@@ -215,8 +215,8 @@ To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.ag
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import agent
 
-@agent(name="react_agent")
-def run_agent():
+@agent
+def react_agent():
     ... # user application logic
     return 
 {{< /code-block >}}
@@ -244,7 +244,7 @@ To trace a tool span, use the function decorator `ddtrace.llmobs.decorators.tool
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import tool
 
-@tool(name="get_current_weather")
+@tool
 def call_weather_api():
     ... # user application logic
     return 
@@ -342,9 +342,15 @@ To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import retrieval
 
-@retrieval(name="get_relevant_docs")
-def similarity_search():
-    ... # user application logic
+@retrieval
+def get_relevant_docs(question):
+    context_documents = ... # user application logic
+    LLMObs.annotate(
+        input_data=question,
+        output_data = [
+            {"id": doc.id, "score": doc.score, "text": doc.text, "name": doc.name} for doc in context_documents
+        ]
+    )
     return 
 {{< /code-block >}}
 
@@ -387,7 +393,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `metrics`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, and so on).
+<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, and so on). The unit for `time_to_first_token` is in seconds, similar to the `duration` metric which is emitted by default.
 
 `tags`
 : optional - _dictionary_
@@ -413,12 +419,11 @@ def llm_call(prompt):
     return resp
 
 @workflow
-def process_message(prompt):
-    resp = llm_call_inline(prompt)
+def extract_data(document):
+    resp = llm_call(document)
     LLMObs.annotate(
-        span=None,
-        input_data="prompt",
-        output_data="output",
+        input_data=document,
+        output_data=resp,
         tags={"host": "host_name"},
     )
     return resp

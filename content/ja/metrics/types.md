@@ -3,15 +3,15 @@ algolia:
   tags:
   - メトリクスタイプ
 aliases:
-- /developers/metrics/counts/
-- /developers/metrics/distributions/
-- /developers/metrics/gauges/
-- /developers/metrics/histograms/
-- /developers/metrics/rates/
-- /developers/metrics/sets/
-- /developers/metrics_type/
-- /developers/metrics/metrics_type/
-- /developers/metrics/types/
+- /ja/developers/metrics/counts/
+- /ja/developers/metrics/distributions/
+- /ja/developers/metrics/gauges/
+- /ja/developers/metrics/histograms/
+- /ja/developers/metrics/rates/
+- /ja/developers/metrics/sets/
+- /ja/developers/metrics_type/
+- /ja/developers/metrics/metrics_type/
+- /ja/developers/metrics/types/
 further_reading:
 - link: developers/dogstatsd
   tag: ドキュメント

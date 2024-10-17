@@ -76,8 +76,8 @@ Datadog allows you to set monitors to keep track of the health of your services 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types/anomaly/
-[2]: https://app.datadoghq.com/monitors#/create
-[3]: https://app.datadoghq.com/monitors#create/apm
+[2]: https://app.datadoghq.com/monitors/create
+[3]: https://app.datadoghq.com/monitors/create/apm
 [4]: /tracing/glossary/#resources
 [5]: /tracing/glossary/#services
 [6]: /monitors/types/anomaly/#faq

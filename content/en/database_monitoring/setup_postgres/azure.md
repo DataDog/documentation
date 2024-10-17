@@ -19,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
 Supported Azure PostgreSQL deployment types
 : PostgreSQL on Azure VMs, Single Server, Flexible Server
@@ -348,7 +348,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: -|
+        postgres.yaml: |-
           cluster_check: true
           init_config:
           instances:

@@ -238,17 +238,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][5] | 8443 | TCP |  |
-| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
-| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
+| [Custom Agent Autoscaling][4] | 8443 | TCP |  |
 | Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
-[5]: /containers/guide/cluster_agent_autoscaling_metrics
+[4]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -258,15 +255,12 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
 | [Custom Agent Autoscaling][5] | 8443 | TCP |  |
-| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
-| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
 | Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
 
 {{% /site-region %}}
 
@@ -275,14 +269,11 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
-| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
 
 {{% /site-region %}}
 

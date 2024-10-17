@@ -5,18 +5,24 @@ on:
     - 'content/en/**/*'
     - 'layouts/shortcodes/**/*.md'
 
+permissions:
+  contents: read
+
 jobs:
   vale:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
     - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
 
     - name: Clone Datadog Vale
       uses: actions/checkout@v4
       with:
         repository: DataDog/datadog-vale
         path: datadog-vale
+        persist-credentials: false
     
     - uses: actions/setup-python@v5.1.0
       with:

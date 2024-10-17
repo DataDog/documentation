@@ -210,18 +210,18 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: '<AZURE_INSTANCE_ENDPOINT>'
-                port: 3306
-                username: datadog
-                password: 'ENC[datadog_user_database_password]'
-                azure:
-                  deployment_type: '<DEPLOYMENT_TYPE>'
-                  fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+          instances:
+            - dbm: true
+              host: '<AZURE_INSTANCE_ENDPOINT>'
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              azure:
+                deployment_type: '<DEPLOYMENT_TYPE>'
+                fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     clusterChecksRunner:
       enabled: true

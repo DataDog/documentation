@@ -31,6 +31,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: moogsoft
 integration_title: Moogsoft
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -68,7 +68,6 @@ tile:
   - Category::Notifications
   - Category::AI/ML
   - Offering::Integration
-  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -119,7 +118,7 @@ Moogsoft は、エンタープライズクラスのクラウドネイティブ�
 
 データは Moogsoft の中を流れ、各ステップでコンテキストを獲得し、ノイズを低減します。メトリクスはイベントとなり、イベントはステートフルアラートとなり、アラートはインシデントに関連付けられます。
 
-## Agent
+## サポート
 Moogsoft サポート ([https://support.moogsoft.com][1]) までお問い合わせください。
 
 [1]: https://support.moogsoft.com

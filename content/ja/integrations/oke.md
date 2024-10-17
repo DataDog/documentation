@@ -21,6 +21,7 @@ categories:
 - kubernetes
 - oracle
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: oke
 integration_title: Oracle Container Engine for Kubernetes
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: oke
 public_title: Oracle Container Engine for Kubernetes
@@ -49,10 +49,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
   support: README.md#Support
   title: Oracle Container Engine for Kubernetes
 ---
@@ -64,14 +68,14 @@ tile:
 
 Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) は、Oracle Cloud 上でコンテナ化されたアプリケーションをデプロイして実行するための、フルマネージド Kubernetes サービスです。Datadog は、OKE によって管理される Kubernetes クラスターに対する包括的な可視性を提供します。Datadog のインテグレーションを有効にすると、Kubernetes インフラストラクチャーの表示、ライブ・プロセスの監視、すべてのポッドとコンテナからの主要メトリクスの追跡を 1 箇所で行うことができます。
 
-## 計画と使用
+## セットアップ
 
 Datadog は既に Kubernetes と統合されているため、すぐに OKE を監視することができます。Kubernetes クラスターで実行中の Agent を OKE に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
 
 さらに、OKE ノードプールもサポートされています。
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 

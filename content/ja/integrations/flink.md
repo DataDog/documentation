@@ -32,8 +32,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10088
     source_type_name: flink
-  logs:
-    source: flink
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -41,6 +39,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
 display_on_public_website: true
@@ -50,7 +49,6 @@ integration_id: flink
 integration_title: Flink
 integration_version: 1.5.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: flink
 public_title: Flink
@@ -66,6 +64,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Flink ジョブのメトリクスを追跡する。
   media: []
@@ -81,14 +80,14 @@ tile:
 
 このチェックは [Flink][1] を監視します。Datadog は Flink の [Datadog HTTP Reporter][2] を使用し、[Datadog の HTTP API][3] によって Flink のメトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Flink チェックは [Datadog Agent][4] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
@@ -125,7 +124,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
 
 4. Flink を再起動すると、Flink のメトリクスが Datadog に送信されます。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -168,21 +167,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンドを実行][11]し、Checks セクションで `flink` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "flink" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Flink には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Flink には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

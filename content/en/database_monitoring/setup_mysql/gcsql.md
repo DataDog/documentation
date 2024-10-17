@@ -273,18 +273,18 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: <INSTANCE_ADDRESS>
-                port: 3306
-                username: datadog
-                password: 'ENC[datadog_user_database_password]'
-                gcp:
-                  project_id: '<PROJECT_ID>'
-                  instance_id: '<INSTANCE_ID>'
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              gcp:
+                project_id: '<PROJECT_ID>'
+                instance_id: '<INSTANCE_ID>'
 
     clusterChecksRunner:
       enabled: true

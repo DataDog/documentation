@@ -219,6 +219,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitaciones
 
+### Tamaño de los archivos
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Los archivos de asignación están limitados a **500** MB. Si tu proyecto tiene un archivo de asignación mayor, utiliza una de las siguientes opciones para reducir el tamaño del archivo:
 {{< /site-region >}}
@@ -241,11 +242,18 @@ datadog {
 }
 ```
 
+### Recopilación
+El SDK gestiona los informes de fallos con los siguientes comportamientos:
+
+- El fallo sólo puede detectarse una vez inicializado el SDK. Teniendo esto en cuenta, la recomendación es inicializar el SDK lo antes posible en el método `onCreate` de tu aplicación.
+- Los fallos RUM deben estar asociados a una vista RUM. Si un fallo se produce antes de que una vista sea visible (por lo general, una actividad o fragmento en un estado `onResume` ) o después de que el usuario final envíe la aplicación a un segundo plano saliendo de ella, el fallo se silencia y no se informa para su recopilación. Para mitigar esto, utiliza el [método][10] `trackBackgroundEvents()` en tu constructor `RumConfiguration`.
+- Sólo se conservan los fallos que se producen en sesiones muestreadas, lo que significa que si la [frecuencia de muestreo de sesiones es del 100%][11], algunos fallos no se notificarán.
+
 ## Para probar tu implementación
 
-Para verificar la configuración de las notificaciones de fallos y el seguimiento de errores Android, necesitas generar un error en tu aplicación y confirmar que el error aparece en Datadog.
+Para verificar la configuración de la notificación de fallos y el seguimiento de errores Android, necesitas generar un error en tu aplicación y confirmar que el error aparece en Datadog.
 
-Para probar tu aplicación:
+Para probar tu implementación
 
 1. Ejecuta tu aplicación en un emulador de Android o en un dispositivo real.
 2. Ejecuta código que contenga un error o fallo. Por ejemplo:

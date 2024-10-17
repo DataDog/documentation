@@ -1,19 +1,19 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Python フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-php
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
 title: チュートリアル - コンテナ内の Python アプリケーションとホスト上の Agent のトレースを有効にする
 ---
@@ -39,7 +39,7 @@ Python の一般的なトレース設定ドキュメントについては、[Pyt
 Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 {{< /code-block >}}
 
 `datadoghq.com` 以外の Datadog サイトにデータを送信するには、`DD_SITE` 環境変数を [Datadog サイト][6]に置き換えてください。
@@ -406,7 +406,7 @@ def create_note(self, desc, add_date=None):
 もし、期待通りのトレースが受信できない場合は、Python パッケージの `ddtrace` でデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -423,5 +423,5 @@ def create_note(self, desc, add_date=None):
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /ja/tracing/trace_collection/custom_instrumentation/python/
 [13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7

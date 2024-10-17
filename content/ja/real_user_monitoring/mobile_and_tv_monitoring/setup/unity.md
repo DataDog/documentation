@@ -7,17 +7,14 @@ code_lang_weight: 30
 description: Unity Mobile プロジェクトから RUM データを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
-  tag: GitHub
+  tag: ソースコード
   text: dd-sdk-unity のソースコード
 - link: https://github.com/DataDog/unity-package
-  tag: GitHub
+  tag: ソースコード
   text: Unity SDK のパッケージ URL
-- link: coscreen/troubleshooting
+- link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの確認方法
-- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
-  tag: ブログ
-  text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
 is_beta: true
 private: true
 title: RUM Unity Monitoring のセットアップ
@@ -26,37 +23,28 @@ type: multi-code-lang
 ## 概要
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring は非公開ベータ版です。アクセスをリクエストするには、Datadog サポートまでご連絡ください。
+Unity Monitoring is in public beta.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのユーザージャーニーを視覚化して分析できます。
 
-## 計画と使用
+## セットアップ
 
 <div class="alert alert-info">
 Datadog は、Unity LTS 2022 以上の iOS と Android の Unity Monitoring をサポートしています。
 </div>
 
-Datadog は、Unity からのデスクトップ (Windows、Mac、Linux)、コンソール、Web のデプロイには対応しておりません。ゲームやアプリケーションをお持ちで、Datadog RUM を使用してパフォーマンスを監視したい場合は、[Datadog サポート](/help/)でチケットを作成してください。
-
-### UI でアプリケーションの詳細を指定
-
-1. Datadog で、[**UX Monitoring** > **Setup & Configurations** > **New Application**][1] へ移動します。
-2. アプリケーションタイプとして `Unity` を選択します。
-3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
-4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。
-
-データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][2]を参照してください。
+Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][7].
 
 ### インストール
 
-1. [External Dependency Manager for Unity (EDM4U)][3] をインストールします。これは [Open UPM][4] を使用して行うことができます。
+1. Install [External Dependency Manager for Unity (EDM4U)][4]. This can be done using [Open UPM][5].
 
-2. [https://github.com/DataDog/unity-package][5] にある Git URL から Datadog SDK Unity パッケージを追加します。
+2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6].  The package URL is `https://github.com/DataDog/unity-package.git`.
 
-3. [Gradle テンプレート][6]を使用するようにプロジェクトを構成し、`Custom Main Template` と `Custom Gradle Properties Template` の両方を有効にします。
+3. Configure your project to use [Gradle templates][8], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
-4. もしビルドして `Duplicate class` エラー (Unity 2022.x でよくあるエラー) が発生する場合は、`mainTemplate.gradle` の `dependencies` ブロックに以下のブロックを追加してください。
+4. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following block in the `dependencies` block in your `mainTemplate.gradle`:
 
    ```groovy
    constraints {
@@ -66,11 +54,47 @@ Datadog は、Unity からのデスクトップ (Windows、Mac、Linux)、コン
    }
    ```
 
-5. Datadog Unity SDK を追加したら、Project Settings から Datadog を構成します。
+### UI でアプリケーションの詳細を指定
 
-    1. Datadog と RUM を有効にする
-    2. `Client Token` と `Application Id` を設定ウィンドウのフィールドにコピーします。
-    3. `Site` が正しいことを確認します。
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
+2. Choose **Unity** as the application type.
+3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。
+
+データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][2]を参照してください。
+
+### Specify Datadog settings in the Unity UI
+
+After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your `Project Settings` and click on the `Datadog` section on the left hand side. You will see the following screen:
+
+{{<img src="real_user_monitoring/unity/datadog-setup-ui.png">}}
+
+次のパラメーターを使用できます。
+
+| パラメーター | Required? | 説明 |
+| --------- | --------- | ----------- |
+| Enable Datadog | いいえ | Whether Datadog should be enabled. Disabling Datadog does not cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls. It only stops the SDK from sending any information. |
+| Output Symbol Files | いいえ | This option enables the output of symbol files for Datadog symbolication and file/line mapping features in Datadog Error Tracking. |
+| Client Token | はい | Your client token created for your application on Datadog's website. |
+| Env | いいえ | The name of the environment for your application. Defaults to `"prod"`. |
+| Datadog サイト | はい | The site you send your data to. |
+| Custom Endpoint | いいえ | A custom endpoint or proxy to send Datadog data through. Mostly used for debugging. |
+| Batch Size | はい | Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the SDK (small batches mean more requests, but each request becomes smaller in size). |
+| Upload Frequency | はい | Sets the preferred frequency of uploading data to Datadog. |
+| Batch Processing Level | はい | Defines the maximum amount of batches processed sequentially without a delay within one reading/uploading cycle. |
+| Enable Crash Reporting | いいえ | Enables crash reporting in the RUM SDK. |
+| Forward Unity Logs | いいえ | Whether to forward logs made from Unity's `Debug.Log` calls to Datadog's default logger. |
+| Remote Log Threshold | はい | The level at which the default logger forwards logs to Datadog. Logs below this level are not sent. |
+| Enable RUM | いいえ | Whether to enable sending data from Datadog's Real User Monitoring APIs |
+| Enable Automatic Scene Tracking | いいえ | Whether Datadog should automatically track new Views by interceping Unity's `SceneManager` loading. |
+| RUM Application ID | Yes (if RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
+| Session Sample Rate | はい | The percentage of sessions to send to Datadog. Between 0 and 100. |
+| Trace Sample Rate | はい | The percentage of distributed traces to send to Datadog. Between 0 and 100. |
+| First Party Hosts | いいえ | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
+
+### RUM セッションのサンプリング
+
+You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
 
 ## Datadog の使用
 
@@ -111,7 +135,7 @@ Datadog は、Datadog の Logging Levels で Unity レベルを以下にマッ�
 ```cs
 var logger = DatadogSdk.Instance.CreateLogger(new DatadogLoggingOptions()
 {
-    SendNetworkInfo = true,
+    NetworkInfoEnabled = true,
     DatadogReportingThreshold = DdLogLevel.Debug,
 });
 logger.Info("Hello from Unity!");
@@ -129,6 +153,17 @@ logger.Debug("Hello with attributes", new()
     },
 });
 ```
+
+The following parameters are available when creating a new logger:
+
+| パラメーター | 説明 | デフォルト |
+| --------- | ----------- | ------- |
+| `Service` | The name of the service to associate with this logger. | The application's service name.
+| `Name` | ロガーの名前。 | なし |
+| `NetworkInfoEnabled` | Whether to bundle information about the user's network state with each log. | `false` |
+| `BundleWithRumEnabled` | Whether to bundle RUM session information with each log. | `true` |
+| `RemoteSampleRate` | The percentage of logs from this logger to send to Datadog, as a whole percent. | `100` |
+| `RemoteLogThreshold` | The threshold above which logs should be sent to Datadog. | `DdLogLevel.Debug` |
 
 ### Real User Monitoring (RUM)
 
@@ -154,7 +189,7 @@ Project Settings で `Enable Automatic Scene Tracking` を設定すると、ア�
 
 #### Web リクエスト / リソース追跡
 
-Datadog は `DatadogTrackedWebRequest` を提供しています。これは `UnityWebRequest` のラッパーであり、`UnityWebRequest` の代替として簡単に利用できることを意図しています。`DatadogTrackedWebRequest` は [Datadog 分散型トレーシング][7] を有効にします。
+Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][3].
 
 Datadog 分散型トレーシングを有効にするには、プロジェクトの設定で `First Party Hosts` を分散型トレーシングをサポートするドメインに設定する必要があります。また、`Tracing Sampling Rate`を設定することで、分散型トレーシングのサンプリングレートを変更することができます。
 
@@ -162,8 +197,9 @@ Datadog 分散型トレーシングを有効にするには、プロジェクト
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /ja/account_management/api-app-keys/#client-tokens
-[3]: https://github.com/googlesamples/unity-jar-resolver
-[4]: https://openupm.com/packages/com.google.external-dependency-manager/
-[5]: https://github.com/DataDog/unity-package
-[6]: https://docs.unity3d.com/Manual/gradle-templates.html
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=browserrum
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
+[4]: https://github.com/googlesamples/unity-jar-resolver
+[5]: https://openupm.com/packages/com.google.external-dependency-manager/
+[6]: https://github.com/DataDog/unity-package
+[7]: /ja/help/
+[8]: https://docs.unity3d.com/Manual/gradle-templates.html

@@ -1,8 +1,8 @@
 ---
 aliases:
-- /tracing/tracing_without_limits/
-- /tracing/livesearch/
-- /tracing/trace_search_and_analytics/
+- /ja/tracing/tracing_without_limits/
+- /ja/tracing/livesearch/
+- /ja/tracing/trace_search_and_analytics/
 description: トレースエクスプローラー
 further_reading:
 - link: tracing/trace_explorer/search

@@ -10,7 +10,7 @@ is_beta: true
 title: セキュリティ通知ルールの今後の変更点
 ---
 
-この記事では、[通知ルール][1]の構成方法に関する今後の変更点について概説します。最も重要な変更は [Cloud Security Management (CSM)][4] に適用されますが、[Application Security Management][5] と [Cloud SIEM][6] にも影響します。
+This article outlines upcoming changes to how [notification rules][1] are configured. These changes impact [Cloud Security Management (CSM)][4], and more specifically cloud configuration and infrastructure configuration signals.
 
 ## CSM Misconfigurations におけるシグナルの廃止
 
@@ -31,9 +31,9 @@ title: セキュリティ通知ルールの今後の変更点
 1. 通知ルールを作成する際に、ソースタイプとして誤構成を指定できるようになりました。
 2. CSM Misconfigurations では今後シグナルは生成されません。これは、通知を個別の検出ルールに対して有効にできなくなることも意味します。
 
-<div class="alert alert-warning">この動作の変更により、通知の生成数が増加していることに気付くかもしれません。通知ルールに設定された条件により通知の数が多くなる場合は、<strong>Preview of Matching Results</strong> パネルに警告メッセージが表示されます。</div>
+<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can use the new time aggregation mechanism.</div>
 
-3. CSM Misconfigurations シグナルのサポートは、2024 年後半に廃止されます。従来のシグナルはトリガー日から 15 か月間保持されます (無料)。
+3. Support for CSM Misconfigurations signals will be deprecated in early 2025. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
 ## 通知ルールのソースタイプセレクター
 
@@ -46,9 +46,9 @@ title: セキュリティ通知ルールの今後の変更点
 
 ## その他の変更
 
-- 通知ルールを、アイデンティティリスクと攻撃経路に対して設定できるようになりました。
+- Notification rules can now be configured for identity risks and attack paths, as well as container image vulnerabilities.
 - CSM Misconfigurations の通知に、診断結果に関する完全なメタデータが含まれるようになりました。以前は、通知には限られたシグナルのメタデータしか含まれていませんでした。
-- レガシーの通知属性を使用した Terraform のカスタム検出ルールはサポートされなくなります。
+- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date (early 2025). Terraform support for Notification Rules will be available in late 2024. 
 
 ## 既存の通知の移行方法
 
@@ -56,7 +56,7 @@ title: セキュリティ通知ルールの今後の変更点
 
 個別の検出ルールに設定されている通知を移行するには:
 
-1. [Misconfiguration Rules ページ][1]で、通知が有効になっている検出ルールを選択します。
+1. On the [Misconfiguration Rules page][3], select a detection rule that has notifications enabled for it.
 2. **Set severity and notifications** セクションに表示されるバナーで、**Update in 1-Click** をクリックします。
 
    **Notification Rules** エディターページが表示され、フィールドにはルールの情報があらかじめ入力されています。
@@ -64,13 +64,17 @@ title: セキュリティ通知ルールの今後の変更点
 3. 必要に応じて設定を変更します。
 4. **Save and Activate** をクリックします。
 
-## その他の参考資料
+### Notification rules configured for cloud or infrastructure configuration signals
+
+To migrate notification rules configured for cloud or infrastructure configuration signals, change the target from Cloud Configuration or Infrastructure Configuration to Vulnerability > Misconfiguration. 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/security/notifications/rules/
 [2]: /ja/security/misconfigurations
-[3]: https://app.datadoghq.com/security/configuration/compliance/rules
+[3]: https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20notification%3A%2A%20&deprecated=hide&groupBy=severity&sort=date
 [4]: /ja/security/cloud_security_management/ 
 [5]: /ja/security/application_security/
 [6]: /ja/security/cloud_siem/

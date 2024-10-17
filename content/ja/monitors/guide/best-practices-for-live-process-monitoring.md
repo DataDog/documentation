@@ -26,11 +26,11 @@ Datadog は、モニターのスコープを数千プロセス以下にするこ
 2. **by tags** フィールドでモニターにタグを追加します。
     - 例えば、`command:puma` を使用して `puma` コマンドに関連するプロセスを監視します。
 
-{{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt=“タグを使用してスコープされたライブプロセスモニター" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt="タグを使用してスコープされたライブプロセスモニター" style="width:100%;" >}}
 
 3. オプションで、**by text** フィールドに検索テキストを追加して、モニターのスコープを絞り込みます。以下の例では、コマンドラインが `cluster worker` に一致するプロセスのみが含まれます。
 
-{{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt=“テキスト検索を使ってスコープされたライブプロセスモニター" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="テキスト検索を使ってスコープされたライブプロセスモニター" style="width:100%;" >}}
 
 4. モニターのスコープがまだすべてのモニターグループで数千プロセスを超える場合、追加のタグを使用して複数のモニターに分割します。
     - 例えば、`env` タグを使って `prod` と `staging` 用の別々のモニターを作成できます。

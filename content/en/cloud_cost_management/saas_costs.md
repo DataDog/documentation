@@ -24,10 +24,6 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 SaaS Cost Integrations are in public beta.
 {{< /beta-callout >}}
@@ -51,6 +47,8 @@ See the respective documentation for your cloud provider:
 {{< partial name="cloud_cost/getting-started.html" >}}
 
 </br>
+
+### Configure your SaaS accounts
 
 Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data.
 
@@ -156,7 +154,6 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 
 
 {{% tab "Elastic Cloud" %}}
-In Cloud Cost Management, you can access your Elastic Cloud cost data for the past 15 months after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
 2. Click **Create New Key**.
@@ -167,9 +164,11 @@ In Cloud Cost Management, you can access your Elastic Cloud cost data for the pa
 7. Click **Add Account**.
 8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
 
+Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
 {{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
 
-[101]: https://app.datadoghq.com/integrations/elastic_cloud_ccm
+[101]: https://app.datadoghq.com/integrations/elastic-cloud-ccm
 [102]: https://cloud.elastic.co/account/keys
 
 {{% /tab %}}
@@ -251,16 +250,6 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
 | `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
 
-| Tag Name | Tag Description |
-|---|---|
-| `invoice_id` | The unique identifier of the invoice. |
-| `status` | State of the payment. |
-| `mongo_org_id` | MongoDB organization ID. |
-| `cluster_name` | The name of the cluster that incurred the charge. |
-| `group_id` | ID of the project with which the line item is associated. |
-| `replica_set_name` | Name of the replica set with which the line item is associated. |
-| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
-
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
@@ -287,6 +276,16 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `invoice_id` | The unique identifier of the invoice. |
+| `status` | State of the payment. |
+| `mongo_org_id` | MongoDB organization ID. |
+| `cluster_name` | The name of the cluster that incurred the charge. |
+| `group_id` | ID of the project with which the line item is associated. |
+| `replica_set_name` | Name of the replica set with which the line item is associated. |
+| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}

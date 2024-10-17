@@ -20,7 +20,7 @@ further_reading:
     text: "Best practices for securing Kubernetes applications"
   - link: "https://www.datadoghq.com/blog/workload-security-evaluator/"
     tag: "Blog"
-    text: "Run Atomic Red Team detection tests in container environments with Datadog’s Workload Security Evaluator"
+    text: "Run Atomic Red Team detection tests in container environments with Datadog's Workload Security Evaluator"
   - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Add security context to observability data with Datadog Cloud Security Management"
@@ -45,6 +45,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-posture-csm/"
     tag: "Blog"
     text: "Report on changes to your security posture with Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
+    tag: "Blog"
+    text: "How Datadog Security Inbox prioritizes security risks"
+  - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
+    tag: "Blog"
+    text: "How we use Datadog for detection as code"
 algolia:
   tags: ['inbox']
 cascade:

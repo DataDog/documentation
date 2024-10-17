@@ -1,6 +1,6 @@
 ---
 aliases:
-- /observability_pipelines/reference/processing_language/errors/
+- /ja/observability_pipelines/reference/processing_language/errors/
 title: (レガシー) エラー
 ---
 

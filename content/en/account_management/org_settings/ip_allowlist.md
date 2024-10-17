@@ -31,6 +31,8 @@ The IP allowlist feature does not block access to the following:
 
 Applications and integrations that submit telemetry from the Agent (metrics, traces, and logs), and those that use an API key provided by the user, are not impacted by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third party applications and integrations.
 
+To allow mobile app clients to connect to Datadog when the IP allowlist feature is enabled, Datadog recommends that the mobile devices connect to an allowed network range via VPN.
+
 ### Functionality
 
 Only users with the **Org Management** permission can configure the IP allowlist.
@@ -57,7 +59,7 @@ When you enable or modify the IP allowlist, the system enforces constraints to m
 To find the [IP allowlist UI][6]:
 
 1. Navigate to **Organization Settings** from your account menu.
-1. Under **Access**, select **IP Allowlist**.
+1. Under **Security**, select **IP Allowlist**.
 
 The IP allowlist table lists the CIDR ranges contained in the IP allowlist.
 

@@ -820,16 +820,14 @@ Filtrando tus **Errores** con el atributo `@feature_flags.{flag_name}`, puedes e
 
 ## Solucionar problemas
 
-### ¿Por qué los datos de mi indicador de características no muestran lo que espero ver?
+### Los datos del indicador de características no reflejan la información esperada
 Los indicadores de características aparecen en el contexto de los eventos donde se evalúan, lo que significa que deberían aparecer en las vistas en las que se ejecuta la lógica del código del indicador de características.
 
 Según cómo hayas estructurado tu código y configurado tus indicadores de características, es posible que aparezcan indicadores de características inesperados en el contexto de algunos eventos.
 
 Por ejemplo, para ver en qué **Vistas** se está evaluando tu indicador de características, puedes utilizar el RUM Explorer para realizar una consulta similar:
 
-
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Buscar vistas de los indicadores de características en el RUM Explorer" style="width:75%;">}}
-
 
 Aquí encontrarás algunos ejemplos de razones por las que se está evaluando tu indicador de características en Vistas no relacionadas que pueden ayudar con tus investigaciones:
 
@@ -840,7 +838,7 @@ Al realizar tus investigaciones, también puedes limitar tus datos para `View Na
 
 ### Denominación de los indicadores de características
 
-Los siguientes caracteres especiales no son compatibles con [Rastreo de indicadores de características][5]: `.` `:` , `+`, `-`, `=`, `&&`, `||`, `>`, ` <`, `!`, `(`, `)`, `{`, `} `, ` [`, `]`, `^`, `"`, `"`, `"`, `~`, `*`, `?`, `\`. Datadog recomienda evitar estos caracteres siempre que sea posible en los nombres de tus indicadores de características. Si tienes que utilizar uno de estos caracteres, sustitúyelo antes de enviar los datos a Datadog. Por ejemplo:
+Los siguientes caracteres especiales no son compatibles con [Rastreo de indicadores de características][5]: `.`, `:` , `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recomienda evitar estos caracteres siempre que sea posible en los nombres de tus indicadores de características. Si tienes que utilizar uno de estos caracteres, sustitúyelo antes de enviar los datos a Datadog. Por ejemplo:
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
