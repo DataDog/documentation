@@ -96,7 +96,7 @@ services:
      - redis # ensures that redis is a host that the container can find
      - web # ensures that the web app can send metrics
     environment:
-     - DD_API_KEY=__your_datadog_api_key_here__
+     - DD_API_KEY=<YOUR_API_KEY>
      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true # enables agent to receive custom metrics from other containers
      - DD_APM_ENABLED=true # enables tracing
      - DD_APM_NON_LOCAL_TRAFFIC=true # enables agent to receive traces from other containers
