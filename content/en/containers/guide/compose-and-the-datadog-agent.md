@@ -69,7 +69,7 @@ ADD conf.d/redisdb.yaml /etc/datadog-agent/conf.d/redisdb.yaml
 
 ### APM Trace Collection
 
-Building on the Redis example above, we can also use Compose to configure the Datadog agent to collect application traces. This `docker-compose.yml` is pulled from [this Docker compose example you can find on our GitHub page][4].
+Building on the Redis example above, you can also use Compose to configure the Datadog agent to collect application traces. This `docker-compose.yml` is pulled from [this Docker compose example on GitHub][4].
 
 ```yaml
 version: "4"
