@@ -18,7 +18,12 @@ further_reading:
 
 ## Overview
 
-Use metrics from Observability Pipelines to create [dashboards][1], [notebooks][2], and [monitors][3] for your specific use case. Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics. See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
+This document lists some of the metrics available from Observability Pipelines. You can:
+
+- Create your own [dashboards][1], [notebooks][2], and [monitors][3] with these metrics.
+- Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
+
+See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
 ## Pipeline metrics
 
