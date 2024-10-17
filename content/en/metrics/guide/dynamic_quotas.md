@@ -52,18 +52,8 @@ Datadog’s Intelligent Query Insights provide us a list of the actively queried
 5. Under ***Configure notifications & automations***, you'll update the monitor notification message and include the Workflow handle from Step 2) above.
 6. Select "Multi Alert" to send a notification for each culprit metric.
 7. Click ***Create*** to create the metric monitor.
-8. Head back into the Workflow blueprint and click on the tiles titled ***Make a decision*** and ***Make a decision 1***. 
-
-{{< img src="/metrics/guide/dynamic_quotas/slack_decisions_1.png" alt="The Make a decision tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
-
-You'll be asked to choose the Slack workspace and either a Slack channel or specific user who will be notified when the monitor alerts. These are the users who will be asked to give Datadog permission to automatically reduce your metrics costs on your behalf.
-
-9. For the ***Send message*** and ***Send message 1*** tiles, you'll also need to select the Slack workspace. You'll also be asked whether you want to notify a channel or specific user after Datadog has made the cost saving configurations on your behalf.
-
-{{< img src="/metrics/guide/dynamic_quotas/slack_decisions_2.png" alt="The Send message tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
-
-10. Click ***Save***.
-11. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
+8. Click ***Save***.
+9. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
 
 
 #### Configure Slack notifications
