@@ -39,6 +39,9 @@ The integration must support all Datadog sites
 Allow users to attach custom tags while setting up your integration
 : Tags can be set as key-value attributes in the JSON body of your integration's log payload. Datadog recommends allowing users to set custom tags for an integration. If the integration [sends logs via the API][1], tags can optionally be set using the `ddtags=<TAGS>` query parameter.
 
+Set the integration's logs `source` tag to the integration name
+: Datadog recommends that the `source` tag is set to `<integration_name>` for an application. `source` must be set before sending logs to Datadog's endpoints as it cannot be remapped in the Datadog UI. </br></br> The `source` tag must be in lowercase and must not be editable by users as it is used to enable integration pipelines and dashboards.
+
 Avoid sending logs that contain arrays in the JSON body whenever possible 
 : While it's possible to send array data in your logs, Datadog recommends avoiding arrays as they cannot be [faceted][24].
 
@@ -48,21 +51,27 @@ Do not log Datadog API Keys
 Do not use Datadog Application Keys
 : Datadog Application Keys are not required to send logs using the HTTP endpoint. 
 
-## Create log integration assets in your Datadog partner account 
+## Create log integration assets
 
-For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
+You can create and design your log integration assets directly within your Datadog partner account.
 
-Log integrations are made of two sets of components, [pipelines][13] and accompanying [facets][12].
+Log integrations are made of two sets of assets, [pipelines][13] and accompanying [facets][12]. Centralizing logs from various technologies and applications can generate large amounts of unique attributes. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17] when creating integrations.
 
 After you've settled on a design for your Datadog Integration and are able to send logs to Datadog's logs endpoint(s), you should define your log pipelines and facets to enrich and structure your integration's Logs.
 
-<div class="alert alert-warning">Empty Log integrations that do not contain pipeline processors or facets may be rejected by Datadog's integration review process.</div>
+For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
 
-### Create a pipeline
+<div class="alert alert-warning">Log integration assets that are empty and do not contain pipeline processors or facets may be refused by Datadog's integration review team.</div>
 
-Logs sent to Datadog are processed in [log pipelines][13] to enrich, standardize, and categorize them for easier search and analysis.
+### Pipelines overview
 
-**Set-up a log pipeline**:
+Logs sent to Datadog are processed in [log pipelines][13] using pipeline processors. These processors allow users to parse, remap and extract attribute information, enriching, and standardising logs for use across the platform.
+
+#### Create a pipeline
+
+Create a log pipeline to process specified logs with pipeline processors. Once you've set-up a pipeline add processors to enrich and structure the logs further.
+
+**Set-up a log pipeline**
 
 1. From the [**Pipelines**][3] page, click **+ New Pipeline**.
 2. In the **Filter** field, enter the unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. 
@@ -72,7 +81,6 @@ Logs sent to Datadog are processed in [log pipelines][13] to enrich, standardize
 
 #### Add pipeline processors
 
-Centralizing logs from various technologies and applications can generate large amounts of unique attributes. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17].
 Before defining your pipeline processors make sure to review [Datadog's Standard Attributes][6].
 
 Use processors within your pipelines to enrich, restructure your data, and generate log attributes. For a list of all log processors, see [Processors][10].
@@ -81,9 +89,6 @@ Use processors within your pipelines to enrich, restructure your data, and gener
 
 Map the application's logs attributes to [Datadog's Standard Attributes][6]
 : Use the [Attribute Remapper][5] to map attribute keys to [Datadog Standard Attributes][6] where possible. For example, an attribute for a network service client IP value should be remapped to `network.client.ip`.
-
-Map the log `source` tag to the integration name
-: Datadog recommends that the `source` tag is set to `<integration_name>` for an application. `source` must be set before sending logs to Datadog's endpoints as it cannot be remapped in the Datadog UI. </br></br> The `source` tag must be in lowercase and must not be editable by users as it is used to enable integration pipelines and dashboards.
 
 Map the log `service` tag to the name of the [service][26] producing telemetry
 : Use the [Service Remapper][7] to remap the `service` attribute. When the source and service are not different services, set `service` to the same value as the `source` tag. `service` tags must be in lowercase. 
@@ -113,7 +118,7 @@ For example, the `Arithmetic Processor` can be used to calculate information bas
 * To maintain optimal grok parsing performance, avoid wildcard matchers such as `%{data:}` and `%{regex(".*"):}`. Make your parsing statements as specific as possible.
 * Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
 
-### Create facets
+### Facets overview
 
 Facets are specific qualitative or quantitative attributes that can be used to filter and narrow down search results. While facets are not strictly necessary for filtering search results, they play a crucial role in helping users understand the available dimensions for refining their search. 
 
@@ -125,23 +130,14 @@ Not all attributes are meant to be used as a facet. The need for facets in integ
 
 You can create [facets][12] in the [Log Explorer][16].
 
-**Add a facet or measure**:
-
-<div class="alert alert-info">Quantitative facets, called "Measures", allow users to filter logs over a range of numeric values using relational operators.  
-For example, a measure for a latency attribute allows users to search for all logs greater-than a certain duration. </div>
-
-1. Click on a log that contains the attribute you want to add a facet or measure for. 
-2. In the log panel, click the Cog icon next to the attribute.
-3. Select **Create facet/measure for @attribute**.
-4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
-**Note**: Define the [unit][11] of a measure based on what the attribute represents.
-5. Click **Add**.
-
-#### Configure and edit facets
+#### Create facets
 
 Correctly defining facets is important as they improve the usability of logs in analytics, monitors, and aggregation features across Datadog's logs management product. 
 
 They allow for better findability of application logs by populating autocomplete features across Log Management.
+
+<div class="alert alert-info">Quantitative facets, called "Measures", allow users to filter logs over a range of numeric values using relational operators.  
+For example, a measure for a latency attribute allows users to search for all logs greater-than a certain duration. </div>
 
 ##### Requirements
 
@@ -158,11 +154,21 @@ Custom facets must be grouped under the `source` name
 Custom facets must have the same data type as the mapped attribute
 : Set the facet data type (String, Boolean, Double, or Integer) to the same type as the Attribute mapped to it. Mismatched types prevent the facet from being used as intended and can cause it to populate incorrectly.
 
-1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
+**Add a facet or measure**
+
+1. Click on a log that contains the attribute you want to add a facet or measure for. 
+2. In the log panel, click the Cog icon next to the attribute.
+3. Select **Create facet/measure for @attribute**.
+4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
+**Note**: Define the [unit][11] of a measure based on what the attribute represents.
+5. To help navigate the facet list specify a facet **Group**. If one does not exist enter the name of the group matching the source tag and a description of the new group, and select **New group**.
+6. Click **Add** to create the facet.
+
+#### Configure and edit facets
+
+1. In the log panel, click the Cog icon next to the attribute that you want to configure or group.
 2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.
-3. Click **Advanced options**.
-4. In the **Group** field, enter the name of the group matching the source tag and a description of the new group, and select **New group**.
-5. Click **Add** or **Update**.
+3. Click **Add** or **Update** when done.
 
 **Tips**
 * Measures should have a unit where possible. Measures can be assigned a [unit][27]. Two families of units are available, `TIME` and `BYTES`, with units such as `millisecond` or `gibibyte`.
