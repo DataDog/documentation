@@ -94,11 +94,7 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 
 ## Manage Excluded Branches
 
-Excluded Branches will not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection.
-
-{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
-
-You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
+Excluded Branches will not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
 ## Explore results in the Test Visibility Explorer
 
@@ -115,7 +111,7 @@ If you suspect there are issues with Early Flake Detection, navigate to the [Tes
 
 This could be caused by a couple of reasons:
 
-* This test has already run in an excluded branch, such as `staging`, `main`, or `preprod`.
+* This test has already run before.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
 ### A test was retried that is not new
