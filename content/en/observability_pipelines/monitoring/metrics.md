@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' metrics to create [dashboards][1], [notebooks][2], and [monitors][3] for you specific use case. Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics. See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
+Use metrics from Observability Pipelines to create [dashboards][1], [notebooks][2], and [monitors][3] for your specific use case. Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics. See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
 ## Pipeline metrics
 
@@ -65,12 +65,12 @@ Errors
 
 Data dropped intentionally or unintentionally
 : **Metric**: `pipelines.component_discarded_events_total`
-: **Description**: The number of events dropped. Break down the metric by using the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
+: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
 : **Available for**: Sources, processors, and destinations.
 
 Utilization
 : **Metric**: `pipelines.utilization`
-: **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle. A value of `1` indicates that the component is busy and likely a bottleneck in the processing topology and creating backpressure, which could cause events to be dropped.
+: **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
 ## Further reading
