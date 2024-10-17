@@ -51,7 +51,7 @@ The following table lists minimum tracing library versions required for Adaptive
 | Node.js     | [v5.16.0][12]            |
 | .NET        | [v2.54.0][13]            |
 | C++/Proxies | [v0.2.2][14]             |
-| PHP         |  Not available           |
+| PHP         | [v1.4.0][17]             |
 
 ## View sampling rates by resource
 
@@ -112,3 +112,4 @@ The configuration should take effect in 5-6 minutes, the time it takes for Datad
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2
 [15]: /tracing/guide/resource_based_sampling/
 [16]: /tracing/trace_pipeline/ingestion_controls
+[17]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0
