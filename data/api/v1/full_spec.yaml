@@ -16403,6 +16403,9 @@ components:
     SyntheticsStepDetail:
       description: Object describing a step for a Synthetic test.
       properties:
+        allowFailure:
+          description: Whether or not the step was allowed to fail.
+          type: boolean
         browserErrors:
           description: Array of errors collected for a browser test.
           items:
@@ -16420,6 +16423,8 @@ components:
         error:
           description: Error returned by the test.
           type: string
+        failure:
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFailure'
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
         screenshotBucketKey:
