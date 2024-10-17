@@ -65,7 +65,7 @@ The PHP tracer adds the available trace correlation identifiers to the log conte
 
 #### Option 2: Use placeholders in your message {#use-placeholders-in-your-message}
 
-You can use placeholders in your message to select which trace correlation identifiers will be automatically injected into your logs. The PHP tracer supports the following placeholders:
+You can use placeholders in your message to select which trace correlation identifiers are automatically injected into your logs. The PHP tracer supports the following placeholders:
 - `%dd.trace_id%`: the trace ID
 - `%dd.span_id%`: the span ID
 - `%dd.service%`: the service name
