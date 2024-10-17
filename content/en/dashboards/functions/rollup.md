@@ -75,6 +75,9 @@ You can customize how your metrics data is bucketed over time when using the `.r
 
 Rollups should usually be avoided in [monitor][5] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
+## Lookback moving rollup 
+You are also able to use the rollup function with lookback which allows you to combine points from the most recent specified time range, plus any data points beyond the original query window that are included in the interval. Read [here][nested queries link goes here] for more information on how to apply lookback moving rollups with nested queries. 
+
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
