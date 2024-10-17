@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: bryce/fix-region-param
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
