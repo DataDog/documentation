@@ -220,10 +220,6 @@ This example includes all c1* sized instances, but excludes staging hosts:
 datadog:true,env:production,!env:staging,instance-type:c1.*
 ```
 
-Limiting your hosts also helps to control your resource costs.
-For more information on how to control your resource costs, see the [Google Cloud Integration Billing page][20].
-
-
 ## Log collection
 
 Forward logs from your Google Cloud services to Datadog using [Google Cloud Dataflow][21] and the [Datadog template][22]. This method provides both compression and batching of events before they are forwarded to Datadog. 
@@ -321,7 +317,6 @@ Use [Database Monitoring (DBM)][49] to gain increased insight on performance met
 [17]: https://cloud.google.com/monitoring/api/metrics_gcp
 [18]: https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
 [19]: https://cloud.google.com/compute/docs/labeling-resources
-[20]: https://docs.datadoghq.com/account_management/billing/google_cloud/
 [21]: https://cloud.google.com/dataflow
 [22]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [23]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
