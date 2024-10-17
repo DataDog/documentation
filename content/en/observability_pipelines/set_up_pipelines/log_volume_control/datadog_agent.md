@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the Datadog Agent source so that you route only useful logs to your destinations.
+Set up the Observability Pipelines Worker with the Datadog Agent source so that you only route useful logs to your destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
@@ -73,6 +73,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -141,6 +146,16 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
@@ -188,6 +203,11 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
@@ -230,6 +250,19 @@ Enter the following information based on your selected logs destination.
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
 
+Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
+
+{{< tabs >}}
+{{% tab "Agent configuration file" %}}
+
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
+
+{{% /tab %}}
+{{% tab "Agent Helm values file" %}}
+
+{{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

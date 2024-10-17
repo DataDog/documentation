@@ -25,6 +25,9 @@ further_reading:
   - link: "/cloud_cost_management/tag_pipelines"
     tag: "Documentation"
     text: "Standardize tags across Cloud Cost Management with Tag Pipelines"
+  - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
+    tag: "Blog"
+    text: "Key learnings from the State of Cloud Costs study"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
@@ -40,7 +43,7 @@ cascade:
 
 Cloud Cost Management provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify inefficiencies.
 
-{{< img src="cloud_cost/overview_1.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
+{{< img src="cloud_cost/overview_2.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
 
 Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Analytics** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 

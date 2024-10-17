@@ -3,6 +3,9 @@ further_reading:
 - link: /logs/explorer/
   tag: 설명서
   text: 로그 탐색 방법 알아보기
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: 가이드
+  text: 데이터 전송 수수료를 줄이면서 로그를 Datadog로 보내는 방법
 title: Azure 로그를 Datadog 리소스로 전송
 ---
 
@@ -24,6 +27,8 @@ title: Azure 로그를 Datadog 리소스로 전송
 
 활동 로그를 Datadog으로 전송하려면 **구독 활동 로그 전송하기**를 선택하세요. 이 옵션을 선택해야 활동 로그가 Datadog로 전송됩니다.
 
+<div class="alert alert-warning">로그 수집을 사용하도록 설정하면 Datadog 리소스가 <a href="https://learn.microsoft.com/azure/app-서비스/">App 서비스</a>의 로깅 구성을 자동으로 수정합니다. 로깅 구성이 변경되면 Azure는 App 서비스를 <strong>다시 시작하도록</strong> 트리거합니다.</div>
+
 ## Azure 리소스 로그
 
 [데이터 플레인][1]을 통해 Azure 리소스 로그에서 운영 인사이트를 얻을 수 있습니다. 예를 들어 데이터 플레인을 사용해 키 볼트에서 비밀을 가져오거나 데이터베이스에 요청을 보낼 수 있습니다. 리소스 로그의 내용은 Azure 서비스 및 리소스 유형에 따라 달라집니다.
@@ -35,7 +40,7 @@ Azure 리소스 로그를 Datadog으로 전송하려면  **Send Azure resource l
 ### 로그 전송 태그 규칙
 
 - `include` 태그로 Datadog에 로그를 전송하는 Azure 리소스입니다.
-- `include` 태그로 Datadog에 로그를 전송하지 않는 Azure 리소스입니다.
+- `exclude` 태그로 Datadog에 로그를 전송하지 않는 Azure 리소스입니다.
 - 포함 규칙과 제외 규칙이 충돌하는 경우 제외 규칙이 우선 적용됩니다.
 
 예를 들어, 아래 스크린샷은 Datadog로 메트릭을 전송하는 가상 머신, 가상 머신 스케일 세트, `Datadog = True`로 태그된 앱 서비스 플랜만을 보여줍니다.
