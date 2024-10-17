@@ -25,6 +25,12 @@ This document lists some of the metrics available from Observability Pipelines. 
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
+## Usage metric
+
+Observability Pipelines ingested bytes
+: **Metric**: `datadog.estimated_usage.observability_pipelines.ingested_bytes`
+: **Description**: The volume of data ingested by Observability Pipelines. See [Estimated Usage Metrics][6] for more information.
+
 ## Pipeline metrics
 
 Bytes in per second
@@ -83,3 +89,4 @@ Utilization
 [3]: /getting_started/monitors/
 [4]: /getting_started/tagging/
 [5]: https://app.datadoghq.com/metric/summary
+[6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
