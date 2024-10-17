@@ -159,7 +159,7 @@ services:
      - /var/lib/docker/containers:/var/lib/docker/containers:ro
 ```
 
-**Note**: The above configuration only collects logs from the `Redis` container. Logs can be collected from the Datadog Agent by adding a similar `com.datadoghq.ad.logs` label. Log collection can also be explicitly enabled for all containers by setting the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true`. See the complete [Docker log collection documentation][5] for additional details.
+**Note**: This configuration collects only logs from the `Redis` container. You can collect logs from the Datadog Agent by adding a similar `com.datadoghq.ad.logs` label. You can also explicitly enable logs collection for all containers by setting the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true`. See [Docker log collection][5] for details.
 
 
 ## Further Reading
