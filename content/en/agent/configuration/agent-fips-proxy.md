@@ -47,7 +47,6 @@ Supported products (Agent 7.45+):
 - Logs
 - APM traces
 - APM profiles
-- Instrumentation Telemetry
 - Processes
 - Orchestrator Explorer
 - Runtime Security
