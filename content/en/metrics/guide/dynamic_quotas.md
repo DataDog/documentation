@@ -28,7 +28,7 @@ With **Datadog's Dynamic Metrics Quotas**, you now additionally have automatic s
 
 Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/product/workflow-automation/), allow you to define a custom metrics quota at an account level (or team/metric name level) via a metric monitor on your estimated custom metric usage metrics.
 
-If your monitor alerts, Datadog identifies the culprit, spiking metrics and asks permission via Slack to automatically apply Metrics without Limits configurations to these metrics; reducing the usage and costs of these metrics on your behalf. 
+If your monitor alerts, Datadog identifies the culprit, spiking metrics and asks permission via Slack to automatically apply [Metrics without Limits™][1] configurations to these metrics; reducing the usage and costs of these metrics on your behalf. 
 
 Datadog’s Intelligent Query Insights provide us a list of the actively queried tags that we use to configure problematic metrics such that you are guaranteed the most cost-optimized configuration that doesn’t sacrifice visibility. Dynamic Metric Quotas help protect your organization from unintentional cardinality and budget overages and relieves your teams from having to play whack-a-mole to remediate metric volume spikes. Learn more about using Datadog's Estimated Usage Metrics to monitor your metric volume usage [here][10]
 
@@ -54,7 +54,6 @@ Datadog’s Intelligent Query Insights provide us a list of the actively queried
 7. Click ***Create*** to create the metric monitor.
 8. Click ***Save***.
 9. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
-
 
 #### Configure Slack notifications
 
