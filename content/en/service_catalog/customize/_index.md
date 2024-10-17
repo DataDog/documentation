@@ -27,7 +27,7 @@ With APM, Datadog can automatically discover the dependencies for an instrumente
 If you are using APM and would like to remove the automatically named *services* from your Service Catalog and Service Map, you can opt in to new [inferred entities experience][7], which allows you to filter Service Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove][8] any [service overrides][9] like service:my-service-http-client from your catalog or map. 
 
 ## Enrich auto-detected services with metadata 
-To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][3] by [submitting a request][4].
+To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. 2.2 is the recommended version. To try experimental features like enhanced relationship mapping and precise code location, opt in to the beta program for [schema 3.0][3] by [submitting a request][4].
 
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
@@ -133,10 +133,11 @@ With [Service Catalog metadata schema 2.2][5], you can specify the type and lang
 
 [1]: /universal_service_monitoring/
 [2]: /tracing/
-[3]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[3]: /service_catalog/service_definitions/v3-0/
 [4]: https://forms.gle/zbLfnJYhD5Ab4Wr18
 [5]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
 [6]: /service_management/workflows/actions_catalog/
 [7]: /tracing/guide/inferred-service-opt-in/?tab=java#global-default-service-naming-migration
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
+[10]: /service_catalog/service_definitions/#add-metadata-with-automation
