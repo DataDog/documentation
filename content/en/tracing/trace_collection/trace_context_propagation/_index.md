@@ -29,6 +29,7 @@ By default, the Datadog SDK extracts and injects distributed tracing headers usi
 
 - [Datadog][1] (takes higher precedence when extracting headers)
 - [W3C Trace Context][2]
+- [Baggage][7]
 
 This default configuration maximizes compatibility with older Datadog SDK versions and products while allowing interoperability with other distributed tracing systems like OpenTelemetry.
 
@@ -43,8 +44,10 @@ Use the following environment variables to configure formats for reading and wri
 
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies trace context propagation formats for extraction and injection in a comma-separated list. May be overridden by extract-specific or inject-specific configurations.<br>
-**Default**: `datadog,tracecontext` <br>
-**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links.
+**Default**: `datadog,tracecontext,baggage` <br>
+**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links. 
+The order in which baggage is included in the list of propagators has no effect. Since they inject and extract different headers, there is no conflict between the baggage propagator and other trace context propagators .
+
 
 `OTEL_PROPAGATORS`
 : Specifies trace context propagation formats for both extraction and injection (comma-separated list). Lowest precedence; ignored if any other Datadog trace context propagation environment variable is set.<br>
@@ -70,6 +73,7 @@ The Datadog SDK supports the following trace context formats:
 | [W3C Trace Context][2] | `tracecontext`                |
 | [B3 Single][3]         | _Language Dependent Value_    |
 | [B3 Multi][4]          | `b3multi`                     |
+| [Baggage][7]           | `baggage`                     |
 | [None][5]              | `none`                        |
 
 ## Language support
@@ -107,6 +111,7 @@ In addition to the environment variable configuration, you can also update the p
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
 [6]: #none-format
+[7]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -622,6 +627,13 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 ### None format
 
 When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK does _not_ interact with request headers, meaning that the corresponding context propagation operation does nothing.
+
+### Baggage format
+
+Baggage propagation using an OpenTelemetry/W3C-compatible header will be enabled by default. The SDKs allow disabling the baggage propagator by explicitly configuring the settings above and not including the baggage header. 
+
+Since there is no conflict between the baggage propagator and the existing trace context propagators (because they inject and extract different headers), the order in which baggage is included in the list of propagators has no effect.
+
 
 ## Further reading
 
