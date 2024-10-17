@@ -42,11 +42,11 @@ To create a segment using external or third-party data:
 
 ## Leverage segments across Product Analytics
 
-### In sankeys
+### In pathways
 
-In the Sankey page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Sankey diagram only for users in the "Premium users" segment.
+In the Pathways page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Pathways diagram only for users in the "Premium users" segment.
 
-{{< img src="product_analytics/segmentation/segmentation-3.png" alt="Filter down the Sankey visualization to reflect a selected segment of users.">}}
+{{< img src="product_analytics/segmentation/segmentation-premium.png" alt="Filter down the Pathways visualization to reflect a selected segment of users.">}}
 
 ### In Analytics Explorer
 
