@@ -52,8 +52,11 @@ To test a login flow using a passkey in your [browser tests][3], you need to fir
 
 You can either:
 
-- Complete the registration flow from within the recorder, but without recording the registration steps, or
-- Create a test that embeds both steps for the registration and login flows.
+- Create a test that embeds both steps for the registration and login flows, or
+
+- Complete the registration flow from within the recorder, but without recording the registration steps
+
+**Note**: To avoid creating a new user for each test scenario involving passkey authentication, it's recommended to combine user creation and authentication in the same step.
 
 1. [Import your virtual authenticator global variable][5]. 
 2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
