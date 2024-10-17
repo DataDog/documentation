@@ -25,7 +25,7 @@ This document lists some of the metrics available from Observability Pipelines. 
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
-## Usage metric
+## Estimated usage metric
 
 Observability Pipelines ingested bytes
 : **Metric**: `datadog.estimated_usage.observability_pipelines.ingested_bytes`
