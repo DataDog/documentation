@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
   This feature is in Preview. Please reach out to Customer Success to get this feature enabled. 
 {{< /callout >}}  
 
