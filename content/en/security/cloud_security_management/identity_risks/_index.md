@@ -59,12 +59,6 @@ Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve 
 
 {{< img src="security/identity_risks/aws_iam_access_analyzer.png" alt="Banner about AWS IAM Access Analyzer enriching permissions gap detections and policy recommendations" width="100%">}}
 
-## Video walkthrough
-
-The following video provides an overview of how to enable and use CSM Identity Risks:
-
-{{< img src="security/csm/how-to-use-csm-identity-risks.mp4" alt="Video that provides an overview of how to install and use CSM Identity Risks" video=true >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
