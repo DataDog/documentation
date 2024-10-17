@@ -40,7 +40,7 @@ sources:
   dst: "data/partials/*.{lang}.yaml"
 - src: "i18n/en.json"
   dst: "i18n/{lang}.json"
-- src: "layouts/shortcodes/*.md"
+- src: "layouts/shortcodes/*.en.md"
   dst: "layouts/shortcodes/*.{lang}.md"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
