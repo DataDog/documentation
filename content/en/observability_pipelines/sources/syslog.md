@@ -25,14 +25,12 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 You can forward third-party logs to a syslog server and then send them to the Observability Pipelines Worker for processing and routing. Below is an example list of these third-party services.
 
-### Fortinet
-- [Configure log forwarding][2]
-- [Configuring syslog settings][3]
-
-### Palo Alto Networks
-
-- [Configure log forwarding][4]
-- [Forward traffic logs to a syslog server][5]
+- Fortinet
+    - [Configure log forwarding][2]
+    - [Configuring syslog settings][3]
+- Palo Alto Networks
+    - [Configure log forwarding][4]
+    - [Forward traffic logs to a syslog server][5]
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://help.fortinet.com/fa/faz50hlp/56/5-6-1/FMG-FAZ/2400_System_Settings/1600_Log%20Forwarding/0400_Configuring.htm
