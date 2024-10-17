@@ -18,8 +18,8 @@ Application Security provides serverless capability for the following platforms 
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| {{< X >}}         	| 	                			|						|
 | .NET    	| {{< X >}}         	|  	                          		|						|
-| Node 		| {{< X >}}     		| beta	              			|						|
-| Python   	| {{< X >}}         	| beta                 			|						|
+| Node 		| {{< X >}}     		| {{< X >}}	              			|						|
+| Python   	| {{< X >}}         	| {{< X >}}                 			|						|
 | Ruby   	| {{< X >}}         	|  	                 			|						|
 | PHP   	| 		        	|	            			|						|
 | Go   		| {{< X >}}         	| 	               			|						|
@@ -55,19 +55,19 @@ Go
 
 ## Google Cloud Run
 
-<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in beta</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in Preview</a>.</div>
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
 |Type           	| Threat Detection	|  Software Composition Analysis	| Code Security 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
-| Java  		| beta         	| beta	                			|						|
-| .NET    	| beta         	| beta 	                          		|						|
-| Node 		| beta     		| beta	              			|						|
-| Python   	| beta         	| beta                 			|						|
-| Ruby   	| beta         	|  beta	                 			|						|
+| Java  		| Preview         	| Preview	                			|						|
+| .NET    	| Preview         	| Preview 	                          		|						|
+| Node 		| Preview     		| Preview	              			|						|
+| Python   	| Preview         	| Preview                 			|						|
+| Ruby   	| Preview         	|  Preview	                 			|						|
 | PHP   	| 		      |	            			|						|
-| Go   		| beta         	| beta	               			|						|
+| Go   		| Preview         	| Preview	               			|						|
 
 
 ## Azure App Service
@@ -78,9 +78,9 @@ Only *web applications* are supported. Azure Functions are not supported.
    
 |Type       | OS			     |Threat Detection	|  Software Composition Analysis	 | Code Security 	|
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
-| Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | beta			                            |
+| Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | {{< X >}}			                            |
 | .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                 |			                                |
-| Node 		| Linux			     | {{< X >}}        | {{< X >}}        	                 | beta			                            |
+| Node 		| Linux			     | {{< X >}}        | {{< X >}}        	                 | {{< X >}}			                            |
 | Python   	| Linux			     | {{< X >}}        | {{< X >}}                          |			                                |
 | Ruby   	| Linux			     | {{< X >}}        | {{< X >}}      	                 |			                                |
 | PHP   	| Linux			     |		        	| {{< X >}} 	                     |			                                |
