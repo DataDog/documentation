@@ -53,7 +53,7 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-  To set up <strong>Log Archives</strong> with an AWS Integration using Role Delegation, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
+  To set up <strong>Log Archives</strong> with an AWS integration using Role Delegation, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 </div>
 {{< /site-region >}}
 
