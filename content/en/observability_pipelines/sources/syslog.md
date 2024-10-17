@@ -5,7 +5,7 @@ disable_toc: false
 
 Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng. Select and set up this source when you [set up a pipeline][1].
 
-You can also [forward third-party log to syslog](#forward-third-party-logs-to-syslog-and-then-to-the-worker) and then send them to the Observability Pipelines Worker.
+You can also [forward third-party log to syslog](#forward-third-party-logs-to-syslog) and then send them to the Observability Pipelines Worker.
 
 ## Prerequisites
 
@@ -21,9 +21,9 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/log_source_configuration/syslog %}}
 
-## Forward third-party logs to syslog and then to the Worker
+## Forward third-party logs to a syslog server
 
-You can forward third-party logs to a syslog server and then send them to the Observability Pipelines Worker for processing and routing. Below are examples of third-party services and their resources on how to forward logs to syslog.
+You can forward third-party logs to a syslog server and then send them to the Observability Pipelines Worker for processing and routing. Below is an example list of these third-party services.
 
 ### Fortinet
 - [Configure log forwarding][2]
