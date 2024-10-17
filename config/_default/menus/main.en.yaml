@@ -4987,10 +4987,10 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
       weight: 612
-    - name: Set Environment Variables
-      url: observability_pipelines/processors/set_environment_variables
+    - name: Add Environment Variables
+      url: observability_pipelines/processors/add_environment_variables
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_set_environment_variables
+      identifier: observability_pipelines_processors_add_environment_variables
       weight: 613
     - name: Destinations
       url: observability_pipelines/destinations/
