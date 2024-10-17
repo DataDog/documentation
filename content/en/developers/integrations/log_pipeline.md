@@ -16,7 +16,7 @@ further_reading:
   tag: Documentation
   text: Learn about log pipelines
 title: Create a Log Pipeline
-description: Learn how to create a Datadog Log Integration.
+description: Learn how to create a Datadog Log Integration Pipeline.
 ---
 ## Overview
 
@@ -28,7 +28,7 @@ In developing your integration to send logs to Datadog follow these guidlines to
 
 ### Guidelines
 
-Before creating a log pipeline, consider the following guidlines and practices:
+Before creating a log pipeline, consider the following guidelines and best practices:
 
 The integration must use supported Datadog logs endpoints
 : Your integration must use one of the [supported endpoints][23] exposed by Datadog for log ingestion. You can otherwise use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
@@ -37,7 +37,7 @@ The integration must support all Datadog sites
 : Users must be able to choose between the different Datadog sites whenever applicable. See [Getting Started with Datadog Sites][2] for more information about site differences. </br></br> Your Datadog site endpoint is `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
 
 Allow users to attach custom tags while setting up your integration
-: Tags can be set as key-value attributes in the JSON body of your integration's logs payload. Datadog recommends allowing users to set custom tags for an integration. If the integation uses the [Send Logs API documentation][1] tags can optionally be set using the `ddtags=<TAGS>` query parameter.
+: Tags can be set as key-value attributes in the JSON body of your integration's log payload. Datadog recommends allowing users to set custom tags for an integration. If the integration [sends logs via the API][1], tags can optionally be set using the `ddtags=<TAGS>` query parameter.
 
 Avoid sending logs that contain arrays in the JSON body whenever possible 
 : While it's possible to send array data in your logs, Datadog recommends avoiding arrays as they cannot be [faceted][24].
@@ -178,7 +178,7 @@ To start a review process, export your log pipeline and relevant custom facets u
 
 {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 
-Include sample raw logs with **all** the attributes you expect to be sent into Datadog by your integration. Raw logs comprise of the raw messages generated directly from the source application **before** they have are sent to Datadog.
+Include sample raw logs with **all** the attributes you expect to be sent into Datadog by your integration. Raw logs comprise of the raw messages generated directly from the source application **before** they are sent to Datadog.
 
 Exporting your log pipeline includes two YAML files:
 
