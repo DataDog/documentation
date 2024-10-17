@@ -120,7 +120,7 @@ datadog
 ddtrace <--
 ``` 
 
-Lastly, it is a good idea to set the `service`, `env`, and `version` tags for our application. We can do this by modifying our web app's `Dockerfile` like so. 
+Finally, set the `service`, `env`, and `version` tags for your application by modifying the web app's `Dockerfile` as follows: 
 
 ```dockerfile
 FROM python:2.7
