@@ -45,9 +45,9 @@ DDSQL supports the following SQL keywords, which function as standard Boolean op
 
 | Operator | Description            | Example | Result |
 |----------|------------------------|---------|--------|
-| `NOT`    | Filter records based on more than one condition. | `SELECT * FROM Student WHERE NOT Major = 'Economics';`   | Return all students that do not major in Economics.  |
-| `AND`    | Filter records based on more than one condition. | `SELECT * FROM Student WHERE Age = 18 AND Major = 'Economics';`   | Return all students that are age 18 AND major in Economics.  |
-| `OR`     | Filter records based on more than one condition. | `SELECT * FROM Student WHERE Age = 18 OR Major = 'Economics';`   | Return all students that are either age 18 OR major in Economics.  |
+| `NOT`    | Filter records based on more than one condition. | `SELECT * FROM host WHERE NOT env = 'prod';`   | Return all hosts that are not in the prod environment.  |
+| `AND`    | Filter records based on more than one condition. | `SELECT * FROM host WHERE env = 'prod' AND cloud_provider = 'aws';`   | Return all hosts that are in the prod environment and the AWS cloud provider.  |
+| `OR`     | Filter records based on more than one condition. | `SELECT * FROM host WHERE env = 'prod' AND cloud_provider = 'aws';`   | Return all hosts that are either in the prod environment or the aws cloud provider.  |
 
 DDSQL also supports the following comparator keywords as they are defined in the SQL standard:
 
