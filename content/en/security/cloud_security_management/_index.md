@@ -95,7 +95,7 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
+<div class="alert alert-info">Resource Catalog is in Preview.</div>
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
 
