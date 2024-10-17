@@ -19,8 +19,9 @@ To successfully forward a request to Datadog, your proxy must
 
 1. [Build the Datadog intake URL](#build-the-datadog-intake-url).
 2. Add an `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
-3. Forward the request to the Datadog intake URL using the POST method.
-4. Leave the request body unchanged.
+3. Remove the `Host` header or set it to Datadog intake URL's host (ex: `browser-intake-datadoghq.com`) (your HTTP client will probably add it automatically).
+4. Forward the request to the Datadog intake URL using the POST method.
+5. Leave the request body unchanged.
 
 <div class="alert alert-warning">
 <ul>
