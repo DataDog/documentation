@@ -1,8 +1,6 @@
 ---
 title: Metrics
 disable_toc: false
-aliases:
-- /path-to-old-doc/
 further_reading:
 - link: "/metrics/summary/"
   tag: "Documentation"
