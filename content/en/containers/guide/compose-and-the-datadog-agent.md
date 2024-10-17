@@ -108,7 +108,9 @@ services:
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
-The main changes to point above are the configuration of the `DD_AGENT_HOST` environment variable, which must be the same for our `web` container and our Agent container in order to collect traces. `DD_APM_ENABLED` and `DD_APM_NON_LOCAL_TRAFFIC` enable APM and allow our agent to receive traces from other containers. 
+Replace `<YOUR_API_KEY>` with your API key.
+
+The main changes in the preceding example are the configuration of the `DD_AGENT_HOST` environment variable, which must be the same for your `web` container and your Agent container to collect traces. `DD_APM_ENABLED` enables APM, and `DD_APM_NON_LOCAL_TRAFFIC` allows the Agent to receive traces from other containers. 
 
 Additionally we've added the `ddtrace` library to the `requirements.txt` for our Python web app. This is why we're able to initialize it with `ddtrace-run` to enable APM (the `datadog` library mentioned below is used for collection custom, DogStatsD metrics).
 ```
