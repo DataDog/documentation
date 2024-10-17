@@ -38,6 +38,8 @@ In the [Log Explorer][2]:
 
 ### Add a column to your workspace
 
+{{< img src="/logs/workspace/workspaces_add_column.png" alt="An example workspace cell, with an open detail side panel that highlights the option to add an attribute as a column" style="width:100%;" >}}
+
 In addition to the default columns, you can add your own columns to your workspace:
 1. From your workspace cell, click on a log to open the detail side panel.
 1. Click the attribute you want to add as a column.
