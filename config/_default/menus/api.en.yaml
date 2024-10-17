@@ -4375,6 +4375,70 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: Application Security Exclusion Filters
+      url: /api/latest/application-security-exclusion-filters/
+      identifier: application-security-exclusion-filters
+      generated: true
+    - name: Update an ASM Exclusion filter
+      url: '#update-an-asm-exclusion-filter'
+      identifier: application-security-exclusion-filters-update-an-asm-exclusion-filter
+      parent: application-security-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityExclusionFilter
+        unstable: []
+        order: 5
+    - name: Get a specific ASM Exclusion Filter
+      url: '#get-a-specific-asm-exclusion-filter'
+      identifier: application-security-exclusion-filters-get-a-specific-asm-exclusion-filter
+      parent: application-security-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityExclusionFilters
+        unstable: []
+        order: 1
+    - name: Delete an ASM Exclusion Filter
+      url: '#delete-an-asm-exclusion-filter'
+      identifier: application-security-exclusion-filters-delete-an-asm-exclusion-filter
+      parent: application-security-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityExclusionFilter
+        unstable: []
+        order: 6
+    - name: Create an ASM Exclusion filter
+      url: '#create-an-asm-exclusion-filter'
+      identifier: application-security-exclusion-filters-create-an-asm-exclusion-filter
+      parent: application-security-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityExclusionFilter
+        unstable: []
+        order: 2
+    - name: List all ASM Exclusion Filters
+      url: '#list-all-asm-exclusion-filters'
+      identifier: application-security-exclusion-filters-list-all-asm-exclusion-filters
+      parent: application-security-exclusion-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityExclusionFilters
+        unstable: []
+        order: 3
     - name: Audit
       url: /api/latest/audit/
       identifier: audit

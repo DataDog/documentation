@@ -149,6 +149,14 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/ApplicationKeysSort'
+    ApplicationSecurityExclusionFilterID:
+      description: The ID of the exclusion filter.
+      example: 3b5-v82-ns6
+      in: path
+      name: exclusion_filter_id
+      required: true
+      schema:
+        type: string
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -1257,6 +1265,326 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    ApplicationSecurityExclusionFilterAttributes:
+      description: The attributes of the Application Security exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Test exclude path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: false
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterMetadata'
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterScope'
+          type: array
+      type: object
+    ApplicationSecurityExclusionFilterCreateAttributes:
+      description: Create a new Application Security exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Test exclude path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: false
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      - path_glob
+    ApplicationSecurityExclusionFilterCreateData:
+      description: Object for a single exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityExclusionFilterCreateRequest:
+      description: Request object that includes the exclusion filter to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterCreateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityExclusionFilterData:
+      description: Object for a single Exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterAttributes'
+        id:
+          description: The ID of the Exclusion filter.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterType'
+      type: object
+    ApplicationSecurityExclusionFilterID:
+      description: The ID of the exclusion filter.
+      example: 3dd-0uc-h1s
+      type: string
+    ApplicationSecurityExclusionFilterListAttributes:
+      description: The attributes of the Application Security exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Test exclude path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: false
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterMetadata'
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterListRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterScope'
+          type: array
+      type: object
+    ApplicationSecurityExclusionFilterListResponse:
+      description: Response object that includes a list of exclusion filters.
+      properties:
+        data:
+          description: The Application Security exclusion filter response data.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionListFilterData'
+          type: array
+      type: object
+    ApplicationSecurityExclusionFilterListRulesTarget:
+      description: A rule targeted by the exclusion filter.
+      properties:
+        tags:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterListRulesTargetTags'
+      type: object
+    ApplicationSecurityExclusionFilterListRulesTargetTags:
+      description: Tags identifying the category and type of the targeted rule.
+      properties:
+        category:
+          description: The category of the rule.
+          example: attack_attempt
+          type: string
+        type:
+          description: The type of the rule.
+          example: lfi
+          type: string
+      type: object
+    ApplicationSecurityExclusionFilterMetadata:
+      description: Metadata about the exclusion filter.
+      properties:
+        added_at:
+          description: The timestamp when the exclusion filter was added.
+          example: '2023-05-04T15:26:41Z'
+          format: date-time
+          type: string
+        added_by:
+          description: The email address of the user who added the exclusion filter.
+          example: xxxx@xxxx.com
+          type: string
+        modified_at:
+          description: The timestamp when the exclusion filter was last modified.
+          example: '2023-05-30T15:45:51Z'
+          format: date-time
+          type: string
+        modified_by:
+          description: The email address of the user who last modified the exclusion
+            filter.
+          example: xxx@xxx.com
+          type: string
+      type: object
+    ApplicationSecurityExclusionFilterResponse:
+      description: Response object that includes a list of exclusion filters.
+      properties:
+        data:
+          description: The Application Security exclusion filter data.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterData'
+          type: array
+      type: object
+    ApplicationSecurityExclusionFilterRulesTarget:
+      description: A rule targeted by the exclusion filter.
+      properties:
+        rule_id:
+          description: The ID of the targeted rule.
+          example: dog-913-009
+          type: string
+      type: object
+    ApplicationSecurityExclusionFilterScope:
+      description: The scope of the exclusion filter.
+      properties:
+        env:
+          description: The environment scope for the exclusion filter.
+          example: dd-appsec-php-support
+          type: string
+        service:
+          description: The service scope for the exclusion filter.
+          example: anil-php-weblog
+          type: string
+      type: object
+    ApplicationSecurityExclusionFilterType:
+      default: exclusion_filter
+      description: The type of the resource. The value should always be `exclusion_filter`.
+      enum:
+      - exclusion_filter
+      example: exclusion_filter
+      type: string
+      x-enum-varnames:
+      - EXCLUSION_FILTER
+    ApplicationSecurityExclusionFilterUpdateAttributes:
+      description: Update an existing Application Security Exclusion filter.
+      properties:
+        description:
+          description: The description of the Exclusion filter.
+          example: My Exclusion filter
+          type: string
+        enabled:
+          description: Whether the Exclusion filter is enabled.
+          example: true
+          type: boolean
+        ip_list:
+          description: The IPs list for the exclusion filter.
+          items:
+            example: 127.0.0.1
+            type: string
+          type: array
+        parameters:
+          description: A list of parameters for the exclusion filter.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The path glob for the exclusion filter.
+          example: /lfi_include/*
+          type: string
+        rules_target:
+          description: A list of rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The scope of the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      - path_glob
+      type: object
+    ApplicationSecurityExclusionFilterUpdateData:
+      description: Object for a single Exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterID'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityExclusionFilterUpdateRequest:
+      description: Request object that includes the Exclusion filter with the attributes
+        to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterUpdateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityExclusionListFilterData:
+      description: Object for a single Exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterListAttributes'
+        id:
+          description: The ID of the Exclusion filter.
+          example: 3dd-0uc-h1s
+          type: string
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterType'
+      type: object
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -37003,6 +37331,157 @@ paths:
         We are gradually onboarding support for more sources. If you have any
 
         feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
+  /api/v2/remote_config/products/asm/waf/exclusion_filters:
+    get:
+      description: Retrieve a list of Application Security exclusion filters.
+      operationId: ListApplicationSecurityExclusionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all ASM Exclusion Filters
+      tags:
+      - Application Security Exclusion Filters
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    post:
+      description: Create a new exclusion filter with the given parameters.
+      operationId: CreateApplicationSecurityExclusionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityExclusionFilterCreateRequest'
+        description: The definition of the new Exclusion filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an ASM Exclusion filter
+      tags:
+      - Application Security Exclusion Filters
+      x-codegen-request-body-name: body
+      x-given:
+        exclusion_filter:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"exclusion_filter\",\n    \"attributes\":
+              {\n      \"description\": \"My Exclusion Filter\",\n      \"enabled\":
+              true,\n      \"path_glob\": \"*\",\n      \"parameters\": [\n        \"list.search.query\"\n
+              \     ],\n      \"rules_target\": [\n        {\n          \"tags\":
+              {\n            \"category\":\"attack_attempt\",\n            \"type\":\"xss\"\n
+              \         }\n        }\n      ],\n      \"scope\": [\n        {\n          \"env\":
+              \"staging\",\n          \"service\": \"event-query\"\n        }\n      ]\n
+              \   }\n  }\n}"
+          step: there is a valid "exclusion_filter" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteApplicationSecurityExclusionFilter
+        parameters:
+        - name: exclusion_filter_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/asm/waf/exclusion_filters/{exclusion_filter_id}:
+    delete:
+      description: Delete a specific Application Security Exclusion filter.
+      operationId: DeleteApplicationSecurityExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityExclusionFilterID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an ASM Exclusion Filter
+      tags:
+      - Application Security Exclusion Filters
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieve a specific Application Security exclusion filter by ID.
+      operationId: GetApplicationSecurityExclusionFilters
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityExclusionFilterID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific ASM Exclusion Filter
+      tags:
+      - Application Security Exclusion Filters
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific Exclusion filter.
+
+        Returns the Exclusion filter object when the request is successful.'
+      operationId: UpdateApplicationSecurityExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityExclusionFilterID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityExclusionFilterUpdateRequest'
+        description: New definition of the Exclusion filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an ASM Exclusion filter
+      tags:
+      - Application Security Exclusion Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
     get:
       description: Get the list of Cloud Security Management Threats Agent rules.
@@ -44210,6 +44689,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
   name: APM Retention Filters
+- description: Exclusion filters in Application Security libraries are used to circumvent
+    false positives in protection.
+  name: Application Security Exclusion Filters
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
