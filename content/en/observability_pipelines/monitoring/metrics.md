@@ -34,8 +34,6 @@ Bytes out per second
 
 These metrics are available for sources, processors, and destinations.
 
-**Note**: `pipelines.utilization` is only available for processors and destinations.
-
 Bytes in per second
 : **Metric**: `pipelines.component_received_bytes_total`
 : **Description**: The number of bytes the component receives per second.
