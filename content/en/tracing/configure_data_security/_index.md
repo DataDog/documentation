@@ -624,7 +624,7 @@ apm_config:
 {{% tab "Environment variables" %}}
 
 ```bash
-export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
+export DD_APM_TELEMETRY_ENABLED=false
 ```
 
 {{% /tab %}}

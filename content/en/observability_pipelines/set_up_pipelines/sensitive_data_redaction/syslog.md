@@ -9,7 +9,7 @@ aliases:
 
 Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks.
 
-Use the Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. You can also create custom scanning rules using regex patterns to match sensitive information.
+Use Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. You can also create custom scanning rules using regex patterns to match sensitive information.
 
 {{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
@@ -20,7 +20,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/syslog%}}
+{{% observability_pipelines/prerequisites/syslog %}}
 
 ## Set up Observability Pipelines
 
@@ -30,7 +30,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/syslog%}}
+{{% observability_pipelines/source_settings/syslog %}}
 
 ### Set up the destinations
 
@@ -75,6 +75,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -143,6 +148,16 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
@@ -189,6 +204,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}

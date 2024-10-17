@@ -33,7 +33,7 @@ Supported operating systems:
 
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
-- Oracle JDK 8u352+, 11.0.17+, 17.0.5+
+- Oracle JDK 8u351+, 11.0.17+, 17.0.5+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
@@ -129,9 +129,9 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
+{{% collapse-content title="(Optional) Build and run Graal native-image" level="h4" %}}
 
-Follow the [Tracer Setup Instructions][14] to build your native image with the Datadog Java Profiler.
+Follow the [Tracer Setup Instructions][14] to build your Graal native image with the Datadog Java Profiler.
 
 When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
 

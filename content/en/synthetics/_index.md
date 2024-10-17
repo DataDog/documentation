@@ -20,9 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
   tag: "Blog"
   text: "Improve your API test coverage with Datadog Synthetic Monitoring"
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
