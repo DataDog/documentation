@@ -27,6 +27,7 @@ further_reading:
 - [Teams management](#teams-management-events)
 
 #### Product-Specific Events
+- [App Builder](#app-builder-events)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
 - [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
@@ -37,6 +38,7 @@ further_reading:
 - [Log Management](#log-management-events)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
+- [Security Notification events](#security-notification-events)
 - [Sensitive Data Scanner](#sensitive-data-scanner-events)
 - [Service Level Objectives](#service-level-objectives-slo-events)
 - [Synthetic Monitoring](#synthetic-monitoring-events)
@@ -81,15 +83,25 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 |-------------| --------------------------------------------------  | ------------------------------------ |
 | [API Request][16] | An API Request is made across the Datadog platform. | `@evt.name:Request @action:accessed` |
 
+### App Builder events
+
+| Name                 | Description of audit event | Query in audit explorer              |
+|----------------------| -------------------------  | ------------------------------------ |
+| [App][109]           | A user accessed, created, modified, deleted, reverted, or unpublished an app.| `@evt.name:"App Builder" @asset.type:app @action:(accessed OR created OR modified OR published OR deleted OR reverted OR unpublished)`|
+| [Query started][107] | A user started a query.    | `@evt.name:"App Builder" @asset.type:query @action:started` |
+| [Query executed][108]| A user executed a query.   | `@evt.name:"App Builder" @asset.type:query @action:executed`|
+
 ### Application Performance Monitoring (APM) events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Retention filter][17] | A user created, modified, or deleted a [retention filter][18] and the previous and/or new values for the retention filter configuration. | `@evt.name:APM @asset.type:retention_filter` |
 | [Span-based metric][19] | A user created, modified, or deleted a [span-based metric][20] and the previous and/or new values for the metric configuration. | `@evt.name:APM @asset.type:custom_metrics` |
+| [Custom metrics][113] | A user created, modified, or deleted a custom metric | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:custom_metrics` |
 | [Facet][21] | A user created, modified, or deleted a [facet][22] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
 | [Primary operation name][23] | A user created, modified, or deleted the [primary operation name][24] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
 | [Second Primary tag][25] | A user added, modified, or deleted the [second primary tag][26] and the previous and/or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
+| [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
 ### Application Security Management
 
@@ -161,17 +173,21 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Archive configuration][53] | A user created, modified, or deleted the configuration of an archive and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:archive` |
+| [Archiving order modified][105] | A user modified the order of archives. | `@evt.name:"Log Management" @action:modified @asset.type:archive_list` |
 | [Custom metric][54] | A user created, modified, or deleted a custom metric for logs and the previous and new values for the custom metric configuration. | `@evt.name:"Log Management" @asset.type:"custom metric"` |
 | [Exclusion filter configuration][55] | A user created, modified, or deleted the configuration of an exclusion filter and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:"exclusion filter"` |
-| [Facet][56] | A user created, modified, or deleted a facet in the log explorer and the previous and new values for the facet configuration.| `@evt.name:"Log Management" @asset.type:facet` |
-| [Historical view][57] | A user created, modified, aborted, or deleted a historical view for logs and the previous and new values for the historical view configuration. | `@evt.name:"Log Management" @asset.type:historical_view` |
 | [Index configuration][58] | A user created, modified, or deleted the configuration of an index and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:index` |
+| [Index order modified][104] | A user modified the order of indexes. | `@evt.name:"Log Management" @action:modified @asset.type:index_list` |
 | [Log pipeline][59] | A user created, modified, or deleted a log pipeline or nested pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline` |
 | [Processor][60] | A user created, modified, or deleted a processor within a pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline_processor` |
-| [Query][61] (Public Beta)| A user ran a Log Management List query either in log explorer, Dashboards or through the Public API. | `@evt.name:"Log Management" @asset.type:logs_query` |
-| [Restriction query configuration][62] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
+| [Facet][56] | A user created, modified, or deleted a facet in the Log Explorer and the previous and new values for the facet configuration.| `@evt.name:"Log Management" @asset.type:facet` |
 | [Standard attribute configuration][63] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
+| [Query][61] (Public Beta)| A user ran a Log Management List query either in Log Explorer, Dashboards or through the Public API. | `@evt.name:"Log Management" @asset.type:logs_query` |
+| [Restriction query configuration][62] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | [Download as CSV][64] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
+| [Historical view][57] | A user created, modified, aborted, or deleted a historical view for logs and the previous and new values for the historical view configuration. | `@evt.name:"Log Management" @asset.type:historical_view` |
+| [Saved view][106] | A user created, modified, or deleted a saved view. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:saved_view` |
+| [Log forwarding][103] | A user created, modified, or deleted a custom destination. | `@evt.name:"Log Management" @action:(created OR modified OR deleted) @asset.type:log_forwarding` |
 
 ### Metrics events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -229,6 +245,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Scanning group][84] | A user created, modified, or deleted a scanning group in Sensitive Data Scanner and the previous and new values for the configuration. | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| [Scanning group order modified][114] | A user modified the order of scanning groups. | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group_list` |
 | [Scanning rule][85] | A user created, modified, or deleted a scanning rule within a scanning group in Sensitive Data Scanner and the previous and new values for the configuration. | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_rule` |
 
 ### Service Level Objectives (SLO) events
@@ -265,7 +282,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Workflow][96] | A user created, deleted, or modified a workflow, or a workflow executed. | `@evt.name:"Workflows" @asset.type:workflow @action:(created OR deleted OR modified OR executed)` |
 | [Workflow Schedule][97] | A user created, deleted, or modified a schedule for a workflow. | `@evt.name:"Workflows" @asset.type:workflow_schedule @action:(created OR deleted OR modified)` |
 | [Workflow Action][98] | A user responded to a Slack prompt during the execution of a workflow. | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` |
+| [Notifications][111] | A notification configuration was created, modified, or deleted for a workflow.| `@evt.name:Workflows @action:(created OR modified OR deleted) @asset.type:workflow_notifications` |
 | [Custom Connection][99] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
+| [Step completed][110] | A step was completed. | `@evt.name:Workflows @action:completed @asset.type:step`|
 
 ## Further Reading
 
@@ -373,3 +392,15 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
 [101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
 [102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser_invite
+[103]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Alog_forwarding%20
+[104]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Amodified%20%40asset.type%3Aindex_list%20
+[105]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Amodified%20%40asset.type%3Aarchive_list%20
+[106]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
+[107]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aquery%20%40action%3Astarted%20
+[108]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aquery%20%40action%3Aexecuted%20
+[109]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22App%20Builder%22%20%40asset.type%3Aapp%20%40action%3A%28accessed%20OR%20created%20OR%20modified%20OR%20published%20OR%20deleted%20OR%20reverted%20OR%20unpublished%29%20
+[110]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40action%3Acompleted%20%40asset.type%3Astep%20
+[111]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Aworkflow_notifications%20
+[112]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
+[113]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Acustom_metrics%20
+[114]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Sensitive%20Data%20Scanner%22%20%40action%3Amodified%20%40asset.type%3Asensitive_data_scanner_scanning_group_list%20

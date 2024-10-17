@@ -21,8 +21,8 @@ assets:
     source_type_id: 10111
     source_type_name: Synthetic Email
   monitors:
-    Hop-count change: assets/monitors/hop_count_change.json
-    Performance degraded: assets/monitors/performance_degraded.json
+    Hop-count is changing: assets/monitors/hop_count_change.json
+    RTT time is experiencing degradation: assets/monitors/performance_degraded.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,6 +31,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-syntheticemail
 integration_title: Synthetic Email
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

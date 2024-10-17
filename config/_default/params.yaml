@@ -64,17 +64,23 @@ code_languages:
     syntax: typescript
     command: tsc
     example_file: example.ts
+  'rs':
+    extension: rs
+    name: rust
+    syntax: rust
+    command: rustc
+    example_file: src/main.rs
 
 code_language_ids:
     android: Android
     ios: iOS
     expo: Expo
     flutter: Flutter
-    otel: OTel
     reactnative: React Native
     codepush: CodePush
     roku: Roku
     unity: Unity
+    kotlin-multiplatform: Kotlin Multiplatform
     swiftui: Swift UI
     java: Java
     cpp: 'C++'

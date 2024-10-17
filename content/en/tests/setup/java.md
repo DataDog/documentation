@@ -67,21 +67,11 @@ You may follow interactive setup steps on the [Datadog site][2] or the instructi
 Configuring the Datadog Java Tracer varies depending on your CI provider.
 
 {{< tabs >}}
-{{% tab "Github Actions" %}}
-You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
-If you do so, you can skip the **Downloading tracer library** and **Running your tests** steps below.
-
-[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
-{{% tab "Jenkins" %}}
-You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
-If you do so, you can skip the "Downloading tracer library" and "Running your tests" steps below.
-
-[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
-{{% /tab %}}
-
-{{% tab "Other cloud CI provider" %}}
+{{% tab "Other Cloud CI Provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 

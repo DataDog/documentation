@@ -24,7 +24,7 @@ instances:
     ## @param password - string - optional
     ## The password to use for authentication.
     #
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
 
     ## @param options - mapping - optional
     ## Connection options. For a complete list, see:
@@ -56,6 +56,23 @@ instances:
     ## the Agent from the MongoDB admin command serverStatus.host.
     #
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
+
+    ## @param additional_metrics - list of strings - optional
+    ## List of additional metrics to collect. Available options are:
+    ## - metrics.commands: Use of database commands
+    ## - tcmalloc: TCMalloc memory allocator
+    ## - top: Usage statistics for each collection
+    ## - collection: Metrics of the specified collections
+    ## - jumbo_chunks: Count and percentage of jumbo chunks. Ignored on mongod instances.
+    ## - sharded_data_distribution: Distribution of data in sharded collections.
+    #
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks", "sharded_data_distribution"]
+
+    ## @param collections_indexes_stats - boolean - optional
+    ## Set to true to collect index statistics for the specified collections.
+    ## Requires `collections` to be set.
+    #
+    collections_indexes_stats: true
 
     ## @param database_autodiscovery - mapping - optional
     ## Enable database autodiscovery to automatically collect metrics from all your MongoDB databases.
@@ -105,21 +122,22 @@ instances:
   - hosts:
       - <HOST_MONGOS>:<PORT>
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
     dbm: true
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
-    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks"]
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks", "sharded_data_distribution"]
+    collections_indexes_stats: true
     database_autodiscovery:
       enabled: true
   ## Shard1
   - hosts:
       - <HOST_SHARD1_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -133,7 +151,7 @@ instances:
   - hosts:
       - <HOST_SHARD1_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -147,7 +165,7 @@ instances:
   - hosts:
       - <HOST_SHARD1_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -162,7 +180,7 @@ instances:
   - hosts:
       - <HOST_SHARD2_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -176,7 +194,7 @@ instances:
   - hosts:
       - <HOST_SHARD2_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -190,7 +208,7 @@ instances:
   - hosts:
       - <HOST_SHARD2_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     tls: true
@@ -205,7 +223,7 @@ instances:
   - hosts:
       - <HOST_CONFIG_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     database: config
     options:
       authSource: admin
@@ -216,7 +234,7 @@ instances:
   - hosts:
       - <HOST_CONFIG_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     database: config
     options:
       authSource: admin
@@ -227,7 +245,7 @@ instances:
   - hosts:
       - <HOST_CONFIG_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     database: config
     options:
       authSource: admin

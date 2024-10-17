@@ -225,6 +225,15 @@ The library injection mechanism for Python only supports injecting the Python li
 - **Solution**: Remove the installation of `ddtrace` if library injection is desired. Otherwise, use the installed library ([see documentation][26]) instead of library injection.
 
 
+#### TLS issues
+
+##### `tls: protocol version not supported`
+
+- **Problem**: Since Cluster Agent v1.20, the API is only served using TLS v1.3 by default. If the Kubernetes cluster is configured with TLS v1.2 or older, library injection fails.
+
+- **Solution**: Set `DD_CLUSTER_AGENT_ALLOW_LEGACY_TLS` to `true` for Cluster Agent.
+
+
 [1]: /containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [3]: /containers/kubernetes/installation/?tab=helm
@@ -268,13 +277,13 @@ When both the Agent and your services are running on a host, real or virtual, Da
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET all pinned to the latest major version. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Exit and open a new shell to use the injection library.
@@ -289,7 +298,6 @@ When an app that is written in a supported language is launched, it is automatic
 
 Configure host injection in one of the following ways:
 - Set environment variables on the process being launched.
-- Specify host injection configuration in the `/etc/datadog-agent/inject/host_config.yaml` file.
 
 Values in environment variables override settings in the configuration file on a per-process basis.
 
@@ -300,7 +308,6 @@ Values in environment variables override settings in the configuration file on a
 |`log_level`  | The logging level|`off`|`off`, `debug`, `info`, `warn`, `error`|
 |`output_paths`|The location where log output is written|`stderr`|`stderr` or a `file://` URL|
 |`env`|The default environment assigned to a process|none|n/a|
-|`config_sources`|The default configuration for a process|`BASIC`|See [Config Sources](#config-sources)|
 
 
 #### Example
@@ -311,7 +318,6 @@ log_level: debug
 output_paths:
   - file:///tmp/host_injection.log
 env: dev
-config_sources: BASIC
 ```
 
 ### Environment variables
@@ -325,13 +331,12 @@ Each of the fields in the config file corresponds to an environment variable. Th
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
-|`config_sources`|`DD_CONFIG_SOURCES`|
 
 The `DD_APM_INSTRUMENTATION_DEBUG` environment variable is limited to the values `true` and `false` (default value `false`). Setting it to `true` sets `log_level` to `debug` and setting it to `false` (or not setting it at all) uses the `log_level` specified in the configuration file. The environment variable can only set the log level to `debug`, not any other log level values.
 
 The `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable controls whether or not injection is enabled. It defaults to `TRUE`. Set it to `FALSE` to turn off library injection altogether.
 
-### Config sources
+### Default configuration
 
 By default, the following settings are enabled in an instrumented process:
 - Tracing
@@ -339,135 +344,6 @@ By default, the following settings are enabled in an instrumented process:
 - Health metrics
 - Runtime metrics
 
-You can change these settings for all instrumented processes by setting the `config_sources` property in the configuration file or for a single process by setting the `DD_CONFIG_SOURCES` environment variable for the process. The valid settings for config sources are:
-
-|Configuration Source Name|Meaning|
-| --------- | ----------- |  
-|`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
-|`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
-
-The words `BASIC` and `LOCAL` must be uppercase.
-
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources.
-
-
-### Supplying configuration source
-
-The config file for `LOCAL` can be formatted as JSON:
-
-```json
-{
-	"version": 1,
-	"tracing_enabled": true,
-	"log_injection_enabled": true,
-	"health_metrics_enabled": true,
-	"runtime_metrics_enabled": true,
-	"tracing_sampling_rate": 1.0,
-	"tracing_rate_limit": 1,
-	"tracing_tags": ["a=b", "foo"],
-	"tracing_service_mapping": [
-		{ "from_key": "mysql", "to_name": "super_db"},
-		{ "from_key": "postgres", "to_name": "my_pg"}
-	],
-	"tracing_agent_timeout": 1,
-	"tracing_header_tags": [
-		{"header": "HEADER", "tag_name":"tag"}
-	],
-	"tracing_partial_flush_min_spans": 1,
-	"tracing_debug": true,
-	"tracing_log_level": "debug",
-}
-```
-
-Or as YAML:
-
-```yaml
----
-version: 1
-tracing_enabled: true
-log_injection_enabled: true
-health_metrics_enabled: true
-runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
-tracing_tags:
-- a=b
-- foo
-tracing_service_mapping:
-- from_key: mysql
-  to_name: super_db
-- from_key: postgres
-  to_name: my_pg
-tracing_agent_timeout: 1
-tracing_header_tags:
-- header: HEADER
-  tag_name: tag
-tracing_partial_flush_min_spans: 1
-tracing_debug: true
-tracing_log_level: debug
-```
-
-The value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
-
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
-
-| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
-| --------- | ----------- | ------------- | ----------- | ------------- |
-| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
-| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
-| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
-| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
-| `tracing_rate_limit` | `dd.trace.rate.limit`    | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
-| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
-| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
-| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
-| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
-
-Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
-
-### Basic configuration settings
-
-`BASIC` configuration settings are equivalent to the following YAML settings:
-
-```yaml
----
-version: 1
-tracing_enabled: true
-log_injection_enabled: true
-health_metrics_enabled: true
-runtime_metrics_enabled: true
-```
-
-## Launch your services
-
-Launch your services, indicating the preload library configuration in the launch command. If `DD_CONFIG_SOURCES` is not specified, the value specified for `config_sources` in the `/etc/datadog-agent/inject/host_config.yaml` config file is used. If that is not specified either, `DD_CONFIG_SOURCES` defaults to `BASIC`:
-
-**Java app example**:
-```sh
-java -jar <SERVICE_1>.jar &
-DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC java -jar <SERVICE_2>.jar &
-```
-
-**Node app example**:
-```sh
-node index.js &
-DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC node index.js &
-```
-
-**.NET app example**:
-```sh
-dotnet <SERVICE_1>.dll &
-DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
-```
-**Python app example**:
-```sh
-python <SERVICE_1>.py &
-DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py &
-```
 
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
@@ -505,142 +381,10 @@ If the host does not yet have a Datadog Agent installed, or if you want to upgra
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
-
-## Configure Docker injection {#configure-docker-injection-2}
-
-If the default configuration doesn't meet your needs, you can edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
-
-```yaml
----
-log_level: debug
-output_paths:
-- stderr
-config_sources: BASIC
-```
-
-`config_sources`
-: Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
-
-The words `BASIC` and `LOCAL` must be uppercase.
-
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks the local file system first, and then uses the built-in default configuration:
-
-```yaml
-config_sources: LOCAL:/opt/config/my_process_config.yaml;BASIC
-```
-
-For more information about configuring `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
-
-`log_level`
-: Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.<br>
-**Default**: `info`
-
-`output_paths`
-: A list of one or more places to write logs.<br>
-**Default**: `stderr`
-
-Optional: `env`
-: Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
-**Default** None.
-
-<a id="supplying-configuration-source-hc"></a>
-
-### Supplying configuration source
-
-If you specify the `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
-
-```json
-{
-	"version": 1,
-	"tracing_enabled": true,
-	"log_injection_enabled": true,
-	"health_metrics_enabled": true,
-	"runtime_metrics_enabled": true,
-	"tracing_sampling_rate": 1.0,
-	"tracing_rate_limit": 1,
-	"tracing_tags": ["a=b", "foo"],
-	"tracing_service_mapping": [
-		{ "from_key": "mysql", "to_name": "super_db"},
-		{ "from_key": "postgres", "to_name": "my_pg"}
-	],
-	"tracing_agent_timeout": 1,
-	"tracing_header_tags": [
-		{"header": "HEADER", "tag_name":"tag"}
-	],
-	"tracing_partial_flush_min_spans": 1,
-	"tracing_debug": true,
-	"tracing_log_level": "debug",
-}
-
-```
-
-Or as YAML:
-```yaml
----
-version: 1
-tracing_enabled: true
-log_injection_enabled: true
-health_metrics_enabled: true
-runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
-tracing_tags:
-- a=b
-- foo
-tracing_service_mapping:
-- from_key: mysql
-  to_name: super_db
-- from_key: postgres
-  to_name: my_pg
-tracing_agent_timeout: 1
-tracing_header_tags:
-- header: HEADER
-  tag_name: tag
-tracing_partial_flush_min_spans: 1
-tracing_debug: true
-tracing_log_level: debug
-```
-
-
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
-
-| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
-| --------- | ----------- | ------------- | ----------- | ------------- |
-| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
-| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
-| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
-| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
-| `tracing_rate_limit` | `dd.trace.rate.limit`       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
-| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
-| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
-| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
-| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
-
-Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
-
-
-### Basic configuration settings
-
-`BASIC` configuration settings are equivalent to the following YAML settings:
-
-```yaml
----
-version: 1
-tracing_enabled: true
-log_injection_enabled: true
-health_metrics_enabled: true
-runtime_metrics_enabled: true
+DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Specifying Unified Service Tags on containers
@@ -683,147 +427,15 @@ Any newly started processes are intercepted and the specified instrumentation li
 Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
+This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LIBRARIES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-## Configure Docker injection
-
-Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
-
-```yaml
----
-log_level: debug
-output_paths:
-- stderr
-config_sources: BASIC
-```
-
-`config_sources`
-: Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
-
-The words `BASIC` and `LOCAL` must be uppercase.
-
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
-
-```yaml
-config_sources: LOCAL:/opt/config/my_process_config.yaml;BASIC
-```
-
-
-For more information about configuring `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
-
-`log_level`
-: Set to `debug` to log detailed information about what is happening, or `info` to log far less.
-
-`output_paths`
-: A list of one or more places to write logs.<br>
-**Default**: `stderr`
-
-Optional: `env`
-: Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
-**Default** None.
-
-<a id="supplying-configuration-source-c"></a>
-
-### Supplying configuration source
-
-If you specify a `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
-
-```json
-{
-	"version": 1,
-	"tracing_enabled": true,
-	"log_injection_enabled": true,
-	"health_metrics_enabled": true,
-	"runtime_metrics_enabled": true,
-	"tracing_sampling_rate": 1.0,
-	"tracing_rate_limit": 1,
-	"tracing_tags": ["a=b", "foo"],
-	"tracing_service_mapping": [
-		{ "from_key": "mysql", "to_name": "super_db"},
-		{ "from_key": "postgres", "to_name": "my_pg"}
-	],
-	"tracing_agent_timeout": 1,
-	"tracing_header_tags": [
-		{"header": "HEADER", "tag_name":"tag"}
-	],
-	"tracing_partial_flush_min_spans": 1,
-	"tracing_debug": true,
-	"tracing_log_level": "debug",
-}
-
-```
-
-Or as YAML:
-```yaml
----
-version: 1
-tracing_enabled: true
-log_injection_enabled: true
-health_metrics_enabled: true
-runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
-tracing_tags:
-- a=b
-- foo
-tracing_service_mapping:
-- from_key: mysql
-  to_name: super_db
-- from_key: postgres
-  to_name: my_pg
-tracing_agent_timeout: 1
-tracing_header_tags:
-- header: HEADER
-  tag_name: tag
-tracing_partial_flush_min_spans: 1
-tracing_debug: true
-tracing_log_level: debug
-```
-
-In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
-
-The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][3]:
-
-| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
-| --------- | ----------- | ------------- | ----------- | ------------- |
-| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
-| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
-| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
-| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
-| `tracing_rate_limit` | `dd.trace.rate.limit`       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
-| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
-| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
-| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
-| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
-
-Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
-
-
-### Basic configuration settings
-
-`BASIC` configuration settings are equivalent to the following YAML settings:
-
-```yaml
----
-version: 1
-tracing_enabled: true
-log_injection_enabled: true
-health_metrics_enabled: true
-runtime_metrics_enabled: true
-```
 
 ## Configure the Agent
 
@@ -838,10 +450,10 @@ In the Docker compose file that launches your containers, use the following sett
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket
-      - DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket
+      - DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket
+      - DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket
     volumes:
-      - /opt/datadog/apm:/opt/datadog/apm
+      - /var/run/datadog:/var/run/datadog
       - /var/run/docker.sock:/var/run/docker.sock:ro
 ```
 
@@ -947,22 +559,12 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 
 - For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` environment variables to `true` in the underlying application pod's deployment file.
 
-- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example:
-
-  ```yaml
-  additional_environment_variables:
-  - key: DD_PROFILING_ENABLED
-    value: true
-  - key: DD_APPSEC_ENABLED
-    value: true
-  ```
-
-  Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
 
 
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/library_config/
-[3]: /security/application_security/enabling/tracing_libraries/threat_detection/java
+[3]: /security/application_security/threats/setup/threat_detection/java/
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
 [5]: /tracing/trace_collection/automatic_instrumentation/
 [6]: /tracing/trace_collection/single-step-apm

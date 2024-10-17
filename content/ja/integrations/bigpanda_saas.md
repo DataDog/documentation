@@ -30,6 +30,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: bigpanda-bigpanda
 integration_title: BigPanda SaaS プラットフォーム
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -86,6 +86,11 @@ tile:
     image_url: images/958addd-arch.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/bigpanda-datadog-marketplace/
+  - resource_type: documentation
+    url: https://docs.bigpanda.io/docs/datadog
   support: README.md#Support
   title: BigPanda SaaS プラットフォーム
   uninstallation: README.md#Uninstallation
@@ -103,7 +108,7 @@ BigPanda は、[インフラストラクチャー][5]、[ログ管理][6]、[APM
 
 Datadog マーケットプレイスでのご提供には、BigPanda プラットフォームへのアクセスが含まれています。すでに BigPanda をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから BigPanda にお問い合わせください。
 

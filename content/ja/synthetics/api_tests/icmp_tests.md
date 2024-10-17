@@ -33,9 +33,7 @@ ICMP テストを使用すると、ホストの可用性を監視し、ネット
 
 ICMP テストは、ネットワークの外部または内部のどちらからエンドポイントへの ICMP ping をトリガーするかに応じて、[管理ロケーション](#select-locations)および[プライベートロケーション][1]の両方から実行できます。ICMP テストは、定義されたスケジュールで、オンデマンドで、または [CI/CD パイプライン][2]内から実行できます。
 
-**注**: Windows プライベートロケーションは `ICMP` テストの実行をサポートしていません。
-
-## ブラウザトラブルシューティング
+## 構成
 
 `ICMP` テストの作成を選択した後、テストのリクエストを定義します。
 
@@ -103,7 +101,7 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
 
-## ヘルプ
+## 権限
 
 デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic ICMP テストを作成、編集、削除できます。Synthetic ICMP テストの作成、編集、および削除のアクセス権を取得するには、ユーザーのロールをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードしてください。
 
@@ -124,7 +122,7 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 [1]: /ja/synthetics/private_locations
 [2]: /ja/synthetics/cicd_integrations
 [3]: /ja/synthetics/search/#search
-[4]: /ja/monitors/notify/#notify-your-team
+[4]: /ja/monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /ja/synthetics/guide/synthetic-test-monitors

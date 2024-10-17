@@ -159,7 +159,7 @@ title: 属性とエイリアス設定
 [25]: /ja/standard-attributes/?search=syslog&product=log+management
 [26]: /ja/integrations/rsyslog/
 [27]: /ja/integrations/nxlog/
-[28]: integrations/syslog_ng/
+[28]: /ja/integrations/syslog_ng/
 [29]: /ja/integrations/fluentd/
 [30]: /ja/integrations/logstash/
 [31]: /ja/standard-attributes/?search=dns&product=log+management

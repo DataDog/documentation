@@ -21,6 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_netapp/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: snmp-netapp
 integration_title: NetApp
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_netapp
 public_title: NetApp
@@ -48,10 +48,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: NetApp ネットワークデバイスから SNMP メトリクスを収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: NetApp
 ---
@@ -65,18 +69,18 @@ NetApp はクラウドデータ管理とデータサービスを専門とする�
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## 計画と使用
+## セットアップ
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

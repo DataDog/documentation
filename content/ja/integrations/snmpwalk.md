@@ -10,6 +10,7 @@ author:
 categories:
 - notifications
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md
 display_on_public_website: true
@@ -19,7 +20,6 @@ integration_id: snmpwalk
 integration_title: SNMP walk
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmpwalk
 public_title: SNMP walk
@@ -36,6 +36,7 @@ tile:
   - Supported OS::Windows
   - Category::Notifications
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: snmpwalk の説明
   media: []
@@ -80,7 +81,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い  SNMP walk チ
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `snmpwalk` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 

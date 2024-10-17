@@ -12,7 +12,8 @@ categories:
 - モニター
 - apm
 - ネットワーク
-- profiler_troubleshooting
+- tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: rum-react-native
 integration_title: React Native
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rum_react_native
 public_title: React Native
@@ -40,6 +40,7 @@ tile:
   - Category::Tracing
   - Supported OS::Android
   - Supported OS::iOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
   media: []
@@ -71,7 +72,7 @@ React Native アプリケーションのエンドツーエンドの健全性を�
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -85,9 +86,9 @@ React Native アプリケーションは、自動的に Datadog にトレース�
 
 React Native アプリケーションのログを Datadog に転送し始めるには、[React Native ログ収集][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 React Native インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -99,11 +100,11 @@ React Native インテグレーションには、メトリクスは含まれて�
 
 React Native インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

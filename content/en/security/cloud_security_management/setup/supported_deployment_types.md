@@ -2,12 +2,14 @@
 title: Cloud Security Supported Deployment Types
 ---
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 The following table summarizes the CSM features available relative to each deployment type.
 
 | Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless Scanning |
 |---------------------|------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
-| AWS Account         |                        | {{< X >}}             |             |                     | {{< X >}}          | {{< X >}}              |
-| Azure Account       |                        | {{< X >}}             |             |                     | {{< X >}}          |                        |
+| AWS Account         |                        | {{< X >}}             |             | {{< X >}}           | {{< X >}}          | {{< X >}}              |
+| Azure Account       |                        | {{< X >}}             |             | Agentless Scanning (beta)      | {{< X >}}          |                        |
 | GCP Account         |                        | {{< X >}}             |             |                     |                    |                        |
 | Terraform           |                        |                       |             |                     |                    | {{< X >}}              |
 | Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
@@ -36,4 +38,3 @@ The following table summarizes the scope of coverage available relative to each 
 [1]: /security/cloud_security_management/setup/#csm-threats
 [2]: /security/cloud_security_management/setup/#csm-vulnerabilities
 [3]: /security/cloud_security_management/setup/#csm-identity-risks
-[4]: /security/cloud_security_management/setup/agentless_scanning?tab=crossaccountscanning#prerequisites

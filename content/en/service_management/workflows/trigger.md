@@ -81,15 +81,7 @@ Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
 ### Test a monitor trigger
 
-You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.
-
-To test a monitor trigger:
-1. Select the monitor trigger action in your workflow.
-1. Click **Test from Monitor**.
-1. If your monitor passes inputs to the workflow, enter a test value under **Workflow Inputs**.
-1. Select a monitor to test.
-1. Select a monitor state.
-1. Click **Run From Monitor**.
+See the test and debug page for information on [how to test a monitor trigger][12].
 
 ## Incident triggers
 
@@ -210,15 +202,13 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 
 {{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
+### Access the result of a child workflow
+
+You can pass the result of a child workflow back to the parent workflow by defining **Output parameters** in the child workflow. Use the `WorkflowOutputs` context variable in the parent workflow to retrieve the output parameters of the child workflow. For example, given a child workflow named `Example_workflow` with an output parameter named `exampleList`, use `Steps.Example_workflow.workflowOutputs.exampleList` to access the result of the child workflow.
+
 ## Run history
 
-After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views.
-
-Use run history to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed _GitHub pull request status_ step. The error message shows that the step failed due to missing permissions:
-
-{{< img src="service_management/workflows/failed-step4.png" alt="A workflow with a failed step." >}}
-
-The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
+After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views. Use run history to watch the progress of a triggered workflow or [debug a failed step][13].
 
 ## Further reading
 
@@ -237,3 +227,5 @@ The initial run history for a workflow provides a panel with the list of previou
 [9]: /account_management/api-app-keys/#application-keys
 [10]: /account_management/api-app-keys/#scopes
 [11]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[12]: /service_management/workflows/test_and_debug/#test-a-monitor-trigger
+[13]: /service_management/workflows/test_and_debug/#debug-a-failed-step

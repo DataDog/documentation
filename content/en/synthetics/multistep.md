@@ -69,7 +69,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    See the [HTTP Tests documentation][101] to create an HTTP request and add assertions. Assertions are optional in multistep API tests.
 
-   [101]: /synthetics/multistep#define-the-request
+   [101]: /synthetics/api_tests/http_tests/
 
    {{% /tab %}}
    {{% tab "gRPC" %}}
@@ -152,7 +152,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (10 minutes).
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (30 minutes).
 
 For HTTP steps, see [common HTTP step failures][15]. For gRPC steps, see [common gRPC step failures][16].
 

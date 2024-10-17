@@ -221,6 +221,20 @@
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
   },
+  "ListCatalogEntity": {
+    "description": "Get a list of entities from Software Catalog.",
+    "summary": "Get a list of entities"
+  },
+  "UpsertCatalogEntity": {
+    "description": "Create or update entities in Software Catalog.",
+    "summary": "Create or update entities",
+    "request_description": "Entity YAML or JSON.",
+    "request_schema_description": "Create or update entity request."
+  },
+  "DeleteCatalogEntity": {
+    "description": "Delete a single entity in Software Catalog.",
+    "summary": "Delete a single entity"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
@@ -548,6 +562,34 @@
     "summary": "Create a Datadog GCP principal",
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
+  },
+  "GetChannelByName": {
+    "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
+    "summary": "Get channel information by name"
+  },
+  "ListTenantBasedHandles": {
+    "description": "Get a list of all tenant-based handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all tenant-based handles"
+  },
+  "CreateTenantBasedHandle": {
+    "description": "Create a tenant-based handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Create tenant-based handle request."
+  },
+  "DeleteTenantBasedHandle": {
+    "description": "Delete a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete tenant-based handle"
+  },
+  "GetTenantBasedHandle": {
+    "description": "Get the tenant, team, and channel information of a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get tenant-based handle information"
+  },
+  "UpdateTenantBasedHandle": {
+    "description": "Update a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Update tenant-based handle request."
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -916,7 +958,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name.",
+    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
@@ -990,6 +1032,16 @@
   "GetInterfaces": {
     "description": "Get the list of interfaces of the device.",
     "summary": "Get the list of interfaces of the device"
+  },
+  "ListDeviceUserTags": {
+    "description": "Get the list of tags for a device.",
+    "summary": "Get the list of tags for a device"
+  },
+  "UpdateDeviceUserTags": {
+    "description": "Update the tags for a device.",
+    "summary": "Update the tags for a device",
+    "request_description": "",
+    "request_schema_description": "List tags response."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -1100,7 +1152,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nPowerpacks               | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1236,6 +1288,12 @@
   "DeleteScorecardRule": {
     "description": "Deletes a single rule.",
     "summary": "Delete a rule"
+  },
+  "UpdateScorecardRule": {
+    "description": "Updates an existing rule.",
+    "summary": "Update an existing rule",
+    "request_description": "Rule attributes.",
+    "request_schema_description": "Request to update a scorecard rule."
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
@@ -1746,21 +1804,21 @@
     "summary": "Get user memberships"
   },
   "ListWorkflowInstances": {
-    "description": "List all instances of a given workflow.",
+    "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",
     "summary": "List workflow instances"
   },
   "CreateWorkflowInstance": {
-    "description": "Execute the given workflow",
+    "description": "Execute the given workflow. This API requires an application key scoped with the workflows_run permission.",
     "summary": "Execute a workflow",
     "request_description": "",
     "request_schema_description": "Request used to create a workflow instance."
   },
   "GetWorkflowInstance": {
-    "description": "Get a specific execution of a given workflow.",
+    "description": "Get a specific execution of a given workflow. This API requires an application key scoped with the workflows_read permission.",
     "summary": "Get a workflow instance"
   },
   "CancelWorkflowInstance": {
-    "description": "Cancels a specific execution of a given workflow.",
+    "description": "Cancels a specific execution of a given workflow. This API requires an application key scoped with the workflows_run permission.",
     "summary": "Cancel a workflow instance"
   }
 }

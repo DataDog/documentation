@@ -27,16 +27,32 @@ You can access, [search](#search-for-tests), and [manage](#manage-tests) all of 
 
 {{< img src="synthetics/search/synthetic_tests_page_2.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
 
-By using [facets](#facets-and-tags), you can accomplish the following actions:
-
-- Search for specific Synthetic tests
-- Manage your tests with bulk actions
-
 ## Search for tests
+
+### Customize columns
+
+Click on the **Customize** gear icon on the right hand side of the page to add additional columns as needed: 
+
+- Steps
+- Frequency
+- Devices
+- Locations
+- Mobile Application
+- Creator
+- CI Execution
+- Monitor
+- Last Runs
+
+{{< img src="synthetics/search/synthetic_tests_customize_column.png" alt="Synthetic Monitoring Tests page with the columns drop down selected" style="width:100%" >}}
 
 ### Facets and tags
 
 The **Synthetics Filters** panel on the left lists default facets you can use to search for your tests. 
+
+By using [facets](#facets-and-tags), you can accomplish the following actions:
+
+- Search for specific Synthetic tests
+- Manage your tests with bulk actions
 
 The default facets include the following:
 

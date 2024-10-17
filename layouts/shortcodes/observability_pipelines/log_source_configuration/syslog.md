@@ -1,6 +1,6 @@
-### Rsyslog
+### rsyslog
 
-To send Rsyslog logs to the Observability Pipelines Worker, update your Rsyslog config file:
+To send rsyslog logs to the Observability Pipelines Worker, update your rsyslog config file:
 
 ```
 ruleset(name="infiles") {
@@ -12,9 +12,9 @@ action(type="omfwd" protocol="tcp" target="<OPW_HOST>" port="<OPW_PORT>")
 - For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. 
 - For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used, for example `opw-observability-pipelines-worker.default.svc.cluster.local`.
 
-### Syslog-ng
+### syslog-ng
 
-To send Syslog-ng logs to the Observability Pipelines Worker, update your Syslog-ng config file:
+To send syslog-ng logs to the Observability Pipelines Worker, update your syslog-ng config file:
 
 ```
 destination obs_pipelines {

@@ -93,6 +93,7 @@ The following table presents the list of collected resources and the minimal Age
 | Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
 | Jobs | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
 | Namespaces | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Network Policies | 7.33.0 | 7.56.0 | 3.57.2 | 1.14.0 |
 | Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
 | PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
 | PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |

@@ -24,6 +24,7 @@ categories:
 - インシデント
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: auth0
 integration_title: Auth0
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: auth0
 public_title: Auth0
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Auth0 イベントを表示し、分析します。
   media: []
@@ -85,7 +86,7 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 
 しきい値を構成することで、セキュリティチームは不審なイベントが発生した際に通知するためのアラートを設定でき、セキュリティインシデントにより早急に対応することができます。
 
-## 計画と使用
+## セットアップ
 
 コンフィギュレーションはすべて [Auth0 ダッシュボード][1]で行います。
 
@@ -113,25 +114,25 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 1. **Logs** > **Livetail** の順に移動します。
 2. `source:auth0` を設定して、Auth0 ログを確認します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### 収集データ
+### ログ収集
 
 Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[ログのイベントタイプコード][4]を参照してください。
 
-### データセキュリティ
+### メトリクス
 
 auth0 には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 auth0 には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 auth0 には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要な場合は、[Datadog サポート][5]までお問い合せください。
 このインテグレーションの詳細は、Datadog の[ブログ記事][6]でご確認いただけます。

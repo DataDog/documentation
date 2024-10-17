@@ -10,8 +10,6 @@ If you are using [Microsoft SourceLink][101], Datadog can extract the git commit
    | Azure DevOps | [Microsoft.SourceLink.AzureRepos.Git][105] |
    | Azure DevOps Server | [Microsoft.SourceLink.AzureDevOpsServer.Git][106] |
 
-1. Ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
-
 [101]: https://github.com/dotnet/sourcelink
 [102]: https://www.nuget.org/packages/Microsoft.SourceLink.GitHub
 [103]: https://www.nuget.org/packages/Microsoft.SourceLink.Bitbucket

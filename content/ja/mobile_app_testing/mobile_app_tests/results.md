@@ -1,6 +1,6 @@
 ---
 aliases:
-- /mobile_testing/mobile_app_tests/results
+- /ja/mobile_testing/mobile_app_tests/results
 description: Synthetic モバイルアプリのテスト結果を表示し、成功または失敗したサンプル実行とテスト実行を比較することができます。
 further_reading:
 - link: /mobile_app_testing/mobile_app_tests/
@@ -92,7 +92,7 @@ Run type
 
 一般的なモバイルアプリテストのエラーには、以下が含まれます。
 
-`Element located but it's invisible` 
+`Element located but it's invisible`
 : 要素はページにあるものの、クリックできない。たとえば、別の要素で覆われている、など。
 
 `Cannot locate element`

@@ -6,7 +6,7 @@ Some of these guidelines are enforced by [the Datadog docs implementation of the
 
 ## Language
 
-- Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.  
+- Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.
 - Don't contribute updates to the translated content (fr, ja, ko, es), as the content in GitHub is not the managed source. If there is a mistake in the English source file, fix the English source file. If the mistake is only in the translated version, let us know and we will get it addressed in the source.
 
 ## General principles
@@ -125,7 +125,7 @@ A top level domain (TLD) in an example must reference a TLD permanently reserved
 - `.invalid`
 - `.localhost`
 
-Same goes for second level domain names, three are reserved: 
+Same goes for second level domain names, three are reserved:
 - `example.com`
 - `example.net`
 - `example.org`

@@ -4,7 +4,7 @@ description: Setting up Database Monitoring on a MongoDB cluster
 disable_sidebar: true
 ---
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
 ### MongoDB versions supported
 
@@ -14,6 +14,7 @@ disable_sidebar: true
 | MongoDB 5.0 | {{< X >}}   | {{< X >}}     |
 | MongoDB 6.0 | {{< X >}}   | {{< X >}}     |
 | MongoDB 7.0 | {{< X >}}   | {{< X >}}     |
+| MongoDB 8.0 | {{< X >}}   | {{< X >}}     |
 
 For setup instructions, select your hosting type:
 

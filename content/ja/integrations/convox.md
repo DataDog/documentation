@@ -24,6 +24,7 @@ categories:
 - cloud
 - configuration & deployment
 - containers
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: convox
 integration_title: Convox
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: convox
 public_title: Convox
@@ -51,10 +51,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
   support: README.md#Support
   title: Convox
 ---
@@ -68,7 +72,7 @@ Convox からリアルタイムにメトリクスを取得して、コンテナ�
 
 ![Convox インテグレーションダッシュボードウィジェット][1]
 
-## 計画と使用
+## セットアップ
 
 [Convox ドキュメント][2]を参照して、Datadog インテグレーションを設定してください。
 
@@ -96,21 +100,21 @@ Rack でオートスケーリングが有効になっている場合は、Rack �
 
 詳しくは、[Listening for ECS CloudWatch Events][3] チュートリアルをご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Convox インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Convox インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Convox インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 環境変数を `convox.yml` ファイルで構成する場合、`environment` パラメーターは `services` パラメーターと同じレベルで定義する必要があります。
 
