@@ -1,5 +1,33 @@
 ---
 title: Getting Started with Google Cloud
+further_reading:
+    - link: 'https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=dataflowmethodrecommended'
+      tag: 'Documentation'
+      text: 'Google Cloud integration'
+    - link: 'https://docs.datadoghq.com/account_management/billing/google_cloud/'
+      tag: 'Guide'
+      text: 'Google Cloud integration billing'
+    - link: 'https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/'
+      tag: 'Guide'
+      text: 'Cloud Metric Delay'
+    - link: 'https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
+      tag: 'Guide'
+      text: 'Why should I install the Datadog Agent on my cloud instances?'
+    - link: 'https://www.datadoghq.com/blog/gke-dashboards-integration-improvements/'
+      tag: 'Blog'
+      text: 'New GKE dashboards and metrics provide deeper visibility into your environment'
+    - link: 'https://www.datadoghq.com/blog/google-cloud-private-service-connect/'
+      tag: 'Blog'
+      text: 'Access Datadog privately and monitor your Google Cloud Private Service Connect usage'
+    - link: 'https://www.datadoghq.com/blog/track-bigquery-costs-performance/'
+      tag: 'Blog'
+      text: 'Monitor BigQuery with Datadog'
+    - link: 'https://www.datadoghq.com/blog/google-cloud-cost-management/'
+      tag: 'Blog'
+      text: 'Empower engineers to take ownership of Google Cloud costs with Datadog'
+    - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
+      text: 'Collect traces, logs, and custom metrics from your Google Cloud Run services with Datadog'
+      tag: 'Blog'
 ---
 
 ## Overview
@@ -269,6 +297,8 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 
 ### Database Monitoring (DBM)
 Use [Database Monitoring (DBM)][49] to gain increased insight on performance metrics, host health and query samples for your Google Cloud SQL databases.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
