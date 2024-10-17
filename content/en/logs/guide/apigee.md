@@ -1,7 +1,6 @@
 ---
 title: Apigee
 name: apigee
-
 description: 'Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance and issues of the proxies aggregated in one place.'
 short_description: 'Collect Apigee logs'
 aliases:
@@ -11,6 +10,9 @@ further_reading:
 - link: 'logs/'
   tag: 'Documentation'
   text: 'Log Management'
+- link: 'https://docs.datadoghq.com/logs/log_collection/'
+  tag: 'Documentation'
+  text: 'Log Collection and Integrations'
 integration_id: "apigee"
 ---
 
