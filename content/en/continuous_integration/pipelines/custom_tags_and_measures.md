@@ -107,7 +107,7 @@ DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pip
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
-The following example adds the measures `error_rate` and `size` to the pipeline span:
+The following example adds `error_rate` and `size` measures to the pipeline span:
 
 ```shell
 DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level pipeline --measures "error_rate:0.56" --measures "size:2327"
