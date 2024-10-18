@@ -20,6 +20,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 * [APM enabled with the Java Agent][2]
   * Kafka and RabbitMQ: v1.9.0 or later
   * Amazon SQS: v1.27.0 or later
+  * [Data Pipeline Lineage][6]: v1.34.0 or later
 
 ### Installation
 
@@ -60,3 +61,4 @@ Data Streams Monitoring uses one [message attribute][4] to track a message's pat
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[6]: /data_streams/data_pipeline_lineage
