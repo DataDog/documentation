@@ -1502,7 +1502,7 @@ try restarting the Jenkins instance.
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
-[11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
+[11]: /continuous_integration/pipelines/jenkins/?tab=agentlessusinganapikey#correlate-infrastructure-metrics
 [12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
