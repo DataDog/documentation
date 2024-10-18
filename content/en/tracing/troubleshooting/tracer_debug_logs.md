@@ -14,8 +14,7 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 
 ### Prerequisites
 
-- [Remote Configuration][3] must be enabled.
-- Your API key must be configured for Remote Configuration.
+- To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
 - You must have a supported tracer version:
   - Java: '1.26.0' or greater
   - Python: '2.11.0' or greater
@@ -23,8 +22,6 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
   - .NET: `2.48.0` or greater
 
 ### Send a flare
-
-To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
 
 {{% remote-flare %}}
 
