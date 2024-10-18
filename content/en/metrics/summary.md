@@ -248,4 +248,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [28]: /logs/
 [29]: /service_catalog/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
-[31]: /metrics/distributions/
+[31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
