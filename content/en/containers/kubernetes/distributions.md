@@ -294,9 +294,9 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Spot pods and compute Classes
+### Spot pods and compute classes
 
-Using [Spot Pods][10] in GKE Autopilot clusters introduces [Taints][9] to the corresponding Spot GKE nodes. When using Spot Pods, additional configuration is required to provide the Agent DaemonSet with a matching Toleration.
+Using [Spot Pods][10] in GKE Autopilot clusters introduces [taints][9] to the corresponding Spot GKE nodes. When using Spot Pods, additional configuration is required to provide the Agent DaemonSet with a matching toleration.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -313,7 +313,7 @@ agents:
 {{% /tab %}}
 {{< /tabs >}}
 
-Similarly when using [GKE Autopilot Compute classes][11] to run workloads that have specific hardware requirements, take note of the [Taints][9] that GKE Autopilot is applying to these specific nodes and add matching Tolerations to the Agent DaemonSet. You can match the Tolerations on your corresponding pods. For example for the `Scale-Out` compute class use a Toleration like:
+Similarly when using [GKE Autopilot Compute classes][11] to run workloads that have specific hardware requirements, take note of the [taints][9] that GKE Autopilot is applying to these specific nodes and add matching tolerations to the Agent DaemonSet. You can match the tolerations on your corresponding pods. For example for the `Scale-Out` compute class use a toleration like:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
