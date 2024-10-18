@@ -1,4 +1,4 @@
-1. Download the [Helm chart values file][601] for Amazon EKS.
+1. Download the [Helm chart values file][601].
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Add the Datadog chart repository to Helm:
     ```shell
@@ -11,7 +11,7 @@
  1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
     ```shell
     helm upgrade --install opw \
-	-f aws_eks.yaml \
+	-f values.yaml \
 	--set datadog.apiKey=<DATADOG_API_KEY> \
 	--set datadog.pipelineId=<PIPELINE_ID> \
 	--set <SOURCE_ENV_VARIABLES> \
@@ -27,5 +27,5 @@
 
 See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
 
-[601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
+[601]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [602]: /observability_pipelines/update_existing_pipelines
