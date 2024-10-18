@@ -130,6 +130,10 @@ On Chromium-based browsers, when the RUM Browser SDK sends data to the Datadog i
 
 The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue][8]. It does not impact the RUM Browser SDK and can safely be ignored.
 
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][14] to view all your uploaded source maps. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][15].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -147,3 +151,5 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
 [13]: /real_user_monitoring/browser/setup/#initialization-parameters
+[14]: https://app.datadoghq.com/source-code/setup/rum
+[15]: /real_user_monitoring/guide/debug-symbols

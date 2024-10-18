@@ -171,6 +171,9 @@ If you are using a host, you have two options.
 
 <div class="alert alert-info">The .NET client library version 2.24.1 or later is required.</div>
 
+As a first step, ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder. 
+Then, follow the rest of the instructions based on your specific deployment model:
+
 #### Containers
 
 If you are using Docker containers, you have three options: using Docker, using Microsoft SourceLink, or configuring your application with `DD_GIT_*` environment variables.
@@ -307,27 +310,6 @@ If you are using Serverless, you have two options depending on your serverless a
 ##### Option 1: Datadog Tooling
 
 {{% sci-dd-serverless %}}
-
-##### Option 2: `DD_GIT_*` Environment Variables
-
-{{% sci-dd-git-env-variables %}}
-
-#### Host
-
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
-
-{{% sci-dd-git-env-variables %}}
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
-
-If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
-
-##### Option 1: Docker
-
-{{% sci-docker %}}
 
 ##### Option 2: `DD_GIT_*` Environment Variables
 
