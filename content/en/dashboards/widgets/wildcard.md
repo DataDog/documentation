@@ -23,9 +23,9 @@ Datadog recommends using an existing [dashboard widget][4] to meet your use case
 
 However, if none of the Datadog widgets meets your visualization needs, a Wildcard widget is a fast way to get a new capability added to your Dashboards without waiting for a new feature or graph type to be added. 
 
-1. **Don't start from scratch**. There are over [150 public official examples][5]. If you're not sure what type of graph you want to use, fork an existing example to test the visualization. Use Vega-Lite over Vega for simplicity and ease of debugging.
+1. **Don't start from scratch**. Vega-Lite maintains a public gallery with over [150 official examples][5]. If you're not sure what type of graph you want to use, fork an existing example to test the visualization. Use Vega-Lite over Vega for simplicity and ease of debugging.
 1. **Test the Wildcard widget**. The flexibility of the Wildcard widget comes with the risk of creating slow, unappealing, or inconsistent visualizations. Test the Wildcard widget on a scratchpad or empty dashboard before adding Wildcard widgets to production.
-1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query which ensures the configuration builds the expected graph. With the Wildcard widget you're adding a custom Vega-Lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
+1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query, which ensures the configuration builds the expected graph. With the Wildcard widget, you're adding a custom Vega-Lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
 
  ## Setup
 
@@ -34,8 +34,10 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click **Add Widgets**.
 1. Click and drag the Wildcard Widget icon from the widget tray. 
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification. 
-1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**. 1. Paste the copied Vega-Lite definition.
-1. Click **Apply** to apply your configuration changes, see a preview of the visualization, and iterate on your design. **Note**: You must click **Apply** to add your changes, however this does not save your configuration.
+1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**.
+1. Paste the copied Vega-Lite definition.
+1. Click **Apply** to apply your configuration changes, see a preview of the visualization, and iterate on your design. 
+   **Note**: You must click **Apply** to add your changes, however this does not save your configuration.
 1. (Optional) Debug Vega-Lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-Lite specification maps to the Datadog query. 
 1. Click **Save**.
 
@@ -63,7 +65,7 @@ The Data Preview table shows the response, fields, and values from your data req
 
 Datadog widgets automatically map the query results to the visualization elements, but the Wildcard widget requires you to add a custom Vega-Lite specification that defines how the Datadog query maps to visual elements. This creates the potential for a mismatch. With Data Preview, you can verify that the Vega-Lite specification maps to the correct query response.
 
-To highlight this, use the example metric query of `system.cpu.user` averaged by `env`
+To highlight this, use the example metric query of `system.cpu.user` averaged by `env`:
 
 {{< img src="/dashboards/widgets/wildcard/example_configuration_query.png" alt="Example widget configuration metric query for system.cpu.user grouped by env" style="width:100%;" >}}
 
@@ -119,7 +121,7 @@ The Wildcard Widget supports data requests from all data sources supported in na
 For simplicity and brevity, opt for Vega-Lite. The system supports Vega-Lite version 5.18.1. Reserve Vega for more complex or advanced visualization needs.
 
 ### Terraform Integration
-Utilize the `datadog_dashboard_json` resource when working with Wildcard widgets in Terraform dashboards.
+Use the `datadog_dashboard_json` resource when working with Wildcard widgets in Terraform dashboards.
 
 ### Known Limitations
 Avoid using Wildcard widgets for the following scenarios:
