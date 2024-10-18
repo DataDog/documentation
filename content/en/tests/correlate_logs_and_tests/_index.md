@@ -31,7 +31,7 @@ Agentless log submission is supported for the following languages and frameworks
 
 - `dd-trace-java >= 1.35.2` and Log4j2.
 
-Use the following environment variables to enable and configure agentless log submission:
+Use the following environment variables to enable and configure Agentless log submission:
 
 | Name | Description | Default value |
 |---|---|---|
@@ -46,7 +46,7 @@ Agentless log submission is supported for the following languages and frameworks
 
 - `dd-trace-js >= 5.24.0` and `dd-trace-js >= 4.48.0` and `winston`.
 
-Use the following environment variables to enable and configure agentless log submission:
+Use the following environment variables to enable and configure Agentless log submission:
 
 | Name | Description | Default value |
 |---|---|---|
