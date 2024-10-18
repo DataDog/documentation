@@ -89,7 +89,7 @@ Ensure that you do not encounter any errors when going through the basic authori
 
 #### Create an API Key
 
-If your OAuth client requests the `api_keys_write` scope, ensure that you can successfully make a request to the `marketplace` endpoint with your token in the headers of the request. 
+If your OAuth client requests the `api_keys_write` scope, ensure that you can successfully make a request to the `marketplace` endpoint with your token in the headers of the request. For more information, see [the OAuth2 Authorization Endpoints Reference][20].
 
 If successful, this request returns an API key that you can find on the [API Keys Management page][10]. You must securely save this key to use it for submitting data into Datadog on behalf of the user. **You cannot access this API key value again after the initial request response**.
 
@@ -186,15 +186,15 @@ headers = {"Authorization": "Bearer {}".format(access_token)}
 
 For more information, see [Implement the OAuth protocol][17].
 
-#### API requests
+### API requests
 
 If you're getting a forbidden error when trying to make an API call to a specific endpoint and you've enabled the correct scope for that endpoint, it's possible your API key, session, or OAuth token is invalid or has expired.
 
-### API key and token expiration
+#### API key and token expiration
 
 Refresh tokens do not expire unless the user revokes authorization or the partner revokes the token. If the partner revokes the token, the user must reauthorize the integration to generate new refresh and access tokens. For more information, see the [OAuth2 Authorization Endpoints Reference][13].
 
-### Retrieving API keys in your partner sandbox account
+#### Retrieving API keys in your partner sandbox account
 
 After you create a key using the [api_keys/marketplace][14] endpoint, the key is returned in the response. The key cannot be regenerated or viewed again. Ensure you store the key securely for continuous data transmission. If you lose your API key, follow these steps to revoke and recreate it:
 
@@ -205,7 +205,10 @@ After you create a key using the [api_keys/marketplace][14] endpoint, the key is
 1. Reinstall the integration and repeat the OAuth flow.
 
 
-### API errors when making a call with subdomains
+### Hostname/IP does not match certificate's altnames
+
+Error
+: `Hostname/IP does not match certificate's altnames`
 
 When connecting to the Datadog API, do not include the subdomain in the API call. For example, use `datadoghq.eu` instead of `bigcorp.datadoghq.eu`.
 
@@ -231,6 +234,7 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://app.datadoghq.com/integrations
@@ -249,3 +253,4 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 [17]: /developers/authorization/oauth2_in_datadog/#implement-the-oauth-protocol
 [18]: /developers/integrations/
 [19]: /agent/configuration/network/
+[20]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints
