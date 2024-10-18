@@ -16,8 +16,8 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 
 - To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
 - You must have a supported tracer version:
-  - Java: '1.26.0' or greater
-  - Python: '2.11.0' or greater
+  - Java: `1.26.0` or greater
+  - Python: `2.11.0` or greater
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
   - .NET: `2.48.0` or greater
 
