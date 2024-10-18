@@ -59,7 +59,7 @@ To see available out-of-the-box monitors:
 
 1. Navigate to [Observability Pipelines][1].
 1. Click **Enable monitors** in the **Monitors** column for your pipeline.
-1. Click **Enable** to set up a monitor for that use case.<br>
+1. Click **Start** to set up a monitor for one of the suggested use cases.<br>
     The new metric monitor page is configured based on the use case you selected. You can update the configuration to further customize it. See the [Metric monitor documentation][3] for more information.
 
 ## Further reading
