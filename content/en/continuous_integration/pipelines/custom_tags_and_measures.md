@@ -81,7 +81,7 @@ DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipelin
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
-The following example adds the tags `team` and `service` to the pipeline span.
+The following example adds `team` and `service` tags to the pipeline span.
 
 ```shell
 DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level pipeline --tags team:backend --tags service:processor
