@@ -63,13 +63,15 @@ The Data Preview table shows the response, fields, and values from your data req
 - Request Columns: Displays column summary statistics and data types. 
 - Internal Tables: Displays transformed data stored by Vega-Lite.
 
-Datadog widgets automatically map the query results to the visualization elements, but the Wildcard widget requires you to add a custom Vega-Lite specification that defines how the Datadog query maps to visual elements. This creates the potential for a mismatch. With Data Preview, you can verify that the Vega-Lite specification maps to the correct query response.
+## Map Datadog data to Vega-Lite specifications
 
-To highlight this, use the example metric query of `system.cpu.user` averaged by `env`:
+Datadog native widgets automatically map the query results to the visualization elements, but the Wildcard widget requires you to add a custom Vega-Lite specification that defines how the Datadog query maps to visual elements. This creates the potential for a mismatch. With [Data Preview](#data-preview), you can verify that the Vega-Lite specification maps to the correct query response.
+
+To see how Datadog values map to the Vega-Lite specification, start with the example metric query of `system.cpu.user` averaged by `env`:
 
 {{< img src="/dashboards/widgets/wildcard/example_configuration_query.png" alt="Example widget configuration metric query for system.cpu.user grouped by env" style="width:100%;" >}}
 
-Notice the matching **query1** and **env** fields listed in the Vega-Lite specification and the Data Preview column. 
+Click on the **Define Visual** tab to view how this query maps to Vega-Lite. Open the Data Preview panel and notice the matching **query1** and **env** fields listed in the Vega-Lite specification and the Data Preview column. 
 
 {{< highlight json "hl_lines=8 12" >}}
   {
@@ -83,7 +85,7 @@ Notice the matching **query1** and **env** fields listed in the Vega-Lite specif
         "type": "nominal"
       },
       "y": {
-        "field": "example",
+        "field": "query1",
         "type": "quantitative"
       }
     },
@@ -100,7 +102,7 @@ Notice the matching **query1** and **env** fields listed in the Vega-Lite specif
 | ---  | ----------- |
 |{{< img src="/dashboards/widgets/wildcard/example_configuration_no_alias.png" alt="Example widget configuration, showing open data preview" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/example_vega_spec_map_to_config.png" alt="Vega specification mapping the widget configuration field query1 to the vega field" style="width:100%;" >}}|
 
-When you add an alias to the query, the visualization does not work because the Vega-lite specification still points to "query1", but the Data Preview column shows that the new query is now the new alias "example". To fix this visualization, you need to replace `field:"query1"` with `field:"example"`.
+To demonstrate a mismatch between the Datadog data and the Vega-Lite specification, add an alias to the query. The visualization does not work because the Vega-lite specification still points to "query1", but the Data Preview column shows that the new query is now the new alias "example". To fix this visualization, you need to replace `field:"query1"` with `field:"example"`.
 
 | Select data configuration  | Define Visual Specification |
 | ---  | ----------- |
