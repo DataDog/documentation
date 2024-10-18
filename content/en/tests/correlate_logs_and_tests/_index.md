@@ -23,7 +23,7 @@ You can correlate Test Visibility data with [logs injected into Datadog][1], whi
 Correlation can be configured differently depending on how you [send your tests data to Datadog][2].
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (agentless)" %}}
+{{% tab "Cloud CI provider (Agentless)" %}}
 
 
 ### Java
@@ -36,7 +36,7 @@ Use the following environment variables to enable and configure Agentless log su
 | Name | Description | Default value |
 |---|---|---|
 | `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Enables/disables log submission | `false`
-| `DD_AGENTLESS_LOG_SUBMISSION_LEVEL` (optional) | Sets log level for agentless submission | `INFO`
+| `DD_AGENTLESS_LOG_SUBMISSION_LEVEL` (optional) | Sets log level for Agentless submission | `INFO`
 | `DD_AGENTLESS_LOG_SUBMISSION_QUEUE_SIZE` (optional) | Sets the maximum size of pending logs queue | `1024`
 | `DD_AGENTLESS_LOG_SUBMISSION_URL` (optional) | Sets custom URL for submitting logs | -
 
