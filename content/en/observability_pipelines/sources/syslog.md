@@ -23,7 +23,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 ## Forward third-party logs to the Observability Pipelines Worker
 
-syslog is a widely used logging protocol for sending network logs to a central server. Many network devices support syslog output, so you can forward third-party logs to the Observability Pipelines's syslog source for processing and routing. Examples of these third-party services include:
+Syslog is a widely used logging protocol for sending network logs to a central server. Many network devices support syslog output, so you can forward third-party logs to the Observability Pipelines's syslog source for processing and routing. Examples of these third-party services include:
 
 #### Fortinet
 - [Configure log forwarding][2]
