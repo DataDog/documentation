@@ -137,7 +137,7 @@ To start, use a Terraform script to deploy to Amazon ECS:
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[{"id":1,"description":"hello"}]`
 
-   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
+   `curl -X PUT 'BASE_DOMAIN:8080/notes/1?desc=UpdatedNote'`
    : `{"id":1,"description":"UpdatedNote"}`
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
@@ -369,7 +369,7 @@ Redeploy the application and exercise the API:
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[{"id":1,"description":"hello"}]`
 
-   `curl -X PUT 'BASE_DOMAIN:8080/notes?id=1&desc=UpdatedNote'`
+   `curl -X PUT 'BASE_DOMAIN:8080/notes/1?desc=UpdatedNote'`
    : `{"id":1,"description":"UpdatedNote"}`
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
