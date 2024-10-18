@@ -8,9 +8,9 @@ further_reading:
       text: Session Replay
 ---
 
-<div class="alert alert-warning">
-Mobile Session Replay is in public beta for native mobile apps. There is no billing for this feature.
-</div>
+{{< callout url="#" btn_hidden="true" header="false">}}
+Mobile Session Replay is in Preview for native mobile apps. There is no billing for this feature.
+{{< /callout >}}
 
 ## Overview
 
