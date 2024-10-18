@@ -77,7 +77,7 @@ Esta integración proporciona monitorización y métricas de [Redis Enterprise][
 
 ### ¿Qué es Redis Enterprise?
 
-[Redis Enterprise][3] es la versión empresarial de Redis totalmente compatible. Además del conjunto de funciones básicas de código abierto de Redis, Redis Enterprise añade la geodistribución, funciones de base de datos multimodelo, una capacidad de observación mejorada y una gestión multiinquilino más sencilla para tiempos de actividad más elevados.
+[Redis Enterprise][3] es la versión empresarial de Redis totalmente compatible. Además del conjunto de funciones básicas de código abierto de Redis, Redis Enterprise añade la geodistribución activo-activo, funciones de base de datos multimodelo, una observabilidad mejorada y una gestión multiinquilino más sencilla para tiempos de actividad más elevados.
 
 ### Dashboard de Redis Enterprise en Datadog
 
@@ -108,7 +108,7 @@ Esta integración es proporcionada por Redis Labs.
 
 ### Instalación
 
-Si utilizas el Agent v7.21/v6.21 o posteriores, sigue las siguientes instrucciones para instalar el check de Redis Enterprise en tu host. Consulta la guía específica del Agent para la [instalación de integraciones de la comunidad][10] para instalar checks con [versiones del Agent anteriores a 7.21/6.21][11] o el [Agent Docker][12]:
+Si utilizas el Agent v7.21/v6.21 o posteriores, sigue las siguientes instrucciones para instalar el check de Redis Enterprise en tu host. Consulta la guía específica del Agent para la [instalación de integraciones de la comunidad][10] para instalar checks con [versiones del Agent anteriores a 7.21/6.21][11] o el [Agent Docker][11]:
 
 1. [Descarga e inicia el Datadog Agent][13].
 2. Ejecuta el siguiente comando para instalar la rueda de integraciones con el Agent:
