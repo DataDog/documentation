@@ -47,10 +47,6 @@ Where supported, the **Top Queries** tab includes a **Stored Procedures** sectio
 
 ## Metrics
 
-<div class="alert alert-info">
-This feature is in beta.
-</div>
-
 On the **Metrics** tab of the host details panel, you can view and filter metrics for system health, query activity, blocking operations, function performance, and other key areas.
 
 {{< img src="database_monitoring/db-list-metrics.png" alt="The Metrics tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
@@ -62,10 +58,6 @@ The **Active Connections** tab of the host details panel displays the live queri
 {{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Schema
-
-<div class="alert alert-info">
-This feature is in beta.
-</div>
 
 Use the **Schema** tab to explore database structures, tables, columns, data types, existing foreign keys, and indexing strategies for every database on a host.
 
