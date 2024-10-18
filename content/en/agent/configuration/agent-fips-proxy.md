@@ -32,14 +32,12 @@ The Datadog Agent FIPS Proxy's compliance is based on its use of the FIPS 140-2 
 
 **It is your responsibility to ensure operating environment compliance with the security policy and wider FIPS guidance.**
 
-Supported platforms (64-bit x86):
+Supported platforms:
 
 |||
 | ---  | ----------- |
-| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12 (beta)|
+| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
-
-**Note**: arm64 architecture is available in beta
 
 Supported products (Agent 7.45+):
 
@@ -47,7 +45,6 @@ Supported products (Agent 7.45+):
 - Logs
 - APM traces
 - APM profiles
-- Instrumentation Telemetry
 - Processes
 - Orchestrator Explorer
 - Runtime Security

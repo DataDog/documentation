@@ -720,7 +720,7 @@ menu:
       parent: otel_interoperability
       weight: 605
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/platform/connect_rum_and_traces/#opentelemetry-support
+      url: /real_user_monitoring/platform/connect_rum_and_traces/
       identifier: otel_rum
       parent: otel_interoperability
       weight: 606
@@ -1825,36 +1825,36 @@ menu:
       parent: platform_heading
       identifier: service_catalog
       weight: 100000
+    - name: Customize the Service Catalog
+      url: service_catalog/customize
+      parent: service_catalog
+      identifier: service_catalog_customize
+      weight: 1
+    - name: Create Entries
+      url: service_catalog/customize/create_entries
+      parent: service_catalog_customize
+      identifier: service_catalog_create_entry
+      weight: 101
+    - name: Import Entries from Datadog
+      url: service_catalog/customize/import_entries_dd
+      parent: service_catalog_customize
+      identifier: service_catalog_import_from_telemetries
+      weight: 102
+    - name: Import Entries from Integrations
+      url: service_catalog/customize/import_entries_integrations
+      parent: service_catalog_customize
+      identifier: service_catalog_import_from_integrations
+      weight: 103
     - name: Navigate the Service Catalog
       url: service_catalog/navigating
       parent: service_catalog
       identifier: service_catalog_browse
-      weight: 1
+      weight: 2
     - name: Investigate a Service
       url: service_catalog/investigating
       parent: service_catalog
       identifier: service_catalog_investigate
-      weight: 2
-    - name: Enrich Default Catalog
-      url: service_catalog/enrich_default_catalog
-      parent: service_catalog
-      identifier: service_catalog_enrich_default_catalog
       weight: 3
-    - name: Create Entries
-      url: service_catalog/enrich_default_catalog/create_entries
-      parent: service_catalog_enrich_default_catalog
-      identifier: service_catalog_create_entry
-      weight: 301
-    - name: Import Entries from Datadog
-      url: service_catalog/enrich_default_catalog/import_entries_dd
-      parent: service_catalog_enrich_default_catalog
-      identifier: service_catalog_import_from_telemetries
-      weight: 302
-    - name: Import Entries from Integrations
-      url: service_catalog/enrich_default_catalog/import_entries_integrations
-      parent: service_catalog_enrich_default_catalog
-      identifier: service_catalog_import_from_integrations
-      weight: 303
     - name: Service Definitions
       url: service_catalog/service_definitions/
       parent: service_catalog
@@ -3964,11 +3964,16 @@ menu:
       parent: llm_obs
       identifier: llm_obs_submit_evaluations
       weight: 5
+    - name: Cluster Map
+      url: llm_observability/cluster_map/
+      parent: llm_obs
+      identifier: llm_obs_cluster_map
+      weight: 6
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 6
+      weight: 7
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

@@ -4,16 +4,17 @@ title: CSM Threats Supported Linux Distributions
 
 Cloud Security Management Threats supports the following Linux distributions:
 
-| Linux Distributions          | Supported Versions                      |
-|------------------------------|-----------------------------------------|
-| Ubuntu LTS                   | 18.04, 20.04, 22.04                     |
-| Debian                       | 10 or later                             |
-| Amazon Linux 2               | Kernels 4.14 and higher                 |
-| Amazon Linux 2023            | All versions                            |
-| SUSE Linux Enterprise Server | 12 and 15                               |
-| Red Hat Enterprise Linux     | 7, 8, and 9                             |
-| Oracle Linux                 | 7, 8, and 9                             |
-| CentOS                       | 7                                       |
+| Linux Distributions                                           | Supported Versions      |
+|---------------------------------------------------------------|-------------------------|
+| Ubuntu LTS                                                    | 18.04, 20.04, 22.04     |
+| Debian                                                        | 10 or later             |
+| Amazon Linux 2                                                | Kernels 4.14 and higher |
+| Amazon Linux 2023                                             | All versions            |
+| SUSE Linux Enterprise Server                                  | 12 and 15               |
+| Red Hat Enterprise Linux                                      | 7, 8, and 9             |
+| Oracle Linux                                                  | 7, 8, and 9             |
+| CentOS                                                        | 7                       |
+| Google Container Optimized OS (default on GKE) (Preview)      | 93 and higher           |
 
 **Notes:**
 
