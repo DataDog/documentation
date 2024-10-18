@@ -1483,6 +1483,13 @@ If this error message appears in the **Jenkins Log**, make sure that you are usi
 Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
 {{< /code-block >}}
 
+### Infrastructure metrics do not get correlated with Jenkins pipelines
+
+Make sure you have gone through the steps to [correlate infrastructure metrics with Jenkins pipelines][11].
+
+If, even after following the steps, infrastructure metrics are still not correlated with Jenkins pipelines,
+try restarting the Jenkins instance.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
