@@ -82,7 +82,7 @@ use Illuminate\Support\Facades\Log;
 Log::info('Hello, World! [%dd.trace_id% %dd.span_id% %status%]');
 ```
 
-The PHP tracer replaces the placeholders with the corresponding values. For example, the logged message above will be transformed into:
+The PHP tracer replaces the placeholders with the corresponding values. For example, the logged message above is transformed into:
 
 ```
 [2022-12-09 16:02:42] production.INFO: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" status="info"]
