@@ -45,7 +45,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 Clicking on **Configure Metrics** gives you three options that you can use to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk Configuration Buttons" style="width:100%;">}}
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
 * **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 

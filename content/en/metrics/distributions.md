@@ -70,7 +70,7 @@ You can enable or disable percentile aggregations for multiple metrics at once, 
 1. Navigate to the [Metrics Summary Page][4] and click the **Configure Metrics** dropdown.
 1. Select **Enable percentiles**.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
-1. (Optional) To disable percentiles for the namespace, click the **Percentile aggregations** toggle.
+1. (Optional) To disable percentiles for all metrics in the namespace, click the **Percentile aggregations** toggle.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;" >}}
 
