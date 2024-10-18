@@ -306,7 +306,8 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -320,7 +321,8 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -330,7 +332,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
-   - You can do this at the build tool level, like Maven:
+    - You can do this at the build tool level, like Maven:
      ```yaml
      <build>
      <plugins>
@@ -352,7 +354,8 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </build>
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
-3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr’`.
+   - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog
@@ -367,6 +370,13 @@ After completing the setup, the service should send traces to Datadog.
 You can view traces using the [Trace Explorer][9].
 
 {{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Features are not enabled or configured correctly for native images
+
+There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.
+
+- For runtime configuration, use environment variables (`DD_PROPERTY_NAME=value`), instead of system properties (`-Ddd.property.name=value`).
+- The exception to this rule is when enabling the profiler. In this case, pass `-J-Ddd.profiling.enabled=true` to the `native-image` tool at _build time_.
+
 ##### Native-image buildpack versions older than 5.12.2
 
 Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.

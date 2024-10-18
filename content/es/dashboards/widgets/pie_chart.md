@@ -19,9 +19,9 @@ El widget de gráfico circular puede mostrar un único conjunto de datos con las
 ## Configuración
 
 1. Selecciona una de las fuentes de datos disponibles.
-2. Configurar la consulta, consulta los siguientes recursos para obtener más información:
-    * Métricas: consulta la documentación [querying (consulta)][1] para configurar una consulta métrica.
-    * Events: consulta la documentación [log search (búsqueda de log)][2] para configurar una consulta de evento de log.
+2. Configura la consulta, consulta los siguientes recursos para obtener más información:
+    * Métricas: consulta la documentación [querying (de consulta)][1] para configurar una consulta métrica.
+    * Events: consulta la documentación [log search (buscar log)][2] para configurar una consulta de evento de log.
 3. (Opcional) Modificar la consulta con una [fórmula][3].
 4. Personaliza tu gráfico.
 
@@ -41,7 +41,7 @@ Por defecto, la opción **Automático** muestra una leyenda de Lado etiquetada d
 
 ### Enlaces contextuales
 
-Los [Context links (enlaces contextuales)][4] están activados por defecto y pueden activarse o desactivarse. Los enlaces contextuales sirven de puente entre el widget de dashboard y otras páginas (en Datadog o de terceros).
+Los [Context links (enlaces contextuales)][4] están activados por defecto y pueden activarse o desactivarse. Los enlaces contextuales enlazan widgets de dashboard con otras páginas (en Datadog o de terceros).
 
 ## Visualización e interacción
 
@@ -59,7 +59,7 @@ La visualización del widget de gráfico circular en pantalla completa muestra e
 
 ## API
 
-Este widget puede utilizarse con la **[API de dashboards][6]**. Ve la siguiente tabla para la [definición del esquema de JSON de widget][7]:
+Este widget puede utilizarse con la **[API de dashboards][6]**. Ve la siguiente tabla para la [definición del esquema JSON widget][7]:
 
 <div class="alert alert-info">El tipo de widget para gráfico circular es <strong>sunburst</strong>.</div>
 

@@ -117,7 +117,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions  | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
-| Yii            | 1.1, 2.0                                | All supported PHP versions  | Framework-level instrumentation |
+| Yii            | 2.0                                     | All supported PHP versions  | Framework-level instrumentation |
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
@@ -133,7 +133,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 |:----------------|:--------------------|:---------------------------|
 | CakePHP Console | 2.x                 | All supported PHP versions |
 | Laravel Artisan | 5.x, 8.x, 9.x, 10.x | All supported PHP versions |
-| Symfony CLI     | 4.x, 5.x, 6.x       | All supported PHP versions |
+| Symfony CLI     | 4.x, 5.x, 6.x, 7.x  | All supported PHP versions |
 
 To request support for additional CLI libraries, contact our awesome [support team][3].
 
@@ -165,6 +165,7 @@ To request support for additional datastores, contact our awesome [support team]
 | Guzzle            | 5.x, 6.x, 7.x              | All supported PHP versions |
 | Laravel Queue     | Laravel supported versions | All supported PHP versions |
 | [OpenAI][11]      | OpenAI supported versions  | All supported PHP versions |
+| Symfony Messenger | 4.4, 5.x, 6.x, 7.x         | All supported PHP versions |
 
 
 To request support for additional libraries, contact our awesome [support team][3].

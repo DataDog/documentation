@@ -27,6 +27,8 @@ If you already have a Datadog Log Archive configured for Observability Pipelines
 
 You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
 
+Select the cloud provider you are using to archive your logs.
+
 {{% collapse-content title="Amazon S3" level="h4" %}}
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
@@ -146,6 +148,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -212,6 +219,16 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
@@ -276,6 +293,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}

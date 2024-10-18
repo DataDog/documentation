@@ -17,7 +17,7 @@ Database Monitoring offers comprehensive insights into your MongoDB databases by
 ## Before you begin
 
 Supported MongoDB major versions
-: 4.4, 5.0, 6.0, 7.0
+: 4.4, 5.0, 6.0, 7.0, 8.0
 
 {{% dbm-mongodb-before-you-begin %}}
 
@@ -73,7 +73,7 @@ To get the individual MongoDB instance hostname and port, you can use the `dig` 
 
 ##### Replica set members
 
-For a sharded cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
+For a non-sharded (replica set) cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
 {{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
@@ -218,8 +218,13 @@ To collect more comprehensive database metrics from MongoDB Atlas, install the [
 
 ## Data Collected
 
+### Metrics
+
+Refer to the [MongoDB integration documentation][4] for a comprehensive list of metrics collected by the MongoDB integration.
+
 {{% dbm-mongodb-agent-data-collected %}}
 
 [1]: /database_monitoring/architecture/#cloud-managed-databases
 [2]: /account_management/api-app-keys/
 [3]: /integrations/mongodb_atlas/
+[4]: /integrations/mongodb_atlas/#metrics

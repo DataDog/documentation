@@ -14,7 +14,7 @@ Kubernetes creates pause containers (requires Agent v5.8+) to acquire the respec
 
 ### Fargate
 
-Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][4] section on the pricing page.
+Fargate is charged based on the concurrent number of monitored tasks in ECS Fargate and the concurrent number of monitored pods for EKS Fargate. For pricing, see the [Infrastructure][4] section on the pricing page.
 
 ### GKE Autopilot
 

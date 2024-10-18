@@ -361,6 +361,15 @@ Utiliza una de las integraciones de Datadog para realizar un rastreo automático
 
 Si tienes algún problema para configurar el rastreo de vistas con `@datadog/mobile-react-navigation`, puedes consultar este [ejemplo de aplicación][16] de Datadog como referencia.
 
+## Envío de datos cuando el dispositivo está desconectado
+
+RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En casos de zonas con baja conexión de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local en lotes. Se envían tan pronto como la red esté disponible y la carga de la batería sea lo suficientemente alta como para asegurar que el SDK de React Native de RUM no afecte a la experiencia del usuario final. Si la red no está disponible cuando tu aplicación está ejecutándose en primer plano o si falla una carga de datos, el lote se conserva hasta que pueda enviarse correctamente.
+
+Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato.
+
+**Nota**: Los datos del disco se eliminan automáticamente si se vuelven demasiado antiguos para garantizar que el SDK de React Native de RUM no utilice demasiado espacio del disco.
+
+
 ## Rastrear eventos en segundo plano
 
 <div class="alert alert-info"><p>El rastreo de eventos en segundo plano puede dar lugar a sesiones adicionales, lo que puede afectar a la facturación. Si tienes dudas, <a href="https://docs.datadoghq.com/help/">contacta con el equipo de soporte de Datadog.</a></p>

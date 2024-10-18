@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure Rsyslog or Syslog-ng to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Configure rsyslog or syslog-ng to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
@@ -18,17 +18,17 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/syslog%}}
+{{% observability_pipelines/prerequisites/syslog %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Split Logs** template to create a new pipeline.
-1. Select **Rsyslog** or **Syslog-ng** as the source.
+1. Select **rsyslog** or **syslog-ng** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/syslog%}}
+{{% observability_pipelines/source_settings/syslog %}}
 
 ### Set up the destinations
 
@@ -73,6 +73,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -141,9 +146,19 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Syslog address. This is a Syslog-compatible endpoint, exposed by the Worker, that your applications send logs to. The Observability Pipelines Worker listens on this address for incoming logs.
 
@@ -187,6 +202,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}

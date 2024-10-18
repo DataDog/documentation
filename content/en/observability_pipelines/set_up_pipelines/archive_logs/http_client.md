@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your HTTP Client so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Use the Observability Pipelines Worker to format your HTTP server logs into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
@@ -15,7 +15,6 @@ This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -26,6 +25,8 @@ This document walks you through the following steps:
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
 
 You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
+
+Select the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h4" %}}
 
@@ -77,7 +78,7 @@ You need to have the Datadog integration for your cloud provider installed to se
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 
@@ -147,6 +148,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -213,9 +219,19 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the full path of the HTTP/S endpoint URL. For example, `https://127.0.0.8/logs`. The Observability Pipelines Worker collects logs events from this endpoint.
 
@@ -278,6 +294,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}

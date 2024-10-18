@@ -70,7 +70,8 @@ var settings = TracerSettings.FromDefaultSources();
 settings.Environment = "prod";
 settings.ServiceName = "MyService";
 settings.ServiceVersion = "abc123";
-settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
+// In v2 of Datadog.Trace, use settings.Exporter.AgentUri
+settings.AgentUri = new Uri("http://localhost:8126/");
 
 // configure the global Tracer settings
 Tracer.Configure(settings);
@@ -144,7 +145,8 @@ Note that UDS is only supported on .NET Core 3.1 and above.<br>
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][11].<br><br>
+For more information, see [Ingestion Mechanisms][11].<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br><br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
 
 `DD_TRACE_SAMPLING_RULES`

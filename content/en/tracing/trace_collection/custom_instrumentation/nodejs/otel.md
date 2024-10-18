@@ -82,43 +82,6 @@ function processData(i, param1, param2) {
 }
 {{< /highlight >}}
 
-
-## Adding span events
-
-You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
-
-- **Name**: A string representing the event's name.
-- **Timestamp**: A UNIX timestamp representing the event's occurrence time.
-- **Attributes**: Zero or more key-value pairs with the following properties:
-  - The key must be a non-empty string.
-  - The value can be either:
-    - A primitive type: string, Boolean, or number.
-    - A homogeneous array of primitive type values (for example, an array of strings).
-  - Nested arrays and arrays containing elements of different data types are not allowed.
-
-The following examples demonstrate different ways to add events to a span:
-
-```js
-span.addEvent('Web page unresponsive', { 'error.code': '403', 'unknown values': [1, ['h', 'a', [false]]] }, 1714536311886)
-span.addEvent('Web page loaded')
-span.addEvent('Button changed color', { colors: [112, 215, 70], 'response.time': 134.3, success: true })
-```
-
-Read the [OpenTelemetry][6] specification for more information.
-
-### Record exceptions
-
-To record exceptions, use the `recordException` API. This method requires an exception parameter and optionally accepts a UNIX timestamp parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
-
-The following examples demonstrate different ways to record exceptions:
-
-```js
-span.recordException(new TestError(), Date.now())
-span.recordException(new TestError())
-```
-
-Read the [OpenTelemetry][7] specification for more information.
-
 ## Creating spans
 
 To create a new span and properly close it, use the `startActiveSpan` method:
@@ -137,6 +100,42 @@ function performTask(iterations, param1, param2) {
   });
 }
 {{< /highlight >}}
+
+## Adding span events
+
+<div class="alert alert-info">Adding span events requires SDK version 5.17.0/4.41.0 or higher.</div>
+
+You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `TimeInput` object.
+
+The following examples demonstrate different ways to add events to a span:
+
+```js
+span.addEvent('Event With No Attributes')
+span.addEvent('Event With Some Attributes', {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [true, false]})
+```
+
+Read the [OpenTelemetry][6] specification for more information.
+
+### Recording exceptions
+
+To record exceptions, use the `recordException` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```js
+span.recordException(new TestError())
+```
+
+Read the [OpenTelemetry][7] specification for more information.
 
 ## Filtering requests
 

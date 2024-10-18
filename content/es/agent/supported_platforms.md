@@ -17,10 +17,10 @@ El Datadog Agent es compatible con una amplia gama de sistemas operativos y plat
 <table>
   <thead>
     <th>Sistema operativo</th>
-    <th>Versiones del SO</th>
-    <th>Versiones del Agent 5</th>
-    <th>Versiones del Agent 6</th>
-    <th>Versiones del Agent 7</th>
+    <th>Versiones del sistema operativo</th>
+    <th>Versiones del Agent 5</th>
+    <th>Versiones del Agent 6</th>
+    <th>Versiones del Agent 7</th>
   </thead>
   <tr>
     <th rowspan='3'><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -81,7 +81,8 @@ El Datadog Agent es compatible con una amplia gama de sistemas operativos y plat
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='3'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th rowspan='3'><a href='/agent/basic_agent_usage/redhat/'>RedHat/<br>CentOS/</a><br>
+    <a href="/agent/basic_agent_usage/oracle">Oracle Linux</a><br></th>
     <td>5.0</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -142,16 +143,16 @@ El Datadog Agent es compatible con una amplia gama de sistemas operativos y plat
   </tr>
 </table>
 
-Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versiones secundarias y de parche.
+Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versiones secundarias y de parches.
 
 ## ARM V8 de 64 bits
 
 <table>
   <thead>
     <th>Sistema operativo</th>
-    <th>Versiones del SO</th>
-    <th>Versiones del Agent 6</th>
-    <th>Versiones del Agent 7</th>
+    <th>Versiones del sistema operativo</th>
+    <th>Versiones del Agent 6</th>
+    <th>Versiones del Agent 7</th>
   </thead>
   <tr>
     <th rowspan=3><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -182,7 +183,8 @@ Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versi
     <td>>= 7.16.0</td>
   </tr>
   <tr>
-    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS/</a><br>
+    <a href='/agent/basic_agent_usage/oracle/'>Oracle Linux<br></a></th>
     <td>>= 8.0</td>
     <td>>= 6.16.0</td>
     <td>>= 7.16.0</td>
@@ -213,25 +215,32 @@ Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versi
 <table>
   <thead>
     <th>Sistema operativo</th>
-    <th>Versiones del SO</th>
-    <th>Versiones del Agent 5</th>
-    <th>Versiones del Agent 6</th>
-    <th>Versiones del Agent 7</th>
+    <th>Versiones del sistema operativo</th>
+    <th>Versiones del Agent 5</th>
+    <th>Versiones del Agent 6</th>
+    <th>Versiones del Agent 7</th>
     <th>Notas</th>
   </thead>
   <tr>
-    <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
     <td><= 7.45.1</td>
-    <td>Server 2008 R2 se ve afectado por un <a href="https://github.com/golang/go/issues/24489">problema conocido con la deriva de reloj y Go</a>.</td>
+    <td>Server 2008 R2 se encuentra afectado por un <a href="https://github.com/golang/go/issues/24489">error conocido con la deriva del reloj y Go</a>.</td>
   </tr>
   <tr>
-    <td>2012/R2</td>
+    <td>2012</td>
     <td></td>
     <td><= 6.46.0</td>
     <td><= 7.46.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2012 R2</td>
+    <td></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
     <td></td>
   </tr>
   <tr>
@@ -242,7 +251,7 @@ Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versi
     <td></td>
   </tr>
   <tr>
-    <td rowspan=3>Windows</td>
+    <td rowspan=4>Windows</td>
     <td>7</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -257,7 +266,14 @@ Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versi
     <td></td>
   </tr>
   <tr>
-    <td>>=10</td>
+    <td>10</td>
+    <td></td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -265,7 +281,7 @@ Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versi
   </tr>
 </table>
 
-Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versiones secundarias y de parche.
+Una marca de verificación ({{< X >}}) indica compatibilidad con todas las versiones secundarias y de parches.
 
 Para instalar una versión específica del Windows Agent, consulta la [lista de instaladores][8].
 
@@ -331,7 +347,7 @@ Las versiones 6 y 7 del Agent son compatibles con las siguientes versiones de [A
 {{% /tab %}}
 {{< /tabs >}}
 
-## Lectura adicional
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
