@@ -42,18 +42,20 @@ The search bars provide the most comprehensive set of actions to filter the list
 {{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
-There are two buttons that allow you to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
+Clicking on **Configure Metrics** gives you multiple options that you can use to configure more than one metric at a time: 
 
-* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles" style="width:75%;">}}
-
-* **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
+* **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
 {{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
+* **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
+
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
+
+* **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
 ## Metric details sidepanel
 
@@ -245,3 +247,5 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [27]: /universal_service_monitoring/
 [28]: /logs/
 [29]: /service_catalog/scorecards/
+[30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
+[31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
