@@ -457,6 +457,30 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "ListIncidentTypes": {
+    "description": "Get all incident types.",
+    "summary": "Get a list of incident types"
+  },
+  "CreateIncidentType": {
+    "description": "Create an incident type.",
+    "summary": "Create an incident type",
+    "request_description": "Incident type payload.",
+    "request_schema_description": "Create request for an incident type."
+  },
+  "DeleteIncidentType": {
+    "description": "Delete an incident type.",
+    "summary": "Delete an incident type"
+  },
+  "GetIncidentType": {
+    "description": "Get incident type details.",
+    "summary": "Get incident type details"
+  },
+  "UpdateIncidentType": {
+    "description": "Update an incident type.",
+    "summary": "Update an incident type",
+    "request_description": "Incident type payload.",
+    "request_schema_description": "Patch request for an incident type."
+  },
   "SearchIncidents": {
     "description": "Search for incidents matching a certain query.",
     "summary": "Search for incidents"
