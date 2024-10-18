@@ -53,6 +53,7 @@ variables:
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
   PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
+  URGENT_FIX: "false" # set to true if the branch is an urgent fix to skip the build_live queue
 
 
 # ================== copy scripts =============== #
@@ -119,8 +120,13 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN || $CI_COMMIT_BRANCH =~ /^mq-working-branch-/
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN 
       when: on_success
+
+.if_mergequeue: &if_mergequeue
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^mq-working-branch-/
+      when: always
 
 .preview_manual_rules: &preview_manual_rules
   rules:
@@ -129,7 +135,12 @@ before_script:
 
 .live_rules: &live_rules
   rules:
-    - if: $CI_COMMIT_REF_NAME == "master"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $URGENT_FIX == "false"
+      when: on_success
+
+.live_urgent_fix_rules: &live_urgent_fix_rules
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $URGENT_FIX == "true"
       when: on_success
 
 .live_schedule_rules: &live_schedule_rules
@@ -152,7 +163,9 @@ before_script:
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
-  <<: *preview_rules
+  rules:
+    - !reference [.preview_rules, rules ]
+    - !reference [.if_mergequeue, rules ]
   stage: build
   cache:
     - *hugo_cache
@@ -205,7 +218,9 @@ build_preview:
 
 link_checks_preview:
   <<: *base_template
-  <<: *preview_rules
+  rules:
+    - !reference [.preview_rules, rules ]
+    - !reference [.if_mergequeue, rules ]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -229,7 +244,9 @@ link_checks_preview:
 
 missing_tms_preview:
   <<: *base_template
-  <<: *preview_rules
+  rules:
+    - !reference [.preview_rules, rules ]
+    - !reference [.if_mergequeue, rules ]
   stage: post-deploy
   environment: "preview"
   allow_failure: true
@@ -384,9 +401,8 @@ post_build_failure_status_to_spec_repo:
   allow_failure: true
 
 # ================== live ================== #
-build_live:
+.build_live_template: &build_live_template
   <<: *base_template
-  <<: *live_rules
   stage: build
   cache:
     - *hugo_cache
@@ -400,6 +416,8 @@ build_live:
     UNTRACKED_EXTRAS: "data"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
+    RESOURCE_GROUP_ORDER: oldest_first
+    RESOURCE_GROUP_LIMIT: 1
   script:
     - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - notify_slack.py "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" --status="#FFD700"
@@ -426,6 +444,20 @@ build_live:
       - ./public/redirects.txt
       - typesense.config.json
     expire_in: 1 week
+
+# Standard master build job
+build_live:
+  <<: *build_live_template
+  <<: *live_rules
+  environment: "live"
+  resource_group: build_live_group
+
+# Urgent fix build job
+build_live_urgent:
+  <<: *build_live_template
+  <<: *live_urgent_fix_rules
+  environment: "live"
+  resource_group: build_live_urgent_group
 
 test_live_link_checks:
   <<: *base_template
