@@ -188,7 +188,7 @@ See the section on [truncated query samples](#query-samples-are-truncated) for i
 
 If a client is using the Postgres [extended query protocol][9] or prepared statements, the Datadog Agent is unable to collect explain plans due to the separation of the parsed query and raw bind parameters. Below are a few options for addressing the problem.
 
-For Postgres version 12 or newer, the below parameter is enabled by default in the [Postgres integration config][19], allowing the Agent to collect explain plans:
+For Postgres version 12 or newer, the following parameter is enabled by default in the [Postgres integration config][19], allowing the Agent to collect explain plans:
 ```
 query_samples:
   explain_parameterized_queries: true
