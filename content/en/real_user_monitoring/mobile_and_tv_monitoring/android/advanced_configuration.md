@@ -1,8 +1,5 @@
 ---
 title: RUM Android Advanced Configuration
-code_lang: android
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
     - /real_user_monitoring/android/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
@@ -622,12 +619,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/android
 [3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
 [9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
 [10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[11]: /real_user_monitoring/android/#sending-data-when-device-is-offline
+[11]: /real_user_monitoring/android/setup/#sending-data-when-device-is-offline
 [12]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
