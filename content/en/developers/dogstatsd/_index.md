@@ -53,14 +53,16 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-DogStatsD is enabled by default over UDP port `8125` for Agent v6+. If you don't need to change this port, see directly how to [setup DogStatsD in your code](#code).
-
-### Agent
+### Agent configuration
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][1], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][2]. To enable a custom Agent DogStatsD server UDP port:
+DogStatsD is enabled by default over UDP port `8125` for Agent v6+.
+
+If you need to change the port, configure the `dogstatsd_port` option in the main [Agent configuration file][1], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][2].
+
+To enable a custom Agent DogStatsD server UDP port:
 
 1. Edit your `datadog.yaml` file to un-comment the `use_dogstatsd` and `dogstatsd_port` parameters:
 
