@@ -162,7 +162,7 @@ To apply a query filter with Reference Tables, click on the `+ Add` button next 
 
 ### API key auditing
 
-<div class="alert alert-warning">API key auditing is in private beta.</div>
+<div class="alert alert-warning">API key auditing is in Preview.</div>
 
 Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
 - How API keys are used across your organization and telemetry sources.
