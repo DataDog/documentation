@@ -24,6 +24,7 @@ By instrumenting your LLM-specific operations with LLM Observability and your br
 ## Setup
 
 The LLM Observability SDK is built on APM's dd-tracer. This allows you to use LLM Observability with [Application Performance Monitoring (APM)][7]
+
 If you are using the [LLM Observability SDK for Python][1] along with APM's [`dd-tracer`][2], you can navigate between spans in Datadog APM and LLM Observability without additional setup.
 
 If you are using the [LLM Observability API][3] with `dd-tracer` for APM:
