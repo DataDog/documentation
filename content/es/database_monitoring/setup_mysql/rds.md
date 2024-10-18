@@ -1,17 +1,17 @@
 ---
-description: Instalar y configurar la Monitorización de base de datos para MySQL gestionado
-  en Amazon RDS
+description: Instalar y configurar la monitorización de bases de datos para MySQL
+  gestionado en Amazon RDS
 further_reading:
 - link: /integrations/mysql/
   tag: Documentación
   text: Integración básica de MySQL
-title: Configuración de la Monitorización de base de datos para MySQL gestionado por
-  Amazon RDS
+title: Configuración de la monitorización de bases de datos para MySQL gestionado
+  por Amazon RDS
 ---
 
-La Monitorización de base de datos proporciona una amplia visibilidad de tus bases de datos MySQL mediante la exposición de métricas de consultas, ejemplos de consultas, planes de explicación, datos de conexión, métricas de sistemas y telemetría para el motor de almacenamiento InnoDB.
+La monitorización de bases de datos proporciona una amplia visibilidad de tus bases de datos MySQL mediante la exposición de métricas de consultas, ejemplos de consultas, planes de explicación, datos de conexión, métricas de sistemas y telemetría para el motor de almacenamiento InnoDB.
 
-El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de sólo lectura. Realiza la siguiente configuración para habilitar la Monitorización de base de datos con tu base de datos MySQL:
+El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de sólo lectura. Realiza la siguiente configuración para habilitar la monitorización de bases de datos con tu base de datos MySQL:
 
 1. [Configura la integración AWS](#configure-the-aws-integration).
 1. [Configura parámetros de bases de datos](#configure-mysql-settings).
@@ -341,7 +341,7 @@ El Cluster Agent registra automáticamente esta configuración y comienza a ejec
 
 ### Validar
 
-[Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][11] para empezar.
+[Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][7] para empezar.
 
 ## Ejemplo de configuraciones del Agent
 {{% dbm-mysql-agent-config-examples %}}
