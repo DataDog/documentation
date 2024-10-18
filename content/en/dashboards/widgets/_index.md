@@ -45,6 +45,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/timeseries_light_large.png">}} Timeseries{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} Wildcard{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups
