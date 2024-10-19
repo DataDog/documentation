@@ -19,7 +19,7 @@ manifest_version: '1.0'
 name: redmine
 public_title: Integración de Redmine con Datadog
 short_description: Visualiza, realiza búsquedas y discute sobre actualizaciones de
-  Redmine en tu flujo (stream) de eventos de Datadog.
+  Redmine en tu flujo de eventos de Datadog.
 version: '1.0'
 ---
 
