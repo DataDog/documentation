@@ -141,7 +141,7 @@ Opciones de configuración.
     ```
 
 
-Cambia el valor del parámetro `path` en función de tu entorno. Para ver todas las opciones de configuración disponibles, consulta el [conf.yaml de ejemplo][3].
+Cambia el valor del parámetro `path` en función de tu entorno. Para ver todas las opciones de configuración disponibles, consulta el [conf.yaml de ejemplo][7].
 
 3. [Reinicia el Agent][8].
 
