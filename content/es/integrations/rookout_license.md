@@ -96,7 +96,7 @@ Identifica las áreas de las aplicaciones que están "en llamas", que requieren 
 
 ### Generación de datos de observabilidad dinámica
 
-Crea los tres pilares de observabilidad, logs, métricas y trazas (traces) a partir de datos de depuración en directo sobre la marcha. Canaliza tus herramientas de colaboración y observabilidad favoritas y analízalas lado a lado con la información existente.
+Crea los tres pilares de observabilidad, logs, métricas y trazas a partir de datos de depuración en directo sobre la marcha. Canaliza tus herramientas de colaboración y observabilidad favoritas y analízalas lado a lado con la información existente.
 
 ## Configuración
 
