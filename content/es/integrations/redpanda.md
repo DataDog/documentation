@@ -137,7 +137,7 @@ helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
 
 Para empezar a recopilar los datos de rendimiento de Redpanda:
 
-1. Edita el archivo `redpanda.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1]. Para conocer todas las opciones de configuración disponibles, consulta el [redpanda.d/conf.yaml de ejemplo][4]:
+1. Edita el archivo `redpanda.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1]. Para conocer todas las opciones de configuración disponibles, consulta el [redpanda.d/conf.yaml de ejemplo][2]:
 
 2. [Reinicia el Agent][3].
 
