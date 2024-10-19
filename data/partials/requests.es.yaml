@@ -69,9 +69,9 @@ requests:
     como enrutadores, conmutadores e impresoras. [Network Performance Monitoring](https://docs.datadoghq.com/network_monitoring/performance/)
     realiza un seguimiento de todo el tráfico de red entrante y saliente de un host,
     proporcionando visibilidad de tu tráfico de red entre servicios, contenedores,
-    zonas de disponibilidad y cualquier otra etiqueta en Datadog. Los datos de conexión
-    a nivel de IP, puerto y PID se agregan a las dependencias de la capa de aplicación
-    entre endpoints de "origen" y "destino" significativos.'
+    zonas de disponibilidad y cualquier otra etiqueta (tag) en Datadog. Los datos
+    de conexión a nivel de IP, puerto y PID se agregan a las dependencias de la capa
+    de aplicación entre endpoints de "origen" y "destino" significativos.'
   image: int_network.png
   link: /network_monitoring
   name: 'Tráfico SNMP y de red '
