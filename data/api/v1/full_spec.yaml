@@ -4302,9 +4302,7 @@ components:
       - error_tracking_usage
       - error_tracking_percentage
       - estimated_indexed_logs_usage
-      - estimated_indexed_spans_usage
       - estimated_ingested_logs_usage
-      - estimated_ingested_spans_usage
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
@@ -4377,9 +4375,7 @@ components:
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
@@ -8068,10 +8064,6 @@ components:
       - estimated_indexed_logs_percentage
       - estimated_ingested_logs_usage
       - estimated_ingested_logs_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
       - functions_usage
@@ -8213,10 +8205,6 @@ components:
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -8530,28 +8518,12 @@ components:
           description: The estimated live indexed logs usage by tag(s).
           format: double
           type: number
-        estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
-          format: double
-          type: number
         estimated_ingested_logs_percentage:
           description: The percentage of estimated live ingested logs usage by tag(s).
           format: double
           type: number
         estimated_ingested_logs_usage:
           description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_rum_sessions_percentage:
