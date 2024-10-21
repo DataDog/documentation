@@ -35,7 +35,7 @@ cascade:
     rank: 80
 ---
 
-<div class="alert alert-info">
+<div class="alert alert-info ">
 Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
