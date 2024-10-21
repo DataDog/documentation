@@ -68,7 +68,7 @@ This guide provides an overview of how to get started with the Datadog Google Cl
 
 ## Setup 
 
-Integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. Service account impersonation enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
+Integrate Datadog with [Google Cloud][4] using [service account impersonation][5] and project discovery. This enables Datadog to automatically discover and monitor new projects as they are created within the assigned scope, providing seamless monitoring as your Google Cloud environment grows.
 
 After reviewing the above [Prerequisites][3], follow these step-by-step instructions to set up the Google Cloud integration:
 
