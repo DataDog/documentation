@@ -36,7 +36,7 @@ draft: false
 git_integration_title: oracle
 integration_id: oracle
 integration_title: Oracle Database
-integration_version: 5.2.0
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: oracle
@@ -501,7 +501,7 @@ Oracle Database チェックには、イベントは含まれません。
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.datadoghq.com/ja/help/
