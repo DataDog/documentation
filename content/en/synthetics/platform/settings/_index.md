@@ -47,17 +47,23 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 ### Enforced tags settings
 
- **Enforce tags for usage attribution on all tests**:
+Enforce tags for **usage attribution** on all tests:
 
-  On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+* On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
 
- **Enforce required monitor tag policies on all tests**:
+Enforce required **monitor tag policies** on all tests:
 
-  On the [Synthetic Monitoring and Testings settings][20] page, select **Enforce required monitor tag policies on all tests** to require that users who set monitor tag policies will now have those tags enforced on Synthetic tests. Configured monitor required tag policies will be required by users creating and editing Synthetic tests and will not be able to save tests without entering all required tags.
+* On the [Synthetic Monitoring and Testings settings][20] page, select **Enforce required monitor tag policies on all tests** to require that users who set monitor tag policies will now have those tags enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
 
-  Example:
+</br>
 
-  {{< img src="synthetics/settings/policy_tags.png" alt="New Synthetics test page, highlighting Policy tags feature" style="width:80%;">}}
+  1. Configure monitor tags on the [**Monitors** > **Settings** > **Policies** page][21]:
+
+   {{< img src="synthetics/settings/monitor_tag_policy.png" alt="Monitor Settings page, showing monitor policy tags that are configured" style="width:80%;">}}
+
+  2. Create a new Synthetic browser test, and add the required policy tags:
+
+  {{< img src="synthetics/settings/monitor_tags.png" alt="New Synthetics test page, highlighting Policy tags feature" style="width:80%;">}}
 
 ### Default locations
 
@@ -320,3 +326,4 @@ For more information, see [Explore RUM & Session Replay][14].
 [18]: /mobile_app_testing/settings/
 [19]: /mobile_app_testing/mobile_app_tests/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
+[21]: https://app.datadoghq.com/monitors/settings/policies
