@@ -88,6 +88,74 @@ If you have a requirement to avoid storing secrets in plaintext in the Agent's c
 
 For more information, see the [Secrets Management][18] documentation.
 
+## Telemetry collection
+
+{{< site-region region="gov" >}}
+
+Datadog on non-government sites will collect environmental, performance, and feature usage information about the Datadog Agent. When Agent detects a government site or FIPS usage Agent will automatically disable this telemetry collection. When such detection is impossible (for example when proxy is used) Agent telemetry will be emitted but immediately dropped at intake. To avoid this emission in the first place we recommend to disable Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
+
+You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Telemetry content:**
+
+`Metadata` ([source code][1])
+- Machine id
+- Machine name
+- OS
+- OS version
+- Agent version
+
+`Metrics` ([source code][2])
+- checks.execution_time
+- pymem.inuse, pymem.alloc
+- api_server.request_duration_seconds
+- logs.decoded, logs.processed
+- logs.sender_latency, logs.bytes_missed
+- logs.sent, logs.dropped
+- logs.bytes_sent, logs.encoded_bytes_sent
+- dogstatsd.udp_packets
+- dogstatsd.uds_packets
+- transactions.input_count, transactions.requeued
+- transactions.retries
+- point.sent, point.dropped
+- oracle.activity_samples_count, oracle.activity_latency
+- oracle.statement_metrics, oracle.statement_plan_errors
+- postgres.collect_relations_autodiscovery_ms
+- postgres.collect_stat_autodiscovery_ms
+- postgres.get_new_pg_stat_activity_ms
+- postgres.get_new_pg_stat_activity_count
+- postgres.get_active_connections_ms
+- postgres.get_active_connections_count
+- postgres.collect_activity_snapshot_ms
+- postgres.collect_statement_samples_ms
+- postgres.collect_statement_samples_count
+
+[1]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/sender.go#L217-L221
+[2]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/config.go#L156
+
+{{< /site-region >}}
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
