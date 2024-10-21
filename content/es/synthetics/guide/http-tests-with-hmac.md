@@ -105,5 +105,5 @@ Configura el resto de tu test HTTP y haz clic en **Create** (Crear) para guardar
 [2]: /es/synthetics/api_tests/http_tests/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /es/synthetics/settings/?tab=specifyvalue#global-variables
-[5]: https://deno.land/std@0.206.0?doc
+[5]: https://jsr.io/@std
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Crypto
