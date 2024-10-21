@@ -23,7 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: statsd
 integration_id: statsd
 integration_title: StatsD
-integration_version: 1.12.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: statsd
