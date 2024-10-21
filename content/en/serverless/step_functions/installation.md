@@ -139,7 +139,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 <div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</div>
 
 4. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>`, `service:<SERVICE_NAME>`, and `version:<VERSION>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name. The `version` tag defaults to `1.0`.
-5. Link your Step Function traces to Lambda traces or other Step Functions:
+5. Link your Step Function traces to downstream Lambda traces or nested Step Functions:
 
 {{% collapse-content title="Step Function to Lambda context injection" level="h4" %}}
 For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
@@ -152,14 +152,6 @@ For Node.js and Python runtimes, you can link your Step Function traces to Lambd
 ```
 
 The `JsonMerge` [intrinsic function][1] merges the [Step Functions context object][2] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
-
-[1]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
-[2]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
-{{% /collapse-content %}} 
-
-{{% collapse-content title="Step Function to Step Function context injection" level="h4" %}}
-TODO
-{{% /collapse-content %}} 
 
 **Example**:
 
@@ -195,6 +187,17 @@ Alternatively, if you have business logic defined in the payload, you could also
 {{< /highlight >}}
 
 If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][3].
+
+[1]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
+[2]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
+[3]: /logs/guide/forwarder/?tab=cloudformation#installation
+{{% /collapse-content %}} 
+
+{{% collapse-content title="Step Function to Step Function context injection" level="h4" %}}
+TODO
+{{% /collapse-content %}} 
+
+
 
 [1]: /logs/guide/forwarder/
 [2]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
