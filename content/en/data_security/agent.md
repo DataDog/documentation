@@ -100,6 +100,8 @@ You can also disable this telemetry collection by updating the below setting in 
 agent_telemetry:
   enabled: false
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 **Telemetry content:**
 
