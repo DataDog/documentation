@@ -164,3 +164,21 @@ jobs:
             } else {
               console.log('All relevant code owners have approved the pull request.');
             }
+
+      - name: Update check run status
+        if: steps.check_approvals.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.CODEOWNER_WORKFLOW_TOKEN}}
+          script: |
+            const checkRunId = context.runId;
+            await github.rest.checks.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              check_run_id: checkRunId,
+              conclusion: 'success',
+              output: {
+                title: 'Code Owners Approval Check',
+                summary: 'The pull request has been approved by code owners.',
+              },
+            });
