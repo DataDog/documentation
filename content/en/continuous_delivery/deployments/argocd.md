@@ -150,7 +150,7 @@ metadata:
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
 <div class="alert alert-warning">
-The automatic service discovery is not currently supported when using <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply"> Server-Side apply</a>.
+The automatic service discovery is not supported when <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply"> Server-Side Apply</a> is used.
 </div>
 
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
