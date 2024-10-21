@@ -15,8 +15,8 @@ further_reading:
 ## Overview
 
 The Metrics Overview page provides you with a deeper understanding of your metrics landscape, and is helpful for users of all experience levels. 
-   - New users can use its comprehensive overview of Datadog metric offerings to help increase the value of their metrics.
-   - Existing users gain a detailed overview into their current metrics' volumes and origins.
+   - **New users** can use its comprehensive overview of Datadog metric offerings to help increase the value of their metrics.
+   - **Existing users** gain a detailed overview into their current metrics' volumes and origins.
 
 The sections below detail the different parts of the page and provide guidance on how you can maximize the value of your Datadog metrics.
 
@@ -30,25 +30,24 @@ The topmost section of the page shows all of your metric sources, along with any
 
 The **Metric Sources** column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][27] scoped to that source. Your Datadog metrics can originate from the following sources:
 
-#### Datadog Agents
-
+{{% collapse-content title="Datadog Agents" level="h4" %}}
 The [Datadog Agent][2] collects metrics from the hosts it's installed on, and forwards them to Datadog. These metrics could originate from:
 
    - Any of the official Datadog integrations that are bundled with the Agent. See [Integration Management][3] for more information about managing these integrations, or the [integrations-core repository][4] for a full listing of the available integrations.
    - [Custom checks][5], which are used to collect metrics from custom applications or unique systems. You define the logic for the check yourself in the Agent's configuration files. See [Writing a Custom Agent Check][6] for more information.
    - [DogStatsD][7], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][8] protocol with some Datadog-specific extensions.
    - [Marketplace integrations][9] installed on the Agent. The [Datadog Marketplace][10] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.
+{{% /collapse-content %}}
 
-#### Cloud integrations
-
+{{% collapse-content title="Cloud integrations" level="h4" %}}
 Also known as authentication-based integrations, these integrations are set up in Datadog. You provide the credentials for obtaining metrics, and Datadog makes API calls on your behalf to collect them. Common examples are cloud provider integrations, Slack, and PagerDuty.
+{{% /collapse-content %}} 
 
-#### Datadog API
-
+{{% collapse-content title="Datadog API" level="h4" %}}
 You can send metrics directly to the [Metrics API][11].
+{{% /collapse-content %}} 
 
-#### Metrics from other Datadog Services
-
+{{% collapse-content title="Metrics from other Datadog Services" level="h4" %}}
 Some Datadog services, such as Synthetic Testing, provide standard metrics by default. Other services can be configured to generate custom metrics. This section covers the available options and provides links to relevant documentation.
 
 ##### Logs
@@ -80,22 +79,23 @@ Log-based metrics allow you to generate custom metrics from any logs ingested in
 ##### Account Management
 
 [Estimated Usage Metrics][21] are standard metrics that Datadog calculates to provide estimates of your current usage.
+{{% /collapse-content %}} 
 
 ### Configurable Processing
 
 The **Configurable Processing** column shows an overview of the configuration options available for your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
 
-#### Manage tagging
-
+{{% collapse-content title="Manage tagging" level="h4" %}}
 [Configuration of tags][22] can help you to manage custom metric costs by indexing only the metric tags most valuable to your organization.
+{{% /collapse-content %}} 
 
-#### Enable percentiles
-
+{{% collapse-content title="Enable percentiles" level="h4" %}}
 [Distributions][23] show you percentile aggregations of metric values sent from multiple hosts, so you can measure statistical distributions across your entire infrastructure.
+{{% /collapse-content %}} 
 
-#### Ingest historical metrics
-
+{{% collapse-content title="Ingest historical metrics" level="h4" %}}
 [Historical Metrics Ingestion][24] enables you to ingest metric values with timestamps older than one hour from the time of submission.
+{{% /collapse-content %}} 
 
 ### Available Metrics
 
@@ -103,15 +103,15 @@ The **Available Metrics** column breaks down your total metric volume by standar
 
 ## Your metrics by source
 
-{{< img src="metrics/overview/metrics_by_source.png" alt="The your metrics by source section of the metrics overview page" >}}
-
 This section contains a tree map with a breakdown of your metric sources and their respective volumes.
+
+{{< img src="metrics/overview/metrics_by_source.png" alt="The your metrics by source section of the metrics overview page" >}}
 
 ## Metrics available for querying
 
-{{< img src="metrics/overview/available_metrics.png" alt="The metrics available for querying section of the metrics overview page" >}}
-
 Use the search bar in this section to view the latest data and configuration options of any of your metrics. You can search all its tags, or click to investigate the metric further in the Metrics Explorer or Summary pages.
+
+{{< img src="metrics/overview/available_metrics.png" alt="The metrics available for querying section of the metrics overview page" >}}
 
 ## Further reading
 
