@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md
 display_on_public_website: true
@@ -29,7 +29,7 @@ draft: false
 git_integration_title: kubelet
 integration_id: kubelet
 integration_title: Kubelet
-integration_version: 7.13.2
+integration_version: 9.0.0
 is_public: true
 manifest_version: 2.0.0
 name: kubelet
