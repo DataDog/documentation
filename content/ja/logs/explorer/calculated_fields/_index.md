@@ -12,10 +12,6 @@ title: 計算されたフィールド
 
 ## 概要
 
-{{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
-Calculated Fields はベータ版です。フィードバックや機能リクエストがございましたら、<a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">お知らせください</a>。
-{{< /beta-callout >}}
-
 計算フィールドを使用して、クエリ実行時にログデータを変換および拡張します。 以下の操作を行うための[数式](#formula)を定義します。
 - [テキストの操作][1]
 - [算術演算][2]
