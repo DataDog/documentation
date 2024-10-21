@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Event Grid のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
@@ -14,7 +15,6 @@ integration_id: azure-eventgrid
 integration_title: Microsoft Azure Event Grid
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_event_grid
 public_title: Datadog-Microsoft Azure Event Grid インテグレーション
@@ -29,27 +29,27 @@ Azure Event Grid は、公開/サブスクライブモデルを使用して均�
 
 Datadog Azure インテグレーションを使用して、Azure Event Grid からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_event_grid" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Event Grid インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Event Grid インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -21,7 +21,7 @@ Datadog の [Kubernetes Resource Utilization][3] ビューは、Kubernetes ワ�
 
 ## 使用方法
 
-Datadog で、**Infrastructure** > [**Kubernetes**][2] に進み、[**Resource Utilization** タブ][3]を選択します。
+In Datadog, go to the [**Kubernetes Overview** page][2] and select the [**Resource Utilization** tab][3].
 
 ページは **Pods** で開き、デフォルトでは `kube_cluster_name`、`kube_namespace`、`kube_deployment` でグループ化されています。
 

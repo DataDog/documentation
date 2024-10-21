@@ -87,6 +87,9 @@ CREATE USER datadog IDENTIFIED BY &password ;
 
 {{< /tabs >}}
 
+### パスワードを安全に保管
+{{% dbm-secret %}}
+
 ### ビューの作成
 
 `sysdba` としてログオンし、`sysdba` スキーマに新しい `view` を作成し、Agent ユーザーにアクセス権を与えます。
@@ -125,7 +128,7 @@ instances:
   - server: '<HOSTNAME_1>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
@@ -133,7 +136,7 @@ instances:
   - server: '<HOSTNAME_2>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'

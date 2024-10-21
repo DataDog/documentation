@@ -14,7 +14,7 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.mongo\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mongo\.yaml=cluster_check: true
 init_config:
 instances:
   - hosts:
@@ -25,9 +25,11 @@ instances:
       authSource: admin
     dbm: true
     cluster_name: <MONGO_CLUSTER_NAME>
+    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     database_autodiscovery:
       enabled: true
-    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>" \
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
+    collections_indexes_stats: true' \
   datadog/datadog
 ```
 
@@ -42,7 +44,7 @@ instances:
   - hosts:
       - <HOST>:<PORT>
     username: datadog
-    password: <UNIQUE_PASSWORD>
+    password: "ENC[datadog_user_database_password]"
     options:
       authSource: admin
     dbm: true
@@ -50,6 +52,8 @@ instances:
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     database_autodiscovery:
       enabled: true
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
+    collections_indexes_stats: true
 ```
 
 ### Configure with Kubernetes service annotations
@@ -66,20 +70,22 @@ metadata:
     ad.datadoghq.com/mongo.checks: |
     {
       "mongo": {
-        "init_config": [{}],
+        "init_config": {},
         "instances": [{
           "hosts": ["<HOST>:<PORT>"],
           "username": "datadog",
-          "password": "<UNIQUE_PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "options": {
             "authSource": "admin"
           },
           "dbm": true,
           "cluster_name": "<MONGO_CLUSTER_NAME>",
+          "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>",
+          "additional_metrics": ["metrics.commands", "tcmalloc", "top", "collection"],
+          "collections_indexes_stats": true,
           "database_autodiscovery": {
             "enabled": true
-          },
-          "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>"
+          }
         }]
       }
     }
@@ -95,7 +101,13 @@ The Cluster Agent automatically registers this configuration and begins running 
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2003] and declare the password using the `ENC[]` syntax.
 
+### Validate
+
+[Run the Agent's status subcommand][2004] and look for `mongo` under the **Checks** section. Navigate to the [Database Monitoring for MongoDB][2005] page in Datadog to get started.
+
 [2000]: /agent/cluster_agent
 [2001]: /agent/cluster_agent/clusterchecks/
 [2002]: https://helm.sh
 [2003]: /agent/configuration/secrets-management
+[2004]: /agent/configuration/agent-commands/#agent-status-and-information
+[2005]: https://app.datadoghq.com/databases/list?listView=mongo

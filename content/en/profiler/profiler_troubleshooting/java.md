@@ -26,25 +26,9 @@ If the default setup overhead is not acceptable, you can use the profiler with m
 
 To use the minimal configuration ensure you have `dd-java-agent` version `0.70.0` then change your service invocation to the following:
 
-```shell
+```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
-
-## Modify the maximum stack depth for collected stack traces
-
-If the default maximum stack depth of 512 is not sufficient for your use case, or it is causing performance issues,
-you can increase it by setting the `dd.profiling.stackdepth` system property.
-
-For example, to decrease the maximum stack depth to 256, start your service with the following JVM setting:
-
-```shell
-java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-```
-
-The same limit will be used for data collected by JFR and the Datadog profiler.
-
-**Note**: If the `-XX:FlightRecorderOptions=stackdepth=<stack-depth>` JVM argument is provided, the maximum stack depth set via the
-`dd.profiling.stackdepth` system property will be ignored in the data collected by JFR, for technical reasons.
 
 ## Increase profiler information granularity
 
@@ -55,7 +39,7 @@ If you want more granularity in your profiling data, you can specify the `compre
 
 To use the comprehensive configuration ensure you have `dd-trace-java` version `0.70.0` then change your service invocation to the following:
 
-```shell
+```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
@@ -75,7 +59,6 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ## Enabling the heap profiler
-<div class="alert alert-info">The Java heap profiler feature is in beta.</div>
 <div class="aler alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
 
@@ -86,6 +69,11 @@ jdk.OldObjectSample#enabled=true
 ```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+## Enabling the heap histogram metrics
+<div class="aler alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
+
+To enable the heap histogram metrics, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable.
 
 ## Removing sensitive information from profiles
 
@@ -109,7 +97,8 @@ jdk.ObjectAllocationOutsideTLAB#enabled=false
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ## Memory leak detection slowing down garbage collector
-
+{{< tabs >}}
+{{% tab "JFR" %}}
 To turn off memory leak detection, disable the following event in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
 
 ```
@@ -117,6 +106,17 @@ jdk.OldObjectSample#enabled=false
 ```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+{{% /tab %}}
+{{% tab "Datadog Profiler" %}}
+If you are using the alpha feature of live heap profiling, you can tune the overhead by changing the percentage
+of the tracked allocation samples.
+```shell
+# track only 10% of the allocation samples
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.ddprof.liveheap.enabled=true -Ddd.profiling.ddprof.liveheap.sample_percent=10 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Exceptions overwhelming the profiler
 
@@ -139,14 +139,14 @@ The following OpenJDK 8 vendors are supported for Continuous Profiling because t
 | Bell-Soft (Liberica)        | u262                                      |
 | All vendors upstream builds | u272                                      |
 
-If your vendor is not on the list, [open a support ticket][2], as other vendors may be in development or available for beta support.
+If your vendor is not on the list, [open a support ticket][2], as other vendors may be in development or available in Preview support.
 
 ## Creating and using a JFR template override file
 
 Override templates let you specify profiling properties to override. However, the default settings are balanced for a good tradeoff between overhead and data density that cover most use cases. To use an override file, perform the following steps:
 
 1. Create an override file in a directory accessible by `dd-java-agent` at service invocation:
-    ```shell
+    ```
     touch dd-profiler-overrides.jfp
     ```
 
@@ -160,7 +160,7 @@ Override templates let you specify profiling properties to override. However, th
 
 3. When running your application with `dd-java-agent`, your service invocation must point to the override file with `-Ddd.profiling.jfr-template-override-file=</path/to/override.jfp>`, for example:
 
-    ```shell
+    ```
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 

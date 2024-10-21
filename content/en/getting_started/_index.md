@@ -81,7 +81,7 @@ Additionally, hundreds of [integrations][1] allow you to layer Datadog features 
 
 ## Learn more
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
   This foundation enablement session helps answer the key question: "What is Datadog, and what can it do for me?" You will learn how to send data to Datadog and which pages to visit to better understand the state of your various environments, applications, and infrastructure.
 {{< /learning-center-callout >}}
 

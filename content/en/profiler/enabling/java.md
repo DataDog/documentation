@@ -33,7 +33,7 @@ Supported operating systems:
 
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
-- Oracle JDK 8u352+, 11.0.17+, 17.0.5+
+- Oracle JDK 8u351+, 11.0.17+, 17.0.5+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
@@ -68,7 +68,7 @@ Additional requirements for profiling [Code Hotspots][12]:
 
 All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 
 ## Installation
 
@@ -129,9 +129,9 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
+{{% collapse-content title="(Optional) Build and run Graal native-image" level="h4" %}}
 
-Follow the [Tracer Setup Instructions][14] to build your native image with the Datadog Java Profiler.
+Follow the [Tracer Setup Instructions][14] to build your Graal native image with the Datadog Java Profiler.
 
 When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
 
@@ -272,11 +272,9 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 {{< /tabs >}}
 
-### Live-heap profiler engine (alpha)
+### Live-heap profiler engine
 
-_Since: v1.17.0. Requires JDK 11+._
-
-<div class="alert alert-warning">This is an alpha feature, it is not recommended to enable this feature in production environments.</a></div>
+_Since: v1.39.0. Requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+._
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.

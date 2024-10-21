@@ -18,7 +18,7 @@ assets:
     source_type_id: 10363
     source_type_name: Pinecone
   monitors:
-    '[Pinecone] Index approaching maximum capacity': assets/monitors/index_fullness.json
+    Index is approaching limit: assets/monitors/index_fullness.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +28,7 @@ categories:
 - メトリクス
 - data stores
 - ai/ml
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,7 +37,6 @@ integration_id: pinecone
 integration_title: Pinecone
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pinecone
 public_title: Pinecone
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 高性能 AI アプリケーションのためのクラウドベースのベクターデータベース。
   media:
@@ -75,41 +76,41 @@ tile:
 
 - **使用量やレイテンシーにおける予期せぬスパイクの発見とトリアージ:** Pinecone の Datadog ダッシュボードで、使用量やレイテンシーの異常をすばやく視覚化します。メトリクスを時系列で表示することで、傾向の理解を深め、スパイクの重大度を判断します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. [Pinecone アカウント][1]にログインします。
 2. **API Keys** タブに移動します。
 3. API キーを作成します。
 4. 作成した API キーをクリップボードにコピーします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Datadog の [Pinecone インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
 2. プロジェクト ID を入力します。
 3. API キーをクリップボードにコピーした際に表示される、環境を入力します。
 4. コピーした API キーを入力します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "pinecone" >}}
 
 
-### ワークフローの自動化
+### Logs
 
 Pinecone には、収集ログは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Pinecone には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Pinecone には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

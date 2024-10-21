@@ -53,18 +53,7 @@ Kubelet API への接続を妨げる最も一般的なエラーは、Kubelet の
 専用のパラメーターを使用するか、Agent マニフェストの**すべてのコンテナ**に対して `DD_KUBELET_TLS_VERIFY` 変数を設定することにより、TLS 検証を無効化することができます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  kubelet:
-    tlsVerify: false
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 `DatadogAgent` Kubernetes Resource:
 
@@ -79,9 +68,21 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "マニフェスト" %}}
+{{% tab "Helm" %}}
 
-`DaemonSet` マニフェスト:
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  kubelet:
+    tlsVerify: false
+```
+
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+
+DaemonSet manifest:
 
 ```yaml
 apiVersion: apps/v1
@@ -116,21 +117,7 @@ AWS、Google Cloud、または Azure で実行する場合、Agent はホスト�
 この場合、Download API を使用して `DD_HOSTNAME` を設定することができます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  env:
-    - name: DD_HOSTNAME
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 `DatadogAgent` Kubernetes Resource:
 
@@ -149,9 +136,24 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "マニフェスト" %}}
+{{% tab "Helm" %}}
 
-`DaemonSet` マニフェスト
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  env:
+    - name: DD_HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+```
+
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+
+DaemonSet manifest:
 
 ```yaml
 apiVersion: apps/v1
@@ -172,7 +174,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Amazon ECS と Docker VM のホスト名エラー
+## Amazon ECS and Docker VM hostname errors
 
 クラウドプロバイダー上の Docker で Agent を実行する場合、ホスト名エラーは通常、Agent が少なくとも次のいずれかにアクセスできないことを意味します。
 * コンテナランタイム API
@@ -183,7 +185,7 @@ spec:
 Agent が Docker ソケットに接続できるようにします。
 
 {{< tabs >}}
-{{% tab "EC2 上の Amazon ECS" %}}
+{{% tab "Amazon ECS on EC2" %}}
 
 [タスク定義][1]で Docker ソケットがマウントされていることを確認します。
 

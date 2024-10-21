@@ -14,15 +14,15 @@ title: カスタム Agent チェックの書き方
 
 このページでは、`min_collection_interval` を使用してサンプルのカスタム Agent チェックを作成し、サンプルのカスタムチェックを拡張するためのユースケースの例を示します。カスタムチェックは、Agent ベースのインテグレーションと同じ固定間隔で実行されます。デフォルトでは 15 秒ごとです。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 カスタム Agent チェックを作成するには、まず [Datadog Agent][1] をインストールします。
 
 **注**: Agent v7+ を実行している場合、Agent チェックは Python 3 と互換性がある必要があります。それ以外の場合は Python 2.7+ との互換性が必要です。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. システムの `conf.d` ディレクトリに移動します。`conf.d` ディレクトリの場所の詳細については、[Agent コンフィギュレーションファイル][2]を参照してください。
 2. `conf.d` ディレクトリに、新しい Agent チェック用の新しいコンフィギュレーションファイルを作成します。ファイルに `custom_checkvalue.yaml` という名前を付けます。
@@ -33,6 +33,7 @@ instances:
   [{}]
 {{< /code-block >}}
 4. `checks.d` ディレクトリにチェックファイルを作成します。ファイルに `custom_checkvalue.py` という名前を付けます。
+   <div class="alert alert-info">コンフィギュレーションファイルとチェックファイルの名前は一致している必要があります。チェックの名前が `custom_checkvalue.py` の場合、コンフィギュレーションファイルの名前は `custom_checkvalue.yaml` である必要があります。</div>
 5. ファイルを編集して、以下を含めます。
    {{< code-block lang="python" filename="checks.d/custom_checkvalue.py" >}}
 from checks import AgentCheck
@@ -42,7 +43,7 @@ class HelloCheck(AgentCheck):
 {{< /code-block >}}
 6. [Agent を再起動します][3]。1 分以内に、[メトリクスサマリー][4]に `hello.world` という新しいメトリクスが表示されます。
 
-**注**: コンフィギュレーションファイルとチェックファイルの名前は一致している必要があります。チェックの名前が `custom_checkvalue.py` の場合、コンフィギュレーションファイルの名前は `custom_checkvalue.yaml` である必要があります。
+Python チェックファイルは、Agent ユーザーが読み取り可能で、実行可能でなければなりません。
 
 ### 結果
 
@@ -99,7 +100,7 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 コマンドラインプログラムを実行すると、チェックはターミナルのコマンドラインで実行されているのと同じ出力をキャプチャします。出力で文字列処理を実行し、結果で `int()` または `float()` を呼び出して、数値型を返します。
 
-サブプロセスの出力に対して文字列処理を行わず整数や浮動小数点数が返されない場合、チェックはエラーなく動作しているように見えても何もデータを報告しません。
+If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors but doesn't report any metrics or events. The check also fails to return metrics or events if the Agent user does not have the correct permissions on any files or directories referenced in the command, or the correct permissions to run the command passed as an argument to `get_subprocess_output()`. 
 
 以下に、コマンドラインプログラムの結果を返すチェックの例を示します。
 

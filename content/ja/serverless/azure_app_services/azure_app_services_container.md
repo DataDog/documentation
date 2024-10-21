@@ -6,11 +6,14 @@ further_reading:
 - link: /integrations/azure_app_service_environment/
   tag: Documentation
   text: Azure App Service Environment
-title: Azure App Service - Linux コンテナ
+title: Instrument Azure App Service - Linux Containers
 ---
+
 ## 概要
 
-このインスツルメンテーション手法により、コンテナ化された Linux Azure App Service ワークロードに対して、以下の追加監視機能が提供されます。
+<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar, see <a href="/serverless/guide/azure_app_service_linux_sidecar">Instrument Azure App Service - Sidecar Pattern</a>.</div>
+
+This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
 
 - 自動インスツルメンテーションを用いた完全分散型 APM トレーシング。
 - カスタマイズされた APM サービスとトレースビューは、関連する Azure App Service のメトリクスとメタデータを表示します。
@@ -26,7 +29,7 @@ title: Azure App Service - Linux コンテナ
 
 ### Dockerfile
 
-Datadog は、serverless-init コンテナイメージの新しいリリースを Google の gcr.io、AWS の ECR、および Docker Hub に公開しています。
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
@@ -36,359 +39,43 @@ Datadog は、serverless-init コンテナイメージの新しいリリース�
 
 * `1`、`1-alpine`: 重大な変更がない最新のマイナーリリースを追跡する場合、これらを使用します
 * `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めする場合、これらを使用します
-* `latest`, `latest-apline`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
+* `latest`、`latest-alpine`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
 
-Dockerfile に以下の指示と引数を追加します。
+{{% svl-init-nodejs %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-```
-
-#### 説明
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Datadog Node.JS トレーサーを Docker イメージにコピーします。
-
-   ```
-   COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
-   ```
-
-   [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
-
-3. (オプション) Datadog タグを追加します。
-
-   ```
-   ENV DD_SERVICE=datadog-demo-run-nodejs
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Datadog `serverless-init` プロセスでアプリケーションをラップするようにエントリポイントを変更します。
-
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
-   ```
-   CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-   ```
-
-[1]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Dockerfile に以下の指示と引数を追加します。
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN pip install --target /dd_tracer/python/ ddtrace
-ENV DD_SERVICE=datadog-demo-run-python
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
-```
+{{% svl-init-python %}}
 
-#### 説明
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Datadog Python トレーサーをインストールします。
-   ```
-   RUN pip install --target /dd_tracer/python/ ddtrace
-   ```
-   [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
-
-3. (オプション) Datadog タグを追加します。
-   ```
-   ENV DD_SERVICE=datadog-demo-run-python
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Datadog `serverless-init` プロセスでアプリケーションをラップするようにエントリポイントを変更します
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Datadog トレーシングライブラリによって起動されたエントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
-   ```
-   CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
-   ```
-
-[1]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Dockerfile に以下の指示と引数を追加します。
+{{% svl-init-java %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
-ENV DD_SERVICE=datadog-demo-run-java
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["./mvnw", "spring-boot:run"]
-```
-
-#### 説明
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Datadog Java トレーサーを Docker イメージに追加します。
-   ```
-   ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
-   ```
-   [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
-
-3. (オプション) Datadog タグを追加します。
-   ```
-   ENV DD_SERVICE=datadog-demo-run-java
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Datadog `serverless-init` プロセスでアプリケーションをラップするようにエントリポイントを変更します
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
-   ```
-   CMD ["./mvnw", "spring-boot:run"]
-   ```
-
-[1]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-アプリケーションをデプロイする前に、Go トレーサーを[手動でインストール][1]してください。以下の指示と引数を Dockerfile に追加してください。
+{{% svl-init-go %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ENTRYPOINT ["/app/datadog-init"]
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-CMD ["/path/to/your-go-binary"]
-```
-
-#### 説明
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Datadog `serverless-init` プロセスでアプリケーションをラップするようにエントリポイントを変更します。
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-3. (オプション) Datadog タグを追加します。
-   ```
-   ENV DD_SERVICE=datadog-demo-run-go
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
-   ```
-   CMD ["/path/to/your-go-binary"]
-   ```
-
-**注**: Go コードを自動的にインスツルメントするツールである [Orchestrion][2] を使うこともできます。Orchestrion は非公開ベータ版です。詳細については、Orchestrion リポジトリで GitHub イシューを開くか、[サポートに連絡][3]してください。
-
-[1]: /ja/tracing/trace_collection/library_config/go/
-[2]: https://github.com/DataDog/orchestrion
-[3]: /ja/help
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Dockerfile に以下の指示と引数を追加します。
+{{% svl-init-dotnet %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
-ENV DD_SERVICE=datadog-demo-run-dotnet
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["dotnet", "helloworld.dll"]
-```
-
-#### 説明
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Datadog .NET トレーサーを Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
-   ```
-   [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
-
-3. (オプション) Datadog タグを追加します。
-   ```
-   ENV DD_SERVICE=datadog-demo-run-dotnet
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Datadog `serverless-init` プロセスでアプリケーションをラップするようにエントリポイントを変更します。
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
-   ```
-   CMD ["dotnet", "helloworld.dll"]
-   ```
-
-[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-アプリケーションをデプロイする前に、Ruby トレーサーを[手動でインストール][1]します。[サンプルアプリケーション][2]を参照してください。
-
-Dockerfile に以下の指示と引数を追加します。
-
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ENV DD_SERVICE=datadog-demo-run-ruby
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["rails", "server", "-b", "0.0.0.0"]
-```
-
-#### 説明
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. (オプション) Datadog タグを追加します
-   ```
-   ENV DD_SERVICE=datadog-demo-run-ruby
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-3. この環境変数は、 トレース伝搬が Cloud Run で正しく動作するために必要です。Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定してください。
-   ```
-   ENV DD_TRACE_PROPAGATION_STYLE=datadog
-   ```
-
-4. Datadog `serverless-init` プロセスでアプリケーションをラップするようにエントリポイントを変更します。
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. エントリポイントにラップされたバイナリアプリケーションを実行します。この行は必要に応じて変更してください。
-   ```
-   CMD ["rails", "server", "-b", "0.0.0.0"]
-   ```
-
-
-[1]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
-[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
+{{% svl-init-ruby %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Dockerfile に以下の指示と引数を追加します。
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
-RUN php /datadog-setup.php --php-bin=all
-ENV DD_SERVICE=datadog-demo-run-ruby
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
+{{% svl-init-php %}}
 
-# apache と mod_php ベースのイメージには以下を使用します
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
-EXPOSE 8080
-CMD ["apache2-foreground"]
-
-# nginx と php-fpm ベースのイメージには以下を使用します
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
-EXPOSE 8080
-CMD php-fpm; nginx -g daemon off;
-```
-
-**注**: datadog-init ENTRYPOINT はプロセスをラップし、そこからログを収集します。ログを正しく動作させるには、apache、nginx、php プロセスが標準出力に出力を書いていることを確認する必要があります。
-
-#### 説明
-
-
-1. Datadog `serverless-init` を Docker イメージにコピーします。
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Datadog PHP トレーサーをコピーしてインストールします。
-   ```
-   ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
-   RUN php /datadog-setup.php --php-bin=all
-   ```
-   [手動トレーサーインスツルメンテーションの説明][1]で説明したように、Datadog トレーサーライブラリをアプリケーションに直接インストールする場合は、このステップを省略してください。
-
-3. (オプション) Datadog タグを追加します。
-   ```
-   ENV DD_SERVICE=datadog-demo-run-ruby
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Datadog serverless-init プロセスでアプリケーションをラップするようにエントリポイントを変更します
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. アプリケーションを実行します。
-
-   apache と mod_php ベースのイメージには以下を使用します。
-   ```
-   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
-   EXPOSE 8080
-   CMD ["apache2-foreground"]
-   ```
-
-   nginx と php-fpm ベースのイメージには以下を使用します。
-   ```
-   RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
-   EXPOSE 8080
-   CMD php-fpm; nginx -g daemon off;
-   ```
-
-[1]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -405,7 +92,7 @@ CMD php-fpm; nginx -g daemon off;
 
 デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
 
-## Python
+## デプロイ
 
 {{% aas-workflow-linux %}}
 
@@ -444,7 +131,7 @@ CMD php-fpm; nginx -g daemon off;
 
 [Datadog サポート][14]と **Log stream** の内容を共有してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

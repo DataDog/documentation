@@ -12,6 +12,10 @@ further_reading:
   text: "Components"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 UI components can trigger reactions on an **Event**. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component event can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].
 
 An event can set the state of a UI component, open or close a modal, trigger another query, or even run custom JavaScript.
@@ -20,23 +24,32 @@ For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button
 
 ### State functions
 
-App Builder provides functions for some types of app state changes on specific components.
+App Builder provides functions for some types of app state changes. These functions are available in custom event reactions for specific components and in post-query hooks.
 
-setValue
-: Sets the value of an element to the value that you provide to the function.<br>
-**Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, and **text input** components.
+
+fetch
+: Executes the query that you run this function on. This function is available for all components that offer the custom event reaction type.<br>
+**Example**: `query0.fetch()` executes the query named `query0`.
 
 setIsOpen
 : Sets the status of a modal to open or closed based on the boolean value that you provide.<br>
 **Example**: See the [Components][1] documentation page section for the **modal** component.
 
+setPageIndex
+: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.<br>
+**Example**: See the [Components][1] documentation page section for the **table** component.
+
 setSelectedRow
 : Sets the `selectedRow` property of the table component to the row that you specify.<br>
 **Example**: See the [Components][1] documentation page section for the **table** component.
 
-setPageIndex
-: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.<br>
-**Example**: See the [Components][1] documentation page section for the **table** component.
+setTabIndex
+: Sets the `selectedTabIndex` property of the table component to the tab index that you specify.<br>
+**Example**: See the [Components][1] documentation page section for the **tab** component.
+
+setValue
+: Sets the value of an element to the value that you provide to the function.<br>
+**Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, **text area**, and **text input** components.
 
 To see what state functions are available for a given component, see [Components][1].
 

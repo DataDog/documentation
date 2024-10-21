@@ -6,6 +6,7 @@ categories:
 - data stores
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: AWS Storage Gateway のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_storage_gateway/
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: AWS Storage Gateway
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_storage_gateway
 public_title: Datadog-AWS Storage Gateway インテグレーション
@@ -31,9 +31,9 @@ AWS Storage Gateway は、オーガニゼーションの IT 環境と AWS のス
 
 このインテグレーションを有効にすると、Datadog にすべての Storage Gateway メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -58,23 +58,23 @@ AWS Storage Gateway から S3 バケットまたは CloudWatch のいずれか�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_storage_gateway" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
 AWS Storage Gateway インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS Storage Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

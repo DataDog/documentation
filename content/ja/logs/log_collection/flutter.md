@@ -2,7 +2,7 @@
 description: Flutter プロジェクトからログデータを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: ソースコード
   text: dd-sdk-flutter ソースコード
 - link: logs/explorer/
   tag: ドキュメント
@@ -152,7 +152,7 @@ final datadogLogger = DatadogSdk.instance.logs?.createLogger(
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: /ja/real_user_monitoring/flutter/setup
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogLoggerConfiguration-class.html
 [4]: /ja/getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html

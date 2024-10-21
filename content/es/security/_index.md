@@ -1,15 +1,15 @@
 ---
 aliases:
-- /compliance_monitoring
-- /cloud_siem
-- /security_platform
-- /security/security_monitoring
-- /security_monitoring/explorer/
-- /cloud_siem/explorer/
-- /security_platform/explorer
-- /security/explorer
-- /security_platform/security_signal_management
-- /security/security_signal_management
+- /es/compliance_monitoring
+- /es/cloud_siem
+- /es/security_platform
+- /es/security/security_monitoring
+- /es/security_monitoring/explorer/
+- /es/cloud_siem/explorer/
+- /es/security_platform/explorer
+- /es/security/explorer
+- /es/security_platform/security_signal_management
+- /es/security/security_signal_management
 cascade:
   algolia:
     rank: 70
@@ -33,7 +33,7 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Laboratorios de seguridad
   text: Lee sobre temas relacionados con la seguridad en el blog de los laboratorios
-    de seguridad de Datadog.
+    de Datadog Security.
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participar en una sesión interactiva para mejorar tu seguridad y la detección
@@ -65,11 +65,11 @@ title: Datadog Security
 
 Aporta velocidad y escalado a tus operaciones de seguridad de producción. Datadog Security ofrece una detección de amenazas en tiempo real y auditorías de configuración continuas en aplicaciones, hosts, contenedores e infraestructuras en la nube. Junto con la mayor plataforma de observabilidad de Datadog, Datadog Security aporta una integración sin precedentes entre la seguridad y las operaciones, en consonancia con los objetivos compartidos de tu organización.
 
-Datadog Security incluye [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem) y [Cloud Security Management](#cloud-security-management). Para obtener más información, consulta la [Visita guiada del producto de 30 segundos][14].
+La seguridad de Datadog incluye [Application Security](#application-security-management), [Cloud SIEM](#cloud-siem) y [Cloud Security Management](#cloud-security-management). Para obtener más información, consulta la [Visita guiada de producto de 30 segundos][14].
 
-## Application Security Management
+## Seguridad de las aplicaciones
 
-[Application Security Management][1] (ASM) proporciona una observabilidad de ataques a nivel de aplicación cuyo objetivo es explotar vulnerabilidades a nivel de código, como Server-Side-Request-Forgery (SSRF), SQL Injection, Log4Shell y Reflected Cross-Site-Scripting (XSS). ASM aprovecha [Datadog APM][2], el [Datadog Agent ][3] y las reglas de detección en la aplicación para detectar amenazas en el entorno de tu aplicación. Para ver más, consulta la [Visita Guiada] del producto (https://www.datadoghq.com/guided-tour/security/application-security-management/).
+Datadog [Application Security][1] proporciona capacidad de observación de ataques a nivel de aplicación, cuyo objetivo es explotar vulnerabilidades a nivel de código, como la Falsificación de solicitudes del lado del servidor (SSRF), la Inyección SQL, Log4Shell y el Cross-Site-Scripting (XSS) reflejado. ASM aprovecha [Datadog APM][2], el [Datadog Agent][3] y las reglas de detección en la aplicación para detectar amenazas en tu entorno de aplicación. Para ver más, consulta la [Visita Guiada] del producto (https://www.datadoghq.com/guided-tour/security/application-security-management/).
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="Panel de señales de seguridad en Datadog, que muestra flujos (flows) de ataque y gráficos de llamas" width="75%">}}
 
@@ -85,7 +85,7 @@ Datadog Security incluye [Application Security Management](#application-security
 
 CSM incluye [Amenazas][12], [Configuraciones incorrectas][11], [Riesgos de identidad][15] y [Vulnerabilidades][16]. Para obtener más información, consulta la [Visita guiada][13].
 
-{{< img src="security/csm/csm_overview_2.png" alt="Bandeja de entrada de seguridad en la información general de Cloud Security Management, que muestra una lista de los problemas de seguridad organizada por prioridades" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Buzón de seguridad en la información general de Cloud Security Management, que muestra una lista de los problemas de seguridad organizada por prioridades" width="100%">}}
 
 Para empezar a utilizar Datadog Security, ve a la página [**Seguridad** > **Configuración**][9] en Datadog, que contiene información detallada para usuarios individuales o configuraciones múltiples, o, para obtener más información sobre cada área de la plataforma, consulta las siguientes secciones que te guían para empezar a utilizar las funciones.
 

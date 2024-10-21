@@ -25,6 +25,7 @@ author:
   support_email: zjohnson@ns1.com
 categories:
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: ns1
 integration_title: ns1
 integration_version: 0.0.6
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ns1
 public_title: ns1
@@ -50,10 +50,16 @@ tile:
   - Supported OS::Windows
   - Category::Network
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: NS1 メトリクスを収集する Datadog インテグレーション
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://help.ns1.com/hc/en-us/articles/4402752547219
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/ns1-monitoring-datadog/
   support: README.md#Support
   title: ns1
 ---
@@ -67,11 +73,11 @@ tile:
 
 ![Snap][2]
 
-## 計画と使用
+## セットアップ
 
 NS1 チェックは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NS1 チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][4]をご参照ください。
 
@@ -83,7 +89,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NS1 チェッ�
 
 2. コアの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. NS1 メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ns1.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [ns1.d/conf.yaml][6] を参照してください。
 
@@ -93,21 +99,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NS1 チェッ�
 
 [Agent の status サブコマンド][5]を実行し、Checks セクションで `ns1` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ns1" >}}
 
 
-### ヘルプ
+### イベント
 
 NS1 インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ns1" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

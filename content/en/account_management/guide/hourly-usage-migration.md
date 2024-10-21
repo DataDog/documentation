@@ -7,7 +7,9 @@ further_reading:
 ---
 
 ## Summary
-Users of the v1 APIs should recognize familiar concepts in the v2 hourly usage API,
+On February 1, 2025, the individual hourly usage by product endpoints will be deprecated in favor of the v2 [hourly usage by product family API][1].
+
+Users of the v1 APIs should recognize familiar concepts in the consolidated v2 hourly usage API,
 just represented in a slightly different format.
 
 The most notable differences between the v1 API and the v2 API are that the v2 API:
@@ -21,162 +23,9 @@ Each difference is discussed in further detail in the following sections.
 ## Consolidated Product Families
 The v2 API introduces the concepts of product family and usage type. Product families are
 groupings of one or more usage types. Usage types are usage measurements for a given organization
-and time period. The initial set of product families mostly aligns with the v1 APIs,
-with the full mapping outlined below. There is also a special `all` product family that retrieves
-the usage for all other product families.
+and time period. The `all` product family retrieves the usage for all product families or you can filter by specific product families.
 
-The families and usage types:
-- **all**
-    * _Contains all other product families_
-- **analyzed_logs**
-    * `analyzed_logs`
-- **application_security**
-    * `app_sec_host_count`
-- **audit_trail**
-    * `enabled`
-- **serverless**
-    * `func_count`
-    * `invocations_sum`
-- **ci_app**
-    * `ci_pipeline_indexed_spans`
-    * `ci_test_indexed_spans`
-    * `ci_visibility_pipeline_committers`
-    * `ci_visibility_test_committers`
-- **cloud_cost_management**
-    * `host_count`
-- **csm_container_enterprise**
-    * `cws_count`
-    * `compliance_count`
-    * `total_count`
-- **csm_host_enterprise**
-    * `total_host_count`
-    * `compliance_hosts`
-    * `cws_hosts`
-    * `aas_host_count`
-    * `azure_host_count`
-    * `aws_host_count`
-    * `gcp_host_count`
-- **cspm**
-    * `aas_host_count`
-    * `azure_host_count`
-    * `compliance_host_count`
-    * `container_count`
-    * `host_count`
-- **cws**
-    * `cws_container_count`
-    * `cws_host_count`
-- **dbm**
-    * `dbm_host_count`
-    * `dbm_queries_count`
-- **fargate**
-    * `avg_profiled_fargate_tasks`
-    * `tasks_count`
-- **infra_hosts**
-    * `agent_host_count`
-    * `alibaba_host_count`
-    * `apm_azure_app_service_host_count`
-    * `apm_host_count`
-    * `aws_host_count`
-    * `azure_host_count`
-    * `container_count`
-    * `gcp_host_count`
-    * `heroku_host_count`
-    * `host_count`
-    * `infra_azure_app_service`
-    * `opentelemetry_host_count`
-    * `vsphere_host_count`
-- **incident_management**
-    * `monthly_active_users`
-- **indexed_logs**
-    * `logs_indexed_events_3_day_count`
-    * `logs_live_indexed_events_3_day_count`
-    * `logs_rehydrated_indexed_events_3_day_count`
-    * `logs_indexed_events_7_day_count`
-    * `logs_live_indexed_events_7_day_count`
-    * `logs_rehydrated_indexed_events_7_day_count`
-    * `logs_indexed_events_15_day_count`
-    * `logs_live_indexed_events_15_day_count`
-    * `logs_rehydrated_indexed_events_15_day_count`
-    * `logs_indexed_events_30_day_count`
-    * `logs_live_indexed_events_30_day_count`
-    * `logs_rehydrated_indexed_events_30_day_count`
-    * `logs_indexed_events_45_day_count`
-    * `logs_live_indexed_events_45_day_count`
-    * `logs_rehydrated_indexed_events_45_day_count`
-    * `logs_indexed_events_60_day_count`
-    * `logs_live_indexed_events_60_day_count`
-    * `logs_rehydrated_indexed_events_60_day_count`
-    * `logs_indexed_events_90_day_count`
-    * `logs_live_indexed_events_90_day_count`
-    * `logs_rehydrated_indexed_events_90_day_count`
-    * `logs_indexed_events_180_day_count`
-    * `logs_live_indexed_events_180_day_count`
-    * `logs_rehydrated_indexed_events_180_day_count`
-    * `logs_indexed_events_360_day_count`
-    * `logs_live_indexed_events_360_day_count`
-    * `logs_rehydrated_indexed_events_360_day_count`
-    * `logs_indexed_events_custom_day_count`
-    * `logs_live_indexed_events_custom_day_count`
-    * `logs_rehydrated_indexed_events_custom_day_count`
-- **indexed_spans**
-    * `indexed_events_count`
-    * `ingested_spans`
-    * `ingested_events_bytes`
-- **iot**
-    * `iot_device_count`
-- **lambda_traced_invocations**
-    * `lambda_traced_invocations_count`
-- **logs**
-    * `billable_ingested_bytes`
-    * `indexed_events_count`
-    * `ingested_events_bytes`
-    * `logs_forwarding_events_bytes`
-    * `logs_live_indexed_count`
-    * `logs_live_ingested_bytes`
-    * `logs_rehydrated_indexed_count`
-    * `logs_rehydrated_ingested_bytes`
-- **network_flows**
-    * `indexed_events_count`
-- **network_hosts**
-    * `host_count`
-- **observability_pipelines**
-    * `observability_pipelines_bytes_processed`
-- **online_archive**
-    * `online_archive_events_count`
-- **profiling**
-    * `avg_container_agent_count`
-    * `host_count`
-- **rum**
-    * `browser_rum_units`
-    * `mobile_rum_units`
-    * `rum_units`
-- **rum_browser_sessions**
-    * `replay_session_count`
-    * `session_count`
-- **rum_mobile_sessions**
-    * `session_count`
-    * `session_count_android`
-    * `session_count_ios`
-    * `session_count_reactnative`
-    * `session_count_flutter`
-- **sds**
-    * `logs_scanned_bytes`
-    * `total_scanned_bytes`
-- **snmp**
-    * `snmp_devices`
-- **synthetics_api**
-    * `check_calls_count`
-- **synthetics_browser**
-    * `browser_check_calls_count`
-- **synthetics_mobile**
-    * `test_runs`
-- **timeseries**
-    * `num_custom_input_timeseries`
-    * `num_custom_output_timeseries`
-    * `num_custom_timeseries`
-
-
-This list shows how the families and usage types above map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted otherwise:
+This list below shows how the product families and usage types map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted:
 
 ENDPOINT | PRODUCT FAMILY
 `<base_url>/api/v1/usage/hosts` | infra_hosts
@@ -228,15 +77,8 @@ ENDPOINT | PRODUCT FAMILY
 : `func_count`
 : `invocations_sum`
 
-`<base_url>/api/v1/usage/rum_sessions?type=browser` | rum_browser_sessions
-: `replay_session_count`
-: `session_count`
-
-`<base_url>/api/v1/usage/rum_sessions?type=mobile` | rum_mobile_sessions
-: `session_count`
-: `session_count_android`
-: `session_count_ios`
-: `session_count_reactnative`
+`<base_url>/api/v1/usage/rum_sessions` | rum
+: See [RUM Migration Guide for full mapping instructions.][2]
 
 `<base_url>/api/v1/usage/network_hosts` | network_hosts
 : `host_count`
@@ -276,9 +118,6 @@ ENDPOINT | PRODUCT FAMILY
 : `container_count`
 : `host_count`
 
-`<base_url>/api/v1/usage/audit_logs` | audit_logs
-: `lines_indexed`
-
 `<base_url>/api/v1/usage/cws` | cws
 : `cws_container_count`
 : `cws_host_count`
@@ -290,11 +129,6 @@ ENDPOINT | PRODUCT FAMILY
 `<base_url>/api/v1/usage/sds` | sds
 : `logs_scanned_bytes`
 : `total_scanned_bytes`
-
-`<base_url>/api/v1/usage/rum` | rum
-: `browser_rum_units`
-: `mobile_rum_units`
-: `rum_units`
 
 `<base_url>/api/v1/usage/ci-app` | ci_app
 : `ci_pipeline_indexed_spans`
@@ -316,11 +150,11 @@ ENDPOINT | PRODUCT FAMILY
 
 ## JSON:API Compliant Format
 
-Response bodies and parameter names conform to the [JSON:API specification][1]. All data
+Response bodies and parameter names conform to the [JSON:API specification][3]. All data
 available in the v1 APIs is still available. See the example below of the mapping from the v1 hosts
 API to the v2 hourly usage API.
 
-### V1 API: [Get hourly usage for hosts and containers][2]
+### V1 API: Get hourly usage for hosts and containers
 
 #### Request
 
@@ -487,6 +321,6 @@ parameter `filter[include_descendants]` to request data for child organizations.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://jsonapi.org/format/
-[2]: /api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
-
+[1]: /api/latest/usage-metering/#get-hourly-usage-by-product-family
+[2]: /account_management/guide/relevant-usage-migration/#rum
+[3]: https://jsonapi.org/format/
