@@ -22,11 +22,13 @@ The sections below detail the different parts of the page and provide guidance o
 
 ## How your metrics flow through Datadog
 
+{{< img src="metrics/overview/how_metrics_flow.png" alt="The how your metrics flow through Datadog section of the metrics overview page" >}}
+
 The topmost section of the page shows all of your metric sources, along with any configurable processing and a breakdown of the metrics by type (standard or [custom][1]).
 
 ### Metric Sources
 
-Your Datadog metrics can originate from the following sources:
+The **Metric Sources** column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][27] scoped to that source. Your Datadog metrics can originate from the following sources:
 
 #### Datadog Agents
 
@@ -63,48 +65,53 @@ Log-based metrics allow you to generate custom metrics from any logs ingested in
 - [Web and mobile vitals][16] are standard metrics that provide performance scores for browser and mobile applications, respectively.
 - [Custom metrics from RUM events][17] enable you to summarize the data from your RUM events. 
 
-##### Synthetic Monitoring & Continuous Testing Metrics
-
-[Synthetic Monitoring & Continuous Testing Metrics][18]
-
 ##### Processes
 
-[Process-based metrics][19] are custom metrics you can generate in the Processes page.
+[Process-based metrics][19] are custom metrics you can generate in the [Processes page][25].
 
 ##### Events
 
-[Custom metrics from events][20]
-> Generate metrics with 15-month retention from any event search query to create and monitor historical events and alerts. For more information, see Event Analytics.
+[Event-based metrics][20] are custom metrics you can generate in the [settings page of Event Management][26].
+
+##### Synthetic Monitoring & Continuous Testing Metrics
+
+[Synthetic Monitoring & Continuous Testing Metrics][18] are standard metrics that are generated to help track test duration, latency, and more.
 
 ##### Account Management
 
-[Estimated Usage Metrics][21]
-<!-- Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
-
-Graph your estimated usage
-Create monitors around your estimated usage based on thresholds of your choosing
-Get monitor alerts of spikes or drops in your usage
-Assess the potential impact of code changes on your usage in near real-time -->
+[Estimated Usage Metrics][21] are standard metrics that Datadog calculates to provide estimates of your current usage.
 
 ### Configurable Processing
 
+The **Configurable Processing** column shows an overview of the configuration options available for your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
+
 #### Manage tagging
 
-[Configuration of tags][22]
-> Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app.
+[Configuration of tags][22] can help you to manage custom metric costs by indexing only the metric tags most valuable to your organization.
 
 #### Enable percentiles
 
-[Distributions][23]
-> Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
+[Distributions][23] show you percentile aggregations of metric values sent from multiple hosts, so you can measure statistical distributions across your entire infrastructure.
 
 #### Ingest historical metrics
 
-[Historical Metrics Ingestion][24]
-> Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
+[Historical Metrics Ingestion][24] enables you to ingest metric values with timestamps older than one hour from the time of submission.
 
 ### Available Metrics
 
+The **Available Metrics** column breaks down your total metric volume by standard and custom metrics over the past month.
+
+## Your metrics by source
+
+{{< img src="metrics/overview/metrics_by_source.png" alt="The your metrics by source section of the metrics overview page" >}}
+
+This section contains a tree map with a breakdown of your metric sources and their respective volumes.
+
+## Metrics available for querying
+
+{{< img src="metrics/overview/available_metrics.png" alt="The metrics available for querying section of the metrics overview page" >}}
+
+Use the search bar in this section to view the latest data and configuration options of any of your metrics. You can search all its tags, or click to investigate the metric further in the Metrics Explorer or Summary pages.
 
 ## Further reading
 
@@ -134,3 +141,6 @@ Assess the potential impact of code changes on your usage in near real-time -->
 [22]: /metrics/metrics-without-limits/#configuration-of-tags
 [23]: /metrics/distributions/
 [24]: /metrics/custom_metrics/historical_metrics/
+[25]: https://app.datadoghq.com/process
+[26]: https://app.datadoghq.com/event/settings/generate-metrics
+[27]: /metrics/summary/
