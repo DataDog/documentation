@@ -82,6 +82,8 @@ To get started, follow the instructions below.
    apache-airflow-providers-openlineage>=1.11.0
    ```
 
+   Ensure the `openlineage` provider version specified is comptiable with your constraints file. If a constraints file is not specified in your `requirements.txt`, ensure the version is comptiable with the [default Apache Airflow constraints][8] for the version of Apache Airflow you are using. See [Amazon MWAA official doc][7] for guidance of specifying Python dependencies in a `requirements.txt` file. 
+
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
    
    ```shell
@@ -111,6 +113,8 @@ To get started, follow the instructions below.
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [6]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
+[7]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html#working-dags-dependencies-syntax-create
+[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html#airflow-versions-official
 
 {{% /tab %}}
 {{< /tabs >}}
