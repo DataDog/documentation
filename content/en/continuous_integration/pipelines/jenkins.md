@@ -37,6 +37,7 @@ Set up tracing in Jenkins to collect data across various stages of your pipeline
 | [Custom tags][22] [and measures at runtime][23] | Custom tags and measures at runtime | Configure [custom tags and measures][12] at runtime. |
 | [Parameters][24] | Parameters | Set custom parameters (such as the default branch name or Git information) when a pipeline is triggered. |
 | [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Running pipelines][30] | Running pipelines | View pipeline executions that are running. Requires Jenkins plugin version >= 7.3.0 |
 
 The following Jenkins versions are supported:
 
@@ -1520,3 +1521,4 @@ try restarting the Jenkins instance.
 [27]: /logs/guide/best-practices-for-log-management/
 [28]: /continuous_integration/search/#search-for-pipelines
 [29]: /agent/logs/?tab=tcpudp#custom-log-collection
+[30]: /glossary/#running-pipeline
