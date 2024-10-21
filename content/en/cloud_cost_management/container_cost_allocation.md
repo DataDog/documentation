@@ -141,7 +141,7 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 For Kubernetes data transfer allocation, a Kubernetes node is joined with its associated data transfer costs from the [CUR][103]. The node's cluster name and all node tags are added to the entire data transfer cost for the node. This allows you to associate cluster-level dimensions with the cost of the data transfer, without considering the pods scheduled to the node.
 
-[Network performance monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Network performance monitoring enabled, the data transfer costs for these hosts will not be allocated and may appear as an n/a bucket depending on filter/groupby conditions.
+[Network Performance Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Network Performance Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
 
 Datadog supports data transfer cost allocation only through the [standard 6 workload resources][104]. If you use custom workload resources their data transfer costs may only be allocated down to the cluster level and not the node/namespace level.
 
