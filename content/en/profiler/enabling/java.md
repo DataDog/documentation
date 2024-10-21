@@ -56,7 +56,7 @@ Minimum JDK versions:
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
-Additional requirements for profiling [Code Hotspots][12]:
+Additional requirements for profiling [Trace to Profiling integration][12]:
  - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
  - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
 
@@ -152,7 +152,7 @@ When the service binary is built, you can use environment variables to enable an
 
 Since dd-trace-java version 1.5.0, you have two options for the CPU profiler used, Datadog or Java Flight Recorder (JFR). Since version 1.7.0, Datadog is the default, but you can also optionally enable JFR for CPU profiling. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
-The Datadog profiler records the active span on every sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
+The Datadog profiler records the active span on every sample, which improves the fidelity of the Trace to Profiling integration and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
 
 The Datadog profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
 
