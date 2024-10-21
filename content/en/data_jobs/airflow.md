@@ -2,9 +2,6 @@
 title: Enable Data Jobs Monitoring for Apache Airflow
 is_beta: true
 private: true
-aliases:
-    - /data_jobs/airflow/
-    - data_jobs/airflow/
 further_reading:
     - link: 'https://www.datadoghq.com/blog/data-jobs-monitoring/'
       tag: 'blog'
