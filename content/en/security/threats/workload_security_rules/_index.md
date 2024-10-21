@@ -95,7 +95,7 @@ Agent rules contain [Agent expressions](#agent-expressions) that determine which
 
 With [Remote Configuration][7] enabled, you automatically receive new and updated CSM Threats Agent rules when they're released. These bundled Agent rules are used in the [default detection rules][1].
 
-<div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-info">Remote Configuration for CSM Threats is in Preview. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
 ### Agent expressions
 
