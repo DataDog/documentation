@@ -68,7 +68,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [LevelDB][49]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
 | [miekg/dns][51]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
 | [Kafka (confluent)][53] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][54]   |
-| [Kafka (sarama)][55]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama][56]                        |
+| [Kafka (sarama)][55]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1][56]                     |
 | [Google API][57]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][58]             |
 | [go-restful][59]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][60]               |
 | [Twirp][61]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][62]                    |
