@@ -1,0 +1,1 @@
+オプションとして、**Decoding** ドロップダウンメニューで、入力形式を未加工の **Bytes**、**JSON**、Graylog Extended Log Format (**Gelf**)、または **Syslog** のいずれかにするかを選択します。デコードが選択されていない場合、デコードのデフォルトは JSON になります。
