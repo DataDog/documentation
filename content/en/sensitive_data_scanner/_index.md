@@ -324,7 +324,7 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 ## Data Security
 
 {{< callout url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Data Security is in beta. To enroll, click <strong>Request Access</strong>.
+  Data Security is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 If you have [Sensitive Data Scanner][6] and [Cloud Security Management][7] enabled, you can use Data Security to locate sensitive data and fix security issues impacting Amazon S3 buckets and RDS instances.
