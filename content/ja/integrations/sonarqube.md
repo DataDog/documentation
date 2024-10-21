@@ -42,7 +42,7 @@ draft: false
 git_integration_title: sonarqube
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 3.2.2
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: sonarqube
