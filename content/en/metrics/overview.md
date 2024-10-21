@@ -69,13 +69,42 @@ Log-based metrics allow you to generate custom metrics from any logs ingested in
 
 ##### Processes
 
+[Process-based metrics][19] are custom metrics you can generate in the Processes page.
+
 ##### Events
+
+[Custom metrics from events][20]
+> Generate metrics with 15-month retention from any event search query to create and monitor historical events and alerts. For more information, see Event Analytics.
 
 ##### Account Management
 
+[Estimated Usage Metrics][21]
+<!-- Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
+
+Graph your estimated usage
+Create monitors around your estimated usage based on thresholds of your choosing
+Get monitor alerts of spikes or drops in your usage
+Assess the potential impact of code changes on your usage in near real-time -->
+
 ### Configurable Processing
 
+#### Manage tagging
+
+[Configuration of tags][22]
+> Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app.
+
+#### Enable percentiles
+
+[Distributions][23]
+> Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
+
+#### Ingest historical metrics
+
+[Historical Metrics Ingestion][24]
+> Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
+
 ### Available Metrics
+
 
 ## Further reading
 
@@ -99,3 +128,9 @@ Log-based metrics allow you to generate custom metrics from any logs ingested in
 [16]: /real_user_monitoring/#web-and-mobile-vitals
 [17]: /real_user_monitoring/platform/generate_metrics/
 [18]: /synthetics/platform/metrics/
+[19]: /infrastructure/process/increase_process_retention/#generate-a-process-based-metric
+[20]: /service_management/events/guides/usage/#custom-metrics
+[21]: /account_management/billing/usage_metrics/
+[22]: /metrics/metrics-without-limits/#configuration-of-tags
+[23]: /metrics/distributions/
+[24]: /metrics/custom_metrics/historical_metrics/
