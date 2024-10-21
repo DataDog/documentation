@@ -3421,6 +3421,12 @@ components:
             to be set to true.'
           example: true
           type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
+          example: true
+          type: boolean
         is_security_command_center_enabled:
           default: false
           description: 'When enabled, Datadog will attempt to collect Security Command
@@ -4290,6 +4296,7 @@ components:
       - cws_containers_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
+      - data_stream_monitoring_usage
       - dbm_hosts_usage
       - dbm_queries_usage
       - error_tracking_usage
@@ -4364,6 +4371,7 @@ components:
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
@@ -4895,6 +4903,7 @@ components:
       - logs_transaction_stream
       - event_stream
       - rum_stream
+      - llm_observability_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4910,6 +4919,7 @@ components:
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
       - RUM_STREAM
+      - LLM_OBSERVABILITY_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -8046,6 +8056,8 @@ components:
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_jobs_monitoring_percentage
+      - data_stream_monitoring_usage
+      - data_stream_monitoring_percentage
       - dbm_hosts_percentage
       - dbm_hosts_usage
       - dbm_queries_percentage
@@ -8189,6 +8201,8 @@ components:
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_JOBS_MONITORING_PERCENTAGE
+      - DATA_STREAM_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_PERCENTAGE
       - DBM_HOSTS_PERCENTAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
@@ -8478,6 +8492,10 @@ components:
           type: number
         data_jobs_monitoring_usage:
           description: The Data Jobs Monitoring usage by tag(s).
+          format: double
+          type: number
+        data_stream_monitoring_usage:
+          description: The Data Stream Monitoring usage by tag(s).
           format: double
           type: number
         dbm_hosts_percentage:
@@ -10944,7 +10962,7 @@ components:
             Periods of no data are counted either as uptime or downtime depending
             on monitor settings.
 
-            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+            See [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
 
             for detailed information.'
           example:
@@ -19846,6 +19864,16 @@ components:
             events over all hours in the current date for the given org.
           format: int64
           type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -20584,6 +20612,16 @@ components:
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -21335,6 +21373,16 @@ components:
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm_sum:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm_sum:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current month for all organizations.
           format: int64
           type: integer
         container_avg_sum:
@@ -27673,8 +27721,8 @@ paths:
               \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
               }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
               \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
-              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
-              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"is_resource_change_collection_enabled\":
+              true,\n  \"private_key\": \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
               \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
               true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
               \ \"type\": \"service_account\"\n}"

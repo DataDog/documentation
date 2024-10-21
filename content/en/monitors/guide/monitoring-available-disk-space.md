@@ -19,6 +19,10 @@ To create the monitor for available disk space:
     
 
      4. Under **Evaluation Details**, choose your desired evaluation interval.
+
+         {{< img src="monitors/guide/monitoring_free_disk_space_alert_criteria.png" alt="Alert criteria configuration set to below threshold, with a value of 10." style="width:80%;">}}
+
+
 5. Under **Set alert conditions**, select **below** from the threshold options and enter `10` in **Alert threshold** field.
 6. In **Configure notifications & automations**, give your monitor a name, then specify the notification message. Include relevant details and a meaningful message template. For example:
 

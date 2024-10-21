@@ -189,7 +189,7 @@
   },
   "software-catalog": {
     "name": "Software Catalog",
-    "description": "API to create, update, retrieve and delete Software Catalog entities."
+    "description": "API to create, update, retrieve, and delete Software Catalog entities."
   },
   "spans": {
     "name": "Spans",

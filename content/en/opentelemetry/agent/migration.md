@@ -187,7 +187,7 @@ datadog:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
-    repository: datadog/agent
+    repository: gcr.io/datadoghq/agent
     tag: 7.57.0-v1.0-ot-beta-jmx
     doNotCheckTag: true
 ...
@@ -251,7 +251,7 @@ Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
 agents:
   image:
-    repository: datadog/agent
+    repository: gcr.io/datadoghq/agent
     tag: 7.57.0-v1.0-ot-beta-jmx
     doNotCheckTag: true
 

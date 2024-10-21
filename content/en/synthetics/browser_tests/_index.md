@@ -11,9 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
-  tag: "Learning Center"
-  text: "Introduction to Synthetic Tests"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with browser tests"
