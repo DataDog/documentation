@@ -202,11 +202,11 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 
 [1]: /security/application_security/how-appsec-works/
 {{% /tab %}}
-{{% tab "Code Hotspots" %}}
+{{% tab "Profiles" %}}
 
-View [Code Hotspots][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
+View [Profiles][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
 
-{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab showing time spent in each method for a selected span" style="width:90%;">}}
 
 [1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
