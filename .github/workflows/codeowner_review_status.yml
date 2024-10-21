@@ -1,10 +1,6 @@
 name: Code Owners Approval Check
 
 on:
-  pull_request:
-    branches:
-      - master
-    types: [opened, synchronize, reopened, ready_for_review]
   pull_request_review:
     types: [submitted, dismissed]
 
@@ -29,6 +25,12 @@ jobs:
             const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
             const { data: files } = await github.rest.pulls.listFiles({ owner, repo, pull_number: number });
             
+            // Check if the base branch is master
+            if (pr.base.ref !== 'master') {
+              console.log(`Base branch is ${pr.base.ref}. Skipping check.`);
+              return;
+            }
+              
             // Get CODEOWNERS file content
             let codeowners;
             try {
