@@ -32,7 +32,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/impala/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: impala
 integration_id: impala
 integration_title: Impala
-integration_version: 2.2.2
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: impala
