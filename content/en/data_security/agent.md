@@ -88,6 +88,53 @@ If you have a requirement to avoid storing secrets in plaintext in the Agent's c
 
 For more information, see the [Secrets Management][18] documentation.
 
+## Telemetry collection
+
+Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
+
+You can also disable this telemetry collection by updating the below setting in the Agent Configuration File.
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+
+**Telemetry content:**
+
+`Metadata`
+- MachineID
+- MachineName
+- OS
+- OS version
+- Agent version
+
+`Metrics`
+- checks.execution_time
+- pymem.inuse, pymem.alloc
+- api_server.request_duration_seconds
+- logs.decoded, logs.processed
+- logs.sender_latency, logs.bytes_missed
+- logs.sent, logs.dropped
+- logs.bytes_sent, logs.encoded_bytes_sent
+- dogstatsd.udp_packets
+- dogstatsd.uds_packets
+- transactions.input_count, transactions.requeued
+- transactions.retries
+- point.sent, point.dropped
+- oracle.activity_samples_count, oracle.activity_latency
+- oracle.statement_metrics, oracle.statement_plan_errors
+- postgres.collect_relations_autodiscovery_ms
+- postgres.collect_stat_autodiscovery_ms
+- postgres.get_new_pg_stat_activity_ms
+- postgres.get_new_pg_stat_activity_count
+- postgres.get_active_connections_ms
+- postgres.get_active_connections_count
+- postgres.collect_activity_snapshot_ms
+- postgres.collect_statement_samples_ms
+- postgres.collect_statement_samples_count
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
