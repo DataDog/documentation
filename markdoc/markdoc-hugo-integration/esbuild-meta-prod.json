@@ -1,0 +1,219 @@
+{
+  "inputs": {
+    "dist/helperModules/PageBuilder/components/ContentFilter.js": {
+      "bytes": 1345,
+      "imports": [],
+      "format": "cjs"
+    },
+    "dist/schemas/regexes.js": {
+      "bytes": 1197,
+      "imports": [],
+      "format": "cjs"
+    },
+    "dist/helperModules/prefsResolution.js": {
+      "bytes": 6063,
+      "imports": [
+        {
+          "path": "dist/schemas/regexes.js",
+          "kind": "require-call",
+          "original": "../schemas/regexes"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../markdoc-static-compiler/src/grammar/tag.js": {
+      "bytes": 42415,
+      "imports": [],
+      "format": "cjs"
+    },
+    "../markdoc-static-compiler/src/ast/variable.ts": {
+      "bytes": 717,
+      "imports": [],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/ast/base.ts": {
+      "bytes": 1332,
+      "imports": [],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/ast/function.ts": {
+      "bytes": 534,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/ast/base.ts",
+          "kind": "import-statement",
+          "original": "./base"
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/utils.ts": {
+      "bytes": 3966,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/grammar/tag.js",
+          "kind": "import-statement",
+          "original": "./grammar/tag"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/ast/variable.ts",
+          "kind": "import-statement",
+          "original": "./ast/variable"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/ast/function.ts",
+          "kind": "import-statement",
+          "original": "./ast/function"
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/tags/conditional.ts": {
+      "bytes": 2760,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/utils.ts",
+          "kind": "import-statement",
+          "original": "../utils"
+        },
+        {
+          "path": "../types",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../types",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/functions/index.ts": {
+      "bytes": 2492,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/tags/conditional.ts",
+          "kind": "import-statement",
+          "original": "../tags/conditional"
+        }
+      ],
+      "format": "esm"
+    },
+    "../markdoc-static-compiler/src/reresolver/index.js": {
+      "bytes": 3957,
+      "imports": [
+        {
+          "path": "../markdoc-static-compiler/src/functions/index.ts",
+          "kind": "require-call",
+          "original": "../functions"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/tags/conditional.ts",
+          "kind": "require-call",
+          "original": "../tags/conditional"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/utils.ts",
+          "kind": "require-call",
+          "original": "../utils"
+        }
+      ],
+      "format": "cjs"
+    },
+    "dist/helperModules/PageBuilder/pageConfigMinification.js": {
+      "bytes": 3293,
+      "imports": [],
+      "format": "cjs"
+    },
+    "dist/helperModules/ClientPrefsManager.js": {
+      "bytes": 13869,
+      "imports": [
+        {
+          "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
+          "kind": "require-call",
+          "original": "./PageBuilder/components/ContentFilter"
+        },
+        {
+          "path": "dist/helperModules/prefsResolution.js",
+          "kind": "require-call",
+          "original": "./prefsResolution"
+        },
+        {
+          "path": "../markdoc-static-compiler/src/reresolver/index.js",
+          "kind": "require-call",
+          "original": "markdoc-static-compiler/src/reresolver"
+        },
+        {
+          "path": "dist/helperModules/PageBuilder/pageConfigMinification.js",
+          "kind": "require-call",
+          "original": "./PageBuilder/pageConfigMinification"
+        }
+      ],
+      "format": "cjs"
+    },
+    "dist/markdoc-client-prefs-manager.js": {
+      "bytes": 245,
+      "imports": [
+        {
+          "path": "dist/helperModules/ClientPrefsManager.js",
+          "kind": "require-call",
+          "original": "./helperModules/ClientPrefsManager"
+        }
+      ],
+      "format": "cjs"
+    }
+  },
+  "outputs": {
+    "dist/helperModules/PageBuilder/compiledScripts/markdoc-client-prefs-manager.min.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "dist/markdoc-client-prefs-manager.js",
+      "inputs": {
+        "dist/helperModules/PageBuilder/components/ContentFilter.js": {
+          "bytesInOutput": 544
+        },
+        "dist/schemas/regexes.js": {
+          "bytesInOutput": 396
+        },
+        "dist/helperModules/prefsResolution.js": {
+          "bytesInOutput": 1563
+        },
+        "../markdoc-static-compiler/src/grammar/tag.js": {
+          "bytesInOutput": 12824
+        },
+        "../markdoc-static-compiler/src/ast/variable.ts": {
+          "bytesInOutput": 259
+        },
+        "../markdoc-static-compiler/src/ast/base.ts": {
+          "bytesInOutput": 350
+        },
+        "../markdoc-static-compiler/src/ast/function.ts": {
+          "bytesInOutput": 236
+        },
+        "../markdoc-static-compiler/src/utils.ts": {
+          "bytesInOutput": 1762
+        },
+        "../markdoc-static-compiler/src/tags/conditional.ts": {
+          "bytesInOutput": 624
+        },
+        "../markdoc-static-compiler/src/functions/index.ts": {
+          "bytesInOutput": 1117
+        },
+        "../markdoc-static-compiler/src/reresolver/index.js": {
+          "bytesInOutput": 1579
+        },
+        "dist/helperModules/PageBuilder/pageConfigMinification.js": {
+          "bytesInOutput": 1542
+        },
+        "dist/helperModules/ClientPrefsManager.js": {
+          "bytesInOutput": 5890
+        },
+        "dist/markdoc-client-prefs-manager.js": {
+          "bytesInOutput": 135
+        }
+      },
+      "bytes": 29522
+    }
+  }
+}
