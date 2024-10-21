@@ -20,4 +20,9 @@ cascade:
     lang: en
   aliases:
     - /api/screenboards/
+- _target:
+    path: /api/latest/csm-threats
+    lang: en
+  aliases:
+    - /api/latest/cloud-workload-security
 ---
