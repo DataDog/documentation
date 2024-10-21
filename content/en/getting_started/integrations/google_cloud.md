@@ -37,7 +37,7 @@ This guide provides an overview of how to get started with the Datadog Google Cl
 
 ## Prerequisites
 1) Create a [Datadog account][1]
-2) Set up a [Service Account][2] in Google Cloud
+2) Set up a [Service Account][2] in your desired Google Cloud project
 3) Review these Google Cloud Prerequisites:
 
 - If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
