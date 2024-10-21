@@ -52,7 +52,7 @@ This guide provides an overview of how to get started with the Datadog Google Cl
 : Allows Datadog to discover compute instance data.
 
 [Cloud Asset API][9]
-: Allows Datadog to request Google Cloud resources and link them to relevant metric tags.
+: Allows Datadog to request Google Cloud resources and link relevant labels to metrics as tags.
 
 [Cloud Resource Manager API][10] 
 : Allows Datadog to append metrics with the correct resources and tags.
