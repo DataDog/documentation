@@ -5269,7 +5269,7 @@ menu:
       url: logs/explorer/calculated_fields/
       parent: log_explorer
       weight: 506
-    - name: Calculated Fields Expression Language
+    - name: Expression Language
       identifier: log_explorer_calculated_fields_expression_language
       url: logs/explorer/calculated_fields/expression_language/
       parent: log_explorer_calculated_fields

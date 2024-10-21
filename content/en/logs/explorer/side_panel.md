@@ -13,6 +13,9 @@ further_reading:
     - link: '/logs/guide/correlate-logs-with-metrics'
       tag: 'Documentation'
       text: 'Connect logs with infrastructure metrics'
+    - link: "/logs/explorer/calculated_fields/expression_language"
+      tag: "Documentation"
+      text: "Learn more about Calculated Fields Expression Language"
 ---
 
 ## Overview

@@ -10,6 +10,9 @@ further_reading:
   text: "Log Explorer"
 ---
 
+
+<div class="alert alert-info">For syntax, operators, and functions, see <a href="/logs/explorer/calculated_fields/expression_language">Expression Language</a></div>
+
 ## Overview
 
 Use calculated fields to transform and enrich your log data at query time. Define [formulas](#formula) to:

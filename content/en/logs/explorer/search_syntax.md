@@ -17,6 +17,9 @@ further_reading:
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
   text: "Learn about Saved Views"
+- link: "/logs/explorer/calculated_fields/expression_language"
+  tag: "Documentation"
+  text: "Learn more about Calculated Fields Expression Language"
 ---
 
 ## Overview
