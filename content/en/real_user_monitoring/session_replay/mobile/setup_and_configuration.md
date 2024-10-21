@@ -220,7 +220,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 {{% /tab %}}
 {{< /tabs >}}
 
-### Start the recording manually
+### Start or stop the recording manually
 
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
 
