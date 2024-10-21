@@ -207,6 +207,12 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects" style="width:80%;">}}
 <p> </p>
 
+## Calculated fields
+
+Calculated fields function like log attributes and can be used for search, aggregation, visualization, and defining other calculated fields. Use the `#` prefix to reference calculated field names.
+
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated field called request_duration used to filter results in the Log Explorer" style="width:100%;" >}}
+
 ## Saved searches
 
 [Saved Views][6] contain your search query, columns, time horizon, and facet.
