@@ -260,8 +260,8 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `aws_resource_id`            | The resource ID associated with the item.|
 | `aws_instance_type`          | The instance type of the item.|
 | `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
-| `aws_datatransfer_type`      | The type of data transfer associated with the item (for example, cross-zone, or cross-region).|
-| `aws_datatransfer_direction` | The direction of data transfer associated with the item (for example, in, or out).|
+| `aws_datatransfer_type`      | The type of data transfer associated with the item (for example, cross-zone or cross-region).|
+| `aws_datatransfer_direction` | The direction of data transfer associated with the item (for example, in or out).|
 | `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
 | `is_aws_ec2_compute_on_demand`| Whether the usage is on-demand.|
 | `is_aws_ec2_compute_reservation`| Whether the usage is associated with a Reserved Instance.|
