@@ -12,6 +12,14 @@ further_reading:
 
 Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB Atlas instances. This guide outlines the steps to set up Database Monitoring for MongoDB Atlas.
 
+### MongoDB Atlas Cluster Types Supported
+
+|                     | Replica Set | Sharded Cluster |
+|---------------------|-------------|-----------------|
+| Serverless Instance |             |                 |
+| Dedicated           |  {{< X >}}  |    {{< X >}}    |
+| Shared              |  {{< X >}}  |    {{< X >}}    |
+
 {{% dbm-mongodb-beta-new-features %}}
 
 ## Before you begin
