@@ -10,6 +10,8 @@
     display_name: Green (ja)
 
   # Blue items
+
+
   - display_name: Ocean (ja)
     id: ocean
   - display_name: Sky (ja)
@@ -30,8 +32,10 @@
     id: frog
 
   # Red items
-  - id: ruby
-    display_name: Ruby (ja)
+  # This item is intentionally missing from the list,
+  # to verify the failover to EN
+  # - id: ruby
+  #   display_name: Ruby (ja)
   - id: apple
     display_name: Apple (ja)
   - id: firetruck
