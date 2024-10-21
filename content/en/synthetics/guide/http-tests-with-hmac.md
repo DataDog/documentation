@@ -51,7 +51,7 @@ Click **Variable From Script** to generate the HMAC signature for your HTTP requ
 * To define a variable, use either `dd.variable.set("<variable_name>", <value>)` or `dd.variable.setObfuscated("<variable_name>", <value>)`.
 
 You also have access to helper functions, such as:
-* Most of the [`std` library][5], accessible with `std.*`. For example, to call the function `encodeHex` defined in `<std>/encoding/hex.ts`, use `std.encoding.hex.encodeHex`.
+* Most of the [`std` library][5], accessible with `std.*`. For example, to call the function `encodeHex` defined in `@std/encoding/hex.ts`, use `std.encoding.hex.encodeHex`.
 * Standard JavaScript APIs, such as the [Web Crypto API][6].
 
 **Note**: Some of these APIs are disabled for security reasons.
