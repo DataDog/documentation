@@ -1,17 +1,11 @@
 postgres_integration_host_options:
   - id: self_hosted
-    display_name: "Self-hosted"
     default: true
   - id: kubernetes
-    display_name: "Kubernetes"
   - id: docker
-    display_name: "Docker"
   - id: ecs
-    display_name: "ECS"
 
 postgres_integration_version_options:
-  - display_name: "10+"
-    id: gte_10_x_x
+  - id: gte_10_x_x
     default: true
-  - display_name: "9.6 and below"
-    id: lte_9_6_x
+  - id: lte_9_6_x

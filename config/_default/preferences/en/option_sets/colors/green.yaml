@@ -1,10 +1,6 @@
 green_item_options:
-  - display_name: Grass
-    id: grass
+  - id: grass
     default: true
-  - display_name: Emerald
-    id: emerald
-  - display_name: Lime
-    id: lime
-  - display_name: Frog
-    id: frog
+  - id: emerald
+  - id: lime
+  - id: frog
