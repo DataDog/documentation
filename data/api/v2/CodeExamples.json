@@ -328,55 +328,6 @@
       "description": "Create a Datadog GCP principal with empty body returns \"OK\" response"
     }
   ],
-  "CreateGCPSTSAccount": [
-    {
-      "group": "gcp_integration",
-      "suffix": "",
-      "description": "Create a new entry for your service account returns \"OK\" response"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_109518525",
-      "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_194782945",
-      "description": "Create a new entry for your service account with cloud run revision filters enabled returns \"OK\" response"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_4235664992",
-      "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_130557025",
-      "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_2597004741",
-      "description": "Create a new entry for your service account with security command center enabled returns \"OK\" response"
-    }
-  ],
-  "UpdateGCPSTSAccount": [
-    {
-      "group": "gcp_integration",
-      "suffix": "",
-      "description": "Update STS Service Account returns \"OK\" response"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_2241994060",
-      "description": "Update STS Service Account returns \"OK\" response with cloud run revision filters"
-    },
-    {
-      "group": "gcp_integration",
-      "suffix": "_3205636354",
-      "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
-    }
-  ],
   "UpdateIPAllowlist": [
     {
       "group": "ip_allowlist",
