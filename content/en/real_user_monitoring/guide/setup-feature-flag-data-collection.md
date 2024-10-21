@@ -29,11 +29,9 @@ Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM
 <details>
   <summary>Before <code>v5.17.0</code></summary>
 
-If you are using a version anterior to 5.17.0, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]` to start collecting feature flag data.
+If you are using a version previous to 5.17.0, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]` to start collecting feature flag data.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
+{{% collapse-content title="NPM" level="h4" %}}
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
@@ -44,10 +42,9 @@ If you are using a version anterior to 5.17.0, initialize the RUM SDK and config
     ...
 });
 ```
+{{% /collapse-content %}} 
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
-
+{{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -57,10 +54,9 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
+{{% /collapse-content %}} 
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
+{{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -69,9 +65,7 @@ window.DD_RUM &&
       ...
     })
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
+{{% /collapse-content %}}
 
 </details>
 <br/>
