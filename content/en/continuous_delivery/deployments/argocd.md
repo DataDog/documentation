@@ -94,7 +94,9 @@ metadata:
   name: argocd-notifications-cm
 data:
   trigger.cd-visibility-trigger: |
-    - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error', 'Running'] and app.status.health.status in ['Healthy', 'Degraded']
+    - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error'] and app.status.health.status in ['Healthy', 'Degraded']
+      send: [cd-visibility-template]
+    - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
       send: [cd-visibility-template]
 ```
 
@@ -146,6 +148,10 @@ metadata:
 ## Tag an Argo CD application deploying multiple services
 
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
+
+<div class="alert alert-warning">
+Automatic service discovery is not supported when <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a> is used.
+</div>
 
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
 - `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].

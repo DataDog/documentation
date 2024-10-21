@@ -51,6 +51,12 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+  <em>Setting up S3 Log Archives using Role Delegation is currently in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
+</div>
+{{< /site-region >}}
+
 ## Setup
 
 ### Generate an external ID

@@ -19,7 +19,7 @@ Las [claves de aplicación][2], junto con la clave de API de tu organización, o
 
 ### Contextos
 
-Para proteger mejor tus aplicaciones, puedes indicar [contextos de autorización][3] para tus claves de aplicación. De este modo, podrás definir permisos más específicos y minimizar el acceso que las aplicaciones tienen a tus datos de Datadog. Esto te da un control pormenorizado sobre tus aplicaciones y minimiza las vulnerabilidades de seguridad al limitar el acceso externo. Por ejemplo, una aplicación que solo lee dashboards no necesita derechos de administrador para gestionar usuarios ni eliminar los datos de tu organización.
+Para proteger mejor tus aplicaciones, puedes indicar contextos de autorización para tus claves de aplicación. De este modo, podrás definir permisos más específicos y minimizar el acceso que las aplicaciones tienen a tus datos de Datadog. Esto te da un control pormenorizado sobre tus aplicaciones y minimiza las vulnerabilidades de seguridad al limitar el acceso externo. Por ejemplo, una aplicación que solo lee dashboards no necesita derechos de administrador para gestionar usuarios ni eliminar los datos de tu organización.
 
 La forma recomendada de determinar el contexto de las claves de aplicación es otorgar los mínimos privilegios y permisos necesarios para que una aplicación funcione según lo previsto. A las claves de aplicación con contexto solo se les conceden los contextos indicados por el usuario y ningún otro permiso. Aunque puedes modificar los contextos de autorización de tus claves de aplicación en cualquier momento, deberás valorar cómo esos cambios podrían afectar a la funcionalidad o al acceso de tu aplicación.
 
@@ -74,11 +74,11 @@ Para añadir una clave de aplicación de Datadog, ve a  [**Organization Settings
 
 ## Eliminar claves de aplicación
 
-Para eliminar una clave de aplicación de Datadog, accede a [**Organization Settings** (Parámetros de organización) > **Application Keys** (Claves de aplicación)]. Si tienes [permiso][4] para crear y gestionar claves de aplicación, podrás ver tus claves y hacer clic en **Revoke** (Revocar) junto a la que quieras revocar. Si tienes permiso para gestionar todas las claves de aplicaciones de tu organización, podrás buscar la que quieres revocar y hacer clic en **Revoke** junto a ella.
+Para eliminar una clave de aplicación de Datadog, accede a [**Organization Settings** (Parámetros de organización) > **Application Keys** (Claves de aplicación)][2]. Si tienes [permiso][4] para crear y gestionar claves de aplicación, podrás ver tus claves y hacer clic en **Revoke** (Revocar) junto a la que quieras revocar. Si tienes permiso para gestionar todas las claves de aplicaciones de tu organización, podrás buscar la que quieres revocar y hacer clic en **Revoke** junto a ella.
 
 ## Definir el contexto de las claves de aplicación
 
-Para especificar [contextos de autorización][3] para claves de aplicación, [haz una solicitud a la API de Datadog][5] o a la interfaz de usuario para crear o editar una clave de aplicación. Los contextos pueden especificarse para claves de aplicación propiedad del [usuario actual][14] o de una [cuenta de servicio][15]. Si no se especifica este campo, las claves de aplicación tendrán por defecto los mismos contextos y permisos que el usuario que las creó.
+Para especificar contextos de autorización para claves de aplicación, [haz una solicitud a la API de Datadog][5] o a la interfaz de usuario para crear o editar una clave de aplicación. Los contextos pueden especificarse para claves de aplicación propiedad del [usuario actual][14] o de una [cuenta de servicio][15]. Si no se especifica este campo, las claves de aplicación tendrán por defecto los mismos contextos y permisos que el usuario que las creó.
 
 **Notas:**
 
@@ -127,7 +127,6 @@ Si se detecta alguna actividad inusual o si necesitas más información sobre c�
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
-[3]: /es/api/latest/scopes/
 [4]: /es/account_management/rbac/permissions
 [5]: /es/api/latest/key-management/
 [6]: /es/logs/log_collection/javascript/

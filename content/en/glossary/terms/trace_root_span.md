@@ -2,6 +2,7 @@
 title: trace root span
 core_product:
   - apm
+short_definition: 'A span is a trace root span when it is the first span of a trace. The root span is the entry-point method of the traced request. Its start marks the beginning of the trace.'
 ---
 A [span][1] is a trace root span when it is the first span of a trace. The root span is the entry-point method of the traced request. Its start marks the beginning of the trace.
 

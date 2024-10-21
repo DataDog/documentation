@@ -32,11 +32,11 @@ Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
 _Requires: Java 11_
 
-Heap Live Objects (beta, 1.17.0+)
+Heap Live Objects (in Preview, 1.17.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Java 11_ <br />
 
-Heap Live Size (beta, 1.39.0+)
+Heap Live Size (in Preview, 1.39.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
 
@@ -199,15 +199,15 @@ CPU (v2.15+)
 Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (beta, v2.18+)
+Allocations (in Preview, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
-_Requires: .NET 6+_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: beta .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
+_Requires: Preview .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
-Live Heap (beta, v2.22+)
+Live Heap (in Preview, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
 

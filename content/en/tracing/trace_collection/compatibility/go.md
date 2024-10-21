@@ -17,7 +17,7 @@ further_reading:
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
 
-The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
+The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in maintenance. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
 
 ### Requirements
 
@@ -68,7 +68,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [LevelDB][49]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
 | [miekg/dns][51]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
 | [Kafka (confluent)][53] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][54]   |
-| [Kafka (sarama)][55]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][56]                    |
+| [Kafka (sarama)][55]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1][56]                     |
 | [Google API][57]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][58]             |
 | [go-restful][59]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][60]               |
 | [Twirp][61]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][62]                    |
@@ -91,8 +91,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-go
-[2]: https://github.com/DataDog/dd-trace-go#support-policy
-[3]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#go-support-policy
 [4]: https://www.datadoghq.com/support/
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [6]: https://gin-gonic.com
@@ -144,8 +143,8 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [52]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns
 [53]: https://github.com/confluentinc/confluent-kafka-go
 [54]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go
-[55]: https://github.com/Shopify/sarama
-[56]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama
+[55]: https://github.com/IBM/sarama
+[56]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1
 [57]: https://github.com/googleapis/google-api-go-client
 [58]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api
 [59]: https://github.com/emicklei/go-restful
