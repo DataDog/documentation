@@ -133,7 +133,7 @@ Initialize the SDK on the native side. See the official [Android][1] documentati
 
 Initialize the SDK on the native side. See the official [iOS][1] documentation for instructions.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=cocoapods
 
 {{% /tab %}}
 {{< /tabs >}}

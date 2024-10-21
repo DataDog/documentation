@@ -88,9 +88,9 @@ The Datadog RUM SDK depends on the following third-party library:
 [1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=fxu2qp7b
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods#declare-the-sdk-as-a-dependency
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=carthage#declare-the-sdk-as-a-dependency
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#alamofire
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#apollo-graphql
 [9]: https://github.com/microsoft/plcrashreporter
