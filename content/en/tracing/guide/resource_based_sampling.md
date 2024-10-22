@@ -12,9 +12,6 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
-Remotely configured sampling rules are in Beta. To request access, complete the form.
-{{< /callout >}}
 
 ## Overview
 
@@ -45,7 +42,7 @@ C++       | [v0.2.2][14]
 
 To see configured sampling rates by resource, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
 
-{{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
+{{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
@@ -57,7 +54,7 @@ To see configured sampling rates by resource, navigate to the Ingestion controls
 
 To configure sampling rates for the service by resource name: 
 1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
-   {{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
+   {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
 1. Click **Add new rule** to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
 1. Click **Apply** to save the configuration.
 
