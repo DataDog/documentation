@@ -56,7 +56,7 @@ The following profiling features are available in the following minimum versions
 
 | Feature                              | Required `dd-trace-php` version |
 |--------------------------------------|---------------------------------|
-| [Trace to Profiling integration][12] | 0.71+                           |
+| [Trace to Profiling integration][12] | 0.89.0+                           |
 | [Endpoint Profiling][13]             | 0.79.0+                         |
 | [Timeline][15]                       | 0.98.0+                         |
 

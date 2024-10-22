@@ -41,7 +41,7 @@ The following profiling features are available in the following minimum versions
 
 | Feature                              | Required `dd-trace-py` version |
 |--------------------------------------|--------------------------------|
-| [Trace to Profiling integration][12] | 0.44.0+                        |
+| [Trace to Profiling integration][12] | 2.12.0+, 2.11.4+, or 2.10.7+ |
 | [Endpoint Profiling][13]             | 0.54.0+                        |
 | [Timeline][15]                       | 2.12.0+, 2.11.4+, or 2.10.7+   |
 

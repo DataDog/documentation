@@ -57,8 +57,12 @@ Minimum JDK versions:
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
 Additional requirements for profiling [Trace to Profiling integration][12]:
- - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
- - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
+ - OpenJDK 17.0.5+ and `dd-trace-java` version 1.17.0+
+ - OpenJDK 11.0.17+ and `dd-trace-java` version 1.17.0+
+ - OpenJDK 8 8u352+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 17.0.6+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 11.0.18+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 8.0.362+ and `dd-trace-java` version 1.17.0+
 
 [3]: /profiler/profiler_troubleshooting/java/#java-8-support
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
