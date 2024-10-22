@@ -24,7 +24,7 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 ## Prerequisites
 
 - Agent version `7.55` or higher is required.
-- [NPM][1] must be enabled.
+- [CNM][1] must be enabled.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 

@@ -45,7 +45,7 @@ The following table shows feature compatibility across different setups:
 | Cloud SIEM                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
 | Correlated Traces, Metrics, Logs              | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
 | Live Container Monitoring/Kubernetes Explorer |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Network Performance Monitoring (NPM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
+| Cloud Network Monitoring (CNM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
 | Real User Monitoring (RUM)                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
 | Runtime Metrics                               | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}                           | {{< X >}}<br>(Java, .NET, Go only)                   | {{< X >}}                          |
 | Source code integration                       | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
@@ -60,11 +60,11 @@ Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1]
 
 To enable full RUM functionality, you need to [inject supported headers][2] to correlate RUM and traces.
 
-### Network Performance Monitoring (NPM)
+### Cloud Network Monitoring (CNM)
 
 Span-level or endpoint-level monitoring is **not** supported.
 
-For more information, see [Network Performance Monitoring Setup][3].
+For more information, see [Cloud Network Monitoring Setup][3].
 
 ### Live Processes
 
@@ -87,7 +87,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 
 [1]: /opentelemetry/integrations/runtime_metrics/
 [2]: /real_user_monitoring/platform/connect_rum_and_traces/
-[3]: /network_monitoring/performance/setup/
+[3]: /network_monitoring/cloud_network_monitoring/setup/
 [4]: /infrastructure/process/
 [5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging
 [6]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/

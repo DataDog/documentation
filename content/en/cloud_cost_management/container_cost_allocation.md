@@ -45,7 +45,7 @@ The following table presents the list of collected features and the minimal Agen
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
-1. To enable Data transfer cost allocation, set up [Network Performance Monitoring][107]. **Note**: additional charges apply
+1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -53,7 +53,7 @@ The following table presents the list of collected features and the minimal Agen
 [104]: /containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [106]: /integrations/dcgm/?tab=kubernetes#installation
-[107]: /network_monitoring/performance/setup
+[107]: /network_monitoring/cloud_network_monitoring/setup
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -141,7 +141,7 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 For Kubernetes data transfer allocation, a Kubernetes node is joined with its associated data transfer costs from the [CUR][103]. The node's cluster name and all node tags are added to the entire data transfer cost for the node. This allows you to associate cluster-level dimensions with the cost of the data transfer, without considering the pods scheduled to the node.
 
-[Network Performance Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Network Performance Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
+[Cloud Network Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Cloud Network Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
 
 Datadog supports data transfer cost allocation only through the [standard 6 workload resources][104]. If you use custom workload resources their data transfer costs may only be allocated down to the cluster level and not the node/namespace level.
 
@@ -149,7 +149,7 @@ Datadog supports data transfer cost allocation only through the [standard 6 work
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [104]: https://kubernetes.io/docs/concepts/workloads/
-[105]: /network_monitoring/performance/setup
+[105]: /network_monitoring/cloud_network_monitoring/setup
 
 {{% /tab %}}
 {{% tab "Azure" %}}

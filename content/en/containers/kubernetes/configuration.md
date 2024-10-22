@@ -13,7 +13,7 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 ### Enable Datadog to collect:
 - [Traces (APM)](#enable-apm-and-tracing)
 - [Kubernetes events](#enable-kubernetes-event-collection)
-- [NPM](#enable-npm-collection)
+- [CNM](#enable-cnm-collection)
 - [Logs](#enable-log-collection)
 - [Processes](#enable-process-collection)
 
@@ -134,7 +134,7 @@ agents:
 
 For DaemonSet configuration, see [DaemonSet Cluster Agent event collection][14].
 
-## Enable NPM collection
+## Enable CNM collection
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
