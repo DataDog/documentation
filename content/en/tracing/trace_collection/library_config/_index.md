@@ -48,7 +48,7 @@ Datadog SDKs support the following general SDK configurations
 : **Default**: Varies by SDK, environment, and runtime <br>
 **Supported Values**: A valid directory path that exists on the system <br>
 **Not Supported In**: Node.js SDK<br>
-**Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK should log a warning and behave as if the environment variable was not set.
+**Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK logs a warning and behaves as if the environment variable was not set.
 
 ### Agent
 
