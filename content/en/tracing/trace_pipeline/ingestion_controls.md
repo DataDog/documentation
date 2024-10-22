@@ -33,7 +33,7 @@ The Ingestion Control page provides visibility into the ingestion configuration 
 
 ## Understanding your ingestion configuration
 
-Use the three numbers in the ingestion control page header to get an overview of the total ingested data over the past hour, and an estimation of your monthly usage against your monthly allocation, calculated with the active APM infrastructure (hosts, Fargate tasks, and serverless functions).
+Use the data in the ingestion control header to monitor your trace ingestion. The header displays the total amount of data ingested over the past hour, your estimated monthly usage, and the percentage of your allocated monthly ingestion limit, calculated based on your active APM infrastructure (such as hosts, Fargate tasks, and serverless functions).
 
 If the monthly usage is under `100%`, the projected ingested data fits within your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
 
@@ -60,7 +60,7 @@ Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Ingestion Configuration
-: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured with [trace sampling rules][8], the service is marked as `Configured`; a `Local` label is set when the sampling rule is applied via configuration in the tracing library, a `Remote` label is set when the sampling rule is applied remotely, from the UI. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured with [trace sampling rules][8], the service is marked as `Configured`; a `Local` label is set when the sampling rule is applied from configuration in the tracing library, a `Remote` label is set when the sampling rule is applied remotely, from the UI. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
 
 Infrastructure
 : Hosts, containers, and functions on which the service is running.
@@ -84,7 +84,7 @@ The breakdown is composed of the following parts:
 - **Complete traces not retained** (gray): The percentage of traces that have not been ingested by Datadog. Some traces might be dropped because: 
 
     1. By default, the [Agent automatically sets a sampling rate][4] on services, depending on service traffic.
-    2. The service is configured to ingest a certain percentage of traces via [sampling rules][8].
+    2. The service is configured to ingest a certain percentage of traces using [sampling rules][8].
 
 - **Complete traces dropped by the tracer rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to change this rate.
 
@@ -92,7 +92,7 @@ The breakdown is composed of the following parts:
 
 ## Configuring ingestion for a service
 
-Click on any service to view the Service Ingestion Summary, a detailed view providing actionable insights on the ingestion configuration of the service.
+Click on any service to view the Service Ingestion Summary, which provides actionable insights and configuration options for managing that service's trace ingestion.
 
 ### Ingestion configuration for a service
 

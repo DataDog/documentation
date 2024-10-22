@@ -12,7 +12,6 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-<div class="alert alert-info">Remotely configured sampling rules are now GA.</div>
 
 ## Overview
 
