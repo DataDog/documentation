@@ -40,7 +40,10 @@ This guide provides an overview of how to get started with the Datadog Google Cl
 2) Set up a [Service Account][2] in your desired Google Cloud project
 3) Review these Google Cloud Prerequisites:
 
+{{% site-region region="us,us3,us5,eu,ap1" %}}
 - If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
+{{% /site-region %}}
+
 - Ensure that any projects being monitored are **not** configured as [scoping projects][42] that pull in metrics from multiple other projects.
 
 - The Google Cloud integration requires the below APIs to be enabled **for each of the projects** you want to monitor:
@@ -284,7 +287,7 @@ To view security findings from [Google Cloud Security Command Center][37] in Clo
 
 ### Cloud Security Management
 
-Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.z
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
 Check out the [Setting up Cloud Security Management guide][39] to get started.
 
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][41] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][40] on Google Cloud.
