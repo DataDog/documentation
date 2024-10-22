@@ -257,13 +257,13 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 Error outliers in Synthetic Monitoring display unexpected behaviors and performance deviations. These anomalies provide insights into the reliability issues in your [Synthetic browser tests][101]. Identifying these error outliers helps you troubleshoot errors in failed test runs, enhancing debugging and reducing Mean Time To Resolution (MTTR).
 
-In the banner card view, you can see the number of error outliers for a failed test run:
+When reviewing failed test runs, you can see the number of error outliers on the failed test:
 
-{{< img src="watchdog/failed_test_run.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
+{{< img src="watchdog/synthetics_watchdog_outlier.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
-Open a failed test run and click **View Error Outlier** to access the error outlier message on the **Errors & Warnings** tab in the test step side panel.
+Click on the outlier from the above step to access the error outlier message on the **Errors & Warnings** tab in the test step side panel.
 
-{{< img src="watchdog/failed_test_step.png" alt="An error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
+{{< img src="watchdog/outlier_step_error_2.png" alt="An error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
 [101]: /synthetics/browser_tests
 
