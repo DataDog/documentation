@@ -97,7 +97,7 @@ Datadog SDKs support the following general SDK configurations
 `DD_TRACE_CLIENT_IP_HEADER`
 : **Default**: `null` <br>
 **Supported Values**: Any non-empty string <br>
-**Description**: Sets a custom header name to source the `http.client_ip` tag from. If this variable is set, all other IP-related headers are ignored. If an empty string or null value is passed, IP headers are queried in this order:
+**Description**: Configures a custom header name from which to source the `http.client_ip` tag value. If this variable is set, all other IP-related headers are ignored. If an empty string or null value is passed, IP headers are queried in this order:
   - `x-forwarded-for`
   - `x-real-ip`
   - `true-client-ip`
