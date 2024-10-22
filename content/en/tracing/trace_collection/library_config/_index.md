@@ -62,7 +62,7 @@ Datadog SDKs support the following general SDK configurations
 `DD_VERSION`
 : **Default**: `null` <br>
 **Supported Values**: A string representing an application version <br>
-**Description**: Adds a version tag to all spans that have the same service name as the default service name (aka `DD_SERVICE`). Spans with a different service name do not get this tag.
+**Description**: Adds a version tag to all spans that have the same service name as the global service name (aka `DD_SERVICE`). Spans with a different service name do not get this tag.
 
 `DD_SERVICE`
 : **Default**: `null` <br>
