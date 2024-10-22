@@ -31,7 +31,7 @@ Datadog provides monitoring capabilities for all Azure App Service resource type
 - Submit custom metrics through the API.
 - Submit [resource logs][5] through [Event Hub][6].
 
-Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
+Datadog provides [additional monitoring capabilities][14] for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
 
 | OS | Runtime |App Type|Status|Documentation| 
 |----|---------|-----|----|--------------|
@@ -70,3 +70,4 @@ Capabilities:
 [11]: /developers/dogstatsd/
 [12]: /serverless/azure_app_services/azure_app_services_container
 [13]: /serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup
+[14]: /serverless/azure_support/
