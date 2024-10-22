@@ -22,11 +22,11 @@ private: true
   This feature is currently in Preview.
 {{< /callout >}} 
 
-As your business scales, managing observability costs could become unruly quickly. Effective custom metrics governance should increase monitoring efficiency rather than cut visibility entirely. And it should not be a time-consuming, cumbersome process to protect your organization from unintentional billing overages. As mentioned in Datadog's [Best Practices Guide for Custom Metrics Governance](https://docs.datadoghq.com/metrics/guide/custom_metrics_governance/#monitoring-and-prevention), you can easily monitor spikes in your custom metrics volumes. 
+As your business scales, managing observability costs could become unruly quickly. Effective custom metrics governance should increase monitoring efficiency rather than cut visibility entirely. And it should not be a time-consuming, cumbersome process to protect your organization from unintentional billing overages. As mentioned in Datadog's [Best Practices Guide for Custom Metrics Governance][12], you can easily monitor spikes in your custom metrics volumes. 
 
 With **Datadog's Dynamic Metrics Quotas**, you now additionally have automatic spike remediation -- reducing unintentional metrics usage and custom metrics costs.
 
-Dynamic Metric Quotas, powered by [Datadog Workflows](https://www.datadoghq.com/product/workflow-automation/), allow you to define a custom metrics quota at an account level (or team/metric name level) via a metric monitor on your estimated custom metric usage metrics.
+Dynamic Metric Quotas, powered by [Datadog Workflows][13], allow you to define a custom metrics quota at an account level (or team/metric name level) via a metric monitor on your estimated custom metric usage metrics.
 
 If your monitor alerts, Datadog identifies the culprit, spiking metrics and asks permission via Slack to automatically apply [Metrics without Limits™][1] configurations to these metrics; reducing the usage and costs of these metrics on your behalf. 
 
@@ -75,3 +75,5 @@ The workflow blueprint contains several Slack integration tiles that need to be 
 [9]: https://app.datadoghq.com/monitors/create/metric
 [10]: /account_management/billing/usage_metrics/
 [11]: /metrics/guide/custom_metrics_governance/#monitoring-and-prevention
+[12]: https://docs.datadoghq.com/metrics/guide/custom_metrics_governance/#monitoring-and-prevention
+[13]: https://www.datadoghq.com/product/workflow-automation/
