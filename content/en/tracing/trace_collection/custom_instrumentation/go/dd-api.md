@@ -109,6 +109,9 @@ err := someOperation()
 span.Finish(tracer.WithError(err))
 ```
 
+Note: Closing a span that was not started in your code will lead to undefined behaviour.
+Please refer to your specific dd-trace-go [integration][10] documentation to do that.
+
 ## Adding spans
 
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
@@ -223,4 +226,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
+[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [11]: /tracing/trace_collection/trace_context_propagation/
