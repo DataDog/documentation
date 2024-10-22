@@ -12,8 +12,15 @@
 
     {{ partial "integration-labels/integration-labels.html" . }}
     
-    {{ if and (in .Params.custom_kind "integration") ($media | len) }}
-        {{ partial "integrations-carousel/integrations-carousel.html" (dict "context" . "media" $media) }}
+    {{ $integrationTitle := .Params.integration_title | default .Title }}
+    {{ with $media }}
+      {{ if and (in .Params.custom_kind "integration") (gt (len $media) 0) }}
+        <!-- Your code here -->
+      {{ else }}
+        {{ warnf "%s is missing the $media value" $integrationTitle }}
+      {{ end }}
+    {{ else }}
+      {{ warnf "%s is missing the $media value" $integrationTitle }}
     {{ end }}
 
     {{ .Content }}
