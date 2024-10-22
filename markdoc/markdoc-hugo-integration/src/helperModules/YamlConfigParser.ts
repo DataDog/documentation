@@ -34,8 +34,18 @@ import {
   SitewidePrefIdsConfig
 } from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { PagePrefsManifest } from '../schemas/resolvedPagePrefs';
 
 export class YamlConfigParser {
+  static buildPagePrefsManifest(p: {
+    frontmatter: Frontmatter;
+    prefOptionsConfig: PrefOptionsConfig;
+  }): PagePrefsManifest {
+    const result: PagePrefsManifest = {
+      referencedPrefIds: []
+    };
+  }
+
   static loadPrefsConfigFromLangDir(p: {
     dir: string;
     allowlistsByType: AllowlistsByType;
