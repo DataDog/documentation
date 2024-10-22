@@ -11,8 +11,6 @@ Please find below a set of consistent configurations across all SDKs. For additi
 
 To instrument an application written in a language that does not yet have official library support, see the list of [community tracing libraries][1].
 
-<div class="alert alert-info">If both Datadog and OpenTelemetry environment variables are set, Datadog takes precedence. Datadog defaults also override OpenTelemetry defaults. See the relevant <a href="/tracing/trace_collection/library_config/">SDK Configuration page</a> for default values and more information.</div>
-
 ## General SDK configuration
 Datadog SDKs support the following general SDK configurations
 
