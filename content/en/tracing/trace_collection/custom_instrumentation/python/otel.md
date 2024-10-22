@@ -1,5 +1,5 @@
 ---
-title: Python Custom Instrumentation using OpenTelemetry API
+title: Python Custom Instrumentation using the OpenTelemetry API
 description: 'Instrument your Python application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
