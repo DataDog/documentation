@@ -54,7 +54,7 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
 
 #### Configure Slack notifications
 
-The workflow blueprint contains several Slack integration tiles that need to be updated. Input the Slack channel or specific user(s) responsible for granting permission to Datadog to configure these metrics to reduce costs on your behalf.
+The workflow blueprint contains several Slack integration tiles that need to be updated. Input the Slack channel or specific user(s) responsible for granting permission to Datadog to apply these cost-optimizing metric configurations on your behalf.
 
 ## Further reading
 
