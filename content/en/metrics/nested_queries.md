@@ -30,7 +30,6 @@ In Datadog, each metric query in Datadog is evaluated with two layers of aggrega
 
 {{< img src="/metrics/nested_queries/nested-queries-before-after.png" alt="example of applying nested queries before and after" style="width:100%;" >}}
 
-Other functions cannot be combined with multilayer aggregation.
 
 
 ### Multilayer time aggregation
