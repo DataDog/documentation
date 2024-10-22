@@ -34,7 +34,7 @@ categories:
 - ログの収集
 - ネットワーク
 - orchestration
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.6.1
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: nginx_ingress_controller

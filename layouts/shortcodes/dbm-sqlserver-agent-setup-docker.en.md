@@ -14,8 +14,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<HOSTNAME>",
-    "port": <SQL_PORT>,
+    "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
     "driver": "FreeTDS",
     "username": "datadog",
