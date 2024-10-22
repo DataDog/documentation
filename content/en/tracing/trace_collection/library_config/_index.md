@@ -24,7 +24,7 @@ Datadog SDKs support the following general SDK configurations
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
-**Supported Values**: A positive integer representing the number of traces per second to sample <br>
+**Supported Values**: A positive integer
 **Description**: Sets the maximum number of traces to sample per second; applies only when either `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set.
 
 `DD_TRACE_HEADER_TAGS`
