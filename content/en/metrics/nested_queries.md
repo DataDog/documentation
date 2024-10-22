@@ -22,9 +22,6 @@ Nested queries unlocks several powerful capabilities:
 - [Multilayer aggregation][6]
 - [Percentiles and standard deviation on count/rate/gauge type metrics][7]
 - [Higher resolution queries over historical timeframes][8]
-- [Moving Rollup with Lookback][8]
-- [Threshold Remapping Functions][8]
-
 
 ## Multilayer aggregation
 
