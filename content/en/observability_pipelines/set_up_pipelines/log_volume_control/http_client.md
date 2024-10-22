@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Set up the Observability Pipelines Worker with the HTTP Client source so that you route only useful logs to your destinations.
+Use the Observability Pipelines Worker to only route useful HTTP server logs to their destinations.
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
@@ -27,7 +27,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 
@@ -72,6 +72,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -140,6 +145,16 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
@@ -186,6 +201,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}

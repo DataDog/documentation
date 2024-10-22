@@ -273,7 +273,7 @@ export SOURCEMAP_FILE=./build/main.jsbundle.map # <- add this line to output sou
 
 Moving forward, you can find the source maps for your bundle on every iOS build.
 
-To find the path to your bundle file from XCode, display the Report Navigator on Xcode and filter by `BUNDLE_FILE` for its location.
+To find the path to your bundle file from Xcode, display the Report Navigator on Xcode and filter by `BUNDLE_FILE` for its location.
 
 The usual location is `~/Library/Developer/Xcode/DerivedData/YourAppName-verylonghash/Build/Intermediates.noindex/ArchiveIntermediates/YourAppName/BuildProductsPath/Release-iphoneos/main.jsbundle`, where `YourAppName` is the name of your app, and `verylonghash` is a 28 letter hash.
 
@@ -282,8 +282,8 @@ To upload the source maps, run this from your React Native project:
 ```bash
 export DATADOG_API_KEY= # fill with your API key
 export SERVICE=com.myapp # replace by your service name
-export VERSION=1.0.0 # replace by the version of your app in XCode
-export BUILD=100 # replace by the build of your app in XCode
+export VERSION=1.0.0 # replace by the version of your app in Xcode
+export BUILD=100 # replace by the build of your app in Xcode
 export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
@@ -325,8 +325,8 @@ To upload the source map, run this from your React Native project root:
 ```bash
 export DATADOG_API_KEY= # fill with your API key
 export SERVICE=com.myapp # replace by your service name
-export VERSION=1.0.0 # replace by the version of your app in XCode
-export BUILD=100 # replace by the build of your app in XCode
+export VERSION=1.0.0 # replace by the version of your app in Xcode
+export BUILD=100 # replace by the build of your app in Xcode
 export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD

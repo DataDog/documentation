@@ -33,7 +33,7 @@ Sources have different prerequisites and settings. Some sources also need to be 
     {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd and Fluent Bit{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/http_client/" >}}HTTP/S Client{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy and Universal Forwarders (TCP){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy or Universal Forwarders (TCP){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog or syslog-ng{{< /nextlink >}}
 {{< /whatsnext >}}

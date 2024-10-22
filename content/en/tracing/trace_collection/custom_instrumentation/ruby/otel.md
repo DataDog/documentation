@@ -71,7 +71,7 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 
 ## Adding span events
 
-_Minimum SDK version: 2.3.0._
+<div class="alert alert-info">Adding span events requires SDK version 2.3.0 or higher.</div>
 
 You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
@@ -82,7 +82,7 @@ You can add span events using the `add_event` API. This method requires a `name`
     - A primitive type: string, Boolean, or number.
     - A homogeneous array of primitive type values (for example, an array of strings).
   - Nested arrays and arrays containing elements of different data types are not allowed.
-- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects `seconds(Float)`.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects `seconds(Float)`.
 
 The following examples demonstrate different ways to add events to a span:
 

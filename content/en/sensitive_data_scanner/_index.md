@@ -22,6 +22,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-security/"
       tag: "Blog"
       text: "Discover sensitive data in your cloud data stores with Data Security"
+    - link: "https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/"
+      tag: "Blog"
+      text: "How companies subject to HIPAA requirements manage sensitive data with Datadog"
 ---
 
 ## Overview
@@ -54,7 +57,7 @@ There are two locations where you can redact your sensitive data:
 **In your environment:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Sensitive Data Scanner using the Agent is in private beta. To request access, fill out this form.
+  Sensitive Data Scanner support for the Datadog Agent is in beta. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 - With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
@@ -147,10 +150,8 @@ To add scanning rules, perform the following steps:
 
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
+1. Select a scanning group if you did not create this rule within a scanning group.
 1. In the **Add library rules to the scanning group** section, select the library rules you want to use.
-1. In the **Define rule target and action** section, select if you want to scan the **Entire Event** or **Specific Attributes**.
-    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned.
-    - If you are scanning specific attributes, specify which attributes you want to scan.
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
 
@@ -158,7 +159,8 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 {{< collapse-content title="Add a custom scanning rule" level="p" >}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define regex** field. Enter sample data in the **Regex tester** field to verify that your regex pattern is valid.   
+1. Select a scanning group if you did not create this rule within a scanning group.
+1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.   
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -170,6 +172,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
+1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
 {{< /collapse-content >}} 
@@ -320,7 +323,9 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 
 ## Data Security
 
-<div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
+{{< callout url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Data Security is in beta. To enroll, click <strong>Request Access</strong>.
+{{< /callout >}}
 
 If you have [Sensitive Data Scanner][6] and [Cloud Security Management][7] enabled, you can use Data Security to locate sensitive data and fix security issues impacting Amazon S3 buckets and RDS instances.
 

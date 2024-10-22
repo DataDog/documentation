@@ -1,5 +1,5 @@
 ---
-title: Split Logs for Splunk Heavy and Universal Forwarders (TCP)
+title: Split Logs for Splunk Heavy or Universal Forwarders (TCP)
 disable_toc: false
 aliases:
     - /observability_pipelines/split_logs/splunk_tcp/
@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your Splunk Heavy and Universal Forwarders to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
@@ -81,6 +81,11 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -147,6 +152,16 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Set env vars" %}}
+
+{{% observability_pipelines/processors/set_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
@@ -192,6 +207,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
