@@ -55,7 +55,7 @@ Datadog SDKs support the following general SDK configurations
 `DD_TRACE_AGENT_URL`
 : **Default**: `http://localhost:8126` <br>
 **Supported Values**: A string representing a host name <br>
-**Description**: The URL to use to connect to the Datadog agent for traces. Valid URL schemas include `http://` and `unix://` (Unix Domain Sockets). This value takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.
+**Description**: The URL for connecting the tracer to the Datadog agent. Valid URL schemas include `http://` and `unix://` (Unix Domain Sockets). This value takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.
 
 ### Unified Service Tagging
 
