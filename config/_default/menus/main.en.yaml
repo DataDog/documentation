@@ -1850,8 +1850,8 @@ menu:
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 2
-    - name: Investigate a Service
-      url: service_catalog/investigating
+    - name: Manage a Service
+      url: service_catalog/manage
       parent: service_catalog
       identifier: service_catalog_investigate
       weight: 3
