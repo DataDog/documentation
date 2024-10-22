@@ -28,7 +28,7 @@ categories:
 - data stores
 - ログの収集
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: ignite
 integration_id: ignite
 integration_title: ignite
-integration_version: 2.4.0
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ignite

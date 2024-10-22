@@ -32,7 +32,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: presto
 integration_id: presto
 integration_title: Presto
-integration_version: 2.8.0
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: presto

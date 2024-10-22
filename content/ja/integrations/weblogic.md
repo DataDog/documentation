@@ -22,8 +22,8 @@ assets:
     source_type_id: 10245
     source_type_name: WebLogic
   monitors:
-    active_threads: assets/monitors/active_threads.json
-    stuck_threads: assets/monitors/stuck_threads.json
+    Number of active thread is high: assets/monitors/active_threads.json
+    Number of stuck thread is high: assets/monitors/stuck_threads.json
   saved_views:
     weblogic_error_logs: assets/saved_views/error_logs.json
     weblogic_overview: assets/saved_views/weblogic_overview.json
@@ -36,7 +36,7 @@ author:
 categories:
 - ログの収集
 - oracle
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weblogic/README.md
 display_on_public_website: true
@@ -44,7 +44,7 @@ draft: false
 git_integration_title: weblogic
 integration_id: weblogic
 integration_title: WebLogic
-integration_version: 1.3.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: weblogic
@@ -198,7 +198,7 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
           name: new_log_start_with_date
           pattern: (\####)?<\w{3} (0?[1-9]|[12][0-9]|3[01]), \d{4}
     - type: file
-      path: <DOMAIN_DIR>/servers/*/logs/access.log
+      path: <DOMAIN_DIR>/servers/*/logs/access.log 
       source: weblogic
       service: http-access
       log_processing_rules:
