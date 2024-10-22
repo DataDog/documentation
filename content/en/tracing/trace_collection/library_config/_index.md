@@ -30,7 +30,7 @@ Datadog SDKs support the following general SDK configurations
 `DD_TRACE_HEADER_TAGS`
 : **Default**: `null` <br>
 **Supported Values**: A comma-separated string representing a list of case-insensitive HTTP headers, with an optional mapping to a custom tag name. Example: `User-Agent:my-user-agent,Content-Type`. <br>
-**Description**: Automatically apply specified HTTP headers as tags on traces. If a custom tag name is not specified, the tag defaults to `http.request.headers.<normalized-header-name>` for request headers and `http.response.headers.<normalized-header-name>` for response headers.
+**Description**: Automatically apply specified HTTP headers as span tags. If a custom tag name is not specified, the tag key defaults to `http.request.headers.<normalized-header-name>` for request headers and `http.response.headers.<normalized-header-name>` for response headers.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
