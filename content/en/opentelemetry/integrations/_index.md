@@ -27,6 +27,12 @@ Monitor and optimize your application's performance with these APM integrations:
 | [Trace Metrics][2] | Full support |
 | [Runtime Metrics][3] | Full support |
 
+### Collector
+
+Monitor the health and performance of your OpenTelemetry Collector:
+
+| [Collector Health Metrics][8] | Full support |
+
 ### Containers and hosts
 
 Gain insights into your containerized environments and host systems with these integrations:
@@ -36,6 +42,13 @@ Gain insights into your containerized environments and host systems with these i
 | [Docker Metrics][4] | Full support |
 | [Host Metrics][5] | Full support |
 
+### Logs
+
+Collect and manage logs from configured file paths:
+
+| Integration | Support |
+| [Log Collection][7] | Full support |
+
 ### Vendor technologies
 
 Extend your observability to popular vendor technologies with these integrations:
@@ -43,8 +56,6 @@ Extend your observability to popular vendor technologies with these integrations
 | Integration | Support |
 |-------------|---------|
 | [Kafka Metrics][6] | Full support |
-| [Log Collection][7] | Full support |
-| [Collector Health Metrics][8] | Full support |
 
 ## Further reading
 
