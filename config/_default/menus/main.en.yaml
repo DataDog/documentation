@@ -6662,16 +6662,151 @@ menu:
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_react_native
       weight: 205
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_advanced_config
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_data_collected
+      weight: 104
+    - name: Mobile Vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_mobile_vitals
+      weight: 105
+    - name: Web View Tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_web_view_tracking
+      weight: 106
+    - name: Integrated Libraries
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_integrated_libraries
+      weight: 107
+    - name: Troubleshooting
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_troubleshooting
+      weight: 108
+    - name: Kotlin Multiplatform
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_kotlin
+      weight: 204
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/error_tracking
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_advanced_config
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_data_collected
+      weight: 104
+    - name: Mobile Vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_mobile_vitals
+      weight: 105
+    - name: Web View Tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_web_view_tracking
+      weight: 106
+    - name: Integrated Libraries
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/integrated_libraries
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_integrated_libraries
+      weight: 107
+    - name: Troubleshooting
+      url: real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/troubleshooting
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_troubleshooting
+      weight: 108
     - name: Roku
       url: real_user_monitoring/mobile_and_tv_monitoring/roku
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_roku
       weight: 206
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku/setup
+      parent: rum_mobile_roku
+      identifier: rum_mobile_roku_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku/error_tracking
+      parent: rum_mobile_roku
+      identifier: rum_mobile_roku_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration
+      parent: rum_mobile_roku
+      identifier: rum_mobile_roku_advanced_configuration
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+      parent: rum_mobile_roku
+      identifier: rum_mobile_roku_data_collected
+      weight: 104
+    - name: Mobile Vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku/mobile_vitals
+      parent: rum_mobile_roku
+      identifier: rum_mobile_roku_mobile_vitals
+      weight: 105
+    - name: Web View Tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/roku/web_view_tracking
+      parent: rum_mobile_roku
+      identifier: rum_mobile_roku_web_view_tracking
+      weight: 106
     - name: Unity
       url: real_user_monitoring/mobile_and_tv_monitoring/unity
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_unity
       weight: 207
+    - name: Setup
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity/setup
+      parent: rum_mobile_unity
+      identifier: rum_mobile_unity_setup
+      weight: 101
+    - name: Mobile Vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals
+      parent: unity
+      identifier: rum_mobile_unity_mobile_vitals
+      weight: 102
+    - name: Web View Tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
+      parent: rum_mobile_unity
+      identifier: rum_mobile_unity_web_view_tracking
+      weight: 103
+    - name: Troubleshooting
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
+      parent: rum_mobile_unity
+      identifier: rum_mobile_unity_troubleshooting
+      weight: 104
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
