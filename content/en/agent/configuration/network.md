@@ -31,6 +31,15 @@ Traffic is always initiated by the Agent to Datadog. No sessions are ever initia
 
 All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
 
+## Installation
+
+Add the following domains to your inclusion list to allow Agent installation:
+
+- `install.datadoghq.com`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+- `apt.datadoghq.com`
+
 ## Destinations
 
 [APM][1]
