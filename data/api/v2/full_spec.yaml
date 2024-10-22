@@ -10042,7 +10042,6 @@ components:
     HTTPLogItem:
       additionalProperties:
         description: Additional log attributes.
-        type: string
       description: Logs that are sent over HTTP.
       properties:
         ddsource:
@@ -29544,7 +29543,7 @@ paths:
           for cost ending this month.'
         in: query
         name: end_month
-        required: true
+        required: false
         schema:
           format: date-time
           type: string
