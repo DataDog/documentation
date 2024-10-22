@@ -3531,6 +3531,19 @@ menu:
           - GetCostByOrg
         unstable: []
         order: 45
+    - name: Get billing dimension mapping for usage endpoints
+      url: '#get-billing-dimension-mapping-for-usage-endpoints'
+      identifier: usage-metering-get-billing-dimension-mapping-for-usage-endpoints
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBillingDimensionMapping
+        unstable:
+          - v2
+        order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
       identifier: usage-metering-get-hourly-usage-for-application-security

@@ -1729,6 +1729,10 @@
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
   },
+  "GetBillingDimensionMapping": {
+    "description": "Get a mapping of billing dimensions to the corresponding keys for the supported usage metering public API endpoints.\nMapping data is updated on a monthly cadence.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "summary": "Get billing dimension mapping for usage endpoints"
+  },
   "GetCostByOrg": {
     "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get cost across multi-org account"
