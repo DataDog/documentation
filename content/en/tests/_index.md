@@ -18,7 +18,7 @@ further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
       text: "Learn about CI Test Monitors"
-    - link: "/tests/guides/flaky_test_management/"
+    - link: "/tests/flaky_test_management/"
       tag: "Documentation"
       text: "Learn about Flaky Test Management"
     - link: "/tests/browser_tests/"

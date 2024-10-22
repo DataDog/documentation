@@ -1,11 +1,13 @@
 ---
 title: Auto Test Retries
 description: Retry failing test cases to avoid failing the build because of flaky tests.
+aliases:
+  - /tests/auto_test_retries
 further_reading:
   - link: "/tests"
     tag: "Documentation"
     text: "Learn about Test Visibility"
-  - link: "/tests/guides/flaky_test_management"
+  - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
 ---
@@ -45,7 +47,7 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - can be set to any non-negative number to change the maximum number of retries per test case.
 
 [1]: /tests/explorer/
-[2]: /tests/guides/flaky_test_management/
+[2]: /tests/flaky_test_management/
 {{% /tab %}}
 
 {{% tab "Javascript" %}}
@@ -100,5 +102,5 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 
 [1]: /tests/setup/
 [2]: /tests/explorer/
-[3]: /tests/early_flake_detection
+[3]: /tests/flaky_test_management/early_flake_detection
 [4]: https://app.datadoghq.com/ci/settings/test-service

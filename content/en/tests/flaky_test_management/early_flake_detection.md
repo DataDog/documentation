@@ -1,11 +1,13 @@
 ---
 title: Early Flake Detection
 description: Detect flakiness before it impacts your default branch using Early Flake Detection.
+aliases:
+  - /tests/early_flake_detection
 further_reading:
   - link: "/tests"
     tag: "Documentation"
     text: "Learn about Test Visibility"
-  - link: "/tests/guides/flaky_test_management"
+  - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
   - link: "/quality_gates"
@@ -123,7 +125,7 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /glossary/#flaky-test
-[2]: /tests/guides/flaky_test_management
+[2]: /tests/flaky_test_management
 [3]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
 [4]: /quality_gates/
 [5]: /quality_gates/setup

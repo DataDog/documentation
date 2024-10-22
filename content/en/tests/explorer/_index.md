@@ -121,7 +121,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 [2]: /tests/explorer/search_syntax
 [3]: /tests/explorer/facets
 [4]: /tests/explorer/saved_views
-[5]: /tests/guides/flaky_test_management
+[5]: /tests/flaky_test_management
 [6]: https://app.datadoghq.com/ci/test-runs
 [7]: https://app.datadoghq.com/dashboard/lists
 [8]: https://app.datadoghq.com/notebook/list
@@ -131,7 +131,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 [12]: /glossary/?product=ci-cd#test-service
 [13]: /glossary/?product=ci-cd#test-suite 
 [14]: /real_user_monitoring/
-[15]: /tests/early_flake_detection/
+[15]: /tests/flaky_test_management/early_flake_detection/
 [16]: /intelligent_test_runner/
 [17]: /tests/code_coverage/
 [18]: https://app.datadoghq.com/ci/test-runs?viz=timeseries 

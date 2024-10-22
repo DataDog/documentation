@@ -4,6 +4,7 @@ title: Flaky Test Management
 aliases:
 - /continuous_integration/guides/find_flaky_tests/
 - /continuous_integration/guides/flaky_test_management/
+- /tests/flaky_test_management
 further_reading:
 - link: "/continuous_integration/tests/"
   tag: "Documentation"
@@ -111,5 +112,5 @@ Failed test runs that were known to be flaky as per the definition above are dis
 [2]: https://app.datadoghq.com/ci/test-runs
 [3]: https://app.datadoghq.com/ci/test-services?view=branches
 [4]: /tests/#use-ci-tests-data
-[5]: /tests/guides/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
+[5]: /tests/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
 [6]: https://app.datadoghq.com/dash/integration/ci_app_tests

@@ -7,7 +7,7 @@ further_reading:
 - link: '/tests/'
   tag: 'Documentation'
   text: 'Learn about Test Visibility'
-- link: '/tests/guides/flaky_test_management'
+- link: '/tests/flaky_test_management/'
   tag: 'Documentation'
   text: 'Learn about Flaky Test Management'
 - link: '/tests/developer_workflows'
@@ -170,7 +170,7 @@ For more information, see the [CI Monitor documentation][13].
 [5]: https://app.datadoghq.com/dash/integration/30897/ci-visibility---tests-dashboard
 [6]: /glossary/?product=ci-cd#flaky-test
 [7]: https://app.datadoghq.com/ci/test-services
-[8]: /tests/guides/flaky_test_management
+[8]: /tests/flaky_test_management/
 [8]: https://app.datadoghq.com/ci/test-runs
 [9]: /continuous_integration/explorer/facets/?tab=testruns
 [10]: /api/latest/ci-visibility-tests/

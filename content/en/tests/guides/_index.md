@@ -11,6 +11,5 @@ cascade:
 ---
 
 {{< whatsnext desc="Test Visibility Guides:" >}}
-    {{< nextlink href="/tests/guides/flaky_test_management" >}}Flaky Test Management{{< /nextlink >}}
     {{< nextlink href="/tests/guides/add_custom_measures" >}}Add Custom Measures to Your Tests{{< /nextlink >}}
 {{< /whatsnext >}}
