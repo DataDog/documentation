@@ -205,6 +205,6 @@ You can use nested queries functionality in our public API for querying timeseri
 [5]: /metrics/#anatomy-of-a-metric-query
 [6]: /metrics/nested_queries/#multilayer-aggregation
 [7]: /metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
-[8]: /metrics/nested_queries/#higher-resolution-queries
+[8]: /metrics/nested_queries/#higher-resolution-queries-over-historical-timeframes
 [9]: /metrics/distributions/
 [10]: /dashboards/functions/rollup/#moving-rollup
