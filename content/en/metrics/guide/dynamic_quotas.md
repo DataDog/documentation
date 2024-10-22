@@ -41,16 +41,21 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
 
 {{< img src="/metrics/guide/dynamic_quotas/automated_mwl_workflow_monitor.png" alt="The Make a decision tiles on the Datadog automated Metrics without Limits™ workflow blueprint" style="width:100%;" >}}
 
+##### Configure the workflow blueprint
+
 1. Open this [workflow blueprint][8], and click ***Create from Blueprint***.
 2. Click on the green Monitor tile, and enable the ***Automatic triggering*** toggle. 
-3. Copy the workflow's ***Mention handle*** for use in step 5 below.
-3. Create a [metric monitor][9]. In the **Define the metric** step, select `datadog.estimated_usage.metrics.custom.by_metric` as your metric name and choose the `SUM BY` space aggregator. It's recommend to use the `Threshold Alert` monitor type, but you can also use Change or Anomaly Detection.
-4. Under **Set alert conditions**, define your quota threshold.
-5. Under **Configure notifications & automations**, update the monitor notification message and include the Workflow handle from step 2 above.
-6. Select ***Multi Alert*** to send a notification for each metric triggering the monitor.
-7. Click ***Create*** to create the metric monitor.
-8. Click ***Save***.
-9. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
+3. Copy the workflow's ***Mention handle*** for use in the metric monitor steps described below.
+
+##### Configure a metric monitor
+
+1. Create a [metric monitor][9]. In the **Define the metric** step, select `datadog.estimated_usage.metrics.custom.by_metric` as your metric name and choose the `SUM BY` space aggregator. It's recommend to use the `Threshold Alert` monitor type, but you can also use Change or Anomaly Detection.
+2. Under **Set alert conditions**, define your quota threshold.
+3. Under **Configure notifications & automations**, update the monitor notification message and include the Workflow handle from step 2 above.
+4. Select ***Multi Alert*** to send a notification for each metric triggering the monitor.
+5. Click ***Create*** to create the metric monitor.
+6. Click ***Save***.
+7. Click ***Publish*** and ***Run*** to start automatically managing your custom metrics costs. 
 
 #### Configure Slack notifications
 
@@ -71,5 +76,3 @@ The workflow blueprint contains several Slack integration tiles that need to be 
 [9]: https://app.datadoghq.com/monitors/create/metric
 [10]: /account_management/billing/usage_metrics/
 [11]: /metrics/guide/custom_metrics_governance/#monitoring-and-prevention
-[12]: https://docs.datadoghq.com/metrics/guide/custom_metrics_governance/#monitoring-and-prevention
-[13]: https://www.datadoghq.com/product/workflow-automation/
