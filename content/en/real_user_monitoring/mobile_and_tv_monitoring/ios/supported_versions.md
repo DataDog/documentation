@@ -2,9 +2,8 @@
 title: RUM iOS and tvOS Monitoring Supported Versions
 beta: true
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
-code_lang: ios
-type: multi-code-lang
-code_lang_weight: 20
+aliases:
+ -  /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
 further_reading:
  - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
    tag: Documentation
@@ -89,8 +88,8 @@ The Datadog RUM SDK depends on the following third-party library:
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=fxu2qp7b
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods#declare-the-sdk-as-a-dependency
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=carthage#declare-the-sdk-as-a-dependency
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#alamofire
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#apollo-graphql
 [9]: https://github.com/microsoft/plcrashreporter

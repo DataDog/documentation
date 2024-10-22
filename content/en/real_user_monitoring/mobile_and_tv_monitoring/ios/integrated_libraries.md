@@ -1,10 +1,8 @@
 ---
 title: iOS and tvOS Libraries for RUM
-code_lang: ios
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
 - /real_user_monitoring/ios/integrated_libraries/
+- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: "Source Code"
@@ -49,4 +47,4 @@ For additional information on sampling rate, distributed tracing, and adding cus
 [1]: https://github.com/Alamofire/Alamofire
 [2]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 [3]: https://github.com/apollographql/apollo-ios
-[4]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/#automatically-track-network-requests
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#automatically-track-network-requests
