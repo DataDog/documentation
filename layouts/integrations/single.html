@@ -10,12 +10,12 @@
         </div>
     </div>
 
-    {{ partial "integration-labels/integration-labels.html" . }}
+
     
     {{ $integrationTitle := .Params.integration_title | default .Title }}
     {{ with $media }}
       {{ if and (in .Params.custom_kind "integration") (gt (len $media) 0) }}
-        <!-- Your code here -->
+        {{ partial "integration-labels/integration-labels.html" . }}
       {{ else }}
         {{ warnf "%s is missing the $media value" $integrationTitle }}
       {{ end }}
