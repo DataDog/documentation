@@ -49,11 +49,11 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 #### Enforce tags for **usage attribution** on all tests
 
-* On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
 
 #### Enforce required **monitor tag policies** on all tests
 
-* On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
 
   <br>
 
