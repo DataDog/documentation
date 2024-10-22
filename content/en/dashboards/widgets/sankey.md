@@ -2,9 +2,9 @@
 title: Sankey Widget
 widget_type: "sankey"
 further_reading:
-- link: "/product_analytics/journeys/sankey/"
+- link: "/product_analytics/journeys/pathways"
   tag: "Documentation"
-  text: "Build Sankey Diagrams in Product Analytics"
+  text: "Build Pathway Diagrams in Product Analytics"
 ---
 
 {{< img src="dashboards/widgets/sankey/sankey_widget.png" alt="Sankey widget configuration showing an example graph" style="width:100%;" >}}
