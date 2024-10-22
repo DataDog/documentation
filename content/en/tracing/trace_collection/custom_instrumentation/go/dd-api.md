@@ -109,8 +109,8 @@ err := someOperation()
 span.Finish(tracer.WithError(err))
 ```
 
-Note: Closing a span that was not started in your code can lead to missing data.
-Please follow your specific dd-trace-go [integration documentation][10] to do that.
+**Note**: Closing a span that was not started in your code can lead to missing data.
+Please follow your specific `dd-trace-go` [integration documentation][10] to do that.
 
 ## Adding spans
 
