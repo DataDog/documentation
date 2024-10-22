@@ -1840,11 +1840,16 @@ menu:
       parent: service_catalog_customize
       identifier: service_catalog_import_from_telemetries
       weight: 102
-    - name: Import Entries from Integrations
-      url: service_catalog/customize/import_entries_integrations
+    - name: Import Entries from Backstage
+      url: service_catalog/customize/import_entries_backstage
       parent: service_catalog_customize
-      identifier: service_catalog_import_from_integrations
+      identifier: service_catalog_import_from_backstage
       weight: 103
+    - name: Import Entries from ServiceNow
+      url: service_catalog/customize/import_entries_servicenow
+      parent: service_catalog_customize
+      identifier: service_catalog_import_from_servicenow
+      weight: 104
     - name: Navigate the Service Catalog
       url: service_catalog/navigating
       parent: service_catalog

@@ -1,5 +1,5 @@
 ---
-title: Import Entries from External Integrations
+title: Import Entries from Backstage
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -16,9 +16,8 @@ further_reading:
 aliases:
     - /service_catalog/import_entries_integrations/
     - /service_catalog/enrich_default_catalog/import_entries_integrations
+    - /service_catalog/customize/import_entries_integrations/
 ---
-
-## Backstage 
 
 {{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
@@ -42,10 +41,6 @@ Upon import, the following occurs:
 
 **Note**: The Service Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:Component`, the entire `catalog-info.yaml file` is rejected.
 
-## ServiceNow
-
-You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][2].
-
 ## Manual Service discovery through other Datadog telemetries
 
 To discover additional services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][4].
@@ -63,7 +58,6 @@ To remove your imported services from the default **Explore** view, click **Clea
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://backstage.io/docs/features/software-catalog/descriptor-format/
-[2]: /integrations/servicenow/#service-ingestion
 [3]: https://app.datadoghq.com/services/settings/get-started
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /tracing/service_catalog/service_definition_api/
