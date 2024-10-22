@@ -53,15 +53,19 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 #### Enforce required **monitor tag policies** on all tests
 
-* On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
+* On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
 
-</br>
+  <br>
 
   1. Configure monitor tags on the [**Monitors** > **Settings** > **Policies** page][21]:
+  
+  <br>
 
    {{< img src="synthetics/settings/monitor_tag_policy.png" alt="Monitor Settings page, showing monitor policy tags that are configured" style="width:80%;">}}
 
   2. Create a Synthetic browser test, and add the required policy tags:
+  
+  <br>
 
   {{< img src="synthetics/settings/monitor_tags.png" alt="New Synthetics test page, highlighting Policy tags feature" style="width:80%;">}}
 
