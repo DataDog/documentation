@@ -31,6 +31,8 @@ Monitor and optimize your application's performance with these APM integrations:
 
 Monitor the health and performance of your OpenTelemetry Collector:
 
+| Integration | Support |
+|-------------|---------|
 | [Collector Health Metrics][8] | Full support |
 
 ### Containers and hosts
@@ -47,6 +49,7 @@ Gain insights into your containerized environments and host systems with these i
 Collect and manage logs from configured file paths:
 
 | Integration | Support |
+|-------------|---------|
 | [Log Collection][7] | Full support |
 
 ### Vendor technologies
