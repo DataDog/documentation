@@ -386,7 +386,7 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. datadog-ci `v2.10.0` or later is required.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -424,7 +424,7 @@ Successfully synced git DB in 3.579 seconds.
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command. datadog-ci `v2.10.0` or later is required.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
