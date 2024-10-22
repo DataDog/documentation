@@ -22,6 +22,8 @@ Nested queries unlocks several powerful capabilities:
 - [Multilayer aggregation][6]
 - [Percentiles and standard deviation on count/rate/gauge type metrics][7]
 - [Higher resolution queries over historical timeframes][8]
+- [Moving Rollup with Lookback][8]
+- [Threshold Remapping Functions][8]
 
 
 ## Multilayer aggregation
@@ -77,7 +79,7 @@ This query first calculates the average CPU utilization for each EC2 instance gr
 
 ### Multilayer space aggregation
 
-Once you've already specified tag(s) in your first layer of space aggregation to group by, multilayer space aggregation can be accessed with the `Group By` function. As a reminder, every metrics query already contains an initial space aggregation that controls the number of timeseries displayed on the graph. For example, this query `avg:system.cpu.usage{*} by {host}` plots the average cpu usage for every host. 
+Once you've already specified tag(s) in your first layer of space aggregation to group by, multilayer space aggregation can be accessed with the `Group By` function. 
 
 You can apply additional layers of space aggregation with subsequent `Group Bys`.
 Note: if you do not specify tag(s) to group by in your initial space aggregation layer, multilayer space aggregation will not be available.
@@ -128,7 +130,7 @@ In the UI or JSON tab, it would look as follows:
 
 You can use multilayer aggregation (time / space) to query percentiles and standard deviation from queries on counts/rates/gauges. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. 
 
-Note: nested queries' percentile/standard deviation aggregators are calculated using the results of an existing, aggregated metric query. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
+Note: nested queries' percentile/standard deviation aggregators are calculated using the results of an existing, aggregated count/rate/gauge metrics. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
 
  {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
 
@@ -169,9 +171,9 @@ In the UI or JSON tab, it would look as follows:
 
 ## Higher Resolution Queries over Historical Timeframes
 
-As a reminder, every metric query contains an initial layer of time aggregation (aka. rollup) which controls the granularity of datapoints shown. Datadog provides default rollup time intervals that increase as your overall query timeframe grows. With nested queries, you can now access more granular, high-resolution data over longer, historical timeframes.
+As a reminder, every metric query contains an initial layer of time aggregation (rollup) which controls the granularity of datapoints shown. Datadog provides default rollup time intervals that increase as your overall query timeframe grows. With nested queries, you can now access more granular, high-resolution data over longer, historical timeframes.
 
- {{< img src="/metrics/nested_queries/higher-res-query-example.png" alt="example of standard deviation with nested queries in the UI" style="width:100%;" >}}
+ {{< img src="/metrics/nested_queries/higher-res-query-example.png" alt="example of higher resolution queries over historical timeframes in the UI" style="width:100%;" >}}
 
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
 
