@@ -88,7 +88,7 @@ When you start editing a source file supported by Static Analysis, the extension
 Report a bug, request a new feature, or ask for help on the [Discussion Forum][15] and [Issue Tracker][16] on GitHub. You can also email `team-ide-integration@datadoghq.com`.
 
 ## Data and Telemetry
-Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy](https://www.datadoghq.com/legal/privacy/) and [Datadog's EULA](https://www.datadoghq.com/legal/eula/).
+Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][21] and [Datadog's EULA][22].
 
 If you don't wish to send this data to Datadog, you can opt out at any time in the settings: `Options > Datadog > General > Data Sharing` and disable the `Send usage statistics` option.
 
@@ -113,3 +113,5 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [18]: /logs/explorer/
 [19]: /code_analysis/static_analysis/
 [20]: /code_analysis/static_analysis_rules/
+[21]: https://www.datadoghq.com/legal/privacy/
+[22]: https://www.datadoghq.com/legal/eula/
