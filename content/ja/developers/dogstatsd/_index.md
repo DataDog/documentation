@@ -9,7 +9,7 @@ description: データタイプ、タグ付けなど、DogStatsD の機能の概
 further_reading:
 - link: integrations/node
   tag: ドキュメント
-  text: NodeJS インテグレーションを利用して NodeJS 用の DogStatsD を有効にします
+  text: Node.js インテグレーションを利用して Node.js 用の DogStatsD を有効にします
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD 入門

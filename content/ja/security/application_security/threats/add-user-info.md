@@ -593,7 +593,7 @@ dd-trace-php v0.84.0 からは、PHP トレーサーの API を使用してユ�
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-dd-trace-js v3.13.1 からは、NodeJS トレーサーの API を使用してユーザーイベントを追跡することができます。
+dd-trace-js v3.13.1 からは、Node.js トレーサーの API を使用してユーザーイベントを追跡することができます。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 

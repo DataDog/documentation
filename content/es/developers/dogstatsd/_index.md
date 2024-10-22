@@ -10,7 +10,7 @@ description: Descripción general de las características de DogStatsD, incluido
 further_reading:
 - link: integrations/node
   tag: Documentación
-  text: Habilitar DogStatsD para NodeJS a través de la integración de NodeJS
+  text: Habilitar DogStatsD para Node.js a través de la integración de Node.js
 - link: developers/dogstatsd
   tag: Documentación
   text: Introducción a DogStatsD

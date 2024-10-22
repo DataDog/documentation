@@ -1,5 +1,5 @@
 ---
-code_lang: NodeJS
+code_lang: nodejs
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-trace-js

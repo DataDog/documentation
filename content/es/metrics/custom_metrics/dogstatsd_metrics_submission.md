@@ -202,7 +202,7 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -379,7 +379,7 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -982,7 +982,7 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -1115,7 +1115,7 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="NodeJS" >}}
+{{< programming-lang lang="Node.js" >}}
 ```javascript
 tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
 ```

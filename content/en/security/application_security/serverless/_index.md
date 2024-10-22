@@ -353,7 +353,7 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 ### Get started
 
 {{< tabs >}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile

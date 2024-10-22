@@ -5148,7 +5148,7 @@ menu:
       parent: log_collection
       identifier: log_collection_java
       weight: 110
-    - name: NodeJS
+    - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
