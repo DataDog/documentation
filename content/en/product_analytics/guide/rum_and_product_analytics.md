@@ -49,7 +49,7 @@ Session Replay remains a part of both RUM and Product Analytics.
 
 ### Is Session Replay available with Product Analytics?
 
-Session Replay is a standalone offering that can be purchased alongside Product Analytics.
+[Session Replay][1] is a standalone offering that can be purchased alongside Product Analytics.
 
 ### What is available to RUM customers versus what is available to Product Analytics customers?
 See the full feature comparison table below.
@@ -71,7 +71,7 @@ See the full feature comparison table below.
 | RUM <> APM correlation | {{< X >}} | |
 | RUM Synthetic tests | {{< X >}} (through Session Replay) | |
 | Retention Analysis | | {{< X >}} |
-| [Conversion page][1] | | {{< X >}} |
+| [Conversion page][2] | | {{< X >}} |
 | User Journeys (Funnels, Sankeys) | | {{< X >}} |
 | Segmentation | | {{< X >}} |
 | Heatmaps | | {{< X >}} |
@@ -83,4 +83,5 @@ See the full feature comparison table below.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/journeys/#conversion
+[1]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#products
+[2]: /product_analytics/journeys/#conversion
