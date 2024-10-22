@@ -33,7 +33,7 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 
 ## Installation
 
-Add the following domains to your inclusion list to allow Agent installation:
+Add the following domains to your inclusion list to allow for Agent installation:
 
 - `install.datadoghq.com`
 - `yum.datadoghq.com`
