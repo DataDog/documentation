@@ -2842,16 +2842,26 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_installation
       weight: 201
+    - name: Link with Lambda Traces
+      url: serverless/step_functions/link-with-lambda-traces
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_link_lambda_traces
+      weight: 202
     - name: Enhanced Metrics
       url: serverless/step_functions/enhanced-metrics
       parent: serverless_step_functions
       identifier: serverless_step_functions_enhanced_metrics
-      weight: 202
+      weight: 203
+    - name: Retry or Redrive Executions
+      url: serverless/step_functions/redrive
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_redrive
+      weight: 204
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 203
+      weight: 205
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
