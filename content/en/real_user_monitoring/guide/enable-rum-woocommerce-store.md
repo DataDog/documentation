@@ -49,7 +49,7 @@ For example, you can:
 
 - Get valuable insights about your customers' behavior by
 making data-driven decisions to improve your store
-- Increase conversion by watching browser recordings enriched sessions with [Session Replay][2] or
+- Increase conversion by watching browser recordings of enriched sessions with [Session Replay][2] or
 - [Generate metrics][3] from those newly captured sessions
 
 ## Further Reading
