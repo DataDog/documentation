@@ -5,16 +5,15 @@ import {
   paintColorsPrefOptionsConfig
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
+import { error } from 'console';
 
 describe('YamlConfigParser.buildPagePrefsManifest', () => {
-  const manifest = YamlConfigParser.buildPagePrefsManifest({
-    frontmatter: paintColorsFrontmatter,
-    prefOptionsConfig: paintColorsPrefOptionsConfig
-  });
+  test('creates the expected object when given valid data', () => {
+    const manifest = YamlConfigParser.buildPagePrefsManifest({
+      frontmatter: paintColorsFrontmatter,
+      prefOptionsConfig: paintColorsPrefOptionsConfig
+    });
 
-  console.log(JSON.stringify(manifest));
-
-  test('creates the expected object', () => {
     const expectedManifest = {
       prefsById: {
         color: {
@@ -78,9 +77,44 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
           { id: 'fire_engine', display_name: 'Fire Engine', default: true },
           { id: 'crimson', display_name: 'Crimson' }
         ]
-      }
+      },
+      errors: []
     };
 
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
+  });
+
+  test('detects an invalid placeholder', () => {
+    const invalidFrontmatter = {
+      title: 'My Page',
+      page_preferences: [
+        {
+          display_name: 'Color',
+          id: 'color',
+          options_source: 'color_options'
+        },
+        {
+          display_name: 'Finish',
+          id: 'finish',
+          options_source: 'finish_options'
+        },
+        {
+          display_name: 'Paint color',
+          id: 'paint',
+          // invalid placeholder 'COLOUR'
+          options_source: '<FINISH>_<COLOUR>_paint_options'
+        }
+      ]
+    };
+
+    const manifest = YamlConfigParser.buildPagePrefsManifest({
+      frontmatter: invalidFrontmatter,
+      prefOptionsConfig: paintColorsPrefOptionsConfig
+    });
+
+    console.log(manifest.errors);
+
+    expect(manifest.errors.length).toEqual(1);
+    expect(manifest.errors[0]).toContain('Invalid placeholder');
   });
 });

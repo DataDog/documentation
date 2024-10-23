@@ -42,13 +42,14 @@ export class YamlConfigParser {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
   }): PagePrefsManifest {
-    const result: PagePrefsManifest = {
+    const manifest: PagePrefsManifest = {
       prefsById: {},
-      optionSetsById: {}
+      optionSetsById: {},
+      errors: []
     };
 
     if (!p.frontmatter.page_preferences) {
-      return result;
+      return manifest;
     }
 
     // Key the configs by pref ID first, for convenience
@@ -67,17 +68,37 @@ export class YamlConfigParser {
       let optionsSetIds: string[] = [];
 
       if (pagePrefConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX)) {
+        let hasFatalError = false;
+
+        // break the options source ID into segments
+        // that can be used to generate all possible options set IDs
         const segments = pagePrefConfig.options_source.split('_').map((segment) => {
-          if (segment.match(PLACEHOLDER_REGEX)) {
-            const referencedPrefId = segment.slice(1, -1).toLowerCase();
-            const referencedOptionsSet =
-              p.prefOptionsConfig[prefConfigByPrefId[referencedPrefId].options_source];
-            return referencedOptionsSet.map((option) => option.id);
+          // build non-placeholder segment (array of solitary possible value)
+          if (!segment.match(PLACEHOLDER_REGEX)) {
+            return [segment];
           }
-          return [segment];
+
+          // build placeholder segment (array of all possible values)
+          const referencedPrefId = segment.slice(1, -1).toLowerCase();
+          const referencedPrefConfig = prefConfigByPrefId[referencedPrefId];
+          if (!referencedPrefConfig) {
+            manifest.errors.push(
+              `Invalid placeholder: The placeholder ${segment} in the options source '${pagePrefConfig.options_source}' refers to an unrecognized pref ID. The file frontmatter must contain a pref with the ID '${referencedPrefId}', and it must be defined before the pref with the ID ${pagePrefConfig.id}.`
+            );
+            hasFatalError = true;
+            return [segment];
+          }
+
+          const referencedOptionsSet =
+            p.prefOptionsConfig[referencedPrefConfig.options_source];
+          return referencedOptionsSet.map((option) => option.id);
         });
 
-        optionsSetIds = this.buildSnakeCaseCombinations(segments);
+        if (!hasFatalError) {
+          optionsSetIds = this.buildSnakeCaseCombinations(segments);
+        } else {
+          optionsSetIds = [];
+        }
       } else {
         optionsSetIds = [pagePrefConfig.options_source];
       }
@@ -86,6 +107,7 @@ export class YamlConfigParser {
       const defaultValuesByOptionsSetId: Record<string, string> = optionsSetIds.reduce(
         (obj, optionsSetId) => {
           const optionsSet = p.prefOptionsConfig[optionsSetId];
+
           const defaultOption = optionsSet.find((option) => option.default);
           if (!defaultOption) {
             return obj;
@@ -95,24 +117,24 @@ export class YamlConfigParser {
         {}
       );
 
-      result.prefsById[pagePrefConfig.id] = {
+      manifest.prefsById[pagePrefConfig.id] = {
         config: pagePrefConfig,
         defaultValuesByOptionsSetId
       };
     });
 
     // Add any options sets that were referenced by the prefs
-    Object.keys(result.prefsById).forEach((prefId) => {
-      const prefManifest = result.prefsById[prefId];
+    Object.keys(manifest.prefsById).forEach((prefId) => {
+      const prefManifest = manifest.prefsById[prefId];
       const optionsSetIds = Object.keys(prefManifest.defaultValuesByOptionsSetId);
       optionsSetIds.forEach((optionsSetId) => {
-        if (!result.optionSetsById[optionsSetId]) {
-          result.optionSetsById[optionsSetId] = p.prefOptionsConfig[optionsSetId];
+        if (!manifest.optionSetsById[optionsSetId]) {
+          manifest.optionSetsById[optionsSetId] = p.prefOptionsConfig[optionsSetId];
         }
       });
     });
 
-    return result;
+    return manifest;
   }
 
   static loadPrefsConfigFromLangDir(p: {
