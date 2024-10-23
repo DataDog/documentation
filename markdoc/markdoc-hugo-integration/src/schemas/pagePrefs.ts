@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { PREF_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
 import { PrefOptionsConfigSchema } from './yaml/prefOptions';
 import { PagePrefConfigSchema } from './yaml/frontMatter';
-import { initial } from 'lodash';
 
 const ResolvedPagePrefOptionSchema = z
   .object({

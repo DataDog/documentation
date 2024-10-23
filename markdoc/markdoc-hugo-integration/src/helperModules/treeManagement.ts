@@ -70,7 +70,6 @@ export function getMinifiedIfFunctionsByRef(
  */
 export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
-  prefOptionsConfig: PrefOptionsConfig;
   defaultValsByPrefId: Record<string, string>;
   variables: Record<string, any>;
 }): RenderableTreeNode {

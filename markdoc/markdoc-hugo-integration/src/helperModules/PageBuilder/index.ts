@@ -45,7 +45,6 @@ export class PageBuilder {
   }): string {
     const renderableTree = buildRenderableTree({
       parsedFile: p.parsedFile,
-      prefOptionsConfig: p.prefOptionsConfig,
       defaultValsByPrefId: p.prefsManifest.defaultValsByPrefId,
       variables: { hugoConfig: { ...JSON.parse(JSON.stringify(p.hugoConfig)) } }
     });
