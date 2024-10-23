@@ -2,7 +2,7 @@ You already have the Datadog Agent installed to collect and route your logs to [
 
 You have the following information available:
 - The Datadog Agent address, including the port.
-    -  The Observability Pipelines Worker listens to this socket address to receive logs from the Datadog Agent. 
+    -  The Observability Pipelines Worker listens to this socket address to receive logs from the Datadog Agent. It is the `<OPW_HOST>:8282` address mentioned in [Connect the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker).
 - A Datadog API key with [Remote Configuration enabled][2003].
 - Your Datadog [`Site URL`][2004]. For example, `datadoghq.com` for the site `US1`.
 
