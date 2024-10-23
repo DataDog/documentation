@@ -123,8 +123,8 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 ## Requirements
 
 * [Astro Runtime 12.1.0][1] or later is required.
-* [apache-airflow-providers-openlineage][2] 1.11.0 or later is required.
-* [openlineage-python][8] 1.23.0 or later is required.
+* [apache-airflow-providers-openlineage 1.11.0][2] or later is required.
+* [openlineage-python 1.23.0][8] or later is required.
 
 ## Setup
 
