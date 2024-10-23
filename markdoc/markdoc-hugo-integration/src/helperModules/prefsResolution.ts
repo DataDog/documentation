@@ -17,7 +17,11 @@
  */
 
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/pagePrefs';
+import {
+  ResolvedPagePrefs,
+  ResolvedPagePref,
+  PagePrefsManifest
+} from '../schemas/pagePrefs';
 import {
   PagePrefsConfig,
   PagePrefConfig,
@@ -35,14 +39,17 @@ import {
  * replacing any placeholders with actual values.
  */
 export function resolvePagePrefs(p: {
-  pagePrefsConfig: PagePrefsConfig;
-  prefOptionsConfig: PrefOptionsConfig;
   valsByPrefId: Record<string, string>;
+  prefsManifest: PagePrefsManifest;
 }): ResolvedPagePrefs {
   const resolvedPagePrefs: ResolvedPagePrefs = {};
   const valsByPrefIdDup = { ...p.valsByPrefId };
 
-  p.pagePrefsConfig.forEach((prefConfig) => {
+  const pagePrefsConfig = Object.values(p.prefsManifest.prefsById).map((pref) => {
+    return pref.config;
+  });
+
+  pagePrefsConfig.forEach((prefConfig) => {
     // If the options source contains a placeholder, resolve it
     const prefConfigDup = resolvePrefOptionsSource({
       pagePrefConfig: prefConfig,
@@ -53,12 +60,13 @@ export function resolvePagePrefs(p: {
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
       prefConfigDup.default_value ||
-      p.prefOptionsConfig[prefConfigDup.options_source].find((option) => option.default)!
-        .id;
+      p.prefsManifest.optionSetsById[prefConfigDup.options_source].find(
+        (option) => option.default
+      )!.id;
 
-    const possibleValues = p.prefOptionsConfig[prefConfigDup.options_source].map(
-      (option) => option.id
-    );
+    const possibleValues = p.prefsManifest.optionSetsById[
+      prefConfigDup.options_source
+    ].map((option) => option.id);
     let currentValue = p.valsByPrefId[prefConfigDup.id];
     if (currentValue && !possibleValues.includes(currentValue)) {
       currentValue = defaultValue;
@@ -71,10 +79,12 @@ export function resolvePagePrefs(p: {
       displayName: prefConfigDup.display_name,
       defaultValue,
       currentValue,
-      options: p.prefOptionsConfig[prefConfigDup.options_source].map((option) => ({
-        id: option.id,
-        displayName: option.display_name
-      }))
+      options: p.prefsManifest.optionSetsById[prefConfigDup.options_source].map(
+        (option) => ({
+          id: option.id,
+          displayName: option.display_name
+        })
+      )
     };
 
     resolvedPagePrefs[prefConfigDup.id] = resolvedPref;

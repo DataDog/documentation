@@ -88,13 +88,16 @@
       function resolvePagePrefs(p) {
         const resolvedPagePrefs = {};
         const valsByPrefIdDup = Object.assign({}, p.valsByPrefId);
-        p.pagePrefsConfig.forEach((prefConfig) => {
+        const pagePrefsConfig = Object.values(p.prefsManifest.prefsById).map((pref) => {
+          return pref.config;
+        });
+        pagePrefsConfig.forEach((prefConfig) => {
           const prefConfigDup = resolvePrefOptionsSource({
             pagePrefConfig: prefConfig,
             valsByPrefId: valsByPrefIdDup
           });
-          const defaultValue = prefConfigDup.default_value || p.prefOptionsConfig[prefConfigDup.options_source].find((option) => option.default).id;
-          const possibleValues = p.prefOptionsConfig[prefConfigDup.options_source].map((option) => option.id);
+          const defaultValue = prefConfigDup.default_value || p.prefsManifest.optionSetsById[prefConfigDup.options_source].find((option) => option.default).id;
+          const possibleValues = p.prefsManifest.optionSetsById[prefConfigDup.options_source].map((option) => option.id);
           let currentValue = p.valsByPrefId[prefConfigDup.id];
           if (currentValue && !possibleValues.includes(currentValue)) {
             currentValue = defaultValue;
@@ -105,7 +108,7 @@
             displayName: prefConfigDup.display_name,
             defaultValue,
             currentValue,
-            options: p.prefOptionsConfig[prefConfigDup.options_source].map((option) => ({
+            options: p.prefsManifest.optionSetsById[prefConfigDup.options_source].map((option) => ({
               id: option.id,
               displayName: option.display_name
             }))

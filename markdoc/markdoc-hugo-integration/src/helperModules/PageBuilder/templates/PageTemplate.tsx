@@ -2,6 +2,7 @@ import { resolvePagePrefs } from '../../prefsResolution';
 import { buildFilterSelectorUi } from '../components/ContentFilter';
 import { Frontmatter } from '../../../schemas/yaml/frontMatter';
 import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
+import { PagePrefsManifest } from '../../../schemas/pagePrefs';
 
 /**
  * A JSX template for the main content area of a page,
@@ -11,20 +12,15 @@ import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
  * only rendered once, at compile time.
  */
 export const PageTemplate = (props: {
-  frontmatter: Frontmatter;
-  prefOptionsConfig: PrefOptionsConfig;
   valsByPrefId: Record<string, string>;
+  prefsManifest: PagePrefsManifest;
   articleHtml: string;
 }) => {
-  const { frontmatter, prefOptionsConfig, valsByPrefId, articleHtml } = props;
+  const { valsByPrefId, articleHtml, prefsManifest } = props;
 
   return (
     <>
-      <FilterSelectorTemplate
-        frontmatter={frontmatter}
-        prefOptionsConfig={prefOptionsConfig}
-        valsByPrefId={valsByPrefId}
-      />
+      <FilterSelectorTemplate valsByPrefId={valsByPrefId} prefsManifest={prefsManifest} />
       <div
         id="mdoc-content"
         className="customizable"
@@ -35,13 +31,12 @@ export const PageTemplate = (props: {
 };
 
 function FilterSelectorTemplate(props: {
-  frontmatter: Frontmatter;
-  prefOptionsConfig: PrefOptionsConfig;
   valsByPrefId: Record<string, string>;
+  prefsManifest: PagePrefsManifest;
 }) {
-  const { frontmatter, prefOptionsConfig, valsByPrefId } = props;
+  const { valsByPrefId, prefsManifest } = props;
 
-  if (!frontmatter.page_preferences) {
+  if (Object.keys(prefsManifest.prefsById).length === 0) {
     return null;
   }
 
@@ -51,9 +46,8 @@ function FilterSelectorTemplate(props: {
       dangerouslySetInnerHTML={{
         __html: buildFilterSelectorUi(
           resolvePagePrefs({
-            pagePrefsConfig: frontmatter.page_preferences,
-            prefOptionsConfig: prefOptionsConfig,
-            valsByPrefId
+            valsByPrefId,
+            prefsManifest
           })
         )
       }}

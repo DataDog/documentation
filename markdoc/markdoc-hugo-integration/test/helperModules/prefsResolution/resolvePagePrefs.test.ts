@@ -11,16 +11,15 @@ import {
 import { ResolvedPagePrefsSchema } from '../../../src/schemas/pagePrefs';
 
 describe('SharedRenderer.resolvePagePrefs', () => {
-  test('resolves to the correct values for the default selections', () => {
-    const valsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
-      paintColorsFrontmatter,
-      paintColorsPrefOptionsConfig
-    );
+  const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
+    frontmatter: paintColorsFrontmatter,
+    prefOptionsConfig: paintColorsPrefOptionsConfig
+  });
 
+  test('resolves to the correct values for the default selections', () => {
     const resolvedPagePrefs = resolvePagePrefs({
-      pagePrefsConfig: paintColorsFrontmatter.page_preferences!,
-      prefOptionsConfig: paintColorsPrefOptionsConfig,
-      valsByPrefId
+      prefsManifest,
+      valsByPrefId: prefsManifest.defaultValsByPrefId
     });
     ResolvedPagePrefsSchema.parse(resolvedPagePrefs);
 
@@ -34,18 +33,13 @@ describe('SharedRenderer.resolvePagePrefs', () => {
   });
 
   test('resolves to the correct values when selections are changed', () => {
-    const valsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
-      paintColorsFrontmatter,
-      paintColorsPrefOptionsConfig
-    );
-
-    valsByPrefId.color = 'red';
-    valsByPrefId.finish = 'gloss';
+    const prefsManifestDup = { ...prefsManifest };
+    prefsManifestDup.defaultValsByPrefId.color = 'red';
+    prefsManifestDup.defaultValsByPrefId.finish = 'gloss';
 
     const resolvedPagePrefs = resolvePagePrefs({
-      pagePrefsConfig: paintColorsFrontmatter.page_preferences!,
-      prefOptionsConfig: paintColorsPrefOptionsConfig,
-      valsByPrefId
+      prefsManifest: prefsManifestDup,
+      valsByPrefId: prefsManifestDup.defaultValsByPrefId
     });
     ResolvedPagePrefsSchema.parse(resolvedPagePrefs);
 

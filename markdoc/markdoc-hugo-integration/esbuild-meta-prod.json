@@ -11,7 +11,7 @@
       "format": "cjs"
     },
     "dist/helperModules/prefsResolution.js": {
-      "bytes": 6063,
+      "bytes": 6198,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -177,7 +177,7 @@
           "bytesInOutput": 490
         },
         "dist/helperModules/prefsResolution.js": {
-          "bytesInOutput": 1563
+          "bytesInOutput": 1636
         },
         "../markdoc-static-compiler/src/grammar/tag.js": {
           "bytesInOutput": 12824
@@ -213,7 +213,7 @@
           "bytesInOutput": 135
         }
       },
-      "bytes": 29616
+      "bytes": 29689
     }
   }
 }

@@ -51,7 +51,6 @@ export class PageBuilder {
     });
 
     const pageInitScript = this.#getPageInitScript({
-      prefOptionsConfig: p.prefOptionsConfig,
       renderableTree,
       prefsManifest: p.prefsManifest
     });
@@ -65,9 +64,8 @@ export class PageBuilder {
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 
     const pageJsx = PageTemplate({
-      frontmatter: p.parsedFile.frontmatter,
-      prefOptionsConfig: p.prefOptionsConfig,
       valsByPrefId: p.prefsManifest.defaultValsByPrefId,
+      prefsManifest: p.prefsManifest,
       articleHtml
     });
 
@@ -119,7 +117,6 @@ export class PageBuilder {
    * a preference setting.
    */
   static #getPageInitScript(p: {
-    prefOptionsConfig: PrefOptionsConfig;
     renderableTree: RenderableTreeNode;
     prefsManifest: PagePrefsManifest;
   }): string {
