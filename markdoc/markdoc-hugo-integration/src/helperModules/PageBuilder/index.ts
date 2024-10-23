@@ -61,7 +61,8 @@ export class PageBuilder {
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
       defaultValsByPrefId: initialValuesByPrefId,
-      renderableTree
+      renderableTree,
+      prefsManifest: p.prefsManifest
     });
 
     let articleHtml = MarkdocStaticCompiler.renderers.html(
@@ -127,10 +128,10 @@ export class PageBuilder {
    * a preference setting.
    */
   static #getPageInitScript(p: {
-    parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
+    prefsManifest: PagePrefsManifest;
   }): string {
     const initFunctionName = 'initPage';
     const docReadyExecutionScript = `if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -142,7 +143,7 @@ export class PageBuilder {
 
     // If the page does not have any preferences,
     // don't pass any data to the prefs manager
-    if (!p.parsedFile.frontmatter.page_preferences) {
+    if (!Object.keys(p.prefsManifest.prefsById).length) {
       return this.#removeLineBreaks(
         `const ${initFunctionName} = () => clientPrefsManager.initialize({}); ` +
           docReadyExecutionScript
@@ -152,10 +153,12 @@ export class PageBuilder {
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientPrefsManager.initialize({
     pagePrefsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPagePrefsConfig(p.parsedFile.frontmatter.page_preferences)
+      YamlConfigParser.minifyPagePrefsConfig(
+        Object.values(p.prefsManifest.prefsById).map((p) => p.config)
+      )
     )},
     prefOptionsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPrefOptionsConfig(p.prefOptionsConfig)
+      YamlConfigParser.minifyPrefOptionsConfig(p.prefsManifest.optionSetsById)
     )},
     selectedValsByPrefId: ${JSON.stringify(p.defaultValsByPrefId)},
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
