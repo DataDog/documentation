@@ -1,4 +1,4 @@
-1. Cliquez sur **Select API key** pour choisir la clé d'API Datadog que vous souhaitez utiliser.
+1. Cliquez sur **Select API key** pour choisir la clé d'API Datadogque vous souhaitez utiliser.
 1. Exécutez la commande fournie dans l'interface utilisateur pour installer le worker. La commande est automatiquement remplie avec les variables d'environnement que vous avez saisies précédemment.
     ```shell
     docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \

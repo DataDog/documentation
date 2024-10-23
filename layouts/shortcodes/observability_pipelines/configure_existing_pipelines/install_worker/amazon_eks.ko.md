@@ -4,7 +4,7 @@
     ```shell
     helm repo update
     ```
-1. 안내된 명령을 UI에 실행해 Worker를 설치하세요. 이 명령을 사용하면 이전에 입력한 환경 변수가 자동으로 채워집니다.
+1. 안내된 명령을 UI에 실행해 Worker를 설치하세요. 이 명령을 사용하면 내가 이전에 입력한 환경 변수가 자동으로 채워집니다.
     ```shell
     helm upgrade --install opw \
     -f aws_eks.yaml \
@@ -19,7 +19,7 @@
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-1. 관측 가능성 파이프라인으로 돌아가 파이프라인 페이지를 편집하려면 **뒤로 탐색**을 클릭하세요.
-1.  **배포 변경 사항**을 클릭하세요.
+1. Observability Pipelines로 돌아가 파이프라인 페이지를 편집하려면 **Navigate Back**을 클릭하세요.
+1.  **Deploy Changes**를 클릭하세요.
 
 [4001]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
