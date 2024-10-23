@@ -45,6 +45,7 @@ Use the following environment variables to configure formats for reading and wri
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies trace context propagation formats for extraction and injection in a comma-separated list. May be overridden by extract-specific or inject-specific configurations.<br>
 **Default**: `datadog,tracecontext` <br>
+**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links.
 
 
 `OTEL_PROPAGATORS`
