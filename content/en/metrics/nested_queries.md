@@ -122,7 +122,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 
-## Percentiles and Standard Deviation for Aggregated Counts/Rates/Gauges
+## Percentiles and Standard Deviation for aggregated counts, rates, and gauges
 
 You can use multilayer aggregation (time and space) to query percentiles and standard deviation from queries on counts, rates, and gauges. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. 
 
