@@ -1,7 +1,8 @@
 ---
-title: Investigate a Service
+title: Manage a Service
 aliases:
   - /tracing/service_catalog/investigating
+  - /service_catalog/investigating/
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
