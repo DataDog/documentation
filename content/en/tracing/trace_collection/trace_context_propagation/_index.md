@@ -29,7 +29,7 @@ By default, the Datadog SDK extracts and injects distributed tracing headers usi
 
 - [Datadog][1] (takes higher precedence when extracting headers)
 - [W3C Trace Context][2]
-- [Baggage][7]
+- [Baggage][10]
 
 This default configuration maximizes compatibility with older Datadog SDK versions and products while allowing interoperability with other distributed tracing systems like OpenTelemetry.
 
@@ -44,9 +44,7 @@ Use the following environment variables to configure formats for reading and wri
 
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies trace context propagation formats for extraction and injection in a comma-separated list. May be overridden by extract-specific or inject-specific configurations.<br>
-**Default**: `datadog,tracecontext,baggage` <br>
-**Note**: With multiple formats, extraction follows the specified order (for example, `datadog,tracecontext` checks Datadog headers first). The first valid context continues the trace; additional valid contexts become span links. 
-The order in which baggage is included in the list of propagators has no effect. Since they inject and extract different headers, there is no conflict between the baggage propagator and other trace context propagators .
+**Default**: `datadog,tracecontext` <br>
 
 
 `OTEL_PROPAGATORS`
@@ -73,7 +71,7 @@ The Datadog SDK supports the following trace context formats:
 | [W3C Trace Context][2] | `tracecontext`                |
 | [B3 Single][3]         | _Language Dependent Value_    |
 | [B3 Multi][4]          | `b3multi`                     |
-| [Baggage][7]           | `baggage`                     |
+| [Baggage][10]           | `baggage`                     |
 | [None][5]              | `none`                        |
 
 ## Language support
@@ -111,7 +109,6 @@ In addition to the environment variable configuration, you can also update the p
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
 [6]: #none-format
-[7]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -648,3 +645,4 @@ Since there is no conflict between the baggage propagator and the existing trace
 [7]: /real_user_monitoring/platform/connect_rum_and_traces
 [8]: /synthetics/platform/apm
 [9]: /opentelemetry/interoperability/environment_variable_support
+[10]: https://www.w3.org/TR/baggage/

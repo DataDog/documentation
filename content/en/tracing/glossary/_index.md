@@ -142,4 +142,4 @@ To learn more, read supported [propagation formats][27] for your application's l
 [24]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
 [25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [26]: /tracing/trace_collection/
-[27]: /tracing/trace_collection/trace_context_propagation
+[27]: /tracing/trace_collection/trace_context_propagation/#supported-formats
