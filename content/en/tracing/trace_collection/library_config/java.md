@@ -182,14 +182,14 @@ By default, long running asynchronous requests will be marked as an error, setti
 `dd.trace.span.tags`
 : **Environment Variable**: `DD_TRACE_SPAN_TAGS`<br> 
 **Default**: `none`<br>
-A list of default tags to be added to every span.<br>
 **Example**: `tag1:value1,tag2:value2`<br>
+A list of default tags to be added to every span.
 
 `dd.trace.jmx.tags`
 : **Environment Variable**: `DD_TRACE_JMX_TAGS`<br>
 **Default**: `none`<br>
-A list of span tags to be added to every jmx metric.<br>
 **Example**: `tag1:value1,tag2:value2`<br>
+A list of span tags to be added to every jmx metric.
 
 `dd.trace.startup.logs`
 : **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
