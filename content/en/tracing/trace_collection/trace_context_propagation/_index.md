@@ -629,8 +629,6 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 Baggage propagation through OpenTelemetry's W3C-compatible headers is enabled by default.
 
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
