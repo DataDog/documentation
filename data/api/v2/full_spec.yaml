@@ -4585,10 +4585,13 @@ components:
           example: test-name
           type: string
         resources:
-          description: An allowlist of resources to restrict pulling metrics for.
+          description: An allowlist of resources to restrict pulling metrics for including
+            `'web', 'dns', 'lb' (load balancer), 'worker'`.
           example:
           - web
           - dns
+          - lb
+          - worker
           items:
             type: string
           type: array
@@ -4633,10 +4636,13 @@ components:
           example: test-name
           type: string
         resources:
-          description: An allowlist of resources to restrict pulling metrics for.
+          description: An allowlist of resources to restrict pulling metrics for including
+            `'web', 'dns', 'lb' (load balancer), 'worker'`.
           example:
           - web
           - dns
+          - lb
+          - worker
           items:
             type: string
           type: array
@@ -4702,10 +4708,13 @@ components:
           description: The name of the Cloudflare account.
           type: string
         resources:
-          description: An allowlist of resources to restrict pulling metrics for.
+          description: An allowlist of resources to restrict pulling metrics for including
+            `'web', 'dns', 'lb' (load balancer), 'worker'`.
           example:
           - web
           - dns
+          - lb
+          - worker
           items:
             type: string
           type: array
@@ -32126,7 +32135,8 @@ paths:
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
               {\n      \"api_key\": \"fakekey\",\n      \"name\": \"{{ unique_lower_alnum
               }}\",\n      \"email\": \"dev@datadog.com\",\n      \"zones\": [\"zone-id-1\",
-              \"zone-id-2\"],\n      \"resources\": [\"web\", \"dns\"]\n    }\n  }\n}"
+              \"zone-id-2\"],\n      \"resources\": [\"web\", \"dns\", \"lb\", \"worker\"]\n
+              \   }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
       x-permission:
