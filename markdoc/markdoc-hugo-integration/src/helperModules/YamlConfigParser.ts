@@ -109,7 +109,7 @@ export class YamlConfigParser {
           const optionsSet = p.prefOptionsConfig[optionsSetId];
           if (!optionsSet) {
             manifest.errors.push(
-              `Invalid options source: The options source '${optionsSetId}', intended for use by the pref ID '${pagePrefConfig.id}' does not exist.`
+              `Invalid options source: The options source '${optionsSetId}', which is required for the pref ID '${pagePrefConfig.id}', does not exist.`
             );
             return obj;
           }
@@ -253,14 +253,6 @@ export class YamlConfigParser {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent);
     return RawPrefOptionsConfigSchema.parse(parsedYaml);
-  }
-
-  // TODO: Not in use yet, old demo code.
-  static loadSitewidePrefsConfigFromFile(yamlFile: string): string[] {
-    const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
-    const parsedYaml = yaml.load(yamlFileContent) as SitewidePrefIdsConfig;
-    SitewidePrefIdsConfigSchema.parse(parsedYaml);
-    return parsedYaml.valid_sitewide_preference_ids;
   }
 
   /**

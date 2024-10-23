@@ -34,7 +34,7 @@ export class MarkdocHugoIntegration {
   // which come with some extra information, like line numbers
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
   // All other errors caught during compilation
-  validationErrorsByFilePath: Record<string, string> = {};
+  validationErrorsByFilePath: Record<string, string[]> = {};
   private compiledFiles: string[] = [];
 
   /**
@@ -218,7 +218,9 @@ export class MarkdocHugoIntegration {
 
       for (const filePath in this.validationErrorsByFilePath) {
         console.error(`\nIn file ${filePath}:`);
-        console.error(`  - ${this.validationErrorsByFilePath[filePath]}`);
+        this.validationErrorsByFilePath[filePath].forEach((error) => {
+          console.error(`  - ${error}`);
+        });
       }
     }
   }
@@ -235,11 +237,25 @@ export class MarkdocHugoIntegration {
   }): string | null {
     let prefOptionsConfigForPage: PrefOptionsConfig;
     const lang = p.markdocFilepath.replace(this.directories.content, '').split('/')[1];
+    this.validationErrorsByFilePath[p.markdocFilepath] = [];
 
     if (!this.hugoConfig.languages.includes(lang)) {
-      this.validationErrorsByFilePath[
-        p.markdocFilepath
-      ] = `Language "${lang}" is not supported.`;
+      this.validationErrorsByFilePath[p.markdocFilepath] = [
+        `Language "${lang}" is not supported.`
+      ];
+      return null;
+    }
+
+    // generate the prefs manifest
+    const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
+      frontmatter: p.parsedFile.frontmatter,
+      prefOptionsConfig: this.prefOptionsConfig[lang]
+    });
+
+    if (prefsManifest.errors.length > 0) {
+      prefsManifest.errors.forEach((error) => {
+        this.validationErrorsByFilePath[p.markdocFilepath].push(error);
+      });
       return null;
     }
 
@@ -252,11 +268,11 @@ export class MarkdocHugoIntegration {
       );
     } catch (e) {
       if (e instanceof Error) {
-        this.validationErrorsByFilePath[p.markdocFilepath] = e.message;
+        this.validationErrorsByFilePath[p.markdocFilepath].push(e.message);
       } else if (typeof e === 'string') {
-        this.validationErrorsByFilePath[p.markdocFilepath] = e;
+        this.validationErrorsByFilePath[p.markdocFilepath].push(e);
       } else {
-        this.validationErrorsByFilePath[p.markdocFilepath] = JSON.stringify(e);
+        this.validationErrorsByFilePath[p.markdocFilepath].push(JSON.stringify(e));
       }
       return null;
     }
@@ -266,6 +282,7 @@ export class MarkdocHugoIntegration {
       const fileContents = PageBuilder.build({
         parsedFile: p.parsedFile,
         prefOptionsConfig: prefOptionsConfigForPage,
+        prefsManifest,
         hugoConfig: this.hugoConfig
       });
 
@@ -278,11 +295,11 @@ export class MarkdocHugoIntegration {
       return compiledFilepath;
     } catch (e) {
       if (e instanceof Error) {
-        this.validationErrorsByFilePath[p.markdocFilepath] = e.message;
+        this.validationErrorsByFilePath[p.markdocFilepath].push(e.message);
       } else if (typeof e === 'string') {
-        this.validationErrorsByFilePath[p.markdocFilepath] = e;
+        this.validationErrorsByFilePath[p.markdocFilepath].push(e);
       } else {
-        this.validationErrorsByFilePath[p.markdocFilepath] = JSON.stringify(e);
+        this.validationErrorsByFilePath[p.markdocFilepath].push(JSON.stringify(e));
       }
       return null;
     }
@@ -300,10 +317,11 @@ export class MarkdocHugoIntegration {
    * Whether any errors have been detected during compilation.
    */
   #hasErrors() {
-    return (
-      Object.keys(this.parsingErrorReportsByFilePath).length > 0 ||
-      Object.keys(this.validationErrorsByFilePath).length > 0
+    const hasParsingErrors = Object.keys(this.parsingErrorReportsByFilePath).length > 0;
+    const hasValidationErrors = Object.values(this.validationErrorsByFilePath).some(
+      (errors) => errors.length > 0
     );
+    return hasParsingErrors || hasValidationErrors;
   }
 
   /**

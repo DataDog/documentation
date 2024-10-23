@@ -1,1 +1,3 @@
-Placeholder <COLOUR> does not refer to a valid page preference ID. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_preferences list before it is referenced in <COLOUR>.
+[
+  "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized pref ID. The file frontmatter must contain a pref with the ID 'colour', and it must be defined before the pref with the ID item.",
+]

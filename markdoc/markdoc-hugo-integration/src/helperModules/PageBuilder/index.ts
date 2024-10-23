@@ -12,6 +12,7 @@ import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/hugoConfig';
+import { PagePrefsManifest } from '../../schemas/pagePrefs';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -40,6 +41,7 @@ export class PageBuilder {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
     hugoConfig: HugoConfig;
+    prefsManifest: PagePrefsManifest;
   }): string {
     const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,

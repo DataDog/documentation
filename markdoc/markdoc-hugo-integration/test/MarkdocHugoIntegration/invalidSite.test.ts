@@ -42,7 +42,11 @@ describe('MarkdocHugoIntegration', () => {
   const errors = { ...validationErrorsByFilePath };
   Object.keys(errors).forEach((filePath) => {
     const sanitizedFilePath = filePath.replace(contentDir, '');
-    errors[sanitizedFilePath] = errors[filePath].replace(contentDir, '');
+    errors[sanitizedFilePath] = [];
+    errors[filePath].forEach((error) => {
+      error = error.replace(contentDir, '');
+      errors[sanitizedFilePath].push(error);
+    });
     delete errors[filePath];
   });
 

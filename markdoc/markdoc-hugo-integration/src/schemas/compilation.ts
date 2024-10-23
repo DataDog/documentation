@@ -27,7 +27,7 @@ export type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
 export type CompilationResult = {
   hasErrors: boolean;
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
-  validationErrorsByFilePath: Record<string, string>;
+  validationErrorsByFilePath: Record<string, string[]>;
   compiledFiles: string[];
 };
 
