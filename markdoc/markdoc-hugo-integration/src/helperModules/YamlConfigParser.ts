@@ -34,15 +34,15 @@ import {
   SitewidePrefIdsConfig
 } from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { PagePrefsManifest } from '../schemas/pagePrefs';
+import { DraftPagePrefsManifest } from '../schemas/pagePrefs';
 import { PagePrefConfig } from '../schemas/yaml/frontMatter';
 
 export class YamlConfigParser {
   static buildPagePrefsManifest(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
-  }): PagePrefsManifest {
-    const manifest: PagePrefsManifest = {
+  }): DraftPagePrefsManifest {
+    const manifest: DraftPagePrefsManifest = {
       prefsById: {},
       optionSetsById: {},
       errors: []
@@ -52,6 +52,28 @@ export class YamlConfigParser {
       return manifest;
     }
 
+    const initialCurrentValues: Record<string, string | undefined> = {};
+
+    for (const fmPrefConfig of p.frontmatter.page_preferences) {
+      // replace placeholders
+      const optionsSetId = fmPrefConfig.options_source;
+      const resolvedOptionsSetId = optionsSetId.replace(
+        GLOBAL_PLACEHOLDER_REGEX,
+        (_match: string, placeholder: string) => {
+          const value = initialCurrentValues[placeholder.toLowerCase()];
+          return value || '';
+        }
+      );
+
+      const resolvedOptionSet = p.prefOptionsConfig[resolvedOptionsSetId];
+
+      if (resolvedOptionSet) {
+        initialCurrentValues[fmPrefConfig.id] =
+          fmPrefConfig.default_value ||
+          resolvedOptionSet.find((option) => option.default)!.id;
+      }
+    }
+
     // Key the configs by pref ID first, for convenience
     const prefConfigByPrefId: Record<string, PagePrefConfig> =
       p.frontmatter.page_preferences.reduce(
@@ -59,15 +81,21 @@ export class YamlConfigParser {
         {}
       );
 
+    // Keep track of the pref IDs that have been processed,
+    // to ensure correct definition order in frontmatter
+    const processedPrefIds: string[] = [];
+
     // Fill out the manifest in the order that the prefs
     // appeared in the frontmatter
     p.frontmatter.page_preferences.forEach((pagePrefConfig) => {
+      const hasDynamicOptions = pagePrefConfig.options_source.match(PLACEHOLDER_REGEX);
+
       // Get the options set ID for this pref,
       // or all possible options set IDs if the pref's options_source
       // contains placeholders
       let optionsSetIds: string[] = [];
 
-      if (pagePrefConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX)) {
+      if (hasDynamicOptions) {
         let hasFatalError = false;
 
         // break the options source ID into segments
@@ -81,7 +109,7 @@ export class YamlConfigParser {
           // build placeholder segment (array of all possible values)
           const referencedPrefId = segment.slice(1, -1).toLowerCase();
           const referencedPrefConfig = prefConfigByPrefId[referencedPrefId];
-          if (!referencedPrefConfig) {
+          if (!referencedPrefConfig || !processedPrefIds.includes(referencedPrefId)) {
             manifest.errors.push(
               `Invalid placeholder: The placeholder ${segment} in the options source '${pagePrefConfig.options_source}' refers to an unrecognized pref ID. The file frontmatter must contain a pref with the ID '${referencedPrefId}', and it must be defined before the pref with the ID ${pagePrefConfig.id}.`
             );
@@ -125,8 +153,11 @@ export class YamlConfigParser {
 
       manifest.prefsById[pagePrefConfig.id] = {
         config: pagePrefConfig,
+        initialValue: initialCurrentValues[pagePrefConfig.id],
         defaultValuesByOptionsSetId
       };
+
+      processedPrefIds.push(pagePrefConfig.id);
     });
 
     // Add any options sets that were referenced by the prefs
@@ -268,7 +299,7 @@ export class YamlConfigParser {
   static getDefaultValuesByPrefId(
     frontmatter: Frontmatter,
     prefOptionsConfig: PrefOptionsConfig
-  ): Record<string, string> {
+  ): Record<string, string | undefined> {
     if (!frontmatter.page_preferences) {
       return {};
     }
@@ -281,11 +312,6 @@ export class YamlConfigParser {
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
           const value = defaultValuesByPrefId[placeholder.toLowerCase()];
-          if (!value) {
-            throw new Error(
-              `The placeholder <${placeholder}> is invalid. Make sure that '${placeholder}' is spelled correctly, and that the '${placeholder.toLowerCase()}' parameter is defined in the page_preferences list before it is referenced as <${placeholder}>.`
-            );
-          }
           return value;
         }
       );

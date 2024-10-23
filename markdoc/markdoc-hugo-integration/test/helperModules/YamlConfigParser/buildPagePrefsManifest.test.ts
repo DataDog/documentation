@@ -17,6 +17,7 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
       prefsById: {
         color: {
           config: { display_name: 'Color', id: 'color', options_source: 'color_options' },
+          initialValue: 'blue',
           defaultValuesByOptionsSetId: { color_options: 'blue' }
         },
         finish: {
@@ -25,6 +26,7 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
             id: 'finish',
             options_source: 'finish_options'
           },
+          initialValue: 'eggshell',
           defaultValuesByOptionsSetId: { finish_options: 'eggshell' }
         },
         paint: {
@@ -33,6 +35,7 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
             id: 'paint',
             options_source: '<FINISH>_<COLOR>_paint_options'
           },
+          initialValue: 'elegant_royal',
           defaultValuesByOptionsSetId: {
             matte_blue_paint_options: 'powder_blue',
             matte_red_paint_options: 'brick',

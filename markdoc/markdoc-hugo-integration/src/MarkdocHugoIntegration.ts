@@ -19,6 +19,7 @@ import {
   ParsedFile
 } from './schemas/compilation';
 import { AllowlistsByType } from './schemas/yaml/allowlist';
+import { PagePrefsManifestSchema } from './schemas/pagePrefs';
 
 export class MarkdocHugoIntegration {
   directories: {
@@ -247,17 +248,19 @@ export class MarkdocHugoIntegration {
     }
 
     // generate the prefs manifest
-    const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
+    const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
       frontmatter: p.parsedFile.frontmatter,
       prefOptionsConfig: this.prefOptionsConfig[lang]
     });
 
-    if (prefsManifest.errors.length > 0) {
-      prefsManifest.errors.forEach((error) => {
+    if (draftPrefsManifest.errors.length > 0) {
+      draftPrefsManifest.errors.forEach((error) => {
         this.validationErrorsByFilePath[p.markdocFilepath].push(error);
       });
       return null;
     }
+
+    const prefsManifest = PagePrefsManifestSchema.parse(draftPrefsManifest);
 
     // verify that all possible placeholder values
     // yield an existing options set
