@@ -10,27 +10,17 @@ further_reading:
 - link: "/integrations/github"
   tag: "Documentation"
   text: "Learn about the GitHub Integration"
-- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+- link: "https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/#get-cmdb-metadata-in-the-datadog-service-catalog"
   tag: "Blog"
-  text: "Import Backstage YAML files into Datadog"
+  text: "Manage your infrastructure with ServiceNow CMDB and Datadog"
 aliases:
     - /service_catalog/import_entries_integrations/
     - /service_catalog/enrich_default_catalog/import_entries_integrations
 ---
 
-You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][2].
+To populate your Datadog Service Catalog with services from your ServiceNow CMDB, use the Service Ingestion feature in the [Datadog-ServiceNow integration][2].
 
-## Manual Service discovery through other Datadog telemetries
-
-To discover additional services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][4].
-
-{{< img src="tracing/service_catalog/import_entries.png" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
-
-After you have imported some entries, they appear in the **Explore** tab. Entries may expire unless you add metadata such as the owner or contacts by [using the API][5] or the [GitHub integration][6].
-
-To remove your imported services from the default **Explore** view, click **Clear Previously Imported Services**. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
-
-{{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
+{{< img src="integrations/servicenow/service-metadata.jpg" alt="Screenshot of the Service Configuration panel showing metadata populated from ServiceNow" >}}
 
 ## Further reading
 
