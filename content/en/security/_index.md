@@ -57,6 +57,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/optimize-and-secure-azure-functions/"
     tag: "Blog"
     text: "Tips to optimize and secure Azure Functions"
+  - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
+    tag: "Blog"
+    text: "How we use Datadog for detection as code"
 cascade:
     algolia:
         rank: 70
