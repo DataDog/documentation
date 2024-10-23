@@ -9,11 +9,10 @@ further_reading:
 ## Overview
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-  This feature is in Preview. Please reach out to Customer Success to get this feature enabled. 
+  This feature is in Preview. To enable this feature, reach out to Customer Success. 
 {{< /callout >}}  
 
-Every metric query in Datadog consists of two layers of aggregation by default (quick refresher [here][5]).
-Nested queries allows you to reuse the results of a previous query in a subsequent one.
+By default, every metric query in Datadog consists of two layers of aggregation. Nested queries allows you to reuse the results of a previous query in a subsequent one.
 
 {{< img src="metrics/nested_queries/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}
 
@@ -25,7 +24,7 @@ Nested queries unlocks several powerful capabilities:
 
 ## Multilayer aggregation
 
-In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space (review the anatomy of a metric's query [here][5]). Multilayer aggregation allows you to apply additional layers of time or space aggregation.
+In Datadog, each metric query in Datadog is evaluated with two layers of aggregation: first by time, then by space. Multilayer aggregation allows you to apply additional layers of time or space aggregation. For more information on aggregation, see the [anatomy of a metric's query][5].
 
 {{< img src="/metrics/nested_queries/nested-queries-before-after.png" alt="example of applying nested queries before and after" style="width:100%;" >}}
 
@@ -33,7 +32,7 @@ In Datadog, each metric query in Datadog is evaluated with two layers of aggrega
 
 ### Multilayer time aggregation
 
-Multilayer time aggregation can be accessed with the `rollup` function. As a reminder, every metric query already contains an initial `rollup` (time aggregation) that controls the granularity of the data points displayed on the graph. For more information, see the [Rollup][1] documentation. 
+Access multilayer time aggregation with the `rollup` function. Every metric query already contains an initial `rollup` (time aggregation) that controls the granularity of the data points displayed on the graph. For more information, see the [Rollup][1] documentation. 
 
 You can apply additional layers of time aggregation with subsequent rollups.
 
@@ -76,7 +75,7 @@ This query first calculates the average CPU utilization for each EC2 instance gr
 
 ### Multilayer space aggregation
 
-Once you've already specified tag(s) in your first layer of space aggregation to group by, multilayer space aggregation can be accessed with the `Group By` function. 
+After you specify tag(s) in your first layer of space aggregation to group by, access multilayer space aggregation with the `Group By` function. 
 
 You can apply additional layers of space aggregation with subsequent `Group Bys`.
 Note: if you do not specify tag(s) to group by in your initial space aggregation layer, multilayer space aggregation will not be available.
@@ -106,7 +105,7 @@ Multilayer space aggregation can be used with the following functions:
 
 Any other functions not listed above cannot be combined with multilayer space aggregation. 
 
-All space aggregators with the exception of percentile space aggregators have one argument, which is the tag key(s) you'd want to group by. Percentile space aggregators require two arguments: 
+All space aggregators with the exception of percentile space aggregators have one argument, which is the tag key(s) you want to group by. Percentile space aggregators require two arguments: 
 - The arbitrary percentile pXX
 - The tag(s) to group by
 
@@ -125,13 +124,13 @@ In the UI or JSON tab, it would look as follows:
 
 ## Percentiles and Standard Deviation for Aggregated Counts/Rates/Gauges
 
-You can use multilayer aggregation (time / space) to query percentiles and standard deviation from queries on counts/rates/gauges. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. 
+You can use multilayer aggregation (time and space) to query percentiles and standard deviation from queries on counts, rates, and gauges. They allow you to better understand the variability and spread of your large datasets and allow you to better identify outliers. 
 
-Note: nested queries' percentile/standard deviation aggregators are calculated using the results of an existing, aggregated count/rate/gauge metrics. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
+**Note**: The percentile or standard deviation aggregators in Nested queries are calculated using the results of an existing, aggregated count, rate, or gauge metrics. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
 
  {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
 
-We can use percentiles in multilayer time aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
+We can use percentiles in multilayer time aggregation to summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
 
  {{< img src="/metrics/nested_queries/percentiles-time-agg-ui.png" alt="example of MLA time agg percentiles using nested queries in the UI" style="width:100%;" >}}
 
@@ -142,7 +141,7 @@ We can use percentiles in multilayer time aggregation to additionally summarize 
 
 {{% collapse-content title="Percentiles in Multilayer Space Aggregation example query" level="h5" %}}
 
-We can use percentiles in multilayer space aggregation to additionally summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
+We can use percentiles in multilayer space aggregation to summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
 
 In the UI or JSON tab, it would look as follows:
 
@@ -166,17 +165,17 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 
-## Higher Resolution Queries over Historical Timeframes
+## Higher resolution queries over historical time frames
 
-As a reminder, every metric query contains an initial layer of time aggregation (rollup) which controls the granularity of datapoints shown. Datadog provides default rollup time intervals that increase as your overall query timeframe grows. With nested queries, you can now access more granular, high-resolution data over longer, historical timeframes.
+Every metric query contains an initial layer of time aggregation (rollup) which controls the granularity of datapoints shown. Datadog provides default rollup time intervals that increase as your overall query timeframe grows. With nested queries, you can access more granular, high-resolution data over longer, historical timeframes.
 
  {{< img src="/metrics/nested_queries/higher-res-query-example.png" alt="example of higher resolution queries over historical timeframes in the UI" style="width:100%;" >}}
 
 {{% collapse-content title="Higher resolution example query" level="h5" %}}
 
-Historically when querying a metric over the past month, you would see data at 4-hour granularity by default. You can now use nested queries to access higher granularity data over this historical timeframe. Here's an example query graphed over the past month where the query batch count is initially rolled up in 5 minute intervals. Then multilayer time aggregation is applied to calculate the standard deviation in time of this nested query over 4 hour intervals for a more human-readable graph.
+Historically, when querying a metric over the past month, you would see data at 4-hour granularity by default. You can use nested queries to access higher granularity data over this historical timeframe. Here's an example query graphed over the past month where the query batch count is initially rolled up in 5 minute intervals. Then multilayer time aggregation is applied to calculate the standard deviation in time of this nested query over 4 hour intervals for a more human-readable graph.
 
-_Note: We recommend you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs._
+_**Note**: Datadog recommends that you define your initial rollup with the most granular rollup interval and use multilayer time aggregation with coarser rollup intervals to get more user-readable graphs._
 
 In the UI or JSON tab, it would look as follows:
 
@@ -185,8 +184,8 @@ In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
-## How can I use Datadog API's to leverage nested queries?
-You can use nested queries functionality in our public API for querying timeseries data [here][3]. Simply change the contents of the **formula** object
+## Use nested queries with Datadog's API
+You can use nested queries functionality in our [public API for querying timeseries data][3]. Change the contents of the **formula** object
 
 
  {{< img src="/metrics/nested_queries/nested-queries-using-api.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
