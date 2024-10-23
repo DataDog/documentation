@@ -13,7 +13,7 @@ For configuration options specific to your programming language, choose your SDK
 
 To instrument an application written in a language that does not yet have official library support, see the list of [community tracing libraries][1].
 
-## General SDK configuration
+## Common configuration options
 Datadog SDKs support the following general SDK configurations
 
 ### Traces
