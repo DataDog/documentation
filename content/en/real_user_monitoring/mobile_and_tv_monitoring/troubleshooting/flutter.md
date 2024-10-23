@@ -89,7 +89,7 @@ final configuration = DdSdkConfiguration(
    //
    rumConfiguration: DatadogRumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
-    tracingSamplingRate: 100.0
+    traceSampleRate: 100.0
    ),
 );
 ```
