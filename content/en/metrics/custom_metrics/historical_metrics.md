@@ -1,5 +1,5 @@
 ---
-title: Historical Metrics Ingestion - Brian's Typesense Update Test
+title: Historical Metrics Ingestion
 further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
