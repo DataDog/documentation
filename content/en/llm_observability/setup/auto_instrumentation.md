@@ -88,8 +88,6 @@ The LangChain integration instruments the following methods:
   - langchain_community.<vectorstores>, langchain_pinecone, langchain_qdrant, langchain_milvus
   - `similarity_search()`, `similarity_search_with_score()`, `similarity_search_by_vector_with_score()`, `similarity_search_with_score_by_vector()`, `similarity_search_by_vector()`
 
-**Note:** The LangChain integration only supports tracing streamed calls from llm, chat_model and chain.
-
 ## Amazon Bedrock
 
 The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Python SDK's chat model calls (using [Boto3][5]/[Botocore][6]).
