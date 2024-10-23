@@ -43,24 +43,15 @@ export class PageBuilder {
     hugoConfig: HugoConfig;
     prefsManifest: PagePrefsManifest;
   }): string {
-    const initialValuesByPrefId = Object.entries(p.prefsManifest.prefsById).reduce<
-      Record<string, string>
-    >((obj, [prefId, prefManifest]) => {
-      obj[prefId] = prefManifest.initialValue;
-      return obj;
-    }, {});
-
     const renderableTree = buildRenderableTree({
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
-      defaultValsByPrefId: initialValuesByPrefId,
+      defaultValsByPrefId: p.prefsManifest.defaultValsByPrefId,
       variables: { hugoConfig: { ...JSON.parse(JSON.stringify(p.hugoConfig)) } }
     });
 
     const pageInitScript = this.#getPageInitScript({
-      parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
-      defaultValsByPrefId: initialValuesByPrefId,
       renderableTree,
       prefsManifest: p.prefsManifest
     });
@@ -76,7 +67,7 @@ export class PageBuilder {
     const pageJsx = PageTemplate({
       frontmatter: p.parsedFile.frontmatter,
       prefOptionsConfig: p.prefOptionsConfig,
-      valsByPrefId: initialValuesByPrefId,
+      valsByPrefId: p.prefsManifest.defaultValsByPrefId,
       articleHtml
     });
 
@@ -129,7 +120,6 @@ export class PageBuilder {
    */
   static #getPageInitScript(p: {
     prefOptionsConfig: PrefOptionsConfig;
-    defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
     prefsManifest: PagePrefsManifest;
   }): string {
@@ -160,7 +150,7 @@ clientPrefsManager.initialize({
     prefOptionsConfig: ${JSON.stringify(
       YamlConfigParser.minifyPrefOptionsConfig(p.prefsManifest.optionSetsById)
     )},
-    selectedValsByPrefId: ${JSON.stringify(p.defaultValsByPrefId)},
+    selectedValsByPrefId: ${JSON.stringify(p.prefsManifest.defaultValsByPrefId)},
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
   });
 }; `;

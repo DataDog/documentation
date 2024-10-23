@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { PREF_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
 import { PrefOptionsConfigSchema } from './yaml/prefOptions';
 import { PagePrefConfigSchema } from './yaml/frontMatter';
+import { initial } from 'lodash';
 
 const ResolvedPagePrefOptionSchema = z
   .object({
@@ -76,7 +77,6 @@ export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;
 export const PagePrefManifestSchema = z
   .object({
     config: PagePrefConfigSchema,
-    initialValue: z.string().regex(SNAKE_CASE_REGEX),
     defaultValuesByOptionsSetId: z.record(
       z.string().regex(PREF_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX)
@@ -85,14 +85,6 @@ export const PagePrefManifestSchema = z
   .strict();
 
 export type PagePrefManifest = z.infer<typeof PagePrefManifestSchema>;
-
-export const DraftPagePrefManifestSchema = PagePrefManifestSchema.omit({
-  initialValue: true
-}).extend({
-  initialValue: z.string().optional()
-});
-
-export type DraftPagePrefManifest = z.infer<typeof DraftPagePrefManifestSchema>;
 
 /**
  * A object containing all of the potential pref IDs
@@ -108,18 +100,12 @@ export const PagePrefsManifestSchema = z
   .object({
     prefsById: z.record(z.string().regex(SNAKE_CASE_REGEX), PagePrefManifestSchema),
     optionSetsById: PrefOptionsConfigSchema,
-    errors: z.array(z.string()).length(0)
+    defaultValsByPrefId: z.record(
+      z.string().regex(SNAKE_CASE_REGEX),
+      z.string().regex(SNAKE_CASE_REGEX)
+    ),
+    errors: z.array(z.string())
   })
   .strict();
 
 export type PagePrefsManifest = z.infer<typeof PagePrefsManifestSchema>;
-
-export const DraftPagePrefsManifestSchema = PagePrefsManifestSchema.omit({
-  prefsById: true,
-  errors: true
-}).extend({
-  prefsById: z.record(z.string().regex(SNAKE_CASE_REGEX), DraftPagePrefManifestSchema),
-  errors: z.array(z.string())
-});
-
-export type DraftPagePrefsManifest = z.infer<typeof DraftPagePrefsManifestSchema>;

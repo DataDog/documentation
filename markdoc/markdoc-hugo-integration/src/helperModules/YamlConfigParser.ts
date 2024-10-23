@@ -34,25 +34,24 @@ import {
   SitewidePrefIdsConfig
 } from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { DraftPagePrefsManifest } from '../schemas/pagePrefs';
+import { PagePrefsManifest } from '../schemas/pagePrefs';
 import { PagePrefConfig } from '../schemas/yaml/frontMatter';
 
 export class YamlConfigParser {
   static buildPagePrefsManifest(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
-  }): DraftPagePrefsManifest {
-    const manifest: DraftPagePrefsManifest = {
+  }): PagePrefsManifest {
+    const manifest: PagePrefsManifest = {
       prefsById: {},
       optionSetsById: {},
-      errors: []
+      errors: [],
+      defaultValsByPrefId: {}
     };
 
     if (!p.frontmatter.page_preferences) {
       return manifest;
     }
-
-    const initialCurrentValues: Record<string, string | undefined> = {};
 
     for (const fmPrefConfig of p.frontmatter.page_preferences) {
       // replace placeholders
@@ -60,7 +59,7 @@ export class YamlConfigParser {
       const resolvedOptionsSetId = optionsSetId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
-          const value = initialCurrentValues[placeholder.toLowerCase()];
+          const value = manifest.defaultValsByPrefId[placeholder.toLowerCase()];
           return value || '';
         }
       );
@@ -68,7 +67,7 @@ export class YamlConfigParser {
       const resolvedOptionSet = p.prefOptionsConfig[resolvedOptionsSetId];
 
       if (resolvedOptionSet) {
-        initialCurrentValues[fmPrefConfig.id] =
+        manifest.defaultValsByPrefId[fmPrefConfig.id] =
           fmPrefConfig.default_value ||
           resolvedOptionSet.find((option) => option.default)!.id;
       }
@@ -153,7 +152,6 @@ export class YamlConfigParser {
 
       manifest.prefsById[pagePrefConfig.id] = {
         config: pagePrefConfig,
-        initialValue: initialCurrentValues[pagePrefConfig.id],
         defaultValuesByOptionsSetId
       };
 
