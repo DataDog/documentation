@@ -107,6 +107,12 @@ export class YamlConfigParser {
       const defaultValuesByOptionsSetId: Record<string, string> = optionsSetIds.reduce(
         (obj, optionsSetId) => {
           const optionsSet = p.prefOptionsConfig[optionsSetId];
+          if (!optionsSet) {
+            manifest.errors.push(
+              `Invalid options source: The options source '${optionsSetId}', intended for use by the pref ID '${pagePrefConfig.id}' does not exist.`
+            );
+            return obj;
+          }
 
           const defaultOption = optionsSet.find((option) => option.default);
           if (!defaultOption) {
