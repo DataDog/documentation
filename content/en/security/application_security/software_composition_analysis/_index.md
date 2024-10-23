@@ -52,7 +52,7 @@ Check the ASM Compatibility for each ASM product to see if your service is suppo
 
 The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. To access the Library Explorer, navigate to [**Security** > **Application Security** > **Catalog** > **Libraries**][8].
 
-Since Datadog SCA covers your software development lifecycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses and quality aspects.
+Since Datadog SCA covers your software development lifecycle from code to production, it detects libraries throughout the lifecycle of an application and flags vulnerabilities, risks, licenses, and more.
 
 {{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
