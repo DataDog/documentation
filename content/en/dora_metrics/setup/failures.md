@@ -94,17 +94,17 @@ The matching algorithm works in the following steps:
 1. If the PagerDuty incident event was [triggered from a monitor][107]:
    - If the monitor is in [Multi Alert mode][109], the incident metrics and events are emmitted with the `env`, `service`, and `team` from the alerted group.
    - If the monitor has [tags][110] for `env`, `service`, or `team`:
-    - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with that environment.
+    - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
     - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
-    - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with that team.
+    - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
 2. If the service URL of the incident matches the PagerDuty service URL for any services in the Service Catalog:
    - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
    - If multiple Datadog services match, the incident metrics and events are emitted with the team.
 
 For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][103].
 
-3. If the PagerDuty service name of the incident matches a service name in the Service Catalog, the incident metrics and events are emitted with that service and team.
-4. If the PagerDuty team name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with that team.
+3. If the PagerDuty service name of the incident matches a service name in the Service Catalog, the incident metrics and events are emitted with the service and team.
+4. If the PagerDuty team name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
 5. If the PagerDuty service name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
