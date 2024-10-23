@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { PREF_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { PrefOptionSchema } from './yaml/prefOptions';
+import { PrefOptionSchema, PrefOptionsConfigSchema } from './yaml/prefOptions';
 import { PagePrefConfigSchema } from './yaml/frontMatter';
 
 const ResolvedPagePrefOptionSchema = z
@@ -95,9 +95,11 @@ export type PagePrefManifest = z.infer<typeof PagePrefManifestSchema>;
  * Useful for efficiently validating, resolving,
  * and re-resolving preferences.
  */
-export const PagePrefsManifestSchema = z.record(
-  z.string().regex(SNAKE_CASE_REGEX),
-  PagePrefManifestSchema
-);
+export const PagePrefsManifestSchema = z
+  .object({
+    prefsById: z.record(z.string().regex(SNAKE_CASE_REGEX), PagePrefManifestSchema),
+    optionSetsById: PrefOptionsConfigSchema
+  })
+  .strict();
 
 export type PagePrefsManifest = z.infer<typeof PagePrefsManifestSchema>;

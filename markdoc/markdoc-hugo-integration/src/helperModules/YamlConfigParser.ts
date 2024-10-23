@@ -42,7 +42,10 @@ export class YamlConfigParser {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
   }): PagePrefsManifest {
-    const result: PagePrefsManifest = {};
+    const result: PagePrefsManifest = {
+      prefsById: {},
+      optionSetsById: {}
+    };
 
     if (!p.frontmatter.page_preferences) {
       return result;
@@ -92,10 +95,21 @@ export class YamlConfigParser {
         {}
       );
 
-      result[pagePrefConfig.id] = {
+      result.prefsById[pagePrefConfig.id] = {
         config: pagePrefConfig,
         defaultValuesByOptionsSetId
       };
+    });
+
+    // Add any options sets that were referenced by the prefs
+    Object.keys(result.prefsById).forEach((prefId) => {
+      const prefManifest = result.prefsById[prefId];
+      const optionsSetIds = Object.keys(prefManifest.defaultValuesByOptionsSetId);
+      optionsSetIds.forEach((optionsSetId) => {
+        if (!result.optionSetsById[optionsSetId]) {
+          result.optionSetsById[optionsSetId] = p.prefOptionsConfig[optionsSetId];
+        }
+      });
     });
 
     return result;
