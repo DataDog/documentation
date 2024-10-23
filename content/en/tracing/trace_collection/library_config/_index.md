@@ -3,7 +3,9 @@ title: Configure the Datadog Tracing Library
 type: multi-code-lang
 ---
 
-Please find below a set of consistent configurations across all SDKs. For additional information about configuration options for specific language SDKs, choose your language:
+This page describes configuration options that are supported across all SDKs. To view these common configuration options, see [Common configuration options](#common-configuration-options).
+
+For configuration options specific to your programming language, choose your SDK from the options below:
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
