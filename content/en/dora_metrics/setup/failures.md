@@ -101,7 +101,7 @@ The matching algorithm works in the following steps:
    - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
    - If multiple Datadog services match, the incident metrics and events are emitted with the team.
 
-For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][103].
+   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][103].
 
 3. If the PagerDuty service name of the incident matches a service name in the Service Catalog, the incident metrics and events are emitted with the service and team.
 4. If the PagerDuty team name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
