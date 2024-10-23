@@ -8,7 +8,7 @@ import {
   resolvePagePrefs,
   resolveMinifiedPagePrefs
 } from '../../../src/helperModules/prefsResolution';
-import { ResolvedPagePrefsSchema } from '../../../src/schemas/resolvedPagePrefs';
+import { ResolvedPagePrefsSchema } from '../../../src/schemas/pagePrefs';
 
 describe('SharedRenderer.resolvePagePrefs', () => {
   test('resolves to the correct values for the default selections', () => {

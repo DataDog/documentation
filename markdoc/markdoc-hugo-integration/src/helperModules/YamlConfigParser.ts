@@ -34,16 +34,71 @@ import {
   SitewidePrefIdsConfig
 } from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { PagePrefsManifest } from '../schemas/resolvedPagePrefs';
+import { PagePrefsManifest } from '../schemas/pagePrefs';
+import { PagePrefConfig } from '../schemas/yaml/frontMatter';
 
 export class YamlConfigParser {
   static buildPagePrefsManifest(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
   }): PagePrefsManifest {
-    const result: PagePrefsManifest = {
-      referencedPrefIds: []
-    };
+    const result: PagePrefsManifest = {};
+
+    if (!p.frontmatter.page_preferences) {
+      return result;
+    }
+
+    // Key the configs by pref ID first, for convenience
+    const prefConfigByPrefId: Record<string, PagePrefConfig> =
+      p.frontmatter.page_preferences.reduce(
+        (obj, prefConfig) => ({ ...obj, [prefConfig.id]: prefConfig }),
+        {}
+      );
+
+    // Fill out the manifest in the order that the prefs
+    // appeared in the frontmatter
+    p.frontmatter.page_preferences.forEach((pagePrefConfig) => {
+      // Get the options set ID for this pref,
+      // or all possible options set IDs if the pref's options_source
+      // contains placeholders
+      let optionsSetIds: string[] = [];
+
+      if (pagePrefConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX)) {
+        const segments = pagePrefConfig.options_source.split('_').map((segment) => {
+          if (segment.match(PLACEHOLDER_REGEX)) {
+            const referencedPrefId = segment.slice(1, -1).toLowerCase();
+            const referencedOptionsSet =
+              p.prefOptionsConfig[prefConfigByPrefId[referencedPrefId].options_source];
+            return referencedOptionsSet.map((option) => option.id);
+          }
+          return [segment];
+        });
+
+        optionsSetIds = this.buildSnakeCaseCombinations(segments);
+      } else {
+        optionsSetIds = [pagePrefConfig.options_source];
+      }
+
+      // Populate the default value for each options set ID
+      const defaultValuesByOptionsSetId: Record<string, string> = optionsSetIds.reduce(
+        (obj, optionsSetId) => {
+          const optionsSet = p.prefOptionsConfig[optionsSetId];
+          const defaultOption = optionsSet.find((option) => option.default);
+          if (!defaultOption) {
+            return obj;
+          }
+          return { ...obj, [optionsSetId]: defaultOption.id };
+        },
+        {}
+      );
+
+      result[pagePrefConfig.id] = {
+        config: pagePrefConfig,
+        defaultValuesByOptionsSetId
+      };
+    });
+
+    return result;
   }
 
   static loadPrefsConfigFromLangDir(p: {

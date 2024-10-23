@@ -17,7 +17,7 @@
  */
 
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
+import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/pagePrefs';
 import {
   PagePrefsConfig,
   PagePrefConfig,

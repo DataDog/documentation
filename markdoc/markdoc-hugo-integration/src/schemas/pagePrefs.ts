@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { PREF_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
 import { PrefOptionSchema } from './yaml/prefOptions';
+import { PagePrefConfigSchema } from './yaml/frontMatter';
 
 const ResolvedPagePrefOptionSchema = z
   .object({
@@ -72,6 +73,18 @@ export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
  */
 export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;
 
+export const PagePrefManifestSchema = z
+  .object({
+    config: PagePrefConfigSchema,
+    defaultValuesByOptionsSetId: z.record(
+      z.string().regex(PREF_OPTIONS_ID_REGEX),
+      z.string().regex(SNAKE_CASE_REGEX)
+    )
+  })
+  .strict();
+
+export type PagePrefManifest = z.infer<typeof PagePrefManifestSchema>;
+
 /**
  * A object containing all of the potential pref IDs
  * and option sets for a page, created by populating the front matter
@@ -82,22 +95,9 @@ export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;
  * Useful for efficiently validating, resolving,
  * and re-resolving preferences.
  */
-export const PagePrefsManifestSchema = z
-  .object({
-    referencedPrefIds: z.array(z.string().regex(SNAKE_CASE_REGEX)),
-    referencedOptionSetsByPrefId: z.record(
-      z.string().regex(SNAKE_CASE_REGEX),
-      z.array(z.string().regex(PREF_OPTIONS_ID_REGEX))
-    ),
-    defaultValuesByOptionsSetId: z.record(
-      z.string().regex(PREF_OPTIONS_ID_REGEX),
-      z.string().regex(SNAKE_CASE_REGEX)
-    ),
-    optionsByOptionsSetId: z.record(
-      z.string().regex(PREF_OPTIONS_ID_REGEX),
-      z.array(PrefOptionSchema)
-    )
-  })
-  .strict();
+export const PagePrefsManifestSchema = z.record(
+  z.string().regex(SNAKE_CASE_REGEX),
+  PagePrefManifestSchema
+);
 
 export type PagePrefsManifest = z.infer<typeof PagePrefsManifestSchema>;
