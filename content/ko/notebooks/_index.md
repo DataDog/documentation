@@ -1,6 +1,6 @@
 ---
 aliases:
-- /graphing/notebooks/
+- /ko/graphing/notebooks/
 cascade:
   algolia:
     rank: 70
@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: 블로그
   text: 인시던트 포스트모템(사후 분석) 생성 모범 사례
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
+  tag: 블로그
+  text: Datadog Observability Pipelines를 사용하여 로그를 변환하고 강화하세요.
 title: 노트북
 ---
 

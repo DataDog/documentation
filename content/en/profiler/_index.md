@@ -94,9 +94,9 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 ### Connect traces to profiling data
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Profiles tab][4] to find specific lines of code related to performance issues.
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab shows profiling information for a APM trace span" >}}
 
 ### Find changes in performance by comparing profiles
 
