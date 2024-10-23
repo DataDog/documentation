@@ -22,6 +22,7 @@ import {
 } from './PageBuilder/pageConfigMinification';
 import { transformConfig } from '../markdocParserConfig';
 import { anchorize } from './stringProcessing';
+import { PagePrefsManifest } from '../schemas/pagePrefs';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -72,7 +73,9 @@ export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   defaultValsByPrefId: Record<string, string>;
   variables: Record<string, any>;
+  prefsManifest: PagePrefsManifest;
 }): RenderableTreeNode {
+  console.log('\n\n\nbuilding tree ...');
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: {
       ...p.defaultValsByPrefId,
@@ -81,21 +84,41 @@ export function buildRenderableTree(p: {
     partials: p.parsedFile.partials,
     ...transformConfig
   });
+  console.log('...renderable tree built.\n\n\n');
 
   addHeaderAnchorstoTree(renderableTree);
 
+  const referencedValuesByPrefId = collectReferencedValuesByVarId(renderableTree);
+
+  const referencedPrefIds = Object.keys(referencedValuesByPrefId);
+
   // ensure that all variable ids appearing
   // in the renderable tree are valid page pref ids
-  const referencedVarIds = collectVarIdsFromTree(renderableTree);
   const pagePrefIds = Object.keys(p.defaultValsByPrefId);
-  const invalidVarIds = referencedVarIds.filter((id) => !pagePrefIds.includes(id));
+  const invalidPrefIds = referencedPrefIds.filter((id) => !pagePrefIds.includes(id));
 
-  if (invalidVarIds.length > 0) {
-    throw new Error(
-      `Invalid reference found in markup: ${invalidVarIds} is not a valid ID.`
-    );
+  if (invalidPrefIds.length > 0) {
+    throw new Error(`Invalid pref IDs found in markup: ${invalidPrefIds}`);
   }
 
+  // ensure that all referenced values are valid
+  Object.keys(referencedValuesByPrefId).forEach((prefId) => {
+    const referencedValues = referencedValuesByPrefId[prefId];
+    console.log('referencedValues', referencedValues);
+    const possibleValues = p.prefsManifest.prefsById[prefId].possibleValues;
+    console.log('possibleValues', possibleValues);
+    const invalidValues = referencedValues.filter(
+      (value) => !possibleValues.includes(value)
+    );
+    console.log('invalidValues', invalidValues);
+    if (invalidValues.length > 0) {
+      throw new Error(
+        `Invalid value found in markup: "${invalidValues}" is not a valid value for the pref ID "${prefId}".`
+      );
+    }
+  });
+
+  console.log('... returning renderable tree.\n\n\n');
   return renderableTree;
 }
 
@@ -115,8 +138,12 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
 
   if ('name' in node && headerTags.includes(node.name as string)) {
     node = node as Tag;
-    if (node.attributes !== null && node.children !== null) {
-      node.attributes.id = node.attributes.id || anchorize(node.children[0] as string);
+    if (
+      node.attributes !== null &&
+      node.children !== null &&
+      typeof node.children[0] === 'string'
+    ) {
+      node.attributes.id = node.attributes.id || anchorize(node.children[0]);
     }
   }
 
@@ -126,36 +153,65 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
 }
 
 /**
- * Collect all variable IDs referenced in the markup.
+ * Collect all variable IDs referenced in the markup,
+ * along with an array of their expected values.
  * (The markup must first be parsed into a renderable tree.)
  *
  * @param node A renderable tree.
  * @returns A list of variable IDs found in the tree.
  */
-function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
-  let varIds: string[] = [];
+function collectReferencedValuesByVarId(
+  node: RenderableTreeNodes
+): Record<string, string[]> {
+  let referencedValuesByVarId: Record<string, string[]> = {};
 
-  if (!node) return varIds;
+  if (!node) return referencedValuesByVarId;
 
   if (Array.isArray(node)) {
     node.forEach((n) => {
-      const ids = collectVarIdsFromTree(n);
-      varIds = varIds.concat(ids);
+      const valuesById = collectReferencedValuesByVarId(n);
+      Object.keys(valuesById).forEach((id) => {
+        if (id in referencedValuesByVarId) {
+          referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(
+            valuesById[id]
+          );
+        } else {
+          referencedValuesByVarId[id] = valuesById[id];
+        }
+      });
     });
   }
 
-  if (typeof node !== 'object') return varIds;
+  if (typeof node !== 'object') return referencedValuesByVarId;
 
   if ('children' in node && node.children) {
-    const ids = collectVarIdsFromTree(node.children);
-    varIds = varIds.concat(ids);
+    const valuesById = collectReferencedValuesByVarId(node.children);
+    Object.keys(valuesById).forEach((id) => {
+      if (id in referencedValuesByVarId) {
+        referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
+      } else {
+        referencedValuesByVarId[id] = valuesById[id];
+      }
+      referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+    });
   }
 
+  /*
   if ('parameters' in node && node.parameters) {
-    const ids = collectVarIdsFromTree(Object.values(node.parameters));
-    varIds = varIds.concat(ids);
+    console.log('evaluating node.parameters', node.parameters);
+    const valuesById = collectReferencedValuesByVarId(Object.values(node.parameters));
+    Object.keys(valuesById).forEach((id) => {
+      if (id in referencedValuesByVarId) {
+        referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
+      } else {
+        referencedValuesByVarId[id] = valuesById[id];
+      }
+      referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+    });
   }
+    */
 
+  /* Not currently necessary, since we aren't interpolating vars in the markup
   if (typeof node === 'object' && '$$mdtype' in node && node.$$mdtype === 'Variable') {
     // @ts-ignore, TODO:
     //
@@ -166,22 +222,59 @@ function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
     //
     // We may wind up needing to support nested data because we may need to
     // group all pref variables under a parent $prefs object or similar.
-    varIds.push(node.path?.join('.'));
+    const varId = node.path?.join('.');
+    const value = node.value;
+    if (varId && value) {
+      if (varId in referencedValuesByVarId) {
+        referencedValuesByVarId[varId].push(value);
+      } else {
+        referencedValuesByVarId[varId] = [value];
+      }
+      referencedValuesByVarId[varId] = Array.from(
+        new Set(referencedValuesByVarId[varId])
+      );
+    }
+  }*/
+
+  if (typeof node !== 'object' || !('$$mdtype' in node)) {
+    return referencedValuesByVarId;
   }
 
-  if (
-    typeof node === 'object' &&
-    '$$mdtype' in node &&
-    node.$$mdtype === 'Tag' &&
-    'if' in node
-  ) {
-    const ids = collectVarIdsFromTree(
+  if (node.$$mdtype === 'Tag' && 'if' in node) {
+    const valuesById = collectReferencedValuesByVarId(
       // @ts-ignore
       node.if
     );
-    varIds = varIds.concat(ids);
+    Object.keys(valuesById).forEach((id) => {
+      if (id in referencedValuesByVarId) {
+        referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
+      } else {
+        referencedValuesByVarId[id] = valuesById[id];
+      }
+      referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+    });
   }
 
-  // remove duplicates
-  return Array.from(new Set(varIds));
+  if (node.$$mdtype === 'Function') {
+    if (
+      node.parameters &&
+      typeof node.parameters === 'object' &&
+      Object.keys(node.parameters).length === 2
+    ) {
+      // @ts-ignore
+      const varId = node.parameters[0].path?.join('.');
+      // @ts-ignore
+      const value = node.parameters[1];
+      if (varId in referencedValuesByVarId) {
+        referencedValuesByVarId[varId].push(value);
+      } else {
+        referencedValuesByVarId[varId] = [value];
+      }
+      referencedValuesByVarId[varId] = Array.from(
+        new Set(referencedValuesByVarId[varId])
+      );
+    }
+  }
+
+  return referencedValuesByVarId;
 }

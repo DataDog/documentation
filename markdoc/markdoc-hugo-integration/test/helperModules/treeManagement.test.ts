@@ -23,17 +23,18 @@ describe('treeManagement', () => {
     file: testFilePath,
     partialsDir: VALID_PARTIALS_DIR
   });
-  const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
-    parsedFile.frontmatter,
+
+  const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
+    frontmatter: parsedFile.frontmatter,
     prefOptionsConfig
-  );
+  });
 
   test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
     const tree = buildRenderableTree({
       parsedFile,
-      prefOptionsConfig,
-      defaultValsByPrefId,
-      variables: {}
+      defaultValsByPrefId: prefsManifest.defaultValsByPrefId,
+      variables: {},
+      prefsManifest
     });
 
     expect(JSON.stringify(tree, null, 2)).toMatchFileSnapshot(

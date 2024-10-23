@@ -159,6 +159,7 @@ export class MarkdocHugoIntegration {
     const markdocFilepaths = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
 
     for (const markdocFilepath of markdocFilepaths) {
+      console.log(`\nCompiling ${markdocFilepath}...`);
       const parsedFile = this.#parseMdocFile(markdocFilepath);
       if (!parsedFile) {
         continue;
