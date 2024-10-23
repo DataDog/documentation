@@ -24,7 +24,7 @@ Use regex patterns that are as precise as possible because generic patterns resu
 
 Add keywords to the keyword dictionary to refine detection accuracy for matching regex patterns. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value. See step 2 in [Add a custom scanning rule][2] for more information.
 
-{{< img src="sensitive_data_scanner/guides/password_keyword.png" alt="A keyword dictionary with password, token, secret, credential" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/guides/password_keyword.png" alt="A keyword dictionary with password, token, secret, credential" style="width:90%;" >}}
 
 To make matches more precise, you can also do one of the following:
 
