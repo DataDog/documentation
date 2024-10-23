@@ -80,7 +80,8 @@ export const PagePrefManifestSchema = z
     defaultValuesByOptionsSetId: z.record(
       z.string().regex(PREF_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX)
-    )
+    ),
+    possibleValues: z.array(z.string().regex(SNAKE_CASE_REGEX))
   })
   .strict();
 

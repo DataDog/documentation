@@ -5,6 +5,7 @@ import {
   paintColorsPrefOptionsConfig
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
+import { SNAPSHOTS_DIR } from '../../config/constants';
 
 describe('YamlConfigParser.buildPagePrefsManifest', () => {
   test('creates the expected object when given valid data', () => {
@@ -23,7 +24,8 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
           },
           defaultValuesByOptionsSetId: {
             color_options: 'blue'
-          }
+          },
+          possibleValues: ['blue', 'red']
         },
         finish: {
           config: {
@@ -33,7 +35,8 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
           },
           defaultValuesByOptionsSetId: {
             finish_options: 'eggshell'
-          }
+          },
+          possibleValues: ['matte', 'eggshell', 'gloss']
         },
         paint: {
           config: {
@@ -48,7 +51,20 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
             eggshell_red_paint_options: 'rose',
             gloss_blue_paint_options: 'sky_blue',
             gloss_red_paint_options: 'fire_engine'
-          }
+          },
+          possibleValues: [
+            'powder_blue',
+            'brick',
+            'scarlet',
+            'elegant_royal',
+            'robins_egg',
+            'rose',
+            'ruby',
+            'sky_blue',
+            'navy',
+            'fire_engine',
+            'crimson'
+          ]
         }
       },
       optionSetsById: {
@@ -148,10 +164,10 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
         paint: 'elegant_royal'
       }
     };
-
-    console.log(JSON.stringify(manifest, null, 2));
-
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
+    expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/prefsManifest.snap.json`
+    );
   });
 
   test('detects an invalid placeholder', () => {

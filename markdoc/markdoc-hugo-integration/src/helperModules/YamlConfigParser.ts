@@ -131,28 +131,31 @@ export class YamlConfigParser {
       }
 
       // Populate the default value for each options set ID
-      const defaultValuesByOptionsSetId: Record<string, string> = optionsSetIds.reduce(
-        (obj, optionsSetId) => {
-          const optionsSet = p.prefOptionsConfig[optionsSetId];
-          if (!optionsSet) {
-            manifest.errors.push(
-              `Invalid options source: The options source '${optionsSetId}', which is required for the pref ID '${pagePrefConfig.id}', does not exist.`
-            );
-            return obj;
+      const defaultValuesByOptionsSetId: Record<string, string> = {};
+      const possibleValues: string[] = [];
+
+      optionsSetIds.forEach((optionsSetId) => {
+        const optionsSet = p.prefOptionsConfig[optionsSetId];
+        if (!optionsSet) {
+          manifest.errors.push(
+            `Invalid options source: The options source '${optionsSetId}', which is required for the pref ID '${pagePrefConfig.id}', does not exist.`
+          );
+          return;
+        }
+
+        optionsSet.forEach((option) => {
+          if (option.default) {
+            defaultValuesByOptionsSetId[optionsSetId] = option.id;
           }
 
-          const defaultOption = optionsSet.find((option) => option.default);
-          if (!defaultOption) {
-            return obj;
-          }
-          return { ...obj, [optionsSetId]: defaultOption.id };
-        },
-        {}
-      );
+          possibleValues.push(option.id);
+        });
+      });
 
       manifest.prefsById[pagePrefConfig.id] = {
         config: pagePrefConfig,
-        defaultValuesByOptionsSetId
+        defaultValuesByOptionsSetId,
+        possibleValues
       };
 
       processedPrefIds.push(pagePrefConfig.id);
@@ -297,7 +300,7 @@ export class YamlConfigParser {
   static getDefaultValuesByPrefId(
     frontmatter: Frontmatter,
     prefOptionsConfig: PrefOptionsConfig
-  ): Record<string, string | undefined> {
+  ): Record<string, string> {
     if (!frontmatter.page_preferences) {
       return {};
     }
