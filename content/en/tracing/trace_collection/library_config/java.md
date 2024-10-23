@@ -179,6 +179,11 @@ A regex to redact sensitive data from incoming requests' query string reported i
 **Default**: `true`<br>
 By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
 
+`dd.trace.span.tags`
+: **Environment Variable**: `DD_TRACE_SPAN_TAGS`<br> 
+**Default**: `false`<br>
+A list of default tags to be added to every span.
+
 `dd.trace.startup.logs`
 : **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
 **Default**: `true`<br>
