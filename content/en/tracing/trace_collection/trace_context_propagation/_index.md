@@ -71,7 +71,7 @@ The Datadog SDK supports the following trace context formats:
 | [W3C Trace Context][2] | `tracecontext`                |
 | [B3 Single][3]         | _Language Dependent Value_    |
 | [B3 Multi][4]          | `b3multi`                     |
-| [Baggage][10]           | `baggage`                     |
+| [Baggage][10]          | `baggage`                     |
 | [None][5]              | `none`                        |
 
 ## Language support
@@ -627,9 +627,8 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 ### Baggage format
 
-Baggage propagation using an OpenTelemetry/W3C-compatible header will be enabled by default. The SDKs allow disabling the baggage propagator by explicitly configuring the settings above and not including the baggage header. 
+Baggage propagation through OpenTelemetry's W3C-compatible headers is enabled by default.
 
-Since there is no conflict between the baggage propagator and the existing trace context propagators (because they inject and extract different headers), the order in which baggage is included in the list of propagators has no effect.
 
 
 ## Further reading
