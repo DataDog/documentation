@@ -1,4 +1,4 @@
-{{- $pattern := `^security_monitoring/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$` -}}
+{{- $pattern := `^security_monitoring/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$|^security/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$` -}}
 {{- range $p := .Site.Pages -}}
     {{- range .Aliases -}}
         {{- $temp := strings.TrimPrefix "/" . -}}
