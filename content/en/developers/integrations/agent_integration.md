@@ -437,11 +437,11 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 </details>
 
 For installing your wheel to test in Kubernetes environments: 
-1. Mount the whl into a initContainer
-2. Run the whl install in the init container
-3. Mount the init container in the agent container while it's running
+1. Mount the `.whl` file into an initContainer.
+2. Run the wheel install in the initContainer.
+3. Mount the initContainer in the Agent container while it's running.
 
-For customer install commands for both host and container environments, please see [here.][35]
+For customer install commands for both host and container environments, see the [Community and Marketplace Integrations documentation][35].
 ## Populate your tile and publish your integration
 
 Once you have created your Agent-based integration, see the [Create a tile][20] documentation for information on populating the remaining [required assets][31] that appear on your integration tile, and opening a pull request.
