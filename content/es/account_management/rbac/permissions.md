@@ -13,7 +13,6 @@ further_reading:
 - link: /api/v2/roles/#list-permissions
   tag: Documentación
   text: Gestiona tus permisos con la API de permisos.
-kind: documentación
 title: Permisos de rol en Datadog
 ---
 

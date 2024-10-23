@@ -201,6 +201,13 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "UploadCustomCostsFile": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_4125168396",
+      "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
   "CreateCloudflareAccount": [
     {
       "group": "cloudflare_integration",
@@ -645,6 +652,20 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1540689753",
+      "description": "Create api handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_419892746",
+      "description": "Update api handle returns \"OK\" response"
+    }
+  ],
   "CreateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -657,6 +678,13 @@
       "group": "monitors",
       "suffix": "",
       "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "UpdateDeviceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
@@ -685,6 +713,13 @@
       "group": "opsgenie_integration",
       "suffix": "",
       "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConfig": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Update a specific Org Config returns \"OK\" response"
     }
   ],
   "CreatePowerpack": [
@@ -797,6 +832,13 @@
       "description": "Change the triage state of a security signal returns \"OK\" response"
     }
   ],
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
+    }
+  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -867,6 +909,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "TestSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a rule returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -1015,6 +1064,20 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpsertCatalogEntity": [
+    {
+      "group": "software_catalog",
+      "suffix": "_586948155",
+      "description": "Create or update software catalog entity using schema v3 returns \"ACCEPTED\" response"
+    }
+  ],
   "AggregateSpans": [
     {
       "group": "spans",
@@ -1114,6 +1177,13 @@
       "group": "users",
       "suffix": "",
       "description": "Update a user returns \"OK\" response"
+    }
+  ],
+  "CreateWorkflowInstance": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Execute a workflow returns \"Created\" response"
     }
   ]
 }

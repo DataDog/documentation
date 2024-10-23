@@ -1991,6 +1991,42 @@ menu:
       url: /api/latest/organizations/
       identifier: organizations
       generated: true
+    - name: Update a specific Org Config
+      url: '#update-a-specific-org-config'
+      identifier: organizations-update-a-specific-org-config
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgConfig
+        unstable: []
+        order: 102
+    - name: Get a specific Org Config value
+      url: '#get-a-specific-org-config-value'
+      identifier: organizations-get-a-specific-org-config-value
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgConfig
+        unstable: []
+        order: 101
+    - name: List Org Configs
+      url: '#list-org-configs'
+      identifier: organizations-list-org-configs
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgConfigs
+        unstable: []
+        order: 100
     - name: Upload IdP metadata
       url: '#upload-idp-metadata'
       identifier: organizations-upload-idp-metadata
@@ -2160,7 +2196,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 9
+        order: 13
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2172,7 +2208,31 @@ menu:
         operationids:
           - ListSecurityMonitoringSignals
         unstable: []
-        order: 10
+        order: 14
+    - name: Test an existing rule
+      url: '#test-an-existing-rule'
+      identifier: security-monitoring-test-an-existing-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TestExistingSecurityMonitoringRule
+        unstable: []
+        order: 8
+    - name: Convert an existing rule from JSON to Terraform
+      url: '#convert-an-existing-rule-from-json-to-terraform'
+      identifier: security-monitoring-convert-an-existing-rule-from-json-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertExistingSecurityMonitoringRule
+        unstable: []
+        order: 11
     - name: Update an existing rule
       url: '#update-an-existing-rule'
       identifier: security-monitoring-update-an-existing-rule
@@ -2220,7 +2280,31 @@ menu:
         operationids:
           - ValidateSecurityMonitoringRule
         unstable: []
-        order: 8
+        order: 10
+    - name: Test a rule
+      url: '#test-a-rule'
+      identifier: security-monitoring-test-a-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TestSecurityMonitoringRule
+        unstable: []
+        order: 9
+    - name: Convert a rule from JSON to Terraform
+      url: '#convert-a-rule-from-json-to-terraform'
+      identifier: security-monitoring-convert-a-rule-from-json-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertSecurityMonitoringRuleFromJSONToTerraform
+        unstable: []
+        order: 12
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -3003,6 +3087,18 @@ menu:
           - GetTest
         unstable: []
         order: 28
+    - name: Fetch uptime for multiple tests
+      url: '#fetch-uptime-for-multiple-tests'
+      identifier: synthetics-fetch-uptime-for-multiple-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - FetchUptimes
+        unstable: []
+        order: 30
     - name: Trigger tests from CI/CD pipelines
       url: '#trigger-tests-from-ci/cd-pipelines'
       identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -3027,6 +3123,42 @@ menu:
           - TriggerTests
         unstable: []
         order: 8
+    - name: Edit a Mobile test
+      url: '#edit-a-mobile-test'
+      identifier: synthetics-edit-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - UpdateMobileTest
+        unstable: []
+        order: 3
+    - name: Get a Mobile test
+      url: '#get-a-mobile-test'
+      identifier: synthetics-get-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - GetMobileTest
+        unstable: []
+        order: 9
+    - name: Create a mobile test
+      url: '#create-a-mobile-test'
+      identifier: synthetics-create-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - CreateSyntheticsMobileTest
+        unstable: []
+        order: 2
     - name: Delete tests
       url: '#delete-tests'
       identifier: synthetics-delete-tests
@@ -4153,6 +4285,19 @@ menu:
           - DeleteOpenAPI
         unstable:
           - v2
+        order: 5
+    - name: List APIs
+      url: '#list-apis'
+      identifier: api-management-list-apis
+      parent: api-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAPIs
+        unstable:
+          - v2
         order: 4
     - name: APM Retention Filters
       url: /api/latest/apm-retention-filters/
@@ -4736,6 +4881,54 @@ menu:
           - v2
         operationids:
           - GetCloudCostActivity
+        unstable: []
+        order: 10
+    - name: Get Custom Costs file
+      url: '#get-custom-costs-file'
+      identifier: cloud-cost-management-get-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomCostsFile
+        unstable: []
+        order: 12
+    - name: Delete Custom Costs file
+      url: '#delete-custom-costs-file'
+      identifier: cloud-cost-management-delete-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomCostsFile
+        unstable: []
+        order: 13
+    - name: Upload Custom Costs file
+      url: '#upload-custom-costs-file'
+      identifier: cloud-cost-management-upload-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadCustomCostsFile
+        unstable: []
+        order: 11
+    - name: List Custom Costs files
+      url: '#list-custom-costs-files'
+      identifier: cloud-cost-management-list-custom-costs-files
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomCostsFiles
         unstable: []
         order: 10
     - name: Update Cloud Cost Management Azure config
@@ -6010,6 +6203,146 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Microsoft Teams Integration
+      url: /api/latest/microsoft-teams-integration/
+      identifier: microsoft-teams-integration
+      generated: true
+    - name: Update tenant-based handle
+      url: '#update-tenant-based-handle'
+      identifier: microsoft-teams-integration-update-tenant-based-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Get tenant-based handle information
+      url: '#get-tenant-based-handle-information'
+      identifier: microsoft-teams-integration-get-tenant-based-handle-information
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Delete tenant-based handle
+      url: '#delete-tenant-based-handle'
+      identifier: microsoft-teams-integration-delete-tenant-based-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Create tenant-based handle
+      url: '#create-tenant-based-handle'
+      identifier: microsoft-teams-integration-create-tenant-based-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Get all tenant-based handles
+      url: '#get-all-tenant-based-handles'
+      identifier: microsoft-teams-integration-get-all-tenant-based-handles
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTenantBasedHandles
+        unstable: []
+        order: 1
+    - name: Get channel information by name
+      url: '#get-channel-information-by-name'
+      identifier: microsoft-teams-integration-get-channel-information-by-name
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChannelByName
+        unstable: []
+        order: 1
+    - name: Network Device Monitoring
+      url: /api/latest/network-device-monitoring/
+      identifier: network-device-monitoring
+      generated: true
+    - name: Update the tags for a device
+      url: '#update-the-tags-for-a-device'
+      identifier: network-device-monitoring-update-the-tags-for-a-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeviceUserTags
+        unstable: []
+        order: 5
+    - name: Get the list of tags for a device
+      url: '#get-the-list-of-tags-for-a-device'
+      identifier: network-device-monitoring-get-the-list-of-tags-for-a-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeviceUserTags
+        unstable: []
+        order: 4
+    - name: Get the list of interfaces of the device
+      url: '#get-the-list-of-interfaces-of-the-device'
+      identifier: network-device-monitoring-get-the-list-of-interfaces-of-the-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInterfaces
+        unstable: []
+        order: 3
+    - name: Get the device details
+      url: '#get-the-device-details'
+      identifier: network-device-monitoring-get-the-device-details
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDevice
+        unstable: []
+        order: 2
+    - name: Get the list of devices
+      url: '#get-the-list-of-devices'
+      identifier: network-device-monitoring-get-the-list-of-devices
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDevices
+        unstable: []
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
@@ -6762,6 +7095,19 @@ menu:
       url: /api/latest/service-scorecards/
       identifier: service-scorecards
       generated: true
+    - name: Update an existing rule
+      url: '#update-an-existing-rule'
+      identifier: service-scorecards-update-an-existing-rule
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardRule
+        unstable:
+          - v2
+        order: 4
     - name: Delete a rule
       url: '#delete-a-rule'
       identifier: service-scorecards-delete-a-rule
@@ -6827,6 +7173,46 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Software Catalog
+      url: /api/latest/software-catalog/
+      identifier: software-catalog
+      generated: true
+    - name: Delete a single entity
+      url: '#delete-a-single-entity'
+      identifier: software-catalog-delete-a-single-entity
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCatalogEntity
+        unstable: []
+        order: 3
+    - name: Create or update entities
+      url: '#create-or-update-entities'
+      identifier: software-catalog-create-or-update-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCatalogEntity
+        unstable: []
+        order: 2
+    - name: Get a list of entities
+      url: '#get-a-list-of-entities'
+      identifier: software-catalog-get-a-list-of-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCatalogEntity
+        unstable: []
+        order: 1
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -7137,5 +7523,57 @@ menu:
           - v2
         operationids:
           - ListTeams
+        unstable: []
+        order: 1
+    - name: Workflow Automation
+      url: /api/latest/workflow-automation/
+      identifier: workflow-automation
+      generated: true
+    - name: Cancel a workflow instance
+      url: '#cancel-a-workflow-instance'
+      identifier: workflow-automation-cancel-a-workflow-instance
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelWorkflowInstance
+        unstable: []
+        order: 4
+    - name: Get a workflow instance
+      url: '#get-a-workflow-instance'
+      identifier: workflow-automation-get-a-workflow-instance
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflowInstance
+        unstable: []
+        order: 3
+    - name: Execute a workflow
+      url: '#execute-a-workflow'
+      identifier: workflow-automation-execute-a-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowInstance
+        unstable: []
+        order: 2
+    - name: List workflow instances
+      url: '#list-workflow-instances'
+      identifier: workflow-automation-list-workflow-instances
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflowInstances
         unstable: []
         order: 1

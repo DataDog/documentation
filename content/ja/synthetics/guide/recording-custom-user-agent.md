@@ -1,15 +1,17 @@
 ---
-title: カスタムユーザーエージェントで手順を記録
-kind: documentation
 description: カスタムユーザーエージェント文字列でブラウザテストの手順を記録
 further_reading:
-  - link: /synthetics/browser_tests/actions
-    tag: ドキュメント
-    text: ブラウザテストのステップについて
-  - link: /synthetics/browser_tests/advanced_options/
-    tag: ドキュメント
-    text: ステップに高度なオプションを構成する
+- link: /synthetics/browser_tests/actions
+  tag: ドキュメント
+  text: ブラウザテストのステップについて
+- link: /synthetics/browser_tests/advanced_options/
+  tag: ドキュメント
+  text: ステップに高度なオプションを構成する
+title: カスタムユーザー Agent で手順を記録
 ---
+
+## 概要
+
 一部の実装では、特定の `User-Agent` 文字列を使用した時のみ（たとえば、`User-Agent` を使用しているとき）アプリケーションがレンダリングされます。この場合、アプリケーションでブラウザテストの手順を記録できるよう `User-Agent` ヘッダーをカスタム文字列に設定する必要があります。
 
 1. ブラウザテストレコーダーの **Open in Popup** をクリックして、アプリケーションをポップアップで開きます。

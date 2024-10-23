@@ -26,6 +26,7 @@ author:
 categories:
 - data stores
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: hbase-master
 integration_title: Hbase Master
 integration_version: 1.1.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: hbase_master
 public_title: Hbase Master
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: HBase master インテグレーション。
   media: []
@@ -70,11 +71,11 @@ Hbase_master サービスからメトリクスをリアルタイムに取得し�
 - Hbase_master の状態を視覚化および監視できます。
 - Hbase_master のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
 Hbase_master チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -86,7 +87,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Hbase_master の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーで `hbase_master.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_master.d/conf.yaml][5] を参照してください。
 
@@ -107,7 +108,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 
 2. [Agent を再起動します][7]。
 
-### 収集データ
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -133,21 +134,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Hbase_master �
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `hbase_master` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hbase_master" >}}
 
 
-### ヘルプ
+### イベント
 
 Hbase_master チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Hbase_master チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
@@ -164,11 +165,11 @@ HBase RegionServer サービスからメトリクスをリアルタイムに取�
 - HBase RegionServer の状態を視覚化および監視できます。
 - HBase RegionServer のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
 HBase RegionServer チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い HBase RegionServer チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -180,13 +181,13 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い HBase RegionSe
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Hbase RegionServer の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーで `hbase_regionserver.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_regionserver.d/conf.yaml][10] を参照してください。
 
 2. [Agent を再起動します][7]。
 
-### 収集データ
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -212,21 +213,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い HBase RegionSe
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `hbase_regionserver` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hbase_regionserver" >}}
 
 
-### ヘルプ
+### イベント
 
 HBase RegionServer チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 HBase RegionServer チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

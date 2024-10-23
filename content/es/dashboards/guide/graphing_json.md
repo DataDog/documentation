@@ -13,7 +13,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentación
   text: Widgets
-kind: documentation
 title: Crear gráficas con JSON
 ---
 

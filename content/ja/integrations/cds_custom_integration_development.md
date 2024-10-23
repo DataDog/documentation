@@ -5,14 +5,15 @@ app_id: cds-custom-integration-development
 app_uuid: b5e0db92-6931-4522-8333-8c1ec5e6df66
 assets: {}
 author:
-  contact_link: https://www.crestdatasys.com/contact-us/
-  homepage: https://www.crestdatasys.com
+  contact_link: https://www.crestdata.ai/contact-us/
+  homepage: https://www.crestdata.ai
   name: Crest Data
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,14 +22,13 @@ integration_id: cds-custom-integration-development
 integration_title: Datadog 用のカスタム開発
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cds_custom_integration_development
 pricing:
 - includes_assets: true
   private_offer_only: true
   product_id: custom-integration-development
-  short_description: プライベートオファーのプレースホルダ―
+  short_description: プライベートオファーのプレースホルダー
   unit_price: null
 public_title: Datadog 用のカスタムインテグレーション開発
 short_description: Crest Data のカスタムインテグレーションを使用すれば、すべてのプラットフォームで包括的なモニタリングと分析が可能になります。
@@ -84,13 +84,13 @@ Datadog のモニタリング・分析プラットフォームを活用するこ
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- サポートメール: [datadog.integrations@crestdatasys.com][1]
-- 営業メール: [datadog-sales@crestdatasys.com][2]
-- Web サイト: [crestdatasys.com][3]
+- Support Email: [datadog.integrations@crestdata.ai][1]
+- Sales Email: [datadog-sales@crestdata.ai][2]
+- Web サイト: [crestdata.ai][3]
 
-[1]: mailto:datadog.integrations@crestdatasys.com
-[2]: mailto:datadog-sales@crestdatasys.com
-[3]: https://www.crestdatasys.com/
+[1]: mailto:datadog.integrations@crestdata.ai
+[2]: mailto:datadog-sales@crestdata.ai
+[3]: https://www.crestdata.ai/
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/cds-custom-integration-development" target="_blank">こちらをクリック</a>してください。

@@ -1,6 +1,5 @@
 ---
 title: Manage Datadog with Terraform
-kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

@@ -18,7 +18,7 @@ integration_id: nextcloud
 integration_title: Nextcloud
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: emeric.planet@gmail.com
 manifest_version: 1.0.0
 metric_prefix: nextcloud.

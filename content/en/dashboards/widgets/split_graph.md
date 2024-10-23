@@ -1,6 +1,5 @@
 ---
 title: Split Graph Widget
-kind: documentation
 widget_type: split_group
 further_reading:
 - link: "/dashboards/guide/graphing_json/"
@@ -8,7 +7,7 @@ further_reading:
   text: "Build dashboards using JSON"
 ---
 
-<div class="alert alert-info">Split graph widgets are not supported on screenboards and <a href="https://docs.datadoghq.com/dashboards/sharing/#share-a-dashboard-by-public-url">public dashboards.</a></div>
+<div class="alert alert-info">Split graph widgets are not supported on screenboards and <a href="https://docs.datadoghq.com/dashboards/sharing/public_dashboards">public dashboards.</a></div>
 
 ## Overview
 
@@ -28,7 +27,7 @@ You can also create a split graph by taking an existing widget and splitting it 
 - Open the context menu of a widget on your dashboard and select **Split Graph**.
 
 From the **Split Graph** tab, you can configure how your graph is split, set the limit on the number of graphs, and configure the order.  
-1. Make configuration changes to the split by editing the split dimension, number of graphs displayed, or editing display options. Fore more information on the configuration options, see the [Configuration](#configuration) section.
+1. Make configuration changes to the split by editing the split dimension, number of graphs displayed, or editing display options. For more information on the configuration options, see the [Configuration](#configuration) section.
 2. Click **Save to Dashboard** to create a new split graph widget at the bottom of your dashboard. Your original widget remains unchanged on your dashboard. 
 
 ### Create a split graph from elsewhere in Datadog

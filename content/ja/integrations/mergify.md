@@ -25,6 +25,7 @@ author:
   support_email: support@mergify.com
 categories:
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mergify/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: mergify
 integration_title: Mergify
 integration_version: 1.0.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: mergify
 public_title: Mergify
@@ -51,6 +51,7 @@ tile:
   - Supported OS::macOS
   - Submitted Data Type::Metrics
   - Category::Developer Tools
+  - Offering::Integration
   configuration: README.md#Setup
   description: Mergify マージキュー統計のインテグレーション
   media: []
@@ -66,9 +67,9 @@ tile:
 
 このインテグレーションは、[Mergify][1] で構成された各リポジトリのマージキュー長を監視し、Mergify のグローバル可用性を追跡します。メトリクスを Datadog アカウントに送信することで、異常アラート用のモニターをセットアップし、マージキューのパフォーマンスを分析することができます。この Datadog インテグレーションを使用して、Mergify サービスの可用性を意識し、開発ワークフローを最適化することができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 #### リリースから
 
@@ -88,7 +89,7 @@ Mergify チェックをホストにインストールするには
  `datadog-agent integration install -w
  path/to/mergify/dist/<ARTIFACT_NAME>.whl`.
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Mergify の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `mergify.d/conf.yaml` ファイルを編集します。
 
@@ -100,17 +101,17 @@ Mergify チェックをホストにインストールするには
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `mergify` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mergify" >}}
 
 
-### ヘルプ
+### イベント
 
 Mergify には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Mergify サポート][1]までお問い合わせください。
 

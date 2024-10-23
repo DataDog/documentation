@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 関数名が読めるようにする
 ---
 ## メタデータ

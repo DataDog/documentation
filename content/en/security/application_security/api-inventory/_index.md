@@ -1,38 +1,38 @@
 ---
 title: API Security Inventory
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
   text: "Mitigate the primary risks to API security"
 ---
 
-<div class="alert alert-info">API Security Inventory is in beta.</div>
-
 ## Overview
 
 [API Security Inventory][7] monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
-- **Authentication**: Type of authentication used, such as Basic Auth and API key.
+- **Authentication**: Whether the API enforces authentication.
+- **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
-- **Production status**: If the API is running in a production environment.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
-- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Software Composition Analysis][3]).
+- **Business Logic**: Business logic and associated business logic suggestions for this API.
+- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
+- **Findings**: Security findings found on this API.
+- **Dependencies**: APIs and Databases the API depends on.
 
 Using the API Security Inventory you can:
 
-- See at a glance your publicly exposed endpoints that are not requiring authenticated requests.
-- See at a glance your publicly exposed endpoints that are handling sensitive data, such as payment card numbers.
+- See at a glance which endpoints process sensitive data, are authenticated, have vulnerabilities or findings, or are publicly available.
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
+- See which endpoints are associated to your business's logic, and find business logic suggestions based on your endpoint's traffic history.
 
-{{< img src="security/application_security/api/api_endpoints.png" alt="API Security Inventory main page">}}
+{{< img src="security/application_security/api/api_endpoints_revamp.png" alt="API Security Inventory main page">}}
 
 ## Configuration
 
-The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
+To use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
 
-|Technology|Minimum version| Support for sensitive data scanning |
+|Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
 |Java      | v1.31.0  | Requests only |
@@ -43,22 +43,19 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Golang    | v1.59.0  | Requests only |
 |Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
+**Note**: On .NET Core and .NET Fx tracers, you need to set the environment variable `DD_API_SECURITY_ENABLED=true` for API Security features to work properly.
+
 ## How it works
 
-API Inventory leverages the Datadog tracing library with [ASM enabled][5] to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme.
+API Inventory leverages the Datadog tracing library with ASM enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme. API information is evaluated per endpoint, every 30 seconds, which should ensure minimal performance impact.
 
 API Inventory Security uses [Remote Configuration][4] to manage and configure scanning rules that detect sensitive data and authentication.
 
 The following risks are calculated for each endpoint:
 
-### Service in production
+### Security trace activity
 
-The `env` tag is checked for patterns that frequently represent non-production environments. For example, if it detects values of `dev`, `alpha`, `beta`, `sandbox`, or similar, it marks the environment as non-production. All other environments are marked as production.
-
-
-### Service under attack
-
-This risk is detected for API endpoints that have experienced [attacks][2] within the last week.
+See the number of [attacks][2] your API experienced within the last week.
 
 ### Processing sensitive data
 
@@ -76,8 +73,6 @@ The matching occurs within your application, and none of the sensitive data is s
 | US vehicle identification numbers                 | `pii`            | `vin`             |
 | Passport numbers                                  | `pii`            | `passport_number` |
 | E-mail addresses                                  | `pii`            | `email`           |
-| JSON Web Token (JWT)                              | `credentials`    | `json_web_token`  |
-| Bearer tokens (found in `Authorization` headers)  | `credentials`    | `bearer_token`    |
 | American Express card number                      | `payment`        | `card`            |
 | Diners Club card number                           | `payment`        | `card`            |
 | JCB card number                                   | `payment`        | `card`            |
@@ -85,7 +80,15 @@ The matching occurs within your application, and none of the sensitive data is s
 | Mastercard card number                            | `payment`        | `card`            |
 | VISA card number                                  | `payment`        | `card`            |
 | IBAN bank account number                          | `payment`        | `iban`            |
- 
+
+### Business logic
+
+These tags are determined by the presence of business logic traces, associated to the endpoint.
+
+#### Suggested business logic
+
+We can suggest a business logic tag for your endpoint based on its HTTP method, response status codes, and URL.
+
 ### Publicly accessible
 
 Datadog marks an endpoint as public if the client IP address is outside these ranges:
@@ -97,7 +100,7 @@ Datadog marks an endpoint as public if the client IP address is outside these ra
 
 See [Configuring a client IP header][6] for more information on the required library configuration.
 
-### Unauthenticated endpoint
+### Endpoint authentication
 
 Authentication is determined by:
 
@@ -105,13 +108,20 @@ Authentication is determined by:
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
 
-### Contains exploitable vulnerabilities
+Datadog reports the type of authentication when available in a header through the Authentication Method facet.
 
-This risk is determined by [Software Composition Analysis][3] for the service hosting the endpoint.
+#### Supported authentication methods
 
-## Performance impact
+| Category                                          | Category facet   |
+|---------------------------------------------------|------------------|
+| JSON Web Token (JWT)                              | `json_web_token` |
+| Bearer tokens (found in `Authorization` headers)  | `bearer_token`   |
+| Basic Authentication                              | `basic_auth`     |
+| Digest access authentication                      | `digest_auth`    |
 
-By default, API Security Inventory evaluates every tenth request (10% sample rate).
+### Vulnerabilities count
+
+Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to the [Software Composition Analysis][3] vulnerabilities of its service.
 
 ## Further reading
 
@@ -121,6 +131,6 @@ By default, API Security Inventory evaluates every tenth request (10% sample rat
 [2]: /security/application_security/threats/
 [3]: /security/application_security/software_composition_analysis/
 [4]: /agent/remote_config/
-[5]: /security/application_security/enabling/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
+[8]: /security/application_security/code_security/

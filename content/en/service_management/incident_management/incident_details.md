@@ -1,6 +1,5 @@
 ---
 title: Incident Details Page
-kind: documentation
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details
@@ -14,7 +13,7 @@ further_reading:
 
 {{< img src="/service_management/incidents/incident_details/incident_overview_page.png" alt="Incident details page of an Active SEV-4 incident." style="width:100%;">}}
 
-Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you [create a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs to group related incident data together. The first of these sections is the Overview.
+Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you [create a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs to group related incident data together. The first of these sections is the Overview tab.
 
 ## Global header
 
@@ -22,9 +21,9 @@ The global header provides access to the [Status and Severity][2] selectors, and
 
 After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][5]. Configure your postmortem templates in the [Incident Settings][6] page to predefine the structure and content of your postmortems.
 
-## Incident details overview section
+## Incident details overview tab
 
-Use the Overview section to specify an incident's properties and define customer impact. 
+Use the Overview tab to specify an incident's properties and define customer impact. 
 
 By default, all incidents have the following properties:
 
@@ -50,7 +49,7 @@ If your incident is customer-facing, specify the details in the Impact section:
 4. Describe the nature of the impact on customers in `Scope of impact`.
 5. Click **Save**.
 
-In addition to housing your property fields, the Overview section also provides the following at-a-glance summary modules:
+In addition to housing your property fields, the Overview tab also provides the following at-a-glance summary modules:
 
 1. *Condensed Timeline*: Displays the times when the incident changes state as well as when impact started and ended for a high-level view of the incident's lifecycle.
 2. *Latest Notifications*: Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification section](#notifications-section).
@@ -151,7 +150,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/#creating-an-incident
+[1]: /service_management/incident_management/declare
 [2]: /service_management/incident_management/#describing-the-incident
 [3]: /service_management/incident_management/#integrations
 [4]: /service_management/incident_management/incident_settings#integrations

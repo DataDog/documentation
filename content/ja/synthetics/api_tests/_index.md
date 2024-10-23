@@ -7,6 +7,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
   text: Datadog Synthetic モニタリングの紹介
+- link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
+  tag: ブログ
+  text: Improve your API test coverage with Datadog Synthetic Monitoring
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog
   tag: ブログ
   text: Datadog SSL、TLS、Multistep API テストを使用してワークフローを監視する
@@ -14,15 +17,14 @@ further_reading:
   tag: ラーニングセンター
   text: Synthetic テストの紹介
 - link: /getting_started/synthetics/api_test
-  tag: Documentation
+  tag: ドキュメント
   text: API テストの概要
 - link: /synthetics/private_locations
   tag: ドキュメント
   text: 内部エンドポイントで API テストを実行する
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
+  tag: 外部サイト
   text: Terraform による Synthetic API テストの作成と管理
-kind: documentation
 title: API テスト
 ---
 
@@ -44,7 +46,7 @@ API テストは、Datadog [管理ロケーション][3]または[プライベ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[1]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
 [2]: /ja/continuous_testing/cicd_integrations
 [3]: /ja/synthetics/api_tests/http_tests/#select-locations
 [4]: /ja/synthetics/private_locations

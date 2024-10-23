@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Datadog Forwarder を使用した Java サーバーレスアプリケーションのインスツルメンテーション
 ---
 ## 概要
@@ -18,7 +17,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用している必要があります。
 
-## ブラウザトラブルシューティング
+## 構成
 
 ### インストール
 

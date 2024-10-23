@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
   text: Planificación y ajustes de uso
-kind: guía
 title: La semana del 19 de febrero de 2024 se efectuará la migración a los nuevos
   encabezados CSV de Plan y Uso
 ---

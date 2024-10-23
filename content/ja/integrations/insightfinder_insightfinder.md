@@ -24,6 +24,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +33,6 @@ integration_id: insightfinder-insightfinder-license
 integration_title: InsightFinder
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -88,6 +88,9 @@ tile:
     image_url: images/InsightFinder_dd_dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/resolve-incidents-faster-with-insightfinder/
   support: README.md#Support
   title: InsightFinder
   uninstallation: README.md#Uninstallation
@@ -101,7 +104,7 @@ DevSecOps、DataOps、MLOps、IT 運用、SRE チームは、複雑なモダン 
 
 InsightFinder の無料トライアルや、Datadog をはじめとする DevSecOps、IT 運用管理 (ITOM)、IT サービス管理 (ITSM) の人気ツールとのインテグレーションにより、お客様は迅速に価値を得ることができます。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから InsightFinder にお問い合わせください。
 

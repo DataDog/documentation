@@ -14,10 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: 블로그
   text: 인시던트 포스트모템(사후 분석) 생성 모범 사례
-- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
   tag: 블로그
-  text: Datadog 워크플로 및 Cloud SIEM으로 일반적인 보안 작업을 자동화하고 위협에 대비하세요.
-kind: 설명서
+  text: Datadog Observability Pipelines를 사용하여 로그를 변환하고 강화하세요.
 title: 노트북
 ---
 
@@ -27,14 +26,14 @@ title: 노트북
 
 ## 시작하기
 
-1. 기본 탐색 **Notebooks > New Notebook**에서 [새 노트북][1]을 만듭니다.
+1. [노트북 목록 ][1] 페이지에서 **+ New Notebook**를 클릭합니다.
 
 2. **Save Notebook** 버튼을 클릭합니다. </br>
   **참고**: 새 노트북은 기본적으로 저장되지 않습니다.
 
 3. [지원되는 그래프 및 텍스트 콘텐츠](#types-of-content)를 사용하여 노트북에 새 셀을 추가합니다.
 
-4. [셀 설정](#cell-configuration).
+4. [셀 구성](#cell-configuration).
 
 ## 협업
 
@@ -64,11 +63,9 @@ title: 노트북
 
 ## 노트북 공유
 
-공유 옵션을 보려면 노트북의 오른쪽 상단에 있는 톱니바퀴 아이콘을 클릭하세요. 노트북은 PDF, Markdown 또는 기타 문서 편집기로 내보낼 수 있습니다.
+공유 옵션을 보려면 노트북의 오른쪽 상단에 있는 톱니바퀴 아이콘을 클릭하세요. 노트북은 PDF, 마크다운 또는 기타 문서 편집기로 내보낼 수 있습니다.
 
 노트북을 문서 편집기로 복사하려면 **Copy formatted contents**를 클릭합니다. Google Docs 또는 Microsoft Word 와 같은 문서 편집기에 붙여넣어 그래프 등 노트북 콘텐츠를 원래 형식으로 볼 수 있습니다.
-
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Google Docs에서 내보낸 노트북의 예시" style="width:100%;">}}
 
 ### 노트북 JSON 가져오기 또는 내보내기
 
@@ -76,15 +73,49 @@ title: 노트북
 
 ### 개별 셀에 링크를 연결하기
 
-셀의 **Share** 메뉴에서 **Link directly to cell**을 클릭하여 특정 셀의 URL을 복사합니다. 직접 연결은 시각화 및 Markdown 셀 모두에서 사용할 수 있습니다.
+특정 셀의 URL을 복사하려면 셀의 **Share** 메뉴를 클릭하고 **Link directly to cell**를 선택합니다. 직접 링크는 시각화 및 마크다운 셀 모두에 사용할 수 있습니다.
 
 사용자가 특정 셀의 URL을 방문하면 노트북이 열리고 뷰포트 상단에 셀이 표시됩니다. 링크는 절대적입니다. 셀의 URL은 노트북 내에서 새 위치로 이동하더라도 같게 유지됩니다.
+
+## 노트북에 이미지 추가
+
+<div class="alert alert-info">PNG, JPG, JPEG, GIF 파일 형식만 지원됩니다. 업로드할 수 있는 최대 파일 크기는 4MB입니다.</a></div>
+
+[이미지 셀](#image-cell)이나 [마크다운 편집기](#markdown-editor)를 사용해 노트북에 이미지를 추가할 수 있습니다.
+
+### 이미지 셀
+
+이 방법은 텍스트와는 별도로 구성된 셀에 이미지를 넣는 방법으로, 이미지 크기 조정, 정렬, 캡션 추가와 같은 기능을 이용할 수 있습니다. 이미지 셀로 업로드한 이미지는 Datadog에서 호스팅합니다.
+
+이미지를 추가하려면 **Add New Cell** 메뉴에서 **이미지** 셀 옵션을 클릭하세요.
+
+{{< img src="notebooks/image_cell.png" alt="셀의 Add New Cell 메뉴에 있는 이미지 셀" style="width:70%;" >}}
+
+다음 옵션 중 하나를 사용해 이미지를 업로드하면 Datadog에서 이미지를 호스팅합니다.
+- 업로드 영역에 이미지 파일 드롭
+- **Choose File**을 클릭하고 파일 디렉터리에서 이미지 선택
+- 공용 접근 가능한 이미지 URL 붙여 넣기
+
+셀 작업 트레이에 있는 아이콘을 클릭해 이미지 셀의 크기를 조정하고, 이미지를 정렬하고, 캡션을 추가하거나, 이미지를 전체 화면 모드에서 볼 수 있습니다.
+
+{{< img src="notebooks/notebooks_image_edit_action_tray.png" alt="이미지 정렬을 조정하고 캡션을 추가할 수 있는 이미지 셀 작업 트레이" style="width:70%;" >}}
+
+### 마크다운 편집기
+
+이 방법은 이미지를 텍스트에 맞춰 넣는 방법으로, 이미지 크기를 재조정할 수 없습니다.
+
+마크다운 셀의 편집 모드로 들어가 다음 방법 중 하나를 사용해 이미지를 추가할 수 있습니다.
+- 텍스트 셀 영역에 이미지 파일 드롭
+- 텍스트 셀 영역에 이미지를 바로 복사 및 붙여넣기
+- 헤더나 [공식 마크다운 가이드][2]를 참조하여 이미지 위젯을 사용해 외부 이미지를 하이퍼링크. **참고**: 이 옵션을 이용하면 이미지를 Datadog에서 호스팅하지 않습니다.
+
+노트북에 저장하기 전에 Preview 탭에서 이미지를 미리볼 수 있습니다.
 
 ## 노트북 목록
 
 {{< img src="notebooks/notebook_list.png" alt="선택한 노트북의 셀 유형을 미리 보는 노트북 목록" style="width:100%;">}}
 
-[Notebook List][2]에서는 이전에 생성한 노트북을 보고 검색할 수 있습니다. 각 노트북의 이름, 생성자 및 마지막 수정 날짜가 표시됩니다. 노트북은 다음을 기준으로 그룹화됩니다.
+[Notebook List][1]에서는 이전에 작성한 노트북들을 보고 검색할 수 있습니다. 각 노트북의 이름, 작성자 및 마지막 수정 날짜가 표시됩니다. 노트북은 다음으로 그룹화됩니다.
 
 * **Your Notebooks**: 사용자가 생성한 노트북.
 * **All Notebooks**: 조직의 모든 노트북.
@@ -102,21 +133,21 @@ title: 노트북
 
 ### 시간 프레임
 
-기본적으로 모든 그래프 셀들은 노트북 헤더에 설정된 글로벌 시간 프레임에 연결됩니다.
+기본적으로 모든 그래프 셀들은 노트북 헤더에 설정된 전역 시간 프레임에 연결됩니다.
 
-다른 시간 프레임을 보려면 글로벌 시간 선택기에서 옵션을 선택하거나 그래프를 직접 스크러빙하세요. 노트북 URL은 노트북에 저장하지 않고 이 새로운 시간 프레임을 반영하도록 업데이트됩니다.
+다른 시간 프레임을 보려면 전역 시간 선택기에서 옵션을 선택하거나 그래프를 직접 스크러빙하세요. 노트북 URL은 노트북에 저장하지 않고 이 새로운 시간 프레임을 반영하도록 업데이트됩니다.
 
-**참고**: 그래프를 확대하기 위해 클릭하고 드래그해도 전역 시간에서 셀의 잠금이 해제되지 않습니다. 대신 이것은 노트북의 글로벌 시간을 변경합니다.
+**참고**: 그래프를 확대하기 위해 클릭하고 드래그해도 전역 시간에서 셀의 잠금이 해제되지 않습니다. 대신 이것은 노트북의 전역 시간을 변경합니다.
 
-{{< img src="notebooks/set_default_time.png" alt="Set Default Time 버튼으로 노트북 글로벌 시간 저장" style="width:100%;">}}
+{{< img src="notebooks/set_default_time.png" alt="Set Default Time 버튼으로 노트북 전역 시간 저장" style="width:100%;">}}
 
-이 시간을 노트북의 기본값으로 저장하려면 **Set Default Time**을 클릭하세요. 글로벌 시간을 이전에 저장된 기본 글로벌 시간으로 재설정하려면 재설정 버튼을 클릭하세요.
+이 시간을 노트북의 기본값으로 저장하려면 **Set Default Time**을 클릭하세요. 전역 시간을 이전에 저장된 기본 전역 시간으로 재설정하려면 재설정 버튼을 클릭하세요.
 
-개별 셀들에 대해 글로벌 시간에서 연결을 해제한 후 독립적인 시간 프레임으로 설정할 수 있습니다.
+개별 셀들에 대해 전역 시간에서 연결을 해제한 후 독립적인 시간 프레임으로 설정할 수 있습니다.
 
-{{< img src="notebooks/cell_time.png" alt="글로벌 시간에서 연결 해제된 셀이 있는 Cell Time Selector" style="width:100%;">}}
+{{< img src="notebooks/cell_time.png" alt="전역 시간에서 연결 해제된 셀이 있는 Cell Time Selector" style="width:100%;">}}
 
-단일 셀에서 다른 시간 프레임을 보려면 셀을 편집하고 토글을 사용하여 글로벌 시간에서 연결을 해제하세요. 시간 선택기를 사용하거나 그래프를 스크러빙하여 시간 프레임을 변경하세요. 편집 모드에서 변경한 내용은 **Done**을 클릭하면 자동으로 저장됩니다. 변경 사항을 취소하려면 **Done** 대신 **Cancel**을 클릭하세요.
+단일 셀에서 다른 시간 프레임을 보려면 셀을 편집하고 토글을 사용하여 전역 시간에서 연결을 해제하세요. 시간 선택기를 사용하거나 그래프를 스크러빙하여 시간 프레임을 변경하세요. 편집 모드에서 변경한 내용은 **Done**을 클릭하면 자동으로 저장됩니다. 변경 사항을 취소하려면 **Done** 대신 **Cancel**을 클릭하세요.
 
 ### 노트북 유형
 
@@ -124,13 +155,13 @@ title: 노트북
 
 노트북을 유형별로 그룹화하면 관련 정보에 빠르게 액세스할 수 있습니다. 인시던트 관리 또는 모니터와 같은 다른 제품에서 구축된 노트북은 특정 유형을 자동으로 할당할 수 있습니다. 노트북 타이틀 위로 마우스를 가져가면 유형을 추가하거나 편집하는 옵션이 표시됩니다. **+ Add Type**을 클릭하여 추가하거나, 마우스를 가져갔을 때 옆에 나타나는 연필 아이콘을 클릭하여 유형을 수정할 수 있습니다.
 
-### 그래프 스냅숏
+### 그래프 스냅샷
 
 만료될 수 있는 그래프의 스냅샷을 자동으로 생성하도록 노트북을 설정할 수 있습니다. 노트북의 톱니바퀴 메뉴에서 **Turn on snapshots**를 클릭하여 활성화하세요. 톱니바퀴 메뉴를 사용하여 스냅샷을 보거나 자동 스냅샷을 끌 수 있습니다. 기존 스냅샷에 대한 액세스를 제거하려면 자동 스냅샷을 끄세요.
 
 {{< img src="notebooks/cog_snapshots.png" alt="스냅샷을 활성화하는 톱니바퀴 메뉴 옵션" style="width:100%;">}}
 
-스냅샷이 활성화된 노트북은 고정 시간 범위(예: `Aug 18, 12:00 am - Aug 19, 11:59 pm`)가 있는 그래프의 정적 이미지를 자동으로 캡처합니다. 이러한 스냅샷은 고정 시간 범위가 있는 새 그래프가 업데이트될 때 함께 업데이트됩니다. 그래프를 글로벌 시간 범위(예: `Past 1 Hour`)로 변경하면 스냅샷이 제거됩니다.
+스냅샷이 활성화된 노트북은 고정 시간 범위(예: `Aug 18, 12:00 am - Aug 19, 11:59 pm`)가 있는 그래프의 정적 이미지를 자동으로 캡처합니다. 이러한 스냅샷은 고정 시간 범위가 있는 새 그래프가 업데이트될 때 함께 업데이트됩니다. 그래프를 전역 시간 범위(예: `Past 1 Hour`)로 변경하면 스냅샷이 제거됩니다.
 
 편집 모드에 있는 동안 카메라 아이콘 위로 마우스를 가져가면 모든 고정 시간 그래프에서 기존 스냅숏을 미리 볼 수 있습니다.
 
@@ -162,62 +193,70 @@ title: 노트북
 
 #### 콘텐츠 유형
 
-Notebooks는 시각화 및 텍스트 셀을 지원합니다. 텍스트 셀은 제목, 부제목, 링크, 이미지, 목록 및 코드 블록을 사용할 수 있는 [Markdown][6]으로 형식이 지정됩니다. Notebooks는 [MermaidJS][7] 형식의 다이어그램도 지원합니다.
+노트북은 시각화 및 텍스트 셀을 지원합니다. 텍스트 셀은 제목, 부제목, 링크, 이미지, 목록 및 코드 블록을 사용할 수 있는 [마크다운][6] 형식이 지정됩니다. 노트북은 [MermaidJS][7] 형식의 다이어그램도 지원합니다.
 
 노트북의 그래프는 메트릭, 로그 이벤트, 인덱스 스팬, 실시간 프로세스, 네트워크 트래픽, RUM 이벤트, 프로파일링 메트릭, 보안 신호 등 모든 Datadog 데이터 소스를 지원합니다. 그래프는 Datadog 쿼리 편집기로 생성됩니다. 노트북은 다음을 지원합니다.
 
-* [시계열][8]
-* [최대 목록][9]
-* [표][10]
-* [히트맵][11]
-* [배포][12]
-* [목록][13]
-* [쿼리 값][14]
-* [퍼넬][15]
-* [원형 차트][16]
-* [SLO 요약][17]
+* [텍스트][8]
+* [이미지](#add-images-to-cells)
+* [시계열][9]
+* [상위 목록][10]
+* [표][11]
+* [쿼리 값][12]
+* [히트맵][13]
+* [분포][14]
+* [목록][15]
+* [플레임 그래프 프로파일링][16]
+* [퍼널][17]
+* [파이][18]
+* [트리 맵][16]
+* [지리맵][19]
+* [SLO][20]
 
-### [편집 액세스 제한]
+### 편집 액세스 제한
 
 기본적으로 모든 사용자는 노트북에 대한 전체 액세스 권한을 갖고 있습니다.
 
-세분화된 액세스 제어를 사용하여 특정 노트북을 편집할 수 있는 [역할][18]을 제한합니다.
+특정 노트북을 편집할 수 있는 [역할][21]을 제한하려면 세분화된 액세스 제어를 사용하세요.
 1. 노트북을 보고 있는 동안 오른쪽 상단의 톱니를 클릭하면 설정 메뉴가 열립니다.
-1. **권한**을 선택하세요.
-1. **액세스 제한**을 클릭하세요.
+1. **Permissions**을 선택하세요.
+1. **Restrict Access**을 클릭하세요.
 1. 대화 상자가 업데이트되어 기본적으로 **뷰어** 액세스 권한이 있는 조직 구성원을 표시합니다.
 1. 드롭다운을 사용하여 노트북을 편집할 수 있는 하나 이상의 역할, 팀 또는 사용자를 선택하세요.
 1. **Add**를 클릭합니다.
-1. 대화상자가 업데이트되어 선택한 역할에 **편집자** 권한이 있는지 표시합니다.
+1. 대화상자가 업데이트되어 선택한 역할에 **Editor** 권한이 있는지 표시합니다.
 1. **Save**를 클릭합니다
 
 **참고:** 노트북에 대한 편집 권한을 유지하려면 저장하기 전에 사용자가 구성원인 역할을 하나 이상 포함해야 합니다.
 
 액세스가 제한된 노트북에 대한 일반 액세스를 복원하려면 다음 단계를 따르세요.
 1. 노트북을 보면서 오른쪽 상단의 톱니를 클릭하면 설정 메뉴가 열립니다.
-1. **권한**을 선택하세요.
+1. **Permissions**을 선택하세요.
 1. **Restore Full Access**를 클릭하세요.
-1. **Save**를 클릭합니다.
+1. **Save**을 클릭합니다.
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://www.markdownguide.org/basic-syntax/#images-1
 [3]: https://app.datadoghq.com/notebook/template-gallery
 [4]: /ko/notebooks/guide/version_history
 [5]: /ko/dashboards/template_variables/
 [6]: https://daringfireball.net/projects/markdown/
 [7]: https://mermaid.js.org/
-[8]: /ko/dashboards/widgets/timeseries/
-[9]: /ko/dashboards/widgets/top_list/
-[10]: /ko/dashboards/widgets/table/
-[11]: /ko/dashboards/widgets/heatmap/
-[12]: /ko/dashboards/widgets/distribution/
-[13]: /ko/dashboards/widgets/list/
-[14]: /ko/dashboards/widgets/query_value/
-[15]: /ko/dashboards/widgets/funnel/
-[16]: /ko/dashboards/widgets/pie_chart/
-[17]: /ko/dashboards/widgets/slo/
-[18]: /ko/account_management/rbac/
+[8]: /ko/dashboards/widgets/free_text/
+[9]: /ko/dashboards/widgets/timeseries/
+[10]: /ko/dashboards/widgets/top_list/
+[11]: /ko/dashboards/widgets/table/
+[12]: /ko/dashboards/widgets/query_value/
+[13]: /ko/dashboards/widgets/heatmap/
+[14]: /ko/dashboards/widgets/distribution/
+[15]: /ko/dashboards/widgets/list/
+[16]: /ko/dashboards/widgets/treemap/
+[17]: /ko/dashboards/widgets/funnel/
+[18]: /ko/dashboards/widgets/pie_chart/
+[19]: /ko/dashboards/widgets/geomap/
+[20]: /ko/dashboards/widgets/slo/
+[21]: /ko/account_management/rbac/

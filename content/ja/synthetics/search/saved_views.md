@@ -3,7 +3,6 @@ further_reading:
 - link: /synthetics/search/
   tag: ドキュメント
   text: Synthetic テストを検索・管理する方法を説明します
-kind: documentation
 title: 保存ビュー
 ---
 
@@ -15,9 +14,9 @@ title: 保存ビュー
 
 ## 保存ビューの作成
 
-保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Create a New Saved View** をクリックします。 
+保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Save new view as** をクリックします。
 
-{{< img src="synthetics/search/create_a_new_saved_view.png" alt="Synthetic Tests ページで新規の保存ビューを作成する" style="width:100%" >}}
+{{< img src="synthetics/search/create_a_new_saved_view_2.png" alt="Synthetic Tests ページで新規の保存ビューを作成する" style="width:100%" >}}
 
 [デフォルトビュー](#default-views)を除き、保存ビューはすべて、ユーザーが作成したいカスタム保存ビューも含め、組織全体で共有されます。これらの保存ビューは組織内の誰でも編集可能で、ビューを作成したユーザーアバターが表示されます。Synthetic Tests ページの現行のコンテンツから保存ビューを作成するには、名前を入力して **Save** をクリックします。
 
@@ -35,9 +34,9 @@ title: 保存ビュー
 
 [Synthetic Tests ページ][2]では、[保存ビュー](#create-a-saved-view)をデフォルトのランディングページに設定することができます。デフォルトビューはユーザーごとに設定され、組織には影響がありません。
 
-デフォルトの保存ビューを一時的に上書きするには、検索クエリのファセットを追加して、**Update your default view** をクリックします。新規の保存ビューを作成するには、**+ Create a New Saved View** ボタンをクリックします。
+デフォルトの保存ビューを一時的に上書きするには、検索クエリにファセットを追加して、**Update your default view** をクリックします。新規の保存ビューを作成するには、**+ Save new view as** ボタンをクリックします。
 
-{{< img src="synthetics/search/update_your_default_view.png" alt="Synthetic Tests ページでデフォルトビューを更新する" style="width:100%" >}}
+{{< img src="synthetics/search/update_your_default_view_2.png" alt="Synthetic Tests ページでデフォルトビューを更新する" style="width:100%" >}}
 
 **Views** パネルのデフォルトビューエントリでは、以下のアクションが可能です。
 

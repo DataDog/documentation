@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/widgets/slo/
   tag: Documentación
   text: Widget de SLO
-kind: guía
 title: Acotar consultas de SLO basadas en métricas
 ---
 

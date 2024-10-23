@@ -4,7 +4,7 @@
 
 As part of its ongoing commitment to the security and protection of its customer's data, Datadog is rolling out a more modern cryptographic engine across its systems which imposes some changes to the configurations it can accept.
 
-Beginning **April 1st, 2024**, Datadog is disabling support for the following cipher suites across its public-facing applications. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
+Beginning **April 1st, 2024**, Datadog disabled support for the following cipher suites across its public-facing applications. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
 
 ## Disabled Cipher Suites
 

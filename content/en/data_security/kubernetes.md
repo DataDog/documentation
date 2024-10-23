@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Data Security
-kind: documentation
 further_reading:
 - link: "/data_security/"
   tag: "Documentation"

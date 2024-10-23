@@ -1,6 +1,6 @@
 ---
 title: Use Passkeys (FIDO2) In Browser Tests
-kind: guide
+
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:
   - link: '/synthetics/guide/app-that-requires-login/'
@@ -22,14 +22,21 @@ You can use passkeys as a replacement for a username and password, or as a secon
 
 ## Create your Virtual Authenticator global variable
 
-Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global variables. To create a Virtual Authenticator global variable storing your passkeys, see the [**Global Variables** section in Synthetic Monitoring & Continuous Testing Settings][4].
+Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global variables. To create a Virtual Authenticator global variable storing your passkeys, see the [**Global Variables - Virtual Authenticator** section in Synthetic Monitoring ][4].
 
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Create a Virtual Authenticator global variable" style="width:70%;" >}}
 
 ## Use passkeys in your Synthetic browser tests
 <div class="alert alert-warning">Synthetic Monitoring supports passkeys in browser tests for Chrome and Edge.</div>
 
-When [creating a browser test][3], complete your application's passkeys registration and authentication flow using the passkeys stored in your virtual authenticator global variable. 
+### Add passkeys to a browser test
+
+1. Click [Digital Experience > New Test > Browser Test][3].
+2. Click **Save & Edit Recording**.
+3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
+4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
+
+{{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
 
 ### Test a registration flow
 
@@ -43,10 +50,12 @@ To test a registration flow using passkeys in your [browser tests][3]:
 
 To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application (see section above). This is required once per passkey and application.
 
-You can either:
+Choose one of the following options:
 
-- Complete the registration flow from within the recorder, but without recording the registration steps, or
-- Create a test that embeds both steps for the registration and login flows.
+- Create a test that embeds both steps for the registration and login flows
+- Complete the registration flow from within the recorder, but without recording the registration steps
+
+**Note**: To avoid creating a new user for each test scenario involving passkey authentication, it's recommended to combine user creation and authentication in the same step.
 
 1. [Import your virtual authenticator global variable][5]. 
 2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
@@ -59,5 +68,5 @@ You can either:
 [1]: https://app.datadoghq.com/synthetics/settings/variables
 [2]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [3]: /synthetics/browser_tests/
-[4]: /synthetics/settings/?tab=virtualauthenticator
+[4]: /synthetics/platform/settings?tab=virtualauthenticator#global-variables
 [5]: /synthetics/browser_tests#use-global-variables

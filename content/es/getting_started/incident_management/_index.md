@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
   tag: Blog
   text: Cómo gestionamos las incidencias en Datadog
-kind: documentación
 title: Empezando con la gestión de incidencias
 ---
 
@@ -192,7 +191,7 @@ Asimismo, puedes declarar y editar incidencias y comunicarte rápidamente con tu
 
 {{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitores en Mobile App">}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -207,7 +206,7 @@ Asimismo, puedes declarar y editar incidencias y comunicarte rápidamente con tu
 [9]: /es/service_management/incident_management/#status-levels
 [10]: /es/service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /es/service_management/mobile/
+[12]: /es/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
 [15]: https://app.datadoghq.com/dashboard/lists

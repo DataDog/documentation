@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentation
   text: サービス、リソース、トレースの詳細
-kind: documentation
 title: Ruby ランタイムメトリクス
 type: multi-code-lang
 ---
@@ -32,17 +31,17 @@ type: multi-code-lang
 ```ruby
 # config/initializers/datadog.rb
 require 'datadog/statsd'
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 
 Datadog.configure do |c|
-  # ランタイムメトリクス収集を有効にするには、`true` を設定します。デフォルトは `false` です。
-  # DD_RUNTIME_METRICS_ENABLED=true に設定して構成することもできます。
+  # To enable runtime metrics collection, set `true`. Defaults to `false`
+  # You can also set DD_RUNTIME_METRICS_ENABLED=true to configure this.
   c.runtime_metrics.enabled = true
 
-  # 必要に応じて、ランタイムメトリクスの送信に使用される DogStatsD インスタンスを構成できます。
-  # `dogstatsd-ruby` が利用可能な場合、DogStatsD は自動的にデフォルト設定になります。
-  # Datadog Agent のホストとポートを使用して構成できます。デフォルトは 'localhost:8125' です。
- c.runtime_metrics.statsd = Datadog::Statsd.new
+  # Optionally, you can configure the DogStatsD instance used for sending runtime metrics.
+  # DogStatsD is automatically configured with default settings if `dogstatsd-ruby` is available.
+  # You can configure with host and port of Datadog agent; defaults to 'localhost:8125'.
+  c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
 
@@ -51,6 +50,8 @@ end
 初期設定では、アプリケーションからのランタイムメトリクスは DogStatsD のポート `8125` から Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
 Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [true に設定されていること][4]、また Agent 上でポート `8125` が開いていることを確認してください。
 Kubernetes では、[DogstatsD ポートをホストポートにバインド][5]し、ECS では[タスク定義で適切なフラグを設定][6]します。
+
+Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][8].
 
 ## 収集データ
 
@@ -71,3 +72,4 @@ APM サービス詳細画面にこれらのメトリクスを表示するだけ�
 [5]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [6]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
+[8]: /ja/developers/dogstatsd/unix_socket/

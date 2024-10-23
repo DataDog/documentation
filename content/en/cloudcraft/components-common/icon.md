@@ -1,6 +1,5 @@
 ---
 title: "Icon Component"
-kind: documentation
 ---
 
 ## Overview

@@ -1,6 +1,5 @@
 ---
 title: Rollup
-kind: documentation
 aliases:
     - /graphing/functions/rollup/
 ---

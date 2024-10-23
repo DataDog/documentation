@@ -1,6 +1,5 @@
 ---
 title: Amazon ECS Data Collection
-kind: documentation
 aliases:
   - /agent/amazon_ecs/data_collected
 further_reading:

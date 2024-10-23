@@ -14,6 +14,7 @@ categories:
 - 構成 & デプロイ
 - マーケットプレイス
 - テスト
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -22,7 +23,6 @@ integration_id: flagsmith-platform
 integration_title: Flagsmith
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -65,6 +65,9 @@ tile:
     image_url: images/dashboard_widget.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/flagsmith-datadog-marketplace/
   support: README.md#Support
   title: Flagsmith
   uninstallation: README.md#Uninstallation
@@ -91,15 +94,15 @@ Flagsmith は、Web、モバイル、サーバーサイドのアプリケーシ�
 
 多変量フラグにより、2 つ以上のバリエーションでパーセンテージ分割を行い、正確なA/B/n テストや実験が可能です。
 
-### ライブラリ
+### ダッシュボード
 
 Flagsmith のフラグを既存の Datadog ダッシュボードから直接表示し、制御することができます。
 
-### ヘルプ
+### イベント
 
 [Datadog Flagsmith インテグレーション][2]により、Flagsmith から Datadog のイベントストリームにフラグ変更イベントを送信します。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Flagsmith にお問い合わせください。
 

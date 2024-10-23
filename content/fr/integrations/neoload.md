@@ -5,6 +5,7 @@ assets:
   dashboards:
     NeoLoad Performance Testing: assets/dashboards/neoload_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: NeoLoad.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10317
     source_type_name: neoload
   logs: {}
 author:
@@ -22,8 +24,8 @@ author:
   sales_email: sales@tricentis.com
   support_email: support@tricentis.com
 categories:
-- monitoring
-- notification
+- notifications
+- testing
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -33,7 +35,7 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: neoload
 public_title: NeoLoad
@@ -45,12 +47,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Notifications
+  - Category::Testing
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
-  - Category::Monitoring
-  - Category::Notification
   configuration: README.md#Setup
   description: Surveillez et analysez les résultats des tests de performance NeoLoad
   media:
@@ -62,6 +64,7 @@ tile:
   title: NeoLoad
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -73,7 +76,7 @@ Grâce à l'intégration NeoLoad, vous pouvez surveiller les métriques de perfo
 - Corréler les performances de votre application avec les métriques d'évaluation de la charge système dans NeoLoad
 - Analyser et visualiser dans Datadog les métriques de NeoLoad telles que les débits de requêtes, les erreurs et les performances à l'aide du dashboard prêt à l'emploi ou du [Metrics Explorer][2]
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

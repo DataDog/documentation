@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/query_syntax
   tag: 설명서
   text: 쿼리 구문
-kind: 설명서
 title: 스팬(span) 검색
 ---
 
@@ -25,7 +24,6 @@ title: 스팬(span) 검색
 {{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="트레이스 익스플로러 목록 검색. 시각화 옵션이 목록으로 설정되어 있음." style="width:100%;">}}
 
 {{< site-region region="us,eu,us3,us5,ap1" >}}
-**참고**: `key:value` 쿼리는 사전에 [패싯을 선언][1]할 필요가 **없습니다**.
 
 [1]: /ko/tracing/trace_explorer/query_syntax/#facets
 {{< /site-region >}}

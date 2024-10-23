@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/account_management/billing/usage_details/
-kind: 도움말
 title: 사용량 상세 정보
 ---
 

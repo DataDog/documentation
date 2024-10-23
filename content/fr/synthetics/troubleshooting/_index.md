@@ -13,7 +13,6 @@ further_reading:
 - link: /synthetics/private_locations/
   tag: Documentation
   text: Timeboards
-kind: documentation
 title: Dépannage de la surveillance Synthetic
 ---
 

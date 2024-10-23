@@ -15,7 +15,6 @@ further_reading:
 - link: /network_monitoring/performance/setup
   tag: Documentation
   text: Datadog Agent を使用したネットワークデータの収集。
-kind: documentation
 title: ネットワークマップ
 ---
 
@@ -37,7 +36,7 @@ title: ネットワークマップ
 
 1. ページの最上部にある最初のセレクターで、表示する*ノード**のタグを選択します。ネットワークページで使用可能なものと同じタグを選択できます。
 
-    {{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="ネットワークマップページの検索バー" >}}
+    {{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
 
     - ノード数が多すぎる場合は、2 つ目のタグが自動的にグループ分けに追加されます。タグは **By** ドロップダウンメニューで変更できます。詳しくは、[クラスター化](#map-clusters)の項を参照してください。
 2. **エッジ** について表示するメトリクスを以下から選択します。

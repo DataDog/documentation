@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Dashboards
-kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"
@@ -24,6 +23,10 @@ further_reading:
     tag: "Foundation Enablement"
     text: "Join an interactive session on better visualizations with Dashboards"  
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Dashboarding">}}
+  Explore and register for Foundation Enablement sessions. Learn to customize your dashboards using our library of visualizations and the drag-and-drop Dashboard builder. Enable your team's success by sharing data with stakeholders via reports, public URLs, and notebooks.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -63,7 +66,7 @@ A common way to start a dashboard is by encountering a similar dashboard already
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
 5. Copy in widgets you like from other dashboards by hovering over the widget and typing `Command + C` (`Ctrl + C` on Windows). Paste it into your dashboard by opening the dashboard and typing `Command + V` (`Ctrl + V` on Windows).
-5. Use the **Export to Dashboard** option provided by many Datadog views for data they show. For example, the Logs Explorer and Log Analytics views have share options to export logs lists and metrics to dashboards.
+5. Use the **Export to Dashboard** option provided by many Datadog views for data they show. For example, the Log Explorer and Log Analytics views have share options to export logs lists and metrics to dashboards.
 
 ## Learn more about metrics
 
@@ -149,6 +152,6 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [14]: /dashboards/sharing/
 [15]: /integrations/slack/
 [16]: /api/v1/dashboards/
-[17]: /service_management/mobile/
+[17]: /mobile/
 [18]: https://apps.apple.com/app/datadog/id1391380318
 [19]: https://play.google.com/store/apps/details?id=com.datadog.app

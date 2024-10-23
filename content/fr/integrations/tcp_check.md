@@ -24,7 +24,7 @@ guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
 integration_id: system
 integration_title: Check TCP
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: network.

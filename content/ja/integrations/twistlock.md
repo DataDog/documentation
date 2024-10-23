@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10052
     source_type_name: Twistlock
-  logs:
-    source: twistlock
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -31,6 +29,7 @@ categories:
 - ログの収集
 - ネットワーク
 - セキュリティ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_on_public_website: true
@@ -38,9 +37,8 @@ draft: false
 git_integration_title: twistlock
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
-integration_version: 3.6.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: twistlock
 public_title: Prisma Cloud Compute Edition
@@ -60,6 +58,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Twistlock はコンテナセキュリティスキャナ
   media: []
@@ -75,18 +74,18 @@ tile:
 
 [Prisma Cloud Compute Edition][1] はセキュリティスキャナです。コンテナ、ホスト、パッケージをスキャンして、脆弱性やコンプライアンス問題を発見します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -113,7 +112,7 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                       |
 | `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}` |
 
-###### ガイド
+###### Kubernetes
 
 Kubernetes を使用している場合は、デプロイ前に twistlock_console.yaml の replication controller セクションに構成を追加してください。
 
@@ -140,7 +139,7 @@ spec:
         name: twistlock-console
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -156,7 +155,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "twistlock", "service": "twistlock"}` |
 
-###### ガイド
+###### Kubernetes
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[DaemonSet コンフィギュレーション][3]でこれを有効にします。
 
@@ -212,21 +211,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンド][3]を実行し、Checks セクションで `twistlock` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "twistlock" >}}
 
 
-### ヘルプ
+### イベント
 
 Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベントを送信します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "twistlock" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: 블로그
   text: Datadog CI Visibility로 GitHub Actions 워크플로 모니터링
-kind: 설명서
 title: GitHub Actions 워크플로에 트레이스 설정
 ---
 

@@ -1,0 +1,60 @@
+{
+  "title": "Example-Dashboard with new fixed span time",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {
+          "type": "fixed",
+          "from": 1712080128,
+          "to": 1712083128
+        },
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "ci_pipelines",
+                "name": "query1",
+                "search": {
+                  "query": "ci_level:job"
+                },
+                "indexes": [
+                  "*"
+                ],
+                "compute": {
+                  "aggregation": "count",
+                  "metric": "@ci.queue_time"
+                },
+                "group_by": []
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ],
+  "layout_type": "ordered",
+  "reflow_type": "auto"
+}

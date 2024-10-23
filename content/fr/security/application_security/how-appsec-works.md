@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: Documentation
   text: Activer Application Security Management
-kind: documentation
 title: Fonctionnement d'Application Security Management dans Datadog
 ---
 
@@ -56,7 +55,7 @@ ASM Datadog pour AWS Lambda permet d'obtenir des informations détaillées sur
 
 Consultez la section [Activer ASM pour les fonctions sans serveur][8] pour découvrir les différentes étapes de configuration de la solution.
 
-## Heures de permanence
+## Performances
 
 La solution ASM Datadog repose sur des processus déjà inclus avec l'Agent et APM. Son utilisation a donc un impact négligeable sur les performances. Lorsqu'APM est activé, la bibliothèque Datadog génère des traces distribuées. ASM se base sur des schémas d'attaque connus pour signaler les activités de sécurité suspectes au sein de traces. Les traces distribuées mettent en corrélation les schémas d'attaque et le contexte d'exécution, ce qui permet de déclencher des signaux de sécurité en fonction des règles de détection définies.
 
@@ -88,18 +87,18 @@ Pour configurer les informations censurées par ASM, consultez les étapes de [c
 
 ## Méthodes de détection des menaces
 
-Les schémas utilisés par Datadog proviennent de plusieurs sources, notamment de l'[ensemble de règles de base ModSecurity OWASP][12]. Ils permettent de détecter les menaces et vulnérabilités connues dans les requêtes HTTP. Lorsqu'une requête HTTP correspond à l'une des [règles de détection prêtes à l'emploi][13], Datadog génère un signal de sécurité.
+Les schémas utilisés par Datadog proviennent de plusieurs sources, notamment le [jeu de règles ModSecurity OWASP][12]. Ils permettent de détecter les menaces et vulnérabilités connues dans les requêtes HTTP. Lorsqu'une requête HTTP correspond à l'une des [règles de détection par défaut][13], Datadog génère un signal de sécurité.
 
 **Mises à jour automatiques des schémas de détection de menaces :** si votre service est exécuté avec [un Agent au sein duquel la fonctionnalité de configuration à distance est activée et avec une version de la bibliothèque de tracing qui prend en charge cette fonctionnalité][26], les schémas de détection de menaces utilisés pour surveiller votre service sont automatiquement mis à jour lorsque Datadog publie des mises à jour.
 
-Chaque fois que Datadog détecte des attaques sérieuses ciblant vos services de production, un signal de sécurité est automatiquement créé. Celui-ci vous permet d'obtenir de précieux renseignements sur les entités à l'origine de l'attaque et les services ciblés. Vous pouvez définir des règles de détection personnalisées avec des seuils afin de déterminer les attaques pour lesquelles vous souhaitez recevoir une notification.
+Chaque fois que Datadog détecte des attaques sérieuses ciblant vos services de production, un signal de sécurité est automatiquement créé. Celui-ci vous permet d'obtenir de précieux renseignements sur les entités à l'origine de l'attaque et les services ciblés. Vous pouvez définir des règles de détection personnalisées avec des seuils, afin de déterminer les attaques pour lesquelles vous souhaitez recevoir une notification.
 
 ## Protection intégrée
 
 {{% asm-protect %}}
 
 
-## Classification des tentatives d'attaque
+## Qualification des tentatives dʼattaque
 
 Les informations du tracing distribuée sont utilisées pour répartir les tentatives d'attaque au sein de trois catégories distinctes : Sans danger, Inconnu ou Dangereux.
 * Les tentatives d'attaque de la catégorie « Sans danger » ne peuvent pas exploiter une faille pour s'introduire au sein de votre application, par exemple lorsqu'une attaque par injection PHP cible un service écrit en Java.
@@ -108,10 +107,10 @@ Les informations du tracing distribuée sont utilisées pour répartir les tenta
 
 
 
-## Portée de la surveillance des menaces
+## Couverture de la surveillance des menaces
 
 
-La solution ASM de Datadog analyse plus de 100 signatures d'attaque afin de détecter [de nombreux types d'attaques][14], notamment (sans s'y limiter) les catégories suivantes :
+La solution ASM Datadog analyse plus de 100 signatures d'attaque afin de détecter [de nombreux types d'attaques][14], notamment les exploitations de catégories suivantes (liste non exhaustive) :
 
 * Injections SQL
 * Injections de code
@@ -120,7 +119,7 @@ La solution ASM de Datadog analyse plus de 100 signatures d'attaque afin de dé
 * Scripts intersites (XSS)
 * Falsification de requête côté serveur (SSRF)
 
-## Détection des vulnérabilités intégrée
+## Détection intégrée des vulnérabilités
 
 La solution ASM Datadog intègre des fonctionnalités de détection qui vous informent des vulnérabilités détectées au sein de vos dépendances open source. Le [Vulnerability Explorer][15] fournit des informations plus détaillées, comme le niveau de gravité de la vulnérabilité, les services affectés, l'infrastructure potentiellement vulnérable, ainsi que des instructions de remédiation pour résoudre les problèmes détectés.
 
@@ -128,11 +127,11 @@ Pour en savoir plus, consultez [Software Composition Analysis][5].
 
 ## Sécurité des API
 
-<div class="alert alert-info">Les fonctionnalités de sécurité des API sont disponibles en version bêta privée.</div>
+<div class="alert alert-info">La sécurité des API est en version bêta privée.</div>
 
-La solution Application Security Management (ASM) de Datadog vous permet d'obtenir des informations pertinentes sur les menaces ciblant vos API. Grâce au [catalogue d'API][27], vous pouvez surveiller des métriques de performance et de santé sur vos API, mais également visualiser les attaques ciblant vos API. Cette vue indique l'adresse IP et les informations d'authentification de l'acteur malveillant, ainsi que des en-têtes de requête comportant des informations détaillées sur l'origine de l'attaque. Grâce à ASM et aux fonctionnalités de gestion des API, vous bénéficiez d'une vue d'ensemble complète de la surface d'attaque de vos API. Vous pourrez ainsi prendre les mesures adéquates pour limiter les menaces.
+La solution Application Security Management (ASM) de Datadog offre une visibilité sur les menaces ciblant vos API. Utilisez le [catalogue des API][27] pour surveiller les métriques relatives à la santé et aux performances des API, où vous pouvez voir les attaques ciblant vos API. Cette vue inclut l'IP de l'attaquant et ses informations d'authentification, ainsi que les en-têtes de requête indiquant les détails sur la formation de l'attaque. En utilisant à la fois ASM et la gestion des API, vous pouvez conserver une vue d'ensemble de la surface d'attaque de vos API et réagir pour atténuer les menaces.
 
-## Protection contre la vulnérabilité Log4Shell
+## Protection fournie par ASM contre la vulnérabilité Log4Shell
 
 La solution ASM Datadog identifie les charges utiles des attaques Log4Shell Log4j et renforce la visibilité sur les tentatives de chargement à distance de code malveillant par des applications vulnérables. Lorsque cette solution est utilisée conjointement avec le reste des fonctionnalités [Cloud SIEM][16], vous pouvez identifier et étudier les activités courantes qui se sont produites après l'exploitation d'une vulnérabilité, et corriger de façon proactive les services Web Java potentiellement vulnérables qui constituent un vecteur d'attaque.
 
@@ -152,7 +151,7 @@ La solution ASM Datadog identifie les charges utiles des attaques Log4Shell Log4
 [10]: /fr/tracing/configure_data_security/?tab=http
 [11]: /fr/security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[13]: /fr/security/default_rules/#cat-application-security
+[13]: /fr/security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /fr/security/cloud_siem/

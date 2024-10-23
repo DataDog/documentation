@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Service Real User Monitoring (RUM) de Datadog
-kind: documentation
 title: Dépannage
 ---
 

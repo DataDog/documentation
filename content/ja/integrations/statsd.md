@@ -3,6 +3,7 @@ app_id: statsd
 app_uuid: 847f92f2-77e2-4429-844f-50f4d9c8097f
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,9 +14,8 @@ assets:
       prefix: statsd.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10086
     source_type_name: StatsD
-  logs:
-    source: statsd
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -23,6 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
 display_on_public_website: true
@@ -30,9 +31,8 @@ draft: false
 git_integration_title: statsd
 integration_id: statsd
 integration_title: StatsD
-integration_version: 1.11.1
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: statsd
 public_title: StatsD
@@ -48,14 +48,21 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/statsd
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
   support: README.md#Support
   title: StatsD
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -70,14 +77,14 @@ tile:
 
 StatsD チェックは [Datadog Agent][1] パッケージに含まれています。StatsD を実行するサーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `statsd.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル statsd.d/conf.yaml][2] を参照してください。
 
@@ -95,7 +102,7 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 [2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -103,15 +110,15 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 | パラメーター            | 値                                 |
 | -------------------- | ------------------------------------- |
-| `<インテグレーション名>` | `statsd`                              |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                         |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"8126"}` |
+| `<INTEGRATION_NAME>` | `statsd`                              |
+| `<INIT_CONFIG>`      | 空白または `{}`                         |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"8126"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### ログの収集
+#### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -147,13 +154,13 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 StatsD チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "statsd" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

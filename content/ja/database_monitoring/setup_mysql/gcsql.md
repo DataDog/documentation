@@ -4,14 +4,8 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
@@ -19,7 +13,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 1. [データベースのパラメーターを構成する](#configure-mysql-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-1. [Agent をインストールする](#install-the-agent)
+1. [Agent のインストールと構成](#install-and-configure-the-agent)
 1. [Cloud SQL インテグレーションをインストールする](#install-the-cloud-sql-integration)
 
 ## はじめに
@@ -31,7 +25,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 7.36.1+
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
@@ -49,7 +43,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL 5.6" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
@@ -59,7 +53,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
@@ -156,6 +150,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### 検証する
 
 次のコマンドを使用して、ユーザーが問題なく作成されたことを検証します。`<UNIQUEPASSWORD>` は上記で作成したパスワードに置き換えます。
@@ -172,13 +169,13 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
 
-## Agent のインストール
+## Agent のインストールと構成
 
 Cloud SQL ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][4]を参照してください。
 
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 ホストで実行されている Agent に対してこのチェックを設定するには (Agent が Google Cloud SQL データベースから収集するように小さな GCE インスタンスをプロビジョニングする場合など)
 
@@ -194,15 +191,13 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>' # 先ほどの CREATE USER のステップから
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
-
-**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
 `project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][3]を参照してください。
 
@@ -254,17 +249,13 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 `project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][2]を参照してください。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][2]でパスワードを環境変数として渡す方法をご確認ください。
-
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/faq/template_variables/
-[3]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -272,45 +263,59 @@ Kubernetes クラスターをお使いの場合は、データベースモニタ
 
 Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。MySQL のコンフィギュレーションは、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
 
-### Helm のコマンドライン
+### Helm
 
-以下の [Helm][3] コマンドを実行して、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
+以下の手順を踏んで、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Helm の [Datadog Agent インストール手順][3]を踏みます。
+2. YAML コンフィギュレーションファイル (Cluster Agent インストール手順の `datadog-values.yaml`) を更新して、以下を含めます。
+    ```yaml
+    clusterAgent:
+      confd:
+        mysql.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              gcp:
+                project_id: '<PROJECT_ID>'
+                instance_id: '<INSTANCE_ID>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 3306
-    username: datadog
-    password: "<UNIQUEPASSWORD>"
-    gcp:
-      project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. コマンドラインから上記のコンフィギュレーションファイルを使用して Agent をデプロイします。
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+Windows の場合は、<code>helm install</code> コマンドに <code>--set targetSystem=windows</code> を追加します。
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/mysql.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # このフラグを必ず入れてください
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
+    password: 'ENC[datadog_user_database_password]'
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -338,7 +343,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -357,17 +362,14 @@ spec:
 
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
-
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探します。または、[データベース][6]のページを参照してください。
 
@@ -383,12 +385,12 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][8]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://app.datadoghq.com/account/settings/agent/latest
@@ -396,3 +398,4 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 [6]: https://app.datadoghq.com/databases
 [7]: /ja/integrations/google_cloudsql
 [8]: /ja/database_monitoring/troubleshooting/?tab=mysql
+[9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema

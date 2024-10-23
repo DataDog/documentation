@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Tag Extraction
-kind: documentation
 aliases:
 - /agent/autodiscovery/tag/
 - /agent/kubernetes/tag
@@ -16,51 +15,50 @@ further_reading:
   text: "Limit data collection to a subset of containers only"
 ---
 
-The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
-
-If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
+The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
 
 ## Out-of-the-box tags
 
-The Agent can autodiscover and attach tags to all data emitted by the entire pods or an individual container within this pod. The list of tags attached automatically depends on the agent [cardinality configuration][1].
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
 
 <div style="overflow-x: auto;">
 
-  | Tag                           | Cardinality  | Source                                                                  | Requirement                                         |
-  |-------------------------------|--------------|-------------------------------------------------------------------------|-----------------------------------------------------|
-  | `container_id`                | High         | Pod status                                                              | N/A                                                 |
-  | `display_container_name`      | High         | Pod status                                                              | N/A                                                 |
-  | `pod_name`                    | Orchestrator | Pod metadata                                                            | N/A                                                 |
-  | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                           | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                            | Pod must have an owner                              |
-  | `kube_job`                    | Orchestrator | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
-  | `kube_job`                    | Low          | Pod ownerref                                                            | Pod must be attached to a job                       |
-  | `kube_replica_set`            | Low          | Pod ownerref                                                            | Pod must be attached to a replica set               |
-  | `kube_service`                | Low          | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
-  | `kube_daemon_set`             | Low          | Pod ownerref                                                            | Pod must be attached to a DaemonSet                 |
-  | `kube_container_name`         | Low          | Pod status                                                              | N/A                                                 |
-  | `kube_namespace`              | Low          | Pod metadata                                                            | N/A                                                 |
-  | `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                      | Pod label must exist                                |
-  | `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                  | Pod label must exist                                |
-  | `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                   | Pod label must exist                                |
-  | `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                 | Pod label must exist                                |
-  | `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                   | Pod label must exist                                |
-  | `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                | Pod label must exist                                |
-  | `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | [Unified service tagging][2] enabled                |
-  | `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | [Unified service tagging][2] enabled                |
-  | `service`                     | Low          | Pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | [Unified service tagging][2] enabled                |
-  | `pod_phase`                   | Low          | Pod status                                                              | N/A                                                 |
-  | `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                    | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_kind`          | Low          | Pod ownerref                                                            | Pod must have an owner                              |
-  | `kube_deployment`             | Low          | Pod ownerref                                                            | Pod must be attached to a deployment                |
-  | `kube_replication_controller` | Low          | Pod ownerref                                                            | Pod must be attached to a replication controller    |
-  | `kube_stateful_set`           | Low          | Pod ownerref                                                            | Pod must be attached to a statefulset               |
-  | `persistentvolumeclaim`       | Low          | Pod spec                                                                | A PVC must be attached to the pod                   |
-  | `kube_cronjob`                | Low          | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
-  | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
-  | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
-  | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
-  | `eks_fargate_node`            | Low          | Pod spec                                                                | EKS Fargate environment                                       |
+  | Tag                           | Cardinality  | Source                                                                                                                       | Requirement                                         |
+  |-------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+  | `container_id`                | High         | Pod status                                                                                                                   | N/A                                                 |
+  | `display_container_name`      | High         | Pod status                                                                                                                   | N/A                                                 |
+  | `pod_name`                    | Orchestrator | Pod metadata                                                                                                                 | N/A                                                 |
+  | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                                                                                | OpenShift environment and pod annotation must exist |
+  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                                                                                 | Pod must have an owner                              |
+  | `kube_job`                    | Orchestrator | Pod ownerref                                                                                                                 | Pod must be attached to a cronjob                   |
+  | `kube_job`                    | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a job                       |
+  | `kube_replica_set`            | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a replica set               |
+  | `kube_service`                | Low          | Kubernetes service discovery                                                                                                 | Pod is behind a Kubernetes service                  |
+  | `kube_daemon_set`             | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a DaemonSet                 |
+  | `kube_container_name`         | Low          | Pod status                                                                                                                   | N/A                                                 |
+  | `kube_namespace`              | Low          | Pod metadata                                                                                                                 | N/A                                                 |
+  | `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                                                                           | Pod label must exist                                |
+  | `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                                                                       | Pod label must exist                                |
+  | `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                                                                        | Pod label must exist                                |
+  | `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                                                                      | Pod label must exist                                |
+  | `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                                                                        | Pod label must exist                                |
+  | `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                                                                     | Pod label must exist                                |
+  | `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar (`DD_ENV` or `OTEL_RESOURCE_ATTRIBUTES`)                              | [Unified service tagging][2] enabled                |
+  | `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar (`DD_ENV` or `OTEL_RESOURCE_ATTRIBUTES`)                          | [Unified service tagging][2] enabled                |
+  | `service`                     | Low          | Pod label `tags.datadoghq.com/service` or container envvar (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES`, or `OTEL_SERVICE_NAME`) | [Unified service tagging][2] enabled                |
+  | `pod_phase`                   | Low          | Pod status                                                                                                                   | N/A                                                 |
+  | `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                                                                         | OpenShift environment and pod annotation must exist |
+  | `kube_ownerref_kind`          | Low          | Pod ownerref                                                                                                                 | Pod must have an owner                              |
+  | `kube_deployment`             | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a deployment                |
+  | `kube_replication_controller` | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a replication controller    |
+  | `kube_stateful_set`           | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a statefulset               |
+  | `persistentvolumeclaim`       | Low          | Pod spec                                                                                                                     | A PVC must be attached to the pod                   |
+  | `kube_cronjob`                | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a cronjob                   |
+  | `image_name`                  | Low          | Pod spec                                                                                                                     | N/A                                                 |
+  | `short_image`                 | Low          | Pod spec                                                                                                                     | N/A                                                 |
+  | `image_tag`                   | Low          | Pod spec                                                                                                                     | N/A                                                 |
+  | `eks_fargate_node`            | Low          | Pod spec                                                                                                                     | EKS Fargate environment                             |
+  | `kube_runtime_class`          | Low          | Pod spec                                                                                                                     | Pod must be attached to a runtime class             |
 
 </div>
 
@@ -175,7 +173,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -268,7 +266,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -361,7 +359,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -386,7 +384,7 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 
 ### Namespace labels as tags
 
-Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
+Starting with Agent 7.55.0+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -454,7 +452,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -535,7 +533,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -613,7 +611,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
 
 ```bash

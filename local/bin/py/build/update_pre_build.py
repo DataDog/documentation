@@ -11,7 +11,6 @@ from actions.pull_and_push_folder import pull_and_push_folder
 from content_manager import prepare_content, download_cached_content_into_repo
 from actions.integrations import Integrations
 from actions.security_rules import security_rules
-from actions.workflows import workflows
 
 from collections import OrderedDict
 from os import sep, getenv
@@ -44,9 +43,13 @@ class Build:
             join(self.tempdir, "extracted") + sep
         )
 
+        # Should match directory name in integrations_data/extracted
         self.apw_integrations = [
             'ably',
-            'akamai_mpulse'
+            'akamai_mpulse',
+            'avmconsulting_workday',
+            'bottomline_mainframe',
+            'nerdvision'
         ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
@@ -98,8 +101,6 @@ class Build:
                     pull_and_push_file(content, self.content_dir)
                 elif content["action"] in ("security-rules", "compliance-rules"):
                     security_rules(content, self.content_dir)
-                elif content['action'] == "workflows":
-                    workflows(content, self.content_dir)
                 elif content["action"] == "Not Available":
                     if not getenv("CI_COMMIT_REF_NAME"):
                         print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(

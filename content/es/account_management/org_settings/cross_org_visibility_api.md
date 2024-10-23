@@ -1,6 +1,5 @@
 ---
 is_beta: true
-kind: documentation
 private: true
 title: API de conexiones entre organizaciones
 ---

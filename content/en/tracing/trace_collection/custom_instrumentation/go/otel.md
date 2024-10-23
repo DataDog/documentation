@@ -1,6 +1,5 @@
 ---
 title: Go Custom Instrumentation using OpenTelemetry API
-kind: documentation
 description: 'Instrument your Go application with OpenTelemetry API to send traces to Datadog'
 code_lang: otel
 type: multi-code-lang
@@ -148,73 +147,31 @@ ctx, span := t.Start(
 span.End()
 ```
 
-### Asynchronous traces
+## Adding span events
 
-When working with asynchronous or concurrent operations, it's important to ensure that traces are properly propagated and connected across different execution contexts. Here's an example of how to create and manage asynchronous traces:
+<div class="alert alert-info">Adding span events requires SDK version 1.67.0 or higher.</div>
 
-```go
-func main() {
-	ctx, span := t.Start(context.Background(), "main_op")
-	defer span.End()
+You can add span events using the `AddEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
-	go func() {
-		ctx, asyncSpan := t.Start(ctx, "asyncOp")
-		defer asyncSpan.End()
-		performOp()
-	}()
-}
-```
-
-### Distributed tracing
-
-Create a distributed [trace][15] by manually propagating the tracing context:
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `Time` object.
+  
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package and `attribute` refers to the go.opentelemetry.io/otel/attribute package. These packages must be imported in order to use this example.
 
 ```go
-package main
-
-import (
-    "net/http"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-    span, ctx := tracer.StartSpanFromContext(r.Context(), "post.process")
-    defer span.Finish()
-
-    req, err := http.NewRequest("GET", "http://example.com", nil)
-    req = req.WithContext(ctx)
-    // Inject the span Context in the Request headers
-    err = tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(req.Header))
-    if err != nil {
-        // Handle or log injection error
-    }
-    http.DefaultClient.Do(req)
-}
+// Start a span.
+ctx, span := tracer.StartSpan(context.Background(), "span_name")
+span.AddEvent("Event With No Attributes")
+span.AddEvent("Event With Some Attributes", oteltrace.WithAttributes(attribute.Int("int_val", 1), attribute.String("string_val", "two"), attribute.Int64Slice("int_array", []int64{3, 4}), attribute.StringSlice("string_array", []string{"5", "6"}), attribute.BoolSlice("bool_array", []bool{false, true})))
+span.Finish()
 ```
-
-Then, on the server side, to continue the trace, start a new [Span][2] from the extracted `Context`:
-
-```go
-package main
-
-import (
-    "net/http"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-    // Extract the span Context and continue the trace in this service
-    sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header))
-    if err != nil {
-        // Handle or log extraction error
-    }
-
-    span := tracer.StartSpan("post.filter", tracer.ChildOf(sctx))
-    defer span.Finish()
-}
-```
+Read the [OpenTelemetry][17] specification for more information.
 
 ## Trace client and Agent configuration
 
@@ -238,9 +195,10 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [6]: https://opentelemetry.io/docs/instrumentation/go/
-[9]: /tracing/trace_collection/trace_context_propagation/go/
+[9]: /tracing/trace_collection/trace_context_propagation/
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[13]: /tracing/trace_collection/trace_context_propagation/go/
+[13]: /tracing/trace_collection/trace_context_propagation/
 [14]: /tracing/security
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context
+[17]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events

@@ -10,7 +10,7 @@ further_reading:
 - link: /tracing/glossary/
   tag: Documentation
   text: Terminologie et présentation de l'APM
-kind: guide
+
 title: Envoyer des traces à l'Agent via l'API
 ---
 

@@ -19,7 +19,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Debian
 title: Uso básico del Agent para Debian
 ---

@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon SNS(Simple Notification Service)
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon SNS(Simple Notification Service) 통합

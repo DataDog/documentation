@@ -1,6 +1,5 @@
 ---
 title: Adding Custom Tags and Measures to Pipeline Traces
-kind: documentation
 aliases:
   - /continuous_integration/pipelines/custom_tags_and_metrics
   - /continuous_integration/setup_pipelines/custom_tags_and_metrics
@@ -77,15 +76,15 @@ Tags can be added to the pipeline span or to the job span.
 To do this, run the `tag` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tag1>] [--tags <tag2>] ...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
-The following example adds the tag `team` to the pipeline span.
+The following example adds `team` and `service` tags to the pipeline span.
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level pipeline --tags team:backend
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level pipeline --tags team:backend --tags service:processor
 ```
 
 The following example adds the tag `go.version` to the span for the current job:
@@ -103,15 +102,15 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 To add numerical tags to the pipeline span or the job span, run the `measure` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measure1>] [--measures <measure2>]...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
-The following example adds the measure `error_rate` to the pipeline span:
+The following example adds `error_rate` and `size` measures to the pipeline span:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level pipeline --measures "error_rate:0.56"
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level pipeline --measures "error_rate:0.56" --measures "size:2327"
 ```
 
 The following example adds a measure `binary.size` to the span for the currently running job:
@@ -165,6 +164,6 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 [7]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [8]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [9]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
-[10]: /continuous_integration/pipelines/explorer
+[10]: /continuous_integration/explorer
 [11]: /continuous_integration/pipelines/
 [12]: /getting_started/site/

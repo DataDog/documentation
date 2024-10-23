@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the Agent
-kind: documentation
 further_reading:
     - link: '/agent/basic_agent_usage/'
       tag: 'Documentation'
@@ -42,7 +41,7 @@ The following Agent metrics are information the Agent sends to Datadog about its
 
 | Metric                           | Description                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `datadog.agent.python.version` | Shows a value of `1` if the Agent is reporting to Datadog. The metric is tagged with the `python_version`. |
+| `datadog.agent.python.version` | The metric is tagged with the `python_version`. |
 | `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                                                 |
 | `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
 
@@ -105,7 +104,7 @@ In the Datadog UI, navigate to the [Agent Installation page][18] and click on **
 Example Ubuntu one-line installation command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Use the [Agent Installation page][18] to see the most up-to-date installation instructions for your operating system.
@@ -149,11 +148,10 @@ Datadog agent (v. 7.XX.X) started on <Hostname>
 
 The Agent is set up to provide the following service checks:
 
-  - `datadog.agent.up`:
-    Returns `OK` if the Agent connects to Datadog.
+  - `datadog.agent.up`: Returns `OK` if the Agent connects to Datadog.
+    <div class="alert alert-warning">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
+  - `datadog.agent.check_status`: Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
-  - `datadog.agent.check_status`:
-    Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
 

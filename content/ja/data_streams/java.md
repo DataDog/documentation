@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: ドキュメント
   text: サービスカタログ
-kind: documentation
 title: Data Streams Monitoring for Java のセットアップ
 ---
 
@@ -22,21 +21,30 @@ Data Streams Monitoring を開始するには、Datadog Agent と Java ライブ
   * Kafka および RabbitMQ: v1.9.0 以降
   * Amazon SQS: v1.27.0 以降
 
-### インフラストラクチャーリスト
+### インストール
 
-Java は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
+Java は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka、SQS、または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
+
+また、トレースで `DD_SERVICE` がサービス名として使用されるように、変数 `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` を `true` に設定します。
 
 例:
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
+  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
 代わりに、Java アプリケーションの起動時に以下を実行して、`-Ddd.data.streams.enabled=true` システムプロパティを設定することも可能です。
 
 ```bash
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.trace.remove.integration.service.names.enabled=true -jar path/to/your/app.jar
 ```
+
+### ワンクリックインストール
+サービスを再起動することなく Datadog UI から Data Streams Monitoring をセットアップするには、[Configuration at Runtime][5] を使用します。APM サービスページに移動して、DSM を有効にします。
+
+{{< img src="data_streams/enable_dsm_service_catalog.png" alt="APM サービスページの Dependencies セクションから Data Streams Monitoring を有効にします" >}}
+
 ### サポートされるライブラリ
 Data Streams Monitoring は、[confluent-kafka ライブラリ][3]をサポートしています。
 
@@ -51,3 +59,4 @@ Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して�
 [2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[5]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

@@ -1,6 +1,5 @@
 ---
 title: Anomaly Monitor
-kind: documentation
 aliases:
     - /guides/anomalies
     - /monitors/monitor_types/anomaly
@@ -13,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "dashboards/functions/algorithms/#anomalies"
@@ -158,7 +157,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
 
 ## API
 
@@ -249,7 +248,7 @@ A standard configuration of thresholds and threshold window looks like:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/anomaly
+[1]: https://app.datadoghq.com/monitors/create/anomaly
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -260,7 +259,7 @@ A standard configuration of thresholds and threshold window looks like:
 [9]: /monitors/types/metric/#data-window
 [10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
-[12]: /monitors/manage/status/#settings
+[12]: /monitors/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
 [15]: /monitors/guide/anomaly-monitor/

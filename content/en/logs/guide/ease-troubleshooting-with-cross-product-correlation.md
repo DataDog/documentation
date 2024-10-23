@@ -1,6 +1,6 @@
 ---
 title: Ease Troubleshooting With Cross-Product Correlation
-kind: guide
+
 further_reading:
 - link: '/getting_started/tagging/unified_service_tagging/'
   tag: 'Documentation'
@@ -73,11 +73,11 @@ Follow [NGINX tracing integration][5].
 
 ##### Inject trace ID in logs
 
-Trace ID is stored as `opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the HTTP section of your NGINX configuration file `/etc/nginx/nginx.conf`:
+Trace ID is stored as `opentelemetry_trace_id` variable. Update the NGINX log format by adding the following configuration block in the HTTP section of your NGINX configuration file `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
-  log_format main '$remote_addr - $opentracing_context_x_datadog_trace_id $http_x_forwarded_user [$time_local] "$request" '
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for" ';
 
@@ -236,7 +236,7 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /logs/log_collection/javascript/
 [12]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /real_user_monitoring/browser/#initialization-parameters
+[13]: /real_user_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
 [16]: /real_user_monitoring/platform/connect_rum_and_traces

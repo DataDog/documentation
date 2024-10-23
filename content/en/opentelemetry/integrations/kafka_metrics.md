@@ -255,7 +255,7 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 ## Data collected
 
-See [OpenTelemetry Metrics Mapping][9] for information about collected container metrics.
+See [OpenTelemetry Metrics Mapping][9] for information about collected Kafka metrics.
 
 
 

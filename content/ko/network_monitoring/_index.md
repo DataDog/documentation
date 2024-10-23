@@ -23,9 +23,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
   tag: 블로그
   text: Datadog를 사용해 Cilium 관리 인프라스트럭처 모니터링
-kind: 설명서
 title: 네트워크 모니터링
 ---
+
+
+{{< learning-center-callout header="활성화 웨비나 세션 참가" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=NPM">}}
+  Datadog 네트워크 성능 모니터링으로 최소한의 비용으로 온프레미스, 클라우드, 하이브리 환경 네트워크 컨텐츠를 가시화하여 확인하는 방법을 알아보세요.
+{{< /learning-center-callout >}}
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance" >}}<u>네트워크 성능 모니터링</u>: 인프라스트럭처에서 점대점 통신을 위한 메트릭을 탐색하세요.{{< /nextlink >}}

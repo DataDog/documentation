@@ -9,7 +9,6 @@ further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: 설명서
   text: 다수 조직 계정 관리
-kind: 도움말
 title: 비용 상세 정보
 ---
 

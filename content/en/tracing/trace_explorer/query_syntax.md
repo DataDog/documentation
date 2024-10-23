@@ -1,6 +1,5 @@
 ---
 title: Query Syntax
-kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
  - /tracing/search_syntax/
@@ -37,7 +36,7 @@ further_reading:
   text: "Dive into your resource performance and traces"
 ---
 
-## Search bar
+## Search query
 
 All search parameters are contained in the url of the page, which can be helpful for sharing your view.
 
@@ -47,9 +46,9 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A [**Facet**](#facet-search)
+* A **Span tag**
 
-* A [**Tag**](#tags-search)
+* A **Tag attribute**
 
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
@@ -59,17 +58,29 @@ To combine multiple *terms* into a complex query, use any of the following boole
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
-### Facet search
+### Attribute search
 
-To search on a specific [facet](#facets) you must [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
+To search on a specific span attribute you must add `@` at the beginning of the attribute key.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
+For instance, if you want to access a span with the following attribute below, you can use:
 
-`@url:www.datadoghq.com`
+`@git.commit.sha:12345`
+
+```json
+  "git": {
+    "commit": {
+      "sha": "12345"
+    },
+    "repository": {
+      "id": "github.com/datadog/datadog"
+    }
+  }
+```
+**Note:** You do not need to use `@` on the [reserved attributes][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
 ### Tags search
 
-Your traces inherit tags from hosts and [integrations][1] that generate them. They can be used in the search and as facets as well:
+Your traces inherit tags from hosts and integrations that generate them. They can be used in the search query:
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -77,9 +88,16 @@ Your traces inherit tags from hosts and [integrations][1] that generate them. Th
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-If your tags don't follow [tags best practices][2] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][2], then do not use `key:value` syntax. Instead, use the following search query:
 
 * `tags:<MY_TAG>`
+
+Example tag that does not follow the best practices:
+
+<img width="867" alt="tagging-not-recommended" src="https://github.com/user-attachments/assets/4a3d5246-b6e7-4ab2-908a-bc2137062573">
+
+Search query for this specific tag:
+`tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### Wildcards
 
@@ -169,9 +187,11 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo" style="width:80%;">}}
 
-### Quantitative (measures)
+### Measures
 
-**Use measures when you need to:**
+Measures are the specific type of facets for quantitative values.
+
+Use measures when you need to:
 * Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
 * Numerically compute the highest latency services for shopping cart values over $1000.
 * Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.
@@ -192,46 +212,13 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
+After you create a new facet, it is available in the facet panel for filtering and basic analytics.
 
 ### Facet panel
 
 Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" style="width:30%;">}}
-
-## Analytics overview
-
-Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
-
-Analytics is automatically enabled for all APM [services][6] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][7] and legacy App Analytics are available in Analytics for 15 days.
-
-Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
-
-## Analytics query
-
-Use the query to control what's displayed in your Analytics:
-
-1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
-
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" style="width:50%;">}}
-
-2. Select the aggregation function for the `Duration` metric:
-
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function" style="width:50%;">}}
-
-3. Use a tag or facet to split your Analytic.
-
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by" style="width:50%;">}}
-
-4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
-
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button" style="width:20%;">}}
-
-5. Choose the Analytic Timesteps.
- Changing the global timeframe changes the list of available Timesteps values.
-
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep" style="width:30%;">}}
 
 ## Visualizations
 
@@ -281,18 +268,15 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button" style="width:40%;">}}
 
-Export your Analytics:
+Export your queries:
 
-* To a new [APM monitor][11]
-* To an existing [Timeboard][12]. This feature is in beta. [Contact the Datadog support team][13] to activate it for your organization.
+* To [monitor][11]
+* To [dashboard][12]
+* To [notebook][18]
 
-**Note:** Analytics can be exported only when powered by [indexed spans][14].
+You can also generate a new metric for the query.
 
-## Traces in dashboard
-
-Export [Analytics][4] from the trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
-
-[Learn more about the timeseries widget][16].
+**Note**: APM queries in dashboards and notebooks are based on all [indexed spans][14]. APM queries in monitors are based on spans indexed by [custom retention filters][19] only.
 
 ## Further Reading
 
@@ -309,8 +293,11 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /tracing/glossary/#trace
 [11]: /monitors/types/apm/
-[12]: /dashboards/#timeboards
+[12]: /dashboards/#get-started
 [13]: /help/
 [14]: /tracing/glossary/#indexed-span
 [15]: /dashboards/
 [16]: /dashboards/widgets/timeseries/
+[17]: /monitors/notify/variables/?tab=is_alert#reserved-attributes
+[18]: /notebooks/
+[19]: /tracing/trace_pipeline/trace_retention/#retention-filters

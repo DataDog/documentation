@@ -1,21 +1,20 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
 title: チュートリアル - コンテナ内の Java アプリケーションとホスト上の Agent のトレースを有効にする
 ---
 
@@ -41,7 +40,7 @@ Datadog Agent をマシンにインストールしていない場合は、今す
 1. [**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
    {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
    {{< /code-block >}}
 
    `datadoghq.com` 以外の Datadog サイトにデータを送信するには、`DD_SITE` 環境変数を [Datadog サイト][6]に置き換えてください。
@@ -125,7 +124,7 @@ Java アプリケーションが動作するようになったので、トレー
 1. Java トレーシングパッケージをプロジェクトに追加します。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除してください。
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. 同じ `notes/dockerfile.notes.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
@@ -222,9 +221,9 @@ docker-compose -f service-docker-compose.yaml up notes
 
 しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-`h2` はこのチュートリアルのために埋め込まれたインメモリデータベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
+`h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
 もし、数分待ってもトレースが表示されない場合は、Agent が実行していることを確認してください。Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
 
@@ -248,7 +247,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 
 `dd.trace.sample.rate` フラグは、このアプリケーションのサンプルレートを設定します。Dockerfile の ENTRYPOINT コマンドでは、この値を `1` に設定しています。これは、`notes` サービスに対する全てのリクエストの 100% が、分析と表示のために Datadog のバックエンドに送信されることを意味します。低容量のテストアプリケーションの場合、これは問題ありません。実稼働時や大量のデータを扱う環境では、このようなことはしないでください。代わりに、リクエストの一部をサンプリングします。例えば、`-Ddd.trace.sample.rate=0.1` とすると、リクエストの 10% 分のトレースが Datadog に送信されます。[トレース構成設定][17]と[サンプリング機構][16]について詳しくお読みください。
 
-このコマンドのサンプリングレートフラグは `-jar` フラグの前に表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
+このコマンドのサンプリングレートフラグは `-jar` フラグの_前に_表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
 
 
 ## Java アプリケーションに手動インスツルメンテーションを追加する
@@ -339,7 +338,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 
 1. ノートアプリと同様に、Dockerfile の起動コマンドに `dd-java-agent` を追加して、トレース用のカレンダーアプリの構成を確認します。`calendar/Dockerfile.calendar.maven` を開き、すでに `dd-java-agent` がダウンロードされていることを確認します。
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. 同じ `calendar/dockerfile.calendar.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
@@ -417,7 +416,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 
 もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -434,7 +433,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /ja/tracing/trace_collection/custom_instrumentation/java/
 [13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7
 [16]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: /ja/tracing/trace_collection/library_config/java/

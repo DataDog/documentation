@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md
 display_on_public_website: true
@@ -28,9 +29,8 @@ draft: false
 git_integration_title: kubelet
 integration_id: kubelet
 integration_title: Kubelet
-integration_version: 7.13.1
+integration_version: 9.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: kubelet
 public_title: Kubelet
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::コンテナ
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubelet からコンテナ統計を収集。
   media: []
@@ -64,13 +65,13 @@ tile:
 - kubelet 統計を視覚化および監視できます。
 - kubelet のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Kubelet チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `kubelet.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kubelet.d/conf.yaml][3] を参照してください。
 
@@ -107,9 +108,9 @@ kubeletArguments:
 - ポッド制限およびリクエスト数
 - ノード容量メトリクス
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "kubelet" >}}
 
 
@@ -119,7 +120,7 @@ kubeletArguments:
 
 ポッドレベルで報告されるネットワークメトリクスでは、他のコンテナが同じポッドに含まれることがあるため、コンテナを `name` や `image name` に基づいて除外することはできません。そのため、`DD_CONTAINER_EXCLUDE` をネームスペースに適用すると、ポッドがそのネームスペースにある場合、ポッドレベルのメトリクスは報告されません。ただし、`DD_CONTAINER_EXCLUDE` がコンテナ名またはイメージ名を参照している場合は、ポッド内の一部のコンテナに除外規則が適用されていても、ポッドレベルのメトリクスが報告されます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

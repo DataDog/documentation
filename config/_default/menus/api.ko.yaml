@@ -1,21 +1,21 @@
 menu:
   api:
-  - identifier: API 개요
+  - identifier: API overview
     name: 개요
     url: /api/latest/
     weight: -10
   - name: API 사용
-    parent: API 개요
+    parent: API overview
     url: /api/latest/using-the-api/
     weight: 5
-  - identifier: API 범위
+  - identifier: API Scopes
     name: 인증 범위
-    parent: API 개요
+    parent: API overview
     url: /api/latest/scopes/
     weight: 6
   - identifier: rate-limits
     name: 속도 제한
-    parent: API 개요
+    parent: API overview
     url: /api/latest/rate-limits/
     weight: 7
   - generated: true
@@ -263,12 +263,12 @@ menu:
     name: API 키 검증
     params:
       operationids:
-      - 검증
+      - Validate
       order: 1
       unstable: []
       versions:
       - v1
-    parent: 인증
+    parent: authentication
     url: '#validate-api-key'
   - generated: true
     identifier: azure-integration
@@ -447,7 +447,7 @@ menu:
     parent: dashboard-lists
     url: '#get-all-dashboard-lists'
   - generated: true
-    identifier: 대시보드
+    identifier: dashboards
     name: 대시보드
     url: /api/latest/dashboards/
   - generated: true
@@ -460,7 +460,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#update-a-dashboard'
   - generated: true
     identifier: dashboards-get-a-dashboard
@@ -472,7 +472,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#get-a-dashboard'
   - generated: true
     identifier: dashboards-delete-a-dashboard
@@ -484,7 +484,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#delete-a-dashboard'
   - generated: true
     identifier: dashboards-send-shared-dashboard-invitation-email
@@ -496,7 +496,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#send-shared-dashboard-invitation-email'
   - generated: true
     identifier: dashboards-get-all-invitations-for-a-shared-dashboard
@@ -508,7 +508,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#get-all-invitations-for-a-shared-dashboard'
   - generated: true
     identifier: dashboards-revoke-shared-dashboard-invitations
@@ -520,7 +520,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#revoke-shared-dashboard-invitations'
   - generated: true
     identifier: dashboards-update-a-shared-dashboard
@@ -532,7 +532,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#update-a-shared-dashboard'
   - generated: true
     identifier: dashboards-get-a-shared-dashboard
@@ -544,7 +544,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#get-a-shared-dashboard'
   - generated: true
     identifier: dashboards-revoke-a-shared-dashboard-url
@@ -556,7 +556,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#revoke-a-shared-dashboard-url'
   - generated: true
     identifier: dashboards-create-a-shared-dashboard
@@ -568,7 +568,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#create-a-shared-dashboard'
   - generated: true
     identifier: dashboards-create-a-new-dashboard
@@ -580,7 +580,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#create-a-new-dashboard'
   - generated: true
     identifier: dashboards-restore-deleted-dashboards
@@ -592,7 +592,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#restore-deleted-dashboards'
   - generated: true
     identifier: dashboards-get-all-dashboards
@@ -604,7 +604,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#get-all-dashboards'
   - generated: true
     identifier: dashboards-delete-dashboards
@@ -616,10 +616,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 대시보드
+    parent: dashboards
     url: '#delete-dashboards'
   - generated: true
-    identifier: 다운타임
+    identifier: downtimes
     name: 다운타임
     url: /api/latest/downtimes/
   - generated: true
@@ -633,7 +633,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 다운타임
+    parent: downtimes
     url: '#get-active-downtimes-for-a-monitor'
   - generated: true
     identifier: downtimes-update-a-downtime
@@ -646,7 +646,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 다운타임
+    parent: downtimes
     url: '#update-a-downtime'
   - generated: true
     identifier: downtimes-get-a-downtime
@@ -659,7 +659,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 다운타임
+    parent: downtimes
     url: '#get-a-downtime'
   - generated: true
     identifier: downtimes-cancel-a-downtime
@@ -672,7 +672,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 다운타임
+    parent: downtimes
     url: '#cancel-a-downtime'
   - generated: true
     identifier: downtimes-cancel-downtimes-by-scope
@@ -684,7 +684,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 다운타임
+    parent: downtimes
     url: '#cancel-downtimes-by-scope'
   - generated: true
     identifier: downtimes-schedule-a-downtime
@@ -697,7 +697,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 다운타임
+    parent: downtimes
     url: '#schedule-a-downtime'
   - generated: true
     identifier: downtimes-get-all-downtimes
@@ -710,7 +710,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 다운타임
+    parent: downtimes
     url: '#get-all-downtimes'
   - generated: true
     identifier: embeddable-graphs
@@ -777,7 +777,7 @@ menu:
     parent: embeddable-graphs
     url: '#get-all-embeds'
   - generated: true
-    identifier: 이벤트
+    identifier: events
     name: 이벤트
     url: /api/latest/events/
   - generated: true
@@ -790,7 +790,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 이벤트
+    parent: events
     url: '#search-events'
   - generated: true
     identifier: events-get-an-event
@@ -802,7 +802,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 이벤트
+    parent: events
     url: '#get-an-event'
   - generated: true
     identifier: events-post-an-event
@@ -814,7 +814,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 이벤트
+    parent: events
     url: '#post-an-event'
   - generated: true
     identifier: events-get-a-list-of-events
@@ -827,7 +827,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 이벤트
+    parent: events
     url: '#get-a-list-of-events'
   - generated: true
     identifier: gcp-integration
@@ -954,7 +954,7 @@ menu:
     parent: gcp-integration
     url: '#delete-a-gcp-integration'
   - generated: true
-    identifier: 호스트
+    identifier: hosts
     name: 호스트
     url: /api/latest/hosts/
   - generated: true
@@ -967,7 +967,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 호스트
+    parent: hosts
     url: '#get-the-total-number-of-active-hosts'
   - generated: true
     identifier: hosts-get-all-hosts-for-your-organization
@@ -979,7 +979,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 호스트
+    parent: hosts
     url: '#get-all-hosts-for-your-organization'
   - generated: true
     identifier: hosts-unmute-a-host
@@ -991,7 +991,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 호스트
+    parent: hosts
     url: '#unmute-a-host'
   - generated: true
     identifier: hosts-mute-a-host
@@ -1003,7 +1003,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 호스트
+    parent: hosts
     url: '#mute-a-host'
   - generated: true
     identifier: ip-ranges
@@ -1215,7 +1215,7 @@ menu:
     parent: key-management
     url: '#get-all-api-keys'
   - generated: true
-    identifier: 로그
+    identifier: logs
     name: 로그
     url: /api/latest/logs/
   - generated: true
@@ -1228,7 +1228,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 로그
+    parent: logs
     url: '#get-a-list-of-logs'
   - generated: true
     identifier: logs-aggregate-events
@@ -1240,7 +1240,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 로그
+    parent: logs
     url: '#aggregate-events'
   - generated: true
     identifier: logs-send-logs
@@ -1253,7 +1253,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 로그
+    parent: logs
     url: '#send-logs'
   - generated: true
     identifier: logs-search-logs
@@ -1266,7 +1266,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 로그
+    parent: logs
     url: '#search-logs'
   - generated: true
     identifier: logs-indexes
@@ -1433,7 +1433,7 @@ menu:
     parent: logs-pipelines
     url: '#get-pipeline-order'
   - generated: true
-    identifier: 메트릭
+    identifier: metrics
     name: 메트릭
     url: /api/latest/metrics/
   - generated: true
@@ -1447,7 +1447,7 @@ menu:
       - v2
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#query-timeseries-data-across-multiple-products'
   - generated: true
     identifier: metrics-query-scalar-data-across-multiple-products
@@ -1460,7 +1460,7 @@ menu:
       - v2
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#query-scalar-data-across-multiple-products'
   - generated: true
     identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -1472,7 +1472,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#list-distinct-metric-volumes-by-metric-name'
   - generated: true
     identifier: metrics-create-a-tag-configuration
@@ -1484,7 +1484,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#create-a-tag-configuration'
   - generated: true
     identifier: metrics-update-a-tag-configuration
@@ -1496,7 +1496,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#update-a-tag-configuration'
   - generated: true
     identifier: metrics-list-tag-configuration-by-name
@@ -1508,7 +1508,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#list-tag-configuration-by-name'
   - generated: true
     identifier: metrics-delete-a-tag-configuration
@@ -1520,7 +1520,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#delete-a-tag-configuration'
   - generated: true
     identifier: metrics-tag-configuration-cardinality-estimator
@@ -1532,7 +1532,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#tag-configuration-cardinality-estimator'
   - generated: true
     identifier: metrics-related-assets-to-a-metric
@@ -1544,7 +1544,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#related-assets-to-a-metric'
   - generated: true
     identifier: metrics-list-tags-by-metric-name
@@ -1556,7 +1556,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#list-tags-by-metric-name'
   - generated: true
     identifier: metrics-list-active-tags-and-aggregations
@@ -1568,7 +1568,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#list-active-tags-and-aggregations'
   - generated: true
     identifier: metrics-configure-tags-for-multiple-metrics
@@ -1580,7 +1580,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#configure-tags-for-multiple-metrics'
   - generated: true
     identifier: metrics-delete-tags-for-multiple-metrics
@@ -1592,7 +1592,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#delete-tags-for-multiple-metrics'
   - generated: true
     identifier: metrics-get-a-list-of-metrics
@@ -1604,7 +1604,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#get-a-list-of-metrics'
   - generated: true
     identifier: metrics-submit-metrics
@@ -1617,7 +1617,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 메트릭
+    parent: metrics
     url: '#submit-metrics'
   - generated: true
     identifier: metrics-search-metrics
@@ -1629,7 +1629,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: metrics
     url: '#search-metrics'
   - generated: true
     identifier: metrics-query-timeseries-points
@@ -1641,7 +1641,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: metrics
     url: '#query-timeseries-points'
   - generated: true
     identifier: metrics-edit-metric-metadata
@@ -1653,7 +1653,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: metrics
     url: '#edit-metric-metadata'
   - generated: true
     identifier: metrics-get-metric-metadata
@@ -1665,7 +1665,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: metrics
     url: '#get-metric-metadata'
   - generated: true
     identifier: metrics-get-active-metrics-list
@@ -1677,7 +1677,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: metrics
     url: '#get-active-metrics-list'
   - generated: true
     identifier: metrics-submit-distribution-points
@@ -1689,10 +1689,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: metrics
     url: '#submit-distribution-points'
   - generated: true
-    identifier: 모니터
+    identifier: monitors
     name: 모니터
     url: /api/latest/monitors/
   - generated: true
@@ -1705,7 +1705,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: "\b모니터"
+    parent: monitors
     url: '#edit-a-monitor-configuration-policy'
   - generated: true
     identifier: monitors-get-a-monitor-configuration-policy
@@ -1717,7 +1717,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 모니터
+    parent: monitors
     url: '#get-a-monitor-configuration-policy'
   - generated: true
     identifier: monitors-delete-a-monitor-configuration-policy
@@ -1729,7 +1729,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 모니터
+    parent: monitors
     url: '#delete-a-monitor-configuration-policy'
   - generated: true
     identifier: monitors-create-a-monitor-configuration-policy
@@ -1741,7 +1741,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 모니터
+    parent: monitors
     url: '#create-a-monitor-configuration-policy'
   - generated: true
     identifier: monitors-get-all-monitor-configuration-policies
@@ -1753,7 +1753,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 모니터
+    parent: monitors
     url: '#get-all-monitor-configuration-policies'
   - generated: true
     identifier: monitors-unmute-all-monitors
@@ -1765,7 +1765,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#unmute-all-monitors'
   - generated: true
     identifier: monitors-mute-all-monitors
@@ -1777,7 +1777,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#mute-all-monitors'
   - generated: true
     identifier: monitors-validate-an-existing-monitor
@@ -1789,7 +1789,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#validate-an-existing-monitor'
   - generated: true
     identifier: monitors-unmute-a-monitor
@@ -1801,7 +1801,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#unmute-a-monitor'
   - generated: true
     identifier: monitors-mute-a-monitor
@@ -1813,7 +1813,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#mute-a-monitor'
   - generated: true
     identifier: monitors-edit-a-monitor
@@ -1825,7 +1825,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#edit-a-monitor'
   - generated: true
     identifier: monitors-get-a-monitors-details
@@ -1837,7 +1837,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#get-a-monitors-details'
   - generated: true
     identifier: monitors-delete-a-monitor
@@ -1849,7 +1849,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#delete-a-monitor'
   - generated: true
     identifier: monitors-validate-a-monitor
@@ -1861,7 +1861,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#validate-a-monitor'
   - generated: true
     identifier: monitors-monitors-search
@@ -1873,7 +1873,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#monitors-search'
   - generated: true
     identifier: monitors-monitors-group-search
@@ -1885,7 +1885,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#monitors-group-search'
   - generated: true
     identifier: monitors-check-if-a-monitor-can-be-deleted
@@ -1897,7 +1897,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#check-if-a-monitor-can-be-deleted'
   - generated: true
     identifier: monitors-create-a-monitor
@@ -1909,7 +1909,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#create-a-monitor'
   - generated: true
     identifier: monitors-get-all-monitor-details
@@ -1921,10 +1921,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 모니터
+    parent: monitors
     url: '#get-all-monitor-details'
   - generated: true
-    identifier: 노트북
+    identifier: notebooks
     name: 노트북
     url: /api/latest/notebooks/
   - generated: true
@@ -1937,7 +1937,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 노트북
+    parent: notebooks
     url: '#update-a-notebook'
   - generated: true
     identifier: notebooks-get-a-notebook
@@ -1949,7 +1949,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 노트북
+    parent: notebooks
     url: '#get-a-notebook'
   - generated: true
     identifier: notebooks-delete-a-notebook
@@ -1961,7 +1961,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 노트북
+    parent: notebooks
     url: '#delete-a-notebook'
   - generated: true
     identifier: notebooks-create-a-notebook
@@ -1973,7 +1973,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 노트북
+    parent: notebooks
     url: '#create-a-notebook'
   - generated: true
     identifier: notebooks-get-all-notebooks
@@ -1985,10 +1985,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 노트북
+    parent: notebooks
     url: '#get-all-notebooks'
   - generated: true
-    identifier: 조직
+    identifier: organizations
     name: 조직
     url: /api/latest/organizations/
   - generated: true
@@ -2003,7 +2003,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: 조직
+    parent: organizations
     url: '#upload-idp-metadata'
   - generated: true
     identifier: organizations-spin-off-child-organization
@@ -2015,7 +2015,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 조직
+    parent: organizations
     url: '#spin-off-child-organization'
   - generated: true
     identifier: organizations-update-your-organization
@@ -2027,7 +2027,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 조직
+    parent: organizations
     url: '#update-your-organization'
   - generated: true
     identifier: organizations-get-organization-information
@@ -2039,7 +2039,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 조직
+    parent: organizations
     url: '#get-organization-information'
   - generated: true
     identifier: organizations-create-a-child-organization
@@ -2051,7 +2051,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 조직
+    parent: organizations
     url: '#create-a-child-organization'
   - generated: true
     identifier: organizations-list-your-managed-organizations
@@ -2063,7 +2063,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 조직
+    parent: organizations
     url: '#list-your-managed-organizations'
   - generated: true
     identifier: pagerduty-integration
@@ -2844,7 +2844,7 @@ menu:
     parent: snapshots
     url: '#take-graph-snapshots'
   - generated: true
-    identifier: 신서틱(Synthetic)
+    identifier: synthetics
     name: 신서틱(Synthetic)
     url: /api/latest/synthetics/
   - generated: true
@@ -2857,7 +2857,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#save-new-value-for-on-demand-concurrency-cap'
   - generated: true
     identifier: synthetics-get-the-on-demand-concurrency-cap
@@ -2869,7 +2869,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-the-on-demand-concurrency-cap'
   - generated: true
     identifier: synthetics-edit-a-global-variable
@@ -2881,7 +2881,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-global-variable'
   - generated: true
     identifier: synthetics-get-a-global-variable
@@ -2893,7 +2893,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-global-variable'
   - generated: true
     identifier: synthetics-delete-a-global-variable
@@ -2905,7 +2905,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#delete-a-global-variable'
   - generated: true
     identifier: synthetics-create-a-global-variable
@@ -2917,7 +2917,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-global-variable'
   - generated: true
     identifier: synthetics-get-all-global-variables
@@ -2929,7 +2929,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-all-global-variables'
   - generated: true
     identifier: synthetics-pause-or-start-a-test
@@ -2941,7 +2941,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#pause-or-start-a-test'
   - generated: true
     identifier: synthetics-get-an-api-test-result
@@ -2953,7 +2953,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-an-api-test-result'
   - generated: true
     identifier: synthetics-get-an-api-tests-latest-results-summaries
@@ -2965,7 +2965,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-an-api-tests-latest-results-summaries'
   - generated: true
     identifier: synthetics-edit-a-test
@@ -2977,7 +2977,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-test'
   - generated: true
     identifier: synthetics-patch-a-synthetic-test
@@ -2989,7 +2989,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#patch-a-synthetic-test'
   - generated: true
     identifier: synthetics-get-a-test-configuration
@@ -3001,7 +3001,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-test-configuration'
   - generated: true
     identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -3013,7 +3013,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#trigger-tests-from-ci/cd-pipelines'
   - generated: true
     identifier: synthetics-trigger-synthetic-tests
@@ -3025,7 +3025,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#trigger-synthetic-tests'
   - generated: true
     identifier: synthetics-delete-tests
@@ -3037,7 +3037,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#delete-tests'
   - generated: true
     identifier: synthetics-get-a-browser-test-result
@@ -3049,7 +3049,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-browser-test-result'
   - generated: true
     identifier: synthetics-get-a-browser-tests-latest-results-summaries
@@ -3061,7 +3061,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-browser-tests-latest-results-summaries'
   - generated: true
     identifier: synthetics-edit-a-browser-test
@@ -3073,7 +3073,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-browser-test'
   - generated: true
     identifier: synthetics-get-a-browser-test
@@ -3085,7 +3085,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-browser-test'
   - generated: true
     identifier: synthetics-create-a-browser-test
@@ -3097,7 +3097,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-browser-test'
   - generated: true
     identifier: synthetics-edit-an-api-test
@@ -3109,7 +3109,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-an-api-test'
   - generated: true
     identifier: synthetics-get-an-api-test
@@ -3121,7 +3121,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-an-api-test'
   - generated: true
     identifier: synthetics-create-an-api-test
@@ -3133,7 +3133,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-an-api-test'
   - generated: true
     identifier: synthetics-create-a-test
@@ -3145,7 +3145,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-test'
   - generated: true
     identifier: synthetics-get-the-list-of-all-synthetic-tests
@@ -3157,7 +3157,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-the-list-of-all-synthetic-tests'
   - generated: true
     identifier: synthetics-get-the-default-locations
@@ -3169,7 +3169,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-the-default-locations'
   - generated: true
     identifier: synthetics-edit-a-private-location
@@ -3181,7 +3181,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-private-location'
   - generated: true
     identifier: synthetics-get-a-private-location
@@ -3193,7 +3193,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-private-location'
   - generated: true
     identifier: synthetics-delete-a-private-location
@@ -3205,7 +3205,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#delete-a-private-location'
   - generated: true
     identifier: synthetics-create-a-private-location
@@ -3217,7 +3217,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-private-location'
   - generated: true
     identifier: synthetics-get-all-locations-public-and-private
@@ -3229,7 +3229,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-all-locations-public-and-private'
   - generated: true
     identifier: synthetics-get-details-of-batch
@@ -3241,10 +3241,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-details-of-batch'
   - generated: true
-    identifier: 태그
+    identifier: tags
     name: 태그
     url: /api/latest/tags/
   - generated: true
@@ -3257,7 +3257,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#update-host-tags'
   - generated: true
     identifier: tags-add-tags-to-a-host
@@ -3269,7 +3269,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#add-tags-to-a-host'
   - generated: true
     identifier: tags-get-host-tags
@@ -3281,7 +3281,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#get-host-tags'
   - generated: true
     identifier: tags-remove-host-tags
@@ -3293,7 +3293,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#remove-host-tags'
   - generated: true
     identifier: tags-get-tags
@@ -3305,7 +3305,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#get-tags'
   - generated: true
     identifier: timeboards
@@ -3519,7 +3519,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: ''
     url: '#get-hourly-usage-for-snmp-devices'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
@@ -6945,7 +6945,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 팀
+    parent: teams
     url: '#get-user-memberships'
   - generated: true
     identifier: teams-update-permission-setting-for-team

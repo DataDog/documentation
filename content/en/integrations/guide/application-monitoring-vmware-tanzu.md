@@ -1,6 +1,6 @@
 ---
 title: Datadog Application Monitoring for VMware Tanzu
-kind: guide
+
 description: "Datadog Application Monitoring for VMware Tanzu"
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
@@ -51,9 +51,8 @@ Datadog Application Monitoring for VMware Tanzu has the following requirements:
 2. Go to the Tanzu Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.
 3. Select the product file downloaded in step **1**. This adds the tile to your staging area.
 4. Click the newly added **Datadog Application Monitoring for VMware Tanzu** tile.
-5. Enter your [Datadog API key][3] in the **Datadog Config** section.
-6. Click **Save**.
-7. Return to the Tanzu Ops Manager Installation Dashboard, and click **Apply changes** to install the Datadog Application Monitoring for the VMware Tanzu tile.
+5. Click **Save**.
+6. Return to the Tanzu Ops Manager Installation Dashboard, and click **Apply changes** to install the Datadog Application Monitoring for the VMware Tanzu tile.
 
 ## Further reading
 

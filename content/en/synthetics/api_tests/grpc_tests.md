@@ -1,6 +1,5 @@
 ---
-title: GRPC Tests
-kind: documentation
+title: GRPC Testing
 description: Simulate gRPC requests to monitor public and internal API endpoints.
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -53,7 +52,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
    For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
    
-   {{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
    
    [101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
 
@@ -62,7 +61,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
    For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
 
-   {{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
    
    {{% /tab %}}
    {{< /tabs >}}
@@ -218,7 +217,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_testing
 [4]: /synthetics/search/#search
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

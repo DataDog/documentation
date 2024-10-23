@@ -1,6 +1,5 @@
 ---
 title: Container Images View
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"

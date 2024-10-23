@@ -1,6 +1,5 @@
 ---
-title: HTTP Tests
-kind: documentation
+title: HTTP Testing
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test
@@ -44,7 +43,18 @@ After choosing to create an `HTTP` test, define your test's request.
 ### Define request
 
 1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
-2. Enrich your HTTP request with **Advanced Options** (optional):
+
+   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+
+2. **Name** your HTTP test.
+
+3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+
+   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
+
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Advanced options
 
    {{< tabs >}}
 
@@ -106,17 +116,15 @@ After choosing to create an `HTTP` test, define your test's request.
 [1]: /data_security/synthetics
    {{% /tab %}}
 
+   {{% tab "Javascript" %}}
+
+   Define variables for your HTTP API tests with JavaScript:
+
+  {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+
+   {{% /tab %}}
+
    {{< /tabs >}}
-
-<br/>
-
-3. **Name** your HTTP test.
-
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
-
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
-
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -182,6 +190,9 @@ The most common errors include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
+`Error performing HTTP/2 request`
+: The request could not be performed. See the dedicated [error][16] page for more information.
+
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
@@ -221,7 +232,7 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
@@ -230,3 +241,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
+[16]: /synthetics/api_tests/errors/#http-errors

@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler
-kind: Documentation
 aliases:
     - /tracing/profiling/
     - /tracing/profiler/
@@ -17,6 +16,9 @@ further_reading:
     - link: '/developers/guide/data-collection-resolution-retention/'
       tag: 'Documentation'
       text: 'Data collection, resolution, and retention'
+    - link: 'https://www.datadoghq.com/blog/source-code-preview/'
+      tag: 'Blog'
+      text: 'Focus on code that matters with source code previews in Continuous Profiler'      
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
@@ -32,6 +34,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
+      tag: 'Blog'
+      text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
 cascade:
     algolia:
         rank: 70
@@ -89,9 +94,9 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 ### Connect traces to profiling data
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Profiles tab][4] to find specific lines of code related to performance issues.
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab shows profiling information for a APM trace span" >}}
 
 ### Find changes in performance by comparing profiles
 

@@ -1,6 +1,5 @@
 ---
 title: Enabling the PHP Profiler
-kind: Documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70
@@ -14,6 +13,9 @@ further_reading:
     - link: 'profiler/profiler_troubleshooting/php'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: "https://www.datadoghq.com/blog/php-exception-profiling/"
+      tag: 'Blog'
+      text: 'Why care about exception profiling in PHP?'
 aliases:
   - /tracing/profiler/enabling/php/
 ---
@@ -52,13 +54,13 @@ apk add libgcc
 
 The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
 
-|      Feature              | Required `dd-trace-php` version          |
-|---------------------------|------------------------------------------|
-| [Code Hotspots][12]       | 0.71+                                    |
-| [Endpoint Profiling][13]  | 0.79.0+                                  |
-| [Timeline][15]            | 0.98.0+ (beta since 0.89.0+)             |
+| Feature                              | Required `dd-trace-php` version |
+|--------------------------------------|---------------------------------|
+| [Trace to Profiling integration][12] | 0.89.0+                           |
+| [Endpoint Profiling][13]             | 0.79.0+                         |
+| [Timeline][15]                       | 0.98.0+                         |
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 
 ## Installation
 

@@ -5,7 +5,7 @@ description: Recueillez les logs issus de votre proxy Stunnel et envoyez-les à 
 has_logo: true
 integration_title: Stunnel
 is_public: true
-kind: integration
+custom_kind: integration
 name: Stunnel
 public_title: Intégration Datadog/Stunnel
 short_description: Recueillez les logs issus de votre proxy Stunnel et envoyez-les à Datadog.

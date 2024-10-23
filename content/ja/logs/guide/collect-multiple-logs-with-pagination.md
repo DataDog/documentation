@@ -1,23 +1,23 @@
 ---
-title: ページ区切りで複数のログを収集する
-kind: ガイド
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ビデオ
-    text: ログの処理方法について
-  - link: /logs/log_configuration/parsing
-    tag: ビデオ
-    text: パースの詳細
-  - link: /logs/live_tail/
-    tag: ビデオ
-    text: Datadog Live Tail 機能
-  - link: /logs/explorer/
-    tag: ビデオ
-    text: ログの調査方法
-  - link: /logs/logging_without_limits/
-    tag: ビデオ
-    text: 無制限のロギング*
+- link: /logs/log_configuration/processors
+  tag: ビデオ
+  text: ログの処理方法について
+- link: /logs/log_configuration/parsing
+  tag: ビデオ
+  text: パースの詳細
+- link: /logs/live_tail/
+  tag: ビデオ
+  text: Datadog Live Tail 機能
+- link: /logs/explorer/
+  tag: ビデオ
+  text: ログの調査方法
+- link: /logs/logging_without_limits/
+  tag: ビデオ
+  text: 無制限のロギング*
+title: ページ区切りで複数のログを収集する
 ---
+
 ## 概要
 
 [ログ API][1] によって返される最大 1000 個のログ制限より長いログリストを取得するには、ページ区切り機能を使用する必要があります。

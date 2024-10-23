@@ -9,7 +9,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임을 예약하여 모니터 음소거
-kind: 가이드
 title: 메트릭 모니터에 대한 데이터 없음 경고 조정
 ---
 

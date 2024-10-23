@@ -1,6 +1,5 @@
 ---
 title: Infrastructure List
-kind: documentation
 aliases:
   - /hostnames
   - /graphing/infrastructure/list/
@@ -18,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list.
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing. 
 
 ## Hosts
 
@@ -56,6 +55,9 @@ Cloud Platform
 
 Datadog Agent
 : Agent version that is collecting data on the host.
+
+OpenTelemetry
+: OpenTelemetry Collector version that is collecting data on the host.
 
 ### Hostname
 
@@ -156,3 +158,4 @@ for host in infra['rows']:
 [8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
+[11]: https://docs.datadoghq.com/account_management/billing/

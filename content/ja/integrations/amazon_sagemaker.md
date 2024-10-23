@@ -5,6 +5,7 @@ categories:
 - クラウド
 - ログの収集
 - ai/ml
+custom_kind: integration
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: Amazon SageMaker
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_sagemaker
 public_title: Datadog-Amazon SageMaker インテグレーション
@@ -34,9 +34,9 @@ Amazon SageMaker は、フルマネージド型の機械学習サービスです
 
 このインテグレーションを有効にすると、Datadog にすべての SageMaker メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -61,17 +61,17 @@ Amazon SageMaker から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_sagemaker" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon SageMaker インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon SageMaker インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -83,19 +83,19 @@ Datadog は、SageMaker のエンドポイントとジョブ向けにすぐに�
 
 [SageMaker エンドポイントダッシュボード][8]を使用すると、追加構成なしで SageMaker エンドポイントの健全性とパフォーマンスの監視をすぐに開始できます。エラー、予想以上のレイテンシー、またはトラフィックの急増が発生しているエンドポイントを特定します。CPU、GPU、メモリ、およびディスクの使用量メトリクスを使用して、インスタンスタイプとスケーリングポリシーの選択を見直し、修正します。
 
-{{< img src="integrations/amazon_sagemaker/sagemaker_endpoints.png" alt="すぐに使える SageMaker エンドポイントダッシュボード" style="width:80%;">}}
+{{< img src="integrations/amazon_sagemaker/sagemaker_endpoints_2.png" alt="すぐに使える SageMaker エンドポイントダッシュボード" style="width:80%;">}}
 
 ### SageMaker ジョブ
 
 [SageMaker ジョブダッシュボード][9]を使用すると、トレーニング、処理、または変換ジョブのリソース使用状況 (CPU、GPU、およびストレージのボトルネックの検出など) を把握できます。この情報を使用して、コンピュートインスタンスを最適化します。
 
-{{< img src="integrations/amazon_sagemaker/sagemaker_jobs.png" alt="すぐに使える SageMaker ジョブダッシュボード" style="width:80%;">}}
+{{< img src="integrations/amazon_sagemaker/sagemaker_jobs_2.png" alt="すぐに使える SageMaker ジョブダッシュボード" style="width:80%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

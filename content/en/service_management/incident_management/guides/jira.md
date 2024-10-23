@@ -1,13 +1,13 @@
 ---
 title: Integrate Jira with Datadog Incident Management
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "integrations/jira/"
   tag: "Documentation"
   text: "Install the Jira Integration"
 - link: "https://app.datadoghq.com/integrations/jira"
-  tag: "In-App"
+  tag: "App"
   text: "In-app Jira integration tile"
 
 ---
@@ -27,13 +27,15 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 
 ## Setup
 
-1. On the [Integration Settings page][3], find the Jira integration. 
-1. Click the toggle for **Automatically create a Jira Issue**.
-3. Define a template with dynamic variables to drive the content of the Jira ticket. The template maps severities to Jira priorities, adds labels, defines a dynamic assignee, and more.
+1. On the [Integration Settings page][3], find the Jira integration.
+2. Click the toggle for **Automatically create a Jira Issue**.
+3. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, the Jira issue is created when the incident is created.
+4. Define a template with dynamic variables to drive the content of the Jira ticket. The template maps severities to Jira priorities, adds labels, defines a dynamic assignee, and more. Dynamic variables only work for **string** [Jira field types][5].
 
 {{< img src="service_management/incidents/guide/jira/incident_jira_template.png" alt="Example template for Jira tickets that are automatically created from Datadog incidents" style="width:80%;" >}}
 
-As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference. 
+As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference.
+The Jira issue is unidirectionally synced with the incident based on the template defined in the [Integration Settings page][3].
 
 ## Further Reading
 
@@ -43,3 +45,4 @@ As incidents are created, an issue is also created in the corresponding Jira ins
 [2]: /integrations/jira/
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: https://app.datadoghq.com/incidents
+[5]: https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type

@@ -1,24 +1,24 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
-  tags: Documentation
+  tag: "Documentation"
   text: Ingestion mechanisms
 - link: https://github.com/DataDog/dd-trace-Go
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 

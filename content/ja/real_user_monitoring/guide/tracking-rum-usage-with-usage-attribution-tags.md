@@ -7,7 +7,6 @@ further_reading:
 - link: /account_management/billing/usage_attribution/
   tag: Documentation
   text: 計画と使用設定
-kind: ガイド
 title: 使用量属性タグによる RUM の使用量の追跡
 ---
 
@@ -49,18 +48,18 @@ RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
 このステップをデプロイすると、新しい RUM セッションは、追加したタグに従って追跡されます。
 
 ## RUM 使用量を表示する
-新たにタグ付けされたセッションは、[Usage Attribution][3] ページに表示されます。これで、Estimated RUM Sessions 列を確認すると、部門別のセッション数を確認することができます。
+The newly tagged sessions are displayed on the [Usage Attribution][3] page. When you review the RUM with Session Replay Sessions and RUM Sessions columns, you can see the number of sessions by department.
 
-{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-2.jpeg" alt="部門別の RUM 使用量を表示する" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-3.png" alt="View RUM usage by department" style="width:100%;">}}
 
 使用量情報は、[`GetHourlyUsageAttribution`][4] エンドポイントでも入手できます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/billing/usage-attribution
-[2]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [3]: https://app.datadoghq.com/billing/usage-attribution
 [4]: /ja/api/latest/usage-metering/#get-hourly-usage-attribution-v1
-[5]: /ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#track-attributes
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-attributes

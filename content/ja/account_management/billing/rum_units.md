@@ -1,7 +1,7 @@
 ---
-title: RUM の請求についての詳細
-kind: documentation
 beta: true
+private: true
+title: RUM の請求についての詳細
 ---
 
 <div class="alert alert-warning">

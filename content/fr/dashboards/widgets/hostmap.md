@@ -6,8 +6,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Créer des dashboards avec JSON
-kind: documentation
 title: Widget Hostmap
+widget_type: hostmap
 ---
 
 Le widget Hostmap représente graphiquement n'importe quelle métrique pour l'ensemble de vos hosts, en proposant le même type de visualisation que la principale page [Host Map][1] :
@@ -34,19 +34,13 @@ La configuration du widget Hostmap est similaire à celle de la page principale 
 
 ### Options
 
-#### Titre
+#### Liens de contexte
 
-Affichez un titre personnalisé pour votre widget en cochant la case `Show a Title` :
-
-{{< img src="dashboards/widgets/options/title.png" alt="Titre du widget" style="width:80%;">}}
-
-Définissez sa taille et son alignement si vous le souhaitez.
+Les [liens de contexte][2] sont activés par défaut, mais vous pouvez les désactiver si vous le souhaitez. Ils relient les widgets du dashboard à d'autres pages (dans Datadog ou sur des sites externes).
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][2] pour en savoir plus.
-
-Le [schéma JSON][3] utilisé pour le widget Hostmap est le suivant :
+Ce widget peut être utilisé avec l'**[API Dashboards][3]**. Le tableau ci-dessous définit le [schéma JSON du widget][9] :
 
 {{< dashboards-widgets-api >}}
 
@@ -55,5 +49,6 @@ Le [schéma JSON][3] utilisé pour le widget Hostmap est le suivant :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/infrastructure/hostmap/
-[2]: /fr/api/v1/dashboards/
-[3]: /fr/dashboards/graphing_json/widget_json/
+[2]: /fr/dashboards/guide/context-links/
+[3]: /fr/api/latest/dashboards/
+[4]: /fr/dashboards/graphing_json/widget_json/

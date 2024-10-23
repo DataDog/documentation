@@ -3,7 +3,6 @@ aliases:
 - /ja/developers/amazon_cloudformation/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
-kind: ガイド
 title: Datadog-Amazon CloudFormation
 ---
 [AWS CloudFormation][1] は、環境内のすべての AWS リソースを一度に記述、構成、プロビジョニングするためのテンプレートを提供します。Datadog-AWS CloudFormation リソースでは、サポートされている Datadog リソースとのやりとり、任意の Datadog データセンターへのリソースの送信、任意のリージョンにおける Datadog リソースを使用した拡張機能の非公開登録を行うことができます。
@@ -28,7 +27,7 @@ title: Datadog-Amazon CloudFormation
   - 拡張機能名
   - 実行ロール ARN
   - マイナーバージョンリリースの自動更新
-  - コンフィギュレーション
+  - 構成
 
 6. リソースコンフィギュレーションについては、**クリアテキストの代わりに [AWS Secrets Manager][17] または同様のサービスを使用して Datadog API とアプリケーションキーを保存することを強くお勧めします**。
 
@@ -119,7 +118,7 @@ title: Datadog-Amazon CloudFormation
 | ダウンタイム (**非推奨**) | `Datadog::Monitors::Downtime`         | [モニターのダウンタイムを有効化/無効化][11]     | `datadog-monitors-downtime`         | [スキーマハンドラーのバージョン][12] |
 | ダウンタイムスケジュール         | `Datadog::Monitors::DowntimeSchedule` | [Datadog のダウンタイムのスケジュール][21]                        | `datadog-monitors-downtimeschedule` | [スキーマハンドラーのバージョン][22] |
 | ユーザー                      | `Datadog::IAM::User`                  | [Datadog ユーザーの作成と管理][13]                   | `datadog-iam-user`                  | [スキーマハンドラーのバージョン][14] |
-| SLO                       | `Datadog::SLOs::SLO`                  | [Datadog SLO の作成および管理][19]                    | `datadog-slos-slo`                  | [スキーマハンドラーのバージョン][20] |
+| SLO                       | `Datadog::SLOs::SLO`                  | [Create and manage Datadog SLOs][19]                    | `datadog-slos-slo`                  | [スキーマハンドラーのバージョン][20] |
 
 ## 対応地域
 
@@ -146,7 +145,7 @@ Datadog-Amazon CloudFormation のリソースは、以下の地域で CloudForma
 
 **注**: 他の地域のリソースを個人的に登録するには、提供されたパッケージを使用します。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は [Datadog サポート][15]までお問い合わせください。
 

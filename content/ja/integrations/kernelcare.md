@@ -24,6 +24,7 @@ author:
 categories:
 - OS & システム
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: kernelcare
 integration_title: KernelCare
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: kernelcare
 public_title: KernelCare
@@ -50,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
   media: []
@@ -67,11 +68,11 @@ tile:
 
 このインテグレーションにより、Datadog Agent を介して KernelCare メトリクスを転送できます。
 
-## 計画と使用
+## セットアップ
 
 Kernelcare チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -83,7 +84,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -93,21 +94,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チ
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `kernelcare` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "kernelcare" >}}
 
 
-### ヘルプ
+### イベント
 
 Kernelcare インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "kernelcare" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

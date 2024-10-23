@@ -12,13 +12,19 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: documentation
   text: カスタムインテグレーション
-kind: documentation
 title: Kubernetes クラスター名の自動検出
 ---
 
-Agent v6.11+ の場合、Datadog Agent は Google GKE、Azure AKS、AWS EKS で Kubernetes クラスター名を自動検出できます。検出された場合、ノード名のサフィックスとしてクラスター名が収集されたすべてのデータに追加され、Kubernetes クラスター全体のノードの識別が容易になります。Google GKE および Azure AKS では、クラスター名はクラウドプロバイダー API から取得されます。AWS EKS の場合、クラスター名は EC2 インスタンスタグから取得されます。AWS では、Agent が EC2 インスタンスタグをクエリできるように、Datadog IAM ポリシーに `ec2:DescribeInstances` [権限][1]を追加する必要があります。
+Agent v6.11+ の場合、Datadog Agent は Google Kubernetes Engine (GKE)、Azure Kubernetes Service (AKS)、Amazon Elastic Kubernetes Service (EKS) で Kubernetes クラスター名を自動検出できます。検出された場合、収集されたすべてのデータに、ノード名のサフィックスとしてクラスター名が追加されます。これにより、Kubernetes クラスター全体でノードの識別が容易になります。
 
-**注**: Agent v6.5+ では、Agent 構成パラメーター [`clusterName`][2] または `DD_CLUSTER_NAME` 環境変数のおかげで、このクラスター名の値を手動で設定できます。
+On GKE, the cluster name is retrieved from the cloud provider API.
+
+On Azure AKS, the cluster name is parsed from the resource group name of the node and must conform to the [pattern][3]: `(MC|mc)_<resource-group>_<cluster-name>_<zone>`.
+
+On Amazon EKS, the cluster name is retrieved from EC2 instance tags. For the Datadog Agent to query EC2 instance tags, you must add the `ec2:DescribeInstances` [permission][1] to your Datadog IAM policy.
+
+**Note**: You can manually set this cluster name value with Agent v6.5+ by using Agent configuration parameter [`clusterName`][2] or the `DD_CLUSTER_NAME` environment variable.
 
 [1]: /ja/integrations/amazon_ec2/#configuration
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L66
+[2]: https://github.com/DataDog/helm-charts/blob/896a355268ff6b3cfd33f945ae373912caa8b6e4/charts/datadog/values.yaml#L96
+[3]: https://github.com/DataDog/datadog-agent/blob/4edc7d4d1b6f3e6d902cf8ab9a6cb786aba2f69f/pkg/util/cloudproviders/azure/azure.go#L115-L116

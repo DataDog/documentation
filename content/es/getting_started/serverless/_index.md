@@ -6,7 +6,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para saber más sobre monitorización serverless.
-kind: documentación
 title: Empezando con AWS Lambda Serverless Monitoring
 ---
 
@@ -50,9 +49,9 @@ def handler(event, context):
     }
 ```
 
-Puedes [ver tus funciones de la aplicación de muestra en Serverless View][6].
+Puedes [ver tus funciones de la aplicación de muestreo en la vista Serverless][6].
 
-{{< img src="getting_started/serverless/dd_serverless_view.png" alt="Monitorización serverless: vista Serverless, una página de navegador" style="width:80%;">}}
+{{< img src="getting_started/serverless/serverless_view_2024.png" alt="Monitorización serverless: vista serverless, una página del explorador" style="width:80%;">}}
 
 ## Vista Serverless
 

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Nomad Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,13 +15,14 @@ assets:
       prefix: nomad
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10002
     source_type_name: Nomad
   monitors:
-    Nomad Excessive Leadership Losses: assets/monitors/nomad_excessive_leadership_losses.json
-    Nomad Heartbeats Received: assets/monitors/nomad_heartbeats_received.json
-    Nomad Job Is Failing: assets/monitors/nomad_job_is_failing.json
-    Nomad No Jobs Running: assets/monitors/nomad_no_jobs_running.json
-    Nomad Pending Jobs: assets/monitors/nomad_pending_jobs.json
+    Jobs are in pending status: assets/monitors/nomad_pending_jobs.json
+    No Jobs Running: assets/monitors/nomad_no_jobs_running.json
+    Nomad has excessive leadership losses: assets/monitors/nomad_excessive_leadership_losses.json
+    Nomad heartbeats is low: assets/monitors/nomad_heartbeats_received.json
+    Nomad jobs are failing: assets/monitors/nomad_job_is_failing.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Nomad
@@ -28,6 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - configuration & deployment
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
 display_on_public_website: true
@@ -37,7 +40,6 @@ integration_id: nomad
 integration_title: Nomad
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nomad
 public_title: Nomad
@@ -53,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
   media: []
@@ -61,6 +64,7 @@ tile:
   title: Nomad
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ![Nomad ダッシュボード][1]
@@ -80,7 +84,7 @@ Nomad クラスターからメトリクスを収集して、以下のことが�
 
 Nomad は、メトリクスを DogStatsD を通じて Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][2]します。
 
-### コンフィギュレーション
+### 構成
 
 Datadog Agent がインストールされたら、クライアントとサーバーの Nomad 構成に Telemetry スタンザを追加します。
 
@@ -106,7 +110,7 @@ telemetry {
 
 Nomad チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Nomad チェックには、サービスのチェック機能は含まれません。
 
@@ -115,6 +119,6 @@ Nomad チェックには、サービスのチェック機能は含まれませ�
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/nomad/images/dashboard_overview.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-extras/blob/master/nomad/metadata.csv
 [4]: https://docs.datadoghq.com/ja/help/

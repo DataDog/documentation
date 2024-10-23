@@ -1,6 +1,5 @@
 ---
 title: Go Log Collection
-kind: documentation
 aliases:
   - /logs/languages/go
 further_reading:

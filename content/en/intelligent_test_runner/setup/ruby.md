@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for Ruby
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
@@ -13,18 +12,16 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Ruby in beta.{{< /beta-callout >}}
-
 ## Compatibility
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `datadog-ci >= 1.0.0.beta3`
+* `datadog-ci >= 1.0`
 * `Ruby >= 2.7`
   * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * [Rails parallel testing][2] is not supported as of library version `1.0.0.beta3`.
+  * [Rails parallel testing][2] is not supported.
 * `cucumber >= 3.0.0`
 
 ## Setup
@@ -35,31 +32,7 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Ruby][1
 
 {{% ci-itr-activation-instructions %}}
 
-### Use the latest version of a Test Visibility library
-
-Intelligent Test Runner for Ruby is available in `datadog-ci` gem version `1.0.0.beta3` and later.
-
-Add to your Gemfile:
-
-```ruby
-group :test do
-  gem 'datadog-ci', '~> 1.0.0.beta3'
-end
-```
-
-If you use other datadog products, upgrade to `2.0.0.beta2` version of gem `datadog`:
-
-```ruby
-gem 'datadog', '~> 2.0.0.beta2'
-
-group :test do
-  gem 'datadog-ci', '~> 1.0.0.beta3'
-end
-```
-
 ## Run tests with the Intelligent Test Runner enabled
-
-<div class="alert alert-info">Setting <code>DD_CIVISIBILITY_ITR_ENABLED</code> to true is required while the Intelligent Test Runner support for Ruby is in beta. </div>
 
 {{< tabs >}}
 
@@ -68,7 +41,7 @@ end
 After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
-DD_CIVISIBILITY_ITR_ENABLED="true" DD_ENV=ci DD_SERVICE=my-app bundle exec rake test
+DD_ENV=ci DD_SERVICE=my-app bundle exec rake test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -78,7 +51,7 @@ DD_CIVISIBILITY_ITR_ENABLED="true" DD_ENV=ci DD_SERVICE=my-app bundle exec rake 
 After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
-DD_CIVISIBILITY_ITR_ENABLED="true" DD_ENV=ci DD_SERVICE=my-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY bundle exec rake test
+DD_ENV=ci DD_SERVICE=my-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY bundle exec rake test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -97,7 +70,9 @@ Examples include:
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 * Tests that run external processes
-* Tests that use threads or fork process (code coverage tracks only code executed in main thread)
+* Tests that depend on global shared state (for example, caches created by a different test or process)
+* Tests that use forked processes (per test code coverage only collects coverage for the main process)
+* Integration tests that use capybara or selenium-webdriver
 
 Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
 
@@ -195,9 +170,17 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
+### Temporarily disabling the Intelligent Test Runner
+
+The Intelligent Test Runner can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
+
+`DD_CIVISIBILITY_ITR_ENABLED` (Optional)
+: Enable the Intelligent Test Runner coverage and test skipping features<br />
+**Default**: `(true)`
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/ruby
+[1]: /tests/setup/ruby
 [2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing

@@ -9,11 +9,10 @@ further_reading:
   tag: 설명서
   text: 여러 계정으로 팀 & 조직 설정하기
 is_public: true
-kind: 설명서
 title: IdP Initiated SAML을 사용하는 Datadog 모바일 앱
 ---
 
-## 구성
+## 설정
 
 Datadog 모바일 앱에서 IdP Initiated SAML을 사용하려면, Datadog를 통해 추가 릴레이 상태(Relay State)를 전달하여 로그인 시 모바일 앱 랜딩 페이지를 트리거해야 합니다. 활성화한 후에는 특정 앱에서 SAML 로그인한 모든 경우에 진행하기 전에 전면(interstitial) 페이지가 표시됩니다.
 

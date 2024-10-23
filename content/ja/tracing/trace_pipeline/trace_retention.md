@@ -13,7 +13,6 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
-kind: documentation
 title: トレースの保持
 ---
 
@@ -72,7 +71,7 @@ Datadog のインテリジェント保持フィルターは、サービスに対
 - [多様性サンプリング](#diversity-sampling)
 - [1% フラットサンプリング](#one-percent-flat-sampling)
 
-**注:** [Trace Queries][11] は、インテリジェント保持フィルターによってインデックス化されたデータに基づいています。
+**Note:** [Trace Queries][11] are based on the data indexed by the Intelligent Retention filter.
 
 インテリジェント保持フィルターによってインデックス化されたスパン (多様性サンプリングと 1% フラットサンプリング) は、インデックス化されたスパンの**使用量にカウントされない**ため、**請求に影響を与えません**。
 
@@ -119,9 +118,9 @@ Datadog のインテリジェント保持フィルターは、サービスに対
 
 ## インデックス化されたスパンのトレース検索と分析
 
-### トレースエクスプローラーで
+### In the Trace Explorer, dashboards, and notebooks
 
-デフォルトでは、カスタム保持フィルター**および**インテリジェント保持フィルターによってインデックス化されたスパンは、トレースエクスプローラーの[集計ビュー][6] (時系列、トップリスト、テーブル) に含まれます。
+By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table), as well as in dashboards and notebook queries.
 
 しかし、ダイバーシティサンプリングされたデータセットは、**一様にサンプリングされていない** (つまり、全トラフィックを比例して代表していない) ため、エラーや高レイテンシーのトレースに偏っているので、クエリに `-retained_by:diversity_sampling` クエリパラメーターを追加すれば、これらのスパンをこれらの表示から除外することができます。
 
@@ -132,9 +131,9 @@ Datadog のインテリジェント保持フィルターは、サービスに対
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="ファセットで保持" >}}
 
-### ダッシュボード、ノートブック、モニターで
+### In trace analytics monitors
 
-上記の理由により、インテリジェント保持フィルターによってインデックス化されたスパンは、ダッシュボードやノートブックに表示される APM クエリから**除外**され、トレース分析モニター評価から**除外**されます。
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM trace analytics monitor evaluation.
 
 ## その他の参考資料
 

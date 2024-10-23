@@ -1,6 +1,5 @@
 ---
 title: User Provisioning with SCIM
-kind: documentation
 further_reading:
     - link: '/account_management/scim/azure/'
       tag: 'Documentation'
@@ -11,6 +10,10 @@ further_reading:
 algolia:
   tags: ["scim", "identity provider", "IdP"]
 ---
+
+<div class="alert alert-info">
+SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+</div>
 
 ## Overview
 
@@ -29,7 +32,7 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) and Okta 
 
 ### Prerequisites
 
-SCIM in Datadog is an advanced feature included in the Enterprise plan.
+SCIM in Datadog is an advanced feature included in the Infrastructure Pro and Infrastructure Enterprise plans.
 
 This documentation assumes your organization manages user identities using an identity provider.
 

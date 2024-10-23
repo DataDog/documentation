@@ -7,7 +7,6 @@ further_reading:
 - link: developers/libraries
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-kind: documentation
 title: Envoyer des quantités importantes de métriques
 ---
 
@@ -85,7 +84,7 @@ with dsd:
 ```
 
 <div class="alert alert-warning">
-  Par défaut, les instances de client DogStatsD Python (y compris l'instance globale <code>statsd</code>) ne peuvent pas être partagées entre des processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>disable_buffering</code> sur <code>True</code>. Consultez la documentation sur <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> pour en savoir plus.
+  Par défaut, les instances de client DogStatsD Python (y compris l'instance globale <code>statsd</code>) ne peuvent pas être partagées entre des processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client, ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>disable_buffering</code> sur <code>True</code>. Consultez la documentation sur <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> pour en savoir plus.
 </div>
 
 
@@ -156,9 +155,10 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
 
-            // Les métriques Counter et Gauge sont envoyées dans le même datagramme
+            // Les métriques counter et gauge sont envoyées au sein du même datagramme
             dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });
             dogStatsdService.Gauge("example_metric.gauge", 100, tags: new[] { "environment:dev" });
         }

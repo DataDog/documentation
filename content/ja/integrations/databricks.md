@@ -20,7 +20,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
+- コスト管理
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
 display_on_public_website: true
@@ -30,11 +32,10 @@ integration_id: databricks
 integration_title: Databricks
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: databricks
 public_title: Databricks
-short_description: Databricks クラスターで Apache Spark を監視する
+short_description: Apache Spark および Databricks ジョブのパフォーマンス、信頼性、コストを監視します。
 supported_os:
 - linux
 - windows
@@ -43,20 +44,34 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Cloud
+  - Category::Cost Management
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Databricks クラスターで Apache Spark を監視する
+  description: Apache Spark および Databricks ジョブのパフォーマンス、信頼性、コストを監視します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/data-jobs-monitoring/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/data-observability-monitoring/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/databricks-monitoring-datadog/
   support: README.md#Support
   title: Databricks
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
+
+<div class="alert alert-warning">
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> helps you observe, troubleshoot, and cost-optimize your Databricks jobs and clusters.<br/><br/>
+This page is limited to documentation for ingesting Databricks cluster utilization metrics and logs.
+</div>
 
 ![Databricks のデフォルトのダッシュボード][1]
 
@@ -68,13 +83,13 @@ tile:
 
 機能の詳細については、[Datadog を使用した Databricks の監視][4]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Databricks Spark アプリケーションを [Datadog Spark インテグレーション][5]で監視します。適切なクラスターの[構成](#configuration)方法に従って、クラスターに [Datadog Agent][6] をインストールしてください。その後、Datadog に [Spark インテグレーション][5]をインストールし、Databricks Overview ダッシュボードを自動インストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Databricks で Apache Spark クラスターを監視し、システムと Spark のメトリクスを収集するように Sparkインテグレーションを構成します。
 
@@ -297,23 +312,28 @@ chmod a+x /tmp/start_datadog.sh
 
 #### クラスタースコープの init スクリプトの場合
 
-クラスタースコープの init スクリプトは、クラスター構成で定義される init スクリプトです。クラスタースコープの init スクリプトは、あなたが作成するクラスターとジョブを実行するために作成されたクラスターの両方に適用されます。
+Cluster-scoped init scripts are init scripts defined in a cluster configuration. Cluster-scoped init scripts apply to both clusters you create and those created to run jobs. Databricks supports configuration and storage of init scripts through:
+- Workspace Files
+- Unity Catalog Volumes
+- Cloud Object Storage
 
 Databricks UI を使用してクラスターを編集し、init スクリプトを実行します。
 
 1. 以下のスクリプトのいずれかを選択して、Agent をドライバー、またはクラスターのドライバーノードとワーカーノードにインストールします。
 2. ニーズに合わせてスクリプトを変更します。例えば、タグを追加したり、インテグレーション用に特定の構成を定義することができます。
-3. 左側の **Workspace** メニューでスクリプトをワークスペースに保存します。
+3. Save the script into your workspace with the **Workspace** menu on the left. If using **Unity Catalog Volume**, save the script in your **Volume** with the **Catalog** menu on the left.
 4. クラスター構成ページで、** Advanced** オプションのトグルをクリックします。
 5. **Environment variables** で、`DD_API_KEY` 環境変数と、オプションで `DD_ENV` と `DD_SITE` 環境変数を指定します。
 6. **Init Scripts** タブに移動します。
-7. **Destination** ドロップダウンで、`Workspace` の宛先タイプを選択します。
-8. init スクリプトへのパスを指定します。
+7. In the **Destination** dropdown, select the `Workspace` destination type. If using **Unity Catalog Volume**, in the **Destination** dropdown, select the `Volume` destination type.
+8. Specify a path to the init script.
 9. **Add** ボタンをクリックします。
 
 もし `datadog_init_script.sh` を `Shared` ワークスペースに直接保存した場合は、パス `/Shared/datadog_init_script.sh` でファイルにアクセスできます。
 
 もし `datadog_init_script.sh` をユーザーワークスペースに直接保存した場合は、パス `/Users/$EMAIL_ADDRESS/datadog_init_script.sh` でファイルにアクセスできます。
+
+If you stored your `datadog_init_script.sh` directly in a `Unity Catalog Volume`, you can access the file at the following path: `/Volumes/$VOLUME_PATH/datadog_init_script.sh`.
 
 クラスター init スクリプトの詳細については、[Databricks 公式ドキュメント][7]を参照してください。
 
@@ -491,21 +511,21 @@ chmod a+x /tmp/start_datadog.sh
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 収集されたメトリクスのリストについては、[Spark インテグレーションドキュメント][8]を参照してください。
 
-### ヘルプ
+### サービスチェック
 
 収集されたサービスチェックのリストについては、[Spark インテグレーションドキュメント][9]を参照してください。
 
-### ヘルプ
+### イベント
 
 Databricks インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 [Databricks Web ターミナル][10]を有効にするか、[Databricks ノートブック][11]を使用することで、問題を自分でトラブルシューティングできます。有用なトラブルシューティング手順については、[Agent のトラブルシューティング][12]のドキュメントを参照してください。
 
@@ -513,7 +533,9 @@ Databricks インテグレーションには、イベントは含まれません
 
 ## その他の参考資料
 
-{{< partial name="whats-next/whats-next.html" >}}
+お役に立つドキュメント、リンクや記事:
+
+- [Uploading a Script to Unity Catalog Volume][14]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/databricks/images/databricks_dashboard.png
@@ -529,3 +551,4 @@ Databricks インテグレーションには、イベントは含まれません
 [11]: https://docs.databricks.com/en/notebooks/index.html
 [12]: https://docs.datadoghq.com/ja/agent/troubleshooting/
 [13]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume

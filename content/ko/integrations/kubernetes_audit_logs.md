@@ -5,9 +5,10 @@ categories:
 - log collection
 - containers
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
-description: Kubernetes 클러스터 내의 모든 활동을 추적할 수 있습니다
+description: Kubernetes 클러스터 내의 모든 활동을 추적하세요
 doc_link: /integrations/kubernetes_audit_logs/
 further_reading:
 - link: logs/
@@ -20,7 +21,6 @@ has_logo: true
 integration_id: kubernetes-audit-logs
 integration_title: Kubernetes 감사 로그
 is_public: true
-kind: integration
 name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes 감사 로그
 short_description: 'Kubernetes 클러스터 내부 추적 '
@@ -37,9 +37,9 @@ title: Kubernetes 감사 로그
 
 Kubernetes 감사 로그 통합을 사용하면 권한 문제를 진단하고, 업데이트해야 하는 RBAC 정책을 식별하며, 전체 클러스터에 영향을 미치는 느린 API 요청을 추적할 수 있습니다. [KubeCon 2019 Datadog 토크][2]를 통해 자세히 살펴보세요.
 
-## 구성
+## 설정
 
-이 통합은 **Agent 6.0이상에서 사용 가능합니다**
+이 통합은 **Agent 6.0 이상에서 사용 가능합니다**
 
 ### 설정
 
@@ -155,7 +155,7 @@ rules:
       # (...)
     ```
 
-   이는 감사 로그 파일에서 로그를 수집하도록 Agent를 설정하는 `conf.d` 폴더도 마운트합니다.
+   이는 감사 로그 파일에서 로그를 수집하도록 Agent를 설정하는 데 필요한 `conf.d` 폴더도 마운트합니다.
 
 4. ConfigMap을 사용하여 해당 파일에서 로그를 수집하도록 Agent를 설정합니다.
 

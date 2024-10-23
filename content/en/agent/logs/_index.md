@@ -1,6 +1,5 @@
 ---
 title: Host Agent Log collection
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "agent/logs/advanced_log_collection/#filter-logs"
@@ -26,7 +25,7 @@ See [Observability Pipelines][2] if you want to send logs using another vendor's
 
 ## Activate log collection
 
-Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][3] or [Docker Log Collection][4] documentation. 
+Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][3] or [Docker Log Collection][4] documentation.
 
 To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][5] (`datadog.yaml`).
 
@@ -69,6 +68,8 @@ logs:
 
 On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
+**Note**: A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
+
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
@@ -88,7 +89,9 @@ If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting wi
 
 In the Agent version 7.31.0+, the TCP connection stays open indefinitely even when idle.
 
-**Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
+**Notes**:
+- The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
+- A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
 
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
@@ -164,9 +167,30 @@ List of all available parameters for log collection:
 | `exclude_paths`  | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file or files to exclude from log collection. This is available for Agent version >= 6.18.                                                                                                                                                                            |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | No       | The attribute used to define the category a source attribute belongs to, for example: `source:postgres, sourcecategory:database` or `source: apache, sourcecategory: http_web_access`.                                                                                                                                                                                                                              |
-| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_ <br/><br/>If `type` is **journald**, set the position for the Agent to start reading the journal. Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`). With `force` options, the Agent ignores the cursor stored on disk and always reads from the beginning or the end of the journal when it starts. _Added in Agent v7.38_                                                                                                          |
+| `start_position` | No       | See [Start position](#start-position) for more information.|
 | `encoding`       | No       | If `type` is **file**, set the encoding for the Agent to read the file. Set it to `utf-16-le` for UTF-16 little-endian, `utf-16-be` for UTF-16 big-endian, or `shift-jis` for Shift JIS. If set to any other value, the Agent reads the file as UTF-8.  _Added `utf-16-le` and `utf-16be` in Agent v6.23/v7.23, `shift-jis` in Agent v6.34/v7.34_                                                                                      |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][13]).                                                                                                                                                                                                                                                                             |
+
+### Start position
+
+The `start_position` parameter is supported by **file** and **journald** tailer types. The `start_position` is always `beginning` when tailing a container.
+
+Support:
+- **File**: Agent 6.19+/7.19+
+- **Journald**: Agent 6.38+/7.38+
+
+If `type` is **file**:
+- Set the position for the Agent to start reading the file.
+- Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`).
+- The `beginning` position does not support paths with wildcards.
+
+If `type` is **journald**:
+- Set the position for the Agent to start reading the journal.
+- Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`).
+
+#### Precedence
+
+For both file and journald tailer types, if an `end` or `beginning` position is specified, but an offset is stored, the offset takes precedence. Using `forceBeginning` or `forceEnd` forces the Agent to use the specified value even if there is a stored offset.
 
 ## Further Reading
 

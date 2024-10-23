@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Oracle Autonomous Database
-kind: documentation
 description: Install and configure Database Monitoring for Oracle Autonomous Database
 further_reading:
 - link: "/integrations/oracle/"
@@ -8,10 +7,6 @@ further_reading:
   text: "Basic Oracle Integration"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 {{% dbm-oracle-definition %}}
 
@@ -88,6 +83,9 @@ grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install the Agent
 
 See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
@@ -110,7 +108,7 @@ instances:
   - server: '<HOST_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     protocol: TCPS
     wallet: <YOUR_WALLET_DIRECTORY>
     dbm: true
@@ -120,7 +118,7 @@ instances:
   - server: '<HOST_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     protocol: TCPS
     wallet: <YOUR_WALLET_DIRECTORY>
     dbm: true
@@ -151,7 +149,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent

@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/autodiscovery/
   tag: Documentación
   text: Autodiscovery
-kind: documentación
 title: Gestión de secretos
 ---
 
@@ -300,7 +299,6 @@ Si `Secret: database-secret` existe en `Namespace: database` y contiene los dato
 Para realizar esta acción, tendrás que conceder permisos adicionales manualmente a la cuenta de servicio del Agent. Puedes tomar la siguiente política de configuración del control de acceso basado en roles (RBAC) como ejemplo:
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
 metadata:
   name: datadog-secret-reader
   namespace: database
@@ -311,7 +309,6 @@ rules:
     verbs: ["get", "watch", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
 metadata:
   name: datadog-read-secrets
   namespace: database

@@ -4,7 +4,6 @@ further_reading:
   tag: Documentation
   text: Datadog による Application Security Management
 is_beta: true
-kind: documentation
 title: 保護
 ---
 
@@ -12,11 +11,11 @@ title: 保護
 
 [リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン][2]を実行しているサービスであれば、Agent やトレーシングライブラリの追加構成なしに、Datadog UI から攻撃やアタッカーをブロックすることができます。
 
-Application Security Management (ASM) Protect は、攻撃や攻撃者を_ブロック_することでその速度を落とすことを可能にします。セキュリティトレースは、Datadog のトレーシングライブラリによってリアルタイムでブロックされます。ブロックは Datadog プラットフォームに保存され、Datadog Agent によって自動的かつ安全にフェッチされ、インフラストラクチャーにデプロイされ、サービスに適用されます。
+Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 ## 前提条件
 
-サービスに保護機能を活用するには
+To use protection capabilities with your service:
 
 - [Datadog Agent][3] をバージョン 7.41.1 以上に更新します。
 - [ASM を有効にします][1]。
@@ -28,16 +27,13 @@ Application Security Management (ASM) Protect は、攻撃や攻撃者を_ブロ
 
 ASM [セキュリティシグナル][5]でフラグが立てられた攻撃者を一時的または恒久的にブロックすることができます。シグナルエクスプローラでシグナルをクリックすると、そのシグナルを生成しているユーザーと IP アドレスが表示され、オプションでそれらをブロックすることができます。
 
-{{< img src="/security/application_security/appsec-block-user-ip_v2.png" alt="Datadog ASM のセキュリティシグナルパネルで、攻撃者の IP をブロックすることができます" width="75%">}}
-
-
-そこから、ASM によって保護されているすべてのサービスは、指定された期間、ブロックされた IP またはユーザーによって実行される着信リクエストをブロックします。ブロックされたすべてのトレースには `security_response.block_ip` または `security_response.block_user` というタグが付けられ、[トレースエクスプローラー][6]に表示されます。ASM が無効になっているサービスは保護されません。
+From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where ASM is disabled aren't protected. See [Investigate Security Signals][20] for more information.
 
 ## 攻撃者ブロックの自動化により、脅威へのリアルタイムな対応を実現
 
 攻撃者を手動でブロックするだけでなく、自動化ルールを構成して、ASM がセキュリティシグナルでフラグを立てた攻撃者を自動的にブロックするようにすることも可能です。
 
-開始するには、**Security > Application Security > Configuration > [Detection Rules][14]** に移動します。新しいルールを作成したり、_Application security_ のタイプで既存のルールを編集したりすることができます。たとえば、Credential Stuffing 攻撃が検出されたときに重大度シグナル `Critical` をトリガーし、関連する攻撃者の IP アドレスを 30 分間自動的にブロックするルールを作成することができます。
+To get started, navigate to **Security > Application Security > Protection > [Detection Rules][14]**. You can create a new rule or edit an existing rule with type _Application security_. For example, you can create a rule to trigger `Critical` severity signals when Credential Stuffing attacks are detected, and automatically block the associated attackers' IP addresses for 30 minutes.
 
 **注**: 認証された攻撃者をブロックできるようにするには、サービスをインスツルメンテーションする必要があります。詳しくは、[ユーザーの監視と保護][15]をご覧ください。
 
@@ -60,7 +56,7 @@ ASM アプリ内 WAF (Web アプリケーションファイアウォール) は�
 
 ASM はアプリケーションのルートを認識しているため、保護は特定のサービスに対してきめ細かく適用でき、必ずしもすべてのアプリケーションとトラフィックに適用する必要はありません。このコンテキストに基づく効率化により、検査の労力が軽減され、境界型 WAF と比較して誤検出率が低下します。ほとんどの Web フレームワークが構造化された経路のマップを提供するため、学習期間はありません。ASM は、脆弱性が公開された後すぐにゼロデイ脆弱性に対する保護を自動的に展開し、脆弱なアプリケーションをターゲットにして、誤検出のリスクを抑えることができるようにします。
 
-### アプリ内 WAF がセキュリティトレースをブロックする仕組み
+### How In-App WAF blocks security traces
 
 130 以上のアプリ内 WAF ルールのそれぞれに提供される `monitoring` および `disabled` モードに加え、ルールには `blocking` モードもあります。各ルールは、ライブラリが疑わしいと判断する条件を受信リクエストに指定します。与えられたルールパターンが進行中の HTTP リクエストにマッチすると、そのリクエストはライブラリによってブロックされます。
 
@@ -74,17 +70,17 @@ Security --> Application Security --> Configuration --> [In-App WAF][9] と進�
 
 [トレースエクスプローラー][11]で、ファセット `Blocked:true` でフィルターをかけて、ブロックされたセキュリティトレースを表示します。
 
-{{< img src="security/application_security/blocked-true.png" alt="ファセット Blocked を true に設定してフィルターされた ASM トレースエクスプローラー。" style="width:100%;" >}}
+{{< img src="security/application_security/app_sec_blocked.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
 
 ### アプリ内 WAF の構成
 
 1. [**リモート構成を有効にする**][2]と、ASM が有効なサービスがアプリ内 WAF の下に表示されるようになります。これは、Datadog バックエンドからインフラストラクチャー内のトレーシングライブラリにアプリ内 WAF の構成を安全にプッシュするために必要です。
 
-2. **ASM/リモート構成が有効なサービスをポリシーと関連付けます**。リモート構成が有効なサービスは、デフォルトで _Datadog Recommended_ ポリシーの下に表示されます。Datadog Recommended は管理されたポリシーで、読み取り専用です。つまり、個々のルールのステータス (監視、ブロック、または無効) を変更することはできません。
+2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Application Security > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
-   詳細な制御が必要な場合は、_Datadog Recommended_ ポリシーを複製して、ルールステータスを変更できるカスタムポリシーを作成します。このカスタムポリシーに、1 つまたは複数のサービスを関連付けます。
+   If you need granular control, clone one of the available policies to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
-3. **各サービスのブロッキングを構成します**。デフォルトでは、特定のアプリ内 WAF ルールのステータスがブロッキングであっても、リクエストはブロックされません。**Security > Configuration > Application > [In-App WAF][13]** に移動して、サービスのブロッキングモードをオンにします。
+   To change the policy applied by default to your services, you can update your default policy. From the In-App-WAF, click the policy you would like to set as default, then click **Actions** > **Set this policy as default**.
 
 ## 保護動作のカスタマイズ
 
@@ -94,7 +90,7 @@ Security --> Application Security --> Configuration --> [In-App WAF][9] と進�
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="ASM がブロックされた IP からのリクエストをブロックする際に表示されるページ" width="75%" >}}
 
-攻撃者に拒否ページを提供する際のデフォルトの HTTP レスポンスステータスコードは、`403 FORBIDDEN` です。このレスポンスをカスタマイズするには、**Security > Application Security > Configuration > [Protection][16]** に移動してください。
+The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > Application Security > Protection > [Summary][16]**.
 
 拒否ページが提供されるときにレスポンスコードを `200 OK` または `404 NOT FOUND` にオーバーライドすることで、攻撃者が検出されブロックされた事実をオプションで隠すことができます。
 
@@ -102,15 +98,15 @@ Security --> Application Security --> Configuration --> [In-App WAF][9] と進�
 
 ### すべてのサービスで保護を無効にする (保護モードの無効化)
 
-保護モードはデフォルトで**オン**であり、**すべての**サービスにおけるブロッキングを迅速に無効にするための切り替えが可能です。リクエストは Datadog の 2 つのセクションからブロックすることができます。つまり、セキュリティシグナルからのすべての攻撃者リクエストと、アプリ内 WAF からのセキュリティトレースです。後者は、アプリ内 WAF でサービスごとにブロッキングを構成する必要があります。
+Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and security traces from In-App WAF.
 
-保護機能をきめ細かく適用し、正規のユーザーがブロックされる可能性を減らすことは重要ですが、**すべての**サービスにわたる**すべての**ブロックをすばやく停止するためのシンプルなオフスイッチが必要な場合があります。保護をオフにするには、**Security > Application Security > Configuration > [Protection][16]** に移動して、**Protection mode** をオフに切り替えます。
+As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Protection > [Summary][16]** and toggle **Allow Request Blocking** to off.
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/application_security/enabling/
+[1]: /ja/security/application_security/threats/setup/
 [2]: /ja/agent/remote_config/#enabling-remote-configuration
 [3]: /ja/agent/versions/upgrade_between_agent_minor_versions
 [4]: /ja/security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
@@ -121,10 +117,10 @@ Security --> Application Security --> Configuration --> [In-App WAF][9] と進�
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
 [10]: /ja/security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
-[12]: /ja/security/application_security/enabling/compatibility/
-[13]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=services
-[14]: https://app.datadoghq.com/security/configuration/asm/rules
+[12]: /ja/security/application_security/threats/setup/compatibility/
+[14]: https://app.datadoghq.com/security/appsec/detection-rules
 [15]: /ja/security/application_security/threats/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
-[16]: https://app.datadoghq.com/security/configuration/asm/protection-behaviour
+[16]: https://app.datadoghq.com/security/appsec/protection
 [17]: https://docs.datadoghq.com/ja/service_management/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+[20]: /ja/security/application_security/threats/security_signals/

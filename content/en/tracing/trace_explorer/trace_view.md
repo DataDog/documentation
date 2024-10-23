@@ -1,6 +1,5 @@
 ---
 title: Trace View
-kind: documentation
 aliases:
 - /tracing/visualization/trace/
 further_reading:
@@ -66,34 +65,69 @@ Groups can be sorted by clicking on the corresponding column header: **RESOURCE*
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
 {{% /tab %}}
-{{% tab "Waterfall (Beta)" %}}
+{{% tab "Waterfall" %}}
 
-<div class="alert alert-info"><strong>Join the Beta!</strong><br />
-To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">fill out this form</a>.</div>
+{{< img src="tracing/trace_view/waterfall2.png" alt="Waterfall" style="width:100%;">}}
 
-{{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
+Displays all spans for a trace on a timeline where each row corresponds to a span. This visualization is useful for isolating and focusing on relevant parts of a trace.
 
-Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. This visualization is useful for isolating and focusing on relevant parts of a trace.
+Each row (span) indicates the following:
 
-On each row (that is, per span):
-* A bar (colored by service), whose length corresponds to the percentage of total trace duration
-* The service name, operation name, and resource name, with font styling: **service** operation <span style="color:gray">resource</span>
-* Absolute and relative span duration information
-* (when applicable) An error icon or HTTP status code
+- **Relative span duration**: The length of the color-coded bar corresponds to the percentage of total trace duration.
+- **Absolute span duration**: The absolute time in milliseconds (ms).
+- **Span details**: The corresponding service name and resource name are displayed.
+- **Statuses**: When applicable, an HTTP status code is displayed.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
-To expand or collapse span descendants, click the plus or minus button on any row. To expand all spans, click the plus button to the left of the timescale.
+To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
 {{% /tab %}}
 {{% tab "Map" %}}
 
-{{< img src="tracing/trace_view/map.png" alt="Map" style="width:90%;">}}
+{{< img src="tracing/trace_view/trace-map.png" alt="Trace map" style="width:100%;">}}
 
-Displays a representation of all the services involved in the trace. This visualization is useful for getting a high-level overview of the services' dependencies and transaction lifecycle at a service level.
+Trace map displays a representation of all services involved in a single trace. It provides an overview of the transaction lifecycle at the service level and shows service dependencies.
 
-Hover over a service to highlight its parent and children, and click on it to focus on the service entry span.
+Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call another service that had already been invoked by the original service, are represented by duplicated nodes.
+
+Service nodes explicitly show the percentage of the **total execution time**, which shows the trace duration breakdown at the service level.
+
+If a [service entry span][6] is in an error state, the corresponding service node is marked with a red border to highlight a faulty services. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
+
+To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name, along with any error messages. To further investigation, click **View Entry Span** to switch to the Waterfall view.
+
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Span search
+
+In the Waterfall and Flamegraph visualizations, the search option allows you to find the spans that meet specific queries. Spans that match the search query are highlighted in the trace view and you can navigate between these matches using the arrows next to the search bar.
+
+<img src="https://github.com/user-attachments/assets/4c6fc35a-65b7-42ee-bc24-fcb9adb9d0b8" alt="Search bar" style="width:90%;">
+
+**Note**: When the `Error` checkbox is selected, the search results return spans that match the query and are in an error state.
+
+The search query on the trace side panel supports the following options:
+
+**Free text search:**
+Free-form text search allows filtering by service, resource, or operation name. It highlights the spans containing the specified text within these categories.
+Example: `web`
+
+**Key-value search:**
+Use key:value expression to filter spans with specific key-value pairs.
+Example: `service:web-ui`
+
+**Note**: Wildcards are not supported in the Trace search bar.
+
+**Supported experssions:**
+Group expression: `language:(go OR python)`
+Boolean expression: `service:event-query OR terminator`
+Range expression: `duration:>200ms`
+
+
+**Note**: Numerical values support `<`, `>`, `<=`, and `>=` expressions.
+
 
 ## More information
 
@@ -129,7 +163,7 @@ See associated tags, as well as critical host/container metrics graphs including
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [log explorer search][1].
+See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [Log Explorer search][1].
 
 {{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
 
@@ -168,11 +202,11 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 
 [1]: /security/application_security/how-appsec-works/
 {{% /tab %}}
-{{% tab "Code Hotspots" %}}
+{{% tab "Profiles" %}}
 
-View [Code Hotspots][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
+View [Profiles][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
 
-{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab showing time spent in each method for a selected span" style="width:90%;">}}
 
 [1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
@@ -208,3 +242,4 @@ To learn more about span links and how to add them with custom instrumentation, 
 [3]: /tracing/glossary/#services
 [4]: /tracing/glossary/#resources
 [5]: /tracing/trace_explorer
+[6]: /glossary/#service-entry-span

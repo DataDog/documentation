@@ -22,7 +22,7 @@ integration_id: pliant
 integration_title: Pliant
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: hello@pliant.io
 manifest_version: 1.0.0
 metric_prefix: pliant.

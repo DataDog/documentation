@@ -1,6 +1,5 @@
 ---
 title: Span Visualizations
-kind: documentation
 description: 'View spans in a list, or aggregate spans into timeseries, top lists and more.'
 further_reading:
     - link: 'tracing/trace_explorer/'

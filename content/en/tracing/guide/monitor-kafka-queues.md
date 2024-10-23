@@ -1,15 +1,15 @@
 ---
 title: Monitoring Kafka Queues
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_collection"
-  tags: "Documentation"
+  tag: "Documentation"
   text: "Set up trace collection"
 - link: "/integrations/kafka"
-  tags: "Documentation"
+  tag: "Documentation"
   text: "Kafka integration"
 - link: "/data_streams/"
-  tags: "Documentation"
+  tag: "Documentation"
   text: "Data Streams Monitoring"
 ---
 

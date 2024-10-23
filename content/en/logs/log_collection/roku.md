@@ -1,11 +1,10 @@
 ---
 title: Roku Log Collection
-kind: documentation
 description: Collect logs from your Roku channel.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku Source code
+  tag: "Source Code"
+  text: Source code for dd-sdk-roku
 - link: logs/explorer
   tag: Documentation
   text: Learn how to explore your logs

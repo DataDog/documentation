@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self hosted Postgres
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: "/integrations/postgres/"
@@ -8,10 +7,6 @@ further_reading:
   text: "Basic Postgres Integration"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
@@ -163,6 +158,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -223,7 +221,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        host: localhost
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
@@ -238,7 +236,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        host: localhost
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        pg_stat_statements_view: datadog.pg_stat_statements()
        pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
@@ -247,6 +245,8 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Wrap your password in single quotes if a special character is present.
 
 2. [Restart the Agent][10].
 
@@ -315,7 +315,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
-[2]: /agent/basic_agent_usage#agent-overhead
+[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html

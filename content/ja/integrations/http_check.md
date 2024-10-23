@@ -20,8 +20,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
 display_on_public_website: true
@@ -29,9 +29,8 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 9.5.0
+integration_version: 9.8.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: http_check
 public_title: HTTP チェック
@@ -46,8 +45,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
   media: []
@@ -63,13 +62,13 @@ tile:
 
 ローカルまたはリモート HTTP エンドポイントの上・下ステータスを監視します。HTTP チェックでは、レスポンス」がないことを示すコード (404 など) の検出、期限切れが近い SSL 証明書の特定、特定のテキストの応答の検索など、さまざまなことができます。また、HTTP 応答時間をメトリクスとして送信します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 HTTP チェックは、[Datadog Agent][1] のパッケージに含まれています。サーバーに追加でインストールする必要はありません。多くのメトリクス指向のチェックは、監視するサービスと同じホストで実行するのが最適ですが、このステータス指向のチェックは、監視するサイトを実行していないホストから実行したい場合があります。
 
-### ブラウザトラブルシューティング
+### 構成
 
 [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `http_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[http_check.d/conf.yaml のサンプル][3]を参照してください。
 
@@ -94,7 +93,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `name`                           | HTTP チェックインスタンスの名前。サービスチェックのタグとして提示されます。                                                                                                                                                              |
 | `url`                            | テストする URL。                                                                                                                                                                                                                                 |
-| `timeout`                        | レスポンスに許可する秒数。                                                                                                                                                                                                     |
+| `timeout`                        | レスポンスを許可する秒数。デフォルトは `10` です。                                                                                                                                                                               |
 | `method`                         | チェックに使用されるHTTP メソッド。                                                                                                                                                                                                            |
 | `data`                           | このパラメーターは、POST、PUT、DELETE、PATCH メソッドを使用したリクエストの本文を指定するために使用します。POST メソッドを使用し、データパラメーターとして XML 文字列を指定すれば、SOAP リクエストがサポートされます。                                             |
 | `headers`                        | このパラメーターを使用すると、リクエストで追加ヘッダーを送信できます。詳細な情報と注意については、[YAML ファイルのサンプル][3]を参照してください。                                                                                                    |
@@ -122,17 +121,17 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 
 [Agent の `status` サブコマンドを実行][8]し、Checks セクションの `http_check` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "http_check" >}}
 
 
-### ヘルプ
+### イベント
 
 HTTP チェックにはイベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "http_check" >}}
 
 
@@ -140,7 +139,7 @@ HTTP チェックにはイベントは含まれません。
 
 **注:** これらのサービスチェックにアラートを設定するには、[ネットワークモニター][11]を作成します。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

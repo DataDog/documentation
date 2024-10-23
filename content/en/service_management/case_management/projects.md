@@ -1,12 +1,17 @@
 ---
 title: Projects
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "service_management/case_management/create_case"
   tag: "Documentation"
   text: "Create a case"
 ---
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
 ## Overview
 

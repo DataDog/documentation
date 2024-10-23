@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: ブログ
   text: Datadog から PCI に準拠したログ管理と APM を発表
-kind: documentation
 title: ログ管理のデータセキュリティ
 ---
 
@@ -37,24 +36,14 @@ Datadog は、インデックス化されたログに対して対称暗号化保
 
 ## HIPAA 対応ユーザー
 
-Datadog は、Datadog のログ管理サービスを介して保護対象医療情報 (ePHI) を送信するお客様と業務提携契約 (BAA) を締結します。
-
-Datadog と BAA を締結されたお客様は、この機能をご利用いただけません。
-
-* チャットからサポートを求めることはできません。
-* Datadog エクスプローラーからログ、セキュリティシグナル、またはトレースを[共有][5]することはできません。
-* セキュリティルールでは、通知タイトルにトリガーとなるグループ化の値を含めることができません。
-* セキュリティルールにメッセージテンプレート変数を含めることはできません。
-* セキュリティルールは Webhook を通じて通知することができません。
-
-ログ管理サービスが HIPAA の適用要件をどのように満たしているかについての質問がある場合は、アカウントマネージャーにお問い合わせください。HIPAA 対応のお客様は、特定の暗号化を実施するために、特定のエンドポイントを使用してログを送信する必要はありません。暗号化は、すべてのログ提出用エンドポイントで有効です。
+{{% hipaa-customers %}}
 
 ## ログ管理における PCI DSS 準拠
 
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-ログ管理の PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
+ログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 
 Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Datadog 組織にログを送信することができます。PCI 準拠の Datadog 組織を設定するには、以下の手順に従います。
@@ -76,7 +65,7 @@ Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Da
 
 ## エンドポイントの暗号化
 
-すべてのログ送信エンドポイントは暗号化されています。以下のレガシーエンドポイントもまだサポートされています。
+すべてのログ送信エンドポイントは暗号化されています。以下のレガシーエンドポイントはまだサポートされています。
 
 * `tcp-encrypted-intake.logs.datadoghq.com`
 * `lambda-tcp-encrypted-intake.logs.datadoghq.com`
@@ -92,3 +81,4 @@ Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Da
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /ja/logs/explorer/#share-views
+[6]: https://www.datadoghq.com/legal/hipaa-eligible-services/

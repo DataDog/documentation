@@ -1,6 +1,5 @@
 ---
 title: Event Monitor
-kind: documentation
 description: "Monitor events gathered by Datadog"
 aliases :
     - /monitors/monitor_types/event
@@ -15,7 +14,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -66,7 +65,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 #### Event template variables
 
@@ -94,7 +93,7 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/event
+[1]: https://app.datadoghq.com/monitors/create/event
 [2]: /service_management/events/explorer/searching
 [3]: /help/
 [4]: /monitors/configuration/#advanced-alert-conditions

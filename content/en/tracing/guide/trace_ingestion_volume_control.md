@@ -1,6 +1,6 @@
 ---
 title: Ingestion volume control with APM Distributed Tracing
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"

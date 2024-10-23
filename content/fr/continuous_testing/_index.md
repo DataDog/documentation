@@ -32,7 +32,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: Blog
   text: Conseils à suivre pour utiliser les tests continus Datadog
-kind: documentation
 title: Tests continus
 ---
 
@@ -42,19 +41,21 @@ Les tests continus Datadog vous offrent tous les outils dont vous avez besoin po
 
 ## Exécuter des tests simples et rapides
 
-Nos fonctionnalités évolutives, comme l'[outil d'enregistrement Web][2] sans code, l'[enregistreur dédié aux applications mobiles][15], [les exécutions simultanées de tests][3] ou encore le testing dans plusieurs emplacements, simplifient grandement le travail de votre équipe en charge de l'assurance qualité.
+Utilisez des fonctionnalités évolutives telles qu'un [enregistreur web][2] sans code, un [enregistreur d'applications mobiles][15], des [exécutions de tests en parallèle][3] et des tests intégrés dans plusieurs emplacements pour faire gagner du temps à votre équipe d'assurance qualité et réduire sa quantité de travail. Vous pouvez exécuter vos tests de manière séquentielle et personnaliser le nombre de tests que vous souhaitez exécuter en même temps sur la [page des **paramètres**][3].
 
-{{< img src="continuous_testing/continuous_testing_selection.png" alt="Page Continuous Testing Settings, avec la possibilité de choisir d'exécuter des tests de façon séquentielle ou de sélectionner le nombre de tests exécutés en parallèle" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Page Continuous Testing Settings, avec la possibilité de choisir d'exécuter des tests de façon séquentielle ou de sélectionner le nombre de tests exécutés en parallèle" style="width:100%;">}}
 
 Datadog prend en charge un grand nombre de protocoles, frameworks et API, y compris gRPC et WebSockets. Ainsi, vous pouvez tester des éléments à tous les niveaux du stack de votre application, ainsi que [sur n'importe quel environnement de pré-production][17].
 
 ## Améliorer la fiabilité des tests
 
-Au lieu de rédiger du code et de l'implémenter, vous pouvez exploiter les [tests évolutifs, durables et sans code de la surveillance Synthetic][4]. Réduisez le nombre de faux positifs à l'aide des tests Browser avec réparation spontanée, des tests d'application mobile et de l'automatisation des nouvelles tentatives. Vous bénéficiez ainsi de tests plus fiables, et pouvez automatiser le [testing sur plusieurs navigateurs][2] ainsi que le [testing d'applications mobiles][16].
+Au lieu de rédiger du code et de l'implémenter, vous pouvez exploiter les [tests évolutifs, durables et sans code de la surveillance Synthetic][4]. Réduisez le nombre de faux positifs à l'aide des tests Browser avec réparation spontanée, des tests d'application mobile et de l'automatisation des nouvelles tentatives.
+
+Pour garantir à vos utilisateurs une expérience optimale, vous pouvez automatiser les [tests inter-navigateurs][2] et les [tests d'applications mobiles][16]. Ces fonctionnalités de test continu sont utiles dans les lots CI où plusieurs tests sont exécutés pour couvrir une variété de scénarios et dʼenvironnements.
 
 ## Gagner en efficacité grâce aux intégrations directes
 
-Simplifiez le développement de vos applications grâce à l'utilisation d'une plateforme de testing et de dépannage commune. Sélectionnez l'un des fournisseurs de CI ou des outils de collaboration suivants, par exemple Slack ou Jira, pour rassembler vos workflows et ne perdre aucune information de contexte.
+Simplifiez le développement de vos applications grâce à l'utilisation d'une plateforme de testing et de dépannage commune. Sélectionnez l'un des fournisseurs de CI ou des outils de collaboration suivants, par exemple [Slack][18] ou [Jira][19], pour rassembler vos workflows et ne perdre aucune information de contexte.
 
 {{< partial name="continuous_testing/ct-getting-started.html" >}}
 
@@ -64,19 +65,23 @@ Le [fournisseur Terraform Datadog][10] vous permet de contrôler la création de
 
 ## Résoudre plus rapidement vos problèmes
 
-Lorsque vous exécutez des tests au sein d'une plateforme de surveillance unifiée, vous pouvez trouver plus facilement la cause à l'origine des échecs de vos tests, et ainsi réduire votre MTTR. Bénéficiez d'un contexte complet pour le dépannage sans avoir à basculer d'un outil à un autre, grâce aux métriques, traces et logs corrélés qui s'affichent dans l'[intégration APM][12] Datadog. Pour accéder à ses données, consultez les tâches exécutées depuis la vue [Synthetic Monitoring & Continuous Testing Explorer][11].
+L'exécution des tests dans une plateforme de surveillance unifiée vous aide à trouver la cause première des échecs et à réduire le temps moyen de résolution (MTTR). 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="Lots CI dans le Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="Volet latéral pour des lots CI dans lʼexplorateur de surveillance Synthetic et de résultats de tests" style="width:100%;">}}
 
-## Utiliser l'Explorateur de surveillance Synthetic et de tests en continu
+Bénéficiez d'un contexte complet pour le dépannage sans avoir à basculer d'un outil à un autre, grâce aux métriques, traces et logs corrélés qui s'affichent dans l'[intégration APM][12] Datadog. Pour accéder à ses données, consultez les tâches exécutées depuis lʼ[explorateur de surveillance Synthetic et de tests en continu][11].
+
+## Examiner des lots CI dans l'Explorateur de surveillance Synthetic et de résultats de tests
 
 Créez des [requêtes de recherche et des visualisations][11] pour vos exécutions de tests Synthetic ou vos exécutions groupées de tests dans des pipelines de CI/CD. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Explorateur de tests en continu" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="Une liste de résultats de lots CI dans lʼexplorateur de surveillance Synthetic et de résultats de tests" style="width:100%;">}}
+
+Vous pouvez surveiller des tests dʼexécution individuels et des lots complets de tests, et accéder à des informations pertinentes pour chaque type de test. 
 
 ## Prêt à vous lancer ?
 
-Après avoir configuré quelques [tests Synthetic][4], consultez la documentation relative à votre principal [fournisseur de CI/CD][1] ou utilisez le [package NPM datadog-ci][14] dans vos pipelines de CI/CD. Référez-vous à la section [Tester des environnements intermédiaires et locaux][17] pour découvrir comment utiliser les tests continus dans des environnements qui ne sont pas publics ou en production. Vous pouvez par exemple exécuter des tests sur votre environnement de développement local ou sur un environnement intermédiaire au sein d'un réseau privé. Consultez ensuite la vue [Synthetic Monitoring & Continuous Testing Explorer][11] afin de passer en revue les détails sur vos exécutions groupées.
+Après avoir configuré quelques [tests Synthetic][4], consultez la documentation relative à votre principal [fournisseur de CI/CD][1] ou utilisez le [package NPM `datadog-ci`][14] dans vos pipelines de CI/CD. Référez-vous à la section [Tester des environnements intermédiaires et locaux][17] pour découvrir comment utiliser les tests continus dans des environnements qui ne sont pas publics ou en production. Vous pouvez par exemple exécuter des tests sur votre environnement de développement local ou sur un environnement intermédiaire au sein d'un réseau privé. Consultez ensuite lʼ[explorateur de surveillance Synthetic et de tests en continu][11] afin de passer en revue les détails sur vos exécutions groupées.
 
 {{< learning-center-callout header="Familiarisez-vous avec les tests Synthetic en les exécutant au sein d'un pipeline de CI/CD depuis le centre d'apprentissage" btn_title="S'inscrire" btn_url="https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline">}}
   Le centre d'apprentissage Datadog propose un vaste choix de ressources vous permettant de vous familiariser avec les tests. Inscrivez-vous gratuitement pour découvrir comment exécuter un test Synthetic Datadog au sein d'un pipeline de CI/CD.
@@ -98,3 +103,5 @@ Après avoir configuré quelques [tests Synthetic][4], consultez la documentatio
 [15]: /fr/mobile_app_testing/mobile_app_tests
 [16]: /fr/mobile_app_testing/
 [17]: /fr/continuous_testing/environments
+[18]: /fr/integrations/slack/
+[19]: /fr/integrations/jira/

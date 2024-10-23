@@ -1,6 +1,5 @@
 ---
 title: Signals Explorer
-kind: documentation
 aliases:
   - /security_platform/cspm/signals_explorer
   - /security/cspm/signals_explorer
@@ -16,6 +15,8 @@ further_reading:
   tag: "Blog"
   text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
+
+<div class="alert alert-warning">Due to <a href="/security/upcoming_changes_notification_rules">changes in how notification rules are configured</a>, cloud configuration and infrastructure configuration signals will be deprecated in early 2025.</div>
 
 ## Overview
 

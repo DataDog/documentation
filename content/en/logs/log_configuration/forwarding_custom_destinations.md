@@ -1,6 +1,5 @@
 ---
 title: Forwarding Logs to Custom Destinations
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/"
   tag: "Blog"
@@ -26,19 +25,22 @@ Log forwarding is not available for the Government site. Contact your account re
 
 Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
 
+**Note**: Only Datadog users with the [`logs_write_forwarding_rules`][2] permission can [create][6], [edit][7], and [delete][8] custom destinations for forwarding logs.
+
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The Log Forwarding page, showing custom destinations highlighted. The list of destinations includes Splunk (filtered by service:logs-processing), HTTP Endpoint (filtered by source:okta OR source:paloalto), and Elasticsearch (filtered by team:acme env:prod)." >}}
+
+If a forwarding attempt fails (for example: if your destination temporarily becomes unavailable), Datadog retries periodically for 2 hours using an exponential backoff strategy. The first attempt is made following a 1-minute delay. For subsequent retries, the delay increases progressively to a maximum of 8-12 minutes (10 minutes with 20% variance).
 
 The following metrics report on logs that have been forwarded successfully, including logs that were sent successfully after retries, as well as logs that were dropped.
 
 - datadog.forwarding.logs.bytes
 - datadog.forwarding.logs.count
 
-**Note**: Only Datadog users with the [`logs_write_forwarding_rules`][2] permission can create, edit, or delete custom destinations for forwarding logs.
 
 ## Set up log forwarding to custom destinations
 
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-2. Navigate to [Log Forwarding][4]. Alternatively, go to **Logs** > **Configuration** and click the **Log Forwarding** tab.
+2. Navigate to [Log Forwarding][4].
 3. Select **Custom Destinations**.
 4. Click **New Destination**.
 5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.
@@ -112,3 +114,6 @@ On the [Log Forwarding][4] page, hover over the status for a destination to see 
 [2]: /account_management/rbac/permissions/?tab=ui#log-management
 [4]: https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations
 [5]: /logs/explorer/search_syntax/
+[6]: /logs/log_configuration/forwarding_custom_destinations#set-up-log-forwarding-to-custom-destinations
+[7]: /logs/log_configuration/forwarding_custom_destinations#edit-a-destination
+[8]: /logs/log_configuration/forwarding_custom_destinations#delete-a-destination

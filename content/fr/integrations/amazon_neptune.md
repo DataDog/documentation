@@ -14,7 +14,7 @@ integration_id: amazon-neptune
 integration_title: "Amazon\_Neptune"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_neptune
 public_title: "Intégration Datadog/Amazon\_Neptune"

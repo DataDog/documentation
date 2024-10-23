@@ -1,6 +1,5 @@
 ---
 title: Java Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/java
     - /tracing/manual_instrumentation/java
@@ -22,6 +21,8 @@ further_reading:
 ---
 
 This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
+
+<div class="alert alert-info">The Datadog Java tracer is built on OpenTracing. Although OpenTracing is deprecated in favor of OpenTelemetry, the following examples correctly import the <code>opentracing</code> library.</div>
 
 ## Adding tags
 
@@ -354,7 +355,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [5]: /tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: /tracing/trace_collection/trace_context_propagation/java/
+[8]: /tracing/trace_collection/trace_context_propagation/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
 [11]: /tracing/setup/java/

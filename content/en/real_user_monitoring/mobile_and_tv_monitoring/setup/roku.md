@@ -1,6 +1,5 @@
 ---
 title: RUM Roku Channel Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/roku/
 code_lang: roku
@@ -11,8 +10,8 @@ further_reading:
   tag: Documentation
   text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: Github
-  text: dd-sdk-roku Source code
+  tag: "Source Code"
+  text: Source code for dd-sdk-roku
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
@@ -216,8 +215,13 @@ Whenever you perform an operation that might throw an exception, you can forward
     end try
 ```
 
+## Sending data when device is offline
 
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
 
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Further Reading
 

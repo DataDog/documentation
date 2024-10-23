@@ -9,7 +9,6 @@ further_reading:
   tag: Blog
   text: Utilizar el análisis del embudo para comprender y optimizar los flujos de
     usuarios clave
-kind: documentación
 title: Widget embudo
 widget_type: embudo
 ---

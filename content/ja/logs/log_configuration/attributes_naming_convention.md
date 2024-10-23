@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: ブログ
   text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
-kind: documentation
 title: 属性とエイリアス設定
 ---
 
@@ -160,7 +159,7 @@ title: 属性とエイリアス設定
 [25]: /ja/standard-attributes/?search=syslog&product=log+management
 [26]: /ja/integrations/rsyslog/
 [27]: /ja/integrations/nxlog/
-[28]: integrations/syslog_ng/
+[28]: /ja/integrations/syslog_ng/
 [29]: /ja/integrations/fluentd/
 [30]: /ja/integrations/logstash/
 [31]: /ja/standard-attributes/?search=dns&product=log+management

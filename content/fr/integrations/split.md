@@ -17,7 +17,7 @@ guid: 2c48dd0b-418f-4ca7-9b8d-54c857587db4
 integration_id: split
 integration_title: Split
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: jeremy-lq
 manifest_version: 1.0.0
 name: split
