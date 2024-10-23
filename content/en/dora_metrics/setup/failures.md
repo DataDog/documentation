@@ -94,9 +94,9 @@ The matching algorithm works in the following steps:
 1. If the PagerDuty incident event was [triggered from a monitor][107]:
    - If the monitor is in [Multi Alert mode][109], the incident metrics and events are emmitted with the `env`, `service`, and `team` from the alerted group.
    - If the monitor has [tags][110] for `env`, `service`, or `team`:
-    - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
-    - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
-    - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
+     - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
+     - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
+     - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
 2. If the service URL of the incident matches the PagerDuty service URL for any services in the Service Catalog:
    - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
    - If multiple Datadog services match, the incident metrics and events are emitted with the team.
