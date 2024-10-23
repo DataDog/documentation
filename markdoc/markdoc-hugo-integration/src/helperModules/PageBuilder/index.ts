@@ -43,22 +43,24 @@ export class PageBuilder {
     hugoConfig: HugoConfig;
     prefsManifest: PagePrefsManifest;
   }): string {
-    const defaultValsByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
-      p.parsedFile.frontmatter,
-      p.prefOptionsConfig
-    );
+    const initialValuesByPrefId = Object.entries(p.prefsManifest.prefsById).reduce<
+      Record<string, string>
+    >((obj, [prefId, prefManifest]) => {
+      obj[prefId] = prefManifest.initialValue;
+      return obj;
+    }, {});
 
     const renderableTree = buildRenderableTree({
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
-      defaultValsByPrefId,
+      defaultValsByPrefId: initialValuesByPrefId,
       variables: { hugoConfig: { ...JSON.parse(JSON.stringify(p.hugoConfig)) } }
     });
 
     const pageInitScript = this.#getPageInitScript({
       parsedFile: p.parsedFile,
       prefOptionsConfig: p.prefOptionsConfig,
-      defaultValsByPrefId,
+      defaultValsByPrefId: initialValuesByPrefId,
       renderableTree
     });
 
@@ -73,7 +75,7 @@ export class PageBuilder {
     const pageJsx = PageTemplate({
       frontmatter: p.parsedFile.frontmatter,
       prefOptionsConfig: p.prefOptionsConfig,
-      valsByPrefId: defaultValsByPrefId,
+      valsByPrefId: initialValuesByPrefId,
       articleHtml
     });
 

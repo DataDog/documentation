@@ -8,6 +8,7 @@ import {
   VALID_PREFS_CONFIG_DIR,
   SNAPSHOTS_DIR
 } from '../../config/constants';
+import { PagePrefsManifestSchema } from '../../../src/schemas/pagePrefs';
 
 describe('PageBuilder.build', () => {
   const LANG_DIR = VALID_PREFS_CONFIG_DIR + '/en';
@@ -30,6 +31,13 @@ describe('PageBuilder.build', () => {
     prefOptionsConfig
   );
 
+  const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
+    frontmatter: parsedFile.frontmatter,
+    prefOptionsConfig
+  });
+
+  const prefsManifest = PagePrefsManifestSchema.parse(draftPrefsManifest);
+
   const html = PageBuilder.build({
     parsedFile,
     prefOptionsConfig: prefOptionsConfigForPage,
@@ -37,7 +45,8 @@ describe('PageBuilder.build', () => {
       siteParams: { img_url: 'https://example.com' },
       env: 'development',
       languages: ['en']
-    }
+    },
+    prefsManifest
   });
 
   test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
