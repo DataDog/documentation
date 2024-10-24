@@ -15770,14 +15770,14 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: example-name
           maxLength: 1500
           type: string
         noScreenshot:
           description: A boolean set to not take a screenshot for the step.
           type: boolean
         params:
-          description: The parameters of the mobile step.
-          type: object
+          $ref: '#/components/schemas/SyntheticsMobileStepParams'
         publicId:
           description: The public ID of the step.
           example: pub-lic-id0
@@ -15788,6 +15788,188 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/SyntheticsMobileStepType'
+      required:
+      - name
+      - params
+      - type
+      type: object
+    SyntheticsMobileStepParams:
+      description: The parameters of a mobile step.
+      properties:
+        check:
+          $ref: '#/components/schemas/SyntheticsCheckType'
+        delay:
+          description: Number of milliseconds to wait between inputs in a TYPE_TEXT
+            step type.
+          format: int64
+          maximum: 5000
+          minimum: 0
+          type: integer
+        direction:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsDirection'
+        element:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElement'
+        enable:
+          description: Boolean to change the state of the wifi for a TOGGLE_WIFI step
+            type.
+          type: boolean
+        maxScrolls:
+          description: Maximum number of scrolls to do for a SCROLL_TO_ELEMENT step
+            type.
+          format: int64
+          type: integer
+        positions:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsPositions'
+        subtestPublicId:
+          description: Public Id of the test to be played as part of a PLAY_SUBTEST
+            step type.
+          type: string
+        value:
+          description: Values used in the step. Used in multiple step types.
+          type: string
+        variable:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsVariable'
+        withEnter:
+          description: Boolean to signal if `Enter` should be pressed at the end of
+            the TYPE_TEXT step type.
+          type: boolean
+        x:
+          description: Amount to scroll by on the `x` axis for a SCROLL step type.
+          format: int64
+          type: integer
+        y:
+          description: Amount to scroll by on the `y` axis for a SCROLL step type.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileStepParamsDirection:
+      description: The direction of the scroll for a SCROLL_TO_ELEMENT step type.
+      enum:
+      - up
+      - down
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - UP
+      - DOWN
+      - LEFT
+      - RIGHT
+    SyntheticsMobileStepParamsElement:
+      description: Information about the element used for a step.
+      properties:
+        context:
+          description: Context of the element.
+          type: string
+        contextType:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementContextType'
+        elementDescription:
+          description: Description of the element.
+          type: string
+        multiLocator:
+          description: MultiLocator to find the element.
+          type: object
+        relativePosition:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementRelativePosition'
+        textContent:
+          description: Text content of the element.
+          type: string
+        userLocator:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocator'
+        viewName:
+          description: Name of the view of the element.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementContextType:
+      description: Type of the context that the element is in.
+      enum:
+      - native
+      - web
+      type: string
+      x-enum-varnames:
+      - NATIVE
+      - WEB
+    SyntheticsMobileStepParamsElementRelativePosition:
+      description: Position of the action relative to the element.
+      properties:
+        x:
+          description: The `relativePosition` on the `x` axis for the element.
+          format: int64
+          type: integer
+        y:
+          description: The `relativePosition` on the `y` axis for the element.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileStepParamsElementUserLocator:
+      description: UserLocator for the element.
+      properties:
+        failTestOnCannotLocate:
+          description: Flag if the the test should fail if the element can not be
+            found.
+          type: boolean
+        values:
+          description: Values of the User Locator.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItems'
+          type: array
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItems:
+      description: A single User Locator object.
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItemsType'
+        value:
+          description: Value of a User Locator.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItemsType:
+      description: Type of a User Locator.
+      enum:
+      - accessibility-id
+      - id
+      - ios-predicate-string
+      - ios-class-chain
+      - xpath
+      type: string
+      x-enum-varnames:
+      - ACCESSIBILITY_ID
+      - ID
+      - IOS_PREDICATE_STRING
+      - IOS_CLASS_CHAIN
+      - XPATH
+    SyntheticsMobileStepParamsPositions:
+      description: List of positions for the FLICK step type. The maximum is 10 flicks
+        per step
+      items:
+        $ref: '#/components/schemas/SyntheticsMobileStepParamsPositionsItems'
+      type: array
+    SyntheticsMobileStepParamsPositionsItems:
+      description: A description of a single position for a FLICK step type.
+      properties:
+        x:
+          description: The `x` position for the flick.
+          format: int64
+          type: integer
+        y:
+          description: The `y` position for the flick.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsMobileStepParamsVariable:
+      description: Variable object for EXTRACT_VARIABLE step type.
+      properties:
+        example:
+          description: An example for the variable.
+          example: ''
+          type: string
+        name:
+          description: The variable name.
+          example: example-name
+          type: string
+      required:
+      - name
+      - example
       type: object
     SyntheticsMobileStepType:
       description: Step type used in your mobile Synthetic test.
@@ -15835,7 +16017,7 @@ components:
         config:
           $ref: '#/components/schemas/SyntheticsMobileTestConfig'
         device_ids:
-          description: The `SyntheticsMobileTest` `device_ids`.
+          description: Array with the different device IDs used to run the test.
           items:
             $ref: '#/components/schemas/SyntheticsMobileDeviceID'
           type: array
@@ -15886,26 +16068,11 @@ components:
     SyntheticsMobileTestBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        items:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItems'
-      type: object
-    SyntheticsMobileTestBindingItems:
-      description: Object describing the binding used for a mobile test.
-      properties:
         principals:
           $ref: '#/components/schemas/SyntheticsMobileTestBindingPrincipals'
-        role:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItemsRole'
+        relation:
+          $ref: '#/components/schemas/SyntheticsMobileTestBindingRelation'
       type: object
-    SyntheticsMobileTestBindingItemsRole:
-      description: The definition of `SyntheticsMobileTestBindingItemsRole` object.
-      enum:
-      - editor
-      - viewer
-      type: string
-      x-enum-varnames:
-      - EDITOR
-      - VIEWER
     SyntheticsMobileTestBindingPrincipals:
       description: List of principals for a mobile test binding.
       items:
@@ -15913,14 +16080,15 @@ components:
         maxLength: 1500
         type: string
       type: array
-    SyntheticsMobileTestCiOptions:
-      description: CI/CD options for a Synthetic test.
-      properties:
-        executionRule:
-          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
-      required:
-      - executionRule
-      type: object
+    SyntheticsMobileTestBindingRelation:
+      description: The type of relation for the binding.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
       properties:
@@ -15933,24 +16101,17 @@ components:
           type: array
       type: object
     SyntheticsMobileTestInitialApplicationArguments:
+      additionalProperties:
+        description: A single application argument.
+        type: string
       description: Initial application arguments for a mobile test.
-      properties:
-        propertyNames:
-          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArgumentsPropertyNames'
-      type: object
-    SyntheticsMobileTestInitialApplicationArgumentsPropertyNames:
-      description: Name of the property.
-      properties:
-        pattern:
-          description: The `propertyNames` `pattern`.
-          example: ^(?!_dd).*$
-          type: string
       type: object
     SyntheticsMobileTestOptions:
       description: Object describing the extra options for a Synthetic test.
       properties:
         allowApplicationCrash:
-          description: The `SyntheticsMobileTestOptions` `allowApplicationCrash`.
+          description: A boolean to set if an application crash would mark the test
+            as failed.
           type: boolean
         bindings:
           description: Array of bindings used for the mobile test.
@@ -15958,9 +16119,9 @@ components:
             $ref: '#/components/schemas/SyntheticsMobileTestBinding'
           type: array
         ci:
-          $ref: '#/components/schemas/SyntheticsMobileTestCiOptions'
+          $ref: '#/components/schemas/SyntheticsTestCiOptions'
         defaultStepTimeout:
-          description: The `SyntheticsMobileTestOptions` `defaultStepTimeout`.
+          description: The defaultStepTimeout for steps of a mobile test in seconds.
           format: int32
           maximum: 300
           minimum: 1
@@ -15968,11 +16129,13 @@ components:
         device_ids:
           description: For mobile test, array with the different device IDs used to
             run the test.
+          example:
+          - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
           items:
             $ref: '#/components/schemas/SyntheticsMobileDeviceID'
           type: array
         disableAutoAcceptAlert:
-          description: The `SyntheticsMobileTestOptions` `disableAutoAcceptAlert`.
+          description: A boolean to disable auto accepting alerts.
           type: boolean
         min_failure_duration:
           description: Minimum amount of time in failure required to trigger an alert.
@@ -15995,7 +16158,7 @@ components:
           minimum: 1
           type: integer
         noScreenshot:
-          description: The `SyntheticsMobileTestOptions` `noScreenshot`.
+          description: A boolean set to not take a screenshot for the step.
           type: boolean
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
@@ -16005,16 +16168,21 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
+          example: 300
           format: int64
           maximum: 604800
           minimum: 300
           type: integer
         verbosity:
-          description: The `SyntheticsMobileTestOptions` `verbosity`.
+          description: The level of verbosity for the mobile test.
           format: int32
           maximum: 5
           minimum: 0
           type: integer
+      required:
+      - device_ids
+      - tick_every
+      - mobileApplication
       type: object
     SyntheticsMobileTestOptionsMonitorOptions:
       description: 'Object containing the options for a mobile Synthetic test as a
@@ -16035,13 +16203,12 @@ components:
           minimum: 0
           type: integer
         renotify_occurrences:
-          description: The `SyntheticsMobileTestOptionsMonitorOptions` `renotify_occurrences`.
+          description: The number renotify_occurrences for the test.
           format: int64
           type: integer
       type: object
     SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName:
-      description: The definition of `SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName`
-        object.
+      description: The name of the preset for the notification for the monitor.
       enum:
       - show_all
       - hide_all
@@ -16067,14 +16234,20 @@ components:
       properties:
         applicationId:
           description: Application ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaaa
           maxLength: 1500
           type: string
         referenceId:
           description: Reference ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaab
           maxLength: 1500
           type: string
         referenceType:
           $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplicationReferenceType'
+      required:
+      - applicationId
+      - referenceId
+      - referenceType
       type: object
     SyntheticsMobileTestsMobileApplicationReferenceType:
       description: Reference type for the mobile application for a mobile synthetics
@@ -16082,6 +16255,7 @@ components:
       enum:
       - latest
       - version
+      example: latest
       type: string
       x-enum-varnames:
       - LATEST
@@ -16555,6 +16729,8 @@ components:
       properties:
         executionRule:
           $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      required:
+      - executionRule
       type: object
     SyntheticsTestConfig:
       description: Configuration object for a Synthetic test.
@@ -16862,6 +17038,9 @@ components:
           description: Timezone in which the timeframe is based.
           example: America/New_York
           type: string
+      required:
+      - timeframes
+      - timezone
       type: object
     SyntheticsTestOptionsSchedulingTimeframe:
       description: Object describing a timeframe.
@@ -16881,6 +17060,10 @@ components:
           description: The hour of the day on which scheduling ends.
           example: '16:00'
           type: string
+      required:
+      - day
+      - from
+      - to
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)
