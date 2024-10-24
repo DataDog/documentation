@@ -4248,32 +4248,32 @@ menu:
       identifier: test_impact_analysis_setup
       weight: 701
     - name: .NET
-      url: test_impact_analysis/setup/dotnet/
+      url: tests/test_impact_analysis/setup/dotnet/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_dotnet
       weight: 101
     - name: JavaScript and TypeScript
-      url: test_impact_analysis/setup/javascript/
+      url: tests/test_impact_analysis/setup/javascript/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_javascript
       weight: 102
     - name: Python
-      url: test_impact_analysis/setup/python/
+      url: tests/test_impact_analysis/setup/python/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_python
       weight: 103
     - name: Swift
-      url: test_impact_analysis/setup/swift/
+      url: tests/test_impact_analysis/setup/swift/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_swift
       weight: 104
     - name: Java
-      url: test_impact_analysis/setup/java/
+      url: tests/test_impact_analysis/setup/java/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_java
       weight: 105
     - name: Ruby
-      url: test_impact_analysis/setup/ruby/
+      url: tests/test_impact_analysis/setup/ruby/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_ruby
       weight: 106

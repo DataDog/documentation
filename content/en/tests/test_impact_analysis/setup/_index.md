@@ -12,4 +12,4 @@ For information about configuration options for [Test Impact Analysis][1], choos
 
 <br>
 
-[1]: /continuous_integration/intelligent_test_runner
+[1]: /tests/test_impact_analysis/

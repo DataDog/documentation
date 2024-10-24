@@ -57,7 +57,7 @@ If you are authoring a commit that includes any of those cases, you can force-di
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /continuous_integration/intelligent_test_runner/
+[2]: /tests/test_impact_analysis/
 [3]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [4]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [5]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request

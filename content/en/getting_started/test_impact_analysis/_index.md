@@ -13,7 +13,7 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about Code Coverage'
 algolia:
-  tags: ["intelligent test runner", "ci test", "ci tests", "flaky test", "flaky tests"]
+  tags: ["test impact analysis", "intelligent test runner", "ci test", "ci tests", "flaky test", "flaky tests"]
 ---
 
 ## Overview

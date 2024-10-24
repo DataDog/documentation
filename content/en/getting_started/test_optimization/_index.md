@@ -1,12 +1,14 @@
 ---
-title: Getting Started with Test Visibility
+title: Getting Started with Test Optimization
+aliases:
+- /getting_started/test_visibility
 further_reading:
 - link: 'https://www.datadoghq.com/blog/ci-test-visibility-with-rum/'
   tag: 'Blog'
   text: 'Troubleshoot end-to-end tests with CI Test Visibility and RUM'
 - link: '/tests/'
   tag: 'Documentation'
-  text: 'Learn about Test Visibility'
+  text: 'Learn about Test Optimization'
 - link: '/tests/flaky_test_management/'
   tag: 'Documentation'
   text: 'Learn about Flaky Test Management'
@@ -19,19 +21,19 @@ algolia:
 
 ## Overview
 
-[Test Visibility][1] allows you to better understand your test posture, identify commits introducing flaky tests, identify performance regressions, and troubleshoot complex test failures. 
+[Test Optimization][1] allows you to better understand your test posture, identify commits introducing flaky tests, identify performance regressions, and troubleshoot complex test failures. 
 
-{{< img src="getting_started/test_visibility/list.png" alt="List of test services in Test Visibility" style="width:100%;" >}}
+{{< img src="getting_started/test_visibility/list.png" alt="List of test services in Test Optimization" style="width:100%;" >}}
 
 You can visualize the performance of your test runs as traces, where spans represent the execution of different parts of the test.
 
-Test Visibility enables development teams to debug, optimize, and accelerate software testing across CI environments by providing insights about test performance, flakiness, and failures. Test Visibility automatically instruments each test and integrates intelligent test selection using the [Intelligent Test Runner][2], enhancing test efficiency and reducing redundancy. 
+Test Optimization enables development teams to debug, optimize, and accelerate software testing across CI environments by providing insights about test performance, flakiness, and failures. Test Optimization automatically instruments each test and integrates intelligent test selection using the [Test Impact Analysis][2], enhancing test efficiency and reducing redundancy. 
 
-With historical test data, teams can understand performance regressions, compare the outcome of tests from feature branches to default branches, and establish performance benchmarks. By using Test Visibility, teams can improve their [developer workflows][14] and maintain quality code output. 
+With historical test data, teams can understand performance regressions, compare the outcome of tests from feature branches to default branches, and establish performance benchmarks. By using Test Optimization, teams can improve their [developer workflows][14] and maintain quality code output. 
 
 ## Set up a test service
 
-Test Visibility tracks the performance and results of your CI tests, and displays results of the test runs.
+Test Optimization tracks the performance and results of your CI tests, and displays results of the test runs.
 
 To start instrumenting and running tests, see the documentation for one of the following languages.
 
@@ -39,15 +41,15 @@ To start instrumenting and running tests, see the documentation for one of the f
 
 </br>
 
-Test Visibility is compatible with any CI provider and is not limited to those supported by CI Visibility. For more information about supported features, see [Test Visibility][3].
+Test Optimization is compatible with any CI provider and is not limited to those supported by CI Visibility. For more information about supported features, see [Test Optimization][3].
 
 ## Use CI test data
 
 Access your tests’ metrics (such as executions, duration, distribution of duration, overall success rate, failure rate, and more) to start identifying important trends and patterns using the data collected from your tests across CI pipelines.
 
-{{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Out-of-the-box Test Visibility dashboard in Datadog" style="width:100%;" >}}
+{{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Out-of-the-box Test Optimization dashboard in Datadog" style="width:100%;" >}}
 
-You can create [dashboards][4] for monitoring flaky tests, performance regressions, and test failures occurring within your tests. Alternatively, you can utilize an [out-of-the-box dashboard][5] containing widgets populated with data collected in Test Visibility to visualize the health and performance of your CI test sessions, modules, suites, and tests.
+You can create [dashboards][4] for monitoring flaky tests, performance regressions, and test failures occurring within your tests. Alternatively, you can utilize an [out-of-the-box dashboard][5] containing widgets populated with data collected in Test Optimization to visualize the health and performance of your CI test sessions, modules, suites, and tests.
 
 ## Manage flaky tests
 
@@ -74,7 +76,7 @@ Failure rate
 Trend
 : A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
 
-Test Visibility displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s **Flaky Tests** section:
+Test Optimization displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s **Flaky Tests** section:
 
 New Flaky Test Runs
 : How often new flaky tests are being detected.
@@ -84,43 +86,43 @@ Known Flaky Test Runs
 
 To ignore new flaky tests for a commit that you’ve determined the flaky tests were detected by mistake, click on a test containing a **New Flaky** value with a dropdown option, and click **Ignore flaky tests**. For more information, see [Flaky Test Management][8].
 
-## Examine results in the Test Visibility Explorer
+## Examine results in the Test Optimization Explorer
 
-The Test Visibility Explorer allows you to create visualizations and filter test spans using the data collected from your testing. Each test run is reported as a trace, which includes additional spans generated by the test request. 
+The Test Optimization Explorer allows you to create visualizations and filter test spans using the data collected from your testing. Each test run is reported as a trace, which includes additional spans generated by the test request. 
 
 {{< tabs >}}
 {{% tab "Session" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Session` to start filtering your test session span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Session` to start filtering your test session span results. 
 
-{{< img src="/getting_started/test_visibility/session.png" alt="Test session results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/session.png" alt="Test session results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asession
 
 {{% /tab %}}
 {{% tab "Module" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
 
-{{< img src="/getting_started/test_visibility/module.png" alt="Test module results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/module.png" alt="Test module results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Amodule
 
 {{% /tab %}}
 {{% tab "Suite" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
 
-{{< img src="/getting_started/test_visibility/suite.png" alt="Test suite results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/suite.png" alt="Test suite results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asuite
 
 {{% /tab %}}
 {{% tab "Test" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
 
-{{< img src="/getting_started/test_visibility/test.png" alt="Test results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/test.png" alt="Test results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Atest
 

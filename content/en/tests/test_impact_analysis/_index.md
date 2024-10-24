@@ -19,7 +19,7 @@ further_reading:
 
 Test Impact Analysis is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
 
-{{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings.">}}
+{{< img src="continuous_integration/itr_savings.png" alt="Test Impact Analysis enabled in a test session showing its time savings.">}}
 
 Test Impact Analysis works by analyzing your test suite to identify the code each test covers. It then cross-references that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration. Find out more details about [How It Works][1].
 
@@ -61,7 +61,7 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Test Impact Analysis Activation Write` permission.
 
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
+{{< img src="continuous_integration/itr_overview.png" alt="Test Impact Analysis enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
 ### Git executable
 
@@ -93,9 +93,9 @@ All file paths are considered to be relative to the root of the repository. You 
 
 You can explore the time savings you get from Test Impact Analysis by looking at the test commit page and test sessions panel.
 
-{{< img src="continuous_integration/itr_commit.png" alt="Test commit page with intelligent test runner" style="width:80%;">}}
+{{< img src="continuous_integration/itr_commit.png" alt="Test commit page with Test Impact Analysis" style="width:80%;">}}
 
-{{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings." style="width:80%;">}}
+{{< img src="continuous_integration/itr_savings.png" alt="ITest Impact Analysis enabled in a test session showing its time savings." style="width:80%;">}}
 
 When Test Impact Analysis is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can identify which test sessions are using Test Impact Analysis on the [Test Runs][7] page.
 
@@ -115,7 +115,7 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 
 [1]: /intelligent_test_runner/how_it_works/
 [2]: /glossary/#flaky-test
-[3]: /continuous_integration/intelligent_test_runner/setup
+[3]: /tests/test_impact_analysis/setup
 [4]: /continuous_integration/tests/
 [5]: https://app.datadoghq.com/ci/settings/test-service
 [6]: https://git-scm.com/

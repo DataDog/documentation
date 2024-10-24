@@ -146,7 +146,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 Other symptoms of the same issue include:
 - A test case is not classified as flaky even if it exhibits flakiness.
-- A test case cannot be skipped by [Intelligent Test Runner][12].
+- A test case cannot be skipped by [Test Impact Analysis][12].
 
 It is likely that the [test case configuration][13] is unstable because one or more of the test parameters are non-deterministic (for instance, they include current date or a random number).
 
@@ -167,6 +167,6 @@ The best way to fix this is to make sure that the test parameters are the same b
 [9]: https://github.com/spulec/freezegun
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [11]: https://app.datadoghq.com/ci/settings/repository
-[12]: /continuous_integration/intelligent_test_runner/
+[12]: /tests/test_impact_analysis/
 [13]: /tests/#parameterized-test-configurations
 [14]: /tests/#supported-features
