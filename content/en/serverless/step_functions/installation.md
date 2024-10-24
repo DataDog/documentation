@@ -11,7 +11,6 @@ further_reading:
 
 ### Requirements
 * The full Step Function execution length must be less than 6 hours for full traces.
-* Linked Lambda traces are supported for Node.js (layer v112+) and Python (layer v95+) runtimes.
 
 ### How it works
 AWS Step Functions is a fully managed service, and the Datadog Agent cannot be directly installed on Step Functions. However, Datadog can monitor Step Functions through Cloudwatch metrics and logs.
@@ -25,7 +24,7 @@ Datadog uses these ingested logs to generate [enhanced metrics][8] and traces fo
 
 {{< img src="serverless/step_functions/telemetry_ingestion.png" alt="A diagram explaining how Step Functions telemetry is ingested and used in Datadog" style="width:100%;" >}}
 
-### Setup
+## Setup
 
 Ensure that the [AWS Step Functions integration][9] is installed.
 
@@ -55,7 +54,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
         enableStepFunctionsTracing: true
-        propagateUpstreamTrace : true
+        propagateUpstreamTrace: true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
@@ -64,8 +63,6 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
-4. For Node.js and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
-
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
 [2]: /logs/guide/forwarder/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
@@ -73,7 +70,6 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 [5]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [6]: logs/guide/forwarder/?tab=cloudformation#installation
 [7]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
-[8]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 1. If you have not already, install the [Datadog CLI][1] v2.18.0+.
@@ -101,14 +97,12 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
-4. For Node.js and Python runtimes, add the flag `--merge-step-function-and-lambda-traces` in your datadog-ci command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
 
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder/
 [3]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [4]: logs/guide/forwarder/?tab=cloudformation#installation
 [5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
-[6]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -136,86 +130,30 @@ For developers using [Serverless Framework][4] to deploy serverless applications
      4. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
      5. Enter a filter name. You can choose to name it "empty filter" and leave the *Filter pattern* box blank.
 
-<div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</div>
+<div class="alert alert-warning"> If you are using a different instrumentation method, such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. To avoid this behavior, choose only one configuration method.</div>
 
 4. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>`, `service:<SERVICE_NAME>`, and `version:<VERSION>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name. The `version` tag defaults to `1.0`.
-5. Link your Step Function traces to downstream Lambda traces or nested Step Function traces:
-
-{{% collapse-content title="Link Step Function traces to downstream Lambda traces" level="h4" %}}
-For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
-
-```json
-"Parameters": {
-  "Payload.$": "States.JsonMerge($$, $, false)",
-  ...
-}
-```
-
-The `JsonMerge` [intrinsic function][1] merges the [Step Functions context object][2] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
-
-**Example**:
-
-{{< highlight json "hl_lines=5-5" >}}
-"Lambda Read From DynamoDB": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::lambda:invoke",
-  "Parameters": {
-    "Payload.$": "States.JsonMerge($$, $, false)",
-    "FunctionName": "${lambdaArn}"
-  },
-  "End": true
-}
-{{< /highlight >}}
-
-Alternatively, if you have business logic defined in the payload, you could also use the following:
-
-{{< highlight json "hl_lines=7-9" >}}
-"Lambda Read From DynamoDB": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::lambda:invoke",
-  "Parameters": {
-    "Payload": {
-      ...
-      "Execution.$": "$$.Execution",
-      "State.$": "$$.State",
-      "StateMachine.$": "$$.StateMachine"
-    },
-    "FunctionName": "${lambdaArn}"
-  },
-  "End": true
-}
-{{< /highlight >}}
-
-If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][3].
-
-[1]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
-[2]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
-[3]: /logs/guide/forwarder/?tab=cloudformation#installation
-{{% /collapse-content %}} 
-
-{{% collapse-content title="Link Step Function traces to nested Step Function traces" level="h4" %}}
-**Example**:
-
-{{< highlight json "hl_lines=9-13" >}}
-"Step Functions StartExecution": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::states:startExecution",
-  "Parameters": {
-    "StateMachineArn": "${stateMachineArn}",
-    "Input": {
-      "StatePayload": "Hello from Step Functions!",
-      "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
-      "CONTEXT": {
-        "Execution.$": "$$.Execution",
-        "State.$": "$$.State",
-        "StateMachine.$": "$$.StateMachine"
+5. To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
+  {{< highlight json "hl_lines=9-13" >}}
+  "Step Functions StartExecution": {
+    "Type": "Task",
+    "Resource": "arn:aws:states:::states:startExecution",
+    "Parameters": {
+      "StateMachineArn": "${stateMachineArn}",
+      "Input": {
+        "StatePayload": "Hello from Step Functions!",
+        "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
+        "CONTEXT": {
+          "Execution.$": "$$.Execution",
+          "State.$": "$$.State",
+          "StateMachine.$": "$$.StateMachine"
+        }
       }
-    }
-  },
-  "End": true
-}
-{{< /highlight >}}
-{{% /collapse-content %}} 
+    },
+    "End": true
+  }
+  {{< /highlight >}}
+
 
 [1]: /logs/guide/forwarder/
 [2]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
@@ -223,6 +161,10 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 [5]: https://app.datadoghq.com/integrations/aws
 {{% /tab %}}
 {{< /tabs >}}
+
+## Link Step Functions with your AWS Lambda traces
+
+If you are using a Node.js (layer v112+) or Python (layer v95+) runtime, you can [link Step Functions traces with Lambda traces][11]. Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
 
 ## Enable enhanced metrics
 
@@ -244,10 +186,6 @@ To manage the APM traced invocation sampling rate for serverless functions, set 
 
 The dropped traces are not ingested into Datadog. 
 
-## Link Step Functions with your AWS Lambda traces
-
-Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
-
 ## See your Step Function metrics, logs, and traces in Datadog
 
 After you have invoked your state machine, go to the [**Serverless app**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see the relevant metrics, logs, and traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
@@ -255,16 +193,6 @@ After you have invoked your state machine, go to the [**Serverless app**][2] in 
 {{< img src="serverless/step_functions/overview1.png" alt="An AWS Step Function side panel view." style="width:100%;" >}}
 
 If you cannot see your traces, see [Troubleshooting][5].
-
-### Retry Step Functions executions or redrive failed executions from within Datadog
-
-You can retry any execution that is being monitored or [redrive][11] executions to continue failed AWS Step Functions from the point of failure, without needing a complete state machine restart. This can be done directly from Datadog.
-
-To take action on you [Step Functions][12] in Datadog, you can either use the invocations list on a Step Function side-panel and click on the **Failed** pill to open a redrive modal, or open the Step Function Trace Map to retry an execution or redrive a failed execution.
-
-{{< img src="serverless/step_functions/redrive.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
-
-To enable using redrive within Datadog, configure an [AWS Connection][13] with [Datadog App Builder][14]. Ensure that your IAM roles include policies that have permissions to allow executing a Step Function for the retry action (`StartExecution`) or redriving a Step Function for the redrive action (`RedriveExecution`).
 
 [2]: https://app.datadoghq.com/functions?search=&cloud=aws&entity_view=step_functions
 [3]: /serverless/installation/#installation-instructions
@@ -274,7 +202,4 @@ To enable using redrive within Datadog, configure an [AWS Connection][13] with [
 [8]: /serverless/step_functions/enhanced-metrics
 [9]: /integrations/amazon_step_functions
 [10]: /serverless/aws_lambda/installation
-[11]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
-[12]: https://app.datadoghq.com/functions?cloud=aws&entity_view=step_functions
-[13]: https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html
-[14]: /service_management/app_builder/
+[11]: /serverless/step_functions/link-with-lambda-traces
