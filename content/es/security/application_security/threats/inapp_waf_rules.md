@@ -56,8 +56,6 @@ Una entrada representa a qué parte de la solicitud se aplica el operador. Las s
 
 ## Reglas WAF dentro de la aplicación personalizadas
 
-   <div class="alert alert-info">Las reglas WAF dentro de la aplicación personalizadas están en fase beta.</div>
-
 Las reglas WAF dentro de la aplicación personalizadas permiten a los usuarios loguear o bloquear tipos específicos de solicitudes a sus aplicaciones. Por ejemplo, puedes utilizar reglas personalizadas para monitorizar si el inicio de sesión es correcto o incorrecto. Para empezar, ve a **Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4]  (Seguridad -> Seguridad de la aplicación -> Protección -> WAF dentro de la aplicación -> Reglas personalizadas).
 
 **Nota:** Las reglas por defecto en la aplicación WAF son de sólo lectura. Para refinar el comportamiento de su WAF dentro de la aplicación, modifica las reglas del WAF dentro de la aplicación. Las reglas predeterminadas no pueden modificarse, sin embargo, puedes crear una regla personalizada basada en una de las reglas predeterminadas y modificar las condiciones de coincidencia según tus necesidades. Asegúrate de desactivar la regla predeterminada para no tener dos reglas similares evaluando las mismas solicitudes.
