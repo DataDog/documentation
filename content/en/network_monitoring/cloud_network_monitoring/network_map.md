@@ -3,17 +3,18 @@ title: Network Map
 description: Map your Network data across all your tags.
 aliases:
     - /network_performance_monitoring/network_map/
+    - /network_monitoring/performance/network_map
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
-      text: 'Network Performance Monitoring'
+      text: 'Cloud Network Monitoring'
     - link: 'https://www.datadoghq.com/blog/datadog-npm-search-map-updates/'
       tag: 'Blog'
       text: 'Streamline network investigations with an enhanced querying and map experience'
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
-    - link: '/network_monitoring/performance/setup'
+    - link: '/network_monitoring/cloud_network_monitoring/setup'
       tag: 'Documentation'
       text: 'Collect your Network Data with the Datadog Agent.'
 ---

@@ -469,7 +469,7 @@ Datadog monitors every aspect of your Istio environment, so you can:
 - View individual distributed traces for applications transacting over the mesh with APM (see below).
 - Assess the health of Envoy and the Istio control plane with [logs][1].
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1].
-- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
+- Map network communication between containers, pods, and services over the mesh with [Cloud Network Monitoring][2].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
