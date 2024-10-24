@@ -1,5 +1,5 @@
 ---
-title: Intelligent Test Runner for .NET
+title: Test Impact Analysis for .NET
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 0
@@ -18,17 +18,17 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is only supported on `dd-trace>= 2.22.0` (execute `dd-trace --version` to get the version of the tool).
+Test Impact Analysis is only supported on `dd-trace>= 2.22.0` (execute `dd-trace --version` to get the version of the tool).
 
 ## Setup
 
 ### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Optimization for .NET][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Test Impact Analysis, set up [Test Optimization for .NET][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Intelligent Test Runner enabled
+## Run tests with the Test Impact Analysis enabled
 
 After completing setup, run your tests as you normally do by using [dotnet test][2] or [VSTest.Console.exe][3]:
 
@@ -56,17 +56,17 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 ## Disable skipping for specific tests
 
-You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+You can override the Test Impact Analysis behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
-The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+The Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 - Tests that read data from text files.
 - Tests that interact with APIs outside of the code being tested (such as remote REST APIs).
-- Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
+- Designating tests as unskippable ensures that the Test Impact Analysis runs them regardless of coverage data.
 
 ### Marking tests as unskippable
 

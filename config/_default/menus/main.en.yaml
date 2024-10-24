@@ -4272,51 +4272,51 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 13
-    - name: Intelligent Test Runner
-      url: intelligent_test_runner/
+    - name: Test Impact Analysis
+      url: test_impact_analysis/
       pre: intelligent-test-runner
       parent: software_delivery_heading
-      identifier: intelligent_test_runner
+      identifier: test_impact_analysis
       weight: 40000
     - name: Setup
-      url: intelligent_test_runner/setup/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_setup
+      url: test_impact_analysis/setup/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_setup
       weight: 1
     - name: .NET
-      url: intelligent_test_runner/setup/dotnet/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_dotnet
+      url: test_impact_analysis/setup/dotnet/
+      parent: test_impact_analysis_setup
+      identifier: itest_impact_analysis_setup_dotnet
       weight: 101
     - name: JavaScript and TypeScript
-      url: intelligent_test_runner/setup/javascript/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_javascript
+      url: test_impact_analysis/setup/javascript/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_javascript
       weight: 102
     - name: Python
-      url: intelligent_test_runner/setup/python/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_python
+      url: test_impact_analysis/setup/python/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_python
       weight: 103
     - name: Swift
-      url: intelligent_test_runner/setup/swift/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_swift
+      url: test_impact_analysis/setup/swift/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_swift
       weight: 104
     - name: Java
-      url: intelligent_test_runner/setup/java/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_java
+      url: test_impact_analysis/setup/java/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_java
       weight: 105
     - name: Ruby
-      url: intelligent_test_runner/setup/ruby/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_ruby
+      url: test_impact_analysis/setup/ruby/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_ruby
       weight: 106
     - name: How It Works
-      url: intelligent_test_runner/how_it_works/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_how_it_works
+      url: test_impact_analysis/how_it_works/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_how_it_works
       weight: 2
     - name: Troubleshooting
       url: intelligent_test_runner/troubleshooting/
