@@ -79,7 +79,7 @@ The following parameters are available:
 | Perform Native Stack Mapping | No | Converts C# stacks traces to native stack traces in non-development builds. This allows for file and line mapping to C# code if symbol files are uploaded to Datadog. This is not supported if Output Symbols is disabled.
 | Client Token | Yes | Your client token created for your application on Datadog's website. |
 | Env | No | The name of the environment for your application. Defaults to `"prod"`. |
-| Service Name | No | The service name for your application. If this is not set it will be set to your application's package name or bundle name (e.g.: com.example.android). |
+| Service Name | No | The service name for your application. If this is not set, it is automatically set to your application's package name or bundle name (e.g.: com.example.android). |
 | Datadog Site | Yes | The site you send your data to. |
 | Batch Size | Yes | Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the SDK (small batches mean more requests, but each request becomes smaller in size). |
 | Upload Frequency | Yes | Sets the preferred frequency of uploading data to Datadog. |

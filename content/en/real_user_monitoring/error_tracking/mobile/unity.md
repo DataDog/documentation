@@ -3,7 +3,7 @@ description: Learn how to track Unity errors with Error Tracking.
 aliases:
 - /real_user_monitoring/error_tracking/unity
 type: multi-code-lang
-code_lang: cs
+code_lang: unity
 code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
@@ -26,7 +26,7 @@ If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup i
 
 ### Forward uncaught exceptions from Unity logs
 
-Unity forwards all uncaught exceptions to it's logger using `Debug.LogException`. To report these exceptions to Datadog, check the option in Datadog's Project Settings labeled "Forward Unity Logs".
+Unity forwards all uncaught exceptions to its logger using `Debug.LogException`. To report these exceptions to Datadog, check the option in Datadog's project settings labeled "Forward Unity Logs".
 
 ### Native crash reporting
 
@@ -40,9 +40,9 @@ Mapping files are used to deobfuscate and symbolicate stack traces, which helps 
 
 ### File and line mapping with IL2CPP
 
-When using the IL2CPP backend (the default for iOS), C# stack traces from Unity lack any file or line information. This information can be retrieved from the Native Symbol files and an IL2CPP mapping file, provided the C# stack traces are mapped to native stacks. To enable this, check the "Perform Native Stack Mapping" option in your Unity Project Settings under the Datadog section and upload your symbol and IL2CPP mapping files as described below.
+When using the IL2CPP backend (the default for iOS), C# stack traces from Unity lack any file or line information. This information can be retrieved from the native symbol files and an IL2CPP mapping file, provided the C# stack traces are mapped to native stacks. To enable this, check the "Perform Native Stack Mapping" option in your Unity project settings under the Datadog section and upload your symbol and IL2CPP mapping files as described below.
 
-Note that, even when checked, Native Stack Mapping is only enabled in non-development builds.
+**Note**: Even when checked, Native Stack Mapping is only enabled in non-development builds.
 
 ### Upload symbol files to Datadog
 
@@ -58,7 +58,7 @@ First, install the `datadog-ci` tool from the instructions above and create a `d
 }
 ```
 
-Because this file contains your API key, it should not be checked in to version control.
+Because this file contains your API key, it should not be checked into version control.
 
 Alternately, you can set the `DATADOG_API_KEY` and `DATADOG_SITE` environment variables.
 
@@ -68,7 +68,7 @@ Then, you can use the following command to upload all the necessary files for sy
 datadog-ci unity-symbols upload --ios
 ```
 
-For Android, export an Android project (instead of building the apk directly) and build using the exported project. You can then run datadog-ci from the exported project directory:
+For Android, export an Android project (instead of building the APK directly) and build using the exported project. You can then run datadog-ci from the exported project directory:
 ```sh
 # From your exported project directory
 datadog-ci unity-symbols upload --android
@@ -95,7 +95,7 @@ Source maps and dSYM files are limited to **500** MB each.
 
 To verify your Unity Crash Reporting and Error Tracking configuration, issue an error in your application and confirm that the error appears in Datadog.
 
-1. Ensure you are not running a development build. Uncheck the "Development Build" box in Unity's Build Settings
+1. Ensure you are not running a development build. Uncheck the "Development Build" box in Unity's build settings.
 2. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
 3. Execute code containing an error or crash. For example:
 
@@ -114,6 +114,6 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/unity-symbols

@@ -1,7 +1,7 @@
 ---
 title: RUM Unity Data Collected
 description: Learn about the data collected by Unity Monitoring.
-code_lang: cs
+code_lang: unity
 type: multi-code-lang
 code_lang_weight: 30
 aliases:

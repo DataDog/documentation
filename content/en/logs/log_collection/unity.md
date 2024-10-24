@@ -32,7 +32,7 @@ logger.Warn("An important warning…");
 logger.Error("An error was met!");
 ```
 
-If you set the "Forward Unity Logs" option, logs sent to Unity using Unity's `Debug.Log*` methods will automatically be sent to `DatadogSdk.Instance.DefaultLogger`.
+If you set the "Forward Unity Logs" option, logs sent to Unity using Unity's `Debug.Log*` methods are automatically sent to `DatadogSdk.Instance.DefaultLogger`.
 
 You can create additional loggers with different services and names using the `CreateLogger` method as well:
 
