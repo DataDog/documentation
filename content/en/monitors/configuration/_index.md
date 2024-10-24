@@ -10,7 +10,7 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Monitor Status"
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"

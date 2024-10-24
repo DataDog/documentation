@@ -228,8 +228,8 @@
   "UpsertCatalogEntity": {
     "description": "Create or update entities in Software Catalog.",
     "summary": "Create or update entities",
-    "request_description": "Entity YAML/JSON.",
-    "request_schema_description": "Create / Update entity request."
+    "request_description": "Entity YAML or JSON.",
+    "request_schema_description": "Create or update entity request."
   },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
@@ -567,33 +567,29 @@
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
     "summary": "Get channel information by name"
   },
-  "ListApiHandles": {
-    "description": "Get a list of all handles from the Datadog Microsoft Teams integration.",
-    "summary": "Get all handles"
+  "ListTenantBasedHandles": {
+    "description": "Get a list of all tenant-based handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all tenant-based handles"
   },
-  "CreateApiHandle": {
-    "description": "Create a handle in the Datadog Microsoft Teams integration.",
-    "summary": "Create handle",
-    "request_description": "Handle payload.",
-    "request_schema_description": "Create handle request."
+  "CreateTenantBasedHandle": {
+    "description": "Create a tenant-based handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Create tenant-based handle request."
   },
-  "GetApiHandleByName": {
-    "description": "Get the tenant, team, and channel information of a handle by name from the Datadog Microsoft Teams integration.",
-    "summary": "Get handle information by name"
+  "DeleteTenantBasedHandle": {
+    "description": "Delete a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete tenant-based handle"
   },
-  "DeleteApiHandle": {
-    "description": "Delete a handle from the Datadog Microsoft Teams integration.",
-    "summary": "Delete handle"
+  "GetTenantBasedHandle": {
+    "description": "Get the tenant, team, and channel information of a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get tenant-based handle information"
   },
-  "GetApiHandle": {
-    "description": "Get the tenant, team, and channel information of a handle from the Datadog Microsoft Teams integration.",
-    "summary": "Get handle information"
-  },
-  "UpdateApiHandle": {
-    "description": "Update a handle from the Datadog Microsoft Teams integration.",
-    "summary": "Update handle",
-    "request_description": "Opsgenie service payload.",
-    "request_schema_description": "Update handle request."
+  "UpdateTenantBasedHandle": {
+    "description": "Update a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Update tenant-based handle request."
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -962,7 +958,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name.",
+    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {

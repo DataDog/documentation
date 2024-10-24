@@ -7,10 +7,6 @@ further_reading:
   text: "Calculated Fields"
 ---
 
-{{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
-<a href="https://docs.datadoghq.com/logs/explorer/calculated_fields/">Calculated Fields</a> is in beta. Have feedback or a feature request? <a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">Let us know</a>.
-{{< /beta-callout >}}
-
 ## Basic syntax and language constructs
 
 | Construct                                                                                          | Syntax and Notation                                                    |
@@ -40,11 +36,10 @@ The available operators in order of precedence:
 
 ## Functions
 
-{{< whatsnext desc="The available functions are categorized as follows:" >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#arithmetic" >}}Arithmetic{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#string" >}}String{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#logical" >}}Logical{{< /nextlink >}}
-{{< /whatsnext >}}
+The available functions are categorized as follows:
+- [Arithmetic](#arithmetic)
+- [String](#string)
+- [Logical](#logical)
 
 ### Arithmetic
 

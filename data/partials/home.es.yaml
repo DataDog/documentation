@@ -1,10 +1,10 @@
 guides:
-- desc: Recopila eventos y métricas de los hosts que enviaban datos a Datadog.
+- desc: Recopila eventos y métricas de los hosts que envían datos a Datadog.
   link: getting_started/agent/
   link_text: Empezando con el Agent
   title: Instalar el Agent
-- desc: Reúne métricas, trazas (trazas (traces)) y Logs con más de 750 integraciones
-    incorporadas para enviar a Datadog.
+- desc: Reúne métricas, trazas (traces) y logs con más de 800 integraciones incorporadas
+    para enviar a Datadog.
   link: getting_started/integrations/
   link_text: Empezando con las integraciones
   title: Configurar integraciones
@@ -26,19 +26,18 @@ nav_sections:
       icon: integrations
       link: integrations/
       title: Integraciones
-    - desc: Canaliza tus métricas, Logs y trazas (trazas (traces)) de OpenTelemetry
-        a Datadog
+    - desc: Canalizar tus métricas, logs y trazas (traces) de OpenTelemetry a Datadog
       icon: open-telemetry
       link: opentelemetry/
       title: OpenTelemetry
-    - desc: Visualiza, analiza y genera información clave sobre tus datos
+    - desc: Visualizar, analizar y generar información clave sobre tus datos
       icon: dashboard
       link: dashboards/
       title: Dashboards
     - desc: Crear, editar y gestionar tus monitores y notificaciones
       icon: monitor
       link: monitors/
-      title: Controlar y alertar
+      title: Monitors y alertar
     - desc: Detectar y mostrar anomalías de la aplicación e infraestructura
       icon: watchdog
       link: watchdog/
@@ -47,7 +46,7 @@ nav_sections:
       icon: mobile
       link: mobile/
       title: Aplicación móvil
-    - desc: Identificar, analizar y mitigar incidentes perturbadores en su organización
+    - desc: Identificar, analizar y mitigar incidentes perturbadores en tu organización
       icon: incidents
       link: service_management/incident_management
       title: Gestión de incidentes
@@ -55,7 +54,7 @@ nav_sections:
       icon: events
       link: events/
       title: Eventos
-    - desc: Automatice y ordene procesos en toda su pila tecnológica
+    - desc: Automatizar y orquestar procesos en todo tu stack tecnológico
       icon: workflows
       link: workflows
       title: Automatización de flujos de trabajo
@@ -76,7 +75,7 @@ nav_sections:
       link: network_monitoring/
       title: Monitorización de red
     - desc: Controla tu gasto en la nube con datos unificados sobre observabilidad
-        y costes
+        y costos
       icon: cloud-cost-management
       link: cloud_cost_management/
       title: Gestión de costos en la nube
@@ -101,7 +100,7 @@ nav_sections:
       icon: data-jobs-monitoring
       link: data_jobs/
       title: Monitorización de trabajos de datos
-    - desc: Descubrir, asignar y supervisar servicios sin cambiar el código
+    - desc: Descubrir, asignar y monitorizar servicios sin cambiar el código
       icon: usm
       link: universal_service_monitoring/
       title: Universal Service Monitoring
@@ -109,7 +108,7 @@ nav_sections:
         el rendimiento de aplicaciones
       icon: synthetics
       link: synthetics/
-      title: Monitorización Sintético
+      title: Monitorización Synthetic
     - desc: Identificar los errores críticos y acelerar la resolución en la web, los
         dispositivos móviles y el backend.
       icon: error-tracking
@@ -129,36 +128,36 @@ nav_sections:
       icon: mobile
       link: mobile_app_testing/
       title: Test de aplicaciones móviles
-    - desc: Hacer pruebas de un extremo a otro y de integración sin código con proveedores
+    - desc: Hacer tests de un extremo a otro y de integración sin código con proveedores
         de CI/CD
       icon: continuous-testing
       link: continuous_testing/
-      title: Pruebas continuas
-    - desc: Monitor del mantenimiento y el rendimiento de sus tuberías de CI
+      title: Tests continuos
+    - desc: Monitor del mantenimiento y el rendimiento de tus pipelines de CI
       icon: ci
       link: continuous_integration/
       title: CI Visibility
-    - desc: Detectar pruebas defectuosas e identificar confirmaciones que introducen
-        pruebas defectuosas
+    - desc: Detectar tests defectuosos e identificar confirmaciones que introduzcan
+        tests defectuosos
       icon: ci
       link: tests/
-      title: Visibilidad de las pruebas
+      title: Visibility de tests
     - desc: Detectar amenazas, vulnerabilidades y errores de configuración
       icon: security-platform
       link: security/
       title: Seguridad
     - desc: Explorar, buscar y crear distribuciones para tus métricas
-      icon: metrica
+      icon: metric
       link: metrics/
       title: Métricas
-    - desc: Procesar, monitorizar y archivar tus Logs ingeridos
+    - desc: Procesar, monitorizar y archivar tus logs ingeridos
       icon: log
       link: logs/
-      title: Gestión de Logs
+      title: Gestión de logs
     - desc: Gestionar y monitorizar tus pipelines de telemetría
       icon: pipelines
       link: observability_pipelines/
-      title: Tuberías de observabilidad
+      title: Pipelines de observabilidad
     - desc: Rastrear, monitorizar y asegurar tus solicitudes de LLM
       icon: llm-observability
       link: llm_observability/
@@ -174,7 +173,7 @@ nav_sections:
       icon: cog-2
       link: account_management/
       title: Gestión de cuentas
-    - desc: Descubra cómo Datadog protege sus datos
+    - desc: Descubrir cómo Datadog protege tus datos
       icon: security-lock
       link: data_security/
       title: Seguridad de los datos

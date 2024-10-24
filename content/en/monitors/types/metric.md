@@ -12,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "/monitors/types/change-alert"
