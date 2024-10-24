@@ -1,5 +1,4 @@
 {{- $hugo_context := .context -}}
-{{- $rank := .rank -}}
 {{- $page := $hugo_context.Site.GetPage "/standard-attributes/" -}}
 
 {{- range $attr := $page.Params.attributes -}}
