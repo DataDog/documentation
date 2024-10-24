@@ -40,7 +40,7 @@ By default, existing users are associated with one of the three managed roles:
 
 All users with one of these roles can read all data types, except for [individually read-restricted][1] resources. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
 
-Managed roles are created and maintained by Datadog. Their permissions may be automatically updated by Datadog as new features are added or permissions change. Users cannot modify managed roles directly, but they can clone them to create [custom roles][4] with specific permissions. If necessary, users can delete managed roles from their account.
+Managed roles are created and maintained by Datadog. Their permissions may be automatically updated by Datadog as new features are added or permissions change. Users cannot modify managed roles directly, but they can clone them to create [custom roles](#custom-roles) with specific permissions. If necessary, users can delete managed roles from their account.
 
 ### Custom roles
 
