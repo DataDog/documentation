@@ -99,10 +99,10 @@ Next, configure the Go application to enable tracing. Because the Agent runs in 
 To enable tracing support, uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 In the `main()` function, uncomment the following lines:
@@ -253,9 +253,9 @@ Datadog has several fully supported libraries for Go that allow for automatic tr
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -300,7 +300,7 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 Also remove the comment around the following import:
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 There are several examples of custom tracing in the sample application. Here are a couple more examples. Remove the comments to enable these spans:
@@ -347,8 +347,8 @@ To enable tracing in the calendar application:
 
 1. Uncomment the following lines in `cmd/calendar/main.go`:
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}

@@ -98,10 +98,10 @@ git clone https://github.com/DataDog/apm-tutorial-golang.git
 추적 지원을 활성화하려면 `apm-tutorial-golang/cmd/notes/main.go`의 가져오기에서 주석을 제거합니다.
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 `main()` 함수에서 다음 줄의 주석을 제거합니다.
@@ -252,9 +252,9 @@ Datadog는 코드에 구현하면 자동 추적을 허용하고 완전한 지원
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -299,7 +299,7 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 다음 가져오기에 대한 코멘트도 제거합니다.
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 샘플 애플리케이션에 커스텀 추적의 몇몇 예시가 있습니다. 여기 두어 개의 예시가 추가로 제공됩니다. 이러한 스팬을 활성화하려면 코멘트를 제거합니다.
@@ -346,8 +346,8 @@ func privateMethod1(ctx context.Context) {
 
 1. `cmd/calendar/main.go`에서 다음 줄의 주석을 제거합니다.
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}

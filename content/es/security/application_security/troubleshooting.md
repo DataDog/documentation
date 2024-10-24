@@ -199,11 +199,11 @@ Los siguientes frameworks Go deben ser instrumentados utilizando el out-of-the-b
 
 Si tu marco no es compatible, [crea una nueva incidencia][7] en el repositorio Go.
 
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc#example-package-Server/v2
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http#example-package/v2
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux#example-package/v2
+[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4#example-package/v2
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi.v5#example-package/v2
 [7]: https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}

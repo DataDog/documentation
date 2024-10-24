@@ -121,7 +121,7 @@ Go トレーサーパッケージは `SetUser()` 関数を提供し、トレー�
 この例では、現在のトレーサースパンを取得し、それを使用してユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を説明します。
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // 早急にリクエストハンドラーを中止して、ユーザーをブロックする必要があります。
@@ -131,7 +131,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -465,7 +465,7 @@ dd-trace-go v1.47.0 からは、Go トレーサーの API を使用してユー�
 {{< tabs >}}
 {{% tab "ログイン成功" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
@@ -482,7 +482,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "ログイン失敗" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
@@ -495,7 +495,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% tab "カスタムビジネスロジック" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "my-uid"}

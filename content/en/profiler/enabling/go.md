@@ -38,7 +38,7 @@ To begin profiling applications:
 2. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    go get github.com/DataDog/dd-trace-go/v2/profiler
     ```
 
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
@@ -46,7 +46,7 @@ To begin profiling applications:
 3. Import the [profiler][6] at the start of your application:
 
     ```Go
-    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    import "github.com/DataDog/dd-trace-go/v2/profiler"
     ```
 
 4. Add the following snippet to start the profiler:
@@ -143,13 +143,13 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [3]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#pkg-constants
 [7]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
 [8]: /profiler/connect_traces_and_profiles/#prerequisites
 [9]: /integrations/guide/source-code-integration/?tab=go
 [10]: https://app.datadoghq.com/profiling
-[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
-[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
+[11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType
 [13]: /getting_started/tagging/unified_service_tagging
 [14]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [15]: https://tip.golang.org/doc/go1.21

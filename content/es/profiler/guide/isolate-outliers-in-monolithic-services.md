@@ -122,7 +122,7 @@ profiler.Start(
 A continuación, abre los perfiles de CPU o goroutine para tu servicio y selecciona el valor `customer_name` que te interese en el menú desplegable `CPU time by`.
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithCustomProfilerLabelKeys
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

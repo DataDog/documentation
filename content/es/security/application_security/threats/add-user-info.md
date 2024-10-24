@@ -122,7 +122,7 @@ El paquete de rastreadores de Go ofrece la función de `SetUser()`, que te permi
 En este ejemplo se muestra cómo recuperar el tramo del rastreador actual, utilizarlo para configurar las etiquetas de monitorización de usuarios y habilitar la capacidad de bloqueo de estos:
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // Se debe bloquear a los usuarios anulando el controlador de solicitudes tan pronto como sea posible.
@@ -132,7 +132,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -466,7 +466,7 @@ En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de se
 {{< tabs >}}
 {{% tab "Inicio de sesión correcto" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
@@ -483,7 +483,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Inicio de sesión fallido" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* si el ID de usuario dado existe o no */
@@ -496,7 +496,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% tab "Lógica empresarial personalizada" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "github.com/DataDog/dd-trace-go/v2/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "my-uid"}
