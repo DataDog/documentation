@@ -50,7 +50,7 @@ In addition to the five default fields and the fields based on metric tags, you 
 
 Single-Select, Multi-Select, and Number custom fields are searchable facets in the [Incident Homepage][2] and [Incident Management Analytics][3] for easy filtering of incidents. Number fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][7] and [Notebooks][8].
 
-[1]: /service_management/incident_management/incident_details/#overview-section
+[1]: /service_management/incident_management/investigate#overview-tab
 [2]: https://app.datadoghq.com/incidents
 [3]: /service_management/incident_management/analytics
 [4]: /tracing/
