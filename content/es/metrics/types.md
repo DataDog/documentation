@@ -99,11 +99,11 @@ Si envías valores `X` para una métrica HISTOGRAM `<METRIC_NAME>` en un interva
 **Tipo dentro de la aplicación de Datadog**: RATE
 
 `<METRIC_NAME>.median`
-: Representa la mediana de los valores de `X` en el intervalo de tiempo.<br>
+: Representa la mediana de los valores `X` en un intervalo de tiempo.<br>
 **Tipo dentro de la aplicación de Datadog**: GAUGE
 
 `<METRIC_NAME>.95percentile` 
-: Representa el percentil 95 de esos valores `X` en el intervalo de tiempo.<br>
+: Representa el percentil 95 de esos valores `X` en un intervalo de tiempo.<br>
 **Tipo dentro de la aplicación de Datadog**: GAUGE
 
 `<METRIC_NAME>.max`
@@ -128,10 +128,10 @@ A diferencia del tipo de métrica HISTOGRAM, que agrega en el Agent durante un i
 - Cálculo de agregaciones de percentiles
 - Personalización del etiquetado
 
-Si envías valores de `X` para una métrica DISTRIBUTION `<METRIC_NAME>` en un intervalo de tiempo determinado, las siguientes agregaciones están disponibles para consultas por defecto:
+Si envías valores `X` para una métrica DISTRIBUTION `<METRIC_NAME>` en un intervalo de tiempo determinado, las siguientes agregaciones están disponibles para consultas por defecto:
 
 `avg:<METRIC_NAME>`
-: Representa la media de los valores de `X` en el intervalo de tiempo.<br>
+: Representa la media de los valores `X` en el intervalo de tiempo.<br>
 **Tipo dentro de la aplicación Datadog**: GAUGE
 
 `count:<METRIC_NAME>`
