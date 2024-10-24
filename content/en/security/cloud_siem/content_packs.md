@@ -13,7 +13,7 @@ further_reading:
   text: "Investigate security signals"
 - link: "https://www.datadoghq.com/blog/cloud-siem-content-packs-whats-new-2024-09/"
   tag: "Blog"
-  text: "What’s new in Cloud SIEM Content Packs: September 2024"
+  text: "What's new in Cloud SIEM Content Packs: September 2024"
 ---
 
 ## Overview
@@ -28,6 +28,7 @@ further_reading:
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}<u>Cloud Audit</u>: AWS CloudTrail, Azure Security, GCP Audit Logs, Kubernetes Audit Logs{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs/#cloud-security" >}}<u>Cloud Security</u>: Google Security Command Center, Wiz{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, Cisco DUO, JumpCloud, Okta{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365, Slack Audit Logs{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare, Cisco Meraki, Cisco Umbrella, Palo Alto Networks Firewall{{< /nextlink >}}
@@ -74,6 +75,23 @@ Gain coverage by monitoring audit logs in your Kubernetes control plane.
 
 The [Kubernetes Audit Logs Content Pack][11] includes:
 - [Detection Rules][12]
+- An interactive dashboard
+
+## Cloud Security
+
+### Google Security Command Center
+
+Track and analyze Google Security Command Center findings.
+
+The [Google Security Command Center Content Pack][46] includes:
+- [Detection Rules][47]
+- An interactive dashboard
+
+### Wiz
+
+View and monitor Wiz audit logs and issues, including toxic combinations.
+
+The [Wix Content Pack][48] includes:
 - An interactive dashboard
 
 ## Authentication Content Packs
@@ -258,3 +276,6 @@ The [CrowdStrike Content Pack][29] includes:
 [43]: https://docs.datadoghq.com/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [44]: https://docs.datadoghq.com/security/cloud_siem/guide/azure-config-guide-for-cloud-siem
 [45]: https://docs.datadoghq.com/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
+[46]: https://app.datadoghq.com/security/content-packs/google-security-command-center
+[47]: /security/default_rules/#googlesecuritycommandcenter
+[48]: https://app.datadoghq.com/security/content-packs/wiz
