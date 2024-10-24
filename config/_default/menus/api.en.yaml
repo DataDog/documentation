@@ -5791,6 +5791,71 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Update an incident type
+      url: '#update-an-incident-type'
+      identifier: incidents-update-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentType
+        unstable:
+          - v2
+        order: 22
+    - name: Get incident type details
+      url: '#get-incident-type-details'
+      identifier: incidents-get-incident-type-details
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentType
+        unstable:
+          - v2
+        order: 21
+    - name: Delete an incident type
+      url: '#delete-an-incident-type'
+      identifier: incidents-delete-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentType
+        unstable:
+          - v2
+        order: 23
+    - name: Create an incident type
+      url: '#create-an-incident-type'
+      identifier: incidents-create-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentType
+        unstable:
+          - v2
+        order: 19
+    - name: Get a list of incident types
+      url: '#get-a-list-of-incident-types'
+      identifier: incidents-get-a-list-of-incident-types
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentTypes
+        unstable:
+          - v2
+        order: 20
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
