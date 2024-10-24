@@ -87,12 +87,12 @@ The severity of the incident in the DORA Metrics product is based on the [incide
 
 ### Mapping PagerDuty services to Datadog services
 
-When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from any relevant [Datadog monitors][108] and from the [Service Catalog][102].
+When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][107] and from the [Service Catalog][102].
 
 The matching algorithm works in the following steps:
 
-1. If the PagerDuty incident event was [triggered from a monitor][107]:
-   - If the monitor is in [Multi Alert mode][109], the incident metrics and events are emmitted with the `env`, `service`, and `team` from the alerted group.
+1. If the PagerDuty incident event was [triggered from a Datadog monitor][107]:
+   - If the monitor is in [Multi Alert mode][109], the incident metrics and events are emitted with the `env`, `service`, and `team` from the alerted group.
    - If the monitor has [tags][110] for `env`, `service`, or `team`:
      - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
      - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
@@ -115,7 +115,6 @@ The matching algorithm works in the following steps:
 [105]: https://app.datadoghq.com/organization-settings/api-keys
 [106]: https://support.pagerduty.com/main/docs/incident-priority
 [107]: /integrations/pagerduty/#troubleshooting
-[108]: /monitors/
 [109]: /monitors/configuration/#multi-alert
 [110]: /monitors/manage/#monitor-tags
 
