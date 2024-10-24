@@ -35,7 +35,7 @@ Ensure [Test Visibility][1] is configured for your test runs.
 {{< tabs >}}
 
 {{% tab "Java" %}}
-After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][4].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -50,7 +50,7 @@ This behavior can be fine-tuned with the following environment variables:
 {{% /tab %}}
 
 {{% tab "Javascript" %}}
-After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][4].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -70,7 +70,7 @@ This behavior can be fine-tuned with the following environment variables:
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][4].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -86,7 +86,7 @@ This behavior can be fine-tuned with the following environment variables:
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][4].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
 
