@@ -128,3 +128,4 @@ A continuación, [configura reglas de detección para crear señales de segurida
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /es/security/application_security/threats/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+
