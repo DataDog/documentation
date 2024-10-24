@@ -155,7 +155,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
 
-#### Add keywords to the keyword dictionary
+#### Add additional keywords
 
 After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
