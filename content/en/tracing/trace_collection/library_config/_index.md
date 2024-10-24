@@ -22,7 +22,7 @@ The following configuration options are supported across all Datadog SDKs:
 : **Default**: `true` <br>
 **Supported Values**: Boolean <br>
 **Not Supported In**: Go SDK<br>
-**Description**: Enable or disable instrumentation for the specified `<INTEGRATION>`.
+**Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`.
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
