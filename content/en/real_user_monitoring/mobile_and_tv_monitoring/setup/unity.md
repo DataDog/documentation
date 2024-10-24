@@ -23,9 +23,9 @@ further_reading:
 ---
 ## Overview
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in public beta.
-{{< /beta-callout >}}
+{{< callout url="#" btn_hidden="true" header="false">}}
+Unity Monitoring is in Preview.
+{{< /callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
 
