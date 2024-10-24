@@ -126,6 +126,7 @@ To install the .NET Tracer in chiseled or distroless Docker images (without a sh
 For example, in your Dockerfile:
 
 ```dockerfile
+# Ensure datadog-dotnet-apm-<TRACER_VERSION>.tar.gz is in your build context
 ADD datadog-dotnet-apm-<TRACER_VERSION>.tar.gz /opt/datadog/
 COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
 ```
