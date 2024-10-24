@@ -377,8 +377,10 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer _and_ as a JavaScript package. If you're using the Datadog Lambda Layer (recommended), do not include `datadog-lambda-js` in your `package.json`, or install it as a dev dependency and run `npm install --production` before deploying.</div>
+
 ## Minimize Cold Start Duration (Beta)
-Starting with version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next`. 
+Starting with version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next`.
 
 ## What's next?
 
