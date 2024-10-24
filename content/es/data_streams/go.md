@@ -21,7 +21,7 @@ Existen dos tipos de instrumentación:
 
 ```ir
 importar (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+  ddkafka "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2"
 )
 
 ...
@@ -47,7 +47,7 @@ Si un servicio consume datos de un punto y produce a otro punto, propague el con
 
 ```ir
 importar (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2"
 )
 
 ...

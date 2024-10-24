@@ -100,10 +100,10 @@ Configurez ensuite l'application Go pour activer le traçage. Comme l'Agent s'ex
 Pour activer la prise en charge du traçage, supprimez la mise en commentaire l-des importations suivantes dans `apm-tutorial-golang/cmd/notes/main.go`  :
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 Dans la fonction `main()`, supprimez la mise en commentaire des lignes suivantes :
@@ -254,9 +254,9 @@ Datadog propose plusieurs bibliothèques entièrement compatibles pour Go qui pe
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -301,7 +301,7 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 Supprimez également le commentaire autour de l'importation suivante :
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 L'exemple d'application contient plusieurs exemples de traçage personnalisé. En voici quelques autres. Supprimez les commentaires pour activer ces spans :
@@ -348,8 +348,8 @@ Pour activer le tracing dans l'application de calendrier :
 
 1. Supprimez la mise en commentaire des lignes suivantes dans `cmd/calendar/main.go` :
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
