@@ -342,7 +342,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 ## Google Cloud Run
 
-<div class="alert alert-info">ASM support for Google Cloud Run is in beta.</a></div>
+<div class="alert alert-info">ASM support for Google Cloud Run is in Preview.</a></div>
 
 ### How `serverless-init` works
 
