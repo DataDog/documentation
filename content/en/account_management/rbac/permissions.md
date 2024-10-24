@@ -66,4 +66,3 @@ Each managed role inherits all of the permissions from the less powerful roles. 
 [1]: /account_management/rbac/granular_access
 [2]: /account_management/users/#edit-a-user-s-roles
 [3]: /api/latest/roles/#list-permissions
-[4]: #custom-roles
