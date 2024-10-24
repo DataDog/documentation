@@ -60,8 +60,6 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
          enabled: true
          mutateUnlabelled: false
      global:
-       tags:
-         - 'data_workload_monitoring_trial:true'
        site: <DATADOG_SITE>
        credentials:
          apiSecret:
@@ -74,9 +72,6 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        nodeAgent:
          image:
            tag: <DATADOG_AGENT_VERSION>
-         env:
-           - name: DD_DJM_CONFIG_ENABLED
-             value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
@@ -109,11 +104,6 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
      apm:
        portEnabled: true
        port: 8126
-     tags:
-       - 'data_workload_monitoring_trial:true'
-     env:
-       - name: DD_DJM_CONFIG_ENABLED
-         value: "true"
 
    agents:
      image:
