@@ -28,7 +28,7 @@ further_reading:
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}<u>Cloud Audit</u>: AWS CloudTrail, Azure Security, GCP Audit Logs, Kubernetes Audit Logs{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs/#cloud-security" >}}<u>Cloud Security</u>: Google Security Command Center, Wiz{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs/#cloud-security-content-packs" >}}<u>Cloud Security</u>: Google Security Command Center, Wiz{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, Cisco DUO, JumpCloud, Okta{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365, Slack Audit Logs{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare, Cisco Meraki, Cisco Umbrella, Palo Alto Networks Firewall{{< /nextlink >}}
@@ -77,7 +77,7 @@ The [Kubernetes Audit Logs Content Pack][11] includes:
 - [Detection Rules][12]
 - An interactive dashboard
 
-## Cloud Security
+## Cloud Security Content Packs
 
 ### Google Security Command Center
 
