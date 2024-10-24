@@ -29,7 +29,7 @@ Add keywords to the keyword dictionary to refine detection accuracy for matching
 To make matches more precise, you can also do one of the following:
 
 - Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like names, you might want to exclude attributes such as `resource_name` and `namespace`.
-- Scan for specific attributes to limit the scope of the data that is scanned. For example, if you are scanning for names, you can specify scanning attributes such as `first_name` and `last_name`.
+- Scan for specific attributes to limit the scope of the data that is scanned. For example, if you are scanning for names, you can choose specific attributes such as `first_name` and `last_name`.
 
 See step 3 in [Add a custom scanning rule][2] for more information.
 
