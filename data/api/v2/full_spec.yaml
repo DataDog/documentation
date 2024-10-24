@@ -22100,11 +22100,15 @@ components:
           format: int64
           type: integer
         has_highlight_enabled:
-          description: Whether or not scanned events are highlighted in Logs or RUM
-            for the org.
+          default: true
+          deprecated: true
+          description: (Deprecated) Whether or not scanned events are highlighted
+            in Logs or RUM for the org.
           type: boolean
         has_multi_pass_enabled:
-          description: Whether or not scanned events have multi-pass enabled.
+          deprecated: true
+          description: (Deprecated) Whether or not scanned events have multi-pass
+            enabled.
           type: boolean
         is_pci_compliant:
           description: Whether or not the org is compliant to the payment card industry
