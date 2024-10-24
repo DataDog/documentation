@@ -15,7 +15,9 @@
             {{ $title := $page.Params.integration_title | default $page.Title }}
             {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
-            {{ $rank := $page.Params.algolia.rank | default 70 }}
+            {{- /* prioritize top level sections e.g /logs/ to be 80 vs /logs/*/ -}}
+            {{ $defaultRank := cond (eq $page.CurrentSection $page.FirstSection) 80 70 }}
+            {{ $rank := $page.Params.algolia.rank | default $defaultRank }}
             {{ $category := $page.Params.algolia.category | default "Documentation" }}
             {{ $subcategory := $page.Params.algolia.subcategory }}
 
