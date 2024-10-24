@@ -6,7 +6,7 @@ observability_pipelines_worker:
     url: "http://<OPW_HOST>:8282"
 ```
 
-`<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
+`<OPW_HOST>` is the host IP address or the load balancer URL associated with the Observability Pipelines Worker. The host IP address is always local host because the Worker is installed on the host.
 
 For CloudFormation installs, use the `LoadBalancerDNS` CloudFormation output for the URL.
 
