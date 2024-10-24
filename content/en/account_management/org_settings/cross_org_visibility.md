@@ -3,7 +3,7 @@ title: Cross-Organization Visibility
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  Cross-organization visibility is in beta.
+  Cross-organization visibility is in Preview.
 {{< /callout >}} 
 
 
