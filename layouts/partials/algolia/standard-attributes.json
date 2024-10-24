@@ -8,8 +8,8 @@
         dict "objectID" $object_id
         "id" $object_id
         "title" "Default Standard Attributes"
-        "section_header" ""
-        "content" (print $attr.name " " $attr.description)
+        "section_header" $attr.name
+        "content" $attr.description
         "type" $page.Type
         "relpermalink" $page.RelPermalink
         "distinct_base_url" $page.RelPermalink
