@@ -5344,6 +5344,11 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
+    - name: Use cases
+      url: logs/workspaces/use_cases/
+      parent: logs_workspaces
+      identifier: logs_workspaces_use_cases
+      weight: 601
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management

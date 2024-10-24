@@ -66,6 +66,13 @@ cascade:
 
 <br>
 
+{{< whatsnext desc="Logs Workspaces Use Cases" >}}
+    {{< nextlink href="" >}}Analyze Login Attempts for e-PHI
+{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<br>
+
 {{< whatsnext desc="Sensitive Data Management" >}}
     {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
