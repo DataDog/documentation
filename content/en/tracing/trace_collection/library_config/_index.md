@@ -98,7 +98,7 @@ The following configuration options are supported across all Datadog SDKs:
 : **Default**: `true` <br>
 **Supported Values**: Boolean <br>
 **Not Supported In**: Node.js SDK<br>
-**Description**: When set to false, the query string segment of the URL is removed from the `http.url` span tag on `http.client` spans. When true (default), the query string is included in the URL.
+**Description**: Enables or disables the inclusion of the query string in the `http.url` span tag value for automatically collected HTTP spans.
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **Default**: `null` <br>
