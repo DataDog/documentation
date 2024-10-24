@@ -1,0 +1,1543 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h1",
+      "attributes": {},
+      "children": [
+        "Test document"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Anything with a YES in front of it should display normally, with no visible background color."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Anything with a NO in front of it should have a dark background (to indicate that it has been given the ",
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "markdoc__hidden"
+          ]
+        },
+        " class, and would be hidden in a real document)."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "For easier checking, each section has its YESes at the top, and NOs at the bottom."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Variable values"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "ul",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "test_string"
+              ]
+            },
+            ": ",
+            {
+              "$$mdtype": "Variable",
+              "path": [
+                "test_string"
+              ],
+              "value": "Datadog"
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "always_true"
+              ]
+            },
+            ": ",
+            {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_true"
+              ],
+              "value": true
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "always_false"
+              ]
+            },
+            ": ",
+            {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_false"
+              ],
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Dynamic variables test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "equals"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          },
+          "1": true
+        },
+        "ref": "0"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($always_true, true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "test_string"
+            ],
+            "value": "Datadog"
+          },
+          "1": "Datadog"
+        },
+        "ref": "1"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($test_string, \"Datadog\")"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_false"
+            ],
+            "value": false
+          },
+          "1": true
+        },
+        "ref": "2"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($always_false, true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "test_string"
+            ],
+            "value": "Datadog"
+          },
+          "1": "Hello"
+        },
+        "ref": "3"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($test_string, \"Hello\")"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "default"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "default",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "notDefined"
+            ]
+          },
+          "1": true
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "default($notDefined, true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "default",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          },
+          "1": false
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "default($always_true, false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "default",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "notDefined"
+            ]
+          },
+          "1": false
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "default($notDefined, false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "or"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_false"
+            ],
+            "value": false
+          }
+        },
+        "ref": "4"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or($always_true, $always_false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Hello"
+            },
+            "ref": "5"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Datadog"
+            },
+            "ref": "6"
+          }
+        },
+        "ref": "7"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "missingVarOne"
+            ]
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "missingVarTwo"
+            ]
+          }
+        },
+        "ref": "8"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or($missingVarOne, $missingVarTwo)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "and"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          }
+        },
+        "ref": "9"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and($always_true, $always_true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_false"
+            ],
+            "value": false
+          }
+        },
+        "ref": "10"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and($always_true, $always_false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Hello"
+            },
+            "ref": "11"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Datadog"
+            },
+            "ref": "12"
+          }
+        },
+        "ref": "13"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "not"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_false"
+            ],
+            "value": false
+          }
+        },
+        "ref": "14"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "not($always_false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Hello"
+            },
+            "ref": "15"
+          }
+        },
+        "ref": "16"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "not(equals($test_string, \"Hello\"))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          }
+        },
+        "ref": "17"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "not($always_true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Datadog"
+            },
+            "ref": "18"
+          }
+        },
+        "ref": "19"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "not(equals($test_string, \"Datadog\"))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Nested functions"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_false"
+                ],
+                "value": false
+              }
+            },
+            "ref": "20"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ],
+                "value": true
+              }
+            },
+            "ref": "21"
+          }
+        },
+        "ref": "22"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or(not($always_false), not($always_true))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Datadog"
+            },
+            "ref": "23"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Hello"
+            },
+            "ref": "24"
+          }
+        },
+        "ref": "25"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": true,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ],
+                    "value": false
+                  }
+                },
+                "ref": "26"
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ],
+                    "value": true
+                  }
+                },
+                "ref": "27"
+              }
+            },
+            "ref": "28"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": true,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ],
+                    "value": false
+                  }
+                },
+                "ref": "29"
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ],
+                    "value": true
+                  }
+                },
+                "ref": "30"
+              }
+            },
+            "ref": "31"
+          }
+        },
+        "ref": "32"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_false"
+                ],
+                "value": false
+              }
+            },
+            "ref": "33"
+          },
+          "1": true
+        },
+        "ref": "34"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals(not($always_false), true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_false"
+                ],
+                "value": false
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ],
+                    "value": true
+                  }
+                },
+                "ref": "35"
+              }
+            },
+            "ref": "36"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": true,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ],
+                    "value": false
+                  }
+                },
+                "ref": "37"
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ],
+                    "value": true
+                  }
+                },
+                "ref": "38"
+              }
+            },
+            "ref": "39"
+          }
+        },
+        "ref": "40"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_false"
+                ],
+                "value": false
+              }
+            },
+            "ref": "41"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ],
+                "value": true
+              }
+            },
+            "ref": "42"
+          }
+        },
+        "ref": "43"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and(not($always_false), not($always_true))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Datadog"
+            },
+            "ref": "44"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Hello"
+            },
+            "ref": "45"
+          }
+        },
+        "ref": "46"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    }
+  ]
+}

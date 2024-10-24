@@ -1,0 +1,5 @@
+major_agent_version_options:
+  - id: 7_x_x
+    default: true
+  - id: 6_x_x
+  - id: 5_x_x

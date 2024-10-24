@@ -1,0 +1,19 @@
+# This options set has too many default options
+primary_color_options:
+  - display_name: Red
+    id: red
+    default: true
+  - display_name: Yellow
+    id: yellow
+    default: true
+  - display_name: Blue
+    id: blue
+
+traffic_light_color_options:
+  - display_name: Red
+    id: red
+  - display_name: Yellow
+    id: yellow
+  - display_name: Green
+    id: green
+    default: true

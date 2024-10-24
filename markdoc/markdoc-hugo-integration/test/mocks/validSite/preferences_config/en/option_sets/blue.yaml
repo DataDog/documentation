@@ -1,0 +1,6 @@
+blue_item_options:
+  - id: ocean
+  - id: sky
+    default: true
+  - id: jeans
+  - id: blueberry

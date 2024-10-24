@@ -1,0 +1,67 @@
+.mdoc__hidden {
+    display: none;
+}
+#mdoc-selector,
+#markdoc-content.customizable {
+    visibility: hidden;
+}
+.mdoc-pref__pill {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 6px;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.mdoc-pref__pill.selected {
+    color: white;
+    background-color: #632ca6;
+    border-color: #632ca6;
+}
+.mdoc-pref__label {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.mdoc-pref__container {
+    display: inline-block;
+    margin-right: 25px;
+}
+.alert.alert-info p {
+    color: rgb(31, 92, 122);
+}
+.alert.alert-warning p {
+    color: #60451f;
+}
+.alert.alert-danger p {
+    color: #82322f;
+}
+#mdoc-content .alert p {
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+}
+#mdoc-content .alert p + p {
+    margin-top: 16px;
+}
+#mdoc-content table ul,
+#mdoc-content table p {
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+}
+#mdoc-content.customizable h1,
+#mdoc-content.customizable h2,
+#mdoc-content.customizable h3,
+#mdoc-content.customizable h4,
+#mdoc-content.customizable h5,
+#mdoc-content.customizable h6 {
+    scroll-margin-top: 95px;
+}
+span.s1 code.mdoc,
+span.s2 code.mdoc {
+    color: #c41a16;
+}

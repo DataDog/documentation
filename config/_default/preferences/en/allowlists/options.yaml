@@ -1,0 +1,341 @@
+allowed:
+- display_name: .NET
+  id: dot_net
+- display_name: Agent
+  id: agent
+- display_name: v5
+  id: agent_v5
+- display_name: v6
+  id: agent_v6
+- display_name: v7
+  id: agent_v7
+- display_name: Agentless (using an API key)
+  id: agentless_using_an_api_key
+- display_name: Amazon ECS
+  id: amazon_ecs
+- display_name: Amazon OpenSearch
+  id: amazon_opensearch
+- display_name: Android
+  id: android
+- display_name: Ansible
+  id: ansible
+- display_name: API
+  id: api
+- display_name: Authentication
+  id: auth
+- display_name: AWS
+  id: aws
+- display_name: AWS CDK
+  id: aws_cdk
+- display_name: AWS CLI
+  id: aws_cli
+- display_name: Amazon EKS
+  id: amazon_eks
+- display_name: AWS Fargate
+  id: aws_fargate
+- display_name: AWS S3
+  id: aws_s3
+- display_name: AWS SAM
+  id: aws_sam
+- display_name: Azure
+  id: azure
+- display_name: Azure AKS
+  id: azure_aks
+- display_name: Azure Storage
+  id: azure_storage
+- display_name: Bash
+  id: bash
+- display_name: Browser
+  id: browser
+- display_name: Carthage
+  id: carthage
+- display_name: CDN async
+  id: cdn_async
+- display_name: CDN sync
+  id: cdn_sync
+- display_name: Check Alert
+  id: check_alert
+- display_name: Chef
+  id: chef
+- display_name: Chronicle
+  id: chronicle
+- display_name: CloudFormation
+  id: cloudformation
+- display_name: Cluster Alert
+  id: cluster_alert
+- display_name: CocoaPods
+  id: cocoapods
+- display_name: ConfigMap
+  id: configmap
+- display_name: Configuration file
+  id: configuration_file
+- display_name: Container Image
+  id: container_image
+- display_name: Containerized
+  id: containerized
+- display_name: Containerized Agent
+  id: containerized_agent
+- display_name: Cucumber
+  id: cucumber
+- display_name: curl
+  id: curl
+- display_name: DaemonSet
+  id: daemonset
+- display_name: Datadog
+  id: datadog
+- display_name: Datadog application
+  id: datadog_application
+- display_name: Datadog Archives
+  id: datadog_archives
+- display_name: Datadog CLI
+  id: datadog_cli
+- display_name: Datadog Operator
+  id: datadog_operator
+- display_name: Debian
+  id: debian
+- display_name: Ubuntu
+  id: ubuntu
+- display_name: Dedupe
+  id: dedupe
+- display_name: Docker
+  id: docker
+- display_name: Docker CLI
+  id: docker_cli
+- display_name: Docker Compose
+  id: docker_compose
+- display_name: Dockerfile
+  id: dockerfile
+- display_name: Elasticsearch
+  id: elasticsearch
+- display_name: Flutter
+  id: flutter
+- display_name: Github Actions
+  id: github_actions
+- display_name: Go
+  id: go
+- display_name: Google
+  id: google
+- display_name: Google Cloud
+  id: google_cloud
+- display_name: Google Cloud Storage
+  id: google_cloud_storage
+- display_name: Google GKE
+  id: google_gke
+- display_name: Gradle
+  id: gradle
+- display_name: Grok Parser
+  id: grok_parser
+- display_name: Helm
+  id: helm
+- display_name: HTTP
+  id: http
+- display_name: iOS
+  id: ios
+- display_name: Java
+  id: java
+- display_name: Jenkins
+  id: jenkins
+- display_name: JSON
+  id: json
+- display_name: Kotlin
+  id: kotlin
+- display_name: Kubernetes
+  id: kubernetes
+- display_name: Linux
+  id: linux
+- display_name: Linux (APT)
+  id: linux_apt
+- display_name: Linux (RPM)
+  id: linux_rpm
+- display_name: Log4j
+  id: log4j
+- display_name: Log4j 2
+  id: log4j_2
+- display_name: Logs
+  id: logs
+- display_name: MacOS
+  id: mac_os
+- display_name: Manual
+  id: manual
+- display_name: Maven
+  id: maven
+- display_name: MongoDB
+  id: mongo_db
+- display_name: Multi-tenant
+  id: multitenant
+- display_name: MySQL
+  id: mysql
+- display_name: NLog
+  id: n_log
+- display_name: Node.js
+  id: node_js
+- display_name: Non-CDB
+  id: non_cdb
+- display_name: NPM
+  id: npm
+- display_name: NuGet
+  id: nu_get
+- display_name: Objective-C
+  id: objective_c
+- display_name: On-Premises CI Provider
+  id: on_premises_ci_provider
+- display_name: OpenSearch
+  id: open_search
+- display_name: Operator
+  id: operator
+- display_name: Oracle
+  id: oracle
+- display_name: PHP
+  id: php
+- display_name: pip
+  id: pip
+- display_name: Poetry
+  id: poetry
+- display_name: Postgres
+  id: postgres
+- display_name: Puppet
+  id: puppet
+- display_name: Python
+  id: python
+- display_name: Quota
+  id: quota
+- display_name: RATE
+  id: rate
+- display_name: RDS
+  id: rds
+- display_name: React Native
+  id: react_native
+- display_name: RedHat
+  id: redhat
+- display_name: CentOS
+  id: centos
+- display_name: SUSE
+  id: suse
+- display_name: Reduce
+  id: reduce
+- display_name: Replica Set
+  id: replica_set
+- display_name: Ruby
+  id: ruby
+- display_name: Sensitive Data Scanner
+  id: sensitive_data_scanner
+- display_name: Serilog
+  id: serilog
+- display_name: Serverless Framework
+  id: serverless_framework
+- display_name: Sharded Cluster
+  id: sharded_cluster
+- display_name: Splunk HEC
+  id: splunk_hec
+- display_name: Standalone
+  id: standalone
+- display_name: Standard
+  id: standard
+- display_name: Sumo Logic
+  id: sumo_logic
+- display_name: Swift
+  id: swift
+- display_name: Swift Package Manager (SPM)
+  id: spm
+- display_name: Syslog
+  id: syslog
+- display_name: TCP
+  id: tcp
+- display_name: Terraform
+  id: terraform
+- display_name: Terraform (AWS)
+  id: terraform_aws
+- display_name: Threshold
+  id: threshold
+- display_name: TOML
+  id: toml
+- display_name: Wget
+  id: wget
+- display_name: Windows
+  id: windows
+- display_name: Windows Host
+  id: windows_host
+- display_name: Windows PowerShell
+  id: windows_powershell
+- display_name: YAML
+  id: yaml
+- display_name: SQL Server
+  id: sql_server
+- display_name: Self-hosted
+  id: self_hosted
+- display_name: Fluent
+  id: fluent
+- display_name: HTTP Client
+  id: http_client
+- display_name: Splunk Forwarders (TCP)
+  id: splunk_forwarders
+- display_name: Sumo Logic Hosted Collector
+  id: sumo_logic_hosted_collector
+
+# Markdoc testing options
+
+# Colors
+- display_name: Red
+  id: red
+- display_name: Yellow
+  id: yellow
+- display_name: Green
+  id: green
+- display_name: Blue
+  id: blue
+
+# Blue items
+- display_name: Ocean
+  id: ocean
+- display_name: Sky
+  id: sky
+- display_name: Jeans
+  id: jeans
+- display_name: Blueberry
+  id: blueberry
+
+# Green items
+- display_name: Grass
+  id: grass
+- display_name: Emerald
+  id: emerald
+- display_name: Lime
+  id: lime
+- display_name: Frog
+  id: frog
+
+# Red items
+- display_name: Apple
+  id: apple
+- display_name: Firetruck
+  id: firetruck
+- display_name: Stop sign
+  id: stop_sign
+
+# Yellow items
+- display_name: Banana
+  id: banana
+- display_name: Sunflower
+  id: sunflower
+- display_name: Lemon
+  id: lemon
+- display_name: School bus
+  id: school_bus
+
+# Agent versions
+- id: 7_x_x
+  display_name: "7"
+- id: 6_x_x
+  display_name: "6"
+- id: 5_x_x
+  display_name: "5"
+
+# Postgres integration host options
+- id: ecs
+  display_name: "ECS"
+
+# Postgres integration version options
+- display_name: "10+"
+  id: gte_10_x_x
+- display_name: "9.6 and below"
+  id: lte_9_6_x

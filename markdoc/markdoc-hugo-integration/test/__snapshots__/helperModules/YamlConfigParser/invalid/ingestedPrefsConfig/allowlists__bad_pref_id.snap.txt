@@ -1,0 +1,1 @@
+ENOENT: no such file or directory, scandir '/allowlists__bad_pref_id/option_sets'

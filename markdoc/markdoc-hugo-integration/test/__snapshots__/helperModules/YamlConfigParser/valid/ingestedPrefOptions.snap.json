@@ -1,0 +1,108 @@
+{
+  "blue_item_options": [
+    {
+      "display_name": "Ocean",
+      "id": "ocean"
+    },
+    {
+      "display_name": "Sky",
+      "default": true,
+      "id": "sky"
+    },
+    {
+      "display_name": "Jeans",
+      "id": "jeans"
+    },
+    {
+      "display_name": "Blueberry",
+      "id": "blueberry"
+    }
+  ],
+  "traffic_light_color_options": [
+    {
+      "display_name": "Red",
+      "id": "red"
+    },
+    {
+      "display_name": "Yellow",
+      "id": "yellow"
+    },
+    {
+      "display_name": "Green",
+      "default": true,
+      "id": "green"
+    }
+  ],
+  "primary_color_options": [
+    {
+      "display_name": "Red",
+      "id": "red"
+    },
+    {
+      "display_name": "Yellow",
+      "id": "yellow"
+    },
+    {
+      "display_name": "Blue",
+      "default": true,
+      "id": "blue"
+    }
+  ],
+  "green_item_options": [
+    {
+      "display_name": "Grass",
+      "default": true,
+      "id": "grass"
+    },
+    {
+      "display_name": "Emerald",
+      "id": "emerald"
+    },
+    {
+      "display_name": "Lime",
+      "id": "lime"
+    },
+    {
+      "display_name": "Frog",
+      "id": "frog"
+    }
+  ],
+  "red_item_options": [
+    {
+      "display_name": "Ruby",
+      "id": "ruby"
+    },
+    {
+      "display_name": "Apple",
+      "id": "apple"
+    },
+    {
+      "display_name": "Firetruck",
+      "id": "firetruck"
+    },
+    {
+      "display_name": "Stop sign",
+      "default": true,
+      "id": "stop_sign"
+    }
+  ],
+  "yellow_item_options": [
+    {
+      "display_name": "Banana",
+      "default": true,
+      "id": "banana"
+    },
+    {
+      "display_name": "Sunflower",
+      "id": "sunflower"
+    },
+    {
+      "display_name": "Lemon",
+      "id": "lemon"
+    },
+    {
+      "display_name": "School bus",
+      "id": "school_bus"
+    }
+  ]
+}
