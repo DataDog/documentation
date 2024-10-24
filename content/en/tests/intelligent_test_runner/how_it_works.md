@@ -1,5 +1,7 @@
 ---
 title: How Intelligent Test Runner Works in Datadog
+aliases:
+  - /intelligent_test_runner/how_it_works
 further_reading:
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
@@ -12,7 +14,7 @@ further_reading:
     text: "Learn about Intelligent Test Runner"
   - link: "/tests"
     tag: "Documentation"
-    text: "Learn about Test Visibility"
+    text: "Learn about Test Optimization"
 ---
 
 ## Overview
@@ -29,7 +31,7 @@ Some test selection solutions don't rely on code coverage data and make up for i
 
 While other test solutions calculate test impact analysis using code coverage too, they only consider the last commit diff when evaluating which tests to run. As an example, this is a problem with GitHub's pull requests, which only take into account the CI status of the latest commit to allow merging. As a result, you must run all commits through CI or risk skipping tests that should have run.
 
-Intelligent Test Runner leverages per-test code coverage information along with data from [Test Visibility][1] to search previous tests in all relevant past commits. Configuration of Intelligent Test Runner is a one-click operation in most languages, and the results are accurate and more precise than other methods.
+Intelligent Test Runner leverages per-test code coverage information along with data from [Test Optimization][1] to search previous tests in all relevant past commits. Configuration of Intelligent Test Runner is a one-click operation in most languages, and the results are accurate and more precise than other methods.
 
 
 ## How test selection works

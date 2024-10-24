@@ -20,7 +20,7 @@ algolia:
 
 [Test Impact Analysis][1] allows you to streamline your organization's test impact analysis by intelligently excluding irrelevant tests that are not affected by recent code changes.
 
-With [Test Visibility][2], development teams can configure Test Impact Analysis for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
+With [Test Optimization][2], development teams can configure Test Impact Analysis for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
 
 {{< img src="/continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram of the components for the Test Impact Analysis: tracked files, excluded branches, and skipped tests" caption="A Venn diagram displaying how Test Impact Analysis defines an excluded test by using tracked files, excluded branches, and passed tests." style="width:65%" >}}
 
@@ -40,7 +40,7 @@ To set up the Test Impact Analysis, see the following documentation for your pro
 
 To enable the Test Impact Analysis:
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Settings**][3]. 
+1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][3]. 
 1. On the **Test Services** tab, click **Configure** in the `Test Impact Analysis` column for a service.
 
 {{< img src="/getting_started/intelligent_test_runner/enable_settings.png" alt="Enable Test Impact Analysis for a test service on the Test Service Settings page" style="width:100%" >}}
@@ -72,43 +72,43 @@ Explore the data collected by enabling Test Impact Analysis, such as the time sa
 
 You can create [dashboards][6] to visualize your testing metrics, or use an [out-of-the-box dashboard][7] containing widgets populated with data collected by the Test Impact Analysis to help you identify areas of improvement with usage patterns and trends. 
 
-## Examine results in the Test Visibility Explorer
+## Examine results in the Test Optimization Explorer
 
-The [Test Visibility Explorer][8] allows you to create visualizations and filter test spans using the data collected from Test Visibility and the Test Impact Analysis. When the Test Impact Analysis is active, it displays the amount of time saved for each test session or commit. The duration bars turn purple to indicate active test skipping.
+The [Test Optimization Explorer][8] allows you to create visualizations and filter test spans using the data collected from Test Optimization and the Test Impact Analysis. When the Test Impact Analysis is active, it displays the amount of time saved for each test session or commit. The duration bars turn purple to indicate active test skipping.
 
 {{< tabs >}}
 {{% tab "Session" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Session` to start filtering your test session span results.
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Session` to start filtering your test session span results.
 
-{{< img src="/getting_started/intelligent_test_runner/itr_sessions.png" alt="Test session results in the Test Visibility Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_sessions.png" alt="Test session results in the Test Optimization Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asession
 
 {{% /tab %}}
 {{% tab "Module" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
 
-{{< img src="/getting_started/intelligent_test_runner/itr_modules.png" alt="Test module results in the Test Visibility Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_modules.png" alt="Test module results in the Test Optimization Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Amodule
 
 {{% /tab %}}
 {{% tab "Suite" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
 
-{{< img src="/getting_started/intelligent_test_runner/itr_suites.png" alt="Test suite results in the Test Visibility Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_suites.png" alt="Test suite results in the Test Optimization Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asuite
 
 {{% /tab %}}
 {{% tab "Test" %}}
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
 
-{{< img src="/getting_started/intelligent_test_runner/itr_tests.png" alt="Test results in the Test Visibility Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_tests.png" alt="Test results in the Test Optimization Explorer filtered on tests skipped by the Test Impact Analysis" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Atest
 

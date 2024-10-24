@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/tests"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/monitors/types/ci"
   tag: "Documentation"
   text: "Learn about CI Monitors"
@@ -18,7 +18,7 @@ further_reading:
 
 Code coverage is a measure of the total code coverage percentage that a module or session exercises.
 
-Ensure that [Test Visibility][1] is already set up for your language.
+Ensure that [Test Optimization][1] is already set up for your language.
 
 ## Report code coverage
 

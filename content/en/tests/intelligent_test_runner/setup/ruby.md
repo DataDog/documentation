@@ -3,6 +3,8 @@ title: Intelligent Test Runner for Ruby
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+    - /intelligent_test_runner/setup/ruby
 further_reading:
     - link: "/tests"
       tag: "Documentation"
@@ -26,9 +28,9 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Ruby][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Intelligent Test Runner, set up [Test Optimization for Ruby][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 
@@ -116,7 +118,7 @@ end
 
 {{% /tab %}}
 {{% tab "Cucumber" %}}
-To mark an entire feature file as unskippable in Cucumber, use the `@datadog_itr_unskippable` tag. This prevents the Intelligent Test Runner from skipping any any of the scenarios defined in that feature file.
+To mark an entire feature file as unskippable in Cucumber, use the `@datadog_itr_unskippable` tag. This prevents the Intelligent Test Runner from skipping any of the scenarios defined in that feature file.
 
 To make only specific scenarios unskippable, apply this tag directly to the desired scenario.
 

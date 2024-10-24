@@ -6,6 +6,7 @@ code_lang_weight: 30
 aliases:
   - /continuous_integration/intelligent_test_runner/python/
   - /continuous_integration/intelligent_test_runner/setup/python/
+  - /intelligent_test_runner/setup/python
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -32,9 +33,9 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Intelligent Test Runner, set up [Test Optimization for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 

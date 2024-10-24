@@ -38,7 +38,7 @@ Use Quality Gates to:
 
 You can configure Quality Gates rules for the following categories: 
 
-[Test Visibility][9]
+[Test Optimization][9]
 
 : <br> - New flaky tests <br> - Performance regressions <br> - Code coverage
 

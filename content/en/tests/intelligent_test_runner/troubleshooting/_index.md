@@ -1,5 +1,7 @@
 ---
 title: Intelligent Test Runner Troubleshooting
+aliases:
+- /intelligent_test_runner/troubleshooting
 further_reading:
 - link: "/intelligent_test_runner"
   tag: "Documentation"

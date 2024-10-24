@@ -7,6 +7,7 @@ code_lang_weight: 40
 aliases:
   - /continuous_integration/intelligent_test_runner/swift/
   - /continuous_integration/intelligent_test_runner/setup/swift/
+  - /intelligent_test_runner/setup/swift
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -24,9 +25,9 @@ Intelligent Test Runner is only supported on [`dd-sdk-swift-testing`][1] in vers
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Swift][2]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
+Prior to setting up Intelligent Test Runner, set up [Test Optimization for Swift][2]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
 
 If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 

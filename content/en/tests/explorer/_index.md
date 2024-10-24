@@ -1,6 +1,6 @@
 ---
-title: Test Visibility Explorer
-description: Learn how to search and filter your test runs in the Test Visibility Explorer.
+title: Test Optimization Explorer
+description: Learn how to search and filter your test runs in the Test Optimization Explorer.
 further_reading:
   - link: "/continuous_integration/tests/"
     tag: "Documentation"
@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-The Test Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag. 
+The Test Optimization Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag. 
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. Each test level represents a different level of aggregation of tests.
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. Each test level represents a different level of aggregation of tests.
 
-{{< img src="/tests/explorer/test_runs.png" text="A list of test run results in the Test Visibility Explorer" style="width:100%" >}}
+{{< img src="/tests/explorer/test_runs.png" text="A list of test run results in the Test Optimization Explorer" style="width:100%" >}}
 
 ## Common facets
 
@@ -62,7 +62,7 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Early Flake Detection Enabled | Indicates if the test has been run using [Early Flake Detection][15]. |
 | Early Flake Detection Abort Reason | Indicates the Early Flake Detection abort reason for a test. |
 
-For more information about common facets that you can use as part of your search query in the Test Visibility Explorer, see [Test Run Facets][3].
+For more information about common facets that you can use as part of your search query in the Test Optimization Explorer, see [Test Run Facets][3].
 
 ### Sessions
 
@@ -111,7 +111,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 
 ## Export
 
-[Export your view][4] in the Test Visibility Explorer to reuse it later or in different contexts.
+[Export your view][4] in the Test Optimization Explorer to reuse it later or in different contexts.
 
 ## Further reading
 

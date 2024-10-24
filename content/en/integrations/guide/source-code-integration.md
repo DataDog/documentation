@@ -17,7 +17,7 @@ further_reading:
   text: "Learn about Serverless Monitoring"
 - link: "/tests/developer_workflows/"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/code_analysis/"
   tag: "Documentation"
   text: "Learn about Code Analysis"
@@ -499,11 +499,11 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in **Test Visibility**.
+You can see links from failed test runs to their source repository in **Test Optimization**.
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select a failed test run.
+1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
 2. Click the **View on GitHub** button to open the test in its source code repository.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}

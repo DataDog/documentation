@@ -6,6 +6,7 @@ code_lang_weight: 20
 aliases:
   - /continuous_integration/intelligent_test_runner/javascript/
   - /continuous_integration/intelligent_test_runner/setup/javascript/
+  - /intelligent_test_runner/setup/javascript
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -40,9 +41,9 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for JavaScript and TypeScript][3]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Intelligent Test Runner, set up [Test Optimization for JavaScript and TypeScript][3]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 

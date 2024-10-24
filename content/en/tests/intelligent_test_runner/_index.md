@@ -2,6 +2,7 @@
 title: Intelligent Test Runner
 aliases:
 - /continuous_integration/intelligent_test_runner/
+- /intelligent_test_runner
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
     tag: "Release Notes"
@@ -45,7 +46,7 @@ There are several configuration mechanisms that you can use in these scenarios t
 
 ## Set up a Datadog library
 
-Before setting up Intelligent Test Runner, you must configure [Test Visibility][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
+Before setting up Intelligent Test Runner, you must configure [Test Optimization][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
     {{< nextlink href="intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}

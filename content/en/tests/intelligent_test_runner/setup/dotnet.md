@@ -6,6 +6,7 @@ code_lang_weight: 0
 aliases:
   - /continuous_integration/intelligent_test_runner/dotnet/
   - /continuous_integration/intelligent_test_runner/setup/dotnet/
+  - /intelligent_test_runner/setup/dotnet
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -21,9 +22,9 @@ Intelligent Test Runner is only supported on `dd-trace>= 2.22.0` (execute `dd-tr
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for .NET][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Intelligent Test Runner, set up [Test Optimization for .NET][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 

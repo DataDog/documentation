@@ -6,7 +6,7 @@ code_lang_weight: 10
 aliases:
   - /continuous_integration/intelligent_test_runner/java/
   - /continuous_integration/intelligent_test_runner/setup/java/
-
+  - /intelligent_test_runner/setup/java
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -30,9 +30,9 @@ The following test frameworks are supported:
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Intelligent Test Runner, set up [Test Optimization for Java][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 

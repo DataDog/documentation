@@ -4136,7 +4136,7 @@ menu:
       identifier: cd_explorer_saved_views
       parent: cd_explorer
       weight: 303
-    - name: Test Visibility
+    - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading

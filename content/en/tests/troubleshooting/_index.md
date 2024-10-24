@@ -1,5 +1,5 @@
 ---
-title: Test Visibility Troubleshooting
+title: Test Optimization Troubleshooting
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page provides information to help you troubleshot issues with Test Visibility. If you need additional help, contact [Datadog Support][2].
+This page provides information to help you troubleshot issues with Test Optimization. If you need additional help, contact [Datadog Support][2].
 
 ## Your tests are instrumented, but Datadog isn't showing any data
 

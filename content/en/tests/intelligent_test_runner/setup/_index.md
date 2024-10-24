@@ -2,6 +2,7 @@
 title: Configure the Intelligent Test Runner
 aliases:
 - /continuous_integration/intelligent_test_runner/setup/
+- /intelligent_test_runner/setup
 type: multi-code-lang
 ---
 
