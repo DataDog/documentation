@@ -4222,71 +4222,35 @@ menu:
       parent: tests
       identifier: tests_monitors
       weight: 5
-    - name: Developer Workflows
-      url: tests/developer_workflows
-      parent: tests
-      identifier: tests_developer_workflows
-      weight: 6
-    - name: Code Coverage
-      url: tests/code_coverage
-      parent: tests
-      identifier: tests_code_coverage
-      weight: 7
-    - name: Instrument Browser Tests with RUM
-      url: tests/browser_tests
-      parent: tests
-      identifier: tests_browser_tests
-      weight: 8
-    - name: Instrument Swift Tests with RUM
-      url: tests/swift_tests
-      parent: tests
-      identifier: tests_swift_tests
-      weight: 9
     - name: Flaky Test Management
       url: tests/flaky_test_management
       parent: tests
       identifier: tests_flaky_test_management
-      weight: 10
+      weight: 6
     - name: Early Flake Detection
       url: tests/flaky_test_management/early_flake_detection
       parent: tests_flaky_test_management
       identifier: tests_early_flake_detection
-      weight: 1001
+      weight: 601
     - name: Auto Test Retries
       url: tests/flaky_test_management/auto_test_retries
       parent: tests_flaky_test_management
       identifier: tests_auto_test_retries
-      weight: 1002
-    - name: Correlate Logs and Tests
-      url: tests/correlate_logs_and_tests
-      parent: tests
-      identifier: tests_correlate_logs_and_tests
-      weight: 11
-    - name: Guides
-      url: tests/guides/
-      parent: tests
-      identifier: tests_guides
-      weight: 12
-    - name: Troubleshooting
-      url: tests/troubleshooting/
-      parent: tests
-      identifier: tests_troubleshooting
-      weight: 13
+      weight: 602
     - name: Test Impact Analysis
-      url: test_impact_analysis/
-      pre: intelligent-test-runner
-      parent: software_delivery_heading
+      url: tests/test_impact_analysis
+      parent: tests
       identifier: test_impact_analysis
-      weight: 40000
+      weight: 7
     - name: Setup
-      url: test_impact_analysis/setup/
+      url: tests/test_impact_analysis/setup/
       parent: test_impact_analysis
       identifier: test_impact_analysis_setup
-      weight: 1
+      weight: 701
     - name: .NET
       url: test_impact_analysis/setup/dotnet/
       parent: test_impact_analysis_setup
-      identifier: itest_impact_analysis_setup_dotnet
+      identifier: test_impact_analysis_setup_dotnet
       weight: 101
     - name: JavaScript and TypeScript
       url: test_impact_analysis/setup/javascript/
@@ -4314,21 +4278,56 @@ menu:
       identifier: test_impact_analysis_setup_ruby
       weight: 106
     - name: How It Works
-      url: test_impact_analysis/how_it_works/
+      url: tests/test_impact_analysis/how_it_works/
       parent: test_impact_analysis
       identifier: test_impact_analysis_how_it_works
-      weight: 2
+      weight: 702
     - name: Troubleshooting
-      url: intelligent_test_runner/troubleshooting/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_troubleshooting
-      weight: 3
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_troubleshooting
+      weight: 703
+    - name: Developer Workflows
+      url: tests/developer_workflows
+      parent: tests
+      identifier: tests_developer_workflows
+      weight: 8
+    - name: Code Coverage
+      url: tests/code_coverage
+      parent: tests
+      identifier: tests_code_coverage
+      weight: 9
+    - name: Instrument Browser Tests with RUM
+      url: tests/browser_tests
+      parent: tests
+      identifier: tests_browser_tests
+      weight: 10
+    - name: Instrument Swift Tests with RUM
+      url: tests/swift_tests
+      parent: tests
+      identifier: tests_swift_tests
+      weight: 11
+    - name: Correlate Logs and Tests
+      url: tests/correlate_logs_and_tests
+      parent: tests
+      identifier: tests_correlate_logs_and_tests
+      weight: 12
+    - name: Guides
+      url: tests/guides/
+      parent: tests
+      identifier: tests_guides
+      weight: 13
+    - name: Troubleshooting
+      url: tests/troubleshooting/
+      parent: tests
+      identifier: tests_troubleshooting
+      weight: 14
     - name: Code Analysis
       url: code_analysis/
       pre: ci
       parent: software_delivery_heading
       identifier: code_analysis
-      weight: 50000
+      weight: 40000
     - name: Static Analysis (SAST)
       url: code_analysis/static_analysis
       parent: code_analysis
@@ -4404,7 +4403,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: quality_gates
-      weight: 60000
+      weight: 50000
     - name: Setup
       url: quality_gates/setup
       parent: quality_gates
@@ -4445,7 +4444,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: dora_metrics
-      weight: 70000
+      weight: 60000
     - name: Setup
       url: dora_metrics/setup
       parent: dora_metrics
