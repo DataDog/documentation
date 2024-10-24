@@ -594,7 +594,7 @@ En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de se
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Empezando en dd-trace-js v3.13.1, se puede utilizar la API del rastreador de NodeJS para rastrear los eventos de los usuarios.
+Empezando en dd-trace-js v3.13.1, se puede utilizar la API del rastreador de Node.js para rastrear los eventos de los usuarios.
 
 En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de sesión o eventos personalizados (utilizando el registro como ejemplo).
 

@@ -26,7 +26,7 @@ Con la nueva experiencia de entidades inferidas, puedes filtrar las entradas del
 
 Para determinar los nombres y tipos de las dependencias de servicio inferidas, Datadog utiliza atributos de tramo estándar y los asigna a atributos `peer.*`. Para consultar la lista completa de atributos `peer.*`, consulta [Nomenclatura de dependencias de servicio inferidas](#inferred-service-dependencies-nomemclature). Las API externas inferidas utilizan el esquema de nomenclatura por defecto `net.peer.name`. Por ejemplo, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan el esquema de nomenclatura por defecto `db.instance`.
 
-Si utilizas el rastreador de Go, Java, NodeJS, PHP, .NET o Ruby, puedes personalizar los nombres predeterminados de las entidades inferidas.
+Si utilizas el rastreador de Go, Java, Node.js, PHP, .NET o Ruby, puedes personalizar los nombres predeterminados de las entidades inferidas.
 
 **Nota:** Si configuras monitores, dashboards, o notebooks para un determinado servicio inferido durante la fase beta, puede que necesites actualizarlos si el esquema de nombres cambia. Más información sobre los pasos de migración en las [instrucciones de elección](#opt-in).
 
@@ -150,9 +150,9 @@ Para ello, añade las siguientes variables de entorno o propiedades del sistema 
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-Las versiones mínimas del rastreador de NodeJS requeridas son [2.44.0][1], [3.31.0][2], o [4.10.0][3]. Las actualizaciones periódicas a la última versión son recomendadas para acceder a los cambios y correcciones de errores.
+Las versiones mínimas del rastreador de Node.js requeridas son [2.44.0][1], [3.31.0][2], o [4.10.0][3]. Las actualizaciones periódicas a la última versión son recomendadas para acceder a los cambios y correcciones de errores.
 
 Para ello, añade las siguientes variables de entorno o propiedades del sistema a la configuración de tu rastreador:
 

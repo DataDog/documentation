@@ -107,7 +107,7 @@ title: AWS Lambda용 서버리스 모니터링 구성
    environment:
      DD_UNIVERSAL_INSTRUMENTATION: true
    ```
-   **NodeJS 또는 파이썬 함수**의 경우 다음을 추가하세요;
+   **Node.js 또는 파이썬 함수**의 경우 다음을 추가하세요;
    ```yaml
    environment:
      DD_EXPERIMENTAL_ENABLE_PROXY: true

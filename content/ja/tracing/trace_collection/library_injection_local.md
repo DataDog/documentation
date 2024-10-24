@@ -30,7 +30,7 @@ Kubernetes Admission Controller の詳細については、[Kubernetes Admission
 ## 要件
 
 * Kubernetes v1.14+
-* Java、Python、NodeJS については Datadog [Cluster Agent v7.40+][3]、.NET、Ruby については Datadog [Cluster Agent v7.44+][3]。
+* Java、Python、Node.js については Datadog [Cluster Agent v7.40+][3]、.NET、Ruby については Datadog [Cluster Agent v7.44+][3]。
 * Datadog Admission Controller が有効になっている。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
 * Python の場合、現時点では uWSGI アプリケーションはサポートされていません。
 * Ruby については、ライブラリ挿入のサポートはベータ版です。インスツルメンテーションは、Bundler のバージョンが 2.3 以上で、vendored gems (デプロイモードまたは `BUNDLE_PATH`) がない Ruby on Rails アプリケーションでのみサポートされています。

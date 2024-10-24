@@ -39,7 +39,7 @@ Para obtener más información, consulta [la página de Docker][7].
     {{< nextlink href="tracing/setup/python" tag="Python" >}}Instrumentación en lenguaje Python.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Instrumentación en lenguaje Ruby.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/go" tag="Go" >}}Instrumentación en lenguaje Go.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Instrumentación en lenguaje Node.js.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Instrumentación en lenguaje Node.js.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}Instrumentación en lenguaje .NET.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}Instrumentación en lenguaje PHP.{{< /nextlink >}}
 {{< /whatsnext >}}

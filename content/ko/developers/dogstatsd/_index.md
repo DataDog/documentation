@@ -9,7 +9,7 @@ description: 데이터 유형 및 태깅을 포함하는 DogStatsD 기능에 대
 further_reading:
 - link: integrations/node
   tag: 도움말
-  text: NodeJS 통합을 통해 NodeJS용 DogStatsD 활성화
+  text: Node.js 통합을 통해 Node.js용 DogStatsD 활성화
 - link: developers/dogstatsd
   tag: 도움말
   text: DogStatsD 소개

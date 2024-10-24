@@ -222,9 +222,9 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente NodeJS versión 3.21.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la biblioteca del cliente Node.js versión 3.21.0 o posterior.</div>
 
 #### Contenedores
 

@@ -30,7 +30,7 @@ Para obtener más información sobre el controlador de admisión Kubernetes, con
 ## Requisitos
 
 * Kubernetes v1.14 o posterior
-* Datadog [Cluster Agent v7.40 o posterior][3], para Java, Python y NodeJS, y Datadog [Cluster Agent v7.44 o posterior][3], para .NET y Ruby.
+* Datadog [Cluster Agent v7.40 o posterior][3], para Java, Python y Node.js, y Datadog [Cluster Agent v7.44 o posterior][3], para .NET y Ruby.
 * Controlador de admisión Datadog habilitado. **Nota**: En el chart de Helm v2.35.0 y posteriores, el controlador de admisión Datadog está habilitado por defecto en el Cluster Agent.
 * Para Python, las aplicaciones uWSGI no son compatibles en este momento.
 * Para Ruby, la compatibilidad de la inyección de bibliotecas está en fase Beta. La instrumentación sólo es compatible con Ruby en aplicaciones Rails con una versión de empaquetador superior a 2.3 y sin gemas vendidas (modo de despliegue o `BUNDLE_PATH`).
@@ -424,7 +424,7 @@ El valor de `version` es siempre `1`. Esto hace referencia a la versión del esq
 
 La siguiente tabla muestra cómo los valores de configuración de la inyección se asignan a las correspondientes [opciones de configuración de bibliotecas de rastreo][4]:
 
-| Inyección | Rastreador Java | Rastreador NodeJS | Rastreador .NET | Rastreador Python |
+| Inyección | Rastreador Java | Rastreador Node.js | Rastreador .NET | Rastreador Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -625,7 +625,7 @@ tracing_log_level: debug
 
 La siguiente tabla muestra cómo los valores de configuración de la inyección se asignan a las correspondientes [opciones de configuración de bibliotecas de rastreo][4]:
 
-| Inyección | Rastreador Java | Rastreador NodeJS | Rastreador .NET | Rastreador Python |
+| Inyección | Rastreador Java | Rastreador Node.js | Rastreador .NET | Rastreador Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -814,7 +814,7 @@ En este archivo de configuración, el valor de `version` es siempre `1`. Esto ha
 
 La siguiente tabla muestra cómo los valores de configuración de la inyección se asignan a las correspondientes [opciones de configuración de bibliotecas de rastreo][4]:
 
-| Inyección | Rastreador Java | Rastreador NodeJS | Rastreador .NET | Rastreador Python |
+| Inyección | Rastreador Java | Rastreador Node.js | Rastreador .NET | Rastreador Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |

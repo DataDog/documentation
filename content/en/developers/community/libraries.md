@@ -85,7 +85,7 @@ This is for a [FreeSwitch ESL][30] application to export statistics to Datadog u
 
 Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
 
-* [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
+* [Heroku Datadog Log Drain][35] written in Node.js by [Oz][36].
 * [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
 
 To use the PHP tracer or profiler on Heroku, use the following buildpack.

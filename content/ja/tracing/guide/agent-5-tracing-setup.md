@@ -39,7 +39,7 @@ Docker コンテナでアプリケーションをトレースするには、[doc
     {{< nextlink href="tracing/setup/python" tag="Python" >}}Python 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/go" tag="Go" >}}Go 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js 言語のインスツルメンテーション。{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Node.js 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP 言語のインスツルメンテーション。{{< /nextlink >}}
 {{< /whatsnext >}}

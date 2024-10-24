@@ -85,7 +85,7 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][34]を参照してください。
 
-* [Oz][36] による Nodejs 版 [Heroku Datadog ログドレイン][35]
+* [Oz][36] による Node.js 版 [Heroku Datadog ログドレイン][35]
 * [Apiary][38] による Go 版 [Heroku Datadog ログドレイン][37]
 
 Heroku で PHP トレーサーやプロファイラーを使用するには、以下のビルドパックを使用します。
