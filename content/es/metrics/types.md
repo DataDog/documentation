@@ -88,14 +88,14 @@ El tipo de envío de métricas GAUGE representa un snapshot de eventos en un int
 
 El tipo de envío de métricas HISTOGRAM representa la distribución estadística de un conjunto de valores calculados del lado del Agent en un intervalo de tiempo. El tipo de métrica HISTOGRAM es una extensión del tipo de métrica de temporización StatsD. El Agent agrega los valores que se envían en un intervalo de tiempo definido y produce diferentes métricas que representan el conjunto de valores.
 
-Si envías `X` valores para una métrica HISTOGRAM `<METRIC_NAME>` en un intervalo de tiempo dado, las siguientes métricas son producidas por el Agent por defecto:
+Si envías valores `X` para una métrica HISTOGRAM `<METRIC_NAME>` en un intervalo de tiempo dado, las siguientes métricas son producidas por el Agent por defecto:
 
 `<METRIC_NAME>.avg`
-: Representa la media de los valores de `X` en el intervalo de tiempo.<br>
+: Representa la media de los valores `X` en un intervalo de tiempo.<br>
 **Tipo dentro de la aplicación de Datadog**: GAUGE
 
 `<METRIC_NAME>.count`
-: Representa el número de valores enviados durante el intervalo, `X`. El Agent envía este número como un RATE por lo que mostraría en el valor de `X/interval` en la aplicación. <br>
+: Representa el número de valores enviados durante el intervalo, `X`. El Agent envía este número como un RATE por lo que mostraría en el valor `X/interval` en la aplicación. <br>
 **Tipo dentro de la aplicación de Datadog**: RATE
 
 `<METRIC_NAME>.median`
@@ -204,7 +204,7 @@ Supongamos que estás enviando una métrica DISTRIBUTION, `request.response_time
 
 #### Cálculo de agregaciones de percentiles
 
-Al igual que otros tipos de métricas, como GAUGE or HISTOGRAM, el tipo de métrica DISTRIBUTION dispone de las siguientes agregaciones: `count` `min` , `max`, `sum` y `avg`. Las métricas de distribución se etiquetan inicialmente del mismo modo que las demás métricas (con etiquetas personalizadas definidas en el código).
+Al igual que otros tipos de métricas, como GAUGE or HISTOGRAM, el tipo de métrica DISTRIBUTION dispone de las siguientes agregaciones: `count` `min` , `max`, `sum` y `avg`. Las métricas de distribución se etiquetan inicialmente del mismo modo que las demás métricas (con etiquetas (tags) personalizadas definidas en el código).
 
 Se pueden añadir agregaciones de percentiles adicionales (`p50`, `p75`, `p90`, `p95`, `p99`) a las métricas de distribución. Si se añadieran agregaciones de percentiles a tu métrica de distribución dentro de la aplicación, las siguientes cinco agregaciones adicionales estarían disponibles para consultas:
 
