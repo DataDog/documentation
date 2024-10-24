@@ -38,7 +38,7 @@ describe('PageBuilder.build', () => {
 
   const prefsManifest = PagePrefsManifestSchema.parse(draftPrefsManifest);
 
-  const html = PageBuilder.build({
+  const { html } = PageBuilder.build({
     parsedFile,
     prefOptionsConfig: prefOptionsConfigForPage,
     hugoConfig: {

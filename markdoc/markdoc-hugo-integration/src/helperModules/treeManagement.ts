@@ -67,15 +67,16 @@ export function getMinifiedIfFunctionsByRef(
  * and when the end user changes a content preference setting.
  *
  * @param p A ParsedFile object and a PrefOptionsConfig object.
- * @returns A renderable tree.
+ * @returns A renderable tree and any errors encountered.
  */
 export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   defaultValsByPrefId: Record<string, string>;
   variables: Record<string, any>;
   prefsManifest: PagePrefsManifest;
-}): RenderableTreeNode {
-  console.log('\n\n\nbuilding tree ...');
+}): { renderableTree: RenderableTreeNode; errors: string[] } {
+  const errors: string[] = [];
+
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: {
       ...p.defaultValsByPrefId,
@@ -84,7 +85,6 @@ export function buildRenderableTree(p: {
     partials: p.parsedFile.partials,
     ...transformConfig
   });
-  console.log('...renderable tree built.\n\n\n');
 
   addHeaderAnchorstoTree(renderableTree);
 
@@ -98,28 +98,31 @@ export function buildRenderableTree(p: {
   const invalidPrefIds = referencedPrefIds.filter((id) => !pagePrefIds.includes(id));
 
   if (invalidPrefIds.length > 0) {
-    throw new Error(`Invalid pref IDs found in markup: ${invalidPrefIds}`);
+    errors.push(`Invalid pref IDs found in markup: ${invalidPrefIds}`);
   }
 
   // ensure that all referenced values are valid
   Object.keys(referencedValuesByPrefId).forEach((prefId) => {
     const referencedValues = referencedValuesByPrefId[prefId];
-    console.log('referencedValues', referencedValues);
-    const possibleValues = p.prefsManifest.prefsById[prefId].possibleValues;
-    console.log('possibleValues', possibleValues);
+    const possibleValues = p.prefsManifest.prefsById[prefId]?.possibleValues;
+
+    // Skip adding error for a bad pref ID,
+    // since those are already caught above
+    if (!possibleValues) {
+      return;
+    }
+
     const invalidValues = referencedValues.filter(
       (value) => !possibleValues.includes(value)
     );
-    console.log('invalidValues', invalidValues);
     if (invalidValues.length > 0) {
-      throw new Error(
+      errors.push(
         `Invalid value found in markup: "${invalidValues}" is not a valid value for the pref ID "${prefId}".`
       );
     }
   });
 
-  console.log('... returning renderable tree.\n\n\n');
-  return renderableTree;
+  return { errors, renderableTree };
 }
 
 /**

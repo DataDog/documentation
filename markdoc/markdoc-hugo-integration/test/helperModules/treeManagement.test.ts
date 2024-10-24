@@ -30,14 +30,14 @@ describe('treeManagement', () => {
   });
 
   test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
-    const tree = buildRenderableTree({
+    const { renderableTree } = buildRenderableTree({
       parsedFile,
       defaultValsByPrefId: prefsManifest.defaultValsByPrefId,
       variables: {},
       prefsManifest
     });
 
-    expect(JSON.stringify(tree, null, 2)).toMatchFileSnapshot(
+    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/renderableTree.snap.json`
     );
   });

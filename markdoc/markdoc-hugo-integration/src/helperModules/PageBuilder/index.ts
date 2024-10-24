@@ -42,8 +42,8 @@ export class PageBuilder {
     prefOptionsConfig: PrefOptionsConfig;
     hugoConfig: HugoConfig;
     prefsManifest: PagePrefsManifest;
-  }): string {
-    const renderableTree = buildRenderableTree({
+  }): { html: string; errors: string[] } {
+    const { renderableTree, errors } = buildRenderableTree({
       parsedFile: p.parsedFile,
       defaultValsByPrefId: p.prefsManifest.defaultValsByPrefId,
       variables: { hugoConfig: { ...JSON.parse(JSON.stringify(p.hugoConfig)) } },
@@ -77,7 +77,7 @@ export class PageBuilder {
       frontmatter: p.parsedFile.frontmatter
     });
 
-    return pageHtml;
+    return { html: pageHtml, errors };
   }
 
   /**

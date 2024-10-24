@@ -283,7 +283,7 @@ export class MarkdocHugoIntegration {
 
     // build the HTML and write it to an .md file
     try {
-      const fileContents = PageBuilder.build({
+      const { html, errors } = PageBuilder.build({
         parsedFile: p.parsedFile,
         prefOptionsConfig: prefOptionsConfigForPage,
         prefsManifest,
@@ -293,7 +293,11 @@ export class MarkdocHugoIntegration {
       const compiledFilepath = this.#writeFile({
         parsedFile: p.parsedFile,
         markdocFilepath: p.markdocFilepath,
-        pageContents: fileContents
+        pageContents: html
+      });
+
+      errors.forEach((error) => {
+        this.validationErrorsByFilePath[p.markdocFilepath].push(error);
       });
 
       return compiledFilepath;
