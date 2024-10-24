@@ -98,6 +98,8 @@ export function buildRenderableTree(p: {
   const invalidPrefIds = referencedPrefIds.filter((id) => !pagePrefIds.includes(id));
 
   if (invalidPrefIds.length > 0) {
+    console.log('referencedPrefIds', referencedPrefIds);
+    console.log('referencedValuesByPrefId', referencedValuesByPrefId);
     errors.push(`Invalid pref IDs found in markup: ${invalidPrefIds}`);
   }
 
@@ -276,8 +278,24 @@ function collectReferencedValuesByVarId(
       referencedValuesByVarId[varId] = Array.from(
         new Set(referencedValuesByVarId[varId])
       );
+
+      const parameters = Object.values(node.parameters);
+      parameters.forEach((p) => {
+        const valuesById = collectReferencedValuesByVarId(p);
+        Object.keys(valuesById).forEach((id) => {
+          if (id in referencedValuesByVarId) {
+            referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(
+              valuesById[id]
+            );
+          } else {
+            referencedValuesByVarId[id] = valuesById[id];
+          }
+          referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+        });
+      });
     }
   }
 
+  delete referencedValuesByVarId.undefined;
   return referencedValuesByVarId;
 }
