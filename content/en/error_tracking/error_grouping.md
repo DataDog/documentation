@@ -1,11 +1,27 @@
 ---
-title: Custom Grouping
-description: Customize how error spans are grouped into issues.
+title: Error Grouping
+description: Understand how errors are grouped into issues.
 ---
 
-## Overview
+## Default Grouping
 
-Error Tracking intelligently groups similar errors into issues with a [default strategy][5]. By using _custom fingerprinting_, you can gain full control over the grouping decision and customize the grouping behavior for your error spans.
+Error Tracking intelligently groups similar errors into issues. This grouping is based on the following error properties:
+
+- `service`: the service where the error occurred.
+- `error.type` or `error.kind`: the class of the error.
+- `error.message`: a description of the error.
+- `error.stack`: the file name and the function name of the top-most meaningful stack frame.
+
+The error stack trace is the code path followed by an error between being thrown and being captured by Datadog instrumentation. Error Tracking evaluates the topmost stack frame (the *location* of the error) and uses it to group the error.
+
+If any stack-frame properties differ for two given errors, the two errors are grouped under different issues. For example, Error Tracking does not group issues across services or error types. Error Tracking also ignores numbers, punctuation, and anything that is between quotes or parentheses: only word-like tokens are used.
+
+**Note**: To improve grouping accuracy, Error Tracking removes variable stack-frame properties such as versions, ids, dates, and so on.
+
+
+## Custom Grouping
+
+Error Tracking intelligently groups similar errors into issues with a default strategy. By using _custom fingerprinting_, you can gain full control over the grouping decision and customize the grouping behavior for your error spans.
 
 You can customize grouping by providing an `error.fingerprint` for the error. The fingerprint is provided in an attribute or tag, depending on the error source (see [Setup](#setup) for details). While the value of `error.fingerprint` does not have any particular format or requirement, the content must be a string.
 
@@ -317,4 +333,3 @@ final configuration = DatadogConfiguration(
 [2]: /logs/log_collection/
 [3]: /real_user_monitoring/browser/
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/setup
-[5]: /error_tracking/default_grouping
