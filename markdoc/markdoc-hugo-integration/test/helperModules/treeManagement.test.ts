@@ -26,7 +26,8 @@ describe('treeManagement', () => {
 
   const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
     frontmatter: parsedFile.frontmatter,
-    prefOptionsConfig
+    prefOptionsConfig,
+    allowlist
   });
 
   test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {

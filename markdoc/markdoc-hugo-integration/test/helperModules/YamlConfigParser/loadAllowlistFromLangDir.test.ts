@@ -1,9 +1,5 @@
 import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
-import {
-  paintColorsFrontmatter,
-  paintColorsPrefOptionsConfig
-} from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { VALID_PREFS_CONFIG_DIR } from '../../config/constants';
@@ -11,7 +7,7 @@ import { VALID_PREFS_CONFIG_DIR } from '../../config/constants';
 describe('YamlConfigParser.loadAllowlistFromLangDir', () => {
   const langDir = `${VALID_PREFS_CONFIG_DIR}/en`;
 
-  test('runs without error', () => {
+  test('builds the expected allowlist', () => {
     const allowlist = YamlConfigParser.loadAllowlistFromLangDir(langDir);
 
     const expectedAllowlist = {
@@ -19,6 +15,10 @@ describe('YamlConfigParser.loadAllowlistFromLangDir', () => {
         color: {
           id: 'color',
           display_name: 'Color'
+        },
+        item: {
+          id: 'item',
+          display_name: 'Item'
         }
       },
       optionsById: {

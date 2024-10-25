@@ -37,7 +37,7 @@ export class YamlConfigParser {
   static buildPagePrefsManifest(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
-    // allowlistsByType: AllowlistsByType;
+    allowlist: Allowlist;
   }): PagePrefsManifest {
     const manifest: PagePrefsManifest = {
       prefsById: {},
@@ -45,9 +45,6 @@ export class YamlConfigParser {
       errors: [],
       defaultValsByPrefId: {}
     };
-
-    // const validPrefIds = p.allowlistsByType.prefs.map((pref) => pref.id);
-    // const validOptionIds = p.allowlistsByType.options.map((option) => option.id);
 
     if (!p.frontmatter.page_preferences) {
       return manifest;
@@ -88,13 +85,11 @@ export class YamlConfigParser {
     // appeared in the frontmatter
     p.frontmatter.page_preferences.forEach((pagePrefConfig) => {
       // Validate the pref ID
-      /*
-      if (!validPrefIds.includes(pagePrefConfig.id)) {
+      if (!p.allowlist.prefsById[pagePrefConfig.id]) {
         manifest.errors.push(
-          `Invalid pref ID: The pref ID '${pagePrefConfig.id}' is not in the allowlist.`
+          `Unrecognized pref ID: The pref ID '${pagePrefConfig.id}' is not in the allowlist.`
         );
       }
-      */
 
       const hasDynamicOptions = pagePrefConfig.options_source.match(PLACEHOLDER_REGEX);
 
@@ -153,14 +148,11 @@ export class YamlConfigParser {
         }
 
         optionsSet.forEach((option) => {
-          // Validate the option ID
-          /*
-          if (!validOptionIds.includes(option.id)) {
+          if (!p.allowlist.optionsById[option.id]) {
             manifest.errors.push(
               `Invalid option ID: The option ID '${option.id}' is not in the options allowlist.`
             );
           }
-          */
 
           if (option.default) {
             defaultValuesByOptionsSetId[optionsSetId] = option.id;

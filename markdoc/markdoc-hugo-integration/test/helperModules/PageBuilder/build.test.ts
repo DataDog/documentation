@@ -33,7 +33,8 @@ describe('PageBuilder.build', () => {
 
   const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
     frontmatter: parsedFile.frontmatter,
-    prefOptionsConfig
+    prefOptionsConfig,
+    allowlist
   });
 
   const prefsManifest = PagePrefsManifestSchema.parse(draftPrefsManifest);

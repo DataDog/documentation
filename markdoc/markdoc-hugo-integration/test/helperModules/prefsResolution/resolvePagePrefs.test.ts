@@ -1,6 +1,7 @@
 import {
   paintColorsFrontmatter,
-  paintColorsPrefOptionsConfig
+  paintColorsPrefOptionsConfig,
+  paintColorsAllowlist
 } from '../../mocks/valid/paintColorsConfig';
 import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
@@ -13,7 +14,8 @@ import { ResolvedPagePrefsSchema } from '../../../src/schemas/pagePrefs';
 describe('SharedRenderer.resolvePagePrefs', () => {
   const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
     frontmatter: paintColorsFrontmatter,
-    prefOptionsConfig: paintColorsPrefOptionsConfig
+    prefOptionsConfig: paintColorsPrefOptionsConfig,
+    allowlist: paintColorsAllowlist
   });
 
   test('resolves to the correct values for the default selections', () => {

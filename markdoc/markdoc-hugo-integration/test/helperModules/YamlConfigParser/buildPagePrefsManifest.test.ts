@@ -2,7 +2,8 @@ import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   paintColorsFrontmatter,
-  paintColorsPrefOptionsConfig
+  paintColorsPrefOptionsConfig,
+  paintColorsAllowlist
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
@@ -11,7 +12,8 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
   test('creates the expected object when given valid data', () => {
     const manifest = YamlConfigParser.buildPagePrefsManifest({
       frontmatter: paintColorsFrontmatter,
-      prefOptionsConfig: paintColorsPrefOptionsConfig
+      prefOptionsConfig: paintColorsPrefOptionsConfig,
+      allowlist: paintColorsAllowlist
     });
 
     const expectedManifest = {
@@ -195,7 +197,8 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
 
     const manifest = YamlConfigParser.buildPagePrefsManifest({
       frontmatter: invalidFrontmatter,
-      prefOptionsConfig: paintColorsPrefOptionsConfig
+      prefOptionsConfig: paintColorsPrefOptionsConfig,
+      allowlist: paintColorsAllowlist
     });
 
     console.log(manifest.errors);
@@ -244,7 +247,8 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
 
     const manifest = YamlConfigParser.buildPagePrefsManifest({
       frontmatter: paintColorsFrontmatter,
-      prefOptionsConfig: invalidPrefOptionsConfig
+      prefOptionsConfig: invalidPrefOptionsConfig,
+      allowlist: paintColorsAllowlist
     });
 
     expect(manifest.errors.length).toEqual(1);

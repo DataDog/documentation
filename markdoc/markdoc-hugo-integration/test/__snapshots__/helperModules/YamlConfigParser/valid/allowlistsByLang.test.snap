@@ -87,6 +87,10 @@
         "display_name": "Color",
         "id": "color",
       },
+      "item": {
+        "display_name": "Item",
+        "id": "item",
+      },
     },
   },
   "ja": {
@@ -176,6 +180,10 @@
       "color": {
         "display_name": "Color(ja)",
         "id": "color",
+      },
+      "item": {
+        "display_name": "Item",
+        "id": "item",
       },
     },
   },

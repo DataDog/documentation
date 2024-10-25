@@ -86,5 +86,9 @@
       "display_name": "Color",
       "id": "color",
     },
+    "item": {
+      "display_name": "Item",
+      "id": "item",
+    },
   },
 }

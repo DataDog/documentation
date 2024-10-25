@@ -234,8 +234,8 @@ export class MarkdocHugoIntegration {
     // generate the prefs manifest
     const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
       frontmatter: p.parsedFile.frontmatter,
-      prefOptionsConfig: this.prefOptionsConfigByLang[lang]
-      // allowlistsByType: this.allowlistsByLang[lang]
+      prefOptionsConfig: this.prefOptionsConfigByLang[lang],
+      allowlist: this.allowlistsByLang[lang]
     });
 
     if (draftPrefsManifest.errors.length > 0) {
