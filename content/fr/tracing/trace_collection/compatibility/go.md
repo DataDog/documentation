@@ -31,13 +31,13 @@ Intégrez le traceur go avec la liste de frameworks Web ci-dessous via l'un des 
 
 | Framework         | Type de prise en charge    | Documentation GoDoc de Datadog                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
-| [Gin][6]          | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin][7]               |/v2
-| [Gorilla Mux][8] | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gorilla/mux][9]                |/v2
-| [gRPC][10]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc][11]     |/v2
-| [gRPC v1.2][10]   | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12][12] |/v2
-| [chi][13]         | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi][14] |/v2
-| [echo v4][15]     | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4][16]           |/v2
-| [Fiber][18]     | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2][19]              |/v2
+| [Gin][6]          | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2][7]               |
+| [Gorilla Mux][8] | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2][9]                |
+| [gRPC][10]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2][11]     |
+| [gRPC v1.2][10]   | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12/v2][12] |
+| [chi][13]         | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2][14] |
+| [echo v4][15]     | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2][16]           |
+| [Fiber][18]     | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2/v2][19]              |
 
 #### Compatibilité des bibliothèques
 
@@ -45,35 +45,35 @@ Le traceur Go prend en charge les datastores et les bibliothèques suivants.
 
 | Bibliothèque                 | Type de prise en charge    | Exemples et documentation                                                      |
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
-| [AWS SDK][20]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go/aws][21]                |/v2
-| [AWS SDK v2][75]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go-v2/aws][76]                |/v2
-| [Elasticsearch][22]     | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/olivere/elastic][23]                   |/v2
-| [Cassandra][24]         | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gocql/gocql][25]                       |/v2
-| [GraphQL][26]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/graph-gophers/graphql-go][27]          |/v2
-| [HTTP][28]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/net/http][29]                          |/v2
-| [HTTP router][30]       | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/julienschmidt/httprouter][31]          |/v2
-| [Redis (go-redis)][32]  | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go-redis/redis][33]                    |/v2
-| [Redis (go-redis-v8)][34]| Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go-redis/redis.v8][35]                |/v2
-| [Redis (redigo)][36]    | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/garyburd/redigo][37]                   |/v2
-| [Redis (new redigo)][38]| Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gomodule/redigo][39]                   |/v2
-| [SQL][40]               | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/database/sql][41]                      |/v2
-| [SQLx][42]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx][43]                      |/v2
-| [MongoDB][44]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go.mongodb.org/mongo-driver/mongo][45] |/v2
-| [MongoDB (mgo)][73]      | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo][46]                    |/v2
-| [BuntDB][47]            | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/tidwall/buntdb][48]                    |/v2
-| [LevelDB][49]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/syndtr/goleveldb/leveldb][50]          |/v2
-| [miekg/dns][51]         | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/miekg/dns][52]                         |/v2
-| [Kafka (confluent)][53] | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go][54]   |/v2
-| [Kafka (sarama)][55]    | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/Shopify/sarama][56]                    |/v2
-| [API Google][57]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/api][58]             |/v2
-| [go-restful][59]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful][60]               |/v2
-| [Twirp][61]             | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp][62]                    |/v2
-| [Vault][63]             | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/hashicorp/vault][64]                   |/v2
-| [Consul][65]            | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/hashicorp/consul][66]                  |/v2
-| [Gorm][67]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm][68]                       |/v2
-| [Gorm v2][69]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1][70]                   |/v2
-| [Kubernetes][71]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/k8s.io/client-go/kubernetes][72]       |/v2
-| [Memcache][73]          | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache][74]      |/v2
+| [AWS SDK][20]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go/aws/v2][21]                |
+| [AWS SDK v2][75]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go-v2/aws/v2][76]                |
+| [Elasticsearch][22]     | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/olivere/elastic/v2][23]                   |
+| [Cassandra][24]         | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gocql/gocql/v2][25]                       |
+| [GraphQL][26]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/graph-gophers/graphql-go/v2][27]          |
+| [HTTP][28]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/net/http/v2][29]                          |
+| [HTTP router][30]       | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/julienschmidt/httprouter/v2][31]          |
+| [Redis (go-redis)][32]  | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go-redis/redis/v2][33]                    |
+| [Redis (go-redis-v8)][34]| Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go-redis/redis.v8/v2][35]                |
+| [Redis (redigo)][36]    | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/garyburd/redigo/v2][37]                   |
+| [Redis (new redigo)][38]| Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gomodule/redigo/v2][39]                   |
+| [SQL][40]               | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/database/sql/v2][41]                      |
+| [SQLx][42]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx/v2][43]                      |
+| [MongoDB][44]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/go.mongodb.org/mongo-driver/mongo/v2][45] |
+| [MongoDB (mgo)][73]      | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo/v2][46]                    |
+| [BuntDB][47]            | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/tidwall/buntdb/v2][48]                    |
+| [LevelDB][49]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/syndtr/goleveldb/leveldb/v2][50]          |
+| [miekg/dns][51]         | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/miekg/dns/v2][52]                         |
+| [Kafka (confluent)][53] | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/v2][54]   |
+| [Kafka (sarama)][55]    | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2][56]                    |
+| [API Google][57]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/api/v2][58]             |
+| [go-restful][59]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful/v2][60]               |
+| [Twirp][61]             | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp/v2][62]                    |
+| [Vault][63]             | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/hashicorp/vault/v2][64]                   |
+| [Consul][65]            | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/hashicorp/consul/v2][66]                  |
+| [Gorm][67]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm/v2][68]                       |
+| [Gorm v2][69]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1/v2][70]                   |
+| [Kubernetes][71]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/k8s.io/client-go/kubernetes/v2][72]       |
+| [Memcache][73]          | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2][74]      |
 
 
 Les packages doivent être importés de la façon suivante :
