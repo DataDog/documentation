@@ -12,7 +12,7 @@ further_reading:
 
 The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made.
 
-By default, timeline cells are sorted in `oldest first` order, but this can be changed to `newest first` using the button at the top of the timeline.
+By default, timeline cells are sorted in `oldest first` order, but you can change it to `newest first` using the button at the top of the timeline.
 
 ## Content types
 
@@ -28,13 +28,13 @@ Each cell has its own content type that indicates the kind of information the ce
 
 ### Responder notes
 
-Add responder notes directly to the timeline using the text box just underneath the tabs for switching between the different sections of the Incident Details page. Customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. 
+Add responder notes directly to the timeline using the text box underneath the section tabs of the Incident Details page. You can also add responder notes [to the timeline from Slack][2]. You can customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. 
 
-For responder notes you author, you can edit the content or timestamp, or delete the note entirely. You can also copy a link to a specific cell to share with teammates. You can also add responder notes [to the timeline from Slack][2].
+For responder notes you author, you can edit the content or timestamp, or delete the note entirely. You can also copy a link to a specific cell to share with teammates. 
 
 ### Graph cells
 
-Graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][3]. When a graph cell is added to the timeline, it has full interactive hover states as found in Dashboards, Notebooks, and other pages. After 24 hours of being added to the timeline, the graphs are replaced with static images capturing what the graph was displaying. This is to ensure that graphs that are displaying short retention data have backup images captured even after the live data in the graphs has expired.
+Graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][3]. For 24 hours after a graph cell is added to the timeline, it has the same full interactive hover states found in Dashboards, Notebooks, and other pages. After 24 hours in the timeline, the graph is replaced with static images capturing what the graph was displaying. This is to ensure that graphs with data that has short retention have backups you can view after the live data for the graphs expires.
 
 ### Images
 
@@ -45,9 +45,9 @@ You can also add an image to an existing cell:
 1. Click the pencil icon to edit a cell.  
 2. Click the image icon and locate the image in your file directory.  
 3. You can use any of the following options to upload an image to be hosted by Datadog:  
-    * Drop an image file into the upload area  
-    * Click **Choose File** and locate the image in your file directory  
-    * Paste a publicly accessible URL for the image
+    * Drop an image file into the upload area.
+    * Click **Choose File** and locate the image in your file directory.
+    * Paste a publicly accessible URL for the image.
 
 ## Further reading
 
