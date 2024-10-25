@@ -13,7 +13,9 @@ allowed:
   # general examples
   - id: host
     display_name: "Host"
-  - id: programming_language
-    display_name: "Programming language"
-  - id: operating_system
+  - id: programming_lang
+    display_name: "Language"
+  - id: os
     display_name: "OS"
+  - id: database
+    display_name: "Database"
