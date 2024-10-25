@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -22,9 +22,9 @@
               public_title: Datadog-Jenkins Integration
               custom_kind: integration
               name: jenkins
-              is_public: true
+              is_public: false
               integration_title: Jenkins
-              has_logo: true
+              has_logo: false
               git_integration_title: jenkins
               description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
               short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: bryce/demo-preview-2
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
