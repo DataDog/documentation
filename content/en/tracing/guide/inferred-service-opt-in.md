@@ -27,7 +27,7 @@ With the new inferred entities experience, you can filter [Service Catalog][3] e
 
 To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For the full list of `peer.*` attributes, see [Inferred service dependencies nomenclature](#inferred-service-dependencies-nomemclature). Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
-If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities. 
+If you're using the Go, Java, Node.js, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities.
 
 **Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes. Read more about migration steps in the [opt-in instructions](#opt-in).
 
@@ -171,9 +171,9 @@ To opt in, add the following environment variables or system properties to your 
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-The minimum NodeJS tracer versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Node.js tracer versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
 To opt in, add the following environment variables or system properties to your tracer settings:
 
