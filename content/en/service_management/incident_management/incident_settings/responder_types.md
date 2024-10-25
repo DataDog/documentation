@@ -1,8 +1,5 @@
 ---
 title: Responder Types
-disable_toc: false
-aliases:
-- /path-to-old-doc/
 further_reading:
 - link: "/service_management/incident_management/describe/#response-team"
   tag: "Documentation"

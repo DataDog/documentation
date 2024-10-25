@@ -2134,11 +2134,16 @@ menu:
       parent: incidents
       identifier: incident_notification
       weight: 3
-    - name: Incident Details
-      url: service_management/incident_management/incident_details
+    - name: Investigate an Incident
+      url: service_management/incident_management/investigate
       parent: incidents
-      identifier: incident_details
+      identifier: incident_investigate
       weight: 4
+    - name: Timeline
+      url: service_management/incident_management/investigate/timeline
+      parent: incident_investigate
+      identifier: incident_investigate_timeline
+      weight: 401
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
