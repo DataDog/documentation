@@ -37,7 +37,6 @@ Go Datadog トレースライブラリは、Go のバージョンに対して[�
 | [Gin][6]          | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2][7]               |
 | [Gorilla Mux][8] | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2][9]                |
 | [gRPC][10]        | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2][11]     |
-| [gRPC v1.2][10]   | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12/v2][12] |
 | [chi][13]         | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2][14] |
 | [echo v4][15]     | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2][16]           |
 | [Fiber][18]     | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2/v2][19]              |
@@ -100,7 +99,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<パッケージディレクト�
 [9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
 [10]: https://github.com/grpc/grpc-go
 [11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2
-[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12/v2
 [13]: https://github.com/go-chi/chi
 [14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
 [15]: https://github.com/labstack/echo
