@@ -275,6 +275,23 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 [1]: https://github.com/nedbat/coveragepy
 [2]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
+{{% tab "Ruby" %}}
+
+### Compatibility
+
+* `datadogg-ci-rb>=1.7.0`
+* `simplecov>=0.18.0`.
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>datadog-ci-rb</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+</div>
+
+If your project has [simplecov][1] configured, the datadog-ci-rb library instruments it and reports the coverage data to Datadog automatically under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED` environment variable to disable this feature (for example: `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED=0`).
+
+[1]: https://github.com/simplecov-ruby/simplecov
+{{% /tab %}}
 {{% tab "JUnit Report Uploads" %}}
 
 ### Compatibility

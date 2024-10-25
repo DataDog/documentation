@@ -10,11 +10,10 @@ further_reading:
   text: "Log Explorer"
 ---
 
-## Overview
 
-{{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
-Calculated Fields is in beta. Have feedback or a feature request? <a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">Let us know</a>.
-{{< /beta-callout >}}
+<div class="alert alert-info">For syntax, operators, and functions, see <a href="/logs/explorer/calculated_fields/expression_language">Expression Language</a></div>
+
+## Overview
 
 Use calculated fields to transform and enrich your log data at query time. Define [formulas](#formula) to:
 - [Manipulate text][1]

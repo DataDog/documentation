@@ -47,11 +47,11 @@ To use a specific identifier (for example, to click on the `nth` element in a dr
 
 {{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
-5. Once you have defined an element, click **Test** to highlight the element in the recording to the right.
+5. Once you have defined an element, click **Highlight** to highlight the element in the recording to the right.
 
 By default, the **If user specified locator fails, fail test** checkbox is selected. This means that if the defined locator fails, the test is considered a failure.
 
-{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Test Highlighted Element" video=true >}}
+{{< img src="synthetics/browser_tests/advanced_options/css_2.mp4" alt="Test Highlighted Element" video=true >}}
 
 You can decide to fall back on the regular browser test algorithm by clearing the **If user specified locator fails, fail test** box.
 

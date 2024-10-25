@@ -170,6 +170,10 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 {{% /tab %}}
 {{< /tabs >}}
 
+#### List uploaded mapping files
+
+See the [RUM Debug Symbols][11] page to view all uploaded symbols.
+
 ### Plugin Configuration Options
 
 There are several plugin properties that can be configured through the plugin extension. In case you are using multiple variants, you can set a property value for a specific flavor in the variant.
@@ -282,3 +286,4 @@ To test your implementation:
 [8]: https://developer.android.com/tools/releases/platforms#11
 [9]: https://developer.android.com/tools/releases/platforms#10
 [10]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/#track-background-events
+[11]: https://app.datadoghq.com/source-code/setup/rum

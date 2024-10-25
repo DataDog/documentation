@@ -12,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "dashboards/functions/algorithms/#anomalies"
@@ -259,7 +259,7 @@ A standard configuration of thresholds and threshold window looks like:
 [9]: /monitors/types/metric/#data-window
 [10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
-[12]: /monitors/manage/status/#settings
+[12]: /monitors/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
 [15]: /monitors/guide/anomaly-monitor/

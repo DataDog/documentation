@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import re
+import os
 import json
 from io import StringIO
 import requests
@@ -60,11 +61,24 @@ Gets the latest version tag from the public oss mirror
 Currently only supports synthetics-windows-pl
 '''
 if __name__ == "__main__":
+    github_output = os.getenv('GITHUB_OUTPUT')
     PRODUCTS = ["synthetics-windows-pl"]
     data = get_data()
     keys = get_keys(data)
+    try:
+        current_versions = json.load(open('data/synthetics_worker_versions.json'))
+    except:
+        current_versions = {}
     final_versions = get_versions(keys)
-    print(final_versions)
     
-    with open('data/synthetics_worker_versions.json', 'w') as f:
-        f.write(json.dumps(final_versions, indent=4, sort_keys=True))
+    if current_versions != final_versions:
+        print("New version detected!")
+        print(final_versions)
+        with open('data/synthetics_worker_versions.json', 'w') as f:
+            f.write(json.dumps(final_versions, indent=4, sort_keys=True))
+        with open(github_output, 'a', encoding='utf-8') as f:
+            f.write('new_version=true')    
+    else:
+        with open(github_output, 'a', encoding='utf-8') as f:
+            print("No new version detected")
+            f.write('new_version=false')
