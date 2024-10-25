@@ -12,8 +12,8 @@ describe('YamlConfigParser.loadAllowlistsByLang', () => {
       prefsConfigDir: VALID_PREFS_CONFIG_DIR
     });
 
-    expect(allowlistsByLang).toMatchFileSnapshot(`
-        ${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/loadAllowlistsByLang.test.snap
-        `);
+    expect(allowlistsByLang).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/allowlistsByLang.test.snap`
+    );
   });
 });

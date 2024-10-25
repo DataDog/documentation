@@ -72,6 +72,10 @@ export const AllowlistSchema = z
 
 /**
  * A parsed-from-YAML allowlist as it is used in the codebase.
+ * The allowlist enforces consistency between the pref IDs
+ * and option IDs used in the docs pages, so that any given
+ * customer preference only needs to be selected once
+ * in order to be applied across every relevant page.
  *
  * @example
  * {

@@ -13,10 +13,10 @@ import { PagePrefsManifestSchema } from '../../../src/schemas/pagePrefs';
 describe('PageBuilder.build', () => {
   const LANG_DIR = VALID_PREFS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
-  const allowlistsByType = YamlConfigParser.loadAllowlistsFromLangDir(LANG_DIR);
+  const allowlist = YamlConfigParser.loadAllowlistFromLangDir(LANG_DIR);
   const prefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
     dir: LANG_DIR,
-    allowlistsByType
+    allowlist
   });
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');

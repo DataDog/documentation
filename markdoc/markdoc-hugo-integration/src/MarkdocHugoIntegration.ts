@@ -18,8 +18,8 @@ import {
   ParsingErrorReport,
   ParsedFile
 } from './schemas/compilation';
-import { AllowlistsByType } from './schemas/yaml/allowlist';
 import { PagePrefsManifestSchema } from './schemas/pagePrefs';
+import { Allowlist } from './schemas/yaml/allowlist';
 
 export class MarkdocHugoIntegration {
   directories: {
@@ -29,10 +29,10 @@ export class MarkdocHugoIntegration {
   };
   hugoConfig: HugoConfig;
   prefOptionsConfigByLang: Record<string, PrefOptionsConfig>;
-  allowlistsByLang: Record<string, AllowlistsByType> = {};
+  allowlistsByLang: Record<string, Allowlist> = {};
 
-  // Errors from the AST parsing process,
-  // which come with some extra information, like line numbers
+  // Errors from the markup-string-to-AST parsing process,
+  // which include additional helpful data, like line numbers
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string[]> = {};
@@ -47,15 +47,16 @@ export class MarkdocHugoIntegration {
     this.hugoConfig = args.hugoConfig;
 
     // Load the English allowlist configuration
-    this.allowlistsByLang.en = YamlConfigParser.loadAllowlistsFromLangDir(
-      this.directories.prefsConfig + '/en'
-    );
+    this.allowlistsByLang = YamlConfigParser.loadAllowlistsByLang({
+      prefsConfigDir: this.directories.prefsConfig,
+      langs: this.hugoConfig.languages
+    });
 
     // Load English pref configuration
     this.prefOptionsConfigByLang = {
       en: YamlConfigParser.loadPrefsConfigFromLangDir({
         dir: this.directories.prefsConfig + '/en',
-        allowlistsByType: this.allowlistsByLang.en
+        allowlist: this.allowlistsByLang.en
       })
     };
 
@@ -65,29 +66,11 @@ export class MarkdocHugoIntegration {
         return;
       }
 
-      let translatedAllowlists: AllowlistsByType;
-      translatedAllowlists = YamlConfigParser.loadAllowlistsFromLangDir(
-        this.directories.prefsConfig + '/' + lang
-      );
-
-      // Merge the English allowlist with the translated allowlist
-      const translatedPrefsAllowlist = Array.from(
-        new Set([...this.allowlistsByLang.en.prefs, ...translatedAllowlists.prefs])
-      );
-      const translatedOptionsAllowlist = Array.from(
-        new Set([...this.allowlistsByLang.en.options, ...translatedAllowlists.options])
-      );
-
-      this.allowlistsByLang[lang] = {
-        prefs: translatedPrefsAllowlist,
-        options: translatedOptionsAllowlist
-      };
-
       let translatedPrefOptionsConfig: PrefOptionsConfig;
       try {
         translatedPrefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
           dir: this.directories.prefsConfig + '/' + lang,
-          allowlistsByType: this.allowlistsByLang[lang]
+          allowlist: this.allowlistsByLang[lang]
         });
       } catch (e) {
         // If no prefs config directory exists for this language,
@@ -252,6 +235,7 @@ export class MarkdocHugoIntegration {
     const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
       frontmatter: p.parsedFile.frontmatter,
       prefOptionsConfig: this.prefOptionsConfigByLang[lang]
+      // allowlistsByType: this.allowlistsByLang[lang]
     });
 
     if (draftPrefsManifest.errors.length > 0) {
