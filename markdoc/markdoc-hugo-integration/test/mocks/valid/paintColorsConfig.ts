@@ -3,6 +3,7 @@ import {
   PrefOptionsConfigSchema
 } from '../../../src/schemas/yaml/prefOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
+import { Allowlist } from '../../../src/schemas/yaml/allowlist';
 
 export const paintColorsPrefOptionsConfig: PrefOptionsConfig = {
   color_options: [
@@ -61,3 +62,86 @@ export const paintColorsFrontmatter: Frontmatter = {
   ]
 };
 FrontmatterSchema.parse(paintColorsFrontmatter);
+
+export const paintColorsAllowlist: Allowlist = {
+  prefsById: {
+    color: {
+      id: 'color',
+      display_name: 'Color'
+    },
+    finish: {
+      id: 'finish',
+      display_name: 'Finish'
+    },
+    paint: {
+      id: 'paint',
+      display_name: 'Paint color'
+    }
+  },
+  optionsById: {
+    blue: {
+      id: 'blue',
+      display_name: 'Blue'
+    },
+    red: {
+      id: 'red',
+      display_name: 'Red'
+    },
+    matte: {
+      id: 'matte',
+      display_name: 'Matte'
+    },
+    eggshell: {
+      id: 'eggshell',
+      display_name: 'Eggshell'
+    },
+    gloss: {
+      id: 'gloss',
+      display_name: 'Gloss'
+    },
+    powder_blue: {
+      id: 'powder_blue',
+      display_name: 'Powder Blue'
+    },
+    elegant_royal: {
+      id: 'elegant_royal',
+      display_name: 'Elegant Royal'
+    },
+    robins_egg: {
+      id: 'robins_egg',
+      display_name: "Robin's Egg"
+    },
+    sky_blue: {
+      id: 'sky_blue',
+      display_name: 'Sky Blue'
+    },
+    navy: {
+      id: 'navy',
+      display_name: 'Navy'
+    },
+    brick: {
+      id: 'brick',
+      display_name: 'Brick'
+    },
+    scarlet: {
+      id: 'scarlet',
+      display_name: 'Scarlet'
+    },
+    rose: {
+      id: 'rose',
+      display_name: 'Rose'
+    },
+    ruby: {
+      id: 'ruby',
+      display_name: 'Ruby'
+    },
+    fire_engine: {
+      id: 'fire_engine',
+      display_name: 'Fire Engine'
+    },
+    crimson: {
+      id: 'crimson',
+      display_name: 'Crimson'
+    }
+  }
+};
