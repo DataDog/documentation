@@ -37,7 +37,7 @@ The following configuration options are supported across all Datadog SDKs:
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
 **Supported Values**: Boolean <br>
-**Description**: Enable or disable the sending of traces to the trace agent.
+**Description**: Enables or disables the sending of traces to the trace agent.
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **Default**:
