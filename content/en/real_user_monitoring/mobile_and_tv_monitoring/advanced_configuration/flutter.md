@@ -189,6 +189,20 @@ If you are using Flutter Navigator v2.0, your setup for automatic view tracking 
 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
+### Notify the SDK that your view finished loading
+
+We are tracking the time it takes for your view to load. To notify the SDK that your view has finished loading you will need to call the `addViewLoadingTime` method
+on `DatadogRum`. This method should be called when your view is fully loaded and ready to be displayed to the user:
+
+```dart
+  DatadogSdk.instance.rum?.addViewLoadingTime(override);
+```
+
+Use `override` option to replace previously calculated loading time for current view.
+
+Once the view loading time is sent, the loading time is accessible as `@view.loading_time` and will be visible also in the RUM UI.
+Please note that this API is still experimental and might change in the future.
+
 ### Add your own performance timing
 
 In addition to RUM's default attributes, you can measure where your application is spending its time by using `DdRum.addTiming`. The timing measure is relative to the start of the current RUM view.
