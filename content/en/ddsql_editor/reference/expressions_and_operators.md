@@ -53,12 +53,12 @@ DDSQL also supports the following comparator keywords as they are defined in the
 
 | Operator     | Description            | Example | Result |
 |--------------|------------------------|---------|--------|
-| `IS NULL`    | Select rows if the specified field is null. | `SELECT * FROM albums WHERE artist IS NULL`   | Return all rows that contain no data in the `artist` column.  |
-| `IS NOT NULL`| Select rows if the specified field is not null. Exclude rows with missing data. | SELECT * FROM albums WHERE artist IS NOT NULL | Return all rows that contain data in the `artist` column.   |
-| `LIKE`       | Search for a specific pattern in a string value. You can use the following wildcard characters to define the patterns: <br>**Percent sign (%)**: Represents zero, one, or multiple characters. <br>**Underscore (_)**: Represents a single character. | `SELECT * FROM employees WHERE firstname LIKE 'a%';` | Return all rows from the `employees` table where the `firstname` column value starts with `a`.  |
+| `IS NULL`    | Select rows if the specified field is null. | `SELECT * FROM host WHERE cloud_provider IS NULL`   | Return all rows that contain no data in the `cloud_provider` column.  |
+| `IS NOT NULL`| Select rows if the specified field is not null. Exclude rows with missing data. | SELECT * FROM host WHERE cloud_provider IS NOT NULL | Return all rows that contain data in the `cloud_provider` column.   |
+| `LIKE`       | Search for a specific pattern in a string value. You can use the following wildcard characters to define the patterns: <br>**Percent sign (%)**: Represents zero, one, or multiple characters. <br>**Underscore (_)**: Represents a single character. | `SELECT * FROM aws_eks_cluster WHERE LOWER(logging) LIKE '%"enabled":true%';` | Return all rows from the `aws_eks_cluster` table where the `logging` column is `"enabled":true`.  |
 | `NOT LIKE`   | Exclude rows from a search, where the row has a specific pattern in a string value. You can use the wildcards `%` and `_` for pattern matching. | `SELECT * FROM products WHERE product_code NOT LIKE '_B%';` | Return all rows from the `products` table where the `product_code` does **not** have `B` as the second character. |
 | `IN`         | Find multiple values in a `WHERE` clause. The `IN` operator is shorthand for multiple `OR` conditions. | `SELECT * FROM Customers WHERE Country IN ('Germany', 'France', 'UK');`  | Return all rows from `Customers` table where the `Country` value is either 'Germany', 'France', or 'UK'.|
-| `NOT IN`     | Replace a set of arguments with the `<>` or `!=` operator that is combined with the `AND` operator| `SELECT Name FROM Emp WHERE age NOT IN (23, 22, 21);`  | Return the `Names` of the `Employees` who do not have `Age` equal to `23`, `22`, or `21`. |
+| `NOT IN`     | Replace a set of arguments with the `<>` or `!=` operator that is combined with the `AND` operator| `SELECT * FROM host WHERE cloud_provider NOT IN ('aws', 'gcp');`  | Return all rows where `cloud_provider` is not `aws` or `gcp`. |
 
 
 DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y`. See [the Postgres documentation for `BETWEEN`][2] for details.
