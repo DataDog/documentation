@@ -1,5 +1,5 @@
 ---
-title: RUM Browser Monitoring Setup
+title: RUM Browser Monitoring Custom Instrumentation
 aliases:
   - /real_user_monitoring/setup
   - /real_user_monitoring/browser/setup
