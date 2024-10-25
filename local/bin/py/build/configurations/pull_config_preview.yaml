@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -22,7 +22,7 @@
               public_title: Datadog-Jenkins Integration
               custom_kind: integration
               name: jenkins
-              is_public: true
+              is_public: false
               integration_title: Jenkins
               has_logo: true
               git_integration_title: jenkins
@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: bryce/demo-preview
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
