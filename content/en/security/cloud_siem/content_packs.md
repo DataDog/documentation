@@ -343,7 +343,7 @@ The [Windows Event Logs Content Pack][62] includes:
 [41]: https://app.datadoghq.com/security/content-packs/nginx
 [42]: /security/default_rules/#nginx
 [43]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[44]: security/cloud_siem/guide/azure-config-guide-for-cloud-siem
+[44]: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem
 [45]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
 [46]: https://app.datadoghq.com/security/content-packs/google-security-command-center
 [47]: /security/default_rules/#googlesecuritycommandcenter
