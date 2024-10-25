@@ -31,7 +31,7 @@ further_reading:
     {{< nextlink href="/security/cloud_siem/content_packs/#cloud-security-content-packs" >}}<u>Cloud Security</u>: Google Security Command Center, Wiz{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, Cisco DUO, JumpCloud, Okta{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365, Slack Audit Logs{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Checkpoint Quantum Firewall, Cisco Meraki, Cisco Secure Firewall, Cisco Umbrella DNS, Cloudflare, Palo Alto Networks Firewall, Palo Alto Panorama, Zeek{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Check Point Quantum Firewall, Cisco Meraki, Cisco Secure Firewall, Cisco Umbrella DNS, Cloudflare, Palo Alto Networks Firewall, Palo Alto Panorama, Zeek{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#web-security-content-packs" >}}<u>Web Security</u>: NGINX{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-developer-tools-content-packs" >}}<u>Cloud developer tools</u>: GitHub{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#endpoint-content-packs" >}}<u>Endpoint</u>: CrowdStrike{{< /nextlink >}}
