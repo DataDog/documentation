@@ -32,7 +32,7 @@ import (
 func main() {
     // 일반 트레이서로 시작해 opentracing.Tracer 인터페이스로 반환합니다.
     // Datadog 트레이서에서 기본적으로 사용하는 것과 동일한 옵션 세트를 사용할 수도 있습니다.
-    t := opentracer.New(tracer.WithServiceName("<SERVICE_NAME>"))
+    t := opentracer.New(tracer.WithService("<SERVICE_NAME>"))
 
     // 트레이서 패키지용 일반 중지 호출을 사용해 중단합니다.
     defer tracer.Stop()
