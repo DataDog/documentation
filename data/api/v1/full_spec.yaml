@@ -4296,15 +4296,13 @@ components:
       - cws_containers_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
+      - data_stream_monitoring_usage
       - dbm_hosts_usage
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
-      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
-      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4370,15 +4368,13 @@ components:
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -4901,6 +4897,7 @@ components:
       - logs_transaction_stream
       - event_stream
       - rum_stream
+      - llm_observability_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4916,6 +4913,7 @@ components:
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
       - RUM_STREAM
+      - LLM_OBSERVABILITY_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -8052,16 +8050,14 @@ components:
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_jobs_monitoring_percentage
+      - data_stream_monitoring_usage
+      - data_stream_monitoring_percentage
       - dbm_hosts_percentage
       - dbm_hosts_usage
       - dbm_queries_percentage
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -8100,8 +8096,6 @@ components:
       - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
-      - estimated_rum_sessions_usage
-      - estimated_rum_sessions_percentage
       - universal_service_monitoring_usage
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
@@ -8195,16 +8189,14 @@ components:
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_JOBS_MONITORING_PERCENTAGE
+      - DATA_STREAM_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_PERCENTAGE
       - DBM_HOSTS_PERCENTAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -8243,8 +8235,6 @@ components:
       - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
-      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
@@ -8486,6 +8476,10 @@ components:
           description: The Data Jobs Monitoring usage by tag(s).
           format: double
           type: number
+        data_stream_monitoring_usage:
+          description: The Data Stream Monitoring usage by tag(s).
+          format: double
+          type: number
         dbm_hosts_percentage:
           description: The percentage of Database Monitoring host usage by tag(s).
           format: double
@@ -8510,14 +8504,6 @@ components:
           description: The error tracking events usage by tag(s).
           format: double
           type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
           format: double
@@ -8526,28 +8512,12 @@ components:
           description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_usage:
           description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -16393,6 +16363,9 @@ components:
     SyntheticsStepDetail:
       description: Object describing a step for a Synthetic test.
       properties:
+        allowFailure:
+          description: Whether or not the step was allowed to fail.
+          type: boolean
         browserErrors:
           description: Array of errors collected for a browser test.
           items:
@@ -16410,6 +16383,8 @@ components:
         error:
           description: Error returned by the test.
           type: string
+        failure:
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFailure'
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
         screenshotBucketKey:

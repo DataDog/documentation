@@ -228,8 +228,8 @@
   "UpsertCatalogEntity": {
     "description": "Create or update entities in Software Catalog.",
     "summary": "Create or update entities",
-    "request_description": "Entity YAML/JSON.",
-    "request_schema_description": "Create / Update entity request."
+    "request_description": "Entity YAML or JSON.",
+    "request_schema_description": "Create or update entity request."
   },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
@@ -958,7 +958,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name.",
+    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
