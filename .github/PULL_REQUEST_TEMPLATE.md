@@ -6,7 +6,11 @@
 ### Merge instructions
 <!-- If you want us to merge this PR as soon as we've reviewed, check the box below. If you're waiting for a release or there are other considerations that you want us to be aware of, list them below. -->
 
-- [ ] Please merge after reviewing
+Merge queue is enabled in this repo. If you'd like your PR to be merged immediately after it has receieved the required reviews, create the PR and then post the following comment:
+
+```
+/merge
+```
 
 ### Additional notes
 <!-- Anything else we should know when reviewing?-->
