@@ -57,7 +57,7 @@ In addition to housing your property fields, the Overview tab also provides the 
 | Latest Notifications| Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification tab][7].|
 | Pending Tasks | Displays the most recent incomplete task, with quick access to the full list of tasks in the Remediation tab. |
 | Responders | Displays the current incident commander as well as avatars for the remaining responders assigned to the incident. |
-| Recent Timeline Entries | Displays the five most recent entries in the incident timeline, with quick access to see the entire Timeline tab. |
+| Recent Timeline Entries | Displays the five most recent entries in the incident timeline, with quick access to see the entire Timeline tab. For more information, see the [Timeline] documentation. |
 
 ## Additional investigation tools
 
@@ -79,3 +79,4 @@ After declaring an incident, responders can use the Incident Details Page to app
 [5]: https://app.datadoghq.com/incidents/settings#Postmortems
 [6]: /service_management/incident_management/incident_settings/property_fields
 [7]: /service_management/incident_management/notification/
+[8]: /service_management/incident_management/investigate/timeline
