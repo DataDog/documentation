@@ -14,9 +14,7 @@ further_reading:
 
 ## Overview
 
-The Metrics Overview page provides you with a deeper understanding of your metrics landscape, and is helpful for users of all experience levels. 
-   - **New users** can use its comprehensive overview of Datadog metric offerings to help increase the value of their metrics.
-   - **Existing users** gain a detailed overview into their current metrics' volumes and origins.
+The Metrics Overview page provides you with a deeper understanding of your metrics landscape, and is helpful for users of all experience levels. Explore the sources of your metrics, generate additional metrics from Datadog products, and enable Metrics without Limits™ and historical data ingestion.
 
 The sections below detail the different parts of the page and provide guidance on how you can maximize the value of your Datadog metrics.
 
@@ -33,21 +31,21 @@ The **Metric Sources** column shows a summary of the metric sources reporting to
 {{% collapse-content title="Datadog Agents" level="h4" %}}
 The [Datadog Agent][2] collects metrics from the hosts it's installed on, and forwards them to Datadog. These metrics could originate from:
 
-   - Any of the official Datadog integrations that are bundled with the Agent. See [Integration Management][3] for more information about managing these integrations, or the [integrations-core repository][4] for a full listing of the available integrations.
-   - [Custom checks][5], which are used to collect metrics from custom applications or unique systems. You define the logic for the check yourself in the Agent's configuration files. See [Writing a Custom Agent Check][6] for more information.
+   - Any of the official Datadog integrations that are bundled with the Agent. See the [integrations-core repository][4] for a full listing of the available integrations, and [Integration Management][3] for more information about managing these integrations.
    - [DogStatsD][7], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][8] protocol with some Datadog-specific extensions.
+   - [Custom checks][5], which are used to collect metrics from custom applications or unique systems. You define the logic for the check yourself in the Agent's configuration files. See [Writing a Custom Agent Check][6] for more information.
    - [Marketplace integrations][9] installed on the Agent. The [Datadog Marketplace][10] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Cloud integrations" level="h4" %}}
-Also known as authentication-based integrations, these integrations are set up in Datadog. You provide the credentials for obtaining metrics, and Datadog makes API calls on your behalf to collect them. Common examples are cloud provider integrations, Slack, and PagerDuty.
+Also known as authentication-based integrations, these integrations are set up in Datadog. You provide the credentials for obtaining metrics, and Datadog makes API calls on your behalf to collect them. Common examples are cloud provider integrations, Slack, and PagerDuty. See [API-based integrations][28] in the Developers documentation for more information.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Datadog API" level="h4" %}}
 You can send metrics directly to the [Metrics API][11].
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Metrics from other Datadog Services" level="h4" %}}
+{{% collapse-content title="Metrics from other Datadog products" level="h4" %}}
 Some Datadog services, such as Synthetic Testing, provide standard metrics by default. Other services can be configured to generate custom metrics. This section covers the available options and provides links to relevant documentation.
 
 ##### Logs
@@ -144,3 +142,4 @@ Use the search bar in this section to view the latest data and configuration opt
 [25]: https://app.datadoghq.com/process
 [26]: https://app.datadoghq.com/event/settings/generate-metrics
 [27]: /metrics/summary/
+[28]: /developers/integrations/?tab=integrations#api-based-integrations
