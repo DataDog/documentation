@@ -184,7 +184,6 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 | `github.com/gofiber/fiber/v2`       | `v0.7.0`                      |
 | `github.com/gomodule/redigo/redis`  | `v0.7.0`                      |
 | `github.com/gorilla/mux`            | `v0.7.0`                      |
-| `github.com/jinzhu/gorm`            | `v0.7.0`                      |
 | `github.com/labstack/echo/v4`       | `v0.7.0`                      |
 | `google.golang.org/grpc`            | `v0.7.0`                      |
 | `gorm.io/gorm`                      | `v0.7.0`                      |

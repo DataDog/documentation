@@ -65,11 +65,10 @@ Le traceur Go prend en charge les datastores et les bibliothèques suivants.
 | [Kafka (confluent)][53] | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/v2][54]   |
 | [Kafka (sarama)][55]    | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2][56]                    |
 | [API Google][57]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/api/v2][58]             |
-| [go-restful][59]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful/v2][60]               |
+| [go-restful][59]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful.v3/v2][60]               |
 | [Twirp][61]             | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp/v2][62]                    |
 | [Vault][63]             | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/hashicorp/vault/v2][64]                   |
 | [Consul][65]            | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/hashicorp/consul/v2][66]                  |
-| [Gorm][67]              | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm/v2][68]                       |
 | [Gorm v2][69]           | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1/v2][70]                   |
 | [Kubernetes][71]        | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/k8s.io/client-go/kubernetes/v2][72]       |
 | [Memcache][73]          | Prise en charge complète | [github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2][74]      |
@@ -142,15 +141,13 @@ import "github.com/DataDog/dd-trace-go/contrib/<RÉPERTOIRE_PACKAGE>/<NOM_PACKAG
 [57]: https://github.com/googleapis/google-api-go-client
 [58]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/api/v2
 [59]: https://github.com/emicklei/go-restful
-[60]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful/v2
+[60]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/emicklei/go-restful.v3/v2
 [61]: https://github.com/twitchtv/twirp
 [62]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/twitchtv/twirp/v2
 [63]: https://github.com/hashicorp/vault
 [64]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/hashicorp/vault/v2
 [65]: https://github.com/hashicorp/consul
 [66]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/hashicorp/consul/v2
-[67]: https://github.com/jinzhu/gorm
-[68]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/jinzhu/gorm/v2
 [69]: https://gorm.io/
 [70]: https://github.com/DataDog/dd-trace-go/contrib/gorm.io/gorm.v1/v2
 [71]: https://github.com/kubernetes/client-go
