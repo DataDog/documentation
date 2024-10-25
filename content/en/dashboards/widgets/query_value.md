@@ -59,7 +59,7 @@ This widget can be used with the **[Dashboards API][5]**. See the following tabl
 {{< dashboards-widgets-api >}}
 
 ### Troubleshooting
- - If your query is using a percentile value to aggregate underlying data points, you may find that the value returned on the widget remains the same across different time ranges. This behavior can be expected with a large sample size of underlying data points ([reference][7]). Changes in values like this can typically be more easily found across narrower time ranges.
+ - If your query is using a percentile value to aggregate underlying data points, you may find that the value returned on the widget remains the same across different time ranges. This behavior can be expected with a large sample size of underlying data points. Changes in values like this can typically be more easily found across narrower time ranges. For more information on this concept, see the [Law of large numbers][7].
 
 ## Further Reading
 
