@@ -221,47 +221,40 @@ export class YamlConfigParser {
     return PrefOptionsConfigSchema.parse(prefOptionsConfig);
   }
 
-  /*
   static loadAllowlistsByLang(p: {
     prefsConfigDir: string;
     langs: string[];
     defaultLang?: string;
   }): Record<string, Allowlist> {
     const defaultLang = p.defaultLang || 'en';
-    const allowlistsByLang: Record<string, AllowlistsByType> = {};
+    const allowlistsByLang: Record<string, Allowlist> = {};
 
-    const defaultAllowlists = this.loadAllowlistsFromLangDir(
+    const defaultAllowlist = this.loadAllowlistFromLangDir(
       `${p.prefsConfigDir}/${defaultLang}`
     );
 
     p.langs.forEach((lang) => {
       if (lang === defaultLang) {
-        allowlistsByLang[lang] = defaultAllowlists;
+        allowlistsByLang[lang] = defaultAllowlist;
         return;
       }
       const langDir = `${p.prefsConfigDir}/${lang}`;
-      const translatedAllowlists = this.loadAllowlistsFromLangDir(langDir);
+      const translatedAllowlist = this.loadAllowlistFromLangDir(langDir);
 
-      const translatedPrefsAllowlist = Array.from(
-        new Set([...allowlistsByLang[defaultLang].prefs, ...translatedAllowlists.prefs])
-      );
-
-      const translatedOptionsAllowlist = Array.from(
-        new Set([
-          ...allowlistsByLang[defaultLang].options,
-          ...translatedAllowlists.options
-        ])
-      );
-
-      allowlistsByLang[lang] = {
-        prefs: translatedPrefsAllowlist,
-        options: translatedOptionsAllowlist
+      // merge the translated allowlist with the default allowlist
+      const mergedAllowlist: Allowlist = {
+        prefsById: { ...defaultAllowlist.prefsById, ...translatedAllowlist.prefsById },
+        optionsById: {
+          ...defaultAllowlist.optionsById,
+          ...translatedAllowlist.optionsById
+        }
       };
+
+      allowlistsByLang[lang] = mergedAllowlist;
     });
 
     return allowlistsByLang;
   }
-    */
 
   /**
    * Load the pref and options allowlists from a prefs config directory.
