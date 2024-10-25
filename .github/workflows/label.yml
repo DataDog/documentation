@@ -10,7 +10,7 @@ jobs:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Set documentation preview
-      if: github.event.pull_request.head.repo.fork == false
+      if: github.event.pull_request.head.repo.fork == false && github.ref != 'refs/heads/guacbot/translation-pipeline'
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}

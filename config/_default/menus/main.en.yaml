@@ -1757,16 +1757,21 @@ menu:
       parent: metrics_top_level
       identifier: metrics_advanced_filtering
       weight: 8
+    - name: Nested Queries
+      url: metrics/nested_queries/
+      parent: metrics_top_level
+      identifier: metrics_nested_queries
+      weight: 9
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 9
+      weight: 10
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 10
+      weight: 11
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
@@ -1840,18 +1845,23 @@ menu:
       parent: service_catalog_customize
       identifier: service_catalog_import_from_telemetries
       weight: 102
-    - name: Import Entries from Integrations
-      url: service_catalog/customize/import_entries_integrations
+    - name: Import Entries from Backstage
+      url: service_catalog/customize/import_entries_backstage
       parent: service_catalog_customize
-      identifier: service_catalog_import_from_integrations
+      identifier: service_catalog_import_from_backstage
       weight: 103
+    - name: Import Entries from ServiceNow
+      url: service_catalog/customize/import_entries_servicenow
+      parent: service_catalog_customize
+      identifier: service_catalog_import_from_servicenow
+      weight: 104
     - name: Navigate the Service Catalog
       url: service_catalog/navigating
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 2
-    - name: Investigate a Service
-      url: service_catalog/investigating
+    - name: Manage a Service
+      url: service_catalog/manage
       parent: service_catalog
       identifier: service_catalog_investigate
       weight: 3

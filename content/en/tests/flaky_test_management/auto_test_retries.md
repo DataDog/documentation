@@ -30,6 +30,7 @@ Ensure [Test Optimization][1] is configured for your test runs.
 * dd-trace-java >= 1.34.0
 * dd-trace-js >= v5.19.0 and dd-trace-js >= v4.43.0
 * datadog-ci-rb >= 1.4.0
+* dd-trace-dotnet >= 3.4.0
 
 ### Configuration
 
@@ -65,7 +66,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 [jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
 
-[1]: /tests/explorer/
+[1]: https://app.datadoghq.com/ci/settings/test-service
 [2]: https://www.npmjs.com/package/jest-image-snapshot
 [3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
 {{% /tab %}}
@@ -83,7 +84,23 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: /tests/explorer/
+[1]: https://app.datadoghq.com/ci/settings/test-service
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+
+{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
+
+By default, the feature retries any failing test case up to 5 times.
+Customize the Auto Test Retries with the following environment variables:
+
+* `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to `0` or `false` to explicitly disable retries even if the remote setting is enabled (default: true)
+* `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
+* `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
+
+
+[1]: https://app.datadoghq.com/ci/settings/test-service
 {{% /tab %}}
 
 {{< /tabs >}}
