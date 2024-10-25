@@ -36,7 +36,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.11.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci

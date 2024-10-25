@@ -7,7 +7,7 @@ disable_toc: false
 
 Configure Logstash to send logs to the Observability Pipelines Worker so that you can generate metrics from those logs.
 
-{{% observability_pipelines/use_case_images/generate_metrics %}} 
+{{% observability_pipelines/use_case_images/generate_metrics %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -149,9 +149,9 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
-{{% tab "Set env vars" %}}
+{{% tab "Add env vars" %}}
 
-{{% observability_pipelines/processors/set_env_vars %}}
+{{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -214,19 +214,9 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
