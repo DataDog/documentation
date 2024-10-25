@@ -53,8 +53,8 @@ DDSQL also supports the following comparator keywords as they are defined in the
 
 | Operator     | Description            | Example | Result |
 |--------------|------------------------|---------|--------|
-| `IS NULL`    | Select rows if the specified field is null. | `SELECT * FROM host WHERE cloud_provider IS NULL`   | Return all rows that contain no data in the `cloud_provider` column.  |
-| `IS NOT NULL`| Select rows if the specified field is not null. Exclude rows with missing data. | SELECT * FROM host WHERE cloud_provider IS NOT NULL | Return all rows that contain data in the `cloud_provider` column.   |
+| `IS NULL`    | Select rows if the specified field is null. | `SELECT * FROM host WHERE cloud_provider IS NULL;`   | Return all rows that contain no data in the `cloud_provider` column.  |
+| `IS NOT NULL`| Select rows if the specified field is not null. Exclude rows with missing data. | `SELECT * FROM host WHERE cloud_provider IS NOT NULL;` | Return all rows that contain data in the `cloud_provider` column.   |
 | `LIKE`       | Search for a specific pattern in a string value. You can use the following wildcard characters to define the patterns: <br>**Percent sign (%)**: Represents zero, one, or multiple characters. <br>**Underscore (_)**: Represents a single character. | `SELECT * FROM aws_eks_cluster WHERE LOWER(logging) LIKE '%"enabled":true%';` | Return all rows from the `aws_eks_cluster` table where the `logging` column is `"enabled":true`.  |
 | `NOT LIKE`   | Exclude rows from a search, where the row has a specific pattern in a string value. You can use the wildcards `%` and `_` for pattern matching. | `SELECT * FROM aws_eks_cluster WHERE LOWER(logging) NOT LIKE '%"enabled":true%';` | Return all rows from the `aws_eks_cluster` table where the `logging` does **not** have `"enabled":true%'`. |
 | `IN`         | Find multiple values in a `WHERE` clause. The `IN` operator is shorthand for multiple `OR` conditions. | `SELECT * FROM host WHERE cloud_provider IN ('aws', 'gcp');`  | Return all rows from `host` table where the `cloud_provider` value is either 'aws' or 'gcp'.|
