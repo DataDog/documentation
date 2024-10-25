@@ -155,7 +155,17 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
 
-{{< /collapse-content >}} 
+#### Add additional keywords
+
+After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
+
+1. Navigate to the [Sensitive Data Scanner][2] configuration page.
+1. Click the scanning group with the rule you want to edit.
+1. Hover over the rule, and then click the pencil icon.
+1. The recommend keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. Click **Update**.
+
+{{< /collapse-content >}}
 {{< collapse-content title="Add a custom scanning rule" level="p" >}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
@@ -172,7 +182,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
 {{< /collapse-content >}} 

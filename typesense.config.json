@@ -2,7 +2,7 @@
     "collections": [
         {
             "name": "docs_main_v1",
-            "short_name": "docs",
+            "file_path": "./public/search.json",
             "synonyms": [
                 {
                     "id": "agent",

@@ -14778,6 +14778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "typesense-instantsearch-adapter@npm:^2.8.0":
   version: 2.8.0
   resolution: "typesense-instantsearch-adapter@npm:2.8.0"
@@ -14792,6 +14793,11 @@ __metadata:
 "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.5.tgz":
   version: 1.0.5
   resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.5.tgz"
+=======
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.4.tgz":
+  version: 1.0.4
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.4.tgz"
+>>>>>>> master
   dependencies:
     "@babel/runtime": ^7.25.0
     crypto: ^1.0.1
@@ -14799,7 +14805,11 @@ __metadata:
     typesense: ^1.8.2
     winston: ^3.14.2
     yargs: ^17.7.2
+<<<<<<< HEAD
   checksum: 9a4cfcdefcd00e13c0fc8cf30a289157bbe9ab08e32e879943667061094a2641232657061f3c8be0b721ec7dc71afe1a2cbf060260e5a9080f5dc2154b438e7b
+=======
+  checksum: 82d721c5d98b5e6c53ecc439d257dc506c7b5f8139fd7d7a4999f73ec5bf35ebb70d446a20bc68c81a5ce8696fc3954c957bc818e60a81223cf8ed97c5bafd31
+>>>>>>> master
   languageName: node
   linkType: hard
 
