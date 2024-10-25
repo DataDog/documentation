@@ -22,17 +22,13 @@ import {
   PagePrefsConfig
 } from '../schemas/yaml/frontMatter';
 import {
-  AllowlistsByType,
   Allowlist,
   AllowlistSchema,
-  RawAllowlistSchema
+  AllowlistConfigSchema,
+  AllowlistConfigEntry
 } from '../schemas/yaml/allowlist';
 import fs from 'fs';
 import yaml from 'js-yaml';
-import {
-  SitewidePrefIdsConfigSchema,
-  SitewidePrefIdsConfig
-} from '../schemas/yaml/sitewidePrefs';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { PagePrefsManifest } from '../schemas/pagePrefs';
 import { PagePrefConfig } from '../schemas/yaml/frontMatter';
@@ -41,6 +37,7 @@ export class YamlConfigParser {
   static buildPagePrefsManifest(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
+    // allowlistsByType: AllowlistsByType;
   }): PagePrefsManifest {
     const manifest: PagePrefsManifest = {
       prefsById: {},
@@ -48,6 +45,9 @@ export class YamlConfigParser {
       errors: [],
       defaultValsByPrefId: {}
     };
+
+    // const validPrefIds = p.allowlistsByType.prefs.map((pref) => pref.id);
+    // const validOptionIds = p.allowlistsByType.options.map((option) => option.id);
 
     if (!p.frontmatter.page_preferences) {
       return manifest;
@@ -87,6 +87,15 @@ export class YamlConfigParser {
     // Fill out the manifest in the order that the prefs
     // appeared in the frontmatter
     p.frontmatter.page_preferences.forEach((pagePrefConfig) => {
+      // Validate the pref ID
+      /*
+      if (!validPrefIds.includes(pagePrefConfig.id)) {
+        manifest.errors.push(
+          `Invalid pref ID: The pref ID '${pagePrefConfig.id}' is not in the allowlist.`
+        );
+      }
+      */
+
       const hasDynamicOptions = pagePrefConfig.options_source.match(PLACEHOLDER_REGEX);
 
       // Get the options set ID for this pref,
@@ -144,6 +153,15 @@ export class YamlConfigParser {
         }
 
         optionsSet.forEach((option) => {
+          // Validate the option ID
+          /*
+          if (!validOptionIds.includes(option.id)) {
+            manifest.errors.push(
+              `Invalid option ID: The option ID '${option.id}' is not in the options allowlist.`
+            );
+          }
+          */
+
           if (option.default) {
             defaultValuesByOptionsSetId[optionsSetId] = option.id;
           }
@@ -177,18 +195,15 @@ export class YamlConfigParser {
 
   static loadPrefsConfigFromLangDir(p: {
     dir: string;
-    allowlistsByType: AllowlistsByType;
+    allowlist: Allowlist;
   }): Readonly<PrefOptionsConfig> {
     const optionSetsDir = `${p.dir}/option_sets`;
-
     const prefOptionsConfig = this.loadPrefOptionsFromDir(optionSetsDir);
 
     Object.values(prefOptionsConfig).forEach((optionsList) => {
-      const displayNamesByAllowedOptionId: Record<string, string> =
-        p.allowlistsByType.options.reduce(
-          (acc, entry) => ({ ...acc, [entry.id]: entry.display_name }),
-          {}
-        );
+      const displayNamesByAllowedOptionId: Record<string, string> = Object.values(
+        p.allowlist.optionsById
+      ).reduce((acc, entry) => ({ ...acc, [entry.id]: entry.display_name }), {});
 
       optionsList.forEach((option) => {
         const defaultDisplayName = displayNamesByAllowedOptionId[option.id];
@@ -206,22 +221,71 @@ export class YamlConfigParser {
     return PrefOptionsConfigSchema.parse(prefOptionsConfig);
   }
 
+  /*
+  static loadAllowlistsByLang(p: {
+    prefsConfigDir: string;
+    langs: string[];
+    defaultLang?: string;
+  }): Record<string, Allowlist> {
+    const defaultLang = p.defaultLang || 'en';
+    const allowlistsByLang: Record<string, AllowlistsByType> = {};
+
+    const defaultAllowlists = this.loadAllowlistsFromLangDir(
+      `${p.prefsConfigDir}/${defaultLang}`
+    );
+
+    p.langs.forEach((lang) => {
+      if (lang === defaultLang) {
+        allowlistsByLang[lang] = defaultAllowlists;
+        return;
+      }
+      const langDir = `${p.prefsConfigDir}/${lang}`;
+      const translatedAllowlists = this.loadAllowlistsFromLangDir(langDir);
+
+      const translatedPrefsAllowlist = Array.from(
+        new Set([...allowlistsByLang[defaultLang].prefs, ...translatedAllowlists.prefs])
+      );
+
+      const translatedOptionsAllowlist = Array.from(
+        new Set([
+          ...allowlistsByLang[defaultLang].options,
+          ...translatedAllowlists.options
+        ])
+      );
+
+      allowlistsByLang[lang] = {
+        prefs: translatedPrefsAllowlist,
+        options: translatedOptionsAllowlist
+      };
+    });
+
+    return allowlistsByLang;
+  }
+    */
+
   /**
    * Load the pref and options allowlists from a prefs config directory.
    */
-  static loadAllowlistsFromLangDir(dir: string): AllowlistsByType {
-    const result: AllowlistsByType = { prefs: [], options: [] };
+  static loadAllowlistFromLangDir(dir: string): Allowlist {
+    const result: Allowlist = { prefsById: {}, optionsById: {} };
 
     // Load and validate the prefs allowlist
     const prefsAllowlistFilePath = `${dir}/allowlists/prefs.yaml`;
     try {
-      const prefsAllowlistStr = fs.readFileSync(prefsAllowlistFilePath, 'utf8');
-      const prefsAllowlist = RawAllowlistSchema.parse(yaml.load(prefsAllowlistStr));
-      result.prefs = prefsAllowlist.allowed;
+      const prefsAllowlistConfigStr = fs.readFileSync(prefsAllowlistFilePath, 'utf8');
+      const prefsAllowlist = AllowlistConfigSchema.parse(
+        yaml.load(prefsAllowlistConfigStr)
+      );
+      result.prefsById = prefsAllowlist.allowed.reduce<
+        Record<string, AllowlistConfigEntry>
+      >((acc, entry) => {
+        acc[entry.id] = entry;
+        return acc;
+      }, {});
     } catch (e) {
       // If the file is not found, use an empty list
       if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-        result.prefs = [];
+        result.prefsById = {};
       } else {
         throw e;
       }
@@ -231,12 +295,19 @@ export class YamlConfigParser {
     const optionsAllowlistFilePath = `${dir}/allowlists/options.yaml`;
     try {
       const optionsAllowlistStr = fs.readFileSync(optionsAllowlistFilePath, 'utf8');
-      const optionsAllowlist = RawAllowlistSchema.parse(yaml.load(optionsAllowlistStr));
-      result.options = optionsAllowlist.allowed;
+      const optionsAllowlist = AllowlistConfigSchema.parse(
+        yaml.load(optionsAllowlistStr)
+      );
+      result.optionsById = optionsAllowlist.allowed.reduce<
+        Record<string, AllowlistConfigEntry>
+      >((acc, entry) => {
+        acc[entry.id] = entry;
+        return acc;
+      }, {});
     } catch (e) {
       // If the file is not found, use an empty list
       if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-        result.options = [];
+        result.optionsById = {};
       } else {
         throw e;
       }
