@@ -11,10 +11,9 @@ const index = async () => {
     const promises = []
 
     for (const collection of config.collections) {
-        const collectionFile = "./public/algolia.json";
         console.log(`Indexing collection ${collection.name}`)
-        promises.push(await typesenseSync(collection.name, collectionFile))
+        promises.push(typesenseSync(collection.name, collection.file_path))
     }
 
-    return Promise.all(promises)
+    return await Promise.all(promises)
 }

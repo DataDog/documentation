@@ -1,5 +1,5 @@
 ---
-title: Go Custom Instrumentation using Datadog API
+title: Go Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog Go APM tracer.'
+description: 'Instrument your code with the Datadog API tracer.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
