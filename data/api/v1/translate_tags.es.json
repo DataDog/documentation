@@ -25,7 +25,7 @@
   },
   "downtimes": {
     "name": "Tiempos de inactividad",
-    "description": "El [tiempo de inactividad](https://docs.datadoghq.com/monitors/notify/downtimes) te proporciona\nun mayor control sobre las notificaciones de monitores, ya que te permite excluir globalmente\ncontextos de alerta. La configuración de tiempos de inactividad, que pueden programarse con horas de inicio y \nhoras de fin, evita todas las alertas relacionadas con etiquetas de Datadog."
+    "description": "El [tiempo de inactividad](https://docs.datadoghq.com/monitors/notify/downtimes) te proporciona\nun mayor control sobre las notificaciones de monitores, ya que te permite excluir globalmente\ncontextos de alerta. La configuración de tiempos de inactividad, que pueden programarse con horas de inicio y \nhoras de fin, evita todas las alertas relacionadas con etiquetas (tags) de Datadog."
   },
   "embeddable-graphs": {
     "name": "Gráficos integrables",
@@ -120,7 +120,7 @@
     "description": "La monitorización Synthetic Datadog utiliza solicitudes de usuario simuladas y la renderización del navegador para ayudarte a garantizar el tiempo de actividad,\nidentificar problemas regionales y realizar un seguimiento del rendimiento de tu aplicación. Los tests Synthetics vienen\nen dos formatos diferentes, [tests de API]((https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\ny [tests de navegador](https://docs.datadoghq.com/synthetics/browser_tests). Puedes utilizar la API Datadog para\ngestionar ambos tipos de tests mediante programación.\n\nPara obtener más información, consulta la [documentación de la monitorización Synthetic](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
-    "name": "Etiquetas (tags)",
+    "name": "Etiquetas",
     "description": "El endpoint de etiquetas permite asignar etiquetas a hosts,\npor ejemplo: `role:database`. Esas etiquetas se aplican a\ntodas las métricas enviadas por el host. Consulta hosts por su nombre\n(`yourhost.example.com`) cuando busques y apliques\netiquetas a un host concreto.\n\nEl componente de tu infraestructura responsable de una etiqueta se identifica\npor una fuente. Por ejemplo, algunas fuentes válidas incluyen nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nMás información sobre etiquetas en [Empezando con etiquetas](https://docs.datadoghq.com/getting_started/tagging/)."
   },
   "timeboards": {
