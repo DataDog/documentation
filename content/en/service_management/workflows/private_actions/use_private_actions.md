@@ -182,7 +182,10 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 ### Change the allowlist of a runner
 
-To edit the allowlist for a Private Action Runner, edit the `actionsAllowlist` section of the `config.yaml` file in your runner's environment and add or remove the relevant permissions.
+To edit the allowlist for a Private Action Runner:
+
+1. Edit the `actionsAllowlist` section of the `config.yaml` file in your runner's environment and add or remove the relevant permissions.
+1. Restart the runner by restarting your container or deployment.
 
 {{% collapse-content title="Available permissions" level="p" %}}
 
