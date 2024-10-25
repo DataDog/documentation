@@ -124,11 +124,14 @@ Unlike other Datadog tracing libraries, when tracing Go applications, it's recom
 
 To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4]:
 
-There are two functions available to create spans. API details are available for `StartSpan` [here][5] and for `StartSpanFromContext` [here][6].
+There are three functions available to create spans. API details are available for `StartSpan` [here][5], for `StartSpanFromContext` [here][6], and `Span.StartChild` [here][12].
 
 ```go
-//Create a span with a resource name, which is the child of parentSpan.
-span := tracer.StartSpan("mainOp", tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
+// Create a span with no parent.
+span := tracer.StartSpan("mainOp")
+
+// Create a span with a resource name, which is the child of parentSpan.
+span := parentSpan.StartChild("mainOp", tracer.ResourceName("/user"))
 
 // Create a span which will be the child of the span in the Context ctx, if there is a span in the context.
 // Returns the new span, and a new context containing the new span.
@@ -196,7 +199,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
         // Handle or log extraction error
     }
 
-    span := tracer.StartSpan("post.filter", tracer.ChildOf(sctx))
+	span := tracer.StartSpan("post.filter", tracer.WithStartSpanConfig(&tracer.StartSpanConfig{
+		Parent: sctx,
+	}))
     defer span.Finish()
 }
 ```
@@ -228,3 +233,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [9]: /tracing/security
 [10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [11]: /tracing/trace_collection/trace_context_propagation/
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#Span.StartChild
