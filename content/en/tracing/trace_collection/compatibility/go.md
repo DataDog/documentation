@@ -49,7 +49,7 @@ The Go tracer includes support for the following data stores and libraries.
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
 | [AWS SDK][20]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go/aws/v2][21]                |
 | [AWS SDK v2][75]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go-v2/aws/v2][76]                |
-| [Elasticsearch][22]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/olivere/elastic/v2][23]                   |
+| [Elasticsearch][22]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/olivere/elastic.v5/v2][23]                   |
 | [Cassandra][24]         | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gocql/gocql/v2][25]                       |
 | [GraphQL][26]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/graph-gophers/graphql-go/v2][27]          |
 | [HTTP][28]              | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/net/http/v2][29]                          |
@@ -107,7 +107,7 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [20]: https://aws.amazon.com/sdk-for-go
 [21]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go/aws/v2
 [22]: https://github.com/olivere/elastic
-[23]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/olivere/elastic/v2
+[23]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/olivere/elastic.v5/v2
 [24]: https://github.com/gocql/gocql
 [25]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gocql/gocql/v2
 [26]: https://github.com/graph-gophers/graphql-go
