@@ -42,6 +42,7 @@ The first rollup supports the following aggregators:
 - `min`
 - `max`
 - `count`
+- `count by`
 
 Additional layers provided by multilayer time aggregation supports the following time aggregators: 
 
@@ -50,6 +51,7 @@ Additional layers provided by multilayer time aggregation supports the following
 - `min`
 - `max`
 - `count`
+- `count by`
 - `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
 - `stddev`
 
@@ -206,6 +208,7 @@ When nesting queries, only the lookback mode version of the `moving_rollup` func
 - `min`
 - `max`
 - `count`
+- `count by`
 - `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
 - `stddev`
 
