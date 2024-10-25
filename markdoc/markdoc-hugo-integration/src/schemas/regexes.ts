@@ -17,13 +17,6 @@ export const PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
 export const GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
 
 /**
- * A regex that matches a preference ID,
- * such as 'host' or 'database_version'.
- */
-export const PREF_ID_REGEX =
-  /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*$/;
-
-/**
  * A regex that matches a preference options set ID.
  *
  * The ID must:

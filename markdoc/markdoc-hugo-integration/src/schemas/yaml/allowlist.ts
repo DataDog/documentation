@@ -12,14 +12,14 @@
  * The allowlist is defined in the preferences configuration YAML.
  */
 import { z } from 'zod';
-import { PREF_ID_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX } from '../regexes';
 
 /**
  * A single entry in an allowlist.
  */
 export const AllowlistConfigEntrySchema = z
   .object({
-    id: z.string().regex(PREF_ID_REGEX),
+    id: z.string().regex(SNAKE_CASE_REGEX),
     display_name: z.string()
   })
   .strict();

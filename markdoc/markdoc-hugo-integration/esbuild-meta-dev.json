@@ -6,7 +6,7 @@
       "format": "cjs"
     },
     "dist/schemas/regexes.js": {
-      "bytes": 1400,
+      "bytes": 1199,
       "imports": [],
       "format": "cjs"
     },
@@ -174,7 +174,7 @@
           "bytesInOutput": 1245
         },
         "dist/schemas/regexes.js": {
-          "bytesInOutput": 714
+          "bytesInOutput": 597
         },
         "dist/helperModules/prefsResolution.js": {
           "bytesInOutput": 4179
@@ -213,7 +213,7 @@
           "bytesInOutput": 340
         }
       },
-      "bytes": 92209
+      "bytes": 92092
     }
   }
 }
