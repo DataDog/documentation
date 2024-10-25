@@ -1,3 +1,14 @@
+/**
+ * Allowlists are used to ensure consistency between docs pages.
+ * For example, for the cloud provider GCP, we want to ensure that
+ * on every page where GCP is an option for the host filter,
+ * the same pref ID is used (e.g. `host`) to represent the host filter,
+ * and the same option ID is used (e.g. `gcp`) to represent the GCP option
+ * for that host filter.
+ *
+ * This ensures that once the customer chooses GCP once as their host,
+ * that preference will apply correctly to every relevant page they visit.
+ */
 import { z } from 'zod';
 import { PREF_ID_REGEX } from '../regexes';
 
