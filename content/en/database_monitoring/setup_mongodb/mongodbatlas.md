@@ -39,7 +39,7 @@ The Datadog Agent requires read-only access to the MongoDB Atlas Cluster to coll
 4. Add the following permissions to the custom role:
    - `read` on the `admin` database
    - `read` on the `local` database
-   - `read` on the `config` database
+   - `read` on the `config` database (Sharded Cluster only)
    - `clusterMonitor` on the `admin` database
    - `read` on the user created databases you want to monitor, or `readAnyDatabase` to monitor all databases
 5. Click **Add Custom Role**.
