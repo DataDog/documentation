@@ -212,9 +212,41 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ### Falta el esquema o la base de datos en métricas de consulta y muestras de MySQL
 
-La etiqueta `schema` (también conocida como "base de datos") está presente en métricas de consulta y muestras de MySQL solo cuando se configura una base de datos predeterminada en la conexión que realizó la consulta. La base de datos predeterminada es configurada por la aplicación especificando el "esquema" en los parámetros de conexión a la base de datos, o ejecutando la [sentencia USE][9] en una conexión ya existente.
+La etiqueta (tag) `schema` (también conocida como "base de datos") está presente en métricas de consulta y muestras de MySQL solo cuando se configura una base de datos predeterminada en la conexión que realizó la consulta. La base de datos predeterminada es configurada por la aplicación especificando el "esquema" en los parámetros de conexión a la base de datos, o ejecutando la [sentencia USE][9] en una conexión ya existente.
 
 Si no hay ninguna base de datos por defecto configurada para una conexión, ninguna de las consultas realizadas por esa conexión tendrá la etiqueta `schema` en ellas.
+
+## Limitaciones conocidas de MariaDB
+
+### Métricas de InnoDB incompatibles
+
+Los siguientes métricas de InnoDB no están disponibles para ciertas versiones de MariaDB:
+
+| Nombre de la métrica                             | Versiones de MariaDB        |
+| --------------------------------------- | ----------------------- |
+| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
+| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
+| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
+| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
+| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
+| `mysql.innodb.rows_read`                | 10.11, 11.1             |
+| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+
+### Plan de explicación de MariaDB
+
+MariaDB no produce el mismo formato JSON que MySQL para los planes de explicación. Ciertos campos del plan de explicación pueden faltar en los planes de explicación de MariaDB, incluyendo `cost_info`, `rows_examined_per_scan`, `rows_produced_per_join` y `used_columns`.
 
 [1]: /es/database_monitoring/setup_mysql/
 [2]: /es/agent/troubleshooting/
