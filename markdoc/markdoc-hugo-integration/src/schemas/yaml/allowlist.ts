@@ -1,37 +1,55 @@
 import { z } from 'zod';
 import { PREF_ID_REGEX } from '../regexes';
 
-export const AllowlistEntrySchema = z
+/**
+ * A single entry in an allowlist.
+ *
+ * @example
+ * {
+ *  id: 'gcp',
+ *  display_name: 'Google Cloud Platform'
+ * }
+ */
+export const AllowlistConfigEntrySchema = z
   .object({
     id: z.string().regex(PREF_ID_REGEX),
     display_name: z.string()
   })
   .strict();
 
-export const AllowlistSchema = z.array(AllowlistEntrySchema).refine((entries) => {
-  const ids = entries.map((entry) => entry.id);
-  const uniqueIds = new Set(ids);
-  if (ids.length !== uniqueIds.size) {
-    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
-    console.error(`Duplicate IDs found in allowlist: ${duplicates.join(', ')}`);
-    return false;
-  }
-  return true;
-});
+/**
+ * A single entry in an allowlist.
+ *
+ * @example
+ * {
+ *  id: 'gcp',
+ *  display_name: 'Google Cloud Platform'
+ * }
+ */
+export type AllowlistConfigEntry = z.infer<typeof AllowlistConfigEntrySchema>;
 
-export const RawAllowlistSchema = z.object({
-  allowed: AllowlistSchema
-});
-export type RawAllowlist = z.infer<typeof RawAllowlistSchema>;
-
-export type AllowlistEntry = z.infer<typeof AllowlistEntrySchema>;
-export type Allowlist = z.infer<typeof AllowlistSchema>;
-
-export const AllowlistsByTypeSchema = z
+export const AllowlistConfigSchema = z
   .object({
-    prefs: AllowlistSchema,
-    options: AllowlistSchema
+    allowed: z.array(AllowlistConfigEntrySchema).refine((entries) => {
+      const ids = entries.map((entry) => entry.id);
+      const uniqueIds = new Set(ids);
+      if (ids.length !== uniqueIds.size) {
+        const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+        console.error(`Duplicate IDs found in allowlist: ${duplicates.join(', ')}`);
+        return false;
+      }
+      return true;
+    })
   })
   .strict();
 
-export type AllowlistsByType = z.infer<typeof AllowlistsByTypeSchema>;
+export type AllowlistConfig = z.infer<typeof AllowlistConfigSchema>;
+
+export const AllowlistSchema = z
+  .object({
+    prefsById: z.record(AllowlistConfigEntrySchema),
+    optionsById: z.record(AllowlistConfigEntrySchema)
+  })
+  .strict();
+
+export type Allowlist = z.infer<typeof AllowlistSchema>;
