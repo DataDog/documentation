@@ -29,6 +29,7 @@ By default, the Datadog SDK extracts and injects distributed tracing headers usi
 
 - [Datadog][1] (takes higher precedence when extracting headers)
 - [W3C Trace Context][2]
+- [Baggage][10]
 
 This default configuration maximizes compatibility with older Datadog SDK versions and products while allowing interoperability with other distributed tracing systems like OpenTelemetry.
 
@@ -70,6 +71,7 @@ The Datadog SDK supports the following trace context formats:
 | [W3C Trace Context][2] | `tracecontext`                |
 | [B3 Single][3]         | _Language Dependent Value_    |
 | [B3 Multi][4]          | `b3multi`                     |
+| [Baggage][10]          | `baggage`                     |
 | [None][5]              | `none`                        |
 
 ## Language support
@@ -623,6 +625,10 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 
 When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK does _not_ interact with request headers, meaning that the corresponding context propagation operation does nothing.
 
+### Baggage format
+
+Baggage propagation through OpenTelemetry's W3C-compatible headers is enabled by default.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -636,3 +642,4 @@ When the Datadog SDK is configured with the None format for extraction or inject
 [7]: /real_user_monitoring/platform/connect_rum_and_traces
 [8]: /synthetics/platform/apm
 [9]: /opentelemetry/interoperability/environment_variable_support
+[10]: https://www.w3.org/TR/baggage/

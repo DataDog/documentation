@@ -13,7 +13,7 @@ Autocomplete and search are in public beta.
 ## Requirements
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- Tracing library [`dd-trace-java`][6] 1.34.0 or higher is installed.
+- Tracing library [`dd-trace-java`][6] 1.39.1 or higher is installed.
 
 ## Installation
 
@@ -98,5 +98,5 @@ export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /dynamic_instrumentation/symdb
+[6]: https://github.com/DataDog/dd-trace-java
 

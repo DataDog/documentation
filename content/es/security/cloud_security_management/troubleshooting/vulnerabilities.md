@@ -47,15 +47,6 @@ ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 
 
 La solución para este problema es establecer la opción de configuración `discard_unpacked_layers=false` en el archivo de configuración de contenedor.
 
-## Ver métricas relacionadas
-
-1. Ve a **[Metrics > Summary][4]** (Métricas > Resumen) en Datadog.
-2. Buscar las siguientes métricas para ayudar a solucionar problemas:
-    -  `datadog.agent.sbom_attempts`: rastrea los intentos de recopilación de sbom por `source` y `type`.
-    -  `datadog.agent.sbom_generation_duration`: mide el tiempo que se tarda en generar SBOMs en segundos.
-    -  `datadog.agent.sbom_errors`: número de fallos sbom por `source`, `type` y `reason`.
-    -  `datadog.agent.export_size`: el tamaño del archivo escrito en disco. 
-
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

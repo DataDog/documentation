@@ -136,7 +136,7 @@ When the install finishes, you are given the option to launch the Datadog Agent 
 
 **Note:** Replace `DatadogGMSA$` with the username of your gMSA. The username **must end with a $ symbol.**
   ```powershell
-  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
+  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
   ```
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -395,7 +395,7 @@ After configuration is complete, [restart the Agent][11].
 [5]: /network_monitoring/performance
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
-[8]: https://app.datadoghq.com/monitors#create/integration
+[8]: https://app.datadoghq.com/monitors/create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/configuration/agent-commands/#restart-the-agent

@@ -33,7 +33,7 @@ title: ログ検索 API を使用してログデータにプログラマティ�
 
 ## 例
 
-### Basic search
+### 基本検索
 
 特定の期間内のすべてのログイベントを取得するには、以下の[検索構文][5]を使用して API コールを完了します。
 
@@ -460,7 +460,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 `data` パラメーターは Log オブジェクトの配列であり、最大でクエリの `limit` パラメーターで定義された数のログが含まれます。このパラメーターはデフォルトで `50` ですが、最大 `1000` に設定できます。
 
-To see the next page of your logs, resend the query with the `cursor` parameter that takes the `after` value from the previous call.
+ログの次のページを閲覧するには、前の呼び出しから `after` を取得する `cursor` パラメーターでクエリを再送信します。
 
 上記の JSON 例から、`after` の値 `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` を使用して次の 2 つの結果を取得します。
 

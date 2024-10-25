@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
   tag: "Blog"
   text: "Prioritize vulnerability remediation with Datadog SCA"
+- link: "https://www.datadoghq.com/blog/smart-vulnerability-remediation/"
+  tag: "Blog"
+  text: "Datadog delivers smarter vulnerability remediation"
 algolia:
   tags: ['Software Composition Analysis', 'Vulnerability Management', 'SCA', 'AVM', 'GuardDog']
 ---

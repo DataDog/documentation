@@ -18,7 +18,7 @@ further_reading:
 You can configure your LLM applications on the [Configuration page][1] with settings that can optimize your application's performance and security. 
 
 Topics
-: Helps identify and filter out irrelevant or malicious input, ensuring your LLM application stays focused on its intended purpose. 
+: Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
 
 Evaluations
 : Enables Datadog to assess your LLM application against respective dimensions like Quality and Security and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. 
@@ -28,8 +28,6 @@ Select an LLM application set up with LLM Observability to start customizing its
 {{< img src="llm_observability/configuration.png" alt="An example of an LLM application's configuration settings in LLM Observability" style="width:100%;" >}}
 
 Enabling any of the [out-of-the-box evaluations](#select-evaluations) outside of `Language Mismatch` shares your input and output to OpenAI. 
-
-<div class="alert alert-warning">By enabling the out-of-the-box evaluations, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
 
 ## Enter a topic
 
@@ -41,7 +39,7 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 To enable evaluations, click the toggle for the respective evaluations that you'd like to assess your LLM application against in the Quality and Security and Safety sections. For more information about evaluations, see [Terms and Concepts][2].
 
-Enabling evaluations results in your prompt-response data being shared with OpenAI. Under the zero data retention (ZDR) policy, OpenAI does not use any data sent from Datadog for training purposes.
+<div class="alert alert-warning">By enabling the out-of-the-box evaluations, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
 
 ## Further Reading
 

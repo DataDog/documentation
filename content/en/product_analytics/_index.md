@@ -3,6 +3,7 @@ title: Product Analytics
 description: Product Analytics help you understand your application usage at a glance.
 aliases:
 - /real_user_monitoring/product_analytics
+- /real_user_monitoring/guide/rum-for-product-analytics
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

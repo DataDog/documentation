@@ -98,16 +98,16 @@ Scope the search query clicking on either value. Clicking on a value toggles the
 ### Hide facets
 
 Your organization has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. Most likely, however, only a subset of these facets is valuable to you in a specific troubleshooting context. Hide facets you don't need on a routine basis, to keep only the most relevant facets for your troubleshooting sessions.
-
-{{< img src="logs/explorer/facet/hide_facet.png" alt="Hide Facet" style="width:30%;">}}
+1. In the [Logs Explorer][30], find the facet you want to hide.
+1. Click the cog icon next to the facet.
+1. Select **Hide Facet**.
 
 Hidden facets are still visible in the facet search (see the [Filter Facet](#filter-facets) section) in case you need it. Unhide hidden facets from there.
 
-{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Unhide Facet" style="width:30%;">}}
 
 Hidden facets are also hidden from auto-complete in the search bar, and dropdowns (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
 
-Hidden facets have no impact aside from the log explorer (for instance: live tail, monitors, or widget definitions in dashboards).
+Hidden facets have no impact aside from the log explorer (for instance, live tail, monitors, or widget definitions in dashboards).
 
 #### Hidden facets and teammates
 
@@ -262,3 +262,4 @@ To delete a facet, follow these steps:
 [27]: /logs/indexes/#indexes
 [28]: /logs/log_configuration/rehydrating
 [29]: /logs/log_configuration/parsing/?tab=matchers#nested-json
+[30]: https://app.datadoghq.com/logs

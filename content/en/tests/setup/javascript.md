@@ -46,22 +46,16 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
 To report test results to Datadog, you need to configure the Datadog JavaScript library:
 
 {{< tabs >}}
-{{% tab "Github Actions" %}}
-You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
-If you do so, the rest of the setup steps below can be skipped.
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
 
-[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+<div class="alert alert-warning">
+  <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
+</div>
+
 {{% /tab %}}
 
-{{% tab "Jenkins" %}}
-You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
-If you do so, the rest of the setup steps below can be skipped.
-
-[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
-{{% /tab %}}
-
-
-{{% tab "Other cloud CI provider" %}}
+{{% tab "Other Cloud CI Provider" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
 {{% ci-agentless %}}
 
@@ -625,11 +619,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 ## Manual testing API
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
-</div>
-
-<div class="alert alert-warning">
-  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
+  <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
 If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
@@ -734,7 +724,7 @@ The payload to be published is a dictionary `<string, string|number>` of tags or
 When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
 
 ```shell
-NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
 ```
 
 

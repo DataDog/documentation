@@ -13,6 +13,8 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -161,7 +163,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple log status remapper processors are applied to a log within a pipeline, only the first one in the pipeline's order is considered. Additionally, for all pipelines that match the log, only the first status remapper encountered (from all applicable pipelines) is applied.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -424,7 +426,7 @@ Use the category processor to add a new attribute (without spaces or special cha
 
 **Notes**:
 
-* The syntax of the query is the one in the [Logs Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one in the [Log Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
 * Once defined in the category processor, you can map categories to log status using the [log status remapper](#log-status-remapper).

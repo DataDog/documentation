@@ -17,8 +17,8 @@ further_reading:
 <div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Early Flake Detection is in public beta.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Early Flake Detection is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -63,9 +63,8 @@ After you have set up your Datadog library for Test Visibility, you can configur
 The required test framework and dd-trace versions are:
 
 `dd-trace-js`:
-* `>=5.12.0` for the 5.x release.
-* `>=4.36.0` for the 4.x release.
-* `>=3.57.0` for the 3.x release.
+* `>=5.23.0` for the 5.x release.
+* `>=4.47.0` for the 4.x release.
 
 The test framework compatibility is the same as [Test Visibility Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
@@ -84,16 +83,18 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 
 {{% /tab %}}
 
+{{% tab "Ruby" %}}
+
+`datadog-ci-rb>=1.5.0`
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
 ## Manage Excluded Branches
 
-Excluded Branches will not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection.
-
-{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
-
-You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
+Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
 ## Explore results in the Test Visibility Explorer
 
@@ -110,7 +111,7 @@ If you suspect there are issues with Early Flake Detection, navigate to the [Tes
 
 This could be caused by a couple of reasons:
 
-* This test has already run in an excluded branch, such as `staging`, `main`, or `preprod`.
+* This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
 ### A test was retried that is not new

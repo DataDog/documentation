@@ -38,10 +38,6 @@ title: グラフ作成ガイド
     {{< nextlink href="/dashboards/guide/how-weighted-works" >}}weighted() の仕組みは？{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="DDSQL Editor:" >}}
-    {{< nextlink href="/dashboards/guide/ddsql_use_cases" >}}Common DDSQL queries and use cases{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< whatsnext desc="非推奨の API:" >}}
     {{< nextlink href="dashboards/guide/screenboard-api-doc" >}}スクリーンボード API{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/timeboard-api-doc" >}}タイムボード API{{< /nextlink >}}

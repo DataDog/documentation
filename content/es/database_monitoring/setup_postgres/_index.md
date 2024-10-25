@@ -4,21 +4,12 @@ disable_sidebar: true
 title: Configuración de Postgres
 ---
 
-### Versiones de Postgres compatibles
+### Instrucciones de instalación por tipo de alojamiento
 
-|  | Autoalojadas | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
-|--|------------|---------|------------|------------------|---------|
-| Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 11 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 14 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 15 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 16 | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |
-
-Para obtener instrucciones de configuración, selecciona tu tipo de alojamiento:
+Para saber cómo configurar la Monitorización de base de datos en una base de datos de Postgres, selecciona tu tipo de alojamiento:
 
 {{< partial name="dbm/dbm-setup-postgres" >}}
 
 <br>
+
+Nota: Las versiones 9.6-16 de Postgres son compatibles con cada tipo de alojamiento, a excepción de Google Cloud SQL, que admite las versiones 9.6-15.

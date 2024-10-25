@@ -18,7 +18,7 @@ title: 브라우저 테스팅 단계
 
 ## 자동으로 기록된 단계
 
-**레코딩 시작**을 클릭하면 Chrome 및 Edge 브라우저에서 사용할 수 있는 [Datadog 브라우저 테스트 레코더 확장][3]은 웹 사이트의 단계를 자동으로 감지하고 기록할 수 있습니다.
+ **Start Recording**을 클릭하면 [Datadog 브라우저 테스트 레코더 확장 프로그램][3]이 웹사이트의 단계를 자동으로 감지하고 기록합니다.
 
 ### 클릭
 
@@ -66,7 +66,7 @@ Datadog은 업로드와 같이 애플리케이션에서 수행하는 단계를 �
 
 테스트가 예상되는 상태로 종료되는지 확인하려면 **어서션**으로 브라우저 테스트를 종료해야 합니다.
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="브라우저 테스트 단계에서 어서션 옵션" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="브라우저 테스트 단계의 어설션 옵션" style="width:70%;" >}}
 
 일부 어서션은 페이지 요소의 **클릭** 또는 **어서션**과 같이 사용자가 마지막으로 상호 작용한 페이지인 활성 페이지의 유효성을 검사합니다.
 
@@ -91,9 +91,12 @@ Datadog은 업로드와 같이 애플리케이션에서 수행하는 단계를 �
 브라우저 테스트가 올바른 요소를 타겟팅하도록 드롭다운 메뉴에서 `CSS` 또는 `XPath 1.0`을 선택하고 선택기를 추가하여 사용자 로케이터를 설정합니다. **Test**를 클릭합니다.
 
 
-Datadog은 더 나은 정확도를 위해 위에 나열된 두 가지 어서션을 사용할 것을 권장합니다. 자세한 내용은 [고급 옵션][1]을 참조하세요.
+#### 체크박스 또는 라디오 버튼의 상태 테스트
 
-[1]: /ko/synthetics/browser_tests/advanced_options#user-specified-locator
+브라우저 테스트에서 페이지 요소를 선택하고 어설션 상태(선택 취소 또는 선택)의 유효성을 검사하도록 어설션 단계를 만듭니다.
+
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="브라우저 테스트 단계의 어설션 옵션" style="width:60%;" >}}
+
 {{% /tab %}}
 {{% tab "활성 페이지 콘텐츠 테스트" %}}
 
@@ -127,7 +130,7 @@ Datadog은 더 나은 정확도를 위해 위에 나열된 두 가지 어서션�
 
 자바스크립트 어서션 함수는 다음 파라미터와 함께 제공되며 반환문이 필요합니다.
 
-* `return`(필수) 문은 테스트 단계가 성공하기 위해 어서션이 충족해야 하는 조건을 반영합니다. 모든 유형이 반환될 수 있지만, 값은 자동으로 부울로 캐스팅됩니다.
+* `return`(필수) 문은 테스트 단계가 성공하기 위해 어설션이 충족해야 하는 조건을 반영합니다. 모든 유형이 반환될 수 있지만 값은 자동으로 부울로 캐스팅됩니다. 잘못된 값이 반환되면 테스트 단계가 실패합니다.
 
 * `vars`(선택 사항): 브라우저 테스트의 [변수][2]를 포함하는 문자열입니다. 자바스크립트 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어, 브라우저 테스트에 `USERNAME` 변수가 포함된 경우 `vars.USERNAME`를 사용하여 자바스크립트 스니펫에서 호출합니다.
 
@@ -137,7 +140,7 @@ Datadog은 더 나은 정확도를 위해 위에 나열된 두 가지 어서션�
 
 자바스크립트 어서션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
 
-예를 들면 다음과 같습니다.
+예시:
 
 ```javascript
 const script = document.createElement('script');
@@ -164,6 +167,8 @@ return jQuery().jquery.startsWith('3.5.1')
 [3]: /ko/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 {{% /tab %}}
 {{< /tabs >}}
+
+</br>
 
 ### 내비게이션
 
@@ -275,7 +280,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 * [`Xpath`][12]는 이메일이 HTML 본문을 포함할 때만 적용 가능합니다. 해당하는 위치의 콘텐츠를 반환합니다(예: `$`).
 
-#### 자바스크립트(Javascript)
+#### JavaScript
 
 자바스크립트 단계는 동기 및 비동기 코드를 모두 지원합니다. 브라우저 테스트는 페이지에 스크립트를 추가하여 외부 자바스크립트를 로드하기 때문에, 웹사이트가 외부 자바스크립트를 허용하는 경우에만 작동합니다.
 
@@ -285,7 +290,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 * `vars` (선택 사항): 코드 내에서 사용할 수 있는 브라우저 테스트의 [변수](#use-variables)를 포함하는 문자열입니다. 자바스크립트 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어 브라우저 테스트에 이미 `PRICE` 변수가 있는 경우, `vars.PRICE`를 사용하여 자바스크립트 스니펫에서 호출합니다.
 
-* `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **Select** 및 **Update** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
+* `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **선택** 및 **업데이트** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="브라우저 테스트 자바스크립트 변수" video="true" width="100%" >}}
 
@@ -376,14 +381,14 @@ HTTP 요청을 정의하려면:
 
    * **Encode parameters**: 인코딩이 필요한 쿼리 파라미터의 이름과 값을 추가합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "요청 본문" %}}
 
    * **Body type**: HTTP 요청에 추가하려는 요청 본문 유형(`text/plain`, `application/json`,`text/xml` ,`text/html` ,`application/x-www-form-urlencoded`, `GraphQL` 또는 `None`)을 선택합니다.
    * **Request body**: HTTP 요청 본문의 내용을 추가합니다. 요청 본문의 최대 크기는 50KB로 제한됩니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "프록시" %}}
 
@@ -463,6 +468,18 @@ HTTP 요청은 다음 `content-encoding` 헤더를 사용하여 본문의 압축
 
 HTTP 요청이나 자바스크립트 단계의 변수와 같이 일부 변수는 런타임에만 계산됩니다. 예를 들어, `{{ <YOUR_VARIABLE_NAME> }}`이 포함된 `Type text` 단계가 있다고 가정해 보겠습니다. 테스트 실행 시 `{{ <YOUR_VARIABLE_NAME> }}`는 변수의 연관된 값으로 체계적으로 대체됩니다. 이러한 변수 중 하나를 사용하여 단계를 기록하려면 테스트를 저장하기 전에 실제 변수 값으로 단계를 기록하고 단계의 정의에서 실제 값을 `{{ <YOUR_VARIABLE_NAME> }}`로 대체합니다.
 
+## 녹화본 편집하기
+
+브라우저 녹화본을 저장한 후 편집하려면 다음 단계를 따르세요.
+
+- [Synthetics > Tests][14]로 이동합니다.
+- 이전에 저장된 브라우저 테스트를 클릭합니다.
+- 오른쪽 상단에 있는 톱니바퀴 아이콘을 클릭한 다음 "edit recording"을 클릭합니다.
+- 삭제하거나 재생할 여러 단계 또는 하나의 단계를 선택한 다음 **Save & Quit**을 클릭합니다.
+
+{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="브라우저 녹화 편집 및 다중 선택 기능 사용"="70%" >}}
+
+
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -480,3 +497,4 @@ HTTP 요청이나 자바스크립트 단계의 변수와 같이 일부 변수는
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: https://app.datadoghq.com/synthetics/tests

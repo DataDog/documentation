@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: Agent の概要
   title: Agent のインストール
-- desc: 750 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
+- desc: 800 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
   link: getting_started/integrations/
   link_text: インテグレーションの概要
   title: インテグレーションをセットアップ
@@ -143,6 +143,10 @@ nav_sections:
       icon: pipelines
       link: observability_pipelines/
       title: Observability Pipelines
+    - desc: LLM アプリケーションを追跡、監視、保護する
+      icon: llm-observability
+      link: llm_observability/
+      title: LLM Observability
 - nav_section:
   - name: 構成
   - navtiles:

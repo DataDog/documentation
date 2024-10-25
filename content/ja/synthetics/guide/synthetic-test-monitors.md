@@ -17,8 +17,6 @@ title: Synthetic テストモニターを利用する
 
 Synthetic テストを作成すると、Datadog は自動的に関連するモニターを作成します。Synthetic テストのモニターがアラートを発する際の通知を設定することができます。
 
-{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Synthetic テストモニター" style="width:100%;">}}
-
 ## Synthetic テストモニターの作成
 
 <div class="alert alert-info"><a href="/monitors/">モニター</a>で Synthetic テストモニターを作成またはインポートすることはできません。</div>

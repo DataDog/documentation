@@ -652,6 +652,20 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1540689753",
+      "description": "Create api handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_419892746",
+      "description": "Update api handle returns \"OK\" response"
+    }
+  ],
   "CreateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -1055,6 +1069,13 @@
       "group": "service_scorecards",
       "suffix": "",
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpsertCatalogEntity": [
+    {
+      "group": "software_catalog",
+      "suffix": "_586948155",
+      "description": "Create or update software catalog entity using schema v3 returns \"ACCEPTED\" response"
     }
   ],
   "AggregateSpans": [

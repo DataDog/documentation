@@ -28,6 +28,7 @@ author:
 categories:
 - languages
 - log collection
+- windows
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md
@@ -36,7 +37,7 @@ draft: false
 git_integration_title: aspdotnet
 integration_id: aspdotnet
 integration_title: ASP.NET
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
 manifest_version: 2.0.0
 name: aspdotnet
@@ -49,7 +50,9 @@ tile:
   classifier_tags:
   - Category::Languages
   - Category::로그 수집
+  - Category::Windows
   - Supported OS::Windows
+  - Offering::통합
   configuration: README.md#Setup
   description: 실시간으로 ASP.NET 서비스 메트릭을 추적하세요
   media: []
@@ -92,7 +95,7 @@ ASP.NET 애플리케이션과 관련된 처리되지 않은 500 수준 예외 �
 
 [Agent의 `status` 하위 명령을 실행][7]하고 Checks 섹션에서 `aspdotnet`을 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "aspdotnet" >}}
