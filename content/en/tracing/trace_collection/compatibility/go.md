@@ -40,7 +40,6 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 | [gRPC v1.2][10]   | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12][12] |/v2
 | [chi][13]         | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi][14] |/v2
 | [echo v4][15]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4][16]           |/v2
-| [echo v3][15]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/labstack/echo][17]              |/v2
 | [Fiber][18]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2][19]              |/v2
 
 #### Library compatibility
@@ -105,7 +104,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
 [15]: https://github.com/labstack/echo
 [16]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
-[17]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo/v2
 [18]: https://github.com/gofiber/fiber
 [19]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2/v2
 [20]: https://aws.amazon.com/sdk-for-go

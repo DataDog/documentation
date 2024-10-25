@@ -40,7 +40,6 @@ Go Datadog トレースライブラリは、Go のバージョンに対して[�
 | [gRPC v1.2][10]   | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12][12] |/v2
 | [chi][13]         | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi][14] |/v2
 | [echo v4][15]     | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4][16]           |/v2
-| [echo v3][15]     | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/labstack/echo][17]              |/v2
 | [Fiber][18]     | 完全対応 | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2][19]              |/v2
 
 #### ライブラリの互換性
@@ -106,7 +105,6 @@ import "github.com/DataDog/dd-trace-go/contrib/<パッケージディレクト�
 [14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
 [15]: https://github.com/labstack/echo
 [16]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
-[17]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo/v2
 [18]: https://github.com/gofiber/fiber
 [19]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2/v2
 [20]: https://aws.amazon.com/sdk-for-go

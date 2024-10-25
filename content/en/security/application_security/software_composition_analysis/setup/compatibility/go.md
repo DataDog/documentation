@@ -63,7 +63,6 @@ The Go packages listed in this page are relevant for Application Security capabi
 | [Gorilla Mux][8] | {{< X >}} | {{< X >}} |
 | [gRPC][11]          | {{< X >}} | {{< X >}} |
 | [echo v4][9]     | {{< X >}}  | {{< X >}} |
-| [echo v3][10]     | {{< X >}} | {{< X >}} |
 | [chi][12] | {{< X >}} | {{< X >}} |
 | [graphql-go][17] | {{< X >}} | {{< X >}} |
 | [gqlgen][18] | {{< X >}} | {{< X >}} |
@@ -91,7 +90,6 @@ The Go packages listed in this page are relevant for Application Security capabi
 [7]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2
 [8]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
 [9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
-[10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo/v2
 [11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2
 [12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
 [13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
