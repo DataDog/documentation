@@ -1,5 +1,5 @@
 /**
- * Allowlists are used to ensure consistency between docs pages.
+ * The allowlist is used to ensure consistency between docs pages.
  * For example, for the cloud provider GCP, we want to ensure that
  * on every page where GCP is an option for the host filter,
  * the same pref ID is used (e.g. `host`) to represent the host filter,
@@ -8,6 +8,8 @@
  *
  * This ensures that once the customer chooses GCP once as their host,
  * that preference will apply correctly to every relevant page they visit.
+ *
+ * The allowlist is defined in the preferences configuration YAML.
  */
 import { z } from 'zod';
 import { PREF_ID_REGEX } from '../regexes';
