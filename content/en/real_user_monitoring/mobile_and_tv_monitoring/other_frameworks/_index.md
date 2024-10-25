@@ -35,6 +35,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#npm
+[1]: /real_user_monitoring/browser/custom_setup/#npm
 [2]: /real_user_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios

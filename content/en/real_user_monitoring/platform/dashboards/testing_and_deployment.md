@@ -77,7 +77,7 @@ For more information about the data displayed, see our documentation for each pl
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/browser/setup/#initialization-parameters
+[4]: /real_user_monitoring/browser/custom_setup/#initialization-parameters
 [5]: /real_user_monitoring/ios/data_collected/
 [6]: /real_user_monitoring/android/data_collected/
 [7]: /real_user_monitoring/reactnative/data_collected/

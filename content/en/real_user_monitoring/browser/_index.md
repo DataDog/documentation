@@ -36,6 +36,6 @@ From here, you can modify the [data and context][2] the RUM Browser SDK collects
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#setup
+[1]: /real_user_monitoring/browser/custom_setup/#setup
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: /real_user_monitoring/browser/advanced_configuration/
