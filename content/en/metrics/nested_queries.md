@@ -184,6 +184,11 @@ In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
+## Moving rollup WORKING ON THIS
+
+Datadog provides a `moving_rollup` function that enables aggregation of data points over a specified time window (quick refresher [here][10]). By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze data points beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
+
+
 ## Use nested queries with Datadog's API
 You can use nested queries functionality in our [public API for querying timeseries data][3]. Change the contents of the **formula** object
 
