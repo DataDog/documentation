@@ -17,7 +17,7 @@ export const PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
 export const GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
 
 /**
- * A regex that matches a preference options set ID.
+ * A regex that matches a preference option set ID.
  *
  * The ID must:
  * - be in snake case
