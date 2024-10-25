@@ -93,7 +93,7 @@ psql -h localhost -U datadog postgres -c \
 When it prompts for a password, enter the one used in the first command.
 
 <!-- postgres_version 9.6 and below -->
-{% if equals($postgres_version, "lte_9_6") %}
+{% if equals($postgres_version, "lte_9_6_x") %}
 For PostgreSQL versions 9.6 and below, run the following and create a `SECURITY DEFINER` to read from `pg_stat_activity`.
 
 ```shell

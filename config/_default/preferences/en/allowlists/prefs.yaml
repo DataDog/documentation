@@ -1,0 +1,19 @@
+allowed:
+  # for the Markdoc test pages
+  - id: color
+    display_name: "Color"
+  - id: item
+    display_name: "Item"
+  - id: postgres_version
+    display_name: "Postgres version"
+  - id: agent_version
+    display_name: "Agent version"
+  - id: agent_host
+    display_name: "Agent host"
+  # general examples
+  - id: host
+    display_name: "Host"
+  - id: programming_language
+    display_name: "Programming language"
+  - id: operating_system
+    display_name: "OS"

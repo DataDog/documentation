@@ -201,8 +201,6 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
       allowlist: paintColorsAllowlist
     });
 
-    console.log(manifest.errors);
-
     expect(manifest.errors.length).toEqual(1);
     expect(manifest.errors[0]).toContain('Invalid placeholder:');
   });

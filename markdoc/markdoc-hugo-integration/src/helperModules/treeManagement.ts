@@ -98,8 +98,6 @@ export function buildRenderableTree(p: {
   const invalidPrefIds = referencedPrefIds.filter((id) => !pagePrefIds.includes(id));
 
   if (invalidPrefIds.length > 0) {
-    console.log('referencedPrefIds', referencedPrefIds);
-    console.log('referencedValuesByPrefId', referencedValuesByPrefId);
     errors.push(`Invalid pref IDs found in markup: ${invalidPrefIds}`);
   }
 
@@ -200,21 +198,6 @@ function collectReferencedValuesByVarId(
       referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
     });
   }
-
-  /*
-  if ('parameters' in node && node.parameters) {
-    console.log('evaluating node.parameters', node.parameters);
-    const valuesById = collectReferencedValuesByVarId(Object.values(node.parameters));
-    Object.keys(valuesById).forEach((id) => {
-      if (id in referencedValuesByVarId) {
-        referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
-      } else {
-        referencedValuesByVarId[id] = valuesById[id];
-      }
-      referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
-    });
-  }
-    */
 
   /* Not currently necessary, since we aren't interpolating vars in the markup
   if (typeof node === 'object' && '$$mdtype' in node && node.$$mdtype === 'Variable') {
