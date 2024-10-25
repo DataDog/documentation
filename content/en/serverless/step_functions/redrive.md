@@ -1,5 +1,5 @@
 ---
-title: Retry or redrive AWS Step Function executions
+title: Redrive AWS Step Functions executions
 further_reading:
     - link: 'https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html'
       tag: 'AWS Developer Guide'
@@ -9,7 +9,7 @@ further_reading:
       text: "Datadog App Builder"
 ---
 
-You can retry any execution that is being monitored or [redrive][1] executions to continue failed AWS Step Functions from the point of failure, without needing a complete state machine restart. You can do this directly within Datadog.
+You can [redrive][1] executions to continue failed AWS Step Functions from the point of failure, without needing a complete state machine restart. You can do this directly within Datadog.
 
 {{< img src="serverless/step_functions/redrive.png" alt="A visualization of a failed Step Function execution." style="width:100%;" >}}
 

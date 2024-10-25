@@ -6,19 +6,19 @@ further_reading:
       text: 'Install Serverless Monitoring for AWS Step Functions'
 ---
 
-This page describes how to link your AWS Step Function traces with related AWS Lambda traces.
+This page describes how to link your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
+
+## Link Step Functions traces to downstream Lambda traces
 
 ### Requirements
-- Node.js (layer v112+) or Python (layer v95+) runtimes
-- You have [instrumented your AWS Lambda functions][1] to send traces to Datadog
-- You have [instrumented your AWS Step Functions][2] to send traces to Datadog
+Node.js (layer v112+) or Python (layer v95+) runtimes.
 
-## Setup
+### Setup
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-In your `serverless.yaml` file, set `mergeStepFunctionAndLambdaTraces` to `true`:
+In your `serverless.yaml` file, set `mergeStepFunctionAndLambdaTraces` to `true`. 
 
 {{< highlight yaml "hl_lines=8" >}}
 custom:
@@ -36,14 +36,16 @@ custom:
 
 Run the following `datadog-ci` command:
 
-```shell
+{{< highlight yaml "hl_lines=6" >}}
 datadog-ci stepfunctions instrument \
  --step-function <STEP_FUNCTION_ARN> \
  --forwarder <FORWARDER_ARN> \
  --env <ENVIRONMENT> \
  --propagate-upstream-trace \
  --merge-step-function-and-lambda-traces
-```
+{{< /highlight >}}
+
+The `propagate-upstream-trace` flag enables you to to inject Step Functions context into downstream Lambda and Step Functions invocations.
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -97,6 +99,77 @@ Alternatively, if you have business logic defined in the payload, you can also u
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Link upstream Lambda traces with Step Functions traces
+
+### Requirements
+For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0 (layer 110).
+
+For Python: Datadog Lambda Library for Python layer 95+ **or** `dd-trace-py` v2.13.0 (layer 99).
+
+### Setup
+
+{{< tabs >}}
+{{% tab "Serverless Framework" %}}
+
+In your `serverless.yaml` file, set `propagateUpstreamTrace` to `true`.
+
+{{< highlight yaml "hl_lines=7" >}}
+custom:
+  datadog:
+    site: <DATADOG_SITE>
+    apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
+    forwarderArn: <FORWARDER_ARN>
+    enableStepFunctionsTracing: true
+    propagateUpstreamTrace: true
+    mergeStepFunctionAndLambdaTraces: true
+{{< /highlight >}}
+
+{{% /tab %}}
+{{% tab "Datadog CLI" %}}
+
+Run the following `datadog-ci` command:
+
+{{< highlight shell "hl_lines=5" >}}
+datadog-ci stepfunctions instrument \
+ --step-function <STEP_FUNCTION_ARN> \
+ --forwarder <FORWARDER_ARN> \
+ --env <ENVIRONMENT> \
+ --propagate-upstream-trace \
+ --merge-step-function-and-lambda-traces
+{{< /highlight >}}
+
+{{% /tab %}}
+{{% tab "Custom" %}}
+
+tk
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Link Step Functions traces to nested Step Functions traces
+
+To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
+{{< highlight json "hl_lines=9-13" >}}
+"Step Functions StartExecution": {
+  "Type": "Task",
+  "Resource": "arn:aws:states:::states:startExecution",
+  "Parameters": {
+    "StateMachineArn": "${stateMachineArn}",
+    "Input": {
+      "StatePayload": "Hello from Step Functions!",
+      "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
+      "CONTEXT": {
+        "Execution.$": "$$.Execution",
+        "State.$": "$$.State",
+        "StateMachine.$": "$$.StateMachine"
+      }
+    }
+  },
+  "End": true
+}
+{{< /highlight >}}
+
 
 [1]: /serverless/installation/#installation-instructions
 [2]: /serverless/step_functions/installation

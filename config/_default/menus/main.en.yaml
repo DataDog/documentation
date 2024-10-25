@@ -2852,7 +2852,7 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_enhanced_metrics
       weight: 203
-    - name: Retry or Redrive Executions
+    - name: Redrive Executions
       url: serverless/step_functions/redrive
       parent: serverless_step_functions
       identifier: serverless_step_functions_redrive

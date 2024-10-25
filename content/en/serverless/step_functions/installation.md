@@ -54,12 +54,10 @@ For developers using [Serverless Framework][4] to deploy serverless applications
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
         enableStepFunctionsTracing: true
-        propagateUpstreamTrace: true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
     - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
-    - `propagateUpstreamTrace`: Optional. Set to `true` to inject Step Function context into downstream Lambda and Step Function invocations
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
@@ -86,14 +84,11 @@ For developers using [Serverless Framework][4] to deploy serverless applications
    datadog-ci stepfunctions instrument \
     --step-function <STEP_FUNCTION_ARN> \
     --forwarder <FORWARDER_ARN> \
-    --env <ENVIRONMENT> \
-    --propagate-upstream-trace
-
+    --env <ENVIRONMENT> 
    ```
    - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. Repeat the `--step-function` flag for each Step Function you wish to instrument.
    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
    - Replace `<ENVIRONMENT>` with the environment tag you would like to apply to your Step Functions.
-   - `--propagate-upstream-trace` is optional, and updates your Step Function definitions to inject Step Function context into any downstream Step Function or Lambda invocations.
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
@@ -164,13 +159,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
 ## Link Step Functions with your AWS Lambda traces
 
-If you are using a Node.js (layer v112+) or Python (layer v95+) runtime, you can [link Step Functions traces with Lambda traces][11]. Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
-
-## Enable enhanced metrics
-
-Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. To enable this, add a `DD_ENHANCED_METRICS` tag to each of your Step Functions and set the value to `true`.
-
-Enhanced metrics are automatically enabled if you enable traces.
+See [link Step Functions traces with Lambda traces][11]. Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
 
 ## Enable tracing
 
@@ -185,6 +174,13 @@ Enhanced metrics are automatically enabled if you enable tracing.
 To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Step Function invocations) and 1.000 (trace all Step Function invocations). 
 
 The dropped traces are not ingested into Datadog. 
+
+## Enable enhanced metrics (without tracing)
+
+Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. Enhanced metrics are automatically enabled if you enable traces.
+
+To enable enhanced metrics without enabling tracing, add a `DD_ENHANCED_METRICS` tag to each of your Step Functions and set the value to `true`.
+
 
 ## See your Step Function metrics, logs, and traces in Datadog
 
