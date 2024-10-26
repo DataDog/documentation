@@ -547,7 +547,7 @@ Deprecated since version 1.9.0
 [5]: /tracing/setup/docker/
 [6]: /agent/configuration/network/#configure-ports
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: /tracing/configure_data_security/#telemetry-collection
+[8]: /tracing/configure_data_security/?tab=net#telemetry-collection
 [9]: /developers/dogstatsd/#setup
 [10]: /agent/docker/#dogstatsd-custom-metrics
 [11]: /developers/dogstatsd/
