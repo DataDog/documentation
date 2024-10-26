@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -22,9 +22,9 @@
               public_title: Datadog-Jenkins Integration
               custom_kind: integration
               name: jenkins
-              is_public: true
+              is_public: false
               integration_title: Jenkins
-              has_logo: true
+              has_logo: false
               git_integration_title: jenkins
               description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
               short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
@@ -70,7 +70,7 @@
         contents:
 
         - action: npm-integrations
-          branch: prod
+          branch: docs_preview_test
           globs:
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
           - networks/model/domain/gcp_services.go
@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: docs-test-1
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
@@ -423,7 +423,7 @@
             dest_dir: '/code_analysis/static_analysis_rules/'
             path_to_remove: 'rulesets/'
             front_matters:
-              disable_edit: true
+              disable_edit: false
 
       - repo_name: datadog-cdk-constructs
         contents:
@@ -537,14 +537,14 @@
       - repo_name: infrastructure-resources
         contents:
         - action: pull-and-push-folder
-          branch: prod
+          branch: docs-test-1
           globs:
             - "generated/md/external/*.md"
           options:
             dest_dir: '/infrastructure/resource_catalog/'
             path_to_remove: 'generated/md/external/'
             front_matters:
-              disable_edit: true
+              disable_edit: false
 
       - repo_name: apps
         contents:
@@ -558,7 +558,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
               aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
-              private: true
+              private: false
 
       - repo_name: datadog-agent
         contents:
@@ -596,7 +596,7 @@
       - repo_name: web-ui
         contents:
           - action: pull-and-push-file
-            branch: prod
+            branch: 
             globs:
               - "generated/md/external/semantic-color-documentation.md"
             options:
