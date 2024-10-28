@@ -356,7 +356,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "{ODBC Driver 18 for SQL Server}"
+    driver: '{ODBC Driver 18 for SQL Server}'
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
