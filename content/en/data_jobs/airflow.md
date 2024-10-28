@@ -51,7 +51,7 @@ To get started, follow the instructions below.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
    
    **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment to allow jobs from different Airflow deployments logically separated.
+   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
    * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of the `openlineage` provider.
@@ -95,7 +95,7 @@ To get started, follow the instructions below.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
    **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment to allow jobs from different Airflow deployments logically separated.
+   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
    * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
@@ -117,7 +117,7 @@ To get started, follow the instructions below.
 {{% tab "Astronomer" %}}
 
 <div class="alert alert-warning">
-For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. This product depends on the same provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport without affecting the existing one.
+For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
 ## Requirements
@@ -150,7 +150,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
    * replace `<DD_API_KEY>` with your valid [Datadog API key][7].
 
    **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment to allow jobs from different Airflow deployments logically separated.
+   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
    * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for the OpenLineage client and its child modules to log at a `DEBUG` logging level. This can be useful for troubleshooting during the configuration of an OpenLineage provider. 
 
    See the [Astronomer official guide][5] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
