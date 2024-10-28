@@ -27,9 +27,8 @@ Span links help trace operations in distributed systems, where workflows often d
 
 Datadog supports both forward and backward span links, allowing users to visualize and navigate span relationships across traces in both directions.
 
-Forward Links: A span can be linked to another span that occurs later in time, whether it belongs to the same trace or a different one. This enables you to navigate from earlier operations to subsequent ones across traces.
-
-Backward Links: Similarly, a span can be linked to a span that occurred earlier in time, either within the same trace or across different traces. This allows you to trace back from later operations to previous ones.
+- Forward Links: A span can be linked to another span that occurs later in time, whether it belongs to the same trace or a different one. This enables you to navigate from earlier operations to subsequent ones across traces.
+- Backward Links: Similarly, a span can be linked to a span that occurred earlier in time, either within the same trace or across different traces. This allows you to trace back from later operations to previous ones.
 
 ## Common use cases
 
