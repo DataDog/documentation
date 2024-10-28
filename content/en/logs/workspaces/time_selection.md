@@ -15,7 +15,7 @@ Log Workspaces is designed for conducting investigations or analyses on a specif
 
 ## Static time selections in Workspaces
 
-After you select a time range—such as the past 15 minutes—it will remain static until you manually select a new time range. For instance, if you choose "past 15 minutes" at 1:05 p.m., the time range remains 12:50 p.m. to 1:05 p.m. until you manually update it. You can do this by opening the time range selection dropdown and choosing the same time range or a different one to display the most current data.
+After you select a time range—such as the past 15 minutes—it remains static until you manually select a new time range. For instance, if you choose "past 15 minutes" at 1:05 p.m., the time range remains 12:50 p.m. to 1:05 p.m. until you manually update it. You can do this by opening the time range selection dropdown and choosing the same time range or a different one to display the most current data.
 
 {{< img src="/logs/workspace/time_selection/time_selector_more.png" alt="Time selection options including custom time frames" style="width:80%;" >}}
 
