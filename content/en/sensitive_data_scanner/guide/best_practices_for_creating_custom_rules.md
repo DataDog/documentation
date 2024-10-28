@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Sensitive Data Scanner uses scanning rules to identify, tag, and optionally redact sensitive data in your logs, APM events, and RUM events. Use [out-of-the-box scanning rules][3] or create your own custom rules using [regular expression][1] (regex) patterns. This guide goes over best practices for creating custom rules using regex patterns.
+Sensitive Data Scanner uses scanning rules to identify, tag, and optionally redact sensitive data in your logs, APM events, and RUM events. Use [out-of-the-box scanning rules][3] or create custom rules using [regular expression][1] (regex) patterns. This guide goes over best practices for creating custom rules using regex patterns.
 
 ## Use precise regex patterns
 
