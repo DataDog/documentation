@@ -44,7 +44,7 @@ Credential Stuffing attack - Account compromised by credential stuffing attack
 
 Titles might update when new data changes the impact of the attack.
 
-Titles also contain the `category` tag for of the attack, for example `category:account_takeover`. Click the cateogy tag to filter, exclude, or copy the tag.
+Titles also contain the `category` tag for of the attack, for example `category:account_takeover`. Click the category tag to filter, exclude, or copy the tag.
 
 ### Service/Env
 
