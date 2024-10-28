@@ -55,9 +55,14 @@ export class PageBuilder {
       prefsManifest: p.prefsManifest
     });
 
+    const variables = {
+      hugoConfig: p.hugoConfig,
+      ...p.prefsManifest.defaultValsByPrefId
+    };
+
     let articleHtml = MarkdocStaticCompiler.renderers.html(
       renderableTree,
-      { variables: { hugoConfig: p.hugoConfig } },
+      { variables },
       customComponents
     );
 

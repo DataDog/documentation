@@ -11,13 +11,13 @@ title: Traffic Light Colors (ja)
     seems contrived and odd, that's only because test pages are often both of
     those things.
   </p>
-  <div class="mdoc__toggleable" data-if="52">
+  <div class="mdoc__toggleable" data-if="136">
     <h2 id="green">Green</h2>
     <p>
       Green is a color that is often associated with nature, growth, and
       renewal.
     </p>
-    <div class="mdoc__toggleable" data-if="48">
+    <div class="mdoc__toggleable" data-if="132">
       <h3 id="grass">Grass</h3>
       <p>
         Grass is a common plant found in many environments, from lawns and
@@ -33,7 +33,7 @@ title: Traffic Light Colors (ja)
         and natural beauty.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="49">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="133">
       <h3 id="emerald">Emerald</h3>
       <p>
         Emeralds are a type of precious gemstone known for their rich green
@@ -48,7 +48,7 @@ title: Traffic Light Colors (ja)
         jewelry. They are believed to symbolize rebirth, love, and prosperity.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="50">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="134">
       <h3 id="lime">Lime</h3>
       <p>
         Limes are small, green citrus fruits known for their tart and tangy
@@ -63,7 +63,7 @@ title: Traffic Light Colors (ja)
         both sweet and savory dishes.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="51">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="135">
       <h3 id="frog">Frog</h3>
       <p>
         Frogs are amphibians known for their distinctive jumping abilities and
@@ -81,51 +81,51 @@ title: Traffic Light Colors (ja)
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="53">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="137">
     <h2 id="yellow">Yellow</h2>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="55">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="139">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="56">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="140">
       <p>
         Sunflowers are a type of flower. They're known for their large, yellow
         petals.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="57">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="141">
       <p>
         Lemons are a type of citrus fruit. They're often used in drinks and
         cooking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="58">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="142">
       <p>
         School buses are a type of vehicle. They're often used to transport
         students to and from school.
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="54">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="138">
     <h2 id="red">Red</h2>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="59">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="143">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="60">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="144">
       <p>
         Apples are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="61">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="145">
       <p>
         Firetrucks are a type of vehicle. They're often used to transport
         firefighters and equipment to emergency situations.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="62">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="146">
       <p>
         Stop signs are a type of traffic sign. They're used to indicate that
         drivers should stop their vehicles.
@@ -134,4 +134,4 @@ title: Traffic Light Colors (ja)
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"traffic_light_color_options"},{"n":"Item","i":"item","o":"<COLOR>_item_options"}],    prefOptionsConfig: {"traffic_light_color_options":[{"n":"Red (ja)","i":"red"},{"n":"Yellow (ja)","i":"yellow"},{"n":"Green (ja)","d":true,"i":"green"}],"red_item_options":[{"n":"Ruby","i":"ruby"},{"n":"Apple (ja)","d":true,"i":"apple"},{"n":"Ja firetruck","i":"firetruck"},{"n":"Stop sign (ja)","i":"stop_sign"}],"yellow_item_options":[{"n":"Banana","d":true,"i":"banana"},{"n":"Sunflower","i":"sunflower"},{"n":"Lemon","i":"lemon"},{"n":"School bus","i":"school_bus"}],"green_item_options":[{"n":"Grass","d":true,"i":"grass"},{"n":"Emerald","i":"emerald"},{"n":"Lime","i":"lime"},{"n":"Frog","i":"frog"}]},    selectedValsByPrefId: {"color":"green","item":"grass"},    ifFunctionsByRef: {"48":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"grass"},"v":true,"r":"48"},"49":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"emerald"},"v":false,"r":"49"},"50":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lime"},"v":false,"r":"50"},"51":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"frog"},"v":false,"r":"51"},"52":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"green"},"v":true,"r":"52"},"53":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"yellow"},"v":false,"r":"53"},"54":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"red"},"v":false,"r":"54"},"55":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"banana"},"v":false,"r":"55"},"56":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"sunflower"},"v":false,"r":"56"},"57":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lemon"},"v":false,"r":"57"},"58":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"school_bus"},"v":false,"r":"58"},"59":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"ruby"},"v":false,"r":"59"},"60":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"apple"},"v":false,"r":"60"},"61":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"firetruck"},"v":false,"r":"61"},"62":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"stop_sign"},"v":false,"r":"62"}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"traffic_light_color_options"},{"n":"Item","i":"item","o":"<COLOR>_item_options"}],    prefOptionsConfig: {"traffic_light_color_options":[{"n":"Red (ja)","i":"red"},{"n":"Yellow (ja)","i":"yellow"},{"n":"Green (ja)","d":true,"i":"green"}],"red_item_options":[{"n":"Ruby","i":"ruby"},{"n":"Apple (ja)","d":true,"i":"apple"},{"n":"Ja firetruck","i":"firetruck"},{"n":"Stop sign (ja)","i":"stop_sign"}],"yellow_item_options":[{"n":"Banana","d":true,"i":"banana"},{"n":"Sunflower","i":"sunflower"},{"n":"Lemon","i":"lemon"},{"n":"School bus","i":"school_bus"}],"green_item_options":[{"n":"Grass","d":true,"i":"grass"},{"n":"Emerald","i":"emerald"},{"n":"Lime","i":"lime"},{"n":"Frog","i":"frog"}]},    selectedValsByPrefId: {"color":"green","item":"grass"},    ifFunctionsByRef: {"132":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"grass"},"v":true,"r":"132"},"133":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"emerald"},"v":false,"r":"133"},"134":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lime"},"v":false,"r":"134"},"135":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"frog"},"v":false,"r":"135"},"136":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"green"},"v":true,"r":"136"},"137":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"yellow"},"v":false,"r":"137"},"138":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"red"},"v":false,"r":"138"},"139":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"banana"},"v":false,"r":"139"},"140":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"sunflower"},"v":false,"r":"140"},"141":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lemon"},"v":false,"r":"141"},"142":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"school_bus"},"v":false,"r":"142"},"143":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"ruby"},"v":false,"r":"143"},"144":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"apple"},"v":false,"r":"144"},"145":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"firetruck"},"v":false,"r":"145"},"146":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"stop_sign"},"v":false,"r":"146"}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
