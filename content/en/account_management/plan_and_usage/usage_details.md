@@ -31,7 +31,7 @@ In product specific tabs, view your month-to-date usage of the products in that 
 
 The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view breaks out your usage by commitments, allotments and on-demand usage.
 
-{{< img src="static/images/account_management/billing/UsageTilesWithAllPills.png" alt="Usage Summary - Billable" >}}
+{{< img src="account_management/billing/UsageTilesWithAllPills.png" alt="Usage Summary - Billable" >}}
 For API users, endpoints are available to access ["All"][2] usage and ["Billable"][3] usage.
 
 Month-to-date usage of each product is calculated as follows:
