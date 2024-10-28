@@ -405,7 +405,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import embedding, llm, retrieval, workflow
 
-@llm(model="model_name", model_provider="model_provider")
+@llm(model_name="model_name", model_provider="model_provider")
 def llm_call(prompt):
     resp = ... # llm call here
     LLMObs.annotate(
