@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Sensitive Data Scanner uses scanning rules to identify, tag, and optionally redact sensitive data in your logs, APM events, and RUM events. Use [out-of-the-box scanning rules][3] or create your own custom rules using [regular expression][1] (regex) patterns. This guide goes over best practices for creating custom rules with regex.
+Sensitive Data Scanner uses scanning rules to identify, tag, and optionally redact sensitive data in your logs, APM events, and RUM events. Use [out-of-the-box scanning rules][3] or create your own custom rules using [regular expression][1] (regex) patterns. This guide goes over best practices for creating custom rules using regex patterns.
 
 ## Use precise regex patterns
 
@@ -22,7 +22,7 @@ Define regex patterns that are as precise as possible because generic patterns r
 
 ## Refine regex pattern matching
 
-Add keywords to the keyword dictionary to refine detection accuracy for matching regex patterns. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value. See step 2 in [Add a custom scanning rule][2] for more information.
+Provide a list of keywords to the keyword dictionary. The dictionary checks for the matching pattern within a defined proximity of these keywords. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value. See step 2 in [Add a custom scanning rule][2] for more information.
 
 {{< img src="sensitive_data_scanner/guides/password_keyword.png" alt="A keyword dictionary with password, token, secret, credential" style="width:90%;" >}}
 
