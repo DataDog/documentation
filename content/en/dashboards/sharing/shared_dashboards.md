@@ -54,7 +54,7 @@ To share a dashboard with one or more email addresses:
 
 ### Access an invite-only shared dashboard
 
-Invitees to shared dashboard are sent an email with a limited-time access link. The email recipients need to click on the link within 1 hour to gain access to the shared dashboard.   
+Invitees to shared dashboards are sent an email with a limited-time access link. The email recipients need to click on the link within 1 hour to gain access to the shared dashboard.   
 
 {{< img src="/dashboards/sharing/shared_dashboards/invite_only_dashboard_link.png" alt="Example of an email invite with a private dashboard access link" style="width:90%;" >}}
 
@@ -108,7 +108,7 @@ In the **Configure Dashboard** step, make changes to the shared dashboard.
 
 ### Dashboards cannot be shared by deactivated users
 
-Shared dashboards must be shared by an active user within your organization. If the sharer is deactivated, the shared dashboard automatically enters a **Paused** state and cannot be reenabled until an active user claims it. The shared dashboard URL and configuration options are preserved during the Paused state.
+Shared dashboards must be shared by an active user within your organization. If the sharer is deactivated, the shared dashboard automatically enters a **Paused** state and cannot be reenabled until an active user claims it. The shared dashboard URL and configuration options are preserved during the paused state.
 
 ### Not all widget types are available
 
