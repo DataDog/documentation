@@ -51,6 +51,18 @@
                 {
                     "id": "otel",
                     "synonyms": ["otel", "opentelemetry"]
+                },
+                {
+                    "id": "slo",
+                    "synonyms": ["slo", "service level objective"]
+                },
+                {
+                    "id": "asm",
+                    "synonyms": ["asm", "application security management"]
+                },
+                {
+                    "id": "rbac",
+                    "synonyms": ["rbac", "role based access control"]
                 }
             ],
             "presets": [

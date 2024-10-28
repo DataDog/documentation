@@ -8,6 +8,8 @@ cascade:
         rank: 20
         category: Guide
         subcategory: RUM & Session Replay Guides
+algolia:
+    tags: ["addaction"]
 ---
 
 {{< whatsnext desc="General RUM:" >}}
