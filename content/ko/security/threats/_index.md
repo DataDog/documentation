@@ -58,7 +58,7 @@ Datadog은 환경에서 자동으로 감지된 암호화 위협을 해결하기 
 ## 시작하기
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/threats/setup">}}설정 및 구성 완료{< /nextlink >}}
+  {{< nextlink href="/security/threats/setup">}}설정 및 구성 완료{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}CSM Threats에 대한 Datadog 역할 권한{{< /nextlink >}}
   {{< nextlink href="/security/threats/workload_security_rules">}}CSM Threats 탐지 규칙 알아보기{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}기본 CSM Threats 탐지 규칙 사용하기{{< /nextlink >}}
