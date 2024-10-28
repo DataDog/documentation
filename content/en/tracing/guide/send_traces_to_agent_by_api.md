@@ -102,8 +102,28 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 {{% tab "Shell" %}}
 
 {{< code-block lang="curl" >}}
-# Curl command
+# Curl command to TCP Port
 curl -X PUT "http://localhost:8126/v0.3/traces" \
+-H "Content-Type: application/json" \
+-d @- << EOF
+[
+  [
+    {
+      "duration": 12345,
+      "name": "span_name",
+      "resource": "/home",
+      "service": "service_name",
+      "span_id": 987654321,
+      "start": 0,
+      "trace_id": 123456789
+    }
+  ]
+]
+EOF
+
+# Curl command to UDS socket
+curl --unix-socket /var/run/datadog/apm.socket \
+-X PUT "http://localhost:8126/v0.3/traces" \
 -H "Content-Type: application/json" \
 -d @- << EOF
 [
