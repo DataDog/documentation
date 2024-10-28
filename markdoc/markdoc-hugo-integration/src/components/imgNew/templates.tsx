@@ -16,12 +16,38 @@ function buildImagePermalink(props: { src: string; hugoConfig: HugoConfig }) {
   return permalink;
 }
 
+function cssStringToObject(css: string) {
+  const r = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g;
+  const o = {};
+  css.replace(r, (m, p, v) => (o[p] = v));
+  return o;
+}
+
+function Video(props: { width: string; src: string }) {
+  return (
+    <video
+      width={props.width || '100%'}
+      height="auto"
+      muted
+      playsInline
+      autoPlay
+      loop
+      controls
+    >
+      <source src={props.src} type="video/mp4" media="(min-width: 0px)" />
+      <div className="play"></div>
+      <div className="pause"></div>
+    </video>
+  );
+}
+
 export const ImgTemplate = (props: {
   attrs: {
     src: string;
     alt: string;
     style: string;
     video: boolean;
+    inline: boolean;
     popup: boolean;
     width: string;
     height: string;
@@ -39,17 +65,43 @@ export const ImgTemplate = (props: {
   const isPopup = attrs.popup;
 
   const img = `${hugoConfig.siteParams.img_url}images/${attrs.src}`;
-  const permalink = buildImagePermalink({ src: attrs.src, hugoConfig });
+  const permalink = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
 
   const imageExt = attrs.src.split('.')[1];
+  // TODO: What does this get used for?
   const imgixWidth = attrs.wide ? '1170' : '850';
 
   const popParam =
     attrs.pop_param || (imageExt === 'gif' ? '?fit=max' : '?fit=max&auto=format');
 
+  let contents: JSX.Element | string = 'NO CONTENTS';
+  if (attrs.video) {
+    contents = <Video width={attrs.width} src={img} />;
+  }
+
+  let wrapperClass = 'shortcode-wrapper shortcode-img expand';
+  if (attrs.wide) {
+    wrapperClass += ' wide-parent';
+  }
+
+  let figureClass = 'text-center';
+  if (attrs.wide) {
+    figureClass += ' wide';
+  }
+  if (attrs.figure_class) {
+    figureClass += ` ${attrs.figure_class}`;
+  }
+
+  let figureStyle = {};
+  if (attrs.figure_style) {
+    figureStyle = cssStringToObject(attrs.figure_style);
+  }
+
   return (
-    <div>
-      <em>-- NEW IMAGE TAG GOES HERE --</em>
+    <div className={wrapperClass}>
+      <figure className={figureClass} style={figureStyle}>
+        {contents}
+      </figure>
     </div>
   );
 };
@@ -110,11 +162,16 @@ export const ImgTemplate = (props: {
 // DONE
 {{- $figure_class :=  .Get "figure_class" -}}
 
-
+// DONE
 {{ $e := (print $img_resource "?auto=format" | safeURL) }}
+
+// NOT DONE
 {{- if not (eq $img_inline "true")}}
+
   <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
     {{- if $video -}}
+
+      // DONE
       <video width="{{$img_width | default "100%" }}" height="auto"
             muted
             playsinline
@@ -127,15 +184,19 @@ export const ImgTemplate = (props: {
         <div class="play"></div>
         <div class="pause"></div>
       </video>
-  {{- else -}}
-    {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
-    <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
-  {{- else if .Get "href" -}}
-    <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
-      {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
-  {{- end -}}
+
+    {{- else -}}
+    
+      {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
+      <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
+      {{- else if .Get "href" -}}
+        <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
+          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
+      {{- end -}}
+
   {{- if $wide -}}
     {{ $e := (print $img_resource "?auto=format" safeURL) }}
+
     {{- if eq $image_ext "gif" -}}
       <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
     {{- else -}}
@@ -159,12 +220,15 @@ export const ImgTemplate = (props: {
         </picture>
       {{- end -}}
   {{- end -}}
+
   {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
     </a>
   {{- else if .Get "href" -}}
     </a>
   {{- end -}}
+
   {{- end -}}
+
     {{- if .Get "caption" -}}
         {{- with .Get "caption" -}}
             <figcaption>{{.}}</figcaption>
