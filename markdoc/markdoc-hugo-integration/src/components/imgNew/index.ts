@@ -18,6 +18,19 @@ export const imgNewDefinition = {
     },
     video: {
       type: Boolean
+    },
+    img_param: {
+      type: String,
+      default: '?ch=Width,DPR&fit=max'
+    },
+    pop_param: {
+      type: String
+    },
+    figure_class: {
+      type: String
+    },
+    figure_style: {
+      type: String
     }
   }
 };
