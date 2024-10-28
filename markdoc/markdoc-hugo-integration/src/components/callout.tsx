@@ -1,4 +1,4 @@
-import { CustomHtmlComponent } from 'markdoc-static-compiler';
+import { CustomHtmlComponent } from '../helperModules/renderer';
 import { renderToString } from 'react-dom/server';
 
 export const calloutDefinition = {

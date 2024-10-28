@@ -1,6 +1,34 @@
-/**
- * This template is not yet in use.
- */
+import { HugoConfig } from '../../schemas/hugoConfig';
+import md5 from 'md5';
+
+// Example permalink:
+// /images/svg-icons/agent.67e2ccd5150e9b20fd3aa128af699606.svg
+
+/*
+{{- $dot := .context -}}
+
+{{- with resources.Get .src -}}
+{{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
+
+{{- if and (eq hugo.Environment "preview") ($dot.Site.Params.branch) -}}
+{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
+{{- $full_permalink = replace $full_permalink $branch_name ""}}
+{{- end -}}
+
+{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
+{{- end -}}
+*/
+function ImgResource(props: { src: string; hugoConfig: HugoConfig }) {
+  const { src, hugoConfig } = props;
+
+  const fingerprintedSrc = src.replace('.', `.${md5(src)}.`);
+  const permalink = `images/${fingerprintedSrc}`;
+
+  console.log('permalink', permalink);
+
+  return <div></div>;
+}
+
 export const ImgTemplate = (props: {
   attrs: {
     src: string;
@@ -12,16 +40,23 @@ export const ImgTemplate = (props: {
     height: string;
     wide: boolean;
   };
+  hugoConfig: HugoConfig;
 }) => {
-  const { attrs } = props;
+  console.log('Rendering ImgTemplate');
+  const { attrs, hugoConfig } = props;
 
   const isPopup = attrs.popup;
+
+  const img = `${hugoConfig.siteParams.img_url}images/${attrs.src}`;
+  console.log('img', img);
+
+  return (
+    <div>
+      <ImgResource src={attrs.src} hugoConfig={hugoConfig} />
+      <em>-- NEW IMAGE TAG GOES HERE --</em>
+    </div>
+  );
 };
-
-/**
-
-{{- $img := (print .Site.Params.img_url "images/" $src) -}}
-*/
 
 /*
 {{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}

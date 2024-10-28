@@ -1,4 +1,6 @@
-import { CustomHtmlComponent } from 'markdoc-static-compiler';
+import { CustomHtmlComponent } from '../../helperModules/renderer';
+import { ImgTemplate } from './templates';
+import { renderToString } from 'react-dom/server';
 
 export const imgNewDefinition = {
   render: 'ImgNew',
@@ -25,12 +27,12 @@ export const imgNewDefinition = {
 // has access to the site configuration.
 export class ImgNew extends CustomHtmlComponent {
   render() {
-    console.log('ImgNew.render()');
-    console.log(
-      'site params',
-      JSON.stringify(this.config!.variables!.hugoConfig!.siteParams, null, 2)
-    );
+    const jsx = ImgTemplate({
+      // @ts-ignore, TODO: Come up with a reusable pattern to validate attributes
+      attrs: this.tag.attributes,
+      hugoConfig: this.hugoConfig
+    });
 
-    return `<em>-- NEW IMAGE TAG GOES HERE --</em>`;
+    return renderToString(jsx);
   }
 }

@@ -1,5 +1,6 @@
-import { CustomHtmlComponent, Config, Node } from 'markdoc-static-compiler';
+import { Config, Node } from 'markdoc-static-compiler';
 import { anchorize } from '../helperModules/stringProcessing';
+import { CustomHtmlComponent } from '../helperModules/renderer';
 
 export const tabDefinition = {
   render: 'Tab',

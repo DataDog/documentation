@@ -1,13 +1,10 @@
-import MarkdocStaticCompiler, {
-  Tag,
-  Config,
-  CustomHtmlComponent
-} from 'markdoc-static-compiler';
+import MarkdocStaticCompiler, { Tag, Config } from 'markdoc-static-compiler';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
-import { render } from '../../../../src/helperModules/renderer';
+import { render, CustomHtmlComponent } from '../../../../src/helperModules/renderer';
+import { HugoConfig } from '../../../../src/schemas/hugoConfig';
 
 const alert = {
   render: 'Alert',
@@ -21,12 +18,20 @@ const alert = {
   }
 };
 
+const mockHugoConfig: HugoConfig = {
+  siteParams: {
+    img_url: 'https://www.datadoghq.com'
+  },
+  env: 'development',
+  languages: ['en']
+};
+
 class Alert extends CustomHtmlComponent {
   level = 'info';
 
   constructor(
     tag: Tag,
-    config?: Config,
+    config: Config,
     components?: Record<string, CustomHtmlComponent>
   ) {
     super(tag, config, components);
@@ -65,7 +70,8 @@ describe('custom components', () => {
       variables: {
         test_string: 'Datadog',
         always_false: false,
-        always_true: true
+        always_true: true,
+        hugoConfig: mockHugoConfig
       },
       tags: {
         alert

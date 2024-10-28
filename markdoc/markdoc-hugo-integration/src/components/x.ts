@@ -2,7 +2,7 @@
  * A custom tag that renders a checkmark,
  * usually used inside a table cell.
  */
-import { CustomHtmlComponent } from 'markdoc-static-compiler';
+import { CustomHtmlComponent } from '../helperModules/renderer';
 
 export const xDefinition = {
   render: 'X'

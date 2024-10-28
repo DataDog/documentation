@@ -7,6 +7,7 @@ import type {
 const { escapeHtml } = MarkdownIt().utils;
 import { reresolve } from './reresolver';
 import { isTag, isClientVariable, isClientFunction } from './utils';
+import { CustomHtmlComponent } from './CustomHtmlComponent';
 
 // HTML elements that do not have a matching close tag
 // Defined in the HTML standard: https://html.spec.whatwg.org/#void-elements
@@ -27,7 +28,7 @@ const voidElements = new Set([
   'wbr'
 ]);
 
-export function render(
+function render(
   node: RenderableTreeNodes,
   config?: Config,
   components?: Record<string, any>
@@ -121,3 +122,5 @@ export function render(
 
   return output;
 }
+
+export { render, CustomHtmlComponent };

@@ -1,7 +1,6 @@
-import { CustomHtmlComponent } from 'markdoc-static-compiler';
+import { CustomHtmlComponent, render } from '../../helperModules/renderer';
 import { highlight } from 'chroma-highlight';
 import { v4 as uuidv4 } from 'uuid';
-import { renderers } from 'markdoc-static-compiler';
 import { CodeBlockTemplate } from './templates';
 import { renderToString } from 'react-dom/server';
 
@@ -53,7 +52,7 @@ export class Fence extends CustomHtmlComponent {
         child.$$mdtype === 'Tag'
       ) {
         const uuid = uuidv4();
-        const renderedChild = renderers.html(child, this.config, this.components);
+        const renderedChild = render(child, this.markdocConfig, this.components);
         renderedChildTagsByUuid[uuid] = renderedChild;
         sanitizedChildren.push(uuid);
       } else if (typeof child === 'string') {
