@@ -2,33 +2,24 @@
  * This template is not yet in use.
  */
 export const ImgTemplate = (props: {
-  src: string;
-  alt: string;
-  style: string;
-  video: boolean;
-  popup: boolean;
-  width: string;
-  height: string;
-  wide: boolean;
+  attrs: {
+    src: string;
+    alt: string;
+    style: string;
+    video: boolean;
+    popup: boolean;
+    width: string;
+    height: string;
+    wide: boolean;
+  };
 }) => {
-  const { src, alt, style, video, popup, width, height, wide } = props;
+  const { attrs } = props;
+
+  const isPopup = attrs.popup;
 };
 
 /**
- * {{ if  not (.Get "src") }}
-    {{ errorf "Img shortcode error: Missing value for param 'src': %s" .Position }}
-{{ end }}
-{{- if eq (.Get "popup") "false" -}}
-  {{- $.Scratch.Set "popup" "false" -}}
-{{- else -}}
-  {{- $.Scratch.Set "popup" "true" -}}
-{{- end -}}
-{{- $isPopup := $.Scratch.Get "popup" -}}
-{{- $img_width := .Get "width" -}}
-{{- $img_height := .Get "height" -}}
-{{- $wide :=  .Get "wide" -}}
-{{- $video :=  .Get "video" -}}
-{{- $src := (.Get "src") -}}
+
 {{- $img := (print .Site.Params.img_url "images/" $src) -}}
 */
 

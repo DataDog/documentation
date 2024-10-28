@@ -25,6 +25,12 @@ export const imgNewDefinition = {
 // has access to the site configuration.
 export class ImgNew extends CustomHtmlComponent {
   render() {
+    console.log('ImgNew.render()');
+    console.log(
+      'site params',
+      JSON.stringify(this.config!.variables!.hugoConfig!.siteParams, null, 2)
+    );
+
     return `<em>-- NEW IMAGE TAG GOES HERE --</em>`;
   }
 }

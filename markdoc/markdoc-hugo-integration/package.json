@@ -12,11 +12,14 @@
         "copy-compiled-scripts": "cp -r ./dist/helperModules/PageBuilder/compiledScripts ./src/helperModules/PageBuilder"
     },
     "dependencies": {
+        "@types/markdown-it": "^14.1.2",
         "chroma-highlight": "^2.4.2",
         "interweave": "^13.1.0",
         "js-yaml": "^4.1.0",
         "lit": "^3.1.4",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",
+        "markdown-it": "12.3.2",
+        "markdown-it-deflist": "^3.0.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "rimraf": "^5.0.5",

@@ -33,6 +33,7 @@ export const transformConfig = {
 export const customComponents = {
   Alert,
   Img,
+  ImgNew,
   RegionParam,
   SiteRegion,
   Tabs,

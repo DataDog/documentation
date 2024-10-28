@@ -10,7 +10,6 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
 import { ParsingErrorReport, ParsedFile } from '../schemas/compilation';
-import { AllowlistsByType } from '../schemas/yaml/allowlist';
 
 /**
  * A module responsible for parsing Markdoc files into data structures

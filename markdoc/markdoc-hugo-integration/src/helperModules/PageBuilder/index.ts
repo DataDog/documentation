@@ -57,7 +57,7 @@ export class PageBuilder {
 
     let articleHtml = MarkdocStaticCompiler.renderers.html(
       renderableTree,
-      undefined,
+      { variables: { hugoConfig: p.hugoConfig } },
       customComponents
     );
 
