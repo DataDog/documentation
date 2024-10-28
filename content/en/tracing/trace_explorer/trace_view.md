@@ -213,7 +213,6 @@ View [Profiles][1] to identify lines of code related to performance issues. The 
 {{% /tab %}}
 {{% tab "Span Links" %}}
 
-<div class="alert alert-info">Span link support is in beta.</div>
 
 [Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
