@@ -12,7 +12,7 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-{{< callout url="<https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/>" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" header="Request access to the Preview!" >}}
 Adaptive sampling is in Preview. To request access, complete the form.
 {{< /callout >}}
 
