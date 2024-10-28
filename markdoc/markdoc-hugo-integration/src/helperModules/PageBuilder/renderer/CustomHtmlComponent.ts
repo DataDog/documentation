@@ -1,4 +1,4 @@
-import { render } from './renderer';
+import { render } from '.';
 import { Tag, Config } from 'markdoc-static-compiler';
 import MarkdownIt from 'markdown-it';
 const { escapeHtml, unescapeAll } = MarkdownIt().utils;

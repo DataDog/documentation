@@ -71,7 +71,6 @@ export function getMinifiedIfFunctionsByRef(
  */
 export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
-  defaultValsByPrefId: Record<string, string>;
   variables: Record<string, any>;
   prefsManifest: PagePrefsManifest;
 }): { renderableTree: RenderableTreeNode; errors: string[] } {
@@ -79,7 +78,7 @@ export function buildRenderableTree(p: {
 
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: {
-      ...p.defaultValsByPrefId,
+      ...p.prefsManifest.defaultValsByPrefId,
       ...JSON.parse(JSON.stringify(p.variables))
     },
     partials: p.parsedFile.partials,
@@ -94,7 +93,7 @@ export function buildRenderableTree(p: {
 
   // ensure that all variable ids appearing
   // in the renderable tree are valid page pref ids
-  const pagePrefIds = Object.keys(p.defaultValsByPrefId);
+  const pagePrefIds = Object.keys(p.prefsManifest.defaultValsByPrefId);
   const invalidPrefIds = referencedPrefIds.filter((id) => !pagePrefIds.includes(id));
 
   if (invalidPrefIds.length > 0) {

@@ -13,6 +13,7 @@ import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/hugoConfig';
 import { PagePrefsManifest } from '../../schemas/pagePrefs';
+import { render } from './renderer';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -43,10 +44,14 @@ export class PageBuilder {
     hugoConfig: HugoConfig;
     prefsManifest: PagePrefsManifest;
   }): { html: string; errors: string[] } {
+    const variables = {
+      hugoConfig: p.hugoConfig,
+      ...p.prefsManifest.defaultValsByPrefId
+    };
+
     const { renderableTree, errors } = buildRenderableTree({
       parsedFile: p.parsedFile,
-      defaultValsByPrefId: p.prefsManifest.defaultValsByPrefId,
-      variables: { hugoConfig: { ...JSON.parse(JSON.stringify(p.hugoConfig)) } },
+      variables,
       prefsManifest: p.prefsManifest
     });
 
@@ -55,16 +60,7 @@ export class PageBuilder {
       prefsManifest: p.prefsManifest
     });
 
-    const variables = {
-      hugoConfig: p.hugoConfig,
-      ...p.prefsManifest.defaultValsByPrefId
-    };
-
-    let articleHtml = MarkdocStaticCompiler.renderers.html(
-      renderableTree,
-      { variables },
-      customComponents
-    );
+    let articleHtml = render(renderableTree, { variables }, customComponents);
 
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 
