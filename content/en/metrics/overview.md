@@ -84,11 +84,11 @@ Log-based metrics allow you to generate custom metrics from any logs ingested in
 The **Configurable Processing** column shows an overview of the configuration options available for your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
 
 {{% collapse-content title="Manage tagging" level="h4" %}}
-[Configuration of tags][22] can help you to manage custom metric costs by indexing only the metric tags most valuable to your organization.
+[Metrics without Limits™][22] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Enable percentiles" level="h4" %}}
-[Distributions][23] show you percentile aggregations of metric values sent from multiple hosts, so you can measure statistical distributions across your entire infrastructure.
+[Distribution metrics][23] with percentiles enabled show you percentile aggregations of metric values sent from multiple hosts, so you can measure statistical distributions across your entire infrastructure.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Ingest historical metrics" level="h4" %}}
@@ -136,10 +136,11 @@ Use the search bar in this section to view the latest data and configuration opt
 [19]: /infrastructure/process/increase_process_retention/#generate-a-process-based-metric
 [20]: /service_management/events/guides/usage/#custom-metrics
 [21]: /account_management/billing/usage_metrics/
-[22]: /metrics/metrics-without-limits/#configuration-of-tags
+[22]: /metrics/metrics-without-limits/
 [23]: /metrics/distributions/
 [24]: /metrics/custom_metrics/historical_metrics/
 [25]: https://app.datadoghq.com/process
 [26]: https://app.datadoghq.com/event/settings/generate-metrics
 [27]: /metrics/summary/
 [28]: /developers/integrations/?tab=integrations#api-based-integrations
+[29]: /metrics/advanced-filtering/
