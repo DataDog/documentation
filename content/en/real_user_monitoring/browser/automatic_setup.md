@@ -15,7 +15,7 @@ RUM Auto-Injection in Preview. Sign up for access!
 
 ## Overview
 
-{{< img src="real_user_monitoring/browser/auto-instrumentation.png" alt="Select Auto-Instrumentation when creating a new application." >}}
+{{< img src="real_user_monitoring/browser/auto-instrumentation-1.png" alt="Select Auto-Instrumentation when creating a new application." >}}
 
 Datadog RUM Auto-Instrumentation lets you opt into Real User Monitoring before automatically instrumenting all of your applications with Real User Monitoring. If you are interested in manual instrumentation per application, see [Custom Instrumentation][1].
 
