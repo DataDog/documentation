@@ -551,7 +551,7 @@ See the Application Security product set up documentation to validate you you ar
 
 ### テレメトリーデータの通信を確保する
 
-環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (NodeJS の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
+環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (Node.js の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
 
 ## 脅威管理と保護を無効にする
 
