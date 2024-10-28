@@ -14,7 +14,10 @@ further_reading:
 
 <div class="alert alert-info">Manual instrumentation is available for Java, Node.js, and Python. <br /><br />If you're interested in manual instrumentation for additional languages, reach out to support@datadoghq.com.</div>
 
-Data Streams Monitoring (DSM)  propagates context through message headers. If you use a message queue technology that is not yet supported by DSM, a technology without headers (such as Kinesis), or lambdas, use manual instrumentation to set up Data Streams Monitoring.
+Data Streams Monitoring (DSM) propagates context through message headers. Use manual instrumentation to set up DSM if you are using:
+- a message queue technology that is not supported by DSM
+- a message queue technology without headers, such as Kinesis, or
+- Lambdas
 
 ### Manual instrumentation installation
 
