@@ -174,7 +174,7 @@ Si la aplicación invoca `pcntl_unshare(CLONE_NEWUSER);` y el rastreador está i
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: https://www.datadoghq.com/support/

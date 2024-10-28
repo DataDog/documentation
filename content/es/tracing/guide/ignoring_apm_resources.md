@@ -37,8 +37,8 @@ Puedes especificar etiquetas de tramos para requerir o rechazar utilizando un li
 : Rechaza trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 
-{{< pestañas >}}
-{{% pestaña "datadog.yaml" %}}
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
 
 También las puedes configurar en la configuración del Agent con una lista separada por comas:
 
@@ -93,8 +93,8 @@ agentes:
 {{% k8s-helm-redeploy %}}
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
-{{% /pestaña%}}
-{{< /pestañas>}}
+{{% /tab%}}
+{{< /tabs>}}
 
 Mediante el filtrado de trazas de esta manera, se eliminan estas solicitudes de [métricas de trazas][3]. Para obtener más información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta [Controles de consumo][4].
 
@@ -222,8 +222,8 @@ Para utilizar correctamente la opción de ignorar recurso, la regla de la expres
 
 Según tu forma de despliegue, la sintaxis será un poco diferente:
 
-{{< pestañas >}}
-{{% pestaña "Datadog.yaml" %}}
+{{< tabs >}}
+{{% tab "Datadog.yaml" %}}
 
 {{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
 apm_config:
@@ -237,8 +237,8 @@ apm_config:
   ignore_resources: ["value1", "Api::HealthchecksController#index$"]
 {{< /bloque de código >}}
 
-{{% /pestaña %}}
-{{% pestaña "Docker componer" %}}
+{{% /tab %}}
+{{% tab "Docker componer" %}}
 
 En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD_APM_IGNORE_RESOURCES` con un patrón como el del ejemplo siguiente. Docker Compose tiene su propia [sustitución de variables][1] a tener en cuenta cuando utilices caracteres especiales como `$`.
 
@@ -257,8 +257,8 @@ Para valores múltiples:
 {{< /bloque de código >}}
 
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
-{{% /pestaña %}}
-{{% pestaña "Docker run" %}}
+{{% /tab %}}
+{{% tab "Docker run" %}}
 
 En tu comando de Docker run para hacer girar el Datadog Agent, añade `DD_APM_IGNORE_RESOURCES`:
 
@@ -282,8 +282,8 @@ Para valores múltiples:
               -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /bloque de código >}}
 
-{{% /pestaña %}}
-{{% pestaña "Kubernetes daemonset" %}}
+{{% /tab %}}
+{{% tab "Kubernetes daemonset" %}}
 
 En el contenedor de Trace Agent dedicado, añade la variable de entorno `DD_APM_IGNORE_RESOURCES`:
 
@@ -333,8 +333,8 @@ Para valores múltiples:
           valor: '"value1","Api::HealthchecksController#index$"'
 {{< /bloque de código >}}
 
-{{% /pestaña %}}
-{{% pestaña "Kubernetes Helm" %}}
+{{% /tab %}}
+{{% tab "Kubernetes Helm" %}}
 
 En la sección `traceAgent` del archivo `values.yaml`, añade `DD_APM_IGNORE_RESOURCES` en la sección `env` y, a continuación, [haz girar helm como de costumbre][1].
 
@@ -365,8 +365,8 @@ helm install dd-agent -f values.yaml \
 {{< /bloque de código >}}
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
-{{% /pestaña %}}
-{{% pestaña "Definición de tareas de Amazon ECS" %}}
+{{% /tab %}}
+{{% tab "Definición de tareas de Amazon ECS" %}}
 
 Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datadog Agent, añade la variable de entorno `DD_APM_IGNORE_RESOURCES` con los valores necesarios para que el JSON evalúe de la siguiente manera:
 
@@ -380,8 +380,8 @@ Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datad
      ]
 {{< /bloque de código >}}
 
-{{% /pestaña%}}
-{{< /pestañas >}}
+{{% /tab%}}
+{{< /tabs >}}
 
 <div class="alert alert-warning"><strong>Nota</strong>: Mediante el filtrado de trazas de esta manera, se eliminan estas solicitudes de <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
 

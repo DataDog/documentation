@@ -685,7 +685,7 @@ Ejercita tu aplicación para empezar a generar datos de telemetría, que puedes 
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores" %}}
 
 <div class="alert alert-info">La inyección de bibliotecas de rastreo en contenedores está en fase Beta.</div>
 
@@ -923,7 +923,7 @@ Para dejar de generar trazas para un servicio específico, ejecuta los siguiente
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores"%}}
 
 1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
    ```shell
@@ -950,7 +950,7 @@ Para dejar de producir trazas (traces), elimina los inyectores de bibliotecas y 
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores" %}}
 
 1. Desinstala la inyección de bibliotecas local:
    ```shell

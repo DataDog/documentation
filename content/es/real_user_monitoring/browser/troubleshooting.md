@@ -132,7 +132,7 @@ La advertencia se muestra porque la ingesta devuelve un objeto JSON no vacío. E
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md

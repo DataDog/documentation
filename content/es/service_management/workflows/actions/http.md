@@ -75,7 +75,7 @@ La conexión HTTP de 2 pasos te permite realizar una solicitud preliminar para r
 5. En el menú desplegable **Authentication Type** (Tipo de autenticación), selecciona **2 Step Auth** (Autenticación en 2 pasos).
 
 {{< tabs >}}
-{{% tab "Token auth" (Autenticación basada en tokens) %}}
+{{% tab "Autenticación basada en tokens" %}}
 Configura la consulta preliminar del token de acceso:
 1. En el menú desplegable **Secret Type** (Tipo de secreto), selecciona **Token Auth** (Autenticación basada en tokens).
 2. **Token Name** (Nombre de token) y un **Token Value** (Valor de token).

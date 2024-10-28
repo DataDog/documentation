@@ -190,7 +190,7 @@ Para más información o para debatir [deja un comentario en este tema de github
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://semver.org/
 [2]: https://github.com/DataDog/dd-trace-js/releases

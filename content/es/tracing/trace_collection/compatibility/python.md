@@ -126,7 +126,7 @@ La biblioteca de `ddtrace` incluye soporte técnico para las siguientes <txprote
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/versioning.html

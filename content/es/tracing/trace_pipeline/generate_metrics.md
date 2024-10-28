@@ -75,7 +75,7 @@ Tras crear una métrica, solo se pueden actualizar dos campos:
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/tracing/trace_pipeline/trace_retention

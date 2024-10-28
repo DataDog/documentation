@@ -199,7 +199,7 @@ Para restablecer el acceso general a un notebook con acceso restringido, sigue e
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook/template-gallery

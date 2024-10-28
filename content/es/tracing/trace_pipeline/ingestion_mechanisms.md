@@ -813,7 +813,7 @@ Según tu configuración con los SDK de OpenTelemetry (mediante la utilización 
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/trace_collection/dd_libraries/
 [2]: /es/tracing/trace_pipeline/metrics/
