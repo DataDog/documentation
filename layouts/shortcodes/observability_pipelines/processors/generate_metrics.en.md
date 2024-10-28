@@ -1,5 +1,7 @@
 This processor generates either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
+**Note**: The metrics generated are [custom metrics][1031] and billed accordingly. See [Custom Metrics Billing][1032] for more information.
+
 To set up the processor:
 
 Click **Manage Metrics** to create new metrics or edit existing metrics. This opens a side panel.
@@ -18,7 +20,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 
 ##### Metrics Types
 
-You can generate these types of metrics for your logs. See the [Metrics Types][10031] and [Distributions][10032] documentation for more details.
+You can generate these types of metrics for your logs. See the [Metrics Types][10033] and [Distributions][10034] documentation for more details.
 
 | Metric type  | Description                                                                                                                                     | Example                                                                                             |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -26,5 +28,7 @@ You can generate these types of metrics for your logs. See the [Metrics Types][1
 | GAUGE        | Represents a snapshot of events in one time interval.                                                                                           | You want to measure the latest CPU utilization per host for all logs in the production environment. |
 | DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made.                           |
 
-[10031]: /metrics/types/
-[10032]: /metrics/distributions/
+[10031]: /metrics/custom_metrics/
+[10032]: /account_management/billing/custom_metrics/
+[10033]: /metrics/types/
+[10034]: /metrics/distributions/
