@@ -181,7 +181,7 @@ The selected behavior is applied when a monitor's query does not return any data
 
 The `Evaluate as zero` and `Show last known status` options are displayed based on the query type:
 
-- **Evaluate as zero:** For Metrics monitors, this option is available for queries where each metric either uses the `sum` space aggregation, is a count of distribution values, or uses one of these functions: `default_zero()`, `count_nonzero()` or `count_not_null()`. For all other monitors, this option is available for monitors using `Count` queries without the `default_zero()` function. 
+- **Evaluate as zero:** For Metrics monitors, this option is available for queries where each metric either uses the `sum` space aggregation, is a count of distribution values, or uses one of these functions: `default_zero()`, `count_nonzero()` or `count_not_null()`. For all other monitors, this option is available for monitors using `Count` queries without the `default_zero()` function.
 - **Show last known status:** This option is available for monitors using any other query aggregations or formulas that could divide by zero.
 
 #### Auto resolve
