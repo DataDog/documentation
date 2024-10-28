@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for self hosted Postgres
+title: Setting Up Database Monitoring for Self-Hosted Postgres
 description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
-
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -303,6 +302,12 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 ### Validate
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
+
+## Data collected
+
+### Metrics
+
+{{< get-metrics-from-git "postgres" >}}
 
 ## Example Agent Configurations
 
