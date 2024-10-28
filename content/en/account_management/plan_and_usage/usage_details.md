@@ -92,7 +92,7 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 Purple on-demand pills highlight the portion of billable usage that is on-demand usage. Blue committed and allotted pills highlight the portion of your usage that is covered by commitments and <a href="https://www.datadoghq.com/pricing/allotments/">allotments</a> from parent products. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
 
-{{< img src="static/images/account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
 
 
 ## Top custom metrics
