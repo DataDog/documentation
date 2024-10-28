@@ -6242,12 +6242,12 @@ menu:
       identifier: rum_browser
       weight: 1
     - name: Automatic Instrumentation
-      url: real_user_monitoring/browser/automatic_setup/
+      url: real_user_monitoring/browser/automatic_setup
       parent: rum_browser
       identifier: rum_browser_auto_setup
       weight: 101
     - name: Custom Instrumentation
-      url: real_user_monitoring/browser/custom_setup/
+      url: real_user_monitoring/browser/custom_setup
       parent: rum_browser
       identifier: rum_browser_custom_setup
       weight: 102

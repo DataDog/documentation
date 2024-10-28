@@ -1,5 +1,6 @@
 ---
 title: RUM Browser Monitoring Automatic Instrumentation
+beta: true
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
