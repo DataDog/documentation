@@ -16,7 +16,7 @@ Sensitive Data Scanner uses scanning rules to identify, tag, and optionally reda
 
 ## Use precise regex patterns
 
-Define regex patterns that are as precise as possible because generic patterns result in more false positives. To refine your regex pattern, add test data in the sample data tester when you are creating a custom rule. See step 2 in [Add a custom scanning rule][2] for more information.
+Define regex patterns that are as precise as possible, because generic patterns result in more false positives. To refine your regex pattern, add test data in the sample data tester when creating a custom rule. For more information, see step 2 in [Add a custom scanning rule][2].
 
 {{< img src="sensitive_data_scanner/guides/regex_sample_test.mp4" alt="Testing a regex pattern with a sample that matches and one that does not" video=true >}}
 
