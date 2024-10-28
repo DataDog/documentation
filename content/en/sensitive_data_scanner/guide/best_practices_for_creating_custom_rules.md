@@ -47,3 +47,4 @@ Use Datadog's out-of-the-box [library rules][3] when possible. The library rules
 [2]: https://docs.datadoghq.com/sensitive_data_scanner/?tab=inthecloud#add-scanning-rules
 [3]: https://docs.datadoghq.com/sensitive_data_scanner/library_rules/
 [4]: https://docs.datadoghq.com/help/
+[5]: /sensitive_data_scanner/?tab=inthecloud#add-additional-keywords
