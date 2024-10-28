@@ -181,8 +181,8 @@ The selected behavior is applied when a monitor's query does not return any data
 
 The `Evaluate as zero` and `Show last known status` options are displayed based on the query type:
 
-- **Evaluate as zero:** This option is available for monitors using `Count` queries without the `default_zero()` function.
-- **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
+- **Evaluate as zero:** This option is available for monitors using `Count` queries without the `default_zero()` function. This option is also available for Metrics monitors that exclusively use queries with either `Sum` space aggregations or the `default_zero()` function. 
+- **Show last known status:** This option is available for monitors using any other query aggregations or formulas that could divide by zero.
 
 #### Auto resolve
 
@@ -207,7 +207,7 @@ Some use cases to define a group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
+**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, Metrics, and RUM monitors.
 
 #### New group delay
 
