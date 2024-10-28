@@ -76,7 +76,7 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 | System | Requirements |
 |---|---|
-| OS | Windows Server 2016, Windows Server 2019, or Windows 10. |
+| OS | Windows Server 2022, Windows Server 2019, Windows Server 2016, or Windows 10. |
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
