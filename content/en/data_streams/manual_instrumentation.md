@@ -1,5 +1,5 @@
 ---
-title: Set up Data Streams Monitoring for Java through Manual Instrumentation
+title: Set up Data Streams Monitoring through Manual Instrumentation
 private: true
 aliases:
   - /data_streams/java_manual_instrumentation
