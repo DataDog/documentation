@@ -18,7 +18,7 @@
                 "distinct_base_url" $glossaryPage.RelPermalink
                 "full_url" ($relpermalink | absLangURL)
                 "language" $page.Language.Lang
-                "category" "Glossary"
+                "category" "Documentation"
                 "subcategory" "Glossary"
                 "rank" 70
                 "order" 1

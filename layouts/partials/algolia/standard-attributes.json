@@ -16,7 +16,7 @@
         "distinct_base_url" $page.RelPermalink
         "full_url" ($relpermalink | absLangURL)
         "language" $page.Language.Lang
-        "category" "Default Standard Attributes"
+        "category" "Documentation"
         "subcategory" "Default Standard Attributes"
         "rank" 70
         "order" 1
