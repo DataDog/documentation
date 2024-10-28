@@ -3,22 +3,23 @@
 
 {{- range $attr := $page.Params.attributes -}}
   {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" ($attr.name | anchorize)) -}}
+  {{- $relpermalink := print $page.RelPermalink "?search=" $attr.name -}}
   {{
     $hugo_context.Scratch.Add "algoliaindex" (
         dict "objectID" $object_id
         "id" $object_id
         "title" "Default Standard Attributes"
         "section_header" $attr.name
-        "content" $attr.description
+        "content" (print $attr.name " " $attr.description)
         "type" $page.Type
-        "relpermalink" $page.RelPermalink
+        "relpermalink" $relpermalink
         "distinct_base_url" $page.RelPermalink
-        "full_url" $page.RelPermalink
+        "full_url" ($relpermalink | absLangURL)
         "language" $page.Language.Lang
         "category" "Default Standard Attributes"
         "subcategory" "Default Standard Attributes"
         "rank" 70
-        "order" -1
+        "order" 1
         "tags" (slice)
     )
   }}
