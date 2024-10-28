@@ -35,7 +35,7 @@ See step 3 in [Add a custom scanning rule][2] for more information.
 
 ## Use out-of-the-box rules
 
-Use Datadog's out-of-the-box [library rules][3] when possible. The library rules are predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords][5]. 
+Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules are predefined rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords][5]. 
 
 [Contact support][4] if there is a rule that you want to use and think other users would also benefit from it.
 
