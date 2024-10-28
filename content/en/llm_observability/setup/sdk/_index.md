@@ -356,16 +356,22 @@ def get_relevant_docs(question):
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
+Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session. Optionally, you can also specify the `user_handle`, `user_name`, and `user_id` tags:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
 @workflow(session_id="<SESSION_ID>")
-def process_message():
-    ... # user application logic
+def process_user_message():
+    LLMObs.annotate(
+        ...
+        tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
+    )
     return 
 {{< /code-block >}}
+
+### User tags
+
 
 ## Annotating a span
 
