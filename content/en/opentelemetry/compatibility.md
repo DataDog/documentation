@@ -29,26 +29,35 @@ The following setups are supported:
 
 ## Feature compatibility
 
-### Supported features
+### Supported Datadog features
 
-The following table shows feature compatibility across different setups:
+The following table shows Datadog feature compatibility across different setups:
 
-| Feature                                       | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector (Preview) | Full Datadog                       |
-|-----------------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------------|------------------------------------|
-| Application Security Monitoring (ASM)         |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
-| Continuous Profiler                           |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
-| Data Jobs Monitoring (DJM)              |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
-| Database Monitoring (DBM)                     |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
-| Data Streams Monitoring (DSM)                 |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
-| Live Processes                                |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Universal Service Monitoring (USM)            |                                    |                                    | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Cloud SIEM                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Correlated Traces, Metrics, Logs              | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Live Container Monitoring/Kubernetes Explorer |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Network Performance Monitoring (NPM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Real User Monitoring (RUM)                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}                          |
-| Runtime Metrics                               | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}                           | {{< X >}}<br>(Java, .NET, Go only)                   | {{< X >}}                          |
-| Source code integration                       | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}                          |
+| Feature                                             | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector (Preview) | Full Datadog |
+|-----------------------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------------|--------------|
+| [Runtime Metrics][23]                               | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}                           | {{< X >}}<br>(Java, .NET, Go only)                   | {{< X >}}    |
+| [Cloud SIEM][18]                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Correlated Traces, Metrics, Logs][19]              | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Real User Monitoring][22] (RUM)                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Source code integration][24]                       | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Live Processes][16]                                |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Live Container Monitoring/Kubernetes Explorer][20] |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Network Performance Monitoring][21] (NPM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Application Security Management][11] (ASM)         |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Continuous Profiler][12]                           |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Data Jobs Monitoring][13] (DJM)                    |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Database Monitoring][14] (DBM)                     |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Data Streams Monitoring][15] (DSM)                 |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Universal Service Monitoring][17] (USM)            |                                    |                                    | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+
+### Supported OpenTelemetry features
+
+The following table shows OpenTelemetry feature compatibility across different setups:
+
+| Feature                                             | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector (Preview) | Full Datadog |
+|-----------------------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------------|--------------|
+| [Span Links][25]                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            |              |
+
 
 ## More details
 
@@ -95,3 +104,18 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [8]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [9]: https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/
 [10]: /tracing/trace_collection/
+[11]: /security/application_security/
+[12]: /profiler/
+[13]: /data_jobs/
+[14]: /database_monitoring/
+[15]: /data_streams/
+[16]: /infrastructure/process/
+[17]: /universal_service_monitoring/
+[18]: /security/cloud_siem/
+[19]: /tracing/other_telemetry/
+[20]: /containers/
+[21]: /network_monitoring/performance/
+[22]: /real_user_monitoring/
+[23]: /tracing/metrics/runtime_metrics/
+[24]: /integrations/guide/source-code-integration/
+[25]: /tracing/trace_collection/span_links/
