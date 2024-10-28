@@ -474,7 +474,7 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 
 ### Use multiple variables
 
-Additionally, you can add multiple variables to your browser test recording steps.
+You can add multiple variables to your browser test recording steps.
 
 In your browser test recording, click the **+ Add Variable** button to add one or more variables to your test:
 
