@@ -1,6 +1,6 @@
 This processor generates either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
-**Note**: The metrics generated are [custom metrics][1031] and billed accordingly. See [Custom Metrics Billing][1032] for more information.
+**Note**: The metrics generated are [custom metrics][10031] and billed accordingly. See [Custom Metrics Billing][10032] for more information.
 
 To set up the processor:
 
