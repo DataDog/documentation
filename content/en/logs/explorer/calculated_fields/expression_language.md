@@ -27,6 +27,7 @@ The available operators in order of precedence:
 |----------|-------------|
 | `()` | A grouping or function call |
 | `!`, `NOT`, `-` | A logical or arithmetic negation |
+| `^`, `%` | Exponentiation, Modulo|
 | `*`, `/` | Multiplication, division|
 | `+`, `-` | Addition, subtraction |
 | `<`, `<=`, `>`, `>=` | Less than, less than or equal to, greater than, greater than or equal to |
@@ -44,6 +45,24 @@ The available functions are categorized as follows:
 
 ### Arithmetic
 
+{{% collapse-content title="abs(<i>num</i> value)" level="h4" %}}
+Returns the absolute value of a number.
+
+| Example  | Formula | Result |
+|----------|-------------|---------|
+| A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | #discrepancy = abs(`@client_latency` - `@server_latency`) | #discrepancy = 1 |
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="ceil(<i>num</i> value)" level="h4" %}}
+Rounds number up to the nearest integer.
+
+| Example  | Formula | Result |
+|----------|-------------|---------|
+| A log event has the following attribute:<br>`@value` = 2.2 | #rounded_up = ceil(`@value`) | #rounded_up = 3 |
+
+{{% /collapse-content %}} 
+
 <h4>abs(<i>num</i> value)</h4>
 
 Returns the absolute value of a number.
@@ -53,7 +72,7 @@ Returns the absolute value of a number.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | abs(`@client_latency` - `@server_latency`) | 1 |
+| A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | #discrepancy = abs(`@client_latency` - `@server_latency`) | #discrepancy = 1 |
 
 </details>
 
@@ -67,7 +86,7 @@ Rounds number up to the nearest integer.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = 2.2 | ceil(`@value`) | 3 |
+| A log event has the following attribute:<br>`@value` = 2.2 | #rounded_up = ceil(`@value`) | #rounded_up = 3 |
 
 </details>
 
@@ -81,7 +100,7 @@ Rounds number down to the nearest integer.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = 9.99 | floor(`@value`) | 9 |
+| A log event has the following attribute:<br>`@value` = 9.99 | #rounded_down = floor(`@value`) | #rounded_down = 9 |
 
 </details>
 
@@ -95,7 +114,7 @@ Finds maximum value amongst a set of numbers.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | max(`@CPU_temperatures`) | 5 |
+| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | #highest_temp = max(`@CPU_temperatures`) | #highest_temp = 5 |
 
 </details>
 
@@ -109,7 +128,7 @@ Finds the minimum value amongst a set of numbers.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | min(`@CPU_temperatures`) | -1 |
+| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | #lowest_temp = min(`@CPU_temperatures`) | #lowest_temp = -1 |
 
 </details>
 
@@ -123,7 +142,7 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = -1234.01 | round(`@value`, -1) | -1230 |
+| A log event has the following attribute:<br>`@value` = -1234.01 | #rounded_to_tens = round(`@value`, -1) | #rounded_to_tens = -1230 |
 
 </details>
 
@@ -140,7 +159,7 @@ Combines multiple values into a single string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@first_name` = "Bob" <br> - `@last_name` = "Smith" | concat(`@first_name`, `@last_name`) | "Bob Smith" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #concatenated_region = concat(`@city`, ", " `@country`) | #concatenated_region = "Paris, France" |
 
 </details>
 
@@ -154,7 +173,7 @@ Converts string to lowercase.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@first_name` = "Bob" | lower(`@first_name`) | "bob" |
+| A log event has the following attribute:<br>`@first_name` = "Bob" | #lower_name = lower(`@first_name`) | #lower_name = "bob" |
 
 </details>
 
@@ -168,7 +187,7 @@ Extracts a portion of text from the beginning of a string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@country` = "Canada" | upper(left(`@country`, 3)) | "CAN" |
+| A log event has the following attribute:<br>`@price` = "USD10.50" | #currency = left(`@price`, 3) | #currency = "USD" |
 
 </details>
 
@@ -182,7 +201,7 @@ Converts string to proper case.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@name` = "bob SMITH 123abc" | proper(`@name`) | "Bob Smith 123Abc" |
+| A log event has the following attribute:<br>`@address` = "123 main st" | #formatted_address = proper(`@address`) | #formatted_address = "123 Main St" |
 
 </details>
 
@@ -201,13 +220,13 @@ Extracts the portion of text preceding a certain pattern in a string.
     <th>Result</th>
   </tr>
   <tr>
-    <td rowspan ="2">A log event has the following attribute:<br><code>@url</code> = "www.example.com/path/to"</td>
-    <td>split_before(<code>@url</code>, "/", 1)</td>
-    <td>"www.example.com"</td>
+    <td rowspan ="2">A log event has the following attribute:<br><code>@url</code> = "www.example.com/path/to/split"</td>
+    <td>#url_extraction = split_before(<code>@url</code>, "/", 1)</td>
+    <td>#url_extraction = "www.example.com/path"</td>
   </tr>
   <tr>
-    <td>split_before(<code>@url</code>, "/", 2)</td>
-    <td>"www.example.com/path"</td>
+    <td>#url_extraction = split_before(<code>@url</code>, "/", 2)</td>
+    <td>#url_extraction = "www.example.com/path/to"</td>
   </tr>
 </table>
 
@@ -221,10 +240,23 @@ Extracts the portion of text following a certain pattern in a string.
 <details>
 <summary>Example</summary>
 
-| Example  | Formula | Result |
-|----------|-------------|---------|
-| A log event has the following attribute:<br>`@url` = "www.example.com/path/to/split" | split_after(`@url`, "/", 1) | "to/split" |
+<table>
+  <tr>
+    <th>Example</th>
+    <th>Formula</th>
+    <th>Result</th>
+  </tr>
+  <tr>
+    <td rowspan ="2">A log event has the following attribute:<br><code>@url</code> = "www.example.com/path/to/split"</td>
+    <td>#url_extraction = split_after(<code>@url</code>, "/", 1)</td>
+    <td>#url_extraction = "path/to/split"</td>
+  </tr>
+  <tr>
+    <td>#url_extraction = split_after(<code>@url</code>, "/", 2)</td>
+    <td>#url_extraction = "to/split"
+</table>
 
+</details>
 </details>
 
 
@@ -237,7 +269,8 @@ Extracts a portion of text from the middle of a string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@country` = "Canada" | substring(`@country`, 1, 4) | "anad" |
+| A log event has the following attribute:<br>`@price` = "USD10.50" | #dollar_value = substring(`@price`, 2, 2) | #dollar_value = "10" |
+
 
 </details>
 
@@ -251,7 +284,7 @@ Extracts a portion of text from the end of a string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@country` = "Canada" | upper(right(`@country`, 3)) | "ADA" |
+| A log event has the following attribute:<br>`@price` = "USD10.50" | #cent_value = right(`@price`, 2) | #cent_value = "50" |
 
 </details>
 
@@ -265,7 +298,7 @@ Combines multiple values into a single string with a delimiter in between.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | textjoin(", ", `@city`, `@country`) | "Paris, France" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #join_region = textjoin(", ", `@city`, `@country`) | #join_region = "Paris, France" |
 
 </details>
 
@@ -279,7 +312,7 @@ Converts string to uppercase.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute: `@first_name` = "Bob" | upper(`@first_name`) | "BOB" |
+| A log event has the following attribute: `@first_name` = "Bob" | #upper_name = upper(`@first_name`) | #upper_name = "BOB" |
 
 </details>
 
@@ -296,7 +329,7 @@ Evaluates a condition and returns a value accordingly.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@origin_country` = "USA" <br> - `@destination_country` = "Canada" <br> - `@origin_continent` = "NA" <br> - `@destination_continent` = "NA" | if(`@origin_country` == `@destination_country`, "national", if(`@origin_continent` == `@destination_continent`, "continental", "intercontinental")) | "continental" |
+| A log event has the following attributes: <br> - `@location` = "Paris, France" <br> - `@home` = "New York, USA" | #abroad = if(`@location` == `@home`, "false", "true") | #abroad = "true" |
 
 </details>
 
@@ -310,7 +343,7 @@ Checks if an attribute or expression is null.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 | is_null(`@users_online` / `@max_capacity`) | TRUE |
+| A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 | is_null(`@users_online` / `@max_capacity`) | "true" |
 
 </details>
 
