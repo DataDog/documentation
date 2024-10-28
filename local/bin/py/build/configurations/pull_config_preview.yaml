@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -94,21 +94,13 @@
         contents:
 
         - action: integrations
-          branch: docs8718/update-azure-ad
+          branch: master
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            dest_path: '/integrations/'
-            file_name: 'microsoft_entra_id.md'
-            front_matters:
-              title: Microsoft Entra ID
-              dependencies: ["https://github.com/DataDog/integrations-core/blob/3f4faac9a5f69ecdcbcfbe250786fd327f93183a/microsoft_entra_id/README.md"]
-              aliases:
-              - /integrations/azure_active_directory
 
       - repo_name: integrations-extras
         contents:
@@ -458,6 +450,8 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
               title: Datadog Lambda Extension
+              algolia:
+                tags: ['datadog lambda extension']
               aliases:
                 - /serverless/datadog_lambda_library/extension
 
@@ -590,17 +584,14 @@
 
       - repo_name: dd-source
         contents:
-        - action: workflows
+        - action: pull-and-push-file
           branch: main
           globs:
-            - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
-            - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
-            dest_path: '/service_management/workflows/actions_catalog/'
-            bundle_excludes:
-              - "com.datadoghq.test"
-              - "com.datadoghq.sample"
-              - "com.datadoghq.internal"
+            base_path: ""
+            dest_path: "/data/"
+            file_name: "workflow_bundles.json"
 
       - repo_name: web-ui
         contents:

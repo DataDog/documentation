@@ -134,6 +134,10 @@ cascade:
     lang: en
   aliases:
     - /integrations/snowflake/
+- _target:
+    path: /integrations/microsoft_entra_id
+  aliases:
+    - /integrations/azure_active_directory
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
