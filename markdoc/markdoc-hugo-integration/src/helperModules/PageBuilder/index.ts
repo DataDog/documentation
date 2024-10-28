@@ -1,7 +1,7 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
 import { ParsedFile } from '../../schemas/compilation';
 import { YamlConfigParser } from '../YamlConfigParser';
-import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compiler';
+import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
@@ -13,7 +13,7 @@ import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/hugoConfig';
 import { PagePrefsManifest } from '../../schemas/pagePrefs';
-import { render } from './renderer';
+import { render } from '../renderer';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 

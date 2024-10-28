@@ -1,0 +1,56 @@
+import MarkdocStaticCompiler from 'markdoc-static-compiler';
+import fs from 'fs';
+import { describe, test, expect } from 'vitest';
+import prettier from 'prettier';
+import { SNAPSHOTS_DIR } from '../../../config/constants';
+import { render } from '../../../../src/helperModules/renderer';
+
+describe('description lists', () => {
+  // retrieve test input file
+  const inputPath = __dirname + '/input.mdoc';
+  const inputString = fs.readFileSync(inputPath, 'utf-8');
+
+  // stage 1: build the AST
+  const ast = MarkdocStaticCompiler.parse(inputString);
+
+  // stage 2: build the renderable tree
+  const renderableTree = MarkdocStaticCompiler.transform(ast, {
+    variables: {
+      test_string: 'Datadog',
+      always_false: false,
+      always_true: true
+    }
+  });
+
+  // stage 3: render the HTML
+  const html = render(renderableTree, {
+    variables: {
+      test_string: 'Datadog',
+      always_false: false,
+      always_true: true
+    }
+  });
+
+  // format the HTML with prettier
+  const formattedHtml = prettier.format(html, {
+    parser: 'html'
+  });
+
+  test('ast', () => {
+    expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/renderer/descriptionLists/ast.snap.json`
+    );
+  });
+
+  test('renderableTree', () => {
+    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/renderer/descriptionLists/renderableTree.snap.json`
+    );
+  });
+
+  test('renderedHtml', () => {
+    expect(formattedHtml).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/renderer/descriptionLists/renderedHtml.snap.html`
+    );
+  });
+});
