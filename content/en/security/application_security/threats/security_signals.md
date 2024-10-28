@@ -28,7 +28,7 @@ The Signals Explorer displays signals using the following columns:
 
 There are five severity states: **Critical**, **High**, **Medium**, **Low**, and **Info**. 
 
-- **Critical:** A service is compromised. For example, a SQL injection. An immediate response is required.
+- **Critical:** A service is compromised. For example, an SQL injection. An immediate response is required.
 - **High:** A service is vulnerable, but it is unclear whether the service is compromised at this time. An immediate response is required.
 - **Medium:** A service is running the stack and infrastructure that allows for an attack, but the service is not vulnerable at this time. If you get a medium, it does not require an immediate response and you can evaluate how you want to triage the issue. 
 - **Low** and **Info**: Typically, these are signals used when experimenting or demonstrating an issue, like Log4Shell scanning.
