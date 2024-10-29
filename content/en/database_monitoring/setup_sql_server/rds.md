@@ -45,8 +45,13 @@ GO
 --Set context to msdb database and create datadog user
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next line:
--- GRANT SELECT to datadog;
+-- If not using either of Log Shipping Monitoring (available in Agent v7.50+), comment out the next line:
+GRANT SELECT ON dbo.log_shipping_monitor_primary to datadog;
+GRANT SELECT ON dbo.log_shipping_monitor_secondary to datadog;
+-- If not using SQL Server Agent Monitoring (available in Agent v7.57+), comment out the next three lines:
+GRANT SELECT ON dbo.sysjobs to datadog;
+GRANT SELECT ON dbo.sysjobhistory TO datadog;
+GRANT SELECT ON dbo.sysjobactivity to datadog;
 GO
 --Switch back to master and grant datadog user server permissions
 USE [master];

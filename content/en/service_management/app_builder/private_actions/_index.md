@@ -1,5 +1,5 @@
 ---
-title: Private Actions
+title: Private Actions Overview
 disable_toc: false
 ---
 

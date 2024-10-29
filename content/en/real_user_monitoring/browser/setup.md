@@ -17,8 +17,8 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 ## Setup
 
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Join the Beta!">}}
-RUM SDK Injection is in private beta. Complete the form to request access.
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Try our new Browser SDK injection!">}}
+You can now auto-inject the Browser SDK in your application instead of installing it manually. Complete the form to request access to the private beta.
 {{< /callout >}}
 
 To set up RUM Browser Monitoring, create a RUM application:
@@ -1858,7 +1858,7 @@ The RUM application ID.
 A [Datadog client token][15].
 
 `site`
-: Required<br/>
+: Optional<br/>
 **Type**: String<br/>
 **Default**: `datadoghq.com`<br/>
 [The Datadog site parameter of your organization][16].

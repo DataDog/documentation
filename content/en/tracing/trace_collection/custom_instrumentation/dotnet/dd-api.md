@@ -1,5 +1,5 @@
 ---
-title: .NET Custom Instrumentation using Datadog API
+title: .NET Custom Instrumentation using the Datadog API
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -81,7 +81,7 @@ namespace Store.Managers
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: When using both the <code>Datadog.Trace</code> NuGet package and automatic instrumentation, it is important to keep the versions in sync.
+  <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 ### Configuring Datadog in code

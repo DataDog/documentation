@@ -176,6 +176,8 @@ Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller ca
 
 This feature can be configured by setting `admission_controller.inject_config.mode` or by defining a Pod-specific mode using the `admission.datadoghq.com/config.mode` Pod label.
 
+Starting from Helm chart v3.22.0 and Datadog Operator v1.1.0, the communication mode is automatically set to `socket` if either APM socket or DSD socket is enabled.
+
 Possible options:
 | Mode               | Description                                                                                                       |
 |--------------------|-------------------------------------------------------------------------------------------------------------------|

@@ -16,11 +16,7 @@ further_reading:
 title: Prise en main de la solution Database Monitoring
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
-## Présentation
+## Section Overview
 
 La solution Database Monitoring de Datadog vous aide à mieux comprendre la santé et les performances de vos bases de données et à déterminer la cause première de vos problèmes.
 
@@ -32,7 +28,7 @@ Vous pouvez visualiser depuis une interface unique :
 
 Poursuivez votre lecture pour configurer la solution Database Monitoring Datadog à partir d'un exemple de base de données PostgreSQL. Vous pourrez ensuite identifier une requête coûteuse, diagnostiquer une requête lente et créer un dashboard pour visualiser l'évolution du volume de requêtes.
 
-## Implémentation
+## Configuration
 
 ### Prérequis
 

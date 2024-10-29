@@ -17,7 +17,7 @@ const doOnLoad = () => {
         }
 
         if (lang === 'fr' || lang === 'ja' || lang === 'ko') {
-            langParam = `?lang=${lang}`;
+            langParam = `lang=${lang}`;
         } else {
             langParam = '';
         }

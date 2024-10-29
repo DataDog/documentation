@@ -457,6 +457,13 @@
       "description": "Create an incident todo returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentType": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident type returns \"CREATED\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -469,6 +476,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident todo returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentType": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an incident type returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -650,6 +664,20 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "CreateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1540689753",
+      "description": "Create api handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_419892746",
+      "description": "Update api handle returns \"OK\" response"
     }
   ],
   "CreateMonitorConfigPolicy": [
@@ -1055,6 +1083,13 @@
       "group": "service_scorecards",
       "suffix": "",
       "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpsertCatalogEntity": [
+    {
+      "group": "software_catalog",
+      "suffix": "_586948155",
+      "description": "Create or update software catalog entity using schema v3 returns \"ACCEPTED\" response"
     }
   ],
   "AggregateSpans": [

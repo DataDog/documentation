@@ -84,14 +84,6 @@ clase privada YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 * implementar `URLSessionDataDelegate` y reenviar:
   * [`urlSession(_:dataTask:didReceive:)`][6]
 
-## Envío de datos cuando el dispositivo está desconectado
-
-RUM garantiza la disponibilidad de los datos cuando el dispositivo del usuario está desconectado. En casos de zonas con baja conexión de red o cuando la carga de la batería del dispositivo es demasiado baja, todos los eventos de RUM se almacenan primero en el dispositivo local en lotes. Se envían tan pronto como la red esté disponible y la carga de la batería sea lo suficientemente alta como para garantizar que el SDK de RUM para iOS no afecte a la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano o si falla una carga de datos, el lote se conserva hasta que se lo pueda enviar con éxito.
-
-Esto significa que incluso si los usuarios abren tu aplicación mientras está desconectada, no se pierde ningún dato.
-
-**Nota**: Los datos en el disco se descartan automáticamente si se hacen demasiado viejos para garantizar que el SDK de RUM para iOS no utilice demasiado espacio del disco.
-
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

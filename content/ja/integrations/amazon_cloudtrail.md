@@ -7,7 +7,7 @@ categories:
 - cloud
 - log collection
 - security
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 不審な AWS アカウントアクティビティを警告。
 doc_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
@@ -39,7 +39,7 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 他の AWS サービスについては、[Amazon Web Services インテグレーションのページ][1]を参照してください
 
 
-## Setup
+## セットアップ
 
 ### インストール
 
@@ -113,35 +113,35 @@ AWS CloudTrail インテグレーションは、AWS CloudTrail の監査証跡�
 
 優先度を標準に設定された CloudTrail イベント (デフォルトのフィルターのイベントエクスプローラーに表示されます):
 
-* apigateway
-* autoscaling
-* cloudformation
-* cloudfront
-* cloudsearch
-* cloudtrail
-* codedeploy
-* codepipeline
-* config
-* datapipeline
-* ds
-* ec2
-* ecs
-* elasticache
-* elasticbeanstalk
-* elasticfilesystem
-* elasticloadbalancing
-* elasticmapreduce
-* iam
-* kinesis
-* lambda
-* monitoring
-* opsworks
-* rds
-* redshift
-* route53
-* s3
-* ses
-* signin
+* apigateway 
+* autoscaling 
+* cloudformation 
+* cloudfront 
+* cloudsearch 
+* cloudtrail 
+* codedeploy 
+* codepipeline 
+* config 
+* datapipeline  
+* ds 
+* ec2 
+* ecs 
+* elasticache 
+* elasticbeanstalk 
+* elasticfilesystem 
+* elasticloadbalancing 
+* elasticmapreduce 
+* iam 
+* kinesis 
+* lambda 
+* monitoring 
+* opsworks 
+* rds 
+* redshift 
+* route53 
+* s3 
+* ses 
+* signin 
 * ssm
 
 ### サービスチェック

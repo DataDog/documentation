@@ -19,6 +19,15 @@ This topic explains how to create custom Datadog Agent and detection rules for [
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
+## RBAC for custom rule management
+
+Here are some important [role and permissions][11] to use for custom rules RBAC:
+
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Active Protection][12] feature. Active Protection enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
+
+
 ## Custom detection rules summary
 
 Custom detection rules depend on Agent rules. They are composed of existing, deployed Agent rules and additional expression parameters. 
@@ -113,7 +122,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. At a minimum, the file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
+Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. The file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
 
 To apply the changes, restart the [Datadog Agent][1].
 
@@ -196,3 +205,5 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 [8]: /security/threats/
 [9]: /security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
+[11]: /account_management/rbac/permissions/
+[12]: /security/cloud_security_management/guide/active-protection

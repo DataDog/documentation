@@ -4,7 +4,7 @@ aliases:
 title: Datadog 에이전트를 로그 수집용으로만 사용
 ---
 
-페이로드를 비활성화하려면 에이전트 v6.4+를 실행해야 합니다. 그러면 메트릭 데이터 제출을 비활성화하고 호스트가 Datadog에 표시되지 않습니다. 다음 단계를 따르세요.
+페이로드를 비활성화하려면 에이전트 v6.4 이상을 실행 중이어야 합니다. 이렇게 하면 메트릭 데이터 제출(커스텀 메트릭 포함)이 비활성화되어 호스트가 Datadog에 표시되지 않습니다. 다음 단계를 따르세요.
 
 {{< tabs >}}
 {{% tab "호스트 " %}}
@@ -21,7 +21,7 @@ title: Datadog 에이전트를 로그 수집용으로만 사용
     ```
 
 3. [에이전트에서 로그를 수집하도록 구성][2]합니다.
-4. [Restart the Agent][3].
+4. [에이전트를 다시 시작합니다][3].
 
 [1]: /ko/agent/configuration/agent-configuration-files/
 [2]: /ko/logs/log_collection/
@@ -51,7 +51,7 @@ docker run -d --name datadog-agent \
 ```
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "쿠버네티스" %}}
 
 쿠버네티스에서 에이전트를 배포하는 경우 에이전트 구성 후에 `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, `DD_ENABLE_PAYLOADS_SKETCHES` 환경 변수를 `false`로 설정하세요.
 

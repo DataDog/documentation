@@ -7,6 +7,7 @@ assets:
   dashboards:
     RapDev Sophos Dashboard: assets/dashboards/rapdev_sophos_dashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,11 +18,12 @@ assets:
       prefix: rapdev.sophos.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10192
     source_type_name: RapDev Sophos
   logs: {}
   monitors:
-    '[RapDev Sophos] Managed Endpoint Health has Changed': assets/monitors/sophos_endpoint_health.json
-    '[RapDev Sophos] Sophos Service on Managed Endpoint is Stopped': assets/monitors/sophos_service_running.json
+    Endpoint is no longer in good health: assets/monitors/sophos_endpoint_health.json
+    Sophos Service is stopped: assets/monitors/sophos_service_running.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,6 +33,7 @@ author:
 categories:
 - marketplace
 - security
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +42,6 @@ integration_id: rapdev-sophos
 integration_title: Sophos
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -68,6 +70,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Surveiller la santé de vos endpoints gérés Sophos
   media:
@@ -80,6 +83,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## Présentation
@@ -93,13 +97,13 @@ L'intégration Sophos surveille la santé globale de vos endpoints gérés Sopho
 ### Dashboards
 1. Dashboard RapDev Sophos
 
-## Assistance
+## Agent
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 
 - Assistance : support@rapdev.io
 - Service commercial : sales@rapdev.io
 - Chat : [rapdev.io](https://www.rapdev.io/#Get-in-touch)
-- Téléphone : 855-857-0222
+- Téléphone : +1 855-857-0222
 
 ---
 Développé avec ❤️ à Boston

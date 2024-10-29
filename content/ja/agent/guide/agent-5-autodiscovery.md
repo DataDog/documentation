@@ -252,7 +252,7 @@ spec:
         - containerPort: 80
 ```
 
-#### Apache and HTTP checks
+#### Apache チェックと HTTP チェック
 
 Deployment からポッドを定義する場合は、テンプレートアノテーションを Deployment のメタデータに追加しないでください。Agent はこれを参照しません。以下のように指定して、アノテーションを追加します。
 

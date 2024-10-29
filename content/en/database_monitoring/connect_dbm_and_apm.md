@@ -35,7 +35,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \* Full propagation mode on Aurora MySQL requires version 3.
 
-\*\* SQL Server only supports full mode with the Java tracer.
+\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
@@ -61,7 +61,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | `service` mode only |                     |
+|                                          | [ADO.NET][24] *        |           |           | {{< X >}} **       |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -78,6 +78,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - Prerequisites:
   - Agent version 7.55.0 or greater
   - Java tracer version 1.39.0 or greater
+  - .NET tracer version 3.3 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -300,7 +301,7 @@ Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
-   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java tracer
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .NET tracers
    - For Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework

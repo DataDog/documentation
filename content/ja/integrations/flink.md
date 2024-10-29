@@ -39,7 +39,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
 display_on_public_website: true
@@ -47,7 +47,7 @@ draft: false
 git_integration_title: flink
 integration_id: flink
 integration_title: Flink
-integration_version: 1.5.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: flink
@@ -98,7 +98,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
     ```yaml
     metrics.reporter.dghttp.factory.class: org.apache.flink.metrics.datadog.DatadogHttpReporterFactory
     metrics.reporter.dghttp.apikey: <DATADOG_API_KEY>
-    metrics.reporter.dghttp.dataCenter: {{< region-param key="dd_datacenter" >}}
+    metrics.reporter.dghttp.dataCenter: US #(optional) The data center (EU/US) to connect to, defaults to US.
     ```
 
 2. `<FLINK_HOME>/conf/flink-conf.yaml` で、システムのスコープを再マッピングします。

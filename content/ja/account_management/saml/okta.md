@@ -29,10 +29,10 @@ Okta の[カスタム SAML アプリのインテグレーションを作成す�
 
 | Okta IDP 入力フィールド        | 予測値                                                                                                                 |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| シングルサインオン URL          | Assertion Consumer Service URL (Find this URL on the [Configure SAML page][3], in the *Assertion Consumer Service URL* field.) |
+| シングルサインオン URL          | Assertion Consumer Service URL (この URL は [Configure SAML ページ][3]の *Assertion Consumer Service URL* フィールドで確認できます) |
 | Recipient URL               | Assertion Consumer Service URL (または *Use this for Recipient URL and Destination URL* チェックボックスをオンにします)                        |
 | Destination URL             | Assertion Consumer Service URL (または *Use this for Recipient URL and Destination URL* チェックボックスをオンにします)                        |
-| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this ID on the [Configure SAML page][3], in the *Service Provider Entity ID* field.)         |
+| Audience URI (SP Entity ID) | サービスプロバイダーのエンティティ ID (この ID は [Configure SAML ページ][3]の *Service Provider Entity ID* フィールドで確認できます)         |
 | Name ID Format              | EmailAddress                                                                                                                   |
 | 応答                    | Signed                                                                                                                         |
 | Assertion Signature         | Signed                                                                                                                         |
@@ -55,7 +55,7 @@ Okta の[カスタム SAML アプリのインテグレーションを作成す�
 
 これは [AuthN Mapping][4] を使用している場合にのみ必要です。
 
-| Name     | 名前形式 (オプション) | 値                                                                                                                     |
+| 名前     | 名前形式 (オプション) | 値                                                                                                                     |
 |----------|------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | memberOf | 指定なし            | 正規表現 `.*` に一致 (このメソッドはすべてのグループを取得します。お使いのユースケースに適合しない場合は IDP 管理者にお問い合わせください) |
 

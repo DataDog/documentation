@@ -24,7 +24,10 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 1. Provide an optional **Description**.
 1. Click **Create**.
 
-**Note:** Allowed characters for team names and team handles are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores.
+**Notes**: 
+
+- Allowed characters for team names are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores. 
+- Allowed characters for team handles are `a-z`, `0-9`, and `._-:/`. The last character cannot be an underscore.
 
 ### Modify team
 
@@ -126,7 +129,7 @@ To customize your team, see [Team Management][3].
 [3]: /account_management/teams/manage/
 [4]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [5]: /dashboards/#dashboard-details
-[6]: /service_management/incident_management/incident_details#overview-section
+[6]: /service_management/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: /infrastructure/resource_catalog/
 [9]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui

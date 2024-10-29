@@ -6,6 +6,7 @@ aliases:
   - /security/application_security/enabling/single_step
   - /security/application_security/enabling/compatibility
   - /security/application_security/enabling
+  - /security/application_security/getting_started
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"

@@ -100,7 +100,7 @@ To configure probabilistic sampling, do one of the following:
     # ...
     probabilistic_sampler:
         enabled: true
-        sampling_percentage: 50 #In this example, 50% of traces are captured.
+        sampling_percentage: 51 #In this example, 51% of traces are captured.
         hash_seed: 22 #A seed used for the hash algorithm. This must match other agents and OTel
   ```
 

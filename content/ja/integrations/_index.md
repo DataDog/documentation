@@ -48,7 +48,7 @@ cascade:
     lang: en
     path: /integrations/amazon_web_services
   algolia:
-    category: Documentation
+    category: ドキュメント
     rank: 80
     subcategory: インテグレーション
     tags:

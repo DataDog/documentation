@@ -41,7 +41,7 @@ Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deplo
 
 1. Install [External Dependency Manager for Unity (EDM4U)][4]. This can be done using [Open UPM][5].
 
-2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6].  The package URL is `https://github.com/DataDog/unity-package.git`.
+2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6]. The package URL is `https://github.com/DataDog/unity-package.git`.
 
 3. Configure your project to use [Gradle templates][8], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
@@ -87,7 +87,7 @@ The following parameters are available:
 | Forward Unity Logs | No | Whether to forward logs made from Unity's `Debug.Log` calls to Datadog's default logger. |
 | Remote Log Threshold | Yes | The level at which the default logger forwards logs to Datadog. Logs below this level are not sent. |
 | Enable RUM | No | Whether to enable sending data from Datadog's Real User Monitoring APIs |
-| Enable Automatic Scene Tracking | No | Whether Datadog should automatically track new Views by interceping Unity's `SceneManager` loading. |
+| Enable Automatic Scene Tracking | No | Whether Datadog should automatically track new Views by intercepting Unity's `SceneManager` loading. |
 | RUM Application ID | Yes (if RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
 | Session Sample Rate | Yes | The percentage of sessions to send to Datadog. Between 0 and 100. |
 | Trace Sample Rate | Yes | The percentage of distributed traces to send to Datadog. Between 0 and 100. |
@@ -196,6 +196,14 @@ Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper 
 To enable Datadog Distributed Tracing, you must set the `First Party Hosts` in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `Tracing Sampling Rate`.
 
 `First Party Hosts` does not allow wildcards, but matches any subdomains for a given domain. For example, api.example.com matches staging.api.example.com and prod.api.example.com, but not news.example.com.
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /account_management/api-app-keys/#client-tokens

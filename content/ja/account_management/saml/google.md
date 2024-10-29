@@ -20,7 +20,7 @@ title: Google SAML IdP
 前提として、Datadog の [SAML 構成ページ][2]で、**IDP initiated SSO** にチェックを入れる必要があります。
 
 Application Name
-: Can be anything
+: 任意の名前
 
 Description
 : 任意の説明
@@ -40,11 +40,11 @@ Signed Response
 Name ID
 : **Basic Information** と **Primary Email** を選択します
 
-## Attribute mapping
+## 属性のマッピング
 
 * urn:oid:1.3.6.1.4.1.5923.1.1.1.6、基本情報、メインのメールアドレス
 
-Also add:
+以下も追加してください。
 
 * urn:oid:2.5.4.4、基本情報、姓
 * urn:oid:2.5.4.42、基本情報、名

@@ -46,7 +46,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY},dd-otlp-source={{< region-param key="dd_site" >}}"
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 ```
 
 #### Manual instrumentation
@@ -112,7 +112,7 @@ traceExporter, err := otlptracehttp.New(
 			"dd-protocol": "otlp", 
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-                  "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
 		}),
 )
 ```
@@ -180,7 +180,7 @@ exporters:
       dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-span-mapping: "{span_name_as_resource_name: false}"
-      dd-otlp-source: "${YOUR_SITE}",
+      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
 ...
 
 service:
@@ -200,7 +200,7 @@ If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP t
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP traces intake endpoint.  
    **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP traces intake endpoint.
 - The `dd-otlp-source` header is missing or has an incorrect value.  
-   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. Your site should be {{< region-param key=dd_site code="true" >}}.
+   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
 

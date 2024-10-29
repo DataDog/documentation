@@ -28,7 +28,7 @@ further_reading:
   text: ネットワークとセキュリティ分析のための DNS ログの監視
 - link: https://www.datadoghq.com/blog/akamai-zero-trust-application-security/
   tag: ブログ
-  text: Monitor Akamai Zero Trust and Application Security with Datadog Cloud SIEM
+  text: Datadog Cloud SIEM で Akamai Zero Trust と Application Security を監視する
 title: Cloud SIEM
 ---
 

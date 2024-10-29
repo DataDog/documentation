@@ -1,6 +1,10 @@
 ---
 title: Log Workspaces
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/log-workspaces/"
+  tag: "Blog"
+  text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="false" >}}
@@ -31,6 +35,15 @@ In the [Log Explorer][2]:
 1. Enter a query.
 1. Click **More**, next to *Download as CSV*, and select **Open in Workspace**.
 1. The workspace adds the log query to a data source cell. By default, the columns in Log Explorer are added to the data source cell.
+
+### Add a column to your workspace
+
+{{< img src="/logs/workspace/workspaces_add_column_to_dataset.png" alt="An example workspace cell, with an open detail side panel that highlights the option to add an attribute as a column" style="width:100%;" >}}
+
+In addition to the default columns, you can add your own columns to your workspace:
+1. From your workspace cell, click on a log to open the detail side panel.
+1. Click the attribute you want to add as a column.
+1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**.
 
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
@@ -222,6 +235,10 @@ An example of the resulting `transaction_record_with_names` dataset:
 Finally, a treemap visualization cell is created with the `transaction_record_with_names` dataset filtered for `status:error` logs and grouped by `dollar_value`, `account_status`, and `customer_name`.
 
 {{< img src="logs/workspace/treemap.png" alt="The workspace datasets" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/analysis-workspace/list
 [2]: https://app.datadoghq.com/logs

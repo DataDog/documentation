@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/disk/README.md
 display_name: Disk
@@ -31,14 +31,14 @@ git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: システム
 integration_title: Disk
-integration_version: 5.3.0
+integration_version: 5.4.0
 is_public: true
 maintainer: help@datadoghq.com
 manifest_version: 2.0.0
 metric_prefix: system.
 metric_to_check: system.disk.free
 monitors:
-  disk-space-forecast: assets/monitors/disk_monitor.json
+  Device is going to be full: assets/monitors/disk_monitor.json
 name: disk
 public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。

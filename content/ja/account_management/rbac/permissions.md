@@ -22,7 +22,7 @@ title: Datadog ロールのアクセス許可
 
 ### すぐに使えるロール
 
-By default, existing users are associated with one of the three out-of-the-box roles:
+By default, existing users are associated with one of the three managed roles:
 
 - Datadog 管理者
 - Datadog 標準
