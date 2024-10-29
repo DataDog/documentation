@@ -342,8 +342,6 @@ To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators
 
 #### Example
 
-The following also includes an example of annotating a span. See [Annotating a span](#annotating-a-span) for more information.
-
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import retrieval
 
@@ -398,7 +396,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `metrics`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, and so on).
+<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, and so on). The unit for `time_to_first_token` is in seconds, similar to the `duration` metric which is emitted by default.
 
 `tags`
 : optional - _dictionary_

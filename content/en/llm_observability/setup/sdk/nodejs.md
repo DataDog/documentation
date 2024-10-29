@@ -14,7 +14,7 @@ aliases:
 
 ## Overview
 
-The LLM Observability SDK for Node.js enhances the observability of your Javascript-based LLM applications. The SDK supports Node.js versions 16 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][13].
+The LLM Observability SDK for Node.js enhances the observability of your Javascript-based LLM applications. The SDK supports Node.js versions 16 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][5].
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with wrapped functions or traced blocks. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
@@ -25,10 +25,10 @@ You can install and configure tracing of various operations such as workflows, t
 1. The latest `dd-trace` package must be installed:
 
 {{< code-block lang="shell">}}
-npm install git+https://git@github.com/DataDog/dd-trace-js.git#sabrenner/llmobs-sdk
+npm install dd-trace
 {{< /code-block >}}
 
-2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
+2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][1]).
 
 ### Command-line setup
 
@@ -70,7 +70,6 @@ const tracer = require('dd-trace').init({
   llmobs: {
     mlApp: "<YOUR_ML_APP_NAME>",
     agentlessEnabled: true,
-    apiKey: "<YOUR_DATADOG_API_KEY>",
   },
   site: "<YOUR_DATADOG_SITE>",
   env: "<YOUR_ENV>",
@@ -127,7 +126,13 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 ## Tracing spans
 
-To trace a span, use `llmobs.wrap(spanKind, options, function)` as a function wrapper for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][8]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
+To trace a span, use `llmobs.wrap(options, function)` as a function wrapper for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][2]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
+
+### Span Kinds
+
+Span kinds are required, and are specified on the `options` object passed to the `llmobs` tracing functions (`trace`, `wrap`, and `decorate`). See the [Span Kinds documentation][2] for a list of supported span kinds. 
+
+**Note:** Spans with an invalid span kind will not be submitted to LLM Observability.
 
 ### Automatic function argument/output/name capturing
 
@@ -138,19 +143,19 @@ function processMessage () {
   ... // user application logic
   return
 }
-processMessage = llmobs.wrap('workflow', { name: 'differentFunctionName' }, processMessage)
+processMessage = llmobs.wrap({ kind: 'workflow', name: 'differentFunctionName' }, processMessage)
 {{< /code-block >}}
 
 ### LLM span
 
-**Note**: If you are using any LLM providers or frameworks that are supported by [Datadog's LLM integrations][13], you do not need to manually start a LLM span to trace these operations.
+**Note**: If you are using any LLM providers or frameworks that are supported by [Datadog's LLM integrations][5], you do not need to manually start a LLM span to trace these operations.
 
-To trace an LLM span, specify the span kind as `llm`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `llm`, with optionally specifying the following arguments on the options object.
 
 #### Arguments
 
 `modelName`
-: required - _string_
+: optional - _string_ - **default**: `"custom"`
 <br/>The name of the invoked LLM.
 
 `name`
@@ -159,6 +164,7 @@ To trace an LLM span, specify the span kind as `llm`, with optionally specifying
 
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
+The name of the model provider.
 
 `sessionId`
 : optional - _string_
@@ -175,12 +181,12 @@ function llmCall () {
   const completion = ... // user application logic to invoke LLM
   return completion
 }
-llmCall = llmobs.wrap('llm', { name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
+llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
 {{< /code-block >}}
 
 ### Workflow span
 
-To trace an LLM span, specify the span kind as `workflow`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `workflow`, with optionally specifying the following arguments on the options object.
 
 #### Arguments
 
@@ -203,12 +209,12 @@ function processMessage () {
   ... // user application logic
   return
 }
-processMessage = llmobs.wrap('workflow', processMessage)
+processMessage = llmobs.wrap({ kind: 'workflow' }, processMessage)
 {{< /code-block >}}
 
 ### Agent span
 
-To trace an LLM span, specify the span kind as `agent`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `agent`, with optionally specifying the following arguments on the options object.
 
 #### Arguments
 
@@ -231,12 +237,12 @@ function reactAgent () {
   ... // user application logic
   return
 }
-reactAgent = llmobs.wrap('agent', reactAgent)
+reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
 {{< /code-block >}}
 
 ### Tool span
 
-To trace an LLM span, specify the span kind as `tool`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `tool`, with optionally specifying the following arguments on the options object.
 
 #### Arguments
 
@@ -259,12 +265,12 @@ function callWeatherApi () {
   ... // user application logic
   return
 }
-callWeatherApi = llmobs.wrap('tool', callWeatherApi)
+callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
 {{< /code-block >}}
 
 ### Task span
 
-To trace an LLM span, specify the span kind as `task`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `task`, with optionally specifying the following arguments on the options object.
 
 #### Arguments
 
@@ -287,19 +293,19 @@ function sanitizeInput () {
   ... // user application logic
   return
 }
-sanitizeInput = llmobs.wrap('task', sanitizeInput)
+sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
 {{< /code-block >}}
 
 ### Embedding span
 
-To trace an LLM span, specify the span kind as `embedding`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `embedding`, with optionally specifying the following arguments on the options object.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
 
 #### Arguments
 
 `modelName`
-: required - _string_
+: optional - _string_ - **default**: `"custom"`
 <br/>The name of the invoked LLM.
 
 `name`
@@ -308,6 +314,7 @@ To trace an LLM span, specify the span kind as `embedding`, with optionally spec
 
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
+The name of the model provider.
 
 `sessionId`
 : optional - _string_
@@ -324,12 +331,12 @@ function performEmbedding () {
   ... // user application logic
   return
 }
-performEmbedding = llmobs.wrap('embedding', { modelName: 'text-embedding-3', modelProvider: 'openai' }, performEmbedding)
+performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3', modelProvider: 'openai' }, performEmbedding)
 {{< /code-block >}}
 
 ### Retrieval span
 
-To trace an LLM span, specify the span kind as `retrieval`, with optionally specifying the following arguments.
+To trace an LLM span, specify the span kind as `retrieval`, with optionally specifying the following arguments on the options object.
 
 **Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
 
@@ -365,12 +372,12 @@ function getRelevantDocs (question) {
   })
   return
 }
-getRelevantDocs = llmobs.wrap('retrieval', getRelevantDocs)
+getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{< /code-block >}}
 
 ### Conditions for finishing a span for a wrapped function
 
-`llmobs.wrap` extends the underlying behavior of [`tracer.wrap`][14]. The underlying span created when the function is called is finished under the following conditions:
+`llmobs.wrap` extends the underlying behavior of [`tracer.wrap`][6]. The underlying span created when the function is called is finished under the following conditions:
 
 1. The function returns a Promise, in which case the span will finish when the promise is resolved or rejected.
 2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
@@ -389,7 +396,7 @@ function myAgentMiddleware (req, res, next) {
   // the span for this function is finished when `next` is called
   next(err)
 }
-myAgentMiddleware = llmobs.wrap('agent', myAgentMiddleware)
+myAgentMiddleware = llmobs.wrap({ kind: 'agent' }, myAgentMiddleware)
 
 app.use(myAgentMiddleware)
 
@@ -403,11 +410,10 @@ const app = express()
 
 function myAgentMiddleware (req, res) {
   // the `next` callback is not being used here
-  return llmobs.trace('agent', { name: 'myAgentMiddleware' }, () => {
+  return llmobs.trace({ kind: 'agent', name: 'myAgentMiddleware' }, () => {
     return res.status(200).send('Hello World!')
   })
 }
-myAgentMiddleware = llmobs.wrap('agent', myAgentMiddleware)
 
 app.use(myAgentMiddleware)
 
@@ -422,7 +428,7 @@ function processMessage() {
     ... # user application logic
     return
 }
-processMessage = llmobs.wrap('workflow', { sessionId: "<SESSION_ID>" }, processMessage)
+processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, processMessage)
 {{< /code-block >}}
 
 ## Annotating a span
@@ -461,7 +467,7 @@ The `annotationOptions` object can contain the following:
 
 `tags`
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
+<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][3].
 
 ### Example
 
@@ -477,7 +483,7 @@ function llmCall (prompt) {
   })
   return completion
 }
-llmCall = llmobs.wrap('llm', { modelName: 'modelName', modelProvider: 'modelProvider' }, llmCall)
+llmCall = llmobs.wrap({ kind:'llm', modelName: 'modelName', modelProvider: 'modelProvider' }, llmCall)
 
 function extractData (document) {
   const resp = llmCall(document)
@@ -488,7 +494,7 @@ function extractData (document) {
   })
   return resp
 }
-extractData = llmobs.wrap('workflow', extractData)
+extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
 
 function performEmbedding () {
   ... // user application logic
@@ -501,7 +507,7 @@ function performEmbedding () {
     }
   )
 }
-performEmbedding = llmobs.wrap('embedding', { modelName: 'text-embedding-3', modelProvider: 'openai' }, performEmbedding)
+performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3', modelProvider: 'openai' }, performEmbedding)
 
 function similaritySearch () {
   ... // user application logic
@@ -512,7 +518,7 @@ function similaritySearch () {
   })
   return
 }
-similaritySearch = llmobs.wrap('retrieval', { name: 'getRelevantDocs' }, similaritySearch)
+similaritySearch = llmobs.wrap({ kind: 'retrieval', name: 'getRelevantDocs' }, similaritySearch)
 
 {{< /code-block >}}
 
@@ -540,7 +546,7 @@ function llmCall () {
   const spanContext = llmobs.exportSpan()
   return completion
 }
-llmCall = llmobs.wrap('llm', { name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
+llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
 {{< /code-block >}}
 
 
@@ -576,7 +582,7 @@ The `evaluationOptions` object can contain the following:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][3].
 
 ### Example
 
@@ -592,14 +598,14 @@ function llmCall () {
   })
   return completion
 }
-llmCall = llmobs.wrap('llm', { name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
+llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
 {{< /code-block >}}
 
 ## Advanced tracing
 
 ### Tracing spans using inline methods
 
-The `llmobs` SDK provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function wrapper counterparts, with the addition that `name` defaults to the span kind (`llm`, `workflow`, and so on) if not provided. This method will finish the span under the following conditions:
+The `llmobs` SDK provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function wrapper counterparts, with the addition that `name` is required, as the name cannot be inferred from an anonymous callback. This method will finish the span under the following conditions:
 
 1. The function returns a Promise, in which case the span will finish when the promise is resolved or rejected.
 2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
@@ -607,39 +613,27 @@ The `llmobs` SDK provides a corresponding inline method to automatically trace t
 
 The return type of this function will match the return type of the wrapped function.
 
-#### Example
+#### Example without a callback
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
-  return llmobs.trace('workflow', { name: 'processMessage', sessionId: '<SESSION_ID>', mlApp: '<ML_APP>' }, workflowSpan => {
+  return llmobs.trace({ kind: 'workflow', name: 'processMessage', sessionId: '<SESSION_ID>', mlApp: '<ML_APP>' }, workflowSpan => {
     ... // user application logic
     return
   })
 }
 {{< /code-block >}}
 
-### Persisting a span across contexts
-
-The LLM Observability SDK provides the `llmobs.startSpan()` method to manually start and stop a span to be persisted across different contexts or scopes:
-
-1. Start a span manually using `llmobs.startSpan(spanKind, options)`
-2. Pass the span object as an argument to other functions.
-3. Stop the span manually with the `span.finish()` method. **Note**: the span must be manually finished, otherwise it will not be submitted.
-
-#### Example
+#### Example with a callback
 
 {{< code-block lang="javascript" >}}
-function processMessage() {
-    const workflowSpan = llmobs.startSpan('workflow', { name: 'processMessage' })
+function processMessage () {
+  return llmobs.trace({ kind: 'workflow', name: 'processMessage', sessionId: '<SESSION_ID>', mlApp: '<ML_APP>' }, (workflowSpan, cb) => {
     ... // user application logic
-    separateTask(workflowSpan)
+    let maybeError = ...
+    cb(maybeError) // the span will finish here, and tag the error if it is not null or undefined
     return
-}
-
-function separateTask(workflowSpan) {
-    ... // user application logic
-    workflowSpan.finish()
-    return
+  })
 }
 {{< /code-block >}}
 
@@ -661,7 +655,7 @@ tracer.init({
 const { llmobs } = tracer;
 
 class MyAgent {
-  @llmobs.decorate('agent')
+  @llmobs.decorate({ kind: 'agent' })
   async runChain () {
     ... // user application logic
     return
@@ -680,21 +674,21 @@ The SDK supports tracking multiple LLM applications from the same service.
 
 You can configure an environment variable `DD_LLMOBS_ML_APP` to the name of your LLM application, which all generated spans are grouped into by default.
 
-To override this configuration and use a different LLM application name for a given root span, pass the `ml_app` argument with the string name of the underlying LLM application when starting a root span for a new trace or a span in a new process.
+To override this configuration and use a different LLM application name for a given root span, pass the `mlApp` argument with the string name of the underlying LLM application when starting a root span for a new trace or a span in a new process.
 
 {{< code-block lang="javascript">}}
 function processMessage () {
   ... // user application logic
   return
 }
-processMessage = llmobs.wrap('workflow', { name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
+processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
 {{< /code-block >}}
 
 ### Distributed tracing
 
 The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
 
-The `dd-trace` library provides some out-of-the-box integrations that support distributed tracing for popular [web frameworks][12]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
+The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][4]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
 
 {{< code-block lang="javascript">}}
 const tracer = require('dd-trace').init({
@@ -704,15 +698,9 @@ tracer.use('http', false) // disable the http integration
 {{< /code-block >}}
 
 
-[1]: https://github.com/openai/openai-node
-[2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
-[3]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
-[4]: https://github.com/langchain-ai/langchain
-[7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[8]: /llm_observability/terms/
-[9]: /getting_started/tagging/
-[10]: https://github.com/DataDog/llm-observability
-[11]: /tracing/trace_collection/compatibility/nodejs/#supported-integrations
-[12]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
-[13]: /llm_observability/setup/auto_instrumentation/
-[14]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper
+[1]: /account_management/api-app-keys/#add-an-api-key-or-client-token
+[2]: /llm_observability/terms/
+[3]: /getting_started/tagging/
+[4]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
+[5]: /llm_observability/setup/auto_instrumentation/
+[6]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper
