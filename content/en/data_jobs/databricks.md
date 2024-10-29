@@ -196,7 +196,7 @@ If you are using [Databricks Private Connectivity][14], the steps to configure t
     {{< nextlink href="agent/guide/gcp-private-service-connect" >}}Connect to Datadog over GCP Private Service Connect{{< /nextlink >}}
 {{< /whatsnext >}}
 
-For further assistance, please contact the Datadog [support team][15].
+For further assistance, contact the Datadog [support team][15].
 
 ## Further Reading
 
