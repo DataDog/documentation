@@ -75,7 +75,7 @@ through the `GlobalRumMonitor` instance. Call this method when your view is full
 {{% /tab %}}
 {{< /tabs >}}
 
-Use `override` option to replace previously calculated loading time for current view.
+Use the `override` option to replace the previously calculated loading time for the current view.
 
 After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 Please note that this API is still experimental and might change in the future.
