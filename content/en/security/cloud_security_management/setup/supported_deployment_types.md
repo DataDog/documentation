@@ -16,7 +16,7 @@ The following table summarizes the CSM features available relative to each deplo
 | Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
-| Windows             | {{< X >}}              |                       | {{< X >}}   | beta                |                    |                        |
+| Windows             | {{< X >}}              |                       | {{< X >}}   | {{< X >}}           |                    |                        |
 | AWS Fargate ECS/EKS | {{< X >}}              |                       | beta        |                     |                    |                        |
 
 The following table summarizes the scope of coverage available relative to each CSM feature.
@@ -28,7 +28,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Kubernetes Cluster              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
 | Docker Host                     | {{< X >}}             |             |                     |                    |                        |
 | Linux Host                      | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    | {{< X >}}              |
-| Windows Host                    |                       | {{< X >}}   | beta                |                    |                        |
+| Windows Host                    |                       | {{< X >}}   | {{< X >}}           |                    |                        |
 | Docker Container                |                       | {{< X >}}   |                     |                    |                        |
 | Container Image                 |                       |             | {{< X >}}           |                    | {{< X >}}              |
 | IAM in AWS Account              |                       |             |                     | {{< X >}}          |                        |

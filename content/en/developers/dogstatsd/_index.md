@@ -10,7 +10,7 @@ aliases:
 further_reading:
     - link: 'integrations/node'
       tag: 'Documentation'
-      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
+      text: 'Enable DogStatsD for Node.js through the Node.js integration'
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Introduction to DogStatsD'
