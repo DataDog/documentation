@@ -262,7 +262,7 @@ spec:
 ```
 {{% /tab %}}
 
-{{% tab "Linux Hosted" %}}
+{{% tab "Linux hosted" %}}
 If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
 
 ```
