@@ -25,7 +25,7 @@ algolia:
 ---
 
 {{< learning-center-callout header="Try Grok parsing in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
-  Build and modify log pipelines, manage them with the Pipeline Scanner, and standardize attribute names across processed logs for consistency.
+  Learn to build and modify log pipelines, manage them with the Pipeline Scanner, and standardize attribute names across processed logs for consistency.
 {{< /learning-center-callout >}}
 
 ## Overview
