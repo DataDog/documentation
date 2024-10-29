@@ -13,7 +13,7 @@ algolia:
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+Event Correlation is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
 ## Overview
