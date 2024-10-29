@@ -1,6 +1,24 @@
 import { HugoConfig } from '../../schemas/hugoConfig';
 import md5 from 'md5';
 
+class HugoUtils {
+  static isAbsUrl(path: string): boolean {
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return true;
+    }
+    try {
+      new URL(path);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static relUrl(path: string) {
+    const isAbs = this.isAbsUrl(path);
+  }
+}
+
 function buildImagePermalink(props: { src: string; hugoConfig: HugoConfig }) {
   const { src, hugoConfig } = props;
 
@@ -17,10 +35,10 @@ function buildImagePermalink(props: { src: string; hugoConfig: HugoConfig }) {
 }
 
 function cssStringToObject(css: string) {
-  const r = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g;
-  const o = {};
-  css.replace(r, (m, p, v) => (o[p] = v));
-  return o;
+  const regex = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g;
+  const result: Record<string, string> = {};
+  css.replace(regex, (match, prop, val) => (result[prop] = val));
+  return result;
 }
 
 function Video(props: { width: string; src: string }) {
@@ -74,11 +92,6 @@ export const ImgTemplate = (props: {
   const popParam =
     attrs.pop_param || (imageExt === 'gif' ? '?fit=max' : '?fit=max&auto=format');
 
-  let contents: JSX.Element | string = 'NO CONTENTS';
-  if (attrs.video) {
-    contents = <Video width={attrs.width} src={img} />;
-  }
-
   let wrapperClass = 'shortcode-wrapper shortcode-img expand';
   if (attrs.wide) {
     wrapperClass += ' wide-parent';
@@ -100,7 +113,23 @@ export const ImgTemplate = (props: {
   return (
     <div className={wrapperClass}>
       <figure className={figureClass} style={figureStyle}>
-        {contents}
+        {/* video */}
+        {attrs.video && <Video width={attrs.width} src={img} />}
+        {/* image */}
+        {!attrs.video && (
+          <>
+            {isPopup && imageExt !== 'gif' && (
+              <>
+                <a
+                  href="{{ print $img_resource $pop_param | relURL }}"
+                  className="pop"
+                  data-bs-toggle="modal"
+                  data-bs-target="#popupImageModal"
+                ></a>
+              </>
+            )}
+          </>
+        )}
       </figure>
     </div>
   );
@@ -189,6 +218,7 @@ export const ImgTemplate = (props: {
     
       {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
       <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
+
       {{- else if .Get "href" -}}
         <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
           {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
@@ -199,11 +229,14 @@ export const ImgTemplate = (props: {
 
     {{- if eq $image_ext "gif" -}}
       <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
+
     {{- else -}}
       <picture {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }}>
         <img class="img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
       </picture>
     {{- end -}}
+
+  
   {{- else -}}
       {{ $e := (print $img_resource "?auto=format" | safeURL) }}
       {{- if eq $image_ext "gif" -}}
