@@ -191,7 +191,7 @@ If you are controlling Databricks API access through IP access lists, allow-list
 
 If you are using [Databricks Private Connectivity][14], the steps to configure the connection depend on your cloud provider.
 {{< whatsnext desc="Refer to the guide for your cloud environment:" >}}
-    {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/private-link" >}}Connect to Datadog over AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="agent/guide/azure-private-link" >}}Connect to Datadog over Azure Private Link{{< /nextlink >}}
     {{< nextlink href="agent/guide/gcp-private-service-connect" >}}Connect to Datadog over GCP Private Service Connect{{< /nextlink >}}
 {{< /whatsnext >}}
