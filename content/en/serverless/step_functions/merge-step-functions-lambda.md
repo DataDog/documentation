@@ -109,43 +109,7 @@ For Python: Datadog Lambda Library for Python layer 99+ **or** `dd-trace-py` v2.
 
 ### Setup
 
-{{< tabs >}}
-{{% tab "Serverless Framework" %}}
-
-In your `serverless.yaml` file, set `propagateUpstreamTrace` to `true`.
-
-{{< highlight yaml "hl_lines=7" >}}
-custom:
-  datadog:
-    site: <DATADOG_SITE>
-    apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
-    forwarderArn: <FORWARDER_ARN>
-    enableStepFunctionsTracing: true
-    propagateUpstreamTrace: true
-    mergeStepFunctionAndLambdaTraces: true
-{{< /highlight >}}
-
-{{% /tab %}}
-{{% tab "Datadog CLI" %}}
-
-Run the following `datadog-ci` command:
-
-{{< highlight shell "hl_lines=5" >}}
-datadog-ci stepfunctions instrument \
- --step-function <STEP_FUNCTION_ARN> \
- --forwarder <FORWARDER_ARN> \
- --env <ENVIRONMENT> \
- --propagate-upstream-trace \
- --merge-step-function-and-lambda-traces
-{{< /highlight >}}
-
-{{% /tab %}}
-{{% tab "Custom" %}}
-
-tk
-
-{{% /tab %}}
-{{< /tabs >}}
+If the layer/tracer version requirements are fulfilled, no futher setup is required.
 
 ## Merge Step Functions traces with nested Step Functions traces
 
