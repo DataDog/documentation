@@ -83,7 +83,7 @@ Log-based metrics allow you to generate custom metrics from any logs ingested in
 
 The **Configurable Processing** column shows an overview of the configuration options available for your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
 
-{{% collapse-content title="Manage tagging" level="h4" %}}
+{{% collapse-content title="Optimize your custom metrics costs with Metrics without Limits™" level="h4" %}}
 [Metrics without Limits™][22] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization.
 {{% /collapse-content %}} 
 
