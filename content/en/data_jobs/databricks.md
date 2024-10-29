@@ -189,7 +189,13 @@ With [Databricks Networking Restrictions][12], Datadog may not have access to yo
 
 If you are controlling Databricks API access through IP access lists, allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][13] for more details on how to manage IP access lists in Databricks.
 
-If you are using [Databricks Private Connectivity][14], it's recommended that you contact the Datadog [support team][15].
+{{< whatsnext desc="If you are using [Databricks Private Connectivity][14], the steps to configure the connection depend on your cloud provider:" >}}
+    {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/azure-private-link" >}}Connect to Datadog over Azure Private Link{{< /nextlink >}}
+    {{< nextlink href="agent/guide/gcp-private-service-connect" >}}Connect to Datadog over GCP Private Service Connect{{< /nextlink >}}
+{{< /whatsnext >}}
+
+Please refer to the appropriate guide for your cloud environment or contact the Datadog [support team][15] for further assistance.
 
 ## Further Reading
 
