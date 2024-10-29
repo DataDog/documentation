@@ -1,5 +1,5 @@
 ---
-title: Historical Metrics Ingestion - Brian Test
+title: Historical Metrics Ingestion
 further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
