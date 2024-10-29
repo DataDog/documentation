@@ -314,6 +314,35 @@ agents:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Optimize footprint for process collection
+By default, the Datadog Agent has a separate Process Agent for process collection with a separate Process Agent. To reduce the Agent's footprint, you can have the consolidate container and process collection to the core Agent if you're running a Linux environment.
+
+{{% tab "Helm" %}}
+Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+```
+datadog:
+  processAgent:
+    runInCoreAgent: true
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Queries
 
