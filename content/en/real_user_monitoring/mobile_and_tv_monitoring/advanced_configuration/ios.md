@@ -104,7 +104,7 @@ func onHeroImageLoaded() {
 
 Use the `override` option to replace the previously calculated loading time for the current view..
 
-Once the view loading time is sent, the loading time is accessible as `@view.loading_time` and will be visible also in the RUM UI.
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 Please note that this API is still experimental and might change in the future.
 
 ### Add your own performance timing
