@@ -2842,10 +2842,10 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_installation
       weight: 201
-    - name: Link with Lambda Traces
-      url: serverless/step_functions/link-with-lambda-traces
+    - name: Merge Step Functions and Lambda Traces
+      url: serverless/step_functions/merge-step-functions-lambda
       parent: serverless_step_functions
-      identifier: serverless_step_functions_link_lambda_traces
+      identifier: serverless_step_functions_merge_lambda_traces
       weight: 202
     - name: Enhanced Metrics
       url: serverless/step_functions/enhanced-metrics

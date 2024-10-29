@@ -1,14 +1,14 @@
 ---
-title: Link Step Functions and Lambda Traces
+title: Merge Step Functions and Lambda Traces
 further_reading:
     - link: '/serverless/step_functions/installation'
       tag: 'Documentation'
       text: 'Install Serverless Monitoring for AWS Step Functions'
 ---
 
-This page describes how to link your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
+This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
-## Link Step Functions traces to downstream Lambda traces
+## Merge Step Functions traces with downstream Lambda traces
 
 ### Requirements
 Node.js (layer v112+) or Python (layer v95+) runtimes.
@@ -100,7 +100,7 @@ Alternatively, if you have business logic defined in the payload, you can also u
 {{% /tab %}}
 {{< /tabs >}}
 
-## Link upstream Lambda traces with Step Functions traces
+## Merge upstream Lambda traces with Step Functions traces
 
 ### Requirements
 For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0.
@@ -147,7 +147,7 @@ tk
 {{% /tab %}}
 {{< /tabs >}}
 
-## Link Step Functions traces to nested Step Functions traces
+## Merge Step Functions traces with nested Step Functions traces
 
 To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
 {{< highlight json "hl_lines=9-13" >}}
@@ -170,6 +170,9 @@ To link your Step Function traces to nested Step Function traces, configure your
 }
 {{< /highlight >}}
 
+## Merge Lambda -> Step Functions -> Lambda
+
+This capability is not supported.
 
 [1]: /serverless/installation/#installation-instructions
 [2]: /serverless/step_functions/installation

@@ -128,26 +128,6 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 <div class="alert alert-warning"> If you are using a different instrumentation method, such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. To avoid this behavior, choose only one configuration method.</div>
 
 4. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>`, `service:<SERVICE_NAME>`, and `version:<VERSION>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name. The `version` tag defaults to `1.0`.
-5. To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
-  {{< highlight json "hl_lines=9-13" >}}
-  "Step Functions StartExecution": {
-    "Type": "Task",
-    "Resource": "arn:aws:states:::states:startExecution",
-    "Parameters": {
-      "StateMachineArn": "${stateMachineArn}",
-      "Input": {
-        "StatePayload": "Hello from Step Functions!",
-        "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
-        "CONTEXT": {
-          "Execution.$": "$$.Execution",
-          "State.$": "$$.State",
-          "StateMachine.$": "$$.StateMachine"
-        }
-      }
-    },
-    "End": true
-  }
-  {{< /highlight >}}
 
 
 [1]: /logs/guide/forwarder/
@@ -157,17 +137,19 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 {{% /tab %}}
 {{< /tabs >}}
 
-## Link Step Functions with your AWS Lambda traces
-
-See [link Step Functions traces with Lambda traces][11]. Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
-
 ## Enable tracing
+
+<div class="alert alert-info">To see Step Functions spans and Lambda spans connected in the same trace, see <a href="/serverless/step_functions/merge-step-functions-lambda">Merge Step Functions with your AWS Lambda traces</a>.</div>
 
 Datadog generates traces from collected Cloudwatch logs. To enable this, add a `DD_TRACE_ENABLED` tag to each of your Step Functions and set the value to `true`. Alternatively, to enable tracing for **all** your Step Functions, add a `DD_STEP_FUNCTIONS_TRACE_ENABLED` environment variable to the Datadog Forwarder and set the value to `true`.
 
 Enhanced metrics are automatically enabled if you enable tracing.
 
 <div class="alert alert-info">If you enable enhanced metrics without enabling traces, you are only billed for Serverless Workload Monitoring. If you enable tracing (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
+
+## Merge Step Functions with your AWS Lambda traces
+
+See [Merge Step Functions traces with Lambda traces][11]. Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
 
 ## Sample traces
 
@@ -180,7 +162,6 @@ The dropped traces are not ingested into Datadog.
 Datadog generates [enhanced metrics][8] from collected Cloudwatch logs. Enhanced metrics are automatically enabled if you enable traces.
 
 To enable enhanced metrics without enabling tracing, add a `DD_ENHANCED_METRICS` tag to each of your Step Functions and set the value to `true`.
-
 
 ## See your Step Function metrics, logs, and traces in Datadog
 
@@ -198,4 +179,4 @@ If you cannot see your traces, see [Troubleshooting][5].
 [8]: /serverless/step_functions/enhanced-metrics
 [9]: /integrations/amazon_step_functions
 [10]: /serverless/aws_lambda/installation
-[11]: /serverless/step_functions/link-with-lambda-traces
+[11]: /serverless/step_functions/merge-step-functions-lambda
