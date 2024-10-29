@@ -77,7 +77,7 @@ Observability Pipelines で[パイプラインをセットアップ][2]すると
 [1]: /ja/account_management/rbac/permissions/#compliance
 [2]: /ja/account_management/rbac/
 {{% /tab %}}
-{{% tab “Agent の使用” %}}
+{{% tab "Agent の使用" %}}
 
 1. 適切な権限を付与します。デフォルトでは、Datadog 管理者ロールを持つユーザーは、スキャンルールを表示および設定するためのアクセス権を持っています。他のユーザーにアクセスを許可するには、**Compliance** で `data_scanner_read` または `data_scanner_write` の権限をカスタムロールに付与します。ロールと権限のセットアップ方法の詳細については、[アクセス制御][3]を参照してください。
 
@@ -112,7 +112,7 @@ Terraform については、[Datadog Sensitive Data Scanner グループ][2]の�
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
-{{% tab “Agent の使用” %}}
+{{% tab "Agent の使用" %}}
 <div class="alert alert-warning"><strong>注</strong>: Sensitive Data Scanner using the Agent は、1 つの組織につき 1 つのスキャングループのみをサポートします。</div>
 
 スキャングループは、スキャンするログを決定します。ホストタグに基づいて適格な Agent に一致させるクエリフィルターで構成されます。
@@ -201,7 +201,7 @@ Terraform については、[Datadog Sensitive Data Scanner ルール][1]のリ�
 [3]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 {{% /tab %}}
-{{% tab “Agent の使用” %}}
+{{% tab "Agent の使用" %}}
 
 スキャンルールは、スキャングループによって定義されたデータ内のどの機密情報を対象にするかを決定します。Datadog Agent は、ログが Datadog プラットフォームに送信される前に、ログ収集中にローカル環境でデータをスキャンします。
 
@@ -274,7 +274,7 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
-{{% tab “Agent の使用” %}}
+{{% tab "Agent の使用" %}}
 
 1. [Sensitive Data Scanner using the Agent][1] の構成ページに移動します。
 1. 編集するスキャンルールにカーソルを合わせ、**Edit** (鉛筆) アイコンをクリックします。

@@ -92,7 +92,7 @@ title: 사용량 속성
 - 패싯 선택기를 사용하여 특정 제품, 조직 또는 태그 키에 대한 데이터를 선택할 수 있습니다.
 - 그래프 위에 있는 시간 선택기를 사용하여 일, 주 또는 월 단위로 데이터를 그래프로 표시할 수 있습니다.
 
-{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="태그로 구분된 인프라 호스트 그래프" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="태그로 구분된 인프라 호스트 그래프" style="width:100%;" >}}
 
 
 ## 비용 속성
