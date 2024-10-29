@@ -11,18 +11,18 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
-RUM Auto-Injection in Preview. Sign up for access!
+RUM Auto-Instrumentation in Preview. Sign up for access!
 {{< /callout >}}
 
 ## Overview
 
 {{< img src="real_user_monitoring/browser/auto-instrumentation-1.png" alt="Select Auto-Instrumentation when creating a new application." >}}
 
-Datadog RUM Auto-Instrumentation lets you opt into Real User Monitoring before automatically instrumenting all of your applications with Real User Monitoring. If you are interested in manual instrumentation per application, see [Custom Instrumentation][1].
+Datadog RUM Auto-Instrumentation lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy. If you are interested in manual instrumentation per application, see [Custom Instrumentation][1].
 
-RUM Auto-Instrumentation works by injecting a RUM SDK JS scriptlet into the headers of the HTML responses being served through a web server/proxy.
+RUM Auto-Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
 
-After your applications have been instrumented, you can begin managing your RUM configurations per RUM application in Datadog or through Terraform.
+After your applications have been instrumented, you can begin configuring your RUM application in Datadog.
 
 ## Prerequisites
 
