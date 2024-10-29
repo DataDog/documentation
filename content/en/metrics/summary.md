@@ -191,7 +191,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | ------------------------| ----------------------------------------------------------------------------- |
 | API Catalog             | Standard Metrics sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
 | APM                     | Custom Metrics sent by the Datadog APM product for metrics generated from traces and span metrics.
-| Agent                   | Standard Metrics sent by the Datadog Agent, collected from [Agent integrations][10], or [built-in integrations][9]. Custom metrics sent through [DogStatsD][32] or [custom Agent checks][33].
+| Agent                   | Standard Metrics sent by the Datadog Agent, collected from [Agent integrations][10], or [built-in integrations][9]. Custom Metrics sent through [DogStatsD][32] or [custom Agent checks][33].
 | CSM                     | Standard Metrics sent by the Datadog [Cloud Security Monitoring][14] product.
 | Cloud Integrations      | Standard Metrics collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
 | DBM                     | Standard Metrics sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
