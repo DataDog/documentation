@@ -239,7 +239,6 @@ Extracts the portion of text following a certain pattern in a string.
 </table>
 
 </details>
-</details>
 
 
 <h4>substring(<i>str</i> string, <i>int</i> start, <i>int</i> length)</h4>
