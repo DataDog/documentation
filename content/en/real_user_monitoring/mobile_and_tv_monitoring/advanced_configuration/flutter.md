@@ -192,7 +192,7 @@ Flutter RUM automatically tracks attributes such as user activity, views (using 
 ### Notify the SDK that your view finished loading
 
 iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
-on `DatadogRum`. This method should be called when your view is fully loaded and ready to be displayed to the user:
+Call this method when your view is fully loaded and ready to be displayed to the user:
 
 ```dart
   DatadogSdk.instance.rum?.addViewLoadingTime(override);
