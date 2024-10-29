@@ -39,10 +39,10 @@ If the country code is already extracted as part of a pipeline, skip ahead to St
 If the country name is already extracted as part of a pipeline, skip ahead to Step 4.
 
 Log Workspaces allows you to parse and create attributes at query time. In addition to enrichment via Log Pipelines (link), this is helpful when working with logs that you don’t own or logs that were only partially formatted on ingest. 
-    - Add a transformation and select the raw_call_logs data source as the target.
-    - Add an extract operation 
-    - country code: {number:country_code}
-    - Rename the cell to call_logs
+- Add a transformation and select the raw_call_logs data source as the target.
+- Add an extract operation 
+- country code: {number:country_code}
+- Rename the cell to call_logs
 
 The country code is now available as a column. 
 

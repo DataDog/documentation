@@ -16,5 +16,5 @@ further_reading:
 
 {{< whatsnext desc="See examples of how to use Log Workspaces:" >}}
     {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
-    {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts" >}}Detect Fraudulent Transaction Volume by Country{{< /nextlink >}}
+    {{< nextlink href="/logs/workspaces/use_cases/detect_fraudulent_transaction" >}}Detect Fraudulent Transaction Volume by Country{{< /nextlink >}}
 {{< /whatsnext >}}
