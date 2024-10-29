@@ -15,11 +15,22 @@ Cloud Cost Recommendations is in public beta with support for AWS, and is automa
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources.
+[Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data to identify orphaned, legacy, or over-provisioned cloud resources.
+
+Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
 {{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
-Recommendations combine billing data and observability data to identify orphaned, legacy, or over-provisioned cloud resources.
+You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
+
+## Prerequisites
+
+The following are requirements necessary to receive Cloud Cost recommendations:
+
+- Cloud provider accounts (for all Cloud Cost recommendations)
+- AWS integration and resource collections (for AWS recommendations)
+- For all resources, we pull in cloud cost metrics for that resource
+- For all AWS resources besides Kubernetes and EC2, we also pull in AWS metrics from AWS CloudWatch
 
 ## Setup
 
@@ -29,90 +40,35 @@ For each AWS account that you would like to receive recommendations for:
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
-## Recommendation types
-
-Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data. You can see the detailed logic for each recommendation type, along with observability metrics or cost data used to generate the recommendation, [on the **Recommendations** page][1].
-
-{{< img src="cloud_cost/recommendations/overprovisioned_k8s_containers_sidepanel_1.png" alt="A side panel displaying a Kubernetes container that is over-provisioned in the ad-auction service with recommended next steps to change its usage as well as investigation metrics." style="width:100%;" >}}
-
-Recommendations are run on a daily basis, and are automatically refreshed in your account. When new recommendations are released, Datadog automatically adds them to your account.
-
-### Unused resource recommendations
+## Recommendation descriptions
 
 Datadog identifies resources that are running on legacy hardware or are not utilized efficiently in your cloud environment. You can consider upgrading or removing these resources to reduce your costs and improve the performance of your resources.
 
-Unused EC2 Instances
-: EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization.
-
-Unattached EBS Volumes
-: Volumes that have been detached from an EC2 instance.
-
-Unused EBS Volumes
-: Volumes attached to a non-running EC2 instance.
-
-Unused RDS Instances
-: RDS instances with 0 database connections and 0 replica lag.
-
-Abandoned S3 Multipart Uploads
-: Incomplete multipart uploads (requires [Storage Lens metrics][6]).
-
-Unused Redshift Cluster
-: Redshift cluster with 0 database connections.
-
-Unused Elasticache Redis Cluster
-: Elasticache Redis Cluster with 0 cache hits and 0 replication bytes.
-
-Unused MQ Broker
-: An MQ broker with 0 connections.
-
-Old ECR Images
-: ECR Image bytes are older than 180 days.
-
-OpenSearch Cluster
-: An OpenSearch cluster with 0 connections.
-
-Unused Classic Elastic Load Balancers
-: Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance.
-
-Unused Network Elastic Load Balancer
-: A network load balancer with 0 processed bytes.
-
-Unused Application Load Balancer
-: An application load balancer with no traffic being processed.
-
-Unused NAT Gateway
-: A NAT Gateway that has no bytes sent out.
-
-Idle Elastic IP Address
-: Elastic IP addresses with idle charges in your AWS cost and usage report.
-
-Unused DynamoDB Recommendations
-: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
-
-Unused DynamoDB Global Secondary Index
-: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
-
-ASGs with legacy instance types
-: An autoscaling group that includes legacy instance types.
-
-DynamoDB Delete Extra On-Demand Backups
-: A DynamoDB table has charges for more than 2 on-demand backups.
-
-### Previous generation resource recommendations
-
-Datadog surfaces resources that are running on legacy hardware, which you can consider upgrading to reduce your costs and improve the performance of your resources.
-
-Legacy EC2 Instance
-: EC2 Instances that are previous generation, and can be upgraded to a newer instance type.
-
-GP2 EBS Volumes
-: EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement.
-
-I01 EBS Volumes
-: EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement.
-
-Extended Support for RDS
-: An RDS running an engine version that is no longer supported and incurring [extended support charges][7].
+| Recommendation Category | Cloud Provider | Resource Type | Recommendation Type | Recommendation Description | Recommendation Prerequisites |
+|-------------------------|----------------|---------------|---------------------|----------------------------|------------------------------|
+| Unused resource recommendations | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | Datadog agent |
+| Unused resource recommendations | AWS | EBS | Unattached EBS Volumes | Volumes that have been detached from an EC2 instance. | |
+| Unused resource recommendations | AWS | EBS | Unused EBS Volumes | Volumes attached to a non-running EC2 instance. | |
+| Unused resource recommendations | AWS | RDS | Unused RDS Instances | RDS instances with 0 database connections and 0 replica lag. | |
+| Unused resource recommendations | AWS | S3 | Abandoned S3 Multipart Uploads | Incomplete multipart uploads. | [Storage Lens][6] |
+| Unused resource recommendations | AWS | Redshift | Unused Redshift Cluster | Redshift cluster with 0 database connections.
+| Unused resource recommendations | AWS | Elasticache Redis | Unused Elasticache Redis Cluster | Elasticache Redis Cluster with 0 cache hits and 0 replication bytes. | |
+| Unused resource recommendations | AWS | MQ | Unused MQ Broker | An MQ broker with 0 connections. | |
+| Unused resource recommendations | AWS | ECR | Old ECR Images | ECR Image bytes are older than 180 days. | |
+| Unused resource recommendations | AWS | OpenSearch | OpenSearch Cluster | An OpenSearch cluster with 0 connections. | |
+| Unused resource recommendations | AWS | Classic Elastic Load Balancer | Unused Classic Elastic Load Balancers | Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance. | |
+| Unused resource recommendations | AWS | Network Elastic Load Balancer | Unused Network Elastic Load Balancer | A network load balancer with 0 processed bytes. | |
+| Unused resource recommendations | AWS | Application Load Balancer | Unused Application Load Balancer | An application load balancer with no traffic being processed. | |
+| Unused resource recommendations | AWS | NAT Gateway | Unused NAT Gateway | A NAT Gateway that has no bytes sent through it. | |
+| Unused resource recommendations | AWS | Elastic IP Address | Idle Elastic IP Address | Elastic IP addresses with idle charges in your AWS cost and usage report. |
+| Unused resource recommendations | AWS | DynamoDB | Unused DynamoDB | A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes. | 
+| Unused resource recommendations | AWS | DynamoDB | Unused DynamoDB Global Secondary Index | A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads. |
+| Unused resource recommendations | AWS | Autoscaling groups (ASG) | ASGs with legacy instance types | An autoscaling group that includes legacy instance types. | Datadog agent |
+| Unused resource recommendations | AWS | DynamoDB | DynamoDB Delete Extra On-Demand Backups | A DynamoDB table has charges for more than 2 on-demand backups. | |
+| Previous generation resource recommendations | AWS | EC2 | Legacy EC2 Instance | EC2 Instances that are previous generation, and can be upgraded to a newer instance type. | Datadog agent |
+| Previous generation resource recommendations | AWS | GP2 EBS | GP2 EBS Volumes | EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement. | |
+| Previous generation resource recommendations | AWS | I01 EBS | I01 EBS Volumes | EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement. |
+| Previous generation resource recommendations | AWS | Extended Support for RDS | An RDS running an engine version that is no longer supported and incurring [extended support charges][7] | 
 
 ### Over-provisioned resource recommendations
 
