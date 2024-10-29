@@ -548,7 +548,7 @@ spec:
     nodeAgent:
       extraConfd:
         configDataMap:
-          postgresql.yaml: |-
+          postgres.yaml: |-
             ad_identifiers:
               - postgres
             init_config:
@@ -558,7 +558,7 @@ spec:
                 username: "datadog"
                 password: "%%env_PG_PASSWORD%%"
 ```
-As a result, the Agent contains a `postgresql.yaml` file with the above configuration in the `conf.d` directory.
+As a result, the Agent contains a `postgres.yaml` file with the above configuration in the `conf.d` directory.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -568,7 +568,7 @@ In `datadog-values.yaml`:
 ```yaml
 datadog:
   confd:
-    postgresql.yaml: |-
+    postgres.yaml: |-
       ad_identifiers:
         - postgres
       init_config:
@@ -578,7 +578,7 @@ datadog:
           username: "datadog"
           password: "%%env_PG_PASSWORD%%"
 ```
-As a result, the Agent contains a `postgresql.yaml` file with the above configuration in the `conf.d` directory.
+As a result, the Agent contains a `postgres.yaml` file with the above configuration in the `conf.d` directory.
 
 {{% /tab %}}
 {{< /tabs >}}

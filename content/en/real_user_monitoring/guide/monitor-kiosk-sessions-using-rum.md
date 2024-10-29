@@ -65,10 +65,6 @@ The `stopSession()` method differs depending on your mobile SDK framework.
 This feature requires RUM iOS SDK version >= 1.18.0. See installation instructions [here][1]. 
 
 ```swift
-// SDK v1
-Global.rum.stopSession()
-
-// SDK v2
 RUMMonitor.shared().stopSession()
 ```
 

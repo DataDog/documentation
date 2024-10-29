@@ -5791,6 +5791,71 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Update an incident type
+      url: '#update-an-incident-type'
+      identifier: incidents-update-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentType
+        unstable:
+          - v2
+        order: 22
+    - name: Get incident type details
+      url: '#get-incident-type-details'
+      identifier: incidents-get-incident-type-details
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentType
+        unstable:
+          - v2
+        order: 21
+    - name: Delete an incident type
+      url: '#delete-an-incident-type'
+      identifier: incidents-delete-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentType
+        unstable:
+          - v2
+        order: 23
+    - name: Create an incident type
+      url: '#create-an-incident-type'
+      identifier: incidents-create-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentType
+        unstable:
+          - v2
+        order: 19
+    - name: Get a list of incident types
+      url: '#get-a-list-of-incident-types'
+      identifier: incidents-get-a-list-of-incident-types
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentTypes
+        unstable:
+          - v2
+        order: 20
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
@@ -6207,76 +6272,64 @@ menu:
       url: /api/latest/microsoft-teams-integration/
       identifier: microsoft-teams-integration
       generated: true
-    - name: Update handle
-      url: '#update-handle'
-      identifier: microsoft-teams-integration-update-handle
+    - name: Update tenant-based handle
+      url: '#update-tenant-based-handle'
+      identifier: microsoft-teams-integration-update-tenant-based-handle
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateApiHandle
+          - UpdateTenantBasedHandle
         unstable: []
         order: 1
-    - name: Get handle information
-      url: '#get-handle-information'
-      identifier: microsoft-teams-integration-get-handle-information
+    - name: Get tenant-based handle information
+      url: '#get-tenant-based-handle-information'
+      identifier: microsoft-teams-integration-get-tenant-based-handle-information
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetApiHandle
+          - GetTenantBasedHandle
         unstable: []
         order: 1
-    - name: Delete handle
-      url: '#delete-handle'
-      identifier: microsoft-teams-integration-delete-handle
+    - name: Delete tenant-based handle
+      url: '#delete-tenant-based-handle'
+      identifier: microsoft-teams-integration-delete-tenant-based-handle
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteApiHandle
+          - DeleteTenantBasedHandle
         unstable: []
         order: 1
-    - name: Get handle information by name
-      url: '#get-handle-information-by-name'
-      identifier: microsoft-teams-integration-get-handle-information-by-name
+    - name: Create tenant-based handle
+      url: '#create-tenant-based-handle'
+      identifier: microsoft-teams-integration-create-tenant-based-handle
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetApiHandleByName
+          - CreateTenantBasedHandle
         unstable: []
         order: 1
-    - name: Create handle
-      url: '#create-handle'
-      identifier: microsoft-teams-integration-create-handle
+    - name: Get all tenant-based handles
+      url: '#get-all-tenant-based-handles'
+      identifier: microsoft-teams-integration-get-all-tenant-based-handles
       parent: microsoft-teams-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateApiHandle
-        unstable: []
-        order: 1
-    - name: Get all handles
-      url: '#get-all-handles'
-      identifier: microsoft-teams-integration-get-all-handles
-      parent: microsoft-teams-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListApiHandles
+          - ListTenantBasedHandles
         unstable: []
         order: 1
     - name: Get channel information by name

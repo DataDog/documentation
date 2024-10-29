@@ -31,7 +31,7 @@ The [user data source][21] can be used to retrieve information about existing us
 
 ### Roles
 
-Datadog provides three out-of-the-box roles for user permissions, but you can also use the [role resource][18] to create and manage custom roles.
+Datadog provides three managed roles for user permissions, but you can also use the [role resource][18] to create and manage custom roles.
 
 The [role data source][22] can be used to retrieve information about existing roles for use in other resources, such as the Datadog user resource.
 
@@ -45,7 +45,7 @@ See the [Teams page][13] for more information.
 
 ### Service accounts
 
-The [service account][14] resource provides a non-interactive account that can be used to own [service account application keys][15] and other resources that are shared across your teams. 
+The [service account][14] resource provides a non-interactive account that can be used to own [service account application keys][15] and other resources that are shared across your teams.
 
 The [service account data source][25] can be used to retrieve information about existing service accounts for use in other resources.
 

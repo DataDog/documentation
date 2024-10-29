@@ -4,36 +4,41 @@ title: ダッシュボードで SLO 履歴データをグラフ化する
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  The SLO data source is in public beta. This feature is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
+  SLO データソースは公開ベータ版です。この機能は、<strong>メトリクスベース</strong>および<strong>タイムスライス</strong>の SLO に対応しています。
 {{< /callout >}}
 
 ## 概要
 
-Graph Metric-based and Time Slice SLOs on dashboards and track trends over 15 months. You can also leverage the [scheduled dashboard reporting][1] functionality to automatically deliver visual reports to key stakeholders. 
+ダッシュボードでメトリクスベースおよびタイムスライスの SLO をグラフ化して、15 か月間のトレンドを追跡できます。また、[ダッシュボードの定期レポート][1]機能を活用して、主要な関係者にビジュアルレポートを自動配信することもできます。
 
 ## 構成
 
-{{< img src="dashboards/guide/slo_data_type/slo-data-source-good-events.png" alt="Graph editor configuration with the slo data type selected and the good events measure selected" style="width:100%;" >}}
+{{< img src="dashboards/guide/slo_data_type/slo-data-good-bad-events.png" alt="グラフエディターの構成で SLO のデータタイプが選択され、測定値として良好イベントが選択されている" style="width:100%;" >}}
 
 まずは、ダッシュボードのウィジェットトレイから標準的な視覚化タイプの 1 つを選択し、クエリのドロップダウンメニューで *SLOs* をデータソースとして選択します。
 
-For the *Measure* parameter, see the table below for more information on what each measure visualizes. The *Display* parameter allows you to break out the query by the groups that are already configured for the SLO. 
+*Measure* パラメーターについては、各測定値が何を視覚化するかについて、以下の表を参照してください。*Display* パラメーターを使用すると、SLO にすでに構成されているグループでクエリを分割することができます。
 
-{{< callout url="#" btn_hidden="true" header="Key Information">}}
-  When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO. Additionally, SLO status corrections are applied to scalar widgets only, not the timeseries widget. 
+{{< callout url="#" btn_hidden="true" header="重要な情報">}}
+Timeseries ウィジェットで SLO データソースの測定値を使用する場合、各ポイントで表示される値は、SLO のローリング期間ではなく、ウィジェットのデフォルトのロールアップに基づいています。
 {{< /callout >}}
 
-| メジャー | SLO type |  時系列ウィジェット  | スカラーウィジェット |
+| 測定値 | SLO タイプ |  時系列ウィジェット  | スカラーウィジェット |
 | -----  | ----- | ----- | ----- |
-| 良好イベント | Metric-based | The count of good events. | The sum of good events across all groups. |
-| 不良イベント | Metric-based | The count of bad events. | The sum of bad events across all groups. |
-| Good minutes | Time Slice | The count of good minutes. | The sum of good minutes across all groups. |
-| Bad minutes | Time Slice | The count of bad minutes. | The sum of bad minutes across all groups. |
-| SLO ステータス | Metric-based or Time Slice | For each time bucket, the SLO status is calculated as the ratio of the number of good events/minutes to total events/minutes. | The ratio of the number of good events/minutes to total events/minutes. |
-| エラーバジェットの残り | Metric-based or Time Slice | For each time bucket, the percentage of error budget remaining. The target for the [primary time window][3] is used in the error budget calculation. | The percentage of error budget remaining at the end of the widget's time frame. |
-| バーンレート | Metric-based or Time Slice | For each time bucket, the burn rate shows the observed error rate divided by the ideal error rate. | The burn rate over the widget's time frame. |
-| エラーバジェットバーンダウン | Metric-based or Time Slice | The error budget burned over time. It starts at 100% (unless there were bad events/minutes within the first time bucket) and decreases with bad events/minutes. | Error budget burndown is not available in scalar widgets. |
+| 良好イベント | メトリクスベース | 良好イベントの数。 | すべてのグループにわたる良好イベントの合計。 |
+| 不良イベント | メトリクスベース | 不良イベントの数。 | すべてのグループにわたる不良イベントの合計。 |
+| 良好分数 | タイムスライス | 良好分数の数。 | すべてのグループにわたる良好分数の合計。 |
+| 不良分数 | タイムスライス | 不良分数の数。 | すべてのグループにわたる不良分数の合計。 |
+| SLO ステータス | メトリクスベースまたはタイムスライス | 各タイムバケットについて、SLO ステータスは良好イベント/分の数を総イベント/分の数で割った比率として計算されます。 | 良好イベント/分の数を総イベント/分の数で割った比率。 |
+| エラーバジェットの残り | メトリクスベースまたはタイムスライス | 各タイムバケットについて、残りのエラーバジェットの割合。[プライマリ時間ウィンドウ][3]のターゲットがエラーバジェットの計算に使用されます。 | ウィジェットの時間枠の終了時点での残りのエラーバジェットの割合。 |
+| バーンレート | メトリクスベースまたはタイムスライス | 各タイムバケットについて、バーンレートは観測されたエラーレートを理想的なエラーレートで割ったものを示します。 | ウィジェットの時間枠におけるバーンレート。 |
+| エラーバジェットバーンダウン | メトリクスベースまたはタイムスライス | 時間経過に伴うエラーバジェットの消費。最初のタイムバケット内に不良イベント/分がない限り、100% から開始し、不良イベント/分に応じて減少します。 | エラーバジェットバーンダウンはスカラーウィジェットでは利用できません。 |
 
+#### SLO ステータスの修正
+
+[ステータス修正][2]を持つ SLO の場合、SLO データソースを使用してチャートで修正を有効または無効にできます。デフォルトでは、修正は有効でチャートに適用されますが、高度なオプションメニューのオプションで無効にすることができます。
+
+{{< img src="dashboards/guide/slo_data_type/slo-data-source-correction.mp4" alt="グラフエディターの構成で SLO のデータタイプが選択され、測定値として良好イベントが選択されている" video="true" style="width:100%;" >}}
 
 
 [1]: /ja/dashboards/sharing/scheduled_reports/

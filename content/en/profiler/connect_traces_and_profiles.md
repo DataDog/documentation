@@ -16,17 +16,15 @@ aliases:
 
 If your application is showing performance problems in production, integrating distributed tracing with code stack trace benchmarks from profiling is a powerful way to identify the performance bottlenecks. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked.
 
-You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
+You can move directly from span information to profiling data on the **Profiles** tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
 
-## Identify code hotspots in slow traces
-
-{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab shows profiling information for a APM trace span" >}}
+## Identify code performance issues in slow traces
 
 ### Prerequisites
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
 The feature is not available on Windows.
 
 For manually instrumented code, continuous profiler requires scope activation of spans:
@@ -50,7 +48,7 @@ It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#require
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Python service][1].
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Python service][1].
 
 Requires `dd-trace-py` version 0.44.0+.
 
@@ -63,7 +61,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Ruby service][1].
 
 The new [timeline feature](#span-execution-timeline-view), including GC information, is enabled by default in `dd-trace-rb` 1.22.0+.
 
@@ -71,7 +69,7 @@ The new [timeline feature](#span-execution-timeline-view), including GC informat
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
@@ -81,7 +79,7 @@ The new [timeline feature](#span-execution-timeline-view) is enabled by default 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Go service][1].
 
 To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
 
@@ -95,7 +93,7 @@ Setting these variables will record up to 1 minute (or 5 MiB) of execution traci
 You can find this data:
 
 - In the [Profile List][3] by adding `go_execution_traced:yes` to your search query. Click on a profile to view the [Profile Timeline][4]. To go even deeper, download the profile and use `go tool trace` or [gotraceui][5] to view the contained `go.trace` files.
-- In the [Trace Explorer][6] by adding `@go_execution_traced:yes` (note the `@`) to your search query. Click on a span and then select the `Code Hotspots` tab to view the [Span Timeline](#span-execution-timeline-view).
+- In the [Trace Explorer][6] by adding `@go_execution_traced:yes` (note the `@`) to your search query. Click on a span and then select the **Profiles** tab to view the [Span Timeline](#span-execution-timeline-view).
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
@@ -111,7 +109,7 @@ This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline vie
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your .NET service][1].
 
 This capability requires `dd-trace-dotnet` version 2.30.0+.
 
@@ -119,7 +117,7 @@ This capability requires `dd-trace-dotnet` version 2.30.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your PHP service][1].
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your PHP service][1].
 
 Requires `dd-trace-php` version 0.71+.
 
@@ -133,7 +131,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 
 ### Span execution breakdown
 
-From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
+From the view of each trace, the **Profiles** tab highlights profiling data scoped on the selected spans.
 
 The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
@@ -178,11 +176,11 @@ Click the plus icon `+` to expand the stack trace to that method **in reverse or
 
 ### Span execution timeline view
 
-{{< img src="profiler/code_hotspots_tab-timeline.png" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" >}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab has a timeline view that breaks down threads and execution over time" >}}
 
-The **Timeline** view surfaces time-based patterns and work distribution over the period of the span.
+The timeline view surfaces time-based patterns and work distribution over the period of the span.
 
-With the span **Timeline** view, you can:
+With the span timeline view, you can:
 
 - Isolate time-consuming methods.
 - Sort out complex interactions between threads.
