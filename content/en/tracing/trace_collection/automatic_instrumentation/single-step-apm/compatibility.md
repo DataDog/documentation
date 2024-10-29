@@ -68,24 +68,22 @@ This section provides language-specific compatibility requirements for Single St
 
 ### Supported .NET runtimes
 
-| .NET Version     | Support       | Notes                               |
-|------------------|---------------|-------------------------------------|
-| .NET 8           | {{< X >}}     |                                     |
-| .NET 7           | {{< X >}}     |                                     |
-| .NET 6           | {{< X >}}     | Versions below 6.0.13 not supported |
-| .NET 5           | {{< X >}}     |                                     |
-| .NET Core 3.1    | {{< X >}}     |                                     |
-| .NET Core 3.0    |               |                                     |
-| .NET Core 2.2    | {{< X >}}     |                                     |
-| .NET Core 2.1    |               |                                     |
-| .NET Core 2.0    |               |                                     |
-| Preview versions | Not supported |                                     |
+| .NET Version     | Support                         | Notes                               |
+|------------------|---------------------------------|-------------------------------------|
+| .NET 8           | <i class="icon-check-bold"></i> |                                     |
+| .NET 7           | <i class="icon-check-bold"></i> |                                     |
+| .NET 6           | <i class="icon-check-bold"></i> | Versions below 6.0.13 not supported |
+| .NET 5           | <i class="icon-check-bold"></i> |                                     |
+| .NET Core 3.1    | <i class="icon-check-bold"></i> |                                     |
+| .NET Core 3.0    |                                 |                                     |
+| .NET Core 2.2    | <i class="icon-check-bold"></i> |                                     |
+| .NET Core 2.1    |                                 |                                     |
+| .NET Core 2.0    |                                 |                                     |
+| Preview versions | Not supported                   |                                     |
 
 <div class="alert alert-info">Single Step Instrumentation disables automatically when manual instrumentation is detected.</div>
 
-
 {{< /programming-lang >}}
-
 {{< /programming-lang-wrapper >}}
 
 ## Further reading

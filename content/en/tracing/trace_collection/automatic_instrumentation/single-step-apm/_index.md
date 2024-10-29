@@ -15,13 +15,7 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
 
 ## Requirements
 
-- **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
-
-- **Operating systems**:
-   - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
-   - Docker
-   - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
-     - NOTE: Windows pods are not supported. Use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
+To see requirements for compatible languages, operating systems, and architectures, see [Single Step Instrumentation compatibility][6].
 
 ## Enabling APM on your applications
 
@@ -613,3 +607,4 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [3]: /tracing/service_catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
+[6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
