@@ -45,24 +45,6 @@ The available functions are categorized as follows:
 
 ### Arithmetic
 
-{{% collapse-content title="abs(<i>num</i> value)" level="h4" %}}
-Returns the absolute value of a number.
-
-| Example  | Formula | Result |
-|----------|-------------|---------|
-| A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | #discrepancy = abs(`@client_latency` - `@server_latency`) | #discrepancy = 1 |
-
-{{% /collapse-content %}} 
-
-{{% collapse-content title="ceil(<i>num</i> value)" level="h4" %}}
-Rounds number up to the nearest integer.
-
-| Example  | Formula | Result |
-|----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = 2.2 | #rounded_up = ceil(`@value`) | #rounded_up = 3 |
-
-{{% /collapse-content %}} 
-
 <h4>abs(<i>num</i> value)</h4>
 
 Returns the absolute value of a number.
