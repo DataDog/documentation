@@ -235,6 +235,7 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
 ### Optimize footprint for process collection
 By default, the Datadog Agent has a separate Process Agent for container and process collection. You can consolidate container and process collection to the core Agent if you're running a Linux environment.
 
+{{< tabs >}}
 {{% tab "Helm" %}}
 Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
 ```
