@@ -1162,7 +1162,7 @@ const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 
 - `localStorage` に格納されたデータはユーザーセッションを超えて残るため、これらのコンテキストで個人を特定できる情報 (PII) を設定することは推奨されません
 - この機能は `trackSessionAcrossSubdomains` オプションと互換性がありません。なぜなら `localStorage` データは同じオリジン間でしか共有されないからです (login.site.com ≠ app.site.com)
-- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
+- `localStorage` はオリジンごとに 5 MiB に制限されているため、ローカルストレージに格納されているアプリケーション固有のデータ、 Datadog コンテキスト、およびその他のサードパーティデータは、問題を避けるためにこの制限内に収める必要があります
 
 ## マイクロフロントエンド
 
