@@ -359,16 +359,28 @@ def get_relevant_docs(question):
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
+Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session, which is submitted as a tag on the span. Optionally, you can also specify the `user_handle`, `user_name`, and `user_id` tags.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
 @workflow(session_id="<SESSION_ID>")
-def process_message():
-    ... # user application logic
+def process_user_message():
+    LLMObs.annotate(
+        ...
+        tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
+    )
     return 
 {{< /code-block >}}
+
+### Session Tracking Tags
+
+| Tag | Description |
+|---|---|
+| `session_id` | The ID representing a single user session, for example, a chat session. |
+| `user_handle` | The handle for the user of the chat session. |
+| `user_name` | The name for the user of the chat session. |
+| `user_id` | The ID for the user of the chat session. |
 
 ## Annotating a span
 
@@ -408,7 +420,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import embedding, llm, retrieval, workflow
 
-@llm(model="model_name", model_provider="model_provider")
+@llm(model_name="model_name", model_provider="model_provider")
 def llm_call(prompt):
     resp = ... # llm call here
     LLMObs.annotate(
