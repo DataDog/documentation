@@ -10,7 +10,7 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-{{< callout url="<LINK TK>" btn_hidden="false" header="Access the Preview!">}}
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
 RUM Auto-Injection in Preview. Sign up for access!
 {{< /callout >}}
 
