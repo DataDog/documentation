@@ -16,12 +16,13 @@ _Serverless_ is a model where developers build and run applications and services
 
 This guide makes use of a serverless [sample app][2] that you can launch using a programming language and infrastructure as code (IaC) tool you are familiar with. This app has Serverless Monitoring preconfigured. Follow this guide to see how you might troubleshoot a problem in your sample app, and what kinds of visibility Serverless Monitoring can provide.
 
-### Install the sample app
+### Deploy the sample app
 
 1. Clone the [sample app][3] repository to your local machine.
 2. Choose a runtime and IaC tool of your choice and follow the link to the specific deployment instructions
-3. You can find your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}). 
-4. After the deployment completes, you can either use the Postman collection in the root of the repository or by running the [load test][6]
+3. Find your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}), you will need them for the next step.
+4. Follow the runtime and IaC specific instructions to deploy the sample application 
+5. After the deployment completes, you can either use the Postman collection in the root of the repository or by running the [load test][6]
 
 You can [see your sample app functions in Serverless View][7].
 
@@ -40,7 +41,7 @@ In Serverless View, the rightmost column is titled **Insights**. Datadog automat
 
 For your serverless sample application, Datadog has likely detected a [cold start][10]. Cold starts occur when your serverless application receives a sudden increase in traffic. This can happen if the function was previously receiving a relatively constant number of requests and abruptly started receiving more—or, as in this case, when the function was previously inactive and has been invoked for the first time.
 
-## Create an error to investigate
+## Investigate Errors
 
 The sample application will periodically generate errors and have slow response, causing Lambda timeouts, in the product pricing service.
 

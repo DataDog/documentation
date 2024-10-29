@@ -16,7 +16,7 @@ further_reading:
 
 If you are new to Datadog, [sign up for a Datadog account][1], then follow the Datadog Agent installation instructions for [AWS Lambda][2] to instrument your Lambda function for a quick start with Datadog. Completing the steps configures your Lambda functions to send real-time metrics, logs, and traces to Datadog.
 
-<div class="alert alert-info">There is a sample application <a href="https://github.com/DataDog/serverless-sample-app">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 {{< beta-callout-private url="https://docs.google.com/forms/d/e/1FAIpQLScw8XBxCyN_wjBVU2tWm-zX5oPIGF7BwUKcLSHY6MJsem259g/viewform?usp=sf_link" >}}
 Interested in bulk-instrumenting AWS Lambdas directly from the Datadog UI? To participate, request access to the upcoming remote Lambda instrumentation private beta.
