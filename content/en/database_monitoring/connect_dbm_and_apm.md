@@ -61,7 +61,8 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | {{< X >}} **       |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -448,7 +449,7 @@ View historical performance of similar queries to those executed in your trace, 
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
 [26]: https://app.datadoghq.com/services
 [27]: https://pypi.org/project/asyncpg/
@@ -456,3 +457,4 @@ View historical performance of similar queries to those executed in your trace, 
 [29]: https://pypi.org/project/mysql-connector-python/
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace?view=sql-server-ver16
