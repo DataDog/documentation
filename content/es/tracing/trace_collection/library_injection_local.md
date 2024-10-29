@@ -495,7 +495,7 @@ Ejercita tu aplicación para empezar a generar datos de telemetría, que puedes 
 [8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
-{{% tab "Agent on host, app in containers" (Agent en host, aplicación en contenedor)%}}
+{{% tab "Agent en host, aplicación en contenedor" %}}
 
 <div class="alert alert-info">La inyección de bibliotecas de rastreo en hosts está en fase Beta.</div>
 

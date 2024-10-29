@@ -415,7 +415,7 @@ Ejemplos:
 
 {{< tabs >}}
 
-{{% tab ""Test suite from @classname" (Conjunto de tests de @classname) %}}
+{{% tab "Conjunto de tests de @classname" %}}
 Por defecto, la etiqueta `test.suite` de los tests se lee de `<testsuite name="suite name">`. Sin embargo, algunos complementos podrían informar de un mejor valor en `<testcase classname="TestSuite">`.
 
 Para cambiar las etiquetas `test.suite` de `value 1`, `value 2` a `SomeTestSuiteClass`, `OtherTestSuiteClass`:

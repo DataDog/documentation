@@ -105,9 +105,9 @@ clase pública SampleApplication extiende Application {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-{{< /sitio-región >}}
+{{< /site-region >}}
 
-{{< sitio-región región="eu" >}}
+{{< site-region region="eu" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
@@ -142,9 +142,9 @@ clase públcia SampleApplication extends Application {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-{{< /sitio-región >}}
+{{< /site-region >}}
 
-{{< sitio-región región="us3" >}}
+{{< site-region region="us3" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
@@ -179,9 +179,9 @@ clase pública SampleApplication extends Application {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-{{< /sitio-región >}}
+{{< /site-region >}}
 
-{{< sitio-región región="us5" >}}
+{{< site-region region="us5" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
@@ -214,12 +214,12 @@ clase pública SampleApplication extends Application {
     }
 }
 ```
-{{% /´pestaña %}}
+{{% /tab %}}
 {{< /tabs >}}
-{{< /sitio-región >}}
+{{< /site-region >}}
 
-{{< sitio-región región="gov" >}}
-{{< pestaña >}}
+{{< site-region region="gov" >}}
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Application() {
@@ -253,9 +253,9 @@ clase pública SampleApplication extiende Aplicación {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-{{< /sitio-región >}}
+{{< /site-region >}}
 
-{{< sitio-región región="ap1" >}}
+{{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
@@ -290,7 +290,7 @@ clase pública SampleApplication extiende Aplicación {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-{{< /sitio-región >}}
+{{< /site-region >}}
 
 Las credenciales de inicialización requieren el nombre de variante de tu aplicación y utilizan el valor de `BuildConfig.FLAVOR`. Con la variante, RUM puede hacer coincidir los errores notificados desde tu aplicación con los archivos de asignación que ha cargado el complemento Gradle. Si no tienes variantes, las credenciales utilizarán una cadena vacía.
 

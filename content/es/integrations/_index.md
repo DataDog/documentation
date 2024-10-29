@@ -149,6 +149,5 @@ Más de {{< translate key="integration_count" >}} integraciones incorporadas. Ve
 
 ¿Qué es una integración? Consulta [Introducción a integraciones][1].
 
-{{< integrations >}}
 
 [1]: /es/getting_started/integrations/

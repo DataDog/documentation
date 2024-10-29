@@ -83,7 +83,7 @@ DatadogWebViewTracking.xcframework
 
 ### Instrumentar tus vistas web
 
-{{< <txprotected>pestañas</txprotected> >}}
+{{< tabs >}}
 {{% tab "Android" %}}
 
 1. Si deseas reenviar eventos de RUM desde páginas web, descarga la [última versión][1] del SDK de RUM Android y configura la función RUM siguiendo la [guía dedicada][2].

@@ -690,7 +690,7 @@ Más información sobre los controles de muestreo en la [Documentación de la bi
 
 [1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
 [2]: /es/tracing/trace_collection/dd_libraries/ruby#sampling
-{{% /tag%}}
+{{% /tab %}}
 {{% tab "Go" %}}
 A partir de la versión [v1.41.0][1], para las aplicaciones Go, establece las reglas de muestreo del **tramo** del nombre por servicio y por operación con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
 

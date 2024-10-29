@@ -84,7 +84,7 @@ Por ejemplo, este monitor se activa si y sólo si no existen eventos RUM para to
 
 Y este monitor se activa si no existen logs para la aplicación `Shop.ist`:
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="The monitor configuration page with Application Id:Shopist entered in the search query, set to the count of all RUM events matching that application over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" (Página de configuración del monitor con Id:Shopist de la aplicación ingresado en la consulta de búsqueda, configurada con el conteo de todos los eventos RUM que coinciden con esa aplicación durante los últimos 5 minutos. La sección Configurar condiciones de alerta está configurada para activarse cuando el valor es inferior al umbral de 1 y, si no hay datos durante más de 5 minutos, está configurada para evaluar la cantidad como 0) style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Página de configuración del monitor con Id:Shopist de la aplicación ingresado en la consulta de búsqueda, configurada con el conteo de todos los eventos RUM que coinciden con esa aplicación durante los últimos 5 minutos. La sección Configurar condiciones de alerta está configurada para activarse cuando el valor es inferior al umbral de 1 y, si no hay datos durante más de 5 minutos, está configurada para evaluar la cantidad como 0" style="width:70%;" >}}
 
 #### Condiciones de alerta avanzadas
 

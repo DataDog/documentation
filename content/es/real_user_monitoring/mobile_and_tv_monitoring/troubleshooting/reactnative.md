@@ -56,7 +56,7 @@ No se pueden enviar eventos antes de la inicialización e intentarlo pone al SDK
 
 #### Solución
 
-{{< <txprotected>pestañas</txprotected> >}}
+{{< tabs >}}
 {{% tab "DdSdkReactNative.initialize" %}}
 
 Si utilizas `DdSdkReactNative.initialize` para iniciar el SDK de Datadog, llama a esta función en tu archivo de nivel superior `index.js` para que el SDK se inicialice antes de que se envíen tus otros eventos.
