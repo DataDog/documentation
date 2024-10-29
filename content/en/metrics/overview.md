@@ -28,7 +28,7 @@ The topmost section of the page shows all of your metric sources, along with any
 
 The **Metric Sources** column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][27] scoped to that source. Your Datadog metrics can originate from the following sources:
 
-{{% collapse-content title="Datadog Agents" level="h4" %}}
+{{% collapse-content title="Datadog Agent" level="h4" %}}
 The [Datadog Agent][2] collects metrics from the hosts it's installed on, and forwards them to Datadog. These metrics could originate from:
 
    - Any of the official Datadog integrations that are bundled with the Agent. See the [integrations-core repository][4] for a full listing of the available integrations, and [Integration Management][3] for more information about managing these integrations.
@@ -87,7 +87,7 @@ The **Configurable Processing** column shows an overview of the configuration op
 [Metrics without Limits™][22] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Enable percentiles" level="h4" %}}
+{{% collapse-content title="Enable percentiles on distribution metrics" level="h4" %}}
 [Distribution metrics][23] with percentiles enabled show you percentile aggregations of metric values sent from multiple hosts, so you can measure statistical distributions across your entire infrastructure.
 {{% /collapse-content %}} 
 
