@@ -148,7 +148,7 @@ content/en/mobile_app_testing/*.md                              @Datadog/synthet
 # Software Delivery
 
 content/en/tests/                                 @Datadog/ci-app-libraries @Datadog/documentation
-content/en/test_impact_analysis/               @Datadog/ci-app-libraries @Datadog/documentation
+content/en/tests/test_impact_analysis               @Datadog/ci-app-libraries @Datadog/documentation
 content/en/continuous_integration/                @Datadog/ci-app-backend @Datadog/documentation
 content/en/continuous_delivery/                   @Datadog/ci-app-backend @Datadog/documentation
 content/en/dora_metrics/                          @Datadog/ci-app-backend @Datadog/documentation

@@ -4,7 +4,7 @@ description: Identify flaky, unreliable tests.
 aliases:
 - /continuous_integration/guides/find_flaky_tests/
 - /continuous_integration/guides/flaky_test_management/
-- /tests/flaky_test_management
+- /tests/guides/flaky_test_management/
 further_reading:
 - link: "/continuous_integration/tests/"
   tag: "Documentation"
