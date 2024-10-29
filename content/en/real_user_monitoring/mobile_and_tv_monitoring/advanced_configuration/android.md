@@ -53,8 +53,8 @@ In addition to [tracking views automatically][4], you can also track specific di
 
 ### Notify the SDK that your view finished loading
 
-We are tracking the time it takes for your view to load. To notify the SDK that your view has finished loading you will need to call the `addViewLoadingTime(override=)` method
-through the `GlobalRumMonitor` instance. This method should be called when your view is fully loaded and displayed to the user:
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override=)` method
+through the `GlobalRumMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
