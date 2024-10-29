@@ -45,7 +45,7 @@ datadog-ci stepfunctions instrument \
  --merge-step-function-and-lambda-traces
 {{< /highlight >}}
 
-The `propagate-upstream-trace` flag enables you to to inject Step Functions context into downstream Lambda and Step Functions invocations.
+The `merge-step-function-and-lambda-traces` flag enables you to to inject Step Functions context into downstream Lambda and Step Functions invocations.
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -103,9 +103,9 @@ Alternatively, if you have business logic defined in the payload, you can also u
 ## Link upstream Lambda traces with Step Functions traces
 
 ### Requirements
-For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0 (layer 110).
+For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0.
 
-For Python: Datadog Lambda Library for Python layer 95+ **or** `dd-trace-py` v2.13.0 (layer 99).
+For Python: Datadog Lambda Library for Python layer 99+ **or** `dd-trace-py` v2.13.0.
 
 ### Setup
 
