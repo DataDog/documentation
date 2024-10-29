@@ -374,10 +374,10 @@ def process_user_message():
 
 | Tag | Description |
 |---|---|
-| `session_id` | ID representing a single user session, e.g. a chat session |
-| `user_handle` | The handle for the user of the chat session |
-| `user_name` | The name for the user of the chat session |
-| `user_id` | The ID for the user of the chat session |
+| `session_id` | The ID representing a single user session, for example, a chat session. |
+| `user_handle` | The handle for the user of the chat session. |
+| `user_name` | The name for the user of the chat session. |
+| `user_id` | The ID for the user of the chat session. |
 
 ## Annotating a span
 
