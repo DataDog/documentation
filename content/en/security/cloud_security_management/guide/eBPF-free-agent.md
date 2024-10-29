@@ -7,6 +7,9 @@ This guide describes how to set up the CMS Threats eBPF-free solution for eBPF d
 
 This guide also describes some advantages of the ptrace solution.
 
+<div class="alert alert-info">Threat Detection for Linux Without eBPF Support is in Preview. Reach out to your Datadog representative to sign up.</div>
+
+
 ## Summary of agent options
 
 CMS Threats includes two agent options for threat detection and response:
