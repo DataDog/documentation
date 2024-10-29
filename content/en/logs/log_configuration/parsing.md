@@ -5,6 +5,9 @@ aliases:
     - /logs/parsing/
     - /logs/processing/parsing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Learn how to build and modify log pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
