@@ -41,21 +41,25 @@ function cssStringToObject(css: string) {
   return result;
 }
 
-function Video(props: { width: string; src: string }) {
+function Video(props: { attrs: ImgTagAttrs; permalink: string }) {
+  const { attrs, permalink } = props;
+
   return (
-    <video
-      width={props.width || '100%'}
-      height="auto"
-      muted
-      playsInline
-      autoPlay
-      loop
-      controls
-    >
-      <source src={props.src} type="video/mp4" media="(min-width: 0px)" />
-      <div className="play"></div>
-      <div className="pause"></div>
-    </video>
+    <Figure attrs={attrs}>
+      <video
+        width={attrs.width || '100%'}
+        height="auto"
+        muted
+        playsInline
+        autoPlay
+        loop
+        controls
+      >
+        <source src={permalink} type="video/mp4" media="(min-width: 0px)" />
+        <div className="play"></div>
+        <div className="pause"></div>
+      </video>
+    </Figure>
   );
 }
 
@@ -63,6 +67,7 @@ type ImgTagAttrs = {
   src: string;
   alt: string;
   style: string;
+  caption: string;
   video: boolean;
   inline: boolean;
   popup: boolean;
@@ -92,67 +97,49 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
   const popParam =
     attrs.pop_param || (imageExt === 'gif' ? '?fit=max' : '?fit=max&auto=format');
 
-  let wrapperClass = 'shortcode-wrapper shortcode-img expand';
-  if (attrs.wide) {
-    wrapperClass += ' wide-parent';
-  }
-
-  let figureClass = 'text-center';
-  if (attrs.wide) {
-    figureClass += ' wide';
-  }
-  if (attrs.figure_class) {
-    figureClass += ` ${attrs.figure_class}`;
-  }
-
-  let figureStyle = {};
-  if (attrs.figure_style) {
-    figureStyle = cssStringToObject(attrs.figure_style);
-  }
-
   let imageStyle = {};
   if (attrs.style) {
     imageStyle = cssStringToObject(attrs.style);
   }
 
+  const isVideo = attrs.video;
+  const isInlineImage = !attrs.video && attrs.inline;
+  const isBlockDisplayImage = !attrs.video && !attrs.inline;
+
   return (
-    <div className={wrapperClass}>
-      <figure className={figureClass} style={figureStyle}>
-        {/* video */}
-        {attrs.video && <Video width={attrs.width} src={img} />}
-        {/* inline image */}
-        {!attrs.video && attrs.inline && (
+    <>
+      {isVideo && <Video attrs={attrs} permalink={permalink} />}
+
+      {isInlineImage && (
+        <Figure attrs={attrs}>
           <img
-            srcSet={e}
+            srcSet={permalink}
             style={imageStyle}
             width={attrs.width || 'auto'}
             height={attrs.height || 'auto'}
           />
-        )}
-        {/* block display image with popup */}
-        {!attrs.video && (
-          <>
-            {isPopup && imageExt !== 'gif' && (
-              <>
-                <a
-                  href="{{ print $img_resource $pop_param | relURL }}"
-                  className="pop"
-                  data-bs-toggle="modal"
-                  data-bs-target="#popupImageModal"
-                ></a>
-              </>
-            )}
-          </>
-        )}
-      </figure>
-    </div>
+        </Figure>
+      )}
+
+      {isBlockDisplayImage && (
+        <>
+          {isPopup && imageExt !== 'gif' && (
+            <>
+              <a
+                href="{{ print $img_resource $pop_param | relURL }}"
+                className="pop"
+                data-bs-toggle="modal"
+                data-bs-target="#popupImageModal"
+              ></a>
+            </>
+          )}
+        </>
+      )}
+    </>
   );
 };
 
-function BlockDisplayImageWrapper(props: {
-  attrs: ImgTagAttrs;
-  children: React.ReactNode;
-}) {
+function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
   let wrapperClass = 'shortcode-wrapper shortcode-img expand';
   let figureClass = 'text-center';
 
@@ -170,6 +157,7 @@ function BlockDisplayImageWrapper(props: {
     <div className={wrapperClass}>
       <figure className={figureClass} style={figureStyle}>
         {props.children}
+        {props.attrs.caption && <figcaption>{props.attrs.caption}</figcaption>}
       </figure>
     </div>
   );
@@ -237,7 +225,9 @@ function BlockDisplayImageWrapper(props: {
 // NOT DONE
 {{- if not (eq $img_inline "true")}}
 
+  
   <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
+    // DONE
     {{- if $video -}}
 
       // DONE
@@ -303,6 +293,7 @@ function BlockDisplayImageWrapper(props: {
 
   {{- end -}}
 
+
     {{- if .Get "caption" -}}
         {{- with .Get "caption" -}}
             <figcaption>{{.}}</figcaption>
@@ -310,15 +301,15 @@ function BlockDisplayImageWrapper(props: {
       {{- end -}}
     </figure>
   </div>
-  {{- else -}}
+
+{{- else -}}
 
   // DONE
-  // NOTE: TS is throwing an error that srcset is not a valid attribute for img,
-  // maybe srcSet becomes srcset in the HTML?
   <img 
     srcset="{{ $e }}" 
     {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
     {{- with $img_width -}} width="{{ . }}" {{- end -}}
     {{- with $img_height -}} height="{{ . }}" {{- end -}} />
-  {{- end -}}
+
+{{- end -}}
 */
