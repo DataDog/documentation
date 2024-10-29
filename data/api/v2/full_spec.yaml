@@ -22291,6 +22291,13 @@ components:
           items:
             type: string
           type: array
+        use_recommended_keywords:
+          description: 'Should the rule use the underlying standard pattern keyword
+            configuration. If set to `true`, the rule must be tied
+
+            to a standard pattern. If set to `false`, the specified keywords and `character_count`
+            are applied.'
+          type: boolean
       required:
       - keywords
       - character_count
