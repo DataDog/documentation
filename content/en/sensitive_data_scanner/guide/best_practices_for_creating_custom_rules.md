@@ -16,13 +16,13 @@ Sensitive Data Scanner uses scanning rules to identify, tag, and optionally reda
 
 ## Use precise regex patterns
 
-Define regex patterns that are as precise as possible, because generic patterns result in more false positives. To refine your regex pattern, add test data in the sample data tester when creating a custom rule. For more information, see step 2 in [Add a custom scanning rule][2].
+Define regex patterns that are as precise as possible because generic patterns result in more false positives. To refine your regex pattern, add test data in the sample data tester when creating a custom rule. For more information, see step 2 in [Add a custom scanning rule][2].
 
 {{< img src="sensitive_data_scanner/guides/regex_sample_test.mp4" alt="Testing a regex pattern with a sample that matches and one that does not" video=true >}}
 
 ## Refine regex pattern matching
 
-Provide a list of keywords to the keyword dictionary. The dictionary checks for the matching pattern within a defined proximity of these keywords. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value. See step 2 in [Add a custom scanning rule][2] for more information.
+Provide a list of keywords to the keyword dictionary to refine regex pattern matching. The dictionary checks for the matching pattern within a defined proximity of those keywords. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also specify that these keywords be within a certain number of characters of a match. By default, keywords must be within 30 characters before a matched value. See step 2 in [Add a custom scanning rule][2] for more information.
 
 {{< img src="sensitive_data_scanner/guides/password_keyword.png" alt="A keyword dictionary with password, token, secret, credential" style="width:90%;" >}}
 
@@ -37,7 +37,7 @@ See step 3 in [Add a custom scanning rule][2] for more information.
 
 ## Use out-of-the-box rules
 
-Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules are predefined rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords][5]. 
+Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules are predefined rules that detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords][5]. 
 
 [Contact support][4] if there is a rule that you want to use and think other users would also benefit from it.
 
