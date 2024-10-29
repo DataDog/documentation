@@ -59,24 +59,23 @@ function Video(props: { width: string; src: string }) {
   );
 }
 
-export const ImgTemplate = (props: {
-  attrs: {
-    src: string;
-    alt: string;
-    style: string;
-    video: boolean;
-    inline: boolean;
-    popup: boolean;
-    width: string;
-    height: string;
-    wide: boolean;
-    img_param: string;
-    pop_param?: string;
-    figure_class?: string;
-    figure_style?: string;
-  };
-  hugoConfig: HugoConfig;
-}) => {
+type ImgTagAttrs = {
+  src: string;
+  alt: string;
+  style: string;
+  video: boolean;
+  inline: boolean;
+  popup: boolean;
+  width: string;
+  height: string;
+  wide: boolean;
+  img_param: string;
+  pop_param?: string;
+  figure_class?: string;
+  figure_style?: string;
+};
+
+export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) => {
   console.log('Rendering ImgTemplate');
   const { attrs, hugoConfig } = props;
 
@@ -86,6 +85,7 @@ export const ImgTemplate = (props: {
   const permalink = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
 
   const imageExt = attrs.src.split('.')[1];
+
   // TODO: What does this get used for?
   const imgixWidth = attrs.wide ? '1170' : '850';
 
@@ -110,12 +110,26 @@ export const ImgTemplate = (props: {
     figureStyle = cssStringToObject(attrs.figure_style);
   }
 
+  let imageStyle = {};
+  if (attrs.style) {
+    imageStyle = cssStringToObject(attrs.style);
+  }
+
   return (
     <div className={wrapperClass}>
       <figure className={figureClass} style={figureStyle}>
         {/* video */}
         {attrs.video && <Video width={attrs.width} src={img} />}
-        {/* image */}
+        {/* inline image */}
+        {!attrs.video && attrs.inline && (
+          <img
+            srcSet={e}
+            style={imageStyle}
+            width={attrs.width || 'auto'}
+            height={attrs.height || 'auto'}
+          />
+        )}
+        {/* block display image with popup */}
         {!attrs.video && (
           <>
             {isPopup && imageExt !== 'gif' && (
@@ -134,6 +148,32 @@ export const ImgTemplate = (props: {
     </div>
   );
 };
+
+function BlockDisplayImageWrapper(props: {
+  attrs: ImgTagAttrs;
+  children: React.ReactNode;
+}) {
+  let wrapperClass = 'shortcode-wrapper shortcode-img expand';
+  let figureClass = 'text-center';
+
+  if (props.attrs.wide) {
+    wrapperClass += ' wide-parent';
+    figureClass += ' wide';
+  }
+
+  let figureStyle = {};
+  if (props.attrs.figure_style) {
+    figureStyle = cssStringToObject(props.attrs.figure_style);
+  }
+
+  return (
+    <div className={wrapperClass}>
+      <figure className={figureClass} style={figureStyle}>
+        {props.children}
+      </figure>
+    </div>
+  );
+}
 
 /*
 // DONE
@@ -214,6 +254,7 @@ export const ImgTemplate = (props: {
         <div class="pause"></div>
       </video>
 
+    // if it's not a video, wrap it in a popup link
     {{- else -}}
     
       {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
@@ -270,6 +311,10 @@ export const ImgTemplate = (props: {
     </figure>
   </div>
   {{- else -}}
+
+  // DONE
+  // NOTE: TS is throwing an error that srcset is not a valid attribute for img,
+  // maybe srcSet becomes srcset in the HTML?
   <img 
     srcset="{{ $e }}" 
     {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 

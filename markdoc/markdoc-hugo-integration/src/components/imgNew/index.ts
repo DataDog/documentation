@@ -1,4 +1,3 @@
-import { inline } from 'markdoc-static-compiler/dist/src/schema';
 import { CustomHtmlComponent } from '../../helperModules/renderer';
 import { ImgTemplate } from './templates';
 import { renderToString } from 'react-dom/server';
