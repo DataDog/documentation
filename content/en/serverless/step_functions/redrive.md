@@ -20,8 +20,9 @@ To enable using redrive within Datadog, configure an [AWS Connection][3] with [D
 To take action on a Step Function in Datadog: 
 1. Go to the [Step Functions][2] page. 
 2. Find the Step Function you wish to redrive.
-3. Open this Step Function's side panel or State Machine Map.
+3. Open this Step Function's side panel. On the **Executions** tab, locate the failed execution you wish to redrive.
 4. Click on the **Failed** pill to open a redrive modal.
+5. Click the **Redrive** button.
 
 ## Further Reading
 
