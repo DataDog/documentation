@@ -11,8 +11,9 @@ saveSettings()
 const index = async () => {
     const promises = []
 
-    // if !== scheduled in gitlab...
-    if (true) {
+    // nightly build pipeline syncs all records in Typesense, all others index english records only.
+    // this is a performance improvement as docs scales.
+    if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
         const fullSearchIndex = require('../../../public/search.json')
         const destFilePath = './public/english_search.json'
         const docsAlias = 'docs_alias'
@@ -25,7 +26,7 @@ const index = async () => {
                 return
             }
 
-            // If we add more collections this will have to change
+            // If we add more collections this will have to change to be iterative
             promises.push(typesenseSync(docsAlias, destFilePath, filterLanguage))
         })
     } else {

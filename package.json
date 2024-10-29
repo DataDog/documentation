@@ -73,7 +73,7 @@
         "tomlify-j0.4": "^3.0.0",
         "traverse": "0.6.8",
         "typesense": "^1.8.2",
-        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/web-5506-docs-typesense-sync/typesense-sync-v1.0.7.tgz",
+        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.6.tgz",
         "yaml-lint": "^1.7.0"
     },
     "devDependencies": {
