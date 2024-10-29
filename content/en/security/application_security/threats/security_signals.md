@@ -150,7 +150,6 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 3. In **Next Steps**, take action. For example:
     -  Click **Block all Attacking IPs** (by specific duration or permanently).
     -  Click **Automated Attacker Blocking** (based on [detection][10] rules).
-    -  Click **[Block with Edge WAF][11]** (if enabled).
 
 ## Bulk actions
 
