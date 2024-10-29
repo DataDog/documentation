@@ -262,7 +262,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Linux Hosted" %}}
-If you are not running the agents in containers on Linux, add the `run_in_core_agent` flag in `datadog-agent.yaml` file:
+If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in `datadog-agent.yaml` file:
 
 ```
 process_config:
