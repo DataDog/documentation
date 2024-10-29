@@ -18,7 +18,7 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-In your `serverless.yaml` file, set `mergeStepFunctionAndLambdaTraces` to `true`. 
+In your `serverless.yaml` file, set `mergeStepFunctionAndLambdaTraces` to `true`. For example:
 
 {{< highlight yaml "hl_lines=8" >}}
 custom:
@@ -45,12 +45,12 @@ datadog-ci stepfunctions instrument \
  --merge-step-function-and-lambda-traces
 {{< /highlight >}}
 
-The `merge-step-function-and-lambda-traces` flag enables you to to inject Step Functions context into downstream Lambda and Step Functions invocations.
+The `merge-step-function-and-lambda-traces` flag lets you inject Step Functions context into downstream Lambda and Step Functions invocations.
 
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-On the Lambda Task, set the `Parameters` key with the following: 
+On the Lambda Task, set the `Parameters` key as follows: 
 
 ```json
 "Parameters": {
@@ -75,7 +75,7 @@ The `JsonMerge` [intrinsic function][1] merges the [Step Functions context objec
 }
 {{< /highlight >}}
 
-Alternatively, if you have business logic defined in the payload, you can also use the following:
+Alternatively, if you have business logic defined in the payload, you can also use the following format:
 
 {{< highlight json "hl_lines=7-9" >}}
 "Lambda Read From DynamoDB": {
@@ -109,7 +109,7 @@ For Python: Datadog Lambda Library for Python layer 99+ **or** `dd-trace-py` v2.
 
 ### Setup
 
-If the layer/tracer version requirements are fulfilled, no futher setup is required.
+If the layer or tracer version requirements are fulfilled, no further setup is required.
 
 ## Merge Step Functions traces with nested Step Functions traces
 
