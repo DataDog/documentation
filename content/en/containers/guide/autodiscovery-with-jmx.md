@@ -76,7 +76,7 @@ kind: Pod
 metadata:
   name: <POD_NAME>
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "<INTEGRATION_NAME>": {
           "init_config": {
@@ -92,7 +92,7 @@ metadata:
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
       # (...)
       env:
         - name: POD_IP
@@ -112,7 +112,7 @@ spec:
 
 In this example:
 - `<POD_NAME>` is the name of your pod.
-- `<CONTAINER_IDENTIFIER>` matches the desired container within your pod.
+- `<CONTAINER_NAME>` matches the desired container within your pod.
 - `<INTEGRATION_NAME>` is the name of the desired JMX integration. See the list of [available JMX integrations](#available-jmx-integrations).
 - Set `<JMX_PORT>` as desired, as long as it matches between the annotations and `JAVA_OPTS`.
 
@@ -171,7 +171,7 @@ spec:
 If you need to collect additional metrics from these integrations, add them to the `init_config` section:
 
 ```yaml
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
   {
     "<INTEGRATION_NAME>": {
       "init_config": {

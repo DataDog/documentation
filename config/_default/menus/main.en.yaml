@@ -1321,9 +1321,9 @@ menu:
       url: dashboards/sharing/
       parent: dashboards
       weight: 10
-    - name: Public Dashboards
-      identifier: dashboards_sharing_public_dashboards
-      url: dashboards/sharing/public_dashboards
+    - name: Shared Dashboards
+      identifier: dashboards_sharing_shared_dashboards
+      url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1001
     - name: Share Graphs
@@ -2134,11 +2134,16 @@ menu:
       parent: incidents
       identifier: incident_notification
       weight: 3
-    - name: Incident Details
-      url: service_management/incident_management/incident_details
+    - name: Investigate an Incident
+      url: service_management/incident_management/investigate
       parent: incidents
-      identifier: incident_details
+      identifier: incident_investigate
       weight: 4
+    - name: Timeline
+      url: service_management/incident_management/investigate/timeline
+      parent: incident_investigate
+      identifier: incident_investigate_timeline
+      weight: 401
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
@@ -2852,16 +2857,26 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_installation
       weight: 201
+    - name: Merge Step Functions and Lambda Traces
+      url: serverless/step_functions/merge-step-functions-lambda
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_merge_lambda_traces
+      weight: 202
     - name: Enhanced Metrics
       url: serverless/step_functions/enhanced-metrics
       parent: serverless_step_functions
       identifier: serverless_step_functions_enhanced_metrics
-      weight: 202
+      weight: 203
+    - name: Redrive Executions
+      url: serverless/step_functions/redrive
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_redrive
+      weight: 204
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 203
+      weight: 205
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
@@ -5158,7 +5173,7 @@ menu:
       parent: log_collection
       identifier: log_collection_java
       weight: 110
-    - name: NodeJS
+    - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
@@ -5344,6 +5359,11 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
+    - name: Time Selection
+      url: logs/workspaces/time_selection/
+      parent: logs_workspaces
+      identifier: logs_workspaces_time_selection
+      weight: 601
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management

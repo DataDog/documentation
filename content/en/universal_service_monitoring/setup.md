@@ -825,10 +825,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
+{{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
+Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.

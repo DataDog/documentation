@@ -392,7 +392,7 @@ Algunos de los rastreadores específicos del lenguaje tienen una opción para mo
 <div class="alert alert-danger"><strong>Importante</strong>: Si la solicitud está asociada a una traza distribuida, la traza resultante puede tener imprecisiones de muestreo si descartas partes de ella debido a estas reglas de filtrado.</div>
 
 
-{{< programming-lang-wrapper langs="Ruby,Python,NodeJS,Java" >}}
+{{< programming-lang-wrapper langs="ruby,python,nodejs,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
