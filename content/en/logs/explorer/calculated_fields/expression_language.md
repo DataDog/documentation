@@ -36,11 +36,10 @@ The available operators in order of precedence:
 
 ## Functions
 
-{{< whatsnext desc="The available functions are categorized as follows:" >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#arithmetic" >}}Arithmetic{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#string" >}}String{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#logical" >}}Logical{{< /nextlink >}}
-{{< /whatsnext >}}
+The available functions are categorized as follows:
+- [Arithmetic](#arithmetic)
+- [String](#string)
+- [Logical](#logical)
 
 ### Arithmetic
 
