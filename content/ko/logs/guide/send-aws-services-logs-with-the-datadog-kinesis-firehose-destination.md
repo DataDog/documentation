@@ -12,6 +12,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: 블로그
   text: Amazon Kinesis Data Firehose 및 Datadog으로 Amazon VPC 플로우 로그 전송
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: 가이드
+  text: 데이터 전송 수수료를 줄이면서 로그를 Datadog로 보내는 방법
 title: Datadog Amazon Data Firehose Destination을 사용하여 AWS 서비스 로그 보내기
 ---
 
@@ -24,7 +27,7 @@ AWS는 Amazon Data Firehose를 완벽하게 관리하므로 추가 인프라스�
 ## 설정
 
 {{< tabs >}}
-{{% tab "Amazon Data Firehose Delivery 스트림" %}}
+{{% tab "Amazon Data Firehose Delivery 스트림" %}}
 
 Datadog에서는 Amazon Data Firehose와 함께 Datadog 대상을 사용할 때 Kinesis Data Stream을 입력으로 사용할 것을 권장합니다. Datadog이 해당 로그의 유일한 소비자가 아닌 경우 로그를 여러 대상으로 전달할 수 있는 기능을 제공합니다. Datadog이 로그의 유일한 대상이거나 이미 로그에 Kinesis Data Stream이 있는 경우 1단계를 무시할 수 있습니다.
 

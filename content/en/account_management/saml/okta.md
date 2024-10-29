@@ -9,6 +9,12 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    In the {{< region-param key="dd_site_name" >}} site, you must manually configure the Datadog application in Okta using the <a href="/account_management/faq/okta/">legacy instructions</a>. Ignore the instructions on this page about the preconfigured Datadog application in the Okta application catalog.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 This page tells you how to set up the Datadog application in Okta. 
