@@ -21,6 +21,10 @@ algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
+{{< learning-center-callout header="Try Grok parsing in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  Build and modify log pipelines, manage them with the Pipeline Scanner, and standardize attribute names across processed logs for consistency.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Datadog automatically parses JSON-formatted logs. For other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
