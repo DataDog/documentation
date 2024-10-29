@@ -80,7 +80,7 @@ For a full list of options, see the `datadog-ci` [Unity Symbols documentation][5
 
 ### List uploaded symbol files
 
-See the [RUM Debug Symbols][10] page to view all uploaded symbols.
+See the [RUM Debug Symbols][6] page to view all uploaded symbols.
 
 ## Limitations
 
@@ -105,8 +105,8 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
    }
    ```
 
-4. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][8].
-5. For crashes, after the crash happens, restart your application and wait for the Unity SDK to upload the crash report in [**Error Tracking**][8].
+4. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
+5. For crashes, after the crash happens, restart your application and wait for the Unity SDK to upload the crash report in [**Error Tracking**][1].
 
 ## Further reading
 
@@ -117,3 +117,4 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/unity-symbols
+[6]: https://app.datadoghq.com/source-code/setup/rum
