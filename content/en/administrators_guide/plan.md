@@ -1,6 +1,6 @@
 ---
 title: Plan your Datadog implementation
-description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
+description: Setup and implement Datadog as an administrator to avoid pit-falls down the road
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
@@ -55,7 +55,7 @@ For example, [Getting started with tagging][2], as well as Datadog's e-book on [
 **Recommendation**:  
 As early as possible, understand [Datadog Unified Service Tagging][3].  Once developed, you can seamlessly map your infrastructure with your collected tags, unify your data streams to pivot between service metrics, logs and request traces, and assign owners to services to build informative alerts.
 
-{{< img src="/service_owners_guide/unified_service_tagging-3.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
+{{< img src="/administrators_guide/unified_service_tagging-3.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
 
 ### RBAC
 
@@ -91,7 +91,7 @@ APM depends critically on the sound application of Unified Service Tagging.  The
 
 The Datadog log management capabilities are rich, robust, and streamlined to allow you and your teams to quickly diagnose and fix your infrastructure issues. The [Logging without Limits™][14] feature is used to create tunable log collection patterns.  [Logging without Limits][14]™ provides the ability to extract the information from your log data into custom metrics. With Datadog's logs features, it is possible to be alerted to critical errors in your logs, without needing to index them.
 
-{{< img src="/service_owners_guide/logging_without_limits.png" alt="Logging without Limits diagram" style="width:90%;">}}
+{{< img src="/administrators_guide/logging_without_limits.png" alt="Logging without Limits diagram" style="width:90%;">}}
 
 The primary design consideration for Datadog's log index architecture is a distributed, time-series, columnar store optimized around serving large scan and aggregation queries.  
 
@@ -197,7 +197,7 @@ Datadog is a platform of tremendous value. From years of collective experience w
 
 Services are the base object of observability. Utilizing the [service catalog][30] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
 
-{{< img src="/service_owners_guide/service_catalog.png" alt="Service Catalog home screen" style="width:90%;">}}
+{{< img src="/administrators_guide/service_catalog.png" alt="Service Catalog home screen" style="width:90%;">}}
 
 ### Resource Catalog
 
@@ -219,7 +219,7 @@ Use [API Catalog][33] for resource endpoint-specific categorization, performance
 
 Centrally administer and manage all of your Datadog Agents with [Fleet Automation][34]. Fleet Automation can help you identify which Agents need upgraded, send a flare from within your organization to support, and help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.  
 
-{{< img src="/service_owners_guide/fleet_automation.png" alt="Fleet Management home screen" style="width:90%;">}}
+{{< img src="/administrators_guide/fleet_automation.png" alt="Fleet Management home screen" style="width:90%;">}}
 
 ### Remote Configuration
 
@@ -307,7 +307,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [38]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [39]: https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion
 [40]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension\#metric-collection
-[41]: /service_owners_guide/build
+[41]: /administrators_guide/build
 [42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
 [43]: /integrations/ping/
 [44]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=project#resource-change-collection

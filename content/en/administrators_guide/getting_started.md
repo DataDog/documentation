@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
+description: Setup and implement Datadog as an administrator to avoid pit-falls down the road
 further_reading:
 - link: "/getting_started/support/"
   tag: "Documentation"
@@ -21,7 +21,7 @@ As you go along in this guide, you can refer to the following self-service resou
 * The [Datadog UI][3], which provides in-context help that is accessible from any page.
 * For information on specific configuration boxes, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom left hand side within the interface.
 
-{{< img src="/service_owners_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
+{{< img src="/administrators_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
 
 On this page you can find resources such as:
 
@@ -119,6 +119,6 @@ To successfully create a new Datadog deployment, review the [plan][11] page to l
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
 [10]: https://app.datadoghq.com/monitors/recommended
-[11]: /service_owners_guide/plan
-[12]: /service_owners_guide/plan/#resource-tagging
+[11]: /administrators_guide/plan
+[12]: /administrators_guide/plan/#resource-tagging
 [13]: https://github.com/DataDog/datadog-agent/tree/main/examples

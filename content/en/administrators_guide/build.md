@@ -98,6 +98,6 @@ Review the Service Owners Guide [run][4] documentation to outline a maintenance 
 [1]: https://docs.datadoghq.com/api/latest/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [3]: https://github.com/DataDog/datadog-sync-cli
-[4]: /service_owners_guide/run
+[4]: /administrators_guide/run
 [5]: /agent/basic_agent_usage/
 [6]: /agent/architecture/

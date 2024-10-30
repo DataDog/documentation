@@ -1,6 +1,6 @@
 ---
 title: Maintaining and running your Datadog Implementation
-description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
+description: Setup and implement Datadog as an administrator to avoid pit-falls down the road
 further_reading:
 - link: "getting_started/application/"
   tag: "Documentation"
@@ -64,7 +64,7 @@ When creating dashboards, there are many things to consider, but the focus shoul
 
 A common OOTB Dashboard is the AWS EC2 Overview Dashboard:
 
-{{< img src="/service_owners_guide/ec2_overview.png" alt="AWS EC2 Overview Dashboard" style="width:90%;">}}
+{{< img src="/administrators_guide/ec2_overview.png" alt="AWS EC2 Overview Dashboard" style="width:90%;">}}
 
 ### API key rotation 
 

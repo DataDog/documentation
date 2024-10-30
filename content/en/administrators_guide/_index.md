@@ -1,6 +1,6 @@
 ---
-title: Datadog Service Owners Guide
-description: Setup and implement Datadog as a Service owner to avoid pit-falls down the road
+title: Administrator's Guide
+description: Setup and implement Datadog as an administrator to avoid pit-falls down the road
 further_reading:
 - link: "/getting_started/application/"
   tag: "Documentation"
@@ -27,17 +27,17 @@ This guide is organized into three sections that provide important concepts, pla
 * **[Build][3]**: Understand what needs to be installed and the best way to get it done so you can implement a Datadog environment that is best suited to your needs.  
 * **[Run][4]**: Execute the internal and external tasks to maintain the Datadog service, maximize its power, and manage ongoing support.
 
-{{< img src="/service_owners_guide/plan_build_run_2.png" alt="Diagram of the plan, build, and run phases" style="width:80%;">}}
+{{< img src="/administrators_guide/plan_build_run_2.png" alt="Diagram of the plan, build, and run phases" style="width:80%;">}}
 
 ## Next Steps
 
 Throughout this guide you will learn how to maximize the value of Datadog by exploring a knowledge-base, experiment with the product, and create an implementation design. To get started using the Datadog Service Owners Guide, review the [Getting Started][5] page to view information on interacting with Datadog Support, sign up for free Datadog training courses, and learn how to create a test environment.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/service_owners_guide/getting_started">}}<u>Getting Started</u>: Learn how to send a Flare to Support, sign up for Datadog Training courses, and build a test environment.{{< /nextlink >}}
-  {{< nextlink href="/service_owners_guide/plan">}}<u>Plan</u>: Plan your Datadog implementation by creating a sizing profile, develop general and best practices, and optimize data collection. {{< /nextlink >}}
-  {{< nextlink href="/service_owners_guide/build">}}<u>Build</u>: Build your Datadog environment by prioritizing features, develop an internal support system, and provision your architecture.  {{< /nextlink >}}
-  {{< nextlink href="/service_owners_guide/run">}}<u>Run</u>: Maintain and run your Datadog implementation by creating Dashboards, onboard new infrastructure, and perform Datadog Agent upgrades.{{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/getting_started">}}<u>Getting Started</u>: Learn how to send a Flare to Support, sign up for Datadog Training courses, and build a test environment.{{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/plan">}}<u>Plan</u>: Plan your Datadog implementation by creating a sizing profile, develop general and best practices, and optimize data collection. {{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/build">}}<u>Build</u>: Build your Datadog environment by prioritizing features, develop an internal support system, and provision your architecture.  {{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/run">}}<u>Run</u>: Maintain and run your Datadog implementation by creating Dashboards, onboard new infrastructure, and perform Datadog Agent upgrades.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
@@ -46,7 +46,7 @@ Throughout this guide you will learn how to maximize the value of Datadog by exp
 
 
 [1]: https://docs.datadoghq.com/
-[2]: /service_owners_guide/plan
-[3]: /service_owners_guide/build
-[4]: /service_owners_guide/run
-[5]: /service_owners_guide/getting_started
+[2]: /administrators_guide/plan
+[3]: /administrators_guide/build
+[4]: /administrators_guide/run
+[5]: /administrators_guide/getting_started
