@@ -28,7 +28,7 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
-| .NET Version         | Microsoft End of Life | Support level        | {{< tooltip text="SSI" tooltip="Single Step Instrumentation">}} Support          | Package version      |
+| .NET Version         | Microsoft End of Life | Support level        | {{< tooltip text="SSI" tooltip="Single Step Instrumentation">}} Support | Package version |
 | -------------------- | --------------------- | -------------------- | -------------------- | -------------------- |
 | .NET 8               |                       | [GA](#support-ga)    | {{< X >}}   | latest (>= 2.42.0)   |
 | .NET 7               | 05/14/2024            | [GA](#support-ga)    | {{< X >}}   | latest (>= 2.20.0)   |
@@ -46,14 +46,14 @@ Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                   | Support level         | Package version                        |
-| ------------------------------------------|-----------------------|----------------------------------------|
-| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
-| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | < 3.0.0 (e.g. 2.56.0)                  |
-| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
-| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
-| Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
-| Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     | .NET 6+ only, added in version 3.2.0   |
+| Processor architectures                   | Support level         | {{< tooltip text="SSI" tooltip="Single Step Instrumentation">}} Support | Package version |
+| ------------------------------------------|-----------------------|-----------|----------------------------------------|
+| Windows x64 (`win-x64`)                   | [GA](#support-ga)     |           | latest                                 |
+| Windows x86 (`win-x86`)                   | [GA](#support-ga)     |           | < 3.0.0 (e.g. 2.56.0)                  |
+| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | {{< X >}} | latest                                 |
+| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     |           | latest                                 |
+| Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | {{< X >}} | .NET 5+ only, added in version 1.27.0  |
+| Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     |           | .NET 6+ only, added in version 3.2.0   |
 
 Note that running 32-bit applications on Windows x64 is supported.
 
@@ -82,17 +82,17 @@ The .NET Tracer supports Linux distributions as best-effort, based on minimum li
 - Alpine x64: [musl][21] 1.2.2 (from Alpine 3.14)
 - Alpine arm64: [musl][21] 1.2.4 (from Alpine 3.18)
 
-| Operating System         | Version | Architectures | Support level         | Package version              |
-| -------------------------|---------|---------------|-----------------------|------------------------------|
-| Alpine Linux (x64)       | 3.14+   |  x64,         | [GA](#support-ga)     | latest (.NET 5+ only, v1.27.0+) |
-| Alpine Linux (arm64)     | 3.18+   |  Arm64        | [GA](#support-ga)     | latest (.NET 6+ only, v3.2.0+) |
-| CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
-| CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
-| Debian                   | 10+     |  x64, Arm64   | [GA](#support-ga)     | latest                       |
-| Fedora                   | 29+     |  x64          | [GA](#support-ga)     | latest                       |
-| openSUSE                 | 15+     |  x64          | [GA](#support-ga)     | latest                       |
-| Red Hat Enterprise Linux | 7+      |  x64          | [GA](#support-ga)     | latest                       |
-| Ubuntu                   | 18.04+  |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| Operating System         | Version | Architectures | Support level                       | {{< tooltip text="SSI" tooltip="Single Step Instrumentation">}} Support | Package version |
+|--------------------------|---------|---------------|-------------------------------------|-----------|---------------------------------|
+| Alpine Linux (x64)       | 3.14+   | x64,          | [GA](#support-ga)                   |           | latest (.NET 5+ only, v1.27.0+) |
+| Alpine Linux (arm64)     | 3.18+   | Arm64         | [GA](#support-ga)                   |           | latest (.NET 6+ only, v3.2.0+)  |
+| CentOS Linux             | 7+      | x64           | [Maintenance](#support-maintenance) | {{< X >}} | latest (EOL in v4.0.0)          |
+| CentOS Stream Linux      | 8       | x64           | [Maintenance](#support-maintenance) |           | latest (EOL in v4.0.0)          |
+| Debian                   | 10+     | x64, Arm64    | [GA](#support-ga)                   | {{< X >}} | latest                          |
+| Fedora                   | 29+     | x64           | [GA](#support-ga)                   | {{< X >}} | latest                          |
+| openSUSE                 | 15+     | x64           | [GA](#support-ga)                   |           | latest                          |
+| Red Hat Enterprise Linux | 7+      | x64           | [GA](#support-ga)                   |           | latest                          |
+| Ubuntu                   | 18.04+  | x64, Arm64    | [GA](#support-ga)                   | {{< X >}} | latest                          |
 
 ### macOS
 
@@ -163,6 +163,20 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | [6.x][8]                    | Latest              |
 | [5.x][9]                    | Latest              |
 
+## Single Step Instrumentation
+
+### Container platforms
+
+The following container platforms are compatible:
+
+| Environment                      | Requirements                               | Support   |
+|----------------------------------|--------------------------------------------|-----------|
+| Docker                           |                                            | {{< X >}} |
+| Kubernetes with Linux containers | [Datadog Admission Controller][22] enabled | {{< X >}} |
+| Kubernetes with Windows pods     |                                            |           |
+
+<div class="alert alert-info">For Kubernetes with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.</div>
+
 ## .NET runtime support policy
 
 The .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, the .NET Tracer also limits its support for that version.
@@ -210,3 +224,4 @@ Version updates imply the following changes to runtime support:
 [19]: https://github.com/dotnet/core/tree/main/release-notes
 [20]: https://www.gnu.org/software/libc/
 [21]: https://musl.libc.org/
+[22]: /containers/cluster_agent/admission_controller/
