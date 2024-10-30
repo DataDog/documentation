@@ -108,14 +108,21 @@ In the runner's connection, specify the location of the credential file on the p
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
 {
-        "auth_type": "Token Auth",
-        "credentials": [
-                {
-                        "username": "USERNAME",
-                        "token": "TOKEN",
-                        "domain": "DOMAIN"
-                }
-        ]
+  "auth_type": "Token Auth",
+  "credentials": [
+    {
+      "tokenName": "username",
+      "tokenValue": "USERNAME"
+    },
+    {
+      "tokenName": "token",
+      "tokenValue": "TOKEN"
+    },
+    {
+      "tokenName": "domain",
+      "tokenValue": "DOMAIN"
+    }
+  ]
 }
 {{< /code-block >}}
 
@@ -134,7 +141,8 @@ For the username credential, replace `USERNAME` with your username.
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "username": "USERNAME"
+                        "tokenName": "username",
+                        "tokenValue": "USERNAME"
                 }
         ]
 }
@@ -147,7 +155,8 @@ For the token credential, replace `TOKEN` with your token.
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "token": "TOKEN"
+                        "tokenName": "token",
+                        "tokenValue": "TOKEN"
                 }
         ]
 }
@@ -160,7 +169,8 @@ For the domain credential, replace `DOMAIN` with your domain.
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "domain": "DOMAIN"
+                        "tokenName": "domain",
+                        "tokenValue": "DOMAIN"
                 }
         ]
 }
