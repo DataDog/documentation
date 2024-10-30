@@ -350,7 +350,7 @@ typesense_sync_live:
  dependencies:
    - build_live
  script:
-   - yarn add typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.4.tgz
+   - yarn add typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.6.tgz
    - >
      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
