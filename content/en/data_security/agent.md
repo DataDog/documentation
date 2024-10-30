@@ -109,6 +109,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 ```
 {{% /tab %}}
 {{< /tabs >}}
+[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
 {{< /site-region >}}
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
@@ -127,49 +128,58 @@ agent_telemetry:
 ```bash
 DD_AGENT_TELEMETRY_ENABLED=false
 ```
-[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
 {{% /tab %}}
 {{< /tabs >}}
 
 **Telemetry content:**
 
-`Metadata` ([source code][1])
-- Machine id
-- Machine name
-- OS
-- OS version
-- Agent version
+| Metadata      |
+| ------------- |
+| Machine id    |
+| Machine name  |
+| OS            |
+| OS version    |
+| Agent version |
+([source code][1])
 
-| Month | Savings |
-| -------- | ------- |
-| January | $250 |
-| February | $80 |
-| March | $420 |
 
-`Metrics` ([source code][2])
-- checks.execution_time
-- pymem.inuse, pymem.alloc
-- api_server.request_duration_seconds
-- logs.decoded, logs.processed
-- logs.sender_latency, logs.bytes_missed
-- logs.sent, logs.dropped
-- logs.bytes_sent, logs.encoded_bytes_sent
-- dogstatsd.udp_packets
-- dogstatsd.uds_packets
-- transactions.input_count, transactions.requeued
-- transactions.retries
-- point.sent, point.dropped
-- oracle.activity_samples_count, oracle.activity_latency
-- oracle.statement_metrics, oracle.statement_plan_errors
-- postgres.collect_relations_autodiscovery_ms
-- postgres.collect_stat_autodiscovery_ms
-- postgres.get_new_pg_stat_activity_ms
-- postgres.get_new_pg_stat_activity_count
-- postgres.get_active_connections_ms
-- postgres.get_active_connections_count
-- postgres.collect_activity_snapshot_ms
-- postgres.collect_statement_samples_ms
-- postgres.collect_statement_samples_count
+| Metrics                                     | Description                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| checks.execution_time                       | Check's execution time in milliseconds                                                            |
+| pymem.inuse                                 | Number of bytes currently allocated by the python interpreter                                     |
+| pymem.alloc                                 | Total number of bytes allocated by the python interpreter since the start of the agent            |
+| api_server.request_duration_seconds         | Total number of bytes allocated by the python interpreter since the start of the agent            |
+| logs.decoded, logs.processed                | CLI commands execution performance (if executed)                                                  |
+| logs.sender_latency                         | Http sender latency in ms                                                                         |
+| logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the agent, such as after log rotation |
+| logs.sent                                   | Total number of sent logs                                                                         |
+| logs.dropped                                | Total number of logs dropped                                                                      |
+| logs.bytes_sent                             | Total number of bytes send before encoding if any                                                 |
+| logs.encoded_bytes_sent                     | Total number of sent bytes after encoding if any                                                  |
+| dogstatsd.udp_packets                       | Dogstatsd UDP packets bytes                                                                       |
+| dogstatsd.uds_packets                       | Dogstatsd UDS packets bytes                                                                       |
+| transactions.input_count                    | Incoming transaction count                                                                        |
+| transactions.requeued                       | Transaction requeue count                                                                         |
+| transactions.retries                        | Transaction retry count                                                                           |
+| point.sent                                  | Total number of sent metrics                                                                      |
+| point.dropped                               | Total number of dropped metrics                                                                   |
+| oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)         |
+| oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                   |
+| oracle.statement_metrics                    | Time to retrieve database metrics  in milliseconds                                                |
+| oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
+| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in ms                                                    |
+| postgres.collect_stat_autodiscovery_ms      | Time to collect autodiscovery stats in ms                                                         |
+| postgres.get_new_pg_stat_activity_ms        | Time to get pg_stat_activity in ms                                                                |
+| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect pg_stat_activity                                                    |
+| postgres.get_active_connections_ms          | Time to get active connections in ms                                                              |
+| postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
+| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in ms                                                               |
+| postgres.collect_statement_samples_ms       | Time to get statement samples in ms                                                               |
+| postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
+([source code][2])
+
+Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics will be emitted.
+
 
 [1]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/sender.go#L217-L221
 [2]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/config.go#L156
