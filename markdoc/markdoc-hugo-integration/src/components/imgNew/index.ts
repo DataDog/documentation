@@ -16,6 +16,9 @@ export const imgNewDefinition = {
     href: {
       type: String
     },
+    target: {
+      type: String
+    },
     style: {
       type: String
     },
