@@ -12,13 +12,15 @@ further_reading:
   text: "Set alert conditions"
 ---
 
+<div class="alert alert-info">Status Graphs is part of the <a href="monitors/status/status_page">provisional Monitor Status Page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
+
 ## Overview
 
 The graphs on the monitor status page provide insights into your monitor's performance and any changes it has undergone. These graphs help you to understand why your monitor might be in an ALERT state and where to focus your troubleshooting efforts.
 
 ## Monitor metadata
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/graphs_metadata.png" alt="Monitor metadata section on the right side of the status page." style="width:100%;" >}}
 
 The right panel of the graph section of the monitor status page provides a high level overview of your monitor including
 
@@ -37,7 +39,7 @@ The right panel of the graph section of the monitor status page provides a high 
 
 Depending on the query, the monitor might have multiple groups. To focus on a specific group, use the filter dropdowns to select the desired group.
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/graphs_filter_by_group_status.png" alt="Example monitor status page filtered by the Alert status template variable" style="width:100%;" >}}
 
 You can chose to scope the page on:
 
@@ -50,15 +52,17 @@ Muted state
 Group tags
 : Only groups that have the selected tag will be shown.
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+## Evaluated data graph
+
+{{< img src="/monitors/status/graphs/graph_evaluated_data_graph.png" alt="Hover over the line of an evaluated data graph to see the single value." style="width:100%;" >}}
 
 The evaluation graph is specific to the monitor and displays the single values compared to the threshold, aggregated from the query's series of points. For example, if the monitor evaluates the average of the query over the last 5 minutes, each datapoint shows the metric's average value for those 5 minutes. 
 
 It matches your monitor's configuration to accurately show the monitor's status using evaluations settings and the monitor's current status.
 
-## Source Data graph
+## Source data graph
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/graphs_source_data.png" alt="Status page displaying the source data graph" style="width:100%;" >}}
 
 The source graph shows the raw data points submitted to Datadog, used to generate the monitor evaluations. Use this graph to view unaltered data over time and confirm if data fluctuations or anomalies trigger alerts.
 
@@ -72,13 +76,13 @@ The following monitor types are not supported by the provisional status page:
 
 ## In Groups
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/in_groups_graph.png" alt="Status page displaying the In Groups graph" style="width:100%;" >}}
 
 The In Groups graph displays your monitor's state transitions over time, broken out by group. It shows which groups are triggering the alert.
 
 ### Non reporting
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/in_groups_non_reporting.png" alt="In Groups graph showing non reporting data" style="width:100%;" >}}
 
 Datadog keeps monitor groups in the UI for 24 hours unless configured differently. For more information, see [Group Retention time][1]. A dotted line in the graph can indicate: 
 
