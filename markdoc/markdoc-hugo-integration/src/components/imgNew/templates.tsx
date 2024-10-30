@@ -25,7 +25,7 @@ type ImgTagAttrs = {
 };
 
 /**
- * Top-level template for the img tag.
+ * The top-level template used to render the img tag.
  */
 export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) => {
   const { attrs, hugoConfig } = props;
@@ -118,28 +118,38 @@ function Picture(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
 
   const pictureProps: Record<string, any> = {
-    className: 'img-fluid',
     srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format'
+  };
+
+  const imgProps: Record<string, any> = {
+    className: 'img-fluid'
   };
 
   if (attrs.style) {
     pictureProps.style = cssStringToObject(attrs.style);
+    imgProps.style = cssStringToObject(attrs.style);
   }
 
   if (attrs.alt) {
-    pictureProps.alt = attrs.alt;
+    imgProps.alt = attrs.alt;
   }
 
+  // If the image is not wide,
+  // add width and height attributes where they are provided
   if (!attrs.wide) {
     if (attrs.width) {
-      pictureProps.width = attrs.width;
+      imgProps.width = attrs.width;
     }
     if (attrs.height) {
-      pictureProps.height = attrs.height;
+      imgProps.height = attrs.height;
     }
   }
 
-  return <picture {...pictureProps} />;
+  return (
+    <picture {...pictureProps}>
+      <img {...imgProps} />
+    </picture>
+  );
 }
 
 function Gif(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
@@ -163,11 +173,18 @@ function Gif(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
 
 // Wrapper components ---------------------------------------------------------
 
+/**
+ * A wrapper component for img tags that have an href attribute.
+ */
 function LinkWrappedImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
 
+  if (!attrs.href) {
+    throw new Error('LinkWrappedImage component requires an href attribute.');
+  }
+
   const linkProps: Record<string, string> = {
-    href: attrs.href!
+    href: attrs.href
   };
 
   if (attrs.target) {
@@ -191,6 +208,9 @@ function LinkWrappedImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig })
   }
 }
 
+/**
+ * A wrapper component for images that open in a popup modal.
+ */
 function PopUpLink(props: {
   children: React.ReactNode;
   attrs: ImgTagAttrs;
@@ -219,6 +239,9 @@ function PopUpLink(props: {
   );
 }
 
+/**
+ * A wrapper component for images that should be wrapped in a figure element.
+ */
 function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
   let wrapperClass = 'shortcode-wrapper shortcode-img expand';
   let figureClass = 'text-center';
