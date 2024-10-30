@@ -4,7 +4,7 @@ stages:
   - post-deploy
   - cleanup
 
-# set pipeline type for merge queue 
+# set pipeline type for merge queue
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
@@ -120,7 +120,7 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN 
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
       when: on_success
 
 .if_mergequeue: &if_mergequeue
