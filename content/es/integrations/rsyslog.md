@@ -3,7 +3,7 @@ aliases:
 - /es/logs/log_collection/rsyslog
 categories:
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 description: Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.

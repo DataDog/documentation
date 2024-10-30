@@ -2,7 +2,7 @@
 categories:
 - cloud
 - red
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Recopila eventos de la plataforma Salesforce en tiempo real como logs
   de Datadog.

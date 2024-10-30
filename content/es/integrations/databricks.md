@@ -22,7 +22,7 @@ categories:
 - nube
 - gestión de costos
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
 display_on_public_website: true

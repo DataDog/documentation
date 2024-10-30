@@ -5,7 +5,7 @@ categories:
 - nube
 - recopilación de logs
 - la red
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Reúne tus logs de Amazon VPC.
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/

@@ -5,7 +5,7 @@ categories:
 - nube de Google
 - colección de logs
 - orquestación
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Recopila métricas, trazas (traces) y logs de todo tus clústeres y analízalos
   en Datadog.

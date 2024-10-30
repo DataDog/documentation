@@ -6,7 +6,7 @@ categories:
 - rastreo de problemas
 - suministrar
 - control de fuentes
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrea las métricas principales de Azure DevOps.
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
