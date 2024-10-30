@@ -92,7 +92,7 @@ For more information, see the [Secrets Management][18] documentation.
 
 {{< site-region region="gov" >}}
 
-Datadog on non-government sites will collect environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or [FIPS][1] is used the Agent will automatically disable this telemetry collection. When such detection is impossible (such as, for example, if a proxy is being used) Agent telemetry will be emitted but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place we recommend disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or [FIPS][1] is used the Agent automatically disable this telemetry collection. When such detection is impossible (such as, for example, if a proxy is being used) Agent telemetry will be emitted but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place we recommend disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
@@ -146,7 +146,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | Metrics                                     | Description                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | checks.execution_time                       | Check's execution time in milliseconds                                                            |
-| pymem.inuse                                 | Number of bytes currently allocated by the python interpreter                                     |
+| pymem.inuse                                 | Number of bytes allocated by the python interpreter                                               |
 | pymem.alloc                                 | Total number of bytes allocated by the python interpreter since the start of the agent            |
 | api_server.request_duration_seconds         | Total number of bytes allocated by the python interpreter since the start of the agent            |
 | logs.decoded, logs.processed                | CLI commands execution performance (if executed)                                                  |
@@ -165,7 +165,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | point.dropped                               | Total number of dropped metrics                                                                   |
 | oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)         |
 | oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                   |
-| oracle.statement_metrics                    | Time to retrieve database metrics  in milliseconds                                                |
+| oracle.statement_metrics                    | Time to retrieve database metrics in milliseconds                                                 |
 | oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
 | postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in ms                                                    |
 | postgres.collect_stat_autodiscovery_ms      | Time to collect autodiscovery stats in ms                                                         |
@@ -178,7 +178,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
 ([source code][2])
 
-Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics will be emitted.
+Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics are emitted.
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/sender.go#L217-L221
