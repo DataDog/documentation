@@ -80,27 +80,32 @@ type ImgTagAttrs = {
   pop_param?: string;
   figure_class?: string;
   figure_style?: string;
+  href?: string;
 };
 
 // DONE
 function InlineImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
 
-  let imageStyle = {};
+  const imgProps: Record<string, any> = {
+    srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format'
+  };
+
   if (attrs.style) {
-    imageStyle = cssStringToObject(attrs.style);
+    imgProps.style = cssStringToObject(attrs.style);
   }
 
-  const srcSet = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
+  // Add any additional attributes that the author provided
+  // to the img properties
+  (['alt', 'width', 'height'] as (keyof ImgTagAttrs)[]).forEach((key) => {
+    if (attrs[key]) {
+      imgProps[key] = attrs[key];
+    }
+  });
 
   return (
     <Figure attrs={attrs}>
-      <img
-        srcSet={srcSet}
-        style={imageStyle}
-        width={attrs.width || 'auto'}
-        height={attrs.height || 'auto'}
-      />
+      <img {...imgProps} />
     </Figure>
   );
 }
@@ -109,63 +114,74 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
   console.log('Rendering ImgTemplate');
   const { attrs, hugoConfig } = props;
 
-  const permalink = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
-
-  let imageStyle = {};
-  if (attrs.style) {
-    imageStyle = cssStringToObject(attrs.style);
-  }
-
-  const isPopup = attrs.popup;
-  const isVideo = attrs.video;
-  const isInlineImage = !attrs.video && attrs.inline;
-  const isBlockDisplayImage = !attrs.video && !attrs.inline;
   const isGif = attrs.src.split('.')[1] === 'gif';
 
-  return (
-    <>
-      {isVideo && <Video attrs={attrs} permalink={permalink} />}
+  if (attrs.video) {
+    return <Video attrs={attrs} hugoConfig={hugoConfig} />;
+  }
 
-      {isInlineImage && <InlineImage />}
+  if (attrs.inline) {
+    return <InlineImage attrs={attrs} hugoConfig={hugoConfig} />;
+  }
 
-      {isBlockDisplayImage && (
-        <>
-          {isPopup && !isGif && (
-            <>
-              <PopUpLink href="TODO" attrs={attrs}>
-                <Gif attrs={attrs} src="TODO" />
-              </PopUpLink>
-            </>
-          )}
-        </>
-      )}
-    </>
-  );
+  if (attrs.popup && !isGif) {
+    return (
+      <PopUpLink attrs={attrs} hugoConfig={hugoConfig}>
+        <Picture attrs={attrs} hugoConfig={hugoConfig} />
+      </PopUpLink>
+    );
+  }
+
+  if (attrs.href) {
+    if (isGif) {
+      return <Gif attrs={attrs} hugoConfig={hugoConfig} />;
+    } else {
+      return <Picture attrs={attrs} hugoConfig={hugoConfig} />;
+    }
+  }
+
+  if (isGif) {
+    return <Gif attrs={attrs} hugoConfig={hugoConfig} />;
+  } else {
+    return <Picture attrs={attrs} hugoConfig={hugoConfig} />;
+  }
 };
 
 // src is resolved with {{ (print $img_resource | safeURL) }}
-function Gif(props: { attrs: ImgTagAttrs; src: string }) {
-  const style = props.attrs.style ? cssStringToObject(props.attrs.style) : {};
-  return (
-    <img
-      className="img-fluid"
-      src={props.src}
-      style={style}
-      alt={props.attrs.alt || ''}
-    />
-  );
+// TODO: When is auto=format added to the src?
+function Gif(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
+  const { attrs, hugoConfig } = props;
+
+  const imgProps: Record<string, any> = {
+    className: 'img-fluid',
+    src: buildImagePermalink({ src: props.attrs.src, hugoConfig }) + '?auto=format'
+  };
+
+  if (attrs.style) {
+    imgProps.style = cssStringToObject(attrs.style);
+  }
+
+  if (attrs.alt) {
+    imgProps.alt = attrs.alt;
+  }
+
+  return <img {...imgProps} />;
 }
 
 // TODO: href should be resolved with "{{ print $img_resource $pop_param | relURL }}"
 function PopUpLink(props: {
   children: React.ReactNode;
-  href: string;
   attrs: ImgTagAttrs;
+  hugoConfig: HugoConfig;
 }) {
-  const { attrs, children, href } = props;
+  const { attrs, children } = props;
 
   const isGif = attrs.src.split('.')[1] === 'gif';
   const popParam = attrs.pop_param || (isGif ? '?fit=max' : '?fit=max&auto=format');
+
+  // TODO, make this a relative URL: {{ print $img_resource $pop_param | relURL }}
+  const href =
+    buildImagePermalink({ src: attrs.src, hugoConfig: props.hugoConfig }) + popParam;
 
   return (
     <a
@@ -203,6 +219,34 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
   );
 }
 
+function Picture(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
+  const { attrs, hugoConfig } = props;
+
+  const pictureProps: Record<string, any> = {
+    className: 'img-fluid',
+    srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format'
+  };
+
+  if (attrs.style) {
+    pictureProps.style = cssStringToObject(attrs.style);
+  }
+
+  if (attrs.alt) {
+    pictureProps.alt = attrs.alt;
+  }
+
+  if (!attrs.wide) {
+    if (attrs.width) {
+      pictureProps.width = attrs.width;
+    }
+    if (attrs.height) {
+      pictureProps.height = attrs.height;
+    }
+  }
+
+  return <picture {...pictureProps} />;
+}
+
 /**
 Link logic:
 
@@ -212,16 +256,10 @@ Link logic:
 {{- $img := (print .Site.Params.img_url "images/" $src) -}}
 // STOP IF VIDEO, use the above as the src - DONE
 
-
-
-
 // 2
 // Create the image resource (I think this is just the image URL adapted for staging)
 
 {{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}
-
-
-
 
 // 3
 // Set img_param and pop_param as variables
@@ -245,14 +283,26 @@ Link logic:
 {{- $img_param := $.Scratch.Get "img_param" -}}
 {{- $pop_param := $.Scratch.Get "pop_param" -}}
 
-
 // 4
 // Make a variable called e for ... reasons
 
 {{ $e := (print $img_resource "?auto=format" | safeURL) }}
-- STOP if inline image, use the above as the srcSet attr
+- STOP if inline image, use the above as the srcSet attr - DONE
 
+// 5
+// If a block display image that IS a popup and IS NOT a gif, build the popup link
+// href="{{ print $img_resource $pop_param | relURL }}"
 
+// 6
+// If it's NOT a popup, but there is an href, wrap the image in an anchor tag
+<a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
+{{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
+
+// 7
+// If it's wide, set e:
+// {{ $e := (print $img_resource "?auto=format" safeURL) }}
+// If it's a gif, use e as the src
+// If it's not a gif, use e as the srcset
 
  */
 
@@ -346,14 +396,17 @@ Link logic:
     // if it's not a video, wrap it in a popup link
     {{- else -}}
     
+      // LINK LOGIC 5
       {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
       <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
 
+      // LINK LOGIC 6
       {{- else if .Get "href" -}}
         <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
           {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
       {{- end -}}
 
+  // LINK LOGIC 7
   {{- if $wide -}}
     {{ $e := (print $img_resource "?auto=format" safeURL) }}
 
@@ -370,7 +423,7 @@ Link logic:
   {{- else -}}
       {{ $e := (print $img_resource "?auto=format" | safeURL) }}
       {{- if eq $image_ext "gif" -}}
-          <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+        <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
       {{- else -}}
         <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
           <img 

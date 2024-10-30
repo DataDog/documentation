@@ -13,6 +13,9 @@ export const imgNewDefinition = {
     alt: {
       type: String
     },
+    href: {
+      type: String
+    },
     style: {
       type: String
     },
