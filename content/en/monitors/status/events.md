@@ -40,19 +40,14 @@ With Quick Actions, you can take action without leaving the Status page. Respond
 
 ## Event troubleshooting section
 
+{{< img src="/monitors/status/events/event_troubleshooting.png" alt="Event troubleshooting with an example dependency map" style="width:100%;" >}}
+
 For each event, access troubleshooting information to help responders quickly understand the context of the alert.
 
-### Workflow History
+| Troubleshooting component     | Description    | 
+| ---  | ----------- | 
+| Dependency Map | When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies. |
 
-The history of the workflow executed in response to the alert is displayed.
-
-### Dependency Map
-
-When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies.
-
-### Case Management
-
-Automatically create a case with the `@case-project` handle, or open one manually from the monitor status page to investigate a monitor alert. When a case is created, you can find related cases and navigate to the case management page for more details.
 
 ## Further reading
 
