@@ -1,6 +1,5 @@
 import { describe, test, expect } from 'vitest';
 import { HugoFunctions } from '../../src/helperModules/HugoFunctions';
-import _ from 'lodash';
 
 describe('HugoFunctions.relUrl', () => {
   test('handles all example inputs correctly for a simple base URL', () => {
@@ -22,7 +21,7 @@ describe('HugoFunctions.relUrl', () => {
       ])
     );
 
-    expect(_.isEqual(expectedOutputByInput, actualOutputByInput)).toBe(true);
+    expect(expectedOutputByInput).toEqual(actualOutputByInput);
   });
 
   test('handles all example inputs correctly for a base URL with a path', () => {
@@ -45,6 +44,6 @@ describe('HugoFunctions.relUrl', () => {
       ])
     );
 
-    expect(_.isEqual(expectedOutputByInput, actualOutputByInput)).toBe(true);
+    expect(expectedOutputByInput).toEqual(actualOutputByInput);
   });
 });

@@ -20,7 +20,8 @@ describe('MarkdocHugoIntegration', () => {
         img_url: 'https://example.com'
       },
       env: 'development',
-      languages: ['en']
+      languages: ['en'],
+      baseUrl: 'https://example.com'
     }
   });
 
