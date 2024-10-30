@@ -177,8 +177,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics are emitted.
 
 
-[1]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/sender.go#L217-L221
-[2]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/config.go#L156
+[1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
+[2]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/config.go#L156
 
 {{< /site-region >}}
 
