@@ -132,17 +132,15 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 
 **Telemetry content:**
-([metadata source code][1])
-| Metadata      |
-| ------------- |
-| Machine id    |
-| Machine name  |
-| OS            |
-| OS version    |
-| Agent version |
+| Metadata ([source][1]) |
+| ---------------------- |
+| Machine id             |
+| Machine name           |
+| OS                     |
+| OS version             |
+| Agent version          |
 
-([list metrics source code][2])
-| Metrics                                     | Description                                                                                       |
+| Metrics ([source][2])                       | Description                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | checks.execution_time                       | Check's execution time in milliseconds                                                            |
 | pymem.inuse                                 | Number of bytes allocated by the python interpreter                                               |
