@@ -1,24 +1,6 @@
 import { HugoConfig } from '../../schemas/hugoConfig';
 import md5 from 'md5';
 
-class HugoUtils {
-  static isAbsUrl(path: string): boolean {
-    if (path.startsWith('http://') || path.startsWith('https://')) {
-      return true;
-    }
-    try {
-      new URL(path);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  static relUrl(path: string) {
-    const isAbs = this.isAbsUrl(path);
-  }
-}
-
 function buildImagePermalink(props: { src: string; hugoConfig: HugoConfig }) {
   const { src, hugoConfig } = props;
 
@@ -114,15 +96,18 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
   console.log('Rendering ImgTemplate');
   const { attrs, hugoConfig } = props;
 
-  const isGif = attrs.src.split('.')[1] === 'gif';
-
+  // Handle videos
   if (attrs.video) {
     return <Video attrs={attrs} hugoConfig={hugoConfig} />;
   }
 
+  // Handle inline images
   if (attrs.inline) {
     return <InlineImage attrs={attrs} hugoConfig={hugoConfig} />;
   }
+
+  // Handle block-display images
+  const isGif = attrs.src.split('.')[1] === 'gif';
 
   if (attrs.popup && !isGif) {
     return (
