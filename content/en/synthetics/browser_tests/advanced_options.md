@@ -76,7 +76,7 @@ In some cases, such as in the event of a pop-up, you may want to make some steps
 
 Configure this option to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure.
 
-{{< img src="synthetics/browser_tests/advanced_options/success_exit.png" alt="Exit on success" style="width:50%">}}
+{{< img src="synthetics/browser_tests/advanced_options/exit_on_success_browser.png" alt="Exit on success" style="width:50%">}}
 
 ## Prevent screenshot capture
 

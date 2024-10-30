@@ -1321,9 +1321,9 @@ menu:
       url: dashboards/sharing/
       parent: dashboards
       weight: 10
-    - name: Public Dashboards
-      identifier: dashboards_sharing_public_dashboards
-      url: dashboards/sharing/public_dashboards
+    - name: Shared Dashboards
+      identifier: dashboards_sharing_shared_dashboards
+      url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1001
     - name: Share Graphs
@@ -2134,11 +2134,16 @@ menu:
       parent: incidents
       identifier: incident_notification
       weight: 3
-    - name: Incident Details
-      url: service_management/incident_management/incident_details
+    - name: Investigate an Incident
+      url: service_management/incident_management/investigate
       parent: incidents
-      identifier: incident_details
+      identifier: incident_investigate
       weight: 4
+    - name: Timeline
+      url: service_management/incident_management/investigate/timeline
+      parent: incident_investigate
+      identifier: incident_investigate_timeline
+      weight: 401
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
@@ -2852,16 +2857,26 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_installation
       weight: 201
+    - name: Merge Step Functions and Lambda Traces
+      url: serverless/step_functions/merge-step-functions-lambda
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_merge_lambda_traces
+      weight: 202
     - name: Enhanced Metrics
       url: serverless/step_functions/enhanced-metrics
       parent: serverless_step_functions
       identifier: serverless_step_functions_enhanced_metrics
-      weight: 202
+      weight: 203
+    - name: Redrive Executions
+      url: serverless/step_functions/redrive
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_redrive
+      weight: 204
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 203
+      weight: 205
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
@@ -3968,7 +3983,7 @@ menu:
       url: llm_observability/configuration/
       parent: llm_obs
       identifier: llm_obs_configuration
-      weight: 4    
+      weight: 4
     - name: Submit Evaluations
       url: llm_observability/submit_evaluations/
       parent: llm_obs
@@ -4952,70 +4967,70 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_processors
       weight: 7
+    - name: Add Environment Variables
+      url: observability_pipelines/processors/add_environment_variables
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_add_environment_variables
+      weight: 701
     - name: Add hostname
       url: observability_pipelines/processors/add_hostname
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
-      weight: 701
+      weight: 702
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 702
+      weight: 703
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 703
+      weight: 704
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 704
+      weight: 705
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 705
+      weight: 706
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 706
+      weight: 707
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 707
+      weight: 708
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 708
+      weight: 709
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 709
+      weight: 710
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 710
+      weight: 711
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 711
+      weight: 712
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 712
-    - name: Set Environment Variables
-      url: observability_pipelines/processors/set_environment_variables
-      parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_set_environment_variables
       weight: 713
     - name: Destinations
       url: observability_pipelines/destinations/
@@ -5158,7 +5173,7 @@ menu:
       parent: log_collection
       identifier: log_collection_java
       weight: 110
-    - name: NodeJS
+    - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
@@ -5344,6 +5359,11 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
+    - name: Time Selection
+      url: logs/workspaces/time_selection/
+      parent: logs_workspaces
+      identifier: logs_workspaces_time_selection
+      weight: 601
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
