@@ -39,19 +39,7 @@ const adapterOptions = {
         cacheSearchResultsForSeconds: 2 * 60
     },
     additionalSearchParameters: {
-        //preset: 'docs_alias_view'
-        query_by: "tags,title,section_header,content",
-        group_by: "distinct_base_url",
-        group_limit: 1,
-        query_by_weights: "4,3,2,2",
-        //prefix: "false,false,false,false",
-        //infix: "off",
-        //sort_by: "rank:desc,order:asc,_text_match:desc",
-        //sort_by: "_group_found:desc",
-        //prioritize_token_position: true,
-        //text_match_type: "max_score",
-        //prioritize_num_matching_fields: "true",
-        //pre_segmented_query: true
+        preset: 'docs_alias_view'
     }
 };
 const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterOptions);
