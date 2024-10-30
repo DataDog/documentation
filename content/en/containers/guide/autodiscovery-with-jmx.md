@@ -220,7 +220,7 @@ This configuration file should include `ad_identifiers`:
 
 ```yaml
 ad_identifiers:
-  - "<SHORT_IMAGE>"
+  - <CONTAINER_IMAGE>
 
 init_config:
   is_jmx: true
@@ -232,7 +232,7 @@ instances:
     port: "<JMX_PORT>"
 ```
 
-Replace `<SHORT_IMAGE>` with the short image name of your desired container. For example, the container image `gcr.io/CompanyName/my-app:latest` has a short image name of `my-app`. As the Datadog Agent discovers that container, it sets up the JMX configuration as described in this file.
+Replace `<CONTAINER_IMAGE>` with the short image name of your desired container. For example, the container image `gcr.io/CompanyName/my-app:latest` has a short image name of `my-app`. As the Datadog Agent discovers that container, it sets up the JMX configuration as described in this file.
 
 You can alternatively reference and specify [custom identifiers to your containers][4] if you do not want to base this on the short image name.
 
@@ -261,7 +261,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - "<SHORT_IMAGE>"
+              - <CONTAINER_IMAGE>
 
             init_config:
               is_jmx: true
@@ -281,7 +281,7 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |
       ad_identifiers:
-        - "<SHORT_IMAGE>"
+        - <CONTAINER_IMAGE>
 
       init_config:
         is_jmx: true
