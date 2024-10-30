@@ -26,7 +26,7 @@ The following configuration options behave consistently across multiple Datadog 
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
-**Supported Input**: A positive integer
+**Supported Input**: A positive integer<br>
 **Description**: Sets the maximum number of traces to sample per second; applies only when either `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set.
 
 `DD_TRACE_HEADER_TAGS`
