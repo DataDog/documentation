@@ -108,8 +108,8 @@ In the runner's connection, specify the location of the credential file on the p
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
 {
-  "auth_type": "Token Auth",
-  "credentials": [
+        "auth_type": "Token Auth",
+        "credentials": [
                 {
                         "tokenName": "username",
                         "tokenValue": "USERNAME"
