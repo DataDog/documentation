@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Test Impact Analysis is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
+Test Impact Analysis automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
 
 {{< img src="continuous_integration/itr_savings.png" alt="Test Impact Analysis enabled in a test session showing its time savings.">}}
 
