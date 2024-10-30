@@ -1,3 +1,5 @@
+import { HugoConfig } from '../schemas/hugoConfig';
+
 /**
  * The Markdoc-Hugo integration's tag templates (shortcode templates)
  * don't have access to the same functions available
@@ -17,15 +19,15 @@ export class HugoFunctions {
     }
   }
 
-  static relUrl(base: string, urlToConvert: string): string {
-    const baseUrl = new URL(base);
+  static relUrl(p: { hugoConfig: HugoConfig; url: string }): string {
+    const baseUrl = new URL(p.hugoConfig.baseURL);
     let resultUrl: string;
 
-    if (urlToConvert.startsWith('/')) {
+    if (p.url.startsWith('/')) {
       // If the input URL starts with a slash, make it relative to the protocol+host of the base URL
-      resultUrl = urlToConvert;
-    } else if (this.isAbsUrl(urlToConvert)) {
-      const fullUrl = new URL(urlToConvert);
+      resultUrl = p.url;
+    } else if (this.isAbsUrl(p.url)) {
+      const fullUrl = new URL(p.url);
       if (fullUrl.origin === baseUrl.origin) {
         resultUrl = fullUrl.pathname + fullUrl.search + fullUrl.hash;
       } else {
@@ -34,7 +36,7 @@ export class HugoFunctions {
         );
       }
     } else {
-      resultUrl = new URL(urlToConvert, baseUrl).pathname;
+      resultUrl = new URL(p.url, baseUrl).pathname;
     }
 
     // Ensure the result URL starts with a slash

@@ -21,7 +21,7 @@ describe('MarkdocHugoIntegration', () => {
       },
       env: 'development',
       languages: ['en'],
-      baseUrl: 'https://example.com'
+      baseURL: 'https://example.com'
     }
   });
 

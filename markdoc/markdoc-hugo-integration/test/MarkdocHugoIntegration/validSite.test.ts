@@ -18,7 +18,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       },
       env: 'development',
       languages: ['en', 'ja', 'fr'],
-      baseUrl: 'https://example.com'
+      baseURL: 'https://example.com'
     }
   });
 

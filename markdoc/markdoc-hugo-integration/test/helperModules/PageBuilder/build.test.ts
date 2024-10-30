@@ -46,7 +46,7 @@ describe('PageBuilder.build', () => {
       siteParams: { img_url: 'https://example.com' },
       env: 'development',
       languages: ['en'],
-      baseUrl: 'https://example.com'
+      baseURL: 'https://example.com'
     },
     prefsManifest
   });

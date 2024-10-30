@@ -24,7 +24,7 @@ const mockHugoConfig: HugoConfig = {
   },
   env: 'development',
   languages: ['en'],
-  baseUrl: 'https://www.datadoghq.com'
+  baseURL: 'https://www.datadoghq.com'
 };
 
 class Alert extends CustomHtmlComponent {
