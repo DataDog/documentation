@@ -38,7 +38,7 @@ Flakiness Identification
 
 Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the default branch:
 
-{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
+{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
 
 You can choose to block the merge of the feature branch with a [Quality Gate][4]. For more information, see the [Quality Gates documentation][5].
 
