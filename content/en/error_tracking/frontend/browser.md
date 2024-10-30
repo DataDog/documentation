@@ -39,7 +39,7 @@ For more information, see the [Datadog Source Code Integration][14].
 
 ## List uploaded source maps
 
-See the [RUM Debug Symbols][15] page to view all uploaded symbols.
+See the [Debug Symbols][15] page to view all uploaded symbols.
 
 ### Limitations
 
