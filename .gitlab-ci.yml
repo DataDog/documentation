@@ -4,7 +4,7 @@ stages:
   - post-deploy
   - cleanup
 
-# set pipeline type for merge queue 
+# set pipeline type for merge queue
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
@@ -120,7 +120,7 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN 
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
       when: on_success
 
 .if_mergequeue: &if_mergequeue
@@ -314,7 +314,7 @@ typesense_sync_preview:manual:
     - >
       TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_preview_admin_api_key')
       TYPESENSE_HOST=$(get_secret 'typesense_preview_host')
-      yarn run typesense:sync:preview
+      yarn run typesense:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
@@ -350,11 +350,11 @@ typesense_sync_live:
  dependencies:
    - build_live
  script:
-   - yarn add typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.5.tgz
+   - yarn add typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.6.tgz
    - >
      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
-     yarn run typesense:sync:production
+     yarn run typesense:sync
 
 sourcemaps_preview:
   <<: *base_template
