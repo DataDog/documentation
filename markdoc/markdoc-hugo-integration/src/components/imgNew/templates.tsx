@@ -41,8 +41,10 @@ function cssStringToObject(css: string) {
   return result;
 }
 
-function Video(props: { attrs: ImgTagAttrs; permalink: string }) {
-  const { attrs, permalink } = props;
+// DONE
+function Video(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
+  const { attrs, hugoConfig } = props;
+  const src = `${hugoConfig.siteParams.img_url}images/${attrs.src}`;
 
   return (
     <Figure attrs={attrs}>
@@ -55,7 +57,7 @@ function Video(props: { attrs: ImgTagAttrs; permalink: string }) {
         loop
         controls
       >
-        <source src={permalink} type="video/mp4" media="(min-width: 0px)" />
+        <source src={src} type="video/mp4" media="(min-width: 0px)" />
         <div className="play"></div>
         <div className="pause"></div>
       </video>
@@ -80,53 +82,57 @@ type ImgTagAttrs = {
   figure_style?: string;
 };
 
-export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) => {
-  console.log('Rendering ImgTemplate');
+// DONE
+function InlineImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
-
-  const isPopup = attrs.popup;
-
-  const img = `${hugoConfig.siteParams.img_url}images/${attrs.src}`;
-  const permalink = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
-
-  const imageExt = attrs.src.split('.')[1];
-
-  // TODO: What does this get used for?
-  const imgixWidth = attrs.wide ? '1170' : '850';
-
-  const popParam =
-    attrs.pop_param || (imageExt === 'gif' ? '?fit=max' : '?fit=max&auto=format');
 
   let imageStyle = {};
   if (attrs.style) {
     imageStyle = cssStringToObject(attrs.style);
   }
 
+  const srcSet = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
+
+  return (
+    <Figure attrs={attrs}>
+      <img
+        srcSet={srcSet}
+        style={imageStyle}
+        width={attrs.width || 'auto'}
+        height={attrs.height || 'auto'}
+      />
+    </Figure>
+  );
+}
+
+export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) => {
+  console.log('Rendering ImgTemplate');
+  const { attrs, hugoConfig } = props;
+
+  const permalink = buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format';
+
+  let imageStyle = {};
+  if (attrs.style) {
+    imageStyle = cssStringToObject(attrs.style);
+  }
+
+  const isPopup = attrs.popup;
   const isVideo = attrs.video;
   const isInlineImage = !attrs.video && attrs.inline;
   const isBlockDisplayImage = !attrs.video && !attrs.inline;
-  const isGif = imageExt === 'gif';
+  const isGif = attrs.src.split('.')[1] === 'gif';
 
   return (
     <>
       {isVideo && <Video attrs={attrs} permalink={permalink} />}
 
-      {isInlineImage && (
-        <Figure attrs={attrs}>
-          <img
-            srcSet="TODO"
-            style={imageStyle}
-            width={attrs.width || 'auto'}
-            height={attrs.height || 'auto'}
-          />
-        </Figure>
-      )}
+      {isInlineImage && <InlineImage />}
 
       {isBlockDisplayImage && (
         <>
           {isPopup && !isGif && (
             <>
-              <PopUpLink href="TODO">
+              <PopUpLink href="TODO" attrs={attrs}>
                 <Gif attrs={attrs} src="TODO" />
               </PopUpLink>
             </>
@@ -151,15 +157,24 @@ function Gif(props: { attrs: ImgTagAttrs; src: string }) {
 }
 
 // TODO: href should be resolved with "{{ print $img_resource $pop_param | relURL }}"
-function PopUpLink(props: { children: React.ReactNode; href: string }) {
+function PopUpLink(props: {
+  children: React.ReactNode;
+  href: string;
+  attrs: ImgTagAttrs;
+}) {
+  const { attrs, children, href } = props;
+
+  const isGif = attrs.src.split('.')[1] === 'gif';
+  const popParam = attrs.pop_param || (isGif ? '?fit=max' : '?fit=max&auto=format');
+
   return (
     <a
-      href={props.href}
+      href={href}
       className="pop"
       data-bs-toggle="modal"
       data-bs-target="#popupImageModal"
     >
-      {props.children}
+      {children}
     </a>
   );
 }
@@ -188,6 +203,59 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
   );
 }
 
+/**
+Link logic:
+
+// 1
+// Resolve the image source
+
+{{- $img := (print .Site.Params.img_url "images/" $src) -}}
+// STOP IF VIDEO, use the above as the src - DONE
+
+
+
+
+// 2
+// Create the image resource (I think this is just the image URL adapted for staging)
+
+{{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}
+
+
+
+
+// 3
+// Set img_param and pop_param as variables
+
+{{- if .Get "img_param" | len -}}
+  {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
+{{- else -}}
+  {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
+{{- end -}}
+
+{{- if .Get "pop_param" | len -}}
+  {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
+{{- else -}}
+  {{- if eq $image_ext "gif" -}}
+     {{- $.Scratch.Add "pop_param" "?fit=max" -}}
+  {{- else -}}
+     {{- $.Scratch.Add "pop_param" "?fit=max&auto=format" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $img_param := $.Scratch.Get "img_param" -}}
+{{- $pop_param := $.Scratch.Get "pop_param" -}}
+
+
+// 4
+// Make a variable called e for ... reasons
+
+{{ $e := (print $img_resource "?auto=format" | safeURL) }}
+- STOP if inline image, use the above as the srcSet attr
+
+
+
+ */
+
 /*
 // DONE
 {{ if  not (.Get "src") }}
@@ -205,8 +273,11 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
 {{- $wide :=  .Get "wide" -}}
 {{- $video :=  .Get "video" -}}
 {{- $src := (.Get "src") -}}
+
+// LINK LOGIC 1
 {{- $img := (print .Site.Params.img_url "images/" $src) -}}
 
+// LINK LOGIC 2
 // DONE
 {{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}
 
@@ -221,6 +292,7 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
 {{- $imgix_w := $.Scratch.Get "imgix_w" -}}
 
 
+// LINK LOGIC 3
 // DONE
 {{- if .Get "img_param" | len -}}
   {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
@@ -228,6 +300,7 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
   {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
 {{- end -}}
 
+// LINK LOGIC 3
 // DONE
 {{- if .Get "pop_param" | len -}}
   {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
@@ -244,13 +317,14 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
 // DONE
 {{- $figure_class :=  .Get "figure_class" -}}
 
+// LINK LOGIC 4
 // DONE
 {{ $e := (print $img_resource "?auto=format" | safeURL) }}
 
 // NOT DONE
 {{- if not (eq $img_inline "true")}}
 
-  
+  // DONE
   <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
     // DONE
     {{- if $video -}}
@@ -329,7 +403,7 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
 
 {{- else -}}
 
-  // DONE
+  // DONE, inline image
   <img 
     srcset="{{ $e }}" 
     {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
