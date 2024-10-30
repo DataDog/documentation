@@ -281,6 +281,13 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "PatchDomainAllowlist": [
+    {
+      "group": "domain_allowlist",
+      "suffix": "",
+      "description": "Sets Domain Allowlist returns \"OK\" response"
+    }
+  ],
   "CreateDowntime": [
     {
       "group": "downtimes",
