@@ -69,7 +69,8 @@
                   {
                       "name": "docs_alias_view",
                       "search_parameters": {
-                          "query_by": "tags,title,content,section_header",
+                          "query_by": "tags,title,section_header,content",
+                          "query_by_weights": "4,3,2,2",
                           "group_by": "distinct_base_url",
                           "group_limit": 1
                       }
