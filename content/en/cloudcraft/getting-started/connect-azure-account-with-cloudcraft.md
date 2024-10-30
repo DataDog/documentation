@@ -43,9 +43,9 @@ Next, create a client secret to allow the Cloudcraft application to securely ide
 5. Copy the **Value** of your newly created secret.
 6. In Cloudcraft, paste the client secret in the **Client secret** field and click **Next**.
 
-#### Create an IAM user for Cloudcraft
+#### Create an IAM role assignment for Cloudcraft
 
-Finally, create an IAM user to allow the Cloudcraft application to read your Azure environment.
+Finally, add a role assignment to allow the Cloudcraft application to read your Azure environment.
 
 1. In Cloudcraft, click **Open your Azure Subscriptions page** link to open the **Subscriptions** page in Azure.
 2. Select the subscription you want to use with Cloudcraft.
