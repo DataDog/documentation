@@ -34,7 +34,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for Ruby][1]
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Test Impact Analysis enabled
+## Run tests with Test Impact Analysis enabled
 
 {{< tabs >}}
 
@@ -65,7 +65,7 @@ You can override the Test Impact Analysis's behavior and prevent specific tests 
 
 ### Why make tests unskippable?
 
-The Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
@@ -76,7 +76,7 @@ Examples include:
 * Tests that use forked processes (per test code coverage only collects coverage for the main process)
 * Integration tests that use capybara or selenium-webdriver
 
-Designating tests as unskippable ensures that the Test Impact Analysis runs them regardless of coverage data.
+Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 ### Marking tests as unskippable
 
@@ -118,7 +118,7 @@ end
 
 {{% /tab %}}
 {{% tab "Cucumber" %}}
-To mark an entire feature file as unskippable in Cucumber, use the `@datadog_itr_unskippable` tag. This prevents the Test Impact Analysis from skipping any of the scenarios defined in that feature file.
+To mark an entire feature file as unskippable in Cucumber, use the `@datadog_itr_unskippable` tag. This prevents Test Impact Analysis from skipping any of the scenarios defined in that feature file.
 
 To make only specific scenarios unskippable, apply this tag directly to the desired scenario.
 
@@ -172,9 +172,9 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-### Temporarily disabling the Test Impact Analysis
+### Temporarily disabling Test Impact Analysis
 
-The Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
+Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
 
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
 : Enable the Test Impact Analysis coverage and test skipping features<br />

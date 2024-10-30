@@ -47,7 +47,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for JavaScri
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Test Impact Analysis enabled
+## Run tests with Test Impact Analysis enabled
 
 {{< tabs >}}
 
@@ -88,14 +88,14 @@ You can override the Test Impact Analysis behavior and prevent specific tests fr
 
 ### Why make tests unskippable?
 
-The Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 
-Designating tests as unskippable ensures that the Test Impact Analysis runs them regardless of coverage data.
+Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 ### Marking tests as unskippable
 

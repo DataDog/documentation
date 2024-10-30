@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: "/intelligent_test_runner"
   tag: "Documentation"
-  text: "Learn about the Test Impact Analysis"
+  text: "Learn about Test Impact Analysis"
 ---
 
 {{< site-region region="gov" >}}
@@ -35,7 +35,7 @@ Test Impact Analysis only takes into account the commit history and test code co
 
 ### Collecting coverages on GitHub Actions CI triggered by pull request events
 
-Tests run in GitHub Actions CI using the [`pull_request` trigger][5] may not be skipped on subsequent commits within the pull request's branch. The trigger introduces changes using a new merge commit that is not considered by the Test Impact Analysis.
+Tests run in GitHub Actions CI using the [`pull_request` trigger][5] may not be skipped on subsequent commits within the pull request's branch. The trigger introduces changes using a new merge commit that is not considered by Test Impact Analysis.
 
 ### Squash and merge your commits
 

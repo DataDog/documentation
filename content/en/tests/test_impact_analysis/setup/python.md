@@ -41,7 +41,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for Python][
 
 ### Required dependencies
 
-The Test Impact Analysis requires the [`coverage` package][2].
+Test Impact Analysis requires the [`coverage` package][2].
 
 Install the package in your CI test environment by specifying it in the relevant requirements file, for example, or using `pip`:
 
@@ -51,9 +51,9 @@ pip install coverage
 
 See [known limitations](#known-limitations) if you are already using the `coverage` package or a plugin like `pytest-cov`.
 
-## Running tests with the Test Impact Analysis enabled
+## Running tests with Test Impact Analysis enabled
 
-The Test Impact Analysis is enabled when you run tests with the Datadog integration active. Run your tests with the following command:
+Test Impact Analysis is enabled when you run tests with the Datadog integration active. Run your tests with the following command:
 
 {{< tabs >}}
 
@@ -75,15 +75,15 @@ DD_ENV=ci DD_SERVICE=my-python-app ddtrace-run python -m unittest
 
 {{< /tabs >}}
 
-### Temporarily disabling the Test Impact Analysis
+### Temporarily disabling Test Impact Analysis
 
-The Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
+Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
 
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
-: Enable the Test Impact Analysis coverage and test skipping features<br />
+: Enable Test Impact Analysis coverage and test skipping features<br />
 **Default**: `(true)`
 
-Run the following command to disable the Test Impact Analysis:
+Run the following command to disable Test Impact Analysis:
 
 {{< tabs >}}
 
@@ -107,18 +107,18 @@ DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=false ddtrace-run
 
 ## Disabling skipping for specific tests
 
-You can override the Test Impact Analysis's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+You can override Test Impact Analysis's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
-The Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 
-Designating tests as unskippable ensures that the Test Impact Analysis runs them regardless of coverage data.
+Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 
 {{< tabs >}}
@@ -134,7 +134,7 @@ Unskippable tests are supported in the following versions:
 
 ### Marking tests as unskippable
 
-You can use [`pytest`][1]'s [`skipif` mark][2] to prevent the Test Impact Analysis from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+You can use [`pytest`][1]'s [`skipif` mark][2] to prevent Test Impact Analysis from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
 
 #### Individual tests
 
@@ -177,7 +177,7 @@ Unskippable tests are supported in the following versions:
 
 ### Marking tests as unskippable in `unittest`
 
-You can use [`unittest`][1]'s [`skipif` mark][2] to prevent the Test Impact Analysis from skipping individual tests. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+You can use [`unittest`][1]'s [`skipif` mark][2] to prevent Test Impact Analysis from skipping individual tests. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
 
 #### Individual tests
 
@@ -207,11 +207,11 @@ Using `@unittest.skipif` does not override any other `skip` marks, or `skipIf` m
 
 #### Interaction with coverage tools
 
-Coverage data may appear incomplete when the Test Impact Analysis is enabled. Lines of code that would normally be covered by tests are not be covered when these tests are skipped.
+Coverage data may appear incomplete when Test Impact Analysis is enabled. Lines of code that would normally be covered by tests are not be covered when these tests are skipped.
 
 #### Interaction with the coverage package
 
-The Test Impact Analysis uses the [`coverage`][2] package's API to collect code coverage. Data from `coverage run` or plugins like `pytest-cov` is incomplete as a result of `ddtrace`'s use of the `Coverage` class.
+Test Impact Analysis uses the [`coverage`][2] package's API to collect code coverage. Data from `coverage run` or plugins like `pytest-cov` is incomplete as a result of `ddtrace`'s use of the `Coverage` class.
 
 Some race conditions may cause exceptions when using `pytest` plugins such as `pytest-xdist` that change test execution order or introduce parallelization.
 

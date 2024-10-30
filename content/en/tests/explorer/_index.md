@@ -54,9 +54,9 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Is New | Indicates if the test has been newly added. |
 | Is Retry | Indicates if the test has been run as a result of a retry. |
 | Code Coverage Enabled | Indicates if the [Test Impact Analysis][16] has enabled [code coverage][17] per test for the session. |
-| Skipped by ITR | Number of tests that were skipped during the session by the Test Impact Analysis. |
-| Test Skipping Enabled | Whether the test session or module is allowed to be skipped by the Test Impact Analysis. |
-| Test Skipping Type | The method or criteria used by the Test Impact Analysis to determine which tests to skip. |
+| Skipped by ITR | Number of tests that were skipped during the session by Test Impact Analysis. |
+| Test Skipping Enabled | Whether the test session or module is allowed to be skipped by Test Impact Analysis. |
+| Test Skipping Type | The method or criteria used by Test Impact Analysis to determine which tests to skip. |
 | Test Skipped | The total count of tests that were not executed during the test session, which may include tests that were configured to skip, or were set as manual exclusions. |
 | Time Saved | The length of time saved for the session by Test Impact Analysis usage. |
 | Early Flake Detection Enabled | Indicates if the test has been run using [Early Flake Detection][15]. |

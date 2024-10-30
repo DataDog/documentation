@@ -15,6 +15,8 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
+<div class="alert alert-warning"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
+
 ## Overview
 
 Test Impact Analysis is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
@@ -59,7 +61,7 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Test Impact Analysis Activation Write` permission.
+Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Intelligent Test Runner Activation Write` permission.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Test Impact Analysis enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
@@ -113,7 +115,7 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /intelligent_test_runner/how_it_works/
+[1]: /tests/test_impact_analysis/how_it_works/
 [2]: /glossary/#flaky-test
 [3]: /tests/test_impact_analysis/setup
 [4]: /continuous_integration/tests/

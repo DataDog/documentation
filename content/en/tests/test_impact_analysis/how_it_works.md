@@ -72,4 +72,4 @@ The diagram above shows a developer branch that branches out from `main` and has
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/
-[2]: /intelligent_test_runner/#tracked-files
+[2]: /tests/test_impact_analysis/#tracked-files

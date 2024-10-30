@@ -28,7 +28,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for .NET][1]
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Test Impact Analysis enabled
+## Run tests with Test Impact Analysis enabled
 
 After completing setup, run your tests as you normally do by using [dotnet test][2] or [VSTest.Console.exe][3]:
 
@@ -60,13 +60,13 @@ You can override the Test Impact Analysis behavior and prevent specific tests fr
 
 ### Why make tests unskippable?
 
-The Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 - Tests that read data from text files.
 - Tests that interact with APIs outside of the code being tested (such as remote REST APIs).
-- Designating tests as unskippable ensures that the Test Impact Analysis runs them regardless of coverage data.
+- Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 ### Marking tests as unskippable
 
@@ -96,7 +96,7 @@ public class MyTestSuite
 
 Add a XUnit `TraitAttribute` with the key `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```csharp
 using Xunit;
@@ -138,7 +138,7 @@ public class MyTestSuite
 
 Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (for example, string.Empty) to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```csharp
 using NUnit.Framework;

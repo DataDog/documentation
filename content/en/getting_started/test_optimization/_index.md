@@ -166,7 +166,7 @@ For more information, see the [CI Monitor documentation][13].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/
-[2]: /intelligent_test_runner/
+[2]: /tests/test_impact_analysis
 [3]: /tests/#supported-features
 [4]: /dashboards/
 [5]: https://app.datadoghq.com/dash/integration/30897/ci-visibility---tests-dashboard

@@ -36,7 +36,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for Java][1]
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Test Impact Analysis enabled
+## Run tests with Test Impact Analysis enabled
 
 After completing setup, run your tests as you normally do:
 
@@ -71,13 +71,13 @@ You can override the Test Impact Analysis behavior and prevent specific tests fr
 
 ### Why make tests unskippable?
 
-The Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 - Tests that read data from text files
 - Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
-- Designating tests as unskippable ensures that the Test Impact Analysis runs them regardless of coverage data.
+- Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 ### Compatibility
 
@@ -117,7 +117,7 @@ public class MyTestSuite {
 
 Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import org.junit.jupiter.api.Tag;
@@ -163,7 +163,7 @@ public class MyTestSuite {
 Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 You do not have to create the `datadog_itr_unskippable` for every test case or test suite, one category is enough for the entire project.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import org.junit.Test;
@@ -204,7 +204,7 @@ public class MyTestSuite {
 
 Add a group with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import org.testng.annotations.Test;
@@ -243,7 +243,7 @@ class MyTestSuite extends Specification {
 
 Add a `spock.lang.Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import spock.lang.Specification
@@ -277,7 +277,7 @@ Feature: My Feature
 
 Add `datadog_itr_unskippable` tag to your gherkin feature to mark it as unskippable.
 
-If a feature is marked as unskippable, none of the scenarios from that feature can be skipped by ITR.
+If a feature is marked as unskippable, none of the scenarios from that feature can be skipped by Test Impact Analysis.
 
 ```gherkin
 @datadog_itr_unskippable
