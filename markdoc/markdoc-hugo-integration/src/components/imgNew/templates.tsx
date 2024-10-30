@@ -105,6 +105,7 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
   const isVideo = attrs.video;
   const isInlineImage = !attrs.video && attrs.inline;
   const isBlockDisplayImage = !attrs.video && !attrs.inline;
+  const isGif = imageExt === 'gif';
 
   return (
     <>
@@ -113,7 +114,7 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
       {isInlineImage && (
         <Figure attrs={attrs}>
           <img
-            srcSet={permalink}
+            srcSet="TODO"
             style={imageStyle}
             width={attrs.width || 'auto'}
             height={attrs.height || 'auto'}
@@ -123,14 +124,11 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
 
       {isBlockDisplayImage && (
         <>
-          {isPopup && imageExt !== 'gif' && (
+          {isPopup && !isGif && (
             <>
-              <a
-                href="{{ print $img_resource $pop_param | relURL }}"
-                className="pop"
-                data-bs-toggle="modal"
-                data-bs-target="#popupImageModal"
-              ></a>
+              <PopUpLink href="TODO">
+                <Gif attrs={attrs} src="TODO" />
+              </PopUpLink>
             </>
           )}
         </>
@@ -138,6 +136,33 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
     </>
   );
 };
+
+// src is resolved with {{ (print $img_resource | safeURL) }}
+function Gif(props: { attrs: ImgTagAttrs; src: string }) {
+  const style = props.attrs.style ? cssStringToObject(props.attrs.style) : {};
+  return (
+    <img
+      className="img-fluid"
+      src={props.src}
+      style={style}
+      alt={props.attrs.alt || ''}
+    />
+  );
+}
+
+// TODO: href should be resolved with "{{ print $img_resource $pop_param | relURL }}"
+function PopUpLink(props: { children: React.ReactNode; href: string }) {
+  return (
+    <a
+      href={props.href}
+      className="pop"
+      data-bs-toggle="modal"
+      data-bs-target="#popupImageModal"
+    >
+      {props.children}
+    </a>
+  );
+}
 
 function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
   let wrapperClass = 'shortcode-wrapper shortcode-img expand';
