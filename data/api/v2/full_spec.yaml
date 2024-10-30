@@ -7210,6 +7210,83 @@ components:
           description: The type of the resource. The value should always be device.
           type: string
       type: object
+    DomainAllowlist:
+      description: The email domain allowlist for an org.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DomainAllowlistAttributes'
+        id:
+          description: The unique identifier of the org.
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DomainAllowlistType'
+      required:
+      - type
+      type: object
+    DomainAllowlistAttributes:
+      description: The details of the email domain allowlist.
+      properties:
+        domains:
+          description: The list of domains in the email domain allowlist.
+          items:
+            type: string
+          type: array
+        enabled:
+          description: Whether the email domain allowlist is enabled for the org.
+          type: boolean
+      type: object
+      x-ignore-duplicate-object: true
+    DomainAllowlistRequest:
+      description: Request containing the desired email domain allowlist configuration.
+      properties:
+        data:
+          $ref: '#/components/schemas/DomainAllowlist'
+      required:
+      - data
+      type: object
+    DomainAllowlistResponse:
+      description: Response containing information about the email domain allowlist.
+      properties:
+        data:
+          $ref: '#/components/schemas/DomainAllowlistResponseData'
+      type: object
+    DomainAllowlistResponseData:
+      description: The email domain allowlist response for an org.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DomainAllowlistResponseDataAttributes'
+        id:
+          description: The unique identifier of the org.
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DomainAllowlistType'
+      required:
+      - type
+      type: object
+    DomainAllowlistResponseDataAttributes:
+      description: The details of the email domain allowlist.
+      properties:
+        domains:
+          description: The list of domains in the email domain allowlist.
+          items:
+            type: string
+          type: array
+        enabled:
+          description: Whether the email domain allowlist is enabled for the org.
+          type: boolean
+      type: object
+      x-ignore-duplicate-object: true
+    DomainAllowlistType:
+      default: domain_allowlist
+      description: Email domain allowlist allowlist type.
+      enum:
+      - domain_allowlist
+      example: domain_allowlist
+      type: string
+      x-enum-varnames:
+      - DOMAIN_ALLOWLIST
     DowntimeCreateRequest:
       description: Request for creating a downtime.
       properties:
@@ -30308,6 +30385,67 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/domain_allowlist:
+    get:
+      description: Get the domain allowlist for an organization.
+      operationId: GetDomainAllowlist
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAllowlistResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Get Domain Allowlist
+      tags:
+      - Domain Allowlist
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
+      x-undo:
+        type: safe
+    patch:
+      description: Update the domain allowlist for an organization.
+      operationId: PatchDomainAllowlist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainAllowlistRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAllowlistResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Sets Domain Allowlist
+      tags:
+      - Domain Allowlist
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
+      x-undo:
+        type: idempotent
   /api/v2/dora/deployment:
     post:
       description: 'Use this API endpoint to provide data about deployments for DORA
@@ -44711,6 +44849,14 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: 'Configure your Datadog Email Domain Allowlist directly through the
+    Datadog API.
+
+    The Email Domain Allowlist controls the domains that certain datadog emails can
+    be sent to.
+
+    For more information, see the [Domain Allowlist docs page](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)'
+  name: Domain Allowlist
 - description: '**Note**: Downtime V2 is currently in private beta. To request access,
     contact [Datadog support](https://docs.datadoghq.com/help/).
 
