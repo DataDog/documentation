@@ -33,7 +33,6 @@ describe('treeManagement', () => {
   test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
     const { renderableTree } = buildRenderableTree({
       parsedFile,
-      defaultValsByPrefId: prefsManifest.defaultValsByPrefId,
       variables: {},
       prefsManifest
     });

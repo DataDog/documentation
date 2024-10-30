@@ -1,4 +1,10 @@
-class HugoFunctions {
+/**
+ * The Markdoc-Hugo integration's tag templates (shortcode templates)
+ * don't have access to the same functions available
+ * in Hugo's shortcode templates. This module provides any functions required
+ * to implement the most common shortcodes on the Markdoc site.
+ */
+export class HugoFunctions {
   static isAbsUrl(path: string): boolean {
     if (path.startsWith('http://') || path.startsWith('https://')) {
       return true;
@@ -34,6 +40,11 @@ class HugoFunctions {
     // Ensure the result URL starts with a slash
     if (!resultUrl.startsWith('/')) {
       resultUrl = '/' + resultUrl;
+    }
+
+    // Remove trailing slash if present
+    if (resultUrl.length > 1 && resultUrl.endsWith('/')) {
+      resultUrl = resultUrl.slice(0, -1);
     }
 
     return resultUrl;
