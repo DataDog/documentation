@@ -12,7 +12,7 @@ further_reading:
   text: "Set alert conditions"
 ---
 
-<div class="alert alert-info">Status Graphs is part of the <a href="monitors/status/status_page">provisional Monitor Status Page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
+<div class="alert alert-info">Status Graphs is part of the <a href="/monitors/status/status_page">provisional Monitor Status Page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
 
 ## Overview
 
