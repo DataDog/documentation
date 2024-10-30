@@ -57,7 +57,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Both**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -76,6 +76,24 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 
 [101]: https://docs.docker.com/compose/compose-application-model/
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster by running `kubectl get pods` and verifying that the output is not an error, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a values.yaml file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Wait until the app says **Status: <RUNNER-NAME> is Ready for use**, then click **Link Runner to a New Connection ->**.
+1. Click **Kubernetes**. Name your connection, choose the runner you previously created, and select an authentication type.
+1. Click **Next, Confirm Access**, then choose your desired access level and click **Create**.
+
+
+[101]: 
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
