@@ -8,10 +8,10 @@ aliases:
 - /monitors/monitor_status/
 - /monitors/manage/status
 further_reading:
-- link: "/monitors/status/graphs"
+- link: "/monitors/status/graphs/"
   tag: "Documentation"
   text: "Learn more about monitor graphs"
-- link: "/monitors/status/events"
+- link: "/monitors/status/events/"
   tag: "Documentation"
   text: "Learn more about event details"
 ---
