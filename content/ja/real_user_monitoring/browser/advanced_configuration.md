@@ -81,50 +81,98 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
    - ビュー名: デフォルトは、ページの URL パスです。
    - サービス: デフォルトは、RUM アプリケーションの作成時に指定されたデフォルトのサービスです。
    - バージョン: デフォルトは、RUM アプリケーションの作成時に指定されたデフォルトのバージョンです。
+   - コンテキスト: [バージョン 5.28.0][20] から、ビューおよびその子イベントにコンテキストを追加できます。
 
    詳しくは、[ブラウザモニタリングの設定][4]をご覧ください。
 
    <details open>
-     <summary>Latest version</summary>
-   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
+     <summary>最新バージョン</summary>
+   次の例では、RUM アプリケーションで <code>checkout</code> ページのページビューを手動で追跡します。ビュー名に <code>checkout</code> を使用し、バージョン <code>1.2.3</code> の <code>purchase</code> サービスを関連付けます。
 
    {{< tabs >}}
    {{% tab "NPM" %}}
    ```javascript
    datadogRum.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3'
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
 
    {{% /tab %}}
-   {{% tab "CDN async" %}}
+   {{% tab "CDN 非同期" %}}
    ```javascript
    window.DD_RUM.onReady(function() {
-       window.DD_RUM.startView({
-         name: 'checkout',
-         service: 'purchase',
-         version: '1.2.3'
-       })
+      window.DD_RUM.startView({
+            name: 'checkout',
+            service: 'purchase',
+            version: '1.2.3',
+            context: {
+                payment: 'Done'
+            },
+      })
    })
    ```
    {{% /tab %}}
-   {{% tab "CDN sync" %}}
+   {{% tab "CDN 同期" %}}
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3'
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
    {{% /tab %}}
    {{< /tabs >}}
-   </details>
+
+</details>
+<details>
+<summary><code>v5.28.0</code> より前</summary>
+次の例では、RUM アプリケーションで <code>checkout</code> ページのページビューを手動で追跡します。ビュー名に <code>checkout</code> を使用し、バージョン <code>1.2.3</code> の <code>purchase</code> サービスを関連付けます。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN 非同期" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3'
+  })
+})
+```
+{{% /tab %}}
+{{% tab "CDN 同期" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+{{% /tab %}}
+{{< /tabs >}}
+</details>
 
    <details>
-     <summary>before <code>v4.13.0</code></summary>
-   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. No service or version can be specified.
+     <summary><code>v4.13.0</code> より前</summary>
+次の例では、RUM アプリケーションで <code>checkout</code> ページのページビューを手動で追跡します。サービスやバージョンを指定することはできません。
 
    {{< tabs >}}
    {{% tab "NPM" %}}
@@ -133,14 +181,14 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
    ```
 
    {{% /tab %}}
-   {{% tab "CDN async" %}}
+   {{% tab "CDN 非同期" %}}
    ```javascript
    window.DD_RUM.onReady(function() {
        window.DD_RUM.startView('checkout')
    })
    ```
    {{% /tab %}}
-   {{% tab "CDN sync" %}}
+   {{% tab "CDN 同期" %}}
    ```javascript
    window.DD_RUM && window.DD_RUM.startView('checkout')
    ```
@@ -322,9 +370,9 @@ function beforeSend(event, context)
 | RUM イベントタイプ   | コンテキスト                   |
 |------------------|---------------------------|
 | ビュー             | [場所][6]                  |
-| アクション           | [イベント][7]                     |
-| リソース (XHR)   | [XMLHttpRequest][8] と [PerformanceResourceTiming][9]            |
-| リソース (フェッチ) | [リクエスト][10]、[リソース][11]、[PerformanceResourceTiming][9]      |
+| アクション           | [イベント][7]とハンドリングスタック                     |
+| リソース (XHR)   | [XMLHttpRequest][8]、[PerformanceResourceTiming][9]、およびハンドリングスタック            |
+| リソース (フェッチ) | [Request][10]、[Response][11]、[PerformanceResourceTiming][9]、およびハンドリングスタック      |
 | リソース (その他) | [PerformanceResourceTiming][9] |
 | Error            | [エラー][12]                     |
 | ロングタスク        | [PerformanceLongTaskTiming][13] |
@@ -454,12 +502,14 @@ window.DD_RUM &&
 |   `view.url`            |   文字列  |   アクティブな Web ページの URL。                            |
 |   `view.referrer`       |   文字列  |   現在リクエストされているページへのリンクがたどられた前のウェブページの URL。  |
 |   `view.name`           |   文字列  |   現在のビューの名前。                            |
+|   `service`             |   文字列  |   アプリケーションのサービス名。                                                            |
+|   `version`             |   文字列  |   アプリケーションのバージョン、例: 1.2.3、6c44da20、2020.02.13。                          |
 |   `action.target.name`  |   文字列  |   ユーザーが操作した要素。自動的に収集されたアクションの場合のみ。              |
 |   `error.message`       |   文字列  |   エラーについて簡潔にわかりやすく説明する 1 行メッセージ。                                 |
 |   `error.stack `        |   文字列  |   スタックトレースまたはエラーに関する補足情報。                                     |
 |   `error.resource.url`  |   文字列  |   エラーをトリガーしたリソース URL。                                                        |
 |   `resource.url`        |   文字列  |   リソースの URL。                                                                                 |
-|   `context`        |   オブジェクト  |   [グローバルコンテキスト API](#global-context) を使って、またはイベントを手動で生成するときに追加される属性 (例: `addError` および `addAction`)。RUM ビューイベント `context` は読み取り専用です。                                                                                 |
+|   `context`        |   オブジェクト  |   [Global Context API](#global-context)、[View Context API](#view-context)、またはイベントを手動で生成するとき (例: `addError` や `addAction`) に追加された属性。                                                                                 |
 
 RUM ブラウザ SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。イベントプロパティの詳細については、[RUM ブラウザ SDK GitHub リポジトリ][15]を参照してください。
 
@@ -793,6 +843,108 @@ acceptCookieBannerButton.addEventListener('click', () => {
 {{% /tab %}}
 {{< /tabs >}}
 
+## ビューコンテキスト
+
+[バージョン 5.28.0][20] から、ビューイベントのコンテキストは変更可能です。コンテキストは現在のビューのみに追加でき、`startView`、`setViewContext`、`setViewContextProperty` 関数を使用して、その子イベント (`action`、`error`、`timing` など) に反映されます。
+
+### コンテキストを使用してビューを開始
+
+[`startView` オプション](#override-default-rum-view-names)を使用して、ビューを開始するときにコンテキストをオプションで定義できます。
+
+### ビューコンテキストを追加
+
+`setViewContextProperty(key: string, value: any)` API を使用して、RUM ビューイベントおよび対応する子イベントのコンテキストを拡充または変更します。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+
+// コード例
+datadogRum.setViewContextProperty('activity', {
+    hasPaid: true,
+    amount: 23.42
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+})
+
+// コード例
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContextProperty('activity', {
+        hasPaid: true,
+        amount: 23.42
+    });
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+
+// コード例
+window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
+    hasPaid: true,
+    amount: 23.42
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### ビューコンテキストを置き換える
+
+`setViewContext(context: Context)` API を使用して、RUM ビューイベントおよび対応する子イベントのコンテキストを置き換えます。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+datadogRum.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// コード例
+datadogRum.setViewContext({
+    originalUrl: 'shopist.io/department/chairs',
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+})
+
+// コード例
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContext({
+      originalUrl: 'shopist.io/department/chairs',
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// コード例
+window.DD_RUM &&
+    window.DD_RUM.setViewContext({
+        originalUrl: 'shopist.io/department/chairs',
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 ## グローバルコンテキスト
 
 ### グローバルコンテキストプロパティを追加する
@@ -1010,7 +1162,92 @@ const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 
 - `localStorage` に格納されたデータはユーザーセッションを超えて残るため、これらのコンテキストで個人を特定できる情報 (PII) を設定することは推奨されません
 - この機能は `trackSessionAcrossSubdomains` オプションと互換性がありません。なぜなら `localStorage` データは同じオリジン間でしか共有されないからです (login.site.com ≠ app.site.com)
-- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
+- `localStorage` はオリジンごとに 5 MiB に制限されているため、ローカルストレージに格納されているアプリケーション固有のデータ、 Datadog コンテキスト、およびその他のサードパーティデータは、問題を避けるためにこの制限内に収める必要があります
+
+## マイクロフロントエンド
+
+バージョン 5.22 から、RUM ブラウザ SDK はマイクロフロントエンドアーキテクチャをサポートします。この仕組みはスタックトレースに基づいています。これを使用するには、アプリケーションのファイルパスやファイル名からサービスおよびバージョンのプロパティを抽出できる必要があります。
+
+### 使用方法
+
+`beforeSend` プロパティで、サービスとバージョンのプロパティをオーバーライドできます。イベントの発生元を特定するのに役立つように、`context.handlingStack` プロパティを使用します。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+datadogRum.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+            if (service && version) {
+                event.service = service;
+                event.version = version;
+            }
+
+            return true;
+        },
+    });
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM && window.DD_RUM.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+RUM エクスプローラーで行われるクエリは、サービス属性を使用してイベントをフィルタリングできます。
+
+### 制限
+
+いくつかのイベントはオリジンに帰属させることができないため、関連するハンドリングスタックがありません。これには以下が含まれます。
+- 自動的に収集されたアクションイベント
+- XHR や Fetch 以外のリソースイベント。
+- ビューイベント (ただし、代わりに[デフォルトの RUM ビュー名をオーバーライド][21]できます)
+- CORS や CSP の違反
 
 ## その他の参考資料
 
@@ -1035,3 +1272,5 @@ const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
 [18]: /ja/data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+[21]: /ja/real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names
