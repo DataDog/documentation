@@ -28,17 +28,17 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
-| .NET Version         | Microsoft End of Life | Support level        | Package version      |
-| -------------------- | --------------------- | -------------------- | -------------------- |
-| .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
-| .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
-| .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
-| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
-| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
-| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  | Not recommended       |
-| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
+| .NET Version         | Microsoft End of Life | Support level        | {{< tooltip text="SSI" tooltip="Single Step Instrumentation">}} Support          | Package version      |
+| -------------------- | --------------------- | -------------------- | -------------------- | -------------------- |
+| .NET 8               |                       | [GA](#support-ga)    | {{< X >}}   | latest (>= 2.42.0)   |
+| .NET 7               | 05/14/2024            | [GA](#support-ga)    | {{< X >}}   | latest (>= 2.20.0)   |
+| .NET 6               |                       | [GA](#support-ga)    | {{< X >}} (> 6.0.13)   | latest (>= 2.0.0)    |
+| .NET 5               | 05/10/2022            | [GA](#support-ga)    | {{< X >}}   | latest (>= 2.0.0)    |
+| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | {{< X >}}   | latest               |
+| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  |             | Not recommended       |
+| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | {{< X >}}   | Not recommended       |
+| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  |             | Not recommended       |
+| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  |             | Not recommended       |
 
 Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
