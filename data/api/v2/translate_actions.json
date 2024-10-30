@@ -401,6 +401,16 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "GetDomainAllowlist": {
+    "description": "Get the domain allowlist for an organization.",
+    "summary": "Get Domain Allowlist"
+  },
+  "PatchDomainAllowlist": {
+    "description": "Update the domain allowlist for an organization.",
+    "summary": "Sets Domain Allowlist",
+    "request_description": "",
+    "request_schema_description": "Request containing the desired email domain allowlist configuration."
+  },
   "CreateDORADeployment": {
     "description": "Use this API endpoint to provide data about deployments for DORA metrics.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
     "summary": "Send a deployment event for DORA Metrics",
