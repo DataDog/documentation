@@ -8,15 +8,12 @@ aliases:
 - /monitors/monitor_status/
 - /monitors/manage/status
 further_reading:
-- link: "/monitors/"
+- link: "/monitors/status/graphs"
   tag: "Documentation"
-  text: "Create monitors"
-- link: "/monitors/notify/"
+  text: "Learn more about monitor graphs"
+- link: "/monitors/status/events"
   tag: "Documentation"
-  text: "Monitor Notifications"
-- link: "/monitors/manage/"
-  tag: "Documentation"
-  text: "Manage monitors"
+  text: "Learn more about event details"
 ---
 
 <div class="alert alert-warning">The provisional status page has limited support for monitors and their features. For more details, see <a href="#restrictions-of-provisional-status-page">Restrictions of provisional status page</a>.</div>
