@@ -92,7 +92,7 @@ For more information, see the [Secrets Management][18] documentation.
 
 {{< site-region region="gov" >}}
 
-Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or [FIPS][1] is used the Agent automatically disable this telemetry collection. When such detection is impossible (such as, for example, if a proxy is being used) Agent telemetry will be emitted but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place we recommend disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or [ Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (such as, for example, if a proxy is being used) Agent telemetry will be emitted but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place we recommend disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
@@ -132,7 +132,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 
 **Telemetry content:**
-
+([metadata source code][1])
 | Metadata      |
 | ------------- |
 | Machine id    |
@@ -140,9 +140,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | OS            |
 | OS version    |
 | Agent version |
-([source code][1])
 
-
+([list metrics source code][2])
 | Metrics                                     | Description                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | checks.execution_time                       | Check's execution time in milliseconds                                                            |
@@ -176,7 +175,6 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in ms                                                               |
 | postgres.collect_statement_samples_ms       | Time to get statement samples in ms                                                               |
 | postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
-([source code][2])
 
 Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics are emitted.
 
