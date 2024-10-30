@@ -92,13 +92,20 @@ For more information, see the [Secrets Management][18] documentation.
 
 {{< site-region region="gov" >}}
 
-Datadog on non-government sites will collect environmental, performance, and feature usage information about the Datadog Agent. When Agent detects a government site or FIPS usage Agent will automatically disable this telemetry collection. When such detection is impossible (for example when proxy is used) Agent telemetry will be emitted but immediately dropped at intake. To avoid this emission in the first place we recommend to disable Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+Datadog on non-government sites will collect environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or [FIPS][1] is used the Agent will automatically disable this telemetry collection. When such detection is impossible (such as, for example, if a proxy is being used) Agent telemetry will be emitted but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place we recommend disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
 
 ```yaml
 agent_telemetry:
   enabled: false
+```
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -115,6 +122,13 @@ agent_telemetry:
   enabled: false
 ```
 {{% /tab %}}
+{{% tab "Environment variables" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
+{{% /tab %}}
 {{< /tabs >}}
 
 **Telemetry content:**
@@ -125,6 +139,12 @@ agent_telemetry:
 - OS
 - OS version
 - Agent version
+
+| Month | Savings |
+| -------- | ------- |
+| January | $250 |
+| February | $80 |
+| March | $420 |
 
 `Metrics` ([source code][2])
 - checks.execution_time
