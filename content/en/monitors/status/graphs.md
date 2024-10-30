@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The graphs on the monitor status page provide insights into your monitor's performance and any changes it has undergone. These graphs help you to understand why your monitor might be in an ALERT state and where to focus your troubleshooting efforts.
+The graphs on the monitor status page provide insights into the single monitor evaluations. These graphs help you to understand why your monitor might be in an ALERT state and where to focus your troubleshooting efforts.
 
 ## Monitor metadata
 

@@ -25,6 +25,19 @@ To explore each individual event for more information, including associated tags
    
 Use the event details to understand monitor alerts and identify root causes. This information supports responder workflows and helps you stay informed about ongoing situations. 
 
+### Take action to remediate
+
+With Quick Actions, you can take action without leaving the Status page. Responders save time since the context is automatically added.
+
+| Action | Description |
+| :---- | :---- |
+| Mute  | Create a [downtime][3] to mute monitor alerts. |
+| Resolve | Temporarily set the monitor status to 'OK' for its next evaluation |
+| Declare Incident | Escalate monitor alerts with [Incident Management][4]. |
+| Create Case | Create a [case][5] if this needs further investigation and you want to correlate the alert to other Datadog products. |
+| Run Workflow | Run [Workflow][6] Automation with predefined snippets to run mitigation actions. |
+| Start a Collaboration | Start a [CoScreen][7] meeting and collaborate with your team. |
+
 ## Event troubleshooting section
 
 For each event, access troubleshooting information to help responders quickly understand the context of the alert.
