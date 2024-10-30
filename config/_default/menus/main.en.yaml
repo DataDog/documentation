@@ -3449,11 +3449,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_map
       weight: 705
+    - name: Inferred services
+      url: tracing/services/inferred_services
+      parent: tracing_services
+      identifier: tracing_inferred_services
+      weight: 706
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 706
+      weight: 707
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
