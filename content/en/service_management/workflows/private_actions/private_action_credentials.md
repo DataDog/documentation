@@ -110,19 +110,19 @@ In the runner's connection, specify the location of the credential file on the p
 {
   "auth_type": "Token Auth",
   "credentials": [
-    {
-      "tokenName": "username",
-      "tokenValue": "USERNAME"
-    },
-    {
-      "tokenName": "token",
-      "tokenValue": "TOKEN"
-    },
-    {
-      "tokenName": "domain",
-      "tokenValue": "DOMAIN"
-    }
-  ]
+                {
+                        "tokenName": "username",
+                        "tokenValue": "USERNAME"
+                },
+                {
+                        "tokenName": "token",
+                        "tokenValue": "TOKEN"
+                },
+                {
+                        "tokenName": "domain",
+                        "tokenValue": "DOMAIN"
+                }
+        ]
 }
 {{< /code-block >}}
 
