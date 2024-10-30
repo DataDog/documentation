@@ -173,6 +173,12 @@ Click **Add Query** to add additional queries.
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Filter logs based on Reference Tables
+
+{{% filter_by_reference_tables %}}
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
 #### Unit testing
 
 Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. Specifically, this can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for it. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.

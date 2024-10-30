@@ -215,7 +215,7 @@ components:
       schema:
         type: string
     EntityID:
-      description: UUID or Entity Ref
+      description: UUID or Entity Ref.
       in: path
       name: entity_id
       required: true
@@ -244,41 +244,41 @@ components:
       schema:
         type: string
     FilterByExcludeSnapshot:
-      description: Filter entities by excluding snapshotted entities
+      description: Filter entities by excluding snapshotted entities.
       in: query
-      name: fitler[exclude_snapshot]
+      name: filter[exclude_snapshot]
       required: false
       schema:
         type: string
     FilterByID:
-      description: Filter entities by UUID
+      description: Filter entities by UUID.
       explode: true
       in: query
-      name: fitler[id]
+      name: filter[id]
       required: false
       schema:
         type: string
     FilterByKind:
-      description: Filter entities by kind
+      description: Filter entities by kind.
       explode: true
       in: query
-      name: fitler[kind]
+      name: filter[kind]
       required: false
       schema:
         type: string
     FilterByName:
-      description: Filter entities by name
+      description: Filter entities by name.
       explode: true
       in: query
-      name: fitler[name]
+      name: filter[name]
       required: false
       schema:
         type: string
     FilterByOwner:
-      description: Filter entities by owner
+      description: Filter entities by owner.
       explode: true
       in: query
-      name: fitler[owner]
+      name: filter[owner]
       required: false
       schema:
         type: string
@@ -286,15 +286,15 @@ components:
       description: Filter entities by reference
       explode: true
       in: query
-      name: fitler[ref]
+      name: filter[ref]
       required: false
       schema:
         type: string
     FilterByRelationType:
-      description: Filter entities by relation type
+      description: Filter entities by relation type.
       explode: true
       in: query
-      name: fitler[relation][type]
+      name: filter[relation][type]
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
@@ -433,8 +433,22 @@ components:
       required: true
       schema:
         type: string
+    IncidentTypeIDPathParameter:
+      description: The UUID of the incident type.
+      in: path
+      name: incident_type_id
+      required: true
+      schema:
+        type: string
+    IncidentTypeIncludeDeletedParameter:
+      description: Include deleted incident types in the response.
+      in: query
+      name: include_deleted
+      schema:
+        default: false
+        type: boolean
     Include:
-      description: include relationship data
+      description: Include relationship data.
       explode: true
       in: query
       name: include
@@ -7775,7 +7789,7 @@ components:
       description: Entity attributes.
       properties:
         apiVersion:
-          description: The api version.
+          description: The API version.
           type: string
         description:
           description: The description.
@@ -7807,7 +7821,7 @@ components:
         attributes:
           $ref: '#/components/schemas/EntityAttributes'
         id:
-          description: Entity id.
+          description: Entity ID.
           type: string
         meta:
           $ref: '#/components/schemas/EntityMeta'
@@ -7834,7 +7848,7 @@ components:
           type: string
       type: object
     EntityRaw:
-      description: Entity definition in raw JSON/YAML representation.
+      description: Entity definition in raw JSON or YAML representation.
       example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice\n"
       type: string
     EntityRelationships:
@@ -7862,7 +7876,7 @@ components:
         attributes:
           $ref: '#/components/schemas/EntityResponseIncludedRelatedIncidentAttributes'
         id:
-          description: Incident id.
+          description: Incident ID.
           type: string
         type:
           description: Incident description.
@@ -7886,7 +7900,7 @@ components:
         attributes:
           $ref: '#/components/schemas/EntityResponseIncludedRawSchemaAttributes'
         id:
-          description: Raw schema id.
+          description: Raw schema ID.
           type: string
         type:
           description: Raw schema type.
@@ -7977,7 +7991,7 @@ components:
           type: string
       type: object
     EntityResponseIncludedRelatedOncallEscalationItem:
-      description: Oncall escalation
+      description: Oncall escalation.
       properties:
         email:
           description: Oncall email.
@@ -7991,7 +8005,7 @@ components:
           type: string
       type: object
     EntityResponseIncludedRelatedOncallEscalations:
-      description: Oncall escalations
+      description: Oncall escalations.
       items:
         $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalationItem'
       type: array
@@ -8001,7 +8015,7 @@ components:
         attributes:
           $ref: '#/components/schemas/EntityResponseIncludedSchemaAttributes'
         id:
-          description: Entity id.
+          description: Entity ID.
           type: string
         type:
           description: Schema type.
@@ -8064,7 +8078,7 @@ components:
       - $ref: '#/components/schemas/EntityV3System'
     EntityV3APIVersion:
       description: The schema version of entity type. The field is known as schema-version
-        in the previous version
+        in the previous version.
       enum:
       - v3
       example: v3
@@ -8073,21 +8087,21 @@ components:
       - V3
     EntityV3DatadogCodeLocationItem:
       additionalProperties: false
-      description: code location item.
+      description: Code location item.
       properties:
         paths:
-          description: The paths (glob) to the source code of the service
+          description: The paths (glob) to the source code of the service.
           items:
             type: string
           type: array
         repositoryURL:
-          description: The repository path of the source code of the entity
+          description: The repository path of the source code of the entity.
           pattern: url
           type: string
       type: object
     EntityV3DatadogCodeLocations:
       additionalProperties: false
-      description: Schema for mapping source code locations to an entity
+      description: Schema for mapping source code locations to an entity.
       items:
         $ref: '#/components/schemas/EntityV3DatadogCodeLocationItem'
       type: array
@@ -8096,28 +8110,28 @@ components:
       description: Events association item.
       properties:
         name:
-          description: The name of the query
+          description: The name of the query.
           type: string
         query:
-          description: The query to run
+          description: The query to run.
           type: string
       type: object
     EntityV3DatadogEvents:
       additionalProperties: false
-      description: Events associations
+      description: Events associations.
       items:
         $ref: '#/components/schemas/EntityV3DatadogEventItem'
       type: array
     EntityV3DatadogIntegrationOpsgenie:
       additionalProperties: false
-      description: An Opsgenie integration schema
+      description: An Opsgenie integration schema.
       properties:
         region:
           description: The region for the Opsgenie integration.
           minLength: 1
           type: string
         serviceURL:
-          description: The service url for the Opsgenie integration.
+          description: The service URL for the Opsgenie integration.
           example: https://www.opsgenie.com/service/shopping-cart
           minLength: 1
           type: string
@@ -8126,10 +8140,10 @@ components:
       type: object
     EntityV3DatadogIntegrationPagerduty:
       additionalProperties: false
-      description: An PagerDuty integration schema
+      description: A PagerDuty integration schema.
       properties:
         serviceURL:
-          description: The service url for the PagerDuty integration.
+          description: The service URL for the PagerDuty integration.
           example: https://www.pagerduty.com/service-directory/Pshopping-cart
           minLength: 1
           type: string
@@ -8138,46 +8152,46 @@ components:
       type: object
     EntityV3DatadogLogItem:
       additionalProperties: false
-      description: log association item.
+      description: Log association item.
       properties:
         name:
-          description: The name of the query
+          description: The name of the query.
           type: string
         query:
-          description: The query to run
+          description: The query to run.
           type: string
       type: object
     EntityV3DatadogLogs:
       additionalProperties: false
-      description: Logs association
+      description: Logs association.
       items:
         $ref: '#/components/schemas/EntityV3DatadogLogItem'
       type: array
     EntityV3DatadogPerformance:
       additionalProperties: false
-      description: Performance stats association
+      description: Performance stats association.
       properties:
         tags:
           description: A list of APM entity tags that associates the APM Stats data
-            with the entity
+            with the entity.
           items:
             type: string
           type: array
       type: object
     EntityV3DatadogPipelines:
       additionalProperties: false
-      description: CI Pipelines association
+      description: CI Pipelines association.
       properties:
         fingerprints:
           description: A list of CI Fingerprints that associate CI Pipelines with
-            the entity
+            the entity.
           items:
             type: string
           type: array
       type: object
     EntityV3Datastore:
       additionalProperties: false
-      description: Schema for datastore entities
+      description: Schema for datastore entities.
       properties:
         apiVersion:
           $ref: '#/components/schemas/EntityV3APIVersion'
@@ -8204,7 +8218,7 @@ components:
       type: object
     EntityV3DatastoreDatadog:
       additionalProperties: false
-      description: Datadog product integrations for the datastore entity
+      description: Datadog product integrations for the datastore entity.
       properties:
         events:
           $ref: '#/components/schemas/EntityV3DatadogEvents'
@@ -8231,16 +8245,16 @@ components:
           minLength: 1
           type: string
         tier:
-          description: The importance of the datastore
+          description: The importance of the datastore.
           minLength: 1
           type: string
         type:
-          description: The type of datastore
+          description: The type of datastore.
           type: string
       type: object
     EntityV3Integrations:
       additionalProperties: false
-      description: A base schema for defining third party integrations
+      description: A base schema for defining third-party integrations.
       properties:
         opsgenie:
           $ref: '#/components/schemas/EntityV3DatadogIntegrationOpsgenie'
@@ -8253,23 +8267,23 @@ components:
       properties:
         additionalOwners:
           additionalProperties: false
-          description: The additional owners of the entity, usually a team
+          description: The additional owners of the entity, usually a team.
           items:
             $ref: '#/components/schemas/EntityV3MetadataAdditionalOwnersItems'
           type: array
         contacts:
           additionalProperties: false
-          description: A list of contacts for the entity
+          description: A list of contacts for the entity.
           items:
             $ref: '#/components/schemas/EntityV3MetadataContactsItems'
           type: array
         description:
           description: Short description of the entity. The UI can leverage the description
-            for display
+            for display.
           type: string
         displayName:
           description: User friendly name of the entity. The UI can leverage the display
-            name for display
+            name for display.
           type: string
         id:
           description: A read-only globally unique identifier for the entity generated
@@ -8283,7 +8297,7 @@ components:
           type: string
         links:
           additionalProperties: false
-          description: A list of links for the entity
+          description: A list of links for the entity.
           items:
             $ref: '#/components/schemas/EntityV3MetadataLinksItems'
           type: array
@@ -8293,20 +8307,20 @@ components:
             Datadog.  User supplied values are ignored.
           type: object
         name:
-          description: 'Unique name given to an entity under the kind/namespace '
+          description: Unique name given to an entity under the kind/namespace.
           example: myService
           minLength: 1
           type: string
         namespace:
           description: Namespace is a part of unique identifier. It has a default
-            value of 'default'
+            value of 'default'.
           example: default
           minLength: 1
           type: string
         owner:
           $ref: '#/components/schemas/EntityV3MetadataOwner'
         tags:
-          description: A set of custom tags
+          description: A set of custom tags.
           example:
           - this:tag
           - that:tag
@@ -8320,11 +8334,11 @@ components:
       description: The definition of Entity V3 Metadata Additional Owners Items object.
       properties:
         name:
-          description: Team name
+          description: Team name.
           example: ''
           type: string
         type:
-          description: Team type
+          description: Team type.
           type: string
       required:
       - name
@@ -8333,11 +8347,11 @@ components:
       description: The definition of Entity V3 Metadata Contacts Items object.
       properties:
         contact:
-          description: Contact value
+          description: Contact value.
           example: https://slack/
           type: string
         name:
-          description: Contact name
+          description: Contact name.
           minLength: 2
           type: string
         type:
@@ -8353,7 +8367,7 @@ components:
       description: The definition of Entity V3 Metadata Links Items object.
       properties:
         name:
-          description: Link name
+          description: Link name.
           example: mylink
           type: string
         provider:
@@ -8365,7 +8379,7 @@ components:
           example: link
           type: string
         url:
-          description: Link url
+          description: Link URL.
           example: https://mylink
           type: string
       required:
@@ -8375,14 +8389,14 @@ components:
       type: object
     EntityV3MetadataOwner:
       additionalProperties: false
-      description: The owner of the entity, usually a team
+      description: The owner of the entity, usually a team.
       properties:
         name:
-          description: Team name
+          description: Team name.
           type: string
     EntityV3Queue:
       additionalProperties: false
-      description: Schema for queue entities
+      description: Schema for queue entities.
       properties:
         apiVersion:
           $ref: '#/components/schemas/EntityV3APIVersion'
@@ -8390,8 +8404,8 @@ components:
           $ref: '#/components/schemas/EntityV3QueueDatadog'
         extensions:
           additionalProperties: {}
-          description: Custom extensions. This is the free-formed field to send client
-            side metadata. No Datadog features are affected by this field.
+          description: Custom extensions. This is the free-formed field to send client-side
+            metadata. No Datadog features are affected by this field.
           type: object
           x-ignore-duplicate-object: true
         integrations:
@@ -8409,7 +8423,7 @@ components:
       type: object
     EntityV3QueueDatadog:
       additionalProperties: false
-      description: Datadog product integrations for the datastore entity
+      description: Datadog product integrations for the datastore entity.
       properties:
         events:
           $ref: '#/components/schemas/EntityV3DatadogEvents'
@@ -8436,16 +8450,16 @@ components:
           minLength: 1
           type: string
         tier:
-          description: The importance of the queue
+          description: The importance of the queue.
           minLength: 1
           type: string
         type:
-          description: The type of queue
+          description: The type of queue.
           type: string
       type: object
     EntityV3Service:
       additionalProperties: false
-      description: Schema for service entities
+      description: Schema for service entities.
       properties:
         apiVersion:
           $ref: '#/components/schemas/EntityV3APIVersion'
@@ -8453,8 +8467,8 @@ components:
           $ref: '#/components/schemas/EntityV3ServiceDatadog'
         extensions:
           additionalProperties: {}
-          description: Custom extensions. This is the free-formed field to send client
-            side metadata. No Datadog features are affected by this field.
+          description: Custom extensions. This is the free-formed field to send client-side
+            metadata. No Datadog features are affected by this field.
           type: object
           x-ignore-duplicate-object: true
         integrations:
@@ -8472,7 +8486,7 @@ components:
       type: object
     EntityV3ServiceDatadog:
       additionalProperties: false
-      description: Datadog product integrations for the service entity
+      description: Datadog product integrations for the service entity.
       properties:
         codeLocations:
           $ref: '#/components/schemas/EntityV3DatadogCodeLocations'
@@ -8498,7 +8512,7 @@ components:
       description: The definition of Entity V3 Service Spec object.
       properties:
         dependsOn:
-          description: A list of components the service depends on
+          description: A list of components the service depends on.
           items:
             type: string
           type: array
@@ -8512,16 +8526,16 @@ components:
           minLength: 1
           type: string
         tier:
-          description: The importance of the component
+          description: The importance of the component.
           minLength: 1
           type: string
         type:
-          description: The type of service
+          description: The type of service.
           type: string
       type: object
     EntityV3System:
       additionalProperties: false
-      description: Schema for system entities
+      description: Schema for system entities.
       properties:
         apiVersion:
           $ref: '#/components/schemas/EntityV3APIVersion'
@@ -8529,8 +8543,8 @@ components:
           $ref: '#/components/schemas/EntityV3SystemDatadog'
         extensions:
           additionalProperties: {}
-          description: Custom extensions. This is the free-formed field to send client
-            side metadata. No Datadog features are affected by this field.
+          description: Custom extensions. This is the free-formed field to send client-side
+            metadata. No Datadog features are affected by this field.
           type: object
           x-ignore-duplicate-object: true
         integrations:
@@ -8548,7 +8562,7 @@ components:
       type: object
     EntityV3SystemDatadog:
       additionalProperties: false
-      description: Datadog product integrations for the service entity
+      description: Datadog product integrations for the service entity.
       properties:
         events:
           $ref: '#/components/schemas/EntityV3DatadogEvents'
@@ -9337,6 +9351,8 @@ components:
           $ref: '#/components/schemas/FindingStatus'
         tags:
           $ref: '#/components/schemas/FindingTags'
+        vulnerability_type:
+          $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
     FindingEvaluation:
       description: The evaluation of the finding.
@@ -9470,6 +9486,20 @@ components:
       type: string
       x-enum-varnames:
       - FINDING
+    FindingVulnerabilityType:
+      description: The vulnerability type of the finding.
+      enum:
+      - misconfiguration
+      - attack_path
+      - identity_risk
+      - api_security
+      example: misconfiguration
+      type: string
+      x-enum-varnames:
+      - MISCONFIGURATION
+      - ATTACK_PATH
+      - IDENTITY_RISK
+      - API_SECURITY
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -9684,6 +9714,12 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
+          example: true
           type: boolean
         is_security_command_center_enabled:
           default: false
@@ -10020,7 +10056,6 @@ components:
     HTTPLogItem:
       additionalProperties:
         description: Additional log attributes.
-        type: string
       description: Logs that are sent over HTTP.
       properties:
         ddsource:
@@ -10554,6 +10589,11 @@ components:
               type: dropdown
               value: SEV-5
           type: object
+        incident_type_uuid:
+          description: A unique identifier that represents an incident type. The default
+            incident type will be used if this property is not provided.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
         initial_cells:
           description: An array of initial timeline cells to be placed at the beginning
             of the incident timeline.
@@ -10963,6 +11003,10 @@ components:
               type: dropdown
               value: SEV-5
           type: object
+        incident_type_uuid:
+          description: A unique identifier that represents an incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
         modified:
           description: Timestamp when the incident was last modified.
           format: date-time
@@ -11910,6 +11954,188 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENTS
+    IncidentTypeAttributes:
+      description: Incident type's attributes.
+      properties:
+        createdAt:
+          description: Timestamp when the incident type was created.
+          format: date-time
+          readOnly: true
+          type: string
+        createdBy:
+          description: A unique identifier that represents the user that created the
+            incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        description:
+          description: Text that describes the incident type.
+          example: Any incidents that harm (or have the potential to) the confidentiality,
+            integrity, or availability of our data.
+          type: string
+        is_default:
+          default: false
+          description: If true, this incident type will be used as the default incident
+            type if a type is not specified during the creation of incident resources.
+          example: true
+          type: boolean
+        lastModifiedBy:
+          description: A unique identifier that represents the user that last modified
+            the incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Timestamp when the incident type was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the incident type.
+          example: Security Incident
+          type: string
+        prefix:
+          description: The string that will be prepended to the incident title across
+            the Datadog app.
+          example: IR
+          readOnly: true
+          type: string
+      required:
+      - name
+      type: object
+    IncidentTypeCreateData:
+      description: Incident type data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTypeAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTypeCreateRequest:
+      description: Create request for an incident type.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTypeCreateData'
+      required:
+      - data
+      type: object
+    IncidentTypeListResponse:
+      description: Response with a list of incident types.
+      properties:
+        data:
+          description: An array of incident type objects.
+          items:
+            $ref: '#/components/schemas/IncidentTypeObject'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentTypeObject:
+      description: Incident type response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTypeAttributes'
+        id:
+          description: The incident type's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentTypePatchData:
+      description: Incident type data for a patch request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTypeUpdateAttributes'
+        id:
+          description: The incident type's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentTypeType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IncidentTypePatchRequest:
+      description: Patch request for an incident type.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTypePatchData'
+      required:
+      - data
+      type: object
+    IncidentTypeResponse:
+      description: Incident type response data.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTypeObject'
+      required:
+      - data
+      type: object
+    IncidentTypeType:
+      default: incident_types
+      description: Incident type resource type.
+      enum:
+      - incident_types
+      example: incident_types
+      type: string
+      x-enum-varnames:
+      - INCIDENT_TYPES
+    IncidentTypeUpdateAttributes:
+      description: Incident type's attributes for updates.
+      properties:
+        createdAt:
+          description: Timestamp when the incident type was created.
+          format: date-time
+          readOnly: true
+          type: string
+        createdBy:
+          description: A unique identifier that represents the user that created the
+            incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        description:
+          description: Text that describes the incident type.
+          example: 'Any incidents that harm (or have the potential to) the confidentiality,
+            integrity, or availability of our data. Note: This will notify the security
+            team.'
+          type: string
+        is_default:
+          description: When true, this incident type will be used as the default type
+            when an incident type is not specified.
+          example: true
+          type: boolean
+        lastModifiedBy:
+          description: A unique identifier that represents the user that last modified
+            the incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          readOnly: true
+          type: string
+        modifiedAt:
+          description: Timestamp when the incident type was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the incident type.
+          example: Security Incident
+          type: string
+        prefix:
+          description: The string that will be prepended to the incident title across
+            the Datadog app.
+          example: IR
+          readOnly: true
+          type: string
+      type: object
     IncidentUpdateAttributes:
       description: The incident's attributes for an update request.
       properties:
@@ -12053,6 +12279,7 @@ components:
               customer_impact_start: null
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
+              incident_type_uuid: 00000000-0000-0000-0000-000000000001
               modified: '2020-09-17T14:16:58.696424+00:00'
               public_id: 1
               resolved: null
@@ -12098,6 +12325,7 @@ components:
               customer_impact_start: null
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
+              incident_type_uuid: 00000000-0000-0000-0000-000000000002
               modified: '2020-09-17T14:16:58.696424+00:00'
               public_id: 2
               resolved: null
@@ -12147,7 +12375,7 @@ components:
       - data
       type: object
     IncludeType:
-      description: supported include types.
+      description: Supported include types.
       enum:
       - schema
       - raw_schema
@@ -12483,13 +12711,13 @@ components:
       description: List entity response links.
       properties:
         next:
-          description: next link.
+          description: Next link.
           type: string
         previous:
-          description: previous link.
+          description: Previous link.
           type: string
         self:
-          description: current link.
+          description: Current link.
           type: string
       type: object
     ListFindingsData:
@@ -17972,7 +18200,7 @@ components:
           type: string
       type: object
     RelationType:
-      description: supported relation types
+      description: Supported relation types.
       enum:
       - RelationTypeOwns
       - RelationTypeOwnedBy
@@ -18005,7 +18233,7 @@ components:
       description: Relationship entry.
       properties:
         id:
-          description: Associated data id.
+          description: Associated data ID.
           type: string
         type:
           description: Relationship type.
@@ -22063,6 +22291,13 @@ components:
           items:
             type: string
           type: array
+        use_recommended_keywords:
+          description: 'Should the rule use the underlying standard pattern keyword
+            configuration. If set to `true`, the rule must be tied
+
+            to a standard pattern. If set to `false`, the specified keywords and `character_count`
+            are applied.'
+          type: boolean
       required:
       - keywords
       - character_count
@@ -22079,11 +22314,15 @@ components:
           format: int64
           type: integer
         has_highlight_enabled:
-          description: Whether or not scanned events are highlighted in Logs or RUM
-            for the org.
+          default: true
+          deprecated: true
+          description: (Deprecated) Whether or not scanned events are highlighted
+            in Logs or RUM for the org.
           type: boolean
         has_multi_pass_enabled:
-          description: Whether or not scanned events have multi-pass enabled.
+          deprecated: true
+          description: (Deprecated) Whether or not scanned events have multi-pass
+            enabled.
           type: boolean
         is_pci_compliant:
           description: Whether or not the org is compliant to the payment card industry
@@ -25279,7 +25518,7 @@ components:
           $ref: '#/components/schemas/RuleType'
       type: object
     UpsertCatalogEntityRequest:
-      description: Create / Update entity request.
+      description: Create or update entity request.
       oneOf:
       - $ref: '#/components/schemas/EntityV3'
       - $ref: '#/components/schemas/EntityRaw'
@@ -26075,6 +26314,7 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
+            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -28200,7 +28440,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpsertCatalogEntityRequest'
-        description: Entity YAML/JSON.
+        description: Entity YAML or JSON.
         required: true
       responses:
         '202':
@@ -29522,7 +29762,7 @@ paths:
           for cost ending this month.'
         in: query
         name: end_month
-        required: true
+        required: false
         schema:
           format: date-time
           type: string
@@ -30705,6 +30945,232 @@ paths:
         - name: incident_id
           source: data.id
         type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/types:
+    get:
+      description: Get all incident types.
+      operationId: ListIncidentTypes
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIncludeDeletedParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+        - incident_read
+      summary: Get a list of incident types
+      tags:
+      - Incidents
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_read
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident type.
+      operationId: CreateIncidentType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTypeCreateRequest'
+        description: Incident type payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Create an incident type
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_type:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{unique_hash}}\"\n
+              \   },\n    \"type\": \"incident_types\"\n  }\n}"
+          step: there is a valid "incident_type" in the system
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
+      x-undo:
+        operationId: DeleteIncidentType
+        parameters:
+        - name: incident_type_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/types/{incident_type_id}:
+    delete:
+      description: Delete an incident type.
+      operationId: DeleteIncidentType
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Delete an incident type
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get incident type details.
+      operationId: GetIncidentType
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_read
+        - incident_read
+      summary: Get incident type details
+      tags:
+      - Incidents
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_read
+        - incident_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an incident type.
+      operationId: UpdateIncidentType
+      parameters:
+      - $ref: '#/components/parameters/IncidentTypeIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTypePatchRequest'
+        description: Incident type payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTypeResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_settings_write
+      summary: Update an incident type
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_settings_write
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -35205,7 +35671,8 @@ paths:
         type: safe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
-      description: View indexed tag key-value pairs for a given metric name.
+      description: View indexed tag key-value pairs for a given metric name over the
+        previous hour.
       operationId: ListTagsByMetricName
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -36405,6 +36872,17 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/FindingStatus'
+      - description: Return findings that match the selected vulnerability types (repeatable).
+        example:
+        - misconfiguration
+        explode: true
+        in: query
+        name: filter[vulnerability_type]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/FindingVulnerabilityType'
+          type: array
       responses:
         '200':
           content:
@@ -44509,7 +44987,7 @@ tags:
     This feature is currently in BETA. If you have any feedback, contact [Datadog
     support](https://docs.datadoghq.com/help/).'
   name: Service Scorecards
-- description: API to create, update, retrieve and delete Software Catalog entities.
+- description: API to create, update, retrieve, and delete Software Catalog entities.
   externalDocs:
     url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
   name: Software Catalog

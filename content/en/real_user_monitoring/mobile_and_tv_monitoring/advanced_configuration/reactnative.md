@@ -316,6 +316,14 @@ DdSdkReactNative.setUser({
 });
 ```
 
+If you want to add or update user information, you can use the following code to modify the existing user's details.
+
+```js
+DdSdkReactNative.addUserExtraInfo({
+    hasPaid: 'true'
+});
+```
+
 If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
 
 ```js
