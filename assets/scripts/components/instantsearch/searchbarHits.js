@@ -89,13 +89,17 @@ const renderHits = (renderOptions, isFirstRender) => {
                 const hit = getHitData(item, renderOptions.results.query);
                 const displayContent = getSnippetForDisplay(hit, false);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
+                const sectHeader = (hit.section_header !== "") ? `<span class="breadcrumb2"> &raquo; <strong>${hit.section_header}</strong></span>` : "";
 
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <p class="ais-Hits-subcategory">${hit.subcategory}</p>
                             <div>
-                                <p class="ais-Hits-title"><strong>${hit.title}</strong></p>
+                                <p class="ais-Hits-title">
+                                    <strong class="breadcrumb1">${hit.title}</strong>
+                                    ${sectHeader}
+                                  </p>
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>
                         </a>

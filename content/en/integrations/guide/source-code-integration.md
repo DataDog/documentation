@@ -219,9 +219,9 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">The NodeJS client library version 3.21.0 or later is required.</div>
+<div class="alert alert-info">The Node.js client library version 3.21.0 or later is required.</div>
 
 #### Containers
 

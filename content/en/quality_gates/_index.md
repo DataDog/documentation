@@ -18,6 +18,9 @@ further_reading:
 - link: "/account_management/audit_trail/"
   tag: "Documentation"
   text: "Learn about Audit Trail"
+- link: "https://www.datadoghq.com/blog/datadog-flaky-tests/"
+  tag: "Blog"
+  text: "Flaky tests: their hidden costs and how to address flaky behavior"
 ---
 
 {{< site-region region="gov" >}}
