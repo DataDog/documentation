@@ -105,8 +105,7 @@ The available functionality has the following important limitations:
 {{< tabs >}}
 {{% tab "Nginx" %}}
 
-- This instrumentation method does not support any [advanced RUM configurations][1].
-- All [initialization parameters][2] are supported except for `allowedTracingUrls` and `excludedActivityUrls`.
+- This instrumentation method does not support any [advanced RUM configurations][1] except `allowedTracingUrls` and `excludedActivityUrls`.
 - If serving compressed traffic, the SDK injector is not able to inject the JS scriptlet into the HTML traffic.
 - The SDK injector does not inject encrypted requests served by the Nginx.
 
@@ -117,7 +116,7 @@ The available functionality has the following important limitations:
 {{% tab "Windows IIS" %}}
 
 - This instrumentation method does not support any [advanced RUM configurations][1].
-- Injection per IIS application is not supported.
+- Configuration for RUM Auto-Injection is only available per Windows IIS Site.
 
 [1]: /real_user_monitoring/browser/advanced_configuration/
 
