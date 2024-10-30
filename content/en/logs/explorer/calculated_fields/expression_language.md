@@ -270,7 +270,7 @@ Extracts a portion of text from the end of a string.
 </details>
 
 
-<h4>textjoin(<i>str</i> delimiter, <i>expr</i> value [, <i>expr</i> value, …])</h4>
+<h4>textjoin(<i>str</i> delimiter, <i>bool</i> ignore, <i>expr</i> value [, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string with a delimiter in between.
 
@@ -279,7 +279,7 @@ Combines multiple values into a single string with a delimiter in between.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #join_region = textjoin(", ", `@city`, `@country`) | #join_region = "Paris, France" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #join_region = textjoin(", ", "false", `@city`, `@country`) | #join_region = "Paris, France" |
 
 </details>
 
