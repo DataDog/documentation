@@ -46,7 +46,7 @@ Below are the available cloud cost recommendation categories and their descripti
 The following are requirements necessary to receive Cloud Cost recommendations:
 
 - Cloud provider accounts (for all Cloud Cost recommendations)
-- AWS integration and resource collections (for AWS recommendations)
+- [AWS integration and resource collections][3] (for AWS recommendations)
 
 ## Setup
 
