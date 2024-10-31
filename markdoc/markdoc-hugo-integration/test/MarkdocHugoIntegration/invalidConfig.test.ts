@@ -5,12 +5,11 @@ import { VALID_SITE_DIR } from '../config/constants';
 const siteDir = VALID_SITE_DIR;
 
 describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
-  const initArgs = {
-    directories: {
-      content: siteDir + '/content',
-      options: siteDir + '/preferences_config/options',
-      partials: siteDir + '/partials'
-    }
+  const dirs = {
+    content: siteDir + '/content',
+    options: siteDir + '/preferences_config/options',
+    partials: siteDir + '/partials',
+    images: siteDir + '/images'
   };
 
   const invalidHugoConfigs = [
@@ -20,16 +19,22 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
         img_url: 'https://example.com'
       },
       languages: ['en'],
-      baseURL: 'https://example.com'
+      siteConfig: {
+        baseURL: 'https://example.com'
+      },
+      dirs
     },
-    // no img_url in siteParams
+    // no img_url in siteParamss
     {
       siteParams: {
         irrelevant_key: 'irrelevant_value'
       },
       env: 'development',
       languages: ['en'],
-      baseURL: 'https://example.com'
+      siteConfig: {
+        baseURL: 'https://example.com'
+      },
+      dirs
     },
     // no branch in siteParams when env is 'preview'
     {
@@ -38,7 +43,10 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       },
       env: 'preview',
       languages: ['en'],
-      baseURL: 'https://example.com'
+      siteConfig: {
+        baseURL: 'https://example.com'
+      },
+      dirs
     }
   ];
 

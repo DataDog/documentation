@@ -5,7 +5,7 @@ import { mockHugoConfig } from '../mocks/valid/hugoConfig';
 describe('HugoFunctions.relUrl', () => {
   test('handles all example inputs correctly for a simple base URL', () => {
     const hugoConfigDup = { ...mockHugoConfig };
-    hugoConfigDup.baseURL = 'https://example.org/';
+    hugoConfigDup.siteConfig = { baseURL: 'https://example.org/' };
 
     const expectedOutputByInput = {
       '': '/',
@@ -24,12 +24,12 @@ describe('HugoFunctions.relUrl', () => {
       ])
     );
 
-    expect(expectedOutputByInput).toEqual(actualOutputByInput);
+    expect(actualOutputByInput).toEqual(expectedOutputByInput);
   });
 
   test('handles all example inputs correctly for a base URL with a path', () => {
     const hugoConfigDup = { ...mockHugoConfig };
-    hugoConfigDup.baseURL = 'https://example.org/foo/bar/';
+    hugoConfigDup.siteConfig = { baseURL: 'https://example.org/foo/bar/' };
 
     const expectedOutputByInput = {
       '': '/foo/bar',
@@ -48,6 +48,6 @@ describe('HugoFunctions.relUrl', () => {
       ])
     );
 
-    expect(expectedOutputByInput).toEqual(actualOutputByInput);
+    expect(actualOutputByInput).toEqual(expectedOutputByInput);
   });
 });

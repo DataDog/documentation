@@ -4,7 +4,7 @@ import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
 import { render, CustomHtmlComponent } from '../../../../src/helperModules/renderer';
-import { HugoConfig } from '../../../../src/schemas/hugoConfig';
+import { mockHugoConfig } from '../../../mocks/valid/hugoConfig';
 
 const alert = {
   render: 'Alert',
@@ -16,15 +16,6 @@ const alert = {
       matches: ['info', 'warning']
     }
   }
-};
-
-const mockHugoConfig: HugoConfig = {
-  siteParams: {
-    img_url: 'https://www.datadoghq.com'
-  },
-  env: 'development',
-  languages: ['en'],
-  baseURL: 'https://www.datadoghq.com'
 };
 
 class Alert extends CustomHtmlComponent {

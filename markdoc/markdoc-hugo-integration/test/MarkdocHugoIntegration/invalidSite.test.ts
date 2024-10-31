@@ -2,7 +2,6 @@ import { MarkdocHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, INVALID_SITE_DIR } from '../config/constants';
 import { FileNavigator } from '../../src/helperModules/FileNavigator';
-import { error } from 'console';
 
 const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';
@@ -10,18 +9,19 @@ const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc$/);
 
 describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({
-    directories: {
-      content: contentDir,
-      prefsConfig: siteDir + '/preferences_config',
-      partials: siteDir + '/partials'
-    },
     hugoConfig: {
       siteParams: {
         img_url: 'https://example.com'
       },
       env: 'development',
       languages: ['en'],
-      baseURL: 'https://example.com'
+      siteConfig: { baseURL: 'https://example.com' },
+      dirs: {
+        content: contentDir,
+        prefsConfig: siteDir + '/preferences_config',
+        partials: siteDir + '/partials',
+        images: siteDir + '/static/images'
+      }
     }
   });
 

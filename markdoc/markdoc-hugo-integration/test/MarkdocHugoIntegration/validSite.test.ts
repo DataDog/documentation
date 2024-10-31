@@ -7,18 +7,19 @@ const siteDir = VALID_SITE_DIR;
 
 describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
   const compiler = new MarkdocHugoIntegration({
-    directories: {
-      content: siteDir + '/content',
-      prefsConfig: siteDir + '/preferences_config',
-      partials: siteDir + '/partials'
-    },
     hugoConfig: {
       siteParams: {
         img_url: 'https://example.com'
       },
       env: 'development',
       languages: ['en', 'ja', 'fr'],
-      baseURL: 'https://example.com'
+      siteConfig: { baseURL: 'https://example.com' },
+      dirs: {
+        content: siteDir + '/content',
+        prefsConfig: siteDir + '/preferences_config',
+        partials: siteDir + '/partials',
+        images: siteDir + '/static/images'
+      }
     }
   });
 

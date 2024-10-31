@@ -10,9 +10,17 @@ export const HugoConfigSchema = z
       img_url: z.string().url(),
       branch: z.string().optional() // required if env is "preview"
     }),
-    baseURL: z.string().url(),
+    siteConfig: z.object({ baseURL: z.string().url() }),
     env: z.union([z.literal('development'), z.literal('preview'), z.literal('live')]),
-    languages: z.array(z.string())
+    languages: z.array(z.string()),
+    dirs: z
+      .object({
+        content: z.string().min(1),
+        partials: z.string().min(1),
+        prefsConfig: z.string().min(1),
+        images: z.string().min(1)
+      })
+      .strict()
   })
   .refine((hugoVars) => {
     if (hugoVars.env === 'preview' && !hugoVars.siteParams.branch) {

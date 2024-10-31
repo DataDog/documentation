@@ -1,10 +1,19 @@
 import { HugoConfig } from '../../../src/schemas/hugoConfig';
+import { VALID_SITE_DIR } from '../../config/constants';
 
 const mockHugoConfig: HugoConfig = {
   siteParams: { img_url: 'https://example.com' },
   env: 'development',
   languages: ['en', 'ja'],
-  baseURL: 'https://example.com'
+  siteConfig: {
+    baseURL: 'https://example.com'
+  },
+  dirs: {
+    content: VALID_SITE_DIR + '/content',
+    prefsConfig: VALID_SITE_DIR + '/preferences_config',
+    partials: VALID_SITE_DIR + '/partials',
+    images: VALID_SITE_DIR + '/static/images'
+  }
 };
 
 export { mockHugoConfig };

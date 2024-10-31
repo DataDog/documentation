@@ -117,11 +117,10 @@ function InlineImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
 function Picture(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
 
-  const pictureProps: Record<string, any> = {
-    srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format'
-  };
+  const pictureProps: Record<string, any> = {};
 
   const imgProps: Record<string, any> = {
+    srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format',
     className: 'img-fluid'
   };
 
@@ -146,9 +145,11 @@ function Picture(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   }
 
   return (
-    <picture {...pictureProps}>
-      <img {...imgProps} />
-    </picture>
+    <Figure attrs={attrs}>
+      <picture {...pictureProps}>
+        <img {...imgProps} />
+      </picture>
+    </Figure>
   );
 }
 
@@ -268,16 +269,38 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
 
 // Utility functions -----------------------------------------------------------
 
+/**
+ * {{- $dot := .context -}}
+
+{{- with resources.Get .src -}}
+{{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
+
+{{- if and (eq hugo.Environment "preview") ($dot.Site.Params.branch) -}}
+{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
+{{- $full_permalink = replace $full_permalink $branch_name ""}}
+{{- end -}}
+
+{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
+{{- end -}}
+ */
 function buildImagePermalink(props: { src: string; hugoConfig: HugoConfig }) {
   const { src, hugoConfig } = props;
 
+  const targetMd5 = '60abd3d42408607da509794034239f28';
+
+  console.log('\n\n\n\nsrc in permalink build', src);
+
+  const fingerprintedSrc = src.replace('.', `.${md5(src)}.`);
+
+  console.log('\n\n\n\nfingerprintedSrc in permalink build', fingerprintedSrc);
+
   // add branch to URL if in staging
-  let prefix = '';
+  // TODO: Verify that the img_resource returns the full URL
+  let prefix = hugoConfig.siteConfig.baseURL;
   if (hugoConfig.env === 'preview') {
     prefix = `${hugoConfig.siteParams.branch}/`;
   }
 
-  const fingerprintedSrc = src.replace('.', `.${md5(src)}.`);
   const permalink = `${prefix}images/${fingerprintedSrc}`;
 
   return permalink;

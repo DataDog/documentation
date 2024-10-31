@@ -18,6 +18,13 @@ const envSiteParamsFile = path.resolve(__dirname, `../config/${env}/params.yaml`
 const envSiteParams = yaml.safeLoad(fs.readFileSync(envSiteParamsFile, 'utf8'));
 const siteParams = Object.assign({}, defaultSiteParams, envSiteParams);
 
+// Load the site config from the appropriate files
+const defaultSiteConfigFile = path.resolve(__dirname, '../config/_default/config.yaml');
+const defaultSiteConfig = yaml.safeLoad(fs.readFileSync(defaultSiteConfigFile, 'utf8'));
+const envSiteConfigFile = path.resolve(__dirname, `../config/${env}/config.yaml`);
+const envSiteConfig = yaml.safeLoad(fs.readFileSync(envSiteConfigFile, 'utf8'));
+const siteConfig = Object.assign({}, defaultSiteConfig, envSiteConfig);
+
 // Load the languages from the appropriate file
 const languagesFile = path.resolve(__dirname, '../config/_default/languages.yaml');
 const languagesConfig = yaml.safeLoad(fs.readFileSync(languagesFile, 'utf8'));
@@ -29,18 +36,21 @@ const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc
 const CONTENT_DIR = path.resolve(__dirname, '../content');
 const PARTIALS_DIR = path.resolve(__dirname, '../mdoc_partials');
 const PREFS_CONFIG_DIR = path.resolve(__dirname, '../config/_default/preferences/');
+const IMAGES_DIR = path.resolve(__dirname, '../static/images');
 
 // Initialize the Markdoc integration
 const markdocIntegration = new MarkdocHugoIntegration({
-    directories: {
-        content: CONTENT_DIR,
-        prefsConfig: PREFS_CONFIG_DIR,
-        partials: PARTIALS_DIR
-    },
     hugoConfig: {
         siteParams,
+        siteConfig,
         languages,
-        env
+        env,
+        directories: {
+            content: CONTENT_DIR,
+            images: IMAGES_DIR,
+            prefsConfig: PREFS_CONFIG_DIR,
+            partials: PARTIALS_DIR
+        }
     }
 });
 

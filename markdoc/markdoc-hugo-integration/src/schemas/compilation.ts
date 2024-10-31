@@ -8,13 +8,6 @@ import { Frontmatter } from '../schemas/yaml/frontMatter';
  * from outside the module.
  */
 export const CompilationConfigSchema = z.object({
-  directories: z
-    .object({
-      content: z.string(),
-      partials: z.string(),
-      prefsConfig: z.string()
-    })
-    .strict(),
   hugoConfig: HugoConfigSchema
 });
 

@@ -13,6 +13,10 @@ export const imgNewDefinition = {
     alt: {
       type: String
     },
+    popup: {
+      type: Boolean,
+      default: true
+    },
     href: {
       type: String
     },
