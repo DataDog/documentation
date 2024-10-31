@@ -111,7 +111,7 @@ For Python: Datadog Lambda Library for Python layer 99+ **or** `dd-trace-py` v2.
 
 If the layer or tracer version requirements are fulfilled, no further setup is required.
 
-<div class="alert alert-info">Ensure that some input, even if empty, is provided to the Step Functions Start Execution command for trace merging to function correctly.</div>
+<div class="alert alert-info">To ensure that trace merging functions correctly, provide input to the Step Functions Start Execution command. The input can be empty.</div>
 
 ## Merge Step Functions traces with nested Step Functions traces
 
