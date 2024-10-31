@@ -63,7 +63,7 @@ For more information, see the [Monitor status events][2] documentation.
 
 ### Resolve an alert
 
-You can resolve a monitor alert from the Header or the Next Actions sections in the Event details. Resolving from the Header sets the entire monitor to 'OK' (all groups), while resolving from Next Actions only affects the group related to the selected event.
+You can resolve a monitor alert from the Header or the Next Actions sections in the Event details. Resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups), while resolving from Next Actions only affects the group related to the selected event.
 
 From Next Actions, click the **Resolve** button to temporarily set the monitor status to 'OK' for its next evaluation. This does not acknowledge the alert or instruct Datadog to ignore it. Use Resolve when data is reported intermittently, such as when a monitor triggers an alert but stops receiving data, preventing it from recovering to 'OK' on its own. The 'resolve' function or the 'Automatically resolve monitor after X hours' option resets the monitor to 'OK'. 
 
