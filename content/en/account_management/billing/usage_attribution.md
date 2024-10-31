@@ -118,4 +118,4 @@ For direct billing customers, month-end cost attribution reports are generated a
 [2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
 [4]: https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-cost-attribution
-[5]: https://docs-staging.datadoghq.com/account_management/billing/usage_metrics/
+[5]: https://docs.datadoghq.com/account_management/billing/usage_attribution/
