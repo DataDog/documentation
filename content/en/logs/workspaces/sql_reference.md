@@ -10,7 +10,6 @@ further_reading:
 
 SQL functions are built-in operations in SQL (Structured Query Language) used for tasks like calculations, data manipulation, or formatting. This documentation is a reference for SQL support available in Logs Workspaces. It details:
 - [SQL functions](#functions)
-- [Data types](#data-types)
 - [Syntax compatible with PostgreSQL](#syntax)
 
 It provides a resource for the Analysis cell. Use this information to leverage SQL capabilities in data analysis and manipulation within Log Workspaces.
@@ -21,29 +20,20 @@ It provides a resource for the Analysis cell. Use this information to leverage S
 
 The following SQL functions are supported:
 
-* `MIN` (returns the minimum value across all input values)  
-* `MAX` (returns the maximum value across all input values)  
-* `COUNT` (returns the number of input values that are not null)  
-* `SUM` (returns the summation across all input values)  
-* `AVG` (returns the average value (arithmetic mean)  across all input values)  
-    
-* `CEIL / CEILING` (returns the value rounded up to the nearest integer)  
-* `FLOOR` (returns the value rounded down to the nearest integer)  
-* `ROUND` (returns the value rounded to the nearest integer)  
-* `LOWER` (returns the string as lower case)  
-* `UPPER` (returns the string as uppercase)  
-* `ABS` (returns the absolute value)  
-    
-* `Coalesce` (returns the first non-null value)
-
-## Data types
-
-These are all *non-standard types*.
-
-* `int64` (64-bit integer type)  
-* `float64` (64-bit floating point type)  
-* `string`  
-* `timestamp` (millisecond-precision timestamp, represented without a time zone)
+| Function         | Description                                                        |
+|------------------|--------------------------------------------------------------------|
+| `MIN`            | Returns the minimum value across all input values                  |
+| `MAX`            | Returns the maximum value across all input values                  |
+| `COUNT`          | Returns the number of input values that are not null               |
+| `SUM`            | Returns the summation across all input values                      |
+| `AVG`            | Returns the average value (arithmetic mean) across all input values|
+| `CEIL / CEILING` | Returns the value rounded up to the nearest integer                |
+| `FLOOR`          | Returns the value rounded down to the nearest integer              |
+| `ROUND`          | Returns the value rounded to the nearest integer                   |
+| `LOWER`          | Returns the string as lower case                                   |
+| `UPPER`          | Returns the string as uppercase                                    |
+| `ABS`            | Returns the absolute value                                         |
+| `COALESCE`       | Returns the first non-null value                                   |
 
 ## Syntax
 
@@ -56,7 +46,7 @@ These are all *non-standard types*.
 
 ## Casting
 
-Casting is not supported in SQL for Workspaces. However, you can cast columns between the supported types when defining them in a Logs data source:
+To cast values in columns, select between types when defining them in a Logs data source:
 
 1. In a workspace cell, click the cog labeled **Columns**.
 1. Configure column types.
