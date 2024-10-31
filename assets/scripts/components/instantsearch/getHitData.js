@@ -4,25 +4,26 @@ import { truncateContent, truncateContentAtHighlight } from "../../helpers/trunc
 export function getHitData(hit, searchQuery = '') {
     const title = hit.title ? hit.title : hit.type;
     const cleanRelPermalink =
-        hit.language == 'en' ? hit.distinct_base_url : hit.distinct_base_url.replace(`/${hit.language}/`, '');
+        hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
 
     const matchingWordsArray = getFilteredMatchingWords(searchQuery).map(word => replaceSpecialCharacters(word))
     const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
     const highlightTitle = (hit._highlightResult.title.value || title);
     const highlightContent = (hit._highlightResult.content.value || '');
+    const highlightSectionHeader = (hit._highlightResult.section_header.value || '');
 
     return {
         relpermalink: cleanRelPermalink,
         category: hit.category ? hit.category : 'Documentation',
         subcategory: hit.subcategory ? hit.subcategory : title,
         title: handleHighlightingSearchResultContent(highlightTitle, regexQry),
-        section_header: hit.section_header || null,
+        section_header: handleHighlightingSearchResultContent(highlightSectionHeader, regexQry),
         highlighted_content: handleHighlightingSearchResultContent(highlightContent, regexQry)
     };
 }
 
-/* 
+/*
     Returns array of matching words from user search query,
     filtering out short/common terms that may cause inaccurate highlighting
 */
@@ -40,7 +41,7 @@ const handleHighlightingSearchResultContent = (string, regex) => {
     if (string.search(regex) > 0) {
         return string.replace(regex, '<mark>$1</mark>')
     }
-    
+
     return string
 }
 
@@ -56,7 +57,7 @@ export const getSnippetForDisplay = (hit, isSearchPage) => {
 
     if (!hit.section_header) {
         snippet = truncateContent(hit.highlighted_content, characterLimit)
-        
+
         if (!snippet.includes('<mark>')) {
             snippet = truncateContentAtHighlight(hit.highlighted_content, characterLimit)
         }
