@@ -40,9 +40,6 @@ export class HugoFunctions {
   }
 
   static relUrl(p: { hugoConfig: HugoConfig; url: string }): string {
-    console.log('\n\n\n\n\nhugoFunctions.relUrl');
-    console.log('args', JSON.stringify(p, null, 2));
-
     const baseUrl = new URL(p.hugoConfig.siteConfig.baseURL);
     let resultUrl: string;
 
@@ -71,8 +68,6 @@ export class HugoFunctions {
     if (resultUrl.length > 1 && resultUrl.endsWith('/')) {
       resultUrl = resultUrl.slice(0, -1);
     }
-
-    console.log('resultUrl', resultUrl);
 
     return resultUrl;
   }

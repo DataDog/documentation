@@ -64,10 +64,6 @@ function render(
 
   if (node.$$mdtype === 'Node') {
     const nodeType = node.type as string;
-    if (nodeType === 'fence') {
-      console.log('fence encountered in renderer:', JSON.stringify(node, null, 2));
-      console.log('components:', JSON.stringify(components, null, 2));
-    }
     if (
       nodeType &&
       typeof nodeType === 'string' &&

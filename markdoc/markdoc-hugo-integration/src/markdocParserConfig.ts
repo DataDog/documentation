@@ -4,7 +4,6 @@
  */
 import { alertDefinition, Alert } from './components/alert';
 import { imgDefinition, Img } from './components/img';
-import { imgNewDefinition, ImgNew } from './components/imgNew';
 import { regionParamDefinition, RegionParam } from './components/regionParam';
 import { siteRegionDefinition, SiteRegion } from './components/siteRegion';
 import { tabDefinition, Tab } from './components/tab';
@@ -17,7 +16,6 @@ export const transformConfig = {
   tags: {
     alert: alertDefinition,
     img: imgDefinition,
-    'img-new': imgNewDefinition,
     'region-param': regionParamDefinition,
     'site-region': siteRegionDefinition,
     tabs: tabsDefinition,
@@ -33,7 +31,6 @@ export const transformConfig = {
 export const customComponents = {
   Alert,
   Img,
-  ImgNew,
   RegionParam,
   SiteRegion,
   Tabs,
