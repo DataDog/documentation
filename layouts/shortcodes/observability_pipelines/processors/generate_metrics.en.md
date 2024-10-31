@@ -14,7 +14,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 1. In the **Define parameters** section, select the metric type (count, gauge, or distribution). See the [Count metric example]() and [Distribution metric example](). Also see [Metrics Types](#metrics-types) for more information.
     - For gauge and distribution metric types, select a log field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.
     - For the distribution metric type, the log field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
-    - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region.
+    - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
 1. Click **Add Metric**.
 
 ##### Metrics Types
