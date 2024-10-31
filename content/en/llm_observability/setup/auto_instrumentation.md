@@ -160,9 +160,9 @@ The Google Gemini integration instruments the following methods:
 Datadog's [LLM Observability Node.js SDK][4] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 
-| Framework                               | Supported Versions | Tracer Version    |
-|-----------------------------------------|--------------------|-------------------|
-| [OpenAI](#openai) (common JS)           | >= 3.0.0           |                   |
+| Framework                               | Supported Versions | Tracer Version      |
+|-----------------------------------------|--------------------|---------------------|
+| [OpenAI](#openai) (common JS)           | >= 3.0.0           | >= 5.25.0, >=4.49.0 |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -267,6 +267,43 @@ function makeOpenAICall (input) {
 }
 ```
 
+## Bundling Support
+To properly use LLMObs integrations in bundled applications (esbuild, Webpack, Next.js), you will need to exclude those integrations' modules from bundling.
+
+If you are using esbuild, or for more specific information on why tracing does not work directly with bundlers, refer to [Bundling][8].
+
+For Webpack or Next.js bundling, please specify the corresponding integration in the `externals` section of the webpack configuration:
+
+```javascript
+// next.config.js
+module.exports = {
+  webpack: (config) => {
+    // this may be a necessary inclusion
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      graphql: false,
+    }
+
+    // exclude OpenAI from bundling
+    config.externals.push('openai')
+
+    return config
+  }
+}
+
+// webpack.config.js
+module.exports = {
+  resolve: {
+    fallback: {
+      graphql: false,
+    }
+  },
+  externals: {
+    openai: 'openai'
+  }
+}
+```
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -274,6 +311,7 @@ function makeOpenAICall (input) {
 [5]: https://platform.openai.com/docs/api-reference/embeddings
 [6]: /llm_observability/setup/sdk/nodejs/#in-code-setup
 [7]: /llm_observability/setup/sdk/nodejs/#tracing-spans-using-inline-methods
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling
 {{% /tab %}}
 {{< /tabs >}}
 
