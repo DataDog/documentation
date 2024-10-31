@@ -169,7 +169,7 @@ Error
 
 Until an OAuth client is published, you can only authorize the client from the account it was created in (the partner's sandbox account). This error occurs if you try to authorize the client outside of that account before the client is published.
 
-If you've already published your OAuth client, make sure to use the client ID and client secret you received upon submission. Please note that the client secret is displayed only once. If you've lost your client secret, please contact ecosystems@datadog.com for assistance.
+If you've already published your OAuth client, make sure to use the client ID and client secret that you received upon submission. The client secret is displayed only once. If you've lost your client secret, contact [ecosystems@datadog.com][14] for assistance.
 
 ### Forbidden errors
 
