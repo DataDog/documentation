@@ -11,7 +11,7 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 * Get [monitor alerts][4] of spikes or drops in your usage
 * Assess the potential impact of code changes on your usage in near real-time
 
-Estimated usage metrics can be queried on a by tag breakdown on up to 3 selected tags. Learn more [here][5].
+Estimated usage `by_tag` metrics can be queried on up to 3 selected tags. Learn more [here][5].
 
 **Note**: These usage metrics are estimates that are not always matched to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average. Due to the nature of the estimations, the margin of error is larger for small usage.
 
