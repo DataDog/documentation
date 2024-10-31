@@ -2067,11 +2067,16 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
       weight: 103
+    - name: Manage Data Collection
+      url: error_tracking/manage_data_collection
+      parent: error_tracking
+      identifier: error_tracking_manage_data
+      weight: 11
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 11
+      weight: 12
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
