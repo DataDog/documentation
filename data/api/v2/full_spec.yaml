@@ -1017,51 +1017,6 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
-    AWSRelatedAccount:
-      description: AWS related account.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/AWSRelatedAccountAttributes'
-        id:
-          description: The AWS account ID.
-          example: '123456789123'
-          type: string
-        type:
-          $ref: '#/components/schemas/AWSRelatedAccountType'
-      required:
-      - id
-      - type
-      type: object
-      x-merge-override:
-        required: false
-    AWSRelatedAccountAttributes:
-      description: Attributes for an AWS related account.
-      properties:
-        has_datadog_integration:
-          description: Whether or not the AWS account has a Datadog integration.
-          type: boolean
-        name:
-          description: The name of the AWS account.
-          type: string
-      type: object
-    AWSRelatedAccountType:
-      default: aws_account
-      description: Type of AWS related account.
-      enum:
-      - aws_account
-      example: aws_account
-      type: string
-      x-enum-varnames:
-      - AWS_ACCOUNT
-    AWSRelatedAccountsResponse:
-      description: List of AWS related accounts.
-      properties:
-        data:
-          description: An AWS related account.
-          items:
-            $ref: '#/components/schemas/AWSRelatedAccount'
-          type: array
-      type: object
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -29755,56 +29710,6 @@ paths:
         - cloud_cost_management_write
       x-undo:
         type: idempotent
-  /api/v2/cost/aws_related_accounts:
-    get:
-      deprecated: true
-      description: List the AWS accounts in an organization by calling 'organizations:ListAccounts'
-        from the specified management account.
-      operationId: ListAWSRelatedAccounts
-      parameters:
-      - description: The ID of the management account to filter by.
-        example: '123456789123'
-        in: query
-        name: filter[management_account_id]
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AWSRelatedAccountsResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: List related AWS accounts
-      tags:
-      - Cloud Cost Management
-      x-menu-order: 5
-      x-permission:
-        operator: OR
-        permissions:
-        - cloud_cost_management_read
-      x-undo:
-        type: safe
   /api/v2/cost/azure_uc_config:
     get:
       description: List the Azure configs.

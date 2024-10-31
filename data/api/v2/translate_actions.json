@@ -301,10 +301,6 @@
     "request_description": "",
     "request_schema_description": "AWS CUR config Patch Request."
   },
-  "ListAWSRelatedAccounts": {
-    "description": "List the AWS accounts in an organization by calling 'organizations:ListAccounts' from the specified management account.",
-    "summary": "List related AWS accounts"
-  },
   "ListCostAzureUCConfigs": {
     "description": "List the Azure configs.",
     "summary": "List Cloud Cost Management Azure configs"
