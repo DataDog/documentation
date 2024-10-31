@@ -50,7 +50,7 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 
 ## Setup
 
-For each AWS account that you would like to receive recommendations for:
+For each cloud account that you would like to receive recommendations for:
 
 1. Configure [Cloud Cost Management][2] to send bill data to Datadog.
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
