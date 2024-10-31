@@ -15767,7 +15767,7 @@ components:
           $ref: '#/components/schemas/SyntheticsMobileStepParamsDirection'
         element:
           $ref: '#/components/schemas/SyntheticsMobileStepParamsElement'
-        enable:
+        enabled:
           description: Boolean to change the state of the wifi for a `toggleWiFi`
             step type.
           type: boolean
@@ -15783,8 +15783,7 @@ components:
             step type.
           type: string
         value:
-          description: Values used in the step. Used in multiple step types.
-          type: string
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsValue'
         variable:
           $ref: '#/components/schemas/SyntheticsMobileStepParamsVariable'
         withEnter:
@@ -15793,12 +15792,12 @@ components:
           type: boolean
         x:
           description: Amount to scroll by on the `x` axis for a `scroll` step type.
-          format: int64
-          type: integer
+          format: double
+          type: number
         y:
           description: Amount to scroll by on the `y` axis for a `scroll` step type.
-          format: int64
-          type: integer
+          format: double
+          type: number
       type: object
     SyntheticsMobileStepParamsDirection:
       description: The direction of the scroll for a `scrollToElement` step type.
@@ -15852,12 +15851,12 @@ components:
       properties:
         x:
           description: The `relativePosition` on the `x` axis for the element.
-          format: int64
-          type: integer
+          format: double
+          type: number
         y:
           description: The `relativePosition` on the `y` axis for the element.
-          format: int64
-          type: integer
+          format: double
+          type: number
       type: object
     SyntheticsMobileStepParamsElementUserLocator:
       description: User locator to find the element.
@@ -15907,13 +15906,25 @@ components:
       properties:
         x:
           description: The `x` position for the flick.
-          format: int64
-          type: integer
+          format: double
+          type: number
         y:
           description: The `y` position for the flick.
-          format: int64
-          type: integer
+          format: double
+          type: number
       type: object
+    SyntheticsMobileStepParamsValue:
+      description: Values used in the step for in multiple step types.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueString'
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueNumber'
+    SyntheticsMobileStepParamsValueNumber:
+      description: Value used in the step for in multiple step types.
+      format: int64
+      type: integer
+    SyntheticsMobileStepParamsValueString:
+      description: Value used in the step for in multiple step types.
+      type: string
     SyntheticsMobileStepParamsVariable:
       description: Variable object for `extractVariable` step type.
       properties:
