@@ -30,6 +30,22 @@ title: Image/Video
     Aut quasi sunt aut repellat deleniti aut corrupti voluptatem 33 enim
     consequatur qui obcaecati quaerat eum sint obcaecati hic similique voluptas.
   </p>
+  <h3 id="with-href">With href</h3>
+  <p>The below image should take you to Google:</p>
+  <a href="https://www.google.com"
+    ><div class="shortcode-wrapper shortcode-img expand">
+      <figure class="text-center">
+        <picture style="width: 80%"
+          ><img
+            srcset="
+              https://example.com/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
+            "
+            class="img-fluid"
+            style="width: 80%"
+            alt="Navigate to the API Keys page for your organization in Datadog"
+        /></picture>
+      </figure></div
+  ></a>
   <h2 id="video">Video</h2>
   <p>
     Lorem ipsum dolor sit amet. 33 earum tempore in aperiam voluptatem et
