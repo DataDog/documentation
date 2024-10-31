@@ -1,4 +1,4 @@
-Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs are a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, networks logs, and so on. Use the generate metrics processor to generate either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and networks logs. Use the generate metrics processor to generate either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
 **Note**: The metrics generated are [custom metrics][10031] and billed accordingly. See [Custom Metrics Billing][10032] for more information.
 
