@@ -328,8 +328,7 @@ Supply placeholder values as follows:
 : The name of your Datadog integration, such as `etcd` or `redisdb`.
 
 `<CONTAINER_NAME>`
-: An identifier to match against the names (`spec.containers[0].name`, **not** `spec.containers[0].image`) of the containers that correspond to your integration. <br/><br/>
-The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers. You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
+: An identifier to match against the names (`spec.containers[i].name`, **not** `spec.containers[i].image`) of the containers that correspond to your integration.
 
 `<CONTAINER_IMAGE>`
 : An identifier to match against the container image (`.spec.containers[i].image`). <br/><br/>

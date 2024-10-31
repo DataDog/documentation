@@ -5,7 +5,6 @@ en:
     home:
       - HTML
       - RSS
-      - Algolia
       - Search
       - Redirects
     page:

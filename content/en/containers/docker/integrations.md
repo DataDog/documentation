@@ -230,7 +230,7 @@ Supply placeholder values as follows:
 : The name of your Datadog integration, such as `etcd` or `redisdb`.
 
 `<CONTAINER_IMAGE>`
-: An identifier to match against the container image (`.spec.containers[i].image`). <br/><br/>
+: An identifier to match against the container image. <br/><br/>
 For example: if you supply `redis` as a container identifier, your Autodiscovery template is applied to all containers with image names that match `redis`. If you have one container running `foo/redis:latest` and `bar/redis:v2`, your Autodiscovery template is applied to both containers.<br/><br/>
 The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers. You can also use custom identifiers. See [Custom Autodiscovery Identifiers][7].
 

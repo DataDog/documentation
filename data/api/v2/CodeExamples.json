@@ -281,6 +281,13 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "PatchDomainAllowlist": [
+    {
+      "group": "domain_allowlist",
+      "suffix": "",
+      "description": "Sets Domain Allowlist returns \"OK\" response"
+    }
+  ],
   "CreateDowntime": [
     {
       "group": "downtimes",
@@ -830,6 +837,20 @@
       "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
+    }
+  ],
+  "CreateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Create a rum-based metric returns \"Created\" response"
+    }
+  ],
+  "UpdateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Update a rum-based metric returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [
