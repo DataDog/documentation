@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Setup and implement Datadog as an administrator to avoid pit-falls down the road
+description: Setup and install Datadog as an administrator to avoid pit-falls down the road
 further_reading:
 - link: "/getting_started/support/"
   tag: "Documentation"
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-When planning any new software implementation, it's crucial to understand its capabilities, objectives, timelines, teams, and design pattern. Throughout the plan phase you will learn some Datadog basics, define your most important objectives, understand several best practices, and identify how to optimize your Datadog implementation. 
+When planning any new software installation, it's crucial to understand its capabilities, objectives, timelines, teams, and design pattern. Throughout the plan phase you will learn some Datadog basics, define your most important objectives, understand several best practices, and identify how to optimize your Datadog installation. 
 
 ## Getting help
 
@@ -17,58 +17,57 @@ When planning any new software implementation, it's crucial to understand its ca
 
 As you go along in this guide, you can refer to the following self-service resources:
 
-* The Datadog [documentation][1], especially the [getting started][2] pages, to familiarize yourself with the platform further.  
-* The [Datadog UI][3], which provides in-context help that is accessible from any page.
-* For information on specific configuration boxes, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom left hand side within the interface.
+* [Datadog training](#learn-datadog-basics) courses.
+* The Datadog [documentation][16], especially the [Getting started][17] pages, to familiarize yourself with the platform further.  
+* The [Datadog UI][18], which provides in-context help, information on specific configuration fields, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom of the product navigation.
 
 {{< img src="/administrators_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
 
 On this page you can find resources such as:
 
-* [Bits-AI][4] (in-app), which is a platform-wide AI assisted troubleshooter that helps you identify and remediate issues in your applications and infrastructure.  
-* Datadog [training courses](#learn-datadog-basics).
+* [Bits-AI][19] (in-app), which is a platform-wide AI assisted troubleshooter that helps you identify and remediate issues in your applications and infrastructure.  
 
 ### File a support ticket
 
-Datadog makes it easy to get support when you've run into a problem without having to worry about gathering the relevant information and sharing it securely and efficiently.
+To get support when you've run into a problem:
 
-* [Datadog Support][5] is available to help with difficult issues, guide implementations, translate implementations into local conditions, identify bugs, and log feature requests.  
-* For an automated interaction with Datadog support, use Datadog Agent flare, which is a CLI tool that creates a new ticket, then automatically redacts sensitive information in all the relevant log files, debug level settings, and local configs before sending it in a zipped file to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][6].  
-* Additionally, In-App, Datadog's [Fleet Automation][7] can perform the Flare remotely, from within the Platform UI.
+* [Datadog Support][20] is available to help with difficult issues, to guide your installation, to translate them into local conditions, to identify bugs, and to log feature requests.
+* For an automated interaction with Datadog support, use Datadog Agent flare, which is a CLI tool that creates a new support ticket and sends a zipped file of automatically redacted relevant log files, debug level settings, and local configs, to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][21].  
+* Additionally, [Fleet Automation][5] can generate a flare remotely, from within the Platform UI.
 
 ## Learn Datadog basics
 
-Get up to speed with the parts of Datadog that are most important to your use-case. Start with enrolling in our free [Learning Center][1] courses. Datadog recommends incorporating, at minimum, the following courses into your onboarding workflows:
+Get up to speed with the parts of Datadog that are most important to your use-case. Start with enrolling in our free [Learning Center][1] courses. Incorporate the following courses into your onboarding workflows:
 
-**Datadog Service Owners**:
+**Getting started**:
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Datadog Foundation{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Tagging Best Practices{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/managing-service-catalog" >}}Managing the Service Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
-**Datadog Administrators**:
+**Administrators**:
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/agent-on-host" >}}The Agent on a Host{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/monitoring-k8s-cluster-agent" >}}Monitoring a Kubernetes Cluster{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dd-api-automation-iac" >}}Datadog API: Automation and Infrastructure as Code{{< /nextlink >}}
 {{< /whatsnext >}} 
 
-**User Interface concentration**:
+**User Interface**:
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Introduction to Dashboards{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}Discovering Graph Widgets{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dashboards-slos" >}}Using Dashboards and SLOs{{< /nextlink >}}
 {{< /whatsnext >}}
 
-**Datadog Responders**:
+**Site Reliability Engineers**:
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-sre" >}}Site Reliability Engineer{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-sre" >}}Datadog 101: Site Reliability Engineer{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/apm-monitors-and-alerting" >}}APM Monitors and Alertin{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/core-web-vitals-lab" >}}Using Datadog RUM to track core web vitals{{< /nextlink >}}
 {{< /whatsnext >}}
 
-**Developer Concentration**:
+**Developers**:
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/apm-java-host" >}}Setup APM for Java applications{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-dev" >}}Datadog 101: Developer{{< /nextlink >}}
@@ -77,32 +76,35 @@ Get up to speed with the parts of Datadog that are most important to your use-ca
 
 ## Create a test environment
 
-After a bit of training, start adding some of your own local conditions. Spend some time installing and experimenting with Datadog in a low-risk sandbox, to help familiarize yourself with the environment. The Datadog installation methods are helpful for the initial setup. It is critical for the Datadog service ownership team to have a straightforward and accessible environment to develop your monitoring profile before broader deployment. 
+After taking some courses, start applying what you learned to your own local conditions. Spend some time installing and experimenting with Datadog in a low-risk sandbox, to help familiarize yourself with the environment. Create a straightforward and accessible environment to develop your monitoring setup before broader installation. 
 
 ### Configuring your test environment
 
 #### In-App
 
-The [Datadog UI][8] is also the best place to start when embarking on substantial deployments of the core products. The platform is full of easy to use configuration assistance, live data auto-parsers, contextual auto-suggestions, and many other tools for the admin. The Datadog UI provides the best resources for aiding in some of these tasks. 
+The [Datadog UI][18] is the best place to start building out your testing environment. The platform provides configuration assistance, live data auto-parsers, contextual suggestions, and many other tools. The Datadog UI provides helpful resources for completing some of these tasks. 
 
 A few examples are:
 
-* [APM Service Setup][9]   
-* [Log Pipelines][8]   
-* [Monitor Templates][10] 
+* Create a [Synthetic test][14] to start testing critical business transactions on your applications.
+* Create a few [Service Level Objectives][15] (SLOs) to define targets for application performance.
+* Review the [APM Service Setup][9] page, and follow the step-by-step instructions to begin instrumenting your services.
+* Configure and test [Log Pipelines][8] to figure out how you would like to ingest different sets of logs coming from infrastructure and applications.
+* Review the [Monitor Templates][10] page to begin adding some alerts on your test environment.
 
 #### Host Agent Config Templates
 
-The [Datadog Agent][2] is open-source and published in Github. This is a useful resource for viewing configuration templates and specifications. Also, there are tools for host Agent Fleet Automation. Here are a few examples:
+The [Datadog Agent][2] is open-source and published in GitHub. The Agent GitHub repo is a useful resource for viewing configuration templates and specifications to assist with building your environment. 
+
+Here are a few examples:
 
 * [Agent Config Template][3]   
-* [Agent Example Configs][13] 
 * [Integration Config Specs][4]   
 * [Fleet Automation][5]
 
 ## Next Steps
 
-To successfully create a new Datadog deployment, review the [plan][11] page to learn how to create a sizing exercise, setup [resource tagging][12], learn some product best practices, add some ancillary products, and optimize your data collection to ensure a smooth implementation.
+To successfully create a new Datadog installation, review the [plan][11] page to learn how to create a scoping exercise, setup [resource tagging][12], learn some product best practices, add some additional products, and optimize your data collection to ensure a smooth installation.
 
 ## Further Reading
 
@@ -114,7 +116,7 @@ To successfully create a new Datadog deployment, review the [plan][11] page to l
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [4]: https://github.com/DataDog/integrations-core
 [5]: https://app.datadoghq.com/fleet
-[6]: https://docs.datadoghq.com/getting_started/tagging/unified\_service\_tagging/
+[6]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 [7]: https://docs.datadoghq.com/getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
@@ -122,3 +124,11 @@ To successfully create a new Datadog deployment, review the [plan][11] page to l
 [11]: /administrators_guide/plan
 [12]: /administrators_guide/plan/#resource-tagging
 [13]: https://github.com/DataDog/datadog-agent/tree/main/examples
+[14]: https://app.datadoghq.com/synthetics/tests
+[15]: https://app.datadoghq.com/slo/manage
+[16]: https://docs.datadoghq.com
+[17]: /getting_started
+[18]: https://app.datadoghq.com
+[19]: /bits_ai/
+[20]: /help
+[21]: /agent/troubleshooting/send_a_flare/?tab=agent

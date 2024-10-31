@@ -1,6 +1,6 @@
 ---
-title: Maintaining and running your Datadog Implementation
-description: Setup and implement Datadog as an administrator to avoid pit-falls down the road
+title: Maintaining and running your Datadog installation
+description: Setup and install Datadog as an administrator to avoid pit-falls down the road
 further_reading:
 - link: "getting_started/application/"
   tag: "Documentation"
@@ -11,7 +11,7 @@ In the previous two sections, we viewed Datadog through the lens of the plan and
 
 ## Service tasks
 
-By releasing your new individual Datadog services in a rational and sequential pattern, gaining confidence as the service develops, we can reduce the risks of the implementation, and increase adoption from our users. In this section we will list a particular sequence of service item releases that will optimize your Datadog service user's experience. It is not practical to discuss all the intricacies involved in these items, as the diversity of the IT architecture at this level is too extensive to be captured in a single document. 
+By releasing your new individual Datadog services in a rational and sequential pattern, gaining confidence as the service develops, we can reduce the risks of the installation, and increase adoption from our users. In this section we will list a particular sequence of service item releases that will optimize your Datadog service user's experience. It is not practical to discuss all the intricacies involved in these items, as the diversity of the IT architecture at this level is too extensive to be captured in a single document. 
 
 Here are a few highlights:
 
@@ -83,10 +83,10 @@ The vast majority of Datadog [Integrations][16] are controlled within the Agent.
 
 ## Datadog Agent updates
 
-Datadog updates the Agent components frequently for security and functionality reasons, and it is optimal to remain up-to-date. With any implementation, it is important to follow your local procedures for testing and release of new software.  
+Datadog updates the Agent components frequently for security and functionality reasons, and it is optimal to remain up-to-date. With any installation, it is important to follow your local procedures for testing and release of new software.  
 
 **Recommendation:**  
-Include Datadog upgrades within existing patch management standards and upgrade policies. Subscribe to [Datadog’s release feed][17], and closely monitor your [Fleet Automation page][18] for Agent’s that require upgrades.
+Include Datadog upgrades within existing patch management standards and upgrade policies. Subscribe to [Datadog’s release feed][17], and closely monitor your [Fleet Automation page][18] for Agent's that require upgrades.
 
 ## Conclusion
 
