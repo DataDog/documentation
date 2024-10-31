@@ -27,7 +27,7 @@ The right panel of the graph section of the monitor status page provides a high 
 |  | Description |
 | ---- | ---- |
 | Groups  | Count of groups per status (Alert, Warn, No Data, Ok)  |
-| Visualize as | Graph selector to toggle between the Evaluated Data, Source Data, and In Group graphs. |
+| Visualize as | Graph selector to toggle between the Evaluated Data, Source Data, and Transition graphs. |
 | Query | The raw monitor query. A link to the Metrics explorer is also available\*. |
 | Evaluation | The aggregation method applied to the Query with the evaluation window. |
 | Notification count | Count of notifications sent from this monitor. |
@@ -74,7 +74,7 @@ The following monitor types are not supported by the provisional status page:
 
 * \[**TODO**\] Add list of monitor types not supported
 
-## In Groups
+## Transitions
 
 {{< img src="/monitors/status/graphs/in_groups_graph.png" alt="Status page displaying the In Groups graph" style="width:100%;" >}}
 
