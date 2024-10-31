@@ -219,6 +219,30 @@ Note that UDS is only supported on .NET Core 3.1 and above.<br>
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
+#### Trace context propagation
+
+For information about valid values and using the following configuration options, see [Trace Context Propagation][21].
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configuration settings take priority when present.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_EXTRACT_FIRST`
+: **Default**: `false`<br>
+When set to `true`, stop extracting trace context when a valid one is found.<br>
+Available since version `2.42.0`
+
 #### Diagnostic logs
 
 `DD_TRACE_DEBUG`
@@ -358,3 +382,4 @@ The following configuration variables are for features that are available for us
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
+[21]: /tracing/trace_collection/trace_context_propagation/
