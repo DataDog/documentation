@@ -8,8 +8,24 @@ title: Image/Video
     reprehenderit distinctio eum consequatur debitis ea omnis voluptatem.
   </p>
   <p>Ex totam temporibus eum illo amet est libero voluptatibus?</p>
-  <!-- prettier-ignore -->
-  {{< img  src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
+  <a
+    href="/images/api-key.60abd3d42408607da509794034239f28.png?fit=max&amp;auto=format"
+    class="pop"
+    data-bs-toggle="modal"
+    data-bs-target="#popupImageModal"
+    ><div class="shortcode-wrapper shortcode-img expand">
+      <figure class="text-center">
+        <picture style="width: 80%"
+          ><img
+            srcset="
+              https://example.com/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
+            "
+            class="img-fluid"
+            style="width: 80%"
+            alt="Navigate to the API Keys page for your organization in Datadog"
+        /></picture>
+      </figure></div
+  ></a>
   <p>
     Aut quasi sunt aut repellat deleniti aut corrupti voluptatem 33 enim
     consequatur qui obcaecati quaerat eum sint obcaecati hic similique voluptas.
@@ -20,8 +36,27 @@ title: Image/Video
     reprehenderit distinctio eum consequatur debitis ea omnis voluptatem.
   </p>
   <p>Ex totam temporibus eum illo amet est libero voluptatibus?</p>
-  <!-- prettier-ignore -->
-  {{< img  src="cloudcraft/advanced/find-id-using-api/share-with-team.mp4" alt="A quick video showing a Cloudcraft user selecting the Datadog and Cloudcraft teams from the Share & Export menu." video="true" >}}
+  <div class="shortcode-wrapper shortcode-img expand">
+    <figure class="text-center">
+      <video
+        width="100%"
+        height="auto"
+        muted=""
+        playsinline=""
+        autoplay=""
+        loop=""
+        controls=""
+      >
+        <source
+          src="https://example.comimages/share-with-team.mp4"
+          type="video/mp4"
+          media="(min-width: 0px)"
+        />
+        <div class="play"></div>
+        <div class="pause"></div>
+      </video>
+    </figure>
+  </div>
   <p>
     Aut quasi sunt aut repellat deleniti aut corrupti voluptatem 33 enim
     consequatur qui obcaecati quaerat eum sint obcaecati hic similique voluptas.

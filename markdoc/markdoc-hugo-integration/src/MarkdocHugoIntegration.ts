@@ -185,6 +185,11 @@ export class MarkdocHugoIntegration {
       console.error(`Syntax errors found in Markdoc files:`);
 
       for (const filePath in errorReportsByFilePath) {
+        const reports = errorReportsByFilePath[filePath];
+        if (reports.length === 0) {
+          continue;
+        }
+
         console.error(`\nIn file ${filePath}:`);
         errorReportsByFilePath[filePath].forEach((report) => {
           console.error(
@@ -194,15 +199,15 @@ export class MarkdocHugoIntegration {
       }
     }
 
-    if (Object.keys(this.validationErrorsByFilePath).length > 0) {
-      console.error(`Errors found in Markdoc files:`);
-
-      for (const filePath in this.validationErrorsByFilePath) {
-        console.error(`\nIn file ${filePath}:`);
-        this.validationErrorsByFilePath[filePath].forEach((error) => {
-          console.error(`  - ${error}`);
-        });
+    for (const filePath in this.validationErrorsByFilePath) {
+      if (this.validationErrorsByFilePath[filePath].length === 0) {
+        continue;
       }
+
+      console.error(`\nIn file ${filePath}:`);
+      this.validationErrorsByFilePath[filePath].forEach((error) => {
+        console.error(`  - ${error}`);
+      });
     }
   }
 

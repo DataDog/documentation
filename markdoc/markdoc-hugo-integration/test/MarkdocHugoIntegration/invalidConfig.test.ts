@@ -20,7 +20,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       },
       languages: ['en'],
       siteConfig: {
-        baseURL: 'https://example.com'
+        baseURL: 'https://example.com/'
       },
       dirs
     },
@@ -32,7 +32,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       env: 'development',
       languages: ['en'],
       siteConfig: {
-        baseURL: 'https://example.com'
+        baseURL: 'https://example.com/'
       },
       dirs
     },
@@ -44,7 +44,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       env: 'preview',
       languages: ['en'],
       siteConfig: {
-        baseURL: 'https://example.com'
+        baseURL: 'https://example.com/'
       },
       dirs
     }

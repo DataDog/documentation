@@ -6,7 +6,7 @@ const mockHugoConfig: HugoConfig = {
   env: 'development',
   languages: ['en', 'ja'],
   siteConfig: {
-    baseURL: 'https://example.com'
+    baseURL: 'https://example.com/'
   },
   dirs: {
     content: VALID_SITE_DIR + '/content',

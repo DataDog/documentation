@@ -15,7 +15,7 @@ describe('MarkdocHugoIntegration', () => {
       },
       env: 'development',
       languages: ['en'],
-      siteConfig: { baseURL: 'https://example.com' },
+      siteConfig: { baseURL: 'https://example.com/' },
       dirs: {
         content: contentDir,
         prefsConfig: siteDir + '/preferences_config',

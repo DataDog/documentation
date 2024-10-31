@@ -52,7 +52,7 @@ export class HugoFunctions {
         resultUrl = fullUrl.pathname + fullUrl.search + fullUrl.hash;
       } else {
         throw new Error(
-          'The URL to convert does not share the same origin as the base URL.'
+          `The URL to convert ("${p.url}") does not share the same origin as the base URL ("${baseUrl}").`
         );
       }
     } else {
