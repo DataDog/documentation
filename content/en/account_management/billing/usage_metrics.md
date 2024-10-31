@@ -39,6 +39,7 @@ Estimated usage metrics are generally available for the following usage types:
 | APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans`, `datadog.estimated_usage.apm.indexed_spans.by_tag`, `datadog.estimated_usage.apm.indexed_spans_by_host` | Total number of spans indexed by tag-based retention filters. |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes`, `datadog.estimated_usage.apm.ingested_bytes.by_tag`, `datadog.estimated_usage.apm.ingested_bytes_by_host` | Volume of ingested spans in bytes. |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans`, `datadog.estimated_usage.apm.ingested_spans_by_host` | Total number of ingested spans. |
+| APM Ingested Traces            | `datadog.estimated_usage.apm.ingested_traces` | Total number of ingested traces. |
 | APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks`, `datadog.estimated_usage.apm.fargate_tasks.by_tag` | Unique APM Fargate Tasks seen in last 5 minutes. |
 | RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | Total number of RUM sessions. |
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions`, `datadog.estimated_usage.serverless.aws_lambda_functions.by_tag` | Unique serverless functions seen in the last hour. |

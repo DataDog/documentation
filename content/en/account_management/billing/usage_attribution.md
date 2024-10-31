@@ -45,7 +45,7 @@ The **Edit Tags** popover allows:
 
 ## Estimated usage metrics by tag breakdown
 
-Tags selected on the Usage Attribution tab will also populate as options for a by tag breakdown on all `by_tag` Estimated usage metrics (list [here][5]). This allows you to query by tag across products such as Metrics Explorer, Dashboards, Notebooks, and SLOs, providing deeper insights for monitoring and optimizing your resource usage.
+Tags selected on the Usage Attribution tab will also populate as options for a by tag breakdown on all Estimated usage `by_tag` metrics (list [here][5]). This allows you to query by tag across products such as Metrics Explorer, Dashboards, Notebooks, and SLOs, providing deeper insights for monitoring and optimizing your resource usage.
 
 **Note**: Changes in tags to the Usage Attribution tab will be reflected in the Estimated Usage Metric by tag breakdown at 00:00 UTC the following day.
 
