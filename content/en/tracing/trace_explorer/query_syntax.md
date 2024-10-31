@@ -46,10 +46,9 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A **Span tag**
-
-* A **Tag attribute**
-
+* A **Span tag:**  Enrichments of context related to the span. For instance host or container tags describing the infrastructure the service is running on.
+* A **Span attribute:** Content of the span, collected via auto or manual instrumentation in the application.
+  
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
 | **Operator** | **Description**                                                                                        | **Example**                  |
