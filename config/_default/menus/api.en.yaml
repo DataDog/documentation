@@ -4992,18 +4992,6 @@ menu:
           - ListCostAzureUCConfigs
         unstable: []
         order: 6
-    - name: List related AWS accounts
-      url: '#list-related-aws-accounts'
-      identifier: cloud-cost-management-list-related-aws-accounts
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListAWSRelatedAccounts
-        unstable: []
-        order: 5
     - name: Update Cloud Cost Management AWS CUR config
       url: '#update-cloud-cost-management-aws-cur-config'
       identifier: cloud-cost-management-update-cloud-cost-management-aws-cur-config
