@@ -16,8 +16,8 @@ Error Tracking provides fine-grained control of which errors to ingest, helping 
 
 You can define what data is included in Error Tracking in two ways:
 
-1. [Rules](#rules-inclusion)
-2. [Rate Limits](#rate-limits)
+- [Rules](#rules-inclusion)
+- [Rate limits](#rate-limits)
 
 You can configure both rules and rate limits on the [**Error Tracking** > **Settings**][1] page. 
 
@@ -29,7 +29,7 @@ Each rule consists of:
 - A scope: an inclusion filter, which contains a search query, such as `service:my-web-store`.
 - Optionally, one or more nested exclusion filters to further refine the rule. For example, an exclusion filter might use the `env:staging` query to exclude staging errors.
 
-A given rule can be toggled on or off. An error event is included if it matches a query in one of the active inclusion filters, and it does not match any active nested exclusion queries.
+A given rule can be toggled on or off. An error event is included if it matches a query in one of the active inclusion filters _and_ it does not match any active nested exclusion queries.
 
 **Note:** Error events that get accepted by a rule might still be excluded from Error Tracking if they lack the [required attributes][2].
 
@@ -46,9 +46,9 @@ By default, Error Tracking has an `*` inclusion filter and no exclusion filters.
 To add a rule (inclusion filter):
 1. Navigate to [Error Tracking Settings][1].
 2. Click **Add New Rule**.
-3. Choose your **Error Tracking source** which the rule should be applied.
+3. Choose the **Error Tracking source** the rule should be applied to.
 4. Enter a search query in the **Define scope** field.
-5. Optionally, **Add Exclusion** filter and/or a description to the rule.
+5. Optionally, **Add Exclusion** filters and a description to the rule.
 6. Click **Save Changes**
 7. Optionally, reorder the rules to change their [evaluation order](#evaluation-order). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
 
@@ -71,7 +71,7 @@ To set a rate limit:
 
 {{< img src="logs/error_tracking/rate_limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
 
-A `Rate limit applied` event is generated when the rate limit is reached. See the [Event Management documentation][4] for details on viewing and using events.
+A `Rate limit applied` event is generated when you reach the rate limit. See the [Event Management documentation][4] for details on viewing and using events.
 
 {{< img src="logs/error_tracking/rate_limit_reached_event.png" alt="Screenshot of a 'Rate limit applied' event in the Event Explorer. The event's status is INFO, the source is Error Tracking, the timestamp reads '6h ago', and the title is 'Rate limit applied.' The event is tagged 'source:error_tracking'. The message reads 'Your rate limit has been applied as more than 60000000 logs error events were sent to Error Tracking. Rate limit can be changed from the ingestion control page. " style="width:70%;">}}
 
