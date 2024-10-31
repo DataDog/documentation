@@ -1,5 +1,7 @@
 This processor generates either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
+**Note**: The metrics generated are [custom metrics][10031] and billed accordingly. See [Custom Metrics Billing][10032] for more information.
+
 To set up the processor:
 
 Click **Manage Metrics** to create new metrics or edit existing metrics. This opens a side panel.
@@ -19,7 +21,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 
 ##### Metrics Types
 
-You can generate these types of metrics for your logs. See the [Metrics Types][10031] and [Distributions][10032] documentation for more details.
+You can generate these types of metrics for your logs. See the [Metrics Types][10033] and [Distributions][10034] documentation for more details.
 
 | Metric type  | Description                                                                                                                                     | Example                                                                                             |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -68,5 +70,7 @@ To create a distribution metric that measures the average time it takes for an A
 | Select a log attribute | `response_time_seconds` |
 | Group by               | `method`                |
 
-[10031]: /metrics/types/
-[10032]: /metrics/distributions/
+[10031]: /metrics/custom_metrics/
+[10032]: /account_management/billing/custom_metrics/
+[10033]: /metrics/types/
+[10034]: /metrics/distributions/
