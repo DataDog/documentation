@@ -11,6 +11,8 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 * Get [monitor alerts][4] of spikes or drops in your usage
 * Assess the potential impact of code changes on your usage in near real-time
 
+Estimated usage metrics can be queried on a by tag breakdown on up to selected tag. Learn more [here][].
+
 **Note**: These usage metrics are estimates that are not always matched to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average. Due to the nature of the estimations, the margin of error is larger for small usage.
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
@@ -82,3 +84,4 @@ For billing questions, contact your [Customer Success][2] Manager.
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
+[5]: 

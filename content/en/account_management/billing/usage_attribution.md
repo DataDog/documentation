@@ -43,6 +43,16 @@ The **Edit Tags** popover allows:
 - If tags are changed, the new report reflects the new tags. However, the previous reports keep the old tags.
 - Monthly reports reflect the latest set of tags. If tags are changed in the middle of a month, partial month reports are created for each reporting period.
 
+## Estimated usage metrics by tag breakdown
+
+Tags selected on the Usage Attribution tab will also populate as options for a by tag breakdown on all `by_tag` Estimated usage metrics (list [here][]). This allows you to query by tag across products such as Metrics Explorer, Dashboards, Notebooks, and SLOs, providing deeper insights for monitoring and optimizing your resource usage.
+
+{{< img src="account_management/billing/usage_attribution/eum_tag_breakdown_metrics_explorer.png" alt="example of Estimated usage metric by tag breakdown of metric on Metrics Explorer" >}}
+
+**Note**: Changes in tags to the Usage Attribution tab will be reflected in the Estimated Usage Metric by tag breakdown at 00:00 UTC the following day.
+
+
+
 ## Total usage
 
 ### Monthly usage attribution
