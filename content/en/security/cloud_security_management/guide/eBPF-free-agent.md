@@ -3,16 +3,16 @@ title: Threat Detection for Linux Without eBPF Support
 disable_toc: false
 ---
 
-This guide describes how to set up the CMS Threats eBPF-less solution for eBPF disabled environments such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog agent.
+This guide describes how to set up the CMS Threats eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
 
 This guide also describes some advantages of the ptrace solution.
 
 <div class="alert alert-info">Threat Detection for Linux Without eBPF Support is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 
-## Summary of agent options
+## Summary of Agent options
 
-CMS Threats includes two agent options for threat detection and response:
+CMS Threats includes two Agent options for threat detection and response:
 
 - eBPF solution
 - eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).
@@ -21,18 +21,18 @@ CMS Threats includes two agent options for threat detection and response:
 
 Datadog has built all its security products around [eBPF (extended Berkeley Packet Filter)][1]. Some of the benfits of eBPF are:
 
-- eBPF improves safety by validating each program through the Linux kernel verifier. This ensures that a program can’t crash, fall into infinite loops, harm the system, etc.
+- eBPF improves safety by validating each program through the Linux kernel verifier. This ensures that a program can’t crash, fall into infinite loops, or harm the system.
 - eBPF is JIT (Just In Time) compiled and the output bytecode is executed on a eBPF VM sandbox. This prevents any kernel crash and provides competitive performance.
 - Easy to debug and maintain, can dynamically load programs, and has access to all information needed to trace the user space.
 
-The Datadog eBPF agent code is [fully open source][2].
+The Datadog eBPF Agent code is [fully open source][2].
 
 {{% /collapse-content %}} 
 
 {{% collapse-content title="eBPF-less solution with ptrace" level="h4" %}}
 Some environments use instances with old kernels that do not have eBPF at all. The ptrace solution is provided for these environments.
 
-The following features are not available in the eBPF-less agent:
+The following features are not available in the eBPF-less Agent:
 
 - Security profiles, providing:
   - Anomaly detection
@@ -40,7 +40,7 @@ The following features are not available in the eBPF-less agent:
   - Malware detection
 - Network detections
 
-<div class="alert alert-info">The current implementation supports amd64 and arm64 architecture and ABIs but can be extended to 32-bit ABIs.</div>
+<div class="alert alert-info">The current implementation supports amd64 and arm64 architecture and ABIs, but can be extended to 32-bit ABIs.</div>
 
 ### Advantages of ptrace solution
 
@@ -49,25 +49,25 @@ A ptrace-based solution achieves a balance between robust threat detection and u
 - Precise process control: ptrace provides detailed inspection of memory and registers, safeguarding critical application workloads. This granular visibility is essential for identifying sophisticated threats. The Datadog procfs (Process Filesystem) scanner monitors all system-wide executions, enabling the surgical termination of malicious processes. Together, these tools protect from malicious activity.
 - Operational stability: Operating in user space, ptrace avoids the complexities and risks of kernel space, providing a safer and more manageable approach. In the event of a failure, a ptrace-based agent defaults to a fail-open state at the OS layer, keeping the system unaffected, even if the application hangs.
 - Performance efficiency: Recent benchmarks conducted by Datadog's engineering team demonstrate that the Datadog ptrace-based implementation shows comparable performance to kernel-based solutions. Specifically, it introduces only a minimal overhead of around 3% for PostgreSQL workloads and negligible impacts for Redis operations, making it very efficient for most use cases.
-- Open source verification: Datadog has open-sourced the ptrace-based and eBPF agent, allowing clients and the security community to verify its safety and effectiveness themselves, fostering transparency and trust in our solution.
+- Open source verification: Datadog has open-sourced the ptrace-based and eBPF Agent, allowing clients and the security community to verify its safety and effectiveness themselves, fostering transparency and trust in the solution.
 {{% /collapse-content %}} 
 
 
-## eBPF-less agent setup
+## eBPF-less Agent setup
 
-You can set up the eBPF-less agent on various platforms, including Docker and Linux hosts.
+You can set up the eBPF-less Agent on various platforms, including Docker and Linux hosts.
 
-This section covers Docker and Linux hosts. For steps on setting up an Amazon fargate environment where eBPF is disabled, see [AWS Fargate Configuration Guide for Datadog Security][3].
+This section covers Docker and Linux hosts. For steps on setting up an Amazon Fargate environment where eBPF is disabled, see [AWS Fargate Configuration Guide for Datadog Security][3].
 
-### eBPF-less agent requirements
+### eBPF-less Agent requirements
 
-- The eBPF-less agent is designed for environments where eBPF is disabled, using ptrace for runtime security, and supports arm64/amd64 architectures.
-- Custom installation commands and configurations are required for deploying the eBPF-less agent. Specific instructions are provided in this section for Docker and Linux host installations.
+- The eBPF-less Agent is designed for environments where eBPF is disabled, using ptrace for runtime security, and supports arm64/amd64 architectures.
+- Custom installation commands and configurations are required for deploying the eBPF-less Agent. Specific instructions are provided in this section for Docker and Linux host installations.
 
 The eBPF-less solution includes two tracing modes for applications:
 
 - Wrap mode: Traces applications from the start.
-- Attach mode: Attaches to already running applications but comes with more performance overhead and limitations.
+- Attach mode: Attaches to already running applications, but comes with more performance overhead and limitations.
 
 ### eBPF-less setup steps
 
@@ -114,7 +114,7 @@ docker run -d --name dd-agent \
 {{% /tab %}}
 
 {{% tab "Linux host" %}}
-To install the agent to a Linux host, use the following install script to install the custom build:
+To install the Agent to a Linux host, use the following install script to install the custom build:
 
 ```shell
 DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" \
@@ -132,7 +132,7 @@ runtime_security_config:
     enabled: true
 {{< /code-block >}}
 
-Alternartively, to manually install the `.deb/.rmp` provided custom build packages, modify the `/etc/datadog-agent/system-probe.yaml` file to enable CWS and eBPF-less mode as follow:
+Alternatively, to manually install the `.deb/.rmp` provided custom build packages, modify the `/etc/datadog-agent/system-probe.yaml` file to enable CWS and eBPF-less mode as follows:
 
 {{< code-block lang="java" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 runtime_security_config:
@@ -148,18 +148,18 @@ runtime_security_config:
 
 
 
-## Deploy eBPF-less agent
+## Deploy eBPF-less Agent
 
-Ensure you perform the following configuration requirements before deploying the agent:
+Ensure you perform the following configuration requirements before deploying the Agent:
 
 1. Customize the [Agent Installation Instructions][5] before proceeding with the installation.
-2. Install/update the agent with CSM enabled. For steps, see [Setting up Cloud Security Management on the Agent][4]. 
+2. Install/update the Agent with CSM enabled. For steps, see [Setting up Cloud Security Management on the Agent][4]. 
 3. Specify additional configurations from the previous **eBPF-less agent setup** sections to install the custom version and enable eBPF-less mode.
 
 
 ## Verify setup
 
-To validate your agent installation and setup, connect to your Linux host or Docker container and run:
+To validate your Agent installation and setup, connect to your Linux host or Docker container and run:
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/system-probe config|grep -A 1 ebpfless
@@ -172,9 +172,9 @@ You should see the output:
     enabled: true
 ```
 
-## Set up application tracing with eBPF-less agent
+## Set up application tracing with eBPF-less Agent
 
-After the eBPF-less agent is installed and set up to use the eBPF-Free mode, you can set up how your application is traced. This section provides you two different methods:
+After the eBPF-less Agent is installed and set up to use the eBPF-Free mode, you can set up how your application is traced. This section provides you two different methods:
 
 - **Wrap mode:** (Recommended) In this mode, your application is launched by the Datadog wrapper that traces it from the beginning using ptrace.
   - All spawned children are traced also.
@@ -182,10 +182,10 @@ After the eBPF-less agent is installed and set up to use the eBPF-Free mode, you
 - **Attach mode:** In this mode, you can specify a list of PIDs to attach to your application processes. This should be done quickly because your application is not ptraced until this is done. 
   - In this mode, a seccomp profile cannot be applied. Consequently, there is a small amount ptracing overhead.
 
-Both modes use the **cws-instrumentation** binary packaged with the datadog agent, and located at `/opt/datadog-agent/embedded/bin/cws-instrumentation`.
+Both modes use the **cws-instrumentation** binary packaged with the Datadog Agent, and located at `/opt/datadog-agent/embedded/bin/cws-instrumentation`.
 
 <div class="alert alert-info">
-This tracer communicates with system-probe (part of the Datadog agent) on localhost using port 5678. The system-probe address can be configured with the <code>--probe-addr=host:port</code> cws-instrumentation option. The server-side address can be updated through the runtime_security_config.ebpfless.socket option of the <code>/etc/datadog-agent/system-probe.yaml</code> agent config file.
+This tracer communicates with system-probe (part of the Datadog Agent) on localhost using port 5678. The system-probe address can be configured with the <code>--probe-addr=host:port</code> cws-instrumentation option. The server-side address can be updated through the runtime_security_config.ebpfless.socket option of the <code>/etc/datadog-agent/system-probe.yaml</code> Agent config file.
 </div>
 
 {{< tabs >}}
@@ -202,7 +202,7 @@ If your application runs as non-root, specify the uid/gid as numeric values:
 sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace --uid 100 --gid 100 -- /usr/bin/your_application
 ```
 
-<div class="alert alert-info">An application won’t start until cws-instrumentation has initialized its connection with the Datadog agent.</div>
+<div class="alert alert-info">An application won’t start until cws-instrumentation has initialized its connection with the Datadog Agent.</div>
 
 The following examples show how the tracer can be integrated within applications for different deployment types.
 
@@ -391,7 +391,7 @@ exit 0
 
 #### Docker
 
-To attach the wrapper to a Docker image running an application, use this following Dockerfile:
+To attach the wrapper to a Docker image running an application, use the following Dockerfile:
 
 ```shell
 FROM gcr.io/datadoghq/agent:latest
@@ -407,7 +407,7 @@ To attach to an application, you’ll need the following:
 - Ensure the application container can reach the Datadog container on port 5678 using one of the following methods:
   - Launch both containers with the `--network` host option.
   - Use the [Docker network][6] feature to run both containers on the same bridge network.
-- To ensure the application container is running on the host pid (just as the Datadog agent does), add these options: `--cgroupns host --pid host`.
+- To ensure the application container is running on the host pid (just as the Datadog Agent does), add these options: `--cgroupns host --pid host`.
 {{% /tab %}}
 {{< /tabs >}}
 
