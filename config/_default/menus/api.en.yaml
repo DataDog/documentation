@@ -5289,6 +5289,34 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Domain Allowlist
+      url: /api/latest/domain-allowlist/
+      identifier: domain-allowlist
+      generated: true
+    - name: Sets Domain Allowlist
+      url: '#sets-domain-allowlist'
+      identifier: domain-allowlist-sets-domain-allowlist
+      parent: domain-allowlist
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDomainAllowlist
+        unstable: []
+        order: 2
+    - name: Get Domain Allowlist
+      url: '#get-domain-allowlist'
+      identifier: domain-allowlist-get-domain-allowlist
+      parent: domain-allowlist
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDomainAllowlist
+        unstable: []
+        order: 1
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
@@ -6914,6 +6942,70 @@ menu:
           - v2
         operationids:
           - ListPermissions
+        unstable: []
+        order: 1
+    - name: Rum Metrics
+      url: /api/latest/rum-metrics/
+      identifier: rum-metrics
+      generated: true
+    - name: Update a rum-based metric
+      url: '#update-a-rum-based-metric'
+      identifier: rum-metrics-update-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumMetric
+        unstable: []
+        order: 4
+    - name: Get a rum-based metric
+      url: '#get-a-rum-based-metric'
+      identifier: rum-metrics-get-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumMetric
+        unstable: []
+        order: 3
+    - name: Delete a rum-based metric
+      url: '#delete-a-rum-based-metric'
+      identifier: rum-metrics-delete-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumMetric
+        unstable: []
+        order: 5
+    - name: Create a rum-based metric
+      url: '#create-a-rum-based-metric'
+      identifier: rum-metrics-create-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumMetric
+        unstable: []
+        order: 2
+    - name: Get all rum-based metrics
+      url: '#get-all-rum-based-metrics'
+      identifier: rum-metrics-get-all-rum-based-metrics
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumMetrics
         unstable: []
         order: 1
     - name: Sensitive Data Scanner
