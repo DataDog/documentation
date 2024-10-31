@@ -67,7 +67,7 @@ To set up a pipeline:
     - [Generate Metrics][8]
 1. Select and set up your [source][9].
 1. Select and set up your [destinations][10].
-1. Set up you [processors][11].
+1. Set up your [processors][11].
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
 
