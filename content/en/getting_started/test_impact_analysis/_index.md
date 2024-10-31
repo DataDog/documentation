@@ -57,6 +57,7 @@ You can configure Test Impact Analysis to prevent specific tests from being skip
 
 To configure Test Impact Analysis:
 
+1. For the test you want to enable it on, click **Configure**.
 1. Click the **Status** toggle to enable Test Impact Analysis. 
 1. Specify any branches to exclude (typically the default branch of a repository). Test Impact Analysis does not skip tests for these branches.
 1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Test Impact Analysis runs all CI tests when any of these tracked files change.
