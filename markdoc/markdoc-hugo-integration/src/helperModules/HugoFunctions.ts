@@ -1,9 +1,11 @@
+import md5 from 'md5';
 import { HugoConfig } from '../schemas/hugoConfig';
+import fs from 'fs';
 
 /**
  * The Markdoc-Hugo integration's tag templates (shortcode templates)
  * don't have access to the same functions available
- * in Hugo's shortcode templates. This module provides any functions required
+ * in Hugo's shortcode templates. This module provides the operations required
  * to implement the most common shortcodes on the Markdoc site.
  */
 export class HugoFunctions {
@@ -17,6 +19,24 @@ export class HugoFunctions {
     } catch (e) {
       return false;
     }
+  }
+
+  static getFingerprintedPermalink(p: { src: string; hugoConfig: HugoConfig }) {
+    const path = p.hugoConfig.dirs.images + '/' + p.src;
+    const hash = this.getFileContentsHash(path);
+
+    let prefix = p.hugoConfig.siteConfig.baseURL;
+    if (p.hugoConfig.env === 'preview') {
+      prefix = `${p.hugoConfig.siteParams.branch}/`;
+    }
+
+    const permalink = `${prefix}images/${p.src.replace('.', `.${hash}.`)}`;
+    return permalink;
+  }
+
+  static getFileContentsHash(path: string): string {
+    const contents = fs.readFileSync(path);
+    return md5(contents);
   }
 
   static relUrl(p: { hugoConfig: HugoConfig; url: string }): string {

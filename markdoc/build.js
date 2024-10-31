@@ -45,7 +45,7 @@ const markdocIntegration = new MarkdocHugoIntegration({
         siteConfig,
         languages,
         env,
-        directories: {
+        dirs: {
             content: CONTENT_DIR,
             images: IMAGES_DIR,
             prefsConfig: PREFS_CONFIG_DIR,

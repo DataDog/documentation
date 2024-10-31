@@ -1,6 +1,5 @@
 import { HugoConfig } from '../../schemas/hugoConfig';
 import { HugoFunctions } from '../../helperModules/HugoFunctions';
-import md5 from 'md5';
 
 /**
  * All of the possible attributes an author can define in the img tag.
@@ -92,7 +91,9 @@ function InlineImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
 
   const imgProps: Record<string, any> = {
-    srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format'
+    srcSet:
+      HugoFunctions.getFingerprintedPermalink({ src: attrs.src, hugoConfig }) +
+      '?auto=format'
   };
 
   if (attrs.style) {
@@ -120,7 +121,9 @@ function Picture(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const pictureProps: Record<string, any> = {};
 
   const imgProps: Record<string, any> = {
-    srcSet: buildImagePermalink({ src: attrs.src, hugoConfig }) + '?auto=format',
+    srcSet:
+      HugoFunctions.getFingerprintedPermalink({ src: attrs.src, hugoConfig }) +
+      '?auto=format',
     className: 'img-fluid'
   };
 
@@ -158,7 +161,7 @@ function Gif(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
 
   const imgProps: Record<string, any> = {
     className: 'img-fluid',
-    src: buildImagePermalink({ src: props.attrs.src, hugoConfig })
+    src: HugoFunctions.getFingerprintedPermalink({ src: props.attrs.src, hugoConfig })
   };
 
   if (attrs.style) {
@@ -225,7 +228,11 @@ function PopUpLink(props: {
   // TODO, make this a relative URL: {{ print $img_resource $pop_param | relURL }}
   const href = HugoFunctions.relUrl({
     hugoConfig,
-    url: buildImagePermalink({ src: attrs.src, hugoConfig: props.hugoConfig }) + popParam
+    url:
+      HugoFunctions.getFingerprintedPermalink({
+        src: attrs.src,
+        hugoConfig: props.hugoConfig
+      }) + popParam
   });
 
   return (
@@ -268,43 +275,6 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
 }
 
 // Utility functions -----------------------------------------------------------
-
-/**
- * {{- $dot := .context -}}
-
-{{- with resources.Get .src -}}
-{{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
-
-{{- if and (eq hugo.Environment "preview") ($dot.Site.Params.branch) -}}
-{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
-{{- $full_permalink = replace $full_permalink $branch_name ""}}
-{{- end -}}
-
-{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
-{{- end -}}
- */
-function buildImagePermalink(props: { src: string; hugoConfig: HugoConfig }) {
-  const { src, hugoConfig } = props;
-
-  const targetMd5 = '60abd3d42408607da509794034239f28';
-
-  console.log('\n\n\n\nsrc in permalink build', src);
-
-  const fingerprintedSrc = src.replace('.', `.${md5(src)}.`);
-
-  console.log('\n\n\n\nfingerprintedSrc in permalink build', fingerprintedSrc);
-
-  // add branch to URL if in staging
-  // TODO: Verify that the img_resource returns the full URL
-  let prefix = hugoConfig.siteConfig.baseURL;
-  if (hugoConfig.env === 'preview') {
-    prefix = `${hugoConfig.siteParams.branch}/`;
-  }
-
-  const permalink = `${prefix}images/${fingerprintedSrc}`;
-
-  return permalink;
-}
 
 function cssStringToObject(css: string) {
   const regex = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g;
