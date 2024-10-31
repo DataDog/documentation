@@ -54,15 +54,23 @@ Group tags
 
 ## Evaluated data graph
 
-{{< img src="/monitors/status/evaluated_data_graph_1.png" alt="Hover over the line of an evaluated data graph to see the single value." style="width:100%;" >}}
+The evaluated data visualization is specific to the monitor and shows individual values compared to the threshold, aggregated from the query's data points. For example, if the monitor evaluates the average over the last 5 minutes, each datapoint represents the metric's average value for that period.
 
-The evaluation graph is specific to the monitor and displays the single values compared to the threshold, aggregated from the query's series of points. For example, if the monitor evaluates the average of the query over the last 5 minutes, each datapoint shows the metric's average value for those 5 minutes. 
+It matches your monitor's configuration to show the monitor's historicl and current status using evaluations settings. The graphs show the status by group. 
 
-It matches your monitor's configuration to accurately show the monitor's status using evaluations settings and the monitor's current status.
+{{< img src="/monitors/status/graphs/evaluated_data_ui_features.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
+
+To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the Event Details section for more information.
+
+To filter the view for an individual group, hover over the group title and click **Filter to Group** in the tooltip.
+
+{{< img src="/monitors/status/graphs/current_status_dot.png" alt="Evaluated data graph showing an OK graph with a WARN dot to show the current status is in WARN" style="width:100%;" >}}
+
+When investigating past status changes, the color dot next to the group title indicates the group's current status.
 
 ## Source data graph
 
-{{< img src="/monitors/status/graphs/graphs_source_data_1.png" alt="Status page displaying the source data graph" style="width:100%;" >}}
+{{< img src="/monitors/status/source_data_graph_1.png" alt="Status page displaying the source data graph" style="width:100%;" >}}
 
 The source graph shows the raw data points submitted to Datadog, used to generate the monitor evaluations. Use this graph to view unaltered data over time and confirm if data fluctuations or anomalies trigger alerts.
 

@@ -31,23 +31,21 @@ With Quick Actions, you can take action without leaving the Status page. Respond
 
 | Action | Description |
 | :---- | :---- |
-| Mute  | Create a [downtime][3] to mute monitor alerts. |
+| Mute  | Create a [downtime][1] to mute monitor alerts. |
 | Resolve | Temporarily set the monitor status to 'OK' for its next evaluation |
-| Declare Incident | Escalate monitor alerts with [Incident Management][4]. |
-| Create Case | Create a [case][5] to keep track of this alert investigation without leaving Datadog. |
-| Run Workflow | Run [Workflow][6] Automation with predefined snippets to run mitigation actions. |
+| Declare Incident | Escalate monitor alerts with [Incident Management][2]. |
+| Create Case | Create a [case][3] to keep track of this alert investigation without leaving Datadog. |
+| Run Workflow | Run [Workflow][4] Automation with predefined snippets to run mitigation actions. |
 
 ### Resolve
 
-You can resolve a monitor alert from the status page Header or Event details sections. Resolving from the Event details section only affects the group related to the selected event while resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups).
+You can resolve a monitor alert from the status page [Header][10] or Event details sections. Resolving from the Event details section only affects the group related to the selected event while resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups).
 
-The monitor `resolve` function is artificially switching the monitor status to `OK` for its next evaluation. The next monitor evaluation is performed normally on the data the monitor is based on.
+If a monitor is alerting because its current data corresponds to the `ALERT` state, using `resolve` will cause the state to temporarily switch from `ALERT` to `OK`, and then back to `ALERT`. Therefore, `resolve` is not meant for acknowledging the alert or instructing Datadog to ignore it.
 
-If a monitor is alerting because its current data corresponds to the `ALERT` state, `resolve` has the monitor follow the state switch `ALERT -> OK -> ALERT`. Therefore, using `resolve` is not appropriate for acknowledging the alert or telling Datadog to ignore the alert.
+Manually resolving a monitor is useful when data is reported intermittently. For example, after an alert is triggered, the monitor may stop receiving data, preventing it from evaluating alert conditions and recovering to the `OK` state. In such cases, the `resolve` function or the `Automatically resolve monitor after X hours` changes the monitor back to an `OK` state.
 
-Manually resolving a monitor is appropriate for cases where data is reported intermittently. For example, after triggering an alert the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case, the `resolve` function or the `Automatically resolve monitor after X hours` changes the monitor back to an `OK` state.
-
-A typical use case is for monitors based on error metrics that only report when errors occur, like `aws.elb.httpcode_elb_5xx` or specific DogStatsD counters reporting errors only when an error exists.
+**Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ## Event troubleshooting section
 
@@ -63,3 +61,9 @@ For each event, access troubleshooting information to help responders quickly un
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/downtimes/?tab=bymonitorname
+[2]: /service_management/incident_management/
+[3]: /service_management/case_management/
+[4]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[10]: /monitors/status/status_page/#header
