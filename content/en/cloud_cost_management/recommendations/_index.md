@@ -60,7 +60,7 @@ For each AWS account that you would like to receive recommendations for:
 
 | Recommendation Category | Cloud Provider | Resource Type | Recommendation Type | Recommendation Description | Recommendation Prerequisites |
 |-------------------------|----------------|---------------|---------------------|----------------------------|------------------------------|
-| Unused resource | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | [[Datadog agent][5]][5] |
+| Unused resource | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | [Datadog agent][5] |
 | Unused resource | AWS | EBS | Unattached EBS Volumes | Volumes that have been detached from an EC2 instance. | |
 | Unused resource | AWS | EBS | Unused EBS Volumes | Volumes attached to a non-running EC2 instance. | |
 | Unused resource | AWS | RDS | Unused RDS Instances | RDS instances with 0 database connections and 0 replica lag. | |
