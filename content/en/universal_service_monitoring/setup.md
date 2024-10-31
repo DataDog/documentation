@@ -67,6 +67,20 @@ providers:
     cos: true
 ```
 
+If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
+
+```
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: "system_u"
+          role: "system_r"
+          type: "spc_t"
+          level: "s0"
+```
+
 {{% /tab %}}
 {{% tab "Operator" %}}
 
@@ -825,10 +839,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
+{{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
+Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.
@@ -906,6 +920,7 @@ agents:
         - name: DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED
           value: "true"
 ```
+
 {{% /tab %}}
 
 {{< /tabs >}}

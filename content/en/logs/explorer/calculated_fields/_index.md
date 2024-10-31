@@ -10,6 +10,9 @@ further_reading:
   text: "Log Explorer"
 ---
 
+
+<div class="alert alert-info">For syntax, operators, and functions, see <a href="/logs/explorer/calculated_fields/expression_language">Expression Language</a></div>
+
 ## Overview
 
 Use calculated fields to transform and enrich your log data at query time. Define [formulas](#formula) to:
@@ -50,14 +53,13 @@ This approach allows you to adapt quickly during an investigation or explore unf
 
 ### Define a calculated field
 
-
-{{< img src="logs/explorer/calculated_fields/define_calculated_field.png" alt="A calculated field for throughput, with a formula that divides the network.bytes attribute by the duration attribute" style="width:50%;" >}}
+{{< img src="logs/explorer/calculated_fields/define_a_calculated_field.png" alt="A calculated field for throughput, with a formula that concatenates firstName and lastName attributes " style="width:70%;" >}}
 
 #### Name
 
-Set a descriptive name that clearly indicates the purpose of the calculated field. For example, if the goal is to capitalize users' first and last names and concatenate them into one field, you might use the name `formatted_name` for the calculated field. To subsequently filter logs from a user named `Bob Smith`, update your query to include `#formatted_name:"Bob Smith"`.
+Set a descriptive name that clearly indicates the purpose of the calculated field. For example, if the goal is to combine users' first and last names into one field, you might name your calculated field `fullName`. 
 
-**Note:** You must use the `#` prefix to refer to calculated fields in searches, aggregation, or other calculated field definitions.
+To filter logs from a user named `Pinkie Smith`, include the calculated field name in your query: `#fullName:"Pinkie Smith"`. **Note:** You must use the `#` prefix to refer to calculated fields in searches, aggregation, or other calculated field definitions.
 
 #### Formula
 
@@ -73,7 +75,7 @@ After successful creation of a calculated field, the Log Explorer updates to:
 - Include a column for the calculated field in the **[List][8]** visualization. The title includes the # prefix.
 - Show calculated fields in a separate section inside the log side panel.
 
-Calculated fields function like log attributes and can be used for search, aggregation, visualization, and defining other calculated fields. Remember to use the # prefix when referencing calculated field names.
+Calculated fields function like log attributes and can be used for search, aggregation, visualization, and defining other calculated fields. Remember to use the `#` prefix when referencing calculated field names.
 
 {{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated field called request_duration used to filter results in the Log Explorer" style="width:100%;" >}}
 

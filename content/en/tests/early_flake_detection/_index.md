@@ -36,7 +36,9 @@ Detection of New Tests
 Flakiness Identification
 : Running a test multiple times helps uncover issues like race conditions, which may cause the test to pass and fail intermittently. If any of the test attempts fail, the test is automatically tagged as flaky.
 
-Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the main branch.
+Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the default branch:
+
+{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation_new.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
 
 You can choose to block the merge of the feature branch with a [Quality Gate][4]. For more information, see the [Quality Gates documentation][5].
 
@@ -94,11 +96,7 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 
 ## Manage Excluded Branches
 
-Excluded Branches will not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection.
-
-{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
-
-You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
+Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
 ## Explore results in the Test Visibility Explorer
 
@@ -115,7 +113,7 @@ If you suspect there are issues with Early Flake Detection, navigate to the [Tes
 
 This could be caused by a couple of reasons:
 
-* This test has already run in an excluded branch, such as `staging`, `main`, or `preprod`.
+* This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
 ### A test was retried that is not new

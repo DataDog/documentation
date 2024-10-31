@@ -20,7 +20,7 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Datadog representative to sign up.</div>
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 
