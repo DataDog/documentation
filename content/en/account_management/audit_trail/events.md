@@ -1,5 +1,5 @@
 ---
-title: Audit Trail Events - Typesense Test
+title: Audit Trail Events
 aliases:
     - /account_management/audit_trail_events/
 further_reading:

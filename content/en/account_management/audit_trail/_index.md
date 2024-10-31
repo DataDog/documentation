@@ -1,5 +1,5 @@
 ---
-title: Datadog Audit Trail - Typesense Test
+title: Datadog Audit Trail
 aliases:
     - /account_management/audit_logs/
 further_reading:
