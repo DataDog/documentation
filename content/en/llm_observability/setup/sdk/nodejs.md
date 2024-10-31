@@ -73,7 +73,6 @@ const tracer = require('dd-trace').init({
   },
   site: "<YOUR_DATADOG_SITE>",
   env: "<YOUR_ENV>",
-  service: "<YOUR_SERVICE>",
 });
 
 const llmobs = tracer.llmobs;
@@ -87,17 +86,9 @@ These options are set on the `llmobs` configuration:
 
 `agentlessEnabled`
 : optional - _boolean_ - **default**: `false`
-<br />Only required if you are not using the Datadog Agent, in which case this should be set to `true`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
-
-`apiKey`
-: optional - _string_ 
-<br />Your Datadog API key. If not provided, this defaults to the value of `DD_API_KEY`.
+<br />Only required if you are not using the Datadog Agent, in which case this should be set to `true`. This configures the `dd-trace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 These options can be set on the general tracer configuration:
-
-`site`
-: optional - _string_ 
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
 
 `env`
 : optional - _string_
@@ -106,6 +97,8 @@ These options can be set on the general tracer configuration:
 `service`
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
+
+`DD_API_KEY` and `DD_SITE` are read from [environment variables](#in-code-setup) for configuration, and cannot be configured programatically.
 
 ### AWS Lambda setup
 
@@ -164,7 +157,7 @@ To trace an LLM span, specify the span kind as `llm`, with optionally specifying
 
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
-The name of the model provider.
+<br/>The name of the model provider.
 
 `sessionId`
 : optional - _string_
@@ -314,7 +307,7 @@ To trace an LLM span, specify the span kind as `embedding`, with optionally spec
 
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
-The name of the model provider.
+<br/>The name of the model provider.
 
 `sessionId`
 : optional - _string_
@@ -421,7 +414,7 @@ app.use(myAgentMiddleware)
 
 ## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
+Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
 
 {{< code-block lang="javascript" >}}
 function processMessage() {
@@ -611,8 +604,6 @@ The `llmobs` SDK provides a corresponding inline method to automatically trace t
 2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
 3. The function doesn't accept a callback and doesn't return a Promise, in which case the span will finish at the end of the function execution.
 
-The return type of this function will match the return type of the wrapped function.
-
 #### Example without a callback
 
 {{< code-block lang="javascript" >}}
@@ -634,6 +625,20 @@ function processMessage () {
     cb(maybeError) // the span will finish here, and tag the error if it is not null or undefined
     return
   })
+}
+{{< /code-block >}}
+
+The return type of this function will match the return type of the traced function:
+
+{{< code-block lang="javascript" >}}
+function processMessage () {
+  const result = llmobs.trace({ kind: 'workflow', name: 'processMessage', sessionId: '<SESSION_ID>', mlApp: '<ML_APP>' }, workflowSpan => {
+    ... // user application logic
+    return 'hello world'
+  })
+
+  console.log(result) // 'hello world'
+  return result
 }
 {{< /code-block >}}
 
@@ -702,5 +707,5 @@ tracer.use('http', false) // disable the http integration
 [2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
 [4]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
-[5]: /llm_observability/setup/auto_instrumentation/
+[5]: /llm_observability/setup/auto_instrumentation/?tab=nodejs
 [6]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/?tab=wrapper

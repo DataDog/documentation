@@ -160,9 +160,9 @@ The Google Gemini integration instruments the following methods:
 Datadog's [LLM Observability Node.js SDK][4] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 
-| Framework                               | Supported Versions | Tracer Version      |
-|-----------------------------------------|--------------------|---------------------|
-| [OpenAI](#openai) (common JS)           | >= 3.0.0           | >= 5.25.0, >=4.49.0 |
+| Framework                               | Supported Versions | Tracer Version       |
+|-----------------------------------------|--------------------|----------------------|
+| [OpenAI](#openai) (common JS)           | >= 3.0.0           | >= 4.49.0, >= 5.25.0 |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -270,9 +270,9 @@ function makeOpenAICall (input) {
 ## Bundling Support
 To properly use LLMObs integrations in bundled applications (esbuild, Webpack, Next.js), you will need to exclude those integrations' modules from bundling.
 
-If you are using esbuild, or for more specific information on why tracing does not work directly with bundlers, refer to [Bundling][8].
+If you are using esbuild, or for more specific information on why tracing does not work directly with bundlers, refer to [Bundling][8] with the Node.js tracer.
 
-For Webpack or Next.js bundling, please specify the corresponding integration in the `externals` section of the webpack configuration:
+For Webpack or Next.js bundling, specify the corresponding integration in the `externals` section of the webpack configuration:
 
 ```javascript
 // next.config.js
