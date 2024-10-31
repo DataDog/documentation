@@ -67,6 +67,20 @@ providers:
     cos: true
 ```
 
+If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
+
+```
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: "system_u"
+          role: "system_r"
+          type: "spc_t"
+          level: "s0"
+```
+
 {{% /tab %}}
 {{% tab "Operator" %}}
 
@@ -905,20 +919,6 @@ agents:
       env:
         - name: DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED
           value: "true"
-```
-
-If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
-
-```
-agents:
-  containers:
-    systemProbe:
-      securityContext:
-        seLinuxOptions:
-          user: "system_u"
-          role: "system_r"
-          type: "spc_t"
-          level: "s0"
 ```
 
 {{% /tab %}}
