@@ -11,6 +11,7 @@ This page details common issues with setting up and using Database Monitoring wi
 
 MongoDB `cluster_name` should follow [Datadog tags naming conventions][2].
 If your MongoDB `cluster_name` contains uppercase characters or spaces, the Agent normalize the cluster name to lowercase and replaces spaces with underscores. For example, if your cluster name is `My Cluster`, the Agent normalizes it to `my_cluster`.
+To avoid inconsistencies and unexpected behavior, ensure the `cluster_name` follows the Datadog tags naming conventions.
 
 ### ServerSelectionTimeoutError when connecting to MongoDB Atlas cluster
 
