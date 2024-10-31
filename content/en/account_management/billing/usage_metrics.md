@@ -84,6 +84,6 @@ For billing questions, contact your [Customer Success][2] Manager.
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
-[5]: https://docs.datadoghq.com/account_management/billing/usage_attribution/#Estimated-usage-metrics-by-tag-breakdown
+[5]: https://docs-staging.datadoghq.com/rachealou/eums-by-ua-updates/account_management/billing/usage_attribution/
 
 
