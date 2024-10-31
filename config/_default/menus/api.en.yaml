@@ -5289,6 +5289,34 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Domain Allowlist
+      url: /api/latest/domain-allowlist/
+      identifier: domain-allowlist
+      generated: true
+    - name: Sets Domain Allowlist
+      url: '#sets-domain-allowlist'
+      identifier: domain-allowlist-sets-domain-allowlist
+      parent: domain-allowlist
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDomainAllowlist
+        unstable: []
+        order: 2
+    - name: Get Domain Allowlist
+      url: '#get-domain-allowlist'
+      identifier: domain-allowlist-get-domain-allowlist
+      parent: domain-allowlist
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDomainAllowlist
+        unstable: []
+        order: 1
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
