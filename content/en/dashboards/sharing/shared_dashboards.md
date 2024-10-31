@@ -108,7 +108,7 @@ In the **Configure Dashboard** step, make changes to the shared dashboard.
 
 ### Dashboards cannot be shared by deactivated users
 
-Shared dashboards must be shared by an active user within your organization. If the sharer is deactivated, the shared dashboard **will no longer display data** until an active user claims ownership of it. The shared dashboard URL and configuration options are preserved during this state.
+Shared dashboards must be shared by an active user within your organization. If the sharer is deactivated, the shared dashboard **no longer displays data** until an active user claims ownership of it. The shared dashboard URL and configuration options are preserved during this state.
 
 ### Not all widget types are available
 
