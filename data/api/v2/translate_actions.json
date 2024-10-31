@@ -1283,6 +1283,30 @@
     "request_description": "",
     "request_schema_description": "RUM application update request."
   },
+  "ListRumMetrics": {
+    "description": "Get the list of configured rum-based metrics with their definitions.",
+    "summary": "Get all rum-based metrics"
+  },
+  "CreateRumMetric": {
+    "description": "Create a metric based on your organization's RUM data.\nReturns the rum-based metric object from the request body when the request is successful.",
+    "summary": "Create a rum-based metric",
+    "request_description": "The definition of the new rum-based metric.",
+    "request_schema_description": "The new rum-based metric body."
+  },
+  "DeleteRumMetric": {
+    "description": "Delete a specific rum-based metric from your organization.",
+    "summary": "Delete a rum-based metric"
+  },
+  "GetRumMetric": {
+    "description": "Get a specific rum-based metric from your organization.",
+    "summary": "Get a rum-based metric"
+  },
+  "UpdateRumMetric": {
+    "description": "Update a specific rum-based metric from your organization.\nReturns the rum-based metric object from the request body when the request is successful.",
+    "summary": "Update a rum-based metric",
+    "request_description": "New definition of the rum-based metric.",
+    "request_schema_description": "The new rum-based metric body."
+  },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "Get a list of RUM events"
