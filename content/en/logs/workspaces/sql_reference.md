@@ -42,7 +42,7 @@ The following SQL functions are supported:
 * `GROUP BY`  
 * `WHERE` (including support for `LIKE` filters on strings)  
 * `CASE`   
-* Basic (standard) arithmetic operations (e.g. \+, \-, \*, /)
+* Basic (standard) arithmetic operations (such as `+`,`-`, `*`, `/`)
 
 ## Casting
 
