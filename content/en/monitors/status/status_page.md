@@ -40,13 +40,13 @@ The header contains the monitor's metadata including:- Alert status
 
 On the right, you'll find the **Edit**, **Clone**, **Export**, and **Permissions** buttons.
 
-From the header, you can resolve the monitor (resolving all groups in alerts) and manage downtimes. For more information, see [Resolve an alert](#resolve-an-alert). 
+From the header, you can resolve the monitor and manage downtimes. Resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups). View downtimes impacting this monitor and create new ones to mute notifications.
 
-Additionally, you can view downtimes impacting this monitor and create new ones to mute notifications.
+To resolve from the Event details, see [Status Events][8].
 
 ## View monitor evaluations through graphs
 
- {{< img src="/monitors/status/view_monitor_evaluations_graphs.png" alt="Example monitor evaluation graph, filtered by the prod account template variable." style="width:100%;" >}}
+ {{< img src="/monitors/status/evaluated_data_graph_1.png" alt="Example monitor evaluation graph" style="width:100%;" >}}
 
 You can troubleshoot monitor alerts by viewing your data through graphs. Toggle between the **Evaluated Data**, **Source Data**, and **Transitions** graphs to investigate which groups are causing the alert. The graphing component also contains details on the monitor query, configured monitor evaluation, and notification information. To learn more about each graph, see the [Monitor status graphs][1] documentation.
 
@@ -59,14 +59,6 @@ Use the template variables to scope down the monitor page to specific groups, se
 You can explore different product areas while maintaining the same alerting context, ensuring you view the same timeframe and service parameters as on your monitor's status page. Use Event details to troubleshoot if the monitor is alerting due to recent configuration changes, take the query to other product areas to troubleshoot and cross reference without losing context. 
 
 For more information, see the [Monitor status events][2] documentation.
-
-### Resolve an alert
-
-You can resolve a monitor alert from the Header or the Next Actions sections in the Event details. Resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups), while resolving from Next Actions only affects the group related to the selected event.
-
-From Next Actions, click the **Resolve** button to temporarily set the monitor status to 'OK' for its next evaluation. This does not acknowledge the alert or instruct Datadog to ignore it. Use Resolve when data is reported intermittently, such as when a monitor triggers an alert but stops receiving data, preventing it from recovering to 'OK' on its own. The 'resolve' function or the 'Automatically resolve monitor after X hours' option resets the monitor to 'OK'. 
-
-A typical use case is for monitors based on error metrics that only report when errors occur, like `aws.elb.httpcode_elb_5xx` or specific DogStatsD counters reporting errors only when an error exists.
 
 ## Restrictions of provisional status page 
 
@@ -97,3 +89,4 @@ The following features are not supported by the provisional status page:
 [5]: /service_management/case_management/
 [6]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
 [7]: /coscreen/?tab=desktop
+[8]: /monitors/status/events/#resolve

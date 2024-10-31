@@ -37,6 +37,18 @@ With Quick Actions, you can take action without leaving the Status page. Respond
 | Create Case | Create a [case][5] to keep track of this alert investigation without leaving Datadog. |
 | Run Workflow | Run [Workflow][6] Automation with predefined snippets to run mitigation actions. |
 
+### Resolve
+
+You can resolve a monitor alert from the status page Header or Event details sections. Resolving from the Event details section only affects the group related to the selected event while resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups).
+
+The monitor `resolve` function is artificially switching the monitor status to `OK` for its next evaluation. The next monitor evaluation is performed normally on the data the monitor is based on.
+
+If a monitor is alerting because its current data corresponds to the `ALERT` state, `resolve` has the monitor follow the state switch `ALERT -> OK -> ALERT`. Therefore, using `resolve` is not appropriate for acknowledging the alert or telling Datadog to ignore the alert.
+
+Manually resolving a monitor is appropriate for cases where data is reported intermittently. For example, after triggering an alert the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case, the `resolve` function or the `Automatically resolve monitor after X hours` changes the monitor back to an `OK` state.
+
+A typical use case is for monitors based on error metrics that only report when errors occur, like `aws.elb.httpcode_elb_5xx` or specific DogStatsD counters reporting errors only when an error exists.
+
 ## Event troubleshooting section
 
 {{< img src="/monitors/status/events/event_troubleshooting.png" alt="Event troubleshooting with an example dependency map" style="width:100%;" >}}
