@@ -26,7 +26,7 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
+<div class="alert alert-info">Resource Catalog is in preview.</div>
 
 ## Overview
 
@@ -136,7 +136,7 @@ Use the **Recent Changes** tab on a resource's side panel to see a 7-day history
 
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
-   - You have [access to the private beta][9].
+   - You have [access to the preview][9].
 
 #### AWS
 
