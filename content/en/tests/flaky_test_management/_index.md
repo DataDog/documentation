@@ -1,13 +1,14 @@
 ---
 title: Flaky Test Management
-
+description: Identify flaky, unreliable tests.
 aliases:
 - /continuous_integration/guides/find_flaky_tests/
 - /continuous_integration/guides/flaky_test_management/
+- /tests/guides/flaky_test_management/
 further_reading:
 - link: "/continuous_integration/tests/"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
   tag: "Knowledge Center"
   text: "Flaky Tests Overview"
@@ -43,7 +44,7 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 The flaky test table for the default branch includes tests that have flaked in the default branch as well as any tests that have exhibited flakiness in a feature branch that was merged into the default branch.
 
-Flaky tests from merged feature branches are found by checking which tests have exhibited flakiness in the most recent 5,000 commits using the Git commit history. The Git commit history is collected by the [Test Visibility libraries][4] and uploaded along with the test results every time the testing phase of a particular commit is executed in your CI build.
+Flaky tests from merged feature branches are found by checking which tests have exhibited flakiness in the most recent 5,000 commits using the Git commit history. The Git commit history is collected by the [Test Optimization libraries][4] and uploaded along with the test results every time the testing phase of a particular commit is executed in your CI build.
 
 Limitations:
 * If you squash or reset and force push commits in your feature branch, flaky tests that have been detected in that branch are not shown in the default branch because the commit history has been altered.
@@ -111,5 +112,5 @@ Failed test runs that were known to be flaky as per the definition above are dis
 [2]: https://app.datadoghq.com/ci/test-runs
 [3]: https://app.datadoghq.com/ci/test-services?view=branches
 [4]: /tests/#use-ci-tests-data
-[5]: /tests/guides/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
+[5]: /tests/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
 [6]: https://app.datadoghq.com/dash/integration/ci_app_tests

@@ -1,11 +1,12 @@
 ---
-title: Intelligent Test Runner for Python
+title: Test Impact Analysis for Python
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 30
 aliases:
   - /continuous_integration/intelligent_test_runner/python/
   - /continuous_integration/intelligent_test_runner/setup/python/
+  - /intelligent_test_runner/setup/python
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -17,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is only supported in the following versions and testing frameworks:
+Test Impact Analysis is only supported in the following versions and testing frameworks:
 
 * `pytest>=7.2.0`
   * From `ddtrace>=2.1.0`.
@@ -32,15 +33,15 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Test Impact Analysis, set up [Test Optimization for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 
 ### Required dependencies
 
-The Intelligent Test Runner requires the [`coverage` package][2].
+Test Impact Analysis requires the [`coverage` package][2].
 
 Install the package in your CI test environment by specifying it in the relevant requirements file, for example, or using `pip`:
 
@@ -50,9 +51,9 @@ pip install coverage
 
 See [known limitations](#known-limitations) if you are already using the `coverage` package or a plugin like `pytest-cov`.
 
-## Running tests with the Intelligent Test Runner enabled
+## Running tests with Test Impact Analysis enabled
 
-The Intelligent Test Runner is enabled when you run tests with the Datadog integration active. Run your tests with the following command:
+Test Impact Analysis is enabled when you run tests with the Datadog integration active. Run your tests with the following command:
 
 {{< tabs >}}
 
@@ -74,15 +75,15 @@ DD_ENV=ci DD_SERVICE=my-python-app ddtrace-run python -m unittest
 
 {{< /tabs >}}
 
-### Temporarily disabling the Intelligent Test Runner
+### Temporarily disabling Test Impact Analysis
 
-The Intelligent Test Runner can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
+Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
 
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
-: Enable the Intelligent Test Runner coverage and test skipping features<br />
+: Enable Test Impact Analysis coverage and test skipping features<br />
 **Default**: `(true)`
 
-Run the following command to disable the Intelligent Test Runner:
+Run the following command to disable Test Impact Analysis:
 
 {{< tabs >}}
 
@@ -106,18 +107,18 @@ DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=false ddtrace-run
 
 ## Disabling skipping for specific tests
 
-You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+You can override Test Impact Analysis's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
-The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 
-Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
+Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 
 {{< tabs >}}
@@ -133,7 +134,7 @@ Unskippable tests are supported in the following versions:
 
 ### Marking tests as unskippable
 
-You can use [`pytest`][1]'s [`skipif` mark][2] to prevent the Intelligent Test Runner from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+You can use [`pytest`][1]'s [`skipif` mark][2] to prevent Test Impact Analysis from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
 
 #### Individual tests
 
@@ -176,7 +177,7 @@ Unskippable tests are supported in the following versions:
 
 ### Marking tests as unskippable in `unittest`
 
-You can use [`unittest`][1]'s [`skipif` mark][2] to prevent the Intelligent Test Runner from skipping individual tests. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+You can use [`unittest`][1]'s [`skipif` mark][2] to prevent Test Impact Analysis from skipping individual tests. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
 
 #### Individual tests
 
@@ -206,11 +207,11 @@ Using `@unittest.skipif` does not override any other `skip` marks, or `skipIf` m
 
 #### Interaction with coverage tools
 
-Coverage data may appear incomplete when the Intelligent Test Runner is enabled. Lines of code that would normally be covered by tests are not be covered when these tests are skipped.
+Coverage data may appear incomplete when Test Impact Analysis is enabled. Lines of code that would normally be covered by tests are not be covered when these tests are skipped.
 
 #### Interaction with the coverage package
 
-The Intelligent Test Runner uses the [`coverage`][2] package's API to collect code coverage. Data from `coverage run` or plugins like `pytest-cov` is incomplete as a result of `ddtrace`'s use of the `Coverage` class.
+Test Impact Analysis uses the [`coverage`][2] package's API to collect code coverage. Data from `coverage run` or plugins like `pytest-cov` is incomplete as a result of `ddtrace`'s use of the `Coverage` class.
 
 Some race conditions may cause exceptions when using `pytest` plugins such as `pytest-xdist` that change test execution order or introduce parallelization.
 

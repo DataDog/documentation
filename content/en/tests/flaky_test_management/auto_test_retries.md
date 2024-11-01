@@ -1,27 +1,29 @@
 ---
 title: Auto Test Retries
 description: Retry failing test cases to avoid failing the build because of flaky tests.
+aliases:
+  - /tests/auto_test_retries
 further_reading:
   - link: "/tests"
     tag: "Documentation"
-    text: "Learn about Test Visibility"
-  - link: "/tests/guides/flaky_test_management"
+    text: "Learn about Test Optimization"
+  - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-Test Visibility's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
+Test Optimization's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
 a failing test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
 
 ## Setup
 
-Ensure [Test Visibility][1] is configured for your test runs.
+Ensure [Test Optimization][1] is configured for your test runs.
 
 ### Compatibility
 
@@ -35,22 +37,22 @@ Ensure [Test Visibility][1] is configured for your test runs.
 {{< tabs >}}
 
 {{% tab "Java" %}}
-After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
 
-* `DD_CIVISIBILITY_FLAKY_RETRY_ONLY_KNOWN_FLAKES` - if this environment variable is set to `true`, only the test cases that Test Visibility considers [flaky][2] are retried.
+* `DD_CIVISIBILITY_FLAKY_RETRY_ONLY_KNOWN_FLAKES` - if this environment variable is set to `true`, only the test cases that Test Optimization considers [flaky][2] are retried.
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - can be set to any non-negative number to change the maximum number of retries per test case.
 
-[1]: https://app.datadoghq.com/ci/settings/test-service
-[2]: /tests/guides/flaky_test_management/
+[1]: /tests/explorer/
+[2]: /tests/flaky_test_management/
 {{% /tab %}}
 
 {{% tab "Javascript" %}}
-After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -70,7 +72,7 @@ This behavior can be fine-tuned with the following environment variables:
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -103,9 +105,9 @@ Customize the Auto Test Retries with the following environment variables:
 
 {{< /tabs >}}
 
-## Explore results in the Test Visibility Explorer
+## Explore results in the Test Optimization Explorer
 
-You can query the retried tests in the [Test Visibility Explorer][2]: they have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true`, which indicates they have been retried by the [Early Flakiness Detection][3] feature).
+You can query the retried tests in the [Test Optimization Explorer][2]: they have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true`, which indicates they have been retried by the [Early Flakiness Detection][3] feature).
 
 ## Troubleshooting
 
@@ -117,5 +119,5 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 
 [1]: /tests/setup/
 [2]: /tests/explorer/
-[3]: /tests/early_flake_detection
+[3]: /tests/flaky_test_management/early_flake_detection
 [4]: https://app.datadoghq.com/ci/settings/test-service

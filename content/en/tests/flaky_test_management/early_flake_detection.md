@@ -1,11 +1,13 @@
 ---
 title: Early Flake Detection
 description: Detect flakiness before it impacts your default branch using Early Flake Detection.
+aliases:
+  - /tests/early_flake_detection
 further_reading:
   - link: "/tests"
     tag: "Documentation"
-    text: "Learn about Test Visibility"
-  - link: "/tests/guides/flaky_test_management"
+    text: "Learn about Test Optimization"
+  - link: "/tests/flaky_test_management"
     tag: "Documentation"
     text: "Learn about Flaky Test Management"
   - link: "/quality_gates"
@@ -44,15 +46,15 @@ You can choose to block the merge of the feature branch with a [Quality Gate][4]
 
 ## Setup
 
-Before implementing Early Flake Detection, you must configure [Test Visibility][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
+Before implementing Early Flake Detection, you must configure [Test Optimization][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
 
 ### Configuration
 
-After you have set up your Datadog library for Test Visibility, you can configure Early Flake Detection from the [Test Service Settings page][7].
+After you have set up your Datadog library for Test Optimization, you can configure Early Flake Detection from the [Test Service Settings page][7].
 
 {{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="Early flake Detection in Test Service Settings." style="width:100%" >}}
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Settings**][7].
+1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][7].
 1. Click **Configure** on the Early Flake Detection column for a test service.
 1. Click the toggle to enable Early Flake Detection and add or modify the list of [**Excluded Branches from Early Flake Detection**](#manage-excluded-branches).
 
@@ -68,7 +70,7 @@ The required test framework and dd-trace versions are:
 * `>=5.23.0` for the 5.x release.
 * `>=4.47.0` for the 4.x release.
 
-The test framework compatibility is the same as [Test Visibility Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
+The test framework compatibility is the same as [Test Optimization Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
 [1]: /tests/setup/javascript/?tab=cloudciprovideragentless#compatibility
 {{% /tab %}}
@@ -98,9 +100,9 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 
 Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
-## Explore results in the Test Visibility Explorer
+## Explore results in the Test Optimization Explorer
 
-You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Visibility Explorer][8].
+You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Optimization Explorer][8].
 
 * **Test Session**: Test sessions running Early Flake Detection have the `@test.early_flake.enabled` tag set to `true`.
 * **New Tests**: New tests have the `@test.is_new` tag set to `true`, and retries for this test have the `@test.is_retry` tag set to `true`.
@@ -125,7 +127,7 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /glossary/#flaky-test
-[2]: /tests/guides/flaky_test_management
+[2]: /tests/flaky_test_management
 [3]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
 [4]: /quality_gates/
 [5]: /quality_gates/setup
