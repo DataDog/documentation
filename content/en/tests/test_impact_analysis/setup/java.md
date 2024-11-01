@@ -1,12 +1,12 @@
 ---
-title: Intelligent Test Runner for Java
+title: Test Impact Analysis for Java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
 aliases:
   - /continuous_integration/intelligent_test_runner/java/
   - /continuous_integration/intelligent_test_runner/setup/java/
-
+  - /intelligent_test_runner/setup/java
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.27.0`.
+Test Impact Analysis is supported in `dd-java-agent >= 1.27.0`.
 
 The following test frameworks are supported:
 - JUnit >= 4.10 and >= 5.3
@@ -30,13 +30,13 @@ The following test frameworks are supported:
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Test Impact Analysis, set up [Test Optimization for Java][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Intelligent Test Runner enabled
+## Run tests with Test Impact Analysis enabled
 
 After completing setup, run your tests as you normally do:
 
@@ -67,17 +67,17 @@ mvn clean verify
 
 ## Disabling skipping for specific tests
 
-You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+You can override the Test Impact Analysis behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
-The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 - Tests that read data from text files
 - Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
-- Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
+- Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 ### Compatibility
 
@@ -117,7 +117,7 @@ public class MyTestSuite {
 
 Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import org.junit.jupiter.api.Tag;
@@ -163,7 +163,7 @@ public class MyTestSuite {
 Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 You do not have to create the `datadog_itr_unskippable` for every test case or test suite, one category is enough for the entire project.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import org.junit.Test;
@@ -204,7 +204,7 @@ public class MyTestSuite {
 
 Add a group with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import org.testng.annotations.Test;
@@ -243,7 +243,7 @@ class MyTestSuite extends Specification {
 
 Add a `spock.lang.Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
-If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by Test Impact Analysis.
 
 ```java
 import spock.lang.Specification
@@ -277,7 +277,7 @@ Feature: My Feature
 
 Add `datadog_itr_unskippable` tag to your gherkin feature to mark it as unskippable.
 
-If a feature is marked as unskippable, none of the scenarios from that feature can be skipped by ITR.
+If a feature is marked as unskippable, none of the scenarios from that feature can be skipped by Test Impact Analysis.
 
 ```gherkin
 @datadog_itr_unskippable

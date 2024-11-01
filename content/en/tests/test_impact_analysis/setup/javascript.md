@@ -1,11 +1,12 @@
 ---
-title: Intelligent Test Runner for JavaScript and TypeScript
+title: Test Impact Analysis for JavaScript and TypeScript
 code_lang: javascript
 type: multi-code-lang
 code_lang_weight: 20
 aliases:
   - /continuous_integration/intelligent_test_runner/javascript/
   - /continuous_integration/intelligent_test_runner/setup/javascript/
+  - /intelligent_test_runner/setup/javascript
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -17,12 +18,12 @@ further_reading:
 
 ## Overview
 
-Intelligent Test Runner for JavaScript skips entire _test suites_ (test files) rather than individual tests.
+Test Impact Analysis for JavaScript skips entire _test suites_ (test files) rather than individual tests.
 
 
 ## Compatibility
 
-Intelligent Test Runner is only supported in the following versions and testing frameworks:
+Test Impact Analysis is only supported in the following versions and testing frameworks:
 
 * `jest>=24.8.0`
   * From `dd-trace>=4.17.0` or `dd-trace>=3.38.0`.
@@ -40,13 +41,13 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility
+### Test Optimization
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for JavaScript and TypeScript][3]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+Prior to setting up Test Impact Analysis, set up [Test Optimization for JavaScript and TypeScript][3]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
 
-## Run tests with the Intelligent Test Runner enabled
+## Run tests with Test Impact Analysis enabled
 
 {{< tabs >}}
 
@@ -73,34 +74,34 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 
 ### Cypress
 
-For Intelligent Test Runner for Cypress to work, you must instrument your web application with code coverage. For more information about enabling code coverage, see the [Cypress documentation][2].
+For Test Impact Analysis for Cypress to work, you must instrument your web application with code coverage. For more information about enabling code coverage, see the [Cypress documentation][2].
 
-To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the `window.__coverage__` global variable. This is what `dd-trace` uses to collect code coverage for Intelligent Test Runner.
+To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the `window.__coverage__` global variable. This is what `dd-trace` uses to collect code coverage for Test Impact Analysis.
 
 ## Inconsistent test durations
 
-In some frameworks, such as `jest`, there are cache mechanisms that make tests faster after other tests have run (see [jest cache][4] docs). If Intelligent Test Runner is skipping all but a few test files, these suites might run slower than they usually do. This is because they run with a colder cache. Regardless of this, total execution time for your test command should still be reduced.
+In some frameworks, such as `jest`, there are cache mechanisms that make tests faster after other tests have run (see [jest cache][4] docs). If Test Impact Analysis is skipping all but a few test files, these suites might run slower than they usually do. This is because they run with a colder cache. Regardless of this, total execution time for your test command should still be reduced.
 
 ## Disabling skipping for specific tests
 
-You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+You can override the Test Impact Analysis behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
-The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 
-Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
+Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
 
 ### Marking tests as unskippable
 
 {{< tabs >}}
 {{% tab "Jest/Mocha/Cypress" %}}
-You can use the following docblock at the top of your test file to mark a suite as unskippable. This prevents any of the tests defined in the test file from being skipped by Intelligent Test Runner. This is similar to jest's [`testEnvironmentOptions`][1].
+You can use the following docblock at the top of your test file to mark a suite as unskippable. This prevents any of the tests defined in the test file from being skipped by Test Impact Analysis. This is similar to jest's [`testEnvironmentOptions`][1].
 
 ```javascript
 /**
@@ -117,7 +118,7 @@ describe('context', () => {
 [1]: https://jestjs.io/docs/configuration#testenvironmentoptions-object
 {{% /tab %}}
 {{% tab "Cucumber" %}}
-You can use the `@datadog:unskippable` [tag][1] in your feature file to mark it as unskippable. This prevents any of the scenarios defined in the feature file from being skipped by Intelligent Test Runner.
+You can use the `@datadog:unskippable` [tag][1] in your feature file to mark it as unskippable. This prevents any of the scenarios defined in the feature file from being skipped by Test Impact Analysis.
 
 ```
 @datadog:unskippable
