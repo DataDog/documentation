@@ -190,6 +190,53 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect Custom Resources
+
+By default the orchestrator explorer collects custom resource definitions. These will appear in the UI alongside other resources without any user configuration required.
+
+To collect custom resources you need to configure both your agent and setup indexing in the UI. When setting up indexing the UI it will explain how to setup the agent. We've also included information about it below.
+
+#### Setting up Indexing
+
+In order for us to process the custom resources we need to setup indexing. This can be done in the Resource Definitions tab of the orchestrator explorer. When you select a version, from either main view or side panel, you will see an indexing screen. From here you enabling indexing and set which fields you would like to parse. You will still have access to the raw yaml when collection starts.
+
+#### Setting up the Agent
+
+The information below will be on previous indexing screen as well. Now that we've configured the Datadog backend to process our custom resources we have to tell the agent to send them. There are different instructions for both the operator and helm charts.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+You can enable the resource collection manually by adding the following configuration to your agent:
+
+```
+features:
+    orchestratorExplorer:
+        customResources:
+            - $NameOfYourCustomResource
+```
+
+Note you need to use the format `group/version/kind`
+
+In order to give the Operator the neccessary permissions to view all custom resources you also need the following in your operator config:
+```
+clusterRole:
+  allowReadAllResources: true
+```
+This will give the operator permission to view all resources.
+{{% /tab %}}
+{{% tab "Helm" %}}
+You can enable the resource collection manually by adding the following configuration to your agent:
+
+```
+orchestratorExplorer:
+    customResources:
+        - $NameOfYourCustomResource
+```
+
+Note you need to use the format `group/version/kind`
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
