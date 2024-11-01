@@ -20,7 +20,7 @@ When you plan a new software installation, its crucial to understand its capabil
 
 Setting a clear goal is critical for installing Datadog. However, in a practical world, it is not possible to know everything you might need at the outset. Product engineers iterate their roll-outs, and systems operators control their changes, all to control risk. Installing a large-scale Datadog installation will benefit from the application of standard project management practices. As part of that process, there are certain Datadog elements that you should include. Send your engineering organization a survey outline to size and whiteboard your needs.
 
-**Recommendation:**   
+**Recommendations:**   
 Start collecting and consolidating a survey of your organization early. Create a comprehensive view of your ecosystems, application languages, data storage, networking, and infrastructure.
 
 A sample survey form might look like this: 
@@ -62,7 +62,7 @@ The Getting [Getting started with tagging][2] guide is a great place to start wi
 - Tag values must be consistent. For example  "Production" is different from "Prod".
 - Define sources of truth for dynamic tags such as code version.
 
-**Recommendation**:  
+**Recommendations**:  
 As early as possible, understand [Datadog Unified Service Tagging][2] and develop your tagging scheme. Then, map your infrastructure to your collected tags, unifying your data so you can pivot between service metrics, logs, and traces, and assign owners to services to build informative alerts.
 
 {{< img src="/administrators_guide/unified_service_tagging-3.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
@@ -94,12 +94,13 @@ As an additional layer, [Teams][8] lets you set up flexible, informal, and ad-ho
 APM depends on the application of Unified Service Tagging. These tags are pivotal to the operational experience, and are also useful for enabling correlation across your telemetry data. This is how Datadog can help determine the owner for a random Java process it discovers.  
 Usually, the default APM setup is sufficient for most use cases, but if for example you want to change sampling rates or to customize other APM configurations:    
 
-**Recommendation:** 
+**Recommendations:** 
 - Identify the services to instrument and determine whether they are host-based, containerized, or serverless.
 - Determine the method available for instrumenting your services in Datadog, depending on the language used or their runtime environment. These methods range from single-step to manual instrumentation.
 - Review the [ingestion controls][9] documentation.  
 - Configure your sampling rate with [Remote Configuration][10] to scale your organization's trace ingestion according to your needs, without needing to restart your Agent. See [sampling rate use cases][11] for more information.  
 - Ensure [Unified Service Tagging][12] is applied, and review [span tag semantics][13].
+- Opt in to [inferred service dependencies][51] to allow your service names to be automatically detected from span attributes.
 
 ### Log Management
 
@@ -149,7 +150,7 @@ Global SIEM
 
 ### Real User Monitoring
 
-Real User Monitoring and Session Replay give granular insights into what an end-user of your service or application is experiencing. Install RUM on applications with high value sessions, where the data can be used to make meaningful changes. Session Replay serves is the picture that is worth a thousand words when it comes to troubleshooting issues that have been observed by humans. You can track actual customer experience, and is most valuable in production environments.    
+Real User Monitoring and Session Replay give granular insights into what an end-user of your service or application is experiencing. Install RUM on applications with high value sessions, where the data can be used to make meaningful changes. Session Replay provides a visual representation that is invaluable for troubleshooting issues observed by users. You can track actual customer experience, and is most valuable in production environments.    
 
 **Recommendations:** 
 
@@ -174,67 +175,81 @@ Synthetic Monitoring is a full synthetic testing suite, including testing for br
 
 ## Integrations
 
-You can use some of the  more than {{< translate key="integration_count" >}} integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system.The integrations, either SaaS-based or Agent-based, collect metrics for monitoring within Datadog. Host-based integrations are configured with yaml files that live in the conf.d directory, and container-based integrations are configured with metadata such as annotations or labels. 
+You can use some of the more than {{< translate key="integration_count" >}} integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system.The integrations, either SaaS-based or Agent-based, collect metrics for monitoring within Datadog. Host-based integrations are configured with yaml files that live in the conf.d directory, and container-based integrations are configured with metadata such as annotations or labels. 
 
 There are different types of integrations in Datadog, and the order in which they are presented here is the order we recommend for their installation.
 
 | Category                                      | Description                                                                                                                                                                                                                                   |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Cloud Technologies (AWS, Google Cloud, Azure, etc)  | These integrations use provisioned credentials to scrape monitoring endpoints for metrics. Fine-tune these to ingest only desired telemetry.                                                                                                  |
-| Incident Response (Slack, Jira, PagerDuty, etc)     | These integrations send notifications when events occur and are vital for establishing an efficient alerting system.                                                                                                                          |
-| Infrastructure (Orchestration, operating system, Network) | These integrations serve as the foundational components for monitoring your infrastructure, gathering both metrics and logs.                                                                                                               |
-| Data Layers (Data Stores, Message Queues, etc)      | These integrations usually query internal DB metrics tables, so this usually requires a database administrator to provide access for the Agent.                                                                                              |
-| Development (Automation, Languages, Source Control) | These integrations push metrics to Datadog and require configuration on their end. Some may require DogStatsD to ship metrics.                                                                                                               |
-| Security and Compliance (Okta, Open Policy Agent)   | These integrations enable you to verify compliance with your standards.                                                                                                                                                                       |
-
+| Cloud Technologies ([AWS][52], [Google Cloud][53], [Azure][54], etc)  | These integrations use provisioned credentials to scrape monitoring endpoints for metrics. Fine-tune these to ingest only desired telemetry.                                                                                                  |
+| Incident Response ([Slack][55], [Jira][56], [PagerDuty][57], etc)     | These integrations send notifications when events occur and are vital for establishing an efficient alerting system.                                                                                                                          |
+| Infrastructure ([orchestration][58], [operating system][59], [network][60]) | These integrations serve as the foundational components for monitoring your infrastructure, gathering both metrics and logs.                                                                                                               |
+| Data Layers ([data stores][61], [message queues][62], etc)      | These integrations usually query internal DB metrics tables, so this usually requires a database administrator to provide access for the Agent.                                                                                              |
+| Development ([automation][63], [languages][64], [source control][65]) | These integrations push metrics to Datadog and require configuration on their end. Some may require DogStatsD to ship metrics.                                                                                                               |
+| Security and Compliance ([Okta][66], [Open Policy Agent][67])   | These integrations enable you to verify compliance with your standards.                                                                                                     |
 
 **Recommendations**:
 
 - Start collecting metrics on your projects as early in the development process as possible.
-- Installed Agents automatically have system and NTP integrations running and can autodetect supported technologies on the host. (Live processes must be enabled for this functionality)
-- You can choose from the above list what you would like to monitor. If there are services you want to monitor that do not have an integration, you can explore Live Processes, Universal Services Monitoring, a process integration, or a custom check.  
+- Installed Agents automatically have system and NTP integrations running and can autodetect supported technologies on the host. ([Live processes](#live-processes) must be enabled for this functionality)
+- You can choose from the above list what you would like to monitor. If there are services you want to monitor that do not have an integration, you can explore [Live processes](#live-processes), [Universal Services Monitoring][68], a [process integration][69], or a [custom check][70].  
 
 ## Additional resources
 
-We've highlighted some important wins and best practices with APM, RUM, Synthetic Monitoring, Logs, and Dashboards to help you achieve success in getting started with those products and components. Some additional resources that are important when planning your installation phase are outlined below.
+You've achieved some important wins and adopted best practices with APM, RUM, Synthetic Monitoring and Logs. Some additional resources that are important when planning your installation phase are outlined below.
 
 ### Live processes 
 
-[Live processes][26] can be used to view all of your running processes in one place. For example, it can provide PID-level information of a running Apache process, to help you understand and troubleshoot transient issues. Additionally, you can query for processes running on a specific host, in a specific availability zone, or running a specific workload. [Configure][27] live processes on your hosts, containers, or AWS ECS Fargate instances to take advantage of this feature.
+Use [Live processes][26] to view all of your running processes in one place. For example, see PID-level information of a running Apache process, to help you understand and troubleshoot transient issues. Additionally, you can query for processes running on a specific host, in a specific availability zone, or running a specific workload. [Configure][27] live processes on your hosts, containers, or AWS ECS Fargate instances to take advantage of this feature.
 
 ### Availability, latency, and SSL expiration 
 
-Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies.  Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and identify soon-to-expire SSL certificates. Additionally the [ping][43] check can be utilized to test the reachability of a host and measures the round-trip time for messages sent from the check to the destination host.
+Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies. Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and use Synthetic API tests to identify soon-to-expire [SSL certificates][71].
 
 ### Network Monitoring
 
-Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits.  Use Datadog's [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
+Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits. Use Datadog's [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
+
+## Platform services
+
+Datadog infrastructure monitoring comes with  additional products that you can use to maximize observability of your environments.
 
 ### Service Catalog
 
-Services are the base object of observability. Utilizing the [service catalog][30] allows you to see at glance which services were deployed most recently, or have not been deployed for a long time. Additionally this view shows which services are reporting the most errors, and whether they have on-going incidents, and much more.
+[Service catalog][30] shows at glance which of your services were deployed most recently, or have not been deployed for a long time. which services are reporting the most errors, and whether they have on-going incidents, and much more.
 
-{{< img src="/administrators_guide/service_catalog.png" alt="Service Catalog home screen" style="width:90%;">}}
+Service Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you may check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
+
+{{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
+
+You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.  
 
 ### Resource Catalog
 
-Use the Datadog [Resource Catalog][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. Resource Catalog offers visibility into infrastructure compliance, facilitating good tagging practices, reducing application risks by identifying security vulnerabilities, providing engineering leadership with a high-level view of security practices, and allowing resource export for record-keeping or auditing.
+Use the [Resource Catalog][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. It is the central hub of all of your infrastructure resources. Resource Catalog offers visibility into infrastructure compliance, facilitating good tagging practices, reducing application risks by identifying security vulnerabilities, providing engineering leadership with a high-level view of security practices, and allowing resource export for record-keeping or auditing.
 
-### Event Management 
+You can use the Resource Catalog in a variety of contexts, including:
 
-Without any additional setup, [event management][31] can be used to see 3rd party event statuses, events generated from the Agent and installed integrations, and more. 
-
-### Error Tracking 
-
-See errors where they happen with Datadog's [Error Tracking][32]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
+- Understanding the team ownership of resources and finding orphaned ones to clean up.
+- Planning upgrades of resources that are running deprecated versions.
+- Accessing configuration information and other metadata to speed up incident response.
+- Maintaining your security posture by finding and resolving misconfigurations and vulnerabilities.
 
 ### API Catalog 
 
 Use [API Catalog][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
+### Event Management 
+
+Without any additional setup, [Event management][31] can show third-party event statuses, events generated from the Agent and installed integrations. Datadog Event Management centralizes third-party events, such as alerts and change events. Datadog also automatically creates events from various products including monitors and Error Tracking. You can also use Event Management to send monitor alerts and notifications based on event queries.
+
+### Error Tracking 
+
+See errors where they happen with Datadog's [Error Tracking][32]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
+
 ### Fleet Automation  
 
-Centrally administer and manage all of your Datadog Agents with [Fleet Automation][34]. Fleet Automation can help you identify which Agents need upgraded, send a flare from within your organization to support, and help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.  
+Centrally administer and manage all of your Datadog Agents with [Fleet Automation][34]. Fleet Automation can identify which Agents need upgrading, send a flare to support, and help in the task of disabling or rotating API keys.
 
 {{< img src="/administrators_guide/fleet_automation.png" alt="Fleet Management home screen" style="width:90%;">}}
 
@@ -246,14 +261,29 @@ Use Datadog's [Remote Configuration][35] (enabled by default), to remotely confi
 
 Use Datadog [Notebooks][37] to share with team members to aid in troubleshooting investigations or incidents.
 
-## Deployment patterns 
+## Optimizing data collection 
 
-At this stage, we have developed two distinct bodies of knowledge. The first, is an understanding of our IT landscape from the observability lens. We understand the types of components it consists of and have a general idea of the observability data we need to extract from it. The second, is a decent understanding of Datadog capabilities and prerequisites.    
-Now it's time to put it all together. In a typical 3-tier, web-scale application, Datadog has about five main capabilities (metrics, logs, traces, synthetics, RUM, and DBM), and many optional sub-components and customizations. They are all managed from as few points as possible, but the most efficient deployment of Datadog requires some degree of pattern creation.
+Datadog collects many things in your environments, so it is important to limit the amount of collection points and establish guard rails. In this section we will discuss the mechanisms that control the telemetry collection, and discuss how you can codify your organization's needs.
+
+### Infrastructure
+
+Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphere, PCF), container schedulers (Kubernetes,Rancher, Docker), and public cloud providers (AWS, Azure, GCP). The platform to [autodiscover][38] resources (pods, VMs, EC2s, ALBs, AzureSQL, GCP blobs) within those environments. It is important to limit the number of monitored resources, because they have billing implications.
+
+**Recommendations**:   
+
+Enable resource collection for [AWS][39] and [GCP][44] to view an inventory of resources, as well as cost and security insights. Additionally, limit metric collection for your [Azure resources][40] and also in your [containerized][45] environments.
+
+## Service Tiers
+
+During the planning phase, it is common to realize that not every instance of observability is as important as others. Some footprints are mission-critical, while others are not. For this reason, it is useful to devise patterns for coverage levels, and which environments you want to monitor with Datadog. For example, a production environment might be monitored at every level, but a development instance of the same application might only have the developer-focused tooling.
+
+**Recommendations**:
+
+- Establish estimates of service tiers early on. They do not need to be precise at first, but will be useful as adoption scales up.
 
 ### Software Development Lifecycle
 
-To begin mapping out your deployment patterns, use the technology survey, combine it with the [Datadog 101][7] training, and begin to develop a plan of action. Below is an example intended to be modified to suit your individual needs. It outlines the deployment pattern from the dimension of SDLC environment (dev,qa,stage,prod), but should be customized to the local standards and conditions. Begin setting expectations within your own Datadog user base what the term "Standard Datadog Deployment" actually means. 
+To begin mapping out your installation patterns, use the information you gathered from the [scoping exercise](#scoping-exercise), combine it with the [Datadog 101][7] training, and develop a plan of action. Consider the following example, and modify it  to suit your organization's needs.The example outlines an installation pattern from the dimension of SDLC environment (dev, qa, stage, prod), and you can customize it to your standards and conditions. Begin setting expectations within your own Datadog user base what "Standard Datadog installation" means. 
 
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
@@ -265,13 +295,13 @@ To begin mapping out your deployment patterns, use the technology survey, combin
 | **Live Processes** | Deny | Deny/Allow | Allow | Allow |
 |  |  |  |  |  |
 
-**Recommendation** :
-Not every tool is fit for every job.  Evaluate the Datadog product use cases, and specifically match them to your needs. Consider the levels of SDLC, application importance, and Datadog product purpose.
+**Recommendations** :
+Not every tool is fit for every job. Evaluate the Datadog product use cases, and specifically match them to your needs. Consider the levels of SDLC, application importance, and Datadog product purpose.
 
-## Plan summary
+## Summary
 
-It is important to develop and plan a realistic course through the installation of Datadog. In this section we have covered the planning and best practices phase, and at this stage, your   
-Datadog footprint is set up for success. You have identified and assembled your knowledge base and team members, developed your deployment models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations will assist you in the next phases of Datadog service ownership, build and run.  
+It is important to develop and plan a realistic course through the installation of Datadog. In this section we covered the planning and best practices phase, and at this stage, your 
+Datadog footprint is set up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations assist you in the next phases of Datadog installation: build and run.  
 
 ## Next Steps
 
@@ -334,3 +364,24 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
 [49]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
 [50]: https://docs.datadoghq.com/integrations/tcp_check/?tab=host#data-collected
+[51]: https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/?tab=java
+[52]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[53]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[54]: https://docs.datadoghq.com/integrations/azure/
+[55]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
+[56]: https://docs.datadoghq.com/integrations/jira/
+[57]: https://docs.datadoghq.com/integrations/pagerduty/
+[58]: https://docs.datadoghq.com/integrations/#cat-orchestration
+[59]: https://docs.datadoghq.com/integrations/#cat-os-system
+[60]: https://docs.datadoghq.com/integrations/network/
+[61]: https://docs.datadoghq.com/integrations/#cat-data-stores
+[62]: https://docs.datadoghq.com/integrations/#cat-message-queues
+[63]: https://docs.datadoghq.com/integrations/#cat-automation
+[64]: https://docs.datadoghq.com/integrations/#cat-languages
+[65]: https://docs.datadoghq.com/integrations/#cat-source-control
+[66]: https://docs.datadoghq.com/integrations/okta/
+[67]: https://docs.datadoghq.com/integrations/open_policy_agent/
+[68]: https://docs.datadoghq.com/universal_service_monitoring/
+[69]: https://docs.datadoghq.com/integrations/process/
+[70]: https://docs.datadoghq.com/developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
+[71]: https://docs.datadoghq.com/synthetics/api_tests/ssl_tests/

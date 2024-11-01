@@ -7,42 +7,41 @@ further_reading:
   text: "Getting Started with Datadog"
 ---
 
-In the previous two sections, we viewed Datadog through the lens of the plan and build phases. Next, let's look at the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that need to be managed. 
+In the previous two sections, we viewed Datadog through the lens of the plan and build phases, next let’s look at the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that you need to manage. 
 
 ## Service tasks
 
-By releasing your new individual Datadog services in a rational and sequential pattern, gaining confidence as the service develops, we can reduce the risks of the installation, and increase adoption from our users. In this section we will list a particular sequence of service item releases that will optimize your Datadog service user's experience. It is not practical to discuss all the intricacies involved in these items, as the diversity of the IT architecture at this level is too extensive to be captured in a single document. 
-
-Here are a few highlights:
+By releasing your new individual Datadog services in a sequential pattern, gaining confidence as the service develops, you can reduce the risks of the installation, and increase adoption from your users. This section lists a sequence of service item releases that optimizes your Datadog service user's experience. The diversity of IT architecture at this level is extensive, so the following guidance does not go into intricate detail. Here are a few highlights:
 
 ### Onboarding a new infrastructure instance
 
-Infrastructure is the foundational object of IT and observability.  It will be the first, and most common task of a Datadog service run team. The platform comes with incredible flexibility, and accelerators to complete the vast majority of this task, but all that capability still has to be molded into a shape that fits into your local conditions. HyperVisors, HyperScalers, Serverless Infrastructure, may all be part of your IT architecture.  
+Infrastructure is the foundational object of IT and observability.  It is the first and most common task of a Datadog service run team. The platform is flexible, and comes with tools to simplify the vast majority of this task.First you must customize it to fit into your local conditions. HyperVisors, HyperScalers, and Serverless Infrastructure may all be part of your IT architecture.  
 
-**Recommendation**:   
-As mentioned in the ancillary products(link), it is highly recommended when you onboard new infrastructure to use [Fleet Automation][1] to aid in remotely managing your Datadog Agents at scale. Continuously monitor your teams for new infrastructure requests, flag them early and rationally apply engineering resources to focus on sensible expansions to infrastructure menu offerings.
+**Recommendations**:   
+
+Use [Fleet Automation][1] o help remotely manage your Agents at scale. Continuously monitor your teams for new infrastructure requests, flag them early and apply engineering resources to focus on sensible expansions to infrastructure menu offerings.
 
 ### Onboarding a new application footprint
 
-This will be a common task in the early days of Datadog service ownership. It is important to develop an efficient mechanism that matches your local conditions to the requirements of Datadog.  At a minimum, it should include the knowledge base items in the planning phase, as well as additional considerations outlined below. 
+Adding an application to Datadog is a common task in the early days of Datadog administration. Develop an efficient mechanism that matches your local conditions to the requirements of Datadog. At a minimum, it should include the knowledge base items in the planning phase, as well as additional considerations:  
 
-- The Universal Service Tag *`version:`* is very important to a series of visualizations.  Developing an automated, reliable and conformant method for this tag will go a long way to powering those higher value visualizations.
+- The Universal Service Tag `version` is important to many visualizations. Developing an automated, reliable, and conformant method to power these higher value visualizations. 
 
-- Establishing a well-populated [service catalog][2] will reap large benefits down the road.  It is central to the Datadog design pattern, and hosts the objects of governance, dependency, and service definition. 
+- Establishing a well-populated [service catalog][2] will reap benefits in the future. Service Catalog is central to the Datadog design pattern, and hosts the objects of governance, dependency, and service definition.  
 
-**Recommendation:**   
+**Recommendations:**   
 Develop automatic version tagging integrated into your application build process. Focus on service catalog, and track readiness with setup guidance.
 
 ## Fielding technical issues
 
-Due to its PaaS structure, there is only a limited area of troubleshooting that exists for Datadog.  To help identify issues in the host Agent, use the provided Datadog [command][3] *`datadog-agent status`*.  This command will report granular, specific, and actionable information that identifies areas to be addressed. Additionally, memorize and use the *`datadog-agent flare`* [command][4] to quickly surface issues that need to be addressed by Datadog Support.
+Due to its platform-as-a-service structure, Datadog demands little troubleshooting from you, the administrator. To help identify issues in the host Agent, use the` datadog-agent status` [command][3].  This command reports granular, specific, and actionable information that identifies areas to be addressed. Additionally, use the `datadog-agent flare` command to quickly surface issues that need to be addressed by Datadog Support.
 
-**Recommendation**: 
+**Recommendations**: 
 Utilize the `status` and `flare` commands from day one.
 
 ## Service Administration Tasks
 
-Like all other enterprise software, ongoing maintenance tasks need to be well-organized and adherent to your local policies. The following outline common ongoing tasks:
+Like all other enterprise software, ongoing maintenance tasks need to be well-organized and adherent to your local policies. The following examples are common ongoing tasks:
 
 ### Usage Monitoring
 
@@ -52,8 +51,8 @@ It is important to keep an eye on consumption, and equally so, to adopt the tool
 
 After becoming familiar with Datadog, your users may start asking for refinements and adjustments, particularly of the items they interact with the most; [dashboards][7] and [monitors][8]. The dashboards, monitors, SLOs, and other content objects are designed for iterative development.  At their core, these items are written in JSON. They can be cloned, exported, modified, imported, and stored as flat files. Additionally, there is a [terraform provider][9] available, and a [dashboards API][10] that can interact with and create dashboards.  
 
-When creating dashboards, there are many things to consider, but the focus should be on what content to display rather than on the construction process of the dashboard itself. This creative process is embraced within Datadog dashboards, and it is supported through a series of offerings and materials. Each of the dashboards included within the 700+ integrations is a value-added template for monitoring for the relative technology. In the out-of-the-box dashboards, notice Datadog's experience and prescriptive model for observability at the individual product level.  
-
+When creating dashboards, focus on what content to display rather than on the construction process of the dashboard itself. This creative process is embraced within dashboards creation tools and in the dashboards that come with the product. Each of the dashboards included within the {{< translate key="integration_count" >}} integrations is a value-added template for monitoring for the corresponding technology. Out-of-the-box dashboards share with you Datadog's experience and prescriptive model for observability.  
+  
 **Recommendations:**  
 
 - Determine the purpose of the dashboard you're creating.   
@@ -68,29 +67,31 @@ A common OOTB Dashboard is the AWS EC2 Overview Dashboard:
 
 ### API key rotation 
 
-The Datadog platform uses standard Restful API Key Authentication, and recommends that standard [API Key Security][14] and rotation be practiced. In addition, it is useful to organize the assignment of these keys to logical working groups to optimize the security profile and rotation operation.
+The Datadog platform uses standard Restful API Key Authentication, and recommends that standard [API Key Security][14] and rotation. In addition, it is useful to organize the assignment of these keys to logical working groups to optimize the security profile and rotation operation.
 
-**Recommendation:**   
-Incorporate Datadog API and App Keys into local systems for key management. Organize keys into groups that can be easily maintained. API keys can also be maintained using our [API key management][19] documentation.  
+**Recommendations:**   
+
+Incorporate Datadog API and App Keys into your own systems for key management. Organize keys into groups that can be easily maintained. 
 
 ### RBAC objects roles, teams, and permission sets
 
-The [RBAC][15] system for Datadog is dependent upon the SAML provider, and the AD/LDAP store upstream of that SAML provider. It is capable of mirroring the AD user groups, and assigning Datadog-specific permissions in a standard group-mapping fashion. This being said, it is likely that collaboration between Datadog admins and SAML/AD/LDAP admins will be necessary to exchange the specific group names and attributes that go into the specific `Key:Value` structure.    
-
-## New integrations
-
-The vast majority of Datadog [Integrations][16] are controlled within the Agent. These can be easily engineered in a local sandbox.  However, there are some that require changes in the product being monitored. When adding new collections, be aware of these externalities. Databases, PaaS Platforms like Atlassian, and Cloud Providers are just a few of the places where additional setup (and planning) is required.
+Datadog [RBAC][15] is dependent upon your SAML provider, and the AD/LDAP store upstream of that SAML provider. It can mirror the AD user groups, and assign Datadog-specific permissions in a standard group-mapping fashion. Collaboration between Datadog admins and SAML/AD/LDAP admins will be necessary to exchange the specific group names and attributes that go into the key-value structure.    
 
 ## Datadog Agent updates
 
-Datadog updates the Agent components frequently for security and functionality reasons, and it is optimal to remain up-to-date. With any installation, it is important to follow your local procedures for testing and release of new software.  
+Agent components are updated frequently with security and feature enhancements, and it is optimal to remain up-to-date. Follow your local procedures for testing and release of new software.   
 
-**Recommendation:**  
-Include Datadog upgrades within existing patch management standards and upgrade policies. Subscribe to [Datadog’s release feed][17], and closely monitor your [Fleet Automation page][18] for Agent's that require upgrades.
+**Recommendations:**  
 
-## Conclusion
+Include Datadog upgrades within existing patch management standards and upgrade policies. Subscribe to [Datadog's release feed][17], and closely monitor your [Fleet Automation page][18] for Agents that require upgrades.
 
-Datadog service ownership does have a few common activities, but the needs in this regard are few. These activities will slot well into your existing process standards. Be sure to fold Datadog into your standard systems for key rotation, patch updates, service onboarding and IaC.  Publish these standards early so that users know how to get started using your new Datadog service. 
+## Summary
+
+Datadog administration has a few common activities that should fit well into your existing process standards. Be sure to fold Datadog into your standard systems for key rotation, patch updates, service onboarding and IaC. Publish these standards early so that users know how to get started using your new Datadog service. 
+
+## Next steps
+
+"What's Next" or "Next Steps" here ... with links to certification, support, blogs, newsletter, and other resources of information.
 
 ## Further Reading
 
