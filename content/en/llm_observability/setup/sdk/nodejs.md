@@ -32,14 +32,14 @@ npm install dd-trace
 
 ### Command-line setup
 
-Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"`  and specifying the required environment variables.
+Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-race/initialize.mjs"`  and specifying the required environment variables.
 
 **Note**: `dd-trace/initialize.mjs` automatically turns on all APM integrations.
 
-{{< code-block lang="shell">}}
-DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+```shell
+DD_SITE={{< region-param key="dd_site" code="true" >}} DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
-{{< /code-block >}}
+```
 
 `DD_API_KEY`
 : required - _string_
