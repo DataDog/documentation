@@ -8,11 +8,10 @@ further_reading:
 
 ## Overview
 
-SQL functions are built-in operations in SQL (Structured Query Language) used for tasks like calculations, data manipulation, or formatting. This documentation is a reference for SQL support available in Logs Workspaces. It details:
+SQL in Analysis cells allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
 - [SQL functions](#functions)
 - [Syntax compatible with PostgreSQL](#syntax)
 
-It provides a resource for the Analysis cell. Use this information to leverage SQL capabilities in data analysis and manipulation within Log Workspaces.
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
 
