@@ -74,7 +74,7 @@ AWS 계정의 태그를 자동으로 감지하고 **Custom tags**, **AWS tags**,
 
 ## 피드백
 
-Cloudcraft애서 는 사용자 경험을 향상하고 더욱 효과적이고 효율적으로 클라우드 인프라스트럭처를 다이어그램화하기 위해 새 실시간 경험 기능을 도입했습니다. 이 기능을 어떻게 사용하고 있는지 [이 양식을 통해서 피드백 주세요][3].
+Cloudcraft애서 는 사용자 경험을 향상하고 더욱 효과적이고 효율적으로 클라우드 인프라스트럭처를 다이어그램화하기 위해 새 실시간 경험 기능을 도입했습니다. 이 기능을 어떻게 사용하고 있는지 [이 양식을 통해서 피드백 주시면 감사하겠습니다][3].
 
 [1]: https://docs.datadoghq.com/ko/cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
 [2]: https://docs.datadoghq.com/ko/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
