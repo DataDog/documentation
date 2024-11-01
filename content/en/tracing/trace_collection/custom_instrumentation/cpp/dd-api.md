@@ -1,5 +1,5 @@
 ---
-title: C++ Custom Instrumentation using Datadog API
+title: C++ Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp
