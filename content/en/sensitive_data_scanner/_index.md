@@ -336,8 +336,8 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 
 ## Cloud Storage scanning
 
-{{< callout header="Join the Limited Availability!" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 If you have [Sensitive Data Scanner][6] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
