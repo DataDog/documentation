@@ -334,17 +334,17 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Security
+## Cloud Storage scanning
 
-{{< callout url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Data Security is in beta. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Join the Limited Availability!" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-If you have [Sensitive Data Scanner][6] and [Cloud Security Management][7] enabled, you can use Data Security to locate sensitive data and fix security issues impacting Amazon S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][6] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
 
-Data Security scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Data Security leverages rules provided by Sensitive Data Scanner to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Datastores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
-Along with displaying sensitive data matches, Data Security surfaces any security issues detected by Cloud Security Management affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+Along with displaying sensitive data matches, Cloud Storage surfaces any security issues detected by [Cloud Security Management][7] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
 ## Out-of-the-box dashboard
 
@@ -370,3 +370,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /agent/remote_config
 [10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[11]: /sensitive_data_scanner/library_rules/
