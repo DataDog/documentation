@@ -48,7 +48,11 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(<INTEGRATION_NAME_IN_LOWERCASE>=True)
+patch(openai=True)
+patch(langchain=True)
+patch(anthropic=True)
+patch(gemini=True)
+patch(botocore=True)
 ```
 
 **Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
@@ -187,7 +191,7 @@ const tracer = require('dd-trace').init({
 });
 
 const { llmobs } = tracer;
-tracer.use('<INTEGRATION_NAME_IN_LOWERCASE>', true);
+tracer.use('openai', true);
 ```
 
 Additionally, you can set the following environment variables for more specific control over library patching and the integration that starts the span:
