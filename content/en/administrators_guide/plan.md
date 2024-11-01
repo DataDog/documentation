@@ -177,7 +177,7 @@ Synthetic Monitoring is a full synthetic testing suite, including testing for br
 
 You can use some of the more than {{< translate key="integration_count" >}} integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system.The integrations, either SaaS-based or Agent-based, collect metrics for monitoring within Datadog. Host-based integrations are configured with yaml files that live in the conf.d directory, and container-based integrations are configured with metadata such as annotations or labels. 
 
-There are different types of integrations in Datadog, and the order in which they are presented here is the order we recommend for their installation.
+There are different types of integrations in Datadog, and the order in which they are presented here is the order Datadog recommends for their installation.
 
 | Category                                      | Description                                                                                                                                                                                                                                   |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -263,7 +263,7 @@ Use Datadog [Notebooks][37] to share with team members to aid in troubleshooting
 
 ## Optimizing data collection 
 
-Datadog collects many things in your environments, so it is important to limit the amount of collection points and establish guard rails. In this section we will discuss the mechanisms that control the telemetry collection, and discuss how you can codify your organization's needs.
+Datadog collects many things in your environments, so it is important to limit the amount of collection points and establish guard rails. In this section, you'll learn the mechanisms that control the telemetry collection, and discuss how you can codify your organization's needs.
 
 ### Infrastructure
 
@@ -300,8 +300,7 @@ Not every tool is fit for every job. Evaluate the Datadog product use cases, and
 
 ## Summary
 
-It is important to develop and plan a realistic course through the installation of Datadog. In this section we covered the planning and best practices phase, and at this stage, your 
-Datadog footprint is set up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations assist you in the next phases of Datadog installation: build and run.  
+It is important to develop and plan a realistic course through the installation of Datadog. In this section you learned the planning and best practices phase, and at this stage, your Datadog footprint is set up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations assist you in the next phases of Datadog installation: build and run.  
 
 ## Next Steps
 

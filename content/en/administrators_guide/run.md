@@ -7,7 +7,7 @@ further_reading:
   text: "Getting Started with Datadog"
 ---
 
-In the previous two sections, we viewed Datadog through the lens of the plan and build phases, next let’s look at the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that you need to manage. 
+In the previous two sections, you understood Datadog through the lens of the plan and build phases, next you'll learn about the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that you need to manage. 
 
 ## Service tasks
 
