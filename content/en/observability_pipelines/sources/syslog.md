@@ -25,20 +25,13 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 Syslog is a widely used logging protocol for sending network logs to a central server. Many network devices support syslog output, so you can forward third-party logs to the Observability Pipelines's syslog source for processing and routing. Examples of these third-party services include:
 
-#### Fortinet
+### Fortinet
 - [Configure log forwarding][2]
 - [Configuring syslog settings][3]
 
-#### Palo Alto Networks
+### Palo Alto Networks
 - [Configure log forwarding][4]
 - [Forward traffic logs to a syslog server][5]
-
-### Port for log forwarding configuration
-
-When you configure your third-party service to forward logs to the Observability Pipelines Worker, set the port to the IP address of the host that the Observability Pipelines Worker is running on, or the URL of the loadbalancer.
-
-- For CloudFormation installs, use the `LoadBalancerDNS` CloudFormation output for the URL.
-- For Kubernetes installs, use the internal DNS record of the Observability Pipelines Worker service, for example `opw-observability-pipelines-worker.default.svc.cluster.local`.
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://help.fortinet.com/fa/faz50hlp/56/5-6-1/FMG-FAZ/2400_System_Settings/1600_Log%20Forwarding/0400_Configuring.htm
