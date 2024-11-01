@@ -128,10 +128,6 @@ The Google Gemini integration instruments the following methods:
   - `model.generate_content()` (Also captures `chat.send_message()`)
   - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
