@@ -3531,6 +3531,19 @@ menu:
           - GetCostByOrg
         unstable: []
         order: 45
+    - name: Get billing dimension mapping for usage endpoints
+      url: '#get-billing-dimension-mapping-for-usage-endpoints'
+      identifier: usage-metering-get-billing-dimension-mapping-for-usage-endpoints
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBillingDimensionMapping
+        unstable:
+          - v2
+        order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
       identifier: usage-metering-get-hourly-usage-for-application-security
@@ -4979,18 +4992,6 @@ menu:
           - ListCostAzureUCConfigs
         unstable: []
         order: 6
-    - name: List related AWS accounts
-      url: '#list-related-aws-accounts'
-      identifier: cloud-cost-management-list-related-aws-accounts
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListAWSRelatedAccounts
-        unstable: []
-        order: 5
     - name: Update Cloud Cost Management AWS CUR config
       url: '#update-cloud-cost-management-aws-cur-config'
       identifier: cloud-cost-management-update-cloud-cost-management-aws-cur-config
@@ -6942,6 +6943,70 @@ menu:
           - v2
         operationids:
           - ListPermissions
+        unstable: []
+        order: 1
+    - name: Rum Metrics
+      url: /api/latest/rum-metrics/
+      identifier: rum-metrics
+      generated: true
+    - name: Update a rum-based metric
+      url: '#update-a-rum-based-metric'
+      identifier: rum-metrics-update-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumMetric
+        unstable: []
+        order: 4
+    - name: Get a rum-based metric
+      url: '#get-a-rum-based-metric'
+      identifier: rum-metrics-get-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumMetric
+        unstable: []
+        order: 3
+    - name: Delete a rum-based metric
+      url: '#delete-a-rum-based-metric'
+      identifier: rum-metrics-delete-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumMetric
+        unstable: []
+        order: 5
+    - name: Create a rum-based metric
+      url: '#create-a-rum-based-metric'
+      identifier: rum-metrics-create-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumMetric
+        unstable: []
+        order: 2
+    - name: Get all rum-based metrics
+      url: '#get-all-rum-based-metrics'
+      identifier: rum-metrics-get-all-rum-based-metrics
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumMetrics
         unstable: []
         order: 1
     - name: Sensitive Data Scanner
