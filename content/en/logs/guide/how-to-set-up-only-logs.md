@@ -2,6 +2,13 @@
 title: Use the Datadog Agent for Log Collection Only
 aliases:
   - /logs/faq/how-to-set-up-only-logs
+further_reading:
+- link: "/containers/docker/log/?tab=containerinstallation"
+  tag: "Documentation"
+  text: "Docker Log Collection"
+- link: "/containers/kubernetes/log/"
+  tag: "Documentation"
+  text: "Kubenetes Log Collection"
 ---
 
 <div class="alert alert-danger">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>
@@ -79,3 +86,7 @@ datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
