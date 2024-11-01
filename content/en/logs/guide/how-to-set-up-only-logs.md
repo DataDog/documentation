@@ -31,7 +31,7 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-If you are using the Docker containerized Agent, set the `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` environment variables to `false` in addition to your Agent configuration:
+If you're using the Docker containerized Agent, make sure to set the following environment variables in addition to your Agent configuration:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -55,21 +55,26 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you are deploying the Agent in Kubernetes, set the `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` environment variables to `false` in addition to your Agent configuration.
+If you're deploying the Agent in Kubernetes, make the following changes in your Helm chart in addition to your Agent configuration:
 
 ```yaml
  ## Send logs only
- datadog:
- [...]
-   env:
-      - name: DD_ENABLE_PAYLOADS_EVENTS
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SERIES
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SKETCHES
-        value: "false"
+clusterAgent:
+  enabled: false
+datadog:
+[...]
+  processAgent:
+    enabled: false
+[...]
+  env:
+    - name: DD_ENABLE_PAYLOADS_EVENTS
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SERIES
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SKETCHES
+      value: "false"
 ```
 
 {{% /tab %}}
