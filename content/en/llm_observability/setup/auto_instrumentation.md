@@ -240,9 +240,9 @@ And start your application with:
 DD_SITE=<YOUR_DATADOG_SITE> node --import ./register.js --require dd-trace/init script.js
 ```
 
-This will avoid any compatability issues with OpenAI and `dd-trace` in ESM projects.
+This avoids any compatability issues with OpenAI and `dd-trace` in ESM projects.
 
-Tracing will not be used for OpenAI calls in this case. In order to add this tracing for LLM Observability, you can instrument your OpenAI calls with the [`llmobs.trace()`][7] method.
+In this case, tracing is not used for OpenAI calls. To add this tracing for LLM Observability, you can instrument your OpenAI calls with the [`llmobs.trace()`][7] method.
 
 ```javascript
 const tracer = require('dd-trace').init({
@@ -267,10 +267,10 @@ function makeOpenAICall (input) {
 }
 ```
 
-## Bundling Support
-To properly use LLMObs integrations in bundled applications (esbuild, Webpack, Next.js), you will need to exclude those integrations' modules from bundling.
+## Bundling support
+To use LLM Observability integrations in bundled applications (esbuild, Webpack, Next.js), you must exclude those integrations' modules from bundling.
 
-If you are using esbuild, or for more specific information on why tracing does not work directly with bundlers, refer to [Bundling][8] with the Node.js tracer.
+If you are using esbuild, or for more specific information on why tracing does not work directly with bundlers, refer to [Bundling with the Node.js tracer][8].
 
 For Webpack or Next.js bundling, specify the corresponding integration in the `externals` section of the webpack configuration:
 

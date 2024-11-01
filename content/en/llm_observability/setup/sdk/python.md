@@ -9,7 +9,7 @@ aliases:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -404,15 +404,15 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `metadata` 
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
+<br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
 `metrics`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, and so on). The unit for `time_to_first_token` is in seconds, similar to the `duration` metric which is emitted by default.
+<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, etc.). The unit for `time_to_first_token` is in seconds, similar to the `duration` metric which is emitted by default.
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
@@ -516,11 +516,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be one of "categorical" or "score".
+<br />The type of the evaluation. Must be `categorical` or `score`.
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (for categorical `metric_type`) or integer/float (for score `metric_type`).
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
 
 `tags`
 : optional - _dictionary_
@@ -550,7 +550,7 @@ def llm_call():
 
 ### Tracing spans using inline methods
 
-For each span kind, the `ddtrace.llmobs.LLMObs` class provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function decorator counterparts, with the addition that `name` defaults to the span kind (`llm`, `workflow`, and so on) if not provided. These methods can be used as context managers to automatically finish the span once the enclosed code block is completed.
+For each span kind, the `ddtrace.llmobs.LLMObs` class provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function decorator counterparts, with the addition that `name` defaults to the span kind (`llm`, `workflow`, etc.) if not provided. These methods can be used as context managers to automatically finish the span after the enclosed code block is completed.
 
 #### Example
 
@@ -569,7 +569,7 @@ To manually start and stop a span across different contexts or scopes:
 
 1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but as a plain function call rather than as a context manager.
 2. Pass the span object as an argument to other functions.
-3. Stop the span manually with the `span.finish()` method. **Note**: the span must be manually finished, otherwise it will not be submitted.
+3. Stop the span manually with the `span.finish()` method. **Note**: the span must be manually finished, otherwise it is not submitted.
 
 #### Example
 

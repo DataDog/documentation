@@ -9,12 +9,12 @@ aliases:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
 
-The LLM Observability SDK for Node.js enhances the observability of your Javascript-based LLM applications. The SDK supports Node.js versions 16 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][5].
+The LLM Observability SDK for Node.js enhances the observability of your JavaScript-based LLM applications. The SDK supports Node.js versions 16 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][5].
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with wrapped functions or traced blocks. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
@@ -125,11 +125,11 @@ To trace a span, use `llmobs.wrap(options, function)` as a function wrapper for 
 
 Span kinds are required, and are specified on the `options` object passed to the `llmobs` tracing functions (`trace`, `wrap`, and `decorate`). See the [Span Kinds documentation][2] for a list of supported span kinds. 
 
-**Note:** Spans with an invalid span kind will not be submitted to LLM Observability.
+**Note:** Spans with an invalid span kind are not submitted to LLM Observability.
 
 ### Automatic function argument/output/name capturing
 
-`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for typescript) will try to automatically capure inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
+`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for TypeScript) tries to automatically capture inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -143,7 +143,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'differentFunctionName' }
 
 **Note**: If you are using any LLM providers or frameworks that are supported by [Datadog's LLM integrations][5], you do not need to manually start a LLM span to trace these operations.
 
-To trace an LLM span, specify the span kind as `llm`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `llm`, and optionally specify the following arguments on the options object.
 
 #### Arguments
 
@@ -179,7 +179,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 ### Workflow span
 
-To trace an LLM span, specify the span kind as `workflow`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `workflow`, and optionally specify the following arguments on the options object.
 
 #### Arguments
 
@@ -207,7 +207,7 @@ processMessage = llmobs.wrap({ kind: 'workflow' }, processMessage)
 
 ### Agent span
 
-To trace an LLM span, specify the span kind as `agent`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `agent`, and optionally specify the following arguments on the options object.
 
 #### Arguments
 
@@ -235,7 +235,7 @@ reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
 
 ### Tool span
 
-To trace an LLM span, specify the span kind as `tool`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `tool`, and optionally specify the following arguments on the options object.
 
 #### Arguments
 
@@ -263,7 +263,7 @@ callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
 
 ### Task span
 
-To trace an LLM span, specify the span kind as `task`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `task`, and optionally specify the following arguments on the options object.
 
 #### Arguments
 
@@ -291,7 +291,7 @@ sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
 
 ### Embedding span
 
-To trace an LLM span, specify the span kind as `embedding`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `embedding`, and optionally specify the following arguments on the options object.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
 
@@ -329,7 +329,7 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 
 ### Retrieval span
 
-To trace an LLM span, specify the span kind as `retrieval`, with optionally specifying the following arguments on the options object.
+To trace an LLM span, specify the span kind as `retrieval`, and optionally specify the following arguments on the options object.
 
 **Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
 
@@ -372,9 +372,9 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 `llmobs.wrap` extends the underlying behavior of [`tracer.wrap`][6]. The underlying span created when the function is called is finished under the following conditions:
 
-1. The function returns a Promise, in which case the span will finish when the promise is resolved or rejected.
-2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
-3. The function doesn't accept a callback and doesn't return a Promise, in which case the span will finish at the end of the function execution.
+- If the function returns a Promise, then the span finishes when the promise is resolved or rejected.
+- If the function takes a callback as its last parameter, then the span finishes when that callback is called.
+- If t function doesn't accept a callback and doesn't return a Promise, then the span finishes at the end of the function execution.
 
 The following example demonstrates the second condition, where the last argument is a callback:
 
@@ -452,15 +452,15 @@ The `annotationOptions` object can contain the following:
 
 `metadata` 
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
+<br />An object of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
 `metrics`
 : optional - _object_
-<br />An object of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, and so on).
+<br />An object of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, etc.).
 
 `tags`
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][3].
+<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][3].
 
 ### Example
 
@@ -600,9 +600,9 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 The `llmobs` SDK provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function wrapper counterparts, with the addition that `name` is required, as the name cannot be inferred from an anonymous callback. This method will finish the span under the following conditions:
 
-1. The function returns a Promise, in which case the span will finish when the promise is resolved or rejected.
-2. The function takes a callback as its last parameter, in which case the span will finish when that callback is called.
-3. The function doesn't accept a callback and doesn't return a Promise, in which case the span will finish at the end of the function execution.
+- If the function returns a Promise, then the span finishes when the promise is resolved or rejected.
+- If the function takes a callback as its last parameter, then the span finishes when that callback is called.
+- If the function doesn't accept a callback and doesn't return a Promise, then the span finishes at the end of the function execution.
 
 #### Example without a callback
 
@@ -628,7 +628,7 @@ function processMessage () {
 }
 {{< /code-block >}}
 
-The return type of this function will match the return type of the traced function:
+The return type of this function matches the return type of the traced function:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
