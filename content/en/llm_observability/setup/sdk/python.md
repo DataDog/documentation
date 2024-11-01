@@ -594,7 +594,7 @@ def separate_task(workflow_span):
 
 ### Tracing multiple applications
 
-The SDK supports tracking multiple LLM applications from the same service.
+The SDK supports tracing multiple LLM applications from the same service.
 
 You can configure an environment variable `DD_LLMOBS_ML_APP` to the name of your LLM application, which all generated spans are grouped into by default.
 
