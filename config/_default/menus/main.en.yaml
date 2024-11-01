@@ -3886,6 +3886,11 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_mongodbatlas
       weight: 702
+    - name: Troubleshooting
+      url: database_monitoring/setup_mongodb/troubleshooting/
+      parent: dbm_setup_mongodb
+      identifier: dbm_troubleshooting_mongodb
+      weight: 703
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
