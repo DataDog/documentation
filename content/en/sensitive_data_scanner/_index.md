@@ -365,7 +365,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [3]: /observability_pipelines/processors/#sensitive-data-scanner
 [4]: /observability_pipelines/
 [5]: /logs/guide/logs-rbac/
-[6]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[6]: /sensitive_data_scanner/
 [7]: /security/cloud_security_management
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /agent/remote_config
