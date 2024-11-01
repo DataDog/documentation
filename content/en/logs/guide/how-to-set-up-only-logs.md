@@ -38,7 +38,13 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-If you're using the Docker containerized Agent, make sure to set the following environment variables in addition to your Agent configuration:
+If you're using the Docker containerized Agent, set the following environment variables to `false`:
+- `DD_ENABLE_PAYLOADS_EVENTS`
+- `DD_ENABLE_PAYLOADS_SERIES`
+- `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`
+- `DD_ENABLE_PAYLOADS_SKETCHES`
+
+Here's an example of how you can include these settings in your Docker run command:
 
 ```shell
 docker run -d --name datadog-agent \
