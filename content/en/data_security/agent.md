@@ -170,8 +170,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                   |
 | postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                              |
 | postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
-| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in ms                                                               |
-| postgres.collect_statement_samples_ms       | Time to get statement samples in ms                                                               |
+| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                               |
+| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                              |
 | postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics are emitted.
