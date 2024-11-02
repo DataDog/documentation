@@ -81,19 +81,18 @@ On the Details Explorer for a vulnerability, you can view impacted infrastructur
 
 ## Datadog Severity Score
 
-Each vulnerability has a defined base severity score. To help prioritize remediation, Datadog provides an enhanced severity score (known as "Datadog Severity Score") using existing attacks
-and the business sensitivity of the environment where the vulnerability is detected.
+Each vulnerability has a defined base severity score. To help prioritize remediation, Datadog adjusts the base CVSS score into the Datadog Severity Score using
+evidence of suspicious requests or attacks, the business sensitivity or exposure of the environment to the Internet, and the risk of a potential successful exploit.
 
-For example, if no production environment is detected, the severity is reduced.
+Four score modifiers may apply to a base score. Two are provided by runtime context:
+ - Vulnerability is in production
+ - Service affected by vulnerability is under attack
 
-The adjusted vulnerability score includes the full context of each service:
+Two are provided by CVE context:
+ - Whether an exploit is available
+ - The exploitation probability
 
-- The original vulnerability severity
-- Evidence of suspicious requests or attacks
-- Sensitive or internet-exposed environments
-- Risk of a potential successful exploit
-
-Datadog shows how the base CVSS score is updated into a Datadog Severity Score based on your execution environment.
+Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score based on the factors above.
 
 {{< img src="security/application_security/vulnerability-score-modified_3.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
 
