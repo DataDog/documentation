@@ -168,7 +168,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                                      |
 | postgres.get_new_pg_stat_activity_ms        | Time to get pg_stat_activity in ms                                                                |
 | postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                   |
-| postgres.get_active_connections_ms          | Time to get active connections in ms                                                              |
+| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                              |
 | postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
 | postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in ms                                                               |
 | postgres.collect_statement_samples_ms       | Time to get statement samples in ms                                                               |
