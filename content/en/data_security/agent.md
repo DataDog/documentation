@@ -144,7 +144,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | checks.execution_time                       | Check's execution time in milliseconds                                                            |
 | pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                               |
-| pymem.alloc                                 | Total number of bytes allocated by the python interpreter since the start of the agent            |
+| pymem.alloc                                 | Total number of bytes allocated by the Python interpreter since the start of the Agent            |
 | api_server.request_duration_seconds         | Total number of bytes allocated by the python interpreter since the start of the agent            |
 | logs.decoded, logs.processed                | CLI commands execution performance (if executed)                                                  |
 | logs.sender_latency                         | Http sender latency in ms                                                                         |
