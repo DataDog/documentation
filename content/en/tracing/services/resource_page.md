@@ -54,7 +54,7 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 Use the Dependency Map to view a flow graph of all of a resource's upstream and downstream service dependencies.  The map is scoped to the requests flowing through the selected service and resource  (endpoint, database query, etc.) you're focused on. [Inferred service dependencies][10] like databases, queues or third-party services are represented with a purple background node.
 
-Click on a downstream or upstream service node to see which resources are invoked in the request flow. To focus on a particular request path, select a node an click `set as start/end`. The map will be filtered to focus on the requests that also flow through this upstream or downstream dependency.
+Click on a downstream or upstream service node to see which resources are invoked in the request flow. To focus on a particular request path, select a node an click `set as start/end`. This filters the map to focus on the requests that also flow through this upstream or downstream dependency.
 
 **Note**: This map is based on a sample of ingested spans. Request rates are then upscaled based on applied sampling rates to represent actual application/service traffic.
 

@@ -8,20 +8,20 @@ further_reading:
 
 ## Overview
 
-Datadog automatically discovers the dependencies for an instrumented service, such as databases, queues, or third-party APIs, even if that dependency hasn't been instrumented yet. By analyzing outbound requests from your instrumented services, Datadog infers the presence of these dependencies and collects associated performance metrics.
+Datadog automatically discovers the dependencies for an instrumented service, such as databases, queues, or third-party APIs, even if that dependency hasn't been directly instrumented. By analyzing outbound requests from your instrumented services, Datadog infers the presence of these dependencies and collects associated performance metrics.
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Service page dependency map" style="width:90%;">}}
 
-Explore inferred services in Datadog with from the [Service Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. From there, each [service page][2] will be tailored to the type of service you are investigating. For instance, database service pages will show insights that are specific to database and will include database monitoring data if you are using [Database monitoring][3].
+Explore inferred services in the [Service Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
-## How to see inferred services in Datadog
+## Set up inferred services
 
-The inferred services feature requires that you enable some configurations on the **Datadog Agent**. No tracing library configuration change is required.
+To see inferred services, you must enable some **Datadog Agent** configurations. 
 
 {{< tabs >}}
-{{% tab "Agent version 7.55.1 and higher" %}}
+{{% tab "Agent v7.55.1+" %}}
 
-From Datadog Agent version >= [7.55.1][1], update your `datadog.yaml` configuration file with the following:
+For Datadog Agent versions [7.55.1][1] or later, add the following to your `datadog.yaml` configuration file:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -31,7 +31,7 @@ apm_config:
 
 {{< /code-block >}}
 
-Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+Alternatively, set these environment variables in your Datadog Agent configuration:
 
 {{< code-block collapsible="true" lang="yaml" >}}
 
@@ -40,14 +40,14 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
 
-If you are using Helm, nclude the same set of environment variables in your `values.yaml` [file][2].
+If you are using Helm, include these environment variables in your `values.yaml` [file][2].
 
 [1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
 [2]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
-{{% tab "Agent version between 7.50.3 and 7.54.1" %}}
+{{% tab "Agent v7.50.3 - v7.54.1" %}}
 
-If you use a Datadog Agent version >= [7.50.3][1] and <= [7.54.1][2], update your `datadog.yaml` configuration file with the following:
+For Datadog Agent versions [7.50.3][1] through [7.54.1][2], add the following to your `datadog.yaml` configuration file:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -58,7 +58,7 @@ apm_config:
 
 {{< /code-block >}}
 
-Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+Alternatively, set these environment variables in your Datadog Agent configuration:
 
 {{< code-block collapsible="true" lang="yaml" >}}
 
@@ -68,15 +68,15 @@ DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.q
 
 {{< /code-block >}}
 
-If you are using Helm, nclude the same set of environment variables in your `values.yaml` [file][3].
+If you are using Helm, include these environment variables in your `values.yaml` [file][3].
 
 [1]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.54.1
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
-{{% tab "OpenTelemetry collector" %}}
+{{% tab "OpenTelemetry Collector" %}}
 
-If you are using the OpenTelemetry collector, the minimum version recommended is the opentelemetry-collector-contrib >= [v0.95.0][1]. Update the collector configuration with:
+For the OpenTelemetry Collector, the minimum recommended version is `opentelemetry-collector-contrib` [v0.95.0][1] or later. In that case, update this configuration:
 
 {{< code-block lang="yaml"  collapsible="true" >}}
 
@@ -89,7 +89,7 @@ connectors:
 
 {{< /code-block >}}
 
-If your collector version is below v0.95.0, update the collector configuration with :
+If your Collector version is below v0.95.0, update the following Collector configuration:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 
@@ -111,11 +111,11 @@ exporters:
 
 ## Naming inferred entities
 
-To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For example, inferred external APIs use the default naming scheme `net.peer.name`, e.g. `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
+To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For example, inferred external APIs use the default naming scheme `net.peer.name` like `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
-### List of newly introduced peer.* tags 
+### Peer tags
 
-`peer.*` dimensions | Remapped from ...
+Peer Tag | Source Attributes
 --------------------|-------------------
 `peer.aws.dynamodb.table` | `tablename`
 `peer.aws.kinesis.stream` | `streamname`
@@ -133,11 +133,11 @@ To determine the names and types of the inferred service dependencies, Datadog u
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
-## Global default service naming migration
+## Migrate to global default service naming
 
-With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (via the `service` tag) is not required anymore to identify these dependencies. 
+With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enabling `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable ensures that no Datadog integration sets service names that are different from the default global service name. It improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensures no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
 <div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 

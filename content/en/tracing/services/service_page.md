@@ -140,19 +140,19 @@ Choose what to display in your resources list:
 {{< site-region region="ap1" >}}
 ## Dependencies
 
-Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1], hence surfaces accurate request counts, error rates and latency numbers. The map automatically groups dependencies together by operation name. For instance, if a service calls two downstream services via gRPC, these will be displayed grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
+Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
 
-[Inferred service dependencies][2] like databases, queues or third-party services are represented with a purple background node.
+[Inferred service dependencies][2] like databases, queues, or third-party services are represented with a purple background node.
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Service page dependency map" style="width:100%;">}}
 
-**Note**: [service overrides][3] are represented as part of the edge of the dependency map to keep visibility over the actual remote service, database or queue the service is interacting with.
+**Note**: [Service overrides][3] display along the edges (connecting lines) between nodes in the dependency map to keep visibility over the actual remote service, database, or queue the service is interacting with.
 
 ### Investigating a specific service dependency
 
-Click on a dependency service node to investigate one of the services' dependencies. In the side panel, request count, errors and latency metrics will be scoped to requests going from the service to the downstream dependency.
+Click on a dependency service node to investigate one of the service's dependencies. In the side panel, request count, errors, and latency metrics are scoped to requests going from the service to the downstream dependency.
 
-Use the table below to see which resources are invoked as part of the client call going from the service to the downstream dependency. For instance, if the service is calling a database, see the breakdown of queries that are made to the database, and use the table to identify slow or failing queries.
+Use the following table to see which resources are invoked in client calls from the service to the downstream dependency. For instance, if the service is calling a database, see the breakdown of queries that are made to the database, and use the table to identify slow or failing queries.
 
 {{< img src="tracing/visualization/service/dependencies_side_panel.png" alt="Service page service dependency map" style="width:100%;">}}
 
