@@ -141,7 +141,7 @@ Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensures no Datadog
 
 <div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
-For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][10].
+For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 
 
 ## Further Reading
@@ -151,3 +151,4 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [1]: /service_catalog/
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
+[4]: /tracing/guide/service_overrides

@@ -3395,10 +3395,10 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
-    - name: Span Facets
-      url: tracing/trace_explorer/facets/
+    - name: Span Tags and Attributes
+      url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
-      identifier: span_facets
+      identifier: span_attributes
       weight: 603
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/

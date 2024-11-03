@@ -80,7 +80,7 @@ For instance, if you want to access a span with the following attribute below, y
 
 ### Tags search
 
-Your traces inherit tags from hosts and integrations that generate them. They can be used in the search query:
+Your span inherit tags from hosts and integrations that generate them. They can be used in the search query:
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -141,6 +141,13 @@ Don't lose time building the same views everyday. Saved searches contain your se
 {{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search" style="width:80%;">}}
 
 To delete a saved search, click on the bin icon under the Trace search dropdown menu.
+
+### Search for services and entities 
+
+To search for a service, use the `service` attribute. To search for another [entity type][20] (e.g. a database, a queue, a third-party provider, etc...), rely on other [peer attributes][21] which Datadog uses to describe dependencies that are not instrumented with APM. For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`
+
+**Note**: Spans `service` tag represents the service **emitting** the span if you migrated to the [global service naming][22] by setting `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
+
 
 ## Time range
 
@@ -301,3 +308,6 @@ You can also generate a new metric for the query.
 [17]: /monitors/notify/variables/?tab=is_alert#reserved-attributes
 [18]: /notebooks/
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[20]: /tracing/services/inferred_services
+[21]: /tracing/services/inferred_services#peer-tags
+[22]: /tracing/services/inferred_services#migrate-to-global-default-service-naming
