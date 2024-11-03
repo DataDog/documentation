@@ -155,36 +155,39 @@ The time range allows you to display traces within a given time period. Quickly 
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
-## Trace stream
+## Span Table
 
-The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+The Span table is the list of spans that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+
+### The service column
+
+By default, the service column shows the `service` reserved attribute from the span.
+
+[Add image]
+
+When the span represents a client call from an instrumented service to an inferred service, the service column shows:
+- the **service**, identified by the `service` reserved attribute.
+- the **[inferred service][4]**: name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
+
+[add image]
+
+When the service name is an override from the base service name, the top of the info sections shows:
+- the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
+- the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
+
+[add image]
 
 ### Displaying a full trace
 
-Click on any trace to see more details about it:
+Click on any span to see details about the associated trace:
 
 {{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" style="width:80%;">}}
 
 ### Columns
 
-To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
+To add other [span tags or attributes][23] as columns to the list, click the **Options** button and select any dimension you want to add:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" style="width:80%;">}}
-
-### Multi-line display
-
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" style="width:30%;">}}
-
-Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
-
-* With one line displayed:
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" style="width:80%;">}}
-
-* With three lines displayed:
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" style="width:80%;">}}
-
-* With ten lines displayed:
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" style="width:80%;">}}
 
 ## Facets
 
@@ -311,3 +314,4 @@ You can also generate a new metric for the query.
 [20]: /tracing/services/inferred_services
 [21]: /tracing/services/inferred_services#peer-tags
 [22]: /tracing/services/inferred_services#migrate-to-global-default-service-naming
+[23]: /tracing/trace_explorer/span_tags_attributes
