@@ -137,7 +137,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1" >}}
+{{< site-region region="ap1,us3,us5" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.

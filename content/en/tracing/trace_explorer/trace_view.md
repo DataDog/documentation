@@ -46,7 +46,9 @@ To navigate the graph, scroll to zoom, click and drag to move around, and use th
 
 The legend details the color coding of the flame graph. Group spans by either **Service** (default), **[Base service][1]** (service from which the span is emitted), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
 
+{{< site-region region="ap1,us3,us5" >}}
 Spans from [inferred services][2] are represented with a dashed outline.
+{{< /site-region >}}
 
 {{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
@@ -80,7 +82,11 @@ Each row (span) indicates the following:
 - **Absolute span duration**: The absolute time in milliseconds (ms).
 - **Span details**: The corresponding service name and resource name are displayed.
 - **Statuses**: When applicable, an HTTP status code is displayed.
-- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown. Spans from [inferred services][1] are represented with a dashed underline.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
+
+{{< site-region region="ap1,us3,us5" >}}
+Spans from [inferred services][1] are represented with a dashed underline.
+{{< /site-region >}}
 
 To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
@@ -158,10 +164,12 @@ Other information may be displayed under various conditions:
 
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
+{{< site-region region="ap1,us3,us5" >}}
 When the service name is an override from the base service name, the top of the info sections shows:
 - the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
 - the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
 - the **[inferred service][4]** (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
+{{< /site-region >}}
 
 [add image]
 

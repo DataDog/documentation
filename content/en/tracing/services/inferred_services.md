@@ -12,6 +12,7 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Service page dependency map" style="width:90%;">}}
 
+{{< site-region region="ap1,us3,us5" >}}
 Explore inferred services in the [Service Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
@@ -142,7 +143,10 @@ Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensures no Datadog
 <div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
-
+{{< /site-region >}}
+{{< site-region region="us,eu,gov" >}}
+<div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
+{{< /site-region >}}
 
 ## Further Reading
 
