@@ -1,21 +1,5 @@
-import { z } from 'zod';
-import { HugoConfigSchema } from './hugoConfig';
 import { Node, ValidationError } from 'markdoc-static-compiler';
-import { Frontmatter } from '../schemas/yaml/frontMatter';
-
-/**
- * The schema for the config object passed to the MarkdocHugoIntegration class
- * from outside the module.
- */
-export const CompilationConfigSchema = z.object({
-  hugoConfig: HugoConfigSchema
-});
-
-/**
- * The type of the config object passed to the MarkdocHugoIntegration class
- * from outside the module.
- */
-export type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
+import { Frontmatter } from './yaml/frontMatter';
 
 export type CompilationResult = {
   hasErrors: boolean;
