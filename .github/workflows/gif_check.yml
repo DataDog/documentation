@@ -12,6 +12,9 @@ concurrency:
 
 jobs:
   look-for-gifs:
+    permissions:
+      contents: read
+    
     if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:

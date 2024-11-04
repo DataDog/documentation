@@ -41,6 +41,8 @@ instances:
     ## @param cluster_name - string - optional
     ## The unique name of the cluster to which the monitored MongoDB instance belongs.
     ## Used to group MongoDB instances in a MongoDB cluster.
+    ## cluster_name should follow Datadog tags naming conventions. See:
+    ## https://docs.datadoghq.com/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
     ## Required when `dbm` is enabled.
     #
     cluster_name: <MONGO_CLUSTER_NAME>

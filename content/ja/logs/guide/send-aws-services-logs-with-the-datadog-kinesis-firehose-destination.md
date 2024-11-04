@@ -141,7 +141,7 @@ AWS CLI で設定する例としては、[Kinesis データストリームを使
 
 ### 検証
 
-[CloudWatch][1] のロググループの詳細ページの **Subscription filters** 田部井をチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
+[CloudWatch][1] のロググループの詳細ページの **Subscription filters** タブをチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
 
 ### Datadog でログを確認する
 
