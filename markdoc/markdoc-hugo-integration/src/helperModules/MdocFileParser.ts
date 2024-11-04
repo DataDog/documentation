@@ -9,7 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
-import { ParsingErrorReport, ParsedFile } from '../schemas/compilation';
+import { ParsingErrorReport, ParsedFile } from '../schemas/compilationResults';
 
 /**
  * A module responsible for parsing Markdoc files into data structures

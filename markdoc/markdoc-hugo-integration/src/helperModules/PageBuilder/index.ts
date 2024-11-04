@@ -1,5 +1,5 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
-import { ParsedFile } from '../../schemas/compilation';
+import { ParsedFile } from '../../schemas/compilationResults';
 import { YamlConfigParser } from '../YamlConfigParser';
 import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
@@ -11,7 +11,7 @@ import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
-import { HugoConfig } from '../../schemas/hugoConfig';
+import { HugoConfig } from '../../schemas/config/hugo';
 import { PagePrefsManifest } from '../../schemas/pagePrefs';
 import { render } from '../renderer';
 

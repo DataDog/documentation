@@ -1,4 +1,4 @@
-import { HugoConfig } from '../../schemas/hugoConfig';
+import { HugoConfig } from '../../schemas/config/hugo';
 import { HugoFunctions } from '../../helperModules/HugoFunctions';
 
 /**

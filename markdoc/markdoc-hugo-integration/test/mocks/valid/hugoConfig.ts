@@ -1,4 +1,4 @@
-import { HugoConfig } from '../../../src/schemas/hugoConfig';
+import { HugoConfig } from '../../../src/schemas/config/hugo';
 import { VALID_SITE_DIR } from '../../config/constants';
 
 const mockHugoConfig: HugoConfig = {
