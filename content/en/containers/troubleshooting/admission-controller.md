@@ -360,7 +360,7 @@ For more information, see [Adding firewall rules for specific use cases][15] in 
 
 #### Rancher
 
-If you are using Rancher with an EKS cluster or a private GKE cluster, additional configuration is required. For more information, see [Rancher Webhook - Common Issues][16] in the Rancher documentation.
+If you are using Rancher with an EKS cluster or a private GKE cluster, additional configuration is required. For more information, see [Rancher Webhook - Common Issues][16] in the Rancher documentation. As our Admission Controller's webhook functions very similar to the Rancher webhook, just on port `8000` instead of Rancher's `9443`.
 
 ##### Rancher and EKS
 To use Rancher in an EKS cluster, deploy the Cluster Agent pod with the following configuration:
@@ -393,7 +393,7 @@ clusterAgent:
 You must also add a security group inbound rule, as described in the [Amazon EKS](#amazon-elastic-kubernetes-service-eks) section on this page.
 
 ##### Rancher and GKE
-To use Rancher in a private GKE cluster, edit your firewall rules to allow inbound access over TCP on port `8000` and port `9443`. See the [GKE](#google-kubernetes-engine-gke) section on this page.
+To use Rancher in a private GKE cluster, edit your firewall rules to allow inbound access over TCP on port `8000`. See the [GKE](#google-kubernetes-engine-gke) section on this page.
 
 ## Further Reading
 
