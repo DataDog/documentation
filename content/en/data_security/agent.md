@@ -92,7 +92,7 @@ For more information, see the [Secrets Management][18] documentation.
 
 {{< site-region region="gov" >}}
 
-Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or [ Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (such as, for example, if a proxy is being used) Agent telemetry will be emitted but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place we recommend disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
@@ -143,12 +143,12 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | Metrics ([source][2])                       | Description                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | checks.execution_time                       | Check's execution time in milliseconds                                                            |
-| pymem.inuse                                 | Number of bytes allocated by the python interpreter                                               |
-| pymem.alloc                                 | Total number of bytes allocated by the python interpreter since the start of the agent            |
+| pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                               |
+| pymem.alloc                                 | Total number of bytes allocated by the Python interpreter since the start of the Agent            |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                  |
 | logs.decoded                                | Total number of decoded logs                                                                      |
 | logs.processed                              | Total number of processed logs                                                                    |
-| logs.sender_latency                         | Http sender latency in ms                                                                         |
+| logs.sender_latency                         | HTTP sender latency in milliseconds                                                               |
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the agent, such as after log rotation |
 | logs.sent                                   | Total number of sent logs                                                                         |
 | logs.dropped                                | Total number of logs dropped                                                                      |
@@ -165,17 +165,17 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                   |
 | oracle.statement_metrics                    | Time to retrieve database metrics in milliseconds                                                 |
 | oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
-| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in ms                                                    |
-| postgres.collect_stat_autodiscovery_ms      | Time to collect autodiscovery stats in ms                                                         |
+| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                                   |
+| postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                                      |
 | postgres.get_new_pg_stat_activity_ms        | Time to get pg_stat_activity in ms                                                                |
-| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect pg_stat_activity                                                    |
-| postgres.get_active_connections_ms          | Time to get active connections in ms                                                              |
+| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                   |
+| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                              |
 | postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
-| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in ms                                                               |
-| postgres.collect_statement_samples_ms       | Time to get statement samples in ms                                                               |
+| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                               |
+| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                              |
 | postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
 
-Only applicable metrics are emitted. For example, if DBM is not enabled none of the database related metrics are emitted.
+Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
