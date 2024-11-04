@@ -30,7 +30,8 @@ When a monitor alerts, the first place to start your investigation is the monito
 
 {{< img src="/monitors/status/status_page_header.png" alt="Monitor status page header" style="width:100%;" >}}
 
-The header contains the monitor's metadata including:- Alert status
+The header contains the monitor's metadata, including:
+- Alert status
 - Monitor status
 - Monitor type
 - Creation date
