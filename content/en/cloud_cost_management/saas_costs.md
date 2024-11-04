@@ -230,12 +230,12 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-| Tag Name| Tag Description |
+| Tag Name | Tag Description |
 |---|---
 | `record_id` | Unique ID for this record. |
 | `account_id` | ID of the account this report was generated for. |
 | `workspace_id` | ID of the Workspace this usage was associated with. |
-| `cloud` | Cloud provider associated with this usage (e.g., AWS, AZURE, GCP). |
+| `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
 | `billing_origin_product` | Product or feature originating the billing event (e.g., JOBS, CLUSTERS). |
 | `usage_type` | Type of usage being billed (e.g., COMPUTE_TIME). |
 | `job_run_id` | Identifier for the specific job run (if applicable). |
