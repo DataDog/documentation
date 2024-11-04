@@ -1064,13 +1064,13 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
 
-## Enable Test Visibility
+## Enable Test Optimization
 
-This is an optional step that enables the collection of tests data using [Test Visibility][16].
+This is an optional step that enables the collection of tests data using [Test Optimization][16].
 
-See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
+See the [Test Optimization documentation][17] for your language to make sure that the testing framework that you use is supported.
 
-There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
+There are different ways to enable Test Optimization inside a Jenkins job or pipeline:
 1. Using the Jenkins configuration UI.
 2. Adding the `datadog` step inside the pipeline script.
 3. Configuring the tracer manually.
@@ -1079,20 +1079,20 @@ For pipelines that spin up a Docker container to execute tests, you can only con
 
 ### Enable with the Jenkins configuration UI
 
-UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or later.
+UI-based Test Optimization configuration is available in Datadog Jenkins plugin v5.6.0 or later.
 
 This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
 For these pipelines use declarative configuration with the `datadog` step (described in the next section).
 
-To enable Test Visibility via UI do the following:
+To enable Test Optimization through the UI do the following:
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
-2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
+2. In the **General** configuration section, tick the **Enable Datadog Test Optimization** checkbox.
 3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
-4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Optimization for these languages, follow the manual [configuration instructions][18].
 5. Optionally, provide [additional configuration settings][18].
 6. Click **Save**.
 
-{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
 
 ### Enable with the `datadog` pipeline step
 
@@ -1137,7 +1137,7 @@ The other `datadog` settings, such as `collectLogs` or `tags` can be added along
 
 ### Enable with manual tracer configuration
 
-Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
+Follow the manual Test Optimization [configuration instructions][17] that are specific to your language.
 
 ## Propagate Git information
 
