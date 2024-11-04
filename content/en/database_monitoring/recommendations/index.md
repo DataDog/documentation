@@ -29,9 +29,6 @@ Function in Filter
 High Row Count
 : We detect queries that return a large number of rows in their result set.
 
-Low Disk Space
-: We detect database instances that are running low on disk space.
-
 Unused Index
 : Detects indexes that have not been queried recently.
 
