@@ -299,17 +299,17 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-| Tag Name            | Tag Description                              |
-|---------------------|----------------------------------------------|
-| `usage_type_cd`     | Name of the usage type.                      |
-| `plan_name`         | Name of the plan.                            |
-| `service_name`      | The name of the Fastly service.              |
-| `credit_coupon_code`| Code representing the credit coupon.         |
-| `product_name`      | Name of the product.                         |
-| `product_group`     | Group the product belongs to.                |
-| `product_line`      | Line of the product within the group.        |
-| `usage_type`        | Type of usage for the product or service.    |
-| `region`            | Geographic region associated with usage.     |
+| Tag Name | Tag Description |
+|---|---|
+| `usage_type_cd` | Name of the usage type. |
+| `plan_name` | Name of the plan. |
+| `service_name` | The name of the Fastly service. |
+| `credit_coupon_code` | Code representing the credit coupon. |
+| `product_name` | Name of the product. |
+| `product_group` | Group the product belongs to. |
+| `product_line` | Line of the product within the group. |
+| `usage_type` | Type of usage for the product or service. |
+| `region` | Geographic region associated with usage. |
 
 
 {{% /tab %}}
