@@ -20,7 +20,7 @@ further_reading:
   tag: Documentación
   text: Consulta
 title: Widget de distribución
-widget_type: distribución
+widget_type: distribution
 ---
 
 En la visualización de la distribución se muestran datos agregados a través de una o varios etiquetas, como *hosts*. A diferencia del [mapa de calor][1], el eje x de una gráfica de distribución es la cantidad y no el tiempo.
