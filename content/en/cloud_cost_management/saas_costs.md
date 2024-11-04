@@ -57,10 +57,11 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-1. Navigate to the [Databricks integration tile][101] in Datadog and click **Add Account**.
-2. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
-3. Under the **Resources** section, click the toggle for each account to enable `Databricks Cost Data Collection`.
-4. Click **Save**.
+1. Navigate to the [Databricks integration tile][101] in Datadog and click the **Configure** tab.
+2. Enter the workspace name, url, and access token corresponding to your Databricks account.
+3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
+4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
+4. Click **Save Databricks Workspace**.
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -71,10 +72,10 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-1. Create or acquire an API key with the organizational admin role in Confluent Cloud.
+1. Create or acquire an API key with the [billing admin][102] role in Confluent Cloud.
 2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
 3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
-4. Under the **Additional Options** section, click the toggle for `Collecting Billing Data`.
+4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
 5. Click **Save**.
 
 Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
@@ -82,6 +83,7 @@ Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud C
 {{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/confluent-cloud
+[102]: https://docs.confluent.io/cloud/current/security/access-control/rbac/predefined-rbac-roles.html#billingadmin-role
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
@@ -192,9 +194,8 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% tab "Fastly" %}}
 
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
-2. Navigate to the [Fastly integration tile][102] in Datadog and click **Add Account**.
+2. Navigate to the [Fastly cost management integration tile][102] in Datadog and click **Add New**.
 3. Enter your Fastly account name and API token.
-4. Click the checkbox for `Collect Billing Data`.
 5. Click **Save**.
 
 Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
@@ -202,7 +203,7 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
 
 [101]: https://manage.fastly.com/account/personal/tokens
-[102]: https://app.datadoghq.com/integrations/fastly
+[102]: https://app.datadoghq.com/integrations/fastly-cost-management
 
 {{% /tab %}}
 {{% tab "Twilio" %}}
