@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-When a monitor alerts, the first place to start your investigation is the Monitor Status page. This page displays the graphs and events to show you why your monitor is in an alert status, so you can understand what is happening around a monitor alert. Further, you can access quick actions to help you move the investigation towards resolution. Use the monitor status page to:
+When a monitor alerts, the first place to start your investigation is the monitor status page. This page displays graphs and events to show you why your monitor is in an alert status, so you can understand what is happening around a monitor alert. Further, you can access quick actions to help you move the investigation towards resolution. Use the monitor status page to:
 
 - Review all the context you need to start an investigation
 - Investigate the possible cause of an alert
@@ -40,7 +40,7 @@ The header contains the monitor's metadata including:- Alert status
 
 On the right, you'll find the **Edit**, **Clone**, **Export**, and **Permissions** buttons.
 
-From the header, you can resolve the monitor. Resolving from the Header resolves all groups in the alert and sets the monitor status to 'OK' (all groups). The `resolve` function temporarily changes the monitor status to 'OK' for its next evaluation, but the next evaluation proceeds as normal based on current data.To resolve from the Event details, see [Status Events][1].
+From the header, you can resolve the monitor. Resolving from the header resolves all groups in the alert and sets the monitor status to `OK` (all groups). The `resolve` function temporarily changes the monitor status to `OK` for its next evaluation, but the next evaluation proceeds as normal based on current data. To resolve from the Event details, see [Status Events][1].
 
 Additionally, view and manage downtimes impacting this monitor and create new ones to mute notifications. 
 

@@ -12,23 +12,23 @@ further_reading:
   text: "Set alert conditions"
 ---
 
-<div class="alert alert-info">Status Graphs is part of the <a href="/monitors/status/status_page">provisional Monitor Status Page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
+<div class="alert alert-info">Status Graphs is part of the <a href="/monitors/status/status_page">provisional monitor status page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
 
 ## Overview
 
-The graphs on the monitor status page provide insights into the single monitor evaluations. These graphs help you to understand why your monitor might be in an ALERT state and where to focus your troubleshooting efforts.
+The graphs on the monitor status page provide insights into the single monitor evaluations. These graphs help you to understand why your monitor might be in an `ALERT` state and where to focus your troubleshooting efforts.
 
 ## Monitor metadata
 
 {{< img src="/monitors/status/graphs/graph_metadata_1.png" alt="Monitor metadata section on the right side of the status page." style="width:100%;" >}}
 
-The right panel of the graph section of the monitor status page provides a high level overview of your monitor including
+The right panel of the graph section of the monitor status page provides a high-level overview of your monitor, including
 
 |  | Description |
 | ---- | ---- |
-| Groups  | Count of groups per status (Alert, Warn, No Data, Ok)  |
+| Groups | Count of groups per status (`ALERT`, `WARN`, `NO DATA`, `OK`) |
 | Visualize as | Graph selector to toggle between the Evaluated Data, Source Data, and Transition graphs. |
-| Query | The raw monitor query. A link to the Metrics explorer is also available\*. |
+| Query | The raw monitor query. A link to the Metrics explorer is also available. |
 | Evaluation | The aggregation method applied to the Query with the evaluation window. |
 | Notification count | Count of notifications sent from this monitor. |
 
@@ -41,10 +41,10 @@ Depending on the query, the monitor might have multiple groups. To focus on a sp
 
 {{< img src="/monitors/status/view_monitor_evaluations_graphs_1.png" alt="Example monitor status page filtered by a template variable" style="width:100%;" >}}
 
-You can chose to scope the page on:
+You can choose to scope the page on:
 
 Group status
-: Only groups that are currently in the selected state will be shown
+: Only groups that are currently in the selected state will be shown.
 
 Muted state
 : Only groups that are muted, or not, will be shown.
@@ -54,13 +54,13 @@ Group tags
 
 ## Evaluated data graph
 
-The evaluated data visualization is specific to the monitor and shows individual values compared to the threshold, aggregated from the query's data points. For example, if the monitor evaluates the average over the last 5 minutes, each datapoint represents the metric's average value for that period.
+The evaluated data visualization is specific to the monitor and shows individual values compared to the threshold, aggregated from the query's data points. For example, if the monitor evaluates the average over the last 5 minutes, each data point represents the metric's average value for that period.
 
-It matches your monitor's configuration to show the monitor's historicl and current status using evaluations settings. The graphs show the status by group. 
+The visualization matches your monitor's configuration to show the monitor's historical and current status using evaluations settings. The graphs show the status by group. 
 
 {{< img src="/monitors/status/graphs/evaluated_data_ui_features.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
 
-To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the Event Details section for more information.
+To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the **Event Details** section for more information.
 
 To filter the view for an individual group, hover over the group title and click **Filter to Group** in the tooltip.
 
@@ -93,9 +93,9 @@ The Transitions graph displays your monitor's state transitions over time, broke
 Datadog keeps monitor groups in the UI for 24 hours unless configured differently. For more information, see [Group Retention time][1]. A dotted line in the graph can indicate: 
 
 * A new group evaluated after monitor creation, shown as a dotted line from the start of the time period to when first evaluated.  
-* A group stops reporting, then starts again, with a dotted line appearing from when it dropped out to when reporting resumes.
+* A group that has stopped reporting, then started again, with a dotted line appearing from when it dropped out to when reporting resumes.
 
-**Note**: This is different from a "no data" status. Host monitors and service checks set to notify on missing data are available for 48 hours.
+**Note**: The non-reporting status is different from a "no data" status. Host monitors and service checks set to notify on missing data are available for 48 hours.
 
 ## Further reading
 
