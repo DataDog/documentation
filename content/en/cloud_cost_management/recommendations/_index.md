@@ -86,11 +86,11 @@ For each cloud account that you would like to receive recommendations for:
 | Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | 
 | Over-provisioned resource | AWS | EC2 instances not in an auto-scaling group, with less than 50% CPU and memory utilization. | [Datadog agent][5] |
 | Over-provisioned resource | AWS | Kubernetes containers | Over-provisioned Kubernetes Containers | Containers with less than 30% CPU and memory utilization. | [Datadog profiling agent][8] |
-| Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Also requires AWS EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Also requires Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | RDS IOPS | Over-provisioned RDS IOPS | An RDS instance using less than 80% of the provisioned IOPS for reads and writes. | 
-| Over-provisioned resource | AWS | EBS IOPS | Over-provisioned EBS IOPS | An EBS volume using less than 80% of the provisioned IOPS for reads and writes. | *[Also requires AWS EC2 integration][9] |
-| Over-provisioned resource | AWS | EBS Storage | Over-provisioned EBS Storage | An EBS volume with less than 20% of its storage capacity used. | *[Also requires AWS EC2 integration][9] |
-| Over-provisioned resource | AWS | EBS Throughput | Over-provisioned EBS Throughput | An EBS volume using less than 80% of the provisioned throughput for reads and writes. | *[Also requires AWS EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS IOPS | Over-provisioned EBS IOPS | An EBS volume using less than 80% of the provisioned IOPS for reads and writes. | *[Also requires Amazon EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS Storage | Over-provisioned EBS Storage | An EBS volume with less than 20% of its storage capacity used. | *[Also requires Amazon EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS Throughput | Over-provisioned EBS Throughput | An EBS volume using less than 80% of the provisioned throughput for reads and writes. | *[Also requires Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | DynamoDB | Over-provisioned DynamoDB Capacity | A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time. | |
 | Rate optimization | AWS | RDS Reserved Instances | Purchase RDS RI | An RDS instance older than 45 days is still charged with on-demand rates. | |
 | Rate optimization | AWS | ElastiCache Reserved Instances | Purchase ElastiCache RI | An ElastiCache node older than 45 days is still charged with on-demand rates. | | 
