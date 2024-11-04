@@ -17,7 +17,7 @@ Supported MongoDB major versions
 
 Supported MongoDB Atlas cluster tiers
 : M10 and higher<br/><br/>
-**Note**: MongoDB Atlas Serverless Instances or Shared Clusters (M0 Sandbox, M2, M5) are not supported.
+**Note**: MongoDB Atlas Serverless instances or shared clusters (M0 Sandbox, M2, M5) are not supported.
 
 {{% dbm-mongodb-before-you-begin %}}
 
