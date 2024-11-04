@@ -111,58 +111,7 @@ jobs:
               }
             });
 
-            // Generate report
-            let report = '## Code Owners Approval Status\n\n';
-            report += `Last updated: ${new Date().toISOString()}\n\n`;
-            
-            // Add required team approvals status
-            if (requiredTeams.size > 0) {
-              report += '### Required Team Approvals\n\n';
-              for (const [team, approved] of teamApprovals) {
-                const status = approved === null ? '❓' : approved ? '✅' : '❌';
-                report += `- ${status} ${team}${approved === null ? ' (error checking team members)' : ''}\n`;
-              }
-              report += '\n';
-            }
-
-            // Add individual required reviewers status
-            if (individualApprovals.size > 0) {
-              report += '### Required Individual Approvals\n\n';
-              for (const [user, approved] of individualApprovals) {
-                const status = approved ? '✅' : '❌';
-                report += `- ${status} ${user}\n`;
-              }
-              report += '\n';
-            }
-
-            // Find and update existing comment
-            const existingComments = await github.rest.issues.listComments({
-              owner,
-              repo,
-              issue_number: number,
-            });
-
-            const botComment = existingComments.data.find(comment => 
-              comment.user.type === 'Bot' && 
-              comment.body.includes('## Code Owners Approval Status')
-            );
-
-            // Update or create comment
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner,
-                repo,
-                comment_id: botComment.id,
-                body: report
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: number,
-                body: report
-              });
-            }
+            // Output results
 
             // Set final status
             if (missingApprovals.length > 0) {
