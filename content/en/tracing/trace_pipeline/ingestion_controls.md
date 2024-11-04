@@ -106,7 +106,7 @@ The table lists the applied sampling rates by resource of the service.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
   - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
   - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
-  - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#remotely-configure-sampling-rules-for-the-service).
+  - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#configure-the-service-ingestion-rates-by-resource).
 
 **Note**: If the service is not making sampling decisions, the service's resources will be collapsed under the `Resources not making sampling decisions` row.
 
@@ -211,7 +211,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 
 [1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
-[3]: https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler
+[3]: /agent/remote_config/#enabling-remote-configuration
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces

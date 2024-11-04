@@ -4,16 +4,16 @@ description: Correlate your logs with your test traces.
 further_reading:
   - link: "/tests"
     tag: "Documentation"
-    text: "Learn about Test Visibility"
+    text: "Learn about Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-You can correlate Test Visibility data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
+You can correlate Test Optimization data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
 
 {{< img src="continuous_integration/correlate_logs_and_tests.png"
   alt="Examine logs for specific test cases with logs and tests correlation." style="width:90%" >}}

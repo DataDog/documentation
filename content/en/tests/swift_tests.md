@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/real_user_monitoring/ios"
   tag: "Documentation"
   text: "Learn about RUM iOS and tvOS Monitoring"
@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Ensure that [Test Visibility][3] is already set up for Swift.
+Ensure that [Test Optimization][3] is already set up for Swift.
 
 ### Compatibility
 
@@ -33,7 +33,7 @@ The CI Visibility - RUM integration is available for these versions of `dd-sdk-s
 
 If you link `dd-sdk-swift-testing` for your UI tests and the application being tested is instrumented using [Real User Monitoring][1], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
-A **RUM Sessions** tab appears in the Test Visibility test detail side panel.
+A **RUM Sessions** tab appears in the Test Optimization test detail side panel.
 
 {{< img src="ci/ci-swift-rum-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 
