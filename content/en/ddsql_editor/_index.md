@@ -70,7 +70,7 @@ Browse and re-run saved queries in the side panel.
 
 ## Permissions
 
-To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. This permission is included in the Datadog Standard Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
+To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
 
 ## Further reading
 
