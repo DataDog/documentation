@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-[Test Impact Analysis][1] allows you to streamline your organization's test impact analysis by intelligently excluding irrelevant tests that are not affected by recent code changes.
+[Test Impact Analysis][1] allows you to skip irrelevant tests unaffected by a code change.
 
 With [Test Optimization][2], development teams can configure Test Impact Analysis for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
 
