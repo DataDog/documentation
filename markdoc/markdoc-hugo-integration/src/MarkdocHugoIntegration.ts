@@ -6,18 +6,17 @@
 
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { HugoConfig } from './schemas/hugoConfig';
+import { HugoConfig, HugoConfigSchema } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
+import { CompilationConfig, CompilationConfigSchema } from './schemas/config/compilation';
 import {
-  CompilationConfig,
-  CompilationConfigSchema,
-  CompilationResult,
   ParsingErrorReport,
-  ParsedFile
-} from './schemas/compilation';
+  ParsedFile,
+  CompilationResult
+} from './schemas/compilationResults';
 import { PagePrefsManifestSchema } from './schemas/pagePrefs';
 import { Allowlist } from './schemas/yaml/allowlist';
 
@@ -36,9 +35,8 @@ export class MarkdocHugoIntegration {
   /**
    * Validate and store the provided configuration.
    */
-  constructor(args: CompilationConfig) {
-    CompilationConfigSchema.parse(args);
-    this.hugoConfig = args.hugoConfig;
+  constructor(args: { hugoConfig: HugoConfig }) {
+    this.hugoConfig = HugoConfigSchema.parse(args.hugoConfig);
 
     // Load the English allowlist configuration
     this.allowlistsByLang = YamlConfigParser.loadAllowlistsByLang({

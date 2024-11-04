@@ -1,6 +1,6 @@
 import { render } from '.';
 import { Tag, Config } from 'markdoc-static-compiler';
-import { HugoConfig, HugoConfigSchema } from '../../schemas/hugoConfig';
+import { HugoConfig, HugoConfigSchema } from '../../schemas/config/hugo';
 import MarkdownIt from 'markdown-it';
 const { escapeHtml, unescapeAll } = MarkdownIt().utils;
 
