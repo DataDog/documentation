@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://docs.google.com/forms/d/1gVVWLg5P3EXkVXBc4qZtqKp_nqykDsFXCMmh6pbvxx0/edit" btn_hidden="false" header="Try the Preview!">}}
-Datastore is in Preview.
+Datastore is in Preview. Use this form to request access today.
 {{< /callout >}}
 
 ## Overview
