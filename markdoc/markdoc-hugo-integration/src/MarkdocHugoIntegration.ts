@@ -6,7 +6,12 @@
 
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { HugoConfig, HugoConfigSchema } from './schemas/config/hugo';
+import {
+  HugoConfig,
+  HugoConfigSchema,
+  HugoGlobalConfig,
+  HugoGlobalConfigSchema
+} from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
@@ -20,7 +25,7 @@ import { PagePrefsManifestSchema } from './schemas/pagePrefs';
 import { Allowlist } from './schemas/yaml/allowlist';
 
 export class MarkdocHugoIntegration {
-  hugoConfig: HugoConfig;
+  hugoGlobalConfig: HugoGlobalConfig;
   prefOptionsConfigByLang: Record<string, PrefOptionsConfig>;
   allowlistsByLang: Record<string, Allowlist> = {};
 
@@ -34,25 +39,25 @@ export class MarkdocHugoIntegration {
   /**
    * Validate and store the provided configuration.
    */
-  constructor(args: { hugoConfig: HugoConfig }) {
-    this.hugoConfig = HugoConfigSchema.parse(args.hugoConfig);
+  constructor(args: { config: HugoGlobalConfig }) {
+    this.hugoGlobalConfig = HugoGlobalConfigSchema.parse(args.config);
 
     // Load the English allowlist configuration
     this.allowlistsByLang = YamlConfigParser.loadAllowlistsByLang({
-      prefsConfigDir: this.hugoConfig.dirs.prefsConfig,
-      langs: this.hugoConfig.languages
+      prefsConfigDir: this.hugoGlobalConfig.dirs.prefsConfig,
+      langs: this.hugoGlobalConfig.languages
     });
 
     // Load English pref configuration
     this.prefOptionsConfigByLang = {
       en: YamlConfigParser.loadPrefsConfigFromLangDir({
-        dir: this.hugoConfig.dirs.prefsConfig + '/en',
+        dir: this.hugoGlobalConfig.dirs.prefsConfig + '/en',
         allowlist: this.allowlistsByLang.en
       })
     };
 
     // Load translated pref configurations, backfilling with English
-    this.hugoConfig.languages.forEach((lang) => {
+    this.hugoGlobalConfig.languages.forEach((lang) => {
       if (lang === 'en') {
         return;
       }
@@ -60,7 +65,7 @@ export class MarkdocHugoIntegration {
       let translatedPrefOptionsConfig: PrefOptionsConfig;
       try {
         translatedPrefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
-          dir: this.hugoConfig.dirs.prefsConfig + '/' + lang,
+          dir: this.hugoGlobalConfig.dirs.prefsConfig + '/' + lang,
           allowlist: this.allowlistsByLang[lang]
         });
       } catch (e) {
@@ -92,7 +97,9 @@ export class MarkdocHugoIntegration {
   }
 
   #getFileLanguage(markdocFilepath: string): string {
-    const lang = markdocFilepath.replace(this.hugoConfig.dirs.content, '').split('/')[1];
+    const lang = markdocFilepath
+      .replace(this.hugoGlobalConfig.dirs.content, '')
+      .split('/')[1];
     if (!lang) {
       throw new Error(`No language detected in file path: ${markdocFilepath}`);
     }
@@ -109,7 +116,7 @@ export class MarkdocHugoIntegration {
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
     const parsedFile = MdocFileParser.parseMdocFile({
       file: markdocFilepath,
-      partialsDir: this.hugoConfig.dirs.partials
+      partialsDir: this.hugoGlobalConfig.dirs.partials
     });
 
     // if the file has errors, log the errors for later output
@@ -131,7 +138,7 @@ export class MarkdocHugoIntegration {
     this.compiledFiles = [];
 
     const markdocFilepaths = FileNavigator.findInDir(
-      this.hugoConfig.dirs.content,
+      this.hugoGlobalConfig.dirs.content,
       /\.mdoc$/
     );
 
@@ -144,7 +151,7 @@ export class MarkdocHugoIntegration {
       const lang = this.#getFileLanguage(markdocFilepath);
 
       // Skip files that are not in the list of languages to compile
-      if (!this.hugoConfig.languages.includes(lang)) {
+      if (!this.hugoGlobalConfig.languages.includes(lang)) {
         continue;
       }
 
@@ -220,11 +227,11 @@ export class MarkdocHugoIntegration {
   }): string | null {
     let prefOptionsConfigForPage: PrefOptionsConfig;
     const lang = p.markdocFilepath
-      .replace(this.hugoConfig.dirs.content, '')
+      .replace(this.hugoGlobalConfig.dirs.content, '')
       .split('/')[1];
     this.validationErrorsByFilePath[p.markdocFilepath] = [];
 
-    if (!this.hugoConfig.languages.includes(lang)) {
+    if (!this.hugoGlobalConfig.languages.includes(lang)) {
       this.validationErrorsByFilePath[p.markdocFilepath] = [
         `Language "${lang}" is not supported.`
       ];
@@ -271,9 +278,7 @@ export class MarkdocHugoIntegration {
         parsedFile: p.parsedFile,
         prefOptionsConfig: prefOptionsConfigForPage,
         prefsManifest,
-        integrationConfig: {
-          hugoConfig: this.hugoConfig
-        }
+        hugoConfig: { global: this.hugoGlobalConfig }
       });
 
       const compiledFilepath = this.#writeFile({

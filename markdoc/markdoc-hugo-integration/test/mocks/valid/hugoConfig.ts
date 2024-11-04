@@ -1,7 +1,7 @@
-import { HugoConfig } from '../../../src/schemas/config/hugo';
+import { HugoGlobalConfig } from '../../../src/schemas/config/hugo';
 import { VALID_SITE_DIR } from '../../config/constants';
 
-const mockHugoConfig: HugoConfig = {
+const mockHugoGlobalConfig: HugoGlobalConfig = {
   siteParams: { img_url: 'https://example.com' },
   env: 'development',
   languages: ['en', 'ja'],
@@ -16,4 +16,4 @@ const mockHugoConfig: HugoConfig = {
   }
 };
 
-export { mockHugoConfig };
+export { mockHugoGlobalConfig };

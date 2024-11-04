@@ -7,7 +7,7 @@ const siteDir = VALID_SITE_DIR;
 
 describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
   const compiler = new MarkdocHugoIntegration({
-    hugoConfig: {
+    config: {
       siteParams: {
         img_url: 'https://example.com'
       },

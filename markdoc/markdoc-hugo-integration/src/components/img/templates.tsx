@@ -66,7 +66,7 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
 
 function Video(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
-  const src = `${hugoConfig.siteParams.img_url}images/${attrs.src}`;
+  const src = `${hugoConfig.global.siteParams.img_url}images/${attrs.src}`;
 
   return (
     <Figure attrs={attrs}>

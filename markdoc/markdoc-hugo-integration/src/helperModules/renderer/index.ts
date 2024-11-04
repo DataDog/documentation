@@ -4,7 +4,7 @@ import type {
   RenderableTreeNodes,
   Config as MarkdocConfig
 } from 'markdoc-static-compiler';
-import { IntegrationConfig } from '../../schemas/config/integration';
+import { HugoConfig } from '../../schemas/config/hugo';
 const { escapeHtml } = MarkdownIt().utils;
 import { reresolve } from './reresolver';
 import { isTag, isClientVariable, isClientFunction } from './utils';
@@ -32,7 +32,7 @@ const voidElements = new Set([
 function render(p: {
   node: RenderableTreeNodes;
   markdocConfig?: MarkdocConfig;
-  integrationConfig: IntegrationConfig;
+  hugoConfig: HugoConfig;
   components?: Record<string, any>;
 }): string {
   if (typeof p.node === 'string' || typeof p.node === 'number')
@@ -89,7 +89,7 @@ function render(p: {
       tag: p.node,
       markdocConfig: p.markdocConfig,
       components: p.components,
-      integrationConfig: p.integrationConfig
+      hugoConfig: p.hugoConfig
     }).render();
   }
 
@@ -115,7 +115,7 @@ function render(p: {
     return render({
       node: children,
       markdocConfig: p.markdocConfig,
-      integrationConfig: p.integrationConfig
+      hugoConfig: p.hugoConfig
     });
 
   let output = `<${name}`;
@@ -130,7 +130,7 @@ function render(p: {
       node: children,
       markdocConfig: p.markdocConfig,
       components: p.components,
-      integrationConfig: p.integrationConfig
+      hugoConfig: p.hugoConfig
     });
   output += `</${name}>`;
 

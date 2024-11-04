@@ -2,7 +2,6 @@ import { render } from '.';
 import { Tag, Config } from 'markdoc-static-compiler';
 import { HugoConfig, HugoConfigSchema } from '../../schemas/config/hugo';
 import MarkdownIt from 'markdown-it';
-import { IntegrationConfig } from '../../schemas/config/integration';
 const { escapeHtml, unescapeAll } = MarkdownIt().utils;
 
 export abstract class CustomHtmlComponent {
@@ -10,21 +9,20 @@ export abstract class CustomHtmlComponent {
   tag: Tag;
   markdocConfig: Config | undefined;
   hugoConfig: HugoConfig;
-  integrationConfig: IntegrationConfig;
   // TODO: What kind of type should be used for components?
   components: Record<string, any> | undefined;
 
   constructor(p: {
     tag: Tag;
     markdocConfig: Config;
-    integrationConfig: IntegrationConfig;
+    hugoConfig: HugoConfig;
     components?: Record<string, CustomHtmlComponent>;
   }) {
     this.markdocConfig = p.markdocConfig;
-    this.integrationConfig = p.integrationConfig;
+    this.hugoConfig = p.hugoConfig;
 
     // TODO: Do this once up front instead of every time a component is created
-    this.hugoConfig = HugoConfigSchema.parse(this.integrationConfig.hugoConfig);
+    HugoConfigSchema.parse(this.hugoConfig);
 
     this.components = p.components;
     this.tag = p.tag;
@@ -33,7 +31,7 @@ export abstract class CustomHtmlComponent {
         node: p.tag.children,
         markdocConfig: p.markdocConfig,
         components: p.components,
-        integrationConfig: p.integrationConfig
+        hugoConfig: p.hugoConfig
       });
     }
   }

@@ -22,12 +22,14 @@ export class HugoFunctions {
   }
 
   static getFingerprintedPermalink(p: { src: string; hugoConfig: HugoConfig }) {
-    const path = p.hugoConfig.dirs.images + '/' + p.src;
+    const globalHugoConfig = p.hugoConfig.global;
+
+    const path = globalHugoConfig.dirs.images + '/' + p.src;
     const hash = this.getFileContentsHash(path);
 
-    let prefix = p.hugoConfig.siteConfig.baseURL;
-    if (p.hugoConfig.env === 'preview') {
-      prefix = `${p.hugoConfig.siteParams.branch}/`;
+    let prefix = globalHugoConfig.siteConfig.baseURL;
+    if (globalHugoConfig.env === 'preview') {
+      prefix = `${globalHugoConfig.siteParams.branch}/`;
     }
 
     const permalink = `${prefix}images/${p.src.replace('.', `.${hash}.`)}`;
@@ -40,7 +42,7 @@ export class HugoFunctions {
   }
 
   static relUrl(p: { hugoConfig: HugoConfig; url: string }): string {
-    const baseUrl = new URL(p.hugoConfig.siteConfig.baseURL);
+    const baseUrl = new URL(p.hugoConfig.global.siteConfig.baseURL);
     let resultUrl: string;
 
     if (p.url.startsWith('/')) {

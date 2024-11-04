@@ -9,7 +9,7 @@ const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc$/);
 
 describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({
-    hugoConfig: {
+    config: {
       siteParams: {
         img_url: 'https://example.com'
       },

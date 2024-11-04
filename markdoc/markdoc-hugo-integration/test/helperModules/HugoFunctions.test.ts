@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { HugoFunctions } from '../../src/helperModules/HugoFunctions';
-import { mockHugoConfig } from '../mocks/valid/hugoConfig';
+import { mockHugoGlobalConfig } from '../mocks/valid/hugoConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 
 describe('HugoFunctions', () => {
@@ -16,7 +16,7 @@ describe('HugoFunctions', () => {
 
   describe('relUrl', () => {
     test('handles all example inputs correctly for a simple base URL', () => {
-      const hugoConfigDup = { ...mockHugoConfig };
+      const hugoConfigDup = { ...mockHugoGlobalConfig };
       hugoConfigDup.siteConfig = { baseURL: 'https://example.org/' };
 
       const expectedOutputByInput = {
@@ -32,7 +32,7 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([url]) => [
           url,
-          HugoFunctions.relUrl({ hugoConfig: hugoConfigDup, url })
+          HugoFunctions.relUrl({ hugoConfig: { global: hugoConfigDup }, url })
         ])
       );
 
@@ -40,7 +40,7 @@ describe('HugoFunctions', () => {
     });
 
     test('handles all example inputs correctly for a base URL with a path', () => {
-      const hugoConfigDup = { ...mockHugoConfig };
+      const hugoConfigDup = { ...mockHugoGlobalConfig };
       hugoConfigDup.siteConfig = { baseURL: 'https://example.org/foo/bar/' };
 
       const expectedOutputByInput = {
@@ -56,7 +56,7 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([input]) => [
           input,
-          HugoFunctions.relUrl({ hugoConfig: hugoConfigDup, url: input })
+          HugoFunctions.relUrl({ hugoConfig: { global: hugoConfigDup }, url: input })
         ])
       );
 

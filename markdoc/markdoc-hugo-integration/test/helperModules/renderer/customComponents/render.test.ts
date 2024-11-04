@@ -4,8 +4,8 @@ import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
 import { render, CustomHtmlComponent } from '../../../../src/helperModules/renderer';
-import { mockHugoConfig } from '../../../mocks/valid/hugoConfig';
-import { IntegrationConfig } from '../../../../src/schemas/config/integration';
+import { mockHugoGlobalConfig } from '../../../mocks/valid/hugoConfig';
+import { HugoConfig } from '../../../../src/schemas/config/hugo';
 
 const alert = {
   render: 'Alert',
@@ -25,7 +25,7 @@ class Alert extends CustomHtmlComponent {
   constructor(p: {
     tag: Tag;
     markdocConfig: Config;
-    integrationConfig: IntegrationConfig;
+    hugoConfig: HugoConfig;
     components?: Record<string, CustomHtmlComponent>;
   }) {
     super(p);
@@ -64,15 +64,14 @@ describe('custom components', () => {
       variables: {
         test_string: 'Datadog',
         always_false: false,
-        always_true: true,
-        hugoConfig: mockHugoConfig
+        always_true: true
       },
       tags: {
         alert
       }
     },
-    integrationConfig: {
-      hugoConfig: mockHugoConfig
+    hugoConfig: {
+      global: mockHugoGlobalConfig
     },
     components: {
       Alert

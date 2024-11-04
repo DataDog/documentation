@@ -9,7 +9,7 @@ import {
   SNAPSHOTS_DIR
 } from '../../config/constants';
 import { PagePrefsManifestSchema } from '../../../src/schemas/pagePrefs';
-import { mockHugoConfig } from '../../mocks/valid/hugoConfig';
+import { mockHugoGlobalConfig } from '../../mocks/valid/hugoConfig';
 
 describe('PageBuilder.build', () => {
   const LANG_DIR = VALID_PREFS_CONFIG_DIR + '/en';
@@ -43,7 +43,7 @@ describe('PageBuilder.build', () => {
   const { html } = PageBuilder.build({
     parsedFile,
     prefOptionsConfig: prefOptionsConfigForPage,
-    integrationConfig: { hugoConfig: mockHugoConfig },
+    hugoConfig: { global: mockHugoGlobalConfig },
     prefsManifest
   });
 
