@@ -135,6 +135,19 @@ Attach the new S3 policy to the Datadog integration role.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
+
+### Finish setup Process for Cloud Cost [AWS]
+
+Validate that S3 Bucket has been created in your AWS Account and the Cloud Cost Policy has been attached to the **DatadogIntegrationRole**
+
+1. Navigate to Cloud Costs setup page in Datadog console. [https://app.datadoghq.com/cost/setup]
+2. Fill details: Bucket Name, Bucket Region, Export Path Prefix and Export Name 
+3. Click **Get Started With Cloud Costs**.
+4. Validate all checks pass
+5. It can take upto 48 Hours for data do display once your account is set-up
+6. Navigate to **Cloud Cost** Overview Page to view your Billing Data [https://app.datadoghq.com/cost/overview]
+
+
 ## Cost types
 
 Visualize your ingested data using out-of-the-box cost types. The cost types differ mainly in how they report on discount rates, savings plans and reservations.
