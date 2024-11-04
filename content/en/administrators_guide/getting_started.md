@@ -21,11 +21,7 @@ As you go along in this guide, you can refer to the following self-service resou
 * The Datadog [documentation][16], especially the [Getting started][17] pages, to familiarize yourself with the platform further.  
 * The [Datadog UI][18], which provides in-context help, information on specific configuration fields, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom of the product navigation.
 
-{{< img src="/administrators_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}}
-
-On this page you can find resources such as:
-
-* [Bits-AI][19] (in-app), which is a platform-wide AI assisted troubleshooter that helps you identify and remediate issues in your applications and infrastructure.  
+{{< img src="/administrators_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}} 
 
 ### File a support ticket
 

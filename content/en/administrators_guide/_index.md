@@ -8,14 +8,15 @@ further_reading:
 ---
 
 
-Use this Datadog Administrators guide when your company has purchased Datadog and you are ready to leverage the observability platform to gain visibility into the health and performance of your underlying infrastructure, supporting services, and applications. It can be challenging to determine where to start and how to best configure Datadog. This guide provides guidance to help you make the most out of Datadog, tailored to your unique needs, particularly for designing, installing, and managing an enterprise-grade installation of Datadog. As an extension of the main Datadog
-[documentation][1], this guide offers best practices, guidance, and examples to help you set up a production environment that matches your workloads and installation needs, while avoiding large pitfalls along the way.
+Use this Datadog Administrators guide when your company has purchased Datadog and you are ready to leverage the observability platform to gain visibility into the health and performance of your underlying infrastructure, supporting services, and applications. It can be challenging to determine where to start and how to best configure Datadog for your needs. This guide offers suggestions to help you make the most out of Datadog, tailored to your unique needs, particularly for designing, installing, and managing an enterprise-grade installation of Datadog. As an extension of the main Datadog
+[documentation][1], this guide offers best practices, guidance, and examples to help you set up a production environment that matches your workloads and installation needs.
 
-After using this guide to install Datadog to scale with your organization, you can manage your installation efficiently without worrying about hardware refreshes, operating system patches, server updates, or cluster re-balance details. Instead, you can focus on the benefits of a full observability system, such as:
+After using this guide to install Datadog to scale with your organization, you can manage your installation efficiently without worrying about hardware refreshes, operating system patches, server updates, or cluster rebalance details. Instead, you can focus on the benefits of a full observability system, such as:
 
 - Lowering your cloud and infrastructure costs.
 - Reducing the severity, frequency, and mean time to resolution of incidents.
-- Collect, process, and correlate observability data from your entire stack in one platform.
+- Collect, process, and correlate observability and security data from your entire stack in one platform.
+- Automate remediation and take action directly from Datadog with complete context from observability data across your stack.
 
 ## Why to use this guide
 

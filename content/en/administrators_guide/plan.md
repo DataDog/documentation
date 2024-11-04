@@ -48,38 +48,43 @@ Hostname, cloud regions, operating system version, and IP are just some of the a
 
 Datadog's strength lies in its capability to maintain and manage a unified vocabulary. The platform also includes built-in data. [Unified Service Tagging][1] consists of reserved tags that enable telemetry correlation across all features of the Datadog Platform.
 
-Tags are `key:value` pairs or simple values. They add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, it's important to take advantage of the tagging capabilities that your platforms offer as Datadog automatically imports these tags through its integrations, for example:
+Tags are `key:value` pairs or simple values. They add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, it's important to take advantage of the tagging capabilities that your platforms offer as Datadog automatically imports these tags through its integrations. The following table is a representation of how `key:value` pairs work and whether the tags are added automatically or manually.
 
-| TAG                  | KEY            | VALUE         |
-|----------------------|----------------|---------------|
-| env:staging:west     | env            | staging:west  |
-| component_type:database | component_type | database      |
+| TAG                  | KEY            | VALUE         |  METHOD     |
+|----------------------|----------------|---------------| ---------------|
+| env:staging     | env            | staging  | automatic
+| component_type:database | component_type | database      | manual
+| region:us-west-1 | region | us-west-1      | automatic
 
 
 The Getting [Getting started with tagging][2] guide is a great place to start with this topic. Here are some additional highlights:
 
-- A service is defined as a single application footprint, something with its own code repository.
+- A service is defined as a single application footprint, something that can be deployed independently.
 - Tag values must be consistent. For example  "Production" is different from "Prod".
 - Define sources of truth for dynamic tags such as code version.
 
 **Recommendations**:  
-As early as possible, understand [Datadog Unified Service Tagging][2] and develop your tagging scheme. Then, map your infrastructure to your collected tags, unifying your data so you can pivot between service metrics, logs, and traces, and assign owners to services to build informative alerts.
 
-{{< img src="/administrators_guide/unified_service_tagging-3.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
+- As early as possible, understand [Datadog Unified Service Tagging][2] and develop your tagging scheme.
+- Align your infrastructure with your collected tags and automate the tagging process where possible (for example, use git hash values from CI pipelines as version tags through Kubernetes labels). This unifies your data, allowing you you to pivot between service metrics, logs, and traces, and assign [owners to services][72] to to create informative alerts.
+
+The following diagram depicts how each of the three reserved tags may look as you are building out your environment:
+
+{{< img src="/administrators_guide/unified_service_tagging_diagram.png" alt="Diagram of Unified Service tagging with the 3 reserved tags: Service, Env, Version" style="width:90%;">}}
 
 ### Access control
 
 At the architectural design level, there are two main areas of access control within Datadog: organization structure, and  [role-based access control (RBAC)][4].
-
-#### Multi-Organizational Structure
-
-Larger Datadog customers often have more than one Datadog installation. This is typically used by managed service providers that have customers which should not have access to each others' data. In some cases, full isolation within a single company is necessary. To accommodate this topology, [multiple organizational accounts][5] can be managed together, for example, so you can view total usage at the parent level, while remaining completely separate technologically. Child organizations should be managed from a single parent organization account. 
 
 #### RBAC
 
 Datadog role-based access control can connect to your existing SAML authentication service. SAML group-mappings can be built against the Datadog default roles and team objects. Datadog provides three default roles, which you can augment to model the complexity of your own AD/LDAP Roles. You can also set up [service accounts][6] for non-interactive purposes like [API and App Key][7] ownership, separating user activity from system tasks. Granular permissions set the access and protections you need.  
 
 As an additional layer, [Teams][8] lets you set up flexible, informal, and ad-hoc groups that users can join or be added to. The notion of Teams carries throughout Datadog products.
+
+#### Multi-Organizational Structure
+
+Larger Datadog customers often have more than one Datadog installation. This is typically used by managed service providers that have customers which should not have access to each others' data. In some cases, full isolation within a single company is necessary. To accommodate this topology, [multiple organizational accounts][5] can be managed together, for example, so you can view total usage at the parent level, while remaining completely separate technologically. Child organizations should be managed from a single parent organization account. 
 
 **Recommendations:**
 
@@ -175,7 +180,7 @@ Synthetic Monitoring is a full synthetic testing suite, including testing for br
 
 ## Integrations
 
-You can use some of the more than {{< translate key="integration_count" >}} integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system.The integrations, either SaaS-based or Agent-based, collect metrics for monitoring within Datadog. Host-based integrations are configured with yaml files that live in the conf.d directory, and container-based integrations are configured with metadata such as annotations or labels. 
+You can use some of Datadog's {{< translate key="integration_count" >}} + integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system.The integrations, either SaaS-based or Agent-based, collect metrics for monitoring within Datadog. Host-based integrations are configured with yaml files that live in the conf.d directory, and container-based integrations are configured with metadata such as annotations or labels. 
 
 There are different types of integrations in Datadog, and the order in which they are presented here is the order Datadog recommends for their installation.
 
@@ -384,3 +389,4 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [69]: https://docs.datadoghq.com/integrations/process/
 [70]: https://docs.datadoghq.com/developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: https://docs.datadoghq.com/synthetics/api_tests/ssl_tests/
+[72]: https://docs.datadoghq.com/service_catalog/service_definitions/
