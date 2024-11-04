@@ -12093,7 +12093,7 @@ components:
           default: false
           description: If true, this incident type will be used as the default incident
             type if a type is not specified during the creation of incident resources.
-          example: true
+          example: false
           type: boolean
         lastModifiedBy:
           description: A unique identifier that represents the user that last modified
@@ -12228,7 +12228,7 @@ components:
         is_default:
           description: When true, this incident type will be used as the default type
             when an incident type is not specified.
-          example: true
+          example: false
           type: boolean
         lastModifiedBy:
           description: A unique identifier that represents the user that last modified
@@ -31441,8 +31441,11 @@ paths:
         incident_type:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{unique_hash}}\"\n
-              \   },\n    \"type\": \"incident_types\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Security
+              Incident\",\n      \"description\": \"Any incidents that harm (or have
+              the potential to) the confidentiality, integrity, or availability of
+              our data.\",\n      \"is_default\": false\n    },\n    \"type\": \"incident_types\"\n
+              \ }\n}"
           step: there is a valid "incident_type" in the system
       x-menu-order: 19
       x-permission:
