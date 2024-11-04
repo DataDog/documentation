@@ -11,6 +11,12 @@ DBM Recommendations draw attention to potential optimizations and problematic ar
 
 ## Recommendation types
 
+Choose your database type to see the supported recommendations:
+
+{{< tabs >}}
+
+{{% tab "Postgres" %}}
+
 Missing Index
 : We analyze execution plans of queries and identify expensive sequential scans. When found, we suggest an index to speed up the query.
 
@@ -29,3 +35,51 @@ Low Disk Space
 Unused Index
 : Detects indexes that have not been queried recently.
 
+{{% /tab %}}
+
+{{% tab "SQLServer" %}}
+
+Missing Index
+: We analyze execution plans of queries and identify expensive sequential scans. When found, we suggest an index to speed up the query.
+
+High Impact Blocker
+: We analyze Query Samples to surface queries that are causing the most blocking.
+
+High Row Count
+: We detect queries that return a large number of rows in their result set.
+
+{{% /tab %}}
+
+{{% tab "MySQL" %}}
+
+High Row Count
+: We detect queries that return a large number of rows in their result set.
+
+
+{{% /tab %}}
+
+{{% tab "Oracle" %}}
+
+
+High Impact Blocker
+: We analyze Query Samples to surface queries that are causing the most blocking.
+
+High Row Count
+: We detect queries that return a large number of rows in their result set.
+
+{{% /tab %}}
+
+{{< /tabs>}}
+
+Choose your hosting type to see the supported recommendations:
+
+{{< tabs >}}
+
+{{% tab "RDS" %}}
+
+Low Disk Space
+: We detect database instances that are running low on disk space.
+
+{{% /tab %}}
+
+{{< /tabls>}}
