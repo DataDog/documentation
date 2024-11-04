@@ -152,8 +152,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, such as after log rotation |
 | logs.sent                                   | Total number of sent logs                                                                         |
 | logs.dropped                                | Total number of logs dropped                                                                      |
-| logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                 |
-| logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                  |
+| logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
+| logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
 | dogstatsd.udp_packets                       | DogStatsD UDP packets bytes                                                                       |
 | dogstatsd.uds_packets                       | DogStatsD UDS packets bytes                                                                       |
 | transactions.input_count                    | Incoming transaction count                                                                        |
@@ -167,7 +167,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
 | postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                          |
 | postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                               |
-| postgres.get_new_pg_stat_activity_ms        | Time to get `pg_stat_activity` in milliseconds                                                                |
+| postgres.get_new_pg_stat_activity_ms        | Time to get `pg_stat_activity` in milliseconds                                                    |
 | postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                  |
 | postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                    |
 | postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
