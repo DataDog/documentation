@@ -19721,8 +19721,10 @@ components:
         include_percentiles:
           $ref: '#/components/schemas/RumMetricComputeIncludePercentiles'
         path:
-          description: The path to the value the rum-based metric will aggregate on
-            (only used if the aggregation type is a "distribution").
+          description: 'The path to the value the rum-based metric will aggregate
+            on.
+
+            Only present when `aggregation_type` is `distribution`.'
           example: '@duration'
           type: string
       required:
@@ -19742,7 +19744,7 @@ components:
       description: 'Toggle to include or exclude percentile aggregations for distribution
         metrics.
 
-        Only present when the `aggregation_type` is `distribution`.'
+        Only present when `aggregation_type` is `distribution`.'
       example: true
       type: boolean
     RumMetricCreateAttributes:
@@ -19813,8 +19815,7 @@ components:
       properties:
         query:
           default: '*'
-          description: The search query - following the RUM search syntax. Must include
-            an @type facet query.
+          description: The search query - following the RUM search syntax.
           example: '@service:web-ui: '
           type: string
       required:
@@ -19829,8 +19830,8 @@ components:
           example: '@browser.name'
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, the
-            path attribute is used as the tag name.
+          description: Eventual name of the tag that gets created. By default, `path`
+            is used as the tag name.
           example: browser_name
           type: string
       required:
@@ -19871,8 +19872,10 @@ components:
         include_percentiles:
           $ref: '#/components/schemas/RumMetricComputeIncludePercentiles'
         path:
-          description: The path to the value the rum-based metric will aggregate on
-            (only used if the aggregation type is a "distribution").
+          description: 'The path to the value the rum-based metric will aggregate
+            on.
+
+            Only present when `aggregation_type` is `distribution`.'
           example: '@duration'
           type: string
       type: object
@@ -19904,14 +19907,14 @@ components:
           example: '@http.status_code'
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, the
-            path attribute is used as the tag name.
+          description: Eventual name of the tag that gets created. By default, `path`
+            is used as the tag name.
           example: status_code
           type: string
       type: object
     RumMetricResponseUniqueness:
-      description: The rule to count updatable events. Is only set if "event_type"
-        is "sessions" or "views".
+      description: The rule to count updatable events. Is only set if `event_type`
+        is `session` or `view`.
       properties:
         when:
           $ref: '#/components/schemas/RumMetricUniquenessWhen'
@@ -19926,8 +19929,8 @@ components:
       x-enum-varnames:
       - RUM_METRICS
     RumMetricUniqueness:
-      description: The rule to count updatable events. Is only set if "event_type"
-        is "sessions" or "views".
+      description: The rule to count updatable events. Is only set if `event_type`
+        is `sessions` or `views`.
       properties:
         when:
           $ref: '#/components/schemas/RumMetricUniquenessWhen'
@@ -19935,8 +19938,8 @@ components:
       - when
       type: object
     RumMetricUniquenessWhen:
-      description: When to count updatable events. "match" when the event is first
-        seen, or "end" when the event is complete.
+      description: When to count updatable events. `match` when the event is first
+        seen, or `end` when the event is complete.
       enum:
       - match
       - end
