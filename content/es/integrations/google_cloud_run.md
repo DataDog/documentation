@@ -47,7 +47,7 @@ Para más información sobre Cloud Run para Anthos, consulta la [documentación 
 
 #### Instalación
 
-Configura la [integración de Google Cloud Platform][2] para empezar a recopilar métricas de forma predefinida. Para configurar <txprotected>métricas personalizadas</txprotected>consulta la [documentación serverless ][3]. 
+Configura la [integración de Google Cloud Platform][2] para empezar a recopilar métricas de forma predefinida. Para configurar métricas personalizadas consulta la [documentación serverless ][3]. 
 
 ### APM
 

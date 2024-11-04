@@ -66,7 +66,7 @@ El SDK del RUM Browser utiliza cookies para almacenar información de sesiones y
 
 ## Identificadores de sesiones, cookies y aplicaciones RUM
 
-Existe una relación de uno a uno entre una sesión RUM y la aplicación RUM a la que pertenece. Por lo tanto, el dominio configurado para la cookie `_dd_s` está totalmente dedicado a la aplicación RUM que está <txprotected>monitorizando</txprotected> y no puede monitorizar ninguna aplicación adicional.
+Existe una relación de uno a uno entre una sesión RUM y la aplicación RUM a la que pertenece. Por lo tanto, el dominio configurado para la cookie `_dd_s` está totalmente dedicado a la aplicación RUM que está monitorizando y no puede monitorizar ninguna aplicación adicional.
 
 ## Limitaciones técnicas
 

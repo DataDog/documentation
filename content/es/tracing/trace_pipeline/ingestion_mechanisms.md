@@ -250,7 +250,7 @@ Más información sobre la [configuración de variables de entorno para .NET][2]
 {{% /tab %}}
 {{< /tabs >}}
 
-**Nota**: Todos los tramos de una traza muestreada utilizando una configuración de biblioteca de rastreo se etiquetan con el motivo de la ingesta `rule`. <txprotected>Los servicios </txprotected> configurados con reglas de muestreo definidas por el usuario se marcan como `Configured` en la columna de configuración de la [Página de control de la ingesta][5].
+**Nota**: Todos los tramos de una traza muestreada utilizando una configuración de biblioteca de rastreo se etiquetan con el motivo de la ingesta `rule`. Los servicios configurados con reglas de muestreo definidas por el usuario se marcan como `Configured` en la columna de configuración de la [Página de control de la ingesta][5].
 
 ## Trazas con errores o poco frecuentes
 
@@ -774,7 +774,7 @@ Más información sobre los controles de muestreo en la [Documentación de la bi
 ### Trazas de RUM
 `ingestion_reason:rum`
 
-Una solicitud de una aplicación web o móvil genera una traza cuando se instrumentan los servicios del backend <txprotected></txprotected>. [La integración de APM con <txprotected>Real User Monitoring</txprotected>][7] vincula las solicitudes de aplicaciones web y móviles a sus trazas de backend correspondientes para que puedas ver todos tus datos frontend y backend a través de una sola lente.
+Una solicitud de una aplicación web o móvil genera una traza cuando se instrumentan los servicios del backend . [La integración de APM con Real User Monitoring][7] vincula las solicitudes de aplicaciones web y móviles a sus trazas de backend correspondientes para que puedas ver todos tus datos frontend y backend a través de una sola lente.
 
 Empezando con la versión `4.30.0` del SDK del navegador RUM, puedes controlar los volúmenes consumidos y mantener un muestreo de las trazas del backend mediante la configuración del parámetro de inicialización `traceSampleRate`. Establece `traceSampleRate` en un número entre `0` y `100`.
 Si no se establece ningún valor `traceSampleRate`, por defecto, el 100 % de las trazas procedentes de las solicitudes del navegador se envían a Datadog.
@@ -792,7 +792,7 @@ De un modo similar, controla la frecuencia de muestreo de trazas en otros SDK ut
 ### Trazas Synthetic
 `ingestion_reason:synthetics` y `ingestion_reason:synthetics-browser`
 
-Las pruebas de HTTP y del navegador generan trazas cuando se instrumentan los <txprotected>servicios</txprotected> del backend. [La integración de APM pruebas Synthetic][13] vincula sus pruebas Synthetic con el backend con las trazas correspondientes del backend. Ve desde una ejecución de prueba que no aprobó a la causa raíz del problema mirando la traza generada por esa ejecución de prueba.
+Las pruebas de HTTP y del navegador generan trazas cuando se instrumentan los servicios del backend. [La integración de APM pruebas Synthetic][13] vincula sus pruebas Synthetic con el backend con las trazas correspondientes del backend. Ve desde una ejecución de prueba que no aprobó a la causa raíz del problema mirando la traza generada por esa ejecución de prueba.
 
 Por defecto, el 100 % de las pruebas de HTTP Synthetic y del navegador generan trazas del backend.
 
@@ -802,8 +802,8 @@ Algunos motivos adicionales de consumo se atribuyen a tramos generados por produ
 
 | Producto    | Motivo del consumo                    | Descripción del mecanismo de consumo |
 |------------|-------------------------------------|---------------------------------|
-| Serverless | `lambda` y `xray`                   | Tus trazas recibidas desde las [aplicaciones Serverless][14] rastreadas con las <txprotected>bibliotecas</txprotected> de rastreo de Detadog o la integración con AWS X-Ray. |
-| Application Security Management     | `appsec`                            | Trazas consumidas desde las <txprotected>bibliotecas</txprotected> de rastreo de Datadog y marcadas por [ASM][15] como una amenaza. |
+| Serverless | `lambda` y `xray`                   | Tus trazas recibidas desde las [aplicaciones Serverless][14] rastreadas con las bibliotecas de rastreo de Detadog o la integración con AWS X-Ray. |
+| Application Security Management     | `appsec`                            | Trazas consumidas desde las bibliotecas de rastreo de Datadog y marcadas por [ASM][15] como una amenaza. |
 | Monitorización de Data Jobs    | `data_jobs`                            | Trazas consumidas desde la integración de Datadog Java Tracer Spark o la integración con Databricks. |
 
 ## Mecanismos de consumo en OpenTelemetry

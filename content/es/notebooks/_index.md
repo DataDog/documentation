@@ -91,7 +91,7 @@ La [lista de notebooks][1] te permite ver y buscar notebooks creados anteriormen
 Pasa el cursor encima del icono de vista previa en cualquier notebook para ver los contenidos, incluidos los de tipo widget y Markdown. Para abrir el notebook en [modo de visualización](#view-mode), pasa el cursor encima del notebook y haz clic en **Open notebook in view mode** (Abrir notebook en modo de visualización) a la derecha.
 
 ## Galería de plantillas
-En la [galería de plantillas][2] podrás ver plantillas listas para usar a partir de las cuales podrás crear nuevos <txprotected>notebooks</txprotected>. Las plantillas incluyen un informe de respuesta a incidentes, un informe de incidentes y una especificación SLO. También puedes crear una nueva plantilla personalizada para construir estructuras de notebook reutilizables.
+En la [galería de plantillas][2] podrás ver plantillas listas para usar a partir de las cuales podrás crear nuevos notebooks. Las plantillas incluyen un informe de respuesta a incidentes, un informe de incidentes y una especificación SLO. También puedes crear una nueva plantilla personalizada para construir estructuras de notebook reutilizables.
 
 ## Historial de versiones
 Desde notebook, haz clic en el icono **Configure** (Configurar) y luego en **Version history** (Historial de versiones) para abrir el panel lateral del historial de versiones. Puedes previsualizar, restaurar o clonar el historial de versiones de tu notebook. Para más información, consulta la [guía del historial de versiones][3].

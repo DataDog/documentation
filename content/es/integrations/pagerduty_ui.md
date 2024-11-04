@@ -116,7 +116,7 @@ PagerDuty, sin tener que cambiar de contexto entre las herramientas.
 
 ## Configuración
 
-1. En tu cuenta de Datadog, ve a ashboards</txprotected>. Selecciona el dashboard al que quieres añadir el widget Dashboard de estado o [crea un nuevo dashboard][1].
+1. En tu cuenta de Datadog, ve a ashboards. Selecciona el dashboard al que quieres añadir el widget Dashboard de estado o [crea un nuevo dashboard][1].
 
 2. En el dashboard, haz clic en **+Añadir widgets** a la derecha del título del dashboard. Desplázate hacia la derecha por los widgets, luego arrastra y suelta el/los widget(s) de **PagerDuty** en la posición deseada en tu dashboard.
 
