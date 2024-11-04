@@ -33,24 +33,17 @@ const languages = Object.keys(languagesConfig);
 console.time('Markdoc compilation execution time');
 
 const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc-assets.html');
+const SITE_DIR = path.resolve(__dirname, '..');
 const CONTENT_DIR = path.resolve(__dirname, '../content');
-const PARTIALS_DIR = path.resolve(__dirname, '../mdoc_partials');
-const PREFS_CONFIG_DIR = path.resolve(__dirname, '../config/_default/preferences/');
-const IMAGES_DIR = path.resolve(__dirname, '../static/images');
 
 // Initialize the Markdoc integration
 const markdocIntegration = new MarkdocHugoIntegration({
-    hugoConfig: {
+    config: {
         siteParams,
         siteConfig,
         languages,
         env,
-        dirs: {
-            content: CONTENT_DIR,
-            images: IMAGES_DIR,
-            prefsConfig: PREFS_CONFIG_DIR,
-            partials: PARTIALS_DIR
-        }
+        siteDir: SITE_DIR
     }
 });
 
