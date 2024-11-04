@@ -119,7 +119,6 @@ To install the Agent to a Linux host, use the following install script to instal
 ```shell
 DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" \
 DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-DD_REPO_URL=datad0g.com \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
@@ -394,7 +393,7 @@ exit 0
 To attach the wrapper to a Docker image running an application, use the following Dockerfile:
 
 ```shell
-FROM gcr.io/datadoghq/agent:latest
+FROM gcr.io/datadoghq/agent:7
 
 ENTRYPOINT ["/opt/datadog-agent/embedded/bin/cws-instrumentation", "trace", "--pid", "$PID"]
 ```
