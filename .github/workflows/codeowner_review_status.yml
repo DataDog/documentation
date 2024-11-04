@@ -106,12 +106,11 @@ jobs:
             // Get relevant code owners for the changed files
             const relevantOwners = new Set();
             const defaultOwner = codeownersRules.find(rule => rule.pattern === '*')?.owners[0];
-
+            
+            let hasSpecificOwner = false;
             files.forEach(file => {
               let fileOwners = new Set();
-              let hasSpecificOwner = false;
               codeownersRules.forEach(rule => {
-                console.log(file.filename, rule.pattern);
                 if (matchesPattern(file.filename, rule.pattern)) {
                   rule.owners.forEach(owner => {
                     fileOwners.add(owner);
