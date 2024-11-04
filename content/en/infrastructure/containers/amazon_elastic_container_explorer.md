@@ -4,46 +4,50 @@ aliases:
   - /infrastructure/containers/amazon_elastic_container_explorer
 ---
 
-{{< img src="infrastructure/livecontainers/orch_ecs_ex.png" alt="ECS Explorer, showing ECS tasks." style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ecs_ex.png" alt="ECS Explorer displaying ECS tasks." style="width:80%;">}}
 
 ## Overview
 
-The Datadog Agent, AWS ECS on EC2 integration and AWS ECS on Fargate integration can retrieve ECS resources for the [ECS Explorer][1]. This feature allows you to monitor the state of EC2 and Fargate tasks, services and other ECS concepts in a specific AWS account, view resource specifications for tasks within a service, correlate with related task logs, metric, profiling, and more.
+The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources for the [ECS Explorer][1]. This feature enables you to monitor the status of EC2 and Fargate tasks, services, and other ECS components within a specific AWS account. You can view resource specifications for tasks within a service and correlate them with related logs, metrics, profiling, and more.
 
-ECS Explorer requires **AWS ECS on EC2 integration Enabled**[2] and **AWS ECS on Fargate integration Enabled**[3]. **Agent version >= 7.58.0** is optional.
+### Prerequisites for ECS Explorer:
+
+* **ECS on EC2 integration**: Required for monitoring clusters using the EC2 launch type.
+* **ECS on Fargate integration**: Required for monitoring clusters using the Fargate launch type.
+* **Agent version >= 7.58.0**: Recommended for a shorter refresh rate on the ECS Explorer page, though it is optional.
 
 ## Setup
 
-Enusre that you have enabled [AWS ECS on EC2 integration][2] and [AWS ECS on Fargate integration][3]. 
+Ensure you have enabled the [ECS on EC2 integration][2] and [ECS on Fargate integration][3].
 
-**Note**: The collection interval for these two integrations is approximately 24 hours. To experience a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
+**Note**: The collection interval for these two integrations is approximately 24 hours. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
 
 {{< tabs >}}
 {{% tab "Task Definition" %}}
-If you are using the [task definition to install the Datadog Agent][4], you can add this new environment variable to the Datadog Agent container to enable this feature.
+If you are using the [task definition to install the Datadog Agent][4], add the following environment variable to the Datadog Agent container to activate this feature.
 
 ```yaml
+{
+  "containerDefinitions": [
     {
-      "containerDefinitions": [
+      "name": "datadog-agent",
+      "environment": [
         {
-          "name": "datadog-agent",
-          "environment": [
-            {
-              "name": "DD_ECS_TASK_COLLECTION_ENABLED",
-              "value": "true"
-            }
-            # (...)
-          ]
-          # (...)
+          "name": "DD_ECS_TASK_COLLECTION_ENABLED",
+          "value": "true"
         }
-      ],
-    # (...)
+        # (...)
+      ]
+      # (...)
     }
+  ],
+# (...)
+}
 ```
 
 {{% /tab %}}
 {{% tab "Manual" %}}
-For manual setup, include this section in the Datadog Agent configuration file.
+For manual configuration, include the following line in the Datadog Agent configuration file.
 
 ```yaml
 ecs_task_collection_enabled: true
@@ -55,87 +59,87 @@ ecs_task_collection_enabled: true
 
 ### Views
 
-Toggle among the **Tasks**, **Services**, **Clusters**, and other ECS resources in the **Select Resources** dropdown menu in the top left corner of the page.
+Use the **Select Resources** dropdown menu in the top left corner of the page to switch between the **Tasks**, **Services**, **Clusters**, and other ECS resources.
 
-Each of these views includes a data table to help you better organize your data by field such as status, name, and AWS tags, and a detailed Cluster Map to give you a bigger picture of your tasks and ECS clusters.
+Each view includes a data table for organizing information by fields such as status, name, and AWS tags, along with a detailed Cluster Map to provide an overview of your tasks and ECS clusters.
 
-**See [Query filter details](#query-filter-details) for more details on how to filter these views.**
+**Refer to [Query filter details](#query-filter-details) for information on filtering these views.**
 
-{{< img src="infrastructure/livecontainers/orch_ecs_ex_servces.png" alt="ECS Explorer opened to show resources > Services, in Summary mode" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ecs_ex_services.png" alt="ECS Explorer displaying resources in the Services view, in Summary mode" style="width:80%;">}}
 
-#### Group by functionality and facets
+#### Grouping by Functionality and Facets
 
-Group tasks by tags to get an aggregated view which allows you to find information quicker. You can perform a group by using the "Group by" bar on the top right of the page or by clicking on a particular tag and locating the group by function in the context menu as shown below.
+Group tasks by tags for an aggregated view that helps you find information more efficiently. You can group tasks using the "Group by" bar located at the top right of the page or by clicking on a specific tag and finding the group by function in the context menu, as illustrated below.
 
-{{< img src="infrastructure/livecontainers/orch_ecs_ex_groupby.png" alt="An example of grouping by launch type" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ecs_ex_groupby.png" alt="Example of grouping by launch type" style="width:80%;">}}
 
-You can also use facets on the left hand side of the page to group resources or filter for resources you care most about, such as tasks with Fargate launch type.
+Additionally, use facets on the left side of the page to filter or group resources according to your interests, such as tasks with Fargate launch type.
 
-{{< img src="infrastructure/livecontainers/fargate.mp4" alt="An example of grouping the Fagate tasks" video=true style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/fargate.mp4" alt="Example of grouping Fargate tasks" video=true style="width:80%;">}}
 
-### Cluster map
+### Cluster Map
 
-A cluster map gives you a bigger picture of your tasks and ECS clusters. You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the nodes.
+The cluster map provides a comprehensive view of your tasks and ECS clusters, allowing you to see all resources on one screen with customizable groups and filters. You can also select which metrics to color the nodes.
 
-Examine resources from cluster maps by clicking on any circle or group to populate a detailed panel.
+To examine resources from the cluster map, click on any circle or group to display a detailed panel.
 
-{{< img src="infrastructure/livecontainers/ecs-cluster-map.mp4" alt="A cluster map with customized groups and filters" video=true style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/ecs-cluster-map.mp4" alt="Cluster map with customized groups and filters" video=true style="width:80%;">}}
 
-### Information panel
+### Information Panel
 
-Click on any row in the table or on any object in a Cluster Map to view information about a specific resource in a side panel.
+Click on any row in the table or any object in the Cluster Map to display detailed information about a specific resource in a side panel.
 
-{{< img src="infrastructure/livecontainers/orch_ecs_ex_panel.png" alt="A view of resources in the side panel, opened to related resources." style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ecs_ex_panel.png" alt="View of resources in the side panel, showing related resources." style="width:80%;">}}
 
-The side panel's **Task Definition** tab shows the full task definition. 
+The **Task Definition** tab in the side panel shows the complete task definition.
 
-For task definitions, it also provides seven days of history, allowing you to view all versions used by the task over the past week. You can compare and see what changes occurred between different versions.
+For task definitions, it also provides a history of seven days, allowing you to view all versions used by the task over the past week and compare changes between different versions.
 
-{{< img src="infrastructure/livecontainers/orch_ecs_ex_manifest_history.png" alt="A view of resources in the side panel, showing the task definition history feature" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ecs_ex_manifest_history.png" alt="View of resource details in the side panel, highlighting task definition history feature" style="width:80%;">}}
 
-The other tabs show more information for troubleshooting the selected resource:
+Other tabs provide additional information for troubleshooting the selected resource:
 
-* **Related Resources**: View all the related resources in a tree structure.
-* [**Logs**][5]: View logs from your container or resource. Click on any log to view related logs in the Log Explorer.
-* [**Metrics**][6]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
-* [**APM**][7]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
-* **Processes**: View all processes running in the container of this resource.
-* **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `task_name` or `service`.
-* **Monitors**: View monitors tagged, scoped, or grouped for this resource.
+* **Related Resources**: View all related resources in a tree structure.
+* [**Logs**][5]: Access logs from your container or resource. Click on any log to view related logs in the Log Explorer.
+* [**Metrics**][6]: View live metrics for your container or resource. You can maximize any graph for full-screen viewing, share a snapshot, or export it from this tab.
+* [**APM**][7]: Access traces from your container or resource, including details such as date, service, duration, method, and status code.
+* **Processes**: See all processes running in the resource's container.
+* **Network**: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the **Destination** field to filter by tags like `DNS` or `ip_type`, or use the **Group by** filter to group network data by tags, such as `task_name` or `service`.
+* **Monitors**: View monitors that are tagged, scoped, or grouped for this resource.
 
-## Query filter details
+## Query Filter Details
 
-You can refine the displayed resources by entering a query in the "Filter by" search bar located at the top left of the page. The query filtering functionality works the same way as it does in the [Kubernetes Explorer][8].
+You can refine displayed resources by entering a query in the "Filter by" search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
 
 ### Exception
 
 In ECS Explorer, you can use `tag#` to search across both Datadog tags and AWS tags.
 
-### Extracted tags
+### Extracted Tags
 
-In addition to the tags you have [configured][9] within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
+In addition to the tags you have [configured][9] in your Datadog agent, Datadog generates additional tags based on resource attributes, which can assist in your searching and grouping needs. These tags are conditionally added to resources when relevant.
 
-#### All resources
+#### All Resources
 
-All resources have all these tags. 
+All resources include the following tags:
 
 * `aws_account`: AWS account ID
 * `region`: AWS account region
-* `<resource_name>_arn`: Resource ARN tag, such as `task_arn`, `task_definition_arn`, `service_arn` and others.
-* `ecs_<resource_name>`: Resource name tag, such as `ecs_task`, `ecs_task_definition`, `ecs_service` and others.
+* `<resource_name>_arn`: Resource ARN tags, such as `task_arn`, `task_definition_arn`, `service_arn`, and more.
+* `ecs_<resource_name>`: Resource name tags, such as `ecs_task`, `ecs_task_definition`, `ecs_service`, and more.
 
 #### Relationships
 
-Related Resources will be tagged with each other. Some examples:
+Related Resources are tagged in relation to one another. Some examples include:
 
-- A task that is part of the "XYZ" service, with an ARN of `XYZ-ARN`, will have a `ecs_service:xyz` tag and a `service_arn:xyz-arn` tag.
-- A service that belongs to "XYZ" cluster, with an ARN of `XYZ-ARN`, will have a `ecs_cluster:xyz` tag and a `cluster_arn:xyz-arn` tag.
+- A task belonging to the "XYZ" service, with an ARN of `XYZ-ARN`, can have tags `ecs_service:xyz` and `service_arn:xyz-arn`.
+- A service that is part of the "XYZ" cluster, identified by the ARN `XYZ-ARN`, can have tags `ecs_cluster:xyz` and `cluster_arn:xyz-arn`.
 
-> **Tip:** Utilize the filter query autocomplete feature to discover what related resource tags are available. Type `ecs_` and see what results are suggested.
+> **Tip:** Use the filter query autocomplete feature to explore available related resource tags. Type `ecs_` to see suggested results.
 
-#### Resource specific tags
+#### Resource-Specific Tags
 
-Some resources have specific tags that are extracted based on your cluster's environment. The following tags are available in addition to the shared tags above.
+Some resources have specific tags. The following tags are available in addition to the shared tags mentioned above.
 
 | Resource | Extracted Tags |
 |---|---|
@@ -143,10 +147,9 @@ Some resources have specific tags that are extracted based on your cluster's env
 | **Task Definition** | `task_family`<br>`task_version`<br>`task_launch_type`<br>`task_definition_status` |
 | **Service** | `task_family`<br>`task_version`<br>`task_launch_type`<br>`service_status` |
 
+## Notes and Known Issues
 
-## Notes and known issues
-
-* Without the Datadog Agent installed in the cluster, the refresh interval for ECS Explorer is approximately 24 hours.
+* Without the Datadog Agent installed in the cluster, the refresh interval for the ECS Explorer is approximately 24 hours.
 
 [1]: https://app.datadoghq.com/orchestration/explorer/ecsTask
 [2]: /integrations/amazon_ecs
