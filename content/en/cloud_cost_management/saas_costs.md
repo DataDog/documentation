@@ -252,7 +252,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `run_name` | Name of the current job or workflow run (if applicable). |
 | `instance_pool_id` | ID of the instance pool used (if applicable). |
 | `cluster_id` | ID of the cluster associated with this usage. |
-| `endpoint_id` | ID of the endpoint, for SQL-based or serving-related usage (if applicable). |
+| `endpoint_id` | ID of the endpoint for SQL-based or serving-related usage (if applicable). |
 | `warehouse_id` | ID of the SQL warehouse (if applicable). |
 | `source_region` | Originating region for this billing record (if applicable). |
 | `dlt_pipeline_id` | ID of the Delta Live Tables pipeline (if applicable). |
