@@ -118,7 +118,11 @@ To view the security signals for a rule in the [Signals Explorer][1], click the 
 
 ### Export a rule as JSON
 
-To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export as JSON**.
+To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export to JSON**.
+
+### Export a rule as Terraform
+
+To export a copy of a rule as Terraform, click the vertical three-dot menu for the rule and select **Export rule to Terraform**.
 
 ## Rule deprecation
 
