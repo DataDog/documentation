@@ -2564,7 +2564,7 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 801
-    - name: Apps Datastore
+    - name: Datastore
       url: service_management/app_builder/datastore/
       parent: app_builder
       identifier: app_builder_datastore
