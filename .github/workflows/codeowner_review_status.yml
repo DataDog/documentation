@@ -3,12 +3,11 @@ name: Code Owners Approval Check
 on:
   pull_request_review:
     types: [submitted, dismissed]
-  pull_request: #remove this line before merge, just for testing
-    types: [synchronize] 
+  pull_request:
+    types: [synchronize]
 
 permissions: {}
 
-# Stop the current running job if a new push is made to the PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
@@ -32,13 +31,12 @@ jobs:
             const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
             const { data: files } = await github.rest.pulls.listFiles({ owner, repo, pull_number: number });
             
-            // Check if the base branch is master
             if (pr.base.ref !== 'master') {
               console.log(`Base branch is ${pr.base.ref}. Skipping check.`);
               return;
             }
-              
-            // Get CODEOWNERS file content
+            
+            // Get CODEOWNERS file
             let codeowners;
             try {
               const { data } = await github.rest.repos.getContent({
@@ -52,57 +50,51 @@ jobs:
               return;
             }
             
-            // Parse CODEOWNERS file
+            // Parse CODEOWNERS file, maintaining order for precedence
             const codeownersRules = codeowners.split('\n')
               .filter(line => line.trim() && !line.startsWith('#'))
               .map(line => {
                 const [pattern, ...owners] = line.split(/\s+/);
-                return { pattern, owners: owners.map(o => o.trim()) };
-              });
-
-            // Extract unique team slugs
-            const teamSlugs = [...new Set(codeownersRules.flatMap(rule => rule.owners))]
-              .map(owner => owner.replace(/^.*\//, ''));
-            
+                return { 
+                  pattern: pattern.trim(), 
+                  owners: owners.map(o => o.trim()).filter(Boolean)
+                };
+              })
+              .reverse(); // Reverse for precedence (last matching rule wins)
 
             // Get reviews
             const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number: number });
+            
+            // Track latest review state per user
+            const latestReviews = new Map();
+            reviews.forEach(review => {
+              const existing = latestReviews.get(review.user.login);
+              if (!existing || review.submitted_at > existing.submitted_at) {
+                latestReviews.set(review.user.login, review);
+              }
+            });
 
             const approvals = new Set(
-              reviews
+              Array.from(latestReviews.values())
                 .filter(review => review.state === 'APPROVED')
                 .map(review => review.user.login)
             );
 
-            // Function to check if a file matches a pattern
             const matchesPattern = (file, pattern) => {
-              // Normalize paths to use forward slashes and trim any leading/trailing slashes
               const normalizedFile = file.replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
               const normalizedPattern = pattern.replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
 
-              // Special case for root wildcard
-              if (pattern === '*') {
-                return true;
-              }
+              if (pattern === '*') return true;
 
-              // Convert the glob pattern to a regex pattern
               const regexPattern = normalizedPattern
-                // Escape special regex characters except * and /
                 .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
-                // Handle double-star patterns (match across directory boundaries)
                 .replace(/\*\*/g, '(?:.*)')
-                // Handle single-star patterns (don't match across directory boundaries)
                 .replace(/\*/g, '(?:[^/]*)')
-                // Handle directory patterns ending with /
                 .replace(/\/$/, '(?:/.*)?');
 
-              // Create the regex object with proper anchoring
               const regex = new RegExp(`^${regexPattern}$`);
-
-              // Test the file against the pattern
               const isMatch = regex.test(normalizedFile);
 
-              // Debug logging
               console.log({
                 file: normalizedFile,
                 pattern: normalizedPattern,
@@ -112,76 +104,103 @@ jobs:
 
               return isMatch;
             };
-            
 
-            // Get relevant code owners for the changed files
-            const relevantOwners = new Set();
-            const defaultOwner = codeownersRules.find(rule => rule.pattern === '*')?.owners[0];
+            // Get file owners with precedence
+            const fileOwners = new Map();
+            const defaultOwners = new Set();
             
-            let hasSpecificOwner = false;
             files.forEach(file => {
-              let fileOwners = new Set();
-              codeownersRules.forEach(rule => {
-                if (matchesPattern(file.filename, rule.pattern)) {
-                  rule.owners.forEach(owner => {
-                    fileOwners.add(owner);
-                    if (rule.pattern !== '*') {
-                      hasSpecificOwner = true;
-                    }
-                  });
+              const filename = file.filename;
+              const owners = new Set();
+              let hasSpecificMatch = false;
+
+              for (const rule of codeownersRules) {
+                if (matchesPattern(filename, rule.pattern)) {
+                  if (rule.pattern === '*') {
+                    rule.owners.forEach(owner => defaultOwners.add(owner));
+                  } else {
+                    hasSpecificMatch = true;
+                    rule.owners.forEach(owner => owners.add(owner));
+                    break; // Stop at first specific match due to precedence
+                  }
                 }
-              });
-              // If no specific owners found or only the default owner was found, use the default owner
-              if (!hasSpecificOwner && defaultOwner) {
-                console.log('Using default owner');
-                fileOwners.add(defaultOwner);
               }
-              fileOwners.forEach(owner => relevantOwners.add(owner));
+
+              // Use default owners only if no specific match found
+              if (!hasSpecificMatch && defaultOwners.size > 0) {
+                defaultOwners.forEach(owner => owners.add(owner));
+              }
+
+              fileOwners.set(filename, owners);
             });
-            
-            if (relevantOwners.size === 0) {
-              console.log('No relevant code owners found for the changed files. Skipping check.');
-              return;
+
+            // Collect all unique required owners
+            const requiredOwners = new Set();
+            for (const owners of fileOwners.values()) {
+              owners.forEach(owner => requiredOwners.add(owner));
             }
 
-            // Check if a user is a member of a team
+            // Check team memberships
             async function checkTeamMembership(teamSlug) {
               try {
                 const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
                   org: context.repo.owner,
                   team_slug: teamSlug,
                 });
-                return teamMembers.map(teamMember => {
-                  const user = teamMember.login;
-                  if (approvals.has(user)) {
-                    return teamSlug;
-                  }
-                });
+                
+                return teamMembers.some(member => approvals.has(member.login));
               } catch (error) {
                 console.error(`Error checking membership for team ${teamSlug}: ${error}`);
                 return false;
               }
             }
 
-            let approvingTeams = new Set()
+            const ownerApprovals = new Map();
+            
+            for (const owner of requiredOwners) {
+              const teamSlug = owner.replace('@DataDog/', '');
+              const isApproved = await checkTeamMembership(teamSlug);
+              ownerApprovals.set(owner, isApproved);
+            }
+              
+             // Find existing bot comment
+            const existingComments = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: number,
+            });
 
-            for (const teamSlug of relevantOwners) {
-              const strippedTeamSlug = teamSlug.replace('@DataDog/', '');
-              const teamApproval = await checkTeamMembership(strippedTeamSlug);
-              if (teamApproval.includes(strippedTeamSlug)) {
-                approvingTeams.add(teamSlug);
+            const botComment = existingComments.data.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('## Code Owners Approval Status')
+            );
+
+            // Generate the report
+            let report = '## Code Owners Approval Status\n\n';
+            report += `Last updated: ${new Date().toISOString()}\n\n`;
+            for (const [file, owners] of fileOwners) {
+              report += `### ${file}\n`;
+              report += 'Required approvals:\n';
+              for (const owner of owners) {
+                const status = ownerApprovals.get(owner) ? '✅' : '❌';
+                report += `- ${status} ${owner}\n`;
               }
+              report += '\n';
             }
 
-            const codeOwnerStatus = Array.from(relevantOwners).map(owner => ({
-              owner,
-              approved: approvingTeams.has(owner),
-            }));
-            
-            const missingApprovals = codeOwnerStatus.filter(status => !status.approved);
-            
-            if (missingApprovals.length > 0) {
-              core.setFailed(`Missing approvals from code owners: ${missingApprovals.map(status => status.owner).join(', ')}`);
+            // Update or create comment
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: botComment.id,
+                body: report
+              });
             } else {
-              console.log('All relevant code owners have approved the pull request.');
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: number,
+                body: report
+              });
             }
