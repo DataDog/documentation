@@ -52,7 +52,11 @@ export class Fence extends CustomHtmlComponent {
         child.$$mdtype === 'Tag'
       ) {
         const uuid = uuidv4();
-        const renderedChild = render(child, this.markdocConfig, this.components);
+        const renderedChild = render({
+          node: child,
+          config: this.markdocConfig,
+          components: this.components
+        });
         renderedChildTagsByUuid[uuid] = renderedChild;
         sanitizedChildren.push(uuid);
       } else if (typeof child === 'string') {

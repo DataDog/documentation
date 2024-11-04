@@ -60,7 +60,11 @@ export class PageBuilder {
       prefsManifest: p.prefsManifest
     });
 
-    let articleHtml = render(renderableTree, { variables }, customComponents);
+    let articleHtml = render({
+      node: renderableTree,
+      config: { variables },
+      components: customComponents
+    });
 
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 

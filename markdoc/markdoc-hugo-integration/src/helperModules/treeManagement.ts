@@ -8,8 +8,7 @@
  * Read more about Markdoc's phases: https://markdoc.dev/docs/render
  */
 
-import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
-import { ParsedFile } from '../schemas/compilation';
+import { ParsedFile } from '../schemas/compilationResults';
 import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode,

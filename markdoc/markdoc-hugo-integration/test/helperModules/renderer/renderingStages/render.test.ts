@@ -23,11 +23,14 @@ describe('rendering stages', () => {
   });
 
   // stage 3: render the HTML
-  const html = render(renderableTree, {
-    variables: {
-      test_string: 'Datadog',
-      always_false: false,
-      always_true: true
+  const html = render({
+    node: renderableTree,
+    config: {
+      variables: {
+        test_string: 'Datadog',
+        always_false: false,
+        always_true: true
+      }
     }
   });
 

@@ -56,9 +56,9 @@ describe('custom components', () => {
   });
 
   // stage 3: render the HTML
-  const html = render(
-    renderableTree,
-    {
+  const html = render({
+    node: renderableTree,
+    config: {
       variables: {
         test_string: 'Datadog',
         always_false: false,
@@ -69,10 +69,10 @@ describe('custom components', () => {
         alert
       }
     },
-    {
+    components: {
       Alert
     }
-  );
+  });
 
   // apply some styles to the HTML
   // to make "hidden" content visible but

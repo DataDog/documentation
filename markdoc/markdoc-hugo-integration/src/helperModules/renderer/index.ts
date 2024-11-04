@@ -28,83 +28,83 @@ const voidElements = new Set([
   'wbr'
 ]);
 
-function render(
-  node: RenderableTreeNodes,
-  config?: Config,
-  components?: Record<string, any>
-): string {
-  if (typeof node === 'string' || typeof node === 'number')
-    return escapeHtml(String(node));
+function render(p: {
+  node: RenderableTreeNodes;
+  config?: Config;
+  components?: Record<string, any>;
+}): string {
+  if (typeof p.node === 'string' || typeof p.node === 'number')
+    return escapeHtml(String(p.node));
 
-  if (node === null || typeof node !== 'object') {
+  if (p.node === null || typeof p.node !== 'object') {
     return '';
   }
 
-  if (Array.isArray(node))
-    return node
+  if (Array.isArray(p.node))
+    return p.node
       .map((n) => {
-        return render(n, config, components);
+        return render({ ...p, node: n });
       })
       .join('');
 
-  if (isClientVariable(node)) {
-    if (config && config.variables !== undefined) {
+  if (isClientVariable(p.node)) {
+    if (p.config && p.config.variables !== undefined) {
       // TODO: Fix reresolve return type so recasting isn't necessary
-      node = reresolve(node, config) as ClientVariable;
+      p.node = reresolve(p.node, p.config) as ClientVariable;
     }
-    return escapeHtml(String(node.value));
+    return escapeHtml(String(p.node.value));
   }
 
-  if (isClientFunction(node)) {
-    if (config && config.variables !== undefined) {
-      node = reresolve(node, config);
+  if (isClientFunction(p.node)) {
+    if (p.config && p.config.variables !== undefined) {
+      p.node = reresolve(p.node, p.config);
     }
     return '';
   }
 
-  if (node.$$mdtype === 'Node') {
-    const nodeType = node.type as string;
+  if (p.node.$$mdtype === 'Node') {
+    const nodeType = p.node.type as string;
     if (
       nodeType &&
       typeof nodeType === 'string' &&
-      components &&
-      nodeType in components
+      p.components &&
+      nodeType in p.components
     ) {
-      const Klass = components[nodeType];
-      return new Klass(node, config, components).render();
+      const Klass = p.components[nodeType];
+      return new Klass(p.node, p.config, p.components).render();
     }
   }
 
-  if (!isTag(node)) {
+  if (!isTag(p.node)) {
     return '';
   }
 
-  const { name, attributes, children = [] } = node;
+  const { name, attributes, children = [] } = p.node;
 
-  if (components && name in components) {
-    const Klass = components[name];
-    return new Klass(node, config, components).render();
+  if (p.components && name in p.components) {
+    const Klass = p.components[name];
+    return new Klass(p.node, p.config, p.components).render();
   }
 
-  if ('if' in node && node.if) {
+  if ('if' in p.node && p.node.if) {
     let ref = '';
-    if ('ref' in node.if) {
-      ref = `data-if=${node.if.ref}`;
+    if ('ref' in p.node.if) {
+      ref = `data-if=${p.node.if.ref}`;
     }
-    if (config && config.variables !== undefined) {
-      node = reresolve(node, config); // TODO: Fix with generic type
+    if (p.config && p.config.variables !== undefined) {
+      p.node = reresolve(p.node, p.config); // TODO: Fix with generic type
     }
     let wrapperTagClasses = 'mdoc__toggleable';
     if (attributes?.display === 'false') {
       wrapperTagClasses += ` mdoc__hidden`;
     }
     let wrapperTagOutput = `<${name} class="${wrapperTagClasses}" ${ref}>`;
-    wrapperTagOutput += render(children, config, components);
+    wrapperTagOutput += render({ ...p, node: children });
     wrapperTagOutput += `</${name}>`;
     return wrapperTagOutput;
   }
 
-  if (!name) return render(children, config);
+  if (!name) return render({ node: children, config: p.config });
 
   let output = `<${name}`;
   for (const [k, v] of Object.entries(attributes ?? {}))
@@ -113,7 +113,8 @@ function render(
 
   if (voidElements.has(name)) return output;
 
-  if (children.length) output += render(children, config, components);
+  if (children.length)
+    output += render({ node: children, config: p.config, components: p.components });
   output += `</${name}>`;
 
   return output;

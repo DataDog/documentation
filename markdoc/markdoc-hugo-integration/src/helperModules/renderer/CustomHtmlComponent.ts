@@ -29,7 +29,7 @@ export abstract class CustomHtmlComponent {
     this.components = components;
     this.tag = tag;
     if (tag.children.length > 0) {
-      this.contents = render(tag.children, markdocConfig, components);
+      this.contents = render({ node: tag.children, config: markdocConfig, components });
     }
   }
 
