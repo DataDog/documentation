@@ -17,6 +17,10 @@ To view information about the Observability Pipelines Workers running for an act
 1. To view the Workers' statuses and versions, click the **Latest Deployment & Setup** tab.
 1. To see the Workers' logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_work.id:<worker_id>` to the search query.
 
+#### Index Worker logs
+
+Make sure your Worker logs are [indexed][7] in Log Management for optimal functionality and when you have to troubleshoot Worker or pipeline issues. Worker logs are needed for functionality because the deployment status looks for those logs to determine the Worker's status. All Worker logs have the tag `source:op_worker`.
+
 ## Inspect events sent through your pipeline to identify setup issues
 
 If you can access your Observability Pipelines Workers locally, use the `tap` command to see the raw data sent through your pipeline's source and processors.
@@ -59,3 +63,4 @@ See [event batching][6] for more information.
 [4]: /observability_pipelines/set_up_pipelines/#set-up-a-pipeline
 [5]: /observability_pipelines/advanced_configurations/#bootstrap-options
 [6]: /observability_pipelines/destinations/#event-batching-intro
+[7]: /logs/log_configuration/indexes/
