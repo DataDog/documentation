@@ -77,71 +77,111 @@ jobs:
             // Function to check if a file matches a pattern
             const matchesPattern = (file, pattern) => {
               // Normalize paths to use forward slashes and trim any leading/trailing slashes
-              const normalizedFile = file.replace(/^\/+|\/+$/g, '');
-              const normalizedPattern = pattern.replace(/^\/+|\/+$/g, '');
+              const normalizedFile = file.replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
+              const normalizedPattern = pattern.replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
 
               // Special case for root wildcard
               if (pattern === '*') {
                 return true;
               }
-            
+
               // Convert the glob pattern to a regex pattern
-              let regexPattern = normalizedPattern
-                .split('*')
-                .map(part => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-                .join('.*?');
-            
-              // Handle directory patterns ending with /
-              if (pattern.endsWith('/')) {
-                regexPattern = `^${regexPattern}.*`;
-              } else {
-                regexPattern = `^${regexPattern}$`;
-              }
-            
-              // Handle double-star patterns (match across directory boundaries)
-              regexPattern = regexPattern.replace(/\\\*\\\*/g, '.*');
-            
-              // Handle single-star patterns (don't match across directory boundaries)
-              regexPattern = regexPattern.replace(/\\\*/g, '[^/]*');
-            
-              // Create the regex object
-              const regex = new RegExp(regexPattern);
-            
+              const regexPattern = normalizedPattern
+                // Escape special regex characters except * and /
+                .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+                // Handle double-star patterns (match across directory boundaries)
+                .replace(/\*\*/g, '(?:.*)')
+                // Handle single-star patterns (don't match across directory boundaries)
+                .replace(/\*/g, '(?:[^/]*)')
+                // Handle directory patterns ending with /
+                .replace(/\/$/, '(?:/.*)?');
+
+              // Create the regex object with proper anchoring
+              const regex = new RegExp(`^${regexPattern}$`);
+
               // Test the file against the pattern
               const isMatch = regex.test(normalizedFile);
-            
+
               // Debug logging
               console.log({
                 file: normalizedFile,
                 pattern: normalizedPattern,
-                regex: regexPattern,
+                regex: regex.toString(),
                 isMatch
               });
-            
+
               return isMatch;
             };
             
-            // Test function to verify pattern matching
-            const testPatterns = () => {
-              const testCases = [
-                { file: 'README.md', pattern: '*', expected: true },
-                { file: 'config/file.txt', pattern: 'config/', expected: true },
-                { file: 'config/content/_menus/nav.yml', pattern: 'config/content/_menus/', expected: true },
-                { file: '.github/workflows/test.yml', pattern: '.github/', expected: true },
-                { file: 'local/subfolder/file.txt', pattern: 'local/**/*', expected: true },
-                { file: 'layouts/shortcodes/docs/guide.md', pattern: 'layouts/shortcodes/**/*.md', expected: true },
-                { file: 'content/en/thing/expo.md', pattern: 'content/en/thing/expo.md', expected: true },
-                { file: 'content/file/cool.html', pattern: 'content/file/cool.html', expected: true },
-                // Negative test cases
-                { file: 'other/file.txt', pattern: 'config/', expected: false },
-                { file: 'config/content/other/file.yml', pattern: 'config/content/_menus/', expected: false },
-                { file: 'local/file.txt', pattern: 'local/**/*.md', expected: false },
-              ];
+
+            // Get relevant code owners for the changed files
+            const relevantOwners = new Set();
+            const defaultOwner = codeownersRules.find(rule => rule.pattern === '*')?.owners[0];
             
-              testCases.forEach(({ file, pattern, expected }) => {
-                const result = matchesPattern(file, pattern);
-                console.log(`Testing: ${file} against ${pattern}`);
-                console.log(`Result: ${result}, Expected: ${expected}, ${result === expected ? 'PASS' : 'FAIL'}`);
+            let hasSpecificOwner = false;
+            files.forEach(file => {
+              let fileOwners = new Set();
+              codeownersRules.forEach(rule => {
+                if (matchesPattern(file.filename, rule.pattern)) {
+                  rule.owners.forEach(owner => {
+                    fileOwners.add(owner);
+                    if (rule.pattern !== '*') {
+                      hasSpecificOwner = true;
+                    }
+                  });
+                }
               });
-            };
+              // If no specific owners found or only the default owner was found, use the default owner
+              if (!hasSpecificOwner && defaultOwner) {
+                console.log('Using default owner');
+                fileOwners.add(defaultOwner);
+              }
+              fileOwners.forEach(owner => relevantOwners.add(owner));
+            });
             
+            if (relevantOwners.size === 0) {
+              console.log('No relevant code owners found for the changed files. Skipping check.');
+              return;
+            }
+
+            // Check if a user is a member of a team
+            async function checkTeamMembership(teamSlug) {
+              try {
+                const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+                  org: context.repo.owner,
+                  team_slug: teamSlug,
+                });
+                return teamMembers.map(teamMember => {
+                  const user = teamMember.login;
+                  if (approvals.has(user)) {
+                    return teamSlug;
+                  }
+                });
+              } catch (error) {
+                console.error(`Error checking membership for team ${teamSlug}: ${error}`);
+                return false;
+              }
+            }
+
+            let approvingTeams = new Set()
+
+            for (const teamSlug of relevantOwners) {
+              const strippedTeamSlug = teamSlug.replace('@DataDog/', '');
+              const teamApproval = await checkTeamMembership(strippedTeamSlug);
+              if (teamApproval.includes(strippedTeamSlug)) {
+                approvingTeams.add(teamSlug);
+              }
+            }
+
+            const codeOwnerStatus = Array.from(relevantOwners).map(owner => ({
+              owner,
+              approved: approvingTeams.has(owner),
+            }));
+            
+            const missingApprovals = codeOwnerStatus.filter(status => !status.approved);
+            
+            if (missingApprovals.length > 0) {
+              core.setFailed(`Missing approvals from code owners: ${missingApprovals.map(status => status.owner).join(', ')}`);
+            } else {
+              console.log('All relevant code owners have approved the pull request.');
+            }
