@@ -3,6 +3,8 @@ name: Code Owners Approval Check
 on:
   pull_request_review:
     types: [submitted, dismissed]
+  pull_request: #remove this line before merge, just for testing
+    types: [synchronize] 
 
 permissions: {}
 
@@ -109,6 +111,7 @@ jobs:
               let fileOwners = new Set();
               let hasSpecificOwner = false;
               codeownersRules.forEach(rule => {
+                console.log(file.filename, rule.pattern);
                 if (matchesPattern(file.filename, rule.pattern)) {
                   rule.owners.forEach(owner => {
                     fileOwners.add(owner);
