@@ -12,8 +12,8 @@ import { FileConfigSchema } from './file';
  * in order to build URLs correctly.
  */
 export const IntegrationConfigSchema = z.object({
-  hugoConfig: HugoConfigSchema,
-  fileConfig: FileConfigSchema
+  hugoConfig: HugoConfigSchema
+  // fileConfig: FileConfigSchema
 });
 
 /**

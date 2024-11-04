@@ -271,7 +271,10 @@ export class MarkdocHugoIntegration {
         parsedFile: p.parsedFile,
         prefOptionsConfig: prefOptionsConfigForPage,
         prefsManifest,
-        hugoConfig: this.hugoConfig
+        hugoConfig: this.hugoConfig,
+        integrationConfig: {
+          hugoConfig: this.hugoConfig
+        }
       });
 
       const compiledFilepath = this.#writeFile({

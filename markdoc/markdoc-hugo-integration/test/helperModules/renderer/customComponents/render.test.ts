@@ -5,6 +5,7 @@ import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
 import { render, CustomHtmlComponent } from '../../../../src/helperModules/renderer';
 import { mockHugoConfig } from '../../../mocks/valid/hugoConfig';
+import { IntegrationConfig } from '../../../../src/schemas/config/integration';
 
 const alert = {
   render: 'Alert',
@@ -21,13 +22,14 @@ const alert = {
 class Alert extends CustomHtmlComponent {
   level = 'info';
 
-  constructor(
-    tag: Tag,
-    config: Config,
-    components?: Record<string, CustomHtmlComponent>
-  ) {
-    super(tag, config, components);
-    this.level = tag.attributes.level || 'info';
+  constructor(p: {
+    tag: Tag;
+    markdocConfig: Config;
+    integrationConfig: IntegrationConfig;
+    components?: Record<string, CustomHtmlComponent>;
+  }) {
+    super(p);
+    this.level = p.tag.attributes.level || 'info';
   }
 
   render() {
@@ -68,6 +70,9 @@ describe('custom components', () => {
       tags: {
         alert
       }
+    },
+    integrationConfig: {
+      hugoConfig: mockHugoConfig
     },
     components: {
       Alert

@@ -14,6 +14,7 @@ import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
 import { PagePrefsManifest } from '../../schemas/pagePrefs';
 import { render } from '../renderer';
+import { IntegrationConfig } from '../../schemas/config/integration';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -41,6 +42,7 @@ export class PageBuilder {
   static build(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
+    integrationConfig: IntegrationConfig;
     hugoConfig: HugoConfig;
     prefsManifest: PagePrefsManifest;
   }): { html: string; errors: string[] } {
@@ -63,6 +65,7 @@ export class PageBuilder {
     let articleHtml = render({
       node: renderableTree,
       markdocConfig: { variables },
+      integrationConfig: p.integrationConfig,
       components: customComponents
     });
 

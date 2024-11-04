@@ -4,6 +4,7 @@ import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
 import { render } from '../../../../src/helperModules/renderer';
+import { mockHugoConfig } from '../../../mocks/valid/hugoConfig';
 
 describe('description lists', () => {
   // retrieve test input file
@@ -31,7 +32,8 @@ describe('description lists', () => {
         always_false: false,
         always_true: true
       }
-    }
+    },
+    integrationConfig: { hugoConfig: mockHugoConfig }
   });
 
   // format the HTML with prettier

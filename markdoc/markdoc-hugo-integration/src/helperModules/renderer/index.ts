@@ -4,6 +4,7 @@ import type {
   RenderableTreeNodes,
   Config as MarkdocConfig
 } from 'markdoc-static-compiler';
+import { IntegrationConfig } from '../../schemas/config/integration';
 const { escapeHtml } = MarkdownIt().utils;
 import { reresolve } from './reresolver';
 import { isTag, isClientVariable, isClientFunction } from './utils';
@@ -31,6 +32,7 @@ const voidElements = new Set([
 function render(p: {
   node: RenderableTreeNodes;
   markdocConfig?: MarkdocConfig;
+  integrationConfig: IntegrationConfig;
   components?: Record<string, any>;
 }): string {
   if (typeof p.node === 'string' || typeof p.node === 'number')
@@ -83,7 +85,12 @@ function render(p: {
 
   if (p.components && name in p.components) {
     const Klass = p.components[name];
-    return new Klass(p.node, p.markdocConfig, p.components).render();
+    return new Klass({
+      tag: p.node,
+      markdocConfig: p.markdocConfig,
+      components: p.components,
+      integrationConfig: p.integrationConfig
+    }).render();
   }
 
   if ('if' in p.node && p.node.if) {
@@ -104,7 +111,12 @@ function render(p: {
     return wrapperTagOutput;
   }
 
-  if (!name) return render({ node: children, markdocConfig: p.markdocConfig });
+  if (!name)
+    return render({
+      node: children,
+      markdocConfig: p.markdocConfig,
+      integrationConfig: p.integrationConfig
+    });
 
   let output = `<${name}`;
   for (const [k, v] of Object.entries(attributes ?? {}))
@@ -117,7 +129,8 @@ function render(p: {
     output += render({
       node: children,
       markdocConfig: p.markdocConfig,
-      components: p.components
+      components: p.components,
+      integrationConfig: p.integrationConfig
     });
   output += `</${name}>`;
 
