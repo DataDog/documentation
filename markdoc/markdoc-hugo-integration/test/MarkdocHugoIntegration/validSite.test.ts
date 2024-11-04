@@ -14,12 +14,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       env: 'development',
       languages: ['en', 'ja', 'fr'],
       siteConfig: { baseURL: 'https://example.com/' },
-      dirs: {
-        content: siteDir + '/content',
-        prefsConfig: siteDir + '/preferences_config',
-        partials: siteDir + '/partials',
-        images: siteDir + '/static/images'
-      }
+      siteDir
     }
   });
 

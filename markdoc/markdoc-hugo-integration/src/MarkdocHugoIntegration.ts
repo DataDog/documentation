@@ -10,7 +10,8 @@ import {
   HugoConfig,
   HugoConfigSchema,
   HugoGlobalConfig,
-  HugoGlobalConfigSchema
+  HugoGlobalConfigSchema,
+  IntegrationConfig
 } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
@@ -23,6 +24,7 @@ import {
 } from './schemas/compilationResults';
 import { PagePrefsManifestSchema } from './schemas/pagePrefs';
 import { Allowlist } from './schemas/yaml/allowlist';
+import { HugoFunctions } from './helperModules/HugoFunctions';
 
 export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
@@ -39,8 +41,12 @@ export class MarkdocHugoIntegration {
   /**
    * Validate and store the provided configuration.
    */
-  constructor(args: { config: HugoGlobalConfig }) {
-    this.hugoGlobalConfig = HugoGlobalConfigSchema.parse(args.config);
+  constructor(args: { config: IntegrationConfig }) {
+    const hugoGlobalConfig = {
+      ...args.config,
+      dirs: HugoFunctions.getSubdirsByType(args.config.siteDir)
+    };
+    this.hugoGlobalConfig = HugoGlobalConfigSchema.parse(hugoGlobalConfig);
 
     // Load the English allowlist configuration
     this.allowlistsByLang = YamlConfigParser.loadAllowlistsByLang({

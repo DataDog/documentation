@@ -1,5 +1,5 @@
 import md5 from 'md5';
-import { HugoConfig } from '../schemas/config/hugo';
+import { HugoConfig, HugoSubdirsByType } from '../schemas/config/hugo';
 import fs from 'fs';
 
 /**
@@ -9,6 +9,15 @@ import fs from 'fs';
  * to implement the most common shortcodes on the Markdoc site.
  */
 export class HugoFunctions {
+  static getSubdirsByType(siteDir: string): HugoSubdirsByType {
+    return {
+      content: siteDir + '/content',
+      prefsConfig: siteDir + '/config/preferences',
+      partials: siteDir + '/partials',
+      images: siteDir + '/static/images'
+    };
+  }
+
   static isAbsUrl(path: string): boolean {
     if (path.startsWith('http://') || path.startsWith('https://')) {
       return true;
