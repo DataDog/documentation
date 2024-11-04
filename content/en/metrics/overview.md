@@ -46,38 +46,27 @@ You can send metrics directly to the [Metrics API][11].
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Metrics from other Datadog products" level="h4" %}}
-Some Datadog services, such as Synthetic Testing, provide standard metrics by default. Other services can be configured to generate custom metrics. This section covers the available options and provides links to relevant documentation.
+Some Datadog products, such as Synthetic Testing, provide standard metrics by default. Other products can be configured to generate custom metrics. This section covers the available options and provides links to relevant documentation.
 
 ##### Logs
 
-Log-based metrics allow you to generate custom metrics from any logs ingested into Datadog. See [Generate Metrics from Ingested Logs][12] for more information.
+[Generate custom metrics from ingested logs][12] to summarize data from all the logs ingested by Datadog. This allows you to visualize and alert on log data that's important to your environment, even if the logs are not indexed for long-term search.
 
 ##### APM
 
-- [Trace metrics][13] are standard metrics that capture request counts, error counts, and latency measures on your applications instrumented with Datadog APM. You can also [generate custom metrics from your ingested spans][15].
-- [Runtime metrics][14] are standard metrics that provide additional insights into an application’s performance.
+[Generate custom metrics from your ingested spans][15] to visualize anomalies and trends across any parameters that are important to your business context.
 
 ##### Real User Monitoring (RUM)
 
-- [Web and mobile vitals][16] are standard metrics that provide performance scores for browser and mobile applications, respectively.
-- [Custom metrics from RUM events][17] enable you to summarize the data from your RUM events. 
+[Generate custom metrics from RUM events][17] to summarize the data from your RUM events, so you can visualize and alert on the user behaviors that are most impactful to your organization.
 
 ##### Processes
 
-[Process-based metrics][19] are custom metrics you can generate in the [Processes page][25].
+[Generate custom process-based metrics][19] to monitor the resource consumption of your processes, as well as any other process-related behavior that might be important to your business needs.
 
 ##### Events
 
-[Event-based metrics][20] are custom metrics you can generate in the [settings page of Event Management][26].
-
-##### Synthetic Monitoring & Continuous Testing Metrics
-
-[Synthetic Monitoring & Continuous Testing Metrics][18] are standard metrics that are generated to help track test duration, latency, and more.
-
-##### Account Management
-
-[Estimated Usage Metrics][21] are standard metrics that Datadog calculates to provide estimates of your current usage.
-{{% /collapse-content %}} 
+[Generate custom event-based metrics][20] for visibility into monitor alerts or any other event-based data ingested by Datadog.
 
 ### Configurable Processing
 
