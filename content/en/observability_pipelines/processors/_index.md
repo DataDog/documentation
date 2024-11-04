@@ -26,6 +26,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 #### Select a processor for more information:
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="observability_pipelines/processors/add_environment_variables" >}}Add environment variables{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/add_hostname" >}}Add hostname{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/dedupe" >}}Deduplicate{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/edit_fields" >}}Edit fields{{< /nextlink >}}
@@ -38,7 +39,6 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
     {{< nextlink href="observability_pipelines/processors/reduce" >}}Reduce{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sensitive_data_scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/set_environment_variables" >}}Set environment variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

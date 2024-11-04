@@ -7,7 +7,7 @@ disable_toc: false
 
 Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker so that you can generate metrics from those logs.
 
-{{% observability_pipelines/use_case_images/generate_metrics %}} 
+{{% observability_pipelines/use_case_images/generate_metrics %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -155,9 +155,9 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
-{{% tab "Set env vars" %}}
+{{% tab "Add env vars" %}}
 
-{{% observability_pipelines/processors/set_env_vars %}}
+{{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
 {{< /tabs >}}
