@@ -165,14 +165,14 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                   |
 | oracle.statement_metrics                    | Time to retrieve database metrics in milliseconds                                                 |
 | oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
-| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                                   |
-| postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                                      |
+| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                          |
+| postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                               |
 | postgres.get_new_pg_stat_activity_ms        | Time to get pg_stat_activity in ms                                                                |
-| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                   |
-| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                              |
+| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                  |
+| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                    |
 | postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
-| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                               |
-| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                              |
+| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                     |
+| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                     |
 | postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
