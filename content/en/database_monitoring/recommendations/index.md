@@ -82,4 +82,4 @@ Low Disk Space
 
 {{% /tab %}}
 
-{{< /tabls>}}
+{{< /tabs>}}
