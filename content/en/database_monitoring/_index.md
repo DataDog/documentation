@@ -106,6 +106,13 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
+### View recommendations for help with optimization and incident avoidance
+
+The [Recommendations page][6] brings problems and optimization opportunities to your attention, saving time by telling you about what's most important to look at.
+
+{{< img src="database_monitoring/recommendations-page.png" alt="The Recommendations page in Datadog" style="width:90%;" >}}
+
+
 ## Further Reading
 
 {{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
@@ -119,3 +126,4 @@ On the [Databases page][1], you can assess the health and activity of your datab
 [3]: /database_monitoring/query_samples/
 [4]: /database_monitoring/query_metrics/#explain-plans
 [5]: /database_monitoring/database_hosts/
+[6]: /database_monitoring/recommendations/
