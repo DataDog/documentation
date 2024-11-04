@@ -119,7 +119,10 @@ jobs:
                 }
               });
               // If no specific owners found or only the default owner was found, use the default owner
+              console.log(hasSpecificOwner, defaultOwner);
+              console.log(fileOwners);
               if (!hasSpecificOwner && defaultOwner) {
+                console.log('Using default owner');
                 fileOwners.add(defaultOwner);
               }
               fileOwners.forEach(owner => relevantOwners.add(owner));
