@@ -360,7 +360,9 @@ For more information, see [Adding firewall rules for specific use cases][15] in 
 
 #### Rancher
 
-If you are using Rancher with an EKS cluster or a private GKE cluster, additional configuration is required. For more information, see [Rancher Webhook - Common Issues][16] in the Rancher documentation. As our Admission Controller's webhook functions very similar to the Rancher webhook, just on port `8000` instead of Rancher's `9443`.
+If you are using Rancher with an EKS cluster or a private GKE cluster, additional configuration is required. For more information, see [Rancher Webhook - Common Issues][16] in the Rancher documentation.
+
+**Note**: Since Datadog's Admission Controller's webhook operates similarly to the Rancher webhook, Datadog needs access to port `8000` instead of Rancher's `9443`.
 
 ##### Rancher and EKS
 To use Rancher in an EKS cluster, deploy the Cluster Agent pod with the following configuration:
