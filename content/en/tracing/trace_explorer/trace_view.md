@@ -146,9 +146,11 @@ The span header contains service, operation, and resource names of the selected 
 
 {{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
+{{< site-region region="ap1,us3,us5" >}}
 When the span represents a client call from an instrumented service to a database, a queue, or a third-party service, the span header shows the service and the inferred entity.
 
-[add image]
+{{< img src="tracing/trace_view/span_header_inferred.png" alt="Span header inferred" style="width:90%;">}}
+{{< /site-region >}}
 
 {{< tabs >}}
 {{% tab "Span Info" %}} 
@@ -169,15 +171,16 @@ When the service name is an override from the base service name, the top of the 
 - the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
 - the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
 - the **[inferred service][4]** (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
-{{< /site-region >}}
 
-[add image]
+{{< img src="tracing/trace_view/base_override_inferred_service.png" alt="Base, Override, and inferred service" style="width:80%;">}}
 
-[1]: /tracing/glossary/#trace
 [2]: /tracing/guide/service_overrides#base-service
 [3]: /tracing/guide/service_overrides
 [4]: /tracing/services/inferred_services
 [5]: /tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
+
+[1]: /tracing/glossary/#trace
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 

@@ -165,19 +165,24 @@ The Span table is the list of spans that match the selected context. A context i
 
 By default, the service column shows the `service` reserved attribute from the span.
 
-[Add image]
+{{< img src="tracing/app_analytics/search/span_table_service.png" style="width:60%;" alt="Span table service column" >}}
 
 When the span represents a client call from an instrumented service to an inferred service, the service column shows:
 - the **service**, identified by the `service` reserved attribute.
 - the **[inferred service][4]**: name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
 
-[add image]
+{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="Span table service column with inferred service" >}}
 
-When the service name is an override from the base service name, the top of the info sections shows:
+When the service name is an override from the base service name, the service column shows:
 - the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
 - the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
 
-[add image]
+{{< img src="tracing/app_analytics/search/span_table_service_override.png" style="width:80%;" alt="Span table service column with service override" >}}
+
+[2]: /tracing/guide/service_overrides#base-service
+[3]: /tracing/guide/service_overrides
+[4]: /tracing/services/inferred_services
+[5]: /tracing/services/inferred_services#peer-tags
 {{< /site-region >}}
 
 ### Displaying a full trace

@@ -138,11 +138,13 @@ Every entry showing up in the service catalog is categorised as a component type
 *  RUM Apps
 *  External providers
 
-[add image]
+{{< img src="tracing/service_catalog/component_selector.png" alt="Service Catalog component selector" style="width:30%;" >}}
 
 Datadog populates service catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
 
 **Note**: The component supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can now filter by datastore technology using the `datastore type` facet.
+
+[10]: /tracing/services/inferred_services#peer-tags
 {{< /site-region >}}
 
 ## Data retention
@@ -161,4 +163,3 @@ The services and resources statistics, and span summaries on the **Service List*
 [7]: /tracing/other_telemetry/
 [8]: /service_catalog/add_metadata#metadata-schema-v30-beta
 [9]: /service_catalog/scorecards/
-[10]: /tracing/services/inferred_services#peer-tags
