@@ -76,6 +76,8 @@ jobs:
 
             // Function to check if a file matches a pattern
             const matchesPattern = (file, pattern) => {
+            console.log('file', file);
+            console.log('pattern', pattern);
               // Handle directory patterns
               if (pattern.endsWith('/')) {
                 return file.startsWith(pattern);
