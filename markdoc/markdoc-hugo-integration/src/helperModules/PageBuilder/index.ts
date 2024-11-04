@@ -43,13 +43,9 @@ export class PageBuilder {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
     integrationConfig: IntegrationConfig;
-    hugoConfig: HugoConfig;
     prefsManifest: PagePrefsManifest;
   }): { html: string; errors: string[] } {
-    const variables = {
-      hugoConfig: p.hugoConfig,
-      ...p.prefsManifest.defaultValsByPrefId
-    };
+    const variables = p.prefsManifest.defaultValsByPrefId;
 
     const { renderableTree, errors } = buildRenderableTree({
       parsedFile: p.parsedFile,

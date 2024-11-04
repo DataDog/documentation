@@ -23,12 +23,8 @@ export abstract class CustomHtmlComponent {
     this.markdocConfig = p.markdocConfig;
     this.integrationConfig = p.integrationConfig;
 
-    // Validate that the Hugo config is present
-    // and contains the required fields
-    if (!this.markdocConfig.variables?.hugoConfig) {
-      throw new Error('Hugo config is not defined');
-    }
-    this.hugoConfig = HugoConfigSchema.parse(this.markdocConfig.variables.hugoConfig);
+    // TODO: Do this once up front instead of every time a component is created
+    this.hugoConfig = HugoConfigSchema.parse(this.integrationConfig.hugoConfig);
 
     this.components = p.components;
     this.tag = p.tag;

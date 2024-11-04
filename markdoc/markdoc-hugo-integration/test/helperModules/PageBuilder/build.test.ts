@@ -43,7 +43,7 @@ describe('PageBuilder.build', () => {
   const { html } = PageBuilder.build({
     parsedFile,
     prefOptionsConfig: prefOptionsConfigForPage,
-    hugoConfig: mockHugoConfig,
+    integrationConfig: { hugoConfig: mockHugoConfig },
     prefsManifest
   });
 
