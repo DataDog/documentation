@@ -11,7 +11,6 @@ import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
-import { CompilationConfig, CompilationConfigSchema } from './schemas/config/compilation';
 import {
   ParsingErrorReport,
   ParsedFile,
