@@ -299,7 +299,8 @@ cmake --install .build
 
 ## Review debug logs
 
-When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
+
+When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. Debug logs are stored in a separate path depending on your logging configuration. If you enable application-level tracer information, debug logs are also sent in the flare for [supported languages](#prerequisites). The following log examples show what might appear in your log file.
 
 If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 

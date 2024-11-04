@@ -20,12 +20,12 @@ further_reading:
 git_integration_title: node
 has_logo: true
 integration_id: node
-integration_title: NodeJS
+integration_title: Node.js
 integration_version: ''
 is_public: true
 manifest_version: '1.0'
 name: node
-public_title: Datadog-NodeJS Integration
+public_title: Datadog-Node.js Integration
 short_description: DogStatsD 또는 API를 통해 Node.js 서비스에서 커스텀 메트릭 전송
 version: '1.0'
 ---
