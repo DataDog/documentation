@@ -7,9 +7,11 @@ aliases:
   - /serverless/real_time_enhanced_metrics
 ---
 
-This page discusses metrics for monitoring serverless applications on AWS Lambda. 
+This page discusses metrics for monitoring serverless applications on AWS Lambda. There are 3 ways to get metrics from AWS Lambda:
 
-After you [install Serverless Monitoring for AWS Lambda][1], Datadog generates [enhanced metrics](#enhanced-lambda-metrics) from your Lambda runtime. You can also [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
+- You can get Cloudwatch Lambda metrics from the [Datadog AWS integration][5]
+- You can get [enhanced metrics](#enhanced-lambda-metrics) by [installing Serverless Monitoring for AWS Lambda][1] through the Datadog Lambda Extension.
+- You can [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
 
@@ -35,7 +37,7 @@ Enhanced Lambda metrics are in addition to the default [Lambda metrics][6] enabl
 
 The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags. 
 
-These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
+These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations. Enhanced metrics are enabled automatically with [Serverless Monitoring][1] but can be disabled by setting the `DD_ENHANCED_METRICS` environment variable to `false` on your Lambda function. 
 
 `aws.lambda.enhanced.invocations`
 : Measures the number of times a function is invoked in response to an event or an invocation of an API call.
@@ -223,6 +225,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
         response.setStatusCode(200);
         return response;
+    }
+
+    static {
+        // ensure all metrics are flushed before shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
     }
 }
 ```

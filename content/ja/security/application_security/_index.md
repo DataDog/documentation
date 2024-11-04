@@ -4,6 +4,7 @@ aliases:
 - /ja/security/application_security/enabling/single_step
 - /ja/security/application_security/enabling/compatibility
 - /ja/security/application_security/enabling
+- /ja/security/application_security/getting_started
 description: 分散型トレースにより提供された実行コンテキストを利用して、実稼働システムをターゲットとした脅威を監視します。
 further_reading:
 - link: /security/application_security/how-appsec-works/

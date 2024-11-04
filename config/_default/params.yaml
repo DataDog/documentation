@@ -76,11 +76,11 @@ code_language_ids:
     ios: iOS
     expo: Expo
     flutter: Flutter
-    otel: OTel
     reactnative: React Native
     codepush: CodePush
     roku: Roku
     unity: Unity
+    kotlin-multiplatform: Kotlin Multiplatform
     swiftui: Swift UI
     java: Java
     cpp: 'C++'

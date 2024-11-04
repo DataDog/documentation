@@ -71,7 +71,7 @@ Third Party allows you to forward alerts from an outside vendor or application. 
 
 ### Search query
 
-{{< img src="security/security_monitoring/detection_rules/threshold.png" alt="Define the search query" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/threshold_20240904.png" alt="Define the search query" style="width:100%;" >}}
 
 Construct a search query using the same logic as a [Log Explorer search][1].
 
@@ -85,17 +85,15 @@ Click **Add Query** to add additional queries.
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 
-{{< img src="security/security_monitoring/detection_rules/joining_queries_define.png" alt="Define search queries" style="width:90%;" >}}
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
 The Detection Rules join the logs together using a group by value. The group by values are typically entities (for example, IP address or user), but can be any attribute.
-
-{{< img src="security/security_monitoring/detection_rules/group_by.png" alt="Group by" style="width:30%;" >}}
 
 The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn't exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
 
 {{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
 
-In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
+In this example, when greater than five failed logins and a successful login exist for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -104,15 +102,13 @@ In this example, when greater than five failed logins and a successful login exi
 
 ### Search query
 
-{{< img src="security/security_monitoring/detection_rules/new_term.png" alt="Define the search query" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value.png" alt="Define the search query" style="width:100%;" >}}
 
 Construct a search query using the same logic as a [Log Explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
 **Note**: The query applies to all ingested logs.
 
 #### Learned value
-
-{{< img src="security/security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" style="width:80%;" >}}
 
 Select the value or values to detect, the learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP).
 
@@ -176,6 +172,28 @@ Click **Add Query** to add additional queries.
 [1]: /logs/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Filter logs based on Reference Tables
+
+{{% filter_by_reference_tables %}}
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
+#### Unit testing
+
+Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. Specifically, this can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for it. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.
+
+To use unit testing:
+
+1. After entering the rule query, click **Unit Test** to test your query against a sample log.
+1. To construct a sample log, you can:  
+    a. Navigate to [Log Explorer][3].  
+    b. Enter the same detection rule query in the search bar.  
+    c. Select one of the logs.  
+    d. Click the export button at the top right side of the log side panel, and then select **Copy**.
+1. Navigate back to the **Unit Test** modal, and then paste the log into the text box. Edit the sample as needed for your use case.
+1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
+1. Click **Run Query Test**.
 
 ## Set a rule case
 
@@ -323,3 +341,4 @@ The rule deprecation process is as follows:
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /security/detection_rules/#clone-a-rule
+[3]: https://app.datadoghq.com/logs/

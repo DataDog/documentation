@@ -30,20 +30,20 @@ The RUM iOS SDK supports the following iOS versions:
 
 | Platform | Supported | Version | Notes |
 |--------|-------------|---------|-------|
-| iOS | {{< X >}} | 11+ | |
-| tvOS | {{< X >}} | 11+ | |
-| iPadOS | {{< X >}} | 11+ | |
+| iOS | {{< X >}} | 12+ | |
+| tvOS | {{< X >}} | 12+ | |
+| iPadOS | {{< X >}} | 12+ | |
 | macOS (Designed for iPad) | {{< X >}} | 11+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
 | macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
-| visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogCrashReporting` is not supported on visionOS due to a lack of support on the [PLCrashreporter][1] side. |
-| watchOS | | n/a | |
+| visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogCrashReporting` is not supported on visionOS due to a lack of support on the [PLCrashReporter][1] side. |
+| watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: only `DatadogLogs` and `DatadogTrace` can build on watchOS. |
 | Linux | | n/a | |
 
 ## Supported platforms
 
 ### Xcode
-The SDK is built using the most recent version of [Xcode][2], but is always backwards compatible with the [lowest supported Xcode version][3] for AppStore submission.
+The SDK is built using the most recent version of [Xcode][2], but is always backwards compatible with the [lowest supported Xcode version][3] for App Store submission.
 
 ### Dependency managers
 We currently support integration of the SDK using the following dependency managers:
@@ -71,16 +71,15 @@ We currently support integration of the SDK using the following dependency manag
 | Framework | Automatic | Manual |
 |--------|-------|-------|
 | URLSession | {{< X >}} | {{< X >}} |
-| [AlamoFire 5+][7] | | {{< X >}} |
+| [Alamofire][7] | {{< X >}} | {{< X >}} |
+| [Apollo GraphQL][8] | {{< X >}} | {{< X >}} |
 | SwiftNIO | | | 
-
-**Note**: Third-party networking libraries can be instrumented by implementing custom `DDURLSessionDelegate`.
 
 ### Dependencies
 
 The Datadog RUM SDK depends on the following third-party library:
 
-- [PLCrashReporter][8] 1.11.1
+- [PLCrashReporter][9] 1.11.2
 
 ## Further Reading
 
@@ -88,9 +87,10 @@ The Datadog RUM SDK depends on the following third-party library:
 
 [1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
-[3]: https://developer.apple.com/news/?id=jd9wcyov
+[3]: https://developer.apple.com/news/?id=fxu2qp7b
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods#declare-the-sdk-as-a-dependency
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=carthage#declare-the-sdk-as-a-dependency
-[7]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
-[8]: https://github.com/microsoft/plcrashreporter
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#alamofire
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#apollo-graphql
+[9]: https://github.com/microsoft/plcrashreporter

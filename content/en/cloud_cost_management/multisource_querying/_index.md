@@ -34,9 +34,9 @@ You can select multiple providers in the **Provider** field on the [**Analytics*
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Analytics page" style="width:40%;" >}}
 
-Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**.
+Dropdown filters like **Provider** and **Team** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
 
-{{< img src="cloud_cost/multisource_querying/filters.png" alt="The Service and Team filters highlighted below the search query on the Cloud Cost Analytics page" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Analytics page" style="width:100%;" >}}
 
 Click **Refine Results** to access the following options and filter your cost data.
 
@@ -55,7 +55,7 @@ Dollar Change
 Percent Change
 : Only display cost changes within a specified percentage change range.
 
-{{< img src="cloud_cost/multisource_querying/refine_results.png" alt="Additional options to refine your cost data on the Cloud Cost Analytics page" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Additional options to refine your cost data on the Cloud Cost Analytics page" style="width:100%;" >}}
 
 ## Visualize your cost data
 

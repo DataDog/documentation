@@ -48,6 +48,8 @@ This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-a
 
 The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin.
 
+If you want to report the logs of your Jenkins jobs to Datadog, make sure that custom log collection over TCP is [enabled and configured][29] in the Agent.
+
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
 <div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
@@ -1062,13 +1064,13 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
 
-## Enable Test Visibility
+## Enable Test Optimization
 
-This is an optional step that enables the collection of tests data using [Test Visibility][16].
+This is an optional step that enables the collection of tests data using [Test Optimization][16].
 
-See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
+See the [Test Optimization documentation][17] for your language to make sure that the testing framework that you use is supported.
 
-There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
+There are different ways to enable Test Optimization inside a Jenkins job or pipeline:
 1. Using the Jenkins configuration UI.
 2. Adding the `datadog` step inside the pipeline script.
 3. Configuring the tracer manually.
@@ -1077,20 +1079,20 @@ For pipelines that spin up a Docker container to execute tests, you can only con
 
 ### Enable with the Jenkins configuration UI
 
-UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or later.
+UI-based Test Optimization configuration is available in Datadog Jenkins plugin v5.6.0 or later.
 
 This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
 For these pipelines use declarative configuration with the `datadog` step (described in the next section).
 
-To enable Test Visibility via UI do the following:
+To enable Test Optimization through the UI do the following:
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
-2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
+2. In the **General** configuration section, tick the **Enable Datadog Test Optimization** checkbox.
 3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
-4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Optimization for these languages, follow the manual [configuration instructions][18].
 5. Optionally, provide [additional configuration settings][18].
 6. Click **Save**.
 
-{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
 
 ### Enable with the `datadog` pipeline step
 
@@ -1135,7 +1137,7 @@ The other `datadog` settings, such as `collectLogs` or `tags` can be added along
 
 ### Enable with manual tracer configuration
 
-Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
+Follow the manual Test Optimization [configuration instructions][17] that are specific to your language.
 
 ## Propagate Git information
 
@@ -1481,6 +1483,13 @@ If this error message appears in the **Jenkins Log**, make sure that you are usi
 Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
 {{< /code-block >}}
 
+### Infrastructure metrics do not get correlated with Jenkins pipelines
+
+Make sure you have gone through the steps to [correlate infrastructure metrics with Jenkins pipelines][11].
+
+If, even after following the steps, infrastructure metrics are still not correlated with Jenkins pipelines,
+try restarting the Jenkins instance.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1493,7 +1502,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
-[11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
+[11]: /continuous_integration/pipelines/jenkins/?tab=agentlessusinganapikey#correlate-infrastructure-metrics
 [12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
@@ -1510,3 +1519,4 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [26]: /glossary/#custom-span
 [27]: /logs/guide/best-practices-for-log-management/
 [28]: /continuous_integration/search/#search-for-pipelines
+[29]: /agent/logs/?tab=tcpudp#custom-log-collection
