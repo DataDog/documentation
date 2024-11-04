@@ -24,6 +24,7 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 ### Send a flare
 
 {{% remote-flare %}}
+For example:
 
 {{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
 
