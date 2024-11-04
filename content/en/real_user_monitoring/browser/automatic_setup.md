@@ -84,16 +84,30 @@ The Datadog RUM Injector leverages a Windows module that injects the RUM SDK int
 
 ## Updating your RUM application
 
+You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
+
 {{< tabs >}}
 {{% tab "Nginx" %}}
 
-To update your RUM Application, update your Datadog RUM configs in your `NGINX.conf` file.
+To update your RUM Application:
+
+1. Go to your RUM application from the [Application Management][1] list.
+2. On the Instrument your application page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
+3. Copy and run the installer command in your `NGINX.conf` file.
+
+[1]: https://app.datadoghq.com/rum/list
 
 {{% /tab %}}
 
 {{% tab "Windows IIS" %}}
 
-To update your RUM application, update the Datadog RUM configs file for the IIS site that you instrumented.
+To update your RUM Application:
+
+1. Go to your RUM application from the [Application Management][1] list.
+2. On the Instrument your application page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
+3. Copy and replace the code in the Datadog RUM configs file for the IIS site that you instrumented.
+
+[1]: https://app.datadoghq.com/rum/list
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -102,26 +116,10 @@ To update your RUM application, update the Datadog RUM configs file for the IIS 
 
 The available functionality has the following important limitations:
 
-{{< tabs >}}
-{{% tab "Nginx" %}}
-
-- This instrumentation method does not support any [advanced RUM configurations][1] except `allowedTracingUrls` and `excludedActivityUrls`.
-- If serving compressed traffic, the SDK injector is not able to inject the JS scriptlet into the HTML traffic.
-- The SDK injector does not inject encrypted requests served by the Nginx.
-
-[1]: /real_user_monitoring/browser/advanced_configuration/
-[2]: /real_user_monitoring/browser/custom_setup/#initialization-parameters
-
-{{% /tab %}}
-{{% tab "Windows IIS" %}}
-
-- This instrumentation method does not support any [advanced RUM configurations][1].
-- Configuration for RUM Auto-Injection is only available per Windows IIS Site.
-
-[1]: /real_user_monitoring/browser/advanced_configuration/
-
-{{% /tab %}}
-{{< /tabs >}}
+- If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
+- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for Nginx web servers.
+- (Nginx only) The Auto-Instrumentation method does not inject encrypted requests served by the Nginx web server.
+- (Windows IIS only) Configuration for RUM Auto-Injection is only available per Windows IIS site.
 
 ## Further reading
 
@@ -129,3 +127,4 @@ The available functionality has the following important limitations:
 
 [1]: /real_user_monitoring/browser/custom_setup
 [2]: /agent/
+[3]: /real_user_monitoring/browser/advanced_configuration/
