@@ -162,3 +162,13 @@ jobs:
               const isApproved = await checkTeamMembership(teamSlug);
               ownerApprovals.set(owner, isApproved);
             }
+
+            const missingApprovals = Array.from(ownerApprovals.entries())
+              .filter(([, approved]) => !approved)
+              .map(([owner]) => owner);
+
+            if (missingApprovals.length > 0) {
+              core.setFailed(`Missing approvals from: ${missingApprovals.join(', ')}`);
+            } else {
+              console.log('All required code owners have approved.');
+            }
