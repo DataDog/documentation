@@ -236,10 +236,10 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `account_id` | ID of the account this report was generated for. |
 | `workspace_id` | ID of the Workspace this usage was associated with. |
 | `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
-| `billing_origin_product` | Product or feature originating the billing event (e.g., JOBS, CLUSTERS). |
-| `usage_type` | Type of usage being billed (e.g., COMPUTE_TIME). |
+| `billing_origin_product` | Product or feature originating the billing event (for example, JOBS, CLUSTERS). |
+| `usage_type` | Type of usage being billed (for example, COMPUTE_TIME). |
 | `job_run_id` | Identifier for the specific job run (if applicable). |
-| `node_type` | Type of node used in this billing record (e.g., m5d.large). |
+| `node_type` | Type of node used in this billing record (for example, m5d.large). |
 | `destination_region` | Region where the workload is directed (if applicable). |
 | `central_clean_room_id` | ID of the central clean room associated with the workload (if applicable). |
 | `notebook_path` | Path to the notebook in Databricks (if applicable). |
@@ -260,7 +260,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `dlt_tier` | Tier of Delta Live Tables service (if applicable). |
 | `jobs_tier` | Tier of the job, such as `CLASSIC` or `PREMIUM`. |
 | `networking` | Type of networking used for this job, if specified. |
-| `serving_type` | Type of serving model used, if applicable (e.g., Model Serving). |
+| `serving_type` | Type of serving model used, if applicable (for example, Model Serving). |
 | `sql_tier` | SQL tier associated with the usage (if applicable). |
 | `is_serverless` | Indicates if the usage pertains to a serverless compute resource (`true` or `false`). |
 | `custom_tags` | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
@@ -291,7 +291,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `user_name` | Name of the user or service account associated with the query. |
 | `warehouse_id` | Identifier for the warehouse generating the cost. |
 | `warehouse_name` | Name of the warehouse associated with this usage. |
-| `warehouse_size` | Size of the warehouse (e.g., Large, Medium). |
+| `warehouse_size` | Size of the warehouse (for example, Large, Medium). |
 | `cost_type` | Type of cost associated with the usage. Possible values include:<br> - `CLOUD_SERVICES`: General costs related to Snowflake's underlying cloud services, and not associated with warehouse usage.<br> - `IDLE_OR_LESS_100MS`: Costs from warehouse idle time or queries that completed in under 100 milliseconds. Unattributed to specific queries. Falls under the **warehouse_metering** service type.<br> - `QUERY_ATTRIBUTION`: Costs attributed to specific queries, grouped by the parameterized query hash. For these costs, the parameterized query associated with this cost can be found under **charge description**. Falls under the **warehouse_metering** service type. |
 | `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
 | `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
