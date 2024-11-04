@@ -42,6 +42,10 @@ See [Advanced Configurations][10] for bootstrapping options and for details on s
 
 After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
 
+### Index your Worker logs
+
+Make sure your Worker logs are [indexed][12] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
 ## Clone a pipeline
 
 1. Navigate to [Observability Pipelines][4].
@@ -71,3 +75,4 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [9]: /observability_pipelines/log_enrichment/
 [10]: /observability_pipelines/advanced_configurations/
 [11]: /observability_pipelines/update_existing_pipelines/
+[12]: /logs/log_configuration/indexes/
