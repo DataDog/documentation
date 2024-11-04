@@ -47,6 +47,7 @@ You can deploy the demo using Docker or Kubernetes (with Helm). Choose your pref
 
 - Kubernetes 1.24+
 - Helm 3.9+
+- An active Kubernetes cluster with kubectl configured to connect to it
 
 {{% /tab %}}
 {{< /tabs >}}

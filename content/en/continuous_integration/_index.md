@@ -33,6 +33,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/"
     tag: "Blog"
     text: "Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility"
+  - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
+    tag: "Blog"
+    text: "How we use Datadog for detection as code"
 cascade:
     algolia:
         rank: 70

@@ -14,6 +14,9 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Take a course to customize alert monitor notifications"
 ---
 
 Use variables in notification messages to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).

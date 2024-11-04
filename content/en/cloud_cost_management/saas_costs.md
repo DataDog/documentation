@@ -48,6 +48,8 @@ See the respective documentation for your cloud provider:
 
 </br>
 
+### Configure your SaaS accounts
+
 Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data.
 
 {{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
@@ -248,16 +250,6 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
 | `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
 
-| Tag Name | Tag Description |
-|---|---|
-| `invoice_id` | The unique identifier of the invoice. |
-| `status` | State of the payment. |
-| `mongo_org_id` | MongoDB organization ID. |
-| `cluster_name` | The name of the cluster that incurred the charge. |
-| `group_id` | ID of the project with which the line item is associated. |
-| `replica_set_name` | Name of the replica set with which the line item is associated. |
-| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
-
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
@@ -284,6 +276,16 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `invoice_id` | The unique identifier of the invoice. |
+| `status` | State of the payment. |
+| `mongo_org_id` | MongoDB organization ID. |
+| `cluster_name` | The name of the cluster that incurred the charge. |
+| `group_id` | ID of the project with which the line item is associated. |
+| `replica_set_name` | Name of the replica set with which the line item is associated. |
+| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}

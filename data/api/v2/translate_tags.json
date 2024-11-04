@@ -59,6 +59,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "domain-allowlist": {
+    "name": "Domain Allowlist",
+    "description": "Configure your Datadog Email Domain Allowlist directly through the Datadog API.\nThe Email Domain Allowlist controls the domains that certain datadog emails can be sent to.\nFor more information, see the [Domain Allowlist docs page](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)"
+  },
   "downtimes": {
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
@@ -119,6 +123,10 @@
     "name": "Metrics",
     "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   },
+  "microsoft-teams-integration": {
+    "name": "Microsoft Teams Integration",
+    "description": "Configure your [Datadog Microsoft Teams integration](https://docs.datadoghq.com/integrations/microsoft_teams/)\ndirectly through the Datadog API. Note: These endpoints do not support legacy connector handles."
+  },
   "monitors": {
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
@@ -159,6 +167,10 @@
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
   },
+  "rum-metrics": {
+    "name": "Rum Metrics",
+    "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
   "security-monitoring": {
     "name": "Security Monitoring",
     "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
@@ -185,7 +197,7 @@
   },
   "software-catalog": {
     "name": "Software Catalog",
-    "description": "API to create, update, retrieve and delete Software Catalog entities."
+    "description": "API to create, update, retrieve, and delete Software Catalog entities."
   },
   "spans": {
     "name": "Spans",
