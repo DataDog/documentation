@@ -54,7 +54,7 @@ export class Fence extends CustomHtmlComponent {
         const uuid = uuidv4();
         const renderedChild = render({
           node: child,
-          config: this.markdocConfig,
+          markdocConfig: this.markdocConfig,
           components: this.components
         });
         renderedChildTagsByUuid[uuid] = renderedChild;

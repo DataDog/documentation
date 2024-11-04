@@ -2,7 +2,7 @@ import MarkdownIt from 'markdown-it';
 import type {
   ClientVariable,
   RenderableTreeNodes,
-  Config
+  Config as MarkdocConfig
 } from 'markdoc-static-compiler';
 const { escapeHtml } = MarkdownIt().utils;
 import { reresolve } from './reresolver';
@@ -30,7 +30,7 @@ const voidElements = new Set([
 
 function render(p: {
   node: RenderableTreeNodes;
-  config?: Config;
+  markdocConfig?: MarkdocConfig;
   components?: Record<string, any>;
 }): string {
   if (typeof p.node === 'string' || typeof p.node === 'number')
@@ -48,16 +48,16 @@ function render(p: {
       .join('');
 
   if (isClientVariable(p.node)) {
-    if (p.config && p.config.variables !== undefined) {
+    if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
       // TODO: Fix reresolve return type so recasting isn't necessary
-      p.node = reresolve(p.node, p.config) as ClientVariable;
+      p.node = reresolve(p.node, p.markdocConfig) as ClientVariable;
     }
     return escapeHtml(String(p.node.value));
   }
 
   if (isClientFunction(p.node)) {
-    if (p.config && p.config.variables !== undefined) {
-      p.node = reresolve(p.node, p.config);
+    if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
+      p.node = reresolve(p.node, p.markdocConfig);
     }
     return '';
   }
@@ -71,7 +71,7 @@ function render(p: {
       nodeType in p.components
     ) {
       const Klass = p.components[nodeType];
-      return new Klass(p.node, p.config, p.components).render();
+      return new Klass(p.node, p.markdocConfig, p.components).render();
     }
   }
 
@@ -83,7 +83,7 @@ function render(p: {
 
   if (p.components && name in p.components) {
     const Klass = p.components[name];
-    return new Klass(p.node, p.config, p.components).render();
+    return new Klass(p.node, p.markdocConfig, p.components).render();
   }
 
   if ('if' in p.node && p.node.if) {
@@ -91,8 +91,8 @@ function render(p: {
     if ('ref' in p.node.if) {
       ref = `data-if=${p.node.if.ref}`;
     }
-    if (p.config && p.config.variables !== undefined) {
-      p.node = reresolve(p.node, p.config); // TODO: Fix with generic type
+    if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
+      p.node = reresolve(p.node, p.markdocConfig); // TODO: Fix with generic type
     }
     let wrapperTagClasses = 'mdoc__toggleable';
     if (attributes?.display === 'false') {
@@ -104,7 +104,7 @@ function render(p: {
     return wrapperTagOutput;
   }
 
-  if (!name) return render({ node: children, config: p.config });
+  if (!name) return render({ node: children, markdocConfig: p.markdocConfig });
 
   let output = `<${name}`;
   for (const [k, v] of Object.entries(attributes ?? {}))
@@ -114,7 +114,11 @@ function render(p: {
   if (voidElements.has(name)) return output;
 
   if (children.length)
-    output += render({ node: children, config: p.config, components: p.components });
+    output += render({
+      node: children,
+      markdocConfig: p.markdocConfig,
+      components: p.components
+    });
   output += `</${name}>`;
 
   return output;

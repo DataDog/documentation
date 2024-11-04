@@ -62,7 +62,7 @@ export class PageBuilder {
 
     let articleHtml = render({
       node: renderableTree,
-      config: { variables },
+      markdocConfig: { variables },
       components: customComponents
     });
 

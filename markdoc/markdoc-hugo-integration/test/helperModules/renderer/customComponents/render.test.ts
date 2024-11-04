@@ -58,7 +58,7 @@ describe('custom components', () => {
   // stage 3: render the HTML
   const html = render({
     node: renderableTree,
-    config: {
+    markdocConfig: {
       variables: {
         test_string: 'Datadog',
         always_false: false,
