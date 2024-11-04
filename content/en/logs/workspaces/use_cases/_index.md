@@ -8,13 +8,10 @@ further_reading:
 
 ## Overview
 
-*To add*
-- What do customer need to know about these use cases?
-- Why should they be reading these, what's the purpose of outlining specific use cases?
+This page provides insights on various applications of Log Workspaces, outlining how they can enhance log management and analysis. The use cases highlight how Log Workspaces can help you make the most of your log management strategies and improve operational efficiency.
 
 ## Use cases
 
 {{< whatsnext desc="See examples of how to use Log Workspaces:" >}}
     {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
-    {{< nextlink href="/logs/workspaces/use_cases/detect_fraudulent_transaction" >}}Detect Fraudulent Transaction Volume by Country{{< /nextlink >}}
 {{< /whatsnext >}}

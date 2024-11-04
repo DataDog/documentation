@@ -67,8 +67,7 @@ cascade:
 <br>
 
 {{< whatsnext desc="Logs Workspaces Use Cases" >}}
-    {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts/" >}}Analyze Login Attempts for e-PHI
-{{< /nextlink >}}
+    {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts/" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

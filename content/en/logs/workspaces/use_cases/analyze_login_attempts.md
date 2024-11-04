@@ -1,23 +1,25 @@
 ---
 title: Analyze Login Attempts for e-PHI
 further_reading:
-- link: "/logs/workspaces/use_cases/"
+- link: "/logs/workspaces/"
   tag: "Documentation"
   text: "Learn more about Log Workspaces"
 ---
 
-## Prerequisites
+## Use case
 
-This guide assumes that you are:
-- submitting logs to Datadog for a similar use case.
-- able to [create a workspace][1] and add cells. 
+Log Workspaces allows you to bring in log data to analyze login attempts and audit access to electronic protected health information (e-PHI). To start monitoring and identifying failed login attempts, using Workspaces' flexible querying and visualization options by following these steps.
 
 ## Setup
+
+This guide assumes that you are:
+- Submitting logs to Datadog for a similar use case.
+- Able to [create a workspace][1] and add cells. 
 
 ### 1. Bring in your data source
 
 To get started, bring in the logs from the service(s) you want to analyze.
-1. Create a new Workspace.
+1. [Create a new Workspace][2].
 1. Select **Logs Query** as your data source.
 
 ### 2. Query for failed logins
@@ -32,7 +34,7 @@ You can add any additional filters, facets, or attributes to narrow your search 
 
 To analyze the data further, you can count the number of failed login attempts by user ID and sort the results. This is helpful for identifying users with repeated failed login attempts, which may require further investigation.
 
-1. Add an [Analysis cell][2] to your workspace.
+1. Add an [Analysis cell][3] to your workspace.
 1. Run a SQL query.
     ```
     SELECT * FROM failed_logins
@@ -42,8 +44,8 @@ To analyze the data further, you can count the number of failed login attempts b
 ### 4. Visualize failed logins over time
 
 To get a clearer picture of when failed logins are occurring, you can create a timeline or time series visualization.
-1. Add a [Visualization cell][3].
-1. Choose Timeseries from the “Visualize as” dropdown.
+1. Add a [Visualization cell][4].
+1. Choose Timeseries from the "Visualize as" dropdown.
 1. Configure the graph to display the number of failed login attempts over time, using your query results as the data source.
 
 ## Further reading
@@ -51,5 +53,6 @@ To get a clearer picture of when failed logins are occurring, you can create a t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/workspaces/#create-a-workspace-and-add-a-data-source
-[2]: /logs/workspaces/#analysis-cell
-[3]: /logs/workspaces/#visualization-cell
+[2]: /logs/workspaces/
+[3]: /logs/workspaces/#analysis-cell
+[4]: /logs/workspaces/#visualization-cell
