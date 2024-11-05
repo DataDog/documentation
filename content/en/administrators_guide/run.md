@@ -2,9 +2,9 @@
 title: Maintaining and running your Datadog installation
 description: Setup and install Datadog as an administrator to avoid pit-falls down the road
 further_reading:
-- link: "getting_started/application/"
+- link: "getting_started/dashboards/"
   tag: "Documentation"
-  text: "Getting Started with Datadog"
+  text: "Getting Started with Dashboards"
 ---
 
 In the previous two sections, you understood Datadog through the lens of the plan and build phases, next you'll learn about the run phase. There are a series of tasks, both internal and external, that will keep the Datadog service running efficiently that you need to manage. 
@@ -87,11 +87,16 @@ Include Datadog upgrades within existing patch management standards and upgrade 
 
 ## Summary
 
-Datadog administration has a few common activities that should fit well into your existing process standards. Be sure to fold Datadog into your standard systems for key rotation, patch updates, service onboarding and IaC. Publish these standards early so that users know how to get started using your new Datadog service. 
+Datadog administration has a few common activities that should fit well into your existing process standards. Be sure to fold Datadog into your standard systems for key rotation, patch updates, service onboarding, and Infrastructure as Code (IaC). Publish these standards early so that users know how to get started using your new Datadog installation. 
 
 ## Next steps
 
-"What's Next" or "Next Steps" here ... with links to certification, support, blogs, newsletter, and other resources of information.
+Once you have successfully planned, set up, and begun maintaining your Datadog installation, the following resources are available to support your ongoing Datadog journey:
+
+- [Obtain a Datadog certification][20]
+- [Get started with Datadog support][21]
+- [Sign up for the Datadog new releases and security newsletters][22]
+- [Check out The Monitor blog][23]
 
 ## Further Reading
 
@@ -116,3 +121,7 @@ Datadog administration has a few common activities that should fit well into you
 [17]: https://github.com/DataDog/datadog-agent/releases
 [18]: https://app.datadoghq.com/fleet
 [19]: /api/latest/key-management/
+[20]: https://www.datadoghq.com/certification/overview/
+[21]: /getting_started/support/
+[22]: https://www.datadoghq.com/subscriptions/
+[23]: https://www.datadoghq.com/blog/
