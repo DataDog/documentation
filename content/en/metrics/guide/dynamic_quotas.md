@@ -33,7 +33,7 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
 ### Prerequisites
 
 1. A Datadog account with [Workflow Automation][3] enabled
-2. The Datadog [Slack integration][5] or [Microsoft Teams integrations][12] installed
+2. The Datadog [Slack integration][5] or [Microsoft Teams integration][12] installed
 
 ### Configure blueprint
 
