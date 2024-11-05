@@ -72,7 +72,9 @@ instances:
 ```
 
 ### Collecting schemas
-To enable this feature, use the `schemas_collection` option.
+To enable this feature, use the `schemas_collection` option. Schemas will be collected on databases for which the Agent has `CONNECT` access.
+
+**Note: For schema collection on RDS instances, it is necessary to grant explicit `CONNECT` access to the `datadog` user for each database on the instance. See [Grant the Agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.**
 
 Use the `database_autodiscovery` option to avoid specifying each logical database. See the sample [sqlserver.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example) for more details.
 
@@ -90,7 +92,8 @@ instances:
       enabled: true
     schemas_collection:
       enabled: true
-    include_index_usage_metrics: true # Optional: enable metric collection for indexes
+    # Optional: enable metric collection for indexes
+    include_index_usage_metrics: true
 # This instance only collects schemas and index metrics from the `users` database
   - dbm: true
         host: 'shopist-prod,1433'
@@ -101,9 +104,8 @@ instances:
     database: users
     schemas_collection:
       enabled: true
+    include_index_usage_metrics: true
 ```
-
-**Note: For schema collection on RDS instances, it is necessary to grant explicit connect access to the `datadog` user for each database on the instance. See [Grant the agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.**
 
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
