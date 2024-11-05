@@ -224,13 +224,22 @@ To collect custom resources, you need to configure both the Datadog Agent and se
        orchestratorExplorer:
            customResources:
                - <CUSTOM_RESOURCE_NAME>
-   clusterRole:
-     allowReadAllResources: true
    ```
 
    Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
    This configuration enables resource collection and gives the Operator the necessary permissions to view all custom resources.
+
+   Note in order for the Operator to have the neccessary RBACs it either needs to be installed with
+   ```
+   --set clusterRole.allowReadAllResources=true
+   ```
+
+   or have the following added to you installation value files
+   ```
+    clusterRole:
+        allowReadAllResources: true
+   ```
 
    {{% /tab %}}
    {{< /tabs >}}
