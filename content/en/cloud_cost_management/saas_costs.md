@@ -57,11 +57,11 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-1. Navigate to the [Databricks integration tile][101] in Datadog and click the **Configure** tab.
+1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
 2. Enter the workspace name, url, and access token corresponding to your Databricks account.
 3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
-4. Click **Save Databricks Workspace**.
+5. Click **Save Databricks Workspace**.
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -296,7 +296,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `warehouse_id` | Identifier for the warehouse generating the cost. |
 | `warehouse_name` | Name of the warehouse associated with this usage. |
 | `warehouse_size` | Size of the warehouse (for example, Large, Medium). |
-| `cost_type` | Type of cost associated with the usage. Possible values include:<br> - `CLOUD_SERVICES`: General costs related to Snowflake's underlying cloud services, and not associated with warehouse usage.<br> - `IDLE_OR_LESS_100MS`: Costs from warehouse idle time or queries that completed in under 100 milliseconds. Unattributed to specific queries. Falls under the **warehouse_metering** service type.<br> - `QUERY_ATTRIBUTION`: Costs attributed to specific queries, grouped by the parameterized query hash. For these costs, the parameterized query associated with this cost can be found under **charge description**. Falls under the **warehouse_metering** service type. |
+| `cost_type` | Type of cost associated with the usage. Possible values include:<br> - `CLOUD_SERVICES`: General costs related to Snowflake's underlying cloud services, excluding warehouse usage.<br> - `IDLE_OR_LESS_100MS`: Costs from warehouse idle time or queries that completed in under 100 milliseconds. Unattributed to specific queries. Falls under the **warehouse_metering** service type.<br> - `QUERY_ATTRIBUTION`: Costs attributed to specific queries, grouped by the parameterized query hash. For these costs, the parameterized query associated with this cost can be found under **charge description**. Falls under the **warehouse_metering** service type. |
 | `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
 | `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
 | `database_name` | Name of the database in which the query was executed (if applicable). Only found for **query attribution** costs. |
@@ -342,11 +342,11 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | Tag Name | Tag Description |
 |---|---|
 | `credit_coupon_code` | Code of any coupon or credit applied to this cost entry (if available). |
-| `product_name` | Name of the specific product being billed (e.g., "North America Bandwidth"). |
+| `product_name` | Name of the specific product being billed (for example, "North America Bandwidth"). |
 | `product_group` | Group or category of the product, such as "Full Site Delivery". |
 | `product_line` | Line of products to which this item belongs, for example, "Network Services". |
-| `usage_type` | Type of usage being billed (e.g., "Bandwidth"). |
-| `region` | Region where the service usage occurred, such as "North America". |
+| `usage_type` | Type of usage being billed (for example, "Bandwidth"). |
+| `region` | Region where the service usage occurred (for example, "North America"). |
 | `service_name` | Name of the service associated with this cost entry, often matching the `product_name`. |
 | `usage_type_cd` | Code or label representing the type of usage, such as "North America Bandwidth". |
 | `plan_name` | Name of the plan under which this service falls, often matching "product_line". |
