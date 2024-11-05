@@ -190,52 +190,54 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
-### Collect Custom Resources
+### Collect custom resources and custom resource definitions
 
-By default the orchestrator explorer collects custom resource definitions. These will appear in the UI alongside other resources without any user configuration required.
+The [Orchestrator Explorer][3] collects custom resource definitions by default. These definitions appear in Datadog without any user configuration required.
 
-To collect custom resources you need to configure both your agent and setup indexing in the UI. When setting up indexing the UI it will explain how to setup the agent. We've also included information about it below.
+To collect custom resources, you need to configure both the Datadog Agent and set up indexing.
 
-#### Setting up Indexing
+1. Open [Orchestrator Explorer][3].
+1. On the left panel, under **Select Resources**, select **Kubernetes > Custom Resources > Resource Definitions**.
+1. Locate the custom resource definition that corresponds to the resource you want to collect. Click on the version under the **Versions** column.
+1. A dialog opens with instructions:
+   - **Agent Setup**
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
 
-In order for us to process the custom resources we need to setup indexing. This can be done in the Resource Definitions tab of the orchestrator explorer. When you select a version, from either main view or side panel, you will see an indexing screen. From here you enabling indexing and set which fields you would like to parse. You will still have access to the raw yaml when collection starts.
+   Add the following configuration to `datadog-values.yaml`:
 
-#### Setting up the Agent
+   ```
+   orchestratorExplorer:
+       customResources:
+           - <CUSTOM_RESOURCE_NAME>
+   ```
 
-The information below will be on previous indexing screen as well. Now that we've configured the Datadog backend to process our custom resources we have to tell the agent to send them. There are different instructions for both the operator and helm charts.
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-You can enable the resource collection manually by adding the following configuration to your agent:
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
 
-```
-features:
-    orchestratorExplorer:
-        customResources:
-            - $NameOfYourCustomResource
-```
+   Add the following configuration to `datadog-agent.yaml`:
 
-Note you need to use the format `group/version/kind`
+   ```
+   features:
+       orchestratorExplorer:
+           customResources:
+               - <CUSTOM_RESOURCE_NAME>
+   clusterRole:
+     allowReadAllResources: true
+   ```
 
-In order to give the Operator the neccessary permissions to view all custom resources you also need the following in your operator config:
-```
-clusterRole:
-  allowReadAllResources: true
-```
-This will give the operator permission to view all resources.
-{{% /tab %}}
-{{% tab "Helm" %}}
-You can enable the resource collection manually by adding the following configuration to your agent:
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
-```
-orchestratorExplorer:
-    customResources:
-        - $NameOfYourCustomResource
-```
+   This configuration enables resource collection and gives the Operator the necessary permissions to view all custom resources.
 
-Note you need to use the format `group/version/kind`
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
+   - **Indexing Configuration**
+
+      Select the fields you want to index.
+1. Select **Enable Indexing**
 
 ## Further reading
 
@@ -243,5 +245,5 @@ Note you need to use the format `group/version/kind`
 
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
-
+[3]: https://app.datadoghq.com/orchestration/explorer/pod
 
