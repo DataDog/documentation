@@ -3,13 +3,12 @@ title: Manage a Service
 aliases:
   - /tracing/service_catalog/investigating
   - /service_catalog/investigating/
+  - /tracing/service_catalog/guides/understanding-service-configuration
+  - /service_catalog/guides/understanding-service-configuration/
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
-- link: "/tracing/service_catalog/guides/understanding-service-configuration"
-  tag: "Guide"
-  text: "Understanding Your Service Configuration"
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
@@ -24,11 +23,35 @@ further_reading:
   text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
-  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+  text: "I use GitHub Actions for Data­dog's Service Catalog, and you should, too"
+- link: "/tracing/service_catalog/"
+  tag: "Documentation"
+  text: "Datadog Service Catalog"
 algolia:
   tags: ['service catalog']
 ---
-## Assigning an owner to a service:
+
+## Understanding your service configuration
+
+Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Service Catalog provides automatic checks for these recommended setups. It helps you detect any monitoring gaps and helps you connect all available data for a service.
+
+To view the configuration completeness for a service, click the service in the [Service Catalog][7], then find the **Setup Guidance** tab:
+
+{{< img src="tracing/service_catalog/service-catalog-setup-guidance.png" alt="Service Catalog with the Setup Guidance tab highlighted." >}}
+
+Alternatively, on the [*Service* page][8], click **Service Config** on the lower-left side:
+
+{{< img src="tracing/service_catalog/service-page-service-config.png" alt="Service page with the Service Config link highlighted." >}}
+
+In the Setup Guidance section, you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][9].
+
+You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness. 
+
+{{< img src="tracing/service_catalog/svc_cat_completeness1.png" alt="Service configuration page showing configuration completeness." >}}
+
+This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
+
+## Assigning an owner to a service
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
 ## Determining and communicating service levels
@@ -52,8 +75,6 @@ Click a service in Service Catalog to open the side panel with the following det
 - **Costs information** showing the cloud spend for a service, broken down by resource types.
 - **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
 
-
-
 ### Configuration details 
 - **Setup completeness status** for Datadog products that can collect data for the service.
 - **External libraries used** which includes the ability to download the Inventory of Libraries.
@@ -67,7 +88,6 @@ Click a service in Service Catalog to open the side panel with the following det
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as for distributed tracing, infrastructure, network performance, Log Management, RUM, and Continuous Profiler.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -78,4 +98,6 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 [4]: /service_catalog/service_definitions/
 [5]: /account_management/teams/
 [6]: /tracing/services/service_page/
-
+[7]: https://app.datadoghq.com/services
+[8]: /tracing/services/service_page/
+[9]: /tracing/service_catalog/service_definition_api/
