@@ -116,7 +116,7 @@ Finds the minimum value amongst a set of numbers.
 
 
 <h4>round(<i>num</i> value, <i>int</i> precision)</h4>
-
+ƒcon
 Rounds a number. Optionally, define how many decimal places to maintain.
 
 <details>
@@ -141,7 +141,7 @@ Combines multiple values into a single string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #concatenated_region = concat(`@city`, ", " `@country`) | #concatenated_region = "Paris, France" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #region = concat(`@city`, ", ", `@country`) | #region = "Paris, France" |
 
 </details>
 
@@ -279,7 +279,7 @@ Combines multiple values into a single string with a delimiter in between.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #join_region = textjoin(", ", "false", `@city`, `@country`) | #join_region = "Paris, France" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #region = textjoin(", ", "false", `@city`, `@country`) | #region = "Paris, France" |
 
 </details>
 
