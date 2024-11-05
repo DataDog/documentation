@@ -105,6 +105,14 @@ To learn more, see the [search syntax][1] documentation.
 
 Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
 
+If you want to investigate connections from your all of your hosts in a single grouping, add the `host` tag in the **View clients as** drop-down, and add `Ungrouped traffic` in the **View servers as** drop-down. 
+
+{{< img src="network_performance_monitoring/network_analytics/npm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
+
+If you have traffic that is not tagged by a specific grouping, you can use the **Auto-grouped traffic** to group data by whichever tags are available. For example, to see which tags are available for a specific `service`, you can use the `service` tag in the **View clients as** drop-down, and add `Auto-grouped traffic` in the **View servers as** drop-down::
+
+{{< img src="network_performance_monitoring/network_analytics/npm_auto-grouped.png" alt="NPM analytics page sorting by service tags" style="width:90%;">}}
+
 ## Summary graphs
 
 The summary graphs are a condensed view of your network, which you can modify to display volume, throughput, connections, or latency as needed. Display up to three summary graphs at a time, and change the data and visualization type to suit your organization. To update a graph's data source, click on the graph's title and make a selection from the dropdown menu.
