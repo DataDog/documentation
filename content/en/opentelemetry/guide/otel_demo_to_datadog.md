@@ -107,7 +107,7 @@ Complete the following steps to configure these three components.
     processors:
       resource:
         attributes:
-          - key: deployment.environment
+          - key: deployment.environment.name
             value: "otel"
             action: upsert
 
