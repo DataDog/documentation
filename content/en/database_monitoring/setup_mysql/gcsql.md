@@ -199,7 +199,7 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-See the [GCP portion of the MySQL.conf.yaml file][10] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP portion of the MySQL.conf.yaml file][4] for additional information on setting `project_id` and `instance_id` fields.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -207,6 +207,8 @@ See the [GCP portion of the MySQL.conf.yaml file][10] for additional information
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -252,10 +254,12 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-See the [GCP portion of the MySQL.conf.yaml file][10] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP portion of the MySQL.conf.yaml file][2] for additional information on setting `project_id` and `instance_id` fields.
 
 
 [1]: /agent/docker/integrations/?tab=docker
+[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -358,13 +362,15 @@ spec:
     name: mysql
 ```
 
-See the [GCP portion of the MySQL.conf.yaml file][10] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP portion of the MySQL.conf.yaml file][4] for additional information on setting `project_id` and `instance_id` fields.
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 
 {{< /tabs >}}
