@@ -8,12 +8,12 @@ aliases:
 
 ## Overview
 
-The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources for the [ECS Explorer][1]. This feature enables you to monitor the status of EC2 and Fargate tasks, services, and other ECS components within a specific AWS account. You can view resource specifications for tasks within a service and correlate them with related logs, metrics, profiling, and more.
+The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources for the [ECS Explorer][1]. This feature enables you to monitor the status of EC2 and Fargate tasks, services, and other ECS components across all of your AWS accounts. You can view resource specifications for tasks within a service and correlate them with related logs, metrics, profiling, and more.
 
 ### Prerequisites for ECS Explorer:
 
-* **ECS on EC2 integration**: Required for monitoring clusters using the EC2 launch type.
-* **ECS on Fargate integration**: Required for monitoring clusters using the Fargate launch type.
+* **[ECS on EC2 integration][2]**: Required for monitoring clusters using the EC2 launch type.
+* **[ECS on Fargate integration][3]**: Required for monitoring clusters using the Fargate launch type.
 * **Agent version >= 7.58.0**: Recommended for a shorter refresh rate on the ECS Explorer page, though it is optional.
 
 ## Setup
@@ -24,6 +24,7 @@ Ensure you have enabled the [ECS on EC2 integration][2] and [ECS on Fargate inte
 
 {{< tabs >}}
 {{% tab "Task Definition" %}}
+
 If you are using the [task definition to install the Datadog Agent][4], add the following environment variable to the Datadog Agent container to activate this feature.
 
 ```yaml
@@ -45,6 +46,8 @@ If you are using the [task definition to install the Datadog Agent][4], add the 
 }
 ```
 
+[4]: /containers/amazon_ecs/?tab=awscli#setup
+
 {{% /tab %}}
 {{% tab "Manual" %}}
 For manual configuration, include the following line in the Datadog Agent configuration file.
@@ -59,7 +62,7 @@ ecs_task_collection_enabled: true
 
 ### Views
 
-Use the **Select Resources** dropdown menu in the top left corner of the page to switch between the **Tasks**, **Services**, **Clusters**, and other ECS resources.
+Use the **Select Resources** dropdown menu in the top left corner of the page to switch between **Tasks**, **Services**, **Clusters**, and other ECS resources.
 
 Each view includes a data table for organizing information by fields such as status, name, and AWS tags, along with a detailed Cluster Map to provide an overview of your tasks and ECS clusters.
 
@@ -100,10 +103,10 @@ For task definitions, it also provides a history of seven days, allowing you to 
 Other tabs provide additional information for troubleshooting the selected resource:
 
 * **Related Resources**: View all related resources in a tree structure.
-* [**Logs**][5]: Access logs from your container or resource. Click on any log to view related logs in the Log Explorer.
+* [**Logs**][5]: Access logs from your container or resource. Click on any log entry to view the full log details in the Log Explorer.
 * [**Metrics**][6]: View live metrics for your container or resource. You can maximize any graph for full-screen viewing, share a snapshot, or export it from this tab.
 * [**APM**][7]: Access traces from your container or resource, including details such as date, service, duration, method, and status code.
-* **Processes**: See all processes running in the resource's container.
+* **Processes**: See all processes running in the resource's containers.
 * **Network**: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the **Destination** field to filter by tags like `DNS` or `ip_type`, or use the **Group by** filter to group network data by tags, such as `task_name` or `service`.
 * **Monitors**: View monitors that are tagged, scoped, or grouped for this resource.
 
@@ -113,7 +116,7 @@ You can refine displayed resources by entering a query in the "Filter by" search
 
 ### Exception
 
-In ECS Explorer, you can use `tag#` to search across both Datadog tags and AWS tags.
+In the ECS Explorer, you can use `tag#` to search across both Datadog tags and AWS tags.
 
 ### Extracted Tags
 
@@ -149,12 +152,18 @@ Some resources have specific tags. The following tags are available in addition 
 
 ## Notes and Known Issues
 
-* Without the Datadog Agent installed in the cluster, the refresh interval for the ECS Explorer is approximately 24 hours.
+* Installing Datadog Agent in your cluster affects how often the ECS Explorer refreshes:
+
+| **Resource**        | **With Datadog Agent** | **Without Datadog Agent** |
+|---------------------|------------------------|--------------------------|
+| **Cluster**         | ~15 minutes             | ~15 minutes               |
+| **Task**            | ~15 seconds             | ~24 hours                 |
+| **Task Definition** | ~15 seconds             | ~24 hours                 |
+| **Service**         | ~24 hours               | ~24 hours                 |
 
 [1]: https://app.datadoghq.com/orchestration/explorer/ecsTask
 [2]: /integrations/amazon_ecs
-[3]: integrations/ecs_fargate
-[4]: /containers/amazon_ecs
+[3]: /integrations/ecs_fargate
 [5]: /logs
 [6]: /metrics
 [7]: /tracing
