@@ -78,11 +78,8 @@ Use the `database_autodiscovery` option to avoid specifying each logical databas
 
 ```yaml
 init_config:
-# This instance only collects data from the `users` database
-# and collects relation metrics only from the specified tables
 instances:
  # This instance detects every logical database automatically
-  # and collects relation metrics from every table
   - dbm: true
         host: 'shopist-prod,1433'
     username: datadog
@@ -93,9 +90,20 @@ instances:
       enabled: true
     schemas_collection:
       enabled: true
+    include_index_usage_metrics: true # Optional: enable metric collection for indexes
+# This instance only collects schemas and index metrics from the `users` database
+  - dbm: true
+        host: 'shopist-prod,1433'
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    connector: adodbapi
+    adoprovider: MSOLEDBSQL
+    database: users
+    schemas_collection:
+      enabled: true
 ```
 
-Note: For schema collection on RDS instances, it is necessary to grant explicit connect access to the `datadog` user for each database on the instance. See [Grant the agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.
+**Note: For schema collection on RDS instances, it is necessary to grant explicit connect access to the `datadog` user for each database on the instance. See [Grant the agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.**
 
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
