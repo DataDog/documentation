@@ -10,7 +10,7 @@ aliases:
 
 The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources for the [ECS Explorer][1]. This feature enables you to monitor the status of EC2 and Fargate tasks, services, and other ECS components across all of your AWS accounts. You can view resource specifications for tasks within a service and correlate them with related logs, metrics, profiling, and more.
 
-### Prerequisites for ECS Explorer:
+### Prerequisites
 
 * **[ECS on EC2 integration][2]**: Required for monitoring clusters using the EC2 launch type.
 * **[ECS on Fargate integration][3]**: Required for monitoring clusters using the Fargate launch type.
@@ -25,7 +25,7 @@ Ensure you have enabled the [ECS on EC2 integration][2] and [ECS on Fargate inte
 {{< tabs >}}
 {{% tab "Task Definition" %}}
 
-If you are using the [task definition to install the Datadog Agent][4], add the following environment variable to the Datadog Agent container to activate this feature.
+If using the [task definition to install the Datadog Agent][4], add this environment variable to the Datadog Agent container to activate this feature.
 
 ```yaml
 {
@@ -70,7 +70,7 @@ Each view includes a data table for organizing information by fields such as sta
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex_services.png" alt="ECS Explorer displaying resources in the Services view, in Summary mode" style="width:80%;">}}
 
-#### Grouping by Functionality and Facets
+#### Group by functionality and facets
 
 Group tasks by tags for an aggregated view that helps you find information more efficiently. You can group tasks using the "Group by" bar located at the top right of the page or by clicking on a specific tag and finding the group by function in the context menu, as illustrated below.
 
@@ -80,7 +80,7 @@ Additionally, use facets on the left side of the page to filter or group resourc
 
 {{< img src="infrastructure/livecontainers/fargate.mp4" alt="Example of grouping Fargate tasks" video=true style="width:80%;">}}
 
-### Cluster Map
+### Cluster map
 
 The cluster map provides a comprehensive view of your tasks and ECS clusters, allowing you to see all resources on one screen with customizable groups and filters. You can also select which metrics to color the nodes.
 
@@ -88,7 +88,7 @@ To examine resources from the cluster map, click on any circle or group to displ
 
 {{< img src="infrastructure/livecontainers/ecs-cluster-map.mp4" alt="Cluster map with customized groups and filters" video=true style="width:80%;">}}
 
-### Information Panel
+### Information panel
 
 Click on any row in the table or any object in the Cluster Map to display detailed information about a specific resource in a side panel.
 
@@ -110,7 +110,7 @@ Other tabs provide additional information for troubleshooting the selected resou
 * **Network**: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the **Destination** field to filter by tags like `DNS` or `ip_type`, or use the **Group by** filter to group network data by tags, such as `task_name` or `service`.
 * **Monitors**: View monitors that are tagged, scoped, or grouped for this resource.
 
-## Query Filter Details
+## Query filter details
 
 You can refine displayed resources by entering a query in the "Filter by" search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
 
@@ -118,11 +118,11 @@ You can refine displayed resources by entering a query in the "Filter by" search
 
 In the ECS Explorer, you can use `tag#` to search across both Datadog tags and AWS tags.
 
-### Extracted Tags
+### Extracted tags
 
 In addition to the tags you have [configured][9] in your Datadog agent, Datadog generates additional tags based on resource attributes, which can assist in your searching and grouping needs. These tags are conditionally added to resources when relevant.
 
-#### All Resources
+#### All resources
 
 All resources include the following tags:
 
@@ -140,7 +140,7 @@ Related Resources are tagged in relation to one another. Some examples include:
 
 > **Tip:** Use the filter query autocomplete feature to explore available related resource tags. Type `ecs_` to see suggested results.
 
-#### Resource-Specific Tags
+#### Resource specific tags
 
 Some resources have specific tags. The following tags are available in addition to the shared tags mentioned above.
 
@@ -150,7 +150,7 @@ Some resources have specific tags. The following tags are available in addition 
 | **Task Definition** | `task_family`<br>`task_version`<br>`task_launch_type`<br>`task_definition_status` |
 | **Service** | `task_family`<br>`task_version`<br>`task_launch_type`<br>`service_status` |
 
-## Notes and Known Issues
+## Notes and known issues
 
 * Installing Datadog Agent in your cluster affects how often the ECS Explorer refreshes:
 
