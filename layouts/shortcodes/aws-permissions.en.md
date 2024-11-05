@@ -8,8 +8,6 @@ To correctly set up the AWS Integration, you must attach the relevant IAM polici
 
 The set of permissions necessary to use all the integrations for individual AWS services.
 
-To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection">resource collection</a> (enabled by default, collected for free), you must attach AWS's managed <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">SecurityAudit Policy</a> to your Datadog IAM role.
-
 The following permissions included in the policy document use wild cards such as `List*` and `Get*`. If you require strict policies, use the complete action names as listed and reference the Amazon API documentation for your respective services.
 
 ```json
