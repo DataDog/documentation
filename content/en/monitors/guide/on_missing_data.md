@@ -1,17 +1,26 @@
-# On Missing Data
+---
+title: On Missing Data
+further_reading:
+- link: "/api/latest/monitors/"
+  tag: "API"
+  text: "Monitors API Documentation"
+---
 
-# Overview
 
-# If you manage your monitors from the UI
+## Overview
 
-If you manage your monitors from the UI, they will be automatically updated for you. If you’d like to update them sooner, you can do it through the API as explained below.
 
-# If you manage your monitors with the API/Terraform
 
-If you are managing your monitors with the API or Terraform, you’ll want to change the field “**notify\_no\_data**” and “**no\_data\_timeframe**” with “**on\_missing\_data**”. 
+## Monitors managed through the UI
 
-“**no\_data\_timeframe**” is no longer needed since “on\_missing\_data” uses the same timeframe as the time window.  
-The available values for “**on\_missing\_data**” are:
+If you manage your monitors from the UI, they will be automatically updated for you. If you'd like to update them sooner, you can do it through the API as explained below.
+
+## Monitors managed through the API or Terraform
+
+If you are managing your monitors with API or Terraform, replace `notify_no_data` and `no_data_timeframe` with `on_missing_data`. 
+
+"**no\_data\_timeframe**" is no longer needed since "on\_missing\_data" uses the same timeframe as the time window.  
+The available values for "**on\_missing\_data**" are:
 
 * default  
 * show\_no\_data  
@@ -20,7 +29,7 @@ The available values for “**on\_missing\_data**” are:
 
 You can find all the available fields here: [Documentation](https://docs.datadoghq.com/api/latest/monitors/) 
 
-Here’s an example of before and after of a JSON monitor with those fields:
+Here's an example of before and after of a JSON monitor with those fields:
 
 **Before**  
 ---
@@ -59,7 +68,7 @@ Here’s an example of before and after of a JSON monitor with those fields:
                     },  
                     "notify\_audit": false,  
                     "include\_tags": false,  
-	        "on\_missing\_data”: “show\_and\_notify\_no\_data”  
+	        "on\_missing\_data": "show\_and\_notify\_no\_data"  
             }  
     }  
 ---
