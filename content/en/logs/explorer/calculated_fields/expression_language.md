@@ -116,7 +116,6 @@ Finds the minimum value amongst a set of numbers.
 
 
 <h4>round(<i>num</i> value, <i>int</i> precision)</h4>
-ƒcon
 Rounds a number. Optionally, define how many decimal places to maintain.
 
 <details>
