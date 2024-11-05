@@ -203,7 +203,7 @@ Your instrumented application can submit spans with timestamps up to 18 hours in
 
 Datadog accepts the following combinations for a given 40-minute interval:
 
-- 1000 unique `environments` and `service` combinations
+- 5000 unique `environments` and `service` combinations
 - 30 unique `second primary tag values` per environment
 - 100 unique `operation names` per environment and service
 - 1000 unique `resources` per environment, service, and operation name
