@@ -38,7 +38,7 @@ is_public: true
 manifest_version: 2.0.0
 name: cri
 public_title: CRI
-short_description: Seguimiento de todas las métricas de tu CRI con Datadog
+short_description: Seguimiento de todas tus métricas de CRI con Datadog
 supported_os:
 - Linux
 tile:
@@ -49,7 +49,7 @@ tile:
   - Sistema operativo compatible::Linux
   - Oferta::Integración
   configuration: README.md#Configuración
-  description: Seguimiento de todas las métricas de tu CRI con Datadog
+  description: Seguimiento de todas tus métricas de CRI con Datadog
   media: []
   overview: README.md#Información general
   support: README.md#Soporte
@@ -67,7 +67,7 @@ Este check monitoriza la interfaz de tiempo de ejecución de un contenedor
 
 ### Instalación
 
-CRI es un check central del [Datadog Agent][1] que debe configurarse en `datadog.yaml` con `cri.d/conf.yaml`.
+El CRI es un check central del [Datadog Agent][1] que debe configurarse en `datadog.yaml` con `cri.d/conf.yaml`.
 
 En `datadog.yaml`, configura tu `cri_socket_path` para que el Agent realice consultas a tu CRI actual (también puedes configurar tiempos de espera predeterminados). En `cri.d/conf.yaml`, configura los parámetros de la instancia del check como `collect_disk`, si tu CRI (como `containerd`) informa de métricas del uso del disco.
 
@@ -112,7 +112,7 @@ spec:
 
 ### Configuración
 
-1. Edita el archivo `cri.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent, para empezar a recopilar los datos de rendimiento de tu CRI-O. Para conocer todas las opciones de configuración disponibles, consulta el [cri.d/conf.yaml de ejemplo][2].
+1. Edita el archivo `cri.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent, para empezar a recopilar los datos de rendimiento de tu CRI. Para conocer todas las opciones de configuración disponibles, consulta el [cri.d/conf.yaml de ejemplo][2].
 
 2. [Reinicia el Agent][3].
 
