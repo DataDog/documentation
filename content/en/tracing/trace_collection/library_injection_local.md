@@ -107,7 +107,7 @@ The available library versions are listed in each container registry, as well as
 - [JavaScript][17]
 - [Python][18]
 - [.NET][19]
-  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
+  - **Note**: For .NET library injection on musl-based Linux distributions (such as Alpine), append `-musl` to the pod annotation tag for versions 2.55 and earlier. For example, use `v2.29.0-musl` instead of `v2.29.0`. The `-musl` suffix is not required for versions after 2.55, including v3.0+.
 - [Ruby][20]
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedence over manually configured libraries.
