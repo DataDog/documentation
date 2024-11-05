@@ -210,9 +210,9 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 #### Example
 
-If you have a `failed_login` and `successful_login` query:
-{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+If you have a `failed_login` and a `successful_login` query:
 
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
 and a rule case that triggers when `failed_login > 5 && successful_login>0`:
 
