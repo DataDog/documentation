@@ -16464,6 +16464,13 @@ components:
         allowFailure:
           description: A boolean set to allow this step to fail.
           type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: A boolean set to exit the test if the step succeeds.
+          type: boolean
         isCritical:
           description: A boolean to use in addition to `allowFailure` to determine
             if the test should be marked as failed when the step fails.
@@ -16472,7 +16479,7 @@ components:
           description: The name of the step.
           type: string
         noScreenshot:
-          description: A boolean set to not take a screenshot for the step.
+          description: A boolean set to skip taking a screenshot for the step.
           type: boolean
         params:
           description: The parameters of the step.
