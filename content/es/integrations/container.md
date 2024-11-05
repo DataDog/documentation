@@ -10,7 +10,7 @@ assets:
     events:
       creates_events: true
     metrics:
-      check: contenedor.tiempo de actividad
+      check: container.uptime
       metadata_path: metadata.csv
       prefix: contenedor.
     service_checks:
