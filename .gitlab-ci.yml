@@ -314,7 +314,7 @@ typesense_sync_preview:manual:
     - >
       TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_preview_admin_api_key')
       TYPESENSE_HOST=$(get_secret 'typesense_preview_host')
-      yarn run typesense:sync
+      yarn run typesense:sync:preview
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
@@ -350,11 +350,11 @@ typesense_sync_live:
  dependencies:
    - build_live
  script:
-   - yarn add typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.6.tgz
+   - yarn add typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.8.tgz
    - >
      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
-     yarn run typesense:sync
+     yarn run typesense:sync:production
 
 sourcemaps_preview:
   <<: *base_template

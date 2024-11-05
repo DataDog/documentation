@@ -1446,8 +1446,7 @@ menu:
           - v2
         operationids:
           - QueryTimeseriesData
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Query scalar data across multiple products
       url: '#query-scalar-data-across-multiple-products'
@@ -1459,8 +1458,7 @@ menu:
           - v2
         operationids:
           - QueryScalarData
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List distinct metric volumes by metric name
       url: '#list-distinct-metric-volumes-by-metric-name'
