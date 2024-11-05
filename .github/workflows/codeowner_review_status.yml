@@ -6,6 +6,10 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   check-code-owners-approval:
     runs-on: ubuntu-latest
@@ -21,148 +25,93 @@ jobs:
           script: |
             const { owner, repo, number } = context.issue;
             
-            // Get pull request details and files
+            // Get pull request details
             const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
-            const { data: files } = await github.rest.pulls.listFiles({ owner, repo, pull_number: number });
             
-            // Check if the base branch is master
+            // Skip if not targeting master
             if (pr.base.ref !== 'master') {
               console.log(`Base branch is ${pr.base.ref}. Skipping check.`);
               return;
             }
-              
-            // Get CODEOWNERS file content
-            let codeowners;
-            try {
-              const { data } = await github.rest.repos.getContent({
-                owner,
-                repo,
-                path: '.github/CODEOWNERS',
-              });
-              codeowners = Buffer.from(data.content, 'base64').toString('utf8');
-            } catch (error) {
-              console.log('CODEOWNERS file not found in .github directory. Skipping check.');
-              return;
-            }
-            
-            // Parse CODEOWNERS file
-            const codeownersRules = codeowners.split('\n')
-              .filter(line => line.trim() && !line.startsWith('#'))
-              .map(line => {
-                const [pattern, ...owners] = line.split(/\s+/);
-                return { pattern, owners: owners.map(o => o.trim()) };
-              });
 
-            // Extract unique team slugs
-            const teamSlugs = [...new Set(codeownersRules.flatMap(rule => rule.owners))]
-              .map(owner => owner.replace(/^.*\//, ''));
-            
+            // Get required reviewers (this includes CODEOWNERS)
+            const { data: reviewers } = await github.rest.pulls.listRequestedReviewers({
+              owner,
+              repo,
+              pull_number: number,
+            });
 
-            // Get reviews
-            const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number: number });
+            // Get all reviews
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner,
+              repo,
+              pull_number: number,
+            });
 
+            // Track latest review state per user
+            const latestReviews = new Map();
+            reviews.forEach(review => {
+              const existing = latestReviews.get(review.user.login);
+              if (!existing || review.submitted_at > existing.submitted_at) {
+                latestReviews.set(review.user.login, review);
+              }
+            });
+
+            // Get current approvals
             const approvals = new Set(
-              reviews
+              Array.from(latestReviews.values())
                 .filter(review => review.state === 'APPROVED')
                 .map(review => review.user.login)
             );
 
-            // Function to check if a file matches a pattern
-            const matchesPattern = (file, pattern) => {
-              // Handle directory patterns
-              if (pattern.endsWith('/')) {
-                return file.startsWith(pattern);
-              }
-              
-              // Handle glob patterns
-              let regexPattern = pattern
-                .replace(/\./g, '\\.')
-                .replace(/\*/g, '[^/]*')
-                .replace(/\?/g, '[^/]')
-                .replace(/\//g, '\\/')
-                .replace(/\*\*/g, '.*');
-              
-              // For double-star patterns, match any depth
-              if (pattern.includes('**')) {
-                return new RegExp(`^${regexPattern}`).test(file);
-              }
-              
-              // For patterns without wildcards, check if the file is in the directory or is the file itself
-              if (!pattern.includes('*') && !pattern.includes('?')) {
-                return file === pattern || file.startsWith(pattern + '/');
-              }
-              
-              // For single-star patterns, don't match across directory boundaries
-              return new RegExp(`^${regexPattern}$`).test(file);
-            };
-            
-            // Get relevant code owners for the changed files
-            const relevantOwners = new Set();
-            const defaultOwner = codeownersRules.find(rule => rule.pattern === '*')?.owners[0];
+            // Track team memberships and approvals
+            const requiredTeams = new Set(
+              reviewers.teams.map(team => `@${owner}/${team.slug}`)
+            );
 
-            files.forEach(file => {
-              let fileOwners = new Set();
-              let hasSpecificOwner = false;
-              codeownersRules.forEach(rule => {
-                if (matchesPattern(file.filename, rule.pattern)) {
-                  rule.owners.forEach(owner => {
-                    fileOwners.add(owner);
-                    if (rule.pattern !== '*') {
-                      hasSpecificOwner = true;
-                    }
-                  });
-                }
-              });
-              // If no specific owners found or only the default owner was found, use the default owner
-              if (!hasSpecificOwner && defaultOwner) {
-                fileOwners.add(defaultOwner);
-              }
-              fileOwners.forEach(owner => relevantOwners.add(owner));
-            });
-            
-            if (relevantOwners.size === 0) {
-              console.log('No relevant code owners found for the changed files. Skipping check.');
-              return;
-            }
+            // Check all approvals and gather missing ones
+            const missingApprovals = [];
+            const teamApprovals = new Map();
 
-            // Check if a user is a member of a team
-            async function checkTeamMembership(teamSlug) {
+            // Check team approvals
+            for (const teamSlug of requiredTeams) {
+              const strippedTeamSlug = teamSlug.replace(`@${owner}/`, '');
               try {
                 const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
-                  org: context.repo.owner,
-                  team_slug: teamSlug,
+                  org: owner,
+                  team_slug: strippedTeamSlug,
                 });
-                return teamMembers.map(teamMember => {
-                  const user = teamMember.login;
-                  if (approvals.has(user)) {
-                    return teamSlug;
-                  }
-                });
+                
+                const hasTeamApproval = teamMembers.some(member => 
+                  approvals.has(member.login)
+                );
+                
+                teamApprovals.set(teamSlug, hasTeamApproval);
+                
+                if (!hasTeamApproval) {
+                  missingApprovals.push(teamSlug);
+                }
               } catch (error) {
-                console.error(`Error checking membership for team ${teamSlug}: ${error}`);
-                return false;
+                console.error(`Error checking team ${teamSlug}: ${error}`);
+                teamApprovals.set(teamSlug, null); // null indicates error
+                missingApprovals.push(teamSlug);
               }
             }
 
-            let approvingTeams = new Set()
-
-            for (const teamSlug of relevantOwners) {
-              const strippedTeamSlug = teamSlug.replace('@DataDog/', '');
-              const teamApproval = await checkTeamMembership(strippedTeamSlug);
-              if (teamApproval.includes(strippedTeamSlug)) {
-                approvingTeams.add(teamSlug);
+            // Check individual approvals
+            const individualApprovals = new Map();
+            reviewers.users.forEach(user => {
+              const userApproved = approvals.has(user.login);
+              individualApprovals.set(`@${user.login}`, userApproved);
+              
+              if (!userApproved) {
+                missingApprovals.push(`@${user.login}`);
               }
-            }
+            });
 
-            const codeOwnerStatus = Array.from(relevantOwners).map(owner => ({
-              owner,
-              approved: approvingTeams.has(owner),
-            }));
-            
-            const missingApprovals = codeOwnerStatus.filter(status => !status.approved);
-            
+            // Set final status
             if (missingApprovals.length > 0) {
-              core.setFailed(`Missing approvals from code owners: ${missingApprovals.map(status => status.owner).join(', ')}`);
+              core.setFailed(`Missing approvals from: ${missingApprovals.join(', ')}`);
             } else {
-              console.log('All relevant code owners have approved the pull request.');
+              console.log('All required reviewers have approved.');
             }

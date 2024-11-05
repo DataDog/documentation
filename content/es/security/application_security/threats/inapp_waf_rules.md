@@ -1,8 +1,8 @@
 ---
 aliases:
-- /security_platform/application_security/event_rules
-- /security/application_security/event_rules
-- /security/application_security/threats/event_rules
+- /es/security_platform/application_security/event_rules
+- /es/security/application_security/event_rules
+- /es/security/application_security/threats/event_rules
 further_reading:
 - link: /security/application_security/
   tag: Documentación
@@ -120,11 +120,12 @@ Los servicios que utilizan una política son visibles directamente en la página
 
 A continuación, [configura reglas de detección para crear señales de seguridad][1] basadas en esas trazas de seguridad definidas por las reglas WAF dentro de la aplicación que has creado. Puedes modificar las reglas de detección de ASM predefinidas o crear otras nuevas. 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
-[3]: /es/security/application_security/enabling/
+[3]: /es/security/application_security/threats/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+

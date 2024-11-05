@@ -164,7 +164,7 @@ Each browser interprets the report format differently:
 
 ## Use CSP with Real User Monitoring and Session Replay
 
-If you're using CSP on your websites, add the following URLs to your existing directives depending on your use case.
+If you're using CSP on your websites, add the following URLs to your existing [directives][15] depending on your use case.
 
 ### Intake URLs
 
@@ -218,3 +218,4 @@ script-src https://www.datadoghq-browser-agent.com
 [12]: https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
 [13]: https://github.com/rollup/plugins/tree/master/packages/url/#readme
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker
+[15]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy#directives

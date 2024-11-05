@@ -229,9 +229,9 @@ menu:
       url: getting_started/test_visibility/
       parent: getting_started
       weight: 26
-    - name: Intelligent Test Runner
-      identifier: getting_started_intelligent_test_runner
-      url: getting_started/intelligent_test_runner/
+    - name: Test Impact Analysis
+      identifier: getting_started_test_impact_analysis
+      url: getting_started/test_impact_analysis/
       parent: getting_started
       weight: 27
     - name: Code Analysis
@@ -1321,9 +1321,9 @@ menu:
       url: dashboards/sharing/
       parent: dashboards
       weight: 10
-    - name: Public Dashboards
-      identifier: dashboards_sharing_public_dashboards
-      url: dashboards/sharing/public_dashboards
+    - name: Shared Dashboards
+      identifier: dashboards_sharing_shared_dashboards
+      url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1001
     - name: Share Graphs
@@ -2067,11 +2067,16 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
       weight: 103
+    - name: Manage Data Collection
+      url: error_tracking/manage_data_collection
+      parent: error_tracking
+      identifier: error_tracking_manage_data
+      weight: 11
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 11
+      weight: 12
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2134,11 +2139,16 @@ menu:
       parent: incidents
       identifier: incident_notification
       weight: 3
-    - name: Incident Details
-      url: service_management/incident_management/incident_details
+    - name: Investigate an Incident
+      url: service_management/incident_management/investigate
       parent: incidents
-      identifier: incident_details
+      identifier: incident_investigate
       weight: 4
+    - name: Timeline
+      url: service_management/incident_management/investigate/timeline
+      parent: incident_investigate
+      identifier: incident_investigate_timeline
+      weight: 401
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
@@ -2852,16 +2862,26 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_installation
       weight: 201
+    - name: Merge Step Functions and Lambda Traces
+      url: serverless/step_functions/merge-step-functions-lambda
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_merge_lambda_traces
+      weight: 202
     - name: Enhanced Metrics
       url: serverless/step_functions/enhanced-metrics
       parent: serverless_step_functions
       identifier: serverless_step_functions_enhanced_metrics
-      weight: 202
+      weight: 203
+    - name: Redrive Executions
+      url: serverless/step_functions/redrive
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_redrive
+      weight: 204
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 203
+      weight: 205
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
@@ -3380,10 +3400,10 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
-    - name: Span Facets
-      url: tracing/trace_explorer/facets/
+    - name: Span Tags and Attributes
+      url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
-      identifier: span_facets
+      identifier: span_attributes
       weight: 603
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/
@@ -3434,11 +3454,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_map
       weight: 705
+    - name: Inferred Services
+      url: tracing/services/inferred_services
+      parent: tracing_services
+      identifier: tracing_inferred_services
+      weight: 706
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 706
+      weight: 707
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -3871,6 +3896,11 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_mongodbatlas
       weight: 702
+    - name: Troubleshooting
+      url: database_monitoring/setup_mongodb/troubleshooting/
+      parent: dbm_setup_mongodb
+      identifier: dbm_troubleshooting_mongodb
+      weight: 703
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
@@ -3968,7 +3998,7 @@ menu:
       url: llm_observability/configuration/
       parent: llm_obs
       identifier: llm_obs_configuration
-      weight: 4    
+      weight: 4
     - name: Submit Evaluations
       url: llm_observability/submit_evaluations/
       parent: llm_obs
@@ -4146,7 +4176,7 @@ menu:
       identifier: cd_explorer_saved_views
       parent: cd_explorer
       weight: 303
-    - name: Test Visibility
+    - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
@@ -4232,35 +4262,90 @@ menu:
       parent: tests
       identifier: tests_monitors
       weight: 5
+    - name: Flaky Test Management
+      url: tests/flaky_test_management
+      parent: tests
+      identifier: tests_flaky_test_management
+      weight: 6
+    - name: Early Flake Detection
+      url: tests/flaky_test_management/early_flake_detection
+      parent: tests_flaky_test_management
+      identifier: tests_early_flake_detection
+      weight: 601
+    - name: Auto Test Retries
+      url: tests/flaky_test_management/auto_test_retries
+      parent: tests_flaky_test_management
+      identifier: tests_auto_test_retries
+      weight: 602
+    - name: Test Impact Analysis
+      url: tests/test_impact_analysis
+      parent: tests
+      identifier: test_impact_analysis
+      weight: 7
+    - name: Setup
+      url: tests/test_impact_analysis/setup/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_setup
+      weight: 701
+    - name: .NET
+      url: tests/test_impact_analysis/setup/dotnet/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_dotnet
+      weight: 101
+    - name: JavaScript and TypeScript
+      url: tests/test_impact_analysis/setup/javascript/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_javascript
+      weight: 102
+    - name: Python
+      url: tests/test_impact_analysis/setup/python/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_python
+      weight: 103
+    - name: Swift
+      url: tests/test_impact_analysis/setup/swift/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_swift
+      weight: 104
+    - name: Java
+      url: tests/test_impact_analysis/setup/java/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_java
+      weight: 105
+    - name: Ruby
+      url: tests/test_impact_analysis/setup/ruby/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_ruby
+      weight: 106
+    - name: How It Works
+      url: tests/test_impact_analysis/how_it_works/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_how_it_works
+      weight: 702
+    - name: Troubleshooting
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_troubleshooting
+      weight: 703
     - name: Developer Workflows
       url: tests/developer_workflows
       parent: tests
       identifier: tests_developer_workflows
-      weight: 6
+      weight: 8
     - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
-      weight: 7
+      weight: 9
     - name: Instrument Browser Tests with RUM
       url: tests/browser_tests
       parent: tests
       identifier: tests_browser_tests
-      weight: 8
+      weight: 10
     - name: Instrument Swift Tests with RUM
       url: tests/swift_tests
       parent: tests
       identifier: tests_swift_tests
-      weight: 9
-    - name: Early Flake Detection
-      url: tests/early_flake_detection
-      parent: tests
-      identifier: tests_early_flake_detection
-      weight: 10
-    - name: Auto Test Retries
-      url: tests/auto_test_retries
-      parent: tests
-      identifier: tests_auto_test_retries
       weight: 11
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests
@@ -4277,63 +4362,12 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 14
-    - name: Intelligent Test Runner
-      url: intelligent_test_runner/
-      pre: intelligent-test-runner
-      parent: software_delivery_heading
-      identifier: intelligent_test_runner
-      weight: 40000
-    - name: Setup
-      url: intelligent_test_runner/setup/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_setup
-      weight: 1
-    - name: .NET
-      url: intelligent_test_runner/setup/dotnet/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_dotnet
-      weight: 101
-    - name: JavaScript and TypeScript
-      url: intelligent_test_runner/setup/javascript/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_javascript
-      weight: 102
-    - name: Python
-      url: intelligent_test_runner/setup/python/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_python
-      weight: 103
-    - name: Swift
-      url: intelligent_test_runner/setup/swift/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_swift
-      weight: 104
-    - name: Java
-      url: intelligent_test_runner/setup/java/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_java
-      weight: 105
-    - name: Ruby
-      url: intelligent_test_runner/setup/ruby/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_ruby
-      weight: 106
-    - name: How It Works
-      url: intelligent_test_runner/how_it_works/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_how_it_works
-      weight: 2
-    - name: Troubleshooting
-      url: intelligent_test_runner/troubleshooting/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_troubleshooting
-      weight: 3
     - name: Code Analysis
       url: code_analysis/
       pre: ci
       parent: software_delivery_heading
       identifier: code_analysis
-      weight: 50000
+      weight: 40000
     - name: Static Analysis (SAST)
       url: code_analysis/static_analysis
       parent: code_analysis
@@ -4409,7 +4443,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: quality_gates
-      weight: 60000
+      weight: 50000
     - name: Setup
       url: quality_gates/setup
       parent: quality_gates
@@ -4450,7 +4484,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: dora_metrics
-      weight: 70000
+      weight: 60000
     - name: Setup
       url: dora_metrics/setup
       parent: dora_metrics
@@ -4952,70 +4986,70 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_processors
       weight: 7
+    - name: Add Environment Variables
+      url: observability_pipelines/processors/add_environment_variables
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_add_environment_variables
+      weight: 701
     - name: Add hostname
       url: observability_pipelines/processors/add_hostname
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
-      weight: 701
+      weight: 702
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 702
+      weight: 703
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 703
+      weight: 704
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 704
+      weight: 705
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 705
+      weight: 706
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 706
+      weight: 707
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 707
+      weight: 708
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 708
+      weight: 709
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 709
+      weight: 710
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 710
+      weight: 711
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 711
+      weight: 712
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 712
-    - name: Set Environment Variables
-      url: observability_pipelines/processors/set_environment_variables
-      parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_set_environment_variables
       weight: 713
     - name: Destinations
       url: observability_pipelines/destinations/
@@ -5158,7 +5192,7 @@ menu:
       parent: log_collection
       identifier: log_collection_java
       weight: 110
-    - name: NodeJS
+    - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
@@ -5344,6 +5378,11 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
+    - name: Time Selection
+      url: logs/workspaces/time_selection/
+      parent: logs_workspaces
+      identifier: logs_workspaces_time_selection
+      weight: 601
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management

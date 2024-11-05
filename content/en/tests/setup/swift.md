@@ -11,9 +11,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/swift"
+    - link: "/tests/test_impact_analysis/swift"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
+      text: "Speed up your test jobs with Test Impact Analysis"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
@@ -760,5 +760,5 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 [4]: /continuous_integration/guides/rum_swift_integration
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
-[7]: /continuous_integration/intelligent_test_runner/
+[7]: /tests/test_impact_analysis/
 [8]: /getting_started/tagging/unified_service_tagging
