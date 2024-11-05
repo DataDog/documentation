@@ -66,7 +66,7 @@ Configure the following [Database Flags][3] and then **restart the server** for 
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][11] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 5.7" %}}
@@ -199,7 +199,7 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-See the [MySQL integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP portion of the MySQL.conf.yaml file][10] for additional information on setting `project_id` and `instance_id` fields.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -252,7 +252,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-See the [MySQL integration spec][2] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP portion of the MySQL.conf.yaml file][10] for additional information on setting `project_id` and `instance_id` fields.
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -358,7 +358,7 @@ spec:
     name: mysql
 ```
 
-See the [MySQL integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP portion of the MySQL.conf.yaml file][10] for additional information on setting `project_id` and `instance_id` fields.
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
@@ -399,3 +399,5 @@ If you have installed and configured the integrations and Agent as described and
 [7]: /integrations/google_cloudsql
 [8]: /database_monitoring/troubleshooting/?tab=mysql
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[10]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[11]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
