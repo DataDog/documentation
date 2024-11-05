@@ -1,6 +1,8 @@
 ---
-title: Span Facets
-description: 'Trace Facets and Facet Panel'
+title: Span Tags, Attributes, and Facets
+description: 'Span Facets and Facet Panel'
+aliases:
+ - /tracing/trace_explorer/facets
 further_reading:
 - link: 'tracing/trace_explorer/'
   tag: 'Documentation'
@@ -9,25 +11,35 @@ further_reading:
 
 ## Overview
 
-Facets are user-defined tags and attributes from your spans. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-facets-measures) data analysis. Facets allow you to manipulate spans in your [Trace Analytics monitors][3], and in APM queries that appear on [dashboards][4] and in [notebooks][5].
+Span metadata is composed of **attributes** and **tags**.
 
-The [Trace Explorer][6] includes out-of-the-box facets such as `Status` and `Service`. You can use facets in the Trace Explorer to:
+* **[Span attributes](#span-attributes)** are the content of the span, collected with automatic or manual instrumentation in the application
 
-- [Search for and filter spans][1]
-- Perform trace analytics
-- Start troubleshooting once your spans are ingested
+* **[Span tags](#span-tags)** are enrichments of context related to the span, for instance host or container tags describing the infrastructure the service is running on. 
+
+You can query spans by any span tag and attribute from the [trace explorer][6].
+
+### Reserved attributes
+
+Reserved attributes are a subset of span attributes that are present on every span. These attributes are queryable without prepending the `@` character. The full list of reserved attributes is: `env`, `service`, `operation_name`, `resource_name`, `status`, `ingestion_reason`, `trace_id`. Refer to the [APM terms and concepts][10] for a full definition of these terms.
+
+### Span attributes
+
+Span attributes are the content of your span. These are collected out-of-the-box in tracing libraries using automatic instrumentation, manually using custom instrumentation, or remapped in the Datadog backend based on source attributes (see [peer attributes][11], remapped from some source attributes). To search on a specific span attribute, you must prepend an `@` character at the beginning of the attribute key.
+
+For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`.
+
+### Span tags
+
+Span tags are context around your span, enriched based on the host or the container the service the span is emitted from is running on. You don't need to prepend an `@` character to query for span tags.
+
+## Facets
+
+You can create **facets** on top of span tags and attributes to map an attribute to the right type (for example, string or int) and for these attributes to show up in the facet list.
+
+**Note**: [Creating facets](#creating-facets) is **not required** for [searching spans][7], [generating metrics from spans][8], or [indexing spans with retention filters][9].
 
 {{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="The Facets panel in the Trace Explorer" style="width:90%;">}}
-
-{{< site-region region="us,eu,us3,us5,ap1" >}}
-
-[Creating facets](#creating-facets) is **not required** for [searching spans][1], [generating metrics from spans][2], or [indexing spans with retention filters][3]. In these contexts, autocomplete capabilities use existing facets, but also any input that matches incoming spans applies.
-
-[1]: /tracing/trace_explorer/search
-[2]: /tracing/trace_pipeline/generate_metrics
-[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
-
-{{< /site-region >}}
 
 ### Qualitative facets
 
@@ -129,3 +141,8 @@ Autocomplete based on the content in spans of the current views helps you to def
 [4]: /dashboards/widgets/
 [5]: /notebooks/
 [6]: /tracing/trace_explorer/
+[7]: /tracing/trace_explorer/search
+[8]: /tracing/trace_pipeline/generate_metrics
+[9]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[10]: /tracing/glossary
+[11]: /tracing/services/inferred_services#peer-tags
