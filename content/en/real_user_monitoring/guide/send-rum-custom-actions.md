@@ -10,6 +10,8 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
+algolia:
+  tags: ["addaction"]
 ---
 ## Overview
 

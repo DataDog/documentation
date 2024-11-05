@@ -88,7 +88,7 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration/?tabs=thresholdalert#no-data
-[2]: /monitors/manage/status/#history
+[2]: /monitors/status/#history
 [3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [4]: /monitors/configuration/?tabs=thresholdalert#auto-resolve
 [5]: /monitors/configuration/?tabs=thresholdalert#set-alert-conditions

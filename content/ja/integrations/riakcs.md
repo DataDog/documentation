@@ -29,7 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: riakcs
 integration_id: riak-cs
 integration_title: Riak CS
-integration_version: 2.11.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: riakcs

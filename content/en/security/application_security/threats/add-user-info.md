@@ -593,7 +593,7 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the NodeJS tracer's API to track user events.
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -785,3 +785,4 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [12]: /security/default_rules/appsec-ato-bf/
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
+[15]: /agent/remote_config/

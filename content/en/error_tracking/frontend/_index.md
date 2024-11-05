@@ -15,9 +15,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Error Tracking Issue States and Workflows'
 ---
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Datadog's standalone frontend Error Tracking experience is in private beta.
-{{< /callout >}} 
 
 ## Overview
 

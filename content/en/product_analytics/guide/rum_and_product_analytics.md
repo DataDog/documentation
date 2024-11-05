@@ -47,6 +47,10 @@ Session Replay remains a part of both RUM and Product Analytics.
 - RUM users can continue to use it as part of their contractual grandfathering, but the use of it is limited to the sample rate and data retention they have in their RUM configuration.
 - After September 1, 2024, the funnel widget is exclusively available to Product Analytics customers.
 
+### Is Session Replay available with Product Analytics?
+
+[Session Replay][1] is a standalone offering that can be purchased alongside Product Analytics.
+
 ### What is available to RUM customers versus what is available to Product Analytics customers?
 See the full feature comparison table below.
 
@@ -60,7 +64,6 @@ See the full feature comparison table below.
 | Core Web Vitals and Mobile Vitals | {{< X >}} | {{< X >}} |
 | Performance Summary | {{< X >}} | |
 | Analytics Summary | {{< X >}} | {{< X >}} |
-| Session Replay | {{< X >}} (see pricing) | {{< X >}} (see [pricing][tk]) |
 | Vitals troubleshooting | {{< X >}} (browser only) | |
 | Custom Vitals | {{< X >}} (browser only) | |
 | Feature Flags performance / Deployment Tracking page | {{< X >}} | |
@@ -68,7 +71,7 @@ See the full feature comparison table below.
 | RUM <> APM correlation | {{< X >}} | |
 | RUM Synthetic tests | {{< X >}} (through Session Replay) | |
 | Retention Analysis | | {{< X >}} |
-| [Conversion page][tk] | | {{< X >}} |
+| [Conversion page][2] | | {{< X >}} |
 | User Journeys (Funnels, Sankeys) | | {{< X >}} |
 | Segmentation | | {{< X >}} |
 | Heatmaps | | {{< X >}} |
@@ -79,3 +82,6 @@ See the full feature comparison table below.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#products
+[2]: /product_analytics/journeys/#conversion
