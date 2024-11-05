@@ -72,7 +72,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
+      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not specified, defaults to 100
       trackResources: true,
@@ -91,7 +91,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
+      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not included, the default is 100
       trackResources: true,

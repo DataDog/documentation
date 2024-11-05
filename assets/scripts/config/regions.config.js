@@ -280,5 +280,13 @@ export default {
       eu: 'api.datadoghq.eu/api/v2/cost/custom_costs.',
       ap1: 'api.ap1.datadoghq.com/api/v2/cost/custom_costs',
       gov: 'The custom costs endpoint for GOV is not supported.'
-    }  
+    },
+    ip_ranges_url_webhooks: {
+      us: 'http://ip-ranges.datadoghq.com/webhooks.json',
+      us3: 'http://ip-ranges.us3.datadoghq.com/webhooks.json',
+      us5: 'http://ip-ranges.us5.datadoghq.com/webhooks.json',
+      eu: 'http://ip-ranges.datadoghq.eu/webhooks.json',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com/webhooks.json',
+      gov: 'http://ip-ranges.ddog-gov.com/webhooks.json'
+    }
 };

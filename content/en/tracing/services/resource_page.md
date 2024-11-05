@@ -72,6 +72,34 @@ A service has load amplification if it's receiving more than 100% of the request
 
 {{< img src="tracing/visualization/resource/dependency-map-requests-cropped.png" alt="A dependency map that shows the flow of requests into and out of a particular resource and highlights the request count of that resource" style="width:100%;" >}}
 
+### Frontend Impact
+
+Datadog provides you visibility into how a web resource impacts your frontend applications. You can understand what frontend view is sending requests to the resource and identify views that are experiencing high latency or errors from the resource. 
+
+{{< img src="tracing/visualization/resource/resource_frontend_impact.png" alt="A table showing several key metrics for a list of views sending requests to a particular resource" style="width:100%;" >}} 
+
+Isolate requests and errors over time for a specific frontend view by hovering over a RUM View Name in the table and clicking on **Isolate this View**. From here, you can explore sampled traces originating from the frontend views by clicking on **View Traces** at the top right of the panel. You can also investigate the sampled RUM sessions for each view by clicking on the context menu for a frontend view in the table. 
+
+The frontend impact panel is only available if you use Real User Monitoring (RUM) and the resource belongs to a web service. Unlike the requests, errors, and latency graphs which use unsampled data sources, the frontend impact metrics are built on sampled trace data from the past 1 hour: 
+
+`RUM View Name:` 
+: Name of the frontend view 
+
+`App Name:` 
+: Name of application that contains the frontend view
+
+`Sessions:` 
+: Number of sessions for the frontend view
+
+`Error Rate Per Sessions:` 
+: Number of sessions that included the frontend view 
+
+`P95 Latency` 
+: P95 latency for requests originating from the frontend view  
+
+`Requests` 
+: Number of requests originating from the frontend view  
+
 
 ## Span summary
 
