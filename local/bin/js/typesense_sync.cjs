@@ -18,7 +18,7 @@ const index = async () => {
         const destFilePath = './public/english_search.json'
         const docsAlias = 'docs_alias'
         const filterLanguage = 'es'
-        const englishOnlySearchIndex = fullSearchIndex.filter(record => record.language === "en")
+        const englishOnlySearchIndex = fullSearchIndex.filter(record => record.language === "es")
 
         fs.writeFile(destFilePath, JSON.stringify(englishOnlySearchIndex), (err) => {
             if (err) {
