@@ -81,8 +81,6 @@ This section provides language-specific compatibility requirements for Single St
 | .NET Core 2.0    |                                 |                                     |
 | Preview versions | Not supported                   |                                     |
 
-<div class="alert alert-info">Single Step Instrumentation disables automatically when manual instrumentation is detected.</div>
-
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
