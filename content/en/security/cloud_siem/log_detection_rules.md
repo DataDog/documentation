@@ -210,7 +210,6 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 #### Example
 
-
 If you have a `failed_login` and `successful_login` query:
 {{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
