@@ -199,7 +199,7 @@ instances:
       instance_id: '<INSTANCE_ID>'
 ```
 
-See the [GCP section of the MySQL.conf.yaml file][4] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP section of the `mysql.conf.yaml` file][4] for additional information on setting `project_id` and `instance_id` fields.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -254,7 +254,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-See the [GCP section of the MySQL.conf.yaml file][2] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP section of the `mysql.conf.yaml` file][2] for additional information on setting `project_id` and `instance_id` fields.
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -362,7 +362,7 @@ spec:
     name: mysql
 ```
 
-See the [GCP section of the MySQL.conf.yaml file][4] for additional information on setting `project_id` and `instance_id` fields.
+See the [GCP section of the `mysql.conf.yaml` file][4] for additional information on setting `project_id` and `instance_id` fields.
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
