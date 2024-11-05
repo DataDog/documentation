@@ -130,7 +130,7 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 {{< site-region region="ap1,us3,us5" >}}
 ## Filtering service catalog entries by component
 
-Every entry showing up in the service catalog is categorised as a component type:
+Every entry showing up in the Service Catalog is categorized as a component type:
 
 *  Services
 *  Datastores
@@ -140,9 +140,9 @@ Every entry showing up in the service catalog is categorised as a component type
 
 {{< img src="tracing/service_catalog/component_selector.png" alt="Service Catalog component selector" style="width:30%;" >}}
 
-Datadog populates service catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
+Datadog populates Service Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
 
-**Note**: The component supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can now filter by datastore technology using the `datastore type` facet.
+**Note**: The component supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can filter by datastore technology using the `datastore type` facet.
 
 [10]: /tracing/services/inferred_services#peer-tags
 {{< /site-region >}}

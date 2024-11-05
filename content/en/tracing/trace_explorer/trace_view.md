@@ -167,10 +167,10 @@ Other information may be displayed under various conditions:
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
 {{< site-region region="ap1,us3,us5" >}}
-When the service name is an override from the base service name, the top of the info sections shows:
-- the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
-- the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
-- the **[inferred service][4]** (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
+When the service name is an override from the base service name, the top of the info section shows the:
+- **[Base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
+- **[Service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
+- **[Inferred service][4]** (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5].
 
 {{< img src="tracing/trace_view/base_override_inferred_service.png" alt="Base, Override, and inferred service" style="width:80%;">}}
 

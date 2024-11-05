@@ -1,5 +1,5 @@
 ---
-title: Span tags, attributes and facets
+title: Span tags, attributes, and facets
 description: 'Span Facets and Facet Panel'
 aliases:
  - /tracing/trace_explorer/facets
@@ -13,7 +13,7 @@ further_reading:
 
 Span metadata is composed of **attributes** and **tags**.
 
-* **[Span attributes](#span-attributes)** are the content of the span, collected via auto or manual instrumentation in the application
+* **[Span attributes](#span-attributes)** are the content of the span, collected with automatic or manual instrumentation in the application
 
 * **[Span tags](#span-tags)** are enrichments of context related to the span, for instance host or container tags describing the infrastructure the service is running on. 
 
@@ -21,11 +21,11 @@ You can query spans by any span tag and attribute from the [trace explorer][6].
 
 ### Reserved attributes
 
-Reserved attributes are a subset of span attributes that are present on every span. These attributes are queriable without prepending the `@` character. The full list of reserved attributes is: `env`, `service`, `operation_name`, `resource_name`, `status`, `ingestion_reason`, `trace_id`. Refer to the [APM terms and concepts][10] for a full definition of these terms.
+Reserved attributes are a subset of span attributes that are present on every span. These attributes are queryable without prepending the `@` character. The full list of reserved attributes is: `env`, `service`, `operation_name`, `resource_name`, `status`, `ingestion_reason`, `trace_id`. Refer to the [APM terms and concepts][10] for a full definition of these terms.
 
 ### Span attributes
 
-Span attributes are the content of your span. These are collected out-of-the-box in tracing libraries via auto-instrumentation, manually via custom instrumentation, or remapped in Datadog backend based on source attributes (c.f. [peer attributes][11], remapped from some source attributes). To search on a specific span attribute you must prepend an `@` character at the beginning of the attribute key.
+Span attributes are the content of your span. These are collected out-of-the-box in tracing libraries using automatic instrumentation, manually using custom instrumentation, or remapped in the Datadog backend based on source attributes (see [peer attributes][11], remapped from some source attributes). To search on a specific span attribute, you must prepend an `@` character at the beginning of the attribute key.
 
 For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`.
 
@@ -35,7 +35,7 @@ Span tags are context around your span, enriched based on the host or the contai
 
 ## Facets
 
-You can create **facets** on top of span tags and attributes to map an attribute to the right type (e.g. string or int) and for these attributes to show up in the facet list.
+You can create **facets** on top of span tags and attributes to map an attribute to the right type (for example, string or int) and for these attributes to show up in the facet list.
 
 **Note**: [Creating facets](#creating-facets) is **not required** for [searching spans][7], [generating metrics from spans][8], or [indexing spans with retention filters][9].
 
