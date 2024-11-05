@@ -65,7 +65,7 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/databricks_setup_1.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/databricks
 
@@ -82,7 +82,7 @@ Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud C
 
 If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
 
-{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/confluent_setup_1.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/confluent-cloud
 [102]: https://docs.confluent.io/cloud/current/security/access-control/rbac/predefined-rbac-roles.html#billingadmin-role
@@ -203,7 +203,7 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/fastly_setup_1.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
 
 [101]: https://manage.fastly.com/account/personal/tokens
 [102]: https://app.datadoghq.com/integrations/fastly-cost-management
