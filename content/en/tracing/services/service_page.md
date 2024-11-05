@@ -37,7 +37,9 @@ Consult on this page:
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
+{{< site-region region="ap1,us3,us5" >}}
 * [Dependencies](#dependencies)
+{{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional sections](#additional-sections)
