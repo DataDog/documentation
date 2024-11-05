@@ -48,12 +48,13 @@ The legend details the color coding of the flame graph. Group spans by either **
 
 {{< site-region region="ap1,us3,us5" >}}
 Spans from [inferred services][2] are represented with a dashed outline.
+
+[2]: /tracing/services/inferred_services
 {{< /site-region >}}
 
 {{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
 [1]: /tracing/guide/service_overrides#base-service
-[2]: /tracing/services/inferred_services
 {{% /tab %}}
 {{% tab "Span List" %}}
 
@@ -86,11 +87,12 @@ Each row (span) indicates the following:
 
 {{< site-region region="ap1,us3,us5" >}}
 Spans from [inferred services][1] are represented with a dashed underline.
+
+[1]: /tracing/services/inferred_services
 {{< /site-region >}}
 
 To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
-[1]: /tracing/services/inferred_services
 {{% /tab %}}
 {{% tab "Map" %}}
 

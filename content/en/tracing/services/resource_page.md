@@ -52,10 +52,12 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 ## Dependency Map 
 
-Use the Dependency Map to view a flow graph of all of a resource's upstream and downstream service dependencies.  The map is scoped to the requests flowing through the selected service and resource  (endpoint, database query, etc.) you're focused on.
+Use the Dependency Map to view a flow graph of all of a resource's upstream and downstream service dependencies. The map is scoped to the requests flowing through the selected service and resource (endpoint, database query, etc.) you're focused on.
 
 {{< site-region region="ap1,us3,us5" >}}
 [Inferred service dependencies][10] like databases, queues or third-party services are represented with a purple background node.
+
+[10]: /tracing/services/inferred_services/
 {{< /site-region >}}
 
 Click on a downstream or upstream service node to see which resources are invoked in the request flow. To focus on a particular request path, select a node an click `set as start/end`. This filters the map to focus on the requests that also flow through this upstream or downstream dependency.
@@ -67,7 +69,9 @@ The dependency map is only available for service-entry span resources.
 {{< img src="tracing/visualization/resource/dependency_map.png" alt="Resource page dependency map" style="width:100%;" >}}
 
 {{< site-region region="ap1,us3,us5" >}}
-**Note**: [service overrides][9] are represented as part of the edge of the dependency map to keep visibility over the actual remote service, database or queue the service is interacting with.
+**Note**: [Service overrides][9] are represented as part of the edge of the dependency map to keep visibility over the actual remote service, database or queue the service is interacting with.
+
+[9]: /tracing/guide/service_overrides/
 {{< /site-region >}}
 
 ### Frontend Impact
@@ -141,5 +145,4 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 [6]: /tracing/glossary/#spans
 [7]: /tracing/trace_explorer/trace_view/
 [8]: /tracing/search/
-[9]: /tracing/guide/service_overrides/
-[10]: /tracing/services/inferred_services/
+

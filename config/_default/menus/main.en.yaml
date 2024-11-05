@@ -3449,7 +3449,7 @@ menu:
       parent: tracing_services
       identifier: tracing_service_map
       weight: 705
-    - name: Inferred services
+    - name: Inferred Services
       url: tracing/services/inferred_services
       parent: tracing_services
       identifier: tracing_inferred_services

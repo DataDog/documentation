@@ -148,6 +148,10 @@ To delete a saved search, click on the bin icon under the Trace search dropdown 
 To search for a service, use the `service` attribute. To search for another [entity type][20] (for example, a database, a queue, or a third-party provider), rely on other [peer attributes][21] which Datadog uses to describe dependencies that are not instrumented with APM. For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`
 
 **Note**: The span's `service` tag represents the service **emitting** the span if you migrated to the [global service naming][22] by setting `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
+
+[20]: /tracing/services/inferred_services
+[21]: /tracing/services/inferred_services#peer-tags
+[22]: /tracing/services/inferred_services#migrate-to-global-default-service-naming
 {{< /site-region >}}
 
 ## Time range
@@ -319,7 +323,4 @@ You can also generate a new metric for the query.
 [17]: /monitors/notify/variables/?tab=is_alert#reserved-attributes
 [18]: /notebooks/
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[20]: /tracing/services/inferred_services
-[21]: /tracing/services/inferred_services#peer-tags
-[22]: /tracing/services/inferred_services#migrate-to-global-default-service-naming
 [23]: /tracing/trace_explorer/span_tags_attributes

@@ -1,5 +1,5 @@
 ---
-title: Span tags, attributes, and facets
+title: Span Tags, Attributes, and Facets
 description: 'Span Facets and Facet Panel'
 aliases:
  - /tracing/trace_explorer/facets
