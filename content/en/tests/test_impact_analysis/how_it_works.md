@@ -33,7 +33,6 @@ While other test solutions calculate test impact analysis using code coverage to
 
 Test Impact Analysis leverages per-test code coverage information along with data from [Test Optimization][1] to search previous tests in all relevant past commits. Configuration of Test Impact Analysis is a one-click operation in most languages, and the results are accurate and more precise than other methods.
 
-
 ## How test selection works
 
 When you enable Test Impact Analysis, per-test (or per-suite, depending on the framework) code coverage is transparently collected and sent to Datadog.
