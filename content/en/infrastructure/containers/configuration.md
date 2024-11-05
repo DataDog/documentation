@@ -217,7 +217,14 @@ To collect custom resources, you need to configure both the Datadog Agent and se
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
 
-   Add the following configuration to `datadog-agent.yaml`:
+   The Operator needs permission to collect custom resources. When you [install the Datadog Operator][4], add `--set clusterRole.allowReadAllResources=true` when you run `helm install`.
+
+   For example:
+   ```
+   helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+   ```
+
+   Then, add the following configuration to `datadog-agent.yaml`:
 
    ```
    features:
@@ -227,19 +234,6 @@ To collect custom resources, you need to configure both the Datadog Agent and se
    ```
 
    Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
-
-   This configuration enables resource collection and gives the Operator the necessary permissions to view all custom resources.
-
-   Note in order for the Operator to have the neccessary RBACs it either needs to be installed with
-   ```
-   --set clusterRole.allowReadAllResources=true
-   ```
-
-   or have the following added to you installation value files
-   ```
-    clusterRole:
-        allowReadAllResources: true
-   ```
 
    {{% /tab %}}
    {{< /tabs >}}
@@ -255,4 +249,5 @@ To collect custom resources, you need to configure both the Datadog Agent and se
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
 [3]: https://app.datadoghq.com/orchestration/explorer/pod
+[4]: /containers/kubernetes/installation?tab=datadogoperator
 
