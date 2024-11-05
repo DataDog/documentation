@@ -233,7 +233,7 @@ A continuación se muestra un lista completo de todas las etiquetas (tags) cread
 | zos.cics.connection.type                          | Tipo de conexión CICS                          |
 | zos.cics.ipconn_name                              | Nombre conexión IP de CICS                              |
 | zos.cics.net.peer.name                            | Nombre del par de red CICS                            |
-| zos.cics.nodejs_application_name                  | Nombre de la aplicación CICS NodeJS                  |
+| zos.cics.nodejs_application_name                  | Nombre de la aplicación CICS Node.js                  |
 | zos.cics.pipeline_name                            | Nombre del canal CICS                            |
 | zos.cics.region_name                              | Nombre de la región CICS                              |
 | zos.cics.session.id                               | ID de sesión CICS                               |

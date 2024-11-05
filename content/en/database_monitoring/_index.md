@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/"
   tag: "Blog"
   text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
+- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
+  tag: "Blog"
+  text: "Track and troubleshoot MongoDB performance"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -57,7 +60,6 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ### MongoDB
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in public beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 {{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 

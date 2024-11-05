@@ -1,4 +1,6 @@
-This processor generates either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and networks logs. Use the generate metrics processor to generate either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+
+**Note**: The metrics generated are [custom metrics][10031] and billed accordingly. See [Custom Metrics Billing][10032] for more information.
 
 To set up the processor:
 
@@ -11,14 +13,15 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 
  1. Enter a [filter query](#filter-query-syntax). Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
-1. In the **Define parameters** section, select the metric type (count, gauge, or distribution). See [Metrics Types](#metrics-types) for more information.
+1. In the **Define parameters** section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
     - For gauge and distribution metric types, select a log field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.
     - For the distribution metric type, the log field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
+    - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
 1. Click **Add Metric**.
 
 ##### Metrics Types
 
-You can generate these types of metrics for your logs. See the [Metrics Types][10031] and [Distributions][10032] documentation for more details.
+You can generate these types of metrics for your logs. See the [Metrics Types][10033] and [Distributions][10034] documentation for more details.
 
 | Metric type  | Description                                                                                                                                     | Example                                                                                             |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -26,5 +29,48 @@ You can generate these types of metrics for your logs. See the [Metrics Types][1
 | GAUGE        | Represents a snapshot of events in one time interval.                                                                                           | You want to measure the latest CPU utilization per host for all logs in the production environment. |
 | DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made.                           |
 
-[10031]: /metrics/types/
-[10032]: /metrics/distributions/
+##### Count metric example
+
+For this `status:error` log example:
+
+```
+{"status": "error", "env": "prod", "host": "ip-172-25-222-111.ec2.internal"}
+```
+
+To create a count metric that counts the number of logs that contain `"status":"error"` and groups them by `env` and `host`, enter the following information:
+
+| Input parameters | Value               |
+|------------------|---------------------|
+| Filter query     | `@status:error`     |
+| Metric name      | `status_error_total`|
+| Metric type      | Count               |
+| Group by         | `env`, `prod`       |
+
+##### Distribution metric example
+
+For this example of an API response log:
+
+```
+{
+    "timestamp": "2018-10-15T17:01:33Z",
+    "method": "GET",
+    "status": 200,
+    "request_body": "{"information"}",
+    "response_time_seconds: 10
+}
+```
+
+To create a distribution metric that measures the average time it takes for an API call to be made, enter the following information:
+
+| Input parameters       | Value                   |
+|------------------------|-------------------------|
+| Filter query           | `@method`               |
+| Metric name            | `status_200_response`   |
+| Metric type            | Distribution            |
+| Select a log attribute | `response_time_seconds` |
+| Group by               | `method`                |
+
+[10031]: /metrics/custom_metrics/
+[10032]: /account_management/billing/custom_metrics/
+[10033]: /metrics/types/
+[10034]: /metrics/distributions/
