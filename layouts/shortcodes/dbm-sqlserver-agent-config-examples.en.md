@@ -71,6 +71,32 @@ instances:
       history_row_limit: 10000
 ```
 
+### Collecting schemas
+To enable this feature, use the `schemas_collection` option.
+
+Use the `database_autodiscovery` option to avoid specifying each logical database. See the sample [sqlserver.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example) for more details.
+
+```yaml
+init_config:
+# This instance only collects data from the `users` database
+# and collects relation metrics only from the specified tables
+instances:
+ # This instance detects every logical database automatically
+  # and collects relation metrics from every table
+  - dbm: true
+        host: 'shopist-prod,1433'
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    connector: adodbapi
+    adoprovider: MSOLEDBSQL
+    database_autodiscovery:
+      enabled: true
+    schemas_collection:
+      enabled: true
+```
+
+Note: For schema collection on RDS instances, it is necessary to grant explicit connect access to the `datadog` user for each database on the instance. See [Grant the agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.
+
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
 In these cases, Datadog recommends limiting the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
