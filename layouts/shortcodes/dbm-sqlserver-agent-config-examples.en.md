@@ -72,7 +72,7 @@ instances:
 ```
 
 ### Collecting schemas
-To enable this feature, use the `schemas_collection` option. Schemas will be collected on databases for which the Agent has `CONNECT` access.
+To enable this feature, use the `schemas_collection` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
 
 **Note: For schema collection on RDS instances, it is necessary to grant explicit `CONNECT` access to the `datadog` user for each database on the instance. See [Grant the Agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.**
 
