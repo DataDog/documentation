@@ -75,7 +75,7 @@ Third Party allows you to forward alerts from an outside vendor or application. 
 
 Construct a search query using the same logic as a [Log Explorer search][1].
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
 Click **Add Query** to add additional queries.
 
@@ -87,13 +87,7 @@ Joining together logs that span a timeframe can increase the confidence or sever
 
 {{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
-The Detection Rules join the logs together using a group by value. The group by values are typically entities (for example, IP address or user), but can be any attribute.
-
-The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn't exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
-
-In this example, when greater than five failed logins and a successful login exist for the same `User Name`, the first case is matched, and a Security Signal is generated.
+The Detection Rules join the logs together using a `group by` value. The `group by` values are typically entities (for example, IP address or user), but can be any attribute.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -125,9 +119,9 @@ You can also identify users and entities using multiple values in a single query
 
 Construct a search query using the same logic as a Log Explorer search.
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP).
 
-Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
+Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
 **Note**: The query applies to all ingested logs.
 
@@ -213,6 +207,21 @@ A rule case contains logical operations (`>, >=, &&, ||`) to determine if a sign
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
 Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated.
+
+#### Example
+
+
+If you have a `failed_login` and `successful_login` query:
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+
+
+and a rule case that triggers when `failed_login > 5 && successful_login>0`:
+
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+
+The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+
+In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
 ### Severity and notification
 
