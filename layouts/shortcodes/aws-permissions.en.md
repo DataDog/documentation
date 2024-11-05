@@ -88,6 +88,7 @@ The following permissions included in the policy document use wild cards such as
                 "s3:GetBucketLogging",
                 "s3:GetBucketNotification",
                 "s3:GetBucketTagging",
+                "s3:ListAccessGrants",
                 "s3:ListAllMyBuckets",
                 "s3:PutBucketNotification",
                 "savingsplans:DescribeSavingsPlanRates",
