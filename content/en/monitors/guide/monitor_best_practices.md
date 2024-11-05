@@ -1,5 +1,5 @@
 ---
-title: Monitor Best Practice
+title: Monitor Best Practices
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -34,13 +34,13 @@ You have an e-commerce website, and to handle large volumes of traffic or proces
 
 ## Give context
 
-Adding context to a monitor transforms raw data into actionable insights. Context clarifies ownership and impact, helping users understand what the monitor affects.. Context also speeds up troubleshooting by providing a clearer picture of potential causes, allowing for better decision-making. In short, context makes monitoring more accurate, useful, and responsive to real-world conditions.
+Adding context to a monitor transforms raw data into actionable insights. Context clarifies ownership and impact, helping users understand what the monitor affects. Context also speeds up troubleshooting by providing a clearer picture of potential causes, allowing for better decision-making. In short, context makes monitoring more accurate, useful, and responsive to real-world conditions.
 
 Datadog has 3 features to enhance monitor context:
 
-* [**Metadata**][2]: Add priority, tag, and team information to alert notifications.. This context helps teams filter, prioritize, and route issues to the right people quickly. They help clarify the alert's nature and group related alerts. This makes managing and resolving alerts more efficient and effective.
+* [**Metadata**][2]: Add priority, tag, and team information to alert notifications. This context helps teams filter, prioritize, and route issues to the right people quickly. They help clarify the alert's nature and group related alerts. This makes managing and resolving alerts more efficient and effective.
 
-* [**Monitors tags**][3]: Organize, filter, and manage monitors across complex infrastructure by categorizing them based on attributes like environment, application, or team ownership. Tags make finding specific monitors easier and help focus on those relevant to a specific purpose or team.
+* [**Monitors tags**][3]: Organize, filter, and manage monitors by categorizing them based on attributes like environment, application, or team ownership. Tags make finding specific monitors easier and help focus on those relevant to a specific purpose or team.
 
 * [**Variables**][4]: Use variables in your monitor message to add precise context, providing dynamic, real-time details, such as the affected system, error message, or exceeded thresholds. This specificity makes notifications clearer and reduces the need for responders to search for additional information, allowing faster action. Variables also ensure consistency in the structure of alerts, which improves readability and response efficiency. 
 
@@ -48,13 +48,13 @@ Datadog has 3 features to enhance monitor context:
 
 To confirm if your monitors are well-configured, use [Monitor Quality][5]. It identifies monitors that need improvement based on predefined rules that catch common misconfigurations in monitoring setups. 
 
-For more information, see the Monitor Quality [Documentation][6].
+For more information, see the [Monitor Quality][6] documentation.
 
 ## Recommended Monitors
 
-If you are unsure where to start when creating a monitor, use Datadog's prebuilt [Recommended Monitors][7]. They provide guidelines on titles, notifications, metrics and thresholds.
+If you are unsure where to start when creating a monitor, use Datadog's pre-built [Recommended Monitors][7]. They provide guidelines on titles, notifications, metrics and thresholds.
 
-For more information, see the Recommended Monitors [Documentation][8].
+For more information, see the [Recommended Monitors][8] documentation.
 
 ## Further reading
 
