@@ -35,7 +35,7 @@ further_reading:
   tag: "Blog"
   text: "Best practices for monitoring and remediating connection churn"
 algolia:
-  tags: ['cnm', 'cloud network monitoring']
+  tags: ['Cloud Network Monitoring', 'Network Performance Monitoring', 'CNM', 'NPM']
 ---
 
 ## Overview
