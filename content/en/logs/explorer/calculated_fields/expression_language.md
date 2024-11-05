@@ -87,7 +87,7 @@ Rounds number down to the nearest integer.
 </details>
 
 
-<h4>max(<i>num</i> value [, <i>num</i> value, …])</h4>
+<h4>max(<i>num</i> value, [ <i>num</i> value, …])</h4>
 
 Finds maximum value amongst a set of numbers.
 
@@ -101,7 +101,7 @@ Finds maximum value amongst a set of numbers.
 </details>
 
 
-<h4>min(<i>num</i> value [, <i>num</i> value, …])</h4>
+<h4>min(<i>num</i> value, [<i>num</i> value, …])</h4>
 
 Finds the minimum value amongst a set of numbers.
 
@@ -132,7 +132,7 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 ### String
 
-<h4>concat(<i>str</i> value [, <i>expr</i> value, …])</h4>
+<h4>concat(<i>str</i> string [<i>str</i> string, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string.
 
@@ -270,7 +270,7 @@ Extracts a portion of text from the end of a string.
 </details>
 
 
-<h4>textjoin(<i>str</i> delimiter, <i>bool</i> ignore, <i>expr</i> value [, <i>expr</i> value, …])</h4>
+<h4>textjoin(<i>str</i> delimiter, <i>bool</i> ignore_empty, <i>str</i> string [<i>str</i> string, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string with a delimiter in between.
 
