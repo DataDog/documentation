@@ -18,6 +18,8 @@ Datastore is in Preview. Use this form to request access today.
 
 The Apps Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
 
+You can interact with a datastore using an app or a workflow, or you can use the UI in the Datadog App.
+
 ## Create a datastore
 
 To create a datastore:
@@ -28,6 +30,11 @@ To create a datastore:
 1. _Optionally_, to upload initial items to your datastore, drag and drop or browse and select a CSV file of your data. The CSV file must include a header row with a column that matches your Primary Key.
 1. Click **Create**.
 1. To see your datastore in the list, click **Refresh Results**.
+
+After you populate your datastore with data, you can:
+
+* Search the datastore by using the **Search** box in the header.
+* Click the name of a column to sor the datastore by that column's data.
 
 
 ## Edit a datastore
@@ -46,6 +53,11 @@ To use values from a datastore in a workflow or app:
 1. On the [Datastore page][1], locate your datastore in the list.
 1. In the header of your datastore, click the **Copy Datastore UUID** button.
 1. Use this UUID to reference your datastore in a workflow or app. Use the [Delete item][2], [Get item][3], [List items][4], or [Put item][5] actions and provide the UUID as your **Datastore ID**.
+
+
+## Delete a datastore
+
+To delete a datastore, click the **Trash (Delete Datastore)** icon in the header of the datastore you want to delete, then click **Confirm** to verify.
 
 
 ## Further reading
