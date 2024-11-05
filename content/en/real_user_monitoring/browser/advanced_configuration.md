@@ -351,7 +351,7 @@ To override default RUM view names so that they are aligned with how you've defi
 
 ### Set view name
 
-Use `setViewName(name: string)` API to update the name of the current view. This allows you to change the view name during the view without starting a new one.
+Use `setViewName(name: string)` to update the name of the current view. This allows you to change the view name during the view without starting a new one.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
