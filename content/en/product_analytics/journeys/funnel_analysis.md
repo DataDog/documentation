@@ -23,29 +23,36 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 - See if customers drop off at a certain point due to poor website performance
 - Track how the conversion rate changes over time as new features are built
 - Measure how adding new steps to a workflow impacts drop off rate
+- Add multiple views or actions to your steps by using wildcards (*) or combining them with OR to define user journeys
+- Filter individual steps in the funnel using any facet so that you can zoom in on notable views and actions
+- Track conversions over time with Timeseries, so you can gain insight into long-term trends
 
 **Note**: The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
+
 ## Build a funnel
 
 To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][1] and click **Funnel**.
 
-{{< img src="product_analytics/journeys/funnel_analysis/overview.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/build-a-funnel-1.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
 
-From this page, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+### Selecting step events
+
+From the Funnel page, choose at least two step events (view or action) and click on the plus icon to build additional steps.
+
+- To load the **most common views and actions** that users typically see and take next, click the input box for View/Action. This allows you to build funnels quicker knowing the paths your users are taking in sequence. This is also where you can **search** for any view/action.
+- To **combine two events** into one (you can mix and match views and actions), click the three dots to the right of an event.
+- To **delete an event**, click **Delete Event**.
+- When you have a starting point in mind, but aren't sure what your users did next, click the input box for a new View/Action.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
-
-### Suggested next steps
-
-When you have a starting point in mind, but aren't sure what your users did next, expand the **Quickly add a step** panel (available in a drawer on the right) to view suggested next steps. After inputting steps, this panel automatically loads the top five most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
-
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Build a funnel" style="width:90%;" >}}
 
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
+When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view or search the full list of available attributes.
+
+To **remove a filter**, click the filter, then the delete icon.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
 
@@ -62,6 +69,10 @@ The **Performance** section allows you to understand if poor performance could h
 The **User Behavior** section allows you to compare the average frustration count (from [frustration signals][6]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting. 
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
+
+## View conversions over time with Timeseries
+
+To 
 
 ## Share a funnel
 
