@@ -190,17 +190,14 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
-### Collect custom resources and custom resource definitions
+### Collect custom resources and CustomResourceDefinitions
 
-The [Orchestrator Explorer][3] collects custom resource definitions by default. These definitions appear in Datadog without any user configuration required.
+The [Orchestrator Explorer][3] collects CustomResourceDefinitions by default. These definitions appear in Datadog without any user configuration required.
 
 To collect custom resources, you need to configure both the Datadog Agent and set up indexing.
 
-1. Open [Orchestrator Explorer][3].
-1. On the left panel, under **Select Resources**, select **Kubernetes > Custom Resources > Resource Definitions**.
-1. Locate the custom resource definition that corresponds to the resource you want to collect. Click on the version under the **Versions** column.
-1. A dialog opens with instructions:
-   - **Agent Setup**
+1. Configure the Datadog Agent:
+
    {{< tabs >}}
    {{% tab "Helm Chart" %}}
 
@@ -217,9 +214,8 @@ To collect custom resources, you need to configure both the Datadog Agent and se
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
 
-   The Operator needs permission to collect custom resources. When you [install the Datadog Operator][4], add `--set clusterRole.allowReadAllResources=true` when you run `helm install`.
+   The Datadog Operator needs permission to collect custom resources. Install the Operator with an option that grants this permission:
 
-   For example:
    ```
    helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
    ```
@@ -228,18 +224,19 @@ To collect custom resources, you need to configure both the Datadog Agent and se
 
    ```
    features:
-       orchestratorExplorer:
-           customResources:
-               - <CUSTOM_RESOURCE_NAME>
+     orchestratorExplorer:
+       customResources:
+         - <CUSTOM_RESOURCE_NAME>
    ```
 
    Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
    {{% /tab %}}
    {{< /tabs >}}
-   - **Indexing Configuration**
 
-      Select the fields you want to index.
+1. In Datadog, open [Orchestrator Explorer][3].
+1. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
+1. Locate the custom resource definition that corresponds to the resource you want to collect. Click on the version under the **Versions** column.
 1. Select **Enable Indexing**
 
 ## Further reading
@@ -249,5 +246,5 @@ To collect custom resources, you need to configure both the Datadog Agent and se
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
 [3]: https://app.datadoghq.com/orchestration/explorer/pod
-[4]: /containers/kubernetes/installation?tab=datadogoperator
+[4]: https://app.datadoghq.com/orchestration/explorer/crd
 
