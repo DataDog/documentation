@@ -9740,6 +9740,20 @@ components:
       type: object
       x-merge-override:
         properties: false
+    GCPMetricNamespaceConfig:
+      description: Configuration for a GCP metric namespace.
+      properties:
+        disabled:
+          default: false
+          description: When disabled, Datadog does not collect metrics that are related
+            to this GCP metric namespace.
+          example: true
+          type: boolean
+        id:
+          description: The id of the GCP metric namespace.
+          example: aiplatform
+          type: string
+      type: object
     GCPSTSDelegateAccount:
       description: Datadog principal service account info.
       properties:
@@ -9844,6 +9858,14 @@ components:
             account.'
           example: true
           type: boolean
+        metric_namespace_configs:
+          description: Configurations for GCP metric namespaces.
+          example:
+          - disabled: true
+            id: aiplatform
+          items:
+            $ref: '#/components/schemas/GCPMetricNamespaceConfig'
+          type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
