@@ -59,8 +59,8 @@ If you have teams with existing members, picking the SAML strict option override
 A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-handle>` or `teams:<team-handle>`. 
 
 To find a team handle:
-1. Click the team's name in the team directory page. A side panel appears with team details.
-1. Look for the **handle** field at the top of the panel. 
+1. Click the team's name in the team directory page. The team detail page appears.
+1. The team handle appears to the right of the name, at the top of the page.
 
 To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below. 
 
