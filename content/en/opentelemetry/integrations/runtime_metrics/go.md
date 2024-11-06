@@ -7,8 +7,6 @@ type: multi-code-lang
 code_lang_weight: 30
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ## Prerequisites
 
 - You are successfully [sending OpenTelemetry metrics to Datadog][1].

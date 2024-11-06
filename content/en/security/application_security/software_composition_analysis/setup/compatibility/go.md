@@ -5,8 +5,6 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ## Application Security capabilities
 
 The following application security capabilities are supported in the Go library, for the specified tracer version:
@@ -65,6 +63,7 @@ The Go packages listed in this page are relevant for Application Security capabi
 | [Gorilla Mux][8] | {{< X >}} | {{< X >}} |
 | [gRPC][11]          | {{< X >}} | {{< X >}} |
 | [echo v4][9]     | {{< X >}}  | {{< X >}} |
+| [echo v3][10]     | {{< X >}} | {{< X >}} |
 | [chi][12] | {{< X >}} | {{< X >}} |
 | [graphql-go][17] | {{< X >}} | {{< X >}} |
 | [gqlgen][18] | {{< X >}} | {{< X >}} |
@@ -88,14 +87,15 @@ The Go packages listed in this page are relevant for Application Security capabi
 [3]: https://github.com/DataDog/dd-trace-go#support-policy
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance
 [5]: https://www.datadoghq.com/support/
-[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
-[7]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2
-[8]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
-[9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
-[11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2
-[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
-[13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
-[14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
+[8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
+[9]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
+[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
+[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
+[13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
+[14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
 [15]: https://github.com/golang/go/wiki/cgo
 [16]: /tracing/compatibility_requirements/go
 [17]: https://pkg.go.dev/github.com/graphql-go/graphql

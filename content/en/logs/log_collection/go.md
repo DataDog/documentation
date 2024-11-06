@@ -26,8 +26,6 @@ further_reading:
   text: 'Glossary entry for "tail"'  
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 To send your Go logs to Datadog, log to a file and then [tail][11] that file with your Datadog Agent. You can use the following setup with [logrus][1], an open source logging library.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON to avoid the need for [custom parsing rules][2].

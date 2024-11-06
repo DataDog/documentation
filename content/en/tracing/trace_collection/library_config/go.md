@@ -7,7 +7,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Source code"
-- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Package page"
 - link: "/tracing/glossary/"
@@ -21,8 +21,6 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
@@ -35,7 +33,7 @@ You may also elect to provide `env`, `service`, and `version` through the tracer
 package main
 
 import (
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
@@ -183,7 +181,7 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [6]: /tracing/configure_data_security#telemetry-collection
@@ -192,7 +190,7 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [9]: https://github.com/openzipkin/b3-propagation
 [13]: /agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
-[15]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
+[15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
 [17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/

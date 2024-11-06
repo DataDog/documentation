@@ -22,8 +22,6 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted %}}
@@ -35,7 +33,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
 
    ```console
-   $ go get -v -u github.com/DataDog/dd-trace-go/v2
+   $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
 
 2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.
