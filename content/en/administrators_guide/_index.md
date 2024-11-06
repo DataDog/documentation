@@ -4,11 +4,11 @@ description: Setup and install Datadog as an administrator to avoid pit-falls do
 further_reading:
 - link: "/getting_started/application/"
   tag: "Documentation"
-  text: "Getting Started with Datadog"
+  text: "Learn more about the capabilities available on the Datadog."
 ---
 
 
-Use this Datadog Administrators guide when your company has purchased Datadog and you are ready to leverage the observability platform to gain visibility into the health and performance of your underlying infrastructure, supporting services, and applications. It can be challenging to determine where to start and how to best configure Datadog for your needs. This guide offers suggestions to help you make the most out of Datadog, tailored to your unique needs, particularly for designing, installing, and managing an enterprise-grade installation of Datadog. As an extension of the main Datadog
+Use this Datadog Administrators guide when your company has purchased and is ready to leverage Datadog's observability platform. This guide helps you make the most out of Datadog to gain visibility into the health and performance of your underlying infrastructure, supporting services, and applications. It provides suggestions for designing, installing, and managing an enterprise-grade installation of Datadog, tailored to your needs. As an extension of the main 
 [documentation][1], this guide offers best practices, guidance, and examples to help you set up a production environment that matches your workloads and installation needs.
 
 After using this guide to install Datadog to scale with your organization, you can manage your installation efficiently without worrying about hardware refreshes, operating system patches, server updates, or cluster rebalance details. Instead, you can focus on the benefits of a full observability system, such as:
@@ -34,13 +34,13 @@ This guide is organized into three sections that provide important concepts, pla
 
 ## Next Steps
 
-Throughout this guide you will learn how to maximize the value of Datadog by exploring a knowledge-base, experiment with the product, and create an installation design. To get started using the Datadog Administrator's Guide, review the [Getting Started][5] page to view information on interacting with Datadog Support, sign up for free Datadog training courses, and learn how to create a test environment.
+Throughout this guide you will learn how to maximize the value of Datadog by exploring a knowledge base, experimenting with the product, and creating an installation design. To get started using the Datadog Administrator's Guide, review the [Getting Started][5] page for information on interacting with Datadog Support, signing up for free Datadog training courses, and learning how to create a test environment.
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/administrators_guide/getting_started">}}<u>Getting Started</u>: Learn how to send a Flare to Support, sign up for Datadog Training courses, and build a test environment.{{< /nextlink >}}
-  {{< nextlink href="/administrators_guide/plan">}}<u>Plan</u>: Plan your Datadog installation by creating a sizing profile, develop general and best practices, and optimize data collection. {{< /nextlink >}}
-  {{< nextlink href="/administrators_guide/build">}}<u>Build</u>: Build your Datadog environment by prioritizing features, develop an internal support system, and provision your architecture.  {{< /nextlink >}}
-  {{< nextlink href="/administrators_guide/run">}}<u>Run</u>: Maintain and run your Datadog installation by creating Dashboards, onboard new infrastructure, and perform Datadog Agent upgrades.{{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/plan">}}<u>Plan</u>: Plan your Datadog installation by creating a sizing profile, developing general and best practices, and optimizing data collection. {{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/build">}}<u>Build</u>: Build your Datadog environment by prioritizing features, developing an internal support system, and provisioning your architecture. {{< /nextlink >}}
+  {{< nextlink href="/administrators_guide/run">}}<u>Run</u>: Maintain and run your Datadog installation by creating Dashboards, onboarding new infrastructure, and performing Datadog Agent upgrades.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

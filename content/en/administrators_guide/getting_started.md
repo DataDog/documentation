@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-When planning any new software installation, it's crucial to understand its capabilities, objectives, timelines, teams, and design pattern. Throughout the plan phase you will learn some Datadog basics, define your most important objectives, understand several best practices, and identify how to optimize your Datadog installation. 
+This Getting Started guide provides strategies for implementing Datadog effectively within your organization. View resources for getting help, learning about Datadog through Learning Center courses, and for creating a test environment. 
 
 ## Getting help
 
@@ -27,13 +27,13 @@ As you go along in this guide, you can refer to the following self-service resou
 
 To get support when you've run into a problem:
 
-* [Datadog Support][20] is available to help with difficult issues, to guide your installation, to translate them into local conditions, to identify bugs, and to log feature requests.
-* For an automated interaction with Datadog support, use Datadog Agent flare, which is a CLI tool that creates a new support ticket and sends a zipped file of automatically redacted relevant log files, debug level settings, and local configs, to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][21].  
-* Additionally, [Fleet Automation][5] can generate a flare remotely, from within the Platform UI.
+* [**Datadog Support**][20]: Available to help with difficult issues, guide your installation, translate issues into local conditions, identify bugs, and log feature requests.
+* [**Datadog Agent flare**][21]: This CLI tool automatically creates a new support ticket and sends a zipped file of redacted relevant log files, debug level settings, and local configs, to Datadog support, no login required. For information on how to use and send the flare to Datadog support, see [sending a flare][21].  
+* [**Fleet Automation**][5]: Allows remote flare generation from the Platform UI.
 
 ## Learn Datadog basics
 
-Get up to speed with the parts of Datadog that are most important to your use-case. Start with enrolling in our free [Learning Center][1] courses. Incorporate the following courses into your onboarding workflows:
+Get up to speed with the parts of Datadog that are most important to your use case. Start by enrolling in our free [Learning Center][1] courses. Incorporate the following courses into your onboarding workflows:
 
 **Getting started**:
 {{< whatsnext desc=" " >}}
@@ -72,7 +72,7 @@ Get up to speed with the parts of Datadog that are most important to your use-ca
 
 ## Create a test environment
 
-After taking some courses, start applying what you learned to your own local conditions. Spend some time installing and experimenting with Datadog in a low-risk sandbox, to help familiarize yourself with the environment. Create a straightforward and accessible environment to develop your monitoring setup before broader installation. 
+After completing some courses, apply what you've learned to your local conditions. Install and experiment with Datadog in a low-risk sandbox, to become familiar with the environment. Create a straightforward and accessible environment to develop your monitoring setup before broader installation. 
 
 ### Configuring your test environment
 
@@ -100,7 +100,7 @@ Here are a few examples:
 
 ## Next Steps
 
-To successfully create a new Datadog installation, review the [plan][11] page to learn how to create a scoping exercise, setup [resource tagging][12], learn some product best practices, add some additional products, and optimize your data collection to ensure a smooth installation.
+To successfully create a new Datadog installation, review the [plan][11] page. You'll learn how to create a scoping exercise, set up [resource tagging][12], learn about product best practices, add more products, and optimize your data collection to ensure a smooth installation.
 
 ## Further Reading
 

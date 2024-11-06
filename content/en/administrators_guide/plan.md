@@ -18,7 +18,7 @@ When you plan a new software installation, its crucial to understand its capabil
 
 ### Scoping exercise
 
-Setting a clear goal is critical for installing Datadog. However, in a practical world, it is not possible to know everything you might need at the outset. Product engineers iterate their roll-outs, and systems operators control their changes, all to control risk. Installing a large-scale Datadog installation will benefit from the application of standard project management practices. As part of that process, there are certain Datadog elements that you should include. Send your engineering organization a survey outline to size and whiteboard your needs.
+Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. Send your engineering organization a survey outline to size and whiteboard your needs.
 
 **Recommendations:**   
 Start collecting and consolidating a survey of your organization early. Create a comprehensive view of your ecosystems, application languages, data storage, networking, and infrastructure.
@@ -42,13 +42,13 @@ Complete the scoping exercise to understand the types of technologies you're wor
 
 ### Resource tagging 
 
-Datadog is a tool for correlating machine data, the application that's running on it, and its physical descriptors. It can cross-reference an individual piece of data against any other piece, regardless of type. For example, query data on database hosts can be compared to worker thread pool size on web server hosts, with all the logs from both hosts displayed in-line. 
+Datadog is a tool for correlating machine data with the running applications and its physical descriptors. It can cross-reference an individual piece of data against others, regardless of type. For example, compare query data on database hosts with web server host worker thread pool sizes, displaying logs from both hosts in-line.
 
 Hostname, cloud regions, operating system version, and IP are just some of the automatically applied resource attributes. Additionally, Datadog allows you to generate custom tags such as cost-code, AppName, environment, and version.
 
-Datadog's strength lies in its capability to maintain and manage a unified vocabulary. The platform also includes built-in data. [Unified Service Tagging][1] consists of reserved tags that enable telemetry correlation across all features of the Datadog Platform.
+Datadog's strength lies in its capability to maintain and manage a unified vocabulary and includes built-in data features. [Unified Service Tagging][1] uses reserved tags that enable telemetry correlation across all features of the Datadog Platform.
 
-Tags are `key:value` pairs or simple values. They add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, it's important to take advantage of the tagging capabilities that your platforms offer as Datadog automatically imports these tags through its integrations. The following table is a representation of how `key:value` pairs work and whether the tags are added automatically or manually.
+Tags are `key:value` pairs or simple values. They add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, take advantage of the tagging capabilities that your platforms offer, as Datadog automatically imports these tags through its integrations. The following table is a representation of how `key:value` pairs work and whether the tags are added automatically or manually.
 
 | TAG                  | KEY            | VALUE         |  METHOD     |
 |----------------------|----------------|---------------| ---------------|
@@ -57,7 +57,7 @@ Tags are `key:value` pairs or simple values. They add dimension to application p
 | region:us-west-1 | region | us-west-1      | automatic
 
 
-The Getting [Getting started with tagging][2] guide is a great place to start with this topic. Here are some additional highlights:
+The [Getting started with tagging][2] guide is a great place to start with this topic. Here are some additional highlights:
 
 - A service is defined as a single application footprint, something that can be deployed independently.
 - Tag values must be consistent. For example  "Production" is different from "Prod".
@@ -66,7 +66,7 @@ The Getting [Getting started with tagging][2] guide is a great place to start wi
 **Recommendations**:  
 
 - As early as possible, understand [Datadog Unified Service Tagging][2] and develop your tagging scheme.
-- Align your infrastructure with your collected tags and automate the tagging process where possible (for example, use git hash values from CI pipelines as version tags through Kubernetes labels). This unifies your data, allowing you you to pivot between service metrics, logs, and traces, and assign [owners to services][72] to to create informative alerts.
+- Align your infrastructure with your collected tags and automate the tagging process where possible (for example, use git hash values from CI pipelines as version tags through Kubernetes labels). This unifies your data, allowing you to create informative alerts by assigning [owners to services][72] and to pivot between service metrics, logs, and traces.
 
 The following diagram depicts how each of the three reserved tags may look as you are building out your environment:
 
@@ -78,18 +78,18 @@ At the architectural design level, there are two main areas of access control wi
 
 #### RBAC
 
-Datadog role-based access control can connect to your existing SAML authentication service. SAML group-mappings can be built against the Datadog default roles and team objects. Datadog provides three default roles, which you can augment to model the complexity of your own AD/LDAP Roles. You can also set up [service accounts][6] for non-interactive purposes like [API and App Key][7] ownership, separating user activity from system tasks. Granular permissions set the access and protections you need.  
+Datadog role-based access control can connect to your existing SAML authentication service. SAML group-mappings can be built against the Datadog default roles and team objects. Datadog provides three default roles, which you can customize to match the complexity of your own AD/LDAP Roles. You can also set up [service accounts][6] for non-interactive purposes like [API and App Key][7] ownership, to separate user activities from system tasks. Granular permissions set the access and protections you need.  
 
-As an additional layer, [Teams][8] lets you set up flexible, informal, and ad-hoc groups that users can join or be added to. The notion of Teams carries throughout Datadog products.
+As an additional layer, [Teams][8] lets you set up flexible, informal, and ad-hoc groups that users can join or be added to. The Teams feature is available throughout Datadog products.
 
 #### Multi-Organizational Structure
 
-Larger Datadog customers often have more than one Datadog installation. This is typically used by managed service providers that have customers which should not have access to each others' data. In some cases, full isolation within a single company is necessary. To accommodate this topology, [multiple organizational accounts][5] can be managed together, for example, so you can view total usage at the parent level, while remaining completely separate technologically. Child organizations should be managed from a single parent organization account. 
+Larger Datadog customers often have more than one Datadog installation. This is typically used by managed service providers to ensure that their customers do not have access to one another's data. In some cases, full isolation within a single company is necessary. To accommodate this topology, you can manage [multiple organizational accounts][5]. For example, you can view total usage at the parent level, while remaining completely separate technologically. Child organizations should be managed from a single parent organization account. 
 
 **Recommendations:**
 
 - Establish a specific plan for building out Datadog user roles.    
-- Leverage service accounts for API key administration
+- Leverage service accounts for API key administration.
 - Explore Teams to link resources such as dashboards, services, monitors, and incidents to a group of users.
 
 ## Product best practices
@@ -97,15 +97,15 @@ Larger Datadog customers often have more than one Datadog installation. This is 
 ### APM
 
 APM depends on the application of Unified Service Tagging. These tags are pivotal to the operational experience, and are also useful for enabling correlation across your telemetry data. This is how Datadog can help determine the owner for a random Java process it discovers.  
-Usually, the default APM setup is sufficient for most use cases, but if for example you want to change sampling rates or to customize other APM configurations:    
+Usually, the default APM setup is sufficient for most use cases, but if, for example, you want to change sampling rates or to customize other APM configurations:    
 
 **Recommendations:** 
 - Identify the services to instrument and determine whether they are host-based, containerized, or serverless.
 - Determine the method available for instrumenting your services in Datadog, depending on the language used or their runtime environment. These methods range from single-step to manual instrumentation.
 - Review the [ingestion controls][9] documentation.  
-- Configure your sampling rate with [Remote Configuration][10] to scale your organization's trace ingestion according to your needs, without needing to restart your Agent. See [sampling rate use cases][11] for more information.  
+- Configure your sampling rate with [Remote Configuration][10] to scale your organization's trace ingestion according to your needs, without needing to restart your Agent. For more information, see [sampling rate use cases][11].  
 - Ensure [Unified Service Tagging][12] is applied, and review [span tag semantics][13].
-- Opt in to [inferred service dependencies][51] to allow your service names to be automatically detected from span attributes.
+- Opt in to [inferred service dependencies][51] to enable automatic detection of your service names from span attributes.
 
 ### Log Management
 
@@ -130,7 +130,7 @@ The logging platform can be configured with many layers of logs storage. Each ha
 With these base functions, you can ingest and monitor logs for some of the following use-cases:
 
 Log format normalization  
-: Centralized control of date/time, value replacement, and referenced lookup
+: Centralized control of date/time, value replacement, and referenced lookup.
 
 Global Sensitive Data and Personally Identifiable Information (PII) Management
 : Personally Identifiable Information (PII) and Sensitive Data Scanner (SDS) are scrubbed first.
@@ -145,17 +145,17 @@ Global log archive
 : Catch-all log archiver.  
 
 Global SIEM 
-: All logs are tested for security at ingestion as a pre-processor
+: All logs are tested for security at ingestion as a pre-processor.
 
 **Recommendations:**  
 - Determine the method to ship your logs to Datadog, either directly to the Datadog logs URL intake endpoints, or from tools like Fluentbit, Syslog, or Logstash. 
-- Fine-tune your log ingestion plan and review best practices for log management
+- Fine-tune your log ingestion plan and review best practices for log management.
 - Understand [Logging without Limits][14]™ Identify the status of your most logged services, observe high volume logging patterns, and create log pattern exclusion filters.
 - Configure [log archives][16].
 
 ### Real User Monitoring
 
-Real User Monitoring and Session Replay give granular insights into what an end-user of your service or application is experiencing. Install RUM on applications with high value sessions, where the data can be used to make meaningful changes. Session Replay provides a visual representation that is invaluable for troubleshooting issues observed by users. You can track actual customer experience, and is most valuable in production environments.    
+Real User Monitoring and Session Replay give detailed insights into the experiences of your service or application end-user. Install RUM on applications with high value sessions to leverage the data for meaningful changes. Session Replay provides a visual representation that is invaluable for troubleshooting issues observed by users. You can track the actual customer experience, which is most valuable in production environments.    
 
 **Recommendations:** 
 
@@ -166,30 +166,30 @@ Real User Monitoring and Session Replay give granular insights into what an end-
 
 ### Synthetic monitoring
 
-Synthetic Monitoring is a full synthetic testing suite, including testing for browser applications, mobile apps, and APIs. Synthetic test results can be linked back to the application behavior it generated, and from there, into the database, message queues, and downstream services.  
+Synthetic Monitoring is a full synthetic testing suite, which includes testing for browser applications, mobile apps, and APIs. Synthetic test results can be linked back to the application behavior it generated, and from there, into the database, message queues, and downstream services.  
 
 **Recommendations:**
 
 - Identify the API endpoints and user journeys that are central to your business and test those frequently.
 - Develop a roadmap of business transactions to test.
 - Use Synthetics in conjunction with [APM and RUM][49].
-- Review [Synthetics Consumption Considerations][23]  
-- Reduce test maintenance by using [sub-tests][24].
+- Review [Synthetics Consumption Considerations][23].
+- Reduce test maintenance by using [subtests][24].
 - Make intentional choices in test location selection. Test from where your customers actually are.     
 - Use the [HTTP Check][25] or [TCP check][50] to monitor SSL certificate expiration or basic uptime.  
 
 ## Integrations
 
-You can use some of Datadog's {{< translate key="integration_count" >}} + integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system.The integrations, either SaaS-based or Agent-based, collect metrics for monitoring within Datadog. Host-based integrations are configured with yaml files that live in the conf.d directory, and container-based integrations are configured with metadata such as annotations or labels. 
+You can use Datadog's {{< translate key="integration_count" >}}+ integrations to bring together all of the metrics and logs from your infrastructure, to gain insights into an entire observability system. The integrations, either SaaS-based or Agent-based, collect metrics to monitor within Datadog. Host-based integrations are configured with yaml files that live in the `conf.d` directory, and container-based integrations are configured with metadata such as annotations or labels. 
 
 There are different types of integrations in Datadog, and the order in which they are presented here is the order Datadog recommends for their installation.
 
 | Category                                      | Description                                                                                                                                                                                                                                   |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Cloud Technologies ([AWS][52], [Google Cloud][53], [Azure][54], etc)  | These integrations use provisioned credentials to scrape monitoring endpoints for metrics. Fine-tune these to ingest only desired telemetry.                                                                                                  |
-| Incident Response ([Slack][55], [Jira][56], [PagerDuty][57], etc)     | These integrations send notifications when events occur and are vital for establishing an efficient alerting system.                                                                                                                          |
+| Cloud Technologies ([AWS][52], [Google Cloud][53], [Azure][54])  | These integrations use provisioned credentials to scrape monitoring endpoints for metrics. Fine-tune these to ingest only desired telemetry.                                                                                                  |
+| Incident Response ([Slack][55], [Jira][56], [PagerDuty][57])     | These integrations send notifications when events occur and are vital for establishing an efficient alerting system.                                                                                                                          |
 | Infrastructure ([orchestration][58], [operating system][59], [network][60]) | These integrations serve as the foundational components for monitoring your infrastructure, gathering both metrics and logs.                                                                                                               |
-| Data Layers ([data stores][61], [message queues][62], etc)      | These integrations usually query internal DB metrics tables, so this usually requires a database administrator to provide access for the Agent.                                                                                              |
+| Data Layers ([data stores][61], [message queues][62])      | These integrations usually query internal DB metrics tables, so this usually requires a database administrator to provide access for the Agent.                                                                                              |
 | Development ([automation][63], [languages][64], [source control][65]) | These integrations push metrics to Datadog and require configuration on their end. Some may require DogStatsD to ship metrics.                                                                                                               |
 | Security and Compliance ([Okta][66], [Open Policy Agent][67])   | These integrations enable you to verify compliance with your standards.                                                                                                     |
 
@@ -221,9 +221,9 @@ Datadog infrastructure monitoring comes with  additional products that you can u
 
 ### Service Catalog
 
-[Service catalog][30] shows at glance which of your services were deployed most recently, or have not been deployed for a long time. which services are reporting the most errors, and whether they have on-going incidents, and much more.
+[Service catalog][30] shows at glance which services were deployed most recently, or have not been deployed for a long time, which services are reporting the most errors, and whether they have on-going incidents, and much more.
 
-Service Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you may check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
+Service Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
 
 {{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
 
@@ -231,9 +231,9 @@ You can add components that you aren't planning on monitoring immediately, such 
 
 ### Resource Catalog
 
-Use the [Resource Catalog][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. It is the central hub of all of your infrastructure resources. Resource Catalog offers visibility into infrastructure compliance, facilitating good tagging practices, reducing application risks by identifying security vulnerabilities, providing engineering leadership with a high-level view of security practices, and allowing resource export for record-keeping or auditing.
+Use [Resource Catalog][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. It is the central hub of all of your infrastructure resources. Resource Catalog offers visibility into infrastructure compliance, promotes good tagging practices, reduces application risks by identifying security vulnerabilities, provides engineering leadership with a high-level view of security practices, and allows resource export for record-keeping or auditing.
 
-You can use the Resource Catalog in a variety of contexts, including:
+You can use Resource Catalog in a variety of contexts, including:
 
 - Understanding the team ownership of resources and finding orphaned ones to clean up.
 - Planning upgrades of resources that are running deprecated versions.
@@ -260,11 +260,11 @@ Centrally administer and manage all of your Datadog Agents with [Fleet Automatio
 
 ### Remote Configuration
 
-Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. See [supported products and capabilities][36] for more information.
+Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
 
 ### Notebooks 
 
-Use Datadog [Notebooks][37] to share with team members to aid in troubleshooting investigations or incidents.
+Use Datadog [Notebooks][37] to share information with team members and to aid troubleshooting investigations or incidents.
 
 ## Optimizing data collection 
 
@@ -276,11 +276,11 @@ Datadog interacts with the monitoring API of HyperVisor managers (Hyper-V, vSphe
 
 **Recommendations**:   
 
-Enable resource collection for [AWS][39] and [GCP][44] to view an inventory of resources, as well as cost and security insights. Additionally, limit metric collection for your [Azure resources][40] and also in your [containerized][45] environments.
+Enable resource collection for [AWS][39] and [GCP][44] to view an inventory of resources, as well as cost and security insights. Additionally, limit metric collection for your [Azure resources][40] and your [containerized][45] environments.
 
 ## Service Tiers
 
-During the planning phase, it is common to realize that not every instance of observability is as important as others. Some footprints are mission-critical, while others are not. For this reason, it is useful to devise patterns for coverage levels, and which environments you want to monitor with Datadog. For example, a production environment might be monitored at every level, but a development instance of the same application might only have the developer-focused tooling.
+During the planning phase, you may find that not all instances of observability are equally important. Some are mission-critical, while others are not. For this reason, it is useful to devise patterns for coverage levels, and which environments you want to monitor with Datadog. For example, a production environment might be monitored at every level, but a development instance of the same application might only have the developer-focused tooling.
 
 **Recommendations**:
 
@@ -288,7 +288,7 @@ During the planning phase, it is common to realize that not every instance of ob
 
 ### Software Development Lifecycle
 
-To begin mapping out your installation patterns, use the information you gathered from the [scoping exercise](#scoping-exercise), combine it with the [Datadog 101][7] training, and develop a plan of action. Consider the following example, and modify it  to suit your organization's needs.The example outlines an installation pattern from the dimension of SDLC environment (dev, qa, stage, prod), and you can customize it to your standards and conditions. Begin setting expectations within your own Datadog user base what "Standard Datadog installation" means. 
+To begin mapping out your installation patterns, combine the information you gathered from the [scoping exercise](#scoping-exercise) with the [Datadog 101][7] training, and develop a plan of action. Consider the following example, and modify it to suit your organization's needs. The example outlines an installation pattern from the dimension of SDLC environment (dev, qa, stage, prod), and you can customize it to your standards and conditions. Begin setting expectations within your own Datadog user base what "Standard Datadog installation" means. 
 
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
@@ -301,11 +301,11 @@ To begin mapping out your installation patterns, use the information you gathere
 |  |  |  |  |  |
 
 **Recommendations** :
-Not every tool is fit for every job. Evaluate the Datadog product use cases, and specifically match them to your needs. Consider the levels of SDLC, application importance, and Datadog product purpose.
+Not every tool suits every job. Evaluate Datadog's product use cases and match them with your needs. Consider the SDLC levels, application importance, and the purpose of each Datadog product.
 
 ## Summary
 
-It is important to develop and plan a realistic course through the installation of Datadog. In this section you learned the planning and best practices phase, and at this stage, your Datadog footprint is set up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned some optimizations, and compiled a list of best practices for some of our core products. These foundations assist you in the next phases of Datadog installation: build and run.  
+It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the the next phases of Datadog installation: build and run.  
 
 ## Next Steps
 
@@ -327,7 +327,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [7]: https://docs.datadoghq.com/account_management/api-app-keys/
 [8]: https://docs.datadoghq.com/account_management/teams/
 [9]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/
-[10]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/\#managing-ingestion-for-all-services-at-the-agent-level
+[10]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [11]: https://docs.datadoghq.com/tracing/guide/ingestion_sampling_use_cases/
 [12]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [13]: https://docs.datadoghq.com/tracing/trace_collection/tracing_naming_convention/
