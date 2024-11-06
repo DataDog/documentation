@@ -89,10 +89,11 @@ The following is a list of bootstrap options, their related pipeline environment
 :
 : An example proxy configuration:
 : &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
-: <b>Note</b>: The `DD_PROXY_HTTP(S)` and `HTTP(S)_PROXY` environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.
 : **Description**: The Observability Pipelines Worker can route external requests through forward proxies, such as Squid. Forward proxies forward client requests from the Observability Pipelines Worker to the internet. You might use them as a web firewall to forbid or allow certain domains, ports, or protocols. Forward proxies usually do not terminate SSL and therefore do not have access to the request content. They only pass packets back and forth between the client and the destination. [HTTP tunnels][5] are used to secure communication through a forward proxy.
-: This option is available for Observability Pipelines Worker 2.1 and later.
-: **Note**: The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.
+: **Notes**:
+: <li style="list-style-type: '- '">This option is available for Observability Pipelines Worker 2.1 and later.</li>
+: <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
+: <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
 
 ## Further reading
 
