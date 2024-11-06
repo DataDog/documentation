@@ -2,47 +2,46 @@ const { typesenseSync } = require('typesense-sync');
 const { saveSettings } = require('typesense-sync/settings');
 const config = require('../../../typesense.config.json');
 const fs = require('fs')
-const CONFIG_UPDATED = process.env.CONFIG_UPDATED || true;
+const TYPESENSE_CONFIG_UPDATED = process.env.TYPESENSE_CONFIG_UPDATED || false;
 
-console.log(CONFIG_UPDATED)
-if (CONFIG_UPDATED) {
-    console.log('config updated')
+if (TYPESENSE_CONFIG_UPDATED) {
+    saveSettings()
+        .then(() => indexSite())
+        .then(() => console.log('Typesense sync completed'))
+        .catch(error => console.log('An error occurred', error))
 } else {
-    console.log('no config update')
+    indexSite()
+        .then(() => console.log('Typesense sync completed'))
+        .catch(error => console.log('An error occurred', error))
 }
 
-// saveSettings()
-//     .then(() => index())
-//     .then(() => console.log('Typesense sync completed'))
-//     .catch(error => console.log('An error occurred', error))
+const indexSite = async () => {
+    const promises = []
 
-// const index = async () => {
-//     const promises = []
+    // nightly build pipeline syncs all records in Typesense, all others index english records only.
+    // this is a performance improvement as docs scales.
+    if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
+        const fullSearchIndex = require('../../../public/search.json')
+        const destFilePath = './public/english_search.json'
+        const docsAlias = 'docs_alias'
+        const filterLanguage = 'en'
+        const englishOnlySearchIndex = fullSearchIndex.filter(record => record.language === "en")
 
-//     // nightly build pipeline syncs all records in Typesense, all others index english records only.
-//     // this is a performance improvement as docs scales.
-//     if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
-//         const fullSearchIndex = require('../../../public/search.json')
-//         const destFilePath = './public/english_search.json'
-//         const docsAlias = 'docs_alias'
-//         const filterLanguage = 'en'
-//         const englishOnlySearchIndex = fullSearchIndex.filter(record => record.language === "en")
+        fs.writeFile(destFilePath, JSON.stringify(englishOnlySearchIndex), (err) => {
+            if (err) {
+                console.error(err)
+                return
+            }
 
-//         fs.writeFile(destFilePath, JSON.stringify(englishOnlySearchIndex), (err) => {
-//             if (err) {
-//                 console.error(err)
-//                 return
-//             }
+            // If we add more collections this will have to change to be iterative
+            promises.push(typesenseSync(docsAlias, destFilePath, filterLanguage))
+        })
+    } else {
+        for (const collection of config.collections) {
+            console.log(`Indexing collection ${collection.name}`)
+            promises.push(typesenseSync(collection.name, collection.file_path))
+        }
+    }
 
-//             // If we add more collections this will have to change to be iterative
-//             promises.push(typesenseSync(docsAlias, destFilePath, filterLanguage))
-//         })
-//     } else {
-//         for (const collection of config.collections) {
-//             console.log(`Indexing collection ${collection.name}`)
-//             promises.push(typesenseSync(collection.name, collection.file_path))
-//         }
-//     }
-
-//     return await Promise.all(promises)
-// }
+    return await Promise.all(promises)
+}
