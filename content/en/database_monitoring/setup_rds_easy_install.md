@@ -20,6 +20,6 @@ Datadog uses AWS ECS to deploy the Agent to the RDS instance.
 1. If you don't have an ECS cluster installed for your account and region, click **Create Cluster**.
 1. Select a security group from the **Security Group** dropdown list.
 1. Click **Select API Key**, select an API key from the list, and then click **Use API Key**.
-1. Click **Launch CloudFormation Stack in AWS Console**.
+1. Click **Launch CloudFormation Stack in AWS Console**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the configuration required to deploy the Agent to monitor your RDS instance.
 
 [1]: https://app.datadoghq.com/databases/setup
