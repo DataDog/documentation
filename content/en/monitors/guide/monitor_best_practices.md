@@ -21,13 +21,13 @@ This guide walks you through the key aspects of building an effective monitor:
 
 By following these principles, you'll create a monitor that delivers meaningful insights and supports proactive decision-making.
 
-## What is the monitor?
+## Write a clear title
 
-The [Manage Monitor][1] page displays the monitor's title, monitor's tags, and its status. Having a  clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance.
+The [Manage Monitor][1] page displays the monitor's title, monitor’s tags and team, and other fields that you can find [**here**][2]. Having a  clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance. Please keep in mind that the monitor’s title and the notification subject are the same, so we suggest avoiding having too many variables in it.
 
 ## Use multi-alert
 
-To avoid redundant monitors (such as multiple similar monitors with just 1 filter changing), Datadog recommends using multi-alert monitors. When you use a "group by" in your query, multi-alerts automatically apply the alert to each source based on your group parameters.
+To avoid redundant monitors (such as multiple similar monitors with just 1 scope changing), Datadog recommends using multi-alert monitors. When you use a "group by" in your query, multi-alerts automatically apply the alert to each source based on your group parameters. The best way to achieve this is with a monitor grouped by “host”, so that you’ll have only 1 monitor that will trigger a distinct alert for each host every time it crosses the threshold.
 
 For example:  
 You have an e-commerce website, and to handle large volumes of traffic or processing, you deploy multiple hosts and use a load balancer to distribute the incoming requests evenly. To ensure no single host is overwhelmed, you want an alert if a host exceeds a specific CPU and memory threshold. This ensures no single host is overwhelmed, maintaining balanced traffic and processing.
@@ -38,9 +38,7 @@ Adding context to a monitor transforms raw data into actionable insights. Contex
 
 Datadog has 3 features to enhance monitor context:
 
-* [**Metadata**][2]: Add priority, tag, and team information to alert notifications. This context helps teams filter, prioritize, and route issues to the right people quickly. They help clarify the alert's nature and group related alerts. This makes managing and resolving alerts more efficient and effective.
-
-* [**Monitors tags**][3]: Organize, filter, and manage monitors by categorizing them based on attributes like environment, application, or team ownership. Tags make finding specific monitors easier and help focus on those relevant to a specific purpose or team.
+* [**Metadata**][3]: Add priority, tag, and team information to alert notifications. This context helps teams filter, prioritize, and route issues to the right people quickly. They help clarify the alert's nature and group related alerts. This makes managing and resolving alerts more efficient and effective.
 
 * [**Variables**][4]: Use variables in your monitor message to add precise context, providing dynamic, real-time details, such as the affected system, error message, or exceeded thresholds. This specificity makes notifications clearer and reduces the need for responders to search for additional information, allowing faster action. Variables also ensure consistency in the structure of alerts, which improves readability and response efficiency. 
 
@@ -61,8 +59,8 @@ For more information, see the [Recommended Monitors][8] documentation.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[3]: /monitors/manage/#monitor-tags
+[2]: /monitors/manage/search/#attributes
+[3]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [4]: /monitors/notify/variables/?tab=is_alert
 [5]: https://app.datadoghq.com/monitors/quality
 [6]: /monitors/quality/
