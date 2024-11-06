@@ -11,6 +11,9 @@ further_reading:
       text: "Assign tags to all data emitted by a container"
 ---
 
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="apm.md">Tracing ECS Applications</a> documentation.</div>
+
+
 ## Overview
 
 To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below.
@@ -222,7 +225,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

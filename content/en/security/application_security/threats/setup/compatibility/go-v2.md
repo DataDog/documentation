@@ -5,6 +5,9 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Go Compatibility Requirements</a> documentation.</div>
+
+
 ## Application Security capabilities
 
 The following application security capabilities are supported in the Go library, for the specified tracer version:

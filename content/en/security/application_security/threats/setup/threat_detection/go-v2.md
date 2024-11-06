@@ -22,6 +22,9 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Enabling ASM for Go</a> documentation.</div>
+
+
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted %}}

@@ -21,6 +21,9 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Correlating Go Logs and Traces</a> documentation.</div>
+
+
 ## Manual injection
 
 The Go tracer API allows printing span information along with log statements using the `%v` format specifier:

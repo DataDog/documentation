@@ -13,6 +13,9 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Go Compatibility Requirements</a> documentation.</div>
+
+
 ## Compatibility
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
