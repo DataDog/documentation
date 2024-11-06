@@ -23,10 +23,13 @@ You can interact with a datastore using an app or a workflow, or you can use the
 
 ## Prerequisites
 
-To interact with the Apps Datastore, your Datadog account must have the following [permissions][6], all of which are included in the Datadog Standard Role:
+To interact with the Apps Datastore, your Datadog account must have the following [permissions][6], which are included in the Datadog Standard Role:
 
 * `apps_datastore_read` - Allows read access to the data within the Apps Datastore.
 * `apps_datastore_write` - Allows modification of data within the Apps Datastore, including adding, editing, and deleting records.
+
+To use the use the [Apps Datastore UI][1], you also need the following permission:
+
 * `apps_datastore_manage` - Allows management of the Apps Datastore, including creating, updating, and deleting the datastore itself.
 
 
