@@ -1,8 +1,8 @@
 ---
-title: Database Monitoring Easy Install for Postgres RDS
+title: Database Monitoring Quick Install for Postgres RDS
 ---
 
-Database Monitoring Easy Install for RDS enables you to quickly set up Agents to monitor your RDS Postgres instances. After specifying a few options, Datadog generates a CloudFormation template that configures your instance for monitoring and deploys an Agent with recommended DBM configurations.
+Database Monitoring Quick Install for RDS enables you to quickly set up Agents to monitor your RDS Postgres instances. After specifying a few options, Datadog generates a CloudFormation template that configures your instance for monitoring and deploys an Agent with recommended DBM configurations.
 
 ## Installation types
 
