@@ -99,7 +99,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **App Builder**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
@@ -142,7 +142,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **Workflows**.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
