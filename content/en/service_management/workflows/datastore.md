@@ -20,6 +20,16 @@ The Apps Datastore offers a scalable, structured data storage solution within Da
 
 You can interact with a datastore using an app or a workflow, or you can use the UI in the Datadog App.
 
+
+## Prerequisites
+
+To interact with the Apps Datastore, your Datadog account must have the following [permissions][6], all of which are included in the Datadog Standard Role:
+
+* `apps_datastore_read` - Allows read access to the data within the Apps Datastore.
+* `apps_datastore_write` - Allows modification of data within the Apps Datastore, including adding, editing, and deleting records.
+* `apps_datastore_manage` - Allows management of the Apps Datastore, including creating, updating, and deleting the datastore itself.
+
+
 ## Create a datastore
 
 To create a datastore:
@@ -69,3 +79,4 @@ To delete a datastore, click the **Trash (Delete Datastore)** icon in the header
 [3]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.getDatastoreItem
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.listDatastoreItems
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.putDatastoreItem
+[6]: /account_management/rbac/permissions/?tab=ui#app-builder--workflow-automation
