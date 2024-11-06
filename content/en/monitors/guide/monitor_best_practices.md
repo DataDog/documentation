@@ -27,7 +27,7 @@ The [Manage Monitor][1] page displays the monitor's title, monitor’s tags and 
 
 ## Use multi-alert
 
-To avoid redundant monitors (such as multiple similar monitors with just 1 scope changing), Datadog recommends using multi-alert monitors. When you use a "group by" in your query, multi-alerts automatically apply the alert to each source based on your group parameters. The best way to achieve this is with a monitor grouped by “host”, so that you’ll have only 1 monitor that will trigger a distinct alert for each host every time it crosses the threshold.
+To avoid redundant monitors (such as multiple similar monitors with just 1 scope changing), Datadog recommends using multi-alert monitors. When you use a "group by" in your query, multi-alerts automatically apply the alert to each source based on your group parameters. The best way to achieve this is with a monitor grouped by `host`, so that you only have one monitor that triggers a distinct alert for each host every time it crosses the threshold.
 
 For example:  
 You have an e-commerce website, and to handle large volumes of traffic or processing, you deploy multiple hosts and use a load balancer to distribute the incoming requests evenly. To ensure no single host is overwhelmed, you want an alert if a host exceeds a specific CPU and memory threshold. This ensures no single host is overwhelmed, maintaining balanced traffic and processing.
