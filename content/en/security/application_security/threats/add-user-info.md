@@ -116,6 +116,9 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="add-user-info.md">User Monitoring and Protection</a> documentation.</div>
+
+
 The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
 
 This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
@@ -457,6 +460,9 @@ void OnUserSignupComplete(string userId, ...)
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
+
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="add-user-info.md">User Monitoring and Protection</a> documentation.</div>
+
 
 Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
 

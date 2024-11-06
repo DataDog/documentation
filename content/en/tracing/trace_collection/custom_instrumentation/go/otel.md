@@ -16,6 +16,9 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="otel-v2.md">Go Custom Instrumentation using the OpenTelemetry API</a> documentation.</div>
+
+
 {{% otel-custom-instrumentation-lang %}}
 
 ## Imports

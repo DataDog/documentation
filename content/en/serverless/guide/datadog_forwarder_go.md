@@ -2,6 +2,10 @@
 title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
 
 ---
+
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="datadog_forwarder_go-v2.md">Instrumenting Go Serverless Applications Using the Datadog Forwarder</a> documentation.</div>
+
+
 ## Overview
 
 <div class="alert alert-warning">

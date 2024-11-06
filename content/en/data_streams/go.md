@@ -2,6 +2,9 @@
 title: Setup Data Streams Monitoring for Go
 ---
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="go-v2.md">Setup Data Streams Monitoring for Go</a> documentation.</div>
+
+
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:

@@ -202,6 +202,9 @@ end
 
 {{< programming-lang lang="go" >}}
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="apm-gov2.md">Tracing ECS Applications</a> documentation.</div>
+
+
 #### Launch time variable
 Update the Task Definition's `entryPoint` with the following, substituting your `<Go Startup Command>`:
 

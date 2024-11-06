@@ -19,6 +19,10 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
+
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="dd-api-v2.md">Go Custom Instrumentation using the Datadog API</a> documentation.</div>
+
+
 <div class="alert alert-info">
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
 </div>

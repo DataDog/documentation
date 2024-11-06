@@ -18,6 +18,9 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="go-v2.md">Go Runtime Metrics</a> documentation.</div>
+
+
 ## Automatic configuration
 
 To enable Go runtime metrics collection, start the tracer using the `WithRuntimeMetrics` option:

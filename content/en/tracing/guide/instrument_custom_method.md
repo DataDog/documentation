@@ -175,6 +175,9 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="instrument_custom_method-go-v2.md">Instrument a custom method to get deep visibility into your business logic</a> documentation.</div>
+
+
   In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.

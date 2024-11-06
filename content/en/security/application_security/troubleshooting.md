@@ -189,6 +189,9 @@ There are no required integrations for PHP.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="troubleshooting-gov2.md">Troubleshooting Application Security Management</a> documentation.</div>
+
+
 The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
 
 - [gRPC][2]
