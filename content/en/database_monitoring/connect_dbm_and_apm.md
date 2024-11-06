@@ -92,17 +92,17 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Update your app dependencies to include [dd-trace-go@v2.0.0][1] or greater:
+Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
 ```
-go get github.com/DataDog/dd-trace-go/v2@v2.0.0
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
 Update your code to import the `contrib/database/sql` package:
 ```go
 import (
    "database/sql"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 ```
 
@@ -112,12 +112,12 @@ Enable the database monitoring propagation feature using one of the following me
 
 2. Using code during the driver registration:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
 3. Using code on `sqltrace.Open`:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -129,8 +129,8 @@ Full example:
 ```go
 import (
 	"database/sql"
-	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-	sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 
 func main() {
@@ -153,7 +153,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 
 {{% /tab %}}
 
@@ -427,7 +427,7 @@ View historical performance of similar queries to those executed in your trace, 
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/
-[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb

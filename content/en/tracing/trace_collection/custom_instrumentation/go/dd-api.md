@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog API tracer.'
+description: 'Instrument your code with the Datadog Go APM tracer.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -40,7 +40,7 @@ import (
     "log"
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +70,7 @@ package main
 import (
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +89,7 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTa
 ```go
 package main
 
-import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
     tracer.Start(
@@ -109,9 +109,6 @@ err := someOperation()
 span.Finish(tracer.WithError(err))
 ```
 
-**Note**: Closing a span that was not started in your code can lead to missing data.
-Please follow your specific `dd-trace-go` [integration documentation][10] to do that.
-
 ## Adding spans
 
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
@@ -124,14 +121,11 @@ Unlike other Datadog tracing libraries, when tracing Go applications, it's recom
 
 To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4]:
 
-There are three functions available to create spans. API details are available for `StartSpan` [here][5], for `StartSpanFromContext` [here][6], and `Span.StartChild` [here][12].
+There are two functions available to create spans. API details are available for `StartSpan` [here][5] and for `StartSpanFromContext` [here][6].
 
 ```go
-// Create a span with no parent.
-span := tracer.StartSpan("mainOp")
-
-// Create a span with a resource name, which is the child of parentSpan.
-span := parentSpan.StartChild("mainOp", tracer.ResourceName("/user"))
+//Create a span with a resource name, which is the child of parentSpan.
+span := tracer.StartSpan("mainOp", tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
 
 // Create a span which will be the child of the span in the Context ctx, if there is a span in the context.
 // Returns the new span, and a new context containing the new span.
@@ -163,7 +157,7 @@ package main
 import (
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -189,7 +183,7 @@ package main
 import (
     "net/http"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -199,9 +193,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
         // Handle or log extraction error
     }
 
-	span := tracer.StartSpan("post.filter", tracer.WithStartSpanConfig(&tracer.StartSpanConfig{
-		Parent: sctx,
-	}))
+    span := tracer.StartSpan("post.filter", tracer.ChildOf(sctx))
     defer span.Finish()
 }
 ```
@@ -226,11 +218,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
 [3]: /tracing/setup/go/#compatibility
-[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
-[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpan
-[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
-[10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [11]: /tracing/trace_collection/trace_context_propagation/
-[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#Span.StartChild
