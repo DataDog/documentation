@@ -58,7 +58,7 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    
    Select **OK** to finish.
 
-### Reach out to support
+### Connection request acceptance
 
 Azure Private Link requires that the Provider accepts new connection requests from a Consumer. Please reach out to support@datadoghq.com with your newly created Endpoint ID and request that we accept the connection.
    
