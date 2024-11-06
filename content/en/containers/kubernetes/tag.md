@@ -268,7 +268,6 @@ bar: quuz
 
 </div>
 
-{{< /tabs >}}
 
 
 ### Kubernetes resources annotations as tags
