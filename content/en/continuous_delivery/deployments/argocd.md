@@ -193,9 +193,9 @@ The following diagram represents an example of this kind of setup:
 
 In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
 
-To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command in your CI. The required command arguments vary by the setup:
-* **Direct push**: The CI pipeline pushes the changes directly to the configuration repository and triggers an Argo CD deployment.
-* **Manually**: The CI pipeline does not push the changes directly to the configuration repository. For example: the CI creates a feature branch, commits to it, and merges it.
+To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command in your CI. The required command can either:
+* Infer the commits when the CI pipeline pushes the changes directly to the configuration repository and triggers an Argo CD deployment.
+* Manually receive the commit SHAs and configuration repository.
 
 {{< tabs >}}
 {{% tab "Direct push" %}}
