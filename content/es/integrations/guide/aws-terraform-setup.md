@@ -66,6 +66,11 @@ Mediante el uso de [Terraform][1], puedes crear el rol IAM de Datadog, el docume
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
    }
 
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
+   }
+
    resource "datadog_integration_aws" "sandbox" {
       account_id  = "<AWS_ACCOUNT_ID>"
       role_name   = "DatadogAWSIntegrationRole"
@@ -154,7 +159,7 @@ Mediante el uso de [Terraform][1], puedes crear el rol IAM de Datadog, el docume
 [3]: /es/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly#aws
 {{< /site-region>}}
 
-3. Ejecuta `terraform apply`. Espera hasta 10 minutos para que los datos comiencen a recopilarse y, a continuación, consulta el [dashboard de información general de AWS][5] para ver las métricas enviadas por tus servicios e infraestructura de AWS. 
+3. Ejecuta `terraform apply`. Espera hasta 10 minutos para que los datos comiencen a recopilarse y, a continuación, consulta el [dashboard de información general de AWS][5] para ver las métricas enviadas por tus servicios e infraestructura de AWS.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
