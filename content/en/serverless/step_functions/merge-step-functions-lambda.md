@@ -124,7 +124,6 @@ To link your Step Function traces to nested Step Function traces, configure your
     "StateMachineArn": "${stateMachineArn}",
     "Input": {
       "StatePayload": "Hello from Step Functions!",
-      "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
       "CONTEXT": {
         "Execution.$": "$$.Execution",
         "State.$": "$$.State",
