@@ -435,8 +435,6 @@ bar: quuz
 
 </div>
 
-{{< /tabs >}}
-
 
 
 ### Node labels as tags
