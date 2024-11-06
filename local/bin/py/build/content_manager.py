@@ -183,7 +183,7 @@ def extract_sourced_and_cached_content_from_pull_config(self, configuration):
     or cache, and populates the associated class property to be processed later.
     :param configuration: Documentation build configuration file path.
     """
-    pull_config_content = configuration[1].get('data', {})
+    pull_config_content = configuration[0].get('data', {})
 
     for org in pull_config_content:
         for repo in org["repos"]:
