@@ -305,15 +305,16 @@ typesense_sync_preview:manual:
     - build_preview
   script:
     # build the site to get algolia.json ondemand
-    - touch Makefile.config preview_error.log
-    - make dependencies
-    - make config
-    - yarn run prebuild
-    - build_site
+    # - touch Makefile.config preview_error.log
+    # - make dependencies
+    # - make config
+    # - yarn run prebuild
+    # - build_site
     # end build
     - >
       TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_preview_admin_api_key')
       TYPESENSE_HOST=$(get_secret 'typesense_preview_host')
+      CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json)
       yarn run typesense:sync:preview
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
