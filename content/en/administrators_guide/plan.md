@@ -288,7 +288,7 @@ During the planning phase, you may find that not all instances of observability 
 
 ### Software Development Lifecycle
 
-To begin mapping out your installation patterns, combine the information you gathered from the [scoping exercise](#scoping-exercise) with the [Datadog 101][7] training, and develop a plan of action. Consider the following example, and modify it to suit your organization's needs. The example outlines an installation pattern from the dimension of SDLC environment (dev, qa, stage, prod), and you can customize it to your standards and conditions. Begin setting expectations within your own Datadog user base what "Standard Datadog installation" means. 
+To begin mapping out your installation patterns, combine the information you gathered from the [scoping exercise](#scoping-exercise) with the [Datadog 101][73] training, and develop a plan of action. Consider the following example, and modify it to suit your organization's needs. The example outlines an installation pattern from the dimension of SDLC environment (dev, qa, stage, prod), and you can customize it to your standards and conditions. Begin setting expectations within your own Datadog user base what "Standard Datadog installation" means. 
 
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
@@ -390,3 +390,4 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [70]: /developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: /synthetics/api_tests/ssl_tests/
 [72]: /service_catalog/service_definitions/
+[73]: https://learn.datadoghq.com/courses/dd-101-sre
