@@ -95,7 +95,7 @@ The Go packages listed in this page are relevant for Application Security capabi
 [13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
 [15]: https://github.com/golang/go/wiki/cgo
-[16]: /tracing/compatibility_requirements/go
+[16]: /tracing/compatibility_requirements/go-v2
 [17]: https://pkg.go.dev/github.com/graphql-go/graphql
 [18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
 

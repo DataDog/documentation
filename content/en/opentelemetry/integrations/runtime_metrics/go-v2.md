@@ -1,7 +1,7 @@
 ---
 title: OpenTelemetry Go Runtime Metrics
 aliases:
-- /opentelemetry/runtime_metrics/go/
+- /opentelemetry/runtime_metrics/go-v2/
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -59,6 +59,6 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `runtime.go.gc_stats.pause_quantiles.max` | Distribution of GC pause times: maximum values. | N/A |
 
 [1]: /opentelemetry/otel_metrics
-[2]: https://app.datadoghq.com/integrations/go
+[2]: https://app.datadoghq.com/integrations/go-v2
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime

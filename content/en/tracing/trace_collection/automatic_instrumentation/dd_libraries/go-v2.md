@@ -1,13 +1,13 @@
 ---
 title: Tracing Go Applications
 aliases:
-- /tracing/go/
-- /tracing/languages/go
-- /agent/apm/go/
-- /tracing/setup/go
-- /tracing/setup_overview/go
-- /tracing/setup_overview/setup/go
-- /tracing/trace_collection/dd_libraries/go
+- /tracing/go-v2/
+- /tracing/languages/go-v2
+- /agent/apm/go-v2/
+- /tracing/setup/go-v2
+- /tracing/setup_overview/go-v2
+- /tracing/setup_overview/setup/go-v2
+- /tracing/trace_collection/dd_libraries/go-v2
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -198,9 +198,9 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/go
+[1]: /tracing/compatibility_requirements/go-v2
 [2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/trace_collection/library_config/go/
+[3]: /tracing/trace_collection/library_config/go-v2/
 [4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [6]: https://github.com/DataDog/orchestrion

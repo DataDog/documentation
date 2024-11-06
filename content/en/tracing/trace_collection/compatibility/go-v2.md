@@ -2,13 +2,13 @@
 title: Go Compatibility Requirements
 description: 'Compatibility Requirements for the Go tracer'
 aliases:
-  - /tracing/compatibility_requirements/go
-  - /tracing/setup_overview/compatibility_requirements/go
+  - /tracing/compatibility_requirements/go-v2
+  - /tracing/setup_overview/compatibility_requirements/go-v2
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: 'tracing/trace_collection/dd_libraries/go'
+    - link: 'tracing/trace_collection/dd_libraries/go-v2'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
@@ -158,4 +158,4 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [74]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go-v2/aws/v2
-[77]: /tracing/trace_collection/library_config/go/
+[77]: /tracing/trace_collection/library_config/go-v2/

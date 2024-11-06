@@ -5,7 +5,7 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 60
 aliases:
-- /tracing/runtime_metrics/go
+- /tracing/runtime_metrics/go-v2
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'

@@ -1,7 +1,7 @@
 ---
 title: Go Log Collection
 aliases:
-  - /logs/languages/go
+  - /logs/languages/go-v2
 further_reading:
 - link: "https://www.datadoghq.com/blog/go-logging/"
   tag: "Blog"
@@ -128,5 +128,5 @@ If APM is enabled for this application, the correlation between application logs
 [7]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [8]: /logs/log_configuration/parsing/?tab=matchers
 [9]: /logs/explorer/#overview
-[10]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[10]: /tracing/other_telemetry/connect_logs_and_traces/go-v2/
 [11]: /glossary/#tail

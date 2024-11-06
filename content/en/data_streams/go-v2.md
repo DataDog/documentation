@@ -86,4 +86,4 @@ if ok {
 
 [1]: /agent
 [2]: https://github.com/DataDog/dd-trace-go
-[3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go-v2/

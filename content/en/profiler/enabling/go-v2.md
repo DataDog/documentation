@@ -10,11 +10,11 @@ further_reading:
     - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
       text: 'Learn more about available profile visualizations'
-    - link: 'profiler/profiler_troubleshooting/go'
+    - link: 'profiler/profiler_troubleshooting/go-v2'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
-  - /tracing/profiler/enabling/go/
+  - /tracing/profiler/enabling/go-v2/
 ---
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
@@ -157,4 +157,4 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [17]: /getting_started/profiler/
 [18]: /profiler/enabling/supported_versions/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go-v2

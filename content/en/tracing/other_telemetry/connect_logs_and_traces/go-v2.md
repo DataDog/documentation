@@ -2,7 +2,7 @@
 title: Correlating Go Logs and Traces
 description: 'Connect your Go logs and traces to correlate them in Datadog.'
 aliases:
-  - /tracing/connect_logs_and_traces/go
+  - /tracing/connect_logs_and_traces/go-v2
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -84,5 +84,5 @@ This automatically injects the trace id to your logs when you log with the conte
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/go/#configure-your-logger
+[1]: /logs/log_collection/go-v2/#configure-your-logger
 [2]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

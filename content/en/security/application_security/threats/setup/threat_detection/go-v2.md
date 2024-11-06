@@ -4,9 +4,9 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 aliases:
-  - /security_platform/application_security/getting_started/go
-  - /security/application_security/getting_started/go
-  - /security/application_security/enabling/tracing_libraries/threat_detection/go/
+  - /security_platform/application_security/getting_started/go-v2
+  - /security/application_security/getting_started/go-v2
+  - /security/application_security/enabling/tracing_libraries/threat_detection/go-v2/
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -119,5 +119,5 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/setup/compatibility/go/#web-framework-compatibility
-[2]: /security/application_security/threats/setup/compatibility/go/
+[1]: /security/application_security/threats/setup/compatibility/go-v2/#web-framework-compatibility
+[2]: /security/application_security/threats/setup/compatibility/go-v2/
