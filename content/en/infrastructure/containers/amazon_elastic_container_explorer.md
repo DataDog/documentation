@@ -66,9 +66,7 @@ Use the **Select Resources** dropdown menu in the top left corner of the page to
 
 Each view includes a data table for organizing information by fields such as status, name, and AWS tags, along with a detailed Cluster Map to provide an overview of your tasks and ECS clusters.
 
-**Refer to [Query filter details](#query-filter-details) for information on filtering these views.**
-
-{{< img src="infrastructure/livecontainers/orch_ecs_ex_services.png" alt="ECS Explorer displaying resources in the Services view, in Summary mode" style="width:80%;">}}
+Refer to [Query filter details](#query-filter-details) for information on filtering these views.
 
 #### Group by functionality and facets
 
@@ -96,7 +94,7 @@ Click on any row in the table or any object in the Cluster Map to display detail
 
 The **Task Definition** tab in the side panel shows the complete task definition.
 
-For task definitions, it also provides a history of seven days, allowing you to view all versions used by the task over the past week and compare changes between different versions.
+For task definitions, it also provides a history of seven days, allowing you to view all task definition revisions used by running tasks over the past week and compare changes between them.
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex_manifest_history.png" alt="View of resource details in the side panel, highlighting task definition history feature" style="width:80%;">}}
 
@@ -114,7 +112,7 @@ Other tabs provide additional information for troubleshooting the selected resou
 
 You can refine displayed resources by entering a query in the "Filter by" search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
 
-### Exception
+### AWS tags
 
 In the ECS Explorer, you can use `tag#` to search across both Datadog tags and AWS tags.
 
