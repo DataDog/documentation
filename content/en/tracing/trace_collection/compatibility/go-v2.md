@@ -13,8 +13,6 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ## Compatibility
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.

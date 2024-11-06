@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Tracer library source code"
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
 - link: https://github.com/DataDog/orchestrion
@@ -31,7 +31,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The Go Tracer requires Go `1.22+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Getting started
 
@@ -201,7 +201,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 [1]: /tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention

@@ -17,8 +17,6 @@ aliases:
   - /tracing/profiler/enabling/go/
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements

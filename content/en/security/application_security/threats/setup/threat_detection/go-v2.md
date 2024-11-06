@@ -22,8 +22,6 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted %}}

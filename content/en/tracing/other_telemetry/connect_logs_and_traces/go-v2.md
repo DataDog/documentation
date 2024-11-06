@@ -21,8 +21,6 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ## Manual injection
 
 The Go tracer API allows printing span information along with log statements using the `%v` format specifier:

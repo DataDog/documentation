@@ -18,8 +18,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ## Automatic configuration
 
 To enable Go runtime metrics collection, start the tracer using the `WithRuntimeMetrics` option:

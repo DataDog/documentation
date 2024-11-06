@@ -2,8 +2,6 @@
 title: Setup Data Streams Monitoring for Go
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:

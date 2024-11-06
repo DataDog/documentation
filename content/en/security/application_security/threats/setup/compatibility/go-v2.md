@@ -5,8 +5,6 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-<!-- TODO(hannahkm): revert to v1 -->
-
 ## Application Security capabilities
 
 The following application security capabilities are supported in the Go library, for the specified tracer version:
