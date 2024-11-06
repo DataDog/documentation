@@ -15,6 +15,7 @@ from os import sep, getenv, makedirs
 from os.path import isdir, sys, dirname, normpath
 
 
+
 def download_from_repo(github_token, org, repo, branch, globs, extract_dir, commit_sha=None):
     """
     Takes github info and file globs and downloads files from github using multiple processes
@@ -98,6 +99,10 @@ def download_content_from_external_source(self, content):
         * cache is disabled
         * this is a local run or master pipeline
     """
+    if os.getenv('FF_PREVIEW_PULL_CONFIG_CACHE', 'false').lower() == 'true':
+        self.cache_enabled = True
+    else:
+        self.cache_enabled = False
     return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') in (None, 'master'))
 
 
