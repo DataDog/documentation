@@ -23,7 +23,9 @@ By following these principles, you'll create a monitor that delivers meaningful 
 
 ## Write a clear title
 
-The [Manage Monitor][1] page displays the monitor's title, monitor’s tags and team, and other fields that you can find [**here**][2]. Having a  clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance. Please keep in mind that the monitor’s title and the notification subject are the same, so we suggest avoiding having too many variables in it.
+The [Manage Monitor][1] page displays the monitor's title, tags, teams, and other fields. For a full list of attributes, see the [Search Monitors][2] documentation. Having a  clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance. 
+
+**Note**: A monitor’s title and the notification subject are the same, so avoid adding too many variables to either.
 
 ## Use multi-alert
 
