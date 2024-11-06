@@ -266,6 +266,7 @@ Your payload, or `Log sent directly using TLS` as written in the example, can be
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /account_management/api-app-keys/#api-keys
 

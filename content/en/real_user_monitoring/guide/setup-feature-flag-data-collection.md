@@ -26,11 +26,12 @@ By enriching your RUM data with feature flag data, you can be confident that you
 
 Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+<details>
+  <summary>Before <code>v5.17.0</code></summary>
 
-<details open>
-  <summary>npm</summary>
+If you are using a version previous to 5.17.0, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]` to start collecting feature flag data.
 
+{{% collapse-content title="NPM" level="h4" %}}
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
@@ -41,12 +42,9 @@ To start collecting feature flag data, initialize the RUM SDK and configure the 
     ...
 });
 ```
+{{% /collapse-content %}} 
 
-</details>
-
-<details>
-  <summary>CDN async</summary>
-
+{{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -56,11 +54,9 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>CDN sync</summary>
-
+{{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -69,6 +65,8 @@ window.DD_RUM &&
       ...
     })
 ```
+{{% /collapse-content %}}
+
 </details>
 <br/>
 

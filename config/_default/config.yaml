@@ -144,8 +144,8 @@ security:
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
 outputFormats:
-  Algolia:
-    baseName: "algolia"
+  Search:
+    baseName: "search"
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true

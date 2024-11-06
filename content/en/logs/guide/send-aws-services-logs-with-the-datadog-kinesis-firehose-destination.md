@@ -152,7 +152,7 @@ To populate all logs by ARN:
 1. Go to the [Log Explorer][5] in Datadog.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Data Firehose ARN, and press **Enter** to see all of your subscribed logs.
 
-**Note**: A single Kinesis payload must not be be more than 65,000 log messages. Log messages after that limit are dropped.
+**Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
 
 ## Further Reading
 

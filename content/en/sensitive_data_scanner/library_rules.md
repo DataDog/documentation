@@ -22,9 +22,9 @@ These rules can also be viewed in Datadog:
 1. Navigate to [Sensitive Data Scanner][1].
 1. Click **Scanning Rules Library** on the top right side of the page.
 1. To add rules from the library to a scanning group:<br />
-   a. Select the rules you want to add.<br />
-   b. Click **Add Rules to Scanning Group**.<br />
-   c. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
+   1. Select the rules you want to add.<br />
+   1. Click **Add Rules to Scanning Group**.<br />
+   1. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
 
 ## Secrets and credentials
 

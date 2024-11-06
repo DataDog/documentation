@@ -10,6 +10,9 @@ further_reading:
     - link: "/sensitive_data_scanner/regular_expression_syntax"
       tag: "Documentation"
       text: "Regular expression syntax for custom scanning rules"
+    - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
+      tag: "Documentation"
+      text: "Best practices for creating custom rules"
     - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
       tag: "Blog"
       text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
@@ -155,7 +158,17 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 {{% sds-scanning-rule %}}
 1. Click **Add Rules**.
 
-{{< /collapse-content >}} 
+#### Add additional keywords
+
+After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
+
+1. Navigate to the [Sensitive Data Scanner][2] configuration page.
+1. Click the scanning group with the rule you want to edit.
+1. Hover over the rule, and then click the pencil icon.
+1. The recommend keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. Click **Update**.
+
+{{< /collapse-content >}}
 {{< collapse-content title="Add a custom scanning rule" level="p" >}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
@@ -172,7 +185,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
 {{< /collapse-content >}} 
@@ -321,17 +334,17 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Security
+## Cloud Storage scanning
 
-{{< callout url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Data Security is in beta. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-If you have [Sensitive Data Scanner][6] and [Cloud Security Management][7] enabled, you can use Data Security to locate sensitive data and fix security issues impacting Amazon S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][6] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
 
-Data Security scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Data Security leverages rules provided by Sensitive Data Scanner to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Datastores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
-Along with displaying sensitive data matches, Data Security surfaces any security issues detected by Cloud Security Management affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+Along with displaying sensitive data matches, Cloud Storage surfaces any security issues detected by [Cloud Security Management][7] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
 ## Out-of-the-box dashboard
 
@@ -352,8 +365,9 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [3]: /observability_pipelines/processors/#sensitive-data-scanner
 [4]: /observability_pipelines/
 [5]: /logs/guide/logs-rbac/
-[6]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[6]: /sensitive_data_scanner/
 [7]: /security/cloud_security_management
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /agent/remote_config
 [10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[11]: /sensitive_data_scanner/library_rules/
