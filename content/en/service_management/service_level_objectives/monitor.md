@@ -117,7 +117,7 @@ When you create a metric monitor, you choose [how the monitor will handle missin
 
 | Monitor configuration     | SLO calculation of missing data |
 |---------------------------|---------------------------------|
-| `Evaluate as zero`        | ???                             |
+| `Evaluate as zero`        | Depends on the monitor alert threshold <br> For instance, a threshold of `> 10` would result in Uptime (since the Monitor status would be `OK`), while a threshold of `< 10` would result in Downtime.                             |
 | `Show last known status`  | Keep last state of SLO          |
 | `Show NO DATA`            | Uptime                          |
 | `Show NO DATA and notify` | Downtime                        |
