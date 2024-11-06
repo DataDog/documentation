@@ -9740,6 +9740,20 @@ components:
       type: object
       x-merge-override:
         properties: false
+    GCPMetricNamespaceConfig:
+      description: Configuration for a GCP metric namespace.
+      properties:
+        disabled:
+          default: false
+          description: When disabled, Datadog does not collect metrics that are related
+            to this GCP metric namespace.
+          example: true
+          type: boolean
+        id:
+          description: The id of the GCP metric namespace.
+          example: aiplatform
+          type: string
+      type: object
     GCPSTSDelegateAccount:
       description: Datadog principal service account info.
       properties:
@@ -9844,6 +9858,14 @@ components:
             account.'
           example: true
           type: boolean
+        metric_namespace_configs:
+          description: Configurations for GCP metric namespaces.
+          example:
+          - disabled: true
+            id: aiplatform
+          items:
+            $ref: '#/components/schemas/GCPMetricNamespaceConfig'
+          type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
@@ -12093,7 +12115,7 @@ components:
           default: false
           description: If true, this incident type will be used as the default incident
             type if a type is not specified during the creation of incident resources.
-          example: true
+          example: false
           type: boolean
         lastModifiedBy:
           description: A unique identifier that represents the user that last modified
@@ -12228,7 +12250,7 @@ components:
         is_default:
           description: When true, this incident type will be used as the default type
             when an incident type is not specified.
-          example: true
+          example: false
           type: boolean
         lastModifiedBy:
           description: A unique identifier that represents the user that last modified
@@ -19721,8 +19743,10 @@ components:
         include_percentiles:
           $ref: '#/components/schemas/RumMetricComputeIncludePercentiles'
         path:
-          description: The path to the value the rum-based metric will aggregate on
-            (only used if the aggregation type is a "distribution").
+          description: 'The path to the value the rum-based metric will aggregate
+            on.
+
+            Only present when `aggregation_type` is `distribution`.'
           example: '@duration'
           type: string
       required:
@@ -19742,7 +19766,7 @@ components:
       description: 'Toggle to include or exclude percentile aggregations for distribution
         metrics.
 
-        Only present when the `aggregation_type` is `distribution`.'
+        Only present when `aggregation_type` is `distribution`.'
       example: true
       type: boolean
     RumMetricCreateAttributes:
@@ -19813,8 +19837,7 @@ components:
       properties:
         query:
           default: '*'
-          description: The search query - following the RUM search syntax. Must include
-            an @type facet query.
+          description: The search query - following the RUM search syntax.
           example: '@service:web-ui: '
           type: string
       required:
@@ -19829,8 +19852,8 @@ components:
           example: '@browser.name'
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, the
-            path attribute is used as the tag name.
+          description: Eventual name of the tag that gets created. By default, `path`
+            is used as the tag name.
           example: browser_name
           type: string
       required:
@@ -19871,8 +19894,10 @@ components:
         include_percentiles:
           $ref: '#/components/schemas/RumMetricComputeIncludePercentiles'
         path:
-          description: The path to the value the rum-based metric will aggregate on
-            (only used if the aggregation type is a "distribution").
+          description: 'The path to the value the rum-based metric will aggregate
+            on.
+
+            Only present when `aggregation_type` is `distribution`.'
           example: '@duration'
           type: string
       type: object
@@ -19904,14 +19929,14 @@ components:
           example: '@http.status_code'
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, the
-            path attribute is used as the tag name.
+          description: Eventual name of the tag that gets created. By default, `path`
+            is used as the tag name.
           example: status_code
           type: string
       type: object
     RumMetricResponseUniqueness:
-      description: The rule to count updatable events. Is only set if "event_type"
-        is "sessions" or "views".
+      description: The rule to count updatable events. Is only set if `event_type`
+        is `session` or `view`.
       properties:
         when:
           $ref: '#/components/schemas/RumMetricUniquenessWhen'
@@ -19926,8 +19951,8 @@ components:
       x-enum-varnames:
       - RUM_METRICS
     RumMetricUniqueness:
-      description: The rule to count updatable events. Is only set if "event_type"
-        is "sessions" or "views".
+      description: The rule to count updatable events. Is only set if `event_type`
+        is `sessions` or `views`.
       properties:
         when:
           $ref: '#/components/schemas/RumMetricUniquenessWhen'
@@ -19935,8 +19960,8 @@ components:
       - when
       type: object
     RumMetricUniquenessWhen:
-      description: When to count updatable events. "match" when the event is first
-        seen, or "end" when the event is complete.
+      description: When to count updatable events. `match` when the event is first
+        seen, or `end` when the event is complete.
       enum:
       - match
       - end
@@ -30002,6 +30027,7 @@ paths:
         type: safe
   /api/v2/cost/enabled:
     get:
+      deprecated: true
       description: Get the Cloud Cost Management activity.
       operationId: GetCloudCostActivity
       responses:
@@ -31437,8 +31463,11 @@ paths:
         incident_type:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{unique_hash}}\"\n
-              \   },\n    \"type\": \"incident_types\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Security
+              Incident\",\n      \"description\": \"Any incidents that harm (or have
+              the potential to) the confidentiality, integrity, or availability of
+              our data.\",\n      \"is_default\": false\n    },\n    \"type\": \"incident_types\"\n
+              \ }\n}"
           step: there is a valid "incident_type" in the system
       x-menu-order: 19
       x-permission:
@@ -37800,12 +37829,6 @@ paths:
         - timeseries_query
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
-        (RUM), Cloud Cost Management, and Log Management data sources.
-
-        We are gradually onboarding support for more sources. If you have any
-
-        feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
       description: 'Query timeseries data across various data sources and
@@ -37849,12 +37872,6 @@ paths:
         - timeseries_query
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
-        (RUM), Cloud Cost Management, and Log Management data sources.
-
-        We are gradually onboarding support for more sources. If you have any
-
-        feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/remote_config/products/cws/agent_rules:
     get:
       description: Get the list of Cloud Security Management Threats Agent rules.
