@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-This Getting Started guide provides strategies for implementing Datadog effectively within your organization. View resources for getting help, learning about Datadog through Learning Center courses, and for creating a test environment. 
+This Getting Started guide offers strategies for effectively implementing Datadog in your organization. Explore resources for assistance, Learning Center courses to deepen your knowledge, and instructions for setting up a test environment.
 
 ## Getting help
 
@@ -112,8 +112,8 @@ To successfully create a new Datadog installation, review the [plan][11] page. Y
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [4]: https://github.com/DataDog/integrations-core
 [5]: https://app.datadoghq.com/fleet
-[6]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
-[7]: https://docs.datadoghq.com/getting_started/tagging/
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
 [10]: https://app.datadoghq.com/monitors/recommended

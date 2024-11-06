@@ -18,7 +18,7 @@ After using this guide to install Datadog to scale with your organization, you c
 - Collect, process, and correlate observability and security data from your entire stack in one platform.
 - Automate remediation and take action directly from Datadog with complete context from observability data across your stack.
 
-## Why to use this guide
+## Benefits of this guide
 
 This guide outlines the foundational concepts of Datadog and offers steps to prevent common issues like fragmented data models, unstructured user grouping, ungoverned consumption, and unrealized value.
 

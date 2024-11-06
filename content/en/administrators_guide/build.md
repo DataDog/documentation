@@ -97,7 +97,7 @@ Review the Datadog administrator's [run][4] documentation to outline a maintenan
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/
+[1]: /api/latest/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [3]: https://github.com/DataDog/datadog-sync-cli
 [4]: /administrators_guide/run

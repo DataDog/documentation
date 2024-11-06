@@ -102,22 +102,22 @@ Once you have successfully planned, set up, and begun maintaining your Datadog i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/fleet_automation/
-[2]: https://docs.datadoghq.com/service_catalog/
-[3]: https://docs.datadoghq.com/agent/configuration/agent-commands#agent-information
-[4]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare/?tab=agent\#send-a-flare-using-the-flare-command
+[1]: /agent/fleet_automation/
+[2]: /service_catalog/
+[3]: /agent/configuration/agent-commands#agent-information
+[4]: /agent/troubleshooting/send_a_flare/?tab=agent\#send-a-flare-using-the-flare-command
 [5]: https://app.datadoghq.com/dash/integration/31281/estimated-usage-overview?fromUser=false\&refresh_mode=sliding\&view=spans\&from_ts=1721313591456\&to\_ts=1721317191456\&live=true
-[6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
-[7]: https://docs.datadoghq.com/dashboards/\#overview
-[8]: https://docs.datadoghq.com/monitors/
-[9]: https://docs.datadoghq.com/getting_started/integrations/terraform/\#dashboards
-[10]: https://docs.datadoghq.com/api/latest/dashboards/
-[11]: https://docs.datadoghq.com/monitors/types/anomaly/
-[12]: https://docs.datadoghq.com/getting_started/dashboards/\#start-by-reusing-other-dashboards
+[6]: /account_management/billing/usage_metrics/
+[7]: /dashboards/#overview
+[8]: /monitors/
+[9]: /getting_started/integrations/terraform/\#dashboards
+[10]: /api/latest/dashboards/
+[11]: /monitors/types/anomaly/
+[12]: /getting_started/dashboards/\#start-by-reusing-other-dashboards
 [13]: https://app.datadoghq.com/dashboard/lists
-[14]: https://docs.datadoghq.com/account_management/api-app-keys/\#using-multiple-api-keys
-[15]: https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication
-[16]: https://docs.datadoghq.com/integrations/
+[14]: /account_management/api-app-keys/\#using-multiple-api-keys
+[15]: /account_management/rbac/?tab=datadogapplication
+[16]: /integrations/
 [17]: https://github.com/DataDog/datadog-agent/releases
 [18]: https://app.datadoghq.com/fleet
 [19]: /api/latest/key-management/
