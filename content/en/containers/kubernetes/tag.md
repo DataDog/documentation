@@ -106,9 +106,9 @@ com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 
 ### Kubernetes resources labels as tags
 
-Starting with Agent v7.58+, the Agent can be configured to collect labels for any kubernetes resource and use them as tags to attach to all metrics, traces. and logs associated with the kubernetes resource.
+Starting with Agent v7.58+, the Agent can be configured to collect labels for any Kubernetes resource and use them as tags to attach to all metrics, traces, and logs associated with that resource.
 
-This configuration option is more generic and should be preferred over:
+This configuration option is more generic and should be preferred over the following options:
 - podLabelsAsTags
 - nodeLabelsAsTags
 - namespaceLabelsAsTags
@@ -119,7 +119,7 @@ This configuration option is more generic and should be preferred over:
 
 Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
 
-If a specific resource is in the empty api group (for example `pods` and `nodes`), it can be specified using `resourceType`.
+If a specific resource is in the empty API group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
 
 
 To extract a given node label `<NODE_LABEL>` and a given deployment label `<DEPLOYMENT_LABEL>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
@@ -138,7 +138,7 @@ spec:
         <DEPLOYMENT_LABEL>: <DEPLOYMENT_TAG_KEY>
 ```
 
-For example, you could set up:
+For example:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -175,9 +175,9 @@ spec:
 
 Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
 
-If a specific resource is in the empty api group (for example `pods` and `nodes`), it can be specified using `resourceType`.
+If a specific resource is in the empty API group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
 
-To extract a given node label `<NODE_LABEL>` and a given deployment label `<DEPLOYMENT_LABEL>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following configuration to your Helm datadog-values.yaml file:
+To extract a given node label `<NODE_LABEL>` and a given deployment label `<DEPLOYMENT_LABEL>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
 
 
 ```yaml
@@ -216,7 +216,7 @@ datadog:
 
 Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
 
-If a specific resource is in the empty api group (for example `pods` and `nodes`), it can be specified using `resourceType`.
+If a specific resource is in the empty API group (for example `pods` and `nodes`), it can be specified using `resourceType`.
 
 To extract a given node label `<NODE_LABEL>` and a given deployment label `<DEPLOYMENT_LABEL>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
@@ -258,7 +258,7 @@ datadog:
     bar: quuz
 ```
 
-The following mapping will be used to extract tags from pod labels:
+The following mapping is used to extract tags from pod labels:
 
 ```yaml
 foo: bar
@@ -273,9 +273,9 @@ bar: quuz
 
 ### Kubernetes resources annotations as tags
 
-Starting with Agent v7.58+, the Agent can be configured to collect annotations for any kubernetes resource and use them as tags to attach to all metrics, traces. and logs associated with the kubernetes resource.
+Starting with Agent v7.58+, the Agent can be configured to collect annotations for any Kubernetes resource and use them as tags to attach to all metrics, traces. and logs associated with that resource.
 
-This configuration option is more generic and should be preferred over:
+This configuration option is more generic and should be preferred over the following options:
 - podAnnotationsAsTags
 - nodeAnnotationsAsTags
 - namespaceAnnotationsAsTags
@@ -286,7 +286,7 @@ This configuration option is more generic and should be preferred over:
 
 Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
 
-If a specific resource is in the empty api group (for example `pods` and `nodes`), it can be specified using `resourceType`.
+If a specific resource is in the empty API group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
 
 
 To extract a given node annotation `<NODE_ANNOTATION>` and a given deployment annotation `<DEPLOYMENT_ANNOTATION>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
@@ -305,7 +305,7 @@ spec:
         <DEPLOYMENT_ANNOTATION>: <DEPLOYMENT_TAG_KEY>
 ```
 
-For example, you could set up:
+For example:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -342,7 +342,7 @@ spec:
 
 Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
 
-If a specific resource is in the empty api group (for example `pods` and `nodes`), it can be specified using `resourceType`.
+If a specific resource is in the empty API group (for example `pods` and `nodes`), it can be specified using `resourceType`.
 
 To extract a given node annotation `<NODE_ANNOTATION>` and a given deployment annotation `<DEPLOYMENT_ANNOTATION>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following configuration to your Helm datadog-values.yaml file:
 
@@ -356,7 +356,7 @@ datadog:
       <DEPLOYMENT_ANNOTATION>: <DEPLOYMENT_TAG_KEY>
 ```
 
-For example, you could set up:
+For example:
 
 ```yaml
 datadog:
@@ -383,7 +383,7 @@ datadog:
 
 Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
 
-If a specific resource is in the empty api group (for example `pods` and `nodes`), it can be specified using `resourceType`.
+If a specific resource is in the empty api group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
 
 To extract a given node annotation `<NODE_ANNOTATION>` and a given deployment annotation `<DEPLOYMENT_ANNOTATION>` and transform them as tag keys `<NODE_TAG_KEY>` and `<DEPLOYMENT_TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
@@ -425,7 +425,7 @@ datadog:
     bar: quuz
 ```
 
-The following mapping will be used to extract tags from pod annotations:
+The following mapping is used to extract tags from pod annotations:
 
 ```yaml
 foo: bar
