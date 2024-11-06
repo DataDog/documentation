@@ -180,7 +180,7 @@ network_devices:
 
 **Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
-**Note**: Make sure you are on Agent 7.53+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
+**Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
 
 ### Ping
 
