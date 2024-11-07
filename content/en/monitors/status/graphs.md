@@ -20,7 +20,7 @@ The graphs on the monitor status page provide insights into the single monitor e
 
 ## Monitor metadata
 
-{{< img src="/monitors/status/graphs/graph_metadata_1.png" alt="Monitor metadata section on the right side of the status page." style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/status_graph_metadata.png" alt="Monitor metadata section on the right side of the status page." style="width:100%;" >}}
 
 The right panel of the graph section of the monitor status page provides a high-level overview of your monitor, including
 
@@ -32,8 +32,8 @@ The right panel of the graph section of the monitor status page provides a high-
 | Evaluation | The aggregation method applied to the Query with the evaluation window. |
 | Notification count | Count of notifications sent from this monitor. |
 
-[**UPDATE**]
-\* The link to the Metrics Explorer is available only for Metrics, Event, Logs, … monitors.
+<!-- [**UPDATE**]
+\* The link to the Metrics Explorer is available only for Metrics, Event, Logs, … monitors. -->
 
 ## Filter the page by groups or status
 
@@ -58,7 +58,7 @@ The evaluated data visualization is specific to the monitor and shows individual
 
 The visualization matches your monitor's configuration to show the monitor's historical and current status using evaluations settings. The graphs show the status by group. 
 
-{{< img src="/monitors/status/graphs/evaluated_data_ui_features.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
+{{< img src="/monitors/status/graphs/status_page_demo.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
 
 To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the **Event Details** section for more information.
 
