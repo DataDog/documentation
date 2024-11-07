@@ -14,15 +14,18 @@ further_reading:
 
 ## Overview
 
-The Metrics Overview page provides you with a deeper understanding of your metrics landscape, and is helpful for users of all experience levels. Explore the sources of your metrics, generate additional metrics from Datadog products, and enable Metrics without Limits™ and historical data ingestion.
+The Metrics Overview page provides users of all experience levels with a deeper understanding of their metrics landscape. It provides guidance on how you can maximize the value of your Datadog metrics. 
 
-The sections below detail the different parts of the page and provide guidance on how you can maximize the value of your Datadog metrics.
+With the Metrics Overview Page you can learn how to: 
+- Explore the sources of your metrics
+- Generate additional metrics from Datadog products
+- And how to enable advanced platform capabilities such as percentiles, Metrics without Limits™, and historical metric ingestion
 
 ## How your metrics flow through Datadog
 
 {{< img src="metrics/overview/how_metrics_flow.png" alt="The how your metrics flow through Datadog section of the metrics overview page" >}}
 
-The topmost section of the page shows all of your metric sources, along with any configurable processing and a breakdown of the metrics by type (standard or [custom][1]).
+This section shows all of your metric sources, the additional processing and configuration that is applied to your metrics data, and a volume breakdown of standard and custom metrics. 
 
 ### Metric Sources
 
@@ -75,14 +78,14 @@ In total, Datadog has more than {{< translate key="integration_count" >}} integr
 
 ### Configurable Processing
 
-The **Configurable Processing** column shows an overview of the configuration options available for your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
+The **Configurable Processing** column lists the various advanced configuration options that you can use to increase the value of your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
 
 {{% collapse-content title="Optimize your custom metrics costs with Metrics without Limits™" level="h4" %}}
-[Metrics without Limits™][19] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization.
+[Metrics without Limits™][19] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization. Your use of Metrics without Limits™ is reflected in the top section of the Overview page as **Selected Metrics**. For more information about managing your custom metrics costs, see [Best Practices for Custom Metrics Governance][22].
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Enable percentiles on distribution metrics" level="h4" %}}
-[Distribution metrics][20] with percentiles enabled show you percentile aggregations of metric values sent from multiple hosts, so you can measure statistical distributions across your entire infrastructure.
+[Distribution metrics][20] with percentiles enabled provide you with globally accurate percentiles calculated server-side from all hosts, so you can measure statistical distributions across your entire distributed infrastructure.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Ingest historical metrics" level="h4" %}}
@@ -95,13 +98,13 @@ The **Available Metrics** column breaks down your total metric volume by standar
 
 ## Your metrics by source
 
-This section contains a tree map with a breakdown of your metric sources and their respective volumes.
+This section contains a tree map that outlines your metric sources and their respective volumes.
 
 {{< img src="metrics/overview/metrics_by_source.png" alt="The your metrics by source section of the metrics overview page" >}}
 
 ## Generate metrics from any source
 
-Click any of the options to open the page in Datadog where you can create custom metrics for:
+Clicking on any of the options below brings you to the corresponding product's Generate Metrics page, where you can create custom metrics from that product:
    - [Logs][14]
    - [Ingested spans][15]
    - [RUM events][16]
