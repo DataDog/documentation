@@ -106,9 +106,9 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
-### View recommendations for guidance on what optimization and why
+### View optimization recommendations
 
-The [Recommendations page][6] brings problems and optimization opportunities to your attention, saving time by telling you about what's most important to look at.
+The [Recommendations page][6] highlights problems and optimization opportunities, helping you save time by prioritizing what's most important.
 
 {{< img src="database_monitoring/recommendations-page.png" alt="The Recommendations page in Datadog" style="width:90%;" >}}
 
