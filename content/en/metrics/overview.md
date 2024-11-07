@@ -68,6 +68,8 @@ Some Datadog products, such as Synthetic Testing, provide standard metrics by de
 
 [Generate custom event-based metrics][18] for visibility into monitor alerts or any other event-based data ingested by Datadog.
 
+{{% /collapse-content %}} 
+
 ### Configurable Processing
 
 The **Configurable Processing** column shows an overview of the configuration options available for your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
