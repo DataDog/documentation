@@ -20,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-event-management"
   tag: "Blog"
   text: "Aggregate, correlate, and act on alerts faster with AIOps-powered Event Management"
+- link: "https://www.datadoghq.com/blog/datadog-service-management/"
+  tag: "Blog"
+  text: "Ensure high service availability with Datadog Service Management"
 ---
 
 {{< site-region region="gov" >}}

@@ -229,9 +229,9 @@ menu:
       url: getting_started/test_visibility/
       parent: getting_started
       weight: 26
-    - name: Intelligent Test Runner
-      identifier: getting_started_intelligent_test_runner
-      url: getting_started/intelligent_test_runner/
+    - name: Test Impact Analysis
+      identifier: getting_started_test_impact_analysis
+      url: getting_started/test_impact_analysis/
       parent: getting_started
       weight: 27
     - name: Code Analysis
@@ -2077,11 +2077,16 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
       weight: 103
+    - name: Manage Data Collection
+      url: error_tracking/manage_data_collection
+      parent: error_tracking
+      identifier: error_tracking_manage_data
+      weight: 11
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 11
+      weight: 12
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -3405,10 +3410,10 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
-    - name: Span Facets
-      url: tracing/trace_explorer/facets/
+    - name: Span Tags and Attributes
+      url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
-      identifier: span_facets
+      identifier: span_attributes
       weight: 603
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/
@@ -3459,11 +3464,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_map
       weight: 705
+    - name: Inferred Services
+      url: tracing/services/inferred_services
+      parent: tracing_services
+      identifier: tracing_inferred_services
+      weight: 706
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 706
+      weight: 707
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -3896,6 +3906,11 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_mongodbatlas
       weight: 702
+    - name: Troubleshooting
+      url: database_monitoring/setup_mongodb/troubleshooting/
+      parent: dbm_setup_mongodb
+      identifier: dbm_troubleshooting_mongodb
+      weight: 703
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
@@ -4171,7 +4186,7 @@ menu:
       identifier: cd_explorer_saved_views
       parent: cd_explorer
       weight: 303
-    - name: Test Visibility
+    - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
@@ -4257,35 +4272,90 @@ menu:
       parent: tests
       identifier: tests_monitors
       weight: 5
+    - name: Flaky Test Management
+      url: tests/flaky_test_management
+      parent: tests
+      identifier: tests_flaky_test_management
+      weight: 6
+    - name: Early Flake Detection
+      url: tests/flaky_test_management/early_flake_detection
+      parent: tests_flaky_test_management
+      identifier: tests_early_flake_detection
+      weight: 601
+    - name: Auto Test Retries
+      url: tests/flaky_test_management/auto_test_retries
+      parent: tests_flaky_test_management
+      identifier: tests_auto_test_retries
+      weight: 602
+    - name: Test Impact Analysis
+      url: tests/test_impact_analysis
+      parent: tests
+      identifier: test_impact_analysis
+      weight: 7
+    - name: Setup
+      url: tests/test_impact_analysis/setup/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_setup
+      weight: 701
+    - name: .NET
+      url: tests/test_impact_analysis/setup/dotnet/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_dotnet
+      weight: 101
+    - name: JavaScript and TypeScript
+      url: tests/test_impact_analysis/setup/javascript/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_javascript
+      weight: 102
+    - name: Python
+      url: tests/test_impact_analysis/setup/python/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_python
+      weight: 103
+    - name: Swift
+      url: tests/test_impact_analysis/setup/swift/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_swift
+      weight: 104
+    - name: Java
+      url: tests/test_impact_analysis/setup/java/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_java
+      weight: 105
+    - name: Ruby
+      url: tests/test_impact_analysis/setup/ruby/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_ruby
+      weight: 106
+    - name: How It Works
+      url: tests/test_impact_analysis/how_it_works/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_how_it_works
+      weight: 702
+    - name: Troubleshooting
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_troubleshooting
+      weight: 703
     - name: Developer Workflows
       url: tests/developer_workflows
       parent: tests
       identifier: tests_developer_workflows
-      weight: 6
+      weight: 8
     - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
-      weight: 7
+      weight: 9
     - name: Instrument Browser Tests with RUM
       url: tests/browser_tests
       parent: tests
       identifier: tests_browser_tests
-      weight: 8
+      weight: 10
     - name: Instrument Swift Tests with RUM
       url: tests/swift_tests
       parent: tests
       identifier: tests_swift_tests
-      weight: 9
-    - name: Early Flake Detection
-      url: tests/early_flake_detection
-      parent: tests
-      identifier: tests_early_flake_detection
-      weight: 10
-    - name: Auto Test Retries
-      url: tests/auto_test_retries
-      parent: tests
-      identifier: tests_auto_test_retries
       weight: 11
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests
@@ -4302,63 +4372,12 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 14
-    - name: Intelligent Test Runner
-      url: intelligent_test_runner/
-      pre: intelligent-test-runner
-      parent: software_delivery_heading
-      identifier: intelligent_test_runner
-      weight: 40000
-    - name: Setup
-      url: intelligent_test_runner/setup/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_setup
-      weight: 1
-    - name: .NET
-      url: intelligent_test_runner/setup/dotnet/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_dotnet
-      weight: 101
-    - name: JavaScript and TypeScript
-      url: intelligent_test_runner/setup/javascript/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_javascript
-      weight: 102
-    - name: Python
-      url: intelligent_test_runner/setup/python/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_python
-      weight: 103
-    - name: Swift
-      url: intelligent_test_runner/setup/swift/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_swift
-      weight: 104
-    - name: Java
-      url: intelligent_test_runner/setup/java/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_java
-      weight: 105
-    - name: Ruby
-      url: intelligent_test_runner/setup/ruby/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_ruby
-      weight: 106
-    - name: How It Works
-      url: intelligent_test_runner/how_it_works/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_how_it_works
-      weight: 2
-    - name: Troubleshooting
-      url: intelligent_test_runner/troubleshooting/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_troubleshooting
-      weight: 3
     - name: Code Analysis
       url: code_analysis/
       pre: ci
       parent: software_delivery_heading
       identifier: code_analysis
-      weight: 50000
+      weight: 40000
     - name: Static Analysis (SAST)
       url: code_analysis/static_analysis
       parent: code_analysis
@@ -4434,7 +4453,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: quality_gates
-      weight: 60000
+      weight: 50000
     - name: Setup
       url: quality_gates/setup
       parent: quality_gates
@@ -4475,7 +4494,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: dora_metrics
-      weight: 70000
+      weight: 60000
     - name: Setup
       url: dora_metrics/setup
       parent: dora_metrics
