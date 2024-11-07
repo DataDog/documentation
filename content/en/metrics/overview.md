@@ -31,10 +31,11 @@ The **Metric Sources** column shows a summary of the metric sources reporting to
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 The [Datadog Agent][3] collects metrics from the hosts it's installed on, and forwards them to Datadog. These metrics could originate from:
 
-   - Any of the official Datadog integrations that are bundled with the Agent. See the [integrations-core repository][4] for a full listing of the available integrations, and [Integration Management][5] for more information about managing these integrations.
+   - Any of the official Datadog integrations that are bundled with the Agent. See the [integrations-core repository][4] for a full listing of the available Agent-based integrations.
    - [DogStatsD][6], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][7] protocol with some Datadog-specific extensions.
    - [Custom checks][8], which are used to collect metrics from custom applications or unique systems. You define the logic for the check yourself in the Agent's configuration files. See [Writing a Custom Agent Check][9] for more information.
    - [Marketplace integrations][10] installed on the Agent. The [Datadog Marketplace][11] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Cloud integrations" level="h4" %}}
@@ -69,6 +70,8 @@ Some Datadog products, such as Synthetic Testing, provide standard metrics by de
 [Generate custom event-based metrics][18] for visibility into monitor alerts or any other event-based data ingested by Datadog.
 
 {{% /collapse-content %}} 
+
+In total, Datadog has more than {{< translate key="integration_count" >}} integrations. See [Integration Management][5] for more information about managing your integrations.
 
 ### Configurable Processing
 
@@ -107,7 +110,7 @@ Click any of the options to open the page in Datadog where you can create custom
 
 ## Metrics available for querying
 
-Use the search bar in this section to view the latest data and configuration options of any of your metrics. You can search all its tags, or click to investigate the metric further in the Metrics Explorer or Summary pages.
+Use the search bar in this section to view the latest data and configuration options of any of your metrics. You can search all its tags, or click to investigate the metric further in the [Metrics Explorer][23] or [Summary][24] pages.
 
 {{< img src="metrics/overview/available_metrics.png" alt="The metrics available for querying section of the metrics overview page" >}}
 
@@ -127,7 +130,7 @@ Use the search bar in this section to view the latest data and configuration opt
 [10]: /integrations/#cat-marketplace
 [11]: https://app.datadoghq.com/marketplace
 [12]: /developers/integrations/?tab=integrations#api-based-integrations
-[13]: /api/latest/metrics/
+[13]: /api/latest/metrics/#submit-metrics
 [14]: /logs/log_configuration/logs_to_metrics/
 [15]: /tracing/trace_pipeline/generate_metrics/
 [16]: /real_user_monitoring/platform/generate_metrics/
@@ -136,3 +139,6 @@ Use the search bar in this section to view the latest data and configuration opt
 [19]: /metrics/metrics-without-limits/
 [20]: /metrics/distributions/
 [21]: /metrics/custom_metrics/historical_metrics/
+[22]: /metrics/guide/custom_metrics_governance
+[23]: https://app.datadoghq.com/metric/explorer
+[24]: https://app.datadoghq.com/metric/summary
