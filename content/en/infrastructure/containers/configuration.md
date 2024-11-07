@@ -214,7 +214,7 @@ To collect custom resources, you need to configure both the Datadog Agent and se
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
 
-   The Datadog Operator needs permission to collect custom resources. Install the Operator with an option that grants this permission:
+   The Datadog Operator needs permission to allow the Agent to collect custom resources. Install the Operator with an option that grants this permission:
 
    ```
    helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
