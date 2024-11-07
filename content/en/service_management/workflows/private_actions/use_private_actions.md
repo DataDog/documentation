@@ -46,7 +46,7 @@ To use App Builder with private actions, you must be able to point a hostname to
 
 In addition, the host must have the following:
 - 2GB of RAM
-- Docker (with Docker Compose if that is your preference)
+- Docker (with Docker Compose if that is your preference) or Kubernetes
 
 ## Set up a private action runner
 
