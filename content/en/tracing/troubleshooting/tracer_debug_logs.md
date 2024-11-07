@@ -123,7 +123,7 @@ or enable the debug mode during the `Start` config:
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 
 func main() {
     tracer.Start(tracer.WithDebugMode(true))
@@ -143,7 +143,7 @@ package main
 import (
   "time"
 
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func main() {
