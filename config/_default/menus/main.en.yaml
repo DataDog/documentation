@@ -3520,7 +3520,7 @@ menu:
       identifier: tracing_error_tracking_troubleshooting
       weight: 1008
     - name: Change Tracking
-      url: tracing/error_tracking
+      url: tracing/change_tracking
       parent: tracing
       identifier: change_tracking
       weight: 11
