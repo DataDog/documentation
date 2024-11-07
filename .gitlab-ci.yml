@@ -271,7 +271,7 @@ typesense_sync_preview:manual:
   dependencies:
     - build_preview
   script:
-    # build the site to get algolia.json ondemand
+    # build the site to get search.json ondemand
     - touch Makefile.config preview_error.log
     - make dependencies
     - make config
