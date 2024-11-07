@@ -10,12 +10,9 @@ further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls"
   tag: "Documentation"
   text: "Ingestion Control Page"
-- link: "/tracing/guide/resource_based_sampling/"
-  tag: "Documentation"
-  text: "Resource-based sampling"
 ---
 
-{{< callout url="<https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/>" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" header="Request access to the Preview!" >}}
 Adaptive sampling is in Preview. To request access, complete the form.
 {{< /callout >}}
 
@@ -51,7 +48,7 @@ The following table lists minimum tracing library versions required for Adaptive
 | Node.js     | [v5.16.0][12]            |
 | .NET        | [v2.54.0][13]            |
 | C++/Proxies | [v0.2.2][14]             |
-| PHP         |  Not available           |
+| PHP         | [v1.4.0][17]             |
 
 ## View sampling rates by resource
 
@@ -60,7 +57,7 @@ To see configured sampling rates:
 1. Navigate to the Ingestion Controls [Service Ingestion Summary][1].
 2. View the table listing the applied sampling rates by resource of the service.
 
-{{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
+{{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 The table includes:
 - `Ingested bytes`: Ingested bytes from spans of the service and resource.
@@ -75,20 +72,20 @@ The table includes:
 
 To configure adaptive sampling for the service:
 1. Navigate to the [Datadog Ingestion Control page][16].
-  {{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_budget_cta.png" alt="Call to action to set adaptive sampling budget" style="width:100%;">}}
+  {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_budget_cta.png" alt="Call to action to set adaptive sampling budget" style="width:100%;">}}
 
 2. Open the modal to set/edit the **Monthly Ingestion Target** for adaptive sampling. Make sure that the ingestion volume target is `>0` when enrolling a first service to adaptive sampling. For subsequent services, you can increase the allocated budget after the new service is onboarded to account for the new volume. 
 
 **Note**: the configured budget is only allocated to services enrolled to adaptive sampling. It does not account for the additional volume from services that use local sampling rules or other [sampling mechanisms][8] configured locally in the Agent or the tracing library.
 
-{{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_budget_modal.png" alt="Adaptive sampling budget modal" style="width:70%;">}}
+{{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_budget_modal.png" alt="Adaptive sampling budget modal" style="width:70%;">}}
 
 3. Navigate to the [Service Ingestion Summary page][1] for your service.
 4. Click **Manage Ingestion Rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
 5. Set your service's sampling strategy to **Datadog Adaptive Sampling Rates** and click **Apply** to save the configuration.
 6. _[Optional]_ Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (e.g. 100% of `GET /checkout` endpoints) or less (e.g. 0.1% of `/health` requests) data.
 
-{{< img src="/tracing/guide/resource_based_sampling/adaptive_sampling_setting_modal.png" alt="Adaptive sampling setting modal" style="width:70%;">}}
+{{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_setting_modal.png" alt="Adaptive sampling setting modal" style="width:70%;">}}
 
 The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources controlled by adaptive sampling will appear marked as `Adaptive Remote` in the **Configuration** column.
 
@@ -110,5 +107,6 @@ The configuration should take effect in 5-6 minutes, the time it takes for Datad
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.54.0
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2
-[15]: /tracing/guide/resource_based_sampling/
+[15]: /tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rates-by-resource
 [16]: /tracing/trace_pipeline/ingestion_controls
+[17]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0
