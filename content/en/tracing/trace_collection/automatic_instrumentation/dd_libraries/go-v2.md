@@ -1,5 +1,5 @@
 ---
-title: Tracing Go Applications
+title: (v2) Tracing Go Applications
 aliases:
 - /tracing/go-v2/
 - /tracing/languages/go-v2
@@ -8,9 +8,6 @@ aliases:
 - /tracing/setup_overview/go-v2
 - /tracing/setup_overview/setup/go-v2
 - /tracing/trace_collection/dd_libraries/go-v2
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 20
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
@@ -29,7 +26,7 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Tracing Go Applications</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go">Tracing Go Applications</a> documentation.</div>
 
 
 ## Compatibility requirements

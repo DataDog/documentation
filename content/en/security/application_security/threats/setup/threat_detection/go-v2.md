@@ -1,8 +1,5 @@
 ---
-title: Enabling ASM for Go
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 20
+title: (v2) Enabling ASM for Go
 aliases:
   - /security_platform/application_security/getting_started/go-v2
   - /security/application_security/getting_started/go-v2
@@ -22,7 +19,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Enabling ASM for Go</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/security/application_security/threats/setup/threat_detection/go">Enabling ASM for Go</a> documentation.</div>
 
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.

@@ -1,5 +1,5 @@
 ---
-title: Go Custom Instrumentation using the Datadog API
+title: (v2) Go Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
@@ -8,9 +8,6 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
 description: 'Instrument your code with the Datadog API tracer.'
-code_lang: dd-api
-type: multi-code-lang
-code_lang_weight: 1
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
@@ -20,7 +17,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="dd-api.md">Go Custom Instrumentation using the Datadog API</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/trace_collection/custom_instrumentation/go/dd-api">Go Custom Instrumentation using the Datadog API</a> documentation.</div>
 
 
 <div class="alert alert-info">

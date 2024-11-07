@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Go Serverless Applications
+title: (v2) Instrumenting Go Serverless Applications
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
@@ -15,7 +15,7 @@ aliases:
     - /serverless/installation/go-v2
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Instrumenting Go Serverless Applications</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/serverless/aws_lambda/installation/go">Instrumenting Go Serverless Applications</a> documentation.</div>
 
 
 <div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>

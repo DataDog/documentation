@@ -1,9 +1,6 @@
 ---
-title: Go Runtime Metrics
+title: (v2) Go Runtime Metrics
 description: "Gain additional insights into your Go application's performance with the runtime metrics associated to your traces."
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 60
 aliases:
 - /tracing/runtime_metrics/go-v2
 further_reading:
@@ -18,7 +15,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Go Runtime Metrics</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/metrics/runtime_metrics/go">Go Runtime Metrics</a> documentation.</div>
 
 
 ## Automatic configuration

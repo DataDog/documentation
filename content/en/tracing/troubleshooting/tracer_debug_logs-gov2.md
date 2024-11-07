@@ -135,7 +135,7 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="tracer_debug_logs.md">Tracer Debug Logs</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/troubleshooting/tracer_debug_logs">Tracer Debug Logs</a> documentation.</div>
 
 
 To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,

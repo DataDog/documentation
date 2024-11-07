@@ -278,7 +278,7 @@ end
 
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="apm.md">Tracing Docker Applications</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/containers/docker/apm">Tracing Docker Applications</a> documentation.</div>
 
 
 ```go

@@ -175,7 +175,7 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="instrument_custom_method.md">Instrument a custom method to get deep visibility into your business logic</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/guide/instrument_custom_method">Instrument a custom method to get deep visibility into your business logic</a> documentation.</div>
 
 
   In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.

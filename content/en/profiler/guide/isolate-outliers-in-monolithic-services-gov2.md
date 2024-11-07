@@ -102,7 +102,7 @@ Then, open CPU, Exceptions, or Wall Time profiles for your service and select th
 {{< /programming-lang >}}
 {{< programming-lang lang="go">}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="isolate-outliers-in-monolithic-service.md">Isolate Outliers in Monolithic Services</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/profiler/guide/isolate-outliers-in-monolithic-service">Isolate Outliers in Monolithic Services</a> documentation.</div>
 
 
 The Go profiler supports custom annotations for your business logic as of version v1.60.0. To add annotations, use [profiler labels][1] like so:

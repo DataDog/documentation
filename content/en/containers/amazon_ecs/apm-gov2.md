@@ -202,7 +202,7 @@ end
 
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="apm.md">Tracing ECS Applications</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/containers/amazon_ecs/apm">Tracing ECS Applications</a> documentation.</div>
 
 
 #### Launch time variable

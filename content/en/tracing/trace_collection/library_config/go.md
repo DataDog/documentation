@@ -21,7 +21,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="go-v2.md">Configuring the Go Tracing Library</a> documentation.</div>
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/trace_collection/library_config/go-v2">Configuring the Go Tracing Library</a> documentation.</div>
 
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.

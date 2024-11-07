@@ -21,7 +21,7 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="go-v2.md">Correlating Go Logs and Traces</a> documentation.</div>
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/other_telemetry/connect_logs_and_traces/go-v2">Correlating Go Logs and Traces</a> documentation.</div>
 
 
 ## Manual injection

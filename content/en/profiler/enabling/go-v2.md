@@ -1,8 +1,5 @@
 ---
 title: Enabling the Go Profiler
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 30
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
@@ -17,7 +14,7 @@ aliases:
   - /tracing/profiler/enabling/go-v2/
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Enabling the Go Profiler</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/profiler/enabling/go">Enabling the Go Profiler</a> documentation.</div>
 
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.

@@ -1,11 +1,8 @@
 ---
-title: Correlating Go Logs and Traces
+title: (v2) Correlating Go Logs and Traces
 description: 'Connect your Go logs and traces to correlate them in Datadog.'
 aliases:
   - /tracing/connect_logs_and_traces/go-v2
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 30
 further_reading:
     - link: 'tracing/trace_collection/custom_instrumentation'
       tag: 'Documentation'
@@ -21,7 +18,7 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Correlating Go Logs and Traces</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/other_telemetry/connect_logs_and_traces/go">Correlating Go Logs and Traces</a> documentation.</div>
 
 
 ## Manual injection

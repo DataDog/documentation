@@ -444,7 +444,7 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="ingestion_mechanisms-gov2.md">Ingestion Mechanisms</a> documentation.</div>
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/trace_pipeline/ingestion_mechanisms-gov2">Ingestion Mechanisms</a> documentation.</div>
 
 
 Manually keep a trace:

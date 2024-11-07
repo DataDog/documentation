@@ -20,7 +20,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="dd-api-v2.md">Go Custom Instrumentation using the Datadog API</a> documentation.</div>
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/trace_collection/custom_instrumentation/go/dd-api-v2">Go Custom Instrumentation using the Datadog API</a> documentation.</div>
 
 
 <div class="alert alert-info">

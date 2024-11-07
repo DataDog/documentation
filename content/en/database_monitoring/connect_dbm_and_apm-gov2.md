@@ -92,7 +92,7 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="connect_dbm_and_apm.md">Tracing ECS Applications</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/database_monitoring/connect_dbm_and_apm">Tracing ECS Applications</a> documentation.</div>
 
 
 Update your app dependencies to include [dd-trace-go@v2.0.0][1] or greater:

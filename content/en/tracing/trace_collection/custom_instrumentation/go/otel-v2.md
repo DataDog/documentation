@@ -1,9 +1,6 @@
 ---
-title: Go Custom Instrumentation using the OpenTelemetry API
+title: (v2) Go Custom Instrumentation using the OpenTelemetry API
 description: 'Instrument your Go application with the OpenTelemetry API to send traces to Datadog'
-code_lang: otel
-type: multi-code-lang
-code_lang_weight: 2
 aliases:
 - /tracing/trace_collection/otel_instrumentation/go/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/go
@@ -16,7 +13,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="otel.md">Go Custom Instrumentation using the OpenTelemetry API</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/trace_collection/custom_instrumentation/go/otel">Go Custom Instrumentation using the OpenTelemetry API</a> documentation.</div>
 
 
 {{% otel-custom-instrumentation-lang %}}

@@ -1,19 +1,16 @@
 ---
-title: Go Compatibility Requirements
+title: (v2) Go Compatibility Requirements
 description: 'Compatibility Requirements for the Go tracer'
 aliases:
   - /tracing/compatibility_requirements/go-v2
   - /tracing/setup_overview/compatibility_requirements/go-v2
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 30
 further_reading:
     - link: 'tracing/trace_collection/dd_libraries/go-v2'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Go Compatibility Requirements</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/trace_collection/compatibility/go">Go Compatibility Requirements</a> documentation.</div>
 
 
 ## Compatibility

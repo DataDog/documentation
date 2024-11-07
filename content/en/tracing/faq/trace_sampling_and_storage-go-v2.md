@@ -191,7 +191,7 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="trace_sampling_and_storage.md">Trace Sampling and Storage</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/faq/trace_sampling_and_storage">Trace Sampling and Storage</a> documentation.</div>
 
 
 Manually keep a trace:

@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent
+title: (v2) Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent
 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
@@ -22,7 +22,7 @@ further_reading:
   text: Tracing library open source code repository
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="tutorial-enable-go-host.md">Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/guide/tutorial-enable-go-host">Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent</a> documentation.</div>
 
 ## Overview
 

@@ -1,8 +1,5 @@
 ---
-title: Configuring the Go Tracing Library
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 20
+title: (v2) Configuring the Go Tracing Library
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
@@ -21,7 +18,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Configuring the Go Tracing Library</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/trace_collection/library_config/go">Configuring the Go Tracing Library</a> documentation.</div>
 
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.

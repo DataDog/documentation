@@ -1,8 +1,8 @@
 ---
-title: Setup Data Streams Monitoring for Go
+title: (v2) Setup Data Streams Monitoring for Go
 ---
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="go.md">Data Streams Monitoring</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/data_streams/go">Data Streams Monitoring</a> documentation.</div>
 
 ### Prerequisites
 
