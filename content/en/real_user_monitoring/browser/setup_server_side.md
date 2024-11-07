@@ -125,6 +125,6 @@ The available functionality has the following important limitations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/custom_setup
+[1]: /real_user_monitoring/browser/setup_client_side/
 [2]: /agent/
 [3]: /real_user_monitoring/browser/advanced_configuration/

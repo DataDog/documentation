@@ -6285,8 +6285,8 @@ menu:
       parent: rum_browser
       identifier: rum_browser_auto_setup
       weight: 101
-    - name: Custom Instrumentation
-      url: real_user_monitoring/browser/custom_setup/
+    - name: Client Side Setup
+      url: real_user_monitoring/browser/setup_client_side/
       parent: rum_browser
       identifier: rum_browser_custom_setup
       weight: 102

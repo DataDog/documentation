@@ -139,7 +139,7 @@ See [privacy options specific to Session Replay][19].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /real_user_monitoring/browser/custom_setup/#configuration
+[2]: /real_user_monitoring/browser/setup_client_side/#configuration
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [5]: /real_user_monitoring/explorer/search/
