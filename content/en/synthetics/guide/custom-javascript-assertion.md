@@ -65,8 +65,9 @@ localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 
+`localStorage` can be easily accessed in other JavaScript assertions if you need to compare specific values. You can retrieve the values as shown below:
+
 {{< code-block lang="javascript" >}}
-LocalStorage can be easily accessed in other JavaScript assertions if you need to compare specific values. You can retrieve the values as shown below
 localStorage.getItem("mytime");
 return true
 {{< /code-block >}}
