@@ -117,7 +117,7 @@ En la [página Bases de datos][1], puedes evaluar el estado y la actividad de tu
   El Centro de aprendizaje de Datadog está lleno de cursos prácticos para ayudarte a aprender sobre este tema. Inscríbete sin coste para identificar ineficiencias y optimizar tu base de datos de Postgres.
 {{< /learning-center-callout >}}
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/databases
 [2]: /es/database_monitoring/query_metrics/

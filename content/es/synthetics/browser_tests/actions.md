@@ -163,8 +163,8 @@ Para obtener más información sobre cómo comprobar las descargas, consulta [Co
 [1]: /es/synthetics/guide/email-validation
 [2]: /es/synthetics/browser_tests/actions#use-variables
 [3]: /es/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 </br>
 
