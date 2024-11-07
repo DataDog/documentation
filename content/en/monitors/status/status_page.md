@@ -41,7 +41,7 @@ The header contains the monitor's metadata, including:
 
 On the right, you'll find the **Edit**, **Clone**, **Export**, and **Permissions** buttons.
 
-From the header, you can resolve the monitor. Resolving from the header resolves all groups in the alert and sets the monitor status to `OK` (all groups). The `resolve` function temporarily changes the monitor status to `OK` for its next evaluation, but the next evaluation proceeds as normal based on current data. To resolve from the Event details, see [Status Events][1].
+From the header, you can resolve the monitor. Resolving from the header resolves all groups in the alert and sets the monitor status to `OK` (all groups). The `resolve` function temporarily changes the monitor status to `OK` until its next evaluation, but the next evaluation proceeds as normal based on current data. To resolve from the Event details, see [Status Events][1].
 
 {{< img src="/monitors/status/header_downtimes.png" alt="The monitor is not muted, but you can click Not Muted to see options to create a downtimes for this monitor" style="width:100%;" >}}
 
