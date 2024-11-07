@@ -9,7 +9,7 @@ further_reading:
 
 After you plan your Datadog installation design and best practices, concentrate on the construction of Datadog itself, understanding what needs to be installed, and the best way to achieve that.
 
-As you scale your IT footprint, it's important to develop standards, methods, and practices for how software is installed and used. Engineering effort is dedicated to developing precise steps for installing and configuring software in a repeatable, standardized manner, while still allowing for a significant level of flexibility. Without these standards, service reliability can be impacted. In this section, we describe how Datadog can most efficiently interact with those standards, methods, and practices.
+As you scale your IT footprint, it's important to develop standards, methods, and practices for how software is installed and used. Engineering effort is dedicated to developing precise steps for installing and configuring software in a repeatable, standardized manner, while still allowing for a significant level of flexibility. Without these standards, reliability can be impacted. In this section, we describe how Datadog can most efficiently interact with those standards, methods, and practices.
 
 ## Iterating on your environment
 
@@ -30,11 +30,11 @@ It is possible to stagger the installation of Datadog, and build up the complexi
 
 ## Internal support
 
-As the owner of your Datadog platform, you will likely need to create a way for your users to consume your service.  There might be a wiki, ServiceNow integration, or Jira board that will publish the Datadog services, and provide a way to request them. This is the guide that your internal customers will use to deploy Datadog on the apps and infrastructure they manage. 
+As the owner of your Datadog platform, you will likely need to create a way for your users to consume your installation. There might be a wiki, ServiceNow integration, or Jira board that will publish Datadog, and provide a way to request them. This is the guide that your internal customers will use to deploy Datadog on the apps and infrastructure they manage. 
 
 The shape of this system will be different depending on your environment, but there are a few fundamental things that can accelerate this creation:
  
-1. Build a list of Datadog service tasks such as:
+1. Build a list of Datadog installation tasks such as:
 
     - Onboard a new application, including all its software and infrastructure. 
     - Add a cloud account

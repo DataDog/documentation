@@ -7,15 +7,15 @@ further_reading:
   text: "Getting Started with Dashboards"
 ---
 
-In the [Plan](/administrators_guide/plan/) and [Build](/administrators_guide/build/) sections, you gained insights into setting goals, strategizing integrations, and constructing and iterating on the Datadog environment for smooth production use.  Next, you'll learn about the run phase, where you'll manage  a series of internal and external tasks to keep the Datadog service running efficiently. 
+In the [Plan](/administrators_guide/plan/) and [Build](/administrators_guide/build/) sections, you gained insights into setting goals, strategizing integrations, and constructing and iterating on the Datadog environment for smooth production use.  Next, you'll learn about the run phase, where you'll manage  a series of internal and external tasks to keep the Datadog installation running efficiently. 
 
 ## Service tasks
 
-Reduce risks and increase adoption by releasing your new Datadog services sequentially, gaining confidence as the service develops. This section lists a sequence of service item releases to optimize the user experience with Datadog. Due to the diversity of IT architecture, this guide is high-level. Here are a few highlights:
+Reduce risks and increase adoption by releasing new Datadog installations sequentially. This section lists a sequence of item releases to optimize the user experience with Datadog. Due to the diversity of IT architecture, this guide is high-level. Here are a few highlights:
 
 ### Onboarding a new infrastructure instance
 
-Infrastructure is the foundational object of IT and observability. It is the first and most common task of a Datadog service run team. The platform is flexible, with tools to simplify the vast majority of this task. Start by customizing it to fit your local conditions. Your IT architecture may include components like HyperVisors, HyperScalers, and Serverless Infrastructure.  
+Infrastructure is the core element of IT and observability. It is the primary and most frequent task for a Datadog administrator team. The platform is flexible, with tools to simplify the vast majority of this task. Start by customizing it to fit your local conditions. Your IT architecture may include components like HyperVisors, HyperScalers, and Serverless Infrastructure.  
 
 **Recommendations**:   
 
@@ -39,7 +39,7 @@ Due to its platform-as-a-service structure, Datadog demands little troubleshooti
 **Recommendations**: 
 Use the `status` and `flare` commands from day one.
 
-## Service Administration Tasks
+## Administration Tasks
 
 Like all other enterprise software, ongoing maintenance tasks must be well-organized and adhere to your local policies. Common ongoing tasks include:
 
@@ -87,7 +87,7 @@ Include Datadog upgrades within existing patch management standards and upgrade 
 
 ## Summary
 
-Datadog administration has several activities that should fit well into your existing process standards. Incorporate Datadog into your standard systems for key rotation, patch updates, service onboarding, and Infrastructure as Code (IaC). Publish these standards early to guide users in getting started with your new Datadog installation. 
+Datadog administration has several activities that should fit well into your existing process standards. Incorporate Datadog into your standard systems for key rotation, patch updates, onboarding, and Infrastructure as Code (IaC). Publish these standards early to guide users in getting started with your new Datadog installation. 
 
 ## Next steps
 
