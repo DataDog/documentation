@@ -85,7 +85,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
-    1. Create a values.yaml file.
+    1. Create a `values.yaml` file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
 1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
@@ -129,7 +129,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
-    1. Create a values.yaml file.
+    1. Create a `values.yaml` file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
 1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
@@ -171,7 +171,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
-    1. Create a values.yaml file.
+    1. Create a `values.yaml` file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
 1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
