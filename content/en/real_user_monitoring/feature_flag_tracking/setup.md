@@ -44,7 +44,6 @@ To enable feature flag data collection for the Browser SDK:
      // Initialize Datadog Browser SDK
      datadogRum.init({
        ...
-       enableExperimentalFeatures: ["feature_flags"],
        ...
    });
    ```
