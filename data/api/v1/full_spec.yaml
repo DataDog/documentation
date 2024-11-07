@@ -13231,6 +13231,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -13238,6 +13240,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security
@@ -20165,9 +20169,19 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20921,9 +20935,19 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21684,9 +21708,19 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        error_tracking_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_events_agg_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:

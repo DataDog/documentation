@@ -8,7 +8,7 @@ further_reading:
   text: Real User Monitoring (RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: Blog
-  text: Monitor de métricas de Core Web Vitals con Datadog RUM y <txprotected>Monitorización</txprotected>
+  text: Monitor de métricas de Core Web Vitals con Datadog RUM y Monitorización
     Sintético
 - link: /real_user_monitoring/explorer/
   tag: Documentación
@@ -39,7 +39,7 @@ Puedes acceder a las métricas del rendimiento de tus vistas en:
 Las métricas de Core Web Vitals de Datadog están disponibles en el paquete de <a href="https://github.com/Datadog/browser-sdk">@Datadog</a>/browser-rum v2.2.0+.
 </div>
 
-Las métricas de [Core Web Vitals de Google][5] son un conjunto de tres métricas diseñados para monitorizar la experiencia de usuario de un sitio. Estas métricas se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada métrica viene acompañada de orientaciones sobre el rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda la <txprotected>monitorización</txprotected> del percentil 75 para estas métricas.
+Las métricas de [Core Web Vitals de Google][5] son un conjunto de tres métricas diseñados para monitorizar la experiencia de usuario de un sitio. Estas métricas se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada métrica viene acompañada de orientaciones sobre el rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda la monitorización del percentil 75 para estas métricas.
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Visualización del resumen de las métricas de Core Web Vitals" >}}
 

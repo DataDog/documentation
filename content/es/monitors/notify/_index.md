@@ -189,7 +189,7 @@ Las variables de mensaje se rellenan automáticamente con un grupo seleccionado 
 ```
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/configuration
 [3]: http://daringfireball.net/projects/markdown/syntax

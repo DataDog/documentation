@@ -11,7 +11,7 @@ categories:
 - iot
 - log collection
 - event management
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Integra tus servicios de AWS con Datadog.
 doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
