@@ -7,7 +7,7 @@ further_reading:
   text: "Getting Started with Dashboards"
 ---
 
-In the [Plan](/administrators_guide/plan/) and [Build](/administrators_guide/build/) sections, you gained insights into setting goals, strategizing integrations, and constructing and iterating on the Datadog environment for smooth production use.  Next, you'll learn about the run phase, where you'll manage  a series of internal and external tasks to keep the Datadog installation running efficiently. 
+In the [Plan](/administrators_guide/plan/) and [Build](/administrators_guide/build/) sections, you gained insights into setting goals, strategizing integrations, and constructing and iterating on the Datadog environment for smooth production use. Next, you'll learn about the run phase, where you'll manage  a series of internal and external tasks to keep the Datadog installation running efficiently. 
 
 ## Service tasks
 
@@ -34,7 +34,7 @@ Develop automatic version tagging integrated into your application build process
 
 ## Fielding technical issues
 
-Due to its platform-as-a-service structure, Datadog demands little troubleshooting from you, the administrator. To help identify issues in the host Agent, use the` datadog-agent status` [command][3].  This command reports granular, specific, and actionable information that identifies areas to address. Additionally, use the `datadog-agent flare` command to quickly surface issues that need to be addressed by Datadog Support.
+Due to its platform-as-a-service structure, Datadog demands little troubleshooting from you, the administrator. To help identify issues in the host Agent, use the` datadog-agent status` [command][3]. This command reports granular, specific, and actionable information that identifies areas to address. Additionally, use the `datadog-agent flare` command to quickly surface issues that need to be addressed by Datadog Support.
 
 **Recommendations**: 
 Use the `status` and `flare` commands from day one.
