@@ -28,12 +28,10 @@ The right panel of the graph section of the monitor status page provides a high-
 | ---- | ---- |
 | Groups | Count of groups per status (`ALERT`, `WARN`, `NO DATA`, `OK`) |
 | Visualize as | Graph selector to toggle between the Evaluated Data, Source Data, and Transitions graphs. |
-| Query | The raw monitor query. A link to the Metrics explorer is also available. |
+| Query | The raw monitor query. Each monitor includes a dynamic link to a specific explorer or page based on the data type, such as event explorer for event data types or a general metric explorer for other types. |
 | Evaluation | The aggregation method applied to the Query with the evaluation window. |
 | Notification count | Count of notifications sent from this monitor. |
 
-<!-- [**UPDATE**]
-\* The link to the Metrics Explorer is available only for Metrics, Event, Logs, … monitors. -->
 
 ## Filter the page by groups or status
 
