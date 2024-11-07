@@ -82,7 +82,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Kubernetes**.
 1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
 1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster by running `kubectl get pods` and verifying that the output is not an error, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
     1. Create a values.yaml file.
@@ -125,7 +125,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Kubernetes**.
 1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
 1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster by running `kubectl get pods` and verifying that the output is not an error, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
     1. Create a values.yaml file.
@@ -166,7 +166,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Kubernetes**.
 1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
 1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster by running `kubectl get pods` and verifying that the output is not an error, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
     1. Create a values.yaml file.
