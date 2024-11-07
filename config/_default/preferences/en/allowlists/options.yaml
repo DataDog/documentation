@@ -133,6 +133,8 @@ allowed:
   id: ios
 - display_name: Java
   id: java
+- display_name: JavaScript
+  id: javascript
 - display_name: Jenkins
   id: jenkins
 - display_name: JSON

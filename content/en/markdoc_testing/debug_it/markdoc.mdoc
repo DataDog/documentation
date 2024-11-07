@@ -1,0 +1,209 @@
+---
+title: "DebugIt: A Fake Debugging Library"
+page_preferences:
+  - display_name: Language
+    id: programming_lang
+    options_source: debugit_programming_lang_options
+  - display_name: OS
+    id: os
+    options_source: debugit_os_options
+  - display_name: Database
+    id: database
+    options_source: debugit_database_options
+---
+
+## Overview
+
+DebugIt is a powerful debugging library designed to streamline the debugging process for developers. 
+With DebugIt, you can easily log errors, warnings, and debug messages, allowing for efficient 
+troubleshooting and debugging of your applications.
+
+## Setup
+
+### Install the DebugIt library
+
+<!-- Python -->
+{% if equals($programming_lang, "python") %}
+```bash
+pip install debugit
+```
+{% /if %}
+
+<!-- JavaScript -->
+{% if equals($programming_lang, "javascript") %}
+```bash
+npm install debugit
+```
+{% /if %}
+
+<!-- Java -->
+{% if equals($programming_lang, "java") %}
+```bash
+mvn install debugit
+```
+{% /if %}
+
+<!-- Ruby -->
+{% if equals($programming_lang, "ruby") %}
+```bash
+gem install debugit
+```
+{% /if %}
+
+<!-- Go -->
+{% if equals($programming_lang, "go") %}
+```bash
+go get debugit
+```
+{% /if %}
+
+### Add the DebugIt library to your path
+
+<!-- Windows -->
+{% if equals($os, "windows") %}
+<!-- Windows > Python -->
+{% if equals($programming_lang, "python") %}
+```bash
+setx PYTHONPATH "%PYTHONPATH%;C:\path\to\your\library\directory"
+```
+{% /if %}
+
+<!-- Windows > Java -->
+{% if equals($programming_lang, "java") %}
+```bash
+set CLASSPATH=%CLASSPATH%;C:\path\to\your\library\directory
+```
+{% /if %}
+
+<!-- Windows > Go -->
+{% if equals($programming_lang, "go") %}
+```bash
+setx GOPATH "%GOPATH%;C:\path\to\your\library\directory"
+```
+{% /if %}
+
+<!-- Windows > Ruby -->
+{% if equals($programming_lang, "ruby") %}
+```bash
+set RUBYLIB=%RUBYLIB%;C:\path\to\your\library\directory
+```
+{% /if %}
+
+<!-- Windows > JavaScript -->
+{% if equals($programming_lang, "javascript") %}
+```bash
+set NODE_PATH=%NODE_PATH%;C:\path\to\your\library\directory
+```
+{% /if %}
+{% /if %}
+
+<!-- Linux -->
+{% if equals($os, "linux") %}
+<!-- Linux > Python -->
+{% if equals($programming_lang, "python") %}
+```bash
+sudo export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- Linux > Java -->
+{% if equals($programming_lang, "java") %}
+```bash
+sudo export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- Linux > Go -->
+{% if equals($programming_lang, "go") %}
+```bash
+sudo export GOPATH="$GOPATH:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- Linux > Ruby -->
+{% if equals($programming_lang, "ruby") %}
+```bash
+sudo export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- Linux > JavaScript -->
+{% if equals($programming_lang, "javascript") %}
+```bash
+sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
+```
+{% /if %}
+{% /if %}
+
+<!-- macOS -->
+{% if equals($os, "mac_os") %}
+<!-- macOS > Python -->
+{% if equals($programming_lang, "python") %}
+```bash
+export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- macOS > Java -->
+{% if equals($programming_lang, "java") %}
+```bash
+export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- macOS > Go -->
+{% if equals($programming_lang, "go") %}
+```bash
+export GOPATH="$GOPATH:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- macOS > Ruby -->
+{% if equals($programming_lang, "ruby") %}
+```bash
+export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
+```
+{% /if %}
+
+<!-- macOS > JavaScript -->
+{% if equals($programming_lang, "javascript") %}
+```bash
+export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
+```
+{% /if %}
+{% /if %}
+
+### Create the database table
+
+<!-- MySQL -->
+{% if equals($database, "mysql") %}
+```sql
+CREATE TABLE debug_it_errors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    error_message TEXT
+);
+```
+{% /if %}
+
+<!-- Postgres -->
+{% if equals($database, "postgres") %}
+```sql
+CREATE TABLE debug_it_errors (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    error_message TEXT
+);
+```
+{% /if %}
+
+<!-- SQL Server -->
+{% if equals($database, "sql_server") %}
+```sql
+CREATE TABLE debug_it_errors (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    error_message NVARCHAR(MAX)
+);
+```
+{% /if %}
