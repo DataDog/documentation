@@ -43,7 +43,7 @@ To analyze the data further, you can count the number of failed login attempts b
 
 ### 4. Visualize failed logins over time
 
-To get a clearer picture of when failed logins are occurring, you can create a timeline or time series visualization.
+To get a clearer picture of when failed logins are occurring, you can create a timeline or Timeseries visualization.
 1. Add a [Visualization cell][4].
 1. Choose Timeseries from the "Visualize as" dropdown.
 1. Configure the graph to display the number of failed login attempts over time, using your query results as the data source.
