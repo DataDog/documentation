@@ -180,8 +180,9 @@ if __name__ == "__main__":
 {{% /tab %}}
 
 {{% tab "Go" %}}
+<a name="go-compatibility"></a>
 
-<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/opentelemetry/interoperability/instrumentation_libraries/?tab=go">Using OpenTelemetry Instrumentation Libraries with Datadog SDKs</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/opentelemetry/interoperability/instrumentation_libraries/?tab=go#go-compatibility">Using OpenTelemetry Instrumentation Libraries with Datadog SDKs</a> documentation.</div>
 
 
 ## Compatibility requirements 

@@ -180,8 +180,9 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 {{% /tab %}}
 
 {{% tab "Go" %}}
+<a name="go-compatibility"></a>
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/opentelemetry/interoperability/instrumentation_libraries-gov2/?tab=go">Using OpenTelemetry Instrumentation Libraries with Datadog SDKs</a> documentation.</div>
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/opentelemetry/interoperability/instrumentation_libraries-gov2/?tab=go#go-compatibility">Using OpenTelemetry Instrumentation Libraries with Datadog SDKs</a> documentation.</div>
 
 
 ## Compatibility requirements
