@@ -88,6 +88,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
     1. Create a values.yaml file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
 
 
 {{% /tab %}}
@@ -131,6 +132,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
     1. Create a values.yaml file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
 
 
 {{% /tab %}}
@@ -172,7 +174,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
     1. Create a values.yaml file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
-
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
 
 {{% /tab %}}
 {{< /tabs >}}
