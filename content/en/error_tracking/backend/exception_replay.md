@@ -53,7 +53,7 @@ For `dd-trace-php` version `1.4.0` or higher, set the `DD_EXCEPTION_REPLAY_ENABL
 
 ### Redacting sensitive data
 
-Once you enable Sensitive Data Scrubbing, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are automatically redacted. Enable Sensitive Data Scrubbing rules [in-app][7]. See the full [list of redacted identifiers][1].
+After you enable Sensitive Data Scrubbing, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, is automatically redacted. Enable Sensitive Data Scrubbing rules [in Datadog][7]. See the full [list of redacted identifiers][1].
 
 You can also scrub variable data for PII by:
 - [Creating custom identifier redaction][2].
