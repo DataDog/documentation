@@ -20,45 +20,35 @@ Datadog supports the following OpenTelemetry integrations:
 
 ### APM (Application Performance Monitoring)
 
-Monitor and optimize your application's performance with these APM integrations:
+Monitor and optimize your application's performance:
 
-| Integration | Support |
-|-------------|---------|
-| [Trace Metrics][2] | Full support |
-| [Runtime Metrics][3] | Full support |
+- [Trace Metrics][2]
+- [Runtime Metrics][3]
 
 ### Collector
 
 Monitor the health and performance of your OpenTelemetry Collector:
 
-| Integration | Support |
-|-------------|---------|
-| [Collector Health Metrics][8] | Full support |
+- [Collector Health Metrics][8]
 
 ### Containers and hosts
 
-Gain insights into your containerized environments and host systems with these integrations:
+Gain insights into your containerized environments and host systems:
 
-| Integration | Support |
-|-------------|---------|
-| [Docker Metrics][4] | Full support |
-| [Host Metrics][5] | Full support |
+- [Docker Metrics][4]
+- [Host Metrics][5]
 
 ### Logs
 
 Collect and manage logs from configured file paths:
 
-| Integration | Support |
-|-------------|---------|
-| [Log Collection][7] | Full support |
+- [Log Collection][7]
 
 ### Vendor technologies
 
-Extend your observability to popular vendor technologies with these integrations:
+Extend your observability to popular vendor technologies:
 
-| Integration | Support |
-|-------------|---------|
-| [Kafka Metrics][6] | Full support |
+- [Kafka Metrics][6]
 
 ## Further reading
 
