@@ -1461,7 +1461,7 @@ Send pipeline traces.
 
 If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct:
 - If the Datadog plugin is configured to send data to a Datadog Agent, check that the Agent host has been added to the `No Proxy Hosts` section.
-- if the Datadog plugin is configured to send data directly to Datadog ("agentless mode"), check that Datadog host (`datadoghq.com` or `datadoghq.eu`, depending on which Datadog site you're using) has been added to the `No Proxy Hosts` section.
+- if the Datadog plugin is configured to send data directly to Datadog ("Agentless mode"), check that Datadog host (`datadoghq.com` or `datadoghq.eu`, depending on which Datadog site you're using) has been added to the `No Proxy Hosts` section.
 
 #### The Datadog Plugin cannot write payloads to the server
 
