@@ -220,7 +220,7 @@ To collect custom resources, you need to configure both the Datadog Agent and se
    helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
    ```
 
-   Then, add the following configuration to `datadog-agent.yaml`:
+   Then, add the following configuration to your `DatadogAgent` manifest, `datadogagent.yaml`:
 
    ```
    features:
