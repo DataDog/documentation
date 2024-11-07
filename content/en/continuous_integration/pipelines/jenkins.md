@@ -1460,7 +1460,7 @@ Send pipeline traces.
 #### HTTP connectivity check
 
 If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct:
-- if the Datadog plugin is configured to send data to Datadog Agent, check that the agent host has been added to the `No Proxy Hosts` section
+- If the Datadog plugin is configured to send data to a Datadog Agent, check that the Agent host has been added to the `No Proxy Hosts` section.
 - if the Datadog plugin is configured to send data directly to Datadog ("agentless mode"), check that Datadog host (`datadoghq.com` or `datadoghq.eu`, depending on which Datadog site you're using) has been added to the `No Proxy Hosts` section.
 
 #### The Datadog Plugin cannot write payloads to the server
@@ -1471,13 +1471,13 @@ If the following error message appears in the **Jenkins Log**, make sure that th
 Error writing to server
 {{< /code-block >}}
 
-If you are using `localhost` as the hostname, try to change it to the server hostname instead.
+If you are using `localhost` as the hostname, change it to the server hostname instead.
 
 ### Jenkins logs are not available in Datadog
 
-If the Datadog plugin is configured to send data to Datadog Agent, do the following:
-- make sure that custom log collection over TCP is [enabled and configured][29] in the Agent
-- go to the plugin configuration UI and click "Test logs connection" to verify logs connectivity.
+If the Datadog plugin is configured to send data to a Datadog Agent, do the following:
+- Make sure that custom log collection over TCP is [enabled and configured][29] in the Agent.
+- Go to the plugin configuration UI and click "Test logs connection" to verify logs connectivity.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 
