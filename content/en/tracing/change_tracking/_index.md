@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-<!-- TO DO: Add primary Change Tracking Screenshot -->
+{{< img src="/tracing/change_tracking/change-tracking-overview.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
 Change Tracking streamlines incident response by surfacing relevant changes to aid in detection and remediation steps during an incident.
 
 ### Types of changes currently tracked:
@@ -33,11 +33,19 @@ Change Tracking streamlines incident response by surfacing relevant changes to a
 - Data Stream Monitoring Changes (Schema Updates)
 <!--Open Question: This is only available for customers with Data Stream Monitoring already set up. Should we link out to a setup page for DSM?  -->
 
+### Prerequisites for Change Tracking
+- Monitors: Requires that “service” tag is set on the monitor alert.
+- Dashboards: Changes overlay on time-series graphs filtered with service tag.
+- Services: No prerequisites.
+
 ## How to use Change Tracking
 Change Tracking is available on the following pages within Datadog:
 
 ### Monitor Status Page
-The Change Tracking experience in the Monitor Status page enables quick resolution without leaving the Monitor page. In your Monitor Status page, look for the "Recent Changes" section at the top of the page. To analyze changes, use the top panel above the monitor status dashboard graph to correlate the timeline of recent change events correlated to the monitor alert you are investigating.
+The Change Tracking experience in the Monitor Status page enables quick resolution without leaving the Monitor page. In your Monitor Status page, look for the "Recent Changes" section at the top of the page. 
+{{< img src="/tracing/change_tracking/change-tracking-monitor-status-page.png" alt="The details of a change displayed on the Monitor Status Page" style="width:100%;" >}}
+
+To analyze changes, use the top panel above the monitor status dashboard graph to correlate the timeline of recent change events correlated to the monitor alert you are investigating.
 
 To enable Change Tracking on the Monitor Status page, ensure a service tag is added to your monitor.
 <!--TO DO: Add Error Rate Graph Screenshot from Example Monitor Status Page Here -->
@@ -52,25 +60,21 @@ To get started with configuring your repository, see the [Source Code Integratio
 
 
 ### Services
-For any service page, see the Recent Changes component within the Service Summary section. To view recent changes from service dependencies, click the "Dependencies toggle.
+For any service page, see the Recent Changes component within the Service Summary section. To view recent changes from service dependencies, click the "Dependencies" toggle.
 <!-- TO DO: Dependencies toggle may change to a dropdown prior to GA -->
-<!-- TO DO: Insert Services Change Tracking Screenshot Here -->
+{{< img src="/tracing/change_tracking/change-tracking-service-page.png" alt="Recent Changes component within the Service Summary section with dependency changes enabled" style="width:100%;" >}}
 
 
 ### Dashboards
 On any Dashboard, you can enable overlays using the "Show Overlays" button at the top of the page. 
-<!-- TO DO: Insert Dashboard Show Overlays Screenshot Here -->
+{{< img src="/tracing/change_tracking/change-tracking-show-overlays-inactive.png" alt="Inactive show overlays button" style="width:100%;" >}}
+
 
 This enables change events as overlays on the graphs. Hovering over the change events provides additional context around the change made in that timeline.
-<!-- TO DO: Insert Dashboard Show Overlays Screenshot Here -->
+{{< img src="/tracing/change_tracking/change-tracking-dashboard-show-overlays-active.png" alt="Change tracking displayed on the Dashboard" style="width:100%;" >}}
 
 Tapping on the change overlay would pull up the backend deploy side-panel as above.
-
-
-## Prerequisites for Change Tracking
-- Monitors: Requires that “service” tag is set on the monitor alert.
-- Dashboards: Changes overlay on time-series graphs filtered with service tag.
-- Services: No prerequisites.
+{{< img src="/tracing/change_tracking/change-tracking-deployment-details-side-panel.png" alt="Change tracking side panel open" style="width:100%;" >}}
 
 ## How does Change Tracking work?
 Change Tracking overlays introduce changes associated with the service or metric. There is no Generative AI involved for Change Tracking. The Root Cause Analysis, powered by Watchdog and featured in Change Tracking, runs a causation analysis based on statistical signals such as anomalies in KPIs and identifies if a change has caused an issue. None of this involves any interaction with Open AI or any Generative AI foundation Models.
