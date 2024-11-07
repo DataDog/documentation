@@ -12,7 +12,9 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging
   tag: Documentation
   text: Apprendre à configurer le tagging de service unifié
-kind: documentation
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour optimiser votre gestion des logs
 title: Débuter avec les logs
 ---
 
@@ -69,7 +71,7 @@ Pour commencer à recueillir des logs à partir d'un service de conteneur, suive
 
 ### Cloud
 
-Vous pouvez transmettre les logs issus de divers fournisseurs de Cloud, comme AWS, Azure, et GCP, à Datadog. Chaque fournisseur de Cloud dispose d'instructions de configuration différentes.
+Vous pouvez transmettre à Datadog les logs provenant de divers fournisseurs cloud, comme AWS, Azure, et Google Cloud. Chaque fournisseur cloud dispose d'instructions de configuration différentes.
 
 Par exemple, les logs du service ​AWS sont généralement stockés dans des compartiments S3 ou des groupes de logs CloudWatch. Vous pouvez vous abonner à ces logs et les transmettre à un flux Amazon Kinesis pour les transmettre à nouveau à une ou plusieurs destinations. Datadog est l'une des destinations par défaut pour les flux de diffusion Amazon Kinesis.​
 
@@ -79,7 +81,7 @@ Pour commencer à recueillir des logs à partir d'un service cloud, suivez les [
 
 Datadog vous permet de recueillir des logs à partir de clients via des SDK ou bibliothèques. Par exemple, utilisez le SDK `datadog-logs` pour envoyer des logs à partir de clients JavaScript à Datadog.
 
-Pour commencer à recueillir des logs à partir d'un service cloud, suivez les [instructions dans l'application][14].
+Pour commencer à recueillir des logs à partir d'un client, suivez les [instructions dans l'application][14].
 
 ### Autre
 
@@ -118,8 +120,9 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 
 ### Guides
 
-* Explorer en détail la fonctionnalité [Logging without Limits*][22]
-* Gérer les données de log sensibles avec les [réglages RBAC][23]
+* [Meilleures pratiques pour la solution Log Management][22]
+* Explorer en détail la fonctionnalité [Logging without Limits*][23]
+* Gérer les données de log sensibles avec les [réglages RBAC][24]
 
 ## Pour aller plus loin
 
@@ -131,7 +134,7 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 [1]: https://www.datadoghq.com
 [2]: /fr/tracing/other_telemetry/connect_logs_and_traces/
 [3]: /fr/logs/guide/correlate-logs-with-metrics/
-[4]: /fr/security_platform/cloud_siem/
+[4]: /fr/security/cloud_siem/
 [5]: /fr/getting_started/integrations/
 [6]: /fr/agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
@@ -149,5 +152,6 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 [19]: /fr/logs/log_configuration/pipelines/
 [20]: /fr/logs/log_configuration/processors/
 [21]: /fr/logs/log_configuration/
-[22]: /fr/logs/guide/getting-started-lwl/
-[23]: /fr/logs/guide/logs-rbac/
+[22]: /fr/logs/guide/best-practices-for-log-management/
+[23]: /fr/logs/guide/getting-started-lwl/
+[24]: /fr/logs/guide/logs-rbac/

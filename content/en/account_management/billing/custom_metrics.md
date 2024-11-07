@@ -1,25 +1,31 @@
 ---
 title: Custom Metrics Billing
-kind: documentation
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 further_reading:
-  - link: "/observability_pipelines/guide/custom-metrics-governance"
-    tag: "Documentation"
-    text: "Use Observability Pipelines to govern custom metrics"
+- link: "/metrics/custom_metrics/"
+  tag: "Documentation"
+  text: "Learn more about Custom Metrics"
+- link: "/metrics/guide/custom_metrics_governance/"
+  tag: "Guide"
+  text: "Best Practice for Custom Metric Governance"
+algolia:
+  tags: ['custom metrics billing']
 ---
 
-If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
+## Overview
 
-**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][25] or through a [custom Agent Check][26] is a custom metric.
+If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]. Certain standard integrations can also potentially emit custom metrics. For more information, see [Custom metrics and standard integrations][14].
 
-Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
+**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-Metrics without Limits™ users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][3]. 
+Your monthly billable custom metrics usage (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics (also known as timeseries) for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value. Your billable usage is not impacted by data point submission frequency or the number of queries you run on your metrics.
+
+Metrics without Limits™ users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][5]. 
 
 ## Counting custom metrics
 
-The number of custom metrics associated with a particular metric name depends on its metric [submission type][4]. Below are examples of how to count your custom metrics based on the following scenario below:
+The number of custom metrics associated with a particular metric name depends on its metric [submission type][6]. Below are examples of how to count your custom metrics based on the following scenario below:
 
 Suppose you're submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measures the latency of your endpoint requests. You're submitting this metric with two tag keys:
 
@@ -215,7 +221,7 @@ By default, the Agent generates five custom metrics for each of the original fou
 
 [1]: /metrics/types/?tab=histogram#metric-types
 [2]: /metrics/types/?tab=histogram#definition
-[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
@@ -283,9 +289,9 @@ Learn more about [Metrics without Limits™][2].
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][5]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics on the [usage details page][6]. See the [Usage Details][7] documentation for more information.
+Administrative users (those with [Datadog Admin roles][7]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics on the [usage details page][8]. See the [Usage Details][9] documentation for more information.
 
-For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][8]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
+For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][10]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
 {{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary sidepanel" style="width:80%;">}}
 
 
@@ -300,53 +306,25 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics" >}}
 
-The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric. Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
-
-## Standard integrations
-
-The following standard integrations can potentially emit custom metrics.
-
-| Type of integrations                           | Integrations                                                                       |
-|------------------------------------------------|------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
-| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[OpenMetrics][16] /[Windows Services][17] /[WMI][18] /[Prometheus][27] |
-| Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                        |
-| Custom metrics sent from cloud integrations    | [AWS][23]                                                                          |
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric. Contact [Sales][11] or your [Customer Success][12] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][24].
+For technical questions, contact [Datadog support][13].
 
-For billing questions, contact your [Customer Success][10] Manager.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+For billing questions, contact your [Customer Success][12] Manager.
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
-[3]: /metrics/metrics-without-limits
-[4]: /metrics/types/#metric-types
-[5]: /account_management/users/default_roles/
-[6]: https://app.datadoghq.com/billing/usage
-[7]: /account_management/billing/usage_details/
-[8]: https://app.datadoghq.com/metric/summary
-[9]: mailto:sales@datadoghq.com
-[10]: mailto:success@datadoghq.com
-[11]: /integrations/activemq/#activemq-xml-integration
-[12]: /integrations/go_expvar/
-[13]: /integrations/java/
-[14]: /integrations/nagios/
-[15]: /integrations/pdh_check/
-[16]: /integrations/openmetrics/
-[17]: /integrations/windows_service/
-[18]: /integrations/wmi_check/
-[19]: /integrations/mysql/
-[20]: /integrations/oracle/
-[21]: /integrations/postgres/
-[22]: /integrations/sqlserver/
-[23]: /integrations/amazon_web_services/
-[24]: /help/
-[25]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[26]: /metrics/custom_metrics/agent_metrics_submission/
-[27]: /integrations/prometheus
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /metrics/custom_metrics/agent_metrics_submission/
+[5]: /metrics/metrics-without-limits
+[6]: /metrics/types/#metric-types
+[7]: /account_management/users/default_roles/
+[8]: https://app.datadoghq.com/billing/usage
+[9]: /account_management/plan_and_usage/usage_details/
+[10]: https://app.datadoghq.com/metric/summary
+[11]: mailto:sales@datadoghq.com
+[12]: mailto:success@datadoghq.com
+[13]: /help/
+[14]: /metrics/custom_metrics/#standard-integrations

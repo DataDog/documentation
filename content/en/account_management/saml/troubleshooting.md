@@ -1,10 +1,9 @@
 ---
 title: SAML Troubleshooting
-kind: documentation
 description: Troubleshoot SAML issues for your Datadog account
 further_reading:
 - link: "https://www.samltool.com/online_tools.php"
-  tag: "Developer Tools"
+  tag: "External Site"
   text: "Identify your assertions with developer SAML tools"
 
 ---
@@ -103,14 +102,13 @@ If you are having trouble logging in because of a role-based error, contact your
 
 ## Identity provider (IdP) errors
 
-If you encounter an error coming from your IdP such as Google, Active Directory, Azure, LastPass, Okta, and more:
+If you encounter an error coming from your IdP such as Google, Active Directory, Azure, Okta, and more:
 
 - If you encounter an issue in Google's Admin Console, see [SAML app error messages][10].
 - If you encounter an issue in Active Directory, see [Debug SAML-based single sign-on to applications in Azure Active Directory][11].
 - If you encounter an issue in AuthO, see [Troubleshoot SAML Configurations][12].
 - If you encounter an issue in Azure, see [An app page shows an error message after the user signs in][13].
 - If you encounter an issue in Google, see [Datadog cloud application][14].
-- If you encounter an issue in LastPass, see the [Datadog App Integration][15].
 - If you encounter an issue in Okta, see [Receiving 404 error when attempting to sign into application][16].
 - If you encounter an issue in SafeNet, see [SafeNet Trusted Access for Datadog][17].
 
@@ -156,7 +154,6 @@ Before reaching out to Datadog support, contact your Administrator. You may need
 [12]: https://auth0.com/docs/troubleshoot/troubleshoot-authentication/troubleshoot-saml-configurations
 [13]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/application-sign-in-problem-application-error
 [14]: https://support.google.com/a/answer/7553768
-[15]: https://support.logmeininc.com/lastpass/help/datadog-app-integration
 [16]: https://support.okta.com/help/s/article/Receiving-404-error-when-attempting-to-sign-into-application?language=en_US
 [17]: https://resources.safenetid.com/help/Datadog/Index.htm
 [18]: https://www.datadoghq.com/support/

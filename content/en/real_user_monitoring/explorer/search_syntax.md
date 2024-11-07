@@ -1,6 +1,5 @@
 ---
 title: Search Syntax
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -29,7 +28,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete functionality to complete your queries with existing values.
 
-{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete1.png" alt="Search bar autocomplete" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete2.png" alt="Search bar autocomplete" style="width:90%;" >}}
 
 ## Escape special characters
 

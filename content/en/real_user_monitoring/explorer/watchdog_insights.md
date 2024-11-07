@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights for RUM
-kind: documentation
 description: 'Learn how to investigate issues in your RUM applications with Watchdog Insights.'
 further_reading:
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
@@ -31,7 +30,7 @@ The pink Watchdog Insights banner appears in the [RUM Explorer][2] and displays 
 
 Click on an [error](#error-outliers) or [latency outlier](#latency-outliers) to interact with the visualizations embedded in the side panel and find views from the list of impacted events. Click **View all** to see all outstanding error outliers in a side panel. 
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card.png" alt="Error Outlier banner card and side panel card view in the RUM Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card-3.png" alt="Error Outlier banner card and side panel card view in the RUM Explorer" style="width:100%;" >}}
 
 Hover over a card in the banner and click **Filter on Insight** to add the anomalous insight behavior to your search query. For example, you can hone in on a particular view path or a specific continent like `North America`. 
 
@@ -47,9 +46,9 @@ In the **banner card** view, you can see:
 * The proportion of total errors and overall RUM events that the field contributes to
 * Related tags
 
-In the **full side panel**, you can see a timeseries graph about the total number of RUM errors with the field along with a list of RUM events that contain the field.
+In the **full side panel**, you can see a timeseries graph about the total number of RUM errors with the field along with a impact pie charts and a list of RUM events that contain the field.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier full side panel" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Error Outlier full side panel" style="width:100%;" >}}
 
 ## Latency outliers
 
@@ -64,7 +63,7 @@ In the **banner card** view, you can see:
 
 In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 You can begin your investigation for the root cause of a performance issue in this timeseries graph.
 
@@ -75,5 +74,5 @@ You can begin your investigation for the root cause of a performance issue in th
 [1]: /watchdog/insights/
 [2]: /real_user_monitoring/explorer
 [3]: /real_user_monitoring/explorer/search/#facets
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[4]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

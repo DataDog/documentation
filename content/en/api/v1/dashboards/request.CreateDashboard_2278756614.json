@@ -1,0 +1,85 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 8
+      },
+      "definition": {
+        "title": "",
+        "type": "split_group",
+        "source_widget_definition": {
+          "title": "",
+          "title_size": "16",
+          "title_align": "left",
+          "type": "timeseries",
+          "requests": [
+            {
+              "response_format": "timeseries",
+              "queries": [
+                {
+                  "name": "query1",
+                  "data_source": "metrics",
+                  "query": "avg:system.cpu.user{*}"
+                }
+              ],
+              "style": {
+                "palette": "dog_classic",
+                "line_type": "solid",
+                "line_width": "normal"
+              },
+              "display_type": "line"
+            }
+          ]
+        },
+        "split_config": {
+          "split_dimensions": [
+            {
+              "one_graph_per": "service"
+            }
+          ],
+          "limit": 24,
+          "sort": {
+            "compute": {
+              "aggregation": "sum",
+              "metric": "system.cpu.user"
+            },
+            "order": "desc"
+          },
+          "static_splits": [
+            [
+              {
+                "tag_key": "service",
+                "tag_values": [
+                  "cassandra"
+                ]
+              },
+              {
+                "tag_key": "datacenter",
+                "tag_values": []
+              }
+            ],
+            [
+              {
+                "tag_key": "demo",
+                "tag_values": [
+                  "env"
+                ]
+              }
+            ]
+          ]
+        },
+        "size": "md",
+        "has_uniform_y_axes": true
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "ordered",
+  "is_read_only": false,
+  "notify_list": []
+}

@@ -1,7 +1,22 @@
 ---
+algolia:
+  tags:
+  - csp-report
+  - csp
+  - report-uri
+  - report-to
+  - Content-Security-Policy
+  - violated-directive
+  - blocked-uri
+  - script-src
+  - worker-src
+  - connect-src
+aliases:
+- /ja/real_user_monitoring/faq/content_security_policy
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md
 description: Datadog で CSP 違反の検出と集計を行う
@@ -12,11 +27,10 @@ further_reading:
   text: 統合サービスタグ付けについて
 has_logo: true
 integration_id: content_security_policy_logs
-integration_title: Content Security Policy ログ
+integration_title: コンテンツセキュリティポリシー
 is_public: true
-kind: integration
 name: content_security_policy_logs
-public_title: Datadog-Content Security Policy ログ
+public_title: Datadog-Content Security Policy
 short_description: CSP 違反の検出
 version: '1.0'
 ---
@@ -25,7 +39,7 @@ version: '1.0'
 
 Datadog Content Security Policy (CSP) インテグレーションは、Web ブラウザが CSP を解釈して違反を検出すると、そのログを Datadog に送信します。CSP インテグレーションを使用すると、CSP データを集計するための専用エンドポイントをホストまたは管理する必要がありません。
 
-CSP の詳細については、[Google の web.dev 投稿][1]を参照してください。
+CSP の詳細については、[Content-Security-Policy][1] を参照してください。
 
 ## 前提条件
 
@@ -38,7 +52,7 @@ CSP ヘッダーにディレクティブを追加する前に、[Datadog アカ�
 ブラウザがポリシー違反のレポートを送信できる URL が必要です。URL は以下の形式である必要があります。
 
 ```
-https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report
 ```
 
 オプションとして、URL に `ddtags` キー (サービス名、環境、サービスバージョン) を追加して、[統合サービスタグ付け][3]を設定します。
@@ -60,7 +74,7 @@ service%3AbillingService%2Cenv%3Aproduction
 そして、タグを使った最終的な URL はこうなります。
 
 ```
-https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=service%3AbillingService%2Cenv%3Aproduction
+https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=service%3AbillingService%2Cenv%3Aproduction
 ```
 
 ## CSP に URL を追加する
@@ -73,7 +87,7 @@ Datadog は、HTTP ヘッダーにコンテンツセキュリティポリシー�
 
 - `report-uri` ディレクティブを使用している場合
   ```bash
-  Content-Security-Policy: ...; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+  Content-Security-Policy: ...; report-uri https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report
   ```
 
 - `report-to` ディレクティブを使用している場合
@@ -82,7 +96,7 @@ Datadog は、HTTP ヘッダーにコンテンツセキュリティポリシー�
   Report-To: { "group": "browser-intake-datadoghq",
               "max_age": 10886400,
               "endpoints": [
-                  { "url": " https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
+                  { "url": "https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
               ] }
   ```
 
@@ -92,7 +106,7 @@ Datadog は、HTTP ヘッダーにコンテンツセキュリティポリシー�
 
 ```html
 <meta http-equiv="Content-Security-Policy"
-    content="...; report-uri 'https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report'">
+    content="...; report-uri 'https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report'">
 ```
 ## 違反レポートの例
 
@@ -148,10 +162,59 @@ Datadog は、HTTP ヘッダーにコンテンツセキュリティポリシー�
 {{% /tab %}}
 {{< /tabs >}}
 
+## リアルユーザーモニタリングとセッションリプレイで CSP を使う
+
+Web サイトで CSP を使用する場合は、ユースケースに応じて、以下の URL を既存のディレクティブに追加してください。
+
+### 取込先 URL
+
+リアルユーザーモニタリング][4]または[ブラウザログ収集][5]の初期化に使用した `site` オプションに応じて、適切な `connect-src` エントリを追加してください。
+
+```txt
+connect-src https://{{< region-param key="browser_sdk_endpoint_domain" >}}
+```
+
+### Web Worker
+
+セッションリプレイまたは RUM [`compressIntakeRequests` 初期化パラメーター][4]を使用している場合、以下の `worker-src` エントリを追加して `blob:` URI スキームを持つワーカーを許可するようにしてください。
+
+```txt
+worker-src blob:;
+```
+
+また、[バージョン 4.47.0][8] からは、以下のいずれかの方法で、Datadog ブラウザ SDK ワーカー JavaScript ファイルをセルフホストし、`workerUrl` オプションを提供して [RUM ブラウザ SDK][8] を初期化することもできます。
+
+* https://unpkg.com/@datadog/browser-worker からダウンロードし、Web アプリケーションのアセットと一緒に保存してください。
+* [`@datadog/browser-worker` NPM パッケージ][9]をインストールし、ビルドツールを使用してビルドアセットに含めます ([Webpack 4][10]、[Webpack 5][11]、[Vite][12]、[Rollup][13] のドキュメントを参照)。
+
+要件:
+
+* ワーカーのメジャーバージョンが、使用しているブラウザ SDK のバージョンと一致していることを確認してください。
+* Web アプリケーションと同じオリジンでファイルをホストします。[ブラウザの制限][14]により、別ドメイン (例えば、サードパーティの CDN ホスト) や異なるスキームでホストすることはできません。
+
+### CDN バンドル URL
+
+[リアルユーザーモニタリング][6]または[ブラウザログ収集][7]で CDN 非同期または CDN 同期の設定を使用している場合、以下の `script-src` 項目も追加してください。
+
+```txt
+script-src https://www.datadoghq-browser-agent.com
+```
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://web.dev/csp/
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/setup/#initialization-parameters
+[5]: /ja/logs/log_collection/javascript/#initialization-parameters
+[6]: /ja/real_user_monitoring/browser/setup
+[7]: /ja/logs/log_collection/javascript/#cdn-async
+[8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
+[9]: https://www.npmjs.com/package/@datadog/browser-worker
+[10]: https://v4.webpack.js.org/loaders/file-loader/
+[11]: https://webpack.js.org/guides/asset-modules/#url-assets
+[12]: https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
+[13]: https://github.com/rollup/plugins/tree/master/packages/url/#readme
+[14]: https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker

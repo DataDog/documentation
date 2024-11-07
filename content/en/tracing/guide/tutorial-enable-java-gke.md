@@ -1,27 +1,27 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on Google Kubernetes Engine
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on Google Kubernetes Engine (GKE). In this scenario, the Datadog Agent is also installed in the cluster. 
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on Google Kubernetes Engine (GKE). In this scenario, the Datadog Agent is also installed in the cluster.
 
 For other scenarios, including on a host, in a container, on other cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
@@ -34,7 +34,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - Kubectl
 - GCloud - Set the `USE_GKE_GCLOUD_AUTH_PLUGIN` environment variable and configure additional properties for your GCloud project by running these commands:
   {{< code-block lang="sh" >}}
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True	
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 gcloud config set project <PROJECT_NAME>
 gcloud config set compute/zone <COMPUTE_ZONE>
 gcloud config set compute/region <COMPUTE_REGION>{{< /code-block >}}
@@ -58,7 +58,7 @@ The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutor
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to run inside a Kubernetes cluster. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-k8s.yaml` file, which builds containers for the application. 
+The repository contains a multi-service Java application pre-configured to run inside a Kubernetes cluster. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-k8s.yaml` file, which builds containers for the application.
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
@@ -83,11 +83,11 @@ gcloud compute networks subnets list{{< /code-block >}}
 gcloud container clusters get-credentials <CLUSTER_NAME>
 gcloud config set container/cluster <CLUSTER_NAME>{{< /code-block >}}
 
-3. To facilitate communication with the applications that will be deployed, [edit the network's firewall rules][17] to ensure that the GKE cluster allows TCP traffic on ports `30080` and `30090`. 
+3. To facilitate communication with the applications that will be deployed, [edit the network's firewall rules][17] to ensure that the GKE cluster allows TCP traffic on ports `30080` and `30090`.
 
 ### Build and upload the application image
 
-If you're not familiar with Google Container Registry (GCR), it might be helpful to read [Quickstart for Container Registry][16]. 
+If you're not familiar with Google Container Registry (GCR), it might be helpful to read [Quickstart for Container Registry][16].
 
 In the sample project's `/docker` directory, run the following commands:
 
@@ -135,7 +135,7 @@ kubectl get pods -o wide{{< /code-block >}}
 
       {{< code-block lang="sh" >}}
 kubectl get nodes -o wide{{< /code-block >}}
-   
+
    {{< img src="tracing/guide/tutorials/tutorial-java-gke-external-ip.png" alt="Output of the kubectl command showing the external IP value for the node" style="width:100%;" >}}
 
    In the examples shown, the `notes-app` is running on node `gke-java-tracing-gke-default-pool-ccbd5526-dd3d`, which has an external IP of `35.196.6.199`.
@@ -165,7 +165,7 @@ Now that you have a working Java application, configure it to enable tracing.
 1. Add the Java tracing package to your project. Because the Agent runs in a GKE cluster, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -179,14 +179,14 @@ Now that you have a working Java application, configure it to enable tracing.
    <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
 3. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed with Kubernetes, these environment variables can be added within the deployment YAML file, specifically for the deployment object, pod spec, and pod container template.
-   
+
    For this tutorial, the `kubernetes/notes-app.yaml` file already has these environment variables defined for the notes application for the deployment object, the pod spec, and the pod container template, for example:
 
    ```yaml
    ...
    spec:
      replicas: 1
-     selector: 
+     selector:
        matchLabels:
          name: notes-app-pod
          app: java-tutorial-app
@@ -245,7 +245,7 @@ Run some curl commands to exercise the app:
 
 Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
 The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
@@ -253,9 +253,9 @@ If you don't see traces after several minutes, clear any filter in the Traces Se
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
 The flame graph for a `POST` trace looks something like this:
 
@@ -316,7 +316,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -328,7 +328,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
             span.setTag(Tags.ERROR, true);
             span.setTag(DDTags.ERROR_MSG, e.getMessage());
             span.setTag(DDTags.ERROR_TYPE, e.getClass().getName());
-            
+
             final StringWriter errorString = new StringWriter();
             e.printStackTrace(new PrintWriter(errorString));
             span.setTag(DDTags.ERROR_STACK, errorString.toString());
@@ -349,13 +349,13 @@ docker tag docker-notes:latest  gcr.io/<PROJECT_NAME>/notes-tutorial:notes
 docker push gcr.io/<PROJECT_NAME>/notes-tutorial:notes
 {{< /code-block >}}
 
-8. Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on. 
+8. Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on.
 
 9. Resend some HTTP requests, specifically some `GET` requests.
 10. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
     {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
-   
+
     Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
 
     The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
@@ -364,14 +364,14 @@ For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
 1. Configure the `calendar` app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:

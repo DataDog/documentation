@@ -1,39 +1,42 @@
 ---
-title: Fonctions
-kind: documentation
 aliases:
-  - /fr/examples/
-  - /fr/examples/aws-metrics/
-  - /fr/examples/month_before/
-  - /fr/examples/graphing-functions/
-  - /fr/examples/day_before/
-  - /fr/examples/json-editing/
-  - /fr/examples/nginx-metrics/
-  - /fr/examples/dashboards/
-  - /fr/examples/hour_before/
-  - /fr/examples/os-metrics/
-  - /fr/examples/week_before/
-  - /fr/examples/cassandra-metrics/
-  - /fr/graphing/miscellaneous/functions
-  - /fr/graphing/miscellaneous/
-  - /fr/getting_started/from_the_query_to_the_graph
-  - /fr/graphing/miscellaneous/from_the_query_to_the_graph
-  - /fr/graphing/functions/
+- /fr/examples/
+- /fr/examples/aws-metrics/
+- /fr/examples/month_before/
+- /fr/examples/graphing-functions/
+- /fr/examples/day_before/
+- /fr/examples/json-editing/
+- /fr/examples/nginx-metrics/
+- /fr/examples/dashboards/
+- /fr/examples/hour_before/
+- /fr/examples/os-metrics/
+- /fr/examples/week_before/
+- /fr/examples/cassandra-metrics/
+- /fr/graphing/miscellaneous/functions
+- /fr/graphing/miscellaneous/
+- /fr/getting_started/from_the_query_to_the_graph
+- /fr/graphing/miscellaneous/from_the_query_to_the_graph
+- /fr/graphing/functions/
+further_reading:
+- link: /metrics/#interroger-des-metriques
+  tag: Documentation
+  text: Interroger des métriques
+title: Fonctions
 ---
+
 ## Présentation
 
-Vous pouvez appliquer des fonctions à vos requêtes en cliquant sur l'icône `+` de l'éditeur de graphiques. La plupart des fonctions sont appliquées lors de la dernière étape (après l'[agrégation temporelle][1] et l'[agrégation spatiale][2]).
+Les fonctions permettent de modifier la présentation des résultats d'une requête de métrique au sein des visualisations. La plupart des fonctions sont appliquées après que les résultats ont été renvoyés. Toutefois, les fonctions peuvent également modifier des paramètres avant l'envoi de la requête.
 
-{{< img src="dashboards/functions/addingfunctions.png" alt="Ajout d'une fonction" style="width:75%;" >}}
+Par exemple, la fonction de cumul modifie l'agrégation temporelle d'une requête avant la transmission des résultats. Par ailleurs, les fonctions arithmétiques modifient les résultats renvoyés de la requête de métrique. Consultez la page [Métriques][3] pour en savoir plus sur l'interrogation de métriques. Pour vous familiariser davantage avec les différentes fonctions, consultez la rubrique [Types de fonctions](#types-de-fonctions).
 
-Dans l'exemple ci-dessous, une fonction d'exclusion est appliquée afin d'exclure certaines valeurs d'une métrique.
+## Ajouter une fonction
 
-{{< img src="dashboards/functions/exclusion_example.png" alt="Exemple d'exclusion avec une top list" style="width:75%;" >}}
+Vous pouvez cliquer sur l'icône d'ajout de fonction `Σ` dans l'éditeur de graphiques pour appliquer des fonctions à vos métriques. La plupart des fonctions sont appliquées après les agrégations [temporelle][1] et [spatiale][2].
 
-Dans l'exemple ci-dessous, une fonction de décalage temporel est appliquée sur des logs d'erreur, afin de comparer les données actuelles à celles d'il y a une semaine.
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Symbole Sigma majuscule pour l'ajout de fonction" style="width:100%;" >}}
 
-{{< img src="dashboards/functions/timeshift_example.png" alt="Exemple de décalage temporel avec des logs" style="width:75%;" >}}
-
+## Types de fonctions
 
 {{< whatsnext desc="Choisissez un type de fonction :" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités.{{< /nextlink >}}
@@ -50,6 +53,10 @@ Dans l'exemple ci-dessous, une fonction de décalage temporel est appliquée sur
     {{< nextlink href="/dashboards/functions/beta" >}}Bêta : calculez la moyenne mobile d'une métrique.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/metrics/#time-aggregation
 [2]: /fr/metrics/#space-aggregation
+[3]: /fr/metrics/#anatomy-of-a-metric-query

@@ -8,13 +8,12 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
 - link: /monitors/manage/status/
   tag: Documentation
   text: Vérifier le statut de votre monitor
-kind: documentation
 title: Monitor composite
 ---
 
@@ -82,7 +81,7 @@ Pour obtenir des instructions détaillées concernant les options d'alerte avanc
 
 ### Notifications
 
-Pour obtenir des instructions sur l'utilisation de template variables issues des monitors qui composent un monitor composite dans vos notifications, consultez la section [Variables des monitors composite][5]. Pour obtenir des instructions détaillées concernant sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][3].
+Pour obtenir des instructions sur l'utilisation de template variables issues des monitors qui composent un monitor composite dans vos notifications, consultez la documentation relative aux [variables des monitors composite][4]. Pour obtenir des instructions détaillées concernant les sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][3].
 
 ### API
 
@@ -125,19 +124,21 @@ Prenons pour exemple un monitor composite qui utilise deux monitors individuels�
 | Monitor A   | Monitor B   | Condition   | Notify No Data   | Statut du monitor composite | Alerte déclenchée ? |
 |-------------|-------------|-------------|------------------|------------------|------------------|
 | Alert (T)   | Warn (T)    | `A && B`    |                  | Warn (T)         | {{< X >}}        |
-| Alert (T)   | Warn (T)    | `A \|\| B`    |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Warn (T)    | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | OK (F)      | `A && B`    |                  | OK (F)           |                  |
+| Alert (T)   | OK (F)      | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
 | Warn (T)    | OK (F)      | `A && B`    |                  | OK (F)           |                  |
-| Warn (T)    | OK (F)      | `A \|\| B`    |                  | Warn (T)         | {{< X >}}        |
+| Warn (T)    | OK (F)      | `A \|\| B`  |                  | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | Oui             | No Data (T)      | {{< X >}}        |
-| No Data (T) | Warn (T)    | `A \|\| B`    | Oui             | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | Oui             | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | Non            | Dernier statut connu       |                  |
-| No Data (T) | Warn (T)    | `A \|\| B`    | Non            | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | Non            | Warn (T)         | {{< X >}}        |
 | No Data (T) | OK (F)      | `A && B`    | Non            | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | Non            | Dernier statut connu       |                  |
+| No Data (T) | OK (F)      | `A \|\| B`  | Non            | Dernier statut connu       |                  |
 | No Data (T) | OK (F)      | `A && B`    | Oui             | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | Oui             | No Data (T)      | {{< X >}}        |
+| No Data (T) | OK (F)      | `A \|\| B`  | Oui             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A && B`    | Oui             | No Data (T)      | {{< X >}}        |
-| No Data (T) | No Data (T) | `A \|\| B`    | Oui             | No Data (T)      | {{< X >}}        |
+| No Data (T) | No Data (T) | `A \|\| B`  | Oui             | No Data (T)      | {{< X >}}        |
 
 **Remarque** : lorsque le paramètre `notify_no_data` d'un monitor composite est défini sur false, et que l'évaluation des sous-monitors devrait entraîner un statut `No Data` pour le monitor composite, ce dernier prend alors le dernier statut connu.
 
@@ -193,29 +194,6 @@ Par exemple, si le monitor `1` est un monitor à alertes multiples regroupé sel
 Cependant, s'il existe un monitor `3` à alertes multiples regroupé selon `host,url`, les monitors `1` et `3` ne peuvent pas générer de résultat pour un monitor composite, car leur regroupement diverge trop.
 {{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="rédaction de notification" style="width:80%;">}}
 
-### New Group Delay et monitors composite
-
-Il est possible de définir le paramètre [new_group_delay][4] dans des monitors composite. S'il est défini et qu'il est supérieur à la valeur définie sur les monitors enfants, il est alors prioritaire sur la valeur définie pour les monitors enfants.
-
-**Exemples :**
-
-1. Monitor composite avec différents paramètres new_group_delay sur des monitors enfants :
-
-    * monitor A : new_group_delay=120s
-    * monitor B : new_group_delay=60s
-    * composite : `A&&B`
-
-    Lorsqu'un nouveau groupe apparaît, l'état de ce nouveau groupe passe immédiatement à OK pour le monitor composite. Après `60s`, le nouveau groupe adopte l'état de B dans le monitor composite. Après `120s`, le nouveau groupe adopte le pire état entre A et B dans le monitor composite.
-
-2. Monitor composite avec paramètre new_group_delay
-
-    * monitor A : new_group_delay=120s
-    * monitor B : new_group_delay=60s
-    * composite : new_group_delay=200s
-    * composite : `A&&B`
-
-    Lorsqu'un nouveau groupe apparaît, l'état de ce nouveau groupe passe immédiatement à OK pour le monitor composite. Après `200s`, le nouveau groupe adopte le pire état entre A et B dans le monitor composite.
-
 
 ## Pour aller plus loin
 
@@ -224,5 +202,4 @@ Il est possible de définir le paramètre [new_group_delay][4] dans des monitors
 [1]: https://app.datadoghq.com/monitors#create/composite
 [2]: /fr/monitors/configuration/#advanced-alert-conditions
 [3]: /fr/monitors/notify/
-[4]: /fr/monitors/configuration/?tab=thresholdalert#new-group-delay
-[5]: /fr/monitors/notify/variables/?tab=is_alert#composite-monitor-variables
+[4]: /fr/monitors/notify/variables/?tab=is_alert#composite-monitor-variables

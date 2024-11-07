@@ -1,92 +1,75 @@
 ---
 categories:
-- cloud
 - aws
+- cloud
 - log collection
-ddtype: crawler
+- notifications
 dependencies: []
-description: Surveillez les événements du service AWS Health en temps quasi réel.
+description: Surveillez les événements de santé de vos services AWS en temps quasi
+  réel.
 doc_link: https://docs.datadoghq.com/integrations/amazon_health
 draft: false
 git_integration_title: amazon_health
 has_logo: true
 integration_id: amazon-health
-integration_title: Amazon Health
+integration_title: AWS Health
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_health
-public_title: Intégration Datadog/Amazon Health
+public_title: Intégration Datadog/AWS Health
 short_description: Surveillez la santé de vos services AWS.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
-AWS Health fournit une visibilité continue sur l'état de vos ressources, services et comptes AWS. Activez cette intégration pour visualiser les événements du service AWS Health dans Datadog :
+AWS Health fournit une visibilité continue sur l'état de vos ressources, services et comptes AWS. Activez cette intégration pour visualiser les événements du service AWS Health dans Datadog :
 
-{{< img src="integrations/amazon_health/awshealthevent.png" alt="Événement AWS Health" popup="true">}}
+{{< img src="integrations/amazon_health/awshealthevent.png" alt="Événement AWS Health" popup="true">}}
 
-**Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'un programme support Business ou Enterprise.
+**Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'une formule Business ou Entreprise.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Collecte de métriques
 
-1. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][2] afin de recueillir des métriques Amazon Health. Pour en savoir plus, consultez la section relative aux [stratégies Health][3] de la documentation AWS.
+1. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][2] afin de recueillir des données AWS Health. Pour en savoir plus, consultez la section relative aux [stratégies Health][3] de la documentation AWS.
 
     | Autorisation AWS                    | Description                                      |
     | --------------------------------- | ------------------------------------------------ |
-    | `health:DescribeEvents`           | Utilisé pour énumérer tous les événements de santé                   |
-    | `health:DescribeEventDetails`     | Récupère des informations détaillées sur les événements de santé       |
-    | `health:DescribeAffectedEntities` | Récupère les entités AWS affectées pour les événements de santé |
+    | `health:DescribeEvents`           | Permet d'énumérer tous les événements de santé                   |
+    | `health:DescribeEventDetails`     | Permet de récupérer des informations détaillées sur les événements de santé       |
+    | `health:DescribeAffectedEntities` | Permet de récupérer les entités AWS affectées pour les événements de santé |
 
 2. Configurez l'[intégration Datadog/AWS Health][4].
 
-### Collecte de logs
+## Real User Monitoring
 
-#### Activer le logging
-
-Configurez Amazon Health de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
-
-**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_health` est défini en tant que _Target prefix_.
-
-#### Envoyer des logs à Datadog
-
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Health dans la console AWS :
-
-    - [Ajouter un déclencheur manuel sur le compartiment S3][6]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][7]
-
-## Données collectées
-
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration AWS Health n'inclut aucune métrique.
 
-### Événements
+### Aide
 
-L'intégration AWS Health regroupe les événements situés dans le AWS Personal Health Dashboard. On y trouve par exemple les problèmes en suspens, les événements de maintenance et les notifications du compte.
+L'intégration AWS Health regroupe les événements du dashboard AWS Personal Health. On y trouve par exemple les problèmes en suspens, les maintenances planifiées et les notifications de compte.
 
-### Checks de service
+### Aide
 
 L'intégration AWS Health n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/health/latest/ug/controlling-access.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_health
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[8]: https://docs.datadoghq.com/fr/help/
+[4]: https://app.datadoghq.com/integrations/amazon-health
+[5]: https://docs.datadoghq.com/fr/help/

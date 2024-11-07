@@ -13,7 +13,6 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Métriques d'utilisation
-kind: documentation
 title: Mécanismes d'ingestion
 ---
 
@@ -36,7 +35,7 @@ La décision est prise au début de la trace, puis transmise à toutes les étap
 
 Vous pouvez définir les taux d'échantillonnage pour l'échantillonnage en amont à deux endroits :
 - Au niveau de l'**[Agent](#dans-l-agent)** (par défaut)
-- Au niveau de la **[bibliothèque de tracing](#dans-les-bibliotheques-de-tracing-regles-definies-par-l-utilisateur)** : tout mécanisme de bibliothèque de tracing est prioritaire sur la configuration de l'Agent.
+- Au niveau de la **[bibliothèque de tracing](#dans-les-bibliotheques-de-tracing-regles-definies-par-l-utilisateur)** : tout mécanisme d'une bibliothèque de tracing est prioritaire sur la configuration de l'Agent.
 
 ### Dans l'Agent
 `ingestion_reason: auto`
@@ -49,7 +48,7 @@ Par exemple, si le service `A` génère plus de trafic que le service `B`, l'Age
 
 <div class="alert alert-warning">La fonctionnalité Remote Configuration pour la configuration de l'ingestion dans l'Agent est disponible en version bêta. Contactez l'<a href="/help/">assistance Datadog</a> pour en bénéficier.</div>
 
-La configuration du taux d'échantillonnage pour l'Agent peut être effectuée à distance, tant que vous utilisez la version [7.42.0][20] ou une version plus récente de l'Agent. Consultez l'article de blog [Fonctionnement de Remote Configuration][14] pour découvrir comment activer la configuration à distance dans vos Agents. Grâce à cette fonctionnalité, vous pouvez modifier le paramètre sans avoir à redémarrer l'Agent.
+La configuration du taux d'échantillonnage pour l'Agent peut être effectuée à distance, tant que vous utilisez la version [7.42.0][20] ou une version plus récente de l'Agent. Consultez l'article de blog [Fonctionnement de Remote Configuration][23] (en anglais) pour découvrir comment activer la configuration à distance dans vos Agents. Grâce à cette fonctionnalité, vous pouvez modifier le paramètre sans avoir à redémarrer l'Agent.
 
 #### Configuration locale
 
@@ -119,13 +118,12 @@ Pour en savoir plus sur les paramètres d'échantillonnage, consultez la [docume
 [1]: /fr/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Pour les applications Ruby, définissez un taux d'échantillonnage global dans la bibliothèque avec la variable d'environnement `DD_TRACE_SAMPLE_RATE`. Définissez des taux d'échantillonnage pour des services spécifiques avec la variable d'environnement `DD_TRACE_SAMPLING_RULES`.
+Pour les applications Ruby, définissez un taux d'échantillonnage global pour la bibliothèque avec la variable d'environnement `DD_TRACE_SAMPLE_RATE`.
 
-Par exemple, pour envoyer 50 % des traces pour le service intitulé `my-service` et 10 % du reste des traces :
+Par exemple, pour envoyer 10 % des traces, utilisez ce qui suit :
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
 Configurez une limite de taux en définissant la variable d'environnement `DD_TRACE_RATE_LIMIT` sur un nombre de traces par seconde et par instance de service. Si aucune valeur n'est définie pour `DD_TRACE_RATE_LIMIT`, une limite de 100 traces par seconde est appliquée.
@@ -189,7 +187,7 @@ Pour en savoir plus sur les paramètres d'échantillonnage, consultez la [docume
 [1]: /fr/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-À partir de la version `1.3.2`, la bibliothèque Datadog C++ prend en charge les configurations suivantes :
+À partir de la version `1.3.2`, la bibliothèque C++ Datadog prend en charge les configurations suivantes :
 - Taux d'échantillonnage global : variable d'environnement `DD_TRACE_SAMPLE_RATE`
 - Taux d'échantillonnage par service : variable d'environnement `DD_TRACE_SAMPLING_RULES`.
 - Limite de taux : variable d'environnement `DD_TRACE_RATE_LIMIT`.
@@ -760,7 +758,7 @@ D'autres motifs d'ingestion peuvent être attribués aux spans générées par c
 ## Mécanismes d'ingestion dans OpenTelemetry
 `ingestion_reason:otel`
 
-Selon la façon dont vous avez configuré les SDK OpenTelemetry (via le Collector OpenTelemetry ou l'Agent Datadog), plusieurs méthodes de contrôle de l'échantillonnage de l'ingestion s'offrent à vous. Consultez la section [Échantillonnage de l'ingestion avec OpenTelemetry][22] afin de découvrir les options d'échantillonnage disponibles au niveau du SDK OTel, du Collector OTel et de l'Agent Datadog dans les différentes configurations OpenTelemetry.
+Selon la façon dont vous avez configuré les SDK OpenTelemetry (via le Collector OpenTelemetry ou l'Agent Datadog), plusieurs méthodes de contrôle de l'échantillonnage de l'ingestion s'offrent à vous. Consultez la section [Échantillonnage de l'ingestion avec OpenTelemetry][22] afin de découvrir les options d'échantillonnage disponibles au niveau du SDK OpenTelemetry, du Collector OpenTelemetry et de l'Agent Datadog dans les différentes configurations OpenTelemetry.
 
 ## Pour aller plus loin
 
@@ -786,5 +784,6 @@ Selon la façon dont vous avez configuré les SDK OpenTelemetry (via le Collecto
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /fr/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[21]: /fr/agent/remote_config/#enabling-remote-configuration
 [22]: /fr/opentelemetry/guide/ingestion_sampling_with_opentelemetry
+[23]: /fr/agent/remote_config/

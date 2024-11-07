@@ -16,8 +16,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: Blog
   text: Nouvelle prise en charge de Consul par la solution NPM Datadog
-kind: documentation
-title: Configuration du Network Performance Monitoring
+title: Configuration de Network Performance Monitoring
 ---
 
 La solution Network Performance Monitoring (NPM) de Datadog vous permet de visualiser votre trafic réseau entre différents services, conteneurs, zones de disponibilité ou autres tags dans Datadog. Vous pouvez ainsi :
@@ -49,15 +48,17 @@ La collecte de données étant basée sur eBPF, votre plateforme doit utiliser l
 
 #### Windows
 
-La collecte de données se fait via un pilote de périphérique. Elle est disponible à partir de la version 7.27.1 de l'Agent Datadog pour Windows 2012 R2 et ses versions ultérieures (ainsi que pour les systèmes d'exploitation équivalents tels que Windows 10).
+La collecte de données se fait via un pilote de périphérique kernel réseau. Elle est disponible depuis la version 7.27.1 de l'Agent Datadog, à partir du système d'exploitation Windows 2012 R2 (et des systèmes d'exploitation pour ordinateur équivalents, y compris Windows 10).
 
 #### macOS
 
 La solution NPM Datadog ne prend pas en charge les plateformes macOS.
 
-### Containers
+### Conteneurs
 
-NPM vous aide à visualiser l'architecture et les performances de vos environnements orchestrés et conteneurisés, avec la prise en charge de [Docker][5], [Kubernetes][6], [ECS][7], et d'autres technologies de conteneur. Les intégrations pour conteneurs de Datadog vous permettent d'agréger le trafic en fonction d'entités pertinentes (conteneurs, tâches, pods, clusters, déploiements, etc.) grâce à des tags prêts à l'emploi (tels que `container_name`, `task_name` et `kube_service`). 
+NPM vous aide à visualiser l'architecture et les performances de vos environnements orchestrés et conteneurisés, avec la prise en charge de [Docker][5], de [Kubernetes][6], d'[ECS][7], et d'autres technologies de conteneur. Les intégrations pour conteneurs de Datadog vous permettent d'agréger le trafic en fonction d'entités pertinentes (conteneurs, tâches, pods, clusters, déploiements, etc.) grâce à des tags prêts à l'emploi (tels que `container_name`, `task_name` et `kube_service`). 
+
+La solution NPM n'est pas prise en charge pour Google Kubernetes Engine (GKE) Autopilot.
 
 ### Outils de routage réseau
 
@@ -172,7 +173,7 @@ Si ces utilitaires ne sont pas disponibles pour votre distribution, suivez les m
 
 
 [1]: /fr/infrastructure/process/?tab=linuxwindows#installation
-[2]: /fr/agent/guide/agent-commands/#restart-the-agent
+[2]: /fr/agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -181,9 +182,9 @@ La collecte de logs réseau pour Windows repose sur un pilote de filtre.
 
 Pour activer NPM pour des hosts Windows, procédez comme suit 
 
-1. Installez l'[Agent Datadog][1 (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
+1. Installez l'[Agent Datadog][1] (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
 
-   Lors de l'installation, transmettez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation via l'interface graphique.
+   [OBSOLÈTE] _(version 7.44 ou antérieure)_ Lors de l'installation, transmettez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation de lʼAgent via l'interface graphique.
 
 1. Modifiez `C:\ProgramData\Datadog\system-probe.yaml` en définissant le flag enabled sur `true` :
 
@@ -205,18 +206,26 @@ Pour activer NPM pour des hosts Windows, procédez comme suit 
 
 
 [1]: /fr/agent/basic_agent_usage/windows/?tab=commandline
-[2]: /fr/agent/guide/agent-commands/#restart-the-agent
+[2]: /fr/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Pour activer Network Performance Monitoring avec Kubernetes via Helm, ajoutez ce qui suit à votre fichier values.yaml !
+Pour activer Network Performance Monitoring avec Kubernetes à l'aide de Helm, ajoutez ce qui suit à votre fichier `values.yaml`.</br> **La version 2.4.39+ du chart Helm est requise**. Pour en savoir plus, consultez la [documentation relative au chart Helm Datadog][1].
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-**Un chart Helm v.2.4.39+ est requis**. Pour en savoir plus, consultez la [documentation relative au chart Helm Datadog][1] (en anglais).
+
+**Remarque** : si vous recevez l'erreur d'autorisation `Error: error enabling protocol classifier: permission denied` lors de la configuration de NPM sur votre environnement Kubernetes, ajoutez ce qui suit à votre fichier `values.yaml` (référez-vous à cette [section][5] du chart Helm) :
+
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
 
 Si vous n'utilisez pas Helm, vous pouvez activer Network Performance Monitoring avec Kubernetes de toute pièce :
 
@@ -351,16 +360,16 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /fr/agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">L'Operator Datadog est disponible librement depuis la version `1.0.0`, qui correspond à la version `v2alpha1` de la ressource personnalisée DatadogAgent. </div>
+<div class="alert alert-warning">L'opérateur Datadog est généralement disponible avec la version `1.0.0`, et il concilie la version `v2alpha1` de la ressource personnalisée de l'Agent Datadog. </div>
 
 [L'Operator Datadog][1] est une fonctionnalité permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut, la santé et les erreurs du déploiement dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration.
 
 Pour activer NPM dans l'Operator, appliquez la configuration suivante :
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
@@ -406,35 +415,34 @@ Si vous utilisez `docker-compose`, ajoutez ce qui suit au service de l'Agent Dat
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<CLÉ_API_DATADOG>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-Pour une configuration sur AWS ECS, consultez la section relative à [AWS ECS][1].
+Pour une configuration sur Amazon ECS, consultez la section relative à [Amazon ECS][1].
 
 
 [1]: /fr/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
@@ -444,22 +452,22 @@ Pour une configuration sur AWS ECS, consultez la section relative à [AWS ECS]
 {{< site-region region="us,us3,us5,eu" >}}
 ### Résolution améliorée
 
-Si vous le souhaitez, vous pouvez activer la collecte des ressources sur les intégrations cloud pour permettre à Network Performance Monitoring de découvrir les entités gérées sur le cloud.
-- Installez l'[intégration Azure][1] pour avoir accès aux équilibreurs de charge et aux passerelles d'application Azure.
-- Installez l'[intégration AWS][2] pour avoir accès à AWS Load Balancer. **Vous devez activer la collecte des métriques ENI et EC2.**
+Vous avez la possibilité dʼactiver la collecte de ressources pour les intégrations dans le cloud et ainsi permettre à la surveillance des performances réseau de détecter des entités gérées par le cloud.
+- Installez lʼ[intégration Azure][101] pour améliorer votre visibilité sur les répartiteurs de charge et les passerelles dʼapplication Azure.
+- installez lʼ[intégration AWS][102] pour améliorer votre visibilité sur le répartiteur de charge AWS. **Vous devez activer la collecte de métriques ENI et EC2.**
 
-Pour en savoir plus sur ces fonctionnalités, consultez la section [Résolution améliorée sur les services cloud][3].
+Pour en savoir plus sur ces fonctionnalités, référez-vous à la rubrique [Résolution améliorée sur les services cloud][103].
 
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+[101]: /fr/integrations/azure
+[102]: /fr/integrations/amazon_web_services/#resource-collection
+[103]: /fr/network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/fr/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /fr/network_monitoring/dns/

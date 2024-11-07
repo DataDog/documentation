@@ -8,6 +8,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
+custom_kind: integration
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
@@ -15,18 +16,18 @@ draft: false
 git_integration_title: amazon_codedeploy
 has_logo: true
 integration_id: amazon-codedeploy
-integration_title: Amazon CodeDeploy
+integration_title: AWS CodeDeploy
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_codedeploy
-public_title: Datadog-Amazon CodeDeploy インテグレーション
+public_title: Datadog-AWS CodeDeploy インテグレーション
 short_description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy デフォルトダッシュボード" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy のデフォルトダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -42,7 +43,7 @@ AWS CodeDeploy は、クラウドおよびオンプレミスのインスタン�
 
 ### メトリクスの収集
 
-1. Amazon CodeDeploy のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [CodeDeploy ポリシー][3]を参照してください。
+1. AWS CodeDeploy のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [CodeDeploy ポリシー][3]を参照してください。
 
     | AWS アクセス許可                        | 説明                                                                   |
     | ------------------------------------- | ----------------------------------------------------------------------------- |
@@ -58,14 +59,14 @@ AWS CodeDeploy は、クラウドおよびオンプレミスのインスタン�
 
 #### ログの有効化
 
-Amazon CodeDeploy から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+S3 バケットまたは CloudWatch のいずれかにログを送信するよう AWS CodeDeploy を構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_codedeploy` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
@@ -80,13 +81,13 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Codedeploy インテグレーションには、成功したデプロイ、失敗したデプロイ、および停止されたデプロイのイベントが含まれます。以下はイベントの例です。
+The AWS CodeDeploy integration includes events for successful, failed, and stopped deployments. See example events below:
 
-{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS Codedeploy イベント" >}}
+{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS CodeDeploy Events" >}}
 
 ### サービスのチェック
 
-AWS Codedeploy インテグレーションには、サービスのチェック機能は含まれません。
+The AWS CodeDeploy integration does not include any service checks.
 
 ## トラブルシューティング
 

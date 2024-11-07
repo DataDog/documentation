@@ -1,44 +1,67 @@
 ---
+app_id: ignite
+app_uuid: 0e1f1ef2-ea62-4ae4-a99f-8c40171b729c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Ignite Overview: assets/dashboards/ignite_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ignite.received_messages
+      metadata_path: metadata.csv
+      prefix: ignite.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Ignite
   logs:
     source: ignite
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - caching
 - data store
 - log collection
-creates_events: false
-ddtype: check
+- network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
-display_name: Ignite
+display_on_public_website: true
 draft: false
 git_integration_title: ignite
-guid: fd5a21d5-ddfe-4d04-855f-28492b4d270e
 integration_id: ignite
 integration_title: ignite
-integration_version: 2.2.1
+integration_version: 2.2.2
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ignite.
-metric_to_check: ignite.received_messages
+custom_kind: integration
+manifest_version: 2.0.0
 name: ignite
-public_title: Intégration Datadog/Ignite
+public_title: ignite
 short_description: Recueillez des métriques à partir de votre serveur Ignite.
-support: core
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Data Store
+  - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Recueillez des métriques à partir de votre serveur Ignite.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ignite
 ---
 
 
@@ -47,7 +70,7 @@ supported_os:
 
 Ce check permet de surveiller [Ignite][1].
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -124,7 +147,7 @@ Pour recueillir des métriques avec l'intégration Datadog/Ignite, consultez le 
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][3].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Docker][3].
 
 | Paramètre      | Valeur                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -161,7 +184,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 
 [1]: https://ignite.apache.org/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://apacheignite.readme.io/docs/logging#section-log4j
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example

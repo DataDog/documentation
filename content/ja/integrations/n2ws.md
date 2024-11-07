@@ -9,6 +9,7 @@ assets:
     N2WSBackup&Recovery-GraphicalVersion-Areas: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
     N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -18,6 +19,7 @@ assets:
       prefix: cpm_metric.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10129
     source_type_name: N2WS Backup & Recovery
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -26,6 +28,7 @@ author:
   support_email: eliad.eini@n2ws.com
 categories:
 - cloud
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_on_public_website: true
@@ -35,10 +38,8 @@ integration_id: n2ws
 integration_title: N2WS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: n2ws
-oauth: {}
 public_title: N2WS
 short_description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
 supported_os:
@@ -52,6 +53,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
+  - Offering::Integration
   configuration: README.md#Setup
   description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
   media: []
@@ -60,6 +62,7 @@ tile:
   title: N2WS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -127,7 +130,7 @@ Datadog は、N2WS Backup & Recovery バックアップに関する以下のデ�
 
 Datadog では、すべての N2WS Backup & Recovery ホストからアラートメッセージを収集します。
 
-### サービスのチェック
+### サービスチェック
 
 N2WS Backup & Recovery インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -5,11 +5,10 @@ aliases:
 - /fr/integrations/faq/does-datadog-support-aws-alb-application-load-balancer/
 - /fr/integrations/faq/where-are-my-elb-latency-metrics/
 categories:
-- cloud
-- web
 - aws
+- cloud
 - log collection
-ddtype: crawler
+- network
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Load Balancer.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elb/
@@ -24,7 +23,7 @@ integration_id: amazon-elb
 integration_title: Amazon Load Balancer
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elb
 public_title: Intégration Datadog/Amazon Load Balancer
@@ -48,7 +47,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de métriques
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `ELB` est cochée dans la section concernant la collecte des métriques. Cochez également la case `ApplicationELB` pour les métriques ELB de l'application et la case `NetworkELB` pour les métriques ELB réseau.
+1. Dans la [page de l'intégration AWS][2], vérifiez que `ELB` est activé dans l'onglet `Metric Collection`. Activez `ApplicationELB` et `NetworkELB` pour les métriques ELB de l'application et ELB réseau, respectivement.
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon ELB. Pour en savoir plus, consultez la section relative aux [stratégies ELB][4] de la documentation AWS.
 
     | Autorisation AWS                                | Description                                                        |
@@ -75,8 +74,10 @@ Choisissez un intervalle de 5 minutes et définissez votre compartiment S3 et v
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][9] dans votre compte AWS.
-2. Configurez [automatiquement][10] ou [manuellement][11] vos déclencheurs sur le compartiment S3 qui contient vos logs ELB. Pour une configuration manuelle, utilisez le type d'événement `Object Created (All)`.
-3. Utilisez la [section Logs de Datadog][12] pour explorer vos logs.
+2. Une fois la configuration terminée, accédez à la fonction Lambda du Forwarder Datadog. Configurez [automatiquement][10] ou [manuellement][11] vos déclencheurs sur le compartiment S3 qui contient vos logs ELB. Pour une configuration manuelle, utilisez le type d'événement `All object create events`.
+3. Utilisez le [Log Explorer][12] pour explorer vos logs.
+
+Pour en savoir plus sur la collecte de logs de services AWS, consultez la section [Envoyer des logs de services AWS avec la fonction Lambda Datadog][13].
 
 ## Données collectées
 
@@ -104,7 +105,7 @@ L'intégration AWS Elastic Load Balancing n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][13].
+Besoin d'aide ? Contactez [l'assistance Datadog][14].
 
 ## Pour aller plus loin
 
@@ -112,15 +113,16 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-authentication-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_elb
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://app.datadoghq.com/integrations/amazon-elb
+[6]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [7]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
 [8]: https://aws.amazon.com/premiumsupport/knowledge-center/lambda-s3-event-configuration-error/
-[9]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[9]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
 [10]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
 [11]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
 [12]: https://app.datadoghq.com/logs
-[13]: https://docs.datadoghq.com/fr/help/
+[13]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[14]: https://docs.datadoghq.com/fr/help/

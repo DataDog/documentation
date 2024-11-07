@@ -6,6 +6,7 @@ assets:
     tomcat: assets/dashboards/metrics.json
     tomcat--overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,9 +19,8 @@ assets:
     - java tomcat
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 43
     source_type_name: Tomcat
-  logs:
-    source: tomcat
   monitors:
     '[Tomcat] % of busy threads is high for host: {{host.name}}': assets/monitors/thread_busy.json
     '[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}': assets/monitors/thread_count_max.json
@@ -29,7 +29,11 @@ assets:
     '[Tomcat] Anomalous request rate for host {{host.name}}': assets/monitors/req_count.json
     '[Tomcat] Increase of the errors/second rate for host: {{host.name}}': assets/monitors/error_count.json
   saved_views:
+    tomcat_4xx: assets/saved_views/tomcat_4xx.json
+    tomcat_5xx: assets/saved_views/tomcat_5xx.json
+    tomcat_overview: assets/saved_views/tomcat_overview.json
     tomcat_processes: assets/saved_views/tomcat_processes.json
+    tomcat_status_code_overview: assets/saved_views/tomcat_status_code_overview.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -38,6 +42,7 @@ author:
 categories:
 - caching
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
 display_on_public_website: true
@@ -45,12 +50,10 @@ draft: false
 git_integration_title: tomcat
 integration_id: tomcat
 integration_title: Tomcat
-integration_version: 1.11.1
+integration_version: 2.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tomcat
-oauth: {}
 public_title: Tomcat
 short_description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
 supported_os:
@@ -65,14 +68,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-tomcat-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/analyzing-tomcat-logs-and-metrics-with-datadog
   support: README.md#Support
   title: Tomcat
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Tomcat ダッシュボード][1]
@@ -87,20 +99,20 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Tomcat チェックは [Datadog Agent][2] パッケージに含まれています。Tomcat サーバーに追加でインストールする必要はありません。
 
 このチェックは JMX ベースなので、Tomcat サーバーで JMX リモートを有効にする必要があります。この方法については、[Tomcat の監視と管理][3]の手順に従ってください。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. Tomcat のメトリクスと[ログ](#ログ収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `tomcat.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[tomcat.d/conf.yaml のサンプル][2]を参照してください。
 
@@ -164,29 +176,7 @@ mydomain:attr0=val0,attr1=val1
         - RecentHitRate
   ```
 
-#### 以前のバージョン
-
-フィルターのリストは、5.3.0 よりも新しい Datadog Agent でのみサポートされます。以前のバージョンを使用している場合は、代わりにシングルトンと複数の `include` ステートメントを使用します。
-
-```yaml
-# Datadog Agent > 5.3.0
-  conf:
-    - include:
-      domain: domain_name
-      bean:
-        - first_bean_name
-        - second_bean_name
-# Older Datadog Agent versions
-  conf:
-    - include:
-      domain: domain_name
-      bean: first_bean_name
-    - include:
-      domain: domain_name
-      bean: second_bean_name
-```
-
-#### ログの収集
+#### ログ収集
 
 
 1. ログを Datadog に送信する際、Tomcat は `log4j` ロガーを使用します。バージョン 8.0 より前の Tomcat では、`log4j` がデフォルトで構成されています。バージョン 8.0+ の Tomcat では、Tomcat を構成し `log4j` を使用する必要があります。[Log4 の使用][5]を参照してください。この手順の初めに、以下の要領で  `$CATALINA_BASE/lib` ディレクトリにある `log4j.properties` ファイルを編集します。
@@ -276,7 +266,7 @@ mydomain:attr0=val0,attr1=val1
 [6]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 [7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -300,18 +290,22 @@ mydomain:attr0=val0,attr1=val1
 
 Tomcat チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "tomcat" >}}
 
 
 ## トラブルシューティング
 
 ### `tomcat.*` メトリクスの欠落
-このインテグレーションでは、`Catalina` Bean ドメイン名からデフォルトの Tomcat メトリクスを収集します。もし、公開されている Tomcat のメトリクスが `Tomcat` などの別の Bean ドメイン名でプレフィックスされている場合は、`metrics.yaml` から `tomcat.d/conf.yaml` の `conf` セクションにデフォルトメトリクスをコピーして、`domain` フィルターを変更して該当する Bean ドメイン名を使用できるようにします。
+
+Datadog Agent は、Datadog Agent のバージョン **7.49.0** 以降で、Bean ドメイン名として `Catalina` または `Tomcat` を持つ JMX メトリクスを収集します。古いバージョンでは、`Catalina` を Bean ドメイン名とするメトリクスのみを収集します。
+スタンドアロンの Tomcat デプロイでは、`Catalina` ドメイン配下にメトリクスがありますが、組み込み Tomcat デプロイ (Spring Boot など) では、`Tomcat` ドメイン配下にメトリクスがあります。
+
+Datadog Agent のバージョンが **7.49.0** より古く、公開されている Tomcat のメトリクスのプレフィックスが `Tomcat` など異なる Bean ドメイン名の場合は、`metrics.yaml` ファイルから `tomcat.d/conf.yaml` ファイルの `conf` セクションにデフォルトのメトリクスをコピーし、該当する Bean ドメイン名を使用するように `domain` フィルターを変更します。
 
 ```yaml
 - include:
-    domain: Tomcat      # デフォルト: Catalina
+    domain: Tomcat
     type: ThreadPool
     attribute:
       maxThreads:
@@ -329,20 +323,20 @@ Tomcat チェックには、イベントは含まれません。
 
 ### 使用可能なメトリクスを表示するコマンド
 
-バージョン 4.1.0 で `datadog-agent jmx` コマンドが追加されました。
+`datadog-agent jmx` コマンドを使用すると、JMXFetch インテグレーションのトラブルシューティングコマンドを実行できます。Linux システムでは、Datadog Agent が正しいユーザーとして実行されるように、コマンドの前に `sudo -u dd-agent` を付ける必要があります。
 
-- 1 つ以上のインスタンス構成に一致する属性をリストする:
-  `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`
-- インスタンス構成の 1 つに一致するが、収集可能なメトリクス数を超えるために収集されない属性をリストする:
-  `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`
-- 現在のインスタンス構成によって実際に収集される属性をリストする:
-  `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`
-- どのインスタンス構成にも一致しない属性をリストする:
-  `sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes`
-- JMXFetch でサポートされているタイプのすべての使用可能な属性をリストする:
-  `sudo /etc/init.d/datadog-agent jmx list_everything`
-- 現在の構成に基づいてメトリクスの収集を開始し、コンソールに表示する:
-  `sudo /etc/init.d/datadog-agent jmx collect`
+#### datadog-agent jmx collect
+`datadog-agent jmx collect` を実行すると、現在の構成に基づいてメトリクスの収集が開始され、コンソールに表示されます。
+
+#### datadog-agent jmx list
+`datadog-agent jmx list` には、利用可能なサブコマンドが多くあります。
+- `collected` - 現在のインスタンスの構成で実際に収集される属性を一覧表示します。
+- `everything` - JMXFetch でサポートされているタイプを持つすべての属性を一覧表示します。
+- `limited` - インスタンスの構成のいずれかに一致するが、収集可能なメトリクス数を超えるため収集されない属性を一覧表示します。
+- `matching` - インスタンスの構成の少なくとも 1 つに一致する属性を一覧表示します。
+- `not-matching` - インスタンスの構成のいずれにも一致しない属性を一覧表示します。
+- `with-metrics` - インスタンスの構成の少なくとも 1 つに一致する属性とメトリクスデータを一覧表示します。
+- `with-rate-metrics` - インスタンスの構成の少なくとも 1 つに一致する属性とメトリクスデータを一覧表示します (レートおよびカウンターを含む)。
 
 ## その他の参考資料
 
@@ -350,12 +344,14 @@ Tomcat チェックには、イベントは含まれません。
 
 - [Datadog を使用した Tomcat メトリクスの監視][6]
 - [Tomcat 監視のためのキーメトリクス][7]
+- [Datadog による Tomcat ログとメトリクスの分析][8]。
 
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tomcat/images/tomcat_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://tomcat.apache.org/tomcat-6.0-doc/monitoring.html
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tomcat/images/tomcat_dashboard_2.png
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://tomcat.apache.org/tomcat-10.1-doc/monitoring.html
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/integrations/java/
 [6]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
 [7]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
+[8]: https://www.datadoghq.com/blog/analyzing-tomcat-logs-and-metrics-with-datadog

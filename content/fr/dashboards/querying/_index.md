@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centre d'apprentissage
   text: Améliorer vos dashboards
-kind: documentation
 title: Requêtes
 ---
 
@@ -26,7 +25,7 @@ Depuis les widgets, ouvrez l'éditeur de graphiques en cliquant sur l'icône en 
 
 Lorsque vous ouvrez l'éditeur de graphiques pour la première fois, vous accédez à l'onglet **Edit**. De là, vous pouvez utiliser l'interface pour définir la plupart des paramètres. Voici un exemple :
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit des graphiques" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit d'un graphique" style="width:100%;" >}}
 
 ## Configuration d'un graphique
 
@@ -48,7 +47,7 @@ Sélectionnez votre visualisation à partir des [widgets][3] disponibles.
 
 Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`. 
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:100%;">}}
 
 Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou un [Notebook][5], ou consultez la liste des métriques sur la page [Metrics Summary][6].
 
@@ -56,11 +55,10 @@ Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou 
 
 La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'aide du menu déroulant **from** à droite de la métrique. Le filtre par défaut est *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Filtre sur un graphique" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="Filtrer le graphique avec le champ 'from', à l'aide de template variables et d'une logique booléenne" style="width:100%;" >}}
 
-Vous pouvez également utiliser le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards, comme suit :
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="Création d'un graphique avec filtres booléens" style="width:75%;" >}} 
+- Utilisez le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards.
+- Filtrez de façon dynamique des requêtes grâce aux template variables. Ajoutez le caractère `$` devant la clé d'un tag pour filtrer automatiquement le graphique en fonction du tag sélectionné dans la liste déroulante des template variables. Pour en savoir plus, consultez la section [Template variables][16].
 
 Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][8].
 
@@ -80,7 +78,7 @@ Pour cumuler manuellement les données, utilisez la [fonction rollup][11]. Cliqu
 
 Cette requête crée une ligne unique représentant l'espace disque total disponible en moyenne sur l'ensemble des machines déployées, avec un intervalle de cumul des données de 1 minute :
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="Exemple d'utilisation de la fonction rollup sur la métrique system.disk.free. L'icône Sigma permettant d'ajouter une fonction est mise en évidence " style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="Exemple d'utilisation de la fonction rollup sur la métrique system.disk.free sur toutes les machines" style="width:100%;">}}
 
 Lorsque vous passez à la vue JSON, voici à quoi ressemble la requête :
 
@@ -139,7 +137,7 @@ En outre, vous pouvez cliquer sur les tags dans la liste déroulante utilisée p
 
 En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Référez-vous à la [liste des fonctions disponibles][12].
 
-Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, et `*` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
+Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, `*`, `min`, and `max` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
 
 Pour représenter les métriques séparément, ajoutez une virgule (`,`). Par exemple, `a, b, c`.
 
@@ -174,6 +172,23 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Exemple de formule - rapport de logs" style="width:75%;" >}}
 
 **Remarque** : les formules ne sont pas représentées par des lettres. Vous ne pouvez donc pas effectuer d'opérations arithmétiques entre plusieurs formules.
+
+#### Minimum ou maximum entre deux requêtes
+Voici un exemple utilisant l'opérateur `max` pour trouver l'utilisation maximale du processeur entre deux zones de disponibilité.  
+
+```text
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+```
+
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Exemple de formule pour 'max' affichant la valeur maximale entre deux requêtes de métriques" style="width:75%;" >}}
+
+En outre, vous pouvez également calculer le maximum (ou le minimum) entre deux requêtes portant sur des produits différents. Voici un autre exemple utilisant l'opérateur `min` pour trouver le minimum entre des logs avec des statuts d'erreur et des statuts d'avertissement.
+
+```text
+min(status:error, status:warn)
+```
+
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Exemple de formule pour 'min' affichant la valeur minimale entre deux requêtes de logs" style="width:75%;" >}}
 
 ### Créer un alias
 
@@ -231,7 +246,8 @@ Les graphiques partagés vous permettent de visualiser des représentations d'un
 [9]: /fr/metrics/#time-aggregation
 [10]: /fr/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /fr/dashboards/functions/rollup/
-[12]: /fr/dashboards/functions/#apply-functions-optional
+[12]: /fr/dashboards/functions/#function-types
 [13]: /fr/metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /fr/logs/explorer/search_syntax/
 [15]: /fr/dashboards/widgets/timeseries/#event-overlay
+[16]: /fr/dashboards/template_variables/

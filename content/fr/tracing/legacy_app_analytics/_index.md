@@ -3,12 +3,11 @@ aliases:
 - /fr/tracing/visualization/search/
 - /fr/tracing/trace_search_and_analytics/
 - /fr/tracing/advanced_usage/
-kind: documentation
 title: App Analytics
 ---
 
 <div class="alert alert-danger">
-Cette page décrit des fonctionnalités obsolètes, dont la configuration repose sur l'ancienne solution App Analytics, qui peuvent s'avérer utiles pour diagnostiquer des problèmes ou modifier d'anciennes configurations. Pour contrôler tous les aspects de vos traces, utilisez plutôt les <a href="/tracing/trace_ingestion">contrôles d'ingestion</a> et les <a href="/tracing/trace_retention">filtres de rétention</a>.
+Cette page décrit des fonctionnalités obsolètes, dont la configuration repose sur l'ancienne solution App Analytics, qui peuvent s'avérer utiles pour diagnostiquer des problèmes ou modifier d'anciennes configurations. Pour contrôler tous les aspects de vos traces, utilisez plutôt les <a href="/tracing/trace_pipeline">contrôles d'ingestion et filtres de rétention</a>.
 </div>
 
 ##  Adopter les nouvelles options de configuration
@@ -500,5 +499,19 @@ apm_config:
     service_B|operation_name_Z: 0.01
 ```
 
-[1]: /fr/tracing/trace_ingestion/
-[2]: /fr/tracing/trace_ingestion/mechanisms
+## Dépannage : limite du nombre d'événements par seconde
+
+Si le message d'erreur suivant apparaît dans vos logs de l'Agent, cela signifie que vos applications génèrent plus de 200 événements de trace par seconde, soit la limite autorisée par défaut par l'APM.
+
+```
+Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
+
+```
+
+Pour augmenter la limite de débit de l'APM pour l'Agent, configurez l'attribut `max_events_per_second` dans le fichier de configuration de l'Agent (sous la section `apm_config:`). Pour les déploiements conteneurisés (tels que Docker ou Kubernetes), utilisez la variable d'environnement `DD_APM_MAX_EPS`.
+
+**Remarque** : l'augmentation de la limite de débit de l'APM pourrait entraîner une augmentation des coûts de la fonction App Analytics.
+
+
+[1]: /fr/tracing/trace_pipeline/ingestion_controls/
+[2]: /fr/tracing/trace_pipeline/ingestion_mechanisms/

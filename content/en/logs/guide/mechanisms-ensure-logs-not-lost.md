@@ -1,6 +1,6 @@
 ---
 title: Mechanisms to Ensure Logs are Not Lost
-kind: guide
+
 aliases:
   - /logs/faq/log-collection-is-the-datadog-agent-losing-logs
 further_reading:
@@ -10,13 +10,16 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 **The Datadog Agent has several mechanisms to ensure that no logs are lost**.
 
 ## Log rotate
 
-When a file is rotated, the Agent keeps tailing the old file while starting to tail the newly created file in parallel.
+When a file is rotated, the Agent keeps [tailing][1] the old file while starting to tail the newly created file in parallel.
 Although the Agent continues to tail the old file, a 60-second timeout after the log rotation is set to ensure the agent is using its resources to tail the most up-to-date files.
 
 ## Network issues
@@ -36,3 +39,5 @@ As for files, Datadog stores a pointer for each tailed container. Therefore, in 
 However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /glossary/#tail

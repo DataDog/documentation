@@ -29,7 +29,7 @@ from actions.format_link import format_link_file
 from actions.comment_conversion import replace_comments
 
 try:
-    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
+    from assetlib.classifiers import get_all_classifier_names, get_customer_facing_classifiers
     CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
     CLASSIFIER_TAGS = []
@@ -42,7 +42,7 @@ finally:
     else:
         file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in get_non_deprecated_classifiers():
+            for tag in get_customer_facing_classifiers():
                 file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
             file.write(''.join(file_content) + '\n')
 
@@ -152,6 +152,42 @@ class Integrations:
                         yaml_data, default_flow_style=False
                     )
                 )
+    
+    @staticmethod
+    def format_metric_spec_yaml(key_name, metric_spec_filename, yml_filename):
+        """
+        Given a file path to metric-spec.yaml file, format all metrics
+
+        :param key_name: integration key name for root object
+        :param metric_spec_filename: path to input metric spec file
+        :param yml_filename: path to output yaml file
+        """
+        yaml_data = {key_name: []}
+        with open(metric_spec_filename) as f:
+            spec = yaml.safe_load(f)
+        
+        for group in spec.get("metric_groups"):
+            for metric in group.get("metrics"):
+                if "metadata" in metric:
+                    metric_metadata = metric.get("metadata", {})
+                    yaml_data[key_name].append(
+                        {
+                            "metric_name": metric.get("name", ""),
+                            "metric_type": metric_metadata.get("metric_type", ""),
+                            "interval": str(metric_metadata.get("interval", "")),
+                            "unit_name": metric_metadata.get("unit_name", ""),
+                            "per_unit_name": metric_metadata.get("per_unit_name", ""),
+                            "description": str(
+                                markdown2.markdown(metric_metadata.get("description", ""))
+                            )[3:-5],
+                            "orientation": str(metric_metadata.get("orientation", 0)),
+                            "integration": spec["integration"],
+                            "short_name": metric_metadata.get("short_name", ""),
+                            "curated_metric": metric_metadata.get("curated_metric", ""),
+                        }
+                    )
+        with open(file=yml_filename, mode="w", encoding="utf-8") as f:
+            f.write(yaml.dump(yaml_data, default_flow_style=False))
 
     def inline_references(self, integration_readme, regex_skip_sections_start, regex_skip_sections_end):
         """
@@ -231,7 +267,7 @@ class Integrations:
             glob.iglob(pattern, recursive=True)
             for pattern in content["globs"]
         ):
-            if file_name.endswith(".csv"):
+            if file_name.endswith(".csv") or file_name.endswith("metric-spec.yaml"):
                 self.process_integration_metric(file_name)
 
             elif file_name.endswith("manifest.json"):
@@ -241,7 +277,7 @@ class Integrations:
                 self.process_service_checks(file_name)
 
             elif file_name.endswith(".md"):
-                self.process_integration_readme(file_name, marketplace)
+                self.process_integration_readme(file_name, marketplace, content)
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
@@ -355,13 +391,16 @@ class Integrations:
 
     def process_integration_metric(self, file_name):
         """
-        Take a single metadata csv file and convert it to yaml
-        :param file_name: path to a metadata csv file
+        Take a single metadata or metric spec file and formats it to yaml
+        :param file_name: path to a metadata csv or yaml file
         """
         if file_name.endswith("/metadata.csv"):
             key_name = basename(
                 dirname(normpath(file_name))
             )
+        elif file_name.endswith("/assets/metrics/metric-spec.yaml"):
+            file_list = file_name.split(sep)
+            key_name = file_list[len(file_list)-4]
         else:
             key_name = basename(
                 file_name.replace("_metadata.csv", "")
@@ -375,7 +414,10 @@ class Integrations:
             new_file_name = "{}{}.yaml".format(
                 self.data_integrations_dir, collision_name
             )
-        self.metric_csv_to_yaml(key_name, file_name, new_file_name)
+        if file_name.endswith("/assets/metrics/metric-spec.yaml"):
+            self.format_metric_spec_yaml(key_name, file_name, new_file_name)
+        else:
+            self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
         """
@@ -628,6 +670,7 @@ class Integrations:
     def get_collision_alternate_name(self, file_name):
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
+        dir_path = dir_path.replace('/metrics', '') if dir_path.endswith('metrics') else dir_path
         dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
         collision_name = dir_name
         manifest_json_path = f'{dir_path}/manifest.json'
@@ -641,7 +684,7 @@ class Integrations:
 
         return collision_name
 
-    def process_integration_readme(self, file_name, marketplace=False):
+    def process_integration_readme(self, file_name, marketplace=False, content=None):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
@@ -653,16 +696,25 @@ class Integrations:
         7. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
+        if content is None:
+            content = {}
         no_integration_issue = True
         tab_logic = False
+        # Prioritize having metric-spec.yaml over metadata.csv
         metrics = glob.glob(
-            "{path}{sep}*metadata.csv".format(
-                path=dirname(file_name), sep=sep
-            )
+            f"{dirname(file_name)}{sep}**{sep}*metric-spec.yaml", recursive=True
         )
-        metrics = metrics[0] if len(metrics) > 0 else None
-        metrics_exist = (metrics and exists(metrics)
-                         and linecache.getline(metrics, 2))
+        if metrics:
+            metrics = metrics[0] if len(metrics) > 0 else None
+            metrics_exist = metrics and exists(metrics)
+        else:
+            metrics = glob.glob(
+                "{path}{sep}*metadata.csv".format(path=dirname(file_name), sep=sep)
+            )
+            metrics = metrics[0] if len(metrics) > 0 else None
+            metrics_exist = (
+                metrics and exists(metrics) and linecache.getline(metrics, 2)
+            )
         service_check = glob.glob("{file}.json".format(
             file=self.data_service_checks_dir + basename(dirname(file_name))))
         service_check = (
@@ -714,19 +766,27 @@ class Integrations:
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace iterations
         result = ''
-        if not marketplace:
+        display_on_public = True
+        source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
+
+        # Don't try to build markdown if display_on_public_website is False
+        if manifest_json and "/dogweb/" not in file_name:
+            if not manifest_json["display_on_public_website"]:
+                display_on_public = False
+        
+        if not marketplace and display_on_public:
             try:
-                result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
+                result = source_comment + format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
                 print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
-        else:
+        elif marketplace:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
-                purchase_copy = f"---\nThis application is made available through the Marketplace and is supported by a Datadog Technology Partner." \
-                                f" <a href=\"https://app.datadoghq.com/marketplace/app/{manifest_json['integration_id']}\" target=\"_blank\">Click Here</a> to purchase this application."
+                purchase_copy = f"---\nThis application is made available through the Datadog Marketplace and is supported by a Datadog Technology Partner. To use it," \
+                                f" <a href=\"https://app.datadoghq.com/marketplace/app/{manifest_json['integration_id']}\" target=\"_blank\">purchase this application in the Marketplace</a>."
 
                 markdown_string = f"{markdown_string}\n{purchase_copy}"
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
@@ -738,7 +798,9 @@ class Integrations:
                 if not is_marketplace_integration_markdown_valid:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
-                    result = updated_markdown
+                    result = source_comment + updated_markdown
+        else:
+            print(f'Skipping markdown for: {file_name}')            
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
@@ -789,22 +851,33 @@ class Integrations:
             collision_name = self.get_collision_alternate_name(file_name)
             print(f"{file_name} {collision_name}")
 
-        if metrics_exist:
-            result = re.sub(
-                self.regex_metrics,
-                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                % format(title if not exist_collision else collision_name),
-                result,
-                0,
-            )
-        if service_check_exist:
-            result = re.sub(
-                self.regex_service_check,
-                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                % format(title if not exist_collision else collision_name),
-                result,
-                0,
-            )
+        # if we have merged integrations upstream in the source repo
+        # there can be multiple instances of code we are trying to regex out which doesn't play nice
+        # lets split the file and apply it in chunks to avoid these issues
+        parts = result.split("## Data Collected")
+        new_parts = []
+        for part in parts:
+            if metrics_exist:
+                part = re.sub(
+                    self.regex_metrics,
+                    r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                    % format(title if not exist_collision else collision_name),
+                    part,
+                    0,
+                )
+            if service_check_exist:
+                part = re.sub(
+                    self.regex_service_check,
+                    r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                    % format(title if not exist_collision else collision_name),
+                    part,
+                    0,
+                )
+            new_parts.append(part)
+        if len(new_parts) == 1:
+            result = "".join(new_parts)
+        else:
+            result = "## Data Collected".join(new_parts)
 
         if not exist_already and no_integration_issue:
             out_name = self.content_integrations_dir + new_file_name
@@ -826,13 +899,14 @@ class Integrations:
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, collision_name))
                     result = self.add_integration_frontmatter(
-                        collision_name, result, dependencies, integration_id, integration_version, manifest_json
+                        collision_name, result, dependencies, integration_id, integration_version, manifest_json, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
                 else:
                     result = self.add_integration_frontmatter(
-                        new_file_name, result, dependencies, integration_id, integration_version
+                        new_file_name, result, dependencies, integration_id, integration_version, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
 
+                # write to content file
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
@@ -846,13 +920,13 @@ class Integrations:
                         print(e)
                         print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                         sys.exit(1)
-            else:
-                if exists(out_name):
-                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
-                    remove(out_name)
+            # else:
+            #     if exists(out_name):
+            #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+            #         remove(out_name)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None
+        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -860,6 +934,8 @@ class Integrations:
         :param content: string of markdown content
         :return: formatted string
         """
+        if extra_fm is None:
+            extra_fm = {}
         fm = {}
         template = "---\n{front_matter}\n---\n\n{content}\n"
         if file_name not in self.initial_integration_files:
@@ -873,7 +949,7 @@ class Integrations:
                 ]
                 item = matches[0] if len(matches) > 0 else []
             if item:
-                item["kind"] = "integration"
+                item["custom_kind"] = "integration"
                 item["integration_title"] = (
                     item
                     .get("public_title", "")
@@ -903,6 +979,7 @@ class Integrations:
                             # add the alias from the list
                             item['aliases'].remove(single_alias)
                             print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
+                item.update(extra_fm)
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
@@ -910,7 +987,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"custom_kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
@@ -1001,4 +1078,9 @@ class Integrations:
             manifest_json["name"] = manifest_json.get("name", name)
             if skipped_tags:
                 print(f'\x1b[33mWARNING\x1b[0m: Categories skipped on integration {manifest_json["name"]}, {skipped_tags}')
+
+        # temporary workaround until we can source integration data from APW
+        # https://datadoghq.atlassian.net/browse/WEB-4579
+        if 'oauth' in manifest_json.keys(): del manifest_json['oauth']
+
         return manifest_json

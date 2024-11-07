@@ -1,10 +1,9 @@
 ---
-title: OAuth Apps
-kind: documentation
 further_reading:
-  - link: /account_management/org_settings/
-    tag: ドキュメント
-    text: オーガニゼーションの設定について
+- link: /account_management/org_settings/
+  tag: ドキュメント
+  text: オーガニゼーションの設定について
+title: OAuth Apps
 ---
 ## 概要
 
@@ -13,7 +12,7 @@ further_reading:
 {{< img src="account_management/oauth_apps/org-management-page.png" alt="Datadog の OAuth Apps 管理ページ" style="width:100%;">}}
 
 ## セットアップ
-### アクセス許可
+### 権限
 
 デフォルトでは、[Datadog Standard ロールおよび Datadog Admin ロール][2]を持つユーザーは、OAuth Apps の管理ページにアクセスできます。組織で[カスタムロール][3]が定義されている場合、ユーザーを `org_authorized_apps_read` と `org_authorized_apps_write` アクセス許可を持つ任意のカスタムロールに追加してください。
 
@@ -21,7 +20,7 @@ Datadog Admin ロールまたは `org_authorized_apps_write` アクセス許可�
 
 ### Enable
 
-有効化された OAuth アプリケーションでは、必要なアクセス許可を持つユーザーが、自分に代わってアクセスを承認することができます。OAuth アプリケーションには、Datadog モバイルアプリと、[OAuth API Access][5] を持つカスタムの [Datadog Apps][4] が含まれます。
+有効化された OAuth アプリケーションでは、必要なアクセス許可を持つユーザーが、自分に代わってアクセスを承認することができます。OAuth アプリケーションには、Datadog モバイルアプリ<!--と、[OAuth API Access][5] を持つカスタムの [UI Extensions][4] -->が含まれます。
 
 ### Disable
 
@@ -48,5 +47,5 @@ OAuth Apps の管理ページからアプリケーションを無効化する方
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /ja/account_management/rbac/permissions/#general-permissions
 [3]: /ja/account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /ja/developers/datadog_apps/
-[5]: /ja/developers/datadog_apps/#oauth-api-access
+[4]: /ja/developers/ui_extensions/
+[5]: /ja/developers/ui_extensions/#oauth-api-access

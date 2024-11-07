@@ -1,17 +1,17 @@
 ---
-title: Présentation des intégrations
-kind: documentation
-aliases:
-  - /fr/getting_started/integrations
 further_reading:
-  - link: https://learn.datadoghq.com/
-    tag: Centre d'apprentissage
-    text: Présentation de Datadog
-  - link: /integrations/
-    tag: Intégrations
-    text: Liste complète des intégrations Datadog
+- link: https://learn.datadoghq.com/courses/intro-to-integrations
+  tag: Centre d'apprentissage
+  text: Présentation des intégrations
+- link: /integrations/
+  tag: Documentation
+  text: Afficher la liste des intégrations Datadog
+title: Présentation des intégrations
 ---
-Ce guide décrit comment utiliser les intégrations Datadog. Si vous souhaitez découvrir comment créer une nouvelle intégration, consultez la page [Créer une nouvelle intégration][1].
+
+## Présentation
+
+Ce guide décrit comment utiliser les intégrations. Si vous souhaitez découvrir comment créer une nouvelle intégration, consultez la page [Créer une nouvelle intégration][1].
 
 Au plus haut niveau, une intégration correspond à l'assemblage d'un système unifié à partir d'unités habituellement considérées séparément. Avec Datadog, vous pouvez utiliser des intégrations pour rassembler toutes les métriques et tous les logs de votre infrastructure afin d'analyser le système dans son ensemble. Chaque composant, ainsi que son impact sur les autres éléments de votre infrastructure, peuvent être étudiés en détail.
 
@@ -27,7 +27,11 @@ Vous pouvez aussi créer un [check custom][10] pour définir et envoyer des mét
 
 ## Configurer une intégration
 
-Le paquet de l'Agent Datadog inclut les intégrations officiellement prises en charge par Datadog dans [integrations-core][11]. Pour utiliser ces intégrations, téléchargez l'Agent Datadog. Les intégrations développées par la communauté se trouvent dans [integrations-extras][12] et nécessitent de télécharger le [kit de développement logiciel][13] pour être utilisées. Pour en savoir plus sur l'installation ou la gestion de ces intégrations, consultez le [guide de gestion des intégrations][14].
+Le package de l'Agent Datadog inclut les intégrations officiellement prises en charge par Datadog dans [integrations-core][11]. Pour utiliser ces intégrations, téléchargez l'Agent Datadog. Les intégrations développées par la communauté se trouvent dans [integrations-extras][12]. Pour en savoir plus sur l'installation ou la gestion de ces intégrations, consultez le [guide de gestion des intégrations][14].
+
+### Autorisations
+
+L'autorisation `manage_integrations` est requise pour interagir avec un carré dʼintégration. Consultez la section relative aux [rôles RBAC][45] pour en savoir plus.
 
 ### Clés d'API et d'application
 
@@ -69,7 +73,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-Pour créer plusieurs instances dans un même check d'Agent et surveiller deux services Apache, créez une nouvelle instance avec un `-` dans la section `instances` :
+Pour surveiller plusieurs instances Apache dans un même check d'Agent, ajoutez des instances supplémentaires à la section `instances` :
 
 ```yaml
 init_config:
@@ -86,7 +90,7 @@ instances:
 
 L'intervalle de collecte par défaut pour toutes les intégrations Datadog standard est de 15 secondes. Pour modifier l'intervalle de collecte, utilisez le paramètre `min_collection_interval`. Pour en savoir plus, consultez la rubrique [Modification de l'intervalle de collecte][24].
 
-### Tagging
+### Tags
 
 L'ajout de tags est essentiel pour être en mesure de filtrer et d'agréger les données envoyées à Datadog depuis plusieurs sources. Pour en savoir plus sur les tags, consultez la section [Débuter avec les tags][25].
 
@@ -95,6 +99,15 @@ Si vous définissez des tags dans le fichier `datadog.yaml`, ils sont appliqués
 Par exemple, il est conseillé d'utiliser `service` pour la [configuration de l'Agent][26] lors de la surveillance de systèmes distincts et indépendants.
 
 Pour mieux unifier votre environnement, il est également recommandé de configurer le tag `env` dans l'Agent. Pour en savoir plus, consultez la section relative au [tagging de service unifié][27].
+
+Par défaut, les métriques transmises par les intégrations comprennent des tags découverts automatiquement dans l'environnement. Par exemple, les métriques transmises par un check Redis exécuté à l'intérieur d'un conteneur comprennent des tags associés au conteneur, tels que `image_name`. Vous pouvez désactiver ce comportement en définissant le paramètre `ignore_autodiscovery_tags` sur `true` :
+```yaml
+init_config:
+
+ignore_autodiscovery_tags: true
+
+# Insérer le reste de la configuration ici
+```
 
 ### Validation
 
@@ -108,14 +121,13 @@ L'installation de plusieurs intégrations revient nécessite d'ajouter les infor
 
 Si vous avez configuré la [collecte de processus][29], Datadog détecte automatiquement les technologies qui s'exécutent sur vos hosts. Cette opération permet d'identifier les intégrations Datadog qui peuvent vous aider à surveiller ces technologies. Les intégrations détectées automatiquement s'affichent dans la [recherche d'intégrations][2] :
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Intégrations détectées automatiquement" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="Intégrations détectées automatiquement" >}}
 
-Chaque intégration possède l'un des deux types de statuts suivants :
+Chaque intégration possède l'un des trois statuts suivants :
 
-- **+ Detected** : cette intégration n'est activée sur aucun host qui l'exécute.
-- **✓ Partial Visibility** : cette intégration est activée sur certains hosts, mais pas sur tous les hosts pertinents qui l'exécutent.
-
-Les hosts qui exécutent l'intégration, mais sur lesquels l'intégration n'est pas activée, se trouvent dans l'onglet **Hosts** du carré de l'intégration.
+- **Detected** : la technologie s'exécute sur un host, mais l'intégration n'a pas été installée ou configurée. Pour cette raison, seule une partie des métriques est recueillie. Configurez l'intégration pour en profiter pleinement. Pour obtenir la liste des hosts qui exécutent une technologie détectée automatiquement, ouvrez le carré de l'intégration, puis sélectionnez l'onglet **Hosts**.
+- **Installed** : l'intégration est installée et configurée sur un host.
+- **Available** : cette catégorie rassemble toutes les intégrations qui ne possèdent pas le statut **Installed** ni **Detected**.
 
 ## Mesures de sécurité
 
@@ -145,7 +157,7 @@ Check custom
 : Il s'agit du fichier de configuration principal au sein duquel vous définissez la façon dont l'Agent dans son ensemble interagit avec ses propres intégrations et avec votre système. Utilisez ce fichier pour mettre à jour les clés d'API, les proxies, les tags de host et d'autres paramètres généraux.
 
 Événement
-: Les événements sont des messages informatifs sur votre système. Ils sont transmis au [flux d'événements][40] pour vous permettre de créer des monitors en fonction de ces événements.
+: Les événements sont des messages informatifs sur votre système. Ils sont transmis à l'[Events Explorer][40] pour vous permettre de créer des monitors en fonction de ces événements.
 
 Instance
 : Chaque instance de ce que vous surveillez doit être définie et mappée dans le fichier `conf.yaml`. Par exemple, pour l'[intégration `http_check`][41], vous devez définir le nom associé à l'instance de l'endpoint HTTP dont vous surveillez l'uptime et le downtime. Vous pouvez surveiller **plusieurs instances** dans une même intégration en définissant toutes les instances dans le fichier `conf.yaml`.
@@ -160,7 +172,7 @@ Logging
 : Ce fichier énumère et stocke les métriques recueillies par chaque intégration.
 
 Métriques
-: La liste des données recueillies à partir de votre système par chaque intégration. La liste des métriques de chaque intégration se trouve dans le fichier `metadata.csv`. Pour en savoir plus sur les métriques, consultez la [page sur les métriques dédiée aux développeurs][42]. Vous pouvez également configurer des [métriques custom][43] afin d'ajouter des métriques qui ne sont pas proposées par défaut avec l'intégration.
+: La liste des données recueillies à partir de votre système par chaque intégration. La liste des métriques de chaque intégration se trouve dans le fichier `metadata.csv` correspondant à cette intégration. Pour en savoir plus sur les métriques, consultez la [page sur les métriques dédiée aux développeurs][42]. Vous pouvez également configurer des [métriques custom][43] afin d'ajouter des métriques qui ne sont pas proposées par défaut avec l'intégration.
 
 Paramètres
 : Utilisez les paramètres dans le fichier `conf.yaml` pour contrôler les accès entre la source de données de votre intégration et l'Agent. Le fichier `conf.yaml.example` de chaque intégration énumère l'ensemble des paramètres obligatoires et facultatifs.
@@ -175,7 +187,7 @@ Tags
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/integrations/new_check_howto/
+[1]: /fr/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /fr/integrations/slack/
 [4]: /fr/integrations/amazon_web_services/
@@ -187,14 +199,13 @@ Tags
 [10]: /fr/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[13]: /fr/developers/integrations/new_check_howto/#developer-toolkit
 [14]: /fr/agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /fr/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /fr/integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /fr/agent/guide/agent-commands/#restart-the-agent
 [22]: /fr/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -204,7 +215,7 @@ Tags
 [27]: /fr/getting_started/tagging/unified_service_tagging/
 [28]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [29]: /fr/infrastructure/process/
-[30]: /fr/security/
+[30]: /fr/data_security/
 [31]: /fr/metrics/explorer/
 [32]: /fr/dashboards/
 [33]: /fr/monitors/
@@ -214,8 +225,9 @@ Tags
 [37]: /fr/agent/troubleshooting/
 [38]: /fr/help/
 [39]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[40]: https://app.datadoghq.com/event/stream
+[40]: https://app.datadoghq.com/event/explorer
 [41]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [42]: /fr/metrics/
 [43]: /fr/metrics/custom_metrics/
 [44]: /fr/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /fr/account_management/rbac/permissions/#integrations

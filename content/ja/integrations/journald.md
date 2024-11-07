@@ -3,12 +3,14 @@ app_id: journald
 app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10167
     source_type_name: journald
 author:
   homepage: https://www.datadoghq.com
@@ -17,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/journald/README.md
 display_on_public_website: true
@@ -24,12 +27,10 @@ draft: false
 git_integration_title: journald
 integration_id: journald
 integration_title: journald
-integration_version: 1.1.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: journald
-oauth: {}
 public_title: journald
 short_description: Datadog を使用して systemd-journald ログを監視します。
 supported_os:
@@ -43,6 +44,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog を使用して systemd-journald ログを監視します。
   media: []
@@ -51,6 +53,7 @@ tile:
   title: journald
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -65,7 +68,7 @@ Systemd-journald は、ログデータを収集して保管するシステムサ
 journald チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 ジャーナルファイルは、デフォルトでは、systemd-journal システムグループによって所有され、読み取られます。ジャーナルログの収集を開始するには、以下のようにします。
 
@@ -76,13 +79,13 @@ journald チェックは [Datadog Agent][1] パッケージに含まれていま
     ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `journald.d/conf.yaml` ファイルを編集します。
 
-#### ログの収集
+#### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -108,11 +111,11 @@ logs:
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-#### ログの収集
+#### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
@@ -162,7 +165,7 @@ Datadog Agent バージョン `7.37.0`+ では、これらのパラメーター�
 - `include_user_units`: 指定されたすべてのユーザーレベルユニットを含めます。
 - `exclude_user_units`: 指定されたすべてのユーザーレベルユニットを除外します。
 
-**注**: `exclude_units` または `exclude_user_units` で `*` ワイルドカードを使用して、特定の Journald ログを指定します。
+**注**: `exclude_units` または `exclude_user_units` でワイルドカード `*` を使用すると、特定の Journald ログを指定できます。ワイルドカード `*` は `include_units` では機能しません。デフォルトでは、システムにもユーザーにもユニットがなく、一致するものが定義されていない場合、すべてのジャーナルログが収集されます。
 
 例:
 
@@ -233,7 +236,7 @@ Agent の [status サブコマンド][3]を実行し、ログ Agent セクショ
 
 journald には、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 journald には、サービスのチェック機能は含まれません。
 
@@ -247,6 +250,6 @@ journald には、イベントは含まれません。
 
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

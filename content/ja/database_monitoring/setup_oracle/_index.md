@@ -1,29 +1,31 @@
 ---
 description: Oracle データベースでのデータベースモニタリングの設定
 disable_sidebar: true
-is_beta: true
-kind: documentation
-private: true
 title: Oracle の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+## Supported Oracle versions
 
-<div class="alert alert-info">
-このページで説明されている機能は非公開ベータ版です。必要な Agent のビルドとインストール手順については、カスタマーサクセスマネージャーにお問い合わせください。
-</div>
+|            | Self-Hosted | RDS       | RAC       | エクサデータ   | 自律型データベース | Automatic Storage Management |
+|------------|-------------|-----------|-----------|-----------|---------------------|------------------------------|
+| Oracle 11g | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 12c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 18c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 19c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 21c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
 
-### サポートされる Oracle バージョン
+## Supported architectures
+- Multi-tenant (CDB/PDB)
+- Non-CDB
 
-|  | セルフホスト | RDS |
-|--|-------------|-----| 
-| Oracle 19c | {{< X >}} | {{< X >}} |
-| Oracle 21c | {{< X >}} | {{< X >}} |
-
-自己管理型、RDS、シングルノード、マルチテナントのデプロイ構成がサポートされています。RAC、Exadata、レガシーアーキテクチャは含まれません。
-
-ホスティングタイプを選択して設定の手順を確認します。
-
+## セットアップ
+For setup instructions, select your hosting type:
 {{< partial name="dbm/dbm-setup-oracle" >}}
+
+[1]: https://app.datadoghq.com/integrations
+[2]: https://app.datadoghq.com/integrations/oracle
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[10]: /ja/database_monitoring/architecture/
+[15]: /ja/agent/versions/upgrade_between_agent_minor_versions/?tab=linux
+[20]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux

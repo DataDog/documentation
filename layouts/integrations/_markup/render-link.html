@@ -1,0 +1,2 @@
+<a href="{{ .Destination | safeURL }}" {{ if hasSuffix .Destination ".xml" }}download{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /*  Do not add extra empty lines or spaces to this render hook. will cause a space to render after anchor */ -}}

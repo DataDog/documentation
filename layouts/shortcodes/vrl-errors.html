@@ -1,0 +1,28 @@
+{{ $errors := $.Site.Data.reference.errors | default (dict) }}
+{{ $regexToFixMdLinks := `\[([^\[]+)\](\([^)]+\))` }}
+{{ range $code, $obj := $errors}}
+  <div class="py-3" style="border-bottom:2px solid #DADADA">
+    <h3 id="{{ $obj.title | anchorize }}">{{ $obj.code }} {{ $obj.title }}</h3>
+    <p>{{ replace (replaceRE $regexToFixMdLinks "$1" $obj.description) "VRL" "DPL" | markdownify }}</p>
+    {{ with $obj.rationale }}
+      <h4 id="{{ $obj.title | anchorize }}-rationale">Rationale</h4>
+      <p>{{ replace (replaceRE $regexToFixMdLinks "$1" .) "VRL" "DPL" | markdownify }}</p>
+    {{ end }}
+    {{ with $obj.resolution }}
+      <h4 id="{{ $obj.title | anchorize }}-resolution">Resolution</h4>
+      <p>{{ replace (replaceRE $regexToFixMdLinks "$1" .) "VRL" "DPL" | markdownify }}</p>
+    {{ end }}
+    {{ with $obj.examples }}
+        <h4 id="{{ $obj.title | anchorize }}-examples">Examples</h4>
+        <div class="card-body">
+          {{ range $i, $ex := . }}
+            <h5 id="{{ $ex.title | anchorize }}">{{ $ex.title | markdownify }}</h5>
+            <p>DPL program:</p>
+            {{ print "```bash\n" $ex.source "\n```" | markdownify }}
+            <p>How to fix it:</p>
+            {{ highlight $ex.diff "diff" }}
+          {{ end }}
+        </div>
+    {{ end }}
+  </div>
+{{ end }}

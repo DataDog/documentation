@@ -1,11 +1,11 @@
 ---
-title: Agent IoT
-kind: documentation
 further_reading:
-  - link: /getting_started/agent/
-    tag: Documentation
-    text: Débuter avec l'Agent
+- link: /getting_started/agent/
+  tag: Documentation
+  text: Débuter avec l'Agent
+title: Agent IoT
 ---
+
 ## Présentation
 
 L'Agent IoT Datadog est une version de l'Agent optimisée pour surveiller les périphériques IoT et les applications intégrées. Les clients se servent de l'Agent IoT pour surveiller un grand nombre de périphériques, tels que des écrans numériques ou des appareils de sécurité exécutant des algorithmes de détection d'images.
@@ -51,7 +51,7 @@ Les besoins exacts en ressources dépendent de l'utilisation faite de l'Agent Io
 Pour télécharger et installer automatiquement l'Agent IoT adapté à votre système d'exploitation et à l'architecture de votre chipset, utilisez la commande suivante :
 
 ```shell
-DD_API_KEY=<VOTRE_CLÉ_API_DD> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 #### Méthode manuelle
@@ -73,8 +73,10 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Si vous utilisez Ubuntu 14 ou une version antérieure, ou Debian 8 ou une version antérieure, copiez le keyring vers `/etc/apt/trusted.gpg.d` :
@@ -84,23 +86,23 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
    ```
 
 4. Mettez à jour `apt` et installez l'Agent IoT :
-    ```bash
+    ```shell
     sudo apt-get update
     sudo apt-get install datadog-iot-agent datadog-signing-keys
     ```
 
 5. Copiez l'exemple de configuration et spécifiez votre clé d'API :
-    ```bash
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 6. Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 7. Démarrez l'Agent IoT :
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
@@ -118,6 +120,8 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
@@ -130,23 +134,23 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     - ARMv7 : `https://yum.datadoghq.com/stable/7/armv7hl/`
 
 2. Mettez à jour votre référentiel yum local et installez l'Agent :
-    ```
+    ```shell
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
 3. Copiez l'exemple de configuration et spécifiez votre clé d'API :
-    ```
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 4. Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 5. Démarrez l'Agent IoT :
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 

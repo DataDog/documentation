@@ -5,6 +5,7 @@ assets:
   dashboards:
     Cert-Manager Overview Dashboard: assets/dashboards/certmanager_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: cert_manager.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10161
     source_type_name: cert-manager
 author:
   homepage: https://www.datadoghq.com
@@ -25,6 +27,7 @@ categories:
 - security
 - 構成 & デプロイ
 - containers
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md
 display_on_public_website: true
@@ -32,12 +35,10 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 3.1.0
+integration_version: 5.1.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: cert_manager
-oauth: {}
 public_title: cert-manager
 short_description: cert-manager のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -53,6 +54,7 @@ tile:
   - Category::Security
   - Category::Configuration & Deployment
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: cert-manager のすべてのメトリクスを Datadog で追跡
   media: []
@@ -61,6 +63,7 @@ tile:
   title: cert-manager
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -78,7 +81,7 @@ tile:
 cert_manager チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. cert_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cert_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cert_manager.d/conf.yaml][4] を参照してください。
 
@@ -98,20 +101,33 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 
 cert_manager インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "cert_manager" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+### 重複する name タグ
+
+各証明書の名前は Prometheus ペイロードの `name` ラベルに表示され、Datadog Agent によってタグに変換されます。ホストも `name` タグを使用している場合 (例えば、[AWS インテグレーション][9]によって自動的に収集される)、このインテグレーションからのメトリクスは両方の値を表示します。`name` タグの重複を防ぐために、[`rename_labels` 構成パラメーター][10]を使用して、Prometheus のラベル `name` を Datadog のタグ `cert_name` にマッピングすることができます。これにより、タグ `cert_name` 内の単一の値で証明書を識別できるようになります。
+```yaml
+init_config:
+instances:
+- openmetrics_endpoint: <OPENMETRICS_ENDPOINT>
+  rename_labels:
+    name: cert_name
+```
+
+ご不明な点は、[Datadog サポート][11]までお問い合わせください。
 
 [1]: https://github.com/jetstack/cert-manager
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cert_manager/images/overview_dashboard.png
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[10]: https://github.com/DataDog/integrations-core/blob/81b91a54328f174c5c1e92cb818640cba1ddfec3/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example#L153-L155
+[11]: https://docs.datadoghq.com/ja/help/

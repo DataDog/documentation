@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: 설명서
   text: 인바운드 포트 구성
-kind: 설명서
 os: osx
 platform: OS X
 title: macOS Agent의 기본 사용법
@@ -111,7 +110,7 @@ Agent는 `/opt/datadog-agent/embedded/`에 임베디드 파이썬(Python) 환경
 
 자세한 정보가 필요하신 분은 [임베디드 Agent에 패키지를 추가][3]하는 방법 안내서를 참조하시기 바랍니다.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

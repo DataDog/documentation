@@ -1,6 +1,5 @@
 ---
 title: Libraries
-kind: documentation
 aliases:
    - /libraries/
    - /developers/faq/monitoring-akka/
@@ -86,16 +85,12 @@ This is for a [FreeSwitch ESL][30] application to export statistics to Datadog u
 
 Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
 
-* [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
+* [Heroku Datadog Log Drain][35] written in Node.js by [Oz][36].
 * [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
 
 To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
 * [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
-
-### Jira
-
-A [tool][39] to poll data from Jira and upload it as metrics to Datadog.
 
 ### K6
 
@@ -121,7 +116,6 @@ A Moogsoft [listener][44] that ingests Datadog notifications.
 
 ### OpenVPN
 
-* Send OpenVPN [bandwidth usage][50] and the count of active connections to Datadog.
 * Send OpenVPN [licensing information][51] to Datadog.
 
 ### Phusion Passenger
@@ -131,6 +125,9 @@ Send health metrics from Phusion's Passenger server using the [passenger-datadog
 ### Pid-stats
 
 This [library][54] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][55].
+
+### Pulumi
+The Datadog [resource provider][67] for Pulumi lets you configure Datadog resources.
 
 ### SaltStack
 
@@ -196,8 +193,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://bitbucket.org/atlassian/jiradog/src/master/
-[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd
@@ -207,7 +203,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp
 [49]: https://www.dailymotion.com/us
-[50]: https://github.com/byronwolfman/dd-openvpn
 [51]: https://github.com/denniswebb/datadog-openvpn
 [52]: https://github.com/Sjeanpierre/passenger-datadog-monitor
 [53]: https://github.com/Sjeanpierre
@@ -224,3 +219,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [64]: mailto:opensource@datadoghq.com
 [65]: https://github.com/SpeedCurve-Metrics/heroku-buildpack-php-ddtrace
 [66]: https://www.speedcurve.com/
+[67]: https://github.com/pulumi/pulumi-datadog

@@ -30,7 +30,7 @@ guid: d2052eae-89b8-4cb1-b631-f373010da4b8
 integration_id: varnish
 integration_title: Varnish
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: varnish.

@@ -1,8 +1,6 @@
 ---
 title: Online Archives
-kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
-is_beta: true
 private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
@@ -14,6 +12,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/online-archives-datadog/"
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
+algolia:
+  tags: ['online archives']
 ---
 
 <div class="alert alert-warning">
@@ -44,7 +44,7 @@ Configure Online Archives in the [Logs Index Configuration][3] page:
 
 ## Searching in Online Archives
 
-Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker. You can adjust the time picker by selecting pre-set options, up to 3 months, or by selecting the calendar view to search further back in time.
+Select Online Archives from the dropdown in the Log Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker. You can adjust the time picker by selecting pre-set options, up to 3 months, or by selecting the calendar view to search further back in time.
 
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}

@@ -23,11 +23,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-kubernetes-era
   tag: Blog
   text: La surveillance à l'ère de Kubernetes
+- link: https://www.datadoghq.com/blog/monitor-kubernetes-events/
+  tag: Blog
+  text: Résoudre des problèmes grâce aux événements Kubernetes
 git_integration_title: kubernetes
 integration_id: kubernetes
 integration_title: Kubernetes
 is_public: true
-kind: integration
+custom_kind: integration
 name: kubernetes
 newhlevel: true
 public_title: Intégration Datadog/Kubernetes
@@ -40,14 +43,14 @@ updated_for_agent: 6.0
 
 ## Présentation
 
-Recueillez des métriques et des logs du service kubernetes en temps réel pour :
+Recueillez des métriques et des logs à partir de Kubernetes en temps réel pour :
 
 - Visualiser et surveiller les états de Kubernetes
-- Être informé des failovers et des événements de kubernetes
+- Être informé des failovers et des événements Kubernetes
 
 ## Implémentation
 
-Pour Kubernetes, nous vous conseillons d'exécuter l'Agent en tant que conteneur dans votre cluster.
+Pour Kubernetes, Datadog vous conseille d'exécuter l'Agent en tant que conteneur dans votre cluster.
 
 **[Consultez la documentation relative à Kubernetes pour déployer l'Agent dans votre cluster Kubernetes][1].**
 

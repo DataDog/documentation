@@ -17,14 +17,16 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: ログ収集のトラブルシューティングガイド
-kind: documentation
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 title: Node.js ログ収集
 ---
 
 
 ## ロガーの構成
 
-Datadog にログを送信するには、ファイルにログを記録し、Datadog Agent でそのファイルを追跡します。Node.js アプリケーションからログを取るには、[Winston][1] ロギングライブラリを使用します。
+Datadog にログを送信するには、ファイルにログを記録し、Datadog Agent でそのファイルを[テール][14]します。Node.js アプリケーションからログを取るには、[Winston][1] ロギングライブラリを使用します。
 
 Winston は、[NPM][2] から入手できます。最初に、コードに依存関係を追加する必要があります。
 
@@ -85,7 +87,7 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({
             name: '<LOGGER_NAME>',
             filename: '<FILE_NAME>.log',
-      json: true,
+            json: true,
             level: 'info'
         })
     ]
@@ -118,12 +120,12 @@ init_config:
 
 instances:
 
-##Log section
+##Log セクション
 logs:
 
   - type: file
-    path: "<ファイル名パス>.log"
-    service: nodejs
+    path: "<FILE_NAME_PATH>.log"
+    service: <SERVICE_NAME>
     source: nodejs
     sourcecategory: sourcecode
 ```
@@ -198,9 +200,10 @@ logstash.on('error', function(err) {
 [5]: /ja/api/v1/logs/#send-logs
 [6]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [7]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[8]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[9]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[10]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[8]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[9]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [11]: /ja/logs/log_configuration/parsing/?tab=matchers
 [12]: /ja/logs/explorer/#overview
 [13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+[14]: /ja/glossary/#tail

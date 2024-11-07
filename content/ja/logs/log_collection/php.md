@@ -20,13 +20,15 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: ドキュメント
   text: ログ収集のトラブルシューティングガイド
-kind: documentation
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 title: PHP ログ収集
 ---
 
 ## 概要
 
-PHP ログを Datadog に送信する場合は、ファイルにログを記録し、Datadog Agent を使用してそのファイルを追跡します。このページでは、[Monolog][8]、[Zend-Log][9] および [Symfony][10] ログライブラリをセットアップする例を詳しく説明します。
+PHP ログを Datadog に送信する場合は、ファイルにログを記録し、Datadog Agent を使用してそのファイルを[テール][14]します。このページでは、[Monolog][8]、[Zend-Log][9] および [Symfony][10] ログライブラリをセットアップする例を詳しく説明します。
 
 ## セットアップ
 
@@ -189,8 +191,8 @@ instances:
 logs:
 
   - type: file
-    path: "/path/to/your/php/application-json.log"
-    service: "<SERVICE_NAME>"
+    path: "<path_to_your_php_application_json>.log"
+    service: "<service_name>"
     source: php
     sourcecategory: sourcecode
 ```
@@ -332,7 +334,7 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ``` 
+    ```
 
 3. 生成された JSON ファイルを Datadog に[ストリーミング](#configure-the-datadog-agent)します。
 
@@ -548,4 +550,5 @@ class AppServiceProvider extends ServiceProvider
 [10]: https://symfony.com/
 [11]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [12]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[13]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[13]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[14]: /ja/glossary/#tail

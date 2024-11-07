@@ -1,6 +1,6 @@
 ---
 title: Use the webhooks integration to create a Trello card
-kind: faq
+
 ---
 
 You can use the [webhooks integration][1] to instantly create a Trello card using the [@-notification feature][2].
@@ -40,7 +40,7 @@ See the [API documentation for Trello cards][4] and Datadog's [webhooks integrat
 
 In the configuration:
 
-* "name" is the alias for how you references this hook (@webhook-NAME)
+* "name" is the alias for how you reference this hook (@webhook-NAME)
 
 * "URL" is `https://api.trello.com/1/cards`
 
@@ -69,7 +69,7 @@ The resulting config looks like this:
 
 ## Some points to consider
 
-This flow involves Trello generating a server token for the application. As you can see in the the token disclaimer:
+This flow involves Trello generating a server token for the application. As you can see in the token disclaimer:
 {{< img src="developers/faq/trello_disclaimer.png" alt="trello_disclaimer" >}}
 
 The token provides read/write access to all your boards and teams, so this is a potential concern if you do not want to give away access in this way.

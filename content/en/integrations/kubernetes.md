@@ -1,7 +1,7 @@
 ---
 integration_title: Kubernetes
 name: kubernetes
-kind: integration
+custom_kind: integration
 git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 6.0
@@ -30,20 +30,23 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitoring-kubernetes-era"
     tag: "Blog"
     text: "Monitoring in the Kubernetes era"
+  - link: "https://www.datadoghq.com/blog/monitor-kubernetes-events/"
+    tag: "Blog"
+    text: "Troubleshoot with Kubernetes events"
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
 ## Overview
 
-Get metrics and logs from kubernetes service in real time to:
+Get metrics and logs from Kubernetes in real time to:
 
-- Visualize and monitor kubernetes states
-- Be notified about kubernetes failovers and events.
+- Visualize and monitor Kubernetes states.
+- Be notified about Kubernetes failovers and events.
 
 ## Setup
 
-For Kubernetes, it's recommended to run the Agent as a container in your cluster.
+For Kubernetes, Datadog recommends that you run the Agent as a container in your cluster.
 
 **[See the dedicated Kubernetes documentation to deploy the Agent in your Kubernetes cluster][1]**.
 

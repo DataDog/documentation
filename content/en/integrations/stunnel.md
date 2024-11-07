@@ -5,7 +5,7 @@ description: Gather your logs from your Stunnel proxy and send them to Datadog.
 has_logo: true
 integration_title: Stunnel
 is_public: true
-kind: integration
+custom_kind: integration
 name: Stunnel
 public_title: Datadog-Stunnel Integration
 short_description: Gather your logs from your Stunnel proxy and send them to Datadog.
@@ -59,7 +59,7 @@ _Available for Agent versions >v6.0_
 
 [Run the Agent's `status` subcommand][4] and look for `stunnel` under the Checks section.
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: /agent/guide/agent-commands/#agent-status-and-information

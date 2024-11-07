@@ -6,9 +6,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: 산점도 위젯
-widget_type: 산점도
+widget_type: scatterplot
 ---
 
 산점도 시각화를 사용하면 서로 다른 두 개의 메트릭과 이들 각각의 집계를 이용해 선택한 범위를 그래프화할 수 있습니다.

@@ -1,27 +1,45 @@
 ---
 aliases:
 - /ja/ci
+cascade:
+  algolia:
+    rank: 70
+    tags:
+    - ci/cd
+    - 継続的インテグレーション
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=CI%20Visibility
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: リリースノート
-  text: CI Visibility の最新リリースをチェック！ (アプリログインが必要です)。
-- link: /continuous_integration/pipelines/
-  tag: ドキュメント
-  text: ビルドの問題を解決するためにパイプラインデータの調査を開始します
-- link: /continuous_integration/tests/
-  tag: ドキュメント
-  text: 問題のあるテストを見つけて修正するために、テストデータの調査を開始します
+  text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
 - link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
   tag: ブログ
   text: Datadog で CircleCI 環境を監視する
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
-  tag: GitHub
+  tag: ブログ
   text: Datadog CI モニターによるパイプラインアラートの構成
-kind: documentation
+- link: /continuous_integration/pipelines/
+  tag: ドキュメント
+  text: ビルドの問題を解決するためにパイプラインデータを調査する
+- link: /account_management/billing/ci_visibility
+  tag: ドキュメント
+  text: CI Visibility の請求に関する注意事項について
+- link: /continuous_integration/tests/
+  tag: ドキュメント
+  text: 問題のあるテストを見つけて修正するために、テストデータを調査する
+- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
+  tag: ブログ
+  text: 静的 Web アプリケーションを監視するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
+  tag: ブログ
+  text: CI/CD 監視のベストプラクティス
+- link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
+  tag: ブログ
+  text: CI/CD のソフトウェアテストを監視するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
+  tag: ブログ
+  text: Datadog CI Pipeline Visibility で CI/CD のモダナイゼーションを監視
 title: Continuous Integration Visibility
 ---
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
@@ -29,48 +47,40 @@ title: Continuous Integration Visibility
 
 <div class="alert alert-info">このページでは、継続的インテグレーション (CI) のメトリクスとデータを Datadog のダッシュボードに取り込む方法について説明します。CI パイプラインで Continuous Testing テストを実行したい場合は、<a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing と CI/CD</a> のセクションを参照してください。</div>
 
-Datadog Continuous Integration (CI) Visibility は、CI テストとパイプラインの結果に関する情報に加えて、CI のパフォーマンス、傾向、信頼性に関するデータをすべて 1 か所にまとめます。開発者が、テストまたはパイプラインの失敗の理由を掘り下げたり、テストスイートの実行時間の傾向を監視したり、特定のコミットがパイプラインに与える影響を確認したりできるだけでなく、ビルドエンジニアが、組織間の CI の状態とパイプラインパフォーマンスの経時的な傾向を視認することもできます。
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Datadog CI Visibility がどのようにして CI パイプラインの効率を高めるのか、また、Testing Visibility と Pipeline Visibility 製品の構成方法について学ぶために、CI Visibility 入門セッションにご参加ください。
+{{< /learning-center-callout >}}
 
-CI Visibility は、CI メトリクスとデータを Datadog ダッシュボードに取り込むため、CI 環境の状態を伝達し、チームが毎回高品質のコードを提供する能力を向上させることに注力できます。
 
-CI Visibility は、テストの失敗と壊れたビルドをトラブルシューティングし、最も差し迫った開発停止をその原因となるコミットに結び付けるのに役立ちます。APM でアプリケーションのパフォーマンスをトレースするために使用するのと同じライブラリを使用して、テストをインスツルメントし、CI で実行されるテストフレームワークからトレースを生成できます。同様に、Datadog は CI プロバイダーと統合してパイプラインメトリクスを収集し、コミットがパイプラインに入った瞬間からデプロイの準備ができるまでのパフォーマンスと結果を追跡します。時間の経過とともに集計されたデータを使用して、テストとビルドのパフォーマンスの傾向を追跡し、最も修正すべき対象を特定します。
+## 概要
 
-## パイプラインに関する洞察を得る
+Datadog Continuous Integration (CI) Visibility は、CI 環境全体のパイプラインの結果、パフォーマンス、トレンド、信頼性を統合的に表示します。CI パイプラインに Datadog を統合することで、モニターを作成したり、[Datadog ダッシュボード][1]や[ノートブック][2]にデータを表示したり、組織の CI の健全性を可視化したりすることができます。
 
-Datadog Pipelines ページは、サービスのビルドパイプラインを監視している開発者にとって便利です。次のような疑問に答えます。
-- 特にデフォルトのブランチで、サービスのパイプラインは成功しているか？
-- そうでない場合、根本的な原因は？
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
-ビルドエンジニアの場合、Pipelines ページには次のものがあります。
-- パイプラインの実行とブランチの集計された統計を含む、ビルドシステム全体の状態の概要。
-- プロダクションパイプラインの破損など、緊急の問題をすばやく見つけて修正するためのウィンドウ。
-- 時間の経過とともに各パイプラインがどのように実行されたか、また、どのような結果と傾向が見られるか。
-- 時間の経過に伴う、各ビルド段階で費やされた時間の内訳。これにより、最大の違いを生む場所に改善努力を集中させることができます。
+</br>
 
-CI パイプラインデータは[ダッシュボード][1]と[ノートブック][2]で利用できるため、ビルドエンジニアリングチームは、優先度の高い作業と CI の傾向に関するコミュニケーションを長期にわたってカスタマイズできます。
+CI Visibility は、開発者がパイプラインの中断の原因を理解し、パイプラインの実行時間の傾向を監視するのに役立ちます。また、ビルドエンジニアは、組織横断的な CI の健全性とパイプラインのパフォーマンスの経時変化に関する洞察を得ることができます。
 
-## テストに関する洞察を得る
+## パイプラインの信頼性を向上させ、トレースを作成
 
-開発者の場合、Tests ページと Test Runs ページには、作業に関する 2 種類の情報が表示されます。
+CI Visibility は、最も重大な開発障害とその原因となったコミットを結びつけることで、パイプラインの障害やビルドの失敗のトラブルシューティングを支援します。パイプラインをインスツルメントし、その実行をトレースすることで、パイプラインのパフォーマンスについてより深い洞察を得ることができます。
 
-- 低レベルで即時:
-    - 失敗しているテストとその理由を確認します。
-    - 最後のコミットのテスト結果を確認します。
-    - 機能ブランチでテストの実時間を表示し、それをデフォルトブランチと比較して、パフォーマンスの低下を引き起こそうとしているかどうかを特定します。
-    - コミットによって、以前は不安定ではなかった新しい不安定なテストが導入されているかどうかを確認します。これは、コードの変更が不安定な原因であることを示しています。これにより、CI の不安定なテストの数を増やすのではなく、続行する前に問題を修正する機会が得られます。
+## シームレスなインテグレーションで効率アップ
 
-- 高レベルの蓄積と傾向:
-    - コードの変更、テストの追加、複雑さの増加が、時間の経過とともにテストスイートのパフォーマンスに与える影響を確認します。
-    - 時間の経過とともにどのテストが遅くなったかを確認し、回帰を引き起こしたコミットを特定します。
-    - 時間の経過とともにどのテストが多かれ少なかれ信頼できなくなっているかを示す、Datadog の自動テストフレークネス検出と追跡を利用します。
+Datadog は、様々な CI プロバイダーと統合し、コミットからデプロイまでの CI パイプラインのパフォーマンスを追跡するメトリクスを収集します。これらのメトリクスは、パフォーマンスの傾向と改善の機会を特定するために使用されます。
 
-テスト実行データは、[ダッシュボード][1]および[ノートブック][2]でも入手できます。
+{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+
+</br>
+
+`datadog-ci` CLI を使用して[コマンドのトレース][8]や[カスタムタグと測定値][9]の追加を行うことができます。これにより、ユーザー定義のテキストおよび数値タグをパイプライントレースに追加することができます。
 
 ## 準備はいいですか？
 
-CI プロバイダーに対する Datadog のセットアップ手順、CI 製品の互換性に関する情報、CI データ収集のインスツルメントと構成の手順については、[パイプラインのセットアップ][3]および[テストのセットアップ][4]を参照してください。次に、[パイプラインの探索][5]と[テストの探索][6]を使用して、データの Datadog CI Visibility ビューの探索を開始します。
+互換性要件の詳細やデータ収集の構成手順など、CI プロバイダーで CI Visibility をセットアップする手順については、[Pipeline Visibility][3] を参照してください。その後、[CI Visibility Explorer][7] でパイプライン実行の詳細を調査し、検索クエリを [CI Pipeline Monitor][6] にエクスポートしてください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -78,5 +88,7 @@ CI プロバイダーに対する Datadog のセットアップ手順、CI 製�
 [2]: https://app.datadoghq.com/notebook/list
 [3]: /ja/continuous_integration/pipelines/
 [4]: /ja/continuous_integration/tests/
-[5]: /ja/continuous_integration/pipelines/
-[6]: /ja/continuous_integration/tests/
+[6]: /ja/monitors/types/ci/
+[7]: /ja/continuous_integration/explorer/
+[8]: /ja/continuous_integration/pipelines/custom_commands/
+[9]: /ja/continuous_integration/pipelines/custom_tags_and_measures/

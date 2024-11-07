@@ -1,6 +1,5 @@
 ---
 title: Serverless Billing
-kind: documentation
 ---
 
 ## Managing usage
@@ -50,7 +49,7 @@ Datadog provides multiple tools to manage the installation and configuration of 
 
 ## Active functions definition
 
-Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. Pro and Enterprise plans include five custom metrics per billable function.
+Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. Pro and Enterprise plans include five custom metrics per billable function. A single billable function is defined by a unique function ARN. In the case of Lambda@Edge functions, each function in a different region is counted as a separate billable function.
 
 Billing for serverless APM is based on the sum of AWS Lambda invocations connected to APM ingested spans in a given month. You are also billed for the total number of [indexed spans][4] submitted to the Datadog APM service exceeding the bundled quantity at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 

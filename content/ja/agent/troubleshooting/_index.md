@@ -27,7 +27,6 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: Documentation
   text: CPU やメモリの消費量が多い
-kind: documentation
 title: Agent のトラブルシューティング
 ---
 
@@ -51,14 +50,14 @@ title: Agent のトラブルシューティング
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /ja/agent/troubleshooting/hostname_containers/
-[4]: /ja/agent/proxy/
+[4]: /ja/agent/configuration/proxy/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /ja/agent/troubleshooting/site/
-[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: /ja/agent/guide/agent-log-files/
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[8]: /ja/agent/configuration/agent-log-files/
 [9]: /ja/agent/troubleshooting/debug_mode/
 [10]: /ja/help/
 [11]: /ja/agent/troubleshooting/send_a_flare/

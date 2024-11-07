@@ -1,6 +1,6 @@
 ---
 title: List Widget
-kind: documentation
+widget_type: list_stream
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -8,9 +8,11 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"
+algolia:
+  tags: ['event stream', 'log stream']
 ---
 
-The list widget enables you to display a list of events and issues coming from different sources.
+The list widget displays a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down the events you want the widget to highlight and display.
 
 _List widget displaying error tracking issues_
 
@@ -22,7 +24,7 @@ _List widget displaying error tracking issues_
 
 ### Configuration
 
-1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, or Events depending on which products are available for your organization.
+1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, Watchdog Alerts, or Events depending on which products are available for your organization.
 
 2. Set display preferences. On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
@@ -79,12 +81,27 @@ For Events, you can choose how they're displayed in the widget:
 * Small (title only)
 * Large (full event)
 
+### Incidents
+
+#### Sorting by
+
+For incidents, you can sort by:
+
+* Created time
+* Severity
+* Status
+
+Ascending or descending
+
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
+This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/dashboards/
+[1]: /api/latest/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

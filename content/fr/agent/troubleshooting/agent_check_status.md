@@ -1,14 +1,14 @@
 ---
-title: Statut d'un check de l'Agent
-kind: documentation
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Dépannage de l'Agent
-    text: Mode debugging de l'Agent
-  - link: /agent/troubleshooting/send_a_flare/
-    tag: Dépannage de l'Agent
-    text: Envoyer un flare avec l'Agent
+- link: /agent/troubleshooting/debug_mode/
+  tag: Dépannage de l'Agent
+  text: Mode debugging de l'Agent
+- link: /agent/troubleshooting/send_a_flare/
+  tag: Dépannage de l'Agent
+  text: Envoyer un flare avec l'Agent
+title: Statut d'un check de l'Agent
 ---
+
 En cas de problème avec l'un des checks de l'Agent, utilisez ces commandes pour votre système d'exploitation pour obtenir plus d'informations de dépannage :
 
 - [Linux](#linux)
@@ -17,6 +17,8 @@ En cas de problème avec l'un des checks de l'Agent, utilisez ces commandes pour
 - [Pour aller plus loin](#pour-aller-plus-loin)
 
 **Remarque** : remplacez `<NOM_CHECK>` dans les exemples ci-dessous par n'importe quel check de l'Agent. Par exemple : `activemq`, `ceph` ou `elastic`. Consultez la [documentation de l'intégration][1] pour vérifier le nom du check de l'Agent.
+
+**Remarque** : pour désactiver temporairement un check de service lors du dépannage, renommez `/conf.d/<NOM_CHECK>.d/conf.yaml` de façon à utiliser une extension de fichier autre `.yaml` ou `.yml`, par exemple `conf.yaml.disable`.
 
 ## Linux
 
@@ -42,7 +44,7 @@ sudo -u dd-agent datadog-agent check <NOM_CHECK> --check-rate
 sudo -u dd-agent dd-agent check <NOM_CHECK>
 ```
 
-Remplacez `<NOM_CHECK>` par n'importe quel check de l'Agent. Par exemple : `activemq`, `ceph` ou `elastic`. Consultez la [documentation de l'intégration][1] pour vérifier le nom du check de l'Agent.
+Remplacez `<NOM_CHECK>` par n'importe quel check de l'Agent. Par exemple : `activemq`, `ceph` ou `elastic`. Consultez la [documentation de l'intégration][4] pour vérifier le nom du check de l'Agent.
 
 Si vous souhaitez inclure des métriques rate, ajoutez `--check-rate` à votre commande. Par exemple, pour l'Agent v6.x, exécutez :
 
@@ -60,18 +62,17 @@ Si le problème persiste, [contactez l'équipe d'assistance Datadog][1] en envoy
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-Exécutez le script suivant, avec le `<NOM_CHECK>` approprié :
+Exécutez le script suivant depuis une ligne de commande PowerShell avec **élévation des privilèges** (en tant qu'administrateur), en utilisant le `<NOM_CHECK>` approprié :
 
 Pour les versions >= 6.12 de l'Agent :
 
 ```powershell
-%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <NOM_CHECK>
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" check <NOM_CHECK>
 ```
 
 Pour les versions <= 6.11 de l'Agent :
-
 ```powershell
-%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <NOM_CHECK>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" check <NOM_CHECK>
 ```
 
 {{% /tab %}}
@@ -89,14 +90,14 @@ Cela permet d'afficher toutes les métriques ou tous les événements que le che
 {{% /tab %}}
 {{% tab "Agent v>=5.12" %}}
 
-Exécutez le script suivant, avec le `<NOM_CHECK>` approprié :
+Exécutez le script suivant depuis une ligne de commande PowerShell avec **élévation des privilèges** (en tant qu'administrateur), en utilisant le `<NOM_CHECK>` approprié :
 
 `<RÉPERTOIRE_INSTALLATION>/embedded/python.exe <RÉPERTOIRE_INSTALLATION>agent/agent.py check <NOM_CHECK>`
 
 Par exemple, pour exécuter le check Disk :
 
 ```powershell
-C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" check disk
 ```
 
 {{% /tab %}}

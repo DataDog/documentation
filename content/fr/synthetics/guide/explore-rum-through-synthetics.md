@@ -2,39 +2,48 @@
 aliases: null
 description: Les utilisateurs n'ayant pas accès à la solution RUM peuvent désormais
   prévisualiser des sessions, erreurs et données RUM depuis les résultats de leurs
-  tests Browser Synthetic.
+  tests Browser Synthetic, sans frais supplémentaires.
 further_reading:
 - link: https://docs.datadoghq.com/synthetics/browser_tests/
   tag: Documentation
   text: Configurer un test Browser
-kind: documentation
-title: Explorer des données RUM et Session Replay dans Synthetics
+- link: /synthetics/settings/
+  tag: Documentation
+  text: Paramètres de la surveillance Synthetic
+title: Découvrez un aperçu des fonctionnalités du RUM dans Synthetics
 ---
 
 ## Présentation
 
-<div class="alert alert-info">Si vous n'avez pas accès à la solution Real User Monitoring, vous pouvez prévisualiser des données relatives à RUM, à Session Replay et au suivi des erreurs, ainsi que des données de performance supplémentaires, depuis vos exécutions de test Browser Synthetic.</div>
+<div class="alert alert-info">Si vous avez accès à la solution Real User Monitoring, vous pouvez prévisualiser des données relatives à RUM, à Session Replay et au suivi des erreurs, ainsi que des données de performance supplémentaires, depuis vos exécutions de test Browser Synthetic.</div>
 
 Les tests Browser Synthetic intègrent le SDK Real User Monitoring. Vous pouvez donc explorer ce qui suit :
 
-- Les données [Session Replay][1] de tous vos tests. Ces informations de contexte supplémentaires viennent compléter les captures d'écran incluses avec chaque étape. Vous avez également accès à des [outils de développement][2].
+- Les données [Session Replay][1] de tous vos tests. Vous pouvez accéder à des informations de contexte supplémentaires qui viennent compléter les captures d'écran incluses avec chaque étape. Il est également possible d'utiliser les [outils de développement Browser][2].
 - Les sessions pertinentes dans le [RUM Explorer][3].
-- Les erreurs agrégées pour l'ensemble des étapes, tests et exécutions grâce au [suivi des erreurs][4]. Ces données vous permettent de visualiser uniquement les erreurs ayant un certain impact et de corriger en priorité les problèmes les plus graves.
+- Les erreurs agrégées pour l'ensemble des étapes, tests et exécutions grâce au [suivi des erreurs][4]. Vous pouvez visualiser uniquement les erreurs ayant un certain impact et corriger en priorité les problèmes les plus graves.
 - Des ressources et informations de durée RUM supplémentaires, avec de nouvelles fonctionnalités de recherche et de surveillance.
 
 ## Autoriser les données Synthetic sur les applications RUM
 
+<div class="alert alert-warning">
+Si l'application cible est déjà instrumentée à l'aide de RUM, veillez à ne pas activer la collecte de données RUM dans la configuration du test Synthetic, afin d'éviter tout comportement inattendu.</div>
+
 Dans l'enregistrement de votre test Browser, cliquez sur l'option **Collect RUM Data on** au-dessus du bouton **Start Recording**, puis sélectionnez l'application pour laquelle vous souhaitez recueillir des données. Une fois la configuration de votre test et votre enregistrement validée, la solution RUM recueille des données sur les tests et génère des enregistrements de session à partir de vos exécutions de test Browser.
 
-Vous pouvez également cliquer sur `Synthetic Tests Default` et sélectionner une autre application RUM depuis la liste déroulante. Cette application s'affiche dans l'enregistrement de test Browser :
+1. Accédez à **Digital Experience** > **Settings** (sous Synthetic Monitoring & Testing) > [**Integration Settings**][5].
+2. Sous **Synthetic Data RUM Collection**, cliquez sur **Enable Synthetic RUM data collection** pour permettre à Datadog de collecter des données RUM à partir de vos exécutions de test.
+3. Cliquez sur **Save RUM Data Collection**.
+4. Sous **Synthetic Data RUM Applications**, sélectionnez une suggestion d'application RUM par défaut depuis le menu déroulant de l'enregistreur de test Browser.
+5. Cliquez sur **Save RUM Data Applications**.
 
-1. Accédez à [**UX Monitoring**> **Settings** > **Integration Settings**][5].
-2. Sous **Synthetic Data RUM Applications**, sélectionnez une suggestion d'application RUM par défaut depuis le menu déroulant de l'enregistreur de test Browser.
-3. Cliquez sur **Save RUM Preview Settings**.
+Vous pouvez également cliquer sur `Synthetic Tests Default` et sélectionner une autre application RUM depuis la liste déroulante. Cette application s'affiche dans l'enregistrement de test Browser.
+
+Pour en savoir plus, consultez les [Paramètres de surveillance Synthetic][6].
 
 ## Passer de Synthetics au RUM Explorer
 
-Accédez à votre [liste de tests Browser][6], puis cliquez sur une exécution de test.
+Accédez à votre [liste de tests Browser][7], puis cliquez sur une exécution de test.
 
 {{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Volet latéral des détails d'une étape de test" style="width:100%;" >}}
 
@@ -46,7 +55,7 @@ Pour visualiser les erreurs, ressources et données de performance de ce test da
 
 ## Passer du RUM Explorer à Synthetics
 
-Depuis le RUM Explorer, accédez à votre [liste de sessions][7], puis cliquez sur une session pour laquelle un replay est disponible.
+Depuis le RUM Explorer, accédez à votre [liste de sessions][8], puis cliquez sur une session pour laquelle un replay est disponible.
 
 {{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Volet latéral des détails d'une session" style="width:100%;" >}}
 
@@ -60,10 +69,11 @@ Pour revenir à la vue Synthetics et aux résultats de votre test, cliquez sur *
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/session_replay/
-[2]: /fr/real_user_monitoring/session_replay/developer_tools/
+[1]: /fr/real_user_monitoring/session_replay/browser/
+[2]: /fr/real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /fr/real_user_monitoring/explorer/
 [4]: /fr/real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations
-[6]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
-[7]: https://app.datadoghq.com/rum/explorer
+[6]: /fr/synthetics/settings
+[7]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
+[8]: https://app.datadoghq.com/rum/explorer

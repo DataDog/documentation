@@ -2,29 +2,30 @@
 categories:
 - cloud
 - AWS
+custom_kind: integration
 dependencies: []
-description: Amazon Network Firewall を監視します。
+description: AWS Network Firewall を監視します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_network_firewall/
 draft: false
 git_integration_title: amazon_network_firewall
 has_logo: true
-integration_id: amazon-network-firewall
-integration_title: Amazon Network Firewall
+integration_id: ''
+integration_title: AWS Network Firewall
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_network_firewall
-public_title: Amazon Network Firewall
-short_description: Amazon Network Firewall を監視します。
+public_title: Datadog-AWS Network Firewall
+short_description: AWS Network Firewall を監視します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Network Firewall は、VPC の境界でトラフィックを絞り込むことができるステートフルなサービスです。
 
-このインテグレーションを有効にすると、すべての Amazon Network Firewall メトリクスを Datadog に表示できます。
+このインテグレーションを有効にすると、すべての AWS Network Firewall メトリクスを Datadog に表示できます。
 
 ## セットアップ
 
@@ -36,20 +37,20 @@ AWS Network Firewall は、VPC の境界でトラフィックを絞り込むこ�
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Network Firewall` が有効になっていることを確認します。
 
-2. [Datadog - AWS Amazon Network Firewall インテグレーション][3]をインストールします。
+2. [Datadog - AWS Network Firewall インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
-Amazon Network Firewall から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS Network Firewall から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が  `amazon_network_firewall` に設定されていることを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールで、Amazon Network Firewall ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールで、AWS Network Firewall ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -64,11 +65,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Amazon Network Firewall インテグレーションには、イベントは含まれません。
+AWS Network Firewall インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-AWS Amazon Network Firewall インテグレーションには、サービスチェックは含まれません。
+AWS Network Firewall インテグレーションには、サービスチェックは含まれません。
 
 ## トラブルシューティング
 

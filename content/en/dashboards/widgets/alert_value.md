@@ -1,16 +1,16 @@
 ---
 title: Alert Value Widget
-kind: documentation
+widget_type: alert_value
 description: "Graph the current value of a metric in any simple-alert metric monitor defined on your system."
 aliases:
-    - /graphing/widgets/alert_value/
+- /graphing/widgets/alert_value/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
 ---
 
-Alert values are query values showing the current value of the metric in any simple-alert metric monitor defined on your system:
+The Alert value widget displays the current query value from a simple-alert metric monitor. Simple-alert monitors have a metric query that is not grouped and returns one value. Use Alert value widgets in your dashboard to get an overview of your monitor behaviors and alert statuses.
 
 {{< img src="dashboards/widgets/alert_value/alert_value_2023.png" alt="Three alert value widgets with three different monitor statuses for disk space, high cpu and checkout error rate" >}}
 
@@ -28,9 +28,7 @@ Alert values are query values showing the current value of the metric in any sim
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
-
-The dedicated [widget JSON schema definition][2] for the alert value widget is:
+This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
 
 {{< dashboards-widgets-api >}}
 

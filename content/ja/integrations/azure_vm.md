@@ -4,6 +4,7 @@ categories:
 - cloud
 - configuration & deployment
 - os & system
+custom_kind: integration
 dependencies: []
 description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_vm/
@@ -18,7 +19,6 @@ integration_id: azure-vm
 integration_title: Microsoft Azure VM
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_vm
 public_title: Datadog-Microsoft Azure VM インテグレーション
@@ -26,6 +26,7 @@ short_description: Azure VM のリソース使用状況、ネットワーク統�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure 仮想マシンでは、オンデマンドでスケーリングできる仮想化環境を柔軟に実行できます。
@@ -59,7 +60,7 @@ Azure VM がシャットダウンまたは停止したモニターをミュー�
 
 ## 収集データ
 
-<div class="alert alert-warning"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化される予定です。
+<div class="alert alert-warning"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化されました。
 
 ご不明な点は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までお問い合わせください。</div>
 
@@ -71,7 +72,7 @@ Azure VM がシャットダウンまたは停止したモニターをミュー�
 
 Azure Virtual Machine インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Virtual Machine インテグレーションには、サービスのチェック機能は含まれません。
 

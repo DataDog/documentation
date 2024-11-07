@@ -1,6 +1,5 @@
 ---
 title: Trace Explorer
-kind: documentation
 aliases:
     - /tracing/tracing_without_limits/
     - /tracing/livesearch/
@@ -131,7 +130,7 @@ All spans indexed by custom retention filters or the intelligent retention filte
 
 From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
 
-**Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
+**Note**: Spans indexed by the intelligent retention filter are excluded from APM trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
 [1]: /dashboards/widgets/timeseries/
 [2]: /monitors/types/apm/?tab=analytics
@@ -158,6 +157,6 @@ You can customize which spans are retained and at what retention rates. By defau
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
 [9]: /account_management/billing/apm_distributed_tracing/
-[10]: /tracing/glossary/#service-entry-span
-[11]: /tracing/glossary/#trace-root-span
+[10]: /glossary/#service-entry-span
+[11]: /glossary/#trace-root-span
 [12]: https://app.datadoghq.com/apm/traces/retention-filters

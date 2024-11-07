@@ -8,7 +8,8 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans le RUM Explorer
-kind: guide
+
+private: true
 title: Envoyer des actions RUM personnalisées
 ---
 ## Présentation
@@ -44,27 +45,27 @@ Assurez-vous d'incorporer l'appel API avec le rappel `onReady` :
 
 ```javascript
 function onCheckoutButtonClick(cart) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addAction('checkout', {
-            'value': cart.value, // par exemple, 42,12
-            'items': cart.items, // par exemple, ['tomate', 'fraises']
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addAction('checkout', {
+            'value': cart.value, // par exemple, 42.12
+            'items': cart.items, // par exemple, ['tomato', 'strawberries']
         })
-    })    
+    })
 }
 ```
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
 
-Assurez-vous de vérifier `DD_RUM` avant de procéder à l'appel API :
+Assurez-vous de vérifier `window.DD_RUM` avant de procéder à l'appel API :
 
 ```javascript
-window.DD_RUM && DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
+window.DD_RUM && window.DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
 
 function onCheckoutButtonClick(cart) {
-    window.DD_RUM && DD_RUM.addAction('checkout', {
-        'value': cart.value, // par exemple, 42,12
-        'items': cart.items, // par exemple, ['tomate', 'fraises']
+    window.DD_RUM && window.DD_RUM.addAction('checkout', {
+        'value': cart.value, // par exemple, 42.12
+        'items': cart.items, // par exemple, ['tomato', 'strawberries']
     })
 }
 ```

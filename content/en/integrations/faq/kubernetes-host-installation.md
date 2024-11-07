@@ -1,6 +1,6 @@
 ---
 title: Host Agent to monitor Kubernetes.
-kind: faq
+
 aliases:
     - /agent/kubernetes/host_setup
 ---
@@ -60,10 +60,10 @@ Use [Autodiscovery with Pod Annotations][4] to configure log collection to add m
 
 To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][7].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [3]: /agent/
 [4]: /agent/kubernetes/integrations/
-[5]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

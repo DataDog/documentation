@@ -1,6 +1,5 @@
 ---
 title: Visualize
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -15,7 +14,7 @@ Visualizations define the outcomes of the filters and aggregates displayed in th
 
 Lists are paginated results of events and are ideal when individual results matter. You do not need prior knowledge of what defines a matching result to use lists.
 
-{{< img src="real_user_monitoring/explorer/visualize/rum_explorer_lists.mp4" alt="Lists in the RUM Explorer" video="true" style="width:70%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/rum_explorer_lists-1.mp4" alt="Lists in the RUM Explorer" video="true" style="width:70%;" >}}
 
 The information you search for is displayed in columns. You can manage the following:
 
@@ -38,9 +37,9 @@ In addition to dashboards, the list widget can be used in Notebooks as well, all
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
 
-{{< img src="real_user_monitoring/explorer/visualize/timeseries.png" alt="Timeseries graph in the RUM Explorer" style="width:80%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/timeseries-2.png" alt="Timeseries graph in the RUM Explorer" style="width:90%;" >}}
 
-The timeseries graph depicts the evolution of the number of page views on the Shopist application over the past day for every view path.
+The timeseries graph depicts the evolution of the number of pageviews on the Shopist application over the past day for every view path.
 
 You can choose additional display options such as:
 
@@ -51,46 +50,51 @@ You can choose additional display options such as:
 
 Visualize the top values from a facet based on your chosen measure.
 
-{{< img src="real_user_monitoring/explorer/visualize/top_list.png" alt="Top list bar graph in the RUM Explorer" style="width:80%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/top-list-2.png" alt="Top list bar graph in the RUM Explorer" style="width:90%;" >}}
 
-The top list includes the top ten browsers used to visit the Shopist website over the last day.
+The top list includes the top browsers used to visit the Shopist website over the last day.
 
 ## Nested tables
 
-Visualize the top values from up to three [facet][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the table. Update the search query or investigate the RUM events corresponding to either dimension.
+Visualize the top values from up to three [facets][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the nested table. Update the search query or investigate the RUM events corresponding to either dimension.
 
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
 * The subtotal may differ from the actual sum of values in a group since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
  **Note**: A table visualization used for one single measure and one single dimension is the same as a [top list](#top-list), just with a different display.
 
- The following RUM Analytics table shows the **top 5 URL path** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
+ The following RUM Analytics table shows the **top 5 URL paths** for **two countries**, US and Japan, grouped by browser, over the last day:
 
-{{< img src="real_user_monitoring/explorer/visualize/nested_table.png" alt="Nested table in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/nested-table-4.png" alt="Nested table in the RUM Explorer" style="width:90%;">}}
 
 ## Distributions
 
 You can display the distribution of measure attributes over the selected time frame to see the values fluctuate. 
 
-{{< img src="real_user_monitoring/explorer/visualize/distribution.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/distribution-2.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
 
 The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
 
-## Geomap
+## Geomaps
 
 Visualize a single [measure][5] (or a [facet][5] unique count of values) on the world map.
 
-{{< img src="real_user_monitoring/explorer/visualize/geomap.png" alt="Geographical map in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/geomap-2.png" alt="Geographical map in the RUM Explorer" style="width:90%;">}}
 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
+## Pie charts
+A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
+
+The following pie chart shows the percentage breakdown by **View Path**.
+
+{{< img src="real_user_monitoring/explorer/visualize/pie-chart.png" alt="Pie chart in the RUM Explorer" style="width:90%;">}}
+
 ## Related events
 
-For all visualizations besides the [funnel](#funnel), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
+For all visualizations, select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
-{{< img src="real_user_monitoring/explorer/visualize/related_events.png" alt="Related events link available when you click on the graph" width="80%" >}}
-
-For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
+{{< img src="real_user_monitoring/explorer/visualize/related-events-2.png" alt="Related events link available when you click on the graph" width="90%" >}}
 
 For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
 

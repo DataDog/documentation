@@ -1,9 +1,10 @@
 ---
 title: Log Facets
-kind: documentation
 description: 'Log Facets and Facet Panel'
 aliases:
     - /logs/facets
+algolia:
+  tags: ["log facets"]
 further_reading:
     - link: 'logs/explorer/analytics'
       tag: 'Documentation'
@@ -31,7 +32,7 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][30], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][9], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
@@ -97,16 +98,16 @@ Scope the search query clicking on either value. Clicking on a value toggles the
 ### Hide facets
 
 Your organization has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. Most likely, however, only a subset of these facets is valuable to you in a specific troubleshooting context. Hide facets you don't need on a routine basis, to keep only the most relevant facets for your troubleshooting sessions.
-
-{{< img src="logs/explorer/facet/hide_facet.png" alt="Hide Facet" style="width:30%;">}}
+1. In the [Logs Explorer][30], find the facet you want to hide.
+1. Click the cog icon next to the facet.
+1. Select **Hide Facet**.
 
 Hidden facets are still visible in the facet search (see the [Filter Facet](#filter-facets) section) in case you need it. Unhide hidden facets from there.
 
-{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Unhide Facet" style="width:30%;">}}
 
 Hidden facets are also hidden from auto-complete in the search bar, and dropdowns (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
 
-Hidden facets have no impact aside from the log explorer (for instance: live tail, monitors, or widget definitions in dashboards).
+Hidden facets have no impact aside from the log explorer (for instance, live tail, monitors, or widget definitions in dashboards).
 
 #### Hidden facets and teammates
 
@@ -114,9 +115,17 @@ Hiding facets is specific to your own troubleshooting context and does not impac
 
 ### Group facets
 
-Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [manage facets](#manage-facets)) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
+Facets are grouped into meaningful themes to ease navigation in the facet list. Assigning or reassigning a group for a facet only affects the display in the facet list and has no impact on search and analytics capabilities.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
+
+To group facets:
+
+1. Click the cog for the facet.
+2. Select **Edit facet**.
+3. Click the **Advanced options** section to expand it.
+4. In the **Group** field, enter the name of the group that you want the facet to be in.
+5. Click **Update**.
 
 ### Filter facets
 
@@ -158,7 +167,7 @@ As a matter of good practice, always consider using an existing facet rather tha
 
 To create a facet on an array of JSON objects, first use a [grok parser][29] to extract the attribute and then create a facet for that attribute.
 
-**Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
+**Note**: Once a facet is created, its content is populated **for all new logs**. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### Log side panel
 
@@ -232,7 +241,7 @@ To delete a facet, follow these steps:
 [6]: /notebooks/
 [7]: /logs/log_configuration/processors
 [8]: /logs/live_tail/
-[9]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[9]: /logs/explorer/
 [10]: /logs/logs_to_metrics/
 [11]: /logs/archives/
 [12]: /logs/archives/rehydrating/
@@ -253,4 +262,4 @@ To delete a facet, follow these steps:
 [27]: /logs/indexes/#indexes
 [28]: /logs/log_configuration/rehydrating
 [29]: /logs/log_configuration/parsing/?tab=matchers#nested-json
-[30]: /logs/explorer/
+[30]: https://app.datadoghq.com/logs

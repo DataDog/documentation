@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: speedscale-speedscale
 app_uuid: beb5efb1-63d5-4030-840d-7dbf6a92a4d6
 assets: {}
@@ -13,6 +15,7 @@ categories:
 - kubernetes
 - マーケットプレイス
 - テスト
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,12 +24,10 @@ integration_id: speedscale-speedscale
 integration_title: Speedscale
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: speedscale_speedscale
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -63,11 +64,17 @@ tile:
     image_url: images/spd-3-datadog-dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/stress-test-kubernetes-with-speedscale/
+  - resource_type: documentation
+    url: https://docs.speedscale.com/
   support: README.md#Support
   title: Speedscale
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要

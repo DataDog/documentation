@@ -1,6 +1,5 @@
 ---
 title: Network Monitoring
-kind: documentation
 disable_sidebar: true
 description: Explore Datadog Network Monitoring Products
 further_reading:
@@ -26,6 +25,11 @@ cascade:
     algolia:
         rank: 70
 ---
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=NPM">}}
+  Learn how Datadog Network Performance Monitoring provides full visibility into every network component that makes up your on-prem, cloud, and hybrid environments, with minimal overhead.
+{{< /learning-center-callout >}}
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance" >}}<u>Network Performance Monitoring</u>: Explore metrics for point to point communication on your infrastructure.{{< /nextlink >}}

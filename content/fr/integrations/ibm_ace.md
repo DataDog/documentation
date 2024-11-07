@@ -22,7 +22,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md
@@ -31,27 +30,25 @@ draft: false
 git_integration_title: ibm_ace
 integration_id: ibm-ace
 integration_title: IBM ACE
-integration_version: 1.0.3
+integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_ace
-oauth: {}
 public_title: IBM ACE
 short_description: Surveillez les statistiques de vos ressources IBM ACE et les flux
   de messages.
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Surveillez les statistiques de vos ressources IBM ACE et les flux de
     messages.
@@ -67,7 +64,7 @@ tile:
 
 Ce check permet de surveiller [IBM ACE][1] avec l'Agent Datadog.
 
-## Configuration
+## Implémentation
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à des environnements conteneurisés.
 

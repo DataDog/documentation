@@ -1,6 +1,5 @@
 ---
 title: Federated Authentication to Role Mapping API
-kind: documentation
 beta: true
 aliases:
   - /account_management/authen_mapping/
@@ -12,9 +11,9 @@ further_reading:
 
 If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog using attributes sent from your Identity Provider. To create and manage Authentication Mappings through the API, users need to use an application key owned by someone with the Access Management permission.
 
-**Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
+**Note**: If you are a SAML user, Datadog strongly recommends that you transition to using this API.
 
-You can also create and manage mappings in the Datadog UI, on the **Mappings** tab in User Management. See [Mapping SAML attributes to Datadog roles][1] for more information.
+You can also create and manage mappings in the Datadog UI, on the **Mappings** tab in User Management. See [SAML group mapping][1] for more information.
 
 ## Requests
 
@@ -608,5 +607,5 @@ curl -X POST \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[1]: /account_management/saml/mapping
 [2]: /api/v2/roles/#list-roles

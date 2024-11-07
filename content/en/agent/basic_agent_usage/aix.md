@@ -1,20 +1,21 @@
 ---
 title: Basic Agent Usage for AIX
-kind: documentation
 further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
   text: "Monitor AIX with the Datadog Unix Agent"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 <div class="alert alert-info">
-The Datadog Unix Agent is being developed for specific system architectures, and is not the same as the Windows, Linux and MacOS Agents.
+The Datadog UNIX Agent is being developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
@@ -121,7 +122,11 @@ dogstatsd:                        # DogStatsD configuration options
 
 There are also facilities to run the Agent with the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
-## Uninstall
+## Monitor Agent uptime
+
+You can use the metric `datadog.agent.running` to monitor the uptime of an Agent. The metric emits a value of `1` if the Agent is reporting to Datadog.
+
+## Uninstall the Agent
 
 To remove an installed Agent, run the following `installp` command:
 
@@ -135,6 +140,6 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aix
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 [3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

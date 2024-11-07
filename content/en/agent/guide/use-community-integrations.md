@@ -1,13 +1,12 @@
 ---
-title: Use Community Integrations
-kind: guide
+title: Use Community and Marketplace Integrations
 aliases:
   - /agent/guide/community-integrations-installation-with-docker-agent
 further_reading:
   - link: "/agent/troubleshooting/"
     tag: "Documentation"
     text: "Agent Troubleshooting"
-  - link: "/developers/integrations/new_check_howto"
+  - link: "/developers/integrations/agent_integration"
     tag: "Documentation"
     text: "Create a New Integration"
 ---
@@ -22,8 +21,6 @@ For new users, download and install the latest version of the [Datadog Agent][2]
 
 ### Installation
 
-Choose your version of the Agent:
-
 {{< tabs >}}
 {{% tab "Agent v7.21+ / v6.21+" %}}
 
@@ -34,29 +31,34 @@ For Agent v7.21+ / v6.21+:
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
-   The version for the integration can be found in the respective changelog on the integration's Github repository 
+   The version for the integration can be found in the respective changelog on the integration's Github repository
 2. Configure your integration similar to core [integrations][1].
 3. [Restart the Agent][2].
 
 **Note**: If necessary, prepend `sudo -u dd-agent` to the install command.
 
 [1]: /getting_started/integrations/
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Docker" %}}
+{{% tab "Containerized" %}}
 
-The recommended way to use a community integration with the Docker Agent is to build the Agent with the integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` from integrations-extras.
+To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.
+
+Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2]. If you are installing a Marketplace integration, the `<INTEGRATION_NAME>` is available in the configuration instructions.
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-The `agent integration install` command run inside Docker issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
+The `datadog-agent integration install` command (run inside Docker) issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. You can ignore this warning.
 
-Use this new Agent image in combination with [Autodiscovery][1] to enable the `<INTEGRATION_NAME>`.
+If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image.
+
+Use [Autodiscovery][1] to enable and configure the integration.
 
 [1]: /agent/autodiscovery/
+[2]: https://github.com/DataDog/integrations-extras
 {{% /tab %}}
 
 {{% tab "Agent earlier versions" %}}
@@ -72,12 +74,17 @@ For Agent < v7.21 / v6.21:
 6. [Restart the Agent][4].
 
 
+
 [1]: https://github.com/DataDog/integrations-extras
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [3]: /getting_started/integrations/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
+
+If your site restricts network access, ensure you have added all of the [`ip-ranges`][3] to your inclusion list, or download the integration manually.
+
+
 
 <br>
 
@@ -86,4 +93,5 @@ For Agent < v7.21 / v6.21:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-extras
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: /agent/configuration/network

@@ -1,7 +1,7 @@
 {{ $dot := . }}
 <div class="dsm-containers">
   <div class="container cards-dd">
-    <div class="row row-cols-2 row-cols-sm-3 g-2 g-xl-3 justify-content-sm-center">
+    <div class="row row-cols-2 row-cols-sm-5 g-2 g-xl-3 justify-content-sm-center">
       <div class="col">
         <a class="card h-100" href="/data_streams/java/">
           <div class="card-body text-center py-2 px-1">
@@ -9,17 +9,35 @@
           </div>
         </a>
       </div>
+
       <div class="col">
-        <a class="card h-100" href="/data_streams/go">
+        <a class="card h-100" href="/data_streams/python">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/golang.png" "class" "img-fluid" "alt" "Go" "width" "200") }}
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/python.png" "class" "img-fluid" "alt" "Python" "width" "200") }}
           </div>
         </a>
       </div>
+      
       <div class="col">
         <a class="card h-100" href="/data_streams/dotnet/">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet-core.png" "class" "img-fluid" "alt" ".NET" "width" "200") }}
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_text.png" "class" "img-fluid" "alt" ".NET" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      
+       <div class="col">
+        <a class="card h-100" href="/data_streams/nodejs/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/node.png" "class" "img-fluid" "alt" "Node" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      
+      <div class="col">
+        <a class="card h-100" href="/data_streams/go">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/go-metro.png" "class" "img-fluid" "alt" "Go" "width" "200") }}
           </div>
         </a>
       </div>

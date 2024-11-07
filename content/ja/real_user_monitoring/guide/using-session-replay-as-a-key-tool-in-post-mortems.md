@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/notebooks/
   tag: documentation
   text: ノートブック
-kind: ガイド
 title: セッションリプレイをポストモーテムのキーツールとして活用する
 ---
 
@@ -18,7 +17,7 @@ title: セッションリプレイをポストモーテムのキーツールと�
 
 この例では、多くのユーザーが **Checkout** ボタンをクリックしたときに問題が発生したと訴えていることに気づきました。[RUM フラストレーションシグナルダッシュボード][1]を調査した結果、このエラータイプがわずか 1 週間で 3,000 件近く発生していることが RUM エクスプローラーで確認されました。
 
-{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/identify-widespread-user-issue.png" alt="RUM を使用して、あるエラータイプのインスタンスが 1 週間に何回発生したかを特定する" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/identify-widespread-user-issue-1.png" alt="RUM を使用して、あるエラータイプのインスタンスが 1 週間に何回発生したかを特定する" style="width:100%;">}}
 
 ## セッションリプレイでユーザーの問題を見る
 上記のクエリからセッションをクリックした後、セッションリプレイを見ることで、このエラーの発生をライブで確認し、その前後でユーザーが何をしたかを観察することができます。

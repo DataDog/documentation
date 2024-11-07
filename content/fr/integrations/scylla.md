@@ -1,51 +1,80 @@
 ---
+app_id: scylla
+app_uuid: 1d655820-3010-4ae3-8273-a3798321d4d4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Scylla Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: scylla.node.operation_mode
+      metadata_path: metadata.csv
+      prefix: scylla.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Scylla
   logs:
     source: scylla
-  metrics_metadata: metadata.csv
   monitors:
     '[Scylla] Server is shutting down': assets/monitors/instance_down.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - log collection
-creates_events: false
-ddtype: check
+- caching
+- data store
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/scylla/README.md'
-display_name: Scylla
+- https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: scylla
-guid: 875e4d62-831b-4929-bea1-57e5c7016d65
 integration_id: scylla
 integration_title: Scylla
+integration_version: 2.3.0
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: scylla.
-metric_to_check: scylla.node.operation_mode
+custom_kind: integration
+manifest_version: 2.0.0
 name: scylla
-public_title: Intégration Datadog/Scylla
-short_description: 'Surveillez la santé des clusters, leurs ressources, leurs latences, et bien plus encore.'
-support: core
+public_title: Scylla
+short_description: Surveillez la santé des clusters, leurs ressources, leurs latences,
+  et bien plus encore.
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Data Store
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Surveillez la santé des clusters, leurs ressources, leurs latences,
+    et bien plus encore.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Scylla
 ---
+
+
+
 ## Présentation
 
 Cette intégration Datadog/[Scylla][1] recueille la majorité des métriques exposées par défaut et offre la possibilité de personnaliser des groupes supplémentaires en fonction de vos besoins.
 
 Scylla est un datastore NoSQL open source qui peut être utilisé en tant qu'alternative instantanée à Apache Cassandra. Il fait appel à une version réarchitecturée du modèle Cassandra, optimisée pour le matériel moderne afin de réduire la taille des clusters requis tout en améliorant le débit et les performances théoriques.
 
-## Configuration
+## Implémentation
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
 
@@ -86,7 +115,7 @@ Scylla génère ses logs de différentes façons en fonction de l'environnement 
 
 3. [Redémarrez l'Agent][4].
 
-Consultez la [documentation de Datadog][6] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Kubernetes.
+Pour activer les logs pour les environnements Kubernetes, consultez la section [Collecte de logs Kubernetes][7].
 
 ### Validation
 
@@ -98,25 +127,26 @@ Consultez la [documentation de Datadog][6] pour découvrir comment configurer l'
 {{< get-metrics-from-git "scylla" >}}
 
 
-### Checks de service
-
-**scylla.prometheus.health** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques. Si ce n'est pas le cas, renvoie `OK`.
-
 ### Événements
 
 Le check Scylla n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "scylla" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
+
 
 [1]: https://scylladb.com
-[2]: https://docs.datadoghq.com/fr/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/scylla/datadog_checks/scylla/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.scylladb.com/getting-started/logging/
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/scylla/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/scylla/assets/service_checks.json
+[10]: https://docs.datadoghq.com/fr/help/

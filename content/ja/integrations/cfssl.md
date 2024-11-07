@@ -3,6 +3,7 @@ app_id: cfssl
 app_uuid: dfcfda46-a2e3-44e4-8f80-1603e0317b2d
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: cfssl.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10284
     source_type_name: cfssl
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
   support_email: JeanFred1@gmail.com
 categories:
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cfssl/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: cfssl
 integration_title: cfssl
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: cfssl
-oauth: {}
 public_title: cfssl
 short_description: cfssl インスタンスを監視する
 supported_os:
@@ -47,6 +48,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: cfssl インスタンスを監視する
   media: []
@@ -55,6 +57,7 @@ tile:
   title: cfssl
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -77,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い cfssl チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. cfssl のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cfssl.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル exim.d/conf.yaml][5] を参照してください。
 
@@ -97,7 +100,7 @@ cfssl インテグレーションには、メトリクスは含まれません�
 
 cfssl インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "cfssl" >}}
 
 

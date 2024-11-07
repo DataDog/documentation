@@ -33,7 +33,7 @@ guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
 integration_title: MongoDB
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: mongodb.

@@ -1,0 +1,295 @@
+{
+  "integration_count": {
+    "other": "800"
+  },
+  "beta_sentence": {
+    "other": "베타 - 지원이 필요하거나 오류 발생 시 다음으로 문의해 주세요 "
+  },
+  "additional_sentence": {
+    "other": "추가 유용한 문서, 링크 및 기사"
+  },
+  "apiaccount_sentence1": {
+    "other": "아래의 API 및/또는 APP 키를 계정에 맞는 것으로"
+  },
+  "apiaccount_sentence2": {
+    "other": "교체했는지 확인하세요."
+  },
+  "install_agent_sentence": {
+    "other": "데이터 수집을 위한 Agent 설치 & 설정"
+  },
+  "integrations_sentence": {
+    "other": "모든 시스템, 앱, 서비스에서 데이터를 수집하세요."
+  },
+  "graphing_sentence": {
+    "other": "데이터를 시각화하여 <br> 인사이트 확보"
+  },
+  "alerting_sentence": {
+    "other": "모니터와 알림 <br> 생성 및 관리"
+  },
+  "apm_sentence": {
+    "other": "성능 향상을 위해 <br> 코드 계측"
+  },
+  "developer_tools_sentence": {
+    "other": " 커스텀 메트릭 수집 <br> 및 새 통합 생성"
+  },
+  "help_sentence": {
+    "other": "데이터독 서포트 엔지니어링팀이 도와드리겠습니다."
+  },
+  "email_support_sentence": {
+    "other": "<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog의 지원 웹사이트</a>를 방문하여 지원팀에 문의할 수 있습니다. (모든 사이트). <br><br>지원 웹사이트에 로그인하는 방법에 대한 자세한 내용은 <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">지원 티켓 액세스</a>를 참조하세요."
+  },
+  "live_chat_support_sentence": {
+    "other": "앱 내의 채팅을 사용하여 월-금 10:00부터 19:00 ET(동부 표준시)까지 Datadog 지원팀에 문의할 수 있습니다. 자세한 내용은 <a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">채팅 상담하기</a>를 참조하세요."
+  },
+  "event_stream_support_sentence": {
+    "other": "<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack 커뮤니티 프로그램</a>은 Datadog 사용자가 서로 질문에 대한 답변을 찾도록 돕거나 제품 팁 및 요령을 공유하기 위해 Datadog 사용자가 구축한 네트워크입니다."
+  },
+  "foundation_enablement_sentence": {
+    "other": "다양한 Datadog 기능 및 제품에 대한 기초 활성화 라이브 세션에 <a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">등록해 보세요</a>."
+  },
+  "learning_center_sentence": {
+    "other": "주요 Datadog 개념을 배우고 실습할 수 있는 자기 주도형 <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">실습 과정</a>을 수강하세요."
+  },
+  "learning_resources": {
+    "other": "학습 리소스 "
+  },
+  "learning_sentence": {
+    "other": "무료 학습 리소스를 통해 Datadog 플랫폼에 대한 지식을 강화하세요."
+  },
+  "webinars_sentence": {
+    "other": "다양한 제품에 대해 예정된 <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">Datadog 웨비나</a>에 참석하거나 녹화본을 시청하세요."
+  },
+  "agent_started_sentence": {
+    "other": "에이전트를 사용하려면 플랫폼을 선택합니다."
+  },
+  "choose_a_platform": {
+    "other": "플랫폼 선택"
+  },
+  "get_started_datadog": {
+    "other": " Datadog 시작하기"
+  },
+  "all": {
+    "other": "전체"
+  },
+  "free_trial": {
+    "other": "무료 체험판"
+  },
+  "agent_check": {
+    "other": "Agent 검사 "
+  },
+  "statsd_check": {
+    "other": "StatsD 검사"
+  },
+  "crawler": {
+    "other": "크롤러"
+  },
+  "library_check": {
+    "other": "라이브러리"
+  },
+  "terms": {
+    "other": "용어"
+  },
+  "privacy": {
+    "other": "개인정보보호"
+  },
+  "cookies": {
+    "other": "쿠키"
+  },
+  "toc": {
+    "other": "목차 "
+  },
+  "get_started_free_short": {
+    "other": "무료 체험판"
+  },
+  "documentation_search": {
+    "other": "문서 검색"
+  },
+  "guides": {
+    "one": "길라잡이",
+    "other": "가이드"
+  },
+  "tags": {
+    "one": "태그",
+    "other": "태그"
+  },
+  "language": {
+    "one": "언어",
+    "other": "언어"
+  },
+  "library": {
+    "one": "라이브러리",
+    "other": "라이브러리"
+  },
+  "official": {
+    "other": "공식"
+  },
+  "api": {
+    "other": "API"
+  },
+  "docs": {
+    "other": "문서"
+  },
+  "home": {
+    "other": "Home"
+  },
+  "datadog_docs": {
+    "other": "Datadog 문서"
+  },
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+  "author": {
+    "other": "작성자"
+  },
+  "notes": {
+    "other": "비고"
+  },
+  "agent": {
+    "other": "Agent"
+  },
+  "integrations": {
+    "one": "통합",
+    "other": "통합"
+  },
+  "graphing": {
+    "other": "그래프화"
+  },
+  "alerting": {
+    "other": "경고"
+  },
+  "apm_tracing": {
+    "other": "APM (Tracing)"
+  },
+  "developer_tools": {
+    "other": "개발 툴"
+  },
+  "contact_us": {
+    "other": "문의하기"
+  },
+  "status_page": {
+    "other": "상태 페이지"
+  },
+  "ops_twitter": {
+    "other": "트위터"
+  },
+  "platform": {
+    "other": "Datadog 지원<br>플랫폼"
+  },
+  "live_chat": {
+    "other": "지원팀과<br>실시간 채팅"
+  },
+  "event_stream_messaging": {
+    "other": "Slack으로<br>문의"
+  },
+  "learning_center": {
+    "other": "datadog<br>학습 센터"
+  },
+  "foundation_enablement": {
+    "other": "실시간 <br>활성화 세션 참여"
+  },
+  "webinars": {
+    "other": "Datadog<br>웨비나"
+  },
+  "questions": {
+    "other": "질문이 있으신가요?"
+  },
+  "type": {
+    "other": "유형"
+  },
+  "feel_free_contribute": {
+    "other": "참여하기"
+  },
+  "mistake_in_docs": {
+    "other": "설명서 오류"
+  },
+  "groups_return_to_": {
+    "other": "돌아가기"
+  },
+  "table_of_contents_heading": {
+    "other": "페이지 소개"
+  },
+  "edit": {
+    "other": "편집"
+  },
+  "overview": {
+    "other": "개요"
+  },
+  "arguments": {
+    "other": "인수"
+  },
+  "path_parameters": {
+    "other": "경로 파라미터"
+  },
+  "query_strings": {
+    "other": "쿼리 문자열"
+  },
+  "header_parameters": {
+    "other": "헤더 파라미터"
+  },
+  "request": {
+    "other": "요청"
+  },
+  "model": {
+    "other": "모델"
+  },
+  "example": {
+    "other": "예시"
+  },
+  "copy": {
+    "other": "복사"
+  },
+  "response": {
+    "other": "응답"
+  },
+  "code_example": {
+    "other": "코드 사례"
+  },
+  "name": {
+    "other": "이름"
+  },
+  "description": {
+    "other": "설명"
+  },
+  "field": {
+    "other": "항목"
+  },
+  "footer_blurb_heading": {
+    "other": "찾으시는 정보가 없나요?"
+  },
+  "footer_blurb_desc": {
+    "other": "데이터독 서포트 엔지니어링팀이 도와드리겠습니다."
+  },
+  "integration_version": {
+    "other": "통합 버전"
+  },
+  "beta_check": {
+    "other": "베타"
+  },
+  "learn_more": {
+    "other": "자세히 알아보기"
+  },
+  "personalized_demo": {
+    "other": "맞춤형 데모 요청"
+  },
+  "configuration_management": {
+    "other": "설정 관리"
+  },
+  "cloud_and_container": {
+    "other": "클라우드 및 컨테이너 "
+  },
+  "source": {
+    "other": "Source"
+  },
+  "legacy": {
+    "other": "레거시"
+  },
+  "try_this_rule": {
+    "other": "이 규칙을 사용해 보세요"
+  },
+  "available_for": {
+    "other": "이용 가능"
+  }
+}

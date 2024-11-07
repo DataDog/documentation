@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: ドキュメント
   text: Windows Agent の基本的なエージェントの利用方法
-kind: ガイド
 title: Windows 用 Datadog Agent Manager
 ---
 
@@ -21,7 +20,7 @@ Datadog Agent Manager GUI はブラウザベースです。GUI が実行され�
 
 #### サポートされるブラウザ
 
-| ブラウザ       | サポートされるバージョン (以降) | コメント                 |
+| Browser       | サポートされるバージョン (以降) | コメント                 |
 |---------------|------------------------------|-------------------------|
 | IE            | 11                           |                         |
 | Edge          | 12                           |  Pre-Chromium Edge |
@@ -29,7 +28,7 @@ Datadog Agent Manager GUI はブラウザベースです。GUI が実行され�
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| IOS           | 12                           |  Mobile Safari          |
+| iOS           | 12                           |  Mobile Safari          |
 
 ### Datadog Agent Manager を起動する
 

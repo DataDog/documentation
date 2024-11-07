@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Glossaire du Sans serveur
 ---
 
@@ -48,9 +47,9 @@ AWS Lambda est la plateforme FaaS proposée par Amazon Web Services. Consultez l
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Métriques Lambda optimisées][3] | Les métriques Lambda optimisées vous offrent des informations plus détaillées que les métriques Lambda activées par défaut avec l'intégration AWS Lambda. Ces métriques sont identifiables par l'espace de nommage `aws.lambda.enhanced.*`. Nous vous recommandons de les utiliser pour définir des monitors en temps réel afin de surveiller la santé de votre application sans serveur.|
+| [Métriques Lambda optimisées][3] | Les métriques Lambda optimisées vous offrent des informations plus détaillées que les métriques Lambda activées par défaut avec l'intégration AWS Lambda. Ces métriques sont identifiables par l'espace de nommage `aws.lambda.enhanced.*`. Il est recommandé de les utiliser pour définir des monitors en temps réel afin de surveiller la santé de votre application sans serveur.|
 | [Bibliothèque Lambda][4]       | La bibliothèque Lambda Datadog permet de recueillir des données (telles que des métriques Lambda optimisées, des traces, etc.) depuis le runtime de votre fonction Lambda. Ces données sont ensuite transmises dans les logs (que le [Forwarder][5] récupère) ou à l'[extension Lambda][6]. Pour simplifier l'installation, la bibliothèque Lambda Datadog est généralement fournie avec la bibliothèque de tracing Datadog au sein d'une [couche Lambda][7].                          |
-| [Forwarder][5]          | Fonction Lambda AWS conçue pour analyser les données de surveillance sans serveur des logs CloudWatch et les transférer à Datadog.                             |
+| [Forwarder][5]          | Fonction AWS Lambda conçue pour analyser les données de surveillance sans serveur des logs CloudWatch et les transférer à Datadog.                             |
 | [Extension Lambda][6] | Une version plus légère de l'Agent Datadog qui s'exécute dans l'environnement d'exécution Lambda et transfère les données de surveillance sans serveur à Datadog avec un impact minimal sur les performances. Pour simplifier l'installation, l'extension est distribuée sous la forme d'une [couche Lambda][7]. |
 | [CLI Serverless][8] | L'interface de ligne de commande, ou CLI, permet d'instrumenter une application sans serveur en modifiant la configuration de vos fonctions Lambda existantes. Il s'agit du moyen le plus rapide de tirer parti de la surveillance sans serveur de Datadog. |
 | [Macro Serverless][9] | La macro CloudFormation Serverless Datadog active automatiquement l'instrumentation des applications sans serveur en modifiant le modèle CloudFormation.|

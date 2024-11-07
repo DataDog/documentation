@@ -1,6 +1,5 @@
 ---
 title: NPM Azure Supported Services
-kind: guide
 npm_provider: azure
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'

@@ -6,13 +6,12 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
-kind: ドキュメント
 title: プロファイラーの有効化
 type: multi-code-lang
 ---

@@ -5,24 +5,25 @@ categories:
 - aws
 - cloud
 - log collection
+custom_kind: integration
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ses/
 draft: false
 git_integration_title: amazon_ses
 has_logo: true
-integration_id: amazon-ses
-integration_title: Amazon SES
+integration_id: ''
+integration_title: Amazon Simple Email Service (SES)
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ses
-public_title: Datadog-Amazon SES インテグレーション
+public_title: Datadog-Amazon Simple Email Service (SES) インテグレーション
 short_description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Simple Email Service (SES) は、費用効率の高いアウトバウンド専用のメール送信サービスです。
@@ -45,9 +46,9 @@ Amazon Simple Email Service (SES) は、費用効率の高いアウトバウン�
 
     詳細については、AWS ウェブサイト上の [SES ポリシー][4]を参照してください。
 
-3. [Datadog - AWS SES インテグレーション][5]をインストールします。
+3. [Datadog - Amazon Simple Email Service (SES) インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -73,11 +74,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS SES インテグレーションには、イベントは含まれません。
+Amazon Simple Email Service (SES) インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-AWS SES インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Simple Email Service (SES) インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

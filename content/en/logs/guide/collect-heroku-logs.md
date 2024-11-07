@@ -1,9 +1,7 @@
 ---
 title: Collect Heroku logs
-kind: guide
----
 
-**This log integration is currently in public beta**
+---
 
 Heroku provides 3 types of logs:
 
@@ -21,13 +19,16 @@ To send all these logs to Datadog:
 * Set up the HTTPS drain with the following command:
 
 ```text
-heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
+heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&ddtags=env:<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
 ```
 
 * Replace `<DD_API_KEY>` with your [Datadog API Key][2].
 * Replace `<ENV>` with your application's [environment][3].
 * Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name.
-* Replace `<HOST>` with the desired hostname. **Note**: Per the [host section][4], metrics and traces set the default hostname to the dyno name. It is not yet possible to dynamically set the dyno name as the hostname for logs. For now, to correlate between metrics, traces, and logs the `dyno` and `dynotype` tags can be used.
+* Replace `<HOST>` with the desired hostname.  
+**Notes**:  
+   - Per the [host section][4], metrics and traces set the default hostname to the dyno name. It is not possible to dynamically set the dyno name as the hostname for logs. Use the `dyno` and `dynotype` tags to correlate between metrics, traces, and logs.
+   - The buildpack automatically adds the tags `dyno` (which represent the dyno name, such as `web.1`), and `dynotype` (the type of dyno, such as `run` or `web`). See the [Getting Started with Tags][3] guide for more information.
 
 ### Custom attributes
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentation
   text: Service Map
-kind: documentation
 title: Widget Topology Map
 widget_type: topology_map
 ---
@@ -34,7 +33,7 @@ Le [schéma JSON][3] utilisé pour le widget Service Map est le suivant :
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

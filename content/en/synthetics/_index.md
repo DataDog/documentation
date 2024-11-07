@@ -1,6 +1,5 @@
 ---
-title: Synthetic Monitoring
-kind: documentation
+title: Synthetic Testing and Monitoring
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
 disable_sidebar: true
 aliases:
@@ -15,9 +14,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
   tag: "Blog"
   text: "Monitor CDN performance within your Synthetic tests"
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
+- link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
+  tag: "Blog"
+  text: "Improve your API test coverage with Datadog Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
@@ -35,6 +40,11 @@ cascade:
 
 <br/>
 
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+  Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
+{{< /learning-center-callout >}}
+
 Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
 
 **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
@@ -49,9 +59,15 @@ API tests allow you to launch [single][4] or [chained][5] requests to perform ve
 
 ## Record browser tests
 
-Use [Synthetic browser tests][14] to monitor how your customers experience your webpages from around the world with end-to-end tests.
+Use [Synthetic browser tests][14] to monitor how your customers experience your webpages end-to-end from around the world.
 
 {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+
+## Record mobile application tests
+
+Use [Synthetic mobile application tests][21] to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
+
+{{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
 ## Launch private locations
 
@@ -69,13 +85,19 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17]. 
 
-{{< img src="synthetics/test_summary_dashboard.png" alt="Test Summary Dashboard" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing Summary Dashboard" style="width:100%;">}}
 
-## Use the Synthetic Monitoring & Continuous Testing Explorer
+## Use the Synthetic Monitoring & Testing Results Explorer
 
 Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+
+## Track testing coverage
+
+Optimize your test suite by [ensuring that your application's most critical workflows are being tested][22].
+
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
@@ -106,3 +128,5 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [18]: /getting_started/synthetics
 [19]: /getting_started/synthetics/private_location
 [20]: /continuous_testing/explorer/
+[21]: /mobile_testing
+[22]: /synthetics/test_coverage

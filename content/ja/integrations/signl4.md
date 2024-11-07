@@ -3,6 +3,7 @@ app_id: signl4
 app_uuid: 07952edd-2dc5-4c11-a697-5cba325f64ee
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: signl4.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10158
     source_type_name: SIGNL4
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -23,7 +25,8 @@ categories:
 - コラボレーション
 - インシデント
 - 問題追跡
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md
 display_on_public_website: true
@@ -33,10 +36,8 @@ integration_id: signl4
 integration_title: SIGNL4
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: signl4
-oauth: {}
 public_title: SIGNL4
 short_description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
 supported_os:
@@ -50,10 +51,11 @@ tile:
   - Category::Collaboration
   - Category::Incidents
   - Category::Issue Tracking
-  - Category::Notification
+  - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
   media: []
@@ -62,6 +64,7 @@ tile:
   title: SIGNL4
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 [SIGNL4][1] インテグレーションを使用すると、Datadog のアラートを SIGNL4 チームに送信し、SIGNL4 アプリ内でシームレスにこのアラートに対応できます。
@@ -202,10 +205,10 @@ Datadog インシデントについては、それぞれのアラートを承認
 
 以下の構成が必要です。
 
-- Datadog URL: Datadog インスタンスの URL。例えば、https://app.datadoghq.com/ や https://app.datadoghq.eu/ など。 
-- Datadog API Key: Datadog の API キー。API キーは、自分のアカウントの Datadog で、Organization Settings -> API Keys で検索または作成することができます。 
-- Datadog Application Key: Datadog のアプリケーションキー。アプリケーションキーは、自分のアカウントの Datadog で、Organization Settings -> Application Keys で検索または作成することができます。 
-- Acknowledgement as Stable: Acknowledgements は、インシデントのステータスを Stable に設定します。 
+- Datadog URL: Datadog インスタンスの URL。例えば、https://app.datadoghq.com/ や https://app.datadoghq.eu/ など。
+- Datadog API Key: Datadog の API キー。API キーは、自分のアカウントの Datadog で、Organization Settings -> API Keys で検索または作成することができます。
+- Datadog Application Key: Datadog のアプリケーションキー。アプリケーションキーは、自分のアカウントの Datadog で、Organization Settings -> Application Keys で検索または作成することができます。
+- Acknowledgement as Stable: Acknowledgements は、インシデントのステータスを Stable に設定します。
 
 ## 収集データ
 
@@ -217,7 +220,7 @@ SIGNL4 インテグレーションには、メトリクスは含まれません�
 
 SIGNL4 でトリガーされ解決したイベントは、SIGNL4 アプリおよびウェブポータルに表示されます。
 
-### サービスのチェック
+### サービスチェック
 
 SIGNL4 インテグレーションには、サービスチェックは含まれません。
 

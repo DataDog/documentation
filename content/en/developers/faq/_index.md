@@ -1,6 +1,6 @@
 ---
 title: Developers FAQ
-kind: faq
+
 cascade: 
   - private: true
 ---

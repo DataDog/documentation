@@ -1,6 +1,5 @@
 ---
 title: Indexes
-kind: documentation
 description: Control the volume of logs indexed by Datadog
 aliases:
   - /logs/dynamic_volume_control
@@ -37,7 +36,7 @@ The Log Explorer supports [queries across multiple indexes][7].
 
 ### Add indexes
 
-Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 10 by default.
+Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
 
 {{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 
@@ -49,7 +48,7 @@ Use the "New Index" button to create a new index. There is a maximum number of i
 
 ### Delete indexes
 
-To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with both `Logs delete data` and `User manage access` permissions can use this option. 
+To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with the `Logs delete data` permission can use this option.
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
@@ -137,7 +136,8 @@ In the following example:
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
-To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. 
+
+To enable adding additional retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. After additional retentions have been enabled, you need to update the retention periods for your indexes.
 
 {{< img src="logs/indexes/log_retention.png" alt="index details" style="width:70%;">}}
 
@@ -148,13 +148,16 @@ To add retentions that are not in your current contract, contact Customer Succes
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (such as after exclusion filters are applied).
 After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
-Update or remove this quota at any time when editing the Index:
+You can configure or remove this quota at any time when editing the Index:
+- Set a daily quota in millions of logs
+- (Optional) Set a custom reset time; by default, index daily quotas reset automatically at [2:00pm UTC][19]
+- (Optional) Set a warning threshold as a percentage of the daily quota (minimum 50%)
 
-{{< img src="logs/indexes/index_quota.png" alt="index details" style="width:70%;">}}
+**Note**: Changes to daily quotas and warning thresholds take effect immediately.
 
-**Note**: Indexes daily quotas reset automatically at [2:00pm UTC][19].
+{{< img src="logs/indexes/daily_quota_config.png" alt="index details" style="width:70%;">}}
 
-An event is generated when the daily quota is reached:
+An event is generated when either the daily quota or the warning threshold is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification" style="width:70%;">}}
 

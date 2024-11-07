@@ -1,11 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_containerservice
+- /fr/integrations/azure_containerservice
 categories:
-  - cloud
-  - containers
-  - azure
-ddtype: crawler
+- cloud
+- containers
+- azure
 dependencies: []
 description: Surveillez des métriques clés Azure Kubernetes Service.
 doc_link: https://docs.datadoghq.com/integrations/azure_container_service/
@@ -16,40 +15,42 @@ integration_id: azure-containerservice
 integration_title: Microsoft Azure Kubernetes Service
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_container_service
 public_title: Intégration Datadog/Microsoft Azure Kubernetes Service
 short_description: Surveillez des métriques clés Azure Kubernetes Service.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Kubernetes Service vous permet de déployer rapidement un cluster Kubernetes prêt pour la production.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Kubernetes Service.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_container_service" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Kubernetes Service n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Kubernetes Service n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

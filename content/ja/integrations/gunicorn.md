@@ -5,6 +5,7 @@ assets:
   dashboards:
     gunicorn: assets/dashboards/gunicorn_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,8 @@ assets:
     - 'gunicorn: master'
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 60
     source_type_name: Gunicorn
-  logs:
-    source: gunicorn
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -33,6 +33,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
 display_on_public_website: true
@@ -40,12 +41,10 @@ draft: false
 git_integration_title: gunicorn
 integration_id: gunicorn
 integration_title: Gunicorn
-integration_version: 2.3.1
+integration_version: 2.7.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: gunicorn
-oauth: {}
 public_title: Gunicorn
 short_description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
 supported_os:
@@ -57,14 +56,19 @@ tile:
   - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-gunicorn-performance
   support: README.md#Support
   title: Gunicorn
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Gunicorn のダッシュボード][1]
@@ -82,18 +86,18 @@ Gunicorn 自身は、これ以外にも以下のようなメトリクスを DogS
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Agent の Gunicorn チェックは [Datadog Agent][2] パッケージに含まれています。Gunicorn サーバーに追加でインストールする必要はありません。
 
 Gunicorn チェックでは、Gunicorn アプリの Python 環境に [`setproctitle`][3] パッケージが含まれている必要があります。これがないと、Datadog Agent は常に `gunicorn` マスタープロセスが見つからない (したがって、ワーカーも見つからない) と報告します。`gunicorn.workers` メトリクスを収集する場合は、アプリの Python 環境に `setproctitle` パッケージをインストールしてください。
 
-### コンフィギュレーション
+### 構成
 
 Gunicorn の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `gunicorn.d/conf.yaml` ファイルを編集します。
 使用可能なすべての構成オプションの詳細については、[サンプル gunicorn.yaml][5] を参照してください。
 
-#### メトリクスの収集
+#### Metric collection
 
 ##### Gunicorn の DogStatsD への接続
 
@@ -116,7 +120,7 @@ instances:
 
 3. [Agent を再起動][8]すると、Datadog への Gunicorn メトリクスの送信が開始されます。
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -178,7 +182,7 @@ udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 
 
 Gunicorn チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "gunicorn" >}}
 
 
@@ -223,7 +227,7 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 - [Datadog を使用した Gunicorn パフォーマンスの監視][14]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/gunicorn/images/gunicorn-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://pypi.python.org/pypi/setproctitle
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/datadog_checks/gunicorn/data/conf.yaml.example

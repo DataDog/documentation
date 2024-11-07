@@ -1,18 +1,19 @@
 ---
-title: Envoyer des traces à l'Agent via l'API
-kind: guide
-further_reading:
-  - link: /tracing/
-    tag: Documentation
-    text: En savoir plus sur le tracing de l'APM Datadog
-  - link: /tracing/visualization/
-    tag: Documentation
-    text: Terminologie et présentation de l'APM
 aliases:
-  - /fr/api/latest/tracing/
-  - /fr/api/v1/tracing/
-  - /fr/api/v2/tracing/
+- /fr/api/latest/tracing/
+- /fr/api/v1/tracing/
+- /fr/api/v2/tracing/
+further_reading:
+- link: /tracing/
+  tag: Documentation
+  text: En savoir plus sur le tracing de l'APM Datadog
+- link: /tracing/glossary/
+  tag: Documentation
+  text: Terminologie et présentation de l'APM
+
+title: Envoyer des traces à l'Agent via l'API
 ---
+
 L'APM de Datadog vous permet de recueillir des métriques de performance en traçant votre code pour identifier les éléments lents ou inefficaces de votre application.
 
 Les données de tracing sont envoyées depuis votre code instrumenté à l'Agent Datadog via une API HTTP. Les bibliothèques de tracing de Datadog simplifient l'envoi de métriques à l'Agent Datadog. Cependant, vous pouvez interagir directement avec l'API pour instrumenter des applications qui ne peuvent pas utiliser les bibliothèques ou qui sont écrites dans des langages qui ne possèdent pas encore de bibliothèque de tracing Datadog officielle.
@@ -94,6 +95,10 @@ et où chaque span est un dictionnaire avec un `trace_id`, `span_id`, `resource`
 
 ### Exemple
 
+{{< tabs >}}
+
+{{% tab "Shell" %}}
+
 {{< code-block lang="curl" >}}
 # Commande curl
 curl -X PUT "http://localhost:8126/v0.3/traces" \
@@ -114,6 +119,38 @@ curl -X PUT "http://localhost:8126/v0.3/traces" \
 ]
 EOF
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Powershell" %}}
+{{< code-block lang="curl" >}}
+
+# Commande Invoke-RestMethod
+
+$uri = "http://localhost:8126/v0.3/traces"
+$headers = @{
+    "Content-Type" = "application/json"
+}
+$body = @"
+[
+  [
+    {
+      "duration": 12345,
+      "name": "span_name",
+      "resource": "/home",
+      "service": "service_name",
+      "span_id": 987654321,
+      "start": 0,
+      "trace_id": 123456789
+    }
+  ]
+]
+"@
+
+Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Pour aller plus loin
 

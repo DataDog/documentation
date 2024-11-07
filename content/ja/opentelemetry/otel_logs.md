@@ -3,7 +3,7 @@ aliases:
 - /ja/logs/log_collection/opentelemetry/
 further_reading:
 - link: tracing/glossary/
-  tag: OpenTelemetry
+  tag: 外部サイト
   text: Collectorドキュメント
 - link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: ブログ
@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
   tag: Documentation
   text: OpenTelemetry トレースとログに接続
-kind: documentation
 title: OpenTelemetry から Datadog にログを送信する
 ---
 
@@ -19,7 +18,7 @@ title: OpenTelemetry から Datadog にログを送信する
 
 ## 概要
 
-[OpenTelemetry][1] (OTel) は、オープンソースの観測可能性フレームワークで、IT チームにテレメトリーデータを収集しルーティングするための標準化されたプロトコルとツールを提供します。Cloud Native Computing Foundation][2] (CNCF) によってインキュベータープロジェクトとして作成された OTel は、アプリケーションテレメトリーデータ (メトリクス、ログ、トレースなど) をインスツルメント、生成、収集、エクスポートし、分析および洞察するための監視プラットフォームに対して一貫したフォーマットを提供するものです。
+[OpenTelemetry][1] は、オープンソースの観測可能性フレームワークで、IT チームにテレメトリーデータを収集しルーティングするための標準化されたプロトコルとツールを提供します。Cloud Native Computing Foundation][2] (CNCF) によってインキュベータープロジェクトとして作成された OpenTelemetry は、アプリケーションテレメトリーデータ (メトリクス、ログ、トレースなど) をインスツルメント、生成、収集、エクスポートし、分析および洞察するための監視プラットフォームに対して一貫したフォーマットを提供するものです。
 
 OpenTelemetry Collector は、あらゆるベンダーに対応するエージェントプロセスで、さまざまなプロセスにより送信されたテレメトリデータを収集、エクスポートします。Datadog には、OpenTelemetry Collector で使える [Exporter][3] があり、OpenTelemetry から Datadog にトレース、メトリクス、ログデータを転送することができます。
 
@@ -29,13 +28,13 @@ OpenTelemetry Collector は、あらゆるベンダーに対応するエージ�
 
 ## セットアップ
 
-アプリケーションやサービスが [OpenTelemetry][4] ライブラリでインスツルメンテーションされている場合、OTel Collector と Datadog Exporter を使用して、ログデータを Datadog バックエンドに送信します。
+アプリケーションやサービスが [OpenTelemetry][4] ライブラリでインスツルメンテーションされている場合、OpenTelemetry Collector と Datadog Exporter を使用して、ログデータを Datadog バックエンドに送信します。
 
 [ログを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][5]
 
 詳しくは [OpenTelemetry][6] をお読みください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -43,5 +42,5 @@ OpenTelemetry Collector は、あらゆるベンダーに対応するエージ�
 [2]: https://www.cncf.io/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/reference/specification/logs/overview/#third-party-application-logs
-[5]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=onahost#4-configure-the-logger-for-your-application
+[5]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=onahost#step-4---configure-the-logger-for-your-application
 [6]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python

@@ -8,10 +8,9 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터 알림 설정
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임을 예약하여 모니터 음소거
-kind: 가이드
 title: 모니터 종속성 생성
 ---
 

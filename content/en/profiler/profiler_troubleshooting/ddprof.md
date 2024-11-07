@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Native Profiler for Compiled Languages
-kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
 code_lang_weight: 90
@@ -11,19 +10,19 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-<code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<code>ddprof</code> is in Preview. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 ## Missing profiles in the profile search page
 
-If you've configured the profiler and don't see profiles in the profile search page, turn on [verbose logging][1] and [open a support ticket][2] with log files and the following information:
+If you've configured the profiler and don't see profiles in the profile search page, turn on verbose logging (`-l debug`) and [open a support ticket][1]. In the support ticket, include log files along with the following information:
 
 - Linux kernel version (`uname -r`)
 - libc version (`ldd --version`)
 - Value of `/proc/sys/kernel/perf_event_paranoid`
 - Complete command line, including both profiler and application arguments
 
-If you prefer, you can also troubleshoot the problem by enabling verbose logs and reviewing the sections below.
+The section below lists potential setup issues.
 
 ### "\<ERROR\> Error calling perfopen on watcher"
 
@@ -33,19 +32,22 @@ Setting `perf_event_paranoid` so that it persists across restarts depends on you
 
 ```shell
 echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
-
 ```
 
 **Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable. Within a container, this setting is inherited from the host.
 
 There are two capabilities you can use to override the value of `perf_event_paranoid`:
-- `CAP_SYS_ADMIN`: adds many permissions and thus may be discouraged
-- `CAP_PERFMON`: adds BPF and `perf_event_open` capabilities (available on Linux v5.8 or later)
+- `CAP_SYS_ADMIN`: Adds many permissions and thus may be discouraged.
+- `CAP_PERFMON`: Adds BPF and `perf_event_open` capabilities (available on Linux v5.8 or later).
 
 There are a few less common permissions issues:
-- The profiler is not always able to instrument processes that change their UID on startup. This is common for many webservers and databases.
 - The profiler relies upon the `perf_event_open()` syscall, which is disallowed by some container runtimes. Check the appropriate documentation to see whether this might be the case.
 - Some seccomp profiles forbid `perf_event_open()`. If your system runs such a configuration, you may not be able to run the profiler.
+
+### "\<ERROR\> Could not mmap memory for watcher
+
+The profiler requires pinned memory to operate. This type of memory is constrained by kernel settings. You can view your current setting using `ulimit -l`. The following capability can be used to bypass this limitation:
+- `CAP_IPC_LOCK`: Allows the use of locked memory (memory exempt from paging).
 
 ### "\<WARNING\> Could not finalize watcher"
 
@@ -55,15 +57,17 @@ Other profiling tools may contribute to the same limit.
 
 ### "\<WARNING\> Failure to establish connection"
 
-This error usually means that the profiler is unable to connect to the Datadog Agent. Enable [configuration logging][3] to identify the hostname and port number used by the profiler for uploads. Additionally, the content of the error message may relay the hostname and port used. Compare these values to your Agent configuration. See [Enabling the profiler][4] for details on profiler input parameters and default values.
+This error usually means that the profiler is unable to connect to the Datadog Agent. Enable configuration logging(`--show_config`) to identify the hostname and port number used by the profiler for uploads. Additionally, the content of the error message may relay the hostname and port used. Compare these values to your Agent configuration. Check the profiler's help section (`ddprof --help`) for further information on how to configure the Agent's URL.
 
 ## Profiles are empty or sparse
 
-Your profiles may be empty ("No CPU time reported") or contain few frames. Sometimes this is caused when applications have poor symbolization information. This may also be expected--the profiler activates only when the instrumented application is scheduled on the CPU, and applications may be predominately off-CPU for many reasons, such as low user load or high application wait time.
-
-The root of your profile is the frame annotated with the application name in parentheses. If this frame shows a significant amount of CPU time, but no child frames, your application may have poor profiling fidelity. Consider the following:
+The root of your profile is the frame annotated with the application's binary.  If this frame shows a significant amount of CPU time, but no child frames, consider the following:
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
+
+If you are seeing `Anonymous` where you would expect your function name, you might be using a interpreted or JITed language. Consider enabling perf maps or JIT dump information.
+
+Your profiles may be empty ("No CPU time reported") or contain few frames. Check that your application is under some amount of load. The profiler activates only when the instrumented application is scheduled on the CPU.
 
 ## Error while loading shared libraries
 
@@ -83,7 +87,4 @@ This happens when your application is built with `libdd_profiling.so` as a depen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
-[3]: /profiler/enabling/ddprof/?tab=environmentvariables#configuration
-[4]: /profiler/enabling/ddprof/
+[1]: /help/

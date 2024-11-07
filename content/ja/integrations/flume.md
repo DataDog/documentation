@@ -3,6 +3,7 @@ app_id: flume
 app_uuid: 9e349061-5665-482d-9a5a-f3a07999bfae
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: flume.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10133
     source_type_name: flume
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   sales_email: kealan.maas@datadoghq.com
   support_email: kealan.maas@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flume/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: flume
 integration_title: flume
 integration_version: 0.0.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: flume
-oauth: {}
 public_title: flume
 short_description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
 supported_os:
@@ -45,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
   media: []
@@ -53,6 +55,7 @@ tile:
   title: flume
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -75,7 +78,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Flume チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. 以下の JVM 引数を [flume-env.sh][5] に追加して、Flume Agent を構成し JMX を有効にします。
 
@@ -88,9 +91,9 @@ export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.
    。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル `flume.d/conf.yaml`][6] ファイルを参照してください。
 
-   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。
+   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、ステータス出力に表示されます。
    以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
-   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][7]で詳細な手順を参照してください。
+   収集するメトリクスのカスタマイズの詳細については、[JMX Checks のドキュメント][7]を参照してください。
    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 3. [Agent を再起動します][9]
@@ -113,7 +116,7 @@ export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.
 
 Flume には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "flume" >}}
 
 
@@ -123,7 +126,7 @@ Flume には、イベントは含まれません。
 
 
 [1]: https://flume.apache.org/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://flume.apache.org/FlumeUserGuide.html#jmx-reporting

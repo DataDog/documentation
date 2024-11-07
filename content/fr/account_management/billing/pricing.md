@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing
   tag: Tarification
   text: Tarification Datadog
-kind: documentation
 title: Tarification
 ---
 
@@ -12,18 +11,17 @@ Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir
 ## Surveillance d'infrastructure
 
 * Un **host** est une instance de système d'exploitation physique ou virtuel. Le nombre de hosts uniques que vous surveillez dans le service Infrastructure de Datadog est mesuré toutes les heures.
-  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
+  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée. Le mois de février fait office d'exception : le prix est alors calculé selon la huitième mesure la plus élevée.
   * Avec une formule mensuelle/horaire hybride (MHP), Datadog facture votre engagement mensuel minimum et applique un taux horaire par host/heure une fois cet engagement dépassé.
 * Un **conteneur** est un environnement d'exploitation autonome qui comprend une application ainsi que des paramètres et des bibliothèques de système d'exploitation limités. Le nombre de conteneurs uniques que vous surveillez dans le service Infrastructure de Datadog est mesuré toutes les cinq minutes. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement.
 * Une [**métrique custom**][2] est une combinaison unique composée d'un nom de métrique, d'un ID de host et de tags. Le prix facturé par Datadog est calculé en fonction du nombre mensuel moyen de métriques custom uniques envoyées au service Infrastructure Datadog par heure.
 * Un **appareil** est un capteur physique comprenant un ou plusieurs ordinateurs à carte unique dans un boîtier. Datadog mesure et facture le nombre d'appareils et de hosts que vous surveillez actuellement dans le service Infrastructure de Datadog.
-* Une **fonction sans serveur** correspond à du code d'application conçu pour s'exécuter sur le service de calcul sans serveur d'une plateforme cloud (par exemple, AWS Lambda, Google Cloud Function ou Azure Function). Le prix facturé par Datadog est calculé en fonction du nombre total d'appels de fonction Lambda effectués en un mois.
-* Une **tâche Fargate** AWS est une collection de conteneurs configurée via la plateforme d'orchestration de conteneurs ECS d'AWS. Le nombre d'instances de tâches que vous surveillez dans le service Infrastructure de Datadog (ou l'APM) est mesuré toutes les cinq minutes. Datadog agrège ces mesures à la fin du mois et calcule le prix facturé en fonction du nombre total d'heures pendant lesquelles vos applications s'exécutaient et étaient surveillées.
+* Une **tâche Fargate** AWS est une collection de conteneurs configurée via la plateforme d'orchestration de conteneurs ECS d'AWS. Le nombre d'instances de tâches que vous surveillez dans le service Infrastructure de Datadog (ou APM) est mesuré toutes les cinq minutes. Datadog agrège ces mesures à la fin du mois et calcule le prix facturé en fonction du nombre total d'heures d'exécution et de surveillance de vos applications.
 
 ## APM
 
-* Si un host (défini dans la [surveillance d'infrastructure](#surveillance-d-infrastructure)) reçoit des traces à partir d'une application instrumentée, Datadog le considère comme un **host d'APM**.
-  * Avec une formule basée sur la limite supérieure, les mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
+* Si une application exécutée sur un host (tel que défini dans [Surveillance d'infrastructure](#surveillance-d-infrastructure)) génère des traces et les transmet à l'application SaaS Datadog, Datadog considère ce host comme un **host APM**.
+  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée. Le mois de février fait office d'exception : le prix est alors calculé selon la neuvième mesure la plus élevée.
   * Avec une formule mensuelle/horaire hybride (MHP), Datadog facture votre engagement mensuel minimum et applique un taux horaire par host/heure une fois cet engagement dépassé.
 * Une **span indexée** est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de spans indexées par des [filtres de rétention][3] dans l'APM Datadog.
 * Une **span ingérée** est une requête individuelle effectuée auprès d'un service de votre pile. Le prix facturé par Datadog est calculé en fonction du nombre total de gigaoctets de spans ingérées par l'APM Datadog.
@@ -33,9 +31,9 @@ Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans 
 ## Database Monitoring
 
 * Datadog enregistre le nombre de hosts de base de données uniques que vous surveillez toutes les heures grâce à la solution Database Monitoring.
-  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
+  * Avec une formule basée sur la limite supérieure, ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée. Le mois de février fait office d'exception : le prix est alors calculé selon la huitième mesure la plus élevée.
   * Avec une formule mensuelle/horaire hybride (MHP), Datadog facture votre engagement mensuel minimum et applique un taux horaire par host/heure une fois cet engagement dépassé.
-* Le prix facturé par Datadog est calculé en fonction du nombre total de [requêtes normalisées][9] configurées qui sont surveillées à un moment donné.
+* Le prix facturé par Datadog est calculé en fonction du nombre total de [requêtes normalisées][6] configurées qui sont surveillées à un moment donné.
 
 ## Log Management
 
@@ -55,19 +53,19 @@ Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans 
 ## Network Performance Monitoring
 
 * Le nombre de hosts que vous surveillez en même temps via le service **Network Performance Monitoring** (NPM) de Datadog est mesuré toutes les heures.
-  * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
+  * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée. Le mois de février fait office d'exception : le prix est alors calculé selon la huitième mesure la plus élevée.
 * En outre, le nombre total de flux utilisés par tous les hosts NPM est mesuré chaque mois par Datadog. Un **flux** correspond à un enregistrement du trafic envoyé et reçu entre une source (IP:Port) et une destination (IP:Port), mesuré sur une période de cinq minutes.
 
 ## Real User Monitoring
 
 * Une **session** correspond à une visite de votre application Web par un utilisateur. Elle expire au bout de 15 minutes d'inactivité ou de 4 heures d'activité continue.
 
-* Datadog collecte toutes les pages consultées par vos utilisateurs finaux avec les données de télémétrie pertinentes : chargement des ressources (XHR, images, fichiers CSS, scripts JS, etc.), erreurs frontend et tâches longues. Tous ces éléments sont inclus dans la session utilisateur. Le prix facturé par Datadog est calculé par tranche de dix mille (10 000) sessions ingérées dans le service Real User Monitoring (RUM) de Datadog.
+* Datadog recueille toutes les pages consultées par vos utilisateurs finaux avec les données de télémétrie pertinentes : chargement des ressources (XHR, images, fichiers CSS, scripts JS, etc.), erreurs frontend et tâches longues. Tous ces éléments sont inclus dans la session utilisateur. Le prix facturé par Datadog est calculé par tranche de mille (1 000) sessions ingérées dans le service Real User Monitoring (RUM) de Datadog.
 
 ## Profileur en continu
 
 * Le nombre de hosts uniques que vous surveillez en même temps via le service Profileur en continu de Datadog est mesuré toutes les heures.
-  * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée (la huitième la plus élevée en février).
+  * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée. Le mois de février fait office d'exception : le prix est alors calculé selon la huitième mesure la plus élevée.
   * Chaque host bénéficie gratuitement de quatre conteneurs profilés. Chaque conteneur supplémentaire coûte 2 $.
     **Remarque** : ce quota est agrégé pour tous les hosts. Si vous avez une moyenne de quatre conteneurs sur l'ensemble de vos hosts, les conteneurs supplémentaires ne vous sont pas facturés pour chaque host séparément.
 * Datadog mesure le nombre total de conteneurs qui sont profilés. Un conteneur est un environnement d'exploitation autonome qui comprend une application ainsi que des paramètres et des bibliothèques de système d'exploitation limités. Le nombre de conteneurs uniques que vous surveillez avec le service Profileur en continu de Datadog est mesuré toutes les cinq minutes. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement. Pour le service Profileur en continu, Datadog comptabilise uniquement les conteneurs qui exécutent le service Profileur en continu dans le nombre total de conteneurs surveillés.
@@ -86,16 +84,16 @@ Vous pouvez mettre en place des contrôles afin de limiter les volumes de spans 
 
 ## Dépannage
 
-Pour toute question technique, contactez [l'assistance Datadog][6].
+Pour toute question technique, contactez [l'assistance Datadog][7].
 
-Contactez le [service commercial][7] ou votre [chargé de compte][8] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
+Contactez le [service commercial][8] ou votre [chargé de compte][9] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /fr/metrics/custom_metrics/
-[3]: /fr/tracing/trace_retention/#retention-filters
-[4]: /fr/tracing/trace_ingestion/
-[5]: /fr/tracing/trace_retention/
-[6]: /fr/help/
-[7]: mailto:sales@datadoghq.com
-[8]: mailto:success@datadoghq.com
-[9]: /fr/database_monitoring/data_collected/#normalized-queries
+[3]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /fr/tracing/trace_pipeline/ingestion_controls/
+[5]: /fr/tracing/trace_pipeline/trace_retention/
+[6]: /fr/database_monitoring/data_collected/#normalized-queries
+[7]: /fr/help/
+[8]: mailto:sales@datadoghq.com
+[9]: mailto:success@datadoghq.com

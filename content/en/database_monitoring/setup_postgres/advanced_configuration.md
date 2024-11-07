@@ -1,12 +1,8 @@
 ---
 title: Advanced Configuration for Postgres Database Monitoring
-kind: documentation
 description: Advanced Configuration for Postgres Database Monitoring
 
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Handling many relations
 
@@ -47,7 +43,9 @@ instances:
 
 If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently.
 
-Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1. Lower the value to a smaller interval:
+Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1 second and can be seen in the <a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L332C9-L336" target="_blank">`postgres/conf.yaml.example`</a>.
+
+Lower the value to a smaller interval:
 
 ```yaml
 instances:

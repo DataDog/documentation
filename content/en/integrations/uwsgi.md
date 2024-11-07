@@ -1,7 +1,7 @@
 ---
 title: uWSGI
 name: uwsgi
-kind: integration
+custom_kind: integration
 description: 'Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.'
 short_description: 'Collect logs to track requests per second, bytes served, request status, and more.'
 categories:
@@ -69,7 +69,7 @@ By default the Datadog-uWSGI integration supports the [default uWSGI log format]
 
 Need help? Contact [Datadog Support][6].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://uwsgi-docs.readthedocs.io/en/latest/Logging.html#logging-to-files
 [3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging

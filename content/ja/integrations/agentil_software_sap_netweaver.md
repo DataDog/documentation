@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-sap-netweaver
 app_uuid: 5b070928-c509-4826-93db-8b5e9206c355
 assets:
@@ -11,6 +13,7 @@ assets:
     SAP System Shortdumps: assets/dashboards/agentil_software_system_shortdumps.json
     SAP jobs details: assets/dashboards/agentil_software_sap_jobs_details.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -20,6 +23,7 @@ assets:
       prefix: agentil_software
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10218
     source_type_name: AGENTIL Software SAP NetWeaver
 author:
   homepage: https://www.agentil-software.com
@@ -28,8 +32,9 @@ author:
   support_email: support@agentil-software.com
   vendor_id: agentil-software
 categories:
-- マーケットプレイス
+- marketplace
 - sap
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,12 +43,10 @@ integration_id: agentil-software-sap-netweaver
 integration_title: SAP S/4HANA & NetWeaver
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: agentil_software_sap_netweaver
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -64,6 +67,8 @@ tile:
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: S/4HANA と NetWeaver システムの ABAP および J2EE スタックを監視する
   media:
@@ -89,11 +94,15 @@ tile:
     image_url: images/abap_background_jobs.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
   support: README.md#Support
   title: SAP S/4HANA & NetWeaver
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要

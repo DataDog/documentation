@@ -1,6 +1,6 @@
 ---
 title: Deploying the Agent on RaspberryPI
-kind: faq
+
 ---
 
 **Using Raspbian**
@@ -53,7 +53,7 @@ sudo systemctl enable datadog
 systemctl start datadog
 ```
 
-The Datadog Agent is installed in the working directory where you ran the installation command, for example: `/home/pi/.datadog-agent/`. 
+The Datadog Agent is installed in the working directory where you ran the installation command, for example: `/home/pi/.datadog-agent/`.
 
 Example of metrics being ingested from your Raspberry PI device:
 
@@ -61,4 +61,4 @@ Example of metrics being ingested from your Raspberry PI device:
 
 **Note**: Datadog does not officially support Raspbian.
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source

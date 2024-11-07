@@ -1,14 +1,14 @@
 ---
 title: Rsyslog
 name: rsyslog
-kind: integration
+custom_kind: integration
 description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
 short_description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
 categories:
     - log collection
 doc_link: /integrations/rsyslog/
 aliases:
-    - logs/log_collection/rsyslog
+    - /logs/log_collection/rsyslog
 has_logo: true
 integration_title: rsyslog
 is_public: true
@@ -29,10 +29,12 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 ### Log collection
 
 #### Rsyslog version >=8
+<div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends <code>inotify</code> mode. Traditionally, <code>imfile</code> used polling mode, which is much more resource-intense (and slower) than <code>inotify</code> mode. </div>
 
 {{< tabs >}}
 
 {{% tab "Ubuntu and Debian" %}}
+
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -53,7 +55,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
    }
    ```
 
@@ -73,7 +75,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
@@ -85,7 +87,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    ```
 
 5. Associate your logs with the host metrics and tags.
-   
+
    To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
    - If you specified a hostname in `datadog.conf` or `datadog.yaml`, replace the `%HOSTNAME%` value in `rsyslog.conf` to match your hostname.
    - If you did not specify a hostname in `datadog.conf` or `datadog.yaml`, you do not need to change anything.
@@ -107,7 +109,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
      ```
 
 7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
-   
+
    1. Add the following lines to your Rsyslog configuration file:
 
       ```conf
@@ -188,7 +190,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
    }
    ```
 
@@ -208,7 +210,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
@@ -220,12 +222,12 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    ```
 
 5. Associate your logs with the host metrics and tags:
-   
+
    To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
    - If you specified a hostname in `datadog.conf` or `datadog.yaml`, replace the `%HOSTNAME%` value in `rsyslog.conf` to match your hostname.
    - If you did not specify a hostname in `datadog.conf` or `datadog.yaml`, you do not need to change anything.
 
-6. To get the best use out of your logs in Datadog, set a source for the logs. 
+6. To get the best use out of your logs in Datadog, set a source for the logs.
    - If you [forward your logs to the Datadog Agent][1], you can set the source in the Agent configuration file.
    - If you're not forwarding your logs to the Datadog Agent, create a distinct configuration file for each source in `/etc/rsyslog.d/`:
 
@@ -242,7 +244,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
      ```
 
 7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
-   
+
    1. Add the following two lines to your Rsyslog configuration file:
 
       ```conf
@@ -325,7 +327,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
    }
    ```
 
@@ -345,7 +347,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
@@ -357,12 +359,12 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    ```
 
 5. Associate your logs with the host metrics and tags:
-   
+
    To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
    - If you specified a hostname in `datadog.conf` or `datadog.yaml`, replace the `%HOSTNAME%` value in `rsyslog.conf` to match your hostname.
    - If you did not specify a hostname in `datadog.conf` or `datadog.yaml`, you do not need to change anything.
 
-6. To get the best use out of your logs in Datadog, set a source for the logs. 
+6. To get the best use out of your logs in Datadog, set a source for the logs.
    - If you [forward your logs to the Datadog Agent][1], you can set the source in the Agent configuration file.
    - If you're not forwarding your logs to the Datadog Agent, create a distinct configuration file for each source in `/etc/rsyslog.d/`:
 
@@ -379,7 +381,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
      ```
 
 7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
-   
+
    1. Add the following two lines to your Rsyslog configuration file:
 
       ```conf

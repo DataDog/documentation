@@ -4,24 +4,24 @@ categories:
     - aws
     - log collection
     - security
-description: Gather your AWS GuardDuty logs.
+description: Gather your Amazon GuardDuty logs.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md']
-integration_title: AWS GuardDuty
+integration_title: Amazon GuardDuty
 is_public: true
-kind: integration
+custom_kind: integration
 name: amazon_guardduty
-public_title: Datadog-AWS GuardDuty Integration
-short_description: Gather your AWS GuardDuty logs.
+public_title: Datadog-Amazon GuardDuty Integration
+short_description: Gather your Amazon GuardDuty logs.
 version: '1.0'
 integration_id: "amazon-guardduty"
 ---
 
 ## Overview
 
-Datadog integrates with AWS GuardDuty through a Lambda function that ships GuardDuty findings to Datadog's Log Management solution.
+Datadog integrates with Amazon GuardDuty through a Lambda function that ships GuardDuty findings to Datadog's Log Management solution.
 
 ## Setup
 

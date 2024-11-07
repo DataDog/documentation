@@ -1,9 +1,9 @@
 ---
 title: Host Map Widget
-kind: documentation
+widget_type: hostmap
 description: "Display the Datadog host map in your dashboards."
 aliases:
-    - /graphing/widgets/hostmap/
+- /graphing/widgets/hostmap/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -34,19 +34,13 @@ Configuration of the host map widget is similar to the main [host map][1] page:
 
 ### Options
 
-#### Title
+#### Context links
 
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+[Context links][2] are enabled by default; you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog or third-party).
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the host map widget is:
+This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
 
 {{< dashboards-widgets-api >}}
 
@@ -55,5 +49,6 @@ The dedicated [widget JSON schema definition][3] for the host map widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /infrastructure/hostmap/
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[2]: /dashboards/guide/context-links/
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

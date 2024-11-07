@@ -5,6 +5,7 @@ assets:
   dashboards:
     Datadog Cluster Agent - Overview: assets/dashboards/datadog_cluster_agent_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: datadog.cluster_agent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10108
     source_type_name: Datadog Cluster Agent
 author:
   homepage: https://www.datadoghq.com
@@ -23,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
 display_on_public_website: true
@@ -30,12 +33,10 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 2.6.1
+integration_version: 3.2.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: datadog_cluster_agent
-oauth: {}
 public_title: Datadog Cluster Agent
 short_description: Datadog Cluster Agent のメトリクスを追跡
 supported_os:
@@ -49,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog Cluster Agent のメトリクスを追跡
   media: []
@@ -57,6 +59,7 @@ tile:
   title: Datadog Cluster Agent
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -72,7 +75,7 @@ tile:
 Datadog-Cluster-Agent チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. datadog_cluster_agent のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `datadog_cluster_agent.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル datadog_cluster_agent.d/conf.yaml][3] を参照してください。
 
@@ -92,7 +95,7 @@ Datadog-Cluster-Agent チェックは [Datadog Agent][2] パッケージに含�
 
 Datadog_Cluster_Agent インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "datadog_cluster_agent" >}}
 
 

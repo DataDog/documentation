@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Node.js Serverless Applications Using the Datadog Forwarder
-kind: guide
+
 ---
 
 ## Overview
@@ -53,38 +53,22 @@ For example:
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
 ```
-{{< site-region region="us,us3,us5,eu,gov" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can instrument it with the Datadog CLI.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can instrument it with the Datadog CLI.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can instrument it with the Datadog CLI.
 
 More information and additional parameters can be found in the [CLI documentation][4].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you install the Datadog Serverless Plugin.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you install the Datadog Serverless Plugin.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][6] before you install the Datadog Serverless Plugin.
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
@@ -107,11 +91,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 **Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
 
-
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -150,23 +134,14 @@ To fill in the placeholders:
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can use the macro.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can use the macro.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can use the macro.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -215,23 +190,14 @@ To fill in the placeholders:
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can use the macro.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can use the macro.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can use the macro.
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://docs.datadoghq.com/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -285,41 +251,24 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 
 #### Using the layer
 
-[Configure the layers][1] for your Lambda function using the ARN in the following format.
+[Configure the layers][8] for your Lambda function using the ARN in the following format.
 
 ```
-# For us,us3,us5,eu regions
+# For us,us3,us5,eu, and ap1 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 
-# For ap1 region
-arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-The available `RUNTIME` options are `Node12-x`, `Node14-x`, and `Node16-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
+The available `RUNTIME` options are: {{< latest-lambda-layer-version layer="node-versions" >}}. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
-```
-
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can add the Datadog Lambda library as a layer.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1] before you can add the Datadog Lambda library as a layer.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2] before you can add the Datadog Lambda library as a layer.
 
 #### Using the package
 
@@ -356,13 +305,15 @@ Subscribe the Datadog Forwarder Lambda function to each of your function's log g
 1. [Install the Datadog Forwarder if you haven't][6].
 2. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
-
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/serverless/forwarder/
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
 {{% /tab %}}
 {{< /tabs >}}
 

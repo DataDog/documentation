@@ -10,13 +10,12 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#multi-line-aggregation
   tag: Documentación
   text: Agregación de logs multilínea
-- link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
   tag: Documentación
   text: Supervisar los directorios mediante comodines
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: Documentación
   text: Reglas generales de procesamiento
-kind: documentación
 title: Transporte de logs del Agent
 ---
 
@@ -30,12 +29,12 @@ Este mecanismo para hacer tests de conectividad solo se ejecuta al iniciar el Ag
 
 Para comprobar qué transporte utiliza el Agent, ejecuta el [comando de estado del Agent][1].
 
-{{< img src="agent/logs/agent-status.png" alt="Estado del Agent"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Estado del Agent" style="width:70%;">}}
 
 **Notas**:
 
 * En las versiones anteriores del Agent, se utiliza el transporte TCP de forma predeterminada. Datadog recomienda encarecidamente aplicar el protocolo de transporte HTTPS si se ejecutan las versiones 6.14/7.14 y posteriores, y el HTTPS comprimido si se ejecutan las versiones 6.16/7.16 y posteriores.
-* Cuando utilices un proxy, aplica siempre un canal de transporte específico (ya sea TCP o HTTPS) para reenviar los logs a Datadog. 
+* Cuando utilices un proxy, aplica siempre un canal de transporte específico (ya sea TCP o HTTPS) para reenviar los logs a Datadog.
 
 ## Aplica un transporte específico
 
@@ -63,7 +62,7 @@ De forma predeterminada, el Datadog Agent utiliza el puerto `443` para enviar su
 
 **El reenvío de logs HTTPS es la configuración recomendada** para obtener la mayor fiabilidad en la recopilación de logs, ya que el sistema de almacenamiento de Datadog devuelve el código de estado `200`:
 
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Esquema de entrada HTTPS"  style="width:80%;">}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Esquema de admisión de HTTPS" style="width:80%;">}}
 
 Al usar HTTP, el Agent envía lotes de logs con los siguientes límites:
 
@@ -115,12 +114,12 @@ Para aplicar el transporte TCP, actualiza el [archivo de configuración principa
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 Para enviar logs con variables de entorno, configura lo siguiente:
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 De forma predeterminada, el Datadog Agent envía sus logs a Datadog mediante el protocolo TCP con cifrado TLS. Esto requiere comunicación de salida (en el puerto `10516` para el sitio de Datadog de EE. UU. y en el puerto `443` para el sitio de Datadog de la UE).
 

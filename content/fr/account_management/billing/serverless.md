@@ -1,49 +1,62 @@
 ---
-kind: documentation
 title: Facturation des fonctions sans serveur
 ---
 
-## Présentation
+## Gestion de l'utliisation
 
-Achetez des appels de fonction sans serveur avec les [offres Pro et Enterprise de Datadog][1]. La facturation Datadog repose sur la somme d'appels Lambda AWS sur un mois pour l'ensemble de vos comptes. Les offres Pro et Enterprise prévoient 150 000 spans indexées et 5 métriques custom par million d'appels facturés. Contactez le [service commercial][2] ou votre [chargé de compte][3] pour en savoir plus sur l'ajout de fonctions sans serveur pour votre compte.
+Vous pouvez surveiller l'utilisation facturable et totale des fonctions sans serveur de votre compte en consultant la page Datadog Usage. Vous y trouverez le résumé du mois en cours, ainsi que l'évolution de l'utilisation.
 
-**Remarque :** si vous utilisez un ancien modèle de facturation pour la surveillance de fonctions sans serveur Datadog, et souhaitez migrer vers une facturation basée sur les appels, contactez votre [chargé de compte][3].
+La facturation de la surveillance sans serveur Datadog tient à la fois compte des invocations et des fonctions Lambda actives qui sont suivies et surveillées dans Datadog. Selon votre offre, les métriques pertinentes sont indiquées dans l'onglet Serverless de la page Plan and Usage (sous le [filtre Billable][1]). Pour en savoir plus sur votre offre et votre utilisation, contactez votre [chargé de compte][3].
 
-## Appels de fonction sans serveur
+Les fonctions Lambda peuvent être surveillées avec l'[intégration Datadog/AWS][10] ou par l'intermédiaire d'une instrumentation directe des couches de l'[extension Lambda][11] et du [Forwarder][12].
 
-Pour sa facturation, Datadog calcule la somme de vos appels de fonction Lambda AWS à la fin de chaque mois.
+## Intégration
 
-Pour en savoir plus sur le tarif des fonctions sans serveur, consultez la [page de tarification de Datadog][1].
-
-## Surveillance de l'utilisation
-
-Vous pouvez surveiller le nombre d'appels de fonction sans serveur facturables de votre compte en consultant la [page Datadog Usage][4]. Vous pouvez consulter le résumé du mois en cours, ainsi que l'évolution de l'utilisation.
-
-Pour contrôler le nombre de fonctions dont les appels sont surveillés par Datadog, excluez des fonctions spécifiques en appliquant un tri par tag dans [l'interface](#interface) ou à l'aide de l'[API](#api).
-
-**Remarque** : il peut s'écouler un certain temps avant que les fonctions exclues disparaissent des pages [Serverless][8] et [Usage][4] Datadog. Testez les règles de filtrage en consultant la métrique [`aws.lambda.invocations`][9] des fonctions filtrées. Lorsque Datadog interrompt la surveillance d'une fonction, la valeur de `aws.lambda.invocations` atteint 0.
+Pour choisir les fonctions qui sont surveillées à partir de l'intégration, vous pouvez utiliser les contrôles de collecte de métriques de l'[intégration Lambda][13] dans l'interface ou via l'API.
 
 ### Interface
 
-Pour utiliser l'interface afin de contrôler les fonctions Lambda AWS surveillées par Datadog, accédez à la [page de l'intégration AWS][5] et ajoutez des tags sous la forme d'ensembles `key:value` dans le champ **to Lambdas with tag:**.
+Pour utiliser l'interface afin de contrôler les fonctions AWS Lambda surveillées par Datadog, accédez à la [page de l'intégration AWS][5]. Dans le volet latéral de gauche, sélectionnez le compte AWS pertinent, puis accédez à l'**onglet Metric Collection**. Faites défiler la page vers le bas jusqu'à atteindre l'en-tête **Limit Metric Collection to Specific Resources**, puis sélectionnez l'option Lambda dans la liste déroulante **Select AWS Service**. Vous pouvez alors ajouter des tags sous la forme d'ensembles `key:value` dans le champ sur la droite.
 
-Pour exclure des fonctions avec un certain tag, ajoutez `!` devant la clé du tag. Exemple :
-
-`!env:staging,!env:test1`
-
-Ce filtre exclut tout le contenu avec le tag `env:staging` ou `env:test1`.
+Consultez la rubrique [Tags](#tags) ci-dessous pour obtenir plus de détails sur l'utilisation des tags dans ce champ.
 
 ### API
 
-Pour utiliser l'API pour contrôler la limite de fonctions Lambda AWS surveillées par Datadog, consultez la [documentation relative aux filtres de tags][6].
+Pour utiliser l'API afin de contrôler les fonctions AWS Lambda surveillées par Datadog, veuillez vous référer à la [documentation relative à l'API d'ajout de filtre de tag][6].
+
+### Tags
+
+Datadog accepte une liste de tags séparés par des virgules, au format `key:value`. Cette liste définit le filtre utilisé lors de la collecte de métriques à partir du service AWS associé. Ces paires `key:value` permettent à la fois d'inclure et d'exclure des tags. Pour exclure des tags, ajoutez le signe `!` avant la clé des tags. Il est également possible d'utiliser des wildcards, comme `?` (pour un seul caractère) et `*` (pour plusieurs caractères).
+
+Le filtre exclut uniquement les ressources qui ne comportent aucun des tags autorisés, à savoir lorsque la liste des tags autorisés constitue une condition « OR ». 
+
+Exemple : `datadog:monitored,env:production`
+
+Ce filtre recueille uniquement les instances EC2 qui contiennent le tag `datadog:monitored` ou le tag `env:production`.
+
+Si vous ajoutez une exclusion de tag à la liste, celle-ci est prioritaire. Ainsi, le tag en question ajoute une condition « AND ».
+
+Exemple : `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
+
+Ce filtre recueille uniquement les instances EC2 qui contiennent le tag `datadog:monitored` OU le tag `env:production` OU un tag instance-type avec pour valeur `c1.*`, ET qui ne contiennent PAS de tag `region:us-east-1`.
+
+## Instrumentation
+
+Datadog propose une [extension Lambda][14] ainsi que plusieurs couches Lambda permettant de tracer et de surveiller vos fonctions selon votre runtime. Les fonctions actives qui sont instrumentées et surveillées à l'aide de ces bibliothèques contribuent à l'utilisation facturée, même lorsque l'intégration AWS est désactivée.
+
+Datadog fournit plusieurs outils afin de gérer l'installation et la configuration de ces bibliothèques. Ils permettent de faire évoluer et d'automatiser l'installation ou la gestion des bibliothèques Lambda Datadog. Pour en savoir plus, consultez la section [Installer la surveillance sans serveur pour AWS Lambda][15]. 
+
+## Définition d'une fonction active
+
+La facturation Datadog repose sur le nombre moyen de fonctions par heure sur un mois pour l'ensemble de vos comptes. Chaque heure, Datadog enregistre le nombre de fonctions exécutées une ou plusieurs fois et surveillées par votre compte Datadog. À la fin du mois, Datadog détermine le montant à facturer en calculant la moyenne horaire du nombre de fonctions enregistrées. Les offres Pro et Enterprise comprennent cinq métriques custom par fonction facturable. Une fonction facturable est définie par un ARN de fonction unique. Pour les fonctions Lambda@Edge, chaque fonction d'une région différente représente une fonction facturable distincte.
+
+La facturation pour APM sans serveur dépend du nombre total d'invocations AWS Lambda associées aux spans APM ingérées sur un mois donné. Vous payez également pour le nombre total de [spans indexées][4] qui sont envoyées au service APM Datadog et qui dépassent la quantité incluse avec votre offre à la fin du mois. Les [hosts APM][4] ne sont pas facturés pour la surveillance sans serveur.
 
 ## Dépannage
 
-Pour toute question technique, contactez [l'assistance Datadog][7].
+Pour toute question d'ordre technique, contactez l'[assistance Datadog][7]. Pour obtenir davantage d'informations sur votre facturation ou sur votre offre et votre utilisation, contactez votre [chargé de compte][3].
 
-Pour toute question concernant la facturation, contactez votre [chargé de compte][3].
-
-[1]: https://www.datadoghq.com/pricing/?product=serverless#serverless
+[1]: https://app.datadoghq.com/billing/usage?category=serverless&data_source=billable
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
@@ -52,3 +65,9 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [7]: /fr/help/
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/metric/explorer?exp_metric=aws.lambda.invocations&exp_group=functionname&exp_agg=sum
+[10]: /fr/integrations/amazon_billing/
+[11]: /fr/serverless/libraries_integrations/extension/
+[12]: /fr/logs/guide/forwarder/
+[13]: /fr/integrations/amazon_lambda/
+[14]: /fr/serverless/aws_lambda
+[15]: /fr/serverless/installation/

@@ -8,13 +8,12 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスの参照
-kind: documentation
 title: サービスチェックモニター
 ---
 
@@ -88,9 +87,9 @@ Datadog で[サービスチェックモニター][6]を作成するには、メ�
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][11]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][11] page.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

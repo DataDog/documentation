@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-kind: guide
+
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -13,6 +13,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/log-management-policies/"
       tag: "Blog"
       text: "How to implement log management policies with your teams"
+algolia:
+  tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -30,6 +32,8 @@ This guide also goes through how to monitor your log usage by:
 - [Alerting on unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
 - [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 - [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
+
+If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
 
 ## Log account configuration
 
@@ -51,9 +55,13 @@ To set up multiple indexes:
 
 Setting daily quotas on your indexes can help prevent billing overages when new log sources are added or if a developer unintentionally changes the logging levels to debug mode. See [Alert on indexes reaching their daily quota](#alert-on-indexes-reaching-their-daily-quota) on how to set up a monitor to alert when a percentage of the daily quota is reached within the past 24 hours.
 
+### Set up storage for long-term retention
+
+If you want to retain logs for an extended time while maintaining querying speeds similar to Standard Indexing, configure [Flex Logs][30]. This tier is best suited for logs that require longer retention and occasionally need to be queried urgently. Flex Logs decouples storage from compute costs so you can cost effectively retain more logs for longer without sacrificing visibility. Logs that need to be frequently queried should be stored in standard indexes.
+
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
 
 #### Set up max scan size to manage expensive rehydrations 
 
@@ -121,7 +129,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 1. Navigate to the [Log Explorer][14].
 2. Enter a [search query][15] that includes the index name (for example, `index:main`) to capture the log volume you want to monitor.
-3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
+3. Click **More...** and select **Create monitor**.
 4. Add tags (for example, `host, `services, and so on) to the **group by** field.
 5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
 6. Add a notification title, for example: 
@@ -134,6 +142,12 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
 7. Click **Create**.
 
+#### Alert on indexed logs volume since the beginning of the month
+
+Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `datadog_is_excluded:false` to only count indexed logs and the [metric monitor cumulative window][28] to monitor the count since the beginning of the month. 
+
+{{< img src="logs/guide/monthly_usage_monitor.png" alt="Setup a monitor to alert for the count of indexed logs since the beginning of the month" style="width:70%;">}}
+
 #### Alert on indexes reaching their daily quota
 
 [Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
@@ -144,9 +158,9 @@ To set up a monitor to alert when the daily quota is reached for an index:
 
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
 2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
-3. Add `datadog_index(datadog_index)` to the **group by** field. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
+3. Add `datadog_index` to the **group by** field. It automatically updates to `datadog_index(datadog_index)`. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
 4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
-5. Add a notification title and message in the **Notify your team** section.The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+5. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
 6. Click **Save**.
 
 This is an example of what the notification looks like in Slack:
@@ -203,7 +217,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [14]: https://app.datadoghq.com/logs
 [15]: /logs/explorer/search/
 [16]: /logs/indexes/#set-daily-quota
-[17]: /service_management/events/explorer/#facets
+[17]: /service_management/events/explorer/facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters
@@ -214,3 +228,6 @@ If you want to see user activities, such as who changed the retention of an inde
 [25]: /account_management/audit_trail/events/
 [26]: /account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
+[28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[29]: /observability_pipelines/
+[30]: /logs/log_configuration/flex_logs/

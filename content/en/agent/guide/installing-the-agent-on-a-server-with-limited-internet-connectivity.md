@@ -1,15 +1,16 @@
 ---
 title: Installing the Agent on a server with limited internet connectivity
-kind: guide
 aliases:
   - /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 further_reading:
 - link: "/agent/"
   tag: "Documentation"
   text: "Learn more about the Datadog Agent"
-- link: "/agent/proxy/"
+- link: "/agent/configuration/proxy/"
   tag: "Documentation"
   text: "Learn more about Proxy"
+algolia:
+  tags: ['airgap', 'airgapped', 'air gap', 'air gapped', 'air-gap', 'air-gapped']
 ---
 
 The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a few different endpoints to function properly and might not work with servers that have limited internet access. Specifically, these are:
@@ -29,7 +30,7 @@ The RPM packages for Agent 6 are available at [https://yum.datadoghq.com/stable/
 
 **Note**: The package bundles all resources necessary to run the Agent and checks (whether the integration is enabled or not). In terms of hard requirements, Python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
 
-Once the package has been transferred to the target system, it can be installed locally by using the appropriate package manager command. For yum, the command would follow the pattern:  
+Once the package has been transferred to the target system, it can be installed locally by using the appropriate package manager command. For yum, the command would follow the pattern:
 
 ```bash
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.<CPU_ARCHITECTURE>.rpm
@@ -53,10 +54,10 @@ Then, [start the Agent][7] using the appropriate command for your system.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/proxy
+[1]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: /agent/configuration/proxy
 [3]: https://yum.datadoghq.com/stable/6
 [4]: https://yum.datadoghq.com/stable/7
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /agent/guide/agent-commands/#start-the-agent
+[7]: /agent/configuration/agent-commands/#start-the-agent

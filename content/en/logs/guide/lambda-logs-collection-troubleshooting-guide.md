@@ -1,6 +1,5 @@
 ---
 title: Lambda Function Log Collection Troubleshooting Guide
-kind: documentation
 further_reading:
     - link: "https://www.datadoghq.com/blog/aws-lambda-telemetry-api/"
       tag: "Blog"
@@ -48,7 +47,7 @@ If you have enabled AWS Lambda metrics, you can view metrics related to Lambda i
 | `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
 | `aws.lambda.throttles`        | Count of invocation attempts that were throttled due to invocation rates exceeding customer limits |
 
-For more information on these and other AWS Lambda metrics, see [Amazon Lambda Metrics][6].
+For more information on these and other AWS Lambda metrics, see [AWS Lambda Metrics][6].
 
 ### Manage your function triggers
 

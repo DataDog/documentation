@@ -1,11 +1,7 @@
 ---
 title: Troubleshoot Database Monitoring setup for MySQL
-kind: documentation
 description: Troubleshoot Database Monitoring setup
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with MySQL, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
@@ -103,7 +99,7 @@ This option enables the tracking of a larger number of recent queries across all
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
 The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -187,6 +183,8 @@ performance_schema_max_sql_text_length=4096
 
 ### Query activity is missing
 
+<div class="alert alert-warning">Query Activity and Wait Event collection are not supported for Flexible Server, as these features require MySQL settings that are not available on a Flexible Server host.</div>
+
 Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
 
 #### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
@@ -216,10 +214,42 @@ The `schema` tag (also known as "database") is present on MySQL Query Metrics an
 
 If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
 
+## MariaDB known limitations
+
+### Incompatible InnoDB metrics
+
+The following InnoDB metrics are not available for certain MariaDB versions:
+
+| Metric Name                             | MariaDB Versions        |
+| --------------------------------------- | ----------------------- |
+| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
+| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
+| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
+| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
+| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
+| `mysql.innodb.rows_read`                | 10.11, 11.1             |
+| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+
+### MariaDB explain plan
+
+MariaDB does not produce the same JSON format as MySQL for explain plans. Certain explain plan fields may be missing from MariaDB explain plans, including `cost_info`, `rows_examined_per_scan`, `rows_produced_per_join`, and `used_columns`.
+
 [1]: /database_monitoring/setup_mysql/
 [2]: /agent/troubleshooting/
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /agent/guide/agent-log-files
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-log-files
 [5]: /database_monitoring/setup_mysql/advanced_configuration/
 [6]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [7]: /database_monitoring/data_collected/#which-queries-are-tracked

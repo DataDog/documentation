@@ -20,11 +20,13 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: ログ収集のトラブルシューティングガイド
-kind: documentation
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 title: Go ログ収集
 ---
 
-Go のログを Datadog に送信するには、ファイルにログを記録し、Datadog Agent でそのファイルを追跡します。オープンソースのロギングライブラリである [logrus][1] を使用すると、以下のようなセットアップが可能です。
+Go のログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で[追跡][11]します。オープンソースのロギングライブラリである [logrus][1] を使用すると、以下のようなセットアップが可能です。
 
 Datadog は、[カスタムパース規則][2]の使用を避け、ログを JSON で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
 
@@ -36,7 +38,7 @@ Datadog は、[カスタムパース規則][2]の使用を避け、ログを JSO
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -57,7 +59,7 @@ func main() {
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -91,8 +93,8 @@ func main() {
     logs:
 
       - type: file
-        path: "/path/to/your/go/log.log"
-        service: go
+        path: "<path_to_your_go_log>.log"
+        service: <service_name>
         source: go
         sourcecategory: sourcecode
     ```
@@ -121,9 +123,10 @@ func main() {
 [2]: /ja/logs/log_configuration/parsing
 [3]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [4]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[5]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[5]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [8]: /ja/logs/log_configuration/parsing/?tab=matchers
 [9]: /ja/logs/explorer/#overview
 [10]: /ja/tracing/other_telemetry/connect_logs_and_traces/go/
+[11]: /ja/glossary/#tail

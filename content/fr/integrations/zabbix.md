@@ -31,10 +31,9 @@ integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: zabbix
-oauth: {}
 public_title: zabbix
 short_description: Recueillez l'historique des éléments via l'API Zabbix et envoyez-les
   à Datadog en tant que métriques.

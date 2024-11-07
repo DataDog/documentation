@@ -9,8 +9,9 @@ categories:
 - log collection
 - network
 - provisioning
+custom_kind: integration
 dependencies: []
-description: Amazon Elastic Beanstalk のキーメトリクスを追跡
+description: AWS Elastic Beanstalk のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
 draft: false
 further_reading:
@@ -19,18 +20,18 @@ further_reading:
   text: AWS Elastic Beanstalk への Datadog のデプロイ
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
-integration_id: amazon-elastic-beanstalk
-integration_title: Amazon Elastic Beanstalk
+integration_id: ''
+integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
-public_title: Datadog-Amazon Elastic Beanstalk インテグレーション
-short_description: Amazon Elastic Beanstalk のキーメトリクスを追跡
+public_title: Datadog-AWS Elastic Beanstalk インテグレーション
+short_description: AWS Elastic Beanstalk のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣れたサーバーで、Java、.NET、PHP、Node.js、Python、Ruby、Go、および Docker を使用して開発された Web アプリケーションやサービスをデプロイおよびスケーリングするための使いやすいサービスです。
@@ -55,7 +56,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 AWS Elastic Beanstalk インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Elastic Beanstalk インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -310,7 +311,7 @@ func main() {
 
 コンテナ定義が完了したら、それを Elastic Beanstalk に送信します。具体的な手順については、AWS Elastic Beanstalk ドキュメント内の [マルチコンテナ Docker 環境][4]を参照してください。
 
-#### DogStatsD
+#### ヘルプ
 
 [マルチコンテナ Docker 環境][4]で DogStatsD を使用してアプリケーションコンテナからカスタムメトリクスを収集するには、`Dockerrun.aws.json` に以下の追加を行います。
 
@@ -402,7 +403,7 @@ func main() {
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the .NET Profiler
-kind: Documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60
@@ -138,9 +137,11 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 ## Reduce overhead when using the profiler
 
-### Enabling the profiler machine-wide
+The [different profile types][3] have a fixed CPU and memory overhead, so *the more profiled applications, the higher the overhead.*
 
-Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools, as the profiler has fixed overhead per profiled application. In order to reduce the amount of resources used by the profiler, you can:
+### Avoid enabling the profiler machine-wide
+
+Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools. To reduce the amount of resources used by the profiler, you can:
 - Increase the allocated resources, such as increasing CPU cores.
 - Profile only specific applications by setting environment in batch files instead of directly running the application.
 - Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
@@ -148,7 +149,10 @@ Datadog does not recommend enabling the profiler at machine-level or for all IIS
 
 ### Linux Containers
 
-The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
+The exact value can vary but the fixed overhead cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
+However, in that case, there will be a CPU consumption increase, even for idle services, because the profiler threads always scan the application's threads. The less available core, the more the CPU consumption increases. 
+
+Disabling the wall time profiler with the setting `DD_PROFILING_WALLTIME_ENABLED=0` decreases the CPU consumption by the profiler. If this is not enough, increase the CPU cores available for your containers.
 
 ### Disabling the profiler
 
@@ -186,3 +190,4 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+[3]: /profiler/profile_types/?code-lang=dotnet

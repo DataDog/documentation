@@ -3,10 +3,10 @@ aliases:
 - /fr/integrations/awslambda/
 - /fr/serverless/real-time-enhanced-metrics/
 categories:
-- cloud
 - aws
+- cloud
 - log collection
-ddtype: crawler
+- tracing
 dependencies: []
 description: Mesurez les temps d'exécution, les erreurs et les nombres d'appels de
   vos fonctions Lambda, ainsi que d'autres paramètres.
@@ -28,8 +28,13 @@ integration_id: amazon-lambda
 integration_title: Amazon Lambda
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
+monitors:
+  lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json
+  lambda_high_iterator_rate: assets/monitors/lambda_high_iterator_rate.json
+  lambda_high_throttles: assets/monitors/lambda_high_throttles.json
+  lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
 public_title: Intégration Datadog/Amazon Lambda
 short_description: Mesurez les temps d'exécution, les erreurs et les nombres d'appels
@@ -37,7 +42,7 @@ short_description: Mesurez les temps d'exécution, les erreurs et les nombres d'
 version: '1.0'
 ---
 
-<div class="alert alert-warning">Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="https://docs.datadoghq.com/serverless">documentation relative à l'Informatique sans serveur</a> pour en savoir plus.</div>
+<div class="alert alert-warning">Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="/serverless">documentation relative à l'Informatique sans serveur Datadog</a> pour recueillir en temps réel des données de télémétrie depuis vos fonctions Lambda.</div>
 
 ## Présentation
 
@@ -45,7 +50,7 @@ Amazon Lambda est un service de calcul qui exécute du code en réponse à des �
 
 Activez cette intégration pour commencer à recueillir des métriques CloudWatch. Cette page décrit également la marche à suivre pour configurer l'envoi de métriques custom, le logging et le tracing pour vos fonctions Lambda.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -53,11 +58,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de métriques
 
-{{< img src="integrations/amazon_lambda/lambda_metrics.png" alt="Diagramme de l'architecture de collecte de métriques runtime depuis AWS Lambda" >}}
-
 #### Métriques AWS Lambda
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `Lambda` est cochée dans la section concernant la collecte des métriques.
+1. Sur la [page de l'intégration AWS][2], vérifiez que `Lambda` est activé dans l'onglet `Metric Collection`.
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon Lambda. Pour en savoir plus, consultez la section relative aux [stratégies Lambda][4] de la documentation AWS.
 
     | Autorisation AWS     | Description                                  |
@@ -72,107 +75,54 @@ Une fois l'installation terminée, vous pouvez consulter l'ensemble de vos fonct
 
 ## Données collectées
 
+<div class="alert alert-warning">Si vous utilisez des extensions AWS Lambda, la métrique <em>duration</em> transmise par AWS inclut la durée <em>post_runtime_extensions_duration</em> utilisée par les extensions Lambda <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">effectuant des activités après l'envoi de la réponse de la fonction</a>. Pour surveiller les performances réelles de la fonction, utilisez le calcul <em>durée - post_runtime_extensions_duration</em> ou la <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">métrique optimisée Datadog</a> <em>aws.lambda.enhanced.runtime_duration</em>.</div>
+
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de la fonction et les groupes de sécurité.
+
 ### Métriques
 {{< get-metrics-from-git "amazon_lambda" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de la fonction et les groupes de sécurité.
-
-Les métriques custom sont uniquement taguées avec le nom de la fonction.
-
 ### Événements
 
-L'intégration AWS Lambda n'inclut aucun événement.
+L'intégration Lambda AWS recueille les événements de déploiement Lambda à partir d'AWS CloudTrail si [le suivi des déploiements sans serveur Datadog][9] est activé.
 
 ### Checks de service
 
 L'intégration AWS Lambda n'inclut aucun check de service.
 
-## Sans serveur
-
-#### Métriques Lambda optimisées transmises en temps réel
-
-Datadog génère en temps réel des métriques runtime Lambda prêtes à l'emploi pour les runtimes Node.js, Python et Ruby. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][9].
-
-##### Activation des métriques Lambda optimisées transmises en temps réel
-
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][9].
-
-### Collecte de logs
+### Métriques Lambda optimisées transmises en temps réel
 
 Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][10].
 
-### Collecte de traces
-
-Datadog prend en charge le tracing distribué pour vos fonctions AWS Lambda, via l'[APM Datadog][11] ou [AWS X-Ray][12]. Vous pouvez utiliser l'un de ces ensembles de bibliothèques client pour générer des traces. L'[APM Datadog][11] associe ensuite automatiquement les traces des applications s'exécutant sur des hosts, des conteneurs et des fonctions sans serveur. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][13].
-
-#### Tracing avec l'APM Datadog
-
-Les bibliothèques de tracing [Node.js][14], [Python][15] et [Ruby][16] Datadog prennent en charge le tracing distribué pour AWS Lambda. D'autres runtimes seront prochainement compatibles. La meilleure façon d'ajouter des fonctionnalités de tracing à votre application consiste à utiliser la [bibliothèque Lambda Datadog][17], qui comprend la bibliothèque de tracing Datadog en tant que dépendance. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][13].
-
-#### Configurer le tracing de fonctions AWS Lambda et de hosts
-
-Lorsque cela est approprié, Datadog associe les traces AWS X-Ray aux traces de l'APM Datadog natives. Vos traces peuvent ainsi dresser un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions Lambda AWS, de conteneurs, de hosts sur site ou de services gérés. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][18].
-
-#### Organiser votre infrastructure avec les tags
-
-Tout [tag][19] appliqué à votre fonction Lambda devient automatiquement une nouvelle dimension que vous pouvez utiliser pour filtrer vos traces. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][20].
-
-### Intégrations sans serveur
-
-Les intégrations de fonctions Lambda suivantes fournissent des fonctionnalités supplémentaires pour la surveillance d'applications sans serveur. Pour en savoir plus, consultez la documentation relative à l'informatique sans serveur :
-
-- [AWS Step Functions][21]
-- [Amazon EFS pour Lambda][22]
-- [Lambda@Edge][23]
-
 ### Métriques custom
 
-Installez la bibliothèque Lambda Datadog pour recueillir et envoyer des métriques custom. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][24].
+Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][11].
 
-#### Passer aux métriques de distribution
+### Collecte de logs
 
-Les métriques de distribution vous permettent de sélectionner l'agrégation souhaitée au moment de créer votre graphique ou de formuler votre requête, et non au moment d'envoyer la métrique. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][25].
+Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][12].
 
-#### Tagging de métriques custom
+### Collecte de traces
 
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][26].
+Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][13].
 
-#### Métriques custom synchrones et asynchrones
+### Lambda@Edge
 
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][27].
+Datadog ajoute automatiquement les tags `at_edge`, `edge_master_name` et `edge_master_arn` sur vos métriques Lambda afin d'obtenir une vue agrégée de vos métriques et logs de fonctions Lambda lorsqu'elles sont exécutées dans des emplacements Edge.
 
-##### Activer les métriques custom asynchrones
+Le tracing distribué n'est _pas_ pris en charge pour les fonctions Lambda@Edge.
 
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][28].
+## Fonctionnalités de surveillance prêtes à l'emploi
 
-#### Exemple de code pour l'envoi de métriques custom
+L'intégration AWS Lambda propose des fonctionnalités de surveillance prêtes à l'emploi vous permettant de surveiller et d'optimiser vos performances.
 
-Dans le code de votre fonction, vous devez importer les méthodes nécessaires à partir de la couche Lambda et ajouter un wrapper autour du gestionnaire de votre fonction. Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][29].
-
-#### Exécution dans un VPC
-
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][30].
-
-#### Bibliothèques tierces
-
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][31].
-
-#### [OBSOLÈTE] CloudWatch Logs
-
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][32].
-
-### Couche Lambda Datadog
-
-Pour en savoir plus, consultez la [documentation relative à l'informatique sans serveur][33].
-
-#### Installer et utiliser la couche Lambda Datadog
-
-Pour en savoir plus, consultez la [documentation relative au sans serveur][33].
+- Dashboard AWS Lambda : bénéficiez d'une vue d'ensemble détaillée de vos fonctions Lambda grâce au [dashboard AWS Lambda][14] prête à l'emploi.
+- Monitors recommandés : activez les [monitors AWS Lambda recommandés][15] pour détecter des problèmes de façon proactive et recevoir des alertes en temps opportun.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][34].
+Besoin d'aide ? Contactez [l'assistance Datadog][16].
 
 ## Pour aller plus loin
 
@@ -180,37 +130,19 @@ Besoin d'aide ? Contactez [l'assistance Datadog][34].
 
 
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
+[1]: /fr/integrations/amazon_web_services/
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: /fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_lambda
+[5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
-[7]: https://docs.datadoghq.com/fr/serverless
+[7]: /fr/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[9]: /fr/serverless/enhanced_lambda_metrics/
-[10]: /fr/serverless/forwarder/
-[11]: https://docs.datadoghq.com/fr/tracing/
-[12]: https://docs.datadoghq.com/fr/integrations/amazon_xray/
+[9]: /fr/serverless/deployment_tracking
+[10]: /fr/serverless/enhanced_lambda_metrics/
+[11]: /fr/serverless/custom_metrics/#custom-metrics
+[12]: /fr/serverless/forwarder/
 [13]: /fr/serverless/distributed_tracing/
-[14]: https://docs.datadoghq.com/fr/tracing/setup/nodejs/
-[15]: https://docs.datadoghq.com/fr/tracing/setup/python/
-[16]: https://docs.datadoghq.com/fr/tracing/setup/ruby/
-[17]: /fr/serverless/datadog_lambda_library/
-[18]: /fr/tracing/serverless_functions/#tracing-across-aws-lambda-and-hosts
-[19]: https://docs.datadoghq.com/fr/tagging/
-[20]: /fr/tracing/serverless_functions/#organizing-your-serverless-infrastructure-with-tags
-[21]: /fr/serverless/serverless_integrations#aws-step-functions
-[22]: /fr/serverless/serverless_integrations#amazon-efs-for-lambda
-[23]: /fr/serverless/serverless_integrations#lambda-edge
-[24]: /fr/serverless/custom_metrics/#custom-metrics
-[25]: /fr/serverless/custom_metrics/#understanding-distribution-metrics
-[26]: /fr/serverless/custom_metrics/#tagging-custom-metrics
-[27]: /fr/serverless/custom_metrics/#synchronous-vs-asynchronous-custom-metrics
-[28]: /fr/serverless/custom_metrics/#enabling-asynchronous-custom-metrics
-[29]: /fr/serverless/custom_metrics/#custom-metrics-sample-code
-[30]: /fr/serverless/custom_metrics/#running-in-a-vpc
-[31]: /fr/serverless/custom_metrics/#using-third-party-libraries
-[32]: /fr/serverless/custom_metrics/#deprecated-using-cloudwatch-logs
-[33]: /fr/serverless/installation/
-[34]: https://docs.datadoghq.com/fr/help/
+[14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
+[15]: https://app.datadoghq.com/monitors/recommended
+[16]: /fr/help/

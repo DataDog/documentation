@@ -1,14 +1,12 @@
 ---
 aliases:
-- /fr/logs/search
 - /fr/logs/search-syntax
-- /fr/logs/explorer/search/
 - /fr/logs/search_syntax/
 description: Effectuez des recherches dans l'ensemble de vos logs.
 further_reading:
 - link: /logs/explorer/#visualiser-les-donnees
   tag: Documentation
-  text: Effectuer des analyses de logs
+  text: Découvrir comment visualiser des logs
 - link: /logs/explorer/#patterns
   tag: Documentation
   text: Détecter les patterns dans vos logs
@@ -17,8 +15,7 @@ further_reading:
   text: Apprendre à traiter vos logs
 - link: /logs/explorer/saved_views/
   tag: Documentation
-  text: Configurer automatiquement votre vue Log Explorer
-kind: documentation
+  text: En savoir plus sur les vues enregistrées
 title: Syntaxe de recherche de logs
 ---
 
@@ -32,49 +29,26 @@ Il existe deux types de termes :
 
 * Une **séquence** est un groupe de mots entre guillemets, comme `hello dolly`.
 
-Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser l'un des opérateurs booléens suivants :
+Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser l'un des opérateurs booléens sensibles à la casse suivants :
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Opérateur** | **Description**                                                                                        | **Exemple**                  |
 | `AND`        | **Intersection** : les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut). | authentication AND failure   |
 | `OR`         | **Union** : un des deux termes figure dans les événements sélectionnés.                                             | authentication OR password   |
-| `-`          | **Exclusion** : le terme suivant ne figure PAS dans les événements sélectionnés.                                                  | authentication AND -password |
+| `-`          | **Exclusion** : le terme suivant ne figure PAS dans l'événement (cela s'applique à chaque recherche de texte brut).                                                  | authentication AND -password |
 
-## Saisie automatique
+## Échapper les caractères spéciaux et les espaces
 
-Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
+Les caractères suivants sont considérés comme spéciaux : `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` et `\`. Tout comme les espaces, ils doivent être échappés avec le caractère `\`.
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="Saisie automatique dans la barre de recherche" style="width:80%;">}}
+Il n'est pas possible de rechercher des caractères spéciaux dans un message de log. Vous pouvez toutefois rechercher des caractères spéciaux au sein d'un attribut.
 
-## Échappement de caractères spéciaux
-
-Les caractères `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` ont un rôle spécial. De plus, le caractère `/` doit être échappé par `\`. Il n'est pas possible de rechercher ces caractères spéciaux dans un message de log. Vous avez toutefois la possibilité de les rechercher dans un attribut. Pour rechercher des caractères spéciaux, parsez-les dans un attribut avec le [parser grok][1], puis cherchez les logs qui contiennent cet attribut.
+Pour rechercher des caractères spéciaux, parsez-les dans un attribut avec le [parser Grok][1], puis recherchez les logs contenant l'attribut en question.
 
 
 ## Recherche d'attributs
 
-{{< site-region region="gov,us3,us5" >}}
-Pour rechercher un attribut spécifique, commencez par l'[ajouter en tant que facette][1], puis ajoutez `@` pour indiquer que vous recherchez une facette.
-
-Par exemple, si le nom de votre attribut est **url** et que vous souhaitez filtrer les résultats en fonction de la valeur de **url** `www.datadoghq.com`, saisissez :
-
-```
-@url:www.datadoghq.com
-```
-
-**Remarques** :
-
-1. Les recherches de facettes sont sensibles à la casse. Effectuez une recherche en texte intégral pour obtenir des résultats non sensibles à la casse. Vous pouvez aussi utiliser le filtre lowercase avec votre parser Grok lors du parsing pour obtenir des résultats de recherche non sensibles à la casse.
-
-2. Lorsque vous effectuez une recherche en fonction d'une valeur de facette qui contient des caractères spéciaux, vous devez utiliser des caractères d'échappement ou des guillemets.
-Par exemple, pour rechercher la facette `my_facet` avec la valeur `hello:world`, utilisez `@my_facet:hello\:world` ou `@my_facet:"hello:world"`.
-Pour rechercher un caractère spécial ou une espace unique, utilisez le wildcard `?`. Par exemple, pour rechercher la facette `my_facet` avec la valeur `hello world`, utilisez `@my_facet:hello?world`.
-
-[1]: /fr/logs/explorer/facets/
-
-{{< /site-region >}}
-{{< site-region region="us,eu" >}}
 Pour rechercher un attribut spécifique, ajoutez `@` pour indiquer que vous recherchez un attribut.
 
 Par exemple, si le nom de votre attribut est **url** et que vous souhaitez filtrer les résultats en fonction de la valeur de **url** `www.datadoghq.com`, saisissez :
@@ -91,9 +65,8 @@ Par exemple, si le nom de votre attribut est **url** et que vous souhaitez filtr
 2. Les recherches d'attributs sont sensibles à la casse. Effectuez une recherche en texte intégral pour obtenir des résultats non sensibles à la casse. Vous pouvez aussi utiliser le filtre `lowercase` avec votre parser Grok lors du parsing pour obtenir des résultats de recherche non sensibles à la casse.
 
 3. Lorsque vous recherchez une valeur d'attribut qui contient des caractères spéciaux, vous devez utiliser des caractères d'échappement ou des guillemets.
-Par exemple, pour un attribut `my_attribute` ayant pour valeur `hello:world`, recherchez `@my_attribute:hello\:world` ou `@my_attribute:"hello:world"`.
-Pour rechercher un caractère spécial ou une espace unique, utilisez le wildcard `?`. Par exemple, pour un attribut `my_attribute` ayant pour valeur `hello world`, recherchez `@my_attribute:hello?world`.
-{{< /site-region >}}
+    - Par exemple, pour un attribut `my_attribute` ayant pour valeur `hello:world`, recherchez `@my_attribute:hello\:world` ou `@my_attribute:"hello:world"`.
+    - Pour rechercher un caractère spécial ou une espace unique, utilisez le wildcard `?`. Par exemple, pour un attribut `my_attribute` ayant pour valeur `hello world`, recherchez `@my_attribute:hello?world`.
 
 Exemples :
 
@@ -102,12 +75,27 @@ Exemples :
 | `@http.url_details.path:"/api/v1/test"`                              | Recherche tous les logs correspondants à `/api/v1/test` dans l'attribut `http.url_details.path`.                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | Recherche tous les logs dont la valeur de l'attribut `http.url` commence par `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Recherche tous les logs dont la valeur `http.status_code` est comprise entre 200 et 299 et dont la valeur de l'attribut `http.url_details.path` commence par `/api/v1/` |
+| `-@http.status_code:*`                                                | Recherche tous les logs ne contenant pas l'attribut `http.status_code` |
+
+### Effectuer une recherche avec la syntaxe CIDR
+La syntaxe Classless Inter Domain Routing (CIDR) permet aux utilisateurs de définir de façon succincte une plage d'adresses IP (ou blocs CIDR). Cette syntaxe sert généralement à définir un réseau (comme un VPC) ou un sous-réseau (comme un sous-réseau public ou privé au sein d'un VPC).
+
+Les utilisateurs peuvent se servir de la fonction `CIDR()` pour interroger les attributs contenus dans des logs à l'aide de la syntaxe CIDR. La fonction `CIDR()` doit être passée dans un attribut de log sous forme de paramètre de filtre, et être suivie d'un ou de plusieurs blocs CIDR.
+
+#### Exemples
+- `CIDR(@network.client.ip,13.0.0.0/8)` renvoie et filtre les logs pour lesquels les adresses IP du champ `network.client.ip` correspondent au bloc CIDR 13.0.0.0/8.
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` renvoie et filtre les logs pour lesquels une adresse IP d'un attribut de tableau `network.ip.list` correspond au bloc 13.0.0.0/8 ou au bloc 15.0.0.0/8.
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` renvoie et filtre les événements de rejet du pare-feu Palo Alto qui provienne du sous-réseau 13.0.0.0/8.
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` renvoie tous les logs de VPC qui ne proviennent pas de 13.0.0.0/8, mais dont la destination est le sous-réseau 15.0.0.0/8. Cela vous permet d'analyser le trafic réseau de vos environnements entre les sous-réseaux.
+
+La fonction `CIDR()` prend à la fois en charge la syntaxe CIDR IPv4 et IPv6. Elle peut être utilisée dans le Log Explorer, la vue Live Tail, les widgets de logs dans les dashboards, les monitors de log et les configurations de log.
+
 
 ## Wildcards
 
 ### Wildcard pour plusieurs caractères
 
-Afin d'effectuer une recherche générique avec plusieurs caractères, utilisez le symbole `*` comme illustré ci-dessous :
+Afin d'effectuer une recherche avec un wildcard pour plusieurs caractères, utilisez le symbole `*` comme illustré ci-dessous :
 
 * `service:web*` renvoie tous les messages de log dont le service commence par `web`.
 * `web*` renvoie tous les messages de log commençant par `web`
@@ -115,15 +103,8 @@ Afin d'effectuer une recherche générique avec plusieurs caractères, utilisez 
 
 **Remarque** : les wildcards sont uniquement considérés comme tels lorsqu'ils se trouvent en dehors de guillemets. Par exemple, `”*test*”` renvoie un log qui contient le texte `*test*` dans son message, tandis que `*test*` renvoie un log qui contient le texte test à n'importe quel endroit de son message.
 
-{{< site-region region="gov,us3,us5" >}}
-Les wildcards peuvent être utilisés au sein de facettes avec cette syntaxe. La requête suivante renvoie tous les services se terminant par le texte `mongo` :
+Les wildcards peuvent être utilisés au sein de tags et d'attributs (qu'ils comportent ou non une facette) avec cette syntaxe. La requête suivante renvoie tous les services se terminant par le texte `mongo` :
 <p> </p>
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-Les wildcards peuvent être utilisés au sein de tags et d'attributs (à facette ou non) avec cette syntaxe. La requête suivante renvoie tous les services se terminant par le texte `mongo` :
-<p> </p>
-{{< /site-region >}}
 <p></p>
 
 ```
@@ -140,20 +121,13 @@ En revanche, les logs contenant le texte `NETWORK` et faisant partie d'une facet
 
 ### Wildcard de recherche
 
-{{< site-region region="gov,us3,us5" >}}
-Lorsque vous recherchez une valeur de facette qui contient des caractères spéciaux ou qui nécessite des caractères d'échappement ou des guillemets, utilisez le wildcard `?` pour renvoyer un caractère spécial ou une espace unique. Par exemple, pour rechercher une facette `my_facet` ayant pour valeur `hello world`, utilisez `@my_facet:hello?world`.
+Lorsque vous recherchez une valeur d'attribut ou de tag qui contient des caractères spéciaux ou qui nécessite des caractères d'échappement ou des guillemets, utilisez le wildcard `?` pour renvoyer un caractère spécial ou une espace unique. Par exemple, pour rechercher un attribut `my_attribute` avec la valeur `hello world`, utilisez : `@my_attribute:hello?world`.
 <p> </p>
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-Lorsque vous recherchez une valeur d'attribut ou de tag qui contient des caractères spéciaux ou qui nécessite des caractères d'échappement ou des guillemets, utilisez le wildcard `?` pour renvoyer un caractère spécial ou une espace unique. Par exemple, pour rechercher un attribut `my_attribute` ayant pour valeur `hello world`, utilisez `@my_attribute:hello?world`.
-<p> </p>
-{{< /site-region >}}
 
 ## Valeurs numériques
 
-Pour rechercher un attribut numérique, commencez par l'[ajouter en tant que facette][2]. Vous pouvez ensuite utiliser des opérateurs numériques (`<`,`>`, `<=` ou `>=`) pour rechercher vos facettes numériques.
-Par exemple, pour récupérer tous les logs dont le délai de réponse est supérieur à 100 ms, utilisez :<p> </p>
+Pour pouvoir rechercher une valeur dans un attribut numérique, commencez par [l'ajouter en tant que facette][2]. Vous pouvez alors utiliser des opérateurs numériques (`<`,`>`, `<=` ou `>=`) pour rechercher une valeur parmi des facettes numériques. Par exemple, recherchez ce qui suit pour récupérer tous les logs dont le temps de réponse dépasse 100 ms :
+<p> </p>
 
 ```
 @http.response_time:>100
@@ -179,23 +153,18 @@ Si vos tags ne respectent pas les [recommandations relatives aux tags][5] et n'u
 
 ## Tableaux
 
-Vous pouvez ajouter des facettes à des tableaux de chaînes ou de nombres. Toutes les valeurs incluses dans le tableau sont énumérées dans la facette et peuvent être utilisées pour effectuer une recherche de logs.
-
 Dans l'exemple ci-dessous, cliquer sur la valeur `Peter` dans la facette renvoie tous les logs contenant un attribut `users.names` dont la valeur est soit `Peter`, soit un tableau qui contient `Peter` :
 
 {{< img src="logs/explorer/search/array_search.png" alt="Tableau et facettes" style="width:80%;">}}
 
-{{< site-region region="us,eu" >}}
-
 **Remarque** : il est également possible de rechercher des attributs de tableau sans facette à l'aide d'une syntaxe similaire.
 
-Dans l'exemple suivant, les logs CloudWatch pour Windows contiennent un tableau d'objets JSON sous `@Event.EventData.Data`.
+Dans l'exemple suivant, les logs CloudWatch pour Windows contiennent un tableau d'objets JSON sous `@Event.EventData.Data`. Il est impossible de créer une facette sur un tableau d'objets JSON. Toutefois, vous pouvez effectuer une recherche à l'aide de la syntaxe suivante.
 
 * `@Event.EventData.Data.Name:ObjectServer` renvoie tous les logs ayant pour clé `Name` et pour valeur `ObjectServer`.
 
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Requête sans facette sur un tableau d'objets JSON" style="width:80%;">}}
 <p> </p>
-{{< /site-region >}}
 
 ## Recherches enregistrées
 
@@ -211,3 +180,4 @@ Les [vues enregistrées][6] contiennent votre requête de recherche, les colonne
 [4]: /fr/integrations/#cat-log-collection
 [5]: /fr/getting_started/tagging/#tags-best-practices
 [6]: /fr/logs/explorer/saved_views/
+[7]: /fr/logs/explorer/facets/#facet-panel

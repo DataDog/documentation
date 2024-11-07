@@ -1,6 +1,5 @@
 ---
 title: Custom Metrics from AWS Lambda Serverless Applications
-kind: documentation
 ---
 
 ## Overview
@@ -9,7 +8,7 @@ There are a few different ways to submit custom metrics to Datadog from a Lambda
 
 - **[Creating custom metrics from logs or traces](#creating-custom-metrics-from-logs-or-traces)**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can generate custom metrics from logs and traces without re-deploying or making any changes to your application code.
 - **[Submitting custom metrics using the Datadog Lambda extension](#with-the-datadog-lambda-extension)**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda extension][1].
-- **[Submitting custom metrics using the Datadog Forwarder Lambda](#with-the-datadog-forwarder)**: If you are sending telemetry from your Lambda function over the Datadog Forwarder Lambda, you can submit customer metrics over logs using the Datadog-provided helper functions.
+- **[Submitting custom metrics using the Datadog Forwarder Lambda](#with-the-datadog-forwarder)**: If you are sending telemetry from your Lambda function over the Datadog Forwarder Lambda, you can submit custom metrics over logs using the Datadog-provided helper functions.
 - **[(Deprecated) Submitting custom metrics from CloudWatch logs](#deprecated-cloudwatch-logs)**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been deprecated. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
 - **(Deprecated) Submitting custom metrics using the Datadog Lambda library**: The Datadog Lambda library for Python, Node.js and Go support sending custom metrics synchronously from the runtime to Datadog by blocking the invocation when `DD_FLUSH_TO_LOG` is set to `false`. Besides the performance overhead, metric submissions may also encounter intermittent errors due to the lack of retries because of transient network issues. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
 - **(Not recommended) Using a third-party library**: Most third-party libraries do not submit metrics as distributions and can lead to under-counted results. You may also encounter intermittent errors due to the lack of retries because of transient network issues.
@@ -58,9 +57,9 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. Follow the general [serverless installation instructions][8] appropriate for your Lambda runtime.
 1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
-1. Follow the sample code or instructions below to submit your custom metric. 
+1. Follow the sample code or instructions below to submit your custom metric.
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -111,25 +110,6 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   )
 }
 ```
-
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-
-```ruby
-require 'datadog/lambda'
-
-def handler(event:, context:)
-    # You only need to wrap your function handler (Not helper functions).
-    Datadog::Lambda.wrap(event, context) do
-        Datadog::Lambda.metric(
-          'coffee_house.order_value',         # Metric name
-          12.45,                              # Metric value
-          "product":"latte", "order":"online" # Associated tags
-        )
-    end
-end
-```
-
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -162,6 +142,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         response.setStatusCode(200);
         return response;
     }
+
+    static {
+        // ensure all metrics are flushed before shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
+    }
 }
 ```
 
@@ -178,12 +174,12 @@ using System.IO;
 using StatsdClient;
 
 namespace Example
-{            
+{
   public class Function
   {
     static Function()
     {
-        // instantiate the statsd client 
+        // instantiate the statsd client
         var dogstatsdConfig = new StatsdConfig
         {
             StatsdServerName = "127.0.0.1",

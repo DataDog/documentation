@@ -1,7 +1,8 @@
 ---
 categories:
 - collaboration
-- notification
+- notifications
+custom_kind: integration
 dependencies: []
 description: Datadog のアラートとグラフをチームの DingTalk Group に送信
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/
@@ -12,7 +13,6 @@ integration_id: dingtalk
 integration_title: DingTalk
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: dingtalk
 public_title: Datadog-DingTalk インテグレーション
@@ -20,6 +20,7 @@ short_description: Datadog のアラートとグラフをチームの DingTalk G
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 DingTalk と統合して、以下のことができます。
@@ -55,7 +56,7 @@ DingTalk インテグレーションは、メトリクスを提供しません�
 
 DingTalk インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 DingTalk インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -63,6 +64,6 @@ DingTalk インテグレーションには、サービスのチェック機能�
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/dingtalk
+[1]: https://app.datadoghq.com/integrations/dingtalk
 [2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [3]: https://docs.datadoghq.com/ja/help/

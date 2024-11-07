@@ -1,0 +1,216 @@
+{{ $media := .media }}
+{{ $app_id := .context.Params.app_id | default "" }}
+{{ $asset_len := ($media | default slice) | len  }}
+{{ $is_scrollable_carousel := (gt $asset_len 3)}}
+{{ $carousel_item_vertical := newScratch }}
+
+<div 
+@keydown.window.left="navigateCarousel('prev')"
+@keydown.window.right="navigateCarousel('next')"
+class="integrations-carousel container container p-0"
+x-data="{
+    activeSlide: 0,
+    scrollByHeight: 0,
+    activeBtnOffsetTop: 0,
+    verticalCarouselEl: $refs.verticalCarousel,
+    isScrollable: {{$is_scrollable_carousel}},
+    navigateCarousel (direction) {
+        // Navigates the carousel based on the provided direction.
+
+        $store.integrationsModal.pauseVideo($refs)
+
+        const max = {{ $asset_len }} - 1
+        let endReached = false
+        if(direction === 'next'){
+            if(this.activeSlide === max){
+                this.activeSlide = 0
+                this.activeBtnOffsetTop = this.scrollByHeight * 3
+                this.verticalCarouselEl.style.scrollBehavior = 'auto'
+                endReached = true
+            }else{
+                this.activeSlide += 1
+                this.activeBtnOffsetTop += this.scrollByHeight
+            }
+        }else if(direction === 'prev'){
+            if(!this.activeSlide){
+                this.activeSlide = {{ $asset_len }} - 1
+                this.activeBtnOffsetTop = this.verticalCarouselEl.scrollHeight - (this.scrollByHeight*2)
+                this.verticalCarouselEl.style.scrollBehavior = 'auto'
+                endReached = true
+            }else{
+                this.activeSlide -= 1
+                this.activeBtnOffsetTop -= this.scrollByHeight
+            }
+        }else{
+            // if vertical carousel is not scrollable, 'direction' is the index of the selected btn
+            this.activeSlide = direction
+        }
+
+        // scroll vertical carousel to correct position
+        this.verticalCarouselEl.scrollTop = this.activeSlide * this.scrollByHeight
+
+        if(endReached){
+            this.verticalCarouselEl.style.scrollBehavior = 'smooth'
+        }
+    },
+    chooseVerticalDirection (btn, btnIdx) {
+        // Determines the vertical direction to navigate the vertical carousel.
+        if(this.isScrollable){
+            if (btn.offsetTop > this.activeBtnOffsetTop) {
+                return 'next'
+            }else if(btn.offsetTop < this.activeBtnOffsetTop) {
+                return 'prev'
+            }
+        }
+        return btnIdx
+    },
+    navigateVerticalNavOnResize () {
+        // Handles navigation of the vertical carousel on window resize.
+        if(this.isScrollable){
+            this.verticalCarouselEl.style.scrollBehavior = 'auto'
+            this.verticalCarouselEl.scrollTop = this.activeSlide * this.scrollByHeight
+            this.scrollByHeight = this.verticalCarouselEl.children[1].offsetTop
+            this.verticalCarouselEl.style.scrollBehavior = 'smooth'
+        }
+    },
+    shouldShowActiveHorizontalSlide (idx) {
+        // Determine whether horizontal carousel item should be visible 
+        return idx === this.activeSlide
+    },
+    isActiveVertical (idx, btn) {
+        // Determines the active state of the vertical carousel item / button
+        if(this.isScrollable && (btn.offsetTop === this.activeBtnOffsetTop)){
+            return 'active'
+        }else if (!this.isScrollable && (idx === this.activeSlide)){
+            return 'active'
+        }
+    },
+    setScrollByHeight () {
+        // Sets the scroll distance for the vertical carousel based on the height of a carousel item or button.
+        if(this.isScrollable){
+            this.scrollByHeight = this.verticalCarouselEl.children[1].offsetTop
+            if(window.innerWidth < 768){
+                this.scrollByHeight = 103 
+            }
+        }
+    },
+    setActiveBtnOffsetTop () {
+        // Determine the initial offset position of the active button.
+        this.activeBtnOffsetTop = window.innerWidth < 768 ? 103 : this.scrollByHeight * 3
+    }
+}">
+    <div class="carousel-top-row row g-0">
+        {{/*  Carousel (horizontal)  */}}
+        <div class="carousel-wrapper__horizontal col-12 h-100 pr-1 position-relative col-md-9">
+            <div class="carousel-items__horizontal h-100 position-relative">
+                {{ range $idx, $elm := $media }}
+                <div
+                @click="{{if not $elm.vimeo_id}}$store.integrationsModal.openModal(activeSlide){{end}}" 
+                id="carousel-item-horizontal-{{add $idx 1}}" 
+                class="carousel-item__horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}" 
+                :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+                x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
+                x-transition.opacity.duration.500ms>
+                    {{ if eq $elm.media_type "image"}}
+                    <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
+                    {{ else }}
+                    <iframe x-ref="iframe" class="d-none" src="https://player.vimeo.com/video/{{ $elm.vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3"></iframe>
+                    <img 
+                    x-ref="playOverlay"
+                    class="play-overlay position-relative h-100 w-100 rounded-1" 
+                    src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
+                    alt="{{ $elm.caption }}">
+                    <button 
+                    @click="$store.integrationsModal.playVideo($refs)"
+                    x-ref="playBtn" 
+                    class="play-btn rounded-circle position-absolute top-50 start-50 translate-middle">
+                        <div class="play-icon position-relative"></div>
+                    </button>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            {{ if gt $asset_len 1 }}
+            <button 
+            class="carousel-controller__arrow prev position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0 p-0" 
+            @click="navigateCarousel('prev')">
+                <div class="control-arrow"></div>
+                <div class="visually-hidden">Previous</div>
+            </button>
+            <button 
+            class="carousel-controller__arrow next position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0 p-0" 
+            @click="navigateCarousel('next')">
+                <div class="control-arrow"></div>
+                <div class="visually-hidden">Next</div>
+            </button>
+            {{ end }}
+        </div>
+        {{/*  Carousel (vertical)  */}}
+        <div 
+        class="carousel-items__vertical d-none overflow-hidden h-100 d-md-block col-md-3"
+        x-init="setScrollByHeight(); setActiveBtnOffsetTop()"
+        x-ref="verticalCarousel"
+        @resize.window="navigateVerticalNavOnResize()">
+            {{ range $idx, $elm := $media }}
+                {{ $base_idx := (sub $asset_len 4) }}
+                {{ if and (gt $idx $base_idx) $is_scrollable_carousel}}
+                {{ $carousel_item_vertical.Set "idx" (sub $idx $base_idx) }}
+                <button 
+                id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
+                data-index="{{ add $idx 1 }}"
+                class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
+                :class="isActiveVertical({{$idx}}, $el)"
+                @click="navigateCarousel(chooseVerticalDirection($el))"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+                >
+                </button>
+                {{ end }}
+            {{ end }}
+            {{ range $idx, $elm := $media }}
+            {{ $carousel_item_vertical.Add "idx" 1 }}
+            <button
+            id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
+            data-index="{{ add $idx 1 }}"
+            class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
+            :class="isActiveVertical({{$idx}}, $el)"
+            @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
+            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+            >
+            </button>
+            {{ end }}
+            {{ range $idx, $elm := first 1 $media }}
+                {{ if $is_scrollable_carousel}}
+                {{ $carousel_item_vertical.Add "idx" 1 }}
+                <button 
+                id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
+                data-index="{{ add $idx 1 }}"
+                class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
+                :class="isActiveVertical({{$idx}}, $el)"
+                @click="navigateCarousel(chooseVerticalDirection($el))"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+                >
+                </button>
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+    {{/*  Carousel item description  */}}
+    <div class="carousel-item-descriptions p-0">
+        {{ range $idx, $el := $media }}
+        <div 
+        id="carousel-item-description-{{ add $idx 1 }}"
+        class="carousel-item-description" 
+        :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+        x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
+            <div class="item-counter">
+                <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
+            </div>
+            <div class="item-caption">
+                <p class="m-0">{{$el.caption}}</p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>

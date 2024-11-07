@@ -1,6 +1,5 @@
 ---
 title: Case Management
-kind: documentation
 aliases:
 - /monitors/case_management/
 further_reading:
@@ -10,56 +9,41 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
+  tag: "blog"
+  text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
+- link: "https://www.datadoghq.com/blog/datadog-service-management/"
+  tag: "Blog"
+  text: "Ensure high service availability with Datadog Service Management"
+algolia:
+  tags: ['inbox', 'case management']
 ---
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
 ## Overview
 
-Datadog Case Management provides a centralized place to track, triage, and troubleshoot issues. Create cases from alerts, security signals, and Error Tracking issues that you want to investigate.
+{{< img src="/service_management/case_management/case_management_overview_cropped.png" alt="Overview of the Case Management page" style="width:100%;" >}}
 
-You can assign cases to users or teams, establishing clear lines of ownership that persist throughout the lifespan of the case. Populate your cases with graphs, logs, and other telemetry data from across Datadog alongside information from external tools, such as messaging and issue-tracking apps.
+Datadog Case Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a case, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the case. 
 
-## View, filter, and manage
+While investigating, populate the case with graphs, logs, and other telemetry data from across Datadog and collaborate with your team members in the activity timeline. Case Management also integrates with tools like Jira, ServiceNow, PagerDuty, Slack, and Microsoft Teams—allowing you to fit Case Management solutions to your organization's processes. 
 
-Find [Case Management][1] in the Service Management menu.
+## Getting started
+{{< whatsnext desc="Learn more about case management:">}}
+    {{< nextlink href="/service_management/case_management/create_case" >}}Create a case{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/projects" >}}Projects{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/create_notifications_and_third_party_tickets" >}}Create notifications and third party tickets{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/view_and_manage" >}}View and manage cases{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
+    
 
-### Filter cases
+{{< /whatsnext >}}
 
-Use **Inboxes** to filter the list of cases to the ones most relevant to your work. Datadog automatically creates inboxes with filters for cases assigned to you, created by you, or associated with your [Teams][2].
-
-To filter cases based on a search query, create a custom inbox:
-1. On the [Case Management page][1], next to **Other Inboxes**, click **Add**. The [Create a new inbox][3] page appears.
-1. Give the inbox a **Name**
-1. In the search box, enter a query. The **Inbox Preview** refreshes to show you the cases that match the current search query.
-1. Click **Save Inbox**.
-
-### Bulk actions
-
-Make bulk edits to cases from the [Case Management page][1]:
-1. Use the checkboxes to select one or more cases. The top of the list updates to show bulk edit options.
-1. Use the drop-down menus to **Set status**, **Assign**, **Set priority**, or perform **More actions**. Or, click **Archive**.
-
-## Create or update a case
-You can create or update cases from several locations in Datadog:
-### Monitors
-From the individual Monitor status page, click the **Escalate** dropdown menu and select the **+ Create a case** option.
-
-### Security signals
-Click into a Security Signal to open up the side panel. From the side panel, click **Create Case**.
-
-### Error Tracking for Logs
-Click into an individual Error Tracking issue to open the side panel. From the side panel, click  **Create Case** or **Add to an existing case**.
-
-### Workflows
-In a new or existing workflow, add a step in the [workflow builder][4] and search for "case management" and select **Create Case** or **Update the status from a Case**.
-
-### Case Management
-In the [Case Management][1] page, click the button **New Case** to create a new case. 
-
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/cases
-[2]: /account_management/teams/
-[3]: https://app.datadoghq.com/cases/contexts/new
-[4]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder

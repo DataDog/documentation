@@ -1,0 +1,63 @@
+{{ $dot := . }}
+<div class="tests-languages">
+  <div class="container cards-dd">
+    <div class="row row-cols-8 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/dotnet/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/dotnet_avatar.svg" "class" "img-fluid" "alt" ".net" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/java/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/java_avatar.svg" "class" "img-fluid" "alt" "java" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/javascript/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/javascript.png" "class" "img-fluid" "alt" "javascript" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/python/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/python_avatar.svg" "class" "img-fluid" "alt" "python" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/ruby/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/ruby_avatar.svg" "class" "img-fluid" "alt" "ruby" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/swift/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/swift_avatar.svg" "class" "img-fluid" "alt" "swift" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/setup/junit_xml/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/junit_xml.png" "class" "img-fluid" "alt" "upload junit tests to datadog" "width" "150") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/tests/containers/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/container.svg" "class" "img-fluid" "alt" "tests in containers" "width" "150") }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

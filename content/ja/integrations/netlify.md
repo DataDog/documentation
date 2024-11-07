@@ -3,6 +3,7 @@ categories:
 - コラボレーション
 - ログの収集
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 description: Netlify ログを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/netlify/
@@ -17,7 +18,6 @@ integration_id: netlify
 integration_title: Netlify
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: netlify
 public_title: Datadog-Netlify インテグレーション
@@ -27,6 +27,7 @@ type: ''
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 [Netlify][1] は、顧客が動的で高性能のウェブアプリを構築しデプロイできる Jamstack ウェブ開発プラットフォームです。
@@ -49,7 +50,7 @@ Netlify を Datadog と統合すると、以下のことができます。
 
 Netlify インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Netlify インテグレーションには、サービスのチェック機能は含まれません。
 

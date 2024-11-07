@@ -1,6 +1,5 @@
 ---
 title: OAuth2 in Datadog
-kind: documentation
 description: Learn about how Datadog uses OAuth 2.0.
 further_reading:
 - link: "/developers/authorization/oauth2_endpoints"
@@ -8,19 +7,19 @@ further_reading:
   text: "Learn how to use the OAuth 2.0 authorization endpoints"
 ---
 
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
-
 ## Overview
 
 This page provides a step-by-step overview on how to implement the OAuth protocol end-to-end on your application once your **confidential** client is created. 
 
-### Implement the OAuth protocol
+{{< img src="developers/authorization/oauth_process.png" alt="A diagram explaining how the OAuth authentication process works after a user clicks the Connect Account button in an integration tile." style="width:100%;">}}
 
-1. Create and configure your OAuth client in the [Developer Platform][16]. 
+## Implement the OAuth protocol
+
+1. Within your Datadog Partner Sandbox Account, create and configure your OAuth client in the [Developer Platform][16].
 
 2. After a user installs your integration, they can click the **Connect Accounts** button to connect their account in the **Configure** tab of the integration tile. 
+
+   {{< img src="developers/authorization/connect-accounts.png" alt="Click the Connect Accounts button" style="width:100%;" >}}
 
    When a user clicks this button, they are directed to the `onboarding_url` that you provided as a part of the OAuth client creation process. This page should be the sign-in page for your platform.
 
@@ -28,39 +27,41 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
    To learn how to derive the `code_challenge` parameter, see the [PKCE](#authorization-code-grant-flow-with-pkce) section. Your application must save `code_verifier` for the token request in Step 5.
 
-   - In order to build the URL for this post request, use the `site` query parameter that is provided on the redirect to your `onboarding_url`. 
+   - To build the URL for this GET request, use the `site` query parameter that is provided on the redirect to your `onboarding_url`. 
    - This parameter is only provided if the user initiates authorization from the Datadog integration tile. See the [Initiate authorization from a third-party location](#Initiate-authorization-from-a-third-party-location) section for more options if the user chooses to initiate authorization externally.  
-   - For example, `site` may be `https://app.datadoghq.com`, `https://app.datadoghq.eu`, `https://us5.datadoghq.com`, or it might have a custom subdomain that must be accounted for, such as `https://<custom_subdomain>.datadoghq.com`. 
-   - To handle multiple Datadog sites dynamically, you can append the Datadog `authorize` path to this constructed URL.
+   - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as any subdomain they may be using, and is required to construct the URL for this GET request to the Authorize endpoint: `<site>/oauth2/v1/authorize?...`.
 
 4. Once a user clicks **Authorize**, Datadog makes a POST request to the authorize endpoint. The user is redirected to the `redirect_uri` that you provided when setting up the OAuth Client with the authorization `code` parameter in the query component.
 
 5. From the `redirect_uri`, make a POST request to the [Datadog token endpoint][10] that includes the authorization code from Step 4, the `code_verifier` from Step 3, your OAuth client ID, and client secret.
 
-   - In order to build the URL for this post request, use the `site` query parameter that is provided on the redirect to your `redirect_uri`. 
-   - For example, `site` might be `https://app.datadoghq.com`, `https://app.datadoghq.eu`, `https://us5.datadoghq.com`, or it might have a custom subdomain that must be accounted for, such as `https://<custom_subdomain>.datadoghq.com`. 
-   - To handle multiple Datadog sites dynamically, you can append the Datadog `token` path to this constructed URL.
+   - To build the URL for this post request, use the `domain` query parameter that is provided on the redirect to your `redirect_uri`. 
+   - It is required to construct the URL for this POST request to the token endpoint: `https://api.<domain>/oauth2/v1/token`.
 
 6. Upon success, you receive your `access_token` and `refresh_token` in the response body. Your application should display a confirmation page with the following message: `You may now close this tab`.
 
 7. Use the `access_token` to make calls to Datadog API endpoints by sending it in as a part of the authorization header of your request: ```headers = {"Authorization": "Bearer {}".format(access_token)}```.
-    - When making calls to API endpoints, ensure that the user's Datadog site is taken into account. For example, if a user is in the EU region, the events endpoint is `https://api.datadoghq.eu/api/v1/events`, while for users in US1, the events endpoint is `https://api.datadoghq.com/api/v1/events`. Some endpoints may also require an API key, which is created in Step 8 below. 
+    - **Note***: API endpoints are different in each Datadog site. For example, if a user is in the EU region, the Events endpoint is `https://api.datadoghq.eu/api/v1/events`, while for users in US1, the Events endpoint is `https://api.datadoghq.com/api/v1/events`.
+    - Use the `domain` query parameter directly in these API calls to ensure the correct endpoint is being contacted. For example, to make a call to the Events endpoint, you would build your request URL as `https://api.<domain>/api/v1/events`.
+    - Some endpoints may also require an API key, which is created in Step 8. 
 
 8. Call the [API Key Creation endpoint][7] to generate an API key that allows you to send data on behalf of Datadog users.
 
-   If the `API_KEYS_WRITE` scope has not been added to your client, this step fails. This endpoint generates an API Key that is only shown once. **Store this value in a secure database or location**. 
+   If the `API_KEYS_WRITE` scope has not been added to your client, this step fails. This endpoint generates an API Key that is only shown once, and cannot be re-generated unless the user deletes it within their Datadog account. **Store this value in a secure database or location**. 
 
-For more information about client creation and publishing, see [OAuth for Datadog Integrations][5].
+For more information about OAuth client creation, testing and publishing, see [OAuth for Datadog Integrations][5].
 
 ### Initiate authorization from a third-party location 
 
-You can start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile, or from the integration's external website. For example, if there's an integration configuration page on your website that Datadog users need to use, you can give users the option to start the authorization process from there.
+Users can start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url` and on redirect to the `redirect_uri`. The user's Datadog site is required to make API calls on behalf of the user and receive an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information is not provided. 
 
-When kicking off authorization from a third-party location—anywhere outside of the Datadog integration tile—you need to account for the [Datadog site][17] (such as EU, US1, US3, or US5) when routing users through the authorization flow and building out the URL for the `authorization` and `token` endpoints. 
+Additionally, when users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when they return to the Datadog integration tile). 
 
-To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region. Once the authorization flow is complete, ensure that all followup API calls use the correct site that is returned as a query parameter with the `redirect_uri` (See Step 5 in [Implement the OAuth protocol](#Implement-the-oauth-protocol)).
+Datadog recommends that partners prompt users to initiate authorization from Datadog, rather than from their own platform.
 
-When users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when returning to the integration tile). To avoid this, users should be routed from third-party platforms to the Datadog integration tile to begin authorization. 
+While Datadog does not recommend supporting initiating authorization from a third-party location anywhere outside of the Datadog integration tile, if you do choose to go down this path then you must ensure that you are able to support users in all Datadog sites, and are willing to continue to support new Datadog sites as they may be created. This usually includes implementing a way for the user to manually input their site onto your platform while authorizing. 
+
+Keep in mind that organizations may have subdomains as well (for example, https://subdomain.datadoghq.com). Subdomains should not be included in API calls, which is why using the `domain` query parameter that's returned on redirect to the `redirect_uri` is recommended when building out the URL for any API call. To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region.
 
 ## Authorization code grant flow with PKCE
 
@@ -81,7 +82,7 @@ To mitigate such attacks, the PKCE extension includes the following parameters t
 | Parameter             | Definition                                                                                                                           |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Code Verifier         | A dynamically-generated cryptographic random string.                                                                                 |
-| Code Challenge        | A transformation of the code verifier.                                                                                               |
+| Code Challenge        | A transformation of the code verifier. The `code_challenge` must use a `base64url` encoding.                                           |
 | Code Challenge Method | The method used to derive the `code_challenge` from the `code_verifier`. You must use [SHA-256][16] to compute the `code_challenge`. |
 
 The [PKCE protocol][11] integrates with the authorization code grant flow by completing the following actions:

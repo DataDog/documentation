@@ -1,7 +1,5 @@
 title: "Docs"
 metadataformat: "yaml"
-# enableGitInfo so lastmod in sitemap.xml is based off git
-enableGitInfo: false
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
@@ -21,7 +19,17 @@ defaultContentLanguageInSubdir: false
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 # contentDir: "content/en"
 
-# gitinfo vars
+# Prevent autogeneration of jsconfig.json file
+# See: https://gohugo.io/hugo-pipes/js/#import-js-code-from-assets
+build:
+  noJSConfigInAssets: true
+
+caches:
+    getjson:
+        dir: :cacheDir/:project
+        maxAge: '1h'
+
+# enableGitInfo so lastmod in sitemap.xml is based off git
 enableGitInfo: true
 
 # Allow to render HTML in markdown files
@@ -33,7 +41,7 @@ markup:
     guessSyntax: true
 
 module:
-  imports:
+  imports:  
    - path: github.com/DataDog/websites-modules
      disabled: false
      mounts:
@@ -57,6 +65,10 @@ module:
        target: layouts/partials/footer_link.html
      - source: layouts/partials/language-selector-docs.html
        target: layouts/partials/language-selector-docs.html
+     - source: layouts/partials/modals/modal-header-demo-signup.html
+       target: layouts/partials/modals/modal-header-demo-signup.html
+     - source: assets/styles/components/_demo-request-modal.scss
+       target: assets/styles/components/_demo-request-modal.scss
      - source: assets/styles/components/_announcement-banner.scss
        target: assets/styles/components/_announcement-banner.scss
      - source: assets/styles/components/_footer.scss
@@ -73,6 +85,19 @@ module:
        target: static/fonts/iconfont.woff2
      - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
+     - source: data
+       target: data
+     - source: i18n
+       target: i18n
+
+   - path: github.com/DataDog/websites-sources
+     disabled: false
+     mounts:
+     - source: content/en/integrations
+       target: content/integrations
+       lang: en
+     - source: data
+       target: data
 
   mounts:
     # default mounts
@@ -85,6 +110,9 @@ module:
     - source: content/ja
       target: content
       lang: ja
+    - source: content/ko
+      target: content
+      lang: ko
     - source: static
       target: static
     - source: layouts
@@ -109,15 +137,15 @@ security:
   funcs:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
-      - ^(HUGO_|CI_)
+      - ^(HUGO_|CI_|IA_SUBDOMAIN)
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
 outputFormats:
-  Algolia:
-    baseName: "algolia"
+  Search:
+    baseName: "search"
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
@@ -127,4 +155,7 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
 
-timeout: "45s"
+timeout: "90s"
+
+minify:
+  disableSVG: true

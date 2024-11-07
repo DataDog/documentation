@@ -3,6 +3,7 @@ app_id: alertnow
 app_uuid: cdb258cc-5e74-4fa2-be21-1489375bb370
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: alertnow.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10279
     source_type_name: AlertNow
 author:
   homepage: https://service.opsnow.com
@@ -24,6 +26,7 @@ categories:
 - コラボレーション
 - インシデント
 - モバイル
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -33,10 +36,8 @@ integration_id: alertnow
 integration_title: AlertNow
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: alertnow
-oauth: {}
 public_title: AlertNow
 short_description: Datadog のアラートと AlertNow のアラートを同期させる
 supported_os:
@@ -54,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog のアラートと AlertNow のアラートを同期させる
   media: []
@@ -62,6 +64,7 @@ tile:
   title: AlertNow
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/
   tag: Documentation
   text: Alertes
-kind: guide
+
 title: Alertes basées sur les données RUM
 ---
 
@@ -27,7 +27,7 @@ Vous pouvez utiliser les facettes recueillies par RUM, notamment les [facettes e
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/high-rum-views-errors.png" alt="Requête de recherche pour une alerte se déclenchant lorsqu'une vue compte plus de huit erreurs" style="width:100%;">}}
 
-La requête de recherche de l'exemple ci-dessus permet à un monitor RUM de surveiller les vues de l'application Shopist IOS, à l'aide de facettes comme `Application ID` et `View Path`. Cet exemple de monitor génère des alertes lorsqu'une vue compte un nombre élevé d'erreurs (par exemple, plus de huit).
+La requête de recherche de l'exemple ci-dessus permet à un monitor RUM de surveiller les vues de l'application Shopist iOS, à l'aide de facettes comme `Application ID` et `View Path`. Cet exemple de monitor génère des alertes lorsqu'une vue compte un nombre élevé d'erreurs (par exemple, plus de huit).
 
 ## Exporter votre requête vers un monitor
 

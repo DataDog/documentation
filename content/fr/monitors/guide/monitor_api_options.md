@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Options de l'API Monitor
 ---
 
@@ -20,7 +20,7 @@ title: Options de l'API Monitor
 
 -  **`require_full_window`** : une valeur booléenne indiquant si ce monitor a besoin d'une période complète de données avant son évaluation. Datadog vous recommande de définir ce paramètre sur `False` pour les métriques creuses, sans quoi certaines évaluations sont ignorées. Valeur par défaut : **False**.
 - **`renotify_interval`** : le nombre de minutes après la dernière notification avant qu'un monitor envoie à nouveau une notification sur le statut actuel. La notification est uniquement envoyée si le monitor n'est pas résolu. Valeur par défaut : **null**.
-- **`renotify_statuses`** : l'état à partir duquel un monitor renvoie une notification. Peut uniquement être défini si l'option `renotify_interval` a été configurée. Valeur par défaut : **null**. Si `renotify_states` n'a pas été défini, des notifications sont renvoyées pour les états `Alert` et `No Data`.
+- **`renotify_statuses`** : l'état à partir duquel un monitor renvoie une notification. Peut uniquement être défini si l'option `renotify_interval` a été configurée. Valeur par défaut : **null**. Si `renotify_statuses` n'a pas été défini, des notifications sont renvoyées pour les états `Alert` et `No Data`.
 - **`renotify_occurrences`** : le nombre de nouvelles notifications envoyées par le monitor. Peut uniquement être défini si l'option `renotify_interval` a été configurée. Valeur par défaut : **null** (aucune limite de renotification).
 - **`escalation_message`** : le message à inclure avec la nouvelle notification. Prend en charge la syntaxe « @nomutilisateur » utilisée ailleurs. Non applicable si `renotify_interval` est défini sur `null`. Valeur par défaut : **null**.
 - **`notify_audit`** : une valeur booléenne qui indique si les utilisateurs tagués sont informés des modifications apportées à ce monitor. Valeur par défaut : **False**.

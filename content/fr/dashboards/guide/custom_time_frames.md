@@ -1,5 +1,4 @@
 ---
-kind: guide
 title: Intervalles personnalisés
 ---
 
@@ -18,6 +17,8 @@ Les intervalles de temps personnalisés fixes et relatifs sont pris en charge :
 {{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt="Saisir un intervalle personnalisé fixe" video="true" width="500" >}}
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Saisir un intervalle personnalisé relatif" video="true" width="500" >}}
+
+**Remarque** : l'exécution des requêtes est basée sur le fuseau UTC, mais la sélection de l'intervalle se fait dans votre navigateur. De plus, vous pouvez choisir d'afficher le fuseau horaire par défaut ou le fuseau UTC dans les [paramètres du dashboard][1].
 
 ## Syntaxes prises en charge
 
@@ -59,4 +60,20 @@ Les intervalles de temps personnalisés fixes et relatifs sont pris en charge :
   * Jours : `d`, `day`, `days`
   * Semaines : `w`, `week`, `weeks`
   * Mois : `mo`, `mos`, `mon`, `mons`, `month`, `months`
-* Les intervalles `today`, `yesterday`, `this month`, `this year` et `last year` sont calculés lorsqu'ils sont entrés. Ils ne sont pas mis à jour à mesure que le temps passe.
+* Les intervalles `today`, `yesterday`, `this month`, `this year` et `last year` sont calculés lors de leur saisie. Ils ne sont pas mis à jour à mesure que le temps passe.
+
+## URL
+
+Vous pouvez transmettre des requêtes temporelles dans l'URL d'un dashboard.
+
+Prenons l'exemple d'URL de dashboard suivant :
+
+```
+https://app.datadoghq.com/dash/host/<ID_DASHBOARD>?from_ts=<DÉBUT_REQUÊTE>&to_ts=<FIN_REQUÊTE>&live=true
+```
+
+* Le paramètre `from_ts` correspond au timestamp Unix en millisecondes représentant l'heure de début de la requête. Exemple : `1683518770980`.
+* Le paramètre `to_ts` correspond au timestamp Unix en millisecondes représentant l'heure de fin de la requête. Exemple : `1683605233205`.
+* `live=true` indique que les spécifications temporelles relatives sont conservées lorsqu'une requête est enregistrée ou partagée. Il est également possible de définir ce paramètre sur `live=false`.
+
+[1]: /fr/dashboards/#display-utc-time

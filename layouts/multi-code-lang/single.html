@@ -16,9 +16,12 @@
             {{ partial "breadcrumbs.html" . }}
         </div>
     </div>
-    
+
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
 
-    <div>{{ .Content }}</div>
+    {{/* Add `table-wrapper` div to tables in imported markdown to fix overflow issues */}}
+      
+    {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
+    {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 
 {{ end }}

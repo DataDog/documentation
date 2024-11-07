@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: イベント検索
-kind: documentation
 title: RUM イベントのグループ化
 ---
 
@@ -11,7 +10,7 @@ title: RUM イベントのグループ化
 
 Real User Monitoring (RUM) のイベントは、個々でも集合体でも価値があります。検索クエリには、イベントのサブセットを集計するための情報が含まれています。
 
-{{< img src="real_user_monitoring/explorer/group_into_fields.png" alt="検索クエリのフィールドセクションにグループ化する" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/group_into_fields-2.png" alt="検索クエリのフィールドセクションにグループ化する" style="width:100%;" >}}
 
 視覚化タイプを切り替えても、イベントのグループ化、集計、測定に使用するフィールドの選択は保持されます。
 
@@ -25,11 +24,11 @@ Real User Monitoring (RUM) のイベントは、個々でも集合体でも価�
 
 - グループごとのファセットのコード化された値の一意の数
 
-  {{< img src="real_user_monitoring/explorer/group-unique-count-coded-values.png" alt="コード化された値のユニークカウントでグループ化" style="width:90%;" >}}
+  {{< img src="real_user_monitoring/explorer/group-unique-count-coded-values-2.png" alt="コード化された値のユニークカウントでグループ化" style="width:90%;" >}}
 
 - グループごとのファセットの数値に対する統計演算 (最小値、最大値、平均値、パーセンタイルなど)
 
-  {{< img src="real_user_monitoring/explorer/group-statistical-operations-1.png" alt="統計演算を利用してフィールドにグループ化" style="width:90%;" >}}
+  {{< img src="real_user_monitoring/explorer/group-statistical-operations-2.png" alt="統計演算を利用してフィールドにグループ化" style="width:90%;" >}}
 
 1 つのファセットに対して複数の値を持つ個々のイベントは、その数だけ集計に属します。例えば、`country:france` と `browser:chrome` の属性を持つ RUM イベントは、`country:france` 集計と `browser:chrome` 集計に一度ずつカウントされます。
 

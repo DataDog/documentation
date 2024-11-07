@@ -1,6 +1,5 @@
 ---
 title: Enabling the Native Profiler for Compiled Languages
-kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
 code_lang_weight: 90
@@ -25,6 +24,8 @@ Profiles sent from `ddprof` show up under the _native_ runtime in the Datadog we
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
+
 Supported operating systems
 : Linux (glibc or musl)
 
@@ -46,17 +47,19 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the latest [`ddprof` release][2]. For example, here is one way to pull the `v0.10.1` release for an `amd64` (also known as `x86_64`) platform:
+1. Download the latest [`ddprof` release][2]. For example, here is one way to pull the latest release for an `amd64` (also known as `x86_64`) platform:
 
    ```bash
-   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
-   tar xvf ddprof-amd64-linux.tar.xz
+   curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
+   tar xvf ddprof-linux.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
    Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
 
-2. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+   Use `arm64` instead of `amd64` for `aarch64` platform.
+
+3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -113,8 +116,8 @@ The library exposes a C API.
 1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
-   tar xvf ddprof-amd64-linux.tar.xz --directory /tmp
+   curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
+   tar xvf ddprof-linux.tar.xz --directory /tmp
    ```
 
 2. In your code, start the profiler using the `ddprof_start_profiling()` interface, defined in the `_dd_profiling.h_` header provided by the release. The profiler stops automatically when your program closes. To stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum block time of the function in milliseconds. Here is a standalone example (`profiler_demo.c`) in C:
@@ -178,29 +181,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/ddprof/lib
 
 ## Configuration
 
-Configuration for the profiler can be set by command line parameters, environment variables, or a combination of both. Whenever both are provided for a given setting, the command line parameter is used.
-
-| Environment variable            | Long name       | Short name | Default   | Description                                                                                                                          |
-| ------------------------------- | --------------- | ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| DD_ENV                          | environment     | E          |           | The [environment][4] name, for example, `production`.                                                                                |
-| DD_SERVICE                      | service         | S          | myservice | The [service][4] name, for example, `web-backend`.                                                                                   |
-| DD_VERSION                      | service_version | V          |           | The [version][4] of your service.                                                                                                    |
-| DD_AGENT_HOST                   | host            | H          | localhost | The hostname for the Datadog agent.                                                                                                  |
-| DD_TRACE_AGENT_PORT             | port            | P          | 8126      | The Datadog agent listening port.                                                                                                    |
-| DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                                |
-| DD_TAGS                         | tags            | T          |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` pairs separated by commas, such as: `layer:api,team:intake`. |
-| DD_PROFILING_NATIVE_NICE        | nice            | i          |           | Sets the nice level of the profiler without affecting the instrumented processes.                                                    |
-| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | c          | no        | Whether to log profiler configuration parameters.                                                                                    |
-| DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o          | stdout    | How to emit profiler logs. See the section on logging for details.                                                                   |
-| DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l          | warn      | Determines log verbosity.                                                                                                            |
-| DD_PROFILING_NATIVE_TARGET_PID  | pid             | p          |           | Engages pidmode. See the section on pidmode for details.                                                                             |
-| DD_PROFILING_NATIVE_GLOBAL      | global          | g          | no        | Engages globalmode. See the section on globalmode for details. Overrides --pid.                                                      |
-
-When passing command line arguments, precede long names with two dashes and short names with a single dash. For example, `--service myservice` and `-S myservice`.
-
 The `environment`, `service`, and `service_version` settings are recommended, as they are used by the Profiling UI.
-
-**Note**: Parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
 See the [full list of parameters][5] or use the command line.
 
@@ -217,26 +198,15 @@ You can configure logging to one of several endpoints:
 - `disable` disables the logs entirely.
 - Any other value is treated as a file path, with a leading `/` designating an absolute path.
 
-### Pidmode
+### Global
 
-When a target PID is given, instrument that PID. When this mode is engaged, any parameter after typical profiler argument processing is ignored. If the owning UID of the target PID and the profiler differ, do one of the following:
-- Run the profiler as the root process instead.
-- Grant `CAP_PERFMON` to the profiler (Linux v5.8 or later).
-- Grant `CAP_SYS_ADMIN` to the profiler.
-- Decrease `perf_event_paranoid` to `-1` (consult your distro documentation or system administrator for details).
-
-When a PID is specified in this way, only child processes (both forks and threads) spawned after instrumentation will be followed.
-
-### Globalmode
-
-Global mode is intended for debug purposes. When `global` is set to `yes`, the profiler attempts to profile all the visible processes. 
-This requires elevated permissions (for example, running as root or granting `CAP_PERFMON`, `CAP_SYSADMIN`) or setting `perf_event_paranoid` to `-1`.
+If you want to instrument all running process, you can try out the `--global` option.
+Global mode is intended for debug purposes. This requires elevated permissions. Depending on your setup, this can mean running as root, granting `CAP_PERFMON`, `CAP_SYSADMIN`, or setting `perf_event_paranoid` to `-1`.
 
 ```bash
-./ddprof --environment staging --global yes --service_version full-host-profile
+./ddprof --environment staging --global --service_version full-host-profile
 ```
 
-When the profiler is run as the root user, all visible processes are instrumented.
 For most configurations, this consists of all processes visible within the profiler's PID namespace.
 
 ## Not sure what to do next?
@@ -251,5 +221,6 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: https://github.com/DataDog/ddprof/blob/v0.10.1/docs/Commands.md
+[5]: https://github.com/DataDog/ddprof/blob/main/docs/Commands.md
 [6]: /getting_started/profiler/
+[7]: /profiler/enabling/supported_versions/

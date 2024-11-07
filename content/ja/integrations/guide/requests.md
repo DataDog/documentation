@@ -1,11 +1,11 @@
 ---
-title: Datadog インテグレーションをリクエストする
-kind: ガイド
 further_reading:
-  - link: developers/integrations/new_check_howto
-    tag: ドキュメント
-    text: Datadog インテグレーションを作成する
+- link: developers/integrations/agent_integration
+  tag: ドキュメント
+  text: Datadog インテグレーションを作成する
+title: Datadog インテグレーションをリクエストする
 ---
+
 Datadog インテグレーションをリクエストするには、次の情報を確認してください。
 
 ## 代替テクノロジー
@@ -24,7 +24,7 @@ Datadog の既存ツールでニーズに見合うものがない場合は、[Da
 
 - リクエスト送信者の名前、役職、連絡先情報
 - リクエストの緊急度: 緊急、優先、通常
-- テクノロジー名とウェブサイトのリンク
+- The name of technology and a link to their website
 - 収集・監視したい特殊なメトリクス
 - 情報収集のユースケース
 - 現在、目標をどのように達成しているかの説明

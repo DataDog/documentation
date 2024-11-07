@@ -1,47 +1,70 @@
 ---
+app_id: containerd
+app_uuid: 206cf95f-1d2a-4ad5-b027-0de15431833b
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: containerd.cpu.user
+      metadata_path: metadata.csv
+      prefix: containerd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10082
+    source_type_name: Containerd
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - containers
-creates_events: true
-ddtype: check
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
-display_name: Containerd
+display_on_public_website: true
 draft: false
 git_integration_title: containerd
-guid: 5cdc0363-a0df-469b-8346-2da4ab84128c
 integration_id: containerd
 integration_title: Containerd
 integration_version: ''
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: containerd.
-metric_to_check: containerd.cpu.user
+custom_kind: integration
+manifest_version: 2.0.0
 name: containerd
-public_title: Intégration Datadog/Containerd
+public_title: Containerd
 short_description: Surveillez toutes vos métriques Containerd avec Datadog.
-support: core
 supported_os:
 - linux
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Supported OS::Linux
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Surveillez toutes vos métriques Containerd avec Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Containerd
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
 
 Ce check surveille le runtime du conteneur Containerd.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Containerd est un check de base de l'[Agent Datadog][1]. Vous devez configurer Containerd dans les fichiers `datadog.yaml` et `containerd.d/conf.yaml`.
 
@@ -120,7 +143,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `containerd.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Containerd. Consultez le [fichier d'exemple containerd.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
@@ -130,29 +153,29 @@ spec:
 
 [Lancez la sous-commande `status` de l'Agent][4] et cherchez `containerd` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "containerd" >}}
 
 
 Cette intégration fonctionne sous Linux et Windows. Toutefois, certaines métriques sont uniquement disponibles pour un seul système d'exploitation. Consultez le fichier `metadata.csv` pour découvrir la liste des métriques qui varient selon le système d'exploitation.
 
-### Événements
+### Aide
 
 Le check Containerd peut recueillir des événements. Utilisez `filters` pour sélectionner les événements pertinents. Consultez le [fichier d'exemple containerd.d/conf.yaml][2] pour obtenir plus de détails.
 
-### Checks de service
+### Aide
 {{< get-service-checks-from-git "containerd" >}}
 
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -5,18 +5,20 @@ assets:
   dashboards:
     Bottomline Record and Replay Overview: assets/dashboards/bottomline_activity_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     metrics:
-      check: datadog.marketplace.bottomline.mainframe.activity.usr.id.count
+      check: bottomline.mainframe.activity.resource.duration
       metadata_path: metadata.csv
       prefix: bottomline.mainframe.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10324
     source_type_name: Bottomline Mainframe
   monitors:
-    Mainframe resource taking long time to respond: assets/monitors/bottomline_mainframe_resource_has_problem.json
+    Resource response time is very slow: assets/monitors/bottomline_mainframe_resource_has_problem.json
 author:
   homepage: https://www.bottomline.com/
   name: Bottomline Technologies
@@ -24,7 +26,8 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
-- mainframe
+- mainframes
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: bottomline-recordandreplay
 integration_title: 'Bottomline の Record and Replay: Mainframe'
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
-oauth: {}
 public_title: 'Bottomline の Record and Replay: Mainframe'
 short_description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
 supported_os:
@@ -46,7 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Mainframe
+  - Category::Mainframes
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -70,6 +71,7 @@ tile:
   title: 'Bottomline の Record and Replay: Mainframe'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,7 +80,7 @@ Bottomline の Mainframe Record and Replay ソリューションは、ネット�
 
 このインテグレーションにより、Datadog で Bottomline の Record and Replay セッションを監視し、リソース使用率、リソースパフォーマンス、ユーザーアクティビティ、セキュリティイベント、およびシステムモニターの可視性を提供することができます。また、お客様は Datadog を通じてユーザーセッションの再生に直接アクセスすることができます。
 
-### アラート設定
+### モニター
 
 このインテグレーションには、Mainframe Resource に問題が発生した場合に報告するモニターが含まれています。
 
@@ -86,7 +88,7 @@ Bottomline の Mainframe Record and Replay ソリューションは、ネット�
 
 このチェックによって提供されるメトリクスのリストについては、[metadata.csv][1] を参照してください。
 
-### ダッシュボード  
+### ダッシュボード
 
 **Bottomline Record and Replay 概要**: このダッシュボードでは、どのようなリソースが使用されているか、リソースのパフォーマンス、ユーザーアクティビティ、セキュリティイベント、システムモニターを可視化することができます。
 
@@ -109,7 +111,7 @@ Bottomline をまだご利用でないお客様は、[Bottomline の Marketplace
 
 [こちら][3]の手順に従い、インテグレーションをインストールしてください。
 
-## サポート
+## Agent
 サポートや機能のリクエストは、[Bottomline][4] にお問い合わせください。
 
 

@@ -1,4 +1,7 @@
 ---
+cascade:
+  algolia:
+    rank: 70
 description: Explorer les produits de surveillance réseau Datadog
 disable_sidebar: true
 further_reading:
@@ -6,6 +9,10 @@ further_reading:
   tag: Notes de version
   text: Découvrez les dernières versions de la surveillance réseau Datadog (connexion
     à l'application requise).
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour améliorer la surveillance des performances
+    de votre réseau
 - link: https://www.datadoghq.com/blog/network-performance-monitoring
   tag: Blog
   text: Présentation de la solution Network Performance Monitoring Datadog
@@ -15,7 +22,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
   tag: Blog
   text: Surveiller des datacenters et des périphériques réseau avec Datadog
-kind: documentation
+- link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
+  tag: Blog
+  text: Surveiller une infrastructure gérée par Cilium avec Datadog
 title: Surveillance réseau
 ---
 

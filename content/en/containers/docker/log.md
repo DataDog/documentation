@@ -1,6 +1,5 @@
 ---
 title: Docker Log collection
-kind: documentation
 aliases:
     - /logs/docker
     - /logs/languages/docker
@@ -80,7 +79,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
+           -e DD_SITE=<DD_SITE> \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
@@ -101,7 +100,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
+           -e DD_SITE=<DD_SITE> \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -131,6 +130,12 @@ The commands related to log collection are:
 `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
 : To collect containers logs from files. Available in the Datadog Agent 6.27.0/7.27.0+
 
+**Note**: If using Docker Compose, the value for `DD_CONTAINER_EXCLUDE` must not be quoted. Configure the environment variable in your docker-compose.yaml file like the example below:
+
+```yaml
+environment:
+    - DD_CONTAINER_EXCLUDE=image:datadog/agent:*
+```
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
@@ -155,7 +160,7 @@ The commands related to log collection are:
 
 [1]: /agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Host Agent with Custom Logging" %}}
 
@@ -178,8 +183,8 @@ The commands related to log collection are:
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
-[3]: /agent/guide/agent-configuration-files/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-configuration-files/
+[4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -212,7 +217,7 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 {{% /tab %}}
-{{% tab "Docker-Compose" %}}
+{{% tab "Docker Compose" %}}
 
 Add the following label in your `docker-compose.yaml` file:
 

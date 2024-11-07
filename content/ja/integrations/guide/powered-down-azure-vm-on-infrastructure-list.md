@@ -5,10 +5,9 @@ further_reading:
 - link: /account_management/billing/azure/
   tag: よくあるご質問
   text: Azure インテグレーションの課金
-- link: /integrations/azure/#configuration
+- link: /account_management/billing/azure/#azure-vm-exclusion
   tag: ドキュメント
   text: タグで Azure VM をフィルターする
-kind: ガイド
 title: インフラストラクチャーリストのパワーダウンした Azure VM
 ---
 

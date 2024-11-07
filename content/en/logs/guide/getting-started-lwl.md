@@ -1,6 +1,6 @@
 ---
 title: Logging Without Limits™ Guide
-kind: guide
+
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -18,7 +18,7 @@ algolia:
   tags: ['logging without limits']
 ---
 
-{{< img src="logs/guide/lwl_marketecture_230424.jpeg" alt="Logging without Limits™" >}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Logging without Limits™" >}}
 
 ## Overview
 
@@ -53,7 +53,7 @@ Click on the log pattern that you would like to exclude to see a sample of under
 
 {{< img src="logs/guide/getting-started-lwl/patterns_context_panel.jpg" alt="Patterns Context" style="width:100%;">}}
 
-The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel will populate with information about your noisiest status pattern.
+The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel is populated with information about your noisiest status pattern.
 
 ## 3. Create a log pattern exclusion filter
 
@@ -84,28 +84,26 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 
 **To generate a new log-based metric based on your log pattern**:
 
-1. In your Datadog account, hover over **Logs** in the main menu, select **Generate Metrics**, and then click the **New Metric+** button in the top right corner.
-2. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (for example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
-3. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
-4. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
-5. Name your metric: Log-based metric names must follow the naming metric convention.
-
-{{< img src="logs/guide/getting-started-lwl/custom_metric.mp4" alt="Generate a custom Metric" video=true style="width:100%;">}}
+1. Navigate to the [Generate Metrics][9] page.
+1. Click **New Metric** in the top right corner.
+1. Enter a name for your metric. Log-based metric names must follow the naming metric convention.
+1. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. For example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`.
+1. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+1. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid negatively impacting your billing.
 
 ### Create an anomaly detection monitor
 
-[Anomaly detection][9] is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs will alert you of any changes based on your set alert conditions.
+[Anomaly detection][10] is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs alerts you of any changes based on your set alert conditions.
 
 **To set an anomaly detection monitor**:
 
-1. In the main navigation, navigate to **Monitors -> New Monitor -> Anomaly**.
-2. Enter the log-based metric you defined in the previous section.
-3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what's happening.
-4. Save the monitor.
+1. Navigate to the [New Monitor][11] page.
+1. Select **Anomaly**.
+1. Enter the log-based metric you defined in the previous section.
+1. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what's happening.
+1. Click **Create**.
 
-{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.mp4" alt="Anomaly Monitor" video=true style="width:100%;">}}
-
-When an anomaly is detected, an alert will be sent to all who are tagged. This alert can also be found in [Monitors -> Triggered Monitors][10].
+When an anomaly is detected, an alert is sent to all who are tagged. This alert can also be found in the [Triggered Monitors][12] page.
 
 ## Review
 
@@ -132,5 +130,7 @@ To learn more about Logging Without Limits™ and how to better utilize features
 [6]: /logs/archives/
 [7]: /metrics/
 [8]: /logs/logs_to_metrics/
-[9]: /monitors/types/anomaly/
-[10]: https://app.datadoghq.com/monitors#/triggered
+[9]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[10]: /monitors/types/anomaly/
+[11]: https://app.datadoghq.com/monitors/create
+[12]: https://app.datadoghq.com/monitors#/triggered

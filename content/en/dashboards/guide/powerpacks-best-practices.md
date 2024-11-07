@@ -1,10 +1,15 @@
 ---
 title: Scale Graphing Expertise with Powerpacks
-kind: guide
 further_reading:
+- link: "/dashboards/widgets/powerpack"
+  tag: "Documentation"
+  text: Powerpack Widget
 - link: "https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show"
   tag: "Documentation"
   text: Add widgets and refine what they show
+- link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
+  tag: "Blog"
+  text: "Save dashboard widgets in reusable groups with Powerpacks"
 - link: "https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/"
   tag: "Guide"
   text: Best practices for maintaining relevant dashboards
@@ -19,7 +24,7 @@ Powerpacks are templated groups of widgets that scale graphing expertise as reus
 Powerpacks are either preset (created by Datadog) or custom (created by a user).
 
 - Preset Powerpacks provide out-of-the-box views for common monitoring patterns like performance metrics or feature usage. They are often linked to a specific product or integration (like `RUM Page Views`) and are maintained by Datadog.
-- Custom Powerpacks can be created by anyone with dashboard write permissions to help users share and standardize internal best practices.
+- Anyone with dashboard write permissions can create custom Powerpacks to help users share and standardize internal best practices. Updates to custom Powerpacks are synced to all its Powerpack instances, so you don't have to make individual updates across multiple dashboards.
  
 This guide addresses best practices for creating and sharing custom Powerpacks.
 
@@ -88,8 +93,17 @@ Each Powerpack user decides whether to save a variable to their dashboard to all
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="A screen showing the option to configure values for tag or attribute variables, with a column for Tag or Attribute, Name, Value, and Use as Template Variable, which shows a checkbox providing the option to Add to dashboard. The Add to dashboard checkbox is checked for $Environment and unchecked for $Service." style="width:100%;" >}}
 
+### Updating a Powerpack
+
+Changes made to an existing custom Powerpack are reflected across all instances of the same Powerpack. This can simplify the process of updating duplicate content across several dashboards. Click **Edit Powerpack Layout** to edit synced Powerpack instances.
+
+### Permissions
+By default, edit permissions for Powerpacks are restricted to the author. Editing permission can be modified at any time through the kebab menu in the widget tray or in the header of a Powerpack instance.
+
 ### Spread the word
 
 Once your Powerpack is created, let your organization know about it. Communicating about your pack both announces the pack and provides a channel for any questions. Share the name of your Powerpack with your organization through communication channels like email or messaging platforms, specify who the pack is intended for, and describe where you expect it to appear. 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

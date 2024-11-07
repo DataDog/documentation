@@ -1,68 +1,76 @@
 ---
-aliases:
-  - /fr/integrations/awses/
+app_id: amazon-es
+app_uuid: c00f4e38-7cc5-42ae-9ea1-519776f5f350
+assets:
+  dashboards:
+    aws_es: assets/dashboards/amazon_es_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.es.cpuutilization
+      metadata_path: metadata.csv
+      prefix: aws.es.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 148
+    source_type_name: Amazon ES
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- metrics
 dependencies: []
-description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
-doc_link: https://docs.datadoghq.com/integrations/amazon_es/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_es
-has_logo: true
 integration_id: amazon-es
-integration_title: Amazon Elasticsearch
+integration_title: Amazon OpenSearch Service
 integration_version: ''
 is_public: true
-kind: integration
-manifest_version: '1.0'
+custom_kind: integration
+manifest_version: 2.0.0
 name: amazon_es
-public_title: "Intégration Datadog/Amazon\_Elasticsearch"
-short_description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
-version: '1.0'
+public_title: Amazon OpenSearch Service
+short_description: Amazon OpenSearch Service simplifie le déploiement et l'utilisation
+  d'OpenSearch.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: Amazon OpenSearch Service simplifie le déploiement et l'utilisation
+    d'OpenSearch.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon OpenSearch Service
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Présentation
 
-Amazon Elasticsearch Service est un service géré qui facilite le déploiement, l'opération et le dimensionnement d'Elasticsearch dans le cloud AWS.
+Amazon OpenSearch Service est un service géré qui facilite le déploiement, l'utilisation et la mise à l'échelle de clusters OpenSearch dans le cloud AWS. OpenSearch est un moteur d'analyse et de recherche entièrement open source qui est notamment utilisé pour l'analyse de logs, la surveillance d'applications en temps réel et l'analyse de flux de clics.
 
-Activez cette intégration pour visualiser dans Datadog les métriques et tags personnalisés pour vos clusters ES.
+Activez cette intégration pour visualiser dans Datadog tous vos tags personnalisés OpenSearch Service. Veuillez toutefois noter que cette intégration s'applique à Amazon AWS OpenSearch Service, et non à une instance Elasticsearch autonome hébergée en dehors d'Amazon AWS. Pour ce type de configuration, privilégiée plutôt l'[intégration Elasticsearch][1].
+
+Remarque : pour activer toutes les fonctionnalités de cette intégration, vous devez attribuer les autorisations 'es:ListTags', 'es:ListDomainNames' et 'es:DescribeElasticsearchDomains'.
 
 ## Configuration
 
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
+Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Amazon Web Services][2].
 
 ### Collecte de métriques
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `ES` est cochée dans la section concernant la collecte des métriques.
-2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon ES :
-
-    - `es:ListTags` : ajoute des tags de domaine ES personnalisés aux métriques ES.
-    - `es:ListDomainNames` : énumère tous les domaines Amazon ES dont le propriétaire est l'utilisateur actuel dans la région active.
-    - `es:DescribeElasticsearchDomains` : collecte l'identifiant de domaine, l'endpoint de service de domaine et l'ARN de domaine pour tous les domaines en tant que tags.
-
-    Pour en savoir plus, consultez la section relative aux [stratégies ES][4] de la documentation AWS.
-
-3. Installez l'[intégration Datadog/AWS ES][5].
-
-### Collecte de logs
-
-#### Activer le logging
-
-Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
-
-**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_elasticsearch` est défini en tant que _Target prefix_.
-
-#### Envoyer des logs à Datadog
-
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][6].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Elasticsearch dans la console AWS :
-
-    - [Ajouter un déclencheur manuel sur le compartiment S3][7]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][7]
+1. Sur la [page de l'intégration AWS][3], vérifiez que `ES` est activé dans l'onglet `Metric Collection`.
+2. Installez l'[intégration Datadog/Amazon OpenSearch Service][4].
 
 ## Données collectées
 
@@ -70,26 +78,21 @@ Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés ver
 {{< get-metrics-from-git "amazon_es" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
-
 ### Événements
 
-L'intégration AWS ES n'inclut aucun événement.
+L'intégration Amazon OpenSearch Service n'inclut aucun événement.
 
 ### Checks de service
 
-L'intégration AWS ES n'inclut aucun check de service.
+L'intégration Amazon OpenSearch Service n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_es
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
-[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[1]: https://docs.datadoghq.com/fr/integrations/elastic
+[2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://app.datadoghq.com/integrations/amazon-es
+[5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
+[6]: https://docs.datadoghq.com/fr/help/

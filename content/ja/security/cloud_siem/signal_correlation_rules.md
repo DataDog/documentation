@@ -23,7 +23,7 @@ type: documentation
 
 そして、`expired account ID` 属性を使用して、2 つのルールを関連付けます。
 
-ログ検出ルールや、ログ検出ルールとクラウドワークロードセキュリティや Application Security Management のルールを相関させることができます。
+ログ検出ルールや、ログ検出ルールと Cloud Security Management Threats や Application Security Management のルールを相関させることができます。
 
 ## シグナル相関ルールの作成
 

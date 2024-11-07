@@ -1,6 +1,6 @@
 ---
 title: Send Logs from a Custom Log File with Heightened Read Permissions
-kind: guide
+
 aliases:
   - /logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions
 further_reading:
@@ -10,6 +10,9 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'  
 ---
 
 Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking the Datadog Agent log collection as it does not have *sudo* or *admin* access.

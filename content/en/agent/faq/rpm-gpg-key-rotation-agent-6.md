@@ -1,10 +1,9 @@
 ---
 title: RPM GPG Key Rotation
-kind: faq
 ---
 
 <div class="alert alert-warning">
-This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/guide/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
+This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/faq/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
 </div>
 
 
@@ -54,10 +53,12 @@ Run the following commands on the host:
 
 ```bash
 $ curl -o /tmp/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+$ curl -o /tmp/DATADOG_RPM_KEY_B01082D3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 $ curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 
 $ rpm --import /tmp/DATADOG_RPM_KEY_CURRENT.public
+$ rpm --import /tmp/DATADOG_RPM_KEY_B01082D3.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -79,6 +80,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -94,6 +96,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -106,7 +109,7 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 **Note**: This method doesn't work on SUSE-based systems. Use the [import command](#import-command) instead.
 
 [1]: https://yum.datadoghq.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/chef-datadog
 [4]: https://github.com/DataDog/ansible-datadog
 [5]: https://github.com/DataDog/puppet-datadog-agent

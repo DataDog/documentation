@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: 설명서
   text: 컨테이너에서 내보내는 모든 데이터에 태그 할당
-kind: 설명서
 title: 도커 Prometheus 및 OpenMetrics 메트릭 수집
 ---
 
@@ -240,7 +239,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 
 공식 통합에는 전용 디렉토리가 있습니다. 일반 검사에는 기본 설정 및 메트릭 메타데이터를 하드코딩하는 기본 인스턴스 메커니즘이 있습니다. 예를 들어, [kube-proxy][9] 통합을 참조하세요.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

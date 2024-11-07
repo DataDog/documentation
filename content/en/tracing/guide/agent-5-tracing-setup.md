@@ -1,6 +1,6 @@
 ---
 title: APM & Continuous Profiler with Agent v5
-kind: guide
+
 private: true
 aliases:
   - /tracing/faq/agent-5-tracing-setup
@@ -40,7 +40,7 @@ For additional information, reference [the Docker page][7].
     {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
     {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Node.js language instrumentation.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -74,7 +74,7 @@ Need help? Contact [Datadog support][12].
 [2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /tracing/glossary/#trace-metrics
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /tracing/docker/
 [8]: /tracing/guide/send_traces_to_agent_by_api/

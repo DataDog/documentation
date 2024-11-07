@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
   text: En savoir plus sur RUM et Session Replay
-kind: documentation
 title: Facturation de RUM et Session Replay
 ---
 
@@ -18,6 +17,10 @@ Une session correspond à une visite de votre application Web ou mobile par un u
 ## Quel est le délai d'expiration d'une session ?
 
 Une session expire au bout de 15 minutes d'inactivité, et est limitée à 4 heures au total. Au bout de 4 heures, une nouvelle session est automatiquement créée.
+
+## Quelle est la durée des enregistrements Session Replay ?
+
+La durée des enregistrements Session Replay varie selon la longueur de la session. Par exemple, si vos enregistrements ne durent qu'entre cinq et huit secondes, cela signifie que l'utilisateur a terminé sa session après cette durée.
 
 ## Quelles sont les données recueillies par les solutions RUM et Session Replay de Datadog ?
 

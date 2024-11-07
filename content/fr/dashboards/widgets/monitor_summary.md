@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Créer des dashboards avec JSON
-kind: documentation
 title: Widget Résumé des monitors
 widget_type: manage_status
 ---
@@ -31,7 +30,7 @@ Le widget Résumé des monitors affiche une vue synthétique de tous vos monitor
 
     {{< img src="dashboards/widgets/monitor_summary/group_summary_type.png" alt="Type de résumé Group" style="width:80%;">}}
 
-    - Le type de résumé `Combined` répertorie le nombre de statuts de groupe et les noms des monitors correspondant à la requête de monitor. Les monitors à alertes multiples s'affichent sur une seule ligne dans la liste des résultats, comme pour le type de résumé `Monitor`, mais la colonne dédiée aux groupes affiche le nombre de groupes correspondant à chaque type de statut au lieu d'afficher le statut global du monitor. Tout comme le type de résumé `Group`, le type de résumé `Combined` prend également en charge les facettes `group` et `group_status` dans sa requête de monitor. Tout comme pour le type de résumé `Monitor`, les nombres indiqués pour chaque statut représentent le nombre total de monitors associés à chaque statut.
+    - Le type de résumé `Combined` répertorie le nombre de statuts de groupe et les noms des monitors correspondant à la requête de monitor. Les monitors à alertes multiples s'affichent sur une seule ligne dans la liste des résultats, comme pour le type de résumé `Monitor`, mais la colonne dédiée aux groupes affiche le nombre de groupes correspondant à chaque type de statut au lieu d'afficher le statut global du monitor. Tout comme le type de résumé `Group`, le type de résumé `Combined` prend également en charge les facettes `group` et `group_status` dans sa requête de monitor. Dans la même logique que le type de résumé `Monitor`, les nombres indiqués pour chaque statut représentent le nombre total de monitors associés à chaque statut.
 
     {{< img src="dashboards/widgets/monitor_summary/combined_summary_type.png" alt="Type de résumé Combined" style="width:80%;">}}
 
@@ -93,6 +92,6 @@ Le [schéma JSON][4] utilisé pour le widget Résumé des monitors est le suivan
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/monitors/manage/
-[2]: /fr/monitors/manage/#manage-triggered-monitors-with-group-level-granularity
+[2]: /fr/monitors/manage/#grouped-results
 [3]: /fr/api/v1/dashboards/
 [4]: /fr/dashboards/graphing_json/widget_json/

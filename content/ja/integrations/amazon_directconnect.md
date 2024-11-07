@@ -5,24 +5,25 @@ categories:
 - cloud
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
-description: Amazon Direct Connect のキーメトリクスを追跡。
+description: AWS Direct Connect のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_directconnect/
 draft: false
 git_integration_title: amazon_directconnect
 has_logo: true
-integration_id: amazon-direct-connect
-integration_title: Amazon Direct Connect
+integration_id: ''
+integration_title: AWS Direct Connect
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_directconnect
-public_title: Datadog-Amazon Direct Connect インテグレーション
-short_description: Amazon Direct Connect のキーメトリクスを追跡。
+public_title: Datadog-AWS Direct Connect インテグレーション
+short_description: AWS Direct Connect のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 このインテグレーションは、AWS Direct Connect から接続状態、送受信ビットレート、送受信パケットレートなどのメトリクスを収集します。
@@ -36,7 +37,7 @@ version: '1.0'
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DirectConnect` が有効になっていることを確認します。
-2. Amazon Direct Connect のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+2. AWS Direct Connect メトリクスの収集には、これらの権限を [Datadog IAM ポリシー][3] に追加してください。
 
     - `directconnect:DescribeConnections`: 使用できる Direct Connect 接続をリストするために使用されます。
     - `directconnect:DescribeTags`: Direct Connect 接続に適用されるカスタムタグを収集するために使用されます。
@@ -45,18 +46,18 @@ version: '1.0'
 
 3. [Datadog - AWS Direct Connect インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
-Amazon Direct Connect から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS Direct Connect を構成して、ログを S3 バケットか CloudWatch のいずれかに送信します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_directconnect` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
     - [CloudWatch ロググループに手動トリガーを追加][8]
@@ -73,7 +74,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 AWS Direct Connect インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Direct Connect インテグレーションには、サービスのチェック機能は含まれません。
 

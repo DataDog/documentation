@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: ラーニングセンター
   text: ダッシュボードをより効果的に活用する
-kind: documentation
 title: クエリ
 ---
 
@@ -26,7 +25,7 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 初めてグラフエディターを開くと、**Edit** タブが表示されます。UI からほとんどの設定を選択できます。以下に例を示します。
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="グラフエディターの Edit タブ" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="グラフエディターの Edit タブ" style="width:100%;" >}}
 
 ## グラフを構成する
 
@@ -48,7 +47,7 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 検索するか、**Metric** の隣にあるドロップダウンから選択して、グラフ化したいメトリクスを選択します。使用するメトリクスが分からない場合は、メトリクスのドロップダウンから `unit`、`type`、`interval`、`description`、`tags`、および `tag values` の数などの追加情報を得ることができます。
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:100%;">}}
 
 [メトリクスエクスプローラー][4]や[ノートブック][5]でメトリクスをさらに詳しく調べたり、[メトリクスの概要][6]ページでメトリクスのリストを閲覧することができます。
 
@@ -56,11 +55,10 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 選択したメトリクスには、メトリクスの右側にある **from** ドロップダウンからホストまたはタグによるフィルターを設定することができます。デフォルトでは *(everywhere)* に設定されています。
 
-{{< img src="dashboards/querying/filter-2.png" alt="グラフの作成フィルター" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="テンプレート変数とブール値ロジックを使用し、'from' フィールドでグラフをフィルター" style="width:100%;" >}}
 
-`from` ドロップダウン内の[高度なフィルタリング][7]を使用して、以下のようなブール型またはワイルドカードでフィルタリングされたクエリを評価することも可能です。
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="ブール型フィルターでグラフを作成" style="width:75%;" >}} 
+- `from` ドロップダウン内の[高度なフィルタリング][7]を使用して、ブール型またはワイルドカードでフィルタリングされたクエリを評価します。
+- テンプレート変数を使用して、クエリを動的にフィルターします。タグキーと一緒に `$` を追加すると、グラフはテンプレート変数のドロップダウンで選択したタグを自動的に適用します。詳細は[テンプレート変数のドキュメント][16]を参照してください。
 
 タグの詳細は、[タグ付けに関するドキュメント][8]を参照してください。
 
@@ -78,9 +76,9 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 手動でデータをロールアップするには、[rollup 関数][11]を使用します。シグマのアイコンをクリックして関数を追加し、ドロップダウンメニューから `rollup` を選択します。次に、データを集計する方法と間隔 (秒) を選択します。
 
-このクエリにより、1 分のバケットでマシン全体の合計空きディスク容量の平均値を平均でロールアップしたことを表す 1  本の線を作成します。
+このクエリは、全マシンにわたる利用可能なディスクスペースの平均値を 1 分間隔で集計し、それを表す単一のラインを作成します。
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="シグマ追加関数アイコンをハイライトする system.disk.free メトリクスのロールアップ例" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="マシン全体の system.disk.free メトリクスのロールアップ例" style="width:100%;">}}
 
 JSON ビューに切り替えると、以下のようなクエリが表示されます。
 
@@ -139,7 +137,7 @@ JSON ビューの使用方法については、[JSON を使用したグラフ作
 
 分析のニーズに応じて、割合、微分係数、平滑化など、他の数学関数をクエリに適用することもできます。詳細については、[使用可能な関数のリスト][12]をご参照ください。
 
-また、Datadog では、さまざまな算術演算によりメトリクス、ログ、トレース、その他のデータソースをグラフ化できます。グラフに表示される 値を変更するには、`+`、`-`、`/`、`*` を使用します。この構文では、整数値、および複数のメトリクスを使用した演算の両方を使用できます。
+また、Datadog では、さまざまな算術演算によりメトリクス、ログ、トレース、その他のデータソースをグラフ化できます。グラフに表示される 値を変更するには、`+`、`-`、`/`、`*`、`min`、および `max` を使用します。この構文では、整数値、および複数のメトリクスを使用した演算の両方を使用できます。
 
 各メトリクスを別々にグラフに表示するには、コンマ (`,`) を使用します（例: `a, b, c`）。
 
@@ -174,6 +172,23 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="数式の例 - ログ比率" style="width:75%;" >}}
 
 **注**: 数式に文字は割り当てられません。数式間では演算できません。
+
+#### 2 つのクエリ間の最小値または最大値
+以下は `max` 演算子を使用して、2 つのアベイラビリティゾーン間の CPU 使用率の最大値を求める例です。
+
+```text
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+```
+
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="2 つのメトリクスクエリ間の最大カウント値を示す 'max' の計算式例" style="width:75%;" >}}
+
+さらに、異なる商品の 2 つのクエリ間の最大値 (または最小値) を計算することもできます。以下は `min` 演算子を使用して、エラーステータスと警告ステータスのログ間の最小値を求める別の例です。
+
+```text
+min(status:error, status:warn)
+```
+
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="2 つのログクエリ間の最小カウント値を示す 'min' の計算式例" style="width:75%;" >}}
 
 ### エイリアスを作成する
 
@@ -231,7 +246,8 @@ status:error / status:info
 [9]: /ja/metrics/#time-aggregation
 [10]: /ja/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /ja/dashboards/functions/rollup/
-[12]: /ja/dashboards/functions/#apply-functions-optional
+[12]: /ja/dashboards/functions/#function-types
 [13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /ja/logs/explorer/search_syntax/
 [15]: /ja/dashboards/widgets/timeseries/#event-overlay
+[16]: /ja/dashboards/template_variables/

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zigiwave-nutanix-integration
 app_uuid: df66726a-0691-4c82-827c-f474ae98e4f5
 assets:
@@ -15,6 +17,8 @@ categories:
 - インシデント
 - マーケットプレイス
 - メトリクス
+- ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,12 +27,10 @@ integration_id: zigiwave-nutanix-integration
 integration_title: Nutanix
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: zigiwave_nutanix_datadog_integration
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -47,8 +49,11 @@ tile:
   - Category::Incidents
   - Category::Marketplace
   - Category::Metrics
+  - Category::AI/ML
   - Supported OS::Linux
   - Supported OS::Windows
+  - Submitted Data Type::Incidents
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog と Nutanix のノーコードインテグレーション
   media:
@@ -64,6 +69,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 

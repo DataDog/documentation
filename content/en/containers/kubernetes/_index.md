@@ -1,13 +1,12 @@
 ---
 title: Kubernetes
-kind: documentation
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes
     - /tracing/kubernetes/
     - /tracing/setup/kubernetes
     - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-    - /integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s/
+    - /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
     - /integrations/faq/docker-ecs-kubernetes-events/
     - /integrations/faq/container-integration-event/
     - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
@@ -27,17 +26,24 @@ further_reading:
       text: 'Join an interactive session for insights on Kubernetes monitoring'
 ---
 
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+  This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.
 
-**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
+**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, see [Legacy Kubernetes versions][1].
 
 For Agent commands, see the [Agent Commands guides][2].
 
+For information pertaining to the Datadog Cluster Agent, which provides a streamlined approach to collecting cluster level monitoring data, see [Cluster Agent for Kubernetes][3].
+
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/agent/kubernetes/installation">}}<u>Installation</u>: Install the Datadog Agent in a Kubernetes environment.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distributions</u>: Review base configurations for major Kubernetes distributions, including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Set up trace collection: configure the Agent to accept traces, configure your Pods to communicate with the Agent, and configure your application tracers to emit traces.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
@@ -53,4 +59,5 @@ For Agent commands, see the [Agent Commands guides][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
+[3]: /containers/cluster_agent/

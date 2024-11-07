@@ -5,11 +5,13 @@ assets:
   dashboards:
     Twingate Dashboard: assets/dashboards/twingate_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10338
     source_type_name: Twingate
 author:
   homepage: https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations
@@ -19,6 +21,7 @@ author:
 categories:
 - ネットワーク
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md
 display_on_public_website: true
@@ -28,10 +31,8 @@ integration_id: twingate
 integration_title: Twingate
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: twingate
-oauth: {}
 public_title: Twingate
 short_description: Twingate は、企業内 VPN に代わる最新のゼロトラストサービスを提供します。
 supported_os:
@@ -57,10 +58,14 @@ tile:
     image_url: images/dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-network-access-with-twingate/
   support: README.md#Support
   title: Twingate
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -159,6 +164,12 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
 ## トラブルシューティング
 ご不明な点は、[Twingate のサポートチーム][7]までお問い合わせください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Twingate の製品を使ってネットワークアクセスを監視する][8]
+
 [1]: https://www.twingate.com/
 [2]: https://docs.datadoghq.com/ja/getting_started/agent/
 [3]: https://docs.twingate.com/docs/connector-real-time-logs
@@ -166,3 +177,4 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: https://help.twingate.com/hc/en-us
+[8]: https://www.datadoghq.com/blog/monitor-network-access-with-twingate/

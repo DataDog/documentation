@@ -5,7 +5,6 @@ further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: ドキュメント
   text: Datadog クラウドワークロードセキュリティの概要
-kind: documentation
 title: カスタム Agent ルールの作成
 ---
 <!-- このファイルは自動生成されています。scripts/templates フォルダーにあるファイルを編集してください -->
@@ -203,6 +202,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.ancestors.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`process.ancestors.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`process.ancestors.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`process.ancestors.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`process.ancestors.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`process.ancestors.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`process.ancestors.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -228,6 +228,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.ancestors.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`process.ancestors.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`process.ancestors.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`process.ancestors.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`process.ancestors.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`process.ancestors.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`process.ancestors.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -273,6 +274,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`process.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`process.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`process.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`process.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`process.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`process.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -298,6 +300,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`process.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`process.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`process.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`process.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`process.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`process.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -337,6 +340,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.parent.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`process.parent.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`process.parent.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`process.parent.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`process.parent.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`process.parent.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`process.parent.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -362,6 +366,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.parent.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`process.parent.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`process.parent.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`process.parent.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`process.parent.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`process.parent.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`process.parent.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -442,6 +447,7 @@ BPF コマンドが実行された
 | [`chmod.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`chmod.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`chmod.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`chmod.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`chmod.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`chmod.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`chmod.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -473,6 +479,7 @@ BPF コマンドが実行された
 | [`chown.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`chown.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`chown.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`chown.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`chown.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`chown.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`chown.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -532,6 +539,7 @@ DNS リクエストが送信された
 | [`exec.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`exec.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`exec.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`exec.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`exec.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`exec.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`exec.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -557,6 +565,7 @@ DNS リクエストが送信された
 | [`exec.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`exec.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`exec.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`exec.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`exec.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`exec.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`exec.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -611,6 +620,7 @@ DNS リクエストが送信された
 | [`exit.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`exit.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`exit.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`exit.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`exit.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`exit.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`exit.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -636,6 +646,7 @@ DNS リクエストが送信された
 | [`exit.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`exit.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`exit.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`exit.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`exit.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`exit.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`exit.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -671,6 +682,7 @@ DNS リクエストが送信された
 | [`link.file.destination.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`link.file.destination.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`link.file.destination.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`link.file.destination.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`link.file.destination.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`link.file.destination.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`link.file.destination.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -689,6 +701,7 @@ DNS リクエストが送信された
 | [`link.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`link.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`link.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`link.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`link.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`link.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`link.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -719,6 +732,7 @@ DNS リクエストが送信された
 | [`load_module.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`load_module.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`load_module.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`load_module.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`load_module.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`load_module.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`load_module.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -750,6 +764,7 @@ DNS リクエストが送信された
 | [`mkdir.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`mkdir.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`mkdir.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`mkdir.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`mkdir.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`mkdir.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`mkdir.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -777,6 +792,7 @@ mmap コマンドが実行された
 | [`mmap.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`mmap.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`mmap.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`mmap.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`mmap.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`mmap.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`mmap.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -830,6 +846,7 @@ mprotect コマンドが実行された
 | [`open.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`open.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`open.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`open.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`open.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`open.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`open.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -878,6 +895,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.ancestors.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`ptrace.tracee.ancestors.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`ptrace.tracee.ancestors.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`ptrace.tracee.ancestors.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`ptrace.tracee.ancestors.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`ptrace.tracee.ancestors.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`ptrace.tracee.ancestors.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -903,6 +921,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.ancestors.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`ptrace.tracee.ancestors.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`ptrace.tracee.ancestors.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`ptrace.tracee.ancestors.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`ptrace.tracee.ancestors.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`ptrace.tracee.ancestors.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`ptrace.tracee.ancestors.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -948,6 +967,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`ptrace.tracee.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`ptrace.tracee.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`ptrace.tracee.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`ptrace.tracee.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`ptrace.tracee.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`ptrace.tracee.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -973,6 +993,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`ptrace.tracee.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`ptrace.tracee.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`ptrace.tracee.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`ptrace.tracee.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`ptrace.tracee.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`ptrace.tracee.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1012,6 +1033,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.parent.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`ptrace.tracee.parent.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`ptrace.tracee.parent.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`ptrace.tracee.parent.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`ptrace.tracee.parent.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`ptrace.tracee.parent.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`ptrace.tracee.parent.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1037,6 +1059,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.parent.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`ptrace.tracee.parent.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`ptrace.tracee.parent.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`ptrace.tracee.parent.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`ptrace.tracee.parent.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`ptrace.tracee.parent.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`ptrace.tracee.parent.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1079,6 +1102,7 @@ ptrace コマンドが実行された
 | [`removexattr.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`removexattr.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`removexattr.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`removexattr.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`removexattr.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`removexattr.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`removexattr.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1107,6 +1131,7 @@ ptrace コマンドが実行された
 | [`rename.file.destination.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`rename.file.destination.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`rename.file.destination.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`rename.file.destination.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`rename.file.destination.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`rename.file.destination.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`rename.file.destination.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1125,6 +1150,7 @@ ptrace コマンドが実行された
 | [`rename.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`rename.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`rename.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`rename.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`rename.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`rename.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`rename.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1152,6 +1178,7 @@ ptrace コマンドが実行された
 | [`rmdir.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`rmdir.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`rmdir.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`rmdir.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`rmdir.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`rmdir.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`rmdir.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1218,6 +1245,7 @@ SELinux 操作が実行された
 | [`setxattr.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`setxattr.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`setxattr.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`setxattr.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`setxattr.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`setxattr.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`setxattr.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1265,6 +1293,7 @@ SELinux 操作が実行された
 | [`signal.target.ancestors.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`signal.target.ancestors.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`signal.target.ancestors.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`signal.target.ancestors.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`signal.target.ancestors.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`signal.target.ancestors.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`signal.target.ancestors.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1290,6 +1319,7 @@ SELinux 操作が実行された
 | [`signal.target.ancestors.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`signal.target.ancestors.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`signal.target.ancestors.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`signal.target.ancestors.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`signal.target.ancestors.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`signal.target.ancestors.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`signal.target.ancestors.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1335,6 +1365,7 @@ SELinux 操作が実行された
 | [`signal.target.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`signal.target.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`signal.target.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`signal.target.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`signal.target.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`signal.target.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`signal.target.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1360,6 +1391,7 @@ SELinux 操作が実行された
 | [`signal.target.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`signal.target.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`signal.target.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`signal.target.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`signal.target.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`signal.target.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`signal.target.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1399,6 +1431,7 @@ SELinux 操作が実行された
 | [`signal.target.parent.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`signal.target.parent.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`signal.target.parent.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`signal.target.parent.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`signal.target.parent.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`signal.target.parent.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`signal.target.parent.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1424,6 +1457,7 @@ SELinux 操作が実行された
 | [`signal.target.parent.interpreter.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`signal.target.parent.interpreter.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`signal.target.parent.interpreter.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`signal.target.parent.interpreter.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`signal.target.parent.interpreter.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`signal.target.parent.interpreter.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`signal.target.parent.interpreter.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1465,6 +1499,7 @@ splice コマンドが実行された
 | [`splice.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`splice.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`splice.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`splice.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`splice.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`splice.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`splice.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1494,6 +1529,7 @@ splice コマンドが実行された
 | [`unlink.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`unlink.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`unlink.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`unlink.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`unlink.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`unlink.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`unlink.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1531,6 +1567,7 @@ splice コマンドが実行された
 | [`utimes.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`utimes.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
 | [`utimes.file.group`](#common-filefields-group-doc) | ファイルの所有者のグループ |
+| [`utimes.file.hashes`](#common-fileevent-hashes-doc) | [実験] このファイルに対して計算された暗号ハッシュのリスト |
 | [`utimes.file.in_upper_layer`](#common-filefields-in_upper_layer-doc) | ファイルレイヤーのインジケーター (例えば OverlayFS の場合) |
 | [`utimes.file.inode`](#common-pathkey-inode-doc) | ファイルの Inode |
 | [`utimes.file.mode`](#common-filefields-mode-doc) | ファイルのモード |
@@ -1869,6 +1906,15 @@ exec.argv in ["127.0.0.1"]
 定義: ファイルの所有者のグループ
 
 `*.group` には 38 個のプレフィックスを付けることができます。
+`chmod.file` `chown.file` `exec.file` `exec.interpreter.file` `exit.file` `exit.interpreter.file` `link.file` `link.file.destination` `load_module.file` `mkdir.file` `mmap.file` `open.file` `process.ancestors.file` `process.ancestors.interpreter.file` `process.file` `process.interpreter.file` `process.parent.file` `process.parent.interpreter.file` `ptrace.tracee.ancestors.file` `ptrace.tracee.ancestors.interpreter.file` `ptrace.tracee.file` `ptrace.tracee.interpreter.file` `ptrace.tracee.parent.file` `ptrace.tracee.parent.interpreter.file` `removexattr.file` `rename.file` `rename.file.destination` `rmdir.file` `setxattr.file` `signal.target.ancestors.file` `signal.target.ancestors.interpreter.file` `signal.target.file` `signal.target.interpreter.file` `signal.target.parent.file` `signal.target.parent.interpreter.file` `splice.file` `unlink.file` `utimes.file`
+
+
+### `*.hashes` {#common-fileevent-hashes-doc}
+タイプ: 文字列
+
+定義: [実験] このファイルに対して計算された暗号ハッシュのリスト
+
+`*.hashes` には 38 個のプレフィックスを付けることができます。
 `chmod.file` `chown.file` `exec.file` `exec.interpreter.file` `exit.file` `exit.interpreter.file` `link.file` `link.file.destination` `load_module.file` `mkdir.file` `mmap.file` `open.file` `process.ancestors.file` `process.ancestors.interpreter.file` `process.file` `process.interpreter.file` `process.parent.file` `process.parent.interpreter.file` `ptrace.tracee.ancestors.file` `ptrace.tracee.ancestors.interpreter.file` `ptrace.tracee.file` `ptrace.tracee.interpreter.file` `ptrace.tracee.parent.file` `ptrace.tracee.parent.interpreter.file` `removexattr.file` `rename.file` `rename.file.destination` `rmdir.file` `setxattr.file` `signal.target.ancestors.file` `signal.target.ancestors.interpreter.file` `signal.target.file` `signal.target.interpreter.file` `signal.target.parent.file` `signal.target.parent.interpreter.file` `splice.file` `unlink.file` `utimes.file`
 
 

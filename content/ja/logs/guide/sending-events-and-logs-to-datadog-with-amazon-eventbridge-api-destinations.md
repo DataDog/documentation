@@ -3,9 +3,15 @@ further_reading:
 - link: https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog
   tag: ブログ
   text: API 宛先のユースケース例を示す AWS ブログ
-kind: ガイド
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: ガイド
+  text: データ転送料金を削減しながら Datadog にログを送信する方法
 title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
+{{< /site-region >}}
 
 Amazon EventBridge は、イベント駆動型アプリケーションの構築を可能にするサーバーレスイベントバスです。 EventBridge は AWS サービスと統合可能ですが、API 宛先機能を利用すると、API を使用して AWS 外からのデータをプッシュ/プルできます。このガイドでは、EventBridge から Datadog へイベントおよびログを送信する方法を解説します。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーション文書][1]をご参照ください。
 
@@ -13,11 +19,11 @@ Amazon EventBridge は、イベント駆動型アプリケーションの構築�
 
 始めるには、[Datadog アカウント][2]と [API キー][3]、[Amazon Eventbridge API 宛先][4]へのアクセスが必要です。
 
-### コンフィギュレーション
+### 構成
 
 1. [Amazon の API 宛先を作成][5]文書のステップに従い、Datadog を API 宛先として追加します。
     - キー名として `DD-API-KEY`、[Datadog API キー][3]を値として、API キー認証を使用します。
-    - 宛先エンドポイントには、ログの場合 `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs`、イベントの場合は `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` を使用して、HTTP メソッドとして `POST` を設定します。ログとイベントの違いに関する詳細は、[データのカテゴリ文書のページ][8]の[ログセクション][6]および[イベントセクション][7]を参照してください。
+    - 宛先エンドポイントには、ログの場合 `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs`、イベントの場合は `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` を使用して、HTTP メソッドとして `POST` を設定します。ログとイベントの違いに関する詳細は、[データ関連リスクの低減][8]を参照してください。
     - イベントエンドポイントを利用する場合、API Destination 接続の `body.field` パラメータに `title` と `text` を含める必要があります。これらは、イベントエンドポイントに `POST` するために必要な値です。詳しくは、[イベントのポストのドキュメント][9]を参照してください。
 2. 宛先をセットアップしたら、Amazon のドキュメントを参照して [EventBridge 作成ルール][10]を作成して、Datadog をあて先として設定します。
 3. Datadog を宛先としてルールをセットアップしたら、イベントを EventBridge にポストしてトリガーします。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーションのドキュメント][1]をご参照ください。たとえば、アカウントで[オブジェクトを S3 バケットへアップロード][11]してテストイベントをトリガーするには、以下の AWS CloudShell コマンドを使用します。
@@ -49,9 +55,7 @@ Datadog に送信されたペイロードの詳細を確認し、API エンド�
 [3]: /ja/account_management/api-app-keys/#api-keys
 [4]: https://aws.amazon.com/eventbridge/
 [5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html#eb-api-destination-create
-[6]: /ja/security/#logs
-[7]: /ja/security/#events-and-comments
-[8]: /ja/security/
+[8]: /ja/data_security/#other-sources-of-potentially-sensitive-data/
 [9]: https://docs.datadoghq.com/ja/api/latest/events/#post-an-event
 [10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
 [11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html

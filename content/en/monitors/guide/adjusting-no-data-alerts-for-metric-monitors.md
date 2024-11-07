@@ -1,6 +1,5 @@
 ---
 title: Adjusting No Data alerts for metric Monitors
-kind: guide
 aliases:
   - /monitors/faq/why-am-i-getting-so-many-no-data-alerts/
   - /monitors/faq/why-am-i-getting-so-many-no-data-alerts-for-my-metric-monitor/

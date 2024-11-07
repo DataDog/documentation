@@ -1,6 +1,6 @@
 ---
-title: Running API and Multistep API Tests On An Application That Requires Authentication
-kind: guide
+title: Use Authentication In API And Multistep API Tests
+
 description: Learn how to ensure your Synthetic API and multistep API tests can log in to your applications. 
 further_reading:
 - link: '/data_security/synthetics'
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[HTTP tests][1] allow you to send HTTP requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content. [Multistep API tests][2] allow you to chain HTTP requests to proactively monitor sophisticated journeys on your key services, and ensure they are available at any time and from any managed or private location.
+[API tests][1] allow you to send requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content. [Multistep API tests][2] allow you to chain requests to proactively monitor sophisticated journeys on your key services, and ensure they are available at any time and from any managed or private location.
 
 This guide discusses the various authentication protocols available for Synthetic API and multistep API tests. For more information about authentication in browser tests, see [Running Tests On An Application That Requires Authentication][3].
 
@@ -104,3 +104,4 @@ For more information about data security, see [Synthetic Monitoring Data Securit
 [5]: https://app.datadoghq.com/synthetics/multi-step/create
 [6]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [7]: /data_security/synthetics
+[8]: /synthetics/api_tests/grpc_tests

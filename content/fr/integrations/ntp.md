@@ -1,39 +1,60 @@
 ---
+app_id: ntp
+app_uuid: 399b74d9-ece5-4517-ae16-c05cac6911b2
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: ntp.offset
+      metadata_path: metadata.csv
+      prefix: ntp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: NTP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - network
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
-display_name: NTP
+display_on_public_website: true
 draft: false
 git_integration_title: ntp
-guid: 9d105f8c-7fd3-48d7-a5d1-1cc386ec0367
 integration_id: ntp
 integration_title: NTP
 integration_version: ''
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ntp.
-metric_to_check: ntp.offset
+custom_kind: integration
+manifest_version: 2.0.0
 name: ntp
-public_title: Intégration Datadog/NTP
+public_title: NTP
 short_description: Recevez des alertes lorsque vos hosts se désynchronisent du serveur
   NTP de votre choix.
-support: core
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: Recevez des alertes lorsque vos hosts se désynchronisent du serveur
+    NTP de votre choix.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: NTP
 ---
 
 
@@ -61,7 +82,7 @@ Par défaut, le check détecte le fournisseur de cloud sur lequel l'Agent est ex
 
 Le check NTP est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
-### Procédure à suivre
+### Configuration
 
 L'Agent active le check NTP par défaut. Pour configurer vous-même le check, modifiez le fichier `ntp.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple ntp.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
@@ -89,7 +110,7 @@ Le check NTP n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/ntp.d/conf.yaml.default
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent

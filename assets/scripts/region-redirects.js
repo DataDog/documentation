@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         redirectToRegion()
     }
-    hideNonRegionSpecificTOC()
+    hideTOCItems()
 
     if (regionSelector) {
         const options = regionSelector.querySelectorAll('.dropdown-item');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             option.addEventListener('click', () => {
                 const region = option.dataset.value;
                 regionOnChangeHandler(region);
-                hideNonRegionSpecificTOC(true)
+                hideTOCItems(true)
             })
         })
     }
@@ -61,7 +61,7 @@ function regionOnChangeHandler(region) {
     const queryParams = new URLSearchParams(window.location.search);
 
     // on change, if query param exists, update the param
-    if (config.allowedRegions.includes(queryParams.get('site'))) {
+    if (config.allowedRegions.includes(queryParams.get('site') || region)) {
         queryParams.set('site', region);
 
         window.history.replaceState(
@@ -73,31 +73,36 @@ function regionOnChangeHandler(region) {
         showRegionSnippet(region);
         replaceButtonInnerText(region);
         Cookies.set('site', region, { path: '/' });
-    } else if (config.allowedRegions.includes(region)) {
-        showRegionSnippet(region);
-        replaceButtonInnerText(region);
-        Cookies.set('site', region, { path: '/' });
     } else {
         redirectToRegion(region);
     }
 }
 
 /**
- * Hides Hugo TOC items that are not {{% site-region %}} specific
- * @param {boolean} regionSelected - region selected via site select dropdown
+ * Hides TOC items that are not {{ site-region }} shortcode specific
+ * Hides all TOC items that are related to headers nested in {{ tabs }}
+ * @param {boolean} shouldResetTOC - region selected via site select dropdown or loading the page asynchronously
  */
-function hideNonRegionSpecificTOC(regionSelected=false) {
+function hideTOCItems(shouldResetTOC=false) {
     const allTOCItems = document.querySelectorAll('#TableOfContents li')
     const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3, .site-region-container.d-none > h2')
     const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
-
+    
+    const tabNestedHeaders = document.querySelectorAll('.code-tabs > .tab-content > .tab-pane > h3, .code-tabs > .tab-content > .tab-pane > h2')
+    const tabNestedHeaderIDs = [...tabNestedHeaders].map(el => `#${el.id}`)
+    
     allTOCItems.forEach(item => {
         const refID = item.querySelector('a')?.hash
-        if(regionSelected){
-            // display all items
+        if(shouldResetTOC){
+            // display all items if region selected or async loading
             item.classList.remove('d-none')
         }
         if(hiddenHeaderIDs.includes(refID)){
+            // since the headers are hidden, also hide the related toc item
+            item.classList.add('d-none')
+        }
+        if(tabNestedHeaderIDs.includes(refID)){
+            // hide all toc items related to headers that are nested in {{tabs}} 
             item.classList.add('d-none')
         }
     })
@@ -135,19 +140,27 @@ function showRegionSnippet(newSiteRegion) {
                 `The key used in the hugo shortcode, ${regionParam}, was not found in the regions.config.js file.`
             );
         } else {
-            param.innerHTML = config[regionParam][newSiteRegion];
-            // checks if there are two `<code>` elements next to each other, and allows them to 'blend' together(no padding or border radius in between the two)
-            if (param.previousElementSibling && param.previousElementSibling.tagName === 'CODE'){
-                param.previousElementSibling.style.paddingRight = '0';
-                param.previousElementSibling.style.borderTopRightRadius = '0';
-                param.previousElementSibling.style.borderBottomRightRadius = '0';
-            }
+            // checks if it's an `<a>` element, in which case we set the href
+            if (param.tagName === 'A'){
+                param.setAttribute("href", config[regionParam][newSiteRegion])
+            } else {
+              param.innerHTML = config[regionParam][newSiteRegion];
+              // checks if there are two `<code>` elements next to each other, and allows them to 'blend' together(no padding or border radius in between the two)
+              if (param.previousElementSibling && param.previousElementSibling.tagName === 'CODE'){
+                  param.previousElementSibling.style.paddingRight = '0';
+                  param.previousElementSibling.style.borderTopRightRadius = '0';
+                  param.previousElementSibling.style.borderBottomRightRadius = '0';
+              }
+             }
         }
     });
 
     if (externalLinks) {
         externalLinks.forEach(link => {
-            link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.search}${link.hash}`;
+            // skips links that are generated by the region-param shortcode
+            if (!link.hasAttribute("data-region-param")){
+              link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.search}${link.hash}`;
+            }
         });
     }
 }
@@ -187,4 +200,4 @@ function redirectToRegion(region = '') {
     }
 }
 
-export { redirectToRegion, getDDSiteFromReferrer };
+export { redirectToRegion, getDDSiteFromReferrer, hideTOCItems };

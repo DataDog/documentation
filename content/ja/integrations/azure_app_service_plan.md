@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure App Service Plan のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
@@ -14,7 +15,6 @@ integration_id: azure-appserviceplan
 integration_title: Microsoft Azure App Service Plan
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_app_service_plan
 public_title: Datadog-Microsoft Azure App Service Plan インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure App Service Plan のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure App Service Plan は、1 つの Web アプリを実行するためのコンピューティングリソース一式を定義します。これらのコンピューティングリソースは、従来の Web ホスティングのサーバーファームに相当します。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure App Service Pla
 
 Azure App Service Plan インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure App Service Plan インテグレーションには、サービスのチェック機能は含まれません。
 

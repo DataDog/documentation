@@ -1,6 +1,5 @@
 ---
 title: Go Log Collection
-kind: documentation
 aliases:
   - /logs/languages/go
 further_reading:
@@ -22,9 +21,12 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'  
 ---
 
-To send your Go logs to Datadog, log to a file and then tail that file with your Datadog Agent. You can use the following setup with [logrus][1], an open source logging library.
+To send your Go logs to Datadog, log to a file and then [tail][11] that file with your Datadog Agent. You can use the following setup with [logrus][1], an open source logging library.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON to avoid the need for [custom parsing rules][2].
 
@@ -36,7 +38,7 @@ For a classic Go configuration, open a `main.go` file and paste in the following
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -57,7 +59,7 @@ These metas can be `hostname`, `username`, `customers`, `metric` or any informat
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -91,8 +93,8 @@ Once [log collection is enabled][3], set up [custom log collection][4] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/go/log.log"
-        service: go
+        path: "<path_to_your_go_log>.log"
+        service: <service_name>
         source: go
         sourcecategory: sourcecode
     ```
@@ -121,9 +123,10 @@ If APM is enabled for this application, the correlation between application logs
 [2]: /logs/log_configuration/parsing
 [3]: /agent/logs/?tab=tailfiles#activate-log-collection
 [4]: /agent/logs/?tab=tailfiles#custom-log-collection
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[5]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [8]: /logs/log_configuration/parsing/?tab=matchers
 [9]: /logs/explorer/#overview
 [10]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[11]: /glossary/#tail

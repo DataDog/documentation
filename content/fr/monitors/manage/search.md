@@ -1,6 +1,5 @@
 ---
 description: Filtrer la liste des monitors à l'aide d'une recherche à facettes
-kind: documentation
 title: Rechercher des monitors
 ---
 
@@ -92,4 +91,4 @@ Vous pouvez effectuer les actions suivantes depuis l'entrée de la vue par défa
 [1]: /fr/monitors/manage/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[4]: /fr/monitors/create/types/
+[4]: /fr/monitors/

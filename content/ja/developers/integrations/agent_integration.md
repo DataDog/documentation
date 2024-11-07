@@ -5,8 +5,7 @@ aliases:
 - /ja/integrations/datadog_checks_dev/
 - /ja/guides/new_integration/
 - /ja/developers/integrations/new_check_howto/
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/agent_integration.md
+description: Datadog Agent インテグレーションを開発し、公開する方法をご紹介します。
 further_reading:
 - link: /developers/integrations/create_a_tile/
   tag: Documentation
@@ -17,7 +16,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Datadog プラットフォームで開発する方法について
-kind: documentation
 title: Agent インテグレーションの作成
 ---
 ## 概要
@@ -26,7 +24,7 @@ title: Agent インテグレーションの作成
 
 ## Agent ベースのインテグレーション
 
-Agent ベースのインテグレーションでは、[Datadog Agent][17] を使用して、開発者が書いたチェックを介してデータを送信します。チェックは、[メトリクス][23]、[イベント][24]、[サービスチェック][25]を顧客の Datadog アカウントに送信できます。Agent 自体も同様に[ログ][26]を送信することができますが、これはチェックの外側で構成されます。
+Agent ベースのインテグレーションでは、[Datadog Agent][17] を使用して、開発者が書いたチェックを介してデータを送信します。チェックは、[メトリクス][34]、[イベント][18]、[サービスチェック][25]を顧客の Datadog アカウントに送信できます。Agent 自体も同様に[ログ][26]を送信することができますが、これはチェックの外側で構成されます。
 
 これらのインテグレーションの実装コードは、Datadog がホスティングしています。Agent インテグレーションは、ローカルエリアネットワーク (LAN) や仮想プライベートクラウド (VPC) に存在するシステムまたはアプリケーションからデータを収集するのに最適な方法です。Agent インテグレーションの作成では、ソリューションを Python ホイール (`.whl`) として公開およびデプロイする必要があります。
 
@@ -48,7 +46,7 @@ Agent ベースのインテグレーションを構築するプロセスは、�
 
 必要な Datadog Agent インテグレーション開発ツールは以下の通りです。
 
-- Python v3.8、[pipx][2]、Agent Integration Developer Tool (`ddev`)。インストール方法については、[Datadog Agent Integration Developer Tool のインストール][3]を参照してください。
+- Python v3.11, [pipx][2], and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
 - フルテストスイートを実行するための [Docker][4]。
 - git [コマンドライン][5]または [GitHub デスクトップクライアント][19]。
 
@@ -441,8 +439,35 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 Agent ベースのインテグレーションを作成したら、インテグレーションタイルに表示される残りの[必須アセット][31]を入力し、プルリクエストを開くための情報については、[タイルの作成][20]ドキュメントを参照してください。
 
+## Update your integration
+To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository. 
 
-## その他の参考資料
+* If you are editing or adding new integration code, a version bump is required.
+
+* If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
+
+After making updates to assets such as dashboards and recommended monitors, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end. 
+
+### Bumping an integration version 
+In addition to any code changes, the following is required when bumping an integration version:
+1. Update `__about__.py` to reflect the new version number. This file can be found in your integration's directory under `/datadog_checks/<your_check_name>/__about__.py`.
+2. Add an entry to the CHANGELOG.md file that adheres to the following format:
+   ```
+   ## Version Number / Date
+
+   ***Added***: 
+
+   * New feature
+   * New feature
+
+   ***Fixed***:
+
+   * Bug fix
+   * Bug fix
+   ```
+3. Update all references to the version number mentioned in `README.md` and elsewhere. Installation instructions in `README.md` often include the version number, which needs to be updated.
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -463,7 +488,7 @@ Agent ベースのインテグレーションを作成したら、インテグ�
 [15]: /ja/developers/integrations/check_references/#service-check-file
 [16]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [17]: https://docs.datadoghq.com/ja/agent/
-[18]: https://docs.datadoghq.com/ja/events/
+[18]: https://docs.datadoghq.com/ja/service_management/events/
 [19]: https://desktop.github.com/
 [20]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
 [21]: https://github.com/Datadog/integrations-extras
@@ -479,3 +504,4 @@ Agent ベースのインテグレーションを作成したら、インテグ�
 [31]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/ja/developers/integrations/check_references/
+[34]: https://docs.datadoghq.com/ja/metrics/

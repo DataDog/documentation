@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": false,
+      "forward_tags": false,
+      "forward_tags_restriction_list": [
+        "datacenter",
+        "host"
+      ],
+      "forward_tags_restriction_list_type": "ALLOW_LIST",
+      "forwarder_destination": {
+        "auth": {
+          "username": "my-username",
+          "password": "my-password"
+        },
+        "index_name": "nginx-logs",
+        "index_rotation": "yyyy-MM-dd",
+        "endpoint": "https://example.com",
+        "type": "elasticsearch"
+      },
+      "name": "Nginx logs",
+      "query": "source:nginx"
+    },
+    "type": "custom_destination"
+  }
+}

@@ -2,13 +2,12 @@
 aliases:
 - /ja/security_platform/cloud_workload_security/guide/tuning-rules/
 - /ja/security_platform/cloud_security_management/guide/tuning-rules/
-kind: ガイド
-title: CWS セキュリティシグナルの微調整
+title: CSM Threats セキュリティシグナルの微調整
 ---
 
 ## 概要 
 
-Datadog Cloud Workload Security は、ワークロードレベルで発生する不審なアクティビティを監視しています。しかし、ユーザーの環境における特定の設定のために、良性のアクティビティが悪意のあるものとしてフラグ付けされるケースもあります。良性に期待されるアクティビティがシグナルをトリガーしている場合、そのアクティビティのトリガーを抑制してノイズを抑制することができます。
+Cloud Security Management Threats (CSM Threats) は、ワークロードレベルで発生する不審なアクティビティを監視しています。しかし、ユーザーの環境における特定の設定のために、良性のアクティビティが悪意のあるものとしてフラグ付けされるケースもあります。良性であると想定されるアクティビティがシグナルをトリガーしている場合、そのアクティビティのトリガーを抑制してノイズを抑制することができます。
 
 このガイドでは、ベストプラクティスのための考察と、シグナル抑制を微調整するためのステップを説明します。
 
@@ -34,7 +33,7 @@ Datadog Cloud Workload Security は、ワークロードレベルで発生する
 - `@process.ancestors.executable.path`
 - `@process.ancestors.executable.envs`
 
-あるプロセスが正当なものであるかどうかを評価する場合、過去のプロセスを確認することで、その実行フローを文脈的に理解することができます。プロセスの祖先ツリーは、プロセスをその起源までさかのぼります。
+To determine if a process is legitimate, review its parent process in the process tree. The process ancestry tree traces a process back to its origin, providing context for its execution flow. This helps in understanding the sequence of events leading up to the current process.
 
 通常、親プロセスと不要なプロセスの属性の両方に基づいて抑制すれば十分です。
 
@@ -134,15 +133,15 @@ Datadog Cloud Workload Security は、ワークロードレベルで発生する
 - `@process.executable.user`
 - `@process.executable.uid`
 
-さらに、一部のマシンでパッチが適用されたカーネルバージョン (例えば、Dirty Pipe 脆弱性のパッチが適用された Linux バージョン 5.16.11、5.15.25、5.10 など) を実行していても、シグナルが作成されることに気づくかもしれません。この場合、組み合わせに `host`、`kube_container_name`、`kube_service` などのワークロードレベルのタグを追加します。ただし、ワークロードレベルの属性やタグを使用する場合、広範囲の候補に適用されるため、検出対象範囲やカバレッジが減少することに注意してください。このような事態を防ぐには、ワークロードレベルのタグとプロセスまたはファイルベースの属性を常に組み合わせて、よりきめ細かい抑制基準を定義する必要があります。
+Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (for example, Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add a workload level tag such as `host`, `kube_container_name`, or `kube_service` to the combination. However, when you use a workload level attribute or tag, be aware that it applies to a wide range of candidates which decreases your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define a more granular suppression criteria.
 
 ## シグナルから抑制を加える
 
-CWS の検出ルールから報告された潜在的な脅威を調査する過程で、環境に特有の既知の良性の動作にアラートするシグナルに遭遇することがあります。
+CSM Threats の検出ルールから報告された潜在的な脅威を調査する過程で、環境に特有の既知の良性の動作についてアラートを発するシグナルに遭遇することがあります。
 
 Java プロセスユーティリティの悪用について考えてみましょう。攻撃者は、Java プロセスを実行するアプリケーションコードの脆弱性を意図的に狙います。この種の攻撃は、独自の Java シェルユーティリティを生成することにより、アプリケーションへの永続的なアクセスを伴います。
 
-場合によっては、CWS のルールは、例えば、セキュリティチームがアプリケーションの堅牢性を評価するためにペンテストセッションを実行しているような、予想されるアクティビティを検出することもあります。この場合、報告されたアラートの精度を評価し、ノイズを抑制することができます。
+場合によっては、CSM Threats のルールは、例えば、セキュリティチームがアプリケーションの堅牢性を評価するためにペンテストセッションを実行しているような、予想されるアクティビティを検出することもあります。この場合、報告されたアラートの精度を評価し、ノイズを抑制することができます。
 
 シグナルの詳細サイドパネルを開き、タブからタブに移動して、コマンドライン引数や環境変数キーなどの主要なプロセスメタデータを含むコンテキストを取得します。コンテナ化されたワークロードの場合、関連するイメージ、ポッド、Kubernetes クラスターなどの情報が含まれます。
 
@@ -169,12 +168,12 @@ Java プロセスユーティリティの悪用について考えてみましょ
 
 シグナルは、セキュリティアラート内の関連するコンテキストを表面化させます。イベントデータは抑制フィルターに活用できますが、検出ルールが構築される観測可能性データはより良い調整候補を提供する可能性があります。
 
-クラウドワークロードセキュリティでは、収集したカーネルイベントからランタイム Agent のログが生成されます。シグナルサイドパネルからコンテキストスイッチなしでログをプレビューすることができます。
+CSM Threats では、収集したカーネルイベントからランタイム Agent のログが生成されます。シグナルサイドパネルからコンテキストスイッチなしでログをプレビューすることができます。
 
 1. 選択したシグナルの詳細サイドパネルで、[Events] タブをクリックします。
 2. **View in Log Explorer** をクリックして、ログ管理に移動し、このシグナルを発生させるログの完全なリストを表示します。
    ログは多数存在するため、シグナルサイドパネルでは、これらのログとその共有属性を JSON 構造にまとめます。
-3. [Event] タブに戻り、パネルの最後尾にスクロールします。JSON ドロップダウンを展開し、ランタイム Agent イベントに含まれるすべてのログ属性にアクセスします。
+3. Go back to the Events tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
 4. シグナルを抑制するキーと値のペアを、`@process.args`、`@process.group`、`@process.ancestors.comm`、または `@process.ancestors.args` などの共通のキーで特定することができるようになります。
 5. ルールエディターでルールを開き、**Exclude benign activity with suppression queries** (抑制クエリを使用した良性アクティビティを除外する) で 役に立つと特定したキーと値のペアのリストを追加します。
 

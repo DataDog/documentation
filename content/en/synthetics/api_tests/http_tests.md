@@ -1,6 +1,5 @@
 ---
-title: HTTP Tests
-kind: documentation
+title: HTTP Testing
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test
@@ -44,12 +43,23 @@ After choosing to create an `HTTP` test, define your test's request.
 ### Define request
 
 1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
-2. Enrich your HTTP request with **Advanced Options** (optional):
+
+   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+
+2. **Name** your HTTP test.
+
+3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+
+   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
+
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Advanced options
 
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
-
+   * **HTTP version**: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1`.
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
    * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Timeout**: Specify the amount of time in seconds before the test times out.
@@ -70,8 +80,8 @@ After choosing to create an `HTTP` test, define your test's request.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
-     For "Single Chunk" transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.  
+     For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).  
    
    {{% /tab %}}
@@ -84,9 +94,11 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
-
+   * **Body type**: Select the type of the request body (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * **Request body**: Add the content of your HTTP request body.
+       * The request body is limited to a maximum size of 50 kilobytes for `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
+       * The request body is limited to one file of 3 megabytes for `application/octet-stream`.
+       * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.  
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
@@ -104,17 +116,15 @@ After choosing to create an `HTTP` test, define your test's request.
 [1]: /data_security/synthetics
    {{% /tab %}}
 
+   {{% tab "Javascript" %}}
+
+   Define variables for your HTTP API tests with JavaScript:
+
+  {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+
+   {{% /tab %}}
+
    {{< /tabs >}}
-
-<br/>
-
-3. **Name** your HTTP test.
-
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
-
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
-
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -150,50 +160,10 @@ Select the **Locations** to run your HTTP test from. HTTP tests can run from bot
 HTTP tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your HTTP test.
-* [**Within your CI/CD pipelines**][2] to start shipping without fearing faulty code might impact your customers experience.
+* [**Within your CI/CD pipelines**][2] to start shipping without fearing faulty code might impact your customers' experience.
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
-### Define alert conditions
-
-Set alert conditions to determine the circumstances under which you want a test to fail and trigger an alert.
-
-#### Alerting rule
-
-When you set the alert conditions to: `An alert is triggered if your test fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
-
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes;
-* At one moment during the last *X* minutes, at least *n* locations were in failure.
-
-#### Fast retry
-
-Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
-
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
-
-### Configure the test monitor
-
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
-
-1. [Similar to how you configure monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the dropdown box.
-
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
-
-    | Conditional Variable       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | Show when the test alerts.                                          |
-    | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from an alert.                          |
-    | `{{^is_recovery}}`         | Show unless the test recovers from an alert.                        |
-    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
-    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
-    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
-    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
-
-3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-
-4. Click **Create** to save your test configuration and monitor.
-
-For more information, see [Using Synthetic Test Monitors][10].
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}}
 
@@ -219,6 +189,9 @@ The most common errors include the following:
 
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
+
+`Error performing HTTP/2 request`
+: The request could not be performed. See the dedicated [error][16] page for more information.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
@@ -247,7 +220,7 @@ Access restriction is available for customers using [custom roles][15] on their 
 
 You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -259,7 +232,7 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
@@ -268,3 +241,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
+[16]: /synthetics/api_tests/errors/#http-errors

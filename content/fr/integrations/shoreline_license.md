@@ -19,12 +19,11 @@ integration_id: shoreline-software-license
 integration_title: Shoreline.io
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/terms_of_service_shoreline.pdf
 manifest_version: 2.0.0
 name: shoreline_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

@@ -1,44 +1,68 @@
 ---
+app_id: oom-kill
+app_uuid: 7546b270-2efe-4a59-8f94-3447df2db801
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: oom_kill.oom_process.count
+      metadata_path: metadata.csv
+      prefix: oom_kill.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10293
+    source_type_name: OOM Kill
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - os & system
-creates_events: true
-ddtype: check
+- os & system
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
-display_name: "OOM\_Kill"
+- https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: oom_kill
-guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
-integration_title: "OOM\_Kill"
+integration_title: OOM Kill
 integration_version: ''
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: oom_kill.
-metric_to_check: oom_kill.oom_process.count
+custom_kind: integration
+manifest_version: 2.0.0
 name: oom_kill
-public_title: "Intégration Datadog/OOM\_Kill"
-short_description: Surveillez les éliminations de processus OOM (Out of Memory) effectuées par le système ou un cgroup.
-support: core
+public_title: OOM Kill
+short_description: Surveillez les éliminations de processus OOM (Out of Memory) effectuées
+  par le système ou un cgroup.
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Surveillez les éliminations de processus OOM (Out of Memory) effectuées
+    par le système ou un cgroup.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OOM Kill
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+
+
 ## Présentation
 
 Ce check permet de surveiller les processus tués par le mécanisme OOM Killer (Out of Memory Killer) du kernel par l'intermédiaire de l'Agent Datadog et du system probe.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Le check OOM Kill est inclus avec le package de l'[Agent Datadog][1]. Il repose sur un programme eBPF intégré au system probe.
 
@@ -55,9 +79,9 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**Remarque** : pour que le check OOM Kill fonctionne, vous devez utiliser la version 4.11+ du kernel. De plus, seules les versions 8 et ultérieures de Windows, Container-Optimized OS et CenOS/RHEL sont prises en charge.
+**Remarque** : pour que le check OOM Kill fonctionne, vous devez utiliser la version 4.11 ou une version ultérieure du kernel. De plus, seules les versions 8 et ultérieures de Windows et CentOS/RHEL sont prises en charge.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Dans le fichier `system-probe.yaml` situé à la racine du répertoire de configuration de votre Agent, ajoutez la configuration suivante :
 
@@ -70,36 +94,90 @@ yum install -y kernel-devel-$(uname -r)
 
 3. [Redémarrez l'Agent][3].
 
+### Configuration avec Docker
+
+En plus de monter `system-probe.yaml` et `oom_kill.d/conf.yaml` tel qu'indiqué ci-dessus, vous devez procéder comme suit :
+
+1. Montez les volumes suivants sur le conteneur de l'Agent :
+
+    ```
+    -v /sys/kernel/debug:/sys/kernel/debug 
+    -v /lib/modules:/lib/modules 
+    -v /usr/src:/usr/src
+    ```
+
+2. Ajoutez l'autorisation suivante pour activer les opérations BPF :
+
+    ```
+    --privileged
+    ```
+
+    À partir de la version 5.8 du kernel, le paramètre `--privileged` peut être remplacé par `--cap-add CAP_BPF`.
+
+**Remarque** : le mode `--privileged` n'est pas pris en charge dans Docker Swarm.
+
+
 ### Configuration avec Helm
 
 À l'aide du [chart Helm Datadog][4], vérifiez que les paramètres `datadog.systemProbe` et `datadog.systemProbe.enableOOMKill` sont activés dans le fichier `values.yaml`.
+
+### Configuration avec l'Operator (v1.0.0+)
+
+Définissez le paramètre `features.oomKill.enabled` dans le manifeste DatadogAgent :
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    oomKill:
+      enabled: true
+```
+
+**Remarque** : si vous utilisez COS (Container Optimized OS), remplacez le volume `src` dans l'Agent de nœud :
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    oomKill:
+      enabled: true
+  override:
+    nodeAgent:
+      volumes: 
+      - emptyDir: {}
+        name: src
+```
 
 ### Validation
 
 [Lancez la sous-commande status de l'Agent][5] et cherchez `oom_kill` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "oom_kill" >}}
 
 
-### Checks de service
+### Aide
 
 Le check OOM Kill n'inclut aucun check de service.
 
-### Événements
+### Aide
 
 Le check OOM Kill envoie un événement pour chaque OOM Kill. Celui-ci inclut l'ID et le nom du processus éliminé, ainsi que l'ID et le nom du processus à l'origine du déclenchement.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[4]: https://github.com/DataDog/helm-charts
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
 [7]: https://docs.datadoghq.com/fr/help/

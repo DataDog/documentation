@@ -3,17 +3,17 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Lex のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_lex/
 draft: false
 git_integration_title: amazon_lex
 has_logo: true
-integration_id: amazon-lex
+integration_id: ''
 integration_title: Amazon Lex
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_lex
 public_title: Datadog-Amazon Lex インテグレーション
@@ -21,6 +21,7 @@ short_description: Amazon Lex のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Lex は、音声とテキストを使用した会話型のインターフェースをアプリケーションに作成するためのサービスです。
@@ -38,7 +39,7 @@ Amazon Lex は、音声とテキストを使用した会話型のインターフ
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Lex` が有効になっていることを確認します。
 2. [Datadog - Amazon Lex インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -64,7 +65,7 @@ Amazon Lex から S3 バケットまたは CloudWatch のいずれかにログ�
 
 Amazon Lex インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon Lex インテグレーションには、サービスのチェック機能は含まれません。
 

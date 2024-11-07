@@ -1,15 +1,11 @@
 ---
 title: Database Monitoring Data Collected
-kind: documentation
 description: Information about the data that Database Monitoring collects.
 further_reading:
 
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
-When you setup Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses.
+When you set up Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses.
 
 These are standard Datadog metrics that you can use in [dashboards][1], [monitors][2], [notebooks][3], and anywhere else you use metrics.
 
@@ -20,8 +16,9 @@ To see a complete list of metrics collected, see the integration **Data Collecte
 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
-- **Postrgres**: `postgresql.queries.*`
+- **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## Normalized queries
 
@@ -55,7 +52,7 @@ SELECT * FROM timeperiods WHERE start >= ? AND end <= ? AND num = ?
 
 ## Sensitive information
 
-Because Database Monitoring Agent normalizes queries, it obfuscates all query bind parameters sent to the Datadog intake. Thus, passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database are not viewable in query metrics, query samples, or explain plans.
+Because the Database Monitoring Agent normalizes queries, it obfuscates all query bind parameters sent to the Datadog intake. Thus, passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database are not viewable in query metrics, query samples, or explain plans.
 
 However, there are some common sources of data risks:
 
@@ -67,7 +64,7 @@ If table names, column names, indexes, database names, or any other schema conta
 
 If you are sending logs to Datadog from your database, be aware that some logs can contain the full SQL query text including query bind parameters. Review and apply [log security rules][4] consistent with your organization's requirements.
 
-### Query Comments
+### Query comments
 
 SQL query comments may be collected by the Agent and sent to Datadog without passing through obfuscation. SQL query comments generally do not contain sensitive data, but comments extracted from the query SQL will not pass through obfuscation.
 

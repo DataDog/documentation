@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: buoyant-inc-buoyant-cloud
 app_uuid: b17ccba3-3278-4923-b22a-542002b3fd5e
 assets: {}
@@ -10,9 +12,10 @@ author:
   vendor_id: buoyant
 categories:
 - マーケットプレイス
-- コンテナ
+- incident-teams
 - コスト管理
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,12 +24,10 @@ integration_id: buoyant-inc-buoyant-cloud
 integration_title: Buoyant Cloud
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: buoyant_inc_buoyant_cloud
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -79,13 +80,14 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Buoyant Cloud は、Linkerd 環境を管理・監視します。Buoyant による Linkerd サポート、Buoyant Operator による Linkerd のフルマネージド、および Linkerd 環境の詳細なヘルスチェックを利用できます。Buoyant Cloud では、ゼロトラスト認可環境の構築と監査を支援する監査およびコンプライアンスツールへのアクセスを得ることができます。
 
-## サポート
+## Agent
 
 [support.buoyant.io](https://support.buoyant.io) にアクセスして、ご相談ください。
 

@@ -8,7 +8,6 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: 설명서
   text: 여러 계정으로 팀 & 조직 설정하기
-kind: 설명서
 title: Google SAML IdP
 ---
 
@@ -18,15 +17,28 @@ title: Google SAML IdP
 
 ## 서버 제공업체 정보
 
-**사전 조건**: IDP-initiated SSO를 Datadog SAML 설정 페이지에서 켜짐으로 설정해야 합니다
+전제조건으로 Datadog [SAML 설정 페이지][2]에서 **IDP initiated SSO**를 확인해야 합니다.
 
-* **애플리케이션 이름**: 무엇이든 될 수 있습니다
-* **설명**: 무엇이든 될 수 있습니다
-* **ACS URL**: https://app.datadoghq.com/saml/saml_setup의 "Assertion Consumer Service URL"에 표시되는 URL(`/id/` 포함 URL)을 사용합니다. "Assertion Consumer Service URL"에 여러 URL이 표시되는 경우에는 하나만 입력해주세요.
-* **엔티티 ID**:  `https://app.datadoghq.com/account/saml/metadata.xml`
-* **시작 URL**: 공백으로 둘 수 있습니다. 또는, https://app.datadoghq.com/saml/saml_setup 및 https://app.datadoghq.com/account/team 페이지에 안내된 "Single Sign On Login URL"을 사용하세요.
-* **서명된 응답**: 체크하지 않은 상태로 두세요
-* **이름 ID**: "기본 정보" "주요 이메일"
+Application Name
+: 모든 이름 가능
+
+Description
+: 무엇이든 가능
+
+ACS URL
+: [SAML 설정 페이지][2]의 **Assertion Consumer Service URL**에 표시되는 URL(`/id/`  포함 URL)을 사용합니다. Assertion Consumer Service URL에 여러 URL이 표시되는 경우 하나만 입력하세요.
+
+Entity ID
+: [SAML 설정 페이지][2]의 **Entity ID**에 표시된 URL을 사용합니다.
+
+Start URL
+: 공백으로 두거나 [SAML 설정 페이지][2]에 나열된 **Single Sign On Login URL**을 사용할 수 있습니다.
+
+Signed Response
+: 선택하지 않은 채로 둠
+
+Name ID
+: **Basic Information** 및 **Primary Email**을 선택합니다
 
 ## 속성 매핑
 
@@ -44,3 +56,4 @@ title: Google SAML IdP
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://support.google.com/a/answer/7553768
+[2]: https://app.datadoghq.com/saml/saml_setup

@@ -3,6 +3,7 @@ app_id: auth0
 app_uuid: 0c91d12e-f01e-47d9-8a07-4dba1cde4b67
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: auth0.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10098
     source_type_name: Auth0
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,6 +24,7 @@ categories:
 - インシデント
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: auth0
 integration_title: Auth0
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: auth0
-oauth: {}
 public_title: Auth0
 short_description: Auth0 イベントを表示し、分析します。
 supported_os:
@@ -50,6 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Auth0 イベントを表示し、分析します。
   media: []
@@ -58,6 +60,7 @@ tile:
   title: Auth0
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -113,7 +116,7 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 
 ## 収集データ
 
-### ログの収集
+### ログ収集
 
 Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[ログのイベントタイプコード][4]を参照してください。
 
@@ -121,7 +124,7 @@ Auth0 のログが収集され、Datadog に送信されます。送信される
 
 auth0 には、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 auth0 には、サービスのチェック機能は含まれません。
 

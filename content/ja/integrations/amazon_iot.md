@@ -6,27 +6,28 @@ categories:
 - cloud
 - iot
 - log collection
+custom_kind: integration
 dependencies: []
-description: Amazon Internet of Things のキーメトリクスを追跡。
+description: AWS IoT Core のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_iot/
 draft: false
 git_integration_title: amazon_iot
 has_logo: true
-integration_id: amazon-iot
-integration_title: Amazon Internet of Things
+integration_id: ''
+integration_title: AWS IoT Core
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_iot
-public_title: Datadog-Amazon Internet of Things インテグレーション
-short_description: Amazon Internet of Things のキーメトリクスを追跡。
+public_title: Datadog-AWS IoT Core インテグレーション
+short_description: AWS IoT Core のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-AWS IoT は、接続されたデバイスが簡単かつセキュアにクラウドアプリケーションや他のデバイスと対話できるようにするマネージド型クラウドプラットフォームです。
+AWS IoT Core は、接続されたデバイスが簡単かつセキュアにクラウドアプリケーションや他のデバイスと対話できるようにするマネージド型クラウドプラットフォームです。
 
 このインテグレーションを有効にすると、Datadog にすべての IOT メトリクスを表示できます。
 
@@ -39,20 +40,20 @@ AWS IoT は、接続されたデバイスが簡単かつセキュアにクラウ
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `IoT` が有効になっていることを確認します。
-2. [Datadog - AWS IoT インテグレーション][3]をインストールします。
+2. [Datadog - AWS IoT Core インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
-Amazon IoT から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS IoT Core から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_iot` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon IoT ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS IoT Core ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -67,11 +68,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS IoT インテグレーションには、イベントは含まれません。
+AWS IoT Core インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-AWS IoT インテグレーションには、サービスのチェック機能は含まれません。
+AWS IoT Core インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

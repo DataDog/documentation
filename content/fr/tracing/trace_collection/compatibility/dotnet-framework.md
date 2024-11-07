@@ -12,7 +12,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
   text: Exemples d'instrumentation personnalisée
-kind: documentation
 title: Exigences de compatibilité .NET Framework
 type: multi-code-lang
 ---
@@ -22,7 +21,7 @@ Le traceur .NET prend en charge tous les langages basés sur .NET (C#, F#, Visua
 
 ## Runtimes .NET Framework pris en charge
 
-Le traceur .NET prend en charge l'instrumentation automatique et personnalisée sur les versions suivantes de .NET Framework. Il prend également en charge [.NET Core][2].
+Le traceur .NET prend en charge l'instrumentation automatique et personnalisée sur les versions suivantes de .NET Framework. Il prend également en charge [.NET Core][2]. Le traceur .NET ne prend pas en charge l'exécution de code dans les environnements de confiance partielle.
 
 | Version de .NET Framework  | Fin de cycle de vie par Microsoft   | Niveau de prise en charge                       | Version du package             | Fin de cycle de vie par Datadog |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
@@ -31,15 +30,15 @@ Le traceur .NET prend en charge l'instrumentation automatique et personnalisée 
 | 4.7                     |                       | [Disponibilité générale](#support-ga)                   | dernière                      |                     |
 | 4.6.2                   |                       | [Disponibilité générale](#support-ga)                   | dernière                      |                     |
 | 4.6.1                   | 26/04/2022            | [Disponibilité générale](#support-ga)                   | dernière                      |                     |
-| 4.6                     | 26/04/2022            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (par ex. [1.31.2][3]) | 26/04/2022          |
-| 4.5.2                   | 26/04/2022            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (par ex. [1.31.2][3]) | 26/04/2022          |
-| 4.5.1                   | 12/01/2016            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (par ex. [1.31.2][3]) | 26/04/2022          |
-| 4.5                     | 12/01/2016            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (par ex. [1.31.2][3]) | 26/04/2022          |
+| 4.6                     | 26/04/2022            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (p. ex. [1.31.2][3]) | 26/04/2022          |
+| 4.5.2                   | 26/04/2022            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (p. ex. [1.31.2][3]) | 26/04/2022          |
+| 4.5.1                   | 12/01/2016            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (p. ex. [1.31.2][3]) | 26/04/2022          |
+| 4.5                     | 12/01/2016            | [Fin de cycle de vie](#support-eol)                 | < 2.0.0 (p. ex. [1.31.2][3]) | 26/04/2022          |
 
-Pour en savoir plus, consultez la [politique de Microsoft relative au cycle de vie de .NET Core][4] et la [politique de prise en charge du runtime par APM pour .NET Framework](#politique-de-prise-en-charge-du-runtime-par-APM-pour-NET-Framework).
+Pour en savoir plus, consultez la [politique de Microsoft relative au cycle de vie de .NET Core][4] et la [politique de prise en charge du runtime par APM pour .NET Framework](#politique-de-prise-en-charge-du-runtime-par-apm-pour-net-framework).
 
 <div class="alert alert-info">
-  <div class="alert-info"><b>Remarque :</b> pour choisir la version du traceur à utiliser pour une instrumentation automatique, utilisez la version de .NET Framework installée sur le serveur d'application. Par exemple, si vous compilez votre application en ciblant la version 4.5.1 de .NET Framework mais que l'application s'exécute sur un serveur qui utilise la version 4.8, utilisez la dernière version du traceur. Pour connaitre la version de .NET Framework installée sur une machine, suivez les <a href="https://learn.microsoft.com/fr-fr/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">instructions fournies par Microsoft</a>.
+  <div class="alert-info"><b>Remarque</b> : pour choisir la version du traceur à utiliser pour une instrumentation automatique, utilisez la version de .NET Framework installée sur le serveur de l'application. Par exemple, si vous compilez votre application en ciblant la version 4.5.1 de .NET Framework, mais que l'application s'exécute sur un serveur qui utilise la version 4.8, utilisez la dernière version du traceur. Pour connaître la version de .NET Framework installée sur une machine, suivez les <a href="https://learn.microsoft.com/fr-fr/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">instructions fournies par Microsoft</a>.
   </div>
 </div>
 
@@ -58,12 +57,16 @@ La [dernière version du traceur .NET][5] peut instrumenter automatiquement les 
 
 | Framework ou bibliothèque            | Package NuGet                                                                             | Nom de l'intégration     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| .NET Remoting                   | Intégré                                                                                  | `Remoting`           |
 | ADO.NET                         | Toutes les intégrations AdoNet                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET (y compris Web Forms)   | Intégré                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
@@ -71,6 +74,7 @@ La [dernière version du traceur .NET][5] peut instrumenter automatiquement les 
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | Intégré                                                                                  | `HttpMessageHandler` |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
 | MSMQ                            | Intégré                                                                                  | `Msmq`               |
@@ -98,7 +102,7 @@ Vos bibliothèques préférées ne sont pas disponibles ? Datadog élargit cont
 
 ## Politique de prise en charge du runtime par APM pour .NET Framework
 
-La solution APM Datadog pour .NET Framework dépend du système d'exploitation du host, du runtime .NET Framework, de certaines bibliothèques .NET Framework et de l'Agent/l'API Datadog. Ces systèmes logiciels tiers prennent en charge des versions spécifiques de .NET Framework. Lorsque le logiciel externe cesse de prendre en charge une version de .NET Framework, la prise en charge de cette version par APM pour .NET Framework s'arrête également.
+La solution APM Datadog pour .NET Framework dépend du système d'exploitation du host, du runtime .NET Framework, de certaines bibliothèques .NET Framework ainsi que de l'Agent et l'API Datadog. Ces systèmes logiciels tiers prennent en charge des versions spécifiques de .NET Framework. Lorsque le logiciel externe cesse de prendre en charge une version de .NET Framework, la prise en charge de cette version par APM pour .NET Framework s'arrête également.
 
 ### Niveaux de prise en charge
 
@@ -112,11 +116,11 @@ La solution APM Datadog pour .NET Framework dépend du système d'exploitation d
 
 ### Gestion des versions du package
 
-La solution APM pour .NET Framework de Datadog applique la [gestion sémantique des versions][10]. En cas de mise à jour, les modifications suivantes sont apportées à la prise en charge du runtime :
+La solution APM pour .NET Framework de Datadog applique la [gestion sémantique des versions][10]. En cas de mise à jour, la prise en charge du runtime subit les modifications suivantes :
 
   - **Les mises à jour majeures** (par exemple, de `1.0.0` à `2.0.0`) peuvent modifier la prise en charge d'un runtime et la faire passer de [Bêta](#support-beta)/[Disponibilité générale](#support-ga) à [Maintenance](#support-maintenance)/[Fin de cycle de vie](#support-eol).
-  - **Les mises à jour mineures** (par exemple, de `1.0.0` à `1.1.0`) ne réduiront pas le niveau de prise en charge d'un runtime, mais des runtimes supplémentaires peuvent être pris en charge.
-  - **Les patchs** (par exemple, de `1.0.0` à `1.0.1`) n'affecteront pas la prise en charge d'un runtime.
+  - **Les mises à jour mineures** (par exemple, de `1.0.0` à `1.1.0`) ne réduisent pas le niveau de prise en charge d'un runtime, mais des runtimes supplémentaires peuvent être pris en charge.
+  - **Les patchs** (par exemple, de `1.0.0` à `1.0.1`) n'affectent pas la prise en charge d'un runtime.
 
 ## Pour aller plus loin
 

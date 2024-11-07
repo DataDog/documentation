@@ -21,7 +21,7 @@ integration_id: php
 integration_title: PHP
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: php
 public_title: Intégration Datadog/PHP

@@ -2,6 +2,7 @@
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure App Services のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_app_services/
@@ -12,7 +13,6 @@ integration_id: azure-app-services
 integration_title: Microsoft Azure App Service
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_app_services
 public_title: Datadog-Microsoft Azure App Service インテグレーション
@@ -20,6 +20,7 @@ short_description: Azure App Services のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure App Service は、Web、モバイル、API、およびビジネスロジックアプリケーションを実行し、それらのアプリケーションが必要とするリソースを自動的に管理する、PaaS (サービスとしてのプラットフォーム) です。
@@ -63,7 +64,7 @@ Azure App Service で実行するアプリケーションに対して Datadog AP
 
 Azure App Service インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure App Service インテグレーションには、サービスのチェック機能は含まれません。
 

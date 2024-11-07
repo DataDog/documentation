@@ -6,10 +6,9 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-kind: ガイド
 title: メトリクスモニターの No Data アラートを調整する
 ---
 
@@ -21,7 +20,7 @@ title: メトリクスモニターの No Data アラートを調整する
 1. 上の画像は、このメトリクス: `aws.ec2.cpuutilization` が少し遅れて入ってきていることを表示しています。
 これは、このメトリクスが Cloudwatch から入手できるようになる時期が制限されているためです。
 
-{{< img src="monitors/guide/require_full_window.png" alt="Require a Full Window of Data" >}}
+{{< img src="monitors/guide/require_full_window.png" alt="フルウィンドウのデータを要求する" >}}
 
 2. 遅延評価オプション。
 モニターは 1 分ごとに評価を行うので、過去 X 分のデータを振り返っていることになります。AWS から来るようなバックフィルされたメトリクスでは、モニターは Datadog にデータがない期間を見ている可能性があります。これは、誤った No Data アラートを引き起こします。このフィールドを設定すると、モニターを 900 秒待つことができ、モニターが評価を開始する前に、AWS のメトリクスが Datadog 内で利用できるように 900 秒持つようになります。

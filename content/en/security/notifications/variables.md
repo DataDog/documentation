@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 aliases:
   - /security_platform/notifications/variables
 further_reading:
@@ -10,7 +9,19 @@ further_reading:
 - link: "/security/notifications/"
   tag: "Documentation"
   text: "Learn more about Security notifications"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -22,17 +33,21 @@ Use template variables to inject dynamic context from triggered logs or traces d
 
 The following variables are available:
 
-| Variable              | Description                                                                                   |
-| --------------------- | --------------------------------------------------------------------------------------------- |
-| `{{severity}}`        | The severity of the triggering rule case (integer, 0-4).                                      |
-| `{{timestamp}}`       | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
-| `{{timestamp_epoch}}` | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
-| `{{first_seen}}`      | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
-| `{{first_seen_epoch}}`| Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
-| `{{last_seen}}`       | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
-| `{{last_seen_epoch}}` | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
-| `{{rule_name}}`       | Name of the associated rule.                                                                  |
-| `{{case_name}}`       | Name of the triggering rule case.                                                             |
+| Variable                                           | Description                                                                                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `{{severity}}`                                     | The severity of the triggering rule case (integer, 0-4).                                      |
+| `{{timestamp}}`                                    | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
+| `{{timestamp_epoch}}`                              | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
+| `{{first_seen}}`                                   | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
+| `{{first_seen_epoch}}`                             | Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
+| `{{last_seen}}`                                    | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
+| `{{last_seen_epoch}}`                              | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
+| `{{rule_name}}`                                    | Name of the associated rule.                                                                  |
+| `{{case_name}}`                                    | Name of the triggering rule case.                                                             |
+| `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
+| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
+
+When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
 
 ### Dynamic links
 
@@ -85,6 +100,8 @@ HIPAA-enabled Datadog organizations have access to only <a href="#template-varia
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
 
 To see a signal's list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
+
+If the signal's JSON does not contain an attribute that is present in the related log's JSON, use the previously outlined syntax with the attribute name from the log's JSON. This attribute is then included in both the signal's JSON and the signal notifications.
 
 The following is an example JSON object with event attributes that may be associated with a security signal:
 
@@ -258,6 +275,16 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 ```
 {{ .matched }} the host name
+```
+
+### URL Encode
+
+If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your signal message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+
+```
+https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
 ## Further reading

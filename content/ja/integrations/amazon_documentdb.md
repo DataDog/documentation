@@ -1,11 +1,12 @@
 ---
 categories:
 - cloud
-- data store
+- data stores
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
-description: AWS DocumentDB のメトリクスとログを監視
+description: Amazon DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
 draft: false
 further_reading:
@@ -14,18 +15,18 @@ further_reading:
   text: Amazon DocumentDB のメトリクスとログを Datadog で収集
 git_integration_title: amazon_documentdb
 has_logo: true
-integration_id: amazon-documentdb
+integration_id: ''
 integration_title: Amazon DocumentDB
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_documentdb
 public_title: Datadog-Amazon DocumentDB インテグレーション
-short_description: AWS DocumentDB のメトリクスとログを監視
+short_description: Amazon DocumentDB のメトリクスとログを監視
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon DocumentDB は、MongoDB のワークロードをサポートする、高速で、スケーラブル、高可用性、フルマネージド型のドキュメントデータベースサービスです。
@@ -39,9 +40,9 @@ Amazon DocumentDB は、MongoDB のワークロードをサポートする、高
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DocumentDB` が有効になっていることを確認します。
-2. [Datadog - AWS DocumentDB インテグレーション][3]をインストールします。
+2. [Datadog - Amazon DocumentDB インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -67,11 +68,11 @@ AWS から取得される各メトリクスには、dbinstanceidentifier、dbclu
 
 ### イベント
 
-AWS DocumentDB インテグレーションには、イベントは含まれません。
+Amazon DocumentDB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-AWS DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
+Amazon DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

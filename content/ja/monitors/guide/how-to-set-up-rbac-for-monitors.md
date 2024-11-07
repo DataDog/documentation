@@ -6,10 +6,9 @@ further_reading:
 - link: /api/latest/monitors/#create-a-monitor
   tag: ドキュメント
   text: API を使った制限付きモニターの作成について詳しく見る
-- link: /monitors/notify/#permissions
+- link: /monitors/configuration/#permissions
   tag: ドキュメント
   text: UI を使った制限付きモニターの作成について詳しく見る
-kind: ガイド
 title: モニター用に RBAC を設定する方法
 ---
 
@@ -36,7 +35,7 @@ title: モニター用に RBAC を設定する方法
 
 詳しくは、[モニター権限][1]をご覧ください。
 
-[1]: /ja/monitors/notify/#permissions
+[1]: /ja/monitors/configuration/#permissions
 {{% /tab %}}
 
 {{% tab "API" %}}
@@ -128,15 +127,13 @@ Datadog がモニターの編集を特定のロールに制限できる機能を
 
 {{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC ロックされたモニター" style="width:70%;">}}
 
-ロックされたモニターは非推奨です。Datadog は、モニターの編集を許可されたユーザーをより柔軟に定義できるロール制限オプションの使用を推奨します。
-
-組織には、既存のロックされたモニターがあるかもしれません。Datadog は、ロックされたモニターを引き続きサポートします。ロックされたモニターの編集は、[Datadog Admin Role][2] を持つユーザーとモニターの作成者に制限されています。
+ロックされたモニターは非推奨であり、もはやサポートされません。代わりに、どのユーザーがモニターを編集できるかを柔軟に定義するロール制限オプションを使用してください。
 
 以下のセクションでは、モニターの管理方法に応じて、ロック機構から制限されたロールに移行する方法について説明します。
 
 ### API
 
-非推奨ではありますが、上記のロック機構に対応する `locked` パラメーターはまだサポートされています。このため、API や Terraform で管理するモニターの定義を徐々に更新して、`locked` の使用を止め、`restricted_roles` (新しいロール制限オプションが付いたパラメーター) を使用するようにすれば良いのです。
+上記のロックメカニズムに対応する `locked` パラメーターはもはやサポートされません。これは、API や Terraform を通じて管理されるモニターの定義を更新し、`locked` の使用を中止し、`restricted_roles` (新しいロール制限オプションに添付されたパラメーター) を使用する必要があることを意味します。
 
 モニターの定義を更新する方法については、[モニター API エンドポイントの編集][3]および[モニター API オプション][4]を参照してください。
 
@@ -192,7 +189,7 @@ This monitor is locked: only its creator and admins can edit it. Read more here.
 
 **注:** 警告とオプションの間に見られる不一致は予期されるものです。警告は、locked パラメーターを使用しているモニターの現在の状態を反映しています。[Datadog Admin Role][2] を持つユーザーまたはモニターの作成者が編集して保存すると、オプションは、モニターの更新後となるロール制限オプションを反映します。モニターが保存されると、警告は消え、適切な制限されたロールがドロップダウンに入力されます。
 
-#### ロックされていないモニター (`locked:false`、`locked:null`、未定義の `locked`)
+#### Non locked monitors (`locked:false`, `locked:null`, undefined `locked`)
 
 ロックされていないモニターを編集すると、次のオプションが表示されます。
 
@@ -200,7 +197,7 @@ This monitor is locked: only its creator and admins can edit it. Read more here.
 
 このオプションは、モニターに加える変更に応じて、さまざまな方法で処理することができます。
 
-**1. モニターの権限を一切変更したくない**
+**1. モニターの権限を一切変更したくない場合**
 
 モニターを保存します。Datadog は、ロック機構から制限されたロールにモニターを自動的に移行します。しきい値の更新やメッセージなど、モニターに行った他の更新も同時に保存されます。
 
@@ -210,7 +207,7 @@ This monitor is locked: only its creator and admins can edit it. Read more here.
 
 **Restrict editing of this monitor to** ドロップダウンメニューで、このモニターを修正できるロールを選択します。モニターを保存します。モニターは選択したロールに制限されます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

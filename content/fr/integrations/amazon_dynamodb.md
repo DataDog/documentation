@@ -1,14 +1,14 @@
 ---
 aliases:
-  - /fr/integrations/awsdynamo/
+- /fr/integrations/awsdynamo/
 categories:
-  - cloud
-  - data store
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- aws
+- log collection
 dependencies: []
-description: Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.
+description: Surveillez la taille des tables, la capacité de lecture/écriture, la
+  latence des requêtes, et plus encore.
 doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
 draft: false
 git_integration_title: amazon_dynamodb
@@ -17,13 +17,15 @@ integration_id: amazon-dynamodb
 integration_title: Amazon DynamoDB
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_dynamodb
-public_title: "Intégration Datadog/Amazon\_DynamoDB"
-short_description: Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.
+public_title: Intégration Datadog/Amazon DynamoDB
+short_description: Surveillez la taille des tables, la capacité de lecture/écriture,
+  la latence des requêtes, et plus encore.
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="Dashboard par défaut DynamoDB" popup="true">}}
 
 ## Présentation
@@ -38,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de métriques
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `DynamoDB` est cochée dans la section concernant la collecte des métriques.
+1. Dans la [page de l'intégration AWS][2], vérifiez que `DynamoDB` est activé dans l'onglet `Metric Collection`.
 2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon DynamoDB :
 
     - `dynamodb:ListTables` : utilisé pour répertorier les tables DynamoDB disponibles.
@@ -53,19 +55,20 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Lorsque vous définissez vos journaux de suivi, sélectionnez un compartiment S3 dans lequel écrire les logs :
-
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation CloudTrail" popup="true" style="width:70%;">}}
+Dans AWS CloudTrail, [créez un journal de suivi][6] et sélectionnez un compartiment S3 dans lequel écrire les logs.
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][6].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs DynamoDB dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
-   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs DynamoDB et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][7] dans votre compte AWS.
+2. Une fois configuré, accédez à la fonction Lambda du Forwarder Datadog. Dans la section Présentation de Functions, cliquez sur **Add Trigger**.
+3. Sélectionnez le déclencheur **S3** pour la Trigger Configuration.
+4. Sélectionnez le compartiment S3 où se trouvent vos logs Amazon DynamoDB.
+5. Ne changez pas le type d'événements `All object create events`.
+6. Cliquez sur **Add** pour ajouter le déclencheur à votre fonction Lambda.
 
-Accédez ensuite à la [section Logs de Datadog][7] pour commencer à explorer vos logs !
+Accédez au [Log Explorer][8] pour commencer à explorer vos logs.
+
+Pour en savoir plus sur la collecte de logs de services AWS, consultez la section [Envoyer des logs de services AWS avec la fonction Lambda Datadog][9].
 
 ## Données collectées
 
@@ -85,14 +88,16 @@ L'intégration AWS DynamoDB n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/authentication-and-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_dynamodb
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[7]: https://app.datadoghq.com/logs
-[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dynamodb/amazon_dynamodb_metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[5]: https://app.datadoghq.com/integrations/amazon-dynamodb
+[6]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
+[7]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
+[8]: https://app.datadoghq.com/logs
+[9]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dynamodb/amazon_dynamodb_metadata.csv
+[11]: https://docs.datadoghq.com/fr/help/

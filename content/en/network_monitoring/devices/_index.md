@@ -1,7 +1,5 @@
 ---
 title: Network Device Monitoring
-kind: documentation
-disable_sidebar: true
 description: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
 aliases:
     - /network_performance_monitoring/devices/
@@ -24,6 +22,8 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
+algolia:
+  tags: ['network device monitoring']
 ---
 
 ## Overview
@@ -32,61 +32,17 @@ further_reading:
 
 <br/>
 
-Network Device Monitoring gives you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
+Network Device Monitoring(NDM) gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up or down.
 
-## Getting started
+{{< whatsnext desc="This section includes the following topics:">}}
+    {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>Getting Started</u>: Getting started with Network Device Monitoring{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>Supported devices</u>: View supported NDM devices{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>SNMP Metrics</u>: Collect SNMP Metrics from your network devices {{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/device_topology_map" >}}<u>Device Topology Map</u>: View your network's physical connections{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>Device Onboarding Experience </u>: Getting started with device profiles{{< /nextlink >}}
+{{< /whatsnext >}}
 
-1. Install the Datadog Agent (usually on a server that is not the monitored device).
-2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. Start monitoring your entire network infrastructure on the Network Devices explore page.
-4. View metrics collected on Datadog's out-of-the-box dashboards:
-    - [Overview of all devices monitored][3]
-    - [Across the performance on all interfaces][4]
-5. Catch issues before they arise with proactive monitoring on any [SNMP metric][5].
-
-## Supported devices
-
-### Generic profile
-
-The generic profile collects metrics for all devices not supported by a vendor profile. Metrics include TCP, UDP, IP, and interface metrics such as bandwidth utilization, volume sent/received, etc.
-
-### Vendor profiles
-
-The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn't supported, refer to the [FAQ page][6].
-
--   Cisco Catalyst
--   Cisco ASA
--   Cisco CSR 1000v
--   Cisco ISR 4431
--   Cisco Nexus
--   Cisco ICM
--   Cisco UC Virtual Machines
--   Arista
--   Aruba
--   Checkpoint Firewall
--   Chatsworth PDU
--   APC UPS
--   F5 Big IP
--   Fortinet FortiGate
--   HP iLO
--   HP Proliant
--   Dell iDRAC
--   EMC Isilon
--   Juniper EX Series
--   Juniper MX Series
--   Juniper SRX
--   Meraki Cloud
--   Meraki On-Prem
--   NetApp
--   Palo Alto
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
-[2]: /network_monitoring/devices/snmp_metrics/#autodiscovery
-[3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
-[4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /monitors/types/metric/
-[6]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

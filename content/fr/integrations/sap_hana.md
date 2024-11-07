@@ -1,41 +1,63 @@
 ---
+app_id: sap-hana
+app_uuid: 53d66afa-de92-4f09-9514-778324f38f5c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sap_hana.uptime
+      metadata_path: metadata.csv
+      prefix: sap_hana.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SAP HANA
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
-creates_events: false
-ddtype: check
+- sap
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
-display_name: SAP HANA
+display_on_public_website: true
 draft: false
 git_integration_title: sap_hana
-guid: 85dace7c-baf5-4bcc-9fbb-4d3a6b841359
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 2.1.0
+integration_version: 2.2.1
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sap_hana.
-metric_to_check: sap_hana.uptime
+custom_kind: integration
+manifest_version: 2.0.0
 name: sap_hana
-public_title: Intégration Datadog/SAP HANA
+public_title: SAP HANA
 short_description: Surveillez les métriques relatives à la mémoire, au réseau, aux
   volumes et à d'autres éléments de votre système SAP HANA.
-support: core
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Store
+  - Category::SAP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Surveillez les métriques relatives à la mémoire, au réseau, aux volumes
+    et à d'autres éléments de votre système SAP HANA.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SAP HANA
 ---
 
 
@@ -44,7 +66,7 @@ supported_os:
 
 Ce check permet de surveiller [SAP HANA][1] 2.0 SPS 2 avec l'Agent Datadog.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -54,7 +76,7 @@ Le check SAP HANA est inclus avec le package de l'[Agent Datadog][2]. Pour util
 Pour Unix :
 
 ```text
-/opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
 ```
 
 Pour Windows :
@@ -69,7 +91,7 @@ Pour interroger certaines vues, vous devez accorder des autorisations spécifiqu
 
 Pour découvrir comment configurer le numéro de port pour les bases de données locataire, multi-locataires et système HANA, consultez la [section de la documentation SAP relative aux connexions][4] (en anglais).
 
-##### Créer l'utilisateur
+##### Création des utilisateurs
 
 1. Pour créer un utilisateur, connectez-vous à la base de données système et exécutez la commande suivante :
 
@@ -125,7 +147,7 @@ Pour découvrir comment configurer le numéro de port pour les bases de données
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### Procédure à suivre
+### Configuration
 
 1. Modifiez le fichier `sap_hana.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance sap_hana. Consultez le [fichier d'exemple sap_hana.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 

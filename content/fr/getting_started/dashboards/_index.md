@@ -7,19 +7,22 @@ further_reading:
 - link: https://www.datadoghq.com/blog/template-variable-associated-values/
   tag: Blog
   text: Utiliser les template variables associées pour affiner vos dashboards
-- link: https://learn.datadoghq.com/enrol/index.php?id=8
-  tag: Apprentissage
-  text: 'Apprentissage en ligne à votre rythme : Améliorer vos dashboards'
+- link: https://learn.datadoghq.com/courses/building-better-dashboards
+  tag: Centre d'apprentissage
+  text: Améliorer vos dashboards
 - link: /dashboards/
   tag: Documentation
   text: Notions de base sur les dashboards
 - link: /notebooks/
   tag: Documentation
-  text: Raconter une histoire à partir de données avec les Notebooks
+  text: Faire parler ses données grâce aux notebooks
 - link: /monitors/
   tag: Documentation
   text: Monitors, SLO, notifications, downtimes et incidents
-kind: documentation
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive sur l'amélioration des visualisations
+    avec des dashboards
 title: Débuter avec les dashboards
 ---
 
@@ -35,7 +38,7 @@ Ce guide vous aide à vous lancer dans la création de dashboards. Vous découvr
 
 Si vous ne l'avez pas déjà fait, créez un [compte Datadog][1]. Installez l'Agent sur un host et une intégration pour un service exécuté sur cet host.
 
-## Planification
+## En fonction de l'offre
 
 Définissez l'objectif du dashboard que vous créez. Un dashboard peut vous aider, les membres de votre équipe et vous-même, à vous concentrer sur la bonne tâche. Un _dashboard d'équipe_ vous permet d'identifier les tâches prioritaires, les informations qui nécessitent votre attention et vos réussites. Créez un ou plusieurs dashboards d'équipe affichant les informations dont votre équipe a fréquemment besoin pour éviter d'avoir à les rechercher. Un dashboard affichant vos SLO et vos SLI constitue par exemple un excellent dashboard d'équipe.
 
@@ -55,8 +58,8 @@ Datadog fournit plusieurs dashboards prêts à l'emploi pour diverses fonctionna
 
 Pour créer un dashboard, il est notamment possible de trouver un dashboard similaire déjà utilisé et de l'ajuster selon vos besoins. Si vous trouvez un dashboard qui offre des réponses à une grande partie des réponses qui vous intéressent :
 
-1. Dupliquez-le en ouvrant le dashboard et en sélectionnant **Clone dashboard** à partir du menu des paramètres (l'icône en forme d'engrenage sur le côté droit). Cette action crée une copie distincte du dashboard ; les modifications que vous apporterez au dashboard copié n'affecteront pas le widget source.
-    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="Dupliquer un dashboard" video=true >}}
+1. Dupliquez-le en ouvrant le dashboard et en sélectionnant **Clone dashboard** à partir du menu des paramètres (l'icône d'exportation sur le côté droit). Cette action crée une copie distincte du dashboard ; les modifications que vous apporterez au dashboard copié n'affecteront pas le widget source.
+  {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="Option de duplication d'un dashboard dans le menu déroulant" style="width:100%;" >}}
 2. Modifiez le doublon en l'ouvrant et en cliquant sur **Edit widgets**. 
 3. Supprimez les widgets dont vous n'avez pas besoin en sélectionnant **Delete** à partir du menu des paramètres du widget.
 4. Réorganisez les widgets selon vos besoins. Chaque widget ou groupe de widgets peut être déplacé vers un autre endroit du dashboard à l'aide d'un glisser-déposer.
@@ -142,9 +145,9 @@ Avec cette application, vous pouvez consulter et rechercher tous les dashboards 
 [9]: /fr/dashboards/template_variables/
 [10]: /fr/dashboards/
 [11]: /fr/dashboards/widgets/timeseries/
-[12]: https://learn.datadoghq.com/enrol/index.php?id=8
+[12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /fr/integrations/slack/
 [14]: /fr/api/v1/dashboards/
-[15]: /fr/mobile/
+[15]: /fr/service_management/mobile/
 [16]: https://apps.apple.com/app/datadog/id1391380318
 [17]: https://play.google.com/store/apps/details?id=com.datadog.app

@@ -17,8 +17,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-kind: documentation
-title: .NET ログとトレースの接続
+title: .NET ログとトレースの相関付け
 type: multi-code-lang
 ---
 
@@ -125,7 +124,19 @@ type: multi-code-lang
 
 2. [.NET Tracer のインストール手順][1]に従って、アプリの自動インスツルメンテーショントレーシングを有効にします。
 
-3. 次の NLog バージョン 4.6 向けのサンプルコードに示すように、マップされた診断コンテキスト (MDC) を有効にします。
+3. 次の NLog バージョン 5.0 向けのサンプルコードに示すように、マップされた診断コンテキスト (MDC) を有効にします。
+
+```xml
+  <!-- includeScopeProperties="true" を追加して ScopeContext プロパティを表示 -->
+  <layout xsi:type="JsonLayout" includeScopeProperties="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+NLog バージョン 4.6 以降 の場合
 
 ```xml
   <!-- includeMdlc="true" を追加して MDC プロパティを表示 -->
@@ -157,7 +168,7 @@ NLog バージョン 4.5 の場合
 [4]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
-ログメッセージに相関性のある識別子を自動的に挿入するには:
+ログメッセージに相関性のある識別子を自動的に挿入するには
 
 1. 以下のトレーサー設定で .NET トレーサーを構成します。
     - `DD_ENV`
@@ -182,7 +193,7 @@ Host.CreateDefaultBuilder(args)
 
 ログが書き込まれているときにアクティブなトレースがあれば、トレースとスパン ID が `dd_trace_id` および `dd_span_id` プロパティと合わせて自動的にアプリケーションログに挿入されます。アクティブなトレースがない場合は、`dd_env`、`dd_service`、`dd_version` プロパティのみが挿入されます。
 
-**注:** [_Serilog.Extensions.Hosting_][3]や[_Serilog.Extensions.Logging_][4]パッケージのように、デフォルトの `LoggerFactory` の実装を置き換えるロギングライブラリを使用している場合は、フレームワーク固有の指示に従ってください (この例では、**Serilog** をご参照ください)。
+**注:** [_Serilog.Extensions.Hosting_][3] や [_Serilog.Extensions.Logging_][4] パッケージのように、デフォルトの `LoggerFactory` の実装を置き換えるロギングライブラリを使用している場合は、フレームワーク固有の指示に従ってください (この例では、**Serilog** をご参照ください)。
 
 その他の例については、GitHub の [Microsoft.Extensions.Logging トレース ID 自動挿入プロジェクト][5]を参照してください。
 
@@ -206,6 +217,8 @@ Host.CreateDefaultBuilder(args)
 相関識別子の挿入を構成した後、[C# ログ収集][7]を参照してログ収集の構成を行います。
 
 **注:** トレースとログを関連付けるには、ログのトレース ID として `dd_trace_id` をパースする[トレース ID リマッパー][8]をセットアップする必要があるかもしれません。詳しくは、[関連するログがトレース ID パネルに表示されない][9]を参照してください。
+
+<div class="alert alert-info"><strong>ベータ版</strong>: バージョン 2.35.0 から、このサービスが実行される場所で <a href="/agent/remote_config/">Agent リモート構成</a>が有効になっている場合、<a href="/tracing/service_catalog">サービスカタログ</a> の UI で <code>DD_LOGS_INJECTION</code> を設定できます。</div>
 
 ## 手動挿入
 

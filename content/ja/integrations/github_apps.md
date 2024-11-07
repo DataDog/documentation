@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: GitHub アプリ
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: github_apps
 public_title: Datadog-GitHub アプリのインテグレーション
@@ -95,7 +95,7 @@ GitHub アプリインテグレーションには、サービスのチェック�
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: サーバーレスの請求
 ---
 
@@ -27,7 +26,7 @@ API を使用して Datadog が監視する AWS Lambda 関数を制限するに�
 
 ### タグ
 
-Datadog は、`key:value` の形式でタグのカンマ区切りのリストを受け付けます。このリストは、関連する AWS サービスからメトリクスを収集する際に使用されるフィルターを定義します。これらの `key:value` のペアは、タグを許可することも除外することもできます。除外を示すには、タグキーの前に `!` を追加します。また、`?` (1文字) や `*` (複数文字) などのワイルドカードを使用することもできます。
+Datadog accepts a comma-separated list of tags in the form `key:value`. This list defines a filter that is used when collecting metrics from the associated AWS service. These `key:value` pairs can both allow and exclude tags. To indicate an exclusion, add a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters), can also be used.
 
 このフィルターは、許可されたすべてのタグがないリソース、つまり、許可されたタグのリストが "OR" ステートメントを形成するリソースのみを除外します。
 
@@ -39,7 +38,8 @@ Datadog は、`key:value` の形式でタグのカンマ区切りのリストを
 
 例: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 
-このフィルターは、`datadog:monitored` タグまたは `env:production` タグまたは `c1.*` 値を持つインスタンスタイプタグを含み、かつ `region:us-east-1` タグでない EC2 インスタンスのみを収集します。
+This filter only collects EC2 instances that contain the tag
+`datadog:monitored` OR the tag `env:production` OR an instance-type tag with a `c1.*` value AND NOT a `region:us-east-1` tag.
 
 ## インスツルメンテーション
 
@@ -49,7 +49,7 @@ Datadog は、これらのライブラリのインストールや構成を管理
 
 ## アクティブ関数の定義
 
-請求は、アカウントの 1 か月間の 1 時間あたりの平均関数の数に基づきます。Datadog では、1 回以上実行された、Datadog アカウントで監視されている関数の数を 1 時間ごとに記録します。月末に、記録された関数の時間当たり平均数が算出され、請求に反映されます。Pro プランと Enterprise プランには、請求対象関数ごとに 5 つのカスタムメトリクスが含まれています。
+請求は、アカウントの 1 か月間の 1 時間あたりの平均関数の数に基づきます。Datadog では、1 回以上実行された、Datadog アカウントで監視されている関数の数を 1 時間ごとに記録します。月末に、記録された関数の時間当たり平均数が算出され、請求に反映されます。Pro プランと Enterprise プランには、請求対象関数ごとに 5 つのカスタムメトリクスが含まれています。単一の請求対象の関数は、一意の関数 ARN によって定義されます。Lambda@Edge 関数の場合、異なるリージョン内の各関数は、個別の請求対象の関数としてカウントされます。
 
 サーバーレス APM の請求は、ある月の APM 取り込みスパンに接続された AWS Lambda の呼び出しの合計に基づきます。また、月末に Datadog APM サービスに送信された[インデックス化スパン][4]の合計がバンドル数量を超えた場合、請求されます。サーバーレス利用時に請求対象となる [APM ホスト][4]はありません。
 

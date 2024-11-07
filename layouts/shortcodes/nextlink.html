@@ -1,6 +1,7 @@
 {{ $dot := . }}
 {{- $href := .Get "href" -}}
 {{- $tag := .Get "tag" -}}
+{{- $img := .Get "img" -}}
 {{- $text := .Inner -}}
 
 {{ if eq (substr $href 0 4) "http"}}
@@ -27,13 +28,19 @@
 
 {{- with .Parent -}}
     <a class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="{{ $link }}">
-        <span class="w-100 d-flex justify-content-between"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
+        {{ with $img }}
+            {{ partial "img.html" (dict "root" $dot "src" $img "class" "img-fluid") }}
+        {{ end }}    
+        <span class="w-100 d-flex justify-content-between {{ with $img }} ps-1 {{ end }}"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
     </a>
 {{- else -}}
     <a class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="{{ $link }}">
-        <span class="w-100 d-flex justify-content-between"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
+        {{ with $img }}
+            {{ partial "img.html" (dict "root" $dot "src" $img "class" "img-fluid") }}
+        {{ end }}   
+        <span class="w-100 d-flex justify-content-between {{ with $img }} ps-1 {{ end }}"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
     </a>

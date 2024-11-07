@@ -3,6 +3,7 @@ app_id: sortdb
 app_uuid: 02cd7f3d-5394-4d08-8364-35c9d1af1377
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: sortdb.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10205
     source_type_name: Sortdb
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,8 @@ author:
   sales_email: namrata.deshpande4@gmail.com
   support_email: namrata.deshpande4@gmail.com
 categories:
-- data store
+- data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: sortdb
 integration_title: Sortdb
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sortdb
-oauth: {}
 public_title: Sortdb
 short_description: sortdb の監視を Datadog がサポート
 supported_os:
@@ -45,7 +46,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: sortdb の監視を Datadog がサポート
   media: []
@@ -54,6 +56,7 @@ tile:
   title: Sortdb
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sortdb チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Sortdb の[メトリクス](#メトリクスの収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `sortdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sortdb.d/conf.yaml][6] を参照してください。
 
@@ -100,7 +103,7 @@ SortDB チェックは、すべての主要プラットフォームと互換性�
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][9] を参照してください。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "sortdb" >}}
 
 
@@ -110,7 +113,7 @@ SortDB チェックには、イベントは含まれません。
 
 
 [1]: https://github.com/jehiah/sortdb
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory

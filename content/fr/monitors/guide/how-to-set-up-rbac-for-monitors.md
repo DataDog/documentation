@@ -9,7 +9,7 @@ further_reading:
 - link: /monitors/notify/#autorisations
   tag: Documentation
   text: En savoir plus sur la création de monitors restreints via l'interface
-kind: guide
+
 title: Configuration du RBAC pour les monitors
 ---
 
@@ -32,7 +32,7 @@ Pour en savoir plus sur les rôles par défaut et les rôles personnalisés, et 
 1. Créez un monitor ou modifiez-en un pour accéder à la page de modification.
 2. Spécifiez en bas de la page les rôles qui pourront, en plus du créateur, modifier le monitor.
 
-{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="Monitor avec une restriction RBAC"  >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="Monitor avec une restriction RBAC" >}}
 
 Pour en savoir plus, consultez la documentation relative aux [autorisations des monitors][1].
 
@@ -144,7 +144,7 @@ Pour en savoir plus sur la modification des définitions de vos monitors, consul
 
 Tous les monitors créés depuis l'interface utilisent désormais le paramètre `restricted_roles`. Ils indiquent également l'option de restriction basée sur les rôles, et ce peu importe le mécanisme sous-jacent :
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="Monitor sans restriction RBAC"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="Monitor sans restriction RBAC" >}}
 
 Dès qu'un monitor est enregistré, Datadog modifie sa définition de façon à remplacer l'ancien mécanisme de verrouillage par la nouvelle restriction basée sur les rôles.
 
@@ -191,7 +191,7 @@ Cela signifie que ce monitor est verrouillé. Cette personne doit donc contacter
 
 Si une personne modifie un monitor non verrouillé et que le message suivant s'affiche :
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="Monitor sans restriction RBAC"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="Monitor sans restriction RBAC" >}}
 
 La procédure à suivre varie selon selon les modifications que vous souhaitez apporter à votre monitor :
 

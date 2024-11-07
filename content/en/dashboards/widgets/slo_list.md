@@ -1,6 +1,6 @@
 ---
 title: SLO List Widget
-kind: documentation
+widget_type: slo_list
 description: "Display a list of SLOs"
 aliases:
 further_reading:
@@ -12,13 +12,15 @@ further_reading:
   text: "Building Dashboards using JSON" 
 ---
 
-The SLO List widget displays a subset of [SLOs][1] over their primary time window. All other configured time windows are available in the SLO's side panel on the SLO page. 
+SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service.
 
-{{< img src="dashboards/widgets/slo_list/slo_list_widget_v2.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
+The SLO List widget displays a subset of SLOs over their primary time window. All other configured time windows are available in the SLO's side panel on the SLO page. For more information, see the [SLO][1] documentation.
+
+{{< img src="dashboards/widgets/slo_list/slo-list-widget-latest.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/slo_list/slo_list_editor_v2.png" alt="A search query defining the service as web-store in the SLO List widget editor" style="width:90%;" >}}
+{{< img src="dashboards/widgets/slo_list/slo-list-widget-editor-latest.png" alt="A search query defining the service as web-store in the SLO List widget editor" style="width:90%;" >}}
 
 ### Configuration
 
@@ -31,9 +33,7 @@ When you are ready to create the widget, click **Save**.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the SLO List widget is:
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
 {{< dashboards-widgets-api >}}
 
@@ -42,5 +42,5 @@ The dedicated [widget JSON schema definition][3] for the SLO List widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/service_level_objectives/
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

@@ -1,32 +1,32 @@
 ---
 title: Outlier Monitor
-kind: documentation
 aliases:
     - /guides/outliers
     - /monitors/monitor_types/outlier
     - /monitors/create/types/outlier/
 description: "Alert on members of a group behaving differently than the others"
 further_reading:
+- link: "https://www.datadoghq.com/blog/outlier-detection-algorithms-at-datadog"
+  tag: "Blog"
+  text: "Outlier detection in Datadog: A look at the algorithms"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
-  tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "/watchdog/insights/"
+  tag: "Documentation"
+  text: "Outlier detection in Watchdog Insights"
 ---
 
 ## Overview
 
 Outlier detection is an algorithmic feature that allows you to detect when a specific group is behaving different compared to its peers. For example, you could detect that one web server in a pool is processing an unusual number of requests, or significantly more 500 errors are happening in one AWS availability zone than the others.
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert" style="width:80%;">}}
-
 ## Monitor creation
 
-To create an [outlier monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Outlier*.
+To create an outlier monitor in Datadog, navigate to [**Monitors > New Monitor > Outlier**][1].
 
 ### Define the metric
 
@@ -74,9 +74,9 @@ This implementation of DBSCAN takes one parameter, `tolerance`, the constant by 
 **Parameters**<br>
 To use MAD for your outlier monitor, configure the parameters `tolerance` and `%`.
 
-Tolerance specifies the number of deviations a point needs to be away from the median for it to be considered an outlier. This parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. Otherwise, if points can vary greatly, then set a higher scale so the variabilities do not trigger false positives.
+Tolerance specifies the number of deviations a point (independently of the groups) needs to be away from the median for it to be considered an outlier. This parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. Otherwise, if points can vary greatly, then set a higher scale so the variabilities do not trigger false positives.
 
-Percent refers to the percentage of points in the series considered as outliers. If this percentage is exceeded, the whole series is marked as an outlier.
+Percent refers to the percentage of points in the group considered as outliers. If this percentage is exceeded, the whole group is marked as an outlier.
 
 [1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
 {{% /tab %}}
@@ -101,7 +101,7 @@ For detailed instructions on the advanced alert options (auto resolve, new group
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 ## API
 
@@ -117,9 +117,9 @@ The outlier algorithms are set up to identify groups that are behaving different
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/outlier
+[1]: https://app.datadoghq.com/monitors/create/outlier
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
-[6]: /monitors/manage/status/#settings
+[6]: /monitors/status/#settings

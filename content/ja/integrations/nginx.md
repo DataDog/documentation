@@ -7,6 +7,7 @@ assets:
     NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
     NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -21,9 +22,8 @@ assets:
     - 'nginx: マスタープロセス'
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 31
     source_type_name: Nginx
-  logs:
-    source: nginx
   monitors:
     '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
     '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
@@ -42,6 +42,7 @@ author:
 categories:
 - configuration & deployment
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
 display_on_public_website: true
@@ -49,12 +50,10 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 5.4.1
+integration_version: 6.3.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx
-oauth: {}
 public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
 supported_os:
@@ -69,14 +68,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-monitor-nginx
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html
   support: README.md#Support
   title: Nginx
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![NGINX のデフォルトのダッシュボード][1]
@@ -122,7 +130,7 @@ http_stub_status_module
 #### NGINX の準備
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (`/etc/nginx/conf.d/` など) に `status.conf` ファイルを作成します。
 
@@ -197,7 +205,7 @@ data:
 [...]
   status.conf: |
     server {
-      listen 18080;
+      listen 81;
 
       location /nginx_status {
         stub_status on;
@@ -209,14 +217,14 @@ data:
     }
 ```
 
-次に、NGINX ポッドで `18080` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
+次に、NGINX ポッドで `81` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
 
 ```yaml
 spec:
   containers:
     - name: nginx
       ports:
-        - containerPort: 18080
+        - containerPort: 81
       volumeMounts:
         - mountPath: /etc/nginx/conf.d/status.conf
           subPath: status.conf
@@ -228,32 +236,18 @@ spec:
           name: "nginx-conf"
 ```
 
-最後に、NGINX サービスでそのポートを公開します。
-
-```yaml
-spec:
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
-    name: default
-  - port: 81
-    protocol: TCP
-    targetPort: 18080
-    name: status
-```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
@@ -275,7 +269,7 @@ spec:
 
 3. [Agent を再起動][2]すると、Datadog への NGINX メトリクスの送信が開始されます。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -338,7 +332,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:81/ng
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
-#### ログの収集
+#### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -361,7 +355,13 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 
 ##### メトリクスの収集
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
+To collect metrics, set the following parameters and values in an [Autodiscovery template][1]. You can do this with Kubernetes Annotations (shown below) on your NGINX pod(s), or with a [local file, ConfigMap, key-value store, Datadog Operator manifest, or Helm chart][2].
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<INTEGRATION_NAME>` | `["nginx"]`                                                                |
+| `<INIT_CONFIG>`      | `[{}]`                                                                     |
+| `<INSTANCE_CONFIG>`  | `[{"nginx_status_url": "http://%%host%%:18080/nginx_status"}]`             |
 
 **Annotations v1** (Datadog Agent < v7.36 向け)
 
@@ -408,12 +408,16 @@ metadata:
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
-#### ログの収集
+#### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+Then, set the following parameter in an [Autodiscovery template][1]. You can do this with Kubernetes Annotations (shown below) on your Redis pod(s), or with a [local file, ConfigMap, key-value store, Datadog Operator manifest, or Helm chart][2].
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<LOG_CONFIG>`       | `[{"source":"nginx","service":"nginx"}]`                                   |
 
 **Annotations v1/v2**
 
@@ -431,8 +435,6 @@ metadata:
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -460,7 +462,7 @@ metadata:
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
-##### ログの収集
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -523,7 +525,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 NGINX チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "nginx" >}}
 
 
@@ -531,7 +533,7 @@ NGINX チェックには、イベントは含まれません。
 
 - [あるはずのタイムスタンプがログに含まれないのはなぜですか？][6]
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ## その他の参考資料
 

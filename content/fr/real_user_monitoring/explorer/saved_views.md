@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Rechercher des événements
-kind: documentation
 title: Vues enregistrées
 ---
 
@@ -24,16 +23,16 @@ Les vues enregistrées vous permettent également de partager des configurations
 
 ## Vues enregistrées
 
-Pour accéder à vos vues enregistrées, développez l'option **> Views** à gauche de l'onglet **Applications** dans le [RUM Explorer][1].
+Pour accéder à vos vues enregistrées, développez l'option **> Views** à gauche de l'onglet **Sessions & Replays** dans le [RUM Explorer][1].
 
 À l'exception de la [vue par défaut](#vues-par-defaut), toutes les vues enregistrées peuvent être partagées avec tous les membres de votre organisation, y compris :
 
 - Les vues enregistrées personnalisées créées par des utilisateurs. Ces vues peuvent être modifiées par n'importe quel utilisateur de votre organisation et sont identifiées par l'avatar de l'utilisateur qui les a créés. Cliquez sur **Save** pour créer une vue enregistrée personnalisée à partir du contenu actuel de votre vue RUM Explorer.
 - Les modèles de vue enregistrée, qui correspondent à des vues enregistrées prédéfinies et prêtes à l'emploi dans le RUM Explorer. Vous pouvez vous baser sur ces modèles pour créer une vue enregistrée identifiée par un avatar Datadog. Défilez jusqu'en bas de la liste des vues enregistrées pour accéder aux modèles.
-</br>
-  {{< img src="real_user_monitoring/explorer/events/views.png" alt="Cliquez sur l'onglet à gauche de Real User Monitoring pour accéder aux vues enregistrées." width="20%" >}}
+<br /><br />
+  {{< img src="real_user_monitoring/explorer/rum-saved-views-2.png" alt="Cliquez sur l'onglet à gauche de Real User Monitoring pour accéder aux vues enregistrées" width="90%" >}}
 
-Vous pouvez effectuer les opérations suivantes :
+Vous pourrez :
 
 - Charger ou recharger une vue enregistrée
 - Remplacer la configuration d'une vue enregistrée par celle de la vue active

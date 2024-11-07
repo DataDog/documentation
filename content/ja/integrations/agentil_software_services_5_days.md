@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-services-5-days
 app_uuid: 4fc93d92-e67b-4c45-b5fd-ebfed8529223
 assets: {}
@@ -10,9 +12,8 @@ author:
   vendor_id: agentil-software
 categories:
 - マーケットプレイス
-- クラウド
-- モニタリング
 - sap
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,12 +22,10 @@ integration_id: agentil-software-services-5-days
 integration_title: サービス
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: agentil_software_services_5_days
-oauth: {}
 pricing:
 - billing_type: one_time
   includes_assets: true
@@ -40,12 +39,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Any
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Professional Service
+  - Supported OS::Any
   configuration: README.md#Setup
   description: Agentil のインテグレーションを実装するための 5 日間のサービス
   media:
@@ -58,6 +55,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -73,7 +71,7 @@ Agentil は、2 つの SAP インテグレーションを提供しています�
 
 **5 日以上必要な場合:** お客様のニーズに合わせたプライベートオファーについては、[sales@agentil-software.com](mailto:sales@agentil-software.com) までお問い合わせください。
 
-## サポート
+## Agent
 ご質問やサポートについては、[sales@agentil-software.com](mailto:sales@agentil-software.com) までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/agentil_software_sap_businessobjects/

@@ -1,6 +1,5 @@
 ---
 title: Query to the Graph
-kind: documentation
 aliases:
     - /dashboards/faq/query-to-the-graph
 ---
@@ -23,19 +22,19 @@ This is because this metric is reported by different hosts, and also because eac
 Thus, this metric is seen with different `{host, device}` tag combinations.
 
 For each source (defined by a host and a set of tags), data is stored separately.
-In this example, consider `host:moby` as having 5 devices. Thus, Datadog is storing 5 timeseries (all datapoints submitted over time for a source) for:
+In this example, consider `host:bubs` as having 5 devices. Thus, Datadog is storing 5 timeseries (all datapoints submitted over time for a source) for:
 
-* `{host:moby, device:tmpfs}`
-* `{host:moby, device:cgroup_root}`
-* `{host:moby, device:/dev/vda1}`
-* `{host:moby, device:overlay}`
-* `{host:moby, device:shm}`
+* `{host:bubs, device:tmpfs}`
+* `{host:bubs, device:cgroup_root}`
+* `{host:bubs, device:/dev/vda1}`
+* `{host:bubs, device:overlay}`
+* `{host:bubs, device:shm}`
 
 Next, consider the successive steps followed by the backend for the query presented above.
 
 ## Find which timeseries are needed for the query
 
-In this query, you only asked for data associated to `host:moby`. So the first step for Datadog's backend is to scan all sources (in this case all `{host, device}` combinations with which metric `system.disk.total` is submitted) and only retain those corresponding to the scope of the query.
+In this query, you only asked for data associated to `host:bubs`. So the first step for Datadog's backend is to scan all sources (in this case all `{host, device}` combinations with which metric `system.disk.total` is submitted) and only retain those corresponding to the scope of the query.
 
 As you may have guessed, the backend finds five matching sources (see previous paragraph).
 
@@ -48,7 +47,7 @@ The idea is then to aggregate data from these sources together to give you a met
 [More information about timeseries and tag cardinality][4]
 
 **Parameter involved: scope**
-You can use more than one tag, such as `{host:moby, device:udev}`, if you want to fetch data responding to both tags.
+You can use more than one tag, such as `{host:bubs, device:udev}`, if you want to fetch data corresponding to both tags.
 
 ## Proceed to time-aggregation
 
@@ -68,7 +67,7 @@ For instance, on a one-day view with the 'lines' display, there is one datapoint
 
 ### How?
 
-By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][6].
+By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why zooming out a timeframe also smooths out your graphs][6].
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. What you generally see on graph is not the real values submitted but local aggregates.
 
 {{< img src="dashboards/faq/metrics_graph_3.png" alt="metrics_graph_3" style="width:75%;">}}
@@ -86,7 +85,7 @@ In this example, `rollup(avg,60)` defines an aggregate period of 60 seconds. So 
 
 ## Proceed to space-aggregation
 
-Next, you can mix data from different source into a single line.
+Next, you can mix data from different sources into a single line.
 
 You have ~300 points for each source. Each of them represents a minute.
 In this example, for each minute, Datadog computes the average across all sources, resulting in the following graph:
@@ -95,7 +94,7 @@ In this example, for each minute, Datadog computes the average across all source
 
 The value obtained (25.74GB) is the average of the values reported by all sources (see previous image).
 
-**Note**: If there is only one source (for instance, if you chose the scope `{host:moby, device:/dev/disk}` for the query), using `sum`/`avg`/`max`/`min` has no effect as no space aggregation needs to be performed. See the FAQ on [switching between the sum/min/max/avg aggregators][8].
+**Note**: If there is only one source (for instance, if you chose the scope `{host:bubs, device:/dev/disk}` for the query), using `sum`/`avg`/`max`/`min` has no effect as no space aggregation needs to be performed. See the FAQ on [switching between the sum/min/max/avg aggregators][8].
 
 **Parameter involved: space aggregator**
 
@@ -159,7 +158,7 @@ Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 For more information, see [Visualize StatsD metrics with Counts Graphing][9].
 Documentation about [StatsD/DogStatsD][10].
 
-[1]: /dashboards/#timeboards
+[1]: /dashboards/#get-started
 [2]: /dashboards/#screenboards
 [3]: /agent/
 [4]: /metrics/custom_metrics/

@@ -1,16 +1,16 @@
 ---
-title: Cluster Agent のネットワークデバイスモニタリング
-kind: ガイド
 aliases:
-  - /ja/network_performance_monitoring/devices/guide/cluster-agent/
+- /ja/network_performance_monitoring/devices/guide/cluster-agent/
 further_reading:
-  - link: /agent/cluster_agent
-    tag: Documentation
-    text: Kubernetes 対応の Cluster Agent
-  - link: /agent/cluster_agent/clusterchecks
-    tag: Documentation
-    text: クラスターチェック
+- link: /agent/cluster_agent
+  tag: Documentation
+  text: Kubernetes 対応の Cluster Agent
+- link: /agent/cluster_agent/clusterchecks
+  tag: Documentation
+  text: クラスターチェック
+title: Cluster Agent のネットワークデバイスモニタリング
 ---
+
 Kubernetes 環境では、Network Device Monitoring (NDM) のオートディスカバリー論理を[クラスターチェック][2]のソースとして使用するよう [Datadog Cluster Agent][1] (DCA) を構成することが可能です。
 
 Agent のオートディスカバリーを DCA と組み合わせるとスケーラブルになり、大量のデバイスを監視することができます。
@@ -34,7 +34,7 @@ Agent のオートディスカバリーを DCA と組み合わせるとスケー
     helm install datadog-monitoring --set datadog.apiKey=<YOUR_DD_API_KEY> -f cluster-agent-values.yaml datadog/datadog
     ```
 
-### コンフィギュレーション
+### 構成
 
 以下は、`cluster-agent-values.yaml` の例です。
 
@@ -42,7 +42,7 @@ Agent のオートディスカバリーを DCA と組み合わせるとスケー
 datadog:
   ## @param apiKey - 文字列 - 必須
   ## Agent を実行する前に、これを Datadog API キーに設定します。
-  ## ref: https://app.datadoghq.com/account/settings#agent/kubernetes
+  ## ref: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
   #
   apiKey: <DATADOG_API_KEY>
 
@@ -207,11 +207,9 @@ clusterAgent:
   ## Datadog Cluster Agent のコンフィグにカスタムコンテンツを指定します (datadog-cluster.yaml)。
   #
   datadog_cluster_yaml:
-    listeners:
-      - name: snmp
 
-    # すべての `snmp_listener` コンフィグはこちらを参照: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-    snmp_listener:
+    # すべての `network_devices.autodiscovery` 構成はこちらを参照: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+    autodiscovery:
       workers: 2
       discovery_interval: 10
       configs:

@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: SLO 목록 위젯
 ---
 
@@ -37,7 +36,7 @@ SLO 목록 위젯의 전용 [위젯 JSON 스키마 정의][3]는 다음과 같�
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

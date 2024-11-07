@@ -3,27 +3,28 @@ aliases:
 - /ja/integrations/awsstoragegateway/
 categories:
 - cloud
-- data store
+- data stores
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: AWS Storage Gateway のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_storage_gateway/
 draft: false
 git_integration_title: amazon_storage_gateway
 has_logo: true
-integration_id: amazon-storage-gateway
-integration_title: Amazon Storage Gateway
+integration_id: ''
+integration_title: AWS Storage Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_storage_gateway
-public_title: Datadog-Amazon Storage Gateway インテグレーション
+public_title: Datadog-AWS Storage Gateway インテグレーション
 short_description: AWS Storage Gateway のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Storage Gateway は、オーガニゼーションの IT 環境と AWS のストレージインフラストラクチャーとの間にシームレスで安全なインテグレーションを提供します。
@@ -41,18 +42,18 @@ AWS Storage Gateway は、オーガニゼーションの IT 環境と AWS のス
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `StorageGateway` が有効になっていることを確認します。
 2. [Datadog - AWS Storage Gateway インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
-Amazon Storage Gateway から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS Storage Gateway から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_storage_gateway` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Storage Gateway ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS Storage Gateway ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -69,7 +70,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 AWS Storage Gateway インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Storage Gateway インテグレーションには、サービスのチェック機能は含まれません。
 

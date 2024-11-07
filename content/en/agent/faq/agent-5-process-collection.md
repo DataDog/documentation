@@ -1,13 +1,12 @@
 ---
 title: Process collection with Agent v5
-kind: faq
 private: true
 ---
 
 ## Standard Agent configuration
 
 **Live Processes is available in Datadog Agent version 5.16.0 and above.**
-See the instructions for standard [Agent installation][1] for platform-specific details. 
+See the instructions for standard [Agent installation][1] for platform-specific details.
 
 **Note**: Live Processes is not available for the source install method of the Agent.
 
@@ -59,9 +58,9 @@ In the [dd-agent.yaml][5] manifest used to create the DaemonSet, add the followi
 
 See the standard [DaemonSet installation][6] and the [docker-dd-agent][4] information pages for further documentation.
 
-[1]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[1]: https://app.datadoghq.com/account/settings/agent/5?platform=overview
 [2]: /agent/faq/where-is-the-configuration-file-for-the-agent/
-[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
 [4]: https://github.com/DataDog/docker-dd-agent
 [5]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [6]: /agent/kubernetes/

@@ -1,4 +1,9 @@
 ---
+algolia:
+  rank: 70
+  tags:
+  - 異常値
+  - 異常値モニター
 aliases:
 - /ja/guides/anomalies
 - /ja/monitors/monitor_types/anomaly
@@ -8,7 +13,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
@@ -17,7 +22,6 @@ further_reading:
 - link: dashboards/functions/algorithms/#anomalies
   tag: ドキュメント
   text: 異常関数
-kind: documentation
 title: 異常検知モニター
 ---
 
@@ -53,8 +57,19 @@ Datadog にレポートが送信されるメトリクスはすべて、モニタ
 トリガーウィンドウ
 : メトリクスの異常が検知されアラートを発するまでに必要な時間。**注意**: アラート設定ウィンドウがあまりに短いと、疑似ノイズにより不正アラームが発せられることがあります。
 
-リカバリウィンドウ
-: メトリクスを異常とみなさないでアラートをリカバリするために必要な時間。
+リカバリーウィンドウ
+: メトリクスが異常とみなされなくなり、アラートが回復するまでに必要な時間。**Recovery Window** は、**Trigger Window** と同じ値に設定することをお勧めします。
+
+**注**: **Recovery Window** の許容値の範囲は、モニターが回復とアラート条件を同時に満たすことができないように、**Trigger Window** と **Alert Threshold** に依存します。
+例:
+* `Threshold`: 50%
+* `Trigger window`: 4h
+リカバリーウィンドウの許容値の範囲は、121 分 (`4h*(1-0.5) +1 min = 121 minutes`) から 4 時間の間です。リカバリーウィンドウを 121 分未満に設定すると、4 時間の時間枠で 50% の異常ポイントが発生し、最後の 120 分では異常ポイントが発生しない可能性があります。
+
+他の例:
+* `Threshold`: 80%
+* `Trigger window`: 4h
+リカバリーウィンドウの許容値の範囲は 49 分 (`4h*(1-0.8) +1 min = 49 minutes`) から 4 時間の間です。
 
 ### 高度なオプション
 
@@ -82,7 +97,6 @@ rollup
 : アラート、警告、リカバリを設定するために異常として判断する基準となるパーセンテージ。
 
 ### 季節性
-<div class="alert alert-info"><strong>注</strong>: 機械学習アルゴリズムが完全に効率的であるためには、選択された季節性の時間の少なくとも 2 倍の履歴データ時間が必要です。例えば、1 週間ごとの季節性の場合、最低でも 2 週間のデータが必要です。</div>
 
 Hourly
 : このアルゴリズムは、毎時の特定の分が過去の同じ分と同様に挙動すると想定します。たとえば、5:15 の挙動が 4:15 や 3:15 と同じだと想定します。
@@ -93,6 +107,15 @@ Daily
 Weekly
 : このアルゴリズムは、特定の曜日が過去の同じ曜日と同様に挙動すると想定します。たとえば、今週の火曜の挙動が過去の火曜と同じだと想定します。
 
+**異常検出アルゴリズムに必要なデータ履歴**: 機械学習アルゴリズムは、ベースラインを計算するために、選択された季節性時間の少なくとも 3 倍の履歴データ時間を必要とします。
+例:
+
+* _週ごと_の季節性には少なくとも 3 週間のデータが必要
+* _日ごと_の季節性には少なくとも 3 日間のデータが必要
+* _時間ごと_の季節性には少なくとも 3 時間のデータが必要
+
+季節性アルゴリズムはすべて、メトリクスの挙動の正常範囲を予測する際に、最大で 6 週間分の履歴データを使用します。過去データを大量に使用することで、通常とは異なる挙動が最近発生していた場合、アルゴリズムはこれを重視しません。
+
 ### 異常検知アルゴリズム
 Basic
 : メトリクスに反復する季節性パターンがない場合に使用します。Basic は遅延の繰り返しの分位数を計算して予測値の範囲を決定します。データをほとんど使用せず、状況の変化にすばやく対応しますが、季節的な挙動や長期的な傾向は認識できません。
@@ -102,8 +125,6 @@ Agile
 
 Robust
 : 安定性が期待できる季節性メトリクスの緩やかなレベルシフトを異常値と見なした場合に使用されます。[季節的傾向分解][7]アルゴリズムの 1 つ。安定性が高く、異常が長期的に続いても予測は一定していますが、意図的なレベルシフトへの対応にはやや時間がかかります (コード変更によってメトリクスのレベルがシフトした場合など)。
-
-季節性アルゴリズムはすべて、メトリクスの挙動の正常範囲を予測する際に、最大で数か月分の履歴データを使用します。過去データを大量に使用することで、通常とは異なる挙動が最近発生していた場合、アルゴリズムはこれを重視しません。
 
 ## 例
 下記のグラフでは、これら 3 つのアルゴリズムがいつどのように異なる挙動を示すか表しています。
@@ -139,13 +160,13 @@ Robust
 
 ## 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][10]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
 
 ## API
 
-エンタープライズレベルのお客様は、[モニターの作成 API エンドポイント][11]を使用して異常検知モニターを作成できます。Datadog では、[モニターの JSON をエクスポート][12]して API のクエリを作成することを**強く推奨**しています。Datadog の[モニター作成ページ][1]を使用することで、顧客はプレビューグラフと自動パラメーター調整の恩恵を受け、不適切に構成されたモニターを回避できます。
+Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-**注**: 異常検知モニターは、エンタープライズレベルのお客様専用のサービスです。プロレベルのお客様で、異常検知モニターのご利用を希望される場合は、カスタマーサクセス担当者にお問い合わせいただくか、[Datadog 請求担当チーム][13]にメールでお問い合わせください。
+**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
 異常モニターは、他のモニターと[同じ API][14] を使用して管理されます。これらのフィールドは、異常モニターに固有です。
 

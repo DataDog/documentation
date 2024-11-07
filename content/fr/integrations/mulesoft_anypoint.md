@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: ioconnect-mulesoft-anypoint
 app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:
@@ -47,12 +49,11 @@ integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
 manifest_version: 2.0.0
 name: mulesoft_anypoint
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

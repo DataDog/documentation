@@ -1,6 +1,5 @@
 ---
 title: "Service Check Submission: Agent Check"
-kind: documentation
 further_reading:
 - link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
@@ -83,7 +82,7 @@ class MyClass(AgentCheck):
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/custom_checks/write_agent_check/
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /agent/guide/agent-commands/#agent-information
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/configuration/agent-commands/#restart-the-agent
+[4]: /agent/configuration/agent-commands/#agent-information
 [5]: https://app.datadoghq.com/check/summary

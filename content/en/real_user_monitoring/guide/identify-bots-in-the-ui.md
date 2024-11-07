@@ -1,6 +1,6 @@
 ---
 title: Identify Bots in the RUM Explorer
-kind: guide
+
 description: Identify incoming RUM requests.
 further_reading:
 - link: '/real_user_monitoring/explorer'
@@ -18,7 +18,7 @@ To distinguish between real user activity and synthetic activity, you can find r
 
 In the [RUM Explorer][2], select **Views** from the dropdown menu and enter `@device.type:Bot` in the search query.
 
-{{< img src="real_user_monitoring/guide/identify-bots/rum-explorer-bot-views.png" alt="Updated View filter and specified search query in the RUM Explorer" style="width:100%" >}}
+{{< img src="real_user_monitoring/guide/identify-bots/rum-explorer-bot-views-1.png" alt="Updated View filter and specified search query in the RUM Explorer" style="width:100%" >}}
 
 Search through the list of views and click on a view event to open the **View** side panel. Click on the **Attributes** tab to validate the bot in the **Browser Name** field under **Session**.
 

@@ -1,39 +1,57 @@
 ---
+app_id: system
+app_uuid: 423f4b03-ce99-4ffc-a553-e522ebd451be
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.nfs.ops
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nfsstat
   logs:
     source: nfsstat
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
-display_name: Nfsstat
+display_on_public_website: true
 draft: false
 git_integration_title: nfsstat
-guid: 9f2fe3a7-ae19-4da9-a253-ae817a5557ab
 integration_id: system
 integration_title: Nfsstat
-integration_version: 1.11.0
+integration_version: 1.11.1
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.nfs.ops
+custom_kind: integration
+manifest_version: 2.0.0
 name: nfsstat
-public_title: Intégration Datadog/Nfsstat
+public_title: Nfsstat
 short_description: nfsstat récupère des métriques nfsiostat-sysstat.
-support: core
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: nfsstat récupère des métriques nfsiostat-sysstat.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nfsstat
 ---
 
 
@@ -100,7 +118,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 - [Créer un monitor réseau sur un check HTTP][9]
 
 [1]: http://man7.org/linux/man-pages/man8/nfsiostat.8.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/datadog_checks/nfsstat/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

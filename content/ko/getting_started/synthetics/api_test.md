@@ -1,8 +1,11 @@
 ---
 further_reading:
-- link: https://learn.datadoghq.com/course/view.php?id=39
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: 학습 센터
   text: 신서틱(Synthetic) 테스트 소개
+- link: /api/latest/synthetics/#create-an-api-test
+  tag: API
+  text: 프로그래밍 방식으로 API 테스트 생성
 - link: /synthetics/api_tests
   tag: 설명서
   text: 싱글 API 테스트에 대해 자세히 알아보기
@@ -11,17 +14,16 @@ further_reading:
   text: 멀티스텝 API 테스트에 대해 자세히 알아보기
 - link: /getting_started/synthetics/private_location
   tag: 설명서
-  text: 비공개 위치 알아보기
-- link: /synthetics/cicd_integrations/
+  text: 프라이빗 위치 알아보기
+- link: /continuous_testing/cicd_integrations/
   tag: 설명서
   text: CI/CD 파이프라인에서 신서틱 테스트 트리거하는 방법 알아보기
-- link: /synthetics/identify_synthetics_bots
+- link: /synthetics/guide/identify_synthetics_bots
   tag: 설명서
   text: API 테스트용 신서틱 봇을 식별하는 방법 알아보기
-- link: /api/v1/synthetics/#create-a-test
-  tag: API 설명서
-  text: 프로그램화 신서틱(Synthetic) 테스트 만들기
-kind: 설명서
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: 설명서
+  text: 신서틱 테스트 모니터에 대해 알아보기
 title: API 테스트 시작하기
 ---
 
@@ -56,31 +58,29 @@ HTTP 테스트는 API 엔드포인트를 모니터링하고 응답 레이턴시�
 
 {{< img src="getting_started/synthetics/api-test-config-3.png" alt="API 테스트 설정" style="width:100%;">}}
 
-### 어서션(표명) 정의하기
+### 어설션(표명) 정의하기
 
-**Test URL**을 클릭하면 엔드포인트 응답에 대한 기본 어셔션이 자동으로 입력됩니다. 어서션은 성공적인 테스트 실행이 무엇인지 정의합니다.
+**Test URL**을 클릭하면 엔드포인트 응답에 대한 기본 어설션이 자동으로 입력됩니다. 어설션은 테스트 실행 성공을 정의합니다.
 
-이번 예시에서는 샘플 테스트 실행을 트리거한 후 세 가지 기본 어서션이 입력됩니다.
+이번 예시에서는 샘플 테스트 실행을 트리거한 후 세 가지 기본 어설션이 입력됩니다.
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="기본 표명" style="width:100%;">}}
 
-어서션은 완벽하게 사용자의 의향에 따라 맞춤 설정이 가능합니다. 커스텀 어서션을 추가하려면 헤더와 같은 응답 미리보기의 요소를 클릭하거나, **New Assertion**을 클릭해 신규 어서션을 처음부터 정의하세요.
+어설션은 사용자의 의향에 따라 맞춤 설정이 가능합니다. 커스텀 어설션을 추가하려면 헤더와 같은 응답 미리보기의 요소를 클릭하거나, **New Assertion**을 클릭해 신규 어설션을 처음부터 정의하세요.
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="예시 API 테스트 설정" video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="예시 API 테스트 설정" video="true" >}}
 
 ### 위치 선택하기
 
-테스트를 실행할 **Managed Locations** 또는 **Private Locations** 하나 이상을 선택하세요.
+테스트를 실행하려면 하나 이상의 **Managed Locations** 또는 **Private Locations**를 선택하세요. {{% managed-locations %}}
 
-관리형 위치(Managed locations)를 사용하면 공개용 웹사이트와 엔드포인트를 테스트할 수 있습니다. 내부 애플리케이션을 테스트하거나 별도 지역의 사용자 행동을 시뮬레이션하는 경우에는 [비공개 위치(private locations)][8]를 선택하세요.
-
-Shopist 애플리케이션은 `https://www.shopist.io/`에 공개되어 있으므로, 관리형 위치를 선택해 테스트를 실행할 수 있습니다.
+Shopist 애플리케이션은 `https://www.shopist.io/`에서 공용으로 사용할 수 있으므로 테스트를 실행할 관리되는 위치를 선택할 수 있습니다. 내부 애플리케이션을 테스트하거나 개별 지리적 영역에서 사용자 동작을 시뮬레이션하려면 [개인 위치][8]를 사용하세요.
 
 ### 테스트 빈도 지정
 
 테스트를 실행할 빈도를 선택합니다. 기본 빈도인 1분을 그대로 둘 수도 있습니다.
 
-**참조**: 신서틱 테스트를 일정대로 실행하는 것과 더불어 [CI/CD 파이프라인][9]에서 수동으로 또는 직접 트리거할 수 있습니다.
+스케줄에 따라 신서틱 테스트를 실행할 뿐만 아니라 [CI/CD 파이프라인][9]에서 수동으로 또는 직접 트리거할 수 있습니다.
 
 ### 경고 조건 정의
 
@@ -98,11 +98,11 @@ Retry test 2 times after 300 ms in case of failure
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### 팀에 알림 전송하기
+### 테스트 모니터 설정
 
 나만의 경고 메시지를 디자인하고 테스트에서 경고를 보낼 이메일 주소를 추가하세요. 또한 Slack, PagerDuty, Microsoft Teams, 웹훅 등의 [알림 통합][10]을 사용할 수도 있습니다. 이러한 도구에서 신서틱 경고를 트리거하려면 먼저 해당하는 [통합][11]을 설정하셔야 합니다.
 
-테스트를 실행할 준비가 되었다면 **Save Test**를 클릭하세요.
+테스트 설정을 저장하고 모니터할 준비가 되면 **Create**를 클릭합니다.
 
 ## 멀티스텝 API 테스트 만들기
 
@@ -128,12 +128,12 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 2. 단계에 이름을 추가합니다(예: `Get a cart`).
 3. 쿼리할 HTTP 메소드와 URL을 지정합니다. `POST` 및 `https://api.shopist.io/carts`를 입력할 수 있습니다. 
 4. **Test URL**을 클릭하세요. 이렇게 하면 Shopist 애플리케이션 백엔드에 장바구니 제품이 생성됩니다.
-5. 기본 어서션을 그대로 두거나 수정합니다.
+5. 기본 어설션을 그대로 두거나 수정합니다.
 6. 선택 사항으로, 실행 파라미터를 정의할 수 있습니다.
 
     **Continue with test if this step fails**를 선택하면 전체 엔드포인트 컬렉션을 테스트했는지, 이전 단계의 성공이나 실패와 관계없이 최근 정리 단계를 실행했는지를 확인하는 데 도움이 됩니다. **Retry** 단계 기능은 API 엔드포인트에서 응답하기까지 시간이 다소 소요된다는 점을 알고 있는 상황에 유용합니다.
 
-    이번 사례에서는 특정 실행 파라미터가 필요하지 않습니다.
+   이번 사례에서는 특정 실행 파라미터가 필요하지 않습니다.
 
 7. 장바구니 ID의 변수를 벗어난 변수를 `location` 헤더 끝에 위치하도록 만드는 방법은 다음과 같습니다.
     - **Extract a variable from response content**를 클릭합니다.
@@ -141,7 +141,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
     - **Response Header**에서 `location`을 선택합니다.
     - **Parsing Regex** 필드에서 `(?:[^\\/](?!(\\|/)))+{TX-PL-LABEL}#x60; 등의 정규 표현식을 추가합니다.
 
-  {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="응답 콘텐츠에서 추출한 변수" style="width:100%;" >}}
+   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="응답 콘텐츠에서 추출한 변수" style="width:100%;" >}}
 
 8. **Save Variable**을 클릭합니다.
 9. 테스트 절차 만들기를 완료했다면 **Save Step**을 클릭합니다.
@@ -152,7 +152,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 2. 단계에 이름을 추가합니다(예: `Get a product`).
 3. 쿼리할 HTTP 메소드와 URL을 지정합니다. 여기에서는 `GET` 및 `https://api.shopist.io/products.json`를 추가할 수 있습니다. 
 4. **Test URL**을 클릭합니다. 이렇게 하면 Shopist 애플리케이션에서 이용 가능한 제품 목록을 불러옵니다.
-5. 기본 어서션을 그대로 두거나 수정합니다.
+5. 기본 어설션을 그대로 두거나 수정합니다.
 6. 선택 사항으로, 실행 파라미터를 정의할 수 있습니다. 이번 예시에서는 특정 실행 파라미터가 필요하지 않습니다.
 7. 제품 ID에서 벗어난 변수를 응답 본문에 위치하도록 만드는 방법은 다음과 같습니다.
     - **Extract a variable from response content**를 클릭합니다.
@@ -187,17 +187,19 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="생성된 테스트 절차" style="width:100%;" >}}
 
-이제 다른 테스트 조건(테스트 빈도, 경고 조건, 경고 메시지 등)을 설정할 수 있습니다. 테스트를 실행할 준비가 되었다면 **Save Test**를 클릭하세요. 
+그런 다음 테스트 빈도 및 경고 조건과 같은 나머지 테스트 조건과 테스트 모니터를 설정할 수 있습니다. 테스트 설정을 저장하고 모니터할 준비가 되었으면 **Create**를 클릭합니다.
+
+자세한 내용은 [신서틱 테스트 모니터 사용][13]을 참고하세요.
 
 ## 테스트 결과 보기
 
 **API test**와 **Multistep API test detail** 페이지는 테스트 설정의 개요, 테스트한 엔드포인트와 관련된 위치별 글로벌 업타임, 응답 시간과 네트워크 타이밍을 보여주는 그래프, 테스트 결과와 이벤트 목록을 표시합니다.
 
-실패한 테스트를 트러블슈팅하려면 **Test Results**로 스크롤을 내린 다음 실패한 테스트 결과를 클릭하세요. 실패한 어서션과 응답 정보(상태 코드, 응답 시간, 관련된 헤더와 본문 등)를 검토해 문제를 진단할 수 있습니다.
+실패한 테스트를 트러블슈팅하려면 **Test Results**로 스크롤을 내린 다음 실패한 테스트 결과를 클릭하세요. 실패한 어설션과 응답 정보(상태 코드, 응답 시간, 관련된 헤더와 본문 등)를 검토해 문제를 진단할 수 있습니다.
 
 {{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API 테스트 실패" style="width:100%;">}}
 
-Datadog의 [APM 통합과 신서틱 모니터링][13]을 이용하면 실행된 테스트에서 생성된 트레이스를 **Traces** 탭에서 살펴보고, 실패한 테스트의 근본 원인에 접근할 수 있습니다.
+Datadog의 [APM 통합과 신서틱 모니터링][14]을 이용하면 실행된 테스트에서 생성된 트레이스를 **Traces** 탭에서 살펴보고, 실패한 테스트의 근본 원인에 접근할 수 있습니다.
 
 ## 참고 자료
 
@@ -215,4 +217,5 @@ Datadog의 [APM 통합과 신서틱 모니터링][13]을 이용하면 실행된 
 [10]: /ko/integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /ko/synthetics/apm/
+[13]: /ko/synthetics/guide/synthetic-test-monitors
+[14]: /ko/synthetics/apm/

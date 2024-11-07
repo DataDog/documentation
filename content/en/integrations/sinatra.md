@@ -1,13 +1,13 @@
 ---
 title: Sinatra
 name: Sinatra
-kind: integration
+custom_kind: integration
 description: 'Gather Sinatra application logs.'
 short_description: 'Gather Sinatra application logs.'
 categories:
     - log collection
 aliases:
-    - logs/log_collection/nxlog
+    - /logs/log_collection/nxlog
 has_logo: true
 integration_title: Sinatra
 is_public: true
@@ -90,7 +90,7 @@ _Available for Agent versions >6.0_
 3. [Restart the Agent][7]
 
 [1]: http://sinatrarb.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger

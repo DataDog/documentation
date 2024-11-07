@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: lambdatest-software-license
 app_uuid: 19d686c3-df14-485b-8efb-539e3dbc23e9
 assets: {}
@@ -15,6 +17,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - コラボレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,12 +26,10 @@ integration_id: lambdatest-software-license
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: lambdatest_license
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -71,11 +72,15 @@ tile:
     image_url: images/realtime-testing.jpg
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-user-bugs-with-lambdatest/
   support: README.md#Support
   title: LambdaTest
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要

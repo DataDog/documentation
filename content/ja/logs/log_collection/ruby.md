@@ -3,7 +3,7 @@ aliases:
 - /ja/logs/languages/ruby
 further_reading:
 - link: https://github.com/roidrage/lograge
-  tag: Github
+  tag: ソースコード
   text: Lograge ドキュメント
 - link: /logs/log_configuration/processors
   tag: Documentation
@@ -17,13 +17,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: ブログ
   text: logrotate を使ったログファイルの管理方法
-kind: documentation
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 title: Ruby on Rails ログ収集
 ---
 
 ## 概要
 
-Datadog にログを送信する際は、[`Lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを追跡します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
+Datadog にログを送信する際は、[`Lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを[テール][11]します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
 
 Lograge を使えば、この例のように、テキストベースの標準的なログ形式を、
 
@@ -150,7 +152,7 @@ end
       logs:
         - type: file
           path: "<RUBY_LOG_FILE_PATH>.log"
-          service: ruby
+          service: <SERVICE_NAME>
           source: ruby
           sourcecategory: sourcecode
           ## Uncomment the following processing rule for multiline logs if they
@@ -202,9 +204,10 @@ logger.info(my_hash);
 [2]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [3]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [4]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[5]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[6]: /ja/agent/guide/agent-commands/#restart-the-agent
+[5]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [7]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby/
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[8]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [9]: /ja/logs/log_configuration/parsing
 [10]: /ja/logs/explorer/
+[11]: /ja/glossary/#tail

@@ -1,54 +1,75 @@
 ---
+app_id: activemq
+app_uuid: ab0b15e8-b7ae-4570-bde2-433a079cdb83
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     activemq: assets/dashboards/activemq_dashboard.json
     artemis: assets/dashboards/artemis_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - activemq.queue.size
+      - activemq.artemis.queue.message_count
+      metadata_path: metadata.csv
+      prefix: activemq.
+    process_signatures:
+    - activemq
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ActiveMQ
   logs:
     source: activemq
-  metrics_metadata: metadata.csv
   monitors:
     '[ActiveMQ Artemis] High disk store usage': assets/recommended_monitors/activemq_artemis_high_disk_store.json
     '[ActiveMQ Artemis] High unrouted messages': assets/recommended_monitors/activemq_artemis_unrouted_messages.json
   saved_views:
     activemq_processes: assets/saved_views/activemq_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - log collection
-- processing
 - messaging
-- autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
-display_name: ActiveMQ
+display_on_public_website: true
 draft: false
 git_integration_title: activemq
-guid: 496df16d-5ad0-438c-aa2a-b8ba8ee3ae05
 integration_id: activemq
 integration_title: ActiveMQ
-integration_version: 2.3.1
+integration_version: 3.0.0
 is_public: true
-kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: activemq.
-metric_to_check:
-- activemq.queue.size
-- activemq.artemis.queue.message_count
+custom_kind: integration
+manifest_version: 2.0.0
 name: activemq
-process_signatures:
-- activemq
-public_title: Intégration Datadog/ActiveMQ
+public_title: ActiveMQ
 short_description: Recueillez des métriques sur les agents, les files d'attente, les
   producteurs, les consommateurs, et plus encore.
-support: core
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Messaging
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Recueillez des métriques sur les agents, les files d'attente, les producteurs,
+    les consommateurs, et plus encore.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ActiveMQ
 ---
 
 
@@ -61,13 +82,13 @@ Le check ActiveMQ recueille des métriques sur les agents, les files d'attente, 
 
 **Remarque** : si vous utilisez une version d'ActiveMQ antérieure à 5.8.0, consultez les [exemples de fichiers pour l'Agent 5.10.x][2].
 
-## Configuration
+## Implémentation
 
 ### Installation
 
 Le check ActiveMQ de l'Agent est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
 
-Le check recueille des métriques par l'intermédiaire de JMX. Une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][4]. Datadog recommande d'utiliser une JVM fournie par Oracle.
+Le check recueille des métriques à partir de JMX via [JMXFetch][4]. Une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse exécuter JMXFetch. Datadog vous conseille d'utiliser une JVM fournie par Oracle.
 
 ### Configuration
 
@@ -198,13 +219,13 @@ Recueillez des métriques d'ActiveMQ XML en temps réel pour :
 - Visualiser et surveiller les états d'ActiveMQ XML
 - Être informé des failovers et des événements d'ActiveMQ XML
 
-## Configuration
+## Implémentation
 
 ### Installation
 
 Le check ActiveMQ XML est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
-### Procédure à suivre
+### Configuration
 
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
@@ -284,7 +305,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv
 [2]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/jmxfetch
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/fr/help/

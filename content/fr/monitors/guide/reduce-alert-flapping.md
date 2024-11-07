@@ -2,10 +2,10 @@
 aliases:
 - /fr/monitors/faq/how-do-i-reduce-alert-flapping-noise
 further_reading:
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
-kind: guide
+
 title: Limiter le bagottement des alertes
 ---
 
@@ -18,9 +18,9 @@ Pour les alertes Datadog individuelles générées par les groupes, le [cumul de
 * Utiliser le seuil `min`
     * Cette condition déclenche l'alerte uniquement lorsque tous les points de données d'une métrique dépassent le seuil sur l'intervalle observé.
 
-* Affiner la requête à l'aide de fonctions, comme des taux, des moyennes mobiles ou des différentiels avec décalage temporel
+* Affiner la requête à l'aide de fonctions, comme des taux, des moyennes mobiles ou des différentiels temporels
     * Vous pouvez ainsi comparer l'écart encore les valeurs du flux d'une métrique et les valeurs observées une semaine plus tôt, et vous baser sur cet écart pour définir les conditions d'alerte
-    * Un différentiel avec décalage temporel vous permet de combiner plusieurs fonctions et de générer une vue historique. Exemple :
+    * Un différentiel temporel vous permet de combiner plusieurs fonctions et de générer une vue historique. Exemple :
  abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
     * Si votre métrique enregistre des pics fréquents qui ne dénotent pas forcément un problème précis, appliquez un taux ou une moyenne pour améliorer la pertinence de votre seuil.
 
@@ -38,7 +38,7 @@ Si vous rencontrez un problème d'acheminement des alertes, songez à utiliser d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
-[2]: /fr/monitors/create/types/anomaly/
-[3]: /fr/monitors/create/types/outlier/
+[2]: /fr/monitors/types/anomaly/
+[3]: /fr/monitors/types/outlier/
 [4]: /fr/monitors/notify/variables/?tab=is_alert#template-variables
 [5]: /fr/monitors/notify/variables/?tab=is_alert#conditional-variables

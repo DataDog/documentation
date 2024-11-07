@@ -1,6 +1,5 @@
 ---
 title: APM Terms and Concepts
-kind: documentation
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
@@ -9,9 +8,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -40,14 +39,17 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
+| [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
+| [Baggage](#baggage) | Baggage is contextual information that is passed between traces, metrics, and logs in the form of key-value pairs. |
 
 ## Services
 
-After [instrumenting your application][3], the [Services List][4] is your main landing page for APM data.
+After [instrumenting your application][3], the [Service Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/service_list.png" alt="service list" >}}
+{{< img src="tracing/visualization/service_catalog.png" alt="Service Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
@@ -59,7 +61,7 @@ The screenshot below is a microservice distributed system for an e-commerce site
 
 {{< img src="tracing/visualization/service_map.png" alt="service map" >}}
 
-All services can be found in the [Service List][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
+All services can be found in the [Service Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
@@ -81,6 +83,12 @@ A trace is used to track the time spent by an application processing a request a
 
 {{< img src="tracing/visualization/trace_view.png" alt="trace view" >}}
 
+## Trace context propagation
+
+Trace context propagation is the method of passing trace identifiers between services in a distributed system. It enables Datadog to stitch together individual spans from different services into a single distributed trace. Trace context propagation works by injecting identifiers, such as the trace ID and parent span ID, into HTTP headers as the request flows through the system. The downstream service then extracts these identifiers and continues the trace. This allows the Datadog to reconstruct the full path of a request across multiple services.
+
+For more information, see the [propagating the trace context][27] for your application's language.
+
 ## Retention filters
 
 [Set tag-based filters][19] in the UI to index spans for 15 days for use with [Trace Search and Analytics][14].
@@ -89,13 +97,29 @@ A trace is used to track the time spent by an application processing a request a
 
 [Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
+## Instrumentation
+
+Instrumentation is the process of adding code to your application to capture and report observability data to Datadog, such as traces, metrics, and logs. Datadog provides instrumentation libraries for various programming languages and frameworks.
+
+You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][24] or when you [manually add Datadog tracing libraries][25] to your code.
+
+You can use custom instrumentation by embedding tracing code directly into your application code. This allows you to programmatically create, modify, or delete traces to send to Datadog.
+
+To learn more, read [Application Instrumentation][26].
+
+## Baggage
+
+Baggage allows you to propagate key-value pairs (also known as baggage items) across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
+
+To learn more, read supported [propagation formats][28] for your application's language.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
-[4]: /tracing/services/services_list/
+[4]: /tracing/service_catalog/
 [5]: /tracing/services/services_map/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/
@@ -103,15 +127,20 @@ A trace is used to track the time spent by an application processing a request a
 [9]: /tracing/manual_instrumentation/
 [10]: /tracing/opentracing/
 [11]: /tracing/other_telemetry/connect_logs_and_traces/
-[12]: /tracing/guide/add_span_md_and_graph_it/
+[12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [13]: /tracing/metrics/runtime_metrics/
-[14]: /tracing/guide/add_span_md_and_graph_it/
+[14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
-[17]: https://app.datadoghq.com/monitors#/create
+[17]: https://app.datadoghq.com/monitors/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [20]: /tracing/trace_pipeline/ingestion_controls/
 [21]: /glossary/#span
 [22]: /glossary/
 [23]: /monitors/types/apm/
+[24]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[26]: /tracing/trace_collection/
+[27]: /tracing/trace_collection/trace_context_propagation
+[28]: /tracing/trace_collection/trace_context_propagation/#supported-formats

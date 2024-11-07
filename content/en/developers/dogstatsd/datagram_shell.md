@@ -1,6 +1,5 @@
 ---
 title: Datagram Format and Shell Usage
-kind: documentation
 description: Overview of the datagram format used by DogStatsD as well as (advanced) shell usage.
 aliases:
     - /developers/dogstatsd/data_types/
@@ -11,9 +10,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. The raw datagrams are encoded in UTF-8. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
@@ -27,11 +23,11 @@ This section specifies the raw datagram format for metrics, events, and service 
 
 | Parameter                           | Required | Description                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][1].                                                  |
+| `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][101].                                                  |
 | `<VALUE>`                           | Yes      | An integer or float.                                                                                                                                           |
-| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET, `d` for DISTRIBUTION. See [Metric Types][2] for more details.                    |
+| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET, `d` for DISTRIBUTION. See [Metric Types][102] for more details.                    |
 | `<SAMPLE_RATE>`                     | No       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, DISTRIBUTION, and TIMER metrics. The default is `1`, which samples 100% of the time. |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). For guidance on defining tags, see [Getting Started with Tags][3].              |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). For guidance on defining tags, see [Getting Started with Tags][103].              |
 
 Here are some example datagrams:
 
@@ -72,7 +68,7 @@ The container ID is prefixed by `c:`, for example:
 
 - `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: The Datadog Agent adds container tags like `image_name` and `image_tag` to the `page.views` metric.
 
-Read more about container tags in the [Kubernetes][4] and [Docker][5] tagging documentation.
+Read more about container tags in the [Kubernetes][104] and [Docker][105] tagging documentation.
 
 ### DogStatsD protocol v1.3
 
@@ -90,11 +86,11 @@ The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 
 - `page.views:15|c|#env:dev|T1656581400`: A COUNT indicating that 15 page views happened on the 30th of June, 2022 at 9:30am UTC
 
-[1]: /metrics/#naming-metrics
-[2]: /metrics/types/
-[3]: /getting_started/tagging/
-[4]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[5]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[101]: /metrics/#metric-name
+[102]: /metrics/types/
+[103]: /getting_started/tagging/
+[104]: /containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[105]: /containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -108,11 +104,11 @@ The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 | `<TITLE_UTF8_LENGTH>`                | Yes      | The length (in bytes) of the UTF-8-encoded `<TITLE>`                                                                              |
 | `<TEXT_UTF8_LENGTH>`                 | Yes      | The length (in bytes) of the UTF-8-encoded `<TEXT>`                                                                               |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
+| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. Defaults to the Datadog Agent instance.                                                                               |
 | `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
 | `p:<PRIORITY>`                       | No       | Set to `normal` or `low`. Default `normal`.                                                                            |
 | `s:<SOURCE_TYPE_NAME>`               | No       | Add a source type to the event. No default.                                                                            |
-| `t:<ALERT_TYPE>`                     | No       | Set to `error`, `warning`, `info` or `success`. Default `info`.                                                        |
+| `t:<ALERT_TYPE>`                     | No       | Set to `error`, `warning`, `info`, or `success`. Default `info`.                                                        |
 | `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default. |
 
 Here are some example datagrams:
@@ -138,7 +134,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the check. The default is the current Unix epoch timestamp.                                                          |
 | `h:<HOSTNAME>`                       | No       | Add a hostname to the event (no default).                                                                                               |
 | `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | Set the tags of the event. A list of strings separated by comma (no default).                                                           |
-| `m:<SERVICE_CHECK_MESSAGE>`          | No       | A message describing the current state of the service check. This field MUST be positioned last among the metadata fields (no default). |
+| `m:<SERVICE_CHECK_MESSAGE>`          | No       | A message describing the current state of the service check. This field must be positioned last among the metadata fields (no default). |
 
 Here's an example datagram:
 
@@ -202,7 +198,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}

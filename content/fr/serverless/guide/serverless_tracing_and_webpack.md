@@ -5,7 +5,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Instrumenter des applications Node.js
-kind: documentation
 title: Tracing Lambda Node.js et compatibilité de Webpack
 ---
 
@@ -53,6 +52,7 @@ Les bibliothèques de tracing Datadog (`dd-trace`) ne sont malheureusement pas c
 1. Suivez les [instructions d'installation pour Node.js][2] et vérifiez que la couche Lambda Datadog pour Node.js a bien été ajoutée à votre fonction Lambda.
 2. Supprimez `datadog-lambda-js` et `dd-trace` de votre fichier `package.json` et de votre processus de build.
 3. Définissez `datadog-lambda-js` et `dd-trace` comme des [externals][4]. Cela indique au bundler qu'il n'est pas nécessaire de les générer en tant que dépendances, puisqu'ils sont déjà disponibles dans le runtime Lambda fourni par la couche Lambda Datadog.
+4. Suivez les étapes indiquées à la rubrique [Prise en charge d'esbuild][6] (en anglais) pour utiliser le plug-in esbuild de Datadog. Celui-ci permet d'instrumenter des dépendances groupées.
 
     **esbuild.config.js (si vous utilisez esbuild-config)**
 
@@ -79,3 +79,4 @@ Les bibliothèques de tracing Datadog (`dd-trace`) ne sont malheureusement pas c
 [3]: https://webpack.js.org/configuration/externals/
 [4]: https://esbuild.github.io/api/#external
 [5]: https://github.com/serverless-heaven/serverless-webpack#node-modules--externals
+[6]: /fr/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#esbuild-support

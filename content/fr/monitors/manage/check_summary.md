@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: Gérer vos monitors
-kind: documentation
 title: Sommaire des checks
 ---
 
@@ -29,7 +28,7 @@ Les checks Datadog transmettent un statut à chaque exécution. La [page du somm
 
 Pour trouver un check spécifique, utilisez la zone de recherche `filter checks` de la page du sommaire des checks. Cliquez sur le nom d'un check pour afficher les statuts et tags associés. Filtrez davantage la liste en utilisant la zone de recherche `filter checks` au sein du volet du check :
 
-{{< img src="monitors/check_summary/check_search.png" alt="Détails du check"  style="width:100%;">}}
+{{< img src="monitors/check_summary/check_search.png" alt="Détails du check" style="width:100%;">}}
 
 ## Dashboards
 

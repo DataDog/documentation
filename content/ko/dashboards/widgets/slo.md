@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
   tag: 블로그
   text: Datadog에서 모든 SLO의 상태 추적
-kind: 설명서
 title: SLO 요약 위젯
 ---
 

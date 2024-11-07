@@ -1,6 +1,5 @@
 ---
 title: Rate
-kind: documentation
 aliases:
     - /graphing/functions/rate/
 further_reading:
@@ -33,6 +32,8 @@ further_reading:
 |:---------|:---------------------------------------------------------------|:-----------------------|
 | `dt()`   | Graph the time difference in seconds between submitted points. | `dt(<METRIC_NAME>{*})` |
 
+The dt() function returns only one timeseries regardless of how many groups are involved. Within that one timeseries, it considers the time difference of all the submitted points across the various groups.
+
 ## Value difference
 
 | Function | Description                    | Example                  |
@@ -52,6 +53,12 @@ Calculates the difference between each interval on a per interval basis. For exa
 | Function       | Description                                   | Example                        |
 |:---------------|:----------------------------------------------|:-------------------------------|
 | `derivative()` | Graph the derivative (diff/dt) of the metric. | `derivative(<METRIC_NAME>{*})` |
+
+## Throughput
+
+| Function       | Description                                                                                                                                        | Example                          |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| `throughput()` | Converts a timeseries into a rate per second, by dividing each value by the number of seconds in the time bucket to produce the per-second value. | `throughput(<METRIC_NAME>{*})` |
 
 ## Other functions
 

@@ -4,7 +4,10 @@ aliases:
 - /fr/tracing/livesearch/
 - /fr/tracing/trace_search_and_analytics/
 description: Trace Explorer
-kind: documentation
+further_reading:
+- link: tracing/trace_explorer/search
+  tag: Documentation
+  text: Rechercher des spans
 title: Trace Explorer
 ---
 
@@ -32,18 +35,18 @@ Le mode Live Search est sélectionné par défaut sur la page Traces. Utilisez l
 
 ### Contrôle du volume des traces
 
-Vous pouvez personnaliser les paramètres d'[ingestion][6] et de [rétention][7] afin d'envoyer et de conserver uniquement les données qui vous intéressent.
+Vous pouvez personnaliser les paramètres [de rétention et d'ingestion][6] afin d'envoyer et de conserver uniquement les données qui vous intéressent.
 
 #### Ingestion
 
-Contrôlez l'ensemble de votre volume avec les [options de configuration de l'Agent Datadog][8] ou définissez des [règles d'ingestion][9] précises pour chaque service instrumenté avec la solution APM Datadog.
+Contrôlez l'ensemble de votre volume avec les [options de configuration de l'Agent Datadog][7] ou définissez des [règles d'ingestion][8] précises pour chaque service instrumenté avec la solution APM Datadog.
 
 
 #### Indexation
 
 Après avoir instrumenté vos services et ingéré des traces, définissez des [filtres de rétention][3] basés sur des tags dans l'application Datadog pour que Datadog conserve uniquement les spans qui vous intéressent.
 
-**Remarque** : les spans ingérées et indexées peuvent augmenter vos coûts. Pour en savoir plus, consultez la page [Tarification d'APM][10].
+**Remarque** : les spans ingérées et indexées peuvent augmenter vos coûts. Pour en savoir plus, consultez la page [Tarification d'APM][9].
 
 ## Live Search pendant 15 minutes
 
@@ -56,7 +59,7 @@ En mode Live Search, Datadog affiche les spans dès qu'elles ont été envoyées
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search avec vue sous forme de liste" video="true" >}}
 
-Utilisez le mode Live Search avec **vue sous forme de Liste** pour :
+Utilisez la **vue sous forme de Liste** pour :
 
 - Surveiller le bon déroulement d'un nouveau déploiement en recherchant l'attribut `version_id` de tous les tags.
 - Visualiser des informations sur les pannes en temps réel en recherchant un `org_id` ou `customer_id` spécifique associé à une span enfant problématique parmi 100 % des spans ingérées.
@@ -97,7 +100,7 @@ En plus de visualiser les requêtes qui correspondent à vos recherches sous for
 
 Définissez une requête valide dans la barre de recherche pour afficher les traces qui correspondent à vos critères de recherche pour **toutes les spans**. La syntaxe de recherche en mode Live Search est la même que celle dans les autres vues. Toutefois, en mode Live Search, la recherche se fait parmi toutes les traces ingérées, pour **tous les tags** et **toutes les spans**, et non pas uniquement parmi celles qui ont été indexées.
 
-Vous pouvez choisir d'interroger les [spans de point d'entrée des services][11], les [spans racines][12] ou toutes les spans en modifiant l'option sélectionnée au-dessus du tableau des traces. Utilisez cette fonction sur les applications qui génèrent beaucoup de trafic pour réduire le nombre de spans affichées et ne visualiser que les spans de point d'entrée des services ou de la trace. Lorsque vous cochez cette case, seules les spans affichées dans la liste sont filtrées. Les autres spans continuent à être représentées dans le flamegraph lorsque vous cliquez sur une span pour afficher les détails de la trace.
+Vous pouvez choisir d'interroger les [spans de point d'entrée des services][10], les [spans racines][11] ou toutes les spans en modifiant l'option sélectionnée au-dessus du tableau des traces. Utilisez cette fonction sur les applications qui génèrent beaucoup de trafic pour réduire le nombre de spans affichées et ne visualiser que les spans de point d'entrée des services ou de la trace. Lorsque vous cochez cette case, seules les spans affichées dans la liste sont filtrées. Les autres spans continuent à être représentées dans le flamegraph lorsque vous cliquez sur une span pour afficher les détails de la trace.
 
 Vous pouvez également rechercher des attributs qui ne sont pas définis en tant que facettes. Par exemple, pour rechercher l'attribut `cart.value`, deux options sont possibles :
 
@@ -123,13 +126,17 @@ Toutes les spans indexées par des filtres de rétention personnalisés *et* le 
 {{% /tab %}}
 {{% tab "Vue sous forme de Série temporelle" %}}
 
-Toutes les spans indexées par des filtres de rétention personnalisés (et *non* par un filtre de rétention intelligent) peuvent être recherchées via l'analyse de traces.
+Toutes les spans indexées par des filtres de rétention personnalisés ou par le filtre de rétention intelligent peuvent être recherchées via l'analyse de traces.
 
-Lorsque la vue sous forme de Série temporelle est activée, exportez votre requête vers un [dashboard][1], un [monitor][2] ou un [notebook][3] pour effectuer une analyse plus poussée ou pour recevoir automatiquement une alerte lorsqu'un nombre agrégé de spans dépasse un certain seuil.
+Lorsque la vue sous forme de Série temporelle est activée, exportez votre requête vers un [dashboard][1], un [monitor][2] ou un [notebook][3] pour effectuer une analyse plus poussée ou pour recevoir automatiquement une alerte lorsqu'un nombre agrégé de spans dépasse un certain seuil. 
+
+**Remarque** : les spans indexées par le filtre de rétention intelligent sont exclues des requêtes APM qui apparaissent dans les dashboards et les notebooks, ainsi que des évaluations de monitor d'analyse de traces. Pour en savoir plus, consultez la section [Rétention des traces][4].
 
 [1]: /fr/dashboards/widgets/timeseries/
-[2]: /fr/monitors/create/types/apm/?tab=analytics
+[2]: /fr/monitors/types/apm/?tab=analytics
 [3]: /fr/notebooks
+[4]: /fr/tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -137,17 +144,19 @@ Lorsque la vue sous forme de Série temporelle est activée, exportez votre requ
 
 Vous pouvez personnaliser les spans qui sont conservées et leurs taux de rétention. Par défaut, le [filtre de rétention intelligent de Datadog][4] est appliqué. Il conserve automatiquement les traces associées à une variété d'erreurs et de latences ainsi que les traces liées à des ressources avec un trafic faible. Pour en savoir plus sur le filtre de rétention intelligent par défaut et découvrir comment créer vos propres filtres, consultez la [documentation sur les filtres de rétention][3]. Accédez à la page [Retention Filters][13] dans l'application Datadog pour créer ou modifier vos propres filtres.
 
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/traces
-[2]: /fr/tracing/trace_ingestion/ingestion_controls
-[3]: /fr/tracing/trace_retention/#retention-filters
-[4]: /fr/tracing/trace_retention/#datadog-intelligent-retention-filter
-[5]: /fr/tracing/visualization/#indexed-span
-[6]: /fr/tracing/trace_ingestion/
-[7]: /fr/tracing/trace_retention/
-[8]: /fr/tracing/trace_ingestion/mechanisms#in-the-agent
-[9]: /fr/tracing/trace_ingestion/mechanisms#in-tracing-libraries-user-defined-rules
-[10]: /fr/account_management/billing/apm_distributed_tracing/
-[11]: /fr/tracing/visualization/#service-entry-span
-[12]: /fr/tracing/visualization/#trace-root-span
-[13]: https://app.datadoghq.com/apm/traces/retention-filters
+[2]: /fr/tracing/trace_pipeline/ingestion_controls
+[3]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /fr/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
+[5]: /fr/tracing/glossary/#indexed-span
+[6]: /fr/tracing/trace_pipeline/
+[7]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[8]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[9]: /fr/account_management/billing/apm_distributed_tracing/
+[10]: /fr/tracing/glossary/#service-entry-span
+[11]: /fr/tracing/glossary/#trace-root-span
+[12]: https://app.datadoghq.com/apm/traces/retention-filters

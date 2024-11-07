@@ -3,10 +3,13 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentation
   text: Utilisation de base de l'Agent
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour booster la surveillance de votre
+    infrastructure
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
-  text: Pourquoi installer l'Agent Datadog sur mes instances dans le cloud ?
-kind: documentation
+  text: Pourquoi installer l'Agent Datadog sur mes instances cloud ?
 title: Débuter avec l'Agent
 ---
 
@@ -102,7 +105,7 @@ Dans l'interface Datadog, cliquez sur **Integrations > Agent** pour accéder à
 Exemple de commande d'installation Ubuntu d'une ligne :
 
 ```shell
-DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Pour obtenir les dernières instructions d'installation, accédez à la [page d'installation de l'Agent][18] pour votre système d'exploitation dans l'application.
@@ -292,7 +295,7 @@ Pour dépanner plus facilement l'Agent :
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /fr/agent/basic_agent_usage/?tab=agentv6v7
-[18]: https://app.datadoghq.com/account/settings#agent/
+[18]: https://app.datadoghq.com/account/settings/agent/latest
 [19]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [20]: /fr/developers/service_checks/#visualize-your-service-check-in-datadog
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

@@ -1,13 +1,13 @@
 ---
-title: Configuration de Database Monitoring pour MySQL auto-hébergé
-kind: documentation
 description: Installez et configurez Database Monitoring pour MySQL auto-hébergé.
 further_reading:
-  - link: /integrations/mysql/
-    tag: Documentation
-    text: Intégration MySQL basique
+- link: /integrations/mysql/
+  tag: Documentation
+  text: Intégration MySQL basique
+title: Configuration de Database Monitoring pour MySQL auto-hébergé
 ---
-{{< site-region region="us5,gov" >}}
+
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
 {{< /site-region >}}
 
@@ -25,7 +25,7 @@ Versions de MySQL prises en charge
 : 5.6, 5.7 et 8.0+
 
 Versions de l'Agent prises en charge
-: 7.33.0+
+: 7.36.1 et versions ultérieures
 
 Incidence sur les performances
 : La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
@@ -49,6 +49,7 @@ Pour recueillir des métriques de requête, des échantillons et des plans d'ex�
 | `max_digest_length` | `4096` | Requis pour la collecte de requêtes volumineuses. Si vous conservez la valeur par défaut, les requêtes comportant plus de `1024` caractères ne sont pas recueilles. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Requis. Active la surveillance des requêtes en cours d'exécution. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Requis. Active la collecte des événements d'attente. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un grand nombre de requêtes récentes sur l'ensemble des threads. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi des requêtes récentes pour un thread spécifique. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
 {{% /tab %}}
@@ -61,6 +62,7 @@ Pour recueillir des métriques de requête, des échantillons et des plans d'ex�
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Requis. Active la surveillance des requêtes en cours d'exécution. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Requis. Active la collecte des événements d'attente. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un grand nombre de requêtes récentes sur l'ensemble des threads. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi des requêtes récentes pour un thread spécifique. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
 {{% /tab %}}
@@ -81,7 +83,7 @@ Les instructions suivantes autorisent l'Agent à se connecter depuis n'importe q
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<MOT_DE_PASSE_UNIQUE>';
+CREATE USER datadog@'%' IDENTIFIED by '<MOT_DE_PASSE_UNIQUE>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -143,7 +145,7 @@ GRANT EXECUTE ON PROCEDURE <VOTRE_SCHÉMA>.explain_statement TO datadog@'%';
 ```
 
 ### Exécuter les consommateurs de configuration
-Nous vous recommandons de créer la procédure suivante afin d'autoriser l'Agent à activer les consommateurs `performance_schema.events_statements_*` lors de l'exécution.
+Datadog vous conseille de créer la procédure suivante afin d'autoriser l'Agent à activer les consommateurs `performance_schema.events_*` lors de l'exécution.
 
 ```SQL
 DELIMITER $$
@@ -151,6 +153,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -276,6 +279,9 @@ Pour venir compléter la télémétrie recueillie depuis la base de données par
 
 [Lancez la sous-commande status de l'Agent][10] et cherchez `mysql` dans la section Checks. Vous pouvez également visiter la page [Databases][11] pour commencer à surveiller vos bases de données.
 
+## Exemple de configurations de l'Agent
+{{% dbm-mysql-agent-config-examples %}}
+
 ## Dépannage
 
 Si vous avez respecté les instructions d'installation et de configuration des intégrations et de l'Agent, mais que vous rencontrez un problème, consultez la section [Dépannage][12].
@@ -289,7 +295,7 @@ Si vous avez respecté les instructions d'installation et de configuration des i
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[6]: https://app.datadoghq.com/account/settings#agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [9]: /fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent

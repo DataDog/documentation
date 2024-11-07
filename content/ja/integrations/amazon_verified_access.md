@@ -13,7 +13,7 @@ integration_id: amazon-verified-access
 integration_title: AWS Verified Access
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_verified_access
 public_title: Datadog-AWS Verified Access インテグレーション
@@ -28,7 +28,7 @@ AWS Verified Access を使用すると、仮想プライベートネットワー
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

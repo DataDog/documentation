@@ -17,7 +17,7 @@ integration_id: amazon-workspaces
 integration_title: AWS Workspaces
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_workspaces
 public_title: Intégration Datadog/AWS Workspaces

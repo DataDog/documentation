@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: fairwinds-insights
 app_uuid: a488d774-fd45-4765-b947-e48792c6ab32
 assets:
@@ -22,9 +24,11 @@ author:
   support_email: insights@fairwinds.com
   vendor_id: fairwinds
 categories:
-- marketplace
 - containers
 - gestion des coûts
+- kubernetes
+- marketplace
+- provisioning
 - security
 dependencies: []
 display_on_public_website: true
@@ -34,12 +38,11 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: fairwinds_insights
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -53,20 +56,22 @@ public_title: Fairwinds Insights
 short_description: Protège et optimise vos applications Kubernetes critiques
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Containers
   - Category::Cost Management
+  - Category::Kubernetes
+  - Category::Marketplace
+  - Category::Provisioning
   - Category::Security
-  - Offering::Software License
   - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Protège et optimise vos applications Kubernetes critiques
   media:
@@ -170,11 +175,10 @@ Fairwinds Insights n'inclut aucun check de service.
 
 ## Assistance
 
-Pour obtenir de l'aide ou communiquer une demande, contactez Fairwinds aux coordonnées suivantes :
+Pour obtenir de l'aide ou transmettre une demande, contactez Fairwinds aux coordonnées suivantes :
 
-Téléphone : +1 617-202-3659 E-mail : sales@fairwinds.com
-
-La documentation est disponible [ici](https://insights.docs.fairwinds.com/). Vous découvrirez comment configurer, intégrer et utiliser Fairwinds Insights pour exploiter tout son potentiel.
+- Téléphone : +1 617-202-3659 
+- E-mail : [sales@fairwinds.com][2]
 
 ### Questions fréquentes
 
@@ -205,13 +209,21 @@ Fairwinds Insights offre des intégrations pour un large éventail d'outils open
 * Notification automatique en cas de chart Helm obsolète
 * Politiques et contrôles de configuration Kubernetes personnalisés
 
-[1]: https://insights.fairwinds.com
-
 ### Politique de remboursement
 
 Politique d'annulation et de remboursement d'Insights :
 
 Fairwinds Insights est proposé sous forme d'abonnement mensuel que vous, le client, pouvez interrompre à tout moment par les moyens mis à votre disposition via votre compte Marketplace Datadog. Si vous choisissez de mettre fin à votre abonnement, seul le reste de la période de facturation mensuelle en cours vous sera facturé. Insights n'émettra aucun remboursement pour les frais déjà payés.
 
+### Pour aller plus loin
+
+Documentation, liens et articles supplémentaires utiles :
+
+- [Surveiller Kubernetes avec la solution Fairwinds Insights du Marketplace Datadog][2]
+- [Documentation Fairwinds Insights][3]
+
+[1]: https://insights.fairwinds.com
+[2]: https://www.datadoghq.com/blog/fairwinds-insights-datadog-marketplace/
+[3]: https://insights.docs.fairwinds.com/
 ---
 Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">Cliquez ici</a> pour l'acheter.

@@ -7,7 +7,6 @@ aliases:
 - /ja/security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ja/security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ja/security/guide/how-to-setup-security-filters-using-security-monitoring-api/
-kind: ガイド
 title: Cloud SIEM API によるセキュリティフィルター
 ---
 
@@ -22,7 +21,7 @@ Datadog は、Datadog Cloud SIEM サービスによって取り込まれ分析�
 * [特定のログを除外するようにデフォルトのセキュリティフィルターを構成する](#add-an-exclusion)
 * [カスタムセキュリティフィルターを作成して、分析するログソースを指定する](#create-a-custom-filter)
 
-**注**: セキュリティフィルターは、Cloud SIEM 製品によって分析されたログを制御するためにのみ必要です。クラウドワークロードセキュリティ (`source:runtime-security-agent`) およびクラウドセキュリティポスチャ管理 (`source:compliance-agent`) 製品の一部として Datadog Agent によって生成されたログを除外するために、セキュリティフィルターを作成する必要はありません。分析ログとして請求されないためです。
+**注**: セキュリティフィルターは、Cloud SIEM 製品によって分析されたログを制御するためにのみ必要です。Cloud Security Management Threats (`source:runtime-security-agent`) および Cloud Security Management Misconfigurations (`source:compliance-agent`) 製品の一部として Datadog Agent によって生成されたログを除外するために、セキュリティフィルターを作成する必要はありません。分析ログとして請求されないためです。
 
 ## 前提条件
 
@@ -121,7 +120,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ### カスタムフィルターを作成する
 
-分析を明示的に指定されたログに制限するために、カスタムセキュリティフィルターを作成することもできます。たとえば、`source:cloudtrail` のみに一致するフィルターを使用して AWS Cloudtrail からのログを分析することを選択できます。
+分析を明示的に指定されたログに制限するために、カスタムセキュリティフィルターを作成することもできます。たとえば、`source:cloudtrail` のみに一致するフィルターを使用して AWS CloudTrail からのログを分析することを選択できます。
 
 **API call:**
 

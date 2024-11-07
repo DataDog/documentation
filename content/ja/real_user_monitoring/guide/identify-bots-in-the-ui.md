@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM エクスプローラーについて
-kind: ガイド
 title: RUM エクスプローラーでボットを識別する
 ---
 
@@ -19,7 +18,7 @@ title: RUM エクスプローラーでボットを識別する
 
 [RUM エクスプローラー][2]で、ドロップダウンメニューから **Views** を選択し、検索クエリに `@device.type:Bot` を入力します。
 
-{{< img src="real_user_monitoring/guide/identify-bots/rum-explorer-bot-views.png" alt="RUM エクスプローラーのビューフィルターと指定された検索クエリを更新しました" style="width:100%" >}}
+{{< img src="real_user_monitoring/guide/identify-bots/rum-explorer-bot-views-1.png" alt="RUM エクスプローラーで更新されたビューフィルターと指定された検索クエリ" style="width:100%" >}}
 
 ビューのリストを検索し、ビューイベントをクリックすると、**View** サイドパネルが表示されます。**Attributes** タブをクリックし、**Session** の下にある **Browser Name** フィールドでボットを検証します。
 

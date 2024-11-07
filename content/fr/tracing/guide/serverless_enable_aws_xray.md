@@ -2,7 +2,6 @@
 aliases:
 - /fr/tracing/serverless_functions/enable_aws_xray/
 description: Tracer vos fonctions Lambda avec AWS X-Ray
-kind: documentation
 title: Activer les traces AWS X-Ray
 ---
 ## Activer AWS X-Ray
@@ -43,7 +42,7 @@ Enfin, [installez et importez la bibliothèque client X-Ray dans votre fonction 
 
 Si vous n'utilisez pas Serverless Framework pour déployer votre application sans serveur, suivez ces instructions pour une configuration manuelle :
 
-1. Accédez à la fonction Lambda dans la console AWS que vous souhaitez instrumenter. Dans la section « Debugging and error handling », cochez la case **Enable active tracing** afin d'activer X-Ray pour cette fonction.
+1. Accédez à la fonction Lambda dans la console AWS que vous souhaitez instrumenter. Dans la section Debugging and error handling, cochez la case **Enable active tracing** afin d'activer X-Ray pour cette fonction.
 2. Accédez à la [console API Gateway][6]. Sélectionnez votre API ainsi que l'étape.
 3. Ensuite, depuis l'onglet **Logs/Tracing**, sélectionnez **Enable X-Ray Tracing**.
 4. Pour que ces changements prennent effet, accédez à **Resources** dans le volet de navigation sur la gauche et sélectionnez **Actions**. Ensuite, cliquez sur **Deploy API**.

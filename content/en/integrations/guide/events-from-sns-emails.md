@@ -1,6 +1,6 @@
 ---
 title: Create Datadog Events from Amazon SNS Emails
-kind: guide
+
 description: "Steps for sending events to Datadog with emails from Amazon SNS"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -38,7 +38,7 @@ Configure alerting based on the emails from your SNS topic with an [event monito
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /events/guides/email/
+[1]: /service_management/events/guides/email/
 [2]: https://app.datadoghq.com/event/explorer
 [3]: /monitors/types/event/
 [4]: /events/explorer/

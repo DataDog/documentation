@@ -1,0 +1,101 @@
+
+{{/*  Carousel Modal  */}}
+{{ $media := .Params.tile.media | default slice}}
+{{ $asset_len := ($media | default slice) | len  }}
+{{ $title := .Params.integration_title | default .Title}}
+{{ $app_id := .Params.app_id | default "" }}
+<div 
+x-data="{
+    shouldShowActiveHorizontalSlide (idx) {
+        // Evaluate the active state of the modal item.
+        // a seperate action from the main carousel 
+        return idx === $store.integrationsModal.activeSlide
+    },
+    selectCarouselItem (idx) {
+        // Sets a new active slide(item). pauses any active video in modal
+        $store.integrationsModal.pauseVideo($refs)
+        $store.integrationsModal.activeSlide = idx
+    },
+    closeModal() {
+        // Closes the modal. pauses any active video in moda
+        $store.integrationsModal.pauseVideo($refs)
+        $store.integrationsModal.isOpen = false
+    },
+}"
+class="integrations-carousel-modal w-100 h-100 fixed-top"
+x-cloak x-show="$store.integrationsModal.isOpen"
+@resize.window="window.innerWidth < 768 && closeModal()">
+    <div 
+    @click.outside="closeModal()"
+    class="modal-container mx-auto p-5 p-lg-6">
+        <div class="modal-info">
+            <div class="modal-info-header">
+                <h1 x-text="'{{ $title }}'"></h1>
+                <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
+            </div>
+            <div class="modal-info-body">
+                {{/*  Slides  */}}
+                <div class="modal-items">
+                    {{ range $idx, $elm := $media }}
+                    <div
+                    id="modal-item-{{add $idx 1}}" 
+                    class="modal-item h-100 position-relative {{if $elm.vimeo_id}}video-item{{end}}" 
+                    :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+                    x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
+                    x-transition.opacity.duration.500ms>
+                        {{ if eq $elm.media_type "image"}}
+                        <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
+                        {{ else }}
+                        <iframe x-ref="iframe" class="d-none" src="https://player.vimeo.com/video/{{ $elm.vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;"></iframe>
+                        <img 
+                        @click="$store.integrationsModal.playVideo($refs)"
+                        x-ref="playOverlay"
+                        class="play-overlay position-relative h-100 w-100 rounded-1" 
+                        src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
+                        alt="{{ $elm.caption }}">
+                        <button 
+                        @click="$store.integrationsModal.playVideo($refs)"
+                        x-ref="playBtn" 
+                        class="play-btn rounded-circle position-absolute top-50 start-50 translate-middle">
+                            <div class="play-icon position-relative"></div>
+                        </button>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+
+                {{/*  Carousel item description  */}}
+                <div class="modal-item-descriptions">
+                    {{ range $idx, $el := $media }}
+                    <div 
+                    id="modal-item-description-{{ add $idx 1 }}"
+                    class="modal-item-description" 
+                    :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+                    x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
+                        <div class="item-counter">
+                            <span class="fw-bold" x-text="($store.integrationsModal.activeSlide + 1) + '/{{$asset_len}}'"></span>
+                        </div>
+                        <div class="item-caption">
+                            <p class="m-0">{{$el.caption}}</p>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+
+        {{/*  ALL ITEMS  */}}
+        <div class="modal-item-btns mx-auto">
+            {{ range $idx, $elm := $media }}
+            <button
+            id="modal-item-btn-{{ add $idx 1 }}"
+            class="modal-item-btn p-0"
+            :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+            @click="selectCarouselItem({{ $idx }})"
+            :style="{backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+            >
+            </button>
+            {{ end }}
+        </div>
+    </div>
+</div>

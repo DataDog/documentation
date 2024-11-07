@@ -9,12 +9,10 @@ author:
   name: Embrace
   support_email: support@embrace.io
 categories:
-- monitoring
-- network
-- exceptions
-- metrics
-- alerting
 - issue tracking
+- metrics
+- mobile
+- network
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -24,29 +22,26 @@ integration_id: embrace-mobile
 integration_title: Embrace Mobile
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
-oauth: {}
 public_title: Embrace Mobile
 short_description: Visibilité mobile pour iOS, Android, React Native et Unity
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
-  - Category::Metrics
-  - Category::Alerting
   - Category::Issue Tracking
+  - Category::Metrics
+  - Category::Mobile
+  - Category::Network
   - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Visibilité mobile pour iOS, Android, React Native et Unity
   media:
@@ -83,6 +78,7 @@ tile:
   title: Embrace Mobile
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -91,7 +87,7 @@ tile:
 
 Une fois l'app installée, Embrace fournit des dashboards qui suivent des métriques de santé mobile clés. Vous pouvez analyser les détails complets de chaque session utilisateur affectée par une régression sans avoir à la reproduire manuellement.
 
-## Configuration
+## Formule et utilisation
 
 1. Activez votre essai gratuit et suivez la [documentation Embrace][2]. **Aucune métrique n'apparaîtra dans Datadog tant que vous n'aurez pas suivi les instructions de cette documentation.**
 1. Une fois la configuration de l'intégration Embrace terminée, revenez à Datadog pour connecter les deux plateformes.
@@ -99,7 +95,7 @@ Une fois l'app installée, Embrace fournit des dashboards qui suivent des métri
 1. Créez un dashboard dans Datadog, puis sélectionnez le widget Embrace afin d'afficher les données Embrace comprenant des métriques liées aux crashs et au réseau.
 1. Cliquez sur « Details » pour analyser en détail les données Embrace depuis Datadog.
 
-## Assistance
+## Agent
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

@@ -1,23 +1,25 @@
 ---
 categories:
-  - orchestration
-ddtype: crawler
+- orchestration
+custom_kind: integration
 dependencies: []
 description: Datadog イベントストリームで Fabric タスクを参照および検索。
-doc_link: 'https://docs.datadoghq.com/integrations/fabric/'
+doc_link: https://docs.datadoghq.com/integrations/fabric/
 draft: false
 git_integration_title: fabric
 has_logo: true
 integration_id: fabric
 integration_title: Fabric
+integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: fabric
 public_title: Datadog-Fabric インテグレーション
 short_description: Datadog イベントストリームで Fabric タスクを参照および検索。
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 **警告**: このインテグレーションは非推奨になりました。今後、積極的な開発は行われません。
@@ -29,7 +31,7 @@ Fabric を Datadog に接続すると、以下のことができます。
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. dogapi パッケージをインストールします。
 
@@ -69,7 +71,7 @@ Fabric インテグレーションには、メトリクスは含まれません�
 
 Fabric インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Fabric インテグレーションには、サービスのチェック機能は含まれません。
 

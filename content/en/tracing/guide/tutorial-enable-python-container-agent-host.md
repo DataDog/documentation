@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application in a Container and an Agent on a Host
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-py
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -40,7 +40,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 {{< /code-block >}}
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
@@ -415,7 +415,7 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [2]: /tracing/trace_collection/dd_libraries/python/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer
@@ -424,5 +424,5 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/python/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

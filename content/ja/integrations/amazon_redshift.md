@@ -2,20 +2,21 @@
 aliases:
 - /ja/integrations/awsredshift/
 categories:
-- cloud
 - aws
+- cloud
+- data stores
 - log collection
+custom_kind: integration
 dependencies: []
 description: Amazon Redshift のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/
 draft: false
 git_integration_title: amazon_redshift
 has_logo: true
-integration_id: amazon-redshift
+integration_id: ''
 integration_title: Amazon Redshift
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_redshift
 public_title: Datadog-Amazon Redshift インテグレーション
@@ -23,6 +24,7 @@ short_description: Amazon Redshift のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Redshift は、ペタバイトスケールの高速なフルマネージド型データウェアハウスサービスです。あらゆるデータをシンプルかつコスト効率よく能率的に分析できます。
@@ -46,13 +48,13 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
     詳細については、AWS ウェブサイト上の [Redshift ポリシー][4]を参照してください。
 
-3. [Datadog - AWS Redshift インテグレーション][5]をインストールします。
+3. [Datadog - Amazon Redshift インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
-ログを収集するには、まず Redshift Cluster でログを有効にします。Redshift ログを AWS S3 バケットに書き込み、[Lambda 関数で使用][6]します。詳細については、[コンソールを使用して監査を構成する][7]を参照してください。
+ログを収集するには、まず Redshift Cluster でログを有効にします。Redshift ログを Amazon S3 バケットに書き込み、[Lambda 関数で使用][6]します。詳細については、[コンソールを使用して監査を構成する][7]を参照してください。
 
 #### ログを Datadog に送信する方法
 
@@ -85,11 +87,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Redshift インテグレーションには、イベントは含まれません。
+Amazon Redshift インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-AWS Redshift インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Redshift インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

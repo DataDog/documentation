@@ -5,6 +5,7 @@ assets:
   dashboards:
     Helm - Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,9 +15,10 @@ assets:
       prefix: helm.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10257
     source_type_name: Helm
   monitors:
-    '[helm] Monitor Helm failed releases': assets/monitors/monitor_failed_releases.json
+    Release is failed: assets/monitors/monitor_failed_releases.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -25,6 +27,7 @@ author:
 categories:
 - 構成 & デプロイ
 - コンテナ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/helm/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: helm
 integration_title: Helm チェック
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: helm
-oauth: {}
 public_title: Helm チェック
 short_description: Datadog で Helm のデプロイメントを追跡
 supported_os:
@@ -52,14 +53,19 @@ tile:
   - Supported OS::Windows
   - Category::Configuration & Deployment
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で Helm のデプロイメントを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-helm-kubernetes-with-datadog/
   support: README.md#Support
   title: Helm チェック
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -75,17 +81,97 @@ Helm は複数のストレージバックエンドをサポートしています
 Helm チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
+
+{{< tabs >}}
+{{% tab "Helm" %}}
 
 これはクラスターのチェックです。Helm チャートに `datadog.helmCheck.enabled` を追加することで、このチェックを有効にすることができます。
 
 **注**: 構成が不要な場合は、空の `conf.d` を渡すことができます。
 
-詳細については、[クラスターチェックのドキュメント][2]を参照してください。
+詳細については、[クラスターチェックのドキュメント][1]を参照してください。
+
+[1]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
+{{% /tab %}}
+{{% tab "Operator (v1.5.0+)" %}}
+
+これはクラスターのチェックです。このチェックを有効にするには、`spec.features.helmCheck.enabled` を `DatadogAgent` のデプロイ構成に追加します。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    helmCheck:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Operator (< v1.5.0)" %}}
+
+これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイメント構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
+
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  override:
+    clusterAgent:
+      [...]
+      extraConfd:
+        configDataMap:
+          helm.yaml: |-
+            init_config:
+            instances:
+            - collect_events: false
+```
+
+このチェックには、Helm に保存されたリリースにアクセスするために、Cluster Agent ポッドが使用する Kubernetes サービスアカウントにバインドされる追加の権限が必要です。
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: datadog-helm-check
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: datadog-helm-check
+subjects:
+  - kind: ServiceAccount
+    name: datadog-cluster-agent
+    namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: datadog-helm-check
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+```
+
+**注**: `ServiceAccount` のサブジェクトは `default` ネームスペースへのインストールを例に挙げています。デプロイメントに応じて `name` と `namespace` を調整してください。
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `helm` を探します。
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `helm` を探します。
 
 ## 収集データ
 
@@ -103,25 +189,23 @@ Helm チェックは [Datadog Agent][1] パッケージに含まれています�
 - リリースがアップグレードされる (新しいリビジョン)。
 - 例えば、デプロイ済みから置き換え済みへのステータス変更があります。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "helm" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [ブログ: Datadog で Helm で管理された Kubernetes アプリケーションを監視する][7]
+- [ブログ: Datadog で Helm で管理された Kubernetes アプリケーションを監視する][4]
+
 
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/helm/metadata.csv
-[5]: https://github.com/DataDog/integrations-core/blob/master/helm/assets/service_checks.json
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-helm-kubernetes-with-datadog/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.datadoghq.com/blog/monitor-helm-kubernetes-with-datadog/

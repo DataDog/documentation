@@ -1,6 +1,5 @@
 ---
 title: Enable AWS X-Ray Tracing
-kind: documentation
 description: 'Trace your Lambda functions with AWS X-Ray'
 aliases:
     - /tracing/serverless_functions/enable_aws_xray/

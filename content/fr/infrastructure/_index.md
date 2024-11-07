@@ -1,23 +1,43 @@
 ---
 aliases:
 - /fr/graphing/infrastructure/
+cascade:
+- _target:
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: fr
+  aliases:
+  - /fr/security/cspm/custom_rules/aws_iam_user/
+- _target:
+    path: /infrastructure/**/*
+    lang: fr
+  algolia:
+    rank: 70
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring
   tag: Notes de version
   text: Découvrez les dernières versions de la surveillance d'infrastructure Datadog
     (connexion à l'application requise).
-kind: documentation
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour booster la surveillance de votre
+    infrastructure
 title: Infrastructure
 ---
 
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Vidéo d'une hostmap filtrée pour garder uniquement les hosts Nginx" video="true">}}
+
+## Présentation
+
+La surveillance d'infrastructure comprend des fonctionnalités Datadog essentielles qui permettent de visualiser, de surveiller et de mesurer les performances de vos hosts, conteneurs et processus.
+
+## Composants
+
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
-    {{< nextlink href="/infrastructure/list" >}}<u>Liste d'infrastructures</u> : consultez la liste de l'ensemble des hosts surveillés par Datadog.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/hostmap" >}}<u>Hostmap</u> : découvrez une vue d'ensemble de vos hosts utilisant des couleurs et des formes pour faciliter la compréhension des regroupements personnalisés, des filtres et des métriques.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/containermap" >}}<u>Container Map</u> : découvrez une vue d'ensemble de vos conteneurs utilisant des couleurs et des formes pour faciliter la compréhension des regroupements personnalisés, des filtres et des métriques.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process" >}}<u>Live processes</u> : surveillez vos processus en visualisant en temps réel les éléments les plus granulaires dans un déploiement.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process/generate_process_metrics" >}}<u>Création de métriques de processus</u> : générez des métriques de distribution globale et en centiles depuis vos processus.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/livecontainers" >}}<u>Live containers</u> : surveillez les conteneurs de votre environnement en les visualisant en temps réel.{{< /nextlink >}}
-    {{< nextlink href="/serverless" >}}<u>Informatique sans serveur</u> : regroupez en une vue unique les métriques, les traces et les logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/list" >}}<u>Liste des infrastructures</u> : consultez la liste de tous vos hosts surveillés par Datadog.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/hostmap" >}}<u>Hostmap et Container Map</u> : visualisez tous vos hosts au sein d'une vue grâce à des regroupements personnalisés, des filtres et des métriques identifiées par des couleurs et formes pour faciliter leur compréhension.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/containers" >}}<u>Vue des conteneurs</u> : surveillez les conteneurs de votre environnement en les consultant en temps réel.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process" >}}<u>Vue des processeurs</u> : surveillez vos processus en consultant en temps réel les éléments les plus granulaires de votre déploiement.{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 ## Pour aller plus loin

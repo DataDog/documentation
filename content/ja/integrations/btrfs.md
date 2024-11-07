@@ -5,6 +5,7 @@ assets:
   dashboards:
     btrfs: assets/dashboards/btrfs_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: system.disk.btrfs.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 89
     source_type_name: Btrfs
 author:
   homepage: https://www.datadoghq.com
@@ -23,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md
 display_on_public_website: true
@@ -30,12 +33,10 @@ draft: false
 git_integration_title: btrfs
 integration_id: btrfs
 integration_title: Btrfs
-integration_version: 1.14.1
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: btrfs
-oauth: {}
 public_title: Btrfs
 short_description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
 supported_os:
@@ -46,7 +47,8 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::OS & System
+  - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
   media: []
@@ -55,6 +57,7 @@ tile:
   title: Btrfs
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![BTRFS メトリクス][1]
@@ -71,7 +74,7 @@ Btrfs からメトリクスをリアルタイムに取得すると、以下の�
 
 Btrfs チェックは [Datadog Agent][2] パッケージに含まれています。少なくとも 1 つの Btrfs ファイルシステムを使用しているサーバーでは、追加のインストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `btrfs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル btrfs.d/conf.yaml][4] を参照してください。
 
@@ -91,7 +94,7 @@ Btrfs チェックは [Datadog Agent][2] パッケージに含まれています
 
 Btrfs チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Btrfs チェックには、サービスのチェック機能は含まれません。
 
@@ -100,7 +103,7 @@ Btrfs チェックには、サービスのチェック機能は含まれませ�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/btrfs/images/btrfs_metric.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/btrfs/datadog_checks/btrfs/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

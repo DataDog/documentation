@@ -5,7 +5,6 @@ further_reading:
 - link: tracing/trace_explorer/query_syntax
   tag: Documentation
   text: Syntaxe de requête
-kind: documentation
 title: Rechercher des spans
 ---
 
@@ -19,11 +18,11 @@ La fonctionnalité de recherche du Trace Explorer vous permet de définir un in
 
 Pour rechercher, par exemple, les spans d'un service de stockage Web qui possèdent un statut d'erreur et qui ont été générées lors des 30 dernières minutes, créez une requête personnalisée, comme `service:web-store status:error`, et définissez l'intervalle sur `Past 30 minutes` :
 
-{{< img src="tracing/trace_explorer/search/trace_explorer_list_search.png" alt="Recherche dans le Trace Explorer sous forme de liste" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_list_search.png" alt="Recherche de liste dans le Trace Explorer. L'utilisateur a recherché 'service:web-store' et 'status:error'. Deux graphiques à barres, l'un pour des requêtes et l'autre pour des erreurs, ainsi qu'un graphique linéaire représentant la latence, sont affichés. L'option Visualize As est définie sur List." style="width:100%;">}}
 
 Sélectionnez une visualisation de top list, puis regroupez la requête par `resource` afin de consulter les principales ressources impactées par les erreurs.
 
-{{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Recherche dans le Trace Explorer sous forme de top list" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Recherche de liste dans le Trace Explorer. L'option Visualize As est définie sur Top List." style="width:100%;">}}
 
 {{< site-region region="us,eu,us3,us5,ap1" >}}
 **Remarque** : pour effectuer une recherche `key:value`, vous n'avez **pas besoin** de commencer par [déclarer une facette][1].

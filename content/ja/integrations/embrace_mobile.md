@@ -13,6 +13,7 @@ categories:
 - メトリクス
 - モバイル
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -22,10 +23,8 @@ integration_id: embrace-mobile
 integration_title: Embrace Mobile
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
-oauth: {}
 public_title: Embrace Mobile
 short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
 supported_os:
@@ -67,6 +66,7 @@ tile:
   title: Embrace Mobile
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -83,7 +83,7 @@ tile:
 1. Datadog でダッシュボードを新規作成します。クラッシュまたはネットワーキングメトリクスを含む Embrace のデータを表示するには、Embrace ウィジェットを選択します。
 1. "Details" をクリックすると、Datadog から Embrace の詳細を確認できます。
 
-## サポート
+## Agent
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

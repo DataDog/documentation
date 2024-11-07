@@ -6,7 +6,6 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: Datadog の OpenTelemetry サポート
-kind: ガイド
 title: OpenTelemetry によるデルタ一時性メトリクスの生成
 ---
 
@@ -28,7 +27,9 @@ OTLP の単調和、ヒストグラム、または累積集計一時性を持つ
 
 OpenTelemetry SDK から OTLP メトリクスを生成する場合、これらのメトリクスタイプをデルタ集計一時性で生成するように OTLP エクスポーターを構成することができます。一部の言語では、`OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` 環境変数を `Delta` に設定することで推奨構成を使用できます (大文字と小文字は区別されません)。この環境変数がサポートされている言語の一覧は、[仕様準拠マトリックス][4]を参照してください。
 
-SDK がこの環境変数をサポートしていない場合は、コードでデルタ一時性を構成することができます。次の例は、OTLP HTTP エクスポーターを構成し、2 秒ごとにカウンターに `1` を追加し、合計で 5 分とします。
+SDK がこの環境変数をサポートしていない場合は、コードでデルタ一時性を構成することができます。次の例は、OTLP HTTP エクスポーターを構成し、2 秒ごとにカウンターに `1` を追加し、合計で 5 分間続けます。
+
+**注**: これらの例は、使い始めるためのものです。console または stdout エクスポーターを使用するようなパターンを本番環境に適用すべきではありません。
 
 {{< programming-lang-wrapper langs="python,go,java,.net" >}}
 
@@ -37,8 +38,7 @@ SDK がこの環境変数をサポートしていない場合は、コードで�
 import time
 
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import (
-    OTLPMetricExporter,
-)
+    OTLPMetricExporter, )
 from opentelemetry.sdk.metrics import (
     Counter,
     Histogram,
@@ -50,6 +50,7 @@ from opentelemetry.sdk.metrics import (
 )
 from opentelemetry.sdk.metrics.export import (
     AggregationTemporality,
+    ConsoleMetricExporter,
     PeriodicExportingMetricReader,
 )
 
@@ -63,16 +64,23 @@ deltaTemporality = {
 }
 
 exporter = OTLPMetricExporter(preferred_temporality=deltaTemporality)
-reader = PeriodicExportingMetricReader(exporter)
+reader = PeriodicExportingMetricReader(exporter, export_interval_millis=5_000)
 provider = MeterProvider(metric_readers=[reader])
 
-meter = provider.get_meter("my-meter")
+consoleReader = PeriodicExportingMetricReader(
+    ConsoleMetricExporter(preferred_temporality=deltaTemporality), export_interval_millis=5_000)
+consoleProvider = MeterProvider(metric_readers=[consoleReader])
 
+meter = provider.get_meter("my-meter")
 counter = meter.create_counter("example.counter")
 
+consoleMeter = consoleProvider.get_meter("my-meter-console")
+consoleCounter = consoleMeter.create_counter("example.counter.console")
+
 for i in range(150):
-    counter.add(1)
-    time.sleep(2)
+  counter.add(1)
+  consoleCounter.add(1)
+  time.sleep(2)
 ```
 {{< /programming-lang >}}
 
@@ -86,6 +94,7 @@ import (
     "time"
 
     "go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp"
+    "go.opentelemetry.io/otel/exporters/stdout/stdoutmetric"
     "go.opentelemetry.io/otel/sdk/metric"
     "go.opentelemetry.io/otel/sdk/metric/metricdata"
 )
@@ -109,26 +118,44 @@ func main() {
     exporter, err := otlpmetrichttp.New(ctx,
         otlpmetrichttp.WithTemporalitySelector(deltaSelector),
     )
-    if err != nil {
+    consoleExporter, consoleErr := stdoutmetric.New(
+        stdoutmetric.WithTemporalitySelector(deltaSelector),
+    )
+    if err != nil || consoleErr != nil {
         panic(err)
     }
 
-    reader := metric.NewPeriodicReader(exporter)
+    reader := metric.NewPeriodicReader(exporter,
+        metric.WithInterval(5*time.Second),
+    )
     provider := metric.NewMeterProvider(metric.WithReader(reader))
+
+    consoleReader := metric.NewPeriodicReader(consoleExporter,
+        metric.WithInterval(5*time.Second),
+    )
+    consoleProvider := metric.NewMeterProvider(metric.WithReader(consoleReader))
+
     defer func() {
-        if err := meterProvider.Shutdown(ctx); err != nil {
+        err := provider.Shutdown(ctx)
+        consoleErr := consoleProvider.Shutdown(ctx)
+        if err != nil || consoleErr != nil {
             panic(err)
         }
     }()
 
     meter := provider.Meter("my-meter")
     counter, err := meter.Int64Counter("example.counter")
-    if err != nil {
+
+    consoleMeter := consoleProvider.Meter("my-meter-console")
+    consoleCounter, consoleErr := consoleMeter.Int64Counter("example.counter.console")
+
+    if err != nil || consoleErr != nil {
         panic(err)
     }
 
     for i := 0; i < 150; i++ {
         counter.Add(ctx, 1)
+        consoleCounter.Add(ctx, 1)
         time.Sleep(2 * time.Second)
     }
 }
@@ -188,6 +215,9 @@ using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using System.Threading;
+using System;
+using System.Threading.Tasks;
 
 namespace GettingStarted;
 
@@ -197,8 +227,21 @@ public class Program
     {
         using var meter = new Meter("my-meter");
         var providerBuilder = Sdk.CreateMeterProviderBuilder().AddMeter(meter.Name);
-        providerBuilder.AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+        providerBuilder
+        .AddConsoleExporter((exporterOptions, metricReaderOptions) =>
             {
+                metricReaderOptions.PeriodicExportingMetricReaderOptions = new PeriodicExportingMetricReaderOptions
+                    {
+                        ExportIntervalMilliseconds = Convert.ToInt32("5000"),
+                    };
+                metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+            })
+        .AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+            {
+                metricReaderOptions.PeriodicExportingMetricReaderOptions = new PeriodicExportingMetricReaderOptions
+                    {
+                        ExportIntervalMilliseconds = Convert.ToInt32("5000"),
+                    };
                 exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
                 metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
             });
@@ -209,8 +252,9 @@ public class Program
             counter?.Add(1);
             Task.Delay(2000).Wait();
         }
-    }
+  }
 }
+
 ```
 {{< /programming-lang >}}
 
@@ -233,7 +277,7 @@ processors:
 
 **注**: 累積-デルタプロセッサは指数ヒストグラムをサポートしません。また、最小値や最大値など一部のフィールドは、このアプローチでは回復できません。代わりに、可能な限り OpenTelemetry SDK のアプローチを使用してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

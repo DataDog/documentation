@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/rbac/log_management/
   tag: 설명서
   text: 로그 관리용 RBAC
-kind: 설명서
 title: 역할 매핑 API를 위한 타사 인증
 ---
 
@@ -14,7 +13,7 @@ title: 역할 매핑 API를 위한 타사 인증
 
 **참조**: SAML 사용자로서 기존 베타 페더레이션 매핑(Federated Mapping) 메커니즘(`roles_v2_saml`)을 사용하는 경우, 이 API를 사용하실 것을 강력하게 권장합니다.
 
-Datadog UI(User Management의 **Mappings** 탭)에서도 매핑을 생성하거나 관리할 수 있습니다. 자세한 내용은 [SAML 속성의 Datadog 역할 매핑][1]을 참조해주세요.
+User Management의 **Mappings** 탭에 있는 Datadog UI에서 매핑을 생성하고 관리할 수도 있습니다. 자세한 내용은 [SAML 그룹 매핑][1]을 참조하세요.
 
 ## 요청
 
@@ -608,5 +607,5 @@ curl -X POST \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[1]: /ko/account_management/saml/mapping
 [2]: /ko/api/v2/roles/#list-roles

@@ -1,22 +1,29 @@
 ---
 further_reading:
-- link: https://learn.datadoghq.com/enrol/index.php?id=18
+- link: https://learn.datadoghq.com/courses/dd-101-dev
   tag: Centre d'apprentissage
-  text: Présentation de Datadog
+  text: 'Datadog 101 : Développeur'
+- link: https://learn.datadoghq.com/courses/dd-101-sre
+  tag: Centre d'apprentissage
+  text: 'Datadog 101 : Ingénieur en fiabilité de site'
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour comprendre les principes fondamentaux
+    de Datadog
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
-  tag: Blog
+  tag: GitHub
   text: Présentation du menu de navigation rapide Datadog
-kind: documentation
+- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
+  tag: Blog
+  text: 'DRUIDS : l''acronyme qui définit la conception chez Datadog'
 title: Débuter avec Datadog
 ---
 
-Cette page fournit un aperçu général des fonctionnalités disponibles sur le [site Datadog][1].
-
 ## Présentation
 
-La navigation du site Datadog varie en fonction de la largeur de votre navigateur. Il existe trois types de navigations.
+Cette page fournit un aperçu général des fonctionnalités disponibles sur le [site Datadog][1].
 
-Pour changer de type de navigation, modifiez la largeur de votre navigateur.
+La navigation du site Datadog varie en fonction de la largeur de votre navigateur. Il existe trois types de navigations. Pour changer de type de navigation, ajustez la taille de votre navigateur.
 
 ## Intégrations
 
@@ -62,7 +69,7 @@ Consultez la section [Hostmap][9] pour en savoir plus.
 
 ## Événements
 
-{{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
+{{< img src="service_management/events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
 
 La vue [Events Explorer][10] affiche les événements les plus récents générés par votre infrastructure et vos services.
 
@@ -151,8 +158,8 @@ L'[application mobile Datadog][23] est disponible dans [l'App Store d'Apple][24
 [7]: /fr/infrastructure/
 [8]: /fr/getting_started/tagging/
 [9]: /fr/infrastructure/hostmap/
-[10]: /fr/events/
-[11]: /fr/events/explorer/#event-analytics
+[10]: /fr/service_management/events/
+[11]: /fr/service_management/events/explorer/analytics
 [12]: /fr/dashboards/
 [13]: /fr/dashboards/#screenboards
 [14]: /fr/dashboards/functions/arithmetic/
@@ -162,8 +169,8 @@ L'[application mobile Datadog][23] est disponible dans [l'App Store d'Apple][24
 [18]: /fr/real_user_monitoring/
 [19]: /fr/real_user_monitoring/session_replay/
 [20]: /fr/serverless
-[21]: /fr/security_platform/cloud_siem/
+[21]: /fr/security/cloud_siem/
 [22]: /fr/synthetics/
-[23]: /fr/mobile/
+[23]: /fr/service_management/mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

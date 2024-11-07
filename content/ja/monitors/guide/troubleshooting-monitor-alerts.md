@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/set-and-monitor-slas/
   tag: ブログ
   text: Datadog によるサービスの監視と SLA 設定
-kind: ガイド
 title: モニターアラートのトラブルシューティング
 ---
 
@@ -42,7 +41,7 @@ title: モニターアラートのトラブルシューティング
 
 モニターの状態やステータスが期待したものと異なる場合、基礎となるデータソースの動作を確認します。メトリクスモニターの場合、[履歴][2]グラフを使用して、メトリクスクエリによって引き込まれたデータポイントを表示できます。メトリクスの進化をさらに調査するには、ステータスグラフのそばにある **Open in a notebook** をクリックします。これにより、モニタークエリのフォーマットされたグラフを持つ調査用[ノートブック][20]が生成されます。
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="1 つのモニターグループのステータスバーの横にある Open in a notebook ボタンにマウスカーソルを合わせた状態でのモニターのステータスページ" style="width:60%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="1 つのモニターグループのステータスバーの横にある Open in a notebook ボタンにマウスカーソルを合わせた状態でのモニターのステータスページ" style="width:60%;">}}
 
 ### アラートの条件
 
@@ -81,6 +80,8 @@ title: モニターアラートのトラブルシューティング
 
 モニターで複数の `@opsgenie-[...]` 通知を使用している場合、同じエイリアスを持つそれらの通知を Opsgenie に送信します。
 [Opsgenie の機能][19]により、Opsgenie は重複とみなされたものを破棄します。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

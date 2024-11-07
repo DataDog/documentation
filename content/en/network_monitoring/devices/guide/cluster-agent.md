@@ -1,6 +1,5 @@
 ---
 title: Network Device Monitoring with the Cluster Agent
-kind: guide
 aliases:
     - /network_performance_monitoring/devices/guide/cluster-agent/
 further_reading:
@@ -43,7 +42,7 @@ Below is an example of the `cluster-agent-values.yaml`:
 datadog:
   ## @param apiKey - string - required
   ## Set this to your Datadog API key before the Agent runs.
-  ## ref: https://app.datadoghq.com/account/settings#agent/kubernetes
+  ## ref: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
   #
   apiKey: <DATADOG_API_KEY>
 
@@ -190,7 +189,7 @@ clusterAgent:
             # The autodiscovery subnet the device is part of.
             # Used by Agent autodiscovery to pass subnet name.
             - "autodiscovery_subnet:%%extra_autodiscovery_subnet%%"
-          
+
           ## @param extra_tags - string - optional
           ## Comma separated tags to attach to every metric, event and service check emitted by this integration.
           ## Example:
@@ -209,11 +208,9 @@ clusterAgent:
   ## Specify custom contents for the datadog cluster agent config (datadog-cluster.yaml).
   #
   datadog_cluster_yaml:
-    listeners:
-      - name: snmp
 
-    # See here for all `snmp_listener` configs: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-    snmp_listener:
+    # See here for all `network_devices.autodiscovery` configs: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+    autodiscovery:
       workers: 2
       discovery_interval: 10
       configs:

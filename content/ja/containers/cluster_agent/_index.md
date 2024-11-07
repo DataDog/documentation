@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: ブログ
   text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
-kind: documentation
 title: Kubernetes 対応の Cluster Agent
 ---
 
@@ -27,23 +26,31 @@ Datadog Cluster Agent を使用すると、次のことができます。
 * サービス、SPOF、イベントの監視など、クラスターレベルのデータの収集を有効化します。
 * カスタム Kubernetes メトリクスと外部メトリクスで HPA (Horizontal Pod Autoscaling) を使用します。詳しくは、[カスタムおよび外部メトリクスでのオートスケーリングガイド][1]を参照してください。
 
+Helm chart v2.7.0 または Datadog Operator v1.0.0+ を使用して Datadog Agent をインストールした場合、**Datadog Cluster Agent はデフォルトで有効化されます**。
+
 Docker をお使いの場合、Datadog Cluster Agent は Docker Hub と GCR で利用できます。
 
 | Docker Hub                                       | GCR                                                       |
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
-<div class="alert alert-warning">2023 年 7 月 10 日、Docker Hub は Datadog の Docker Hub レジストリへのダウンロードレート制限を実施するようになります。これらのレジストリからのイメージのプルは、レート制限割り当てにカウントされます。<br/><br/>
+<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
-Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レート制限が適用されない他のレジストリからプルすることを推奨しています。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリを変更する</a>を参照してください。</div>
+### Agent と Cluster Agent の最小バージョン
 
-**注**: Datadog Cluster Agent のすべての機能を利用するには、Kubernetes v1.10+ を使用してください。
+Kubernetes の後期バージョンに関連する一部の機能では、Datadog Agent の最低バージョンが必要です。
+
+| Kubernetes バージョン | Agent バージョン  | Cluster Agent バージョン | 理由                                |
+|--------------------|----------------|-----------------------|---------------------------------------|
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet メトリクスの非推奨化           |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes リソースの非推奨化       |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | ダイナミックサービスアカウントトークンをサポート |
 
 {{< whatsnext desc="このセクションには、以下のトピックが記載されています。">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>セットアップ</u>: Kubernetes クラスターで Datadog Cluster Agent をセットアップします。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>コマンドとオプション</u>: Cluster Agent で利用可能なコマンドとオプションの一覧。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>クラスターチェック</u>: クラスターチェックにより、オートディスカバリーの実施や、Kubernetes サービスなど負荷分散型クラスターサービスでのチェックの実施が可能になります。{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>エンドポイントチェック</u>: エンドポイントがクラスターチェックを拡張してクラスターサービス背後のあらゆるエンドポイントを監視します。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>エンドポイントチェック</u>: エンドポイントチェックはクラスターチェックを拡張して、クラスターサービスの背後にあるあらゆるエンドポイントを監視します。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: アプリケーションポッドの構成を簡略化するために Admission Controller を構成します。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent のトラブルシューティング</u>: Datadog Cluster Agent のトラブルシューティング情報を検索できます。{{< /nextlink >}}
 {{< /whatsnext >}}

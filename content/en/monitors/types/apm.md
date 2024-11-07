@@ -1,6 +1,5 @@
 ---
 title: APM Monitor
-kind: documentation
 description: "Compare an APM metric to a user defined threshold"
 aliases:
   - /monitors/monitor_types/app_analytics
@@ -15,7 +14,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -119,16 +118,16 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-**Note**: Find service level monitors on the [Services page][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the [Services page][4]).
+**Note**: Find service level monitors on the [Service Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types/metric/
-[2]: https://app.datadoghq.com/monitors#create/apm
+[2]: https://app.datadoghq.com/monitors/create/apm
 [3]: /monitors/notify/
-[4]: https://app.datadoghq.com/apm/services
+[4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map

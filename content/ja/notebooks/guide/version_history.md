@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
   tag: blog
   text: バージョン履歴で Datadog ダッシュボードとノートブックに対する変更を追跡する
-kind: documentation
 title: ノートブックのバージョン履歴
 ---
 
@@ -22,12 +21,12 @@ title: ノートブックのバージョン履歴
 
 [監査証跡][1]を有効にすると、バージョン履歴が 30 日から 90 日に延長されます。監査証跡を有効にした後は、既存のすべてのノートブックで、30 ～ 90 日前の間に行われたすべての編集を見ることができます。
 
-## バージョンの表示
+## バージョンの確認
 ノートブックから ** Configure** アイコンをクリックし、**Version History** をクリックすると、バージョン履歴のサイドパネルが開きます。保持期間内に編集がない場合、バージョン履歴のオプションは無効になります。
 
 {{< img src="/notebooks/guide/version_history/disabled_version_history.png" alt="ノートブックでバージョン履歴オプションを無効化" style="width:100%;" >}}
 
-バージョン履歴サイドパネルでは、各バージョンごとに以下の情報を確認できます。
+Version History サイドパネルでは、各バージョンごとに以下の情報を確認できます。
 - 変更を行った Datadog ユーザー
 - 変更日時
 - 変更の概要と、前のバージョンと比べた詳細な変更内容の説明
@@ -42,8 +41,8 @@ Version History サイドパネルから任意のバージョンをクリック�
 
 {{< img src="/notebooks/guide/version_history/version_history_options.png" alt="バージョン履歴のオプションを示すノートブックの例" style="width:100%;" >}}
 
-- バージョン履歴サイドパネルから、復元するバージョンが決まったら、ユーザープロファイルの右側にあるケバブメニューをクリックし、**Restore this version** を選択します。
-- バージョン履歴サイドパネルが開いた際に、ページ上部に **Restore this version** ボタンが表示されます。
+- Version History サイドパネルから復元するバージョンを決め、ユーザープロファイルの右側にあるケバブメニューをクリックし、**Restore this version** を選択します。
+- Version History サイドパネルが開いた際に、ページ上部に **Restore this version** ボタンが表示されます。
 
 バージョンを復元すると、すべてのユーザーを対象にノートブックがそのバージョンにアップデートされ、バージョン履歴には復元を示す新しいエントリが追加されます。これによって変更履歴が上書きされることはなく、引き続き保持期間内の任意のバージョンのプレビューと復元が可能です。
 
@@ -58,8 +57,8 @@ Version History サイドパネルから任意のバージョンをクリック�
 | 監査証跡が**有効**な場合  | 90 日 |
 
 
-[1]:/ja/account_management/audit_trail/
+[1]: /ja/account_management/audit_trail/
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -18,7 +18,7 @@ integration_id: amazon-msk
 integration_title: Amazon Managed Streaming for Apache Kafka
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_msk
 public_title: Intégration Datadog/Amazon Managed Streaming for Apache Kafka
@@ -82,7 +82,7 @@ L'intégration Amazon MSK n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

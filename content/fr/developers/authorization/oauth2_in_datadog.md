@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: Documentation
   text: Utiliser les endpoints d'autorisation OAuth 2.0
-kind: documentation
 title: OAuth2 dans Datadog
 ---
 
@@ -92,7 +91,7 @@ Le [protocole PKCE][11] s'intègre au flux d'octroi de code d'autorisation en ef
 
 - L'application envoie à Datadog une requête de token contenant le code d'autorisation et la chaîne `code_verifier` pour obtenir un token d'accès. L'endpoint de token vérifie le code d'autorisation en transformant la chaîne `code_verifier` à l'aide de la méthode définie via le paramètre `code_challenge_method` et compare la valeur obtenue à la valeur `code_challenge` d'origine.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

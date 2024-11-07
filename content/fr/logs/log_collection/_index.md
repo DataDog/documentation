@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: Blog
   text: Comment gérer des fichiers de log avec Logrotate
+- link: /agent/logs/advanced_log_collection
+  tag: Documentation
+  text: Configurations avancées pour la collecte de logs
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Découvrir comment traiter vos logs
@@ -24,7 +27,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging Without Limits*
-kind: Documentation
 title: Collecte de logs et intégrations
 ---
 
@@ -36,7 +38,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 
 **Remarque** : lorsque vous envoyez des logs au format JSON à Datadog, certains attributs sont réservés et possèdent une signification particulière dans Datadog. Consultez la [section sur les attributs réservés](#attributs-et-tags) pour en savoir plus.
 
-## Configuration
+## Implémentation
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -45,7 +47,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][5] pour obtenir plus de détails et d'exemples.
 3. Une fois la collecte activée, vous pouvez configurer l'Agent Datadog afin de [suivre les fichiers de log ou de détecter les logs envoyés via UDP/TCP][2], de [filtrer les logs ou de nettoyer les données sensibles][3] et d'[agréger les logs multiligne][4].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/logs/#custom-log-collection
 [3]: /fr/agent/logs/advanced_log_collection/#filter-logs
 [4]: /fr/agent/logs/advanced_log_collection/#multi-line-aggregation
@@ -55,12 +57,12 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 {{% tab "Application" %}}
 
 1. Installez l'[Agent Datadog][1].
-2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][2] pour obtenir plus de détails et d'exemples.
+2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le fichier de configuration principal de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][2] pour obtenir plus de détails et d'exemples.
 3. Suivez les instructions d'installation correspondant au langage de votre application pour configurer un logger et commencer à générer des logs :
 
 {{< partial name="logs/logs-languages.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/logs/
 {{% /tab %}}
 
@@ -88,7 +90,7 @@ Choisissez un fournisseur de conteneurs ou d'orchestrateurs et suivez les instru
 
 {{% tab "Environnement sans serveur" %}}
 
-Utilisez le Forwarder Datadog, une fonction Lambda AWS qui transmet des logs à Datadog depuis votre environnement. Pour activer la collecte de logs dans votre environnement AWS sans serveur, consultez la section [Forwarder Datadog][1].
+Utilisez le Forwarder Datadog, une fonction AWS Lambda qui transmet des logs à Datadog depuis votre environnement. Pour activer la collecte de logs dans votre environnement AWS sans serveur, consultez la section [Forwarder Datadog][1].
 
 [1]: /fr/serverless/forwarder
 {{% /tab %}}
@@ -128,6 +130,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 | Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1].                                                    |
+| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Utilisé par l'Agent pour envoyer des logs via HTTPS à une organisation pour laquelle la conformité PCI DSS est activée. Consultez la section [Conformité PCI DSS pour Log Management][3] pour en savoir plus.                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Utilisé par le SDK Browser pour envoyer des logs au format JSON via HTTPS.                                                                                                             |
@@ -139,6 +142,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 [1]: /fr/api/latest/logs/#send-logs
 [2]: /fr/agent/logs/#send-logs-over-https
+[3]: /fr/data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -185,11 +189,25 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
+|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
+| US5  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
+| US5  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
+| US5  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].          |
+| US5  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Utilisé par le SDK Browser pour envoyer des logs au format JSON via HTTPS.                                                          |
+
+[1]: /fr/api/latest/logs/#send-logs
+[2]: /fr/agent/logs/#send-logs-over-https
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
 | Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US1-FED | HTTPS | `http-intake.logs.ddog-gov.datadoghq.com`                                 | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
+| US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
 | US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
 | US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].          |
 | US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Utilisé par le SDK Browser pour envoyer des logs au format JSON via HTTPS.                                                          |
@@ -214,19 +232,28 @@ Vous pouvez envoyer des logs à la plateforme Datadog via HTTP. Consultez la [do
 
 {{< site-region region="us" >}}
 
-Effectuez un test manuel avec telnet. Vous devez ajouter un préfixe correspond à votre [clé d'API Datadog][1] à l'entrée de log, puis ajouter une charge utile.
+Vous pouvez tester manuellement votre connexion avec OpenSSL, GnuTLS ou un autre client SSL/TLS. Pour GnuTLS, exécutez la commande suivante :
 
-```text
-telnet intake.logs.datadoghq.com 10514
-<CLÉ_API_DATADOG> Log envoyé directement via TCP
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-Votre charge utile, `Log sent directly via TCP` dans cet exemple, peut être au format brut, Syslog ou JSON. Si votre charge utile est au format JSON, Datadog parse automatiquement ses attributs.
+Pour OpenSSL, exécutez la commande suivante :
+
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+Vous devez ajouter un préfixe correspondant à votre [clé d'API Datadog][1] à l'entrée de log, puis ajouter une charge utile.
+
+```
+<CLÉ_API_DATADOG> Log sent directly using TLS
+```
+
+Votre charge utile, `Log sent directly using TLS` dans cet exemple, peut être au format brut, Syslog ou JSON. Si votre charge utile est au format JSON, Datadog parse automatiquement ses attributs.
 
 ```text
-telnet intake.logs.datadoghq.com 10514 
-<CLÉ_API_DATADOG> {"message":"log au format json", "ddtags":"env:mon-env,user:mon-utilisateur", "ddsource":"mon-intégration", "hostname":"mon-hostname", "service":"mon-service"}
-```
+<CLÉ_API_DATADOG> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 
 [1]: /fr/account_management/api-app-keys/#api-keys
 
@@ -234,18 +261,28 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< site-region region="eu" >}}
 
-Effectuez un test manuel avec telnet. Vous devez ajouter un préfixe correspond à votre [clé d'API Datadog][1] à l'entrée de log, puis ajouter une charge utile.
+Vous pouvez tester manuellement votre connexion avec OpenSSL, GnuTLS ou un autre client SSL/TLS. Pour GnuTLS, exécutez la commande suivante :
 
-```text
-telnet agent-intake.logs.datadoghq.eu 443
-<CLÉ_API_DATADOG> Log sent directly via TCP
+```shell
+gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
-Votre charge utile, `Log sent directly via TCP` dans cet exemple, peut être au format brut, Syslog ou JSON. Si votre charge utile est au format JSON, Datadog parse automatiquement ses attributs.
+Pour OpenSSL, exécutez la commande suivante :
+
+```shell
+openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
+```
+
+Vous devez ajouter un préfixe correspondant à votre [clé d'API Datadog][1] à l'entrée de log, puis ajouter une charge utile.
+
+```
+<CLÉ_API_DATADOG> Log sent directly using TLS
+```
+
+Votre charge utile, `Log sent directly using TLS` dans cet exemple, peut être au format brut, Syslog ou JSON. Si votre charge utile est au format JSON, Datadog parse automatiquement ses attributs.
 
 ```text
-telnet intake.logs.datadoghq.com 10514 
-<CLÉ_API_DATADOG> {"message":"log au format json", "ddtags":"env:mon-env,user:mon-utilisateur", "ddsource":"mon-intégration", "hostname":"mon-hostname", "service":"mon-service"}
+<CLÉ_API_DATADOG> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
 [1]: /fr/account_management/api-app-keys/#api-keys
@@ -258,7 +295,7 @@ Il n'est pas recommandé d'utiliser l'endpoint TCP pour ce site. Contactez l'[as
 [1]: /fr/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5" >}}
+{{< site-region region="gov,us5,ap1" >}}
 
 L'endpoint TCP n'est pas pris en charge par ce site.
 
@@ -276,7 +313,7 @@ L'endpoint TCP n'est pas pris en charge par ce site.
 * L'API HTTPS prend en charge les logs d'une taille maximale de 1 Mo. Toutefois, pour obtenir des performances optimales, il est recommandé que chaque log ne dépasse pas 25 Ko. Si vous utilisez l'Agent Datadog pour générer des logs, il est configuré pour créer un nouveau log dès que le précédent atteint 256 Ko (256 000 octets).
 * Un événement de log ne doit pas comporter plus de 100 tags, et chaque tag ne doit pas dépasser 256 caractères pour un maximum de 10 millions de tags uniques par jour.
 * Les événements de log convertis au format JSON doivent contenir moins de 256 attributs. Les clés de chacun de ces attributs doivent être inférieures à 50 caractères, être imbriquées dans moins de 10 niveaux successifs, et leur valeur respective doit être inférieure à 1 024 caractères si elle est présentée en tant que facette.
-* Les événements de log peuvent être envoyés jusqu'à 18 h avant ou 2 h après la réalisation de l'événement.
+* Les événements de log peuvent être envoyés avec un [timestamp][14] jusqu'à 18 h dans le passé.
 
 Les événements de log qui ne respectent pas ces limitations sont susceptibles d'être modifiés ou tronqués par le système. Ils peuvent aussi ne pas être indexés s'ils sont envoyés en dehors de l'intervalle de temps spécifié. Toutefois, Datadog s'efforce de préserver autant de données utilisateur que possible.
 
@@ -288,7 +325,7 @@ Les attributs déterminent les [facettes des logs][9] qui servent à filtrer le 
 
 Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom du logger, le thread actuel, le type d'erreur et la stack trace.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace"  >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Attributs d'une stack trace parsée" >}}
 
 Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 
@@ -308,7 +345,7 @@ Pour en savoir plus, consultez la [documentation relative aux attributs de code 
 
 Une fois les logs recueillis et ingérés, ils sont disponibles dans le **Log Explorer**. Depuis cette vue, vous pouvez rechercher, enrichir et visualiser des alertes sur vos logs. Référez-vous à la [documentation relative au Log Explorer][12] pour commencer à analyser vos données de log, ou consultez les sections supplémentaires ci-dessous sur la gestion des logs.
 
-{{< img src="logs/explore.jpg" alt="Vue Log Explorer"  >}}
+{{< img src="logs/explore.png" alt="Logs visibles dans le Log Explorer" style="width:100%" >}}
 
 ## Pour aller plus loin
 
@@ -322,7 +359,7 @@ Une fois les logs recueillis et ingérés, ils sont disponibles dans le **Log E
 [3]: /fr/integrations/nxlog/
 [4]: /fr/integrations/fluentd/#log-collection
 [5]: /fr/integrations/logstash/#log-collection
-[6]: /fr/security/logs/#information-security
+[6]: /fr/data_security/logs/#information-security
 [7]: /fr/agent/logs/#send-logs-over-https
 [8]: /fr/api/v1/logs/#send-logs
 [9]: /fr/logs/explorer/facets/
@@ -330,3 +367,4 @@ Une fois les logs recueillis et ingérés, ils sont disponibles dans le **Log E
 [11]: /fr/logs/log_configuration/attributes_naming_convention/#source-code
 [12]: /fr/logs/explore/
 [13]: /fr/getting_started/site/
+[14]: /fr/logs/log_configuration/pipelines/?tab=date#date-attribute

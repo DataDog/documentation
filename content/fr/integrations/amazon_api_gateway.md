@@ -1,40 +1,75 @@
 ---
-aliases:
-- /fr/integrations/awsapigateway/
+app_id: amazon-api-gateway
+app_uuid: 431bfc66-cc6e-40c5-b7f0-dbb2990322c8
+assets:
+  dashboards:
+    Amazon API Gateway: assets/dashboards/aws_api_gateway_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.apigateway.latency
+      metadata_path: metadata.csv
+      prefix: aws.apigateway
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 166
+    source_type_name: Amazon Api Gateway
+  monitors:
+    '[AWS] API Gateway Elevated 4XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_4xx_errors.json
+    '[AWS] API Gateway Elevated 5XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_5xx_errors.json
+    '[AWS] API Gateway High Response Time (latency) on {{apiname.name}}': assets/monitors/rec_mon_high_latency.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
 - aws
-- log collection
+- metrics
+- cloud
 dependencies: []
-description: Surveillez les erreurs d'AWS API Gateway, les hits et miss de cache et
-  la latence des requêtes.
-doc_link: https://docs.datadoghq.com/integrations/amazon_api_gateway/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_api_gateway
-has_logo: true
 integration_id: amazon-api-gateway
-integration_title: Amazon API Gateway
+integration_title: Amazon Api Gateway
 integration_version: ''
 is_public: true
-kind: integration
-manifest_version: '1.0'
+custom_kind: integration
+manifest_version: 2.0.0
 name: amazon_api_gateway
-public_title: Intégration Datadog/Amazon API Gateway
-short_description: Surveillez les erreurs Amazon API Gateway.
-version: '1.0'
+public_title: Intégration dʼAmazon Api Gateway
+short_description: Amazon API Gateway est un service géré pour les API.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Metrics
+  - Category::Cloud
+  configuration: README.md#Setup
+  description: Amazon API Gateway est un service géré pour les API.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Intégration dʼAmazon Api Gateway
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Présentation
 
 Amazon API Gateway est un service entièrement géré qui permet aux développeurs de créer, publier, gérer, surveiller et sécuriser facilement des API quelque soit l'échelle.
 
-Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'API Gateway.
+Activez cette intégration pour visualiser dans Datadog toutes vos métriques dʼAPI Gateway.
 
 ## Configuration
 
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
+Si vous ne l'avez pas déjà fait, configurez [l'intégration Amazon Web Services][1].
 
 ### Collecte de métriques
 
@@ -45,11 +80,14 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     - `apigateway:GET`
     - `tag:GetResources`
 
-3. Configurez l'[intégration Datadog/AWS API Gateway][4].
+3. Installez l'[intégration Datadog/Amazon API Gateway][4].
+
+
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 **Remarque** : si vous avez activé les métriques CloudWatch détaillées, vous devez les activer pour toutes les ressources ou toutes les routes d'une étape. Sinon, les valeurs agrégées dans Datadog seront incorrectes.
 
-### Collecte de logs
+### APM
 
 Pour activer la journalisation API Gateway :
 
@@ -62,6 +100,8 @@ Pour activer la journalisation API Gateway :
 
     ```text
     {
+        "apiId": "$context.apiId",
+        "stage": "$context.stage",
         "requestId":"$context.requestId",
         "ip":"$context.identity.sourceIp",
         "caller":"$context.identity.caller",
@@ -75,13 +115,13 @@ Pour activer la journalisation API Gateway :
     }
     ```
 
-#### Envoyer des logs à Datadog
+#### Envoi de logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction AWS Lambda de collecte de logs avec Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le groupe de logs CloudWatch qui contient vos logs API Gateway depuis la console AWS.
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur.
 
-Accédez ensuite à la [section Log de Datadog][6] pour commencer à explorer vos logs !
+Accédez ensuite à la [page Logs][6] pour commencer à explorer vos logs.
 
 ## Données collectées
 
@@ -89,15 +129,14 @@ Accédez ensuite à la [section Log de Datadog][6] pour commencer à explorer vo
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 
-L'intégration AWS API Gateway n'inclut aucun événement.
+L'intégration Amazon APIP Gateway n'inclut aucun événement.
 
 ### Checks de service
 
-L'intégration AWS API Gateway n'inclut aucun check de service.
+L'intégration Amazon API Gateway n'inclut aucun check de service.
 
 ## Dépannage
 

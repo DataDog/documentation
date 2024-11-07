@@ -1,26 +1,29 @@
 ---
 aliases:
-  - /fr/integrations/awsredshift/
+- /fr/integrations/awsredshift/
 categories:
-  - cloud
-  - aws
-  - log collection
-ddtype: crawler
+- aws
+- cloud
+- data store
+- log collection
 dependencies: []
-description: "Surveillez des métriques clés d'Amazon\_Redshift."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_redshift/'
+description: Surveillez des métriques clés d'Amazon Redshift.
+doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/
 draft: false
 git_integration_title: amazon_redshift
 has_logo: true
+integration_id: amazon-redshift
 integration_title: Amazon Redshift
+integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_redshift
-public_title: "Intégration Datadog/Amazon\_Redshift"
-short_description: "Surveillez des métriques clés d'Amazon\_Redshift."
+public_title: Intégration Datadog/Amazon Redshift
+short_description: Surveillez des métriques clés d'Amazon Redshift.
 version: '1.0'
 ---
+
 ## Présentation
 
 Amazon Redshift est un service d'entrepôt de données entièrement géré qui stocke des pétaoctets de données et simplifie et rentabilise l'analyse de toutes vos données.
@@ -35,40 +38,43 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de métriques
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `Redshift` est cochée dans la section concernant la collecte des métriques.
+1. Dans la [page de l'intégration AWS][2], vérifiez que `Redshift` est activé dans l'onglet `Metric Collection`.
 2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques d'Amazon Redshift :
 
     - `redshift:DescribeClusters` : répertorie tous les clusters Redshift de votre compte.
     - `redshift:DescribeLoggingStatus` : récupère le compartiment S3 au sein duquel sont stockés les logs Redshift.
     - `tag:GetResources` : récupère les tags personnalisés sur vos clusters Redshift.
 
-    Pour en savoir plus sur les stratégies Redshift, consultez [la documentation disponible sur le site d'AWS][4].
+    Pour en savoir plus, consultez la section relative aux [stratégies Redshift][4] de la documentation AWS.
 
 3. Installez l'[intégration Datadog/AWS Redshift][5].
 
 ### Collecte de logs
 
-#### Activer la journalisation AWS Redshift
+#### Activer le logging
 
-Commencez par activer la journalisation sur votre cluster Redshift pour recueillir vos logs. Les logs Redshift peuvent être écrits dans un compartiment AWS S3 et [lus par une fonction Lambda][6]. [Pour en savoir plus, consultez la documentation AWS][7]
+Commencez par activer la journalisation sur votre cluster Redshift pour recueillir vos logs. Les logs Redshift peuvent être écrits dans un compartiment AWS S3 et [lus par une fonction Lambda][6]. Pour en savoir plus, consultez [Configuration de l'audit à l'aide de la console][7].
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS.
 2. Une fois la fonction Lambda installée, vous pouvez recueillir vos logs Redshift de deux façons :
 
-    - Solution automatique : nous gérons les logs Redshift si vous nous accordez les autorisations nécessaires. [Consultez le principal service Web d'Amazon pour configurer la collecte de logs automatique][9].
-    - Solution manuelle : ajoutez manuellement un déclencheur sur le compartiment s3 qui contient vos logs Redshift dans la console AWS.
+    - Solution automatique : les logs Redshift sont automatiquement gérés si vous accordez les autorisations nécessaires à Datadog. Consultez la section [Configurer automatiquement des déclencheurs][9] pour en savoir plus sur la configuration de la collecte automatique de logs sur la fonction Lambda du Forwarder Datadog.
+    - Solution manuelle : dans la console AWS, ajoutez un déclencheur sur le compartiment S3 qui contient vos logs Redshift. Consultez les [étapes de l'installation manuelle](#etapes-de-l-installation-manuelle).
 
 #### Étapes de l'installation manuelle
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs Redshift dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
-   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs Redshift et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS.
+2. Une fois configuré, accédez à la fonction Lambda du Forwarder Datadog. Dans la section Présentation de Functions, cliquez sur **Add Trigger**.
+3. Sélectionnez le déclencheur **S3** pour la Trigger Configuration.
+4. Sélectionnez le compartiment S3 où se trouvent vos logs Redshift.
+5. Ne changez pas le type d'événements `All object create events`.
+6. Cliquez sur **Add** pour ajouter le déclencheur à votre fonction Lambda.
 
-Accédez ensuite à la [section Log de Datadog][10] pour commencer à explorer vos logs !
+Accédez au [Log Explorer][10] pour commencer à explorer vos logs.
+
+Pour en savoir plus sur la collecte de logs de services AWS, consultez la section [Envoyer des logs de services AWS avec la fonction Lambda Datadog][11].
 
 ## Données collectées
 
@@ -76,7 +82,7 @@ Accédez ensuite à la [section Log de Datadog][10] pour commencer à explorer v
 {{< get-metrics-from-git "amazon_redshift" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
+Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
 
@@ -88,17 +94,18 @@ L'intégration AWS Redshift n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_redshift.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_redshift
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[4]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-authentication-access-control.html
+[5]: https://app.datadoghq.com/integrations/amazon-redshift
+[6]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#collecting-logs-from-s3-buckets
 [7]: https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing-console.html
-[8]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#collecting-logs-from-s3
+[8]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
+[9]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#automatically-set-up-triggers
 [10]: https://app.datadoghq.com/logs
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_redshift/amazon_redshift_metadata.csv
-[12]: https://docs.datadoghq.com/fr/help/
+[11]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_redshift/amazon_redshift_metadata.csv
+[13]: https://docs.datadoghq.com/fr/help/

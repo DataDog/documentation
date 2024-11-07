@@ -1,6 +1,5 @@
 ---
 title: Audit Trail Monitor
-kind: documentation
 aliases:
     - /monitors/create/types/audit_logs/
     - /monitors/create/types/audit_trail/
@@ -45,7 +44,7 @@ Create a monitor message. This can include the steps required for team members t
 
 You can then select a value from `[Never]` to `Every 24 Hours` to renotify you if the monitor has not been resolved. You can also set tags and priority to better correlate data in the event of an incident.
 
-### Notify your team
+### Configure notifications and automations
 
 Select services and team members to notify. For example, you can alert your on-call compliance team with PagerDuty, or alert your team by Slack or email to begin assessment of the alert.
 

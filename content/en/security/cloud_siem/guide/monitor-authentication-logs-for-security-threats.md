@@ -1,9 +1,9 @@
 ---
 title: Monitor Authentication Logs for Security Threats
-kind: guide
 aliases:
   - /security_monitoring/guide/monitor-authentication-logs-for-security-threats/
   - /security_platform/guide/monitor-authentication-logs-for-security-threats/
+  - /security/guide/monitor-authentication-logs-for-security-threats/
 further_reading:
 - link: "https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/"
   tag: "Blog"
@@ -86,7 +86,7 @@ Another common authentication attack technique is [**credential stuffing**][11].
 
 Datadog offers pre-configured [Detection Rules][12] that scan your ingested logs in real time for common attacker techniques like the two mentioned above. If any log triggers one of these rules, Datadog automatically generates a [Security Signal][13]. This signal includes key data about the event, such as the type of attack detected and suggestions on how to respond and remedy the situation. You can view, filter, and sort all of your Security Signals in the explorer to triage them and see where to best focus your efforts.
 
-For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
+For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
 
 ### Use dashboards to investigate
 
@@ -105,13 +105,13 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_siem/
-[2]: /logs/log_collection/?tab=http#application-log-collection
+[2]: /logs/log_collection/?tab=application#application-log-collection
 [3]: /logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
 [5]: /logs/log_configuration/attributes_naming_convention
 [6]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [7]: /logs/log_configuration/attributes_naming_convention/#events
-[8]: /logs/log_configuration/attributes_naming_convention/#network
+[8]: /logs/log_configuration/attributes_naming_convention/#web-access
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=credential%20stuffing%20attack&sort=rule
@@ -122,5 +122,5 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation
 [17]: https://app.datadoghq.com/screen/integration/security-monitoring-user-investigation
 [18]: https://www.datadoghq.com/blog/logging-without-limits/
-[19]: /logs/indexes/#exclusion-filters
+[19]: /logs/log_configuration/indexes/#exclusion-filters
 [20]: https://www.datadoghq.com/blog/efficient-log-rehydration-with-datadog/

@@ -1,6 +1,5 @@
 ---
 title: CoScreen
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/'
   tag: 'Blog'
@@ -13,21 +12,39 @@ cascade:
 {{< img src="coscreen/collab-v2.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}
 
 ## Overview
-[CoScreen][1] is a collaborative meeting tool that allows multiple participants to simultaneously share and interact with any application window on their desktops. It was specifically designed for engineers for use cases such as pair programming, incident management, joint troubleshooting, team standups, and employee onboarding.
+[CoScreen][1] is a collaborative meeting tool that allows multiple participants to simultaneously share and interact with any application window on their desktops. It is specifically designed for engineering use cases—such as pair programming, incident management, joint troubleshooting, team standups, and employee onboarding.
 
 ## Setup
 #### Requirements
-CoScreen is a desktop app available for Windows 10 and macOS v10.15 Catalina and higher.
+{{< tabs >}}
+{{% tab "Desktop" %}}
+The CoScreen desktop app is available for Windows 10 and macOS v10.15 Catalina and higher.
 
-[Download CoScreen][2].
+[Download CoScreen][1].
 
-After installing CoScreen, launch the desktop app and sign up.
+After installing CoScreen, launch the desktop app. You can sign in with your Datadog account.
 
-### Join your first CoScreen
+[1]: https://www.coscreen.co/download
+{{% /tab %}}
+{{% tab "Web" %}}
+The [CoScreen web app][1] is supported in Chrome v87+, Edge v87+, and Safari v16+.
 
-Click on **New CoScreen** to create a new CoScreen. If you were invited to a CoScreen, click on the link, or click on **Join a CoScreen** and paste the CoScreen ID or URL.
+The CoScreen web app has limited functionality. To make full use of CoScreen's features, use the desktop app.
+
+[1]: https://app.coscreen.co/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Usage
+### Join a CoScreen
+
+If you were invited to a CoScreen, click on the link. You can click on **Join from browser** to join the CoScreen through the web app, or you can launch the desktop app. You can also join manually by entering your meeting link or ID.
 
 When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the main menu. You can rejoin these at any time.
+
+To enable noise reduction in the desktop app, go to **Settings** > **Audio** and select _Apply noise reduction to my microphone_.
+
+On macOS, you can enable background blurring under **Settings** > **Camera** > **Video Effects**.
 
 ### Invite your collaborators
 
@@ -37,38 +54,49 @@ You can also add your closest collaborators to the list of _Your Collaborators_ 
 
 ### Share windows
 
-You can share application windows in multiple ways.
+With the CoScreen desktop app, you can share application windows in multiple ways.
 
- - **Select individual windows to be shared**.
+#### Select individual windows to be shared
 
-   {{< img src="coscreen/sharewindow.mp4" alt="A 'Share window' tab-shaped button is attached to the top of a window. Clicking on this button highlights the window in purple. The text changes to 'Unshare window.'" width=50% video="true">}}
+{{< img src="coscreen/sharewindow2.mp4" alt="A 'Share window' tab-shaped button is attached to the top of a window. Clicking on this button highlights the window in purple. The text changes to 'Unshare window.'" width=50% video="true">}}
 
-Share and unshare windows by clicking on the tab above each window. You can also use the window sharing dialog to select the application window(s) that you want to share with other members of the CoScreen you've joined.
+Once you have joined a CoScreen, you can hover over any window in any of your displays, and a **Share** tab appears. Share and unshare windows by clicking on this tab. You can also use the window sharing dialog to select the application window(s) that you want to share with other members of the CoScreen you've joined.
 
- Multiple users can share multiple windows at the same time. Shared windows have a border around them in a different color assigned to each CoScreen participant.
+Multiple users can share multiple windows at the same time. Shared windows have a border around them, in a different color assigned to each CoScreen participant.
 
- - **Share all windows on your display**.
-
-Open the window sharing dialog and select the first option, _Entire display_, to share all open windows on this display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
+#### Use the window sharing dialog to share entire displays or individual windows
 
 Click on the **Share windows** button to open the window sharing dialog.
 
 {{< img src="coscreen/share_windows_button.png" alt="A panel of buttons from the CoScreen desktop UI. The 'Share windows' button is highlighted." style="width:50%;">}}
 
-By default, when you join a CoScreen, the following dialog appears:
+If you have multiple displays, you can select a display and click **Share the entire display** to share all open windows on that display. While screen sharing is enabled, all windows that you open or drag onto your shared display are also shared.
 
-{{< img src="coscreen/share_windows.png" alt="The window sharing dialog. Users are prompted to choose a display, and then to select a window or windows to share." style="width:60%;">}}
-
-If you have multiple displays, choose which display contains the window or windows you want to share.
-
+You can also select any number of windows on any of your displays to share.
 
 Screen sharing is deactivated by default when you join a CoScreen.
 
 ### Collaborate in shared windows
 
-{{< img src="coscreen/collaborate-v2.mp4" alt="Two cursors interact with a shared window at the same time." video="true" width=70% >}}
+{{< img src="coscreen/v5-control-tabs.mp4" alt="Two cursors interact with a shared window at the same time." video="true" width=70% >}}
 
-You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. **Everyone can click and type into any shared window**. If you click the _Draw_ button on the tab of a remote window, you can also draw on a shared window.
+You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. When viewing a remote window, two tabs appear: **Control**, which enables you to interact with the window, click on buttons, and type into text fields; and **Draw**, which enables you to draw on the window.
+
+### Collaborate in a shared terminal
+
+CoScreen includes a shared, collaborative terminal that enables users to run commands and to write and debug code together.
+
+To start a shared terminal, click on the **Share terminal** button in the meeting menu:
+
+{{< img src="coscreen/share_terminal.png" alt="A panel of buttons from the CoScreen desktop UI. The 'Share terminal' button is highlighted." style="width:70%;">}}
+
+The shared terminal appears for you and all other participants in the CoScreen session. If you enable remote control in CoScreen, other users can type and click into your terminal.
+
+{{< img src="coscreen/coterm.png" alt="A shared CoScreen terminal window." style="width:60%;">}}
+
+To stop sharing, click the **Unshare** tab on the terminal window, or on the button in the meeting menu. 
+
+For privacy, CoScreen uses [Sensitive Data Scanner][8] and entropy filters to detect and obfuscate sensitive data.
 
 ### Integrations
 
@@ -81,6 +109,10 @@ To install the CoScreen Slack app, go to [coscreen.co/slack][4] and click on _Ad
 #### CoScreen + Google Calendar
 
 To configure this integration, install the [CoScreen Chrome extension][5] and sign in. Open any Google Calendar event and use the **Add CoScreen** button to make the event a CoScreen meeting.
+
+#### CoScreen + Datadog Incident Management
+
+In [Incident Management][9], use the **Meet on CoScreen** button to start a CoScreen meeting with incident responders. To configure this, go to your [Incident Management Integration Settings][10] page and toggle on **Enable click-to-join CoScreen meeting buttons**.
 
 ## Security and privacy
 
@@ -112,3 +144,6 @@ For all the details on how CoScreen enables secure collaboration, read the [CoSc
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
+[8]: /sensitive_data_scanner/
+[9]: /service_management/incident_management/
+[10]: https://app.datadoghq.com/incidents/settings#Integrations

@@ -17,10 +17,10 @@ const supportedLangs = ['en'];
 const updateMenu = (specData, specs, languages) => {
 
   languages.forEach((language) => {
-    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
+    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/api.${language}.yaml`, 'utf8'));
 
   // filter out auto generated menu items so we just have hardcoded ones
-  const newMenuArray = (currentMenuYaml[`api`] || []).filter((entry => !entry.hasOwnProperty("generated")));
+  const newMenuArray = (currentMenuYaml['menu']['api'] || []).filter((entry => !entry.hasOwnProperty("generated")));
 
   specData.forEach((apiYaml, index) => {
     const apiVersion = specs[index].split('/')[3];
@@ -45,7 +45,9 @@ const updateMenu = (specData, specs, languages) => {
       // just get this sections data
       Object.keys(apiYaml.paths)
         .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
-        .map((path) => Object.values(apiYaml.paths[path]))
+        .map((path) => Object.entries(apiYaml.paths[path])
+            .filter(([key, values]) => !key.startsWith("x-"))
+            .map(([key, values]) => values))
         .reduce((obj, item) => ([...obj, ...item]), [])
         .forEach((action) => {
 
@@ -90,12 +92,12 @@ const updateMenu = (specData, specs, languages) => {
 
 
   // generate new yaml menu
-  currentMenuYaml[`api`] = newMenuArray;
+  currentMenuYaml['menu']['api'] = newMenuArray;
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
-  fs.writeFileSync(`./config/_default/menus/menus.${language}.yaml`, newMenuYaml, 'utf8');
-  console.log(`successfully updated ./config/_default/menus/menus.${language}.yaml`);
+  fs.writeFileSync(`./config/_default/menus/api.${language}.yaml`, newMenuYaml, 'utf8');
+  console.log(`successfully updated ./config/_default/menus/api.${language}.yaml`);
   })
 
 
@@ -156,7 +158,8 @@ const createResources = (apiYaml, deref, apiVersion) => {
 
     // build example json for request and each response
     data.forEach((actionObj) => {
-      Object.entries(actionObj).forEach(([actionKey, action]) => {
+      Object.entries(actionObj)
+        .filter(([actionKey, action]) => !actionKey.startsWith("x-")).forEach(([actionKey, action]) => {
 
         // request
         let request;
@@ -201,7 +204,7 @@ const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
   contentTypeKeys.forEach((key) => {
-    if(key.startsWith("application/json") || key.startsWith("text/json")) {
+    if(key.startsWith("application/json") || key.startsWith("text/json") || key.startsWith("multipart/form-data")) {
       return content[key].schema;
     }
   });
@@ -914,35 +917,41 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
 
   const actions = {};
   Object.keys(deref.paths)
+    // Ignore extensions since they're not paths.
+    .filter((path) => !path.startsWith("x-"))
     .forEach((path) => {
-      Object.entries(deref.paths[path]).forEach(([actionKey, action]) => {
-        const item = {
-          description: action.description,
-          summary: action.summary,
-          // responses: {}
-        }
-        if (action.requestBody) {
-          item['request_description'] = action.requestBody.description || '';
-          if (action.requestBody.content && action.requestBody.content["application/json"]) {
-            item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
-          } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
-            item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
+      Object.entries(deref.paths[path])
+        .filter(([actionKey, action]) => !actionKey.startsWith("x-"))
+        .forEach(([actionKey, action]) => {
+          const item = {
+            description: action.description,
+            summary: action.summary,
+            // responses: {}
           }
-        }
-        /*
-        if (action.responses) {
-          Object.entries(action.responses).forEach(([responseKey, resp]) => {
-            const respObj = {
-              description: resp.description
+          if (action.requestBody) {
+            item['request_description'] = action.requestBody.description || '';
+            if (action.requestBody.content && action.requestBody.content["application/json"]) {
+              item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
+            } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
+              item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
+            } else if(action.requestBody.content && action.requestBody.content["multipart/form-data"]) {
+              item['request_schema_description'] = action.requestBody.content["multipart/form-data"].schema.description || '';
             }
-            if (resp.content && resp.content["application/json"] && resp.content["application/json"].schema && resp.content["application/json"].schema.description) {
-              respObj["schema_description"] = resp.content["application/json"].schema.description;
-            }
-            item['responses'][responseKey] = respObj;
-          });
-        } */
-        actions[action.operationId] = item;
-      });
+          }
+          /*
+          if (action.responses) {
+            Object.entries(action.responses).forEach(([responseKey, resp]) => {
+              const respObj = {
+                description: resp.description
+              }
+              if (resp.content && resp.content["application/json"] && resp.content["application/json"].schema && resp.content["application/json"].schema.description) {
+                respObj["schema_description"] = resp.content["application/json"].schema.description;
+              }
+              item['responses'][responseKey] = respObj;
+            });
+          } */
+          actions[action.operationId] = item;
+        });
     });
   const actionsFilePath = `./data/api/${apiVersion}/translate_actions.json`;
   fs.writeFileSync(actionsFilePath, safeJsonStringify(actions, null, 2), 'utf8');

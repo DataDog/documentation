@@ -1,6 +1,6 @@
 ---
-title: Manually Adding The Browser Test Chrome Extension To Internal Applications Stores
-kind: guide
+title: Manually Add The Chrome Extension For Your Browser Tests
+
 further_reading:
     - link: 'https://www.datadoghq.com/blog/browser-tests/'
       tag: 'Blog'
@@ -33,6 +33,6 @@ If you are unable to download applications directly from the Chrome Web Store be
 
 [1]: https://github.com/DataDog/synthetics-browser-extension
 [2]: https://app.datadoghq.com/synthetics/browser/create
-[3]: /synthetics/browser_tests/#configuration
+[3]: /synthetics/browser_tests/#test-configuration
 [4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa?hl=en
-[5]: /synthetics/browser_tests/#record-test
+[5]: /synthetics/browser_tests/#record-your-steps

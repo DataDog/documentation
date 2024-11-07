@@ -1,6 +1,6 @@
 ---
 title: Geomap Widget
-kind: documentation
+widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
 further_reading:
@@ -12,7 +12,11 @@ further_reading:
   text: "Notebooks"
 ---
 
-The geomap widget plots geographic data and visualizes it through shaded regions or points.
+The geomap widget visualizes geographic data with shaded regions or points. It can be used to:
+- View user sessions by country.
+- Filter to see a list of all sessions in a new tab.
+- View user sessions filtered by employee.
+- Monitor performance metrics like load time, core web vitals, and percent of views with errors.
 
 {{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="Geomap visualization with the points overlay" >}}
 
@@ -38,7 +42,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   |Security Signals <br> Application Security <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
-  [2]: /getting_started/tagging/#defining-tags
+  [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
@@ -53,7 +57,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   |RUM   | See the [RUM documentation][4] to configure a RUM query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
-  [2]: /getting_started/tagging/#defining-tags
+  [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /real_user_monitoring/explorer/search_syntax/
   {{% /tab %}}
@@ -69,9 +73,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
-
-The dedicated [widget JSON schema definition][9] for the change widget is:
+This widget can be used with the **[Dashboards API][8]**. See the following table for the [widget JSON schema definition][9]:
 
 {{< dashboards-widgets-api >}}
 
@@ -80,7 +82,7 @@ The dedicated [widget JSON schema definition][9] for the change widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/processors/#geoip-parser
-[2]: /getting_started/tagging/#defining-tags
+[2]: /getting_started/tagging/#define-tags
 [3]: /logs/search_syntax/
 [4]: /logs/logs_to_metrics/
 [5]: /dashboards/querying/

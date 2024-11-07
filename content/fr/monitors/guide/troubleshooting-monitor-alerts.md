@@ -18,7 +18,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/set-and-monitor-slas/
   tag: Blog
   text: Surveiller des services et définir des SLA avec Datadog
-kind: guide
+
 title: Dépanner les alertes de monitor
 ---
 
@@ -42,7 +42,7 @@ L'état d'un monitor peut également parfois se mettre à jour alors qu'aucune �
 
 Si l'état ou le statut de votre monitor vous semble anormal, vérifiez le comportement de la source de données sous-jacente. Pour un monitor de métrique, vous pouvez utiliser le graphique [History][2] pour afficher les points de données récupérés par la requête de la métrique. Pour analyser plus en détail l'évolution de vos métriques, cliquez sur **Open in a notebook** sur le graphique des statuts. Un [notebook][20] sera alors généré avec un graphique formaté de la requête du monitor pour vous permettre d'enquêter.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="La page de statut du monitor avec le curseur de la souris survolant le bouton Open in a notebook à côté de la barre de statut d'un groupe de monitors" style="width:60%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="La page de statut du monitor avec le curseur de la souris survolant le bouton Open in a notebook à côté de la barre de statut d'un groupe de monitors" style="width:60%;">}}
 
 ### Conditions d'alerte
 

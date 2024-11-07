@@ -26,6 +26,12 @@ further_reading:
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: "Blog"
+  text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview
@@ -65,37 +71,23 @@ Third Party allows you to forward alerts from an outside vendor or application. 
 
 ### Search query
 
-{{< img src="security/security_monitoring/detection_rules/threshold.png" alt="Define the search query" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/threshold_20240904.png" alt="Define the search query" style="width:100%;" >}}
 
-Construct a search query using the same logic as a [log explorer search][1].
+Construct a search query using the same logic as a [Log Explorer search][1].
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given time frame. The defined Group By generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP). The Group By is also used to [join the queries together](#joining-queries).
 
-Add additional queries with the Add Query button.
+Click **Add Query** to add additional queries.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
-
-## Exclude benign activity with suppression queries
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
+**Note**: The query applies to all ingested logs.
 
 #### Joining queries
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 
-{{< img src="security/security_monitoring/detection_rules/joining_queries_define.png" alt="Define search queries" style="width:90%;" >}}
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
 
-The Detection Rules join the logs together using a group by value. The group by values are typically entities (for example, IP address or user), but can be any attribute.
-
-{{< img src="security/security_monitoring/detection_rules/group_by.png" alt="Group by" style="width:30%;" >}}
-
-The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn't exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case3.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:55%;" >}}
-
-In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
+The Detection Rules join the logs together using a `group by` value. The `group by` values are typically entities (for example, IP address or user), but can be any attribute.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -104,15 +96,13 @@ In this example, when greater than five failed logins and a successful login exi
 
 ### Search query
 
-{{< img src="security/security_monitoring/detection_rules/new_term.png" alt="Define the search query" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value.png" alt="Define the search query" style="width:100%;" >}}
 
-Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+Construct a search query using the same logic as a [Log Explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 #### Learned value
-
-{{< img src="security/security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" style="width:80%;" >}}
 
 Select the value or values to detect, the learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP).
 
@@ -120,24 +110,20 @@ For example, create a query for successful user authentication and set **Detect 
 
 You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
-## Exclude benign activity with suppression queries
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
-
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
 
-Construct a search query using the same logic as a log explorer search.
+### Search query
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
+Construct a search query using the same logic as a Log Explorer search.
 
-Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each `group by` value. Typically, the `group by` is an entity (like user, or IP).
 
-**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
+
+**Note**: The query applies to all ingested logs.
 
 {{% /tab %}}
 
@@ -145,7 +131,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 ### Search query
 
-Construct a search query using the same logic as a [log explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
+Construct a search query using the same logic as a [Log Explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
 
 #### User attribute
 
@@ -163,16 +149,45 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-## Exclude benign activity with suppression queries
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
-
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
 {{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Root query
+
+Construct a search query using the same logic as a [Log Explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+
+Click **Add Query** to add additional queries.
+
+**Note**: The query applies to all ingested logs.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
 {{< /tabs >}}
+
+#### Filter logs based on Reference Tables
+
+{{% filter_by_reference_tables %}}
+
+{{< img src="/security/security_monitoring/detection_rules/filter-by-reference-table.png" alt="The log detection rule query editor with the reference table search options highlighted" style="width:100%;" >}}
+
+#### Unit testing
+
+Use unit testing to test your rules against sample logs and make sure the detection rule is working as expected. Specifically, this can be helpful when you are creating a detection rule for an event that hasn't happened yet, so you don't have actual logs for it. For example: You have logs with a `login_attempt` field and want to detect logs with `login_attempt:failed`, but you only have logs with `login_attempt:success`. To test the rule, you can construct a sample log by copying a log with `login_attempt:success` and changing the `login_attempt` field to `failed`.
+
+To use unit testing:
+
+1. After entering the rule query, click **Unit Test** to test your query against a sample log.
+1. To construct a sample log, you can:  
+    a. Navigate to [Log Explorer][3].  
+    b. Enter the same detection rule query in the search bar.  
+    c. Select one of the logs.  
+    d. Click the export button at the top right side of the log side panel, and then select **Copy**.
+1. Navigate back to the **Unit Test** modal, and then paste the log into the text box. Edit the sample as needed for your use case.
+1. Toggle the switch for **Query is expected to match based on the example event** to fit your use case.
+1. Click **Run Query Test**.
 
 ## Set a rule case
 
@@ -185,13 +200,27 @@ In the **This rule will not generate a signal if there is a match** field, you h
 
 Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
 
-All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`.
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
 
-A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section.
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
 Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated.
+
+#### Example
+
+If you have a `failed_login` and a `successful_login` query:
+
+{{< img src="security/security_monitoring/detection_rules/joining_queries_20240904.png" alt="Define search queries" style="width:100%;" >}}
+
+and a rule case that triggers when `failed_login > 5 && successful_login>0`:
+
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+
+The rule case joins these queries together based on their `group by` value. The `group by` attribute is typically the same attribute because the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+
+In this example, when there are more than five failed logins and at least one successful login for the same `User Name`, the first case is matched, and a Security Signal is generated.
 
 ### Severity and notification
 
@@ -256,6 +285,24 @@ The impossible travel detection method does not require setting a rule case.
 {{% security-rule-time-windows %}}
 
 {{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Trigger
+
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
+
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+Click **Add Case** to add additional cases.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Decreasing non-production severity
@@ -279,6 +326,12 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
+## Suppression rules
+
+Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
+
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
+
 ## Rule deprecation
 
 Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
@@ -295,4 +348,5 @@ The rule deprecation process is as follows:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /security/detection_rules/#rule-and-generated-signal-options
+[2]: /security/detection_rules/#clone-a-rule
+[3]: https://app.datadoghq.com/logs/

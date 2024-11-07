@@ -3,6 +3,7 @@ app_id: bind9
 app_uuid: b37533b0-6f0e-4259-9971-083f08086fac
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: bind9.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10222
     source_type_name: BIND 9
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: ashuvyas45@gmail.com
 categories:
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: bind9
 integration_title: bind9
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: bind9
-oauth: {}
 public_title: bind9
 short_description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Supported OS::Windows
   - Category::Network
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
   media: []
@@ -54,6 +56,7 @@ tile:
   title: bind9
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Bind9 チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Bind9 の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `bind9.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル bind9.d/conf.yaml][6] を参照してください。
 
@@ -111,7 +114,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Bind9 チェ�
 
 bind9 チェックにはイベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "bind9" >}}
 
 
@@ -121,7 +124,7 @@ bind9 チェックにはイベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bind9/images/snapshot.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

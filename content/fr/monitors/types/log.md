@@ -6,13 +6,12 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
 - link: /monitors/manage/status/
   tag: Documentation
   text: Vérifier le statut de votre monitor
-kind: documentation
 title: Log Monitors
 ---
 

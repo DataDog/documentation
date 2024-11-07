@@ -11,7 +11,6 @@ further_reading:
 - link: real_user_monitoring/connect_rum_and_traces/
   tag: Documentation
   text: Associer RUM à vos traces
-kind: documentation
 title: Analyse de l'impact Watchdog
 ---
 
@@ -25,9 +24,9 @@ Si Watchdog détermine qu'une anomalie a une incidence négative sur l'expérien
 - Le nombre estimé d'utilisateurs concernés
 - Un lien vers la liste des utilisateurs concernés, afin de pouvoir les contacter, si nécessaire
 
-{{< img src="watchdog/watchdog_impact_analysis.mp4" alt="Un utilisateur passe sa souris sur les boutons Users et Views pour en savoir plus sur les utilisateurs affectés et le nombre de vues affectées"  video=true >}}
+{{< img src="watchdog/watchdog_impact_analysis.mp4" alt="Un utilisateur passe son curseur sur les boutons Users et Views pour en savoir plus sur les utilisateurs affectés et le nombre de vues affectées" video=true >}}
 
-Cette fonctionnalité est automatiquement activée pour l'ensemble des utilisateurs de l'APM et de RUM. Lorsque des alertes APM Watchdog sont associées à des impacts pour les utilisateurs finaux, les **utilisateurs** et **chemins des vues** concernés s'affichent dans la section **Impacts** de vos alertes Watchdog. Cliquez sur **users** pour afficher les coordonnées des utilisateurs concernés afin de pouvoir les contacter, ou sur **view paths** pour accéder aux vues RUM concernées afin de consulter des informations supplémentaires.
+Cette fonctionnalité est automatiquement activée pour l'ensemble des utilisateurs d'APM et de RUM. Lorsque des alertes APM Watchdog sont associées à des impacts pour les utilisateurs finaux, les **utilisateurs** et **chemins des vues** concernés s'affichent dans la section **Impacts** de vos alertes Watchdog. Cliquez sur **users** pour afficher les coordonnées des utilisateurs concernés afin de pouvoir les contacter, ou sur **view paths** pour accéder aux vues RUM concernées afin de consulter des informations supplémentaires.
 
 ## Pour aller plus loin
 

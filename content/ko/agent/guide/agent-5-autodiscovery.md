@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/faq/agent-5-autodiscovery
-kind: 가이드
 private: true
 title: Agent v5를 활용한 자동탐지
 ---
@@ -237,7 +236,6 @@ annotations:
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -260,7 +258,6 @@ Deployments에서 팟을 정의한다면 템플릿 어노테이션을 Deployment
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # Don't add templates here
   name: apache-deployment
 spec:
@@ -335,7 +332,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
   - `%%host_<NETWORK NAME>%%`: 여러 네트워크에 연결된 경우 `%%host_bridge%%`, `%%host_swarm%%`을 비롯해 사용할 네트워크 이름을 특정합니다. 지정된 네트워크 이름을 찾을 수 없는 경우에는 `%%host%%`와 동일하게 작동합니다.
 
 - 컨테이너 포트: `port`
-  - `%%port%%`: **숫자 오름차순으로 정렬**했을 때, 가장 많이 노출된 포트를 사용합니다. 예를 들어 포트 80, 443, 8443을 노출하는 컨테이너의 경우 8443을 반환합니다.
+  - `%%port%%`: **숫자로 오름차순으로 정렬**했을 때, 가장 많이 노출된 포트를 사용합니다. (예를 들어 포트 80, 443, 8443을 노출하는 컨테이너의 경우 8443을 반환합니다.)
   - `%%port_0%%`:  **숫자 오름차순으로 정렬**했을 때, 첫 번째 포트를 사용합니다. (동일한 컨테이너에서 `%%port_0%%`은 포트 80을 참조하고 `%%port_1%%`은 443을 참조합니다)
   - 사용하는 포트가 바뀌지 않는다면 `port` 변수를 사용하지 말고 포트를 직접 지정하시길 권장합니다.
 
@@ -408,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /ko/agent/guide/agent-commands/#start-stop-restart-the-agent
+[22]: /ko/agent/configuration/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

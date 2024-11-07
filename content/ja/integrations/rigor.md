@@ -3,6 +3,7 @@ app_id: rigor
 app_uuid: f9ab0c97-235c-4f88-8b92-89eb563e18ba
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: rigor.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10029
     source_type_name: Rigor
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: support@rigor.com
 categories:
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: rigor
 integration_title: Rigor
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rigor
-oauth: {}
 public_title: Rigor
 short_description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Supported OS::Windows
   - Category::Testing
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
   media: []
@@ -54,6 +56,7 @@ tile:
   title: Rigor
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Rigor により、開発ライフサイクル全体で総合的な監視と最適化を実施できます。
@@ -66,7 +69,7 @@ Rigor を使用すると、総合的なフロントエンドパフォーマン�
 
 Rigor と Datadog とのインテグレーションには、メトリクスインテグレーションとイベントインテグレーションの 2 種類があります。
 
-### コンフィギュレーション
+### 構成
 #### メトリクスの収集
 
 管理者として、画面右上の "Admin Tools" メニューをクリックし、"Integrations" を選択します。
@@ -124,7 +127,7 @@ Datadog イベントを介してアラートを発生するようチェックが
 
 ![events-example][11]
 
-### サービスのチェック
+### サービスチェック
 
 Rigor インテグレーションには、サービスのチェック機能は含まれません。
 

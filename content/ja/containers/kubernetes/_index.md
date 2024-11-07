@@ -5,7 +5,7 @@ aliases:
 - /ja/tracing/kubernetes/
 - /ja/tracing/setup/kubernetes
 - /ja/integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-- /ja/integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s/
+- /ja/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 - /ja/integrations/faq/docker-ecs-kubernetes-events/
 - /ja/integrations/faq/container-integration-event/
 - /ja/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
@@ -23,21 +23,27 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Kubernetes のモニタリングに関する知見を得るためのインタラクティブなセッションに参加できます
-kind: documentation
 title: Kubernetes
 ---
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+  This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
+{{< /learning-center-callout >}}
 
 ## 概要
 
 Kubernetes クラスターで Datadog Agent を実行し、クラスターとアプリケーションのメトリクス、トレース、ログの収集を開始します。
 
-**注**: Agent v6.0+ は Kubernetes v1.7.6+ のみをサポートしています。Kubernetes の以前のバージョンについては、[レガシー Kubernetes バージョンのセクション][1]を参照してください。
+**注**: Agent v6.0+ は Kubernetes v1.7.6+ のみをサポートしています。Kubernetes の以前のバージョンについては、[Kubernetes のレガシーバージョン][1]を参照してください。
 
 Agent のコマンドについては、[Agent コマンドガイド][2]を参照してください。
 
+クラスターレベルのモニタリングデータの収集について合理的なアプローチを提供する Datadog Cluster Agent に関する情報については、[Kubernetes 対応の Cluster Agent][3] を参照してください。
+
 {{< whatsnext desc="このセクションには、以下のトピックが含まれます。">}}
   {{< nextlink href="/agent/kubernetes/installation">}}<u>インストール</u>: Kubernetes 環境に Datadog Agent をインストールします。{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/configuration">}}<u>構成</u>: イベントの収集、プロキシ設定のオーバーライド、DogStatsD によるカスタムメトリクスの送信、コンテナの許可リストとブロックリストの構成、利用可能な環境変数の全リストの参照を行います。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>追加の構成</u>: イベントの収集、プロキシ設定のオーバーライド、DogStatsD によるカスタムメトリクスの送信、コンテナの許可リストとブロックリストの構成、利用可能な環境変数の全リストの参照を行います。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/distributions">}}<u>ディストリビューション</u>: AWS Elastic Kubernetes Service (EKS)、Azure Kubernetes Service (AKS)、Google Kubernetes Engine (GKE) など、主要な Kubernetes ディストリビューションの基本構成を確認します。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: トレース収集の設定: トレースを受け入れるように Agent を構成し、Agent と通信するようにポッドを構成し、トレースを発するようにアプリケーショントレーサーを構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/log">}}<u>ログ収集</u>: Kubernetes 環境のログ収集を設定します。{{< /nextlink >}}
@@ -53,4 +59,5 @@ Agent のコマンドについては、[Agent コマンドガイド][2]を参照
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/faq/kubernetes-legacy/
-[2]: /ja/agent/guide/agent-commands/
+[2]: /ja/agent/configuration/agent-commands/
+[3]: /ja/containers/cluster_agent/

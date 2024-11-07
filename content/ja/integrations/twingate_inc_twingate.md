@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: twingate-inc-twingate
 app_uuid: ae992049-e257-4322-a520-cb348a17ae5e
 assets: {}
@@ -12,6 +14,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -20,12 +23,10 @@ integration_id: twingate-inc-twingate
 integration_title: Twingate
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: twingate_inc_twingate
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -63,8 +64,10 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Twingate
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -80,7 +83,7 @@ Twingate Business Tier には、以下のものが含まれます。
 
 エンタープライズ層への加入するには、Datadog Marketplace から購入してください。Twingate のスタッフがアカウントのアップグレードをサポートします。
 
-## サポート
+## Agent
 お困りですか？詳しくは以下をご覧ください。
 * [Twingate ドキュメント](https://www.twingate.com/docs/)
 * [Twingate サポートポータル](https://help.twingate.com/)

@@ -6,28 +6,30 @@
   {{ with (index $dot.Site.Data.api $versionNum).full_spec_deref }}
     {{ $spec := . }}
     {{ range $path_key, $path_object := $spec.paths }}
-      {{ range $action_type, $action := $path_object }}
-          {{ $tag := index $action.tags 0 }}
-            {{ range $sec := ($action.security | default slice) }}
-                {{ range $k, $v := $sec }}
-                    {{ if eq $k "AuthZ" }}
-                      {{ range $scope := $v }}
-                        {{ $scopeMap := index ($s.Get "scopes" | default dict) $scope | default dict }}
-                        {{ $tags := ($scopeMap.tags | default slice) }}
-                        {{ if not (in $tags $tag) }}
-                            {{ $tags = $tags | append $tag }}
+      {{ if not (hasPrefix $path_key "x-") }}
+        {{ range $action_type, $action := $path_object }}
+            {{ $tag := index $action.tags 0 }}
+              {{ range $sec := ($action.security | default slice) }}
+                  {{ range $k, $v := $sec }}
+                      {{ if eq $k "AuthZ" }}
+                        {{ range $scope := $v }}
+                          {{ $scopeMap := index ($s.Get "scopes" | default dict) $scope | default dict }}
+                          {{ $tags := ($scopeMap.tags | default slice) }}
+                          {{ if not (in $tags $tag) }}
+                              {{ $tags = $tags | append $tag }}
+                          {{ end }}
+                          {{ $endpoints := ($scopeMap.endpoints | default slice) }}
+                          {{ $slug := $action.summary | urlize }}
+                          {{ $url := (printf "api/latest/%s/" $tag | urlize) | absLangURL }}
+                          {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
+                          {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
+                          {{ $scopeMap = merge $scopeMap $updateMap }}
+                          {{ $s.SetInMap "scopes" $scope $scopeMap }}
                         {{ end }}
-                        {{ $endpoints := ($scopeMap.endpoints | default slice) }}
-                        {{ $slug := (replaceRE " " "-" ($action.summary | humanize | lower)) }}
-                        {{ $url := (printf "api/latest/%s/" (replaceRE " " "-" ($tag | humanize | lower))) | absLangURL }}
-                        {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
-                        {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
-                        {{ $scopeMap = merge $scopeMap $updateMap }}
-                        {{ $s.SetInMap "scopes" $scope $scopeMap }}
                       {{ end }}
-                    {{ end }}
-                {{ end }}
-            {{ end }}
+                  {{ end }}
+              {{ end }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
@@ -38,19 +40,44 @@ For each scope find the common tags and group them together
 -->
 {{ $tagGroups := slice }}
 {{ $scopeGroups := slice }}
+{{ $counter := 0 }}
+{{ $total := len ($s.Get "scopes") }}
 {{ range $scope, $scope_obj := ($s.Get "scopes") }}
-  {{ $intersect := len (intersect $tagGroups $scope_obj.tags) }}
-  {{ if eq $intersect 0 }}
-    {{ if $tagGroups}}
-      {{ $tagStr := (print (delimit $tagGroups ", ")) }}
-      {{ $s.SetInMap "tags" $tagStr $scopeGroups }}
-    {{ end }}
-    {{ $tagGroups = slice }}
-    {{ $scopeGroups = slice }}
+  {{ range $t := $scope_obj.tags }}
+    {{ $x := (index ($s.Get "tags2Scopes") $t) | default slice }}
+    {{ $x = $x | append $scope }}
+    {{ $s.SetInMap "tags2Scopes" $t $x }}
   {{ end }}
-  {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
-  {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
 {{ end }}
+
+{{ range $scope, $scope_obj := ($s.Get "scopes") }}
+
+  {{ $tagGroups = slice }}
+  {{ range $scope2, $scope_obj2 := ($s.Get "scopes") }}
+    {{ $intersect := (intersect $scope_obj2.tags $scope_obj.tags) }}
+    {{ if and ($intersect) (ne $scope_obj2.tags $scope_obj.tags) }}
+        {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
+        {{ $tagGroups = ($tagGroups | append $scope_obj2.tags) | uniq }}
+        {{ $tagGroups = sort $tagGroups }}
+    {{ end }}
+  {{ end }}
+
+  {{/* if not intersects at all we want to add fresh.. */}}
+  {{ if eq (len $tagGroups) 0 }}
+    {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
+    {{ $tagGroups = sort $tagGroups }}
+  {{ end }}
+
+  {{/* key off tags2Scopes to get our scopes */}}
+  {{ $scopeGroups = slice }}
+  {{ range $tg := $tagGroups }}
+    {{ $scopeGroups = ($scopeGroups | append (index ($s.Get "tags2Scopes") $tg)) | uniq }}
+  {{ end }}
+
+  {{ $s.SetInMap "tags" (print (delimit $tagGroups ", ")) $scopeGroups }}
+
+{{ end }}
+
 
 {{ range $tagString, $scopeSlice := ($s.Get "tags") }}
     <h4>{{ $tagString }}</h4>

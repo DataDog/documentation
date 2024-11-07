@@ -1,0 +1,411 @@
+{{ define "main" }}
+    {{ $dot := . }}
+
+    <!-- From imported files -->
+    {{ $list := sort .Pages }}
+    
+
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+     
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
+    {{ .Content }}
+
+    {{ $products := slice }}
+    {{ $ruleset_params := .Params }}
+    {{ $pad := newScratch }}
+
+    <!-- Build slice of unique languages to validate against url param `languages` on page load -->
+    {{ range ($list.GroupByParam "group_id") }}
+        {{ range .Pages }}
+            {{ $pad.Set "languages" ( union ($pad.Get "languages") (slice (( cond (.Params.meta.language_alias | not) .Params.meta.language (printf "%s;%s" .Params.meta.language_alias .Params.meta.language) ))) ) }}
+        {{ end }}
+    {{ end }}
+
+    {{ $valid_langs := $pad.Get "languages" }}
+    <div 
+    class="static-analysis-main w-100 min-vh-100 d-flex flex-column"
+    x-data="{
+        filterTypes: {
+            languages: [],
+            categories: [],
+            severities: []
+        },
+        searchValue: '',
+        openedFilterForm: null,
+        showEmptyResultsMsg: false,
+        filteredRulesets: new Set(),
+        lang_aliases: {
+            // if logo name different than language_alias,
+            // map to appropriate integration logo name (e.g. csharp: 'net')
+        },
+        resetFilteredRulesets () {
+            // Empty filtered rulesets
+
+            this.filteredRulesets = new Set()
+        },
+        shouldShowRuleSet (ruleset, shouldShowRule) {
+            // Manage visibility of ruleset group
+
+            const rulesetID = ruleset.dataset.groupId
+
+            if(shouldShowRule){
+                this.filteredRulesets.add(rulesetID)
+                ruleset.classList.remove('d-none')
+            }else if (!this.filteredRulesets.has(rulesetID)){
+                ruleset.classList.add('d-none')
+            }
+        },
+        shouldShowRule (ruleEl) {
+            // Determines rule display
+            // Compares search values and filter values against ruleInfo
+            
+            const ruleInfo = ruleEl.dataset.info.split(';')
+            const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
+            const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
+
+            const filterValues = Object.values(this.filterTypes)
+            const searchValues = this.searchValue.split(' ')
+
+            /**
+            *   FILTER LOGIC (containsFilteredValue) e.g.
+            *   {
+            *      languages: [javascript, docker],
+            *      categories: [severity],
+            *      severities: [warning]
+            *   }
+            *   show ruleEl if condition met ('Javascript' OR 'Docker') AND Security AND Warning
+            */
+
+            const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
+            const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
+
+            this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
+
+            if(containsSearchValues && containsFilteredValue){
+                ruleEl.classList.add('show')
+            }else{
+                ruleEl.classList.remove('show')    
+            }
+
+            return containsSearchValues && containsFilteredValue
+        },
+        pushState (filterType=undefined, filterOption=undefined) {
+            // Updates url with new query params for filter type and search without refreshing the page
+
+            const url = new URL(window.location.href)
+            let newURL = ''
+            if(filterType){
+                if(!url.searchParams.getAll(filterType).includes(filterOption)){
+                    // add one key:value param
+                    url.searchParams.append(filterType, filterOption)
+                }else{
+                    // remove one key:value param
+                    const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}(?=\&|$)`, 'g');
+                    newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
+                }
+                if(!this.filterTypes[filterType].length) {
+                    url.searchParams.delete(filterType)
+                }
+            }else {
+                url.searchParams.set('search', this.searchValue)
+                if(!this.searchValue) {
+                    url.searchParams.delete('search')
+                }
+            }
+
+            window.history.pushState(null,'', newURL || url.toString())
+        },
+        updateWithURLParams (validLangs) {
+            // Updates x-data properties with url param values
+            
+            const validLangsArr = validLangs.replaceAll(/[\[\]]/g, '').split(' ')
+            const url = new URL(window.location.href)
+            const langAliasMap = validLangsArr.reduce((acc,l) => {
+                // map to appropriate language display name 
+                const [lang, displayName] = l.split(';')
+                acc[lang.toLowerCase()] = displayName
+                return acc
+            }, {})
+            
+            Array.from(url.searchParams.entries()).forEach(([key, value]) => {
+                if (key === 'search'){
+                    this.searchValue = value
+                } else if ((key === 'languages') && validLangsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
+                    const logoName = this.lang_aliases[value.toLowerCase()] ?? value
+                    const displayName = langAliasMap[value.toLowerCase()] ?? value
+                    const langLookupName = langAliasMap[value.toLowerCase()] ? `,${value}`: ''
+                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${langLookupName}`)
+                } else if (key != 'languages'){
+                    this.filterTypes[key]?.push(value)
+                }
+            })
+        },
+        toggleRuleSet (selectedRulesetEl) {
+            // Manage ruleset accordians
+
+            selectedRulesetEl.classList.toggle('active')
+            selectedRulesetEl.previousElementSibling.classList.toggle('d-none')
+        },
+        toggleFilterForm (selectedFilterFormEl) {
+            // manage filter form accordian
+
+            const filterTypeID = selectedFilterFormEl.dataset.id
+            this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
+        },
+        copyHref (selectedRuleEl) {
+            // Copy href
+
+            const clickableIconWrapper = selectedRuleEl
+            const copyConfirmedIconWrapper = clickableIconWrapper.nextElementSibling
+            const anchor = clickableIconWrapper.dataset.anchor
+            const {pathname, origin} = window.location
+            const path = new URL(`${origin}${pathname}${anchor}`)
+
+            const Clipboard = navigator.clipboard
+            // write href to clipboard
+            Clipboard.writeText(path.href).then(() => {
+                clickableIconWrapper.classList.add('d-none');
+                copyConfirmedIconWrapper.classList.remove('d-none')
+                setTimeout(function() {
+                    clickableIconWrapper.classList.remove('d-none');
+                    copyConfirmedIconWrapper.classList.add('d-none')
+                }, 1000)
+            })
+        },
+        deleteOneSelection (filterType, filterOption) {
+            // delete one filterOption from selections in filter toggler
+
+            this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
+
+            const [displayName,_,langLookupName] = filterOption.split(',')
+            const filterName = langLookupName || displayName
+            this.pushState(filterType, filterName)
+        },
+        deleteAllSelections (filterType) {
+            // delete all selections of a filter type from filter toggler and url params
+
+            this.filterTypes[filterType] = []
+            this.openedFilterForm = null
+            const url = new URL(window.location.href)
+            url.searchParams.delete(filterType)
+            window.history.pushState(null,'', url.toString())
+        },
+        emptyResultsMsg () {
+            // Determine and return the appropriate empty results message
+
+            const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
+            if(filterValues.length && this.searchValue){
+                return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
+            }else{
+                return `No results found for query '${this.searchValue || filterValues}'`
+            }
+        }
+    }"
+    x-init="updateWithURLParams('{{$valid_langs}}')">
+        <div class="col-12 order-1">
+            <div class="ps-0">
+                {{ range $list.GroupByParam "group_id" }}
+                {{ $group_id := .Key }}
+                {{ $ruleset_title := index (index $ruleset_params.rulesets .Key) "title"}}
+                {{ $ruleset_description := index (index $ruleset_params.rulesets .Key) "description"}}
+                <div
+                data-group-id="{{ $group_id }}" 
+                class="ruleset d-flex flex-column"
+                id="{{ $group_id }}"
+                >
+                    <div class="ruleset-body mb-3 order-1">
+                        <div class="d-flex flex-column">
+                            <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
+                            <span class="ruleset-description m-0">{{$ruleset_description | markdownify}}</span>
+                        </div>
+                        <div class="ps-0 mt-1">
+                            {{ range .Pages }}
+                            {{ $rule_language_with_alias := ( cond (.Params.meta.language_alias | not) .Params.meta.language (printf "%s;%s" .Params.meta.language_alias .Params.meta.language) ) }}
+                            {{ $rule_language := (index (split $rule_language_with_alias ";") 0) }}
+                            {{/*  
+                                build a string with rule's lookup info for filtering and searching against
+                            */}}
+                            {{ $rule_id := index (split .Params.meta.id "/") 1}}
+                            {{ $filter_info := (printf "%s,%s,%s%s" .Params.meta.language .Params.meta.category .Params.meta.severity (cond (.Params.meta.language_alias | not) "" (printf ",%s" .Params.meta.language_alias))) }}
+                            {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
+                            <div 
+                            class="rule d-flex justify-content-between border p-1 position-relative"
+                            data-info="{{ $rule_info }}"
+                            data-name="{{ .Title }}"
+                            x-cloak x-show.important="shouldShowRule($el)"
+                            >
+                                <div class="rule-name-container d-flex align-items-center">
+                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $rule_language "variant" "avatar") }}
+                                    {{ if $int_logo }}
+                                    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                    {{ end }}
+                                    <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <span class="d-none d-md-block">{{ $rule_id }}</span>
+                                    <div class="ruleset-header__arrow fw-semibold ms-1">></div>
+                                </div>
+                            </div>
+                            
+                            {{/*  
+                                build object with unique values for filter dropdowns (.filter-selection-container)
+                                e.g:
+                                filters: {
+                                    Language: [],
+                                    Category: [],
+                                    Severity: {}
+                                }
+                            */}}
+                            {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice $rule_language_with_alias)) }}
+                            {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
+                            {{ $pad.SetInMap "filters" "Severities" (merge (index ($pad.Get "filters") "Severities") (dict (string .Params.meta.severity_rank) .Params.meta.severity)) }}
+                            {{/*  
+                                build object of arrays with unique languages for each ruleset header (.ruleset-header )
+                                languagesByRuleset: {
+                                    rulesetID: [<languages>],
+                                    ...
+                                }    
+                            */}}
+                            {{ $pad.SetInMap "languageByRuleSet" $group_id (union (index ($pad.Get "languageByRuleSet") $group_id) (slice $rule_language)) }}
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    {{/* RULESET-HEADER - Keep here. scratch pad for languageByRuleSet needs to build first */}}
+                    <button
+                    data-header-id="{{ $group_id }}" 
+                    class="ruleset-header w-100 border mb-1 d-flex align-items-center justify-content-between"
+                    @click="toggleRuleSet($el)"
+                    >
+                        <div class="d-flex align-items-center h-100">
+                            {{$ruleset_languages := index ($pad.Get "languageByRuleSet") $group_id}}
+                            <div class="d-flex align-items-center h-100">
+                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") }}
+                                {{ if $int_logo }}
+                                <img class="ruleset-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                {{ if gt (len $ruleset_languages) 1 }}
+                                <span class="ruleset-header__plus fw-semibold">+{{sub (len $ruleset_languages) 1}}</span>
+                                {{ end }}
+                                {{ end }}
+                            </div>
+                            <span class="ruleset-header__text fw-semibold">{{$ruleset_title}}</span>
+                            <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
+                            <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+                        </div>
+                        <div class="ruleset-header__arrow fw-semibold">></div>
+                    </button>
+                </div>
+                {{ end }}
+                {{/*  hook into the app lifecycle. $watch for 'filteredRulesets' to change and update the 'showEmptyResultsMsg' property  */}}
+                <div x-init="showEmptyResultsMsg = !filteredRulesets.size; $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)">
+                    <template x-if="showEmptyResultsMsg">
+                        <span class="fw-semibold" x-text="emptyResultsMsg"></span>
+                    </template>
+                </div>
+            </div>
+        </div>
+        {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
+        <nav id="static-analysis-nav" class="container px-0">
+            {{ $filter_types := (slice "Languages" "Categories" "Severities") }}
+            <div class="filters-static-analysis row">
+                {{ range $filter_types }}
+                {{ $filter_type := . | lower}}
+                <div class='filter-type flex-column col-12 col-md-{{cond (eq $filter_type "languages") "12" "6" }}' data-id="{{$filter_type}}" >
+                    <p class="filter-type-name fw-semibold">{{ . }}</p>
+                    <div class="filter-component position-relative">
+                        {{/*  FILTER TOGGLER  */}}
+                        <button 
+                        data-id="{{$filter_type}}"
+                        class="toggler w-100 rounded position-relative"
+                        @click.stop="toggleFilterForm($el)">
+                            <div class="selections d-flex">
+                                {{/*  All  */}}
+                                <template x-if="!filterTypes['{{$filter_type}}'].length">
+                                    <span class="all fw-semibold">All</span>
+                                </template>
+                                {{/*  Show filter selections from `filterTypes` data */}}
+                                <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
+                                    <div 
+                                    :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                    class="selection-container rounded d-flex align-items-center">
+                                        <template x-if="filter.split(',')[1]">
+                                            <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
+                                        </template>
+                                        <span class="selection-name" x-text="filter.split(',')[0]"></span>
+                                        <div 
+                                        :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                        class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
+                                            {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
+                                <template x-if="filterTypes['{{$filter_type}}'].length">
+                                    <span class="cancel-circle-wrapper" @click.stop="resetFilteredRulesets; deleteAllSelections('{{ $filter_type }}')">
+                                        {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
+                                    </span>
+                                </template>
+                                <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
+                                    <div class="chevron chevron-down"></div>
+                                </span>
+                            </div>
+                        </button>
+                        {{/*  FILTER FORM  */}}
+                        <form 
+                        data-id="{{$filter_type}}"
+                        class="d-flex flex-column bg-white rounded position-absolute w-100"
+                        x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
+                        @click.outside="openedFilterForm = null"
+                        >
+                            <div class="filter-selection-container">
+                                <span>All</span>
+                            </div>
+                            {{ range index ($pad.Get "filters") . }}
+                            <div class="filter-selection-container">
+
+                                {{ $lang_lookup_name := index (split . ";") 0 }}
+                                {{ $display_name := (index (split . ";") 1) | default . }}
+                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $lang_lookup_name "variant" "avatar") }}
+                                {{/*  store $int_logo and $lang_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
+                                {{ $value := (printf "%s,%s%s" $display_name $int_logo (cond (eq ((split . ";") | len) 2) (printf ",%s" $lang_lookup_name) ""))}}
+                                <input 
+                                id="{{ $lang_lookup_name | anchorize }}" 
+                                type="checkbox" 
+                                value='{{ cond ($int_logo | not ) . $value }}' 
+                                x-model="filterTypes['{{$filter_type}}']"
+                                @change="resetFilteredRulesets"
+                                @change.debounce="pushState('{{ $filter_type }}', '{{ $lang_lookup_name }}')"
+                                >  
+                                
+                                <label for="{{ $lang_lookup_name | anchorize }}" class="d-flex align-items-center">
+                                    {{ if $int_logo }}
+                                    <img src="{{ $int_logo }}" height="16" alt="{{ $lang_lookup_name }}"/>
+                                    {{ end }}
+                                    {{$display_name}}
+                                </label>
+                            </div>
+                            {{ end }}
+                        </form>
+                    </div>                      
+                   
+                </div>
+                {{ end }}
+            </div>
+            {{/*  SEARCH FORM */}}
+            <form class="search-static-analysis" @submit.prevent="">
+                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
+            </form>
+          </nav>
+    </div>
+
+    <h2>Further Reading</h2>
+    {{ partial "whats-next/whats-next.html" .}}
+{{ end }}

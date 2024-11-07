@@ -25,7 +25,7 @@ integration_id: aws-fargate
 integration_title: "Amazon\_ECS sur AWS\_Fargate"
 integration_version: 2.14.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: ecs.

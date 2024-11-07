@@ -2,273 +2,118 @@
 aliases:
 - /ja/infrastructure/cloud_cost_management
 - /ja/integrations/cloudability
+cascade:
+  algolia:
+    rank: 70
+    subcategory: Cloud Cost Management
+    tags:
+    - cloud cost
+    - cloud integrations
+    - クラウド コスト マネジメント
+    - cloud cost aws
+    - cloud cost azure
+    - cloud cost google cloud
+    - cloud cost gcp
+    - data collected aws
+    - data collected azure
+    - data collected google cloud
 further_reading:
 - link: https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/
   tag: GitHub
   text: Datadog Cloud Cost Management でクラウドコストの可視化とコントロールを実現する
-kind: documentation
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: ブログ
+  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
+- link: https://www.datadoghq.com/blog/google-cloud-cost-management/
+  tag: ブログ
+  text: Datadog でエンジニアが Google Cloud のコストを管理するための権限を与える
+- link: https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/
+  tag: ブログ
+  text: サービスに関連するクラウドや SaaS のコストを迅速かつ包括的に分析する
+- link: /monitors/types/cloud_cost/
+  tag: ドキュメント
+  text: クラウドコストモニターを作成する
+- link: /cloud_cost_management/tag_pipelines/
+  tag: ドキュメント
+  text: Tag Pipelines について
+- link: /cloud_cost_management/tag_pipelines
+  tag: ドキュメント
+  text: Tag Pipelines を使って Cloud Cost Management 全体でタグを標準化する
 title: クラウド コスト マネジメント
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Cost Management はサポートされていません。</div>
+{{< /site-region >}}
+
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
+クラウドプロバイダーのコストを調査し、リアルタイムのテレメトリーデータと相関付けることで、クラウドコストの発生源、変動、最適化の機会についての具体的な洞察とアラートを得ることができます。
+{{< /learning-center-callout >}}
+
 ## 概要
 
-クラウドコストマネジメントは、エンジニアリングチームとファイナンスチームに、インフラストラクチャーの変更がコストにどのような影響を与えるかを示すインサイトを提供します。これにより、傾向を把握し、組織全体に費用を配分し、非効率性を特定することができます。
-Datadog は、クラウドのコストデータをインジェストし、クエリ可能なメトリクスに変換します。コストが上昇した場合、その変化と使用状況の指標を関連付け、根本原因を特定することができます。
+Cloud Cost Management は、エンジニアリングチームや財務チームに、インフラストラクチャーの変更がコストに与える影響を理解し、組織全体の支出を割り当て、非効率性を特定するための洞察を提供します。
+
+{{< img src="cloud_cost/overview_1.png" alt="Datadog の Cloud Costs Overview ページで、クラウドプロバイダーのコストと使用状況をすべて把握することができます。" style="width:100%;" >}}
+
+Datadog はクラウドコストデータを取り込み、[**Analytics** ページ][1]の検索クエリで使用可能なメトリクスに変換します。コスト上昇時には、その上昇を使用量メトリクスと相関付けて根本原因を特定することができます。
 
 ## セットアップ
-{{< tabs >}}
-{{% tab "AWS" %}}
 
+{{< whatsnext desc="Cloud Cost Management でクラウドコストの管理を始めるには、以下のドキュメントをご覧ください。">}}
+{{< nextlink href="/cloud_cost_management/aws">}}<u>AWS</u>: AWS 請求書向けに Cloud Cost Management を構成します。{{< /nextlink >}}
+{{< nextlink href="/cloud_cost_management/azure">}}<u>Azure</u>: Azure 請求書向けに Cloud Cost Management を構成します。{{< /nextlink >}}
+{{< nextlink href="/cloud_cost_management/google_cloud">}}<u>Google Cloud</u>: Google Cloud 請求書向けに Cloud Cost Management を構成します。{{< /nextlink >}}
+{{< nextlink href="/cloud_cost_management/saas_costs">}}<u>SaaS コストインテグレーション</u>: サポートされている SaaS コストプロバイダーから Datadog にコストデータを送信します。{{< /nextlink >}}
+{{< nextlink href="/cloud_cost_management/custom">}}<u>カスタムコスト</u>: 任意のコストデータソースを Datadog にアップロードします。{{< /nextlink >}}
+{{< nextlink href="/cloud_cost_management/datadog_costs">}}<u>Datadog コスト</u>: Datadog の日々の支出と利用メトリクスを可視化します。{{< /nextlink >}}
+{{< /whatsnext >}}
 
-AWS Cloud Cost Management を利用するには、Cost and Usage Report (CUR) にアクセスできる AWS アカウントを持ち、Datadog に AWS インテグレーションがインストールされている必要があります。Datadog で Cloud Cost Management をセットアップするには、Cost and Usage レポートを生成する必要があります。
-### 前提条件: Cost and Usage Report を作成する
+## クラウドコストデータを活用する
 
-AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud Cost Management で使用するために以下のコンテンツオプションを選択します。
+インフラストラクチャーの費用と関連する利用メトリクスを 15 か月間保持し、潜在的な非効率性や節約の機会を可視化します。
 
-* **Include resource IDs** (リソース ID を含む)
-* **"Automatically refresh your Cost & Usage Report when charges are detected for previous months with closed bills." (請求が締め切られた前月の料金が検出されると、コストと使用量レポートが自動的に更新されます。) のチェックボックスをオンにします。**
+ダッシュボード作成時、検索クエリのデータソースとして **Cloud Cost** を選択します。
 
-以下の Delivery オプションを選択します。
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト" style="width:100%;" >}}
 
-* 時間粒度: **Hourly**
-* レポートのバージョン管理: **Create new report version** (新しいレポートのバージョンを作成する)
-* 圧縮タイプ: **GZIP** または **Parquet**
-* フォーマット: `text/csv` または `Parquet`
+オプションで、[Metrics API][2] を使用してクラウドコストデータの時系列グラフをプログラムでエクスポートすることができます。
 
-### AWS インテグレーションの構成
+## 日々の Datadog コストデータを活用する
 
-[Setup & Configuration](https://app.datadoghq.com/cost/setup) に移動し、ドロップダウンメニューから AWS 管理アカウントを選択し、Datadog がこのアカウントに関連するタグを表示できるようにします。同じような名前の管理アカウントが複数ある場合、選択したアカウントに関連するタグを表示し、必要な特定のアカウントを選択したことを確認します。
+Datadog の日々の費用と関連する利用メトリクスを 15 か月間保持し、潜在的な非効率性や節約の機会を可視化します。
 
-**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][2]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、**管理アカウント**の[設定][3]で次のオプションが選択されていることを確認してください。
+ダッシュボード作成時、検索クエリのデータソースとして **Cloud Cost** を選択します。
 
-* **リンクされたアカウントへのアクセス**
-* **リンクされたアカウントの払い戻しおよびクレジット**
-* **リンクされたアカウントの割引**
+{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="ダッシュボードの Cloud Cost データソースのオプションとしての Datadog コスト" style="width:100%;" >}}
 
-これにより、AWS Cost Explorer に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
+オプションで、[Metrics API][2] を使用して Datadog コストデータの時系列グラフをプログラムでエクスポートすることができます。
 
-### Cost and Usage Report を探す
+## タグルールの作成
 
-セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って [Cost and Usage Report の詳細][4]を見つけて表示します。
+[Tag Pipelines][5] を活用して、クラウドリソース全体でタグを標準化することで、コストデータの見落としを防ぎ、包括的なコスト追跡を実現します。
 
-Datadog が Cost and Usage Report を検索できるようにするには、対応する詳細情報をフィールドに入力します。
+{{< img src="cloud_cost/tags_addnew.png" alt="Tag Pipelines でタグルールを作成し、クラウドリソースが標準タグを使用するようにする" style="width:60%;" >}}
 
-* **Region**: バケットがあるリージョンです。例: `us-east-1`
-* **Bucket Name**: CUR の保存先となる s3 バケット名です。
-* **Report Path Prefix**: フォルダ名です。AWS の詳細ページから **Report path prefix** を表示する場合、パスの最初のセクションになります。例えば、**Report path prefix** が `cur-report-dir/cost-report` と表示されている場合、`cur-report-dir` と入力することになります。
-* **Report Name**: 前提条件のセクションでレポートを生成したときに入力した名前です。AWS の詳細ページから **Report path prefix** を表示する場合、パスの後半部分となります。例えば、**Report path prefix** が `cur-report-dir/cost-report` と表示されている場合、`cost-report` と入力することになります。
+タグルールを作成することで、欠落したタグや誤ったタグを修正し、組織のビジネスロジックに沿った推論タグを追加することができます。
 
-### Cost and Usage Report へのアクセス構成
+## コストモニターの作成
 
-以下の JSON を使用して[ポリシーを作成][5]することで、Datadog が CUR とそれが格納されている s3 バケットにアクセスする権限を持つように AWS を構成します。
+[クラウドコストモニター][3]を作成して、クラウド支出を積極的に管理・最適化しましょう。クラウド費用を監視するために、**コストの変動**または**コストのしきい値**を選択できます。
 
-{{< code-block lang="yaml" collapsible="true" >}}
-{
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-          "Sid": "DDCloudCostReadBucket",
-          "Effect": "Allow",
-          "Action": [
-              "s3:ListBucket"
-          ],
-          "Resource": "arn:aws:s3:::BUCKETNAME"
-      },
-      {
-          "Sid": "DDCloudCostGetBill",
-          "Effect": "Allow",
-          "Action": [
-              "s3:GetObject"
-          ],
-          "Resource": "arn:aws:s3:::BUCKETNAME/REPORT_PREFIX/REPORT_NAME/*"
-      },
-      {
-          "Sid": "DDCloudCostCheckAccuracy",
-          "Effect": "Allow",
-          "Action": [
-              "ce:Get*"
-          ],
-          "Resource": "*"
-      },
-      {
-          "Sid": "DDCloudCostListCURs",
-          "Action": [
-              "cur:DescribeReportDefinitions"
-          ],
-          "Effect": "Allow",
-          "Resource": "*"
-      },
-      {
-          "Sid": "DDCloudCostListOrganizations",
-          "Action": [
-              "organizations:Describe*",
-              "organizations:List*"
-          ],
-          "Effect": "Allow",
-          "Resource": "*"
-      }
-  ]
-}
-{{< /code-block >}}
+{{< img src="cloud_cost/monitor.png" alt="コストの変動をアラートするクラウドコストモニターの作成" style="width:100%;" >}}
 
-**ヒント:** このポリシーのために作成した名前は、次のステップのためにメモしておいてください。
+## コストの割り当て
 
-### Datadog のインテグレーションロールにポリシーをアタッチする
+[コンテナコスト割り当てメトリクス][4]を活用して、Kubernetes、AWS ECS、Azure、Google Cloud 全体のクラスターやワークロードに関連するコストを把握しましょう。ポッドレベルのコストを可視化し、アイドルリソースのコストを特定し、リソースタイプ別にコストを分析することができます。
 
-Datadog のインテグレーションロールに新しい S3 ポリシーをアタッチします。
-
-1. AWS IAM コンソールで **Roles** に移動します。
-2. Datadog インテグレーションで使用されるロールを見つけます。デフォルトでは、 **DatadogIntegrationRole** という名前になっていますが、組織で名前を変更した場合は、名前が異なる場合があります。ロール名をクリックすると、ロールのサマリーページが表示されます。
-3. **Attach policies** をクリックします。
-4. 上記で作成した S3 バケットポリシーの名称を入力します。
-5. **Attach policy** をクリックします。
-
-**注:** Datadog でデータが安定するまでに、セットアップ後最大 48～72 時間かかることがあります。
-### コストタイプ
-
-インジェストしたデータは、以下のコストタイプで可視化することができます。
-
-| コストタイプ            | 説明           |
-| -------------------- | --------------------- |
-| `aws.cost.amortized` | 適用される割引率に基づくコストと、割引期間中の使用量に応じたプリペイドの配分 (発生主義)。 |
-| `aws.cost.unblended` | 使用時に請求される金額で表示されるコスト (現金主義)。|
-| `aws.cost.blended`   | 組織のメンバーアカウントで、ある利用形態に対して支払われた平均的な料金に基づくコスト。|
-| `aws.cost.ondemand`  | AWS から提供されるリストレートに基づくコスト。 |
-
-### タグエンリッチメント
-
-Datadog は取り込まれたコストデータにすぐに使えるタグを追加し、コストをさらに分解して割り当てることができるようにします。これらのタグは、[Cost and Usage Report (CUR)][6] に由来しています。
-
-また、データのフィルタリングやグループ化には、以下のすぐに使えるタグが利用できます。
-
-| タグ                          | 説明       |
-| ---------------------------- | ----------------- |
-| `aws_product`                | 課金対象となる AWS サービス。|
-| `aws_product_family`         | 課金対象となる AWS サービスのカテゴリー (例: Compute、Storage など)。|
-| `aws_management_account_name`| 項目に関連付けられた AWS 管理アカウント名。|
-| `aws_management_account_id`  | 項目に関連付けられた AWS 管理アカウント ID。|
-| `aws_member_account_name`    | 項目に関連付けられた AWS メンバーアカウント名。|
-| `aws_member_account_id`      | 項目に関連付けられた AWS メンバーアカウント ID。|
-| `aws_cost_type`              | この項目で対象となる料金の種類 (例: 使用料、消費税など)。|
-| `aws_pricing_term`           | 予約、スポット、オンデマンドのいずれの利用形態か。|
-| `aws_reservation_arn`        | 項目が恩恵を受けたリザーブドインスタンスの ARN。|
-| `aws_savings_plan_arn`       | 項目が恩恵を受けたセービングプランの ARN。|
-| `aws_usage_type`             | 項目の使用量 (例: BoxUsage:i3.8xlarge)。|
-| `aws_operation`              | 項目に関連する演算子 (例: RunInstances)。|
-| `aws_region`                 | 項目に関連するリージョン。|
-| `aws_availability_zone`      | 項目に関連するアベイラビリティゾーン。|
-| `aws_resource_id`            | 項目に関連するリソース ID。|
-| `aws_instance_type`          | 項目に関連するインスタンスタイプ。|
-| `aws_instance_family`        | 項目に関連するインスタンスファミリー (例: Storage optimized)。|
-| `is_aws_ec2_compute`         | 使用が EC2 コンピュートに関するものかどうか。|
-| `is_aws_ec2_compute_on_demand`| 使用がオンデマンドであるかどうか。|
-| `is_aws_ec2_compute_reservation`| 使用がリザーブドインスタンスと関連しているかどうか。|
-| `is_aws_ec2_capacity_reservation`| 使用が容量予約と関連しているかどうか。|
-| `is_aws_ec2_spot_instance`   | 使用がスポットインスタンスと関連しているかどうか。|
-| `is_aws_ec2_savings_plan`    | 使用がセービングプランと関連しているかどうか。|
-
-### タグパイプライン (ベータ版)
-
-タグパイプラインを使用してタグルールを作成し、クラウド請求書に記載されていないタグや不正確なタグを修正したり、ビジネスロジックに沿った新しい推論タグを作成したりすることができます。
-
-2 種類のルールがサポートされています。**Create new tag** (*新しいタグを作成する) と **Alias existing tag keys** (既存のタグキーを別名にする) です。ルールセットを活用することで、ルールを整理することができます。ルールセットは、ルールのフォルダーとして機能します。ルールは、実行順序を決定的にするために、(上から下へ) 順番に実行されます。ルールとルールセットを整理することで、実行順序をビジネスロジックと一致させることができます。
-
-### ルールタイプ
-
-<div class="alert alert-info"><strong>注</strong>: ルールは最大 100 個まで作成可能です。 </div>
-
-**Create new tag** - これにより、既存のタグの存在に基づいて、新しいタグ (キー＋値) を作成することができます。例えば、チーム A、B、C に所属し、指定されたアプリケーションを実行するすべてのリソースに、新しい `cost-center:webstore` タグを付けるルールを作成することができます。
-
-**Alias existing tag keys** - これにより、既存のタグの値を使用して、より標準化されたタグキーにマッピングすることができます。例えば、組織全体で `application` というタグキーを使用するように標準化したいが、いくつかのチームが `app`、`web-app`、`apps` のようなタグのバリエーションを持っている場合、`apps` を `application` に別名で使用することができます。各エイリアスタグルールでは、最大で 25 個のタグキーを新しいタグにエイリアスすることができます。 
-
-ルールは各リソースに対して、最初に一致するものが見つかると実行を停止します。例えば、リソースが既に `web-app` タグを持っている場合、このルールは `apps` や `service` タグを識別しようとしません。
-
-[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
-[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
-[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
-[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
-{{% /tab %}}
-
-{{% tab "Azure" %}}
-
-Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure インテグレーションを設定し、**amortized** と **actual** のエクスポートをセットアップする必要があります。さらに、Datadog はコンテナからエクスポートを読み取る権限が必要です。
-
-{{% site-region region="us3" %}}
-**注**: US3 のお客様であれば、Azure ポータルから推奨される [Datadog リソース方法][1]を使用して Datadog インテグレーションをセットアップしているかと思います。クラウドコストマネジメントに対応するためには、[App Registration の作成][2]が必要です。
-
-[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: /ja/integrations/azure/?tab=azurecliv20#setup
-{{% /site-region %}}
-
-### コストエクスポートの生成
-
-1. Azure ポータルの *Cost Management + Billing* の下にある [Exports][3] に移動します。
-2. エクスポートのスコープを選択します。**注:** スコープは *billing account*、*subscription* または *resource group* でなければなりません。
-3. スコープを選択したら、**Add** をクリックします。
-
-{{< img src="cloud_cost/exports_scope.png" alt="Azure ポータルで、ナビゲーションのエクスポートオプションとエクスポートスコープをハイライト表示" >}}
-
-4. 次のエクスポートの詳細を選択します。
-    - Metric: **Actual Cost (usage and purchases)**
-    - Export type: **Daily export of month-to-date costs**
-    - File Partitioning: `On`
-
-{{< img src="cloud_cost/new_export.png" alt="Metric: Actual、Export type: Daily、File Partitioning: On のエクスポートの詳細" >}}
-
-5. エクスポートのためのストレージアカウント、コンテナ、およびディレクトリを選択します。**注:** 請求エクスポートは、エクスポートが対象としているサブスクリプションに保存される必要はありません。複数のサブスクリプションのエクスポートを作成する場合、Datadog は 1 つのサブスクリプションのストレージアカウントに保存することを推奨しています。
-6. **Create** を選択します。
-
-メトリクス **Amortized Cost (usage and purchases)** について、ステップ 1～6 を繰り返します。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨します。より速く処理するために、**Run Now** をクリックして最初のエクスポートを手動で生成します。
-{{< img src="cloud_cost/run_now.png" alt="エクスポートサイドパネルの Run Now ボタンをクリックし、エクスポートを生成します" >}}
-
-### Datadog がエクスポートにアクセスできるようにする
-
-1. Exports タブで、エクスポートの Storage Account をクリックし、移動します。
-2. Containers タブをクリックします。
-3. 請求書の入っているストレージコンテナを選びます。
-4. Access Control (IAM) タブを選択します。
-5. **Add** をクリックします。
-6. **Storage Blob Data Reader** を選択し、Next をクリックします。
-7. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
-    - **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
-    - *review + assign* を選択します。
-
-エクスポートが別のコンテナに入っている場合は、他のコンテナについて手順 1〜7 を繰り返します。
-
-### コストマネジメントリーダーへのアクセス構成
-**注:** スコープが **Billing Account** の場合、このアクセスは構成する必要はありません。
-
-1. [サブスクリプション][4]に移動し、サブスクリプションの名前をクリックします。
-2. Access Control (IAM) タブを選択します。
-3. **Add** をクリックします。
-4. **Cost Management Reader** を選択し、Next をクリックします。
-5. これらの権限をサブスクリプションに割り当てます。
-
-これにより、Azure Cost Management に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
-
-### コストタイプ
-
-インジェストしたデータは、以下のコストタイプで可視化することができます。
-
-| コストタイプ            | 説明           |
-| -------------------- | --------------------- |
-| `azure.cost.amortized` | 適用される割引率に基づくコストと、割引期間中の使用量に応じたプリペイドの配分 (発生主義)。|
-| `azure.cost.actual` | コストは、使用時に請求される金額で表示されます (現金主義)。実際のコストには、プライベート割引、リザーブドインスタンスやセービングプランの割引が別の料金タイプとして含まれています。|
-
-[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#setup
-[3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
-{{% /tab %}}
-{{< /tabs >}}
-
-## ダッシュボードに表示されるクラウドコスト
-
-インフラストラクチャーの支出を、関連する使用量メトリクスと一緒に可視化することで、潜在的な非効率性と節約の機会を発見することができます。Datadog ダッシュボードのウィジェットにクラウドコストを追加するには、*Cloud Cost* データソースを選択します。
-
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト" >}}
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/cost/analytics
+[2]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[3]: /ja/monitors/types/cloud_cost/
+[4]: /ja/cloud_cost_management/container_cost_allocation
+[5]: /ja/cloud_cost_management/tag_pipelines

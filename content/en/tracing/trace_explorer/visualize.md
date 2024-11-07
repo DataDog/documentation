@@ -1,6 +1,5 @@
 ---
 title: Span Visualizations
-kind: documentation
 description: 'View spans in a list, or aggregate spans into timeseries, top lists and more.'
 further_reading:
     - link: 'tracing/trace_explorer/'
@@ -28,7 +27,15 @@ The default sort for spans in the list visualization is by timestamp, with the m
 
 The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
-The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent of misleading latency information that would only make sense when the trace is complete.
+The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent or misleading latency information that would only make sense when the trace is complete.
+
+When the query is filtered on error spans, select the **Group into Issues** option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
+
+{{< img src="tracing/trace_explorer/visualize/trace_explorer_issue_grouping.png" alt="Error Tracking Issue Grouping" style="width:100%;">}}
+
+From the issue details, click `See all errors` to view individual error spans grouped under this issue.
+
+**Note**:Switch back to the `Errors` grouping to view individual errors, including non fingerprinted errors, i.e. errors without associated issue.
 
 ## Timeseries
 
@@ -90,3 +97,4 @@ The following table shows the error spans count by `Env`, `Service`, and `Error 
 [2]: /tracing/trace_explorer/query_syntax/#time-range
 [3]: /tracing/trace_explorer/facets/#quantitative-facets-measures
 [4]: /tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
+[5]: /tracing/error_tracking/

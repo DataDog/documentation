@@ -1,6 +1,5 @@
 ---
 title: Custom Checks
-kind: documentation
 description: Setting up a custom check with Datadog
 ---
 
@@ -22,5 +21,5 @@ Use custom checks to collect metrics from custom applications or unique systems.
 {{< /whatsnext >}}
 
 [1]: /developers/service_checks/
-[2]: /developers/integrations/new_check_howto/
+[2]: /developers/integrations/agent_integration/
 [3]: /developers/

@@ -4,17 +4,17 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Gamelift のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_gamelift/
 draft: false
 git_integration_title: amazon_gamelift
 has_logo: true
-integration_id: amazon-gamelift
+integration_id: ''
 integration_title: Amazon Gamelift
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_gamelift
 public_title: Datadog-Amazon Gamelift インテグレーション
@@ -22,6 +22,7 @@ short_description: Amazon Gamelift のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon GameLift は、セッションベースのマルチプレーヤーゲームサーバーをクラウドでデプロイ、運用、およびスケーリングするためのフルマネージド型サービスです。
@@ -30,16 +31,16 @@ Amazon GameLift は、セッションベースのマルチプレーヤーゲー�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Game Lift` が有効になっていることを確認します。
-2. [Datadog - Amazon Gamelift インテグレーション][3]をインストールします。
+2. Install the [Datadog - Amazon GameLift integration][3].
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -63,11 +64,11 @@ Amazon GameLift から S3 バケットまたは CloudWatch のいずれかにロ
 
 ### イベント
 
-Amazon Gamelift インテグレーションには、イベントは含まれません。
+The Amazon GameLift integration does not include any events.
 
-### サービスのチェック
+### サービスチェック
 
-Amazon Gamelift インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon GameLift integration does not include any service checks.
 
 ## トラブルシューティング
 

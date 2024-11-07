@@ -6,6 +6,9 @@ aliases:
 - /ja/infrastructure/serverless/
 - /ja/tracing/serverless_functions/datadog_apm
 - /ja/integrations/amazon_lambda/docs.datadoghq.com/serverless/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Serverless
   tag: リリースノート
@@ -22,7 +25,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: サーバーレスモニタリングについて詳しく知ることができるインタラクティブなセッションに参加できます
-kind: ドキュメント
 title: サーバーレス
 ---
 
@@ -31,6 +33,10 @@ title: サーバーレス
 <br/>
 
 <div class="alert alert-info"><a href="https://chat.datadoghq.com/">Datadog Slack コミュニティー</a>の <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> チャンネルで交わされるディスカッションを必ずチェックしましょう。</div>
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+Learn how serverless monitoring enables your teams to stay agile and focus their time on building revenue-generating applications while reducing operational overhead.
+{{< /learning-center-callout >}}
 
 [Datadog サーバーレスモニタリング][1]は、コンピューティングからのリアルタイムメトリクス、ログ、トレースおよび関連するフルマネージド API、キュー、ストリーム、データストアを収集することで、サーバーレスアプリケーションを稼働させるすべてのマネージドサービスに関する完全な可視性を提供します。
 
@@ -48,6 +54,16 @@ Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service
 
 [デプロイ追跡][6]なら、サーバーレスコード、コンフィギュレーション、そしてデプロイメントの変更をメトリクス、トレース、そして関数からのログと関連付け、リアルタイムのインサイトによりこのような変更がアプリケーションの正常性やパフォーマンスに与える影響を確認できます。
 
+### AWS Step Functions
+
+AWS Step Functions は、サーバーレスのオーケストレーションサービスで、開発者は AWS でマルチステップのアプリケーションワークフローを作成し、管理することができます。 
+
+[AWS Step Functions インテグレーション][13]から取得したメトリクスやログを監視し、Serverless アプリビュー内でクラウドネイティブなテレメトリーを表示できます。
+
+[実行トレース][14]でバグやボトルネックを特定できます。ステップ関数のトレースは、Step Function ログから生成でき、ステートマシンの実行パス、各ステップの入出力、ステップの実行時間を含む、詳細な実行情報を提供します。
+
+Step Function の拡張メトリクスは、`aws.states.enhanced` のプレフィックス付きで Datadog に表示され、秒単位の粒度で利用でき、Datadog 内で直接生成されます。
+
 ### Azure App Service
 
 [Datadog の Azure App Service 向け拡張機能][7]は、Azure Web Apps のトレーシングもサポートしています。
@@ -64,7 +80,7 @@ Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service
 
 Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレースもサポートしています。Azure のトレーシング設定について詳しくは、[Azure App Service][7] を参照してください。
 
-### Azure Container Apps
+### Azure コンテナアプリ
 
 Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][9]を通して Container Apps のモニタリングとログ収集を提供しています。
 
@@ -72,7 +88,7 @@ Azure Container Apps は、コンテナベースのアプリケーションを�
 
 ### Google Cloud Run
 
-Google Cloud Run は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバレス機能を監視するには、[Google Cloud Platform インテグレーション][11]を有効にします。
+Google Cloud Run は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバーレス関数を監視するには、[Google Cloud Platform インテグレーション][11]を有効にします。
 
 また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Run アプリケーションをインスツルメントする][12]ソリューションも提供しています。
 
@@ -92,3 +108,5 @@ Google Cloud Run は、単一目的の小規模な関数を作成できる、軽
 [10]: /ja/serverless/azure_container_apps
 [11]: /ja/integrations/google_cloud_platform/
 [12]: /ja/serverless/google_cloud_run
+[13]: /ja/integrations/amazon_step_functions
+[14]: /ja/serverless/step_functions/installation

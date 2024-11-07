@@ -1,6 +1,5 @@
 ---
 title: Manage Monitors
-kind: documentation
 aliases:
     - /monitors/manage_monitor/
 description: "Send notifications to your teams when monitors trigger alerts"
@@ -11,6 +10,9 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
+  tag: "Blog"
+  text: "Best practices for tagging your monitors"
 ---
 
 Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
@@ -30,7 +32,7 @@ After searching, select one or more monitors to update using the checkboxes next
 | Mute       | [Mute][3] the selected monitors for `1h`, `4h`, `12h`, `1d`, `1w`, or `Forever`. |
 | Unmute     | If the selected monitors are muted, unmute them.                                 |
 | Resolve    | [Resolve][4] the alert for the selected monitors.                                |
-| Delete     | Permanently delete the selected monitors.                                        |
+| Delete     | Delete the selected monitors.                                                    |
 | Edit Tags  | Edit the monitor tags for the selected monitors.                                 |
 | Edit Teams | Edit the [teams][5] for the selected monitors.                                  |
 
@@ -66,10 +68,10 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add up t
 
 [1]: https://app.datadoghq.com/monitors/manage
 [2]: /monitors/manage/search/
-[3]: /monitors/manage/status/#mute
-[4]: /monitors/manage/status/#resolve
+[3]: /monitors/status/#mute
+[4]: /monitors/status/#resolve
 [5]: /account_management/teams/
-[6]: /service_management/mobile/#monitors
+[6]: /mobile/#monitors
 [7]: https://apps.apple.com/app/datadog/id1391380318
 [8]: https://play.google.com/store/apps/details?id=com.datadog.app
 [9]: https://app.datadoghq.com/monitors/triggered

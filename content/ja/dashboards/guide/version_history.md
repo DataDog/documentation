@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
   tag: blog
   text: バージョン履歴で Datadog ダッシュボードとノートブックに対する変更を追跡する
-kind: documentation
 title: ダッシュボードのバージョン履歴
 ---
 
@@ -23,9 +22,9 @@ title: ダッシュボードのバージョン履歴
 [監査証跡][1]を有効にすると、バージョン履歴が 30 日から 90 日に延長されます。監査証跡を有効にした後は、既存のすべてのダッシュボードで、30 ～ 90 日前の間に行われたすべての編集を見ることができます。
 
 ## バージョンの確認
-個別のダッシュボードから、ページ右上にあるバージョン履歴のアイコンをクリックすると、Version History サイドパネルが開きます。保持期間内に編集が行われていない場合、バージョン履歴アイコンは無効化された状態になります。
+個々のダッシュボードから、ページ右上の **Configure** をクリックし、**Version History** を選択します。保持期間内に編集がない場合、バージョン履歴は無効になります。
 
-{{< img src="/dashboards/guide/version_history/disabled_version_history_dashboards.png" alt="ダッシュボードでバージョン履歴アイコンが無効化されている様子" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/configure_actions_version_history.png" alt="ダッシュボードの Configure Actions メニューで、バージョン履歴オプションを無効にした様子" style="width:50%;" >}}
 
 Version History サイドパネルでは、各バージョンごとに以下の情報を確認できます。
 - 変更を行った Datadog ユーザー
@@ -40,7 +39,7 @@ Version History サイドパネルから任意のバージョンをクリック�
 ## バージョンの復元
 ダッシュボードを以前のバージョンに復元するには、2 つの方法があります。
 
-{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="画像の説明" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History side panel shows past dashboard versions and ways to restore them." style="width:100%;" >}}
 
 - Version History サイドパネルから復元するバージョンを決め、ユーザープロファイルの右側にあるケバブメニューをクリックし、**Restore this version** を選択します。
 - Version History サイドパネルが開いた際に、ページ上部に **Restore this version** ボタンが表示されます。
@@ -58,8 +57,8 @@ Version History サイドパネルから任意のバージョンをクリック�
 | 監査証跡が**有効**な場合  | 90 日 |
 
 
-[1]:/ja/account_management/audit_trail/
+[1]: /ja/account_management/audit_trail/
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery with Agent v5
-kind: guide
 private: true
 aliases:
   - /agent/faq/agent-5-autodiscovery
@@ -237,7 +236,6 @@ The following Pod annotation defines two templates-equivalent to those from the 
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -260,7 +258,6 @@ If you define pods with Deployments, don't add template annotations to the Deplo
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # Don't add templates here
   name: apache-deployment
 spec:
@@ -335,7 +332,7 @@ The following template variables are handled by the Agent:
   - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks, for example `%%host_bridge%%`, `%%host_swarm%%`, etc; behaves like `%%host%%` if network name specified was not found.
 
 - Container port: `port`
-  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
+  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (For example, 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
   - If your target port is constant, Datadog recommends you directly specify it, without using the `port` variable.
 
@@ -408,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[22]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

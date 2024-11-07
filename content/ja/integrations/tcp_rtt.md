@@ -3,12 +3,12 @@ aliases:
 - /ja/integrations/tcprtt
 categories:
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
 integration_id: tcp-rtt
 integration_title: TCP RTT
 is_public: true
-kind: integration
 name: tcp_rtt
 newhlevel: true
 public_title: Datadog-TCP RTT インテグレーション
@@ -23,7 +23,7 @@ TCP RTT チェックは、Agent のホストと Agent の通信相手のホス�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 このチェックは、発信パケットから対応する TCP 受信確認までの時間を計算するために、PCAP ライブラリで提供されているタイムスタンプを使用します。そのため、PCAP をインストールして構成する必要があります。
 

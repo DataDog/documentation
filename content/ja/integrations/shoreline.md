@@ -1,7 +1,8 @@
 ---
 app_id: shoreline-integration
 app_uuid: 90e1b0ed-0907-4973-929c-7e7f1be0c4f4
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://shoreline.io/
   name: Shoreline.io
@@ -19,10 +20,8 @@ integration_id: shoreline-integration
 integration_title: Shoreline.io
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: shoreline
-oauth: {}
 public_title: Shoreline.io
 short_description: トリガーされたモニターを修復するためのオートメーション構築
 supported_os:
@@ -54,6 +53,7 @@ tile:
   title: Shoreline.io
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,7 +69,7 @@ Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮�
 まずは、[Shoreline][1] でトライアルアカウントを設定してください。
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 以下の手順でインテグレーション構成を行います。
 
@@ -104,9 +104,9 @@ Shoreline で Datadog-Shoreline アプリを構成するには、Datadog の API
 
 アプリの詳細な構成方法については、[Datadog-Shoreline のドキュメント][6]を参照してください。
 
-## サポート
+## Agent
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ## その他の参考資料
 

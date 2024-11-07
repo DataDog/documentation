@@ -1,7 +1,7 @@
 ---
 categories:
-- exceptions
-- notification
+- notifications
+custom_kind: integration
 dependencies: []
 description: 複数のアプリケーションのエラー率を一元的に追跡。
 doc_link: https://docs.datadoghq.com/integrations/bugsnag/
@@ -12,7 +12,6 @@ integration_id: bugsnag
 integration_title: Bugsnag
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: bugsnag
 public_title: Datadog-Bugsnag インテグレーション
@@ -21,6 +20,7 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Bugsnag は、Web およびモバイルアプリケーション用の自動クラッシュ検出プラットフォームをソフトウェアチームに提供します。Bugsnag は、発生したエラーを自動的にキャプチャしてアラートを生成します。Datadog を Bugsnag と統合すると、エラー通知が Datadog のイベントストリームに送信されます。
@@ -37,7 +37,7 @@ Bugsnag は、Web およびモバイルアプリケーション用の自動ク�
 
 インストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 Bugsnag を Datadog と統合するには、以下の手順に従います。
 
@@ -64,7 +64,7 @@ Bugsnag インテグレーションには、メトリクスは含まれません
 
 Bugsnag インテグレーションは、設定された Bugsnag のエラーとアラートを Datadog のイベントストリームにプッシュします。
 
-### サービスのチェック
+### サービスチェック
 
 Bugsnag インテグレーションには、サービスのチェック機能は含まれません。
 

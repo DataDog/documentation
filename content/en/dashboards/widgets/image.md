@@ -1,16 +1,16 @@
 ---
 title: Image Widget
-kind: documentation
+widget_type: image
 description: "Include an image or a gif in your Datadog dashboards."
 aliases:
-    - /graphing/widgets/image/
+- /graphing/widgets/image/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
 ---
 
-The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF, hosted where it can be accessed by URL:
+The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF, hosted where it can be accessed by URL.
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}
 
@@ -26,9 +26,7 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
-
-The dedicated [widget JSON schema definition][2] for the image widget is:
+This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
 
 {{< dashboards-widgets-api >}}
 
@@ -36,5 +34,5 @@ The dedicated [widget JSON schema definition][2] for the image widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/dashboards/
+[1]: /api/latest/dashboards/
 [2]: /dashboards/graphing_json/widget_json/

@@ -9,10 +9,6 @@ further_reading:
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD ソースコード
-kind: documentation
 title: データグラム形式とシェルの使用方法
 ---
 
@@ -27,11 +23,11 @@ title: データグラム形式とシェルの使用方法
 
 | パラメーター                           | 必須 | 説明                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | 〇      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][1]を参照してください。                                                  |
-| `<VALUE>`                           | 〇      | 整数または浮動小数点数。                                                                                                                                           |
-| `<TYPE>`                            | 〇      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][2]を参照してください。                    |
-| `<SAMPLE_RATE>`                     | ✕       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、DISTRIBUTION、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | 文字列のカンマ区切りリスト。キー/値タグにはコロンを使用します（`env:prod`）。タグの定義に関するガイダンスについては、[タグの概要][3]を参照してください。              |
+| `<METRIC_NAME>`                     | はい      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][101]を参照してください。                                                  |
+| `<VALUE>`                           | はい      | 整数または浮動小数点数。                                                                                                                                           |
+| `<TYPE>`                            | はい      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][102]を参照してください。                    |
+| `<SAMPLE_RATE>`                     | いいえ       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、DISTRIBUTION、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | カンマで区切られた文字列のリスト。キー/値タグにはコロンを使用します (`env:prod`)。タグの定義に関するガイダンスについては、[タグの概要][103]を参照してください。              |
 
 以下に、データグラムの例を示します。
 
@@ -70,7 +66,7 @@ Datadog Agent は、コンテナ ID の値を使用して、追加のコンテ�
 
 - `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: Datadog Agent は、`image_name` や `image_tag` などのコンテナタグを `page.views` メトリクスに追加します。
 
-コンテナタグについては、[Kubernetes][4] と [Docker][5] のタグ付けのドキュメントをご覧ください。
+コンテナタグについては、[Kubernetes][104] と [Docker][105] のタグ付けのドキュメントをご覧ください。
 
 ### DogStatsD プロトコル v1.3
 
@@ -88,11 +84,11 @@ Unix のタイムスタンプは、過去の有効な正の数である必要が
 
 - `page.views:15|c|#env:dev|T1656581400`: 2022 年 6 月 30 日午前 9 時 30 分 (UTC) に 15 ページビューが発生したことを示す COUNT
 
-[1]: /ja/metrics/#naming-metrics
-[2]: /ja/metrics/types/
-[3]: /ja/getting_started/tagging/
-[4]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[5]: /ja/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[101]: /ja/metrics/#metric-name
+[102]: /ja/metrics/types/
+[103]: /ja/getting_started/tagging/
+[104]: /ja/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[105]: /ja/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -100,18 +96,18 @@ Unix のタイムスタンプは、過去の有効な正の数である必要が
 
 | パラメーター                            | 必須 | 説明                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `_e`                                 | 〇      | データグラムは `_e` で始まる必要があります。                                                                                     |
-| `<タイトル>`                            | 〇      | イベントのタイトル。                                                                                                       |
-| `<テキスト>`                             | 〇      | イベントテキスト。`\\n` で改行を挿入します。                                                                        |
-| `<TITLE_UTF8_LENGTH>`                | 〇      | UTF-8 でエンコーディングされた `<TITLE>` 長 (バイト単位)                                                                              |
-| `<TEXT_UTF8_LENGTH>`                 | 〇      | UTF-8 でエンコーディングされた `<TEXT>` 長 (バイト単位)                                                                               |
-| `d:<TIMESTAMP>`                      | ✕       | イベントにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                         |
-| `h:<HOSTNAME>`                       | ✕       | イベントにホスト名を追加します。デフォルトはありません。                                                                               |
-| `k:<集計キー>`                | ✕       | 同じキーを持つ他のイベントとグループ化するための集計キーを追加します。デフォルトはありません。                              |
-| `p:<PRIORITY>`                       | ✕       | `normal` または `low` に設定します。デフォルトは `normal` です。                                                                            |
-| `s:<ソースタイプ名>`               | ✕       | イベントにソースタイプを追加します。デフォルトはありません。                                                                            |
-| `t:<ALERT_TYPE>`                     | ✕       | `error`、`warning`、`info`、`success` のいずれかに設定します。デフォルトは `info` です。                                                        |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | タグ内のコロンは、タグリスト文字列の一部です。他のパラメーターで使用されるコロンのようにパースには使用されません。デフォルトはありません。 |
+| `_e`                                 | はい      | データグラムは `_e` で始まる必要があります。                                                                                     |
+| `<タイトル>`                            | はい      | イベントのタイトル。                                                                                                       |
+| `<テキスト>`                             | はい      | イベントテキスト。`\\n` で改行を挿入します。                                                                        |
+| `<TITLE_UTF8_LENGTH>`                | はい      | UTF-8 でエンコーディングされた `<TITLE>` 長 (バイト単位)                                                                              |
+| `<TEXT_UTF8_LENGTH>`                 | はい      | UTF-8 でエンコーディングされた `<TEXT>` 長 (バイト単位)                                                                               |
+| `d:<TIMESTAMP>`                      | いいえ       | イベントにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                         |
+| `h:<HOSTNAME>`                       | いいえ       | イベントにホスト名を追加します。デフォルトは Datadog Agent インスタンスです。                                                                               |
+| `k:<集計キー>`                | いいえ       | 同じキーを持つ他のイベントとグループ化するための集計キーを追加します。デフォルトはありません。                              |
+| `p:<PRIORITY>`                       | いいえ       | `normal` または `low` に設定します。デフォルトは `normal` です。                                                                            |
+| `s:<ソースタイプ名>`               | いいえ       | イベントにソースタイプを追加します。デフォルトはありません。                                                                            |
+| `t:<ALERT_TYPE>`                     | いいえ       | `error`、`warning`、`info`、`success` のいずれかに設定します。デフォルトは `info` です。                                                        |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | タグ内のコロンは、タグリスト文字列の一部です。他のパラメーターで使用されるコロンのようにパースには使用されません。デフォルトはありません。 |
 
 以下に、データグラムの例を示します。
 
@@ -130,13 +126,13 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 | パラメーター                            | 必須 | 説明                                                                                                                             |
 | ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `_sc`                                | 〇      | データグラムは `_sc` で始まる必要があります。                                                                                                     |
-| `<NAME>`                             | 〇      | サービスチェック名。                                                                                                                 |
-| `<STATUS>`                           | 〇      | チェックステータスに対応する整数値 (OK = `0`、WARNING = `1`、CRITICAL = `2`、UNKNOWN = `3`)                                  |
-| `d:<TIMESTAMP>`                      | ✕       | チェックにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                                          |
-| `h:<HOSTNAME>`                       | ✕       | イベントにホスト名を追加します（デフォルトはありません）。                                                                                               |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | イベントのタグを設定します。カンマで区切られた文字列のリスト（デフォルトはありません）。                                                           |
-| `m:<SERVICE_CHECK_MESSAGE>`          | ✕       | サービスチェックの現在の状態を説明するメッセージ。このフィールドは、メタデータフィールドの最後に置く必要があります（デフォルトはありません）。 |
+| `_sc`                                | はい      | データグラムは `_sc` で始まる必要があります。                                                                                                     |
+| `<NAME>`                             | はい      | サービスチェック名。                                                                                                                 |
+| `<STATUS>`                           | はい      | チェックステータスに対応する整数値 (OK = `0`、WARNING = `1`、CRITICAL = `2`、UNKNOWN = `3`)                                  |
+| `d:<TIMESTAMP>`                      | いいえ       | チェックにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                                          |
+| `h:<HOSTNAME>`                       | いいえ       | イベントにホスト名を追加します（デフォルトはありません）。                                                                                               |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | イベントのタグを設定します。カンマで区切られた文字列のリスト（デフォルトはありません）。                                                           |
+| `m:<SERVICE_CHECK_MESSAGE>`          | いいえ       | サービスチェックの現在の状態を説明するメッセージ。このフィールドは、メタデータフィールドの最後に置く必要があります (デフォルトはありません)。 |
 
 以下に、データグラムの例を示します。
 
@@ -200,7 +196,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}

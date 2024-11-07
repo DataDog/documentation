@@ -1,6 +1,5 @@
 ---
 title: Serverless
-kind: documentation
 aliases:
   - /graphing/infrastructure/cloudfunctions
   - /graphing/infrastructure/serverless_functions
@@ -35,6 +34,10 @@ cascade:
  
 <div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+Learn how serverless monitoring enables your teams to stay agile and focus their time on building revenue-generating applications while reducing operational overhead.
+{{< /learning-center-callout >}}
+
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
 Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), and [Google Cloud Run](#google-cloud-run).
@@ -50,6 +53,16 @@ You can send [custom metrics][4] from a Lambda function by generating metrics fr
 With [Distributed Tracing][5], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 
 [Deployment Tracking][6] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
+
+### AWS Step Functions
+
+AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows in AWS. 
+
+Monitor metrics and logs from the [AWS Step Functions Integration][13] to view cloud-native telemetry within the Serverless app view.
+
+Identify bugs and bottlenecks with [execution traces][14]. Traces for step functions can be generated from Step Function logs and provide granular execution information, including the state machine execution path, inputs and outputs for each step, and step execution length.
+
+Enhanced Step Function metrics, which appear in Datadog with the prefix `aws.states.enhanced`, are available at second granularity and generated directly within Datadog.
 
 ### Azure App Service
 
@@ -95,3 +108,5 @@ Datadog also provides a solution, now in public beta, for [instrumenting your Cl
 [10]: /serverless/azure_container_apps
 [11]: /integrations/google_cloud_platform/
 [12]: /serverless/google_cloud_run
+[13]: /integrations/amazon_step_functions
+[14]: /serverless/step_functions/installation

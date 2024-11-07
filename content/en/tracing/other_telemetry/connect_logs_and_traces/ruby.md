@@ -1,6 +1,5 @@
 ---
-title: Connecting Ruby Logs and Traces
-kind: documentation
+title: Correlating Ruby Logs and Traces
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
@@ -24,7 +23,7 @@ In many cases, such as logging, it may be useful to correlate trace IDs to other
 
 #### Automatic injection
 
-For Rails applications using the default logger (`ActiveSupport::TaggedLogging`), `lograge`, or `semantic_logger`, trace correlation injection is automatically configured.
+For Rails applications using the default logger (`ActiveSupport::TaggedLogging`), `lograge`, or `semantic_logger`, trace ID injection is automatically configured. You need to add a [trace remapper][1] to connect the relevant logs with the traces.
 
 #### Manual injection
 
@@ -71,4 +70,6 @@ Datadog::Tracing.trace('my.operation') { logger.warn('This is a traced operation
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/log_configuration/processors/?tab=ui#trace-remapper
 

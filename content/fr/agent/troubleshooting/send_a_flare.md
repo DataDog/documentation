@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - agent flare
 aliases:
 - /fr/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
@@ -8,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: Dépannage de l'Agent
   text: Obtenir le statut d'un check de l'Agent
-kind: documentation
 title: Commande flare de l'Agent
 ---
 
@@ -100,7 +102,7 @@ aws ecs execute-command --cluster <NOM_CLUSTER> \
 
 [1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#agent-v6
-[3]: /fr/agent/faq/heroku-troubleshooting/#send-a-flare
+[3]: /fr/agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
@@ -127,9 +129,10 @@ aws ecs execute-command --cluster <NOM_CLUSTER> \
 
 {{% tab "Agent de cluster" %}}
 
-| Plateforme   | Commande                                                             |
-|------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <NOM_POD> -it datadog-cluster-agent flare <ID_TICKET>` |
+| Plateforme      | Commande                                                                     |
+|---------------|-----------------------------------------------------------------------------|
+| Kubernetes    | `kubectl exec <NOM_POD_CLUSTER> -it datadog-cluster-agent flare <ID_TICKET>` |
+| Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <ID_TICKET>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -142,7 +145,7 @@ Récupérez manuellement ce fichier et envoyez-le à l'équipe d'assistance si l
 ### Kubernetes
 Pour récupérer le fichier d'archive dans Kubernetes, utilisez la commande kubectl :
 ```
-kubectl cp datadog-<nom-pod>:/tmp/datadog-agent-<date-du-flare>.zip flare.zip
+kubectl cp datadog-<nom-pod>:tmp/datadog-agent-<date-du-flare>.zip flare.zip -c agent
 ```
 
 ## Pour aller plus loin

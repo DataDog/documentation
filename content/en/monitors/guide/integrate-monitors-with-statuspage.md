@@ -1,6 +1,5 @@
 ---
 title: Integrating Monitors With Statuspage
-kind: guide
 description: Learn how to integrate Datadog monitors with Atlassian Statuspage.
 further_reading:
 - link: '/integrations/statuspage'
@@ -45,7 +44,7 @@ To create a [metric monitor][8] that triggers on Statuspage alerts:
 1. Navigate to [**Monitors** > **New Monitor**][9] and click **Metric**.
 2. See the [Metric Monitor documentation][8] to select a detection method, define your metric(s), set alerting conditions, and configure advanced monitor options. 
 3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
-4. In the **Notify your team** section, add the generated email address such as `@custom-statuspage-email@notifications.statuspage.io` in the message. This automatically populates the `Notify your services and your team members` field above **Renotification**.
+4. In the **Configure notifications and automations** section, add the generated email address such as `@custom-statuspage-email@notifications.statuspage.io` in the message. This automatically populates the `Notify your services and your team members` field above **Renotification**.
 5. Fill out the monitor notification section and add a summary in the monitor name such as `Shopist Checkout Functionality`.
 6. Set the monitor renotification conditions and add tags such as `service:status-page`.
 7. Select a team and assign a priority to the monitor.

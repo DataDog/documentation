@@ -5,7 +5,6 @@ further_reading:
 - link: /monitors/types/metric/
   tag: 설명서
   text: 메트릭 모니터
-kind: 가이드
 title: 복구 기준치
 ---
 
@@ -49,7 +48,7 @@ title: 복구 기준치
               }
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,8 +1,5 @@
-{{/* Scopable columns have been removed. */}}
-
 {{ $permission_group := .group }}
 {{ $permissions_data := .data }}
-
 
 {{ if ne $permissions_data nil }}
   <table>
@@ -10,6 +7,7 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Default Role</th>
       </tr>
     </thead>
     <tbody>
@@ -19,10 +17,21 @@
           <td>
             <code>{{- .attributes.name -}}</code>
           </td>
-          <td>{{- .attributes.description -}}</td>
+          <td>
+            {{- if ne .attributes.description_link nil -}}
+              <a href="{{- .attributes.description_link -}}" target="_blank">
+                {{- .attributes.description -}}
+              </a>
+            {{- else -}}
+              {{- .attributes.description -}}
+            {{- end -}}
+          </td>
+          <td class="text-nowrap">
+            {{- .role_name | default "None" -}}
+          </td>
         </tr>
         {{- end -}}
-      {{ end }}
+      {{- end -}}
     </tbody>
   </table>
 
@@ -34,6 +43,7 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Default Role</th>
       </tr>
     </thead>
     <tbody>
@@ -42,12 +52,14 @@
           <a href="/logs/guide/logs-rbac-permissions/#logs_live_tail"><code>logs_live_tail</code></a>
         </td>
         <td>Access the live tail feature</td>
+        <td class="text-nowrap">Datadog Read Only Role</td>
       </tr>
       <tr>
         <td>
           <a href="/logs/guide/logs-rbac-permissions/#logs_read_index_data"><code>logs_read_index_data</code></a>
         </td>
         <td>Read a subset log data (index based)</td>
+        <td class="text-nowrap">Datadog Read Only Role</td>
       </tr>
     </tbody>
   </table>

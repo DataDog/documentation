@@ -1,16 +1,14 @@
 ---
 aliases:
 - /fr/synthetics/security/
-- /fr/security/synthetics/
 further_reading:
 - link: /data_security/
   tag: Documentation
   text: Consulter les principales catégories de données envoyées à Datadog
-kind: documentation
 title: Sécurité des données liées à la surveillance Synthetic
 ---
 
-<div class="alert alert-info">Cette page est consacrée à la sécurité des données transmises à Datadog. Si vous cherchez des fonctionnalités et solutions relatives à la sécurité des applications et du cloud, consultez la section <a href="/security_platform/" target="_blank">Plateforme de sécurité</a>.</div>
+<div class="alert alert-info">Cette page est consacrée à la sécurité des données transmises à Datadog. Si vous cherchez des fonctionnalités et solutions relatives à la sécurité des applications et du cloud, consultez la section <a href="/security/" target="_blank">Sécurité</a>.</div>
 
 La [solution de surveillance Synthetic][2] vous permet d'effectuer un suivi proactif des performances de vos systèmes et de vos applications, à l'aide de requêtes et de transactions commerciales fictives. Les tests Synthetic peuvent être initiés depuis n'importe quel pays, à partir d'emplacements gérés ou privés.
 
@@ -32,9 +30,9 @@ La [solution de surveillance Synthetic][2] vous permet d'effectuer un suivi proa
 
 Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources des tests Browser.
 
-{{< site-region region="us,us3,us5,gov" >}}
+{{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Stockage **: chiffrement pour les [compartiments AWS S3][1].
+* **Stockage **: chiffrement pour les [compartiments Amazon S3][1].
 * **Transport **: chiffrement pendant le transfert à l'aide du processus [AWS Signature version 4 pour S3][2].
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
@@ -74,7 +72,7 @@ Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources
 
 Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources des tests Browser.
 
-{{< site-region region="us,us3,us5,gov" >}}
+{{< site-region region="us,us3,us5,gov,ap1" >}}
 
 * **Stockage** : chiffrement pour [AWS][1].
 * **Transport** : transport HTTPS entre l'emplacement privé et Datadog (authentification par clé d'API). Avant d'être stockées, les données transférées par Datadog sont chiffrées à l'aide du [processus AWS Signature Version 4 pour S3][2].
@@ -117,5 +115,5 @@ Modifiez les options de confidentialité des [tests API][6], [API à plusieurs �
 [4]: /fr/synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /fr/account_management/rbac/permissions/#synthetic-monitoring
 [6]: /fr/synthetics/api_tests/http_tests?tab=privacy#define-request
-[7]: /fr/synthetics/multistep?tab=privacy#define-the-request 
+[7]: /fr/synthetics/multistep?tab=privacy#define-the-request
 [8]: /fr/synthetics/browser_tests/?tab=privacy#test-configuration

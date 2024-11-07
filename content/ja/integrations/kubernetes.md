@@ -9,6 +9,7 @@ categories:
 - containers
 - orchestration
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md
 description: Kubernetes クラスターとそこで実行されているアプリケーションの状態を監視します。Pod スケジュールイベントをキャプチャし、Kubelets
@@ -21,11 +22,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-kubernetes-era
   tag: ブログ
   text: Kubernetes 時代のモニタリング
+- link: https://www.datadoghq.com/blog/monitor-kubernetes-events/
+  tag: ブログ
+  text: Kubernetes イベントのトラブルシューティング
 git_integration_title: Kubernetes
 integration_id: kubernetes
 integration_title: Kubernetes
 is_public: true
-kind: インテグレーション
 name: Kubernetes
 newhlevel: true
 public_title: Datadog-Kubernetes インテグレーション
@@ -37,14 +40,14 @@ updated_for_agent: 6.0
 
 ## 概要
 
-Kubernetes サービスからリアルタイムでメトリクスとログを取得するには
+Kubernetes からメトリクスとログをリアルタイムで取得し、次のことが可能になります。
 
-- Kubernetes の状態を視覚化して監視します。
-- Kubernetes フェイルオーバーとイベントについて通知されます。
+- Kubernetes の状態を視覚化および監視できます。
+- Kubernetes のフェイルオーバーとイベントの通知を受けることができます。
 
 ## セットアップ
 
-For Kubernetes の場合は、Agent をクラスターでコンテナとして実行することをおすすめします。
+Kubernetes の場合、Datadog は Agent をクラスター内のコンテナとして実行することを推奨します。
 
 **[Kubernetes クラスターで Agent をデプロイするには、別途 Kubernetes ドキュメントを参照してください][1]**。
 

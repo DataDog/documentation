@@ -1,6 +1,5 @@
 ---
 title: Visualizing OTLP Histograms as heatmaps
-kind: guide
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
@@ -36,7 +35,7 @@ For metrics coming from other sources, ensure if possible that these come as del
 Set the histogram mode and enable aggregation metrics on your Datadog Exporter or Datadog Agent.
 
 {{< tabs >}}
-{{% tab "Datadog Exporter (OTel Collector)" %}}
+{{% tab "Datadog Exporter (OpenTelemetry Collector)" %}}
 
 In the `collector.yaml` file for the Datadog Exporter, configure the histogram mode to `counters` and enable aggregation metrics with the `send_aggregation_metrics` flag.
 

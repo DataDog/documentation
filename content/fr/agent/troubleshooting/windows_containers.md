@@ -1,6 +1,4 @@
 ---
-title: Problèmes avec les conteneurs Windows
-kind: documentation
 further_reading:
 - link: /agent/docker/?tab=windows
   tag: Documentation
@@ -11,6 +9,7 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Dépannage de l'Agent
   text: Dépannage de l'Agent
+title: Problèmes avec les conteneurs Windows
 ---
 
 Cette page décrit les problèmes connus et non résolus pouvant affecter la surveillance d'applications Windows conteneurisées.
@@ -19,7 +18,12 @@ Cette page décrit les problèmes connus et non résolus pouvant affecter la sur
 
 La surveillance d'applications Windows conteneurisées nécessite l'Agent Datadog 7.19+.
 
-Les versions du système d'exploitation prises en charge sont Windows Server 2019 (LTSC) et Windows Server version 1909 (SAC).
+Voici la liste des versions des systèmes d'exploitation prises en charge :
+- Windows Server 2019 (LTSC/1809)
+- Windows Server 2019 1909 (jusqu'à la version 7.39 de l'Agent ; les dernières versions ne sont plus prises en charge par Microsoft)
+- Windows Server 2019 2004 ou 20H1 (jusqu'à la version 7.39 de l'Agent ; les dernières versions ne sont plus prises en charge par Microsoft)
+- Windows Server 2019 20H2 (de la version 7.33 à 7.39 de l'Agent ; les dernières versions ne sont plus prises en charge par Microsoft)
+- Windows Server 2022 LTSC (Agent 7.34+)
 
 Le mode d'isolation Hyper-V n'est pas pris en charge.
 
@@ -27,15 +31,15 @@ Les métriques de host relatives au disque, aux E/S et au réseau sont désactiv
 
 ## Problèmes avec Docker
 
-Les Live Processes ne s'affichent pas dans les conteneurs (à l'exception de l'Agent Datadog).
+Les live processes ne s'affichent pas dans les conteneurs (sauf pour l'Agent Datadog).
 
 ## Problèmes avec Kubernetes
 
-Les Live Processes ne s'affichent pas dans les conteneurs (à l'exception de l'Agent Datadog).
+Les live processes ne s'affichent pas dans les conteneurs (sauf pour l'Agent Datadog).
 
 ### Clusters mixte (Linux + Windows)
 
-Pour déployer l'Agent Datadog sur un cluster mixte, il est conseillé d'effectuer deux installations de notre chart Helm avec un `targetSystem` différent.
+Pour déployer l'Agent Datadog sur un cluster mixte, il est conseillé d'effectuer deux installations du chart Helm avec des `targetSystem` différents.
 
 L'Agent Datadog utilise un `nodeSelector` pour sélectionner automatiquement les nœuds Linux ou Windows en fonction du `targetSystem`.
 
@@ -56,6 +60,46 @@ kube-state-metrics:
 * Déployez Kube State Metrics vous-même séparément en définissant `datadog.kubeStateMetricsEnabled` sur `false`.
 
 **Remarque** : lorsque vous utilisez deux installations de Datadog (une avec `targetSystem: linux` et une autre avec `targetSystem: windows`), assurez-vous que le paramètre `datadog.kubeStateMetricsEnabled` est défini sur `false` pour la deuxième installation afin d'empêcher le déploiement de deux instances de Kube State Metrics.
+
+#### Clusters mixtes avec l'Agent de cluster Datadog
+
+Depuis la version 1.18 de l'Agent de cluster, les configurations reposant sur des clusters mixtes sont prises en charge.
+
+Utilisez le fichier `values.yaml` suivant pour configurer les communications entre les Agents déployés sur les nœuds Windows et l'Agent de cluster.
+
+```yaml
+targetSystem: windows
+existingClusterAgent:
+  join: true
+  serviceName: "<NOM_SERVICE_EXISTANT_AGENT_CLUSTER_DATADOG>" # provenant du premier chart Helm Datadog
+  tokenSecretName: "<NOM_SECRET_EXISTANT_AGENT_CLUSTER_DATADOG>" # provenant du premier chart Helm Datadog
+
+# Désactiver le déploiement de datadogMetrics, car il est déjà réalisé par le premier chart
+datadog-crds:
+  crds:
+    datadogMetrics: false
+# Désactiver le déploiement de kube-state-metrics 
+datadog:
+  kubeStateMetricsEnabled: false
+```
+
+#### Options de configuration limitées pour les déploiements Windows
+
+La liste suivante répertorie les options de configuration qui ne sont **pas** disponibles sous Windows :
+
+| Paramètre                      | Raison |
+| --- | ----------- |
+| `datadog.dogstatsd.useHostPID` |  PID de host incompatible avec les conteneurs Windows |
+| `datadog.dogstatsd.useSocketVolume` | Sockets Unix incompatibles avec Windows |
+| `datadog.dogstatsd.socketPath` |  Sockets Unix incompatibles avec Windows |
+| `datadog.processAgent.processCollection` |  Impossible d'accéder aux processus des hosts et des autres conteneurs |
+| `datadog.systemProbe.seccomp` | System probe indisponible sous Windows |
+| `datadog.systemProbe.seccompRoot` | System probe indisponible sous Windows |
+| `datadog.systemProbe.debugPort` | System probe indisponible sous Windows |
+| `datadog.systemProbe.enableConntrack` | System probe indisponible sous Windows |
+| `datadog.systemProbe.bpfDebug` |  System probe indisponible sous Windows |
+| `datadog.systemProbe.apparmor` |  System probe indisponible sous Windows |
+| `agents.useHostNetwork` | Réseau host incompatible avec les conteneurs Windows |
 
 ### HostPort pour l'APM ou DogStatsD
 

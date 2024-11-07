@@ -1,6 +1,9 @@
 ---
+algolia:
+  tags:
+  - synthetics
 further_reading:
-- link: https://learn.datadoghq.com/course/view.php?id=39
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Centre d'apprentissage
   text: Présentation des tests Synthetic
 - link: /synthetics/api_tests
@@ -15,10 +18,13 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: En savoir plus sur les emplacements privés
-- link: /synthetics/cicd_integrations
+- link: /continuous_testing/cicd_integrations
   tag: Documentation
-  text: En savoir plus sur les tests Synthetic sur les pipelines de CI/CD
-kind: documentation
+  text: Découvrir comment exécuter des tests Synthetic dans un pipeline de CI
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour améliorer vos capacités de testing
+    Synthetic
 title: Débuter avec la surveillance Synthetic
 ---
 

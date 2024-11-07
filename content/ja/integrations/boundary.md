@@ -5,6 +5,7 @@ assets:
   dashboards:
     Boundary Overview: assets/dashboards/boundary_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: boundary.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10280
     source_type_name: Boundary
   monitors:
     '[Boundary] High active connections': assets/monitors/active_connections.json
@@ -26,6 +28,7 @@ author:
 categories:
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/boundary/README.md
 display_on_public_website: true
@@ -33,12 +36,10 @@ draft: false
 git_integration_title: boundary
 integration_id: boundary
 integration_title: Boundary
-integration_version: 1.2.0
+integration_version: 2.2.3
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: boundary
-oauth: {}
 public_title: Boundary
 short_description: Boundary コントローラーとワーカーを監視します。
 supported_os:
@@ -53,6 +54,7 @@ tile:
   - Supported OS::macOS
   - Category::Configuration & Deployment
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Boundary コントローラーとワーカーを監視します。
   media: []
@@ -61,6 +63,7 @@ tile:
   title: Boundary
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -71,12 +74,12 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Boundary チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### リスナー
 
@@ -133,9 +136,28 @@ controller {
 
 Boundary インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "boundary" >}}
 
+
+### ログ収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. To start collecting your Boundary logs, add this configuration block to your `boundary.d/conf.yaml` file:
+
+    ```yaml
+    logs:
+       - type: file
+         source: boundary
+         path: /var/log/boundary/events.ndjson
+    ```
+
+    Change the `path` parameter value based on your environment. See the [sample `boundary.d/conf.yaml` file][4] for all available configuration options.
 
 ## トラブルシューティング
 
@@ -143,7 +165,7 @@ Boundary インテグレーションには、イベントは含まれません�
 
 [1]: https://www.boundaryproject.io
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/boundary/datadog_checks/boundary/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

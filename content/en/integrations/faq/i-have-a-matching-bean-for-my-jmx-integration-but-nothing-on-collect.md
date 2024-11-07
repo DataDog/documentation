@@ -1,6 +1,6 @@
 ---
 title: I Have a Matching Bean for my JMX integration but nothing on Collect !
-kind: faq
+
 ---
 
 Trouble setting up your JMX integration ? Here are a few great articles to get you started :

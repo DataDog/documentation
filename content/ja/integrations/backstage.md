@@ -3,6 +3,7 @@ app_id: backstage
 app_uuid: 2b89148d-0938-46fc-a9dc-fd8a45e583a9
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: backstage.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10281
     source_type_name: backstage
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: oss@roadie.io
 categories:
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/backstage/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: backstage
 integration_title: Backstage
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: backstage
-oauth: {}
 public_title: Backstage
 short_description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
   media: []
@@ -54,6 +56,7 @@ tile:
   title: Backstage
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -96,7 +99,7 @@ Backstage インスタンスの Overview タブを開き、Datadog のダッシ�
 
 Backstage インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Backstage インテグレーションには、サービスのチェック機能は含まれません。
 

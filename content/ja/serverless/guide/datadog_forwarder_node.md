@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Datadog Forwarder を使用した Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 
@@ -13,7 +12,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-## コンフィギュレーション
+## 構成
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -22,7 +21,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 CI/CD パイプラインにコマンドを追加してすべてのサーバーレスアプリケーションにインスツルメンテーションを有効化することも可能です。Datadog CLI コマンドによる変更が上書きされないよう、通常のサーバーレスアプリケーションのデプロイ*後*にコマンドを実行します。
 
-### Install
+### インストール
 
 NPM または Yarn を使用して Datadog CLI をインストールします。
 
@@ -53,38 +52,22 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
 ```
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
 Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
 
 [CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
+
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 [Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][6]に追加する必要があります。
 
 Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
 
@@ -107,17 +90,17 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 **注**: Lambda 関数が Datadog のトレーシングライブラリと　[Webpack][5] を同時に使用している場合は、これらの[追加のコンフィギュレーションステップ][4]に従ってください。
 
-
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [4]: /ja/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
 [Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-### Install
+### インストール
 
 [AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに一度だけマクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
@@ -150,23 +133,14 @@ Transform:
 - `<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
 - `<SERVICE>` と `<ENV>` をサービスと環境の値に置き換えます。
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加する必要があります。
 
 [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -176,7 +150,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 - Lambda 関数からのトレースおよびカスタムメトリクスの収集を有効化。
 - Datadog Forwarder から Lambda 関数ロググループへのサブスクリプションを管理。
 
-### Install
+### インストール
 
 CDK プロジェクトで以下の Yarn または NPM コマンドを実行し、Datadog CDK Constructs ライブラリをインストールします。
 
@@ -215,27 +189,18 @@ class CdkStack extends cdk.Stack {
 - `<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
 - `<SERVICE>` と `<ENV>` をサービスと環境の値に置き換えます。
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
 
 さらに詳しい情報や、追加パラメーターについては、[Datadog CDK NPM ページ][1]をご覧ください。
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
-### Install
+### インストール
 
 Lambda 関数をコンテナイメージとしてデプロイする場合は、Datadog Lambda ライブラリをレイヤーとして使用できません。代わりに、Datadog Lambda ライブラリを、イメージ内の関数の依存関係としてインストールする必要があります。Datadog トレーシングを使用している場合は、`dd-trace` もインストールする必要があります。
 
@@ -277,7 +242,7 @@ yarn add datadog-lambda-js dd-trace
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+### インストール
 
 Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケージとしてインポートすることができます。
 
@@ -285,41 +250,24 @@ Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケ�
 
 #### レイヤーの使用
 
-以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][8]します。
 
 ```
-# us,us3,us5,eu リージョンの場合
+# us、us3、us5、eu リージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# us-gov リージョンの場合
+# 米国政府リージョンの場合
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 
-# ap1 リージョンの場合
-arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-使用できる `RUNTIME` オプションは、`Node12-x`、`Node14-x`、`Node16-x` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
+利用可能な `RUNTIME` オプションは {{< latest-lambda-layer-version layer="node-versions" >}} です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
-```
-
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加する必要があります。
 
 #### パッケージの使用
 
@@ -356,13 +304,15 @@ yarn add datadog-lambda-js
 1. [まだの場合は、Datadog Forwarder をインストールします][6]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][7]。
 
-
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: /ja/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
 {{% /tab %}}
 {{< /tabs >}}
 

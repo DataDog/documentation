@@ -3,7 +3,6 @@ aliases:
 - /ja/libraries/
 - /ja/developers/faq/monitoring-akka/
 - /ja/developers/libraries/
-kind: documentation
 title: ライブラリ
 ---
 
@@ -86,16 +85,12 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][34]を参照してください。
 
-* [Oz][36] による Nodejs 版 [Heroku Datadog ログドレイン][35]
+* [Oz][36] による Node.js 版 [Heroku Datadog ログドレイン][35]
 * [Apiary][38] による Go 版 [Heroku Datadog ログドレイン][37]
 
 Heroku で PHP トレーサーやプロファイラーを使用するには、以下のビルドパックを使用します。
 
 * [SpeedCurve][66] によって保守されている [Heroku Datadog PHP Tracer and Profiler Buildpack][65]。
-
-### Jira
-
-Jira にデータをポーリングし、Datadog にメトリクスとしてアップロードするための[ツール][39]です。
 
 ### K6
 
@@ -121,7 +116,6 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 
 ### OpenVPN
 
-* OpenVPN [帯域幅使用量][50]とアクティブな接続の数を Datadog に送信します。
 * OpenVPN [ライセンス情報][51]を Datadog に送信します。
 
 ### Phusion Passenger
@@ -131,6 +125,9 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 ### Pid-stats
 
 この[ライブラリ][54]を使用すると、pid ファイルを指定して StatsD からプロセス情報を生成できます。これは [GitterHQ][55] によって作成されました。
+
+### Pulumi
+Pulumi 用の Datadog [リソースプロバイダー][67]を使用すると、Datadog リソースを構成することができます。
 
 ### SaltStack
 
@@ -193,11 +190,10 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [31]: https://github.com/wimactel
 [34]: /ja/logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://web.oz.com/
+[36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://bitbucket.org/atlassian/jiradog/src/master/
-[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd
@@ -207,7 +203,6 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp
 [49]: https://www.dailymotion.com/us
-[50]: https://github.com/byronwolfman/dd-openvpn
 [51]: https://github.com/denniswebb/datadog-openvpn
 [52]: https://github.com/Sjeanpierre/passenger-datadog-monitor
 [53]: https://github.com/Sjeanpierre
@@ -224,3 +219,4 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [64]: mailto:opensource@datadoghq.com
 [65]: https://github.com/SpeedCurve-Metrics/heroku-buildpack-php-ddtrace
 [66]: https://www.speedcurve.com/
+[67]: https://github.com/pulumi/pulumi-datadog

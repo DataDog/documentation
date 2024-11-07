@@ -4,7 +4,8 @@ aliases:
 categories:
 - azure
 - クラウド
-- data store
+- data stores
+custom_kind: integration
 dependencies: []
 description: Azure Data Lake Analytics のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
@@ -15,7 +16,6 @@ integration_id: azure-datalakeanalytics
 integration_title: Microsoft Azure Data Lake Analytics
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_data_lake_analytics
 public_title: Datadog-Microsoft Azure Data Lake Analytics インテグレーション
@@ -23,6 +23,7 @@ short_description: Azure Data Lake Analytics のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Data Lake Analytics は、ビッグデータを簡略化するオンデマンド分析ジョブサービスです。
@@ -31,7 +32,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Analytics �
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
@@ -45,7 +46,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Analytics �
 
 Azure Data Lake Analytics インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Data Lake Analytics インテグレーションには、サービスのチェック機能は含まれません。
 

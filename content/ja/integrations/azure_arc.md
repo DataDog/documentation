@@ -3,6 +3,7 @@ aliases: []
 categories:
 - クラウド
 - azure
+custom_kind: integration
 dependencies: []
 description: 主要な Azure Arc メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_arc/
@@ -17,7 +18,6 @@ integration_id: azure-arc
 integration_title: Microsoft Azure Arc
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: azure_arc
 public_title: Datadog-Microsoft Azure Arc インテグレーション
@@ -25,6 +25,7 @@ short_description: 主要な Azure Arc メトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Arc は、Azure プラットフォームを拡張するブリッジであり、データセンター間、エッジ、マルチクラウド環境で実行できる柔軟性を備えたアプリケーションやサービスの構築を支援します。
@@ -40,7 +41,7 @@ Azure Arc インテグレーションを使用すると、以下のことが可�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
@@ -54,7 +55,7 @@ Azure Arc インテグレーションを使用すると、以下のことが可�
 
 Azure Arc インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Arc インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -1,6 +1,5 @@
 ---
 title: Version History for Dashboards
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -23,9 +22,9 @@ All dashboards retain 30 days worth of version history by default. In order to s
 With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing dashboards. 
 
 ## View versions
-From an individual dashboard, click on the version history icon in the top right of the page to open the Version History side panel. If there are no edits within the retention period, the Version History icon is disabled.
+From an individual dashboard, click **Configure** on the top right of the page and select **Version History**. If there are no edits within the retention period, Version History is disabled.
 
-{{< img src="/dashboards/guide/version_history/disabled_version_history_dashboards.png" alt="Disabled version history icon in dashboards" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/configure_actions_version_history.png" alt="Disabled version history option in the dashboard Configure Actions menu" style="width:50%;" >}}
 
 In the Version History side panel, for each version you can see:
 - Which Datadog user made the change
@@ -40,7 +39,7 @@ From the Version History side panel, click on a version to preview what your das
 ## Restore a version
 There are two ways you can restore your dashboard to a previous version.
 
-{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History side panel shows past dashboard versions and ways to restore them." style="width:100%;" >}}
 
 - From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this version**.
 - When the Version History side panel opens up, a button appears at the top of the page to **Restore this version**.
@@ -58,7 +57,7 @@ If you do not want to change your current dashboard but you'd like to create a c
 | Audit Trail **Enabled**  | 90 days |
 
 
-[1]:/account_management/audit_trail/
+[1]: /account_management/audit_trail/
 
 ## Further reading
 

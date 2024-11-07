@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Control Plane Monitoring
-kind: documentation
 aliases:
 - /agent/kubernetes/control_plane
 further_reading:
@@ -51,49 +50,9 @@ The API server integration is automatically configured. The Datadog Agent discov
 By providing read access to the Etcd certificates located on the host, the Datadog Agent check can communicate with Etcd and start collecting Etcd metrics.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-  ignoreAutoConfig:
-  - etcd
-  confd:
-    etcd.yaml: |-
-      ad_identifiers:
-        - etcd
-      instances:
-        - prometheus_url: https://%%host%%:2379/metrics
-          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
-          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
-          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-agents:
-  volumes:
-    - hostPath:
-        path: /etc/kubernetes/pki/etcd
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/kubernetes/pki/etcd
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/master
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -149,27 +108,12 @@ data:
         tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
         tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
         tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{< /tabs >}}
-
-### Controller Manager and Scheduler
-
-#### Insecure ports
-
-If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
-
-#### Secure ports
-
-Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
-
-{{< tabs >}}
 {{% tab "Helm" %}}
 
-Custom `values.yaml`:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -178,8 +122,6 @@ datadog:
     tlsVerify: false
   ignoreAutoConfig:
   - etcd
-  - kube_scheduler
-  - kube_controller_manager
   confd:
     etcd.yaml: |-
       ad_identifiers:
@@ -189,20 +131,6 @@ datadog:
           tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
           tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
           tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-    kube_scheduler.yaml: |-
-      ad_identifiers:
-        - kube-scheduler
-      instances:
-        - prometheus_url: https://%%host%%:10259/metrics
-          ssl_verify: false
-          bearer_token_auth: true
-    kube_controller_manager.yaml: |-
-      ad_identifiers:
-        - kube-controller-manager
-      instances:
-        - prometheus_url: https://%%host%%:10257/metrics
-          ssl_verify: false
-          bearer_token_auth: true
 agents:
   volumes:
     - hostPath:
@@ -216,14 +144,26 @@ agents:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
     operator: Exists
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+{{< /tabs >}}
 
-```yaml
+### Controller Manager and Scheduler
+
+#### Insecure ports
+
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
+
+#### Secure ports
+
+Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -301,9 +241,62 @@ data:
       - prometheus_url: https://%%host%%:10257/metrics
         ssl_verify: false
         bearer_token_auth: true
-```
+{{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+  ignoreAutoConfig:
+    - etcd
+    - kube_scheduler
+    - kube_controller_manager
+  confd:
+    etcd.yaml: |-
+      ad_identifiers:
+        - etcd
+      instances:
+        - prometheus_url: https://%%host%%:2379/metrics
+          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
+          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
+    kube_scheduler.yaml: |-
+      ad_identifiers:
+        - kube-scheduler
+      instances:
+        - prometheus_url: https://%%host%%:10259/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_controller_manager.yaml: |-
+      ad_identifiers:
+        - kube-controller-manager
+      instances:
+        - prometheus_url: https://%%host%%:10257/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+agents:
+  volumes:
+    - hostPath:
+        path: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/kubernetes/pki/etcd
+      readOnly: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 **Notes:**
@@ -366,9 +359,9 @@ The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the s
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ```
-
 ### Etcd
 
+{{% collapse-content title="Etcd OpenShift 4.0 - 4.13" level="h4" %}}
 Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
 
 ```shell
@@ -382,29 +375,9 @@ These certificates should be mounted on the Cluster Check Runner pods by adding 
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-...
-clusterChecksRunner:
-  volumes:
-    - name: etcd-certs
-      secret:
-        secretName: kube-etcd-client-certs
-    - name: disable-etcd-autoconf
-      emptyDir: {}
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/etcd
-      readOnly: true
-    - name: disable-etcd-autoconf
-      mountPath: /etc/datadog-agent/conf.d/etcd.d
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -426,11 +399,31 @@ spec:
             secretName: kube-etcd-client-certs
         - name: disable-etcd-autoconf
           emptyDir: {}
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "Helm" %}}
 
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - name: etcd-certs
+      secret:
+        secretName: kube-etcd-client-certs
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 Then, annotate the service running in front of Etcd:
 
@@ -444,6 +437,88 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 ```
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
+
+{{% /collapse-content %}} 
+
+
+{{% collapse-content title="Etcd OpenShift 4.14 and higher" level="h4" %}}
+
+Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
+
+```shell
+oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
+```
+
+These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
+
+**Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
+
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterChecksRunner:
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /etc/etcd-certs
+            - name: disable-etcd-autoconf
+              mountPath: /etc/datadog-agent/conf.d/etcd.d
+      volumes:
+        - name: etcd-certs
+          secret:
+            secretName: etcd-metric-client
+        - name: disable-etcd-autoconf
+          emptyDir: {}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - name: etcd-certs
+      secret:
+        secretName: etcd-metric-client
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+      
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+Then, annotate the service running in front of Etcd:
+
+```shell
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.init_configs=[{}]'
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "tls_ca_cert": "/etc/etcd-certs/etcd-client-ca.crt", "tls_cert": "/etc/etcd-certs/etcd-client.crt",
+      "tls_private_key": "/etc/etcd-certs/etcd-client.key"}]'
+oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=ip'
+```
+
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
+
+{{% /collapse-content %}} 
 
 
 ### Controller Manager
@@ -516,29 +591,9 @@ Certificates are needed to communicate with the Etcd service, which are located 
 **Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-...
-clusterChecksRunner:
-  volumes:
-    - hostPath:
-        path: /etc/etcd
-      name: etcd-certs
-    - name: disable-etcd-autoconf
-      emptyDir: {}
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/etcd
-      readOnly: true
-    - name: disable-etcd-autoconf
-      mountPath: /etc/datadog-agent/conf.d/etcd.d
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -560,7 +615,27 @@ spec:
             path: /etc/etcd
         - name: disable-etcd-autoconf
           emptyDir: {}
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - hostPath:
+        path: /etc/etcd
+      name: etcd-certs
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -631,7 +706,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Add Kubernetes services to configure auto-discovery checks
+### Add Kubernetes services to configure Autodiscovery checks
 
 By adding headless Kubernetes services to define check configurations, the Datadog Agent is able to target the `pushprox` pods and collect metrics.
 
@@ -711,41 +786,9 @@ spec:
 Deploy the Datadog Agent with manifests based on the following configurations:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-agents:
-  volumes:
-    - hostPath:
-        path: /opt/rke/etc/kubernetes/ssl
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/opt/rke/etc/kubernetes/ssl
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -780,13 +823,41 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-## Kubernetes on Rancher Kubernetes Engine (\<v2.5) {#RKEBefore2_5}
+## Kubernetes on Rancher Kubernetes Engine (before v2.5) {#RKEBefore2_5}
 
 ### API Server, Controller Manager, and Scheduler
 
@@ -831,41 +902,9 @@ The following are examples of how to configure the Datadog Agent with Helm and t
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-agents:
-  volumes:
-    - hostPath:
-        path: /opt/rke/etc/kubernetes/ssl
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/opt/rke/etc/kubernetes/ssl
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -900,7 +939,35 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

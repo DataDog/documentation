@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/search_syntax/
   tag: Documentation
   text: En savoir plus sur la syntaxe de l'API Logs Search
-kind: guide
+
 title: Programmation de l'accès aux données de log à l'aide de l'API Logs Search
 ---
 
@@ -437,8 +437,8 @@ Les paramètres `from` and `to` peuvent être définis sur les valeurs suivantes
 ```javascript
 {
   "filter": {
-    "from": "now",
-    "to": "now-1h"
+    "from": "now-1h",
+    "to": "now"
   }
 }
 ```
