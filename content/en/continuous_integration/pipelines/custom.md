@@ -94,16 +94,14 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
 3. After sending your pipeline event to Datadog, you can integrate additional event types such as `stage`, `job`, and `step`. For more information, see the [Send Pipeline Event endpoint][1].
 
 ## Running pipelines
-Pipelines sent with the `status` set to `running` should have the same `unique_id` as the final pipeline event. Additionally,
-running pipelines can be updated by adding more information while they are still running. The flow is as follows:
+Pipeline events sent with the `status` set to `running` have the same `unique_id` as the final pipeline event.
+Additionally, running pipelines can be updated by adding more information while they are still running. The flow is as follows:
 
 1. The initial running pipeline event with the `status` set to `running`.
 2. Optionally, `N` running pipelines with the same `unique_id` and the `status` set to `running` to update the pipeline with more information.
 3. The final pipeline event with a non `running` status and the same `unique_id`.
 
-**Note**: it is not guaranteed that the last value will be the one displayed in the UI when the same field is updated multiple times.
-For example: if the a tag called `my_tag` is set to `value1` in the first running pipeline and then we try to update it to `value2`,
-Datadog might sometimes show `value1` instead of `value2` in the UI.
+**Note**: The most recent value may not always be the one displayed in the UI when a field is updated. For example, if the tag `my_tag` is set to `value1` in the first running pipeline, and then is updated to `value2`, you may see `value1` instead of `value2` in the UI.
 
 ## Visualize pipeline data in Datadog
 
