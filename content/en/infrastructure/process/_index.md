@@ -232,6 +232,48 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
 
+### Optimize footprint for process collection
+By default, the Datadog Agent has a separate Process Agent for container and process collection. You can consolidate container and process collection to the core Agent if you're running a Linux environment.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+```
+datadog:
+  processAgent:
+    runInCoreAgent: true
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{% tab "Linux hosted" %}}
+If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
+
+```
+process_config:
+  run_in_core_agent:
+    enabled: true
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### Process arguments scrubbing
 
 In order to hide sensitive data on the Live Processes page, the Agent scrubs sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
