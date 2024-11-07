@@ -87,15 +87,40 @@ Add a notification channel to your Team to route alerts to communication channel
 1. Select **Notifications**.
 1. Add a channel, then click **Save**.
 
+## Favorite Teams
+
+You may be interested in a particular team's resources without being a member of that team. Adding a team to your favorite teams allows you to get filtered views on that team's resources without joining the team.
+
+Your favorite teams appear alongside teams you belong to at the top of the team directory page and in the teams filter.
+
+You can add or remove a team from your favorites by navigating to its detail page:
+1. On the [team directory page][1], click the team you wish to add as a favorite. The [team detail page][3] appears.
+1. Click **Add Favorite** or **Remove Favorite** in the upper right.
+
+You can also remove a team from your favorites from the team directory page:
+1. On the [team directory page][1], mouse over the team you wish to remove as a favorite. Inline icons appear to the right of the team name.
+1. Click the star (**Remove from Favorites**) icon.
+
 ## Filter
 
-The team filter tailors a user's experiences across Datadog to content associated with their teams.
+The team filter tailors your experience across Datadog by showing you content associated with your teams. Your teams include teams you are a member of and teams you selected as a favorite.
 
 The team filter appears in two places in each list view: 
 - A list of search facets at the top left
 - A search term in the search bar
 
 When a user enables a team filter, they see only the resources associated with their teams or with the services owned by their teams. The team filter state is global and persistent. Therefore, Datadog maintains team context across a user's navigation journey over all applicable products.
+
+### Managing favorites
+
+The team filter component allows you to manage your favorite teams on the product page. To change or view your teams, click **My Teams** to expand the filter.
+
+You can add a favorite team from the team filter:
+1. Click **Add Favorites**. The filter component refreshes to show a search box and a list of teams.
+1. To narrow the list of teams, enter text in the search box.
+1. Click the star next to a team name to add it to your favorites.
+
+### Supported products
 
 The following table describes the products in which you can use the team filter:
 
@@ -112,7 +137,6 @@ The following table describes the products in which you can use the team filter:
 | [Data Streams Monitoring][18]  | Team handle                                                                 |
 | [Synthetic Tests][19]          | Team handle                                                                 |
 | [Notebooks][20]          | Team handle                                                                      |
-
 
 
 ## Permissions
