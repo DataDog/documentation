@@ -1245,8 +1245,8 @@ Any query done in the RUM Explorer can use the service attribute to filter event
 
 Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
 - Action events collected automatically
-- Ressource events other than XHR and Fetch.
-- View events (but you can [override default rum view names][21] instead)
+- Resource events other than XHR and Fetch.
+- View events (but you can [override default RUM view names][21] instead)
 - CORS and CSP violations
 
 ## Further Reading

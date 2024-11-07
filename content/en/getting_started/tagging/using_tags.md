@@ -26,9 +26,9 @@ When including or excluding multiple tags:
 
 ## Events
 
-The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:service:coffee-house` to search for the tag `service:coffee-house`.
+The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:(service:coffee-house)` to search for the tag `service:coffee-house`.
 
-To search multiple tags inclusively, use parentheses and separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
+To search multiple tags inclusively, separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards
 

@@ -57,24 +57,25 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Application key][3] (Service account user) | A user created, modified, or deleted an application key for a service account user. | `@evt.name:"Access Management" @asset.type:application_key` |
 | [Authentication methods][4] (Org) | A user modified the allowed authentication methods for an org and what the previous and new values are. | `@evt.name:"Access Management" @asset.type:identity_provider` |
 | [Email][5]       | An email is added, disabled, or verified on the Datadog account as a user in the account. | `@evt.name:"Access Management" @asset.type:user` |
+| [Password][9] | A user modified their password in the org. Password update events are delivered to all orgs that user is active in, even if the org does not have password authentication configured.| `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Role modified][6]  | A role is modified and what the previous and new permissions are. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Role created or deleted][7] | A role is created or deleted in the org. | `@evt.name:"Access Management" @asset.type:role @action:(created OR deleted)` |
 | [Role access request][8] | A user created, responded to, or deleted an access request for a role, and the value of the access request. | `@evt.name:"Access Management" @asset.type:role_request` |
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
-| [Password][9] | A user modified their password in the org. Password update events are delivered to all orgs that user is active in, even if the org does not have password authentication configured.| `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][10] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 | [Email update (Support)][11] | A user's email was updated by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:modified` |
 | [User invite (Support)][12] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
 | [User's role (Support)][100] | A user was added or deleted from a role in the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
 | [Role modified (Support)][101] | A role was modified by Datadog Support, and what the previous and new permissions are. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
+| [IP Allowlist Modified (Support)][115] | A new IP was added to the org's IP allowlist by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:ip_allowlist @action:modified` |
 
 ### Agent
 
 | Name                                    | Description of audit event                          | Query in audit explorer                                             |
 |-----------------------------------------| --------------------------------------------------  | ------------------------------------------------------------------- |
+| [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 | [Agent enabled][13]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][14]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
-| [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 
 
 ### API request events
@@ -99,7 +100,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Custom metrics][113] | A user created, modified, or deleted a custom metric | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:custom_metrics` |
 | [Facet][21] | A user created, modified, or deleted a [facet][22] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
 | [Primary operation name][23] | A user created, modified, or deleted the [primary operation name][24] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
-| [Second Primary tag][25] | A user added, modified, or deleted the [second primary tag][26] and the previous and/or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
+| [Second primary tag][25] | A user added, modified, or deleted the [second primary tag][26] and the previous or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 | [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
@@ -111,6 +112,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 | Name  | Description of audit event                          | Query in audit explorer              |
 |-------------| --------------------------------------------------  | ------------------------------------ |
+| [Audit Trail settings][76] | A user modified Audit Trail settings and what the previous and new settings are. | `@evt.name:"Organization Management" @asset.type:audit_logs_settings` |
 | [Download as CSV][28] | A user exports list of Audit Events as CSV | `@evt.name:Audit Trail @asset.type:audit_events_csv` |
 
 ### Authentication events
@@ -125,11 +127,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### CI Visibility events
 | Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Exclusion filters][36]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
+| [Quality gates rule][37]        | A user has created, modified, or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 | [Repository default branch][33] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
 | [Test service settings][34]     | A user created or modified the settings of a test service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings (@action:created OR @action:modified)`            |
 | [GitHub account settings][35]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
-| [Exclusion filters][36]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
-| [Quality gates rule][37]        | A user has created, modified or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 
 ### Cloud Security Platform events
 
@@ -140,9 +142,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name               | Description of audit event                                                                        | Query in audit explorer                                               |
 | -------------------| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------   |
 | [Dashboard created][38] | A dashboard is created and the new JSON value for the dashboard.                                    | `@evt.name:Dashboard @asset.type:dashboard @action:created`             |
-| [Dashboard deleted][39] | A dashboard is deleted and the previous JSON value for the dashboard.                              | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`             |
-| [Dashboard embedded][40] (Roadie) | A Datadog dashboard is [embedded into a third party][41] and a user views the dashboard.                      | `@evt.name:Dashboard @asset.type:embed @action:accessed`                |
-| [Dashboard modified][42] | A dashboard is modified and the previous and new JSON values for the dashboard.                   | `@evt.name:Dashboard @asset.type:dashboard @action:modified`            |
+| [Dashboard embedded][40] (Roadie) | A Datadog dashboard is embedded into a third party ([Roadie][41]) and a user views the dashboard.                      | `@evt.name:Dashboard @asset.type:embed @action:accessed`                |
+| [Dashboard modified][42] | A dashboard is modified. Also provides the previous and new JSON values for the dashboard.                   | `@evt.name:Dashboard @asset.type:dashboard @action:modified`            |
+| [Dashboard deleted][39] | A dashboard is deleted. Also provides the previous JSON value for the dashboard.                              | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`             |
 | [Dashboard user(s) added][43] | A user added user ID(s) that can access a dashboard and the list of new user IDs.                 | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:created`   |
 | [Dashboard user(s) deleted][44] | A user deleted user ID(s) that can access a dashboard and the list of the deleted user ID(s).       | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:deleted`   |
 | [Public URL accessed][45] | A public dashboard URL is accessed.                                                               | `@evt.name:Dashboard @asset.type:dashboard @action:accessed`            |
@@ -160,8 +162,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 | Name     | Description of audit event                                          | Query in audit explorer                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Error Tracking for Logs activation][50] | A user has enabled or disabled Error Tracking for Logs product. | `@evt.name:"Error Tracking" @action:(created OR deleted) @asset.type:error_tracking_logs` |
 | [Create or Modify inclusion filter][51] | A user has added or modified an inclusion filter. | `@evt.name:"Error Tracking" @asset.type:error_tracking_inclusion_filter` |
+| [Error Tracking for Logs activation][50] | A user has enabled or disabled Error Tracking for the Logs product. | `@evt.name:"Error Tracking" @action:(created OR deleted) @asset.type:error_tracking_logs` |
 
 ### Integration events
 
@@ -193,16 +195,16 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- |------------------------------------------------------------------- | --------------------------------------------------|
 | [Custom metric created][65] | A user created a custom metric and the new value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:created` |
-| [Custom metric deleted][66] | A user deleted a custom metric and the previous value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:deleted` |
 | [Custom metric modified][67] | A user modified a custom metric and the previous and new values for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:modified` |
+| [Custom metric deleted][66] | A user deleted a custom metric. Also provides the previous value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:deleted` |
 
 ### Monitor events
 
 | Name             | Description of audit event                                           | Query in audit explorer                                  |
 | ---------------- | -------------------------------------------------------------------- | ---------------------------------------------------------|
 | [Monitor created][68]  | A monitor is created and the new JSON value for the monitor.                 | `@evt.name:Monitor @asset.type:monitor @action:created`  |
-| [Monitor deleted][69]  | A monitor is deleted and the previous JSON value for the monitor.           | `@evt.name:Monitor @asset.type:monitor @action:deleted`  |
 | [Monitor modified][70] | A monitor is modified and the previous and new JSON values for the monitor. | `@evt.name:Monitor @asset.type:monitor @action:modified` |
+| [Monitor deleted][69]  | A monitor is deleted. Also provides the previous JSON value for the monitor.           | `@evt.name:Monitor @asset.type:monitor @action:deleted`  |
 | [Monitor resolved][71] | A monitor is resolved.                                               | `@evt.name:Monitor @asset.type:monitor @action:resolved` |
 
 ### Notebook events
@@ -210,8 +212,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name              | Description of audit event                                            | Query in audit explorer                                     |
 | ----------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
 | [Notebook created][72]  | A notebook is created and the new JSON value for the notebook.                 | `@evt.name:Notebook @asset.type:notebook @action:created`   |
-| [Notebook deleted][73]  | A notebook is deleted and the previous JSON value for the notebook.           | `@evt.name:Notebook @asset.type:notebook @action:deleted`   |
 | [Notebook modified][74] | A notebook is modified and the previous and new JSON values for the notebook. | `@evt.name:Notebook @asset.type:notebook @action:modified`  |
+| [Notebook deleted][73]  | A notebook is deleted and the previous JSON value for the notebook.           | `@evt.name:Notebook @asset.type:notebook @action:deleted`   |
 
 ### OAuth events
 
@@ -236,8 +238,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Security Notification events
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
-| [Token leaked][81] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
 | [Login method override][82] | Datadog has detected a user login method override that is different from the default login methods set for the organization.| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
+| [Token leaked][81] | Datadog has detected a leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
 | [Unusual login][83] | Datadog has detected a unusual login event.| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 | [User invited with throwaway email][102] | Datadog has detected that a user with an email from a free or disposable email provider was invited to the organization.| `@evt.name:"Security Notification" @asset.type:user_invite @action:notification` |
 
@@ -260,10 +262,10 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Private location][88] | A user created or deleted a private location for Synthetic tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
+| [Synthetic settings][92] | A user modified Synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
 | [Synthetic test created or deleted][89] | A user created or deleted a Synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
 | [Synthetic test modified][90] | A user modified a Synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
 | [Synthetic variable][91] | A user created, modified, or deleted a Synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
-| [Synthetic settings][92] | A user modified Synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
 
 ### Reference Table events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
@@ -404,3 +406,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [112]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
 [113]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Acustom_metrics%20
 [114]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Sensitive%20Data%20Scanner%22%20%40action%3Amodified%20%40asset.type%3Asensitive_data_scanner_scanning_group_list%20
+[115]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Aip_allowlist%20%40action%3Amodified
