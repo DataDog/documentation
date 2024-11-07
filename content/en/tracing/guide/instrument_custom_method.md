@@ -175,9 +175,6 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/guide/instrument_custom_method-go-v2">Instrument a custom method to get deep visibility into your business logic</a> documentation.</div>
-
-
   In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
@@ -185,7 +182,7 @@ end
 ```go
 package ledger
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 
 // [...]
 

@@ -277,13 +277,10 @@ end
 
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/containers/docker/apm-gov2">Tracing Docker Applications</a> documentation.</div>
-
-
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 
 func main() {
     tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))

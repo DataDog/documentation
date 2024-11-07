@@ -200,10 +200,7 @@ end
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
-
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/containers/amazon_ecs/apm-gov2">Tracing ECS Applications</a> documentation.</div>
-
+{{< programming-lang lang="go">}}
 
 #### Launch time variable
 Update the Task Definition's `entryPoint` with the following, substituting your `<Go Startup Command>`:
@@ -225,7 +222,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func main() {

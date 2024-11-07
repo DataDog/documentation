@@ -57,9 +57,6 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/legacy_app_analytics/_index-gov2">App Analytics</a> documentation.</div>
-
-
 App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
 * the [`WithAnalytics`][1] tracer start option, for example:
@@ -188,17 +185,14 @@ Where `integration` is the name of the integration. See the [list of available i
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/legacy_app_analytics/_index-gov2">App Analytics</a> documentation.</div>
-
-
 In addition to the global setting, you can enable or disable App Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
 
 ```go
 package main
 
 import (
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // use "github.com/DataDog/dd-trace-go/contrib/net/http/v2" if you're using v2.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func main() {
