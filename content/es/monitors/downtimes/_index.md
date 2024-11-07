@@ -32,7 +32,7 @@ title: Tiempos de inactividad
 
 Programa tiempos de inactividad para cierres del sistema, mantenimientos fuera de línea o actualizaciones, sin que se activen tus monitores. Los tiempos de inactividad silencian todas las alertas y notificaciones de monitores, pero no impiden las transiciones de estado de los monitores.
 
-{{< img src="/monitors/downtimes/downtime_overview.png" alt="Example of a downtime" (Ejemplo de tiempo de inactividad) style="width:100%;" >}}
+{{< img src="/monitors/downtimes/downtime_overview.png" alt="Ejemplo de tiempo de inactividad" style="width:100%;" >}}
 
 ## Configuración
 
@@ -49,11 +49,11 @@ Aplica cronogramas de tiempos de inactividad a monitores específicos por nombre
 **Nota**: Cualquier monitor creado o editado después de programar el tiempo de inactividad se incluye automáticamente en el tiempo de inactividad, si coincide con el contexto.
 
 {{< tabs >}}
-{{% tab "By Monitor Name" (Por nombre de monitor) %}}
+{{% tab "Por nombre de monitor" %}}
 
 Busca o utiliza el menú desplegable para elegir qué monitores silenciar. Si el campo se deja vacío, todos los monitores se silencian por defecto. También puedes seleccionar un rango para restringir tu tiempo de inactividad a un host, un dispositivo o una etiqueta (tag) arbitraria específica. Sólo se silencian los monitores que tienen **TODOS los rangos seleccionados**.
 {{% /tab %}}
-{{% tab "By Monitor Tags" (Por etiquetas de monitor) %}}
+{{% tab "Por etiquetas de monitor" %}}
 
 Programa un tiempo de inactividad en función de una o varias [etiquetas de monitor)][3]. El número máximo de etiquetas que se pueden seleccionar para un único tiempo de inactividad es 32. Cada etiqueta puede tener un máximo de 256 caracteres. Sólo se silencian los monitores que tienen **TODAS las etiquetas seleccionadas**. También puedes seleccionar rangos para restricciones adicionales.
 
@@ -100,7 +100,7 @@ Existen algunas limitaciones que **no son compatibles**, entre las que se incluy
 
 Establece un tiempo de inactividad para una única vez introduciendo la fecha de inicio, la hora y la zona horaria. También puedes establecer una fecha y una hora de finalización.
 
-{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="Fields for scheduling one time downtime" (Campos de programación de un tiempo de inactividad para una única vez) style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="Campos de programación de un tiempo de inactividad para una única vez" style="width:90%;">}}
 
 #### Recurrente
 
@@ -109,7 +109,7 @@ Los tiempos de inactividad recurrentes son útiles para los periodos de mantenim
 Cuando finaliza un único tiempo de inactividad de un tiempo de inactividad recurrente, se cancela el único tiempo de inactividad y se crea un nuevo tiempo de inactividad con las mismas restricciones, y horas de inicio y fin actualizadas. <br>
 **Nota**: El creador original se asocia a todos los tiempos de inactividad recién creados.
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" (Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas fuera del horario laboral y durante el fin de semana) style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas fuera del horario laboral y durante el fin de semana" style="width:100%;" >}}
 
 Utiliza [reglas de recurrencia][4] (RRULE) para definir los cronogramas de los tiempos de inactividad. Utiliza el [generador de RRULE][5] oficial como herramienta para generar reglas recurrentes. Un caso de uso común consiste en utilizar las RRULE para definir tiempos de inactividad para días específicos del mes, por ejemplo, el tercer lunes de cada mes. Para ver más casos de uso de recurrencias, consulta la guía para [suprimir alertas con tiempos de inactividad][6].
 
@@ -128,7 +128,7 @@ Configura notificaciones y automatizaciones especificando los miembros del equip
 
 Por defecto, Datadog envía una notificación de recuperación de los monitores que se activan **antes** de un tiempo de inactividad y que terminan recuperándose **durante** un tiempo de inactividad. Esto es útil cuando se utilizan integraciones de terceros para cerrar automáticamente incidentes abiertos. Al seleccionar la casilla de verificación se silencian estas notificaciones.
 
-{{< img src="monitors/downtimes/downtime_first_recovery.png" alt="Mute first recovery notification" (Silenciar la notificación de una primera recuperación) style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_first_recovery.png" alt="Silenciar la notificación de una primera recuperación" style="width:80%;">}}
 
 La opción de desactivar la notificación de una primera recuperación es aditiva entre varios tiempos de inactividad. Por ejemplo, si varios tiempos de inactividad se superponen y silencian el mismo monitor, la notificación de la primera recuperación se silencia si **al menos un** tiempo de inactividad ha seleccionado la opción para desactivarla.
 
@@ -149,7 +149,7 @@ El historial de tiempos de inactividad se puede ver en la página [Estado del mo
 
 Los monitores activan eventos cuando cambian entre los estados posibles: `ALERT` `WARNING` , `RESOLVED` y `NO DATA`. Cuando un monitor está silenciado o tiene un tiempo de inactividad programado, las transiciones de `RESOLVED` a otro estado **no** activan eventos o notificaciones.
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Monitor status graph showing state transition to alert during downtime, will not create an alert event" (Gráfico de estado de un monitor que muestra que la alerta de transición de estado durante el tiempo de inactividad no crea un evento de alerta) style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Gráfico de estado de un monitor que muestra que la alerta de transición de estado durante el tiempo de inactividad no crea un evento de alerta" style="width:80%;">}}
 
 **Nota**: Cuando se silencia o se anular el silenciamiento de un monitor desde la página de estado del monitor no se eliminan los tiempos de inactividad programados asociados al monitor. Para editar o eliminar un tiempo de inactividad, consulta la página [Gestionar tiempos de inactividad][1] o utiliza la [API][11].
 
@@ -159,7 +159,7 @@ Por defecto, si un monitor se encuentra en un estado de alerta (`ALERT`, `WARNIN
 
 Para anular el comportamiento predeterminado, especifica qué notificaciones deben enviarse al finalizar un tiempo de inactividad, utilizando las opciones de la sección **Configurar notificaciones y automatizaciones**. En los tiempos de inactividad creados con la API, el comportamiento predeterminado es excluir la opción `Is cancelled`.
 
-{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="The Configure notifications and automations section of a monitor with specific downtime conditions" (Sección de configuración de notificaciones y automatizaciones de un monitor con condiciones específicas para los tiempos de inactividad) style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="Sección de configuración de notificaciones y automatizaciones de un monitor con condiciones específicas para los tiempos de inactividad" style="width:100%;">}}
 
 **Ejemplo 1:** Si un monitor se encuentra en estado de alerta *antes* de que comience el tiempo de inactividad y *continúa así* mientras dura el tiempo de inactividad:
 1. Durante el tiempo de inactividad, se suprimen las notificaciones de esta alerta.

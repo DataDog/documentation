@@ -34,7 +34,7 @@ categories:
 - recopilación de logs
 - la red
 - orquestación
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true

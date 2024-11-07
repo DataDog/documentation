@@ -3,7 +3,7 @@ categories:
 - collaboration
 - incidents
 - notifications
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Generar alertas PagerDuty a partir de métricas y eventos de Datadog
 doc_link: https://docs.datadoghq.com/integrations/pagerduty/

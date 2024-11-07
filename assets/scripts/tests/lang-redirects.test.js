@@ -63,7 +63,7 @@ describe(`Ensure EN site loads and redirects as expected `, () => {
     });
 
     it('should ignore when lang_pref is not in allowedLanguages', () => {
-        window.location.href = 'http://localhost:3000/?lang_pref=es';
+        window.location.href = 'http://localhost:3000/?lang_pref=it';
 
         redirect.handleLanguageBasedRedirects();
 

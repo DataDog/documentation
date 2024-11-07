@@ -44,13 +44,13 @@ Identifica los robots de Datadog utilizando **encabezados predeterminados**, que
 
 De manera predeterminada, se añade un encabezado `user-agent` a todas las solicitudes realizadas por los tests de Sintético. Cualquier `user-agent` personalizado que se añada en el test sustituye al predeterminado.
 
-{{< pestañas >}}
-{{% pestaña "Tests de la API de uno y varios pasos" %}}
+{{< tabs >}}
+{{% tab "Tests de la API de uno y varios pasos" %}}
 
 Para los tests de la API de uno o varios pasos, el encabezado predeterminado `user-agent` es `Datadog/Synthetics`.
 
-{{% /pestaña %}}
-{{% pestaña "Tests de navegador" %}}
+{{% /tab %}}
+{{% tab "Tests de navegador" %}}
 
 Para los tests de navegador, el valor del encabezado predeterminado `user-agent` varía en función del navegador y del dispositivo que ejecuta el test. El valor predeterminado de `user-agent` siempre termina en `DatadogSynthetics` para poder identificar los tests de Sintético.
 
@@ -61,15 +61,15 @@ Para los tests de navegador, el valor del encabezado predeterminado `user-agent`
 
 Se añade un encabezado `sec-datadog` a todas las solicitudes realizadas por los tests de Sintético. El valor incluye el ID del test del que procede la solicitud.
 
-{{< pestañas >}}
-{{% pestaña "Tests de la API de uno y varios pasos" %}}
+{{< tabs >}}
+{{% tab "Tests de la API de uno y varios pasos" %}}
 
 ```
 sec-Datadog: Solicitud enviada por un test de la API de Sintético de Datadog (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
-{{% /pestaña %}}
-{{% pestaña "Tests de navegador" %}}
+{{% /tab %}}
+{{% tab "Tests de navegador" %}}
 
 ```
 sec-Datadog: Solicitud enviada por un test de Navegador Sintético de Datadog (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
