@@ -5,8 +5,17 @@ on:
     paths:
     - 'static/images/**/*'
 
+# Stop the current running job if a new push is made to the PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   look-for-gifs:
+    permissions:
+      contents: read
+    
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
