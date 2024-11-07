@@ -32,19 +32,14 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 To get started with the RUM Browser SDK, follow the steps to create a RUM application based on how your application is served:
 
+{{< partial name="rum/rum-browser-setup.html" >}}
 
-
-- [**Automatic instrumentation**][2]: Automatically instruments all of your applications with RUM by injecting a RUM SDK JS scriptlet into the headers of the HTML responses being served through a web server/proxy.
-- [**Custom instrumentation**][3]: Manually instrument each of your applications with RUM, then manage those configurations in Datadog.
-
-From here, you can modify the [data and context][4] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][5].
+From here, you can modify the [data and context][2] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_security/real_user_monitoring/#shared-responsibility
-[2]: /real_user_monitoring/browser/automatic_setup
-[3]: /real_user_monitoring/browser/setup_client_side/
-[4]: /real_user_monitoring/browser/data_collected/
-[5]: /real_user_monitoring/browser/advanced_configuration/
+[2]: /real_user_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/browser/advanced_configuration/

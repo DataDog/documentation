@@ -1,5 +1,5 @@
 ---
-title: RUM Browser Monitoring Automatic Instrumentation
+title: RUM Browser Monitoring Server Side Instrumentation
 beta: true
 further_reading:
 - link: '/real_user_monitoring/explorer/'
@@ -10,19 +10,19 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
-RUM Auto-Instrumentation in Preview. Sign up for access!
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="real_user_monitoring/browser/auto-instrumentation-1.png" alt="Select Auto-Instrumentation when creating a new application." >}}
 
-Datadog RUM Auto-Instrumentation lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy. If you are interested in manual instrumentation per application, see [Custom Instrumentation][1].
+Datadog RUM Server Side Instrumentation (SDK Injection) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy. If you are interested in manual instrumentation per application, see [Client Side Instrumentation][1].
 
-RUM Auto-Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
+RUM Server Side Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
 
 After your applications have been instrumented, you can begin configuring your RUM application in Datadog.
+
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
+RUM SDK Injection in Preview. Sign up for access! You can also request early access if you are using Apache HTTPD, Tomcat, or another web server technology.
+{{< /callout >}}
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{< tabs >}}
 {{% tab "Nginx" %}}
 
-The Datadog RUM Injector leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses identified as HTML.
+The Datadog RUM Server Side Instrumentation method leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses identified as HTML.
 
 To automatically instrument your RUM application:
 
@@ -41,6 +41,7 @@ To automatically instrument your RUM application:
 2. Select **Auto-Instrumentation** and **NGINX**.
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][3].
 4. Copy and run the installer command to load the Datadog RUM SDK Injector onto your Nginx module.
+5. After the installer successfully installs the SDK Injector, restart your Nginx to begin collecting RUM sessions.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 [2]: https://app.datadoghq.com/rum/list
@@ -118,6 +119,7 @@ The available functionality has the following important limitations:
 
 - If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
 - This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for Nginx web servers.
+- The SDK Injector does not inject into encrypted requests served by the Nginx or IIS related to TLS.
 - (Nginx only) The Auto-Instrumentation method does not inject encrypted requests served by the Nginx web server.
 - (Windows IIS only) Configuration for RUM Auto-Injection is only available per Windows IIS site.
 

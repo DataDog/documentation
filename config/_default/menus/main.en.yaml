@@ -6280,8 +6280,8 @@ menu:
       parent: rum
       identifier: rum_browser
       weight: 1
-    - name: Automatic Instrumentation
-      url: real_user_monitoring/browser/automatic_setup/
+    - name: Server Side Setup
+      url: real_user_monitoring/browser/setup_server_side
       parent: rum_browser
       identifier: rum_browser_auto_setup
       weight: 101
