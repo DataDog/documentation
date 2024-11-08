@@ -97,11 +97,11 @@ Larger Datadog customers often have more than one Datadog installation. This is 
 ### APM
 
 APM depends on the application of Unified Service Tagging. These tags are pivotal to the operational experience, and are also useful for enabling correlation across your telemetry data. This is how Datadog can help determine the owner for a random Java process it discovers.  
-Usually, the default APM setup is sufficient for most use cases, but if, for example, you want to change sampling rates or to customize other APM configurations:    
+Usually, the default APM setup is sufficient for most use cases, but if, for example, you want to change sampling rates or to customize other APM configurations, use the following guidelines.   
 
 **Recommendations:** 
 - Identify the services to instrument and determine whether they are host-based, containerized, or serverless.
-- Determine the method available for instrumenting your services in Datadog, depending on the language used or their runtime environment. These methods range from single-step to manual instrumentation.
+- Determine the method available for instrumenting your services in Datadog, depending on the language used or their runtime environment. These methods range from single-step to manual [instrumentation][75].
 - Review the [ingestion controls][9] documentation.  
 - Configure your sampling rate with [Remote Configuration][10] to scale your organization's trace ingestion according to your needs, without needing to restart your Agent. For more information, see [sampling rate use cases][11].  
 - Ensure [Unified Service Tagging][12] is applied, and review [span tag semantics][13].
@@ -173,7 +173,7 @@ Synthetic Monitoring is a full synthetic testing suite, which includes testing f
 - Identify the API endpoints and user journeys that are central to your business and test those frequently.
 - Develop a roadmap of business transactions to test.
 - Use Synthetics in conjunction with [APM and RUM][49].
-- Review [Synthetics Consumption Considerations][23].
+- Review [Synthetic monitoring consumption considerations][23].
 - Reduce test maintenance by using [subtests][24].
 - Make intentional choices in test location selection. Test from where your customers actually are.     
 - Use the [HTTP Check][25] or [TCP check][50] to monitor SSL certificate expiration or basic uptime.  
@@ -340,7 +340,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [20]: /logs/guide/best-practices-for-log-management/
 [21]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event
 [22]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
-[23]: https://www.datadoghq.com/pricing/?product=synthetic-testing--monitoring\#synthetic-testing--monitoring-common-questions
+[23]: https://www.datadoghq.com/pricing/?product=synthetic-testing--monitoring#synthetic-testing--monitoring-common-questions
 [24]: /synthetics/browser_tests/advanced_options/#subtests
 [25]: /integrations/http_check/
 [26]: /infrastructure/process/?tab=linuxwindows
@@ -392,3 +392,5 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [72]: /service_catalog/service_definitions/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
+[75]: /tracing/trace_collection/
+
