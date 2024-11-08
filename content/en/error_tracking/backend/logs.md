@@ -32,6 +32,7 @@ To configure inline code snippets in issues, set up the [source code integration
 To enable Error Tracking, logs must include both of the following:
 
 - Either an `error.kind` or `error.stack` field. **Note**: if using `error.stack`, it must be a valid stack trace.
+- A `Service` attribute
 - A status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`.
 
 The remaining attributes listed below are optional, but their presence improves error grouping.

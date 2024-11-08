@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/real_user_monitoring/browser"
   tag: "Documentation"
   text: "Learn about RUM Browser Monitoring"
@@ -20,11 +20,11 @@ further_reading:
 
 ## Overview
 
-Test Visibility integrates with Datadog [Real User Monitoring][2] to provide you with the tools for deep analysis of your browser tests.
+Test Optimization integrates with Datadog [Real User Monitoring][2] to provide you with the tools for deep analysis of your browser tests.
 
 ### Compatibility
 
-To enable RUM integration ensure that [Test Visibility][1] is set up for your tests and that the application being tested is instrumented using [RUM][2].
+To enable RUM integration ensure that [Test Optimization][1] is set up for your tests and that the application being tested is instrumented using [RUM][2].
 
 RUM integration is supported for Cypress browser tests and Selenium-driven browser tests.
 
@@ -50,7 +50,7 @@ From Browser SDK v5.0.0, enable the `allowUntrustedEvents` initialization parame
 
 If you use Cypress or Selenium to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
-A **Browser Sessions** tab appears in the Test Visibility test details side panel.
+A **Browser Sessions** tab appears in the Test Optimization test details side panel.
 
 {{< img src="ci/ci-browser-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 

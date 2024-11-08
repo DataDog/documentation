@@ -65,6 +65,13 @@ localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 
+`localStorage` can be accessed in other JavaScript assertions if you need to compare specific values:
+
+{{< code-block lang="javascript" >}}
+localStorage.getItem("mytime");
+return true
+{{< /code-block >}}
+
 ## Assert on text contained in a rendered PDF
 
 You can use an external library to test the content of a rendered PDF. 
