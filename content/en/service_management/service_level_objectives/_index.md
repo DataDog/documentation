@@ -27,6 +27,9 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
   tag: "External Site"
   text: "Create and manage SLOs with Terraform"
+- link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
+  tag: "Blog"
+  text: "Burn Rate is a Better Error Rate"  
 ---
 
 {{< jqmath-vanilla >}}

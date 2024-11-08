@@ -31,7 +31,7 @@ categories:
 - rum
 - seguimiento de problemas
 - tests
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
 display_on_public_website: true

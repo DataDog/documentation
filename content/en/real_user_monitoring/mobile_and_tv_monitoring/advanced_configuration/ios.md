@@ -76,6 +76,37 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 
 For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
 
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
+through the `RUMMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+@_spi(Experimental)
+import DatadogRUM
+
+func onHeroImageLoaded() {
+    let rum = RUMMonitor.shared()
+    rum.addViewLoadingTime(override: false)
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+- (void)onHeroImageLoad {
+    [[DDRUMMonitor shared] addViewLoadingTimeWithOverride:NO | YES];
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Use the `override` option to replace the previously calculated loading time for the current view..
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+Please note that this API is still experimental and might change in the future.
+
 ### Add your own performance timing
 
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view.

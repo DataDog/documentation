@@ -138,7 +138,7 @@ Asegúrate de dejar `Require MFA` deshabilitado. Para obtener más detalles, con
 
 {{% aws-resource-collection %}}
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/integrations/amazon_web_services/
