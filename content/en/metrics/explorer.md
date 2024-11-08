@@ -10,6 +10,9 @@ further_reading:
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
+  - link: "/dashboards/guide/quick-graphs/"
+    tag: "Documentation"
+    text: "Quick Graphs"
     
 ---
 
@@ -52,6 +55,10 @@ You can optionally add functions to your query using the function button. Not al
 
 Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
 
+### Quick Graphs
+
+With [Quick Graphs][7], you get even more options to visualize your data, such as Timeseries, Top List, Query value, and Geomap without needing to create a [Dashboard][4] or [Notebook][2].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -61,6 +68,5 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 [3]: /dashboards/#screenboards
 [4]: /dashboards/#get-started
 [5]: /metrics/introduction/#space-aggregation
-[6]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing
-
-
+[6]: /dashboards/querying/#advanced-graphing
+[7]: /dashboards/guide/quick-graphs/
