@@ -29,7 +29,7 @@ To get started with the standard PostgreSQL integration, create a read-only `dat
 
 For PostgreSQL version 10 and above, run:
 
-```shell
+```sql
 create user datadog with password '<PASSWORD>';
 grant pg_monitor to datadog;
 grant SELECT ON pg_stat_database to datadog;
@@ -37,14 +37,14 @@ grant SELECT ON pg_stat_database to datadog;
 
 For PostgreSQL versions below 10, run:
 
-```shell
+```sql
 create user datadog with password '<PASSWORD>';
 grant SELECT ON pg_stat_database to datadog;
 ```
 
 To verify the permissions are correct, run the following command:
 
-```shell
+```sql
 psql -h localhost -U datadog postgres -c \
 "select * from pg_stat_database LIMIT(1);" \
 && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
@@ -55,7 +55,7 @@ When it prompts for a password, enter the one used in the first command.
 
 For PostgreSQL versions 9.6 and below, run the following and create a `SECURITY DEFINER` to read from `pg_stat_activity`.
 
-```shell
+```sql
 CREATE FUNCTION pg_stat_activity() RETURNS SETOF pg_catalog.pg_stat_activity AS
 $$ SELECT * from pg_catalog.pg_stat_activity; $$
 LANGUAGE sql VOLATILE SECURITY DEFINER;

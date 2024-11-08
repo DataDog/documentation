@@ -10,6 +10,7 @@ export const regionParamDefinition = {
     },
     key: {
       type: String,
+      required: true,
       matches: [
         'dd_datacenter',
         'dd_site',
@@ -45,8 +46,7 @@ export const regionParamDefinition = {
         'aws_private_link_remote_config_service_name',
         'ip_ranges_url',
         'otlp_trace_endpoint'
-      ],
-      required: true
+      ]
     },
     code: {
       type: Boolean,

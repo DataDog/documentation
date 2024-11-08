@@ -19,7 +19,7 @@ export const fenceDefinition = {
     },
     collapsible: {
       type: Boolean,
-      default: true
+      default: false
     },
     disable_copy: {
       type: Boolean,
@@ -99,6 +99,7 @@ export class Fence extends CustomHtmlComponent {
 
     const jsx = CodeBlockTemplate({
       highlightedContents: formattedCodeContents,
+      language,
       // @ts-ignore
       attrs
     });
