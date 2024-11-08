@@ -59,7 +59,7 @@ Use the template variables to scope down the monitor page to specific groups, se
 
 {{< img src="/monitors/status/status_page_event_details.png" alt="Example monitor status event details" style="width:100%;" >}}
 
-You can explore different product areas while maintaining the same alerting context, ensuring you view the same timeframe and service parameters as on your monitor's status page. Use Event details to troubleshoot if the monitor is alerting due to recent configuration changes, take the query to other product areas to troubleshoot and cross reference without losing context. 
+You can explore different product areas while maintaining the same alerting context, ensuring you view the same timeframe and service parameters as on your monitor's status page. Use Event details to troubleshoot if the monitor is alerting due to recent configuration changes. You can take the query to other product areas to troubleshoot and cross reference without losing context. 
 
 For more information, see the [Monitor status events][3] documentation.
 
