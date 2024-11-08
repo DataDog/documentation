@@ -31,6 +31,8 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 
 ## Setup your RUM application
 
+<div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
+
 {{< tabs >}}
 {{% tab "Nginx" %}}
 
@@ -57,7 +59,7 @@ The Datadog RUM Injector leverages a Windows module that injects the RUM SDK int
 2. Select **Auto-Instrumentation** and **Windows IIS**.
 3. Set up the IIS module using either the GUI installer or command line as described below:
 
-{{% collapse-content title="Using the GUI installer" level="h4" %}}
+{{% collapse-content title="Using the GUI installer" level="h5" %}}
 
 1. Download the Datadog RUM installer.
 2. Follow the installer as an administrator by opening the `.msi` file.
@@ -69,7 +71,7 @@ The Datadog RUM Injector leverages a Windows module that injects the RUM SDK int
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Using the command line" level="h4" %}}
+{{% collapse-content title="Using the command line" level="h5" %}}
 
 1. Run the Powershell command line as an administrator.
 2. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][1].
