@@ -105,7 +105,7 @@ To learn more, see the [search syntax][1] documentation.
 
 Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
 
-If you want to investigate connections from your all of your hosts in a single grouping, add the `host` tag in the **View clients as** drop-down, and add `Ungrouped traffic` in the **View servers as** drop-down. 
+If you want to investigate connections from all of your hosts in a single grouping, add the `host` tag in the **View clients as** drop-down, and add `Ungrouped traffic` in the **View servers as** drop-down. 
 
 {{< img src="network_performance_monitoring/network_analytics/npm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
 
