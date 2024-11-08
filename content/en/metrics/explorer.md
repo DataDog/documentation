@@ -57,7 +57,9 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 
 ### Quick Graphs
 
-With [Quick Graphs][7], you get even more options to visualize your data, such as Timeseries, Top List, Query value, and Geomap without needing to create a [Dashboard][4] or [Notebook][2].
+With Quick Graphs, you have more options to visualize your data, without needing to create a [Dashboard][4] or [Notebook][2]. These graphs are useful for understanding and troubleshooting issues without creating permanent dashboards or complex visualization setups.
+
+For more information, see the [Quick Graphs][7] documentation.
 
 ## Further reading
 
