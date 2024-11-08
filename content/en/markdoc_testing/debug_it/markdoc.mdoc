@@ -24,35 +24,35 @@ troubleshooting and debugging of your applications.
 
 <!-- Python -->
 {% if equals($programming_lang, "python") %}
-```bash
+```shell
 pip install debugit
 ```
 {% /if %}
 
 <!-- JavaScript -->
 {% if equals($programming_lang, "javascript") %}
-```bash
+```shell
 npm install debugit
 ```
 {% /if %}
 
 <!-- Java -->
 {% if equals($programming_lang, "java") %}
-```bash
+```shell
 mvn install debugit
 ```
 {% /if %}
 
 <!-- Ruby -->
 {% if equals($programming_lang, "ruby") %}
-```bash
+```shell
 gem install debugit
 ```
 {% /if %}
 
 <!-- Go -->
 {% if equals($programming_lang, "go") %}
-```bash
+```shell
 go get debugit
 ```
 {% /if %}
@@ -63,35 +63,35 @@ go get debugit
 {% if equals($os, "windows") %}
 <!-- Windows > Python -->
 {% if equals($programming_lang, "python") %}
-```bash
+```shell
 setx PYTHONPATH "%PYTHONPATH%;C:\path\to\your\library\directory"
 ```
 {% /if %}
 
 <!-- Windows > Java -->
 {% if equals($programming_lang, "java") %}
-```bash
+```shell
 set CLASSPATH=%CLASSPATH%;C:\path\to\your\library\directory
 ```
 {% /if %}
 
 <!-- Windows > Go -->
 {% if equals($programming_lang, "go") %}
-```bash
+```shell
 setx GOPATH "%GOPATH%;C:\path\to\your\library\directory"
 ```
 {% /if %}
 
 <!-- Windows > Ruby -->
 {% if equals($programming_lang, "ruby") %}
-```bash
+```shell
 set RUBYLIB=%RUBYLIB%;C:\path\to\your\library\directory
 ```
 {% /if %}
 
 <!-- Windows > JavaScript -->
 {% if equals($programming_lang, "javascript") %}
-```bash
+```shell
 set NODE_PATH=%NODE_PATH%;C:\path\to\your\library\directory
 ```
 {% /if %}
@@ -101,35 +101,35 @@ set NODE_PATH=%NODE_PATH%;C:\path\to\your\library\directory
 {% if equals($os, "linux") %}
 <!-- Linux > Python -->
 {% if equals($programming_lang, "python") %}
-```bash
+```shell
 sudo export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > Java -->
 {% if equals($programming_lang, "java") %}
-```bash
+```shell
 sudo export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > Go -->
 {% if equals($programming_lang, "go") %}
-```bash
+```shell
 sudo export GOPATH="$GOPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > Ruby -->
 {% if equals($programming_lang, "ruby") %}
-```bash
+```shell
 sudo export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > JavaScript -->
 {% if equals($programming_lang, "javascript") %}
-```bash
+```shell
 sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 ```
 {% /if %}
@@ -139,35 +139,35 @@ sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 {% if equals($os, "mac_os") %}
 <!-- macOS > Python -->
 {% if equals($programming_lang, "python") %}
-```bash
+```shell
 export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > Java -->
 {% if equals($programming_lang, "java") %}
-```bash
+```shell
 export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > Go -->
 {% if equals($programming_lang, "go") %}
-```bash
+```shell
 export GOPATH="$GOPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > Ruby -->
 {% if equals($programming_lang, "ruby") %}
-```bash
+```shell
 export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > JavaScript -->
 {% if equals($programming_lang, "javascript") %}
-```bash
+```shell
 export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 ```
 {% /if %}

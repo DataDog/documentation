@@ -45,76 +45,91 @@ menu:
       pre: hex-ringed
       parent: essentials_heading
       weight: 10000
+    - name: DebugIt
+      identifier: markdoc_testing_debug_it
+      url: markdoc_testing/debug_it/
+      parent: markdoc_testing
+      weight: 1
+    - name: Hugo
+      identifier: markdoc_testing_debug_it_hugo
+      url: markdoc_testing/debug_it/hugo
+      parent: markdoc_testing_debug_it
+      weight: 101
+    - name: Markdoc
+      identifier: markdoc_testing_debug_it_markdoc
+      url: markdoc_testing/debug_it/markdoc
+      parent: markdoc_testing_debug_it
+      weight: 102
     - name: Demo pages
       identifier: markdoc_testing_demo_pages
       url: markdoc_testing/demo_pages/
       parent: markdoc_testing
-      weight: 1
+      weight: 2
     - name: Primary Colors
       identifier: markdoc_testing_primary_colors
       url: markdoc_testing/demo_pages/primary_colors/
       parent: markdoc_testing_demo_pages
-      weight: 101
+      weight: 201
     - name: Traffic Light Colors
       identifier: markdoc_testing_traffic_light_colors
       url: markdoc_testing/demo_pages/traffic_light_colors/
       parent: markdoc_testing_demo_pages
-      weight: 102
+      weight: 202
     - name: Postgres Integration Setup
       identifier: markdoc_testing_postgres
       url: markdoc_testing/demo_pages/postgres_integration_setup/
       parent: markdoc_testing_demo_pages
-      weight: 103
+      weight: 203
     - name: Elements
       identifier: markdoc_testing_elements
       url: markdoc_testing/elements/
       parent: markdoc_testing
-      weight: 2
+      weight: 3
     - name: Alert
       identifier: markdoc_testing_alert
       url: markdoc_testing/elements/alert/
       parent: markdoc_testing_elements
-      weight: 201
+      weight: 301
     - name: Callout
       identifier: markdoc_testing_callout
       url: markdoc_testing/elements/callout/
       parent: markdoc_testing_elements
-      weight: 202
+      weight: 302
     - name: Code Block
       identifier: markdoc_testing_code_block
       url: markdoc_testing/elements/code_block/
       parent: markdoc_testing_elements
-      weight: 203
+      weight: 303
     - name: Description List
       identifier: markdoc_testing_description_list
       url: markdoc_testing/elements/description_list/
       parent: markdoc_testing_elements
-      weight: 204
+      weight: 304
     - name: Image/Video
       identifier: markdoc_testing_image
       url: markdoc_testing/elements/image/
       parent: markdoc_testing_elements
-      weight: 205
+      weight: 305
     - name: region-param
       identifier: markdoc_testing_region_param
       url: markdoc_testing/elements/region_param/
       parent: markdoc_testing_elements
-      weight: 206
+      weight: 306
     - name: site-region
       identifier: markdoc_testing_site_region
       url: markdoc_testing/elements/site_region/
       parent: markdoc_testing_elements
-      weight: 207
+      weight: 307
     - name: Table
       identifier: markdoc_testing_table
       url: markdoc_testing/elements/table/
       parent: markdoc_testing_elements
-      weight: 208
+      weight: 308
     - name: Tabs
       identifier: markdoc_testing_tabs
       url: markdoc_testing/elements/tabs/
       parent: markdoc_testing_elements
-      weight: 209
+      weight: 309
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/

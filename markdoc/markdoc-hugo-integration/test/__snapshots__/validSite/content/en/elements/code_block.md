@@ -12,17 +12,12 @@ title: Code Block
   </ul>
   <h2 id="simple-example">Simple example</h2>
   <div class="code-snippet-wrapper">
-    <div class="code-filename-wrapper d-flex justify-content-end collapsible">
-      <div class="js-code-block-visibility-toggle">
-        <div class="chevron chevron-down d-none"></div>
-        <div class="chevron chevron-up"></div>
-      </div>
-    </div>
+    <div class="code-filename-wrapper d-flex justify-content-end"></div>
     <div class="code-snippet">
       <div class="code-button-wrapper position-absolute">
         <button class="btn text-primary js-copy-button">Copy</button>
       </div>
-      <div>
+      <div class="mdoc-code-snippet mdoc-language-javascript">
         <pre
           tabindex="0"
           class="chroma"
@@ -36,17 +31,12 @@ title: Code Block
   </div>
   <h2 id="example-with-region-param">Example with region-param</h2>
   <div class="code-snippet-wrapper">
-    <div class="code-filename-wrapper d-flex justify-content-end collapsible">
-      <div class="js-code-block-visibility-toggle">
-        <div class="chevron chevron-down d-none"></div>
-        <div class="chevron chevron-up"></div>
-      </div>
-    </div>
+    <div class="code-filename-wrapper d-flex justify-content-end"></div>
     <div class="code-snippet">
       <div class="code-button-wrapper position-absolute">
         <button class="btn text-primary js-copy-button">Copy</button>
       </div>
-      <div>
+      <div class="mdoc-code-snippet mdoc-language-bash">
         <pre
           tabindex="0"
           class="chroma"
@@ -63,19 +53,12 @@ title: Code Block
     <li>
       Item 1 includes some code:
       <div class="code-snippet-wrapper">
-        <div
-          class="code-filename-wrapper d-flex justify-content-end collapsible"
-        >
-          <div class="js-code-block-visibility-toggle">
-            <div class="chevron chevron-down d-none"></div>
-            <div class="chevron chevron-up"></div>
-          </div>
-        </div>
+        <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div>
+          <div class="mdoc-code-snippet mdoc-language-python">
             <pre
               tabindex="0"
               class="chroma"
@@ -96,19 +79,12 @@ title: Code Block
         <li>
           Step 3: Step three would go here. It has some code:
           <div class="code-snippet-wrapper">
-            <div
-              class="code-filename-wrapper d-flex justify-content-end collapsible"
-            >
-              <div class="js-code-block-visibility-toggle">
-                <div class="chevron chevron-down d-none"></div>
-                <div class="chevron chevron-up"></div>
-              </div>
-            </div>
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
             <div class="code-snippet">
               <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>
               </div>
-              <div>
+              <div class="mdoc-code-snippet mdoc-language-javascript">
                 <pre
                   tabindex="0"
                   class="chroma"

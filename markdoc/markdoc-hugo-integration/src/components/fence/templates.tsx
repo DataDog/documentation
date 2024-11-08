@@ -5,6 +5,7 @@
 
 export const CodeBlockTemplate = (props: {
   highlightedContents: string;
+  language: string;
   attrs: {
     filename?: string;
     wrap: boolean;
@@ -37,14 +38,19 @@ export const CodeBlockTemplate = (props: {
       </div>
       <div className={`code-snippet ${codeSnippetClasses}`}>
         {!attrs.disable_copy && <CopyButton />}
-        <CodeSnippet contents={highlightedContents} />
+        <CodeSnippet contents={highlightedContents} language={props.language} />
       </div>
     </div>
   );
 };
 
-function CodeSnippet(props: { contents: string }) {
-  return <div dangerouslySetInnerHTML={{ __html: props.contents }}></div>;
+function CodeSnippet(props: { contents: string; language: string }) {
+  return (
+    <div
+      className={`mdoc-code-snippet mdoc-language-${props.language}`}
+      dangerouslySetInnerHTML={{ __html: props.contents }}
+    ></div>
+  );
 }
 
 function CollapseToggle() {

@@ -16,6 +16,14 @@
     font-size: 16px;
     border-radius: 5px;
 }
+div.mdoc-code-snippet.mdoc-language-shell span.line:before {
+    content: '$ ';
+    display: inline;
+}
+div.mdoc-code-snippet.mdoc-language-bash span.line:before {
+    content: '$ ';
+    display: inline;
+}
 .mdoc-pref__pill.selected {
     color: white;
     background-color: #632ca6;
