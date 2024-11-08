@@ -30,7 +30,14 @@ const languagesFile = path.resolve(__dirname, '../config/_default/languages.yaml
 const languagesConfig = yaml.safeLoad(fs.readFileSync(languagesFile, 'utf8'));
 const languages = Object.keys(languagesConfig);
 
-console.time('Markdoc compilation execution time');
+// Load the i18n strings
+const i18n = {};
+const i18nDir = path.resolve(__dirname, '../i18n');
+const files = fs.readdirSync(i18nDir);
+files.forEach((file) => {
+    const lang = file.replace('.json', '');
+    i18n[lang] = yaml.safeLoad(fs.readFileSync(path.resolve(i18nDir, file), 'utf8'));
+});
 
 const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc-assets.html');
 const SITE_DIR = path.resolve(__dirname, '..');
@@ -43,7 +50,8 @@ const markdocIntegration = new MarkdocHugoIntegration({
         siteConfig,
         languages,
         env,
-        siteDir: SITE_DIR
+        siteDir: SITE_DIR,
+        i18n
     }
 });
 

@@ -24,7 +24,14 @@ export const IntegrationConfigSchema = z.object({
   siteConfig: z.object({ baseURL: z.string().url() }),
   env: z.union([z.literal('development'), z.literal('preview'), z.literal('live')]),
   languages: z.array(z.string()),
-  siteDir: z.string().min(1)
+  siteDir: z.string().min(1),
+  i18n: z.record(
+    z.record(
+      z.object({
+        other: z.string()
+      })
+    )
+  )
 });
 
 /**
