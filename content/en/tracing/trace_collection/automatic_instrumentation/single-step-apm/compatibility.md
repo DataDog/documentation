@@ -110,8 +110,6 @@ This section provides language-specific compatibility requirements for Single St
 | 3.2          | <i class="icon-check-bold"></i> |       |
 | 3.1          | <i class="icon-check-bold"></i> |       |
 | 3.0          | <i class="icon-check-bold"></i> |       |
-| 2.9          | <i class="icon-check-bold"></i> |       |
-| 2.8          | <i class="icon-check-bold"></i> |       |
 | 2.7          | <i class="icon-check-bold"></i> |       |
 
 ### Troubleshooting
