@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { HugoFunctions } from '../../src/helperModules/HugoFunctions';
-import { mockHugoGlobalConfig } from '../mocks/valid/integrationConfig';
+import { mockHugoGlobalConfig, mockPageConfig } from '../mocks/valid/integrationConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 
 describe('HugoFunctions', () => {
@@ -32,7 +32,10 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([url]) => [
           url,
-          HugoFunctions.relUrl({ hugoConfig: { global: hugoConfigDup }, url })
+          HugoFunctions.relUrl({
+            hugoConfig: { global: hugoConfigDup, page: mockPageConfig },
+            url
+          })
         ])
       );
 
@@ -56,7 +59,10 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([input]) => [
           input,
-          HugoFunctions.relUrl({ hugoConfig: { global: hugoConfigDup }, url: input })
+          HugoFunctions.relUrl({
+            hugoConfig: { global: hugoConfigDup, page: mockPageConfig },
+            url: input
+          })
         ])
       );
 

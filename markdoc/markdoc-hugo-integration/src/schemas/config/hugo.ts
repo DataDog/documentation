@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { IntegrationConfigSchema } from './integration';
+import { PageConfigSchema } from './page';
 
 /**
  * A mapping of commonly accessed Hugo subdirectories
@@ -55,8 +56,8 @@ export type HugoGlobalConfig = z.infer<typeof HugoGlobalConfigSchema>;
  */
 export const HugoConfigSchema = z
   .object({
-    global: HugoGlobalConfigSchema
-    // page config will go here
+    global: HugoGlobalConfigSchema,
+    page: PageConfigSchema
   })
   .strict();
 

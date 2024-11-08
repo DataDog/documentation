@@ -2,6 +2,7 @@ import { HugoGlobalConfig } from '../../../src/schemas/config/hugo';
 import { IntegrationConfig } from '../../../src/schemas/config/integration';
 import { VALID_SITE_DIR } from '../../config/constants';
 import { HugoFunctions } from '../../../src/helperModules/HugoFunctions';
+import { PageConfig } from '../../../src/schemas/config/page';
 
 const mockIntegrationConfig: IntegrationConfig = {
   siteParams: { img_url: 'https://example.com' },
@@ -42,4 +43,9 @@ const mockHugoGlobalConfig: HugoGlobalConfig = {
   }
 };
 
-export { mockHugoGlobalConfig, mockIntegrationConfig };
+const mockPageConfig: PageConfig = {
+  lang: 'en',
+  path: 'example/path/to/file.md'
+};
+
+export { mockHugoGlobalConfig, mockIntegrationConfig, mockPageConfig };

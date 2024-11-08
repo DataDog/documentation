@@ -4,7 +4,10 @@ import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
 import { render, CustomHtmlComponent } from '../../../../src/helperModules/renderer';
-import { mockHugoGlobalConfig } from '../../../mocks/valid/integrationConfig';
+import {
+  mockHugoGlobalConfig,
+  mockPageConfig
+} from '../../../mocks/valid/integrationConfig';
 import { HugoConfig } from '../../../../src/schemas/config/hugo';
 
 const alert = {
@@ -71,7 +74,8 @@ describe('custom components', () => {
       }
     },
     hugoConfig: {
-      global: mockHugoGlobalConfig
+      global: mockHugoGlobalConfig,
+      page: mockPageConfig
     },
     components: {
       Alert
