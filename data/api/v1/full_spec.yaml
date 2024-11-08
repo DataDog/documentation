@@ -16134,7 +16134,8 @@ components:
           minimum: 300
           type: integer
         verbosity:
-          description: The level of verbosity for the mobile test.
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
           format: int32
           maximum: 5
           minimum: 0
@@ -17244,12 +17245,12 @@ components:
     SyntheticsTestRestrictionPolicyBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        principals:
-          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
+        principal:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipal'
         relation:
           $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
       type: object
-    SyntheticsTestRestrictionPolicyBindingPrincipals:
+    SyntheticsTestRestrictionPolicyBindingPrincipal:
       description: List of principals for a mobile test binding.
       items:
         description: A principal for a mobile test binding.
