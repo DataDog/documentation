@@ -42,6 +42,7 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
   // Handle block-display images
   const isGif = attrs.src.split('.')[1] === 'gif';
 
+  // If it has a pop up, wrap the image in a link that opens a modal
   if (attrs.popup && !isGif) {
     return (
       <PopUpLink attrs={attrs} hugoConfig={hugoConfig}>
@@ -55,6 +56,7 @@ export const ImgTemplate = (props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig 
     return <LinkWrappedImage attrs={attrs} hugoConfig={hugoConfig} />;
   }
 
+  // Otherwise, use a plain image or gif element
   if (isGif) {
     return <Gif attrs={attrs} hugoConfig={hugoConfig} />;
   } else {
