@@ -236,8 +236,10 @@ To collect custom resources, you need to configure both the Datadog Agent and se
 
 1. In Datadog, open [Orchestrator Explorer][3].
 1. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
-1. Locate the custom resource definition that corresponds to the resource you want to collect. Click on the version under the **Versions** column.
-1. Select **Enable Indexing**
+1. Locate the custom resource definition that corresponds to the resource you want to visualize in the explorer. Click on the version under the **Versions** column.
+1. Click to select the fields you would like to index from the Custom Resource (maximum of 50 fields per resource), then click **Enable Indexing** to save
+
+Once fields are indexed, they will be available to add as columns in the explorer or as part of Saved Views. 
 
 ## Further reading
 
