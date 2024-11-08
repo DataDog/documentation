@@ -180,7 +180,6 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 {{% /tab %}}
 
 {{% tab "Go" %}}
-<a name="go-compatibility"></a>
 
 ## Compatibility requirements
 
