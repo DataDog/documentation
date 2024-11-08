@@ -26,7 +26,7 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 ## Setup
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
-RUM SDK Injection in Preview. Sign up for access! You can also request early access if you are using Apache HTTPD, Tomcat, or another web server technology. Learn more about <a href="/real_user_monitoring/browser/setup/server">Server Side Instrumentation</a>
+RUM SDK Injection in Preview. Sign up for access! You can also request early access if you are using Apache HTTPD, Tomcat, or another web server technology. Learn more about <a href="/real_user_monitoring/browser/setup/server">Server Side Instrumentation.</a>
 {{< /callout >}}
 
 To set up RUM Browser Monitoring, create a RUM application:
