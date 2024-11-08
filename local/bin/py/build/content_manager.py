@@ -115,11 +115,20 @@ def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir
     :param github_token: A valide Github token to download content with the Github Class
     :param extract_dir: Directory into which to put all content downloaded.
     """
+    # Load allowed repos
+    allowed_repos = self.pull_config_allowlist.get('allowed_repos', [])
+
     grouped_globs = grouped_globs_table(self.list_of_sourced_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
 
     for content in self.list_of_sourced_contents:
         repo = content["repo_name"]
+
+        # Check if the repo is in the allowed list
+        if repo not in allowed_repos:
+            print("\x1b[31mERROR\x1b[0m: Repo {} not allowed".format(repo))
+            raise ValueError
+
         print(f'Downloading external content from {repo}...')
         local_repo_path = os.path.join("..", repo)
         repo_path_last_extract = os.path.join(extract_dir, repo)

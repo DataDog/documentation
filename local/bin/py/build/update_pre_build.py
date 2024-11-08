@@ -52,11 +52,12 @@ class Build:
             'nerdvision'
         ]        
 
-    def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
+    def load_config(self, build_configuration_file_path, pull_config_allowlist_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
         """
         Loads configurations for external content to pull from source or cache, and attaches it to the Build Class
         """
         self.build_configuration = yaml.safe_load(open(build_configuration_file_path))
+        self.pull_config_allowlist = yaml.safe_load(open(pull_config_allowlist_file_path))
 
         if disable_cache_on_retry:
             self.cache_enabled = False
@@ -150,6 +151,7 @@ class Build:
 def main(disable_cache_on_retry=False):
     # Those hard-written variables should be set in the Makefile config later down the road.
     build_configuration_file_path = getenv("CONFIGURATION_FILE")
+    pull_config_allowlist_file_path = "./local/bin/py/build/configurations/pull_config_allowlist.yaml"
     integration_merge_configuration_file_path = "./local/bin/py/build/configurations/integration_merge.yaml"
     temp_directory = "./integrations_data"
 
@@ -159,7 +161,7 @@ def main(disable_cache_on_retry=False):
     # 3. Retrieve the list of content to work with and updates it based of the configuration specification
     # 4. Actually build the documentation with the udpated list of content.
     build = Build(temp_directory)
-    build.load_config(build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry)
+    build.load_config(build_configuration_file_path, pull_config_allowlist_file_path, integration_merge_configuration_file_path, disable_cache_on_retry)
     build.get_list_of_content(build.build_configuration)
     build.build_documentation()
 
