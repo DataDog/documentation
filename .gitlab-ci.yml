@@ -55,6 +55,9 @@ variables:
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
   URGENT_FIX: "false" # set to true if the branch is an urgent fix to skip the build_live queue
 
+  # Feature Flag Vars
+  FF_PREVIEW_PULL_CONFIG_CACHE: "true" # set to false to disable caching of pull_config.yaml in preview builds
+
 
 # ================== copy scripts =============== #
 before_script:
@@ -368,6 +371,7 @@ post_build_failure_status_to_spec_repo:
     LOCAL: "False"
     RESOURCE_GROUP_ORDER: oldest_first
     RESOURCE_GROUP_LIMIT: 1
+    FF_PREVIEW_PULL_CONFIG_CACHE: "false"
   script:
     - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - notify_slack.py "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" --status="#FFD700"
@@ -498,18 +502,6 @@ link_checks:on-schedule:
       - ./tmp/.htmltest
   interruptible: true
   allow_failure: true
-
-# We are relying on the preview version of this job due to the length of time it takes
-# test_missing_tms_live:
-#   <<: *base_template
-#   <<: *live_rules
-#   stage: post-deploy
-#   cache: {}
-#   environment: "live"
-#   dependencies:
-#     - build_live
-#   script:
-#     - check_missing_tms
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template

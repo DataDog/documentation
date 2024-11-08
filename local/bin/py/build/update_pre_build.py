@@ -61,7 +61,7 @@ class Build:
         if disable_cache_on_retry:
             self.cache_enabled = False
         else:
-            self.cache_enabled = self.build_configuration[0].get('config', {}).get('cache_enabled', False)
+            self.cache_enabled = os.getenv('FF_PREVIEW_PULL_CONFIG_CACHE', 'false').lower() == 'true'
 
         if not self.cache_enabled:
             self.integration_mutations = OrderedDict(yaml.safe_load(open(integration_merge_configuration_file_path)))
