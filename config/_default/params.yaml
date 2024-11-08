@@ -72,6 +72,8 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
+    client: Client
+    server: Server
     android: Android
     ios: iOS
     expo: Expo

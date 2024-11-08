@@ -1,6 +1,9 @@
 ---
 title: RUM Browser Monitoring Server Side Instrumentation
 beta: true
+code_lang: server
+type: multi-code-lang
+code_lang_weight: 2
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -10,19 +13,17 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
+RUM SDK Injection in Preview. Sign up for access! You can also request early access if you are using Apache HTTPD, Tomcat, or another web server technology.
+{{< /callout >}}
+
 ## Overview
 
-{{< img src="real_user_monitoring/browser/auto-instrumentation-1.png" alt="Select Auto-Instrumentation when creating a new application." >}}
-
-Datadog RUM Server Side Instrumentation (SDK Injection) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy. If you are interested in manual instrumentation per application, see [Client Side Instrumentation][1].
+Datadog RUM Server Side Instrumentation (SDK Injection) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy.
 
 RUM Server Side Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
 
 After your applications have been instrumented, you can begin configuring your RUM application in Datadog.
-
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
-RUM SDK Injection in Preview. Sign up for access! You can also request early access if you are using Apache HTTPD, Tomcat, or another web server technology.
-{{< /callout >}}
 
 ## Prerequisites
 
@@ -127,6 +128,6 @@ The available functionality has the following important limitations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup_client_side/
+[1]: /real_user_monitoring/browser/setup/
 [2]: /agent/
 [3]: /real_user_monitoring/browser/advanced_configuration/

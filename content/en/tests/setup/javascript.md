@@ -476,7 +476,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /real_user_monitoring/browser/setup_client_side/
+[10]: /real_user_monitoring/browser/setup/
 [11]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 

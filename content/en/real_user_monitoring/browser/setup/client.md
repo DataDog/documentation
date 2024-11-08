@@ -1,5 +1,8 @@
 ---
 title: RUM Browser Monitoring Client Side Instrumentation
+code_lang: client
+type: multi-code-lang
+code_lang_weight: 1
 aliases:
   - /real_user_monitoring/setup
   - /real_user_monitoring/browser/setup
@@ -23,11 +26,10 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 ## Setup
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Try our new Browser SDK injection!">}}
-You can now auto-inject the Browser SDK in your application instead of installing it manually. Complete the form to request access to the private beta.
+You can now auto-inject the Browser SDK in your application instead of installing it manually. Complete the form to request access to the private beta. Learn more about <a href="/real_user_monitoring/browser/setup/server">Server Side Instrumentation</a>.
 {{< /callout >}}
 
 To set up RUM Browser Monitoring, create a RUM application:
-
 1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][2] and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][3].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
@@ -46,7 +48,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 ### Choose the right installation method
 
 SDK injection
-: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in private beta. To use this feature, [request access to RUM SDK injection][27].
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][27].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
@@ -61,8 +63,7 @@ CDN sync
 
 Add [`@datadog/browser-rum`][13] to your `package.json` file, then initialize it with:
 
-<details open>
-  <summary>Latest version</summary>
+{{% collapse-content title="Latest version" level="h4" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -85,10 +86,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before <code>v5.0.0</code></summary>
+{{% collapse-content title="Before v5.0.0" level="h4" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -110,11 +110,9 @@ datadogRum.init({
 });
 datadogRum.startSessionReplayRecording();
 ```
+{{% /collapse-content %}} 
 
-</details>
-
-<details>
-  <summary>before <code>v4.30.0</code></summary>
+{{% collapse-content title="Before v4.30.0" level="h4" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -137,10 +135,9 @@ datadogRum.init({
 datadogRum.startSessionReplayRecording();
 ```
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before <code>v4.20.0</code></summary>
+{{% collapse-content title="Before v4.20.0" level="h4" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -161,10 +158,9 @@ datadogRum.init({
 datadogRum.startSessionReplayRecording();
 ```
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before <code>v4.10.2</code></summary>
+{{% collapse-content title="Before v4.10.2" level="h4" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -185,7 +181,7 @@ datadogRum.init({
 datadogRum.startSessionReplayRecording();
 ```
 
-</details>
+{{% /collapse-content %}} 
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
@@ -193,8 +189,7 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application. For **{{<region-param key="dd_site_name">}}** site:
 
-<details open>
-  <summary>Latest version</summary>
+{{% collapse-content title="Latest version" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -371,10 +366,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before<code>v5.0.0</code></summary>
+{{% collapse-content title="Before v5.0.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -551,10 +545,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before<code>v4.30.0</code></summary>
+{{% collapse-content title="Before v4.30.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -731,10 +724,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before<code>v4.20.0</code></summary>
+{{% collapse-content title="Before v4.20.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -899,10 +891,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.10.2</code></summary>
+{{% collapse-content title="Before v4.10.2" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1067,7 +1058,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}} 
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
@@ -1077,8 +1068,7 @@ Early RUM API calls must be wrapped in the `window.DD_RUM.onReady()` callback. T
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Including the script tag higher and synchronized ensures Datadog RUM can collect all performance data and errors. For **{{<region-param key="dd_site_name">}}** site:
 
-<details open>
-  <summary>Latest version</summary>
+{{% collapse-content title="Latest version" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1225,10 +1215,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>before<code>v5.0.0</code></summary>
+{{% collapse-content title="Before v5.0.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1381,10 +1370,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.30.0</code></summary>
+{{% collapse-content title="Before v4.30.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1537,10 +1525,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.20.0</code></summary>
+{{% collapse-content title="Before v4.20.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1681,10 +1668,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.10.2</code></summary>
+{{% collapse-content title="Before v4.10.2" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1825,7 +1811,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 {{</ site-region>}}
 
-</details>
+{{% /collapse-content %}} 
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
@@ -2140,3 +2126,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [26]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [27]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
 [28]: /data_security/real_user_monitoring/#mask-action-names
+[29]: /real_user_monitoring/browser/setup/server
