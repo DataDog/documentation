@@ -16,7 +16,15 @@ describe('MarkdocHugoIntegration', () => {
       env: 'development',
       languages: ['en'],
       siteConfig: { baseURL: 'https://example.com/' },
-      siteDir
+      siteDir,
+      i18n: {
+        en: {
+          example_key: { other: 'test' }
+        },
+        ja: {
+          example_key: { other: 'テスト' }
+        }
+      }
     }
   });
 

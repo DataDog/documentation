@@ -14,7 +14,15 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       env: 'development',
       languages: ['en', 'ja', 'fr'],
       siteConfig: { baseURL: 'https://example.com/' },
-      siteDir
+      siteDir,
+      i18n: {
+        en: {
+          example_key: { other: 'test' }
+        },
+        ja: {
+          example_key: { other: 'テスト' }
+        }
+      }
     }
   });
 

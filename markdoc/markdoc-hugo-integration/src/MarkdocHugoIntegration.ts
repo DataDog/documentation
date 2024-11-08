@@ -6,12 +6,12 @@
 
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
+import { IntegrationConfig } from './schemas/config/integration';
 import {
   HugoConfig,
   HugoConfigSchema,
   HugoGlobalConfig,
-  HugoGlobalConfigSchema,
-  IntegrationConfig
+  HugoGlobalConfigSchema
 } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
