@@ -9,7 +9,7 @@ categories:
 - log collection
 - network
 - provisioning
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de métricas clave de AWS Elastic Beanstalk.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/

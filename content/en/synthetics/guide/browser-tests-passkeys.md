@@ -22,7 +22,7 @@ You can use passkeys as a replacement for a username and password, or as a secon
 
 ## Create your Virtual Authenticator global variable
 
-Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global variables. To create a Virtual Authenticator global variable storing your passkeys, see the [**Global Variables** section in Synthetic Monitoring & Continuous Testing Settings][4].
+Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global variables. To create a Virtual Authenticator global variable storing your passkeys, see the [**Global Variables - Virtual Authenticator** section in Synthetic Monitoring ][4].
 
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Create a Virtual Authenticator global variable" style="width:70%;" >}}
 
@@ -50,10 +50,12 @@ To test a registration flow using passkeys in your [browser tests][3]:
 
 To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application (see section above). This is required once per passkey and application.
 
-You can either:
+Choose one of the following options:
 
-- Complete the registration flow from within the recorder, but without recording the registration steps, or
-- Create a test that embeds both steps for the registration and login flows.
+- Create a test that embeds both steps for the registration and login flows
+- Complete the registration flow from within the recorder, but without recording the registration steps
+
+**Note**: To avoid creating a new user for each test scenario involving passkey authentication, it's recommended to combine user creation and authentication in the same step.
 
 1. [Import your virtual authenticator global variable][5]. 
 2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
@@ -66,5 +68,5 @@ You can either:
 [1]: https://app.datadoghq.com/synthetics/settings/variables
 [2]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [3]: /synthetics/browser_tests/
-[4]: /synthetics/settings/?tab=virtualauthenticator
+[4]: /synthetics/platform/settings?tab=virtualauthenticator#global-variables
 [5]: /synthetics/browser_tests#use-global-variables

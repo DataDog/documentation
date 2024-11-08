@@ -19,6 +19,9 @@ further_reading:
     - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Configure an API Test'
+    - link: "https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/"
+      tag: "Architecture Center"
+      text: "Protect Sensitive Data with Synthetics Private Location Runners"
     - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location'
       tag: "External Site"
       text: 'Create and manage Synthetic Private Locations with Terraform'
@@ -76,7 +79,7 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 | System | Requirements |
 |---|---|
-| OS | Windows Server 2016, Windows Server 2019, or Windows 10. |
+| OS | Windows Server 2022, Windows Server 2019, Windows Server 2016, or Windows 10. |
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 

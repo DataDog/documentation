@@ -15,7 +15,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="false" url="https://www.datadoghq.com/private-beta/backend-error-tracking/" header="Join the Beta!">}}
-Datadog's standalone backend Error Tracking is in private beta. Sign up to be notified and gain access when the private beta opens.
+Datadog's standalone backend Error Tracking is in private beta. Sign up to gain access when the private beta opens.
 {{< /beta-callout >}}
 
 

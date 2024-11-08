@@ -20,7 +20,7 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Datadog representative to sign up.</div>
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 
@@ -28,7 +28,7 @@ Network Path illustrates the route that network traffic follows from its origin 
 
 **Note**: [Network Performance Monitoring][2] must be enabled to use Network Path functionality.
 
-{{< img src="network_performance_monitoring/network_path/network_path_default_view_2.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_default_view_3.png" alt="The Network Path default view, showing the path from source to destination" >}}
 
 ## How it works
 

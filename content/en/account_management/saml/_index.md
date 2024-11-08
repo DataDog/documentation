@@ -68,20 +68,27 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 When a login occurs, a SAML Assertion containing user authorization is sent from the identity provider to Datadog.
 
-Some important notes on assertions:
+### Capabilities
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
+
+### Requirements
+
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
 * Reference [Datadog's Service Provider metadata][18] for more information. You must be signed in to Datadog to access the file.
+
+### Supported attributes
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 
   1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user's Datadog username. The username is typically the user's email address.
   2. **sn**: This is optional, and should be set to the user's surname.
   3. **givenName**: This is optional, and should be set to the user's first, or given name.
+
+<div class="alert alert-info">For the Azure Entra ID IdP, use the attribute `surname` instead of `sn` in the assertion.</div>
 
 Datadog expects that Attributes use the URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or the Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute depends on the NameFormat that your IdP uses.
 
