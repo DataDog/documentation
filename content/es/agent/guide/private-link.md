@@ -5,7 +5,7 @@ further_reading:
   text: Habilitar la recopilación de logs con el Agent
 - link: /integrations/amazon_web_services/#log-collection
   tag: Documentación
-  text: Recopilar logs de tus <txprotected>servicios</txprotected> AWS
+  text: Recopilar logs de tus servicios AWS
 title: Conectarse a Datadog a través de PrivateLink de AWS
 ---
 

@@ -16134,7 +16134,8 @@ components:
           minimum: 300
           type: integer
         verbosity:
-          description: The level of verbosity for the mobile test.
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
           format: int32
           maximum: 5
           minimum: 0
@@ -17244,12 +17245,12 @@ components:
     SyntheticsTestRestrictionPolicyBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        principals:
-          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
+        principal:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipal'
         relation:
           $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
       type: object
-    SyntheticsTestRestrictionPolicyBindingPrincipals:
+    SyntheticsTestRestrictionPolicyBindingPrincipal:
       description: List of principals for a mobile test binding.
       items:
         description: A principal for a mobile test binding.
@@ -20169,9 +20170,19 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20925,9 +20936,19 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21688,9 +21709,19 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        error_tracking_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_events_agg_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
