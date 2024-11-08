@@ -1,5 +1,5 @@
 ---
-title: v2 Go Compatibility Requirements
+title: (v2) Go Compatibility Requirements
 ---
 
 <div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/security/application_security/software_composition_analysis/setup/compatibility/go">Go Compatibility Requirements</a> documentation.</div>

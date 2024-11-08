@@ -1,5 +1,5 @@
 ---
-title: Enabling the Go Profiler
+title: (v2) Enabling the Go Profiler
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
