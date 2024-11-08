@@ -10,7 +10,7 @@ In Datadog On-Call, escalation policies ensure that Pages are promptly addressed
 
 Datadog creates a default escalation policy when you [onboard a Team to On-Call][1].
 
-### Create a new escalation policy
+## Create a new escalation policy
 {{< img src="service_management/oncall/escalation_policy.png" alt="A sample escalation policy." style="width:100%;" >}}
 
 1. Go to [**On-Call** > **Escalation Policies**][2].
@@ -22,34 +22,34 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 1. Configure how many times these steps should be repeated if no one acknowledges the Page.
 1. Select whether Datadog should automatically update the Page status to **Resolved** after executing all rules and repeats.
 
-### Escalation Policy Targets
+## Escalation policy targets
 
-Within each step of an Escalation Policy, you can notify individual users, entire teams, and/or whoever is currently on-call in a schedule.
+In each step of an escalation policy, you can notify individual users, entire teams, or whoever is currently on-call in a schedule.
 
-#### Schedules
+### Schedules
 {{< img src="service_management/oncall/escalation_policy_notify_schedule.png" alt="A sample escalation policy." style="width:100%;" >}}
 
-Escalation Policies can notify whoever is on-call according to a predefined schedule. This means that the system checks the schedule and notifies the person or group that is actively on-call during the incident.
+Escalation policies can notify whoever is on-call according to a predefined schedule. The system checks the schedule and notifies the person or group that is actively on-call during the incident.
 
 - Routing alerts to on-call responders across different time zones to ensure 24/7 coverage.
 - Handling tiered support, where different shifts handle different levels of urgency.
 - Dynamic notifications for teams with rotating on-call responsibilities, ensuring the right person is always paged.
 
-Should no one be on-call for a given schedule, the escalation step is gracefully skipped, ensuring that the process moves forward without delays or interruptions. The UI will indicate it as well:
+If no one is on-call for a given schedule, the escalation step gracefully skips and the process moves forward without delays or interruptions. The UI indicates a skipped escalation.
 
-{{< img src="service_management/oncall/escalation_policy_schedule_skipped.png" alt="A sample escalation policy." style="width:100%;" >}}
+{{< img src="service_management/oncall/escalation_policy_schedule_skipped.png" alt="A sample escalation policy indicating a skipped escalation due to no one being on call." style="width:100%;" >}}
 
-#### Users
-{{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="A sample escalation policy." style="width:100%;" >}}
+### Users
+{{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="A sample escalation policy that specifies a user in the escalation policy." style="width:100%;" >}}
 
-You can directly include specific users in an Escalation Policy. This ensures that certain key individuals are always notified in the event of a Page. Common use cases for directly paging a user are:
+You can directly include specific users in an escalation policy. This ensures that certain key individuals are always notified in the event of a Page. Common use cases for directly paging a user are:
 
 - Notifying a senior engineer for high-severity incidents requiring specialized knowledge.
 - Alerting a product manager or director in case of customer-facing incidents.
 - Routing alerts to a backup responder if the primary contact is unavailable.
 
-#### Teams
-{{< img src="service_management/oncall/escalation_policy_notify_team.png" alt="A sample escalation policy." style="width:100%;" >}}
+### Teams
+{{< img src="service_management/oncall/escalation_policy_notify_team.png" alt="A sample escalation policy that specifies a team ." style="width:100%;" >}}
 
 Common use cases for paging an entire Team are:
 
@@ -58,7 +58,7 @@ Common use cases for paging an entire Team are:
 - Ensuring that all relevant members of an engineering or security team are alerted for critical outages.
 
 
-### Limitations
+## Limitations
 
 - Maximum escalation steps: 10
 - Maximum number of notify targets (individuals, teams or schedules) per escalation step: 10
