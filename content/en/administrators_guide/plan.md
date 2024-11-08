@@ -121,7 +121,7 @@ The logging platform can be configured with many layers of logs storage. Each ha
 | Ignored | No | None | None | N/A |
 | [Ingested][15] | Logs-to-metrics | 15m in LiveTail | None | Volume |
 | [Archive][16] | Upon rehydrate | Infinite | Slow | Volume |
-| [Forward Logs][17] | Logs-to-metrics | Determined by target | None | Volume |
+| [Forward logs][17] | Logs-to-metrics | Determined by target | None | Volume |
 | [Index][18] | Yes | 3,7,15,30 days | Immediate | Volume & message count |
 | [Flex Logs][19] | Yes\* | [Storage tiers][74]  | Rapid | Retrieval volume |
 
