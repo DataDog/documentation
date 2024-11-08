@@ -19,7 +19,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/log_source_configuration/logstash %}}
 
-## Send logs to the Observability Pipelines Worker with Filebeat
+## Send logs using Filebeat to Observability Pipelines
 
 Use the Logstash source to send logs to the Observability Pipelines Worker with Filebeat.
 
