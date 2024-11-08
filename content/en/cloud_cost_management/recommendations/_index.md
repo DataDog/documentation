@@ -12,8 +12,8 @@ further_reading:
   text: "AWS Integration and CloudWatch FAQ"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Cloud Cost Recommendations is in public beta with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Cloud Cost Recommendations is in Preview with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
 {{< /callout >}}
 
 ## Overview
