@@ -40,7 +40,6 @@ span.set_tag("datadog.api_catalog.route", "/products/{productId}")
 **.NET**\
 {{< code-block lang="dotnet" disable_copy="true" >}}
 scope.Span.SetTag("datadog.api_catalog.route", "/products/{productid}");
-span.SetTag("datadog.api_catalog.route", )
 {{< /code-block >}}
 
 **Go**\
