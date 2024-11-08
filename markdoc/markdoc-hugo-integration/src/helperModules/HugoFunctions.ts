@@ -18,6 +18,18 @@ export class HugoFunctions {
     };
   }
 
+  static i18n(p: { hugoConfig: HugoConfig; key: string }): string {
+    const i18n = p.hugoConfig.global.i18n;
+    const lang = p.hugoConfig.page.lang;
+    const string = i18n[lang][p.key].other;
+
+    if (string) {
+      return string;
+    } else {
+      throw new Error(`No translation found for key "${p.key}" in language "${lang}".`);
+    }
+  }
+
   static isAbsUrl(path: string): boolean {
     if (path.startsWith('http://') || path.startsWith('https://')) {
       return true;
