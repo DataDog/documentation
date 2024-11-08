@@ -191,15 +191,11 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
-
-To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command in your CI. The required command can either:
-* Infer the commits when the CI pipeline pushes the changes directly to the configuration repository and triggers an Argo CD deployment.
-* Manually receive the commit SHAs and configuration repository.
+The `datadog-ci deployment correlate` command can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. The version of the `datadog-ci` CLI should be `2.44.0` or higher.
 
 {{< tabs >}}
-{{% tab "Direct push" %}}
-When using direct push, the `datadog-ci deployment correlate` command needs to run between committing the changes and pushing them to the configuration repository. This requires `datadog-ci` CLI version `2.41.0` or later.
+{{% tab "Automatic" %}}
+When this approach is used, the command automatically infers the current application commit (that is, the commit of the pipeline the command is running in) and the configuration repository commits based on the current Git environment. For this to work properly, the command needs to be run between committing the changes and pushing them to the configuration repository:
 ```yaml
 - job: JobToUpdateConfigurationRepository
   run: |
@@ -212,18 +208,16 @@ When using direct push, the `datadog-ci deployment correlate` command needs to r
     git push
 ```
 {{% /tab %}}
-{{% tab "Manually" %}}
-For other setups, provide the required information manually. This requires `datadog-ci` CLI version `2.44.0` or later.
+{{% tab "Manual" %}}
+If the automatic setup is too limited for your use case, it is possible to provide the the configuration repository URL and SHAs manually:
 ```yaml
 - job: JobToUpdateConfigurationRepository
   run: |
     # Correlate the deployment with the CI pipeline
     export DD_BETA_COMMANDS_ENABLED=1
-    datadog-ci deployment correlate --provider argocd --config-repo <CONFIG_REPO> --config-shas <COMMIT_SHA>
+    datadog-ci deployment correlate --provider argocd --config-repo <CONFIG_REPO_URL> --config-shas <COMMIT_SHA>
 ```
 You can omit the `--config-repo` option if the CI is checked out to the configuration repository. See [command syntax][14] for additional details.
-
-For example, if the CI is creating a branch, committing to it, and merging it, you can run the command after the merge and provide the full merge commit SHA in the `--config-shas` argument.
 {{% /tab %}}
 {{< /tabs >}}
 
