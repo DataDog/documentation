@@ -37,7 +37,7 @@ Haz clic en el paso y selecciona el tipo de clic que deseas que realice el test 
 
 Datadog graba los pasos que realizas en tu aplicación, como por ejemplo seleccionar una opción de un menú desplegable `select`, y aparece un resumen como paso.
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
+{{< img src="synthetics/browser_tests/type_text.mp4" alt="Paso de entrada de texto de test de navegador" video="true" width="95%" >}}
 
 ### Seleccionar una opción
 
@@ -134,7 +134,7 @@ La función de aserción de JavaScript contiene los siguientes parámetros y req
 
 * `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Seleccionar** y **Actualizar** elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Aserción JavaScript de test de navegador" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/assertion_java.mp4" alt="Aserción de JavaScript de test de navegador" video="true" width="100%" >}}
 
 Dado que las aserciones de JavaScript se ejecutan en el contexto de la página activa, estos pasos pueden acceder a todos los objetos definidos en la página activa (tales como bibliotecas, elementos integrados y variables globales). Para cargar bibliotecas externas utiliza una promesa (promise).
 
@@ -163,6 +163,13 @@ Para obtener más información sobre cómo comprobar las descargas, consulta [Co
 [1]: /es/synthetics/guide/email-validation
 [2]: /es/synthetics/browser_tests/actions#use-variables
 [3]: /es/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+
+#### Realizar tests del recuento de solicitudes HTTP
+
+Crea este paso de aserción para realizar tests de la cantidad de solicitudes HTTP realizadas a un patrón de URL específico. Ingresa la cantidad de solicitudes esperadas y la expresión regular de la URL de destino con la que se realizará el test.
+
+{{< img src="synthetics/browser_tests/number_and_target_2.png" alt="Opción de número de test y destino de solicitudes con el menú desplegable de solicitudes realizadas mostrado" style="width:60%;" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -172,79 +179,79 @@ Para obtener más información sobre cómo comprobar las descargas, consulta [Co
 
 {{< img src="synthetics/browser_tests/navigation_step.png" alt="Elige entre tres tipos de navegación en una grabación de test de navegador" style="width:60%;" >}}
 
-#### Refrescar una página
+#### Actualizar una página
 
-Crea este paso de navegación para que tu test de navegador refresque la página actual de la grabación.
+Crea este paso de navegación para que tu test de navegador actualice la página actual de la grabación.
 
-#### Ve a un correo electrónico y haz clic en un enlace
+#### Ir a un correo electrónico y hacer clic en un enlace
 
-Una vez que hayas [creado una variable de correo electrónico][4], crea este paso de navegación para que tu test de navegador tenga acceso a buzones únicos de correo de Synthetic.
+Una vez que hayas [creado una variable de correo electrónico][4], crea este paso de navegación para que tu test de navegador tenga acceso a buzones de correo únicos de Synthetic.
 
 Selecciona el correo electrónico y los enlaces en los que quieres que haga clic el test de navegador. Este paso te lleva a la página correspondiente y te permite seguir adelante con el resto del recorrido desde esa página específica.
 
 #### Seguir un enlace específico
 
-Crea este paso de navegación para que tu test de navegador vaya a una página específica. Debes anteponer en tus URL `http` o `https` en la casilla **Enter link URL** (Introducir enlace de URL).
+Crea este paso de navegación para que tu test de navegador vaya a una página específica. Debes anteponer `http` o `https` en tus URLs en la casilla **Enter link URL** (Ingresar enlace de URL).
 
 ### Acciones especiales
 
-Puedes utilizar la [extensión grabador de test de navegador de Datadog][3], para grabar y monitorizar la mayoría de los pasos asociados a los recorridos de los usuarios. Sin embargo, la extensión no graba automáticamente algunos pasos tales como **Hover** (Pasar el cursor), **Press Key** (Pulsar tecla), **Scroll** (Desplazamiento) y **Wait** (Esperar).
+Puedes usar la [extensión de grabador de test de navegador de Datadog][3], para grabar y monitorizar la mayoría de los pasos asociados a los recorridos de los usuarios. Sin embargo, la extensión no graba de manera automática algunos pasos tales como **Hover** (Pasar el cursor), **Press Key** (Pulsar tecla), **Scroll** (Desplazarse) y **Wait** (Esperar).
 
-Crea este paso de aserción manualmente haciendo clic en **Special Actions** (Acciones especiles) y seleccionando un tipo de acción.
+Crea este paso de aserción de manera manual al hacer clic en **Special Actions** (Acciones especiales) y seleccionar un tipo de acción.
 
 #### Pasar el cursor
 
-Este paso utiliza un clic específico, no un mecanismo de pasar el cursor, para evitar que se genere un paso distinto cada vez que un usuario pase el cursor por encima de un elemento durante la grabación.
+En este paso se usa un clic específico, no un mecanismo de pasar el cursor, para evitar que se genere un paso distinto cada vez que un usuario pase el cursor por encima de un elemento durante la grabación.
 
 Selecciona **Hover** (Pasar el cursor) y haz clic en un elemento para añadir un paso.
 
 #### Pulsar tecla
 
-Añade un paso **Press Key** (Pulsar tecla) para simular que los usuarios introducen pulsaciones de teclas. La [extensión  grabador de test de navegador de Datadog][3] puede grabar las siguientes teclas:
+Añade el paso **Press Key** (Pulsar tecla) para simular que los usuarios introducen pulsaciones de teclas. La [extensión de grabador de test de navegador de Datadog][3] puede grabar las siguientes teclas:
 
 * Intro
 * Flechas (arriba, abajo, derecha e izquierda)
-* Pestaña (fuera de un formulario)
+* Tab (fuera de un formulario)
 * Escape
 * Retroceso
 
-Para pulsar teclas que no se graban automáticamente, especifica los valores que hay que pulsar en el campo **Valor**.
+Para pulsar teclas que no se graban de manera automática, especifica los valores que hay que pulsar en el campo **Value** (Valor). 
 
-Selecciona los modificadores  `Alt`, `Control`, `Meta` y `Shift` para añadirlos al valor introducido.
+ Selecciona los modificadores `Alt`, `Control`, `Meta` y `Shift` para añadirlos al valor introducido.
 
-{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Pulsar el paso Clave en una grabación de test de navegador" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Paso de Pulsar tecla en una grabación de test de navegador" style="width:50%;" >}}
 
-#### Desplazamiento
+#### Desplazarse
 
-Los tests de navegador se desplazan automáticamente a los elementos con los que es necesario interactuar. En la mayoría de los casos no es necesario añadir manualmente un paso de desplazamiento. Utiliza el paso de desplazamiento cuando necesites activar una interacción adicional, como por ejemplo un desplazamiento infinito.
+Los tests de navegador se desplazan de manera automática a los elementos con los que es necesario interactuar. En la mayoría de los casos no es necesario añadir de manera manual un paso de desplazamiento. Usa el paso de desplazamiento cuando necesites activar una interacción adicional, como por ejemplo un desplazamiento infinito.
 
-Especifica el número de píxeles por los que deseas que el test de navegador se desplace vertical y horizontalmente.
+Especifica el número de píxeles por los que quieres que el test de navegador se desplace vertical y horizontalmente.
 
-{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Paso de desplazamiento en una grabación de test de navegador Paso de desplazamiento de test" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Paso de Desplazarse en una grabación de test de navegador, test del paso de Desplazarse" style="width:50%;" >}}
 
-De forma predeterminada, el paso **Scroll** (Desplazamiento) se desplaza por toda la página. Si necesitas desplazarte sobre un elemento específico (por ejemplo, un `<div>` específico), haz clic en **Target Element** (Elemento de destino) y selecciona un elemento 
+De manera predeterminada, el paso **Desplazarse** efectúa desplazamientos por toda la página. Si necesitas desplazarte sobre un elemento específico (por ejemplo, un `<div>` específico), haz clic en **Target Element** (Elemento de destino) y selecciona un elemento por el que quieres que se desplace el test de navegador.
 
 #### Esperar
 
-De forma predeterminada, los tests de navegador esperan a que una página esté completamente cargada antes de realizar un paso o el siguiente paso con un tiempo de espera de 60 segundos.
+De manera predeterminada, los tests de navegador esperan a que una página se haya cargado por completo antes de realizar un paso o realizan el siguiente paso con un tiempo de espera de 60 segundos. 
 
-Si sabes que una página o elemento de página tarda más de 60 segundos en cargarse, puedes personalizar el tiempo de espera en las [opciones avanzadas][2] del paso, o añadir un paso de espera codificado con un valor máximo de 300 segundos.
+Si sabes que una página o elemento de página tarda más de 60 segundos en cargarse, puedes personalizar el tiempo de espera en las [opciones avanzadas][2] del paso, o añadir un paso de espera codificado con un valor máximo de 300 segundos.
 
-{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Paso de espera en una grabación de test de navegador" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Paso de Esperar en una grabación de test de navegador" style="width:50%;" >}}
 
-Este tiempo adicional se añade sistemáticamente a **cada ejecución** de la grabación de tu test de navegador.
+Este tiempo adicional se añade de manera sistemática a **cada ejecución** de la grabación de tu test de navegador.
 
 ### Variables
 
-Haz clic en **Variables** y selecciona un tipo de creación de variable en el menú desplegable.
+Haz clic en **Variables** y selecciona un tipo de creación de variable en el menú desplegable. 
 
-{{< img src="synthetics/browser_tests/variables.png" alt="Variables de test de navegador" style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/variables.png" alt="Variables del test de navegador" style="width:60%;" >}}
 
-Para aprender a utilizar variables dentro de tus pasos consulta [Utilizar variables](#use-variables).
+Para aprender a usar variables en tus pasos, consulta [Usar variables](#use-variables).
 
 #### Patrón
 
-Puede seleccionar una de las siguientes funciones integradas disponibles:
+Puedes seleccionar una de las siguientes funciones integradas disponibles:
 
 `{{ numeric(n) }}`
 : Genera una cadena numérica con `n` dígitos.
@@ -259,40 +266,40 @@ Puede seleccionar una de las siguientes funciones integradas disponibles:
 : Genera una fecha en uno de los formatos aceptados por Datadog, con un valor correspondiente a la fecha UTC en la que se inicia el test en + o - `n` unidades.
 
 `{{ timestamp(n, unit) }}` 
-: Genera una marca de tiempo en una de las unidades aceptadas de Datadog, con un valor correspondiente a la marca de tiempo UTC con la que se inicia el test en + o - `n` unidades.
+: Genera una marca de tiempo en una de las unidades aceptadas por Datadog, con un valor correspondiente a la marca de tiempo UTC con la que se inicia el test en + o - `n` unidades.
 
 `{{ uuid }}`
-: Genera un identificador único universal de la versión 4 (UUID).
+: Genera un identificador único universal (UUID) de la versión 4.
 
 Para enmascarar los valores de las variables locales en los resultados del test, selecciona **Hide and obfuscate variable value** (Ocultar y enmascarar el valor de la variable). Una vez definida la cadena de la variable, haz clic en **Add Variable** (Añadir variable).
 
 #### Elemento
 
-Crear una variable a partir de un contenido como `span` o `div` extrayendo el texto del elemento.
+Crea una variable a partir de contenido como `span` o `div` al extraer el texto del elemento.
 
 #### Cuerpo del correo electrónico
 
-Crea una variable a partir del cuerpo del correo electrónico utilizando uno de los siguientes métodos: [`regex`][13] o [`Xpath`][12].
+Crea una variable a partir del cuerpo del correo electrónico con uno de los siguientes métodos: [`regex`][13] o [`Xpath`][12].
 
-* [`Regex`][13] busca y devuelve el primer patrón coincidente (por ejemplo, `/*./`) del cuerpo de texto sin formato del correo electrónico. Si no se encuentra el patrón, busca en el cuerpo de HTML.
+* [`Regex`][13] busca y devuelve el primer patrón coincidente (por ejemplo, `/*./`) del cuerpo con texto sin formato del correo electrónico. Si no se encuentra el patrón, busca en el cuerpo de HTML.
 
-* [`Xpath`][12] solo es aplicable cuando el correo electrónico contiene un cuerpo de HTML. Devuelve el contenido de la localización correspondiente (por ejemplo, `$`).
+* [`Xpath`][12] solo se puede aplicar cuando el correo electrónico contiene un cuerpo de HTML. Devuelve el contenido de la localización correspondiente (por ejemplo, `$`).
 
 #### JavaScript
 
-Los pasos de JavaScript admiten tanto código síncrono como asíncrono. Dado que los tests de navegador cargan JavaScript externo añadiendo el script a la página, solo funcionan si tu sitio web acepta JavaScript externo.
+Los pasos de JavaScript admiten tanto código síncrono como asíncrono. Dado que los tests de navegador cargan JavaScript externo al añadir el script a la página, solo funcionan si tu sitio web acepta JavaScript externo.
 
-La función JavaScript viene con los siguientes parámetros y requiere una sentencia return (retorno).
+La función de JavaScript cuenta con los siguientes parámetros y requiere una instrucción de retorno (return).
 
-* La sentencia (obligatoria) `return` devuelve el valor que deseas asociar a tu variable JavaScript. La sentencia puede devolver cualquier valor, pero lo convierte automáticamente en una cadena.
+* La instrucción `return` (obligatoria) devuelve el valor que quieres asociar a tu variable de JavaScript. La instrucción puede devolver cualquier valor, pero lo convierte en una cadena de manera automática.
 
-* `vars` (opcional): Una cadena que contiene [variables] (#use-variables) de tu test de navegador que puedes usar dentro de tu código. Usa `vars.<YOUR_VARIABLE>` para hacer referencia a una variable de test de navegador en tu snippet de JavaScript. Por ejemplo, si tu test de navegador ya incluye una variable `PRICE`, invócala en tu snippet de JavaScript utilizando `vars.PRICE`.
+* `vars` (opcional): una cadena que contiene [variables](#use-variables) de tu test de navegador que puedes usar en tu código. Usa `vars.<YOUR_VARIABLE>` para hacer referencia a una variable de test de navegador en tu fragmento de JavaScript. Por ejemplo, si tu test de navegador ya incluye una variable `PRICE`, invócala en tu fragmento de JavaScript con `vars.PRICE`.
 
-* `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Seleccionar** y **Actualizar** elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
+* `element` (opcional): el localizador del elemento en la página. Para configurarlo, usa los botones **Select** (Seleccionar) y **Update** (Actualizar) del elemento de destino. El elemento seleccionado usa de manera automática el algoritmo de multilocalización del test de navegador de Datadog.
 
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Variable JavaScript de test de navegador" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/custom_java_script.mp4" alt="Variable de JavaScript del test de navegador" video="true" width="100%" >}}
 
-Dado que las aserciones de JavaScript se ejecutan en el contexto de la página activa, estos pasos pueden acceder a todos los objetos definidos en la página activa (tales como bibliotecas, elementos integrados y variables globales). Para cargar bibliotecas externas utiliza una promesa (promise).
+Dado que las aserciones de JavaScript se ejecutan en el contexto de la página activa, estos pasos pueden acceder a todos los objetos definidos en dicha página (tales como bibliotecas, elementos integrados y variables globales). Para cargar bibliotecas externas, usa una promesa. 
 
 Por ejemplo:
 
@@ -305,177 +312,189 @@ document.head.appendChild(script)
 
 await promise
 
-// Script is now loaded
+// El script ya se ha cargado
 
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
 #### Variable global
 
-Seleccionar cualquier variable global definida en [Configuración de monitorización Synthetic][5].
+Selecciona cualquier variable global definida en la [Configuración de la monitorización Synthetic][5].
 
-#### Variable global - MFA
+#### Variable global: MFA
 
-Selecciona cualquier variable global MFA definida en [Configuración de monitorización de Synthetic][5].
+Selecciona cualquier variable global de MFA definida en la [Configuración de la monitorización Synthetic][5].
 
-Este tipo de variable global almacena claves secretas de contraseñas de un solo uso basadas en tiempo (TOTP), lo cual te permite probar tus módulos MFA y los flujos de trabajo protegidos por MFA. Para más información, consulta [TOTPs para Autenticación multifactor (MFA) en Tests de navegador][6].
+Este tipo de variable global almacena claves secretas de contraseñas de un solo uso basadas en el tiempo (TOTP), lo que te permite realizar tests de tus módulos de MFA y los flujos de trabajo protegidos con MFA. Para obtener más información, consulta [TOTPs para la autenticación multifactor (MFA) en tests de navegador][6].
 
 #### Correo electrónico
 
-Crea una dirección de correo electrónico de Datadog Synthetics que puedes utilizar en pasos de test para [confirmar si un correo electrónico se ha enviado correctamente][7] o [navegar a un enlace en el correo electrónico][8], por ejemplo, para hacer clic en un enlace de confirmación.
+Crea una dirección de correo electrónico de Datadog Synthetics que puedes usar en pasos de test para [confirmar si un correo electrónico se ha enviado correctamente][7] o [navegar a un enlace en el correo electrónico][8], por ejemplo, para hacer clic en un enlace de confirmación.
 
-Se genera un buzón único de correo electrónico en cada ejecución de test para evitar conflictos entre ejecuciones de test.
+Se genera un buzón de correo electrónico único en cada ejecución de test para evitar conflictos entre ejecuciones de test.
 
 ### Subtests
 
-Puedes ejecutar tests de navegador dentro de otros tests de navegador para reutilizar los flujos de trabajo existentes hasta dos niveles de anidamiento.
+Puedes ejecutar tests de navegador en otros tests de navegador para reutilizar los flujos de trabajo existentes hasta dos niveles de anidamiento.
 
-Para utilizar como subtest un test de navegador ya existente, haz clic en **Add New Subtest** (Añadir nuevo subtest), selecciona un test de navegador en el menú desplegable de la pestaña **From Existing Test** (Desde test existente) y haz clic en **Add Subtest** (Añadir subtest).
+Para usar un test de navegador existente como subtest, haz clic en **Add New Subtest** (Añadir subtest nuevo), selecciona un test de navegador en el menú desplegable de la pestaña **From Existing Test** (Desde test existente) y haz clic en **Add Subtest** (Añadir subtest).
 
-Para convertir los pasos de tu test de navegador actual en un subtest, haz clic en la pestaña **Extract From Steps** (Extraer desde pasos), selecciona los pasos grabados que quieres extraer y haz clic en **Convert to Subtest** (Convertir a subtest). De forma predeterminada, un subtest se ejecuta en secuencia con los pasos anteriores del test padre.
+Para convertir los pasos de tu test de navegador actual en un subtest, haz clic en la pestaña **Extract From Steps** (Extraer desde pasos), selecciona los pasos grabados que quieres extraer y haz clic en **Convert to Subtest** (Convertir a subtest). De manera predeterminada, un subtest se ejecuta en secuencia con los pasos anteriores del test principal. 
 
 {{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Añadir un subtest en un test de navegador" style="width:60%;" >}}
 
-Para anular las variables de los subtests en los tests padre, asegúrate de que las variables creadas en el nivel del test padre tienen los mismos nombres que las variables presentes en el subtest. Una variable siempre utiliza el valor que se le asignó en primer lugar.
+Para anular las variables de los subtests en los tests principales, asegúrate de que las variables creadas en el nivel del test principal tengan los mismos nombres que las variables presentes en el subtest. Una variable siempre usa el valor que se le asignó en primer lugar. 
 
-Para más información sobre opciones avanzadas para subtests, consulta [Opciones avanzadas para pasos de test de navegador][9].
+A fin de obtener más información sobre opciones avanzadas para subtests, consulta [Opciones avanzadas para pasos de test de navegador][9].
 
-Si para ti no tiene sentido ejecutar un subtest de forma independiente, puedes detenerlo. El test continúa siendo invocado como parte de tu test padre y no se ejecuta individualmente. Para más información consulta [Reutilización de los recorridos de test de navegador en tu conjunto de tests][10].
+Si para ti no tiene sentido ejecutar un subtest de forma independiente, puedes detenerlo. El test se continúa invocando como parte de tu test principal y no se ejecuta de manera individual. Para obtener más información, consulta [Reutilización de los recorridos de tests de navegador en tu conjunto de tests][10].
 
 ### Solicitudes HTTP
 
-Puedes ejecutar peticiones de HTTP como parte de tus tests de navegador.
+Puedes ejecutar solicitudes HTTP como parte de tus tests de navegador.
 
-{{< img src="synthetics/browser_tests/recorder_http_requests2.png" alt="Paso de petición de HTTP" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/http_request_2.png" alt="Paso de solicitud HTTP" style="width:70%;" >}}
 
 #### Configuración
 
-Para definir tu petición de HTTP:
+Para definir tu solicitud HTTP:
 
-1. Selecciona un **Method** (Método) y **URL** a consultar. Elige entre `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` y`OPTIONS`.
-2. Opcionalmente, especifica **Advanced Options** (Opciones Avanzadas):
+1. Selecciona un **Method** (Método) y una **URL** para consultar. Elige entre `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` y `OPTIONS`.
+2. De manera opcional, especifica **Advanced Options** (Opciones Avanzadas):
 
    {{< tabs >}}
 
-   {{% tab "Opciones de petición" %}}
+   {{% tab "Opciones de solicitud" %}}
 
-   * **Follow redirects** (Seguir redirecciones): Marca esta opción para que tu test de HTTP pueda acceder hasta a diez redirecciones al realizar la petición.
-   * **Ignore server certificate error** (Ignorar error de certificado del servidor): Marca esta opción para que tu test de HTTP continúe con la conexión aunque se produzcan errores al validar el certificado SSL.
-   * **Request headers** (Encabezados de la petición): Define los encabezados a añadir a tu petición de HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
-   * **Cookies**: Definir cookies para añadir a tu solicitud de HTTP. Define múltiples cookies utilizando el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`
+   * **Follow redirects** (Seguir redirecciones): marca esta opción para que tu test de HTTP pueda acceder a un máximo de diez redirecciones al realizar la solicitud.
+   * **Ignore server certificate error** (Ignorar error de certificado del servidor): marca esta opción para que tu test de HTTP continúe con la conexión aunque se produzcan errores al validar el certificado SSL.
+   * **Request headers** (Encabezados de la solicitud): define encabezados para añadir a tu solicitud HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
+   * **Cookies**: define cookies para añadir a tu solicitud HTTP. Define varias cookies con el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
    {{% /tab %}}
 
    {{% tab "Autenticación" %}}
 
-   * **Client certificate** (Certificado de cliente): Autentícate a través de mTLS subiendo tu certificado de cliente y la clave privada asociada.
-   * **HTTP Basic Auth**: Añadir credenciales de autenticación básica de HTTP.
-   * **Digest Auth**: Añadir credenciales de autenticación Add Digest. 
-   * **NTLM**: Añadir credenciales de autenticación NTLM. Es compatible tanto con NTLMv2 como con NTLMv1.
+   * **Client certificate** (Certificado de cliente): autentícate a través de mTLS al cargar tu certificado de cliente y la clave privada asociada.
+   * **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
+   * **Autenticación Digest** (Autenticación implícita): añade credenciales de autenticación implícita. 
+   * **NTLM**: añade credenciales de autenticación NTLM. Es compatible con NTLMv2 y NTLMv1.
 
    {{% /tab %}}
 
    {{% tab "Parámetros de consulta" %}}
 
-   * **Parámetros Encode**: Añade el nombre y el valor de los parámetros de consulta que requieren codificación.
+   * **Encode parameters** (Codificar parámetros): añade el nombre y el valor de los parámetros de consulta que requieren codificación. 
 
    {{% /tab %}}
 
-   {{% tab "Cuerpo de la consulta" %}}
+   {{% tab "Cuerpo de la solicitud" %}}
 
-   * **Body type** (Tipo de cuerpo): Selecciona el tipo de cuerpo de la petición (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL` o  `None`) que quieres añadir a tu petición de HTTP.
-   * **Request body** (Cuerpo de la petición): Añade el contenido del cuerpo de tu petición de HTTP. El cuerpo de la petición está limitado a un tamaño máximo de 50 kilobytes.
+   * **Body type** (Tipo de cuerpo): selecciona el tipo de cuerpo de la solicitud (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
+   * **Request body** (Cuerpo de la solicitud): añade el contenido del cuerpo de tu solicitud HTTP. El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes.
 
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
 
-   * **Proxy URL**: Especifica la URL del proxy por el que debe pasar la petición de HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header** (Encabezado del proxy): Añade encabezados para incluir en la petición de HTTP al proxy.
+   * **Proxy URL** (URL del proxy): especifica la URL del proxy por la que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy Header** (Encabezado del proxy): añade encabezados para incluir en la solicitud HTTP al proxy.
 
    {{% /tab %}}
 
    {{% tab "Privacidad" %}}
 
-   * **Do not save response body** (No guardar el cuerpo de la respuesta): Selecciona esta opción para evitar que se guarde el cuerpo de la respuesta durante la ejecución. Esto ayuda a garantizar que no se muestren datos confidenciales en los resultados del test, pero puede dificultar la resolución de problemas. Para conocer todas las recomendaciones de seguridad, consulta [Synthetic Monitoring Data Security][1].
+   * **Do not save response body** (No guardar el cuerpo de la respuesta): selecciona esta opción para evitar que se guarde el cuerpo de la respuesta durante la ejecución. Esto ayuda a garantizar que no se muestren datos confidenciales en los resultados del test, pero puede dificultar la resolución de problemas. Para conocer todas las recomendaciones de seguridad, consulta la [Seguridad de los datos de la monitorización Synthetic][1].
 
 [1]: /es/data_security/synthetics
    {{% /tab %}}
 
    {{< /tabs >}}
    </br>
-3. Haz clic en **Test URL** para probar la configuración de la petición. Aparecerá una vista previa de la respuesta.
+3. Haz clic en **Test URL** (Realizar test de la URL) para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta.
 
-{{< img src="synthetics/browser_tests/http_request2.png" alt="Realizar solicitud de HTTP" style="width:80%;" >}}
+{{< img src="synthetics/browser_tests/http_request2.png" alt="Realizar solicitud HTTP" style="width:80%;" >}}
 
 #### Añadir aserciones
 
-Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **Test URL**, se añaden aserciones básicas en `status code`, `response time` y `header` `content-type`basadas en la respuesta del test. Las aserciones son opcionales para los pasos de HTTP en los tests de navegador.
+Las aserciones definen el resultado esperado de un test. Después de hacer clic en **Test URL** (Realizar test de la URL), se añaden aserciones básicas en `status code`, `response time` y `header` `content-type` basadas en la respuesta del test. Las aserciones son opcionales para los pasos de HTTP en los tests de navegador.
 
 | Tipo          | Operador                                                                                               | Tipo de valor                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| cuerpo          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| cabecera        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]_                                      |
-| tiempo de respuesta | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| código de estado   | `is`, `is not`                                                                                         | _Integer_                                                      |
+| cuerpo          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _Cadena_ <br> _[Expresión regular][13]_ <br> _Cadena_, _[Expresión regular][13]_ |
+| encabezado        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Cadena_ <br> _[Expresión regular][13]_                                      |
+| tiempo de respuesta | `is less than`                                                                                         | _Entero (ms)_                                                  |
+| código de estado   | `is`, `is not`                                                                                         | _Entero_                                                      |
 
-Las peticiones de HTTP pueden descomprimir cuerpos con los siguientes encabezados `content-encoding`: `br`, `deflate`, `gzip` y `identity`.
+Las solicitudes HTTP pueden descomprimir cuerpos con los siguientes encabezados `content-encoding`: `br`, `deflate`, `gzip` y `identity`.
 
-- Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la petición dentro del límite de tiempo de espera establecido por el Worker de Synthetics.
+- Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
 
-- Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá un error `Assertions on the body/response cannot be run beyond this limit`.
+- Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
 
-{{< img src="synthetics/browser_tests/assertions.png" alt="Define aserciones para que tu test de navegador tenga éxito o falle en" style="width:80%;" >}}
+{{< img src="synthetics/browser_tests/assertions.png" alt="Define aserciones para que tu test de navegador tenga éxito o falle" style="width:80%;" >}}
 
-Puedes crear hasta 20 aserciones por paso haciendo clic en **New Assertion** (Nueva aserción) o haciendo clic directamente en la vista previa de la respuesta.
+Puedes crear hasta 20 aserciones por paso al hacer clic en **New Assertion** (Aserción nueva) o hacer clic directamente en la vista previa de la respuesta.
 
 #### Extraer una variable de la respuesta
 
-Opcionalmente puedes extraer una variable de la respuesta de tu petición de HTTP mediante el parseo de sus encabezados o del cuerpo de la respuesta. El valor de la variable se actualiza cada vez que se ejecuta el paso de solicitud de HTTP. Una vez creada, esta variable se puede utilizar en los [pasos siguientes]( #use-variables) del test de navegador.
+De manera opcional, puedes extraer una variable de la respuesta de tu solicitud HTTP mediante el parseo de los encabezados o del cuerpo de la respuesta. El valor de la variable se actualiza cada vez que se ejecuta el paso de solicitud HTTP. Una vez creada, esta variable se puede usar en los [pasos siguientes](#use-variables) del test de navegador.
 
 Para iniciar el parseo de una variable, haz clic en **Extract a variable from response content** (Extraer una variable del contenido de la respuesta):
 
-1. Introduce un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres y sólo puede contener mayúsculas, números y guiones bajos. 
+1. Ingresa un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres, y solo puede contener mayúsculas, números y guiones bajos.
 2. Decide si quieres extraer tu variable de los encabezados o del cuerpo de la respuesta.
 
-   * Extraer el valor del **response header** (encabezado de la respuesta): Utiliza el encabezado completo de la respuesta de tu solicitud de HTTP como valor de la variable o parsealo con un  [`regex`][13].
-   * Extraer el valor del **response body** (cuerpo de la respuesta): Utiliza el cuerpo completo de la respuesta de tu solicitud de HTTP como valor de la variable o parsealo con un [`regex`][13], un [`JSONPath`][11] o un [`XPath`][12].
+   * Extraer el valor del **encabezado de la respuesta**: usa el encabezado completo de la respuesta de tu solicitud HTTP como valor de la variable o parséalo con un comando [`regex`][13].
+   * Extraer el valor del **cuerpo de la respuesta**: usa el cuerpo completo de la respuesta de tu solicitud HTTP como valor de la variable o parséalo con un comando [`regex`][13], [`JSONPath`][11] o [`XPath`][12].
 
-{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Variable extraida de la respuesta" style="width:80%;" >}}
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Variable extraída de la respuesta" style="width:80%;" >}}
 
 
-## Gestiona el orden de los pasos
+## Gestionar el orden de los pasos
 
-En lugar de reordenar manualmente los nuevos pasos arrastrando y soltando pasos individuales, puedes colocar el cursor en un paso de test en una fase concreta de la grabación e insertar pasos adicionales.
+En lugar de reordenar de manera manual los pasos nuevos al arrastrar y soltar pasos individuales, puedes colocar el cursor en un paso de test en una fase concreta de la grabación e insertar pasos adicionales. 
 
-1. Pasa el cursor por encima de un paso de test grabado y haz clic en el icono **Set Cursor** (Situar el cursor). Aparecerá una línea azul sobre el paso de test.
-2. Graba [pasos de test] (#automatically-recorded-steps) adicionales, o añade [pasos manualmente] (#manually-added-steps).
+1. Pasa el cursor por encima de un paso de test grabado y haz clic en el icono **Set Cursor** (Situar el cursor). Aparecerá una línea azul sobre el paso de test. 
+2. Graba [pasos de test](#automatically-recorded-steps) adicionales o añade [pasos de manera manual](#manually-added-steps).
 3. Cuando hayas terminado de añadir pasos adicionales sobre tus pasos de test, haz clic en **Clear Cursor** (Borrar el cursor) para salir.
 
 {{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Sitúa el cursor sobre un paso de test para añadir pasos adicionales antes de este paso" video="true" width="100%" >}}
 
 ## Usar variables
 
-Para ver todas las variables disponibles en los pasos añadidos manualmente, escribe `{{` en el campo de entrada.
+Para ver todas las variables disponibles en los pasos añadidos de manera manual, escribe `{{` en el campo de entrada.
 
-Para utilizar una variable en pasos grabados automáticamente, haz clic en el icono **Inject this variable** (Inyectar esta variable) para introducir el valor de la variable durante la grabación.
+Para usar una variable en pasos grabados de manera automática, haz clic en el icono **Inject this variable** (Inyectar esta variable) para introducir el valor de la variable durante la grabación. 
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Haz clic en el paso de test para inyectar el valor en tu página de grabación" video="true" width="100%" >}}
 
-Si a una variable se le asignan valores diferentes a lo largo de los pasos de test de navegador (por ejemplo entre subtests), la variable utiliza sistemáticamente el valor que se le asignó en primer lugar.
+Si a una variable se le asignan valores diferentes a lo largo de los pasos de test de navegador (por ejemplo, entre subtests), la variable usa de manera sistemática el valor que se le asignó en primer lugar.
 
-Algunas variables sólo se calculan en tiempo de ejecución, como por ejemplo una variable de una solicitud de HTTP o un paso JavaScript. Por ejemplo, supongamos que tienes un paso `Type text` que presenta `{{ <YOUR_VARIABLE_NAME> }}`. En la ejecución del test, `{{ <YOUR_VARIABLE_NAME> }}` se sustituye sistemáticamente por el valor asociado a tu variable. Para grabar un paso utilizando una de estas variables, graba un paso con el valor real de la variable y sustituye el valor real por `{{ <YOUR_VARIABLE_NAME> }}` en la definición del paso antes de guardar tu test.
+Algunas variables solo se calculan en tiempo de ejecución, como por ejemplo una variable de una solicitud HTTP o un paso de JavaScript. Por ejemplo, supongamos que tienes un paso `Type text` que presenta `{{ <YOUR_VARIABLE_NAME> }}`. En la ejecución del test, `{{ <YOUR_VARIABLE_NAME> }}` se sustituye de manera sistemática por el valor asociado a tu variable. Para grabar un paso con una de estas variables, graba un paso con el valor real de la variable y sustituye el valor real por `{{ <YOUR_VARIABLE_NAME> }}` en la definición del paso antes de guardar tu test. 
+
+### Utilizar múltiples variables
+
+Puedes añadir múltiples variables a los pasos de registro de test del navegador.
+
+En el registro de test del navegador, haz clic en el botón **+ Add Variable** (+ Añadir variable) para añadir una o varias variables al test:
+
+  {{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="Definir una variable local desde variables globales" width="90%" >}}
+
+En el registro de tu test de navegador, añade un registro por pasos y haz clic en **Extract variables from the response(optional)** (Extraer variables de la respuesta (opcional)) para extraer y utilizar las variables en tu test de navegador:
+
+  {{< img src="synthetics/browser_tests/edit_test_extract_multiple_variables.png" alt="Inyección de una variable local en un campo durante un registro de navegador" width="90%" >}}
 
 ## Editar una grabación 
 
 Para editar una grabación del navegador después de guardarla:
 
-- Ve a [Sintético > Tests][14].
+- Ve a [Synthetics > Tests][14].
 - Haz clic en un test de navegador guardado previamente.
-- Haz clic en el icono de engranaje de la esquina superior derecha y, a continuación, en "Editar grabación".
-- Selecciona uno o varios pasos para borrarlos o reproducirlos y, a continuación, haz clic en **Guardar y Salir**.
+- Haz clic en el icono de engranaje de la esquina superior derecha y, a continuación, en «Edit recording» (Editar grabación).
+- Selecciona uno o varios pasos para eliminarlos o reproducirlos y, a continuación, haz clic en **Save & Quit** (Guardar y salir).
 
-{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="Editar una grabación del navegador y utilizar la función de selección múltiple"="70%" >}}
+{{< img src="synthetics/browser_tests/edit_a_recording.png" alt="Editar una grabación del navegador y usar la función de selección múltiple"="70%" >}}
 
 
 ## Referencias adicionales
