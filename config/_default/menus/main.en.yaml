@@ -130,6 +130,11 @@ menu:
       url: markdoc_testing/elements/tabs/
       parent: markdoc_testing_elements
       weight: 309
+    - name: Whatsnext / Further reading
+      identifier: markdoc_testing_whatsnext
+      url: markdoc_testing/elements/whatsnext/
+      parent: markdoc_testing_elements
+      weight: 310
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/
