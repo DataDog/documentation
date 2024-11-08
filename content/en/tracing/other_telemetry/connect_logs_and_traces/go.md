@@ -21,9 +21,6 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/other_telemetry/connect_logs_and_traces/go-v2">Correlating Go Logs and Traces</a> documentation.</div>
-
-
 ## Manual injection
 
 The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
@@ -34,7 +31,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -62,8 +59,8 @@ package main
 import (
     "github.com/sirupsen/logrus"
 
-    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus" // use "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2" if you're using v2.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func main() {

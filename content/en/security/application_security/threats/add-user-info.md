@@ -116,15 +116,13 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/security/application_security/threats/add-user-info">User Monitoring and Protection</a> documentation.</div>
-
-
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1]. If you are using the preview version of v2.x, see this [documentation][2].
 
 This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/appsec" if you're using v2.x
+
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // The user must be blocked by aborting the request handler asap.
@@ -135,6 +133,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -461,9 +460,6 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/security/application_security/threats/add-user-info">User Monitoring and Protection</a> documentation.</div>
-
-
 Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
 
 The following examples show how to track login events or custom events (using signup as an example).
@@ -471,7 +467,7 @@ The following examples show how to track login events or custom events (using si
 {{< tabs >}}
 {{% tab "Login success" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
@@ -488,7 +484,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Login failure" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/appsec" if you're using v2.x
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
@@ -501,7 +497,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% tab "Custom business logic" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/appsec" if you're using v2.x
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "my-uid"}
