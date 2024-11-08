@@ -2,9 +2,6 @@
 title: Setup Data Streams Monitoring for Go
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/data_streams/go-v2">Setup Data Streams Monitoring for Go</a> documentation.</div>
-
-
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
@@ -24,7 +21,7 @@ Two types of instrumentation are available:
 
 ```go
 import (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2" // use "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2" if you're using v2.x
 )
 
 ...
@@ -50,7 +47,7 @@ If a service consumes data from one point and produces to another point, propaga
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama" // use "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama" if you're using 2.x
 )
 
 ...
