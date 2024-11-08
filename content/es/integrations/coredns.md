@@ -35,7 +35,7 @@ categories:
 - Kubernetes
 - recopilación de logs
 - la red
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_on_public_website: true
