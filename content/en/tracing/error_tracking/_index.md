@@ -52,7 +52,7 @@ Issues created from APM include the distribution of impacted spans, the latest m
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/trace/?tab=spantags#more-information
+[1]: /tracing/trace_explorer/span_tags_attributes/#span-attributes
 [2]: /tracing/trace_explorer/trace_view/?tab=spantags
 [3]: /tracing/error_tracking/explorer
 [4]: /tracing
