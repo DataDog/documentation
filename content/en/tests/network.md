@@ -1,5 +1,5 @@
 ---
-title: Network Traffic
+title: Network Settings
 further_reading:
   - link: "/tests/setup/"
     tag: "Documentation"

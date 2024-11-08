@@ -18,7 +18,7 @@ For information about configuration options for [Test Optimization][1], choose y
 <br>
 
 If you run your tests in an environment with network restrictions,
-check the [Agent Network Traffic][2] or [Agentless Network Traffic][3] guide for information on how to configure whitelisting.
+check the [Agent Network Traffic][2] or [Agentless Network Settings][3] guide for information on how to configure whitelisting.
 
 If you run your tests in a container, check the [Tests in Containers][4] guide for additional setup steps.
 
