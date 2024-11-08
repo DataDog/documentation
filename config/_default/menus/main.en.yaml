@@ -2067,11 +2067,16 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
       weight: 103
+    - name: Manage Data Collection
+      url: error_tracking/manage_data_collection
+      parent: error_tracking
+      identifier: error_tracking_manage_data
+      weight: 11
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 11
+      weight: 12
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -3395,10 +3400,10 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
-    - name: Span Facets
-      url: tracing/trace_explorer/facets/
+    - name: Span Tags and Attributes
+      url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
-      identifier: span_facets
+      identifier: span_attributes
       weight: 603
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/
@@ -3449,11 +3454,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_map
       weight: 705
+    - name: Inferred Services
+      url: tracing/services/inferred_services
+      parent: tracing_services
+      identifier: tracing_inferred_services
+      weight: 706
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 706
+      weight: 707
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -5368,11 +5378,16 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
+    - name: Use cases
+      url: logs/workspaces/use_cases/
+      parent: logs_workspaces
+      identifier: logs_workspaces_use_cases
+      weight: 601
     - name: Time Selection
       url: logs/workspaces/time_selection/
       parent: logs_workspaces
       identifier: logs_workspaces_time_selection
-      weight: 601
+      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -5661,11 +5676,6 @@ menu:
       parent: cloud_workload_security
       identifier: cws_agent_expressions
       weight: 204
-    - name: CWS Events Formats
-      url: security/threats/backend
-      parent: cloud_workload_security
-      identifier: cws_backend_event_schema_documentation
-      weight: 205
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm

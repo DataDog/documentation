@@ -119,7 +119,7 @@ Integra las comunicaciones con tu equipo mediante la [integración de Slack][14]
 
 Todos los dashboards tienen una representación JSON que puedes copiar o exportar desde el menú de configuración. Los widgets del dashboard también tienen una definición JSON; para editarla, abre el editor del widget (icono del lápiz) y haz clic en la pestaña JSON de **Graph your data** (Tus datos en un gráfico).
 
-Dado que todos los <txprotected>widgets</txprotected> y dashboards se representan como JSON, puedes generarlos mediante programación utilizando la [API de dashboards][15], lo que resulta útil si deseas generar un dashboard cada vez que tu equipo inicie un nuevo proyecto o se encuentre con un incidente, o formalice un SLO, por ejemplo.
+Dado que todos los widgets y dashboards se representan como JSON, puedes generarlos mediante programación utilizando la [API de dashboards][15], lo que resulta útil si deseas generar un dashboard cada vez que tu equipo inicie un nuevo proyecto o se encuentre con un incidente, o formalice un SLO, por ejemplo.
 
 ### Consulta los dashboards desde la aplicación móvil de Datadog
 
