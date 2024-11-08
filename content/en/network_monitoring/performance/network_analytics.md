@@ -117,7 +117,7 @@ The **Auto-grouped traffic** option can help to identify the source of your tags
 
 {{< img src="network_performance_monitoring/network_analytics/npm_icon_tooltip.png" alt="Hovering over the icon tooltip to display the tag source" style="width:90%;">}}
 
-Using the search bar along with the group by feature is helpful to further isolate your network traffic. For example, to find all traffic from your your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and enter `datacenter` in the **View clients** as drop-down:
+Using the search bar along with the group by feature is helpful to further isolate your network traffic. For example, to find all traffic from your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and enter `datacenter` in the **View clients** as drop-down:
 
 {{< img src="network_performance_monitoring/network_analytics/search_bar_with_groupby.png" alt="Using group by option with search field" style="width:90%;">}}
 
