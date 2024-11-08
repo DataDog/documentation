@@ -118,12 +118,12 @@ Datadog's log index architecture is a distributed, timeseries, columnar store th
 The logging platform can be configured with many layers of logs storage. Each has its own use-cases outlined here:
 |  | Data captured | Retention | Retrieval to Datadog | Cost Driver |
 | :---- | :---- | :---- | :---- | :---- |
-| Ignored | No | None | None | NA |
-| [Ingested][15] | Logs-to-Metrics | 15m in LiveTail | None | Volume |
-| [Archive][16] | Upon Rehydrate | Infinite | Slow | Volume |
-| [Forward Logs][17] | Logs-to-Metrics | Determined by Target | None | Volume |
-| [Index][18] | Yes | 3,7,15,30 days | Immediate | Volume & Message Count |
-| [Flex Logs][19] | Yes\* |  | Rapid | Retrieval Volume |
+| Ignored | No | None | None | N/A |
+| [Ingested][15] | Logs-to-metrics | 15m in LiveTail | None | Volume |
+| [Archive][16] | Upon rehydrate | Infinite | Slow | Volume |
+| [Forward Logs][17] | Logs-to-metrics | Determined by target | None | Volume |
+| [Index][18] | Yes | 3,7,15,30 days | Immediate | Volume & message count |
+| [Flex Logs][19] | Yes\* | [Storage tiers][74]  | Rapid | Retrieval volume |
 
 \* Flex logs capability does not include monitors/alerting and Watchdog. However, you can still perform log-to-metrics on the ingestion stream before logs are indexed (in either standard or flex) and use those metrics in monitors. Correlation with other telemetry, such as  traces, is supported.
 
@@ -391,3 +391,4 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [71]: /synthetics/api_tests/ssl_tests/
 [72]: /service_catalog/service_definitions/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
+[74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
