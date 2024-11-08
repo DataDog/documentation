@@ -214,7 +214,7 @@ build_preview:
       - typesense.config.json
   after_script:
     - |
-      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+      if [ -s $PREVIEW_ERROR_LOG ] && [ $CI_JOB_STATUS != 'success' ]; then
         echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
       fi # Output the error to the console
   interruptible: true

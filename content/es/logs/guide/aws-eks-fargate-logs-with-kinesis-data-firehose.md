@@ -9,7 +9,6 @@ further_reading:
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
   tag: Documentación
   text: Perfil de AWS Fargate
-kind: guía
 title: Enviar logs de Amazon EKS Fargate logs con Amazon Data Firehose
 ---
 
