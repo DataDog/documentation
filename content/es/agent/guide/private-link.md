@@ -122,7 +122,7 @@ Sin embargo, para dirigir el tráfico a la oferta de PrivateLink de Datadog en {
 2. Selecciona **Find service by name** (Buscar servicio por nombre).
 3. Completa el cuadro de texto _Service Name_ (Nombre de servicio) según el servicio para el que quieres establecer AWS PrivateLink:
 
-{{< img src="agent/guide/private_link/vpc_service_name.png" alt="Nombre de servicio de VPC style="width:90%;" >}}
+{{< img src="agent/guide/private_link/vpc_service_name.png" alt="Nombre de servicio de VPC" style="width:90%;" >}}
 
 | Datadog                   | Nombre de servicio de PrivateLink                                                               |
 |---------------------------|----------------------------------------------------------------------------------------|
