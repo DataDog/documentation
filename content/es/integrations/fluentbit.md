@@ -1,7 +1,7 @@
 ---
 categories:
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
 description: Configura Fluent Bit para recopilar, analizar y reenviar datos de logs

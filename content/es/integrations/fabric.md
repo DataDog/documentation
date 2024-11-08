@@ -1,7 +1,7 @@
 ---
 categories:
 - orchestration
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Visualiza y busca tareas de Fabric en tu flujo (stream) de eventos Datadog.
 doc_link: https://docs.datadoghq.com/integrations/fabric/
