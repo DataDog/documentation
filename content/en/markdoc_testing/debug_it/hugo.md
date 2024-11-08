@@ -52,24 +52,24 @@ go get debugit
 
 {{% tab "Python" %}}
 
-### Linux
+#### Linux
 {{< code-block lang="shell" >}}
 sudo export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### macOS
+#### macOS
 {{< code-block lang="shell" >}}
 export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### Windows
+#### Windows
 {{< code-block lang="shell" >}}
 set PYTHONPATH "%PYTHONPATH%;C:\path\to\your\library\directory"
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "JavaScript" %}}
-### Linux
+#### Linux
 {{< code-block lang="shell" >}}
 sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 {{< /code-block >}}
@@ -79,58 +79,58 @@ sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### Windows
+#### Windows
 {{< code-block lang="shell" >}}
 set NODE_PATH=%NODE_PATH%;C:\path\to\your\library\directory
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Java" %}}
-### Linux
+#### Linux
 {{< code-block lang="shell" >}}
 sudo export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### macOS
+#### macOS
 {{< code-block lang="shell" >}}
 export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### Windows
+#### Windows
 {{< code-block lang="shell" >}}
 set CLASSPATH=%CLASSPATH%;C:\path\to\your\library\directory
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-### Linux
+#### Linux
 {{< code-block lang="shell" >}}
 sudo export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### macOS
+#### macOS
 {{< code-block lang="shell" >}}
 export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### Windows
+#### Windows
 {{< code-block lang="shell" >}}
 set RUBYLIB=%RUBYLIB%;C:\path\to\your\library\directory
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Go" %}}
-### Linux
+#### Linux
 {{< code-block lang="shell" >}}
 sudo export GOPATH="$GOPATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### macOS
+#### macOS
 {{< code-block lang="shell" >}}
 export GOPATH="$GOPATH:/path/to/your/library/directory"
 {{< /code-block >}}
 
-### Windows
+#### Windows
 {{< code-block lang="shell" >}}
 set GOPATH "%GOPATH%;C:\path\to\your\library\directory"
 {{< /code-block >}}
