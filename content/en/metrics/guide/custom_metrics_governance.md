@@ -190,7 +190,12 @@ After you've received an alert, use the Metrics Volume Management page to inspec
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/forecasts/" >}}Forecast future metrics growth and alert on any unexpected overall deviation.{{< /nextlink >}}
+
 {{< /whatsnext >}}
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+  Real-time [estimated Custom Metric usage metrics][16] can now be prepopulated with the tags you set in the [Usage Attribution][17] page. To enable this feature, reach out to Customer Success. 
+{{< /callout >}}  
 
 ## Summary of best practices
 
@@ -218,3 +223,5 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 [13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags
 [15]: /metrics/summary/#metrics-related-assets
+[16]: account_management/billing/usage_metrics/
+[17]: account_management/billing/usage_attribution/
