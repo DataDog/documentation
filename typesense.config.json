@@ -6,7 +6,7 @@
             "synonyms": [
                 {
                     "id": "agent",
-                    "synonyms": ["agent", "datadog agent"]
+                    "synonyms": ["agent", "datadog agent", "dd-agent"]
                 },
                 {
                     "id": "azure",
