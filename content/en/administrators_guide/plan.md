@@ -125,7 +125,7 @@ The logging platform can be configured with many layers of logs storage. Each ha
 | [Index][18] | Yes | 3,7,15,30 days | Immediate | Volume & message count |
 | [Flex Logs][19] | Yes\* | [Storage tiers][74]  | Rapid | Retrieval volume |
 
-\* Flex logs capability does not include monitors/alerting and Watchdog. However, you can still perform log-to-metrics on the ingestion stream before logs are indexed (in either standard or flex) and use those metrics in monitors. Correlation with other telemetry, such as  traces, is supported.
+\* Flex Logs capability does not include monitors/alerting and Watchdog. However, you can still perform log-to-metrics on the ingestion stream before logs are indexed (in either standard or flex) and use those metrics in monitors. Correlation with other telemetry, such as  traces, is supported.
 
 With these base functions, you can ingest and monitor logs for some of the following use-cases:
 
@@ -164,7 +164,7 @@ Real User Monitoring and Session Replay give detailed insights into the experien
 - [Discard front-end errors][21].  
 - Configure your [RUM sampling rate][22]. 
 
-### Synthetic monitoring
+### Synthetic Monitoring
 
 Synthetic Monitoring is a full synthetic testing suite, which includes testing for browser applications, mobile apps, and APIs. Synthetic test results can be linked back to the application behavior it generated, and from there, into the database, message queues, and downstream services.  
 
@@ -201,7 +201,7 @@ There are different types of integrations in Datadog, and the order in which the
 
 ## Additional resources
 
-You've achieved some important wins and adopted best practices with APM, RUM, Synthetic Monitoring and Logs. Some additional resources that are important when planning your installation phase are outlined below.
+You've achieved some important wins and adopted best practices with APM, RUM, Synthetic Monitoring and Log Management. Some additional resources that are important when planning your installation phase are outlined below.
 
 ### Live processes 
 
@@ -294,7 +294,7 @@ To begin mapping out your installation patterns, combine the information you gat
 | :---- | :---- | :---- | :---- | :---- |
 | **APM** | Deny/Allow | Allow | Allow | Allow |
 | **Synthetics** | Deny | Deny/Allow | Allow | Allow |
-| **Logs** | Allow | Allow | Allow | Allow |
+| **Log Management** | Allow | Allow | Allow | Allow |
 | **RUM** | Deny | Deny/Allow |  Allow | Allow |
 | **DBM** | Deny/Allow | Deny/Allow | Allow | Allow |
 | **Live Processes** | Deny | Deny/Allow | Allow | Allow |
