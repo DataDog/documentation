@@ -28,7 +28,7 @@ version: '1.0'
 
 Google Cloud Firestore es una base de datos flexible y escalable para el desarrollo móvil, web y de servidor de Firebase y Google Cloud Platform.
 
-Utiliza la integración Google Cloud Platform en Datadog para recopilar métricas de Google Cloud Filestore.
+Utiliza la integración Google Cloud Platform en Datadog para recopilar métricas de Google Cloud Firestore.
 
 ## Configuración
 
