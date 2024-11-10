@@ -19,7 +19,7 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 {{< /site-region >}}
 
 <div class="alert alert-warning">
-Traffic is always initiated by the tracers to Datadog. No sessions are ever initiated from Datadog back to the tracers.
+Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the tracers.
 </div>
 
 ## Destinations
@@ -27,7 +27,7 @@ Traffic is always initiated by the tracers to Datadog. No sessions are ever init
 The network endpoints accessed by the tracers are dependent on the Datadog site.
 To see destinations based on your [Datadog site][1], click the `DATADOG SITE` selector on the right.
 
-Ensure the following HTTP endpoints are accessible from the host where your tests are executed:
+The following HTTP endpoints must be accessible from the host where your tests are executed:
 
 - `api.`{{< region-param key="dd_site" code="true" >}}
 - `citestcycle-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -38,7 +38,7 @@ Ensure the following HTTP endpoints are accessible from the host where your test
 
 ### Static IP addresses
 
-Some of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
+Some of these domains are **CNAME** records that point to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
 
@@ -63,7 +63,7 @@ Each section has a dedicated endpoint, for example `https://ip-ranges.{{< region
 
 ### Inclusion
 
-Add all of the `ip-ranges` to your inclusion list. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
+Add all of the `ip-ranges` to your inclusion list. Although only a subset is active at any given moment, variations occur over time within the entire set due to regular network operation and maintenance.
 
 ## Further Reading
 
