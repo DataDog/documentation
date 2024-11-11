@@ -13,9 +13,7 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="RUM SDK Auto-Injection is in Preview" >}}
-To try the preview for RUM SDK Auto-Injection, sign up for access!
-{{< /callout >}}
+<div class="alert alert-info">To try the preview for RUM SDK Auto-Injection, follow the setup instructions below.</div>
 
 ## Overview
 
@@ -36,7 +34,7 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{< tabs >}}
 {{% tab "Nginx" %}}
 
-The Datadog RUM Server Side Instrumentation method leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses identified as HTML.
+The Auto-Instrumentation method leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses identified as HTML.
 
 To automatically instrument your RUM application:
 
@@ -53,7 +51,7 @@ To automatically instrument your RUM application:
 {{% /tab %}}
 {{% tab "Windows IIS" %}}
 
-The Datadog RUM Injector leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
+Auto-Instrumentation leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
 
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Windows IIS**.
@@ -122,9 +120,9 @@ The available functionality has the following important limitations:
 
 - If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
 - This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for Nginx web servers.
-- The SDK Injector does not inject into encrypted requests served by Nginx or IIS related to TLS.
-- (Nginx only) The Auto-Instrumentation method does not inject encrypted requests served by the Nginx web server.
-- (Windows IIS only) Configuration for RUM Auto-Injection is only available per Windows IIS site.
+- Auto-Instrumentation does not inject into encrypted requests served by Nginx or IIS related to TLS.
+- (Nginx only) Auto-Instrumentation does not inject encrypted requests served by the Nginx web server.
+- (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
 
 ## Further reading
 
