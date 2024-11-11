@@ -211,7 +211,7 @@ build_preview:
       - typesense.config.json
   after_script:
     - |
-      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+      if [ -s $PREVIEW_ERROR_LOG ] && [ $CI_JOB_STATUS != 'success' ]; then
         echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
       fi # Output the error to the console
   interruptible: true
@@ -281,6 +281,7 @@ typesense_sync_preview:manual:
     - >
       TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_preview_admin_api_key')
       TYPESENSE_HOST=$(get_secret 'typesense_preview_host')
+      TYPESENSE_CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json) 
       yarn run typesense:sync:preview
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -303,6 +304,7 @@ typesense_sync_live:
    - >
      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
+     TYPESENSE_CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json) 
      yarn run typesense:sync:production
 
 sourcemaps_preview:

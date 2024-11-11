@@ -20,6 +20,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
+- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
+  tag: "Blog"
+  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:
@@ -109,6 +112,13 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
+### View optimization recommendations
+
+The [Recommendations page][6] highlights problems and optimization opportunities, helping you save time by prioritizing what's most important. Select a recommendation to view details, including a summary of the problem, as well as potential next steps to address the issue.
+
+{{< img src="database_monitoring/recommendations-page.png" alt="The Recommendations page in Datadog" style="width:90%;" >}}
+
+
 ## Further Reading
 
 {{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
@@ -122,3 +132,4 @@ On the [Databases page][1], you can assess the health and activity of your datab
 [3]: /database_monitoring/query_samples/
 [4]: /database_monitoring/query_metrics/#explain-plans
 [5]: /database_monitoring/database_hosts/
+[6]: /database_monitoring/recommendations/

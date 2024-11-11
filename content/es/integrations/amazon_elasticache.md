@@ -8,7 +8,7 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de métricas clave de Amazon ElasicCache.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
