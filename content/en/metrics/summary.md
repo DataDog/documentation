@@ -191,7 +191,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | ------------------------| ----------------------------------------------------------------------------- |
 | API Catalog             | Timeseries sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
-| Agent                   | Timeseries sent by the Datadog agent, collected from [Agent integrations][10], or [built-in integrations][9].
+| Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
 | CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
 | Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
 | DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
@@ -208,7 +208,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Processes               | Timeseries generated from the Datadog [Processes][22] product.
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
-| Serverless               | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
+| Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
 | Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
 | Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
 | USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
@@ -249,3 +249,5 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [29]: /service_catalog/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
+[32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[33]: /metrics/custom_metrics/agent_metrics_submission/

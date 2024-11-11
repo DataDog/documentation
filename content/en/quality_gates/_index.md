@@ -41,7 +41,7 @@ Use Quality Gates to:
 
 You can configure Quality Gates rules for the following categories: 
 
-[Test Visibility][9]
+[Test Optimization][9]
 
 : <br> - New flaky tests <br> - Performance regressions <br> - Code coverage
 
@@ -70,7 +70,7 @@ You can create rules to block code from being merged that introduces new [flaky 
 
 {{< img src="quality_gates/setup/flaky_test_1.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
 
-[101]: /tests/guides/flaky_test_management/
+[101]: /tests/flaky_test_management/
 
 {{% /tab %}}
 {{% tab "Pipelines" %}}
@@ -137,7 +137,7 @@ For more information, see the [Audit Trail documentation][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/guides/flaky_test_management/
+[1]: /tests/flaky_test_management/
 [2]: /quality_gates/setup/
 [3]: /account_management/audit_trail/
 [4]: /account_management/audit_trail/events/#ci-visibility-events

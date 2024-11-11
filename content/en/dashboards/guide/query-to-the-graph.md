@@ -47,7 +47,7 @@ The idea is then to aggregate data from these sources together to give you a met
 [More information about timeseries and tag cardinality][4]
 
 **Parameter involved: scope**
-You can use more than one tag, such as `{host:bubs, device:udev}`, if you want to fetch data responding to both tags.
+You can use more than one tag, such as `{host:bubs, device:udev}`, if you want to fetch data corresponding to both tags.
 
 ## Proceed to time-aggregation
 
@@ -67,7 +67,7 @@ For instance, on a one-day view with the 'lines' display, there is one datapoint
 
 ### How?
 
-By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][6].
+By default, the Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why zooming out a timeframe also smooths out your graphs][6].
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. What you generally see on graph is not the real values submitted but local aggregates.
 
 {{< img src="dashboards/faq/metrics_graph_3.png" alt="metrics_graph_3" style="width:75%;">}}

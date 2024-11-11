@@ -28,7 +28,7 @@ author:
   support_email: eliad.eini@n2ws.com
 categories:
 - nube
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_on_public_website: true

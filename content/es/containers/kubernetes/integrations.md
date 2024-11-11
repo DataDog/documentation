@@ -50,7 +50,7 @@ O:
 3. [Proporciona valores](#placeholder-values) para estos parámetros.
 
 {{< tabs >}}
-{{% tab "Annotations" (Anotaciones) %}}
+{{% tab "Anotaciones" %}}
 
 Si defines tus pods de Kubernetes directamente con `kind: Pod`, añade las anotaciones de cada pod directamente bajo su sección `metadata`, como se muestra a continuación:
 
@@ -101,7 +101,7 @@ spec:
 Si defines pods indirectamente (con despliegues, ReplicaSets o ReplicationControllers), añade anotaciones de pod en `spec.template.metadata`.
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Archivo local" %}}
 
 Puedes almacenar plantillas de Autodiscovery como archivos locales dentro del directorio montado `/conf.d`. Debes reiniciar tus contenedores del Agent cada vez que cambies, añadas o elimines plantillas.
 
@@ -148,7 +148,7 @@ data:
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Puedes obtener plantillas de Autodiscovery de [Consul][1], [etcd][2] o [ZooKeeper][3]. Puedes configurar tu base de datos clave-valor en el archivo de configuración `datadog.yaml` (y posteriormente montar este archivo en el contenedor del Agent) o como variables de entorno en el contenedor del Agent.
 
@@ -374,7 +374,7 @@ Aquí, `<PASSWORD>` corresponde a la contraseña del usuario `datadog` que has c
 Para aplicar esta configuración a tus contenedores Postgres:
 
 {{< tabs >}}
-{{% tab "Annotations" (Anotaciones) %}}
+{{% tab "Anotaciones" %}}
 
 En el manifiesto de tu pod:
 
@@ -447,7 +447,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Archivo local" %}}
 1. Crea un archivo `conf.d/postgresql.d/conf.yaml` en tu host:
 
    ```yaml
@@ -516,7 +516,7 @@ A continuación, define `volumeMounts` y `volumes` en tu manifiesto:
 ```
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Los siguientes comandos etcd crean una plantilla de integración con Postgres con un parámetro `password` personalizado:
 
