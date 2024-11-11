@@ -100,7 +100,7 @@ nav_sections:
       link: universal_service_monitoring/
       title: Universal Service Monitoring
     - desc: アップタイムの確保、地域ごとの問題点の指摘、アプリケーションのパフォーマンステスト
-      icon: rum
+      icon: synthetics
       link: synthetics/
       title: Synthetic Monitoring
     - desc: Web、モバイル、バックエンド全体で重大なエラーを特定し、解決を加速
@@ -108,7 +108,7 @@ nav_sections:
       link: error_tracking/
       title: Error Tracking
     - desc: アプリケーションのユーザーエクスペリエンスを把握、観察、分析
-      icon: account_management_saml
+      icon: rum
       link: real_user_monitoring/
       title: Real User Monitoring
     - desc: ユーザーの行動に関する洞察を得て、データに基づく製品の決定を行う
@@ -116,8 +116,8 @@ nav_sections:
       link: product_analytics/
       title: 製品分析
     - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
-      icon: apm
-      link: synthetics/mobile_app_testing/
+      icon: mobile
+      link: mobile_app_testing/
       title: モバイルアプリケーションテスト
     - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施
       icon: continuous-testing
@@ -136,11 +136,11 @@ nav_sections:
       link: security/
       title: セキュリティ
     - desc: メトリクスの探索、検索、および分布の作成
-      icon: メトリクス
+      icon: metric
       link: metrics/
       title: メトリクス
     - desc: 取り込んだログを処理し、監視し、アーカイブ
-      icon: ログ
+      icon: log
       link: logs/
       title: Log Management
     - desc: テレメトリーパイプラインの管理と監視
