@@ -3,7 +3,7 @@ categories:
 - nube
 - AWS
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de métricas AWS Step Functions clave.
 doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
