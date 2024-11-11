@@ -24,10 +24,10 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 
 1. Sign in to the [Microsoft Entra admin center][6] as at least a [Cloud Application Administrator][7]
 1. Browse to **Identity** -> **Applications** -> **Enterprise Applications**
-1. Click **New Application** -> **Create your own application**
+1. Click **New Application**
 1. Type "Datadog" in the search box
 1. Select the Datadog application from the gallery
-1. Enter a name
+1. Optionally, enter a name in the **Name** text box
 1. Click **Create**
 
 **Note:** If you already have Datadog configured with Microsoft Entra ID for SSO, go to **Enterprise Applications** and select your existing Datadog application.
@@ -41,7 +41,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
     - **Tenant URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
     - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
-{{< img src="/account_management/scim/admin-credentials.png" alt="Azure AD Admin Credentials configuration screen">}}
+{{< img src="/account_management/scim/admin-credentials-2.png" alt="Azure AD Admin Credentials configuration screen">}}
 
 5. Click **Test Connection**, and wait for the message confirming that the credentials are authorized to enable provisioning.
 6. Click **Save**. The mapping section appears. See the following section to configure mapping.
@@ -51,7 +51,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 ### User attributes
 
 1. Expand the **Mappings** section
-2. Click **Provision Microsoft Entra ID Users**
+2. Click **Provision Azure Active Directory Users**. The Attribute Mapping page appears.
 3. Set **Enabled** to **Yes**
 4. Click the **Save** icon
 5. Under **Target Object actions**, ensure Create, Update, and Delete actions are selected
@@ -64,7 +64,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 | `mail`                           | `emails[type eq "work"].value` |
 | `displayName`                    | `name.formatted`               |
 
-   {{< img src="/account_management/scim/ad-users.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
+   {{< img src="/account_management/scim/ad-users-2.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
 7. After you set your mappings, click **Save**.
 
