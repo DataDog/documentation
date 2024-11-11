@@ -59,6 +59,8 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
   - SNS and SQS direct integration
   - Kinesis
   - EventBridge
+  - DynamoDB
+  - S3
 - Tracing dozens of additional out-of-the-box [Python][3] and [Node.js][4] libraries.
 
 For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5].
@@ -108,7 +110,16 @@ For .NET serverless applications, Datadog recommends [installing Datadog's traci
 
 Learn more about [tracing through .NET Azure serverless applications][15].
 
-### Hybrid environments
+## Span Auto-linking
+Datadog can automatically detect linked spans when certain parts of your request cannot propogate trace context, such as when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. These will appear in the Span Links tab in the Datadog Trace UI. 
+
+**Note:** Span auto-linking may not work if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
+
+If you are viewing the request that originated before the change event and the linked trace is ingested, you will be able to see
+
+This functionality is available for Python instrumented Lambda Functions on layer version 101 and above.
+
+## Hybrid environments
 
 If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
@@ -116,7 +127,7 @@ If `dd-trace` is installed on your hosts with the Datadog Agent, and your server
 
 Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. See the [Datadog APM documentation][16] to learn more about tracing in container or host-based environments.
 
-## Profiling your Lambda Functions (Public Beta)
+## Profiling your Lambda Functions
 
 <div class="alert alert-info">During the beta period, profiling is available at no additional cost.</div>
 
@@ -360,3 +371,5 @@ If you are already tracing your serverless application with X-Ray and want to co
 [25]: /tracing/trace_collection/custom_instrumentation/
 [26]: /serverless/guide/handler_wrapper/
 [27]: /profiler/
+[28]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html
+[29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
