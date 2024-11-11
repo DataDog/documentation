@@ -615,7 +615,7 @@ Instrumentation telemetry is not available for the {{< region-param key="dd_site
 
 {{< /site-region >}}
 
-Datadog may gather environmental and diagnostic information about your tracing libraries to improve Datadog's products; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
+Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
 You can disable this telemetry collection using either of these settings:
 
