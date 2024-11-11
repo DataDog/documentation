@@ -1,21 +1,18 @@
 ---
-title: Tracing Go Applications
+title: (v2) Tracing Go Applications
 aliases:
-- /tracing/go/
-- /tracing/languages/go
-- /agent/apm/go/
-- /tracing/setup/go
-- /tracing/setup_overview/go
-- /tracing/setup_overview/setup/go
-- /tracing/trace_collection/dd_libraries/go
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 20
+- /tracing/go-v2/
+- /tracing/languages/go-v2
+- /agent/apm/go-v2/
+- /tracing/setup/go-v2
+- /tracing/setup_overview/go-v2
+- /tracing/setup_overview/setup/go-v2
+- /tracing/trace_collection/dd_libraries/go-v2
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Tracer library source code"
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
 - link: https://github.com/DataDog/orchestrion
@@ -29,12 +26,12 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go-v2">Tracing Go Applications</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go">Tracing Go Applications</a> documentation.</div>
 
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The Go Tracer requires Go `1.22+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Getting started
 
@@ -187,7 +184,6 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 | `github.com/gofiber/fiber/v2`       | `v0.7.0`                      |
 | `github.com/gomodule/redigo/redis`  | `v0.7.0`                      |
 | `github.com/gorilla/mux`            | `v0.7.0`                      |
-| `github.com/jinzhu/gorm`            | `v0.7.0`                      |
 | `github.com/labstack/echo/v4`       | `v0.7.0`                      |
 | `google.golang.org/grpc`            | `v0.7.0`                      |
 | `gorm.io/gorm`                      | `v0.7.0`                      |
@@ -202,10 +198,10 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/go
+[1]: /tracing/compatibility_requirements/go-v2
 [2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/trace_collection/library_config/go/
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[3]: /tracing/trace_collection/library_config/go-v2/
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention

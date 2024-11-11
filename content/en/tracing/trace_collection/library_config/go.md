@@ -7,9 +7,12 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Source code"
-- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Package page"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+  tag: "External Site"
+  text: "v2 Package page"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -33,7 +36,7 @@ You may also elect to provide `env`, `service`, and `version` through the tracer
 package main
 
 import (
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func main() {
@@ -50,7 +53,7 @@ func main() {
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3].
+See all available options in the [configuration documentation][3] ([v2.x documentation][20]).
 
 ### Unified service tagging
 
@@ -181,7 +184,7 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [6]: /tracing/configure_data_security#telemetry-collection
@@ -190,8 +193,9 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [9]: https://github.com/openzipkin/b3-propagation
 [13]: /agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
-[15]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
+[15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
 [17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
+[20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption

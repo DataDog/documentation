@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate
+title: (v2) Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate
 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
@@ -22,7 +22,7 @@ further_reading:
   text: Tracing library open source code repository
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/guide/tutorial-enable-go-aws-ecs-fargate-v2">Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate</a> documentation.</div>
+<div class="alert alert-info">[PREVIEW] This documentation is for v2.x preview of the Go Tracer. If you are looking for v1.x documentation, see the <a href="/tracing/guide/tutorial-enable-go-aws-ecs-fargate">Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate</a> documentation.</div>
 
 
 ## Overview
@@ -165,10 +165,10 @@ To enable tracing support:
 1. Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-     sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+     sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+     chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+     httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
 1. In the `main()` function, uncomment the following lines:
@@ -183,11 +183,11 @@ To enable tracing support:
    })){{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-   r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
+   r.Use(chitrace.Middleware(chitrace.WithService("notes"))){{< /code-block >}}
 
 1. In `setupDB()`, uncomment the following lines:
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
@@ -216,7 +216,7 @@ To enable tracing support:
    Also remove the comment around the following import:
 
    {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"{{< /code-block >}}
 
 1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
