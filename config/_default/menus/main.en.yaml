@@ -3891,7 +3891,7 @@ menu:
       parent: dbm
       identifier: dbm_query_samples
       weight: 12
-    - name: DBM Recommendations
+    - name: Exploring Recommendations
       url: database_monitoring/recommendations/
       parent: dbm
       identifier: dbm_recommendations
