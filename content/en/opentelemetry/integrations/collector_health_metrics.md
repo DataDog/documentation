@@ -1,5 +1,7 @@
 ---
 title: Health Metrics
+aliases: 
+- /opentelemetry/collector_exporter/collector_health_metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

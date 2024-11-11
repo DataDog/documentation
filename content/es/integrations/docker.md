@@ -2,7 +2,7 @@
 categories:
 - Configuración y despliegue
 - contenedores
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Monitorización de métricas de Docker con Datadog
 doc_link: https://docs.datadoghq.com/integrations/docker/
