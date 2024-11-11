@@ -1,4 +1,4 @@
-import { HugoGlobalConfig } from '../../../src/schemas/config/hugo';
+import { HugoConfig, HugoGlobalConfig } from '../../../src/schemas/config/hugo';
 import { IntegrationConfig } from '../../../src/schemas/config/integration';
 import { VALID_SITE_DIR } from '../../config/constants';
 import { HugoFunctions } from '../../../src/helperModules/HugoFunctions';
@@ -48,4 +48,6 @@ const mockPageConfig: PageConfig = {
   path: 'example/path/to/file.md'
 };
 
-export { mockHugoGlobalConfig, mockIntegrationConfig, mockPageConfig };
+const mockHugoConfig: HugoConfig = { global: mockHugoGlobalConfig, page: mockPageConfig };
+
+export { mockHugoGlobalConfig, mockIntegrationConfig, mockPageConfig, mockHugoConfig };

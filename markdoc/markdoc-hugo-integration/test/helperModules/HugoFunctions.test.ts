@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { HugoFunctions } from '../../src/helperModules/HugoFunctions';
-import { mockHugoGlobalConfig, mockPageConfig } from '../mocks/valid/integrationConfig';
+import { mockHugoConfig } from '../mocks/valid/integrationConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 
 describe('HugoFunctions', () => {
@@ -14,10 +14,64 @@ describe('HugoFunctions', () => {
     });
   });
 
+  describe('absLangUrl', () => {
+    test('handles all example inputs correctly for a simple base URL', () => {
+      const hugoConfigDup = { ...mockHugoConfig };
+      hugoConfigDup.global.siteConfig = { baseURL: 'https://example.org/' };
+
+      const expectedOutputByInput = {
+        '': 'https://example.org/en/',
+        articles: 'https://example.org/en/articles',
+        'style.css': 'https://example.org/en/style.css',
+        '/': 'https://example.org/en/',
+        '/articles': 'https://example.org/en/articles',
+        '/style.css': 'https://example.org/en/style.css'
+      };
+
+      const actualOutputByInput = Object.fromEntries(
+        Object.entries(expectedOutputByInput).map(([url]) => [
+          url,
+          HugoFunctions.absLangUrl({
+            hugoConfig: hugoConfigDup,
+            url
+          })
+        ])
+      );
+
+      expect(actualOutputByInput).toEqual(expectedOutputByInput);
+    });
+
+    test('handles all example inputs correctly for a base URL with a path', () => {
+      const hugoConfigDup = { ...mockHugoConfig };
+      hugoConfigDup.global.siteConfig = { baseURL: 'https://example.org/docs/' };
+
+      const expectedOutputByInput = {
+        '': 'https://example.org/docs/en/',
+        articles: 'https://example.org/docs/en/articles',
+        'style.css': 'https://example.org/docs/en/style.css',
+        '/': 'https://example.org/en/',
+        '/articles': 'https://example.org/en/articles',
+        '/style.css': 'https://example.org/en/style.css'
+      };
+
+      const actualOutputByInput = Object.fromEntries(
+        Object.entries(expectedOutputByInput).map(([input]) => [
+          input,
+          HugoFunctions.absLangUrl({
+            hugoConfig: hugoConfigDup,
+            url: input
+          })
+        ])
+      );
+
+      expect(actualOutputByInput).toEqual(expectedOutputByInput);
+    });
+  });
+
   describe('relUrl', () => {
     test('handles all example inputs correctly for a simple base URL', () => {
-      const hugoConfigDup = { ...mockHugoGlobalConfig };
-      hugoConfigDup.siteConfig = { baseURL: 'https://example.org/' };
+      const hugoConfigDup = { ...mockHugoConfig };
+      hugoConfigDup.global.siteConfig = { baseURL: 'https://example.org/' };
 
       const expectedOutputByInput = {
         '': '/',
@@ -33,7 +87,7 @@ describe('HugoFunctions', () => {
         Object.entries(expectedOutputByInput).map(([url]) => [
           url,
           HugoFunctions.relUrl({
-            hugoConfig: { global: hugoConfigDup, page: mockPageConfig },
+            hugoConfig: hugoConfigDup,
             url
           })
         ])
@@ -43,8 +97,8 @@ describe('HugoFunctions', () => {
     });
 
     test('handles all example inputs correctly for a base URL with a path', () => {
-      const hugoConfigDup = { ...mockHugoGlobalConfig };
-      hugoConfigDup.siteConfig = { baseURL: 'https://example.org/foo/bar/' };
+      const hugoConfigDup = { ...mockHugoConfig };
+      hugoConfigDup.global.siteConfig = { baseURL: 'https://example.org/foo/bar/' };
 
       const expectedOutputByInput = {
         '': '/foo/bar',
@@ -60,7 +114,7 @@ describe('HugoFunctions', () => {
         Object.entries(expectedOutputByInput).map(([input]) => [
           input,
           HugoFunctions.relUrl({
-            hugoConfig: { global: hugoConfigDup, page: mockPageConfig },
+            hugoConfig: hugoConfigDup,
             url: input
           })
         ])

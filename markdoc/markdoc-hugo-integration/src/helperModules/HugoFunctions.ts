@@ -1,6 +1,7 @@
 import md5 from 'md5';
 import { HugoConfig, HugoSubdirsByType } from '../schemas/config/hugo';
 import fs from 'fs';
+import { result } from 'lodash';
 
 /**
  * The Markdoc-Hugo integration's tag templates (shortcode templates)
@@ -9,6 +10,35 @@ import fs from 'fs';
  * to implement the most common shortcodes on the Markdoc site.
  */
 export class HugoFunctions {
+  /**
+   * Returns an absolute URL with a language prefix, if any.
+   *
+   * The JS equivalent of the Hugo template function `absLangURL`:
+   * https://gohugo.io/functions/urls/abslangurl/
+   */
+  static absLangUrl(p: { hugoConfig: HugoConfig; url: string }): string {
+    let resultBaseUrl = new URL(p.hugoConfig.global.siteConfig.baseURL);
+    const lang = p.hugoConfig.page.lang;
+
+    let resultPath = p.url;
+
+    if (resultPath.startsWith('/')) {
+      resultBaseUrl = new URL(resultBaseUrl.origin + '/');
+    } else {
+      resultPath = '/' + resultPath;
+    }
+
+    resultPath = `${lang}${resultPath}`;
+
+    console.log('\n\n\n');
+    console.log('url', p.url);
+    console.log('lang', lang);
+    console.log('resultPath', resultPath);
+    console.log('resultBaseUrl', resultBaseUrl);
+    console.log('final result', new URL(resultPath, resultBaseUrl));
+    return new URL(resultBaseUrl.href + resultPath).href;
+  }
+
   static getSubdirsByType(siteDir: string): HugoSubdirsByType {
     return {
       content: siteDir + '/content',
