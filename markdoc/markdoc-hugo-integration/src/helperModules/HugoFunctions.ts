@@ -1,7 +1,6 @@
 import md5 from 'md5';
 import { HugoConfig, HugoSubdirsByType } from '../schemas/config/hugo';
 import fs from 'fs';
-import { result } from 'lodash';
 
 /**
  * The Markdoc-Hugo integration's tag templates (shortcode templates)

@@ -20,11 +20,15 @@ describe('HugoFunctions', () => {
       hugoConfigDup.global.siteConfig = { baseURL: 'https://example.org/' };
 
       const expectedOutputByInput = {
+        // without leading slash
         '': 'https://example.org/en/',
         articles: 'https://example.org/en/articles',
+        'articles#somehash': 'https://example.org/en/articles#somehash',
         'style.css': 'https://example.org/en/style.css',
+        // with leading slash
         '/': 'https://example.org/en/',
         '/articles': 'https://example.org/en/articles',
+        '/articles#somehash': 'https://example.org/en/articles#somehash',
         '/style.css': 'https://example.org/en/style.css'
       };
 
@@ -46,11 +50,15 @@ describe('HugoFunctions', () => {
       hugoConfigDup.global.siteConfig = { baseURL: 'https://example.org/docs/' };
 
       const expectedOutputByInput = {
+        // without leading slash
         '': 'https://example.org/docs/en/',
         articles: 'https://example.org/docs/en/articles',
+        'articles#somehash': 'https://example.org/docs/en/articles#somehash',
         'style.css': 'https://example.org/docs/en/style.css',
+        // with leading slash
         '/': 'https://example.org/en/',
         '/articles': 'https://example.org/en/articles',
+        '/articles#somehash': 'https://example.org/en/articles#somehash',
         '/style.css': 'https://example.org/en/style.css'
       };
 
