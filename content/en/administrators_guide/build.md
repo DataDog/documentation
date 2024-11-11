@@ -13,7 +13,7 @@ As you scale your IT footprint, it's important to develop standards, methods, an
 
 ## Iterating on your environment
 
-In the [plan][7] section, you explored a range of topics within a Datadog design specification. In a perfect world, every one of those questions would be fully researched and answered before executing a large roll-out. In this regard, enterprise IT engineering is far from a perfect world, and sometimes you need to pause and adapt as you build out your installation.
+In the [plan][7] section, you explored a range of topics within a Datadog design specification. In a perfect world, every one of those questions would be fully researched and answered before executing a large rollout. In this regard, enterprise IT engineering is far from a perfect world, and sometimes you need to pause and adapt as you build out your installation.
 
 ### Prioritizing features
 
@@ -70,7 +70,7 @@ Like most enterprise software products, Datadog installations can be broken into
 
 **File(s)**: Contains configurations  
 **Package**: Holds binaries and controls their deployment  
-**Service**: Manages the runtime instance via the OS service system.  
+**Service**: Manages the runtime instance via the OS service system
 
 The basic operations you must complete in order to install Datadog are the following:
 
@@ -78,12 +78,12 @@ The basic operations you must complete in order to install Datadog are the follo
 
 **Package**: Use internal package repositories such as Artifactory or Nexus to host .rpm, .msi, and containerized Agent packages.   
 
-**Service**: Use of IaC, or shell scripting
+**Service**: Use of IaC, or shell scripting.
 
 **IaC:** Infrastructure-As-Code has advanced in both sophistication and robustness. While it is almost universally used in cloud infrastructures, it is often retrofitted to long-established on-premise infrastructures. Its simple file/package/service structure has been leveraged to deploy significant Datadog footprints with IaC "tools" as rudimentary as a bash script. While this is not recommended, it stands as encouragement to begin the IaC adoption of Datadog as soon as possible, and when you do, you will find Datadog at the ready with sample code and integrations for Ansible, Puppet, Chef, Powershell, Bash, CloudFormations, Terraform, and more.  
 
 **Recommendations:**   
-When it comes to deploying Datadog Agent software, it is advisable to re-use as much of your existing provisioning systems as possible. Datadog software design is flat and compliant to industry standard methods.  
+When it comes to deploying Datadog Agent software, it is advisable to reuse as much of your existing provisioning systems as possible. Datadog software design is flat and compliant to industry standard methods.  
 
 ## Summary
 

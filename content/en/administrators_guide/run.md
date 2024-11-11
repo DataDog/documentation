@@ -19,7 +19,7 @@ Infrastructure is the core element of IT and observability. It is the primary an
 
 **Recommendations**:   
 
-Use [Fleet Automation][1] to remotely manage your Agents at scale. Continuously monitor your teams for new infrastructure requests, flagging them early and applying engineering resources to focus on sensible expansions to your infrastructure offerings.
+Use [Fleet Automation][1] to remotely manage your Agents at scale. Continuously monitor your teams for new infrastructure requests, flagging them early, and applying engineering resources to focus on sensible expansions to your infrastructure offerings.
 
 ### Onboarding a new application footprint
 

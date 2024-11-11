@@ -27,8 +27,8 @@ This guide outlines the foundational concepts of Datadog and offers steps to pre
 This guide is organized into three sections that provide important concepts, plans, tasks, and structures to create and streamline your Datadog ownership experience:
 
 * **[Plan][2]**: Learn the parts of Datadog that are important to your use case, build a knowledge base, develop some practical experience, plan your installation, and apply best practices when configuring your observability platform.  
-* **[Build][3]**: Understand what needs to be installed and create a detailed roll-out methodology so you can set up a Datadog environment that is best suited to your needs.  
-* **[Run][4]**: Maintain Datadog, maximize its power and manage ongoing support.
+* **[Build][3]**: Understand what needs to be installed and create a detailed rollout methodology so you can set up a Datadog environment that is best suited to your needs.  
+* **[Run][4]**: Maintain Datadog, maximize its power, and manage ongoing support.
 
 {{< img src="/administrators_guide/plan_build_run_2.png" alt="Diagram of the plan, build, and run phases" style="width:80%;">}}
 
