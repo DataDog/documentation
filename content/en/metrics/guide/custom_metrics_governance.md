@@ -194,7 +194,7 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 {{< /whatsnext >}}
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-  Real-time [estimated Custom Metric usage metrics][16] can now be prepopulated with the tags you set in the [Usage Attribution][17] page. To enable this feature, reach out to Customer Success. 
+  Real-time [estimated Custom Metric usage metrics][16] can now be prepopulated with the tags you set in the [Usage Attribution][17] to monitor custom metric volume fluctuations. To enable this feature, reach out to Customer Success. 
 {{< /callout >}}  
 
 ## Summary of best practices
