@@ -105,19 +105,19 @@ To learn more, see the [search syntax][1] documentation.
 
 Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
 
-If you want to investigate connections from all of your hosts in a single grouping, add the `host` tag in the **View clients as** drop-down, and add `Ungrouped traffic` in the **View servers as** drop-down. 
+If you want to investigate connections from all of your hosts in a single grouping, add the `host` tag in the **View clients as** dropdown, and add `Ungrouped traffic` in the **View servers as** dropdown. 
 
 {{< img src="network_performance_monitoring/network_analytics/npm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
 
-If you have traffic that is not tagged by a specific grouping, you can use the **Auto-grouped traffic** to group data by whichever tags are available. For example, to see which tags are available for a specific `service`, you can use the `service` tag in the **View clients as** drop-down, and add `Auto-grouped traffic` in the **View servers as** drop-down:
+If you have traffic that is not tagged by a specific group, you can select **Auto-grouped traffic** to group data by any available tags. For example, to see which tags are available for a specific `service`, use the `service` tag in the **View clients as** dropdown, and add `Auto-grouped traffic` in the **View servers as** dropdown:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_auto-grouped.png" alt="NPM analytics page sorting by service tags" style="width:90%;">}}
 
-The **Auto-grouped traffic** option can help to identify the source of your tags. For instance, hovering over the individual icons displays a tooltip indicating the tag's origin:
+The **Auto-grouped traffic** option can help you identify the source of your tags. For example, hover over the individual icons to display a tooltip that indicates the tag's origin:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_icon_tooltip.png" alt="Hovering over the icon tooltip to display the tag source" style="width:90%;">}}
 
-Using the search bar along with the group by feature is helpful to further isolate your network traffic. For example, to find all traffic from your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and enter `datacenter` in the **View clients** as drop-down:
+Using the search bar and the group by feature together is helpful to further isolate your network traffic. For example, to find all traffic from your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and select `datacenter` in the **View clients** as dropdown:
 
 {{< img src="network_performance_monitoring/network_analytics/search_bar_with_groupby.png" alt="Using group by option with search field" style="width:90%;">}}
 
