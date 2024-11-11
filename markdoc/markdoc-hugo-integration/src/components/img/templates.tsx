@@ -1,5 +1,6 @@
 import { HugoConfig } from '../../schemas/config/hugo';
 import { HugoFunctions } from '../../helperModules/HugoFunctions';
+import { cssStringToObject } from '../utils';
 
 /**
  * All of the possible attributes an author can define in the img tag.
@@ -274,13 +275,4 @@ function Figure(props: { attrs: ImgTagAttrs; children: React.ReactNode }) {
       </figure>
     </div>
   );
-}
-
-// Utility functions -----------------------------------------------------------
-
-function cssStringToObject(css: string) {
-  const regex = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g;
-  const result: Record<string, string> = {};
-  css.replace(regex, (match, prop, val) => (result[prop] = val));
-  return result;
 }
