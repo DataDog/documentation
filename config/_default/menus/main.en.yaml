@@ -229,9 +229,9 @@ menu:
       url: getting_started/test_visibility/
       parent: getting_started
       weight: 26
-    - name: Intelligent Test Runner
-      identifier: getting_started_intelligent_test_runner
-      url: getting_started/intelligent_test_runner/
+    - name: Test Impact Analysis
+      identifier: getting_started_test_impact_analysis
+      url: getting_started/test_impact_analysis/
       parent: getting_started
       weight: 27
     - name: Code Analysis
@@ -604,165 +604,130 @@ menu:
       identifier: otel_receiver
       parent: otel_collector_configuration
       weight: 3021
-    - name: Integrations
-      url: opentelemetry/integrations/
-      identifier: otel_integrations
-      parent: otel_collector
-      weight: 303
-    - name: Docker Metrics
-      url: opentelemetry/integrations/docker_metrics/
-      identifier: otel_docker_metrics
-      parent: otel_integrations
-      weight: 3031
-    - name: Host Metrics
-      url: opentelemetry/integrations/host_metrics/
-      identifier: otel_host_metrics
-      parent: otel_integrations
-      weight: 3032
-    - name: Trace Metrics
-      url: opentelemetry/integrations/trace_metrics/
-      identifier: otel_trace_metrics
-      parent: otel_integrations
-      weight: 3033
-    - name: Runtime Metrics
-      url: opentelemetry/integrations/runtime_metrics/
-      identifier: otel_runtime_metrics
-      parent: otel_integrations
-      weight: 3034
-    - name: Collector Health Metrics
-      url: opentelemetry/collector_exporter/collector_health_metrics/
-      identifier: otel_heatlh_metrics
-      parent: otel_integrations
-      weight: 3035
-    - name: Log Collection
-      url: opentelemetry/integrations/log_collection/
-      identifier: otel_log_collection
-      parent: otel_integrations
-      weight: 3036
     - name: Hostnames and Tagging
       url: opentelemetry/collector_exporter/hostname_tagging/
       identifier: otel_hostnames_tagging
       parent: otel_collector_configuration
-      weight: 3037
+      weight: 3022
     - name: Batch and Memory Settings
       url: opentelemetry/collector_exporter/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel_collector_configuration
-      weight: 3038
-    - name: Kafka Metrics
-      url: opentelemetry/integrations/kafka_metrics/
-      identifier: otel_gs_kafka_metrics
-      parent: otel_integrations
-      weight: 3039
+      weight: 3023
+    - name: Integrations
+      url: opentelemetry/integrations/
+      identifier: otel_integrations
+      parent: opentelemetry_top_level
+      weight: 4
     - name: Schema and Semantics
       url: opentelemetry/schema_semantics/
       identifier: otel_schema
       parent: opentelemetry_top_level
-      weight: 4
+      weight: 5
     - name: Resource Attribute Mapping
       url: opentelemetry/schema_semantics/semantic_mapping/
       identifier: otel_semantic_mapping
       parent: otel_schema
-      weight: 401
+      weight: 501
     - name: Metrics Mapping
       url: opentelemetry/schema_semantics/metrics_mapping/
       identifier: otel_metrics_mapping
       parent: otel_schema
-      weight: 402
+      weight: 502
     - name: Infrastructure Host Mapping
       url: opentelemetry/schema_semantics/host_metadata/
       identifier: otel_host_metadata
       parent: otel_schema
-      weight: 403
+      weight: 503
     - name: Hostname Mapping
       url: opentelemetry/schema_semantics/hostname/
       identifier: otel_hostname
       parent: otel_schema
-      weight: 404
+      weight: 504
     - name: Service-entry Spans Mapping
       url: opentelemetry/schema_semantics/service_entry_spans/
       identifier: otel_service_entry_spans
       parent: otel_schema
-      weight: 404
+      weight: 504
     - name: Ingestion Sampling
       url: opentelemetry/ingestion_sampling_with_opentelemetry
       identifier: otel_sampling
       parent: opentelemetry_top_level
-      weight: 5
+      weight: 6
     - name: Interoperability with Datadog
       url: opentelemetry/interoperability/
       identifier: otel_interoperability
       parent: opentelemetry_top_level
-      weight: 6
+      weight: 7
     - name: OTLP Ingestion by the Agent
       url: opentelemetry/interoperability/otlp_ingest_in_the_agent/
       identifier: otel_ingest
       parent: otel_interoperability
-      weight: 601
+      weight: 701
     - name: Trace Context Propagation
       url: /opentelemetry/interoperability/trace_context_propagation
       identifier: otel_propagation
       parent: otel_interoperability
-      weight: 602
+      weight: 702
     - name: OpenTelemetry API Support
       url: /opentelemetry/interoperability/api_support
       identifier: otel_instrumentation
       parent: otel_interoperability
-      weight: 603
+      weight: 703
     - name: OpenTelemetry Instrumentation Libraries
       url: /opentelemetry/interoperability/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
       parent: otel_interoperability
-      weight: 604
+      weight: 704
     - name: Environment Variable Configuration
       url: /opentelemetry/interoperability/environment_variable_support
       identifier: otel_env_var_configuration
       parent: otel_interoperability
-      weight: 605
+      weight: 705
     - name: Correlate RUM and Traces
       url: /real_user_monitoring/platform/connect_rum_and_traces/
       identifier: otel_rum
       parent: otel_interoperability
-      weight: 606
+      weight: 706
     - name: Correlate Logs and Traces
       url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
       identifier: otel_logs
       parent: otel_interoperability
-      weight: 607
+      weight: 707
     - name: Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
       parent: opentelemetry_top_level
-      weight: 7
+      weight: 8
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
       parent: opentelemetry_top_level
-      weight: 8
+      weight: 9
     - name: Guides and Resources
       url: opentelemetry/guide/
       identifier: otel_guides
       parent: opentelemetry_top_level
-      weight: 9
+      weight: 10
     - name: Visualizing OTLP Histograms as Heatmaps
       url: opentelemetry/guide/otlp_histogram_heatmaps/
       identifier: otel_guides_heatmaps
       parent: otel_guides
-      weight: 901
+      weight: 1001
     - name: Migrate to OpenTelemetry Collector version 0.95.0+
       url: opentelemetry/guide/migration/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 902
+      weight: 1002
     - name: Producing Delta Temporality Metrics
       url: opentelemetry/guide/otlp_delta_temporality/
       identifier: otel_guides_delta_temporality
       parent: otel_guides
-      weight: 903
+      weight: 1003
     - name: Sending Data from OpenTelemetry Demo
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
-      weight: 904
+      weight: 1004
     - name: Developers
       url: developers/
       pre: dev-code
@@ -2067,11 +2032,16 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
       weight: 103
+    - name: Manage Data Collection
+      url: error_tracking/manage_data_collection
+      parent: error_tracking
+      identifier: error_tracking_manage_data
+      weight: 11
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 11
+      weight: 12
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2857,16 +2827,26 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_installation
       weight: 201
+    - name: Merge Step Functions and Lambda Traces
+      url: serverless/step_functions/merge-step-functions-lambda
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_merge_lambda_traces
+      weight: 202
     - name: Enhanced Metrics
       url: serverless/step_functions/enhanced-metrics
       parent: serverless_step_functions
       identifier: serverless_step_functions_enhanced_metrics
-      weight: 202
+      weight: 203
+    - name: Redrive Executions
+      url: serverless/step_functions/redrive
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_redrive
+      weight: 204
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 203
+      weight: 205
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate
@@ -3385,10 +3365,10 @@ menu:
       parent: trace_explorer
       identifier: span_query_syntax
       weight: 602
-    - name: Span Facets
-      url: tracing/trace_explorer/facets/
+    - name: Span Tags and Attributes
+      url: tracing/trace_explorer/span_tags_attributes/
       parent: trace_explorer
-      identifier: span_facets
+      identifier: span_attributes
       weight: 603
     - name: Span Visualizations
       url: tracing/trace_explorer/visualize/
@@ -3439,11 +3419,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_map
       weight: 705
+    - name: Inferred Services
+      url: tracing/services/inferred_services
+      parent: tracing_services
+      identifier: tracing_inferred_services
+      weight: 706
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 706
+      weight: 707
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -3876,6 +3861,11 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_mongodbatlas
       weight: 702
+    - name: Troubleshooting
+      url: database_monitoring/setup_mongodb/troubleshooting/
+      parent: dbm_setup_mongodb
+      identifier: dbm_troubleshooting_mongodb
+      weight: 703
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
@@ -4151,7 +4141,7 @@ menu:
       identifier: cd_explorer_saved_views
       parent: cd_explorer
       weight: 303
-    - name: Test Visibility
+    - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
@@ -4237,35 +4227,90 @@ menu:
       parent: tests
       identifier: tests_monitors
       weight: 5
+    - name: Flaky Test Management
+      url: tests/flaky_test_management
+      parent: tests
+      identifier: tests_flaky_test_management
+      weight: 6
+    - name: Early Flake Detection
+      url: tests/flaky_test_management/early_flake_detection
+      parent: tests_flaky_test_management
+      identifier: tests_early_flake_detection
+      weight: 601
+    - name: Auto Test Retries
+      url: tests/flaky_test_management/auto_test_retries
+      parent: tests_flaky_test_management
+      identifier: tests_auto_test_retries
+      weight: 602
+    - name: Test Impact Analysis
+      url: tests/test_impact_analysis
+      parent: tests
+      identifier: test_impact_analysis
+      weight: 7
+    - name: Setup
+      url: tests/test_impact_analysis/setup/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_setup
+      weight: 701
+    - name: .NET
+      url: tests/test_impact_analysis/setup/dotnet/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_dotnet
+      weight: 101
+    - name: JavaScript and TypeScript
+      url: tests/test_impact_analysis/setup/javascript/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_javascript
+      weight: 102
+    - name: Python
+      url: tests/test_impact_analysis/setup/python/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_python
+      weight: 103
+    - name: Swift
+      url: tests/test_impact_analysis/setup/swift/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_swift
+      weight: 104
+    - name: Java
+      url: tests/test_impact_analysis/setup/java/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_java
+      weight: 105
+    - name: Ruby
+      url: tests/test_impact_analysis/setup/ruby/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_ruby
+      weight: 106
+    - name: How It Works
+      url: tests/test_impact_analysis/how_it_works/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_how_it_works
+      weight: 702
+    - name: Troubleshooting
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: test_impact_analysis
+      identifier: test_impact_analysis_troubleshooting
+      weight: 703
     - name: Developer Workflows
       url: tests/developer_workflows
       parent: tests
       identifier: tests_developer_workflows
-      weight: 6
+      weight: 8
     - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
-      weight: 7
+      weight: 9
     - name: Instrument Browser Tests with RUM
       url: tests/browser_tests
       parent: tests
       identifier: tests_browser_tests
-      weight: 8
+      weight: 10
     - name: Instrument Swift Tests with RUM
       url: tests/swift_tests
       parent: tests
       identifier: tests_swift_tests
-      weight: 9
-    - name: Early Flake Detection
-      url: tests/early_flake_detection
-      parent: tests
-      identifier: tests_early_flake_detection
-      weight: 10
-    - name: Auto Test Retries
-      url: tests/auto_test_retries
-      parent: tests
-      identifier: tests_auto_test_retries
       weight: 11
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests
@@ -4282,63 +4327,12 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 14
-    - name: Intelligent Test Runner
-      url: intelligent_test_runner/
-      pre: intelligent-test-runner
-      parent: software_delivery_heading
-      identifier: intelligent_test_runner
-      weight: 40000
-    - name: Setup
-      url: intelligent_test_runner/setup/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_setup
-      weight: 1
-    - name: .NET
-      url: intelligent_test_runner/setup/dotnet/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_dotnet
-      weight: 101
-    - name: JavaScript and TypeScript
-      url: intelligent_test_runner/setup/javascript/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_javascript
-      weight: 102
-    - name: Python
-      url: intelligent_test_runner/setup/python/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_python
-      weight: 103
-    - name: Swift
-      url: intelligent_test_runner/setup/swift/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_swift
-      weight: 104
-    - name: Java
-      url: intelligent_test_runner/setup/java/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_java
-      weight: 105
-    - name: Ruby
-      url: intelligent_test_runner/setup/ruby/
-      parent: intelligent_test_runner_setup
-      identifier: intelligent_test_runner_setup_ruby
-      weight: 106
-    - name: How It Works
-      url: intelligent_test_runner/how_it_works/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_how_it_works
-      weight: 2
-    - name: Troubleshooting
-      url: intelligent_test_runner/troubleshooting/
-      parent: intelligent_test_runner
-      identifier: intelligent_test_runner_troubleshooting
-      weight: 3
     - name: Code Analysis
       url: code_analysis/
       pre: ci
       parent: software_delivery_heading
       identifier: code_analysis
-      weight: 50000
+      weight: 40000
     - name: Static Analysis (SAST)
       url: code_analysis/static_analysis
       parent: code_analysis
@@ -4414,7 +4408,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: quality_gates
-      weight: 60000
+      weight: 50000
     - name: Setup
       url: quality_gates/setup
       parent: quality_gates
@@ -4455,7 +4449,7 @@ menu:
       pre: ci
       parent: software_delivery_heading
       identifier: dora_metrics
-      weight: 70000
+      weight: 60000
     - name: Setup
       url: dora_metrics/setup
       parent: dora_metrics
@@ -5349,11 +5343,16 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
+    - name: Use cases
+      url: logs/workspaces/use_cases/
+      parent: logs_workspaces
+      identifier: logs_workspaces_use_cases
+      weight: 601
     - name: Time Selection
       url: logs/workspaces/time_selection/
       parent: logs_workspaces
       identifier: logs_workspaces_time_selection
-      weight: 601
+      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -5642,11 +5641,6 @@ menu:
       parent: cloud_workload_security
       identifier: cws_agent_expressions
       weight: 204
-    - name: CWS Events Formats
-      url: security/threats/backend
-      parent: cloud_workload_security
-      identifier: cws_backend_event_schema_documentation
-      weight: 205
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm

@@ -64,9 +64,9 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Ruby test visibility library
+## Installing the Ruby test optimization library
 
-To install the Ruby test visibility library:
+To install the Ruby test optimization library:
 
 1. Add the `datadog-ci` gem to your `Gemfile`:
 
@@ -93,7 +93,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -133,7 +133,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -193,7 +193,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -252,7 +252,7 @@ For more information on custom measures, see the [Add Custom Measures Guide][3].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the test visibility library, either in code by using a `Datadog.configure` block, or using environment variables:
+The following is a list of the most important configuration settings that can be used with the test optimization library, either in code by using a `Datadog.configure` block, or using environment variables:
 
 `service`
 : Name of the service or library under test.<br/>
