@@ -40,7 +40,7 @@ User retention is a metric for measuring the percentage of active users who cont
 
 [User journeys][3] allow you to measure and report on the impact of every feature change - from backend bottlenecks to user frustrations - so that they can be appropriately optimized. Identify the ideal path for feature adoption and user conversion.
 
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-overview.png" alt="Understand end-to-end conversions with Funnel Analysis" style="width:100%;" >}}
 
 See different visualizations of the user experience when interacting with your application:
 
