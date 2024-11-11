@@ -82,7 +82,7 @@ After reviewing the above [Prerequisites][3], follow these step-by-step instruct
 - Monitoring Viewer
 - Compute Viewer
 - Cloud Asset Viewer
-- Browser
+- Browser (Only required in the default project of the service account)
 6. Click **Continue**, then **Done** to complete creating the service account.
 
 {{< img src="integrations/google_cloud_platform/create-service-account.png" alt="Google Cloud console interface, showing the 'Create service account' flow. Under 'Grant this service account access to project', the four roles in the instructions are added." style="width:70%;">}}
@@ -96,15 +96,16 @@ If you have no configured projects, you are automatically redirected to this pag
 3. If you have not generated a Datadog principal for your org, click the **Generate Principal** button.
 4. Copy your Datadog principal and keep it for the next section.
 
-{{< img src="integrations/google_cloud_platform/principal-2.png" alt="Datadog interface, showing the 'Add New GCP Account' flow. The first step, 'Add Datadog Principal to Google,' features a text box where a user can generate a Datadog Principal and copy it to their clipboard. The second step, 'Add Service Account Email,' features a text box that the user can complete in section 3." style="width:70%;">}}
+{{< img src="integrations/google_cloud_platform/principal-2.png" alt="Datadog interface, showing the 'Add New GCP Account' flow. The first step, 'Add Datadog Principal to Google,' features a text box where a user can generate a Datadog Principal and copy it to their clipboard. The second step, 'Add Service Account Email,' features a text box that the user can complete in section 4." style="width:70%;">}}
 
-Keep this window open for Section 3.
+Keep this window open for Section 4.
 5. In the [Google Cloud console][55], under the **Service Accounts** menu, find the service account you created in Section 1.
 6. Go to the **Permissions** tab and click on **Grant Access**.
 
    {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Google Cloud console interface, showing the Permissions tab under Service Accounts." style="width:70%;">}}
 7. Paste your Datadog principal into the **New principals** text box.
-8. Click **Save**.
+8. Assign the role of **Service Account Token Creator**.
+9. Click **Save**.
 
 **Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
 {{% /collapse-content %}}
@@ -119,7 +120,7 @@ Keep this window open for Section 3.
 - Compute Viewer
 - Monitoring Viewer
 - Cloud Asset Viewer
-- Service Account Token Creator
+
    {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="Google Cloud console interface, showing an 'Add principals' box and an 'Assign roles' interface." style="width:70%;">}}
 6. Click **Save**.
 
