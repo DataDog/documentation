@@ -3891,16 +3891,21 @@ menu:
       parent: dbm
       identifier: dbm_query_samples
       weight: 12
+    - name: DBM Recommendations
+      url: database_monitoring/recommendations/
+      parent: dbm
+      identifier: dbm_recommendations
+      weight: 13
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 13
+      weight: 14
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 14
+      weight: 15
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
