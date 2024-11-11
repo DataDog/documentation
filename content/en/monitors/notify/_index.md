@@ -71,17 +71,12 @@ If a notification channel is set, you can route notifications to a specific Team
 {{% notifications-integrations %}}
 
 ### Workflows
-You can trigger a [workflow automation][7] or create a new workflow from a monitor. Before you add a workflow to a monitor, add a monitor trigger to the workflow.
+You can trigger a [workflow automation][7] or create a new workflow from a monitor. 
 
-**To add an existing workflow to a monitor**:
-1. Click **Add Workflow** and search for it in the drop-down menu.
-1. Alternatively, in the message section, add the full workflow mention name. The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`.
+Before you add a workflow to a monitor, [add a monitor trigger to the workflow][17].
 
-To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`.
+After you add the monitor trigger, [add an existing workflow to your monitor][8] or create a new workflow. To create a new workflow from the monitors page:
 
-For more information on triggering a workflow, see [Trigger a workflow][8].
-
-**To create a workflow**:
 1. Click **Add Workflow**.
 1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
@@ -201,7 +196,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [5]: /monitors/notify/variables/#conditional-variables
 [6]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
 [7]: /service_management/workflows/
-[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[8]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [9]: /service_management/workflows/build/
 [10]: /monitors/settings/#tag-policies
 [11]: /account_management/teams/
@@ -210,3 +205,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [14]: /monitors/types
 [15]: /monitors/configuration/
 [16]: /monitors/guide/recovery-thresholds/
+[17]: /service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow

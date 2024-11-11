@@ -590,8 +590,25 @@ h5 {
         }
     }
 
+    ol ol {    
+        list-style-type: lower-alpha;
+        ol {
+            list-style-type: lower-roman;
+            ol {
+                list-style-type: decimal;
+                ol {
+                    list-style-type: upper-alpha;
+                    ol {
+                        list-style-type: upper-roman;
+                    }
+                }
+            }
+        }
+    }
+    
     ul,
     ol,
+    dl,
     p {
         &:lang(ja) {
             font-size: 14px;
@@ -907,6 +924,7 @@ table,
 
 dl {
     border: 1px solid $ddgray;
+    font-size: 18px;
 
     a {
         border-bottom: 1px solid;
