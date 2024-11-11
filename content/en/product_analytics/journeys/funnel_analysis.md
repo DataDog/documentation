@@ -44,7 +44,7 @@ From the Funnel page, choose at least two step events (view or action) and click
 - To **delete an event**, click **Delete Event**.
 - When you have a starting point in mind, but aren't sure what your users did next, click the input box for a new View/Action.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
+{{< img src="product_analytics/journeys/funnel_analysis/product-analytics-funnel-step-events.mp4" alt="To build step events, you can add or combine views and actions." video=true >}}
 
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
