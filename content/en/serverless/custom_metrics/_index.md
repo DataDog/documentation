@@ -142,6 +142,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         response.setStatusCode(200);
         return response;
     }
+
+    static {
+        // ensure all metrics are flushed before shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
+    }
 }
 ```
 

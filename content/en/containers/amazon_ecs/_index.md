@@ -319,6 +319,8 @@ This feature is only available for Linux.
 
 To send data to the Datadog for Government site, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features][1].
 
+**Note**: You must also ensure that the sidecar container is configured with applicable network settings and IAM permissions.
+
 ```json
  {
    "containerDefinitions": [

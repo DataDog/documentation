@@ -59,6 +59,7 @@ The list of automatically-assigned tags depends on the Agent's [cardinality conf
   | `image_tag`                   | Low          | Pod spec                                                                                                                     | N/A                                                 |
   | `eks_fargate_node`            | Low          | Pod spec                                                                                                                     | EKS Fargate environment                             |
   | `kube_runtime_class`          | Low          | Pod spec                                                                                                                     | Pod must be attached to a runtime class             |
+  | `gpu_vendor`                  | Low          | Pod spec                                                                                                                     | Container must be attached to a GPU resource        |
 
 </div>
 
@@ -89,11 +90,11 @@ annotations:
   ad.datadoghq.com/tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-If you want to apply a `<TAG_KEY>:<TAG_VALUE>` tag to an individual container `<CONTAINER_IDENTIFIER>` within a pod, use the following annotation on your pod:
+If you want to apply a `<TAG_KEY>:<TAG_VALUE>` tag to an individual container `<CONTAINER_NAME>` within a pod, use the following annotation on your pod:
 
 ```yaml
 annotations:
-  ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
+  ad.datadoghq.com/<CONTAINER_NAME>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
 Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without modifying the Agent configuration.

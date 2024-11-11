@@ -39,7 +39,7 @@ categories:
 - data stores
 - log collection
 - tracing
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
