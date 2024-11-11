@@ -12,6 +12,7 @@ import { fenceDefinition, Fence } from './components/fence';
 import { xDefinition, X } from './components/x';
 import { calloutDefinition, Callout } from './components/callout';
 import { nextlinkDefinition, Nextlink } from './components/nextlink';
+import { whatsnextDefinition, Whatsnext } from './components/whatsnext';
 
 export const transformConfig = {
   tags: {
@@ -23,7 +24,8 @@ export const transformConfig = {
     tab: tabDefinition,
     x: xDefinition,
     callout: calloutDefinition,
-    nextlink: nextlinkDefinition
+    nextlink: nextlinkDefinition,
+    whatsnext: whatsnextDefinition
   },
   nodes: {
     fence: fenceDefinition
@@ -40,5 +42,6 @@ export const customComponents = {
   Fence,
   X,
   Callout,
-  Nextlink
+  Nextlink,
+  Whatsnext
 };

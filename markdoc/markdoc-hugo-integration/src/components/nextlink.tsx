@@ -1,5 +1,8 @@
+import { renderToString } from 'react-dom/server';
 import { HugoFunctions } from '../helperModules/HugoFunctions';
 import { CustomHtmlComponent } from '../helperModules/renderer';
+import { HugoConfig } from '../schemas/config/hugo';
+import { ImgTemplate } from './shared/img';
 
 export const nextlinkDefinition = {
   render: 'Nextlink',
@@ -19,70 +22,68 @@ export const nextlinkDefinition = {
 
 export class Nextlink extends CustomHtmlComponent {
   render() {
-    let link: string = this.tag.attributes.href;
+    const jsx = NextlinkTemplate({
+      // @ts-ignore
+      attrs: { ...this.tag.attributes, text: this.contents },
+      hugoConfig: this.hugoConfig
+    });
 
-    // If the href is not an absolute URL,
-    // make it an absolute URL with a language prefix
-    if (!link.startsWith('http')) {
-      link = HugoFunctions.absLangUrl({
-        hugoConfig: this.hugoConfig,
-        url: link
-      });
-    }
-
-    return `<div>nextlink goes here</div>`;
+    return renderToString(jsx);
   }
 }
 
-/*
+function NextlinkTemplate(props: {
+  attrs: {
+    href: string;
+    text: string;
+    tag?: string;
+    img?: string;
+  };
+  hugoConfig: HugoConfig;
+}) {
+  let link: string = props.attrs.href;
 
-// DONE
-{{ $dot := . }}
-{{- $href := .Get "href" -}}
-{{- $tag := .Get "tag" -}}
-{{- $img := .Get "img" -}}
-{{- $text := .Inner -}}
+  // If the href is not an absolute URL,
+  // make it an absolute URL with a language prefix
+  if (!link.startsWith('http')) {
+    link = HugoFunctions.absLangUrl({
+      hugoConfig: props.hugoConfig,
+      url: link
+    });
+  }
 
-// DONE
-{{ if eq (substr $href 0 4) "http"}}
-    {{ $.Scratch.Set "link" $href}}
-{{ else }}
-    {{ if eq (substr $href 0 1) "/"}}
-        {{ $.Scratch.Set "link" ((substr $href 1) | absLangURL) }}
-    {{ else }}
-        {{ $.Scratch.Set "link" ($href | absLangURL) }}
-    {{ end }}
-{{ end }}
+  const { tag, text, img } = props.attrs;
 
-// DONE
-// If the url ends with a anchor link e.g #graphing then make sure this doesn't get stripped during the abslang
-{{ $fragment := (urls.Parse $href).Fragment }}
-{{ if $fragment }}
-  {{ if not (strings.HasSuffix ($.Scratch.Get "link") (print "#" $fragment)) }}
-    {{ $.Scratch.Set "link" (print ($.Scratch.Get "link") "#" $fragment) }}
-  {{ end }}
-{{ end }}
-
-// DONE
-{{ $link := $.Scratch.Get "link" }}
-
-{{- with .Parent -}}
-    <a class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="{{ $link }}">
-        {{ with $img }}
-            {{ partial "img.html" (dict "root" $dot "src" $img "class" "img-fluid") }}
-        {{ end }}    
-        <span class="w-100 d-flex justify-content-between {{ with $img }} ps-1 {{ end }}"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
-        {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
-        {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
+  return (
+    <a
+      style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.125)' }}
+      className="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center"
+      href={link}
+    >
+      {img && <ImgTemplate attrs={{ src: img }} hugoConfig={props.hugoConfig} />}
+      <span className={`w-100 d-flex justify-content-between ${img ? 'ps-1' : ''}`}>
+        <span className="text">{text}</span>
+        {tag && (
+          <span className="badge badge-white pe-2 border-0">{tag.toUpperCase()}</span>
+        )}
+      </span>
+      <ImgTemplate
+        attrs={{
+          src: 'icons/list-group-arrow.png',
+          class: 'img-fluid static',
+          alt: 'more'
+        }}
+        hugoConfig={props.hugoConfig}
+      />
+      <ImgTemplate
+        attrs={{
+          src: 'icons/list-group-arrow-r.png',
+          class: 'img-fluid hover',
+          alt: 'more',
+          disable_lazy: true
+        }}
+        hugoConfig={props.hugoConfig}
+      />
     </a>
-{{- else -}}
-    <a class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="{{ $link }}">
-        {{ with $img }}
-            {{ partial "img.html" (dict "root" $dot "src" $img "class" "img-fluid") }}
-        {{ end }}   
-        <span class="w-100 d-flex justify-content-between {{ with $img }} ps-1 {{ end }}"><span class="text">{{ $text }}</span>{{ if $tag }}<span class="badge badge-white pe-2 border-0">{{ $tag | upper }}</span>{{ end }}</span>
-        {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
-        {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
-    </a>
-{{- end }}
-*/
+  );
+}

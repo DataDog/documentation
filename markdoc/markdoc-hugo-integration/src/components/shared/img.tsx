@@ -1,6 +1,11 @@
 import { HugoConfig } from '../../schemas/config/hugo';
 import { cssStringToObject } from '../utils';
 
+/**
+ * The JS equivalent to the `img` partial.
+ * Not to be confused with the `img` shortcode,
+ * which is implemented in src/components/img.
+ */
 export function ImgTemplate(props: {
   attrs: {
     src: string;
