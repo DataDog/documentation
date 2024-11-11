@@ -7,7 +7,7 @@ further_reading:
   text: "Getting Started with Dashboards"
 ---
 
-In the [Plan](/administrators_guide/plan/) and [Build](/administrators_guide/build/) sections, you gained insights into setting goals, strategizing integrations, and constructing and iterating on the Datadog environment for smooth production use. Next, you'll learn about the run phase, where you'll manage  a series of internal and external tasks to keep the Datadog installation running efficiently. 
+In the [Plan](/administrators_guide/plan/) and [Build](/administrators_guide/build/) sections, you gained insights into setting goals, strategizing integrations, and constructing and iterating on the Datadog environment for smooth production use. Next, you'll learn about the run phase, where you'll manage a series of internal and external tasks to keep the Datadog installation running efficiently. 
 
 ## Service tasks
 
