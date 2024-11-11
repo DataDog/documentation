@@ -515,7 +515,7 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: registry.ddbuild.io/ci/websites/pa11y:v33259941-f0dfbc91
+  image: registry.ddbuild.io/ci/websites/pa11y-preview:v48715921-28822659
   tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
