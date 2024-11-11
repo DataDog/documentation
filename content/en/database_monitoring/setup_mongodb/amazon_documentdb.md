@@ -11,7 +11,11 @@ Database Monitoring offers comprehensive insights into your DocumentDB databases
 ## Before you begin
 
 Supported Amazon DocumentDB major versions
-: 4.4, 5.0
+: 4.0, 5.0
+
+Supported Amazon DocumentDB cluster types
+: Instance Based.<br /><br />
+**Note**: Amazon DocumentDB Elastic Cluster is not supported.
 
 {{% dbm-mongodb-before-you-begin %}}
 
@@ -19,57 +23,15 @@ Supported Amazon DocumentDB major versions
 
 To enable Database Monitoring for your database:
 
-1. [Grant the Agent access to your MongoDB instances](#grant-the-agent-access-to-your-mongodb-instances)
+1. [Grant the Agent access to your Amazon DocumentDB instances](#grant-the-agent-access-to-your-amazon-documentdb-instances)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
 3. [(Optional) Install the Amazon DocumentDB integration](#install-the-amazon-documentdb-integration)
 
-### Grant the Agent access to your MongoDB instances
+### Grant the Agent access to your Amazon DocumentDB instances
 
 The Datadog Agent requires read-only access to the Amazon DocumentDB instance to collect statistics and queries.
 
 {{< tabs >}}
-{{% tab "Standalone" %}}
-
-In a Mongo shell, authenticate to the Amazon DocumentDB instance, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
-
-{{< code-block lang="shell" >}}
-
-# Authenticate as the admin user.
-
-use admin
-db.auth("admin", "<YOUR_AMAZON_DOCUMENTDB_ADMIN_PASSWORD>")
-
-# Create the user for the Datadog Agent.
-
-db.createUser({
-"user": "datadog",
-"pwd": "<UNIQUE_PASSWORD>",
-"roles": [
-{ role: "read", db: "admin" },
-{ role: "read", db: "local" },
-{ role: "clusterMonitor", db: "admin" }
-]
-})
-{{< /code-block >}}
-
-Grant additional permissions to the `datadog` user in the databases you want to monitor:
-
-{{< code-block lang="shell" >}}
-db.grantRolesToUser("datadog", [
-{ role: "read", db: "mydatabase" },
-{ role: "read", db: "myotherdatabase" }
-])
-{{< /code-block >}}
-
-Alternatively, you can grant `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
-
-{{< code-block lang="shell" >}}
-db.grantRolesToUser("datadog", [
-{ role: "readAnyDatabase", db: "admin" }
-])
-{{< /code-block >}}
-
-{{% /tab %}}
 {{% tab "Replica Set" %}}
 
 In a Mongo shell, authenticate to the primary node of the replica set, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
@@ -171,9 +133,6 @@ To monitor your Amazon DocumentDB Cluster, you must install and configure the Da
 #### Create the configuration file
 
 {{< tabs >}}
-{{% tab "Standalone" %}}
-{{% dbm-amazon-documentdb-agent-config-standalone %}}
-{{% /tab %}}
 {{% tab "Replica Set" %}}
 {{% dbm-amazon-documentdb-agent-config-replica-set %}}
 {{% /tab %}}
@@ -236,6 +195,6 @@ Refer to the [MongoDB integration documentation][2] for a comprehensive list of 
 {{% dbm-amazon-documentdb-agent-data-collected %}}
 
 [1]: /account_management/api-app-keys/
-[2]: /integrations/mongo/?tab=standalone#metrics
+[2]: /integrations/mongo/?tab=replicaset#metrics
 [3]: /integrations/amazon_documentdb/
 [4]: /integrations/amazon_documentdb/#metrics
