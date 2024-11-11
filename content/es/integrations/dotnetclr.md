@@ -24,7 +24,7 @@ author:
 categories:
 - languages
 - windows
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md
 display_on_public_website: true
