@@ -25,7 +25,7 @@ Si [instalas o actualizas un Datadog Agent][1] con la opción **Habilitar la ins
 Los siguientes ejemplos muestran cómo funciona para cada tipo de despliegue.
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 <div class="alert alert-warning">Si ya has utilizado la instrumentación de un solo paso con hosts Linux, <a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">actualiza a la última versión</a>.</div>
 
@@ -200,7 +200,7 @@ Después de completar estos pasos, es posible que quieras habilitar [métricas d
 Cuando ejecutas el comando de instalación de una línea, hay algunas opciones disponibles para personalizar tu experiencia:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 ### Especificación de versiones de bibliotecas de rastreo {#lib-linux}
 
@@ -478,7 +478,7 @@ Si no quieres recopilar datos de trazas de un determinado servicio, host, máqui
 Para eliminar la instrumentación APM y dejar de enviar trazas desde un servicio específico, sigue estos pasos:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
 
@@ -522,7 +522,7 @@ Para eliminar la instrumentación APM y dejar de enviar trazas desde un servicio
 Para dejar de producir trazas, desinstala APM y reinicia la infraestructura:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 1. Ejecuta:
    ```shell

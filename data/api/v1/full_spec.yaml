@@ -4294,6 +4294,7 @@ components:
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
+      - cws_fargate_task_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_stream_monitoring_usage
@@ -4366,6 +4367,7 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_STREAM_MONITORING_USAGE
@@ -8046,6 +8048,8 @@ components:
       - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
+      - cws_fargate_task_percentage
+      - cws_fargate_task_usage
       - cws_hosts_percentage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
@@ -8185,6 +8189,8 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_PERCENTAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
@@ -8462,6 +8468,15 @@ components:
           type: number
         cws_containers_usage:
           description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_percentage:
+          description: The percentage of Cloud Workload Security Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_usage:
+          description: The Cloud Workload Security Fargate task usage by tag(s).
           format: double
           type: number
         cws_hosts_percentage:
@@ -13231,6 +13246,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -13238,6 +13255,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security
@@ -14654,7 +14673,7 @@ components:
             $ref: '#/components/schemas/SyntheticsBatchResult'
           type: array
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
       type: object
     SyntheticsBatchResult:
       description: Object with the results of a Synthetic batch.
@@ -14678,7 +14697,7 @@ components:
           format: double
           type: number
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
         test_name:
           description: Name of the test.
           type: string
@@ -14688,6 +14707,17 @@ components:
         test_type:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
+    SyntheticsBatchStatus:
+      description: Determines whether the batch has passed, failed, or is in progress.
+      enum:
+      - passed
+      - skipped
+      - failed
+      type: string
+      x-enum-varnames:
+      - PASSED
+      - SKIPPED
+      - FAILED
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -16119,7 +16149,8 @@ components:
           minimum: 300
           type: integer
         verbosity:
-          description: The level of verbosity for the mobile test.
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
           format: int32
           maximum: 5
           minimum: 0
@@ -16447,23 +16478,18 @@ components:
           description: Subject Alternative Name associated with the certificate.
           type: string
       type: object
-    SyntheticsStatus:
-      description: Determines whether or not the batch has passed, failed, or is in
-        progress.
-      enum:
-      - passed
-      - skipped
-      - failed
-      type: string
-      x-enum-varnames:
-      - PASSED
-      - skipped
-      - failed
     SyntheticsStep:
       description: The steps used in a Synthetic browser test.
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: A boolean set to exit the test if the step succeeds.
           type: boolean
         isCritical:
           description: A boolean to use in addition to `allowFailure` to determine
@@ -16473,7 +16499,7 @@ components:
           description: The name of the step.
           type: string
         noScreenshot:
-          description: A boolean set to not take a screenshot for the step.
+          description: A boolean set to skip taking a screenshot for the step.
           type: boolean
         params:
           description: The parameters of the step.
@@ -17234,12 +17260,12 @@ components:
     SyntheticsTestRestrictionPolicyBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        principals:
-          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
+        principal:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipal'
         relation:
           $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
       type: object
-    SyntheticsTestRestrictionPolicyBindingPrincipals:
+    SyntheticsTestRestrictionPolicyBindingPrincipal:
       description: List of principals for a mobile test binding.
       items:
         description: A principal for a mobile test binding.
@@ -20135,6 +20161,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for all organizations.
@@ -20159,9 +20190,19 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20895,6 +20936,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
@@ -20915,9 +20961,19 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21649,9 +21705,14 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
-        cws_containers_avg_sum:
+        cws_container_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cws_fargate_task_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
@@ -21678,9 +21739,19 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        error_tracking_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_events_agg_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -30091,20 +30162,26 @@ paths:
         ##### Error Tracking Alert Query
 
 
-        Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
+        "New issue" example: `error-tracking(query).source(issue_source).new().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`
 
-        Example(APM Traces): `error-tracking-traces(query).rollup(rollup_method[,
-        measure]).last(time_window) operator #`
+        "High impact issue" example: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`
 
 
         - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
+        - `issue_source` The issue source - supports `all`, `browser`, `mobile` and
+        `backend` and defaults to `all` if omitted.
+
         - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
+        `cardinality` and defaults to `count` if omitted.
 
         - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
+
+        - `group by` Comma-separated list of attributes to group by - should contain
+        at least `issue.id`.
 
         - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 

@@ -402,7 +402,7 @@ Consulta esta lista para encontrar los enlaces a cada una de las siguientes secc
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/getting_started/tagging/assigning_tags/
 [2]: /es/service_management/events/explorer

@@ -2,7 +2,7 @@
 categories:
 - cloud
 - red
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Recopila eventos de la plataforma Salesforce en tiempo real como logs
   de Datadog.
@@ -70,12 +70,12 @@ de eventos compatibles en la sección **Platform Events** (Eventos de plataforma
 2. Haz clic en **New Production Org** (Nueva organización de producción) o **New Sandbox Org** (Nueva organización sandbox) en la pestaña **Configuration** (Configuración) del [cuadro de la integración Salesforce][9].
 3. Define cualquier etiqueta (tag) personalizada que quieras adjuntar a estos eventos como una lista separada por comas. Puede elegir cuáles eventos activar.
 
-    {{< img src="integrations/salesforce/salesforce-1.png" alt="Pantalla "Logrado" cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
+    {{< img src="integrations/salesforce/salesforce-1.png" alt="Pantalla 'Logrado' cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
 
 4. Haz clic en **Save** (Guardar). Se te pedirá que inicies sesión en tu cuenta de Salesforce y que concedas permisos de acceso a Datadog. 
 5. Una vez que hayas completado el proceso de inicio de sesión, regresa al [cuadro de la integración Salesforce][9] en Datadog. Tu organización incluye etiquetas predeterminadas.
 
-    {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="Pantalla "Logrado" cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
+    {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="Pantalla 'Logrado' cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
 
 6. Selecciona las etiquetas que quieres utilizar y haz clic en **Connect** (Conectar).
 7. Repite estos pasos para conectar tus organizaciones restantes. Debes tener acceso a las organizaciones que estás intentando añadir. 
