@@ -9,7 +9,7 @@ Database Monitoring (DBM) Recommendations draw attention to potential optimizati
 
 ## How it Works
 
-Datadog analyzes metrics and sample data from DBM to identify your systems' highest-priority issues. The severity indicator is calculated for each recommendation, highlighting the most impactful areas to focus on. High-severity recommendations may indicate immediate or impending problems, while lower-severity recommendations can be addressed asynchronously to proactively maintain database health.
+Datadog analyzes metrics and sample data from DBM to identify your systems' highest-priority issues. A severity indicator is calculated for each recommendation, highlighting the most impactful areas to focus on. High-severity recommendations may indicate immediate or impending problems, while lower-severity recommendations can be addressed asynchronously to proactively maintain database health.
 
 ## Recommendation types
 
@@ -20,7 +20,7 @@ Choose your database type to view the supported recommendations:
 {{% tab "Postgres" %}}
 
 Missing Index
-: The query's execution plan performs expensive sequential scans. When detected, Datadog recommendations using an index to expedite the query.
+: The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
 
 High Impact Blocker
 : The query is causing a significant amount of waiting time for blocked queries.
@@ -29,7 +29,7 @@ Function in Filter
 : The query calls a function on columns being filtered, leading to expensive sequential scans that can’t take advantage of typical column-based indexes.
 
 High Row Count
-: The query returns a large number of rows in their result set.
+: The query returns a large number of rows in its result set.
 
 Unused Index
 : The index has not been used in any execution plans recently.
@@ -44,13 +44,13 @@ Low Disk Space
 {{% tab "SQLServer" %}}
 
 Missing Index
-: The query's execution plan performs expensive sequential scans. When detected, Datadog recommendations using an index to expedite the query.
+: The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
 
 High Impact Blocker
 : The query is causing a significant amount of waiting time for blocked queries.
 
 High Row Count
-: The query returns a large number of rows in their result set.
+: The query returns a large number of rows in its result set.
 
 Low Disk Space
 : The database instance is running low on disk space.
@@ -62,7 +62,7 @@ Low Disk Space
 {{% tab "MySQL" %}}
 
 High Row Count
-: The query returns a large number of rows in their result set.
+: The query returns a large number of rows in its result set.
 
 Low Disk Space
 : The database instance is running low on disk space.
@@ -77,7 +77,7 @@ High Impact Blocker
 : The query is causing a significant amount of waiting time for blocked queries.
 
 High Row Count
-: The query returns a large number of rows in their result set.
+: The query returns a large number of rows in its result set.
 
 Low Disk Space
 : The database instance is running low on disk space.
