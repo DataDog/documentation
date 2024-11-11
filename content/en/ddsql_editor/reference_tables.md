@@ -10,11 +10,11 @@ further_reading:
 
 Reference tables are an essential feature within DDSQL, designed to help you organize and simplify your data queries. These tables store predefined sets of information that can be easily referenced within your queries, reducing complexity and enhancing query performance. In addition to querying data, you can join reference tables with other datasets, expanding your analytical capabilities and insights.
 
+For more information on adding reference tables, see the [Reference Tables Documentation](1).
+
 ## Querying Reference Tables
 
-### DDSQL Editor Capabilities
-
-The DDSQL Editor allows users to query reference tables directly. This guide aims to clarify how you can unlock the full potential of reference tables in your data queries.
+You can query reference tables directly with the DDSQL Editor. This guide aims to clarify how you can unlock the full potential of reference tables in your data queries.
 
 ### Example Query Syntax
 
@@ -35,25 +35,24 @@ In addition to querying reference tables, you can also join them with other avai
 
 Here's a simple example of joining a reference table with another dataset:
 
-<!-- ```sql
-SELECT a.*, b.*
+```sql
+SELECT a.dataset_name, b.dataset.version
 FROM reference_tables.test a
-JOIN other_dataset b ON a.key = b.key
-``` -->
+  JOIN other_dataset b ON a.key = b.key
+ORDER BY b.dataset_version DESC;
+```
 
 ## Notes and Best Practices
 
 When using reference tables, consider the following:
 
-- **Keep Tables Updated:** Regularly update reference tables to ensure data accuracy.
-- **Optimize Queries:** Use indexing and other optimization techniques to improve query performance.
-- **Avoid Common Pitfalls:** Ensure your joins and queries are appropriately configured to avoid performance issues.
+- **Keep Tables Updated**: Regularly update reference tables to ensure data accuracy.
+- **Optimize Queries**: Use indexing and other optimization techniques to improve query performance.
+- **Avoid Common Pitfalls**: Ensure your joins and queries are appropriately configured to avoid performance issues.
 
-## Additional Resources
+## Further reading
 
-For more detailed information and guidance, refer to our [Reference Tables Documentation](#). You'll find related pages, tutorials, FAQs, and additional resources to deepen your understanding of DDSQL and effectively manage reference tables.
-
----
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 
