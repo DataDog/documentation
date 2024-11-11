@@ -176,9 +176,7 @@ Ve [Hotspots de código][1] para identificar las líneas de código relacionadas
 [1]: /es/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
-{{% tab "Span Links (Beta)" %}}
-
-<div class="alert alert-info">La compatibilidad con enlaces de tramo está en fase beta.</div>
+{{% tab "Span Links" %}}
 
 [Los enlaces de tramo][4] correlacionan uno o más tramos juntos que están causalmente relacionados, pero no tienen una relación típica principal-secundario.
 
@@ -191,7 +189,7 @@ Haz clic en un tramo en la gráfica de llamas para mostrar tramos conectados con
 Para saber más sobre los enlaces de tramo y cómo añadirlos con instrumentación personalizada, lee [Enlaces de tramo][4].
 
 [1]: /es/tracing/trace_pipeline/trace_retention/
-[2]: /es/tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
+[2]: /es/tracing/trace_collection/custom_instrumentation/php#adding-span-links
 [3]: /es/tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
 [4]: /es/tracing/trace_collection/span_links/
 
