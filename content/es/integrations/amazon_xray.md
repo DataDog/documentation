@@ -5,7 +5,7 @@ categories:
 - aws
 - nube
 - rastreo
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrear solicitudes a medida que pasan por los servicios de AWS
 doc_link: https://docs.datadoghq.com/integrations/amazon_xray/
