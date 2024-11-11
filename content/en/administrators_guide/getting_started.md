@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Setup and install Datadog as an administrator to avoid pit-falls down the road
+description: Learn strategies for getting started with your new Datadog installation.
 further_reading:
 - link: "/getting_started/support/"
   tag: "Documentation"

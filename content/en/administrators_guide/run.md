@@ -1,6 +1,6 @@
 ---
 title: Maintaining and running your Datadog installation
-description: Setup and install Datadog as an administrator to avoid pit-falls down the road
+description: Keep your datadog installation running smoothly.
 further_reading:
 - link: "getting_started/dashboards/"
   tag: "Documentation"

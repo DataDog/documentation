@@ -1,6 +1,6 @@
 ---
 title: Plan your Datadog installation
-description: Setup and install Datadog as an administrator to avoid pit-falls down the road
+description: Plan out your Datadog installation for success.
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"

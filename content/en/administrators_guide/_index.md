@@ -1,15 +1,13 @@
 ---
 title: Administrator's Guide
-description: Setup and install Datadog as an administrator to avoid pit-falls down the road
+description: Setup and install Datadog as an administrator to avoid common issues.
 further_reading:
 - link: "/getting_started/application/"
   tag: "Documentation"
   text: "Learn more about the capabilities available on the Datadog."
 ---
 
-
-Use this Datadog Administrators guide when your company has purchased and is ready to leverage Datadog's observability platform. This guide helps you make the most out of Datadog to gain visibility into the health and performance of your underlying infrastructure, supporting services, and applications. It provides suggestions for designing, installing, and managing an enterprise-grade installation of Datadog, tailored to your needs. As an extension of the main 
-[documentation][1], this guide offers best practices, guidance, and examples to help you set up a production environment that matches your workloads and installation needs.
+Use this Datadog Administrators guide when your company has purchased and is ready to leverage Datadog's observability platform. This guide helps you make the most out of Datadog to gain visibility into the health and performance of your underlying infrastructure, supporting services, and applications. It provides suggestions for designing, installing, and managing an enterprise-grade installation of Datadog, tailored to your needs. As an extension of the main [documentation][1], this guide offers best practices, guidance, and examples to help you set up a production environment that matches your workloads and installation needs.
 
 After using this guide to install Datadog to scale with your organization, you can manage your installation efficiently without worrying about hardware refreshes, operating system patches, server updates, or cluster rebalance details. Instead, you can focus on the benefits of a full observability system, such as:
 

@@ -1,6 +1,6 @@
 ---
 title: Build your Datadog installation
-description: Setup and install Datadog as an administrator to avoid pit-falls down the road
+description: Build your Datadog installation and prioritize features.
 further_reading:
 - link: "/getting_started/integrations/"
   tag: "Documentation"
