@@ -73,7 +73,7 @@ code_languages:
 
 code_language_ids:
     client: Client
-    server: Server
+    server: Server (Auto-Instrumentation)
     android: Android
     ios: iOS
     expo: Expo

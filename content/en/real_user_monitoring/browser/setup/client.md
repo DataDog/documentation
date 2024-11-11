@@ -1,5 +1,5 @@
 ---
-title: RUM Browser Monitoring Client Side Instrumentation
+title: RUM Browser Monitoring Client-Side Instrumentation
 code_lang: client
 type: multi-code-lang
 code_lang_weight: 1
@@ -25,8 +25,8 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 
 ## Setup
 
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Preview!">}}
-RUM SDK Injection in Preview. Sign up for access! You can also request early access if you are using Apache HTTPD, Tomcat, or another web server technology. Learn more about <a href="/real_user_monitoring/browser/setup/server">Server Side Instrumentation.</a>
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Auto-Instrumentation Preview!">}}
+You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
 {{< /callout >}}
 
 To set up RUM Browser Monitoring, create a RUM application:
@@ -47,7 +47,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 ### Choose the right installation method
 
-SDK injection
+Server-side (Auto-instrumentation)
 : This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][27].
 
 npm (node package manager)
@@ -2124,6 +2124,6 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [24]: /real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [26]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
-[27]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
+[27]: /real_user_monitoring/browser/setup/server
 [28]: /data_security/real_user_monitoring/#mask-action-names
-[29]: /real_user_monitoring/browser/setup/server
+

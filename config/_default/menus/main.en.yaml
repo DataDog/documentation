@@ -6285,14 +6285,14 @@ menu:
       parent: rum_browser
       identifier: rum_browser_setup
       weight: 101
-    - name: Client Side Setup
+    - name: Client-Side
       url: real_user_monitoring/browser/setup/client
-      parent: rum_browser
+      parent: rum_browser_setup
       identifier: rum_browser_setup_client
       weight: 1101
-    - name: Setup
+    - name: Server-Side
       url: real_user_monitoring/browser/setup/server
-      parent: rum_browser
+      parent: rum_browser_setup
       identifier: rum_browser_setup_server
       weight: 1102
     - name: Advanced Configuration
