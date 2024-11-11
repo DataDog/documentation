@@ -7,7 +7,6 @@ further_reading:
 - link: https://app.datadoghq.com/integrations/jira
   tag: En la aplicación
   text: Cuadro de integración de Jira en la aplicación
-kind: Guía
 title: Integrar Jira con la Gestión de incidencias de Datadog
 ---
 

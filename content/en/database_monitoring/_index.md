@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/"
   tag: "Blog"
   text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
+- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
+  tag: "Blog"
+  text: "Track and troubleshoot MongoDB performance"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -17,6 +20,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
+- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
+  tag: "Blog"
+  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:

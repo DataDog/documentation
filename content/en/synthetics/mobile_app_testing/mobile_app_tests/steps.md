@@ -184,6 +184,17 @@ For more information about advanced options for subtests, see [Advanced Options 
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][6].
 
+#### Step preview
+
+When adding subtests to your mobile tests, click the **steps** dropdown to show a preview of each step within the subtest:
+
+{{< img src="mobile_app_testing/test_steps/subtest_mobile_preview_steps.png" alt="Add a subtest and select existing subtest or extract from steps" style="width:60%" >}}
+
+After adding the subtest to your mobile test, click the subtest to view another preview of each step within the subtest:
+
+{{< img src="mobile_app_testing/test_steps/subtest_preview_steps_click.png" alt="Selecting a subtest shows a preview of the steps" style="width:60%" >}}
+
+
 ### Variables
 If your subtest contains variables, they are inherited by the test you import them into. 
 To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
