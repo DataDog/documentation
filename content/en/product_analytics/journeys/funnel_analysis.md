@@ -50,11 +50,11 @@ From the Funnel page, choose at least two step events (view or action) and click
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view or search the full list of available attributes.
+When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes (such as session duration or view count) to analyze the data further. Click the **Add Filter** button to view or search the full list of available attributes.
 
 To **remove a filter**, click the filter, then the delete icon.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-filters.png" alt="Use attributes to filter information when constructing your funnel" style="width:60%;" >}}
 
 ## Analyzing a funnel
 
@@ -72,7 +72,9 @@ The **User Behavior** section allows you to compare the average frustration coun
 
 ## View conversions over time with Timeseries
 
-To 
+To view the conversion rate over time based on the step events you've defined, click the **Timeseries** tab in the visualizer. You can toggle between the Steps and Timeseries view.
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-timeseries-conversions.png" alt="Use the Timeseries view to visualize conversion rate over time" style="width:90%;" >}}
 
 ## Share a funnel
 
