@@ -91,7 +91,7 @@ By default, public dashboards are accessible for one year before they expire and
 You can add embedded dashboards to a website with an iFrame. To share an embedded dashboard:
 1. Click **Share** in the upper right corner of the dashboard.
 1. Select **Share Dashboard**.
-1. Select the **Public** option in the **Select a Share Type** step and acknowledge that the dashboard is accessible to anyone with the link. 
+1. Select the **Embed** option in the **Select a Share Type** step.
 1. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
 1. Add the website domains that you want to allowlist as embeddable domains. 
 1. Click **Share Dashboard** to create the share URL. 
