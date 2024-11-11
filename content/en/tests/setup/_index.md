@@ -1,11 +1,11 @@
 ---
-title: Configure Test Visibility
+title: Configure Test Optimization
 type: multi-code-lang
 aliases:
 - /continuous_integration/tests/setup/
 ---
 
-For information about configuration options for [Test Visibility][1], choose your language:
+For information about configuration options for [Test Optimization][1], choose your language:
 
 {{< partial name="continuous_integration/ci-tests-setup.html" >}}
 

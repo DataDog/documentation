@@ -281,6 +281,13 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "PatchDomainAllowlist": [
+    {
+      "group": "domain_allowlist",
+      "suffix": "",
+      "description": "Sets Domain Allowlist returns \"OK\" response"
+    }
+  ],
   "CreateDowntime": [
     {
       "group": "downtimes",
@@ -832,6 +839,20 @@
       "description": "Revoke permission returns \"OK\" response"
     }
   ],
+  "CreateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Create a rum-based metric returns \"Created\" response"
+    }
+  ],
+  "UpdateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Update a rum-based metric returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -923,6 +944,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "RunHistoricalJob": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Run a historical job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [

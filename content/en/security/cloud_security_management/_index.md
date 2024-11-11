@@ -52,7 +52,7 @@ further_reading:
     tag: "Blog"
     text: "How we use Datadog for detection as code"
 algolia:
-  tags: ['inbox']
+  tags: ['csm', 'cloud security management', 'inbox']
 cascade:
     algolia:
         subcategory: Cloud Security Management

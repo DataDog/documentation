@@ -44,6 +44,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
   tag: "Blog"
   text: "How Datadog Security Inbox prioritizes security risks"
+algolia:
+  tags: ["asm", "application security"]
 ---
 
 {{< site-region region="gov" >}}
