@@ -32,6 +32,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="/monitors/guide/monitor_best_practices" >}}Monitor Best Practices{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}

@@ -15,6 +15,8 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/logstash %}}
 
+## Send logs to the Observability Pipelines Worker over Logstash
+
 {{% observability_pipelines/log_source_configuration/logstash %}}
 
 [1]: /observability_pipelines/set_up_pipelines/
