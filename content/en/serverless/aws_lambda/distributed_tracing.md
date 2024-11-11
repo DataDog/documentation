@@ -111,13 +111,33 @@ For .NET serverless applications, Datadog recommends [installing Datadog's traci
 Learn more about [tracing through .NET Azure serverless applications][15].
 
 ## Span Auto-linking
-Datadog can automatically detect linked spans when certain parts of your request cannot propogate trace context, such as when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. These will appear in the Span Links tab in the Datadog Trace UI. 
+Datadog automatically detects linked spans when segements of your asynchronous requests cannot propogate trace context, such as when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. These span links will appear in the [Span Links tab][30] in the Datadog Trace UI. 
 
-**Note:** Span auto-linking may not work if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
+**Note:** Span auto-linking may not link traces if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
 
-If you are viewing the request that originated before the change event and the linked trace is ingested, you will be able to see
+If you are viewing the request that originated before the change event and the linked trace is ingested, you can the linked span as a `Backward` link. 
+
+If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Forward` link. 
 
 This functionality is available for Python instrumented Lambda Functions on layer version 101 and above.
+
+### DyanmoDB Change Stream Auto-linking
+
+For [DyanmoDB Change Streams][29], Span Auto-linking supports the following operations:
+
+- `PutItem`
+- `UpdateItem`
+- `DeleteItem`
+- `BatchWriteItem`
+
+### S3 Change Notification Auto-linking
+
+For [S3 Change Notifications][28], Span Auto-linking supports the following operations:
+
+-  `PutObject`
+- `CompleteMultipartUpload`
+- `CopyObject`
+
 
 ## Hybrid environments
 
@@ -373,3 +393,4 @@ If you are already tracing your serverless application with X-Ray and want to co
 [27]: /profiler/
 [28]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html
 [29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[30]: https://docs.datadoghq.com/tracing/trace_explorer/trace_view/?tab=spanlinksbeta
