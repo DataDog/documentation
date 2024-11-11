@@ -1,5 +1,5 @@
 ---
-title: Set Up Sensitive Data Scanner for Telemetry
+title: Telemetry
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"
