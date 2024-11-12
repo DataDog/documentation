@@ -90,7 +90,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, prometheus, otlp]
+      receivers: [hostmetrics, prometheus, otlp, datadog/connector]
       processors: [batch]
       exporters: [datadog/exporter]
     traces:
