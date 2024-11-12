@@ -52,7 +52,7 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_TRACE_LOG_DIRECTORY`
 : **Default**: Varies by SDK, environment, and runtime. [Read more here][2] <br>
 **Supported Input**: A valid directory path that exists on the system<br>
-**Not Supported In**: Java, Node.js, Ruby, Python SDKs<br>
+**Not Supported In**: Java, Node.js, Ruby, Python<br>
 **Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK falls back to its default diagnostic logging method.
 
 ### Agent
