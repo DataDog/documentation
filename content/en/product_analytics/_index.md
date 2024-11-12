@@ -36,6 +36,8 @@ To start using Product Analytics, you need to enable it for each application you
 2. Under PRODUCT SETTINGS, click **Product Analytics**.
 3. Click the **Enable** button.
 
+{{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
+
 By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
 
 ## Measure user retention
