@@ -6501,6 +6501,11 @@ menu:
       parent: rum_session_replay
       identifier: rum_session_replay_playlists
       weight: 503
+    - name: Heatmaps
+      url: real_user_monitoring/session_replay/heatmaps
+      parent: rum_session_replay
+      identifier: rum_session_replay_heatmaps
+      weight: 504
     - name: Exploring RUM Data
       url: real_user_monitoring/explorer/
       parent: rum
