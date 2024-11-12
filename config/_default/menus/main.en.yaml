@@ -3891,16 +3891,21 @@ menu:
       parent: dbm
       identifier: dbm_query_samples
       weight: 12
+    - name: Exploring Recommendations
+      url: database_monitoring/recommendations/
+      parent: dbm
+      identifier: dbm_recommendations
+      weight: 13
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 13
+      weight: 14
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 14
+      weight: 15
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -6255,6 +6260,16 @@ menu:
       parent: rum_browser
       identifier: rum_browser_setup
       weight: 101
+    - name: Client-Side
+      url: real_user_monitoring/browser/setup/client
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_client
+      weight: 1101
+    - name: Server-Side
+      url: real_user_monitoring/browser/setup/server
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_server
+      weight: 1102
     - name: Advanced Configuration
       url: real_user_monitoring/browser/advanced_configuration/
       parent: rum_browser
@@ -6807,9 +6822,9 @@ menu:
       url: account_management/scim/okta
       parent: account_management_scim
       weight: 501
-    - name: Azure
-      identifier: account_management_scim_azure
-      url: account_management/scim/azure
+    - name: Microsoft Entra ID
+      identifier: account_management_scim_entra
+      url: account_management/scim/entra
       parent: account_management_scim
       weight: 502
     - name: API and Application Keys

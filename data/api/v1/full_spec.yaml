@@ -3147,6 +3147,8 @@ components:
       enum:
       - good_events
       - bad_events
+      - good_minutes
+      - bad_minutes
       - slo_status
       - error_budget_remaining
       - burn_rate
@@ -3156,6 +3158,8 @@ components:
       x-enum-varnames:
       - GOOD_EVENTS
       - BAD_EVENTS
+      - GOOD_MINUTES
+      - BAD_MINUTES
       - SLO_STATUS
       - ERROR_BUDGET_REMAINING
       - BURN_RATE
