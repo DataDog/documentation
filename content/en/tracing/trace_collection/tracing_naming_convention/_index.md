@@ -44,7 +44,7 @@ Span tags and span attributes are similar but distinct concepts:
 
 ### Span tags
 
-Span tags are the enrichments of context related to the span. For instance, host or container tags describing the infrastructure the service is running on. More examples include:
+Span tags provide context related to the span. For instance, host or container tags on the infrastructure the service is running on. More examples include:
 
 - **Host tags**: `hostname`, `availability-zone`, `cluster-name`
 - **Container tags**: `container_name`, `kube_deployment`, `pod_name`
