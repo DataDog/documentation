@@ -50,7 +50,7 @@ To report test results to Datadog, you need to configure the Datadog Go library:
 
 ## Installing Orchestrion
 
-You only need to install `orchestrion` to from [https://github.com/datadog/orchestrion][1] using:
+You only need to install `orchestrion` from [https://github.com/datadog/orchestrion][1] using:
 
 ```bash
 $ go install github.com/DataDog/orchestrion@latest
@@ -77,12 +77,12 @@ $ go install github.com/DataDog/orchestrion@latest
     >
     >     import _ "github.com/DataDog/orchestrion"
     >     ```
-    > 2. Run `go get github.com/DataDog/orchstrion@<current-release>` to make sure the roject version corresponds to the
+    > 2. Run `go get github.com/DataDog/orchstrion@<current-release>` to make sure the project version corresponds to the
     >    one currently being used
     > 3. Run `go mod tidy` to make sure your `go.mod` and `go.sum` files are up-to-date
     >
-    > If you do not run this command, it will be done automatically when required. Once one, the version of `orchestrion`
-    > used by this project can be controlled directly using the `go.mod` file, as you would ontrol any other dependency.
+    > If you do not run this command, it will be done automatically when required. Once done, the version of `orchestrion`
+    > used by this project can be controlled directly using the `go.mod` file, as you would control any other dependency.
     </details>
 
 
