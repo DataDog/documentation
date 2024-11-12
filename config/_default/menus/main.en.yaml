@@ -4287,6 +4287,11 @@ menu:
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_ruby
       weight: 106
+    - name: Go
+      url: tests/test_impact_analysis/setup/go/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_go
+      weight: 107
     - name: How It Works
       url: tests/test_impact_analysis/how_it_works/
       parent: test_impact_analysis
