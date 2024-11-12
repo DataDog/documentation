@@ -72,7 +72,7 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_SERVICE`
 : **Default**: `null` <br>
 **Supported Input**: A string representing an application service name <br>
-**Description**: Sets the default service name used for most spans. In some cases, tracers may set a different service name for downstream services. Integration spans may use their own default names, which can differ from the value specified in `DD_SERVICE`
+**Description**: Sets the default service name used for most spans. Tracers may set a different service name for inferred services. Integration spans may use their own default names, which can differ from the value specified in `DD_SERVICE`
 
 `DD_ENV`
 : **Default**: `null` <br>
