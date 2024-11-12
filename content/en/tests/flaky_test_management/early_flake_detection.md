@@ -95,7 +95,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Go" %}}
 
-`orchestrion >= x.y.z`
+`orchestrion >= 0.9.4`
 
 {{% /tab %}}
 
