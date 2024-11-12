@@ -292,6 +292,22 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 [1]: https://github.com/simplecov-ruby/simplecov
 {{% /tab %}}
+
+{{% tab "Go" %}}
+
+### Compatibility
+
+* `go test -cover`
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>orchestrion</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+</div>
+
+If your tests are executed with the `-cover` flag, the datadog library instruments it and reports the coverage data to Datadog automatically under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+{{% /tab %}}
+
+
 {{% tab "JUnit Report Uploads" %}}
 
 ### Compatibility
