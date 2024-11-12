@@ -84,4 +84,4 @@ You can view span links from the [Trace Explorer][4] in Datadog.
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [8]: https://docs.datadoghq.com/opentelemetry/interoperability/otlp_ingest_in_the_agent
-[9]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/?tab=datadogapi
+[9]: /tracing/trace_collection/custom_instrumentation/?tab=datadogapi
