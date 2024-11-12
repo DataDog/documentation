@@ -31,7 +31,7 @@ Access your [**Domain Allowlist**][1] under **Organization Settings**. To read o
 
 {{< img src="account_management/org_settings/domain_allowlist/enabled.png" alt="Screenshot showing the Domain Allowlist UI, with the allowlist containing one email domain." >}}
 
-The **Domains Currently In Use** section displays the email domains of all emails mentioned in your **monitor** notifications - not including domains in use for other types of notifications right now. You can still configure sending notifications in scope to email domains that are not in your allowlist, but if Domain Allowlist is enabled, email domains that are not in your allowlist do not receive notifications for the products in scope.
+The **Domains Currently In Use** section displays the email domains of all emails mentioned in your **monitor** notifications, not including domains in use for other types of notifications. You can still configure sending notifications in scope to email domains that are not in your allowlist, but if Domain Allowlist is enabled, email domains that are not in your allowlist do not receive notifications for the products in scope.
 
 
 ### Enable or disable Domain Allowlist
