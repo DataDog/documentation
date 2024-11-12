@@ -18,34 +18,77 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-In your `serverless.yaml` file, set `mergeStepFunctionAndLambdaTraces` to `true`. For example:
+1. If you have not already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
 
-{{< highlight yaml "hl_lines=8" >}}
-custom:
-  datadog:
-    site: <DATADOG_SITE>
-    apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
-    forwarderArn: <FORWARDER_ARN>
-    enableStepFunctionsTracing: true
-    propagateUpstreamTrace: true
-    mergeStepFunctionAndLambdaTraces: true
-{{< /highlight >}}
+    ```shell
+    serverless plugin install --name serverless-plugin-datadog
+    ```
+
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You may need to [update your Forwarder][5].
+
+   Take note of your Forwarder's ARN.
+
+3. Add the following to your `serverless.yml`:
+
+   ```yaml
+   custom:
+     datadog:
+       site: <DATADOG_SITE>
+       apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
+       forwarderArn: <FORWARDER_ARN>
+       enableStepFunctionsTracing: true
+       propagateUpstreamTrace: true
+       mergeStepFunctionAndLambdaTraces: true
+   ```
+
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder.
+
+    For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
+
+
+[1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
+[2]: /logs/guide/forwarder/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://www.serverless.com/
+[5]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[6]: logs/guide/forwarder/?tab=cloudformation#installation
+[7]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
 
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-Run the following `datadog-ci` command:
+1. If you have not already, install the [Datadog CLI][1] v2.18.0+.
 
-{{< highlight yaml "hl_lines=6" >}}
-datadog-ci stepfunctions instrument \
- --step-function <STEP_FUNCTION_ARN> \
- --forwarder <FORWARDER_ARN> \
- --env <ENVIRONMENT> \
- --propagate-upstream-trace \
- --merge-step-function-and-lambda-traces
-{{< /highlight >}}
+   ```shell
+   npm install -g @datadog/datadog-ci
+   ```
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You may need to [update your Forwarder][3].
 
-The `merge-step-function-and-lambda-traces` flag lets you inject Step Functions context into downstream Lambda and Step Functions invocations.
+   Take note of your Forwarder's ARN.
+3. Instrument your Step Function.
+
+   ```shell
+   datadog-ci stepfunctions instrument \
+    --step-function <STEP_FUNCTION_ARN> \
+    --forwarder <FORWARDER_ARN> \
+    --env <ENVIRONMENT> \
+    --propagate-upstream-trace \
+    --merge-step-function-and-lambda-traces
+   ```
+   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. Repeat the `--step-function` flag for each Step Function you wish to instrument.
+   - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
+   - Replace `<ENVIRONMENT>` with the environment tag you would like to apply to your Step Functions.
+
+   For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
+
+
+[1]: /serverless/libraries_integrations/cli/
+[2]: /logs/guide/forwarder/
+[3]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[4]: logs/guide/forwarder/?tab=cloudformation#installation
+[5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
 
 {{% /tab %}}
 {{% tab "Custom" %}}
