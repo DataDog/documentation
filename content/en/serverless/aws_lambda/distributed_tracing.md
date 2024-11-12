@@ -111,9 +111,9 @@ For .NET serverless applications, Datadog recommends [installing Datadog's traci
 Learn more about [tracing through .NET Azure serverless applications][15].
 
 ## Span Auto-linking
-Datadog automatically detects linked spans when segements of your asynchronous requests cannot propogate trace context, such as when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. These span links will appear in the [Span Links tab][30] in the Datadog Trace UI. 
+Datadog automatically detects linked spans when segements of your asynchronous requests cannot propogate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. Span Auto-links appear in the [Span Links tab][30] in the Datadog Trace UI. 
 
-**Note:** Span auto-linking may not link traces if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
+**Note:** Span Auto-linking may not link traces if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
 
 If you are viewing the request that originated before the change event and the linked trace is ingested, you can the linked span as a `Backward` link. 
 
@@ -134,7 +134,7 @@ For [DyanmoDB Change Streams][29], Span Auto-linking supports the following oper
 
 For [S3 Change Notifications][28], Span Auto-linking supports the following operations:
 
--  `PutObject`
+- `PutObject`
 - `CompleteMultipartUpload`
 - `CopyObject`
 
