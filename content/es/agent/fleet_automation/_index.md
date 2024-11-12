@@ -75,7 +75,7 @@ Para obtener información sobre la configuración de funciones y permisos, consu
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /es/agent/configuration/agent-configuration-files/

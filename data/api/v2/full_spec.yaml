@@ -305,6 +305,13 @@ components:
       required: true
       schema:
         type: string
+    HistoricalJobID:
+      description: The ID of the job.
+      in: path
+      name: job_id
+      required: true
+      schema:
+        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -3735,6 +3742,21 @@ components:
             from the other indexes
           type: string
       type: object
+    CalculatedField:
+      description: Calculated field.
+      properties:
+        expression:
+          description: Expression.
+          example: '@request_end_timestamp - @request_start_timestamp'
+          type: string
+        name:
+          description: Field name.
+          example: response_time
+          type: string
+      required:
+      - name
+      - expression
+      type: object
     Case:
       description: A case
       properties:
@@ -5633,6 +5655,59 @@ components:
       - IDENTITY
       - GZIP
       - DEFLATE
+    ConvertJobResultsToSignalsAttributes:
+      description: Attributes for converting historical job results to signals.
+      properties:
+        id:
+          description: Request ID.
+          type: string
+        jobResultIds:
+          description: Job result IDs.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        notifications:
+          description: Notifications sent.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        signalMessage:
+          description: Message of generated signals.
+          example: A large number of failed login attempts.
+          type: string
+        signalSeverity:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - jobResultIds
+      - signalSeverity
+      - signalMessage
+      - notifications
+      type: object
+    ConvertJobResultsToSignalsData:
+      description: Data for converting historical job results to signals.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConvertJobResultsToSignalsAttributes'
+        type:
+          $ref: '#/components/schemas/ConvertJobResultsToSignalsDataType'
+      type: object
+    ConvertJobResultsToSignalsDataType:
+      description: Type of payload.
+      enum:
+      - historicalDetectionsJobResultSignalConversion
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOBRESULTSIGNALCONVERSION
+    ConvertJobResultsToSignalsRequest:
+      description: Request for converting historical job results to signals.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConvertJobResultsToSignalsData'
+      type: object
     CostAttributionAggregates:
       description: An array of available aggregates.
       items:
@@ -9740,6 +9815,20 @@ components:
       type: object
       x-merge-override:
         properties: false
+    GCPMetricNamespaceConfig:
+      description: Configuration for a GCP metric namespace.
+      properties:
+        disabled:
+          default: false
+          description: When disabled, Datadog does not collect metrics that are related
+            to this GCP metric namespace.
+          example: true
+          type: boolean
+        id:
+          description: The id of the GCP metric namespace.
+          example: aiplatform
+          type: string
+      type: object
     GCPSTSDelegateAccount:
       description: Datadog principal service account info.
       properties:
@@ -9844,6 +9933,14 @@ components:
             account.'
           example: true
           type: boolean
+        metric_namespace_configs:
+          description: Configurations for GCP metric namespaces.
+          example:
+          - disabled: true
+            id: aiplatform
+          items:
+            $ref: '#/components/schemas/GCPMetricNamespaceConfig'
+          type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
@@ -10214,6 +10311,67 @@ components:
           type: string
       required:
       - message
+      type: object
+    HistoricalJobDataType:
+      description: Type of payload.
+      enum:
+      - historicalDetectionsJob
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOB
+    HistoricalJobListMeta:
+      description: Metadata about the list of jobs.
+      properties:
+        totalCount:
+          description: Number of jobs in the list.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    HistoricalJobResponse:
+      description: Historical job response.
+      properties:
+        data:
+          $ref: '#/components/schemas/HistoricalJobResponseData'
+      type: object
+    HistoricalJobResponseAttributes:
+      description: Historical job attributes.
+      properties:
+        createdAt:
+          description: Time when the job was created.
+          type: string
+        createdByHandle:
+          description: The handle of the user who created the job.
+          type: string
+        createdByName:
+          description: The name of the user who created the job.
+          type: string
+        createdFromRuleId:
+          description: ID of the rule used to create the job (if it is created from
+            a rule).
+          type: string
+        jobDefinition:
+          $ref: '#/components/schemas/JobDefinition'
+        jobName:
+          description: Job name.
+          type: string
+        jobStatus:
+          description: Job status.
+          type: string
+        modifiedAt:
+          description: Last modification time of the job.
+          type: string
+      type: object
+    HistoricalJobResponseData:
+      description: Historical job response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/HistoricalJobResponseAttributes'
+        id:
+          description: ID of the job.
+          type: string
+        type:
+          $ref: '#/components/schemas/HistoricalJobDataType'
       type: object
     HourlyUsage:
       description: Hourly usage for a product family for an org.
@@ -12649,6 +12807,140 @@ components:
           description: Jira project key
           type: string
       type: object
+    JobCreateResponse:
+      description: Run a historical job response.
+      properties:
+        data:
+          $ref: '#/components/schemas/JobCreateResponseData'
+      type: object
+    JobCreateResponseData:
+      description: The definition of `JobCreateResponseData` object.
+      properties:
+        id:
+          description: ID of the created job.
+          type: string
+        type:
+          $ref: '#/components/schemas/HistoricalJobDataType'
+      type: object
+    JobDefinition:
+      description: Definition of a historical job.
+      properties:
+        calculatedFields:
+          description: Calculated fields.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
+        cases:
+          description: Cases used for generating job results.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        from:
+          description: Starting time of data analyzed by the job.
+          example: 1729843470000
+          format: int64
+          type: integer
+        index:
+          description: Index used to load the data.
+          example: cloud_siem
+          type: string
+        message:
+          description: Message for generated results.
+          example: A large number of failed login attempts.
+          type: string
+        name:
+          description: Job name.
+          example: Excessive number of failed attempts.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs analyzed by the job.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            type: string
+          type: array
+        thirdPartyCases:
+          description: Cases for generating results from third-party rules. Only available
+            for third-party rules.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
+          type: array
+        to:
+          description: Ending time of data analyzed by the job.
+          example: 1729847070000
+          format: int64
+          type: integer
+        type:
+          description: Job type.
+          type: string
+      required:
+      - from
+      - to
+      - index
+      - name
+      - cases
+      - queries
+      - message
+      type: object
+    JobDefinitionFromRule:
+      description: Definition of a historical job based on a security monitoring rule.
+      properties:
+        caseIndex:
+          description: Index of the rule case applied by the job.
+          example: 0
+          format: int32
+          maximum: 9
+          type: integer
+        from:
+          description: Starting time of data analyzed by the job.
+          example: 1729843470000
+          format: int64
+          type: integer
+        id:
+          description: ID of the detection rule used to create the job.
+          example: abc-def-ghi
+          type: string
+        index:
+          description: Index used to load the data.
+          example: cloud_siem
+          type: string
+        notifications:
+          description: Notifications sent when the job is completed.
+          example:
+          - '@sns-cloudtrail-results'
+          items:
+            type: string
+          type: array
+        to:
+          description: Ending time of data analyzed by the job.
+          example: 1729847070000
+          format: int64
+          type: integer
+      required:
+      - id
+      - from
+      - to
+      - index
+      - caseIndex
+      type: object
     LeakedKey:
       description: The definition of LeakedKey object.
       properties:
@@ -12878,6 +13170,17 @@ components:
       required:
       - data
       - meta
+      type: object
+    ListHistoricalJobsResponse:
+      description: List of historical jobs.
+      properties:
+        data:
+          description: Array containing the list of historical jobs.
+          items:
+            $ref: '#/components/schemas/HistoricalJobResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/HistoricalJobListMeta'
       type: object
     ListPowerpacksResponse:
       description: Response object which includes all powerpack configurations.
@@ -19997,6 +20300,38 @@ components:
             $ref: '#/components/schemas/RumMetricResponseData'
           type: array
       type: object
+    RunHistoricalJobRequest:
+      description: Run a historical job request.
+      properties:
+        data:
+          $ref: '#/components/schemas/RunHistoricalJobRequestData'
+      type: object
+    RunHistoricalJobRequestAttributes:
+      description: Run a historical job request.
+      properties:
+        fromRule:
+          $ref: '#/components/schemas/JobDefinitionFromRule'
+        id:
+          description: Request ID.
+          type: string
+        jobDefinition:
+          $ref: '#/components/schemas/JobDefinition'
+      type: object
+    RunHistoricalJobRequestData:
+      description: Data for running a historical job request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RunHistoricalJobRequestAttributes'
+        type:
+          $ref: '#/components/schemas/RunHistoricalJobRequestDataType'
+      type: object
+    RunHistoricalJobRequestDataType:
+      description: Type of data.
+      enum:
+      - historicalDetectionsJobCreate
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOBCREATE
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -42296,6 +42631,250 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
+  /api/v2/siem-historical-detections/jobs:
+    get:
+      description: List historical jobs.
+      operationId: ListHistoricalJobs
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: The order of the jobs in results.
+        example: status
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Query used to filter items from the fetched list.
+        example: security:attack status:high
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListHistoricalJobsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List historical jobs
+      tags:
+      - Security Monitoring
+      x-menu-order: 20
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+    post:
+      description: Run a historical job.
+      operationId: RunHistoricalJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunHistoricalJobRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobCreateResponse'
+          description: Status created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Run a historical job
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        historical_job:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"historicalDetectionsJobCreate\",\n
+              \   \"attributes\": {\n      \"jobDefinition\": {\n        \"type\":
+              \"log_detection\",\n        \"name\": \"Excessive number of failed attempts.\",\n
+              \       \"queries\": [\n          {\n            \"query\": \"source:non_existing_src_weekend\",\n
+              \           \"aggregation\": \"count\",\n            \"groupByFields\":
+              [],\n            \"distinctFields\": []\n          }\n        ],\n        \"cases\":
+              [\n          {\n            \"name\": \"Condition 1\",\n            \"status\":
+              \"info\",\n            \"notifications\": [],\n            \"condition\":
+              \"a > 1\"\n          }\n        ],\n        \"options\": {\n          \"keepAlive\":
+              3600,\n          \"maxSignalDuration\": 86400,\n          \"evaluationWindow\":
+              900\n        },\n        \"message\": \"A large number of failed login
+              attempts.\",\n        \"tags\": [],\n        \"from\": 1730387522611,\n
+              \       \"to\": 1730387532611,\n        \"index\": \"main\"\n      }\n
+              \   }\n  }\n}"
+          step: there is a valid "historical_job" in the system
+      x-menu-order: 19
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/signal_convert:
+    post:
+      description: Convert a job result to a signal.
+      operationId: ConvertJobResultToSignal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertJobResultsToSignalsRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Convert a job result to a signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 24
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/{job_id}:
+    delete:
+      description: Delete an existing job.
+      operationId: DeleteHistoricalJob
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an existing job
+      tags:
+      - Security Monitoring
+      x-menu-order: 23
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+    get:
+      description: Get a job's details.
+      operationId: GetHistoricalJob
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalJobResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a job's details
+      tags:
+      - Security Monitoring
+      x-menu-order: 21
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/{job_id}/cancel:
+    patch:
+      description: Cancel a historical job.
+      operationId: CancelHistoricalJob
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Cancel a historical job
+      tags:
+      - Security Monitoring
+      x-menu-order: 22
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
   /api/v2/slo/report:
     post:
       description: 'Create a job to generate an SLO report. The report job is processed

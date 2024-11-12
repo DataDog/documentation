@@ -1456,7 +1456,23 @@ Send pipeline traces.
 ...
 {{< /code-block >}}
 
-### The Datadog Plugin cannot write payloads to the server
+### Pipeline executions data is not available in Datadog
+
+#### HTTP connectivity check
+
+If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct:
+- If the Datadog plugin is configured to send data to a Datadog Agent, check that the Agent host has been added to the `No Proxy Hosts` section.
+- If the Datadog plugin is configured to send data directly to Datadog (Agentless mode), check that Datadog host has been added to the `No Proxy Hosts` section. The table below shows the supported Datadog sites and their corresponding host values:
+
+| Datadog site | Host value |
+| ------------ | ----------------------- |
+| US1          | datadoghq.com           |
+| US3          | us3.datadoghq.com       |
+| US5          | us5.datadoghq.com       |
+| EU1          | datadoghq.eu            |
+| AP1          | ap1.datadoghq.com       |
+
+#### The Datadog Plugin cannot write payloads to the server
 
 If the following error message appears in the **Jenkins Log**, make sure that the plugin configuration is correct.
 
@@ -1464,19 +1480,13 @@ If the following error message appears in the **Jenkins Log**, make sure that th
 Error writing to server
 {{< /code-block >}}
 
-1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
-2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+If you are using `localhost` as the hostname, change it to the server hostname instead.
 
-#### HTTP 504
+### Jenkins logs are not available in Datadog
 
-If the HTTP 504 error message appears, make sure that the Jenkins proxy configuration is correct.
-
-{{< code-block lang="text" >}}
-Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
-{{< /code-block >}}
-
-1. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
-  1. Check that `localhost` has been configured in the `No Proxy Hosts` section.
+If the Datadog plugin is configured to send data to a Datadog Agent, do the following:
+- Make sure that custom log collection over TCP is [enabled and configured][29] in the Agent.
+- Go to the plugin configuration UI and click **Test logs connection** to verify logs connectivity.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 

@@ -1,7 +1,7 @@
 ---
 categories:
 - configuration & deployment
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
 description: Reenvía automáticamente tus métricas, eventos y checks de servicio de
