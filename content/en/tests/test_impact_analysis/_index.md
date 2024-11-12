@@ -57,6 +57,7 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
     {{< nextlink href="intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/go" >}}Go{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
