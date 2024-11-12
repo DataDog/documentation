@@ -67,7 +67,7 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_VERSION`
 : **Default**: `null`, with an exception for the Node.js SDK, which can automatically retrieve the version number from package.json, if available<br>
 **Supported Input**: A string representing an application version <br>
-**Description**: Adds a version tag to all spans that have the same service name as the global service name (aka `DD_SERVICE`). Spans with a different service name do not get this tag.
+**Description**: Adds a version tag to all spans except for spans coming from inferred services.
 
 `DD_SERVICE`
 : **Default**: `null` <br>
