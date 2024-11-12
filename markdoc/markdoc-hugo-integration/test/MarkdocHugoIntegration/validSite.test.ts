@@ -17,10 +17,10 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
       siteDir,
       i18n: {
         en: {
-          example_key: { other: 'test' }
+          additional_sentence: { other: 'test' }
         },
         ja: {
-          example_key: { other: 'テスト' }
+          additional_sentence: { other: 'テスト' }
         }
       }
     }

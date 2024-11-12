@@ -50,13 +50,18 @@ export class HugoFunctions {
   static i18n(p: { hugoConfig: HugoConfig; key: string }): string {
     const i18n = p.hugoConfig.global.i18n;
     const lang = p.hugoConfig.page.lang;
-    const string = i18n[lang][p.key].other;
 
-    if (string) {
-      return string;
-    } else {
-      throw new Error(`No translation found for key "${p.key}" in language "${lang}".`);
+    if (!i18n[lang] && !i18n['en']) {
+      throw new Error(`No i18n translations found for language "${lang}" or English.`);
     }
+
+    if (!i18n[lang][p.key] && !i18n['en'][p.key]) {
+      throw new Error(
+        `No translation found for key "${p.key}" in language "${lang}" or in English.`
+      );
+    }
+
+    return i18n[lang][p.key].other || i18n['en'][p.key].other;
   }
 
   static isAbsUrl(path: string): boolean {

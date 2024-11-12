@@ -36,13 +36,12 @@ function WhatsnextTemplate(props: {
   return (
     <>
       <div className="whatsnext">
-        <p>{desc}</p>
+        <p>{desc}:</p>
         <ul
           className="list-group"
           dangerouslySetInnerHTML={{ __html: props.contents }}
         ></ul>
       </div>
-      <br />
     </>
   );
 }

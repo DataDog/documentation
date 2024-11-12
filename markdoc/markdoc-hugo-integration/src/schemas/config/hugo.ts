@@ -29,10 +29,20 @@ export type HugoSubdirsByType = z.infer<typeof HugoSubdirsByTypeSchema>;
  */
 export const HugoGlobalConfigSchema = IntegrationConfigSchema.extend({
   dirs: HugoSubdirsByTypeSchema
-}).refine((hugoVars) => {
-  if (hugoVars.env === 'preview' && !hugoVars.siteParams.branch) {
+}).refine((config) => {
+  // If we're in preview mode, we need to know the branch name
+  // to build the correct URLs
+  if (config.env === 'preview' && !config.siteParams.branch) {
     console.error(
       'hugoVars.siteParams.branch is required when hugoVars.env is "preview"'
+    );
+    return false;
+  }
+  // English is the failover language for i18n data,
+  // so the English i18n data must be present
+  if (!config.i18n.en) {
+    console.error(
+      'No i18n data ingested for English, does <SITE_DIR>/i18n/en.json exist?'
     );
     return false;
   }
