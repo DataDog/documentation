@@ -42,15 +42,11 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
-{{< callout url="https://forms.gle/JV8VLH1ZTzmUnK5F7" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Bring your own threat intelligence (BYOTI) is in private beta.
-{{< /callout >}} 
-
 ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 ### Storing indicators of compromise in reference tables
 
-Threat intelligence is supported in the CSV format and requires 4 columns.
+Threat intelligence is supported in the CSV format and requires 5 columns.
 
 **CSV Structure**
 
@@ -77,6 +73,14 @@ ip_address,additional_data,category,intention,source
 
 ### Uploading and enabling your own threat intel
 
+Datadog supports creating reference tables via a manual upload, or by periodically retrieving the data from [AWS S3, Azure storage, or Google Cloud storage](/integrations/guide/reference-tables/?tab=manualupload#create-a-reference-table).
+
+**Note**: It can take 10 to 30 minutes after creating a table, before it will start enriching ASM traces.
+
+**Note**: If a primary key is duplicated, it will be skipped, and an error message about the key will be displayed.
+
+#### Manual upload
+
 On a new [references table][4] page:
 
 1. Name the table. The table name is referenced in ASM's **Threat Intel** config.
@@ -88,6 +92,20 @@ On a new [references table][4] page:
 5. In [Threat Intel][5], locate the new table, and then select the toggle to enable it. 
    
    {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table_enabled.png" alt="Enabled reference table" style="width:100%;" >}}
+
+#### Acquisition from cloud storage
+
+See the related reference table documentation for:
+
+- [AWS S3](/integrations/guide/reference-tables/?tab=amazons3#create-a-reference-table)
+- [Azure storage](/integrations/guide/reference-tables/?tab=azurestorage#create-a-reference-table)
+- [Google Cloud storage](/integrations/guide/reference-tables/?tab=googlecloudstorage#create-a-reference-table)
+
+When the reference table is created from cloud storage, it will periodically be refreshed. The entire table is *replaced*, there is no way to merge data currently.
+
+##### Troubleshooting automatic acquisition
+
+If you suspect that the reference tables are not being refreshed, you can select the `View Change Events` link from the top-right Settings menu on the Reference Table page. It will open a page showing potential error events.
 
 ### Filter traces by joining the list with a Reference Table
 
