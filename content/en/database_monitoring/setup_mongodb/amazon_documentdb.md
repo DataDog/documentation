@@ -14,7 +14,7 @@ Supported Amazon DocumentDB major versions
 : 4.0, 5.0
 
 Supported Amazon DocumentDB cluster types
-: Instance Based.<br /><br />
+: Instance-based clusters.<br /><br />
 **Note**: Amazon DocumentDB Elastic Cluster is not supported.
 
 {{% dbm-mongodb-before-you-begin %}}
@@ -65,7 +65,7 @@ db.grantRolesToUser("datadog", [
 ])
 {{< /code-block >}}
 
-Alternatively, you can grant `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
+Alternatively, you can grant the `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
 
 {{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
@@ -128,7 +128,7 @@ db.grantRolesToUser("datadog", [
 
 To monitor your Amazon DocumentDB Cluster, you must install and configure the Datadog Agent on a host that can [remotely access][1] your Amazon DocumentDB Cluster. This host can be a Linux host, a Docker container, or a Kubernetes pod.
 
-<div class="alert alert-info">Amazon DocumentDB Elastic clusters are not supported because they only expose the cluster (mongos) endpoints.</div>
+<div class="alert alert-info">Amazon DocumentDB Elastic Clusters is not supported because it only exposes the cluster (<code>mongos</code>) endpoints.</div>
 
 #### Create the configuration file
 
@@ -141,8 +141,8 @@ To monitor your Amazon DocumentDB Cluster, you must install and configure the Da
 {{% /tab %}}
 {{< /tabs >}}
 
-Complete this section if you have installed the [Amazon DocumentDB integration][3] to enrich instances
-with DocumentDB integration telemetry.
+If you installed the [Amazon DocumentDB integration][3] to enrich instances
+with DocumentDB integration telemetry, add this section to your configuration:
 
 ```yaml
 ## @param aws - mapping - optional
@@ -151,7 +151,7 @@ with DocumentDB integration telemetry.
 #
 aws:
     ## @param instance_endpoint - string - optional
-    ## Equal to the Endpoint.Address of the instance the agent is connecting to.
+    ## Equal to the Endpoint.Address of the instance the Agent is connecting to.
     ## This value is optional if the value of `host` is already configured to the instance endpoint.
     ##
     ## For more information on instance endpoints,
@@ -159,7 +159,7 @@ aws:
     #
     instance_endpoint: <AWS_INSTANCE_ENDPOINT>
     ## @param cluster_identifier - string - optional
-    ## Equal to the Cluster identifier of the instance the agent is connecting to.
+    ## Equal to the cluster identifier of the instance the Agent is connecting to.
     ## This value is optional if the value of `cluster_name` is already configured to the cluster identifier.
     ##
     ## For more information on cluster identifiers,
@@ -193,6 +193,10 @@ To collect more comprehensive database metrics from Amazon DocumentDB, install t
 Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
 
 {{% dbm-amazon-documentdb-agent-data-collected %}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/api-app-keys/
 [2]: /integrations/mongo/?tab=replicaset#metrics

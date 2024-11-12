@@ -213,6 +213,10 @@ Refer to the [MongoDB integration documentation][4] for a comprehensive list of 
 
 {{% dbm-mongodb-agent-data-collected %}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /database_monitoring/architecture/#cloud-managed-databases
 [2]: /account_management/api-app-keys/
 [3]: /integrations/mongodb_atlas/
