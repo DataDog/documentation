@@ -53,12 +53,12 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-### Agent configuration
+DogStatsD consists of a server, which is bundled with the Datadog Agent, and a client library, which is available in multiple languages. The DogStatsD server is enabled by default over UDP port `8125` for Agent v6+. You can set a custom port for the server if necessary. Configure your client to match the address and port of the Datadog Agent DogStatsD server.
+
+### Datadog Agent DogStatsD server
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
-
-DogStatsD is enabled by default over UDP port `8125` for Agent v6+.
 
 If you need to change the port, configure the `dogstatsd_port` option in the main [Agent configuration file][1], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][2].
 
@@ -252,7 +252,9 @@ To gather custom metrics with [DogStatsD][1] with helm:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Code
+### DogStatsD client
+
+Install the DogStatsD client library for your preferred language and configure it to match the address and port of the Datadog Agent DogStatsD server.
 
 #### Install the DogStatsD client
 
@@ -294,8 +296,6 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
     <version>4.2.1</version>
 </dependency>
 ```
-
-
 
 [1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 {{< /programming-lang >}}
