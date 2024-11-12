@@ -96,7 +96,7 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Not Supported In**: Node.js SDK<br>
+**Not Supported In**: Node.js<br>
 **Description**: Enables or disables the inclusion of the query string in the `http.url` span tag value for automatically collected HTTP spans.
 
 `DD_TRACE_CLIENT_IP_HEADER`
