@@ -21,7 +21,7 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Not Supported In**: Go SDK<br>
+**Not Supported In**: Go<br>
 **Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_RATE_LIMIT`
