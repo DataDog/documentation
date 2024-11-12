@@ -26,14 +26,9 @@ With the Datadog RUM Browser SDK, you can also:
 
 {{< img src="real_user_monitoring/browser/rum-browser-overview.png" alt="RUM performance summary dashboard" style="width:100%;">}}
 
-The responsibility of keeping user data secure is shared between Datadog and developers who leverage the RUM SDKs. Learn more about [Shared responsibility][1].
-
 ## Getting started
 
-{{< whatsnext desc="To get started with the RUM Browser SDK, follow the steps to create a RUM application based on how your application is served:" >}}
-  {{< nextlink href="/real_user_monitoring/browser/setup/client">}}<u>Client-Side</u>: Instrument each of your browser-based web applications, deploy the application, then configure the initialization parameters you want to track, and use advanced configuration to further manage data and context that RUM collects.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/setup/server">}}<u>Server-Side (Auto-Instrumentation)</u>: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.{{< /nextlink >}}
-{{< /whatsnext >}}
+To get started with the RUM Browser SDK, follow the steps to [create a JavaScript RUM application][1].
 
 From here, you can modify the [data and context][2] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][3].
 
@@ -41,6 +36,6 @@ From here, you can modify the [data and context][2] the RUM Browser SDK collects
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_security/real_user_monitoring/#shared-responsibility
+[1]: /real_user_monitoring/browser/setup/#setup
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: /real_user_monitoring/browser/advanced_configuration/

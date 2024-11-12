@@ -674,7 +674,7 @@ LaunchDarkly does not currently support this integration. Create a ticket with L
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Split's SDK and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
 
@@ -772,7 +772,7 @@ For more information about initializing Split's SDK, see Split's [Flutter plugin
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Initialize Split's SDK and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Split's SDK, see Split's [React Native SDK documentation][1].
 
@@ -901,7 +901,7 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/browser/setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors
