@@ -87,6 +87,12 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% /tab %}}
 
+{{% tab "Go" %}}
+
+`orchestrion >= x.y.z`
+
+{{% /tab %}}
+
 {{% tab "Ruby" %}}
 
 `datadog-ci-rb>=1.5.0`
