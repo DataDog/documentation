@@ -94,7 +94,7 @@ Esta integración de Workday monitoriza el estado de tus integraciones en Workda
 
 ### Monitores
 
-Este integración incluye los siguientes monitores recomendados:
+Esta integración incluye los siguientes monitores recomendados:
 
 1. Connect to Workday, que monitoriza tu conexión a Workday.
 2. Workday Integration Status, un monitor múltiple que está agrupado por integraciones y verifica el estado del último evento de integración de Workday.
@@ -105,7 +105,7 @@ Esta integración incluye un dashboard listo para usar llamado **Workday Integra
 
 ### Colección de logs
 
-Este integración utiliza la API de Workday para recopilar logs para ejecuciones de integración y enviar esos logs a Datadog a través de la API REST de Datadog. Las etiquetas (tags) relacionadas con la ejecución se asignan dinámicamente a esos logs.
+Esta integración utiliza la API de Workday para recopilar logs para ejecuciones de integración y enviar esos logs a Datadog a través de la API REST de Datadog. Las etiquetas (tags) relacionadas con la ejecución se asignan dinámicamente a esos logs.
 
 ## Agent
 
