@@ -946,6 +946,13 @@
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
+  "RunHistoricalJob": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Run a historical job returns \"Status created\" response"
+    }
+  ],
   "TestSecurityMonitoringRule": [
     {
       "group": "security_monitoring",

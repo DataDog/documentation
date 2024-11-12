@@ -548,8 +548,8 @@ Una vez completado el proceso, haz clic en **Finish** (Finalizar) en la página 
 [101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
-{{% /pestaña %}}
-{{% pestaña "Windows vía CLI" %}}
+{{% /tab %}}
+{{% tab "Windows vía CLI" %}}
 
 1. Descarga el archivo [`datadog-synthetics-worker-1.49.0.amd64.msi` ][101] y ejecútalo desde la máquina en la que quieres instalar la localización privada. 
 2. Ejecuta uno de los siguientes comandos dentro del directorio en el que descargaste el instalador.

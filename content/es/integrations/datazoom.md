@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md
 display_on_public_website: true

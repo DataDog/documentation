@@ -26,7 +26,7 @@ categories:
 - rum
 - rastreo de problemas
 - notificaciones
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
 display_on_public_website: true
