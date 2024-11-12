@@ -49,8 +49,10 @@ To share a dashboard with one or more email addresses:
 2. Select **Share Dashboard.**
 3. Select **Invite only**.
 4. Configure the desired options time, variable, and color options. For more details, see the [Configuration Options](#configuration-options).
-5. Add the emails or email domains you want to grant access to. Add a domain to prevent public access and limit dashboard access to anyone with that domain address.
+5. Add the emails or email domains you want to grant access to, and set the expiration date for each invite. Add a domain to prevent public access and limit dashboard access to anyone with that domain address.
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
+
+**Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
 
 ### Access an invite-only shared dashboard
 
@@ -83,6 +85,16 @@ To share a public dashboard:
 5. Click **Share Dashboard** to create the share URL.
 
 By default, public dashboards are accessible for one year before they expire and switch to a **Paused** state. You can turn off or adjust the expiration date in the **Select a Share Type** step.
+
+## Embedded dashboards
+
+You can add embedded dashboards to a website with an iframe. To share an embedded dashboard:
+1. Click **Share** in the upper-right corner of the dashboard.
+1. Select **Share Dashboard**.
+1. Select the **Embed** option in the **Select a Share Type** step.
+1. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
+1. Add the website domains that you want to allowlist as embeddable domains. 
+1. Click **Share Dashboard** to create the share URL. 
 
 ## Configuration Options
 
