@@ -39,7 +39,7 @@ For more information, see [Default Standard Attributes][6].
 
 Span tags and span attributes are similar but distinct concepts:
 
-- [Span tags](#span-tags) are the enrichments of context related to the span. For instance, host or container tags describing the infrastructure the service is running on.
+- [Span tags](#span-tags) provides context related to the span. For instance, host or container tags on the infrastructure the service is running on.
 - [Span attributes](#span-attributes) are the content of the span, collected with automatic or manual instrumentation in the application.
 
 ### Span tags
