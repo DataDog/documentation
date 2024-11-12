@@ -3,7 +3,7 @@ title: Configure the Datadog Tracing Library
 type: multi-code-lang
 ---
 
-This page describes configuration options that are supported across all SDKs. To view these common configuration options, see [Common configuration options](#common-configuration-options).
+This page describes configuration options that are supported across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
 
 For configuration options specific to your programming language, choose your language from the options below:
 
