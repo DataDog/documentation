@@ -120,8 +120,6 @@ Keep this window open for Section 4.
 - Compute Viewer
 - Monitoring Viewer
 - Cloud Asset Viewer
-
-   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="Google Cloud console interface, showing an 'Add principals' box and an 'Assign roles' interface." style="width:70%;">}}
 6. Click **Save**.
 
 {{% /collapse-content %}}
