@@ -165,6 +165,19 @@ HTTP tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+## One-click
+
+API test creation suggests endpoints from the [API Catalog][17] and existing API tests to choose from in order to pre-fill your test form with relevant configuration options.
+Use existing Datadog data sources such as APM traces, API Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+
+Start typing in the API test url input to get suggestions for endpoints, or similar tests in Synthetic Monitoring:
+
+   {{< img src="synthetics/api_tests/api-one-click.png" alt="HTTP API Test showing a GET search for an existing API test" style="width:90%;" >}}
+   
+Then, select a suggestion to pre-fill your test configuration (request options and headers, authentication, and variables):
+
+   {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Select" style="width:90%;" >}}
+
 {{% synthetics-variables %}}
 
 ### Use variables
@@ -242,3 +255,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
+[17]: /api_catalog
