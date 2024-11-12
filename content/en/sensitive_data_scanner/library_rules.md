@@ -58,7 +58,7 @@ These rules can also be viewed in Datadog:
 | Okta API Token Scanner                             | okta, api token                                                                                                       |
 | OpenAI API Key Scanner                             | \-                                                                                                                    |
 | PGP Private Key Scanner                            | \-                                                                                                                    |
-| Pagerduty API Token Scanner                        | pagerduty, pager_duty, token, pg                                                                                      |
+| PagerDuty API Token Scanner                        | pagerduty, pager_duty, token, pg                                                                                      |
 | Paypal Braintree Access Token Scanner              | paypal, braintree, access, token                                                                                      |
 | Postman API Key Scanner                            | postman, x-api-key, postman-api-key                                                                                   |
 | RSA Private Key Scanner                            | \-                                                                                                                    |
