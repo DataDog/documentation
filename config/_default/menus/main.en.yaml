@@ -1353,6 +1353,11 @@ menu:
       parent: ddsql_editor
       identifier: ddsql_editor_tags
       weight: 6
+    - name: Querying Reference Tables
+      url: ddsql_editor/reference_tables
+      parent: ddsql_editor
+      identifier: ddsql_editor_reference_tables
+      weight: 7
     - name: Guides
       url: ddsql_editor/guide
       parent: ddsql_editor
