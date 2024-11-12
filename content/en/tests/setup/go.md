@@ -129,15 +129,14 @@ If you have not run `orchestrion pin`, you may see a message similar to the foll
   ╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
+### Alternative
 
-  - <details><summary>Alternative</summary>
+_Orchestrion_ at the core is a standard Go toolchain `-toolexec` proxy. Instead of using `orchestrion go`, you can
+also manually provide the `-toolexec` argument to `go` commands that accept it:
 
-    > _Orchestrion_ at the core is a standard Go toolchain `-toolexec` proxy. Instead of using `orchestrion go`, you can
-    > also manually provide the `-toolexec` argument to `go` commands that accept it:
-    > ```console
-    > $ go build -toolexec 'orchestrion toolexec' .
-    > $ go test -toolexec 'orchestrion toolexec' -race .
-    > ```
-    </details>
+```console
+$ go build -toolexec 'orchestrion toolexec' .
+$ go test -toolexec 'orchestrion toolexec' -race .
+```
 
 [1]: https://github.com/datadog/orchestrion
