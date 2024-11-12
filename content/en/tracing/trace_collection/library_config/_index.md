@@ -5,7 +5,7 @@ type: multi-code-lang
 
 This page describes configuration options that are supported across all SDKs. To view these common configuration options, see [Common configuration options](#common-configuration-options).
 
-For configuration options specific to your programming language, choose your SDK from the options below:
+For configuration options specific to your programming language, choose your language from the options below:
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
