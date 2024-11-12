@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - contenedores
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
 display_on_public_website: true

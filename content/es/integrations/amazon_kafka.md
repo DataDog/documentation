@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - aws
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
 display_on_public_website: true
