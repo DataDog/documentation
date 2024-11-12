@@ -24,8 +24,8 @@ export class Whatsnext extends CustomHtmlComponent {
   }
 }
 
-function WhatsnextTemplate(props: {
-  desc: string;
+export function WhatsnextTemplate(props: {
+  desc?: string;
   hugoConfig: HugoConfig;
   contents: string;
 }) {

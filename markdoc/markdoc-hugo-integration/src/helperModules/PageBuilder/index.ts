@@ -14,6 +14,7 @@ import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
 import { PagePrefsManifest } from '../../schemas/pagePrefs';
 import { render } from '../renderer';
+import { FurtherReadingTemplate } from '../../components/furtherReading';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 

@@ -32,7 +32,7 @@ export class Nextlink extends CustomHtmlComponent {
   }
 }
 
-function NextlinkTemplate(props: {
+export function NextlinkTemplate(props: {
   attrs: {
     href: string;
     text: string;

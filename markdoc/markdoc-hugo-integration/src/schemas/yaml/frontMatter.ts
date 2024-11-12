@@ -93,9 +93,28 @@ export const PagePrefsConfigSchema = z
  */
 export type PagePrefsConfig = z.infer<typeof PagePrefsConfigSchema>;
 
+export const FurtherReadingConfigSchema = z
+  .object({
+    further_reading: z
+      .array(
+        z
+          .object({
+            link: z.string(),
+            text: z.string(),
+            tag: z.string().optional()
+          })
+          .strict()
+      )
+      .min(1)
+  })
+  .strict();
+
+export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
+
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  page_preferences: PagePrefsConfigSchema.optional()
+  page_preferences: PagePrefsConfigSchema.optional(),
+  further_reading: FurtherReadingConfigSchema.optional()
 });
 
 /**
