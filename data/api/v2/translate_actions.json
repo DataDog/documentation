@@ -1637,6 +1637,34 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "ListHistoricalJobs": {
+    "description": "List historical jobs.",
+    "summary": "List historical jobs"
+  },
+  "RunHistoricalJob": {
+    "description": "Run a historical job.",
+    "summary": "Run a historical job",
+    "request_description": "",
+    "request_schema_description": "Run a historical job request."
+  },
+  "ConvertJobResultToSignal": {
+    "description": "Convert a job result to a signal.",
+    "summary": "Convert a job result to a signal",
+    "request_description": "",
+    "request_schema_description": "Request for converting historical job results to signals."
+  },
+  "DeleteHistoricalJob": {
+    "description": "Delete an existing job.",
+    "summary": "Delete an existing job"
+  },
+  "GetHistoricalJob": {
+    "description": "Get a job's details.",
+    "summary": "Get a job's details"
+  },
+  "CancelHistoricalJob": {
+    "description": "Cancel a historical job.",
+    "summary": "Cancel a historical job"
+  },
   "CreateSLOReportJob": {
     "description": "Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.\n\nCheck the status of the job and download the CSV report using the returned `report_id`.",
     "summary": "Create a new SLO report",

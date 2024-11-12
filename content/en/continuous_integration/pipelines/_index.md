@@ -144,6 +144,7 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 |  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS CodePipeline | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< ci-details title="Filter CI Jobs on the critical path" >}}Identification of CI jobs that are on the critical path of the pipeline.{{< /ci-details >}} | | {{< X >}} | | | | | | | | |
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | | {{< X >}} | | | {{< X >}} | | | | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
 | {{< ci-details title="Step spans" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} | {{< X >}} (_But are presented as job spans_) |  |  |  | {{< X >}} |  | {{< X >}} |  |  |  {{< X >}} |

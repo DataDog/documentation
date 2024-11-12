@@ -20,7 +20,7 @@ author:
 categories:
 - metrics
 - event management
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
 display_on_public_website: verdadero

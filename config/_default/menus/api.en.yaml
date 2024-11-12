@@ -1446,8 +1446,7 @@ menu:
           - v2
         operationids:
           - QueryTimeseriesData
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Query scalar data across multiple products
       url: '#query-scalar-data-across-multiple-products'
@@ -1459,8 +1458,7 @@ menu:
           - v2
         operationids:
           - QueryScalarData
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List distinct metric volumes by metric name
       url: '#list-distinct-metric-volumes-by-metric-name'
@@ -2161,6 +2159,84 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Cancel a historical job
+      url: '#cancel-a-historical-job'
+      identifier: security-monitoring-cancel-a-historical-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelHistoricalJob
+        unstable:
+          - v2
+        order: 22
+    - name: Get a job's details
+      url: '#get-a-jobs-details'
+      identifier: security-monitoring-get-a-jobs-details
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHistoricalJob
+        unstable:
+          - v2
+        order: 21
+    - name: Delete an existing job
+      url: '#delete-an-existing-job'
+      identifier: security-monitoring-delete-an-existing-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteHistoricalJob
+        unstable:
+          - v2
+        order: 23
+    - name: Convert a job result to a signal
+      url: '#convert-a-job-result-to-a-signal'
+      identifier: security-monitoring-convert-a-job-result-to-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertJobResultToSignal
+        unstable:
+          - v2
+        order: 24
+    - name: Run a historical job
+      url: '#run-a-historical-job'
+      identifier: security-monitoring-run-a-historical-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RunHistoricalJob
+        unstable:
+          - v2
+        order: 19
+    - name: List historical jobs
+      url: '#list-historical-jobs'
+      identifier: security-monitoring-list-historical-jobs
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListHistoricalJobs
+        unstable:
+          - v2
+        order: 20
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
