@@ -64,14 +64,9 @@ If you need to change the port, configure the `dogstatsd_port` option in the mai
 
 To enable a custom Agent DogStatsD server UDP port:
 
-1. Edit your `datadog.yaml` file to un-comment the `use_dogstatsd` and `dogstatsd_port` parameters:
+1. Set the `dogstatsd_port` parameter:
 
     ```yaml
-    ## @param use_dogstatsd - boolean - optional - default: true
-    ## Set this option to false to disable the Agent DogStatsD server.
-    #
-    use_dogstatsd: true
-
     ## @param dogstatsd_port - integer - optional - default: 8125
     ## Override the Agent DogStatsD port.
     ## Note: Make sure your client is sending to the same UDP port.
@@ -80,7 +75,6 @@ To enable a custom Agent DogStatsD server UDP port:
     ```
 
 2. [Restart your Agent][3].
-
 
 [1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /developers/dogstatsd/unix_socket/
@@ -97,7 +91,7 @@ docker run -d --cgroupns host \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
+              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
               gcr.io/datadoghq/agent:latest
 ```
