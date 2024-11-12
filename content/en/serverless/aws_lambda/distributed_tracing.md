@@ -129,6 +129,7 @@ For [DyanmoDB Change Streams][29], Span Auto-linking supports the following oper
 - `UpdateItem`
 - `DeleteItem`
 - `BatchWriteItem`
+- `TransactWriteItems`
 
 ### S3 Change Notification Auto-linking
 
