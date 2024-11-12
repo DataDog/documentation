@@ -44,7 +44,7 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
 
-   All logs matching the query are aggregated into groups based on the value of tags, attributes and up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
+   All logs matching the query are aggregated into groups based on the value of tags, attributes, and up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
    * **1 facet**: 1000 top values
    * **2 facets**: 30 top values per facet (at most 900 groups)
    * **3 facets**: 10 top values per facet (at most 1000 groups)
