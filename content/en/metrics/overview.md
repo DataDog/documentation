@@ -51,6 +51,20 @@ Also known as authentication-based integrations, these integrations are set up i
 You can send metrics directly to the [Metrics API][13].
 {{% /collapse-content %}} 
 
+In total, Datadog has more than {{< translate key="integration_count" >}} integrations. See [Integration Management][5] for more information about managing your integrations.
+
+### Configurable Processing
+
+The **Configurable Processing** column lists the various advanced configuration options that you can use to increase the value of your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
+
+{{% collapse-content title="Optimize your custom metrics costs with Metrics without Limits™" level="h4" %}}
+[Metrics without Limits™][19] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization. Your use of Metrics without Limits™ is reflected in the top section of the Overview page as **Selected Metrics**. For more information about managing your custom metrics costs, see [Best Practices for Custom Metrics Governance][22].
+{{% /collapse-content %}} 
+
+{{% collapse-content title="Enable percentiles on distribution metrics" level="h4" %}}
+[Distribution metrics][20] with percentiles enabled provide you with globally accurate percentiles calculated server-side from all hosts, so you can measure statistical distributions across your entire distributed infrastructure.
+{{% /collapse-content %}} 
+
 {{% collapse-content title="Metrics from other Datadog products" level="h4" %}}
 Some products incorporate standard metrics to surface insights out of the box (for example, APM). 
 
@@ -73,21 +87,6 @@ Some products incorporate standard metrics to surface insights out of the box (f
 ##### Events
 
 [Generate custom event-based metrics][18] for visibility into monitor alerts or any other event-based data ingested by Datadog.
-
-{{% /collapse-content %}} 
-
-In total, Datadog has more than {{< translate key="integration_count" >}} integrations. See [Integration Management][5] for more information about managing your integrations.
-
-### Configurable Processing
-
-The **Configurable Processing** column lists the various advanced configuration options that you can use to increase the value of your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
-
-{{% collapse-content title="Optimize your custom metrics costs with Metrics without Limits™" level="h4" %}}
-[Metrics without Limits™][19] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization. Your use of Metrics without Limits™ is reflected in the top section of the Overview page as **Selected Metrics**. For more information about managing your custom metrics costs, see [Best Practices for Custom Metrics Governance][22].
-{{% /collapse-content %}} 
-
-{{% collapse-content title="Enable percentiles on distribution metrics" level="h4" %}}
-[Distribution metrics][20] with percentiles enabled provide you with globally accurate percentiles calculated server-side from all hosts, so you can measure statistical distributions across your entire distributed infrastructure.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Ingest historical metrics" level="h4" %}}
@@ -147,3 +146,5 @@ Use the search bar in this section to view the latest data and configuration opt
 [22]: /metrics/guide/custom_metrics_governance
 [23]: https://app.datadoghq.com/metric/explorer
 [24]: https://app.datadoghq.com/metric/summary
+[25]: /metrics/guide/custom_metrics_governance/
+[26]: /metrics/volume/
