@@ -266,7 +266,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.3.0"
+  version = "1.5.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -276,8 +276,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 65
+  datadog_node_layer_version = 115
 
   # aws_lambda_function arguments
 }
@@ -302,8 +302,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 65
+  datadog_node_layer_version = 115
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -377,8 +377,10 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If using the Datadog Lambda Layer (recommended), do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
+
 ## Minimize Cold Start Duration (Beta)
-Starting with version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next`. 
+Starting with version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, add an [issue on GitHub][8] and tag your issue with `version/next`.
 
 ## What's next?
 

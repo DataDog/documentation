@@ -216,9 +216,9 @@ Docker コンテナを使用しえいる場合、Docker を使用する、Micros
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">NodeJS クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
+<div class="alert alert-info">Node.js クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
 
 #### コンテナ
 

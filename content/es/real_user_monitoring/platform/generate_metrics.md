@@ -41,7 +41,7 @@ Para crear una métrica personalizada a partir de una consulta de búsqueda en e
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generar una métrica personalizada basada en RUM" width="80%" >}}
 
-1. Pon un nombre a tu [<txprotected>métrica personalizada</txprotected>][3] que no empiece por `datadog.estimated_usage`, como `rum.sessions.count_by_geography`. Para obtener más información, consulta la [convención de nomenclatura][6].
+1. Pon un nombre a tu [métrica personalizada][3] que no empiece por `datadog.estimated_usage`, como `rum.sessions.count_by_geography`. Para obtener más información, consulta la [convención de nomenclatura][6].
 2. Selecciona un tipo de evento para el que quieras crear una métrica personalizada, como por ejemplo `Sessions`. Tus opciones incluyen **Sesiones**, **Vistas**, **Acciones**, **Errores**, **Recursos** y **Tareas prolongadas**. Para obtener más información, consulta [Buscar eventos RUM][7].
 3. Crea una consulta de búsqueda que filtre tus eventos RUM utilizando la [sintaxis de búsqueda][8] de Explorador RUM, como `@session.type:user`.
 4. Elige un campo para realizar su seguimiento en el menú desplegable situado junto a **Recuento**.

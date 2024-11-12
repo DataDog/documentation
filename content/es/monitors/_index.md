@@ -20,112 +20,68 @@ further_reading:
   tag: Notas de la versión
   text: ¡Mira cuáles son las últimas versiones de las alertas de Datadog! (Es necesario
     iniciar sesión en la aplicación).
+- link: https://dtdg.co/fe
+  tag: Establecer las bases
+  text: Participa en una sesión interactiva sobre la creación de monitores eficaces
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: Blog
   text: 'Introducción a la monitorización: alertar sobre lo importante'
 - link: /api/v1/monitors/
   tag: Documentación
   text: API de monitores de Datadog
-- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
-  tag: Blog
-  text: Detectar checks de calidad fallidos con las reglas de protección de implementación
-    de GitHub y Datadog
-- link: https://dtdg.co/fe
-  tag: Establecer las bases
-  text: Participa en una sesión interactiva sobre la creación de monitores eficaces
-- link: https://www.datadoghq.com/blog/aws-recommended-monitors/
-  tag: Blog
-  text: Activa alertas preconfiguradas con monitores recomendados para AWS
 title: Monitores
 ---
 
 ## Información general
 
-Para hacer una monitorización de toda tu infraestructura desde un mismo sitio, es crucial que sepas cuándo se producen cambios críticos. Datadog te da la posibilidad de crear monitores que realizan checks de métricas, disponibilidad para la integración, endpoints de la red, entre otros aspectos.
+Los monitores de Datadog proporcionan una visibilidad vital de tu infraestructura, lo que permite una detección proactiva y una respuesta en tiempo real a los problemas de rendimiento y las interrupciones. Al configurar monitores para realizar un seguimiento de métricas y umbrales clave, las organizaciones pueden recibir alertas inmediatas y abordar los problemas antes de que afecten a los clientes o provoquen una caída del sistema.
 
-Configurar monitores, configurar notificaciones y automatizaciones, y gestionar alertas de un vistazo en la plataforma de alertas.
+Monitoriza cambios críticos comprobando las métricas, la disponibilidad de la integración y los endpoints de red a través de la plataforma de alerta. Con los monitores de Datadog puedes:
+- Simplificar la monitorización y los procesos de respuesta
+- Mejorar la eficacia operativa
+- Optimizar el rendimiento 
 
-**Nota**: Consulta y busca monitores en tu móvil con la aplicación de [Datadog][1], disponible en el [Apple App Store][2] y en [Google Play Store][3].
+## Para empezar
 
-## Crear monitores
+La forma más rápida de empezar con los monitores de Datadog es con [Monitores recomendados][1]. Se trata de una colección de monitores dentro de Datadog que están preconfigurados por Datadog y los socios de integración.
 
-Para crear un monitor en Datadog:
+También puedes crear tus propios monitores desde cero en los entornos de laboratorio en el Centro de aprendizaje, o en tu aplicación siguiendo la guía Empezando con monitores.
 
-1. Accede a [**Monitors** > **New monitor**][4] (Monitores > Nuevo monitor).
-1. Selecciona un tipo de monitor correspondiente al tipo de telemetría sobre el que deseas alertar. Consulta [Tipos de monitores][5] para ver la lista completa.
-1. [Configurar monitores][6]: alertar sobre métricas, eventos, logs, disponibilidad de la integración, endpoints de red y más.
-
-{{< img src="/monitors/create.png" alt="Crear un monitor" style="width:90%;">}}
-
-Para crear un monitor mediante programación, consulta la [API de Datadog][7] o [bibliotecas de la comunidad][8].
-
-## Configurar notificaciones y automatizaciones
-
-{{< img src="/monitors/notify.png" alt="Enviar una notificación cuando un monitor tiene una alerta" style="width:90%;">}}
-
-Configura las [notificaciones de monitor][11] al crear monitores para mantener a tu equipo informado de los problemas. Dirige las notificaciones a las personas adecuadas, incluye [automatizaciones de flujos de trabajo][17], [casos][18] e [identificadores de equipo de Datadog][19], aprovecha las variables de plantilla para incluir detalles y adjunta snapshots cuando envíes las alertas por correo electrónico o Slack. Crea [tiempos de inactividad][12] para silenciar las alertas durante el mantenimiento de la aplicación.
-
-## Gestionar monitores
-
-{{< img src="/monitors/manage.png" alt="Gestiona todas las alertas de monitores" style="width:90%;">}}
-
-Puedes [gestionar monitores][13] al editar, clonar, borrar, silenciar y resolver monitores, todo en el mismo lugar. Puedes enfocarte en las alertas de alta prioridad utilizando la búsqueda avanzada por facetas. Explora los detalles y alertas de monitor a lo largo del tiempo en la [página Lista de monitores][9].
-
-## Exportación e importación de monitores
-
-Para exportar un monitor:
-
-1. En la página [**Manage Monitors**][9] (Gestionar monitores), haz clic en el monitor que deseas exportar.
-1. Deberías ver la página Monitor Status (Estatus del monitor).
-1. Haz clic en el engranaje de configuración (arriba a la derecha) y selecciona **Export** (Exportar) en el menú.
-
-Para importar un monitor:
-
-1. Ve a [**Monitors** > **New Monitor**][4] (Monitores > Nuevo monitor).
-1. Haz clic en [**Import from JSON**][10] (Importar desde JSON) en la parte superior de la página.
-1. Añade tu definición de monitor JSON y haz clic en **Save** (Guardar).
-
-## Controla las etiquetas de los monitores mediante las políticas de etiquetas
-
-Las [políticas de etiqueta del monitor][14] imponen la validación de datos en las etiquetas (tags) y los valores de etiqueta de tus monitores de Datadog. Añade una de las siguientes reglas para evitar que se creen monitores con etiquetas inesperadas.
-- Requerir etiquetas con valores obligatorios
-- Requerir únicamente etiquetas
-- Etiquetas opcionales con valores obligatorios
-
-## Consultar y buscar monitores en dispositivos móviles
-
-[Monitores móviles en iOS y Android][15]: puedes ver, silenciar y anular el silencio de los monitores en cualquier dispositivo iOS o Android con la [aplicación móvil de Datadog][1], disponible en [Apple App Store][2] y [Google Play Store][3]. Escribe consultas en la barra de búsqueda para filtrar monitores en tiempo real. Utiliza [Vistas guardadas del monitor][16] para acceder a una colección de monitores con unos pocos toques en el móvil.
-
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors en la aplicación para móviles">}}
-
-## Otras secciones
-
-{{< whatsnext desc=" ">}}
-    {{< nextlink href="/service_management/service_level_objectives" >}}<u>Objetivos de nivel de servicio (SLOs)</u>: crea, edita o visualiza tus Objetivos de nivel de servicio (SLOs) mediante métricas o monitores de Datadog.{{< /nextlink >}}
-    {{< nextlink href="/monitors/incident_management" >}}<u>Gestión de incidencias</u>: declara y gestiona incidencias.{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide" >}}<u>Guías</u>: artículos útiles adicionales sobre monitores y alertas.{{< /nextlink >}}
+{{< whatsnext desc="Usa los siguientes recursos para crear un monitor:" >}}
+    {{< nextlink href="/getting_started/monitors/" >}}Empezando con monitores: guía sobre cómo crear un monitor basado en métricas{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/" >}}Crear un monitor desde tipos de monitora monitor{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Centro de aprendizaje: crear un monitor basado en métricas en un entorno de laboratorio de prueba{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Leer más
+## Analizar datos agregados
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+Los datos deben ser bien comprendidos, detallados, etiquetados por contexto y duraderos. Utiliza distintos tipos de datos para alertas y diagnósticos, en función del nivel de urgencia. Instrumenta todas las aplicaciones y recopila tantos datos relevantes como sea posible para realizar mediciones exhaustivas y observar los sistemas complejos.
 
-[1]: /es/mobile
-[2]: https://apps.apple.com/app/datadog/id1391380318
-[3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: https://app.datadoghq.com/monitors/create
-[5]: /es/monitors/types/
-[6]: /es/monitors/configuration
-[7]: /es/api/latest/monitors/
-[8]: /es/developers/community/libraries/#managing-monitors
-[9]: https://app.datadoghq.com/monitors/manage
-[10]: https://app.datadoghq.com/monitors/create/import
-[11]: /es/monitors/notify
-[12]: /es/monitors/downtimes
-[13]: /es/monitors/manage
-[14]: /es/monitors/settings/
-[15]: /es/service_management/mobile/?tab=ios#monitors
-[16]: /es/monitors/manage/search/#saved-view
-[17]: /es/monitors/notify/#workflows
-[18]: /es/monitors/notify/#notifications
-[19]: /es/monitors/notify/#teams
+Mide el estado de tus aplicaciones y el estado de tu infraestructura con Datadog. Utiliza datos de toda la plataforma de Datadog para crear alertas sobre posibles problemas.
+
+## Alertas sobre lo que importa
+
+Configura [notificaciones de monitor][2] para mantener a tu equipo informado de los problemas y proporcionar orientación para solucionar problemas. Dirige las notificaciones a las personas adecuadas, aprovecha variables de plantilla para incluir detalles y adjunta snapshots cuando envíes las alertas por correo electrónico o Slack. 
+
+Reduce la fatiga por alertas para que los equipos puedan centrarse en resolver las alertas cuando es importante. Crea [tiempos de inactividad][3] para silenciar las alertas durante el mantenimiento de las aplicaciones.
+
+## Próximos pasos
+
+Los monitores y las alertas son herramientas esenciales para garantizar la fiabilidad, el rendimiento y la disponibilidad de los sistemas y aplicaciones de TI. Ayudan a mantener la eficiencia operativa, se mejora la experiencia del usuario y se mitigan los riesgos potenciales al permitir una rápida detección y respuesta a los problemas antes de que se agraven. Más información sobre las funciones del monitor: 
+1. [Programa tiempos de inactividad para silenciar monitores.][7]
+1. [Organiza y gestiona monitores.][8]
+1. [Resuelve los errores de configuración de monitores en la página de Calidad del monitor][9].
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/monitors/recommended
+[2]: /es/monitors/notify
+[3]: /es/monitors/downtimes
+[4]: /es/monitors/types/
+[5]: /es/monitors/configuration/?tab=thresholdalert
+[6]: /es/monitors/notify/
+[7]: /es/monitors/downtimes/?tab=bymonitorname
+[8]: /es/monitors/manage
+[9]: /es/monitors/quality/

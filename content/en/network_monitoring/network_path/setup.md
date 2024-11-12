@@ -15,8 +15,7 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
-
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div> 
 
 ## Overview
 
@@ -35,6 +34,8 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
+<div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div> 
+
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
    ```
@@ -49,7 +50,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
       connections_monitoring:
         enabled: true
       collector:
-        workers: 10 # default 4
+        # workers: <NUMER OF WORKERS> # default 4
     ```
  
     For full configuration details, reference the [example config][3], or use the following:
@@ -66,7 +67,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
         ## Number of workers that can collect paths in parallel
         ## Recommendation: leave at default
         #
-        workers: 10
+        # workers: <NUMER OF WORKERS> # default 4
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.

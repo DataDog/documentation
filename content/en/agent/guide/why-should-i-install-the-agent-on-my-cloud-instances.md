@@ -20,7 +20,7 @@ If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, in
 
 * **Exposed metrics** - Datadog has over 50 metrics enabled by default. More metrics can be added with Datadog's application-specific [integrations][2].
 
-* **Integrations** - Over [750 integrations][2] extend the functionality of the Datadog Agent beyond the native metrics.
+* **Integrations** - Over [{{< translate key="integration_count" >}} integrations][2] extend the functionality of the Datadog Agent beyond the native metrics.
 
 * **Tagging consistency across services**: Tags applied at the Agent level are added to all metrics, logs, and traces reported by the Agent. 
 

@@ -23,19 +23,19 @@ categories:
 - nube
 - aws
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
-integration_title: Amazon EKS on AWS Fargate
-integration_version: 4.2.1
+integration_title: Amazon EKS en AWS Fargate
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
-public_title: Amazon EKS on AWS Fargate
+public_title: Amazon EKS en AWS Fargate
 short_description: Recopila las métricas, las trazas (traces) y los logs de Amazon
   EKS.
 supported_os:
@@ -45,13 +45,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - SO compatible::Linux
-  - SO compatible::macOS
-  - SO compatible::Windows
-  - Categoría::Nube
-  - Categoría::AWS
-  - Categoría::Recopilación de logs
-  - Oferta::Integración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::AWS
+  - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Recopila las métricas, las trazas y los logs de Amazon EKS.
   media: []
@@ -64,10 +64,10 @@ tile:
   - resource_type: Blog
     url: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
   support: README.md#Support
-  title: Amazon EKS on AWS Fargate
+  title: Amazon EKS en AWS Fargate
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -75,19 +75,19 @@ tile:
 <div class="alert alert-warning"> En esta página se describe la integración de EKS Fargate. Para ECS Fargate, consulta la documentación sobre la <a href="http://docs.datadoghq.com/integrations/ecs_fargate">integración de ECS Fargate de Datadog</a>.
 </div>
 
-Amazon EKS on AWS Fargate es un servicio gestionado de Kubernetes que automatiza ciertos aspectos del despliegue y mantenimiento de cualquier entorno estándar de Kubernetes. AWS Fargate gestiona los nodos de Kubernetes y los abstrae del usuario.
+Amazon EKS en AWS Fargate es un servicio gestionado de Kubernetes que automatiza ciertos aspectos del despliegue y mantenimiento de cualquier entorno estándar de Kubernetes. AWS Fargate gestiona los nodos de Kubernetes y los abstrae del usuario.
 
 **Nota**: Network Performance Monitoring (NPM) no es compatible con EKS Fargate.
 
 ## Configuración
 
-Estos pasos cubren la configuración del Datadog Agent v7.17+ en un contenedor dentro de Amazon EKS on AWS Fargate. Consulta la [documentación de la integración de Datadog y Amazon EKS][1] si no utilizas AWS Fargate.
+Estos pasos cubren la configuración del Datadog Agent v7.17+ en un contenedor dentro de Amazon EKS en AWS Fargate. Consulta la [documentación de la integración de Datadog y Amazon EKS][1] si no utilizas AWS Fargate.
 
-Los pods de AWS Fargate no son pods físicos, lo que significa que excluyen las [checks de los sistemas basados en hosts][2], como CPU, memoria, etc. Para recopilar los datos de los pods de AWS Fargate, debes ejecutar el Agent como sidecar de un pod de aplicación con control de acceso basado en roles (RBAC) personalizado. Esto habilita las siguientes características:
+Los pods de AWS Fargate no son pods físicos, lo que significa que excluyen los [checks de los sistemas basados en hosts][2], como CPU, memoria, etc. Para recopilar los datos de los pods de AWS Fargate, debes ejecutar el Agent como sidecar de un pod de aplicación con control de acceso basado en roles (RBAC) personalizado. Esto habilita las siguientes características:
 
 - Recopilación de las métricas de Kubernetes del pod que ejecuta los contenedores de aplicaciones y el Agent
 - [Autodiscovery][3]
-- Configuración de checks personalizadas del Agent para establecer los contenedores en el mismo pod como destino
+- Configuración de checks personalizados del Agent para establecer los contenedores en el mismo pod como destino
 - APM y DogStatsD para los contenedores del mismo pod
 
 ### Nodo de EC2
@@ -185,11 +185,12 @@ Con la configuración manual, debes modificar cada manifiesto de carga de trabaj
 <div class="alert alert-warning">Esta característica requiere el Cluster Agent v7.52.0+, el Datadog Operator v1.7.0+ y la <a href="https://docs.datadoghq.com/integrations/eks_fargate">integración de EKS Fargate</a>.
 </div>
 
-La siguiente configuración permite que el Cluster Agent se comunique con los sidecars del Agent y acceda a características como la [recopilación de eventos][1], la [vista de recursos de Kubernetes][2] y las [checks de clústeres][3].
+La siguiente configuración permite que el Cluster Agent se comunique con los sidecars del Agent y acceda a características como la [recopilación de eventos][1], la [vista de recursos de Kubernetes][2] y los [checks de clústeres][3].
 
 **Requisitos previos**
 
 * Configura el RBAC en el espacio de nombres de aplicación. Consulta la sección [RBAC de AWS EKS Fargate](#aws-eks-fargate-rbac) de esta página.
+* Vincula el RBAC anterior al pod de aplicación al configurar el nombre de cuenta de servicio.
 * Crea un secreto de Kubernetes que contenga tu clave de la API de Datadog y el token del Cluster Agent en los espacios de nombres de instalación y aplicación de Datadog:
 
    ```shell
@@ -235,7 +236,7 @@ La siguiente configuración permite que el Cluster Agent se comunique con los si
 
 **Resultado de ejemplo**
 
-   A continuación se muestra un fragmento de `spec.containers` de un despliegue de Redis en el que el Admission Controller inyecta un sidecar del Agent. El sidecar se configura automáticamente con los valores predeterminados internos e incluye parámetros adicionales para ejecutarse en un entorno de EKS Fargate. El sidecar utiliza el repositorio de imágenes y las etiquetas (tags) configurados en `datadog-agent.yaml`. La comunicación entre el Cluster Agent y los sidecars está habilitada por defecto. 
+   A continuación se muestra un fragmento de `spec.containers` de un despliegue de Redis en el que el Admission Controller inyecta un sidecar del Agent. El sidecar se configura automáticamente con los valores predeterminados internos e incluye parámetros adicionales para ejecutarse en un entorno de EKS Fargate. El sidecar utiliza el repositorio de imágenes y las etiquetas (tags) configurados en `datadog-agent.yaml`. La comunicación entre el Cluster Agent y los sidecars se encuentra habilitada de manera predeterminada. 
 
    {{< highlight yaml "hl_lines=7-29" >}}
      containers:
@@ -360,11 +361,12 @@ Para ampliar la configuración del Agent o de sus recursos de contenedores, util
 <div class="alert alert-warning">Esta característica requiere el Cluster Agent v7.52.0+.
 </div>
 
-La siguiente configuración permite que el Cluster Agent se comunique con los sidecars del Agent y acceda a características como la [recopilación de eventos][1], la [vista de recursos de Kubernetes][2] y las [checks de clústeres][3].
+La siguiente configuración permite que el Cluster Agent se comunique con los sidecars del Agent y acceda a características como la [recopilación de eventos][1], la [vista de recursos de Kubernetes][2] y los [checks de clústeres][3].
 
 **Requisitos previos**
 
 * Configura el RBAC en el espacio de nombres de aplicación. Consulta la sección [RBAC de AWS EKS Fargate](#aws-eks-fargate-rbac) de esta página.
+* Vincula el RBAC anterior al pod de aplicación al configurar el nombre de cuenta de servicio.
 * Crea un secreto de Kubernetes que contenga tu clave de la API de Datadog y el token del Cluster Agent en los espacios de nombres de instalación y aplicación de Datadog:
 
    ```shell
@@ -395,7 +397,7 @@ La siguiente configuración permite que el Cluster Agent se comunique con los si
 
 **Resultado de ejemplo**
 
-A continuación se muestra un fragmento de `spec.containers` de un despliegue de Redis en el que el Admission Controller inyecta un sidecar del Agent. El sidecar se configura automáticamente con los valores predeterminados internos e incluye parámetros adicionales para ejecutarse en un entorno de EKS Fargate. El sidecar utiliza el repositorio de imágenes y las etiquetas configurados en los valores de Helm. La comunicación entre el Cluster Agent y los sidecars está habilitada por defecto. 
+A continuación se muestra un fragmento de `spec.containers` de un despliegue de Redis en el que el Admission Controller inyecta un sidecar del Agent. El sidecar se configura automáticamente con los valores predeterminados internos e incluye parámetros adicionales para ejecutarse en un entorno de EKS Fargate. El sidecar utiliza el repositorio de imágenes y las etiquetas configurados en los valores de Helm. La comunicación entre el Cluster Agent y los sidecars se encuentra habilitada de manera predeterminada. 
 
 {{< highlight yaml "hl_lines=7-29" >}}
   containers:
@@ -580,13 +582,13 @@ spec:
 
 ###### Ejecución del Cluster Agent o el Cluster Checks Runner
 
-Datadog recomienda ejecutar el Cluster Agent para acceder a características como la [recopilación de eventos][2], la [vista de recursos de Kubernetes][3] y las [checks de clústeres][4].
+Datadog recomienda ejecutar el Cluster Agent para acceder a características como la [recopilación de eventos][2], la [vista de recursos de Kubernetes][3] y los [checks de clústeres][4].
 
 Cuando se utiliza EKS Fargate, hay dos escenarios posibles dependiendo de si el clúster de EKS ejecuta o no cargas de trabajo mixtas (de Fargate y que no son de Fargate).
 
 Si el clúster de EKS ejecuta cargas de trabajo de Fargate y que no son de Fargate, y quieres monitorizar la carga de trabajo que no es de Fargate a través de Node Agent DaemonSet, añade el Cluster Agent o el Cluster Checks Runner a este despliegue. Para obtener más información, consulta la [Configuración del Cluster Agent][5].
 
-El token del Cluster Agent debe ser accesible desde las tareas de Fargate que quieres monitorizar. Si utilizas el Helm Chart o el Datadog Operator, dicho token no es accesible por defecto porque se crea un secreto en el espacio de nombres de destino.
+El token del Cluster Agent debe ser accesible desde las tareas de Fargate que quieres monitorizar. Si utilizas el Helm Chart o el Datadog Operator, dicho token no es accesible de manera predeterminada porque se crea un secreto en el espacio de nombres de destino.
 
 Tienes dos opciones para que esto funcione correctamente:
 
@@ -666,21 +668,21 @@ spec:
      name: "<POD_NAME>"
      annotations:
       ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<CHECK_NAME>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.init_configs: '[<INIT_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.instances: '[<INSTANCE_CONFIG>]'
    spec:
      serviceAccountName: datadog-agent
      containers:
      - name: "<APPLICATION_NAME>"
        image: "<APPLICATION_IMAGE>"
-     ## Ejecución del Agent como sidecar
+     ## Running the Agent as a side-car
      - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
          value: "<YOUR_DATADOG_API_KEY>"
-         ## Define DD_SITE como "datadoghq.eu" para enviar los
-         ## datos del Agent al sitio de Datadog de la UE
+         ## Set DD_SITE to "datadoghq.eu" to send your
+         ## Agent data to the Datadog EU site
        - name: DD_SITE
          value: "datadoghq.com"
        - name: DD_EKS_FARGATE
@@ -866,7 +868,7 @@ spec:
 
 Para recopilar eventos del servidor de la API de AWS EKS Fargate, ejecuta un [Datadog Cluster Agent dentro de tu clúster de EKS](#running-the-cluster-agent-or-the-cluster-checks-runner) y [habilita la recopilación de eventos del Cluster Agent][19].
 
-Opcionalmente, despliega los ejecutores de checks de clústeres además de configurar el Datadog Cluster Agent para habilitar las checks de clústeres.
+Opcionalmente, despliega los ejecutores de checks de clústeres además de configurar el Datadog Cluster Agent para habilitar los checks de clústeres.
 
 **Nota**: También puedes recopilar eventos si ejecutas el Datadog Cluster Agent en un pod de Fargate.
 
@@ -890,11 +892,11 @@ spec:
 
 ### Métricas
 
-La check eks_fargate envía una métrica de frecuencia `eks.fargate.pods.running` que se etiqueta según `pod_name` y `virtual_node` para que puedas realizar un seguimiento de cuántos pods se están ejecutando.
+El check eks_fargate envía una métrica de frecuencia `eks.fargate.pods.running` que se etiqueta según `pod_name` y `virtual_node` para que puedas realizar un seguimiento de cuántos pods se están ejecutando.
 
 ### Checks de servicio
 
-eks_fargate no incluye ninguna check de servicio.
+eks_fargate no incluye checks de servicios.
 
 ### Eventos
 
