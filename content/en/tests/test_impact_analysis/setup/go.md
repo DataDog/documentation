@@ -40,7 +40,7 @@ orchestrion go test ./... -cover -covermode=count -coverpkg ./...
 
 2. `-covermode`: must be either `count` or `atomic` (`set` is not supported).
 
-3. `-coverpkg`: the code coverage analysis for each test must be configured to apply in all package dependencies and not only for the package being tested. This way if a dependency changes we will be able to track the test affected by this change. If we are running the test command from the root of the project (where the go.mod file is) you can use the `./...` wildcard. If not, we have to manually list all package dependencies comma separated (`pattern1, pattern2, pattern3, ...`), for that you could use the `go list ./...` command to get all the package names.
+3. `-coverpkg`: the code coverage analysis for each test must be configured to apply in all package dependencies and not only for the package being tested. This way if a dependency changes we will be able to track the test affected by this change. If we are running the test command from the root of the project (where the go.mod file is) you can use the `./...` wildcard. If not, we have to manually list all package dependencies comma separated (`pattern1, pattern2, pattern3, ...`). For that, you could use the `go list ./...` command to get all the package names.
 
 ## Disable skipping for specific tests
 
