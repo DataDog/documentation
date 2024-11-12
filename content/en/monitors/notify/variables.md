@@ -31,9 +31,9 @@ The following conditional variables are available:
 |----------------------------|--------------------------------------------------------------------|
 | `{{#is_alert}}`            | The monitor alerts                                                 |
 | `{{^is_alert}}`            | The monitor does not alert                                         |
-| `{{#is_match}}`            | The context matches the provided substring. If a numeric value is used it will be converted to a string.|
+| `{{#is_match}}`            | The context matches the provided substring. If a numeric value is used, it is converted to a string.|
 | `{{^is_match}}`            | The context does not match the provided substring                  |
-| `{{#is_exact_match}}`      | The context exactly matches the provided string.<br> If a number is used, the numeric value will be considered, regardless of its type. This means that as long as two numbers have the same value, they will be considered equal by the function|
+| `{{#is_exact_match}}`      | The context exactly matches the provided string.<br> If a number is used, the numeric value is considered, regardless of its type. This means that as long as two numbers have the same value, they are considered equal by the function. |
 | `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
 | `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
 | `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
