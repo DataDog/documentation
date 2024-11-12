@@ -19,13 +19,15 @@ The Metrics Overview page provides users of all experience levels with a deeper 
 With the Metrics Overview Page you can learn how to: 
 - Explore the sources of your metrics
 - Generate additional metrics from Datadog products
-- And how to enable advanced platform capabilities such as percentiles, Metrics without Limits™, and historical metric ingestion
+- Enable advanced platform capabilities such as percentiles, Metrics without Limits™, and historical metric ingestion
 
 ## How your metrics flow through Datadog
 
 {{< img src="metrics/overview/how_metrics_flow.png" alt="The how your metrics flow through Datadog section of the metrics overview page" >}}
 
-This section shows all of your metric sources, the additional processing and configuration that is applied to your metrics data, and a volume breakdown of standard and custom metrics. 
+This section shows all of your metric sources, the additional processing and configuration that is applied to your metrics data, and a volume breakdown of standard and custom metrics.
+
+**Note**: the Overview page is not dedicated to managing costs of metrics. See [Best Practices for Custom Metrics Governance][25] for further details on how to optimize costs.
 
 ### Metric Sources
 
@@ -50,7 +52,7 @@ You can send metrics directly to the [Metrics API][13].
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Metrics from other Datadog products" level="h4" %}}
-Some Datadog products, such as Synthetic Testing, provide standard metrics by default. Other products can be configured to generate custom metrics. This section covers the available options and provides links to relevant documentation.
+Some products incorporate standard metrics to surface insights out of the box (for example, APM). 
 
 ##### Logs
 
@@ -94,7 +96,7 @@ The **Configurable Processing** column lists the various advanced configuration 
 
 ### Available Metrics
 
-The **Available Metrics** column breaks down your total metric volume by standard and custom metrics over the past month.
+The **Available Metrics** column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [metrics volume management page][26] for more detailed insights.
 
 ## Your metrics by source
 
@@ -105,7 +107,7 @@ This section contains a tree map that outlines your metric sources and their res
 ## Generate metrics from any source
 
 Clicking on any of the options below brings you to the corresponding product's Generate Metrics page, where you can create custom metrics from that product:
-   - [Logs][14]
+   - [Ingested Logs][14]
    - [Ingested spans][15]
    - [RUM events][16]
    - [Processes][17]
