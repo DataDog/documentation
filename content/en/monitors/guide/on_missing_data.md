@@ -18,11 +18,11 @@ Metric Monitors tracking errors should reflect as "OK" when no errors occur. Wit
 
 ## Monitors managed through the UI
 
-If you manage your monitors from the UI, they will be automatically updated for you. If you'd like to update them sooner, you can do it through the API as explained below.
+If you manage your monitors from the UI, they are automatically updated for you. If you'd like to update them sooner, you can do it through the API as explained below.
 
 ## Monitors managed through the API or Terraform
 
-If you are managing your monitors with API or Terraform, replace `notify_no_data` and `no_data_timeframe` with `on_missing_data`. The `no_data_timeframe` parameter is not required since `on_missing_data` uses the same timeframe as the time window.  
+If you are managing your monitors with API or Terraform, replace `notify_no_data` and `no_data_timeframe` with `on_missing_data`. The `no_data_timeframe` parameter is not required since `on_missing_data` uses the same time frame as the time window.  
 The available values for `on_missing_data` are:
 
 * default  
@@ -30,7 +30,7 @@ The available values for `on_missing_data` are:
 * show_and_notify_no_data  
 * resolve
 
-### API Parameters
+### API parameters
 
 The previous No Data parameter, `notify_no_data`, remains available on existing monitors and are not automatically upgraded to the new `on_missing_data` features.
 
@@ -40,7 +40,7 @@ The previous No Data parameter, `notify_no_data`, remains available on existing 
 | `"on_missing_data": "show_no_data"`     | If data is missing Show NO DATA<br>(Formerly, "Do not notify if data is missing")                           |
 | `"on_missing_data": "resolve"`          | If data is missing Show OK                                                                       |
 | `"on_missing_data": "default"` if using sum or count aggregation | If data is missing Evaluate as 0 (or other default value)                                  |
-| `"on_missing_data": "default"` if using all other aggregation types | If data is missing Show last known status (See the table above to determine which will be enabled) |
+| `"on_missing_data": "default"` if using all other aggregation types | If data is missing Show last known status |
 
 For all the available fields, see the [API Documentation][1].
 
