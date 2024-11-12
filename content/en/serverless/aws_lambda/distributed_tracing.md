@@ -115,7 +115,7 @@ Datadog automatically detects linked spans when segements of your asynchronous r
 
 **Note:** Span Auto-linking may not link traces if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
 
-If you are viewing the request that originated before the change event and the linked trace is ingested, you can the linked span as a `Backward` link. 
+If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Backward` link. 
 
 If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Forward` link. 
 
