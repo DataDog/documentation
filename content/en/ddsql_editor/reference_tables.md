@@ -33,18 +33,18 @@ In addition to querying reference tables, you can also join them with other avai
 - Combine reference data with live data to enhance your reports and dashboards.
 - Integrate static and dynamic data for comprehensive analytics.
 
-Here's an example of joining a reference table with another dataset:
+Here's an example of joining a reference table with another table:
 
 ```sql
-SELECT a.dataset_name, b.dataset.version
+SELECT a.table_name, b.table.version
 FROM reference_tables.test a
-  JOIN other_dataset b ON a.key = b.key
-ORDER BY b.dataset_version DESC;
+  JOIN other_table b ON a.key = b.key
+ORDER BY b.table_version DESC;
 ```
 
 ## Best practice
 
-When using reference tables keep tables updated. Regularly update reference tables to ensure data accuracy.
+Regularly update reference tables to ensure data accuracy.
 
 ## Further reading
 
