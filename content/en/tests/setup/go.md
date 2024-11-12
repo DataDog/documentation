@@ -2,7 +2,7 @@
 title: Go Tests
 code_lang: go
 type: multi-code-lang
-code_lang_weight: 0
+code_lang_weight: 70
 aliases:
   - /continuous_integration/setup_tests/go
   - /continuous_integration/tests/go
