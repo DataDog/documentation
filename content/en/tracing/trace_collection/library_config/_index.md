@@ -90,7 +90,7 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_TRACE_HTTP_SERVER_ERROR_STATUSES`
 : **Default**: `500-599` <br>
 **Supported Input**: A comma-separated string of the form `from-to`, where `from` and `to` are integers. Singular values are also accepted (for example, `400-403,405,410-499`). <br>
-**Not Supported In**: Node.js SDK<br>
+**Not Supported In**: Node.js<br>
 **Description**: Defines the inclusive range of status codes to be considered errors on `http.server` span kinds. Only the values within the specified range are considered errors.
 
 `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`
