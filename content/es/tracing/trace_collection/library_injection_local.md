@@ -271,10 +271,10 @@ Si el host aún no tiene instalado el Datadog Agent o si quieres actualizar tu i
 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LANGUAGES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas:
+Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LIBRARIES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES="java,js" DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Sal y abre un nuevo shell para utilizar la inyección de bibliotecas.
@@ -518,10 +518,10 @@ Si el host aún no tiene instalado el Datadog Agent o si quieres actualizar tu i
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LANGUAGES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas:
+Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LIBRARIES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES="java,js" DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configurar la inyección Docker {#configure-docker-injection-2}
@@ -706,7 +706,7 @@ Utiliza el script de shell `install_script_agent7.sh` para instalar automáticam
 DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Se instalan las bibliotecas de todos los lenguajes compatibles. Para instalar lenguajes específicos, define la variable `DD_APM_INSTRUMENTATION_LANGUAGES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`:
+Se instalan las bibliotecas de todos los lenguajes compatibles. Para instalar lenguajes específicos, define la variable `DD_APM_INSTRUMENTATION_LIBRARIES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`:
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"

@@ -267,10 +267,10 @@ Si l'Agent Datadog n'est pas encore installé sur le host, ou si vous souhaitez 
 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
+Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES="java,js" DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Quittez et ouvrez un nouveau shell pour utiliser la bibliothèque d'injection.
@@ -569,10 +569,10 @@ Si l'Agent Datadog n'est pas encore installé sur le host, ou si vous souhaitez 
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
+Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES="java,js" DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Installer uniquement l'injection de bibliothèque
@@ -809,7 +809,7 @@ Utilisez le script shell `install_script_agent7.sh` pour installer automatiqueme
 DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Cela permet d'installer les bibliothèques de tous les langages pris en charge. Pour installer seulement les bibliothèques de certains langages, définissez la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES`. Les valeurs `java`, `js`, `python`, `ruby` et `dotnet` sont autorisées :
+Cela permet d'installer les bibliothèques de tous les langages pris en charge. Pour installer seulement les bibliothèques de certains langages, définissez la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES`. Les valeurs `java`, `js`, `python`, `ruby` et `dotnet` sont autorisées :
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
