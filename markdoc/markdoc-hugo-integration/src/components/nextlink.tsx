@@ -48,7 +48,8 @@ export function NextlinkTemplate(props: {
   if (!link.startsWith('http')) {
     link = HugoFunctions.absLangUrl({
       hugoConfig: props.hugoConfig,
-      url: link
+      url: link,
+      defaultLang: 'en'
     });
   }
 

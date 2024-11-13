@@ -11,7 +11,7 @@ export function FurtherReadingTemplate(props: {
   // build the list of nextlinks
   let contents = '';
 
-  props.furtherReadingConfig.further_reading.forEach((item) => {
+  props.furtherReadingConfig.forEach((item) => {
     const jsx = NextlinkTemplate({
       attrs: {
         href: item.link,

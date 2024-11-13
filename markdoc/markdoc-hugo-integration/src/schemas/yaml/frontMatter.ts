@@ -94,20 +94,16 @@ export const PagePrefsConfigSchema = z
 export type PagePrefsConfig = z.infer<typeof PagePrefsConfigSchema>;
 
 export const FurtherReadingConfigSchema = z
-  .object({
-    further_reading: z
-      .array(
-        z
-          .object({
-            link: z.string(),
-            text: z.string(),
-            tag: z.string().optional()
-          })
-          .strict()
-      )
-      .min(1)
-  })
-  .strict();
+  .array(
+    z
+      .object({
+        link: z.string(),
+        text: z.string(),
+        tag: z.string().optional()
+      })
+      .strict()
+  )
+  .min(1);
 
 export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
 

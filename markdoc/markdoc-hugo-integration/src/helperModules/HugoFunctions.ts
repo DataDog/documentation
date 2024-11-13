@@ -15,7 +15,11 @@ export class HugoFunctions {
    * The JS equivalent of the Hugo template function `absLangURL`:
    * https://gohugo.io/functions/urls/abslangurl/
    */
-  static absLangUrl(p: { hugoConfig: HugoConfig; url: string }): string {
+  static absLangUrl(p: {
+    hugoConfig: HugoConfig;
+    url: string;
+    defaultLang?: string;
+  }): string {
     let resultBaseUrl = new URL(p.hugoConfig.global.siteConfig.baseURL);
     const lang = p.hugoConfig.page.lang;
 
@@ -35,7 +39,13 @@ export class HugoFunctions {
     console.log('resultPath', resultPath);
     console.log('resultBaseUrl', resultBaseUrl);
     console.log('final result', new URL(resultPath, resultBaseUrl));
-    return new URL(resultBaseUrl.href + resultPath).href;
+    const result = new URL(resultBaseUrl.href + resultPath).href;
+
+    if (p.defaultLang && lang === p.defaultLang) {
+      return result.replace(`/${lang}/`, '/');
+    } else {
+      return result;
+    }
   }
 
   static getSubdirsByType(siteDir: string): HugoSubdirsByType {
