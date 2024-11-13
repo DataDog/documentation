@@ -95,7 +95,7 @@ Some products incorporate standard metrics to surface insights out of the box (f
 
 ### Available Metrics
 
-The **Available Metrics** column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [metrics volume management page][26] for more detailed insights.
+The **Available Metrics** column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Volume Management page][26] for more detailed insights.
 
 ## Your metrics by source
 
