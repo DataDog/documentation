@@ -33,7 +33,7 @@ This metric measures latency between two points in the pipeline. The value can r
   <br/><br/>
   For example:
   <br/>
-  {{< img src="data_streams/pipeline_temp.png" alt="Diagram of a pipeline that flows from 'Service A' to 'Queue A' to 'Service B' to 'Queue B' to 'Service C'." >}}
+  {{< img src="data_streams/dsm_pipeline.png" alt="Diagram of a pipeline that flows from 'Service A' to 'Queue A' to 'Service B' to 'Queue B' to 'Service C'." >}}
   <br/>
   The query `start:serviceA and end:serviceC and pathway_type:full` measures end-to-end latency for this pipeline.
   <br/>
@@ -44,7 +44,7 @@ This metric measures latency between two points in the pipeline. The value can r
   <br/><br/>
   For example:
   <br/>
-  {{< img src="data_streams/pipeline_temp.png" alt="Diagram of a pipeline that flows from 'Service A' to 'Queue A' to 'Service B' to 'Queue B' to 'Service C'." >}}
+  {{< img src="data_streams/dsm_pipeline.png" alt="Diagram of a pipeline that flows from 'Service A' to 'Queue A' to 'Service B' to 'Queue B' to 'Service C'." >}}
   <br/>
   You can use `start:serviceA and end:serviceB and pathway_type:full` to measure the first part of this pipeline.
   <br/>
@@ -78,7 +78,7 @@ This metric measures latency between two points in the pipeline. The value can r
   <br/><br/>
   Consider the following pipeline:
   <br/>
-  {{< img src="data_streams/visited-queues-disambiguation-temp.png" alt="Diagram of a pipeline that flows from 'Service A', splits into two ('Queue A' and 'Queue B'), and merges at 'Service B'." >}}
+  {{< img src="data_streams/visited-queues-disambiguation.png" alt="Diagram of a pipeline that flows from 'Service A', splits into two ('Queue A' and 'Queue B'), and merges at 'Service B'." >}}
   <br/><br/>
   To measure data flow from Service A to Queue A to Service B, you can query `start:serviceA and end:serviceB and visited_queues:queueA`.
   <br/>
