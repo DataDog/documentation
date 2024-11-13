@@ -174,7 +174,7 @@ Start typing in the API test **URL** input to get endpoint suggestions or simila
 
    {{< img src="synthetics/api_tests/api-one-click.png" alt="HTTP API Test showing a GET search for an existing API test" style="width:90%;" >}}
    
-Then, select a suggestion to pre-fill your test configuration (request options and headers, authentication, and variables):
+Then, select a suggestion to prefill your test configuration (request options and headers, authentication, and variables):
 
    {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Select" style="width:90%;" >}}
 
