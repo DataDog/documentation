@@ -30,7 +30,7 @@ categories:
 - contenedores
 - recopilación de logs
 - la red
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_on_public_website: true
@@ -102,7 +102,7 @@ Configura este check del Agent para obtener métricas del servicio de Docker_dae
 
 Para recopilar métricas de Docker sobre todos tus contenedores, ejecuta **un** Datadog Agent en cada host. Hay dos formas de ejecutar el Agent: directamente en cada host o en un [contenedor de docker-dd-agent][2] (recomendado).
 
-Para cualquiera de las opciones, tus <txprotected>hosts</txprotected> necesitan una gestión de memoria de grupo activada para que el check de Docker tenga éxito. Consulta el [repositorio docker-dd-agent][3] para saber cómo activarla.
+Para cualquiera de las opciones, tus hosts necesitan una gestión de memoria de grupo activada para que el check de Docker tenga éxito. Consulta el [repositorio docker-dd-agent][3] para saber cómo activarla.
 
 #### Instalación del host
 

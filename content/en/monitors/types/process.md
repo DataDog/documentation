@@ -11,13 +11,17 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 - link: "https://www.datadoghq.com/blog/monitor-fargate-processes/"
   tag: "Blog"
   text: "Monitor processes running on AWS Fargate with Datadog"
 ---
+
+<div class="alert alert-warning">
+Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
 
 ## Overview
 

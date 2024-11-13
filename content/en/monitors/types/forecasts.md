@@ -11,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -147,5 +147,5 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 [7]: /monitors/types/metric/#data-window
 [8]: /monitors/notify/
 [9]: /api/v1/monitors/#create-a-monitor
-[10]: /monitors/manage/status/#settings
+[10]: /monitors/status/#settings
 [11]: /api/v1/monitors/

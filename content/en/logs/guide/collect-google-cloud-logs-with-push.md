@@ -16,7 +16,14 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-This page describes deprecated features with configuration information relevant to legacy Pub/Sub Push subscriptions, useful for troubleshooting or modifying legacy setups. Use a <strong>Pull</strong> subscription with the Datadog Dataflow template to forward your Google Cloud logs to Datadog instead. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
+
+This page describes deprecated features with configuration information relevant to legacy Pub/Sub Push subscriptions, useful for troubleshooting or modifying legacy setups. Pub/Sub Push subscription is being deprecated for the following reasons:
+- For Google Cloud VPC, new Push subscriptions cannot be configured with external endpoints (see Google Cloud's [Supported products and limitations][12] page for more information)
+- The Push subscription does not provide compression or batching of events
+
+Documentation for the <strong>Push</strong> subscription is only maintained for troubleshooting or modifying legacy setups. 
+
+Use a <strong>Pull</strong> subscription with the Datadog Dataflow template to forward your Google Cloud logs to Datadog instead. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
 </div>
 
 ## Overview
@@ -100,3 +107,4 @@ You can optionally sample logs while querying by using the [sample function][11]
 [9]: https://console.cloud.google.com/logs/viewer
 [10]: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
 [11]: https://cloud.google.com/logging/docs/view/logging-query-language#sample
+[12]: https://cloud.google.com/vpc-service-controls/docs/supported-products#table_pubsub

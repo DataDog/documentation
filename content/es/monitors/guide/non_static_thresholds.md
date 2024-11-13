@@ -52,7 +52,7 @@ El umbral que aparece en la siguiente captura de pantalla se ha configurado en 0
 {{< img src="monitors/guide/non_static_thresholds/seasonal_threshold_config.png" alt="Configuración para añadir la serie temporal _semana_anterior_ a la consulta de la métrica y establecer la fórmula a/b" style="width:100%;" >}}
 {{% /tab %}}
 
-{{% tab "JSON Example" (Ejemplo de JSON) %}}
+{{% tab "Ejemplo de JSON" %}}
 ``` json
 {
     "name": "[Seasonal threshold] Amount of connection",
@@ -105,7 +105,7 @@ El primer monitor registra el número total de ocurrencias, tanto de aciertos co
 
 {{% /tab %}}
 
-{{% tab "JSON Example" (Ejemplo de JSON) %}}
+{{% tab "Ejemplo de JSON" %}}
 ```
 {
     "name": "Number of hits",
@@ -139,7 +139,7 @@ El segundo monitor calcula la tasa de error. Crea una consulta sobre el número 
   {{< img src="monitors/guide/non_static_thresholds/reference_error_rate.png" alt="Configuración de un monitor de métricas que muestra la fórmula para calcular la tasa de error" style="width:100%;" >}}
 {{% /tab %}}
 
-{{% tab "JSON Example" (Ejemplo de JSON) %}}
+{{% tab "Ejemplo de JSON" %}}
 ```
 {
     "name": "Error Rate",

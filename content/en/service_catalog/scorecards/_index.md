@@ -17,7 +17,10 @@ further_reading:
   text: "Formalize best practices with custom Scorecards"
 - link: "/continuous_integration/dora_metrics/"
   tag: "Documentation"
-  text: "Track DORA Metrics with Datadog" 
+  text: "Track DORA Metrics with Datadog"
+- link: "https://www.datadoghq.com/blog/scorecards-dogfooding/"
+  tag: "Blog"
+  text: "How we use Scorecards to define and communicate best practices at scale"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}

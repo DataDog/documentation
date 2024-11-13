@@ -397,7 +397,7 @@ Para obtener instrucciones paso a paso, consulta la [Guía de configuración de 
 
 #### Habilitar el registro de AWS CloudTrail
 
-{{% cloud-siem-AWS-cloudtrail-enable %}}
+{{% cloud-siem-aws-cloudtrail-enable %}}
 
 #### Enviar logs de AWS CloudTrail a Datadog
 

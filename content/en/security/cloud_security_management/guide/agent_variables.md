@@ -40,10 +40,6 @@ The Datadog Agent has several environment variables that can be enabled for Clou
         <td>Enables SBOM collection on container images.</td>
     </tr>
     <tr>
-        <td><code>DD_CONTAINER_IMAGE_ENABLED</code></td>
-        <td>Collects container images.</td>
-    </tr>
-    <tr>
         <td><code>DD_SBOM_HOST_ENABLED</code></td>
         <td>Enables SBOM collection on hosts.</td>
     </tr>

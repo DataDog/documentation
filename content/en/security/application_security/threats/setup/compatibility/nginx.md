@@ -13,14 +13,14 @@ specified tracer version:
 | Application Security capability        | Minimum nginx module version |
 |----------------------------------------|------------------------------|
 | Threat Detection                       | 1.2.0                        |
-| Threat Protection                      | 1.2.0                        |
-| Customize response to blocked requests | 1.2.0                        |
+| Threat Protection                      | 1.3.0                        |
+| Customize response to blocked requests | 1.3.0                        |
 | Software Composition Analysis (SCA)    | not applicable               |
 | Code Security                          | not applicable               |
 | Automatic user activity event tracking | not supported                |
 | API Security                           | not supported                |
 
-Please review nginx version 1.2.0 [limitations][1].
+Please review nginx version 1.3.0 [limitations][1].
 
 ## Nginx support
 

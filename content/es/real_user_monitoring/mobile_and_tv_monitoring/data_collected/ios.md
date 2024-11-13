@@ -99,7 +99,7 @@ Los siguientes atributos están relacionados con la geolocalización de las dire
 
 **Nota:** Si deseas dejar de recopilar atributos de geolocalización, cambia la configuración en tus [detalles de la aplicación][6].
 
-| Nombre completo                           | Tipo   | Descripción                                                                                                                               |
+| Nombre del atributo                     | Tipo   | Descripción                                                                                                                               |
 |------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`                      | cadena | Nombre del país                                                                                                                       |
 | `geo.country_iso_code`             | cadena | Código ISO del país (por ejemplo, `US` para Estados Unidos o `FR` para Francia).                                                  |

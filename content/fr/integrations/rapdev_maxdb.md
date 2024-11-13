@@ -1,10 +1,13 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: rapdev-maxdb
 app_uuid: f30ae17c-d58a-43f4-a8a6-693279394101
 assets:
   dashboards:
     RapDev MaxDB Dashboard: assets/dashboards/rapdev_maxdb_dashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,13 +18,14 @@ assets:
       prefix: rapdev.maxdb.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10131
     source_type_name: MaxDB par RapDev
   monitors:
-    RapDev MaxDB Data Volume Usage: assets/monitors/rapdev_maxdb_data_volume_usage.json
-    RapDev MaxDB Database Connection Check: assets/monitors/rapdev_maxdb_connection_check.json
-    RapDev MaxDB Database State: assets/monitors/rapdev_maxdb_state.json
-    RapDev MaxDB Lock Utilization: assets/monitors/rapdev_maxdb_lock_utilization.json
-    RapDev MaxDB Log Area Usage: assets/monitors/rapdev_maxdb_log_area_usage.json
+    Data volume usage is high: assets/monitors/rapdev_maxdb_data_volume_usage.json
+    Database connection is failing: assets/monitors/rapdev_maxdb_connection_check.json
+    Database is not online: assets/monitors/rapdev_maxdb_state.json
+    Lock utilization is high: assets/monitors/rapdev_maxdb_lock_utilization.json
+    Log area usage is high: assets/monitors/rapdev_maxdb_log_area_usage.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -30,9 +34,10 @@ author:
   vendor_id: rapdev
 categories:
 - caching
-- data store
+- data stores
 - marketplace
 - sap
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,7 +46,6 @@ integration_id: rapdev-maxdb
 integration_title: MaxDB
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -66,13 +70,14 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Marketplace
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Surveiller le volume, le cache, les schémas, les tables et d'autres
     éléments de vos bases de données MaxDB
@@ -92,6 +97,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## Présentation
 
 L'intégration MaxDB permet de surveiller des métriques liées aux données, aux logs, aux volumes, aux caches, aux sessions et aux locks ainsi que d'autres métriques à partir de vos instances MaxDB afin de s'assurer que vos bases de données fonctionnent de façon optimale. L'intégration offre un dashboard dont les informations peuvent être filtrées par base de données ou par host de base de données. Elle propose également des monitors pour surveiller des métriques courantes liées à la santé globale de la base de données.
@@ -103,7 +109,7 @@ L'intégration MaxDB permet de surveiller des métriques liées aux données, au
 4. Utilisation des locks MaxDB
 5. Utilisation des volumes de logs MaxDB
 
-## Assistance
+## Agent
 
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 

@@ -18,7 +18,7 @@ assets:
     source_type_id: 10324
     source_type_name: Bottomline Mainframe
   monitors:
-    Mainframe resource taking long time to respond: assets/monitors/bottomline_mainframe_resource_has_problem.json
+    Resource response time is very slow: assets/monitors/bottomline_mainframe_resource_has_problem.json
 author:
   homepage: https://www.bottomline.com/
   name: Bottomline Technologies
@@ -27,7 +27,7 @@ author:
   vendor_id: bottomline
 categories:
 - mainframes
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
 display_on_public_website: true
