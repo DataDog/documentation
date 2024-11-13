@@ -50,6 +50,8 @@ To report test results to Datadog, you need to configure the Datadog Go library:
 
 ## Installing Orchestrion
 
+Orchestrion is a tool to process Go source code at compilation time and automatically insert instrumentation using `dd-trace-go`.
+
 You only need to install `orchestrion` from [https://github.com/datadog/orchestrion][1] using:
 
 ```bash

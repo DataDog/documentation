@@ -18,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-Test Impact Analysis is only supported on `orchestrion >= 0.9.5`.
+Test Impact Analysis is only supported on `orchestrion >= 0.9.5 (dd-trace-go >= 1.70.0)`.
 
 ## Setup
 
@@ -38,9 +38,11 @@ orchestrion go test ./... -cover -covermode=count -coverpkg ./...
 
 1. `-cover`: The Test Impact Analysis feature uses the built-in Go's code coverage processor, so we need to enable code coverage collection in the `go test` command.
 
-2. `-covermode`: must be either `count` or `atomic` (`set` is not supported).
+2. `-covermode`: must be either `count` or `atomic`. Because `set` is not supported, setting this value will disable test impact analysis.
 
 3. `-coverpkg`: the code coverage analysis for each test must be configured to apply in all package dependencies and not only for the package being tested. This way if a dependency changes we will be able to track the test affected by this change. If we are running the test command from the root of the project (where the go.mod file is) you can use the `./...` wildcard. If not, we have to manually list all package dependencies comma separated (`pattern1, pattern2, pattern3, ...`). For that, you could use the `go list ./...` command to get all the package names.
+
+<div class="alert alert-warning">Having an incorrect -coverpkg value will affect the ability of Test Impact Analysis to correctly track test coverage.</div>
 
 ## Disable skipping for specific tests
 
