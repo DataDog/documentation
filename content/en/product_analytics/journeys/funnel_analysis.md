@@ -31,29 +31,39 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 ## Build a funnel
 
-To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][1] and click **Funnel**.
+To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][1] and click **Funnel**, then follow the steps below.
 
 {{< img src="product_analytics/journeys/funnel_analysis/build-a-funnel-1.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
 
-### Selecting step events
+### 1. Build step events
 
-From the Funnel page, choose at least two step events (view or action) and click on the plus icon to build additional steps.
-
-- To load the **most common views and actions** that users typically see and take next, click the input box for View/Action. This allows you to build funnels quicker knowing the paths your users are taking in sequence. This is also where you can **search** for any view/action.
-- To **filter individual events** or **combine two events** into one (you can mix and match views and actions), click the three dots to the right of an event.
-  {{< img src="product_analytics/journeys/funnel_analysis/pa-three-dots-1.png" alt="Click the three dots next to each step event to filter or combine views/actions" style="width:40%;" >}}
-- To **delete an event**, click **Delete Event**.
-- When you have a starting point in mind, but aren't sure what your users did next, click the input box for a new View/Action.
+1. Choose at least two step events (view/action) to build a funnel.
+2. Optionally, click the three dots to **filter on individual events** or **combine two events** into one.
+   - You can **mix and match** views and actions
+   - Click the input box to **search** for any view/action
+   - When you have a starting point in mind, but aren't sure what your users next, clicking the input box also loads the **most common views/actions** that users are taking in sequence
+   - Click **Delete Event** to delete an event
+   - Click **More Filters** to see or search for additional filters
+3. Click the plus icon to build additional steps
 
 {{< img src="product_analytics/journeys/funnel_analysis/product-analytics-funnel-step-events.mp4" alt="To build step events, you can add or combine views and actions." video=true >}}
 
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
-### Filtering
+### 2. Optionally, define conversion metrics
 
-When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes (such as session duration or view count) to analyze the data further. Click the **Add Filter** button to view or search the full list of available attributes.
+Under **Define conversion metrics** (funnel type), you can choose whether to measure conversion by the following metrics:
 
-To **remove a filter**, click the filter, then the delete icon.
+- **Sessions**: Percentage of sessions on your website that result in a conversion, such as a purchase or form submission. It is calculated by dividing the number of sessions with a conversion by the total number of sessions.
+- **Users**: Percentage of users who take a desired action. It is calculated by dividing the total number of users who converted by the total number of users who visit your site.
+
+### 3. Optionally, filter on default attributes
+
+When constructing your funnel, you can add [default attributes][2] (device type, environment, country, release version, and more), as well as [session-specific][3] attributes (such as session duration or view count) to analyze the data further.
+
+- Click the **Add Filter** button to view or search the full list of available attributes.
+- To **remove a filter**, click the filter, then the delete icon.
+- To **clear all filters**, click **Clear**
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnels-filters.png" alt="Use attributes to filter information when constructing your funnel" style="width:60%;" >}}
 
@@ -71,25 +81,46 @@ The **User Behavior** section allows you to compare the average frustration coun
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
 
-## View conversions over time with Timeseries
+## Change funnel visualization
 
-To view the conversion rate over time based on the step events you've defined, click the **Timeseries** tab in the visualizer. You can toggle between the Steps and Timeseries view.
+### Steps
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnels-timeseries-conversions.png" alt="Use the Timeseries view to visualize conversion rate over time" style="width:90%;" >}}
+This is the default visualization, which uses a bar graph to show the number and percentage of users or sessions that move to the next step in the funnel.
+
+- As you add steps, the funnel refreshes with more bars.
+- Click any bar to analyze the particular step further.
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-bars.png" alt="The Steps view is a bar graph that visualizes your funnel." style="width:60%;" >}}
+
+### Timeseries
+
+View your funnel as a Timeseries to analyze conversion over time based on your funnel and an understanding of whether your end user experience is improving.
+
+To view the conversion rate over time based on the funnel you've defined, click the **Timeseries** tab in the visualizer.
+
+From the Timeseries view, you can:
+- Decide the size of the rollup period (by day, week) by adjusting the time frame
+- Toggle between the Steps and Timeseries view
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-timeseries-conversions.png" alt="Use the Timeseries view to visualize conversion rate over time" style="width:60%;" >}}
+
+### Query value
+
+View the raw number of sessions or users based on your funnel query.
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-query-value.png" alt="The Query Value view shows the raw number of sessions or users based on your query." style="width:60%;" >}}
+
+### Top list
+
+Visualize the top values based on your funnel query.
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-top-list.png" alt="The Top List view visualizes the top values based on your query." style="width:60%;" >}}
 
 ## Share a funnel
 
-Funnels can be shared with your teams on [dashboards][7] to analyze conversion alongside other telemetry metrics, or in a [Notebook][8] to be used for reporting.
+To share a funnel visualization, click the **Export** button in the upper-right of the widget.
 
-You can share the entire visualization or individual widgets.
-
-- Share the entire visualization to Notebooks and dashboards:
-
-  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-entire-visualization.jpg" alt="Share the entire visualization by clicking Export" style="width:90%;" >}}
-
-- Share individual widgets:
-
-  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" alt="Share a widget by clicking the export icon in the upper-right of the widget" video="true" width=90% >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnels-export-1.png" alt="Share the entire visualization by clicking Export" style="width:90%;" >}}
 
 ## Further reading
 
