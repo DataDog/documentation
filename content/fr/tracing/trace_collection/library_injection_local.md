@@ -812,7 +812,7 @@ DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -
 Cela permet d'installer les bibliothèques de tous les langages pris en charge. Pour installer seulement les bibliothèques de certains langages, définissez la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES`. Les valeurs `java`, `js`, `python`, `ruby` et `dotnet` sont autorisées :
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configurer l'injection Docker

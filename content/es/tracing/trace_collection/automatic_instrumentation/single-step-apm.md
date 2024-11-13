@@ -241,7 +241,7 @@ Por defecto, la habilitación de APM en tu servidor instala la compatibilidad pa
 Por ejemplo, para instalar sólo la versión 1.25.0 de la biblioteca de rastreo Java y la última versión de la biblioteca de rastreo Python, añade lo siguiente al comando de instalación:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Puedes proporcionar opcionalmente un número de versión para la biblioteca de rastreo colocando dos puntos después del nombre del lenguaje y especificando la versión de la biblioteca de rastreo. Si no especificas una versión, se utilizará por defecto la versión más reciente. Los nombres de lenguajes están separados por comas.

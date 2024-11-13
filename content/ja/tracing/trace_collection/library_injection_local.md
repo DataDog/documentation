@@ -427,13 +427,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 Use the `install_script_agent7.sh` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LIBRARIES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1,js:5" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 
