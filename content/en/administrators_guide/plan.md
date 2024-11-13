@@ -42,11 +42,9 @@ Complete the scoping exercise to understand the types of technologies you're wor
 
 ### Resource tagging 
 
-Datadog is a tool for correlating machine data with the running applications and its physical descriptors. It can cross-reference an individual piece of data against others, regardless of type. For example, compare query data on database hosts with web server host worker thread pool sizes, displaying logs from both hosts in-line.
+Datadog is a tool for correlating machine data with the running applications and its physical descriptors. It can cross-reference an individual piece of data against others, regardless of type. Hostname, cloud regions, operating system version, and IP are just some of the automatically applied resource attributes. Additionally, Datadog allows you to generate custom tags such as `cost-code`, `AppName`, `environment`, and `version`.
 
-Hostname, cloud regions, operating system version, and IP are just some of the automatically applied resource attributes. Additionally, Datadog allows you to generate custom tags such as cost-code, AppName, environment, and version.
-
-Datadog's strength lies in its capability to maintain and manage a unified vocabulary and includes built-in data features. [Unified Service Tagging][1] uses reserved tags that enable telemetry correlation across all features of the Datadog Platform.
+Datadog's strength lies in its capability to maintain and manage a unified vocabulary and includes built-in data features. [Unified Service Tagging][1] uses reserved tags that enable telemetry correlation across all features of the Datadog platform.
 
 Tags are `key:value` pairs or simple values. They add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, take advantage of the tagging capabilities that your platforms offer, as Datadog automatically imports these tags through its integrations. The following table is a representation of how `key:value` pairs work and whether the tags are added automatically or manually.
 
