@@ -45,7 +45,7 @@ Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/sensitive_data_scanner/regular_expression_syntax/
+[1]: https://docs.datadoghq.com/sensitive_data_scanner/custom_rules/
 [2]: https://docs.datadoghq.com/sensitive_data_scanner/?tab=inthecloud#add-scanning-rules
 [3]: https://docs.datadoghq.com/sensitive_data_scanner/scanning_rules/library_rules/
 [4]: https://docs.datadoghq.com/help/
