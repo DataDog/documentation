@@ -67,6 +67,15 @@ export class PageBuilder {
 
     articleHtml = prettier.format(articleHtml, { parser: 'html' });
 
+    if (p.parsedFile.frontmatter.further_reading) {
+      const jsx = FurtherReadingTemplate({
+        furtherReadingConfig: p.parsedFile.frontmatter.further_reading,
+        hugoConfig: p.hugoConfig
+      });
+
+      articleHtml += renderToString(jsx);
+    }
+
     const pageJsx = PageTemplate({
       valsByPrefId: p.prefsManifest.defaultValsByPrefId,
       prefsManifest: p.prefsManifest,
