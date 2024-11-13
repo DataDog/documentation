@@ -1,5 +1,5 @@
 ---
-title: Regular Expression Syntax
+title: Custom Rules
 disable_toc: false
 further_reading:
     - link: "/sensitive_data_scanner/"

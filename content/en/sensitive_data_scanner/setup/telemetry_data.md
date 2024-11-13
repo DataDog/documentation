@@ -1,5 +1,5 @@
 ---
-title: Telemetry
+title: Telemetry Data
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"
