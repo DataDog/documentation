@@ -14,11 +14,13 @@ further_reading:
 
 ## Overview
 
+Change Tracking highlights relevant system changes to help you identify and resolve incidents. It automatically surfaces changes across your infrastructure, enabling faster detection and remediation of issues.
+
 {{< img src="/tracing/change_tracking/change-tracking-overview.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
 
-Change Tracking streamlines incident response by surfacing relevant changes to aid in detection and remediation steps during an incident.
+## Tracked changes
 
-## Types of changes currently tracked
+Change Tracking follows these types of changes across your infrastructure:
 <!-- To DO: revisit the names of these with the Team ahead of GA -->
 Application Deployments
 : Code Deployments (APM)
@@ -26,56 +28,87 @@ Application Deployments
 
 Feature-Flag Changes
 : LaunchDarkly feature flag events
-: Custom feature flag events sent to Datadog’s Events Management API
+: Custom feature flag events sent to Datadog's Events Management API
 
 Performance and Stability Changes
-: Watchdog Alerts (Error rate, latency, Cloud & API outages, etc.)
+: Watchdog Alerts (Error rate, latency, Cloud & API outages)
 : CrashLoopBackOff Kubernetes pod crashes
 
 Data Layer Modifications
-: Database Updates (PostgreSQL Database Schema and Settings Changes)
-: Data Stream Updates (Kafka and gRPC Schema Changes)
+: Database Updates (PostgreSQL database schema and settings changes)
+: Data Stream Updates (Kafka and gRPC schema changes)
 
-## Prerequisites for Change Tracking
-- Monitors: Requires that “service” tag is set on the monitor alert.
-- Dashboards: Changes overlay on time-series graphs filtered with service tag.
-- Services: No prerequisites.
+## Prerequisites
 
-## How to use Change Tracking
-Change Tracking is available on the following pages within Datadog:
+To use Change Tracking, ensure the following:
 
-### Monitor Status Page
-The Change Tracking experience in the Monitor Status page enables quick resolution without leaving the Monitor page. In your Monitor Status page, look for the "Recent Changes" section at the top of the page. 
+- **Monitors**: Set the `service` tag on the monitor alert.
+- **Dashboards**: Filter timeseries graphs by the `service` tag to see change overlays.
+- **Services**: No prerequisites.
+
+## Using Change Tracking
+
+Change Tracking is available on several pages in Datadog:
+
+### Monitor status page
+
+View and analyze changes from the [monitor status page][1].
+
 {{< img src="/tracing/change_tracking/change-tracking-monitor-status-page.png" alt="The details of a change displayed on the Monitor Status Page" style="width:100%;" >}}
 
-To analyze changes, use the top panel above the monitor status dashboard graph to correlate the timeline of recent change events correlated to the monitor alert you are investigating.
+To analyze changes from the monitor status page:
 
-To enable Change Tracking on the Monitor Status page, ensure a service tag is added to your monitor.
+1. Go to the monitor status page for the monitor you are analyzing.
+1. Locate the **Recent Changes** section.
+1. Use the **Recent Changes** timeline together with the **Status & History** graphs to correlate change events with the alert.
+1. Click the change indictor in the **Recent Changes** timeline to view more details about the change.
+1. From the side panel, you can investigate more details and take remediation actions.
+1. Use the buttons in **Take actions** to:
+   - View the deployment in your CI/CD system.
+   - View the latest commits in your repository.
+   - Compare changes between deployments to identify potential issues.
+
+<div class="alert alert-info">To enable Change Tracking on the monitor status page, ensure a <code>service</code> tag is added to your monitor.
+</div>
+
 <!--TO DO: Add Error Rate Graph Screenshot from Example Monitor Status Page Here -->
 
-If you believe a recent change is a probable root cause for the monitor alert, click on the change to open up the side panel where you can learn more and take remediation action from within Datadog.
-
-For example, when you tap the “Feature Flag” update, you would open this side panel to see a timeline of recent changes, the rollout status, and the change in a side-by-side comparison. 
-
-See pre-built actions to see more details on the change in your deployment tool, or rollback the change.
-
 ### Services
-For any service page, see the Recent Changes component within the Service Summary section. Changes in timelines on the Service Summary and Monitor Status pages are filtered to the direct service by default, but changes isolated to the scope of the individual service do not always tell the whole story. To identify correlations between changes in dependencies impacting the service, change the dropdown to include dependencies.
+
+View and analyze changes from the [service page][2].
 
 {{< img src="/tracing/change_tracking/change-tracking-service-page.png" alt="Recent Changes component within the Service Summary section with dependency changes enabled" style="width:100%;" >}}
 
+To analyze changes from the service page:
+
+1. Navigate to the service page you want to investigate.
+1. Locate the recent changes timeline in the **Service Summary** section.
+1. Use the dropdown to view either:
+   - Changes specific to this service (**only**)
+   - Changes in dependent services that might impact this service (**and its dependencies**)
+1. Click the change indicator to view detailed information and take remediation actions.
 
 ### Dashboards
-On any Dashboard, you can enable overlays using the "Show Overlays" button at the top of the page. 
-{{< img src="/tracing/change_tracking/change-tracking-show-overlays-inactive.png" alt="Inactive show overlays button" style="width:100%;" >}}
 
+View and analyze changes from any [dashboard][3].
 
-This enables change events as overlays on the graphs. Hovering over the change events provides additional context around the change made in that timeline.
-{{< img src="/tracing/change_tracking/change-tracking-dashboard-show-overlays-active.png" alt="Change tracking displayed on the Dashboard" style="width:100%;" >}}
+{{< img src="/tracing/change_tracking/change-tracking-dashboard-show-overlays-active.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
 
-Tapping on the change overlay would pull up the backend deploy side-panel as above.
-{{< img src="/tracing/change_tracking/change-tracking-deployment-details-side-panel.png" alt="Change tracking side panel open" style="width:100%;" >}}
+To analyze changes from dashboards:
+
+1. Navigate to your dashboard.
+2. Click **Show Overlays** at the top of the page to enable change indicators.
+3. Hover over any change indicator to view a summary of the change.
+4. Click the change indicator to view detailed information and take remediation actions.
+
+<div class="alert alert-info">To enable Change Tracking on dashboards, ensure your timeseries graphs are filtered by the <code>service</code> tag.</div>
+
+{{< img src="/tracing/change_tracking/change-tracking-deployment-details-side-panel.png" alt="Change Tracking side panel open" style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/status/
+[2]: /tracing/services/service_page/
+[3]: /dashboards/
