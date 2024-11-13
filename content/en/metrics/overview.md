@@ -65,7 +65,7 @@ The **Configurable Processing** column lists the various advanced configuration 
 [Distribution metrics][20] with percentiles enabled provide you with globally accurate percentiles calculated server-side from all hosts, so you can measure statistical distributions across your entire distributed infrastructure.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Metrics from other Datadog products" level="h4" %}}
+{{% collapse-content title="Generate metrics from other Datadog products" level="h4" %}}
 Some products incorporate standard metrics to surface insights out of the box (for example, APM). 
 
 ##### Logs
@@ -106,7 +106,7 @@ This section contains a tree map that outlines your metric sources and their res
 ## Generate metrics from any source
 
 Clicking on any of the options below brings you to the corresponding product's Generate Metrics page, where you can create custom metrics from that product:
-   - [Ingested Logs][14]
+   - [Ingested logs][14]
    - [Ingested spans][15]
    - [RUM events][16]
    - [Processes][17]
