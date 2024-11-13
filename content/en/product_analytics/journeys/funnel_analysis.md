@@ -40,7 +40,8 @@ To build a funnel, navigate to [**Digital Experience > Product Analytics > Journ
 From the Funnel page, choose at least two step events (view or action) and click on the plus icon to build additional steps.
 
 - To load the **most common views and actions** that users typically see and take next, click the input box for View/Action. This allows you to build funnels quicker knowing the paths your users are taking in sequence. This is also where you can **search** for any view/action.
-- To **combine two events** into one (you can mix and match views and actions), click the three dots to the right of an event.
+- To **filter individual events** or **combine two events** into one (you can mix and match views and actions), click the three dots to the right of an event.
+  {{< img src="product_analytics/journeys/funnel_analysis/pa-three-dots-1.png" alt="Click the three dots next to each step event to filter or combine views/actions" style="width:40%;" >}}
 - To **delete an event**, click **Delete Event**.
 - When you have a starting point in mind, but aren't sure what your users did next, click the input box for a new View/Action.
 
