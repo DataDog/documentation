@@ -30,7 +30,7 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 ## Getting started
 
-To start using Product Analytics, you need to enable it for each application you want to monitor user behavior for:
+To start using Product Analytics, enable it for each application where you want to monitor user behavior:
 
 1. Select the application you want to monitor from the [Application Management][9] list.
 2. Under PRODUCT SETTINGS, click **Product Analytics**.
