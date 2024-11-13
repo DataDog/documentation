@@ -25,7 +25,7 @@ docker run --rm datadog/synthetics-private-location-worker --help
 {{% /tab %}}
 {{% tab "Windows" %}}
 ```
-synthetics-private-location.exe --help
+synthetics-pl-location.exe --help
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -42,7 +42,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 {{% /tab %}}
 {{% tab "Windows" %}}
 ```cmd
-synthetics-private-location.exe --config=<PathToYourConfiguration> --logFormat=json
+synthetics-pl-location.exe --config=<PathToYourConfiguration> --logFormat=json
 ```
 {{% /tab %}}
 {{< /tabs >}}
