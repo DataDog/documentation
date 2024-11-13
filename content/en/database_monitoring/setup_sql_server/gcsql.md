@@ -5,6 +5,9 @@ further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
   text: "SQL Server Integration"
+- link: "/database_monitoring/guide/sql_deadlock/"
+  tag: "Documentation"
+  text: "Configuring Deadlock monitoring"
 
 
 ---

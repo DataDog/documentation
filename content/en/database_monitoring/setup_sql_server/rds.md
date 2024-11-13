@@ -8,6 +8,9 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/?tab=sqlserver"
   tag: "Documentation"
   text: "Troubleshoot Common Issues"
+- link: "/database_monitoring/guide/sql_deadlock/"
+  tag: "Documentation"
+  text: "Configuring Deadlock monitoring"
 
 
 ---
