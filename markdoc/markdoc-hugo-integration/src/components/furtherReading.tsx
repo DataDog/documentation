@@ -26,9 +26,9 @@ export function FurtherReadingTemplate(props: {
 
   // wrap the nextlinks in the whatsnext wrapper template
   return (
-    <div>
+    <>
       <h2>Further reading</h2>
       <WhatsnextTemplate contents={contents} hugoConfig={props.hugoConfig} />
-    </div>
+    </>
   );
 }

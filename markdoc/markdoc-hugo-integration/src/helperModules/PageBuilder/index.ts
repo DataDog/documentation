@@ -73,7 +73,7 @@ export class PageBuilder {
         hugoConfig: p.hugoConfig
       });
 
-      articleHtml += renderToString(jsx);
+      articleHtml = articleHtml.replace('</article>', renderToString(jsx) + '</article>');
     }
 
     const pageJsx = PageTemplate({
