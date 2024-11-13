@@ -1,5 +1,6 @@
 ---
 title: site-region
+private: true
 ---
 
 {% site-region region="us" %}

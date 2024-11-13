@@ -1,5 +1,6 @@
 ---
 title: Table
+private: true
 ---
 
 ## Markdown table (CommonMark table)

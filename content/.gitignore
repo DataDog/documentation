@@ -1,19 +1,19 @@
 # GENERATED FILE: DO NOT EDIT
 # Ignore .md files compiled from Markdoc
-/en/markdoc_testing/debug_it/markdoc.md
-/en/markdoc_testing/demo_pages/postgres_integration_setup.md
-/en/markdoc_testing/demo_pages/primary_colors.md
-/en/markdoc_testing/demo_pages/traffic_light_colors.md
-/en/markdoc_testing/elements/alert.md
-/en/markdoc_testing/elements/callout.md
-/en/markdoc_testing/elements/code_block.md
-/en/markdoc_testing/elements/description_list.md
-/en/markdoc_testing/elements/further_reading.md
-/en/markdoc_testing/elements/image.md
-/en/markdoc_testing/elements/region_param.md
-/en/markdoc_testing/elements/site_region.md
-/en/markdoc_testing/elements/table.md
-/en/markdoc_testing/elements/tabs.md
-/en/markdoc_testing/elements/whatsnext.md
+/en/markdoc/demos/colors/primary.md
+/en/markdoc/demos/colors/traffic_light.md
+/en/markdoc/demos/debug_it/markdoc.md
+/en/markdoc/demos/postgres_setup/_index.md
+/en/markdoc/tags_and_elements/alert/_index.md
+/en/markdoc/tags_and_elements/callout/_index.md
+/en/markdoc/tags_and_elements/code_block/_index.md
+/en/markdoc/tags_and_elements/description_list/_index.md
+/en/markdoc/tags_and_elements/further_reading/_index.md
+/en/markdoc/tags_and_elements/image_or_video/_index.md
+/en/markdoc/tags_and_elements/region_param/_index.md
+/en/markdoc/tags_and_elements/site_region/_index.md
+/en/markdoc/tags_and_elements/table/_index.md
+/en/markdoc/tags_and_elements/tabs/_index.md
+/en/markdoc/tags_and_elements/whatsnext/_index.md
 /ja/markdoc_testing/demo_pages/primary_colors.md
 /ja/markdoc_testing/demo_pages/traffic_light_colors.md

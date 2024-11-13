@@ -1,5 +1,6 @@
 ---
 title: region-param
+private: true
 ---
 
 ## Body copy
