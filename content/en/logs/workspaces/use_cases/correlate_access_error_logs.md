@@ -8,12 +8,12 @@ further_reading:
 
 ## Use case
 
-Log Workspaces enable you to integrate and correlate Apache Web Access Logs and Web Error Logs, providing clear insights into how specific errors impact users. Analyse these logs togehter to identify which user actions cause errors and address issues proactively. Follow these steps to monitor and correlate Apache Web access and Error logs using the flexible querying and visualization options available within Workspaces.
+Log Workspaces enable you to integrate and correlate Apache Web Access Logs and Web Error Logs, providing clear insights into how specific errors impact users. Analyze these logs together to identify which user actions cause errors and address issues proactively. Follow these steps to monitor and correlate Apache Web access and Error logs using the flexible querying and visualization options available within Workspaces.
 
 ## Setup
 
 This guide assumes that you are:
-- Submitting logs to Datadog for a similar use case.
+- Already submitting logs to Datadog for a similar use case.
 - Able to [create a workspace][1] and add cells. 
 
 ### 1. Bring in your data source
@@ -35,7 +35,7 @@ You can add any additional filters, facets, or attributes to narrow your search 
 To analyze the data further, use the Analysis feature to query your datasets with SQL. Create a `status_group` by 200s, 300s, 400s, and 500s to group the status codes together. Anything not matching a status code is marked "unknown". This is helpful for correlating the status codes to the user errors as we will see later on. 
 
 1. Add an [Analysis cell][3] to your workspace.
-1. Run a SQL query.
+1. Run this SQL query.
     ```sql
     SELECT timestamp,
       source,
