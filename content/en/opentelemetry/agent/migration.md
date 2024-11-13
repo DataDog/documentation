@@ -10,7 +10,7 @@ further_reading:
   text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
 ---
 
-{{< callout url="https://www.datadoghq.com/preview/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
   The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}} 
 
