@@ -102,5 +102,5 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][11] summar
 [7]: https://docs.datadoghq.com/sensitive_data_scanner/scanning_rules/library_rules/
 [8]: https://docs.datadoghq.com/security/cloud_security_management
 [9]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
-[10]: https://docs.datadoghq.com/sensitive_data_scanner/investigate_sensitive_data_issues/
+[10]: https://docs.datadoghq.com/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 [11]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner

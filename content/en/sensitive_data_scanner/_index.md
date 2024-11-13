@@ -9,7 +9,7 @@ further_reading:
       text: "Reducing data related risks"
     - link: "/sensitive_data_scanner/regular_expression_syntax"
       tag: "Documentation"
-      text: "Regular expression syntax for custom scanning rules"
+      text: "Creating custom rules for Sensitive Data Scanner"
     - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
       tag: "Documentation"
       text: "Best practices for creating custom rules"
@@ -201,7 +201,7 @@ See [Investigate Sensitive Data Issues][3] for details on how to use the [Summar
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
 [2]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[3]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[3]: /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 {{% /tab %}}
 {{% tab "Using the Agent" %}}
