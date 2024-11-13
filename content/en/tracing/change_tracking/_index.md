@@ -75,3 +75,7 @@ This enables change events as overlays on the graphs. Hovering over the change e
 
 Tapping on the change overlay would pull up the backend deploy side-panel as above.
 {{< img src="/tracing/change_tracking/change-tracking-deployment-details-side-panel.png" alt="Change tracking side panel open" style="width:100%;" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
