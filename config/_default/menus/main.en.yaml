@@ -614,6 +614,11 @@ menu:
       identifier: otel_batch_memory
       parent: otel_collector_configuration
       weight: 3023
+    - name: Log Collection
+      url: /opentelemetry/collector_exporter/log_collection/
+      identifier: otel_log_collection
+      parent: otel_collector_configuration
+      weight: 3024
     - name: Integrations
       url: opentelemetry/integrations/
       identifier: otel_integrations
