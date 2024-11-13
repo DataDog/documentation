@@ -49,7 +49,7 @@ Input JSON:
 Generated tags:
 
 ```text
-aws.request.body.Message.foo.bar: baz  
+aws.request.body.Message.foo.\bar: baz  
 aws.request.body.Message.Arr.0: a  
 aws.request.body.Message.Arr.1: b
 ```
@@ -147,7 +147,7 @@ The Node.js tracer applies redaction rules on a per-service basis. For example:
 {{< programming-lang lang="python" >}}
 ### Supported services
 
-By default, the Python tracer supports these services:
+The following services are supported:
 - SNS
 - SQS
 - Kinesis
@@ -199,13 +199,15 @@ The default value (758) is the maximum the Datadog Agent can accept. Increasing 
 {{< programming-lang lang="java" >}}
 ### Supported services
 
-By default, the Java tracer supports these services:
-- API Gateway
-- EventBridge
+The following services are supported:
 - SNS
 - SQS
 - Kinesis
 - S3
+- EventBridge
+- API Gateway
+
+
 
 #### Configure services
 
