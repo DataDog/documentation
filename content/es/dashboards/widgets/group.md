@@ -7,7 +7,7 @@ further_reading:
   tag: Documentación
   text: Creación de dashboards con JSON
 title: Widget de grupo
-widget_type: grupo
+widget_type: group
 ---
 
 ## Información general

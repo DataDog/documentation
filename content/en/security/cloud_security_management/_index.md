@@ -36,9 +36,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
     tag: "Blog"
     text: "Build sufficient security coverage for your cloud environment"
-  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings-2024/"
     tag: "Blog"
-    text: "Key learnings from the State of Cloud Security study"
+    text: "Key learnings from the 2024 State of Cloud Security study"
   - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
     tag: "Blog"
     text: "Detect malware in your containers with Datadog Cloud Security Management"
@@ -52,7 +52,7 @@ further_reading:
     tag: "Blog"
     text: "How we use Datadog for detection as code"
 algolia:
-  tags: ['inbox']
+  tags: ['csm', 'cloud security management', 'inbox']
 cascade:
     algolia:
         subcategory: Cloud Security Management

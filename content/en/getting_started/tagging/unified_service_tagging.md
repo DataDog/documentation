@@ -420,7 +420,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 
 [1]: /real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/setup
+[2]: /real_user_monitoring/browser/setup/
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
@@ -502,9 +502,13 @@ When using OpenTelemetry, map the following [resource attributes][16] to their c
 
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |
-| `deployment.environment` | `env` |
+| `deployment.environment` <sup>1</sup>  | `env` |
+| `deployment.environment.name` <sup>2</sup> | `env` |
 | `service.name` | `service` |
 | `service.version` | `version` |
+
+1: `deployment.environment` is deprecated in favor of `deployment.environment.name` in [OpenTelemetry semantic conventions v1.27.0][17].  
+2: `deployment.environment.name` is supported in Datadog Agent 7.58.0+ and Datadog Exporter v0.110.0+.
 
 <div class="alert alert-warning">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
 
@@ -580,3 +584,4 @@ processors:
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
 [16]: https://opentelemetry.io/docs/languages/js/resources/
+[17]: https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.27.0

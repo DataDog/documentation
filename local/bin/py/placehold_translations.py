@@ -77,7 +77,7 @@ def md_update_links(this_lang_code, content):
     """ Update footer links in markdown to be language relative """
     result = content
     try:
-        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/", "ko/", "resources/"]
+        common_lang_codes = ["en/", "es/", "de/", "fr/", "ja/", "ko/", "resources/"]
         exclude_common_langs = "|".join(list(map(lambda code: f"{code}",common_lang_codes)))
         relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ").*)$", re.MULTILINE | re.IGNORECASE)
         substitute = "\g<1>/" + this_lang_code.lower() + "\g<2>"
@@ -103,7 +103,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
 
     with open(template) as o_file:
         content = o_file.read()
-        boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+        boundary = re.compile(r'^-{3,}\s*$', re.MULTILINE)
         split = boundary.split(content, 2)
         new_yml = {}
         if len(split) == 3:
