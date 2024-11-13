@@ -12,15 +12,16 @@ The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources 
 
 ### Prerequisites
 
+* **[AWS resource collection][10]**: Required for collecting ECS resources
 * **[ECS on EC2 integration][2]**: Required for monitoring clusters using the EC2 launch type.
 * **[ECS on Fargate integration][3]**: Required for monitoring clusters using the Fargate launch type.
 * **Agent version >= 7.58.0**: Recommended for a shorter refresh rate on the ECS Explorer page, though it is optional.
 
 ## Setup
 
-Ensure you have enabled the [ECS on EC2 integration][2] and [ECS on Fargate integration][3].
+Ensure you have enabled the [AWS resource collection][10], [ECS on EC2 integration][2] and [ECS on Fargate integration][3].
 
-**Note**: The collection interval for these two integrations is approximately 24 hours. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
+**Note**: The collection interval for these integrations is approximately 24 hours. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
 
 {{< tabs >}}
 {{% tab "Task Definition" %}}
@@ -167,3 +168,4 @@ Some resources have specific tags. The following tags are available in addition 
 [7]: /tracing
 [8]: /infrastructure/containers/orchestrator_explorer/?tab=manual#query-filter-details
 [9]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
+[10]: /integrations/amazon_web_services/#resource-collection
