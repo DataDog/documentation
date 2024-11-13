@@ -90,6 +90,7 @@ This section provides language-specific compatibility requirements for Single St
 
 | Python Version | Support                         | Notes |
 |----------------|---------------------------------|-------|
+| 3.12           | <i class="icon-check-bold"></i> |       |
 | 3.11           | <i class="icon-check-bold"></i> |       |
 | 3.10           | <i class="icon-check-bold"></i> |       |
 | 3.9            | <i class="icon-check-bold"></i> |       |
