@@ -9,7 +9,7 @@ further_reading:
 
 After you plan your Datadog installation design and best practices, concentrate on the construction of Datadog itself, understanding what needs to be installed, and the best way to achieve that.
 
-As your IT footprint grows, establish standards for software installation and usage. Develop precise, repeatable steps for configuring software while maintaining flexibility. This ensures reliability. This section explains how Datadog can efficiently integrate with these standards.
+As your IT footprint grows, you need to establish standards for software installation and usage. To do this, it's important to develop precise, repeatable steps for reliably configuring software while maintaining the flexibility you need. This section explains how Datadog can efficiently integrate with these standards.
 
 ## Iterating on your environment
 
