@@ -33,7 +33,7 @@ Then, to send your Step Functions logs to Datadog:
 1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
    {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
-2. Ensure you have deployed the [Datadog Lambda Forwarder][11], and that you are using v3.121.0+. You may need to [update your Forwarder][12]. As an alternative, you may also use [Amazon Data Firehose][16].
+2. Ensure you have deployed the [Datadog Lambda Forwarder][11], and that you are using v3.121.0+. You might need to [update your Forwarder][12]. As an alternative, you may also use [Amazon Data Firehose][16].
 
 3. Subscribe CloudWatch logs to the Datadog Lambda Forwarder. 
    {{< tabs >}}

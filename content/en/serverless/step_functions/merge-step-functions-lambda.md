@@ -24,7 +24,7 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
     serverless plugin install --name serverless-plugin-datadog
     ```
 
-2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You may need to [update your Forwarder][5].
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.121.0+. You might need to [update your Forwarder][5].
 
    Take note of your Forwarder's ARN.
 
