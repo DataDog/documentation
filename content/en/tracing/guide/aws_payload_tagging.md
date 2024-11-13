@@ -49,7 +49,7 @@ Input JSON:
 Generated tags:
 
 ```text
-aws.request.body.Message.foo.\bar: baz  
+aws.request.body.Message.foo\.bar: baz  
 aws.request.body.Message.Arr.0: a  
 aws.request.body.Message.Arr.1: b
 ```
