@@ -1,8 +1,5 @@
 ---
 title: Metrics Overview Page
-aliases:
-  - /metrics/faq/metrics-without-limits/
-  - /metrics/guide/metrics-without-limits-getting-started/
 further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"
