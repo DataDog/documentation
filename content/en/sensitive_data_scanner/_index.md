@@ -370,4 +370,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /agent/remote_config
 [10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
-[11]: /sensitive_data_scanner/library_rules/
+[11]: /sensitive_data_scanner/scanning_rules/library_rules/

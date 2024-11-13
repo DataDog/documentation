@@ -99,7 +99,7 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][11] summar
 [4]: https://docs.datadoghq.com/sensitive_data_scanner/?tab=inthecloud
 [5]: https://docs.datadoghq.com/security/cloud_security_management/setup/agentless_scanning
 [6]: https://docs.datadoghq.com/agent/remote_config
-[7]: https://docs.datadoghq.com/sensitive_data_scanner/library_rules/
+[7]: https://docs.datadoghq.com/sensitive_data_scanner/scanning_rules/library_rules/
 [8]: https://docs.datadoghq.com/security/cloud_security_management
 [9]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [10]: https://docs.datadoghq.com/sensitive_data_scanner/investigate_sensitive_data_issues/

@@ -223,5 +223,5 @@ Script names can be used to match any character from the script. The following a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /sensitive_data_scanner/
-[2]: /sensitive_data_scanner/library_rules/
+[2]: /sensitive_data_scanner/scanning_rules/library_rules/
 [3]: https://www.pcre.org/current/doc/html/pcre2syntax.html
