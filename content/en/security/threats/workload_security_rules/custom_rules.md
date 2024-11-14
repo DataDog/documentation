@@ -122,7 +122,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. The file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
+Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder. The file must have `read` and `write` access for the `root` user on the host. This may require use of a utility such as SCP or FTP.
 
 To apply the changes, restart the [Datadog Agent][1].
 
@@ -137,8 +137,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
     ```yaml
     securityAgent:
-      compliance:
-        # [...]
+      # [...]
       runtime:
         # datadog.securityAgent.runtime.enabled
         # Set to true to enable Security Runtime Module
@@ -147,17 +146,12 @@ To apply the changes, restart the [Datadog Agent][1].
           # datadog.securityAgent.runtime.policies.configMap
           # Place custom policies here
           configMap: jdefaultpol
-      syscallMonitor:
-        # datadog.securityAgent.runtime.syscallMonitor.enabled
-        # Set to true to enable Syscall monitoring.
-        enabled: false
+      # [...]
     ```
 
 3. Upgrade the Helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
 
     **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
-
-4. Restart the [Datadog Agent][1].
 
 [1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
