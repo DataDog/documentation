@@ -19,9 +19,11 @@ further_reading:
 
 You can manually instrument each of your applications with the Datadog Browser RUM SDK.
 
-After your applications have been instrumented, you can begin managing your RUM and Error Tracking configurations per application in Datadog.
+After your applications have been instrumented, you can begin managing your RUM configurations per application in Datadog.
 
 The RUM Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][1] table.
+
+This page includes instructions for how to set up the RUM Browser SDK for RUM and Error Tracking.
 
 ## Setup
 
