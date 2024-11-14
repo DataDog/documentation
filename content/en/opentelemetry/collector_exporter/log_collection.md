@@ -1,7 +1,7 @@
 ---
 title: Log Collection
 aliases:
-- /opentelemetry/collector_exporter/log_collection/
+- /opentelemetry/integrations/log_collection/
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

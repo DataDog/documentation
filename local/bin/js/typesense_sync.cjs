@@ -2,13 +2,9 @@ const { typesenseSync } = require('typesense-sync');
 const { saveSettings } = require('typesense-sync/settings');
 const config = require('../../../typesense.config.json');
 const fs = require('fs')
+const TYPESENSE_CONFIG_UPDATED = process.env.TYPESENSE_CONFIG_UPDATED || false;
 
-saveSettings()
-    .then(() => index())
-    .then(() => console.log('Typesense sync completed'))
-    .catch(error => console.log('An error occurred', error))
-
-const index = async () => {
+const indexSite = async () => {
     const promises = []
 
     // nightly build pipeline syncs all records in Typesense, all others index english records only.
@@ -37,4 +33,16 @@ const index = async () => {
     }
 
     return await Promise.all(promises)
+}
+
+if (TYPESENSE_CONFIG_UPDATED) {
+    saveSettings()
+        .then(() => indexSite())
+        .then(() => console.log('Typesense sync completed'))
+        .catch(error => console.log('An error occurred', error))
+} else {
+    console.log('typesense.config.json unchanged, skipping settings update.')
+    indexSite()
+        .then(() => console.log('Typesense sync completed'))
+        .catch(error => console.log('An error occurred', error))
 }
