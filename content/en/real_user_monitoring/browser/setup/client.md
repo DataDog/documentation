@@ -2391,7 +2391,7 @@ You can explore the following attributes:
 | user_action    | Object containing action ID (or undefined if no action is found). |
 | view           | Object containing details about the current view event.           |
 
-For more information, see [RUM Browser Data Collected][3].
+For more information, see [RUM Browser Data Collected][1].
 
 #### Example
 
@@ -2443,6 +2443,8 @@ For CDN sync, use:
 window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
 ```
 
+[1]: /real_user_monitoring/data_collected/
+
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
@@ -2457,22 +2459,3 @@ This option is not supported for Error Tracking.
 
 [1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
-
-
-[13]: 
-[14]: /account_management/api-app-keys/#client-tokens
-[15]: /getting_started/site/
-[16]: /getting_started/tagging/#define-tags
-[17]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
-[18]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[19]: /real_user_monitoring/browser/tracking_user_actions
-[20]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
-[21]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[22]: /real_user_monitoring/session_replay/browser/#usage
-[23]: /real_user_monitoring/guide/proxy-rum-data/
-[24]: /real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
-[25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[26]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
-[27]: /real_user_monitoring/browser/setup/server
-[28]: /data_security/real_user_monitoring/#mask-action-names
-
