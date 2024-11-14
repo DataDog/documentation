@@ -88,7 +88,7 @@ Leverage the pillars of observability by connecting your logs to metrics and tra
 
 Start exploring your ingested logs in the [Log Explorer][1].
 
-**Tip**: To get to the Log Explorer quickly, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> to open Datadog's global search, then search for `logs`.
+**Tip**: To open the Log Explorer from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `logs`.
 
 {{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
 
