@@ -33,3 +33,7 @@ To get started with RUM for React Native, create an application and configure th
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting">}}
   <u>Troubleshooting</u>: Common troubleshooting RUM React Native SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
