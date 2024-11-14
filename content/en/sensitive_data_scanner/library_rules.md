@@ -22,15 +22,15 @@ These rules can also be viewed in Datadog:
 1. Navigate to [Sensitive Data Scanner][1].
 1. Click **Scanning Rules Library** on the top right side of the page.
 1. To add rules from the library to a scanning group:<br />
-   a. Select the rules you want to add.<br />
-   b. Click **Add Rules to Scanning Group**.<br />
-   c. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
+   1. Select the rules you want to add.<br />
+   1. Click **Add Rules to Scanning Group**.<br />
+   1. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
 
 ## Secrets and credentials
 
 | Library rule                                       | Default Keywords                                                                                                      |
 | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| AWS Access Key ID Scanner                          | aws_access_key_id, access key, aws access                                                                             |
+| AWS Access Key ID Scanner                          | aws_access_key_id, access key, aws access, x-amz-credential                                                           |
 | AWS Secret Access Key Scanner                      | aws_secret_access_key, credentials, secret access key, secret key, set-awscredential                                  |
 | Amazon Marketplace Web Services Auth Token Scanner | amazon, marketplace, aws, auth, token, authorization, authentication                                                  |
 | Azure Personal Access Token Scanner                | \-                                                                                                                    |
@@ -56,8 +56,11 @@ These rules can also be viewed in Datadog:
 | Mailchimp API Key Scanner                          | mailchimp, api key                                                                                                    |
 | Mailgun API Key Scanner                            | mailgun, api key                                                                                                      |
 | Okta API Token Scanner                             | okta, api token                                                                                                       |
+| OpenAI API Key Scanner                             | \-                                                                                                                    |
 | PGP Private Key Scanner                            | \-                                                                                                                    |
+| PagerDuty API Token Scanner                        | pagerduty, pager_duty, token, pg                                                                                      |
 | Paypal Braintree Access Token Scanner              | paypal, braintree, access, token                                                                                      |
+| Postman API Key Scanner                            | postman, x-api-key, postman-api-key                                                                                   |
 | RSA Private Key Scanner                            | \-                                                                                                                    |
 | SSH Key Scanner                                    | \-                                                                                                                    |
 | SendGrid API Key Scanner                           | send grid, api token                                                                                                  |
@@ -103,20 +106,22 @@ These rules can also be viewed in Datadog:
 
 ## Personal identifiable information (PII)
 
-| Library rule                                                | Default Keywords                    |
-| ----------------------------------------------------------- | ----------------------------------- |
-| Canadian Social Insurance Number Scanner                    | \-                                  |
-| Chinese Car License Plate Number Scanner                    | car, plate, license, platenumber    |
-| Chinese Passport Scanner                                    | passport, travel document           |
-| Chinese Phone Number Scanner                                | mobile, phone, cell                 |
-| Chinese Vehicle Identification Number Scanner               | vin, vehicle identification number  |
-| France Social Security Number Scanner (INSEE/NIR)           | social security, insee, nir         |
-| Standard Email Address Scanner                              | \-                                  |
-| UK National Insurance Number Scanner                        | \-                                  |
-| US Individual Taxpayer Identification Number Scanner (ITIN) | i.t.i.n., individual taxpayer, itin |
-| US Passport Scanner                                         | \-                                  |
-| US Social Security Number Scanner                           | ssn, social security                |
-| US Vehicle Identification Number Scanner                    | \-                                  |
+| Library rule                                                | Default Keywords                                                                                                             |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Canadian Social Insurance Number Scanner                    | \-                                                                                                                           |
+| Chinese Car License Plate Number Scanner                    | car, plate, license, platenumber                                                                                             |
+| Chinese Identity Card Number Scanner                        | national id, resident identity, identity number, identification number, identity card number, national identification number |
+| Chinese Passport Scanner                                    | passport, travel document                                                                                                    |
+| Chinese Phone Number Scanner                                | mobile, phone, cell                                                                                                          |
+| Chinese Vehicle Identification Number Scanner               | vin, vehicle identification number                                                                                           |
+| France Social Security Number Scanner (INSEE/NIR)           | social security, insee, nir                                                                                                  |
+| Standard Email Address Scanner                              | \-                                                                                                                           |
+| UK National Health Service Number Scanner                   | national health number, nhs                                                                                                  |
+| UK National Insurance Number Scanner                        | \-                                                                                                                           |
+| US Individual Taxpayer Identification Number Scanner (ITIN) | i.t.i.n., individual taxpayer, itin                                                                                          |
+| US Passport Scanner                                         | \-                                                                                                                           |
+| US Social Security Number Scanner                           | ssn, social security                                                                                                         |
+| US Vehicle Identification Number Scanner                    | \-                                                                                                                           |
 
 ## Network and device information
 

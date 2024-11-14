@@ -33,7 +33,7 @@ categories:
 - data stores
 - alerting
 - イベント管理
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -110,10 +110,10 @@ Anomali ThreatStream は、環境内で生成される Observable もサポー�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][5]
-- Sales Email: [datadog-sales@crestdata.ai][6]
+- サポートメール: [datadog.integrations@crestdata.ai][5]
+- 営業メール: [datadog-sales@crestdata.ai][6]
 - Web サイト: [crestdata.ai][3]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][10]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][10]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
