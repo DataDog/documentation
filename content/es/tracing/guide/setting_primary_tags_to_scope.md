@@ -61,7 +61,7 @@ Opciones:
         ...
     ```
 
-    **Contenedor <txprotected>entornos</txprotected>**: El Agent también admite Configuración de nivel superior `tags` a través de la variable entorno `DD_TAGS` .
+    **Contenedor entornos**: El Agent también admite Configuración de nivel superior `tags` a través de la variable entorno `DD_TAGS` .
 
 #### Datos por entorno
 

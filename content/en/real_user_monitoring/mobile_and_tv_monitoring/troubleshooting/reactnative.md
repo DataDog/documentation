@@ -279,6 +279,10 @@ dependencies {
 }
 ```
 
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][6] to view all your uploaded source maps, dSYMs, and mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][7].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -288,3 +292,5 @@ dependencies {
 [3]: https://github.com/JakeWharton/pidcat/issues/180#issuecomment-1124019329
 [4]: https://github.com/facebook/react-native/commit/6e08f84719c47985e80123c72686d7a1c89b72ed
 [5]: https://github.com/facebook/react-native/issues/28801
+[6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: /real_user_monitoring/guide/debug-symbols

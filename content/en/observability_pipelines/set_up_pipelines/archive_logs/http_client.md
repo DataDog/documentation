@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Configure your HTTP Client so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Use the Observability Pipelines Worker to format your HTTP server logs into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
@@ -15,7 +15,6 @@ This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -79,7 +78,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/http_client%}}
+{{% observability_pipelines/source_settings/http_client %}}
 
 ### Set up the destinations
 
@@ -149,6 +148,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -213,6 +217,16 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Enrichment table" %}}
 
 {{% observability_pipelines/processors/enrichment_table %}}
+
+{{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Add env vars" %}}
+
+{{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -282,6 +296,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
@@ -290,19 +309,9 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}

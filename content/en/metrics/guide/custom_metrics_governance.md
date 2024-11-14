@@ -190,7 +190,12 @@ After you've received an alert, use the Metrics Volume Management page to inspec
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/forecasts/" >}}Forecast future metrics growth and alert on any unexpected overall deviation.{{< /nextlink >}}
+
 {{< /whatsnext >}}
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+  Real-time <a href="/account_management/billing/usage_metrics/">estimated Custom Metric usage metrics</a> can now be prepopulated with the tags you set in the <a href="/account_management/billing/usage_attribution/">Usage Attribution</a> to monitor custom metric volume fluctuations. To enable this feature, reach out to Customer Success. 
+{{< /callout >}}
 
 ## Summary of best practices
 

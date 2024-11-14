@@ -108,6 +108,8 @@ The Resource Catalog map provides a visualization of the resources in your organ
 
 ## Investigate a host or resource
 
+<div class="alert alert-info">No secrets are displayed in this panel. Any displayed "secrets" are randomly generated strings that do not pose a security risk.</div>
+
 Clicking on a host opens a side panel with details including:
 
 - **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource

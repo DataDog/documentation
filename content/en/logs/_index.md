@@ -43,6 +43,8 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+algolia:
+    tags: ['logs']
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}

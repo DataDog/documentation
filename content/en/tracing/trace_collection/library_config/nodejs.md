@@ -80,7 +80,8 @@ Accepts a comma-delimited list of case-insensitive HTTP headers optionally mappe
 `DD_TRACE_SAMPLE_RATE`
 : **Configuration**: `sampleRate`<br>
 **Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.
+Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
 
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
