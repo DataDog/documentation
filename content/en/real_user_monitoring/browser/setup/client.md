@@ -29,7 +29,10 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
 {{< /callout >}}
 
-To set up RUM Browser Monitoring, create a RUM application:
+To set up Browser Monitoring, create an application in Datadog:
+
+{{< tabs >}}
+{{% tab "RUM" %}}
 1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][2] and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][3].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
@@ -45,7 +48,30 @@ To set up RUM Browser Monitoring, create a RUM application:
 
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. In Datadog, navigate to the [**Error Tracking > Settings > Browser and Mobile > Add an Application** page ][1] and select the JavaScript (JS) application type.
+   - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Browser Data Collected][2].
+   - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
+   - Choose the installation type for the Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
+   - Define the environment name and service name for your application to use [unified service tagging][3]. Set a version number for your deployed application in the initialization snippet. For more information, see [Tagging](#tagging).
+2. Deploy the changes to your application. Once your deployment is live, Datadog collects events from your users' browsers.
+3. Visualize the [data collected][2] in [dashboards][4] or create a search query in Error Tracking.
+
+[1]: https://app.datadoghq.com/rum/list
+[2]: /real_user_monitoring/data_collected/
+[3]: /getting_started/tagging/using_tags/
+[4]: /real_user_monitoring/platform/dashboards/
+
+Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Choose the right installation method
+{{< tabs >}}
+{{% tab "RUM" %}}
 
 Server-side (Auto-instrumentation)
 : This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][27].
@@ -59,9 +85,27 @@ CDN async
 CDN sync
 : This method is recommended for collecting all RUM events. The RUM Browser SDK loads from our CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
 
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+npm (node package manager)
+: This method is recommended for modern web applications. The Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+
+CDN async
+: This method is recommended for web applications with performance targets. The Browser SDK loads from our CDN asynchronously, ensuring the SDK download does not impact page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized.
+
+CDN sync
+: This method is recommended for collecting all events. The Browser SDK loads from our CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### npm
 
 Add [`@datadog/browser-rum`][13] to your `package.json` file, then initialize it with:
+
+{{< tabs >}}
+{{% tab "RUM" %}}
 
 {{% collapse-content title="Latest version" level="h4" %}}
 
@@ -182,6 +226,30 @@ datadogRum.startSessionReplayRecording();
 ```
 
 {{% /collapse-content %}} 
+
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+
+   applicationId: '<APP_ID>',
+   clientToken: '<CLIENT_TOKEN>',
+   service: '<SERVICE>',
+   env: '<ENV_NAME>',
+   // site: '<SITE>',
+   // version: '1.0.0',
+   trackUserInteractions: true,
+   trackResources: true,
+   defaultPrivacyLevel: {default to the selection in form}
+});
+
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
