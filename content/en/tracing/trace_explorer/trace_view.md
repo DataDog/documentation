@@ -243,15 +243,14 @@ View [Profiles][1] to identify lines of code related to performance issues. The 
 [1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
-{{% tab "Span Links (Beta)" %}}
+{{% tab "Span Links" %}}
 
-<div class="alert alert-info">Span link support is in beta.</div>
 
 [Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
 Click a span in the flame graph to display spans connected with span links:
 
-{{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
+{{< img src="tracing/span_links/span_links_tab_2.png" alt="Span Links tab" style="width:90%;">}}
 
 **Note**: Span links only display when the corresponding spans are ingested and indexed, for example, with a [retention filter][1].
 
