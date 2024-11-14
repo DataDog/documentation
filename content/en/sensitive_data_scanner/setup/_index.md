@@ -7,4 +7,10 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
+## Overview
+
 TKTK
+
+## Disable Sensitive Data Scanner
+
+To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group so that they are disabled.
