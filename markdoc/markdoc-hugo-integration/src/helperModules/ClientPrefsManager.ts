@@ -319,7 +319,7 @@ export class ClientPrefsManager {
   }
 
   /**
-   * Relaunch the ClientPrefsManager to manage a new page.
+   * Reconfigure the ClientPrefsManager to manage a new page.
    *
    * Called by a given doc page on load.
    */

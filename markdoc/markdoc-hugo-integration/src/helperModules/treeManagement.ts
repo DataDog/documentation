@@ -168,6 +168,7 @@ function collectReferencedValuesByVarId(
 
   if (!node) return referencedValuesByVarId;
 
+  // If the node is an array, collect referenced values recursively
   if (Array.isArray(node)) {
     node.forEach((n) => {
       const valuesById = collectReferencedValuesByVarId(n);
@@ -185,6 +186,7 @@ function collectReferencedValuesByVarId(
 
   if (typeof node !== 'object') return referencedValuesByVarId;
 
+  // Collect referenced values from the node's children if present
   if ('children' in node && node.children) {
     const valuesById = collectReferencedValuesByVarId(node.children);
     Object.keys(valuesById).forEach((id) => {
@@ -197,35 +199,11 @@ function collectReferencedValuesByVarId(
     });
   }
 
-  /* Not currently necessary, since we aren't interpolating vars in the markup
-  if (typeof node === 'object' && '$$mdtype' in node && node.$$mdtype === 'Variable') {
-    // @ts-ignore, TODO:
-    //
-    // This only works if we assume that the variable path is one level deep,
-    // which is what we're supporting for now. In other words, there cannot be a variable
-    // like `$user.database.version` in the markup -- no nested data is allowed,
-    // just variables like `$database`, and `$database_version`.
-    //
-    // We may wind up needing to support nested data because we may need to
-    // group all pref variables under a parent $prefs object or similar.
-    const varId = node.path?.join('.');
-    const value = node.value;
-    if (varId && value) {
-      if (varId in referencedValuesByVarId) {
-        referencedValuesByVarId[varId].push(value);
-      } else {
-        referencedValuesByVarId[varId] = [value];
-      }
-      referencedValuesByVarId[varId] = Array.from(
-        new Set(referencedValuesByVarId[varId])
-      );
-    }
-  }*/
-
   if (typeof node !== 'object' || !('$$mdtype' in node)) {
     return referencedValuesByVarId;
   }
 
+  // Collect referenced values from an `if` tag
   if (node.$$mdtype === 'Tag' && 'if' in node) {
     const valuesById = collectReferencedValuesByVarId(
       // @ts-ignore
@@ -241,6 +219,7 @@ function collectReferencedValuesByVarId(
     });
   }
 
+  // Collect referenced values from a `function` tag
   if (node.$$mdtype === 'Function') {
     if (
       node.parameters &&

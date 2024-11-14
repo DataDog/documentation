@@ -2486,16 +2486,26 @@
           }
           return __classPrivateFieldGet(_a, _a, "f", _ClientPrefsManager_instance);
         }
+        /**
+         * Read any existing user preferences from their browser.
+         */
         retrieveStoredPreferences() {
           const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
           this.storedPreferences = storedPreferences;
         }
+        /**
+         * Update the stored preferences in the user's browser.
+         */
         updateStoredPreferences() {
           const storedPreferences = JSON.parse(localStorage.getItem("content-prefs") || "{}");
           const newStoredPreferences = Object.assign(Object.assign({}, storedPreferences), this.selectedValsByPrefId);
           this.storedPreferences = newStoredPreferences;
           localStorage.setItem("content-prefs", JSON.stringify(newStoredPreferences));
         }
+        /**
+         * Read the selected preference values from the URL
+         * and return them in a dictionary.
+         */
         getSelectedValsFromUrl() {
           const url = new URL(window.location.href);
           const searchParams = url.searchParams;
@@ -2507,6 +2517,9 @@
           });
           return selectedValsByPrefId;
         }
+        /**
+         * Update the URL with the selected preference values.
+         */
         syncUrlWithSelectedVals() {
           const url = new URL(window.location.href);
           const searchParams = url.searchParams;
@@ -2553,6 +2566,9 @@
           }
         }
         /**
+         * Populate the right nav with links to the headers
+         * on the page.
+         *
          * Should run after the page has been rendered.
          */
         populateRightNav() {
@@ -2581,6 +2597,9 @@
           }
           rightNav.innerHTML = html;
         }
+        /**
+         * Refresh all page content.
+         */
         rerender() {
           this.rerenderFilterSelector();
           this.rerenderPageContent();
@@ -2630,6 +2649,9 @@
             prefPills[i].addEventListener("click", (e) => this.handlePrefSelectionChange(e));
           }
         }
+        /**
+         * Find the filter selector on a given page.
+         */
         locateFilterSelectorEl() {
           const filterSelectorEl = document.getElementById("mdoc-selector");
           if (!filterSelectorEl) {
@@ -2639,6 +2661,10 @@
             return true;
           }
         }
+        /**
+         * Resolve all available preference sources (URL params, local storage,
+         * default values, etc.) into a single set of selected values.
+         */
         applyPrefOverrides() {
           const relevantPrefIds = Object.keys(this.selectedValsByPrefId);
           let prefOverrideFound = false;
@@ -2657,6 +2683,10 @@
           });
           return prefOverrideFound;
         }
+        /**
+         * Override Hugo's default edit button to point to an .mdoc file,
+         * since the .md file is generated code and not stored in the repo.
+         */
         updateEditButton() {
           const editButton = document.getElementsByClassName("toc-edit-btn")[0];
           if (!editButton) {
@@ -2668,6 +2698,11 @@
           }
           editButtonLink.href = editButtonLink.href.replace(/\.md\/$/, ".mdoc/");
         }
+        /**
+         * Reconfigure the ClientPrefsManager to manage a new page.
+         *
+         * Called by a given doc page on load.
+         */
         initialize(p) {
           this.prefOptionsConfig = p.prefOptionsConfig;
           this.pagePrefsConfig = p.pagePrefsConfig;
@@ -2693,6 +2728,11 @@
             this.updateStoredPreferences();
           }
         }
+        /**
+         * Flip the page from hidden to visible
+         * after making sure the TOC and other elements are
+         * correctly synced with the user's current preferences.
+         */
         revealPage() {
           markdocBeforeRevealHooks.forEach((hook) => hook());
           if (this.filterSelectorEl) {
@@ -2708,6 +2748,10 @@
             content.style.visibility = "visible";
           }
         }
+        /**
+         * Rerender the filter selector based on the current selections,
+         * since some selections and options may have changed.
+         */
         rerenderFilterSelector() {
           if (!this.pagePrefsConfig || !this.prefOptionsConfig || !this.filterSelectorEl) {
             throw new Error("Cannot rerender filter selector without pagePrefsConfig, prefOptionsConfig, and filterSelectorEl");

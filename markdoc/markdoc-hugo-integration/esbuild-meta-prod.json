@@ -127,7 +127,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientPrefsManager.js": {
-      "bytes": 13869,
+      "bytes": 15175,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
@@ -153,7 +153,7 @@
       "format": "cjs"
     },
     "dist/markdoc-client-prefs-manager.js": {
-      "bytes": 245,
+      "bytes": 512,
       "imports": [
         {
           "path": "dist/helperModules/ClientPrefsManager.js",

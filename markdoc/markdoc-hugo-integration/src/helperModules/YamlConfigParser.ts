@@ -33,12 +33,23 @@ import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { PagePrefsManifest } from '../schemas/pagePrefs';
 import { PagePrefConfig } from '../schemas/yaml/frontMatter';
 
+/**
+ * A module responsible for all data ingestion from
+ * the YAML files that define the available preferences
+ * and their options.
+ */
 export class YamlConfigParser {
+  /**
+   * Combine a page's frontmatter, the global allowlist,
+   * and the global preference config into a single object
+   * that defines the preferences available on the page.
+   */
   static buildPagePrefsManifest(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;
     allowlist: Allowlist;
   }): PagePrefsManifest {
+    // Create an empty manifest to populate
     const manifest: PagePrefsManifest = {
       prefsById: {},
       optionSetsById: {},
@@ -46,12 +57,14 @@ export class YamlConfigParser {
       defaultValsByPrefId: {}
     };
 
+    // Return the empty manifest if the page has no prefs
     if (!p.frontmatter.page_preferences) {
       return manifest;
     }
 
+    // Process each entry in the frontmatter's page_preferences list
     for (const fmPrefConfig of p.frontmatter.page_preferences) {
-      // replace placeholders
+      // Replace any placeholders in the options source
       const optionsSetId = fmPrefConfig.options_source;
       const resolvedOptionsSetId = optionsSetId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
@@ -185,6 +198,10 @@ export class YamlConfigParser {
     return manifest;
   }
 
+  /**
+   * For a given language directory, load the preference options
+   * associated with that language, and validate the object as a whole.
+   */
   static loadPrefsConfigFromLangDir(p: {
     dir: string;
     allowlist: Allowlist;
@@ -213,6 +230,10 @@ export class YamlConfigParser {
     return PrefOptionsConfigSchema.parse(prefOptionsConfig);
   }
 
+  /**
+   * Load all of the allowlists for all languages,
+   * keyed by language code.
+   */
   static loadAllowlistsByLang(p: {
     prefsConfigDir: string;
     langs: string[];
@@ -249,7 +270,7 @@ export class YamlConfigParser {
   }
 
   /**
-   * Load the pref and options allowlists from a prefs config directory.
+   * For a given language, load the pref and options allowlists.
    */
   static loadAllowlistFromLangDir(dir: string): Allowlist {
     const result: Allowlist = { prefsById: {}, optionsById: {} };

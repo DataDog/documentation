@@ -48,6 +48,11 @@ export class HugoFunctions {
     }
   }
 
+  /**
+   * When given the top-level directory for a Hugo site,
+   * returns an object with the paths to any subdirectories
+   * the integration needs to access.
+   */
   static getSubdirsByType(siteDir: string): HugoSubdirsByType {
     return {
       content: siteDir + '/content',
@@ -57,6 +62,15 @@ export class HugoFunctions {
     };
   }
 
+  /**
+   * Returns the string value of a key in the i18n object.
+   * The i18n object is ingested from the JSON files in
+   * the `<SITE_DIR>/i18n` folder. It contains translations
+   * of text elements in the site UI, such as a translation of
+   * the default Further Reading description
+   * ("Additional helpful documentation, links, and articles")
+   * into French.
+   */
   static i18n(p: { hugoConfig: HugoConfig; key: string }): string {
     const i18n = p.hugoConfig.global.i18n;
     const lang = p.hugoConfig.page.lang;
@@ -74,6 +88,11 @@ export class HugoFunctions {
     return i18n[lang][p.key].other || i18n['en'][p.key].other;
   }
 
+  /**
+   * Determines whether a given path is an absolute URL,
+   * such as `https://example.com/path/to/page`,
+   * or a relative path, such as `/path/to/page` or `path/to/page`.
+   */
   static isAbsUrl(path: string): boolean {
     if (path.startsWith('http://') || path.startsWith('https://')) {
       return true;
@@ -86,6 +105,11 @@ export class HugoFunctions {
     }
   }
 
+  /**
+   * Build a permalink for an image that includes an md5
+   * hash of the image's contents, in order to validate
+   * the image's integrity.
+   */
   static getFingerprintedPermalink(p: { src: string; hugoConfig: HugoConfig }) {
     const globalHugoConfig = p.hugoConfig.global;
 
@@ -101,11 +125,18 @@ export class HugoFunctions {
     return permalink;
   }
 
+  /**
+   * Returns the md5 hash of the contents of a file at a given path.
+   */
   static getFileContentsHash(path: string): string {
     const contents = fs.readFileSync(path);
     return md5(contents);
   }
 
+  /**
+   * The JavaScript equivalent of the Hugo template function `relURL`:
+   * https://gohugo.io/functions/urls/relurl/
+   */
   static relUrl(p: { hugoConfig: HugoConfig; url: string }): string {
     const baseUrl = new URL(p.hugoConfig.global.siteConfig.baseURL);
     let resultUrl: string;

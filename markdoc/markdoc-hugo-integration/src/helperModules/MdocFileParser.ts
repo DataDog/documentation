@@ -1,9 +1,3 @@
-/**
- * The static class responsible for breaking an .mdoc file
- * into various data structures, such as the AST
- * and the frontmatter object.
- */
-
 import MarkdocStaticCompiler, { Node, ValidationError } from 'markdoc-static-compiler';
 import fs from 'fs';
 import path from 'path';
