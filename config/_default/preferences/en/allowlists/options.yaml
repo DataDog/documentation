@@ -1,3 +1,16 @@
+# The list of allowed option IDs for content preference selections.
+# This is to enforce consistency between various selections 
+# the user can make, ensuring that the selection 
+# will reliably be applied to all relevant pages.
+#
+# For example, if the user chooses "linux_apt" as their operating system
+# on one page, we want to ensure that other pages are scanning
+# for that same exact selection ID, rather than a slightly different
+# selection such as "linuxapt" or "apt_linux".
+#
+# To add a new option, add a new item to the list 
+# and give it a unique ID.
+
 allowed:
 - display_name: .NET
   id: dot_net
