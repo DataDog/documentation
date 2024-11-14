@@ -32,7 +32,7 @@ To get started, bring in the logs from the service(s) you want to analyze.
 
 To search for inventory data, set up your logs query to filter for your specific service, index, or attributes that contain this data.
 
-{{< img src="/logs/workspace/use_cases/query_failed_logs.png" alt="Example workspace query to find failed login attempts" style="width:100%;" >}}
+{{< img src="/logs/workspace/use_cases/analyze_retail_inventory/query_inventory_sales_data.png" alt="Example workspace query to find logs from service:product-inventory" style="width:100%;" >}}
 
 You can add any additional filters, facets, or attributes to narrow your search based on your requirements and what is available in your logs.
 
@@ -63,7 +63,7 @@ Analyze products with low stock and recent high sales by joining inventory and s
       inventory.stock_level < inventory.threshold_level
       AND sales.quantity_sold > 30;
     ```
-    {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+    {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/join_inventory_sales_data.png" alt="SQL query to join the inventory and sales data to identify products with low stock and recently high sales" style="width:100%;" >}}
 
 This analysis helps identify products with limited availability despite recent sales, indicating potential need for restocking. Additionaly, you can reveal other patterns, such as products with unexpected spikes in sales.
 
@@ -74,9 +74,20 @@ You can further analyze your product sales by location. After identifying produc
 Achieve this by joining your inventory and sales data with a [Reference Table][5] that includes store location information. Use the store ID to assess in which locations specific products are most popular.
 1. **Add a Data Source Cell**: Select the Reference Table.
 2. **Select the Reference Table**: Ensure you choose the correct table containing store location information.
-  {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+  {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/analyze_by_location.png" alt="Data source cell with the Reference table selected in Data source dropdown field" style="width:100%;" >}}
 3. Write a SQL query to join the inventory and sales data, identifying products with low stock and recent high sales.
-  {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+  ```sql
+  SELECT
+    lsa.product_id,
+    location.store_country,
+    sum(lsa.quantity_sold)
+  FROM
+    low_stock_analysis AS lsa
+  JOIN
+    store_location_data AS location
+    ON lsa.store_id = location.store_id
+  GROUP BY lsa.product_id, location.store_country
+  ```
 
 For each product, we are summing the total quantity sold in each country and grouping them in a way that will allow us to visualize by product, what were the quantities sold in each country. 
 
@@ -84,9 +95,10 @@ For each product, we are summing the total quantity sold in each country and gro
 
 Create a visualization to display product sales distribution by country. 
 1. Add a [Visualization cell][4].
-1. Select your location analysis as the source dataset, 
-1. Select Pie Chart from the "Visualize as" dropdown.
+1. Select your location analysis as the source dataset.
+1. Select **Pie Chart** from the "Visualize as" dropdown.
 1. Group by product and country to view total quantities sold for each product across different regions.
+  {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/vizualize_product_sales_by_country.png" alt="Group by product and country to see total quantities sold for each product across different regions" style="width:100%;" >}}
 
 ## Further reading
 
