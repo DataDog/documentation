@@ -58,7 +58,7 @@ Use Sensitive Data Scanner for the Agent or Observability Pipelines if you want 
 
 #### Datadog Agent
 
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
   Sensitive Data Scanner support for the Datadog Agent is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
