@@ -56,13 +56,13 @@ No se pueden enviar eventos antes de la inicialización e intentarlo pone al SDK
 
 #### Solución
 
-{{< <txprotected>pestañas</txprotected> >}}
-{{% pestaña "DdSdkReactNative.initialize" %}}
+{{< tabs >}}
+{{% tab "DdSdkReactNative.initialize" %}}
 
 Si utilizas `DdSdkReactNative.initialize` para iniciar el SDK de Datadog, llama a esta función en tu archivo de nivel superior `index.js` para que el SDK se inicialice antes de que se envíen tus otros eventos.
 
-{{% /pestaña %}}
-{{% pestaña "DatadogProveedor" %}}
+{{% /tab %}}
+{{% tab "DatadogProveedor" %}}
 
 A partir de la versión del SDK `1.2.0`, puedes inicializar el SDK utilizando el componente `DatadogProvider`. Este componente incluye un buffer de eventos de RUM que se asegura de que el SDK se inicialice antes de enviar cualquier dato a Datadog, lo que evita que se produzca este problema.
 
@@ -70,8 +70,8 @@ Para utilizarlo, consulta la [Guía para la migración al proveedor de Datadog][
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
 
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Revisión de los logs nativos
 
@@ -106,13 +106,13 @@ Si ves el siguiente log, significa que has llamado a un método de RUM antes de 
 
 ##### Solución
 
-{{< pestañas >}}
-{{% pestaña "DdSdkReactNative.initialize" %}}
+{{< tabs >}}
+{{% tab "DdSdkReactNative.initialize" %}}
 
 Si utilizas `DdSdkReactNative.initialize` para iniciar el SDK de Datadog, llama a esta característica en tu archivo de nivel superior `index.js` para que el SDK se inicialice antes de que se envíen tus otros eventos.
 
-{{% /pestaña %}}
-{{% pestaña "DatadogProveedor" %}}
+{{% /tab %}}
+{{% tab "DatadogProveedor" %}}
 
 A partir de la versión del SDK `1.2.0`, puedes inicializar el SDK utilizando el componente `DatadogProvider`. Este componente incluye un buffer de eventos de RUM que se asegura de que el SDK se inicialice antes de enviar cualquier dato a Datadog, lo que evita que se produzca este problema.
 
@@ -121,8 +121,8 @@ Para utilizarlo, consulta la [Guía para la migración al proveedor de Datadog ]
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
 
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 #### En Android
 

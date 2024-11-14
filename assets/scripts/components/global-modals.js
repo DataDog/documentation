@@ -16,7 +16,7 @@ const doOnLoad = () => {
             lang = ddc.lang;
         }
 
-        if (lang === 'fr' || lang === 'ja' || lang === 'ko') {
+        if (lang === 'fr' || lang === 'ja' || lang === 'ko' || lang === 'es') {
             langParam = `lang=${lang}`;
         } else {
             langParam = '';
