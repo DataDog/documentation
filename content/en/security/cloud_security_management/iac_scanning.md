@@ -1,6 +1,5 @@
 ---
 title: IaC Scanning
-private: true
 ---
 
 <div class="alert alert-info">Static Infrastructure as Code (IaC) scanning is in Preview.</div>
