@@ -1,6 +1,12 @@
 /**
- * Build the configuration objects required
- * to provide custom components to Markdoc.
+ * All custom tag definitions required to build
+ * the configuration object that is expected by Markdoc
+ * in order for it to parse our file content correctly,
+ * and expected by our own custom render function as a source
+ * of custom JSX templates and other rendering logic.
+ *
+ * You can read more about the Markdoc config object here:
+ * https://markdoc.dev/docs/config
  */
 import { alertDefinition, Alert } from './components/alert';
 import { imgDefinition, Img } from './components/img';

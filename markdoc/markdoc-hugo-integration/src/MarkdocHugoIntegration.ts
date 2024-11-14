@@ -1,18 +1,7 @@
-/**
- * The external interface of the integration.
- * This class is responsible for compiling Markdoc files
- * and reporting any errors encountered during compilation.
- */
-
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { IntegrationConfig } from './schemas/config/integration';
-import {
-  HugoConfig,
-  HugoConfigSchema,
-  HugoGlobalConfig,
-  HugoGlobalConfigSchema
-} from './schemas/config/hugo';
+import { HugoGlobalConfig, HugoGlobalConfigSchema } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
@@ -26,17 +15,25 @@ import { PagePrefsManifestSchema } from './schemas/pagePrefs';
 import { Allowlist } from './schemas/yaml/allowlist';
 import { HugoFunctions } from './helperModules/HugoFunctions';
 
+/**
+ * The external interface of the integration.
+ * This class is instantiated by the docs site build code,
+ * and is responsible for compiling Markdoc files
+ * and reporting the result of the compilation,
+ * including any errors encountered during compilation.
+ */
 export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
   prefOptionsConfigByLang: Record<string, PrefOptionsConfig>;
   allowlistsByLang: Record<string, Allowlist> = {};
+  private compiledFilePaths: string[] = [];
 
   // Errors from the markup-string-to-AST parsing process,
   // which include additional helpful data, like line numbers
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
+
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string[]> = {};
-  private compiledFilePaths: string[] = [];
 
   /**
    * Validate and store the provided configuration.

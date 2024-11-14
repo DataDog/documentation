@@ -1,3 +1,8 @@
+/**
+ * A few type checking functions to simplify rendering control flow.
+ * These functions satisfy TypeScript's type checker when it can't
+ * correctly infer the type of a variable on its own.
+ */
 import { Tag, ClientVariable, ClientFunction } from 'markdoc-static-compiler';
 
 export function isTag(tag: any): tag is Tag {

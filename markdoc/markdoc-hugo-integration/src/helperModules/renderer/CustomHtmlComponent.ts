@@ -4,6 +4,16 @@ import { HugoConfig, HugoConfigSchema } from '../../schemas/config/hugo';
 import MarkdownIt from 'markdown-it';
 const { escapeHtml, unescapeAll } = MarkdownIt().utils;
 
+/**
+ * The base class for all custom HTML components
+ * (any tags that are not part of OOTB Markdoc).
+ * It's not instantiated directly, but rather extended by
+ * a child class, such as the Alert class.
+ *
+ * It provides useful rendering information to a given child class,
+ * such as the tag's attributes and the rendered contents
+ * of the tag's children.
+ */
 export abstract class CustomHtmlComponent {
   contents = '';
   tag: Tag;
@@ -34,22 +44,6 @@ export abstract class CustomHtmlComponent {
         hugoConfig: p.hugoConfig
       });
     }
-  }
-
-  forwardNamedAttributes(): string {
-    let result = '';
-    Object.keys(this.tag.attributes).forEach((key) => {
-      result += ` ${key}="${this.tag.attributes[key]}"`;
-    });
-    return result;
-  }
-
-  escapeHtml(str: string): string {
-    return escapeHtml(str);
-  }
-
-  unescapeAll(str: string): string {
-    return unescapeAll(str);
   }
 
   abstract render(): string;

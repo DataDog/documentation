@@ -29,19 +29,43 @@ const voidElements = new Set([
   'wbr'
 ]);
 
+/**
+ * A custom rendering function that takes a tree of nodes
+ * and renders them into a string of HTML.
+ *
+ * Markdoc includes a HTML renderer and React renderer OOTB,
+ * but we require a custom renderer because our version of the
+ * rendering tree contains extra information about when
+ * to display certain nodes, and we render this extra information
+ * into the HTML as proprietary HTML attributes, so these conditions
+ * can be re-evaluated as needed on the client side.
+ *
+ * In OOTB Markdoc, this idea of conditionality
+ * does not exist at the rendering step -- the conditionality is
+ * resolved earlier and the rendering tree only contains the nodes
+ * that should be displayed.
+ *
+ * Read more about Markdoc's rendering step:
+ * https://markdoc.dev/docs/render#render
+ */
 function render(p: {
   node: RenderableTreeNodes;
   markdocConfig?: MarkdocConfig;
   hugoConfig: HugoConfig;
   components?: Record<string, any>;
 }): string {
+  // If this is plain text content, escape and return it
   if (typeof p.node === 'string' || typeof p.node === 'number')
     return escapeHtml(String(p.node));
 
+  // If there's no content available to render in this data,
+  // return an empty string
   if (p.node === null || typeof p.node !== 'object') {
     return '';
   }
 
+  // If this is an array of nodes, render the list recursively
+  // and join the results together into one HTML string
   if (Array.isArray(p.node))
     return p.node
       .map((n) => {
@@ -49,6 +73,7 @@ function render(p: {
       })
       .join('');
 
+  // If this node represents a variable, render the variable's value
   if (isClientVariable(p.node)) {
     if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
       // TODO: Fix reresolve return type so recasting isn't necessary
@@ -57,6 +82,8 @@ function render(p: {
     return escapeHtml(String(p.node.value));
   }
 
+  // If this node represents a function, resolve the function's
+  // value for use by other nodes, but don't render anything now
   if (isClientFunction(p.node)) {
     if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
       p.node = reresolve(p.node, p.markdocConfig);
@@ -64,8 +91,11 @@ function render(p: {
     return '';
   }
 
+  // Handle non-tag nodes (such as code fences)
   if (p.node.$$mdtype === 'Node') {
     const nodeType = p.node.type as string;
+    // If this node is a custom component, render it
+    // using its dedicated class as defined in the components arg
     if (
       nodeType &&
       typeof nodeType === 'string' &&
@@ -77,12 +107,15 @@ function render(p: {
     }
   }
 
+  // If this node has no content, return an empty string
   if (!isTag(p.node)) {
     return '';
   }
 
   const { name, attributes, children = [] } = p.node;
 
+  // If this tag is a custom component, render it
+  // using its dedicated class as defined in the components arg
   if (p.components && name in p.components) {
     const Klass = p.components[name];
     return new Klass({
@@ -93,6 +126,10 @@ function render(p: {
     }).render();
   }
 
+  // If this tag is an `if` tag, it should function as
+  // a conditional display wrapper. Render it as a div
+  // with a display class that can be toggled off and on
+  // by the client side JavaScript.
   if ('if' in p.node && p.node.if) {
     let ref = '';
     if ('ref' in p.node.if) {
@@ -111,13 +148,17 @@ function render(p: {
     return wrapperTagOutput;
   }
 
-  if (!name)
+  // If the tag has no name, just render its children
+  if (!name) {
     return render({
       node: children,
       markdocConfig: p.markdocConfig,
       hugoConfig: p.hugoConfig
     });
+  }
 
+  // If this is a standard HTML tag, convert it HTML markup
+  // and return that
   let output = `<${name}`;
   for (const [k, v] of Object.entries(attributes ?? {}))
     output += ` ${k.toLowerCase()}="${escapeHtml(String(v))}"`;

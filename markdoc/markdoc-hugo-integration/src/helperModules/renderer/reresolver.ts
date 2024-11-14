@@ -8,7 +8,7 @@ import {
 import { isClientFunction, isClientVariable, isTag, truthy } from './utils';
 
 /**
- * Given a new config, re-resolves a client renderable tree nodes in place,
+ * Given a new config, re-resolves a client renderable tree node in place,
  * updating its value and re-resolving its children/dependencies.
  */
 export function reresolve(
