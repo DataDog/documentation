@@ -171,6 +171,8 @@ export function initializeIntegrations() {
         const show = [];
         const hide = [];
 
+        const keywords = filter.split(/\s+/);
+
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
             const domitem = document.getElementById(`mixid_${item.id}`);
@@ -185,7 +187,7 @@ export function initializeIntegrations() {
                 const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
                 if (
-                    (filter && isSearch && (name.includes(filter) || publicTitle.includes(filter))) ||
+                    (filter && isSearch && keywords.map((i) => { name.includes(i) || publicTitle.includes(i) })) ||
                     (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
                 ) {
                     if (!isSafari) {
