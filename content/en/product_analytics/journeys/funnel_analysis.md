@@ -52,10 +52,14 @@ To build a funnel, navigate to [**Digital Experience > Product Analytics > Journ
 
 ### 2. Optionally, define conversion metrics
 
-Under **Define conversion metrics** (funnel type), you can choose whether to measure conversion by the following metrics:
+Depending on the funnel visualization, you can choose to measure conversion by the following under **Define conversion metrics**.
 
-- **Sessions**: Percentage of sessions on your website that result in a conversion, such as a purchase or form submission. It is calculated by dividing the number of sessions with a conversion by the total number of sessions.
-- **Users**: Percentage of users who take a desired action. It is calculated by dividing the total number of users who converted by the total number of users who visit your site.
+| Metric Category | Metric | Definition | Visualization Type |
+|-----------------|--------|------------|--------------|
+| Funnel type | Sessions | Percentage of sessions on your website that result in a conversion, such as a purchase or form submission. It is calculated by dividing the number of sessions with a conversion by the total number of sessions. | Steps, Timeseries, Query Value, Top List |
+| Funnel type | Users | Percentage of users who take a desired action. It is calculated by dividing the total number of users who converted by the total number of users who visit your site. | Steps, Timeseries, Query Value, Top List |
+| Metric | Sessions | Count of unique sessions. | Timeseries, Top list |
+| Metric | Users | Count of unique users. | Timeseries, Top List |
 
 ### 3. Optionally, filter on default attributes
 
@@ -66,6 +70,10 @@ When constructing your funnel, you can add [default attributes][2] (device type,
 - To **clear all filters**, click **Clear**
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnels-filters.png" alt="Use attributes to filter information when constructing your funnel" style="width:60%;" >}}
+
+### 4. Optionally, group by a specific attribute
+
+When viewing a Timeseries or Top List of your funnel, you can group the data by a specific attribute, such as by country or browser name.
 
 ## Analyzing a funnel
 
