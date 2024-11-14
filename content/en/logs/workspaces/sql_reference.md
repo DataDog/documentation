@@ -63,7 +63,7 @@ AS avg_response_time
 FROM logs 
 WHERE status_code = 200 
 GROUP BY service_name {{< /code-block >}} |
-| `CEIL`/`CEILING(numerical column)` | Returns the value rounded up to the nearest integer.            | {{< code-block lang="sql" >}} ELECT CEIL(price) AS rounded_price 
+| `CEIL`/`CEILING(numerical column)` | Returns the value rounded up to the nearest integer.            | {{< code-block lang="sql" >}} SELECT CEIL(price) AS rounded_price 
 FROM products {{< /code-block >}} |
 | `FLOOR(numerical column)`     | Returns the value rounded down to the nearest integer.               | {{< code-block lang="sql" >}}SELECT FLOOR(price) AS floored_price 
 FROM products {{< /code-block >}} |
