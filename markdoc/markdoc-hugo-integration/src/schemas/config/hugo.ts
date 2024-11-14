@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { IntegrationConfigSchema } from './integration';
-import { PageConfigSchema } from './page';
 
 /**
  * A mapping of commonly accessed Hugo subdirectories
@@ -25,7 +24,12 @@ export type HugoSubdirsByType = z.infer<typeof HugoSubdirsByTypeSchema>;
 
 /**
  * Any Hugo config that applies to the entire site,
- * such as the list of supported languages.
+ * such as the list of supported languages and the base URL.
+ *
+ * This typically represents the information in
+ * Hugo's `config` directory, but can also include
+ * other site-wide configuration data, such as the
+ * i18n translation data.
  */
 export const HugoGlobalConfigSchema = IntegrationConfigSchema.extend({
   dirs: HugoSubdirsByTypeSchema
@@ -51,9 +55,31 @@ export const HugoGlobalConfigSchema = IntegrationConfigSchema.extend({
 
 /**
  * Any Hugo config that applies to the entire site,
- * such as the list of supported languages.
+ * such as the list of supported languages and the base URL.
+ *
+ * This typically represents the information in
+ * Hugo's `config` directory, but can also include
+ * other site-wide configuration data, such as the
+ * i18n translation data.
  */
 export type HugoGlobalConfig = z.infer<typeof HugoGlobalConfigSchema>;
+
+/**
+ * Any Hugo config that applies to a single page,
+ * such as the language currently being processed.
+ */
+export const PageConfigSchema = z
+  .object({
+    lang: z.string(), // "en" etc.
+    path: z.string()
+  })
+  .strict();
+
+/**
+ * Any Hugo config that applies to a single page,
+ * such as the language currently being processed.
+ */
+export type PageConfig = z.infer<typeof PageConfigSchema>;
 
 /**
  * Any Hugo-specific config data needed for transforming and rendering

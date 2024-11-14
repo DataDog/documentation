@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 /**
  * The configuration object that is passed to the integration
- * when it is instantiated. The integration unpacks it
- * into a HugoGlobalConfig object.
+ * when it is instantiated by the site build process.
+ * The integration unpacks it into a HugoGlobalConfig object.
  */
 export const IntegrationConfigSchema = z.object({
   siteParams: z.object({
@@ -25,7 +25,7 @@ export const IntegrationConfigSchema = z.object({
 
 /**
  * The configuration object that is passed to the integration
- * when it is instantiated. The integration unpacks it
- * into a HugoGlobalConfig object.
+ * when it is instantiated by the site build process.
+ * The integration unpacks it into a HugoGlobalConfig object.
  */
 export type IntegrationConfig = z.infer<typeof IntegrationConfigSchema>;
