@@ -104,7 +104,7 @@ See the [metrics types][16] documentation for more detailed examples of each met
 
 You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
-**Tip**: To open your metrics from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `metrics`.
+**Tip**: To open the Metrics Summary page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `metrics`.
 
 Here's an example of a timeseries visualization:
 
