@@ -2,13 +2,16 @@ import { z } from 'zod';
 import { SNAKE_CASE_REGEX, PREF_OPTIONS_ID_REGEX } from '../regexes';
 
 /**
- * An option for a preference,
- * as defined in the preference options configuration files.
+ * A single option for a preference,
+ * as defined in the preference options configuration files
+ * and parsed directly from that YAML.
  *
  * @example
- * display_name: Postgres
- * id: postgres
- * default: true
+ * {
+ *   display_name: "Postgres",
+ *   id: "postgres",
+ *   default: true
+ * }
  */
 export const PrefOptionSchema = z
   .object({
@@ -19,10 +22,11 @@ export const PrefOptionSchema = z
   .strict();
 
 /**
- * The pref options config as it appears in the YAML,
+ * The pref options config as it is parsed from the config YAML,
  * without additional default values populated.
  * For example, the display value will be missing
- * from most of the options.
+ * from an option when the intention is to use the default
+ * display name as defined in the options allowlist.
  */
 export const RawPrefOptionsConfigSchema = z.record(
   z.string().regex(PREF_OPTIONS_ID_REGEX),
@@ -58,11 +62,19 @@ export const RawPrefOptionsConfigSchema = z.record(
 );
 
 /**
- * The pref options config as it appears in the YAML,
+ * The pref options config as it is parsed from the config YAML,
  * without additional default values populated.
+ * For example, the display value will be missing
+ * from an option when the intention is to use the default
+ * display name as defined in the options allowlist.
  */
 export type RawPrefOptionsConfig = z.infer<typeof RawPrefOptionsConfigSchema>;
 
+/**
+ * A minified version of the PrefOptionSchema.
+ * This is used to reduce the size of the preference options
+ * configuration when it is embedded in HTML.
+ */
 const MinifiedPrefOptionSchema = z
   .object({
     n: z.string(), // display name
@@ -71,12 +83,27 @@ const MinifiedPrefOptionSchema = z
   })
   .strict();
 
+/**
+ * A minified version of the PrefOptionSchema.
+ * This is used to reduce the size of the preference options
+ * configuration when it is embedded in HTML.
+ *
+ * @example
+ * {
+ *   n: "Postgres", // option display name
+ *   d: true,       // this option is the default
+ *   i: "postgres"  // option ID
+ * }
+ */
 interface MinifiedPrefOption {
   n: string; // display name
   d?: boolean; // default
   i: string; // ID
 }
 
+/**
+ * A minified version of the PrefOptionsConfigSchema.
+ */
 export const MinifiedPrefOptionsConfigSchema = z.record(
   z.string().regex(PREF_OPTIONS_ID_REGEX),
   z.array(MinifiedPrefOptionSchema)
@@ -91,7 +118,7 @@ export interface MinifiedPrefOptionsConfig {
 
 /**
  * The validated preference options configuration
- * ingested from YAML files.
+ * as it is parsed directly from the YAML config files.
  */
 export const PrefOptionsConfigSchema = z.record(
   z.string().regex(PREF_OPTIONS_ID_REGEX),
@@ -124,7 +151,7 @@ export const PrefOptionsConfigSchema = z.record(
 
 /**
  * The validated preference options configuration
- * ingested from YAML files.
+ * as it is parsed directly from the YAML config files.
  *
  * @example
  * {

@@ -36,7 +36,7 @@ export class MarkdocHugoIntegration {
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string[]> = {};
-  private compiledFiles: string[] = [];
+  private compiledFilePaths: string[] = [];
 
   /**
    * Validate and store the provided configuration.
@@ -141,7 +141,7 @@ export class MarkdocHugoIntegration {
    */
   compileMdocFiles(): CompilationResult {
     this.#resetErrors();
-    this.compiledFiles = [];
+    this.compiledFilePaths = [];
 
     const markdocFilepaths = FileNavigator.findInDir(
       this.hugoGlobalConfig.dirs.content,
@@ -168,11 +168,11 @@ export class MarkdocHugoIntegration {
       });
 
       if (compiledFilepath) {
-        this.compiledFiles.push(compiledFilepath);
+        this.compiledFilePaths.push(compiledFilepath);
       }
     }
 
-    this.compiledFiles.sort();
+    this.compiledFilePaths.sort();
 
     if (this.#hasErrors()) {
       this.logErrorsToConsole();
@@ -182,7 +182,7 @@ export class MarkdocHugoIntegration {
       hasErrors: this.#hasErrors(),
       parsingErrorReportsByFilePath: this.parsingErrorReportsByFilePath,
       validationErrorsByFilePath: this.validationErrorsByFilePath,
-      compiledFiles: this.compiledFiles
+      compiledFilePaths: this.compiledFilePaths
     };
   }
 

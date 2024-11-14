@@ -14,6 +14,11 @@ export const PagePrefConfigSchema = z
   })
   .strict();
 
+/**
+ * The configuration of an individual page preference,
+ * minified in order to reduce the load time of the HTML file
+ * it's embedded in.
+ */
 export const MinifiedPagePrefConfigSchema = z
   .object({
     n: z.string(), // display name
@@ -23,8 +28,24 @@ export const MinifiedPagePrefConfigSchema = z
   })
   .strict();
 
-// Defining this type without Zod
-// to keep Zod out of the browser bundle
+/**
+ * The configuration of an individual page preference,
+ * minified in order to reduce the load time of the HTML file
+ * it's embedded in.
+ *
+ * To keep Zod out of the browser bundle,
+ * this type is defined independently of Zod,
+ * rather than being derived directly from the schema,
+ * which is the usual approach and would be less redundant.
+ *
+ * @example
+ * {
+ *   n: "Database",             // pref display name
+ *   i: "database",             // pref ID
+ *   o: "dbm_database_options", // options source ID
+ *   d: "postgres"              // pref default value
+ * }
+ */
 export interface MinifiedPagePrefConfig {
   n: string; // display name
   i: string; // ID
@@ -32,10 +53,23 @@ export interface MinifiedPagePrefConfig {
   d?: string; // default value
 }
 
+/**
+ * An array of minified pref configurations,
+ * used to represent all available preferences on the page
+ * in a compact format to reduce HTML load time.
+ *
+ * To keep Zod out of the browser bundle,
+ * this type is defined independently of Zod,
+ * rather than being derived directly from the schema,
+ * which is the usual approach and would be less redundant.
+ */
 export const MinifiedPagePrefsConfigSchema = z.array(MinifiedPagePrefConfigSchema);
 
-// Defining this type without Zod
-// to keep Zod out of the browser bundle
+/**
+ * An array of minified pref configurations,
+ * used to represent all available preferences on the page
+ * in a compact format to reduce HTML load time.
+ */
 export type MinifiedPagePrefsConfig = Array<MinifiedPagePrefConfig>;
 
 /**
@@ -93,6 +127,10 @@ export const PagePrefsConfigSchema = z
  */
 export type PagePrefsConfig = z.infer<typeof PagePrefsConfigSchema>;
 
+/**
+ * The list of further reading links, as parsed directly from
+ * the front matter YAML of a given file.
+ */
 export const FurtherReadingConfigSchema = z
   .array(
     z
@@ -105,8 +143,30 @@ export const FurtherReadingConfigSchema = z
   )
   .min(1);
 
+/**
+ * The list of further reading links, as parsed directly from
+ * the front matter YAML of a given file.
+ *
+ * @example
+ * [
+ *   {
+ *     link: "https://exampleblogpost.com",
+ *     text: "Example blog post",
+ *     tag: "blog"
+ *   },
+ *   {
+ *     link: "https://random.com",
+ *     text: "Some random link with no applicable tag"
+ *   }
+ * ]
+ */
 export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
 
+/**
+ * The front matter of a document required by the integration
+ * (additional keys are allowed in the front matter YAML,
+ * but are ignored by the integration).
+ */
 export const FrontmatterSchema = z.object({
   title: z.string(),
   page_preferences: PagePrefsConfigSchema.optional(),

@@ -60,13 +60,13 @@ const assetsPartialContents = markdocIntegration.buildAssetsPartial();
 fs.writeFileSync(ASSETS_PARTIAL_PATH, assetsPartialContents);
 
 // Compile all .mdoc files found in the content directory
-const { compiledFiles, hasErrors } = markdocIntegration.compileMdocFiles();
+const { compiledFilePaths, hasErrors } = markdocIntegration.compileMdocFiles();
 
 // Build a .gitignore file for the compiled files,
 // to be written to the content directory
 let gitignoreContents = `# GENERATED FILE: DO NOT EDIT
 # Ignore .md files compiled from Markdoc\n`;
-compiledFiles.forEach((file) => {
+compiledFilePaths.forEach((file) => {
     const sanitizedFile = file.replace(CONTENT_DIR, '');
     gitignoreContents += sanitizedFile + '\n';
 });

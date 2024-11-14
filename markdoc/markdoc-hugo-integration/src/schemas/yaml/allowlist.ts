@@ -37,7 +37,7 @@ export type AllowlistConfigEntry = z.infer<typeof AllowlistConfigEntrySchema>;
 
 /**
  * An allowlist configuration (such as the allowed pref IDs)
- * as it appears in the YAML file.
+ * as it is parsed directly from the YAML file.
  */
 export const AllowlistConfigSchema = z
   .object({
