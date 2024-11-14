@@ -68,7 +68,7 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 
 ## Explore infrastructure packages
 
-The [Infrastructure Packages Catalog][1] provides a real-time inventory of all packages across hosts, host images and container images deployed in your infrastructure, offering an interface to investigate your SBOMs, enriched with vulnerability and runtime context.
+The [Infrastructure Packages Catalog][10] provides a real-time inventory of all packages across hosts, host images and container images deployed in your infrastructure, offering an interface to investigate your SBOMs, enriched with vulnerability and runtime context.
 
 Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all resources using it.
 
@@ -87,6 +87,7 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [5]: /security/application_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+[10]: https://app.datadoghq.com/security/catalog/libraries
 
 
 ## Further reading
