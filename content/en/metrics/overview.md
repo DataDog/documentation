@@ -24,14 +24,14 @@ With the Metrics Overview Page you can learn how to:
 
 This section shows all of your metric sources, the additional processing and configuration that is applied to your metrics data, and a volume breakdown of standard and custom metrics.
 
-**Note**: the Overview page is not dedicated to managing costs of metrics. See [Best Practices for Custom Metrics Governance][25] for further details on how to optimize costs.
+**Note**: the Overview page is not dedicated to managing the costs of metrics. See [Best Practices for Custom Metrics Governance][25] for further details on how to optimize costs.
 
 ### Metric Sources
 
 The **Metric Sources** column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][2] scoped to that source. Your Datadog metrics can originate from the following sources:
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
-The [Datadog Agent][3] collects metrics from the hosts it's installed on, and forwards them to Datadog. These metrics could originate from:
+The [Datadog Agent][3] collects metrics from the hosts where it's installed and forwards them to Datadog. These metrics could originate from:
 
    - Any of the official Datadog integrations that are bundled with the Agent. See the [integrations-core repository][4] for a full listing of the available Agent-based integrations.
    - [DogStatsD][6], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][7] protocol with some Datadog-specific extensions.
