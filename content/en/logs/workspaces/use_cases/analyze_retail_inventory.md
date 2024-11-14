@@ -98,7 +98,8 @@ Create a visualization to display product sales distribution by country.
 1. Select your location analysis as the source dataset.
 1. Select **Pie Chart** from the "Visualize as" dropdown.
 1. Group by product and country to view total quantities sold for each product across different regions.
-  {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/vizualize_product_sales_by_country.png" alt="Group by product and country to see total quantities sold for each product across different regions" style="width:100%;" >}}
+  {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/visualize_product_sales_by_country.png" alt="Group by product and country to see total quantities sold for each product across different regions" style="width:100%;" >}}
+  {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/visualize_pie_chart.png" alt="Pie chart of example inventory product by country" style="width:100%;" >}}
 
 ## Further reading
 
