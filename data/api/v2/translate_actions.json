@@ -563,6 +563,42 @@
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
   },
+  "ListAWSAccounts": {
+    "description": "Get a list of AWS Account Integration Configs.",
+    "summary": "List all AWS integrations"
+  },
+  "CreateAWSAccount": {
+    "description": "Create a new AWS Account Integration Config.",
+    "summary": "Create an AWS integration",
+    "request_description": "",
+    "request_schema_description": "AWS Account Create Request body"
+  },
+  "DeleteAWSAccount": {
+    "description": "Delete an AWS Account Integration Config",
+    "summary": "Delete an AWS integration"
+  },
+  "GetAWSAccount": {
+    "description": "Get an AWS Account Integration Config",
+    "summary": "Get an AWS integration by config ID"
+  },
+  "UpdateAWSAccount": {
+    "description": "Update an AWS Account Integration Config",
+    "summary": "Update an AWS integration",
+    "request_description": "",
+    "request_schema_description": "AWS Account Update Request body"
+  },
+  "ListAWSNamespaces": {
+    "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
+    "summary": "List available namespaces"
+  },
+  "CreateNewAWSExternalID": {
+    "description": "Generate a new external ID for AWS role-based authentication.",
+    "summary": "Generate a new external ID"
+  },
+  "ListAWSLogsServices": {
+    "description": "Get a list of AWS services that can send logs to Datadog.",
+    "summary": "Get list of AWS log ready services"
+  },
   "ListGCPSTSAccounts": {
     "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
     "summary": "List all GCP STS-enabled service accounts"
