@@ -1,5 +1,5 @@
 ---
-title: Analyze Login Attempts for e-PHI
+title: Analyze Retail Inventory
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
@@ -25,7 +25,7 @@ This guide assumes that you are:
 ### 1. Bring in your data source
 
 To get started, bring in the logs from the service(s) you want to analyze.
-1. [Create a new Workspace][1].
+1. [Create a Workspace][1].
 1. Select **Logs Query** as your data source.
 
 ### 2. Query for inventory and sales data
@@ -89,7 +89,7 @@ Achieve this by joining your inventory and sales data with a [Reference Table][5
   GROUP BY lsa.product_id, location.store_country
   ```
 
-For each product, we are summing the total quantity sold in each country and grouping them in a way that will allow us to visualize by product, what were the quantities sold in each country. 
+For each product, this query sums the total quantity sold in each country and groups them in a way that will visualize by product, what were the quantities sold in each country. 
 
 ### 5. Visualize product sales by country
 
