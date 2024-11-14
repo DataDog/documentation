@@ -32,7 +32,7 @@ You can add any additional filters, facets, or attributes to narrow your search 
 
 ### 3. Group status codes together
 
-To analyze the data further, use the Analysis feature to query your datasets with SQL. Create a `status_group` by 200s, 300s, 400s, and 500s to group the status codes together. Anything not matching a status code is marked "unknown". This is helpful for correlating the status codes to the user errors as we will see later on. 
+To analyze the data further, use the Analysis feature to query your datasets with SQL. Create a `status_group` by 200s, 300s, 400s, and 500s to group the status codes together. With grouped status codes, you can more easily correlate them with user errors, as we will see later on. 
 
 1. Add an [Analysis cell][3] to your workspace.
 1. Run this SQL query.
