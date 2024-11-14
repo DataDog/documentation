@@ -37,7 +37,7 @@ Sensitive data, such as credit card numbers, API keys, IP addresses, and persona
 
 **Note**: See [PCI DSS Compliance][1] for information on setting up a PCI-compliant Datadog organization.
 
-## Scan Telemetry Data
+## Scan telemetry data
 
 {{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="Five different sensitive issues detected where two have critical priority, one has medium priority, and two are info." style="width:100%;" >}}
 
@@ -70,7 +70,7 @@ See [Set Up Sensitive Data Scanner using the Agent][2] for setup details.
 
 [Observability Pipelines][3] collects and processes your data within your environment, and then routes the data to their downstream integrations. When you [set up a pipeline][4] in Observability Pipelines, add the [Sensitive Data Scanner processor][5] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email address, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
 
-## Scan Cloud Storage
+## Scan cloud storage
 
 {{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
   Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
@@ -88,7 +88,7 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 See [Set up Sensitive Data Scanner for Cloud Storage][2] for setup details.
 
-## Investigate Sensitive Data Issues
+## Investigate sensitive data issues
 
 {{< img src="sensitive_data_scanner/sds_summary_20241114.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
 
@@ -102,7 +102,7 @@ Use the [Summary page][11] to see details of sensitive data issues identified by
 
 See [Investigate Sensitive Data Issues][12] for more information on how to use the Summary page to triage your sensitive data issues.
 
-## Review Sensitive Data Trends
+## Review sensitive data trends
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
