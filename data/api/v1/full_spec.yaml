@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
