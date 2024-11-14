@@ -38,6 +38,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: ブログ
   text: Datadog CI Pipeline Visibility で CI/CD のモダナイゼーションを監視
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: ブログ
+  text: Datadog を Detection as Code (コードとしての検出) に使用する方法
 title: Continuous Integration Visibility
 ---
 
