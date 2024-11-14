@@ -78,7 +78,7 @@ See [Set Up Sensitive Data Scanner using the Agent][2] for setup details.
 
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="Your image description" style="width:100%;" >}}
 
-If you have [Sensitive Data Scanner][6] enabled, you can now catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. \*\*Note\*\*: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
+If you have [Sensitive Data Scanner][6] enabled, you can now catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
 
 Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][7] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][8], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time.
 
@@ -106,7 +106,7 @@ See [Investigate Sensitive Data Issues][12] for more information on how to use t
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summarizing sensitive data issues is automatically installed in your account. To access this dashboard, navigate to **Dashboards** \> **Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summarizing sensitive data issues is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
 
 ## Further reading
 
