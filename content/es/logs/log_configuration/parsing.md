@@ -66,7 +66,7 @@ Después de procesar, se genera el siguiente log estructurado:
 En esta lista encontrarás todos los emparejadores y filtros implementados de forma nativa por Datadog:
 
 {{< tabs >}}
-{{% tab "Matchers" (Emparejadores) %}}
+{{% tab "Emparejadores" %}}
 
 `date("pattern"[, "timezoneId"[, "localeId"]])` 
 : Empareja una fecha con el patrón especificado y la analiza para producir una marca de tiempo Unix. [Consulta los ejemplos del emparejador de fechas](#parsing-dates).
@@ -144,7 +144,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Empareja cualquier cadena, incluidos espacios y líneas nuevas. Equivale a `.*` en expresiones regulares. Utilízalo cuando ninguno de los patrones anteriores sea apropiado.
 
 {{% /tab %}}
-{{% tab "Filters" (Filtros) %}}
+{{% tab "Filtros" %}}
 
 `number`
 : Analiza una coincidencia como un número de doble precisión.
@@ -206,7 +206,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 
 En la parte inferior de los cuadros de tu procesador grok se encuentra la sección **Advanced Settings** (Configuración avanzada):
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Configuración avanzada style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Configuración avanzada" style="width:80%;">}}
 
 ### Análisis de un atributo con texto específico
 

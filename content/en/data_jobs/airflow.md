@@ -14,8 +14,8 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/monitoring-for-data-and-data-pipelines/" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
-Data Jobs Monitoring for Apache Airflow is in Preview. To request access, complete the form.
+{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in Preview" >}}
+To try the preview for Airflow monitoring, follow the setup instructions below.
 {{< /callout >}}
 
 [Data Jobs Monitoring][1] provides visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
