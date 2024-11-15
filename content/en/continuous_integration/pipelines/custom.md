@@ -27,6 +27,7 @@ You can send custom pipelines through HTTP using the [public API endpoint][1]. F
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
+| [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 | [Manual steps][8] | Manual steps | View manually triggered pipelines. |
 | [Parameters][9] | Parameters | Set custom parameters when a pipeline is triggered. |
@@ -43,7 +44,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    - `DD-API-KEY`: Your [Datadog API key][14].
    - `Content-Type`: `application/json`.
 
-1. Prepare the payload body by entering information about the [pipeline execution][2] in a cURL command:
+2. Prepare the payload body by entering information about the [pipeline execution][2] in a cURL command:
 
    | Parameter Name | Description | Example Value |
    |---|---|---|
@@ -57,8 +58,8 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    | Start | Time when the pipeline run started (it should not include any [queue time][12]). The time format must be RFC3339. | `2024-08-22T11:36:29-07:00` |
    | End | Time when the pipeline run finished. The time format must be RFC3339. | `2024-08-22T14:36:00-07:00` |
    | URL | The URL to look at the pipeline in the CI provider UI. | `http://your-ci-provider.com/pipeline/{pipeline-id}` |
-   
-   For example, this payload sends a CI pipeline event to Datadog: 
+
+   For example, this payload sends a CI pipeline event to Datadog:
 
    {{< code-block lang="bash" >}}
    curl -X POST "https://api.datadoghq.com/api/v2/ci/pipeline" \
@@ -90,7 +91,16 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    EOF
    {{< /code-block >}}
 
-1. After sending your pipeline event to Datadog, you can integrate additional event types such as `stage`, `job`, and `step`. For more information, see the [Send Pipeline Event endpoint][1].
+3. After sending your pipeline event to Datadog, you can integrate additional event types such as `stage`, `job`, and `step`. For more information, see the [Send Pipeline Event endpoint][1].
+
+## Running pipelines
+Pipeline events sent with the `status` set to `running` have the same `unique_id` as the final pipeline event. Running pipelines can be updated by adding more information while they are still running. A running pipeline consists of the following events:
+
+1. The initial running pipeline event with the `status` set to `running`.
+2. Optionally, `N` running pipeline events that update the pipeline with more information, with the same `unique_id` and the `status` set to `running`.
+3. The final pipeline event **without** a `running` status and the same `unique_id`.
+
+**Note**: The most recent value may not always be the one displayed in the UI when a field is updated. For example, if the tag `my_tag` is set to `value1` in the first running pipeline, and then is updated to `value2`, you may see `value1` instead of `value2` in the UI. It is recommended to only update running pipelines by adding more fields instead modifying existing ones.
 
 ## Visualize pipeline data in Datadog
 
@@ -116,3 +126,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [12]: /glossary/#queue-time
 [13]: /continuous_integration/search/#search-for-pipelines
 [14]: https://app.datadoghq.com/organization-settings/api-keys
+[15]: /glossary/#running-pipeline
