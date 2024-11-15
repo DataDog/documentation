@@ -1753,26 +1753,31 @@ menu:
       url: metrics/volume/
       parent: metrics_top_level
       weight: 7
+    - name: Overview
+      identifier: metrics_overview
+      url: metrics/overview/
+      parent: metrics_top_level
+      weight: 8
     - name: Advanced Filtering
       url: metrics/advanced-filtering/
       parent: metrics_top_level
       identifier: metrics_advanced_filtering
-      weight: 8
+      weight: 9
     - name: Nested Queries
       url: metrics/nested_queries/
       parent: metrics_top_level
       identifier: metrics_nested_queries
-      weight: 9
+      weight: 10
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 10
+      weight: 11
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 11
+      weight: 12
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
