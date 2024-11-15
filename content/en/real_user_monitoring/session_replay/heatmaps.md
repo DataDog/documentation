@@ -1,24 +1,25 @@
 ---
 title: Heatmaps
 description: Heatmaps are a type of visualization allowing you to see where users click on your website.
+aliases:
+- /real_user_monitoring/heatmaps
 further_reading:
-- link: '/product_analytics/session_replay/browser/'
+- link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'
-  text: 'Session Replay'
+  text: 'Session Replay for Browsers'
+- link: '/real_user_monitoring/session_replay/mobile/'
+  tag: 'Documentation'
+  text: 'Session Replay for Mobile'
 - link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
   tag: 'Blog'
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
-A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps:
+A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. Real User Monitoring (RUM) has three different types of heatmaps:
 
-- **Click maps:** View user interactions (clicks) to understand how users engage with your page
+- **Click maps:** View user interactions (clicks) to understand how users engage with your page.
 - **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
 - **Scroll maps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
 
@@ -30,19 +31,19 @@ To get started with heatmaps:
 
 1. Verify your SDK version:
   - For Click maps, you must be on the latest version of the SDK (v4.40.0 or later).
-  - For Scroll maps, you must be on (v4.50.0 or later)
+  - For Scroll maps, you must be on (v4.50.0 or later).
 2. Enable [Session Replay][1].
 3. Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (required for Clickmaps).
 
 ## Getting started
 
-Navigate to [**Digital Experience > Product Analytics > Heatmaps**][2]. Select your application and view.
+Navigate to [**Digital Experience > Real User Monitoring > Session Replay > Heatmaps**][2]. Select your application and view.
 
-On the [Product Analytics landing page][3], select your application and view. You can select the type of heatmap you would like to view as well (Top Elements, Click Map, Scroll Map).
+On the [Real User Monitoring landing page][3], select your application from the [application selector][4] and view. Under Map Type, you can select the type of heatmap you would like to view: Top Elements, Click Map, or Scroll Map. Clicking one of these options takes you to the [heatmap page][2] for a particular view.
 
-{{< img src="product_analytics/heatmaps/heatmaps-pa.png" alt="Select an application to view heatmaps for it" style="width:100%;" >}}
+{{< img src="real_user_monitoring/heatmaps/rum-heatmaps-getting-started.png" alt="Select an application to view heatmaps for it" style="width:100%;" >}}
 
-This takes you to the [heatmap page][2] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
+ You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-filters-v2.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
@@ -50,7 +51,7 @@ This takes you to the [heatmap page][2] for a particular view. You can switch th
 
 A Click map shows you the most interacted-with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
-{{< img src="real_user_monitoring/heatmaps/heatmap_v3.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmap_v3.png" alt="Clickmap data overlayed on a website." style="width:100%;">}}
 
 Each Click map also offers analytics such as:
 
@@ -67,7 +68,7 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 ## Top Elements
 
-Top Elements heatmaps aggregate click actions on a given view by displaying the most interacted-with elements and their rank. The ranking on the map itself corresponds to the action name on the side.
+Top Elements aggregate click actions on a given view by displaying the most interacted-with elements and their rank. The ranking on the map itself corresponds to the action name on the side.
 
 {{< img src="real_user_monitoring/heatmaps/top-elements-v3.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
 
@@ -75,7 +76,7 @@ Click any action name in the panel to highlight the corresponding action on the 
 
 ## Scroll maps
 
-Scroll maps show a visual of the aggregate scroll activity on a given page. Use Scroll maps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scroll map to the depth you wish to assess.
+Scroll maps display the aggregate scroll activity on a given page. Use Scroll maps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scroll map to the depth you wish to assess.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-v3.png" alt="Scrollmap of the bedding page in a sample ecommerce application" style="width:100%;">}}
 
@@ -91,13 +92,13 @@ A heatmap's list of backgrounds cannot be modified.
 
 ## Next steps
 
-After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [Analytics explorer][4]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
+After analyzing heatmaps, the next step is to understand the user action by exploring related data. Pivot to the [Analytics explorer][4] or watch associated [session replays][1] to visually see user actions in the context of their overall session.
 
 ## Troubleshooting
 
 ### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
 
-Heatmaps are based on Product Analytics view names. Depending on how your Product Analytics application is configured, many pages can start being grouped under the same view name, or you can start having specific view names.
+Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having specific view names.
 
 ### The view that I selected is not showing the initial content.
 
@@ -111,9 +112,9 @@ Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm
 
 The tooltip on the icon says **element is not visible**. This means that the element is a common action on your page, but it's not displayed on the background in the heatmap. To see that element, you can click **Choose Background** in the bottom right corner to switch the background of your heatmap to one where that element is present. 
 
-### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
+### After attempting to create a heatmap, I see a "No Replay Data" state appear.
 
-This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][5], it may also take a few minutes for the Session Replay to be available for viewing.
+This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][6], it may also take a few minutes for the Session Replay to be available for viewing.
 
 ### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
 
@@ -129,8 +130,9 @@ User information is not collected by default. Heatmaps use the user information 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/session_replay/browser/
-[2]: https://app.datadoghq.com/product-analytics/heatmap
-[3]: https://app.datadoghq.com/product-analytics/summary
-[4]: /product_analytics/analytics_explorer/
-[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json 
+[1]: /real_user_monitoring/session_replay/
+[2]: https://app.datadoghq.com/rum/heatmap/
+[3]: https://app.datadoghq.com/rum/performance-monitoring
+[4]: /real_user_monitoring/explorer/#view-by-application
+[5]: https://app.datadoghq.com/rum/sessions
+[6]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json 
