@@ -59,6 +59,12 @@ To use the app with your data, click **+ Connect Data**, then either create a ne
 
 You can change the selected connection by clicking **Change Connection** in the app.
 
+## App Builder Overview dashboard
+
+The App Builder Overview dashboard provides a high-level overview of your Datadog apps. To find the dashboard, go to your [Dashboard list][3] and search for `App Builder Overview`.
+
+{{< img src="service_management/app_builder/app-builder-dashboard.png" alt="The App Builder Overview dashboard" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
