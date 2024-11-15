@@ -73,7 +73,7 @@ ip_address,additional_data,category,intention,source
 
 ### Uploading and enabling your own threat intel
 
-Datadog supports creating reference tables via a manual upload, or by periodically retrieving the data from [Amazon S3, Azure storage, or Google Cloud storage][10].
+Datadog supports creating reference tables through a manual upload, or by periodically retrieving the data from [Amazon S3, Azure storage, or Google Cloud storage][10].
 
 Notes:
 - It can take 10 to 30 minutes to start enriching ASM traces after creating a table.
@@ -82,7 +82,7 @@ Notes:
 On a new [references table][4] page:
 
 1. Name the table. The table name is referenced in ASM's **Threat Intel** config.
-2. Upload a local CSV or import a CSV from a cloud storage bucket. The file will undergo normalization and validation.
+2. Upload a local CSV or import a CSV from a cloud storage bucket. The file is normalized and validated.
 3. Preview the table schema and choose the IP address as the Primary Key.
    
    {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table.png" alt="New reference table" style="width:100%;" >}}
@@ -113,7 +113,7 @@ Other useful cloud import details to remember:
 - The expected latency before updated enrichments are available when a source is uploaded or updated is 10 to 30 minutes.
 - How to know when the updates are applied: The changes are visible in the reference table or in the spans. Select the **View Change Events** link from settings on the reference table detail page to see the related events.
 - The update replaces the *entire table* with the new data. 
-- In the case of a duplicated primary key, the rows with the duplicated key are not written, and an error is shown in the reference table detail page.
+- In case of a duplicated primary key, the rows with the duplicated key are not written, and an error is shown in the reference table detail page.
 
 ### Filter traces by joining the list with a Reference Table
 
