@@ -1,13 +1,13 @@
 import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
-  PrefOptionsConfig,
-  PrefOptionsConfigSchema
-} from '../../../src/schemas/yaml/prefOptions';
+  FilterOptionsConfig,
+  FilterOptionsConfigSchema
+} from '../../../src/schemas/yaml/filterOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
-describe('YamlConfigParser.getDefaultValuesByPrefId', () => {
-  const prefOptions: PrefOptionsConfig = {
+describe('YamlConfigParser.getDefaultValuesByFilterId', () => {
+  const filterOptions: FilterOptionsConfig = {
     color_options: [
       { id: 'blue', display_name: 'Blue', default: true },
       { id: 'red', display_name: 'Red' }
@@ -41,11 +41,11 @@ describe('YamlConfigParser.getDefaultValuesByPrefId', () => {
       { id: 'crimson', display_name: 'Crimson' }
     ]
   };
-  PrefOptionsConfigSchema.parse(prefOptions);
+  FilterOptionsConfigSchema.parse(filterOptions);
 
   const frontmatter: Frontmatter = {
     title: 'My Page',
-    page_preferences: [
+    page_filters: [
       {
         display_name: 'Color',
         id: 'color',
@@ -65,12 +65,12 @@ describe('YamlConfigParser.getDefaultValuesByPrefId', () => {
   };
   FrontmatterSchema.parse(frontmatter);
 
-  test('derives the default values for each preference', () => {
-    const defaultValuesByPrefId = YamlConfigParser.getDefaultValuesByPrefId(
+  test('derives the default values for each filter', () => {
+    const defaultValsByFilterId = YamlConfigParser.getDefaultValuesByFilterId(
       frontmatter,
-      prefOptions
+      filterOptions
     );
-    expect(defaultValuesByPrefId).toEqual({
+    expect(defaultValsByFilterId).toEqual({
       color: 'blue',
       finish: 'eggshell',
       paint: 'elegant_royal'

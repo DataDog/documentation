@@ -10,7 +10,7 @@ export const HugoSubdirsByTypeSchema = z
   .object({
     content: z.string().min(1),
     partials: z.string().min(1),
-    prefsConfig: z.string().min(1),
+    filtersConfig: z.string().min(1),
     images: z.string().min(1)
   })
   .strict();

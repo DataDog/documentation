@@ -1,24 +1,26 @@
-import { ResolvedPagePrefs } from '../../../schemas/pageFilters';
+import { ResolvedPageFilters } from '../../../schemas/pageFilters';
 
 /**
- * Given a resolved page prefs object, build the UI for the filter selector
+ * Given a resolved page filters object, build the UI for the filter selector
  * that goes at the top of the page.
  *
- * This runs at compile time, but also client-side on pref selection change,
+ * This runs at compile time, but also client-side on filter selection change,
  * so JSX templating is not available.
  */
-export const buildFilterSelectorUi = (resolvedPagePrefs: ResolvedPagePrefs): string => {
+export const buildFilterSelectorUi = (
+  resolvedPageFilters: ResolvedPageFilters
+): string => {
   let selectorHtml = '<div>';
-  Object.keys(resolvedPagePrefs).forEach((prefId) => {
-    const resolvedPref = resolvedPagePrefs[prefId];
-    const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
-    selectorHtml += '<div class="mdoc-pref__container">';
+  Object.keys(resolvedPageFilters).forEach((filterId) => {
+    const resolvedFilter = resolvedPageFilters[filterId];
+    const currentValue = resolvedFilter.currentValue || resolvedFilter.defaultValue;
+    selectorHtml += '<div class="mdoc-filter__container">';
     // Render the label
-    selectorHtml += `<div class="mdoc-pref__label">${resolvedPref.displayName}</div>`;
+    selectorHtml += `<div class="mdoc-filter__label">${resolvedFilter.displayName}</div>`;
     // Render each option pill
-    resolvedPref.options.forEach((option) => {
+    resolvedFilter.options.forEach((option) => {
       const selected = option.id === currentValue ? 'selected' : '';
-      selectorHtml += `<div class="mdoc-pref__pill ${selected}" data-pref-id="${resolvedPref.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+      selectorHtml += `<div class="mdoc-filter__pill ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
     });
     selectorHtml += '</div>';
   });

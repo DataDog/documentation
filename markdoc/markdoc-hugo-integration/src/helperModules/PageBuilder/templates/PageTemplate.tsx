@@ -1,8 +1,6 @@
-import { resolvePagePrefs } from '../../prefsResolution';
+import { resolvePageFilters } from '../../filtersResolution';
 import { buildFilterSelectorUi } from '../components/ContentFilter';
-import { Frontmatter } from '../../../schemas/yaml/frontMatter';
-import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
-import { PagePrefsManifest } from '../../../schemas/pageFilters';
+import { PageFiltersManifest } from '../../../schemas/pageFilters';
 
 /**
  * A JSX template for the main content area of a page,
@@ -12,15 +10,18 @@ import { PagePrefsManifest } from '../../../schemas/pageFilters';
  * only rendered once, at compile time.
  */
 export const PageTemplate = (props: {
-  valsByPrefId: Record<string, string>;
-  prefsManifest: PagePrefsManifest;
+  valsByFilterId: Record<string, string>;
+  filtersManifest: PageFiltersManifest;
   articleHtml: string;
 }) => {
-  const { valsByPrefId, articleHtml, prefsManifest } = props;
+  const { valsByFilterId, articleHtml, filtersManifest } = props;
 
   return (
     <>
-      <FilterSelectorTemplate valsByPrefId={valsByPrefId} prefsManifest={prefsManifest} />
+      <FilterSelectorTemplate
+        valsByFilterId={valsByFilterId}
+        filtersManifest={filtersManifest}
+      />
       <div
         id="mdoc-content"
         className="customizable"
@@ -31,12 +32,12 @@ export const PageTemplate = (props: {
 };
 
 function FilterSelectorTemplate(props: {
-  valsByPrefId: Record<string, string>;
-  prefsManifest: PagePrefsManifest;
+  valsByFilterId: Record<string, string>;
+  filtersManifest: PageFiltersManifest;
 }) {
-  const { valsByPrefId, prefsManifest } = props;
+  const { valsByFilterId, filtersManifest } = props;
 
-  if (Object.keys(prefsManifest.prefsById).length === 0) {
+  if (Object.keys(filtersManifest.filtersById).length === 0) {
     return null;
   }
 
@@ -45,9 +46,9 @@ function FilterSelectorTemplate(props: {
       id="mdoc-selector"
       dangerouslySetInnerHTML={{
         __html: buildFilterSelectorUi(
-          resolvePagePrefs({
-            valsByPrefId,
-            prefsManifest
+          resolvePageFilters({
+            valsByFilterId,
+            filtersManifest
           })
         )
       }}

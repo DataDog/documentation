@@ -1,4 +1,14 @@
 {
+  "filtersById": {
+    "color": {
+      "display_name": "Color",
+      "id": "color",
+    },
+    "item": {
+      "display_name": "Item",
+      "id": "item",
+    },
+  },
   "optionsById": {
     "apple": {
       "display_name": "Apple",
@@ -79,16 +89,6 @@
     "yellow": {
       "display_name": "Yellow",
       "id": "yellow",
-    },
-  },
-  "prefsById": {
-    "color": {
-      "display_name": "Color",
-      "id": "color",
-    },
-    "item": {
-      "display_name": "Item",
-      "id": "item",
     },
   },
 }

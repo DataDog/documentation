@@ -5,8 +5,8 @@ export default defineConfig({
     coverage: {
       exclude: [
         ...configDefaults.exclude,
-        '**/markdoc-client-prefs-manager.js',
-        '**/helperModules/ClientPrefsManager.ts',
+        '**/markdoc-client-filters-manager.js',
+        '**/helperModules/ClientFiltersManager.ts',
         '**/debugBookmarklet.js',
         '**/compiledScripts/**',
         '**/scripts/**',

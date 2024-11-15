@@ -1,25 +1,25 @@
 /**
  * A module responsible for finding, parsing, and validating
- * configurations that define the preference settings available to users,
- * the default values for each preference, and so on.
+ * configurations that define the filter settings available to users,
+ * the default values for each filter, and so on.
  */
 
 import {
-  MinifiedPrefOptionsConfig,
-  MinifiedPrefOptionsConfigSchema,
-  PrefOptionsConfig,
-  PrefOptionsConfigSchema,
-  RawPrefOptionsConfig,
-  RawPrefOptionsConfigSchema
-} from '../schemas/yaml/prefOptions';
+  MinifiedFilterOptionsConfig,
+  MinifiedFilterOptionsConfigSchema,
+  FilterOptionsConfig,
+  FilterOptionsConfigSchema,
+  RawFilterOptionsConfig,
+  RawFilterOptionsConfigSchema
+} from '../schemas/yaml/filterOptions';
 import { FileNavigator } from './FileNavigator';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
   Frontmatter,
-  MinifiedPagePrefConfig,
-  MinifiedPagePrefsConfig,
-  MinifiedPagePrefsConfigSchema,
-  PagePrefsConfig
+  MinifiedPageFilterConfig,
+  MinifiedPageFiltersConfig,
+  MinifiedPageFiltersConfigSchema,
+  PageFiltersConfig
 } from '../schemas/yaml/frontMatter';
 import {
   Allowlist,
@@ -30,84 +30,84 @@ import {
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { PagePrefsManifest } from '../schemas/pageFilters';
-import { PagePrefConfig } from '../schemas/yaml/frontMatter';
+import { PageFiltersManifest } from '../schemas/pageFilters';
+import { PageFilterConfig } from '../schemas/yaml/frontMatter';
 
 /**
  * A module responsible for all data ingestion from
- * the YAML files that define the available preferences
+ * the YAML files that define the available filters
  * and their options.
  */
 export class YamlConfigParser {
   /**
    * Combine a page's frontmatter, the global allowlist,
-   * and the global preference config into a single object
-   * that defines the preferences available on the page.
+   * and the global filter config into a single object
+   * that defines the filters available on the page.
    */
-  static buildPagePrefsManifest(p: {
+  static buildPageFiltersManifest(p: {
     frontmatter: Frontmatter;
-    prefOptionsConfig: PrefOptionsConfig;
+    filterOptionsConfig: FilterOptionsConfig;
     allowlist: Allowlist;
-  }): PagePrefsManifest {
+  }): PageFiltersManifest {
     // Create an empty manifest to populate
-    const manifest: PagePrefsManifest = {
-      prefsById: {},
+    const manifest: PageFiltersManifest = {
+      filtersById: {},
       optionSetsById: {},
       errors: [],
-      defaultValsByPrefId: {}
+      defaultValsByFilterId: {}
     };
 
-    // Return the empty manifest if the page has no prefs
-    if (!p.frontmatter.page_preferences) {
+    // Return the empty manifest if the page has no filters
+    if (!p.frontmatter.page_filters) {
       return manifest;
     }
 
-    // Process each entry in the frontmatter's page_preferences list
-    for (const fmPrefConfig of p.frontmatter.page_preferences) {
+    // Process each entry in the frontmatter's page_filters list
+    for (const fmFilterConfig of p.frontmatter.page_filters) {
       // Replace any placeholders in the options source
-      const optionsSetId = fmPrefConfig.options_source;
+      const optionsSetId = fmFilterConfig.options_source;
       const resolvedOptionsSetId = optionsSetId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
-          const value = manifest.defaultValsByPrefId[placeholder.toLowerCase()];
+          const value = manifest.defaultValsByFilterId[placeholder.toLowerCase()];
           return value || '';
         }
       );
 
-      const resolvedOptionSet = p.prefOptionsConfig[resolvedOptionsSetId];
+      const resolvedOptionSet = p.filterOptionsConfig[resolvedOptionsSetId];
 
       if (resolvedOptionSet) {
-        manifest.defaultValsByPrefId[fmPrefConfig.id] =
-          fmPrefConfig.default_value ||
+        manifest.defaultValsByFilterId[fmFilterConfig.id] =
+          fmFilterConfig.default_value ||
           resolvedOptionSet.find((option) => option.default)!.id;
       }
     }
 
-    // Key the configs by pref ID first, for convenience
-    const prefConfigByPrefId: Record<string, PagePrefConfig> =
-      p.frontmatter.page_preferences.reduce(
-        (obj, prefConfig) => ({ ...obj, [prefConfig.id]: prefConfig }),
+    // Key the configs by filter ID first, for convenience
+    const filterConfigByFilterId: Record<string, PageFilterConfig> =
+      p.frontmatter.page_filters.reduce(
+        (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
         {}
       );
 
-    // Keep track of the pref IDs that have been processed,
+    // Keep track of the filter IDs that have been processed,
     // to ensure correct definition order in frontmatter
-    const processedPrefIds: string[] = [];
+    const processedFilterIds: string[] = [];
 
-    // Fill out the manifest in the order that the prefs
+    // Fill out the manifest in the order that the filters
     // appeared in the frontmatter
-    p.frontmatter.page_preferences.forEach((pagePrefConfig) => {
-      // Validate the pref ID
-      if (!p.allowlist.prefsById[pagePrefConfig.id]) {
+    p.frontmatter.page_filters.forEach((pageFilterConfig) => {
+      // Validate the filter ID
+      if (!p.allowlist.filtersById[pageFilterConfig.id]) {
         manifest.errors.push(
-          `Unrecognized pref ID: The pref ID '${pagePrefConfig.id}' is not in the allowlist.`
+          `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the allowlist.`
         );
       }
 
-      const hasDynamicOptions = pagePrefConfig.options_source.match(PLACEHOLDER_REGEX);
+      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
 
-      // Get the options set ID for this pref,
-      // or all possible options set IDs if the pref's options_source
+      // Get the options set ID for this filter,
+      // or all possible options set IDs if the filter's options_source
       // contains placeholders
       let optionsSetIds: string[] = [];
 
@@ -116,25 +116,28 @@ export class YamlConfigParser {
 
         // break the options source ID into segments
         // that can be used to generate all possible options set IDs
-        const segments = pagePrefConfig.options_source.split('_').map((segment) => {
+        const segments = pageFilterConfig.options_source.split('_').map((segment) => {
           // build non-placeholder segment (array of solitary possible value)
           if (!segment.match(PLACEHOLDER_REGEX)) {
             return [segment];
           }
 
           // build placeholder segment (array of all possible values)
-          const referencedPrefId = segment.slice(1, -1).toLowerCase();
-          const referencedPrefConfig = prefConfigByPrefId[referencedPrefId];
-          if (!referencedPrefConfig || !processedPrefIds.includes(referencedPrefId)) {
+          const referencedFilterId = segment.slice(1, -1).toLowerCase();
+          const referencedFilterConfig = filterConfigByFilterId[referencedFilterId];
+          if (
+            !referencedFilterConfig ||
+            !processedFilterIds.includes(referencedFilterId)
+          ) {
             manifest.errors.push(
-              `Invalid placeholder: The placeholder ${segment} in the options source '${pagePrefConfig.options_source}' refers to an unrecognized pref ID. The file frontmatter must contain a pref with the ID '${referencedPrefId}', and it must be defined before the pref with the ID ${pagePrefConfig.id}.`
+              `Invalid placeholder: The placeholder ${segment} in the options source '${pageFilterConfig.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${pageFilterConfig.id}.`
             );
             hasFatalError = true;
             return [segment];
           }
 
           const referencedOptionsSet =
-            p.prefOptionsConfig[referencedPrefConfig.options_source];
+            p.filterOptionsConfig[referencedFilterConfig.options_source];
           return referencedOptionsSet.map((option) => option.id);
         });
 
@@ -144,7 +147,7 @@ export class YamlConfigParser {
           optionsSetIds = [];
         }
       } else {
-        optionsSetIds = [pagePrefConfig.options_source];
+        optionsSetIds = [pageFilterConfig.options_source];
       }
 
       // Populate the default value for each options set ID
@@ -152,10 +155,10 @@ export class YamlConfigParser {
       const possibleValues: string[] = [];
 
       optionsSetIds.forEach((optionsSetId) => {
-        const optionsSet = p.prefOptionsConfig[optionsSetId];
+        const optionsSet = p.filterOptionsConfig[optionsSetId];
         if (!optionsSet) {
           manifest.errors.push(
-            `Invalid options source: The options source '${optionsSetId}', which is required for the pref ID '${pagePrefConfig.id}', does not exist.`
+            `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${pageFilterConfig.id}', does not exist.`
           );
           return;
         }
@@ -175,22 +178,22 @@ export class YamlConfigParser {
         });
       });
 
-      manifest.prefsById[pagePrefConfig.id] = {
-        config: pagePrefConfig,
+      manifest.filtersById[pageFilterConfig.id] = {
+        config: pageFilterConfig,
         defaultValuesByOptionsSetId,
         possibleValues
       };
 
-      processedPrefIds.push(pagePrefConfig.id);
+      processedFilterIds.push(pageFilterConfig.id);
     });
 
-    // Add any options sets that were referenced by the prefs
-    Object.keys(manifest.prefsById).forEach((prefId) => {
-      const prefManifest = manifest.prefsById[prefId];
-      const optionsSetIds = Object.keys(prefManifest.defaultValuesByOptionsSetId);
+    // Add any options sets that were referenced by the filters
+    Object.keys(manifest.filtersById).forEach((filterId) => {
+      const filterManifest = manifest.filtersById[filterId];
+      const optionsSetIds = Object.keys(filterManifest.defaultValuesByOptionsSetId);
       optionsSetIds.forEach((optionsSetId) => {
         if (!manifest.optionSetsById[optionsSetId]) {
-          manifest.optionSetsById[optionsSetId] = p.prefOptionsConfig[optionsSetId];
+          manifest.optionSetsById[optionsSetId] = p.filterOptionsConfig[optionsSetId];
         }
       });
     });
@@ -199,17 +202,17 @@ export class YamlConfigParser {
   }
 
   /**
-   * For a given language directory, load the preference options
+   * For a given language directory, load the filter options
    * associated with that language, and validate the object as a whole.
    */
-  static loadPrefsConfigFromLangDir(p: {
+  static loadFiltersConfigFromLangDir(p: {
     dir: string;
     allowlist: Allowlist;
-  }): Readonly<PrefOptionsConfig> {
-    const optionSetsDir = `${p.dir}/option_sets`;
-    const prefOptionsConfig = this.loadPrefOptionsFromDir(optionSetsDir);
+  }): Readonly<FilterOptionsConfig> {
+    const optionSetsDir = `${p.dir}/filter_option_sets`;
+    const filterOptionsConfig = this.loadFilterOptionsFromDir(optionSetsDir);
 
-    Object.values(prefOptionsConfig).forEach((optionsList) => {
+    Object.values(filterOptionsConfig).forEach((optionsList) => {
       const displayNamesByAllowedOptionId: Record<string, string> = Object.values(
         p.allowlist.optionsById
       ).reduce((acc, entry) => ({ ...acc, [entry.id]: entry.display_name }), {});
@@ -227,7 +230,7 @@ export class YamlConfigParser {
       });
     });
 
-    return PrefOptionsConfigSchema.parse(prefOptionsConfig);
+    return FilterOptionsConfigSchema.parse(filterOptionsConfig);
   }
 
   /**
@@ -235,7 +238,7 @@ export class YamlConfigParser {
    * keyed by language code.
    */
   static loadAllowlistsByLang(p: {
-    prefsConfigDir: string;
+    filtersConfigDir: string;
     langs: string[];
     defaultLang?: string;
   }): Record<string, Allowlist> {
@@ -243,7 +246,7 @@ export class YamlConfigParser {
     const allowlistsByLang: Record<string, Allowlist> = {};
 
     const defaultAllowlist = this.loadAllowlistFromLangDir(
-      `${p.prefsConfigDir}/${defaultLang}`
+      `${p.filtersConfigDir}/${defaultLang}`
     );
 
     p.langs.forEach((lang) => {
@@ -251,12 +254,15 @@ export class YamlConfigParser {
         allowlistsByLang[lang] = defaultAllowlist;
         return;
       }
-      const langDir = `${p.prefsConfigDir}/${lang}`;
+      const langDir = `${p.filtersConfigDir}/${lang}`;
       const translatedAllowlist = this.loadAllowlistFromLangDir(langDir);
 
       // merge the translated allowlist with the default allowlist
       const mergedAllowlist: Allowlist = {
-        prefsById: { ...defaultAllowlist.prefsById, ...translatedAllowlist.prefsById },
+        filtersById: {
+          ...defaultAllowlist.filtersById,
+          ...translatedAllowlist.filtersById
+        },
         optionsById: {
           ...defaultAllowlist.optionsById,
           ...translatedAllowlist.optionsById
@@ -270,19 +276,19 @@ export class YamlConfigParser {
   }
 
   /**
-   * For a given language, load the pref and options allowlists.
+   * For a given language, load the filter and options allowlists.
    */
   static loadAllowlistFromLangDir(dir: string): Allowlist {
-    const result: Allowlist = { prefsById: {}, optionsById: {} };
+    const result: Allowlist = { filtersById: {}, optionsById: {} };
 
-    // Load and validate the prefs allowlist
-    const prefsAllowlistFilePath = `${dir}/allowlists/prefs.yaml`;
+    // Load and validate the filters allowlist
+    const filtersAllowlistFilePath = `${dir}/allowlists/filter_ids.yaml`;
     try {
-      const prefsAllowlistConfigStr = fs.readFileSync(prefsAllowlistFilePath, 'utf8');
-      const prefsAllowlist = AllowlistConfigSchema.parse(
-        yaml.load(prefsAllowlistConfigStr)
+      const filtersAllowlistConfigStr = fs.readFileSync(filtersAllowlistFilePath, 'utf8');
+      const filtersAllowlist = AllowlistConfigSchema.parse(
+        yaml.load(filtersAllowlistConfigStr)
       );
-      result.prefsById = prefsAllowlist.allowed.reduce<
+      result.filtersById = filtersAllowlist.allowed.reduce<
         Record<string, AllowlistConfigEntry>
       >((acc, entry) => {
         acc[entry.id] = entry;
@@ -291,14 +297,14 @@ export class YamlConfigParser {
     } catch (e) {
       // If the file is not found, use an empty list
       if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-        result.prefsById = {};
+        result.filtersById = {};
       } else {
         throw e;
       }
     }
 
     // Load and validate the options allowlist
-    const optionsAllowlistFilePath = `${dir}/allowlists/options.yaml`;
+    const optionsAllowlistFilePath = `${dir}/allowlists/filter_options.yaml`;
     try {
       const optionsAllowlistStr = fs.readFileSync(optionsAllowlistFilePath, 'utf8');
       const optionsAllowlist = AllowlistConfigSchema.parse(
@@ -323,104 +329,101 @@ export class YamlConfigParser {
   }
 
   /**
-   * Load all of the preference options files in a directory
+   * Load all of the filter options files in a directory
    * into a single object, and validate the object as a whole.
    * For example, duplicate options set IDs are not allowed.
    *
-   * @param dir The directory containing the preference options YAML files.
-   * @returns A read-only PrefOptionsConfig object.
+   * @param dir The directory containing the filter options YAML files.
+   * @returns A read-only FilterOptionsConfig object.
    */
-  private static loadPrefOptionsFromDir(dir: string): RawPrefOptionsConfig {
+  private static loadFilterOptionsFromDir(dir: string): RawFilterOptionsConfig {
     const filenames = FileNavigator.findInDir(dir, /\.ya?ml$/);
-    const rawPrefOptions: RawPrefOptionsConfig = {};
+    const rawFilterOptions: RawFilterOptionsConfig = {};
 
     filenames.forEach((filename) => {
-      const prefOptionsConfig = RawPrefOptionsConfigSchema.parse(
-        this.loadPrefsYamlFromStr(filename)
+      const filterOptionsConfig = RawFilterOptionsConfigSchema.parse(
+        this.loadFiltersYamlFromStr(filename)
       );
-      for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
+      for (const [optionsListId, optionsList] of Object.entries(filterOptionsConfig)) {
         // Verify that no duplicate options set IDs exist
-        if (rawPrefOptions[optionsListId]) {
+        if (rawFilterOptions[optionsListId]) {
           throw new Error(
             `Duplicate options list ID '${optionsListId}' found in file ${filename}`
           );
         }
-        rawPrefOptions[optionsListId] = optionsList;
+        rawFilterOptions[optionsListId] = optionsList;
       }
     });
 
-    return rawPrefOptions;
+    return rawFilterOptions;
   }
 
   /**
-   * Load a preference options configuration from a YAML file.
+   * Load a filter options configuration from a YAML file.
    *
-   * @param yamlFile The path to a YAML file containing preference options.
-   * @returns A read-only PrefOptionsConfig object.
+   * @param yamlFile The path to a YAML file containing filter options.
+   * @returns A read-only FilterOptionsConfig object.
    */
-  static loadPrefsYamlFromStr(yamlFile: string): RawPrefOptionsConfig {
+  static loadFiltersYamlFromStr(yamlFile: string): RawFilterOptionsConfig {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent);
-    return RawPrefOptionsConfigSchema.parse(parsedYaml);
+    return RawFilterOptionsConfigSchema.parse(parsedYaml);
   }
 
   /**
-   * For a given page, derive the default values for each preference
-   * from the frontmatter and the preference options configuration.
+   * For a given page, derive the default values for each filter
+   * from the frontmatter and the filter options configuration.
    *
    * This is useful for rendering the default version of a page,
-   * before the user has interacted with any preference controls.
-   *
-   * @param {Frontmatter} frontmatter A Frontmatter object.
-   * @param {PrefOptionsConfig} prefOptionsConfig A PrefOptionsConfig object.
+   * before the user has interacted with any filter controls.
    */
-  static getDefaultValuesByPrefId(
+  static getDefaultValuesByFilterId(
     frontmatter: Frontmatter,
-    prefOptionsConfig: PrefOptionsConfig
+    filterOptionsConfig: FilterOptionsConfig
   ): Record<string, string> {
-    if (!frontmatter.page_preferences) {
+    if (!frontmatter.page_filters) {
       return {};
     }
-    const defaultValuesByPrefId: Record<string, string> = {};
+    const defaultValuesByFilterId: Record<string, string> = {};
 
-    for (const fmPrefConfig of frontmatter.page_preferences) {
+    for (const fmFilterConfig of frontmatter.page_filters) {
       // replace placeholders
-      const optionsSetId = fmPrefConfig.options_source;
+      const optionsSetId = fmFilterConfig.options_source;
       const resolvedOptionsSetId = optionsSetId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
-          const value = defaultValuesByPrefId[placeholder.toLowerCase()];
+          const value = defaultValuesByFilterId[placeholder.toLowerCase()];
           return value;
         }
       );
 
-      defaultValuesByPrefId[fmPrefConfig.id] =
-        fmPrefConfig.default_value ||
-        prefOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!.id;
+      defaultValuesByFilterId[fmFilterConfig.id] =
+        fmFilterConfig.default_value ||
+        filterOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!.id;
     }
 
-    return defaultValuesByPrefId;
+    return defaultValuesByFilterId;
   }
 
   /**
-   * Narrow a PrefOptionsConfig object to only include the options
+   * Narrow a FilterOptionsConfig object to only include the options
    * that are relevant to a specific page, based on the page's frontmatter.
-   * Verify that all placeholders refer to valid pref IDs,
+   * Verify that all placeholders refer to valid filter IDs,
    * and that all potential options sources generated
    * by those placeholders are valid.
    *
    * @param frontmatter A Frontmatter object, parsed from the front matter of an .mdoc file.
-   * @param prefOptionsConfig A PrefOptionsConfig object, parsed
-   * from the preference options YAML files.
+   * @param filterOptionsConfig A FilterOptionsConfig object, parsed
+   * from the filter options YAML files.
    */
-  static getPrefOptionsForPage(
+  static getFilterOptionsForPage(
     frontmatter: Frontmatter,
-    prefOptionsConfig: PrefOptionsConfig
-  ): Readonly<PrefOptionsConfig> {
-    const prefOptionsConfigForPage: PrefOptionsConfig = {};
+    filterOptionsConfig: FilterOptionsConfig
+  ): Readonly<FilterOptionsConfig> {
+    const filterOptionsConfigForPage: FilterOptionsConfig = {};
 
-    if (!frontmatter.page_preferences) {
-      return prefOptionsConfigForPage;
+    if (!frontmatter.page_filters) {
+      return filterOptionsConfigForPage;
     }
 
     this.validatePlaceholderReferences(frontmatter);
@@ -428,43 +431,43 @@ export class YamlConfigParser {
     // Verify that all possible options_source IDs are valid
 
     const validValuesByOptionsSetId: Record<string, string[]> = {};
-    const optionsSetIdsByPrefId: Record<string, string> = {};
+    const optionsSetIdsByFilterId: Record<string, string> = {};
 
-    for (const fmPrefConfig of frontmatter.page_preferences) {
-      const placeholderMatches = fmPrefConfig.options_source.match(
+    for (const fmFilterConfig of frontmatter.page_filters) {
+      const placeholderMatches = fmFilterConfig.options_source.match(
         GLOBAL_PLACEHOLDER_REGEX
       );
 
       // if this options_source does not contain any placeholders,
       // it should be a valid options set ID
       if (!placeholderMatches) {
-        if (!prefOptionsConfig[fmPrefConfig.options_source]) {
+        if (!filterOptionsConfig[fmFilterConfig.options_source]) {
           throw new Error(
-            `Invalid options_source found in page_preferences: ${fmPrefConfig.options_source}`
+            `Invalid options_source found in page_filters: ${fmFilterConfig.options_source}`
           );
         }
-        validValuesByOptionsSetId[fmPrefConfig.options_source] = prefOptionsConfig[
-          fmPrefConfig.options_source
+        validValuesByOptionsSetId[fmFilterConfig.options_source] = filterOptionsConfig[
+          fmFilterConfig.options_source
         ].map((option) => option.id);
 
-        optionsSetIdsByPrefId[fmPrefConfig.id] = fmPrefConfig.options_source;
+        optionsSetIdsByFilterId[fmFilterConfig.id] = fmFilterConfig.options_source;
 
-        // add this options source to the prefOptionsConfigForPage object
-        prefOptionsConfigForPage[fmPrefConfig.options_source] =
-          prefOptionsConfig[fmPrefConfig.options_source];
+        // add this options source to the filterOptionsConfigForPage object
+        filterOptionsConfigForPage[fmFilterConfig.options_source] =
+          filterOptionsConfig[fmFilterConfig.options_source];
 
         continue;
       }
 
       // if placeholders are contained,
       // generate a list of all possible options sources
-      const optionsSetIdSegments = fmPrefConfig.options_source.split('_');
+      const optionsSetIdSegments = fmFilterConfig.options_source.split('_');
       const possibleSegmentValues: Array<Array<string>> = [];
 
       for (const segment of optionsSetIdSegments) {
         if (segment.match(PLACEHOLDER_REGEX)) {
-          const referencedPrefId = segment.slice(1, -1).toLowerCase();
-          const referencedOptionsSetId = optionsSetIdsByPrefId[referencedPrefId];
+          const referencedFilterId = segment.slice(1, -1).toLowerCase();
+          const referencedOptionsSetId = optionsSetIdsByFilterId[referencedFilterId];
           possibleSegmentValues.push(validValuesByOptionsSetId[referencedOptionsSetId]);
         } else {
           possibleSegmentValues.push([segment]);
@@ -476,63 +479,63 @@ export class YamlConfigParser {
 
       // validate that all potential options set IDs are valid
       for (const potentialOptionsSetId of potentialOptionsSetIds) {
-        if (!prefOptionsConfig[potentialOptionsSetId]) {
+        if (!filterOptionsConfig[potentialOptionsSetId]) {
           throw new Error(
-            `Invalid options_source could be populated by the placeholders in ${fmPrefConfig.options_source}: An options source with the ID '${potentialOptionsSetId}' does not exist.`
+            `Invalid options_source could be populated by the placeholders in ${fmFilterConfig.options_source}: An options source with the ID '${potentialOptionsSetId}' does not exist.`
           );
         }
-        validValuesByOptionsSetId[potentialOptionsSetId] = prefOptionsConfig[
+        validValuesByOptionsSetId[potentialOptionsSetId] = filterOptionsConfig[
           potentialOptionsSetId
         ].map((option) => option.id);
 
-        // add this options source to the prefOptionsConfigForPage object
-        prefOptionsConfigForPage[potentialOptionsSetId] =
-          prefOptionsConfig[potentialOptionsSetId];
+        // add this options source to the filterOptionsConfigForPage object
+        filterOptionsConfigForPage[potentialOptionsSetId] =
+          filterOptionsConfig[potentialOptionsSetId];
       }
     }
 
-    return prefOptionsConfigForPage;
+    return filterOptionsConfigForPage;
   }
 
   /**
-   * Verify that each placeholder refers to a valid page pref ID.
+   * Verify that each placeholder refers to a valid page filter ID.
    *
    * For example, if there is a <COLOR> placeholder, there must
-   * also be a page pref with the ID 'color', and it must
+   * also be a page filter with the ID 'color', and it must
    * have been defined in the frontmatter before the placeholder is referenced.
    *
    * @param frontmatter A Frontmatter object.
    */
   static validatePlaceholderReferences(frontmatter: Frontmatter): void {
-    if (!frontmatter.page_preferences) {
+    if (!frontmatter.page_filters) {
       return;
     }
 
-    const validPrefIds: string[] = [];
+    const validFilterIds: string[] = [];
 
-    for (const fmPrefConfig of frontmatter.page_preferences) {
+    for (const fmFilterConfig of frontmatter.page_filters) {
       const placeholderMatches =
-        fmPrefConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX) || [];
+        fmFilterConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX) || [];
 
       for (const placeholder of placeholderMatches) {
         const match = placeholder.match(PLACEHOLDER_REGEX);
         if (!match) {
           throw new Error(
-            `Invalid placeholder found in options_source: ${fmPrefConfig.options_source}`
+            `Invalid placeholder found in options_source: ${fmFilterConfig.options_source}`
           );
         }
 
         const referencedId = match[1].toLowerCase();
-        if (!validPrefIds.includes(referencedId)) {
+        if (!validFilterIds.includes(referencedId)) {
           throw new Error(
-            `Placeholder ${match[0]} does not refer to a valid page preference ID. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the page_preferences list before it is referenced in ${match[0]}.`
+            `Placeholder ${match[0]} does not refer to a valid page filter ID. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the page_filters list before it is referenced in ${match[0]}.`
           );
         }
       }
 
-      // add this pref ID to the list of valid pref IDs
+      // add this filter ID to the list of valid filter IDs
       // that may be referenced by placeholders later in the list
-      validPrefIds.push(fmPrefConfig.id);
+      validFilterIds.push(fmFilterConfig.id);
     }
   }
 
@@ -567,42 +570,42 @@ export class YamlConfigParser {
   }
 
   /**
-   * Shorten the keys in a PrefOptionsConfig object to save space
+   * Shorten the keys in a FilterOptionsConfig object to save space
    * when storing the object inline at the bottom of an .md file.
    */
-  static minifyPrefOptionsConfig(
-    prefOptionsConfig: PrefOptionsConfig
-  ): MinifiedPrefOptionsConfig {
-    const minifiedPrefOptionsConfig: MinifiedPrefOptionsConfig = {};
-    for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
-      minifiedPrefOptionsConfig[optionsListId] = optionsList.map((option) => ({
+  static minifyFilterOptionsConfig(
+    filterOptionsConfig: FilterOptionsConfig
+  ): MinifiedFilterOptionsConfig {
+    const minifiedConfig: MinifiedFilterOptionsConfig = {};
+    for (const [optionsListId, optionsList] of Object.entries(filterOptionsConfig)) {
+      minifiedConfig[optionsListId] = optionsList.map((option) => ({
         n: option.display_name,
         d: option.default,
         i: option.id
       }));
     }
-    MinifiedPrefOptionsConfigSchema.parse(minifiedPrefOptionsConfig);
-    return minifiedPrefOptionsConfig;
+    MinifiedFilterOptionsConfigSchema.parse(minifiedConfig);
+    return minifiedConfig;
   }
 
   /**
-   * Shorten the keys in a PagePrefsConfig object to save space
+   * Shorten the keys in a PageFiltersConfig object to save space
    * when storing the object inline at the bottom of an
    * .md file.
    */
-  static minifyPagePrefsConfig(
-    pagePrefsConfig: PagePrefsConfig
-  ): MinifiedPagePrefsConfig {
-    const minifiedPagePrefsConfig: Array<MinifiedPagePrefConfig> = [];
-    pagePrefsConfig.forEach((pagePrefConfig) => {
-      minifiedPagePrefsConfig.push({
-        n: pagePrefConfig.display_name,
-        i: pagePrefConfig.id,
-        o: pagePrefConfig.options_source,
-        d: pagePrefConfig.default_value
+  static minifyPageFiltersConfig(
+    pageFiltersConfig: PageFiltersConfig
+  ): MinifiedPageFiltersConfig {
+    const minifiedConfig: Array<MinifiedPageFilterConfig> = [];
+    pageFiltersConfig.forEach((config) => {
+      minifiedConfig.push({
+        n: config.display_name,
+        i: config.id,
+        o: config.options_source,
+        d: config.default_value
       });
     });
-    MinifiedPagePrefsConfigSchema.parse(minifiedPagePrefsConfig);
-    return minifiedPagePrefsConfig;
+    MinifiedPageFiltersConfigSchema.parse(minifiedConfig);
+    return minifiedConfig;
   }
 }

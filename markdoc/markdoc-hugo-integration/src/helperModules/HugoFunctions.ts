@@ -56,7 +56,7 @@ export class HugoFunctions {
   static getSubdirsByType(siteDir: string): HugoSubdirsByType {
     return {
       content: siteDir + '/content',
-      prefsConfig: siteDir + '/config/_default/preferences',
+      filtersConfig: siteDir + '/config/_default/content_filters',
       partials: siteDir + '/layouts/partials',
       images: siteDir + '/static/images'
     };

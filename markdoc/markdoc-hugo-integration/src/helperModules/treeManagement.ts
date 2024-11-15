@@ -21,7 +21,7 @@ import {
 } from './PageBuilder/pageConfigMinification';
 import { transformConfig } from '../markdocParserConfig';
 import { anchorize } from './stringProcessing';
-import { PagePrefsManifest } from '../schemas/pageFilters';
+import { PageFiltersManifest } from '../schemas/pageFilters';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -63,21 +63,21 @@ export function getMinifiedIfFunctionsByRef(
 /**
  * Build a renderable tree from the AST, frontmatter, partials, and default values.
  * The renderable tree is used to render HTML output at compile time,
- * and when the end user changes a content preference setting.
+ * and when the end user changes a content filter setting.
  *
- * @param p A ParsedFile object and a PrefOptionsConfig object.
+ * @param p A ParsedFile object and a FilterOptionsConfig object.
  * @returns A renderable tree and any errors encountered.
  */
 export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   variables: Record<string, any>;
-  prefsManifest: PagePrefsManifest;
+  filtersManifest: PageFiltersManifest;
 }): { renderableTree: RenderableTreeNode; errors: string[] } {
   const errors: string[] = [];
 
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: {
-      ...p.prefsManifest.defaultValsByPrefId,
+      ...p.filtersManifest.defaultValsByFilterId,
       ...JSON.parse(JSON.stringify(p.variables))
     },
     partials: p.parsedFile.partials,
@@ -86,25 +86,27 @@ export function buildRenderableTree(p: {
 
   addHeaderAnchorstoTree(renderableTree);
 
-  const referencedValuesByPrefId = collectReferencedValuesByVarId(renderableTree);
+  const referencedValsByFilterId = collectReferencedValuesByVarId(renderableTree);
 
-  const referencedPrefIds = Object.keys(referencedValuesByPrefId);
+  const referencedFilterIds = Object.keys(referencedValsByFilterId);
 
   // ensure that all variable ids appearing
-  // in the renderable tree are valid page pref ids
-  const pagePrefIds = Object.keys(p.prefsManifest.defaultValsByPrefId);
-  const invalidPrefIds = referencedPrefIds.filter((id) => !pagePrefIds.includes(id));
+  // in the renderable tree are valid page filter ids
+  const pageFilterIds = Object.keys(p.filtersManifest.defaultValsByFilterId);
+  const invalidFilterIds = referencedFilterIds.filter(
+    (id) => !pageFilterIds.includes(id)
+  );
 
-  if (invalidPrefIds.length > 0) {
-    errors.push(`Invalid pref IDs found in markup: ${invalidPrefIds}`);
+  if (invalidFilterIds.length > 0) {
+    errors.push(`Invalid filter IDs found in markup: ${invalidFilterIds}`);
   }
 
   // ensure that all referenced values are valid
-  Object.keys(referencedValuesByPrefId).forEach((prefId) => {
-    const referencedValues = referencedValuesByPrefId[prefId];
-    const possibleValues = p.prefsManifest.prefsById[prefId]?.possibleValues;
+  Object.keys(referencedValsByFilterId).forEach((filterId) => {
+    const referencedValues = referencedValsByFilterId[filterId];
+    const possibleValues = p.filtersManifest.filtersById[filterId]?.possibleValues;
 
-    // Skip adding error for a bad pref ID,
+    // Skip adding error for a bad filter ID,
     // since those are already caught above
     if (!possibleValues) {
       return;
@@ -115,7 +117,7 @@ export function buildRenderableTree(p: {
     );
     if (invalidValues.length > 0) {
       errors.push(
-        `Invalid value found in markup: "${invalidValues}" is not a valid value for the pref ID "${prefId}".`
+        `Invalid value found in markup: "${invalidValues}" is not a valid value for the filter ID "${filterId}".`
       );
     }
   });

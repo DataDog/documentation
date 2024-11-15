@@ -1,13 +1,13 @@
 import { z } from 'zod';
-import { PREF_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { PrefOptionsConfigSchema } from './yaml/prefOptions';
-import { PagePrefConfigSchema } from './yaml/frontMatter';
+import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
+import { FilterOptionsConfigSchema } from './yaml/filterOptions';
+import { PageFilterConfigSchema } from './yaml/frontMatter';
 
 /**
- * An option available in a resolved page pref
+ * An option available in a resolved page filter
  * (see next schema).
  */
-const ResolvedPagePrefOptionSchema = z
+const ResolvedPageFilterOptionSchema = z
   .object({
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
@@ -17,7 +17,7 @@ const ResolvedPagePrefOptionSchema = z
   .strict();
 
 /**
- * A page preference that has been "resolved" into
+ * A page filter that has been "resolved" into
  * its current value and available options.
  * The current value can be derived from default values
  * or user selections, and the available options
@@ -30,20 +30,20 @@ const ResolvedPagePrefOptionSchema = z
  * "resolved" (narrowed) based on the user's selection of dbm_host,
  * since not every possible host type option is valid for all hosts.
  */
-export const ResolvedPagePrefSchema = z
+export const ResolvedPageFilterSchema = z
   .object({
     // The unique ID of the variable
     id: z.string().regex(SNAKE_CASE_REGEX),
-    // The display name of the preference in the UI
+    // The display name of the filter in the UI
     displayName: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
-    options: z.array(ResolvedPagePrefOptionSchema),
+    options: z.array(ResolvedPageFilterOptionSchema),
     currentValue: z.string().regex(SNAKE_CASE_REGEX)
   })
   .strict();
 
 /**
- * A page preference that has been "resolved" into
+ * A page filter that has been "resolved" into
  * its current value and available options.
  * The current value can be derived from default values
  * or user selections, and the available options
@@ -68,22 +68,22 @@ export const ResolvedPagePrefSchema = z
  *   ]
  * }
  */
-export type ResolvedPagePref = z.infer<typeof ResolvedPagePrefSchema>;
+export type ResolvedPageFilter = z.infer<typeof ResolvedPageFilterSchema>;
 
 /**
- * A collection of ResolvedPagePref objects, indexed by their
+ * A collection of ResolvedPageFilter objects, indexed by their
  * unique IDs.
  */
-export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
+export const ResolvedPageFiltersSchema = z.record(ResolvedPageFilterSchema);
 
 /**
- * A collection of ResolvedPagePref objects, indexed by their
+ * A collection of ResolvedPageFilter objects, indexed by their
  * unique IDs.
  *
- * Page prefs are resolved by combining data from
+ * Page filters are resolved by combining data from
  * several sources, such as the page's URL, the frontmatter,
- * the default value for the pref,
- * and the user's stored preferences.
+ * the default value for the filter,
+ * and the user's stored filters.
  *
  * @example
  * {
@@ -99,21 +99,21 @@ export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
  *   }
  * }
  */
-export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;
+export type ResolvedPageFilters = z.infer<typeof ResolvedPageFiltersSchema>;
 
 /**
- * The manifest for a single page preference,
+ * The manifest for a single page filter,
  * containing all of the configuration data necessary
- * to support the preference and its options.
+ * to support the filter and its options.
  *
  * This is used to efficiently validate, resolve,
- * and re-resolve the preference.
+ * and re-resolve the filter.
  */
-export const PagePrefManifestSchema = z
+export const PageFilterManifestSchema = z
   .object({
-    config: PagePrefConfigSchema,
+    config: PageFilterConfigSchema,
     defaultValuesByOptionsSetId: z.record(
-      z.string().regex(PREF_OPTIONS_ID_REGEX),
+      z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX)
     ),
     possibleValues: z.array(z.string().regex(SNAKE_CASE_REGEX))
@@ -121,15 +121,15 @@ export const PagePrefManifestSchema = z
   .strict();
 
 /**
- * The manifest for a single page preference,
+ * The manifest for a single page filter,
  * containing all of the configuration data necessary
- * to support the preference and its options.
+ * to support the filter and its options.
  *
  * This is used to efficiently validate, resolve,
- * and re-resolve the preference.
+ * and re-resolve the filter.
  *
  * @example
- * // A manifest for a `host_type` preference
+ * // A manifest for a `host_type` filter
  * // whose options change depending on
  * // the user's previous selection of `host`.
  * {
@@ -146,23 +146,23 @@ export const PagePrefManifestSchema = z
  *   possibleValues: ['ec2', 'gce', [... many more possible values here]]
  * }
  */
-export type PagePrefManifest = z.infer<typeof PagePrefManifestSchema>;
+export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
 
 /**
- * A object containing all of the potential pref IDs
+ * A object containing all of the potential page filter IDs
  * and option sets for a page, created by populating the front matter
  * placeholders with all possible values, then collecting all
  * configuration data necessary to support the resulting
- * pref and options set IDs.
+ * filter and options set IDs.
  *
  * Useful for efficiently validating, resolving,
- * and re-resolving preferences.
+ * and re-resolving filters.
  */
-export const PagePrefsManifestSchema = z
+export const PageFiltersManifestSchema = z
   .object({
-    prefsById: z.record(z.string().regex(SNAKE_CASE_REGEX), PagePrefManifestSchema),
-    optionSetsById: PrefOptionsConfigSchema,
-    defaultValsByPrefId: z.record(
+    filtersById: z.record(z.string().regex(SNAKE_CASE_REGEX), PageFilterManifestSchema),
+    optionSetsById: FilterOptionsConfigSchema,
+    defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX)
     ),
@@ -171,18 +171,18 @@ export const PagePrefsManifestSchema = z
   .strict();
 
 /**
- * A object containing all of the potential pref IDs
+ * A object containing all of the potential page filter IDs
  * and option sets for a page, created by populating the front matter
  * placeholders with all possible values, then collecting all
  * configuration data necessary to support the resulting
- * pref and options set IDs.
+ * filter and options set IDs.
  *
  * Useful for efficiently validating, resolving,
- * and re-resolving preferences.
+ * and re-resolving filters.
  *
  * @example
  * {
- *   // a simple preference with no dependencies
+ *   // a simple filter with no dependencies
  *   host: {
  *     config: {
  *       id: 'host',
@@ -195,7 +195,7 @@ export const PagePrefsManifestSchema = z
  *     possibleValues: ['aws', 'gcp', 'azure']
  *   },
  *
- *   // a preference that depends on the user's selection of `host`,
+ *   // a filter that depends on the user's selection of `host`,
  *   // yielding different options for each host type
  *   // and a wide variety of possible values overall
  *   host_type: {
@@ -213,4 +213,4 @@ export const PagePrefsManifestSchema = z
  *   }
  * }
  */
-export type PagePrefsManifest = z.infer<typeof PagePrefsManifestSchema>;
+export type PageFiltersManifest = z.infer<typeof PageFiltersManifestSchema>;

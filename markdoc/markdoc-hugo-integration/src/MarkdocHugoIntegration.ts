@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
+import { FilterOptionsConfig } from './schemas/yaml/filterOptions';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig, HugoGlobalConfigSchema } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
@@ -11,7 +11,7 @@ import {
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
-import { PagePrefsManifestSchema } from './schemas/pageFilters';
+import { PageFiltersManifestSchema } from './schemas/pageFilters';
 import { Allowlist } from './schemas/yaml/allowlist';
 import { HugoFunctions } from './helperModules/HugoFunctions';
 
@@ -24,7 +24,7 @@ import { HugoFunctions } from './helperModules/HugoFunctions';
  */
 export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
-  prefOptionsConfigByLang: Record<string, PrefOptionsConfig>;
+  filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
   allowlistsByLang: Record<string, Allowlist> = {};
   private compiledFilePaths: string[] = [];
 
@@ -47,43 +47,43 @@ export class MarkdocHugoIntegration {
 
     // Load the English allowlist configuration
     this.allowlistsByLang = YamlConfigParser.loadAllowlistsByLang({
-      prefsConfigDir: this.hugoGlobalConfig.dirs.prefsConfig,
+      filtersConfigDir: this.hugoGlobalConfig.dirs.filtersConfig,
       langs: this.hugoGlobalConfig.languages
     });
 
-    // Load English pref configuration
-    this.prefOptionsConfigByLang = {
-      en: YamlConfigParser.loadPrefsConfigFromLangDir({
-        dir: this.hugoGlobalConfig.dirs.prefsConfig + '/en',
+    // Load English filter configuration
+    this.filterOptionsConfigByLang = {
+      en: YamlConfigParser.loadFiltersConfigFromLangDir({
+        dir: this.hugoGlobalConfig.dirs.filtersConfig + '/en',
         allowlist: this.allowlistsByLang.en
       })
     };
 
-    // Load translated pref configurations, backfilling with English
+    // Load translated filter configurations, backfilling with English
     this.hugoGlobalConfig.languages.forEach((lang) => {
       if (lang === 'en') {
         return;
       }
 
-      let translatedPrefOptionsConfig: PrefOptionsConfig;
+      let translatedFilterOptionsConfig: FilterOptionsConfig;
       try {
-        translatedPrefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
-          dir: this.hugoGlobalConfig.dirs.prefsConfig + '/' + lang,
+        translatedFilterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
+          dir: this.hugoGlobalConfig.dirs.filtersConfig + '/' + lang,
           allowlist: this.allowlistsByLang[lang]
         });
       } catch (e) {
-        // If no prefs config directory exists for this language,
-        // assume no translated prefs exist
+        // If no filters config directory exists for this language,
+        // assume no translated filters exist
         if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-          translatedPrefOptionsConfig = {};
+          translatedFilterOptionsConfig = {};
         } else {
           throw e;
         }
       }
 
-      this.prefOptionsConfigByLang[lang] = {
-        ...this.prefOptionsConfigByLang.en,
-        ...translatedPrefOptionsConfig
+      this.filterOptionsConfigByLang[lang] = {
+        ...this.filterOptionsConfigByLang.en,
+        ...translatedFilterOptionsConfig
       };
     });
   }
@@ -96,7 +96,7 @@ export class MarkdocHugoIntegration {
    */
   buildAssetsPartial() {
     return `<style>${PageBuilder.getStylesStr()}</style>
-<script>${PageBuilder.getClientPrefsManagerScriptStr()}</script>`;
+<script>${PageBuilder.getClientFiltersManagerScriptStr()}</script>`;
   }
 
   #getFileLanguage(markdocFilepath: string): string {
@@ -161,7 +161,7 @@ export class MarkdocHugoIntegration {
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         parsedFile,
-        prefOptionsConfig: this.prefOptionsConfigByLang[lang]
+        filterOptionsConfig: this.filterOptionsConfigByLang[lang]
       });
 
       if (compiledFilepath) {
@@ -226,9 +226,9 @@ export class MarkdocHugoIntegration {
   #compileMdocFile(p: {
     markdocFilepath: string;
     parsedFile: ParsedFile;
-    prefOptionsConfig: PrefOptionsConfig;
+    filterOptionsConfig: FilterOptionsConfig;
   }): string | null {
-    let prefOptionsConfigForPage: PrefOptionsConfig;
+    let filterOptionsConfigForPage: FilterOptionsConfig;
     const lang = p.markdocFilepath
       .replace(this.hugoGlobalConfig.dirs.content, '')
       .split('/')[1];
@@ -241,28 +241,28 @@ export class MarkdocHugoIntegration {
       return null;
     }
 
-    // generate the prefs manifest
-    const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
+    // generate the filters manifest
+    const draftFiltersManifest = YamlConfigParser.buildPageFiltersManifest({
       frontmatter: p.parsedFile.frontmatter,
-      prefOptionsConfig: this.prefOptionsConfigByLang[lang],
+      filterOptionsConfig: this.filterOptionsConfigByLang[lang],
       allowlist: this.allowlistsByLang[lang]
     });
 
-    if (draftPrefsManifest.errors.length > 0) {
-      draftPrefsManifest.errors.forEach((error) => {
+    if (draftFiltersManifest.errors.length > 0) {
+      draftFiltersManifest.errors.forEach((error) => {
         this.validationErrorsByFilePath[p.markdocFilepath].push(error);
       });
       return null;
     }
 
-    const prefsManifest = PagePrefsManifestSchema.parse(draftPrefsManifest);
+    const filtersManifest = PageFiltersManifestSchema.parse(draftFiltersManifest);
 
     // verify that all possible placeholder values
     // yield an existing options set
     try {
-      prefOptionsConfigForPage = YamlConfigParser.getPrefOptionsForPage(
+      filterOptionsConfigForPage = YamlConfigParser.getFilterOptionsForPage(
         p.parsedFile.frontmatter,
-        p.prefOptionsConfig
+        p.filterOptionsConfig
       );
     } catch (e) {
       if (e instanceof Error) {
@@ -279,8 +279,8 @@ export class MarkdocHugoIntegration {
     try {
       const { html, errors } = PageBuilder.build({
         parsedFile: p.parsedFile,
-        prefOptionsConfig: prefOptionsConfigForPage,
-        prefsManifest,
+        filterOptionsConfig: filterOptionsConfigForPage,
+        filtersManifest: filtersManifest,
         hugoConfig: {
           global: this.hugoGlobalConfig,
           page: {

@@ -5,20 +5,20 @@ import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
-  VALID_PREFS_CONFIG_DIR,
+  VALID_FILTERS_CONFIG_DIR,
   SNAPSHOTS_DIR
 } from '../../config/constants';
-import { PagePrefsManifestSchema } from '../../../src/schemas/pageFilters';
+import { PageFiltersManifestSchema } from '../../../src/schemas/pageFilters';
 import {
   mockHugoGlobalConfig,
   mockPageConfig
 } from '../../mocks/valid/integrationConfig';
 
 describe('PageBuilder.build', () => {
-  const LANG_DIR = VALID_PREFS_CONFIG_DIR + '/en';
+  const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
   const allowlist = YamlConfigParser.loadAllowlistFromLangDir(LANG_DIR);
-  const prefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
+  const filterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
     dir: LANG_DIR,
     allowlist
   });
@@ -30,24 +30,24 @@ describe('PageBuilder.build', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const prefOptionsConfigForPage = YamlConfigParser.getPrefOptionsForPage(
+  const filterOptionsConfigForPage = YamlConfigParser.getFilterOptionsForPage(
     parsedFile.frontmatter,
-    prefOptionsConfig
+    filterOptionsConfig
   );
 
-  const draftPrefsManifest = YamlConfigParser.buildPagePrefsManifest({
+  const draftFiltersManifest = YamlConfigParser.buildPageFiltersManifest({
     frontmatter: parsedFile.frontmatter,
-    prefOptionsConfig,
+    filterOptionsConfig: filterOptionsConfig,
     allowlist
   });
 
-  const prefsManifest = PagePrefsManifestSchema.parse(draftPrefsManifest);
+  const filtersManifest = PageFiltersManifestSchema.parse(draftFiltersManifest);
 
   const { html } = PageBuilder.build({
     parsedFile,
-    prefOptionsConfig: prefOptionsConfigForPage,
+    filterOptionsConfig: filterOptionsConfigForPage,
     hugoConfig: { global: mockHugoGlobalConfig, page: mockPageConfig },
-    prefsManifest
+    filtersManifest: filtersManifest
   });
 
   test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {

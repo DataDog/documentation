@@ -1,1 +1,9 @@
-ENOENT: no such file or directory, scandir '/allowlists__missing_pref_display_name/option_sets'
+[
+  {
+    "code": "custom",
+    "message": "Invalid input",
+    "path": [
+      "color_options"
+    ]
+  }
+]

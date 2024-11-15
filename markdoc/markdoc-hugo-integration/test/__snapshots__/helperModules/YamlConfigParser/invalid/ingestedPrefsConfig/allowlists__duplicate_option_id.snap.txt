@@ -1,1 +1,9 @@
-ENOENT: no such file or directory, scandir '/allowlists__duplicate_option_id/option_sets'
+[
+  {
+    "code": "custom",
+    "message": "Invalid input",
+    "path": [
+      "color_options"
+    ]
+  }
+]

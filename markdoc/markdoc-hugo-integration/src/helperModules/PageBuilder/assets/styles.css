@@ -5,7 +5,7 @@
 #markdoc-content.customizable {
     visibility: hidden;
 }
-.mdoc-pref__pill {
+.mdoc-filter__pill {
     display: inline-block;
     padding: 5px 10px;
     margin-right: 6px;
@@ -24,18 +24,18 @@ div.mdoc-code-snippet.mdoc-language-bash span.line:before {
     content: '$ ';
     display: inline;
 }
-.mdoc-pref__pill.selected {
+.mdoc-filter__pill.selected {
     color: white;
     background-color: #632ca6;
     border-color: #632ca6;
 }
-.mdoc-pref__label {
+.mdoc-filter__label {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 5px;
 }
-.mdoc-pref__container {
+.mdoc-filter__container {
     display: inline-block;
     margin-right: 25px;
 }

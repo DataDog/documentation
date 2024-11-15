@@ -2,16 +2,16 @@ import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   paintColorsFrontmatter,
-  paintColorsPrefOptionsConfig
+  paintColorsFilterOptionsConfig
 } from '../../mocks/valid/paintColorsConfig';
 import { Frontmatter } from '../../../src/schemas/yaml/frontMatter';
 
-describe('YamlConfigParser.getPrefOptionsForPage', () => {
+describe('YamlConfigParser.getFilterOptionsForPage', () => {
   test('processes valid frontmatter placeholders without errors', () => {
     expect(() =>
-      YamlConfigParser.getPrefOptionsForPage(
+      YamlConfigParser.getFilterOptionsForPage(
         paintColorsFrontmatter,
-        paintColorsPrefOptionsConfig
+        paintColorsFilterOptionsConfig
       )
     ).not.toThrow();
   });
@@ -19,7 +19,7 @@ describe('YamlConfigParser.getPrefOptionsForPage', () => {
   test('throws an error when an invalid frontmatter placeholder is used', () => {
     const invalidFrontmatter: Frontmatter = {
       title: 'My Page',
-      page_preferences: [
+      page_filters: [
         {
           display_name: 'Color',
           id: 'color',
@@ -39,20 +39,23 @@ describe('YamlConfigParser.getPrefOptionsForPage', () => {
       ]
     };
     expect(() =>
-      YamlConfigParser.getPrefOptionsForPage(
+      YamlConfigParser.getFilterOptionsForPage(
         invalidFrontmatter,
-        paintColorsPrefOptionsConfig
+        paintColorsFilterOptionsConfig
       )
     ).toThrowError(
-      `Placeholder <COLOUR> does not refer to a valid page preference ID. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_preferences list before it is referenced in <COLOUR>.`
+      `Placeholder <COLOUR> does not refer to a valid page filter ID. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_filters list before it is referenced in <COLOUR>.`
     );
   });
 
   test('throws an error when a placeholder-derived options set does not exist', () => {
-    const { gloss_red_paint_options, ...invalidPrefOptions } =
-      paintColorsPrefOptionsConfig;
+    const { gloss_red_paint_options, ...invalidFilterOptions } =
+      paintColorsFilterOptionsConfig;
     expect(() =>
-      YamlConfigParser.getPrefOptionsForPage(paintColorsFrontmatter, invalidPrefOptions)
+      YamlConfigParser.getFilterOptionsForPage(
+        paintColorsFrontmatter,
+        invalidFilterOptions
+      )
     ).toThrowError(
       `Invalid options_source could be populated by the placeholders in <FINISH>_<COLOR>_paint_options: An options source with the ID 'gloss_red_paint_options' does not exist.`
     );

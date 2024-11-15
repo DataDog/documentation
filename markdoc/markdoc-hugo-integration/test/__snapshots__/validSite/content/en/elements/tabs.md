@@ -1,7 +1,7 @@
 ---
 title: Tabs
 ---
-<div id="mdoc-selector"><div><div class="mdoc-pref__container"><div class="mdoc-pref__label">Color</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="red">Red</div><div class="mdoc-pref__pill " data-pref-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-pref__pill selected" data-pref-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>
@@ -72,4 +72,4 @@ title: Tabs
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientPrefsManager.initialize({    pagePrefsConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],    prefOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},    selectedValsByPrefId: {"color":"blue"},    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"2"}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    pageFiltersConfig: [{"n":"Color","i":"color","o":"primary_color_options"}],    filterOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}]},    selectedValsByFilterId: {"color":"blue"},    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"2"}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

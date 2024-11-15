@@ -2,16 +2,16 @@ import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
-import { VALID_PREFS_CONFIG_DIR } from '../../config/constants';
+import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
 
 describe('YamlConfigParser.loadAllowlistFromLangDir', () => {
-  const langDir = `${VALID_PREFS_CONFIG_DIR}/en`;
+  const langDir = `${VALID_FILTERS_CONFIG_DIR}/en`;
 
   test('builds the expected allowlist', () => {
     const allowlist = YamlConfigParser.loadAllowlistFromLangDir(langDir);
 
     const expectedAllowlist = {
-      prefsById: {
+      filtersById: {
         color: {
           id: 'color',
           display_name: 'Color'

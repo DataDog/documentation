@@ -4,16 +4,16 @@ import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   SNAPSHOTS_DIR,
-  VALID_PREFS_CONFIG_DIR
+  VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
 import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
 
 describe('treeManagement', () => {
-  const LANG_DIR = VALID_PREFS_CONFIG_DIR + '/en';
+  const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
   const allowlist = YamlConfigParser.loadAllowlistFromLangDir(LANG_DIR);
-  const prefOptionsConfig = YamlConfigParser.loadPrefsConfigFromLangDir({
+  const filterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
     dir: LANG_DIR,
     allowlist
   });
@@ -24,9 +24,9 @@ describe('treeManagement', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const prefsManifest = YamlConfigParser.buildPagePrefsManifest({
+  const filtersManifest = YamlConfigParser.buildPageFiltersManifest({
     frontmatter: parsedFile.frontmatter,
-    prefOptionsConfig,
+    filterOptionsConfig: filterOptionsConfig,
     allowlist
   });
 
@@ -34,7 +34,7 @@ describe('treeManagement', () => {
     const { renderableTree } = buildRenderableTree({
       parsedFile,
       variables: {},
-      prefsManifest
+      filtersManifest
     });
 
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(

@@ -2,22 +2,22 @@ import { describe, test, expect } from 'vitest';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   paintColorsFrontmatter,
-  paintColorsPrefOptionsConfig,
+  paintColorsFilterOptionsConfig,
   paintColorsAllowlist
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 
-describe('YamlConfigParser.buildPagePrefsManifest', () => {
+describe('YamlConfigParser.buildPageFiltersManifest', () => {
   test('creates the expected object when given valid data', () => {
-    const manifest = YamlConfigParser.buildPagePrefsManifest({
+    const manifest = YamlConfigParser.buildPageFiltersManifest({
       frontmatter: paintColorsFrontmatter,
-      prefOptionsConfig: paintColorsPrefOptionsConfig,
+      filterOptionsConfig: paintColorsFilterOptionsConfig,
       allowlist: paintColorsAllowlist
     });
 
     const expectedManifest = {
-      prefsById: {
+      filtersById: {
         color: {
           config: {
             display_name: 'Color',
@@ -160,7 +160,7 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
         ]
       },
       errors: [],
-      defaultValsByPrefId: {
+      defaultValsByFilterId: {
         color: 'blue',
         finish: 'eggshell',
         paint: 'elegant_royal'
@@ -168,14 +168,14 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
     };
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
     expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/prefsManifest.snap.json`
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/filtersManifest.snap.json`
     );
   });
 
   test('detects an invalid placeholder', () => {
     const invalidFrontmatter = {
       title: 'My Page',
-      page_preferences: [
+      page_filters: [
         {
           display_name: 'Color',
           id: 'color',
@@ -195,9 +195,9 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
       ]
     };
 
-    const manifest = YamlConfigParser.buildPagePrefsManifest({
+    const manifest = YamlConfigParser.buildPageFiltersManifest({
       frontmatter: invalidFrontmatter,
-      prefOptionsConfig: paintColorsPrefOptionsConfig,
+      filterOptionsConfig: paintColorsFilterOptionsConfig,
       allowlist: paintColorsAllowlist
     });
 
@@ -206,7 +206,7 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
   });
 
   test('detects a nonexistent options source', () => {
-    const invalidPrefOptionsConfig = {
+    const invalidFilterOptionsConfig = {
       color_options: [
         { id: 'blue', display_name: 'Blue', default: true },
         { id: 'red', display_name: 'Red' }
@@ -243,9 +243,9 @@ describe('YamlConfigParser.buildPagePrefsManifest', () => {
       ]
     };
 
-    const manifest = YamlConfigParser.buildPagePrefsManifest({
+    const manifest = YamlConfigParser.buildPageFiltersManifest({
       frontmatter: paintColorsFrontmatter,
-      prefOptionsConfig: invalidPrefOptionsConfig,
+      filterOptionsConfig: invalidFilterOptionsConfig,
       allowlist: paintColorsAllowlist
     });
 

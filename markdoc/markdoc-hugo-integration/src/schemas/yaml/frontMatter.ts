@@ -1,35 +1,35 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, PREF_OPTIONS_ID_REGEX } from './../regexes';
+import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './../regexes';
 
 /**
- * The configuration of an individual page preference,
+ * The configuration of an individual page filter,
  * as defined in the front matter of a document.
  */
-export const PagePrefConfigSchema = z
+export const PageFilterConfigSchema = z
   .object({
     display_name: z.string(),
     id: z.string().regex(SNAKE_CASE_REGEX),
-    options_source: z.string().regex(PREF_OPTIONS_ID_REGEX),
+    options_source: z.string().regex(FILTER_OPTIONS_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional()
   })
   .strict();
 
 /**
- * The configuration of an individual page preference,
+ * The configuration of an individual page filter,
  * minified in order to reduce the load time of the HTML file
  * it's embedded in.
  */
-export const MinifiedPagePrefConfigSchema = z
+export const MinifiedPageFilterConfigSchema = z
   .object({
     n: z.string(), // display name
     i: z.string().regex(SNAKE_CASE_REGEX), // id
-    o: z.string().regex(PREF_OPTIONS_ID_REGEX), // options source
+    o: z.string().regex(FILTER_OPTIONS_ID_REGEX), // options source
     d: z.string().regex(SNAKE_CASE_REGEX).optional() // default value
   })
   .strict();
 
 /**
- * The configuration of an individual page preference,
+ * The configuration of an individual page filter,
  * minified in order to reduce the load time of the HTML file
  * it's embedded in.
  *
@@ -40,13 +40,13 @@ export const MinifiedPagePrefConfigSchema = z
  *
  * @example
  * {
- *   n: "Database",             // pref display name
- *   i: "database",             // pref ID
- *   o: "dbm_database_options", // options source ID
- *   d: "postgres"              // pref default value
+ *   n: "Database",             // filter display name
+ *   i: "database",             // filter ID
+ *   o: "dbm_database_options", // filter source ID
+ *   d: "postgres"              // filter default value
  * }
  */
-export interface MinifiedPagePrefConfig {
+export interface MinifiedPageFilterConfig {
   n: string; // display name
   i: string; // ID
   o: string; // options source
@@ -54,8 +54,8 @@ export interface MinifiedPagePrefConfig {
 }
 
 /**
- * An array of minified pref configurations,
- * used to represent all available preferences on the page
+ * An array of minified filter configurations,
+ * used to represent all available filters on the page
  * in a compact format to reduce HTML load time.
  *
  * To keep Zod out of the browser bundle,
@@ -63,17 +63,17 @@ export interface MinifiedPagePrefConfig {
  * rather than being derived directly from the schema,
  * which is the usual approach and would be less redundant.
  */
-export const MinifiedPagePrefsConfigSchema = z.array(MinifiedPagePrefConfigSchema);
+export const MinifiedPageFiltersConfigSchema = z.array(MinifiedPageFilterConfigSchema);
 
 /**
- * An array of minified pref configurations,
- * used to represent all available preferences on the page
+ * An array of minified filter configurations,
+ * used to represent all available filters on the page
  * in a compact format to reduce HTML load time.
  */
-export type MinifiedPagePrefsConfig = Array<MinifiedPagePrefConfig>;
+export type MinifiedPageFiltersConfig = Array<MinifiedPageFilterConfig>;
 
 /**
- * The configuration of an individual page preference,
+ * The configuration of an individual page filter,
  * as defined in the front matter of a document.
  *
  * @example
@@ -84,29 +84,29 @@ export type MinifiedPagePrefsConfig = Array<MinifiedPagePrefConfig>;
  *   default_value: "postgres" // optional override
  * }
  */
-export type PagePrefConfig = z.infer<typeof PagePrefConfigSchema>;
+export type PageFilterConfig = z.infer<typeof PageFilterConfigSchema>;
 
 /**
- * The list of page preferences, as defined in the front matter
+ * The list of page filters, as defined in the front matter
  * of a document, validated as a whole.
  */
-export const PagePrefsConfigSchema = z
-  .array(PagePrefConfigSchema)
-  .refine((prefsConfig) => {
-    // Page preference names must be unique within a page
-    const prefNames = prefsConfig.map((prefConfig) => prefConfig.display_name);
-    const uniquePrefNames = new Set(prefNames);
-    if (prefNames.length !== uniquePrefNames.size) {
-      console.error('Duplicate page preference names found in list:', prefNames);
+export const PageFiltersConfigSchema = z
+  .array(PageFilterConfigSchema)
+  .refine((filtersConfig) => {
+    // Page filter names must be unique within a page
+    const filterNames = filtersConfig.map((filterConfig) => filterConfig.display_name);
+    const uniqueFilterNames = new Set(filterNames);
+    if (filterNames.length !== uniqueFilterNames.size) {
+      console.error('Duplicate page filter display names found in list:', filterNames);
       return false;
     }
 
-    // Placeholders must refer to a valid preference name
+    // Placeholders must refer to a valid filter name
     // that is defined earlier in the list than the placeholder
     const definedParamNames = new Set();
-    for (const prefConfig of prefsConfig) {
-      definedParamNames.add(prefConfig.display_name);
-      const bracketedPlaceholders = prefConfig.display_name.match(/<([a-z0-9_]+)>/g);
+    for (const filterConfig of filtersConfig) {
+      definedParamNames.add(filterConfig.display_name);
+      const bracketedPlaceholders = filterConfig.display_name.match(/<([a-z0-9_]+)>/g);
       if (bracketedPlaceholders) {
         for (const placeholder of bracketedPlaceholders) {
           const paramName = placeholder.slice(1, -1);
@@ -122,10 +122,10 @@ export const PagePrefsConfigSchema = z
   });
 
 /**
- * The list of page preferences, as defined in the front matter
+ * The list of page filters, as defined in the front matter
  * of a document.
  */
-export type PagePrefsConfig = z.infer<typeof PagePrefsConfigSchema>;
+export type PageFiltersConfig = z.infer<typeof PageFiltersConfigSchema>;
 
 /**
  * The list of further reading links, as parsed directly from
@@ -169,7 +169,7 @@ export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
  */
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  page_preferences: PagePrefsConfigSchema.optional(),
+  page_filters: PageFiltersConfigSchema.optional(),
   further_reading: FurtherReadingConfigSchema.optional()
 });
 
@@ -181,7 +181,7 @@ export const FrontmatterSchema = z.object({
  * @example
  * {
  *   title: "Decorative Painting Tips",
- *   page_preferences: [
+ *   page_filters: [
  *     {
  *       display_name: "Color",
  *       id: "color",

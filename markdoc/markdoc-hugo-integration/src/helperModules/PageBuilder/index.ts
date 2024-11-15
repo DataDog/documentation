@@ -1,4 +1,4 @@
-import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
+import { FilterOptionsConfig } from '../../schemas/yaml/filterOptions';
 import { ParsedFile } from '../../schemas/compilationResults';
 import { YamlConfigParser } from '../YamlConfigParser';
 import { RenderableTreeNode } from 'markdoc-static-compiler';
@@ -12,14 +12,14 @@ import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
-import { PagePrefsManifest } from '../../schemas/pageFilters';
+import { PageFiltersManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
-const clientPrefsManagerScriptStr = fs.readFileSync(
-  path.resolve(__dirname, 'compiledScripts/markdoc-client-prefs-manager.min.js'),
+const clientFiltersManagerScriptStr = fs.readFileSync(
+  path.resolve(__dirname, 'compiledScripts/markdoc-client-filters-manager.min.js'),
   'utf8'
 );
 
@@ -31,9 +31,9 @@ const clientPrefsManagerScriptStr = fs.readFileSync(
  *
  * - the filter selector component, if one is present
  * - the main HTML content
- * - a script that initializes the ClientPrefsManager
+ * - a script that initializes the ClientFiltersManager
  *   with the necessary data to re-render the page
- *   when the user changes a preference setting.
+ *   when the user changes a filter setting.
  */
 export class PageBuilder {
   /**
@@ -41,21 +41,21 @@ export class PageBuilder {
    */
   static build(p: {
     parsedFile: ParsedFile;
-    prefOptionsConfig: PrefOptionsConfig;
+    filterOptionsConfig: FilterOptionsConfig;
     hugoConfig: HugoConfig;
-    prefsManifest: PagePrefsManifest;
+    filtersManifest: PageFiltersManifest;
   }): { html: string; errors: string[] } {
-    const variables = p.prefsManifest.defaultValsByPrefId;
+    const variables = p.filtersManifest.defaultValsByFilterId;
 
     const { renderableTree, errors } = buildRenderableTree({
       parsedFile: p.parsedFile,
       variables,
-      prefsManifest: p.prefsManifest
+      filtersManifest: p.filtersManifest
     });
 
     const pageInitScript = this.#getPageInitScript({
       renderableTree,
-      prefsManifest: p.prefsManifest
+      filtersManifest: p.filtersManifest
     });
 
     let articleHtml = render({
@@ -77,8 +77,8 @@ export class PageBuilder {
     }
 
     const pageJsx = PageTemplate({
-      valsByPrefId: p.prefsManifest.defaultValsByPrefId,
-      prefsManifest: p.prefsManifest,
+      valsByFilterId: p.filtersManifest.defaultValsByFilterId,
+      filtersManifest: p.filtersManifest,
       articleHtml
     });
 
@@ -110,28 +110,28 @@ export class PageBuilder {
   }
 
   /**
-   * Provide the JavaScript code for the ClientPrefsManager.
+   * Provide the JavaScript code for the ClientFiltersManager.
    */
-  static getClientPrefsManagerScriptStr() {
-    return clientPrefsManagerScriptStr;
+  static getClientFiltersManagerScriptStr() {
+    return clientFiltersManagerScriptStr;
   }
 
   /**
    * Add a frontmatter string to a page contents string.
    */
   static #addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
-    const { page_preferences, ...rest } = p.frontmatter;
+    const { page_filters, ...rest } = p.frontmatter;
     return `---\n${yaml.dump(rest)}---\n${p.pageContents}`;
   }
 
   /**
-   * Build the snippet of JavaScript that is used to initialize the ClientPrefsManager
+   * Build the snippet of JavaScript that is used to initialize the ClientFiltersManager
    * with all of the necessary data required to re-render the page when the user changes
-   * a preference setting.
+   * a filter setting.
    */
   static #getPageInitScript(p: {
     renderableTree: RenderableTreeNode;
-    prefsManifest: PagePrefsManifest;
+    filtersManifest: PageFiltersManifest;
   }): string {
     const initFunctionName = 'initPage';
     const docReadyExecutionScript = `if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -141,26 +141,26 @@ export class PageBuilder {
 }
 `;
 
-    // If the page does not have any preferences,
-    // don't pass any data to the prefs manager
-    if (!Object.keys(p.prefsManifest.prefsById).length) {
+    // If the page does not have any filters,
+    // don't pass any data to the filters manager
+    if (!Object.keys(p.filtersManifest.filtersById).length) {
       return this.#removeLineBreaks(
-        `const ${initFunctionName} = () => clientPrefsManager.initialize({}); ` +
+        `const ${initFunctionName} = () => clientFiltersManager.initialize({}); ` +
           docReadyExecutionScript
       );
     }
 
     const initFunctionStr = `const ${initFunctionName} = () => { 
-clientPrefsManager.initialize({
-    pagePrefsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPagePrefsConfig(
-        Object.values(p.prefsManifest.prefsById).map((p) => p.config)
+clientFiltersManager.initialize({
+    pageFiltersConfig: ${JSON.stringify(
+      YamlConfigParser.minifyPageFiltersConfig(
+        Object.values(p.filtersManifest.filtersById).map((p) => p.config)
       )
     )},
-    prefOptionsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPrefOptionsConfig(p.prefsManifest.optionSetsById)
+    filterOptionsConfig: ${JSON.stringify(
+      YamlConfigParser.minifyFilterOptionsConfig(p.filtersManifest.optionSetsById)
     )},
-    selectedValsByPrefId: ${JSON.stringify(p.prefsManifest.defaultValsByPrefId)},
+    selectedValsByFilterId: ${JSON.stringify(p.filtersManifest.defaultValsByFilterId)},
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
   });
 }; `;

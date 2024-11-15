@@ -2,14 +2,14 @@
  * The allowlist is used to ensure consistency between docs pages.
  * For example, for the cloud provider GCP, we want to ensure that
  * on every page where GCP is an option for the host filter,
- * the same pref ID is used (e.g. `host`) to represent the host filter,
+ * the same filter ID is used (e.g. `host`) to represent the host filter,
  * and the same option ID is used (e.g. `gcp`) to represent the GCP option
  * for that host filter.
  *
  * This ensures that once the customer chooses GCP once as their host,
- * that preference will apply correctly to every relevant page they visit.
+ * that filter will apply correctly to every relevant page they visit.
  *
- * The allowlist is defined in the preferences configuration YAML.
+ * The allowlist is defined in the filters configuration YAML.
  */
 import { z } from 'zod';
 import { SNAKE_CASE_REGEX } from '../regexes';
@@ -36,7 +36,7 @@ export const AllowlistConfigEntrySchema = z
 export type AllowlistConfigEntry = z.infer<typeof AllowlistConfigEntrySchema>;
 
 /**
- * An allowlist configuration (such as the allowed pref IDs)
+ * An allowlist configuration (such as the allowed filter IDs)
  * as it is parsed directly from the YAML file.
  */
 export const AllowlistConfigSchema = z
@@ -55,7 +55,7 @@ export const AllowlistConfigSchema = z
   .strict();
 
 /**
- * An allowlist configuration (such as the allowed pref IDs)
+ * An allowlist configuration (such as the allowed filter IDs)
  * as it appears in the YAML file.
  */
 export type AllowlistConfig = z.infer<typeof AllowlistConfigSchema>;
@@ -65,21 +65,21 @@ export type AllowlistConfig = z.infer<typeof AllowlistConfigSchema>;
  */
 export const AllowlistSchema = z
   .object({
-    prefsById: z.record(AllowlistConfigEntrySchema),
+    filtersById: z.record(AllowlistConfigEntrySchema),
     optionsById: z.record(AllowlistConfigEntrySchema)
   })
   .strict();
 
 /**
  * A parsed-from-YAML allowlist as it is used in the codebase.
- * The allowlist enforces consistency between the pref IDs
+ * The allowlist enforces consistency between the filter IDs
  * and option IDs used in the docs pages, so that any given
- * customer preference only needs to be selected once
+ * selection only needs to be made once
  * in order to be applied across every relevant page.
  *
  * @example
  * {
- *   prefsById: {
+ *   filtersById: {
  *     host: {
  *       id: 'host',
  *       display_name: 'Host'

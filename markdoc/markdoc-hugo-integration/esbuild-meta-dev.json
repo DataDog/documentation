@@ -1,7 +1,7 @@
 {
   "inputs": {
     "dist/helperModules/PageBuilder/components/ContentFilter.js": {
-      "bytes": 1345,
+      "bytes": 1379,
       "imports": [],
       "format": "cjs"
     },
@@ -10,8 +10,8 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/prefsResolution.js": {
-      "bytes": 6198,
+    "dist/helperModules/filtersResolution.js": {
+      "bytes": 6352,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -126,8 +126,8 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/ClientPrefsManager.js": {
-      "bytes": 15175,
+    "dist/helperModules/ClientFiltersManager.js": {
+      "bytes": 15282,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
@@ -135,9 +135,9 @@
           "original": "./PageBuilder/components/ContentFilter"
         },
         {
-          "path": "dist/helperModules/prefsResolution.js",
+          "path": "dist/helperModules/filtersResolution.js",
           "kind": "require-call",
-          "original": "./prefsResolution"
+          "original": "./filtersResolution"
         },
         {
           "path": "../markdoc-static-compiler/src/reresolver/index.js",
@@ -152,32 +152,32 @@
       ],
       "format": "cjs"
     },
-    "dist/markdoc-client-prefs-manager.js": {
-      "bytes": 512,
+    "dist/markdoc-client-filters-manager.js": {
+      "bytes": 524,
       "imports": [
         {
-          "path": "dist/helperModules/ClientPrefsManager.js",
+          "path": "dist/helperModules/ClientFiltersManager.js",
           "kind": "require-call",
-          "original": "./helperModules/ClientPrefsManager"
+          "original": "./helperModules/ClientFiltersManager"
         }
       ],
       "format": "cjs"
     }
   },
   "outputs": {
-    "dist/helperModules/PageBuilder/compiledScripts/markdoc-client-prefs-manager.js": {
+    "dist/helperModules/PageBuilder/compiledScripts/markdoc-client-filters-manager.js": {
       "imports": [],
       "exports": [],
-      "entryPoint": "dist/markdoc-client-prefs-manager.js",
+      "entryPoint": "dist/markdoc-client-filters-manager.js",
       "inputs": {
         "dist/helperModules/PageBuilder/components/ContentFilter.js": {
-          "bytesInOutput": 1245
+          "bytesInOutput": 1275
         },
         "dist/schemas/regexes.js": {
-          "bytesInOutput": 597
+          "bytesInOutput": 601
         },
-        "dist/helperModules/prefsResolution.js": {
-          "bytesInOutput": 4179
+        "dist/helperModules/filtersResolution.js": {
+          "bytesInOutput": 4361
         },
         "../markdoc-static-compiler/src/grammar/tag.js": {
           "bytesInOutput": 52241
@@ -206,14 +206,14 @@
         "dist/helperModules/PageBuilder/pageConfigMinification.js": {
           "bytesInOutput": 3111
         },
-        "dist/helperModules/ClientPrefsManager.js": {
-          "bytesInOutput": 14156
+        "dist/helperModules/ClientFiltersManager.js": {
+          "bytesInOutput": 14271
         },
-        "dist/markdoc-client-prefs-manager.js": {
-          "bytesInOutput": 340
+        "dist/markdoc-client-filters-manager.js": {
+          "bytesInOutput": 354
         }
       },
-      "bytes": 93574
+      "bytes": 93927
     }
   }
 }

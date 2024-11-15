@@ -1,11 +1,11 @@
 import {
-  PrefOptionsConfig,
-  PrefOptionsConfigSchema
-} from '../../../src/schemas/yaml/prefOptions';
+  FilterOptionsConfig,
+  FilterOptionsConfigSchema
+} from '../../../src/schemas/yaml/filterOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 import { Allowlist } from '../../../src/schemas/yaml/allowlist';
 
-export const paintColorsPrefOptionsConfig: PrefOptionsConfig = {
+export const paintColorsFilterOptionsConfig: FilterOptionsConfig = {
   color_options: [
     { id: 'blue', display_name: 'Blue', default: true },
     { id: 'red', display_name: 'Red' }
@@ -39,11 +39,11 @@ export const paintColorsPrefOptionsConfig: PrefOptionsConfig = {
     { id: 'crimson', display_name: 'Crimson' }
   ]
 };
-PrefOptionsConfigSchema.parse(paintColorsPrefOptionsConfig);
+FilterOptionsConfigSchema.parse(paintColorsFilterOptionsConfig);
 
 export const paintColorsFrontmatter: Frontmatter = {
   title: 'My Page',
-  page_preferences: [
+  page_filters: [
     {
       display_name: 'Color',
       id: 'color',
@@ -64,7 +64,7 @@ export const paintColorsFrontmatter: Frontmatter = {
 FrontmatterSchema.parse(paintColorsFrontmatter);
 
 export const paintColorsAllowlist: Allowlist = {
-  prefsById: {
+  filtersById: {
     color: {
       id: 'color',
       display_name: 'Color'

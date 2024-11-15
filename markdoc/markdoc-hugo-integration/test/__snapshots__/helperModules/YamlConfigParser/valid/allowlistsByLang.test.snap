@@ -1,5 +1,15 @@
 {
   "en": {
+    "filtersById": {
+      "color": {
+        "display_name": "Color",
+        "id": "color",
+      },
+      "item": {
+        "display_name": "Item",
+        "id": "item",
+      },
+    },
     "optionsById": {
       "apple": {
         "display_name": "Apple",
@@ -82,9 +92,11 @@
         "id": "yellow",
       },
     },
-    "prefsById": {
+  },
+  "ja": {
+    "filtersById": {
       "color": {
-        "display_name": "Color",
+        "display_name": "Color(ja)",
         "id": "color",
       },
       "item": {
@@ -92,8 +104,6 @@
         "id": "item",
       },
     },
-  },
-  "ja": {
     "optionsById": {
       "apple": {
         "display_name": "Apple (ja)",
@@ -174,16 +184,6 @@
       "yellow": {
         "display_name": "Yellow (ja)",
         "id": "yellow",
-      },
-    },
-    "prefsById": {
-      "color": {
-        "display_name": "Color(ja)",
-        "id": "color",
-      },
-      "item": {
-        "display_name": "Item",
-        "id": "item",
       },
     },
   },
