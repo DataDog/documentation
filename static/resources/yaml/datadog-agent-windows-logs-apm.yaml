@@ -81,8 +81,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "7a7a2481-66c9-4c9b-99de-8b236ac1e05d"
-  install_time: "1728322714"
+  install_id: "5d386ffa-6748-4aa7-a46a-6ccef53df37d"
+  install_time: "1731489758"
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -211,7 +211,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -229,12 +229,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -343,7 +343,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -362,12 +362,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -409,10 +409,6 @@ spec:
             - name: auth-token
               mountPath: C:/ProgramData/Datadog/auth
               readOnly: true
-            - name: runtimesocket
-              mountPath: \\.\pipe\docker_engine
-            - name: containerdsocket
-              mountPath: \\.\pipe\containerd-containerd
           livenessProbe:
             initialDelaySeconds: 15
             periodSeconds: 15
@@ -420,7 +416,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-foreground", "--cfgpath=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -434,12 +430,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -475,7 +471,7 @@ spec:
               mountPath: \\.\pipe\containerd-containerd
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -491,7 +487,7 @@ spec:
               readOnly: true
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -514,12 +510,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:

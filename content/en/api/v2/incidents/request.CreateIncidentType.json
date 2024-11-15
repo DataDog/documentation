@@ -1,9 +1,9 @@
 {
   "data": {
     "attributes": {
-      "description": "8d4bbb66dccf2456",
-      "is_default": true,
-      "name": "8d4bbb66dccf2456"
+      "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
+      "is_default": false,
+      "name": "Security Incident"
     },
     "type": "incident_types"
   }
