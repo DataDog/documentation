@@ -1,5 +1,5 @@
 ---
-title: RUM Android and Android TV Monitoring Setup
+title: Android and Android TV Monitoring Setup
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -18,11 +18,15 @@ further_reading:
 ---
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+The Datadog Android SDK supports Real User Monitoring (RUM) and Error Tracking on Android 5.0+ (API level 21) and Android TV.
 
-The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
+- RUM enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+- Error Tracking processes errors collected from the Datadog SDK to provide comprehensive crash reports and error trends.
 
 ## Setup
+
+{{< tabs >}}
+{{% tab "RUM" %}}
 
 1. Declare Datadog RUM SDK as a dependency.
 2. Specify application details in the UI.
@@ -30,7 +34,19 @@ The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 4. Enable RUM feature to start sending data.
 5. Initialize RUM Interceptor to track network events.
 
-### Declare the Datadog RUM SDK as a dependency
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. Declare Datadog SDK as a dependency.
+2. Specify application details in the UI.
+3. Initialize Datadog SDK with application context.
+4. Enable feature to start sending data.
+5. Initialize Interceptor to track network events.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Declare the Datadog SDK as a dependency
 
 Declare [dd-sdk-android-rum][1] and the [Gradle plugin][12] as a dependency in your **application module's** `build.gradle` file.
 
@@ -56,16 +72,48 @@ dependencies {
 
 ### Specify application details in the UI
 
-1. Navigate to [**Digital Experience** > **Add an Application**][2].
+{{< tabs >}}
+{{% tab "RUM" %}}
+
+1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][13].
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Android Data Collected][15].
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
+4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Android Data Collected][3].
 
    {{< img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][4] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
 
-For more information about setting up a client token, see the [Client Token documentation][4].
+For more information about setting up a client token, see the [Client Token documentation][5].
+
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/android/web_view_tracking/
+[3]: /real_user_monitoring/android/data_collected/
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /account_management/api-app-keys/#client-tokens
+
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. Navigate to [**Errors > Settings > Browser and Mobile > Add an Application**][1].
+2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
+4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Android Data Collected][3].
+
+   {{< img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
+
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][4] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+
+For more information about setting up a client token, see the [Client Token documentation][5].
+
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[2]: /real_user_monitoring/android/web_view_tracking/
+[3]: /real_user_monitoring/android/data_collected/
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /account_management/api-app-keys/#client-tokens
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Initialize Datadog SDK with application context
 
@@ -292,13 +340,16 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
-The initialization credentials require your application's variant name and uses the value of `BuildConfig.FLAVOR`. With the variant, RUM can match the errors reported from your application with the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
+The initialization credentials require your application's variant name and uses the value of `BuildConfig.FLAVOR`. With the variant, Datadog can match the errors reported from your application with the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
 
-The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated RUM error stack traces. For more information, see the [Track Android Errors][8].
+The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][8].
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+{{< tabs >}}
+{{% tab "RUM" %}}
+
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][1] as a percentage between 0 and 100.
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -307,6 +358,25 @@ val rumConfig = RumConfiguration.Builder(applicationId)
         .build()
 Rum.enable(rumConfig)
 ```
+
+[1]: 
+
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+To control the data your application sends to Datadog RUM, you can specify a sample rate for sessions while [initializing the Error Tracking feature][1] as a percentage between 0 and 100.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+        // Here 75% of the RUM sessions are sent to Datadog
+        .setSessionSampleRate(75.0f)
+        .build()
+Rum.enable(rumConfig)
+```
+[1]: 
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Set tracking consent (GDPR compliance)
 
@@ -464,9 +534,9 @@ This means that even if users open your application while offline, no data is lo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
+[2]: 
+[3]: 
+[4]: 
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
 [6]: #set-tracking-consent-gdpr-compliance
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
@@ -475,7 +545,7 @@ This means that even if users open your application while offline, no data is lo
 [10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[13]: /real_user_monitoring/android/web_view_tracking/
+[13]: 
 [14]: /getting_started/tagging/using_tags/#rum--session-replay
-[15]: /real_user_monitoring/android/data_collected/
+[15]: 
 [16]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
