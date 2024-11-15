@@ -43,7 +43,7 @@ FilterOptionsConfigSchema.parse(paintColorsFilterOptionsConfig);
 
 export const paintColorsFrontmatter: Frontmatter = {
   title: 'My Page',
-  page_filters: [
+  content_filters: [
     {
       display_name: 'Color',
       id: 'color',

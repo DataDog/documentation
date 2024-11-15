@@ -45,7 +45,7 @@ describe('YamlConfigParser.getDefaultValuesByFilterId', () => {
 
   const frontmatter: Frontmatter = {
     title: 'My Page',
-    page_filters: [
+    content_filters: [
       {
         display_name: 'Color',
         id: 'color',

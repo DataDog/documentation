@@ -61,7 +61,7 @@ describe('SharedRenderer.resolvePageFilters', () => {
     );
 
     const minifiedFilters = YamlConfigParser.minifyPageFiltersConfig(
-      paintColorsFrontmatter.page_filters!
+      paintColorsFrontmatter.content_filters!
     );
 
     const minifiedFilterOptionsConfig = YamlConfigParser.minifyFilterOptionsConfig(

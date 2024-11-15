@@ -175,7 +175,7 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
   test('detects an invalid placeholder', () => {
     const invalidFrontmatter = {
       title: 'My Page',
-      page_filters: [
+      content_filters: [
         {
           display_name: 'Color',
           id: 'color',

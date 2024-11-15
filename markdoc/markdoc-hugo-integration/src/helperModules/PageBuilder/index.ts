@@ -120,7 +120,7 @@ export class PageBuilder {
    * Add a frontmatter string to a page contents string.
    */
   static #addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
-    const { page_filters, ...rest } = p.frontmatter;
+    const { content_filters, ...rest } = p.frontmatter;
     return `---\n${yaml.dump(rest)}---\n${p.pageContents}`;
   }
 

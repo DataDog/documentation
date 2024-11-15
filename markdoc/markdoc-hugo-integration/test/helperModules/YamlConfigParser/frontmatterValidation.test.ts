@@ -19,7 +19,7 @@ describe('YamlConfigParser.getFilterOptionsForPage', () => {
   test('throws an error when an invalid frontmatter placeholder is used', () => {
     const invalidFrontmatter: Frontmatter = {
       title: 'My Page',
-      page_filters: [
+      content_filters: [
         {
           display_name: 'Color',
           id: 'color',
@@ -44,7 +44,7 @@ describe('YamlConfigParser.getFilterOptionsForPage', () => {
         paintColorsFilterOptionsConfig
       )
     ).toThrowError(
-      `Placeholder <COLOUR> does not refer to a valid page filter ID. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_filters list before it is referenced in <COLOUR>.`
+      `Placeholder <COLOUR> does not refer to a valid page filter ID. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the content_filters list before it is referenced in <COLOUR>.`
     );
   });
 

@@ -58,12 +58,12 @@ export class YamlConfigParser {
     };
 
     // Return the empty manifest if the page has no filters
-    if (!p.frontmatter.page_filters) {
+    if (!p.frontmatter.content_filters) {
       return manifest;
     }
 
-    // Process each entry in the frontmatter's page_filters list
-    for (const fmFilterConfig of p.frontmatter.page_filters) {
+    // Process each entry in the frontmatter's content_filters list
+    for (const fmFilterConfig of p.frontmatter.content_filters) {
       // Replace any placeholders in the options source
       const optionsSetId = fmFilterConfig.options_source;
       const resolvedOptionsSetId = optionsSetId.replace(
@@ -85,7 +85,7 @@ export class YamlConfigParser {
 
     // Key the configs by filter ID first, for convenience
     const filterConfigByFilterId: Record<string, PageFilterConfig> =
-      p.frontmatter.page_filters.reduce(
+      p.frontmatter.content_filters.reduce(
         (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
         {}
       );
@@ -96,7 +96,7 @@ export class YamlConfigParser {
 
     // Fill out the manifest in the order that the filters
     // appeared in the frontmatter
-    p.frontmatter.page_filters.forEach((pageFilterConfig) => {
+    p.frontmatter.content_filters.forEach((pageFilterConfig) => {
       // Validate the filter ID
       if (!p.allowlist.filtersById[pageFilterConfig.id]) {
         manifest.errors.push(
@@ -381,12 +381,12 @@ export class YamlConfigParser {
     frontmatter: Frontmatter,
     filterOptionsConfig: FilterOptionsConfig
   ): Record<string, string> {
-    if (!frontmatter.page_filters) {
+    if (!frontmatter.content_filters) {
       return {};
     }
     const defaultValuesByFilterId: Record<string, string> = {};
 
-    for (const fmFilterConfig of frontmatter.page_filters) {
+    for (const fmFilterConfig of frontmatter.content_filters) {
       // replace placeholders
       const optionsSetId = fmFilterConfig.options_source;
       const resolvedOptionsSetId = optionsSetId.replace(
@@ -422,7 +422,7 @@ export class YamlConfigParser {
   ): Readonly<FilterOptionsConfig> {
     const filterOptionsConfigForPage: FilterOptionsConfig = {};
 
-    if (!frontmatter.page_filters) {
+    if (!frontmatter.content_filters) {
       return filterOptionsConfigForPage;
     }
 
@@ -433,7 +433,7 @@ export class YamlConfigParser {
     const validValuesByOptionsSetId: Record<string, string[]> = {};
     const optionsSetIdsByFilterId: Record<string, string> = {};
 
-    for (const fmFilterConfig of frontmatter.page_filters) {
+    for (const fmFilterConfig of frontmatter.content_filters) {
       const placeholderMatches = fmFilterConfig.options_source.match(
         GLOBAL_PLACEHOLDER_REGEX
       );
@@ -443,7 +443,7 @@ export class YamlConfigParser {
       if (!placeholderMatches) {
         if (!filterOptionsConfig[fmFilterConfig.options_source]) {
           throw new Error(
-            `Invalid options_source found in page_filters: ${fmFilterConfig.options_source}`
+            `Invalid options_source found in content_filters: ${fmFilterConfig.options_source}`
           );
         }
         validValuesByOptionsSetId[fmFilterConfig.options_source] = filterOptionsConfig[
@@ -507,13 +507,13 @@ export class YamlConfigParser {
    * @param frontmatter A Frontmatter object.
    */
   static validatePlaceholderReferences(frontmatter: Frontmatter): void {
-    if (!frontmatter.page_filters) {
+    if (!frontmatter.content_filters) {
       return;
     }
 
     const validFilterIds: string[] = [];
 
-    for (const fmFilterConfig of frontmatter.page_filters) {
+    for (const fmFilterConfig of frontmatter.content_filters) {
       const placeholderMatches =
         fmFilterConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX) || [];
 
@@ -528,7 +528,7 @@ export class YamlConfigParser {
         const referencedId = match[1].toLowerCase();
         if (!validFilterIds.includes(referencedId)) {
           throw new Error(
-            `Placeholder ${match[0]} does not refer to a valid page filter ID. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the page_filters list before it is referenced in ${match[0]}.`
+            `Placeholder ${match[0]} does not refer to a valid page filter ID. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the content_filters list before it is referenced in ${match[0]}.`
           );
         }
       }

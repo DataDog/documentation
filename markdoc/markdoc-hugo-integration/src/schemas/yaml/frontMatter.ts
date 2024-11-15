@@ -169,7 +169,7 @@ export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
  */
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  page_filters: PageFiltersConfigSchema.optional(),
+  content_filters: PageFiltersConfigSchema.optional(),
   further_reading: FurtherReadingConfigSchema.optional()
 });
 
@@ -181,7 +181,7 @@ export const FrontmatterSchema = z.object({
  * @example
  * {
  *   title: "Decorative Painting Tips",
- *   page_filters: [
+ *   content_filters: [
  *     {
  *       display_name: "Color",
  *       id: "color",
