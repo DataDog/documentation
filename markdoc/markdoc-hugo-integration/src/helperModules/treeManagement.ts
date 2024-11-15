@@ -83,7 +83,7 @@ export function buildRenderableTree(p: {
 
   addHeaderAnchorstoTree(renderableTree);
 
-  const referencedValsByFilterId = collectReferencedValuesByVarId(renderableTree);
+  const referencedValsByFilterId = collectReferencedValsByVarId(renderableTree);
 
   const referencedFilterIds = Object.keys(referencedValsByFilterId);
 
@@ -159,7 +159,7 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
  *
  * @returns A list of variable IDs found in the tree.
  */
-function collectReferencedValuesByVarId(
+function collectReferencedValsByVarId(
   node: RenderableTreeNodes
 ): Record<string, string[]> {
   let referencedValuesByVarId: Record<string, string[]> = {};
@@ -169,7 +169,7 @@ function collectReferencedValuesByVarId(
   // If the node is an array, collect referenced values recursively
   if (Array.isArray(node)) {
     node.forEach((n) => {
-      const valuesById = collectReferencedValuesByVarId(n);
+      const valuesById = collectReferencedValsByVarId(n);
       Object.keys(valuesById).forEach((id) => {
         if (id in referencedValuesByVarId) {
           referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(
@@ -186,7 +186,7 @@ function collectReferencedValuesByVarId(
 
   // Collect referenced values from the node's children if present
   if ('children' in node && node.children) {
-    const valuesById = collectReferencedValuesByVarId(node.children);
+    const valuesById = collectReferencedValsByVarId(node.children);
     Object.keys(valuesById).forEach((id) => {
       if (id in referencedValuesByVarId) {
         referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
@@ -203,7 +203,7 @@ function collectReferencedValuesByVarId(
 
   // Collect referenced values from an `if` tag
   if (node.$$mdtype === 'Tag' && 'if' in node) {
-    const valuesById = collectReferencedValuesByVarId(
+    const valuesById = collectReferencedValsByVarId(
       // @ts-ignore
       node.if
     );
@@ -239,7 +239,7 @@ function collectReferencedValuesByVarId(
 
       const parameters = Object.values(node.parameters);
       parameters.forEach((p) => {
-        const valuesById = collectReferencedValuesByVarId(p);
+        const valuesById = collectReferencedValsByVarId(p);
         Object.keys(valuesById).forEach((id) => {
           if (id in referencedValuesByVarId) {
             referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(

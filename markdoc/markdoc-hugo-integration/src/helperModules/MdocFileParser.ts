@@ -47,8 +47,6 @@ export class MdocFileParser {
   /**
    * Recursively build the ASTs of all partials required by the given AST.
    *
-   * @param ast An AST node.
-   * @param partialsDir The directory containing any partials required by the AST.
    * @returns An object containing the partial ASTs by filepath, and any errors.
    */
   static #buildPartialASTs(
