@@ -39,11 +39,11 @@ To get started with heatmaps:
 
 Navigate to [**Digital Experience > Real User Monitoring > Session Replay > Heatmaps**][2]. Select your application and view.
 
-On the [Real User Monitoring landing page][3], select your application and view. You can select the type of heatmap you would like to view as well (Top Elements, Click Map, Scroll Map).
+On the [Real User Monitoring landing page][3], select your application from the [application selector][4] and view. Under Map Type, you can select the type of heatmap you would like to view: Top Elements, Click Map, or Scroll Map. Clicking one of these options takes you to the [heatmap page][2] for a particular view.
 
 {{< img src="real_user_monitoring/heatmaps/rum-heatmaps-getting-started.png" alt="Select an application to view heatmaps for it" style="width:100%;" >}}
 
-This takes you to the [heatmap page][2] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
+ You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-filters-v2.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
@@ -92,7 +92,7 @@ A heatmap's list of backgrounds cannot be modified.
 
 ## Next steps
 
-After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [Analytics explorer][4]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
+After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [Analytics explorer][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
 
 ## Troubleshooting
 
@@ -114,7 +114,7 @@ The tooltip on the icon says **element is not visible**. This means that the ele
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear.
 
-This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][5], it may also take a few minutes for the Session Replay to be available for viewing.
+This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][6], it may also take a few minutes for the Session Replay to be available for viewing.
 
 ### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
 
@@ -133,5 +133,6 @@ User information is not collected by default. Heatmaps use the user information 
 [1]: /real_user_monitoring/session_replay/
 [2]: https://app.datadoghq.com/rum/heatmap/
 [3]: https://app.datadoghq.com/rum/performance-monitoring
-[4]: https://app.datadoghq.com/rum/sessions
-[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json 
+[4]: /real_user_monitoring/explorer/#view-by-application
+[5]: https://app.datadoghq.com/rum/sessions
+[6]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json 
