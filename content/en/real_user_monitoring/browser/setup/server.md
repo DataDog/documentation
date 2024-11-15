@@ -23,6 +23,16 @@ RUM Auto-Instrumentation works by injecting a RUM SDK JavaScript scriptlet into 
 
 After your applications have been instrumented, you can configure your RUM application in Datadog.
 
+## Limitations
+
+The available functionality has the following important limitations:
+
+- If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
+- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for Nginx web servers.
+- Auto-Instrumentation does not inject into encrypted requests served by Nginx or IIS related to TLS.
+- (Nginx only) Auto-Instrumentation does not inject encrypted requests served by the Nginx web server.
+- (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
+
 ## Prerequisites
 
 The automatic installation method requires that you have the [Datadog Agent][2] installed.
@@ -34,19 +44,71 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{< tabs >}}
 {{% tab "Nginx" %}}
 
-The Auto-Instrumentation method leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses identified as HTML.
+The Auto-Instrumentation method leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses 
+identified as HTML. You can instrument your RUM application automatically or manually.
+
+{{% collapse-content title="Automatic instrumentation (recommended)" level="h5" %}}
 
 To automatically instrument your RUM application:
 
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][2] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Nginx**.
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][3].
-4. Copy and run the installer command to load the Datadog Nginx Module with the RUM SDK Injector onto your Nginx.
-5. After the installer successfully installs the SDK Injector, restart Nginx to begin collecting RUM sessions.
+4. Copy and run the installer command to load the Datadog Nginx Module with the RUM SDK Injector onto nginx.
+5. After the installer successfully installs the SDK Injector, restart nginx to begin collecting RUM sessions.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 [2]: https://app.datadoghq.com/rum/list
 [3]: /real_user_monitoring/guide/sampling-browser-plans/
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Manual instrumentation" level="h5" %}}
+
+### Download the appropriate `.tgz` file
+
+1. Use the `.tgz` file corresponding to your version of nginx. You can find all the relevant `.tgz` files listed by nginx version under [References](#references).
+2. Extract the tarball to extract teh `ngx_http_datadog_module.so` file. Move it to a location that nginx has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
+
+### Update Nginx configuration
+1. The `NGINX.conf` file is usually located in nginx's configuration directory. Add the following line to load the module:
+
+   ```javascript
+   load_module <RUM_MODULE_PATH>;
+   ```
+
+2. Then in the **http/server/location** section, add the following:
+
+   ```javascript
+   # APM Tracing is enabled by default. The following line disables APM Tracing.
+   datadog_disable;
+   datadog_rum on;
+   datadog_rum_config "v5" {
+     "applicationId" "<DATADOG_APPLICATION_ID>";
+     "clientToken" "<DATADOG_CLIENT_TOKEN>";
+     "site" "<DATADOG_SITE>";
+     "service" "my-web-application";
+     "env" "production";
+     "version" "1.0.0";
+     "sessionSampleRate" "50";
+     "sessionReplaySampleRate" "100";
+     "trackResources" "true";
+     "trackLongTasks" "true";
+     "trackUserInteractions" "true";
+   }
+   ```
+
+### 3. Update the Nginx configuration
+
+1. Restart the nginx server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+
+2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
+
+   ```javascript
+   error_log <file> info;
+   ```
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Windows IIS" %}}
@@ -57,7 +119,7 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 2. Select **Auto-Instrumentation** and **Windows IIS**.
 3. Set up the IIS module using either the GUI installer or command line as described below:
 
-{{% collapse-content title="Using the GUI installer" level="h5" %}}
+{{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
 
 1. Download the Datadog RUM installer.
 2. Follow the installer as an administrator by opening the `.msi` file.
@@ -114,15 +176,46 @@ To update your RUM Application:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Limitations
+## Troubleshooting
 
-The available functionality has the following important limitations:
+### Nginx stops responding
 
-- If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
-- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for Nginx web servers.
-- Auto-Instrumentation does not inject into encrypted requests served by Nginx or IIS related to TLS.
-- (Nginx only) Auto-Instrumentation does not inject encrypted requests served by the Nginx web server.
-- (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
+Since the module is in Preview, it's possible nginx may stop serving requests, particularly after installation. If you experience this issue, contact [Datadog support][40] with the following information to help us investigate and resolve the issue:
+
+- Your nginx configuration file
+- Any relevant error logs
+
+### RUM is not injected
+
+If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
+
+- **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
+- **Content compression by upstream server**: If nginx is acting as a proxy and the upstream server has content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure that content compression is disabled on the upstream server and configure nginx to compress the content.
+
+## Reference
+
+### Nginx modules
+
+| Nginx version | amd64 | arm 64 |
+|---------------|-------|--------|
+| 1.22.0 | [ngx_http_datadog-amd64-1.22.0][4] | [ngx_http_datadog-arm64-1.22.0][5] |
+| 1.22.1 | [ngx_http_datadog-amd64-1.22.1][6] | [ngx_http_datadog-arm64-1.22.1][7] |
+| 1.23.0 | [ngx_http_datadog-amd64-1.23.0][8] | [ngx_http_datadog-arm64-1.23.0][9] | 
+| 1.23.1 | [ngx_http_datadog-amd64-1.23.1][10] | [ngx_http_datadog-arm64-1.23.1][11] | 
+| 1.23.2 | [ngx_http_datadog-amd64-1.23.2][12] | [ngx_http_datadog-arm64-1.23.2][13] | 
+| 1.23.3 | [ngx_http_datadog-amd64-1.23.3][14] | [ngx_http_datadog-arm64-1.23.3][15] | 
+| 1.23.4 | [ngx_http_datadog-amd64-1.23.4][16] | [ngx_http_datadog-arm64-1.23.4][17] | 
+| 1.24.0 | [ngx_http_datadog-amd64-1.24.0][18] | [ngx_http_datadog-arm64-1.24.0][19] | 
+| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][20] | [ngx_http_datadog-arm64-1.25.0][21] | 
+| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][22] | [ngx_http_datadog-arm64-1.25.1][23] | 
+| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][24] | [ngx_http_datadog-arm64-1.25.2][25] | 
+| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][26] | [ngx_http_datadog-arm64-1.25.3][27] | 
+| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][28] | [ngx_http_datadog-arm64-1.25.4][29] | 
+| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][30] | [ngx_http_datadog-arm64-1.25.5][31] | 
+| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][32] | [ngx_http_datadog-arm64-1.26.0][33] | 
+| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][34] | [ngx_http_datadog-arm64-1.26.1][35] | 
+| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][36] | [ngx_http_datadog-arm64-1.26.2][37] | 
+| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][38] | [ngx_http_datadog-arm64-1.27.0][39] | 
 
 ## Further reading
 
@@ -131,3 +224,39 @@ The available functionality has the following important limitations:
 [1]: /real_user_monitoring/browser/setup/
 [2]: /agent/
 [3]: /real_user_monitoring/browser/advanced_configuration/
+[4]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.22.0.so.tgz
+[5]:https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.22.0.so.tgz
+[6]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.22.1.so.tgz
+[7]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.22.1.so.tgz
+[8]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.0.so.tgz
+[9]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.0.so.tgz
+[10]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.1.so.tgz
+[11]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.1.so.tgz
+[12]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.2.so.tgz
+[13]: 
+[14]: 
+[15]: 
+[16]: 
+[17]: 
+[18]: 
+[19]: 
+[20]: 
+[21]: 
+[22]: 
+[23]: 
+[24]: 
+[25]: 
+[26]: 
+[27]: 
+[28]: 
+[29]: 
+[30]: 
+[31]: 
+[32]: 
+[33]: 
+[34]: 
+[35]: 
+[36]: 
+[37]: 
+[38]: 
+[39]: 
