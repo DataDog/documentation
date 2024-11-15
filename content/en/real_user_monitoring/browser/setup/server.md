@@ -41,7 +41,7 @@ To automatically instrument your RUM application:
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][2] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Nginx**.
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][3].
-4. Copy and run the installer command to load the Datadog RUM SDK Injector onto your Nginx module.
+4. Copy and run the installer command to load the Datadog Nginx Module with the RUM SDK Injector onto your Nginx.
 5. After the installer successfully installs the SDK Injector, restart Nginx to begin collecting RUM sessions.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
