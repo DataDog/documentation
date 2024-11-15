@@ -35,7 +35,7 @@ title: Guías de integración
     {{< nextlink href="getting_started/integrations/aws/" tag=" AWS" >}}Configuración automática de la integración de AWS con CloudFormation{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-terraform-setup" tag=" AWS" >}}Configuración automática de la integración de AWS con Terraform{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-organizations-setup" tag=" AWS" >}}Configuración multicuenta de la integración de AWS para organizaciones{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}Configuración manual de la integración de AWS{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}}Configuración manual de la integración de AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Solucionar problemas de la integración de AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Monitorizar tus detalles de facturación de AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog no está autorizado para realizar sts:AssumeRole{{< /nextlink >}}
