@@ -9,7 +9,7 @@ further_reading:
 ## Use case
 
 
-Use Log Workspaces to perform a detailed analysis of products with low stock and high recent sales various different regions or countries. This guide walks you through the steps to:
+Use Log Workspaces to perform a detailed analysis of products with low stock and high recent sales in various different regions or countries. This guide walks you through the steps to:
 - Join inventory, sales, and location data in a workspace
 - Filter for products with low stock and high demand
 - Visualize sales of each of these products by country
@@ -65,7 +65,7 @@ Analyze products with low stock and recent high sales by joining inventory and s
     ```
     {{< img src="/logs/workspace/use_cases/analyze_retail_inventory/join_inventory_sales_data.png" alt="SQL query to join the inventory and sales data to identify products with low stock and recently high sales" style="width:100%;" >}}
 
-This analysis helps identify products with limited availability despite recent sales, indicating potential need for restocking. Additionaly, you can reveal other patterns, such as products with unexpected spikes in sales.
+This analysis helps identify products with limited availability despite recent sales, indicating potential need for restocking. Additionally, you can reveal other patterns, such as products with unexpected spikes in sales.
 
 ### 4. Analyze by location
 
@@ -89,7 +89,7 @@ Achieve this by joining your inventory and sales data with a [Reference Table][5
   GROUP BY lsa.product_id, location.store_country
   ```
 
-For each product, this query sums the total quantity sold in each country and groups them in a way that will visualize by product, what were the quantities sold in each country. 
+This query sums the total quantity of each product sold in each country and groups the results by product and country.
 
 ### 5. Visualize product sales by country
 
