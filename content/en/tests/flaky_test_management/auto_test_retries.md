@@ -109,7 +109,7 @@ After you set up Test Visibility, you can configure Auto Test Retries from the [
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
 
-By default, the feature retries any failing test case up to 5 times.
+By default, the feature retries each failing test case up to 5 times.
 Customize the Auto Test Retries with the following environment variables:
 
 * `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to `0` or `false` to explicitly disable retries even if the remote setting is enabled (default: true)
