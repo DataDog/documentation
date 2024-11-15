@@ -7,6 +7,7 @@ import {
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
+import { PageFiltersManifest } from '../../../src/schemas/pageFilters';
 
 describe('YamlConfigParser.buildPageFiltersManifest', () => {
   test('creates the expected object when given valid data', () => {
@@ -16,7 +17,7 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
       allowlist: paintColorsAllowlist
     });
 
-    const expectedManifest = {
+    const expectedManifest: PageFiltersManifest = {
       filtersById: {
         color: {
           config: {
@@ -24,10 +25,10 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
             id: 'color',
             options_source: 'color_options'
           },
-          defaultValuesByOptionsSetId: {
+          defaultValsByOptionsSetId: {
             color_options: 'blue'
           },
-          possibleValues: ['blue', 'red']
+          possibleVals: ['blue', 'red']
         },
         finish: {
           config: {
@@ -35,10 +36,10 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
             id: 'finish',
             options_source: 'finish_options'
           },
-          defaultValuesByOptionsSetId: {
+          defaultValsByOptionsSetId: {
             finish_options: 'eggshell'
           },
-          possibleValues: ['matte', 'eggshell', 'gloss']
+          possibleVals: ['matte', 'eggshell', 'gloss']
         },
         paint: {
           config: {
@@ -46,7 +47,7 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
             id: 'paint',
             options_source: '<FINISH>_<COLOR>_paint_options'
           },
-          defaultValuesByOptionsSetId: {
+          defaultValsByOptionsSetId: {
             matte_blue_paint_options: 'powder_blue',
             matte_red_paint_options: 'brick',
             eggshell_blue_paint_options: 'elegant_royal',
@@ -54,7 +55,7 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
             gloss_blue_paint_options: 'sky_blue',
             gloss_red_paint_options: 'fire_engine'
           },
-          possibleValues: [
+          possibleVals: [
             'powder_blue',
             'brick',
             'scarlet',

@@ -1,3 +1,0 @@
-[
-  "Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".",
-]

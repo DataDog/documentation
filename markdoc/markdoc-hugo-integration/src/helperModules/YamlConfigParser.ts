@@ -151,8 +151,8 @@ export class YamlConfigParser {
       }
 
       // Populate the default value for each options set ID
-      const defaultValuesByOptionsSetId: Record<string, string> = {};
-      const possibleValues: string[] = [];
+      const defaultValsByOptionsSetId: Record<string, string> = {};
+      const possibleVals: string[] = [];
 
       optionsSetIds.forEach((optionsSetId) => {
         const optionsSet = p.filterOptionsConfig[optionsSetId];
@@ -171,17 +171,17 @@ export class YamlConfigParser {
           }
 
           if (option.default) {
-            defaultValuesByOptionsSetId[optionsSetId] = option.id;
+            defaultValsByOptionsSetId[optionsSetId] = option.id;
           }
 
-          possibleValues.push(option.id);
+          possibleVals.push(option.id);
         });
       });
 
       manifest.filtersById[pageFilterConfig.id] = {
         config: pageFilterConfig,
-        defaultValuesByOptionsSetId,
-        possibleValues
+        defaultValsByOptionsSetId: defaultValsByOptionsSetId,
+        possibleVals: possibleVals
       };
 
       processedFilterIds.push(pageFilterConfig.id);
@@ -190,7 +190,7 @@ export class YamlConfigParser {
     // Add any options sets that were referenced by the filters
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filterManifest = manifest.filtersById[filterId];
-      const optionsSetIds = Object.keys(filterManifest.defaultValuesByOptionsSetId);
+      const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
       optionsSetIds.forEach((optionsSetId) => {
         if (!manifest.optionSetsById[optionsSetId]) {
           manifest.optionSetsById[optionsSetId] = p.filterOptionsConfig[optionsSetId];
@@ -374,14 +374,14 @@ export class YamlConfigParser {
    * This is useful for rendering the default version of a page,
    * before the user has interacted with any filter controls.
    */
-  static getDefaultValuesByFilterId(
+  static getDefaultValsByFilterId(
     frontmatter: Frontmatter,
     filterOptionsConfig: FilterOptionsConfig
   ): Record<string, string> {
     if (!frontmatter.content_filters) {
       return {};
     }
-    const defaultValuesByFilterId: Record<string, string> = {};
+    const defaultValsByFilterId: Record<string, string> = {};
 
     for (const fmFilterConfig of frontmatter.content_filters) {
       // replace placeholders
@@ -389,17 +389,17 @@ export class YamlConfigParser {
       const resolvedOptionsSetId = optionsSetId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
-          const value = defaultValuesByFilterId[placeholder.toLowerCase()];
+          const value = defaultValsByFilterId[placeholder.toLowerCase()];
           return value;
         }
       );
 
-      defaultValuesByFilterId[fmFilterConfig.id] =
+      defaultValsByFilterId[fmFilterConfig.id] =
         fmFilterConfig.default_value ||
         filterOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!.id;
     }
 
-    return defaultValuesByFilterId;
+    return defaultValsByFilterId;
   }
 
   /**

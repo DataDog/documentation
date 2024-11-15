@@ -68,21 +68,17 @@ describe('MarkdocHugoIntegration', () => {
     test(`the file ${sanitizedFilename} should have errors`, () => {
       expect(fileHasError).toBe(true);
     });
+  });
 
-    if (parsingErrorReports) {
-      test(`the parsing error reports for ${sanitizedFilename} match the snapshot`, () => {
-        expect(JSON.stringify(parsingErrorReports, null, 2)).toMatchFileSnapshot(
-          `${SNAPSHOTS_DIR}/invalidSite/${sanitizedFilename}/parsingErrors.snap.json`
-        );
-      });
-    }
+  test(`the validation errors match the snapshot`, () => {
+    expect(JSON.stringify(validationErrorsByFilePath, null, 2)).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/invalidSite/validationErrors.snap.txt`
+    );
+  });
 
-    if (validationError) {
-      test(`the validation error for ${sanitizedFilename} matches the snapshot`, () => {
-        expect(validationError).toMatchFileSnapshot(
-          `${SNAPSHOTS_DIR}/invalidSite/${sanitizedFilename}/validationErrors.snap.txt`
-        );
-      });
-    }
+  test(`the parsing errors match the snapshot`, () => {
+    expect(JSON.stringify(parsingErrorReportsByFilePath, null, 2)).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/invalidSite/parsingErrors.snap.txt`
+    );
   });
 });

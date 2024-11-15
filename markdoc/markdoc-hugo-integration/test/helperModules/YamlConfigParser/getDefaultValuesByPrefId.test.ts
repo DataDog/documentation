@@ -6,7 +6,7 @@ import {
 } from '../../../src/schemas/yaml/filterOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
-describe('YamlConfigParser.getDefaultValuesByFilterId', () => {
+describe('YamlConfigParser.getDefaultValsByFilterId', () => {
   const filterOptions: FilterOptionsConfig = {
     color_options: [
       { id: 'blue', display_name: 'Blue', default: true },
@@ -66,7 +66,7 @@ describe('YamlConfigParser.getDefaultValuesByFilterId', () => {
   FrontmatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
-    const defaultValsByFilterId = YamlConfigParser.getDefaultValuesByFilterId(
+    const defaultValsByFilterId = YamlConfigParser.getDefaultValsByFilterId(
       frontmatter,
       filterOptions
     );

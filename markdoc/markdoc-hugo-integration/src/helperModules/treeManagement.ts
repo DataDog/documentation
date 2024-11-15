@@ -100,21 +100,19 @@ export function buildRenderableTree(p: {
 
   // ensure that all referenced values are valid
   Object.keys(referencedValsByFilterId).forEach((filterId) => {
-    const referencedValues = referencedValsByFilterId[filterId];
-    const possibleValues = p.filtersManifest.filtersById[filterId]?.possibleValues;
+    const referencedVals = referencedValsByFilterId[filterId];
+    const possibleVals = p.filtersManifest.filtersById[filterId]?.possibleVals;
 
     // Skip adding error for a bad filter ID,
     // since those are already caught above
-    if (!possibleValues) {
+    if (!possibleVals) {
       return;
     }
 
-    const invalidValues = referencedValues.filter(
-      (value) => !possibleValues.includes(value)
-    );
-    if (invalidValues.length > 0) {
+    const invalidVals = referencedVals.filter((value) => !possibleVals.includes(value));
+    if (invalidVals.length > 0) {
       errors.push(
-        `Invalid value found in markup: "${invalidValues}" is not a valid value for the filter ID "${filterId}".`
+        `Invalid value found in markup: "${invalidVals}" is not a valid value for the filter ID "${filterId}".`
       );
     }
   });
@@ -162,58 +160,56 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
 function collectReferencedValsByVarId(
   node: RenderableTreeNodes
 ): Record<string, string[]> {
-  let referencedValuesByVarId: Record<string, string[]> = {};
+  let referencedValsByVarId: Record<string, string[]> = {};
 
-  if (!node) return referencedValuesByVarId;
+  if (!node) return referencedValsByVarId;
 
   // If the node is an array, collect referenced values recursively
   if (Array.isArray(node)) {
     node.forEach((n) => {
-      const valuesById = collectReferencedValsByVarId(n);
-      Object.keys(valuesById).forEach((id) => {
-        if (id in referencedValuesByVarId) {
-          referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(
-            valuesById[id]
-          );
+      const valsById = collectReferencedValsByVarId(n);
+      Object.keys(valsById).forEach((id) => {
+        if (id in referencedValsByVarId) {
+          referencedValsByVarId[id] = referencedValsByVarId[id].concat(valsById[id]);
         } else {
-          referencedValuesByVarId[id] = valuesById[id];
+          referencedValsByVarId[id] = valsById[id];
         }
       });
     });
   }
 
-  if (typeof node !== 'object') return referencedValuesByVarId;
+  if (typeof node !== 'object') return referencedValsByVarId;
 
   // Collect referenced values from the node's children if present
   if ('children' in node && node.children) {
-    const valuesById = collectReferencedValsByVarId(node.children);
-    Object.keys(valuesById).forEach((id) => {
-      if (id in referencedValuesByVarId) {
-        referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
+    const valsById = collectReferencedValsByVarId(node.children);
+    Object.keys(valsById).forEach((id) => {
+      if (id in referencedValsByVarId) {
+        referencedValsByVarId[id] = referencedValsByVarId[id].concat(valsById[id]);
       } else {
-        referencedValuesByVarId[id] = valuesById[id];
+        referencedValsByVarId[id] = valsById[id];
       }
-      referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+      referencedValsByVarId[id] = Array.from(new Set(referencedValsByVarId[id]));
     });
   }
 
   if (typeof node !== 'object' || !('$$mdtype' in node)) {
-    return referencedValuesByVarId;
+    return referencedValsByVarId;
   }
 
   // Collect referenced values from an `if` tag
   if (node.$$mdtype === 'Tag' && 'if' in node) {
-    const valuesById = collectReferencedValsByVarId(
+    const valsById = collectReferencedValsByVarId(
       // @ts-ignore
       node.if
     );
-    Object.keys(valuesById).forEach((id) => {
-      if (id in referencedValuesByVarId) {
-        referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(valuesById[id]);
+    Object.keys(valsById).forEach((id) => {
+      if (id in referencedValsByVarId) {
+        referencedValsByVarId[id] = referencedValsByVarId[id].concat(valsById[id]);
       } else {
-        referencedValuesByVarId[id] = valuesById[id];
+        referencedValsByVarId[id] = valsById[id];
       }
-      referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+      referencedValsByVarId[id] = Array.from(new Set(referencedValsByVarId[id]));
     });
   }
 
@@ -228,32 +224,28 @@ function collectReferencedValsByVarId(
       const varId = node.parameters[0].path?.join('.');
       // @ts-ignore
       const value = node.parameters[1];
-      if (varId in referencedValuesByVarId) {
-        referencedValuesByVarId[varId].push(value);
+      if (varId in referencedValsByVarId) {
+        referencedValsByVarId[varId].push(value);
       } else {
-        referencedValuesByVarId[varId] = [value];
+        referencedValsByVarId[varId] = [value];
       }
-      referencedValuesByVarId[varId] = Array.from(
-        new Set(referencedValuesByVarId[varId])
-      );
+      referencedValsByVarId[varId] = Array.from(new Set(referencedValsByVarId[varId]));
 
       const parameters = Object.values(node.parameters);
       parameters.forEach((p) => {
-        const valuesById = collectReferencedValsByVarId(p);
-        Object.keys(valuesById).forEach((id) => {
-          if (id in referencedValuesByVarId) {
-            referencedValuesByVarId[id] = referencedValuesByVarId[id].concat(
-              valuesById[id]
-            );
+        const valsById = collectReferencedValsByVarId(p);
+        Object.keys(valsById).forEach((id) => {
+          if (id in referencedValsByVarId) {
+            referencedValsByVarId[id] = referencedValsByVarId[id].concat(valsById[id]);
           } else {
-            referencedValuesByVarId[id] = valuesById[id];
+            referencedValsByVarId[id] = valsById[id];
           }
-          referencedValuesByVarId[id] = Array.from(new Set(referencedValuesByVarId[id]));
+          referencedValsByVarId[id] = Array.from(new Set(referencedValsByVarId[id]));
         });
       });
     }
   }
 
-  delete referencedValuesByVarId.undefined;
-  return referencedValuesByVarId;
+  delete referencedValsByVarId.undefined;
+  return referencedValsByVarId;
 }

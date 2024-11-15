@@ -6,10 +6,10 @@
         "id": "color",
         "options_source": "color_options"
       },
-      "defaultValuesByOptionsSetId": {
+      "defaultValsByOptionsSetId": {
         "color_options": "blue"
       },
-      "possibleValues": [
+      "possibleVals": [
         "blue",
         "red"
       ]
@@ -20,10 +20,10 @@
         "id": "finish",
         "options_source": "finish_options"
       },
-      "defaultValuesByOptionsSetId": {
+      "defaultValsByOptionsSetId": {
         "finish_options": "eggshell"
       },
-      "possibleValues": [
+      "possibleVals": [
         "matte",
         "eggshell",
         "gloss"
@@ -35,7 +35,7 @@
         "id": "paint",
         "options_source": "<FINISH>_<COLOR>_paint_options"
       },
-      "defaultValuesByOptionsSetId": {
+      "defaultValsByOptionsSetId": {
         "matte_blue_paint_options": "powder_blue",
         "matte_red_paint_options": "brick",
         "eggshell_blue_paint_options": "elegant_royal",
@@ -43,7 +43,7 @@
         "gloss_blue_paint_options": "sky_blue",
         "gloss_red_paint_options": "fire_engine"
       },
-      "possibleValues": [
+      "possibleVals": [
         "powder_blue",
         "brick",
         "scarlet",

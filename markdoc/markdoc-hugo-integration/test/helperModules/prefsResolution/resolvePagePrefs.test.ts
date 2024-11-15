@@ -55,7 +55,7 @@ describe('SharedRenderer.resolvePageFilters', () => {
   });
 
   test('resolves to the correct values using minified page filters', () => {
-    const valsByFilterId = YamlConfigParser.getDefaultValuesByFilterId(
+    const valsByFilterId = YamlConfigParser.getDefaultValsByFilterId(
       paintColorsFrontmatter,
       paintColorsFilterOptionsConfig
     );

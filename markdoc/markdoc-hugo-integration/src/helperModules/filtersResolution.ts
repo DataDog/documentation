@@ -63,11 +63,11 @@ export function resolvePageFilters(p: {
         (option) => option.default
       )!.id;
 
-    const possibleValues = p.filtersManifest.optionSetsById[
+    const possibleVals = p.filtersManifest.optionSetsById[
       filterConfigDup.options_source
     ].map((option) => option.id);
     let currentValue = p.valsByFilterId[filterConfigDup.id];
-    if (currentValue && !possibleValues.includes(currentValue)) {
+    if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
       valsByFilterIdDup[filterConfigDup.id] = defaultValue;
     }
@@ -116,11 +116,11 @@ export function resolveMinifiedPageFilters(p: {
       filterConfigDup.d ||
       p.filterOptionsConfig[filterConfigDup.o].find((option) => option.d)!.i;
 
-    const possibleValues = p.filterOptionsConfig[filterConfigDup.o].map(
+    const possibleVals = p.filterOptionsConfig[filterConfigDup.o].map(
       (option) => option.i
     );
     let currentValue = p.valsByFilterId[filterConfigDup.i];
-    if (currentValue && !possibleValues.includes(currentValue)) {
+    if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
       valsByFilterIdDup[filterConfigDup.i] = defaultValue;
     }

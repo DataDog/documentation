@@ -96,9 +96,9 @@
             valsByFilterId: valsByFilterIdDup
           });
           const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionSetsById[filterConfigDup.options_source].find((option) => option.default).id;
-          const possibleValues = p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => option.id);
+          const possibleVals = p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => option.id);
           let currentValue = p.valsByFilterId[filterConfigDup.id];
-          if (currentValue && !possibleValues.includes(currentValue)) {
+          if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
             valsByFilterIdDup[filterConfigDup.id] = defaultValue;
           }
@@ -125,9 +125,9 @@
             valsByFilterId: valsByFilterIdDup
           });
           const defaultValue = filterConfigDup.d || p.filterOptionsConfig[filterConfigDup.o].find((option) => option.d).i;
-          const possibleValues = p.filterOptionsConfig[filterConfigDup.o].map((option) => option.i);
+          const possibleVals = p.filterOptionsConfig[filterConfigDup.o].map((option) => option.i);
           let currentValue = p.valsByFilterId[filterConfigDup.i];
-          if (currentValue && !possibleValues.includes(currentValue)) {
+          if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
             valsByFilterIdDup[filterConfigDup.i] = defaultValue;
           }

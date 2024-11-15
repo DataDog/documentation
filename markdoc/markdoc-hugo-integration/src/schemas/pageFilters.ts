@@ -112,11 +112,11 @@ export type ResolvedPageFilters = z.infer<typeof ResolvedPageFiltersSchema>;
 export const PageFilterManifestSchema = z
   .object({
     config: PageFilterConfigSchema,
-    defaultValuesByOptionsSetId: z.record(
+    defaultValsByOptionsSetId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX)
     ),
-    possibleValues: z.array(z.string().regex(SNAKE_CASE_REGEX))
+    possibleVals: z.array(z.string().regex(SNAKE_CASE_REGEX))
   })
   .strict();
 
@@ -138,12 +138,12 @@ export const PageFilterManifestSchema = z
  *     options_source: 'aws_host_types',
  *     default_value: 'ec2'
  *   },
- *   defaultValuesByOptionsSetId: {
+ *   defaultValsByOptionsSetId: {
  *     aws_host_types: 'ec2',
  *     gcp_host_types: 'gce',
  *     azure_host_types: 'vm'
  *   },
- *   possibleValues: ['ec2', 'gce', [... many more possible values here]]
+ *   possibleVals: ['ec2', 'gce', [... many more possible values here]]
  * }
  */
 export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
@@ -189,10 +189,10 @@ export const PageFiltersManifestSchema = z
  *       options_source: 'host_options',
  *       default_value: 'aws'
  *     },
- *     defaultValuesByOptionsSetId: {
+ *     defaultValsByOptionsSetId: {
  *       host_options: 'aws',
  *     },
- *     possibleValues: ['aws', 'gcp', 'azure']
+ *     possibleVals: ['aws', 'gcp', 'azure']
  *   },
  *
  *   // a filter that depends on the user's selection of `host`,
@@ -204,12 +204,12 @@ export const PageFiltersManifestSchema = z
  *       options_source: 'aws_host_types',
  *       default_value: 'ec2'
  *     },
- *     defaultValuesByOptionsSetId: {
+ *     defaultValsByOptionsSetId: {
  *       aws_host_types: 'ec2',
  *       gcp_host_types: 'gce',
  *       azure_host_types: 'vm'
  *     },
- *     possibleValues: ['ec2', 'gce', [... many more possible values here]]
+ *     possibleVals: ['ec2', 'gce', [... many more possible values here]]
  *   }
  * }
  */
