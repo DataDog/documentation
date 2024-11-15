@@ -161,7 +161,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 #### Span ID attribute
 
-By default, [Datadog tracers can automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
 
 * `dd.span_id`
 * `contextMap.dd.span_id`
