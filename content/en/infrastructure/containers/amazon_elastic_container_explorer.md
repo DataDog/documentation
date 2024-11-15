@@ -50,7 +50,7 @@ If using the [task definition to install the Datadog Agent][4], add this environ
 [4]: /containers/amazon_ecs/?tab=awscli#setup
 
 {{% /tab %}}
-{{% tab "Manual" %}}
+{{% tab "Configuration File" %}}
 For manual configuration, include the following line in the Datadog Agent configuration file.
 
 ```yaml
