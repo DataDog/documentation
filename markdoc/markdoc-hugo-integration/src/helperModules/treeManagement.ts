@@ -64,9 +64,6 @@ export function getMinifiedIfFunctionsByRef(
  * Build a renderable tree from the AST, frontmatter, partials, and default values.
  * The renderable tree is used to render HTML output at compile time,
  * and when the end user changes a content filter setting.
- *
- * @param p A ParsedFile object and a FilterOptionsConfig object.
- * @returns A renderable tree and any errors encountered.
  */
 export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
@@ -160,7 +157,6 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
  * along with an array of their expected values.
  * (The markup must first be parsed into a renderable tree.)
  *
- * @param node A renderable tree.
  * @returns A list of variable IDs found in the tree.
  */
 function collectReferencedValuesByVarId(

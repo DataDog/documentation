@@ -112,9 +112,6 @@ export class MarkdocHugoIntegration {
   /**
    * Parse a single Markdoc file into a collection
    * of data structures, such as the AST and the frontmatter.
-   *
-   * @param markdocFilepath The path to the file.
-   * @returns A ParsedFile object.
    */
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
     const parsedFile = MdocFileParser.parseMdocFile({

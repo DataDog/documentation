@@ -360,9 +360,6 @@ export class YamlConfigParser {
 
   /**
    * Load a filter options configuration from a YAML file.
-   *
-   * @param yamlFile The path to a YAML file containing filter options.
-   * @returns A read-only FilterOptionsConfig object.
    */
   static loadFiltersYamlFromStr(yamlFile: string): RawFilterOptionsConfig {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
@@ -411,10 +408,6 @@ export class YamlConfigParser {
    * Verify that all placeholders refer to valid filter IDs,
    * and that all potential options sources generated
    * by those placeholders are valid.
-   *
-   * @param frontmatter A Frontmatter object, parsed from the front matter of an .mdoc file.
-   * @param filterOptionsConfig A FilterOptionsConfig object, parsed
-   * from the filter options YAML files.
    */
   static getFilterOptionsForPage(
     frontmatter: Frontmatter,
@@ -503,8 +496,6 @@ export class YamlConfigParser {
    * For example, if there is a <COLOR> placeholder, there must
    * also be a page filter with the ID 'color', and it must
    * have been defined in the frontmatter before the placeholder is referenced.
-   *
-   * @param frontmatter A Frontmatter object.
    */
   static validatePlaceholderReferences(frontmatter: Frontmatter): void {
     if (!frontmatter.content_filters) {

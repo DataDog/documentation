@@ -14,10 +14,6 @@ export class MdocFileParser {
   /**
    * Parse a Markdoc file and return its AST, frontmatter, partials,
    * and any validation errors encountered during parsing.
-   *
-   * @param markdocFile The path to the Markdoc file.
-   * @param partialsDir The directory containing any partials required by the Markdoc file.
-   * @returns A read-only ParsedFile object.
    */
   static parseMdocFile(p: {
     file: string;
