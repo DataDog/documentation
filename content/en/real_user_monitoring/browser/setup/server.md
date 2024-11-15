@@ -105,8 +105,10 @@ To automatically instrument your RUM application:
    }
    ```
 
-3. Restart the nginx server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
-4. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
+### Restart your server
+
+1. Restart the nginx server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
 
    ```javascript
    error_log <file> info;
