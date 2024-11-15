@@ -32,7 +32,7 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic between your **client** ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
+For example, if you want to see network traffic between your ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
 
 {{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
@@ -82,18 +82,18 @@ Aggregate and filter your traffic data by any tags in Datadog network page. An i
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
-1. Select the `+` button on the top right of the facet panels.
+1. Select the **+ Add** button on the top right of the facet panels.
 2. Enter the relevant tag you want to create a custom facet upon.
-3. Click `Create`.
+3. Click **Add**.
 
 Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
 ### Wildcard search
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-- `client_service:web*` matches all client services that start with web
-- `client_service:*web` matches all client services that end with web
-- `client_service:*web*` matches all client services that contain the string web
+- `client_service:web*` matches all client services that start with web.
+- `client_service:*web` matches all client services that end with web.
+- `client_service:*web*` matches all client services that contain the string web.
 
 Wildcard searches work within facets with this syntax. This query returns all the client services that end with the string "mongo":
 
@@ -104,6 +104,22 @@ To learn more, see the [search syntax][1] documentation.
 ### Group by
 
 Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
+
+If you want to investigate connections from all of your hosts in a single grouping, add the `host` tag in the **View clients as** dropdown, and add `Ungrouped traffic` in the **View servers as** dropdown. 
+
+{{< img src="network_performance_monitoring/network_analytics/npm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
+
+If you have traffic that is not tagged by a specific group, you can select **Auto-grouped traffic** to group data by any available tags. For example, to see which tags are available for a specific `service`, use the `service` tag in the **View clients as** dropdown, and add `Auto-grouped traffic` in the **View servers as** dropdown:
+
+{{< img src="network_performance_monitoring/network_analytics/npm_auto-grouped.png" alt="NPM analytics page sorting by service tags" style="width:90%;">}}
+
+The **Auto-grouped traffic** option can help you identify the source of your tags. For example, hover over the individual icons to display a tooltip that indicates the tag's origin:
+
+{{< img src="network_performance_monitoring/network_analytics/npm_icon_tooltip.png" alt="Hovering over the icon tooltip to display the tag source" style="width:90%;">}}
+
+Using the search bar and the group by feature together is helpful to further isolate your network traffic. For example, to find all traffic from your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and select `datacenter` in the **View clients** as dropdown:
+
+{{< img src="network_performance_monitoring/network_analytics/search_bar_with_groupby.png" alt="Using group by option with search field" style="width:90%;">}}
 
 ## Summary graphs
 

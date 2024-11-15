@@ -27,7 +27,7 @@ categories:
 - almacenes de datos
 - recopilación de logs
 - almacenamiento en caché
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md
 display_on_public_website: true

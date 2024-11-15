@@ -41,7 +41,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.t
 ```
 
 ### Instalación con un solo clic
-Para configurar la monitorización de flujos de datos desde la interfaz de usuario Datadog sin necesidad de reiniciar tu servicio, utiliza la [Configuración en el tiempo de ejecución][5]. Ve a la página de <txprotected>servicios</txprotected> de APM y `Enable DSM`.
+Para configurar la monitorización de flujos de datos desde la interfaz de usuario Datadog sin necesidad de reiniciar tu servicio, utiliza la [Configuración en el tiempo de ejecución][5]. Ve a la página de servicios de APM y `Enable DSM`.
 
 {{< img src="data_streams/enable_dsm_service_catalog.png" alt="Habilita la monitorización de flujos de datos desde la sección Dependencias de la página de servicios de APM" >}}
 
