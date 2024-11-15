@@ -1,21 +1,20 @@
 ---
-description: CI Visibility에서 특정 이벤트를 처리하지 않도록 제외하는 조건을 어떻게 정의하는지 알아보세요.
+description: CI Visibility에서 특정 이벤트를 처리하지 않도록 제외하는 조건을 어떻게 정의하는지 알아봅니다.
 further_reading:
 - link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: 블로그
   text: Datadog Intelligent Test Runner로 CI 테스트 간소화
-- link: https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility
-  tag: 가격
-  text: CI Visibility 가격 확인하기
-kind: 가이드
-title: CI Visibility를 위한 수집 제어
+- link: /continuous_integration/pipelines
+  tag: 설명서
+  text: Pipeline Visibility에 대해 알아보기
+title: CI Visibility용 수집 제어 설정
 ---
 
-## 개요
-
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">선택하신 사이트({{<region-param key="dd_site_name">}})에서 현재 CIVisibility를 사용할 수 없습니다.</div>
+<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
+
+## 개요
 
 제외 필터를 사용하면 Datadog이 처리하는 특정 이벤트를 제외할 하나 이상의 조건을 정의할 수 있어 CI Visibility 예산을 세밀하게 제어할 수 있습니다.
 

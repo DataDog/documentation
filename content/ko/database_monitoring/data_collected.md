@@ -1,7 +1,6 @@
 ---
 description: 데이터베이스 모니터링이 수집한 데이터에 대한 정보
 further_reading: null
-kind: 설명서
 title: 수집된 데이터베이스 모니터링 데이터
 ---
 {{< site-region region="gov" >}}

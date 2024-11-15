@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: ブログ
   text: DBM と APM のテレメトリーをシームレスに相関させ、エンドツーエンドのクエリパフォーマンスを把握する
-kind: documentation
 title: Database Monitoring とトレースの相関付け
 ---
 
@@ -20,21 +19,23 @@ Postgres、MySQL、SQL Server、Oracle
 : 7.46+
 
 データプライバシー
-: SQL コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がアクセスすることが可能になります。
+: SQL コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、それにアクセスする権限を与えられた他の第三者がそのデータにアクセスできるようになります。
 
 
-APM トレーサーインテグレーションは、アプリケーションからデータベースに渡される情報量を制御する*伝搬モード*をサポートしています。
+APM トレーサーインテグレーションは、アプリケーションからデータベースに渡される情報量を制御する*伝播モード*をサポートしています。
 
 - `full` モードは完全なトレース情報をデータベースに送信し、DBM 内で個々のトレースを調査できるようにします。これはほとんどのインテグレーションで推奨されるソリューションです。
-- `service` モードはサービス名を送信し、どのサービスがデータベース負荷に寄与しているかを把握できます。このモードは Oracle と SQL Server アプリケーションで唯一サポートされているモードです。
-- `disabled` モードは伝搬を無効にし、アプリケーションからの情報を送信しません。
+- `service` モードはサービス名を送信し、データベースの負荷に貢献しているサービスを把握することができます。これは Oracle アプリケーションでサポートされている唯一のモードです。
+- `disabled` モードは伝播を無効にし、アプリケーションからの情報を送信しません。
 
-SQL Server と Oracle は、ステートメントキャッシュの動作により、完全なトレースコンテキストを含むとパフォーマンスの問題が発生する可能性があるため、`full` 伝搬モードをサポートしていません。
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
-|:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} |            |           |
-| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
+\* Aurora MySQL の完全伝播モードにはバージョン 3 が必要です。
+
+\*\* SQL Server は Java および .NET トレーサーでのみフルモードをサポートしています。
 
 **サポート対象のアプリケーショントレーサーとドライバー**
 
@@ -44,17 +45,24 @@ SQL Server と Oracle は、ステートメントキャッシュの動作によ�
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` モードのみ |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | `service` モードのみ |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -64,6 +72,14 @@ SQL Server と Oracle は、ステートメントキャッシュの動作によ�
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] はサポートされていません
+
+\*\* Java/.NET トレーサーにおける SQL Server のフルモード:
+  - インスツルメンテーションは、クライアントがクエリを発行する際に `SET context_info` コマンドを実行し、これによりデータベースとの追加のラウンドトリップが発生します。
+  - アプリケーションが `context_info` を使用してインスツルメンテーションを行っている場合、APM トレーサーによって上書きされます。
+  - 前提条件:
+    - Agent バージョン 7.55.0 以降
+    - Java トレーサーバージョン 1.39.0 以降
+    - .NET トレーサーバージョン 3.3 以降
 
 ## セットアップ
 最高のユーザーエクスペリエンスを得るために、アプリケーションで以下の環境変数が設定されていることを確認してください。
@@ -91,7 +107,7 @@ import (
 )
 ```
 
-以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
+以下のいずれかの方法で、データベースモニタリングの伝播機能を有効にします。
 1. 環境変数:
    `DD_DBM_PROPAGATION_MODE=full`
 
@@ -119,7 +135,7 @@ import (
 )
 
 func main() {
-    // まず、ドライバの登録時に dbm 伝搬モードを設定します。これは sqltrace.Open で行うこともでき、
+    // まず、ドライバの登録時に dbm 伝播モードを設定します。これは sqltrace.Open で行うこともでき、
     // この機能をより詳細に制御できることに注意してください。
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
@@ -144,11 +160,11 @@ func main() {
 
 {{% tab "Java" %}}
 
-[Java トレーシング][1]のインスツルメンテーションの説明に従い、Agent の `1.11.0` またはそれ以上のバージョンをインストールする必要があります。
+[Java トレーシング][1]のインスツルメンテーションの説明に従い、Agent の `1.11.0` またはそれ以上のバージョンをインストールします。
 
 また、`jdbc-datasource` [インスツルメンテーション][2]を有効にする必要があります。
 
-以下の**いずれか**の方法で、データベースモニタリングの伝搬機能を有効にします。
+以下の**いずれか**の方法で、データベースモニタリングの伝播機能を有効にします。
 
 - システムプロパティ `dd.dbm.propagation.mode=full` を設定する
 - 環境変数 `DD_DBM_PROPAGATION_MODE=full` を設定する
@@ -191,14 +207,14 @@ Gemfile で [dd-trace-rb][1] をバージョン `1.8.0` 以降にインストー
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'datadog' # v1.x を使用している場合は `'ddtrace', '>= 1.8.0'` を使用します 
 
-# 使用による
+# 使用状況による
 gem 'mysql2'
 gem 'pg'
 ```
 
-以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
+以下のいずれかの方法で、データベースモニタリングの伝播機能を有効にします。
 1. 環境変数:
    `DD_DBM_PROPAGATION_MODE=full`
 
@@ -245,7 +261,7 @@ pip install "ddtrace>=1.9.0"
 pip install psycopg2
 ```
 
-以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
+以下の環境変数を設定して、データベースモニタリングの伝播機能を有効にします。
    - `DD_DBM_PROPAGATION_MODE=full`
 
 完全な例:
@@ -284,9 +300,10 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 サポートされているクライアントライブラリを使用していることを確認します。例えば、`Npgsql` などです。
 
-以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
+以下の環境変数を設定して、データベースモニタリングの伝播機能を有効にします。
    - Postgres および MySQL の場合: `DD_DBM_PROPAGATION_MODE=full`
-   - SQL Server の場合: `DD_DBM_PROPAGATION_MODE=service`
+   - SQL Server の場合: Java および .NET トレーサーで `DD_DBM_PROPAGATION_MODE=service` または `DD_DBM_PROPAGATION_MODE=full`
+   - Oracle の場合: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
@@ -303,7 +320,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 サポートされているクライアントライブラリを使用していることを確認します。例えば、`PDO` などです。
 
-以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
+以下の環境変数を設定して、データベースモニタリングの伝播機能を有効にします。
    - `DD_DBM_PROPAGATION_MODE=full`
 
 [1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/php?tab=containers
@@ -324,7 +341,7 @@ npm install dd-trace@^3.17.0
 const tracer = require('dd-trace').init();
 ```
 
-以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
+以下のいずれかの方法で、データベースモニタリングの伝播機能を有効にします。
 * 以下の環境変数を設定します。
    ```
    DD_DBM_PROPAGATION_MODE=full
@@ -397,11 +414,11 @@ Database Monitoring で Query Sample を表示するとき、関連付けられ�
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="サービスページから、APM サービスが依存するダウンストリームデータベースホストを視覚化します。">}}
 
-指定したサービスの APM ページで、Database Monitoring により特定されたサービスの直接的なダウンストリームデータベース依存関係を確認できます。ノイジーなネイバーが原因と思われる不均衡な負荷がかかっているホストがあるかどうかをすばやく判断できます。サービスのページを表示するには、[サービスカタログ][26]でサービスをクリックして詳細パネルを開き、パネル内の **View Service Page** をクリックします。
+指定されたサービスの APM ページで、データベースモニタリングによって特定された、サービスの直接的なダウンストリームデータベース依存を表示します。ノイズの多いネイバーが原因で負荷が不均衡になっているホストがあるかどうかを迅速に判断できます。サービスのページを表示するには、[サービスカタログ][26]でサービスをクリックして詳細パネルを開き、パネル内の **View Service Page** をクリックします。
 
 ### データベースクエリの実行計画をトレースで確認し、最適化の可能性を特定する
 
-{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="トレース内のデータベースクエリに対する実行計画を使用して非効率を特定します。">}}
+{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="データベースクエリの実行計画をトレースで説明し、非効率な部分を特定します。">}}
 
 トレースで実行されたクエリと同様のクエリの履歴ビュー (サンプルの待機イベント、平均レイテンシー、最近キャプチャした実行計画など) を表示し、クエリがどのように実行されると予想されるかを説明します。動作が異常であるかどうかを判断し、データベースモニタリングにピボットして、基礎となるデータベースホストに関する追加のコンテキストを得ることで、調査を継続します。
 
@@ -432,6 +449,12 @@ Database Monitoring で Query Sample を表示するとき、関連付けられ�
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[...]%20should%20set
 [26]: https://app.datadoghq.com/services
+[27]: https://pypi.org/project/asyncpg/
+[28]: https://pypi.org/project/aiomysql/
+[29]: https://pypi.org/project/mysql-connector-python/
+[30]: https://pypi.org/project/mysqlclient/
+[31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

@@ -33,7 +33,7 @@ integration_id: sap-hana
 integration_title: SAP HANA
 integration_version: 2.2.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: sap_hana
 public_title: SAP HANA

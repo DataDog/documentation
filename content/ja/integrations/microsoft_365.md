@@ -2,6 +2,7 @@
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies: []
 description: Microsoft 365 に接続して組織の監査ログを Datadog のロギングプラットフォームにプル転送。
 doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: Microsoft 365 のセキュリティと監査ログ
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: microsoft_365
 public_title: Datadog-Microsoft 365 のセキュリティと監査ログ
@@ -35,9 +35,9 @@ Microsoft 365 と統合して、以下のことができます。
 - Microsoft 365 プラットフォームからのイベントにモニターを設定
 - Datadog のセキュリティツールスイートを活用してセキュリティ規則を設定
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Datadog Microsoft 365 タイル][1]を使用してインテグレーションをインストールします。
 
@@ -47,9 +47,9 @@ Microsoft 365 と統合して、以下のことができます。
 
 **注**: Datadog の監査ログを使用するには、組織の[監査ログが有効][2]である必要があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### ワークフローの自動化
+### Logs
 
 [Office 365 Management API スキーマ][3]で言及されている、以下のようなすべてのサービスの監査ログを収集できます。
 
@@ -150,7 +150,7 @@ Datadog の [Cloud SIEM][28] を使用すると、Microsoft 365 の監査ログ�
 
 {{< img src="integrations/microsoft_365/microsoft_365_rules.png" alt="Cloud SIEM を選択し、検索バーに Microsoft 365 を入力したすぐに使えるセキュリティルールのページ" style="width:80;" popup="true">}}
 
-### データセキュリティ
+### メトリクス
 
 Microsoft 365 インテグレーションはメトリクスを収集しません。
 
@@ -158,7 +158,7 @@ Microsoft 365 インテグレーションはメトリクスを収集しません
 
 Microsoft 365 インテグレーションはサービスチェックを収集しません。
 
-## ヘルプ
+## トラブルシューティング
 
 Datadog のログインテークは、最大過去 18 時間までさかのぼったログイベントのみをサポートします。この期間より前のタイムスタンプのログイベントは破棄されます。
 
@@ -170,7 +170,7 @@ Datadog では、異なる Microsoft エンドポイントが必要となるた�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/integrations/microsoft_365
+[1]: https://app.datadoghq.com/integrations/microsoft-365
 [2]: https://docs.microsoft.com/en-us/microsoft-365/compliance/turn-audit-log-search-on-or-off?view=o365-worldwide#turn-on-audit-log-search
 [3]: https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema#office-365-management-api-schemas
 [4]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AAirInvestigation%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
@@ -198,6 +198,6 @@ Datadog では、異なる Microsoft エンドポイントが必要となるた�
 [26]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityMonitoringEntityReducer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
 [27]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AThreatIntelligence%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
 [28]: https://docs.datadoghq.com/ja/security/#cloud-siem
-[29]: https://docs.datadoghq.com/ja/security/default_rules/?q=microsoft%20365#cat-cloud-siem-log-detection
-[30]: https://docs.datadoghq.com/ja/security/detection_rules/#creating-and-managing-detection-rules
+[29]: https://docs.datadoghq.com/ja/security/default_rules/?category=cat-cloud-siem-log-detection&search=microsoft+365
+[30]: https://docs.datadoghq.com/ja/security/detection_rules/#create-detection-rules
 [31]: https://docs.datadoghq.com/ja/help/

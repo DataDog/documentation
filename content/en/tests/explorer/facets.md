@@ -1,14 +1,13 @@
 ---
 title: Test Run Facets
-kind: documentation
-description: Learn about default facets that you can use to search your test runs in the Test Visibility Explorer.
+description: Learn about default facets that you can use to search your test runs in the Test Optimization Explorer.
 further_reading:
 - link: 'tests/search/'
   tag: 'Documentation'
   text: 'Learn how to search your tests'
 - link: 'tests/explorer/'
   tag: 'Documentation'
-  text: 'Learn about the Test Visibility Explorer'
+  text: 'Learn about the Test Optimization Explorer'
 ---
 
 ## Overview
@@ -19,17 +18,17 @@ Facets are user-defined tags and attributes from your tests. They are useful for
 
 ## Common facets
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][7] to access the list of facets left of the test runs list.
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][7] to access the list of facets left of the test runs list.
 
-{{< img src="/continuous_integration/facets-tests.png" text="Facets list on the Test Runs page of the Test Visibility Explorer" style="width:100%" >}}
+{{< img src="/continuous_integration/facets-tests.png" text="Facets list on the Test Runs page of the Test Optimization Explorer" style="width:100%" >}}
 
-You can use facets in the Test Visibility Explorer to:
+You can use facets in the Test Optimization Explorer to:
 
 - [Search for and filter test runs][5]
 - Perform test analytics
 - Start troubleshooting once your test runs complete
 
-The [Test Visibility Explorer][4] includes the following out-of-the-box facets:
+The [Test Optimization Explorer][4] includes the following out-of-the-box facets:
 
 | Facet | Description |
 |---|---|
@@ -126,7 +125,7 @@ The easiest way to create a facet is to add it from the Test Runs side panel so 
 
 {{< img src="tests/explorer/create_facet.png" alt="Create a facet from a failed test run in the Test Runs side panel" style="width:100%;">}}
 
-1. Navigate to a test run of interest in the [Test Visibility Explorer][4] that contains the field to create a facet on.
+1. Navigate to a test run of interest in the [Test Optimization Explorer][4] that contains the field to create a facet on.
 2. Open the Test Runs side panel by selecting the test run from the list.
 3. Click on the desired field (in the **Other tags** section for a test run) and create a facet from there:
 

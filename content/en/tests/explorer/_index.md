@@ -1,7 +1,6 @@
 ---
-title: Test Visibility Explorer
-kind: documentation
-description: Learn how to search and filter your test runs in the Test Visibility Explorer.
+title: Test Optimization Explorer
+description: Learn how to search and filter your test runs in the Test Optimization Explorer.
 further_reading:
   - link: "/continuous_integration/tests/"
     tag: "Documentation"
@@ -13,11 +12,11 @@ further_reading:
 
 ## Overview
 
-The Test Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag. 
+The Test Optimization Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag. 
 
-Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**.
+Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. Each test level represents a different level of aggregation of tests.
 
-{{< img src="/continuous_integration/test_runs.png" text="Test Runs page" style="width:100%" >}}
+{{< img src="/tests/explorer/test_runs.png" text="A list of test run results in the Test Optimization Explorer" style="width:100%" >}}
 
 ## Common facets
 
@@ -54,20 +53,16 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | RUM Active | Indicates if the test was run inside of an active [Real User Monitoring][14] web session. |
 | Is New | Indicates if the test has been newly added. |
 | Is Retry | Indicates if the test has been run as a result of a retry. |
-| Code Coverage Enabled | Indicates if the [Intelligent Test Runner][16] has enabled [code coverage][17] per test for the session. |
-| Skipped by ITR | Number of tests that were skipped during the session by the Intelligent Test Runner. |
-| Test Skipping Enabled | Whether the test session or module is allowed to be skipped by the Intelligent Test Runner. |
-| Test Skipping Type | The method or criteria used by the Intelligent Test Runner to determine which tests to skip. |
+| Code Coverage Enabled | Indicates if the [Test Impact Analysis][16] has enabled [code coverage][17] per test for the session. |
+| Skipped by ITR | Number of tests that were skipped during the session by Test Impact Analysis. |
+| Test Skipping Enabled | Whether the test session or module is allowed to be skipped by Test Impact Analysis. |
+| Test Skipping Type | The method or criteria used by Test Impact Analysis to determine which tests to skip. |
 | Test Skipped | The total count of tests that were not executed during the test session, which may include tests that were configured to skip, or were set as manual exclusions. |
-| Time Saved | The length of time saved for the session by Intelligent Test Runner usage. |
+| Time Saved | The length of time saved for the session by Test Impact Analysis usage. |
 | Early Flake Detection Enabled | Indicates if the test has been run using [Early Flake Detection][15]. |
 | Early Flake Detection Abort Reason | Indicates the Early Flake Detection abort reason for a test. |
 
-You can filter by test level: session, module, suite, and test run. Each test level represents a different level of aggregation of tests.
-
-{{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
-
-For more information about common facets that you can use as part of your search query in the Test Visibility Explorer, see [Test Run Facets][3].
+For more information about common facets that you can use as part of your search query in the Test Optimization Explorer, see [Test Run Facets][3].
 
 ### Sessions
 
@@ -116,7 +111,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 
 ## Export
 
-[Export your view][4] in the Test Visibility Explorer to reuse it later or in different contexts.
+[Export your view][4] in the Test Optimization Explorer to reuse it later or in different contexts.
 
 ## Further reading
 
@@ -126,7 +121,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 [2]: /tests/explorer/search_syntax
 [3]: /tests/explorer/facets
 [4]: /tests/explorer/saved_views
-[5]: /tests/guides/flaky_test_management
+[5]: /tests/flaky_test_management
 [6]: https://app.datadoghq.com/ci/test-runs
 [7]: https://app.datadoghq.com/dashboard/lists
 [8]: https://app.datadoghq.com/notebook/list
@@ -136,7 +131,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 [12]: /glossary/?product=ci-cd#test-service
 [13]: /glossary/?product=ci-cd#test-suite 
 [14]: /real_user_monitoring/
-[15]: /tests/early_flake_detection/
+[15]: /tests/flaky_test_management/early_flake_detection/
 [16]: /intelligent_test_runner/
 [17]: /tests/code_coverage/
 [18]: https://app.datadoghq.com/ci/test-runs?viz=timeseries 

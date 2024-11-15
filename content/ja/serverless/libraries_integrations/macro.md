@@ -3,7 +3,6 @@ aliases:
 - /ja/serverless/serverless_integrations/macro/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
-kind: documentation
 title: Datadog のサーバーレスマクロ
 ---
 ![build_serverless](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)
@@ -111,7 +110,7 @@ aws cloudformation update-stack \
 
 また、最新の [リリース](https://github.com/DataDog/datadog-cloudformation-macro/releases)からマクロのバージョンを指定することもできます。それには、`latest.yml` をリリースバージョンに置き換えます (例: `0.1.2.yml`)。
 
-## コンフィギュレーション
+## 構成
 
 プラグインをさらに構成するには、以下のカスタムパラメーターを使用します。
 
@@ -140,19 +139,19 @@ aws cloudformation update-stack \
 | `tags`                      | 1 つの文字列としての key:value のペアのカンマ区切りのリスト。`extensionLayerVersion` と共に設定すると、すべての Lambda 関数に `DD_TAGS` 環境変数が追加され、指定した値が設定されます。`forwarderArn` と共に指定すると、マクロは文字列をパースして、各 key:value ペアをタグとしてすべての Lambda 関数に設定します。                                                                                                                                                                |
 | `logLevel`                  | ログのレベルを設定します。拡張ロギングの場合 `DEBUG` に設定します。                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `captureLambdaPayload`      | 関数の実行スパンにリクエストと応答のペイロードを自動的にタグ付けして、APM アプリケーションに表示できるようにします。                                                                                                                                                                                                                                                                                                                                                                 |
-| `enableColdStartTracing`    | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `enableColdStartTracing`    | コールドスタートトレースを無効にするには、`false` に設定します。Node.js と Python で使用されます。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `coldStartTraceMinDuration` | コールドスタートトレースでトレースするモジュールロードイベントの最小継続時間 (ミリ秒) を設定します。数値。デフォルトは `3` です。                                                                                                                                                                                                                                                                                                                                                                   |
 | `coldStartTraceSkipLibs`    | オプションで、カンマで区切られたライブラリのリストに対してコールドスタートスパンの作成をスキップすることができます。深さを制限したり、既知のライブラリをスキップするのに便利です。デフォルトはランタイムに依存します。                                                                                                                                                                                                                                                                                                                                       |
-| `enableProfiling`           | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。                                                                                                                                                                                                                                                                                                                                                                                   |
-| `encodeAuthorizerContext`   | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                              |
-| `decodeAuthorizerContext`   | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                       |
-| `apmFlushDeadline`          | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。                                                                                                                                                                                    |
+| `enableProfiling`           | Datadog Continuous Profiler を `true` で有効にします。Node.js と Python のベータ版でサポートされています。デフォルトは `false` です。                                                                                                                                                                                                                                                                                                                                                                                   |
+| `encodeAuthorizerContext`   | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。Node.js と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                              |
+| `decodeAuthorizerContext`   | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。Node.js と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                       |
+| `apmFlushDeadline`          | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。Node.js と Python でサポートされています。デフォルトは `100` ミリ秒です。                                                                                                                                                                                    |
 
-## UDS の仕組み
+## 仕組み
 
 このマクロにより CloudFormation テンプレートが変更され、[Node.js][2]、[Python][1]、[.NET][9]、および [Java][10] 用の Lambda レイヤーを関数にアタッチすることで Datadog Lambda ライブラリがインストールされます。そして、コードの変更を必要とせずに、Lambda ライブラリを初期化する置換ハンドラーへリダイレクトされます。
 
-## ヘルプ
+## トラブルシューティング
 
 ### デバッグログ
 
@@ -207,7 +206,7 @@ Resources:
 
 このエラーは、コマンドを実行する IAM ユーザーに `lambda:InvokeFunction` 権限がない場合に発生する可能性があります。そのユーザーの IAM ロールに権限を追加してください。
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

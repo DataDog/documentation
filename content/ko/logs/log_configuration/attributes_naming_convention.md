@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: 블로그
   text: CIDR 표기법 쿼리를 사용하여 네트워크 트래픽 로그 필터링
-kind: 설명서
 title: 속성과 별칭
 ---
 
@@ -95,7 +94,7 @@ title: 속성과 별칭
   - URL 세부정보 속성 앞에는 `http.url_details`가 붙습니다. 이러한 속성은 HTTP URL의 파싱된 부분에 대한 세부정보를 제공합니다. [URL 파서][14]에 의해 생성됩니다.
 - [소스 코드][15]
   - 이러한 속성은 커스텀 애플리케이션의 로거로 인해 로그 또는 오류가 생성될 때 사용되는 데이터와 관련이 있습니다. 모든 속성에는 `logger` 또는 `error` 접두사가 붙습니다.
-  - 이러한 속성을 사용하는 일반적인 통합에는 Java, NodeJs, .NET, Golang, Python 등이 있습니다.
+  - 이러한 속성을 사용하는 일반적인 통합에는 Java, Node.js, .NET, Golang, Python 등이 있습니다.
 - [데이터베이스][16]
   - 이러한 속성을 사용하는 일반적인 통합은 [Cassandra][17], [MySQL][18], [RDS][19], [Elasticsearch][20] 등입니다.
 - [성능][21]

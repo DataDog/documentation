@@ -4,7 +4,6 @@ aliases:
 - /fr/security_platform/guide/
 - /fr/security_platform/cloud_siem/guide/
 disable_toc: true
-kind: guide
 private: true
 title: Guides sur Cloud SIEM
 ---

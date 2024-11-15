@@ -1,6 +1,5 @@
 ---
 title: Events Explorer
-kind: documentation
 aliases:
 - /events/stream/
 - /events/explorer/

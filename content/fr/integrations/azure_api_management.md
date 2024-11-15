@@ -14,7 +14,7 @@ integration_id: azure-apimanagement
 integration_title: Gestion des API de Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_api_management
 public_title: Intégration Datadog/Gestion des API de Microsoft Azure

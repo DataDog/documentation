@@ -1,6 +1,5 @@
 ---
 title: Log Management
-kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
@@ -44,7 +43,13 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+algolia:
+    tags: ['logs']
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  Join an introductory or intermediate enablement session to learn how Datadog Log Management unifies logs, metrics, and traces in a single view, giving you rich context for analyzing log data.
+{{< /learning-center-callout >}}
 
 ## Overview
 

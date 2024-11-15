@@ -1,6 +1,5 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -309,6 +308,23 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 Rum.enable(rumConfig)
 ```
 
+### Set tracking consent (GDPR compliance)
+
+To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+Tracking consent can be one of the following values:
+
+- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
+ collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+- `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or
+ RUM events.
+
+To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
+
+- `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+
+
 ### Enable RUM feature to start sending data
 
 {{< tabs >}}
@@ -353,19 +369,32 @@ See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHostsWithHeaderType = mapOf(
+    "example.com" to setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT),
+    "example.eu" to  setOf(
+        TracingHeaderType.DATADOG,
+        TracingHeaderType.TRACECONTEXT))
 val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
+    .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
+final Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+final Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
+tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
-    .addInterceptor(new DatadogInterceptor())
+    .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build();
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+
 
 This records each request processed by the `OkHttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10].
 
@@ -422,6 +451,14 @@ Usage of the local resources can be tracked by using `getRawResAsRumResource` ex
 val inputStream = context.getRawResAsRumResource(id)
 ```
 
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -431,7 +468,7 @@ val inputStream = context.getRawResAsRumResource(id)
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
+[6]: #set-tracking-consent-gdpr-compliance
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
 [8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/

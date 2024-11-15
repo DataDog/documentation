@@ -1,6 +1,5 @@
 ---
-title: Azure App Service - Linux Container
-kind: documentation
+title: Instrument Azure App Service - Linux Containers
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -9,9 +8,12 @@ further_reading:
   tag: "Documentation"
   text: "Azure App Service Environment"
 ---
+
 ## Overview
 
-This instrumentation method provides the following additional monitoring capabilities for Containerized Linux Azure App Service workloads:
+<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar, see <a href="/serverless/guide/azure_app_service_linux_sidecar">Instrument Azure App Service - Sidecar Pattern</a>.</div>
+
+This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
 
 - Fully distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.

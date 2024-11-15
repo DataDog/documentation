@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for RDS Oracle
-kind: documentation
 description: Install and configure Database Monitoring for RDS Oracle
 further_reading:
 - link: "/integrations/oracle/"
@@ -57,7 +56,6 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$INSTANCE','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_FEATURE_USAGE_STATISTICS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PROCESS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CON_SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACE_USAGE_METRICS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACES','DATADOG','SELECT',p_grant_option => false);
@@ -69,9 +67,6 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_gran
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$ASM_DISKGROUP','DATADOG','SELECT',p_grant_option => false);
@@ -84,6 +79,8 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
+### Securely store your password
+{{% dbm-secret %}}
 
 ### Install the Agent
 
@@ -103,7 +100,7 @@ instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -111,7 +108,7 @@ instances:
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'

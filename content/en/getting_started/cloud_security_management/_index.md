@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Cloud Security Management
-kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
@@ -20,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/security-posture-csm/"
   tag: "Blog"
   text: "Report on changes to your security posture with Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/agentless-scanning/"
+  tag: "Blog"
+  text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
@@ -79,8 +81,6 @@ This guide walks you through best practices for getting your team up and running
 [20]: /security/threats/agent_expressions
 [21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
-[23]: /security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities
-[24]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-csm-for-vulnerabilities
 [25]: https://app.datadoghq.com/containers/images
 [26]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [27]: /integrations/amazon_cloudtrail/#send-logs-to-datadog

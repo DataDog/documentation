@@ -9,8 +9,7 @@ further_reading:
 - link: /getting_started/synthetics/
   tag: Documentación
   text: Empezando con Synthetic Monitoring
-kind: guía
-title: Monitorizar el tiempo de actividad de un sitio web con SLOs
+title: Monitorizar tiempos de actividad de sitios web con SLOs
 ---
 
 ## Información general
@@ -29,7 +28,7 @@ Al hacer clic en **Test URL** (Probar URL), se rellenan las aserciones sobre el 
 
 ### Crear un SLO
 
-1. [Crea un SLO][5] para llevar un seguimiento del tiempo de actividad de tu sitio web en función de los resultados de los tests de Synthetics.
+1. [Crea un SLO][5] para llevar un seguimiento del tiempo de actividad de tu sitio web en función de los resultados de los tests de Synthetic.
 2. Selecciona **Monitor Based** (Basado en monitores) e introduce el nombre del test de Synthetics.
 
     {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="Configuración del SLO" >}}
@@ -47,7 +46,7 @@ Al hacer clic en **Test URL** (Probar URL), se rellenan las aserciones sobre el 
 ### Importar SLOs en el dashboard
 
 1. [Crea un dashboard][6] para colocar en él el widget de SLOs.
-2. Arrastra el widget de resumen de SLO y suéltalo en el dashboard.
+2. Arrastra y suelta el widget de SLO en tu tablero.
 3. Selecciona el SLO que has definido previamente.
 
     {{< img src="synthetics/guide/uptime_slo/slo_selection.png" alt="Selección del widget de SLOs" >}}
@@ -60,7 +59,7 @@ Al hacer clic en **Test URL** (Probar URL), se rellenan las aserciones sobre el 
 
     {{< img src="synthetics/guide/uptime_slo/final_dashboard.png" alt="Dashboard final" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

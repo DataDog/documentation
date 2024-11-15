@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
   tag: ブログ
   text: コールドスタートトレーシングでサーバーレス関数のパフォーマンスを把握する
-kind: documentation
 title: AWS Lambda のためのサーバーレスモニタリング
 ---
 
@@ -40,7 +39,7 @@ Datadog のサーバーレスモニタリングは、Datadog Lambda 拡張機能
 
 Datadog Lambda 拡張機能は、Datadog Lambda ライブラリからのトレース、拡張メトリクス、カスタムメトリクスに加え、CloudWatch を通じてログを収集します。
 
-## 使用
+## 使用方法
 
 以下のページでは、AWS Lambda のためのサーバーレスモニタリングのインストール方法と構成方法について、完全な可視化を実現するためのメトリクス、トレース、およびログの使用方法を含めて説明します。
 

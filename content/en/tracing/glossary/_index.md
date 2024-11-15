@@ -1,6 +1,5 @@
 ---
 title: APM Terms and Concepts
-kind: documentation
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
@@ -40,9 +39,11 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
+| [Baggage](#baggage) | Baggage is contextual information that is passed between traces, metrics, and logs in the form of key-value pairs. |
 
 ## Services
 
@@ -82,6 +83,12 @@ A trace is used to track the time spent by an application processing a request a
 
 {{< img src="tracing/visualization/trace_view.png" alt="trace view" >}}
 
+## Trace context propagation
+
+Trace context propagation is the method of passing trace identifiers between services in a distributed system. It enables Datadog to stitch together individual spans from different services into a single distributed trace. Trace context propagation works by injecting identifiers, such as the trace ID and parent span ID, into HTTP headers as the request flows through the system. The downstream service then extracts these identifiers and continues the trace. This allows the Datadog to reconstruct the full path of a request across multiple services.
+
+For more information, see the [propagating the trace context][27] for your application's language.
+
 ## Retention filters
 
 [Set tag-based filters][19] in the UI to index spans for 15 days for use with [Trace Search and Analytics][14].
@@ -99,6 +106,12 @@ You can automatically instrument your application when you install the Datadog A
 You can use custom instrumentation by embedding tracing code directly into your application code. This allows you to programmatically create, modify, or delete traces to send to Datadog.
 
 To learn more, read [Application Instrumentation][26].
+
+## Baggage
+
+Baggage allows you to propagate key-value pairs (also known as baggage items) across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
+
+To learn more, read supported [propagation formats][28] for your application's language.
 
 ## Further Reading
 
@@ -119,7 +132,7 @@ To learn more, read [Application Instrumentation][26].
 [14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
-[17]: https://app.datadoghq.com/monitors#/create
+[17]: https://app.datadoghq.com/monitors/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [20]: /tracing/trace_pipeline/ingestion_controls/
@@ -129,3 +142,5 @@ To learn more, read [Application Instrumentation][26].
 [24]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
 [25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [26]: /tracing/trace_collection/
+[27]: /tracing/trace_collection/trace_context_propagation
+[28]: /tracing/trace_collection/trace_context_propagation/#supported-formats

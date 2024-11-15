@@ -2,7 +2,6 @@
 aliases:
 - /fr/graphing/widgets/event_stream/
 description: Affichez des événements filtrés à partir du flux d'événements.
-kind: documentation
 private: true
 title: Widget Flux d'événements
 ---

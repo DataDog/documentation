@@ -1,6 +1,5 @@
 ---
 title: Date Remapper
-kind: Documentation
 
 ---
 

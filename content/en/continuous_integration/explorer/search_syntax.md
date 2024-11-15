@@ -1,6 +1,5 @@
 ---
 title: CI Visibility Explorer Search Syntax
-kind: documentation
 description: Learn how to search for all of your pipeline executions in the CI Visibility Explorer.
 further_reading:
 - link: "/continuous_integration/search"

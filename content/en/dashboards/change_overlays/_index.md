@@ -1,6 +1,5 @@
 ---
 title: Change Overlays
-kind: documentation
 description: Overlay your change events on graphs to correlate performance anomalies with changes in your application
 further_reading:
 - link: "/tracing/services/deployment_tracking/"

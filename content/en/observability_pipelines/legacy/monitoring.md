@@ -1,9 +1,6 @@
 ---
 title: (LEGACY) Monitoring
-kind: documentation
 disable_toc: false
-aliases:
-  - /observability_pipelines/monitoring/
 ---
 
 {{< site-region region="gov" >}}

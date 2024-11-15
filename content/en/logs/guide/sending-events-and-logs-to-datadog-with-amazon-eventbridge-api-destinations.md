@@ -1,10 +1,13 @@
 ---
 title: Sending Events and Logs to Datadog with Amazon EventBridge API Destinations
-kind: guide
+
 further_reading:
 - link: "https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog"
   tag: "Blog"
   text: "AWS Blog with example API destination use cases"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 {{< site-region region="gov" >}}

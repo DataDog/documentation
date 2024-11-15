@@ -1,6 +1,5 @@
 ---
 title: Creating Custom Detection Rules
-kind: documentation
 further_reading:
 - link: "/security/threats/setup"
   tag: "Documentation"
@@ -20,6 +19,15 @@ This topic explains how to create custom Datadog Agent and detection rules for [
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
+## RBAC for custom rule management
+
+Here are some important [role and permissions][11] to use for custom rules RBAC:
+
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Active Protection][12] feature. Active Protection enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
+
+
 ## Custom detection rules summary
 
 Custom detection rules depend on Agent rules. They are composed of existing, deployed Agent rules and additional expression parameters. 
@@ -33,20 +41,20 @@ For more information, see [CSM Threats Detection Rules][7].
 
 You can create custom rules using these methods:
 
-- **Simple:** Use the **Simple rule creator** to create the custom Agent and detection rules together.
-  - For steps on using the **Simple rule creator**, see [Create the custom Agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
+- **Simple:** Use the **Assisted rule creator** to create the custom Agent and detection rules together.
+  - For steps on using the **Assisted rule creator**, see [Create the custom Agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
 - **Advanced:**  Create custom Agent and detection rules individually by defining their threat detection expressions. 
   - For steps on this method, see [Create a custom agent rule](#create-a-custom-agent-rule) and [Create a custom detection rule](#create-a-custom-detection-rule).
 
 ## Create the custom Agent and detection rules together
 
-The **Simple rule creator** option helps you create the Agent and dependent detection rules together, and ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than the advanced method of creating the Agent and detection rules separately.
+The **Assisted rule creator** option helps you create the Agent and dependent detection rules together, and ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than the advanced method of creating the Agent and detection rules separately.
 
 As you define the rules using this tool, the threat expressions generated for these rules are displayed in the tool.
 
 To use the simple rule creator:
 
-1. In [Agent Configuration][4] or [Threat Detection Rules][3], select **New Rule**, and then select **Simple rule creator**.
+1. In [Agent Configuration][4] or [Threat Detection Rules][3], select **New Rule**, and then select **Assisted rule creator**.
 2. Define the detection. To monitor your resource effectively, you have the following detection type options:
    - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
@@ -59,7 +67,7 @@ To use the simple rule creator:
    
    Here's an example of a new FIM rule, including the expressions generated for each rule.
 
-    {{< img src="/security/csm/csm_threats_simple_rule_creator.png" alt="Simple rule creator example" style="width:100%;" >}}
+    {{< img src="/security/csm/csm_threats_simple_rule_creator2.png" alt="Assisted rule creator example" style="width:100%;" >}}
 
 6. Select **Create _N_ Rules**.
 7. In **Generate Rules**, select **Confirm**. The rules are generated.
@@ -71,7 +79,7 @@ To use the simple rule creator:
 
 You can create an individual custom Agent rule, deploy it as a [new Agent policy](#deploy-the-policy-in-your-environment), and reference it in a [custom detection rule](#create-a-custom-detection-rule).
 
-1. On the [**Agent Configuration**][4] page, select **New Rule**, and then select **Advanced rule creation**.
+1. On the [**Agent Configuration**][4] page, select **New Rule**, and then select **Manual rule creator**.
 2. Add a name and description for the rule.
 3. In **Expression**, define the Agent expression using Datadog Security Language (SECL) syntax.
 
@@ -94,8 +102,6 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 
 You can use Remote Configuration to automatically deploy the custom policy to your designated hosts (all hosts or a defined subset of hosts), or manually upload it to the Agent on each host.
 
-<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5Emr7y_Jg3ShcC44HlYtalxKgHUocFAz8dq87xSkjfeALTg/viewform">form</a> to request access.</div>
-
 ### Remote Configuration
 
 1. On the **Agent Configuration** page, click **Deploy Agent Policy**.
@@ -114,7 +120,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. At a minimum, the file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
+Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder. The file must have `read` and `write` access for the `root` user on the host. This may require use of a utility such as SCP or FTP.
 
 To apply the changes, restart the [Datadog Agent][1].
 
@@ -129,8 +135,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
     ```yaml
     securityAgent:
-      compliance:
-        # [...]
+      # [...]
       runtime:
         # datadog.securityAgent.runtime.enabled
         # Set to true to enable Security Runtime Module
@@ -139,17 +144,12 @@ To apply the changes, restart the [Datadog Agent][1].
           # datadog.securityAgent.runtime.policies.configMap
           # Place custom policies here
           configMap: jdefaultpol
-      syscallMonitor:
-        # datadog.securityAgent.runtime.syscallMonitor.enabled
-        # Set to true to enable Syscall monitoring.
-        enabled: false
+      # [...]
     ```
 
 3. Upgrade the Helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
 
     **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
-
-4. Restart the [Datadog Agent][1].
 
 [1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
@@ -160,7 +160,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
 After you upload the new default policy file to the Agent, navigate to the [**Threat Detection Rules**][3] page.
 
-1. On the [**Threat Detection Rules**][3] page, select **New Rule**, and then select **Advanced rule creation**.
+1. On the [**Threat Detection Rules**][3] page, select **New Rule**, and then select **Manual rule creator**.
 2. **Select a rule type:**
    1. In **Detection rule types**, select **Workload Security**. 
    2. Select a detection method such as **Threshold** or **New Value**.
@@ -197,3 +197,5 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 [8]: /security/threats/
 [9]: /security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
+[11]: /account_management/rbac/permissions/
+[12]: /security/cloud_security_management/guide/active-protection

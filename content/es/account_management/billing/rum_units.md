@@ -1,6 +1,5 @@
 ---
 beta: true
-kind: documentación
 private: true
 title: Detalles de facturación de RUM
 ---

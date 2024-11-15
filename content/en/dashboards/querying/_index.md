@@ -1,6 +1,5 @@
 ---
 title: Querying
-kind: documentation
 aliases:
   - /graphing/using_graphs/
 description: Query your data to gain insight
@@ -59,9 +58,9 @@ Your chosen metric can be filtered by host or tag using the **from** dropdown to
 {{< img src="dashboards/querying/filter-3.png" alt="Filter the graph with the 'from' field, using template variables and boolean logic" style="width:100%;" >}}
 
 - Use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries.
-- Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][16].
+- Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][8].
 
-To learn more about tags, see the [Tagging documentation][8].
+To learn more about tags, see the [Tagging documentation][9].
 
 ### Aggregate and rollup
 
@@ -73,9 +72,9 @@ Aggregation method is next to the filter dropdown. This defaults to `avg by` but
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
-In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][9]. See the [Rollup][10] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
+In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][10]. See the [Rollup][11] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
 
-To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
+To manually rollup the data, use the [rollup function][12]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
@@ -134,15 +133,22 @@ Next to the aggregation method dropdown, choose what constitutes a line or group
 
 Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
 
+### Nested Queries
+
+Datadog’s nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
+
+For more information, see the [Nested Queries][13] documentation.
+
+
 ### Advanced graphing
 
-Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
+Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][14].
 
 Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][13] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
@@ -211,7 +217,7 @@ Click **Done** to save your work and exit the editor. You can always come back t
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][14].
+View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][16] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][17].
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
 
@@ -243,12 +249,13 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
 [7]: /metrics/advanced-filtering/
-[8]: /getting_started/tagging/
-[9]: /metrics/#time-aggregation
-[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /dashboards/functions/rollup/
-[12]: /dashboards/functions/#function-types
-[13]: /metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /logs/explorer/search_syntax/
-[15]: /dashboards/widgets/timeseries/#event-overlay
-[16]: /dashboards/template_variables/
+[8]: /dashboards/template_variables/
+[9]: /getting_started/tagging/
+[10]: /metrics/#time-aggregation
+[11]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[12]: /dashboards/functions/rollup/
+[13]: /metrics/nested_queries/
+[14]: /dashboards/functions/#function-types
+[15]: /metrics/advanced-filtering/#boolean-filtered-queries
+[16]: /dashboards/widgets/timeseries/#event-overlay
+[17]: /logs/explorer/search_syntax/

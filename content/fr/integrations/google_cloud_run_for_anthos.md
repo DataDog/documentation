@@ -16,7 +16,7 @@ integration_id: google-cloud-run-for-anthos
 integration_title: Google Cloud Run for Anthos
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_run_for_anthos
 public_title: Intégration Datadog/Google Cloud Run for Anthos

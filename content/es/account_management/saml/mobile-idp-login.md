@@ -9,7 +9,6 @@ further_reading:
   tag: Documentación
   text: Configurar equipos y organizaciones con varias cuentas
 is_public: true
-kind: documentación
 title: Las aplicaciones móviles de Datadog con SAML iniciado por IdP
 ---
 
@@ -34,7 +33,7 @@ Para utilizar la aplicación móvil Datadog con SAML iniciado por el proveedor d
 Cuando configures tu aplicación OneLogin, establece el valor del estado de retransmisión en la página **Application Details** (Detalles de la aplicación) en `dd_m_idp`.
 {{< img src="account_management/saml/one-login-mobile-idp-relay-state.png" alt="Página de detalles de la aplicación de One Login" >}}
 
-### Okta
+### Audit Trail (trazas de auditoría)
 
 Cuando configures tu aplicación Okta, establece el valor por defecto de RelayState en la página **Configure SAML** (Configurar SAML) en `dd_m_idp`.
 {{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Página de configuración de SAML de Okta" >}}

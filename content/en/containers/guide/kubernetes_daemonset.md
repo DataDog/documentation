@@ -1,11 +1,14 @@
 ---
 title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
-kind: documentation
 further_reading:
 - link: "/containers/kubernetes/installation"
   tag: "Documentation"
   text: "Install the Datadog Agent on Kubernetes"
 ---
+
+<div class="alert alert-warning">
+  Datadog discourages using DaemonSets to deploy the Datadog Agent because the manual process is prone to errors. Datadog recommends that you <a href="/containers/kubernetes/installation">use Datadog Operator or Helm</a> to install the Agent on Kubernetes.
+</div>
 
 ## Installation
 You can use DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).

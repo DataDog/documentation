@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/autodiscovery/
   tag: 설명서
   text: 자동탐지
-kind: 설명서
 title: 시크릿 관리
 ---
 
@@ -300,7 +299,6 @@ Kubernetes에서는 Pod에 [시크릿을 파일로 노출][3]하는 기능을 �
 이를 위해서는 에이전트 서비스 계정에 필요 권한을 수동으로 부여해야 합니다. 예를 들어, 다음 BRAC 정책을 따를 수 있습니다.
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
 metadata:
   name: datadog-secret-reader
   namespace: database
@@ -311,7 +309,6 @@ rules:
     verbs: ["get", "watch", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
 metadata:
   name: datadog-read-secrets
   namespace: database

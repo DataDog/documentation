@@ -6,9 +6,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget de imagen
-widget_type: imagen
+widget_type: image
 ---
 
 La widget de imagen te permite integrar una imagen en tu dashboard. Una imagen puede ser un PNG, JPG o GIF animado, alojada en un lugar accesible para la URL.

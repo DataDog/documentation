@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: RUM & セッションリプレイガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 ---
@@ -14,16 +13,15 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}RUM イベントの階層を理解する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM データで Apdex とカスタムパフォーマンス指標を算出する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM データでアラートを作成する{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}コンバージョン率に応じたアラートを作成する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}コンバージョン率に対するアラートを作成する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM の使用量を監視する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}使用量属性タグを使って RUM の使用量を追跡する{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}RUM とセッションリプレイを製品分析に活用する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly を使用して RUM をリモート構成する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM デプロイメント追跡の概要{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}機能フラグデータの概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}RUM サンプリングのベストプラクティス{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}RUM で UTM キャンペーンを監視する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}RUM デバッグシンボルを使用して難読化されたスタックトレースを調査する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザ RUM:" >}}
@@ -41,6 +39,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce ストアで RUM を有効にする{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}RUM を使用した Next.js アプリケーションの監視{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Capacitor アプリケーションの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}

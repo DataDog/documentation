@@ -3,6 +3,7 @@ app_id: OpenShift
 app_uuid: e92e309f-7bdc-4ff4-91d4-975497526325
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: openshift.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10024
     source_type_name: OpenShift
 author:
   homepage: https://www.datadoghq.com
@@ -27,6 +29,7 @@ categories:
 - ネットワーク
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
 display_on_public_website: true
@@ -36,7 +39,6 @@ integration_id: OpenShift
 integration_title: OpenShift
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: OpenShift
 public_title: OpenShift
@@ -53,6 +55,7 @@ tile:
   - Category::Orchestration
   - Category::Provisioning
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: ビッグアイデア用の Kubernetes プラットフォーム
   media: []
@@ -61,6 +64,7 @@ tile:
   title: OpenShift
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## 概要
 
 Red Hat OpenShift は、企業向けアプリケーションの開発とデプロイのための Kubernetes コンテナオーケストレーターに基づくオープンソースのコンテナアプリケーションプラットフォームです。
@@ -130,9 +134,9 @@ Operator Lifecycle Manager (OLM) を使用して Operator をデプロイした�
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 {{% /tab %}}
-{{< /tabs >}} 
+{{< /tabs >}}
 
-#### ログの収集
+#### ログ収集
 
 詳しくは、[Kubernetes のログ収集][5]を参照してください。
 
@@ -197,7 +201,7 @@ runAsUser:
 
 OpenShift チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 OpenShift チェックには、サービスのチェック機能は含まれません。
 

@@ -1,6 +1,5 @@
 ---
 title: New CSV headers for Individual Organizations Summary
-kind: guide
 ---
 
 CSV header changes take effect the week of February 19, 2024. The following example demonstrates the new CSV structure. 

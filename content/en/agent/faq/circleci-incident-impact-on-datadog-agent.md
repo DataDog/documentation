@@ -1,6 +1,5 @@
 ---
 title: Impact of the CircleCI Security Incident on the Datadog Agent
-kind: faq
 ---
 <details>
   <summary><strong>Page changelog</strong></summary>
@@ -136,9 +135,9 @@ We released new versions of **Agent installation methods** to ensure they make h
   * [Datadog Puppet module][12] release [3.20.0][13]
   * [Datadog SaltStack formula][14] release [3.5][15]
   * Datadog Agent 6/7 Linux install scripts, released to the following locations with version 1.13.0 at 13:00 UTC on January 12th, 2023:
-    * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh][16]
-    * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh][17]
-    * [https://s3.amazonaws.com/dd-agent/scripts/install_script.sh][18] (Deprecated and no longer recommended, but updated.)
+    * [https://install.datadoghq.com/scripts/install_script_agent6.sh][16]
+    * [https://install.datadoghq.com/scripts/install_script_agent7.sh][17]
+    * [https://install.datadoghq.com/scripts/install_script.sh][18] (Deprecated and no longer recommended, but updated.)
   * [Datadog Agent 5 Linux install script][19] released to its [download location][19] at 16:25 UTC on January 12th, 2023
 
 
@@ -158,7 +157,7 @@ We released new versions of **Agent installation methods** to ensure they make h
 [13]: https://github.com/DataDog/puppet-datadog-agent/releases/tag/v3.20.0
 [14]: https://github.com/DataDog/datadog-formula
 [15]: https://github.com/DataDog/datadog-formula/releases/tag/3.5
-[16]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh
-[17]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
-[18]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+[16]: https://install.datadoghq.com/scripts/install_script_agent6.sh
+[17]: https://install.datadoghq.com/scripts/install_script_agent7.sh
+[18]: https://install.datadoghq.com/scripts/install_script.sh
 [19]: https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh

@@ -1,7 +1,5 @@
 title: "Docs"
 metadataformat: "yaml"
-# enableGitInfo so lastmod in sitemap.xml is based off git
-enableGitInfo: false
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
@@ -21,12 +19,17 @@ defaultContentLanguageInSubdir: false
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 # contentDir: "content/en"
 
+# Prevent autogeneration of jsconfig.json file
+# See: https://gohugo.io/hugo-pipes/js/#import-js-code-from-assets
+build:
+  noJSConfigInAssets: true
+
 caches:
     getjson:
         dir: :cacheDir/:project
         maxAge: '1h'
 
-# gitinfo vars
+# enableGitInfo so lastmod in sitemap.xml is based off git
 enableGitInfo: true
 
 # Allow to render HTML in markdown files
@@ -82,6 +85,10 @@ module:
        target: static/fonts/iconfont.woff2
      - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
+     - source: data
+       target: data
+     - source: i18n
+       target: i18n
 
    - path: github.com/DataDog/websites-sources
      disabled: false
@@ -106,6 +113,9 @@ module:
     - source: content/ko
       target: content
       lang: ko
+    - source: content/es
+      target: content
+      lang: es
     - source: static
       target: static
     - source: layouts
@@ -137,8 +147,8 @@ security:
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
 outputFormats:
-  Algolia:
-    baseName: "algolia"
+  Search:
+    baseName: "search"
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
-kind: 설명서
 title: 애플리케이션 성능 모니터링(APM) 연결 오류
 ---
 

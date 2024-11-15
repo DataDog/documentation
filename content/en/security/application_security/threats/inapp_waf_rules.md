@@ -1,6 +1,5 @@
 ---
 title: In-App WAF Rules
-kind: documentation
 aliases:
   - /security_platform/application_security/event_rules
   - /security/application_security/event_rules
@@ -55,8 +54,6 @@ An input represents which part of the request the operator is applied to. The fo
 | `is_sqli` | Special operator to check for SQL injection (SQLI) payloads |
 
 ## Custom in-app WAF rules
-
-   <div class="alert alert-info">Custom in-app WAF rules is in beta.</div>
 
 Custom in-app WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4].
 
@@ -128,5 +125,5 @@ Next, [configure detection rules to create security signals][1] based on those s
 
 [1]: /security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
-[3]: /security/application_security/enabling/
+[3]: /security/application_security/threats/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules

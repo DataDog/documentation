@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/real_user_monitoring/explorer/analytics/
 further_reading:
 - link: /real_user_monitoring/explorer/group/
   tag: ドキュメント
@@ -6,7 +8,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: ドキュメント
   text: イベントへの視覚化の適用
-kind: documentation
 title: RUM イベントの検索
 ---
 

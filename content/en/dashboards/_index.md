@@ -1,6 +1,5 @@
 ---
 title: Dashboards
-kind: documentation
 aliases:
     - /guides/templating/
     - /graphing/dashboards/
@@ -44,7 +43,7 @@ Dashboards provide real-time insights into the performance and health of systems
 
 {{< whatsnext desc="Dashboard features:">}}
     {{< nextlink href="/dashboards/configure" >}}Configure: Overview of the configuration options for dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/configure" >}}Dashboard List: Search, view, or create dashboards and lists{{< /nextlink >}}
+    {{< nextlink href="/dashboards/list" >}}Dashboard List: Search, view, or create dashboards and lists{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
@@ -108,9 +107,13 @@ View your dashboards in a mobile-friendly format with the Datadog Mobile App, av
 
 ## Further Reading
 
+{{< learning-center-callout header="Try Creating Graph Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explore timeseries, query value, top list, table, distribution, and pie chart widgets. Learn how to configure the widgets and develop an understanding of when each widget type should be utilized. {{< /learning-center-callout >}}
+
+{{< learning-center-callout header="Try Creating Table, List, SLO, and Architecture Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}} Explore table, list, SLO, and architecture widgets. Learn how to track the metrics and performance of a web application and discover how to present important data. {{< /learning-center-callout >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/mobile/
+[1]: /mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists

@@ -4,7 +4,6 @@ aliases:
 - /ko/security_platform/guide/
 - /ko/security_platform/cloud_siem/guide/
 disable_toc: true
-kind: 가이드
 private: true
 title: Cloud SIEM 가이드
 ---

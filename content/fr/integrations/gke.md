@@ -22,7 +22,7 @@ integration_id: gke
 integration_title: "Google\_Kubernetes\_Engine"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: gke.

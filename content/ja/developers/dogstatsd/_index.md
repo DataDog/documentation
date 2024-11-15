@@ -9,7 +9,7 @@ description: データタイプ、タグ付けなど、DogStatsD の機能の概
 further_reading:
 - link: integrations/node
   tag: ドキュメント
-  text: NodeJS インテグレーションを利用して NodeJS 用の DogStatsD を有効にします
+  text: Node.js インテグレーションを利用して Node.js 用の DogStatsD を有効にします
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD 入門
@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: ブログ
   text: Datadog で Azure App Service 上の Linux Web アプリを監視する
-kind: documentation
 title: DogStatsD
 ---
 
@@ -183,7 +182,7 @@ env:
             enabled: true
     ```
 
-**注**: 
+**注**:
 * UDP 以外には [Unix ドメインソケット][5]があります。
 * UDP による送信元検出では、エンティティ ID としてポッド ID を使うことができます。
 
@@ -545,7 +544,7 @@ v2.10.0 以降では、NonBlockingStatsDClientBuilder を使ってクライア�
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| パラメーター     | タイプ            | デフォルト     | 説明                                                                                                                                                                                          
+| パラメーター     | タイプ            | デフォルト     | 説明
           |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `host`        | 文字列          | `localhost` | DogStatsD サーバーのホスト。これが設定されていない場合、Agent は環境変数 `DD_AGENT_HOST` または `DD_DOGSTATSD_URL` を調べます。                                                               |

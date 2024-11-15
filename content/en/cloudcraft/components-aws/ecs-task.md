@@ -1,6 +1,5 @@
 ---
 title: "ECS Task Component"
-kind: documentation
 ---
 ## Overview
 

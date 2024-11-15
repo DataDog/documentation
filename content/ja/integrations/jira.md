@@ -4,6 +4,7 @@ categories:
 - developer tools
 - issue tracking
 - notifications
+custom_kind: インテグレーション
 dependencies: []
 description: このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira
   チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: Jira
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: jira
 public_title: Datadog-Jira インテグレーション
@@ -28,14 +28,14 @@ version: '1.0'
 
 Jira は、ソフトウェアチーム向けの課題およびプロジェクト追跡システムです。Datadog Jira インテグレーションにより、Datadog でトリガーされたアラート、インシデント、ケースから Jira に課題を作成し、Jira で作成された課題を Datadog のイベントとして表示することができます。
 
-## 計画と使用
+## セットアップ
 
 ### Jira でアプリケーションリンクを作成する
 
 1. Jira に移動します。
 1. 右端の歯車アイコンをクリックし、** Products** を選択します。
 1. 左メニューの **Integrations** の下にある **Application links** をクリックし、**Create link** をクリックします。
-1. **Direct application link** チェックボックスを選択し、URL `https://app.datadoghq.com/` を入力し、**Continue** をクリックします。
+1. **Direct application link** チェックボックスを選択し、URL `https://{{< region-param key="dd_full_site" code="true" >}}` を入力し、**Continue** をクリックします。
 1. "No response was received from the URL you entered” (入力した URL から応答がありません) という警告を無視して、**Continue** をクリックします。
 1. 下記のようにフォームに入力し、**Continue** をクリックします。
 
@@ -64,6 +64,7 @@ Jira は、ソフトウェアチーム向けの課題およびプロジェクト
 1. [Datadog Jira インテグレーションタイル][1]に移動し、**Add Account** をクリックします。
 2. Jira インスタンスの URL と、以前に作成したアプリケーションリンクのコンシューマーキーを入力します。
 3. **Connect** をクリックし、Jira 認可ページの指示に従います。Datadog では、最適かつ一貫した結果を得るために、このインテグレーション専用の (個人用ではない) Jira サービスアカウントを持つことを推奨しています。**Connect** をクリックする前に、このアカウントにログインしていることを確認してください。
+**注**: Datadog Jira インテグレーションは、On-Prem/Jira Server および Jira Data Center インスタンスに接続できます。ただし、これらのインスタンスの多くは IP 範囲をブラックリストに登録します。インテグレーションを動作させるには、以下の IP フィルタリングのドキュメントに従ってください。
 
 ### IP フィルタリング
 
@@ -112,7 +113,7 @@ Jira webhook を作成するには
 
 `${EVENT_TITLE}` などのテンプレート変数を使用すると、アラートイベントのデータを使用して、課題フィールドに値を入力することができます。使用可能な変数の一覧は、[Datadog Webhooks インテグレーション][5]を参照してください。
 
-## API
+## 使用方法
 
 #### Datadog アラートから自動的に課題を作成する
 
@@ -120,21 +121,21 @@ Datadog のアラートイベントから Jira 課題を作成するには、**N
 
 課題は、モニターがトリガーされたときに作成されます。モニターが解決されるまで、モニターによって新しい課題が作成されることはありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Jira インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 作成されたすべての Jira の課題は、Datadog 内にイベントとして表示されます。
 
-### ヘルプ
+### サービスチェック
 
 Jira インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

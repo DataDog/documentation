@@ -22,7 +22,7 @@ integration_id: ilert
 integration_title: iLert
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@ilert.com
 manifest_version: 1.0.0
 metric_prefix: ilert.

@@ -18,10 +18,8 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10072
     source_type_name: Vertica
-  logs:
-    source: vertica
   monitors:
-    '[Vertica] Nodes down above K-safety level': assets/monitors/vertica_replication_safety.json
+    Vertica Nodes down above K-safety level: assets/monitors/vertica_replication_safety.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,6 +28,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_on_public_website: true
@@ -37,9 +36,8 @@ draft: false
 git_integration_title: vertica
 integration_id: vertica
 integration_title: Vertica
-integration_version: 4.5.0
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: vertica
 public_title: Vertica
@@ -56,6 +54,7 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
   media: []
@@ -71,13 +70,13 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Vertica][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Vertica チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 vertica のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `vertica.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [vertica.d/conf.yaml][3] を参照してください。
 
@@ -105,7 +104,7 @@ GRANT SYSMONITOR TO datadog WITH ADMIN OPTION;
 
 [Agent を再起動][8]すると、Datadog への Vertica メトリクスの送信が開始されます。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -131,21 +130,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `vertica` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "vertica" >}}
 
 
-### ヘルプ
+### イベント
 
 Vertica には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "vertica" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

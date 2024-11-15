@@ -1,27 +1,26 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
 title: チュートリアル - Google Kubernetes Engine 上の Java アプリケーションのトレースを有効にする
 ---
 
 ## 概要
 
-このチュートリアルでは、Google Kubernetes Engine (GKE) 上のクラスターにインストールされたサンプル Java アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、Datadog Agent もクラスターにインストールされています。
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on Google Kubernetes Engine (GKE). In this scenario, the Datadog Agent is also installed in the cluster.
 
 ホスト、コンテナ、他のクラウドインフラストラクチャー、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。
 
@@ -34,7 +33,7 @@ Java の一般的なトレース設定ドキュメントについては、[Java 
 - Kubectl
 - GCloud - 以下のコマンドを実行して、`USE_GKE_GCLOUD_AUTH_PLUGIN` 環境変数を設定し、GCloud プロジェクトに追加のプロパティを構成します。
   {{< code-block lang="sh" >}}
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True  
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 gcloud config set project <PROJECT_NAME>
 gcloud config set compute/zone <COMPUTE_ZONE>
 gcloud config set compute/region <COMPUTE_REGION>{{< /code-block >}}
@@ -58,7 +57,7 @@ helm repo update{{< /code-block >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-リポジトリには、Kubernetes クラスター内で動作するようにあらかじめ構成されたマルチサービスの Java アプリが含まれています。サンプルアプリは基本的なメモアプリで、データの追加や変更を行うための REST API が用意されています。Kubernetes のポッド用コンテナを作成するための `docker-compose` YAML ファイルは `docker` ディレクトリに配置されています。このチュートリアルでは、アプリケーション用のコンテナをビルドする `service-docker-compose-k8s.yaml` ファイルを使用します。
+The repository contains a multi-service Java application pre-configured to run inside a Kubernetes cluster. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-k8s.yaml` file, which builds containers for the application.
 
 `notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
 
@@ -87,7 +86,7 @@ gcloud config set container/cluster <CLUSTER_NAME>{{< /code-block >}}
 
 ### アプリケーションイメージの構築とアップロード
 
-Google Container Registry (GCR) に馴染みがない方は、[Container Registry のクイックスタート][16]を読むとよいかもしれません。
+If you're not familiar with Google Container Registry (GCR), it might be helpful to read [Quickstart for Container Registry][16].
 
 サンプルプロジェクトの `/docker` ディレクトリで、以下のコマンドを実行します。
 
@@ -165,7 +164,7 @@ Java アプリケーションが動作するようになったので、トレー
 1. Java tracing パッケージをプロジェクトに追加します。Agent は GKE クラスターで動作するため、Dockerfile が適切に構成されていることを確認し、何もインストールする必要はありません。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. 同じ `notes/dockerfile.notes.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
@@ -186,7 +185,7 @@ Java アプリケーションが動作するようになったので、トレー
    ...
    spec:
      replicas: 1
-     selector: 
+     selector:
        matchLabels:
          name: notes-app-pod
          app: java-tutorial-app
@@ -245,7 +244,7 @@ helm upgrade -f datadog-values.yaml --install --debug latest --set datadog.apiKe
 
 しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
 `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
@@ -271,7 +270,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 
 `dd.trace.sample.rate` フラグは、このアプリケーションのサンプルレートを設定します。Dockerfile の ENTRYPOINT コマンドでは、この値を `1` に設定しています。これは、`notes` サービスに対する全てのリクエストの 100% が、分析と表示のために Datadog のバックエンドに送信されることを意味します。低容量のテストアプリケーションの場合、これは問題ありません。実稼働時や大量のデータを扱う環境では、このようなことはしないでください。代わりに、リクエストの一部をサンプリングします。例えば、`-Ddd.trace.sample.rate=0.1` とすると、リクエストの 10% 分のトレースが Datadog に送信されます。[トレース構成設定][14]と[サンプリング機構][15]について詳しくお読みください。
 
-このコマンドのサンプリングレートフラグは `-jar` フラグの前に表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
+このコマンドのサンプリングレートフラグは `-jar` フラグの_前に_表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
 
 ## Java アプリケーションに手動インスツルメンテーションを追加する
 
@@ -316,7 +315,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -371,7 +370,7 @@ docker push gcr.io/<PROJECT_NAME>/notes-tutorial:notes
 1. ノートアプリと同様に、Dockerfile の起動コマンドに `dd-java-agent` を追加して、トレース用の `calendar` アプリの構成を確認します。`calendar/dockerfile.calendar.maven` を開き、すでに `dd-java-agent` がダウンロードされていることを確認します。
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. 同じ `calendar/dockerfile.calendar.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
@@ -426,7 +425,7 @@ kubectl delete -f calendar-app.yaml{{< /code-block >}}
 ## トラブルシューティング
 
 もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

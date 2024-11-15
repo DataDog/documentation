@@ -14,7 +14,7 @@ has_logo: true
 integration_id: google-compute-engine
 integration_title: Google Compute Engine
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_compute_engine
 public_title: Intégration Datadog/Google Compute Engine

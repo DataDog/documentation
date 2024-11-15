@@ -1,6 +1,5 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
-kind: guide
 further_reading:
     - link: '/agent/logs'
       tag: 'Documentation'
@@ -8,6 +7,15 @@ further_reading:
     - link: '/integrations/amazon_web_services/#log-collection'
       tag: 'Documentation'
       text: 'Collect logs from your AWS services'
+    - link: "https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink/"
+      tag: "Architecture Center"
+      text: "Connect to Datadog over AWS PrivateLink"
+    - link: "https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-transit-gateway/"
+      tag: "Architecture Center"
+      text: "Connect to Datadog over AWS PrivateLink using AWS Transit Gateway"
+    - link: "https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-vpc-peering/"
+      tag: "Architecture Center"
+      text: "Connect to Datadog over AWS PrivateLink using AWS VPC peering"
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
@@ -74,17 +82,17 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
-11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][2]:
+11. If you are running a Datadog Agent version older than v6.19 or v7.19, to collect logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][2]:
 
     ```yaml
     logs_config:
-        use_http: true
+        force_use_http: true
     ```
 
     If you are using the container Agent, set the following environment variable instead:
 
     ```
-    DD_LOGS_CONFIG_USE_HTTP=true
+    DD_LOGS_CONFIG_FORCE_USE_HTTP=true
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][3].

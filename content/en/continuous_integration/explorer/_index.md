@@ -1,6 +1,5 @@
 ---
 title: Continuous Integration Visibility Explorer
-kind: documentation
 description: Learn how to search and filter your pipeline executions in the CI Visibility Explorer.
 further_reading:
   - link: "/continuous_integration/pipelines/"
@@ -51,6 +50,7 @@ The **CI** panel on the left lists default facets you can use to search for your
 | Wait time | The total time spent waiting for manual approval within a CI execution. |
 | Is Deployment | Indicates whether a job within the pipeline initiated a deployment. |
 | Contains Deployment | Indicates whether the pipeline includes any jobs that trigger a deployment. |
+| On Critical Path | Indicates whether the job is on the critical path of the CI pipeline execution. |
 
 For more information about common facets that you can use as part of your search query in the CI Visibility Explorer, see [Pipeline Execution Facets][3]. 
 

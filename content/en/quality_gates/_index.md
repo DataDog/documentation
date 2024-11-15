@@ -1,6 +1,5 @@
 ---
 title: Quality Gates
-kind: documentation
 description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
 is_beta: true
 further_reading:
@@ -19,6 +18,9 @@ further_reading:
 - link: "/account_management/audit_trail/"
   tag: "Documentation"
   text: "Learn about Audit Trail"
+- link: "https://www.datadoghq.com/blog/datadog-flaky-tests/"
+  tag: "Blog"
+  text: "Flaky tests: their hidden costs and how to address flaky behavior"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,7 +31,7 @@ further_reading:
 
 Quality Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
-{{< img src="quality_gates/setup/pipeline_rule.png" alt="A pipeline rule that fails when code coverage for PCT is below or equal to zero in Quality Gates" style="width:100%" >}}
+{{< img src="quality_gates/setup/pipeline_rule_1.png" alt="A pipeline rule that fails when code coverage for PCT is below or equal to zero in Quality Gates" style="width:100%" >}}
 
 Use Quality Gates to:
 
@@ -39,7 +41,7 @@ Use Quality Gates to:
 
 You can configure Quality Gates rules for the following categories: 
 
-[Test Visibility][9]
+[Test Optimization][9]
 
 : <br> - New flaky tests <br> - Performance regressions <br> - Code coverage
 
@@ -66,30 +68,30 @@ Quality Gates offers the following rule types:
 
 You can create rules to block code from being merged that introduces new [flaky tests][101].
 
-{{< img src="quality_gates/setup/flaky_test.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
+{{< img src="quality_gates/setup/flaky_test_1.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
 
-[101]: /tests/guides/flaky_test_management/
+[101]: /tests/flaky_test_management/
 
 {{% /tab %}}
 {{% tab "Pipelines" %}}
 
 You can create rules to block code from being merged that introduces issues that wouldn't normally fail your CI/CD pipelines, but end up being deployed to production.
 
-{{< img src="quality_gates/setup/pipeline_rule.png" alt="A Quality Gate rule that fails when code coverage for PCT is below or equal to zero for a CI pipeline" style="width:80%" >}}
+{{< img src="quality_gates/setup/pipeline_rule_1.png" alt="A Quality Gate rule that fails when code coverage for PCT is below or equal to zero for a CI pipeline" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Static Analysis" %}}
 
 You can create rules to block code from being merged that introduces code quality and code vulnerability violations.
 
-{{< img src="quality_gates/setup/static_analysis.png" alt="A Quality Gate rule that fails when one or more new code quality violations with errors occur" style="width:80%" >}}
+{{< img src="quality_gates/setup/static_analysis_1.png" alt="A Quality Gate rule that fails when one or more new code quality violations with errors occur" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
 You can create rules to block code from being merged that introduces software vulnerabilities and forbidden licenses.
 
-{{< img src="quality_gates/setup/sca.png" alt="A Quality Gate rule that fails when one or more new critical vulnerabilities are introduced" style="width:80%" >}}
+{{< img src="quality_gates/setup/sca_1.png" alt="A Quality Gate rule that fails when one or more new critical vulnerabilities are introduced" style="width:80%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -100,7 +102,7 @@ To create a Quality Gate rule, see the [Setup documentation][2].
 
 You can evaluate and update quality control processes by accessing Quality Gates rules on the [**Quality Gates Rules** page][6]. Improve your deployment practices based on your project requirements and desired performance outcomes. 
 
-{{< img src="quality_gates/rules_list.png" alt="List of Quality Gate rules in Datadog" style="width:100%" >}}
+{{< img src="quality_gates/rules_list_1.png" alt="List of Quality Gate rules in Datadog" style="width:100%" >}}
 
 To search for Quality Gate rules, see the [Search and Manage documentation][5].
 
@@ -135,7 +137,7 @@ For more information, see the [Audit Trail documentation][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/guides/flaky_test_management/
+[1]: /tests/flaky_test_management/
 [2]: /quality_gates/setup/
 [3]: /account_management/audit_trail/
 [4]: /account_management/audit_trail/events/#ci-visibility-events

@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Monitor
-kind: documentation
 description: Learn how to create a monitor with Cloud Cost data.
 further_reading:
 - link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
@@ -18,9 +17,9 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
 
-{{< include-markdown "content/en/monitors/types/cloud_cost.md" >}}
+{{< include-markdown "monitors/types/cloud_cost" >}}

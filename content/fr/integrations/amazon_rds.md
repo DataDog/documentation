@@ -29,7 +29,7 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
@@ -177,7 +177,7 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 
 3. Installez l'[intégration Datadog/Amazon RDS][4].
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon-rds

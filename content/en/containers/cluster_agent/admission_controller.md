@@ -1,6 +1,5 @@
 ---
 title: Datadog Admission Controller
-kind: documentation
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:
@@ -13,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
   text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
+- link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+  tag: "Architecture Center"
+  text: "Instrument your app using the Datadog Operator and Admission Controller"
 ---
 
 ## Overview
@@ -29,11 +31,11 @@ Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more deta
 
 ## Configuration
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 To enable the Admission Controller for the Datadog Operator, set the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
 
-{{< code-block lang="yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-agent.yaml" disable_copy="false" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -51,7 +53,7 @@ Starting from Helm chart v2.35.0, Datadog Admission controller is activated by d
 
 To enable the Admission Controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 
-{{< code-block lang="yaml" filename="values.yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml" disable_copy="false" >}}
 #(...)
 clusterAgent:
   #(...)
@@ -176,6 +178,8 @@ When these environment variables are not set, the Admission Controller uses stan
 Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller can be configured to inject different modes of communication between the application and Datadog agent.
 
 This feature can be configured by setting `admission_controller.inject_config.mode` or by defining a Pod-specific mode using the `admission.datadoghq.com/config.mode` Pod label.
+
+Starting from Helm chart v3.22.0 and Datadog Operator v1.1.0, the communication mode is automatically set to `socket` if either APM socket or DSD socket is enabled.
 
 Possible options:
 | Mode               | Description                                                                                                       |

@@ -13,7 +13,7 @@ integration_id: azure-relay
 integration_title: Microsoft Azure Relay
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_relay
 public_title: Intégration Datadog/Microsoft Azure Relay

@@ -27,6 +27,7 @@ categories:
 - notifications
 - orchestration
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: torq
 integration_title: Torq
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: torq
 public_title: Torq
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: セキュリティチームとオペレーションチームのためのノーコード自動化
   media: []
@@ -70,7 +71,7 @@ tile:
 
 [Torq][1] のインテグレーションでは、Datadog のアラートに対応してワークフローをトリガーし、アラートのリッチ化を実現します。そして、Torq ワークフローから Datadog のイベントストリームや Torq 専用ダッシュボードに直接イベントを送り返すことができます。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションを設定するには、アクティブな [Torq アカウント][2]と、そのアカウント所有者のロールが必要です。また、Datadog の適切な管理者権限も必要となります。
 
@@ -169,31 +170,31 @@ API キーを作成した後、後でアクセスできなくなるので、コ�
 
 2. `Datadog-<monitor_type>` のような意味のあるインテグレーション名を入力し、**Add** をクリックします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Torq インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### イベント
 
 Torq インテグレーションでは、Datadog ポストイベントステップを使用して Torq ワークフローから Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
 
-### ヘルプ
+### サービスチェック
 
 Torq インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://torq.io
 [2]: https://torq.io/get-started/
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook.png
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_2.png
+[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_search.png
+[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_config.png
 [5]: https://docs.datadoghq.com/ja/monitors/manage_monitor/
 [6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
-[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_api_key.png
+[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_api_key_2.png
 [8]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-application-keys
-[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_app_key.png
+[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_app_key_2.png
 [10]: https://docs.datadoghq.com/ja/help/

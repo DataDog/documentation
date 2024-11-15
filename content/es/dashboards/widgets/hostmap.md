@@ -6,9 +6,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget del mapa de host
-widget_type: Mapa de host
+widget_type: hostmap
 ---
 
 El widget del mapa de host representa gráficamente cualquier métrica a través de tus hosts utilizando la misma visualización disponible en la página principal del [Mapa de host][1]:

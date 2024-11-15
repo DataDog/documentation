@@ -1,10 +1,12 @@
 ---
 title: Send Azure Logs with the Datadog Resource
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 {{< site-region region="us3" >}}

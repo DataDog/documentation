@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
   text: Planificación y ajustes de uso
-kind: guía
 title: Migración a las APIs de atribución de uso por horas y meses
 ---
 

@@ -14,7 +14,7 @@ integration_id: azure-vm-scale-set
 integration_title: Microsoft Azure VM 스케일 세트
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_vm_scale_set
 public_title: Datadog-Microsoft Azure VM 스케일 세트 통합

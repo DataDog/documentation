@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: Amazon CloudSearch
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: amazon_cloudsearch
 public_title: Datadog-Amazon CloudSearch 통합

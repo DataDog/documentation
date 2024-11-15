@@ -4,7 +4,6 @@ further_reading:
   tag: ドキュメント
   text: Datadog サービスカタログ
 is_beta: true
-kind: ドキュメント
 title: API への所有者の割り当て
 ---
 
@@ -38,11 +37,11 @@ info:
 x-datadog:
  teamHandle: <dd-team>
 {{< /highlight >}}
-2. [Import the OpenAPI/Swagger file][2].
+2. [OpenAPI/Swagger ファイルをインポート][2]します。
 
 <!--## Assess monitoring gaps TKTK -->
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

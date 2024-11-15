@@ -13,13 +13,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
   tag: ブログ
   text: Datadog Database Monitoring で AlwaysOn のアベイラビリティグループを監視する
-kind: documentation
 title: セルフホスト SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+データベースで Database Monitoring を有効にするには、以下の手順を実行します。
 
 1. [Agent にアクセスを付与する](#grant-the-agent-access)
 1. [Agent をインストールする](#install-the-agent)
@@ -35,7 +34,7 @@ title: セルフホスト SQL Server のデータベースモニタリングの�
 
 Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+サーバーに接続するために読み取り専用ログインを作成し、必要な権限を付与します。
 
 {{< tabs >}}
 {{% tab "SQL Server 2014+" %}}
@@ -46,24 +45,28 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- If not using either of Log Shipping Monitoring (available in Agent v7.50+) or
+-- SQL Server Agent Monitoring (available in Agent v7.57+), comment out the next three lines:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
 
-```SQL
+"```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
+GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
-```
+-- Log Shipping Monitoring (Agent v7.50+ で利用可能) または
+-- SQL Server Agent Monitoring (Agent v7.57+ で利用可能) のいずれも使用しない場合は、
+-- 次の 3 行をコメントアウトしてください。
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```"
 
 追加した各アプリケーションデータベースに `datadog` ユーザーを作成します。
 ```SQL
@@ -72,6 +75,9 @@ CREATE USER datadog FOR LOGIN datadog;
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+### パスワードを安全に保管
+{{% dbm-secret %}}
 
 ## Agent のインストール
 
@@ -99,6 +105,6 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 ## Agent の構成例
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/tracing/faq/agent-5-tracing-setup
-kind: 가이드
 private: true
 title: Agent v5와 APM & Continuous Profiler
 ---
@@ -40,7 +39,7 @@ APM는 리눅스와 도커에서 Datadog Agent 5.13 이상의 버전을 사용�
     {{< nextlink href="tracing/setup/python" tag="Python" >}}파이썬(Python) 언어 계측.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby 언어 계측{{< /nextlink >}}
     {{< nextlink href="tracing/setup/go" tag="Go" >}}Go 언어 계측.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js 언어 계측.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Node.js 언어 계측.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET 언어 계측.{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP 언어 계측.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -11,7 +11,6 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: En savoir plus sur l'Explorateur de suivi des erreurs
-kind: documentation
 title: Signalement de pannes du navigateur et suivi des erreurs
 ---
 

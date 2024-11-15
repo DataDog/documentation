@@ -23,7 +23,7 @@ integration_id: pagerduty-ui
 integration_title: Interface PagerDuty
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: pagerduty_ui
 public_title: Interface PagerDuty

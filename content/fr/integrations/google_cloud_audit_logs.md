@@ -14,7 +14,7 @@ integration_id: google-cloud-audit-logs
 integration_title: Dashboard des logs d'audit Datadog/Google
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_audit_logs
 public_title: Intégration du dashboard des logs d'audit Datadog/Google

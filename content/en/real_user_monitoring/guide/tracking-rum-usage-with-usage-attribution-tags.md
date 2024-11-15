@@ -1,6 +1,6 @@
 ---
 title: Track RUM Usage with Usage Attribution Tags
-kind: guide
+
 beta: true
 description: Learn how to track RUM usage with custom attribution tags
 aliases:
@@ -23,7 +23,7 @@ As an example, this guide walks through how to track RUM usage by department.
 
 Categories for usage are determined by tags. Before setting up your RUM usage attribution, make sure that the tags you want to use are configured on the Usage Attribution page. Click **Edit tags**, then select the tags that you want to use to view usage and click **Save**. In this example, we've added "department" as a tag.
 
-{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-4.jpeg" alt="Check your tags on the Usage Attribution page" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-1.jpeg" alt="Check your tags on the Usage Attribution page" style="width:100%;">}}
 
 ### Add tags to your RUM sessions
 Once your usage attribution tags have been configured, you can tag your RUM sessions with them. 

@@ -1,6 +1,6 @@
 ---
 title: Azure Troubleshooting
-kind: guide
+
 aliases:
   - /integrations/faq/azure-troubleshooting
 further_reading:

@@ -35,7 +35,6 @@ further_reading:
   tag: Blog
   text: Intercepter les attaques au niveau de la couche réseau grâce à la détection
     des menaces basées sur le DNS
-kind: documentation
 title: Configurer Cloud Security Management
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: DogStatsD
-kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
     - /guides/dogstatsd/
@@ -11,7 +10,7 @@ aliases:
 further_reading:
     - link: 'integrations/node'
       tag: 'Documentation'
-      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
+      text: 'Enable DogStatsD for Node.js through the Node.js integration'
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Introduction to DogStatsD'
@@ -546,8 +545,7 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                                                                                                          
-          |
+| Parameter     | Type            | Default     | Description                                                                                                                                                                                            |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
 | `port`        | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |

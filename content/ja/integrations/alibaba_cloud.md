@@ -1,6 +1,7 @@
 ---
 categories:
 - cloud
+custom_kind: integration
 dependencies: []
 description: Alibaba Cloud サービスを Datadog と統合
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
@@ -15,7 +16,6 @@ integration_id: alibaba-cloud
 integration_title: Alibaba Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: alibaba_cloud
 public_title: Datadog-Alibaba Cloud インテグレーション

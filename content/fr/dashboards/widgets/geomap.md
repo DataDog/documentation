@@ -8,7 +8,6 @@ further_reading:
 - link: /notebooks/
   tag: Documentation
   text: Notebooks
-kind: documentation
 title: Widget Geomap
 ---
 

@@ -38,7 +38,7 @@ integration_id: active-directory
 integration_title: Active Directory
 integration_version: 2.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: active_directory
 public_title: Active Directory

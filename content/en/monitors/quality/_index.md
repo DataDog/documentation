@@ -1,6 +1,5 @@
 ---
 title: Monitor Quality
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/monitors/quality"
@@ -35,7 +34,7 @@ Monitor Quality displays your monitors with the following quality issues:
 
 ### Muted for over 60 days
 
-[Downtimes][1] are useful for silencing alerts during scheduled maintenance, planned outages or system shutdowns, or to stop alerts during weekends and evenings. However, monitors that have been muted for an extended period (more than 60 days) may indicate an oversight. You can unmute these monitors to resume alerting and ensure comprehensive monitoring coverage.
+[Downtimes][1] are useful for silencing alerts during scheduled maintenance, planned outages or system shutdowns, or to stop alerts during weekends and evenings. However, monitors that have been muted, or partially muted, for an extended period (more than 60 days) may indicate an oversight. You can unmute these monitors to resume alerting and ensure comprehensive monitoring coverage.
 
 See which monitors are not alerting due to downtime misconfigurations and unmute them.
 

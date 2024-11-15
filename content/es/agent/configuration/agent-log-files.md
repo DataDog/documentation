@@ -15,7 +15,6 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: Preguntas frecuentes
   text: Comandos del Agent
-kind: guía
 title: Archivos de log del Agent
 ---
 

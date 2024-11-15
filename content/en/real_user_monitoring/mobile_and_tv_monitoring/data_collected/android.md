@@ -1,6 +1,5 @@
 ---
 title: RUM Android Data Collected
-kind: documentation
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
@@ -69,6 +68,7 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (System User-Agent).  |
 | `device.model`   | string | The device model as reported by the device (System User-Agent).    |
 | `device.name` | string | The device name as reported by the device (System User-Agent).  |
+| `device.architecture` | string | The CPU architecture of the device that is reporting the error. |
 
 ### Connectivity
 
@@ -144,6 +144,7 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.last_view.name` | string | Name of the last view of the session. |
 | `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8]. |
 | `session.useragent` | string | System user agent info to interpret device info.  |
+| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 
 ### View metrics
 
@@ -205,7 +206,9 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.message` | string | A concise, human-readable one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 | `error.issue_id`   | string | The stack trace or complementary information about the error.     |
-
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
+| `error.file` | string | File where the error happened for the Error Tracking issue. |
+| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
 
 ### Network errors 
 
@@ -238,9 +241,20 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.name` | string | Name of the user action. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-## Data Storage
+## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][6], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+
+## Data upload
+
+The RUM Android SDK allows you to get the data you need to Datadog while considering user bandwidth impact. The Datadog SDK batches and uploads events as follows:
+
+- On _event collected_, the Datadog SDK appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
+- On _upload_ (when the batch is considered "closed"), the Datadog SDK:
+  - Reads the batch and extract events
+  - Drops redundant View events in RUM (no optimizations in other tracks)
+  - Builds payloads specific to each track
+  - Compresses the payload and sends it
 
 ## Direct Boot mode support
 

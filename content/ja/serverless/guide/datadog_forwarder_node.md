@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Datadog Forwarder を使用した Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 
@@ -13,7 +12,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-## コンフィギュレーション
+## 構成
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -22,7 +21,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 CI/CD パイプラインにコマンドを追加してすべてのサーバーレスアプリケーションにインスツルメンテーションを有効化することも可能です。Datadog CLI コマンドによる変更が上書きされないよう、通常のサーバーレスアプリケーションのデプロイ*後*にコマンドを実行します。
 
-### Install
+### インストール
 
 NPM または Yarn を使用して Datadog CLI をインストールします。
 
@@ -101,7 +100,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 [Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-### Install
+### インストール
 
 [AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに一度だけマクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
@@ -151,7 +150,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 - Lambda 関数からのトレースおよびカスタムメトリクスの収集を有効化。
 - Datadog Forwarder から Lambda 関数ロググループへのサブスクリプションを管理。
 
-### Install
+### インストール
 
 CDK プロジェクトで以下の Yarn または NPM コマンドを実行し、Datadog CDK Constructs ライブラリをインストールします。
 
@@ -201,7 +200,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
-### Install
+### インストール
 
 Lambda 関数をコンテナイメージとしてデプロイする場合は、Datadog Lambda ライブラリをレイヤーとして使用できません。代わりに、Datadog Lambda ライブラリを、イメージ内の関数の依存関係としてインストールする必要があります。Datadog トレーシングを使用している場合は、`dd-trace` もインストールする必要があります。
 
@@ -243,7 +242,7 @@ yarn add datadog-lambda-js dd-trace
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+### インストール
 
 Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケージとしてインポートすることができます。
 

@@ -23,16 +23,17 @@ assets:
     source_type_id: 10375
     source_type_name: crest_data_systems_anomali_threatstream
 author:
-  homepage: https://www.crestdatasys.com
-  name: Crest Data Systems
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  homepage: https://www.crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - マーケットプレイス
 - data stores
-- slos
+- alerting
 - イベント管理
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,7 +42,6 @@ integration_id: crest-data-systems-anomali-threatstream
 integration_title: Anomali ThreatStream
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -108,19 +108,22 @@ Anomali ThreatStream は、環境内で生成される Observable もサポー�
 
 ## Agent
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- サポートメール: [datadog.integrations@crestdatasys.com][5]
-- 営業メール: [datadog-sales@crestdatasys.com][6]
-- Web サイト: [crestdatasys.com][3]
+- サポートメール: [datadog.integrations@crestdata.ai][5]
+- 営業メール: [datadog-sales@crestdata.ai][6]
+- Web サイト: [crestdata.ai][3]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][10]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://www.crestdatasys.com/
+[3]: https://www.crestdata.ai/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
-[5]: mailto:datadog.integrations@crestdatasys.com
-[6]: mailto:datadog-sales@crestdatasys.com
-[7]: https://www.crestdatasys.com/datadog-integrations-readme/Anomali_Threatstream.pdf
-
+[5]: mailto:datadog.integrations@crestdata.ai
+[6]: mailto:datadog-sales@crestdata.ai
+[7]: https://docs.crestdata.ai/datadog-integrations-readme/Anomali_Threatstream.pdf
+[8]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[9]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[10]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-anomali-threatstream" target="_blank">こちらをクリック</a>してください。

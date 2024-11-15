@@ -1,6 +1,5 @@
 ---
 title: Metric Monitor
-kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric
@@ -13,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "/monitors/types/change-alert"
@@ -189,7 +188,7 @@ The following logic determines the bucket size:
 In order to be considered as a "full window", the monitor requires:
 
 1. At least one data point in the first bucket. The first bucket is chronologically the earliest bucket in the window.
-2. At most three buckets in total with no data points (including the first one).
+2. No more than three buckets in total with no data points.
 
 If the conditions are met, the monitor is evaluated. Otherwise, the evaluation is canceled and the monitor state is unchanged.
 

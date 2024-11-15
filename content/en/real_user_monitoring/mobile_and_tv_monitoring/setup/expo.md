@@ -1,6 +1,5 @@
 ---
 title: RUM Expo Setup
-kind: documentation
 description: Monitor your React Native projects using Expo and Expo Go with Datadog.
 aliases:
     - /real_user_monitoring/reactnative/expo/
@@ -52,7 +51,7 @@ To see RUM sessions populate in Datadog, you need to implement view tracking, wh
 
 #### Manual tracking
 
-You can manually start and stop a view using the following `startView()` and `stopview()` methods.
+You can manually start and stop a view using the following `startView()` and `stopView()` methods.
 
 ```js
 import {
@@ -72,7 +71,7 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 
 #### Automatic tracking
 
-Automatic view tracking is supported for the the following modules:
+Automatic view tracking is supported for the following modules:
 
 - React Navigation: [@Datadog/mobile-react-navigation][2]
 - React Native Navigation: [@Datadog/mobile-react-native-navigation][3]
@@ -106,7 +105,7 @@ const config = new DdSdkReactNativeConfiguration(
     true, // track XHR resources.
     true // track errors.
 );
-// Optional: Select your Datadog website ("US1", "US3", "US5", EU1", or "US1_FED"). Default is "US1".
+// Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
 config.site = 'US1';
 // Optional: Enable or disable native crash reports.
 config.nativeCrashReportEnabled = true;
@@ -243,6 +242,14 @@ import { DdSdkReactNative } from 'expo-datadog';
 const config = new DdSdkReactNativeConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
 ```
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+ 
+This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Troubleshooting
 

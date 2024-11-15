@@ -23,6 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -30,9 +31,8 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 外部 DNS
-integration_version: 3.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: external_dns
 public_title: 外部 DNS
@@ -48,6 +48,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: 外部 DNS のすべてのメトリクスを Datadog で追跡
   media: []
@@ -96,7 +97,7 @@ metadata:
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `external_dns` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "external_dns" >}}

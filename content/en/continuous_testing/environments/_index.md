@@ -1,6 +1,5 @@
 ---
 title: Testing Local and Staging Environments
-kind: documentation
 description: Learn about using Continuous Testing in local and remote environments.
 aliases:
   - /synthetics/testing_tunnel

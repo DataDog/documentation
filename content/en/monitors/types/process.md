@@ -1,6 +1,5 @@
 ---
 title: Live Process Monitor
-kind: documentation
 description: "Check if a process is running on a host"
 aliases:
 - /monitors/monitor_types/process
@@ -12,13 +11,17 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 - link: "https://www.datadoghq.com/blog/monitor-fargate-processes/"
   tag: "Blog"
   text: "Monitor processes running on AWS Fargate with Datadog"
 ---
+
+<div class="alert alert-warning">
+Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
 
 ## Overview
 
@@ -95,7 +98,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /infrastructure/process/
-[2]: https://app.datadoghq.com/monitors#create/live_process
+[2]: https://app.datadoghq.com/monitors/create/live_process
 [3]: /infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
 [5]: /monitors/configuration/#advanced-alert-conditions

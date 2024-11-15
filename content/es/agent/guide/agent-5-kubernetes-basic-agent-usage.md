@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/faq/agent-5-kubernetes-basic-agent-usage
-kind: guía
 private: true
 title: Uso básico del Agent con Kubernetes en el Agent v5
 ---
@@ -40,7 +39,6 @@ Si tu Kubernetes tiene habilitada la configuración del control de acceso basado
 ```yaml
 
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: dd-agent
 spec:
@@ -153,7 +151,6 @@ Para ejecutar métricas kube-state-metrics, crea un archivo `kube-state-metrics.
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
@@ -178,7 +175,6 @@ spec:
             cpu: 200m
 ---
 apiVersion: v1
-kind: Service
 metadata:
   annotations:
     prometheus.io/scrape: 'true'
@@ -258,7 +254,6 @@ Si estás usando un pod `dd-agent` por cada nodo worker de Kubernetes, puedes us
 ```yaml
 
 apiVersion: v1
-kind: Pod
 metadata:
   annotations:
     service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'
@@ -294,7 +289,7 @@ Checks
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /es/getting_started/agent/autodiscovery/
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
-[11]: /es/agent/guide/agent-commands/#agent-status-and-information
+[11]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example

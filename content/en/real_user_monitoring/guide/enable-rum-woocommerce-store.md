@@ -1,6 +1,6 @@
 ---
 title: Enable RUM on Your WooCommerce Store
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'
@@ -49,9 +49,8 @@ For example, you can:
 
 - Get valuable insights about your customers' behavior by
 making data-driven decisions to improve your store
-- Increase conversion by watching browser recordings enriched sessions with [Session Replay][2]
-- Use [funnel analysis][3] to better understand the customer journey, or
-- [Generate metrics][4] from those newly captured sessions
+- Increase conversion by watching browser recordings of enriched sessions with [Session Replay][2] or
+- [Generate metrics][3] from those newly captured sessions
 
 ## Further Reading
 
@@ -59,5 +58,4 @@ making data-driven decisions to improve your store
 
 [1]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: /real_user_monitoring/session_replay/
-[3]: /real_user_monitoring/product_analytics/funnel_analysis
-[4]: /real_user_monitoring/platform/generate_metrics/
+[3]: /real_user_monitoring/platform/generate_metrics/

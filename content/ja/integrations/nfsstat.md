@@ -16,8 +16,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 9164582
     source_type_name: Nfsstat
-  logs:
-    source: nfsstat
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -26,6 +24,7 @@ author:
 categories:
 - os & system
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
 display_on_public_website: true
@@ -33,9 +32,8 @@ draft: false
 git_integration_title: nfsstat
 integration_id: nfsstat
 integration_title: Nfsstat
-integration_version: 1.13.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nfsstat
 public_title: Nfsstat
@@ -48,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Category::OS とシステム
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
   media: []
@@ -63,19 +62,19 @@ tile:
 
 NFS インテグレーションは、マウントごとの NFS クライアント[統計][1]を表示する `nfsiostat` ツールを使用して、NFS クライアント上のマウントポイントに関するメトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
 以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### インフラストラクチャーリスト
+### インストール
 
 NFSstat チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `nfsstat.d/conf.yaml` ファイルを編集します。nfsiostat バイナリスクリプトを指定するか、バイナリインストーラーに含まれているスクリプトを使用します。使用可能なすべてのコンフィギュレーションオプションについては、[nfsstat.d/conf.yaml のサンプル][4]を参照してください。
 
-### 収集データ
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` ファイルでこれを有効にするには、以下の設定を更新します。
 
@@ -102,18 +101,18 @@ NFSstat チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `nfsstat` を探します。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "nfsstat" >}}
 
 
-### ヘルプ
+### イベント
 Nfsstat チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 Nfsstat チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料

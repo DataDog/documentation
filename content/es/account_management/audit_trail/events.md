@@ -5,7 +5,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: Documentación
   text: Obtén más información sobre Audit Trail
-kind: documentación
 title: Eventos de Audit Trail
 ---
 
@@ -270,7 +269,7 @@ Consulta la [documentación de Audit Trail][2] para obtener más información so
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: /es/account_management/audit_trail/

@@ -1,9 +1,8 @@
 ---
 title: Template Variable Evaluation
-kind: guide
 ---
 
-In monitor notification messages, you can modify the output of template variables using the `eval` syntax, which enables several different mathematical operations and functions on template variables with a numerical value.
+In monitor notification messages, you can modify the output of template variables using the `eval` syntax, which enables several different mathematical operations and functions on template variables with a numerical or string value.
 
 ## Operators
 
@@ -44,20 +43,27 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 
 ### Routing notifications to different teams based on time of day
 
-You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_match}}{{/is_match}}` to customize the routing of notifications based on time of day:
+You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_exact_match}}{{/is_exact_match}}` to customize the routing of notifications based on time of day (UTC):
 ```
-{{#is_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "14" "15" "16"}}  
-Handle that should receive notification if time is between 2PM and 5PM
-{{/is_match}}
+{{#is_exact_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "8" "9" "10" "11" "12" "13"}}  
+Handle that should receive notification if time is between 8AM and 2PM UTC
+{{/is_exact_match}}
 ```
+
+**Note:** If you need to evaluate your monitor on a schedule, see [Custom Schedules][2] instead.
 
 ## Functions
 
-The value of a numerical template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+The value of a template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value (if applicable). The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
 
 ```text
 {{eval "function(TEMPLATE_VARIABLE_NAME)"}}
 ```
+
+
+{{< tabs >}}
+{{% tab "Numeric variable" %}}
+
 
 The following functions change how the value of a numerical template variable is formatted:
 
@@ -113,4 +119,26 @@ If `{{value}}` is evaluating to a large number of bytes or bits, use the `humani
 {{eval "humanize_bits(value)"}}
 ```
 
+{{% /tab %}}
+
+
+{{% tab "String variable" %}}
+
+The following functions can be used to perform certain operations on strings variables:
+
+| Function            | Description|
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| upper(var) | Returns a string converted to uppercase letters|
+| lower(var)  | Returns a string converted to lowercase letters|
+| substring(var, start, end)            | Extracts characters from a string, between two specified indexes (start, end). The third parameter is optional.<br>For example: substring("host:D", 5) = "D"|
+| strip(var, characters)            | Remove the leading and trailing characters. When the second parameter is null, it removes spaces at the beginning and at the end of the string. For example:<br>strip("   host:E   ") = "host:E"<br>strip("abchost:Eabc", "abc") = "host:E"|
+
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+
 [1]: /logs/explorer/
+[2]: /monitors/guide/custom_schedules

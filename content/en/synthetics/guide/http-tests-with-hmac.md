@@ -1,6 +1,5 @@
 ---
 title: Creating HTTP Tests with HMAC Authentication
-kind: documentation
 description: Learn how to create an HTTP test with HMAC.
 further_reading:
 - link: "/synthetics/api_tests/http_tests"
@@ -52,7 +51,7 @@ Click **Variable From Script** to generate the HMAC signature for your HTTP requ
 * To define a variable, use either `dd.variable.set("<variable_name>", <value>)` or `dd.variable.setObfuscated("<variable_name>", <value>)`.
 
 You also have access to helper functions, such as:
-* Most of the [`std` library][5], accessible with `std.*`. For example, to call the function `encodeHex` defined in `<std>/encoding/hex.ts`, use `std.encoding.hex.encodeHex`.
+* Most of the [`std` library][5], accessible with `std.*`. For example, to call the function `encodeHex` defined in `@std/encoding/hex.ts`, use `std.encoding.hex.encodeHex`.
 * Standard JavaScript APIs, such as the [Web Crypto API][6].
 
 **Note**: Some of these APIs are disabled for security reasons.
@@ -106,5 +105,5 @@ Configure the rest of your HTTP test, and click **Create** to save.
 [2]: /synthetics/api_tests/http_tests/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
-[5]: https://deno.land/std@0.206.0?doc
+[5]: https://jsr.io/@std
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Crypto

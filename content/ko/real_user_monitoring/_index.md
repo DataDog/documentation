@@ -51,13 +51,17 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: 설명서
   text: 수집된 RUM 브라우저 데이터
-kind: 설명서
 title: RUM & 세션 재생
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+
+{{< learning-center-callout header="활성화 웨비나 세션 참가하기" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  특정 비즈니스 요구에 맞게 커스텀 사용자 작업을 생성하는 방법을 알아보고 사용자 행동을 정확하게 추적해 보세요.
+{{< /learning-center-callout >}}
 
 ## 실제 사용자 모니터링이란?
+
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
 
 Datadog의 *RUM(실제 사용자 모니터링)*은 개별 사용자의 실시간 활동과 경험에 대한 엔드투엔드 가시성을 제공합니다. RUM은 웹 및 모바일 애플리케이션 모니터링을 위한 네 가지 유형의 사용 사례를 해결합니다:
 
@@ -103,7 +107,6 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 | 로그의 글로벌 컨텍스트/속성 추적  | {{< X >}} |  |  |  |  |  |  |
 | 클라이언트 쪽 추적 |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | 세션 재생 | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay는 기본 모바일 앱용 공개 베타 버전입니다. |
-| 히트맵 | {{< X >}} |  |  |  |  |  |  |
 | 장애물 신호 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | 모든 **모바일** 및 **Roku** 기기에 대해 부분적으로만 지원됨 |
 
 ## SDK 도메인에 대해 지원되는 엔드포인트

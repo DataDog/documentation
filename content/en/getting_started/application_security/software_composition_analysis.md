@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Software Composition Analysis
-kind: documentation
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:
@@ -16,35 +15,60 @@ further_reading:
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Management works"
-- link: "/security/application_security/getting_started"
-  tag: "Documentation"
-  text: "Enabling ASM"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://www.datadoghq.com/blog/sca-supply-chain-security/"
+  tag: "Blog"
+  text: "Beyond vulnerabilities, towards a holistic approach to securing the software supply chain"
 ---
 
 
 ## Overview
 
-Datadog [Software Composition Analysis][1] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
+Datadog [Software Composition Analysis][15] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
 
 This guide walks you through best practices for getting your team up and running with SCA.
 
 ## Phase 1: Enable
-1. Check [ASM Compatibility][2] to see if your service is supported.
-2. Enable Software Composition Analysis on your services. 
-   - Navigate to the [Quick Start Guide][4].
-   - Expand **Enable Vulnerability Detection**.
-   - Click **Start Activation**.
-   - Choose services to secure with ASM.
 
-   OR
+First, see the [Library Compatibility][12] requirements page to verify if the Datadog Tracing Library used by your application or service supports the Software Composition Analysis (SCA) capability for your application's or service's programming language.
+
+### Enable SCA on your services using the Quick Start Guide
+
+1. In Datadog, go to **[Application Security > Settings > Quick Start Guide][4]**.
+2. Expand **Enable Vulnerability Detection**, select **Open source vulnerabilities**, and click **Start Activation**. A list of services appears.
+3. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. The number of selected services and their names are listed.
+4. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
    
-   - Navigate to the [Setup][9] page.
-   - To enable Software Composition Analysis for static analysis in source code, in **Software Composition Analysis**, click **Get Started**.
-     - In **SCA static analysis in source code**, click **See Instructions**.
-     - In **SCA runtime analysis in running services**, click **Select Services**.
+   
+   {{< img src="/security/application_security/software_composition_analysis/APM_SCA-enablement-quick-start-guide.mp4" alt="quick start guide in the Datadog UI" video="true">}}
+
+### Enable SCA on your repositories and services using the Settings page
+
+1. In Datadog, go to **[Application Security > Settings][13]**.
+2. Click **Get Started** to expand the Software Composition Analysis (SCA) capability.
+
+
+#### Enable SCA on GitHub repositories
+
+1. Click **Select Repositories** on your desired GitHub account and toggle **Enable Software Composition Analysis (SCA)** to enable for all repositories. If you do not see any GitHub accounts listed, [create a new GitHub App][14] to get started.
+   
+{{< img src="/security/application_security/software_composition_analysis/SCA-github-all-repositories.png" alt="enable SCA for all repositories">}}
+   
+Optionally, you can select specific GitHub repositories to enable SCA by clicking the toggle for each repository.
+   
+{{< img src="/security/application_security/software_composition_analysis/SCA-github-enabled-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
+
+#### Enable SCA on services
+
+1. Click **Select Services**. A list of services should appear.
+2. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. You should see the number of selected services and their names.
+3. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
+<br>      
+
+
+{{< img src="/security/application_security/software_composition_analysis/SCA-enablement-settings-services.mp4" alt="SCA enablement in the Datadog UI" video="true">}}
 
 ## Phase 2: Identify
 1. **Identify Vulnerabilities**: Navigate to [Vulnerabilities][5].  
@@ -65,7 +89,7 @@ This guide walks you through best practices for getting your team up and running
 
    **Note**: Remediated and Auto-Closed vulnerabilities re-open if the vulnerability is detected again by Datadog.
 
-3. View additional details by clicking on the vulnerability. This opens a panel which includes information about:
+2. View additional details by clicking on the vulnerability. This opens a panel which includes information about:
     - Which services are affected.
     - The date on which the vulnerability was last detected.
     - A description of the vulnerability.
@@ -90,7 +114,7 @@ This guide walks you through best practices for getting your team up and running
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-4. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
+3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:
@@ -111,8 +135,6 @@ This guide walks you through best practices for getting your team up and running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/vulnerability_management/
-[2]: /security/application_security/enabling/compatibility/
-[3]: /security/application_security/enabling/
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services
@@ -121,3 +143,7 @@ This guide walks you through best practices for getting your team up and running
 [9]: https://app.datadoghq.com/security/configuration/asm/setup
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
+[12]: https://app.datadoghq.com/security/configuration/asm/onboarding
+[13]: https://app.datadoghq.com/security/configuration/asm/setup
+[14]: https://docs.datadoghq.com/integrations/github/
+[15]: /security/application_security/software_composition_analysis/setup/compatibility/

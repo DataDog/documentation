@@ -3,7 +3,6 @@ aliases:
 - /ja/serverless/serverless_integrations
 - /ja/serverless/datadog_lambda_library/
 - /ja/serverless/libraries_integrations/library/
-kind: documentation
 title: サーバーレスライブラリとインテグレーション
 ---
 
@@ -18,14 +17,14 @@ title: サーバーレスライブラリとインテグレーション
 
 ## Datadog Lambda 拡張機能と Forwarder
 
-{{< whatsnext desc="Lambda 関数からテレメトリーを送信するには、Lambda 拡張機能または Forwarder のいずれかが必要です。また、Amazon API Gateway など、Lambda 以外のサーバーレスリソースのログを収集するには、Forwarder が必要な場合があります。" >}}
+{{< whatsnext desc="Lambda 関数からテレメトリーを送信するには、Lambda 拡張機能または Forwarder のいずれかが必要です。また、Amazon API Gateway などの Lambda 以外のサーバーレスリソースのログを収集するためにも、Forwarder が必要になる場合があります。" >}}
     {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda 拡張機能{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Datadog Forwarder Lambda 関数{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Lambda ライブラリ
 
-{{< whatsnext desc="特定のランタイムでは、テレメトリーを収集するために、Datadog Lambda 拡張機能に加えて、Datadog Lambda ライブラリが必要です。" >}}
+{{< whatsnext desc="特定のランタイムでは、Datadog Lambda 拡張機能に加えて、Datadog Lambda ライブラリがテレメトリーを収集するために必要です。" >}}
     {{< nextlink href="https://github.com/DataDog/datadog-lambda-python" >}}Python 用 Datadog Lambda ライブラリ{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/datadog-lambda-js" >}}Node.js 用 Datadog Lambda ライブラリ{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/datadog-lambda-go" >}}Go 用 Datadog Lambda ライブラリ{{< /nextlink >}}

@@ -7,7 +7,6 @@ further_reading:
 - link: /continuous_integration/explorer/facets
   tag: 설명서
   text: 패싯에 대해 자세히 알아보기
-kind: 설명서
 title: CI 가시성 탐색기 검색 구문
 ---
 

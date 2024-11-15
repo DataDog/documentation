@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: AWS Lambda 서버리스 애플리케이션의 커스텀 메트릭
 ---
 
@@ -142,6 +141,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
         response.setStatusCode(200);
         return response;
+    }
+
+    static {
+        // 종료 전에 모든 측정항목이 플러시되었는지 확인하세요
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
     }
 }
 ```

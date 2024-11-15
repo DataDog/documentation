@@ -26,7 +26,6 @@ further_reading:
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para mejorar tus capacidades de synthetic
     testing
-kind: documentación
 title: Empezando con la monitorización Synthetic
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Why are users being added as "none none"?
-kind: faq
 ---
 
 Sometimes when a user first signs into [Datadog with SAML / SSO][1], their name is displayed on the team page as "none none" in place of their username. This can be especially noticeable in (but is not limited to) cases where users are created through JIT provisioning. Seeing "none none" indicates a problem with the setup of their account's SAML assertion—specifically the "sn" and "givenName" attributes included in it. "sn" stands for "surname"—the user's last name; "givenName" would be the user's first name.

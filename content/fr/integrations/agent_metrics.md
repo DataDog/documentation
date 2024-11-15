@@ -28,7 +28,7 @@ integration_id: datadog-agent
 integration_title: Agent Metrics
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: agent_metrics
 public_title: Agent Metrics

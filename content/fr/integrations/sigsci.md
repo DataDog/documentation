@@ -19,7 +19,7 @@ integration_id: sigsci
 integration_title: "Signal\_Sciences"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: info@signalsciences.com
 manifest_version: 1.0.0
 metric_prefix: sigsci.

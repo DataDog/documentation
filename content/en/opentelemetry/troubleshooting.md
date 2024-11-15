@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/troubleshooting/"
   tag: "External Site"
@@ -37,6 +36,8 @@ processors:
   - k8sattributes
 ```
 
+For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2].
+
 ## Unexpected hostnames with AWS Fargate deployment
 
 In AWS Fargate environments, an incorrect hostname might be reported for traces.
@@ -51,8 +52,49 @@ processors:
     override: false
 ```
 
+## Gateway collector not forwarding host metadata
+
+In a gateway deployment, you may encounter issues with collecting and forwarding host metadata from agent collectors to Datadog.
+
+To troubleshoot:
+
+1. Configure agent collectors to collect and forward host metadata:
+
+   ```yaml
+   processors:
+     resourcedetection:
+       detectors: [system, env]
+     k8sattributes:
+       passthrough: true
+   ```
+
+2. Configure the gateway collector to extract and forward necessary metadata:
+
+   ```yaml
+   processors:
+     k8sattributes:
+       extract:
+         metadata: [node.name, k8s.node.name]
+     transform:
+       trace_statements:
+         - context: resource
+           statements:
+             - set(attributes["datadog.host.use_as_metadata"], true)
+   
+   exporters:
+     datadog:
+       hostname_source: resource_attribute
+   
+   ```
+
+3. Verify that host metadata is being collected by agent collectors and properly forwarded through the gateway to Datadog.
+
+For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][3].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
+[2]: /opentelemetry/schema_semantics/hostname/
+[3]: /opentelemetry/schema_semantics/host_metadata/

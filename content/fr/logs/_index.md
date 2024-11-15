@@ -43,7 +43,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
   tag: Blog
   text: Filter and correlate logs dynamically using Subqueries
-kind: Documentation
 title: Log Management
 ---
 

@@ -1,6 +1,5 @@
 ---
 description: Conecta Zoom a Datadog para ayudar a que tu equipo colabore
-kind: documentación
 private: true
 title: Integración con Zoom
 ---

@@ -17,7 +17,7 @@ integration_id: twenty-forty-eight
 integration_title: Twenty Forty Eight
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: twenty_forty_eight
 public_title: Twenty Forty Eight

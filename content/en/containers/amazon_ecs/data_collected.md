@@ -1,6 +1,5 @@
 ---
 title: Amazon ECS Data Collection
-kind: documentation
 aliases:
   - /agent/amazon_ecs/data_collected
 further_reading:
@@ -19,7 +18,9 @@ further_reading:
 
 ### Metrics
 
-Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances. Metrics collected by the Agent for Amazon ECS:
+Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances.
+
+The following table lists metrics collected by the Agent or API crawler for Amazon ECS:
 
 {{< get-metrics-from-git "amazon_ecs" >}}
 

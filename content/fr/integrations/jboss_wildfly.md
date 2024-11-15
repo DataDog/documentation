@@ -35,7 +35,7 @@ integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
 integration_version: 2.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: jboss_wildfly
 public_title: JBoss/WildFly

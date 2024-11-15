@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/graphing/functions/smoothing/
-kind: documentation
 title: Lissage
 ---
 

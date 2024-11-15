@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Threats
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/

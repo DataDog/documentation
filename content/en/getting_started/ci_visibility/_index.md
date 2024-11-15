@@ -1,6 +1,5 @@
 ---
 title: Getting Started with CI Visibility
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/monitor-ci-pipelines/'
   tag: 'Blog'
@@ -14,6 +13,9 @@ further_reading:
 - link: '/monitors/types/ci'
   tag: 'Documentation'
   text: 'Learn about CI Pipeline Monitors'
+- link: '/account_management/billing/ci_visibility'
+  tag: 'Documentation'
+  text: 'Learn about billing considerations for CI Visibility'
 algolia:
   tags: ["pipeline visibility", "pipelines", "ci pipeline"]
 ---
@@ -111,7 +113,7 @@ Once you click into a pipeline, you can access individual pipeline executions li
 
 You can identify bottlenecks in your pipeline and examine individual nodes ranked from the largest to smallest percentage of execution time. 
 
-After you have set up Test Visibility, you can access information about tests that were run in your CI pipelines, including the test status (Failed, New Flaky, Passed, or Skipped), on the Test Runs tab in a pipeline execution’s side panel. For more information, see the [Flaky Test Management documentation][10].
+After you have set up Test Optimization, you can access information about tests that were run in your CI pipelines, including the test status (Failed, New Flaky, Passed, or Skipped), on the Test Runs tab in a pipeline execution’s side panel. For more information, see the [Flaky Test Management documentation][10].
 
 You can access pipeline or job logs across cloud and self-hosted runners and see information about your runners on the Logs tab in a pipeline execution’s side panel.
 
@@ -152,7 +154,7 @@ To set up a monitor that alerts on your CI pipeline when the average duration in
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: /continuous_integration/search/
 [9]: /continuous_integration/explorer
-[10]: /tests/guides/flaky_test_management/
+[10]: /tests/flaky_test_management/
 [11]: /continuous_integration/pipelines/?tab=githubactions#supported-features
 [12]: /continuous_integration/guides/infrastructure_metrics_with_gitlab/
 [13]: /continuous_integration/guides/pipeline_data_model/

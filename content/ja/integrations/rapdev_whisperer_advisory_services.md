@@ -13,6 +13,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,7 +22,6 @@ integration_id: rapdev-whisperer-advisory-services
 integration_title: Whisperer Advisory Services
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rapdev_whisperer_advisory_services
 pricing:
@@ -31,7 +31,7 @@ pricing:
   short_description: プライベートオファーのプレースホルダ―
   unit_price: null
 public_title: Whisperer Advisory Services
-short_description: RapDev の Datadog アドバイザリーおよびコンサルティングサービス
+short_description: Datadog Advisory and Consultation services from RapDev
 supported_os:
 - linux
 - windows
@@ -45,7 +45,7 @@ tile:
   - Category::Marketplace
   - Offering::Professional Service
   configuration: README.md#Setup
-  description: RapDev の Datadog アドバイザリーおよびコンサルティングサービス
+  description: Datadog Advisory and Consultation services from RapDev
   media:
   - caption: RapDev のサービス概要
     image_url: images/rapdev_whisperer.jpg

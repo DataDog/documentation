@@ -1,6 +1,5 @@
 ---
 title: Exclusion
-kind: documentation
 aliases:
     - /graphing/functions/exclusion/
 ---
@@ -23,6 +22,10 @@ When you graph this metric as a timeseries, you would have 3 x 4 = 12 lines on y
 | `clamp_max()` | Set any metric values _over_ a threshold value to equal that value.  | `clamp_max(avg:system.load.1{*}, 100)` |
 
 Add a threshold value. The `clamp_min()` sets all datapoints below the threshold to equal that value, while `clamp_max()` limits datapoints above the threshold.
+
+Note: `clamp_min(values, threshold)` and `clamp_max(values, threshold)` sets any `NaN` in values to `threshold`.
+
+To avoid this behavior, apply the `default_zero()` before the `clamp_min()` / `clamp_max()` function.
 
 ## Cutoff
 

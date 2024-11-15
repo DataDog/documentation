@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Limita la recopilación de datos solo a un subconjunto de contenedores
-kind: documentación
 title: Extracción de etiquetas (tags) del Docker
 ---
 

@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md
 display_on_public_website: true
@@ -28,9 +29,8 @@ draft: false
 git_integration_title: tcp_check
 integration_id: システム
 integration_title: TCP チェック
-integration_version: 4.8.0
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_check
 public_title: TCP チェック
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: リモートホストへの TCP 接続を監視
   media: []
@@ -127,7 +128,7 @@ instances:
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `tcp_check` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "tcp_check" >}}

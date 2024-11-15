@@ -3,7 +3,6 @@ aliases:
 - /fr/serverless/serverless_integrations/plugin
 dependencies:
 - https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md
-kind: documentation
 title: Plug-in Serverless Framework Datadog
 ---
 ![build](https://github.com/DataDog/serverless-plugin-datadog/workflows/build/badge.svg)
@@ -62,14 +61,14 @@ Pour configurer plus d'options pour votre plug-in, utilisez les paramètres pers
 | `failOnError`                 | Si ce paramètre est défini, le plug-in renverra une erreur en cas d'échec lors de la création ou de la mise à jour d'un monitor Datadog personnalisé. L'erreur est générée après le déploiement mais entraîne le renvoi d'un code de sortie différent de zéro après l'opération `serverless deploy` (pour faire échouer le CI utilisateur). Valeur par défaut : `false`. |
 | `logLevel`                    | Le niveau de log. Définir sur `DEBUG` pour une journalisation étendue. |
 | `skipCloudformationOutputs`   | Définissez ce paramètre sur `true` si vous ne souhaitez pas que les sorties CloudFormation Datadog soient ajoutées pour votre stack. Ce paramètre s'avère utile si vous dépassez la limite de 200 sorties, ce qui peut empêcher la création de votre stack. |
-| `enableColdStartTracing`      | Définissez ce paramètre sur `false` pour désactiver le tracing des démarrages à froid. Pris en charge avec NodeJS et Python. Valeur par défaut : `true`. |
+| `enableColdStartTracing`      | Définissez ce paramètre sur `false` pour désactiver le tracing des démarrages à froid. Pris en charge avec Node.js et Python. Valeur par défaut : `true`. |
 | `coldStartTraceMinDuration`   | Permet de définir la durée minimale (en millisecondes) pendant laquelle un événement de chargement de module doit être tracé via le tracing des démarrages à froid. Nombre. Valeur par défaut : `3`. |
 | `coldStartTraceSkipLibs`      | (Facultatif) Permet d'empêcher la création de spans de démarrage à froid pour une liste de bibliothèques séparées par des virgules. Utile pour limiter la profondeur ou ignorer les bibliothèques connues. La valeur par défaut dépend du runtime. |
 | `subdomain`                   | Permet de définir un sous-domaine à utiliser pour les URL d'application écrites dans le fichier de sortie. Valeur par défaut : `app`. |
-| `enableProfiling`             | Définir sur `true` pour activer le profileur en continu Datadog. En version bêta pour NodeJS et Python. Valeur par défaut : `false`. |
-| `encodeAuthorizerContext`     | Si ce paramètre est défini sur `true` pour des mécanismes d'autorisation Lambda, le contexte de tracing sera encodé dans la réponse en vue de sa propagation. Pris en charge avec NodeJS et Python. Valeur par défaut : `true`. |
-| `decodeAuthorizerContext`     | Si ce paramètre est défini sur `true` pour les Lambdas autorisées via des mécanismes d'autorisation Lambda, le contexte de tracing sera parsé et utilisé (s'il est détecté). Pris en charge avec NodeJS et Python. Valeur par défaut : `true`. |
-| `apmFlushDeadline`            | Permet de déterminer à quel moment les spans doivent être envoyées avant qu'un timeout ne se produise, en millisecondes. Lorsque le temps restant dans un appel AWS Lambda est inférieur à la valeur définie, le traceur tente d'envoyer les spans actives actuelles et toutes les spans terminées. Pris en charge avec NodeJS et Python. Valeur par défaut : `100` millisecondes. |
+| `enableProfiling`             | Définir sur `true` pour activer le profileur en continu Datadog. En version bêta pour Node.js et Python. Valeur par défaut : `false`. |
+| `encodeAuthorizerContext`     | Si ce paramètre est défini sur `true` pour des mécanismes d'autorisation Lambda, le contexte de tracing sera encodé dans la réponse en vue de sa propagation. Pris en charge avec Node.js et Python. Valeur par défaut : `true`. |
+| `decodeAuthorizerContext`     | Si ce paramètre est défini sur `true` pour les Lambdas autorisées via des mécanismes d'autorisation Lambda, le contexte de tracing sera parsé et utilisé (s'il est détecté). Pris en charge avec Node.js et Python. Valeur par défaut : `true`. |
+| `apmFlushDeadline`            | Permet de déterminer à quel moment les spans doivent être envoyées avant qu'un timeout ne se produise, en millisecondes. Lorsque le temps restant dans un appel AWS Lambda est inférieur à la valeur définie, le traceur tente d'envoyer les spans actives actuelles et toutes les spans terminées. Pris en charge avec Node.js et Python. Valeur par défaut : `100` millisecondes. |
 
 Pour utiliser l'un de ces paramètres, ajoutez une section `custom` > `datadog` dans votre fichier `serverless.yml` semblable à l'exemple ci-dessous :
 

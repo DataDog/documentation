@@ -23,6 +23,7 @@ author:
 categories:
 - developer tools
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: ping
 integration_title: Ping
 integration_version: 1.0.2
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ping
 public_title: Ping
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リモートホストへの接続を監視
   media: []
@@ -71,11 +72,11 @@ ICMP パケットの作成には raw ソケットが必要であるため、こ�
 
 **Windows をお使いの方への注意事項**: インストールされている Windows の言語が英語に設定されていない場合、このチェックが正しく行われないことがあります。
 
-## 計画と使用
+## セットアップ
 
 Ping チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -95,7 +96,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
 3. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. ping のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ping.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ping.d/conf.yaml][5] を参照してください。
 
@@ -105,21 +106,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `ping` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ping" >}}
 
 
-### ヘルプ
+### イベント
 
 Ping チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ping" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### `SubprocessOutputEmptyError: get_subprocess_output expected output but had none` エラー
 Ping インテグレーションを実行中に、以下のようなエラーが表示されることがあります。

@@ -1,6 +1,5 @@
 ---
-title: Node.js Custom Instrumentation using Datadog API
-kind: documentation
+title: Node.js Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/nodejs
     - /tracing/manual_instrumentation/nodejs
@@ -13,7 +12,7 @@ code_lang: dd-api
 code_lang_weight: 1
 type: multi-code-lang
 further_reading:
-    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+    - link: "/tracing/trace_collection/trace_context_propagation/"
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
@@ -108,12 +107,12 @@ tracer.use('express', {
 To learn more, read [API details for individual plugins][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
+[1]: https://datadoghq.dev/dd-trace-js/modules/export_.plugins.html
 {{% /tab %}}
 
 {{% tab "Errors" %}}
 
-Errors can be added to a span with the special `error` tag that supports error objects. This splits the error into three tags: `error.type`, `error.msg`, and `error.stack`.
+Errors can be added to a span with the special `error` tag that supports error objects. This splits the error into three tags: `error.type`, `error.message`, and `error.stack`.
 
 ```javascript
 try {
@@ -159,7 +158,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Promises" %}}
@@ -188,7 +187,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Async/await" %}}
@@ -214,7 +213,7 @@ app.get('/make-sandwich', async (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Wrapper" %}}
@@ -243,7 +242,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#wrap
 {{% /tab %}}
 {{< /tabs >}}
 

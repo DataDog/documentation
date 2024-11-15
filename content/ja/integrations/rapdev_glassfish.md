@@ -31,6 +31,7 @@ author:
 categories:
 - マーケットプレイス
 - 開発ツール
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-glassfish
 integration_title: Glassfish
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

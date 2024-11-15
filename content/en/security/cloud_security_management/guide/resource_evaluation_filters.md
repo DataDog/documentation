@@ -1,6 +1,5 @@
 ---
 title: Use Filters to Exclude Resources from Evaluation
-kind: guide
 further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"

@@ -1,6 +1,5 @@
 ---
 title: Arithmetic Processor
-kind: Documentation
 
 ---
 

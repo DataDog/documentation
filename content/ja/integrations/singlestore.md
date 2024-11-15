@@ -20,12 +20,10 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10215
     source_type_name: SingleStore
-  logs:
-    source: singlestore
   monitors:
-    '[SingleStore] License expiration': assets/monitors/license_expiration.json
-    '[SingleStore] Read failures rate': assets/monitors/read_failures.json
-    '[SingleStore] Write failures rate': assets/monitors/write_failures.json
+    License will expire soon: assets/monitors/license_expiration.json
+    Read queries failure rate is high: assets/monitors/read_failures.json
+    Write queries failure rate is high: assets/monitors/write_failures.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -35,6 +33,7 @@ categories:
 - data stores
 - ログの収集
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
 display_on_public_website: true
@@ -42,9 +41,8 @@ draft: false
 git_integration_title: singlestore
 integration_id: singlestore
 integration_title: SingleStore
-integration_version: 2.2.0
+integration_version: 4.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: singlestore
 public_title: SingleStore
@@ -62,6 +60,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
   media: []
@@ -82,18 +81,18 @@ tile:
 - リソースの利用効率を高める。
 
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 SingleStore チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
-#### メトリクスベース SLO
+#### ホスト
 
 ##### メトリクスの収集
 1. SingleStore のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `singlestore.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル singlestore.d/conf.yaml][4] を参照してください。
@@ -102,7 +101,7 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 **注**: デフォルトでは、SingleStore インテグレーションは `MV_GLOBAL_STATUS`、`AGGREGATORS`、`LEAVES` テーブルからしかメトリクスを収集しません。システムレベルのメトリクス (CPU、ディスク、ネットワーク IO、メモリ) を追加で収集するには、`singlestore.d/conf.yaml` ファイルで `collect_system_metrics: true` を設定します。
 
-##### 収集データ
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -142,7 +141,7 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 | `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### 収集データ
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -161,22 +160,22 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `singlestore` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "singlestore" >}}
 
 
 
-### ヘルプ
+### イベント
 
 SingleStore インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "singlestore" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

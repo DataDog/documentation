@@ -20,7 +20,7 @@ integration_id: rundeck
 integration_title: Rundeck
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: forrest@rundeck.com
 manifest_version: 1.0.0
 metric_prefix: rundeck.

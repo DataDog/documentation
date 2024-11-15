@@ -1,6 +1,5 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Service-entry Spans
-kind: documentation
 aliases:
 - /opentelemetry/guide/service_entry_spans_mapping/
 further_reading:
@@ -9,15 +8,17 @@ further_reading:
   text: "OpenTelemetry Trace Metrics"
 ---
 
-<div class="alert alert-info">
-This feature is in beta. If you have any feedback, contact <a href="/help/">Datadog support</a>.
-</div>
-
 ## Overview
 Datadog uses [service-entry spans][1] throughout the platform for features such as [Trace Metrics][2] and the [APM Trace Explorer][3]. This convention is unique to Datadog, but can be mapped from the [`SpanKind`][4] attribute in OpenTelemetry by following the opt-in guide below.
 
-## Opting in to the feature
-This feature requires OTel Collector Contrib v0.100.0 or greater and Datadog Agent v7.53.0 or greater. To opt into the **public beta**, enable the config option depending on the ingestion path.
+## Requirements
+
+- OTel Collector Contrib v0.100.0 or greater
+- Datadog Agent v7.53.0 or greater
+
+## Setup
+
+Enable the config option based on your ingestion path:
 
 {{< tabs >}}
 {{% tab "OTel Collector and Datadog Exporter" %}}

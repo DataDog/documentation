@@ -1,6 +1,6 @@
 ---
 title: Send RUM Custom Actions
-kind: guide
+
 beta: true
 private: true
 description: Learn how to send custom actions to extend your collection of user interactions.
@@ -10,6 +10,8 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
+algolia:
+  tags: ["addaction"]
 ---
 ## Overview
 

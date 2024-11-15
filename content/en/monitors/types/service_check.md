@@ -1,6 +1,5 @@
 ---
 title: Service Check Monitor
-kind: documentation
 description: "Monitor status of arbitrary service checks."
 aliases :
     - /monitors/monitor_types/custom_check
@@ -13,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -61,7 +60,7 @@ Set up the check alert:
     * Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` `OK` statuses.
 
 
-[1]: /monitors/manage/status
+[1]: /monitors/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 

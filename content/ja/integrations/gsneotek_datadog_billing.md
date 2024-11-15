@@ -14,7 +14,8 @@ author:
 categories:
 - コスト管理
 - マーケットプレイス
-- slos
+- alerting
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,7 +24,6 @@ integration_id: gsneotek-datadog-billing
 integration_title: GS Neotek Datadog Cost Analysis
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: gsneotek_datadog_billing
 pricing:

@@ -1,6 +1,5 @@
 ---
 title: Fine-tuning CSM Threats Security Signals
-kind: guide
 aliases:
   - /security_platform/cloud_workload_security/guide/tuning-rules/
   - /security_platform/cloud_security_management/guide/tuning-rules/
@@ -34,7 +33,7 @@ Common keys:
 - `@process.ancestors.executable.path`
 - `@process.ancestors.executable.envs`
 
-When evaluating if a process is legitimate, check past processes to help you contextualize its execution flow. The process ancestry tree traces a process back to its origin.
+To determine if a process is legitimate, review its parent process in the process tree. The process ancestry tree traces a process back to its origin, providing context for its execution flow. This helps in understanding the sequence of events leading up to the current process.
 
 Usually, it's sufficient to suppress based on both the parent process and on unwanted process attributes.
 
@@ -174,7 +173,7 @@ In CSM Threats, the runtime Agent logs are generated from collected kernel event
 1. Go to your chosen signal details side-panel and click the Events tab. 
 2. Click **View in Log Explorer** to navigate to Log Management, which displays the full list of logs that instigate this signal.
    Because there can be many logs, the signal side-panel combines these logs and their shared attributes into a JSON structure.
-3. Go back to the Event tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
+3. Go back to the Events tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
 4. Identify key-value pairs to suppress signals by common keys, including `@process.args`, `@process.group`, `@process.ancestors.comm`, or `@process.ancestors.args`.
 5. Open the rule in the Rule editor and in the **Exclude benign activity with suppression queries**. Add the list of key-value pairs that you identified as helpful.
 

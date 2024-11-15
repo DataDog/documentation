@@ -29,7 +29,7 @@ integration_id: confluent-platform
 integration_title: Confluent Platform
 integration_version: 1.8.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: confluent.

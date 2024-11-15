@@ -2,9 +2,8 @@
 description: Datadog アカウントの SAML に関する問題のトラブルシューティング
 further_reading:
 - link: https://www.samltool.com/online_tools.php
-  tag: 開発ツール
+  tag: 外部サイト
   text: 開発者用 SAML ツールでアサーションを識別する
-kind: documentation
 title: SAML トラブルシューティング
 ---
 
@@ -102,14 +101,13 @@ SAML でログインし、Datadog のロールに対応する値を持ってい�
 
 ## Identity provider (IdP) errors
 
-Google、Active Directory、Azure、LastPass、Okta など、お使いの IdP からエラーが発生した場合は、こちらをご覧ください。
+Google、Active Directory、Azure、Okta など、お使いの IdP からエラーが発生した場合は、こちらをご覧ください。
 
 - Google の Admin Console で問題が発生した場合は、[SAML アプリのエラーメッセージ][10]を参照してください。
 - Active Directory で問題が発生した場合は、[Azure Active Directory における SAML ベースのアプリケーションへのシングルサインオンをデバッグする][11]を参照してください。
 - AuthO で問題が発生した場合は、[SAML コンフィギュレーションのトラブルシューティング][12]を参照してください。
 - Azure で問題が発生した場合は、[ユーザーがサインインした後に、アプリのページにエラーメッセージが表示される][13]を参照してください。
 - Google で問題が発生した場合は、[Datadog クラウドアプリケーション][14]を参照してください。
-- LastPass で問題が発生した場合は、[Datadog アプリインテグレーション][15]を参照してください。
 - Oktaで問題が発生した場合は、[アプリケーションにサインインしようとすると 404 エラーが発生する][16]を参照してください。
 - SafeNet で問題が発生した場合は、[SafeNet Trusted Access for Datadog][17] を参照してください。
 
@@ -155,7 +153,6 @@ Datadog のサポートに連絡する前に、管理者に連絡してくださ
 [12]: https://auth0.com/docs/troubleshoot/troubleshoot-authentication/troubleshoot-saml-configurations
 [13]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/application-sign-in-problem-application-error
 [14]: https://support.google.com/a/answer/7553768
-[15]: https://support.logmeininc.com/lastpass/help/datadog-app-integration
 [16]: https://support.okta.com/help/s/article/Receiving-404-error-when-attempting-to-sign-into-application?language=en_US
 [17]: https://resources.safenetid.com/help/Datadog/Index.htm
 [18]: https://www.datadoghq.com/support/

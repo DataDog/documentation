@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/python.md
-kind: documentation
 title: Environnement Python pour le développement d'intégrations avec l'Agent
 ---
 Ce document aborde la configuration d'un environnement Python permettant de travailler sur des intégrations basées sur l'Agent, y compris l'installation de l'interpréteur et la vérification de la présence de toutes les dépendances requises.

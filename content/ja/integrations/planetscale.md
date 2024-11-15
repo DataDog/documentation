@@ -24,6 +24,7 @@ author:
   support_email: support@planetscale.com
 categories:
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/planetscale/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: planetscale
 integration_title: PlanetScale
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: planetscale
 public_title: PlanetScale
@@ -43,6 +43,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: PlanetScale のメトリクスを DataDog に送信します。
   media: []
@@ -58,7 +59,7 @@ tile:
 
 PlanetScale は、Datadog にメトリクスをプッシュして、データベースの使用量とパフォーマンスの把握を支援することができます。
 
-## 計画と使用
+## セットアップ
 
 以下の手順に従って、Datadog にメトリクスをプッシュするために PlanetScale の組織を構成してください。
 
@@ -67,21 +68,21 @@ PlanetScale は、Datadog にメトリクスをプッシュして、データベ
 
 ![PlanetScale 組織設定][3]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "planetscale" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Planetscale には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Planetscale には、イベントは含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

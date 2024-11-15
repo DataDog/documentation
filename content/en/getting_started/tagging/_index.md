@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Tags
-kind: documentation
 description: 'Learn how to assign and use tags in Datadog.'
 aliases:
     - /getting_started/getting_started_with_tags
@@ -22,13 +21,15 @@ further_reading:
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session on effective tagging with Datadog"
+algolia:
+  tags: ["tagging"]
 ---
 
 ## Overview
 
 Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
 
-Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. 
+Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys.
 
 | Tag Key   | Allows for                                                            |
 | --------- | --------------------------------------------------------------------- |
@@ -38,6 +39,7 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | `service` | Scoping of application specific data across metrics, traces, and logs. |
 | `env`     | Scoping of application specific data across metrics, traces, and logs. |
 | `version` | Scoping of application specific data across metrics, traces, and logs. |
+| `team`    | Assign ownership to any resources                                     |
 
 Datadog recommends looking at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
@@ -90,7 +92,7 @@ As a best practice, Datadog recommends using unified service tagging when assign
 
 ## Usage
 
-After you have [assigned tags][7] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. 
+After you have [assigned tags][7] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform.
 
 | Area                 | Use Tags to                                                                                      |
 | -------------------- | ------------------------------------------------------------------------------------------------ |

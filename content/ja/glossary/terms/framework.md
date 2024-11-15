@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- cspm
+- csm
 synonyms:
 - コンプライアンスフレームワーク
 - コンプライアンス規格

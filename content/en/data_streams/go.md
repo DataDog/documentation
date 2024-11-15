@@ -1,6 +1,5 @@
 ---
 title: Setup Data Streams Monitoring for Go
-kind: documentation
 ---
 
 ### Prerequisites
@@ -48,7 +47,7 @@ If a service consumes data from one point and produces to another point, propaga
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1"
 )
 
 ...

@@ -13,7 +13,6 @@ further_reading:
 - link: /getting_started/workflow_automation/
   tag: Documentación
   text: Empezando con Workflow Automation
-kind: documentation
 title: Conexiones
 ---
 

@@ -6,7 +6,6 @@ cascade:
   algolia:
     rank: 70
 description: Datadog 계정과 조직을 관리하세요
-kind: 설명서
 title: 계정 관리
 ---
 {{< site-region region="gov" >}}

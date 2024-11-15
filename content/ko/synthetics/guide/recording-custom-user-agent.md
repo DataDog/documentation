@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: 설명서
   text: 절차의 고급 옵션 설정하기
-kind: 설명서
 title: 커스텀 User-Agent를 사용하여 단계 기록
 ---
 

@@ -1,6 +1,5 @@
 ---
-title: Test Visibility Troubleshooting
-kind: documentation
+title: Test Optimization Troubleshooting
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
@@ -13,14 +12,15 @@ further_reading:
 
 ## Overview
 
-This page provides information to help you troubleshot issues with Test Visibility. If you need additional help, contact [Datadog Support][2].
+This page provides information to help you troubleshot issues with Test Optimization. If you need additional help, contact [Datadog Support][2].
 
 ## Your tests are instrumented, but Datadog isn't showing any data
 
 1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
 2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in the [**Tests**][5] section, Git information is missing. See [Data appears in Test Runs but not Tests](#data-appears-in-test-runs-but-not-tests) to troubleshoot it.
-3. If you are reporting the data through the Datadog Agent, make sure it is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the tracer to check if it's able to connect to the Agent.
-4. If you still don't see any results, [contact Support][2] for troubleshooting help.
+3. If you are reporting the data through the Datadog Agent, make sure there is [network connectivity][15] from your test-running host to the Agent's host and port. Run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the tracer to verify connectivity to the Agent.
+4. If you are reporting the data directly to Datadog ("Agentless mode"), make sure there is [network connectivity][16] from the test-running hosts to Datadog's hosts. You can activate [debug mode][6] in the tracer to verify connectivity to Datadog.
+5. If you still don't see any results, [contact Support][2] for troubleshooting help.
 
 ## You are uploading JUnit test reports with `datadog-ci` but some or all tests are missing
 If you are uploading JUnit test report files with `datadog-ci` CLI and you do not see the tests, it is likely the tests are being discarded because the report is considered incorrect.
@@ -147,7 +147,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 Other symptoms of the same issue include:
 - A test case is not classified as flaky even if it exhibits flakiness.
-- A test case cannot be skipped by [Intelligent Test Runner][12].
+- A test case cannot be skipped by [Test Impact Analysis][12].
 
 It is likely that the [test case configuration][13] is unstable because one or more of the test parameters are non-deterministic (for instance, they include current date or a random number).
 
@@ -168,6 +168,8 @@ The best way to fix this is to make sure that the test parameters are the same b
 [9]: https://github.com/spulec/freezegun
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [11]: https://app.datadoghq.com/ci/settings/repository
-[12]: /continuous_integration/intelligent_test_runner/
+[12]: /tests/test_impact_analysis/
 [13]: /tests/#parameterized-test-configurations
 [14]: /tests/#supported-features
+[15]: /agent/configuration/network/
+[16]: /tests/network/

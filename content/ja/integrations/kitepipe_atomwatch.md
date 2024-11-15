@@ -44,12 +44,13 @@ author:
   support_email: AtomWatch.Support@kitepipe.com
   vendor_id: kitepipe
 categories:
-- slos
+- alerting
 - AWS
 - イベント管理
 - ログの収集
 - マーケットプレイス
 - notifications
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,7 +59,6 @@ integration_id: kitepipe-atomwatch
 integration_title: Kitepipe AtomWatch
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -111,6 +111,11 @@ tile:
     image_url: images/error_monitoring.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://atomwatch.refined.site/space/CS/11108353
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/kitepipe-datadog-marketplace/
   support: README.md#Support
   title: Kitepipe AtomWatch
   uninstallation: README.md#Uninstallation
@@ -123,7 +128,7 @@ tile:
 
 Kitepipe の AtomWatch は Agent ベースのインテグレーションで、Boomi プロセス、クラスターノード、関連インフラストラクチャーからメトリクスを収集し、Datadog と Boomi の両方のお客様にインテグレーションの健全性を知らせることができます。
 
-AtomWatch バージョン 1.0 には、Boomi の実行統計、クラスターのステータス、インフラストラクチャーの健全性を報告する 4 つのダッシュボード、13 のカスタムメトリクス、13 のモニターが含まれています。これらのメトリクスは、Datadog および Boomi のお客様が、拡張された時間推移分析 (Boomi Process Reporting の利用可能期間の基準である 30 日を超える) に利用できます。
+AtomWatch version 1.0 contains 4 dashboards, 13 custom metrics, and 13 monitors that report on Boomi execution statistics, cluster status, and infrastructure health. These metrics are available to Datadog and Boomi customers for extended time-trending analysis (over the standard of 30 days for Boomi Process Reporting availability).
 
 AtomWatch を購入した Datadog のお客様は、Boomi Java Runtime を Atom または Molecule のいずれかの構成で管理する必要があります。Kitepipe では、14 日間の無料トライアルに 1 時間のセットアップと構成セッションが含まれています。
 
@@ -135,19 +140,19 @@ Kitepipe は Boomi Platinum Implementation Partner であり、北米におけ�
 
 Datadog のサービス AtomWatch は、AWS における Boomi マネージドサービスを中心とした Kitepipe の新しい提案です。Kitepipe は、Boomi プロセスの AWS マイグレーション、AWS マネージド Boomi、Boomi で構築されたバイオテクノロジーの垂直ソリューション、NetSuite、SAP、Coupa、Workday、HRIS、Data Mart/BI などのエンドポイントを含む多くのインテグレーション分野、業界、ドメインでリーダーとして活躍しています。
 
-### レート
+### ログ収集
 
 このインテグレーションは、お客様に代わって Boomi プラットフォームへの API 呼び出しを行い、実行レコードを取得し、Datadog にログとして送信します。
 
-### ヘルプ
+### イベント
 
 このインテグレーションは、Boomi API から AuditLog レコードを取得し、Datadog にイベントとして送信します。イベントは、Boomi Workload Monitoring Dashboard または[イベントエクスプローラー][1]でフィルターされた形で見ることができます。フィルタリングされていない AuditLog レコードを検査するために、独自のモニターを構築することができます。
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションは、メトリクスを送信します。メトリクスの一覧は、**Data Collected** タブで確認することができます。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AtomWatch にお問い合わせください。
 
@@ -162,7 +167,7 @@ Kitepipe の AtomWatch のサポート時間は、米国とカナダのタイム
 お役に立つドキュメント、リンクや記事:
 
 - [AtomWatch ドキュメント][9]
-- [Datadog Marketplace の Kitepipe の製品を使って Boomi インテグレーションを監視する][12]
+- [Monitor your Boomi integrations with Kitepipe's offering in the Datadog Marketplace][12]
 
 [1]: https://app.datadoghq.com/event/explorer
 [2]: https://help.boomi.com/bundle/atomsphere_platform/page/int-Adding_API_tokens.html

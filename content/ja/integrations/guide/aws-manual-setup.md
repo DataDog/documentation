@@ -37,7 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: ブログ
   text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
-kind: ガイド
 title: AWS マニュアルセットアップガイド
 ---
 
@@ -49,6 +48,12 @@ title: AWS マニュアルセットアップガイド
 {{% tab "Role delegation" %}}
 
 AWS インテグレーションを手動で設定するには、AWS アカウントで IAM ポリシーと IAM ロールを作成し、Datadog アカウントで生成された AWS External ID でそのロールを構成します。これにより、Datadog の AWS アカウントは、自動的に AWS API をクエリし、Datadog アカウントにデータをプルすることができます。以下のセクションでは、これらの各コンポーネントを作成し、Datadog アカウントでセットアップを完了するための手順を詳しく説明します。
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+<em>ロール委任を使用した S3 ログアーカイブの設定は現在限定的に利用可能です。Datadog for Government アカウントでこの機能をリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください</em>。
+</div>
+{{< /site-region >}}
 
 ## セットアップ
 
@@ -136,6 +141,8 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 {{< /tabs >}}
 
 {{% aws-permissions %}}
+
+{{% aws-resource-collection %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

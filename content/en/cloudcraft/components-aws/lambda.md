@@ -1,6 +1,5 @@
 ---
 title: "Lambda Component"
-kind: documentation
 ---
 ## Overview
 

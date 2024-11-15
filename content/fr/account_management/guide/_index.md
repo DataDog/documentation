@@ -1,5 +1,4 @@
 ---
-kind: guide
 private: true
 title: Guides sur la gestion de compte
 cascade:

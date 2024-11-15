@@ -6,7 +6,6 @@ further_reading:
 - link: /security/threats/agent_expressions
   tag: 설명서
   text: 에이전트 정규식 구문
-kind: 지침
 title: 커스텀 CSM 위협 규칙 작성 지침
 ---
 

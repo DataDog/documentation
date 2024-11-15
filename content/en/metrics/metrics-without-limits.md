@@ -1,6 +1,5 @@
 ---
 title: Metrics without Limits™
-kind: documentation
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
@@ -88,8 +87,6 @@ Learn more about [Custom Metrics Billing][8].
 2. Configure your unqueried metrics with empty tag configurations.
 
    As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
-
-   Ask your Customer Success Manager for an unqueried metrics report.
 
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 

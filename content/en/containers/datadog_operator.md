@@ -1,6 +1,5 @@
 ---
 title: Datadog Operator
-kind: documentation
 aliases:
   - /agent/kubernetes/operator_configuration
   - /containers/kubernetes/operator_configuration
@@ -14,6 +13,9 @@ further_reading:
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
     tag: "Source Code"
     text: 'Datadog Operator: Configuration'
+  - link: https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/
+    tag: "Architecture Center"
+    text: "Instrument your app using the Datadog Operator and Admission Controller"
 ---
 
 [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. 

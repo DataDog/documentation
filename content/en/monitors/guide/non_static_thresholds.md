@@ -1,6 +1,5 @@
 ---
 title: How to monitor non-static thresholds
-kind: Guide
 further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"

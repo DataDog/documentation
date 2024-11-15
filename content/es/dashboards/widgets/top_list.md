@@ -11,9 +11,8 @@ further_reading:
 - link: /dashboards/guide/context-links/#overview/
   tag: Documentación
   text: Enlaces contextuales
-kind: documentación
 title: Widget de lista principal
-widget_type: lista principal
+widget_type: toplist
 ---
 
 La visualización de lista principal te permite mostrar una lista de los valores de etiqueta con más o menos cualquier valor de métrica o evento, como los mayores consumidores de CPU, hosts con menos espacio en disco o los productos en la nube con los costes más elevados.
@@ -24,7 +23,7 @@ La visualización de lista principal te permite mostrar una lista de los valores
 
 ### Configuración
 
-1. Elige los datos para graficar:
+1. Elige los datos para los que crear gráficas:
     * Métrica: consulta la documentación [querying (consulta)][1] para configurar una consulta métrica.
     * Fuentes de datos de no métrica: consulta la [Trace search documentation (documentación de búsqueda de rastreo)][2] o [Log search documentation (documentación de búsqueda de log)][3] para configurar una consulta de evento.
 
@@ -43,7 +42,7 @@ Configurar las funciones del Modo de visualización opcional para añadir contex
 
 #### Enlaces contextuales
 
-Los [Context links (enlaces contextuales)][4] están activados por defecto y pueden activarse o desactivarse. Los enlaces contextuales sirven de puente entre widgets de dashboard con otras páginas de Datadog, o con aplicaciones de terceros.
+Los [enlaces contextuales][4] están activados por defecto y pueden activarse o desactivarse. Los enlaces contextuales sirven de puente entre widgets de dashboard con otras páginas de Datadog, o con aplicaciones de terceros.
 
 #### Hora mundial
 
@@ -51,7 +50,7 @@ En los screenboards y notebooks, elige si tu widget tiene un marco temporal pers
 
 ## API
 
-Este widget puede utilizarse con la **[Dashboards API (API de dashboards)][5]**. Ve la siguiente tabla para la [widget JSON schema definition (definición del esquema JSON widget][6]:
+Este widget se puede utilizar con la **[API de dashboards][5]**. Consulta la siguiente tabla para obtener la [definición del esquema JSON del widget)][6]:
 
 {{< dashboards-widgets-api >}}
 

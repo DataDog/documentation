@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self-hosted SQL Server
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted SQL Server
 further_reading:
 - link: "/integrations/sqlserver/"
@@ -47,10 +46,11 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- If not using either of Log Shipping Monitoring (available in Agent v7.50+) or
+-- SQL Server Agent Monitoring (available in Agent v7.57+), comment out the next three lines:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -60,10 +60,11 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- If not using either of Log Shipping Monitoring (available in Agent v7.50+) or
+-- SQL Server Agent Monitoring (available in Agent v7.57+), comment out the next three lines:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 Create the `datadog` user in each additional application database:
@@ -73,6 +74,9 @@ CREATE USER datadog FOR LOGIN datadog;
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ## Install the Agent
 

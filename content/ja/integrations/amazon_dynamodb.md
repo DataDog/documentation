@@ -6,6 +6,7 @@ categories:
 - data stores
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: Amazon DynamoDB
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_dynamodb
 public_title: Datadog-Amazon DynamoDB インテグレーション

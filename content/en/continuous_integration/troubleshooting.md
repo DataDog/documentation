@@ -1,6 +1,5 @@
 ---
 title: CI Visibility Troubleshooting
-kind: documentation
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
@@ -8,9 +7,9 @@ further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
     text: "Learn how to monitor your CI pipelines"
-  - link: "/continuous_integration/intelligent_test_runner"
+  - link: "/tests/test_impact_analysis"
     tag: "Documentation"
-    text: "Learn about the Intelligent Test Runner"
+    text: "Learn about Test Impact Analyzer"
 ---
 
 {{< site-region region="gov" >}}
@@ -39,11 +38,15 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 
 Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
+## Missing variables in Gitlab pipelines
+
+[User-defined variables in Gitlab][16] should be reported in the field `@ci.parameters` in CI Visibility. However, this information is only present in some cases like downstream pipelines, and may be missing for the rest of the cases since Gitlab [does not always report this information][17] to Datadog.
+
 ### Limitations on running pipelines
 
 #### Delivery of webhook events is not guaranteed by CI providers
 
-Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished.
 
 #### Maximum duration for a pipeline execution
 
@@ -62,9 +65,11 @@ A pipeline execution can maintain `Running` status for a maximum of three days. 
 [7]: /continuous_integration/tests/containers/
 [8]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [9]: https://app.datadoghq.com/ci/settings/repository
-[10]: /continuous_integration/intelligent_test_runner/
+[10]: /tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [13]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
 [14]: /continuous_integration/tests/#supported-features
 [15]: /continuous_integration/pipelines/#supported-features
+[16]: https://docs.gitlab.com/ee/ci/variables/#define-a-cicd-variable-in-the-gitlab-ciyml-file
+[17]: https://gitlab.com/gitlab-org/gitlab/-/issues/29539

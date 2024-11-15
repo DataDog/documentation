@@ -1,6 +1,5 @@
 ---
 title: Datadog Extension for Visual Studio
-kind: documentation
 is_beta: true
 aliases:
 - '/developers/ide_integrations/visual_studio/'
@@ -30,7 +29,7 @@ The Datadog extension for Visual Studio helps you find and fix bugs, security is
 
 ### Code insights
 
-Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], [Flaky Tests][10], and [Watchdog][7] profiling insights without leaving Visual Studio.
+Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], and [Flaky Tests][10] without leaving Visual Studio.
 
 {{< img src="/developers/ide_plugins/visual_studio/code-insights.png" alt="The Code Insights view" >}}
 
@@ -88,6 +87,11 @@ When you start editing a source file supported by Static Analysis, the extension
 
 Report a bug, request a new feature, or ask for help on the [Discussion Forum][15] and [Issue Tracker][16] on GitHub. You can also email `team-ide-integration@datadoghq.com`.
 
+## Data and Telemetry
+Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][21] and [Datadog's EULA][22].
+
+If you don't wish to send this data to Datadog, you can opt out at any time in the settings: `Options > Datadog > General > Data Sharing` and disable the `Send usage statistics` option.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,7 +102,6 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [5]: /tracing/error_tracking/
 [6]: /security/application_security/vulnerability_management/
-[7]: /watchdog/insights
 [8]: /profiler/
 [10]: /continuous_integration/guides/flaky_test_management/
 [12]: /integrations/guide/source-code-integration/
@@ -110,3 +113,5 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [18]: /logs/explorer/
 [19]: /code_analysis/static_analysis/
 [20]: /code_analysis/static_analysis_rules/
+[21]: https://www.datadoghq.com/legal/privacy/
+[22]: https://www.datadoghq.com/legal/eula/

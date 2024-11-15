@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10040
     source_type_name: OpenLDAP
-  logs:
-    source: openldap
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +26,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
 display_on_public_website: true
@@ -35,9 +34,8 @@ draft: false
 git_integration_title: openldap
 integration_id: openldap
 integration_title: OpenLDAP
-integration_version: 1.12.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: openldap
 public_title: OpenLDAP
@@ -54,6 +52,7 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
   media: []
@@ -69,16 +68,16 @@ tile:
 
 OpenLDAP インテグレーションを使用すると、OpenLDAP サーバーの `cn=Monitor` バックエンドからメトリクスを取得できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 OpenLDAP インテグレーションは Agent とパッケージ化されています。OpenLDAP メトリクスの収集を開始するには、以下を実行します。
 
 1. OpenLDAP サーバーで `cn=Monitor` バックエンドを構成します。
 2. OpenLDAP サーバーに [Agent をインストール][1]します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### OpenLDAP の準備
 
@@ -134,7 +133,7 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -165,7 +164,7 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 
 2. [Agent を再起動します][2]。
 
-###### 収集データ
+###### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -206,7 +205,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                   |
 | `<INSTANCE_CONFIG>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
 
-###### 収集データ
+###### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -229,21 +228,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 このチェックは、すべての主要プラットフォームと互換性があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "openldap" >}}
 
 
-### ヘルプ
+### イベント
 
 openldap チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "openldap" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

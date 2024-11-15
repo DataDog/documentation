@@ -14,7 +14,7 @@ integration_id: amazon-shield
 integration_title: "Amazon\_Shield"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_shield
 public_title: "Intégration Datadog/Amazon\_Shield"

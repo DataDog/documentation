@@ -19,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - メトリクス
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_on_public_website: true
@@ -26,9 +27,8 @@ draft: false
 git_integration_title: openmetrics
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 4.2.0
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: openmetrics
 public_title: OpenMetrics
@@ -44,10 +44,16 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/agent/openmetrics/
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/developers/openmetrics/
   support: README.md#Support
   title: OpenMetrics
 ---
@@ -63,17 +69,17 @@ tile:
 
 このインテグレーションは、[Prometheus エクスポジション形式][1]と [OpenMetrics 仕様標準][2]の両方に対応しています。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][3]のガイドを参照してこの手順を行ってください。
 
 このインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][4]を参照してください。
 
-### インフラストラクチャーリスト
+### インストール
 
 OpenMetrics チェックは、[Datadog Agent v6.6.0 以降][5]にパッケージ化されています。
 
-### ブラウザトラブルシューティング
+### 構成
 
 [Agent の構成ディレクトリ][6]の root にある `conf.d/openmetrics.d/conf.yaml` ファイルを編集します。利用可能なすべての構成オプションについては、[サンプル openmetrics.d/conf.yaml][7] を参照してください。これは、Datadog Agent バージョン 7.32.0 の時点での最新の OpenMetrics チェックの例です。以前にこのインテグレーションを実装していた場合は、[レガシー例][8]を参照してください。
 
@@ -95,21 +101,21 @@ Datadog Agent v7.32.0 以降では、[OpenMetrics 仕様標準][2]に従って�
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `openmetrics` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 OpenMetrics チェックによって収集されたメトリクスはすべて、カスタムメトリクスとして Datadog に転送されます。
 
-### ヘルプ
+### イベント
 
 OpenMetrics チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 OpenMetrics チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ### 高いカスタムメトリクスの課金
 

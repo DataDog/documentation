@@ -1,6 +1,5 @@
 ---
 title: RUM Roku Data Collected
-kind: documentation
 code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
@@ -82,7 +81,7 @@ The below attributes are related to the geo-location of IP addresses.
 
 **Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][9].
 
-| Fullname                  | Type   | Description                                                                                                                               |
+| Attribute name            | Type   | Description                                                                                                                               |
 | :------------------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | `geo.country`             | string | Name of the country.                                                                                                                      |
 | `geo.country_iso_code`    | string | ISO Code of the country (for example, `US` for the United States or `FR` for France).                                                     |

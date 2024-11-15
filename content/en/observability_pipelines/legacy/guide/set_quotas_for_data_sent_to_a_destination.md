@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Set Quotas for Data Sent to a Destination
-kind: documentation
 disable_toc: false
 private: true
 is_beta: true
@@ -209,6 +208,6 @@ sinks:
 [8]: /monitors/notify/variables/
 [9]: /monitors/notify/#renotify
 [10]: /monitors/notify/#metadata
-[11]: /monitors/notify/#permissions
+[11]: /monitors/configuration/#permissions
 [12]: /logs/log_configuration/archives/
 [13]: /observability_pipelines/legacy/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/

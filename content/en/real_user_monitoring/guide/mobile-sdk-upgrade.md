@@ -1,6 +1,6 @@
 ---
 title: Upgrade RUM Mobile SDKs
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -112,7 +112,7 @@ Libraries are modularized in v2. Adopt the following libraries:
 These come in addition to the existing `DatadogCrashReporting` and `DatadogObjc`.
 
 <details>
-  <summary>SPM</summary>
+  <summary>SPM (Recommended)</summary>
 
   ```swift
 let package = Package(
@@ -778,7 +778,7 @@ The following structures have been renamed:
 | `1.x` | `2.x` |
 |-------|-------|
 | `DdSdkConfiguration` | `DatadogConfiguration` |
-| `LoggingConfiguartion` | `DatadogLoggingConfiguration` |
+| `LoggingConfiguration` | `DatadogLoggingConfiguration` |
 | `RumConfiguration` | `DatadogRumConfiguration` |
 | `DdSdkExistingConfiguration` | `DatadogAttachConfiguration` |
 

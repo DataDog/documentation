@@ -15,17 +15,17 @@ further_reading:
 - link: /logs/guide/
   tag: ガイド
   text: Datadog を使用したロギングに関する追加ガイド
-kind: ドキュメント
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Architecture Center
+  text: Datadog を使用したログ管理のインデックス戦略ガイド
 title: ログコンフィギュレーション
 ---
 
 ## 概要
 
-Datadog Logging without Limits* は、ログの取り込みとインデックス作成を切り離します。[**Logs > Configuration**][1] のログ構成ページから、インデックスを作成して保持するログ、またはアーカイブするログを選択し、トップレベルで設定とコントロールを管理します。
+Datadog Logging without Limits* は、ログの取り込みとインデックス作成を切り離します。[**Logs > Pipelines**][1] のログ構成ページから、インデックスを作成して保持するログ、またはアーカイブするログを選択し、トップレベルで設定と制御を管理します。
 
 **注**: PCI 準拠の Datadog 組織をセットアップするための情報は、[PCI DSS 準拠][2]をご覧ください。
-
-{{< img src="logs/log_configuration_overview1.mp4" alt="Datadog アプリのログ構成セクション" video=true >}}
 
 ## コンフィギュレーションオプション
 
@@ -37,7 +37,7 @@ Datadog Logging without Limits* は、ログの取り込みとインデックス
 - [アーカイブをリハイドレート][9]して、古いログイベントまたはインデックス作成から除外されたログイベントを分析または調査します。
 - [ログデータアクセス][10]を制限クエリで制限します。
 
-## Misconfigurations Explorer
+## ログエクスプローラー
 
 コンフィギュレーションが完了したら、[ログエクスプローラー][11]でログの調査とトラブルシューティングを開始します。
 
