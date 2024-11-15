@@ -6,7 +6,6 @@ import type {
 } from 'markdoc-static-compiler';
 import { HugoConfig } from '../../schemas/config/hugo';
 const { escapeHtml } = MarkdownIt().utils;
-import { reresolve } from './reresolver';
 import { isTag, isClientVariable, isClientFunction } from './utils';
 import { CustomHtmlComponent } from './CustomHtmlComponent';
 
@@ -75,19 +74,11 @@ function render(p: {
 
   // If this node represents a variable, render the variable's value
   if (isClientVariable(p.node)) {
-    if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
-      // TODO: Fix reresolve return type so recasting isn't necessary
-      p.node = reresolve(p.node, p.markdocConfig) as ClientVariable;
-    }
     return escapeHtml(String(p.node.value));
   }
 
-  // If this node represents a function, resolve the function's
-  // value for use by other nodes, but don't render anything now
+  // If this node represents a function, don't render anything
   if (isClientFunction(p.node)) {
-    if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
-      p.node = reresolve(p.node, p.markdocConfig);
-    }
     return '';
   }
 
@@ -134,9 +125,6 @@ function render(p: {
     let ref = '';
     if ('ref' in p.node.if) {
       ref = `data-if=${p.node.if.ref}`;
-    }
-    if (p.markdocConfig && p.markdocConfig.variables !== undefined) {
-      p.node = reresolve(p.node, p.markdocConfig); // TODO: Fix with generic type
     }
     let wrapperTagClasses = 'mdoc__toggleable';
     if (attributes?.display === 'false') {

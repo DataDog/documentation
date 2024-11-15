@@ -13,13 +13,13 @@ aliases:
     contrived and odd, that's only because test pages are often both of those
     things.
   </p>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="52">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="22">
     <h2 id="blue-header-id-override">Blue</h2>
     <p>
       Blue is a calming and serene color that is often associated with
       tranquility, stability, and trust.
     </p>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="48">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="18">
       <h3 id="ocean">Ocean</h3>
       <p>
         The ocean is a vast and expansive body of saltwater that covers
@@ -35,7 +35,7 @@ aliases:
         reflection.
       </p>
     </div>
-    <div class="mdoc__toggleable" data-if="49">
+    <div class="mdoc__toggleable" data-if="19">
       <h3 id="sky">Sky</h3>
       <p>
         The sky is the expanse of atmosphere that we see when we look up from
@@ -51,7 +51,7 @@ aliases:
         ever-changing nature inspire a sense of wonder and curiosity.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="50">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="20">
       <h3 id="jeans">Jeans</h3>
       <p>
         Jeans are a type of durable clothing typically made from denim fabric.
@@ -66,7 +66,7 @@ aliases:
         appeal of jeans have made them a beloved garment for people of all ages.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="51">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="21">
       <h3 id="blueberry">Blueberry</h3>
       <p>
         Blueberries are small, round fruits that are known for their sweet and
@@ -82,51 +82,51 @@ aliases:
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="53">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="23">
     <h2 id="yellow">Yellow</h2>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="55">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="25">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="56">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="26">
       <p>
         Sunflowers are a type of flower. They're known for their large, yellow
         petals.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="57">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="27">
       <p>
         Lemons are a type of citrus fruit. They're often used in drinks and
         cooking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="58">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="28">
       <p>
         School buses are a type of vehicle. They're often used to transport
         students to and from school.
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="54">
+  <div class="mdoc__toggleable mdoc__hidden" data-if="24">
     <h2 id="red">Red</h2>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="59">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="29">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="60">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="30">
       <p>
         Apples are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="61">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="31">
       <p>
         Firetrucks are a type of vehicle. They're often used to transport
         firefighters and equipment to emergency situations.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="62">
+    <div class="mdoc__toggleable mdoc__hidden" data-if="32">
       <p>
         Stop signs are a type of traffic sign. They're used to indicate that
         drivers should stop their vehicles.
@@ -135,4 +135,4 @@ aliases:
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    pageFiltersConfig: [{"n":"Color","i":"color","o":"primary_color_options"},{"n":"Item","i":"item","o":"<COLOR>_item_options"}],    filterOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}],"red_item_options":[{"n":"Ruby","i":"ruby"},{"n":"Apple","d":true,"i":"apple"},{"n":"Firetruck","i":"firetruck"},{"n":"Stop sign","i":"stop_sign"}],"yellow_item_options":[{"n":"Banana","d":true,"i":"banana"},{"n":"Sunflower","i":"sunflower"},{"n":"Lemon","i":"lemon"},{"n":"School bus","i":"school_bus"}],"blue_item_options":[{"n":"Ocean","i":"ocean"},{"n":"Sky","d":true,"i":"sky"},{"n":"Jeans","i":"jeans"},{"n":"Blueberry","i":"blueberry"}]},    selectedValsByFilterId: {"color":"blue","item":"sky"},    ifFunctionsByRef: {"48":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ocean"},"v":false,"r":"48"},"49":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sky"},"v":true,"r":"49"},"50":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"jeans"},"v":false,"r":"50"},"51":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"blueberry"},"v":false,"r":"51"},"52":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"bleu"},"v":false,"r":"52"},"53":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"53"},"54":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"54"},"55":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"banana"},"v":false,"r":"55"},"56":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sunflower"},"v":false,"r":"56"},"57":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"lemon"},"v":false,"r":"57"},"58":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"school_bus"},"v":false,"r":"58"},"59":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ruby"},"v":false,"r":"59"},"60":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"apple"},"v":false,"r":"60"},"61":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"firetruck"},"v":false,"r":"61"},"62":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"stop_sign"},"v":false,"r":"62"}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    pageFiltersConfig: [{"n":"Color","i":"color","o":"primary_color_options"},{"n":"Item","i":"item","o":"<COLOR>_item_options"}],    filterOptionsConfig: {"primary_color_options":[{"n":"Red","i":"red"},{"n":"Yellow","i":"yellow"},{"n":"Blue","d":true,"i":"blue"}],"red_item_options":[{"n":"Ruby","i":"ruby"},{"n":"Apple","d":true,"i":"apple"},{"n":"Firetruck","i":"firetruck"},{"n":"Stop sign","i":"stop_sign"}],"yellow_item_options":[{"n":"Banana","d":true,"i":"banana"},{"n":"Sunflower","i":"sunflower"},{"n":"Lemon","i":"lemon"},{"n":"School bus","i":"school_bus"}],"blue_item_options":[{"n":"Ocean","i":"ocean"},{"n":"Sky","d":true,"i":"sky"},{"n":"Jeans","i":"jeans"},{"n":"Blueberry","i":"blueberry"}]},    selectedValsByFilterId: {"color":"blue","item":"sky"},    ifFunctionsByRef: {"18":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ocean"},"v":false,"r":"18"},"19":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sky"},"v":true,"r":"19"},"20":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"jeans"},"v":false,"r":"20"},"21":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"blueberry"},"v":false,"r":"21"},"22":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"bleu"},"v":false,"r":"22"},"23":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"23"},"24":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"24"},"25":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"banana"},"v":false,"r":"25"},"26":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sunflower"},"v":false,"r":"26"},"27":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"lemon"},"v":false,"r":"27"},"28":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"school_bus"},"v":false,"r":"28"},"29":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ruby"},"v":false,"r":"29"},"30":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"apple"},"v":false,"r":"30"},"31":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"firetruck"},"v":false,"r":"31"},"32":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"stop_sign"},"v":false,"r":"32"}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
