@@ -33,7 +33,7 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. [Check native widgets][4]. See if a Datadog widget can fulfill your requirements.
 1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click **Add Widgets**.
 1. Click and drag the Wildcard Widget icon from the widget tray. 
-1. Select from the **Request Type** dropdown. For more information on Scalar and Timeseries types, see the [Formulas Scalar vs. Formulas Timeseries] section of this page.
+1. Select from the **Request Type** dropdown. For more information on Scalar and Timeseries types, see the [Formulas Scalar vs. Formulas Timeseries](#formulas-scalar-vs-formulas-timeseries) section of this page.
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification. 
 1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**.
 1. Paste the copied Vega-Lite definition.
@@ -49,7 +49,7 @@ In Datadog dashboards, scalar and timeseries visualizations serve different purp
 **Timeseries**
 : This visualization is designed to display how your data changes over time.
    - **Use-cases**: It's ideal for monitoring metrics that fluctuate, such as CPU usage, memory consumption, or request rates. It helps identify trends, patterns, and anomalies over a specified time range. 
-   - **Appearance**: These visualizations are typically line or area charts. They show data points plotted against time (usually on the x-axis), making it easy to observe changes and trends.
+   - **Appearance**: These visualizations are typically line or area charts. They show datapoints plotted against time (usually on the x-axis), to observe changes and trends.
 
 **Scalar**
 : This visualization presents a single, aggregate value derived from your data.
