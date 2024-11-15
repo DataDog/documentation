@@ -27,7 +27,7 @@ title: Guías de Real User Monitoring y Session Replay
 {{< whatsnext desc="Browser RUM:" >}}
     {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Enviar acciones de usuario personalizadas{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identificar bots en el RUM Explorer{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Cargar mapas fuente de JavaScript {< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Cargar mapas fuente de JavaScript {{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}Controlar el volumen de la sesión utilizando la configuración de muestreo para RUM del navegador y RUM y Session Replay del navegador{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Mejorar y controlar los datos de RUM de navegador{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Actualizar el SDK de RUM del navegador{{< /nextlink >}}
