@@ -3,6 +3,7 @@ title: Pathways
 aliases:
 - /real_user_monitoring/product_analytics/sankey
 - /product_analytics/sankey
+- /product_analytics/journeys/sankey
 further_reading:
 - link: '/product_analytics/journeys'
   tag: Documentation
@@ -32,7 +33,7 @@ Actions are not supported in the Pathways diagram.
 
 ### View the default diagram
 
-1. Navigate to [**Digital Experience > Product Analytics > User Journeys**][1].
+1. Navigate to [**Product Analytics > User Journeys**][1].
 2. Click **Pathways** if it's not already selected. This displays the default visualization, which represents the most popular user journeys in your application.
 
 ### Start or end the diagram at a given view

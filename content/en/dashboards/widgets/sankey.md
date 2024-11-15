@@ -7,6 +7,10 @@ further_reading:
   text: "Build Pathway Diagrams in Product Analytics"
 ---
 
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+This feature is in Preview and only available to Product Analytics users. To request access to Product Analytics, complete the form.
+{{< /callout >}}
+
 {{< img src="dashboards/widgets/sankey/sankey_widget.png" alt="Sankey widget configuration showing an example graph" style="width:100%;" >}}
 
 The Sankey widget shows user flow, movement, or change from one application state to another. This widget is available for Product Analytics.
