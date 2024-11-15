@@ -47,7 +47,7 @@ To create a datastore:
 After you populate your datastore with data, you can:
 
 * Search the datastore by using the **Search** box in the header.
-* Click the name of a column to sor the datastore by that column's data.
+* Click the name of a column to sort the datastore by that column's data.
 
 
 ## Edit a datastore
