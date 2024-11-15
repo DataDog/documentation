@@ -48,7 +48,9 @@ There are two ways to instrument your Go application:
 
 Refer to the instructions in the section corresponding to your preference below:
 
-{{% collapse-content title="Manual instrumentation" level="p" %}}
+{{< tabs >}}
+{{% tab "Manual instrumentation" %}}
+
 ### Activate Go integrations to create spans
 
 Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
@@ -58,9 +60,12 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
-{{% /collapse-content %}}
 
-{{% collapse-content title="Compile-time instrumentation (Preview)" level="p" %}}
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+
+{{% /tab %}}
+
+{{% tab "Compile-time instrumentation" %}}
 
 ### Overview
 
@@ -154,7 +159,7 @@ You can use the [tracing library][4] in your Orchestrion-built application. This
 #### Use the continuous profiler
 
 Your Orchestrion-built application includes [continuous profiler][12] instrumentation.
-To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true` at run time.
+To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true` at runtime.
 
 ### Supported frameworks
 
@@ -178,17 +183,9 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 | `k8s.io/client-go`                  | `v0.7.4`                      |
 | `github.com/hashicorp/vault`        | `v0.7.4`                      |
 
-{{% /collapse-content %}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
@@ -196,3 +193,13 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 [10]: https://pkg.go.dev/cmd/go#hdr-Modules__module_versions__and_more
 [11]: https://github.com/DataDog/orchestrion/releases
 [12]: /profiler
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/compatibility_requirements/go
+[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
