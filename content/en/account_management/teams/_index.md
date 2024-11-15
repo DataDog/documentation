@@ -93,15 +93,15 @@ Add a notification channel to your Team to route alerts to communication channel
 
 The team filter tailors your experience across Datadog by showing you content associated with your teams. The **My Teams** list includes teams you are a member of and teams you selected as a favorite.
 
-When you enable the team filter, you see only the resources associated with your teams or with the services owned by your teams. The team filter state is global and persistent. When you enable the team filter, Datadog maintains that team context as you navigate across different products.
+When you enable the team filter, you see only the resources associated with your teams or with the services owned by your teams. The team filter state is global and persistent, so Datadog applies your team context as you navigate across different products.
 
-The team filter works by adding team-based search terms to the search query. When you enable the team filter, you can see the team-based search terms it adds by examining the search bar.
+The team filter works by adding team-based search terms to the search query. When you enable the team filter, you can see the team-based search terms it adds in the search bar.
 
 ### Favorite teams
 
 You may be interested in a particular team's resources without being a member of that team. Adding a team to your favorite teams allows you to get filtered views on that team's resources without joining the team.
 
-Your favorite teams appear alongside teams you belong to at the top of the team directory page and in the teams filter.
+Your favorite teams appear alongside teams you belong to at the top of the team directory page and in the team filter.
 
 #### Add or remove favorite teams
 
@@ -111,7 +111,7 @@ From the [team directory page][1]:
 1. Click the team you wish to add as a favorite. The [team detail page][3] appears.
 1. Click **Add Favorite** or **Remove Favorite** in the upper right.
 
-Alternately, also from the team directory page:
+Alternatively, also from the team directory page:
 1. Hover over the team you wish to add or remove. Inline icons appear to the right of the team name.
 1. Click the star (**Add to Favorites** or **Remove from Favorites**) icon.
 
