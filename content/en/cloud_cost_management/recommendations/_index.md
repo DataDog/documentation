@@ -82,15 +82,14 @@ For each cloud account that you would like to receive recommendations for:
 | Previous generation resource | AWS | EC2 | Legacy EC2 Instance | EC2 Instances that are previous generation, and can be upgraded to a newer instance type. | [Datadog agent][5] |
 | Previous generation resource | AWS | GP2 EBS | GP2 EBS Volumes | EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement. | |
 | Previous generation resource | AWS | I01 EBS | I01 EBS Volumes | EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement. |
-| Previous generation resource | AWS | Extended Support for RDS | An RDS running an engine version that is no longer supported and incurring [extended support charges][7] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | 
-| Over-provisioned resource | AWS | EC2 instances not in an auto-scaling group, with less than 50% CPU and memory utilization. | [Datadog agent][5] |
+| Previous generation resource | AWS | RDS | Extended Support RDS Instance | An RDS running an engine version that is no longer supported and incurring [extended support charges][7] |
+| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | Migrate legacy autoscaling group instances to new types. | [Datadog agent][5] |
 | Over-provisioned resource | AWS | Kubernetes containers | Over-provisioned Kubernetes Containers | Containers with less than 30% CPU and memory utilization. | [Datadog profiling agent][8] |
-| Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Also requires Amazon EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | RDS IOPS | Over-provisioned RDS IOPS | An RDS instance using less than 80% of the provisioned IOPS for reads and writes. | 
-| Over-provisioned resource | AWS | EBS IOPS | Over-provisioned EBS IOPS | An EBS volume using less than 80% of the provisioned IOPS for reads and writes. | *[Also requires Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | EBS Storage | Over-provisioned EBS Storage | An EBS volume with less than 20% of its storage capacity used. | *[Also requires Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | EBS Throughput | Over-provisioned EBS Throughput | An EBS volume using less than 80% of the provisioned throughput for reads and writes. | *[Also requires Amazon EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS IOPS | Over-provisioned EBS IOPS | An EBS volume using less than 80% of the provisioned IOPS for reads and writes. | *[Amazon EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS Storage | Over-provisioned EBS Storage | An EBS volume with less than 20% of its storage capacity used. | *[Amazon EC2 integration][9] |
+| Over-provisioned resource | AWS | EBS Throughput | Over-provisioned EBS Throughput | An EBS volume using less than 80% of the provisioned throughput for reads and writes. | *[Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | DynamoDB | Over-provisioned DynamoDB Capacity | A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time. | |
 | Rate optimization | AWS | RDS Reserved Instances | Purchase RDS RI | An RDS instance older than 45 days is still charged with on-demand rates. | |
 | Rate optimization | AWS | ElastiCache Reserved Instances | Purchase ElastiCache RI | An ElastiCache node older than 45 days is still charged with on-demand rates. | | 
@@ -102,8 +101,8 @@ For each cloud account that you would like to receive recommendations for:
 | Rate optimization | AWS | DynamoDB | Migrate DynamoDB to Provisioned Capacity Mod | An on-demand DynamoDB table has an hourly read and write capacity consumption that is always greater than 18%. | |
 | Rate optimization | AWS | DynamoDB | Migrate DynamoDB to Standard Table Class | Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage. | |
 | Rate optimization | AWS | DynamoDB | Migrate DynamoDB to Infrequent Access Table Class | Migrating to the Infrequent Access (IA) table class offers more potential savings from storage rates compared to the additional costs from capacity rates. | |
-| Architecture | NAT Gateway | NAT Gateway within VPC transfer charges | Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges. | [NPM][10] |
-| Architecture | NAT Gateway | NAT Gateway cross-zone transfer charges | Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges. | |
+| Architecture | AWS | NAT Gateway | NAT Gateway within VPC transfer charges | Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges. | [NPM][10] |
+| Architecture | AWS | NAT Gateway | NAT Gateway cross-zone transfer charges | Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges. | |
 
 ## Further reading
 
