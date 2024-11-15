@@ -47,14 +47,14 @@ Group status
 Muted state
 : Only groups that are muted, or not, will be shown.
 
-Group tags
+Group names
 : Only groups that have the selected tag will be shown.
 
 ## Evaluated data graph
 
-The evaluated data visualization is specific to the monitor and shows individual values compared to the threshold, aggregated from the query's data points. For example, if the monitor evaluates the average over the last 5 minutes, each data point represents the metric's average value for that period.
+The evaluated data visualization is specific to the monitor and shows the results of individual evaluations. For example, if the monitor evaluates the average over the last 5 minutes, each data point represents the aggregated 5 minute average at each evaluation time.
 
-The visualization matches your monitor's configuration to show the monitor's historical and current status using evaluations settings. The graphs show the status by group. 
+The visualization matches your monitor's configuration to show the monitor's historical and current status using evaluations settings. The graphs show the status by group.
 
 {{< img src="/monitors/status/graphs/status_page_demo.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
 
@@ -70,7 +70,7 @@ When investigating past status changes, the color dot next to the group title in
 
 {{< img src="/monitors/status/source_data_graph_1.png" alt="Status page displaying the source data graph" style="width:100%;" >}}
 
-The source graph shows the raw data points submitted to Datadog, used to generate the monitor evaluations. Use this graph to view unaltered data over time and confirm if data fluctuations or anomalies trigger alerts.
+The source graph shows a view of a monitors's underlying data query as you would see in a dashboard or notebook. Use this graph to view unaltered data over time and confirm if data fluctuations or anomalies trigger alerts.
 
 Use this graph to identify any discrepancies between raw data and expected metrics, which may indicate data collection or submission issues affecting the monitor's status.
 
@@ -95,11 +95,11 @@ The Transitions graph displays your monitor's state transitions over time, broke
 
 ### Non reporting
 
-{{< img src="/monitors/status/graphs/non_reporting_transitions_1.png" alt="Transisions graph showing non reporting data" style="width:100%;" >}}
+{{< img src="/monitors/status/graphs/non_reporting_transitions_1.png" alt="Transitions graph showing non reporting data" style="width:100%;" >}}
 
-Datadog keeps monitor groups in the UI for 24 hours unless configured differently. For more information, see [Group Retention time][1]. A dotted line in the graph can indicate: 
+Datadog keeps monitor groups in the UI for 24 hours unless configured differently. For more information, see [Group Retention time][1]. A dotted line in the graph can indicate:
 
-* A new group evaluated after monitor creation, shown as a dotted line from the start of the time period to when first evaluated.  
+* A new group evaluated after monitor creation, shown as a dotted line from the start of the time period to when first evaluated.
 * A group that has stopped reporting, then started again, with a dotted line appearing from when it dropped out to when reporting resumes.
 
 **Note**: The non-reporting status is different from a "no data" status. Host monitors and service checks set to notify on missing data are available for 48 hours.
