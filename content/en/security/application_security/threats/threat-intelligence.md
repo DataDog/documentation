@@ -46,7 +46,7 @@ ASM supports enriching and searching traces with threat intelligence indicators 
 
 ### Storing indicators of compromise in reference tables
 
-Threat intelligence is supported in the CSV format and requires the following columns.
+Threat intelligence is supported in the CSV format and requires the following columns:
 
 **CSV Structure**
 
