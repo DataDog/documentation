@@ -19,7 +19,7 @@ further_reading:
 
 A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. Real User Monitoring (RUM) has three different types of heatmaps:
 
-- **Click maps:** View user interactions (clicks) to understand how users engage with your page
+- **Click maps:** View user interactions (clicks) to understand how users engage with your page.
 - **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
 - **Scroll maps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
 
@@ -31,7 +31,7 @@ To get started with heatmaps:
 
 1. Verify your SDK version:
   - For Click maps, you must be on the latest version of the SDK (v4.40.0 or later).
-  - For Scroll maps, you must be on (v4.50.0 or later)
+  - For Scroll maps, you must be on (v4.50.0 or later).
 2. Enable [Session Replay][1].
 3. Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (required for Clickmaps).
 
@@ -68,7 +68,7 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 ## Top Elements
 
-Top Elements heatmaps aggregate click actions on a given view by displaying the most interacted-with elements and their rank. The ranking on the map itself corresponds to the action name on the side.
+Top Elements aggregate click actions on a given view by displaying the most interacted-with elements and their rank. The ranking on the map itself corresponds to the action name on the side.
 
 {{< img src="real_user_monitoring/heatmaps/top-elements-v3.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
 
@@ -76,7 +76,7 @@ Click any action name in the panel to highlight the corresponding action on the 
 
 ## Scroll maps
 
-Scroll maps show a visual of the aggregate scroll activity on a given page. Use Scroll maps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scroll map to the depth you wish to assess.
+Scroll maps display the aggregate scroll activity on a given page. Use Scroll maps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scroll map to the depth you wish to assess.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-v3.png" alt="Scrollmap of the bedding page in a sample ecommerce application" style="width:100%;">}}
 
@@ -98,7 +98,7 @@ After understanding analytics, the next step is to understand the action in the 
 
 ### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
 
-Heatmaps are based on Real user Monitoring view names. Depending on how your Real user Monitoring application is configured, many pages can start being grouped under the same view name, or you can start having specific view names.
+Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having specific view names.
 
 ### The view that I selected is not showing the initial content.
 
