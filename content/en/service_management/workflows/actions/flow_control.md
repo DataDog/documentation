@@ -18,7 +18,7 @@ further_reading:
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Use [Logic actions][2] to add control logic to your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and more.
+Use [Logic actions][1] to add control logic to your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and more.
 
 ## Branch workflow from condition
 
@@ -39,7 +39,7 @@ In the example below, a for loop iterates over a list of incidents and sends a S
 {{< img src="service_management/workflows/iteration2.png" alt="A workflow with a for loop. The loop iterates over a list of incidents and sends a message to a slack channel if the incident is more than a week old." style="width:100%;" >}}
 
 To add a for loop to your workflow:
-1. Click the plus (**+**) icon on your workflow canvas to open the [action catalog][1].
+1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
 1. Search for and select the **For loop** step.
 1. Click the loop step and enter an **Input list** for the step to iterate over. You can enter a custom list or use a workflow variable.
 1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
@@ -53,8 +53,7 @@ When a run completes, the workflow enters **Debug** mode. Select a step within t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
-[1]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
-[2]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if
-[3]: https://datadoghq.slack.com/
+[1]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if
+[2]: https://datadoghq.slack.com/

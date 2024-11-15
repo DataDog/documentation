@@ -223,7 +223,7 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/devices/netflow/
+[1]: /network_monitoring/netflow/
 [2]: https://app.datadoghq.com/infrastructure/devices?viewTab=topology
 [3]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
 [4]: /network_monitoring/devices/profiles/

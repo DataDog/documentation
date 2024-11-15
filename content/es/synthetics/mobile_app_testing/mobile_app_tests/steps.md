@@ -73,8 +73,8 @@ Crea este paso de aserción para que el test de tu aplicación móvil confirme q
 
 Crea este paso de aserción para que el test de tu aplicación móvil confirme que el texto especificado en el campo `Value` **no** está presente en la página actual que se está grabando.
 
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Acciones especiales
 
@@ -213,7 +213,7 @@ Para editar una grabación móvil una vez guardada:
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/mobile_app_testing/mobile_app_tests/#variables
 [2]: /es/synthetics/settings/#global-variables

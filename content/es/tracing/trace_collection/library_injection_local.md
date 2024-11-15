@@ -30,7 +30,7 @@ Para obtener más información sobre el controlador de admisión Kubernetes, con
 ## Requisitos
 
 * Kubernetes v1.14 o posterior
-* Datadog [Cluster Agent v7.40 o posterior][3], para Java, Python y NodeJS, y Datadog [Cluster Agent v7.44 o posterior][3], para .NET y Ruby.
+* Datadog [Cluster Agent v7.40 o posterior][3], para Java, Python y Node.js, y Datadog [Cluster Agent v7.44 o posterior][3], para .NET y Ruby.
 * Controlador de admisión Datadog habilitado. **Nota**: En el chart de Helm v2.35.0 y posteriores, el controlador de admisión Datadog está habilitado por defecto en el Cluster Agent.
 * Para Python, las aplicaciones uWSGI no son compatibles en este momento.
 * Para Ruby, la compatibilidad de la inyección de bibliotecas está en fase Beta. La instrumentación sólo es compatible con Ruby en aplicaciones Rails con una versión de empaquetador superior a 2.3 y sin gemas vendidas (modo de despliegue o `BUNDLE_PATH`).
@@ -424,7 +424,7 @@ El valor de `version` es siempre `1`. Esto hace referencia a la versión del esq
 
 La siguiente tabla muestra cómo los valores de configuración de la inyección se asignan a las correspondientes [opciones de configuración de bibliotecas de rastreo][4]:
 
-| Inyección | Rastreador Java | Rastreador NodeJS | Rastreador .NET | Rastreador Python |
+| Inyección | Rastreador Java | Rastreador Node.js | Rastreador .NET | Rastreador Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -495,7 +495,7 @@ Ejercita tu aplicación para empezar a generar datos de telemetría, que puedes 
 [8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
-{{% tab "Agent on host, app in containers" (Agent en host, aplicación en contenedor)%}}
+{{% tab "Agent en host, aplicación en contenedor" %}}
 
 <div class="alert alert-info">La inyección de bibliotecas de rastreo en hosts está en fase Beta.</div>
 
@@ -625,7 +625,7 @@ tracing_log_level: debug
 
 La siguiente tabla muestra cómo los valores de configuración de la inyección se asignan a las correspondientes [opciones de configuración de bibliotecas de rastreo][4]:
 
-| Inyección | Rastreador Java | Rastreador NodeJS | Rastreador .NET | Rastreador Python |
+| Inyección | Rastreador Java | Rastreador Node.js | Rastreador .NET | Rastreador Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -685,7 +685,7 @@ Ejercita tu aplicación para empezar a generar datos de telemetría, que puedes 
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores" %}}
 
 <div class="alert alert-info">La inyección de bibliotecas de rastreo en contenedores está en fase Beta.</div>
 
@@ -814,7 +814,7 @@ En este archivo de configuración, el valor de `version` es siempre `1`. Esto ha
 
 La siguiente tabla muestra cómo los valores de configuración de la inyección se asignan a las correspondientes [opciones de configuración de bibliotecas de rastreo][4]:
 
-| Inyección | Rastreador Java | Rastreador NodeJS | Rastreador .NET | Rastreador Python |
+| Inyección | Rastreador Java | Rastreador Node.js | Rastreador .NET | Rastreador Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -923,7 +923,7 @@ Para dejar de generar trazas para un servicio específico, ejecuta los siguiente
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores"%}}
 
 1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
    ```shell
@@ -950,7 +950,7 @@ Para dejar de producir trazas (traces), elimina los inyectores de bibliotecas y 
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores" %}}
 
 1. Desinstala la inyección de bibliotecas local:
    ```shell

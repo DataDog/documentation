@@ -20,9 +20,14 @@ further_reading:
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'
   - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
-    tag: "blog"
+    tag: "Blog"
     text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+  - link: "https://www.datadoghq.com/blog/datadog-service-management/"
+    tag: "Blog"
+    text: "Ensure high service availability with Datadog Service Management"
 ---
+
+
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
@@ -63,18 +68,11 @@ When declaring an incident, it is critical to provide a comprehensive descriptio
 
 For more information, see the [Describe an Incident][20] documentation.
 
-## Data collected
+## Evaluate incident data
 
-Incident Management collects the following analytic measures:
+Incident Analytics provides insights into the efficiency and performance of your incident response process by allowing you to aggregate and analyze statistics from past incidents. Key metrics, such as time to resolution and customer impact, can be tracked over time. You can query these analytics using graph widgets in dashboards and notebooks. Datadog offers customizable templates, such as the Incident Management Overview Dashboard and a Notebook Incident Report, to help you get started.
 
-* Incident Count
-* Customer Impact Duration
-* Status Active Duration
-* Status Stable Duration
-* Time to Repair (customer impact end time - created time)
-* Time to Resolve (resolved time - created time)
-
-For more information about Incident Management graphs, see [Incident Management Analytics][10].
+For more details on the measures collected and step-by-step graph configurations to visualize your data, see [Incident Management Analytics][10].
 
 ## Integrations
 
@@ -101,7 +99,7 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 [7]: /account_management/teams/
 [8]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [9]: /tracing/#2-instrument-your-application
-[10]: /service_management/incident_management/analytics/#overview
+[10]: /service_management/incident_management/analytics/
 [11]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [12]: /integrations/pagerduty/
 [13]: /integrations/opsgenie/
