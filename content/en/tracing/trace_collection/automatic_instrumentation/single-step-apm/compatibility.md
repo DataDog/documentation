@@ -14,13 +14,13 @@ Single Step Instrumentation (SSI) has specific compatibility requirements that v
 
 The following operating systems and architectures are compatible:
 
-| OS           | Version   | Architecture  | Support |
-|--------------|-----------|---------------|-----------|
-| Amazon Linux | 2022+     | x86_64, arm64 | {{< X >}} |
-| CentOS       | 7+, 8+    | x86_64, arm64 | {{< X >}} |
-| Debian       | 9-12      | x86_64, arm64 | {{< X >}} |
-| Red Hat      | 7+        | x86_64, arm64 | {{< X >}} |
-| Ubuntu       | 20+ (LTS) | x86_64, arm64 | {{< X >}} |
+| OS           | Version   | Architecture  |
+|--------------|-----------|---------------|
+| Amazon Linux | 2022+     | x86_64, arm64 |
+| CentOS       | 7+, 8+    | x86_64, arm64 |
+| Debian       | 9-12      | x86_64, arm64 |
+| Red Hat      | 7+        | x86_64, arm64 |
+| Ubuntu       | 20+ (LTS) | x86_64, arm64 |
 
 ## Platforms
 
@@ -51,17 +51,6 @@ For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or 
 ## Language-specific requirements
 
 This section provides language-specific compatibility requirements for Single Step Instrumentation:
-
-| Language | Support       |
-|----------|---------------|
-| Java     | GA            |
-| .NET     | GA            |
-| Node.js  | GA            |
-| Python   | GA            |
-| Ruby     | GA            |
-| PHP      | Preview       |
-| Go       | Not Supported |
-| C++      | Not Supported |
 
 {{< programming-lang-wrapper langs="java,python,ruby,nodejs,dotnet,php" >}}
 
@@ -104,14 +93,16 @@ This section provides language-specific compatibility requirements for Single St
 
 {{< programming-lang lang="ruby" >}}
 
+<div class="alert alert-warning">Using Single Step Instrumentation with Ruby applications is in Preview.</div>
+
 ### Supported Ruby versions
 
-| Ruby Version | Support                         | Notes |
-|--------------|---------------------------------|-------|
-| 3.2          | <i class="icon-check-bold"></i> |       |
-| 3.1          | <i class="icon-check-bold"></i> |       |
-| 3.0          | <i class="icon-check-bold"></i> |       |
-| 2.7          | <i class="icon-check-bold"></i> |       |
+| Ruby Version | Support | Notes |
+|--------------|---------|-------|
+| 3.2          | Preview |       |
+| 3.1          | Preview |       |
+| 3.0          | Preview |       |
+| 2.7          | Preview |       |
 
 ### Troubleshooting
 
