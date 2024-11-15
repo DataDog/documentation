@@ -41,7 +41,6 @@ export class PageBuilder {
    */
   static build(p: {
     parsedFile: ParsedFile;
-    filterOptionsConfig: FilterOptionsConfig;
     hugoConfig: HugoConfig;
     filtersManifest: PageFiltersManifest;
   }): { html: string; errors: string[] } {

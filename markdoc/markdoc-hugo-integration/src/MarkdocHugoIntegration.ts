@@ -254,29 +254,10 @@ export class MarkdocHugoIntegration {
 
     const filtersManifest = PageFiltersManifestSchema.parse(draftFiltersManifest);
 
-    // verify that all possible placeholder values
-    // yield an existing options set
-    try {
-      filterOptionsConfigForPage = YamlConfigParser.getFilterOptionsForPage(
-        p.parsedFile.frontmatter,
-        p.filterOptionsConfig
-      );
-    } catch (e) {
-      if (e instanceof Error) {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(e.message);
-      } else if (typeof e === 'string') {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(e);
-      } else {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(JSON.stringify(e));
-      }
-      return null;
-    }
-
     // build the HTML and write it to an .md file
     try {
       const { html, errors } = PageBuilder.build({
         parsedFile: p.parsedFile,
-        filterOptionsConfig: filterOptionsConfigForPage,
         filtersManifest: filtersManifest,
         hugoConfig: {
           global: this.hugoGlobalConfig,

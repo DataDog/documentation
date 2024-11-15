@@ -30,11 +30,6 @@ describe('PageBuilder.build', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const filterOptionsConfigForPage = YamlConfigParser.getFilterOptionsForPage(
-    parsedFile.frontmatter,
-    filterOptionsConfig
-  );
-
   const draftFiltersManifest = YamlConfigParser.buildPageFiltersManifest({
     frontmatter: parsedFile.frontmatter,
     filterOptionsConfig: filterOptionsConfig,
@@ -45,7 +40,6 @@ describe('PageBuilder.build', () => {
 
   const { html } = PageBuilder.build({
     parsedFile,
-    filterOptionsConfig: filterOptionsConfigForPage,
     hugoConfig: { global: mockHugoGlobalConfig, page: mockPageConfig },
     filtersManifest: filtersManifest
   });
