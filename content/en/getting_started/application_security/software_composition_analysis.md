@@ -44,7 +44,7 @@ First, see the [Library Compatibility][12] requirements page to verify if the Da
    
    {{< img src="/security/application_security/software_composition_analysis/APM_SCA-enablement-quick-start-guide.mp4" alt="quick start guide in the Datadog UI" video="true">}}
 
-### Enable SCA on your services using the Settings page
+### Enable SCA on your repositories and services using the Settings page
 
 1. In Datadog, go to **[Application Security > Settings][13]**.
 2. Click **Get Started** to expand the Software Composition Analysis (SCA) capability.
@@ -60,7 +60,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
    
 {{< img src="/security/application_security/software_composition_analysis/SCA-github-enabled-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
 
-#### Enable SCA on running services
+#### Enable SCA on services
 
 1. Click **Select Services**. A list of services should appear.
 2. Select the service(s) you want to monitor for vulnerabilities, then click **Next**. You should see the number of selected services and their names.

@@ -5,7 +5,7 @@ categories:
 - configuración y despliegue
 - recopilación de logs
 - suministrar
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrea métricas clave de AWS App Runner.
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/

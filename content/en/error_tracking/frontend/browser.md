@@ -37,6 +37,10 @@ Error Tracking can use this information to correlate errors with your source cod
 
 For more information, see the [Datadog Source Code Integration][14].
 
+## List uploaded source maps
+
+See the [Debug Symbols][15] page to view all uploaded symbols.
+
 ### Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
@@ -59,7 +63,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [2]: /error_tracking/frontend/collecting_browser_errors/?tab=npm#collect-errors-manually
 [3]: /error_tracking/frontend/collecting_browser_errors/?tab=npm#error-sources
 [4]: https://app.datadoghq.com/rum/error-tracking
-[5]: https://app.datadoghq.com/rum/application/create
+[5]: https://app.datadoghq.com/error-tracking/settings/setup/client?referrer=intro
 [6]: /real_user_monitoring/browser/setup
 [7]: https://www.npmjs.com/package/@datadog/browser-rum
 [8]: /real_user_monitoring/browser/setup/#initialization-parameters
@@ -69,3 +73,4 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [12]: https://about.gitlab.com
 [13]: https://bitbucket.org/product
 [14]: /integrations/guide/source-code-integration/
+[15]: https://app.datadoghq.com/source-code/setup/rum

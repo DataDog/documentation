@@ -40,17 +40,16 @@ You can access performance metrics for your views in:
 
 [Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Core Web Vitals summary visualization" >}}
 
-- First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
+- Interaction to Next Paint and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
 - Metrics collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
-| [First Input Delay][8]        | Interactivity    | Time elapsed between a user's first interaction with the page and the browser's response.             | <100ms      |
-| [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
 | [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
+| [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
 
 ### Core web vitals target elements
 
@@ -149,7 +148,7 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 
 ### Measure component-level performance with custom vitals
 
-Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction.
+Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction. **Note**: Custom vital names can't contain spaces or special characters.
 
 #### Start and stop duration measurements
 

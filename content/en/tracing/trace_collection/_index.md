@@ -33,11 +33,11 @@ Instrumenting your application allows observability data to be sent to the Agent
 
 ## Instrumentation types
 
-There are two main approaches to instrument your application: automatic or custom instrumentation.
+There are two main approaches to instrument your application: automatic or custom {{< tooltip glossary="instrumentation" >}}.
 
 ### Automatic instrumentation
 
-Create spans for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
+Create {{< tooltip glossary="span" >}}s for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
 
 - [Single Step Instrumentation (Beta)][7]: Run a one-line install command to install the Datadog Agent, enable APM, and instrument all of your services on your Linux host, VM, or container.
 - [Datadog libraries][8]: Add Datadog tracing libraries to your application.
