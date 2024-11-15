@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-SQL in Analysis cells allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
+SQL in [Analysis cells][1] allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 
@@ -16,6 +16,8 @@ SQL in Analysis cells allows you to analyze and manipulate data within Log Works
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
 
 ## Syntax
+
+The following SQL syntax is supported:
 
 | Syntax        | Description                                                                                  | Example                                                                                                  |
 |---------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
@@ -82,3 +84,5 @@ FROM users {{< /code-block >}} |
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/workspaces/#analysis-cell
