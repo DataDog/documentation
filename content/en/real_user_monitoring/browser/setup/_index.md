@@ -1,5 +1,5 @@
 ---
-title: RUM Browser Monitoring Setup
+title: Browser Monitoring Setup
 type: multi-code-lang
 ---
 
