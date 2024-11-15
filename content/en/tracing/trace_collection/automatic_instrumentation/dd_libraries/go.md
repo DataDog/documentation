@@ -185,6 +185,10 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 | `k8s.io/client-go`                  | `v0.7.4`                      |
 | `github.com/hashicorp/vault`        | `v0.7.4`                      |
 
+### Troubleshooting
+
+To troubleshoot `orchestrion`-managed builds, see [Troubleshooting Go Compile-Time Instrumentation][13]
+
 [1]: /tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
@@ -196,6 +200,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 [10]: https://pkg.go.dev/cmd/go#hdr-Modules__module_versions__and_more
 [11]: https://github.com/DataDog/orchestrion/releases
 [12]: /profiler
+[13]: /tracing/troubleshooting/go_compile_time/
 
 {{% /tab %}}
 {{< /tabs >}}
