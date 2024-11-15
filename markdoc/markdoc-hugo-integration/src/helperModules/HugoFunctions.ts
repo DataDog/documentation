@@ -33,12 +33,6 @@ export class HugoFunctions {
 
     resultPath = `${lang}${resultPath}`;
 
-    console.log('\n\n\n');
-    console.log('url', p.url);
-    console.log('lang', lang);
-    console.log('resultPath', resultPath);
-    console.log('resultBaseUrl', resultBaseUrl);
-    console.log('final result', new URL(resultPath, resultBaseUrl));
     const result = new URL(resultBaseUrl.href + resultPath).href;
 
     if (p.defaultLang && lang === p.defaultLang) {
