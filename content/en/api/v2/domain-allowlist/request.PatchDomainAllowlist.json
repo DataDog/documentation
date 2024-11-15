@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "domains": [
+        "@static-test-domain.test"
+      ],
+      "enabled": false
+    },
+    "type": "domain_allowlist"
+  }
+}

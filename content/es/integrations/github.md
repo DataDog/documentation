@@ -6,7 +6,7 @@ categories:
 - developer tools
 - issue tracking
 - source control
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Conecta GitHub con Datadog para monitorizar confirmaciones y solicitudes
   pull que afecten el rendimiento de tus servicios.

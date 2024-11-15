@@ -88,8 +88,6 @@ Learn more about [Custom Metrics Billing][8].
 
    As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
 
-   Ask your Customer Success Manager for an unqueried metrics report.
-
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
    - Prior to saving your configuration, the tag configuration cardinality estimator returns the estimated resulting number of indexed custom metrics which should be lower than your ingested custom metrics volumes.

@@ -53,6 +53,21 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadogs-approach-devsecops/
   tag: ブログ
   text: Datadog の DevSecOps へのアプローチ
+- link: https://www.datadoghq.com/blog/investigate-denial-of-service-attacks/
+  tag: ブログ
+  text: 複雑なサービス拒否攻撃の調査
+- link: https://www.datadoghq.com/blog/optimize-and-secure-azure-functions/
+  tag: ブログ
+  text: Azure Functions を最適化し、セキュリティを確保するためのヒント
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: ブログ
+  text: Datadog を Detection as Code (コードとしての検出) に使用する方法
+- link: https://www.datadoghq.com/blog/lateral-movement-entra-id-azure/
+  tag: ブログ
+  text: ハイブリッド Azure 環境におけるラテラルムーブメントの検出
+- link: https://www.datadoghq.com/blog/secrets-management/
+  tag: ブログ
+  text: クラウド環境を攻撃に対してより脆弱にするシークレットを特定する
 title: Datadog Security
 ---
 
@@ -60,11 +75,11 @@ title: Datadog Security
 
 実稼働セキュリティ運用にスピードとスケールを。Datadog Security は、リアルタイムの脅威検出と、アプリケーション、ホスト、コンテナ、クラウドインフラストラクチャー全体にわたる継続的なコンフィギュレーション監査を提供します。Datadog の可観測性プラットフォームと組み合わせることで、Datadog Security は、組織の共有目標に沿ったセキュリティと運用の間にかつてないインテグレーションをもたらします。
 
-Datadog Security includes [Application Security](#application-security-management), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
+Datadog Security には、[Application Security](#application-security-management)、[Cloud SIEM](#cloud-siem)、[Cloud Security Management](#cloud-security-management) が含まれています。詳しくは、[30 秒製品ガイドツアー][14]をご覧ください。
 
 ## アプリケーションセキュリティ
 
-Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
+Datadog [Application Security][1] は、SSRF (Server-Side-Request-Forgery) や SQL インジェクション、Log4Shell、XSS (Reflected Cross-Site-Scripting) など、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。ASM は、Datadog [APM][2]、[Datadog Agent][3]、およびアプリ内検出ルールを活用して、アプリケーション環境における脅威を検出します。詳しくは製品[ガイドツアー](https://www.datadoghq.com/guided-tour/security/application-security-management/)をご確認ください。
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="攻撃フローとフレームグラフが表示された Datadog のセキュリティシグナルパネル" width="75%">}}
 
