@@ -118,7 +118,7 @@ Alternately, also from the team directory page:
 From the team filter:
 1. If the filter is collapsed, click **My Teams** to expand it.
 1. Click **Add Favorites**. A search box and list of teams appear.
-1. To find a team quickly, start typing its name in the search box.
+1. To narrow the list of teams, start typing a team name in the search box.
 1. Click the star next to the desired team to add or remove it from your favorites.
 
 ### Supported products
