@@ -1,4 +1,4 @@
-import { ResolvedPagePrefs } from '../../../schemas/pagePrefs';
+import { ResolvedPagePrefs } from '../../../schemas/pageFilters';
 
 /**
  * Given a resolved page prefs object, build the UI for the filter selector

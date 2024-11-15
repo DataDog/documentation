@@ -8,7 +8,7 @@ import {
   VALID_PREFS_CONFIG_DIR,
   SNAPSHOTS_DIR
 } from '../../config/constants';
-import { PagePrefsManifestSchema } from '../../../src/schemas/pagePrefs';
+import { PagePrefsManifestSchema } from '../../../src/schemas/pageFilters';
 import {
   mockHugoGlobalConfig,
   mockPageConfig

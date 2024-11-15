@@ -21,7 +21,7 @@ import {
 } from './PageBuilder/pageConfigMinification';
 import { transformConfig } from '../markdocParserConfig';
 import { anchorize } from './stringProcessing';
-import { PagePrefsManifest } from '../schemas/pagePrefs';
+import { PagePrefsManifest } from '../schemas/pageFilters';
 
 /**
  * Collect the top-level client functions inside the renderable tree,

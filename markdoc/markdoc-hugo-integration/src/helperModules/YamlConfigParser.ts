@@ -30,7 +30,7 @@ import {
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { PagePrefsManifest } from '../schemas/pagePrefs';
+import { PagePrefsManifest } from '../schemas/pageFilters';
 import { PagePrefConfig } from '../schemas/yaml/frontMatter';
 
 /**

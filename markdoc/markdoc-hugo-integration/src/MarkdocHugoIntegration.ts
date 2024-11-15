@@ -11,7 +11,7 @@ import {
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
-import { PagePrefsManifestSchema } from './schemas/pagePrefs';
+import { PagePrefsManifestSchema } from './schemas/pageFilters';
 import { Allowlist } from './schemas/yaml/allowlist';
 import { HugoFunctions } from './helperModules/HugoFunctions';
 

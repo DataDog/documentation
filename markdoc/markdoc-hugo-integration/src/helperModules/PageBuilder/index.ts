@@ -12,7 +12,7 @@ import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
-import { PagePrefsManifest } from '../../schemas/pagePrefs';
+import { PagePrefsManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
 

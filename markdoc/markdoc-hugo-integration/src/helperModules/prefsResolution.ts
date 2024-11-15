@@ -21,7 +21,7 @@ import {
   ResolvedPagePrefs,
   ResolvedPagePref,
   PagePrefsManifest
-} from '../schemas/pagePrefs';
+} from '../schemas/pageFilters';
 import {
   PagePrefsConfig,
   PagePrefConfig,

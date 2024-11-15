@@ -9,7 +9,7 @@ import {
   resolvePagePrefs,
   resolveMinifiedPagePrefs
 } from '../../../src/helperModules/prefsResolution';
-import { ResolvedPagePrefsSchema } from '../../../src/schemas/pagePrefs';
+import { ResolvedPagePrefsSchema } from '../../../src/schemas/pageFilters';
 
 describe('SharedRenderer.resolvePagePrefs', () => {
   const prefsManifest = YamlConfigParser.buildPagePrefsManifest({

@@ -2,7 +2,7 @@ import { resolvePagePrefs } from '../../prefsResolution';
 import { buildFilterSelectorUi } from '../components/ContentFilter';
 import { Frontmatter } from '../../../schemas/yaml/frontMatter';
 import { PrefOptionsConfig } from '../../../schemas/yaml/prefOptions';
-import { PagePrefsManifest } from '../../../schemas/pagePrefs';
+import { PagePrefsManifest } from '../../../schemas/pageFilters';
 
 /**
  * A JSX template for the main content area of a page,
