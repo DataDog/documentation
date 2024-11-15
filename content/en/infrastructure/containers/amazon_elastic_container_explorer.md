@@ -12,7 +12,7 @@ The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources 
 
 ### Prerequisites
 
-* **[AWS resource collection][10]**: Required for collecting ECS resources
+* **[AWS resource collection][10]**: Required for collecting ECS resources.
 * **[ECS on EC2 integration][2]**: Required for monitoring clusters using the EC2 launch type.
 * **[ECS on Fargate integration][3]**: Required for monitoring clusters using the Fargate launch type.
 * **Agent version >= 7.58.0**: Recommended for a shorter refresh rate on the ECS Explorer page, though it is optional.
