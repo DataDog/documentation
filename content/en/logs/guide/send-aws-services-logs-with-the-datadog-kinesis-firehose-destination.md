@@ -41,7 +41,8 @@ Datadog recommends using a Kinesis Data Stream as input when using the Datadog d
    b. Set the destination as `Datadog`.  
    c. Provide a name for the delivery stream.  
    d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
-   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
+   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3]. If you prefer to use Secrets Manager authentication, add in your Datadog API key in the full JSON format in the value field as follows: `{"api_key":"<YOUR_API_KEY>"}`.
+   
    f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
    **Note**: Datadog recommends setting the **Buffer size** to `2 MiB` if the logs are single line messages.  
    g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
