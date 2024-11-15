@@ -92,7 +92,7 @@ A heatmap's list of backgrounds cannot be modified.
 
 ## Next steps
 
-After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [Analytics explorer][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
+After analyzing heatmaps, the next step is to understand the user action by exploring related data. Pivot to the [Analytics explorer][4] or watch associated [session replays][1] to visually see user actions in the context of their overall session.
 
 ## Troubleshooting
 
