@@ -61,6 +61,8 @@ If needed, configure the tracing library to send application performance telemet
 
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 
+[1]: /tracing/compatibility_requirements/go
+[3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 
 {{% /tab %}}
@@ -186,6 +188,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 [1]: /tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
