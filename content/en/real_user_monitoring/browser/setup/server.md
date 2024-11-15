@@ -51,15 +51,19 @@ identified as HTML. You can instrument your RUM application automatically or man
 
 To automatically instrument your RUM application:
 
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][2] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Nginx**.
-3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][3].
+3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][2].
 4. Copy and run the installer command to load the Datadog Nginx Module with the RUM SDK Injector onto nginx.
 5. After the installer successfully installs the SDK Injector, restart nginx to begin collecting RUM sessions.
+6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
 
-[1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
-[2]: https://app.datadoghq.com/rum/list
-[3]: /real_user_monitoring/guide/sampling-browser-plans/
+   ```javascript
+   error_log <file> info;
+   ```
+
+[1]: https://app.datadoghq.com/rum/list
+[2]: /real_user_monitoring/guide/sampling-browser-plans/
 
 {{% /collapse-content %}}
 
@@ -67,7 +71,7 @@ To automatically instrument your RUM application:
 
 ### Download the appropriate `.tgz` file
 
-1. Use the `.tgz` file corresponding to your version of nginx. You can find all the relevant `.tgz` files listed by nginx version under [References](#references).
+1. Use the `.tgz` file corresponding to your version of nginx. You can find all the relevant `.tgz` files listed by nginx version under [Reference](#reference).
 2. Extract the tarball to extract teh `ngx_http_datadog_module.so` file. Move it to a location that nginx has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 ### Update Nginx configuration
@@ -98,17 +102,16 @@ To automatically instrument your RUM application:
    }
    ```
 
-### 3. Update the Nginx configuration
-
-1. Restart the nginx server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
-
-2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
+3. Restart the nginx server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+4. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
 
    ```javascript
    error_log <file> info;
    ```
 
 {{% /collapse-content %}}
+
+[1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 
 {{% /tab %}}
 {{% tab "Windows IIS" %}}
@@ -260,3 +263,4 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [37]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
 [38]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
 [39]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
+[40]: /help
