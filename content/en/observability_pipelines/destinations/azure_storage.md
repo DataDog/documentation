@@ -36,4 +36,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: /observability_pipelines/archive_logs/
 [2]: /logs/log_configuration/archives/
 [3]: /integrations/google_cloud_platform/#setup
-[4]: /observability_pipelines/destinations/#event-batching-intro
+[4]: /observability_pipelines/destinations/#event-batching

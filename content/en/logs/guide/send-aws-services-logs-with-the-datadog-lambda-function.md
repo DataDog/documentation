@@ -10,6 +10,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 AWS service logs can be collected with the Datadog Forwarder Lambda function. This Lambda—which triggers on S3 Buckets, CloudWatch log groups, and EventBridge events—forwards logs to Datadog.
@@ -250,11 +253,14 @@ Resources:
 {{< /tabs >}}
 
 
-
 ## Scrubbing and filtering
 
 You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][46].
 You can also exclude or send only those logs that match a specific pattern by using the [filtering option][47].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support

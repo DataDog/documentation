@@ -127,9 +127,9 @@ Datadog allows restriction of monitor editing to specific roles through the role
 
 ### API
 
-You can update the definition of monitors that are managed through API or Terraform by using the `restricted_roles` parameter. You can also use the [Restriction Policies][5] endpoint to define the access control rules for a monitor, mapping a set of relations (such as editor and viewer) to a set of allowed principals (such as roles, teams, or users). The restriction policy determines who is authorized to perform what actions on the monitor.
+You can update the definition of monitors that are managed through API or Terraform by using the `restricted_roles` parameter. You can also use the [Restriction Policies][4] endpoint to define the access control rules for a monitor, mapping a set of relations (such as editor and viewer) to a set of allowed principals (such as roles, teams, or users). The restriction policy determines who is authorized to perform what actions on the monitor.
 
-For more information, see [Edit a monitor API endpoint][3] and [Restriction Policies API][5].
+For more information, see [Edit a monitor API endpoint][3] and [Restriction Policies API][4].
 
 ### UI
 

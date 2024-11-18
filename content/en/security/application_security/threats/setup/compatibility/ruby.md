@@ -17,7 +17,7 @@ The following application security capabilities are supported in the Ruby librar
 | Software Composition Analysis (SCA) | 1.11.0 |
 | Code Security        | not supported |
 | Automatic user activity event tracking | 1.14.0 |
-| API Security | 1.15.0 |
+| API Security | 2.4.0 |
 
 The minimum tracer version to get all supported application security capabilities for Ruby is 1.15.0.
 

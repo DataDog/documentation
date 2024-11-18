@@ -13,6 +13,9 @@ further_reading:
 - link: "/service_management/service_level_objectives/guide/slo_types_comparison/"
   tag: "Documentation"
   text: "Comparison of Datadog SLO Types"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
 ---
 
 
@@ -55,6 +58,14 @@ further_reading:
 | Freshness   | How long does it take for new data or processed results to appear? |
 
 ### STEP 2
+
+#### Best practices for choosing an SLO Type
+
+- Whenever possible, use metric-based SLOs. It's best practice to have SLOs where the error budget reflects the number of bad events you have left before you breach your SLO. Your SLO calculations will also be volume weighted based on the number of events.
+- If, instead, you want an SLO that tracks uptime and uses a time-based SLI calculation, use time slice SLOs. Unlike monitor-based SLOs, time slice SLOs don't require you to maintain an underlying monitor for your SLO.
+- Finally, consider monitor-based SLOs for use cases that are not covered by time slice SLOs, which include SLOs based on non-metric monitors or multiple monitors.
+
+For a detailed comparison of the SLO types, see the [SLO Type Comparison][8] guide.
 
 **Do you require an SLI calculation that is time-based or count-based?**
 
@@ -119,3 +130,4 @@ _Example: the latency of all user requests should be less than 250 ms 99% of the
 [5]: /tracing/trace_pipeline/generate_metrics/
 [6]: /logs/logs_to_metrics/
 [7]: /service_management/service_level_objectives/#searching-and-viewing-slos
+[8]: /service_management/service_level_objectives/guide/slo_types_comparison

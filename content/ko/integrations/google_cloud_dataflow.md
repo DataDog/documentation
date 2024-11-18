@@ -20,7 +20,7 @@ integration_version: ''
 is_public: true
 manifest_version: '1.0'
 monitors:
-  job-backlog-time: assets/monitors/backlog_monitor.json
+  Job backlog time is high: assets/monitors/backlog_monitor.json
 name: google_cloud_dataflow
 public_title: Datadog-Google Cloud Dataflow 통합
 short_description: 주요 Google Cloud Dataflow 메트릭을 추적합니다.

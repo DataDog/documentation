@@ -31,6 +31,15 @@ Traffic is always initiated by the Agent to Datadog. No sessions are ever initia
 
 All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
 
+## Installation
+
+Add the following domains to your inclusion list to allow for Agent installation:
+
+- `install.datadoghq.com`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+- `apt.datadoghq.com`
+
 ## Destinations
 
 [APM][1]
@@ -238,17 +247,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][5] | 8443 | TCP |  |
-| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
-| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
-| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
+| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
+| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
-[5]: /containers/guide/cluster_agent_autoscaling_metrics
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -257,16 +263,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][5] | 8443 | TCP |  |
-| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
-| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
-| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
+| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
+| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -275,14 +279,10 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
-| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
 
 {{% /site-region %}}
 
@@ -390,3 +390,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [16]: /agent/basic_agent_usage/#gui
 [17]: /tracing/
 [18]: /developers/dogstatsd/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics

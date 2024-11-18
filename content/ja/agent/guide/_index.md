@@ -18,8 +18,8 @@ title: Agent ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Windows guides:" >}}
-    {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
-    {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
+    {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Windows 用 Datadog Agent Manager{{< /nextlink >}}
+    {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent ユーザー{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud infrastructure guides:" >}}

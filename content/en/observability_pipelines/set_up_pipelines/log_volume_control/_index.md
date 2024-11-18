@@ -3,6 +3,10 @@ title: Log Volume Control
 disable_toc: false
 aliases:
     - /observability_pipelines/log_volume_control/
+further_reading:
+- link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
+  tag: "documentation"
+  text: "Strategies for Reducing Log Volume"
 ---
 
 ## Overview
@@ -21,16 +25,26 @@ Select a log source to get started:
 
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
-- [HTTP Client][3]
-- [Splunk HTTP Event Collector (HEC)][4]
-- [Splunk Heavy and Universal Forwarders (TCP)][5]
-- [Sumo Logic Hosted Collector][6]
-- [rsyslog or syslog-ng][7]
+- [Google Pub/Sub][3]
+- [HTTP Client][4]
+- [HTTP Server][5]
+- [Logstash][6]
+- [Splunk HTTP Event Collector (HEC)][7]
+- [Splunk Heavy or Universal Forwarders (TCP)][8]
+- [Sumo Logic Hosted Collector][9]
+- [rsyslog or syslog-ng][10]
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/log_volume_control/datadog_agent
 [2]: /observability_pipelines/log_volume_control/fluent
-[3]: /observability_pipelines/log_volume_control/http_client
-[4]: /observability_pipelines/log_volume_control/splunk_hec
-[5]: /observability_pipelines/log_volume_control/splunk_tcp
-[6]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
-[7]: /observability_pipelines/log_volume_control/syslog
+[3]: /observability_pipelines/set_up_pipelines/log_volume_control/google_pubsub
+[4]: /observability_pipelines/log_volume_control/http_client
+[5]: /observability_pipelines/set_up_pipelines/log_volume_control/http_server
+[6]: /observability_pipelines/set_up_pipelines/log_volume_control/logstash
+[7]: /observability_pipelines/log_volume_control/splunk_hec
+[8]: /observability_pipelines/log_volume_control/splunk_tcp
+[9]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
+[10]: /observability_pipelines/log_volume_control/syslog

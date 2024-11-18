@@ -43,7 +43,7 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
 
 2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
 
-3. Create a subscription to the `Datadog CI Visibility` service for each of the following webhook types. These event types are required and must be enabled individually. 
+3. Create a subscription to the `Datadog CI Visibility` service for each of the following webhook types. These event types are required and must be enabled individually.
 
     - **Run state changed**
     - **Run stage state changed**
@@ -62,7 +62,7 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
 
 ### Configuring multiple projects in bulk
 
-Datadog offers a [script][12] to help you enable service hooks across multiple or all of your Azure projects using the Azure API. The script requires Python 3 and the `requests` package. 
+Datadog offers a [script][12] to help you enable service hooks across multiple or all of your Azure projects using the Azure API. The script requires Python 3 and the `requests` package.
 
 To run the script, you need:
 
@@ -106,15 +106,15 @@ Example for enabling the hooks in specified projects:
 ```
 
 
-### Set custom tags 
+### Set custom tags
 
 You can set custom tags for all pipeline and job spans from your Azure projects to improve traceability. For more information, see [Custom Tags and Measures][6].
 
 ### Collect job logs
 
-<div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>. <br><br>  Job log collection is not available for <a href="/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
+<div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
 
-Datadog supports log collection for your Azure DevOps pipelines. 
+Datadog supports log collection for your Azure DevOps pipelines.
 
 To enable job log collection:
 

@@ -35,7 +35,7 @@ Por ejemplo, es posible que desees utilizar métricas personalizadas para visual
 | Granularidad del comportamiento                           | Crea métricas personalizadas para endpoints importantes u otros grupos con baja cardinalidad.                        | Utiliza [Trace Explorer][5] para endpoints específicos o utiliza la opción "Agrupar por" en [Analytics][6].                    |
 | Pronóstico o matemáticas complejas                          | Crea un [Monitor de pronóstico][7] en función de las métricas generadas.                          |   N/D                            |
 
-Para generar métricas a partir de tramos, en la página [<txprotected>Instalación y configuración de APM</txprotected>][8], selecciona la pestaña [Generar métricas][9] y haz clic en el botón **New Metric** (Nueva métrica).
+Para generar métricas a partir de tramos, en la página [Instalación y configuración de APM][8], selecciona la pestaña [Generar métricas][9] y haz clic en el botón **New Metric** (Nueva métrica).
 
 <br>
 
@@ -75,7 +75,7 @@ Tras crear una métrica, solo se pueden actualizar dos campos:
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/tracing/trace_pipeline/trace_retention

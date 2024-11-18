@@ -23,7 +23,7 @@ To add an email variable called `EMAIL`:
 1. Click **Variables** and select **Email** from the dropdown menu. 
 2. Click **Add Variable** to make the variable available for you to use when you start recording. 
 
-{{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="Create an email variable" video="true" width="100%">}}
+{{< img src="synthetics/guide/email-validation/adding-variable-email.mp4" alt="Create an email variable" video="true" width="100%">}}
 
 The email variable generates a unique mailbox maintained by Datadog at every test execution, which enables your browser tests to run without conflicts.
 
@@ -33,7 +33,7 @@ Once you have created an email variable, you can [confirm the email was sent cor
 
 Click **Start Recording** and record all of the steps leading up to the email being triggered with your email variable. Click the hand icon in a variable to inject its value into the text input of a form or field.
 
-{{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Record your steps" video="true" width="100%">}}
+{{< img src="synthetics/guide/email-validation/record_steps_2.mp4" alt="Record your steps" video="true" width="100%">}}
 
 After recording your steps to complete the form, click the **Sign Up** button to trigger an email notification. An email tailored to this recording session is sent to the Datadog mailbox, for example, `838-n3q-q2y.6238933596@synthetics.dtdg.co`.
 
@@ -41,9 +41,9 @@ After recording your steps to complete the form, click the **Sign Up** button to
 
 To confirm that the email was sent, click **Assertion** and select **Test that an email was received**. To ensure your email follows specific guidelines for content, you can add additional verifications on the subject and body.
 
-{{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="Add an assertion" video="true" width="100%">}}
+{{< img src="synthetics/guide/email-validation/assertion-step_2.mp4" alt="Add an assertion" video="true" width="100%">}}
 
-In this example, the assertion is successful if the email subject is `Welcome to Shopist!`, the body contains the sentence `Your verification code is...`, and the verification code matches the `\d{1,6}` regex pattern.
+In this example, the assertion is successful if the email subject contains `Welcome to Shopist!`, the body contains the sentence `Your verification code is...`, and the verification code matches the `\d{1,6}` regex pattern.
 
 ### Navigate through links in an email
 

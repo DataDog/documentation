@@ -29,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: Blog
   text: Monitorización de logs DNS para la red y los análisis de seguridad
+- link: https://www.datadoghq.com/blog/akamai-zero-trust-application-security/
+  tag: Blog
+  text: Monitoriza Akamai Zero Trust y Application Security con Datadog Cloud SIEM
 title: Cloud SIEM
 ---
 

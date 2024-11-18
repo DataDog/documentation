@@ -6,6 +6,7 @@ aliases:
   - /security/application_security/enabling/single_step
   - /security/application_security/enabling/compatibility
   - /security/application_security/enabling
+  - /security/application_security/getting_started
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
@@ -43,6 +44,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
   tag: "Blog"
   text: "How Datadog Security Inbox prioritizes security risks"
+algolia:
+  tags: ["asm", "application security"]
 ---
 
 {{< site-region region="gov" >}}

@@ -94,7 +94,9 @@ metadata:
   name: argocd-notifications-cm
 data:
   trigger.cd-visibility-trigger: |
-    - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error', 'Running'] and app.status.health.status in ['Healthy', 'Degraded']
+    - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error'] and app.status.health.status in ['Healthy', 'Degraded']
+      send: [cd-visibility-template]
+    - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
       send: [cd-visibility-template]
 ```
 
@@ -147,6 +149,10 @@ metadata:
 
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
+<div class="alert alert-warning">
+Automatic service discovery is not supported when <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a> is used.
+</div>
+
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
 - `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
 - `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
@@ -183,7 +189,7 @@ By default, the Git metadata reported in deployment events is associated with th
 
 The following diagram represents an example of this kind of setup:
 
-{{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
+{{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
 In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
 

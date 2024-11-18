@@ -32,9 +32,9 @@ integration_version: ''
 is_public: true
 manifest_version: '1.0'
 monitors:
-  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
-  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
-  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
+  Anomaly in database connections: assets/monitors/rds_database_connections_anomaly.json
+  CPU utilization is high: assets/monitors/rds_cpu_utilization.json
+  Storage utilization is high: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS に関連する大量のメトリクスを追跡する。

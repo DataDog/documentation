@@ -17,8 +17,6 @@ title: 신서틱 테스트 모니터 사용
 
 신서틱 테스트를 생성하면 Datadog에서 자동으로 관련 모니터를 생성합니다. 신서틱 테스트 모니터에 알림이 있을 때 알림을 받도록 설정할 수 있습니다.
 
-{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="신서틱 테스트 모니터" style="width:100%;">}}
-
 ## 신서틱 테스트 모니터 생성
 
 <div class="alert alert-info"><a href="/monitors/">Monitors</a>에서 신서틱 테스트 모니터를 생성하거나 가져올 수 없습니다.</div>

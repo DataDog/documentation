@@ -147,7 +147,8 @@ def security_rules(content, content_dir):
                 "default_rule_id": data.get('defaultRuleId', '').strip(),
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
-                    # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                    f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                    f"/security/default_rules/{data.get('defaultRuleId', '').strip()}",
                     f"/security_monitoring/default_rules/{p.stem.lower()}"
                 ],
                 "rule_category": [],
@@ -189,7 +190,7 @@ def security_rules(content, content_dir):
                 # add 'tags' as frontmatter
                 for tag in tags:
                     if ':' in tag:
-                        key, value = tag.split(':')
+                        key, value = tag.split(':', maxsplit=1)
                         page_data[key] = value
                 if data.get('source', ''):
                     page_data["source"] = data.get('source', '')

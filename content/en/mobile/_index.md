@@ -33,10 +33,12 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
-1. Press the "Using Single Sign-On (SAML)?" button.
-2. Enter your company email and send the email.
-3. While on your mobile device, open the email and click on the indicated link.
-4. Enter your org's SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
+1. In the mobile app, select your data center region (for example, US1) in the upper right corner.
+2. Press the log-in button.
+3. Click the "Using Single Sign-On (SAML)?" link.
+4. Enter your company email and send the email.
+5. While on your mobile device, open the email and click on the indicated link.
+6. Enter your org's SAML credentials to be rerouted to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
 

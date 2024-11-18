@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - インテグレーション
+  - インテグレーションセットアップ
 aliases:
 - /ja/integrations/verisign_openhybrid/
 - /ja/integrations/snyk/
@@ -48,7 +52,7 @@ cascade:
     lang: en
     path: /integrations/amazon_web_services
   algolia:
-    category: Documentation
+    category: ドキュメント
     rank: 80
     subcategory: インテグレーション
     tags:

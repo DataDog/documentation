@@ -18,8 +18,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
 display_on_public_website: true
@@ -38,7 +38,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::OS とシステム
+  - Category::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup
@@ -74,7 +74,7 @@ Microsoft Windows および他のパッケージアプリケーションから�
 
 System.Diagnostics の使い方については、[PerformanceCounter クラス][3]を参照してください。メトリクスを追加した後、WMI でそれを見つけることができるはずです。WMI ネームスペースを参照するには、[WMI エクスプローラー][4]が便利でしょう。Powershell で [Get-WmiObject][5] を使用すると、同じ情報を見つけることができます。また、[WMI メトリクスの取得][6]の情報も確認してください。
 
-新しいメトリクスに My_New_Metric というカテゴリを割り当てる場合、WMI パスは
+新しいメトリクスに My_New_Metric というカテゴリを割り当てる場合、WMI パスは 
 `\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric` になります
 
 メトリクスが WMI に表示されない場合は、`winmgmt /resyncperf` を実行して、WMI に強制的にパフォーマンスライブラリを登録してみてください。

@@ -75,7 +75,7 @@ Windows では、パス `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log` 
 
 {{% tab "TCP/UDP" %}}
 
-To gather logs from your `<APP_NAME>` application that forwards its logs to TCP port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
+TCP ポート **10518** にログを転送する `<APP_NAME>` アプリケーションからログを収集するには、[Agent の構成ディレクトリ][1]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
 
 ```yaml
 logs:

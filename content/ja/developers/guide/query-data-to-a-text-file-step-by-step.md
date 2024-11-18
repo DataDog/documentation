@@ -16,7 +16,7 @@ title: データをクエリしてテキストファイルにするまでの手�
 
     a. `<YOUR_DD_API_KEY>` と `<YOUR_DD_APP_KEY>` を [Datadog API キーとアプリケーションキー][4]に置き換えます。
 
-    b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary][5].
+    b. `system.cpu.idle` を、取得するメトリクスに置き換えます。メトリクスのリストは [Datadog メトリクスサマリー][5]に表示されます。
 
     c. オプションで、`*` をホストに置き換えて、データを絞り込みます。ホストのリストは [Datadog インフラストラクチャーリスト][6]に表示されます。
 

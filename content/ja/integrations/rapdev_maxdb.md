@@ -21,11 +21,11 @@ assets:
     source_type_id: 10131
     source_type_name: RapDev MaxDB
   monitors:
-    RapDev MaxDB Data Volume Usage: assets/monitors/rapdev_maxdb_data_volume_usage.json
-    RapDev MaxDB Database Connection Check: assets/monitors/rapdev_maxdb_connection_check.json
-    RapDev MaxDB Database State: assets/monitors/rapdev_maxdb_state.json
-    RapDev MaxDB Lock Utilization: assets/monitors/rapdev_maxdb_lock_utilization.json
-    RapDev MaxDB Log Area Usage: assets/monitors/rapdev_maxdb_log_area_usage.json
+    Data volume usage is high: assets/monitors/rapdev_maxdb_data_volume_usage.json
+    Database connection is failing: assets/monitors/rapdev_maxdb_connection_check.json
+    Database is not online: assets/monitors/rapdev_maxdb_state.json
+    Lock utilization is high: assets/monitors/rapdev_maxdb_lock_utilization.json
+    Log area usage is high: assets/monitors/rapdev_maxdb_log_area_usage.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -37,7 +37,7 @@ categories:
 - data stores
 - マーケットプレイス
 - sap
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -111,9 +111,9 @@ MaxDB インテグレーションは MaxDB インスタンスのデータ、ロ�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: support@rapdev.io
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222
+ - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
