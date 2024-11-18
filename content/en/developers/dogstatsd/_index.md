@@ -303,7 +303,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 Add the following to your `composer.json`:
 
 ```text
-"datadog/php-datadogstatsd": "1.4.*"
+"datadog/php-datadogstatsd": "1.6.*"
 ```
 
 **Note**: The first version shipped in Composer is _0.0.3_
