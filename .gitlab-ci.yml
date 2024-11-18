@@ -164,7 +164,7 @@ before_script:
 build_preview:
   <<: *base_template
   rules:
-    - !reference [.if_mergequeue, rules ]
+    - !reference [.preview_rules, rules ]
   stage: build
   cache:
     - *hugo_cache
@@ -219,7 +219,6 @@ build_preview:
 build_preview_mergequeue:
   <<: *base_template
   rules:
-    - !reference [.preview_rules, rules ]
     - !reference [.if_mergequeue, rules ]
   stage: build
   cache:
@@ -261,7 +260,6 @@ link_checks_preview:
   <<: *base_template
   rules:
     - !reference [.preview_rules, rules ]
-    - !reference [.if_mergequeue, rules ]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -287,7 +285,6 @@ missing_tms_preview:
   <<: *base_template
   rules:
     - !reference [.preview_rules, rules ]
-    - !reference [.if_mergequeue, rules ]
   stage: post-deploy
   environment: "preview"
   allow_failure: true
