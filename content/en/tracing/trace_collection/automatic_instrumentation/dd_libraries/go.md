@@ -40,6 +40,7 @@ Before you begin, make sure you've already [installed and configured the Agent][
 There are two ways to instrument your Go application:
 
 1. **Semi-Automatic instrumentation**:
+  
   Use dd-trace-go in conjunction with our integration packages to automatically generate spans about libraries of your choosing. This option:
    - Gives you complete control over which parts of your application are traced.
    - Requires modifying the application's source code.
