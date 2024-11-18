@@ -13,7 +13,7 @@ further_reading:
     text: "OpenTelemetry Protocol Exporter"
 ---
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP traces intake endpoint is in private beta.
+  The Datadog OTLP traces intake endpoint is in Preview.
 {{< /callout >}} 
 
 {{< site-region region="ap1,gov" >}}
@@ -53,7 +53,7 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_K
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically.
 
-<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}:<br><ul><li>Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}}.<li>Replace <code>${YOUR_SITE}</code> with {{< region-param key="dd_site" code="true" >}}. </div>
+<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}:<br><ul><li>Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}}.<li>Replace <code>${YOUR_SITE}</code> with the organization name you received from Datadog. </div>
 
 {{< tabs >}}
 {{% tab "JavaScript" %}}

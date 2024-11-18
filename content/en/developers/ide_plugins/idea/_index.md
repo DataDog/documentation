@@ -206,6 +206,11 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 You can give feedback in the [discussion forum][1], or send an e-mail to [team-ide-integration@datadoghq.com][11].
 
+## Data and Telemetry
+Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][16] and [Datadog's EULA][17].
+
+If you don't wish to send this data to Datadog, you can opt out at any time in the settings: `Settings > Tools > Datadog > Data Sharing` and disable the `Send usage statistics` option.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -230,3 +235,5 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [13]: /static_analysis/?tab=githubactions
 [14]: /static_analysis/rules/#python-rules
 [15]: /logs/explorer/analytics/patterns/
+[16]: https://www.datadoghq.com/legal/privacy/
+[17]: https://www.datadoghq.com/legal/eula/

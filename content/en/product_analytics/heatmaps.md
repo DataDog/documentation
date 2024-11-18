@@ -1,8 +1,6 @@
 ---
 title: Heatmaps
 description: Heatmaps are a type of visualization allowing you to see where users click on your website.
-aliases:
-- /real_user_monitoring/heatmaps/
 further_reading:
 - link: '/product_analytics/session_replay/browser/'
   tag: 'Documentation'
@@ -87,7 +85,7 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 ## Backgrounds
 
-A background is a snapshot of a Session Replay. Each heatmap fetches the 20 backgrounds that triggered the most actions during a given session. You can use the **Choose Background** button to select a particular background for your heatmap.
+A background is a snapshot of a Session Replay. Each heatmap fetches the 20 backgrounds that triggered the most actions during a given session. Changing the background shows different results depending on the background selected. You can use the **Choose Background** button to select a particular background for your heatmap.
 
 A heatmap's list of backgrounds cannot be modified.
 
