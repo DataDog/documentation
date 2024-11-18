@@ -44,6 +44,8 @@ further_reading:
 
 Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
+**Tip**: To open Service Level Objectives from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `slo`.
+
 ## Key terminology
 
 Service Level Indicator (SLI)
