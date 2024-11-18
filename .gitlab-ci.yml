@@ -164,7 +164,6 @@ before_script:
 build_preview:
   <<: *base_template
   rules:
-    - !reference [.preview_rules, rules ]
     - !reference [.if_mergequeue, rules ]
   stage: build
   cache:
@@ -214,6 +213,47 @@ build_preview:
       if [ -s $PREVIEW_ERROR_LOG ] && [ $CI_JOB_STATUS != 'success' ]; then
         echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
       fi # Output the error to the console
+  interruptible: true
+
+# Only build the site for merge queue, we don't need to deploy or artifact since this is a follow up check to ensure the site builds correctly
+build_preview_mergequeue:
+  <<: *base_template
+  rules:
+    - !reference [.preview_rules, rules ]
+    - !reference [.if_mergequeue, rules ]
+  stage: build
+  cache:
+    - *hugo_cache
+    - *yarn_cache_pull_push
+    - *pip_cache
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+    CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
+    LOCAL: "False"
+  script:
+    - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
+    - touch Makefile.config
+    - make dependencies
+    - make config
+    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
+    - yarn run prebuild
+    - make update_websites_sources_module
+    - build_site
+    - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
+  artifacts:
+    when: always
+    paths:
+      - ${ARTIFACT_RESOURCE}
+      - ./integrations_data
+      - .github/
+      - .vale.ini
+      - .htmltest.yml
+      - ./logs
+      - $PREVIEW_ERROR_LOG
+      - ./latest-cached.tar.gz
+      - typesense.config.json
   interruptible: true
 
 link_checks_preview:
