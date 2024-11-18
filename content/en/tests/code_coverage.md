@@ -295,6 +295,10 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 {{% tab "Go" %}}
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Test optimization for Go is in Preview.
+{{< /callout >}}
+
 ### Compatibility
 
 * `go test -cover`
