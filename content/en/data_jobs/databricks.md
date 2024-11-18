@@ -170,11 +170,11 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{< /tabs >}}
 
-### Restart currently running clusters
+### Restart already-running clusters
 
 The init script installs the Agent when clusters start.
 
-Currently running all-purpose clusters or long-lived job clusters must be manually restarted for the init script to install the Datadog Agent.
+Already-running all-purpose clusters or long-lived job clusters must be manually restarted for the init script to install the Datadog Agent.
 
 For scheduled jobs that run on job clusters, the init script installs the Datadog Agent automatically on the next run.
 
