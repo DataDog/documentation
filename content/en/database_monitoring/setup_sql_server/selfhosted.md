@@ -10,7 +10,7 @@ further_reading:
   text: "Troubleshoot Common Issues"
 - link: "/database_monitoring/guide/sql_deadlock/"
   tag: "Documentation"
-  text: "Configuring Deadlock monitoring"
+  text: "Configure Deadlock Monitoring"
 - link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
   tag: "Blog"
   text: "Strategize your Azure migration for SQL workloads with Datadog"

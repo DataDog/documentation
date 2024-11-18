@@ -10,9 +10,7 @@ further_reading:
   text: "Troubleshoot Common Issues"
 - link: "/database_monitoring/guide/sql_deadlock/"
   tag: "Documentation"
-  text: "Configuring Deadlock monitoring"
-
-
+  text: "Configure Deadlock Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
