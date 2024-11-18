@@ -230,11 +230,11 @@ Extracts the portion of text following a certain pattern in a string.
   </tr>
   <tr>
     <td rowspan ="2">A log event has the following attribute:<br><code>@url</code> = "www.example.com/path/to/split"</td>
-    <td><code>#url_extraction = split_after(@url, "/", 1)</code></td>
+    <td><code>#url_extraction = split_after(@url, "/", 0)</code></td>
     <td><code>#url_extraction</code> = "path/to/split"</td>
   </tr>
   <tr>
-    <td><code>#url_extraction = split_after(@url, "/", 2)</code></td>
+    <td><code>#url_extraction = split_after(@url, "/", 1)</code></td>
     <td><code>#url_extraction</code> = "to/split"
 </table>
 

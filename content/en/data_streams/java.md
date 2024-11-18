@@ -15,11 +15,16 @@ further_reading:
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [APM enabled with the Java Agent][2]
-  * Kafka and RabbitMQ: v1.9.0 or later
-  * Amazon SQS: v1.27.0 or later
+
+### Supported libraries
+
+| Technology | Library                                                                                    | Minimal tracer version | Recommended tracer version |
+|------------|--------------------------------------------------------------------------------------------|------------------------|----------------------------|
+| Kafka      | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients)         | 1.9.0                  | 1.42.2 or later            |
+| RabbitMQ   | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                 | 1.9.0                  | 1.42.2 or later            |
+| Amazon SQS | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs) | 1.27.0                 | 1.42.2 or later            |
+| Amazon SQS | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                  | 1.27.0                 | 1.42.2 or later            |
 
 ### Installation
 
@@ -41,15 +46,12 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.t
 ```
 
 ### One-Click Installation
-To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][5]. Navigate to the APM Service Page and `Enable DSM`.
+To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.
 
 {{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
-### Supported libraries
-Data Streams Monitoring supports the [confluent-kafka library][3].
-
 ### Monitoring SQS pipelines
-Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ## Further Reading
 
@@ -57,6 +59,5 @@ Data Streams Monitoring uses one [message attribute][4] to track a message's pat
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
-[3]: https://pypi.org/project/confluent-kafka/
-[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
