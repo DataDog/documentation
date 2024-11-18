@@ -10,11 +10,11 @@ title: Extensión Datadog Lambda
 
 **Nota:** Este repositorio contiene notas de la versión, problemas, instrucciones y scripts relacionados con la extensión Datadog Lambda. La extensión es una compilación especial del Datadog Agent . El código fuente se puede encontrar [aquí](https://github.com/DataDog/datadog-agent/tree/main/cmd/serverless). 
 
-La extensión Datadog Lambda es una AWS Lambda Extension que admite el envío de <txprotected>métricas personalizadas</txprotected>, trazas (traces) y Logs de forma asíncrona mientras se ejecuta tu función AWS Lambda.
+La extensión Datadog Lambda es una AWS Lambda Extension que admite el envío de métricas personalizadas, trazas (traces) y Logs de forma asíncrona mientras se ejecuta tu función AWS Lambda.
 
 ## Instalación
 
-Sigue las [instrucciones de instalación](https://docs.datadoghq.com/serverless/installation) y ve las <txprotected>métricas mejoradas</txprotected>, trazas y logs de tu función en Datadog.
+Sigue las [instrucciones de instalación](https://docs.datadoghq.com/serverless/installation) y ve las métricas mejoradas, trazas y logs de tu función en Datadog.
 
 ## Actualización
 Para actualizar, actualiza la versión de la extensión Datadog en tus configuraciones de la Lambda Layer o en el archivo Docker (para las funciones Lambda desplegadas como imágenes del contenedor). Consulta las últimas [versiones](https://github.com/DataDog/datadog-lambda-extension/releases) y los logs de cambio correspondientes antes de actualizar.

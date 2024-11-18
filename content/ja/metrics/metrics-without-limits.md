@@ -69,7 +69,7 @@ Agent やコードレベルの変更を必要とせず、いつでも集計の�
 
 ## Metrics without LimitsTM の請求
 
-Configuring your tags and aggregations gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without LimitsTM decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+タグと集計を構成することで、どのカスタムメトリクスをクエリできるかを制御でき、最終的にカスタムメトリクスの請求対象数を減らすことができます。Metrics without LimitsTM は、インジェストコストとインデキシングコストを分離します。Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能にするタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量と、インデックスを作成した残りのデータ量が異なる場合、Usage ページや Metrics Summary ページに 2 つの異なるボリュームが表示されることがあります。
 
 - **Ingested Custom Metrics**: 取り込まれたすべてのタグに基づいたカスタムメトリクスの元のボリューム。
 - **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
@@ -83,13 +83,11 @@ Configuring your tags and aggregations gives you control over which custom metri
 1. [Plan & Usage ページ][9]の Metrics Summary ページ、または[API][2] から上位 20 のメトリクスを構成することができます。
    一括メトリクス構成 (`*` 構文) を使用すると、複数のメトリクスにタグを素早く構成することができます。Datadog は、一括構成ジョブが完了すると通知します。
 
-**Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
+**注:** [Create Tag Configuration API][2] を使用している場合、タグコンフィギュレーションを作成する前に、まず [tag configuration cardinality estimator API][5] を使用して、タグコンフィギュレーションの潜在的な影響を検証してください。UI または estimator API が、indested より大きい indexed の数を結果として返す場合、タグコンフィギュレーションを保存しないでください。
 
 2. クエリされていないメトリクスを空のタグコンフィギュレーションで構成します。
 
    Datadog プラットフォームでクエリされることのないノイズの多いメトリクスをクリーンアップし続けるチームは、タグの空の許可リストでメトリクスを構成することによって、これらのクエリされないメトリクスのコストを即座に最小化することができます。
-
-   未クエリのメトリクスレポートは、カスタマーサクセスマネージャーにお尋ねください。
 
 3. 使用量と請求を確認します。メトリクスの構成後、3 つの方法で変更の影響を検証することができます。
 

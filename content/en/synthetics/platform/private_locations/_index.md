@@ -19,6 +19,9 @@ further_reading:
     - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Configure an API Test'
+    - link: "https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/"
+      tag: "Architecture Center"
+      text: "Protect Sensitive Data with Synthetics Private Location Runners"
     - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location'
       tag: "External Site"
       text: 'Create and manage Synthetic Private Locations with Terraform'

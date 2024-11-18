@@ -2,7 +2,7 @@
 categories:
 - Collaboration
 - issue tracking
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Lee y comenta historias en tu flujo de eventos (streams) Datadog.
 doc_link: https://docs.datadoghq.com/integrations/pivotal/

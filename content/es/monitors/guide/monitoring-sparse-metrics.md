@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/functions/interpolation/#default-zero
   tag: Documentación
   text: Obtener más información sobre la interpolación
-kind: Guía
 title: Monitorizar métricas dispersas
 ---
 
@@ -54,7 +53,7 @@ Si el editor de gráficos no dispone de varias opciones para cambiar el estilo d
 ¿Se trata de un monitor de [logs][9], [eventos][10], [Audit Trail][11] o [seguimiento de errores][12]? Observa lo siguiente:
 
 * Verifica que la configuración de "Missing data" (Datos faltantes) corresponde al comportamiento esperado para el monitor: **Evaluate as zero**, **Show NO DATA**, **Show NO DATA and notify** o **Show OK** (Evaluar como cero, NO mostrar NINGÚN dato, NO mostrar NINGÚN dato y notificar, o Mostrar OK).
-  {{< img src="monitors/guide/sparse_metrics/data_is_missing.png" alt="Opciones de selección de datos faltantes en la sección "Configurar condiciones de alerta" de configuraciones del monitor" style="width:80%;" >}}
+  {{< img src="monitors/guide/sparse_metrics/data_is_missing.png" alt="Opciones de selección de datos faltantes en la sección 'Configurar condiciones de alerta' de configuraciones del monitor" style="width:80%;" >}}
 * Ajusta el periodo de evaluación. Si se espera que los puntos de datos estén disponibles cada 30 minutos, el periodo de evaluación debe tenerlo en cuenta.
 
 ## Monitorización basada en cronogramas
