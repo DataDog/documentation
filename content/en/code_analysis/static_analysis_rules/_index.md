@@ -91,6 +91,14 @@ rulesets:
     title: "React specific linting rules"
     description: |
       This plugin exports a `recommended` configuration that enforces React good practices.
+  kotlin-best-practices:
+    title: "Rules to enforce Kotlin best practices."
+    description: |
+
+  kotlin-code-style:
+    title: "Rules to check code style for Kotlin"
+    description: |
+
   php-best-practices:
     title: "Follow best practices for writing PHP code"
     description: |
