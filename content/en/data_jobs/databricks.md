@@ -145,6 +145,10 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
+## Troubleshooting
+
+{{% djm-install-troubleshooting %}}
+
 ## Advanced Configuration
 
 ### Tag spans at runtime
