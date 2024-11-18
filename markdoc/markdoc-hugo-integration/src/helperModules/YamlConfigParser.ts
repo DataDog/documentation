@@ -30,6 +30,58 @@ import { PageFilterConfig } from '../schemas/yaml/frontMatter';
  * and their options.
  */
 export class YamlConfigParser {
+  /**
+   * Collect all possible default values,
+   * and all possible selected values,
+   * for a given list of options set IDs.
+   */
+  static getPossibleDefaultsAndSelectedValues(p: {
+    filterId: string;
+    optionsSetIds: string[];
+    allowlist: Allowlist;
+    filterOptionsConfig: FilterOptionsConfig;
+  }): {
+    defaultValsByOptionsSetId: Record<string, string>;
+    possibleVals: string[];
+    errors: string[];
+  } {
+    // Populate the default value for each options set ID
+    const defaultValsByOptionsSetId: Record<string, string> = {};
+    const possibleVals: string[] = [];
+    const errors: string[] = [];
+
+    p.optionsSetIds.forEach((optionsSetId) => {
+      const optionsSet = p.filterOptionsConfig[optionsSetId];
+      if (!optionsSet) {
+        errors.push(
+          `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`
+        );
+        return;
+      }
+
+      optionsSet.forEach((option) => {
+        if (!p.allowlist.optionsById[option.id]) {
+          errors.push(
+            `Invalid option ID: The option ID '${option.id}' is not in the options allowlist.`
+          );
+        }
+
+        if (option.default) {
+          defaultValsByOptionsSetId[optionsSetId] = option.id;
+        }
+
+        possibleVals.push(option.id);
+      });
+    });
+
+    return { defaultValsByOptionsSetId, possibleVals, errors };
+  }
+
+  /**
+   * For filters whose options source contains placeholders,
+   * build all possible options set IDs that could be referenced
+   * by the filter, based on the preceding filters.
+   */
   static buildDynamicOptionsSetIds(p: {
     filterId: string;
     filterOptionsConfig: FilterOptionsConfig;
@@ -132,6 +184,8 @@ export class YamlConfigParser {
       return manifest;
     }
 
+    // Collect default values for each filter, keyed by filter ID,
+    // used to resolve placeholders in options sources
     manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
       filterOptionsConfig: p.filterOptionsConfig,
       filterConfigs: p.frontmatter.content_filters
@@ -148,8 +202,8 @@ export class YamlConfigParser {
     // to ensure correct definition order in frontmatter
     const processedFilterIds: string[] = [];
 
-    // Fill out the manifest in the order that the filters
-    // appeared in the frontmatter
+    // Fill out the manifest for each filter,
+    // in the order that the filters appeared in the frontmatter
     p.frontmatter.content_filters.forEach((pageFilterConfig) => {
       // Validate the filter ID
       if (!p.allowlist.filtersById[pageFilterConfig.id]) {
@@ -158,12 +212,11 @@ export class YamlConfigParser {
         );
       }
 
-      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
-
-      // Get the options set ID for this filter,
-      // or all possible options set IDs if the filter's options_source
-      // contains placeholders
+      // Get all possible options set IDs for this filter,
+      // so each one can have its range of values processed
+      // and the options set itself can be attached to the manifest
       let optionsSetIds: string[] = [];
+      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
         const { optionsSetIds: dynamicOptionsSetIds, errors } =
@@ -183,33 +236,19 @@ export class YamlConfigParser {
         optionsSetIds = [pageFilterConfig.options_source];
       }
 
-      // Populate the default value for each options set ID
-      const defaultValsByOptionsSetId: Record<string, string> = {};
-      const possibleVals: string[] = [];
-
-      optionsSetIds.forEach((optionsSetId) => {
-        const optionsSet = p.filterOptionsConfig[optionsSetId];
-        if (!optionsSet) {
-          manifest.errors.push(
-            `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${pageFilterConfig.id}', does not exist.`
-          );
-          return;
-        }
-
-        optionsSet.forEach((option) => {
-          if (!p.allowlist.optionsById[option.id]) {
-            manifest.errors.push(
-              `Invalid option ID: The option ID '${option.id}' is not in the options allowlist.`
-            );
-          }
-
-          if (option.default) {
-            defaultValsByOptionsSetId[optionsSetId] = option.id;
-          }
-
-          possibleVals.push(option.id);
+      // Collect a default value for every possible options set ID,
+      // along with all possible selected values for the filter
+      const { defaultValsByOptionsSetId, possibleVals, errors } =
+        this.getPossibleDefaultsAndSelectedValues({
+          filterId: pageFilterConfig.id,
+          optionsSetIds,
+          allowlist: p.allowlist,
+          filterOptionsConfig: p.filterOptionsConfig
         });
-      });
+
+      if (errors.length > 0) {
+        manifest.errors.push(...errors);
+      }
 
       manifest.filtersById[pageFilterConfig.id] = {
         config: pageFilterConfig,
@@ -220,7 +259,7 @@ export class YamlConfigParser {
       processedFilterIds.push(pageFilterConfig.id);
     });
 
-    // Add any options sets that were referenced by the filters
+    // Attach any options sets that were referenced by the filters
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filterManifest = manifest.filtersById[filterId];
       const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
