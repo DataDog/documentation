@@ -1,9 +1,3 @@
-/**
- * A module responsible for combining ingested configuration data
- * into a single object that defines the filters available on a page,
- * validating the data in the process.
- */
-
 import { FilterOptionsConfig } from '../schemas/yaml/filterOptions';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { Frontmatter } from '../schemas/yaml/frontMatter';
@@ -16,9 +10,9 @@ import {
 import { PageFilterConfig } from '../schemas/yaml/frontMatter';
 
 /**
- * A module responsible for all data ingestion from
- * the YAML files that define the available filters
- * and their options.
+ * A module responsible for combining ingested configuration data
+ * into a single object that defines the filters available on a page,
+ * validating the data in the process.
  */
 export class FiltersManifestBuilder {
   /**
@@ -42,6 +36,119 @@ export class FiltersManifestBuilder {
 
     return result;
   }
+
+  /**
+   * Combine a page's frontmatter, the global allowlist,
+   * and the global filter config into a single object
+   * that defines the filters available on the page.
+   */
+  static build(p: {
+    frontmatter: Frontmatter;
+    filterOptionsConfig: FilterOptionsConfig;
+    allowlist: Allowlist;
+  }): PageFiltersManifest {
+    // Create an empty manifest to populate
+    const manifest: PageFiltersManifest = {
+      filtersById: {},
+      optionSetsById: {},
+      errors: [],
+      defaultValsByFilterId: {}
+    };
+
+    // Return the empty manifest if the page has no filters
+    if (!p.frontmatter.content_filters) {
+      return manifest;
+    }
+
+    // Collect default values for each filter, keyed by filter ID,
+    // used to resolve placeholders in options sources
+    manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
+      filterOptionsConfig: p.filterOptionsConfig,
+      filterConfigs: p.frontmatter.content_filters
+    });
+
+    // Key the configs by filter ID, for convenient access during processing
+    const filterConfigByFilterId: Record<string, PageFilterConfig> =
+      p.frontmatter.content_filters.reduce(
+        (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
+        {}
+      );
+
+    // Keep track of the filter IDs that have been processed,
+    // to ensure correct definition order in frontmatter
+    const processedFilterIds: string[] = [];
+
+    // Fill out the manifest for each filter,
+    // in the order that the filters appeared in the frontmatter
+    p.frontmatter.content_filters.forEach((pageFilterConfig) => {
+      // Validate the filter ID
+      if (!p.allowlist.filtersById[pageFilterConfig.id]) {
+        manifest.errors.push(
+          `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the allowlist.`
+        );
+      }
+
+      // Get all possible options set IDs for this filter,
+      // so each one can have its range of values processed
+      // and the options set itself can be attached to the manifest
+      let optionsSetIds: string[] = [];
+      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
+
+      if (hasDynamicOptions) {
+        const { optionsSetIds: dynamicOptionsSetIds, errors } =
+          this.buildDynamicOptionsSetIds({
+            filterId: pageFilterConfig.id,
+            filterOptionsConfig: p.filterOptionsConfig,
+            filterConfigsByFilterId: filterConfigByFilterId,
+            precedingFilterIds: processedFilterIds
+          });
+
+        if (errors.length > 0) {
+          manifest.errors.push(...errors);
+        }
+
+        optionsSetIds = dynamicOptionsSetIds;
+      } else {
+        optionsSetIds = [pageFilterConfig.options_source];
+      }
+
+      // Collect a default value for every possible options set ID,
+      // along with all possible selected values for the filter
+      const { defaultValsByOptionsSetId, possibleVals, errors } =
+        this.getPossibleDefaultsAndSelectedValues({
+          filterId: pageFilterConfig.id,
+          optionsSetIds,
+          allowlist: p.allowlist,
+          filterOptionsConfig: p.filterOptionsConfig
+        });
+
+      if (errors.length > 0) {
+        manifest.errors.push(...errors);
+      }
+
+      manifest.filtersById[pageFilterConfig.id] = {
+        config: pageFilterConfig,
+        defaultValsByOptionsSetId: defaultValsByOptionsSetId,
+        possibleVals: possibleVals
+      };
+
+      processedFilterIds.push(pageFilterConfig.id);
+    });
+
+    // Attach any options sets that were referenced by the filters
+    Object.keys(manifest.filtersById).forEach((filterId) => {
+      const filterManifest = manifest.filtersById[filterId];
+      const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
+      optionsSetIds.forEach((optionsSetId) => {
+        if (!manifest.optionSetsById[optionsSetId]) {
+          manifest.optionSetsById[optionsSetId] = p.filterOptionsConfig[optionsSetId];
+        }
+      });
+    });
+
+    return manifest;
+  }
+
   /**
    * Collect all possible default values,
    * and all possible selected values,
@@ -171,118 +278,6 @@ export class FiltersManifestBuilder {
     }
 
     return defaultValsByFilterId;
-  }
-
-  /**
-   * Combine a page's frontmatter, the global allowlist,
-   * and the global filter config into a single object
-   * that defines the filters available on the page.
-   */
-  static build(p: {
-    frontmatter: Frontmatter;
-    filterOptionsConfig: FilterOptionsConfig;
-    allowlist: Allowlist;
-  }): PageFiltersManifest {
-    // Create an empty manifest to populate
-    const manifest: PageFiltersManifest = {
-      filtersById: {},
-      optionSetsById: {},
-      errors: [],
-      defaultValsByFilterId: {}
-    };
-
-    // Return the empty manifest if the page has no filters
-    if (!p.frontmatter.content_filters) {
-      return manifest;
-    }
-
-    // Collect default values for each filter, keyed by filter ID,
-    // used to resolve placeholders in options sources
-    manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
-      filterOptionsConfig: p.filterOptionsConfig,
-      filterConfigs: p.frontmatter.content_filters
-    });
-
-    // Key the configs by filter ID, for convenient access during processing
-    const filterConfigByFilterId: Record<string, PageFilterConfig> =
-      p.frontmatter.content_filters.reduce(
-        (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
-        {}
-      );
-
-    // Keep track of the filter IDs that have been processed,
-    // to ensure correct definition order in frontmatter
-    const processedFilterIds: string[] = [];
-
-    // Fill out the manifest for each filter,
-    // in the order that the filters appeared in the frontmatter
-    p.frontmatter.content_filters.forEach((pageFilterConfig) => {
-      // Validate the filter ID
-      if (!p.allowlist.filtersById[pageFilterConfig.id]) {
-        manifest.errors.push(
-          `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the allowlist.`
-        );
-      }
-
-      // Get all possible options set IDs for this filter,
-      // so each one can have its range of values processed
-      // and the options set itself can be attached to the manifest
-      let optionsSetIds: string[] = [];
-      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
-
-      if (hasDynamicOptions) {
-        const { optionsSetIds: dynamicOptionsSetIds, errors } =
-          this.buildDynamicOptionsSetIds({
-            filterId: pageFilterConfig.id,
-            filterOptionsConfig: p.filterOptionsConfig,
-            filterConfigsByFilterId: filterConfigByFilterId,
-            precedingFilterIds: processedFilterIds
-          });
-
-        if (errors.length > 0) {
-          manifest.errors.push(...errors);
-        }
-
-        optionsSetIds = dynamicOptionsSetIds;
-      } else {
-        optionsSetIds = [pageFilterConfig.options_source];
-      }
-
-      // Collect a default value for every possible options set ID,
-      // along with all possible selected values for the filter
-      const { defaultValsByOptionsSetId, possibleVals, errors } =
-        this.getPossibleDefaultsAndSelectedValues({
-          filterId: pageFilterConfig.id,
-          optionsSetIds,
-          allowlist: p.allowlist,
-          filterOptionsConfig: p.filterOptionsConfig
-        });
-
-      if (errors.length > 0) {
-        manifest.errors.push(...errors);
-      }
-
-      manifest.filtersById[pageFilterConfig.id] = {
-        config: pageFilterConfig,
-        defaultValsByOptionsSetId: defaultValsByOptionsSetId,
-        possibleVals: possibleVals
-      };
-
-      processedFilterIds.push(pageFilterConfig.id);
-    });
-
-    // Attach any options sets that were referenced by the filters
-    Object.keys(manifest.filtersById).forEach((filterId) => {
-      const filterManifest = manifest.filtersById[filterId];
-      const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
-      optionsSetIds.forEach((optionsSetId) => {
-        if (!manifest.optionSetsById[optionsSetId]) {
-          manifest.optionSetsById[optionsSetId] = p.filterOptionsConfig[optionsSetId];
-        }
-      });
-    });
-
-    return manifest;
   }
 
   /**

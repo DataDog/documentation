@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
 
-describe('YamlConfigParser.buildSnakeCaseCombinations', () => {
+describe('FiltersManifestBuilder.buildSnakeCaseCombinations', () => {
   test('returns all possible options source names', () => {
     const segments = [['red', 'blue'], ['gloss', 'matte'], ['paint'], ['options']];
     expect(FiltersManifestBuilder.buildSnakeCaseCombinations(segments)).toEqual([

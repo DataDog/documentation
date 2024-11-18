@@ -169,7 +169,7 @@ describe('FiltersManifestBuilder.build', () => {
     };
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
     expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/filtersManifest.snap.json`
+      `${SNAPSHOTS_DIR}/helperModules/FiltersManifestBuilder/valid/filtersManifest.snap.json`
     );
   });
 

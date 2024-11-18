@@ -1,9 +1,3 @@
-/**
- * A module responsible for finding, parsing, and validating
- * configurations that define the filter settings available to users,
- * the default values for each filter, and so on.
- */
-
 import {
   FilterOptionsConfig,
   FilterOptionsConfigSchema,
