@@ -28,9 +28,9 @@ After your applications have been instrumented, you can configure your RUM appli
 The available functionality has the following important limitations:
 
 - If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
-- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for Nginx web servers.
-- Auto-Instrumentation does not inject into encrypted requests served by Nginx or IIS related to TLS.
-- (Nginx only) Auto-Instrumentation does not inject encrypted requests served by the Nginx web server.
+- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX web servers.
+- Auto-Instrumentation does not inject into encrypted requests served by NGINX or IIS related to TLS.
+- (NGINX only) Auto-Instrumentation does not inject encrypted requests served by the NGINX web server.
 - (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
 
 ## Prerequisites
@@ -42,9 +42,9 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 <div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
 {{< tabs >}}
-{{% tab "Nginx" %}}
+{{% tab "NGINX" %}}
 
-The Auto-Instrumentation method leverages the [Nginx Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses 
+The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses 
 identified as HTML. You can instrument your RUM application automatically or manually.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
@@ -55,11 +55,11 @@ identified as HTML. You can instrument your RUM application automatically or man
 To automatically instrument your RUM application:
 
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
-2. Select **Auto-Instrumentation** and **Nginx**.
+2. Select **Auto-Instrumentation** and **NGINX**.
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][2].
-4. Copy and run the installer command to load the Datadog Nginx Module with the RUM SDK Injector onto nginx.
-5. After the installer successfully installs the SDK Injector, restart nginx to begin collecting RUM sessions.
-6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
+4. Copy and run the installer command to load the Datadog NGINX Module with the RUM SDK Injector onto NGINX.
+5. After the installer successfully installs the SDK Injector, restart NGINX to begin collecting RUM sessions.
+6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:
 
    ```javascript
    error_log <file> info;
@@ -74,11 +74,11 @@ To automatically instrument your RUM application:
 
 ### Download the appropriate `.tgz` file
 
-1. Use the `.tgz` file corresponding to your version of nginx. You can find all the relevant `.tgz` files listed by nginx version under [Reference](#reference).
+1. Use the `.tgz` file corresponding to your version of NGINX. You can find all the relevant `.tgz` files listed by NGINX version under [Reference](#reference).
 2. Extract the tarball to extract teh `ngx_http_datadog_module.so` file. Move it to a location that nginx has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 ### Update Nginx configuration
-1. The `NGINX.conf` file is usually located in nginx's configuration directory. Add the following line to load the module:
+1. The `NGINX.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
 
    ```javascript
    load_module <RUM_MODULE_PATH>;
@@ -107,8 +107,8 @@ To automatically instrument your RUM application:
 
 ### Restart your server
 
-1. Restart the nginx server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
-2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the nginx error logs for relevant messages. The module logs important steps during the injection process. Ensure that nginx is configured with at least the `INFO` log level with the following:
+1. Restart the NGINX server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:
 
    ```javascript
    error_log <file> info;
@@ -184,11 +184,11 @@ To update your RUM Application:
 
 ## Troubleshooting
 
-### Nginx stops responding
+### NGINX stops responding
 
-Since the module is in Preview, it's possible nginx may stop serving requests, particularly after installation. If you experience this issue, contact [Datadog support][4] with the following information to help us investigate and resolve the issue:
+Since the module is in Preview, it's possible NGINX may stop serving requests, particularly after installation. If you experience this issue, contact [Datadog support][4] with the following information to help us investigate and resolve the issue:
 
-- Your nginx configuration file
+- Your NGINX configuration file
 - Any relevant error logs
 
 ### RUM is not injected
@@ -196,11 +196,11 @@ Since the module is in Preview, it's possible nginx may stop serving requests, p
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Content compression by upstream server**: If nginx is acting as a proxy and the upstream server has content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure that content compression is disabled on the upstream server and configure nginx to compress the content.
+- **Content compression by upstream server**: If NGINX is acting as a proxy and the upstream server has content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure that content compression is disabled on the upstream server and configure NGINX to compress the content.
 
 ## Reference
 
-### Nginx modules
+### NGINX modules
 
 | Nginx version | amd64 | arm 64 |
 |---------------|-------|--------|
