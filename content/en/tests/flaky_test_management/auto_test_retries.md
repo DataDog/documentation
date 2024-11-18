@@ -31,7 +31,7 @@ Ensure [Test Optimization][1] is configured for your test runs.
 * dd-trace-js >= v5.19.0 and dd-trace-js >= v4.43.0
 * datadog-ci-rb >= 1.4.0
 * dd-trace-dotnet >= 3.4.0
-* orchestrion >= 0.9.5 (dd-trace-go >= 1.70.0)
+* orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1
 
 ### Configuration
 

@@ -22,7 +22,7 @@ Test optimization for Go is in Preview.
 
 ## Compatibility
 
-Test Impact Analysis is only supported on `orchestrion >= 0.9.5 (dd-trace-go >= 1.70.0)`.
+Test Impact Analysis is only supported on `orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`.
 
 ## Setup
 
