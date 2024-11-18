@@ -7,7 +7,7 @@ import {
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
 describe('YamlConfigParser.getDefaultValsByFilterId', () => {
-  const filterOptions: FilterOptionsConfig = {
+  const filterOptionsConfig: FilterOptionsConfig = {
     color_options: [
       { id: 'blue', display_name: 'Blue', default: true },
       { id: 'red', display_name: 'Red' }
@@ -41,7 +41,7 @@ describe('YamlConfigParser.getDefaultValsByFilterId', () => {
       { id: 'crimson', display_name: 'Crimson' }
     ]
   };
-  FilterOptionsConfigSchema.parse(filterOptions);
+  FilterOptionsConfigSchema.parse(filterOptionsConfig);
 
   const frontmatter: Frontmatter = {
     title: 'My Page',
@@ -66,10 +66,10 @@ describe('YamlConfigParser.getDefaultValsByFilterId', () => {
   FrontmatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
-    const defaultValsByFilterId = YamlConfigParser.getDefaultValsByFilterId(
-      frontmatter,
-      filterOptions
-    );
+    const defaultValsByFilterId = YamlConfigParser.getDefaultValsByFilterId({
+      filterConfigs: frontmatter.content_filters!,
+      filterOptionsConfig
+    });
     expect(defaultValsByFilterId).toEqual({
       color: 'blue',
       finish: 'eggshell',

@@ -2611,7 +2611,7 @@
          * Refresh all page content.
          */
         rerender() {
-          this.rerenderFilterSelector();
+          this.rerenderFilterMenu();
           this.rerenderPageContent();
           this.populateRightNav();
           markdocAfterRerenderHooks.forEach((hook) => hook());
@@ -2732,7 +2732,7 @@
          * Rerender the filter selector based on the current selections,
          * since some selections and options may have changed.
          */
-        rerenderFilterSelector() {
+        rerenderFilterMenu() {
           if (!this.filterSelectorEl || !this.filtersManifest) {
             throw new Error("Cannot rerender filter selector without filtersManifest and filterSelectorEl");
           }

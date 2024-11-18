@@ -30,6 +30,85 @@ import { PageFilterConfig } from '../schemas/yaml/frontMatter';
  * and their options.
  */
 export class YamlConfigParser {
+  static buildDynamicOptionsSetIds(p: {
+    filterId: string;
+    filterOptionsConfig: FilterOptionsConfig;
+    filterConfigsByFilterId: Record<string, PageFilterConfig>;
+    precedingFilterIds: string[];
+  }): { optionsSetIds: string[]; errors: string[] } {
+    const filter = p.filterConfigsByFilterId[p.filterId];
+
+    let optionsSetIds: string[] = [];
+    const errors: string[] = [];
+
+    const segments = filter.options_source.split('_').map((segment) => {
+      // build non-placeholder segment (array of solitary possible value)
+      if (!segment.match(PLACEHOLDER_REGEX)) {
+        return [segment];
+      }
+
+      // build placeholder segment (array of all possible values)
+      const referencedFilterId = segment.slice(1, -1).toLowerCase();
+      const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
+      if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
+        errors.push(
+          `Invalid placeholder: The placeholder ${segment} in the options source '${filter.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`
+        );
+        return [segment];
+      }
+
+      const referencedOptionsSet =
+        p.filterOptionsConfig[referencedFilterConfig.options_source];
+
+      return referencedOptionsSet.map((option) => option.id);
+    });
+
+    // Only finish building the options set IDs if there are no errors,
+    // to avoid generating invalid options set IDs
+    if (errors.length === 0) {
+      optionsSetIds = this.buildSnakeCaseCombinations(segments);
+    } else {
+      optionsSetIds = [];
+    }
+
+    return { optionsSetIds, errors };
+  }
+
+  /**
+   * Derive the default values for each filter,
+   * and return them keyed by filter ID.
+   */
+  static getDefaultValsByFilterId(p: {
+    filterOptionsConfig: FilterOptionsConfig;
+    filterConfigs: PageFilterConfig[];
+  }): Record<string, string> {
+    const defaultValsByFilterId: Record<string, string> = {};
+
+    // Process each entry in the frontmatter's content_filters list
+    for (const fmFilterConfig of p.filterConfigs) {
+      // Replace any placeholders in the options source
+      const optionsSetId = fmFilterConfig.options_source;
+      const resolvedOptionsSetId = optionsSetId.replace(
+        GLOBAL_PLACEHOLDER_REGEX,
+        (_match: string, placeholder: string) => {
+          const value = defaultValsByFilterId[placeholder.toLowerCase()];
+          return value || '';
+        }
+      );
+
+      // Resolve the default option set for this filter
+      const resolvedOptionSet = p.filterOptionsConfig[resolvedOptionsSetId];
+
+      if (resolvedOptionSet) {
+        defaultValsByFilterId[fmFilterConfig.id] =
+          fmFilterConfig.default_value ||
+          resolvedOptionSet.find((option) => option.default)!.id;
+      }
+    }
+
+    return defaultValsByFilterId;
+  }
+
   /**
    * Combine a page's frontmatter, the global allowlist,
    * and the global filter config into a single object
@@ -53,28 +132,12 @@ export class YamlConfigParser {
       return manifest;
     }
 
-    // Process each entry in the frontmatter's content_filters list
-    for (const fmFilterConfig of p.frontmatter.content_filters) {
-      // Replace any placeholders in the options source
-      const optionsSetId = fmFilterConfig.options_source;
-      const resolvedOptionsSetId = optionsSetId.replace(
-        GLOBAL_PLACEHOLDER_REGEX,
-        (_match: string, placeholder: string) => {
-          const value = manifest.defaultValsByFilterId[placeholder.toLowerCase()];
-          return value || '';
-        }
-      );
+    manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
+      filterOptionsConfig: p.filterOptionsConfig,
+      filterConfigs: p.frontmatter.content_filters
+    });
 
-      const resolvedOptionSet = p.filterOptionsConfig[resolvedOptionsSetId];
-
-      if (resolvedOptionSet) {
-        manifest.defaultValsByFilterId[fmFilterConfig.id] =
-          fmFilterConfig.default_value ||
-          resolvedOptionSet.find((option) => option.default)!.id;
-      }
-    }
-
-    // Key the configs by filter ID first, for convenience
+    // Key the configs by filter ID, for convenient access during processing
     const filterConfigByFilterId: Record<string, PageFilterConfig> =
       p.frontmatter.content_filters.reduce(
         (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
@@ -103,40 +166,19 @@ export class YamlConfigParser {
       let optionsSetIds: string[] = [];
 
       if (hasDynamicOptions) {
-        let hasFatalError = false;
+        const { optionsSetIds: dynamicOptionsSetIds, errors } =
+          this.buildDynamicOptionsSetIds({
+            filterId: pageFilterConfig.id,
+            filterOptionsConfig: p.filterOptionsConfig,
+            filterConfigsByFilterId: filterConfigByFilterId,
+            precedingFilterIds: processedFilterIds
+          });
 
-        // break the options source ID into segments
-        // that can be used to generate all possible options set IDs
-        const segments = pageFilterConfig.options_source.split('_').map((segment) => {
-          // build non-placeholder segment (array of solitary possible value)
-          if (!segment.match(PLACEHOLDER_REGEX)) {
-            return [segment];
-          }
-
-          // build placeholder segment (array of all possible values)
-          const referencedFilterId = segment.slice(1, -1).toLowerCase();
-          const referencedFilterConfig = filterConfigByFilterId[referencedFilterId];
-          if (
-            !referencedFilterConfig ||
-            !processedFilterIds.includes(referencedFilterId)
-          ) {
-            manifest.errors.push(
-              `Invalid placeholder: The placeholder ${segment} in the options source '${pageFilterConfig.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${pageFilterConfig.id}.`
-            );
-            hasFatalError = true;
-            return [segment];
-          }
-
-          const referencedOptionsSet =
-            p.filterOptionsConfig[referencedFilterConfig.options_source];
-          return referencedOptionsSet.map((option) => option.id);
-        });
-
-        if (!hasFatalError) {
-          optionsSetIds = this.buildSnakeCaseCombinations(segments);
-        } else {
-          optionsSetIds = [];
+        if (errors.length > 0) {
+          manifest.errors.push(...errors);
         }
+
+        optionsSetIds = dynamicOptionsSetIds;
       } else {
         optionsSetIds = [pageFilterConfig.options_source];
       }
@@ -356,81 +398,6 @@ export class YamlConfigParser {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent);
     return RawFilterOptionsConfigSchema.parse(parsedYaml);
-  }
-
-  /**
-   * For a given page, derive the default values for each filter
-   * from the frontmatter and the filter options configuration.
-   *
-   * This is useful for rendering the default version of a page,
-   * before the user has interacted with any filter controls.
-   */
-  static getDefaultValsByFilterId(
-    frontmatter: Frontmatter,
-    filterOptionsConfig: FilterOptionsConfig
-  ): Record<string, string> {
-    if (!frontmatter.content_filters) {
-      return {};
-    }
-    const defaultValsByFilterId: Record<string, string> = {};
-
-    for (const fmFilterConfig of frontmatter.content_filters) {
-      // replace placeholders
-      const optionsSetId = fmFilterConfig.options_source;
-      const resolvedOptionsSetId = optionsSetId.replace(
-        GLOBAL_PLACEHOLDER_REGEX,
-        (_match: string, placeholder: string) => {
-          const value = defaultValsByFilterId[placeholder.toLowerCase()];
-          return value;
-        }
-      );
-
-      defaultValsByFilterId[fmFilterConfig.id] =
-        fmFilterConfig.default_value ||
-        filterOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!.id;
-    }
-
-    return defaultValsByFilterId;
-  }
-
-  /**
-   * Verify that each placeholder refers to a valid page filter ID.
-   *
-   * For example, if there is a <COLOR> placeholder, there must
-   * also be a page filter with the ID 'color', and it must
-   * have been defined in the frontmatter before the placeholder is referenced.
-   */
-  static validatePlaceholderReferences(frontmatter: Frontmatter): void {
-    if (!frontmatter.content_filters) {
-      return;
-    }
-
-    const validFilterIds: string[] = [];
-
-    for (const fmFilterConfig of frontmatter.content_filters) {
-      const placeholderMatches =
-        fmFilterConfig.options_source.match(GLOBAL_PLACEHOLDER_REGEX) || [];
-
-      for (const placeholder of placeholderMatches) {
-        const match = placeholder.match(PLACEHOLDER_REGEX);
-        if (!match) {
-          throw new Error(
-            `Invalid placeholder found in options_source: ${fmFilterConfig.options_source}`
-          );
-        }
-
-        const referencedId = match[1].toLowerCase();
-        if (!validFilterIds.includes(referencedId)) {
-          throw new Error(
-            `Placeholder ${match[0]} does not refer to a valid page filter ID. Make sure that '${referencedId}' is spelled correctly, and that the '${referencedId}' parameter is defined in the content_filters list before it is referenced in ${match[0]}.`
-          );
-        }
-      }
-
-      // add this filter ID to the list of valid filter IDs
-      // that may be referenced by placeholders later in the list
-      validFilterIds.push(fmFilterConfig.id);
-    }
   }
 
   /**
