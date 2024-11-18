@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
+import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
 import {
   paintColorsFrontmatter,
   paintColorsFilterOptionsConfig,
@@ -9,9 +9,9 @@ import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { PageFiltersManifest } from '../../../src/schemas/pageFilters';
 
-describe('YamlConfigParser.buildPageFiltersManifest', () => {
+describe('FiltersManifestBuilder.buildPageFiltersManifest', () => {
   test('creates the expected object when given valid data', () => {
-    const manifest = YamlConfigParser.buildPageFiltersManifest({
+    const manifest = FiltersManifestBuilder.buildPageFiltersManifest({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
       allowlist: paintColorsAllowlist
@@ -196,7 +196,7 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
       ]
     };
 
-    const manifest = YamlConfigParser.buildPageFiltersManifest({
+    const manifest = FiltersManifestBuilder.buildPageFiltersManifest({
       frontmatter: invalidFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
       allowlist: paintColorsAllowlist
@@ -244,7 +244,7 @@ describe('YamlConfigParser.buildPageFiltersManifest', () => {
       ]
     };
 
-    const manifest = YamlConfigParser.buildPageFiltersManifest({
+    const manifest = FiltersManifestBuilder.buildPageFiltersManifest({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: invalidFilterOptionsConfig,
       allowlist: paintColorsAllowlist

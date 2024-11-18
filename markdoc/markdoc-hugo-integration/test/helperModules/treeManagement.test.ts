@@ -8,6 +8,7 @@ import {
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
 import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
+import { FiltersManifestBuilder } from '../../src/helperModules/FiltersManifestBuilder';
 
 describe('treeManagement', () => {
   const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
@@ -24,7 +25,7 @@ describe('treeManagement', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const filtersManifest = YamlConfigParser.buildPageFiltersManifest({
+  const filtersManifest = FiltersManifestBuilder.buildPageFiltersManifest({
     frontmatter: parsedFile.frontmatter,
     filterOptionsConfig: filterOptionsConfig,
     allowlist

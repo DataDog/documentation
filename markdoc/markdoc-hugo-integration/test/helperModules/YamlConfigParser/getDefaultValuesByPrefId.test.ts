@@ -1,12 +1,12 @@
 import { describe, test, expect } from 'vitest';
-import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
+import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
 import {
   FilterOptionsConfig,
   FilterOptionsConfigSchema
 } from '../../../src/schemas/yaml/filterOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
-describe('YamlConfigParser.getDefaultValsByFilterId', () => {
+describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
   const filterOptionsConfig: FilterOptionsConfig = {
     color_options: [
       { id: 'blue', display_name: 'Blue', default: true },
@@ -66,7 +66,7 @@ describe('YamlConfigParser.getDefaultValsByFilterId', () => {
   FrontmatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
-    const defaultValsByFilterId = YamlConfigParser.getDefaultValsByFilterId({
+    const defaultValsByFilterId = FiltersManifestBuilder.getDefaultValsByFilterId({
       filterConfigs: frontmatter.content_filters!,
       filterOptionsConfig
     });

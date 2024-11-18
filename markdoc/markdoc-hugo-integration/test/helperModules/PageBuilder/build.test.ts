@@ -2,6 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
 import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
+import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -30,7 +31,7 @@ describe('PageBuilder.build', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const draftFiltersManifest = YamlConfigParser.buildPageFiltersManifest({
+  const draftFiltersManifest = FiltersManifestBuilder.buildPageFiltersManifest({
     frontmatter: parsedFile.frontmatter,
     filterOptionsConfig: filterOptionsConfig,
     allowlist

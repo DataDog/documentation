@@ -14,6 +14,7 @@ import {
 import { PageFiltersManifestSchema } from './schemas/pageFilters';
 import { Allowlist } from './schemas/yaml/allowlist';
 import { HugoFunctions } from './helperModules/HugoFunctions';
+import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
 
 /**
  * The external interface of the integration.
@@ -239,7 +240,7 @@ export class MarkdocHugoIntegration {
     }
 
     // generate the filters manifest
-    const draftFiltersManifest = YamlConfigParser.buildPageFiltersManifest({
+    const draftFiltersManifest = FiltersManifestBuilder.buildPageFiltersManifest({
       frontmatter: p.parsedFile.frontmatter,
       filterOptionsConfig: this.filterOptionsConfigByLang[lang],
       allowlist: this.allowlistsByLang[lang]
