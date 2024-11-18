@@ -29,6 +29,7 @@ This is an introduction to Metrics in Datadog and why they're useful. This secti
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
+    {{< nextlink href="/metrics/nested_queries" >}}<u>Nested Queries</u> - Apply additional layers of aggregation to unlock advanced querying capabilities.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Understand and manage your custom metrics volumes and costs" >}}
@@ -103,6 +104,8 @@ See the [metrics types][16] documentation for more detailed examples of each met
 
 You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
+**Tip**: To open the Metrics Summary page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `metrics`.
+
 Here's an example of a timeseries visualization:
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="A timeseries graph displays a latency metric represented by a single blue line with several spikes" >}}
@@ -174,6 +177,10 @@ Space aggregation splits a single metric into multiple timeseries by tags such a
 
 There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
 
+#### Nested Queries
+Add additional layers of aggregation on the results of existing queries in time and space with nested queries in the UI or through the [API][27]. For more information, see the [Nested Queries][26] documentation.
+
+
 ### View real-time information about metrics
 
 The [Metrics Summary page][20] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
@@ -218,3 +225,5 @@ Read the [metrics summary documentation][22] for more details.
 [23]: /dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /dashboards/functions/
 [25]: /metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /metrics/nested_queries
+[27]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products

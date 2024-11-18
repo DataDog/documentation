@@ -123,6 +123,8 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
 
+**Tip**: To open RUM from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `real user monitoring`.
+
 ### Out-of-the-box dashboards
 
 Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
