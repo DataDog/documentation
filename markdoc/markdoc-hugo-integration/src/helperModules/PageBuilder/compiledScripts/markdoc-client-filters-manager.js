@@ -81,8 +81,6 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.convertToClientManifest = convertToClientManifest;
       exports.resolvePageFilters = resolvePageFilters;
-      exports.resolveMinifiedPageFilters = resolveMinifiedPageFilters;
-      exports.resolveMinifiedFilterOptionsSource = resolveMinifiedFilterOptionsSource;
       exports.resolveFilterOptionsSource = resolveFilterOptionsSource;
       var regexes_1 = require_regexes();
       function convertToClientManifest(manifest) {
@@ -131,44 +129,6 @@
           resolvedPageFilters[filterConfigDup.id] = resolvedFilter;
         });
         return resolvedPageFilters;
-      }
-      function resolveMinifiedPageFilters(p) {
-        const resolvedPageFilters = {};
-        const valsByFilterIdDup = Object.assign({}, p.valsByFilterId);
-        p.pageFiltersConfig.forEach((filterConfig) => {
-          const filterConfigDup = resolveMinifiedFilterOptionsSource({
-            pageFilterConfig: filterConfig,
-            valsByFilterId: valsByFilterIdDup
-          });
-          const defaultValue = filterConfigDup.d || p.filterOptionsConfig[filterConfigDup.o].find((option) => option.d).i;
-          const possibleVals = p.filterOptionsConfig[filterConfigDup.o].map((option) => option.i);
-          let currentValue = p.valsByFilterId[filterConfigDup.i];
-          if (currentValue && !possibleVals.includes(currentValue)) {
-            currentValue = defaultValue;
-            valsByFilterIdDup[filterConfigDup.i] = defaultValue;
-          }
-          const resolvedFilter = {
-            id: filterConfigDup.i,
-            displayName: filterConfigDup.n,
-            defaultValue,
-            currentValue,
-            options: p.filterOptionsConfig[filterConfigDup.o].map((option) => ({
-              id: option.i,
-              displayName: option.n
-            }))
-          };
-          resolvedPageFilters[filterConfigDup.i] = resolvedFilter;
-        });
-        return resolvedPageFilters;
-      }
-      function resolveMinifiedFilterOptionsSource(p) {
-        const filterConfigDup = Object.assign({}, p.pageFilterConfig);
-        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.o)) {
-          filterConfigDup.o = filterConfigDup.o.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
-            return p.valsByFilterId[placeholder.toLowerCase()];
-          });
-        }
-        return filterConfigDup;
       }
       function resolveFilterOptionsSource(p) {
         const filterConfigDup = Object.assign({}, p.pageFilterConfig);

@@ -71,52 +71,6 @@ export const RawFilterOptionsConfigSchema = z.record(
 export type RawFilterOptionsConfig = z.infer<typeof RawFilterOptionsConfigSchema>;
 
 /**
- * A minified version of the FilterOptionSchema.
- * This is used to reduce the size of the filter options
- * configuration when it is embedded in HTML.
- */
-const MinifiedFilterOptionSchema = z
-  .object({
-    n: z.string(), // display name
-    d: z.boolean().optional(), // default
-    i: z.string().regex(SNAKE_CASE_REGEX) // ID
-  })
-  .strict();
-
-/**
- * A minified version of the FilterOptionSchema.
- * This is used to reduce the size of the filter options
- * configuration when it is embedded in HTML.
- *
- * @example
- * {
- *   n: "Postgres", // option display name
- *   d: true,       // this option is the default
- *   i: "postgres"  // option ID
- * }
- */
-interface MinifiedFilterOption {
-  n: string; // display name
-  d?: boolean; // default
-  i: string; // ID
-}
-
-/**
- * A minified version of the FilterOptionsConfigSchema.
- */
-export const MinifiedFilterOptionsConfigSchema = z.record(
-  z.string().regex(FILTER_OPTIONS_ID_REGEX),
-  z.array(MinifiedFilterOptionSchema)
-);
-
-/**
- * A minified version of the FilterOptionsConfigSchema.
- */
-export interface MinifiedFilterOptionsConfig {
-  [key: string]: MinifiedFilterOption[];
-}
-
-/**
  * The validated filter options configuration
  * as it is parsed directly from the YAML config files.
  */

@@ -5,8 +5,6 @@
  */
 
 import {
-  MinifiedFilterOptionsConfig,
-  MinifiedFilterOptionsConfigSchema,
   FilterOptionsConfig,
   FilterOptionsConfigSchema,
   RawFilterOptionsConfig,
@@ -14,16 +12,9 @@ import {
 } from '../schemas/yaml/filterOptions';
 import { FileNavigator } from './FileNavigator';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import {
-  Frontmatter,
-  MinifiedPageFilterConfig,
-  MinifiedPageFiltersConfig,
-  MinifiedPageFiltersConfigSchema,
-  PageFiltersConfig
-} from '../schemas/yaml/frontMatter';
+import { Frontmatter } from '../schemas/yaml/frontMatter';
 import {
   Allowlist,
-  AllowlistSchema,
   AllowlistConfigSchema,
   AllowlistConfigEntry
 } from '../schemas/yaml/allowlist';
@@ -470,45 +461,5 @@ export class YamlConfigParser {
       );
     }
     return final;
-  }
-
-  /**
-   * Shorten the keys in a FilterOptionsConfig object to save space
-   * when storing the object inline at the bottom of an .md file.
-   */
-  static minifyFilterOptionsConfig(
-    filterOptionsConfig: FilterOptionsConfig
-  ): MinifiedFilterOptionsConfig {
-    const minifiedConfig: MinifiedFilterOptionsConfig = {};
-    for (const [optionsListId, optionsList] of Object.entries(filterOptionsConfig)) {
-      minifiedConfig[optionsListId] = optionsList.map((option) => ({
-        n: option.display_name,
-        d: option.default,
-        i: option.id
-      }));
-    }
-    MinifiedFilterOptionsConfigSchema.parse(minifiedConfig);
-    return minifiedConfig;
-  }
-
-  /**
-   * Shorten the keys in a PageFiltersConfig object to save space
-   * when storing the object inline at the bottom of an
-   * .md file.
-   */
-  static minifyPageFiltersConfig(
-    pageFiltersConfig: PageFiltersConfig
-  ): MinifiedPageFiltersConfig {
-    const minifiedConfig: Array<MinifiedPageFilterConfig> = [];
-    pageFiltersConfig.forEach((config) => {
-      minifiedConfig.push({
-        n: config.display_name,
-        i: config.id,
-        o: config.options_source,
-        d: config.default_value
-      });
-    });
-    MinifiedPageFiltersConfigSchema.parse(minifiedConfig);
-    return minifiedConfig;
   }
 }

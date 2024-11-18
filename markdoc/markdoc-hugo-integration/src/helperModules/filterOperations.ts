@@ -23,15 +23,7 @@ import {
   PageFiltersManifest,
   PageFiltersClientSideManifest
 } from '../schemas/pageFilters';
-import {
-  PageFilterConfig,
-  MinifiedPageFiltersConfig,
-  MinifiedPageFilterConfig
-} from '../schemas/yaml/frontMatter';
-import {
-  MinifiedFilterOptionsConfig,
-  FilterOptionsConfig
-} from '../schemas/yaml/filterOptions';
+import { PageFilterConfig } from '../schemas/yaml/frontMatter';
 
 /**
  * Convert a standard compile-time page filters manifest
@@ -115,77 +107,6 @@ export function resolvePageFilters(p: {
   });
 
   return resolvedPageFilters;
-}
-
-export function resolveMinifiedPageFilters(p: {
-  pageFiltersConfig: MinifiedPageFiltersConfig;
-  filterOptionsConfig: MinifiedFilterOptionsConfig;
-  valsByFilterId: Record<string, string>;
-}): ResolvedPageFilters {
-  const resolvedPageFilters: ResolvedPageFilters = {};
-  // Make a copy of the selected values,
-  // so we can update a value to the default
-  // if the incoming value is invalid
-  const valsByFilterIdDup = { ...p.valsByFilterId };
-
-  p.pageFiltersConfig.forEach((filterConfig) => {
-    // If the options source contains a placeholder, resolve it
-    const filterConfigDup = resolveMinifiedFilterOptionsSource({
-      pageFilterConfig: filterConfig,
-      valsByFilterId: valsByFilterIdDup
-    });
-
-    // Update the value for the filter,
-    // if the current value is no longer valid after placeholder resolution
-    const defaultValue =
-      filterConfigDup.d ||
-      p.filterOptionsConfig[filterConfigDup.o].find((option) => option.d)!.i;
-
-    const possibleVals = p.filterOptionsConfig[filterConfigDup.o].map(
-      (option) => option.i
-    );
-    let currentValue = p.valsByFilterId[filterConfigDup.i];
-    if (currentValue && !possibleVals.includes(currentValue)) {
-      currentValue = defaultValue;
-      valsByFilterIdDup[filterConfigDup.i] = defaultValue;
-    }
-
-    // Add the resolved filter to the returned object
-    const resolvedFilter: ResolvedPageFilter = {
-      id: filterConfigDup.i,
-      displayName: filterConfigDup.n,
-      defaultValue,
-      currentValue,
-      options: p.filterOptionsConfig[filterConfigDup.o].map((option) => ({
-        id: option.i,
-        displayName: option.n
-      }))
-    };
-
-    resolvedPageFilters[filterConfigDup.i] = resolvedFilter;
-  });
-
-  return resolvedPageFilters;
-}
-
-export function resolveMinifiedFilterOptionsSource(p: {
-  pageFilterConfig: MinifiedPageFilterConfig;
-  valsByFilterId: Record<string, string>;
-}): MinifiedPageFilterConfig {
-  const filterConfigDup = { ...p.pageFilterConfig };
-
-  // Replace any placeholder in the options source with the selected value
-  if (GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.o)) {
-    // Resolve the options source
-    filterConfigDup.o = filterConfigDup.o.replace(
-      GLOBAL_PLACEHOLDER_REGEX,
-      (_match: string, placeholder: string) => {
-        return p.valsByFilterId[placeholder.toLowerCase()];
-      }
-    );
-  }
-
-  return filterConfigDup;
 }
 
 /**

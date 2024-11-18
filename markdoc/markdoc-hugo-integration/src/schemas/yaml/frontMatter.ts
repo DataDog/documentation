@@ -16,64 +16,6 @@ export const PageFilterConfigSchema = z
 
 /**
  * The configuration of an individual page filter,
- * minified in order to reduce the load time of the HTML file
- * it's embedded in.
- */
-export const MinifiedPageFilterConfigSchema = z
-  .object({
-    n: z.string(), // display name
-    i: z.string().regex(SNAKE_CASE_REGEX), // id
-    o: z.string().regex(FILTER_OPTIONS_ID_REGEX), // options source
-    d: z.string().regex(SNAKE_CASE_REGEX).optional() // default value
-  })
-  .strict();
-
-/**
- * The configuration of an individual page filter,
- * minified in order to reduce the load time of the HTML file
- * it's embedded in.
- *
- * To keep Zod out of the browser bundle,
- * this type is defined independently of Zod,
- * rather than being derived directly from the schema,
- * which is the usual approach and would be less redundant.
- *
- * @example
- * {
- *   n: "Database",             // filter display name
- *   i: "database",             // filter ID
- *   o: "dbm_database_options", // filter source ID
- *   d: "postgres"              // filter default value
- * }
- */
-export interface MinifiedPageFilterConfig {
-  n: string; // display name
-  i: string; // ID
-  o: string; // options source
-  d?: string; // default value
-}
-
-/**
- * An array of minified filter configurations,
- * used to represent all available filters on the page
- * in a compact format to reduce HTML load time.
- *
- * To keep Zod out of the browser bundle,
- * this type is defined independently of Zod,
- * rather than being derived directly from the schema,
- * which is the usual approach and would be less redundant.
- */
-export const MinifiedPageFiltersConfigSchema = z.array(MinifiedPageFilterConfigSchema);
-
-/**
- * An array of minified filter configurations,
- * used to represent all available filters on the page
- * in a compact format to reduce HTML load time.
- */
-export type MinifiedPageFiltersConfig = Array<MinifiedPageFilterConfig>;
-
-/**
- * The configuration of an individual page filter,
  * as defined in the front matter of a document.
  *
  * @example
