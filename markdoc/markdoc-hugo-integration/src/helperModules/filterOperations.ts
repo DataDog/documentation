@@ -64,7 +64,7 @@ export function convertToClientManifest(
  */
 export function resolvePageFilters(p: {
   valsByFilterId: Record<string, string>;
-  filtersManifest: PageFiltersManifest;
+  filtersManifest: PageFiltersManifest | PageFiltersClientSideManifest;
 }): ResolvedPageFilters {
   const resolvedPageFilters: ResolvedPageFilters = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };

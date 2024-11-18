@@ -1,6 +1,4 @@
-import { FilterOptionsConfig } from '../../schemas/yaml/filterOptions';
 import { ParsedFile } from '../../schemas/compilationResults';
-import { YamlConfigParser } from '../YamlConfigParser';
 import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
@@ -152,17 +150,8 @@ export class PageBuilder {
 
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientFiltersManager.initialize({
-    pageFiltersConfig: ${JSON.stringify(
-      YamlConfigParser.minifyPageFiltersConfig(
-        Object.values(p.filtersManifest.filtersById).map((p) => p.config)
-      )
-    )},
-    filterOptionsConfig: ${JSON.stringify(
-      YamlConfigParser.minifyFilterOptionsConfig(p.filtersManifest.optionSetsById)
-    )},
-    selectedValsByFilterId: ${JSON.stringify(p.filtersManifest.defaultValsByFilterId)},
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
-    manifest: ${JSON.stringify(convertToClientManifest(p.filtersManifest))}
+    filtersManifest: ${JSON.stringify(convertToClientManifest(p.filtersManifest))}
   });
 }; `;
 

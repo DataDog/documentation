@@ -19,10 +19,8 @@
  */
 
 import { buildFilterSelectorUi } from './PageBuilder/components/ContentFilter';
-import { MinifiedFilterOptionsConfig } from '../schemas/yaml/filterOptions';
-import { MinifiedPageFiltersConfig } from '../schemas/yaml/frontMatter';
+import { resolvePageFilters } from './filterOperations';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
-import { resolveMinifiedPageFilters } from './filterOperations';
 import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
 import {
   expandClientFunction,
@@ -33,8 +31,7 @@ import { PageFiltersClientSideManifest } from '../schemas/pageFilters';
 export class ClientFiltersManager {
   static #instance: ClientFiltersManager;
 
-  private filterOptionsConfig?: MinifiedFilterOptionsConfig;
-  private pageFiltersConfig?: MinifiedPageFiltersConfig;
+  private filtersManifest?: PageFiltersClientSideManifest;
   private filterSelectorEl?: HTMLElement;
   private selectedValsByFilterId: Record<string, string> = {};
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
@@ -327,15 +324,11 @@ export class ClientFiltersManager {
    * Called by a given doc page on load.
    */
   initialize(p: {
-    filterOptionsConfig: MinifiedFilterOptionsConfig;
-    pageFiltersConfig: MinifiedPageFiltersConfig;
-    selectedValsByFilterId?: Record<string, string>;
     ifFunctionsByRef: Record<string, MinifiedClientFunction>;
-    manifest: PageFiltersClientSideManifest;
+    filtersManifest: PageFiltersClientSideManifest;
   }) {
-    this.filterOptionsConfig = p.filterOptionsConfig;
-    this.pageFiltersConfig = p.pageFiltersConfig;
-    this.selectedValsByFilterId = p.selectedValsByFilterId || {};
+    this.filtersManifest = p.filtersManifest;
+    this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
     this.ifFunctionsByRef = {};
 
     const contentIsCustomizable = this.locateFilterSelectorEl();
@@ -394,9 +387,9 @@ export class ClientFiltersManager {
    * since some selections and options may have changed.
    */
   rerenderFilterSelector() {
-    if (!this.pageFiltersConfig || !this.filterOptionsConfig || !this.filterSelectorEl) {
+    if (!this.filterSelectorEl || !this.filtersManifest) {
       throw new Error(
-        'Cannot rerender filter selector without pageFiltersConfig, filterOptionsConfig, and filterSelectorEl'
+        'Cannot rerender filter selector without filtersManifest and filterSelectorEl'
       );
     }
 
@@ -405,9 +398,8 @@ export class ClientFiltersManager {
      * can have a cascading impact on the interpolated placeholder values,
      * and thus the valid options for each filter.
      */
-    const resolvedPageFilters = resolveMinifiedPageFilters({
-      pageFiltersConfig: this.pageFiltersConfig,
-      filterOptionsConfig: this.filterOptionsConfig!,
+    const resolvedPageFilters = resolvePageFilters({
+      filtersManifest: this.filtersManifest,
       valsByFilterId: this.selectedValsByFilterId
     });
 

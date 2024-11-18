@@ -127,7 +127,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 15279,
+      "bytes": 15106,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
@@ -207,13 +207,13 @@
           "bytesInOutput": 3111
         },
         "dist/helperModules/ClientFiltersManager.js": {
-          "bytesInOutput": 14268
+          "bytesInOutput": 14093
         },
         "dist/markdoc-client-filters-manager.js": {
           "bytesInOutput": 354
         }
       },
-      "bytes": 94612
+      "bytes": 94437
     }
   }
 }

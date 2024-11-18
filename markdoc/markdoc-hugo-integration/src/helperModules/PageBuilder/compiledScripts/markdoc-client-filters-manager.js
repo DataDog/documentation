@@ -2720,9 +2720,8 @@
          * Called by a given doc page on load.
          */
         initialize(p) {
-          this.filterOptionsConfig = p.filterOptionsConfig;
-          this.pageFiltersConfig = p.pageFiltersConfig;
-          this.selectedValsByFilterId = p.selectedValsByFilterId || {};
+          this.filtersManifest = p.filtersManifest;
+          this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
           this.ifFunctionsByRef = {};
           const contentIsCustomizable = this.locateFilterSelectorEl();
           if (contentIsCustomizable) {
@@ -2769,12 +2768,11 @@
          * since some selections and options may have changed.
          */
         rerenderFilterSelector() {
-          if (!this.pageFiltersConfig || !this.filterOptionsConfig || !this.filterSelectorEl) {
-            throw new Error("Cannot rerender filter selector without pageFiltersConfig, filterOptionsConfig, and filterSelectorEl");
+          if (!this.filterSelectorEl || !this.filtersManifest) {
+            throw new Error("Cannot rerender filter selector without filtersManifest and filterSelectorEl");
           }
-          const resolvedPageFilters = (0, filterOperations_1.resolveMinifiedPageFilters)({
-            pageFiltersConfig: this.pageFiltersConfig,
-            filterOptionsConfig: this.filterOptionsConfig,
+          const resolvedPageFilters = (0, filterOperations_1.resolvePageFilters)({
+            filtersManifest: this.filtersManifest,
             valsByFilterId: this.selectedValsByFilterId
           });
           Object.keys(resolvedPageFilters).forEach((filterId) => {
