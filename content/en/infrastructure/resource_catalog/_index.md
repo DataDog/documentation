@@ -26,7 +26,7 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in preview.</div>
+<div class="alert alert-info">Resource Catalog is in Preview.</div>
 
 ## Overview
 

@@ -48,7 +48,7 @@ Dynamic Instrumentation requires the following:
 - For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
 - For PHP applications, tracing library [`dd-trace-php`][18] 1.4.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended, [autocomplete and search (in preview)][17] is enabled.
+- Recommended, [autocomplete and search (in Preview)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
 - The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
