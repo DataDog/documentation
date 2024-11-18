@@ -85,8 +85,6 @@ For configuration instructions and details about using the API, see the Datadog 
 
 #### Supported packages
 
-Orchestrion is under active development and supports a subset of integrations available in the [tracing library][1]. For the latest list of supported frameworks and their minimum Orchestrion versions, see the [Supported frameworks](#supported-frameworks).
-
 ### Install Orchestrion
 
 To install and set up Orchestrion:
@@ -96,7 +94,7 @@ To install and set up Orchestrion:
    go install github.com/DataDog/orchestrion@latest
    ```
    <div class="alert alert-info">Ensure <code>$(go env GOBIN)</code> (or <code>$(go env GOPATH)/bin</code>) is in your <code>$PATH</code>.</div>
-   
+
 1. Register Orchestrion in your project's `go.mod`:
    ```sh
    orchestrion pin
@@ -112,7 +110,7 @@ Now you can manage your dependency on `orchestrion` like any other dependency us
 
 Use one of these methods to enable Orchestrion in your build process:
 
-#### Prepend `orchestrion` to your usual `go` commands:  
+#### Prepend `orchestrion` to your usual `go` commands:
   ```sh
   orchestrion go build .
   orchestrion go run .
@@ -136,11 +134,11 @@ Use one of these methods to enable Orchestrion in your build process:
 
 #### Create custom trace spans
 
-To create custom trace spans for functions accepting `context.Context` or `*http.Request` arguments, add the `//dd:span` directive comment to the function declaration:
+Custom trace spans can be automtically created for any function annotated with the `//dd:span` directive comment:
 
 {{<code-block lang="go" filename="example.go" collapsible="true">}}
 //dd:span custom_tag:tag_value
-func CriticalPathFunction(ctx context.Context) {
+func CriticalPathFunction() {
   // ... implementation details ...
 }
 {{</code-block>}}
@@ -154,6 +152,42 @@ handler := func(w http.ResponseWriter, r *http.Request) {
 }
 {{</code-block>}}
 
+##### Operation Name
+
+The name of the operation (`span.name`) is determined automatically using the following precedence:
+1. An explicit `span.name:customOperationName` tag specified as a directive argument
+2. The function's declared name (this does not apply to function literal expressions, which are anonymous)
+3. The value of the very first tag provided to the directive arguments list
+
+{{<code-block lang="go" filename="example.go" collapsible="true">}}
+//dd:span tag-name:spanName other-tag:bar span.name:operationName
+func tracedFunction() {
+  // This functino will be represented as a span named "operationName"
+}
+
+//dd:span tag-name:spanName other-tag:bar
+func otherTracedFunction() {
+  // This functino will be represented as a span named "otherTracedFunction"
+}
+
+//dd:span tag-name:spanName other-tag:bar
+tracedFunction := func() {
+  // This function will be represented as a span named "spanName"
+}
+{{</code-block>}}
+
+##### Error Results
+
+If the annotated function returns an `error` result, any error returned by the function will be automatically attached to the corresponding trace span:
+
+{{<code-block lang="go" filename="example.go" collapsible="true">}}
+//dd:span
+func failableFunction() (any, error) {
+  // This span will have error information attached automatically.
+  return nil, errors.ErrUnsupported
+}
+{{</code-block>}}
+
 #### Use the tracing library
 
 You can use the [tracing library][4] in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
@@ -162,28 +196,6 @@ You can use the [tracing library][4] in your Orchestrion-built application. This
 
 Your Orchestrion-built application includes [continuous profiler][12] instrumentation.
 To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true` at runtime.
-
-### Supported frameworks
-
-| Library                             | Minimum orchestrion version   |
-|-------------------------------------|-------------------------------|
-| `database/sql`                      | `v0.7.0`                      |
-| `github.com/gin-gonic/gin`          | `v0.7.0`                      |
-| `github.com/go-chi/chi/v5`          | `v0.7.0`                      |
-| `github.com/go-chi/chi`             | `v0.7.0`                      |
-| `github.com/go-redis/redis/v7`      | `v0.7.0`                      |
-| `github.com/go-redis/redis/v8`      | `v0.7.0`                      |
-| `github.com/gofiber/fiber/v2`       | `v0.7.0`                      |
-| `github.com/gomodule/redigo/redis`  | `v0.7.0`                      |
-| `github.com/gorilla/mux`            | `v0.7.0`                      |
-| `github.com/jinzhu/gorm`            | `v0.7.0`                      |
-| `github.com/labstack/echo/v4`       | `v0.7.0`                      |
-| `google.golang.org/grpc`            | `v0.7.0`                      |
-| `gorm.io/gorm`                      | `v0.7.0`                      |
-| `net/http`                          | `v0.7.0`                      |
-| `go.mongodb.org/mongo-driver/mongo` | `v0.7.3`                      |
-| `k8s.io/client-go`                  | `v0.7.4`                      |
-| `github.com/hashicorp/vault`        | `v0.7.4`                      |
 
 ### Troubleshooting
 
