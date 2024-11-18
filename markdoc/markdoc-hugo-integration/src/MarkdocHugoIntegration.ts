@@ -12,7 +12,7 @@ import {
   CompilationResult
 } from './schemas/compilationResults';
 import { PageFiltersManifestSchema } from './schemas/pageFilters';
-import { Allowlist } from './schemas/yaml/allowlist';
+import { Glossary } from './schemas/yaml/glossary';
 import { HugoFunctions } from './helperModules/HugoFunctions';
 import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
 
@@ -26,7 +26,7 @@ import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
 export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
   filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
-  allowlistsByLang: Record<string, Allowlist> = {};
+  glossariesByLang: Record<string, Glossary> = {};
   private compiledFilePaths: string[] = [];
 
   // Errors from the markup-string-to-AST parsing process,
@@ -46,8 +46,8 @@ export class MarkdocHugoIntegration {
     };
     this.hugoGlobalConfig = HugoGlobalConfigSchema.parse(hugoGlobalConfig);
 
-    // Load the English allowlist configuration
-    this.allowlistsByLang = YamlConfigParser.loadAllowlistsByLang({
+    // Load the English glossary configuration
+    this.glossariesByLang = YamlConfigParser.loadGlossariesByLang({
       filtersConfigDir: this.hugoGlobalConfig.dirs.filtersConfig,
       langs: this.hugoGlobalConfig.languages
     });
@@ -56,7 +56,7 @@ export class MarkdocHugoIntegration {
     this.filterOptionsConfigByLang = {
       en: YamlConfigParser.loadFiltersConfigFromLangDir({
         dir: this.hugoGlobalConfig.dirs.filtersConfig + '/en',
-        allowlist: this.allowlistsByLang.en
+        glossary: this.glossariesByLang.en
       })
     };
 
@@ -70,7 +70,7 @@ export class MarkdocHugoIntegration {
       try {
         translatedFilterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
           dir: this.hugoGlobalConfig.dirs.filtersConfig + '/' + lang,
-          allowlist: this.allowlistsByLang[lang]
+          glossary: this.glossariesByLang[lang]
         });
       } catch (e) {
         // If no filters config directory exists for this language,
@@ -243,7 +243,7 @@ export class MarkdocHugoIntegration {
     const draftFiltersManifest = FiltersManifestBuilder.build({
       frontmatter: p.parsedFile.frontmatter,
       filterOptionsConfig: this.filterOptionsConfigByLang[lang],
-      allowlist: this.allowlistsByLang[lang]
+      glossary: this.glossariesByLang[lang]
     });
 
     if (draftFiltersManifest.errors.length > 0) {

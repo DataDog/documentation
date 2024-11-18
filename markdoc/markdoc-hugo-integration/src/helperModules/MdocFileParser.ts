@@ -15,11 +15,7 @@ export class MdocFileParser {
    * Parse a Markdoc file and return its AST, frontmatter, partials,
    * and any validation errors encountered during parsing.
    */
-  static parseMdocFile(p: {
-    file: string;
-    partialsDir: string;
-    // allowlistsByType: AllowlistsByType
-  }): Readonly<ParsedFile> {
+  static parseMdocFile(p: { file: string; partialsDir: string }): Readonly<ParsedFile> {
     const markdocStr = fs.readFileSync(p.file, 'utf8');
     const ast = MarkdocStaticCompiler.parse(markdocStr);
 

@@ -4,13 +4,13 @@ import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
 
-describe('YamlConfigParser.loadAllowlistFromLangDir', () => {
+describe('YamlConfigParser.loadGlossaryFromLangDir', () => {
   const langDir = `${VALID_FILTERS_CONFIG_DIR}/en`;
 
-  test('builds the expected allowlist', () => {
-    const allowlist = YamlConfigParser.loadAllowlistFromLangDir(langDir);
+  test('builds the expected glossary', () => {
+    const glossary = YamlConfigParser.loadGlossaryFromLangDir(langDir);
 
-    const expectedAllowlist = {
+    const expectedGlossary = {
       filtersById: {
         color: {
           id: 'color',
@@ -105,9 +105,9 @@ describe('YamlConfigParser.loadAllowlistFromLangDir', () => {
       }
     };
 
-    expect(_.isEqual(allowlist, expectedAllowlist)).toBe(true);
-    expect(allowlist).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/allowlist.snap.json`
+    expect(_.isEqual(glossary, expectedGlossary)).toBe(true);
+    expect(glossary).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossary.snap.json`
     );
   });
 });

@@ -26,7 +26,7 @@ export const FilterOptionSchema = z
  * without additional default values populated.
  * For example, the display value will be missing
  * from an option when the intention is to use the default
- * display name as defined in the options allowlist.
+ * display name as defined in the options glossary.
  */
 export const RawFilterOptionsConfigSchema = z.record(
   z.string().regex(FILTER_OPTIONS_ID_REGEX),
@@ -66,7 +66,7 @@ export const RawFilterOptionsConfigSchema = z.record(
  * without additional default values populated.
  * For example, the display value will be missing
  * from an option when the intention is to use the default
- * display name as defined in the options allowlist.
+ * display name as defined in the options glossary.
  */
 export type RawFilterOptionsConfig = z.infer<typeof RawFilterOptionsConfigSchema>;
 

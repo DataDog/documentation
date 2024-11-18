@@ -6,10 +6,10 @@ import {
 } from '../schemas/yaml/filterOptions';
 import { FileNavigator } from './FileNavigator';
 import {
-  Allowlist,
-  AllowlistConfigSchema,
-  AllowlistConfigEntry
-} from '../schemas/yaml/allowlist';
+  Glossary,
+  GlossaryConfigSchema,
+  GlossaryEntryConfig
+} from '../schemas/yaml/glossary';
 import fs from 'fs';
 import yaml from 'js-yaml';
 
@@ -25,21 +25,21 @@ export class YamlConfigParser {
    */
   static loadFiltersConfigFromLangDir(p: {
     dir: string;
-    allowlist: Allowlist;
+    glossary: Glossary;
   }): Readonly<FilterOptionsConfig> {
     const optionSetsDir = `${p.dir}/filter_option_sets`;
     const filterOptionsConfig = this.loadFilterOptionsFromDir(optionSetsDir);
 
     Object.values(filterOptionsConfig).forEach((optionsList) => {
       const displayNamesByAllowedOptionId: Record<string, string> = Object.values(
-        p.allowlist.optionsById
+        p.glossary.optionsById
       ).reduce((acc, entry) => ({ ...acc, [entry.id]: entry.display_name }), {});
 
       optionsList.forEach((option) => {
         const defaultDisplayName = displayNamesByAllowedOptionId[option.id];
         if (!defaultDisplayName) {
           throw new Error(
-            `The option ID '${option.id}' does not exist in the options allowlist.`
+            `The option ID '${option.id}' does not exist in the options glossary.`
           );
         }
         if (!option.display_name) {
@@ -52,62 +52,62 @@ export class YamlConfigParser {
   }
 
   /**
-   * Load all of the allowlists for all languages,
+   * Load all of the glossaries for all languages,
    * keyed by language code.
    */
-  static loadAllowlistsByLang(p: {
+  static loadGlossariesByLang(p: {
     filtersConfigDir: string;
     langs: string[];
     defaultLang?: string;
-  }): Record<string, Allowlist> {
+  }): Record<string, Glossary> {
     const defaultLang = p.defaultLang || 'en';
-    const allowlistsByLang: Record<string, Allowlist> = {};
+    const glossariesByLang: Record<string, Glossary> = {};
 
-    const defaultAllowlist = this.loadAllowlistFromLangDir(
+    const defaultGlossary = this.loadGlossaryFromLangDir(
       `${p.filtersConfigDir}/${defaultLang}`
     );
 
     p.langs.forEach((lang) => {
       if (lang === defaultLang) {
-        allowlistsByLang[lang] = defaultAllowlist;
+        glossariesByLang[lang] = defaultGlossary;
         return;
       }
       const langDir = `${p.filtersConfigDir}/${lang}`;
-      const translatedAllowlist = this.loadAllowlistFromLangDir(langDir);
+      const translatedGlossary = this.loadGlossaryFromLangDir(langDir);
 
-      // merge the translated allowlist with the default allowlist
-      const mergedAllowlist: Allowlist = {
+      // merge the translated glossary with the default glossary
+      const mergedGlossary: Glossary = {
         filtersById: {
-          ...defaultAllowlist.filtersById,
-          ...translatedAllowlist.filtersById
+          ...defaultGlossary.filtersById,
+          ...translatedGlossary.filtersById
         },
         optionsById: {
-          ...defaultAllowlist.optionsById,
-          ...translatedAllowlist.optionsById
+          ...defaultGlossary.optionsById,
+          ...translatedGlossary.optionsById
         }
       };
 
-      allowlistsByLang[lang] = mergedAllowlist;
+      glossariesByLang[lang] = mergedGlossary;
     });
 
-    return allowlistsByLang;
+    return glossariesByLang;
   }
 
   /**
-   * For a given language, load the filter and options allowlists.
+   * For a given language, load the filter and options glossaries.
    */
-  static loadAllowlistFromLangDir(dir: string): Allowlist {
-    const result: Allowlist = { filtersById: {}, optionsById: {} };
+  static loadGlossaryFromLangDir(dir: string): Glossary {
+    const result: Glossary = { filtersById: {}, optionsById: {} };
 
-    // Load and validate the filters allowlist
-    const filtersAllowlistFilePath = `${dir}/allowlists/filter_ids.yaml`;
+    // Load and validate the filters glossary
+    const filtersGlossaryFilePath = `${dir}/glossary/filter_ids.yaml`;
     try {
-      const filtersAllowlistConfigStr = fs.readFileSync(filtersAllowlistFilePath, 'utf8');
-      const filtersAllowlist = AllowlistConfigSchema.parse(
-        yaml.load(filtersAllowlistConfigStr)
+      const filtersGlossaryConfigStr = fs.readFileSync(filtersGlossaryFilePath, 'utf8');
+      const filtersGlossary = GlossaryConfigSchema.parse(
+        yaml.load(filtersGlossaryConfigStr)
       );
-      result.filtersById = filtersAllowlist.allowed.reduce<
-        Record<string, AllowlistConfigEntry>
+      result.filtersById = filtersGlossary.allowed.reduce<
+        Record<string, GlossaryEntryConfig>
       >((acc, entry) => {
         acc[entry.id] = entry;
         return acc;
@@ -121,15 +121,13 @@ export class YamlConfigParser {
       }
     }
 
-    // Load and validate the options allowlist
-    const optionsAllowlistFilePath = `${dir}/allowlists/filter_options.yaml`;
+    // Load and validate the options glossary
+    const optionsGlossaryFilePath = `${dir}/glossary/filter_options.yaml`;
     try {
-      const optionsAllowlistStr = fs.readFileSync(optionsAllowlistFilePath, 'utf8');
-      const optionsAllowlist = AllowlistConfigSchema.parse(
-        yaml.load(optionsAllowlistStr)
-      );
-      result.optionsById = optionsAllowlist.allowed.reduce<
-        Record<string, AllowlistConfigEntry>
+      const optionsGlossaryStr = fs.readFileSync(optionsGlossaryFilePath, 'utf8');
+      const optionsGlossary = GlossaryConfigSchema.parse(yaml.load(optionsGlossaryStr));
+      result.optionsById = optionsGlossary.allowed.reduce<
+        Record<string, GlossaryEntryConfig>
       >((acc, entry) => {
         acc[entry.id] = entry;
         return acc;

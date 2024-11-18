@@ -3,7 +3,7 @@ import {
   FilterOptionsConfigSchema
 } from '../../../src/schemas/yaml/filterOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
-import { Allowlist } from '../../../src/schemas/yaml/allowlist';
+import { Glossary } from '../../../src/schemas/yaml/glossary';
 
 export const paintColorsFilterOptionsConfig: FilterOptionsConfig = {
   color_options: [
@@ -63,7 +63,7 @@ export const paintColorsFrontmatter: Frontmatter = {
 };
 FrontmatterSchema.parse(paintColorsFrontmatter);
 
-export const paintColorsAllowlist: Allowlist = {
+export const paintColorsGlossary: Glossary = {
   filtersById: {
     color: {
       id: 'color',

@@ -18,10 +18,10 @@ import {
 describe('PageBuilder.build', () => {
   const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
-  const allowlist = YamlConfigParser.loadAllowlistFromLangDir(LANG_DIR);
+  const glossary = YamlConfigParser.loadGlossaryFromLangDir(LANG_DIR);
   const filterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
     dir: LANG_DIR,
-    allowlist
+    glossary
   });
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
@@ -34,7 +34,7 @@ describe('PageBuilder.build', () => {
   const draftFiltersManifest = FiltersManifestBuilder.build({
     frontmatter: parsedFile.frontmatter,
     filterOptionsConfig: filterOptionsConfig,
-    allowlist
+    glossary
   });
 
   const filtersManifest = PageFiltersManifestSchema.parse(draftFiltersManifest);

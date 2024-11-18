@@ -1,7 +1,7 @@
 import { FilterOptionsConfig } from '../schemas/yaml/filterOptions';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { Frontmatter } from '../schemas/yaml/frontMatter';
-import { Allowlist } from '../schemas/yaml/allowlist';
+import { Glossary } from '../schemas/yaml/glossary';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
   PageFiltersManifest,
@@ -38,14 +38,14 @@ export class FiltersManifestBuilder {
   }
 
   /**
-   * Combine a page's frontmatter, the global allowlist,
+   * Combine a page's frontmatter, the global glossary,
    * and the global filter config into a single object
    * that defines the filters available on the page.
    */
   static build(p: {
     frontmatter: Frontmatter;
     filterOptionsConfig: FilterOptionsConfig;
-    allowlist: Allowlist;
+    glossary: Glossary;
   }): PageFiltersManifest {
     // Create an empty manifest to populate
     const manifest: PageFiltersManifest = {
@@ -82,9 +82,9 @@ export class FiltersManifestBuilder {
     // in the order that the filters appeared in the frontmatter
     p.frontmatter.content_filters.forEach((pageFilterConfig) => {
       // Validate the filter ID
-      if (!p.allowlist.filtersById[pageFilterConfig.id]) {
+      if (!p.glossary.filtersById[pageFilterConfig.id]) {
         manifest.errors.push(
-          `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the allowlist.`
+          `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the glossary.`
         );
       }
 
@@ -118,7 +118,7 @@ export class FiltersManifestBuilder {
         this.getPossibleDefaultsAndSelectedValues({
           filterId: pageFilterConfig.id,
           optionsSetIds,
-          allowlist: p.allowlist,
+          glossary: p.glossary,
           filterOptionsConfig: p.filterOptionsConfig
         });
 
@@ -157,7 +157,7 @@ export class FiltersManifestBuilder {
   static getPossibleDefaultsAndSelectedValues(p: {
     filterId: string;
     optionsSetIds: string[];
-    allowlist: Allowlist;
+    glossary: Glossary;
     filterOptionsConfig: FilterOptionsConfig;
   }): {
     defaultValsByOptionsSetId: Record<string, string>;
@@ -179,9 +179,9 @@ export class FiltersManifestBuilder {
       }
 
       optionsSet.forEach((option) => {
-        if (!p.allowlist.optionsById[option.id]) {
+        if (!p.glossary.optionsById[option.id]) {
           errors.push(
-            `Invalid option ID: The option ID '${option.id}' is not in the options allowlist.`
+            `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`
           );
         }
 

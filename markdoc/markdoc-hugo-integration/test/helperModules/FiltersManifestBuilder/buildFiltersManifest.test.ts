@@ -3,7 +3,7 @@ import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManife
 import {
   paintColorsFrontmatter,
   paintColorsFilterOptionsConfig,
-  paintColorsAllowlist
+  paintColorsGlossary
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
@@ -14,7 +14,7 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
-      allowlist: paintColorsAllowlist
+      glossary: paintColorsGlossary
     });
 
     const expectedManifest: PageFiltersManifest = {
@@ -199,7 +199,7 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
-      allowlist: paintColorsAllowlist
+      glossary: paintColorsGlossary
     });
 
     expect(manifest.errors.length).toEqual(1);
@@ -247,7 +247,7 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: invalidFilterOptionsConfig,
-      allowlist: paintColorsAllowlist
+      glossary: paintColorsGlossary
     });
 
     expect(manifest.errors.length).toEqual(1);
