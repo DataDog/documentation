@@ -4,6 +4,8 @@
  * found in the content directory, and updates the .gitignore file
  * in that directory to ignore the compiled files.
  */
+console.time('Markdoc compilation execution time');
+
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
