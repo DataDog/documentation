@@ -52,7 +52,7 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 
 For each cloud account that you would like to receive recommendations for:
 
-1. Configure [Cloud Cost Management][2] to send bill data to Datadog.
+1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
@@ -60,7 +60,7 @@ For each cloud account that you would like to receive recommendations for:
 
 | Recommendation Category | Cloud Provider | Resource Type | Recommendation Type | Recommendation Description | Recommendation Prerequisites |
 |-------------------------|----------------|---------------|---------------------|----------------------------|------------------------------|
-| Unused resource | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | [Datadog agent][5] |
+| Unused resource | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | [Datadog Agent][5] |
 | Unused resource | AWS | EBS | Unattached EBS Volumes | Volumes that have been detached from an EC2 instance. | |
 | Unused resource | AWS | EBS | Unused EBS Volumes | Volumes attached to a non-running EC2 instance. | |
 | Unused resource | AWS | RDS | Unused RDS Instances | RDS instances with 0 database connections and 0 replica lag. | |
@@ -77,13 +77,13 @@ For each cloud account that you would like to receive recommendations for:
 | Unused resource | AWS | Elastic IP Address | Idle Elastic IP Address | Elastic IP addresses with idle charges in your AWS cost and usage report. |
 | Unused resource | AWS | DynamoDB | Unused DynamoDB | A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes. | 
 | Unused resource | AWS | DynamoDB | Unused DynamoDB Global Secondary Index | A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads. |
-| Unused resource | AWS | Autoscaling groups (ASG) | ASGs with legacy instance types | An autoscaling group that includes legacy instance types. | [Datadog agent][5] |
+| Unused resource | AWS | Autoscaling groups (ASG) | ASGs with legacy instance types | An autoscaling group that includes legacy instance types. | [Datadog Agent][5] |
 | Unused resource | AWS | DynamoDB | DynamoDB Delete Extra On-Demand Backups | A DynamoDB table has charges for more than 2 on-demand backups. | |
-| Previous generation resource | AWS | EC2 | Legacy EC2 Instance | EC2 Instances that are previous generation, and can be upgraded to a newer instance type. | [Datadog agent][5] |
+| Previous generation resource | AWS | EC2 | Legacy EC2 Instance | EC2 Instances that are previous generation, and can be upgraded to a newer instance type. | [Datadog Agent][5] |
 | Previous generation resource | AWS | GP2 EBS | GP2 EBS Volumes | EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement. | |
 | Previous generation resource | AWS | I01 EBS | I01 EBS Volumes | EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement. |
 | Previous generation resource | AWS | RDS | Extended Support RDS Instance | An RDS running an engine version that is no longer supported and incurring [extended support charges][7] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | Migrate legacy autoscaling group instances to new types. | [Datadog agent][5] |
+| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | Migrate legacy autoscaling group instances to new types. | [Datadog Agent][5] |
 | Over-provisioned resource | AWS | Kubernetes containers | Over-provisioned Kubernetes Containers | Containers with less than 30% CPU and memory utilization. | [Datadog profiling agent][8] |
 | Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | RDS IOPS | Over-provisioned RDS IOPS | An RDS instance using less than 80% of the provisioned IOPS for reads and writes. | 
