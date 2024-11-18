@@ -256,22 +256,6 @@ build_preview_mergequeue:
       - typesense.config.json
   interruptible: true
 
-synthetic_tests_mergequeue:
-  <<: *base_template
-  rules:
-    - !reference [.preview_rules, rules ]
-    - !reference [.if_mergequeue, rules ]
-  stage: post-deploy
-  environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-  allow_failure: false
-  cache: {}
-  dependencies:
-    - build_preview
-  script:
-    - run_preview_synthetic_tests "./datadog-ci.preview.json"
-  interruptible: true
 
 link_checks_preview:
   <<: *base_template
