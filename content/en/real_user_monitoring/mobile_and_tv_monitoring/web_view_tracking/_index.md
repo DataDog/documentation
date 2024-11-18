@@ -133,7 +133,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 #### Kotlin Multiplatform
 
-Add `DatadogWebViewTracking` library to your application by following the guide [here][7].
+Add `DatadogWebViewTracking` library to your application by following the guide [here][5].
 
 ### Instrument your web views
 
@@ -157,6 +157,13 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
    ```
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+
+**Note**:
+In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
+
+```kotlin
+    webView.settings.javaScriptEnabled = true
+```
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [2]: /real_user_monitoring/android/?tab=kotlin#setup
@@ -287,7 +294,7 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 
 ### Access your web views
 
-Your web views appear in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
+Your web views appear in the [RUM Explorer][6] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
 To access your web views:
 
@@ -306,16 +313,16 @@ From here, you can hover over a session event and click **Open View waterfall** 
 
 ## Billing implications
 
-See [RUM & Session Replay Billing][3] for details on how web views in mobile applications impact session recordings and billing.
+See [RUM & Session Replay Billing][7] for details on how web views in mobile applications impact session recordings and billing.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/browser/setup/#npm
-[3]: /real_user_monitoring/ios/
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup
 [4]: /logs/log_collection/ios
-[5]: https://app.datadoghq.com/rum/explorer
-[6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
+[6]: https://app.datadoghq.com/rum/explorer
+[7]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

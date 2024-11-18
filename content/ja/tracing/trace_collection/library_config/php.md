@@ -19,7 +19,7 @@ further_reading:
   text: 高度な使用方法
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: ドキュメント
-  text: OpenTelemetry Environment Variable Configurations
+  text: OpenTelemetry 環境変数の構成
 title: PHP トレーシングライブラリの構成
 type: multi-code-lang
 ---
@@ -34,7 +34,7 @@ INI 設定は、`php.ini` ファイルで、または特定のウェブサーバ
 
 ## Apache
 
-For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
+php-fpm を使用する Apache の場合、PHP トレーサーを構成するために、`www.conf` コンフィギュレーションファイルで `env` ディレクティブを使用します。例:
 
 ```
 ; ホスト環境変数 SOME_ENV を
@@ -92,8 +92,8 @@ DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 
 `DD_ENV`
 : **INI**: `datadog.env`<br>
-**Default**: `null`<br>
-Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
+**デフォルト**: `null`<br>
+アプリケーションの環境を設定します。例: `prod`、`pre-prod`、`stage`。バージョン `0.90.0` 以降、`ini_set` を使用して実行時に `datadog.version` を変更すると、現在のルートスパンにも適用されます。
 
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
@@ -124,15 +124,15 @@ APM インテグレーションのデフォルト名を変更します。1 つ�
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
-**Default**: `true`<br>
-When true, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+**デフォルト**: `true`<br>
+`true` の場合、トレーサーは 128 ビットのトレース ID を生成し、トレース ID をゼロパディングされた 32 文字の小文字の 16 進数としてエンコードします。
 
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
-**Default**: `0`<br>
-Enable printing of the full 128-bit trace ID when formatting trace IDs for logs correlation.
-When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
-When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+**デフォルト**: `0`<br>
+ログの相関のためにトレース ID をフォーマットする際に、完全な 128 ビットのトレース ID を出力することを有効にします。
+`false` (デフォルト) の場合、トレース ID の下位 64 ビットのみが整数として出力されます。これは、トレース ID が 64 ビットのみの場合に完全な ID が出力されることを意味します。
+`true` の場合、トレース ID は 16 進数形式の完全な 128 ビットのトレース ID として出力されます。これは、ID 自体が 64 ビットのみであっても同様です。
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
@@ -171,18 +171,18 @@ CLI から送られた PHP スクリプトのトレーシングを有効にし�
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
-**Default**: `0`<br>
-Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` may be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files. Takes precedence over `DD_TRACE_LOG_LEVEL` if active.
+**デフォルト**: `0`<br>
+デバッグモードを有効にします。`1` の場合、ログメッセージは `error_log` INI 設定で設定されたデバイスまたはファイルに送信されます。`php -i` の出力とは異なる可能性がある `error_log` の実際の値は、PHP-FPM/Apache のコンフィギュレーションファイルで上書きされることがあります。有効な場合、`DD_TRACE_LOG_LEVEL` よりも優先されます。
 
 `DD_TRACE_LOG_LEVEL`
 : **INI**: `datadog.trace.log_level`<br>
-**Default**: `Error`<br>
-Sets a precise log level. The log level follows RUST_LOG conventions; accepted log levels are `error`, `warn`, `info`, `debug`, `trace` and `off`.
+**デフォルト**: `Error`<br>
+正確なログレベルを設定します。ログレベルは RUST_LOG の規約に従います。受け入れられるログレベルは `error`、`warn`、`info`、`debug`、`trace`、`off` です。
 
 `DD_TRACE_LOG_FILE`
 : **INI**: `datadog.trace.log_file`<br>
-**Default**: ``<br>
-Specifies a log file. If none is specified, logs go to the default PHP error location. To debug datadog-ipc-helper issues (for example, submission of telemetry), you must specify the log file.
+**デフォルト**: ``<br>
+ログファイルを指定します。指定がない場合、ログはデフォルトの PHP エラー出力先に送られます。datadog-ipc-helper の問題 (例えばテレメトリーの送信) をデバッグするには、ログファイルを指定する必要があります。
 
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
@@ -225,10 +225,25 @@ HTTP リクエストのサービス名を `host-<hostname>` に設定します�
 **デフォルト**: `true`<br>
 Laravel Queue/Horizon コマンドの root スパン生成を自動的に無効にし (`DD_TRACE_GENERATE_ROOT_SPAN` を参照)、自動フラッシュを有効にします (`DD_TRACE_AUTO_FLUSH_ENABLED` を参照)。バージョン `0.88.0` で追加されました。
 
+`DD_TRACE_REMOVE_ROOT_SPAN_SYMFONY_MESSENGER`
+: **INI**: `datadog.trace.remove_root_span_symfony_messenger`<br>
+**デフォルト**: `true`<br>
+Symfony Messenger コマンドのルートスパン生成 (`DD_TRACE_GENERATE_ROOT_SPAN` を参照) を自動的に無効にし、オートフラッシュ (`DD_TRACE_AUTO_FLUSH_ENABLED` を参照) を有効にします。バージョン `1.3.0` で追加されました。
+
 `DD_TRACE_LARAVEL_QUEUE_DISTRIBUTED_TRACING`
 : **INI**: `datadog.trace.laravel_queue_distributed_tracing`<br>
-**Default**: `true`<br>
-Disables the creation of an additional `laravel.queue.process` span and relies solely on span links. Added in version `0.93.0`.
+**デフォルト**: `true`<br>
+追加の `laravel.queue.process` スパンの作成を無効にし、スパンリンクのみを利用します。バージョン `0.93.0` で追加されました。
+
+`DD_TRACE_SYMFONY_MESSENGER_DISTRIBUTED_TRACING`
+: **INI**: `datadog.trace.symfony_messenger_distributed_tracing`<br>
+**デフォルト**: `true`<br>
+無効にすると、原因となるプロデュース/コンシュームの関係はスパンリンクを使用して関連付けられます。バージョン `1.3.0` で追加されました。
+
+`DD_TRACE_SYMFONY_MESSENGER_MIDDLEWARES`
+: **INI**: `datadog.trace.symfony_messenger_middlewares`<br>
+**デフォルト**: `false`<br>
+Symfony Messenger のミドルウェアのトレースを有効にします。バージョン `1.3.0` で追加されました。
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 : **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
@@ -258,8 +273,9 @@ HTTP サーバーリクエストのルートベースの命名を有効にしま
 
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
-**Default**: `-1`<br>
-The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.
+**デフォルト**: `-1`<br>
+`0.0` から `1.0` の間の数値でトレースのサンプリングレートを設定します。デフォルト値の `-1` はサンプリングの制御を Datadog Agent に委ねます。<br>
+**注**: `DD_TRACE_SAMPLE_RATE` は非推奨です。代わりに `DD_TRACE_SAMPLING_RULES` を使用してください。<br>
 
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
@@ -320,8 +336,8 @@ JSON でエンコードされた文字列で、サンプリングレートを構
 
 `DD_TRACE_SAMPLING_RULES_FORMAT`
 : **INI**: `datadog.trace.sampling_rules_format`<br>
-**Default**: `glob`<br>
-Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
+**デフォルト**: `glob`<br>
+`DD_TRACE_SAMPLING_RULES` で定義されたサンプリングルールに使用される形式 (`regex` または `glob`) を指定します。バージョン `0.98.0` で追加され、`1.0.0` から非推奨となりました。
 
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`<br>
@@ -376,8 +392,8 @@ Datadog は、製品の改良のため、[システムの環境・診断情報][
 
 `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
 : **INI**: `datadog.trace.db_client_split_by_instance`<br>
-**Default**: `0`<br>
-Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
+**デフォルト**: `0`<br>
+HTTP リクエストのサービス名を `pdo-<hostname>` に設定します。例えば、データベースホスト `datadoghq.com` への `PDO->query()` 呼び出しは、デフォルトのサービス名 `pdo` の代わりに `pdo-datadoghq.com` というサービス名になります。
 
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
 : **INI**: `datadog.trace.redis_client_split_by_host`<br>
@@ -405,9 +421,9 @@ Redis クライアントオペレーションのサービス名を `redis-<hostn
 ### OpenTelemetry
 
 `DD_TRACE_OTEL_ENABLED`
-: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
-Valid values are: `true` or `false`.<br>
-**Default**: `false`
+: [カスタム][18]または[自動][19]インスツルメンテーションの両方に対して、OpenTelemetry ベースのトレースを有効または無効にします。<br>
+有効な値は `true` または `false` です。<br>
+**デフォルト**: `false`
 
 ### プロファイリング
 
@@ -428,10 +444,10 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 **注**: これは `0.84` から利用できるようになった `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` 環境変数 (`datadog.profiling.experimental_allocation_enabled` INI 設定) よりも優先されます。両方が設定されている場合は、こちらが優先されます。
 
 `DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
-: **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
-**Default**: `0`<br>
-Enable all experimental features.<br>
-**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings won't have an effect.
+: **INI**: `datadog.profiling.experimental_features_enabled`。INI は `0.96.0` から利用可能。<br>
+**デフォルト**: `0`<br>
+すべての実験的機能を有効にします。<br>
+**注**: この設定はより具体的な構成をオーバーライドし、有効にした場合、他の実験的な構成設定を切り替えても効果はありません。
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`。INI は `0.82.0` から利用可能です。<br>
@@ -439,43 +455,42 @@ Enable all experimental features.<br>
 試験的 CPU プロファイルタイプを有効にします。バージョン `0.69.0` に追加されています。バージョン `0.76` 以下では、デフォルトで `0` になっていました。
 
 `DD_PROFILING_EXCEPTION_ENABLED`
-: **INI**: `datadog.profiling.exception_enabled`. INI available since `0.96.0`.<br>
-**Default**: `1`<br>
-Enable the exception profile type. Added in version `0.92.0` and GA
-in version `0.96.0`.<br><br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
+: **INI**: `datadog.profiling.exception_enabled`。INI は `0.96.0` から利用可能。<br>
+**デフォルト**: `1`<br>
+例外プロファイルタイプを有効にします。バージョン `0.92.0` で追加され、バージョン `0.96.0` で一般利用可能 (GA) になりました。<br><br>
+**注**: これは `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` 環境変数 (`datadog.profiling.experimental_exception_enabled` INI 設定) を置き換えます。これは `0.92` から利用可能でした。両方が設定されている場合、こちらが優先されます。
 
 `DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
-: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
-**Default**: `0`<br>
-Enable the collection of exception messages with exception samples.<br><br>
-**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
+: **INI**: `datadog.profiling.exception_message_enabled`。INI は `0.98.0` から利用可能。<br>
+**デフォルト**: `0`<br>
+例外サンプルとともに例外メッセージの収集を有効にします。<br><br>
+**注**: 例外メッセージには PII (個人識別情報) が含まれる可能性があるため、この設定はデフォルトで無効になっています。
 
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
-: **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
-**Default**: `100`<br>
-Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
+: **INI**: `datadog.profiling.exception_sampling_distance`。INI は `0.96.0` から利用可能。<br>
+**デフォルト**: `100`<br>
+例外のサンプリング距離を構成します。サンプリング距離が大きいほど、作成されるサンプルが少なくなり、オーバーヘッドが低くなります。<br><br>
+**注**: これは `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` 環境変数 (`datadog.profiling.experimental_exception_sampling_distance` INI 設定) を置き換えます。これは `0.92` から利用可能でした。両方が設定されている場合、こちらが優先されます。
 
 `DD_PROFILING_TIMELINE_ENABLED`
-: **INI**: `datadog.profiling.timeline_enabled`. INI available since `0.98.0`.<br>
-**Default**: `1`<br>
-Enable the timeline profile type. Added in version `0.89.0`.<br><br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
+: **INI**: `datadog.profiling.timeline_enabled`。INI は `0.98.0` から利用可能。<br>
+**デフォルト**: `1`<br>
+タイムラインプロファイルタイプを有効にします。バージョン `0.89.0` で追加されました。<br><br>
+**注**: これは `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` 環境変数 (`datadog.profiling.experimental_timeline_enabled` INI 設定) を置き換えます。これは `0.89` から利用可能 (デフォルトは `0`) でした。両方が設定されている場合、こちらが優先されます。
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`。INI は `0.82.0` から利用可能です。<br>
 **デフォルト**: `off`<br>
 プロファイラーのログレベルを設定します。許可される値は `off`、`error`、`warn`、`info`、`debug`、`trace` です。プロファイラーのログは、プロセスの標準エラーストリームに書き込まれます。バージョン `0.69.0` に追加されています。
 
-### Trace context propagation
+### トレースコンテキストの伝播
 
 分散トレースコンテキストの伝播を目的としてヘッダーの抽出と挿入を行うための PHP トレーシングライブラリの構成については、[トレースコンテキストの伝播][11]をお読みください。
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `Datadog,tracecontext`<br>
-Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
+**デフォルト**: `Datadog,tracecontext`<br>
+トレースヘッダーを注入する際に使用する伝播スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
 
   - [tracecontext][10]
   - [b3multi][7]
@@ -484,8 +499,8 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `Datadog,tracecontext,b3multi,B3 single header`<br>
-Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
+**デフォルト**: `Datadog,tracecontext,b3multi,B3 single header`<br>
+トレースヘッダーを抽出する際に使用する伝播スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
 
   - [tracecontext][10]
   - [b3multi][7]
@@ -506,46 +521,46 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
-**Default**: `true` for PHP tracer >= v1.0<br>
-Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
+**デフォルト**: `true` (PHP トレーサー >= v1.0) <br>
+WordPress のアクションフックコールバックのインスツルメンテーションを有効にします。この機能は `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` が有効な場合にのみ利用できます。バージョン `0.91.0` で追加されました。
 
 
 `DD_OPENAI_SERVICE`
 : **INI**: `datadog.openai.service`<br>
-**Default**: `DD_SERVICE`<br>
-The service name reported by default for OpenAI requests.
+**デフォルト**: `DD_SERVICE`<br>
+OpenAI リクエストに対してデフォルトで報告されるサービス名。
 
-`DD_OPENAI_LOGS_ENABLED` (beta)
+`DD_OPENAI_LOGS_ENABLED` (ベータ版) 
 : **INI**: `datadog.openai.logs_enabled`<br>
-**Default**: `false`<br>
-Enable collection of prompts and completions as logs. You can adjust the rate of prompts and completions collected using the sample rate configuration described below.
+**デフォルト**: `false`<br>
+プロンプトと完了結果をログとして収集することを有効にします。以下で説明するサンプリングレート構成を使用して、収集されるプロンプトと完了結果のレートを調整できます。
 
 `DD_OPENAI_METRICS_ENABLED`
 : **INI**: `datadog.openai.metrics_enabled`<br>
-**Default**: `true`<br>
-Enable collection of OpenAI metrics.<br>
-If the Datadog Agent is configured to use a non-default StatsD hostname or port, use `DD_DOGSTATSD_URL` to configure the OpenAI metrics collection.
+**デフォルト**: `true`<br>
+OpenAI メトリクスの収集を有効にします。<br>
+Datadog Agent がデフォルト以外の StatsD ホスト名またはポートを使用するように構成されている場合は、`DD_DOGSTATSD_URL` を使用して OpenAI メトリクスの収集を構成してください。
 
-`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
+`DD_OPENAI_SPAN_CHAR_LIMIT` (ベータ版) 
 : **INI**: `datadog.openai.span_char_limit`<br>
-**Default**: `128`<br>
-Configure the maximum number of characters for the following data within span tags:
+**デフォルト**: `128`<br>
+スパンタグ内の以下のデータの最大文字数を構成します。
 
-  - Prompt inputs and completions
-  - Message inputs and completions
-  - Embedding inputs
+  - プロンプト入力と完了結果
+  - メッセージ入力と完了結果
+  - 埋め込み入力
 
-Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
+最大文字数を超えるテキストは、文字数制限まで切り詰められ、末尾に `...` が追加されます。
 
-`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (ベータ版) 
 : **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
-**Default**: `1.0`<br>
-Configure the sample rate for the collection of prompts and completions as span tags.
+**デフォルト**: `1.0`<br>
+スパンタグとしてプロンプトと完了結果を収集するためのサンプリングレートを構成します。
 
-`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (ベータ版) 
 : **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
-**Default**: `0.1`<br>
-Configure the sample rate for the collection of prompts and completions as logs.
+**デフォルト**: `0.1`<br>
+プロンプトと完了結果をログとして収集するためのサンプリングレートを構成します。
 
 #### インテグレーション名
 
@@ -553,42 +568,43 @@ Configure the sample rate for the collection of prompts and completions as logs.
 
 インテグレーション固有のコンフィギュレーションを設定する場合は、`DD_TRACE_<INTEGRATION>_ENABLED` 形式で名前を付けてください。例: Laravel の場合、 `DD_TRACE_LARAVEL_ENABLED`。
 
-| インテグレーション   | サービス名    |
-|---------------| --------------- |
-| AMQP          | `amqp`          |
-| CakePHP       | `cakephp`       |
-| CodeIgniter   | `codeigniter`   |
-| cURL          | `curl`          |
-| ElasticSearch | `elasticsearch` |
-| Eloquent      | `eloquent`      |
-| Guzzle        | `guzzle`        |
-| Laminas       | `laminas`       |
-| Laravel       | `laravel`       |
-| Laravel Queue | `laravelqueue`  |
-| Lumen         | `lumen`         |
-| Memcache      | `memcache`      |
-| Memcached     | `memcached`     |
-| Mongo         | `mongo`         |
-| MongoDB       | `mongodb`       |
-| Mysqli        | `mysqli`        |
-| Nette         | `nette`         |
-| OpenAI        | `openai`        |
-| PCNTL         | `pcntl`         |
-| PDO           | `pdo`           |
-| PhpRedis      | `phpredis`      |
-| Predis        | `predis`        |
-| Psr18         | `psr18`         |
-| Roadrunner    | `roadrunner`    |
-| Sql Server    | `sqlsrv`        |
-| Symfony       | `symfony`       |
-| WordPress     | `wordpress`     |
-| Yii           | `yii`           |
-| ZendFramework | `zendframework` |
+| インテグレーション       | サービス名       |
+|-------------------|--------------------|
+| AMQP              | `amqp`             |
+| CakePHP           | `cakephp`          |
+| CodeIgniter       | `codeigniter`      |
+| cURL              | `curl`             |
+| ElasticSearch     | `elasticsearch`    |
+| Eloquent          | `eloquent`         |
+| Guzzle            | `guzzle`           |
+| Laminas           | `laminas`          |
+| Laravel           | `laravel`          |
+| Laravel Queue     | `laravelqueue`     |
+| Lumen             | `lumen`            |
+| Memcache          | `memcache`         |
+| Memcached         | `memcached`        |
+| Mongo             | `mongo`            |
+| MongoDB           | `mongodb`          |
+| Mysqli            | `mysqli`           |
+| Nette             | `nette`            |
+| OpenAI            | `openai`           |
+| PCNTL             | `pcntl`            |
+| PDO               | `pdo`              |
+| PhpRedis          | `phpredis`         |
+| Predis            | `predis`           |
+| Psr18             | `psr18`            |
+| Roadrunner        | `roadrunner`       |
+| Sql Server        | `sqlsrv`           |
+| Symfony           | `symfony`          |
+| Symfony Messenger | `symfonymessenger` |
+| WordPress         | `wordpress`        |
+| Yii               | `yii`              |
+| ZendFramework     | `zendframework`    |
 
 ## リソース名を正規化された URI にマッピング
 
 <div class="alert alert-warning">
-Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
+次のいずれかを設定すると、新しいリソース正規化アプローチにオプトインし、<code>DD_TRACE_RESOURCE_URI_MAPPING</code> の値は無視されます: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>、<code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>、および <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code>。
 </div>
 
 HTTP サーバーとクライアントインテグレーションでは、URL はクエリ文字列が URL から削除された状態で、トレースリソース名を作成するために `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>` の形式で使用されます。URL を正規化し 1 つのリソースの下に一般的なエンドポイントをグループ化することで、自動インスツルメンテーションされないカスタムフレームワークにおける可視性を向上することができます。

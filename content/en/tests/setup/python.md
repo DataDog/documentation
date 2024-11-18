@@ -14,13 +14,13 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -167,13 +167,13 @@ assert True
 
 ### Manual testing API
 
-<div class="alert alert-warning"><strong>Note</strong>: The Test Visibility manual testing API is in <strong>beta</strong> and subject to change.</div>
+<div class="alert alert-warning"><strong>Note</strong>: The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
 
-As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Visibility API (`ddtrace.ext.test_visibility`) to submit test visibility results as needed.
+As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
 
 #### API execution
 
-The API uses classes to provide namespaced methods to submit test visibility events.
+The API uses classes to provide namespaced methods to submit test optimization events.
 
 Test execution has two phases:
 - Discovery: inform the API what items to expect
@@ -181,11 +181,11 @@ Test execution has two phases:
 
 The distinct discovery and execution phases allow for a gap between the test runner process collecting the tests and the tests starting.
 
-API users must provide consistent identifiers (described below) that are used as references for Test Visibility items within the API's state storage.
+API users must provide consistent identifiers (described below) that are used as references for Test Optimization items within the API's state storage.
 
 ##### Enable `test_visibility`
 
-You must call the `ddtrace.ext.test_visibility.api.enable_test_visibility()` function before using the Test Visibility API.
+You must call the `ddtrace.ext.test_visibility.api.enable_test_visibility()` function before using the Test Optimization API.
 
 Call the `ddtrace.ext.test_visibility.api.disable_test_visibility()` function before process shutdown to ensure proper flushing of data.
 
@@ -193,11 +193,11 @@ Call the `ddtrace.ext.test_visibility.api.disable_test_visibility()` function be
 
 The API is based around four concepts: test session, test module, test suite, and test.
 
-Modules, suites, and tests form a hierarchy in the Python Test Visibility API, represented by the item identifier's parent relationship.
+Modules, suites, and tests form a hierarchy in the Python Test Optimization API, represented by the item identifier's parent relationship.
 
 ##### Test session
 
-A test session represents a project's test execution, typically corresponding to the execution of a test command. Only one session can be discovered, started, and finished in the execution of Test Visibility program.
+A test session represents a project's test execution, typically corresponding to the execution of a test command. Only one session can be discovered, started, and finished in the execution of Test Optimization program.
 
 Call `ddtrace.ext.test_visibility.api.TestSession.discover()` to discover the session, passing the test command, a given framework name, and version.
 
@@ -263,7 +263,7 @@ The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an opt
 The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional `TestSourceFileInfo` object as the `source_file_info` parameter. A `TestSourceFileInfo` object represents the path and optionally, the start and end lines for a given test.
 
 The `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` method accepts three positional parameters:
-- `path`: a `pathlib.Path` object (made relative to the repo root by the `Test Visibility` API)
+- `path`: a `pathlib.Path` object (made relative to the repo root by the `Test Optimization` API)
 - `start_line`: an optional integer representing the start line of the test in the file
 - `end_line`: an optional integer representing the end line of the test in the file
 
@@ -283,7 +283,7 @@ import pathlib
 import sys
 
 if __name__ == "__main__":
-    # Enable the Test Visibility service
+    # Enable the Test Optimization service
     api.enable_test_visibility()
 
     # Discover items
@@ -431,9 +431,9 @@ The overall count of test events (and their correctness) remain unaffected.
 
 {{% tab "unittest" %}}
 
-In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
+In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test optimization.
 
-Datadog recommends you use up to one process at a time to prevent affecting test visibility.
+Datadog recommends you use up to one process at a time to prevent affecting test optimization.
 
 {{% /tab %}}
 

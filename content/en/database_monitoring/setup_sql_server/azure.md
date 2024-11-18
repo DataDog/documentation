@@ -321,7 +321,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
+            driver: '{ODBC Driver 18 for SQL Server}'
             include_ao_metrics: true  # Optional: For AlwaysOn users
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
@@ -356,7 +356,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
+    driver: '{ODBC Driver 18 for SQL Server}'
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'

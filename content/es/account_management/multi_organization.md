@@ -106,7 +106,7 @@ Esta pestaña contiene la sección Month-to-Date Total Usage (Uso total del últ
 
 En la sección Month-to-Date Total Usage (Uso total del último mes) se resume tu uso del último mes de hosts, contenedores, métricas personalizadas y cualquier otra parte de la plataforma que hayas usado durante ese mes, tanto en tu organización principal como en todas sus organizaciones secundarias.
 
-{{< img src="account_management/multi-org-v2.png" alt="Uso del último mes >}}
+{{< img src="account_management/multi-org-v2.png" alt="Uso del último mes" >}}
 
 De forma predeterminada, la mayoría de las cuentas pueden ver el uso "Billable" (Facturable), que muestra el uso que computa para tu factura final. En esta vista también se desglosa el uso bajo demanda por encima de tus confirmaciones y asignaciones. La vista "All" (Todo) muestra todo el uso, incluido el uso no facturable, como las pruebas de productos.
 

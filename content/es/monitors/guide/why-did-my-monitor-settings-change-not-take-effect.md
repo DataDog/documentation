@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/monitors/faq/why-did-my-monitor-settings-change-not-take-effect
-kind: Guía
 title: Monitorizar cambios de configuración que no surten efecto
 ---
 

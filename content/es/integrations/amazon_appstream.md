@@ -4,7 +4,7 @@ categories:
 - nube
 - configuración y despliegue
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrea métricas clave de Amazon AppStream.
 doc_link: https://docs.datadoghq.com/integrations/amazon_appstream/
