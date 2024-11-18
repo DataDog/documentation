@@ -135,7 +135,7 @@ Use one of these methods to enable Orchestrion in your build process:
 
 #### Create custom trace spans
 
-Custom trace spans can be automtically created for any function annotated with the `//dd:span` directive comment:
+Custom trace spans can be automatically created for any function annotated with the `//dd:span` directive comment:
 
 {{<code-block lang="go" filename="example.go" collapsible="true">}}
 //dd:span custom_tag:tag_value
