@@ -1,5 +1,5 @@
 ---
-title: Instrument Azure App Service - Linux Containers
+title: Instrument Azure App Service with serverless-init - Linux Containers
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
