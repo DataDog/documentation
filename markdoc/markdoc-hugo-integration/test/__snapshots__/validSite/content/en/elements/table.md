@@ -2,7 +2,7 @@
 title: Table
 ---
 <div id="mdoc-content" class="customizable"><article>
-  <h2 id="markdown-table-commonmark-table">
+  <h2 id="markdown-table--commonmark-table">
     Markdown table (CommonMark table)
   </h2>
   <table>

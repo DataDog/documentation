@@ -18,12 +18,17 @@ export class HugoFunctions {
     let futureDash = false;
 
     for (const char of text) {
-      if (/[a-zA-Z0-9]/.test(char)) {
+      if (/[a-zA-Z0-9]/.test(char) || /[\u00C0-\u017F]/.test(char)) {
         if (futureDash && anchorName.length > 0) {
           anchorName.push('-');
         }
         futureDash = false;
         anchorName.push(char.toLowerCase());
+      } else if (char === ' ') {
+        anchorName.push('-');
+        futureDash = false;
+      } else if (char === '.') {
+        futureDash = false;
       } else {
         futureDash = true;
       }

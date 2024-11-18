@@ -14,6 +14,25 @@ describe('HugoFunctions', () => {
     });
   });
 
+  test('anchorize', () => {
+    const expectedOutputByInput = {
+      'A B C': 'a-b-c',
+      'a b   c': 'a-b---c',
+      '< a, b, & c >': '-a-b--c-',
+      'main.go': 'maingo',
+      Hugö: 'hugö'
+    };
+
+    const actualOutputByInput = Object.fromEntries(
+      Object.entries(expectedOutputByInput).map(([input]) => [
+        input,
+        HugoFunctions.anchorize(input)
+      ])
+    );
+
+    expect(actualOutputByInput).toEqual(expectedOutputByInput);
+  });
+
   describe('absLangUrl', () => {
     test('handles all example inputs correctly for a simple base URL', () => {
       const hugoConfigDup = { ...mockHugoConfig };
