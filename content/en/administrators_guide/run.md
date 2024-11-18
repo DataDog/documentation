@@ -15,7 +15,7 @@ Reduce risks and increase adoption by releasing new Datadog installations sequen
 
 ### Onboarding a new infrastructure instance
 
-Infrastructure is the core element of IT and observability. It is the primary and most frequent task for a Datadog administrator team. The platform is flexible, with tools to simplify the vast majority of this task. Start by customizing it to fit your local conditions. Your IT architecture may include components like HyperVisors, HyperScalers, and Serverless Infrastructure.  
+Infrastructure is the core element of IT and observability. It is the primary and most frequent task for a Datadog administrator team. The platform is adaptable, offering tools to streamline most tasks. Begin by tailoring it to your specific environment. Your IT architecture might include components such as HyperVisors, HyperScalers, and Serverless Infrastructure.
 
 **Recommendations**:   
 

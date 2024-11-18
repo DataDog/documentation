@@ -38364,9 +38364,10 @@ paths:
         type: safe
   /api/v2/posture_management/findings:
     get:
-      description: "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be
-        applied by appending query parameters to the URL.\n\n  - Using a single filter:
-        `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+      description: "Get a list of findings. These include both misconfigurations and
+        identity risks.\n\n### Filtering\n\nFilters can be applied by appending query
+        parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n
+        \ - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
         \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
         `attribute_key` can be any of the filter keys described further below.\n\nQuery
         parameters of type `integer` support comparison operators (`>`, `>=`, `<`,

@@ -33,6 +33,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: ブログ
   text: ネットワークとセキュリティ分析のための DNS ログの監視
+- link: https://www.datadoghq.com/blog/monitor-connection-churn-datadog/
+  tag: ブログ
+  text: コネクションチャーンを監視し、対処するためのベストプラクティス
 title: ネットワークパフォーマンスモニタリング
 ---
 
@@ -49,7 +52,7 @@ Datadog ネットワークパフォーマンスモニタリング (NPM) は Data
 
 NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio サービスメッシュのインスツルメンテーション][4]およびオーケストレーションに対応したコンテナ化環境を搭載しており、複雑なネットワークの監視をシンプルにします。
 
-さらに、NPM の機能である[ネットワークパス][5]が非公開ベータ版として提供されており、これによりネットワーク内のホップバイホップのトラフィックを確認することができます。
+さらに、NPM の機能である[ネットワークパス][5]がプレビュー版として提供されており、これによりネットワーク内の各ホップごとのトラフィックを確認することができます。
 
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>セットアップ</u>: ネットワークデータを収集するように Agent を構成します。{{< /nextlink >}}
