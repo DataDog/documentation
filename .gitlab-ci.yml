@@ -515,7 +515,7 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: registry.ddbuild.io/ci/websites/pa11y:v33259941-f0dfbc91
+  image: registry.ddbuild.io/ci/websites/pa11y:v48852638-b2768bdb
   tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
@@ -548,6 +548,7 @@ run_pa11y:manual:
       when: never
     - if: $CI_COMMIT_TAG == null
       when: manual
+  timeout: 2h
 
 tag_successful_live_pipeline:
   <<: *base_template
