@@ -58,9 +58,9 @@ This section provides language-specific compatibility requirements for Single St
 
 ### Supported Java versions
 
-| Java Version | Support                         | Notes |
-|--------------|---------------------------------| ----- |
-| 8+           | <i class="icon-check-bold"></i> |       |
+| Java Version | Support                         |
+|--------------|---------------------------------|
+| 8+           | <i class="icon-check-bold"></i> |
 
 ### Troubleshooting
 
@@ -69,7 +69,7 @@ This section provides language-specific compatibility requirements for Single St
   - Consider moving some configurations to a properties file
   - Check application logs for specific initialization errors
 
-<div class="alert alert-info">Single Step Instrumentation disables automatically when custom instrumentation is detected.</div>
+<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
 
 {{< /programming-lang >}}
 
@@ -77,17 +77,17 @@ This section provides language-specific compatibility requirements for Single St
 
 ### Supported Python versions
 
-| Python Version | Support                         | Notes |
-|----------------|---------------------------------|-------|
-| 3.12           | <i class="icon-check-bold"></i> |       |
-| 3.11           | <i class="icon-check-bold"></i> |       |
-| 3.10           | <i class="icon-check-bold"></i> |       |
-| 3.9            | <i class="icon-check-bold"></i> |       |
-| 3.8            | <i class="icon-check-bold"></i> |       |
-| 3.7            | <i class="icon-check-bold"></i> |       |
+| Python Version | Support                         |
+|----------------|---------------------------------|
+| 3.12           | <i class="icon-check-bold"></i> |
+| 3.11           | <i class="icon-check-bold"></i> |
+| 3.10           | <i class="icon-check-bold"></i> |
+| 3.9            | <i class="icon-check-bold"></i> |
+| 3.8            | <i class="icon-check-bold"></i> |
+| 3.7            | <i class="icon-check-bold"></i> |
 
 
-<div class="alert alert-info">Single Step Instrumentation disables automatically when custom instrumentation is detected.</div>
+<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
 
 {{< /programming-lang >}}
 
@@ -97,12 +97,12 @@ This section provides language-specific compatibility requirements for Single St
 
 ### Supported Ruby versions
 
-| Ruby Version | Support | Notes |
-|--------------|---------|-------|
-| 3.2          | Preview |       |
-| 3.1          | Preview |       |
-| 3.0          | Preview |       |
-| 2.7          | Preview |       |
+| Ruby Version | Support |
+|--------------|---------|
+| 3.2          | Preview |
+| 3.1          | Preview |
+| 3.0          | Preview |
+| 2.7          | Preview |
 
 ### Troubleshooting
 
@@ -118,7 +118,7 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 - Requires Linux distributions using glibc 2.27 or newer
 - Not compatible with Alpine Linux or other musl-based distributions
 
-<div class="alert alert-info">Single Step Instrumentation disables automatically when custom instrumentation is detected.</div>
+<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
 
 {{< /programming-lang >}}
 
@@ -130,7 +130,7 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 |--------------------|---------------------------------|-----------------------------------------------|
 | Latest LTS release | <i class="icon-check-bold"></i> | Instrumenting ESM modules is not supported.   |
 
-<div class="alert alert-info">Single Step Instrumentation disables automatically when custom instrumentation is detected.</div>
+<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
 
 {{< /programming-lang >}}
 
@@ -149,7 +149,6 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 | .NET Core 2.2    |                                 |                                      |
 | .NET Core 2.1    |                                 |                                      |
 | .NET Core 2.0    |                                 |                                      |
-| Preview versions | Not supported                   |                                      |
 
 {{< /programming-lang >}}
 
@@ -160,17 +159,17 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 <div class="alert alert-warning">Using Single Step Instrumentation with PHP applications is in Preview.</div>
 
 
-| PHP Version | Support | Notes |
-|-------------|---------|-------|
-| 8.3.x       | Preview |       |
-| 8.2.x       | Preview |       |
-| 8.1.x       | Preview |       |
-| 8.0.x       | Preview |       |
-| 7.4.x       | Preview |       |
-| 7.3.x       | Preview |       |
-| 7.2.x       | Preview |       |
-| 7.1.x       | Preview |       |
-| 7.0.x       | Preview |       |
+| PHP Version | Support |
+|-------------|---------|
+| 8.3.x       | Preview |
+| 8.2.x       | Preview |
+| 8.1.x       | Preview |
+| 8.0.x       | Preview |
+| 7.4.x       | Preview |
+| 7.3.x       | Preview |
+| 7.2.x       | Preview |
+| 7.1.x       | Preview |
+| 7.0.x       | Preview |
 
 ### PHP extensions
 
