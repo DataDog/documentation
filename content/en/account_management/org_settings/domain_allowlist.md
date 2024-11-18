@@ -11,8 +11,8 @@ further_reading:
   text: "Domain Allowlist API"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
-  Domain Allowlist is available in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
+{{< callout url="https://www.datadoghq.com/preview/domain-allowlist/" >}}
+  Domain Allowlist is available in Preview for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
 {{< /callout >}} 
 
 With [Domain Allowlist][1], you can restrict the email domains that can receive notifications. The notifications in scope include all notifications from:
