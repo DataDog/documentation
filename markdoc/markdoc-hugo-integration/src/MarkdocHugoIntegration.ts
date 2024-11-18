@@ -240,7 +240,7 @@ export class MarkdocHugoIntegration {
     }
 
     // generate the filters manifest
-    const draftFiltersManifest = FiltersManifestBuilder.buildPageFiltersManifest({
+    const draftFiltersManifest = FiltersManifestBuilder.build({
       frontmatter: p.parsedFile.frontmatter,
       filterOptionsConfig: this.filterOptionsConfigByLang[lang],
       allowlist: this.allowlistsByLang[lang]

@@ -25,7 +25,7 @@ describe('treeManagement', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const filtersManifest = FiltersManifestBuilder.buildPageFiltersManifest({
+  const filtersManifest = FiltersManifestBuilder.build({
     frontmatter: parsedFile.frontmatter,
     filterOptionsConfig: filterOptionsConfig,
     allowlist

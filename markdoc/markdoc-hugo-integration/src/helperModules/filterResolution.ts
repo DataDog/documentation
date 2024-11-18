@@ -26,30 +26,6 @@ import {
 import { PageFilterConfig } from '../schemas/yaml/frontMatter';
 
 /**
- * Convert a standard compile-time page filters manifest
- * to a lighter version to be used client-side.
- */
-export function convertToClientManifest(
-  manifest: PageFiltersManifest
-): PageFiltersClientSideManifest {
-  const result: PageFiltersClientSideManifest = {
-    filtersById: {},
-    defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
-    optionSetsById: { ...manifest.optionSetsById }
-  };
-
-  Object.keys(manifest.filtersById).forEach((filterId) => {
-    const filter = manifest.filtersById[filterId];
-    result.filtersById[filterId] = {
-      config: { ...filter.config },
-      defaultValsByOptionsSetId: { ...filter.defaultValsByOptionsSetId }
-    };
-  });
-
-  return result;
-}
-
-/**
  * Resolve the page filters object that is used
  * to populate the content filtering UI (AKA the filter selector),
  * replacing any placeholders with actual values.

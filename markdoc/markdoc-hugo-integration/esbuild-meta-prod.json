@@ -10,8 +10,8 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/filterOperations.js": {
-      "bytes": 4758,
+    "dist/helperModules/filterResolution.js": {
+      "bytes": 3996,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -135,9 +135,9 @@
           "original": "./PageBuilder/components/ContentFilter"
         },
         {
-          "path": "dist/helperModules/filterOperations.js",
+          "path": "dist/helperModules/filterResolution.js",
           "kind": "require-call",
-          "original": "./filterOperations"
+          "original": "./filterResolution"
         },
         {
           "path": "../markdoc-static-compiler/src/reresolver/index.js",
@@ -176,8 +176,8 @@
         "dist/schemas/regexes.js": {
           "bytesInOutput": 400
         },
-        "dist/helperModules/filterOperations.js": {
-          "bytesInOutput": 1359
+        "dist/helperModules/filterResolution.js": {
+          "bytesInOutput": 984
         },
         "../markdoc-static-compiler/src/grammar/tag.js": {
           "bytesInOutput": 12824
@@ -213,7 +213,7 @@
           "bytesInOutput": 139
         }
       },
-      "bytes": 29268
+      "bytes": 28888
     }
   }
 }

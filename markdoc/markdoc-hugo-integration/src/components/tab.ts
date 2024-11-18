@@ -1,5 +1,5 @@
 import { Config, Node } from 'markdoc-static-compiler';
-import { anchorize } from '../helperModules/stringProcessing';
+import { HugoFunctions } from '../helperModules/HugoFunctions';
 import { CustomHtmlComponent } from '../helperModules/renderer';
 
 export const tabDefinition = {
@@ -23,7 +23,7 @@ export const tabDefinition = {
 export class Tab extends CustomHtmlComponent {
   render() {
     let dataLang = this.tag.attributes.label;
-    dataLang = anchorize(dataLang);
+    dataLang = HugoFunctions.anchorize(dataLang);
 
     return `<div data-lang="${dataLang}" class="tab-pane fade" role="tabpanel" title="${this.tag.attributes.label}">${this.contents}</div>`;
   }

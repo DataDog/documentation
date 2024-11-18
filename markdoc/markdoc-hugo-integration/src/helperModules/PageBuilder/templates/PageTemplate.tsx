@@ -1,4 +1,4 @@
-import { resolvePageFilters } from '../../filterOperations';
+import { resolvePageFilters } from '../../filterResolution';
 import { buildFilterSelectorUi } from '../components/ContentFilter';
 import { PageFiltersManifest } from '../../../schemas/pageFilters';
 

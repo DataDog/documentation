@@ -13,7 +13,7 @@ import { HugoConfig } from '../../schemas/config/hugo';
 import { PageFiltersManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
-import { convertToClientManifest } from '../filterOperations';
+import { FiltersManifestBuilder } from '../FiltersManifestBuilder';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -151,7 +151,9 @@ export class PageBuilder {
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientFiltersManager.initialize({
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
-    filtersManifest: ${JSON.stringify(convertToClientManifest(p.filtersManifest))}
+    filtersManifest: ${JSON.stringify(
+      FiltersManifestBuilder.minifyManifest(p.filtersManifest)
+    )}
   });
 }; `;
 

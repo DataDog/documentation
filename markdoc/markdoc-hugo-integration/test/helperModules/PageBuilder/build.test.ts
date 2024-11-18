@@ -31,7 +31,7 @@ describe('PageBuilder.build', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const draftFiltersManifest = FiltersManifestBuilder.buildPageFiltersManifest({
+  const draftFiltersManifest = FiltersManifestBuilder.build({
     frontmatter: parsedFile.frontmatter,
     filterOptionsConfig: filterOptionsConfig,
     allowlist

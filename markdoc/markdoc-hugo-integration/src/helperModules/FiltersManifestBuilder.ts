@@ -9,7 +9,10 @@ import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { Frontmatter } from '../schemas/yaml/frontMatter';
 import { Allowlist } from '../schemas/yaml/allowlist';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { PageFiltersManifest } from '../schemas/pageFilters';
+import {
+  PageFiltersManifest,
+  PageFiltersClientSideManifest
+} from '../schemas/pageFilters';
 import { PageFilterConfig } from '../schemas/yaml/frontMatter';
 
 /**
@@ -18,6 +21,27 @@ import { PageFilterConfig } from '../schemas/yaml/frontMatter';
  * and their options.
  */
 export class FiltersManifestBuilder {
+  /**
+   * Convert a standard compile-time page filters manifest
+   * to a lighter version to be used client-side.
+   */
+  static minifyManifest(manifest: PageFiltersManifest): PageFiltersClientSideManifest {
+    const result: PageFiltersClientSideManifest = {
+      filtersById: {},
+      defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
+      optionSetsById: { ...manifest.optionSetsById }
+    };
+
+    Object.keys(manifest.filtersById).forEach((filterId) => {
+      const filter = manifest.filtersById[filterId];
+      result.filtersById[filterId] = {
+        config: { ...filter.config },
+        defaultValsByOptionsSetId: { ...filter.defaultValsByOptionsSetId }
+      };
+    });
+
+    return result;
+  }
   /**
    * Collect all possible default values,
    * and all possible selected values,
@@ -154,7 +178,7 @@ export class FiltersManifestBuilder {
    * and the global filter config into a single object
    * that defines the filters available on the page.
    */
-  static buildPageFiltersManifest(p: {
+  static build(p: {
     frontmatter: Frontmatter;
     filterOptionsConfig: FilterOptionsConfig;
     allowlist: Allowlist;

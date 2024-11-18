@@ -20,7 +20,7 @@ import {
   minifyClientFunction
 } from './PageBuilder/pageConfigMinification';
 import { transformConfig } from '../markdocParserConfig';
-import { anchorize } from './stringProcessing';
+import { HugoFunctions } from './HugoFunctions';
 import { PageFiltersManifest } from '../schemas/pageFilters';
 
 /**
@@ -141,7 +141,8 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
       node.children !== null &&
       typeof node.children[0] === 'string'
     ) {
-      node.attributes.id = node.attributes.id || anchorize(node.children[0]);
+      node.attributes.id =
+        node.attributes.id || HugoFunctions.anchorize(node.children[0]);
     }
   }
 

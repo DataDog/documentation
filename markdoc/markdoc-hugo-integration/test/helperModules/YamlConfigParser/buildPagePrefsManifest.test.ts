@@ -9,9 +9,9 @@ import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { PageFiltersManifest } from '../../../src/schemas/pageFilters';
 
-describe('FiltersManifestBuilder.buildPageFiltersManifest', () => {
+describe('FiltersManifestBuilder.build', () => {
   test('creates the expected object when given valid data', () => {
-    const manifest = FiltersManifestBuilder.buildPageFiltersManifest({
+    const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
       allowlist: paintColorsAllowlist
@@ -196,7 +196,7 @@ describe('FiltersManifestBuilder.buildPageFiltersManifest', () => {
       ]
     };
 
-    const manifest = FiltersManifestBuilder.buildPageFiltersManifest({
+    const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
       allowlist: paintColorsAllowlist
@@ -244,7 +244,7 @@ describe('FiltersManifestBuilder.buildPageFiltersManifest', () => {
       ]
     };
 
-    const manifest = FiltersManifestBuilder.buildPageFiltersManifest({
+    const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: invalidFilterOptionsConfig,
       allowlist: paintColorsAllowlist
