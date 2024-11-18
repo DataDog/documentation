@@ -22,12 +22,13 @@ import { buildFilterSelectorUi } from './PageBuilder/components/ContentFilter';
 import { MinifiedFilterOptionsConfig } from '../schemas/yaml/filterOptions';
 import { MinifiedPageFiltersConfig } from '../schemas/yaml/frontMatter';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
-import { resolveMinifiedPageFilters } from './filtersResolution';
+import { resolveMinifiedPageFilters } from './filterOperations';
 import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
 import {
   expandClientFunction,
   MinifiedClientFunction
 } from './PageBuilder/pageConfigMinification';
+import { PageFiltersClientSideManifest } from '../schemas/pageFilters';
 
 export class ClientFiltersManager {
   static #instance: ClientFiltersManager;
@@ -330,6 +331,7 @@ export class ClientFiltersManager {
     pageFiltersConfig: MinifiedPageFiltersConfig;
     selectedValsByFilterId?: Record<string, string>;
     ifFunctionsByRef: Record<string, MinifiedClientFunction>;
+    manifest: PageFiltersClientSideManifest;
   }) {
     this.filterOptionsConfig = p.filterOptionsConfig;
     this.pageFiltersConfig = p.pageFiltersConfig;

@@ -8,7 +8,7 @@ import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
 import {
   resolvePageFilters,
   resolveMinifiedPageFilters
-} from '../../../src/helperModules/filtersResolution';
+} from '../../../src/helperModules/filterOperations';
 import { ResolvedPageFiltersSchema } from '../../../src/schemas/pageFilters';
 
 describe('SharedRenderer.resolvePageFilters', () => {

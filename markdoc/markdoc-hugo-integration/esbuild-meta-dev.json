@@ -10,8 +10,8 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/filtersResolution.js": {
-      "bytes": 6344,
+    "dist/helperModules/filterOperations.js": {
+      "bytes": 7106,
       "imports": [
         {
           "path": "dist/schemas/regexes.js",
@@ -127,7 +127,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 15282,
+      "bytes": 15279,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/ContentFilter.js",
@@ -135,9 +135,9 @@
           "original": "./PageBuilder/components/ContentFilter"
         },
         {
-          "path": "dist/helperModules/filtersResolution.js",
+          "path": "dist/helperModules/filterOperations.js",
           "kind": "require-call",
-          "original": "./filtersResolution"
+          "original": "./filterOperations"
         },
         {
           "path": "../markdoc-static-compiler/src/reresolver/index.js",
@@ -176,8 +176,8 @@
         "dist/schemas/regexes.js": {
           "bytesInOutput": 601
         },
-        "dist/helperModules/filtersResolution.js": {
-          "bytesInOutput": 4353
+        "dist/helperModules/filterOperations.js": {
+          "bytesInOutput": 5050
         },
         "../markdoc-static-compiler/src/grammar/tag.js": {
           "bytesInOutput": 52241
@@ -207,13 +207,13 @@
           "bytesInOutput": 3111
         },
         "dist/helperModules/ClientFiltersManager.js": {
-          "bytesInOutput": 14271
+          "bytesInOutput": 14268
         },
         "dist/markdoc-client-filters-manager.js": {
           "bytesInOutput": 354
         }
       },
-      "bytes": 93919
+      "bytes": 94612
     }
   }
 }

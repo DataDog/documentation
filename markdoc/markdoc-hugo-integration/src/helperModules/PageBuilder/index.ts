@@ -15,6 +15,7 @@ import { HugoConfig } from '../../schemas/config/hugo';
 import { PageFiltersManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
+import { convertToClientManifest } from '../filterOperations';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -160,7 +161,8 @@ clientFiltersManager.initialize({
       YamlConfigParser.minifyFilterOptionsConfig(p.filtersManifest.optionSetsById)
     )},
     selectedValsByFilterId: ${JSON.stringify(p.filtersManifest.defaultValsByFilterId)},
-    ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))}
+    ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
+    manifest: ${JSON.stringify(convertToClientManifest(p.filtersManifest))}
   });
 }; `;
 

@@ -74,16 +74,32 @@
     }
   });
 
-  // dist/helperModules/filtersResolution.js
-  var require_filtersResolution = __commonJS({
-    "dist/helperModules/filtersResolution.js"(exports) {
+  // dist/helperModules/filterOperations.js
+  var require_filterOperations = __commonJS({
+    "dist/helperModules/filterOperations.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
+      exports.convertToClientManifest = convertToClientManifest;
       exports.resolvePageFilters = resolvePageFilters;
       exports.resolveMinifiedPageFilters = resolveMinifiedPageFilters;
       exports.resolveMinifiedFilterOptionsSource = resolveMinifiedFilterOptionsSource;
       exports.resolveFilterOptionsSource = resolveFilterOptionsSource;
       var regexes_1 = require_regexes();
+      function convertToClientManifest(manifest) {
+        const result = {
+          filtersById: {},
+          defaultValsByFilterId: Object.assign({}, manifest.defaultValsByFilterId),
+          optionSetsById: Object.assign({}, manifest.optionSetsById)
+        };
+        Object.keys(manifest.filtersById).forEach((filterId) => {
+          const filter = manifest.filtersById[filterId];
+          result.filtersById[filterId] = {
+            config: Object.assign({}, filter.config),
+            defaultValsByOptionsSetId: Object.assign({}, filter.defaultValsByOptionsSetId)
+          };
+        });
+        return result;
+      }
       function resolvePageFilters(p) {
         const resolvedPageFilters = {};
         const valsByFilterIdDup = Object.assign({}, p.valsByFilterId);
@@ -2464,7 +2480,7 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientFiltersManager = void 0;
       var ContentFilter_1 = require_ContentFilter();
-      var filtersResolution_1 = require_filtersResolution();
+      var filterOperations_1 = require_filterOperations();
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
       var ClientFiltersManager = class {
@@ -2756,7 +2772,7 @@
           if (!this.pageFiltersConfig || !this.filterOptionsConfig || !this.filterSelectorEl) {
             throw new Error("Cannot rerender filter selector without pageFiltersConfig, filterOptionsConfig, and filterSelectorEl");
           }
-          const resolvedPageFilters = (0, filtersResolution_1.resolveMinifiedPageFilters)({
+          const resolvedPageFilters = (0, filterOperations_1.resolveMinifiedPageFilters)({
             pageFiltersConfig: this.pageFiltersConfig,
             filterOptionsConfig: this.filterOptionsConfig,
             valsByFilterId: this.selectedValsByFilterId

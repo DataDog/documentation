@@ -214,3 +214,43 @@ export const PageFiltersManifestSchema = z
  * }
  */
 export type PageFiltersManifest = z.infer<typeof PageFiltersManifestSchema>;
+
+/**
+ * A lighter version of the PageFilterManifest schema,
+ * designed to be used client-side.
+ */
+export const PageFilterClientSideManifestSchema = z
+  .object({
+    config: PageFilterConfigSchema,
+    defaultValsByOptionsSetId: z.record(
+      z.string().regex(FILTER_OPTIONS_ID_REGEX),
+      z.string().regex(SNAKE_CASE_REGEX)
+    )
+  })
+  .strict();
+
+export type PageFilterClientSideManifest = z.infer<
+  typeof PageFilterClientSideManifestSchema
+>;
+
+/**
+ * A lighter version of the PageFiltersManifest schema,
+ * designed to be used client-side.
+ */
+export const PageFiltersClientSideManifestSchema = z
+  .object({
+    filtersById: z.record(
+      z.string().regex(SNAKE_CASE_REGEX),
+      PageFilterClientSideManifestSchema
+    ),
+    optionSetsById: FilterOptionsConfigSchema,
+    defaultValsByFilterId: z.record(
+      z.string().regex(SNAKE_CASE_REGEX),
+      z.string().regex(SNAKE_CASE_REGEX)
+    )
+  })
+  .strict();
+
+export type PageFiltersClientSideManifest = z.infer<
+  typeof PageFiltersClientSideManifestSchema
+>;
