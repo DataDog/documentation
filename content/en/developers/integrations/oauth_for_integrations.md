@@ -230,6 +230,10 @@ Error
 
 For issues with the PKCE OAuth flow, ensure the `content-type` header is correctly set to `application/json` or `application/x-www-form-urlencoded`.
 
+### Regenerating client secrets and secret rotation
+
+If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.com][11]. Only one secret can be active at a time. After you regenerate your secret, the existing secret is deleted. You do not need to re-authorize the integration.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -245,6 +249,7 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 [8]: /getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: mailto:ecosystems@datadog.com
 [12]: /api/latest/using-the-api/
 [13]: /developers/authorization/oauth2_endpoints/#exchange-authorization-code-for-access-token
 [14]: /developers/authorization/oauth2_endpoints/#post-apiv2api_keysmarketplace

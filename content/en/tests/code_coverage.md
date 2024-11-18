@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/tests"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/monitors/types/ci"
   tag: "Documentation"
   text: "Learn about CI Monitors"
@@ -18,7 +18,7 @@ further_reading:
 
 Code coverage is a measure of the total code coverage percentage that a module or session exercises.
 
-Ensure that [Test Visibility][1] is already set up for your language.
+Ensure that [Test Optimization][1] is already set up for your language.
 
 ## Report code coverage
 
@@ -347,9 +347,9 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 
 The pull request's [test summary comment][7] shows the code coverage change of a GitHub pull request compared to the default branch.
 
-## Intelligent Test Runner and total code coverage
+## Test Impact Analysis and total code coverage
 
-[Intelligent Test Runner][8] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
+[Test Impact Analysis][8] does **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
 
 ## Further reading
 
@@ -363,4 +363,4 @@ The pull request's [test summary comment][7] shows the code coverage change of a
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /continuous_integration/tests/developer_workflows#branch-overview
 [7]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
-[8]: /continuous_integration/intelligent_test_runner/
+[8]: /tests/test_impact_analysis

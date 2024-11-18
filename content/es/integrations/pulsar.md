@@ -26,7 +26,7 @@ author:
 categories:
 - recopilación de logs
 - colas de mensajes
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pulsar/README.md
 display_on_public_website: true
