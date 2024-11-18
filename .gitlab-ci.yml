@@ -241,6 +241,7 @@ build_preview_mergequeue:
     - yarn run prebuild
     - make update_websites_sources_module
     - build_site
+    - remove_static_from_repo
     - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
   artifacts:
     when: always
@@ -251,7 +252,6 @@ build_preview_mergequeue:
       - .vale.ini
       - .htmltest.yml
       - ./logs
-      - $PREVIEW_ERROR_LOG
       - ./latest-cached.tar.gz
       - typesense.config.json
   interruptible: true
