@@ -2444,6 +2444,11 @@
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
       var ClientFiltersManager = class {
+        /**
+         * The constructor should not do anything,
+         * since there is always only one instance,
+         * and it is created lazily.
+         */
         constructor() {
           this.selectedValsByFilterId = {};
           this.ifFunctionsByRef = {};
@@ -2456,23 +2461,52 @@
         static get instance() {
           if (!__classPrivateFieldGet(_a, _a, "f", _ClientFiltersManager_instance)) {
             __classPrivateFieldSet(_a, _a, new _a(), "f", _ClientFiltersManager_instance);
-            __classPrivateFieldGet(_a, _a, "f", _ClientFiltersManager_instance).retrieveStoredFilters();
+            __classPrivateFieldGet(_a, _a, "f", _ClientFiltersManager_instance).getStoredFilterSelections();
             window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
             window.markdocAfterRerenderHooks = window.markdocAfterRerenderHooks || [];
           }
           return __classPrivateFieldGet(_a, _a, "f", _ClientFiltersManager_instance);
         }
         /**
+         * Reconfigure the ClientFiltersManager to manage a new page.
+         *
+         * Called by a given doc page on load.
+         */
+        initialize(p) {
+          this.filtersManifest = p.filtersManifest;
+          this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
+          this.ifFunctionsByRef = {};
+          const contentIsCustomizable = this.locateFilterSelectorEl();
+          if (contentIsCustomizable) {
+            Object.keys(p.ifFunctionsByRef).forEach((ref) => {
+              this.ifFunctionsByRef[ref] = (0, pageConfigMinification_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
+            });
+            const overrideApplied = this.applyFilterSelectionOverrides();
+            if (overrideApplied) {
+              this.rerender();
+            } else {
+              this.addFilterSelectorEventListeners();
+            }
+          }
+          this.populateRightNav();
+          this.revealPage();
+          this.updateEditButton();
+          if (contentIsCustomizable) {
+            this.syncUrlWithSelectedVals();
+            this.updateStoredFilterSelections();
+          }
+        }
+        /**
          * Read any existing user filters from their browser.
          */
-        retrieveStoredFilters() {
+        getStoredFilterSelections() {
           const storedFilters = JSON.parse(localStorage.getItem("content-filters") || "{}");
           this.storedFilters = storedFilters;
         }
         /**
          * Update the stored filters in the user's browser.
          */
-        updateStoredFilters() {
+        updateStoredFilterSelections() {
           const storedFilters = JSON.parse(localStorage.getItem("content-filters") || "{}");
           const newStoredFilters = Object.assign(Object.assign({}, storedFilters), this.selectedValsByFilterId);
           this.storedFilters = newStoredFilters;
@@ -2526,7 +2560,7 @@
           this.selectedValsByFilterId[filterId] = optionId;
           this.rerender();
           this.syncUrlWithSelectedVals();
-          this.updateStoredFilters();
+          this.updateStoredFilterSelections();
         }
         /**
          * Check whether the element or any of its ancestors
@@ -2673,35 +2707,6 @@
             return;
           }
           editButtonLink.href = editButtonLink.href.replace(/\.md\/$/, ".mdoc/");
-        }
-        /**
-         * Reconfigure the ClientFiltersManager to manage a new page.
-         *
-         * Called by a given doc page on load.
-         */
-        initialize(p) {
-          this.filtersManifest = p.filtersManifest;
-          this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
-          this.ifFunctionsByRef = {};
-          const contentIsCustomizable = this.locateFilterSelectorEl();
-          if (contentIsCustomizable) {
-            Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-              this.ifFunctionsByRef[ref] = (0, pageConfigMinification_1.expandClientFunction)(p.ifFunctionsByRef[ref]);
-            });
-            const overrideApplied = this.applyFilterSelectionOverrides();
-            if (overrideApplied) {
-              this.rerender();
-            } else {
-              this.addFilterSelectorEventListeners();
-            }
-          }
-          this.populateRightNav();
-          this.revealPage();
-          this.updateEditButton();
-          if (contentIsCustomizable) {
-            this.syncUrlWithSelectedVals();
-            this.updateStoredFilters();
-          }
         }
         /**
          * Flip the page from hidden to visible

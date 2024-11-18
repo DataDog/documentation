@@ -37,6 +37,11 @@ export class ClientFiltersManager {
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
   private storedFilters: Record<string, string> = {};
 
+  /**
+   * The constructor should not do anything,
+   * since there is always only one instance,
+   * and it is created lazily.
+   */
   private constructor() {}
 
   /**
@@ -46,7 +51,7 @@ export class ClientFiltersManager {
   public static get instance(): ClientFiltersManager {
     if (!ClientFiltersManager.#instance) {
       ClientFiltersManager.#instance = new ClientFiltersManager();
-      ClientFiltersManager.#instance.retrieveStoredFilters();
+      ClientFiltersManager.#instance.getStoredFilterSelections();
       // @ts-ignore
       window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
       // @ts-ignore
@@ -57,9 +62,49 @@ export class ClientFiltersManager {
   }
 
   /**
+   * Reconfigure the ClientFiltersManager to manage a new page.
+   *
+   * Called by a given doc page on load.
+   */
+  initialize(p: {
+    ifFunctionsByRef: Record<string, MinifiedClientFunction>;
+    filtersManifest: PageFiltersClientSideManifest;
+  }) {
+    this.filtersManifest = p.filtersManifest;
+    this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
+    this.ifFunctionsByRef = {};
+
+    const contentIsCustomizable = this.locateFilterSelectorEl();
+    if (contentIsCustomizable) {
+      // Unminify conditional function data
+      Object.keys(p.ifFunctionsByRef).forEach((ref) => {
+        this.ifFunctionsByRef[ref] = expandClientFunction(
+          p.ifFunctionsByRef[ref]
+        ) as ClientFunction;
+      });
+
+      const overrideApplied = this.applyFilterSelectionOverrides();
+      if (overrideApplied) {
+        this.rerender();
+      } else {
+        this.addFilterSelectorEventListeners();
+      }
+    }
+
+    this.populateRightNav();
+    this.revealPage();
+    this.updateEditButton();
+
+    if (contentIsCustomizable) {
+      this.syncUrlWithSelectedVals();
+      this.updateStoredFilterSelections();
+    }
+  }
+
+  /**
    * Read any existing user filters from their browser.
    */
-  retrieveStoredFilters() {
+  getStoredFilterSelections() {
     const storedFilters = JSON.parse(localStorage.getItem('content-filters') || '{}');
     this.storedFilters = storedFilters;
   }
@@ -67,7 +112,7 @@ export class ClientFiltersManager {
   /**
    * Update the stored filters in the user's browser.
    */
-  updateStoredFilters() {
+  updateStoredFilterSelections() {
     const storedFilters = JSON.parse(localStorage.getItem('content-filters') || '{}');
     const newStoredFilters = {
       ...storedFilters,
@@ -134,7 +179,7 @@ export class ClientFiltersManager {
     this.selectedValsByFilterId[filterId] = optionId;
     this.rerender();
     this.syncUrlWithSelectedVals();
-    this.updateStoredFilters();
+    this.updateStoredFilterSelections();
   }
 
   /**
@@ -194,7 +239,7 @@ export class ClientFiltersManager {
    * Refresh all page content.
    */
   rerender() {
-    this.rerenderFilterSelector();
+    this.rerenderFilterMenu();
     this.rerenderPageContent();
     this.populateRightNav();
     //@ts-ignore
@@ -319,46 +364,6 @@ export class ClientFiltersManager {
   }
 
   /**
-   * Reconfigure the ClientFiltersManager to manage a new page.
-   *
-   * Called by a given doc page on load.
-   */
-  initialize(p: {
-    ifFunctionsByRef: Record<string, MinifiedClientFunction>;
-    filtersManifest: PageFiltersClientSideManifest;
-  }) {
-    this.filtersManifest = p.filtersManifest;
-    this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
-    this.ifFunctionsByRef = {};
-
-    const contentIsCustomizable = this.locateFilterSelectorEl();
-    if (contentIsCustomizable) {
-      // Unminify conditional function data
-      Object.keys(p.ifFunctionsByRef).forEach((ref) => {
-        this.ifFunctionsByRef[ref] = expandClientFunction(
-          p.ifFunctionsByRef[ref]
-        ) as ClientFunction;
-      });
-
-      const overrideApplied = this.applyFilterSelectionOverrides();
-      if (overrideApplied) {
-        this.rerender();
-      } else {
-        this.addFilterSelectorEventListeners();
-      }
-    }
-
-    this.populateRightNav();
-    this.revealPage();
-    this.updateEditButton();
-
-    if (contentIsCustomizable) {
-      this.syncUrlWithSelectedVals();
-      this.updateStoredFilters();
-    }
-  }
-
-  /**
    * Flip the page from hidden to visible
    * after making sure the TOC and other elements are
    * correctly synced with the user's current filters.
@@ -386,7 +391,7 @@ export class ClientFiltersManager {
    * Rerender the filter selector based on the current selections,
    * since some selections and options may have changed.
    */
-  rerenderFilterSelector() {
+  rerenderFilterMenu() {
     if (!this.filterSelectorEl || !this.filtersManifest) {
       throw new Error(
         'Cannot rerender filter selector without filtersManifest and filterSelectorEl'
