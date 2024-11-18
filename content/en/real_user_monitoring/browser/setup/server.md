@@ -77,7 +77,7 @@ To automatically instrument your RUM application:
 1. Use the `.tgz` file corresponding to your version of NGINX. You can find all the relevant `.tgz` files listed by NGINX version under [Reference](#reference).
 2. Extract the tarball to extract teh `ngx_http_datadog_module.so` file. Move it to a location that nginx has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
-### Update Nginx configuration
+### Update NGINX configuration
 1. The `NGINX.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
 
    ```javascript
@@ -157,7 +157,7 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
 
 {{< tabs >}}
-{{% tab "Nginx" %}}
+{{% tab "NGINX" %}}
 
 To update your RUM Application:
 
