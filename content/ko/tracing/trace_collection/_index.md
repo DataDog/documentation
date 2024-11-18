@@ -33,11 +33,11 @@ title: 애플리케이션 계측
 
 ## 계측 유형
 
-애플리케이션 계측 주요 방식 두 가지는 자동 또는 커스텀 계측입니다.
+애플리케이션을 계측하는 두 가지 기본 접근 방식이 존재합니다. 자동 계측과 커스텀 계측입니다 {{< tooltip glossary="instrumentation" >}}.
 
 ### 자동 계측
 
-수동 단계를 최소화하며 애플리케이션 스팬을 생성합니다. 애플리케이션을 자동으로 계측하려면 다음 옵션 중 하나를 사용합니다.
+최소한의 수동 단계를 통해 애플리케이션의 {{< tooltip glossary="span" >}}을 생성하세요. 자동으로 애플리케이션을 계측하려면 양 옵션 중 하나를 사용할 수 있습니다.
 
 - [단일 단계 계측 (베타)][7]: 한 줄 설치 명령을 실행하여 Datadog 에이전트를 설치하고 애플리케이션 성능 모니터링(APM) 을 활성화합니다. 아울러 Linux 호스트, VM 또는 컨테이너의 모든 서비스를 계측합니다.
 - [Datadog 라이브러리][8]: Datadog 추적 라이브러리 을 애플리케이션에 추가합니다.
@@ -58,21 +58,21 @@ title: 애플리케이션 계측
 다음 튜토리얼에서는 Datadog 추적 라이브러리를 사용한 자동 및 커스텀 계측으로 다양한 인프라스트럭처 시나리오에서 샘플 애플리케이션에 대한 분산 추적을 설정하는 방법을 알아봅니다.
 
 {{< whatsnext desc="언어 및 환경 선택하기:" >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog 에이전트와 동일한 호스트에서 Python 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog 에이전트와 동일한 호스트에서 파이썬(Python) 애플리케이션 트레이싱 활성화{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> 컨테이너의 파이썬(Python) 애플리케이션 및 Datadog 에이전트 트레이싱 활성화{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> 호스트의 컨테이너 및 애플리케이션의 파이썬(Python) 애플리케이션 트레이싱 활성화{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> {{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Java Application and Datadog Agent in Containers{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing for a Java Application in a Container and an Agent on a Host{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> Enabling Tracing for a Java Application on GKE{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Enabling Tracing for a Java Application on AWS EKS{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Enabling Tracing for a Java Application in Amazon ECS with EC2{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Java Application in Amazon ECS with Fargate{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Enabling Tracing for a Java Application with the Admission Controller{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Go Application on the Same Host as Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Go Application and Datadog Agent in Containers{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Enabling Tracing for a Go Application in Amazon ECS with EC2{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Go Application in Amazon ECS with Fargate{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog 에이전트와 동일한 호스트에서 Java 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> 컨테이너의 Java 애플리케이션 및 Datadog 에이전트 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> 호스트의 컨테이너 및 애플리케이션의 Java 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE에서 Java 애플리케이션 트레이싱 활성화 {{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS에서 Java 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Amazon ECS에서 EC2로 Java 애플리케이션 트레이싱 활성화 {{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Amazon ECS에서 Fargate로 Java 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> 어드미션 컨트롤러로 Java 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog 에이전트와 동일한 호스트에서 Go 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> 컨테이너의 Datadog 에이전트 및 Go 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Amazon ECS에서 EC2로 Go 애플리케이션 트레이싱 활성화{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Amazon ECS에서 Fargate로 Go 애플리케이션 트레이싱 활성화{{< /nextlink >}}
 
 {{< /whatsnext >}}
 ## 참고 자료

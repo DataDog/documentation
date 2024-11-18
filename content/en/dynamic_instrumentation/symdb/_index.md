@@ -12,7 +12,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Autocomplete and search are in preview.
+Autocomplete and search are in Preview for Python and .NET.
 {{< /beta-callout >}}
 
 ## Overview
