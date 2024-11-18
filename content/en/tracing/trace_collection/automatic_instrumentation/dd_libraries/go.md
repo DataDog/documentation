@@ -99,12 +99,13 @@ To install and set up Orchestrion:
    ```sh
    orchestrion pin
    ```
-1. Commit changes to your version control system:
+   Refer to the output of `orchestrion pin -help` for more information about available customization options.
+1. Commit changes to your version control system (unless you are integrating `orchestrion` directly in your CI/CD pipeline):
    ```sh
    git commit -m "chore: enable orchestrion" go.mod go.sum orchestrion.tool.go
    ```
 
-Now you can manage your dependency on `orchestrion` like any other dependency using the `go.mod` file.
+   Now you can manage your dependency on `orchestrion` like any other dependency using the `go.mod` file.
 
 ### Usage
 
