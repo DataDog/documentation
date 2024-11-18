@@ -37,9 +37,15 @@ Datadog.setVerbosity(Log.INFO)
 
 If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][2] for more information.
 
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][3] to view all your uploaded mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][4].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
 [2]: https://github.com/DataDog/dd-sdk-android/blob/develop/MIGRATION.MD
+[3]: https://app.datadoghq.com/source-code/setup/rum
+[4]: /real_user_monitoring/guide/debug-symbols

@@ -41,7 +41,7 @@ Para más información, consulta la documentación relevante para tu método de 
 
 Utiliza la API Datadog para añadir una instrumentación personalizada que te permita crear, modificar o eliminar mediante programación trazas para enviar a Datadog. Esto es útil para rastrear el código interno no capturado por la instrumentación automática, eliminar tramos no deseados de trazas y para proporcionar una visibilidad y un contexto más profundos en tramos, incluido añadir etiquetas de tramos.
 
-{{< nombre parcial="apm/apm-manual-instrumentation-custom.html" >}}
+{{< partial name="apm/apm-manual-instrumentation-custom.html" >}}
 
 <br>
 
@@ -51,7 +51,7 @@ Utiliza la API Datadog para añadir una instrumentación personalizada que te pe
 
 Las bibliotecas de rastreo de Datadog proporcionan una implementación de la API OpenTelemetry para instrumentar tu código. Esto significa que puedes mantener una instrumentación independiente del proveedor de todos tus servicios, sin dejar de aprovechar la implementación nativa, las funciones y los productos de Datadog. Puedes configurarla para generar tramos y trazas del estilo de Datadog que han de ser procesados por la biblioteca de rastreo de Datadog para tu lenguaje y enviar estos a Datadog.
 
-{{< nombre parcial="apm/apm-otel-instrumentation-custom.html" >}}
+{{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
 
 <br>
 
@@ -61,7 +61,7 @@ Las bibliotecas de rastreo de Datadog proporcionan una implementación de la API
 
 Si la instrumentación personalizada de [OpenTelemetry][1] o [`ddtrace`][2] no funciona para ti, cada uno de los lenguajes compatibles también tiene soporte técnico para enviar datos de [OpenTracing][3] a Datadog. OpenTracing está archivado y el proyecto no tiene soporte técnico. 
 
-{{< nombre parcial="apm/apm-opentracing-custom.html" >}}
+{{< partial name="apm/apm-opentracing-custom.html" >}}
 
 <br>
 
@@ -74,7 +74,7 @@ Si la instrumentación personalizada de [OpenTelemetry][1] o [`ddtrace`][2] no f
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [2]: /es/tracing/trace_collection/custom_instrumentation/dd_libraries/

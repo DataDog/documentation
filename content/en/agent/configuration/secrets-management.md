@@ -206,7 +206,7 @@ func main() {
 {{% /tab %}}
 {{% tab "PowerShell" %}}
 ```powershell
-$secretsJson = Read-Host | ConvertFrom-Json
+$secretsJson = $input | ConvertFrom-Json
 $secrets = @{}
 for ($index = 0; $index -lt $secretsJson.secrets.count; $index++) {
     $secretKey = $secretsJson.secrets[$index]
@@ -506,6 +506,35 @@ If you encounter one of the following errors, then something is missing in your 
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
 
+Datadog has a [Powershell script][8] to help you set the correct permission on your executable. Example on how to use it:
+
+```powershell
+.\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
+ddagentuser SID: S-1-5-21-3139760116-144564943-2741514060-1076
+=== Checking executable permissions ===
+Executable path: C:\secrets\decrypt_secrets.exe
+Executable permissions: OK, the executable has the correct permissions
+
+Permissions Detail:
+
+stdout:
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\secrets\decrypt_secrets.exe
+Owner  : BUILTIN\Administrators
+Group  : BUILTIN\Administrators
+Access : NT AUTHORITY\SYSTEM Allow  FullControl
+         BUILTIN\Administrators Allow  FullControl
+         DESKTOP-V03BB2P\ddagentuser Allow  ReadAndExecute, Synchronize
+Audit  :
+Sddl   : O:BAG:BAD:PAI(A;;FA;;;SY)(A;;FA;;;BA)(A;;0x1200a9;;;S-1-5-21-3139760116-144564943-2741514
+         060-1076)
+stderr:
+
+
+=== Secrets stats ===
+Number of secrets resolved: 0
+Secrets handle resolved:
+```
+
 ##### Testing your executable
 
 Your executable is executed by the Agent when fetching your secrets. The Datadog Agent runs using the `ddagentuser`. This user has no specific rights, but it is part of the `Performance Monitor Users` group. The password for this user is randomly generated at install time and is never saved anywhere.
@@ -544,6 +573,8 @@ stderr: None
 exit code:
 0
 ```
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
+[8]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -585,4 +616,5 @@ This command returns whether the permissions are valid for the Agent to view thi
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [6]: /agent/configuration/agent-commands/#restart-the-agent
-[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
+
+

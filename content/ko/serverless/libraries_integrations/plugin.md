@@ -62,14 +62,14 @@ Datadog는 서버리스 애플리케이션을 구축하기 위해 서버리스 �
 | `failOnError`                 | 설정되면 Datadog 모니터가 생성이나 업데이트에 실패했을 때 오류를 트리거합니다. 배포 후에 발생할 수 있지만 0이 아닌 종료 코드를 반환하기 위해(사용자 CI 실패를 위해) `serverless deploy`를 발생시킬 수 있습니다. 기본값은 `false`로 설정됩니다. |
 | `logLevel`                    | 로그 수준으로, 확장된 로깅을 위해 `DEBUG`로 설정됩니다. |
 | `skipCloudformationOutputs`   | 스택에 Datadog Cloudformation Outputs 추가하기를 건너뛰려면 `true`로 설정합니다. 200개 출력 제한은 스택 생성을 실패하게 할 수 있으므로 이 경우 유용합니다. |
-| `enableColdStartTracing`      | 콜드 스타트 추적을 비활성화하려면 `false`로 설정합니다. NodeJS 및 파이썬(Python)에서 사용됩니다. 기본값은 `true`입니다. |
+| `enableColdStartTracing`      | 콜드 스타트 추적을 비활성화하려면 `false`로 설정합니다. Node.js 및 파이썬(Python)에서 사용됩니다. 기본값은 `true`입니다. |
 | `coldStartTraceMinDuration`   | 콜드 스타트 추적을 통해 추적할 모듈 로드 이벤트의 최소 지속 시간(밀리초)을 설정합니다. 번호. 기본값은`3` 입니다. |
 | `coldStartTraceSkipLibs`      | 선택적으로 쉼표로 구분된 라이브러리 목록에 대해 콜드 스타트 스팬(span) 만들기를 건너뜁니다. 깊이를 제한하거나 알려진 라이브러리를 건너뛸 때 유용합니다. 기본값은 런타임에 따라 다릅니다. |
 | `subdomain`                   | 부수적인 하위 도메인을 설정하여 출력 생성을 위해 프린트되는 앱 URL을 사용합니다. 기본값은 `app`으로 설정됩니다. |
-| `enableProfiling`             | `true`와 함께 Datadog 계속적인 프로파일러를 사용하도록 설정합니다. NodeJS 및 파이썬(Python)용 베타에서 지원됩니다. 기본값은 `false`입니다. |
-| `encodeAuthorizerContext`     | 람다 승인자에 대해 `true`로 설정하면 추적 컨텍스트가 전파를 위해 응답으로 인코딩됩니다. NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다. |
-| `decodeAuthorizerContext`     | 람다 인증자를 통해 인증된 람다에 대해 `true`로 설정하면 인코딩된 추적 컨텍스트를 구문 분석하고 사용합니다(찾은 경우). NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다. |
-| `apmFlushDeadline`            | 밀리초에서 시간 초과하기 전에 기간을 제출할 시기를 결정하는 데 사용됩니다. AWS 람다 호출의 남은 시간이 설정된 값보다 작으면 추적기는 현재 활성 스팬(span)과 완료된 모든 스팬(span)을 제출하려고 시도합니다. NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `100`밀리초입니다. |
+| `enableProfiling`             | `true`와 함께 Datadog 계속적인 프로파일러를 사용하도록 설정합니다. Node.js 및 파이썬(Python)용 베타에서 지원됩니다. 기본값은 `false`입니다. |
+| `encodeAuthorizerContext`     | 람다 승인자에 대해 `true`로 설정하면 추적 컨텍스트가 전파를 위해 응답으로 인코딩됩니다. Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다. |
+| `decodeAuthorizerContext`     | 람다 인증자를 통해 인증된 람다에 대해 `true`로 설정하면 인코딩된 추적 컨텍스트를 구문 분석하고 사용합니다(찾은 경우). Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다. |
+| `apmFlushDeadline`            | 밀리초에서 시간 초과하기 전에 기간을 제출할 시기를 결정하는 데 사용됩니다. AWS 람다 호출의 남은 시간이 설정된 값보다 작으면 추적기는 현재 활성 스팬(span)과 완료된 모든 스팬(span)을 제출하려고 시도합니다. Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `100`밀리초입니다. |
 
 이 파라미터를 사용하려면 이 예시와 유사한 `serverless.yml`에 `custom` > `datadog` 섹션을 추가합니다.
 
