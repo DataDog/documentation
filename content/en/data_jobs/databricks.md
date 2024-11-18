@@ -12,7 +12,7 @@ further_reading:
 
 Follow these steps to enable Data Jobs Monitoring for Databricks.
 
-1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for the Databricks workspace.
+1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for a Databricks workspace.
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s) in the workspace.
 
 
@@ -33,7 +33,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, chooose either
-  - [Managed by Datadog](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog will install and manage the Agent with a global init script in the workspace (recommended).
+  - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog will install and manage the Agent with a global init script in the workspace.
   - [Manaully](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
 
 ### Install the Datadog Agent
@@ -170,13 +170,13 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{< /tabs >}}
 
-### Restart existing clusters
+### Restart currently running clusters
 
 The init script installs the Agent when clusters start.
 
-Existing clusters, like all-purpose clusters or long-lived job clusters, must be restarted for the init script to install the Datadog Agent.
+Currently running all-purpose clusters or long-lived job clusters must be manually restarted for the init script to install the Datadog Agent.
 
-All new clusters that start will use the init script (if the script is global or configured for the job cluster).
+For scheduled jobs that run on job clusters, the init script gets installed automatically on the next run.
 
 ## Validation
 
