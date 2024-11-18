@@ -72,7 +72,7 @@ The Datadog sidecar uses file tailing to collect logs. Datadog recommends writin
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-To set up logging in your application, see [Node.js Log Collection][1]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][2].
+To set up logging in your application, see [Python Log Collection][1]. To set up trace log correlation, see [Correlating Python Logs and Traces][2].
 
 [1]: /logs/log_collection/python/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/python
@@ -84,7 +84,7 @@ The Datadog sidecar uses file tailing to collect logs. Datadog recommends writin
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-To set up logging in your application, see [Node.js Log Collection][1]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][2].
+To set up logging in your application, see [Java Log Collection][1]. To set up trace log correlation, see [Correlating Java Logs and Traces][2].
 
 [1]: /logs/log_collection/java/?tab=winston30
 [2]: /tracing/other_telemetry/connect_logs_and_traces/java
@@ -96,7 +96,7 @@ The Datadog sidecar uses file tailing to collect logs. Datadog recommends writin
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-To set up logging in your application, see [Node.js Log Collection][1]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][2].
+To set up logging in your application, see [Go Log Collection][1]. To set up trace log correlation, see [Correlating Go Logs and Traces][2].
 
 [1]: /logs/log_collection/go/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/go
@@ -108,7 +108,7 @@ The Datadog sidecar uses file tailing to collect logs. Datadog recommends writin
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
-To set up logging in your application, see [Node.js Log Collection][1]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][2].
+To set up logging in your application, see [PHP Log Collection][1]. To set up trace log correlation, see [Correlating PHP Logs and Traces][2].
 
 [1]: /logs/log_collection/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php
