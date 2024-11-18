@@ -75,7 +75,7 @@ To automatically instrument your RUM application:
 ### Download the appropriate `.tgz` file
 
 1. Use the `.tgz` file corresponding to your version of NGINX. You can find all the relevant `.tgz` files listed by NGINX version under [Reference](#reference).
-2. Extract the tarball to extract teh `ngx_http_datadog_module.so` file. Move it to a location that nginx has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
+2. Extract the tarball to extract the `ngx_http_datadog_module.so` file. Move it to a location that NGINX has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 ### Update NGINX configuration
 1. The `NGINX.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
