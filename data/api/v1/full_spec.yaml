@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -17264,12 +17266,12 @@ components:
     SyntheticsTestRestrictionPolicyBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        principal:
-          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipal'
+        principals:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
         relation:
           $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
       type: object
-    SyntheticsTestRestrictionPolicyBindingPrincipal:
+    SyntheticsTestRestrictionPolicyBindingPrincipals:
       description: List of principals for a mobile test binding.
       items:
         description: A principal for a mobile test binding.
