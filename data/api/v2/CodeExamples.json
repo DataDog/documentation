@@ -20,6 +20,25 @@
       "description": "Update a retention filter returns \"OK\" response"
     }
   ],
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "_1716720881",
+      "description": "Create an AWS account returns \"AWS Account object\" response"
+    },
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -944,6 +963,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "RunHistoricalJob": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Run a historical job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [

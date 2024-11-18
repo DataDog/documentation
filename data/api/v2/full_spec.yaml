@@ -92,6 +92,13 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/APIKeysSort'
+    AWSAccountConfigIDPathParameter:
+      description: Unique Datadog ID of the AWS Account Integration Config
+      in: path
+      name: aws_account_config_id
+      required: true
+      schema:
+        type: string
     ApplicationKeyFilterCreatedAtEndParameter:
       description: Only include application keys created on or before the specified
         date.
@@ -302,6 +309,13 @@ components:
       description: Your GCP STS enabled service account's unique ID.
       in: path
       name: account_id
+      required: true
+      schema:
+        type: string
+    HistoricalJobID:
+      description: The ID of the job.
+      in: path
+      name: job_id
       required: true
       schema:
         type: string
@@ -1017,6 +1031,536 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    AWSAccountConfigID:
+      description: Unique Datadog ID of the AWS Account Integration Config
+      example: 00000000-abcd-0001-0000-000000000000
+      type: string
+    AWSAccountCreateRequest:
+      description: AWS Account Create Request body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    AWSAccountCreateRequestAttributes:
+      description: The AWS Account Integration Config to be created
+      properties:
+        account_tags:
+          $ref: '#/components/schemas/AWSAccountTags'
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        aws_partition:
+          $ref: '#/components/schemas/AWSAccountPartition'
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegions'
+        logs_config:
+          $ref: '#/components/schemas/AWSLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetricsConfig'
+        resources_config:
+          $ref: '#/components/schemas/AWSResourcesConfig'
+        traces_config:
+          $ref: '#/components/schemas/AWSTracesConfig'
+      required:
+      - aws_account_id
+      - aws_partition
+      - auth_config
+      type: object
+    AWSAccountCreateRequestData:
+      description: AWS Account Create Request data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSAccountID:
+      description: AWS Account ID
+      example: '123456789012'
+      type: string
+    AWSAccountPartition:
+      default: aws
+      description: AWS Account partition
+      enum:
+      - aws
+      - aws-cn
+      - aws-us-gov
+      example: aws
+      type: string
+      x-enum-varnames:
+      - AWS
+      - AWS_CN
+      - AWS_US_GOV
+    AWSAccountResponse:
+      description: AWS Account response body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountResponseData'
+      required:
+      - data
+      type: object
+    AWSAccountResponseAttributes:
+      description: The AWS Account Integration Config
+      properties:
+        account_tags:
+          $ref: '#/components/schemas/AWSAccountTags'
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        aws_partition:
+          $ref: '#/components/schemas/AWSAccountPartition'
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegions'
+        created_at:
+          description: Timestamp of when the account integration was created
+          format: date-time
+          readOnly: true
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/AWSLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetricsConfig'
+        modified_at:
+          description: Timestamp of when the account integration was updated
+          format: date-time
+          readOnly: true
+          type: string
+        resources_config:
+          $ref: '#/components/schemas/AWSResourcesConfig'
+        traces_config:
+          $ref: '#/components/schemas/AWSTracesConfig'
+      required:
+      - aws_account_id
+      type: object
+    AWSAccountResponseData:
+      description: AWS Account Response body
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountResponseAttributes'
+        id:
+          $ref: '#/components/schemas/AWSAccountConfigID'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - id
+      - type
+      type: object
+    AWSAccountTags:
+      description: Tags to apply to all metrics in the account
+      items:
+        description: Tag to apply to all metrics in the account
+        example: key:value
+        type: string
+      nullable: true
+      type: array
+    AWSAccountType:
+      default: account
+      description: AWS Account resource type.
+      enum:
+      - account
+      example: account
+      type: string
+      x-enum-varnames:
+      - ACCOUNT
+    AWSAccountUpdateRequest:
+      description: AWS Account Update Request body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    AWSAccountUpdateRequestAttributes:
+      description: The AWS Account Integration Config to be updated
+      properties:
+        account_tags:
+          $ref: '#/components/schemas/AWSAccountTags'
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        aws_partition:
+          $ref: '#/components/schemas/AWSAccountPartition'
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegions'
+        logs_config:
+          $ref: '#/components/schemas/AWSLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetricsConfig'
+        resources_config:
+          $ref: '#/components/schemas/AWSResourcesConfig'
+        traces_config:
+          $ref: '#/components/schemas/AWSTracesConfig'
+      required:
+      - aws_account_id
+      type: object
+    AWSAccountUpdateRequestData:
+      description: AWS Account Update Request data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountUpdateRequestAttributes'
+        id:
+          $ref: '#/components/schemas/AWSAccountConfigID'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSAccountsResponse:
+      description: AWS Accounts response body
+      properties:
+        data:
+          description: List of AWS Account Integration Configs
+          items:
+            $ref: '#/components/schemas/AWSAccountResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    AWSAuthConfig:
+      description: AWS Authentication config
+      oneOf:
+      - $ref: '#/components/schemas/AWSAuthConfigKeys'
+      - $ref: '#/components/schemas/AWSAuthConfigRole'
+    AWSAuthConfigKeys:
+      description: AWS Authentication config for key-based account
+      properties:
+        access_key_id:
+          description: AWS Access Key ID
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+        secret_access_key:
+          description: AWS Secret Access Key
+          example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+          minLength: 1
+          type: string
+          writeOnly: true
+      required:
+      - access_key_id
+      type: object
+    AWSAuthConfigRole:
+      description: AWS Authentication config for role-based account
+      properties:
+        external_id:
+          description: AWS IAM External ID for associated role
+          type: string
+        role_name:
+          description: AWS IAM Role name
+          example: DatadogIntegrationRole
+          maxLength: 576
+          minLength: 1
+          type: string
+      required:
+      - role_name
+      type: object
+    AWSLambdaForwarderConfig:
+      description: AWS Lambda forwarder
+      properties:
+        lambdas:
+          description: List of Datadog Lambda Log Forwarder ARNs
+          items:
+            example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
+            type: string
+          type: array
+        sources:
+          description: List of AWS services that will send logs to the Datadog Lambda
+            Log Forwarder
+          items:
+            example: s3
+            type: string
+          type: array
+      type: object
+    AWSLogsConfig:
+      description: AWS Logs config
+      properties:
+        lambda_forwarder:
+          $ref: '#/components/schemas/AWSLambdaForwarderConfig'
+      type: object
+    AWSLogsServicesResponse:
+      description: AWS Logs Services response body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSLogsServicesResponseData'
+      required:
+      - data
+      type: object
+    AWSLogsServicesResponseAttributes:
+      description: AWS Logs Services response body
+      properties:
+        logs_services:
+          description: List of AWS services that can send logs to Datadog
+          example:
+          - s3
+          items:
+            example: s3
+            type: string
+          type: array
+      required:
+      - logs_services
+      type: object
+    AWSLogsServicesResponseData:
+      description: AWS Logs Services response body
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSLogsServicesResponseAttributes'
+        id:
+          default: logs_services
+          description: The `AWSLogsServicesResponseData` `id`.
+          example: logs_services
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSLogsServicesResponseDataType'
+      required:
+      - id
+      - type
+      type: object
+    AWSLogsServicesResponseDataType:
+      default: logs_services
+      description: The `AWSLogsServicesResponseData` `type`.
+      enum:
+      - logs_services
+      example: logs_services
+      type: string
+      x-enum-varnames:
+      - LOGS_SERVICES
+    AWSMetricsConfig:
+      description: AWS Metrics config
+      properties:
+        automute_enabled:
+          description: Enable EC2 automute for AWS metrics
+          example: true
+          type: boolean
+        collect_cloudwatch_alarms:
+          description: Enable CloudWatch alarms collection
+          example: true
+          type: boolean
+        collect_custom_metrics:
+          description: Enable custom metrics collection
+          example: true
+          type: boolean
+        enabled:
+          description: Enable AWS metrics collection
+          example: true
+          type: boolean
+        namespace_filters:
+          $ref: '#/components/schemas/AWSNamespaceFilters'
+        tag_filters:
+          description: AWS Metrics tag filters list
+          items:
+            $ref: '#/components/schemas/AWSNamespaceTagFilter'
+          type: array
+      type: object
+    AWSNamespaceFilters:
+      description: AWS Metrics namespace filters
+      oneOf:
+      - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeAll'
+      - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
+      - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeAll'
+      - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
+    AWSNamespaceFiltersExcludeAll:
+      description: Exclude all namespaces
+      properties:
+        exclude_all:
+          description: Exclude all namespaces
+          example: false
+          type: boolean
+      required:
+      - exclude_all
+    AWSNamespaceFiltersExcludeOnly:
+      description: Exclude only these namespaces
+      properties:
+        exclude_only:
+          description: Exclude only these namespaces
+          example:
+          - AWS/EC2
+          items:
+            example: AWS/EC2
+            type: string
+          type: array
+      required:
+      - exclude_only
+    AWSNamespaceFiltersIncludeAll:
+      description: Include all namespaces
+      properties:
+        include_all:
+          description: Include all namespaces
+          example: false
+          type: boolean
+      required:
+      - include_all
+    AWSNamespaceFiltersIncludeOnly:
+      description: Include only these namespaces
+      properties:
+        include_only:
+          description: Include only these namespaces
+          example:
+          - AWS/EC2
+          items:
+            example: AWS/EC2
+            type: string
+          type: array
+      required:
+      - include_only
+    AWSNamespaceTagFilter:
+      description: AWS Metrics tag filters
+      properties:
+        namespace:
+          description: The AWS Namespace to apply the tag filters against
+          example: AWS/EC2
+          type: string
+        tags:
+          description: The tags to filter based on
+          items:
+            example: key:value
+            type: string
+          nullable: true
+          type: array
+      type: object
+    AWSNamespacesResponse:
+      description: AWS Namespaces response body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSNamespacesResponseData'
+      required:
+      - data
+      type: object
+    AWSNamespacesResponseAttributes:
+      description: AWS Namespaces response body
+      properties:
+        namespaces:
+          description: AWS CloudWatch namespace
+          example:
+          - AWS/ApiGateway
+          items:
+            example: AWS/ApiGateway
+            type: string
+          type: array
+      required:
+      - namespaces
+      type: object
+    AWSNamespacesResponseData:
+      description: AWS Namespaces response body
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSNamespacesResponseAttributes'
+        id:
+          default: namespaces
+          description: The `AWSNamespacesResponseData` `id`.
+          example: namespaces
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSNamespacesResponseDataType'
+      required:
+      - id
+      - type
+      type: object
+    AWSNamespacesResponseDataType:
+      default: namespaces
+      description: The `AWSNamespacesResponseData` `type`.
+      enum:
+      - namespaces
+      example: namespaces
+      type: string
+      x-enum-varnames:
+      - NAMESPACES
+    AWSNewExternalIDResponse:
+      description: AWS External ID response body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSNewExternalIDResponseData'
+      required:
+      - data
+      type: object
+    AWSNewExternalIDResponseAttributes:
+      description: AWS External ID response body
+      properties:
+        external_id:
+          description: AWS IAM External ID for associated role
+          example: acb8f6b8a844443dbb726d07dcb1a870
+          type: string
+      required:
+      - external_id
+      type: object
+    AWSNewExternalIDResponseData:
+      description: AWS External ID response body
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSNewExternalIDResponseAttributes'
+        id:
+          default: external_id
+          description: The `AWSNewExternalIDResponseData` `id`.
+          example: external_id
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSNewExternalIDResponseDataType'
+      required:
+      - id
+      - type
+      type: object
+    AWSNewExternalIDResponseDataType:
+      default: external_id
+      description: The `AWSNewExternalIDResponseData` `type`.
+      enum:
+      - external_id
+      example: external_id
+      type: string
+      x-enum-varnames:
+      - EXTERNAL_ID
+    AWSRegions:
+      description: AWS Regions to collect data from
+      oneOf:
+      - $ref: '#/components/schemas/AWSRegionsIncludeAll'
+      - $ref: '#/components/schemas/AWSRegionsIncludeOnly'
+    AWSRegionsIncludeAll:
+      description: Include all regions
+      properties:
+        include_all:
+          description: Include all regions
+          example: false
+          type: boolean
+      required:
+      - include_all
+    AWSRegionsIncludeOnly:
+      description: Include only these regions
+      properties:
+        include_only:
+          description: Include only these regions
+          example:
+          - us-east-1
+          items:
+            example: us-east-1
+            type: string
+          type: array
+      required:
+      - include_only
+    AWSResourcesConfig:
+      description: AWS Resources config
+      properties:
+        cloud_security_posture_management_collection:
+          description: Whether Datadog collects cloud security posture management
+            resources from your AWS account.
+          example: false
+          type: boolean
+        extended_collection:
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Required for `cspm_resource_collection`.
+          example: false
+          type: boolean
+      type: object
+    AWSTracesConfig:
+      description: AWS Traces config
+      properties:
+        xray_services:
+          $ref: '#/components/schemas/XRayServicesList'
+      type: object
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -3735,6 +4279,21 @@ components:
             from the other indexes
           type: string
       type: object
+    CalculatedField:
+      description: Calculated field.
+      properties:
+        expression:
+          description: Expression.
+          example: '@request_end_timestamp - @request_start_timestamp'
+          type: string
+        name:
+          description: Field name.
+          example: response_time
+          type: string
+      required:
+      - name
+      - expression
+      type: object
     Case:
       description: A case
       properties:
@@ -5633,6 +6192,59 @@ components:
       - IDENTITY
       - GZIP
       - DEFLATE
+    ConvertJobResultsToSignalsAttributes:
+      description: Attributes for converting historical job results to signals.
+      properties:
+        id:
+          description: Request ID.
+          type: string
+        jobResultIds:
+          description: Job result IDs.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        notifications:
+          description: Notifications sent.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        signalMessage:
+          description: Message of generated signals.
+          example: A large number of failed login attempts.
+          type: string
+        signalSeverity:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - jobResultIds
+      - signalSeverity
+      - signalMessage
+      - notifications
+      type: object
+    ConvertJobResultsToSignalsData:
+      description: Data for converting historical job results to signals.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConvertJobResultsToSignalsAttributes'
+        type:
+          $ref: '#/components/schemas/ConvertJobResultsToSignalsDataType'
+      type: object
+    ConvertJobResultsToSignalsDataType:
+      description: Type of payload.
+      enum:
+      - historicalDetectionsJobResultSignalConversion
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOBRESULTSIGNALCONVERSION
+    ConvertJobResultsToSignalsRequest:
+      description: Request for converting historical job results to signals.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConvertJobResultsToSignalsData'
+      type: object
     CostAttributionAggregates:
       description: An array of available aggregates.
       items:
@@ -10237,6 +10849,67 @@ components:
       required:
       - message
       type: object
+    HistoricalJobDataType:
+      description: Type of payload.
+      enum:
+      - historicalDetectionsJob
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOB
+    HistoricalJobListMeta:
+      description: Metadata about the list of jobs.
+      properties:
+        totalCount:
+          description: Number of jobs in the list.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    HistoricalJobResponse:
+      description: Historical job response.
+      properties:
+        data:
+          $ref: '#/components/schemas/HistoricalJobResponseData'
+      type: object
+    HistoricalJobResponseAttributes:
+      description: Historical job attributes.
+      properties:
+        createdAt:
+          description: Time when the job was created.
+          type: string
+        createdByHandle:
+          description: The handle of the user who created the job.
+          type: string
+        createdByName:
+          description: The name of the user who created the job.
+          type: string
+        createdFromRuleId:
+          description: ID of the rule used to create the job (if it is created from
+            a rule).
+          type: string
+        jobDefinition:
+          $ref: '#/components/schemas/JobDefinition'
+        jobName:
+          description: Job name.
+          type: string
+        jobStatus:
+          description: Job status.
+          type: string
+        modifiedAt:
+          description: Last modification time of the job.
+          type: string
+      type: object
+    HistoricalJobResponseData:
+      description: Historical job response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/HistoricalJobResponseAttributes'
+        id:
+          description: ID of the job.
+          type: string
+        type:
+          $ref: '#/components/schemas/HistoricalJobDataType'
+      type: object
     HourlyUsage:
       description: Hourly usage for a product family for an org.
       properties:
@@ -12671,6 +13344,140 @@ components:
           description: Jira project key
           type: string
       type: object
+    JobCreateResponse:
+      description: Run a historical job response.
+      properties:
+        data:
+          $ref: '#/components/schemas/JobCreateResponseData'
+      type: object
+    JobCreateResponseData:
+      description: The definition of `JobCreateResponseData` object.
+      properties:
+        id:
+          description: ID of the created job.
+          type: string
+        type:
+          $ref: '#/components/schemas/HistoricalJobDataType'
+      type: object
+    JobDefinition:
+      description: Definition of a historical job.
+      properties:
+        calculatedFields:
+          description: Calculated fields.
+          items:
+            $ref: '#/components/schemas/CalculatedField'
+          type: array
+        cases:
+          description: Cases used for generating job results.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        from:
+          description: Starting time of data analyzed by the job.
+          example: 1729843470000
+          format: int64
+          type: integer
+        index:
+          description: Index used to load the data.
+          example: cloud_siem
+          type: string
+        message:
+          description: Message for generated results.
+          example: A large number of failed login attempts.
+          type: string
+        name:
+          description: Job name.
+          example: Excessive number of failed attempts.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs analyzed by the job.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        referenceTables:
+          description: Reference tables for the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            type: string
+          type: array
+        thirdPartyCases:
+          description: Cases for generating results from third-party rules. Only available
+            for third-party rules.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
+          type: array
+        to:
+          description: Ending time of data analyzed by the job.
+          example: 1729847070000
+          format: int64
+          type: integer
+        type:
+          description: Job type.
+          type: string
+      required:
+      - from
+      - to
+      - index
+      - name
+      - cases
+      - queries
+      - message
+      type: object
+    JobDefinitionFromRule:
+      description: Definition of a historical job based on a security monitoring rule.
+      properties:
+        caseIndex:
+          description: Index of the rule case applied by the job.
+          example: 0
+          format: int32
+          maximum: 9
+          type: integer
+        from:
+          description: Starting time of data analyzed by the job.
+          example: 1729843470000
+          format: int64
+          type: integer
+        id:
+          description: ID of the detection rule used to create the job.
+          example: abc-def-ghi
+          type: string
+        index:
+          description: Index used to load the data.
+          example: cloud_siem
+          type: string
+        notifications:
+          description: Notifications sent when the job is completed.
+          example:
+          - '@sns-cloudtrail-results'
+          items:
+            type: string
+          type: array
+        to:
+          description: Ending time of data analyzed by the job.
+          example: 1729847070000
+          format: int64
+          type: integer
+      required:
+      - id
+      - from
+      - to
+      - index
+      - caseIndex
+      type: object
     LeakedKey:
       description: The definition of LeakedKey object.
       properties:
@@ -12900,6 +13707,17 @@ components:
       required:
       - data
       - meta
+      type: object
+    ListHistoricalJobsResponse:
+      description: List of historical jobs.
+      properties:
+        data:
+          description: Array containing the list of historical jobs.
+          items:
+            $ref: '#/components/schemas/HistoricalJobResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/HistoricalJobListMeta'
       type: object
     ListPowerpacksResponse:
       description: Response object which includes all powerpack configurations.
@@ -20019,6 +20837,38 @@ components:
             $ref: '#/components/schemas/RumMetricResponseData'
           type: array
       type: object
+    RunHistoricalJobRequest:
+      description: Run a historical job request.
+      properties:
+        data:
+          $ref: '#/components/schemas/RunHistoricalJobRequestData'
+      type: object
+    RunHistoricalJobRequestAttributes:
+      description: Run a historical job request.
+      properties:
+        fromRule:
+          $ref: '#/components/schemas/JobDefinitionFromRule'
+        id:
+          description: Request ID.
+          type: string
+        jobDefinition:
+          $ref: '#/components/schemas/JobDefinition'
+      type: object
+    RunHistoricalJobRequestData:
+      description: Data for running a historical job request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RunHistoricalJobRequestAttributes'
+        type:
+          $ref: '#/components/schemas/RunHistoricalJobRequestDataType'
+      type: object
+    RunHistoricalJobRequestDataType:
+      description: Type of data.
+      enum:
+      - historicalDetectionsJobCreate
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOBCREATE
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -26699,6 +27549,34 @@ components:
           description: The id of the instance.
           type: string
       type: object
+    XRayServicesIncludeAll:
+      description: Include all services
+      properties:
+        include_all:
+          description: Include all services
+          example: false
+          type: boolean
+      required:
+      - include_all
+    XRayServicesIncludeOnly:
+      description: Include only these services
+      nullable: true
+      properties:
+        include_only:
+          description: Include only these services
+          example:
+          - AWS/AppSync
+          items:
+            example: AWS/AppSync
+            type: string
+          type: array
+      required:
+      - include_only
+    XRayServicesList:
+      description: AWS X-Ray services to collect traces from
+      oneOf:
+      - $ref: '#/components/schemas/XRayServicesIncludeAll'
+      - $ref: '#/components/schemas/XRayServicesIncludeOnly'
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -32347,6 +33225,295 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/aws/accounts:
+    get:
+      description: Get a list of AWS Account Integration Configs.
+      operationId: ListAWSAccounts
+      parameters:
+      - description: Optional query filter accounts by AWS Account ID
+        example: '123456789012'
+        in: query
+        name: aws_account_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountsResponse'
+          description: AWS Accounts List object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all AWS integrations
+      tags:
+      - AWS Integration
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    post:
+      description: Create a new AWS Account Integration Config.
+      operationId: CreateAWSAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSAccountCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an AWS integration
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-given:
+        aws_account_v2:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"account\",\n    \"attributes\":
+              {\n      \"account_tags\": [\n        \"key:value\"\n      ],\n      \"auth_config\":
+              {\n        \"role_name\": \"DatadogIntegrationRole\"\n      },\n      \"aws_account_id\":
+              \"123456789012\",\n      \"aws_partition\": \"aws\",\n      \"aws_regions\":
+              {\n        \"include_only\": [\n          \"us-east-1\"\n        ]\n
+              \     },\n      \"logs_config\": {\n        \"lambda_forwarder\": {\n
+              \         \"lambdas\": [\n            \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n
+              \         ],\n          \"sources\": [\n            \"s3\"\n          ]\n
+              \       }\n      },\n      \"metrics_config\": {\n        \"enabled\":
+              true,\n        \"automute_enabled\": true,\n        \"collect_custom_metrics\":
+              false,\n        \"collect_cloudwatch_alarms\": false,\n        \"tag_filters\":
+              [\n          {\n            \"namespace\": \"AWS/EC2\",\n            \"tags\":
+              [\n              \"key:value\"\n            ]\n          }\n        ],\n
+              \       \"namespace_filters\": {\n          \"include_only\": [\n            \"AWS/EC2\"\n
+              \         ]\n        }\n      },\n      \"resources_config\": {\n        \"cloud_security_posture_management_collection\":
+              false,\n        \"extended_collection\": false\n      },\n      \"traces_config\":
+              {\n        \"xray_services\": {\n          \"include_only\": [\n            \"AWS/AppSync\"\n
+              \         ]\n        }\n      }\n    }\n  }\n}"
+          step: there is a valid "aws_account_v2" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
+      x-undo:
+        operationId: DeleteAWSAccount
+        parameters:
+        - name: aws_account_config_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/accounts/{aws_account_config_id}:
+    delete:
+      description: Delete an AWS Account Integration Config
+      operationId: DeleteAWSAccount
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an AWS integration
+      tags:
+      - AWS Integration
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    get:
+      description: Get an AWS Account Integration Config
+      operationId: GetAWSAccount
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an AWS integration by config ID
+      tags:
+      - AWS Integration
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    patch:
+      description: Update an AWS Account Integration Config
+      operationId: UpdateAWSAccount
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an AWS integration
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/available_namespaces:
+    get:
+      description: Get a list of available AWS CloudWatch namespaces that can send
+        metrics to Datadog.
+      operationId: ListAWSNamespaces
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSNamespacesResponse'
+          description: AWS Namespaces List object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List available namespaces
+      tags:
+      - AWS Integration
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/generate_new_external_id:
+    post:
+      description: Generate a new external ID for AWS role-based authentication.
+      operationId: CreateNewAWSExternalID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSNewExternalIDResponse'
+          description: AWS External ID object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Generate a new external ID
+      tags:
+      - AWS Integration
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/logs/services:
+    get:
+      description: Get a list of AWS services that can send logs to Datadog.
+      operationId: ListAWSLogsServices
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSLogsServicesResponse'
+          description: AWS Logs Services List object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get list of AWS log ready services
+      tags:
+      - AWS Logs Integration
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/gcp/accounts:
     get:
       description: List all GCP STS-enabled service accounts configured in your Datadog
@@ -37197,9 +38364,10 @@ paths:
         type: safe
   /api/v2/posture_management/findings:
     get:
-      description: "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be
-        applied by appending query parameters to the URL.\n\n  - Using a single filter:
-        `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+      description: "Get a list of findings. These include both misconfigurations and
+        identity risks.\n\n### Filtering\n\nFilters can be applied by appending query
+        parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n
+        \ - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
         \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
         `attribute_key` can be any of the filter keys described further below.\n\nQuery
         parameters of type `integer` support comparison operators (`>`, `>=`, `<`,
@@ -42318,6 +43486,250 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
+  /api/v2/siem-historical-detections/jobs:
+    get:
+      description: List historical jobs.
+      operationId: ListHistoricalJobs
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: The order of the jobs in results.
+        example: status
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Query used to filter items from the fetched list.
+        example: security:attack status:high
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListHistoricalJobsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List historical jobs
+      tags:
+      - Security Monitoring
+      x-menu-order: 20
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+    post:
+      description: Run a historical job.
+      operationId: RunHistoricalJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunHistoricalJobRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobCreateResponse'
+          description: Status created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Run a historical job
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        historical_job:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"historicalDetectionsJobCreate\",\n
+              \   \"attributes\": {\n      \"jobDefinition\": {\n        \"type\":
+              \"log_detection\",\n        \"name\": \"Excessive number of failed attempts.\",\n
+              \       \"queries\": [\n          {\n            \"query\": \"source:non_existing_src_weekend\",\n
+              \           \"aggregation\": \"count\",\n            \"groupByFields\":
+              [],\n            \"distinctFields\": []\n          }\n        ],\n        \"cases\":
+              [\n          {\n            \"name\": \"Condition 1\",\n            \"status\":
+              \"info\",\n            \"notifications\": [],\n            \"condition\":
+              \"a > 1\"\n          }\n        ],\n        \"options\": {\n          \"keepAlive\":
+              3600,\n          \"maxSignalDuration\": 86400,\n          \"evaluationWindow\":
+              900\n        },\n        \"message\": \"A large number of failed login
+              attempts.\",\n        \"tags\": [],\n        \"from\": 1730387522611,\n
+              \       \"to\": 1730387532611,\n        \"index\": \"main\"\n      }\n
+              \   }\n  }\n}"
+          step: there is a valid "historical_job" in the system
+      x-menu-order: 19
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/signal_convert:
+    post:
+      description: Convert a job result to a signal.
+      operationId: ConvertJobResultToSignal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertJobResultsToSignalsRequest'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Convert a job result to a signal
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 24
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/{job_id}:
+    delete:
+      description: Delete an existing job.
+      operationId: DeleteHistoricalJob
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an existing job
+      tags:
+      - Security Monitoring
+      x-menu-order: 23
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+    get:
+      description: Get a job's details.
+      operationId: GetHistoricalJob
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalJobResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a job's details
+      tags:
+      - Security Monitoring
+      x-menu-order: 21
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
+  /api/v2/siem-historical-detections/jobs/{job_id}/cancel:
+    patch:
+      description: Cancel a historical job.
+      operationId: CancelHistoricalJob
+      parameters:
+      - $ref: '#/components/parameters/HistoricalJobID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Cancel a historical job
+      tags:
+      - Security Monitoring
+      x-menu-order: 22
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
+
+        Please check the documentation regularly for updates.'
   /api/v2/slo/report:
     post:
       description: 'Create a job to generate an SLO report. The report job is processed
@@ -45303,6 +46715,18 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
   name: APM Retention Filters
+- description: 'Configure your Datadog-AWS integration directly through the Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).'
+  name: AWS Integration
+- description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
+  name: AWS Logs Integration
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)

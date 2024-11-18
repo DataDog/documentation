@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -3147,6 +3149,8 @@ components:
       enum:
       - good_events
       - bad_events
+      - good_minutes
+      - bad_minutes
       - slo_status
       - error_budget_remaining
       - burn_rate
@@ -3156,6 +3160,8 @@ components:
       x-enum-varnames:
       - GOOD_EVENTS
       - BAD_EVENTS
+      - GOOD_MINUTES
+      - BAD_MINUTES
       - SLO_STATUS
       - ERROR_BUDGET_REMAINING
       - BURN_RATE
@@ -4294,6 +4300,7 @@ components:
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
+      - cws_fargate_task_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_stream_monitoring_usage
@@ -4366,6 +4373,7 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_STREAM_MONITORING_USAGE
@@ -8046,6 +8054,8 @@ components:
       - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
+      - cws_fargate_task_percentage
+      - cws_fargate_task_usage
       - cws_hosts_percentage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
@@ -8185,6 +8195,8 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_PERCENTAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
@@ -8462,6 +8474,15 @@ components:
           type: number
         cws_containers_usage:
           description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_percentage:
+          description: The percentage of Cloud Workload Security Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_usage:
+          description: The Cloud Workload Security Fargate task usage by tag(s).
           format: double
           type: number
         cws_hosts_percentage:
@@ -16134,7 +16155,8 @@ components:
           minimum: 300
           type: integer
         verbosity:
-          description: The level of verbosity for the mobile test.
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
           format: int32
           maximum: 5
           minimum: 0
@@ -20145,6 +20167,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for all organizations.
@@ -20915,6 +20942,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
@@ -21679,9 +21711,14 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
-        cws_containers_avg_sum:
+        cws_container_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cws_fargate_task_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
