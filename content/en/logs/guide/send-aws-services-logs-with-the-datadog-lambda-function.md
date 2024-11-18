@@ -128,14 +128,14 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
 
-4. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
+3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:90%;" >}}
-5. Enter the ARN of the Lambda created in the previous section and click **Add**.
-6. Select the services from which you'd like to collect logs and click **Save**. To stop collecting logs from a particular service, deselect the log source.
+4. Enter the ARN of the Lambda created in the previous section and click **Add**.
+5. Select the services from which you'd like to collect logs and click **Save**. To stop collecting logs from a particular service, deselect the log source.
    {{< img src="logs/aws/aws_log_setup_step2.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with one Lambda function successfully entered under Included ARNs and some of the services enabled under Log Sources" popup="true" style="width:90%;" >}}
-7. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this page.
-8. To stop collecting all AWS logs, hover over a Lambda and click the Delete icon. All triggers for that function are removed.
-9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
+6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this page.
+7. To stop collecting all AWS logs, hover over a Lambda and click the Delete icon. All triggers for that function are removed.
+8. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
 
 ### Manually set up triggers
 
