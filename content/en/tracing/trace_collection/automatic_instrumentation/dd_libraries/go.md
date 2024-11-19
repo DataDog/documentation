@@ -49,24 +49,6 @@ There are two ways to instrument your Go application:
 Refer to the instructions in the section corresponding to your preference below:
 
 {{< tabs >}}
-{{% tab "Manual instrumentation" %}}
-
-### Activate Go integrations to create spans
-
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
-
-### Configuration
-
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
-
-For configuration instructions and details about using the API, see the Datadog [API documentation][4].
-
-[1]: /tracing/compatibility_requirements/go
-[3]: /tracing/trace_collection/library_config/go/
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
-
-{{% /tab %}}
 
 {{% tab "Compile-time instrumentation" %}}
 
@@ -228,6 +210,26 @@ To troubleshoot `orchestrion`-managed builds, see [Troubleshooting Go Compile-Ti
 [14]: /getting_started/tagging/unified_service_tagging/
 
 {{% /tab %}}
+
+{{% tab "Manual instrumentation" %}}
+
+### Activate Go integrations to create spans
+
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+
+### Configuration
+
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+
+For configuration instructions and details about using the API, see the Datadog [API documentation][4].
+
+[1]: /tracing/compatibility_requirements/go
+[3]: /tracing/trace_collection/library_config/go/
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further reading
