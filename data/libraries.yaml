@@ -263,6 +263,7 @@ Tracing:
   - Rust/C++/C:
     - name: ddprof
       link: https://github.com/DataDog/ddprof
+      official: true
       authors: Datadog
       notes: A profiler for compiled languages.
   - Elixir:
