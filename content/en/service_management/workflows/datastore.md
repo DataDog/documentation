@@ -40,7 +40,12 @@ To create a datastore:
 1. Navigate to the [Datastore page][1].
 1. Click **+ New Datastore**.
 1. Enter a **Name**, a **Primary Key**, and optionally a **Description** for your datastore. The Primary Key must be a column name in your data where every data row has a unique value.
-1. _Optionally_, to upload initial items to your datastore, drag and drop, or browse and select, a CSV file of your data. The CSV file must include a header row with a column that matches your Primary Key.
+1. _Optionally_, to upload initial items to your datastore, use one of the following methods to copy a CSV file:
+   * Drag and drop the file into the UI.
+   * Click **browse files** to browse and select a file from your computer.
+   * Copy a CSV file on your computer and use <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd> to paste it.
+
+   The CSV file must include a header row with a column that matches your Primary Key.
 1. Click **Create**.
 1. To see your datastore in the list, click **Refresh Results**.
 
