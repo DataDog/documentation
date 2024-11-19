@@ -345,7 +345,7 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 
 ## Notes and known issues
 
-* Data is updated automatically in constant intervals. Update intervals may change during beta.
+* Data is updated automatically in constant intervals.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
 
 [1]: https://app.datadoghq.com/orchestration/overview

@@ -11,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -72,7 +72,7 @@ Set up the check alert:
     Choose how many consecutive runs with the `OK` status resolve the alert.
 
 
-[1]: /monitors/manage/status
+[1]: /monitors/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 

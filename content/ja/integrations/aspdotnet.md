@@ -28,7 +28,8 @@ author:
 categories:
 - languages
 - log collection
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md
 display_on_public_website: true
@@ -36,7 +37,7 @@ draft: false
 git_integration_title: aspdotnet
 integration_id: aspdotnet
 integration_title: ASP.NET
-integration_version: 2.1.1
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: aspdotnet
@@ -49,6 +50,7 @@ tile:
   classifier_tags:
   - Category::言語
   - Category::ログの収集
+  - Category::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup

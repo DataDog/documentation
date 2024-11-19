@@ -1,6 +1,6 @@
 ---
-title: Node.js Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your Node.js application with OpenTelemetry API to send traces to Datadog.'
+title: Node.js Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Node.js application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
@@ -103,7 +103,7 @@ function performTask(iterations, param1, param2) {
 
 ## Adding span events
 
-_Minimum SDK version: 5.17.0 & 4.41.0._
+<div class="alert alert-info">Adding span events requires SDK version 5.17.0/4.41.0 or higher.</div>
 
 You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
@@ -114,7 +114,7 @@ You can add span events using the `addEvent` API. This method requires a `name` 
     - A primitive type: string, Boolean, or number.
     - A homogeneous array of primitive type values (for example, an array of strings).
   - Nested arrays and arrays containing elements of different data types are not allowed.
-- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects a `TimeInput` object.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `TimeInput` object.
 
 The following examples demonstrate different ways to add events to a span:
 

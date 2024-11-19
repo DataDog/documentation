@@ -6,6 +6,10 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Teams are the central organizational unit of [Datadog On-Call][2]. Pages are sent to a Team, and the Team's schedules or escalation policies route the Page to an appropriate Team member.
 
 On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed on the [Teams][3] overview page, alongside Teams that do not perform on-call duties. Datadog recommends that you use existing Teams for your On-Call configuration whenever possible, as this increases your On-Call Team's discoverability.

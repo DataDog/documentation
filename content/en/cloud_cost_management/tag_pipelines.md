@@ -18,6 +18,8 @@ To effectively monitor cloud costs, you need a comprehensive understanding of ho
 
 With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking.
 
+Tag pipelines are applied to Cloud Cost metrics from all providers. Tag pipelines are not applied to Cloud Cost Recommendations.
+
 ## Create a ruleset
 
 <div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>

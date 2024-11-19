@@ -78,7 +78,7 @@ En las implementaciones de APM debe especificarse `env`. Si tienes una variable 
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/services/deployment_tracking/
 [2]: /es/watchdog/faulty_deployment_detection/

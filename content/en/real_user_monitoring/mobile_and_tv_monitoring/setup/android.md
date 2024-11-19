@@ -308,6 +308,23 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 Rum.enable(rumConfig)
 ```
 
+### Set tracking consent (GDPR compliance)
+
+To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+Tracking consent can be one of the following values:
+
+- `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
+ collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+- `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or
+ RUM events.
+
+To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
+
+- `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
+- `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+
+
 ### Enable RUM feature to start sending data
 
 {{< tabs >}}
@@ -451,7 +468,7 @@ This means that even if users open your application while offline, no data is lo
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
+[6]: #set-tracking-consent-gdpr-compliance
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
 [8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/

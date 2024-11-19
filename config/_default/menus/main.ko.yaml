@@ -2410,7 +2410,7 @@ menu:
       parent: infrastructure_heading
       weight: 20000
       pre: container
-    - name: Amazon ECS
+    - name: Docker 및 그 외 런타임
       url: containers/docker/
       parent: containers
       identifier: containers_docker

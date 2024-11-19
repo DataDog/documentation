@@ -51,6 +51,35 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{% /tab %}}
 {{< /tabs >}}
 
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override=)` method
+through the `GlobalRumMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       @OptIn(ExperimentalRumApi::class)
+       fun onViewLoaded() {
+            GlobalRumMonitor.get().addViewLoadingTime(override = false)
+       }
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       @OptIn(markerClass = ExperimentalRumApi.class)
+       public void onViewLoaded() {
+            GlobalRumMonitor.get().addViewLoadingTime(override);
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
+Use the `override` option to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+Please note that this API is still experimental and might change in the future.
+
 ### Add your own performance timing
 
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
@@ -72,6 +101,7 @@ In addition to RUM's default attributes, you can measure where your application 
 {{< /tabs >}}
 
 Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][10] before graphing it in RUM analytics or in dashboards. 
+
 
 ### Custom Actions
 
@@ -301,9 +331,6 @@ You can use the following methods in `Configuration.Builder` when creating the D
 `setFirstPartyHostsWithHeaderType`
 : Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing.
 
-`useSite` 
-: Switches target data to a Datadog EU1, US1, US3, US5, US1_FED or AP1 site.
-
 `setBatchSize([SMALL|MEDIUM|LARGE])` 
 : Defines the individual batch size for requests sent to Datadog.
 
@@ -322,13 +349,10 @@ You can use the following methods in `Configuration.Builder` when creating the D
 `setEncryption(Encryption)` 
 : Set an encryption function applied to data stored locally on the device.
 
-`setCrashReportsEnabled(Boolean)` 
-: Enable or disable the collection of JVM crashes.
-
 `setPersistenceStrategyFactory`
 : Allows you to use a custom persistence strategy.
 
-`setCrashReportsEnabled`
+`setCrashReportsEnabled(Boolean)`
 : Allows you to control whether JVM crashes are tracked or not. The default value is `true`.
 
 `setBackpressureStrategy(BackPressureStrategy)` 
@@ -339,20 +363,17 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `trackUserInteractions(Array<ViewAttributesProvider>)` 
 : Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
 
+`disableUserInteractionTracking`
+: Disables the user interaction automatic tracker.
+
 `useViewTrackingStrategy(strategy)` 
-: Defines the strategy used to track views. Depending on your application's architecture, you can choose one of several implementations of [`ViewTrackingStrategy`][4] or implement your own.
+: Defines the strategy used to track views. See [Automatically track views](#automatically-track-views) for more information.
 
 `trackLongTasks(durationThreshold)` 
-: Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog.
+: Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog. See [Automatically track long tasks](#automatically-track-long-tasks) for more information.
 
 `trackNonFatalAnrs(Boolean)` 
 : Enables tracking non-fatal ANRs. This is enabled by default on Android API 29 and below, and disabled by default on Android API 30 and above.
-
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
-: Defines the individual batch size for requests sent to Datadog.
-
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
-: Defines the frequency for requests made to Datadog endpoints (if requests are available).
 
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
 : Sets the preferred frequency for collecting mobile vitals.
@@ -360,31 +381,11 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `setSessionSampleRate(<sampleRate>)` 
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setXxxEventMapper(<event>)` 
-: Sets the data scrubbing callbacks for views, actions, resources, and errors.
-
 `setSessionListener(RumSessionListener)` 
 : Sets a listener to be notified on when a new RUM Session starts.
 
-You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM features:
-
-`setSessionSampleRate(<sampleRate>)` 
-: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
-
 `setTelemetrySampleRate`
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This must be a value between `0` and `100`. By default, this is set to `20`.
-
-`trackUserInteractions`
-: Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
-
-`disableUserInteractionTracking`
-: Disables the user interaction automatic tracker.
-
-`useViewTrackingStrategy`
-: Sets the automatic view tracking strategy the SDK uses. See [Automatically track views](#automatically-track-views) for more information.
-
-`trackLongTasks`
-: Enable long operations on the main thread to be tracked automatically. See [Automatically track long tasks](#automatically-track-long-tasks) for more information.
 
 `setViewEventMapper`
 : Sets the ViewEventMapper for the RUM ViewEvent. You can use this interface implementation to modify the ViewEvent attributes before serialization.
@@ -406,9 +407,6 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 
 `trackFrustrations`
 : Enable/disable tracking of frustration signals.
-
-`setVitalsUpdateFrequency`
-: Allows you to specify the frequency at which to update the mobile vitals data provided in the RUM ViewEvent.
 
 `useCustomEndpoint`
 : Use RUM to target a custom server.
@@ -660,5 +658,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [8]: https://square.github.io/okhttp/features/events/
 [9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
 [10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/android/#sending-data-when-device-is-offline
+[11]: /real_user_monitoring/android/#sending-data-when-device-is-offline
 [12]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279

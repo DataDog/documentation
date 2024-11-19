@@ -200,7 +200,7 @@ final config = DatadogConfiguration(
 );
 ```
 
-### Set tracking consent
+### Set tracking consent (GDPR compliance)
 
 To be compliant with the GDPR regulation, the Datadog Flutter SDK requires the `trackingConsent` value at initialization.
 

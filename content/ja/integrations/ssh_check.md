@@ -29,7 +29,7 @@ author:
 categories:
 - developer tools
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: ssh_check
 integration_id: ssh
 integration_title: SSH
-integration_version: 2.9.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: ssh_check

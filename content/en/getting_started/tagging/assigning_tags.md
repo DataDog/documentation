@@ -379,7 +379,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][10]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -392,9 +392,9 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][11] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [Metrics Submission: DogStatsD][12] documentation.
 
 ## Further Reading
 
@@ -411,3 +411,4 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [9]: /tracing/setup/
 [10]: /developers/dogstatsd/
 [11]: /developers/community/libraries/
+[12]: /metrics/dogstatsd_metrics_submission/#host-tag

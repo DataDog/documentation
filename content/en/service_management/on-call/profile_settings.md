@@ -6,6 +6,10 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You must [configure your profile settings][1] before you can receive On-Call Pages. Your profile includes settings for contact methods, testing those methods, and notification preferences. These ensure that you receive timely and effective Pages.
 
 ## Configure your On-Call profile
@@ -28,9 +32,18 @@ Configure **Notification Preferences** to control when and how you receive On-Ca
 
 Under **Other Notifications**, you can opt to receive a **Shift reminder** before your On-Call shift begins.
 
+### Supported notification methods
+
+Datadog supports:
+- Push notifications through the [Datadog mobile app][3]
+- Emails (HTML or text format)
+- SMS
+- Phone calls
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/on-call/profile
 [2]: /service_management/mobile/?tab=ios
+[3]: /mobile
