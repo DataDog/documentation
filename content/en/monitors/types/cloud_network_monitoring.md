@@ -19,7 +19,6 @@ further_reading:
   tag: "Documentation"
   text: "Recommended CNM Monitors"
 ---
-<div class="alert alert-info">The CNM monitor is in public beta.</div>
 
 ## Overview
 

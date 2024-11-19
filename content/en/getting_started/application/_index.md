@@ -28,6 +28,8 @@ This page provides a high-level overview of capabilities available on the [Datad
 
 The Datadog site navigation varies based on the width of your browser. You can have up to three types of navigation. To change the navigation type, adjust your browser width.
 
+**Tip**: You can press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> to search for pages and entities, like dashboards and monitors, across Datadog.
+
 ## Integrations
 
 {{< img src="getting_started/application/integrations-2024.png" alt="Integrations" >}}

@@ -5,6 +5,9 @@ further_reading:
 - link: "https://vega.github.io/vega-lite/tutorials/getting_started.html"
   tag: "Vega Tutorial"
   text: "Introduction to Vega-Lite"
+- link: "https://vega.github.io/vega-lite/tutorials/explore.html"
+  tag: "Vega Tutorial"
+  text: "Exploring Data"
 ---
 
 {{< callout url="https://forms.gle/tLdC1AqhVizD3wCp7" btn_hidden="false" header="Access the Preview!">}}
