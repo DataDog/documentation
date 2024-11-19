@@ -47,7 +47,7 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the Preview!" url="https://www.datadoghq.com/preview/service-health/" >}}
+{{< callout header="Opt in to the Preview!" url="https://www.datadoghq.com/product-preview/service-health/" >}}
   Service health is in Preview. To request access, complete the form.
 {{< /callout >}}
 

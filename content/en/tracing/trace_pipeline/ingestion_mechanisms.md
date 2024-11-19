@@ -76,7 +76,7 @@ The configuration can be set by environment variables or directly in the code:
 {{% tab "Java" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
@@ -145,7 +145,7 @@ Read more about sampling controls in the [Ruby tracing library documentation][1]
 {{% tab "Go" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
 
 Read more about how to remotely configure sampling rates by service and resource in this [article][3].
 
