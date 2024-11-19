@@ -22,6 +22,8 @@ The following operating systems and architectures are compatible:
 | Red Hat      | 7+        | x86_64, arm64 |
 | Ubuntu       | 20+ (LTS) | x86_64, arm64 |
 
+<div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
+
 ## Platforms
 
 The following container platforms are compatible:
@@ -32,7 +34,7 @@ The following container platforms are compatible:
 | Docker on Linux |                                                        | GA      |
 | Kubernetes      | [Datadog Admission Controller][1] enabled              | Preview |
 
-### Platform-specific limitations
+### Platform-specific requirements
 
 #### Linux virtual machines (VMs)
 
@@ -69,8 +71,6 @@ This section provides language-specific compatibility requirements for Single St
   - Consider moving some configurations to a properties file
   - Check application logs for specific initialization errors
 
-<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -86,8 +86,11 @@ This section provides language-specific compatibility requirements for Single St
 | 3.8            | <i class="icon-check-bold"></i> |
 | 3.7            | <i class="icon-check-bold"></i> |
 
+### Default system repository support
 
-<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
+Single Step Instrumentation requires Python 3.7-3.12, which is available by default only on:
+- CentOS Stream 8+
+- Red Hat Enterprise Linux 8+
 
 {{< /programming-lang >}}
 
@@ -118,8 +121,6 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 - Requires Linux distributions using glibc 2.27 or newer
 - Not compatible with Alpine Linux or other musl-based distributions
 
-<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
@@ -130,7 +131,11 @@ When uninstalling Single Step Instrumentation from a Ruby application, follow th
 |--------------------|---------------------------------|-----------------------------------------------|
 | Latest LTS release | <i class="icon-check-bold"></i> | Instrumenting ESM modules is not supported.   |
 
-<div class="alert alert-info">Single Step Instrumentation automatically disables when it detects custom instrumentation.</div>
+### Default system repository support
+
+Single Step Instrumentation supports Node.js 16.x and above, which is available by default only on:
+- CentOS Stream 9+
+- Red Hat Enterprise Linux 9+
 
 {{< /programming-lang >}}
 

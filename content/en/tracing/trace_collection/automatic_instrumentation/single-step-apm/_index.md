@@ -11,9 +11,9 @@ further_reading:
 ---
 ## Overview
 
-Single Step Instrumentation for APM installs the Datadog Agent and [instruments][4] your applications in one step, with no additional configuration steps required.
+Single Step Instrumentation (SSI) for APM installs the Datadog Agent and [instruments][4] your applications in one step, with no additional configuration steps required.
 
-## Requirements
+## Compatibility
 
 To see requirements for compatible languages, operating systems, and architectures, see [Single Step Instrumentation compatibility][6].
 
@@ -598,6 +598,15 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### Single Step Instrumentation is not taking effect
+
+Single Step Instrumentation automatically disables when it detects [custom instrumentation][7] in your application. If you want to use SSI, you'll need to:
+
+1. Remove any existing custom instrumentation code.
+1. Restart your application.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -608,3 +617,4 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
 [6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
+[7]: /tracing/trace_collection/custom_instrumentation/
