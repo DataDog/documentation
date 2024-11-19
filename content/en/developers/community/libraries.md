@@ -63,7 +63,7 @@ In addition to the official Ansible integration, the [monitoring section][23] of
 
 ### Aptible
 
-Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
+The Aptible platform can deliver container logs and metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
 
 ### CLI management
 
@@ -182,7 +182,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [22]: https://github.com/intercom
 [23]: https://docs.ansible.com/ansible/2.9/modules/list_of_monitoring_modules.html
 [24]: https://github.com/ansible/ansible-modules-extras
-[25]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
+[25]: https://www.aptible.com/docs/core-concepts/integrations/datadog
 [27]: https://github.com/keirans/datadog-management
 [28]: https://github.com/zendesk/consul2dogstats
 [29]: https://github.com/cvent/dogscaler
