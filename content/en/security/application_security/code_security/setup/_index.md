@@ -42,15 +42,11 @@ By following these steps, you'll successfully set up Code Security for your appl
 
 ## Enabling Code Security using single step instrumentation
 
-
-<div class="alert alert-info">Enabling Code Security using single step instrumentation is in beta.</div>
-
-
 ### Requirements
 
 - **Minimum Agent version 7.53.0**
 - **Minimum Datadog Helm chart version 3.62.0** (for Kubernetes deployments).
-- **Languages and architectures**: Single step instrumentation for Code Security only supports tracing Java, Node.js, .NET Core services on `x86_64` and `arm64` architectures, and Python (support available in private beta).
+- **Languages and architectures**: Single step instrumentation for Code Security only supports tracing Java, Node.js, .NET Core services on `x86_64` and `arm64` architectures, and Python (support available in Preview).
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ### Enabling in one step
