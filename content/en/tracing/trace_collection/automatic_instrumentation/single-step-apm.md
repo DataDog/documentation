@@ -19,7 +19,7 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
 - **Operating systems**:
    - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
    - Docker
-   - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
+   - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled)
      - NOTE: Windows pods are not supported. Use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
 
 ## Enabling APM on your applications
@@ -63,7 +63,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -153,7 +153,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
@@ -196,7 +196,7 @@ To enable Single Step Instrumentation with Helm:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -298,7 +298,7 @@ To enable instrumentation for specific namespaces, add `enabledNamespaces` confi
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          enabledNamespaces: # Add namespaces to instrument
            - default
            - applications
@@ -310,7 +310,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
            - default
            - applications
