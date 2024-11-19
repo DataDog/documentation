@@ -43,6 +43,15 @@ Designed for new users, the quick start workflow offers an efficient setup proce
 
 To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
 
+## Update the CloudFormation template version
+
+To update the Agentless Scanning CloudFormation template:
+
+* Log in to your AWS console, select the `DatadogIntegration-DatadogAgentlessScanning...` sub-stack and click on `Update nested stack`
+* Replace existing template using the following S3 URL:
+  * `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`
+  * Replace `<VERSION>` in the URL above with the version found in https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
