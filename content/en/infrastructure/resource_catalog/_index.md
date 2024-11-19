@@ -130,7 +130,7 @@ Clicking on any resource opens a side panel with details including:
 
 ### Recent changes
 
-{{< callout url="https://www.datadoghq.com/private-beta/recent-changes-tab/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
   The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
 {{< /callout >}} 
 
