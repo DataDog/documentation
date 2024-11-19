@@ -72,7 +72,7 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 
 ##### ログのトレース ID の挿入
 
-トレース ID は、`opentelemetry_trace_id` 変数として保存されます。NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
+トレース ID は、`opentelemetry_trace_id` という変数に保存されます。NGINX コンフィギュレーションファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログフォーマットを更新します。
 
 ```conf
 http {
