@@ -70,7 +70,7 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 
 The [Infrastructure Packages Catalog][10] provides a real-time inventory of all packages across hosts, host images, and container images deployed in your infrastructure. It offers an interface you can use to investigate your SBOMs, enriched with vulnerability and runtime context.
 
-Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all resources using it.
+Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
 
 {{< img src="security/vulnerabilities/csm_package_explorer.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
