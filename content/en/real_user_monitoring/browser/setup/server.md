@@ -27,7 +27,7 @@ After your applications have been instrumented, you can configure your RUM appli
 
 The available functionality has the following important limitations:
 
-- If serving compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
+- If proxying compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
 - This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX web servers.
 - Auto-Instrumentation does not inject into encrypted requests served by NGINX or IIS related to TLS.
 - (NGINX only) Auto-Instrumentation does not inject encrypted requests served by the NGINX web server.
@@ -50,7 +50,7 @@ identified as HTML. You can instrument your RUM application automatically or man
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 
 
-{{% collapse-content title="Automatic instrumentation (recommended)" level="h5" %}}
+{{% collapse-content title="Automatic installation (recommended)" level="h5" %}}
 
 To automatically instrument your RUM application:
 
@@ -70,7 +70,7 @@ To automatically instrument your RUM application:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Manual instrumentation" level="h5" %}}
+{{% collapse-content title="Manual installation" level="h5" %}}
 
 ### Download the appropriate `.tgz` file
 
@@ -78,7 +78,7 @@ To automatically instrument your RUM application:
 2. Extract the tarball to extract the `ngx_http_datadog_module.so` file. Move it to a location that NGINX has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 ### Update NGINX configuration
-1. The `NGINX.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
+1. The `nginx.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
 
    ```javascript
    load_module <RUM_MODULE_PATH>;
@@ -97,7 +97,7 @@ To automatically instrument your RUM application:
      "service" "my-web-application";
      "env" "production";
      "version" "1.0.0";
-     "sessionSampleRate" "50";
+     "sessionSampleRate" "100";
      "sessionReplaySampleRate" "100";
      "trackResources" "true";
      "trackLongTasks" "true";
