@@ -733,6 +733,10 @@ menu:
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 1004
+    - name: Combining OpenTelemetry and Datadog Metrics
+      url: opentelemetry/guide/combining_otel_and_datadog_metrics/
+      parent: otel_guides
+      weight: 1005
     - name: Developers
       url: developers/
       pre: dev-code
