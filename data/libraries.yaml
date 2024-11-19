@@ -138,7 +138,7 @@ Classic:
       api: true
       authors: Brett Langdon
     - name: datadog-metrics
-      link: https://www.npmjs.com/package/datadog-metrics
+      link: https://github.com/dbader/node-datadog-metrics
       api: true
       authors: Daniel Bader
   - Perl:
