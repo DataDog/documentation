@@ -3,7 +3,7 @@ aliases:
 - /es/logs/log_collection/rsyslog
 categories:
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 description: Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
@@ -32,7 +32,7 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 #### Rsyslog versión 8 o posterior
 <div class="alert alert-info"> A partir de la <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">versión 8.1.5</a> Rsyslog recomienda el modo <code>inotify</code>. Tradicionalmente, <code>imfile</code> utilizaba el modo polling, que consume muchos más recursos (y es más lento) que el modo <code>inotify</code>. </div>
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Ubuntu y Debian" %}}
 
@@ -168,7 +168,7 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 {{% /site-region %}}
 
 [1]: /es/agent/logs/
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Amazon Linux, CentOS y Red Hat" %}}
 1. Habilita el módulo `imfile` para monitorizar archivos específicos de logs. Para añadir el módulo `imfile`, añada lo siguiente a tu `rsyslog.conf`:
@@ -304,7 +304,7 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 {{% /site-region %}}
 
 [1]: /es/agent/logs/
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Fedora" %}}
 1. Habilita el módulo `imfile` para monitorizar archivos específicos de logs. Para añadir el módulo `imfile`, añada lo siguiente a tu `rsyslog.conf`:
@@ -441,9 +441,9 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 {{% /site-region %}}
 
 [1]: /es/agent/logs/
-{{% /pestaña %}}
+{{% /tab %}}
 
-{{< /pestañas >}}
+{{< /tabs >}}
 
 ## Solucionar problemas
 

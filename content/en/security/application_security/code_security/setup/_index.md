@@ -173,7 +173,7 @@ By default, enabling APM on your server installs support for Java, Python, Node.
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_IAST_ENABLED=true DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
@@ -317,7 +317,7 @@ Run the following commands and restart the service to stop injecting the library
 {{% tab "Kubernetes" %}}
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
-  
+
    ```yaml
    spec:
      template:
@@ -365,7 +365,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Under `asm:`, remove `iast:` and all following configuration in`datadog-values.yaml`.
 3. Run the following command:
-  
+
     ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
 

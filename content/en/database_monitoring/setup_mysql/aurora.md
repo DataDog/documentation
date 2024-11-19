@@ -373,7 +373,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: /database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /database_monitoring/data_collected/#sensitive-information
+[2]: /containers/cluster_agent/clusterchecks/?tab=datadogoperator
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest
