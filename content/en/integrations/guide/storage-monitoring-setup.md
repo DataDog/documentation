@@ -1,6 +1,11 @@
+---
+title: Storage Monitoring [Preview]
+private: true
+---
+
 Storage Monitoring provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Whether you're tracking storage growth, investigating access patterns, or optimizing costs, Storage Monitoring gives you the insights you need to manage your storage infrastructure efficiently.
 
-This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using our provided CloudFormation templates. Please note that Storage Monitoring is currently in Preview.
+This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using our provided CloudFormation templates. Please note that Storage Monitoring is currently in Preview and is available under Resource Catalog -> Monitoring -> S3 Buckets.
 
 ## Setup
 
@@ -20,7 +25,7 @@ This template configures your existing S3 bucket to generate inventory reports, 
 2. In AWS CloudFormation, create a new stack With Existing Resources (import resources)
 3. Enter the bucket name for which you want AWS to start generating inventories and click Next
 
- {{< img src="" alt="Identify S3 resources to start generating inventory" responsive="true" style="width:60%;" >}}
+ {{< img src="integrations/guide/identify_resources.png" alt="Identify S3 resources to start generating inventory" responsive="true" style="width:60%;" >}}
 
 4. Fill in the required parameters:
    - **DestinationBucketName**: The bucket where inventory files will be stored
@@ -30,7 +35,7 @@ This template configures your existing S3 bucket to generate inventory reports, 
    - **DestinationBucketPrefix**: Specific path within the destination bucket. Please don’t include trailing slashes ( “/“ ).
    - **SourceBucketPrefix**: (Optional) Limit monitoring to a specific path in source bucket
 
-{{< img src="" alt="Specify stack details" responsive="true" style="width:60%;" >}}
+{{< img src="integrations/guide/specify_stack_details.png" alt="Specify stack details" responsive="true" style="width:60%;" >}}
 
 5. In the next screen, wait for AWS to locate your source bucket and click on Imports resources in the bottom right corner.
 
@@ -52,10 +57,12 @@ This template creates two IAM policies: one allowing Datadog to read inventory f
     - **DestinationBucketPrefix**:  If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Please don’t include trailing slashes ( “/“ ). Can be left blank.
    - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket. Can be left blank.
 
+{{< img src="integrations/guide/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:60%;" >}}
+
 
 4. Verify parameters and launch stack
 
-{{< img src="" alt="Verify and launch stack" responsive="true" style="width:60%;" >}}
+{{< img src="integrations/guide/acknowledge_bucket_policy.png" alt="Verify and launch stack" responsive="true" style="width:60%;" >}}
 
 #### Post-Setup Steps
 
