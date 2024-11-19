@@ -179,6 +179,18 @@ A regex to redact sensitive data from incoming requests' query string reported i
 **Default**: `true`<br>
 By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
 
+`dd.trace.span.tags`
+: **Environment Variable**: `DD_TRACE_SPAN_TAGS`<br> 
+**Default**: `none`<br>
+**Example**: `tag1:value1,tag2:value2`<br>
+A list of default tags to be added to every span.
+
+`dd.trace.jmx.tags`
+: **Environment Variable**: `DD_TRACE_JMX_TAGS`<br>
+**Default**: `none`<br>
+**Example**: `tag1:value1,tag2:value2`<br>
+A list of span tags to be added to every jmx metric.
+
 `dd.trace.startup.logs`
 : **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
 **Default**: `true`<br>
@@ -218,6 +230,34 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
 **Default**: `false`<br>
 When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
+
+`dd.trace.cloud.payload.tagging.services`
+: **Environment Variable**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES`<br>
+**Default**: `ApiGateway,ApiGatewayV2,EventBridge,Sqs,Sns,S3,Kinesis`<br>
+**Example**: `S3,Sso`<br>
+To enable [AWS payload tagging][18] for additional services, use this setting.
+
+`dd.trace.cloud.request.payload.tagging`
+: **Environment Variable**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `$.Metadata.UserId,$.phoneNumber`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK requests. Setting this enables [AWS payload tagging][18] for requests.
+
+`dd.trace.cloud.response.payload.tagging`
+: **Environment Variable**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `$.Metadata.Credentials.*`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK responses. Setting this enables [AWS payload tagging][18] for responses.
+
+`dd.trace.cloud.payload.tagging.max-depth`
+: **Environment Variable**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`<br>
+**Default**: `10`<br>
+An integer representing the maximum depth of an AWS SDK request/response payload to use for [AWS payload tagging][18].
+
+`dd.trace.cloud.payload.tagging.max-tags`
+: **Environment Variable**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_TAGS`<br>
+**Default**: `758`<br>
+An integer representing the maximum number of tags to extract per a span to be used for [AWS payload tagging][18].
 
 ### Agent
 
@@ -545,3 +585,4 @@ Deprecated since version 1.9.0
 [15]: /tracing/trace_collection/trace_context_propagation/
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support
+[18]: /tracing/guide/aws_payload_tagging/?code-lang=java

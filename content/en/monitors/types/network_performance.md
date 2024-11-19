@@ -10,14 +10,13 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 - link: "/monitors/recommended/"
   tag: "Documentation"
   text: "Recommended NPM Monitors"
 ---
-<div class="alert alert-info">The NPM monitor is in public beta.</div>
 
 ## Overview
 

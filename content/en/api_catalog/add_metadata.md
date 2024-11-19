@@ -1,6 +1,5 @@
 ---
 title: Adding Metadata to APIs
-is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -25,6 +24,13 @@ Datadog supports custom OpenAPI fields to help manage metadata:
    teamHandle: dd-team
   ```
 
+- **Scope to service**: Add the `service` parameter to the top level of an OpenAPI file to scope the API to a specific service. If you don't define a specific service, Datadog matches all endpoints that fit your definition:
+  ```yaml
+  x-datadog:
+   service: web-store
+  ```
+  The name of the service should be the exact service name as it appears on Datadog traces.
+
 Example OpenAPI file:
 
 {{< code-block lang="yaml" disable_copy="true" >}}
@@ -35,6 +41,7 @@ info:
  version: 1.0.0
 x-datadog:
  teamHandle: dd-team
+ service: web-store
 paths:
  /api/v2/customers/{id}:
    get:

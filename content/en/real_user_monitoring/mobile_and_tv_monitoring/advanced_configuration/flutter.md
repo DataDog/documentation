@@ -26,127 +26,183 @@ further_reading:
 
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup).
 
-## Automatic View Tracking
+## Initialization parameters
+You can specify the following parameters in your configuration when intializing the SDK.
 
-If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. Here, we document how to integrate with the most popular routing packages.
+`clientToken`
+: Required<br/>
+**Type**: String<br/>
+A client token for RUM or logging/APM. You can obtain this token in Datadog.
 
-### go_router
+`env`
+: Required<br/>
+**Type**: String<br/>
+The environment name sent to Datadog. You can use `env` to filter events by environment (for example, `staging` or `production`).
 
-Since [go_router][8], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+`site`
+: Required<br/>
+**Type**: Enum<br/>
+The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, and `ap1`.
 
-```dart
-final _router = GoRouter(
-  routes: [
-    // Your route information here
-  ],
-  observers: [
-    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
-  ],
-);
-MaterialApp.router(
-  routerConfig: _router,
-  // Your remaining setup
-);
-```
+`nativeCrashReportEnabled`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Enables native crash reporting.
 
-If you are using ShellRoutes, you need to supply a separate observer to each `ShellRoute`, as shown below. See [this bug][11] for more information.
+`service`
+: Optional<br/>
+**Type**: String<br/>
+The service name for the application.
 
-```dart
-final _router = GoRouter(
-  routes: [
-    ShellRoute(build: shellBuilder),
-    routes: [
-      // Additional routes
-    ],
-    observers: [
-      DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
-    ],
-  ],
-  observers: [
-    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
-  ],
-);
-MaterialApp.router(
-  routerConfig: _router,
-  // Your remaining setup
-);
-```
+`uploadFrequency`
+: Optional<br/>
+**Type**: Enum<br/>
+**Default**: `average`<br/>
+The frequency at which the Datadog SDK tries to upload data batches. Enum values: `frequent`, `average`, and `rare`.
 
-Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, ensure that you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
+`batchSize`
+: Optional<br/>
+**Type**: Enum<br/>
+**Default**: `medium`<br/>
+Defines the Datadog SDK policy for batching data before uploading it to Datadog servers. Larger batches result in larger (but fewer) network requests. Smaller batches result in smaller (but more) network requests. Enum values: `small`, `medium`, and `large`.
 
-```dart
-GoRoute(
-  name: 'My Home',
-  path: '/path',
-  pageBuilder: (context, state) {
-    return MaterialPage(
-      key: state.pageKey,       // Necessary for GoRouter to call Observers
-      name: name,               // Needed for Datadog to get the right route name
-      child: _buildContent(),
-    );
-  },
-),
-```
+`batchProcessingLevel`
+: Optional<br/>
+**Type**: Enum<br/>
+**Default**: `medium`
+Defines the maximum number of batches processed sequentially without a delay, within one reading and uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, and `high`.
 
-### AutoRoute
+`version`
+: Optional<br/>
+**Type**: String<br/>
+The application's version number. Because `version` is a Datadog tag, it must comply with the rules in [Defining Tags][20].
 
-[AutoRoute][9] can use a `DatadogNavigationObserver` provided as one of the `navigatorObservers` as part of its `config` method.
+`flavor`
+: Optional<br/>
+**Type**: String<br/>
+The flavor (variant) of the application. For stack trace deobfuscation, this must match the flavor set during symbol upload.
 
-```dart
-return MaterialApp.router(
-  routerConfig: _router.config(
-    navigatorObservers: () => [
-      DatadogNavigationObserver(
-        datadogSdk: DatadogSdk.instance,
-      ),
-    ],
-  ),
-  // Your remaining setup
-);
-```
+`firstPartyHosts`
+: Optional<br/>
+**Type**: List&lt;String&gt;<br/>
+A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracinHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
 
-However, if you are using AutoRoute's tab routing, you need to extend Datadog's default observer with AutoRoute's `AutoRouteObserver` interface.
+`firstPartyHostsWithTracingHeaders`
+: Optional<br/>
+**Type**: Map&lt;String, Set&lt;TracingHeaderType&gt;&gt;<br/>
+A map of first party hosts and the types of tracing headers Datadog automatically injects on resource calls, used in conjunction with Datadog network tracking packages. For example:<br/>
+  ```dart
+  final configuration = DatadogConfiguration(
+   clientToken: <CLIENT_TOKEN>,
+   env: `prod`,
+   site: DatadogSite.us1,
+   firstPartyHostsWithTracingHeaders: {
+    'example.com': {TracingHeaderType.b3},
+   },
+  );
+  ```
+  The `TracingHeaderType` enum has the following values:
+  - `datadog`: Datadog's [`x-datadog-*` header][21]
+  - `b3`: OpenTelemetry B3 [single header][22]
+  - `b3multi`: OpenTelemetry B3 [multiple headers][23]
+  - `tracecontext`: W3C [trace context header][24]
 
-```dart
-class DatadogAutoRouteObserver extends DatadogNavigationObserver
-    implements AutoRouterObserver {
-  DatadogAutoRouteObserver({required super.datadogSdk});
+`rumConfiguration`
+: Optional<br/>
+**Type**: Object<br/>
+See [RUM configuration](#rum-configuration).
 
-  // only override to observer tab routes
-  @override
-  void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
-    datadogSdk.rum?.startView(route.path, route.name);
-  }
+### RUM configuration
 
-  @override
-  void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
-    datadogSdk.rum?.startView(route.path, route.name);
-  }
-}
-```
+Use the following parameters for the `DatadogRumConfiguration` class.
 
-This new object replaces the simpler `DatadogNavigationObserver` in creation of AutoRoute's config.
+`applicationId`
+: Required<br/>
+**Type**: String</br>
+The RUM application ID.
 
-### Beamer
+`sessionSamplingRate`
+: Optional<br/>
+**Type**: Double<br/>
+**Default**: `100.0`<br/>
+The sampling rate for RUM sessions. Must be between `0.0` (no RUM events are sent) and `100.0` (all RUM events are sent).
 
-[Beamer][10] can use the `DatadogNavigationObserver` as an argument to `BeamerDelegate`:
+`traceSampleRate`
+: Optional<br/>
+**Type**: Double<br/>
+**Default**: `20.0`<br/>
+The sampling rate for resource tracing. Must be between `0.0` (no resources include APM tracing) and `100.0` (all resources include APM tracing).
 
-```dart
-final routerDelegate = BeamerDelegate(
-  locationBuilder: RoutesLocationBuilder(
-    routes: {
-      // Your route config
-    },
-  ),
-  navigatorObservers: [
-    DatadogNavigationObserver(DatadogSdk.instance),
-  ]
-);
-```
+`traceContextInjection`
+: Optional<br/>
+**Type**: Enum<br/>
+**Default**: `all`<br/>
+The strategy for injecting trace context into requests. Enum values can be `all` (inject trace context into all requests) or `sampled` (inject trace context into only sampled requests).
+
+`detectLongTasks`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Enable or disable long task detection. This capability attempts to detect when an application is doing too much work on the main isolate or native thread, which could prevent your app from rendering at a smooth framerate.
+
+`longTaskThreshold`
+: Optional<br/>
+**Type**: Double<br/>
+**Default**: `0.1`<br/>
+The amount of elapsed time that distinguishes a _long task_, in seconds. If the main isolate takes more than this amount of time to process a microtask, it appears as a long task in Datadog RUM Explorer. Minimum value: `0.02`. On Flutter Web, which always uses a value of `0.05` seconds, this argument is ignored.
+
+`trackFrustrations`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Enables [automatic collection of user frustrations][19].
+
+`vitalUpdateFrequency`
+: Optional<br/>
+**Type**: Enum<br/>
+**Default**: `average`<br/>
+The preferred frequency for collecting mobile vitals. Enum values: `frequent` (100ms),`average` (500ms), and `rare` (1000ms). To disable mobile vitals collection, set this parameter to `null`.
+
+`reportFlutterPerformance`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`
+Enables reporting Flutter-specific performance metrics, including build and raster times.
+
+`customEndpoint`
+: Optional<br/>
+**Type**: String<br/>
+A custom endpoint for sending RUM data.
+
+`telemetrySampleRate`
+: Optional<br/>
+**Type**: Double<br/>
+**Default**: `20.0`
+The sampling rate for telemetry data, such as errors and debug logs.
+
+## Automatic view tracking
+
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][18] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
 
 ## Enrich user sessions
 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
+
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
+Call this method when your view is fully loaded and ready to be displayed to the user:
+
+```dart
+  DatadogSdk.instance.rum?.addViewLoadingTime(override);
+```
+
+Use the `override` option to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+Please note that this API is still experimental and might change in the future.
 
 ### Add your own performance timing
 
@@ -261,6 +317,29 @@ For example:
 DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
 ```
 
+### Add custom user attributes
+
+You can add custom attributes to your user session. This additional information is automatically applied to logs, traces, and RUM events.
+
+To remove an existing attribute, set it to `null`.
+
+For example:
+
+```dart
+DatadogSdk.instance.addUserExtraInfo({
+ 'attribute_1': 'foo',
+ 'attribute_2': null,
+});
+```
+
+## Clear all data
+
+Use `clearAllData` to clear all data that has not been sent to Datadog.
+
+```dart
+DatadogSdk.instance.clearAllData();
+```
+
 ## Modify or drop RUM events
 
 **Note**: This feature is not yet available for Flutter web applications.
@@ -323,22 +402,6 @@ You can access the RUM session ID at runtime without waiting for the `sessionSta
 final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
 ```
 
-## Set tracking consent (GDPR & CCPA compliance)
-
-In order to be compliant with data protection and privacy policies, the Flutter RUM SDK requires the tracking consent value at initialization.
-
-The `trackingConsent` setting can be one of the following values:
-
-1. `TrackingConsent.pending`: The Flutter RUM SDK starts collecting and batching the data but does not send it to Datadog. The Flutter RUM SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `TrackingConsent.granted`: The Flutter RUM SDK starts collecting the data and sends it to Datadog.
-3. `TrackingConsent.notGranted`: The Flutter RUM SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
-
-To change the tracking consent value after the Flutter RUM SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call. The Flutter RUM SDK changes its behavior according to the new value.
-
-For example, if the current tracking consent is `TrackingConsent.pending` and you change the value to `TrackingConsent.granted`, the Flutter RUM SDK sends all previously recorded and future data to Datadog.
-
-Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
-
 ## Flutter-specific performance metrics
 
 To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][17].
@@ -372,6 +435,18 @@ You can then enable tracing as usual.
 
 This information is merged with any hosts set on `DatadogConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
 
+## Check first party hosts
+
+To determine if a specific URI is a first party host, use `isFirstPartyHost`.
+
+For example:
+```dart
+var host = 'example.com'
+if (DatadogSdk.instance.isFirstPartyHost(host)){
+ print('$host is a first party host.');
+}
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -393,3 +468,10 @@ This information is merged with any hosts set on `DatadogConfiguration.firstPart
 [15]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [16]: https://www.w3.org/TR/trace-context/#tracestate-header
 [17]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter
+[18]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/flutter/
+[19]: /real_user_monitoring/browser/frustration_signals/
+[20]: /getting_started/tagging/#defining-tags
+[21]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=browserrum#how-are-rum-resources-linked-to-traces
+[22]: https://github.com/openzipkin/b3-propagation#single-headers
+[23]: https://github.com/openzipkin/b3-propagation#multiple-headers
+[24]: https://www.w3.org/TR/trace-context/#tracestate-header
