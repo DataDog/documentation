@@ -35,7 +35,7 @@ For details on specific types of supported changes and setup requirements [see b
 To use Change Tracking, ensure the following:
 
 - **Monitors**: Confirm the service is specified in the monitor query, selected as part of a group, or set the `service` tag.
-- **Dashboards**: Set at least one time series widget on the dashboard to see relevant changes within the timeline and as overlays.
+- **Dashboards**: Set at least one timeseries widget on the dashboard to see relevant changes within the timeline and as overlays.
 - **Services**: No prerequisites.
 
 ## Using Change Tracking
@@ -45,8 +45,6 @@ Change Tracking is available on several pages in Datadog:
 ### Monitor status page
 
 View and analyze changes from the [monitor status page][1].
-
-{{< img src="/tracing/change_tracking/change-tracking-monitor-status-page.png" alt="The details of a change displayed on the Monitor Status Page" style="width:100%;" >}}
 
 To analyze changes from the monitor status page:
 
@@ -58,7 +56,7 @@ To analyze changes from the monitor status page:
    - View the deployment in your CI/CD system.
    - View the latest commits in your repository.
    - Compare changes between deployments to identify potential issues.
-   - Set context-aware, **Custom Links** allow quick access to relevant resources.
+   - Set context-aware, **Custom Links** for quick access to relevant resources.
 
 ### Services
 
