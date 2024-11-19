@@ -276,10 +276,6 @@ Tracing:
       official: true
       authors: Datadog
       notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
-    - name: dd-go-opentracing
-      link: https://github.com/gchaincl/dd-go-opentracing
-      authors: Gustavo Chaín
-      notes: OpenTracing Tracer implementation for Datadog in Go.
     - name: datadog-go
       link: https://github.com/savaki/datadog
       authors: Matt Ho
