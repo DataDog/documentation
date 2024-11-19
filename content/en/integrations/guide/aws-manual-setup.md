@@ -106,7 +106,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 
 ### Complete the setup in Datadog
 
-18. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account. 20
+18. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account.
 19. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
 20. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China, or `aws-us-gov` for GovCloud. Refer to [AWS documentation][9] for more information on AWS partitions.
 21. Enter the name of the role created in the previous section, and click **Save**.
