@@ -14,7 +14,7 @@ further_reading:
 
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL Editor is in private beta.
+DDSQL Editor is in Preview.
 {{< /callout >}}
 
 ## Overview
