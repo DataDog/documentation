@@ -10,7 +10,7 @@ further_reading:
 
 Datadog and OpenTelemetry (OTel) use different naming conventions for integration metrics. This guide explains how to combine metrics from both systems in a single query using Datadog's `equiv_otel` function.
 
-## Understanding the Problem
+## Challenges when combining metrics
 
 Subtleties that may arise when trying to combine Datadog and equivalent OTel integration metrics is best illustrated with an example.
 
