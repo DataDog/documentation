@@ -277,4 +277,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: /tracing/security
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /tracing/setup/python/
-[7]: https://github.com/DataDog/trace-examples/tree/baggage/python/flask-baggage
+[7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage
