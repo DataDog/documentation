@@ -9,7 +9,7 @@ cascade:
         rank: 70
 ---
 
-{{< callout url="https://www.datadoghq.com/preview/on-call/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/on-call/" >}}
   On-Call is in Preview. Complete the form to request access.
 {{< /callout >}} 
 
