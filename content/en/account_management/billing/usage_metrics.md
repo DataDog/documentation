@@ -24,8 +24,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Infrastructure Hosts          | `datadog.estimated_usage.hosts`          | Unique hosts seen in the last hour. |
 | Containers                    | `datadog.estimated_usage.containers`     | Unique containers seen in the last hour. |
 | Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`  | Unique Fargate Tasks seen in the last 5 minutes. |
-| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag` (in Preview)  | Unique indexed Custom Metrics seen in the last hour. |
-| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag` (in Preview)  | Unique ingested Custom Metrics seen in the last hour. |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
