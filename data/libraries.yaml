@@ -102,11 +102,6 @@ Classic:
       official: true
       api: true
       authors: Datadog
-    - name: Lassie
-      link: https://github.com/bazaarvoice/lassie
-      api: true
-      notes: Only for creating screenboards.
-      authors: Bazaarvoice
     - name: java-dogstatsd-client
       link: https://github.com/arnabk/java-dogstatsd-client
       dogstatsd: true
