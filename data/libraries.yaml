@@ -205,12 +205,10 @@ Classic:
   - Rust:
     - name: cadence
       link: https://docs.rs/cadence/latest/cadence/
-      official: false
       dogstatsd: true
       authors: Nick Pillitteri
     - name: metrics-exporter-statsd
       link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
-      official: false
       dogstatsd: true
       authors: GitHub
     - name: datadog-api-client-rust
