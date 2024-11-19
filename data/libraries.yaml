@@ -21,11 +21,6 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
-    - name: DatadogSharp
-      link: https://github.com/neuecc/DatadogSharp
-      dogstatsd: true
-      notes: Also supports APM.
-      authors: Yoshifumi Kawai
     - name: DatadogStatsD
       link: https://github.com/verdie-g/DatadogStatsD
       dogstatsd: true
