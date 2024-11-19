@@ -77,10 +77,6 @@ Classic:
       official: true
       api: true
       authors: Datadog
-    - name: godspeed
-      link: https://github.com/theckman/godspeed
-      dogstatsd: true
-      authors: Tim Heckman
     - name: xstats
       link: https://github.com/rs/xstats
       dogstatsd: true
