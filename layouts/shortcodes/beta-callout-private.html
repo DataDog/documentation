@@ -4,7 +4,7 @@
 
     <div class="card-body d-flex flex-column">
         {{ if not (eq $header "false")  }}
-        <h5 class="card-title text-black mt-0 mb-1">{{$header | default "Join the Private Beta"}}</h5>
+        <h5 class="card-title text-black mt-0 mb-1">{{$header | default "Join the Preview"}}</h5>
         {{ end }}
         <p class="card-text">{{.Inner}}</p>
         {{- if not (eq $btn_hidden "true") -}}
