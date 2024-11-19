@@ -147,13 +147,14 @@ Next, Datadog looks at all of the [workload resources][104] running on that node
 
 [Network Performance Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Network Performance Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
 
-Datadog supports data transfer cost allocation only through the [standard 6 workload resources][104]. If you use custom workload resources their data transfer costs may only be allocated down to the cluster level and not the node/namespace level.
+Datadog supports data transfer cost allocation only through the [standard 6 workload resources][104]. If you use [custom workload resources][106] their data transfer costs may only be allocated down to the cluster level and not the node/namespace level.
 
 [101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [104]: https://kubernetes.io/docs/concepts/workloads/
 [105]: /network_monitoring/performance/setup
+[106]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
 
 {{% /tab %}}
 {{% tab "Azure" %}}
