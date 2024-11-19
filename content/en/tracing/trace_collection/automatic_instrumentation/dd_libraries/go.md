@@ -64,6 +64,7 @@ For configuration instructions and details about using the API, see the Datadog 
 [1]: /tracing/compatibility_requirements/go
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 
 {{% /tab %}}
 
@@ -133,6 +134,20 @@ Use one of these methods to enable Orchestrion in your build process:
    go test ./...
    ```
 
+### Trace Customization
+
+#### Setting up Unified Service Tagging
+
+Applictions instrumented by `orchestrion` support Unified Service Tagging (UST). You can set your traces' UST tags by setting the corresponding environment variable in your application's **runtime** environment:
+
+| Unified Tag | Environment  |
+|-------------|--------------|
+| `env`       | `DD_ENV`     |
+| `service`   | `DD_SERVICE` |
+| `version`   | `DD_VERSION` |
+
+For more information, refer to the [Unified Service Tagging documentation][14].
+
 #### Create custom trace spans
 
 Custom trace spans can be automatically created for any function annotated with the `//dd:span` directive comment:
@@ -153,7 +168,7 @@ handler := func(w http.ResponseWriter, r *http.Request) {
 }
 {{</code-block>}}
 
-##### Operation Name
+#### Operation Name
 
 The name of the operation (`span.name`) is determined automatically using the following precedence:
 1. An explicit `span.name:customOperationName` tag specified as a directive argument
@@ -177,7 +192,7 @@ tracedFunction := func() {
 }
 {{</code-block>}}
 
-##### Error Results
+#### Error Results
 
 If the annotated function returns an `error` result, any error returned by the function will be automatically attached to the corresponding trace span:
 
@@ -202,18 +217,15 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 
 To troubleshoot `orchestrion`-managed builds, see [Troubleshooting Go Compile-Time Instrumentation][13]
 
-[1]: /tracing/compatibility_requirements/go
-[2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
-[9]: https://www.datadoghq.com/support/
 [10]: https://pkg.go.dev/cmd/go#hdr-Modules__module_versions__and_more
 [11]: https://github.com/DataDog/orchestrion/releases
 [12]: /profiler
 [13]: /tracing/troubleshooting/go_compile_time/
+[14]: /getting_started/tagging/unified_service_tagging/
 
 {{% /tab %}}
 {{< /tabs >}}
