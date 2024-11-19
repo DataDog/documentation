@@ -162,4 +162,5 @@ Avoid using Wildcard widgets for the following scenarios:
 [6]: /dashboards/widgets/#full-screen
 [16]: /api/latest/dashboards/
 [17]: /dashboards/graphing_json/widget_json/
+[18]: /dashboards/functions/
 
