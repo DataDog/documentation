@@ -1,7 +1,7 @@
 ---
 title: Compatibility
 further_reading:
-- link: /tracing/trace_collection/automatic_instrumentation/dd_libraries/single-step-apm/
+- link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
   tag: "Documentation"
   text: "Single Step APM Instrumentation"
 ---

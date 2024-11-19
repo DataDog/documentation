@@ -2,7 +2,6 @@
 title: Single Step APM Instrumentation
 aliases:
 - /tracing/trace_collection/single-step-apm
-- /tracing/trace_collection/automatic_instrumentation/single-step-apm
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
