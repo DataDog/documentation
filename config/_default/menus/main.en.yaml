@@ -733,6 +733,10 @@ menu:
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 1004
+    - name: Combining OTel and Datadog Metrics
+      url: opentelemetry/guide/combining_otel_and_datadog_metrics/
+      parent: otel_guides
+      weight: 1005
     - name: Developers
       url: developers/
       pre: dev-code
@@ -4233,11 +4237,16 @@ menu:
       parent: tests_setup
       identifier: tests_setup_swift
       weight: 106
+    - name: Go
+      url: tests/setup/go/
+      parent: tests_setup
+      identifier: tests_setup_go
+      weight: 107
     - name: JUnit Report Uploads
       url: tests/setup/junit_xml/
       parent: tests_setup
       identifier: tests_setup_junit_xml
-      weight: 107
+      weight: 108
     - name: Network Settings
       url: tests/network/
       parent: tests
@@ -4338,6 +4347,11 @@ menu:
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_ruby
       weight: 8106
+    - name: Go
+      url: tests/test_impact_analysis/setup/go/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_go
+      weight: 8107
     - name: How It Works
       url: tests/test_impact_analysis/how_it_works/
       parent: test_impact_analysis

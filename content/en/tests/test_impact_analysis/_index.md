@@ -57,13 +57,14 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
     {{< nextlink href="intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/go" >}}Go{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
 
 Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Intelligent Test Runner Activation Write` permission.
 
-{{< img src="continuous_integration/itr_overview.png" alt="Test Impact Analysis enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Service Settings page" style="width:80%" >}}
 
 ### Git executable
 
@@ -89,7 +90,7 @@ When you specify a set of tracked files, Test Impact Analysis runs all tests if 
 
 All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
-{{< img src="continuous_integration/itr_configuration2.png" alt="Select branches to exclude and tracked files" style="width:80%;">}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Select branches to exclude and tracked files" style="width:80%" >}}
 
 ## Explore test sessions
 
