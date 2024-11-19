@@ -60,7 +60,6 @@ equiv_otel(avg:nginx.connections_current{state:active})
 ```
 The function works the same way in reverse, automatically including the equivalent Datadog metric (`nginx.net.connections`).
 
-```
+
 [1]: /dashboards/functions
 
-```
