@@ -209,7 +209,7 @@ When this approach is used, the command automatically infers the current applica
 ```
 {{% /tab %}}
 {{% tab "Manual" %}}
-If the automatic setup is too limited for your use case, it is possible to provide the the configuration repository URL and SHAs manually:
+If the automatic setup is too limited for your use case, it is possible to provide the configuration repository URL and SHAs manually:
 ```yaml
 - job: JobToUpdateConfigurationRepository
   run: |
