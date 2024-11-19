@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/monitors/types/ci"
   tag: "Documentation"
   text: "Learn about CI Monitors"
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Before you begin, make sure that [Test Visibility][1] is already set up for your language. This guide walks you through adding and using custom measures for your tests.
+Before you begin, make sure that [Test Optimization][1] is already set up for your language. This guide walks you through adding and using custom measures for your tests.
 
 ## Add the custom measure to your test
 

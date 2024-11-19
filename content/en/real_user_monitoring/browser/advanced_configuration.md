@@ -349,6 +349,45 @@ To override default RUM view names so that they are aligned with how you've defi
    {{% /tab %}}
    {{< /tabs >}}
 
+### Set view name
+
+Use `setViewName(name: string)` to update the name of the current view. This allows you to change the view name during the view without starting a new one.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewName('<VIEW_NAME>');
+
+// Code example
+datadogRum.setViewName('Checkout');
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('<VIEW_NAME>');
+})
+
+// Code example
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('Checkout');
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
+
+// Code example
+window.DD_RUM && window.DD_RUM.setViewName('Checkout');
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Changing the view name affects the view and its child events from the time the method is called.
+
 ## Enrich and control RUM data
 
 The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog.
@@ -1245,8 +1284,8 @@ Any query done in the RUM Explorer can use the service attribute to filter event
 
 Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
 - Action events collected automatically
-- Ressource events other than XHR and Fetch.
-- View events (but you can [override default rum view names][21] instead)
+- Resource events other than XHR and Fetch.
+- View events (but you can [override default RUM view names][21] instead)
 - CORS and CSP violations
 
 ## Further Reading
@@ -1256,7 +1295,7 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/browser/setup
+[4]: /real_user_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
