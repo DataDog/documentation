@@ -23,7 +23,7 @@ resource "datadog_dashboard" "example" {
 
 ## Restricting a dashboard using a restriction policy
 
-<div class="alert alert-warning">Restriction policies are in private beta. Contact <a href="/help/">Datadog Support</a> or your Customer Success Manager for access.</div>
+<div class="alert alert-warning">Restriction policies are in Preview. Contact <a href="/help/">Datadog Support</a> or your Customer Success Manager for access.</div>
 
 [Restriction Policies][1] allow you to restrict the editing of dashboards and other resources to specific principals, including roles, teams, users, and service accounts.
 

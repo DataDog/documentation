@@ -4,7 +4,7 @@ aliases:
 - /security/application_security/enabling/single_step/threat_detection/
 ---
 
-<div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in beta.</div>
+<div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in Preview.</div>
 
 
 ## Requirements

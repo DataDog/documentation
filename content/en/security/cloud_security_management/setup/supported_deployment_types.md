@@ -17,7 +17,7 @@ The following table summarizes the CSM features available relative to each deplo
 | Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Windows             | {{< X >}}              |                       | {{< X >}}   | {{< X >}}           |                    |                        |
-| AWS Fargate ECS/EKS | {{< X >}}              |                       | beta        |                     |                    |                        |
+| AWS Fargate ECS/EKS | {{< X >}}              |                       | {{< X >}}   |                     |                    |                        |
 
 The following table summarizes the scope of coverage available relative to each CSM feature.
 | Resources monitored             | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless scanning |
