@@ -37,9 +37,7 @@ title: ディストリビューション
 
 * **タグ付けのカスタマイズ**: この機能を使用すると、ホストレベルの詳細度を必要としない場合にカスタムメトリクスのタグ付けスキームを制御することができます (チェックアウトサービスの毎秒トランザクションなど)。
 
-実装の詳細については、[開発ツールのセクション][1]を参照してください。
-
-**注:** ディストリビューションは新しいメトリクスタイプであるため、Datadog への送信時に新しいメトリクス名の下でインスツルメンテーションを行う必要があります。
+**注:** ディストリビューションメトリクスデータは他のタイプとは異なる方法で保存されるため、`distribution` に使用するメトリクス名は他のメトリクスタイプには使用しないでください。
 
 ## 高度なクエリ機能の有効化
 
@@ -64,6 +62,17 @@ title: ディストリビューション
   _"私のアプリケーションの p95 のリクエストレイテンシーが過去 5 分間に 200 ms を超えたら警告を出す。"_
 
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="モニターのアラート条件にドロップダウンで設定できるパーセンタイルしきい値" style="width:80%;">}}
+
+### 複数のメトリクスの一括構成
+
+個々のメトリクスを個別に構成するのではなく、複数のメトリクスに対するパーセンタイル集計を一括で有効または無効にすることができます。
+
+1. [メトリクスサマリーページ][4]に移動し、**Configure Metrics** ドロップダウンをクリックします。
+1. **Enable percentiles** を選択します。
+1. そのネームスペースに一致するすべてのメトリクスを選択するには、メトリクスのネームスペースプレフィックスを指定します。
+1. (オプション) ネームスペース内のすべてのメトリクスに対するパーセンタイルを無効にするには、**Percentile aggregations** トグルをクリックします。
+
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="パーセンタイル集計を管理するためのトグル" style="width:100%;" >}}
 
 ### しきい値クエリ
 
@@ -124,3 +133,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [1]: /ja/metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [3]: https://app.datadoghq.com/event/explorer
+[4]: https://app.datadoghq.com/metric/summary
