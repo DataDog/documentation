@@ -66,7 +66,7 @@ Estimated usage metrics are generally available for the following usage types:
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
-## Multi-Org usage
+## Multi-Org usage 
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 
