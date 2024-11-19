@@ -21,7 +21,7 @@ Trace metrics are collected automatically for your services and resources and ar
   - *Prerequisite:* This metric exists for any APM service .
   - *Description:* Represents latency distributions for all services, resources and versions across different environments and second primary tags.
   - *Metric type:* [DISTRIBUTION][2]
-  - *Tags:* `env`, `service`, `version`, `resource`, and [the second primary tag][3].
+  - *Tags:* `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [the second primary tag][3].
 
 The APM Service and Resource pages use this metric type automatically. You can use these metrics to power your dashboards and monitors.
 
