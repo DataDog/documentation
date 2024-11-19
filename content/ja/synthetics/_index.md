@@ -25,9 +25,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
   tag: ブログ
   text: Datadog Synthetic Monitoring で API テストカバレッジを向上させる
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: ラーニングセンター
-  text: Synthetic テストの紹介
+  text: 'Datadog ラーニングセンター: Synthetic ブラウザテストを始める'
 - link: /synthetics/guide/
   tag: ドキュメント
   text: Synthetic モニタリングガイド
@@ -42,8 +42,8 @@ title: Synthetic テストとモニター
 <br/>
 
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
-  Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+  Foundation Enablement セッションを確認し、登録しましょう。Datadog Synthetic Monitoring は、コード不要で API、ブラウザ、モバイルのテストを作成し、アプリケーション、主要なエンドポイント、ネットワーク層へのユーザーフローとリクエストを自動的にシミュレートする先進的なモニタリングソリューションであることを学びましょう。
 {{< /learning-center-callout >}}
 
 Synthetic テストでは、**世界中からのシミュレートされたリクエストとアクション**を使用して、システムとアプリケーションがどのように実行されているかを観察できます。Datadog は、バックエンドからフロントエンドまで、さまざまなネットワークレベル (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) で、制御された安定した方法で Web ページと API のパフォーマンスを追跡します。障害のある動作 (リグレッション、機能の破損、応答時間の長さ、予期しないステータスコードなど) を警告します。
@@ -68,7 +68,7 @@ API テストを使用すると、[シングル][4]または[チェーン][5]リ
 
 [Synthetic モバイルアプリケーションテスト][21]を使用して、顧客が異なるデバイスタイプから iOS と Android アプリケーションをエンドツーエンドでどのように体験するかを監視します。
 
-{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Synthetic モバイルテストの記録ワークフローの例" style="width:100%;">}}
+{{< img src="synthetics/mobile_app_tests.png" alt="Synthetic モバイルテストの記録ワークフローの例" style="width:100%;">}}
 
 ## プライベートロケーションを起動する
 
