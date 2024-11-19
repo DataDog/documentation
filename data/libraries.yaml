@@ -321,12 +321,6 @@ Tracing:
     - name: datadog-apm
       link: https://github.com/pipefy/datadog-apm-rust
       authors: Pipefy
-  - Finagle:
-    - name: datadog-finagle
-      link: https://github.com/DataDog/datadog-finagle
-      official: true
-      authors: Datadog
-      notes: Reports Finagle traces to Datadog.
 Serverless:
   - Lambda:
     - name: datadog-lambda-python
