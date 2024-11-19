@@ -108,7 +108,7 @@ If you need additional assistance, contact [Datadog support][5].
 
 ### Third-Party library compatibility note
 
-Code Security modifies Python code at runtime, which can cause conflicts with other third-party Python libraries that perform similar code transformations, especially:
+Code Security modifies Python code at runtime, which can cause conflicts with other third-party Python libraries that perform similar code transformations, especially but not limited to:
 
 - Numba
 - JAX
