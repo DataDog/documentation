@@ -260,10 +260,6 @@ Tracing:
       official: true
       notes: NuGet package is `Datadog.Trace`.
       authors: Datadog
-    - name: DatadogSharp
-      link: https://github.com/neuecc/DatadogSharp
-      notes: Also supports DogStatsD.
-      authors: Yoshifumi Kawai
   - Rust/C++/C:
     - name: ddprof
       link: https://github.com/DataDog/ddprof
