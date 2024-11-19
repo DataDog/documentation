@@ -5686,11 +5686,16 @@ menu:
       parent: csm_setup
       identifier: csm_setup_iac_remediation
       weight: 104
+    - name: Set Up without Infrastructure Monitoring
+      url: security/cloud_security_management/setup/without_infrastructure_monitoring
+      parent: csm_setup
+      identifier: csm_setup_without_infrastructure_monitoring
+      weight: 105
     - name: Deploy via Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
-      weight: 105
+      weight: 106
     - name: Threats
       url: security/threats/
       parent: csm
