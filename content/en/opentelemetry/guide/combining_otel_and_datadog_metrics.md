@@ -1,5 +1,5 @@
 ---
-title: Combining OTel and Datadog Metrics
+title: Combining OpenTelemetry and Datadog Metrics
 further_reading:
     - link: '/metrics/'
       tag: 'Documentation'
