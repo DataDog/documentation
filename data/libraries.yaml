@@ -359,11 +359,6 @@ Serverless:
       authors: Dante Consulting, Inc.
       notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration.
 Log:
-  - Flutter:
-    - name: Datadog Flutter
-      link: https://github.com/greenbits/datadog_flutter
-      authors: tshedor
-      notes: Log-only SDK for Flutter
   - Laravel:
     - name: laravel-datadog-logger
       link: https://github.com/myLocalInfluence/laravel-datadog-logger
