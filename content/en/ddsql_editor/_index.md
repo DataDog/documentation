@@ -14,7 +14,7 @@ further_reading:
 
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL Editor is in private beta.
+DDSQL Editor is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -68,9 +68,14 @@ Browse and re-run saved queries in the side panel.
 
 {{< img src="ddsql_editor/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
 
+## Permissions
+
+To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. This permission is included in the Datadog Read Only Role by default. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
 [2]: /dashboards/ddsql_editor/reference/tags
+[3]: /account_management/rbac/

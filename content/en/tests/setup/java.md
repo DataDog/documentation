@@ -25,7 +25,7 @@ further_reading:
       text: "Correlate logs and test traces"
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}

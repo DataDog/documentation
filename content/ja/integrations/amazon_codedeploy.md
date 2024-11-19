@@ -8,7 +8,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
@@ -81,13 +81,13 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-The AWS CodeDeploy integration includes events for successful, failed, and stopped deployments. See example events below:
+AWS CodeDeploy インテグレーションには、成功したデプロイ、失敗したデプロイ、および停止されたデプロイのイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS CodeDeploy Events" >}}
+{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS CodeDeploy イベント" >}}
 
 ### サービスのチェック
 
-The AWS CodeDeploy integration does not include any service checks.
+AWS CodeDeploy インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -98,7 +98,7 @@ The AWS CodeDeploy integration does not include any service checks.
 [3]: https://docs.aws.amazon.com/codedeploy/latest/userguide/security-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon_codedeploy
 [5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codedeploy/amazon_codedeploy_metadata.csv
 [9]: https://docs.datadoghq.com/ja/help/

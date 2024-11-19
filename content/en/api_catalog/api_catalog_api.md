@@ -1,6 +1,5 @@
 ---
 title: API Catalog API
-is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/"
   tag: "Documentation"

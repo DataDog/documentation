@@ -20,7 +20,7 @@ When you need to further refine the results of a log search, use [subqueries](#f
 
 ## Filter logs with subqueries
 
-<div class="alert alert-warning">Filtering logs with subqueries is in beta.</div>
+<div class="alert alert-warning">Filtering logs with subqueries is in Preview.</div>
 
 Use subqueries when you want to filter the results of a query based on the results of a secondary query. See [subquery examples](#subquery-examples) for two example scenarios.
 
