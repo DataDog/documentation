@@ -59,7 +59,7 @@ Refer to the instructions in the section corresponding to your preference below:
 - Comprehensive tracing coverage:
    - Instruments your code and all dependencies, including the Go standard library
    - Instruments your code during compilation, preventing gaps in tracing coverage due to overlooked manual instrumentation
-- Exclusive [Application Security Management][7] **Exploit Prevention** feature. Exploit Prevention is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
+- Exclusive [Application Security Management][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
 
 ### Requirements
 
@@ -208,6 +208,7 @@ To troubleshoot `orchestrion`-managed builds, see [Troubleshooting Go Compile-Ti
 [12]: /profiler
 [13]: /tracing/troubleshooting/go_compile_time/
 [14]: /getting_started/tagging/unified_service_tagging/
+[15]: /security/application_security/threats/exploit-prevention/
 
 {{% /tab %}}
 
