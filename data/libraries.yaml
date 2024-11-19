@@ -113,10 +113,6 @@ Classic:
       dogstatsd: true
       notes: A reporting bridge between Dropwizard metrics and Datadog.
       authors: Coursera
-    - name: dogstatd-client
-      link: https://github.com/chonton/dogstatd-client
-      dogstatsd: true
-      authors: Chas Honton
   - Lua:
     - name: APISIX
       link: https://apisix.apache.org/docs/apisix/next/plugins/datadog/
