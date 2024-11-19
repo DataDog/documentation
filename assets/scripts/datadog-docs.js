@@ -1,5 +1,5 @@
 import configDocs from './config/config-docs';
-import { updateMainContentAnchors, gtag, chromeHashFix } from './helpers/helpers';
+import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { bodyClassContains } from './helpers/helpers';
 import { DOMReady } from './helpers/documentReady';
 import { initializeIntegrations } from './components/integrations';
@@ -122,8 +122,6 @@ const doOnLoad = () => {
 
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
-    } else {
-        chromeHashFix();
     }
 };
 

@@ -7,6 +7,14 @@
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
   },
+  "aws-integration": {
+    "name": "AWS Integration",
+    "description": "Configure your Datadog-AWS integration directly through the Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services)."
+  },
+  "aws-logs-integration": {
+    "name": "AWS Logs Integration",
+    "description": "Configure your Datadog-AWS-Logs integration directly through Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)."
+  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."
@@ -166,6 +174,10 @@
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
+  },
+  "rum-metrics": {
+    "name": "Rum Metrics",
+    "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
   "security-monitoring": {
     "name": "Security Monitoring",
