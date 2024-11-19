@@ -12,7 +12,7 @@ Datadog and OpenTelemetry (OTel) use different naming conventions for integratio
 
 ## Challenges when combining metrics
 
-Subtleties that may arise when trying to combine Datadog and equivalent OTel integration metrics is best illustrated with an example.
+When working with both Datadog and OTel metrics, two main challenges arise. Let's examine these using NGINX connection monitoring as an example:
 
 If nginx is monitored by a Datadog integration, the metric emitted for the number of current active connections is named `nginx.net.connections`. OTel integrations do not emit a specific metric just for active connections. Rather OTel integrations emit a metric named `nginx.connections_current` to capture all connections regardless of their state, whether active or waiting. You can filter this metric down by filtering with the tag `state:active` to measure only active connections.
 
