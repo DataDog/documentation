@@ -23,7 +23,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/cost-anomaly-detection/" btn_hidden="false" header="Join the Beta!">}}
-Cost anomaly detection is in private beta. To request access, complete the form.
+Cost anomaly detection is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
