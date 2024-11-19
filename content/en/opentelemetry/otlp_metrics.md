@@ -23,7 +23,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP metrics intake endpoint is in private beta.
+  The Datadog OTLP metrics intake endpoint is in Preview.
 {{< /callout >}} 
 
 {{< site-region region="ap1,gov" >}}
@@ -74,7 +74,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="{{< region-param key="otlp_metrics_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY}"
+export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="delta"
 ```
 
@@ -96,6 +96,7 @@ const exporter = new OTLPMetricExporter({
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-metric-config': '{resource_attributes_as_tags: true}',
+    'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
   },
 });
 ```
@@ -117,6 +118,7 @@ OtlpHttpMetricExporter exporter = OtlpHttpMetricExporter.builder()
 			AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-metric-config", "{resource_attributes_as_tags: true}")
+    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
     .build();
 ```
 
@@ -140,6 +142,7 @@ metricExporter, err := otlpmetrichttp.New(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-metric-config": "{resource_attributes_as_tags: true}",
+      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
 		}),
 )
 ```
@@ -161,6 +164,7 @@ exporter = OTLPMetricExporter(
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-metric-config": "{resource_attributes_as_tags: true}",
+        "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
     },
 )
 ```
@@ -231,6 +235,7 @@ exporters:
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-metric-config: "{resource_attributes_as_tags: true}"
+      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
 ...
 
 service:
@@ -249,9 +254,11 @@ service:
 If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates one of the following issues:
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.  
-   **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP metrics intake endpoint.  
+   **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP metrics intake endpoint.
    
-   
+- The `dd-otlp-source` header is missing or has an incorrect value.  
+   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
+
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_metrics_endpoint" code="true" >}} endpoint.
 

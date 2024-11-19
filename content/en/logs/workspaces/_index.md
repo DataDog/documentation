@@ -7,8 +7,8 @@ further_reading:
   text: "Take enhanced control of your log data with Datadog Log Workspaces"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="false" >}}
-  Log Workspaces is in private beta.
+{{< callout url="https://www.datadoghq.com/private-beta/log-workspaces/" header="Access the Preview!" >}}
+  Log Workspaces is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -35,6 +35,15 @@ In the [Log Explorer][2]:
 1. Enter a query.
 1. Click **More**, next to *Download as CSV*, and select **Open in Workspace**.
 1. The workspace adds the log query to a data source cell. By default, the columns in Log Explorer are added to the data source cell.
+
+### Add a column to your workspace
+
+{{< img src="/logs/workspace/workspaces_add_column_to_dataset.png" alt="An example workspace cell, with an open detail side panel that highlights the option to add an attribute as a column" style="width:100%;" >}}
+
+In addition to the default columns, you can add your own columns to your workspace:
+1. From your workspace cell, click on a log to open the detail side panel.
+1. Click the attribute you want to add as a column.
+1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**.
 
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:

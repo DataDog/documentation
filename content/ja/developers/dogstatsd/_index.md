@@ -9,7 +9,7 @@ description: データタイプ、タグ付けなど、DogStatsD の機能の概
 further_reading:
 - link: integrations/node
   tag: ドキュメント
-  text: NodeJS インテグレーションを利用して NodeJS 用の DogStatsD を有効にします
+  text: Node.js インテグレーションを利用して Node.js 用の DogStatsD を有効にします
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD 入門
@@ -41,7 +41,7 @@ DogStatsD は、Docker Hub と GCR で利用できます。
 
 <div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
-## UDS の仕組み
+## 仕組み
 
 DogStatsD は、UDP 経由で[カスタムメトリクス][5]、[イベント][6]、および[サービスチェック][7]を受け入れ、それらを定期的に集計して Datadog に転送します。
 
@@ -182,7 +182,7 @@ env:
             enabled: true
     ```
 
-**注**:
+**注**: 
 * UDP 以外には [Unix ドメインソケット][5]があります。
 * UDP による送信元検出では、エンティティ ID としてポッド ID を使うことができます。
 
@@ -494,7 +494,7 @@ using (var dogStatsdService = new DogStatsdService())
 | `socket_path`   | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス（`host` と `port` をオーバーライドします。Agent v6 以上でのみサポートされます）。 |
 | `tags`          | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。                                                      |
 | `namespace`     | 文字列          | `null`      | すべてのメトリクス、イベント、サービスチェックの前に付けるネームスペース。                                                |
-| `single_thread` | ブール値         | `false`     | コンパニオンスレッドではなく、有効になっている場合、クライアントがメインスレッドでメトリクスを送信するようにします。           |
+| `single_thread` | Boolean         | `false`     | コンパニオンスレッドではなく、有効になっている場合、クライアントがメインスレッドでメトリクスを送信するようにします。           |
 
 オプションのパラメーターの完全なリストについては、GitHub の [dogstatsd-ruby リポジトリ][1]を参照してください。
 
@@ -525,9 +525,9 @@ v2.10.0 以降では、NonBlockingStatsDClientBuilder を使ってクライア�
 | `hostname(String val)`                       | 文字列         | localhost | ターゲット StatsD サーバーのホスト名。                                        |
 | `port(int val)`                              | 整数        | 8125      | ターゲット StatsD サーバーのポート。                                             |
 | `constantTags(String... val)`                | String varargs | null      | すべてのメトリクス、イベント、サービスチェックに適用されるグローバルタグ。                |
-| `blocking(boolean val)`                      | ブール値        | false     | インスタンス化するクライアントのタイプ: ブロッキングか非ブロッキングか。                        |
+| `blocking(boolean val)`                      | Boolean        | false     | インスタンス化するクライアントのタイプ: ブロッキングか非ブロッキングか。                        |
 | `socketBufferSize(int val)`                  | 整数        | -1        | 基礎となるソケットバッファのサイズ。                                           |
-| `enableTelemetry(boolean val)`               | ブール値        | false     | クライアントテレメトリーレポート。                                                         |
+| `enableTelemetry(boolean val)`               | Boolean        | false     | クライアントテレメトリーレポート。                                                         |
 | `entityID(String val)`                       | 文字列         | null      | 発信点検出のためのエンティティ ID。                                                   |
 | `errorHandler(StatsDClientErrorHandler val)` | 整数        | null      | クライアント内部でエラーが発生した場合のエラーハンドラー。                                  |
 | `maxPacketSizeBytes(int val)`                | 整数        | 8192/1432 | 最大パケットサイズ、UDS で 8192、UDP で 1432。                               |
@@ -544,13 +544,12 @@ v2.10.0 以降では、NonBlockingStatsDClientBuilder を使ってクライア�
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| パラメーター     | タイプ            | デフォルト     | 説明
-          |
+| パラメーター     | タイプ            | デフォルト     | 説明                                                                                                                                                                                            |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `host`        | 文字列          | `localhost` | DogStatsD サーバーのホスト。これが設定されていない場合、Agent は環境変数 `DD_AGENT_HOST` または `DD_DOGSTATSD_URL` を調べます。                                                               |
-| `port`        | 整数         | `8125`      | DogStatsD サーバーのポート。これが設定されていない場合、Agent は環境変数 `DD_DOGSTATSD_PORT` または `DD_DOGSTATSD_URL` を調べます。                                                          |
-| `socket_path` | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス（`host` と `port` をオーバーライドします。Agent v6 以上でのみサポートされます）。これが設定されていない場合、Agent は環境変数 `DD_DOGSTATSD_URL` を調べます。 |
-| `global_tags` | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。 `@dd.internal.entity_id` タグは、環境変数 `DD_ENTITY_ID` から global_tags に追加されます。                                    |
+| `host`        | 文字列          | `localhost` | DogStatsD サーバーのホスト。これが設定されていない場合、Agent は `DD_AGENT_HOST` または `DD_DOGSTATSD_URL` 環境変数を調べます。                                                               |
+| `port`        | 整数         | `8125`      | DogStatsD サーバーのポート。これが設定されていない場合、Agent は `DD_DOGSTATSD_PORT` または `DD_DOGSTATSD_URL` 環境変数を調べます。                                                          |
+| `socket_path` | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス (`host` と `port` をオーバーライドします)。Agent v6 以上でのみサポートされます。これが設定されていない場合、Agent は `DD_DOGSTATSD_URL` 環境変数を調べます。 |
+| `global_tags` | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。`@dd.internal.entity_id` タグは、`DD_ENTITY_ID` 環境変数から global_tags に追加されます。                                    |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -577,7 +576,7 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
 
 DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][9]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

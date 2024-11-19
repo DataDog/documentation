@@ -91,6 +91,14 @@ rulesets:
     title: "React specific linting rules"
     description: |
       This plugin exports a `recommended` configuration that enforces React good practices.
+  kotlin-best-practices:
+    title: "Follow best practices for writing Kotlin code"
+    description: |
+      Rules to enforce Kotlin best practices.
+  kotlin-code-style:
+    title: "Enforce Kotlin code style"
+    description: |
+      Rules to enforce Kotlin code style.
   php-best-practices:
     title: "Follow best practices for writing PHP code"
     description: |
@@ -167,6 +175,10 @@ rulesets:
     title: "Security rules for Ruby"
     description: |
       Rules focused on finding security issues in your Ruby code.
+  terraform-aws:
+    title: "Terraform AWS"
+    description: |
+      Rules to enforce Terraform best practices for AWS.
   tsx-react:
     title: "TypeScript React code quality"
     description: |

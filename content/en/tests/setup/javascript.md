@@ -14,9 +14,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/javascript"
+    - link: "/tests/test_impact_analysis/javascript"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
+      text: "Speed up your test jobs with Test Impact Analysis"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
@@ -476,7 +476,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /real_user_monitoring/browser/setup
+[10]: /real_user_monitoring/browser/setup/
 [11]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
@@ -619,11 +619,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 ## Manual testing API
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
-</div>
-
-<div class="alert alert-warning">
-  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
+  <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
 If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
@@ -728,7 +724,7 @@ The payload to be published is a dictionary `<string, string|number>` of tags or
 When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
 
 ```shell
-NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
 ```
 
 

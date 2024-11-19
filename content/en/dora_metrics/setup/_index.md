@@ -12,32 +12,36 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in public beta.</div>
+<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
-The four DORA Metrics are calculated based on two types of events:
+The four DORA Metrics are calculated based on two types of events that support different data sources.
 
-- [**Deployment events**][8]: Indicate that a new deployment has occurred for a service in a specific environment. 
-- [**Incident events**][9]: Indicate that a new failure has occurred for a service in a specific environment.
+[**Deployment events**][8]
+: Indicate that a new deployment has occurred for a service in a specific environment. Deployment events are used to compute deployment frequency, change lead time, and change failure rate.
 
-Each event type supports different data sources.
+[**Incident events**][9]
+: Indicate that a new failure has occurred for a service in a specific environment. Incident events are used to compute change failure rate and mean time to restore.
 
 ## Configure data sources
 
-### Deployments 
-{{< whatsnext desc="Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:" >}}
-  {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
+### Select a deployment data source
+
+{{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up the data source for your deployment events:" >}}
+  {{< nextlink href="/dora_metrics/setup/deployments?tab=apmdeploymenttracking" >}}APM Deployment Tracking{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/deployments?tab=apiorcli" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Failures
-{{< whatsnext desc="Failure events, interpreted through incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your failure events:">}}
-  {{< nextlink href="/dora_metrics/failures/pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/failures/incident_api" >}}Incident Event API{{< /nextlink >}}
+### Select an incident data source
+
+{{< whatsnext desc="DORA Metrics supports the following data sources for incident events. See the respective documentation to set up a data source for your incident events:" >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=pagerduty" >}}PagerDuty{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/setup/failures?tab=api" >}}Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Limitations
+
 - When you first select a data source option (such as APM Deployment Tracking or PagerDuty), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected. 
 - Deployments or incidents of the same service cannot occur at the same second.
 
@@ -45,10 +49,5 @@ Each event type supports different data sources.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /dora_metrics/
-[4]: /service_management/events/explorer/
-[5]: /api/latest/metrics/#query-timeseries-points
-[6]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[7]: /dora_metrics/data_collected/
-[8]: /dora_metrics/deployments/
-[9]: /dora_metrics/failures/
+[8]: /dora_metrics/setup/deployments/
+[9]: /dora_metrics/setup/failures/
