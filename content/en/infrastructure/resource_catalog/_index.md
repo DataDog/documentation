@@ -160,7 +160,7 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [6]: /integrations/amazon_config/#events
 [7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-change-collection
-[9]: https://www.datadoghq.com/private-beta/recent-changes-tab/
+[9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
 [10]: https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/
 [11]: https://docs.datadoghq.com/security/threats/
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/

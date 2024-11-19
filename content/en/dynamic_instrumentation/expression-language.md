@@ -23,7 +23,7 @@ It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
 * Other native programming language syntax beyond what is described on this page.
 
-Try the [autocomplete and search open beta][6] for an improved user experience using the Expression Language.
+Try [autocomplete and search (in Preview)][6] for an improved user experience using the Expression Language.
 
 The following sections summarize the variables and operations that the Dynamic Instrumentation Expression Language supports.
 
