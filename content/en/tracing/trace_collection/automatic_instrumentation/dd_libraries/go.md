@@ -185,6 +185,38 @@ func failableFunction() (any, error) {
 }
 {{</code-block>}}
 
+#### Prevent instrumentation of some code
+
+The `//orchestrion:ignore` directive can be used to prevent `orchestrion` from performing _any_ modification on the annotated code.
+
+This can be used to prevent caller-side instrumentation from being applied to specific locations:
+
+{{<code-block lang="go" filename="example.go" collapsible="true">}}
+import "database/sql"
+
+// Caller-side instrumentation normally happens within this function...
+func normal() {
+  // The following assignment will NOT be modified to add any caller-side
+  // instrumentation as it is opted out by the dd:ignore directive:
+  //orchestrion:ignore
+  db, err := sql.Open("driver-name", "database=example")
+  // ...
+}
+
+// Caller-side instrumentation will NOT happen in the following function
+// as it is annotated with dd:ignore.
+//orchestrion:ignore
+func excluded() {
+  // The following assignment will NOT be modified to add any caller-side
+  // instrumentation as the surrounding context is excluded by a dd:ignore
+  // directive:
+  db, err := sql.Open("driver-name", "database=example")
+  // ...
+}
+{{</code-block>}}
+
+Some of the instrumentation performed by `orchestrion` is done callee-side (or library-side), meaning the integration is added directly within the dependency itself. In such cases, it is not possible to locally opt out of such integrations.
+
 #### Use the tracing library
 
 You can use the [tracing library][4] in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
@@ -226,7 +258,6 @@ For configuration instructions and details about using the API, see the [Datadog
 [1]: /tracing/compatibility_requirements/go
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 
 {{% /tab %}}
 
