@@ -83,6 +83,12 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-insights-panel.png" alt="A screenshot of the queries for scroll data insights" style="width:50%;">}}
 
+## Backgrounds
+
+A background is a snapshot of a Session Replay. Each heatmap fetches the 20 backgrounds that triggered the most actions during a given session. Changing the background shows different results depending on the background selected. You can use the **Choose Background** button to select a particular background for your heatmap.
+
+A heatmap's list of backgrounds cannot be modified.
+
 ## Next steps
 
 After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [Analytics explorer][4]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
@@ -95,7 +101,7 @@ Heatmaps are based on Product Analytics view names. Depending on how your Produc
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the background of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm smartly picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the [background](#backgrounds) of your heatmap, you can use the **Choose Background** button to navigate through the different states of the page and find the one you are looking for.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-background-selector.mp4" alt="Select a different background via the choose background button" video=true >}}
 

@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10093
     source_type_name: Sidekiq
-  logs:
-    source: sidekiq
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md
 display_on_public_website: true
@@ -34,9 +33,8 @@ draft: false
 git_integration_title: sidekiq
 integration_id: sidekiq
 integration_title: Sidekiq
-integration_version: 1.4.0
+integration_version: 3.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sidekiq
 public_title: Sidekiq
@@ -52,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
   media: []
@@ -69,14 +68,14 @@ tile:
 
 **注** Sidekiq Pro (>= 3.6) または Enterprise (>= 1.1.0) のユーザーのみがメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化されています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. `dogstatsd-ruby` [gem][3] をインストールします。
 
@@ -137,15 +136,15 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
 
 4. [Agent を再起動します][8]。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "sidekiq" >}}
 
 
 Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq Enterprise Historical Metrics][10] を参照してください。
 
-### 収集データ
+### ログ収集
 
 1. Datadog Agent でのログ収集は、デフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -167,15 +166,15 @@ Sidekiq インテグレーションでは、カスタムメトリクスも使用
 
 3. [Agent を再起動します][8]。
 
-### ヘルプ
+### サービスチェック
 
 Sidekiq には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Sidekiq には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

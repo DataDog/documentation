@@ -21,11 +21,11 @@ assets:
     source_type_id: 10131
     source_type_name: RapDev MaxDB
   monitors:
-    RapDev MaxDB Data Volume Usage: assets/monitors/rapdev_maxdb_data_volume_usage.json
-    RapDev MaxDB Database Connection Check: assets/monitors/rapdev_maxdb_connection_check.json
-    RapDev MaxDB Database State: assets/monitors/rapdev_maxdb_state.json
-    RapDev MaxDB Lock Utilization: assets/monitors/rapdev_maxdb_lock_utilization.json
-    RapDev MaxDB Log Area Usage: assets/monitors/rapdev_maxdb_log_area_usage.json
+    Data volume usage is high: assets/monitors/rapdev_maxdb_data_volume_usage.json
+    Database connection is failing: assets/monitors/rapdev_maxdb_connection_check.json
+    Database is not online: assets/monitors/rapdev_maxdb_state.json
+    Lock utilization is high: assets/monitors/rapdev_maxdb_lock_utilization.json
+    Log area usage is high: assets/monitors/rapdev_maxdb_log_area_usage.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -37,6 +37,7 @@ categories:
 - data stores
 - マーケットプレイス
 - sap
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,7 +46,6 @@ integration_id: rapdev-maxdb
 integration_title: MaxDB
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -100,7 +100,7 @@ tile:
 
 MaxDB インテグレーションは MaxDB インスタンスのデータ、ログ領域、ボリューム、キャッシュ、セッション、ロック、その他のメトリクスを監視し、データベースが正常に稼働していることを確認します。このインテグレーションで利用可能なダッシュボードは、データベースおよびデータベースホストでフィルタリングすることができます。MaxDB インテグレーションにはまた、データベースの総合的な健全性に関連する共通のメトリクスのモニターも搭載されています。
 
-### ログ管理
+### モニター
 1. MaxDB 接続チェック
 2. MaxDB ステート
 3. MaxDB データボリューム使用量

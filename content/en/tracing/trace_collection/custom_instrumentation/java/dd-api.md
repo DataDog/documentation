@@ -1,5 +1,5 @@
 ---
-title: Java Custom Instrumentation using Datadog API
+title: Java Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/java
     - /tracing/manual_instrumentation/java
@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/java
-description: 'Instrument your code with the Datadog Java APM tracer.'
+description: 'Instrument your code with the Datadog API.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -355,7 +355,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [5]: /tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: /tracing/trace_collection/trace_context_propagation/java/
+[8]: /tracing/trace_collection/trace_context_propagation/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
 [11]: /tracing/setup/java/

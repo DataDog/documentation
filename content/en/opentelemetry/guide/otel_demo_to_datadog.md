@@ -47,6 +47,7 @@ You can deploy the demo using Docker or Kubernetes (with Helm). Choose your pref
 
 - Kubernetes 1.24+
 - Helm 3.9+
+- An active Kubernetes cluster with kubectl configured to connect to it
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -100,8 +101,8 @@ Complete the following steps to configure these three components.
           trace_buffer: 500
         hostname: "otelcol-docker"
         api:
-          site: ${DD_SITE_PARAMETER}
-          key: ${DD_API_KEY}
+          site: ${env:DD_SITE_PARAMETER}
+          key: ${env:DD_API_KEY}
 
     processors:
       resource:

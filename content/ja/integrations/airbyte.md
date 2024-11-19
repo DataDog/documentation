@@ -24,7 +24,7 @@ assets:
     source_type_id: 10386
     source_type_name: Airbyte
   monitors:
-    long_running_jobs: assets/monitors/long_running_jobs.json
+    Sync Jobs are taking a longer time than usual: assets/monitors/long_running_jobs.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -33,6 +33,7 @@ author:
 categories:
 - ai/ml
 - data stores
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
 display_on_public_website: true
@@ -42,7 +43,6 @@ integration_id: airbyte
 integration_title: Airbyte
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: airbyte
 public_title: Airbyte
@@ -60,6 +60,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Airbyte のデプロイの状態を監視します。
   media: []
@@ -148,7 +149,7 @@ dogstatsd_mapper_profiles:
 
 3. Agent と Airbyte を[再起動][6]します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "airbyte" >}}

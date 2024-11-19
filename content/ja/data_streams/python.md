@@ -17,7 +17,10 @@ title: Data Streams Monitoring for Python のセットアップ
 
 Data Streams Monitoring を開始するには、Datadog Agent と Python ライブラリの最新バージョンが必要です。
 * [Datadog Agent v7.34.0 以降][1]
-* [Python Tracer v1.16.0 以降][2]
+* [Python Tracer][2]
+  * Kafka: v1.16.0 以上
+  * Amazon SQS および Amazon Kinesis: v1.20.0
+  * RabbitMQ: v2.6.0 以上
 
 ### インストール
 
@@ -30,10 +33,13 @@ environment:
 ```
 
 ### サポートされるライブラリ
-Data Streams Monitoring は、[confluent-kafka ライブラリ][3]をサポートしています。
+Data Streams Monitoring は、[confluent-kafka ライブラリ][3]と [kombu パッケージ][5]をサポートしています。
 
 ### SQS パイプラインの監視
-Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して、SQS キューを通過するメッセージの経路を追跡します。AWS SQS は、メッセージごとに許可されるメッセージ属性の上限が 10 個であるため、データパイプラインを通じてストリーミングされるすべてのメッセージには、9 個以下のメッセージ属性が設定されている必要がありがあり、残りの属性は Data Streams Monitoring に使用できます。
+Data Streams Monitoring は、SQS キューを通るメッセージのパスを追跡するために 1 つの[メッセージ属性][4]を使用します。Amazon SQS にはメッセージごとに許可されるメッセージ属性が最大 10 個という制限があるため、すべてのメッセージをデータパイプラインを通じてストリーミングする際には、設定するメッセージ属性を 9 個以下にして、残りの 1 つの属性を Data Streams Monitoring のために残しておく必要があります。
+
+### Kinesis パイプラインの監視
+Kinesis にはメッセージ属性がないため、コンテキストを伝播してメッセージが Kinesis ストリームを通る完全なパスを追跡することができません。その結果、Data Streams Monitoring のエンドツーエンドのレイテンシーメトリクスは、メッセージのパス上のセグメントごとのレイテンシー (プロデューサーサービスから Kinesis ストリームを経由し、コンシューマーサービスに至るまでのレイテンシー) を合計して近似されます。スループットメトリクスも、プロデューサーサービスから Kinesis ストリームを経てコンシューマーサービスに至るまでのセグメントに基づいています。それでも、サービスにインスツルメンテーションを施すことで、データストリームの完全なトポロジーを視覚化することが可能です。
 
 ## その他の参考資料
 
@@ -43,3 +49,4 @@ Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して�
 [2]: /ja/tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[5]: https://pypi.org/project/kombu/

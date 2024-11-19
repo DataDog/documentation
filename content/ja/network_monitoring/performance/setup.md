@@ -23,7 +23,7 @@ Datadog の ネットワークパフォーマンスモニタリング (NPM) は 
 - 予期しない、または潜在的なサービスの依存関係を特定。
 - クロスリージョンやマルチクラウドなど、高コストの通信を最適化。
 - クラウドプロバイダーのリージョンやサードパーティーツールの機能停止を特定。
-- DNS サーバーメトリクスに関するサービスディスカバリーの不具合のトラブルシューティングを実施。
+- DNS サーバーメトリクスを使用してサービスディスカバリーの不具合をトラブルシューティング。
 
 ネットワークパフォーマンスモニタリングには [Datadog Agent v6.14 以降][1]が必要です。メトリクスは Agent の上位バージョンで自動的に収集されるため、DNS モニタリングを構成するには[メトリクス設定セクション][2]を参照してください。
 
@@ -33,7 +33,7 @@ Datadog の ネットワークパフォーマンスモニタリング (NPM) は 
 
 #### Linux OS
 
-データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.4.0 以降または eBPF 機能のバックポートを備えたプラットフォームを必要とします。NPM は以下の Linux ディストリビューションをサポートしています。
+データ収集は eBPF を使用して行われるため、Datadog は最低限、基盤となる Linux カーネルバージョン 4.4.0 以降または eBPF 機能がバックポートされたプラットフォームを必要とします。NPM は以下の Linux ディストリビューションをサポートしています。
 
 - Ubuntu 16.04 以降
 - Debian 9 以降
@@ -55,7 +55,9 @@ Datadog ネットワークパフォーマンスモニタリングは macOS プ�
 
 ### コンテナ
 
-NPM は [Docker][5]、[Kubernetes][6]、[ECS][7] およびその他のコンテナ技術をサポートしており、コンテナ化およびオーケストレーションされた環境のアーキテクチャとパフォーマンスの可視化に役立ちます。Datadog のコンテナインテグレーションでは、コンテナ、タスク、ポッド、クラスター、デプロイなど目で見て分かりやすいエンティティごとに、システムに内蔵されたタグ (`container_name`、`task_name`、`kube_service` など) を使用してトラフィックを集約することができます。
+NPM は [Docker][5]、[Kubernetes][6]、[ECS][7] およびその他のコンテナ技術をサポートしており、コンテナ化およびオーケストレーションされた環境のアーキテクチャとパフォーマンスの可視化に役立ちます。Datadog のコンテナインテグレーションでは、コンテナ、タスク、ポッド、クラスター、デプロイなど意味のあるエンティティごとに、システムに内蔵されたタグ (`container_name`、`task_name`、`kube_service` など) を使用してトラフィックを集約することができます。
+
+NPM は Google Kubernetes Engine (GKE) Autopilot ではサポートされていません。
 
 ### ネットワークルーティングツール
 
@@ -94,11 +96,11 @@ Datadog を使用した Istio 環境の監視について、詳しくは [Istio 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
 
-Datadog Agent を使用してネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
+Datadog Agent を使用してネットワークパフォーマンスのモニタリングを有効化するには、次の構成を使用します。
 
 1. **v6.14+ 以降のバージョンの Agent を使用されている場合は**、先に[ライブプロセスの収集][1]を有効化し、このステップは飛ばします。
 
-2. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
+2. 下記のシステムプローブの構成の例をコピーします。
 
     ```shell
     sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
@@ -139,7 +141,7 @@ CentOS ベースのシステム向けの Datadog Agent RPM パッケージには
 
 SELinux を有効にしたその他のシステムでネットワークパフォーマンスモニタリングを使用する場合は、次の手順に従ってください。
 
-1. ベースとなる [SELinux ポリシー][3]を、お使いの SELinux コンフィギュレーションに合わせて修正します。
+1. ベースとなる [SELinux ポリシー][3]を、お使いの SELinux 構成に合わせて修正します。
     お使いのシステムによっては、タイプや属性が存在しない (または名前が異なる) 場合があります。
 
 2. ポリシーをモジュールにコンパイルします。ポリシーのファイル名が `system_probe_policy.te` の場合は以下のようになります。
@@ -164,18 +166,18 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 
 5. [Agent を再起動します][2]。
 
-**注**: 上記の手順では、システムに複数の SELinux ユーティリティ (`checkmodule`、`semodule`、`semodule_package`、`semanage`、`restorecon`) をインストールする必要があります。これらは標準ディストリビューション (Ubuntu、Debian、RHEL、CentOS、SUSE) のほとんどで利用可能です。インストール方法について、詳しくはお使いのディストリビューションを確認してください。
+**注**: これらの手順を実行するには、システムに SELinux ユーティリティ (`checkmodule`、`semodule`、`semodule_package`、`semanage`、`restorecon`) をインストールしておく必要があります。これらのユーティリティは標準ディストリビューション (Ubuntu、Debian、RHEL、CentOS、SUSE) のほとんどで利用可能です。インストール方法については、お使いのディストリビューションの詳細を確認してください。
 
 お使いのディストリビューション内にこれらのユーティリティが存在しない場合は、現在のディストリビューションで利用可能なユーティリティを使って同じ手順を実行してください。
 
 
 [1]: /ja/infrastructure/process/?tab=linuxwindows#installation
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
 
-Windows のデータ収集は、ネットワークデータ収集用のフィルタードライバに依存します。
+Windows でのデータ収集は、ネットワークデータ収集用のフィルタードライバに依存します。
 
 Windows ホストのネットワークパフォーマンスモニタリングを有効にするには
 
@@ -203,18 +205,27 @@ Windows ホストのネットワークパフォーマンスモニタリングを
 
 
 [1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes で Helm を使用してネットワークパフォーマンスのモニタリングを新規で有効化するには、
+Kubernetes で Helm を使用してネットワークパフォーマンスのモニタリングを有効化するには、以下を `values.yaml` ファイルに追加します。</br>
+**Helm チャート v2.4.39+ が必要です**。詳細については、[Datadog Helm チャートのドキュメント][1]を参照してください。
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-を values.yaml に追加します。**Helm チャート v2.4.39+ が必要です**。詳細については、[Datadog Helm チャートのドキュメント][1]を参照してください。
+
+**注**: Kubernetes 環境で NPM を構成する際に権限エラー (`Error: error enabling protocol classifier: permission denied`) が発生する場合は、`values.yaml` に以下を追加してください (Helm チャートのこちらの[セクション][5]を参照)。
+
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
 
 Helm をお使いでない場合は、Kubernetes を使用してネットワークパフォーマンスモニタリングを新規で有効化することができます。
 
@@ -349,13 +360,14 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /ja/agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
 <div class="alert alert-warning">Datadog Operator は `1.0.0` バージョンで一般公開されており、DatadogAgent Custom Resource のバージョン `v2alpha1` と照合しています。 </div>
 
-[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
+[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度な構成オプションで構成ミスのリスクを抑えます。
 
-Operator でネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
+Operator でネットワークパフォーマンスのモニタリングを有効化するには、次の構成を使用します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -372,7 +384,7 @@ spec:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
+Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次の構成を使用します。
 
 ```shell
 docker run --cgroupns host \
@@ -403,29 +415,28 @@ gcr.io/datadoghq/agent:latest
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<DATADOG_API_KEY>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -442,14 +453,14 @@ Amazon ECS での設定については、[Amazon ECS][1] ドキュメントペ�
 ### エンハンスドレゾリューション
 
 オプションで、クラウドインテグレーションのリソース収集を有効にして、ネットワークパフォーマンスモニタリングでクラウド管理型エンティティを検出できるようにします。
-- Azure ロードバランサーとアプリケーションゲートウェイを可視化するには、[Azure インテグレーション][1]をインストールします。
-- AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
+- Azure ロードバランサーとアプリケーションゲートウェイを可視化するには、[Azure インテグレーション][101]をインストールします。
+- AWS ロードバランサーを可視化するには、[AWS インテグレーション][102]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
 
-これらの機能に関する追加情報は、[クラウドサービスエンハンスドレゾリューション][3]を参照してください。
+これらの機能に関する追加情報は、[クラウドサービスエンハンスドレゾリューション][103]を参照してください。
 
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+[101]: /ja/integrations/azure
+[102]: /ja/integrations/amazon_web_services/#resource-collection
+[103]: /ja/network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 

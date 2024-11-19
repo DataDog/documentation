@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10062
     source_type_name: Hive
-  logs:
-    source: hive
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hive/README.md
 display_on_public_website: true
@@ -34,9 +33,8 @@ draft: false
 git_integration_title: hive
 integration_id: hive
 integration_title: Hive
-integration_version: 1.10.0
+integration_version: 2.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: hive
 public_title: Hive
@@ -52,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
   media: []
@@ -67,13 +66,13 @@ tile:
 
 このチェックは、[Hive][1] の Hive Metastore と HiveServer2 の 2 つを監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Hive チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### Hive のセットアップ
 
@@ -103,7 +102,7 @@ Hive チェックは [Datadog Agent][2] パッケージに含まれています�
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -118,7 +117,7 @@ Hive チェックは [Datadog Agent][2] パッケージに含まれています�
 
 2. [Agent を再起動します][5]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -162,7 +161,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Datadog-Hive インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][2]ガイドを参照してください。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -182,21 +181,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションで `Hive` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hive" >}}
 
 
-### ヘルプ
+### イベント
 
 Hive チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "hive" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

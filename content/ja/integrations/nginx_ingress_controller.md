@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10050
     source_type_name: nginx-ingress-controller
-  logs:
-    source: nginx-ingress-controller
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -36,6 +34,7 @@ categories:
 - ログの収集
 - ネットワーク
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -43,9 +42,8 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.6.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nginx_ingress_controller
 public_title: nginx-ingress-controller
@@ -65,6 +63,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
   media: []
@@ -81,18 +80,18 @@ tile:
 このチェックでは、Kubernetes の [NGINX Ingress Controller][1] を監視します。F5 NGINX Ingress Controller を監視するには、[NGINX Prometheus Exporter][3] が提供するリストから目的のメトリクスを監視するように [Datadog Prometheus インテグレーション][2]をセットアップしてください。
 
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 `nginx-ingress-controller` チェックは [Datadog Agent][4] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 Agent がホストで実行されている場合は、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nginx_ingress_controller.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx_ingress_controller.d/conf.yaml][1] を参照してください。次に、[Agent を再起動][2]します。
 
@@ -143,7 +142,7 @@ Agent がホストで実行されている場合は、Agent のコンフィギ�
     }
 ```
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -157,21 +156,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `nginx_ingress_controller` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "nginx_ingress_controller" >}}
 
 
-### ヘルプ
+### イベント
 
 NGINX Ingress Controller には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 NGINX Ingress Controller には、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

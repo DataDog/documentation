@@ -48,6 +48,7 @@ tile:
   - Category::Metrics
   - Category::Cloud
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon S3는 가용성과 확장성이 뛰어난 클라우드 스토리지 서비스입니다.
   media: []
@@ -71,14 +72,14 @@ tile:
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정합니다. 
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정하세요. 
 
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][3]의 `Metric Collection` 탭에서 `S3`가 활성화되어 있는지 확인하세요.
 2. [Datadog - Amazon S3 통합][4]을 설치합니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "amazon_s3" >}}
@@ -94,11 +95,11 @@ Amazon S3 통합에는 서비스 점검이 포함되지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][6]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원 팀][6]에 문의하세요.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
 [2]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://app.datadoghq.com/integrations/amazon-billing
+[4]: https://app.datadoghq.com/integrations/amazon-s3
 [5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_s3/metadata.csv
 [6]: https://docs.datadoghq.com/ko/help/

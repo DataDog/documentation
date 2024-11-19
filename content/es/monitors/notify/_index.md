@@ -12,6 +12,9 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentación
   text: Gestionar los monitores
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: Centro de aprendizaje
+  text: Realiza un curso para personalizar las notificaciones de monitor de alertas
 title: Notificaciones
 ---
 
@@ -22,9 +25,9 @@ Las notificaciones son un componente clave de los monitores que mantienen a tu e
 ## Configurar notificaciones y automatizaciones
 
 Utiliza la sección **Configure notifications and automations**( Configurar notificaciones y automatizaciones) para:
-- Envía las notificaciones a tu equipo a través de correo electrónico, Slack, PagerDuty y otras integraciones.
-- Activar un flujo de trabajo o crear un flujo de trabajo a partir de monitor.
-- Añade un estuche a tu monitor.
+- Envía notificaciones a tu equipo a través del correo electrónico, Slack, PagerDuty y otras integraciones.
+- Activa un flujo de trabajo o crea un flujo de trabajo a partir de un monitor.
+- Añade un caso a tu monitor.
 
 ### Título
 
@@ -32,11 +35,11 @@ Añade un título único a tu monitor (obligatorio). Para las alertas de múltip
 
 ### Mensaje
 
-El campo de mensaje admite [formato Markdown][3] y [variables][4] estándar. Utiliza [variables condicionales][5] para modular el texto de la notificación enviado a diferentes contactos con [@notifications](#notifications).
+El campo de mensaje admite el [formato Markdown][3] y [variables][4] estándar. Utiliza [variables condicionales][5] para modular el texto de la notificación enviado a diferentes contactos con [@notifications](#notifications).
 
 Un caso de uso común para el mensaje de monitor es incluir una forma de resolver el problema paso a paso, por ejemplo:
 
-```Texto
+```text
 Pasos para liberar espacio en disco:
 1. Eliminar los paquetes que no utilices
 2. Borrar la caché de APT
@@ -68,18 +71,12 @@ Si se establece un canal de notificación, puedes dirigir notificaciones a un eq
 {{% notifications-integrations %}}
 
 ### Flujos de trabajo
-Puedes activar una [automatización del flujo de trabajo][7] o crear un nuevo flujo de trabajo a partir de un monitor.
+Puedea activar una [automatización del flujo de trabajo][7] o crear un nuevo flujo de trabajo a partir de un monitor. 
 
-**Para añadir un flujo de trabajo existente a un monitor**:
-1. En la sección de mensajes, añade el nombre completo de la mención del flujo de trabajo:
-   - El nombre de la mención debe empezar por `@workflow-`. Por ejemplo, `@workflow-my-workflow`
-   - Para pasar variables de activación al flujo de trabajo, utiliza una lista separada por comas con la sintaxis `@workflow-name(key=value, key=value)`. Puedes utilizar las variables de plantilla del mensaje como variables desencadenantes. Por ejemplo: `@workflow-my-workflow(hostname=host.name)`
+Antes de añadir un flujo de trabajo a un monitor, [añade un disparador de monitor al flujo de trabajo][17].
 
-1. También puedes hacer clic en **Add Workflow** (Añadir flujo de trabajo) y buscarlo en el menú desplegable.
+Después de añadir el disparador del monitor, [añade un flujo de trabajo existente a tu monitor][8] o crea un nuevo flujo de trabajo. Para crear un nuevo flujo de trabajo desde la página de monitores:
 
-Para obtener más información sobre cómo activar un flujo de trabajo, consulta [Activar un flujo de trabajo][8].
-
-**Para crear un flujo de trabajo**:
 1. Haz clic en **Add Workflow** (Añadir flujo de trabajo).
 1. Haz clic en el icono **+** y selecciona un Blueprint (Proyecto), o selecciona **Start From Scratch** (Empezar desde cero).
    {{< img src="/monitors/notifications/create-workflow.png" alt="Haz clic en el botón + para añadir un nuevo flujo de trabajo" style="width:90%;">}}
@@ -106,9 +103,9 @@ Por ejemplo, puedes establecer prioridades diferentes para notificaciones `alert
 
 ### Alternar contenido adicional
 
-Las notificaciones del monitor incluyen contenidos como la consulta de monitor, las @-mentions utilizadas, las snapshots de métrica (para monitores de métrica), y enlaces a páginas relevantes en Datadog. Tienes la opción de elegir qué contenido deseas incluir o excluir de notificaciones para monitores individuales.
+Las notificaciones del monitor incluyen contenidos como la consulta de monitor, las @-mentions utilizadas, las snapshots de métrica (para monitores de métrica) y enlaces a páginas relevantes en Datadog. Tienes la opción de elegir qué contenido deseas incluir o excluir de notificaciones para monitores individuales.
 
-Las métricas de distribución con agregadores de percentil (como `p50`, `p75`, `p95`, o `p99`) no generan un gráfico de snapshot en notificaciones.
+<div class="alert alert-warning">Las métricas de distribución con agregadores de percentil (como `p50`, `p75`, `p95`, o `p99`) no generan un gráfico de snapshot en notificaciones. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Establecer una configuración previa de un monitor" style="width:70%;" >}}
 
@@ -135,8 +132,8 @@ Activa la renotificación (opcional) para recordar a tu equipo que un problema n
 
 Configura el intervalo de renotificación, los estados del monitor desde los que el monitor vuelve a notificar (dentro de `alert`, `no data` y `warn`) y, opcionalmente, establece un límite al número de mensajes de renovación enviados.
 
-Por ejemplo, configura el monitor en `stop renotifying after 1 occurrence` para recibir un único mensaje de escalada después de la alerta principal.
-**Nota:** [Las variables de atributo y etiqueta][12] en la renotificación se rellenan con los datos disponibles en el monitor durante el periodo de la renotificación.
+Por ejemplo, configurar el monitor en `stop renotifying after 1 occurrence` para recibir un único mensaje de escalada después de la alerta principal.
+**Nota:** [Las variables de atributo y etiqueta][2] en la renotificación se rellenan con los datos disponibles en el monitor durante el periodo de la renotificación.
 
 Si se activa la renotificación, se te da la opción de incluir un mensaje de escalada que se envía si el monitor permanece en uno de los estados elegidos durante el periodo especificado.
 
@@ -152,48 +149,30 @@ Si utilizas el bloque `{{#is_renotify}}`, el mensaje original de notificación t
 1. Incluye solo detalles adicionales en el bloque `{{#is_renotify}}` y no repitas los detalles del mensaje original.
 2. Envía el mensaje de escalada a un subconjunto de grupos.
 
-Descubre cómo configurar tus monitores para esos casos de uso en la [sección de ejemplos][13].
+Descubre cómo configurar monitores para esos casos de uso en la [sección de ejemplos][12].
 
 
-## Definición de permisos y notificaciones de auditoría
+## Notificaciones de auditoría
 
-### Modificaciones
+Se crea un [evento][13] de auditoría cada vez que se crea, modifica, silencia o elimina un monitor. En la sección **Define permissions and audit notifications** (Definir permisos y notificaciones de auditoría), selecciona **Notify** (Notificar) para alertar a los miembros del equipo, a los servicios del chat y al creador del monitor de estos eventos.
 
-Se crea un [evento][14] cada vez que se crea, modifica, silencia o elimina un monitor. Configura la opción `Notify` para notificar a los miembros del equipo, a los servicios de chat y al creador del monitor de estos eventos.
+## Notificaciones de test
 
-### Permisos
+Se admiten las notificaciones de test para los [tipos de monitores][14]: host, métrica, anomalía, outlier, predicción, logs, rum, APM, integración (solo check), proceso (solo check), red (solo check), check personalizado, evento y composite.
 
-Todos los usuarios pueden leer todos los monitores, independientemente del rol al que estén asociados.
+### Ejecutar el test
 
-Por defecto, solo los usuarios asociados a roles con el [permiso de escritura de monitores][15] pueden editar monitores. [El rol de administrador de Datadog y el rol estándar de Datadog][16] tienen el permiso de escritura de monitores por defecto. Si tu organización utiliza [Roles personalizados][17], otros roles personalizados pueden tener el permiso de escritura de monitores.
+1. Después de definir tu monitor, prueba las notificaciones con el botón **Test Notifications** (Notificaciones de test) situado en la parte inferior derecha de la página del monitor.
 
-Puedes restringir aún más tu monitor especificando una lista de [roles][18] autorizados para editarlo. El creador del monitor siempre puede editar el monitor.
+2. En la ventana emergente de notificaciones de test, elige el monitor de transición que deseas probar y el grupo (disponible solo si la consulta tiene [agrupación][15]). Solo se pueden probar los estados disponibles en la configuración del monitor para los umbrales especificados en las condiciones de alerta. Los [umbrales de recuperación][16] son una excepción, ya que Datadog envía una notificación de recuperación una vez que el monitor ya no está en alerta, o no tiene condiciones de alerta.
 
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="Monitor restringido por RBAC" style="width:90%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="Prueba las notificaciones para este monitor" style="width:70%;" >}}
 
-La edición incluye cualquier actualización de la configuración de tu monitor, la eliminación del monitor y el silenciamiento del monitor durante cualquier periodo.
-
-**Nota**: Las limitaciones se aplican tanto en la interfaz de usuario como en la API.
-
-Para obtener más información sobre la configuración de RBAC para monitores y la migración de monitores de la configuración bloqueada al uso de restricciones de rol, consulta [Cómo configurar RBAC para monitores][19].
-
-## Notificaciones de prueba
-
-Las notificaciones de prueba son compatibles con los [tipos de monitores][20]: host, métrica, anomalía, outlier, predicción, logs, rum, APM, integración (check solamente), proceso (check solamente), red (check solamente), check personalizado, evento y compuesto.
-
-### Ejecutar la prueba
-
-1. Después de definir tu monitor, prueba las notificaciones con el botón **Test Notifications** (Notificaciones de prueba) situado en la parte inferior derecha de la página del monitor.
-
-2. En la ventana emergente de las notificaciones de prueba, elige el caso de monitor que deseas probar. Solo puedes probar los estados disponibles en la configuración del monitor para los umbrales especificados en las condiciones de alerta. Los [umbrales de recuperación][21] son una excepción, ya que Datadog envía una notificación de recuperación una vez que el monitor ya no está en alerta, o no tiene condiciones de alerta.
-
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Probar las notificaciones de este monitor" style="width:70%;" >}}
-
-3. Haz clic en **Run Test** (Ejecutar prueba) para enviar notificaciones a las personas y servicios que figuran en el monitor.
+3. Haz clic en **Run Test** (Ejecutar test) para enviar notificaciones a las personas y servicios que figuran en el monitor.
 
 ### Eventos
 
-Las notificaciones de prueba producen eventos que se pueden buscar en el explorador de eventos. Estas notificaciones indican quién inició la prueba en el cuerpo del mensaje con `[TEST]` en el título de la notificación.
+Las notificaciones de test producen eventos que se pueden buscar en el Event Explorer. Estas notificaciones indican quién inició el test en el cuerpo del mensaje con `[TEST]` en el título de la notificación.
 
 Las variables de etiqueta solo se rellenan en el texto de eventos secundarios de Datadog. El evento principal solo muestra un resumen de agregación.
 
@@ -206,28 +185,24 @@ Las variables de mensaje se rellenan automáticamente con un grupo seleccionado 
 {{host.name}} <-- will populate
 {{/is_alert}}
 ```
-## Lectura adicional
+## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/configuration
-[2]: /es/monitors/notify/variables/#tag-variables
+[2]: /es/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /es/monitors/notify/variables/
 [5]: /es/monitors/notify/variables/#conditional-variables
 [6]: /es/account_management/teams/#send-notifications-to-a-specific-communication-channel
 [7]: /es/service_management/workflows/
-[8]: /es/service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[8]: /es/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [9]: /es/service_management/workflows/build/
 [10]: /es/monitors/settings/#tag-policies
 [11]: /es/account_management/teams/
-[12]: /es/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[13]: /es/monitors/notify/variables/?tab=is_renotify#examples
-[14]: /es/events/
-[15]: /es/account_management/rbac/permissions/#monitors
-[16]: /es/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[17]: /es/account_management/rbac/?tab=datadogapplication#custom-roles
-[18]: /es/account_management/rbac/?tab=datadogapplication
-[19]: /es/monitors/guide/how-to-set-up-rbac-for-monitors/
-[20]: /es/monitors/types
-[21]: /es/monitors/guide/recovery-thresholds/
+[12]: /es/monitors/notify/variables/?tab=is_renotify#examples
+[13]: /es/events/
+[14]: /es/monitors/types
+[15]: /es/monitors/configuration/
+[16]: /es/monitors/guide/recovery-thresholds/
+[17]: /es/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow

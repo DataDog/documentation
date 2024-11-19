@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10060
     source_type_name: JBoss/WildFly
-  logs:
-    source: jboss_wildfly
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_on_public_website: true
@@ -34,9 +33,8 @@ draft: false
 git_integration_title: jboss_wildfly
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
-integration_version: 2.2.0
+integration_version: 3.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: jboss_wildfly
 public_title: JBoss/WildFly
@@ -52,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
   media: []
@@ -67,20 +66,20 @@ tile:
 
 このチェックは [JBoss][1] および [WildFly][2] アプリケーションを監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれています。JBoss/WildFly ホストに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][4]に表示されます。下記の構成を編集することで、関心のあるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][5]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][6]までお問い合わせください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -99,7 +98,7 @@ JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれて�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -133,7 +132,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -152,21 +151,25 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションで `jboss_wildfly` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "jboss_wildfly" >}}
 
 
-### ヘルプ
+### イベント
 
 JBoss/WildFly インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "jboss_wildfly" >}}
 
 
-## ヘルプ
+### JMXFetch によるメトリクス収集
+
+[JMXFetch][7] を介して Java アプリケーションメトリクスを収集するように Datadog Agent を構成できます。JBoss/Wildfly Datadog インテグレーション用に構成されたデフォルトのメトリクスを収集するには、システムプロパティ `Ddd.jmxfetch.jboss_wildfly.enabled=true` を設定します。
+
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
@@ -178,3 +181,4 @@ JBoss/WildFly インテグレーションには、イベントは含まれませ
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/integrations/java/
 [6]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/integrations/java

@@ -1,4 +1,7 @@
 ---
+cascade:
+  algolia:
+    rank: 70
 description: Datadog ネットワークモニタリング製品を見る
 disable_sidebar: true
 further_reading:
@@ -22,6 +25,11 @@ further_reading:
   text: Datadog で Cilium が管理するインフラストラクチャーを監視する
 title: ネットワークモニタリング
 ---
+
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=NPM">}}
+  Datadog Network Performance Monitoring が、オンプレミス、クラウド、ハイブリッド環境を構成するすべてのネットワークコンポーネントを最小限の負荷で完全に可視化する方法をご覧ください。
+{{< /learning-center-callout >}}
 
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="network_monitoring/performance" >}}<u>ネットワークパフォーマンスモニタリング</u>: インフラストラクチャー上のポイントツーポイントコミュニケーションのメトリクスを調査。{{< /nextlink >}}

@@ -1,6 +1,6 @@
 ---
-title: iOS and tvOS Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your iOS and tvOS application with OpenTelemetry API to send traces to Datadog.'
+title: iOS and tvOS Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your iOS and tvOS application with the OpenTelemetry API to send traces to Datadog.'
 aliases:
 - /tracing/trace_collection/otel_instrumentation/ios/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios
@@ -22,19 +22,9 @@ further_reading:
 
 ## Tracing iOS applications with OpenTelemetry
 
-1. Declare the library as a dependency depending on your package manager:
+1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods](https://cocoapods.org/) to install `dd-sdk-ios`:
-
-```
-pod 'DatadogCore'
-pod 'DatadogTrace'
-```
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -49,9 +39,21 @@ DatadogTrace
 ```
 
 {{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
+
+```
+pod 'DatadogCore'
+pod 'DatadogTrace'
+```
+
+[1]: https://cocoapods.org/
+
+{{% /tab %}}
 {{% tab "Carthage" %}}
 
-You can use [Carthage](https://github.com/Carthage/Carthage) to install `dd-sdk-ios`:
+You can use [Carthage][1] to install `dd-sdk-ios`:
 
 ```
 github "DataDog/dd-sdk-ios"
@@ -64,6 +66,8 @@ DatadogInternal.xcframework
 DatadogCore.xcframework
 DatadogTrace.xcframework
 ```
+
+[1]: https://github.com/Carthage/Carthage
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -28,6 +28,8 @@ author:
 categories:
 - languages
 - log collection
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md
 display_on_public_website: true
@@ -35,9 +37,8 @@ draft: false
 git_integration_title: aspdotnet
 integration_id: aspdotnet
 integration_title: ASP.NET
-integration_version: 2.1.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: aspdotnet
 public_title: ASP.NET
@@ -49,7 +50,9 @@ tile:
   classifier_tags:
   - Category::言語
   - Category::ログの収集
+  - Category::Windows
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
   media: []
@@ -68,13 +71,13 @@ ASP.NET からメトリクスをリアルタイムに取得すると、以下の
 - ASP.NET の状態を視覚化および監視できます。
 - ASP.NET のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 ASP.NET チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. ASP.NET のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `aspdotnet.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル aspdotnet.d/conf.yaml][3] を参照してください。
 
@@ -82,7 +85,7 @@ ASP.NET チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 **注**: このチェックのバージョン 1.9.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][5]を参照してください。
 
-#### 収集データ
+#### ログ収集
 
 ASP.NET は IIS ロギングを使用します。ASP.NET リクエストおよび失敗に関するログを表示するには、[IIS のセットアップ手順][6]に従います。
 
@@ -92,21 +95,21 @@ ASP.NET アプリケーションに関する未処理の 500 レベルの例外�
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `aspdotnet` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "aspdotnet" >}}
 
 
-### ヘルプ
+### イベント
 
 ASP.NET チェックにはイベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 ASP.NET チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

@@ -93,6 +93,7 @@ The following table presents the list of collected resources and the minimal Age
 | Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
 | Jobs | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
 | Namespaces | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Network Policies | 7.33.0 | 7.56.0 | 3.57.2 | 1.14.0 |
 | Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
 | PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
 | PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
@@ -189,11 +190,63 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect custom resources and CustomResourceDefinitions
+
+The [Orchestrator Explorer][3] collects CustomResourceDefinitions by default. These definitions appear in Datadog without any user configuration required.
+
+To collect custom resources, you need to configure both the Datadog Agent and set up indexing.
+
+1. Configure the Datadog Agent:
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   Add the following configuration to `datadog-values.yaml`:
+
+   ```
+   orchestratorExplorer:
+       customResources:
+           - <CUSTOM_RESOURCE_NAME>
+   ```
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+   The Datadog Operator needs permission to allow the Agent to collect custom resources. Install the Operator with an option that grants this permission:
+
+   ```
+   helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+   ```
+
+   Then, add the following configuration to your `DatadogAgent` manifest, `datadogagent.yaml`:
+
+   ```
+   features:
+     orchestratorExplorer:
+       customResources:
+         - <CUSTOM_RESOURCE_NAME>
+   ```
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+1. In Datadog, open [Orchestrator Explorer][3].
+1. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
+1. Locate the custom resource definition that corresponds to the resource you want to visualize in the explorer. Click on the version under the **Versions** column.
+1. Click to select the fields you would like to index from the Custom Resource (maximum of 50 fields per resource), then click **Enable Indexing** to save
+
+Once fields are indexed, they will be available to add as columns in the explorer or as part of Saved Views. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
-
+[3]: https://app.datadoghq.com/orchestration/explorer/pod
+[4]: https://app.datadoghq.com/orchestration/explorer/crd
 

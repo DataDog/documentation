@@ -25,6 +25,7 @@ jobs:
               'datadog-api-client-python',
               'datadog-api-client-ruby',
               'datadog-api-client-typescript',
+              'datadog-api-client-rust',
               'integrations-core'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
@@ -37,6 +38,8 @@ jobs:
             console.log(versions)
             return JSON.stringify(versions)
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Write version
         run: |-
           echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json

@@ -7,6 +7,9 @@ on:
       - 'local/bin/py/build/configurations/pull_config_preview.yaml'
       - 'local/bin/py/build/configurations/pull_config.yaml'
 
+permissions:
+  contents: read
+
 # Stop the current running job if a new push is made to the PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
@@ -14,11 +17,13 @@ concurrency:
 
 jobs:
   check-cache-values:
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline' 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 2
+        persist-credentials: false
 
     - name: Find changed files
       id: changed_files

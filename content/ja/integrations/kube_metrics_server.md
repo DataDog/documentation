@@ -27,6 +27,7 @@ categories:
 - コンテナ
 - kubernetes
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true
@@ -34,9 +35,8 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: kube_metrics_server
 public_title: Kubernetes Metrics Server
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubernetes Metrics Server の監視
   media: []
@@ -69,18 +70,18 @@ tile:
 
 このチェックは、Kubernetes Control Plane によって使用されるコンポーネントである [Kube_metrics_server][1] v0.3.0+ を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -107,7 +108,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 収集データ
+#### SSL
 
 エンドポイントが保護されている場合、追加の構成が必要です。
 
@@ -121,21 +122,21 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションで `kube_metrics_server` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "kube_metrics_server" >}}
 
 
-### ヘルプ
+### イベント
 
 kube_metrics_server には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "kube_metrics_server" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

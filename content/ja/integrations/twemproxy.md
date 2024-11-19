@@ -5,6 +5,7 @@ assets:
   dashboards:
     Twemproxy - Overview: assets/dashboards/twemproxy_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,17 +16,16 @@ assets:
       prefix: twemproxy.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10070
     source_type_name: Twemproxy
-  logs:
-    source: twemproxy
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
 display_on_public_website: true
@@ -33,25 +33,24 @@ draft: false
 git_integration_title: twemproxy
 integration_id: twemproxy
 integration_title: Twemproxy
-integration_version: 1.13.0
+integration_version: 3.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: twemproxy
 public_title: Twemproxy
 short_description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
   media: []
@@ -60,6 +59,7 @@ tile:
   title: Twemproxy
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -72,16 +72,16 @@ tile:
 
 Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含まれています。Twemproxy サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `twemproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twemproxy.d/conf.yaml][2] を参照してください。
+1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `twemproxy.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル twemproxy.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -93,7 +93,7 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 
 2. [Agent を再起動][3]すると、Datadog へ Twemproxy メトリクスの送信が開始します。
 
-##### ログの収集
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -101,7 +101,7 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
    logs_enabled: true
    ```
 
-2. Apache のログ収集を開始するには、次のコンフィギュレーションブロックを `twemproxy.d/conf.yaml` ファイルに追加します。
+2. Apache ログの収集を開始するには、次の構成ブロックを `twemproxy.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -111,7 +111,7 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
        service: "<SERVICE_NAME>"
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twemproxy.d/conf.yaml][2] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル twemproxy.d/conf.yaml][2] を参照してください。
 
 3. [Agent を再起動します][3]。
 
@@ -119,7 +119,7 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 [2]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -127,11 +127,11 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<インテグレーション名>` | `twemproxy`                            |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22222"}` |
+| `<INTEGRATION_NAME>` | `twemproxy`                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"22222"}` |
 
-##### ログの収集
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
@@ -158,7 +158,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Twemproxy チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "twemproxy" >}}
 
 
@@ -168,6 +168,6 @@ Twemproxy チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

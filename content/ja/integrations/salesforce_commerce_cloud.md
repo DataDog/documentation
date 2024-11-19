@@ -18,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,20 +27,30 @@ integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
 public_title: Salesforce Commerce Cloud
 short_description: Salesforce Commerce Cloud のログを Datadog にインポートする
-supported_os: []
+supported_os:
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
+  - Offering::Integration
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Salesforce Commerce Cloud のログを Datadog にインポートする
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/salesforce_commerce_cloud/
   support: README.md#Support
   title: Salesforce Commerce Cloud
 ---
@@ -49,13 +60,13 @@ tile:
 
 Salesforce Commerce Cloud は、マルチテナント型のクラウドベースのコマースプラットフォームです。Salesforce Commerce Cloud と Datadog をインテグレーションし、[Datadog Logs][1] を使ってログを表示・パースします。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Datadog がログデータをインポートするためのアクセスを Salesforce Commerce Cloud に許可するよう構成するには、API クライアントを作成する必要があります。そして、その API クライアントを Datadog に登録します。
 
@@ -94,21 +105,21 @@ Datadog がログデータをインポートするためのアクセスを Sales
 
 SFCC Log Center は、Datadog とは異なるログデータを表現します。例えば、大きなスタックトレースを持ついくつかのエラーログは、SFCC Log Center では 2 つのログイベントに分割され、Datadog ではスタックトレースの詳細が省略されます。この結果、2 つのシステム間でログイベントの総カウントに不一致が生じます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Salesforce Commerce Cloud インテグレーションには、メトリクスは含まれません。
 
-### ワークフローの自動化
+### ログ
 
 Salesforce Commerce Cloud インテグレーションは、Commerce Cloud インスタンスへの webdav 接続を介してログを収集します。
 
-### ヘルプ
+### サービスチェック
 
 Salesforce Commerce Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

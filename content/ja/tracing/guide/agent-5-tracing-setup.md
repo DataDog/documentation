@@ -39,14 +39,14 @@ Docker コンテナでアプリケーションをトレースするには、[doc
     {{< nextlink href="tracing/setup/python" tag="Python" >}}Python 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/go" tag="Go" >}}Go 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js 言語のインスツルメンテーション。{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Node.js 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET 言語のインスツルメンテーション。{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP 言語のインスツルメンテーション。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 公式ライブラリでまだサポートされていない言語で記述されたアプリケーションをインスツルメントする場合は、[トレーシング API][8] を参照してください。
 
-## コンフィグレーション
+## 構成
 
 Datadog Agent では、インフラストラクチャーの監視と APM コンフィギュレーションのオプションの双方にコンフィギュレーションファイルを使用します。
 
@@ -73,7 +73,7 @@ Datadog Agent の詳細については、[専用ドキュメントページ][9]�
 [2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /ja/tracing/glossary/#trace-metrics
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /ja/tracing/docker/
 [8]: /ja/tracing/guide/send_traces_to_agent_by_api/

@@ -308,7 +308,7 @@ When enabled, a watchdog termination is reported and attached to the previous RU
 
 - The application was not upgraded in the meantime,
 
-- And it did not call neither `exit`, nor `abort`,
+- And it did not call either `exit`, or `abort`,
 
 - And it did not crash, either because of an exception, or because of a fatal [app hang][13],
 
@@ -348,6 +348,10 @@ To disable watchdog terminations reporting, update the initialization snippet an
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
+
+### List uploaded .dSYMs
+
+See the [RUM Debug Symbols][20] page to view all uploaded symbols.
 
 ### Symbolicate crash reports
 
@@ -460,7 +464,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError("Crash the app")
+     fatalError("Crash the app")
    }
    ```
 
@@ -491,3 +495,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [17]: /real_user_monitoring/explorer/search/#facets
 [18]: /dashboards/widgets/timeseries
 [19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
+[20]: https://app.datadoghq.com/source-code/setup/rum

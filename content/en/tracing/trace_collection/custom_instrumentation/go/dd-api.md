@@ -1,5 +1,5 @@
 ---
-title: Go Custom Instrumentation using Datadog API
+title: Go Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog Go APM tracer.'
+description: 'Instrument your code with the Datadog API tracer.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -108,6 +108,9 @@ To set an error on one of your spans, use `tracer.WithError` as below:
 err := someOperation()
 span.Finish(tracer.WithError(err))
 ```
+
+**Note**: Closing a span that was not started in your code can lead to missing data.
+Please follow your specific `dd-trace-go` [integration documentation][10] to do that.
 
 ## Adding spans
 
@@ -223,4 +226,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
-[11]: /tracing/trace_collection/trace_context_propagation/go/
+[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[11]: /tracing/trace_collection/trace_context_propagation/

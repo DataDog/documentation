@@ -68,6 +68,7 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (System User-Agent).  |
 | `device.model`   | string | The device model as reported by the device (System User-Agent).    |
 | `device.name` | string | The device name as reported by the device (System User-Agent).  |
+| `device.architecture` | string | The CPU architecture of the device that is reporting the error. |
 
 ### Connectivity
 
@@ -143,6 +144,7 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.last_view.name` | string | Name of the last view of the session. |
 | `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8]. |
 | `session.useragent` | string | System user agent info to interpret device info.  |
+| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 
 ### View metrics
 
@@ -204,7 +206,9 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.message` | string | A concise, human-readable one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 | `error.issue_id`   | string | The stack trace or complementary information about the error.     |
-
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
+| `error.file` | string | File where the error happened for the Error Tracking issue. |
+| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
 
 ### Network errors 
 

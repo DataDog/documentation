@@ -20,6 +20,7 @@ Naming convention is an art and possibly one of the most difficult decisions to 
 * Maintain consistency across all teams, apps, and services.
 * Avoid reserved keywords that might cause clashes with the other tags or metrics.
 * In the case of metrics, prefix them with a namespace depicting the application or service generating the data.
+* Avoid the use of personal and sensitive data of any kind. 
 
 ## Rules and best practices for naming metrics
 
@@ -27,7 +28,6 @@ Naming convention is an art and possibly one of the most difficult decisions to 
 * Can only contain ASCII alphanumerics, underscores, and periods. Other characters are converted to underscores.
 * Should not exceed 200 characters (though less than 100 is generally preferred from a UI perspective)
 * Unicode is not supported.
-* It is recommended to avoid spaces.
 
 Metrics reported by the Agent are in a pseudo-hierarchical dotted format, for example: `http.nginx.response_time`. This is described as pseudo-hierarchical because a hierarchy is not actually enforced, but the structure is used to infer certain relationships, for example: _"I see hostA and hostB are reporting `http.nginx.*`, those must be web frontends"_).
 

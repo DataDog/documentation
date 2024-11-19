@@ -1,5 +1,5 @@
 ---
-title: Node.js Custom Instrumentation using Datadog API
+title: Node.js Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/nodejs
     - /tracing/manual_instrumentation/nodejs
@@ -12,7 +12,7 @@ code_lang: dd-api
 code_lang_weight: 1
 type: multi-code-lang
 further_reading:
-    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+    - link: "/tracing/trace_collection/trace_context_propagation/"
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
@@ -112,7 +112,7 @@ To learn more, read [API details for individual plugins][1].
 
 {{% tab "Errors" %}}
 
-Errors can be added to a span with the special `error` tag that supports error objects. This splits the error into three tags: `error.type`, `error.msg`, and `error.stack`.
+Errors can be added to a span with the special `error` tag that supports error objects. This splits the error into three tags: `error.type`, `error.message`, and `error.stack`.
 
 ```javascript
 try {

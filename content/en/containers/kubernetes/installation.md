@@ -28,11 +28,11 @@ For dedicated documentation and examples for monitoring the Kubernetes control p
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version  | Reason                                |
-|--------------------|----------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | Kubelet metrics deprecation           |
-| 1.21.0+            | 7.36.0+        |  Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+        |  Support dynamic service account token |
+| Kubernetes version | Agent version | Reason                                |
+| ------------------ | ------------- | ------------------------------------- |
+| 1.16.0+            | 7.19.0+       | Kubelet metrics deprecation           |
+| 1.21.0+            | 7.36.0+       | Kubernetes resource deprecation       |
+| 1.22.0+            | 7.37.0+       | Support dynamic service account token |
 
 See also: [Minimum Kubernetes and Cluster Agent versions][8].
 
@@ -203,11 +203,11 @@ helm install datadog-agent -f datadog-values.yaml datadog/datadog
 
 ### Container registries
 
-Datadog publishes container images to Google Artifact Registry, Amazon ECR, and Docker Hub:
+Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
 
-| gcr.io | public.ecr.aws | docker hub |
-| ------ | -------------- | ------------ |
-| gcr.io/datadoghq | public.ecr.aws/datadog | docker.io/datadog |
+| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
+| ------------------------ | ---------------------- | -------------------- | ----------------- |
+| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, use another registry.
 

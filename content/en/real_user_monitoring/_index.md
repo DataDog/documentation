@@ -53,7 +53,7 @@ cascade:
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
   Discover how to create custom user actions tailored to specific business needs, enabling precise tracking of user behavior.
 {{< /learning-center-callout >}}
 
@@ -122,6 +122,8 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 ## Explore Datadog RUM
 
 Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
+
+**Tip**: To open RUM from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `real user monitoring`.
 
 ### Out-of-the-box dashboards
 

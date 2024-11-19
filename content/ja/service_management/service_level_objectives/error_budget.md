@@ -13,11 +13,15 @@ title: エラー予算アラート
 
 SLO エラーバジェットアラートは閾値に基づき、SLO のエラーバジェットの一定の割合が消費されなかったときに通知します。たとえば、対象とする 7 日間でエラーバジェットの 75% が消費されたらアラート、50% が消費されたら警告（オプション）のように設定します。
 
-**注:** エラーバジェットアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
+**注:** エラーバジェットのアラートは、以下の SLO タイプで利用可能です。
+
+- [メトリクスベースの SLO][1]、
+- [メトリクスモニタータイプ (メトリクス、インテグレーション、 APM メトリクス、異常、予測、外れ値モニター) のみで構成されるモニターベースの SLO][2]、および
+- [タイムスライス SLO][8]
 
 *エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][3]を参照してください。
 
-{{< img src="service_management/service_level_objectives/error_budget_alert_config.png" alt="エラーバジェットアラートのコンフィギュレーション">}}
+{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="エラーバジェットアラート構成">}}
 
 ## モニターの作成
 
@@ -26,10 +30,10 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 3.  **Step 1: Setting alerting conditions** の **Error Budget**  タブを選択
 4. 過去の `target` 日数において、エラーバジェットの消費割合が `threshold` を超えるとアラートをトリガーするタイミングを設定します。
 。
-4. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][5]を追加します。
-5. SLO コンフィギュレーションページで **Save and Set Alert** ボタンをクリックします。
+4. **Configure notifications and automations** セクションに [通知情報][5]を追加します。
+5. SLO 構成ページで **Create &amp; Set Alert** ボタンをクリックします。
 
-{{< img src="service_management/service_level_objectives/save_set_alert.png" alt="SLO を保存してエラーバジェットアラートをセットアップ">}}
+{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="SLO を作成し、エラーバジェットアラートをセットアップする" style="width:80%;">}}
 
 ### API および Terraform
 
@@ -74,3 +78,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [5]: /ja/monitors/notify/
 [6]: /ja/api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[8]: /ja/service_management/service_level_objectives/time_slice

@@ -14,10 +14,10 @@ further_reading:
     - link: "/tests/explorer"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/tests/early_flake_detection"
+    - link: "/tests/flaky_test_management/early_flake_detection"
       tag: "Documentation"
       text: "Detect test flakiness with Early Flake Detection"
-    - link: "/tests/auto_test_retries"
+    - link: "/tests/flaky_test_management/auto_test_retries"
       tag: "Documentation"
       text: "Retry failing test cases with Auto Test Retries"
     - link: "/tests/correlate_logs_and_tests"
@@ -25,7 +25,7 @@ further_reading:
       text: "Correlate logs and test traces"
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -67,21 +67,11 @@ You may follow interactive setup steps on the [Datadog site][2] or the instructi
 Configuring the Datadog Java Tracer varies depending on your CI provider.
 
 {{< tabs >}}
-{{% tab "Github Actions" %}}
-You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
-If you do so, you can skip the **Downloading tracer library** and **Running your tests** steps below.
-
-[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
-{{% tab "Jenkins" %}}
-You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
-If you do so, you can skip the "Downloading tracer library" and "Running your tests" steps below.
-
-[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
-{{% /tab %}}
-
-{{% tab "Other cloud CI provider" %}}
+{{% tab "Other Cloud CI Provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
@@ -165,7 +155,7 @@ Specifying `org.gradle.jvmargs` in the command line overrides the value specifie
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables Test Visibility.
+: Enables Test Optimization.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -369,7 +359,7 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ### Deterministic test parameters representation
 
-Test Visibility works best when the [test parameters are deterministic][8] and stay the same between test runs.
+Test Optimization works best when the [test parameters are deterministic][8] and stay the same between test runs.
 If a test case has a parameter that varies between test executions (such as a current date, a random number, or an instance of a class whose `toString()` method is not overridden), some of the product features may not work as expected.
 For example, the history of executions may not be available, or the test case may not be classified as flaky even if it exhibits flakiness.
 

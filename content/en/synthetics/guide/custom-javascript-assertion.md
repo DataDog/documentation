@@ -20,7 +20,7 @@ This guide describes how you can test a user interface (UI) using custom JavaScr
 
 To create an assertion using custom JavaScript:
 
-1. Click **Assertion** and select **Test your UI with custom JavaScript**.
+1. Click **Assertion** and select **Test custom JavaScript assertion**.
 2. Write the body of your assertion.
 3. Optionally, select a target element in the UI. 
 4. Click **Apply**.
@@ -62,6 +62,13 @@ For example, to set the number of milliseconds elapsed since January 1, 1970, 00
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem("mytime", Date.now());
+return true
+{{< /code-block >}}
+
+`localStorage` can be accessed in other JavaScript assertions if you need to compare specific values:
+
+{{< code-block lang="javascript" >}}
+localStorage.getItem("mytime");
 return true
 {{< /code-block >}}
 

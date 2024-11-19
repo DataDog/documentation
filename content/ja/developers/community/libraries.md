@@ -85,7 +85,7 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][34]を参照してください。
 
-* [Oz][36] による Nodejs 版 [Heroku Datadog ログドレイン][35]
+* [Oz][36] による Node.js 版 [Heroku Datadog ログドレイン][35]
 * [Apiary][38] による Go 版 [Heroku Datadog ログドレイン][37]
 
 Heroku で PHP トレーサーやプロファイラーを使用するには、以下のビルドパックを使用します。
@@ -129,7 +129,7 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 ### Pulumi
 Pulumi 用の Datadog [リソースプロバイダー][67]を使用すると、Datadog リソースを構成することができます。
 
-### Windows
+### SaltStack
 
 * [Datadog SaltStack Formula][56]
 * [Luca Cipriani][58] が作成した [Datadog SaltStack][57]。
@@ -193,7 +193,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd

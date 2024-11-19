@@ -9,7 +9,10 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/linux/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 
 ## Prerequisites
 
@@ -17,7 +20,7 @@ Use the following instructions to enable Misconfigurations, Threat Detection, Ho
 
 ## Installation
 
-For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
+For a package-based deployment, [install the Datadog package][6] with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/datadog.yaml" disable_copy="false" collapsible="true" >}}
 remote_configuration:
@@ -47,8 +50,6 @@ sbom:
   # Set to true to enable Host Vulnerability Management  
   host:
     enabled: true
-container_image:
-  enabled: true
 {{< /code-block >}}
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
@@ -100,3 +101,4 @@ sudo chgrp dd-agent /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/secu
 [3]: /security/cloud_security_management/vulnerabilities
 [4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [5]: /getting_started/agent/#installation
+[6]: /agent/?tab=Linux

@@ -394,7 +394,7 @@ http {
     fieldRef:
       fieldPath: status.hostIP
 - name: OTEL_EXPORTER_OTLP_ENDPOINT
-  value: "http://$(HOST_IP):4318"
+  value: "http://$(HOST_IP):4317"
 ```
 
 Next, enable OpenTelemetry instrumentation for the controller. Create or edit a ConfigMap with the following details:
@@ -526,12 +526,6 @@ environment variable. If `DD_TRACE_SAMPLING_RULES` is not specified, then 100%
 of Istio traces are sent to Datadog.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
-
-To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
-
-```bash
-DD_TRACE_SAMPLING_RULES='[]'
-```
 
 Explicitly specifying an empty array of rules is different from not specifying rules.
 

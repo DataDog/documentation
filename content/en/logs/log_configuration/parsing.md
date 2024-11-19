@@ -5,6 +5,9 @@ aliases:
     - /logs/parsing/
     - /logs/processing/parsing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Learn how to build and modify log pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
@@ -17,7 +20,13 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
+
+{{< learning-center-callout header="Try Grok parsing in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  Learn to build and modify log pipelines, manage them with the Pipeline Scanner, and standardize attribute names across processed logs for consistency.
+{{< /learning-center-callout >}}
 
 ## Overview
 

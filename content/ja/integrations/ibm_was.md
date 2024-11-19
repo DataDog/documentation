@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10048
     source_type_name: IBM WAS
-  logs:
-    source: ibm_was
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +26,7 @@ author:
 categories:
 - ログの収集
 - OS & システム
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
 display_on_public_website: true
@@ -35,9 +34,8 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_was
 public_title: IBM WAS
@@ -54,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
   media: []
@@ -69,7 +68,7 @@ tile:
 
 このチェックは、Datadog Agent を通じて [IBM Websphere Application Server (WAS)][1] を監視します。このチェックは IBM WAS バージョン >=  8.5.5 をサポートします。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
@@ -77,7 +76,7 @@ IBM WAS Datadog インテグレーションは、有効になっている PMI �
 
 このチェックはデフォルトで、JDBC、JVM、スレッドプール、および Servlet Session Manager のメトリクスを収集します。オプションで追加のメトリクスを指定して、"custom_queries" セクションに収集することができます。例については、[サンプルチェック構成][3]を参照してください。
 
-### インフラストラクチャーリスト
+### インストール
 
 IBM WAS チェックは [Datadog Agent][4] パッケージに含まれています。
 
@@ -97,12 +96,12 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 この変更を行ったら、"適用" をクリックしてコンフィギュレーションを保存し、アプリケーションサーバーを再起動します。この変更を行ってからしばらくすると、追加した JDBC、JVM、およびサーブレットのメトリクスが Datadog に表示されます。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -112,7 +111,7 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 2. [Agent を再起動します][2]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -151,7 +150,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                 |
 | `<INSTANCE_CONFIG>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -170,21 +169,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションの `ibm_was` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ibm_was" >}}
 
 
-### ヘルプ
+### イベント
 
 IBM WAS には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ibm_was" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

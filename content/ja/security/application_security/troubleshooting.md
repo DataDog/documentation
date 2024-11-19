@@ -5,12 +5,6 @@ further_reading:
 - link: /security/application_security/
   tag: ドキュメント
   text: Datadog Application Security Management による脅威の監視
-- link: /security/application_security/enabling/
-  tag: ドキュメント
-  text: Application Security Management を有効にして脅威の検出を開始する
-- link: /security/application_security/enabling/compatibility/
-  tag: ドキュメント
-  text: プログラミング言語とフレームワークの互換性
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog における Application Security Management の仕組み
@@ -26,9 +20,9 @@ Datadog Application Security Management (ASM) で予期せぬ動作が発生し�
 
 ASM のトレースは、1 秒間に 100 個のトレースにレート制限されています。制限後に送信されたトレースは報告されません。制限を変更する必要がある場合は、[Datadog サポート][1]に連絡してください。
 
-## ASM で不審なリクエストが検出されない
+## ASM でセキュリティトレースが検出されない
 
-ASM の[トレースとシグナルエクスプローラー][2]に脅威情報が表示されるには、一連の手順を正常に実行することが必要です。この問題を調査する際には、各ステップを確認することが重要です。特定の言語に関する追加のトラブルシューティング手順は、末尾の言語タブに記載されています。
+ASM の[トレースとシグナルエクスプローラー][2]に脅威情報が表示されるには、一連の手順が正常に実行される必要があります。この問題を調査する際には、各ステップを確認することが重要です。特定の言語に関する追加のトラブルシューティング手順は、末尾の言語タブに記載されています。
 
 ### ASM が有効であることを確認する
 
@@ -149,7 +143,7 @@ done
 
 アプリケーションを有効にして実行し、成功すると、数分後に[トレースとシグナルエクスプローラー][2]に脅威情報が表示されます。
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
+{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
 
 ### 必要なトレーサーのインテグレーションが無効になっていないか確認する
 
@@ -160,7 +154,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
-[Java][1] の場合、以下のいずれかの技術を使用している場合は、それぞれのインテグレーションが必要です。
+For Java, if you are using any of the following technologies, the respective integration is required:
 
 - grizzly
 - grizzly-filterchain
@@ -176,26 +170,26 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - spring-web
 - tomcat
 
-[1]: /ja/security/application_security/enabling/compatibility/java
+
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-[.NET][1] の場合、ASP.NET とのインテグレーションが必要です。
+For .NET, the ASP.NET integration is required.
 
 **注:** ASP.NET Core が無効になっている場合でも、ASM はこのフレームワークで動作するはずです。
 
-[1]: /ja/security/application_security/enabling/compatibility/dotnet
+
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-[PHP][1] については、必須のインテグレーションはありません。
+There are no required integrations for PHP.
 <p></p>
 
-[1]: /ja/security/application_security/enabling/compatibility/php
+
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-以下の [Go][1] フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメンテーションを行う必要があります。
+The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
 
 - [gRPC][2]
 - [net/http][3]
@@ -203,9 +197,8 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - [Echo][5]
 - [Chi][6]
 
-お使いのフレームワークがサポートされていない場合は、Go リポジトリで[新しい課題を作成][7]してください。
+お使いのフレームワークがサポートされていない場合は、Go リポジトリで [新しい問題を作成][7] してください。
 
-[1]: /ja/security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -215,18 +208,17 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-[Node.js][1] の場合、HTTP インテグレーションが必要です。
+For Node.js, the HTTP integration is required.
 <p></p>
 
-[1]: /ja/security/application_security/enabling/compatibility/nodejs
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-[Ruby][1] の場合、[Rack][2] とのインテグレーションが必要です。また、Ruby トレーサーのバージョン `1.0.0` 以降が必要です。[0.x から 1.x への移行][3]の情報を参照してください。
+For Ruby, the [Rack][2] integration is required. Ruby tracer version `1.0.0` or higher is also required. See information on [migrating from 0.x to 1.x][3].
 
 **注:** Rack は手動で追加するか、[Rails][4] または [Sinatra][5] とのインテグレーションで自動的に追加することができます。手動で追加した場合、Rack スタックにおいて、トレーサーミドルウェアはセキュリティミドルウェアの前に表示される必要があります。
 
-[1]: /ja/security/application_security/enabling/compatibility/ruby
 [2]: /ja/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /ja/tracing/trace_collection/dd_libraries/ruby/#rails
@@ -235,10 +227,10 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 {{< programming-lang lang="python" >}}
 
-[Python][1] の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
+For Python, the WSGI integration is required along with the integration for the
+framework you're using, such as the Django or Flask integration.
 <p></p>
 
-[1]: /ja/security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -252,7 +244,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 ### スパンが Datadog に正常に送信されたかどうかを確認する
 
-ASM のデータは、[スパン][9]を介して送信されます。スパンが Datadog に正常に送信されていることを確認するために、トレーサーログにこのようなログが含まれていることを確認します。
+ASM のデータは、[スパン][9]を介して送信されます。スパンが Datadog に正常に送信されていることを確認するために、トレーサーログに次のようなログが含まれていることを確認します。
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -314,7 +306,7 @@ datadog.appsec.log_file='tmp/extension.log'
 ```
 
 ### インストールで PHP が見つからない
-インストールスクリプトが正しい PHP のバージョンを見つけられない場合、 `--php-bin` を PHP のバイナリの場所に設定することができます。例:
+インストールスクリプトが正しい PHP のバージョンを見つけられない場合、 `--php-bin` オプションを使用して PHP のバイナリの場所を設定することができます。例:
 
 ```
 $ php datadog-setup.php --php-bin /usr/bin/php7.4 --enable-appsec
@@ -367,7 +359,6 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 
 **注:** ASM は、有効になっているときのみログを出力します。ASM を有効にするには、環境変数 `DD_APPSEC_ENABLED=1` を使用します。
 
-
 [1]: /ja/tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
@@ -390,7 +381,7 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
 
 3. アプリケーションのディレクトリで、`npm explore @datadog/native-appsec -- npm run install` というコマンドを実行し、アプリを再起動します。
 
-    a. `@datadog/native-appsec` が見つからない場合は、インストールが正しく行われていない可能性があります。[インストール方法][4]を参照してください。
+    a. If `@datadog/native-appsec` is not found then the installation is incorrect.
 
     b. アプリケーションの起動時に `@datadog/native-appsec` が見つかった場合は、ランタイム起動スクリプトにコマンドを追加してください。
 
@@ -406,7 +397,6 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /ja/tracing/troubleshooting/tracer_startup_logs/
-[4]: /ja/security/application_security/enabling/nodejs/?tab=dockercli
 [5]: /ja/tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -426,7 +416,7 @@ Python アプリケーションの[トレースとシグナルエクスプロー
    DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
    ```
 
-   このログがない場合は、ASM が起動していないことになります。
+   If this log is not present, ASM is not running.
 
 2. トレーサーは動作していますか？APM ダッシュボードで関連するトレースを見ることができますか？
 
@@ -458,7 +448,7 @@ D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_debug, :func= >"parse", :file=>"parser_v2.cpp", :message=>"Loaded 124 rules out of 124 available in the ruleset"}
 ```
 
-これらのログが表示されない場合は、以下を確認してください。
+If you do not see those logs, check the following:
 
 - アプリケーションプロセスに対して正しい ASM 環境変数が設定されているか。
 - 最新バージョンの gem がインストールされている。
@@ -531,7 +521,7 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Agent がトレースを転送するまで 1 分ほど待ち、APM ダッシュボードにトレースが表示されることを確認します。トレース内のセキュリティ情報は、Datadog で処理されるまでにさらに時間がかかり、ASM の[トレースとシグナルエクスプローラー][1]に疑わしいリクエストとして表示される場合があります。
+Agent がトレースを転送するのを 1 分ほど待ってから、APM ダッシュボードでトレースが表示されていることを確認してください。トレース内のセキュリティ情報は、Datadog で処理されるまでにさらに時間がかかり、ASM の[トレースとシグナルエクスプローラー][1]にセキュリティトレースとして表示される場合があります。
 
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /ja/tracing/troubleshooting/#tracer-debug-logs
@@ -539,9 +529,9 @@ Agent がトレースを転送するまで 1 分ほど待ち、APM ダッシュ�
 {{< /programming-lang-wrapper >}}
 
 
-## Application Vulnerability Management で脆弱性が検出されない
+## Software Composition Analysis で脆弱性が検出されない
 
-脆弱性情報が Service Catalog Security View または Application Vulnerability Management Explorer に表示されるには、一連のステップを正常に実行する必要があります。この問題を調査する際には、各ステップを確認することが重要です。
+脆弱性情報が [Service Catalog Security View][16] または [Vulnerability Explorer][12] に表示されるには、一連のステップを正常に実行する必要があります。この問題を調査する際には、各ステップを確認することが重要です。
 
 ### ASM が有効であることを確認する
 
@@ -557,11 +547,60 @@ ASM のデータは、APM トレースと一緒に送信されます。[APM の�
 
 ### トレーサーのバージョンが更新されていることを確認する
 
-トレーサーの正しいバージョンを使用していることを確認するために、Application Security [設定ドキュメント][11]を参照してください。ライブラリ情報を含むテレメトリーデータの送信を開始するには、これらの最小バージョンが必要です。
+See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### テレメトリーデータの通信を確保する
 
-環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (NodeJS の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
+環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (Node.js の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
+
+## 脅威管理と保護を無効にする
+
+脅威管理を無効にするには、アプリケーション構成から `DD_APPSEC_ENABLED=true` 環境変数を削除して、サービスを再起動します。
+
+サービスで `DD_APPSEC_ENABLED=true` 環境変数が設定されていない場合は、以下のいずれかを行います。
+* PHP サービスの場合は、環境変数を明示的に `DD_APPSEC_ENABLED=false` に設定し、サービス を再起動します。
+* 脅威管理が[リモート構成][16]を使用して有効化された場合は、以下を実行します。 
+  1. [Services][15] に移動します (**ASM** > **Catalog** > **Services**)。
+  2. **Threat Management in Monitoring Mode** を選択します。
+  3. **Threat Management** ファセットで、**Monitoring Only**、**No data**、**Ready to block** を有効にします。
+  4. サービスをクリックします。
+  5. サービスの詳細で、**Threat Detection** の **Deactivate** をクリックします。
+
+<div class="alert alert-info">脅威管理が<a href="https://app.datadoghq.com/organization-settings/remote-config">リモート構成</a>を使用して有効化された場合は、<strong>Deactivate</strong> ボタンを使用できます。脅威管理がローカル構成を使用して有効化された場合は、<strong>Deactivate</strong> ボタンは使用できません。</div>
+
+* 複数のサービスで脅威管理を一括で無効にするには、以下を実行します。
+  1. [Services][15] に移動します。
+  2. **Threat Management** ファセットで、**Monitoring Only**、**No data**、**Ready to block** を有効にします。
+  3. 脅威の検出を無効にしたいサービスのチェック ボックスを選択します。
+  4. **Bulk Actions** で **Deactivate Threat detection on (number of) services** を選択します。
+
+## Software Composition Analysis を無効にする
+
+[Software Composition Analysis][14] を無効にするには:
+
+* [Services][15] に移動して **Software Composition Analysis (SCA)** を選択し、サービスをクリックして **Deactivate** をクリックします。
+* 複数のサービスで Software Composition Analysis を一括で無効にするには、リストヘッダーのチェックボックスをクリックし、**Bulk Actions** で **Deactivate Software Composition Analysis (SCA) on (number of) services** を選択します。
+* 環境変数 `DD_APPSEC_SCA_ENABLED` を使用して Software Composition Analysis を無効にするには、アプリケーションの構成から環境変数 `DD_APPSEC_SCA_ENABLED=true` を削除し、サービスを再起動します。これは PHP アプリには適用されません。
+
+## コードセキュリティの無効化
+
+[Code Security][13] の脆弱性検出を無効にするには、アプリケーション構成から `DD_IAST_ENABLED=true` 環境変数を削除して、サービスを再起動します。これは PHP アプリには適用されません。
+
+サービスで `DD_IAST_ENABLED=true` 環境変数が設定されていない場合は、以下を行います。
+  1. [Services][15] に移動します。
+  2. **Code Security** を選択します。
+  3. サービスをクリックします。
+  4. サービスの詳細で、**Vulnerability Detection** の **Deactivate** をクリックします。
+
+## IAST/カスタムコードの脆弱性が一部またはすべて検出されない
+
+### IAST が有効であることを確認する
+
+`DD_IAST_ENABLED` 環境変数が `true` に設定されているか、使用言語に対応するシステムプロパティが有効になっていることを確認します。
+
+### Python+Flask の場合は、エントリーポイントパッチ関数を呼び出します。
+
+Flask アプリケーションを実行している場合は、`ddtrace_iast_flask_patch()` 関数をモジュールのトップレベルで、`app.run()` を呼び出す前に呼び出していることを確認してください。詳細は [Flask インテグレーションのドキュメント][17]を参照してください。
 
 ## さらにサポートが必要ですか？
 
@@ -584,4 +623,9 @@ ASM で問題が解決しない場合は、以下の情報を添えて [Datadog 
 [8]: /ja/tracing/troubleshooting/tracer_startup_logs/
 [9]: /ja/tracing/glossary/#spans
 [10]: /ja/tracing/troubleshooting/#tracer-debug-logs
-[11]: /ja/security/application_security/enabling/
+[12]: https://app.datadoghq.com/security/appsec/vm
+[13]: /ja/security/application_security/code_security/
+[14]: /ja/security/application_security/software_composition_analysis
+[15]: https://app.datadoghq.com/security/configuration/asm/services-config
+[16]: https://app.datadoghq.com/organization-settings/remote-config
+[17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md
 display_on_public_website: true
@@ -32,9 +33,8 @@ draft: false
 git_integration_title: btrfs
 integration_id: btrfs
 integration_title: Btrfs
-integration_version: 2.3.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: btrfs
 public_title: Btrfs
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
   media: []
@@ -67,13 +68,13 @@ Btrfs からメトリクスをリアルタイムに取得すると、以下の�
 
 - Btrfs の状態を視覚化および監視できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Btrfs チェックは [Datadog Agent][2] パッケージに含まれています。少なくとも 1 つの Btrfs ファイルシステムを使用しているサーバーでは、追加のインストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `btrfs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル btrfs.d/conf.yaml][4] を参照してください。
 
@@ -83,21 +84,21 @@ Btrfs チェックは [Datadog Agent][2] パッケージに含まれています
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `btrfs` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "btrfs" >}}
 
 
-### ヘルプ
+### イベント
 
 Btrfs チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Btrfs チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

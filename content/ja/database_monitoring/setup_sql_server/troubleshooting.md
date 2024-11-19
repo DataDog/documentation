@@ -3,10 +3,6 @@ description: SQL Server のデータベースモニタリングセットアッ�
 title: SQL Server 用 DBM セットアップのトラブルシューティング
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 このページでは、SQL Server によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
 ## Diagnosing common connection issues {#common-connection-issues}
@@ -113,15 +109,17 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 ### SSL Provider: The certificate chain was issued by an authority that is not trusted {#certificate-verify-fail}
 
-このエラーは、最新の [MSOLEDBSQL][6] ドライバーにアップグレードした後に、導入された[破壊的変更][7]のためによく発生します。最新バージョンのドライバーでは、SQL インスタンスへのすべての接続がデフォルトで暗号化されています。
+#### Microsoft OLE DB Driver 2019
 
-最新版の Microsoft OLE DB Driver for SQL Server を使用して、暗号化接続を必要とする SQL Server インスタンスに接続しようとする場合、次の回避策を使用することができます。
+このエラーは、[`MSOLEDBSQL` 2019][6] ドライバーにアップグレードした後に、導入された[破壊的変更][7]のためによく発生します。最新バージョンのドライバーでは、SQL インスタンスへのすべての接続がデフォルトで暗号化されています。
+
+最新版の Microsoft OLE DB Driver for SQL Server を使用して、暗号化接続を必要とする SQL Server インスタンスに接続しようとする場合、次のいずれかの回避策を使用することができます。
 
 1. 自己署名証明書とサーバーの Force Encryption 設定 (AWS では `rds.force_ssl=1`) により、クライアントが暗号化されて接続されるようにする場合:
 
-   - クライアントのトラストチェーンの一部として信頼される証明書への変更
-   - 自己署名証明書をクライアントの信頼できる証明書として追加する
-   - 接続文字列に `TrustServerCertificate=yes;` を追加する
+   - クライアントのトラストチェーンの一部として信頼される証明書への変更。
+   - 自己署名証明書をクライアントの信頼できる証明書として追加する。
+   - 接続文字列に `Trust Server Certificate=True;` を追加する。
 
 これについては、[マイクロソフトのドキュメント][7]で詳しく説明されています。
 
@@ -131,7 +129,7 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
   # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
-      connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
+      connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
       connector: adodbapi
       adoprovider: MSOLEDBSQL19
   ```
@@ -147,7 +145,9 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
       adoprovider: MSOLEDBSQL
   ```
 
-**`MSOLEDBSQL` 2019** 以外のドライバーを使用している場合、接続文字列に `TrustServerCertificate=yes` を設定することで、このエラーを解決することができます。例えば、2017 年の `ODBC` ドライバーの場合:
+#### その他の Microsoft OLE DB および ODBC ドライバーのバージョン
+
+`MSOLEDBSQL` 2019 以外の OLE DB ドライバーまたは ODBC ドライバーを使用している場合、接続文字列に `TrustServerCertificate=yes` を設定することで、このエラーを解決することができます。例えば、`ODBC` ドライバーの場合:
 
   ```yaml
   # この例では、SQL Server 認証を使用しています
@@ -157,7 +157,7 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
       password: <DD_AGENT_PASSWORD>
       connection_string: "TrustServerCertificate=yes;"
       connector: odbc
-      driver: '{ODBC Driver 17 for SQL Server}'
+      driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
 ### SQL Server unable to connect 'SSL Security error (18)' {#ssl-security-error}
@@ -319,6 +319,48 @@ SQL Server の技術的な制限により、正しいユーザーが実行して
 ### なぜ "CREATE PROCEDURE" クエリが多いのですか？
 
 7.40.0 より古いバージョンの Agent では、`PROCEDURE` 統計が過大にカウントされるバグがあります。これにより、データベースをモニタリングする Query Metrics UI で `CREATE PROCEDURE...` の実行が多数表示されるようになります。この問題を解決するには、Datadog Agent を最新バージョンにアップグレードしてください。
+
+### エラー "The SELECT permission was denied on the object 'sysjobs’” (SELECT 権限がオブジェクト 'sysjobs' で拒否されました) により SQL Server Agent Job が収集されない
+
+SQL Server Agent Job のチェックには、msdb データベースに対する `SELECT` 権限が必要です。エラー `The SELECT permission was denied on the object 'sysjobs'` (SELECT 権限がオブジェクト 'sysjobs' で拒否されました) が表示された場合は、Agent が SQL Server インスタンスへの接続に使用しているユーザーに `SELECT` 権限を付与する必要があります。
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
+
+## 既知の制限
+
+### SQL Server 2012
+
+以下のメトリクスは、SQL Server 2012 では使用できません。
+
+- `sqlserver.files.read_io_stall_queued`
+- `sqlserver.files.write_io_stall_queued`
+- `sqlserver.ao.quorum_type`
+- `sqlserver.ao.quorum_state`
+- `sqlserver.ao.member.type`
+- `sqlserver.ao.member.state`
+- `sqlserver.ao.member.number_of_quorum_votes`
+- `sqlserver.ao.log_send_queue_size`
+- `sqlserver.ao.log_send_rate`
+- `sqlserver.ao.redo_queue_size`
+- `sqlserver.ao.redo_rate`
+- `sqlserver.ao.low_water_mark_for_ghosts`
+- `sqlserver.ao.filestream_send_rate`
+- `sqlserver.ao.replica_status`
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.fci.status`
+- `sqlserver.fci.is_current_owner`
+- `sqlserver.latches.latch_wait_time`
+
+### SQL Server 2014
+
+以下のメトリクスは、SQL Server 2014 では使用できません。
+
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.latches.latch_wait_time`
 
 [1]: /ja/database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication

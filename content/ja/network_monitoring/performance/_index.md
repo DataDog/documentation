@@ -27,6 +27,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: ブログ
   text: Datadog NPM が Consul ネットワーキングに対応
+- link: https://www.datadoghq.com/blog/npm-story-centric-ux/
+  tag: ブログ
+  text: NPM のストーリー中心 UX でネットワーク調査を迅速に開始
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: ブログ
+  text: ネットワークとセキュリティ分析のための DNS ログの監視
+- link: https://www.datadoghq.com/blog/monitor-connection-churn-datadog/
+  tag: ブログ
+  text: コネクションチャーンを監視し、対処するためのベストプラクティス
 title: ネットワークパフォーマンスモニタリング
 ---
 
@@ -43,10 +52,13 @@ Datadog ネットワークパフォーマンスモニタリング (NPM) は Data
 
 NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio サービスメッシュのインスツルメンテーション][4]およびオーケストレーションに対応したコンテナ化環境を搭載しており、複雑なネットワークの監視をシンプルにします。
 
+さらに、NPM の機能である[ネットワークパス][5]がプレビュー版として提供されており、これによりネットワーク内の各ホップごとのトラフィックを確認することができます。
+
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>セットアップ</u>: ネットワークデータを収集するように Agent を構成します。{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>ネットワーク分析</u>: 利用可能な各クライアントとサーバー間のネットワークデータをグラフ化します。{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>ネットワークマップ</u>: タグ間でネットワークデータをマッピングします。{{< /nextlink >}}
+    {{< nextlink href="monitors/types/network_performance/" >}}<u>推奨モニター</u>: 推奨される NPM モニターを構成します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料
@@ -57,3 +69,4 @@ NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio 
 [2]: https://app.datadoghq.com/network/map
 [3]: https://www.datadoghq.com/blog/npm-windows-support/
 [4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[5]: /ja/network_monitoring/network_path/

@@ -295,7 +295,24 @@ export default function App() {
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sampleRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
+
+### Set tracking consent (GDPR compliance)
+
+To be compliant with the GDPR regulation, the RUM React Native SDK requires the tracking consent value at initialization.
+
+The `trackingConsent` setting can be one of the following values:
+
+1. `.PENDING`: The RUM React Native SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOReact NativeS SDK waits for the new tracking consent value to decide what to do with the batched data.
+2. `.GRANTED`: The RUM React Native SDK starts collecting the data and sends it to Datadog.
+3. `.NOTGRANTED`: The RUM iReact NativeOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
+
+To change the tracking consent value after the RUM React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM React Native SDK changes its behavior according to the new value.
+
+For example, if the current tracking consent is `.PENDING`:
+
+- If you change the value to `.GRANTED`, the RUM React Native SDK sends all current and future data to Datadog;
+- If you change the value to `.NOTGRANTED`, the RUM React Native SDK wipes all current data and does not collect future data.
 
 ### Override the reported version
 
@@ -358,6 +375,15 @@ Use one of Datadog's integrations to automatically track views for the following
 -   If you use the [`react-navigation`][7] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][8].
 
 If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][16] as a reference.
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native RUM SDK does not use too much disk space.
+
 
 ## Track background events
 

@@ -1,5 +1,5 @@
 ---
-app_id: システム
+app_id: system
 app_uuid: 43bff15c-c943-4153-a0dc-25bb557ac763
 assets:
   integration:
@@ -13,7 +13,7 @@ assets:
       prefix: system.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: プロセス
+    source_type_name: Process
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -21,18 +21,18 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/process/README.md
 display_on_public_website: true
 draft: false
-git_integration_title: プロセス
-integration_id: システム
+git_integration_title: process
+integration_id: system
 integration_title: プロセス
-integration_version: 3.0.0
+integration_version: 3.4.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
-name: プロセス
+name: process
 public_title: プロセス
 short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
 supported_os:
@@ -45,18 +45,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/process-check-monitoring
   support: README.md#Support
   title: プロセス
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
 プロセスチェックを使用して、以下のことができます。
 - 任意のホスト上で実行されている特定プロセスのリソース使用状況メトリクスを収集できます。たとえば、CPU、メモリ、I/O、スレッド数などです。
@@ -68,7 +73,7 @@ tile:
 
 プロセスチェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 他の多くのチェックとは異なり、デフォルトのプロセスチェックは、特に役立つ監視を行いません。どのプロセスを監視するかを構成する必要があります。
 
@@ -77,10 +82,10 @@ tile:
 ```yaml
 init_config:
 instances:
-- name: ssh
-  search_string:
-    - ssh
-    - sshd
+  - name: ssh
+    search_string:
+      - ssh
+      - sshd
 ```
 
 **注**: 構成の変更後は、必ず [Agent を再起動][4]してください。
@@ -109,6 +114,10 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 **注**: Windows でページフォールトメトリクスを収集するには、[WMI チェック][7]を使用します。
 
+**注**: Windows の v6.11 + では、Agent は `Local System` ではなく、`ddagentuser` として実行されます。このため、他のユーザーで実行されているプロセスの完全なコマンドラインや他のユーザーのプロセスのユーザーにアクセスすることができません。このため、以下のチェックのオプションは機能しません。
+- `false` に設定した場合の `exact_match`
+- 特定のユーザーに属するプロセスを選択することができる `user`
+
 すべてのメトリクスは process.yaml で構成された `instance` ごとに収集され、`process_name:<instance_name>` のタグが付きます。
 
 このチェックにより送信される `system.processes.cpu.pct` メトリクスは、30 秒間以上存在する処理でのみ正確です。
@@ -126,17 +135,17 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 プロセスチェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "process" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
-プロセスのリソース消費を監視する方法 (または理由) について理解するには、こちらの[ブログ記事][11]を参照してください。
+プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][12]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/monitors/create/types/process_check/?tab=checkalert
 [2]: https://app.datadoghq.com/account/settings/agent/latest
@@ -145,7 +154,8 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
 [7]: https://docs.datadoghq.com/ja/integrations/wmi_check/
-[8]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://www.datadoghq.com/blog/process-check-monitoring
+[8]: https://docs.datadoghq.com/ja/agent/guide/windows-agent-ddagent-user/#process-check
+[9]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
+[10]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
+[11]: https://docs.datadoghq.com/ja/help/
+[12]: https://www.datadoghq.com/blog/process-check-monitoring

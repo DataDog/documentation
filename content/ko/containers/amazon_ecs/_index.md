@@ -45,7 +45,7 @@ ECS 컨테이너 및 작업을 모니터링하려면 Datadog 에이전트를 ECS
 
 ### ECS 작업 정의 생성
 
-이 [ECS 작업 정의][30]는 필요한 설정으로 Datadog 에이전트 컨테이너를 시작합니다. 에이전트 설정을 수정해야 하는 경우 이 작업 정의를 업데이트하고 데몬 서비스를 다시 배포합니다. AWS Management Console 또는 [AWS CLI][9]를 사용하여 이 작업 정의를 설정할 수 있습니다.
+이 [ECS 작업 정의][30]는 필요한 구성으로 Datadog Agent  컨테이너를 시작합니다. Agent 구성을 수정해야 하는 경우 이 작업 정의를 업데이트하고 데몬 서비스를 다시 배포합니다. AWS Management Console 또는 [AWS CLI][9]를 사용하여 이 작업 정의를 설정할 수 있습니다.
 
 다음 샘플은 핵심 인프라스트럭처 모니터링을 위한 최소한의 설정입니다. 이외에도 여러 기능을 가진 작업 정의 샘플은 [추가적인 에이전트 기능 설정](#setup-additional-agent-features)에서 제공됩니다.
 
@@ -63,7 +63,7 @@ ECS 컨테이너 및 작업을 모니터링하려면 Datadog 에이전트를 ECS
     - `DD_SITE` 환경 변수를 [Datadog 사이트][13]로 설정합니다. 귀하의 사이트는 {{< region-param key="dd_site" code="true" >}}입니다.
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - 선택적으로 `DD_TAGS` 환경 변수를 추가하여 태그 을 추가로 지정합니다.
 
@@ -284,7 +284,7 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.3",
+            "image": "datadog/fips-proxy:1.1.5",
             "portMappings": [
                 {
                     "containerPort": 9803,

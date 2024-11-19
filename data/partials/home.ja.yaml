@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: Agent の概要
   title: Agent のインストール
-- desc: 750 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
+- desc: 800 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
   link: getting_started/integrations/
   link_text: インテグレーションの概要
   title: インテグレーションをセットアップ
@@ -11,7 +11,7 @@ guides:
   link: getting_started/application/
   link_text: Datadog で始める
   title: アプリで始める
-heading: Welcome to Datadog Docs!
+heading: Datadog ドキュメントへようこそ！
 nav_sections:
 - nav_section:
   - name: プラットフォームサービス
@@ -91,6 +91,10 @@ nav_sections:
       icon: datastreams-monitoring
       link: data_streams/
       title: Data Streams Monitoring
+    - desc: データ処理ジョブを監視し、最適化する
+      icon: data-jobs-monitoring
+      link: data_jobs/
+      title: データジョブのモニタリング
     - desc: コードを変更せずにサービスを発見、マッピング、監視する
       icon: usm
       link: universal_service_monitoring/
@@ -99,14 +103,22 @@ nav_sections:
       icon: synthetics
       link: synthetics/
       title: Synthetic Monitoring
+    - desc: Web、モバイル、バックエンド全体で重大なエラーを特定し、解決を加速
+      icon: error-tracking
+      link: error_tracking/
+      title: Error Tracking
     - desc: アプリケーションのユーザーエクスペリエンスを把握、観察、分析
       icon: rum
       link: real_user_monitoring/
       title: Real User Monitoring
+    - desc: ユーザーの行動に関する洞察を得て、データに基づく製品の決定を行う
+      icon: product-analytics
+      link: product_analytics/
+      title: 製品分析
     - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
       icon: mobile
       link: mobile_app_testing/
-      title: Mobile Application Testing
+      title: モバイルアプリケーションテスト
     - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施
       icon: continuous-testing
       link: continuous_testing/
@@ -118,7 +130,7 @@ nav_sections:
     - desc: 不安定なテストの検出と、不安定なテストをもたらしたコミットの特定
       icon: ci
       link: tests/
-      title: Test Visibility
+      title: テストの最適化
     - desc: 脅威、脆弱性、誤構成の検出
       icon: security-platform
       link: security/
@@ -135,6 +147,10 @@ nav_sections:
       icon: pipelines
       link: observability_pipelines/
       title: Observability Pipelines
+    - desc: LLM アプリケーションを追跡、監視、保護する
+      icon: llm-observability
+      link: llm_observability/
+      title: LLM Observability
 - nav_section:
   - name: 構成
   - navtiles:

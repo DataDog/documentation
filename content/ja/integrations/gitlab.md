@@ -24,8 +24,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10026
     source_type_name: Gitlab
-  logs:
-    source: gitlab
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -37,6 +35,7 @@ categories:
 - issue tracking
 - log collection
 - source control
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
 display_on_public_website: true
@@ -44,9 +43,8 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 7.3.0
+integration_version: 9.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: gitlab
 public_title: GitLab
@@ -66,6 +64,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog ですべての GitLab メトリクスを追跡します。
   media: []
@@ -87,22 +88,22 @@ tile:
 
 GitLab パイプラインのさらに詳細なモニタリングについては、[CI Pipeline Visibility][2] をご確認ください。CI Pipeline Visibility では、ユーザーワークフローの詳細な洞察を提供し、詳細な Git メタデータにアクセスでき、時間をかけてパイプラインのパフォーマンスを追跡します。
 
-## 計画と使用
+## セットアップ
 
 この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][3]を参照してください。
 
 `[OpenMetricsV1]` または `[OpenMetricsV2]` とマークされたメトリクスは、GitLab インテグレーションの対応するモードを使用した場合にのみ利用できます。その他のメトリクスはどちらのモードでも収集されます。
 
-### インフラストラクチャーリスト
+### インストール
 
 GitLab チェックは [Datadog Agent][4] パッケージに含まれています。GitLab サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -122,7 +123,7 @@ GitLab チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 4. [Agent を再起動します][6]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -171,7 +172,7 @@ GitLab チェックは [Datadog Agent][4] パッケージに含まれていま�
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                 |
 | `<INSTANCE_CONFIG>`  | `{"gitlab_url":"http://%%host%%/", "openmetrics_endpoint":"http://%%host%%:10055/-/metrics"}` |
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -188,9 +189,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `gitlab` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gitlab" >}}
 
 
@@ -198,7 +199,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 GitLab チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "gitlab" >}}
  `gitlab.readiness.*` のサービスチェックについての詳細は、公式の [GitLab ドキュメント][6]に記載されています。
 
@@ -221,15 +222,15 @@ GitLab チェックには、イベントは含まれません。
 
 GitLab Runner と Prometheus とのインテグレーションについては、[GitLab Runner ドキュメント][8]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][9]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 GitLab Runner チェックは [Datadog Agent][4] パッケージに含まれています。GitLab サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Runner の Prometheus メトリクスエンドポイントおよびサービスチェックを持つ GitLab マスターを指定するには、[Agent のコンフィギュレーションディレクトリ][10]のルートにある `conf.d/` フォルダーの `gitlab_runner.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gitlab_runner.d/conf.yaml][11] を参照してください。
 
@@ -239,13 +240,13 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `gitlab_runner` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gitlab_runner" >}}
 
 
-### 収集データ
+### ログ収集
 
 
 1. `gitlab_runner` [コンフィギュレーションファイル][12]で、ログフォーマットを `json` に変更します (_GitLab Runner のバージョン 11.4.0 以降で利用可能_) :
@@ -280,7 +281,7 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 
 GitLab Runner チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 GitLab Runner チェックは、Runner が GitLab マスターと通信できるかを確認するサービスのチェック機能、およびローカルの Prometheus エンドポイントが使用可能かを確認するサービスのチェック機能を提供します。
 
