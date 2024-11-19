@@ -97,7 +97,7 @@ Click **If step succeeds, exit test and mark it as passed** to exit the test aft
 
 #### Step failure
 
-Click **If step fails, continue to next step** to  your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
+Click **If step fails, continue to next step** to move on with subsequent steps after step failure. This can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
