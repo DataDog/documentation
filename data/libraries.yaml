@@ -142,10 +142,6 @@ Classic:
       api: true
       authors: Daniel Bader
   - Perl:
-    - name: webservice-datadog
-      link: https://github.com/jpinkham/webservice-datadog
-      api: true
-      authors: Jennifer Pinkham
     - name: dogstatsd-perl
       link: https://github.com/binary-com/dogstatsd-perl
       dogstatsd: true
