@@ -4,7 +4,7 @@ description: Learn about Datadog Static Analysis to scan code for quality issues
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -16,15 +16,15 @@ algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code Analysis**][1].

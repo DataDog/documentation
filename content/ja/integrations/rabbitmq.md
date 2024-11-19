@@ -23,12 +23,12 @@ assets:
     source_type_id: 51
     source_type_name: RabbitMQ
   monitors:
-    consumers_at_zero: assets/monitors/consumers_at_zero.json
-    disk_usage: assets/monitors/disk_usage.json
-    disk_usage_prometheus: assets/monitors/disk_usage_prometheus.json
-    message_ready: assets/monitors/message_ready.json
-    message_unack_prometheus: assets/monitors/message_unack_prometheus.json
-    message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
+    Disk space is low: assets/monitors/disk_usage_prometheus.json
+    Level of disk usage is too high for host: assets/monitors/disk_usage.json
+    Messages are ready in RabbitMQ queue: assets/monitors/message_ready.json
+    Messages unacknowledged rate is higher than usual: assets/monitors/message_unacknowledge_rate_anomaly.json
+    RabbitMQ queue has 0 consumers: assets/monitors/consumers_at_zero.json
+    Unacknowledged Messages are higher than usual: assets/monitors/message_unack_prometheus.json
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
     rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
@@ -41,7 +41,7 @@ author:
 categories:
 - log collection
 - message queues
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_on_public_website: true
@@ -49,7 +49,7 @@ draft: false
 git_integration_title: rabbitmq
 integration_id: rabbitmq
 integration_title: RabbitMQ
-integration_version: 5.3.2
+integration_version: 7.0.0
 is_public: true
 manifest_version: 2.0.0
 name: rabbitmq
@@ -68,6 +68,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
   media: []

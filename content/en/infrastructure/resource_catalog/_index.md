@@ -130,15 +130,15 @@ Clicking on any resource opens a side panel with details including:
 
 ### Recent changes
 
-{{< callout url="https://www.datadoghq.com/private-beta/recent-changes-tab/" >}}
-  The <strong>Recent Changes</strong> tab is in private beta, but you can easily request access! Use this form to submit your request today.
+{{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
+  The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
 {{< /callout >}} 
 
 Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
 
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
-   - You have [access to the preview][9].
+   - You have [access to the Preview][9].
 
 #### AWS
 
@@ -160,7 +160,7 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [6]: /integrations/amazon_config/#events
 [7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-change-collection
-[9]: https://www.datadoghq.com/private-beta/recent-changes-tab/
+[9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
 [10]: https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/
 [11]: https://docs.datadoghq.com/security/threats/
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/

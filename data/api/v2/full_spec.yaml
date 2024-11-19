@@ -27634,6 +27634,7 @@ components:
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            security_monitoring_signals_write: Edit Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
             security_pipelines_read: View Security Pipelines.
@@ -38365,9 +38366,10 @@ paths:
   /api/v2/posture_management/findings:
     get:
       description: "Get a list of findings. These include both misconfigurations and
-        identity risks.\n\n### Filtering\n\nFilters can be applied by appending query
-        parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n
-        \ - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+        identity risks.\n\n**Note**: To filter and return only identity risks, add
+        the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters
+        can be applied by appending query parameters to the URL.\n\n  - Using a single
+        filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
         \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
         `attribute_key` can be any of the filter keys described further below.\n\nQuery
         parameters of type `integer` support comparison operators (`>`, `>=`, `<`,
@@ -43562,7 +43564,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_rules_write
       summary: Run a historical job
       tags:
       - Security Monitoring
@@ -43587,6 +43590,10 @@ paths:
               \   }\n  }\n}"
           step: there is a valid "historical_job" in the system
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -43618,12 +43625,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_signals_write
       summary: Convert a job result to a signal
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -43686,11 +43698,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_rules_read
       summary: Get a job's details
       tags:
       - Security Monitoring
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -43720,11 +43737,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_rules_write
       summary: Cancel a historical job
       tags:
       - Security Monitoring
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -46863,7 +46885,11 @@ tags:
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in Datadog.'
+    for a list of the archives currently configured in Datadog.
+
+
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
@@ -46882,8 +46908,11 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/
   name: Logs Custom Destinations
-- description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
+- description: 'Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
+
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
@@ -46923,7 +46952,8 @@ tags:
     scoped to different team values.
 
 
-    You need an API and application key with Admin rights to interact with this endpoint.
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.
 
 
     See [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)

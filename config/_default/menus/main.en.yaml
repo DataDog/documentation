@@ -733,6 +733,10 @@ menu:
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 1004
+    - name: Combining OTel and Datadog Metrics
+      url: opentelemetry/guide/combining_otel_and_datadog_metrics/
+      parent: otel_guides
+      weight: 1005
     - name: Developers
       url: developers/
       pre: dev-code
@@ -1592,10 +1596,20 @@ menu:
       identifier: monitors_check_summary
       weight: 603
     - name: Monitor Status
-      url: monitors/status/
+      url: monitors/status/status_page
       parent: alerting
       identifier: monitors_status
       weight: 7
+    - name: Status Graphs
+      url: monitors/status/graphs
+      parent: monitors_status
+      identifier: monitors_status_graphs
+      weight: 701
+    - name: Status Events
+      url: monitors/status/events
+      parent: monitors_status
+      identifier: monitors_status_events
+      weight: 702
     - name: Monitor Settings
       url: monitors/settings/
       weight: 8
@@ -2479,26 +2493,31 @@ menu:
       parent: workflows
       identifier: workflows_connections
       weight: 8
+    - name: Datastore
+      url: service_management/workflows/datastore/
+      parent: workflows
+      identifier: workflows_datastore
+      weight: 9
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
-      weight: 9
+      weight: 10
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 10
+      weight: 11
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 11
+      weight: 12
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 12
+      weight: 13
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2565,16 +2584,21 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 801
+    - name: Datastore
+      url: service_management/app_builder/datastore/
+      parent: app_builder
+      identifier: app_builder_datastore
+      weight: 9
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 9
+      weight: 10
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 10
+      weight: 11
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -4233,11 +4257,16 @@ menu:
       parent: tests_setup
       identifier: tests_setup_swift
       weight: 106
+    - name: Go
+      url: tests/setup/go/
+      parent: tests_setup
+      identifier: tests_setup_go
+      weight: 107
     - name: JUnit Report Uploads
       url: tests/setup/junit_xml/
       parent: tests_setup
       identifier: tests_setup_junit_xml
-      weight: 107
+      weight: 108
     - name: Network Settings
       url: tests/network/
       parent: tests
@@ -4338,6 +4367,11 @@ menu:
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_ruby
       weight: 8106
+    - name: Go
+      url: tests/test_impact_analysis/setup/go/
+      parent: test_impact_analysis_setup
+      identifier: test_impact_analysis_setup_go
+      weight: 8107
     - name: How It Works
       url: tests/test_impact_analysis/how_it_works/
       parent: test_impact_analysis

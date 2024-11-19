@@ -7,7 +7,7 @@ categories:
 - data stores
 - log collection
 - os & system
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon Elastic Filesystem のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_efs/
@@ -85,11 +85,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-The Amazon Elastic File System integration does not include any events.
+Amazon Elastic File System インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
 
-The Amazon Elastic File System integration does not include any service checks.
+Amazon Elastic File System インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -101,8 +101,8 @@ The Amazon Elastic File System integration does not include any service checks.
 [4]: https://docs.aws.amazon.com/efs/latest/ug/auth-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-efs
 [6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [9]: /ja/integrations/amazon_lambda/#amazon-efs-for-lambda
 [10]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/#aws-lambda-metrics
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_efs/amazon_efs_metadata.csv
