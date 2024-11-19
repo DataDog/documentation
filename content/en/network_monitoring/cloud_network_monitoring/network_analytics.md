@@ -25,7 +25,7 @@ further_reading:
 
 The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_network_analytics.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_network_analytics_2.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
 
 ## Queries
 
@@ -35,7 +35,7 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 For example, if you want to see network traffic between your ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
 
-{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag_2.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
 For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
 
@@ -45,11 +45,11 @@ Additionally, the following diagram illustrates inbound and outbound requests wh
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_default_view.png" alt="CNM Default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_default_view_2.png" alt="CNM Default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_flow_table_region.png" alt="Aggregate connection table filtered" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_flow_table_region_2.png" alt="Aggregate connection table filtered" style="width:90%;">}}
 
 You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
@@ -59,7 +59,7 @@ Additionally, set the timeframe over which traffic is aggregated using the time 
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/network_analytics/recommended_queries.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
+{{< img src="network_performance_monitoring/network_analytics/recommended_queries_2.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
 
 Recommended queries allow you to begin investigating into your network—whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. The recommended queries help you quickly find relevant network information without needing to search for or group the traffic. For example, the recommended query `Find dependencies of service: web-store` populates the search bar with the query `client_service: web-store` and displays the top services that the service web-store is sending traffic to within the network, and therefore its downstream dependencies.
 
@@ -108,11 +108,11 @@ Groups allow you to group your data by a given tag's value. For example, if you 
 
 If you want to investigate connections from all of your hosts in a single grouping, add the `host` tag in the **View clients as** dropdown, and add `Ungrouped traffic` in the **View servers as** dropdown. 
 
-{{< img src="network_performance_monitoring/network_analytics/npm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
 
 If you have traffic that is not tagged by a specific group, you can select **Auto-grouped traffic** to group data by any available tags. For example, to see which tags are available for a specific `service`, use the `service` tag in the **View clients as** dropdown, and add `Auto-grouped traffic` in the **View servers as** dropdown:
 
-{{< img src="network_performance_monitoring/network_analytics/npm_auto-grouped.png" alt="NPM analytics page sorting by service tags" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_auto-grouped.png" alt="NPM analytics page sorting by service tags" style="width:90%;">}}
 
 The **Auto-grouped traffic** option can help you identify the source of your tags. For example, hover over the individual icons to display a tooltip that indicates the tag's origin:
 
@@ -120,7 +120,7 @@ The **Auto-grouped traffic** option can help you identify the source of your tag
 
 Using the search bar and the group by feature together is helpful to further isolate your network traffic. For example, to find all traffic from your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and select `datacenter` in the **View clients** as dropdown:
 
-{{< img src="network_performance_monitoring/network_analytics/search_bar_with_groupby.png" alt="Using group by option with search field" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/search_bar_with_groupby_2.png" alt="Using group by option with search field" style="width:90%;">}}
 
 ## Summary graphs
 
@@ -259,7 +259,7 @@ If you have [setup][9] enhanced resolution for AWS or Azure, CNM can filter and 
 
 Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. `domain` **is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_analytics/domain_aggregation2.png" alt="Domain aggregation" >}}
+{{< img src="network_performance_monitoring/network_analytics/domain_aggregation_3.png" alt="Domain aggregation" >}}
 
 **Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
@@ -288,7 +288,7 @@ In AWS and Google Cloud, the network ID is automatically set to the VPC ID. For 
 
 Organize and share views of traffic data. Saved Views make debugging faster and empower collaboration. For instance, you can create a view, save it for the future for common queries, and copy its link to share network data with your teammates.
 
-{{< img src="network_performance_monitoring/network_analytics/npm_saved_views2.png" alt="Saved Views" >}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_saved_views.png" alt="Cloud Network Monitoring Saved Views" >}}
 
 - To save a view: click the *+ Save* button and name the view to record your current query, table configuration, and graph metric selections.
 - To load a view: click *Views* at the top left to see your Saved Views and select a view from the list.
@@ -330,7 +330,7 @@ Select any row from the data table to see associated logs, traces, and processes
 
 Hover over a row in the analytics table to pivot to [network path][11] and see the paths between the source and destination specified in CNM.
 
-{{< img src="network_performance_monitoring/network_analytics/view_network_path.png" alt="Example of hovering over a row in the Analytics table to show the Network Path toggle" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/view_network_path_2.png" alt="Example of hovering over a row in the Analytics table to show the Network Path toggle" style="width:90%;">}}
 
 ## Sidepanel
 
