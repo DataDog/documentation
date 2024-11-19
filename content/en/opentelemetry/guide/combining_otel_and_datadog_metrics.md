@@ -34,10 +34,10 @@ You get an average of averages, not the true average across all timeseries. This
 
 The `equiv_otel` function automatically combines equivalent Datadog and OTel metrics in a single query. It:
 
-- Automatically handles metric name translation.
-- Properly aggregates all timeseries as a single metric.
-- Works bidirectionally (Datadog to OTel or OTel to Datadog).
-- Preserves query aggregation semantics.
+- Automatically handles metric name translation
+- Properly aggregates all timeseries as a single metric
+- Works bidirectionally (Datadog to OTel or OTel to Datadog)
+- Preserves query aggregation semantics
 
 ### Converting from Datadog to OTel
 
@@ -59,6 +59,10 @@ The same works for including Datadog metrics in an OTel query:
 equiv_otel(avg:nginx.connections_current{state:active})
 ```
 The function works the same way in reverse, automatically including the equivalent Datadog metric (`nginx.net.connections`).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /dashboards/functions
