@@ -8,8 +8,6 @@ title: Schema Tracking
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">Schema tracking is in <b>beta</b> for Java services using Protobuf and Avro. If you're interested in other languages and schemas, reach out <a href="https://www.datadoghq.com/private-beta/schema-tracking/">here</a>. </div>
-
 Data Streams Monitoring provides visibility into schemas used by producers and consumers, and how schema issues impact downstream services. You can track new schemas added, schemas with errors, and schema evolutions to manage schema migrations and identify issues.
 
 Changing a schema produced by a service without updating the consumer can lead to the consumer struggling to process payloads, blocking further data flow downstream. Understanding schema changes ensures data compatibility between producers and consumers, and ultimately prevents issues.
