@@ -14,15 +14,21 @@ Datadog and OpenTelemetry (OTel) use different naming conventions for integratio
 
 When working with both Datadog and OTel metrics, two main challenges arise. Let's examine these using NGINX connection monitoring as an example:
 
-If nginx is monitored by a Datadog integration, the metric emitted for the number of current active connections is named `nginx.net.connections`. OTel integrations do not emit a specific metric just for active connections. Rather OTel integrations emit a metric named `nginx.connections_current` to capture all connections regardless of their state, whether active or waiting. You can filter this metric down by filtering with the tag `state:active` to measure only active connections.
+### Different naming conventions
 
-If you want to show the average number of active nginx connections using a metrics query, there are two challenges:
+Datadog and OTel handle the same measurements differently:
+- Datadog: `nginx.net.connections` (a specific metric for active connections)
+- OTel: `nginx.connections_current` (captures all connection states in a single metric)
+  - Requires filtering with `state:active` to match Datadog's active connections metric
 
-1. You need to know the names (and optionally metric filters) for both Datadog and OTel style naming conventions. It is often the case the query author has familiarity with one schema or the other. It would be uncommon, and burdensome, to understand the complete mapping of equivalences between integration metrics between these two standards.
+### Aggregation limitations
 
-2. Combining two separate metric queries together using [metrics functions][1] restricts you to combining the result of two metric queries, rather than aggregate all timeseries across both metric names as a single metric.
-
-As an example, if we have two queries: `avg:nginx.net.connections`, and `avg:nginx.connections_current{state:active}`, we cannot represent the average of all contributing time series by combining these results. You cannot take an average of averages.
+Simply combining separate metric queries can lead to incorrect results. For example, if you try to combine these queries:
+```
+avg:nginx.net.connections
+avg:nginx.connections_current{state:active}
+```
+You get an average of averages, not the true average across all timeseries. This happens because traditional [metrics functions][1] combine the results of separate queries rather than treating the data as a single metric.
 
 ## Datadog Makes Combining Datadog and OTel Integration Metrics Easy
 
