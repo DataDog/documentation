@@ -30,7 +30,7 @@ Supported Agent versions
 ## Setup
 1. In the SQL Server database instance, create a Datadog Extended Events (XE) session. You can run the session on any database in the instance.
 
-   **Note**: If the Datadog XE session isn't created in the database, the Agent still attempts to collect deadlock events from a default SQL Server XE view. This view writes to the buffer pool, but there's a higher chance of missing events because of a size limitation on the XML queried from it. For more information, see [You may not see the data you expect in Extended Event Ring Buffer Targets]][2] on the SQL Server Support Blog.
+   **Note**: If the Datadog XE session isn't created in the database, the Agent still attempts to collect deadlock events from a default SQL Server XE view. This view writes to the buffer pool, but there's a higher chance of missing events because of a size limitation on the XML queried from it. For more information, see [You may not see the data you expect in Extended Event Ring Buffer Targets][2] on the SQL Server Support Blog.
 
 ```sql
   CREATE EVENT SESSION datadog
