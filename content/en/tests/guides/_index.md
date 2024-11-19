@@ -1,5 +1,5 @@
 ---
-title: Test Visibility Guides
+title: Test Optimization Guides
 
 private: true
 disable_toc: true
@@ -7,10 +7,9 @@ cascade:
     algolia:
         rank: 20
         category: Guide
-        subcategory: Test Visibility Guides
+        subcategory: Test Optimization Guides
 ---
 
-{{< whatsnext desc="Test Visibility Guides:" >}}
-    {{< nextlink href="/tests/guides/flaky_test_management" >}}Flaky Test Management{{< /nextlink >}}
+{{< whatsnext desc="Test Optimization Guides:" >}}
     {{< nextlink href="/tests/guides/add_custom_measures" >}}Add Custom Measures to Your Tests{{< /nextlink >}}
 {{< /whatsnext >}}

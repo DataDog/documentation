@@ -59,7 +59,7 @@ Note that running 32-bit applications on Windows x64 is supported.
 
 ## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation on Windows and Linux operating systems. It supports macOS for CI Test Visibility only.
+The .NET Tracer supports automatic instrumentation on Windows and Linux operating systems. It supports macOS for CI Test Optimization only.
 
 ### Windows
 
@@ -96,7 +96,7 @@ The .NET Tracer supports Linux distributions as best-effort, based on minimum li
 
 ### macOS
 
-The .NET Tracer supports macOS for CI Test Visibility only
+The .NET Tracer supports macOS for CI Test Optimization only
 
 | Operating System         | Version | Architectures | Support level         | Package version              |
 | -------------------------|---------|---------------|-----------------------|------------------------------|

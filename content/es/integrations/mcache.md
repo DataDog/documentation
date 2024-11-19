@@ -32,7 +32,7 @@ categories:
 - caching
 - log collection
 - tracing
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_on_public_website: true

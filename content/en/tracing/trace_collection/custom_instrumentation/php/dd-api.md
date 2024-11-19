@@ -1,5 +1,5 @@
 ---
-title: PHP Custom Instrumentation using Datadog API
+title: PHP Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/manual_instrumentation/php
     - /tracing/opentracing/php
@@ -422,9 +422,7 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding span links (Beta)
-
-<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
+## Adding span links
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 

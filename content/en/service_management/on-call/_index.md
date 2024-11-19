@@ -14,8 +14,9 @@ cascade:
 {{< /callout >}} 
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">This feature is not available for the Datadog for Government site.</div>
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
+
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 

@@ -51,7 +51,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    If this process is not working as expected, ensure the logs attribute's name containing the trace ID is `dd.trace_id` and verify that the attribute is correctly set in the [reserved attributes'][4] Trace ID section.
 
-   {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="The preprocessing for JSON logs page with the Trace Id section highlighted" >}}
+{{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="The preprocessing for JSON logs page with the Trace Id section highlighted" >}}
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
@@ -64,7 +64,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    This example demonstrates the Java integration pipeline:
 
-   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="The Java log pipeline with the Trace Id remapper highlighted" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="The Java log pipeline with the Trace Id remapper highlighted" style="width:90%;">}}
 
    It is possible that the log format is not recognized by the integration pipeline. In this case, clone the pipeline and follow the [parsing troubleshooting guide][2] to make sure the pipeline accepts the log format.
 

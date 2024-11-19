@@ -31,6 +31,15 @@ Traffic is always initiated by the Agent to Datadog. No sessions are ever initia
 
 All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
 
+## Installation
+
+Add the following domains to your inclusion list to allow for Agent installation:
+
+- `install.datadoghq.com`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+- `apt.datadoghq.com`
+
 ## Destinations
 
 [APM][1]
@@ -238,14 +247,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][4] | 8443 | TCP |  |
-| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
+| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
+| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /containers/guide/cluster_agent_autoscaling_metrics
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -254,13 +263,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][5] | 8443 | TCP |  |
-| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
+| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
+| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -269,11 +279,10 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
 
 {{% /site-region %}}
 
@@ -285,7 +294,7 @@ Used for Agent services communicating with each other locally within the host on
 | ------  | ---- | ------- | ----------- |
 | [Agent browser GUI][16] | 5002 | TCP |  |
 | APM receiver | 8126 | TCP | Includes Tracing and the Profiler. |
-| [DogStatsD][18] | 8125 | UDP | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`. |
+| [DogStatsD][18] | 8125 | UDP | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
 | go_expvar server (APM) | 5012 | TCP | For more information, see [the go_expar integration documentation][15]. |
 | go_expvar integration server | 5000 | TCP | For more information, see [the go_expar integration documentation][15]. |
 | IPC API | 5001 | TCP | Port used for Inter Process Communication (IPC). |
@@ -381,3 +390,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [16]: /agent/basic_agent_usage/#gui
 [17]: /tracing/
 [18]: /developers/dogstatsd/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics

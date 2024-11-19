@@ -31,24 +31,25 @@ title: Seguimiento de errores en aplicaciones web y móviles
 
 ## Información general
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Detalles de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="Detalles de un problema en el Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
-Los problemas de errores RUM incluyen la traza (trace) de stack tecnológico, las líneas de tiempo de las sesiones de usuario y los metadatos, incluidos la localización del usuario, la versión y cualquier atributo personalizado que hayas incluido en tus informes de errores.
+Los problemas que derivan de los errores de RUM incluyen las líneas de tiempo de las sesiones de usuario, stack traces y metadatos, incluida la localización del usuario, la versión y cualquier atributo personalizado que hayas incluido en tus informes de errores.
 
-Eche un vistazo a las principales funciones de seguimiento de errores en la documentación [Explorador de seguimiento de errores][3]. Para ver el Explorador de seguimiento de errores para RUM, ve a [**Experiencia digital** > **Seguimiento de errores**][1].
+Echa un vistazo a las principales funciones de Error Tracking en la documentación de [Error Tracking Explorer][3]. A fin de ver el Error Tracking Explorer para RUM, dirígete a [**Digital Experience** (Experiencia digital) > **Error Tracking**][1].
 
 ## Configuración
 
-{{< whatsnext desc="Para empezar con el seguimiento de errores de Datadog para RUM, consulta la documentación correspondiente:" >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
+{{< whatsnext desc="A fin de empezar a usar Datadog Error Tracking para RUM, consulta la documentación correspondiente:" >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Navegador{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Referencias adicionales

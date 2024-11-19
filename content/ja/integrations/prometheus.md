@@ -20,7 +20,7 @@ author:
 categories:
 - metrics
 - event management
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
 display_on_public_website: true
@@ -28,7 +28,7 @@ draft: false
 git_integration_title: prometheus
 integration_id: prometheus
 integration_title: Prometheus (レガシー)
-integration_version: 3.6.0
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: prometheus
@@ -135,7 +135,7 @@ Prometheus Alertmanager のアラートをイベントストリームで送信�
 ```
 receivers:
 - name: datadog
-  webhook_configs:
+  webhook_configs: 
   - send_resolved: true
     url: https://app.datadoghq.com/intake/webhook/prometheus?api_key=<DATADOG_API_KEY>
 route:

@@ -19,7 +19,7 @@ assets:
     source_type_id: 10072
     source_type_name: Vertica
   monitors:
-    '[Vertica] Nodes down above K-safety level': assets/monitors/vertica_replication_safety.json
+    Vertica Nodes down above K-safety level: assets/monitors/vertica_replication_safety.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,7 +28,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: vertica
 integration_id: vertica
 integration_title: Vertica
-integration_version: 4.6.0
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: vertica

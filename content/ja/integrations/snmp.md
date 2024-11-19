@@ -23,19 +23,15 @@ assets:
     source_type_id: 78
     source_type_name: SNMP
   monitors:
-    '[SNMP] BGP peer state between {{snmp_device.name}} and neighbor {{neighbor.name}} is stuck in an unestablished state': assets/monitors/bgp_peer_state_stuck.json
-    '[SNMP] CPU usage high for {{snmp_device.name}} in namespace {{device_namespace.name}}': assets/monitors/high_cpu.json
-    '[SNMP] Device Down Alert': assets/monitors/device_down.json
-    '[SNMP] Device Unreachable Alert': assets/monitors/device_unreachable.json
-    ? '[SNMP] High interface bandwidth usage for incoming traffic for device {{snmp_device.name}}
-      on interface {{interface.name}} in {{device_namespace.name}}'
-    : assets/monitors/high_interface_bandwidth_usage_in.json
-    ? '[SNMP] High interface bandwidth usage for outgoing traffic for device {{snmp_device.name}}
-      on interface {{interface.name}} in {{device_namespace.name}}'
-    : assets/monitors/high_interface_bandwidth_usage_out.json
-    '[SNMP] High memory usage for device {{snmp_device.name}} in namespace {{device_namespace.name}}': assets/monitors/high_memory.json
-    '[SNMP] Interface Down Alert': assets/monitors/interface_down.json
-    '[SNMP] LinkDown Trap Alert': assets/monitors/traps_linkDown.json
+    BGP peer state is stuck in an unestablished state: assets/monitors/bgp_peer_state_stuck.json
+    Device is down: assets/monitors/device_down.json
+    Interface bandwidth usage for incoming traffic is high: assets/monitors/high_interface_bandwidth_usage_in.json
+    Interface bandwidth usage for outgoing traffic is high: assets/monitors/high_interface_bandwidth_usage_out.json
+    Interface is down on SNMP device: assets/monitors/interface_down.json
+    LinkDown Trap Interface is down on SNMP device: assets/monitors/traps_linkDown.json
+    SNMP Device is unreachable: assets/monitors/device_unreachable.json
+    SNMP device CPU usage is high: assets/monitors/high_cpu.json
+    SNMP device memory usage is high: assets/monitors/high_memory.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -45,7 +41,7 @@ categories:
 - network
 - notifications
 - snmp
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
 display_on_public_website: true
@@ -53,7 +49,7 @@ draft: false
 git_integration_title: snmp
 integration_id: snmp
 integration_title: SNMP
-integration_version: 7.4.0
+integration_version: 9.0.0
 is_public: true
 manifest_version: 2.0.0
 name: snmp

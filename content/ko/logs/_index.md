@@ -45,6 +45,10 @@ further_reading:
 title: 로그 관리
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  초급 또는 중급 활성화 세션에 참가해 Datadog  Log Management를 사용해 로그, 메트릭, 트레이스를 하나로 통합해 보는 방법을 알아보세요. 이를 통해 로그 데이터 분석에 풍성한 컨텍스트를 얻을 수 있습니다.
+{{< /learning-center-callout >}}
+
 ## 개요
 
 시스템 운영의 중요 요소에 대한 로그를 수집하는 것은 인프라스트럭처 서비스 상태를 유지하는 데 매우 중요합니다. 최신 인프라스트럭처는 분당 로그 이벤트를 수천 개 생성할 수 있는 기능을 갖추고 있습니다. 이러한 조건에서는 로그 관리 솔루션에 전송할 로그와 보관할 로그를 선택해야 합니다. 그러나 로그를 전송하기 전에 필터링하면 범위에 공백이 생기거나 중요한 데이터가 실수로 삭제될 수도 있습니다.
@@ -69,7 +73,7 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 
 일단 로그를 수집하면, 프로세스 파이프라인과 프로세서로 모든 로그를 보강 및 처리하고 인덱스를 활용하여 로그 관리 예산을 제어합니다. 또한 수집한 로그로 메트릭을 생성하거나 [로그 설정 옵션][5]으로 스토리지에 최적화된 아카이브 내에서 해당 로그를 관리합니다.
 
-## 연결
+## Connect
 
 {{< img src="/logs/connect.png" alt="로그를 메트릭 또는 트레이스와 연결하기" style="width:80%;">}}
 
@@ -97,7 +101,7 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*제한 없는 로깅은 Datadog, Inc.의 상표입니다.
+*Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/explorer/
 [2]: /ko/security/cloud_siem/

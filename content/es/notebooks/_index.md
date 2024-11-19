@@ -14,20 +14,19 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Prácticas recomendadas para redactar informes de incidentes
-- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
-  tag: blog
-  text: Automatiza tareas de seguridad habituales y protégete frente a las amenazas
-    con Datadog Workflows y Cloud SIEM
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
+  tag: Blog
+  text: Transforma y mejora tus logs con pipelines de observabilidad de Datadog
 title: Notebooks
 ---
 
 ## Información general
 
-Los notebooks combinan gráficos y texto en un formato lineal con celdas. De esta forma, te permiten consultar y compartir artículos con tus datos en informes, estudios, runbooks y otros documentos.
+Los notebooks combinan gráficos y texto en un formato lineal con celdas. De esta forma, te permiten consultar y compartir artículos mediante la creación de informes, estudios, runbooks y otros documentos.
 
-## Primeros pasos
+## Para empezar
 
-1. En la página con la [lista de notebooks][1], haz clic en **+ New Notebook** (+ Nuevo notebook).
+1. En la página de la [lista de notebooks][1], haz clic en **+ New Notebook** (+ Nuevo notebook).
 
 2. Haz clic en el botón **Save Notebook** (Guardar notebook). </br>
   **Nota**: De forma predeterminada, los notebooks nuevos no se guardan automáticamente.
@@ -38,63 +37,97 @@ Los notebooks combinan gráficos y texto en un formato lineal con celdas. De est
 
 ## Colaboración
 
-{{< img src="notebooks/collaboration.png" alt="Indicadores de los usuarios que están consultando un notebook y haciendo cambios en vivo" style="width:100%;">}}
+{{< img src="notebooks/collaboration.png" alt="Indicadores de los usuarios que están consultando un notebook y realizando cambios en vivo" style="width:100%;">}}
 
-Los notebooks permiten la colaboración en tiempo real. Los indicadores de presencia muestran a las personas que están consultando un notebook en cualquier momento, además de las modificaciones en tiempo real de las celdas. Los cambios hechos en un notebook aparecen de forma automática sin necesidad de actualizar.
+Los notebooks permiten la colaboración en tiempo real. Los indicadores de presencia te permiten ver quiénes están consultando un notebook en cualquier momento, además de las modificaciones en tiempo real de las celdas. Los cambios llevados a cabo en un notebook aparecen de forma automática, sin necesidad de actualizar.
 
-Todos los miembros del equipo pueden abrirlos, pero solo los usuarios de Datadog con el permiso `Notebooks Write` pueden modificarlos o eliminarlos.
+Todos los miembros del equipo pueden abrirlos, pero sólo los usuarios de Datadog con el permiso `Notebooks Write` pueden modificarlos o eliminarlos.
 
-### Comentar
+### Comentarios
 
-Para añadir un comentario, selecciona un texto o pasa el cursor por encima de un gráfico. El icono **Add comment** (Añadir comentario) aparecerá a la derecha de la celda. Desde los comentarios, también puedes notificar a un miembro del equipo hacer mediante la función`@mention`. Haz clic en los tres puntos verticales de la esquina superior derecha de un comentario que hayas escrito para editarlo o borrarlo. También puedes consultar o reabrir comentarios resueltos en el panel lateral Comment History (Historial de comentarios), al que podrás acceder desde el menú del engranaje del notebook.
+Para añadir un comentario, selecciona un texto o pasa el cursor sobre un gráfico. El icono **Add comment** (Añadir comentario) aparecerá a la derecha de la celda. Desde los comentarios, también puedes notificar a un miembro del equipo mediante la función`@mention`. Haz clic en los tres puntos verticales de la esquina superior derecha de un comentario que hayas escrito para editarlo o borrarlo. También puedes consultar o reabrir comentarios resueltos en el panel lateral Comment History (Historial de comentarios), al que podrás acceder desde el menú del engranaje del notebook.
 
-Los autores de un notebook reciben notificaciones por email cuando se publican comentarios en sus notebooks. A su vez, la persona que deja el comentario también los recibe cuando alguien le responde. Gestiona los parámetros de las notificaciones usando `Notifications` en el menú del engranaje.
+Los creadores reciben notificaciones de correo electrónico cada vez que alguien publica comentarios en sus notebooks. A su vez, la persona que deja el comentario también los recibe cuando alguien le responde. Gestiona los parámetros de las notificaciones mediante `Notifications`, en el menú del engranaje.
 
 ### Tipo de vista
 
-{{< img src="notebooks/read_mode.png" alt="Menú desplegable de tipo de vista" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="Menú desplegable del tipo de vista" style="width:100%;">}}
 
-Puedes alternar entre las distintas vistas del notebook seleccionando el menú desplegable de la parte superior derecha de tu notebook.
+Puedes elegir entre las distintas vistas del notebook seleccionando el menú desplegable en la parte superior derecha de tu notebook.
 
 - **Editing** (Edición): para hacer cambios en el notebook.
 
-- **Viewing** (Visualización): para consultar contenidos que son de solo lectura y evitar que los usuarios hagan cambios no deseados en parámetros y datos.
+- **Viewing** (Visualización): para consultar contenidos que son de sólo lectura y evitar que los usuarios hagan cambios no deseados en parámetros y datos.
 
 - **Presenting** (Presentación): para compartir contenidos de forma que cada celda del notebook aparezca como una diapositiva. Este modo es compatible con interacciones gráficas como cuadros de información y leyendas.
 
 ## Compartir un notebook
 
-Haz clic en el icono del engranaje de la parte superior derecha de un notebook para ver las opciones para compartir. Puedes exportarlo a PDF, Markdown y otros formatos compatibles con un editor de documentos.
+Haz clic en el icono del engranaje en la parte superior derecha de un notebook para ver las opciones para compartir. Puedes exportarlo a PDF, Markdown y otros formatos compatibles con un editor de documentos.
 
-Para copiar un notebook en un editor de documentos, haz clic en **Copy formatted contents** (Copiar contenidos con formato). Luego pégalo en un editor de documentos tipo Google Docs o Microsoft Word para ver los contenidos, incluidos los gráficos, en su formato original.
+Para copiar un notebook en un editor de documentos, haz clic en **Copy formatted contents** (Copiar contenidos con formato). Luego, pégalo en un editor de documentos como Google Docs o Microsoft Word para ver los contenidos, incluidos los gráficos, en su formato original.
 
 ### Importar o exportar un notebook en formato JSON
 
-Usa **Export Notebook JSON** (Exportar notebook en formato JSON) para descargar un archivo JSON que contiene la definición de tu notebook. Con **Import Notebook JSON** (Importar notebook en formato JSON) se sobreescribe el contenido del notebook con el del archivo JSON que cargues.
+Utiliza **Export Notebook JSON** (Exportar notebook en formato JSON) para descargar un archivo JSON que contiene la definición de tu notebook. Con **Import Notebook JSON** (Importar notebook en formato JSON) se sobreescribe el contenido del notebook con el contenido del archivo JSON cargado.
 
 ### Enlace a celdas individuales
 
-Para copiar la URL de una celda específica, haz clic en el menú **Share** (Compartir) de la celda y selecciona **Link directly to cell** (Vincular directamente a celda). La vinculación directa está disponible tanto para las celdas de visualización como para las de Markdown.
+Para copiar la URL de una celda específica, haz clic en el menú **Share** (Compartir) de la celda y selecciona **Link directly to cell** (Vincular directamente a celda). La vinculación directa está disponible tanto para las celdas de visualización como para las celdas Markdown.
 
-Cuando un usuario visita la URL de una celda específica, se abre el notebook y muestra la celda en la parte superior de la ventanilla. Los enlaces son absolutos. La URL de una celda no varía incluso si se cambia de sitio dentro del notebook. 
+Cuando un usuario visita la URL de una celda específica, el notebook se abre y muestra la celda en la parte superior de la ventanilla. Los enlaces son absolutos. La URL de una celda no varía incluso si se la cambia de sitio dentro del notebook. 
+
+## Añadir imágenes a notebooks
+
+<div class="alert alert-info">Solo se admiten los tipos de archivo PNG, JPG, JPEG y GIF. El tamaño máximo de los archivos es de 4 MB.</a></div>
+
+Puedes añadir imágenes a tu notebook mediante la [celda de imagen](#image-cell) o el [editor de Markdown](#markdown-editor).
+
+### Celda de imagen
+
+Este método coloca la imagen en una celda separada del texto y ofrece opciones para redimensionar, alinear y titular la imagen. Las imágenes cargadas por la celda de imagen se alojan en Datadog.
+
+Para añadir una imagen, haz clic en la opción de celda **Image** (Imagen) del menú **Add New Cell** (Añadir nueva celda).
+
+{{< img src="notebooks/image_cell.png" alt="Celda de imagen en el menú de celdas Añadir nueva celda" style="width:70%;" >}}
+
+Puedes utilizar cualquiera de las siguientes opciones para subir una imagen que se alojará en Datadog:
+- Coloca un archivo de imagen en el área de carga
+- Haz clic en **Choose File** (Seleccionar archivo) y localiza la imagen en tu directorio de archivos
+- Pega una URL de acceso público para la imagen
+
+Haz clic en los iconos de la bandeja de acciones de la celda para ajustar el tamaño, la alineación, añadir una leyenda para la celda de la imagen o ver la imagen en modo de pantalla completa.
+
+{{< img src="notebooks/notebooks_image_edit_action_tray.png" alt="Bandeja de acciones de la celda para ajustar la alineación de la imagen y añadir una leyenda" style="width:70%;" >}}
+
+### Editor de Markdown
+
+Este método coloca la imagen en línea con el texto, pero no ofrece opciones para cambiar el tamaño de la imagen.
+
+Accede al modo de edición en cualquier celda de Markdown y utiliza cualquiera de las siguientes opciones para añadir la imagen:
+- Coloca un archivo de imagen en el área de celdas de texto.
+- Copia y pega la imagen directamente en el área de la celda de texto.
+- Hipervincula una imagen externa mediante el widget de la imagen en el encabezado o haciendo referencia a la [guía oficial de Markdown][2]. **Nota**: Esta opción no carga la imagen que se alojará en Datadog. 
+
+Puedes previsualizar la imagen en pestaña de vista previa antes de guardarla en tu notebook.
 
 ## Lista de notebooks
 
 {{< img src="notebooks/notebook_list.png" alt="Lista de notebooks con la vista previa de los tipos de celdas de un notebook seleccionado" style="width:100%;">}}
 
-La [lista de notebooks][1] te permite ver y buscar notebooks creados anteriormente. Se muestra el nombre, el creador y la fecha de última modificación de cada notebook. Los notebooks se agrupan por:
+La [lista de notebooks][1] te permite ver y buscar notebooks creados anteriormente. Se muestra el nombre, el creador y la fecha de la última modificación de cada notebook. Los notebooks se agrupan por:
 
 * **Your notebooks** (Tus notebooks): notebooks que has creado.
 * **All Notebooks** (Todos los notebooks): todos los notebooks de tu organización.
 * **[Notebook Type (Tipo de notebook)](#notebook-types)**: agrupa los notebooks por tipo.
 
-Pasa el cursor encima del icono de vista previa en cualquier notebook para ver los contenidos, incluidos los de tipo widget y Markdown. Para abrir el notebook en [modo de visualización](#view-mode), pasa el cursor encima del notebook y haz clic en **Open notebook in view mode** (Abrir notebook en modo de visualización) a la derecha.
+Pasa el cursor sobre el icono de vista previa en cualquier notebook para ver los contenidos, incluidos los de tipo widget y Markdown. Para abrir el notebook en [modo de visualización](#view-mode), pasa el cursor sobre el notebook y haz clic en **Open notebook in view mode** (Abrir notebook en modo de visualización) a la derecha.
 
 ## Galería de plantillas
-En la [galería de plantillas][2] podrás ver plantillas listas para usar a partir de las cuales podrás crear nuevos <txprotected>notebooks</txprotected>. Las plantillas incluyen un informe de respuesta a incidentes, un informe de incidentes y una especificación SLO. También puedes crear una nueva plantilla personalizada para construir estructuras de notebook reutilizables.
+En la [galería de plantillas][3], puedes obtener plantillas listas para usar a partir de las que puedes crear notebooks. Estas plantillas incluyen un informe retrospectivo de la respuesta ante incidencias, un informe de incidencias y una especificación de SLO. También puedes crear una nueva plantilla personalizada para generar estructuras de notebook reutilizables.
 
 ## Historial de versiones
-Desde notebook, haz clic en el icono **Configure** (Configurar) y luego en **Version history** (Historial de versiones) para abrir el panel lateral del historial de versiones. Puedes previsualizar, restaurar o clonar el historial de versiones de tu notebook. Para más información, consulta la [guía del historial de versiones][3].
+Desde un notebook, haz clic en el icono **Configure** (Configurar) y haz clic en **Version history** (Historial de versiones) para abrir el panel lateral Historial de versiones. Puedes previsualizar, restaurar o clonar el historial de versiones de tu notebook. Para más información, consulta la [Guía del historial de versiones][4].
 
 ## Configuración del notebook
 
@@ -136,7 +169,7 @@ Si quieres compartir una versión de tu notebook con snapshots, desde el menú d
 
 ### Variables de plantilla
 
-Los notebooks aceptan variables de plantilla. Recorre las visualizaciones de forma dinámica añadiendo y seleccionando valores de variables de plantilla. Para obtener más información, consulta [Variables de plantilla][4].
+Los notebooks aceptan variables de plantilla. Recorre las visualizaciones de forma dinámica añadiendo y seleccionando valores de variables de plantilla. Para obtener más información, consulta [Variables de plantilla][5].
 
 ### Configuración de las celdas
 
@@ -160,26 +193,31 @@ En una celda de un notebook, haz clic en **Edit** (Editar) para ver la configura
 
 #### Tipos de contenido
 
-Los notebooks aceptan celdas de visualización y de texto. Las celdas de texto tienen formato [Markdown][5], lo que permite usar encabezados, subencabezados, enlaces, imágenes, listas y bloques de código. También aceptan diagramas con formato [MermaidJS][6].
+Los notebooks aceptan celdas de visualización y de texto. Las celdas de texto tienen formato [Markdown][6], lo que permite usar encabezados, subencabezados, enlaces, imágenes, listas y bloques de código. También aceptan diagramas con formato [MermaidJS][6].
 
 Los gráficos en notebooks son compatibles con todos los orígenes de datos de Datadog: métricas, eventos de logs, tráfico de redes, eventos RUM, métricas de elaboración de perfiles, señales de seguridad, etc. Los gráficos se crean con el editor de consultas de Datadog. Notebook acepta: 
 
-* [Series temporales][7]
-* [Principales][8]
-* [Tablas][9]
-* [Mapas de calor][10]
-* [Distribuciones][11]
-* [Lista][12]
-* [Valores de consulta][13]
-* [Gráficos de embudo][14]
-* [Gráficos circulares][15]
-* [SLO][16]
+* [Texto][8]
+* [Imágenes](#add-images-to-cells)
+* [Series temporales][9]
+* [Lista principal][10]
+* [Tabla][11]
+* [Valor de la consulta][12]
+* [Mapa de calor][13]
+* [Distribución][14]
+* [Lista][15]
+* [Perfilado de la gráfica de llamas][16]
+* [Embudo][17]
+* [Torta][18]
+* [Mapa de árboles][16]
+* [Mapa geográfico][19]
+* [SLO][20]
 
 ### Limitar el acceso de edición
 
 Por omisión, todos los usuarios tienen acceso completo a notebooks.
 
-Utiliza los controles de acceso granular para limitar los [roles][17] que pueden editar un notebook concreto:
+Utiliza controles de acceso detallados para limitar los [roles][21] que pueden editar un determinado notebook:
 1. Cuando consultes un notebook, haz clic en el engranaje que aparece en la parte superior derecha. Se abrirá el menú de configuración.
 1. Selecciona **Permissions** (Permisos).
 1. Haz clic en **Restrict Access** (Restringir el acceso).
@@ -195,26 +233,30 @@ Para restablecer el acceso general a un notebook con acceso restringido, sigue e
 1. Cuando consultes un notebook, haz clic en el engranaje que aparece en la parte superior derecha. Se abrirá el menú de configuración.
 1. Selecciona **Permissions** (Permisos).
 1. Haz clic en **Restore Full Access** (Restablecer acceso completo).
-1. Haz clic en **Save** (Guardar).
+1. Haz clic en **Guardar**.
 
-## Leer más
+## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
-[3]: /es/notebooks/guide/version_history
-[4]: /es/dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: https://mermaid.js.org/
-[7]: /es/dashboards/widgets/timeseries/
-[8]: /es/dashboards/widgets/top_list/
-[9]: /es/dashboards/widgets/table/
-[10]: /es/dashboards/widgets/heatmap/
-[11]: /es/dashboards/widgets/distribution/
-[12]: /es/dashboards/widgets/list/
-[13]: /es/dashboards/widgets/query_value/
-[14]: /es/dashboards/widgets/funnel/
-[15]: /es/dashboards/widgets/pie_chart/
-[16]: /es/dashboards/widgets/slo/
-[17]: /es/account_management/rbac/
+[2]: https://www.markdownguide.org/basic-syntax/#images-1
+[3]: https://app.datadoghq.com/notebook/template-gallery
+[4]: /es/notebooks/guide/version_history
+[5]: /es/dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /es/dashboards/widgets/free_text/
+[9]: /es/dashboards/widgets/timeseries/
+[10]: /es/dashboards/widgets/top_list/
+[11]: /es/dashboards/widgets/table/
+[12]: /es/dashboards/widgets/query_value/
+[13]: /es/dashboards/widgets/heatmap/
+[14]: /es/dashboards/widgets/distribution/
+[15]: /es/dashboards/widgets/list/
+[16]: /es/dashboards/widgets/treemap/
+[17]: /es/dashboards/widgets/funnel/
+[18]: /es/dashboards/widgets/pie_chart/
+[19]: /es/dashboards/widgets/geomap/
+[20]: /es/dashboards/widgets/slo/
+[21]: /es/account_management/rbac/

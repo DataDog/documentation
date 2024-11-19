@@ -297,6 +297,23 @@ export default function App() {
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
 
+### Set tracking consent (GDPR compliance)
+
+To be compliant with the GDPR regulation, the RUM React Native SDK requires the tracking consent value at initialization.
+
+The `trackingConsent` setting can be one of the following values:
+
+1. `.PENDING`: The RUM React Native SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOReact NativeS SDK waits for the new tracking consent value to decide what to do with the batched data.
+2. `.GRANTED`: The RUM React Native SDK starts collecting the data and sends it to Datadog.
+3. `.NOTGRANTED`: The RUM iReact NativeOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
+
+To change the tracking consent value after the RUM React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM React Native SDK changes its behavior according to the new value.
+
+For example, if the current tracking consent is `.PENDING`:
+
+- If you change the value to `.GRANTED`, the RUM React Native SDK sends all current and future data to Datadog;
+- If you change the value to `.NOTGRANTED`, the RUM React Native SDK wipes all current data and does not collect future data.
+
 ### Override the reported version
 
 By default, the Datadog React Native SDK reports the `version` as the commercial version of your app (for example, "1.2.44").
