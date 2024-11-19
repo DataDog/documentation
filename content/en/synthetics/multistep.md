@@ -87,17 +87,17 @@ Under **Execution Settings**, the following options are available:
 
 #### Step success:
 
-Click **If step succeeds, continue to next step** to allow your test to move on with subsequent steps after successful steps.  
+Click **If step succeeds, continue to next step** to let your test proceed with subsequent steps after successful steps.  
 
 {{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Screenshot of execution settings showing step success options continue to next step" style="width:90%;" >}}
 
-Click **If step succeeds, exit test and mark it as passed** to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure. 
+Click **If step succeeds, exit test and mark it as passed** to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as failed. 
 
 {{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Screenshot of execution settings showing step success exit and mark as passed" style="width:90%;" >}}
 
 #### Step failure
 
-Click **If step fails, continue to next step** to move on with subsequent steps after step failure. This can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
+Click **If step fails, continue to next step** to proceed with subsequent steps after step failure. This can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
