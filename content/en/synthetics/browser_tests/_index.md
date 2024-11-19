@@ -53,6 +53,24 @@ Define the configuration of your browser test.
 
 6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
 
+### Snippets
+
+Use snippets when creating a new Synthetic Monitoring browser test to pre-populate your devices and regions. The following snippets are available:
+
+**Large screen check**:
+Automatically perform your browser tests on a large screen across browsers.
+
+**Tablet check**:
+Automatically perform your browser tests on a tablet sized screen across browsers.
+
+**Large screen check**:
+Automatically perform your browser tests on a mobile sized screen across browsers.
+
+**Multi-region check**: Test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA)
+
+  {{< img src="synthetics/browser_tests/browser_snippets.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="90%" >}}
+
+
 ### Advanced options
 
 {{< tabs >}}
