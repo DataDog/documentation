@@ -30,23 +30,35 @@ avg:nginx.connections_current{state:active}
 ```
 You get an average of averages, not the true average across all timeseries. This happens because traditional [metrics functions][1] combine the results of separate queries rather than treating the data as a single metric.
 
-## Datadog Makes Combining Datadog and OTel Integration Metrics Easy
+## Combining metrics with the equiv_otel function
 
-The metrics function `equiv_otel` is provided to address both problems illustrated above.
+The `equiv_otel` function automatically combines equivalent Datadog and OTel metrics in a single query. It:
 
-If you have a Datadog style query for `avg:nginx.net.connections` and you want to actually examine the average of all nginx active connections regardless of whether that data is provided by a Datadog or OTel integration, simply specify your query as an argument to the `equiv_otel` function. The `equiv_otel` function will automatically convert the Datadog style query to the equivalent OTel query, and then aggregate the results of both queries together as if they were a single metric.
+- Automatically handles metric name translation.
+- Properly aggregates all timeseries as a single metric.
+- Works bidirectionally (Datadog to OTel or OTel to Datadog).
+- Preserves query aggregation semantics.
 
-`equiv_otel(avg:nginx.net.connections)`
+### Converting from Datadog to OTel
 
-Upon seeing a query wrapped in `equiv_otel`, Datadog will first lookup the equivalent OTel named metric, and optionally a filter. In this case its `nginx.connections_current{state:active}`. Next all of the query aggregations, `avg` in this case, will be applied across all time series combined from these two metrics, preserving the aggregation semantics of hte original query.
+To include the equivalent OTel metrics in your query, wrap your Datadog query in `equiv_otel`:
 
-This function works both ways. If you have an OTel query first, but want to change it to include all equivalent Datadog integration metrics, wrap it in `equiv_otel`. In this example, it would best
+```
+equiv_otel(avg:nginx.net.connections)
+```
+This query:
+1. Identifies the equivalent OTel metric (`nginx.connections_current{state:active}`)
+2. Combines timeseries from both metrics
+3. Applies the aggregation (`avg`) across all datapoints
 
-`equiv_otel(avg:nginx.current_connections{state:active})`
+### Converting from OTel to Datadog
 
-Datadog will know that the corresponding time series for nginx integrations observed by Datadog is `nginx.net.connections`. It will include these time series in the `avg` aggregation.
+The same works for including Datadog metrics in an OTel query:
 
-Now you don't have to worry about knowing the equivalences between integration metrics.
+```
+equiv_otel(avg:nginx.connections_current{state:active})
+```
+The function works the same way in reverse, automatically including the equivalent Datadog metric (`nginx.net.connections`).
 
 ```
 [1]: /dashboards/functions
