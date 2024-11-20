@@ -9,7 +9,7 @@ further_reading:
   text: "Setting Up Database Monitoring for Amazon RDS managed Postgres"
 ---
 
-Database Monitoring Quick Install for RDS enables you to quickly set up Agents to monitor your RDS Postgres instances. After specifying a few options, Datadog generates a CloudFormation template that configures your instance for monitoring and uses AWS ECS to deploy the Agent with recommended DBM configurations to the RDS instance.
+Database Monitoring Quick Install for RDS enables you to quickly set up Agents to monitor your RDS Postgres instances. After you specify a few options, Datadog generates a CloudFormation template that configures your instance for monitoring, and uses Amazon ECS to deploy the Agent to the RDS instance with recommended DBM configurations.
 
 ## Prerequisites
 
