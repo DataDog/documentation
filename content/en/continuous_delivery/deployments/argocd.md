@@ -218,6 +218,8 @@ If the automatic setup is too limited for your use case, it is possible to provi
     datadog-ci deployment correlate --provider argocd --config-repo <CONFIG_REPO_URL> --config-shas <COMMIT_SHA>
 ```
 You can omit the `--config-repo` option if the CI is checked out to the configuration repository. See [command syntax][14] for additional details.
+
+[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,7 +252,6 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/service_catalog
-[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
