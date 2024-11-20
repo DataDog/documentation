@@ -93,6 +93,16 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% /tab %}}
 
+{{% tab "Go" %}}
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Test optimization for Go is in Preview.
+{{< /callout >}}
+
+`orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 

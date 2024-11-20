@@ -25,7 +25,7 @@ categories:
 - メトリクス
 - ログの収集
 - クラウド
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,7 +58,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-AWS Elemental MediaConvert is a service that formats and compresses offline video content for delivery to televisions or connected devices.
+AWS Elemental MediaConvert は、オフラインビデオコンテンツをテレビや接続デバイスへの配信用にフォーマットして圧縮するサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Elemental MediaConvert メトリクスを表示できます。
 
@@ -71,20 +71,20 @@ AWS Elemental MediaConvert is a service that formats and compresses offline vide
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MediaConvert` が有効になっていることを確認します。
-2. Install the [Datadog - AWS Elemental MediaConvert integration][3].
+2. [Datadog - AWS Elemental MediaConvert インテグレーション][3]をインストールします。
 
 ### ログ収集
 
 #### ログの有効化
 
-Configure AWS Elemental MediaConvert to send logs to either an S3 bucket or to CloudWatch.
+AWS Elemental MediaConvert を構成して、ログを S3 バケットまたは CloudWatch のいずれかに送信するよう設定します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_mediaconvert` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your AWS Elemental MediaConvert logs in the AWS console:
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS Elemental MediaConvert ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -97,11 +97,11 @@ Configure AWS Elemental MediaConvert to send logs to either an S3 bucket or to C
 
 ### イベント
 
-The AWS Elemental MediaConvert integration does not include any events.
+AWS Elemental MediaConvert インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
 
-The AWS Elemental MediaConvert integration does not include any service checks.
+AWS Elemental MediaConvert インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -111,7 +111,7 @@ The AWS Elemental MediaConvert integration does not include any service checks.
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mediaconvert
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediaconvert/amazon_mediaconvert_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

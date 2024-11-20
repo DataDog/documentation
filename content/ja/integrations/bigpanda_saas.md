@@ -30,7 +30,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -129,4 +129,4 @@ Datadog マーケットプレイスでのご提供には、BigPanda プラット
 [6]: https://docs.datadoghq.com/ja/logs
 [7]: https://docs.datadoghq.com/ja/tracing
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

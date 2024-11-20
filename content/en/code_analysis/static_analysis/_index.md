@@ -4,7 +4,7 @@ description: Learn about Datadog Static Analysis to scan code for quality issues
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -16,15 +16,16 @@ algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 
@@ -106,7 +107,7 @@ The two types of fixes are distinguished visually in the UI with different label
 *AI Suggested Fixes:*
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
-<div class="alert alert-warning">AI Suggested Fixes are in private beta. To request access, contact <a href="/help/">Support.</div>
+<div class="alert alert-warning">AI Suggested Fixes are in Preview. To request access, contact <a href="/help/">Support.</div>
 
 ### Fixing a vulnerability or quality issue directly from Datadog
 {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}

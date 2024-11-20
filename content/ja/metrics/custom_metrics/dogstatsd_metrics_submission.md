@@ -1014,7 +1014,7 @@ DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` 
 | `GAUGE`        | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
 | `SET`          | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
 | `HISTOGRAM`    | `histogram.count` 統計は COUNT メトリクスであり、上記の補正を受け取ります。他の統計は GAUGE メトリクスなので、「補正」は行われません。                      |
-| `DISTRIBUTION` | Values received are counted (`1/<SAMPLE_RATE>`) times. It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
+| `DISTRIBUTION` | 受け取った値は (`1/<SAMPLE_RATE>`) 倍として計上されます。受信したデータポイント 1 つに対し、`1/<SAMPLE_RATE>` 個が同じ値で実際にサンプリングされたと考えるのは理にかなっています。 |
 
 #### コード例
 

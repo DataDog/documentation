@@ -1,7 +1,5 @@
 ---
 title: Domain Allowlist API
-private: true
-is_beta: true
 further_reading:
 - link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
   tag: "In the app"
@@ -11,8 +9,8 @@ further_reading:
   text: "Domain Allowlist UI"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
-  Domain Allowlist is available in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
+{{< callout url="/help/" header="Get Started with Domain Allowlist" >}}
+  Domain Allowlist is available for customers with Enterprise plans. If you're interested in this feature, contact Datadog support to request access.
 {{< /callout >}} 
 
 [Domain Allowlist][1] enables you to restrict the email domains to which notifications can be sent. 
