@@ -29,7 +29,7 @@ The available functionality has the following important limitations:
 
 - If proxying compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
 - This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX web servers.
-- If NGINX or IIS is acting as a proxy and the upstream server has end-to-end encryption (like TLS) enabled, the module can not inject RUM. Ensure the web server is set up for TLS origination for successful instrumentation.
+- If NGINX or IIS is acting as a proxy and the upstream server has end-to-end encryption (like TLS) enabled, the module cannot inject RUM. Ensure the web server is set up for TLS origination for successful instrumentation.
 - (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
 
 ## Prerequisites
@@ -44,7 +44,7 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{% tab "NGINX" %}}
 
 The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses 
-identified as HTML. You can instrument your RUM application automatically or manually.
+identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install NGINX manually.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 
@@ -69,7 +69,7 @@ To automatically instrument your RUM application:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Manual installation" level="h5" %}}
+{{% collapse-content title="Manual configuration" level="h5" %}}
 
 ### Download the appropriate `.tgz` file
 
