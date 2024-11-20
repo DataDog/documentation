@@ -2,7 +2,7 @@
 # Ignore .md files compiled from Markdoc
 /en/markdoc/demos/colors/primary.md
 /en/markdoc/demos/colors/traffic_light.md
-/en/markdoc/demos/debug_it/markdoc.md
+/en/markdoc/demos/debug_it/_index.md
 /en/markdoc/demos/postgres_setup/_index.md
 /en/markdoc/tags_and_elements/alert/_index.md
 /en/markdoc/tags_and_elements/callout/_index.md
