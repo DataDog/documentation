@@ -30,11 +30,12 @@ further_reading:
 algolia:
   tags: ['service catalog']
 ---
+`Service` is the only component type in Service Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 
-## Assigning an owner to a service
+## Assigning an owner 
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
-## Determining and communicating service levels
+## Determining and communicating criticality 
 Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
 
 ## Understanding your service configuration
@@ -101,3 +102,4 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 [7]: https://app.datadoghq.com/services
 [8]: /tracing/services/service_page/
 [9]: /tracing/service_catalog/service_definition_api/
+[10]: /service_catalog/service_definitions/v3-0/
