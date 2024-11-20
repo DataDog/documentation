@@ -53,6 +53,15 @@ If you've already [set up Cloud Security Management][3] and want to add a new AW
 
 {{% csm-agentless-exclude-resources %}}
 
+## Update the CloudFormation stack
+
+Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
+1. Log in to your AWS console and go to the CloudFormation Stacks page.
+2. Select the `DatadogIntegration-DatadogAgentlessScanning-...` CloudFormation sub-stack, and click on `Update` then `Update nested stack`.
+3. Click on `Replace existing template`.
+4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][4].
+5. Paste the S3 URL and click on `Next` in the next pages, then submit the form.
+
 ## Disable Agentless Scanning
 
 1. On the [Cloud Security Management Setup][3] page, click **Cloud Integrations** > **AWS**.
@@ -63,15 +72,6 @@ If you've already [set up Cloud Security Management][3] and want to add a new AW
 
 To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
 
-## Update the CloudFormation stack
-
-To update the Agentless Scanning CloudFormation stack:
-
-* Log in to your AWS console, select the `DatadogIntegration-DatadogAgentlessScanning...` CloudFormation sub-stack and click on `Update nested stack`
-* Replace existing template using the following S3 URL:
-  * `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`
-  * Replace `<VERSION>` in the URL above with the version found in https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -79,3 +79,4 @@ To update the Agentless Scanning CloudFormation stack:
 [1]: /security/cloud_security_management/agentless_scanning
 [2]: /security/cloud_security_management/setup/agentless_scanning/terraform
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
+[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
