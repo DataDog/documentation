@@ -335,7 +335,7 @@ aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-doc
 aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
 ```
 
-2. Modify the IAM role permission policies of the ECS task where the Agent is running to allow assuming the IAM role created in the previous step.
+2. Modify the IAM role permission policies of the ECS task where the Agent is running to allow the agent to assume the IAM role created in the previous step.
    - Replace `<YOUR_AGENT_ECS_ROLE>` with the IAM role of the ECS task where the Agent is running
    - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
    - Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located
