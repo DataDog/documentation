@@ -55,7 +55,7 @@ Define the configuration of your browser test.
 
 ### Snippets
 
-Use snippets when creating a new Synthetic Monitoring browser test to pre-populate your devices and regions. The following snippets are available:
+When setting up a new Synthetic Monitoring browser test, use snippets to automatically fill in your devices and regions, rather than selecting these options manually. The following snippets are available:
 
 **Large screen check**:
 Automatically perform your browser tests on a large screen across browsers.
@@ -66,9 +66,9 @@ Automatically perform your browser tests on a tablet sized screen across browser
 **Large screen check**:
 Automatically perform your browser tests on a mobile sized screen across browsers.
 
-**Multi-region check**: Test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA)
+**Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions.
 
-  {{< img src="synthetics/browser_tests/browser_snippets.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="90%" >}}
+  {{< img src="synthetics/browser_tests/browser_snippets.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
 
 
 ### Advanced options

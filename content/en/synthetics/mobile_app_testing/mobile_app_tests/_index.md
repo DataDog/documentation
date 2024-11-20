@@ -29,7 +29,7 @@ Mobile app tests can run on a schedule, on-demand, or directly within your [CI/C
 
 You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
-{{< img src="mobile_app_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
+{{< img src="mobile_app_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:60%;">}}
 
 ### Flakiness 
 
@@ -51,6 +51,53 @@ Define the configuration of your mobile app test.
 5. Set retry conditions for your test.
 6. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
 7. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
+
+### Snippets
+
+When configuring a new Mobile Application test, utilize snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
+
+  {{< img src="mobile_app_testing/mobile_app_snippets.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
+
+**OS Version**:
+Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
+
+**Device Size**:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Multi-screen size
+: Automatically test your iOS  apps across multiple form factors.
+
+Tablet
+: Automatically test your iOS apps on tablets.
+
+Large Screen
+: Automatically test your iOS apps on large screen devices.
+
+Standard Screen
+: Automatically test your iOS apps on standard screen devices.
+
+Small Screen
+: Automatically test your iOS apps on on small screen devices.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Multi-screen size
+: Automatically test your Android apps across multiple form factors.
+
+Tablet
+: Automatically test your Android apps on tablets.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Device Manufacturer (Android only)**:
+Automatically test your Android apps across multiple device manufacturers.
+
+**Uptime**: Automatically configure a test with the shortest frequency available (every 15 minutes).
 
 {{% synthetics-variables %}}
 
