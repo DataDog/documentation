@@ -191,11 +191,11 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-The `datadog-ci deployment correlate` command can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. The version of the `datadog-ci` CLI should be `2.44.0` or higher.
+The `datadog-ci deployment correlate` command can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. Both methods require version `2.44.0` or higher of the `datadog-ci` CLI.
 
 {{< tabs >}}
 {{% tab "Automatic" %}}
-When this approach is used, the command automatically infers the current application commit (that is, the commit of the pipeline the command is running in) and the configuration repository commits based on the current Git environment. For this to work properly, the command needs to be run between committing the changes and pushing them to the configuration repository:
+In this method, the command automatically infers the current application commit (that is, the commit of the pipeline that the command is running in) and the configuration repository commits based on the current Git environment. For this to work properly, the command needs to be run between committing the changes and pushing them to the configuration repository:
 ```yaml
 - job: JobToUpdateConfigurationRepository
   run: |
@@ -209,7 +209,7 @@ When this approach is used, the command automatically infers the current applica
 ```
 {{% /tab %}}
 {{% tab "Manual" %}}
-If the automatic setup is too limited for your use case, it is possible to provide the configuration repository URL and SHAs manually:
+If the automatic setup is too limited for your use case, you can provide the configuration repository URL and SHAs manually:
 ```yaml
 - job: JobToUpdateConfigurationRepository
   run: |
