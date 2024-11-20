@@ -57,6 +57,33 @@ Define the configuration of your mobile app test.
 6. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
 7. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
 
+### Snippets
+
+When configuring a new Mobile Application test, utilize snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
+
+* **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
+
+* **Device Size**:
+
+  - **Multi-screen size**: Automatically test your iOS or Android apps across multiple form factors.
+
+  - **Tablet**: Automatically test your iOS or Android apps on tablets.
+
+  - **Large Screen (iOS only)**: Automatically test your iOS apps on large screen devices.
+
+  - **Standard Screen (iOS only)**: Automatically test your iOS apps on standard screen devices.
+
+  - **Small Screen (iOS only)**: Automatically test your iOS apps on on small screen devices.
+
+* **Device Manufacturer (Android only)**: Automatically test your Android apps across multiple device manufacturers.
+
+* **Uptime**: Automatically configure a test with the shortest frequency available (every 15 minutes).
+
+<br/>
+  {{< img src="mobile_app_testing/mobile_app_snippets.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
+
+## Variables
+
 {{% synthetics-variables %}}
 
 ### Use global variables
