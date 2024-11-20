@@ -22,7 +22,7 @@ The Go Datadog Trace Library has a [version support policy][2] defined for Go ve
 ### Requirements
 
 - Datadog Agent v5.21.1+.
-- Instrument your application before configuring integrations:
+- Instrument your application before configuring integrations using one of the following methods:
   * [Automatically at compile time using `orchestrion`][78]
   * [Manually add and initialize the Datadog Go tracer][77]
 

@@ -66,7 +66,6 @@ Refer to the instructions in the section corresponding to your preference below:
 - Supports the two latest Go runtime releases (matching [Go's official release policy][8]).
 - Applications must be managed using [go modules][10]. Module vendoring is supported.
 
-#### Supported packages
 
 ### Install Orchestrion
 
@@ -76,7 +75,7 @@ To install and set up Orchestrion:
    ```sh
    go install github.com/DataDog/orchestrion@latest
    ```
-   <div class="alert alert-info">Ensure <code>$(go env GOBIN)</code> (or <code>$(go env GOPATH)/bin</code>) is in your <code>$PATH</code>.</div>
+   <div class="alert alert-info"><strong>Note</strong>: Ensure that <code>$(go env GOBIN)</code> or <code>$(go env GOPATH)/bin</code> is in your <code>$PATH</code>.</div>
 
 1. Register Orchestrion in your project's `go.mod`:
    ```sh
@@ -120,7 +119,7 @@ Use one of these methods to enable Orchestrion in your build process:
 
 #### Setting up Unified Service Tagging
 
-Applictions instrumented by `orchestrion` support Unified Service Tagging (UST). You can set your traces' UST tags by setting the corresponding environment variable in your application's **runtime** environment:
+Applications instrumented by `orchestrion` support Unified Service Tagging (UST). You can set UST tags for your traces by setting the corresponding environment variable in your application's **runtime** environment:
 
 | Unified Tag | Environment  |
 |-------------|--------------|
@@ -160,12 +159,12 @@ The name of the operation (`span.name`) is determined automatically using the fo
 {{<code-block lang="go" filename="example.go" collapsible="true">}}
 //dd:span tag-name:spanName other-tag:bar span.name:operationName
 func tracedFunction() {
-  // This functino will be represented as a span named "operationName"
+  // This function will be represented as a span named "operationName"
 }
 
 //dd:span tag-name:spanName other-tag:bar
 func otherTracedFunction() {
-  // This functino will be represented as a span named "otherTracedFunction"
+  // This function will be represented as a span named "otherTracedFunction"
 }
 
 //dd:span tag-name:spanName other-tag:bar
@@ -197,7 +196,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 
 ### Troubleshooting
 
-To troubleshoot `orchestrion`-managed builds, see [Troubleshooting Go Compile-Time Instrumentation][13]
+To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
 
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [6]: https://github.com/DataDog/orchestrion
@@ -216,13 +215,13 @@ To troubleshoot `orchestrion`-managed builds, see [Troubleshooting Go Compile-Ti
 
 ### Activate Go integrations to create spans
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. You can find a list of these packages in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
 
 ### Configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][4].
+For configuration instructions and details about using the API, see the [Datadog API documentation][4].
 
 [1]: /tracing/compatibility_requirements/go
 [3]: /tracing/trace_collection/library_config/go/
