@@ -11,9 +11,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Prácticas recomendadas para la creación de tests de extremo a extremo
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: Centro de aprendizaje
-  text: Introducción a los tests Synthetic
+  text: 'Centro de aprendizaje de Datadog: Empezando con los tests de navegador Synthetic'
 - link: /getting_started/synthetics/browser_test
   tag: Documentación
   text: Empezando con los tests de navegador
@@ -50,9 +50,9 @@ Define la configuración de tu test de navegador.
 
    {{% managed-locations %}}
 
-   También puedes utilizar el [túnel de tests continuos][15] para activar tests en tu configuración de desarrollo local o en tu pipeline CI/CD para realizar tests en entornos internos.
+   También puedes utilizar el [túnel de tests continuos][2] para activar tests en tu configuración de desarrollo local o en tu pipeline de CI/CD para realizar tests en entornos internos.
 
-6. Ajusta la **frecuencia de los tests**: Los intervalos varían de cada cinco minutos a una vez por semana. Para solicitar una frecuencia de un minuto, [ponte en contacto con el servicio de asistencia][2].
+6. Ajusta la **frecuencia de los tests**: los intervalos varían de cada cinco minutos a una vez por semana. Para solicitar una frecuencia de un minuto, [ponte en contacto con el servicio de asistencia][3].
 
 ### Opciones avanzadas
 
@@ -110,7 +110,9 @@ Introduce una cantidad de tiempo en segundos que el test deberá esperar antes d
 
 {{% tab "Hora e idioma" %}}
 
-Por defecto, la zona horaria está definida en UTC y el idioma en inglés (En). Para definir un idioma, utiliza el [código ISO] de 2 o 3 dígitos correspondiente[19].
+  Por defecto, la zona horaria está establecida en UTC y el idioma en inglés (en). Para definir un idioma, utiliza el [código ISO][1] de 2 o 3 dígitos correspondiente.
+
+[1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -119,19 +121,19 @@ Por defecto, la zona horaria está definida en UTC y el idioma en inglés (En). 
 
 ### Uso de variables globales
 
-Puedes utilizar las [variables globales definidas en **Configuración**][3] en la **URL de inicio** y en **Opciones avanzadas** de los detalles del test de tu navegador, así como en la grabación del test.
+Puedes utilizar las [variables globales definidas en **Settings** (Configuración)][4] en la **Starting URL** (URL de inicio) y **Advanced Options** (Opciones avanzadas) de los detalles del test de tu navegador, así como en la grabación del test.
 
 Para visualizar una lista de las variables disponibles:
 
 - En los detalles de los tests de tu navegador: Escribe `{{` en el campo deseado.
 
-  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="Definición de una variable local a partir de variables globales" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/use_global_variables_1.mp4" alt="Definición de una variable local de las variables globales" video="true" width="90%" >}}
 
 - En la grabadora de los tests de tu navegador: Importa la variable en tu test, luego escribe `{{` en el campo deseado o inyecta la variable en tu aplicación para utilizarla.
 
-  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Inyección de una variable local en un campo durante una grabación del navegador" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/use_global_variables_2.mp4" alt="Inyección de una variable local en un campo durante una grabación de navegador" video="true" width="90%" >}}
 
-Para obtener más información sobre el uso de variables durante la grabación del test del navegador, consulta [Pasos de un test de navegador][4].
+Para más información sobre el uso de variables en la grabación del test del navegador, consulta [Pasos del test del navegador][5].
 
 ### Definir las condiciones de alerta
 
@@ -140,13 +142,13 @@ Puedes personalizar las condiciones de alerta para definir las circunstancias en
 {{< img src="synthetics/browser_tests/alerting_rules.png" alt="Regla para las alertas de un test de navegador" style="width:80%" >}}
 
 * Se activa una alerta si cualquier aserción falla durante `X` minutos desde cualquier localización `n` de `N`. Esta regla para alertas permite especificar durante cuánto tiempo y en cuántas localizaciones debe fallar un test antes de que se active la notificación.
-* Reintenta `X` veces antes de que la localización se marque como fallida. Permite definir cuántos fallos de tests consecutivos deben producirse para que una localización se considere fallida. Por defecto, hay una espera de 300 ms antes de reintentar un test fallido. Este intervalo puede configurarse con la [API][5].
+* Reintenta `X` veces antes de que la localización se marque como fallida. Esto permite definir cuántos fallos de tests consecutivos deben producirse para que una localización se considere fallida. Por defecto, hay una espera de 300 ms antes de reintentar un test que ha fallado. Este intervalo puede configurarse con la [API][6].
 
 ### Configurar el monitor de tests
 
 Se envía una notificación según el conjunto de condiciones de alerta. Utiliza esta sección para definir qué mensajes enviar a tus equipos y cómo hacerlo.
 
-1. Introduce un **mensaje** para el test del navegador. Este campo permite el [formato Markdown][6] estándar y admite las siguientes [variables condicionales][17]:
+1. Introduce un **mensaje** para el test del navegador. Este campo permite el [formato Markdown][7] estándar y admite las siguientes [variables condicionales][8]:
 
     | Variable condicional       | Descripción                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -165,35 +167,35 @@ Se envía una notificación según el conjunto de condiciones de alerta. Utiliza
 3. Especifica una frecuencia de reenvío de notificaciones. Para evitar el reenvío de notificaciones en caso de tests fallidos, deja la opción como `Never renotify if the monitor has not been resolved`.
 4. Haz clic en **Guardar detalles y grabar test** para guardar la configuración de tu test y grabar los pasos del navegador.
 
-Para obtener más información, consulta [Uso de monitores de tests Synthetic][7].
+Para obtener más información, consulta [Usar monitores de tests Synthetic][9].
 
 ## Para grabar tus pasos
 
-Los tests sólo se pueden grabar desde [Google Chrome][8]. Para grabar tu test, descarga la [extensión Datadog para la grabación de tests para Google Chrome][9].
+Los tests sólo se pueden grabar desde [Google Chrome][10]. Para grabar tu test, descarga la [extensión de Datadog para la grabación de tests de Google Chrome][11].
 
-Durante la grabación de un test de navegador puedes cambiar de pestaña para realizar una acción en tu aplicación (como hacer clic en un enlace que abre otra pestaña) y añadir otro paso de test. Tu test de navegador debe interactuar primero con la página (a través de un clic), antes de poder realizar una [aserción][10]. Al grabar todos los pasos del test, el test del navegador puede cambiar de pestaña automáticamente durante la ejecución del test.
+Durante la grabación de un test de navegador puedes cambiar de pestaña para realizar una acción en tu aplicación (como hacer clic en un enlace que abre otra pestaña) y añadir otro paso de test. Tu test de navegador debe interactuar primero con la página (a través de un clic), antes de poder realizar una [aserción][12]. Al grabar todos los pasos del test, el test del navegador puede cambiar de pestaña automáticamente durante la ejecución del test.
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Test de grabación de un test de navegador" width="90%" >}}
 
 1. También puedes seleccionar **Abrir en una ventana emergente** en la parte superior derecha de la página para abrir la grabación del test en una ventana emergente independiente. Esto es útil si tu aplicación no admite ser abierta en un iframe o si quieres evitar problemas de tamaño en la grabación. También puedes abrir la ventana emergente en **Modo incógnito** para empezar a grabar tu test desde un navegador nuevo, libre de sesiones ya iniciadas, cookies de tu navegador actual, etc.
-2. También puedes habilitar Datadog para recopilar automáticamente datos RUM al ejecutar grabaciones de los pasos del test de tu navegador. Para obtener más información, consulta [Explorar RUM y Session Replay][11].
+2. También puedes habilitar Datadog para recopilar automáticamente datos RUM al ejecutar grabaciones de los pasos del test de tu navegador. Para obtener más información, consulta [Explorar RUM y Session Replay][13].
 3. Haz clic en **Iniciar grabación** para empezar a grabar el test de tu navegador.
-4. A medida que haces clic en tu aplicación en el recorrido del usuario que quieres monitorizar, tus acciones se graban automáticamente y se utilizan para crear [pasos][12] en el escenario de test de tu navegador a la izquierda.
-5. Además de los pasos grabados automáticamente, también puedes utilizar los [pasos][12] disponibles en la esquina superior izquierda para enriquecer tu escenario:
+4. A medida que haces clic en tu aplicación en el recorrido del usuario que quieres monitorizar, tus acciones se graban automáticamente y se utilizan para crear [pasos][14] en el escenario de test de tu navegador a la izquierda.
+5. Además de los pasos grabados automáticamente, también puedes utilizar los [pasos][14] disponibles en la esquina superior izquierda para mejorar tu escenario:
    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Pasos del test de navegador" style="width:80%;">}}
 
-   Datadog recomienda finalizar tu test de navegador con una **[aserción][10]** para confirmar que el recorrido ejecutado por el test del navegador ha dado como resultado al estado esperado.
+   Datadog recomienda finalizar tu test de navegador con una **[aserción][12]** para confirmar que el recorrido ejecutado por el test del navegador ha dado como resultado el estado esperado.
 6. Una vez que termines tu escenario, haz clic en **Guardar e iniciar test**.
 
 ## Permisos
 
-De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][13] pueden crear, editar y eliminar tests de navegador Synthetic. Para crear, editar y eliminar tests de navegador Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][13].
+De manera predeterminada, solo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][15] pueden crear, editar y eliminar tests de navegador Synthetic. Para crear, editar y eliminar tests de navegador Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][15].
 
-Si utilizas la función [rol personalizado][13], añade tu usuario a cualquier rol personalizado que incluya permisos de `synthetics_read` y `synthetics_write`.
+Si estás utilizando la [función de rol personalizado][15], añade tu usuario a cualquier rol que incluya permisos `synthetics_read` y `synthetics_write`.
 
 ### Restringir el acceso
 
-La restricción de acceso está disponible para los clientes que utilizan [roles personalizados][14] en sus cuentas.
+La restricción del acceso está disponible para clientes que utilizan [roles personalizados][16] en sus cuentas.
 
 Puedes restringir el acceso a un test de navegador en función de los roles de tu organización. Al crear un test de navegador, elige qué roles (además de tu usuario) pueden leer y escribir tu test.
 
@@ -204,20 +206,18 @@ Puedes restringir el acceso a un test de navegador en función de los roles de t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/synthetics/private_locations/
-[2]: /es/help/
-[3]: /es/synthetics/settings/#global-variables
-[4]: /es/synthetics/browser_tests/actions#variables
-[5]: /es/api/latest/synthetics/#create-or-clone-a-test
-[6]: http://daringfireball.net/projects/markdown/syntax
-[7]: /es/synthetics/guide/synthetic-test-monitors
-[8]: https://www.google.com/chrome
-[9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[10]: /es/synthetics/browser_tests/actions/#assertion
-[11]: /es/synthetics/guide/explore-rum-through-synthetics/
-[12]: /es/synthetics/browser_tests/actions/
-[13]: /es/account_management/rbac#custom-roles
-[14]: /es/account_management/rbac/#create-a-custom-role
-[15]: /es/continuous_testing/environments/proxy_firewall_vpn
-[16]: /es/synthetics/guide/browser-tests-passkeys
-[17]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
-[19] https://www.loc.gov/standards/iso639-2/php/code_list.php
+[2]: /es/continuous_testing/environments/proxy_firewall_vpn
+[3]: /es/help/
+[4]: /es/synthetics/settings/#global-variables
+[5]: /es/synthetics/browser_tests/actions#variables
+[6]: /es/api/latest/synthetics/#create-or-clone-a-test
+[7]: http://daringfireball.net/projects/markdown/syntax
+[8]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
+[9]: /es/synthetics/guide/synthetic-test-monitors
+[10]: https://www.google.com/chrome
+[11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[12]: /es/synthetics/browser_tests/actions/#assertion
+[13]: /es/synthetics/guide/explore-rum-through-synthetics/
+[14]: /es/synthetics/browser_tests/actions/
+[15]: /es/account_management/rbac#custom-roles
+[16]: /es/account_management/rbac/#create-a-custom-role
