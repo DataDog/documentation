@@ -35,7 +35,7 @@ You can set RUM configs on your web servers and Datadog will automatically injec
 
 To set up Browser Monitoring, create an application in Datadog:
 
-1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][1] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the [**Digital Experience** > **Add an Application**][1] page and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][2].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
    - Choose the installation type for the RUM Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
@@ -66,7 +66,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 To set up Browser Monitoring, create an application in Datadog:
 
-1. In Datadog, navigate to the [**Error Tracking > Settings > Browser and Mobile > Add an Application** page ][1] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the [**Error Tracking > Settings > Browser and Mobile > Add an Application**][1] page and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Browser Data Collected][2].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
    - Choose the installation type for the Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
