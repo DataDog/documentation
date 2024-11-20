@@ -5781,11 +5781,6 @@ menu:
       parent: cspm_findings_explorer
       identifier: cspm_export_misconfigurations
       weight: 101
-    - name: Signals Explorer
-      url: /security/cloud_security_management/misconfigurations/signals_explorer/
-      parent: cspm
-      identifier: signals
-      weight: 306
     - name: Identity Risks
       url: security/cloud_security_management/identity_risks/
       parent: csm

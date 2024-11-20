@@ -7,6 +7,10 @@ aliases:
   - /security_platform/notifications/rules/
   - /security/notification_profiles/
   - /security/notification_rules/
+  - /security_platform/cspm/signals_explorer
+  - /security/cspm/signals_explorer
+  - /security/misconfigurations/signals_explorer
+  - /security/cloud_security_management/misconfigurations/signals_explorer/
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
