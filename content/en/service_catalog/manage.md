@@ -1,5 +1,5 @@
 ---
-title: Manage a Service
+title: Manage a Component
 aliases:
   - /tracing/service_catalog/investigating
   - /service_catalog/investigating/

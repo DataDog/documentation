@@ -1880,12 +1880,12 @@ menu:
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 2
-    - name: Manage a Service
+    - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
       identifier: service_catalog_investigate
       weight: 3
-    - name: Service Definitions
+    - name: Definitions
       url: service_catalog/service_definitions/
       parent: service_catalog
       identifier: service_catalog_definitions_versions
@@ -1910,7 +1910,7 @@ menu:
       parent: service_catalog_definitions_versions
       identifier: service_catalog_definitions_2-0
       weight: 404
-    - name: Service Scorecards
+    - name: Scorecards
       url: service_catalog/scorecards
       parent: service_catalog
       identifier: service_catalog_scorecards
