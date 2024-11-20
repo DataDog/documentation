@@ -34,7 +34,6 @@ x-data="{
     'cloud-provider': [],
     'resource-type': []
   },
-  filtering: {},
   searchValue: '',
   openedFilterForm: null,
   filteredRulesets: new Set(),
@@ -50,12 +49,10 @@ x-data="{
       // Compares search values and filter values against ruleInfo
       const ruleInfo = ruleEl.dataset.info.split(';') //seperate filter values from search vals
       const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
-      console.log('filters are lowercase here: ',ruleFilterInfo)
       const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
 
       const filterValues = Object.values(this.filterTypes)
       const searchValues = this.searchValue.split(' ')
-      console.log('curr filtervals: ',filterValues)
 
       /**
       *   FILTER LOGIC (containsFilteredValue) e.g.:
@@ -64,17 +61,15 @@ x-data="{
       *     'cloud-provider': [],
       *     'resource-type': []
       *   }
-      *   show ruleEl if condition met ('Javascript' OR 'Docker') AND Security AND Warning
       */
 
-      const containsFilteredValue = filterValues.every((t, idx) => t.length ? t.some(f => ruleFilterInfo[idx] === f.toLowerCase()) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
+      const containsFilteredValue = filterValues.every((t, idx) => t.length ? t.some(f => ruleFilterInfo[idx] === f.toLowerCase()) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type. scrict. filter value must match correct filter type
       const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
       
       if(containsSearchValues && containsFilteredValue){
         ruleEl.classList.add('show')
         this.filteredRulesets.add(ruleEl.dataset.id)
-        this.filtering[ruleEl.dataset.id] = true
       }else{
           ruleEl.classList.remove('show')    
       }
@@ -84,16 +79,12 @@ x-data="{
   resetFilteredRulesets () {
     // Empty filtered rulesets
     this.filteredRulesets = new Set()
-    this.filtering = {}
   },
   deleteOneSelection (filterType, filterOption) {
     // delete one filterOption from selections in filter toggler
-
+    
     this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
-
-    const [displayName,_,langLookupName] = filterOption.split(',')
-    const filterName = langLookupName || displayName
-    this.pushState(filterType, filterName)
+    this.pushState(filterType, filterOption)
   },
   deleteAllSelections (filterType) {
     // delete all selections of a filter type from filter toggler and url params
@@ -101,6 +92,7 @@ x-data="{
     this.filterTypes[filterType] = []
     this.openedFilterForm = null
     const url = new URL(window.location.href)
+
     url.searchParams.delete(filterType)
     window.history.pushState(null,'', url.toString())
   },
@@ -108,12 +100,11 @@ x-data="{
       // Updates x-data properties with url param values
       
       const url = new URL(window.location.href)
-      console.log([...url.searchParams.entries()])
       Array.from(url.searchParams.entries()).forEach(([key, value]) => {
           if (key === 'search'){
               this.searchValue = value
           } else {
-              this.filterTypes[key]?.push(value.replaceAll('-', ' '))
+              this.filterTypes[key]?.push(value)
           }
       })
   },
@@ -126,13 +117,19 @@ x-data="{
           if(!url.searchParams.getAll(filterType).includes(filterOption)){
               // add one key:value param
               url.searchParams.append(filterType, filterOption)
-          }else{
+            }else{
               // remove one key:value param
-              const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}(?=\&|$)`, 'g');
+
+              function encode (match) {
+                // helper function to encode some special characters. 
+                // accounting for how the url toString method encodes characters
+                return match === ' ' ? '\\+': '%'+ match.charCodeAt(0).toString(16).toUpperCase()
+              }
+              const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(/[\s()!*\[\]%,]/g, encode)}(?=\&|$)`, 'g');
               newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
           }
           if(!this.filterTypes[filterType].length) {
-              url.searchParams.delete(filterType)
+             url.searchParams.delete(filterType)
           }
       }else {
           url.searchParams.set('search', this.searchValue)
@@ -147,7 +144,6 @@ x-data="{
       // Determine and return the appropriate empty results message
 
       const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
-      console.log(this.filteredRulesets.size, '<-- filtered rows')
       if(filterValues.length && this.searchValue){
           return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
       }else{
@@ -174,7 +170,7 @@ x-init="updateWithURLParams()">
       {{ $int := 0 }}
       {{ range .Params.recommendations }}
         {{/*  
-            build a string with rule's lookup info for filtering and searching against
+            build a string with rule's lookup info for filtering and searching against. must maintain filter_info order to align with filterTypes prop.
         */}}
         {{ $filter_info := (printf "%s,%s,%s" .category .cloud_provider .resource_type) }}
         {{ $all_info := (delimit (slice $filter_info (.recommendation_type|lower) (.recommendation_description|lower) (.recommendation_prerequisites|lower) ) ";") }}
@@ -206,7 +202,11 @@ x-init="updateWithURLParams()">
       </tbody>
       </table>
       {{/*  hook into the app lifecycle. $watch for 'filteredRulesets' to change and update the 'showEmptyResultsMsg' property  */}}
-      <div x-init="showEmptyResultsMsg = !filteredRulesets.size; $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)">
+      <div x-init="
+        showEmptyResultsMsg = !filteredRulesets.size; 
+        $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)
+        ">
+        {{/*  $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)  */}}
         <template x-if="showEmptyResultsMsg">
             <span class="fw-semibold" x-text="emptyResultsMsg"></span>
         </template>
@@ -241,7 +241,7 @@ x-init="updateWithURLParams()">
                                 {{/*  Delete one selection (x) */}}
                                 <div 
                                 :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
-                                class="close-light-wrapper" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
+                                class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
                                     {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                 </div>
                             </div>
@@ -270,18 +270,19 @@ x-init="updateWithURLParams()">
                         <span>All</span>
                     </div>
 
-                    {{ range index ($pad.Get "filters") $v }}
+                    {{ range (index ($pad.Get "filters") $v) | sort  }}
+                    {{ $id := (printf "%s-%s" . $filter_type) | anchorize }}
                     <div class="filter-selection-container">
                         <input 
-                        id="{{ . | anchorize }}" 
+                        id='{{ $id }}' 
                         type="checkbox" 
                         value='{{ . }}' 
                         x-model="filterTypes['{{$filter_type}}']"
                         @change="resetFilteredRulesets"
-                        @change.debounce="pushState('{{ $filter_type }}', '{{ . | anchorize }}')"
+                        @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
                         >  
                         
-                        <label for="{{ . | anchorize }}" class="d-flex align-items-center">
+                        <label for="{{ $id }}" class="d-flex align-items-center">
                             {{.}}
                         </label>
                     </div>
