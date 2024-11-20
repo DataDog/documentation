@@ -182,5 +182,5 @@ To link your Step Function traces to nested Step Function traces, configure your
 
 This capability is not supported.
 
-[1]: /serverless/installation/#installation-instructions
-[2]: /serverless/step_functions/installation
+[1]: /serverless/step_functions/installation
+[2]: /serverless/installation/#installation-instructions
