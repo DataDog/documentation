@@ -2351,7 +2351,7 @@ See `usePartitionedCrossSiteSessionCookie`.
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows the use of `localStorage` when cookies cannot be set. This enables the Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][13] for a typical use-case.
+Allows the use of `localStorage` when cookies cannot be set. This enables the Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][13] for a typical use case.
 
 [1]: /account_management/api-app-keys/#client-tokens
 [2]: /getting_started/site/
