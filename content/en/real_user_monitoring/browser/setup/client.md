@@ -1,5 +1,5 @@
 ---
-title: RUM Browser Monitoring Client-Side Instrumentation
+title: Browser Monitoring Client-Side Instrumentation
 code_lang: client
 type: multi-code-lang
 code_lang_weight: 1
@@ -17,15 +17,17 @@ further_reading:
 
 ## Overview
 
-You can manually instrument each of your applications with the Datadog Browser RUM SDK.
+The Datadog Browser SDK can be used to instrument your application for both [Real User Monitoring (RUM)][1] and [Error Tracking][2].
 
-After your applications have been instrumented, you can begin managing your RUM configurations per application in Datadog.
+After your applications have been manually instrumented, you can begin managing your RUM and Error Tracking configurations per application in Datadog.
 
-The RUM Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][1] table.
+The Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][3] table.
 
-This page includes instructions for how to set up the RUM Browser SDK for RUM and Error Tracking.
 
 ## Setup
+
+{{< tabs >}}
+{{% tab "RUM" %}}
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Auto-Instrumentation Preview!">}}
 You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
@@ -33,8 +35,6 @@ You can set RUM configs on your web servers and Datadog will automatically injec
 
 To set up Browser Monitoring, create an application in Datadog:
 
-{{< tabs >}}
-{{% tab "RUM" %}}
 1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][1] and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][2].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
@@ -63,6 +63,8 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
+
+To set up Browser Monitoring, create an application in Datadog:
 
 1. In Datadog, navigate to the [**Error Tracking > Settings > Browser and Mobile > Add an Application** page ][1] and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Browser Data Collected][2].
@@ -115,7 +117,7 @@ CDN sync
 
 ### npm
 
-Add [`@datadog/browser-rum`][2] to your `package.json` file, then initialize it with:
+Add [`@datadog/browser-rum`][4] to your `package.json` file, then initialize it with:
 
 {{< tabs >}}
 {{% tab "RUM" %}}
@@ -2459,5 +2461,7 @@ This option is not supported for Error Tracking.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[2]: https://www.npmjs.com/package/@datadog/browser-rum
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
+[4]: https://www.npmjs.com/package/@datadog/browser-rum
