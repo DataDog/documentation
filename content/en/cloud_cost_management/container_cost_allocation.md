@@ -141,7 +141,7 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 For Kubernetes data transfer allocation, a Kubernetes node is joined with its associated data transfer costs from the [CUR][103]. The node's cluster name and all node tags are added to the entire data transfer cost for the node. This allows you to associate cluster-level dimensions with the cost of the data transfer, without considering the pods scheduled to the node.
 
-Next, Datadog looks at all of the [workload resources][104] running on that node for the day. The cost of the node is allocated to the workload level based on the volume of network traffic used. This calculated cost is enriched with all of the workload resource's tags.
+Next, Datadog examines the daily [workload resources][104] running on that node. The node cost is allocated to the workload level according to network traffic volume usage. This calculated cost is enriched with all of the workload resource's tags.
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
