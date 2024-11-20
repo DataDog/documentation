@@ -15415,34 +15415,8 @@ components:
       type: object
     SyntheticsDeviceID:
       description: The device ID.
-      enum:
-      - laptop_large
-      - tablet
-      - mobile_small
-      - chrome.laptop_large
-      - chrome.tablet
-      - chrome.mobile_small
-      - firefox.laptop_large
-      - firefox.tablet
-      - firefox.mobile_small
-      - edge.laptop_large
-      - edge.tablet
-      - edge.mobile_small
       example: chrome.laptop_large
       type: string
-      x-enum-varnames:
-      - LAPTOP_LARGE
-      - TABLET
-      - MOBILE_SMALL
-      - CHROME_LAPTOP_LARGE
-      - CHROME_TABLET
-      - CHROME_MOBILE_SMALL
-      - FIREFOX_LAPTOP_LARGE
-      - FIREFOX_TABLET
-      - FIREFOX_MOBILE_SMALL
-      - EDGE_LAPTOP_LARGE
-      - EDGE_TABLET
-      - EDGE_MOBILE_SMALL
     SyntheticsFetchUptimesPayload:
       description: Object containing IDs of Synthetic tests and a timeframe.
       properties:
@@ -15745,10 +15719,6 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
-    SyntheticsMobileDeviceID:
-      description: The device ID.
-      example: synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
-      type: string
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -16024,7 +15994,7 @@ components:
         device_ids:
           description: Array with the different device IDs used to run the test.
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         message:
           description: Notification message associated with the test.
@@ -16113,7 +16083,7 @@ components:
           example:
           - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         disableAutoAcceptAlert:
           description: A boolean to disable auto accepting alerts.
