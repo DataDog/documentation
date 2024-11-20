@@ -326,6 +326,8 @@ For each cloud account that you would like to receive recommendations for:
 
 ## Recommendation and resource descriptions
 
+{{< multifilter-search >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
