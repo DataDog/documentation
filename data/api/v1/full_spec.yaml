@@ -4761,6 +4761,11 @@ components:
           description: Widget column field.
           example: content
           type: string
+        is_clustering_pattern_field_path:
+          description: Identifies the clustering pattern field column, usable only
+            with logs_pattern_stream.
+          example: true
+          type: boolean
         width:
           $ref: '#/components/schemas/ListStreamColumnWidth'
       required:
@@ -4840,6 +4845,12 @@ components:
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        clustering_pattern_field_path:
+          default: message
+          description: Specifies the field for logs pattern clustering. Usable only
+            with logs_pattern_stream.
+          example: message
+          type: string
         compute:
           description: Compute configuration for the List Stream Widget. Compute can
             be used only with the logs_transaction_stream (from 1 to 5 items) list
