@@ -21,11 +21,11 @@ orchestrion go build -work ./...
 WORK=/tmp/go-build2455442813
 ```
 
-The work tree location prints at the start of the build, marked with `WORK=`. This directory contains subdirectories for each built `go` package.
+The work tree location prints at the start of the build, marked with `WORK=`. This directory contains subdirectories for each built `go` package, which are called _stage directories_.
 
 ## Work tree contents
 
-When Orchestrion injects code into a source file, it writes the modified file to the package's stage directory in the `orchestrion/src` subdirectory. For modified package import configurations, the original file is preserved with a `.original` suffix. You can inspect these human-readable files to verify Orchestrion's actions. Contact Datadog support for help interpreting these files.
+When Orchestrion injects code into a source file, it writes the modified file to the package's stage directory (`$WORK/b###`) in the `orchestrion/src` subdirectory. For modified package import configurations, the original file is preserved with a `.original` suffix. You can inspect these human-readable files to verify Orchestrion's actions. Contact Datadog support for help interpreting these files.
 
 ## Logging configuration
 
@@ -52,7 +52,7 @@ Write logging messages to files instead of the console by setting the `ORCHESTRI
 
 The log file path can include `$PID` or `${PID}` tokens, which are replaced with the logging process's PID. This reduces file contention but creates multiple log files for large projects.
 
-Logging appends to existing files rather than overwriting them.
+Logging appends to existing files rather than overwriting them, regardless of the presence of `$PID` in the file path.
 
 ## Further reading
 
