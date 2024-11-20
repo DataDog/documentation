@@ -19,7 +19,7 @@ You can set up CSM without infrastructure monitoring, so you can save on costs.
 1. Go to the [Azure Integration configuration page][3] in Datadog.
 1. Select the client ID you want to enable CSM on.
 1. To turn off infrastructure monitoring, under the selected client ID, on the **Metric Collection** tab, turn off the **Enable Metric Collection** toggle. 
-1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** check box.
+1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
 1. Click **Save**.
 
 [1]: /security/cloud_security_management/guide/resource_evaluation_filters/
