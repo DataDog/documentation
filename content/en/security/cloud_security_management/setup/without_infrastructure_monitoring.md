@@ -11,7 +11,7 @@ You can set up CSM without infrastructure monitoring, so you can save on costs.
 1. Go to the [AWS Integration configuration page][2] in Datadog.
 1. On the **Configuration** tab, select the account you want to enable CSM on.
 1. To turn off infrastructure monitoring, under the selected account number, on the **Metric Collection** tab, click the **disable metric collection** link. Then, click **Disable Metric Collection** to confirm.
-1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** check box.
+1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
 1. Click **Save**.
 
 ## Set up CSM on your Azure subscription
