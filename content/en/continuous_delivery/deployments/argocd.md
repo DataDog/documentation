@@ -191,7 +191,7 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-The `datadog-ci deployment correlate` command can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. Both methods require version `2.44.0` or higher of the `datadog-ci` CLI.
+The [`datadog-ci deployment correlate` command][14] can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. Both methods require version `2.44.0` or higher of the `datadog-ci` CLI.
 
 {{< tabs >}}
 {{% tab "Automatic" %}}
@@ -252,6 +252,7 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/service_catalog
+[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
