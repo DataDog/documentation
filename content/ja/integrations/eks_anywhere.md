@@ -24,7 +24,7 @@ categories:
 - ログの収集
 - orchestration
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true

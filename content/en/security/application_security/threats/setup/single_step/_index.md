@@ -4,7 +4,7 @@ aliases:
 - /security/application_security/enabling/single_step/threat_detection/
 ---
 
-<div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in beta.</div>
+<div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in Preview.</div>
 
 
 ## Requirements
@@ -97,7 +97,7 @@ For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -131,7 +131,7 @@ By default, enabling APM on your server installs support for Java, Python, Ruby,
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
@@ -189,13 +189,13 @@ You can enable APM by installing the Agent with the Datadog Helm chart. This dep
 To enable single step instrumentation with Helm:
 
 1. Add the Helm Datadog repo:
-  
+
     ```bash
     helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
 2. Create a Kubernetes Secret to store your Datadog [API key][10]:
-  
+
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
 
@@ -252,7 +252,7 @@ Run the following commands and restart the service to stop injecting the library
 {{% tab "Kubernetes" %}}
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
-     
+
    ```yaml
    spec:
      template:
@@ -298,7 +298,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Under `asm:`, remove `threats:` and all following configuration in`datadog-values.yaml`.
 3. Run the following command:
-   
+
    ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
 {{% /tab %}}
