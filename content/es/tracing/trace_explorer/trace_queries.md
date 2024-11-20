@@ -13,7 +13,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentación
   text: Sintaxis de consulta de tramo
-is_beta: true
 title: Consultas de trazas
 ---
 
@@ -90,7 +89,7 @@ Pasa el ratón sobre el Desglose de latencia para tener una idea de dónde (en q
 
 **Nota**: La información mostrada en la tabla son atributos del tramo raíz de la traza, incluida la duración, que **no** representa la duración de extremo a extremo de la traza.
 
-## Analytics
+## Análisis
 
 Selecciona una de las otras visualizaciones, como `Timeseries`, `Top List`, o `Table` para agregar resultados a lo largo del tiempo, agrupados por una o varias dimensiones. Lee [Visualizaciones de tramo][2] para obtener más información sobre las opciones de agregación. 
 
@@ -119,15 +118,16 @@ Estos dos mecanismos de muestreo capturan las **trazas completas**, lo que signi
 
 El muestreo plano del 1% se aplica sobre la base de `trace_id`, lo que significa que todos los tramos pertenecientes a la misma traza comparten la misma decisión de muestreo. Para obtener más información, lee la [documentación sobre el muestreo plano del 1%][4].
 
-### Muestreo diverso
+### Muestreo por diversidad
 `retained_by:diversity_sampling`
 
 Cada 15 minutos, el muestreo diverso retiene al menos un tramo y la traza asociada para cada combinación de entorno, servicio, operación y recurso. Esto ocurre para el percentil de latencias `p75`, `p90` y `p95` para asegurar que siempre se puede encontrar un ejemplo de trazas en servicio y páginas de recursos, incluso para endpoints con poco tráfico. Para obtener más información, lee la [documentación sobre el muestreo diverso][5].
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/tracing/trace_explorer/query_syntax/
 [2]: /es/tracing/trace_explorer/visualize/#timeseries
