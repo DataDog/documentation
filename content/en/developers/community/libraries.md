@@ -63,7 +63,7 @@ In addition to the official Ansible integration, the [monitoring section][23] of
 
 ### Aptible
 
-The Aptible platform can deliver container logs and metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
+The Aptible platform can deliver container logs and metrics to a Datadog account. Consult the [Aptible help center][25] for details.
 
 ### CLI management
 
