@@ -30,7 +30,7 @@ further_reading:
 algolia:
   tags: ['service catalog']
 ---
-`Service` is the only component type in Service Catalog schema versions v2, v2.1 and v2.2. Starting in [v3.0][10] supports multiple kinds of components including `kind:system`, `kind:service`, `kind:queue`, `kind:api` and `kind:datastore`.
+`Service` is the only component type in Service Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 
 ## Assigning an owner 
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
