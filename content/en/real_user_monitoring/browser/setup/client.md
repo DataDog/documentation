@@ -26,14 +26,14 @@ The Browser SDK supports all modern desktop and mobile browsers including IE11. 
 
 ## Setup
 
-{{< tabs >}}
-{{% tab "RUM" %}}
-
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Access the Auto-Instrumentation Preview!">}}
 You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
 {{< /callout >}}
 
 To set up Browser Monitoring, create an application in Datadog:
+
+{{< tabs >}}
+{{% tab "RUM" %}}
 
 1. In Datadog, navigate to the [**Digital Experience** > **Add an Application**][1] page and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][2].
@@ -63,8 +63,6 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
-
-To set up Browser Monitoring, create an application in Datadog:
 
 1. In Datadog, navigate to the [**Error Tracking > Settings > Browser and Mobile > Add an Application**][1] page and select the JavaScript (JS) application type.
    - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Browser Data Collected][2].
