@@ -217,9 +217,9 @@ If the automatic setup is too limited for your use case, you can provide the con
     export DD_BETA_COMMANDS_ENABLED=1
     datadog-ci deployment correlate --provider argocd --config-repo <CONFIG_REPO_URL> --config-shas <COMMIT_SHA>
 ```
-You can omit the `--config-repo` option if the CI is checked out to the configuration repository. See [command syntax][14] for additional details.
+You can omit the `--config-repo` option if the CI is checked out to the configuration repository. See [command syntax][1] for additional details.
 
-[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
 {{% /tab %}}
 {{< /tabs >}}
 
