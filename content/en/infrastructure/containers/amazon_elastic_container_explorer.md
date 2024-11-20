@@ -15,11 +15,11 @@ The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources 
 * **[AWS resource collection][10]**: Required for collecting ECS resources.
 * **[ECS on EC2 integration][2]**: Required for monitoring clusters using the EC2 launch type.
 * **[ECS on Fargate integration][3]**: Required for monitoring clusters using the Fargate launch type.
-* **Agent version >= 7.58.0**: Recommended for a shorter refresh rate on the ECS Explorer page, though it is optional.
+* **Datadog Agent version >= 7.58.0**: Recommended for a shorter refresh rate on the ECS Explorer page.
 
 ## Setup
 
-Ensure you have enabled the [AWS resource collection][10], [ECS on EC2 integration][2] and [ECS on Fargate integration][3].
+Ensure you have enabled [AWS resource collection][10], the [ECS on EC2 integration][2], and the [ECS on Fargate integration][3].
 
 **Note**: The collection interval for these integrations is approximately 24 hours. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
 
@@ -71,7 +71,7 @@ Refer to [Query filter details](#query-filter-details) for information on filter
 
 #### Group by functionality and facets
 
-Group tasks by tags for an aggregated view that helps you find information more efficiently. You can group tasks using the "Group by" bar located at the top right of the page or by clicking on a specific tag and finding the group by function in the context menu, as illustrated below.
+Group tasks by tags for an aggregated view that helps you find information more efficiently. You can group tasks using the **Group by** bar located at the top right of the page or by clicking on a specific tag and finding the group by function in the context menu, as illustrated below.
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex_groupby.png" alt="Example of grouping by launch type" style="width:80%;">}}
 
@@ -111,7 +111,7 @@ Other tabs provide additional information for troubleshooting the selected resou
 
 ## Query filter details
 
-You can refine displayed resources by entering a query in the "Filter by" search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
+You can refine displayed resources by entering a query in the **Filter by** search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
 
 ### AWS tags
 
@@ -119,7 +119,7 @@ In the ECS Explorer, you can use `tag#` to search across both Datadog tags and A
 
 ### Extracted tags
 
-In addition to the tags you have [configured][9] in your Datadog agent, Datadog generates additional tags based on resource attributes, which can assist in your searching and grouping needs. These tags are conditionally added to resources when relevant.
+In addition to the tags you have [configured][9] in your Datadog Agent, Datadog generates additional tags based on resource attributes, which can assist in your searching and grouping needs. These tags are conditionally added to resources when relevant.
 
 #### All resources
 
@@ -151,7 +151,7 @@ Some resources have specific tags. The following tags are available in addition 
 
 ## Notes and known issues
 
-* Installing Datadog Agent in your cluster affects how often the ECS Explorer refreshes:
+* Installing the Datadog Agent in your cluster affects how often the ECS Explorer refreshes:
 
 | **Resource**        | **With Datadog Agent** | **Without Datadog Agent** |
 |---------------------|------------------------|--------------------------|
