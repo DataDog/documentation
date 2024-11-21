@@ -68,7 +68,7 @@ This guide provides an overview of how to get started with the Datadog Google Cl
 
 ## Setup 
 
-For simplicity of setup, and to ensure there are no gaps in your monitoring, integrate Datadog with [Google Cloud][4] using [service account impersonation][5] at the organization or folder level. 
+For the most comprehensive level of monitoring in your Google Cloud environment, integrate Datadog with [Google Cloud][4] using [service account impersonation][5] at the organization or folder level.
 
 After reviewing the above [Prerequisites][3], follow these step-by-step instructions to set up the Google Cloud integration:
 
