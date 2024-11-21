@@ -39,7 +39,9 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 There are two ways to instrument your Go application:
 
-1. **Manual instrumentation**:
+1. **Semi-Automatic instrumentation**:
+  
+   Use dd-trace-go in conjunction with our integration packages to automatically generate spans about libraries of your choosing. This option:
    - Gives you complete control over which parts of your application are traced.
    - Requires modifying the application's source code.
 2. **Compile-time instrumentation**:
@@ -48,16 +50,12 @@ There are two ways to instrument your Go application:
 
 Refer to the instructions in the section corresponding to your preference below:
 
-{{% collapse-content title="Manual instrumentation" level="p" %}}
-### Activate Go integrations to create spans
+{{% collapse-content title="Semi-Automatic instrumentation" level="p" %}}
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] for configuration instructions and details about using the API.
 
-### Configuration
+Next, activate Go integrations to generate spans. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
-
-For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 {{% /collapse-content %}}
 
 {{% collapse-content title="Compile-time instrumentation (Preview)" level="p" %}}

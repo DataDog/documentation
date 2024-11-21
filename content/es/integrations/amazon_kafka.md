@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - aws
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: amazon_kafka
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 4.11.0
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: amazon_kafka
@@ -51,6 +51,7 @@ tile:
   - Sistema operativo compatible::Windows
   - Sistema operativo compatible::macOS
   - Oferta::Integración
+  - Product::Data Streams Monitoring
   configuration: README.md#Configuración
   description: Monitoriza el estado y el rendimiento de tus clústeres Amazon MSK.
   media: []
@@ -116,7 +117,7 @@ Esta integración basada en OpenMetrics tiene un modo más reciente (`use_openme
 
 El check de Amazon MSK no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 
 Para ver una lista de los checks de servicios proporcionados por esta integración, consulta [service_checks.json][17].
 

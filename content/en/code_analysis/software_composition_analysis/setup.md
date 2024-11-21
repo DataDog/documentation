@@ -1,7 +1,7 @@
 ---
 title: Setting Up Software Composition Analysis
 description: Learn how to set up Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
@@ -22,15 +22,15 @@ algolia:
   tags: ['software composition analysis', 'software composition analysis rules', 'library vulnerabilities', 'SCA']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 
