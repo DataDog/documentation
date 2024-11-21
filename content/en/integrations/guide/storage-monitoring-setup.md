@@ -23,30 +23,33 @@ The fastest way to set up Storage Monitoring is using the provided CloudFormatio
 #### Step 1: Configure inventory generation
 
 
-This template configures your existing S3 bucket to generate inventory reports, which Datadog will use to generate detailed metrics about your prefixes.
+This template configures your existing S3 bucket to generate inventory reports, which Datadog uses to generate detailed metrics about your bucket prefixes.
 
 1. Download the source-bucket-inventory-cfn.yaml template
-2. In AWS CloudFormation, create a new stack With Existing Resources (import resources)
-3. Enter the bucket name for which you want AWS to start generating inventories and click Next
+2. In [AWS CloudFormation][1], click **Create stack** in the top right corner and select **With existing resources (import resources)**.
+3. In the **Specify template** step, select **Upload a template file**.
+4. Click **Choose file** and select the `source-bucket-inventory-cfn.yaml` file, then click **Next**.
+5. Enter the bucket name you want AWS to start generating inventories for, and click **Next**.
 
  {{< img src="integrations/guide/identify_resources.png" alt="Identify S3 resources to start generating inventory" responsive="true" style="width:60%;" >}}
 
-4. Fill in the required parameters:
-   - **DestinationBucketName**: The bucket where inventory files will be stored
-   - **SourceBucketName**: The bucket you want to monitor and start generating inventory files
+6. Fill in the required parameters:
+   - **DestinationBucketName**: The bucket for storing inventory files.
+   - **SourceBucketName**: The bucket you want to monitor and start generating inventory files for.
 
    Optional parameters:
-   - **DestinationBucketPrefix**: Specific path within the destination bucket. Please don’t include trailing slashes ( “/“ ).
-   - **SourceBucketPrefix**: (Optional) Limit monitoring to a specific path in source bucket
+   - **DestinationBucketPrefix**: Specific path within the destination bucket. Ensure this path doesn't include trailing slashes (`/`).
+   - **SourceBucketPrefix**: (Optional) Limit monitoring to a specific path in the source bucket
 
 {{< img src="integrations/guide/specify_stack_details.png" alt="Specify stack details" responsive="true" style="width:60%;" >}}
 
-5. In the next screen, wait for AWS to locate your source bucket and click on Imports resources in the bottom right corner.
+7. Click **Next**.
+8. Wait for AWS to locate your source bucket, and click **Import resources** in the bottom right corner.
 
-**Note:** This CF template can be rolled back but it won’t delete the resources created. This is to ensure the existing bucket doesn’t get deleted. Customers will have to manually delete the inventory configurations by going on the Management tab in the bucket view.
+**Note:** This CloudFormation template can be rolled back, but rolling back doesn't delete the created resources. This is to ensure the existing bucket doesn’t get deleted. You can manually delete the inventory configurations by going on the **Management** tab in the bucket view.
 
 
-#### Step 2: Configure Required Permissions
+#### Step 2: Configure required permissions
 
 This template creates two IAM policies: one allowing Datadog to read inventory files from the destination bucket, and another allowing your source bucket to write inventory files to it.
 
