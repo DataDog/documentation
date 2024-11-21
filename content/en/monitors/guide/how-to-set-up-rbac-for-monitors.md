@@ -83,9 +83,9 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 }
 ```
 
-Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict monitor editing to a specific set of roles and to the monitor's creator. 
+Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restriction_policy` parameter to restrict monitor editing to a specific set of roles and to the monitor's creator. 
 
-**Note:** You can specify one or multiple role UUIDs. Setting `restricted_roles` to `null` allows monitor editing for all users with [Monitor Write permissions][4].
+**Note:** You can specify one or multiple role UUIDs. Setting `restriction_policy` to `null` allows monitor editing for all users with [Monitor Write permissions][4].
 
 ```bash
 curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
@@ -105,7 +105,7 @@ curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
     "frontend"
   ],
   "type": "query alert",
-  "restricted_roles": ["89f5dh86-e470-11f8-e26f-4h656a27d9cc"]
+  "restriction_policy": ["89f5dh86-e470-11f8-e26f-4h656a27d9cc"]
 }'
 ```
 
@@ -127,13 +127,15 @@ Datadog allows restriction of monitor editing to specific roles through the role
 
 ### API
 
-You can update the definition of monitors that are managed through API or Terraform by using the `restricted_roles` parameter. You can also use the [Restriction Policies][4] endpoint to define the access control rules for a monitor, mapping a set of relations (such as editor and viewer) to a set of allowed principals (such as roles, teams, or users). The restriction policy determines who is authorized to perform what actions on the monitor.
+You can update the definition of monitors that are managed through API or Terraform by using the [Restriction Policies][4] endpoint to define the access control rules for a monitor, mapping a set of relations (such as editor and viewer) to a set of allowed principals (such as roles, teams, or users). The restriction policy determines who is authorized to perform what actions on the monitor.
 
 For more information, see [Edit a monitor API endpoint][3] and [Restriction Policies API][4].
 
+**Note**: The `restricted_roles` parameter has been deprecated. 
+
 ### UI
 
-All new monitors created from the UI use the `restricted_roles` parameter. 
+All new monitors created from the UI use the `restriction_policy` parameter. 
 All monitors also display the role restriction option regardless of the underlying mechanism:
 
 {{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
