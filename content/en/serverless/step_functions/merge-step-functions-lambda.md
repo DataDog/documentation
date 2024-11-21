@@ -178,7 +178,7 @@ To link your Step Function traces to nested Step Function traces, configure your
 }
 {{< /highlight >}}
 
-## Merge Any Upstream Service -> Step Functions -> Lambda
+## Merge upstream traces with Step Functions and downstream Lambda traces
 
 ### Requirements
 Node.js (layer v113+) or Python (layer v103+) runtimes.
@@ -196,15 +196,11 @@ On the Lambda Task, set the `Arguments` key as follows:
 }
 ```
 
-The `JSONata` expression will do the following:
-1. Parse the Step Functions Execution's input and look for a `_datadog` header
-2. Create this header if it doesn't exist
-3. Merge the header with the Step Functions context object
-4. Merge this object with the State's input
+The `JSONata` expression merges the upstream service's context with the current Step Functions context object and the Lambda state's input payload.
 
 Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
 
-## Merge Any Upstream Service -> Step Functions -> Step Functions
+## Merge upstream traces with Step Functions and nested Step Functions traces
 
 ### Requirements
 Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
