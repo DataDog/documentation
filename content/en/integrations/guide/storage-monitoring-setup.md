@@ -64,12 +64,11 @@ This template creates two IAM policies:
 
    Optional parameters:
     - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`).
-   - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket. Can be left blank.
+   - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket.
 
 {{< img src="integrations/guide/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:60%;" >}}
 
-
-4. Verify parameters and launch stack
+6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**
 
 {{< img src="integrations/guide/acknowledge_bucket_policy.png" alt="Verify and launch stack" responsive="true" style="width:60%;" >}}
 
@@ -77,7 +76,7 @@ This template creates two IAM policies:
 
 After completing the CloudFormation setup, reach out with the following information:
     1. Name of the destination bucket holding the inventory files
-    2. Prefix at which the files are stored in the destination bucket (if any)
+    2. Prefix where the files are stored in the destination bucket (if any)
     3. Name of the source bucket you want to monitor i.e. the bucket producing inventory files
     4. AWS Region of the destination bucket holding the inventory files
     5. AWS account ID in which the buckets live
