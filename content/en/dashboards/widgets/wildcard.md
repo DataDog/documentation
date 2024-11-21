@@ -44,19 +44,19 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 
 #### Formulas Scalar vs. Formulas Timeseries
 
-In Datadog dashboards, scalar and timeseries visualizations serve different purposes and are used to represent data in distinct ways.
+In Datadog dashboards, visualizations are powered by a multiple _request types_, including scalar and timeseries. Each _request type_ changes the number and type of fields available for the data in a Wildcard widget.
 
 **Timeseries**
-: This visualization is designed to display how your data changes over time.
+: This data format is designed to display how your data changes over time.
    - **Use-cases**: It's ideal for monitoring metrics that fluctuate, such as CPU usage, memory consumption, or request rates. It helps identify trends, patterns, and anomalies over a specified time range. 
-   - **Appearance**: These visualizations are typically line or area charts. They show datapoints plotted against time (usually on the x-axis), to observe changes and trends.
 
 **Scalar**
-: This visualization presents a single, aggregate value derived from your data.
-   - **Use-cases**: It's best for displaying key performance indicators (KPIs) or summary statistics such as averages, sums, or percentiles. It provides a summary view of the current state or a specific metric.
-   - **Appearance**: Scalars often appear as large, standalone numbers or small cards on dashboards, highlighting the most relevant statistics, like the current number of active users, or the sum of errors over the last hour.
+: This data format aggregates your data producing 1 value per "group". The scalar format is used for the toplist, treemap, pie chart, and table widget, where each group refers to 1 shape (bar, rectangle, slice, or row respectively) in your graph.
+   - **Use-cases**: It's best for displaying key performance indicators (KPIs) or summary statistics such as averages, sums, or percentiles. It provides a summary view of the current state or a specific metric. If you are not describing changes over time, use Scalar.
 
-Timeseries visualizations emphasize data trends over time, scalar visualizations focus on presenting single, computed values that help with quick assessments. If you're going to visualize time on an axis, or need individual time buckets, choose the Timeseries type. However, if you're not vizualizing against time, choose the Scalar type as it's much more performant.
+The Timeseries data format emphasizes data trends over time, while the Scalar format focuses on presenting single, computed values for quick assessments. Choose the Timeseries type if you need to visualize time on an axis or require individual time buckets. If not visualizing against time, select the Scalar type for performance. 
+
+**Note**: The "Formulas" prefix is used specifically for Scalar and Timeseries formats because they are compatible with the [Functions API][18]. The other formats, such as Histogram and List, do not support this API.
 
 ### Import data from an existing widget
 
