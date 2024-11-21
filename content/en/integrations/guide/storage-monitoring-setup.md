@@ -1,11 +1,15 @@
 ---
-title: Storage Monitoring [Preview]
+title: Storage Monitoring for Amazon S3
 private: true
 ---
 
-Storage Monitoring provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Whether you're tracking storage growth, investigating access patterns, or optimizing costs, Storage Monitoring gives you the insights you need to manage your storage infrastructure efficiently.
+<div class="alert alert-info">Storage Monitoring is in Preview.</div>
 
-This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using our provided CloudFormation templates. Please note that Storage Monitoring is currently in Preview and is available under Resource Catalog -> Monitoring -> S3 Buckets.
+## Overview
+
+Storage Monitoring for Amazon S3 provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Use these insights to help you track storage growth, investigate access patterns, and optimize costs.
+
+This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets**.
 
 ## Setup
 
@@ -14,9 +18,9 @@ This guide explains how to configure Storage Monitoring in Datadog for your S3 b
 {{< tabs >}}
 {{% tab "CloudFormation" %}}
 
-The fastest way to set up Storage Monitoring is using our provided CloudFormation templates. This process involves two steps:
+The fastest way to set up Storage Monitoring is using the provided CloudFormation templates. This process involves two steps:
 
-#### Step 1: Configure Inventory Generation
+#### Step 1: Configure inventory generation
 
 
 This template configures your existing S3 bucket to generate inventory reports, which Datadog will use to generate detailed metrics about your prefixes.
