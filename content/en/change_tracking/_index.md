@@ -46,7 +46,7 @@ Change Tracking supports monitoring of a range of modifications to your service 
 - Kubernetes Pod Crashes
 - Watchdog Alerts
 
-For details on specific types of supported changes and setup requirements [see below](#tracked-changes).
+For details on specific types of supported changes and setup requirements, see the [Tracked changes](#tracked-changes) section.
 
 ## Using Change Tracking
 
