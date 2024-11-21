@@ -24,9 +24,11 @@ The basic workflow for creating a custom chart is as follows:
 1. Add the custom chart component and choose a chart style from the App Builder UI or the [Vega-Lite example gallery][1].
 1. Replace the values in the example with your query data.
 
+## Example setup flow
+
 The following example shows how to create a histogram chart illustrating Datadog Logs grouped by service.
 
-## Set up your data source
+### Set up your data source
 
 1. Click **+ New Query**.
 1. Search for "search logs" and choose the Datadog **Search logs** action to create a query called `searchLogs0`.
@@ -36,7 +38,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 1. Under `logs`, expand `0`, then expand `content`. This shows the available properties for each log.
 
 
-## Add the custom chart component and choose a chart style
+### Add the custom chart component and choose a chart style
 
 1. Click **+ All Components** and select **Custom Chart** to add a component called `customChart0`.
 1. Click **Show Chart Examples**.
@@ -63,7 +65,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 }}{{< /code-block >}}
 
 
-## Replace example values with your data
+### Replace example values with your data
 
 Replace the auto-populated Vega Specification with the following to change the data source and the value being graphed on the x-axis:
 
@@ -90,4 +92,11 @@ Replace the auto-populated Vega Specification with the following to change the d
 A histogram chart with your Datadog Logs data displays.
 
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][0].
+
+[0]: https://datadoghq.slack.com/
 [1]: https://vega.github.io/vega-lite/examples/
