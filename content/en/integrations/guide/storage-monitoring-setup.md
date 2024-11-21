@@ -112,8 +112,8 @@ For each bucket you want to monitor:
     - **Destination**: select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`.
        **Note**: If you want to use a prefix on the destination bucket, add this as well  
     - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog  
-    - Format: CSV
-    - Enable inventory generation
+    - **Output format**: CSV  
+    - **Status**: Enabled  
     - **Server-side encryption**: Don't specify an encryption key  
     - Select the following **Additional metadata fields**:  
           - Size  
