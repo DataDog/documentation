@@ -18,7 +18,7 @@ Explore inferred services in the [Service Catalog][1] by filtering entries by en
 
 ## Set up inferred services
 
-To see inferred services, you must enable some **Datadog Agent** configurations. 
+To see inferred services, you must enable some configurations. 
 
 {{< tabs >}}
 {{% tab "Agent v7.55.1+" %}}
