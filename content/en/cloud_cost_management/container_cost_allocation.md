@@ -153,12 +153,8 @@ Datadog supports data transfer cost allocation using [standard 6 workload resour
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [104]: https://kubernetes.io/docs/concepts/workloads/
-<<<<<<< HEAD
 [105]: /network_monitoring/cloud_network_monitoring/setup
-=======
-[105]: /network_monitoring/performance/setup
 [106]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
->>>>>>> master
 
 {{% /tab %}}
 {{% tab "Azure" %}}
