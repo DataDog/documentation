@@ -25,7 +25,7 @@ The fastest way to set up Storage Monitoring is using the provided CloudFormatio
 
 This template configures your existing S3 bucket to generate inventory reports, which Datadog uses to generate detailed metrics about your bucket prefixes.
 
-1. Download the source-bucket-inventory-cfn.yaml template
+1. Download the [source-bucket-inventory-cfn.yaml](https://github.com/DataDog/experimental/blob/main/users/raphael.allier/source-bucket-inventory-cfn.yaml) template
 2. In [AWS CloudFormation][1], click **Create stack** in the top right corner and select **With existing resources (import resources)**.
 3. In the **Specify template** step, select **Upload a template file**.
 4. Click **Choose file** and select the `source-bucket-inventory-cfn.yaml` file, then click **Next**.
@@ -36,9 +36,9 @@ This template configures your existing S3 bucket to generate inventory reports, 
 6. Fill in the required parameters:
    - **DestinationBucketName**: The bucket for storing inventory files.
    - **SourceBucketName**: The bucket you want to monitor and start generating inventory files for.
+   - **DestinationBucketPrefix**: Specific path within the destination bucket. Ensure this path doesn't include trailing slashes (`/`).
 
    Optional parameters:
-   - **DestinationBucketPrefix**: Specific path within the destination bucket. Ensure this path doesn't include trailing slashes (`/`).
    - **SourceBucketPrefix**: (Optional) Limit monitoring to a specific path in the source bucket
 
 {{< img src="integrations/guide/specify_stack_details.png" alt="Specify stack details" responsive="true" style="width:60%;" >}}
@@ -51,30 +51,30 @@ This template configures your existing S3 bucket to generate inventory reports, 
 
 #### Step 2: Configure required permissions
 
-This template creates two IAM policies: 
+This template creates two IAM policies:
   - A policy to allow Datadog to read inventory files from the destination bucket
   - A policy to allow your source bucket to write inventory files to the destination bucket
 
-1. Download the cloud-inventory-policies-cfn.yaml template.
-2. Create a new stack With New Resources (standard)
-3. Fill in the required parameters:
+1. Download the [cloud-inventory-policies-cfn.yaml](https://github.com/DataDog/experimental/blob/main/users/raphael.allier/cloud-inventory-policies-cfn.yaml) template.
+2. In [AWS CloudFormation][1], click **Create stack** in the top right corner and select **With new resources (standard)**.
+3. In the **Specify template** step, select **Upload a template file**.
+4. Click **Choose file** and select the `cloud-inventory-policies-cfn.yaml` file, then click **Next**.
+5. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
    - **DestinationBucketName**: The name of the bucket that to receive your inventory files.
    - **SourceBucketName**: The name of the bucket you want to start generating inventory files for.
+   - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`).
 
    Optional parameters:
-    - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`).
    - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket.
 
 {{< img src="integrations/guide/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:60%;" >}}
 
 6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**
 
-{{< img src="integrations/guide/acknowledge_bucket_policy.png" alt="Verify and launch stack" responsive="true" style="width:60%;" >}}
-
 #### Post-Setup Steps
 
-After completing the CloudFormation setup, reach out with the following information:
+After completing the CloudFormation setup, reach out to mahashree.rajendran@datadoghq.com with the following information:
     1. Name of the destination bucket holding the inventory files
     2. Prefix where the files are stored in the destination bucket (if any)
     3. Name of the source bucket you want to monitor (the bucket producing inventory files)
@@ -95,7 +95,7 @@ To manually set up the required [Amazon S3 Inventory][2] and related configurati
 
 #### Step 2: Configure the bucket and integration role policies
 
-1. Follow the steps in the [Amazon S3 user guide][4] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets. 
+1. Follow the steps in the [Amazon S3 user guide][4] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets.
 
 2. Ensure the Datadog AWS integration role has `s3:GetObject` and `s3:ListObjects` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
@@ -108,16 +108,16 @@ For each bucket you want to monitor:
   4. Configure the following settings:
     - Set a configuration name
     - (Optional) Specify a source bucket prefix
-    - We also advise picking “Current Versions Only”
-    - **Destination**: select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`.
-       **Note**: If you want to use a prefix on the destination bucket, add this as well  
-    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog  
-    - **Output format**: CSV  
-    - **Status**: Enabled  
-    - **Server-side encryption**: Don't specify an encryption key  
-    - Select the following **Additional metadata fields**:  
-          - Size  
-          - Last Modified  
+    - **Object versions**: Datadog recommends selecting **Current Versions Only**
+    - **Destination**: Select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
+       **Note**: If you want to use a prefix on the destination bucket, add this as well
+    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
+    - **Output format**: CSV
+    - **Status**: Enabled
+    - **Server-side encryption**: Don't specify an encryption key
+    - Select the following **Additional metadata fields**:
+          - Size
+          - Last Modified
           - Storage Class
 
 #### Post-setup steps
