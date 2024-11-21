@@ -59,7 +59,7 @@ This template creates two IAM policies:
 2. Create a new stack With New Resources (standard)
 3. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
-   - **DestinationBucketName**: The name of the bucket that will be the recipient for your inventory files
+   - **DestinationBucketName**: The name of the bucket that to receive your inventory files.
    - **SourceBucketName**: The name of the bucket for which you wish to start generating inventory files
 
    Optional parameters:
