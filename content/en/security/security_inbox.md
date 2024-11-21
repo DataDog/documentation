@@ -69,7 +69,7 @@ Key features include:
 
 ## Customize Security Inbox to highlight crucial issues
 
-{{< callout url="/product-preview/customize-your-security-inbox/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
   Vulnerability Pipeline is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
 {{< /callout >}}
 
