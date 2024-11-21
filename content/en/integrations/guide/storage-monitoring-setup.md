@@ -48,7 +48,7 @@ This template configures your existing S3 bucket to generate inventory reports, 
 
 **Note:** This CloudFormation template can be rolled back, but rolling back doesn't delete the created resources. This is to ensure the existing bucket doesn’t get deleted. You can manually delete the inventory configurations by going on the **Management** tab in the bucket view.
 
-
+**Note:** Review [AWS S3 pricing][7] for costs related to inventory generation.
 #### Step 2: Configure required permissions
 
 This template creates two IAM policies:
@@ -118,7 +118,9 @@ For each bucket you want to monitor:
     - Select the following **Additional metadata fields**:
           - Size
           - Last Modified
-          - Storage Class
+          - Storage Class'
+
+    **Note:** Review [AWS S3 pricing][7] for costs related to inventory generation.
 
 #### Post-setup steps
 
@@ -154,3 +156,4 @@ If you encounter any issues or need assistance:
 [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
 [5]: https://console.aws.amazon.com/s3/buckets
 [6]: mailto:mahashree.rajendran@datadoghq.com
+[7]: https://aws.amazon.com/s3/pricing/
