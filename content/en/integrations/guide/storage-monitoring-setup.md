@@ -142,12 +142,15 @@ To verify your setup:
    - Confirm the Datadog integration can access the files:
    - Navigate to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets -> Installation Recommendations** to see if the bucket you configured is showing in the list
 
-### Cost Considerations
-- S3 Inventory pricing: $0.0025 per million objects listed
-- Standard S3 egress costs apply when syncing inventory files
 
-### Support
+### Troubleshooting
 If you encounter any issues or need assistance:
 - Verify all permissions are correctly configured
-- Contact us at mahashree.rajendran@datadoghq.com with your bucket details, AWS account ID and Datadog Org ID
+- If you're still encountering issues, [reach out][6] with your bucket details, AWS account ID, and Datadog org ID
 
+[1]: https://console.aws.amazon.com/cloudformation/
+[2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
+[3]: https://console.aws.amazon.com/s3/bucket/create
+[4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
+[5]: https://console.aws.amazon.com/s3/buckets
+[6]: mailto:mahashree.rajendran@datadoghq.com
