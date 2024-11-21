@@ -17,7 +17,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 ## Prerequisites
 
-Recommended, [autocomplete and search (open beta)][6] is enabled.
+Recommended, [autocomplete and search (in Preview)][6] is enabled.
 
 ## Installation
 

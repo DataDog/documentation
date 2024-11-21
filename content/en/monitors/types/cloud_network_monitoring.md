@@ -66,6 +66,9 @@ The following tables list the different CNM metrics you can create monitors on.
 | Latency                 | Average time it takes to make the connection.   |
 | RTT (Round-Trip Time)   | Average time it takes to receive a response. |
 | Jitter                  | Average variance in RTT.                     |
+| TCP Timeouts | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
+| TCP Refusals | The number of TCP connections that were refused by the server. Typically this indicates an attempt to connect to an IP/port that isn't receiving connections, or a firewall/security misconfiguration. |
+| TCP Resets | The number of TCP connections that were reset by the server.  |
 | Established Connections | Establishes connections between client/server. |
 | Closed Connections      | Closed connections between client/server.      |
 

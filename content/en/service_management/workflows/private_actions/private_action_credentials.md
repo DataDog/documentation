@@ -4,7 +4,7 @@ title: Handling Private Action Credentials
 disable_toc: false
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
 Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
