@@ -187,7 +187,7 @@ func failableFunction() (any, error) {
 
 #### Prevent instrumentation of some code
 
-The `//orchestrion:ignore` directive can be used to prevent `orchestrion` from performing _any_ modification on the annotated code.
+You can use the `//orchestrion:ignore` directive to prevent `orchestrion` from performing _any_ modification on the annotated code.
 
 This can be used to prevent caller-side instrumentation from being applied to specific locations:
 
@@ -247,7 +247,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 ### Activate Go integrations to create spans
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. You can find a list of these packages in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. You can find a list of these packages in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each package.
 
 ### Configuration
 
