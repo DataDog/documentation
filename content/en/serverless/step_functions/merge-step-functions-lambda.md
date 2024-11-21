@@ -180,7 +180,29 @@ To link your Step Function traces to nested Step Function traces, configure your
 
 ## Merge Lambda -> Step Functions -> Lambda
 
-This capability is not supported.
+### Requirements
+Node.js (layer v113+) or Python (layer v103+) runtimes.
+
+Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top of the State Machine Definition.
+
+### Setup
+
+On the Lambda Task, set the `Arguments` key as follows: 
+
+```json
+"Arguments": {
+  "Payload": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ? $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$states.input, {'_datadog': $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])}])) %}"
+  ...
+}
+```
+
+The `JSONata` expression will do the following:
+1. Parse the Step Functions Execution's input and look for a `_datadog` header
+2. Create this header if it doesn't exist
+3. Merge the header with the Step Functions context object
+4. Merge this object with the State's input
+
+Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for `"Payload"`.
 
 [1]: /serverless/step_functions/installation
 [2]: /serverless/installation/#installation-instructions
