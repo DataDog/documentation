@@ -73,6 +73,49 @@ To enable the Agent DogStatsD UDS:
     - Start your application containers with `-v /var/run/datadog:/var/run/datadog:ro`
 
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. In your task definition, set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container definition (example: `/var/run/datadog/dsd.socket`).
+
+2. Make the socket file accessible to the application containers by mounting a shared volume on both sides. This makes it possible for the application containers to access the socket from the Datadog Agent container.
+
+    - Mount the empty folder the `volumes` section of the task definition:
+
+        ```json
+        "volumes": [
+            {
+                "name": "dsdsocket",
+                "host": {}
+            }
+        ],
+        ```
+
+    - In the `mountPoints` section of your Agent container, mount the socket folder:
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket"
+            }
+        ],
+        ```
+
+    - In the `mountPoints` section of your application containers, expose the same folder in your application containers:
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket",
+            "readOnly": true
+            }
+        ],
+        ```
+
+        **Note**: Remove `"readOnly": true` if your application containers need write access to the socket.
+
+{{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container (example: `/var/run/datadog/dsd.socket`).
@@ -210,6 +253,34 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. In your task definition, set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container definition:
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_ORIGIN_DETECTION",
+        "value": "true"
+    },
+    ```
+
+2. Add the [`PidMode` parameter][10] in the task definition and set it to `task` as follows:
+
+    ```json
+    "pidMode": "task"
+    ```
+
+3. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`:
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_TAG_CARDINALITY",
+        "value": "low"
+    },
+    ```
+
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
+{{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
@@ -318,3 +389,4 @@ For guidelines on creating additional implementation options, see the [datadog-a
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
 [9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
