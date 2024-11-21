@@ -140,42 +140,7 @@ After finishing these steps, metrics appear in Datadog after approximately **15 
 The Google Cloud integration collects all available [Google Cloud metrics][17] from your projects through the Google Cloud Monitoring API.
 
 {{% collapse-content title="Click here for a sample of the Google Cloud metrics Datadog collects" level="h5" %}}
-| Integration                         | Description                                                                           |
-|-------------------------------------|---------------------------------------------------------------------------------------|
-| [App Engine][56]                     | PaaS (platform as a service) to build scalable applications                           |
-| [Big Query][57]                      | Enterprise data warehouse                                                             |
-| [Bigtable][58]                       | NoSQL Big Data database service                                                       |
-| [Cloud SQL][59]                      | MySQL database service                                                                |
-| [Cloud APIs][60]                     | Programmatic interfaces for all Google Cloud Platform services                        |
-| [Cloud Armor][61]                   | Network security service to help protect against denial of service and web attacks    |
-| [Cloud Composer][62]                 | A fully managed workflow orchestration service                                        |
-| [Cloud Dataproc][63]                 | A cloud service for running Apache Spark and Apache Hadoop clusters                   |
-| [Cloud Dataflow][64]                | A fully-managed service for transforming and enriching data in stream and batch modes |
-| [Cloud Filestore][65]                | High-performance, fully managed file storage                                          |
-| [Cloud Firestore][66]                | A flexible, scalable database for mobile, web, and server development                 |
-| [Cloud Interconnect][67]            | Hybrid connectivity                                                                   |
-| [Cloud IoT][68]                     | Secure device connection and management                                               |
-| [Cloud Load Balancing][69]          | Distribute load-balanced compute resources                                            |
-| [Cloud Logging][70]                 | Real-time log management and analysis                                                 |
-| [Cloud Memorystore for Redis][71]   | A fully managed in-memory data store service                                          |
-| [Cloud Router][72]                  | Exchange routes between your VPC and on-premises networks by using BGP                |
-| [Cloud Run][73]                     | Managed compute platform that runs stateless containers through HTTP                  |
-| [Cloud Security Command Center][74] | Security Command Center is a threat reporting service.                                |
-| [Cloud Tasks][75]                   | Distributed task queues                                                               |
-| [Cloud TPU][76]                     | Train and run machine learning models                                                 |
-| [Compute Engine][77]                | High performance virtual machines                                                     |
-| [Container Engine][78]              | Kubernetes, managed by Google                                                         |
-| [Datastore][79]                     | NoSQL database                                                                        |
-| [Firebase][80]                      | Mobile platform for application development                                           |
-| [Functions][81]                     | Serverless platform for building event-based microservices                            |
-| [Kubernetes Engine][82]             | Cluster manager and orchestration system                                              |
-| [Machine Learning][83]              | Machine learning services                                                             |
-| [Private Service Connect][84]       | Access managed services with private VPC connections                                  |
-| [Pub/Sub][85]                       | Real-time messaging service                                                           |
-| [Spanner][86]                       | Horizontally scalable, globally consistent, relational database service               |
-| [Storage][87]                       | Unified object storage                                                                |
-| [Vertex AI][88]                     | Build, train and deploy custom machine learning (ML) models.                          |
-| [VPN][89]                           | Managed network functionality                                                         |
+{{% google-cloud-integrations %}}
 {{% /collapse-content %}} 
 
 You can find your Google Cloud metrics in the Metrics Summary page in the Datadog platform.
