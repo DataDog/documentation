@@ -110,8 +110,8 @@ For each bucket you want to monitor:
     - (Optional) Specify a source bucket prefix
     - We also advise picking “Current Versions Only”
     - **Destination**: select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`.
-    - If you wish to have a prefix on the destination bucket, please define it and let us know
-    - Choose frequency: Daily (recommended) or Weekly [Note that this setting determines how often your prefix level metrics will be updated in Datadog]
+       **Note**: If you want to use a prefix on the destination bucket, add this as well  
+    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog  
     - Format: CSV
     - Enable inventory generation
     - Do not specify encryption
