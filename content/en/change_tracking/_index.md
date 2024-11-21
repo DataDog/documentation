@@ -108,8 +108,6 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 3. Hover over any change indicator or overlay to view a summary of the change.
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
 
-{{< img src="/change_tracking/change-tracking-deployment-details-side-panel.png" alt="Change Tracking side panel open" style="width:100%;" >}}
-
 ## Tracked changes
 
 Change Tracking follows these types of changes across your infrastructure:
