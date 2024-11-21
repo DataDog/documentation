@@ -21,28 +21,49 @@ Topics
 : Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
 
 Evaluations
-: Enables Datadog to assess your LLM application against respective dimensions like Quality and Security and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. 
+: Enables Datadog to assess your LLM application against respective dimensions like Quality and Security and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. For more information about evaluations, see [Terms and Concepts][1].
 
-Select an LLM application set up with LLM Observability to start customizing its topics and evaluations. 
+## Connect your OpenAI account
 
-{{< img src="llm_observability/configuration.png" alt="An example of an LLM application's configuration settings in LLM Observability" style="width:100%;" >}}
+Connect your OpenAI account to LLM Observability with your OpenAI API key.
 
-Enabling any of the [out-of-the-box evaluations](#select-evaluations) outside of `Language Mismatch` shares your input and output to OpenAI. 
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][2]. 
+1. Select **Connect** on the OpenAI tile.
+1. Follow the instructions on the tile. 
+   - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
+1. Enable **Invoke Model from this API key**.
+
+{{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
+
+## Select and enable evaluations
+
+Navigate to [**LLM Observability > Settings > Evaluations**][3]. 
+
+{{< img src="llm_observability/configuration/settings.png" alt="The Evaluations tab, featuring a list of existing evaluations." style="width:100%;" >}}
+
+1. Click on the evaluation you want to enable.
+1. Select **OpenAI** as your LLM provider.
+1. Select the OpenAI account you want to run the evaluation on.
+1. Assign the LLM application you want to run the evaluation on.
+
+After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using the OpenAI API key you provided.
+
+You can monitor the usage of this API key by querying for the metrics `ml_obs.span.llm.input.tokens`, `ml_obs.span.llm.output.tokens`, and `ml_obs.span.llm.total.tokens`. Filter by the `evaluation:default` tag.
+
+For more information about evaluations, see [Terms and Concepts][1].
 
 ## Enter a topic
 
-To enter a topic, click the Edit icon and add keywords. For example, for an LLM application that was designed for incident management, add `observability`, `software engineering`, or `incident resolution`. 
+Providing topics allows you to use the [topic relevancy][4] evaluation. To enter a topic, click the edit icon and add keywords. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution".
 
-Topics can contain multiple words and should be as specific and descriptive as possible. For example, if your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
+Topics can contain multiple words and should be as specific and descriptive as possible. For example, if your application handles customer inquiries for an e-commerce store, you can use “Customer questions about purchasing furniture on an e-commerce store”.
 
-## Select evaluations
-
-To enable evaluations, click the toggle for the respective evaluations that you'd like to assess your LLM application against in the Quality and Security and Safety sections. For more information about evaluations, see [Terms and Concepts][1].
-
-<div class="alert alert-warning">By enabling the out-of-the-box evaluations, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/terms/
+[2]: https://app.datadoghq.com/llm/settings/integrations
+[3]: https://app.datadoghq.com/llm/settings/evaluations
+[4]: /llm_observability/terms/#topic-relevancy
