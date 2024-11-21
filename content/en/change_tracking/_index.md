@@ -10,6 +10,24 @@ further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Service Page"
+- link: "/api/latest/events/"
+  tag: "Documentation"
+  text: "Event Management API"
+- link: "/tracing/services/deployment_tracking/"
+  tag: "Documentation"
+  text: "Deployment Tracking"
+- link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
+  tag: "Documentation"
+  text: "LaunchDarkly"
+- link: "/watchdog/"
+  tag: "Documentation"
+  text: "Watchdog"
+- link: "/database_monitoring/"
+  tag: "Documentation"
+  text: "Database Monitoring"
+- link: "/data_streams/"
+  tag: "Documentation"
+  text: "Data Streams Monitoring"
 ---
 
 ## Overview
@@ -30,14 +48,6 @@ Change Tracking supports monitoring of a range of modifications to your service 
 
 For details on specific types of supported changes and setup requirements [see below](#tracked-changes).
 
-## Prerequisites
-
-To use Change Tracking, ensure the following:
-
-- **Monitors**: Confirm the service is specified in the monitor query, selected as part of a group, or set the `service` tag.
-- **Dashboards**: Set at least one timeseries widget on the dashboard to see relevant changes within the timeline and as overlays.
-- **Services**: No prerequisites.
-
 ## Using Change Tracking
 
 Change Tracking is available on several pages in Datadog:
@@ -48,18 +58,24 @@ View and analyze changes from the [monitor status page][1].
 
 {{< img src="/change_tracking/change-tracking-monitor-status-page.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
 
+#### Prerequisites
 
-To analyze changes from the monitor status page:
+To use change tracking on the Monitor Status Page, ensure the appropriate service has been:
+- Specified in the monitor query.
+- Selected as part of a group.
+- Added as a `service` tag on the monitor.
+
+#### To analyze changes from the monitor status page:
 
 1. Go to the monitor status page for the monitor you are analyzing.
 1. Locate the **Recent Changes** section.
 1. Use the **Recent Changes** timeline together with the **Status & History** graphs to correlate change events with the alert.
 1. Click the change indicator in the **Recent Changes** timeline to view more details about the change in the side panel.
-1. From the side panel, you can investigate more details and take the following actions:
+1. From the side panel, you can investigate more details about the change and take the following actions:
    - View the deployment in your CI/CD system.
    - View the latest commits in your repository.
    - Compare changes between deployments to identify potential issues.
-   - Set context-aware, **Custom Links** for quick access to relevant resources.
+   - Configure additional custom links in the deployment side panel to quickly access other resources relevant to you.
 
 ### Services
 
@@ -67,7 +83,7 @@ View and analyze changes from the [service page][2].
 
 {{< img src="/change_tracking/change-tracking-service-page.png" alt="Recent Changes component within the Service Summary section with dependency changes shown" style="width:100%;" >}}
 
-To analyze changes from the service page:
+#### To analyze changes from the service page:
 
 1. Navigate to the service page you want to investigate.
 1. Locate the changes timeline in the **Service Summary** section.
@@ -82,7 +98,10 @@ View and analyze changes from any [dashboard][3].
 
 {{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
 
-To analyze changes from dashboards:
+#### Prerequisites
+To see relevant changes within the timeline and as overlays on your dashboard, ensure you have set at least one timeseries widget.
+
+#### To analyze changes from dashboards:
 
 1. Navigate to your dashboard.
 2. Click **Show Overlays** at the top of the page to enable the change timeline and change overlays on supported widgets.
@@ -97,16 +116,16 @@ Change Tracking follows these types of changes across your infrastructure:
 
 | Change Type | Tracking Requirements |
 | ----------- | ----------- |
-| Code Deployments (APM) | Works out of the box for APM customers as the agent injects the version if not provided.
+| Code Deployments (APM) | APM & [Deployment Tracking][4]. A version must be available on the service.
 | Kubernetes Deployment Manifest Updates | Datadog Agent Set Up for Kubernetes
-| LaunchDarkly Feature Flag Events | Third Party Datadog Integrations (LaunchDarkly only)
-| Custom Feature Flag Events | Events Management API (V2) 
-| Watchdog Alerts (Error Rate Spike, Latency Spike, Cloud and API Outage) | Watchdog
-| CrashLoopBackOff Kubernetes Pod Crashes | Datadog Agent, Kubernetes Integration
-| PostgreSQL Database Table Change | Datadog Agent, Database Monitoring (DBM)
-| PostgreSQL Database Settings Change | Datadog Agent, Database Monitoring (DBM)
-|  Kafka Schema Updates | Datadog Agent, Data Streams Monitoring (DSM)
-| Manual Kubernetes Deployment Scale Events | Datadog Agent, Kubernetes Audit Logging
+| LaunchDarkly Feature Flag Events | Third Party Datadog Integrations ([LaunchDarkly only][5])
+| Custom Feature Flag Events | [Event Management API][6]
+| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.). | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.
+| CrashLoopBackOff Kubernetes Pod Crashes | Kubernetes Integration
+| PostgreSQL Database Table Change | [Database Monitoring (DBM)][8]
+| PostgreSQL Database Settings Change | [Database Monitoring (DBM)][8]
+|  Kafka Schema Updates | [Data Streams Monitoring (DSM)][9]
+| Manual Kubernetes Deployment Scale Events | Kubernetes Audit Logging
 
 ## Further reading
 
@@ -115,3 +134,9 @@ Change Tracking follows these types of changes across your infrastructure:
 [1]: /monitors/status/
 [2]: /tracing/services/service_page/
 [3]: /dashboards/
+[4]: /tracing/services/deployment_tracking/
+[5]: /integrations/launchdarkly/#feature-flag-tracking-integration/
+[6]: /api/latest/events/
+[7]: /watchdog/
+[8]: /database_monitoring/
+[9]: /data_streams/
