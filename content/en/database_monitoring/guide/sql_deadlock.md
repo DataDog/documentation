@@ -1,5 +1,5 @@
 ---
-title: Configure Deadlock Monitoring on SQL Server
+title: Configuring Deadlock Monitoring on SQL Server
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
