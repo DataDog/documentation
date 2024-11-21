@@ -52,11 +52,16 @@ You can monitor the usage of this API key by querying for the metrics `ml_obs.sp
 
 For more information about evaluations, see [Terms and Concepts][1].
 
-## Enter a topic
+## Provide topics for topic relevancy
 
-Providing topics allows you to use the [topic relevancy][4] evaluation. To enter a topic, click the edit icon and add keywords. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution".
+Providing topics allows you to use the [topic relevancy][4] evaluation. 
 
-Topics can contain multiple words and should be as specific and descriptive as possible. For example, if your application handles customer inquiries for an e-commerce store, you can use “Customer questions about purchasing furniture on an e-commerce store”.
+1. Go to [**LLM Observability > Applications**][5].
+1. Select the application you want to add topics for.
+1. At the bottom of the left side bar, select **Configuration**.
+1. Add topics in the pop-up modal.
+
+Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use “Customer questions about purchasing furniture on an e-commerce store”.
 
 
 ## Further Reading
@@ -67,3 +72,4 @@ Topics can contain multiple words and should be as specific and descriptive as p
 [2]: https://app.datadoghq.com/llm/settings/integrations
 [3]: https://app.datadoghq.com/llm/settings/evaluations
 [4]: /llm_observability/terms/#topic-relevancy
+[5]: https://app.datadoghq.com/llm/applications
