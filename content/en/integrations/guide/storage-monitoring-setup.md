@@ -77,25 +77,25 @@ This template creates two IAM policies:
 After completing the CloudFormation setup, reach out with the following information:
     1. Name of the destination bucket holding the inventory files
     2. Prefix where the files are stored in the destination bucket (if any)
-    3. Name of the source bucket you want to monitor i.e. the bucket producing inventory files
-    4. AWS Region of the destination bucket holding the inventory files
-    5. AWS account ID in which the buckets live
-    6. Datadog Org ID
+    3. Name of the source bucket you want to monitor (the bucket producing inventory files)
+    4. AWS region of the destination bucket holding the inventory files
+    5. AWS account ID containing the buckets
+    6. Datadog org ID
 
 
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
-If you prefer to set up the required [AWS Inventory](https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html) and related configuration manually, follow these steps:
+To manually set up the required [Amazon S3 Inventory][2] and related configuration, follow these steps:
 
-#### Step 1: Create Destination Bucket
+#### Step 1: Create a destination bucket
 
-Create a new S3 bucket that will store your inventory files. This bucket will act as the central location for inventory reports. Required: Please create a prefix within the destination bucket.
+1. [Create a new S3 bucket][3] to store your inventory files. This bucket acts as the central location for inventory reports.
+2. Create a prefix within the destination bucket.
 
+#### Step 2: Configure the bucket and integration role policies
 
-#### Step 2: Configure Bucket and Integration Role Policies
-
-Add a bucket policy to your destination bucket allowing write access i.e. s3:PutObject from your source buckets [See AWS doc]. The policy should include permissions for the source buckets to write inventory files.
+1. Follow the steps in the [Amazon S3 user guide][4] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets. 
 
 Ensure your Datadog AWS integration role has s3:GetObject and s3:ListObjects permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
