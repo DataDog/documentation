@@ -30,7 +30,7 @@ algolia:
 ## Overview
 
 - To create, get, and delete service definitions, see the [Service Definitions API reference][1].
-- To create, get, and delete definitions for new component types like systems, datastores, queues, see the [Software Catalog API reference][3].
+- To create, get, and delete definitions for new component types like systems, datastores, and queues, see the [Software Catalog API reference][3].
 - To create and update service scorecard rules and outcomes, see the [Service Scorecards API reference][2].
 
 
