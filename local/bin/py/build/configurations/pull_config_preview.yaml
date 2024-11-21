@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -118,7 +118,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: robert.nortepeterson/do-not-merge-zoom-preview
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
@@ -293,7 +293,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-      
+
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
