@@ -98,7 +98,7 @@ agents:
 
 この方法でトレースをフィルターすると、[トレースメトリクス][3]からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込みを減らす方法については、[Ingestion Controls][4] を参照してください。
 
-バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。これらのタグは、Datadog Agent レベルでトレースをドロップするために使用することはできません。
+バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。なお、これらのタグは Datadog Agent レベルでトレースをドロップするためには使用できません。エージェントは取り込み前に利用可能なタグに基づいてのみフィルタリングを行うためです。
 
 
 | 名前                                    | 説明                                      |
@@ -128,7 +128,7 @@ agents:
 | **名前**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
-| `http.useragent`               | `user_agent` - Java, C++                                                                                   |
+| `http.useragent`               | `user_agent` - Java、C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
 #### データベース
