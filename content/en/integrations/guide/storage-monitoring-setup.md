@@ -51,9 +51,11 @@ This template configures your existing S3 bucket to generate inventory reports, 
 
 #### Step 2: Configure required permissions
 
-This template creates two IAM policies: one allowing Datadog to read inventory files from the destination bucket, and another allowing your source bucket to write inventory files to it.
+This template creates two IAM policies: 
+  - A policy to allow Datadog to read inventory files from the destination bucket
+  - A policy to allow your source bucket to write inventory files to the destination bucket
 
-1. Download the cloud-inventory-policies-cfn.yaml template
+1. Download the cloud-inventory-policies-cfn.yaml template.
 2. Create a new stack With New Resources (standard)
 3. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
