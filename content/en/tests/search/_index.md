@@ -19,22 +19,31 @@ further_reading:
 
 ## Overview
 
-The [Tests page][1] is useful for developers who want to keep an eye on their test results.
+The [Repositories page][1] gives you a high-level overview of test performance across your organization's repositories.
 
 {{< img src="/tests/services.png" text="A list of test services sorted by the most recent branch on the Test Services page" style="width:100%" >}}
 
-You can access low-level and immediate insights:
+Use the Repositories page to:
+- See the total number of flaky tests in each repo
+- Track whether tests are becoming more or less unreliable over time.
+- See the test status for the most recent commit in each repository.
+- See how many test services are associated with each repo.
 
+<!-- vale Datadog.pronouns = NO -->
+To filter the list down to only repositories that you have committed to, toggle **My Repositories** and enter the email address associated with your GitHub account. You can enter multiple email addresses. You can edit this address later by clicking **Edit Authors**.
+<!-- vale Datadog.pronouns = YES -->
+
+### Repository page
+
+<!-- WIP marker -->
+
+
+Clicking into a specific repository from the repository page gives you granular insight into the tests for that repo. You can:
+- See which tests have become slower over time and identify the commit that introduced the regression.
 - See what tests are failing and why.
 - See your last commit's test results.
-- View the total duration of your tests in your feature branch.
 - Find out if your commit introduces a new [flaky test][4] that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
 
-You can also access high-level accumulation and trends:
-
-- See the effects that changed code, added tests, and increased complexity have on your test suite performance over time.
-- See which tests have become slower over time and identify the commit that introduced the regression.
-- Take advantage of Datadog's automatic test flakiness detection and tracking, which shows you which tests are becoming more or less unreliable over time.
 
 ## Search for tests
 
@@ -80,9 +89,9 @@ The Default Branches view shows similar information to the Branches view, but ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/test-services?view=branches
+[1]: https://app.datadoghq.com/ci/test-repositories
+[2]: https://app.datadoghq.com/ci/test-repositories?view=branches
 [3]: /glossary/#test-service
 [4]: /glossary/#flaky-test
 [5]: /glossary/#test-regression
-[6]: https://app.datadoghq.com/ci/test-services?view=default-branches
+[6]: https://app.datadoghq.com/ci/test-repositories?view=default-branches
