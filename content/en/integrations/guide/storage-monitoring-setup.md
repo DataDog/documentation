@@ -97,19 +97,19 @@ To manually set up the required [Amazon S3 Inventory][2] and related configurati
 
 1. Follow the steps in the [Amazon S3 user guide][4] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets. 
 
-Ensure your Datadog AWS integration role has s3:GetObject and s3:ListObjects permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
+2. Ensure the Datadog AWS integration role has `s3:GetObject` and `s3:ListObjects` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
 #### Step 3: Configure Inventory Generation
 
 For each bucket you want to monitor:
-  1. Go to the AWS S3 Console
-  2. Navigate to the bucket's Management tab
-  3. Click Create Inventory Configuration
+  1. Go to the [Amazon S3 buckets page][5] in the AWS console, and select the bucket.
+  2. Navigate to the bucket's **Management** tab.
+  3. Click **Create inventory configuration**.
   4. Configure the following settings:
     - Set a configuration name
     - (Optional) Specify a source bucket prefix
     - We also advise picking “Current Versions Only”
-    - In select destination bucket, pick the newly created destination bucket. Example, if bucket is named destination-bucket `s3://your-destination-bucket`
+    - **Destination**: select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`.
     - If you wish to have a prefix on the destination bucket, please define it and let us know
     - Choose frequency: Daily (recommended) or Weekly [Note that this setting determines how often your prefix level metrics will be updated in Datadog]
     - Format: CSV
