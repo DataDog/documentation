@@ -207,7 +207,7 @@ Your State Machine Definition must be using `JSONata` as the query language. Thi
 
 ### Setup
 
-On the Step Functions Task, set the `Input` key as follows: 
+On the Step Functions Task, set the `_datadog` field in the `Input` key as follows: 
 
 ```json
 "Arguments": {
