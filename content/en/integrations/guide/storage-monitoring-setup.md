@@ -114,34 +114,33 @@ For each bucket you want to monitor:
     - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog  
     - Format: CSV
     - Enable inventory generation
-    - Do not specify encryption
-    - Select required metadata fields:
-          - Size
-          - Last Modified
+    - **Server-side encryption**: Don't specify an encryption key  
+    - Select the following **Additional metadata fields**:  
+          - Size  
+          - Last Modified  
           - Storage Class
 
+#### Post-setup steps
 
-#### Post-Setup Steps
+After completing the above steps, reach out on the `#storage-monitoring` Slack channel with the following information:
 
-After the above steps, please reach out on #storage-monitoring with the following information:
-
-1. Name of the destination bucket where inventories are stored
-2. Prefix where the inventory files will be stored
-2. Region of the destination bucket
-3. AWS Account ID in which the bucket is defined
-4. Datadog Role Name that has the permissions to read objects in destination bucket
-4. Datadog Org ID
+1. Name of the destination bucket where inventories are stored.
+2. Prefix to store the inventory files.
+3. Region of the destination bucket.
+4. AWS account ID containing the bucket.
+5. Datadog role name that has the permissions to read objects in destination bucket.
+6. Datadog org ID.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Verification
+### Validation
 
 To verify your setup:
-Wait for the first inventory report to generate (up to 24 hours for daily inventories)
-Check the destination bucket for inventory files
-Confirm the Datadog integration can access the files:
-Check Resource Catalog -> Monitoring -> S3 Buckets -> Installation Recommendations to see if the bucket you configured is showing in the list
+   - Wait for the first inventory report to generate (up to 24 hours for daily inventories)
+   - Check the destination bucket for inventory files
+   - Confirm the Datadog integration can access the files:
+   - Navigate to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets -> Installation Recommendations** to see if the bucket you configured is showing in the list
 
 ### Cost Considerations
 - S3 Inventory pricing: $0.0025 per million objects listed
