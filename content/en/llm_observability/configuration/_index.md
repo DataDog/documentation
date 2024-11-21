@@ -61,7 +61,7 @@ Providing topics allows you to use the [topic relevancy][4] evaluation.
 1. At the bottom of the left side bar, select **Configuration**.
 1. Add topics in the pop-up modal.
 
-Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use “Customer questions about purchasing furniture on an e-commerce store”.
+Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
 
 ## Further Reading
