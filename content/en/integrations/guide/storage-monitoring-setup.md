@@ -60,10 +60,10 @@ This template creates two IAM policies:
 3. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
    - **DestinationBucketName**: The name of the bucket that to receive your inventory files.
-   - **SourceBucketName**: The name of the bucket for which you wish to start generating inventory files
+   - **SourceBucketName**: The name of the bucket you want to start generating inventory files for.
 
    Optional parameters:
-    - **DestinationBucketPrefix**:  If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Please don’t include trailing slashes ( “/“ ). Can be left blank.
+    - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`).
    - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket. Can be left blank.
 
 {{< img src="integrations/guide/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:60%;" >}}
