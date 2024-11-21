@@ -4633,6 +4633,127 @@ components:
           format: int64
           type: integer
       type: object
+    ChangeEventCustomAttributes:
+      description: Object representing custom change event attributes.
+      properties:
+        author:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesAuthor'
+        change_metadata:
+          additionalProperties: {}
+          description: Free form object with information related to the `change` event.
+            Can be arbitrarily nested and contain any valid JSON.
+          example:
+            dd:
+              team: datadog_team
+              user_email: datadog@datadog.com
+              user_id: datadog_user_id
+              user_name: datadog_username
+            resource_link: datadog.com/feature/fallback_payments_test
+          type: object
+        changed_resource:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResource'
+        impacted_resources:
+          description: 'A list of resources impacted by this change. It is recommended
+            to provide an impacted resource to display
+
+            the change event at the right location. Only resources of type `service`
+            are supported.'
+          example:
+          - name: payments_api
+            type: service
+          items:
+            $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItems'
+          type: array
+        new_value:
+          additionalProperties: {}
+          description: Free form object to track new value of the changed resource.
+          example:
+            enabled: true
+            percentage: 50%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+        prev_value:
+          additionalProperties: {}
+          description: Free form object to track previous value of the changed resource.
+          example:
+            enabled: true
+            percentage: 10%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+      required:
+      - changed_resource
+      type: object
+    ChangeEventCustomAttributesAuthor:
+      description: Object representing the entity which made the change. Optional
+        field but if provided should include `type` and `name`.
+      properties:
+        name:
+          description: Author's name. Limited to 128 characters.
+          example: datadog@datadog.com
+          maxLength: 128
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesAuthorType'
+      required:
+      - name
+      - type
+      type: object
+    ChangeEventCustomAttributesAuthorType:
+      description: Author's type.
+      enum:
+      - user
+      - system
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - SYSTEM
+    ChangeEventCustomAttributesChangedResource:
+      description: Object representing a uniquely identified resource. Only the resource
+        type `feature_flag` is supported.
+      properties:
+        name:
+          description: Resource's name.
+          example: fallback_payments_test
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResourceType'
+      required:
+      - type
+      - name
+      type: object
+    ChangeEventCustomAttributesChangedResourceType:
+      description: Resource's type.
+      enum:
+      - feature_flag
+      example: feature_flag
+      type: string
+      x-enum-varnames:
+      - FEATURE_FLAG
+    ChangeEventCustomAttributesImpactedResourcesItems:
+      description: Object representing a uniquely identified resource. Only the resource
+        type `service` is supported.
+      properties:
+        name:
+          description: Resource's name.
+          example: payments_api
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItemsType'
+      required:
+      - type
+      - name
+      type: object
+    ChangeEventCustomAttributesImpactedResourcesItemsType:
+      description: Resource's type.
+      enum:
+      - service
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
     ChargebackBreakdown:
       description: Charges breakdown.
       properties:
@@ -9436,6 +9557,125 @@ components:
           example: Oh boy!
           type: string
       type: object
+    EventCategory:
+      description: Event category to identify the type of event. Only the value `change`
+        is supported. Support for other categories are coming. please reach out to
+        datadog support if you're interested.
+      enum:
+      - change
+      example: change
+      type: string
+      x-enum-varnames:
+      - CHANGE
+    EventCreateRequest:
+      description: Object representing an event creation request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventPayload'
+        type:
+          $ref: '#/components/schemas/EventCreateRequestType'
+      type: object
+    EventCreateRequestPayload:
+      description: Payload for creating an event.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventCreateRequest'
+      type: object
+    EventCreateRequestType:
+      description: Entity type.
+      enum:
+      - event
+      example: event
+      type: string
+      x-enum-varnames:
+      - EVENT
+    EventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventCreateResponseAttributes'
+        type:
+          description: Event type
+          example: event
+          type: string
+      type: object
+    EventCreateResponseAttributes:
+      description: JSON object containing all events attributes and their associated
+        values.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventCreateResponseAttributesAttributes'
+      type: object
+    EventCreateResponseAttributesAttributes:
+      description: JSON object of attributes from your events.
+      properties:
+        evt:
+          $ref: '#/components/schemas/EventCreateResponseAttributesAttributesEvt'
+      type: object
+    EventCreateResponseAttributesAttributesEvt:
+      description: JSON object of event system attributes.
+      properties:
+        id:
+          description: Event id
+          type: string
+      type: object
+    EventCreateResponsePayload:
+      description: Response containing information about created event.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventCreateResponse'
+      type: object
+    EventPayload:
+      description: Event attributes.
+      properties:
+        aggregation_key:
+          description: An arbitrary string to use for aggregation when correlating
+            events. Limited to 100 characters.
+          maxLength: 100
+          type: string
+        attributes:
+          $ref: '#/components/schemas/EventPayloadAttributes'
+        category:
+          $ref: '#/components/schemas/EventCategory'
+        message:
+          description: The body of the event. Limited to 4000 characters.
+          example: payment_processed feature flag has been enabled
+          maxLength: 4000
+          type: string
+        tags:
+          description: 'A list of tags to apply to the event.
+
+            Refer to [Tags docs](https://docs.datadoghq.com/getting_started/tagging/).'
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: 'Timestamp when the event occurred. Must follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
+            format.
+
+            For example `"2017-01-15T01:30:15.010000Z"`.
+
+            Defaults to the timestamp of receipt. Limited to values no older than
+            18 hours.'
+          type: string
+        title:
+          description: The event title. Limited to 500 characters.
+          example: payment_processed feature flag updated
+          maxLength: 500
+          type: string
+      required:
+      - title
+      - category
+      - attributes
+      type: object
+    EventPayloadAttributes:
+      description: JSON object for custom attributes. Schema are different per each
+        event category.
+      oneOf:
+      - $ref: '#/components/schemas/ChangeEventCustomAttributes'
     EventPriority:
       description: The priority of the event's monitor. For example, `normal` or `low`.
       enum:
@@ -32112,8 +32352,88 @@ paths:
         - events_read
       x-undo:
         type: safe
+    post:
+      description: This endpoint allows you to post events. Only events with `change`
+        category are under General Availability.
+      operationId: CreateEvent
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      attributes:
+                        author:
+                          name: datadog@datadog.com
+                          type: user
+                        change_metadata:
+                          dd:
+                            team: datadog_team
+                            user_email: datadog@datadog.com
+                            user_id: datadog_user_id
+                            user_name: datadog_username
+                          resource_link: datadog.com/feature/fallback_payments_test
+                        changed_resource:
+                          name: fallback_payments_test
+                          type: feature_flag
+                        impacted_resources:
+                        - name: payments_api
+                          type: service
+                        new_value:
+                          enabled: true
+                          percentage: 50%
+                          rule:
+                            datacenter: devcycle.us1.prod
+                        prev_value:
+                          enabled: true
+                          percentage: 10%
+                          rule:
+                            datacenter: devcycle.us1.prod
+                      category: change
+                      message: payment_processed feature flag has been enabled
+                      tags:
+                      - environment:test
+                      title: payment_processed feature flag updated
+                    type: event
+            schema:
+              $ref: '#/components/schemas/EventCreateRequestPayload'
+        description: Event request object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventCreateResponsePayload'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Post an event
+      tags:
+      - Events
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: unsafe
     x-merge-override:
       get: false
+      post: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
