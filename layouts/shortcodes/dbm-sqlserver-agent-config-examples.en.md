@@ -88,8 +88,7 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    database_autodiscovery:
-      enabled: true
+    database_autodiscovery: true
     schemas_collection:
       enabled: true
     # Optional: enable metric collection for indexes
