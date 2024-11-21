@@ -20,12 +20,23 @@ You can use the facet `@ci.on_critical_path` to identify which CI Jobs are on th
 Using that facet, you can create your custom dashboards and notebooks for your needs.
 
 You can also import the [CI Visibility - Critical Path][1] dashboard template:
-- Open [CI Visibility - Critical Path][1] JSON. Copy all the content.
-- Go to: Dashboards -> New Dashboard. Paste the content into the new dashboard.
+- Open [civisibility-critical-path-gitlab-dashboard.json][1] dashboard template and copy the content in the clipboard.
+- Create a [New Dashboard][8] in Datadog.
+- Paste the copied content in the new dashboard.
 - Save the dashboard.
 
 {{< img src="continuous_integration/critical_path_dashboard.png" alt="Critical path dashboard for CI Visibility" width="90%">}}
 
-TBD
+### Terminology
+
+| Column            | Description                                                                                                                                                                                   |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Total Duration    | Sum all jobs duration                                                                                                                                                                         |
+| Count             | Number of times that the job has been detected on the critical path                                                                                                                           |
+| Avg Duration      | Avg duration of the jobs                                                                                                                                                                      |
+| Impact on Latency | Represents the impact of a particular job in a pipeline. This value is proportional to the total duration and count. The higher the number is the higher is the impact of the job in your CI. |
+
+
 
 [1]: /resources/json/civisibility-critical-path-gitlab-dashboard.json
+[2]: /dashboards/
