@@ -25,7 +25,7 @@ Si [instalas o actualizas un Datadog Agent][1] con la opción **Habilitar la ins
 Los siguientes ejemplos muestran cómo funciona para cada tipo de despliegue.
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 <div class="alert alert-warning">Si ya has utilizado la instrumentación de un solo paso con hosts Linux, <a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">actualiza a la última versión</a>.</div>
 
@@ -59,7 +59,7 @@ En un contenedor Linux Docker:
 
 1. Ejecuta el comando de instalación de una línea:
    ```shell
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configura el Agent en Docker:
    ```shell
@@ -132,7 +132,7 @@ Para habilitar la instrumentación de un solo paso con el Datadog Operator:
      features:
        apm:
          instrumentation:
-           enabled: true  
+           enabled: true
    ```
    Sustituye `<Datadog_SITE>` por tu [sitio Datadog][12] y `<Agent_ENV>` por el entorno en el que está instalado tu Agent (por ejemplo, `env:staging`).
    <div class="alert alert-info">Para ver más opciones, consulta <a href=#advanced-options>Opciones avanzadas</a>.</div>
@@ -142,7 +142,7 @@ Para habilitar la instrumentación de un solo paso con el Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. Espera unos minutos a que se apliquen los cambios del Datadog Cluster Agent y reinicia tus aplicaciones.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Instalación con Helm" level="h4" >}}
 Sigue estos pasos para habilitar la instrumentación de un solo paso en todo tu clúster con Helm. Esto envía automáticamente trazas para todas las aplicaciones en el clúster que están escritas en lenguajes compatibles.
@@ -179,7 +179,7 @@ Para habilitar la instrumentación de un solo paso con Helm:
    ```
 5. Espera unos minutos a que se apliquen los cambios del Datadog Cluster Agent y reinicia tus aplicaciones.
 
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -200,7 +200,7 @@ Después de completar estos pasos, es posible que quieras habilitar [métricas d
 Cuando ejecutas el comando de instalación de una línea, hay algunas opciones disponibles para personalizar tu experiencia:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 ### Especificación de versiones de bibliotecas de rastreo {#lib-linux}
 
@@ -241,7 +241,7 @@ Por defecto, la habilitación de APM en tu servidor instala la compatibilidad pa
 Por ejemplo, para instalar sólo la versión 1.25.0 de la biblioteca de rastreo Java y la última versión de la biblioteca de rastreo Python, añade lo siguiente al comando de instalación:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Puedes proporcionar opcionalmente un número de versión para la biblioteca de rastreo colocando dos puntos después del nombre del lenguaje y especificando la versión de la biblioteca de rastreo. Si no especificas una versión, se utilizará por defecto la versión más reciente. Los nombres de lenguajes están separados por comas.
@@ -280,7 +280,7 @@ Para habilitar la instrumentación para espacios de nombres específicos, añade
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          enabledNamespaces: # Añadir espacios de nombres que se van a instrumentar
            - default
            - applications
@@ -292,7 +292,7 @@ Para deshabilitar la instrumentación para determinados espacios de nombres, añ
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          disabledNamespaces: # Añadir espacios de nombres que no se van a instrumentar
            - default
            - applications
@@ -339,7 +339,7 @@ Especifica bibliotecas de rastreo de Datadog y sus versiones para instrumentar a
 
 **Por defecto**: Si no especificas ninguna versión de biblioteca y`apm.instrumentation.enabled=true`, las aplicaciones escritas en los lenguajes soportados se instrumentan automáticamente utilizando las últimas versiones de bibliotecas de rastreo.
 
-#### Especificación a nivel del servicio 
+#### Especificación a nivel del servicio
 
 Para instrumentar automáticamente aplicaciones en pods específicos, añade la anotación de lenguaje y la versión de biblioteca adecuadas para tu aplicación en la especificación de tu pod:
 
@@ -379,7 +379,7 @@ spec:
         - # ...
 {{< /highlight >}}
 
-#### Especificación a nivel del clúster 
+#### Especificación a nivel del clúster
 
 Si no habilitas la instrumentación automática para pods específicos utilizando las anotaciones, puedes especificar qué lenguajes instrumentar en todo el clúster utilizando la configuración de la instrumentación de un solo paso. Cuando se define `apm.instrumentation.libVersions`, sólo se instrumentan las aplicaciones escritas en los lenguajes especificados, utilizando las versiones de biblioteca especificadas.
 
@@ -478,9 +478,9 @@ Si no quieres recopilar datos de trazas de un determinado servicio, host, máqui
 Para eliminar la instrumentación APM y dejar de enviar trazas desde un servicio específico, sigue estos pasos:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
-1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
+1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio:
 
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
@@ -491,7 +491,7 @@ Para eliminar la instrumentación APM y dejar de enviar trazas desde un servicio
 
 {{% tab "Docker" %}}
 
-1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
+1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
@@ -522,7 +522,7 @@ Para eliminar la instrumentación APM y dejar de enviar trazas desde un servicio
 Para dejar de producir trazas, desinstala APM y reinicia la infraestructura:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" (Host Linux o máquina virtual) %}}
+{{% tab "Host Linux o máquina virtual" %}}
 
 1. Ejecuta:
    ```shell

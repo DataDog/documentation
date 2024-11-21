@@ -22,8 +22,8 @@ further_reading:
   text: "Handling Private Action Credentials for App Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
-Private Actions are in beta. Use this form to request access today.
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network using Docker or [Kubernetes][1] and pair the runner with a [connection][2].

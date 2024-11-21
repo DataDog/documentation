@@ -102,7 +102,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### 検証する
@@ -267,7 +267,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -275,7 +275,7 @@ instances:
     port: 5432
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog GCP インテグレーションを構成して、CPU、メモリなどの追加のクラウドデータを取得します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'

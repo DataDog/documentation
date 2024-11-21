@@ -271,17 +271,17 @@ Si el host aún no tiene instalado el Datadog Agent o si quieres actualizar tu i
 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LANGUAGES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas: 
+Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LIBRARIES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Sal y abre un nuevo shell para utilizar la inyección de bibliotecas.
 
 ## Siguientes pasos
 
-Si aún no lo has hecho, instala tu aplicación y cualquier lenguaje de compatibilidad o biblioteca que requiera. 
+Si aún no lo has hecho, instala tu aplicación y cualquier lenguaje de compatibilidad o biblioteca que requiera.
 
 Cuando se inicia una aplicación escrita en un lenguaje compatible, se inyecta automáticamente con el rastreo activado.
 
@@ -295,8 +295,8 @@ Los valores de las variables de entorno anulan los parámetros del archivo de co
 
 ### Archivo de configuración
 
-| Nombre de la propiedad | Propósito | Valor por defecto | Valores válidos | 
-| --------- | ----------- | ------------- | ----------- | 
+| Nombre de la propiedad | Propósito | Valor por defecto | Valores válidos |
+| --------- | ----------- | ------------- | ----------- |
 |`log_level`  | Nivel de gestión de logs|`off`|`off`, `debug`, `info`, `warn`, `error`|
 |`output_paths`|Localización donde se escribe el resultado de los logs |`stderr`|`stderr` o una URL `file://` |
 |`env`|Entorno predeterminado asignado a un proceso|ninguno|n/a|
@@ -318,10 +318,10 @@ config_sources: BASIC
 
 Las siguientes variables de entorno configuran la inyección de bibliotecas. Puedes pasarlas por `export`, a través de la línea de comandos (`export DD_CONFIG_SOURCES=BASIC`), la configuración de shells o el comando de inicio.
 
-Cada uno de los campos del archivo de configuración corresponde a una variable de entorno. Esta variable de entorno es leída por el entorno del proceso que se está iniciando y sólo afecta al proceso que se está iniciando en ese momento. 
+Cada uno de los campos del archivo de configuración corresponde a una variable de entorno. Esta variable de entorno es leída por el entorno del proceso que se está iniciando y sólo afecta al proceso que se está iniciando en ese momento.
 
 |Propiedad del archivo de configuración|Variable de entorno|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
@@ -342,14 +342,14 @@ Por defecto, los siguientes parámetros están habilitados en un proceso instrum
 Puedes cambiar esta configuración para todos los procesos instrumentados, configurando la propiedad `config_sources` en el archivo de configuración, o para un único proceso, configurando la variable de entorno `DD_CONFIG_SOURCES` para el proceso. Los parámetros válidos para las fuentes de configuración son:
 
 | Nombre de la fuente de configuración|Significado|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`BASIC`|Aplica las configuraciones especificadas anteriormente. Si no se especifica ninguna fuente de configuración, esta es la predeterminada.|
 |`LOCAL:PATH`|Aplica la configuración en la ruta especificada del sistema de archivos local. A continuación se describe el formato del archivo de configuración. Ejemplo: `LOCAL:/opt/config/my_process_config.yaml`|
 |`BLOB:URL`| Aplica la configuración en la ruta especificada del almacén de objetos compatible con S3. A continuación se describen la URL de conexión y el formato del archivo de configuración. Ejemplo: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
 
 Las palabras `BASIC`, `LOCAL` y `BLOB` deben ir en mayúsculas.
 
-Los valores de las fuentes de configuración pueden separarse con puntos y comas para indicar que existen varias localizaciones posibles. Se utiliza la primera configuración que se devuelve sin error. En la configuración no se combinan varias fuentes de configuración. En el siguiente ejemplo se comprueba la configuración de un bucket de S3, a continuación se comprueba el sistema de archivos local y, por último, se utiliza la configuración integrada predeterminada: 
+Los valores de las fuentes de configuración pueden separarse con puntos y comas para indicar que existen varias localizaciones posibles. Se utiliza la primera configuración que se devuelve sin error. En la configuración no se combinan varias fuentes de configuración. En el siguiente ejemplo se comprueba la configuración de un bucket de S3, a continuación se comprueba el sistema de archivos local y, por último, se utiliza la configuración integrada predeterminada:
 
 ```yaml
 DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
@@ -364,7 +364,7 @@ Para obtener información sobre la configuración de credenciales con variables 
 
 <a id="supplying-Configuración-source-host"></a>
 
-### Suministro de la fuente de configuración 
+### Suministro de la fuente de configuración
 
 El archivo de configuración de `LOCAL` y `BLOB` puede adoptar el formato JSON:
 
@@ -495,7 +495,7 @@ Ejercita tu aplicación para empezar a generar datos de telemetría, que puedes 
 [8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
-{{% tab "Agent on host, app in containers" (Agent en host, aplicación en contenedor)%}}
+{{% tab "Agent en host, aplicación en contenedor" %}}
 
 <div class="alert alert-info">La inyección de bibliotecas de rastreo en hosts está en fase Beta.</div>
 
@@ -518,10 +518,10 @@ Si el host aún no tiene instalado el Datadog Agent o si quieres actualizar tu i
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LANGUAGES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas: 
+Por defecto, la ejecución del script instala la compatibilidad para Java, Node.js, Python, Ruby, y .NET. Si quieres especificar qué lenguaje instalar, configura también la variable de entorno`DD_APM_INSTRUMENTATION_LIBRARIES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`. Para especificar más de un lenguaje, utiliza una lista separada por comas:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configurar la inyección Docker {#configure-docker-injection-2}
@@ -544,7 +544,7 @@ config_sources: BASIC
 
 Las palabras `BASIC`, `LOCAL`, y `BLOB` deben ir en mayúsculas.
 
-Los valores de las fuentes de configuración pueden separarse con puntos y comas para indicar que existen varias localizaciones posibles. Se utiliza la primera configuración que se devuelve sin error. En la configuración no se combinan varias fuentes de configuración. En el siguiente ejemplo se comprueba la configuración de un bucket de S3, a continuación se comprueba el sistema de archivos local y, por último, se utiliza la configuración integrada predeterminada: 
+Los valores de las fuentes de configuración pueden separarse con puntos y comas para indicar que existen varias localizaciones posibles. Se utiliza la primera configuración que se devuelve sin error. En la configuración no se combinan varias fuentes de configuración. En el siguiente ejemplo se comprueba la configuración de un bucket de S3, a continuación se comprueba el sistema de archivos local y, por último, se utiliza la configuración integrada predeterminada:
 
 ```yaml
 config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
@@ -566,7 +566,7 @@ Opcional: `env`
 
 <a id="supplying-configuration-source-hc"></a>
 
-### Suministro de la fuente de configuración 
+### Suministro de la fuente de configuración
 
 Si especificas la fuente configuración `BLOB` o `LOCAL`, crea un archivo JSON o YAML allí y proporciona la configuración como JSON:
 
@@ -685,7 +685,7 @@ Ejercita tu aplicación para empezar a generar datos de telemetría, que puedes 
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores" %}}
 
 <div class="alert alert-info">La inyección de bibliotecas de rastreo en contenedores está en fase Beta.</div>
 
@@ -700,16 +700,16 @@ Se intercepta cualquier proceso recién iniciado y la biblioteca de instrumentac
 
 ## Instalación de la biblioteca precargada
 
-Utiliza el script de shell `install_script_docker_injection` para instalar automáticamente la compatibilidad de la inyección Docker. Para esto, Docker ya debe estar instalado en la máquina host.
+Utiliza el script de shell `install_script_agent7.sh` para instalar automáticamente la compatibilidad de la inyección Docker. Para esto, Docker ya debe estar instalado en la máquina host.
 
 ```shell
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Se instalan las bibliotecas de todos los lenguajes compatibles. Para instalar lenguajes específicos, define la variable `DD_APM_INSTRUMENTATION_LANGUAGES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`:
+Se instalan las bibliotecas de todos los lenguajes compatibles. Para instalar lenguajes específicos, define la variable `DD_APM_INSTRUMENTATION_LIBRARIES`. Los valores válidos son `java`, `js`, `python`, `ruby` y `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1,js:5" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configuración de la inyección Docker
@@ -732,7 +732,7 @@ config_sources: BASIC
 
 Las palabras `BASIC`, `LOCAL` y `BLOB` deben ir en mayúsculas.
 
-Los valores de las fuentes de configuración pueden separarse con puntos y comas para indicar que existen varias localizaciones posibles. Se utiliza la primera configuración que se devuelve sin error. En la configuración no se combinan varias fuentes de configuración. En el siguiente ejemplo se comprueba la configuración de un bucket de S3, a continuación se comprueba el sistema de archivos local y, por último, se utiliza la configuración integrada predeterminada: 
+Los valores de las fuentes de configuración pueden separarse con puntos y comas para indicar que existen varias localizaciones posibles. Se utiliza la primera configuración que se devuelve sin error. En la configuración no se combinan varias fuentes de configuración. En el siguiente ejemplo se comprueba la configuración de un bucket de S3, a continuación se comprueba el sistema de archivos local y, por último, se utiliza la configuración integrada predeterminada:
 
 ```yaml
 config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
@@ -754,7 +754,7 @@ Opcional: `env`
 
 <a id="supplying-configuration-source-c"></a>
 
-### Suministro de la fuente de configuración 
+### Suministro de la fuente de configuración
 
 Si especificas la fuente configuración `BLOB` o `LOCAL`, crea un archivo JSON o YAML allí y proporciona la configuración como JSON:
 
@@ -914,7 +914,7 @@ Para dejar de generar trazas para un servicio específico, ejecuta los siguiente
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
+1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio:
 
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
@@ -923,9 +923,9 @@ Para dejar de generar trazas para un servicio específico, ejecuta los siguiente
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores"%}}
 
-1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio: 
+1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio del servicio:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
    ```
@@ -950,7 +950,7 @@ Para dejar de producir trazas (traces), elimina los inyectores de bibliotecas y 
 
 {{% /tab %}}
 
-{{% tab "Agent and app in separate containers" (El Agent y la aplicación en diferentes contenedores%}}
+{{% tab "El Agent y la aplicación en diferentes contenedores" %}}
 
 1. Desinstala la inyección de bibliotecas local:
    ```shell

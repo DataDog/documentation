@@ -18,7 +18,7 @@ To begin **onboarding**:
 logs_config:
   logs_dd_url: <agent-http-intake-pci.logs.datadoghq.com:443>
 ```
-4. All logs that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enalbed for PCI DSS compliance and are included with no additional charge.
+4. All logs that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enabled for PCI DSS compliance and are included with no additional charge.
 
 To finish onboarding and be moved to **compliant**:
 1. Inform your [Datadog support][101] or your [Customer Success Manager][102] that you have moved over **all** your endpoints to the PCI compliant endpoint(s).
