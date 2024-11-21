@@ -21,7 +21,7 @@ Using that facet, you can create your custom dashboards and notebooks for your n
 
 You can also import the [CI Visibility - Critical Path][1] dashboard template:
 - Open [civisibility-critical-path-gitlab-dashboard.json][1] dashboard template and copy the content in the clipboard.
-- Create a [New Dashboard][8] in Datadog.
+- Create a [New Dashboard][2] in Datadog.
 - Paste the copied content in the new dashboard.
 - Save the dashboard.
 
@@ -36,7 +36,7 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 | Avg Duration      | Avg duration of the jobs                                                                                                                                                                      |
 | Impact on Latency | Represents the impact of a particular job in a pipeline. This value is proportional to the total duration and count. The higher the number is the higher is the impact of the job in your CI. |
 
-
+TBD
 
 [1]: /resources/json/civisibility-critical-path-gitlab-dashboard.json
 [2]: /dashboards/
