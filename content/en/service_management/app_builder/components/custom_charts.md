@@ -26,7 +26,7 @@ The basic workflow for creating a custom chart is as follows:
 
 The following example shows how to create a histogram chart illustrating Datadog Logs grouped by service.
 
-## Create or choose a query
+## Set up your data source
 
 1. Click **+ New Query**.
 1. Search for "search logs" and choose the Datadog **Search logs** action to create a query called `searchLogs0`.
