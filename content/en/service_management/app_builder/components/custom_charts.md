@@ -29,7 +29,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 ## Create or choose a query
 
 1. Click **+ New Query**.
-1. Search for "search logs" and choose the Datadog **Search logs** action.
+1. Search for "search logs" and choose the Datadog **Search logs** action to create a query called `searchLogs0`.
 1. Choose an existing Datadog Account Connection, or create a new one.
 1. Under **Inputs**, for **Time period**, choose **Past 2 Days**.
 1. Click **Run**.<br>A panel displays the outputs of your query in the bottom-left.
