@@ -14,16 +14,11 @@ Before setting up Threat Management, ensure the following prerequisites are met:
 
 There are two main approaches to enable Threat Management on your tracing libraries: Single-Step Instrumentation and Datadog Tracing Libraries.
 
-### Single-Step Instrumentation
-
-Run a one-line install command to install the Datadog Agent, and enable [Threat Management with Single-Step Instrumentation][2].
-
 ### Datadog Tracing Libraries
 
-Add an environment variable or a new argument to your [Datadog Tracing Library configuration][3].
+Add an environment variable or a new argument to your [Datadog Tracing Library configuration][2].
 
 By following these steps, you'll successfully set up Threat Management for your application or service, monitoring services that are under attack and protecting them against attacks.
 
 [1]: /security/application_security/threats/setup/compatibility
-[2]: /security/application_security/threats/setup/single_step
-[3]: /security/application_security/threats/setup/threat_detection
+[2]: /security/application_security/threats/setup/threat_detection
