@@ -43,7 +43,7 @@ Upon import, the following occurs:
 
 **Note**: The Service Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:component` or `kind:system`, the entire `catalog-info.yaml file` is rejected. Schema version v3.0 is required to use kind:system and the `dependsOn` field.
 
-### Example YAML for `catalog-info.yaml`
+### Example YAML for catalog-info.yaml
 {{< code-block lang="yaml" filename="catalog-info.yaml" collapsible="true" >}}
 apiVersion: backstage.io/v1alpha1
 kind: Component
