@@ -22,7 +22,7 @@ The basic workflow for creating a custom chart is as follows:
 
 1. Create or choose a query that contains the data you want to graph.
 1. Add the custom chart component and choose a chart style from the App Builder UI or the [Vega-Lite example gallery][1].
-1. Replace the values in the example with your data.
+1. Replace the values in the example with your query data.
 
 The following example shows how to create a histogram chart illustrating Datadog Logs grouped by service.
 
