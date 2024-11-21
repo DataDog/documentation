@@ -1,5 +1,7 @@
 ---
 title: Kubernetes Security Posture Management
+aliases:
+  - /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm/
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

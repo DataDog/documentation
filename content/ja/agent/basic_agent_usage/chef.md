@@ -5,7 +5,7 @@ title: Chef
 ---
 Datadog Chef レシピは Datadog のコンポーネントとコンフィギュレーションを自動的にデプロイするために使用します。クックブックは次のバージョンに対応しています。
 
-* Datadog Agent v7.x (default)
+* Datadog Agent v7.x (デフォルト)
 * Datadog Agent v6.x
 * Datadog Agent v5.x
 
@@ -195,12 +195,12 @@ run_list %w(
 | package_action の変更 | `'agent_package_action'` または `'agent6_package_action'` | 全バージョンで `'agent_package_action'` |
 | APT repo URL の変更   | `'aptrepo'` または `'agent6_aptrepo'`                     | 全バージョンで `'aptrepo'`              |
 | APT リポジトリディストリビューションの変更  | `'aptrepo_dist'` または `'agent6_aptrepo_dist'`   | 全バージョンで `'aptrepo_dist'`         |
-| Change YUM repo       | `'yumrepo'` または `'agent6_yumrepo'`                     | 全バージョンで `'yumrepo'`              |
+| YUM repo の変更       | `'yumrepo'` または `'agent6_yumrepo'`                     | 全バージョンで `'yumrepo'`              |
 | SUSE repo の変更      | `'yumrepo_suse'` または `'agent6_yumrepo_suse'`           | 全バージョンで `'yumrepo_suse'`         |
 
 Agent v6 から v7 へアップグレードするには、下記のメソッドのいずれか 1 つを使用します。
 
-* Set `agent_major_version` to `7`, `agent_package_action` to `install`, and pin a specific v7 version as `agent_version` (recommended).
+* `agent_major_version` を `7` に設定し、`agent_package_action` を `install` に設定したのち、特定の v7 バージョンを `agent_version` として固定します (推奨)。
 * `agent_major_version` を `7` に設定し、`agent_package_action` を `upgrade` に設定します。
 
 下記の例では Agent v6 から v7 へアップグレードします。Agent v5 から v6 へアップグレードする場合も、同様に適用できます。
@@ -263,7 +263,7 @@ Agent をアンインストールするには、`dd-agent` レシピを削除し
 
 [dd-agent レシピ][9]が、対象システムに Datadog Agent をインストールし、[Datadog API キー][4]を設定して、ローカルのシステムメトリクスに関するレポートを送信するサービスを開始します。
 
-**Note**: Windows users upgrading the Agent from versions <= 5.10.1 to >= 5.12.0, set the `windows_agent_use_exe` attribute to `true`. For more details, see the [dd-agent wiki][10].
+**注**: Windows で Agent を 5.10.1 以前のバージョン から 5.12.0 以降のバージョンにアップグレードする場合は、`windows_agent_use_exe` 属性を `true` に設定します。詳細については、[dd-agent wiki][10] を参照してください。
 
 ### ハンドラー
 
@@ -318,12 +318,12 @@ Agent インテグレーションのコンフィギュレーションファイ�
 
 ```ruby
 datadog_monitor 'name' do
-  init_config                       Hash # default value: {}
-  instances                         Array # default value: []
-  logs                              Array # default value: []
-  use_integration_template          true, false # default value: false
-  config_name                       String # default value: 'conf'
-  action                            Symbol # defaults to :add
+  init_config                       Hash # デフォルト値: {}
+  instances                         Array # デフォルト値: []
+  logs                              Array # デフォルト値: []
+  use_integration_template          true, false # デフォルト値: false
+  config_name                       String # デフォルト値: 'conf'
+  action                            Symbol # デフォルト値: :add
 end
 ```
 
@@ -336,7 +336,7 @@ end
 | `init_config`              | インテグレーションコンフィギュレーションファイルの `init_config` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                     |
 | `logs`                     | インテグレーションコンフィギュレーションファイルの `logs` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                            |
 | `use_integration_template` | `instances`、`init_config`、`logs` の値を記述するデフォルトテンプレートを使用するには、それぞれのキーの YAML で `true` (推奨) に設定します。下位互換性ではデフォルトで `false` に設定されていますが、今後のクックブックの主要バージョンではデフォルトで `true` に設定される可能性があります。 |
-| `config_name`              | The filename used when creating an integrations configuration file. Overriding this property allows the creation of multiple configuration files for a single integration.  This defaults to `conf`, which creates a configuration file named `conf.yaml`.                                    |
+| `config_name`              | インテグレーションコンフィギュレーションファイルを作成する際に使用するファイル名。このプロパティをオーバーライドすると、1 つのインテグレーションに対して複数のコンフィギュレーションファイルを作成することができます。デフォルトでは `conf` となり、`conf.yaml` という名前のコンフィギュレーションファイルが作成されます。                                    |
 
 #### 例
 

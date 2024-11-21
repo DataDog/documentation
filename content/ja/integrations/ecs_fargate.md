@@ -31,7 +31,7 @@ categories:
 - orchestration
 - provisioning
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md
 display_on_public_website: true
@@ -39,7 +39,7 @@ draft: false
 git_integration_title: ecs_fargate
 integration_id: aws-fargate
 integration_title: Amazon ECS on AWS Fargate
-integration_version: 4.3.1
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: ecs_fargate
@@ -64,7 +64,7 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: Track metrics for containers running with ECS Fargate
+  description: ECS Fargate を使用して実行中のコンテナのメトリクスを追跡する
   media: []
   overview: README.md#Overview
   resources:
@@ -139,7 +139,7 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 1. [AWS Web Console][4] にログインし、ECS セクションに移動します。
 2. 左メニューの **Task Definitions** をクリックし、**Create new Task Definition** ボタンをクリックするか、既存の Fargate タスク定義を選択します。
 3. 新しいタスク定義の場合
-    1. Select **Fargate** as the launch type, then click the **Next step** button.
+    1. 起動タイプとして **Fargate** を選択し、**Next step** ボタンをクリックします。
     2. **Task Definition Name** にタスク定義名を入力します (`my-app-and-datadog` など)。
     3. タスク実行 IAM ロールを選択します。下の [IAM ポリシーの作成と修正](#create-or-modify-your-iam-policy)セクションで、権限の要件を確認します。
     4. ニーズに合わせて **Task memory** と **Task CPU** を選択します。
@@ -252,9 +252,9 @@ ECS Fargate では、タスクを [Replica サービス][6]として実行する
 ##### Web UI レプリカサービス
 
 1. [AWS Web Console][1] にログインし、ECS セクションに移動します。必要に応じて、**Networking only** クラスターテンプレートを使用してクラスターを作成します。
-2. Choose the cluster to run the Datadog Agent on.
+2. Datadog Agent を実行するクラスターを選択します。
 3. **Services** タブで、**Create** ボタンをクリックします。
-4. For **Launch type**, choose **FARGATE**.
+4. **Launch type** で、**FARGATE** を選択します。
 5. **Task Definition** で、先ほど作成したタスクを選択します。
 6. **Service name** に入力します。
 7. **Number of tasks** に `1` と入力し、**Next step** ボタンをクリックします。
@@ -272,7 +272,7 @@ ECS Fargate では、タスクを [Replica サービス][6]として実行する
 
 [AWS CLI ツール][1]を使用して次のコマンドを実行します。
 
-**Note**: Fargate version 1.1.0 or greater is required, so the command below specifies the platform version.
+**注**: Fargate バージョン 1.1.0 以降が必要です。したがって、以下のコマンドでは、プラットフォームバージョンを指定します。
 
 必要に応じてクラスターを作成します。
 
@@ -390,7 +390,7 @@ CloudFormation 例 (YAML):
               Value: "{\"com.docker.compose.service\":\"service_name\"}"
 ```
 
-**Note**: You should not use `DD_HOSTNAME` since there is no concept of a host to the user in Fargate. Using this tag can cause your tasks to appear as APM Hosts in the Infrastructure list, potentially impacting your billing. Instead, `DD_TAGS` is traditionally used to assign host tags. As of Datadog Agent version 6.13.0, you can also use the `DD_TAGS` environment variable to set global tags on your integration metrics.
+**注**: `DD_HOSTNAME` を使用しないでください。Fargate には、ユーザーに対するホストという概念がないからです。このタグを使用すると、タスクがインフラストラクチャーリストの APM ホストとして表示されるようになり、請求に影響が出る可能性があります。代わりに、従来からホストタグを割り当てるために `DD_TAGS` が使用されています。Datadog Agent バージョン 6.13.0 では、`DD_TAGS` 環境変数を使用してインテグレーションメトリクスにグローバルタグを設定することもできます。
 
 ### クローラーベースのメトリクス
 

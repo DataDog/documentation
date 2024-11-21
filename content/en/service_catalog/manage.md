@@ -1,5 +1,5 @@
 ---
-title: Manage a Service
+title: Manage a Component
 aliases:
   - /tracing/service_catalog/investigating
   - /service_catalog/investigating/
@@ -30,11 +30,12 @@ further_reading:
 algolia:
   tags: ['service catalog']
 ---
+`Service` is the only component type in Service Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 
-## Assigning an owner to a service
+## Assigning an owner 
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
-## Determining and communicating service levels
+## Determining and communicating criticality 
 Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
 
 ## Understanding your service configuration
@@ -82,7 +83,7 @@ Click a service in Service Catalog to open the side panel with the following det
 - An interactive service map displaying services upstream and downstream from this service.
 - **Defined and Related Dashboards** showing a list of pre-defined and Watchdog recommended dashboards when available. 
 - **Service Scorecards** showing a snapshot of the service's scores and last evaluation timestamp.
-- **Beta: Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][1] enabled, you can adjust the [trace sampling rate][3] (from 0.0 to 1.0), enable [Log Injection][2] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
+- **Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][1] enabled, you can adjust the [trace sampling rate][3] (from 0.0 to 1.0), enable [Log Injection][2] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
 
   {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
 
@@ -101,3 +102,4 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 [7]: https://app.datadoghq.com/services
 [8]: /tracing/services/service_page/
 [9]: /tracing/service_catalog/service_definition_api/
+[10]: /service_catalog/service_definitions/v3-0/

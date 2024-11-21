@@ -326,7 +326,7 @@ The SLO Calendar View is available on the [SLO status page][2]. On the top right
 ## SLO CSV export
 
 {{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="Try Out the SLO CSV Export Feature">}}
-The CSV Export feature is in Private Beta. Complete the form to request access.
+The CSV Export feature is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data with the following information:

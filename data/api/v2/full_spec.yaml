@@ -27590,6 +27590,9 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code and library vulnerabilities.
+              This does not restrict access to the vulnerability data source through
+              the API or inventory SQL.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -27630,7 +27633,8 @@ components:
               Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_read: View a list of findings that include
+              both misconfigurations and identity risks.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -38366,9 +38370,10 @@ paths:
   /api/v2/posture_management/findings:
     get:
       description: "Get a list of findings. These include both misconfigurations and
-        identity risks.\n\n### Filtering\n\nFilters can be applied by appending query
-        parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n
-        \ - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+        identity risks.\n\n**Note**: To filter and return only identity risks, add
+        the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters
+        can be applied by appending query parameters to the URL.\n\n  - Using a single
+        filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
         \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
         `attribute_key` can be any of the filter keys described further below.\n\nQuery
         parameters of type `integer` support comparison operators (`>`, `>=`, `<`,
