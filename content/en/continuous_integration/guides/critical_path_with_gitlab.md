@@ -29,12 +29,25 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 
 ### Terminology
 
-| Column            | Description                                                                                                                                                                                   |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Total Duration    | Sum all jobs duration                                                                                                                                                                         |
-| Count             | Number of times that the job has been detected on the critical path                                                                                                                           |
-| Avg Duration      | Avg duration of the jobs                                                                                                                                                                      |
-| Impact on Latency | Represents the impact of a particular job in a pipeline. This value is proportional to the total duration and count. The higher the number is the higher is the impact of the job in your CI. |
+| Column            | Description                                                                                                                                                                                               |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Total Duration    | Sum all jobs duration                                                                                                                                                                                     |
+| Count             | Number of times that the job has been detected on the critical path                                                                                                                                       |
+| Avg Duration      | Avg duration of the jobs                                                                                                                                                                                  |
+| Impact on Latency | Represents the impact of a particular job across all your pipelines. This value is proportional to the total duration and count. The higher the number is the higher is the impact of the job in your CI. |
+
+### Using Impact on Latency value
+
+You can find your CI Jobs with the highest impact in your CI sorting all the CI Jobs on the critical path by `Impact on Latency`.
+
+This measure is takes into account, not only the CI Job duration, but the number of times that a particular job is executed.
+
+**Example**
+
+In the previous image, we can observe that the two first rows corresponds to a different kind of a CI Job:
+
+- The `tests` CI Job executed in the `shopist/cart-service` repository has an average duration of 5 mins executed around 2500 times.
+- The `build` CI Job executed in the `shopist/cart-service` repository has an average duration of less than 2 minutes, but the number of times is almost x2 than the `tests` CI Job. That makes that the `Impact on Latency` is in second place, even though the CI Job duration is substantially minor.
 
 TBD
 
