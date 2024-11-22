@@ -8,7 +8,7 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
-<div class="alert alert-info">We recommend using `JSONata` to define your Step Function payloads for the most complete end-to-end tracing experience. If you are using `JSONPath` to define your Step Function payloads, see the below sections for supported configurations</a>.</div>
+<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function payloads for the most complete end-to-end tracing experience. If you are using <code>JSONPath</code> to define your Step Function payloads, see the below sections for supported configurations</a>.</div>
 
 ## Merge upstream traces with Step Functions and downstream Lambda traces
 
