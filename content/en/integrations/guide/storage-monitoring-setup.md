@@ -91,7 +91,7 @@ After completing the CloudFormation setup, [reach out][105] with the following i
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
-To manually set up the required [Amazon S3 Inventory][2] and related configuration, follow these steps:
+To manually set up the required [Amazon S3 Inventory][206] and related configuration, follow these steps:
 
 #### Step 1: Create a destination bucket
 
@@ -107,20 +107,20 @@ To manually set up the required [Amazon S3 Inventory][2] and related configurati
 #### Step 3: Configure Inventory generation
 
 For each bucket you want to monitor:
-  1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
-  2. Navigate to the bucket's **Management** tab.
-  3. Click **Create inventory configuration**.
-  4. Configure the following settings:
-    - Set a configuration name
-    - (Optional) Specify a source bucket prefix
-    - **Object versions**: Datadog recommends selecting **Current Versions Only**
-    - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
+    1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
+    2. Navigate to the bucket's **Management** tab.
+    3. Click **Create inventory configuration**.
+    4. Configure the following settings:
+      - Set a configuration name
+      - (Optional) Specify a source bucket prefix
+      - **Object versions**: Datadog recommends selecting **Current Versions Only**
+      - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
        **Note**: If you want to use a prefix on the destination bucket, add this as well
-    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
-    - **Output format**: CSV
-    - **Status**: Enabled
-    - **Server-side encryption**: Don't specify an encryption key
-    - Select the following **Additional metadata fields**:
+      - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
+      - **Output format**: CSV
+      - **Status**: Enabled
+      - **Server-side encryption**: Don't specify an encryption key
+      - Select the following **Additional metadata fields**:
           1. Size
           2. Last Modified
           3. Storage Class
@@ -143,6 +143,7 @@ After completing the above steps, [reach out][205] with the following informatio
 [203]: https://console.aws.amazon.com/s3/buckets
 [204]: https://aws.amazon.com/s3/pricing/
 [205]: mailto:storage-monitoring@datadoghq.com
+[206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 {{% /tab %}}
 {{< /tabs >}}
 
