@@ -23,6 +23,10 @@ title: 除外
 
 しきい値を追加します。`clamp_min()` は、すべてのしきい値以下のデータポイントをそのしきい値と等しく設定し、`clamp_max()` はしきい値以上のデータポイントをそのしきい値と等しく設定します。
 
+注: `clamp_min(values, threshold)` および `clamp_max(values, threshold)` は、値内の `NaN` をすべて `threshold` に設定します。
+
+この動作を回避するには、`clamp_min()` / `clamp_max()` 関数の前に `default_zero()` を適用してください。
+
 ## カットオフ
 
 | 関数       | 説明                                     | 例                                 |

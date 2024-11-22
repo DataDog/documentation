@@ -245,7 +245,6 @@ View [Profiles][1] to identify lines of code related to performance issues. The 
 {{% /tab %}}
 {{% tab "Span Links" %}}
 
-
 [Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
 Click a span in the flame graph to display spans connected with span links:

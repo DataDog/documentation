@@ -17,13 +17,13 @@ further_reading:
     - link: "/tests/test_impact_analysis/javascript"
       tag: "Documentation"
       text: "Speed up your test jobs with Test Impact Analysis"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -622,7 +622,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -741,7 +741,7 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 ### Cypress interactive mode
 
-Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][13], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][14].
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][13], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][14].
 
 ### Jest's `test.concurrent`
 Jest's [test.concurrent][15] is not supported.
@@ -754,7 +754,7 @@ Mocha's [--exit][17] option may cause data loss. Datadog tries to send data imme
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and Test Optimization.
 
 ### Parameterized tests
 
@@ -790,7 +790,7 @@ forEach([
 });
 {{< /code-block >}}
 
-When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
+When you use this approach, both the testing framework and Test Optimization can tell your tests apart.
 
 ## Further reading
 
