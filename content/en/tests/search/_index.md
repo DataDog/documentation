@@ -19,9 +19,7 @@ further_reading:
 
 ## Overview
 
-The [Repositories page][1] gives you a high-level overview of test performance across your organization's repositories.
-
-{{< img src="/tests/services.png" text="A list of test services sorted by the most recent branch on the Test Services page" style="width:100%" >}}
+The [Repositories page][1] displays aggregated health metrics for the default branch of each repository. This view is useful for gaining a high-level overview of test performance across your organization's repositories.
 
 Use the Repositories page to:
 - See the total number of flaky tests in each repo
@@ -32,13 +30,11 @@ Use the Repositories page to:
 <!-- vale Datadog.pronouns = NO -->
 To filter the list down to only repositories that you have committed to, toggle **My Repositories** and enter the email address associated with your GitHub account. You can enter multiple email addresses. You can edit this address later by clicking **Edit Authors**.
 <!-- vale Datadog.pronouns = YES -->
-
-### Repository page
-
 <!-- WIP marker -->
 
 
-Clicking into a specific repository from the repository page gives you granular insight into the tests for that repo. You can:
+
+Clicking into a repository from the repository page gives you granular insight into the tests for that repo. You can:
 - See which tests have become slower over time and identify the commit that introduced the regression.
 - See what tests are failing and why.
 - See your last commit's test results.
@@ -76,14 +72,6 @@ Click into one of the test runs to see the test trace as a flame graph or a span
 #### Explore connections to services, resources, logs, and network events
 
 Click the CI provider link to examine the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
-
-### Default Branches view
-
-The [Default Branches][6] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
-
-{{< img src="/tests/default_branches.png" text="A list of test services sorted by the default branch on the Test Services page" style="width:100%" >}}
-
-The Default Branches view shows similar information to the Branches view, but applied to the default branch.
 
 ## Further reading
 
