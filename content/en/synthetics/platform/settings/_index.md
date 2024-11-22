@@ -18,7 +18,7 @@ further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "/mobile_app_testing/mobile_app_tests"
+- link: "/mobile_app_testing/"
   tag: "Documentation"
   text: "Configure a Mobile Test"
 - link: "/synthetics/private_locations/"
