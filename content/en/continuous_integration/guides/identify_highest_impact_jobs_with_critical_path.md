@@ -17,8 +17,9 @@ This guide explains how to identify the CI jobs that are on the critical path, w
 ### Compatibility
 
 Filtering CI Jobs on the Critical Path is available for the following CI Providers:
-- GitLab
+* [GitLab][3]
 
+Note that this applies only to filtering CI jobs. You can [highlight which CI jobs are on the critical path][4] using the Pipeline Execution detail view across all CI providers.
 
 ## Identify the CI Jobs to improve your CI Pipeline
 
@@ -71,3 +72,5 @@ In the previous image, we can observe that the first two rows correspond to diff
 
 [1]: /resources/json/civisibility-critical-path-gitlab-dashboard.json
 [2]: /dashboards/
+[3]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom
+[4]: /continuous_integration/search/#highlight-critical-path
