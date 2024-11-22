@@ -4846,7 +4846,6 @@ components:
       description: Updated list stream widget.
       properties:
         clustering_pattern_field_path:
-          default: message
           description: Specifies the field for logs pattern clustering. Usable only
             with logs_pattern_stream.
           example: message
