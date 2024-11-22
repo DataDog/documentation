@@ -8,14 +8,14 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
+<div class="alert alert-info">We recommend using `JSONata` to define your Step Function payloads for the most complete end-to-end tracing experience. If you are using `JSONPath` to define your Step Function payloads, see the below sections for supported configurations</a>.</div>
+
 ## Merge upstream traces with Step Functions and downstream Lambda traces
 
-<div class="alert alert-info">We recommend using `JSONata` to define your Step Function payloads for the most complete end-to-end tracing experience. If you are using `JSONPath` to define your Step Function payloads, see the below sections for `JSONPath` supported configurations</a>.</div>
-
 ### Requirements
-Node.js (layer v113+) or Python (layer v103+) runtimes.
+Node.js (layer v116+) or Python (layer v103+) runtimes.
 
-Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
+Your State Machine Definition must be using [JSONata][1] as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
 
 ### Setup
 
@@ -31,6 +31,8 @@ On the Lambda Task, set the `Arguments` key as follows:
 The `JSONata` expression merges the upstream service's context with the current Step Functions context object and the Lambda state's input payload.
 
 Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
+
+[1]: https://aws.amazon.com/blogs/compute/simplifying-developer-experience-with-variables-and-jsonata-in-aws-step-functions/
 
 ## Merge upstream traces with Step Functions and nested Step Functions traces
 
