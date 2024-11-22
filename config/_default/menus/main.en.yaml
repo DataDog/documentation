@@ -5796,7 +5796,7 @@ menu:
       parent: csm_agentless
       identifier: csm_agentless_deployment_methods
       weight: 102
-    - name: IAC Scanning
+    - name: IaC Scanning
       url: security/cloud_security_management/iac_scanning
       parent: csm
       identifier: csm_iac_scanning
