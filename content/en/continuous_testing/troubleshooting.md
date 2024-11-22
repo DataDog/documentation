@@ -47,7 +47,7 @@ The first thing to check is which failure mode flags you are passing in your [gl
 
 ## Synthetics monitors
 
-The CI doesn't trigger Synthetics monitors and do not factor into monitor evaluation at all, however failing runs will make the CI red. 
+The CI does not trigger Synthetics monitors or incorporate them into monitor evaluations; however, failing runs will result in the CI showing a red status.
 
 ## Further reading
  
