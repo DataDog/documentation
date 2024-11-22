@@ -86,7 +86,7 @@ After completing the CloudFormation setup, [reach out][105] with the following i
 [102]: https://console.aws.amazon.com/cloudformation/
 [103]: https://github.com/DataDog/experimental/blob/main/users/raphael.allier/cloud-inventory-policies-cfn.yaml
 [104]: https://console.aws.amazon.com/cloudformation/
-[105]: mailto:mahashree.rajendran@datadoghq.com
+[105]: mailto:storage-monitoring@datadoghq.com
 [106]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "AWS Console" %}}
@@ -110,16 +110,16 @@ For each bucket you want to monitor:
   1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
   2. Navigate to the bucket's **Management** tab.
   3. Click **Create inventory configuration**.
-  4. Configure the following settings:  
-    - Set a configuration name  
-    - (Optional) Specify a source bucket prefix  
-    - **Object versions**: Datadog recommends selecting **Current Versions Only**  
-    - **Destination**: Select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`  
-       **Note**: If you want to use a prefix on the destination bucket, add this as well  
-    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog  
-    - **Output format**: CSV  
-    - **Status**: Enabled  
-    - **Server-side encryption**: Don't specify an encryption key  
+  4. Configure the following settings:
+    - Set a configuration name
+    - (Optional) Specify a source bucket prefix
+    - **Object versions**: Datadog recommends selecting **Current Versions Only**
+    - **Destination**: Select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
+       **Note**: If you want to use a prefix on the destination bucket, add this as well
+    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
+    - **Output format**: CSV
+    - **Status**: Enabled
+    - **Server-side encryption**: Don't specify an encryption key
     - Select the following **Additional metadata fields**:
           1. Size
           2. Last Modified
@@ -129,7 +129,7 @@ For each bucket you want to monitor:
 
 #### Post-setup steps
 
-After completing the above steps, reach out on the `#storage-monitoring` Slack channel with the following information:
+After completing the above steps, [reach out][205] with the following information:
 
 1. Name of the destination bucket where inventories are stored.
 2. Prefix to store the inventory files.
@@ -142,6 +142,7 @@ After completing the above steps, reach out on the `#storage-monitoring` Slack c
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
 [203]: https://console.aws.amazon.com/s3/buckets
 [204]: https://aws.amazon.com/s3/pricing/
+[205]: mailto:storage-monitoring@datadoghq.com
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -159,4 +160,4 @@ If you encounter any issues or need assistance:
 - Verify all permissions are correctly configured
 - If you're still encountering issues, [reach out][1] with your bucket details, AWS account ID, and Datadog org ID
 
-[1]: mailto:mahashree.rajendran@datadoghq.com
+[1]: mailto:storage-monitoring@datadoghq.com
