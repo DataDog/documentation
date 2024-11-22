@@ -106,7 +106,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 #### Step 3: Configure Inventory generation
 
-For each bucket you want to monitor:
+For each bucket you want to monitor: <br>
     1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
     2. Navigate to the bucket's **Management** tab.
     3. Click **Create inventory configuration**.
