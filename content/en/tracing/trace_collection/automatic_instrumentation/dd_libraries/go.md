@@ -245,15 +245,13 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 {{% tab "Manual instrumentation" %}}
 
+### Add the tracer library to your application
+
+First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] for configuration instructions and details about using the API.
+
 ### Activate Go integrations to create spans
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. You can find a list of these packages in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each package.
-
-### Configuration
-
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
-
-For configuration instructions and details about using the API, see the [Datadog API documentation][4].
+Activate [Go integrations][1] to generate spans. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each integration.
 
 [1]: /tracing/compatibility_requirements/go
 [3]: /tracing/trace_collection/library_config/go/
