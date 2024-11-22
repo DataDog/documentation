@@ -5,6 +5,7 @@ core_product:
   - ci-cd
 related_terms:
   - performance regression
+short_definition: "A test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch. Additionally, the test run must have a minimum duration of 500ms to be considered a regression."
 ---
 In Datadog Test Optimization, a test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch. Additionally, the test run must have a minimum duration of 500ms to be considered a regression. A benchmark test run (`@test.type:benchmark`) is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch.
 

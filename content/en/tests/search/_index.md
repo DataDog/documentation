@@ -1,6 +1,6 @@
 ---
-title: Search and Manage CI Tests
-description: Learn how to search for your CI tests.
+title: Repositories
+description: Gain insight into test performance in your repositories.
 algolia:
    rank: 70
    tags: ['flaky test', 'flaky tests', 'test regression', 'test regressions', 'test service', 'test services']
@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -28,18 +28,22 @@ Use the Repositories page to:
 - See how many test services are associated with each repo.
 
 <!-- vale Datadog.pronouns = NO -->
+
 To filter the list down to only repositories that you have committed to, toggle **My Repositories** and enter the email address associated with your GitHub account. You can enter multiple email addresses. You can edit this address later by clicking **Edit Authors**.
+
 <!-- vale Datadog.pronouns = YES -->
-<!-- WIP marker -->
 
+### Investigate a repository
 
-
-Clicking into a repository from the repository page gives you granular insight into the tests for that repo. You can:
-- See which tests have become slower over time and identify the commit that introduced the regression.
-- See what tests are failing and why.
-- See your last commit's test results.
-- Find out if your commit introduces a new [flaky test][4] that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
-
+Select a repository to gain granular insights into its test performance. The page for a specific repository gives you access to:
+- **Latest Commit**: Test status and performance for the latest commit.
+- **Commits**: A list of recent commits and their test statistics.
+- **Test Services**: A summary of any test services you've added to the repo.
+- **Flaky Tests**: Insights into [flaky tests][7] in the repo.
+- **Test Regressions**: Insights into {{< tooltip glossary="test regression" >}}s.
+- **Test Performance**: See which tests have become slower over time.
+- **Common Error Types**: See the most common error types in the repo.
+- **All Test Runs**: Explore all test runs in the repo.
 
 ## Search for tests
 
@@ -83,3 +87,4 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 [4]: /glossary/#flaky-test
 [5]: /glossary/#test-regression
 [6]: https://app.datadoghq.com/ci/test-repositories?view=default-branches
+[7]: /tests/flaky_test_management
