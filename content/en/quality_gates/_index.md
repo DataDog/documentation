@@ -35,7 +35,7 @@ Quality Gates is in Preview.
 
 Quality Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
-{{< img src="quality_gates/setup/sca_2.png" alt="An SCA rule that fails any library vulnerabilities with critical or high severity are detected in the repository" style="width:100%" >}}
+{{< img src="quality_gates/setup/sca_2.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
 Use Quality Gates to:
 
