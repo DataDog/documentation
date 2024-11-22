@@ -88,7 +88,7 @@ The Service Catalog provides a definition as a [Terraform resource][8]. Creating
 
 As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][10].
 
-## Build custom extensions 
+## Build custom extensions (in Limited Availability)
 
 The `extensions` field is supported in all versions including v2.0. You can incorporate this custom field into deployment processes to standardize and codify best practices.
 
