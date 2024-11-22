@@ -169,6 +169,8 @@ Error
 
 Until an OAuth client is published, you can only authorize the client from the account it was created in (the partner's sandbox account). This error occurs if you try to authorize the client outside of that account before the client is published.
 
+If you've already published your OAuth client, make sure to use the client ID and client secret that you received upon submission. The client secret is displayed only once. If you've lost your client secret, contact [ecosystems@datadog.com][11] for assistance.
+
 ### Forbidden errors
 
 Error
@@ -222,6 +224,9 @@ This error is usually the result of configuration differences between your testi
 - Confirm you are using the correct redirect URI. For example, if your client is published, the redirect URI should match the one configured for production, and not the URI you used for testing.
 - Ensure you are using the correct client. Use your testing client until the integration is published to your sandbox account.
 
+### Applications with subdomains
+
+We do not support multi-tenanted applications where customers have individual subdomains to authorize against. We only support authorizing against a single domain. 
 
 ### OAuth with PKCE
 
