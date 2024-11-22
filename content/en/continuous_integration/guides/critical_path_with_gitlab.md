@@ -38,18 +38,16 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 
 ### Using Impact on Latency value
 
-You can find your CI Jobs with the highest impact in your CI sorting all the CI Jobs on the critical path by `Impact on Latency`.
+You can identify the CI Jobs with the highest impact on your CI by sorting by `Impact on Latency`.
 
-This measure is takes into account, not only the CI Job duration, but the number of times that a particular job is executed.
+This metric helps you to determine quickly which CI Jobs require attention to <u>achieve the best effort-to-benefit ratio</u> for overall CI improvement, as it accounts, not only for the CI Job duration, but also for the frequency with which a particular CI Job is executed.
 
 **Example**
 
-In the previous image, we can observe that the two first rows corresponds to a different kind of a CI Job:
+In the previous image, we can observe that the first two rows correspond to different types of CI Jobs:
 
-- The `tests` CI Job executed in the `shopist/cart-service` repository has an average duration of 5 mins executed around 2500 times.
-- The `build` CI Job executed in the `shopist/cart-service` repository has an average duration of less than 2 minutes, but the number of times is almost x2 than the `tests` CI Job. That makes that the `Impact on Latency` is in second place, even though the CI Job duration is substantially minor.
-
-TBD
+- The `tests` CI Job, executed in the `shopist/cart-service repository`, has an average duration of 5 minutes and runs approximately 2,500 times. This is undoubtedly the CI Job with the highest impact on this repository. Improving it would yield the most significant improvement in our CI performance.
+- The `build` CI Job, also executed in the `shopist/cart-service` repository, has an average duration of less than 2 minutes but is executed almost twice as often as the `tests` CI Job. As a result, its `Impact on Latency` ranks second, despite its significantly shorter duration.
 
 [1]: /resources/json/civisibility-critical-path-gitlab-dashboard.json
 [2]: /dashboards/
