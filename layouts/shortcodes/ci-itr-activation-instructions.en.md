@@ -1,4 +1,4 @@
-### Activate Intelligent Test Runner for the test service
+### Activate Test Impact Analysis for the test service
 
 You, or a user in your organization with the **Intelligent Test Runner Activation** (`intelligent_test_runner_activation_write`) permission, must activate Test Impact Analysis on the [Test Service Settings][101] page.
 
