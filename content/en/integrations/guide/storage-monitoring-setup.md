@@ -61,7 +61,7 @@ This template creates two IAM policies:
 4. Click **Choose file** and select the `cloud-inventory-policies-cfn.yaml` file, then click **Next**.
 5. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
-   - **DestinationBucketName**: The name of the bucket that to receive your inventory files. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
+   - **DestinationBucketName**: The name of the bucket that receives your inventory files. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
    - **SourceBucketName**: The name of the bucket you want to start generating inventory files for
    - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`)
 
@@ -75,12 +75,12 @@ This template creates two IAM policies:
 #### Post-setup steps
 
 After completing the CloudFormation setup, [reach out][105] with the following information:
-    1. Name of the destination bucket holding the inventory files.
-    2. Prefix where the files are stored in the destination bucket.
-    3. Name of the source bucket you want to monitor (the bucket producing inventory files).
-    4. AWS region of the destination bucket holding the inventory files.
-    5. AWS account ID containing the buckets.
-    6. Datadog org ID.
+1. Name of the destination bucket holding the inventory files.
+2. Prefix where the files are stored in the destination bucket.
+3. Name of the source bucket you want to monitor (the bucket producing inventory files).
+4. AWS region of the destination bucket holding the inventory files.
+5. AWS account ID containing the buckets.
+6. Datadog org ID.
 
 [101]: https://github.com/DataDog/experimental/blob/main/users/raphael.allier/source-bucket-inventory-cfn.yaml
 [102]: https://console.aws.amazon.com/cloudformation/
@@ -125,7 +125,7 @@ For each bucket you want to monitor:
           2. Last Modified
           3. Storage Class
 
-**Note**: Review [AWS S3 pricing][204] for costs related to inventory generation.
+**Note**: Review [Amazon S3 pricing][204] for costs related to inventory generation.
 
 #### Post-setup steps
 
