@@ -3359,6 +3359,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
       weight: 1008
+    - name: Change Tracking
+      url: tracing/change_tracking
+      parent: tracing
+      identifier: change_tracking
+      weight: 11
     - name: Sécurité des données
       url: tracing/configure_data_security/
       parent: tracing

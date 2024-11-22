@@ -2097,6 +2097,12 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Change Tracking
+      url: change_tracking/
+      pre: graph-3
+      parent: platform_heading
+      identifier: change_tracking
+      weight: 130000
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -3624,6 +3630,11 @@ menu:
       identifier: tracing_troubleshooting_quantization
       parent: tracing_troubleshooting
       weight: 1310
+    - name: Go Compile-Time Instrumentation
+      url: /tracing/troubleshooting/go_compile_time
+      identifier: tracing_troubleshooting_go_instrumentation
+      parent: tracing_troubleshooting
+      weight: 1311
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
@@ -3992,6 +4003,11 @@ menu:
       identifier: data_streams_troubleshooting
       parent: data_streams
       weight: 2
+    - name: Guide
+      url: data_streams/guide
+      identifier: data_streams_guide
+      parent: data_streams
+      weight: 3
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
