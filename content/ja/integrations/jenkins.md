@@ -1,7 +1,7 @@
 ---
 categories:
 - configuration & deployment
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
 description: Jenkins のメトリクス、イベント、サービスチェックを自動転送 to Datadog.
@@ -156,7 +156,7 @@ d.save()
    -  Datadog Agent で[ログ収集](#log-collection-for-agents)を有効にします。
    - ログ収集を有効にするには、`DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` 変数を `true` に設定します (デフォルトでは無効になっています)。
    - Datadog Agent のログ収集用ポートを指定する `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT` を設定します。
-5. (オプション) CI Visibility (トレース収集):
+5. (オプション) CI Visibility (トレース収集): 
    - CI Visibility を有効にするには、`DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` 変数を `true` に設定します (デフォルトでは無効になっています)。
    - Datadog Agent トレース収集ポート (デフォルトは `8126`) を指定する `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT` 変数を設定します。
    - CI Visibility の Jenkins インスタンスの名前を指定する `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME` 変数を設定します (デフォルトは `jenkins`)。
@@ -171,9 +171,13 @@ d.save()
 
 #### ロギング
 
-ロギングには [Jenkins と相性の良い][6] `java.util.Logger` を利用します。ログの取得設定は [Jenkins のロギング文書][6]に記載の手順に従ってください。ロガーの追加画面では、 `org.datadog.jenkins.plugins.datadog.` で始まるすべての Datadog プラグイン関数と、それに紐付く関数名が自動入力されます。本記事の執筆時点で、利用可能な関数は `org.datadog.jenkins.plugins.datadog.listeners.DatadogBuildListener` のみとなります。
+ロギングは、[Jenkins のベストプラクティス][6]に従う `java.util.Logger` を利用して行われます。
 
-## 内容
+「Datadog Plugin Logs」というカスタムロガーが自動的に登録され、このロガーはプラグインのログをレベル `INFO` 以上で記録します。
+カスタムロガーの登録は、環境変数 `DD_JENKINS_PLUGIN_LOG_RECORDER_ENABLED` を `false` に設定することで無効化できます。
+プラグインのログを最大限詳細に確認したい場合は、カスタムロガーのレベルを手動で `ALL` に変更してください。
+
+## カスタマイズ
 
 ### パイプラインのカスタマイズ
 
@@ -220,7 +224,7 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 
 グローバルコンフィギュレーションをカスタマイズするには、Jenkins で `Manage Jenkins -> Configure System` に移動し、**Advanced** ボタンをクリックします。次のオプションを使用できます。
 
-| 内容              | 説明                                                                                                                                                                                                                                 | 環境変数                          |
+| カスタマイズ              | 説明                                                                                                                                                                                                                                 | 環境変数                          |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | ホスト名                   | Datadog に送信されるすべてのイベントで使用するホスト名。                                                                                                                                                                                           | `DATADOG_JENKINS_PLUGIN_HOSTNAME`             |
 | 除外されるジョブ              | 監視対象から除外したいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`。この設定は、イベント、メトリクス、ログ、CI Visibility といった、プラグインのすべての側面に影響します。               |  `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
@@ -259,8 +263,8 @@ Test Visibility の自動構成を有効にするには、2 つのオプショ�
 pipeline {
     agent any
     options {
-        datadog(testVisibility: [
-            enabled: true,
+        datadog(testVisibility: [ 
+            enabled: true, 
             serviceName: "my-service", // the name of service or library being tested
             languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
@@ -391,6 +395,7 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 | `jenkins.plugin.failed`                | プラグインに失敗しました。                                                                                        | `jenkins_url`                                                              |
 | `jenkins.plugin.inactivate`            | プラグインは無効です。                                                                                      | `jenkins_url`                                                              |
 | `jenkins.plugin.withUpdate`            | プラグインに更新があります。                                                                                   | `jenkins_url`                                                              |
+| `jenkins.plugin.withWarning`           | 警告付きプラグイン。                                                                                  | `jenkins_url`                                                              |
 | `jenkins.project.count`                | プロジェクト総数                                                                                         | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | キューサイズ                                                                                            | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                                                                     | `jenkins_url`                                                              |
@@ -435,9 +440,26 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 
 ビルドステータス `jenkins.job.status` にデフォルトタグを適用:  `jenkins_url、`job`、`node`、`user_id`
 
+## トラブルシューティング
+
+### 診断用フレアの生成。
+
+プラグイン診断フレアには、プラグインの問題を診断するために使用できるデータが含まれています。
+本稿執筆時点では、フレアには以下の内容が含まれています。
+- XML 形式のプラグイン構成
+- プラグイン接続チェックの結果
+- 実行時データ (JVM、Jenkins Core、プラグインの現在のバージョン)
+- プラグインコード内で発生した最近の例外
+- レベル `INFO` 以上のプラグインログ、および最近の Jenkins コントローラログ
+- Jenkins コントローラプロセスの現在のスレッドスタック
+- 環境変数で、`DD_` または `DATADOG_` で始まるもの (API キーおよび/またはアプリキーを除く)
+
+フレアを生成するには、`Manage Jenkins` ページに移動し、`Troubleshooting` セクションを見つけ、`Datadog` を選択します。
+`Download Diagnostic Flare` をクリックして (「MANAGE」権限が必要です)、フレアを生成します。
+
 ## 問題の追跡
 
-このプラグイン [jenkinsci/datadog-plugin/issues][7]に関する問題はすべて、GitHub に搭載の問題追跡システムを使用して追跡を行います。
+このプラグイン [jenkinsci/datadog-plugin/issues][7]に関する問題はすべて、GitHub に搭載の問題追跡システムを使用して追跡を行います。 
 しかし、Jenkins プラグインのホスティング状況に応じて、JIRA に課題が作成される場合があります。関連する課題の投稿については、 [Jenkins の課題ページ][8]をご参照ください。
 
 **注**: [Datadog に関連する JIRA の課題で未解決のものが存在します][9]。
