@@ -34,9 +34,9 @@ This template configures your existing S3 bucket to generate inventory reports, 
  {{< img src="integrations/guide/storage_monitoring/identify_resources.png" alt="Identify S3 resources to start generating inventory" responsive="true" style="width:90%;" >}}
 
 6. Fill in the required parameters:
-   - **DestinationBucketName**: The bucket for storing inventory files.
-   - **SourceBucketName**: The bucket you want to monitor and start generating inventory files for.
-   - **DestinationBucketPrefix**: Specific path within the destination bucket. Ensure this path doesn't include trailing slashes (`/`).
+   - **DestinationBucketName**: The bucket for storing inventory files. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
+   - **SourceBucketName**: The bucket you want to monitor and start generating inventory files for
+   - **DestinationBucketPrefix**: Specific path within the destination bucket. Ensure this path doesn't include trailing slashes (`/`)
 
    Optional parameters:
    - **SourceBucketPrefix**: (Optional) Limit monitoring to a specific path in the source bucket
@@ -61,12 +61,12 @@ This template creates two IAM policies:
 4. Click **Choose file** and select the `cloud-inventory-policies-cfn.yaml` file, then click **Next**.
 5. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
-   - **DestinationBucketName**: The name of the bucket that to receive your inventory files
+   - **DestinationBucketName**: The name of the bucket that to receive your inventory files. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
    - **SourceBucketName**: The name of the bucket you want to start generating inventory files for
    - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`)
 
    Optional parameters:
-   - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket.
+   - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket
 
 {{< img src="integrations/guide/storage_monitoring/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:90%;" >}}
 
@@ -76,7 +76,7 @@ This template creates two IAM policies:
 
 After completing the CloudFormation setup, [reach out][105] with the following information:
     1. Name of the destination bucket holding the inventory files.
-    2. Prefix where the files are stored in the destination bucket (if any).
+    2. Prefix where the files are stored in the destination bucket.
     3. Name of the source bucket you want to monitor (the bucket producing inventory files).
     4. AWS region of the destination bucket holding the inventory files.
     5. AWS account ID containing the buckets.
@@ -95,7 +95,7 @@ To manually set up the required [Amazon S3 Inventory][2] and related configurati
 
 #### Step 1: Create a destination bucket
 
-1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
+1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
 2. Create a prefix within the destination bucket.
 
 #### Step 2: Configure the bucket and integration role policies
@@ -114,7 +114,7 @@ For each bucket you want to monitor:
     - Set a configuration name
     - (Optional) Specify a source bucket prefix
     - **Object versions**: Datadog recommends selecting **Current Versions Only**
-    - **Destination**: Select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
+    - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
        **Note**: If you want to use a prefix on the destination bucket, add this as well
     - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
     - **Output format**: CSV
@@ -132,7 +132,7 @@ For each bucket you want to monitor:
 After completing the above steps, [reach out][205] with the following information:
 
 1. Name of the destination bucket where inventories are stored.
-2. Prefix to store the inventory files.
+2. Prefix where the files are stored in the destination bucket.
 3. Region of the destination bucket.
 4. AWS account ID containing the bucket.
 5. Datadog role name that has the permissions to read objects in destination bucket.
