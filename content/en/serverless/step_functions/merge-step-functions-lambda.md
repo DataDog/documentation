@@ -180,6 +180,8 @@ To link your Step Function traces to nested Step Function traces, configure your
 
 ## Merge upstream traces with Step Functions and downstream Lambda traces
 
+<div class="alert alert-info">We recommend using JSONata to define your Step Function Payloads for the most complete end-to-end tracing experience. If you are using `JSONPath` to define your Step Function payloads, see the below sections for JSONPath supported configurations</a>.</div>
+
 ### Requirements
 Node.js (layer v113+) or Python (layer v103+) runtimes.
 
