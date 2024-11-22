@@ -226,7 +226,7 @@ This error is usually the result of configuration differences between your testi
 
 ### Applications with subdomains
 
-We do not support multi-tenanted applications where customers have individual subdomains to authorize against. We only support authorizing against a single domain. 
+Datadog does not support multi-tenanted applications where customers authorize using individual subdomains; instead, authorization is supported only through a single domain.
 
 ### OAuth with PKCE
 
