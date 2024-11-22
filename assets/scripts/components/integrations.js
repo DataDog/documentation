@@ -170,9 +170,7 @@ export function initializeIntegrations() {
     function updateData(filter, isSearch) {
         const show = [];
         const hide = [];
-        const filterWords = filter.split(' ');
-
-        const keywords = filter.split(/\s+/);
+        const filterWords = filter.split(/\s+/);
 
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
