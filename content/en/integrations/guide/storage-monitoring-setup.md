@@ -100,32 +100,32 @@ To manually set up the required [Amazon S3 Inventory][2] and related configurati
 
 #### Step 2: Configure the bucket and integration role policies
 
-1. Follow the steps in the [Amazon S3 user guide][4] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets.
+1. Follow the steps in the [Amazon S3 user guide][202] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets.
 
 2. Ensure the Datadog AWS integration role has `s3:GetObject` and `s3:ListObjects` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
-#### Step 3: Configure Inventory Generation
+#### Step 3: Configure Inventory generation
 
 For each bucket you want to monitor:
-  1. Go to the [Amazon S3 buckets page][5] in the AWS console, and select the bucket.
+  1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
   2. Navigate to the bucket's **Management** tab.
   3. Click **Create inventory configuration**.
-  4. Configure the following settings:
-    - Set a configuration name
-    - (Optional) Specify a source bucket prefix
-    - **Object versions**: Datadog recommends selecting **Current Versions Only**
-    - **Destination**: Select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
-       **Note**: If you want to use a prefix on the destination bucket, add this as well
-    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
-    - **Output format**: CSV
-    - **Status**: Enabled
-    - **Server-side encryption**: Don't specify an encryption key
+  4. Configure the following settings:  
+    - Set a configuration name  
+    - (Optional) Specify a source bucket prefix  
+    - **Object versions**: Datadog recommends selecting **Current Versions Only**  
+    - **Destination**: Select the destination bucket. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`  
+       **Note**: If you want to use a prefix on the destination bucket, add this as well  
+    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog  
+    - **Output format**: CSV  
+    - **Status**: Enabled  
+    - **Server-side encryption**: Don't specify an encryption key  
     - Select the following **Additional metadata fields**:
-          - Size
-          - Last Modified
-          - Storage Class'
+          1. Size
+          2. Last Modified
+          3. Storage Class
 
-    **Note:** Review [AWS S3 pricing][7] for costs related to inventory generation.
+**Note**: Review [AWS S3 pricing][204] for costs related to inventory generation.
 
 #### Post-setup steps
 
@@ -138,6 +138,10 @@ After completing the above steps, reach out on the `#storage-monitoring` Slack c
 5. Datadog role name that has the permissions to read objects in destination bucket.
 6. Datadog org ID.
 
+[201]: https://console.aws.amazon.com/s3/bucket/create
+[202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
+[203]: https://console.aws.amazon.com/s3/buckets
+[204]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -147,18 +151,12 @@ To verify your setup:
    - Wait for the first inventory report to generate (up to 24 hours for daily inventories)
    - Check the destination bucket for inventory files
    - Confirm the Datadog integration can access the files:
-   - Navigate to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets -> Installation Recommendations** to see if the bucket you configured is showing in the list
+       - Navigate to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets -> Installation Recommendations** to see if the bucket you configured is showing in the list
 
 
 ### Troubleshooting
 If you encounter any issues or need assistance:
 - Verify all permissions are correctly configured
-- If you're still encountering issues, [reach out][6] with your bucket details, AWS account ID, and Datadog org ID
+- If you're still encountering issues, [reach out][1] with your bucket details, AWS account ID, and Datadog org ID
 
-[1]: https://console.aws.amazon.com/cloudformation/
-[2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
-[3]: https://console.aws.amazon.com/s3/bucket/create
-[4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
-[5]: https://console.aws.amazon.com/s3/buckets
-[6]: mailto:mahashree.rajendran@datadoghq.com
-[7]: https://aws.amazon.com/s3/pricing/
+[1]: mailto:mahashree.rajendran@datadoghq.com
