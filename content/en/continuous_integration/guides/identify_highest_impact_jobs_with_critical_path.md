@@ -63,7 +63,7 @@ This metric helps you to determine quickly which CI Jobs require attention to <u
 
 In the previous image, we can observe that the first two rows correspond to different types of CI Jobs:
 
-- The `tests` CI Job, executed in the `shopist/cart-service repository`, has an average duration of 5 minutes and runs approximately 2,500 times. This is undoubtedly the CI Job with the highest impact on this repository. Improving it would yield the most significant improvement in our CI performance.
+- The `tests` CI Job, executed in the `shopist/cart-service` repository, has an average duration of 5 minutes and runs approximately 2,500 times. This is undoubtedly the CI Job with the highest impact on this repository. Improving it would yield the most significant improvement in our CI performance.
 - The `build` CI Job, also executed in the `shopist/cart-service` repository, has an average duration of less than 2 minutes but is executed almost twice as often as the `tests` CI Job. As a result, its `Impact on Latency` ranks second, despite its significantly shorter duration.
 
 {{< img src="continuous_integration/critical_path_dashboard_focus_impact.png" alt="Focus on the CI Jobs with the highest impact" width="90%">}}
