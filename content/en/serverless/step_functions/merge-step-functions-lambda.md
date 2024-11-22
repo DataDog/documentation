@@ -8,6 +8,48 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
+## Merge upstream traces with Step Functions and downstream Lambda traces
+
+<div class="alert alert-info">We recommend using `JSONata` to define your Step Function payloads for the most complete end-to-end tracing experience. If you are using `JSONPath` to define your Step Function payloads, see the below sections for `JSONPath` supported configurations</a>.</div>
+
+### Requirements
+Node.js (layer v113+) or Python (layer v103+) runtimes.
+
+Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
+
+### Setup
+
+On the Lambda Task, set the `Arguments` key as follows: 
+
+```json
+"Arguments": {
+  "Payload": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ? $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$states.input, {'_datadog': $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])}])) %}",
+  ...
+}
+```
+
+The `JSONata` expression merges the upstream service's context with the current Step Functions context object and the Lambda state's input payload.
+
+Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
+
+## Merge upstream traces with Step Functions and nested Step Functions traces
+
+### Requirements
+Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
+
+### Setup
+
+On the Step Functions Task, set the `_datadog` field in the `Input` key as follows: 
+
+```json
+"Arguments": {
+  "Input": {
+    "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}",
+    ...
+  }
+}
+```
+
 ## Merge Step Functions traces with downstream Lambda traces
 
 ### Requirements
@@ -177,48 +219,6 @@ To link your Step Function traces to nested Step Function traces, configure your
   "End": true
 }
 {{< /highlight >}}
-
-## Merge upstream traces with Step Functions and downstream Lambda traces
-
-<div class="alert alert-info">We recommend using JSONata to define your Step Function Payloads for the most complete end-to-end tracing experience. If you are using `JSONPath` to define your Step Function payloads, see the below sections for JSONPath supported configurations</a>.</div>
-
-### Requirements
-Node.js (layer v113+) or Python (layer v103+) runtimes.
-
-Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
-
-### Setup
-
-On the Lambda Task, set the `Arguments` key as follows: 
-
-```json
-"Arguments": {
-  "Payload": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ? $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$states.input, {'_datadog': $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])}])) %}",
-  ...
-}
-```
-
-The `JSONata` expression merges the upstream service's context with the current Step Functions context object and the Lambda state's input payload.
-
-Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
-
-## Merge upstream traces with Step Functions and nested Step Functions traces
-
-### Requirements
-Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
-
-### Setup
-
-On the Step Functions Task, set the `_datadog` field in the `Input` key as follows: 
-
-```json
-"Arguments": {
-  "Input": {
-    "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}",
-    ...
-  }
-}
-```
 
 [1]: /serverless/step_functions/installation
 [2]: /serverless/installation/#installation-instructions
