@@ -175,4 +175,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
 [77]: /tracing/trace_collection/library_config/go/
-[78]: /tracing/trace_collection/Compile-Time_instrumentation/dd_libraries/go/#activate-go-integrations-to-create-spans
+[78]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=manualinstrumentation#activate-go-integrations-to-create-spans
