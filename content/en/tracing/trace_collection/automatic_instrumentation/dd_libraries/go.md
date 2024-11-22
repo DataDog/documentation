@@ -39,14 +39,14 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 There are two ways to instrument your Go application:
 
-1. **Semi-Automatic instrumentation**:
+1. **Compile-time instrumentation**:
+   - Ensures maximum coverage of your tracing instrumentation.
+   - Does not require source code modifications, making ideal for integrating at the CI/CD level.
+1. **Semi-automatic (manual) instrumentation**:
 
    Use dd-trace-go in conjunction with our integration packages to automatically generate spans about libraries of your choosing. This option:
    - Gives you complete control over which parts of your application are traced.
    - Requires modifying the application's source code.
-2. **Compile-time instrumentation**:
-   - Ensures maximum coverage of your tracing instrumentation.
-   - Does not require source code modifications, making ideal for integrating at the CI/CD level.
 
 Refer to the instructions in the section corresponding to your preference below:
 
@@ -245,7 +245,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 {{% /tab %}}
 
-{{% tab "Manual instrumentation" %}}
+{{% tab "Semi-automatic (manual) instrumentation" %}}
 
 ### Add the tracer library to your application
 
