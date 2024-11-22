@@ -212,7 +212,7 @@ Microsoft Teams アプリがインストールされたら、**Incident Settings
 4. 新しいチャンネルを自動的に作成するチームを選択します。
 5. 設定を保存します。
 
-{{< img src="integration/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Microsoft Teams インシデント更新チャンネル設定". >}}
+{{< img src="integration/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Microsoft Teams インシデント更新チャンネル設定" >}}
 
 ## データ収集
 
