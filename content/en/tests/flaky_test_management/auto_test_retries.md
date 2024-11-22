@@ -106,7 +106,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 {{% tab "Go" %}}
 
-Test optimization for Go is in Preview.
+<div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
