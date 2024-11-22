@@ -25,13 +25,13 @@ The fastest way to set up Storage Monitoring is using the provided CloudFormatio
 
 This template configures your existing S3 bucket to generate inventory reports, which Datadog uses to generate detailed metrics about your bucket prefixes.
 
-1. Download the [source-bucket-inventory-cfn.yaml](https://github.com/DataDog/experimental/blob/main/users/raphael.allier/source-bucket-inventory-cfn.yaml) template
-2. In [AWS CloudFormation][1], click **Create stack** in the top right corner and select **With existing resources (import resources)**.
+1. Download the [source-bucket-inventory-cfn.yaml][101] template.
+2. In [AWS CloudFormation][102], click **Create stack** in the top right corner and select **With existing resources (import resources)**.
 3. In the **Specify template** step, select **Upload a template file**.
 4. Click **Choose file** and select the `source-bucket-inventory-cfn.yaml` file, then click **Next**.
 5. Enter the bucket name you want AWS to start generating inventories for, and click **Next**.
 
- {{< img src="integrations/guide/identify_resources.png" alt="Identify S3 resources to start generating inventory" responsive="true" style="width:60%;" >}}
+ {{< img src="integrations/guide/storage_monitoring/identify_resources.png" alt="Identify S3 resources to start generating inventory" responsive="true" style="width:90%;" >}}
 
 6. Fill in the required parameters:
    - **DestinationBucketName**: The bucket for storing inventory files.
@@ -41,48 +41,53 @@ This template configures your existing S3 bucket to generate inventory reports, 
    Optional parameters:
    - **SourceBucketPrefix**: (Optional) Limit monitoring to a specific path in the source bucket
 
-{{< img src="integrations/guide/specify_stack_details.png" alt="Specify stack details" responsive="true" style="width:60%;" >}}
+{{< img src="integrations/guide/storage_monitoring/specify_stack_details.png" alt="Specify stack details" responsive="true" style="width:90%;" >}}
 
 7. Click **Next**.
 8. Wait for AWS to locate your source bucket, and click **Import resources** in the bottom right corner.
 
-**Note:** This CloudFormation template can be rolled back, but rolling back doesn't delete the created resources. This is to ensure the existing bucket doesn’t get deleted. You can manually delete the inventory configurations by going on the **Management** tab in the bucket view.
+**Note:** This CloudFormation template can be rolled back, but rolling back doesn't delete the created resources. This is to ensure the existing bucket doesn't get deleted. You can manually delete the inventory configurations by going on the **Management** tab in the bucket view.
 
-**Note:** Review [AWS S3 pricing][7] for costs related to inventory generation.
+**Note:** Review [Amazon S3 pricing][106] for costs related to inventory generation.
 #### Step 2: Configure required permissions
 
 This template creates two IAM policies:
   - A policy to allow Datadog to read inventory files from the destination bucket
   - A policy to allow your source bucket to write inventory files to the destination bucket
 
-1. Download the [cloud-inventory-policies-cfn.yaml](https://github.com/DataDog/experimental/blob/main/users/raphael.allier/cloud-inventory-policies-cfn.yaml) template.
-2. In [AWS CloudFormation][1], click **Create stack** in the top right corner and select **With new resources (standard)**.
+1. Download the [cloud-inventory-policies-cfn.yaml][103] template.
+2. In [AWS CloudFormation][104], click **Create stack** in the top right corner and select **With new resources (standard)**.
 3. In the **Specify template** step, select **Upload a template file**.
 4. Click **Choose file** and select the `cloud-inventory-policies-cfn.yaml` file, then click **Next**.
 5. Fill in the required parameters:
    - **DatadogIntegrationRole**: Your Datadog AWS integration role name
-   - **DestinationBucketName**: The name of the bucket that to receive your inventory files.
-   - **SourceBucketName**: The name of the bucket you want to start generating inventory files for.
-   - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`).
+   - **DestinationBucketName**: The name of the bucket that to receive your inventory files
+   - **SourceBucketName**: The name of the bucket you want to start generating inventory files for
+   - **DestinationBucketPrefix**: If you want to reuse an existing bucket as the destination, this parameter allows the inventory files to be shipped to a specific prefix in that bucket. Ensure that any prefixes do not include trailing slashes (`/`)
 
    Optional parameters:
    - **SourceBucketPrefix**: This parameter limits the inventory generation to a specific prefix in the source bucket.
 
-{{< img src="integrations/guide/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:60%;" >}}
+{{< img src="integrations/guide/storage_monitoring/bucket_policy_stack_details.png" alt="Stack parameters for bucket policy" responsive="true" style="width:90%;" >}}
 
-6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**
+6. On the **Review and create** step, verify the parameters have been entered correctly, and click **Submit**.
 
-#### Post-Setup Steps
+#### Post-setup steps
 
-After completing the CloudFormation setup, reach out to mahashree.rajendran@datadoghq.com with the following information:
-    1. Name of the destination bucket holding the inventory files
-    2. Prefix where the files are stored in the destination bucket (if any)
-    3. Name of the source bucket you want to monitor (the bucket producing inventory files)
-    4. AWS region of the destination bucket holding the inventory files
-    5. AWS account ID containing the buckets
-    6. Datadog org ID
+After completing the CloudFormation setup, [reach out][105] with the following information:
+    1. Name of the destination bucket holding the inventory files.
+    2. Prefix where the files are stored in the destination bucket (if any).
+    3. Name of the source bucket you want to monitor (the bucket producing inventory files).
+    4. AWS region of the destination bucket holding the inventory files.
+    5. AWS account ID containing the buckets.
+    6. Datadog org ID.
 
-
+[101]: https://github.com/DataDog/experimental/blob/main/users/raphael.allier/source-bucket-inventory-cfn.yaml
+[102]: https://console.aws.amazon.com/cloudformation/
+[103]: https://github.com/DataDog/experimental/blob/main/users/raphael.allier/cloud-inventory-policies-cfn.yaml
+[104]: https://console.aws.amazon.com/cloudformation/
+[105]: mailto:mahashree.rajendran@datadoghq.com
+[106]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
@@ -90,7 +95,7 @@ To manually set up the required [Amazon S3 Inventory][2] and related configurati
 
 #### Step 1: Create a destination bucket
 
-1. [Create a new S3 bucket][3] to store your inventory files. This bucket acts as the central location for inventory reports.
+1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
 2. Create a prefix within the destination bucket.
 
 #### Step 2: Configure the bucket and integration role policies
