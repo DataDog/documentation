@@ -850,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateEvent
         unstable: []

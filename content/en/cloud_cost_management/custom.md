@@ -18,9 +18,9 @@ further_reading:
   text: "Gain insights into your Google Cloud bill"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Custom Cost is in public beta.
-{{< /beta-callout >}}
+{{< callout btn_hidden="true" header="Join the Preview!">}}
+Custom Costs are in Preview.
+{{< /callout >}}
 
 ## Overview
 

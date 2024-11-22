@@ -1880,12 +1880,12 @@ menu:
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 2
-    - name: Manage a Service
+    - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
       identifier: service_catalog_investigate
       weight: 3
-    - name: Service Definitions
+    - name: Definitions
       url: service_catalog/service_definitions/
       parent: service_catalog
       identifier: service_catalog_definitions_versions
@@ -1910,7 +1910,7 @@ menu:
       parent: service_catalog_definitions_versions
       identifier: service_catalog_definitions_2-0
       weight: 404
-    - name: Service Scorecards
+    - name: Scorecards
       url: service_catalog/scorecards
       parent: service_catalog
       identifier: service_catalog_scorecards
@@ -2097,6 +2097,12 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Change Tracking
+      url: change_tracking/
+      pre: graph-3
+      parent: platform_heading
+      identifier: change_tracking
+      weight: 130000
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2493,26 +2499,31 @@ menu:
       parent: workflows
       identifier: workflows_connections
       weight: 8
+    - name: Datastore
+      url: service_management/workflows/datastore/
+      parent: workflows
+      identifier: workflows_datastore
+      weight: 9
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
-      weight: 9
+      weight: 10
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 10
+      weight: 11
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 11
+      weight: 12
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 12
+      weight: 13
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2579,16 +2590,21 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 801
+    - name: Datastore
+      url: service_management/app_builder/datastore/
+      parent: app_builder
+      identifier: app_builder_datastore
+      weight: 9
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 9
+      weight: 10
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 10
+      weight: 11
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -5756,11 +5772,6 @@ menu:
       parent: cspm_frameworks_benchmarks
       identifier: cspm_supported_frameworks
       weight: 102
-    - name: Kubernetes Security Posture Management
-      url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm
-      parent: cspm_frameworks_benchmarks
-      identifier: cspm_kspm
-      weight: 103
     - name: Explore Misconfigurations
       url: /security/cloud_security_management/misconfigurations/findings
       parent: cspm
@@ -5776,6 +5787,11 @@ menu:
       parent: cspm
       identifier: signals
       weight: 306
+    - name: Kubernetes Security Posture Management
+      url: security/cloud_security_management/misconfigurations/kspm
+      parent: cspm
+      identifier: cspm_kspm
+      weight: 307
     - name: Identity Risks
       url: security/cloud_security_management/identity_risks/
       parent: csm
@@ -6822,11 +6838,16 @@ menu:
       url: account_management/org_settings/ip_allowlist
       parent: organization_settings
       weight: 206
+    - name: Domain Allowlist
+      identifier: account_management_org_settings_domain_allowlist
+      url: account_management/org_settings/domain_allowlist
+      parent: organization_settings
+      weight: 207
     - name: Cross-Organization Visibility
       identifier: account_management_org_settings_cross_org_visibility
       url: account_management/org_settings/cross_org_visibility
       parent: organization_settings
-      weight: 207
+      weight: 208
     - name: Access Control
       url: account_management/rbac/
       parent: account_management

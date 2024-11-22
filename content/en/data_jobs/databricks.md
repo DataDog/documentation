@@ -182,6 +182,10 @@ For scheduled jobs that run on job clusters, the init script installs the Datado
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
+## Troubleshooting
+
+{{% djm-install-troubleshooting %}}
+
 ## Advanced Configuration
 
 ### Tag spans at runtime
