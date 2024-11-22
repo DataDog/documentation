@@ -57,10 +57,10 @@ If you've already [set up Cloud Security Management][3] and want to add a new AW
 
 Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
 1. Log in to your AWS console and go to the CloudFormation Stacks page.
-2. Select the `DatadogIntegration-DatadogAgentlessScanning-...` CloudFormation sub-stack, and click on `Update` then `Update nested stack`.
-3. Click on `Replace existing template`.
-4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][4].
-5. Paste the S3 URL and click on `Next` in the next pages, then submit the form.
+2. Select the **DatadogIntegration-DatadogAgentlessScanning-...** CloudFormation sub-stack, click **Update**, then click **Update nested stack**.
+3. Click **Replace existing template**.
+4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][4]. Paste that URL into the **Amazon S3 URL** field.
+5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
 
 ## Disable Agentless Scanning
 
