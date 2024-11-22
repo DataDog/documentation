@@ -135,6 +135,8 @@ Peer Tag | Source Attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
+**Note**: peer attribute values that match ip adresses formats (e.g. `127.0.0.1`) are quantized and redacted with `blocked-ip-adress` to avoid noise and tagging metrics with high cardinality dimensions. As a result, you might find some `blocked-ip-adress` services show up as downstream dependencies of your instrumented services.
+
 ## Migrate to global default service naming
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
