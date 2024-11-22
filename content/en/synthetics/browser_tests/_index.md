@@ -65,7 +65,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
 * **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions.  
 <br/>
-  {{< img src="synthetics/browser_tests/browser_snippets.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
+  {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
 
 ### Advanced options
 

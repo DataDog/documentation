@@ -9,5 +9,5 @@ When setting up a new Synthetic Monitoring API test, use snippets to automatical
 <br/></br>
 
   <figure class="text-center">
-  <img src="{{ .Site.Params.img_url}}images/synthetics/api_tests/api_tests_snippets.png" alt="Screenshot of the left hand side of an API test creation, showing the snippets example" width="70%">
+  <img src="{{ .Site.Params.img_url}}images/synthetics/api_tests/api_tests_snippets_2.png" alt="Screenshot of the left hand side of an API test creation, showing the snippets example" width="80%">
   </figure>

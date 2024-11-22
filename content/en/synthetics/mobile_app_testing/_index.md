@@ -59,7 +59,7 @@ Define the configuration of your mobile app test.
 
 ### Snippets
 
-When configuring a new Mobile Application test, utilize snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
+When configuring a new Mobile Application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
 
 * **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
 
@@ -80,7 +80,7 @@ When configuring a new Mobile Application test, utilize snippets to automaticall
 * **Uptime**: Automatically configure a test with the shortest frequency available (every 15 minutes).
 
 <br/>
-  {{< img src="mobile_app_testing/mobile_app_snippets.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
+  {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
 
 ## Variables
 
