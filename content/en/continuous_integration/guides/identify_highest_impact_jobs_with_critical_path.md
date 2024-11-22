@@ -1,18 +1,24 @@
 ---
-title: Identify GitLab Jobs on the Critical Path to improve your Pipelines
-description: Learn how to identify those GitLab Jobs that are on the critical path to improve the duration of your CI Pipelines.
+title: Identify CI Jobs on the Critical Path to improve your Pipelines
+description: Learn how to identify those CI Jobs that are on the critical path to improve the duration of your CI Pipelines.
 further_reading:
-  - link: "/continuous_integration/pipelines/gitlab"
-    tag: "Documentation"
-    text: "Set up CI Visibility on a GitLab pipeline"
   - link: "/continuous_integration/search/#pipeline-details-and-executions"
     tag: "Documentation"
     text: "Learn how to search and manage your pipeline executions"
+  - link: "continuous_integration/search/#highlight-critical-path"
+    tag: "Documentation"
+    text: "Highlight critical path in your Pipeline Execution"
 ---
 
 ## Overview
 
 This guide explains how to identify the CI jobs that are on the critical path, with the goal of determining which CI jobs to focus on to improve the overall duration of CI pipelines.
+
+### Compatibility
+
+Filtering CI Jobs on the Critical Path is available for the following CI Providers:
+- GitLab
+
 
 ## Identify the CI Jobs to improve your CI Pipeline
 
@@ -58,6 +64,10 @@ In the previous image, we can observe that the first two rows correspond to diff
 - The `build` CI Job, also executed in the `shopist/cart-service` repository, has an average duration of less than 2 minutes but is executed almost twice as often as the `tests` CI Job. As a result, its `Impact on Latency` ranks second, despite its significantly shorter duration.
 
 {{< img src="continuous_integration/critical_path_dashboard_focus_impact.png" alt="Focus on the CI Jobs with the highest impact" width="90%">}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /resources/json/civisibility-critical-path-gitlab-dashboard.json
 [2]: /dashboards/
