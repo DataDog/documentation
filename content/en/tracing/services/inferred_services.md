@@ -135,7 +135,7 @@ Peer Tag | Source Attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
-**Note**: peer attribute values that match ip addresses formats (e.g. `127.0.0.1`) are quantized and redacted with `blocked-ip-address` to avoid noise and tagging metrics with high cardinality dimensions. As a result, you might find some `blocked-ip-address` services show up as downstream dependencies of your instrumented services.
+**Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
 ## Migrate to global default service naming
 
