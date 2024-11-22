@@ -48,14 +48,18 @@ When the test runs successfully, the mobile app test recomputes (or "self heals"
 
 Define the configuration of your mobile app test.
 
+1. Select a pre-populated template to choose from, or build a test from scratch.
+
+   {{< img src="mobile_app_testing/mobile_app_templates.png" alt="Mobile app landing page with templates" style="width:100%;" >}}
+
 1. Select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
-2. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
-3. Add a **name** for your test.
-4. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-4. Select the **devices** to run your test on.
-5. Set retry conditions for your test.
-6. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
-7. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
+1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
+1. Add a **name** for your test.
+1. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+1. Select the **devices** to run your test on.
+1. Set retry conditions for your test.
+1. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
+1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
 
 {{% synthetics-variables %}}
 

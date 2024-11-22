@@ -38,11 +38,13 @@ Health Checks
 
 gRPC tests can run from both [managed](#select-locations) and [private locations][2] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
-## Configuration
+## Configuration 
 
 After choosing to create a `gRPC` test, define your test's request.
 
-### Define request
+{{% synthetics-api-tests-templates %}}
+
+### Define request (build from scratch)
 
 1. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
 2. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check. 
