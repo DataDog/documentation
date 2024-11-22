@@ -16,10 +16,10 @@ This guide explains how to identify the CI jobs that are on the critical path, w
 
 ### Compatibility
 
+<div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out this form.</div>
+
 Filtering CI Jobs on the Critical Path is available for the following CI Providers:
 * [GitLab][3]
-
-<div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out this form.</div>
 
 Note that this applies only to filtering CI Jobs on the critical path. You can still [highlight which CI Jobs are on the critical path][4] using the Pipeline Execution detail view across all CI providers.
 
