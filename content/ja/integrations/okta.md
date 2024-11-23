@@ -20,7 +20,7 @@ author:
 categories:
 - ログの収集
 - security
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -99,7 +99,7 @@ API キーを使用してインテグレーションを有効にするには
 
     | パラメーター | 説明                           |
     |-----------|---------------------------------------|
-    | API key   | The API token from your Okta account. The minimum required permission is read-only administrator. |
+    | API key   | Okta アカウントの API トークンです。必要な最低権限は、読み取り専用の管理者権限です。 |
 
 4. **Save** をクリックします。
 
