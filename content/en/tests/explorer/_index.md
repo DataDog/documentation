@@ -94,7 +94,7 @@ Test run data is available in [dashboards][7] and [notebooks][8], enabling build
 
 You can narrow down, broaden, or shift your focus on a subset of test runs by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left.
 
-- To learn how to search for tests, see [Search and Manage][1].
+- To learn how to search for tests, see [Explorer][1].
 - To learn how to create queries, see [Search Syntax][2].
 
 ## Analyze
@@ -117,7 +117,7 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/search
+[1]: /tests/explorer/
 [2]: /tests/explorer/search_syntax
 [3]: /tests/explorer/facets
 [4]: /tests/explorer/saved_views

@@ -1,6 +1,8 @@
 ---
 title: Repositories
 description: Gain insight into test performance in your repositories.
+aliases:
+- /tests/search/
 algolia:
    rank: 70
    tags: ['flaky test', 'flaky tests', 'test regression', 'test regressions', 'test service', 'test services']
@@ -44,6 +46,10 @@ Select a repository to gain granular insights into its test performance. The pag
 - **Test Performance**: See which tests have become slower over time.
 - **Common Error Types**: See the most common error types in the repo.
 - **All Test Runs**: Explore all test runs in the repo.
+
+## Repository settings
+
+<!-- WIP marker -->
 
 ## Search for tests
 

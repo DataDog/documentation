@@ -332,12 +332,12 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 The [CI Visibility Explorer][101] displays your test runs run in a CI pipeline.
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Search and Manage CI Tests][102].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Test Optimization Explorer Search Syntax][102].
 
 {{< img src="/continuous_integration/test_runs.png" alt="Test runs in the CI Visibility Explorer" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /tests/search/
+[102]: /tests/explorer/search_syntax
 
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
