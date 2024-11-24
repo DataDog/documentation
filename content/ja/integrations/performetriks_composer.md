@@ -12,7 +12,7 @@ author:
   vendor_id: performetriks
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -93,7 +93,7 @@ Composer では、モニタリングのコンフィギュレーションをコ�
 
 **コンフィギュレーションの復元**
 
-Errors in monitoring configuration can be difficult to spot, but Composer simplifies this process dramatically. Select your most recent Datadog configuration from the created backup and undo your mistakes within seconds.
+モニタリングコンフィギュレーションのエラーを発見するのは困難ですが、Composer はこのプロセスを劇的に簡素化します。作成されたバックアップから最新の Datadog のコンフィギュレーションを選択し、数秒以内にミスを元に戻すことができます。
 
 **コンフィギュレーションのアップロード**
 
@@ -116,4 +116,4 @@ Errors in monitoring configuration can be difficult to spot, but Composer simpli
 [3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
