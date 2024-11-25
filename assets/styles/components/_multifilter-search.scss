@@ -1,17 +1,15 @@
-.static-analysis-main {
+.multifilter-search-component {
     [x-cloak] {
         display: none !important;
     }
-    #static-analysis-nav {
-        // position: sticky;
-        // top: 95px;
+    #multifilter-search-nav {
         align-self: flex-start;
         z-index: 2;
         background-color: white;
         padding-top: 12px;
         padding-bottom: 12px;
 
-        .filters-static-analysis {
+        .filters__multifilter {
             margin-bottom: 12px;
             .filter-type {
                 margin-bottom: 24px;
@@ -115,7 +113,7 @@
                 margin-bottom: 0;
             }
         }
-        .search-static-analysis input {
+        .search__multifilter input {
             padding: 9px 8px;
             border-radius: 4px;
             border: $gray-light 1px solid; 
@@ -126,6 +124,8 @@
             }
         }
     }
+
+    // static-analysis
     .ruleset {
         .ruleset-header {
             transition: box-shadow 0.125s;

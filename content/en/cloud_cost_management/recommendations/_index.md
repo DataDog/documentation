@@ -18,7 +18,26 @@ further_reading:
     tag: "Documentation"
     text: "AWS Integration and CloudWatch FAQ"
 
-recommendations:
+
+multifiltersearch:
+  # "id" must match the corresponding key in the "data" object
+  headers:
+    - name: Recommendation Category
+      id: category
+      filter_by: true
+    - name: Cloud Provider
+      id: cloud_provider
+      filter_by: true
+    - name: Resource Type
+      id: resource_type
+      filter_by: true
+    - name: Recommendation Type
+      id: recommendation_type
+    - name: Recommendation Description
+      id: recommendation_description
+    - name: Recommendation Prerequisites
+      id: recommendation_prerequisites
+  data:
     - category: Unused resource
       cloud_provider:  AWS
       resource_type: EC2
@@ -277,7 +296,6 @@ recommendations:
       recommendation_type: NAT Gateway cross-zone transfer charges
       recommendation_description: Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges.
       recommendation_prerequisites: ""
-
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}

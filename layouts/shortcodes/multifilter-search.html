@@ -1,18 +1,14 @@
 
-{{ $pad := newScratch }}
-
+{{ $navigation := newScratch }}
+{{ $table := newScratch }}
 
 <div 
-class="static-analysis-main w-100 min-vh-100 d-flex flex-column"
+class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
 x-data="{
-  filterTypes: {
-    'resource-category': [],
-    'cloud-provider': [],
-    'resource-type': []
-  },
+  filterTypes: {},
   searchValue: '',
   openedFilterForm: null,
-  filteredRulesets: new Set(),
+  filteredSet: new Set(),
   showEmptyResultsMsg: false,
   toggleFilterForm (selectedFilterFormEl) {
     // manage filter form accordian
@@ -20,41 +16,34 @@ x-data="{
     const filterTypeID = selectedFilterFormEl.dataset.id
     this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
   },
-  shouldShowRule (ruleEl) {
-      // Determines rule display
-      // Compares search values and filter values against ruleInfo
-      const ruleInfo = ruleEl.dataset.info.split(';') //seperate filter values from search vals
-      const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
-      const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
+  shouldShowRecord (record) {
+      // Determines record display
+      // Compares user search and filter values against lookupInfo
+      const lookupInfo = record.dataset.info.split(';') // separate filter values from search vals
+      const filterInfo = lookupInfo[0].toLowerCase().split(',')
+      const searchInfo = lookupInfo.slice(1).join(' ').toLowerCase()
 
-      const filterValues = Object.values(this.filterTypes)
-      const searchValues = this.searchValue.split(' ')
+      // User input
+      const filteredValues = Object.values(this.filterTypes)
+      const searchedValues = this.searchValue.split(' ')
 
-      /**
-      *   FILTER LOGIC (containsFilteredValue) e.g.:
-      *   filterTypes: {
-      *     'resource-category': [],
-      *     'cloud-provider': [],
-      *     'resource-type': []
-      *   }
-      */
-
-      const containsFilteredValue = filterValues.every((t, idx) => t.length ? t.some(f => ruleFilterInfo[idx] === f.toLowerCase()) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type. scrict. filter value must match correct filter type
-      const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
+      // Check if record should be displayed
+      const containsFilteredValues = filteredValues.every((t, idx) => t.length ? t.some(f => filterInfo[idx] === f.toLowerCase()) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type. scrict. filter value must be a child of correct parent filter type
+      const containsSearchedValues = searchedValues.every(word => searchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
       
-      if(containsSearchValues && containsFilteredValue){
-        ruleEl.classList.add('show')
-        this.filteredRulesets.add(ruleEl.dataset.id)
+      if(containsSearchedValues && containsFilteredValues){
+        record.classList.add('show')
+        this.filteredSet.add(record.dataset.id)
       }else{
-          ruleEl.classList.remove('show')    
+          record.classList.remove('show')    
       }
 
-      return containsSearchValues && containsFilteredValue
+      return containsSearchedValues && containsFilteredValues
   },
-  resetFilteredRulesets () {
-    // Empty filtered rulesets
-    this.filteredRulesets = new Set()
+  resetFilteredSet () {
+    // Empty filtered Set
+    this.filteredSet = new Set()
   },
   deleteOneSelection (filterType, filterOption) {
     // delete one filterOption from selections in filter toggler
@@ -72,9 +61,17 @@ x-data="{
     url.searchParams.delete(filterType)
     window.history.pushState(null,'', url.toString())
   },
-  updateWithURLParams () {
-      // Updates x-data properties with url param values
+  initFilterSearchValues () {
+      // Initializes and Updates x-data filter and search properties with url param values, if any
       
+      // setup empty filterTypes object
+      this.filterTypes = {
+          {{ range $k, $h := (where $.Page.Params.multifiltersearch.headers `filter_by` true)}}
+          '{{ $h.id }}': [],
+          {{ end }}
+      }
+
+      // get search and filter value from url params
       const url = new URL(window.location.href)
       Array.from(url.searchParams.entries()).forEach(([key, value]) => {
           if (key === 'search'){
@@ -97,8 +94,8 @@ x-data="{
               // remove one key:value param
 
               function encode (match) {
-                // helper function to encode some special characters. 
-                // accounting for how the url toString method encodes characters
+                // callback function to encode some special characters. 
+                // accounting for how the toString url method encodes characters
                 return match === ' ' ? '\\+': '%'+ match.charCodeAt(0).toString(16).toUpperCase()
               }
               const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(/[\s()!*\[\]%,]/g, encode)}(?=\&|$)`, 'g');
@@ -128,75 +125,84 @@ x-data="{
   }
 
 }"
-x-init="updateWithURLParams()">
+x-init="initFilterSearchValues()">
+  {{/* DATA TABLE  */}}
   <div class="col-12 order-1">
     <div class="table-wrapper pb-3">
       <table>
+        {{ $table.Set "filter_keys" slice }}
+        {{ $table.Set "search_keys" slice }}
+        {{/*  TABLE HEADER  */}}  
         <thead class="table-header">
-          <tr>
-            <th>Recommendation Category</th>
-            <th>Cloud Provider</th>
-            <th>Resource Type</th>
-            <th>Recommendation Type</th>
-            <th>Recommendation Description</th>
-            <th>Recommendation Prerequisites</th>
-          </tr>
+          {{ range $.Page.Params.multifiltersearch.headers }}
+            <th>{{.name}}</th>
+            {{ if .filter_by }}
+            {{ $table.Add "filter_keys" (slice .id)}}
+            {{ else }}
+            {{ $table.Add "search_keys" (slice .id)}}
+            {{ end }}
+          {{ end }}
         </thead>
-      <tbody>
-      {{ $int := 0 }}
-      {{ range $.Page.Params.recommendations }}
-        {{/*  
-            build a string with rule's lookup info for filtering and searching against. must maintain filter_info order to align with filterTypes prop.
-        */}}
-        {{ $filter_info := (printf "%s,%s,%s" .category .cloud_provider .resource_type) }}
-        {{ $all_info := (delimit (slice $filter_info (.recommendation_type|lower) (.recommendation_description|lower) (.recommendation_prerequisites|lower) ) ";") }}
-        <tr 
-        data-id="{{$int}}"
-        data-info="{{ $all_info }}"
-        x-cloak x-show.important="shouldShowRule($el)">
-          <td>{{.category}}</td>
-          <td>{{.cloud_provider}}</td>
-          <td>{{.resource_type}}</td>
-          <td>{{.recommendation_type | markdownify}}</td>
-          <td>{{.recommendation_description | markdownify}}</td>
-          <td>{{.recommendation_prerequisites | markdownify}}</td>
-        </tr>
-        {{/*  
-            build object with unique values for filter dropdowns (.filter-selection-container)
-            e.g:
-            filters: {
-                Resource Category: [],
-                Cloud Provider: [],
-                Resource Type: []
-            }
-        */}}
-        {{ $pad.SetInMap "filters" "Resource Category" (union (index ($pad.Get "filters") "Resource Category") (slice .category)) }}
-        {{ $pad.SetInMap "filters" "Cloud Provider" (union (index ($pad.Get "filters") "Cloud Provider") (slice .cloud_provider)) }}
-        {{ $pad.SetInMap "filters" "Resource Type" (union (index ($pad.Get "filters") "Resource Type") (slice .resource_type)) }}
-        {{ $int = add $int 1 }}
-      {{ end }}
-      </tbody>
+        <tbody>
+        {{ range $idx, $row := $.Page.Params.multifiltersearch.data }}
+          {{/*  
+              build a string with lookup info for filtering and searching against. must maintain filter_info order to align with filterTypes property.
+          */}}
+          {{ $table.Set "filter_info" "" }}
+          {{ $table.Set "search_info" "" }}
+          {{ range $k, $v := ($table.Get "filter_keys") }}
+            {{ $table.Add "filter_info" (printf (cond (not $k) "%s" ",%s") (index $row $v)) }}
+          {{ end }}
+          
+          {{ range $table.Get "search_keys" }}
+              {{ $table.Add "search_info" (printf ";%s" (index $row (.|lower))) }}
+          {{ end }}
+
+          {{ $all_info := print ($table.Get "filter_info") ($table.Get "search_info") }}
+
+          <tr 
+          data-id='{{print "record-" $idx}}'
+          data-info="{{ $all_info }}"
+          x-cloak x-show.important="shouldShowRecord($el)">
+            {{ range $.Page.Params.multifiltersearch.headers }}
+              <td>{{ (index $row .id) | markdownify }}</td>
+            {{ end }}
+          </tr>
+          {{/*  
+              build object with unique values for filter dropdowns
+              e.g:
+              dropdown: {
+                  Recommendation Category: [],
+                  Cloud Provider: [],
+                  Resource Type: []
+              }
+          */}}
+          {{ range where $.Page.Params.multifiltersearch.headers "filter_by" true}}
+              {{ $navigation.SetInMap "dropdown" .name (union (index ($navigation.Get "dropdown") .name) (slice (index $row .id))) }}
+          {{ end }}
+
+        {{ end }}
+        </tbody>
       </table>
-      {{/*  hook into the app lifecycle. $watch for 'filteredRulesets' to change and update the 'showEmptyResultsMsg' property  */}}
+      {{/*  hook into the app lifecycle. $watch for 'filteredSet' to change and update the 'showEmptyResultsMsg' property  */}}
       <div x-init="
-        showEmptyResultsMsg = !filteredRulesets.size; 
-        $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)
+        showEmptyResultsMsg = !filteredSet.size; 
+        $watch('filteredSet', value => showEmptyResultsMsg = !value.size)
         ">
-        {{/*  $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)  */}}
         <template x-if="showEmptyResultsMsg">
             <span class="fw-semibold" x-text="emptyResultsMsg"></span>
         </template>
       </div>
     </div>
   </div>
+  
   {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
-  <nav id="static-analysis-nav" class="container px-0">
-    {{ $filter_types := (slice "Resource Category" "Cloud Provider" "Resource Type") }}
-    <div class="filters-static-analysis row">
-        {{ range $k, $v := $filter_types }}
-        {{ $filter_type := $v | anchorize }}
-        <div class='filter-type flex-column col-12 col-md-{{cond (eq $filter_type "resource-category") "12" "6" }}' data-id="{{$filter_type}}" >
-            <p class="filter-type-name fw-semibold">{{ $v }}</p>
+  <nav id="multifilter-search-nav" class="container px-0">
+    <div class="filters__multifilter row">
+        {{ range $k, $h := (where $.Page.Params.multifiltersearch.headers "filter_by" true)}}
+        {{ $filter_type := $h.id }}
+        <div class='filter-type flex-column col-12 col-md-{{cond (not $k) "12" "6" }}' data-id="{{$filter_type}}" >
+            <p class="filter-type-name fw-semibold">{{ $h.name }}</p>
             <div class="filter-component position-relative">
                 {{/*  FILTER TOGGLER  */}}
                 <button 
@@ -208,6 +214,7 @@ x-init="updateWithURLParams()">
                         <template x-if="!filterTypes['{{$filter_type}}'].length">
                             <span class="all fw-semibold">All</span>
                         </template>
+                        
                         {{/*  Show filter selections from `filterTypes` data in button as they are selected */}}
                         <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
                             <div 
@@ -217,16 +224,17 @@ x-init="updateWithURLParams()">
                                 {{/*  Delete one selection (x) */}}
                                 <div 
                                 :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
-                                class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
+                                class="close-light-wrapper" @click.stop="resetFilteredSet; deleteOneSelection('{{ $filter_type }}', filter )">
                                     {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                 </div>
                             </div>
                         </template>
+
                     </div>
                     {{/*  Delete all selections for a filter type  */}}
                     <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
                         <template x-if="filterTypes['{{$filter_type}}'].length">
-                            <span class="cancel-circle-wrapper" @click.stop="resetFilteredRulesets; deleteAllSelections('{{ $filter_type }}')">
+                            <span class="cancel-circle-wrapper" @click.stop="resetFilteredSet; deleteAllSelections('{{ $filter_type }}')">
                                 {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
                             </span>
                         </template>
@@ -246,22 +254,22 @@ x-init="updateWithURLParams()">
                         <span>All</span>
                     </div>
 
-                    {{ range (index ($pad.Get "filters") $v) | sort  }}
-                    {{ $id := (printf "%s-%s" . $filter_type) | anchorize }}
-                    <div class="filter-selection-container">
-                        <input 
-                        id='{{ $id }}' 
-                        type="checkbox" 
-                        value='{{ . }}' 
-                        x-model="filterTypes['{{$filter_type}}']"
-                        @change="resetFilteredRulesets"
-                        @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
-                        >  
-                        
-                        <label for="{{ $id }}" class="d-flex align-items-center">
-                            {{.}}
-                        </label>
-                    </div>
+                    {{ range (index ($navigation.Get "dropdown") $h.name) | sort  }}
+                      {{ $id := (printf "%s-%s" . $filter_type) | anchorize }}
+                      <div class="filter-selection-container">
+                          <input 
+                          id='{{ $id }}' 
+                          type="checkbox" 
+                          value='{{ . }}' 
+                          x-model="filterTypes['{{$filter_type}}']"
+                          @change="resetFilteredSet"
+                          @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
+                          >  
+                          
+                          <label for="{{ $id }}" class="d-flex align-items-center">
+                              {{.}}
+                          </label>
+                      </div>
                     {{ end }}
                 </form>
             </div>                      
@@ -270,8 +278,8 @@ x-init="updateWithURLParams()">
         {{ end }}
     </div>
     {{/*  SEARCH FORM */}}
-    <form class="search-static-analysis" @submit.prevent="">
-        <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
+    <form class="search__multifilter" @submit.prevent="">
+        <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredSet" @input.debounce="pushState()">
     </form>
   </nav>
 </div>
