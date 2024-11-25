@@ -1,7 +1,7 @@
 ---
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
 description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
@@ -48,7 +48,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 | dd_source      | _推奨_ - サービスの基盤となるテクノロジーの名前。人間が解読可能であること。たとえば `postgres` や `nginx` など。                                                                                                                                                                                                    |                                                                             |
 | dd_message_key | _推奨_ - ログメッセージを保存するために属性を使用するように設定します。                                                                                                                                                                                                                                                         |                                                                             |
 | dd_tags        | _任意_ - Datadog のログに割り当てる[タグ][10]。                                                                                                                                                                                                                                                     |                                                                             |
-| dd_hostname    | _Optional_ - The host that emitted logs should be associated with. If unset, Datadog expects the host to be set as one of [the standard host attributes][12].
+| dd_hostname    | _オプション_ - ログを発行したホストに関連付けることができます。未設定の場合、Datadog はホストが[標準のホスト属性][12]のいずれかとして設定されているとみなします。 
 | プロバイダー       | _任意_ - 使用するプロバイダー。Fargate Tasks から Datadog にログを送信する場合は、これを `ecs` に設定します。                                                                                                                                                                                                            |                                                                             |
 
 #### コンフィギュレーションファイルの例
@@ -61,7 +61,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
     TLS               on
     compress          gzip
     apikey            <DATADOG_API_キー>
-    dd_service       <アプリケーション_サービス>
+    dd_service       <アプリケーション_サービス> 
     dd_source         <ソース>
     dd_message_key    log
     dd_tags           env:dev,<タグキー>:<タグ値>

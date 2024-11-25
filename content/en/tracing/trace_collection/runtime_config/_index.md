@@ -6,7 +6,7 @@ further_reading:
   text: "Remote Configuration"
 ---
 
-<div class="alert alert-info">This feature is in public beta.</div>
+<div class="alert alert-info">This feature is in Preview.</div>
 
 ## Overview
 
