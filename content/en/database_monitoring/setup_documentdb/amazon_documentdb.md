@@ -7,7 +7,7 @@ Database Monitoring offers comprehensive insights into your DocumentDB databases
 ## Before you begin
 
 Supported Amazon DocumentDB major versions
-: 4.0, 5.0
+: 4.0.0, 5.0.0
 
 Supported Amazon DocumentDB cluster types
 : Instance-based clusters.<br /><br />
