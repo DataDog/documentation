@@ -1,7 +1,6 @@
 ---
 title: Cloud Cost Recommendations
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
-type: ccm-recommendations
 algolia:
   tags:
     - cloud cost recommendations
