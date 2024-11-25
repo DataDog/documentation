@@ -1361,19 +1361,8 @@ components:
     AWSNamespaceFilters:
       description: AWS Metrics namespace filters
       oneOf:
-      - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeAll'
       - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
-      - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeAll'
       - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
-    AWSNamespaceFiltersExcludeAll:
-      description: Exclude all namespaces
-      properties:
-        exclude_all:
-          description: Exclude all namespaces
-          example: false
-          type: boolean
-      required:
-      - exclude_all
     AWSNamespaceFiltersExcludeOnly:
       description: Exclude only these namespaces
       properties:
@@ -1387,15 +1376,6 @@ components:
           type: array
       required:
       - exclude_only
-    AWSNamespaceFiltersIncludeAll:
-      description: Include all namespaces
-      properties:
-        include_all:
-          description: Include all namespaces
-          example: false
-          type: boolean
-      required:
-      - include_all
     AWSNamespaceFiltersIncludeOnly:
       description: Include only these namespaces
       properties:
