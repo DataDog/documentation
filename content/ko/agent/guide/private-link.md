@@ -54,14 +54,14 @@ Datadog는 **{{< region-param key="aws_region" >}}**에 AWS PrivateLink 엔드�
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | 로그(에이전트 HTTP 인테이크) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint" code="true">}}              |
 | 로그(사용자 HTTP 인테이크) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint" code="true">}}                    |
-| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>API.{{< region-param key="dd_site" ></code> }}                    |
-| 메트릭 | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>메트릭.에이전트.< region-param key="dd_site" ></code> }}          |
-| 컨테이너 |< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" ></code> }}           |
-| 프로세스 | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>프로세스.{{< region-param key="dd_site" ></code> }}                |
-| 프로파일링 |< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" ></code> }}         |
-| 트레이스 | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>추적하다.에이전트.< region-param key="dd_site" ></code> }}            |
-| 데이터베이스 모니터링 | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-메트릭</code> -intake <code>.{{< region-param key="dd_site" ></code> }}     |
-| 원격 설정 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.< region-param key="dd_site" ></code> }}                 |
+| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>API.{{< region-param key="dd_site" >}}</code>                    |
+| 메트릭 | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>메트릭.에이전트.< region-param key="dd_site" >}}</code>           |
+| 컨테이너 |< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>            |
+| 프로세스 | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>프로세스.{{< region-param key="dd_site" >}}</code>                 |
+| 프로파일링 |< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+| 트레이스 | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>추적하다.에이전트.< region-param key="dd_site" >}}</code>             |
+| 데이터베이스 모니터링 | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-메트릭</code> -intake <code>.{{< region-param key="dd_site" >}}</code>      |
+| 원격 설정 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.< region-param key="dd_site" >}}</code>                  |
 
 4. **확인**을 클릭합니다.  _서비스 이름을 찾을 수 없음_이 반환되지 않으면 [Datadog 지원팀][1]에 문의하세요.
 5. Datadog VPC 서비스 엔드포인트로 피어링할 VPC와 서브넷을 선택합니다.
