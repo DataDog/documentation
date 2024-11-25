@@ -44,11 +44,11 @@ After completing setup, run your tests as you normally do:
 {{% tab "Gradle" %}}
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
+GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
-dd.service=my-java-app
+dd.service=my-java-app \
+./gradlew clean test
 {{< /code-block >}}
 
 {{% /tab %}}
