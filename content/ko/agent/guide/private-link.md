@@ -122,7 +122,7 @@ Datadog는 **{{< region-param key="aws_region" >}}**에 AWS PrivateLink 엔드�
 2. **이름으로 서비스 찾기**를 선택합니다.
 3. AWS PrivateLink를 설정하려는 서비스 에 따라 _서비스 이름_ 텍스트 상자를 입력합니다:
 
-{{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC 서비스 이름" <txprotected>style="width:90%;" >}}
+{{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC 서비스 이름" style="width:90%;" >}}
 
 | Datadog | PrivateLink 서비스 이름 |
 |---------------------------|----------------------------------------------------------------------------------------|
