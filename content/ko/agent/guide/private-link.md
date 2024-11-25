@@ -107,7 +107,11 @@ Datadog는 **{{< region-param key="aws_region" >}}**에 AWS PrivateLink 엔드�
 [2]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /ko/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-[5]: /ko/agent/configuration/agent-commands/#restart-the-agent{{% /tab %}}{{% tab "Connect from another region using VPC Peering" %}}
+[5]: /ko/agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+
+{{% tab "Connect from another region using VPC Peering" %}}
 
 ### Amazon VPC 피어링
 
