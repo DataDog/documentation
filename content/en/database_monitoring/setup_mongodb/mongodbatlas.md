@@ -67,7 +67,7 @@ To monitor your MongoDB Atlas Cluster, you must install and configure the Datado
 
 Applications usually connect to MongoDB Atlas using an SRV connection string, but the Datadog Agent must connect directly to the individual MongoDB instance being monitored. If the Agent connects to different MongoDB instance while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
-To get the individual MongoDB instance hostname and port, you can use network utility command line tools like `dig` command in Linux or `nslookup` command in Windows to resolve the SRV connection string.
+To get the individual MongoDB instance hostname and port, you can use network utility command line tools like `dig` in Linux or `nslookup` in Windows to resolve the SRV connection string.
 
 {{< tabs >}}
 {{% tab "Replica Set" %}}
@@ -76,7 +76,7 @@ To get the individual MongoDB instance hostname and port, you can use network ut
 
 For a non-sharded (replica set) cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
-Use the `dig` command in Linux to resolve the SRV connection string:
+Use `dig` in Linux to resolve the SRV connection string:
 
 {{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
@@ -90,7 +90,7 @@ The output should be similar to:
 0 0 27017 XXXXX-00-02.4zh9o.mongodb.net.
 {{< /code-block >}}
 
-Use the `nslookup` command in Windows to resolve the SRV connection string:
+Use `nslookup` in Windows to resolve the SRV connection string:
 
 {{< code-block lang="shell" >}}
 nslookup -type=SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
@@ -118,7 +118,7 @@ You can use the `<HOST>:<PORT>` retrieved from the SRV connection string to conf
 
 For a sharded cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
-Use the `dig` command in Linux to resolve the SRV connection string:
+Use `dig` in Linux to resolve the SRV connection string:
 
 {{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
@@ -132,7 +132,7 @@ The output should be similar to:
 0 0 27016 XXXXX-00-02.4zh9o.mongodb.net.
 {{< /code-block >}}
 
-Use the `nslookup` command in Windows to resolve the SRV connection string:
+Use `nslookup` in Windows to resolve the SRV connection string:
 
 {{< code-block lang="shell" >}}
 nslookup -type=SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
