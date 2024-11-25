@@ -136,7 +136,7 @@ Datadog은 업로드와 같이 애플리케이션에서 수행하는 단계를 �
 
 * `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **선택** 및 **업데이트** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
 
-{{< img src="synthetics/browser_tests/assertion_java.mp4"" alt="브라우저 테스트 자바스크립트(Javascript) 어설션" video="true" width="100%" >}} >}}
+{{< img src="synthetics/browser_tests/assertion_java.mp4" alt="브라우저 테스트 자바스크립트(Javascript) 어설션" video="true" width="100%;" >}}
 
 자바스크립트 어서션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
 
