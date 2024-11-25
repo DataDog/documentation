@@ -24,7 +24,7 @@ This page walks Technology Partners through creating a log pipeline. A log pipel
 
 ## Integration prerequisites
 
-In developing your integration to send logs to Datadog follow these guidlines to ensure the best experience for your users.
+When developing your integration to send logs to Datadog follow these guidlines to ensure the best experience for your users.
 
 ### Guidelines
 
