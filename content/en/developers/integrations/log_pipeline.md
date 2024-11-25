@@ -55,7 +55,7 @@ Do not use Datadog Application Keys
 
 You can create and design your log integration assets directly within your Datadog partner account.
 
-Log integrations are made of two sets of assets, [pipelines][13] and accompanying [facets][12]. Centralizing logs from various technologies and applications can generate large amounts of unique attributes. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17] when creating integrations.
+Log integrations are made of two sets of assets, [pipelines][13] and associated [facets][12]. Centralizing logs from various technologies and applications can generate large amounts of unique attributes. To take advantage of out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog’s [standard naming convention][17] when creating integrations.
 
 After you've settled on a design for your Datadog Integration and are able to send logs to Datadog's logs endpoint(s), you should define your log pipelines and facets to enrich and structure your integration's Logs.
 
@@ -91,9 +91,9 @@ Map the application's logs attributes to [Datadog's Standard Attributes][6]
 : Use the [Attribute Remapper][5] to map attribute keys to [Datadog Standard Attributes][6] where possible. For example, an attribute for a network service client IP value should be remapped to `network.client.ip`.
 
 Map the log `service` tag to the name of the [service][26] producing telemetry
-: Use the [Service Remapper][7] to remap the `service` attribute. When the source and service are not different services, set `service` to the same value as the `source` tag. `service` tags must be in lowercase. 
+: Use the [Service Remapper][7] to remap the `service` attribute. When source and service share the same value, remap the `service` tag to the `source` tag. `service` tags must be lowercase. 
 
-Map the log's internal timestamp to it's official Datadog timestamp
+Map the log's internal timestamp to its official Datadog timestamp
 : Use the [Date Remapper][4] to define the official timestamp for logs. If the log timestamp does not already map to a [standard date attribute][28] it defaults to the time of ingestion at Datadog's endpoint.
 
 Map the custom status attributes of the logs to the official Datadog `status` attribute
@@ -122,7 +122,7 @@ For example, the `Arithmetic Processor` can be used to calculate information bas
 
 Facets are specific qualitative or quantitative attributes that can be used to filter and narrow down search results. While facets are not strictly necessary for filtering search results, they play a crucial role in helping users understand the available dimensions for refining their search. 
 
-Facets for standard attributes are automatically added by Datadog when a pipeline is published. Review if the attribute should be remapped to a [Datadog Standard Attribute][6] instead. 
+Facets for standard attributes are automatically added by Datadog when a pipeline is published. Review if the attribute should be remapped to a [Datadog Standard Attribute][6]. 
 
 Not all attributes are meant to be used as a facet. The need for facets in integrations is focused on two things:
 * Facets provide a straightforward interface for filtering logs. They are leveraged in Log Management autocomplete features, allowing users to find and aggregate key information found in their logs.
@@ -132,7 +132,7 @@ You can create [facets][12] in the [Log Explorer][16].
 
 #### Create facets
 
-Correctly defining facets is important as they improve the usability of logs in analytics, monitors, and aggregation features across Datadog's logs management product. 
+Correctly defining facets is important as they improve the usability of indexed logs in analytics, monitors, and aggregation features across Datadog's logs management product. 
 
 They allow for better findability of application logs by populating autocomplete features across Log Management.
 
@@ -161,7 +161,7 @@ Custom facets must have the same data type as the mapped attribute
 3. Select **Create facet/measure for @attribute**.
 4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
 **Note**: Define the [unit][11] of a measure based on what the attribute represents.
-5. To help navigate the facet list specify a facet **Group**. If one does not exist enter the name of the group matching the source tag and a description of the new group, and select **New group**.
+5. Specify a facet **Group** to help navigate the Facet List. If the facet group does not exist, select **New group**, enter the name of the group matching the source tag, and add a description for the new group.
 6. Click **Add** to create the facet.
 
 #### Configure and edit facets
@@ -173,8 +173,8 @@ Custom facets must have the same data type as the mapped attribute
 **Tips**
 * Measures should have a unit where possible. Measures can be assigned a [unit][27]. Two families of units are available, `TIME` and `BYTES`, with units such as `millisecond` or `gibibyte`.
 * Facets can be assigned a description. A clear description of the facet can help users understand how to best use it.
-* If you redefine an attribute and keep both, define a facet on a single one.
-* When manually configuring facets in `.yaml` files, note they are assigned a `source`. This refers to where the attribute is captured from and can be `log` for attributes or `tag` for tags.
+* If you remap an attribute and keep the original using the `preserveSource:true` option, define a facet on only a single one.
+* When manually configuring facets in a pipeline's `.yaml` configuration files, note they are assigned a `source`. This refers to where the attribute is captured from and can be `log` for attributes or `tag` for tags.
 
 ## Review and deploy the integration
 
@@ -189,17 +189,18 @@ Include sample raw logs with **all** the attributes you expect to be sent into D
 Exporting your log pipeline includes two YAML files:
 
 * One with the log pipeline, which includes custom facets, attribute remappers, and grok parsers. The exported file is named `pipeline-name.yaml`.
-* One with the raw example logs with an empty result. The exported file is named `pipeline-name_test.yaml`
+* One with the raw sample logs provided and an empty `result` section. The exported file is named `pipeline-name_test.yaml`.
 
 **Note**: Depending on your browser, you may need to adjust your settings to allow file downloads.
 
 After you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
 
-Validations are run automatically in your pull request. 
+Validations are run automatically in your pull request, and validate your pipelines against the raw samples provided. These will produce a result that you can set as the `result` section of your `pipeline-name_test.yaml` file.
+Once the validations runs again, if no issues are detected, the logs validation should succeed.
 
 Three common validation errors are:
 1. The `id` field in both YAML files: Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
-2. Not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
+2. Not providing the `result` of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
 3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
 
 After validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. Datadog team members respond within 2-3 business days.
