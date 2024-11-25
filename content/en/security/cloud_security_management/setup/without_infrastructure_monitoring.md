@@ -4,8 +4,6 @@ title: Setting Up CSM without Infrastructure Monitoring
 
 In addition to setting up CSM with or without an Agent, you can also set it up without Infrastructure Monitoring.
 
-**Tip**: In your CSM settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
-
 ## Set up CSM on your AWS account
 
 1. Navigate to the [AWS Integration configuration page][2] in Datadog.
@@ -16,6 +14,8 @@ In addition to setting up CSM with or without an Agent, you can also set it up w
 1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
 1. Click **Save**.
 
+**Note**: In your CSM settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
+
 ## Set up CSM on your Azure subscription
 
 1. Navigate to the [Azure Integration configuration page][3] in Datadog.
@@ -25,6 +25,8 @@ In addition to setting up CSM with or without an Agent, you can also set it up w
 1. To turn off infrastructure monitoring on a given account, under the selected client ID, on the **Metric Collection** tab, turn off the **Enable Metric Collection** toggle. 
 1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
 1. Click **Save**.
+
+**Note**: In your CSM settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
 [1]: /security/cloud_security_management/guide/resource_evaluation_filters/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
