@@ -5557,10 +5557,10 @@ menu:
       identifier: cloud_siem_detection_rules
       weight: 2
     - name: Signal Correlation Rules
-      url: security/cloud_siem/signal_correlation_rules
-      parent: cloud_siem
+      url: security/cloud_siem/detection_rules/signal_correlation_rules
+      parent: cloud_siem_detection_rules
       identifier: cloud_siem_signal_correlation_rules
-      weight: 3
+      weight: 20500
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem
