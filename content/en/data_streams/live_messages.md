@@ -12,7 +12,7 @@ Live Messages enables you to view a live tail of messages that a specific servic
 
 ### Setup
 
-1. Enable [dynamic instrumentation][1] on the services you want to use this feature on. 
+1. Enable [Dynamic Instrumentation][1] on the services you want to use this feature on. 
 
    <div class="alert alert-info">
    Dynamic Instrumentation requires <a href="/agent/remote_config/">Remote Configuration</a>.
@@ -46,7 +46,7 @@ Users must have the `Dynamic Instrumentation Capture Variables` and the `Dynamic
 
 Dynamic Instrumentation automatically redacts values linked to specific identifiers deemed sensitive, such as password and accessToken. See the [full list of redacted identifiers][5]. 
 
-You can further tailor redaction by specifying additional identifiers. In your application’s environment (not on `datadog-agent`), set the `DD_DYNAMIC_INSTRUMENTATION_REDACTED_IDENTIFIERS` environment variable to a comma-separated list of identifiers such as `firstName,lastName,phoneNumber`.
+You can further tailor redaction by specifying additional identifiers. In your application's environment (not on `datadog-agent`), set the `DD_DYNAMIC_INSTRUMENTATION_REDACTED_IDENTIFIERS` environment variable to a comma-separated list of identifiers such as `firstName,lastName,phoneNumber`.
 
 For additional information on sensitive data scrubbing, view the [Dynamic Instrumentation documentation][6]. If you have additional requirements or requests on handling sensitive data, [contact Datadog support][7]. 
 
