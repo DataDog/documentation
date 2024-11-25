@@ -38,7 +38,7 @@ The live tail automatically turns off after the approximate number of messages s
 ### Additional details
 
 #### Message storage and access
-Messages are accessed by Datadog in the message consumers and producers. They are then stored in Datadog as logs, after going through the [sensitive data scanner][3].
+Messages are accessed by Datadog in the message consumers and producers. They are then stored in Datadog as logs, after going through the [Sensitive Data Scanner][3].
 
 Users must have the `Dynamic Instrumentation Capture Variables` and the `Dynamic Instrumentation Read` roles to use the Live Messages feature. All users in your organization are able to view the logs. For more information on Role Based Access Controls, see [Dynamic Instrumentation][4].
 
@@ -51,7 +51,7 @@ You can further tailor redaction by specifying additional identifiers. In your a
 For additional information on sensitive data scrubbing, view the [Dynamic Instrumentation documentation][6]. If you have additional requirements or requests on handling sensitive data, [contact Datadog support][7]. 
 
 #### SSL encryption on Kafka
-Datadog captures messages in the clients (consumer, producer) before they are encrypted. Thus, Datadog can capture messages regardless of if encryption is turned on at the Kafka layer.
+Datadog captures messages in the clients (consumer, producer) before they are encrypted. Thus, Datadog can capture messages regardless of whether encryption is turned on at the Kafka layer.
 
 [1]: /dynamic_instrumentation/
 [2]: https://app.datadoghq.com/personal-settings/profile
