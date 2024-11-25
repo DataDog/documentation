@@ -27,7 +27,7 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for ho
 
 ## Application libraries
 
-Cloud Security Management Vulnerabilities supports vulnerability scanning for the following application libraries on containers and Lambda instances:
+Cloud Security Management Vulnerabilities supports vulnerability scanning for the following application languages and libraries on containers and Lambda instances:
 
 | Language | Supported Package Manager | Supported Files                                                      | Agentless support | Agent support     |
 |----------|---------------------------|----------------------------------------------------------------------|-------------------|-------------------|
