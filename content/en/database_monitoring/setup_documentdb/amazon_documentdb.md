@@ -1,8 +1,8 @@
 ---
-title: Setting Up Database Monitoring for Amazon DocumentDB
+title: Setting Up Database Monitoring for Amazon DocumentDB (with MongoDB compatibility)
 ---
 
-Database Monitoring offers comprehensive insights into your DocumentDB databases by providing access to critical metrics, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for Amazon DocumentDB, ensure that the Datadog Agent is installed and configured to connect to your DocumentDB instances. This guide outlines the steps to set up Database Monitoring for Amazon DocumentDB.
+Database Monitoring offers comprehensive insights into your Amazon DocumentDB (with MongoDB compatibility) databases by providing access to critical metrics, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for Amazon DocumentDB, ensure that the Datadog Agent is installed and configured to connect to your Amazon DocumentDB instances. This guide outlines the steps to set up Database Monitoring for Amazon DocumentDB.
 
 ## Before you begin
 
@@ -79,7 +79,7 @@ To monitor your Amazon DocumentDB Cluster, you must install and configure the Da
 {{% dbm-amazon-documentdb-agent-config-replica-set %}}
 
 If you installed the [Amazon DocumentDB integration][3] to enrich instances
-with DocumentDB integration telemetry, add this section to your configuration:
+with Amazon DocumentDB integration telemetry, add this section to your configuration:
 
 ```yaml
 ## @param aws - mapping - optional
