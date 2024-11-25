@@ -2338,7 +2338,7 @@ components:
             type: string
           type: array
         account_filtering_include_new_accounts:
-          description: Whether or not to automatically include or exclude new accounts in Account Filtering.
+          description: Whether or not to automatically include new accounts in Account Filtering.
           example: true
           type: boolean
         months:
@@ -2417,7 +2417,7 @@ components:
             type: string
           type: array
         account_filtering_include_new_accounts:
-          description: Whether or not to automatically include or exclude new accounts in Account Filtering.
+          description: Whether or not to automatically include new accounts in Account Filtering.
           example: true
           type: boolean
       type: object
@@ -2475,7 +2475,7 @@ components:
             type: string
           type: array
         account_filtering_include_new_accounts:
-          description: Whether or not to automatically include or exclude new accounts in Account Filtering.
+          description: Whether or not to automatically include new accounts in Account Filtering.
           example: true
           type: boolean
         months:
