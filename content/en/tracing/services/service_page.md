@@ -33,7 +33,7 @@ Selecting a service on the Service Catalog leads you to the detailed service pag
 
 Consult on this page:
 
-* [Service health](#service-health) (private beta)
+* [Service health](#service-health) (in Preview)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
@@ -47,8 +47,8 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
-  Service health is in private beta. To request access, complete the form.
+{{< callout header="Opt in to the Preview!" url="https://www.datadoghq.com/product-preview/service-health/" >}}
+  Service health is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 The **Service Health** banner and alert badges provides a real-time summary of service signals to help you understand if a service needs your attention.

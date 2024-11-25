@@ -18,7 +18,7 @@ Explore inferred services in the [Service Catalog][1] by filtering entries by en
 
 ## Set up inferred services
 
-To see inferred services, you must enable some **Datadog Agent** configurations. 
+To see inferred services, you must enable some configurations. 
 
 {{< tabs >}}
 {{% tab "Agent v7.55.1+" %}}
@@ -134,6 +134,8 @@ Peer Tag | Source Attributes
 `peer.rpc.service` | `rpc.service`
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
+
+**Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
 ## Migrate to global default service naming
 

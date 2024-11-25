@@ -18,7 +18,7 @@ further_reading:
   text: Empezando con el seguimiento de implementaciones RUM
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/
   tag: Blog
-  text: Solución de problemas en implantaciones frontend fallidas con el seguimiento
+  text: Solución de problemas en implementaciones frontend fallidas con el seguimiento
     de implementaciones en RUM
 - link: https://www.datadoghq.com/blog/change-overlays/
   tag: Blog
@@ -26,10 +26,6 @@ further_reading:
     de cambios
 title: Cambiar superposiciones
 ---
-<div class="alert alert-warning">
-    La función de superposición de cambios está en fase beta.
-</div>
-
 
 ## Información general
 
@@ -76,9 +72,10 @@ En las implementaciones de APM, las superposiciones aparecen en gráficos de ser
 ### ¿Cuál es el alcance de las implementaciones?
 En las implementaciones de APM debe especificarse `env`. Si tienes una variable de plantilla `env` o `datacenter` establecida en tu dashboard, las implementaciones se filtran para que coincidan con la selección. De lo contrario, `env` cambia por defecto a `prod`. 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/tracing/services/deployment_tracking/
 [2]: /es/watchdog/faulty_deployment_detection/
