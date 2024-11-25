@@ -2,6 +2,7 @@
 title: Continuous Integration Visibility
 aliases:
   - /ci
+  - /continuous_integration
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
     tag: "Release Notes"
