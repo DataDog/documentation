@@ -170,6 +170,7 @@ export function initializeIntegrations() {
     function updateData(filter, isSearch) {
         const show = [];
         const hide = [];
+        const filterWords = filter.split(/\s+/);
 
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
@@ -184,10 +185,12 @@ export function initializeIntegrations() {
                 const name = item.name ? item.name.toLowerCase() : '';
                 const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
-                if (
-                    (filter && isSearch && (name.includes(filter) || publicTitle.includes(filter))) ||
-                    (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
-                ) {
+                const matchesFilter = filterWords.some(word => 
+                    (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
+                    (!isSearch && item.tags.indexOf(word.substr(1)) !== -1)
+                );
+
+                if (matchesFilter) {
                     if (!isSafari) {
                         int.classList.remove('dimmer');
                     }
@@ -214,10 +217,12 @@ export function initializeIntegrations() {
                         const name = item.name ? item.name.toLowerCase() : '';
                         const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
-                        if (
-                            (filter && isSearch && (name.includes(filter) || publicTitle.includes(filter))) ||
-                            (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
-                        ) {
+                        const matchesFilter = filterWords.some(word => 
+                            (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
+                            (!isSearch && item.tags.indexOf(word.substr(1)) !== -1)
+                        );
+
+                        if (matchesFilter) {
                             int.classList.remove('dimmer');
                         } else {
                             int.classList.add('dimmer');
