@@ -7,7 +7,7 @@ categories:
 - issue tracking
 - log collection
 - provisioning
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: 'Rastrea las ejecuciones del cliente Chef: conoce cuándo fallan, tienen
   éxito o realizan grandes cambios.'
