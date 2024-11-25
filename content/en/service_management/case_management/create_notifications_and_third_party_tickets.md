@@ -91,4 +91,5 @@ Ongoing two-way syncing requires [webhook support](https://docs.datadoghq.com/in
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases/settings
-[2]: https://docs.datadoghq.com/integrations/servicenow/#itom-and-itsm-setup
+[2]: /integrations/servicenow/#itom-and-itsm-setup
+[3]: /integrations/jira/#configure-a-jira-webhook
