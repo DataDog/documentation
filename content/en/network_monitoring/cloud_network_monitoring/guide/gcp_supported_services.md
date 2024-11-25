@@ -1,5 +1,7 @@
 ---
 title: CNM Google Cloud Supported Services
+aliases:
+  - /network_monitoring/performance/guide/gcp_supported_services
 npm_provider: gcp
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'

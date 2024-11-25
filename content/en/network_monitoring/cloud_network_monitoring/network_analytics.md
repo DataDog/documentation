@@ -45,7 +45,7 @@ Additionally, the following diagram illustrates inbound and outbound requests wh
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_default_view_2.png" alt="CNM Default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_default_view_2.png" alt="CNM default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 

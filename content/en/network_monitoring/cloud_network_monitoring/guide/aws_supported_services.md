@@ -1,5 +1,7 @@
 ---
 title: CNM AWS Supported Services
+aliases:
+  - /network_monitoring/performance/guide/aws_supported_services
 npm_provider: aws
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'

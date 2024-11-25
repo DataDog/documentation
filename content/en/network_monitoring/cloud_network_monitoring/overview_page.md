@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The [CNM overview page][3] provides a high-level overview of your network, from costly network traffic to DNS health to service top talkers. Use the Overview page to filter network traffic by environment or team with tags, adjust the time frame for your network data and drill into your most expensive traffic. 
+The [CNM overview page][3] provides a high-level overview of your network, from costly network traffic to DNS health to service top talkers. Use the Overview page to filter network traffic by environment or team with tags, adjust the time frame for your network data and investigate your most expensive traffic. 
 
 {{< img src="/network_performance_monitoring/overview_page/cnm_overview_page_2.png" alt="The network overview page in Datadog" style="width:110%;">}}
 
