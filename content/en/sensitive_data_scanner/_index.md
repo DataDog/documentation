@@ -60,7 +60,7 @@ There are two locations where you can redact your sensitive data:
 **In your environment:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Sensitive Data Scanner support for the Datadog Agent is in beta. To enroll, click <strong>Request Access</strong>.
+  Sensitive Data Scanner support for the Datadog Agent is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 - With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
