@@ -83,7 +83,7 @@ App Builder keeps a record of every saved version of your app.
 
 To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
 
-The UI displays up to 50 saved or published versions of your app:
+The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
 {{< img src="service_management/app_builder/version-history-example.png" alt="An example App Builder version history list with two items, the current version and a previous version" style="width:70%;" >}}
 
