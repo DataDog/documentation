@@ -43,9 +43,9 @@ title: Datadog-Amazon CloudFormation
     }
   }
   ```
-   米国以外のアカウントを使用している場合は `ApiURL` を指定します (デフォルトは `https://api.datadoghq.com`)。例えば、EU アカウントの場合は `https://api.datadoghq.eu` を使用します。
+   US1 以外のリージョンでアカウントを使用している場合は、`ApiURL` を指定してください。例えば、EU リージョンでアカウントを使用している場合は `https://api.datadoghq.eu` を、US5 リージョンでアカウントを使用している場合は `https://api.us5.datadoghq.com/` を使用してください。
 
-7. リソースを構成したら、アクティブ化された Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
+7. リソースを構成した後、[AWS スタックを作成][3]し、アクティブ化した Datadog リソースのいずれかを含めてください。
 
 使用可能なコマンドとワークフローの詳細については、公式の [AWS ドキュメント][4]を参照してください。
 
@@ -118,7 +118,7 @@ title: Datadog-Amazon CloudFormation
 | ダウンタイム (**非推奨**) | `Datadog::Monitors::Downtime`         | [モニターのダウンタイムを有効化/無効化][11]     | `datadog-monitors-downtime`         | [スキーマハンドラーのバージョン][12] |
 | ダウンタイムスケジュール         | `Datadog::Monitors::DowntimeSchedule` | [Datadog のダウンタイムのスケジュール][21]                        | `datadog-monitors-downtimeschedule` | [スキーマハンドラーのバージョン][22] |
 | ユーザー                      | `Datadog::IAM::User`                  | [Datadog ユーザーの作成と管理][13]                   | `datadog-iam-user`                  | [スキーマハンドラーのバージョン][14] |
-| SLO                       | `Datadog::SLOs::SLO`                  | [Create and manage Datadog SLOs][19]                    | `datadog-slos-slo`                  | [スキーマハンドラーのバージョン][20] |
+| SLO                       | `Datadog::SLOs::SLO`                  | [Datadog SLO の作成および管理][19]                    | `datadog-slos-slo`                  | [スキーマハンドラーのバージョン][20] |
 
 ## 対応地域
 

@@ -4,7 +4,7 @@ description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
-is_beta: true
+is_beta: false
 type: static-analysis
 rulesets:
   csharp-best-practices:
@@ -91,6 +91,14 @@ rulesets:
     title: "React specific linting rules"
     description: |
       This plugin exports a `recommended` configuration that enforces React good practices.
+  kotlin-best-practices:
+    title: "Follow best practices for writing Kotlin code"
+    description: |
+      Rules to enforce Kotlin best practices.
+  kotlin-code-style:
+    title: "Enforce Kotlin code style"
+    description: |
+      Rules to enforce Kotlin code style.
   php-best-practices:
     title: "Follow best practices for writing PHP code"
     description: |
@@ -243,15 +251,15 @@ further_reading:
     text: "Learn about Datadog Code Analysis"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 
