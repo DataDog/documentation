@@ -240,7 +240,7 @@ If you are not using Helm, you can enable Network Performance Monitoring with Ku
 
 If you already have the [Agent running with a manifest][4]:
 
-1. Prior to Kubernetes 1.30 : add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
+1. For Kubernetes versions below `1.30`, add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
     ```yaml
     spec:
@@ -255,7 +255,7 @@ If you already have the [Agent running with a manifest][4]:
                 annotations:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
-    For and after Kubernetes 1.30 : add the following `securityContext` on the `datadog-agent` template:
+    For Kubernetes versions `1.30+`, add the following `securityContext` on the `datadog-agent` template:
 
     ```yaml
     spec:
