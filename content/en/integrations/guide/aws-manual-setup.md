@@ -75,7 +75,7 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 Create an IAM policy for the Datadog role in your AWS account with the [necessary permissions](#aws-integration-iam-policy) to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change.
 
 3. Create a new policy in the AWS [IAM Console][3].
-4. Select the **JSON** tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox.
+4. Select the **JSON** tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox.<br>
   **Note**: Optionally, you can add [Condition][7] elements to the IAM policy. For example, conditions can be used to [restrict monitoring to certain regions][8].
 5. Click **Next: Tags** and **Next: Review**.
 6. Name the policy `DatadogIntegrationPolicy` or one of your own choosing, and provide an apt description.
@@ -108,11 +108,13 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 
 18. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account.
 19. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
-20. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China, or `aws-us-gov` for GovCloud. Refer to [AWS documentation][9] for more information on AWS partitions.
+20. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
 21. Enter the name of the role created in the previous section, and click **Save**.
   **Note**: The role name you enter in the integration tile is case sensitive and must exactly match the role name in AWS.
 22. If there is a [Datadog is not authorized to perform sts:AssumeRole][6] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][6].
 23. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+
+*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][62] section on our website.*
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
