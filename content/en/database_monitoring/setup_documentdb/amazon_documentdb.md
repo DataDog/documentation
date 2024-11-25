@@ -1,9 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Amazon DocumentDB
-further_reading:
-    - link: '/integrations/mongo/'
-      tag: 'Documentation'
-      text: 'Basic MongoDB Integration'
 ---
 
 Database Monitoring offers comprehensive insights into your DocumentDB databases by providing access to critical metrics, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for Amazon DocumentDB, ensure that the Datadog Agent is installed and configured to connect to your DocumentDB instances. This guide outlines the steps to set up Database Monitoring for Amazon DocumentDB.
@@ -17,7 +13,7 @@ Supported Amazon DocumentDB cluster types
 : Instance-based clusters.<br /><br />
 **Note**: Amazon DocumentDB Elastic Cluster is not supported.
 
-{{% dbm-mongodb-before-you-begin %}}
+{{% dbm-documentdb-before-you-begin %}}
 
 ## Setup
 
@@ -30,9 +26,6 @@ To enable Database Monitoring for your database:
 ### Grant the Agent access to your Amazon DocumentDB instances
 
 The Datadog Agent requires read-only access to the Amazon DocumentDB instance to collect statistics and queries.
-
-{{< tabs >}}
-{{% tab "Replica Set" %}}
 
 In a Mongo shell, authenticate to the primary node of the replica set, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
@@ -73,53 +66,6 @@ db.grantRolesToUser("datadog", [
 ])
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Sharded Cluster" %}}
-
-1. For each shard in your cluster, connect to the primary node of the shard, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
-
-{{< code-block lang="shell" >}}
-
-# Authenticate as the admin user.
-
-use admin
-db.auth("admin", "<YOUR_AMAZON_DOCUMENTDB_ADMIN_PASSWORD>")
-
-# Create the user for the Datadog Agent.
-
-db.createUser({
-"user": "datadog",
-"pwd": "<UNIQUE_PASSWORD>",
-"roles": [
-{ role: "read", db: "admin" },
-{ role: "read", db: "local" },
-{ role: "clusterMonitor", db: "admin" }
-]
-})
-{{< /code-block >}}
-
-Grant additional permissions to the `datadog` user in the databases you want to monitor:
-
-{{< code-block lang="shell" >}}
-db.grantRolesToUser("datadog", [
-{ role: "read", db: "mydatabase" },
-{ role: "read", db: "myotherdatabase" }
-])
-{{< /code-block >}}
-
-Alternatively, you can grant the `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
-
-{{< code-block lang="shell" >}}
-db.grantRolesToUser("datadog", [
-{ role: "readAnyDatabase", db: "admin" }
-])
-{{< /code-block >}}
-
-2. Follow the same steps and create the same user from a `mongos` proxy. This action creates the local user in the config servers and allows direct connection.
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ### Securely store your password
 
 {{% dbm-secret %}}
@@ -128,18 +74,9 @@ db.grantRolesToUser("datadog", [
 
 To monitor your Amazon DocumentDB Cluster, you must install and configure the Datadog Agent on a host that can [remotely access][1] your Amazon DocumentDB Cluster. This host can be a Linux host, a Docker container, or a Kubernetes pod.
 
-<div class="alert alert-info">Amazon DocumentDB Elastic Clusters is not supported because it only exposes the cluster (<code>mongos</code>) endpoints.</div>
-
 #### Create the configuration file
 
-{{< tabs >}}
-{{% tab "Replica Set" %}}
 {{% dbm-amazon-documentdb-agent-config-replica-set %}}
-{{% /tab %}}
-{{% tab "Sharded Cluster" %}}
-{{% dbm-amazon-documentdb-agent-config-sharded-cluster %}}
-{{% /tab %}}
-{{< /tabs >}}
 
 If you installed the [Amazon DocumentDB integration][3] to enrich instances
 with DocumentDB integration telemetry, add this section to your configuration:
@@ -157,7 +94,7 @@ aws:
     ## For more information on instance endpoints,
     ## see the AWS docs https://docs.aws.amazon.com/documentdb/latest/developerguide/API_Endpoint.html
     #
-    instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+    instance_endpoint: <AMAZON_DOCUMENTDB_ENDPOINT>
     ## @param cluster_identifier - string - optional
     ## Equal to the cluster identifier of the instance the Agent is connecting to.
     ## This value is optional if the value of `cluster_name` is already configured to the cluster identifier.
@@ -165,7 +102,7 @@ aws:
     ## For more information on cluster identifiers,
     ## see the AWS docs https://docs.aws.amazon.com/documentdb/latest/developerguide/API_DBCluster.html
     #
-    cluster_identifier: <AWS_CLUSTER_IDENTIFIER_ENDPOINT>
+    cluster_identifier: <AMAZON_DOCUMENTDB_CLUSTER_IDENTIFIER>
 ```
 
 #### Set up the Agent
@@ -190,7 +127,7 @@ To collect more comprehensive database metrics from Amazon DocumentDB, install t
 
 ### Metrics
 
-Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
+Refer to the [integration documentation][2] for a comprehensive list of metrics collected by the integration.
 
 {{% dbm-amazon-documentdb-agent-data-collected %}}
 
