@@ -2330,6 +2330,17 @@ components:
           items:
             type: string
           type: array
+        account_filtering_selections:
+          description: The account filtering selections for the AWS CUR config.
+          items:
+            description: The AWS account ID to be included in or excluded from Cloud Cost Management.
+            example: '123456789123'
+            type: string
+          type: array
+        account_filtering_include_new_accounts:
+          description: Whether or not to automatically include or exclude new accounts in Account Filtering.
+          example: true
+          type: boolean
         months:
           deprecated: true
           description: The number of months the report has been backfilled.
@@ -2398,8 +2409,17 @@ components:
           description: Whether or not the Cloud Cost Management account is enabled.
           example: true
           type: boolean
-      required:
-      - is_enabled
+        account_filtering_selections:
+          description: The account filtering selections for the AWS CUR config.
+          items:
+            description: The AWS account ID to be included in or excluded from Cloud Cost Management.
+            example: '123456789123'
+            type: string
+          type: array
+        account_filtering_include_new_accounts:
+          description: Whether or not to automatically include or exclude new accounts in Account Filtering.
+          example: true
+          type: boolean
       type: object
     AwsCURConfigPatchRequestType:
       default: aws_cur_config_patch_request
@@ -2446,6 +2466,17 @@ components:
           type: string
         is_enabled:
           description: Whether or not the Cloud Cost Management account is enabled.
+          type: boolean
+        account_filtering_selections:
+          description: The account filtering selections for the AWS CUR config.
+          items:
+            description: The AWS account ID to be included in or excluded from Cloud Cost Management.
+            example: '123456789123'
+            type: string
+          type: array
+        account_filtering_include_new_accounts:
+          description: Whether or not to automatically include or exclude new accounts in Account Filtering.
+          example: true
           type: boolean
         months:
           description: The month of the report.
