@@ -3937,56 +3937,61 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_mongodbatlas
       weight: 702
-    - name: Amazon DocumentDB
-      url: database_monitoring/setup_mongodb/amazon_documentdb
-      parent: dbm_setup_mongodb
-      identifier: dbm_setup_mongodb_amazon_documentdb
-      weight: 703
     - name: Troubleshooting
       url: database_monitoring/setup_mongodb/troubleshooting/
       parent: dbm_setup_mongodb
       identifier: dbm_troubleshooting_mongodb
-      weight: 704
+      weight: 703
+    - name: Setting Up Amazon DocumentDB
+      url: database_monitoring/setup_documentdb/
+      parent: dbm
+      identifier: dbm_setup_documentdb
+      weight: 8
+    - name: Amazon DocumentDB
+      url: database_monitoring/setup_documentdb/amazon_documentdb
+      parent: dbm_setup_documentdb
+      identifier: dbm_setup_documentdb_amazon_documentdb
+      weight: 801
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
       identifier: dbm_connect_dbm_and_apm
-      weight: 8
+      weight: 9
     - name: Data Collected
       url: database_monitoring/data_collected
       parent: dbm
       identifier: dbm_data_collected
-      weight: 9
+      weight: 10
     - name: Exploring Database Hosts
       url: database_monitoring/database_hosts/
       parent: dbm
       identifier: dbm_database_hosts
-      weight: 10
+      weight: 11
     - name: Exploring Query Metrics
       url: database_monitoring/query_metrics/
       parent: dbm
       identifier: dbm_query_metrics
-      weight: 11
+      weight: 12
     - name: Exploring Query Samples
       url: database_monitoring/query_samples/
       parent: dbm
       identifier: dbm_query_samples
-      weight: 12
+      weight: 13
     - name: Exploring Recommendations
       url: database_monitoring/recommendations/
       parent: dbm
       identifier: dbm_recommendations
-      weight: 13
+      weight: 14
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 14
+      weight: 15
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 15
+      weight: 16
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
