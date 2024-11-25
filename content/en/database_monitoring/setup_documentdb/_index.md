@@ -1,10 +1,10 @@
 ---
-title: Setting up Amazon DocumentDB (with MongoDB compatibility)
+title: Setting up Amazon DocumentDB
 description: Setting up Database Monitoring on a Amazon DocumentDB cluster
 disable_sidebar: true
 ---
 
-### Amazon DocumentDB (with MongoDB compatibility) versions supported
+### Amazon DocumentDB versions supported
 
 |       | Instance-based cluster | Elastic cluster |
 | ----- | ---------------------- | --------------- |
