@@ -6,10 +6,11 @@ disable_sidebar: true
 
 ### Amazon DocumentDB versions supported
 
-|                       | Amazon DocumentDB |
-| --------------------- | ----------------- |
-| Amazon DocumentDB 4.0 | {{< X >}}         |
-| Amazon DocumentDB 5.0 | {{< X >}}         |
+|       | Instance-based cluster | Elastic cluster |
+| ----- | ---------------------- | --------------- |
+| 3.6.0 |                        |                 |
+| 4.0.0 | {{< X >}}              |                 |
+| 5.0.0 | {{< X >}}              |                 |
 
 For setup instructions, select your hosting type:
 
