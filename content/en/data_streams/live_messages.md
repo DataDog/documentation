@@ -25,7 +25,7 @@ Live Messages enables you to view a live tail of messages that a specific servic
 
 1. Navigate to the Data Streams Monitoring map and click on a Java service that has dynamic instrumentation enabled. Select the **Messages** tab.
    {{< img src="data_streams/dsm-messages-tab.png" alt="Data Streams Monitoring with a service's side panel open. A play button is displayed." style="width:80%;" >}}
-1. To turn on the Live Messages live tail, click on the play button. Then, click on **Start Capturing**. Messages are generated in the form of logs and sampled at a rate of one message per second per host.
+1. To turn on the Live Messages live tail, click on the play button. Then, specify the approximate number of messages to capture, and click on **Start Capturing**. Messages are generated in the form of logs and sampled at a rate of one message per second per host.
    {{< img src="data_streams/dsm-start-capturing.png" alt="Start Capturing Messages modal, with a field to configure how many messages are captured (at a rate of one message per second per host)." style="width:80%;" >}}
 1. Clicking into each message shows the fields and values.
    {{< img src="data_streams/dsm-details.png" alt="Live Messages with one message selected." style="width:80%;" >}}
@@ -33,7 +33,7 @@ Live Messages enables you to view a live tail of messages that a specific servic
 #### Turn off Live Messages live tail
 {{< img src="data_streams/dsm-stop-capturing.png" alt="Stop Capturing Messages modal." style="width:100%;" >}}
 
-The live tail automatically turns off after ten minutes. You can also manually turn it off by selecting the **Stop Capturing** button.
+The live tail automatically turns off after the approximate number of messages specified is captured. You can also manually turn it off by selecting the **Stop Capturing** button.
 
 ### Additional details
 
