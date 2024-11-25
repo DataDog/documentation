@@ -649,6 +649,7 @@ set_redirect_metadata_preview:
   variables:
     BUCKET: "datadog-docs-preview"
     SET_REDIRECTS_PREVIEW: "true"
+    GIT_STRATEGY: none
   stage: post-deploy
   cache: []
   environment: "preview"
@@ -664,6 +665,7 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
+    GIT_STRATEGY: none
   stage: post-deploy
   cache: []
   environment: "live"
