@@ -32,7 +32,7 @@ The `JSONata` expression merges the upstream service's context with the current 
 
 Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
 
-[1]: https://aws.amazon.com/blogs/compute/simplifying-developer-experience-with-variables-and-jsonata-in-aws-step-functions/
+[1]: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
 
 ## Merge upstream traces with Step Functions and nested Step Functions traces
 
