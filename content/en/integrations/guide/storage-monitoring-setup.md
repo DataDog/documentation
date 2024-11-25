@@ -9,7 +9,9 @@ private: true
 
 Storage Monitoring for Amazon S3 provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Use these insights to help you track storage growth, investigate access patterns, and optimize costs.
 
-This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> [Resource Catalog][107] -> Monitoring -> S3 Buckets**.
+This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets**. 
+
+To learn more about the Resource Catalog, see the [Resource Catalog][107] documentation.
 
 ## Setup
 
@@ -88,7 +90,7 @@ After completing the CloudFormation setup, [reach out][105] with the following i
 [104]: https://console.aws.amazon.com/cloudformation/
 [105]: mailto:storage-monitoring@datadoghq.com
 [106]: https://aws.amazon.com/s3/pricing/
-[107]: https://docs.datadoghq.com/infrastructure/resource_catalog/
+[107]: /infrastructure/resource_catalog/
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
