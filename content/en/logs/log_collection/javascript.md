@@ -379,8 +379,6 @@ Options that must have a matching configuration when using the `RUM` SDK:
 
 ## Usage
 
-## Usage
-
 ### Custom logs
 
 After the Datadog browser logs SDK is initialized, send a custom log entry directly to Datadog with the API:
