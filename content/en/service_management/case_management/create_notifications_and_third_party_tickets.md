@@ -64,9 +64,10 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 1. For case status and priority, select which values they map to on the Jira side.
 1. Save changes.
 
-Ongoing two-way syncing requires [webhook support](https://docs.datadoghq.com/integrations/jira/#configure-a-jira-webhook).
-
-**Note**: A case can only be synced with one external resource at a time, per project. To enable Jira syncing, ServiceNow automatic creation and syncing must be disabled. At this time only cases using the core statuses of "Open", "In Progress" and "Closed" will properly sync with Jira.
+**Notes**: 
+- A case can only be synced with one external resource at a time, per project. To enable Jira syncing, ServiceNow automatic creation and syncing must be disabled. 
+- Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with Jira.
+- Two-way syncing requires [webhook support][3].
 
 ### ServiceNow
 
@@ -84,7 +85,7 @@ Ongoing two-way syncing requires [webhook support](https://docs.datadoghq.com/in
 1. Select ServiceNow state values that Case Management status values should map to.
 1. Save changes.
 
-**Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. At this time only cases using the core statuses of "Open", "In Progress" and "Closed" will properly sync with ServiceNow.
+**Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with ServiceNow.
 
 ## Further Reading
 
