@@ -241,7 +241,7 @@ If you are not using Helm, you can enable Cloud Network Monitoring with Kubernet
 
 If you already have the [Agent running with a manifest][4]:
 
-1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
+1. For Kubernetes versions below `1.30`, add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
     ```yaml
     spec:
@@ -255,6 +255,26 @@ If you already have the [Agent running with a manifest][4]:
                 name: datadog-agent
                 annotations:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
+    ```
+    For Kubernetes versions `1.30+`, add the following `securityContext` on the `datadog-agent` template:
+
+    ```yaml
+    spec:
+        selector:
+            matchLabels:
+                app: datadog-agent
+        template:
+            metadata:
+                labels:
+                    app: datadog-agent
+                name: datadog-agent
+            spec:
+                serviceAccountName: datadog-agent
+                securityContext:
+                  appArmorProfile:
+                    type: Unconfined
+                containers:
+                # (...)
     ```
 
 2. Enable process collection and the system probe with the following environment variables in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variables to the Process Agent container; otherwise, add them to the Agent container.
@@ -271,6 +291,8 @@ If you already have the [Agent running with a manifest][4]:
                             value: 'true'
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/sysprobe/sysprobe.sock
+                          - name: DD_AUTH_TOKEN_FILE_PATH
+                            value: /etc/datadog-agent/auth/token
     ```
 
 3. Mount the following extra volumes into the `datadog-agent` container:
@@ -294,6 +316,9 @@ If you already have the [Agent running with a manifest][4]:
                         mountPath: /sys/kernel/debug
                       - name: sysprobe-socket-dir
                         mountPath: /var/run/sysprobe
+                      - name: auth-token
+                        mountPath: /etc/datadog-agent/auth
+                        readOnly: false # needs RW to write auth token
     ```
 
 4. Add a new system-probe as a side car to the Agent:
@@ -323,15 +348,19 @@ If you already have the [Agent running with a manifest][4]:
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
+                          - name: DD_SYSTEM_PROBE_ENABLED
+                            value: 'true'
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/sysprobe/sysprobe.sock
+                          - name: DD_AUTH_TOKEN_FILE_PATH
+                            value: /etc/datadog-agent/auth/token
                       resources:
                           requests:
                               memory: 150Mi
                               cpu: 200m
                           limits:
-                              memory: 150Mi
-                              cpu: 200m
+                              memory: 300Mi
+                              cpu: 400m
                       volumeMounts:
                           - name: procdir
                             mountPath: /host/proc
@@ -343,19 +372,23 @@ If you already have the [Agent running with a manifest][4]:
                             mountPath: /sys/kernel/debug
                           - name: sysprobe-socket-dir
                             mountPath: /var/run/sysprobe
+                          - name: auth-token
+                            mountPath: /etc/datadog-agent/auth
+                            readOnly: true
     ```
 
 5. Finally, add the following volumes to your manifest:
 
     ```yaml
                 volumes:
-                    - name: sysprobe-socket-dir
-                      emptyDir: {}
                     - name: debugfs
                       hostPath:
                           path: /sys/kernel/debug
+                    - name: sysprobe-socket-dir
+                      emptyDir: { }
+                    - name: auth-token
+                      emptyDir: { }
     ```
-
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: /resources/yaml/datadog-agent-npm.yaml
