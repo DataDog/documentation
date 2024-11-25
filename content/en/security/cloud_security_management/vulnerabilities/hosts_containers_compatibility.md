@@ -39,7 +39,7 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for th
 | PHP      | composer                  | composer.lock                                                        | {{< X >}}         |                   |
 | Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package | {{< X >}}         |                   |
 
-**Note**: For agent-based vulnerability management in application libraries, see [Software Composition Analysis][1]
+**Note**: For Agent-based vulnerability management in application libraries, see [Software Composition Analysis][1].
 
 
 [1]: /security/application_security/software_composition_analysis/
