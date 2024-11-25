@@ -124,8 +124,8 @@ Service Catalog 쓰기 권한을 통해 사용자는 서비스 카탈로그 데�
 *  Web
 
 일부 통합 별칭을 유형에 매핑합니다. 예를 들어 Postgres, MySQL 및 Cassandra는 "DB" 유형에 매핑됩니다. Redis 및 Memcache 통합 는 "Cache" 유형에 매핑됩니다.
-{< /site-region >}}
-{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< /site-region >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 ## 구성 요소별로 서비스 카탈로그 항목 필터링
 
 Service Catalog에 표시되는 모든 항목은 구성 요소 유형으로 분류됩니다.
