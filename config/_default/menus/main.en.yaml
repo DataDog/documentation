@@ -4282,11 +4282,16 @@ menu:
       parent: tests
       identifier: tests_repositories
       weight: 4
+    - name: Branches
+      url: /tests/branches
+      parent: tests
+      identifier: tests_branches
+      weight: 5
     - name: Explorer
       url: tests/explorer/
       parent: tests
       identifier: tests_explorer
-      weight: 5
+      weight: 6
     - name: Search Syntax
       url: tests/explorer/search_syntax
       parent: tests_explorer

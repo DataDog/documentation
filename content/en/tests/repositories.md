@@ -41,7 +41,7 @@ Select a repository to gain granular insights into its test performance. The pag
 - **Latest Commit**: Test status and performance for the latest commit.
 - **Commits**: A list of recent commits and their test statistics.
 - **Test Services**: A summary of any test services you've added to the repo.
-- **Flaky Tests**: Insights into [flaky tests][7] in the repo.
+- **Flaky Tests**: Insights into [flaky tests][2] in the repo.
 - **Test Regressions**: Insights into {{< tooltip glossary="test regression" >}}s.
 - **Test Performance**: See which tests have become slower over time.
 - **Common Error Types**: See the most common error types in the repo.
@@ -49,48 +49,29 @@ Select a repository to gain granular insights into its test performance. The pag
 
 ## Repository settings
 
-<!-- WIP marker -->
+The [Test Optimization settings][3] page gives you an overview of the features enabled on each of your repos together with any overrides you've applied. Select a repo to configure the following repository capabilities:
+- **[GitHub Comments][4]**: Show summaries of your test results directly in pull requests.
+- **[Auto Test Retries][5]**: Retry failing tests to avoid failing your build due to flaky tests.
+- **[Early Flake Detection][6]**: Identify flaky tests early in the development cycle.
+- **[Test Impact Analysis][7]**: Automatically select and run only the relevant tests for a given commit based on the code being changed.
 
-## Search for tests
+### Overrides for test services
 
-To see your tests, navigate to [**CI** > **Tests**][1] and select between the [**Branches**](#branches-view) or [**Default Branches** view](#default-branches-view).
+If you have a suite of test services that require their own configuration, you can override your default repository settings.
 
-### Branches view
+To create an override:
+1. From the [Test Optimization settings][3] page, select a repo with a test service.
+1. Click **Edit Custom Settings**.
+1. Select the test service you want to apply an override to and expand it to view the available settings.
+1. Toggle the desired settings.
 
-The [Branches][2] view of the Tests page lists all branches from all [test services][3] that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
+You can view the number of overrides in effect on each repo from the [settings][3] page.
 
-In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you), enable the **My branches** toggle and add the email addresses you use in your Git configuration.
-
-#### Test results
-
-For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, total test time, when the commit was last updated, and the avatar of the author of the commit.
-
-Click on a branch to explore the test details page, which includes information about the branch's latest commits, flaky tests, test performance, common error types, and all test runs.
-
-{{< img src="continuous_integration/test_details.png" alt="Test Details page for a single branch" style="width:100%;">}}
-
-#### Test regressions
-
-[Test regressions][5] are evaluated per commit in an effort to tie performance regressions to specific code changes.
-
-#### Investigate for more details
-
-Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
-
-Click into one of the test runs to see the test trace as a flame graph or a span list. The _Runs (n)_ list on the left lets you quickly access traces for each retry of the test for the same commit.
-
-#### Explore connections to services, resources, logs, and network events
-
-Click the CI provider link to examine the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-repositories
-[2]: https://app.datadoghq.com/ci/test-repositories?view=branches
-[3]: /glossary/#test-service
-[4]: /glossary/#flaky-test
-[5]: /glossary/#test-regression
-[6]: https://app.datadoghq.com/ci/test-repositories?view=default-branches
-[7]: /tests/flaky_test_management
+[2]: /tests/flaky_test_management
+[3]: https://app.datadoghq.com/ci/settings/test-optimization
+[4]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
+[5]: /tests/flaky_test_management/auto_test_retries/
+[6]: /tests/flaky_test_management/early_flake_detection/
+[7]: /tests/test_impact_analysis/
