@@ -87,6 +87,14 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% /tab %}}
 
+{{% tab "Python" %}}
+
+<div class="alert alert-info">Early Flake Detection is available using the beta of the new pytest plugin. Set the <b>DD_PYTEST_USE_NEW_PLUGIN_BETA</b> environment variable to <b>true</b> to enable it.</div>
+
+`dd-trace-py>=2.18.0` (`pytest>=7.2.0`)
+
+{{% /tab %}}
+
 {{% tab "Ruby" %}}
 
 `datadog-ci-rb>=1.5.0`
