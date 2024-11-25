@@ -114,7 +114,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 22. If there is a [Datadog is not authorized to perform sts:AssumeRole][6] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][6].
 23. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
-*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][62] section on our website.*
+*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][10] section on our website.*
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -126,6 +126,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [8]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
 [9]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
+[10]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
