@@ -3,7 +3,7 @@ aliases:
 - /ja/logs/log_collection/nxlog
 categories:
 - ログの収集
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md
 description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
