@@ -157,7 +157,7 @@ Datadog는 **{{< region-param key="aws_region" >}}**에 AWS PrivateLink 엔드�
 
 ### Amazon Route53
 
-1. AWS PrivateLink 엔드포인트를 생성한 각 서비스 에 대해 [Route53 비공개 호스트 영역][3]을 생성합니다. < region-param key="aws_region" code="true" > }}의 VPC에 프라이빗 호스트 영역을 연결합니다.
+1. AWS PrivateLink 엔드포인트를 생성한 각 서비스 에 대해 [Route53 비공개 호스트 영역][3]을 생성합니다. {{< region-param key="aws_region" code="true" >}}의 VPC에 프라이빗 호스트 영역을 연결합니다.
 
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Route53 사설 호스트 영역 생성" style="width:80%;" >}}
 
@@ -165,16 +165,16 @@ Datadog는 **{{< region-param key="aws_region" >}}**에 AWS PrivateLink 엔드�
 
   | Datadog | PrivateLink 서비스 이름 | 비공개 DNS 이름 |
   |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-  | 로그(에이전트 HTTP 인테이크) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | <code>http-intake.logs.</code> <code>.로그.{{< region-param key="dd_site" ></code> }} |
-  | 로그(사용자 HTTP 인테이크) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | <code>로그.{{< region-param key="dd_site" ></code> }}       |
-  | API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>API.{{< region-param key="dd_site" ></code> }}                    |
-  | 메트릭 | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.< region-param key="dd_site" ></code> }}          |
-  | 컨테이너 |< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" ></code> }}           |
-  | 프로세스 | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" ></code> }}                |
-  | 프로파일링 |< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" ></code> }}         |
-  | 트레이스 | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.< region-param key="dd_site" ></code> }}            |
-  | 데이터베이스 모니터링 | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake</code><code>.{{< region-param key="dd_site" ></code> }}     |
-  | 원격 설정 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.< region-param key="dd_site" ></code> }}                 |
+  | 로그(에이전트 HTTP 인테이크) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | <code>http-intake.logs.</code> <code>.로그.{{< region-param key="dd_site" >}}</code>  |
+  | 로그(사용자 HTTP 인테이크) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | <code>로그.{{< region-param key="dd_site" >}}</code>        |
+  | API | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>API.{{< region-param key="dd_site" >}}</code>                     |
+  | 메트릭 | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.< region-param key="dd_site" >}}</code>           |
+  | 컨테이너 |< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>            |
+  | 프로세스 | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" >}}</code>                 |
+  | 프로파일링 |< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>          |
+  | 트레이스 | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.< region-param key="dd_site" >}}</code>             |
+  | 데이터베이스 모니터링 | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake</code><code>.{{< region-param key="dd_site" >}}</code>      |
+  | 원격 설정 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.< region-param key="dd_site" >}}</code>                  |
 
   AWS API , `DescribeVpcEndpointServices`, 또는 다음 명령을 사용하여 이 정보를 찾을 수도 있습니다. 
 
