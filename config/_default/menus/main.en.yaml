@@ -6697,26 +6697,31 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: User Retention
-      url: product_analytics/user_retention
-      parent: product_analytics
-      identifier: pa_user_retention
-      weight: 1
     - name: Journeys
       url: product_analytics/journeys
       parent: product_analytics
       identifier: pa_journeys
-      weight: 2
+      weight: 1
+    - name: Pathways
+      url: product_analytics/journeys/pathways
+      parent: pa_journeys
+      identifier: pa_pathways
+      weight: 101
     - name: Funnel Analysis
       url: product_analytics/journeys/funnel_analysis
       parent: pa_journeys
       identifier: pa_funnel_analysis
-      weight: 201
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
+      weight: 102
+    - name: Conversions
+      url: product_analytics/journeys/conversions
       parent: pa_journeys
-      identifier: pa_sankey
-      weight: 202
+      identifier: pa_conversions
+      weight: 103
+    - name: User Retention
+      url: product_analytics/user_retention
+      parent: product_analytics
+      identifier: pa_user_retention
+      weight: 2
     - name: Heatmaps
       url: product_analytics/heatmaps
       parent: product_analytics
