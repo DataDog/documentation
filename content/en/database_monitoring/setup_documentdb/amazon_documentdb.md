@@ -131,10 +131,6 @@ Refer to the [integration documentation][2] for a comprehensive list of metrics 
 
 {{% dbm-amazon-documentdb-agent-data-collected %}}
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /account_management/api-app-keys/
 [2]: /integrations/mongo/?tab=replicaset#metrics
 [3]: /integrations/amazon_documentdb/
