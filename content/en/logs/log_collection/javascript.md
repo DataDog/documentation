@@ -375,6 +375,9 @@ Options that must have a matching configuration when using the `RUM` SDK:
 | `useSecureSessionCookie`               | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                |
 | `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
 | `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
+| `usePciIntake`                         | Boolean | No       | `false` | Set to true to forward logs to the PCI-compliant intake. Note: PCI-compliant intake is only available for Datadog organizations in the us1 site. If `usePciIntake` is set to true and site is not datadoghq.com, logs will be sent to the default intake. |
+
+## Usage
 
 ## Usage
 
