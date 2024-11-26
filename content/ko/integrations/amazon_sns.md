@@ -7,7 +7,7 @@ categories:
 - aws
 - log collection
 - event management
-custom_kind: 통합
+custom_kind: integration
 dependencies: []
 description: Amazon SNS 메시지를 Datadog에 전송하거나 Datadog 알림을 SNS에 전송하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_sns/

@@ -3,7 +3,7 @@ categories:
 - collaboration
 - developer tools
 - issue tracking
-custom_kind: 통합
+custom_kind: integration
 dependencies: []
 description: Datadog 이벤트 스트림에서 Redmine 업데이트를 확인, 검색, 논의하세요.
 doc_link: https://docs.datadoghq.com/integrations/redmine/
