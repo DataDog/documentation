@@ -21,9 +21,6 @@ further_reading:
 - link: https://github.com/DataDog/orchestrion
   tag: "Source Code"
   text: "Orchestrion source code"
-- link: https://datadoghq.dev/orchestrion
-  tag: "External Site"
-  text: "Orchestrion documentation"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
