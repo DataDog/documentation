@@ -39,7 +39,7 @@ CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.y
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files)
+clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
 	rm -rf ./node_modules ./hugpython ./public
 
 clean-dependent-repos:
@@ -67,7 +67,8 @@ server:
 	fi;
 
 # Download all dependencies and run the site
-start: dependencies ## Build and run docs including external content.
+start: setup-build-scripts ## Build and run docs including external content.
+	@make dependencies 
 	@make update_websites_sources_module
 	@make server
 
@@ -202,7 +203,7 @@ clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsub
 # Local build setup
 SCRIPTS_PATH := local/bin/py/build
 
-.PHONY: setup-build clean-build backup-config restore-config
+.PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
 
 # Save specific config files
 backup-config:
@@ -230,11 +231,13 @@ restore-config:
 $(SCRIPTS_PATH):
 	@mkdir -p $(SCRIPTS_PATH)
 
-clean-build:
+# Clean build scripts
+clean-build-scripts:
 	@echo "Cleaning build directory..."
 	@find $(SCRIPTS_PATH) -mindepth 1 -not -name 'integration_merge.yaml' -not -name 'pull_config_preview.yaml' -not -name 'pull_config.yaml' -delete
 
-setup-build: clean-build $(SCRIPTS_PATH) backup-config
+# Source the build scripts and maintain file structure
+setup-build-scripts: clean-build-scripts $(SCRIPTS_PATH) backup-config
 	@echo "Fetching latest build scripts..."
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BRANCH) $(REPO_URL) $$tmp_dir && \
