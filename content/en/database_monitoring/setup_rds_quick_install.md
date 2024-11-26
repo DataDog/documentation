@@ -13,8 +13,10 @@ Database Monitoring Quick Install for RDS enables you to quickly set up Agents t
 
 ## Prerequisites
 
-- The RDS instance's admin access username/password must be stored in an AWS Secret.
 - A security group must be configured on the instance to allow incoming connections from the instance's VPC and outgoing connections to the internet.
+- The RDS instance's admin access username and password must be stored in an AWS Secret within AWS Secrets Manager. Ensure that you note the Amazon Resource Name (ARN) of this secret, since Datadog uses it to access the credentials during setup and operation.
+
+<div class="alert alert-info">Datadog does not store the admin credentials. They are only used temporarily to connect the Agent, and no data is retained after the process is completed.</div>
 
 ## Installation
 
