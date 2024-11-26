@@ -420,6 +420,12 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 {{% /tab %}}
 {{< /tabs >}}
 
+## Traces
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+
+For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
+
 ## Quick actions
 
 {{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
@@ -495,3 +501,4 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [20]: /help/
 [21]: https://chat.datadoghq.com/
 [22]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[23]: /tracing/trace_explorer/query_syntax/
