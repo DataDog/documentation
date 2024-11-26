@@ -380,7 +380,7 @@ module "lambda-datadog" {
 <div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If using the Datadog Lambda Layer (recommended), do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
 ## Minimize cold start duration
-Version 66+ of [the Datadog Extension][7] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+Version 67+ of [the Datadog Extension][7] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
 
 To leave feedback or report a bug, add an [issue on GitHub][8] and tag your issue with `version/next`.
 
