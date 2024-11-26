@@ -169,6 +169,7 @@ You can trigger a workflow from GitHub using the following steps.
 1. In GitHub, choose which events you would like to trigger your webhook, then click **Add webhook**.
 1. _Optionally_, in your workflow, click the **plus** (+) to add a **Rate Limit**.
 1. Click **Save** on your workflow.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## API triggers
 
