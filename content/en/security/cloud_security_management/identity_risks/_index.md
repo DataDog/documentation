@@ -51,6 +51,18 @@ To remediate the identity risk, click **Fix in AWS** to update the resource in A
 
 You can also use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
 
+## Gain visibility into who can access at-risk resources
+
+To see all the principals that can directly or indirectly access a given misconfigured resource, click the **Access Insights** tab in Misconfigurations, Identity Risks, and the Security Inbox. In this example, it shows all the principals that can access this EC2 instance:
+
+{{< img src="security/csm/access_insights.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
+
+You can see the risks associated with each principal in the **Risks** column, as well as the type of **Path** the principal can take (direct or indirect) to access the resource.
+
+You can search for a subset of principals by name, type, public accessibility, or administrative access. Additionally, you can filter for direct or indirect access.
+
+Click the **Actions** dropdown beside a principal to see it in Resource Catalog, or update its configuration in AWS IAM console.
+
 ## AWS IAM Access Analyzer integration
 
 Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve the permissions gap detections. If you are using AWS IAM Access Analyzer, Datadog CIEM automatically leverages its unused access findings to enrich permissions gap detections and downsized policy recommendations.

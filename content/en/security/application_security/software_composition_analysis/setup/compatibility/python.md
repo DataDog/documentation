@@ -14,7 +14,7 @@ The following application security capabilities are supported in the Python libr
 | Threat Protection | 1.10.0  |
 | Customize response to blocked requests | 1.19.0 |
 | Software Composition Analysis (SCA) | 1.5.0  |
-| Code Security         |  private beta  |
+| Code Security         |  Preview  |
 | Automatic user activity event tracking | 1.17.0 |
 | API Security | 2.6.0 |
 

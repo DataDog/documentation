@@ -107,7 +107,7 @@ The Service Catalog write permission allows a user to modify service catalog dat
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
-{{< site-region region="us,eu,gov" >}}
+{{< site-region region="gov" >}}
 ## Services types
 
 Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
@@ -124,7 +124,7 @@ The type of the service can be one of:
 
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 {{< /site-region >}}
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 ## Filtering service catalog entries by component
 
 Every entry showing up in the Service Catalog is categorized as a component type:

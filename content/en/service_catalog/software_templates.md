@@ -17,7 +17,7 @@ further_reading:
 Use [Workflow Automation][1] and [App Builder][2] to automate end-to-end processes. Integrate them with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
-  Software Templates are in private beta. Complete the form to request access.
+  Software Templates are in Preview. Complete the form to request access.
 {{< /callout >}} 
 
 ### Create software template workflows using Cookiecutter

@@ -33,7 +33,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: gunicorn
 integration_id: gunicorn
 integration_title: Gunicorn
-integration_version: 2.7.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: gunicorn
@@ -97,7 +97,7 @@ Gunicorn チェックでは、Gunicorn アプリの Python 環境に [`setprocti
 Gunicorn の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `gunicorn.d/conf.yaml` ファイルを編集します。
 使用可能なすべての構成オプションの詳細については、[サンプル gunicorn.yaml][5] を参照してください。
 
-#### Metric collection
+#### メトリクスの収集
 
 ##### Gunicorn の DogStatsD への接続
 
