@@ -68,7 +68,7 @@ Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true"
 | `*`      | A                    | IP address for your metrics endpoint |
 | `trace`  | A                    | IP address for your traces endpoint |
 
-**Note**: this zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
+**Note**: This zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 
 ## Published services
