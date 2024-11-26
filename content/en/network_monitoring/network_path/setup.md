@@ -165,7 +165,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
         ## Number of workers that can collect paths in parallel
         ## Recommendation: leave at default
         #
-        # workers: <NUMER OF WORKERS> # default 4
+        # workers: <NUMBER OF WORKERS> # default 4
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
