@@ -61,19 +61,15 @@ Define the configuration of your mobile app test.
 
 When configuring a new Mobile Application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
 
-* **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
+* **Device Size**: Automatically perform your browser tests on a specifically sized screen across browsers:
 
-* **Device Size**:
+  - **Multi-screen size**
+  - **Tablet**
+  - **Large Screen (iOS only)**
+  - **Standard Screen (iOS only)**
+  - **Small Screen (iOS only)**
 
-  - **Multi-screen size**: Automatically test your iOS or Android apps across multiple form factors.
-
-  - **Tablet**: Automatically test your iOS or Android apps on tablets.
-
-  - **Large Screen (iOS only)**: Automatically test your iOS apps on large screen devices.
-
-  - **Standard Screen (iOS only)**: Automatically test your iOS apps on standard screen devices.
-
-  - **Small Screen (iOS only)**: Automatically test your iOS apps on on small screen devices.
+* **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.  
 
 * **Device Manufacturer (Android only)**: Automatically test your Android apps across multiple device manufacturers.
 
