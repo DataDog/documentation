@@ -148,7 +148,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
       connections_monitoring:
         enabled: true
       # collector:
-        # workers: <NUMER OF WORKERS> # default 4
+        # workers: <NUMBER OF WORKERS> # default 4
     ```
 
     For full configuration details, reference the [example config][3], or use the following:
