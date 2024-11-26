@@ -15,6 +15,8 @@ aliases:
     - /serverless/installation/java
 ---
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), Java 17 (`java17`), or Java 21 (`java21`) runtimes with at least 1024 MB of memory.
 
 If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either [using AWS PrivateLink][6] for the `datadoghq.com` [Datadog site][7], or [using a proxy][8] for all other sites.
@@ -366,9 +368,9 @@ module "lambda-datadog" {
 {{< /tabs >}}
 
 ## Minimize cold start duration
-Version 67+ of [the Datadog Extension][12] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+Version 67+ of [the Datadog Extension][12] is optimized to reduce instrumentation overhead by up to 70%. 
 
-To leave feedback or report a bug, add an [issue on GitHub][13] and tag your issue with `version/next`.
+If you are noticing any issues, you can force your extension to use the fully compatible, older version of the extension by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog also encourages you to report any feedback or bugs by adding an [issue on GitHub][13] and tag your issue with `version/next`.
 
 ## What's next?
 

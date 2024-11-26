@@ -19,6 +19,8 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 ## Installation
 
 {{< tabs >}}
@@ -158,9 +160,9 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 ```
 
 ## Minimize cold start duration
-Version 67+ of [the Datadog Extension][5] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+Version 67+ of [the Datadog Extension][5] is optimized to reduce instrumentation overhead by up to 70%. 
 
-To leave feedback or report a bug, add an [issue on GitHub][6] and tag your issue with `version/next`.
+If you are noticing any issues, you can force your extension to use the fully compatible, older version of the extension by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog also encourages you to report any feedback or bugs by adding an [issue on GitHub][6] and tag your issue with `version/next`.
 
 ## What's next?
 

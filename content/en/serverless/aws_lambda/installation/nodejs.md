@@ -25,6 +25,8 @@ aliases:
 
 <div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_bundlers/">mark the Datadog libraries as external</a>.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 ## Installation
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
@@ -380,9 +382,9 @@ module "lambda-datadog" {
 <div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If using the Datadog Lambda Layer (recommended), do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
 ## Minimize cold start duration
-Version 67+ of [the Datadog Extension][7] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+Version 67+ of [the Datadog Extension][7] is optimized to reduce instrumentation overhead by up to 70%. 
 
-To leave feedback or report a bug, add an [issue on GitHub][8] and tag your issue with `version/next`.
+If you are noticing any issues, you can force your extension to use the fully compatible, older version of the extension by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog also encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tag your issue with `version/next`.
 
 ## What's next?
 
