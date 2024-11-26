@@ -1,6 +1,6 @@
 ---
-title: Repositories
-description: Gain insight into test performance in your repositories.
+title: Branches
+description: Gain insight into test performance in your repository branches.
 aliases:
 - /tests/search/
 algolia:
@@ -13,13 +13,16 @@ further_reading:
 - link: "/continuous_integration/guides/flaky_test_management"
   tag: "Documentation"
   text: "Learn how to manage flaky tests"
+- link: "/tests/repositories"
+  tag: "Documentation"
+  text: "Gain insight into test performance in your repositories"
 ---
 
 ## Overview
 
-The [Branches][2] view of the Tests page lists all branches from all [test services][3] that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
+The [Branches][1] view of the Tests page lists all branches from all {{< tooltip glossary="test service" >}}s that have reported test results. This tab is useful for seeing the status of tests run on your code branches and troubleshooting test failures.
 
-In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you), enable the **My branches** toggle and add the email addresses you use in your Git configuration.
+To filter the list down to only branches that you have committed to, toggle **My Branches** and enter the email address associated with your GitHub account. You can enter multiple email addresses. Edit your address later by clicking **Edit Authors**.
 
 ## Test results
 
@@ -31,13 +34,13 @@ Click on a branch to explore the test details page, which includes information a
 
 ## Test regressions
 
-[Test regressions][5] are evaluated per commit in an effort to tie performance regressions to specific code changes.
+All {{< tooltip glossary="test regression" >}}s are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 ## Investigate for more details
 
 Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
 
-Click into one of the test runs to see the test trace as a flame graph or a span list. The _Runs (n)_ list on the left lets you quickly access traces for each retry of the test for the same commit.
+Click into one of the test runs to see the test trace as a flame graph or a span list. The _Runs (n)_ list on the left lets you access traces for each retry of the test for the same commit.
 
 ## Explore connections to services, resources, logs, and network events
 
@@ -47,11 +50,4 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: https://app.datadoghq.com/ci/test-repositories
-[2]: https://app.datadoghq.com/ci/test-repositories?view=branches
-[3]: /glossary/#test-service
-[4]: /glossary/#flaky-test
-[5]: /glossary/#test-regression
-[6]: https://app.datadoghq.com/ci/test-repositories?view=default-branches
-[7]: /tests/flaky_test_management
+[1]: https://app.datadoghq.com/ci/test-repositories?view=branches

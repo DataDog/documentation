@@ -13,6 +13,9 @@ further_reading:
 - link: "/continuous_integration/guides/flaky_test_management"
   tag: "Documentation"
   text: "Learn how to manage flaky tests"
+- link: "/tests/branches"
+  tag: "Documentation"
+  text: "Gain insight into test performance in your repository branches"
 ---
 
 {{< site-region region="gov" >}}
@@ -24,20 +27,22 @@ further_reading:
 The [Repositories page][1] displays aggregated health metrics for the default branch of each repository. This view is useful for gaining a high-level overview of test performance across your organization's repositories.
 
 Use the Repositories page to:
-- See the total number of flaky tests in each repo
+- See the total number of flaky tests in each repo.
 - Track whether tests are becoming more or less unreliable over time.
 - See the test status for the most recent commit in each repository.
-- See how many test services are associated with each repo.
+- See how many {{< tooltip glossary="test service" >}}s are associated with each repo.
 
 <!-- vale Datadog.pronouns = NO -->
 
-To filter the list down to only repositories that you have committed to, toggle **My Repositories** and enter the email address associated with your GitHub account. You can enter multiple email addresses. You can edit this address later by clicking **Edit Authors**.
+To filter the list down to only repositories that you have committed to, toggle **My Repositories** and enter the email address associated with your GitHub account. You can enter multiple email addresses. Edit your address later by clicking **Edit Authors**.
 
 <!-- vale Datadog.pronouns = YES -->
 
-### Investigate a repository
+## Investigate a repository
 
-Select a repository to gain granular insights into its test performance. The page for a specific repository gives you access to:
+Select a repository to gain granular insights into its test performance. Use the **Branch**, **Test Service**, and **Env** drop-downs to filter for the desired data. Selecting the **\*** filter gives you an aggregated view across that category.
+
+The page for a specific repository gives you access to:
 - **Latest Commit**: Test status and performance for the latest commit.
 - **Commits**: A list of recent commits and their test statistics.
 - **Test Services**: A summary of any test services you've added to the repo.
@@ -67,8 +72,11 @@ To create an override:
 
 You can view the number of overrides in effect on each repo from the [settings][3] page.
 
+## Further reading
 
-[1]: https://app.datadoghq.com/ci/test-repositories
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/ci/test-repositories?view=repositories
 [2]: /tests/flaky_test_management
 [3]: https://app.datadoghq.com/ci/settings/test-optimization
 [4]: /tests/developer_workflows/#test-summaries-in-github-pull-requests

@@ -1,6 +1,7 @@
 ---
 # Glossary Term
 title: test service
+short_definition: "A test service is a group of tests associated with a project or repo. It contains all the individual tests for your code, optionally organized into test suites, which are like folders for your tests."
 core_product:
   - ci-cd
   - synthetic monitoring
