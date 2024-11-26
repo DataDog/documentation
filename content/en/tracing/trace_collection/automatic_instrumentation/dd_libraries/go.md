@@ -128,6 +128,10 @@ Applications instrumented by `orchestrion` support Unified Service Tagging (UST)
 
 For more information, refer to the [Unified Service Tagging documentation][14].
 
+#### Tracer Configuration
+
+Refer to [Library Configuration][16] documentation for all configuration instructions.
+
 #### Create custom trace spans
 
 Custom trace spans can be automatically created for any function annotated with the `//dd:span` directive comment:
@@ -239,6 +243,8 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [13]: /tracing/troubleshooting/go_compile_time/
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: /security/application_security/threats/exploit-prevention/
+[16]: /tracing/trace_collection/library_config/go/#traces
+
 
 {{% /tab %}}
 
