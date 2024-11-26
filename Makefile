@@ -201,21 +201,21 @@ clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsub
 	@rm -rf examples
 
 # Local build setup
-SCRIPTS_PATH := local/bin/py/build
+BUILD_SCRIPTS_PATH := local/bin/py/build
 
 .PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
 
 # Save specific config files
 backup-config:
 	@tmp_backup=$$(mktemp -d)/config_backup && \
-	if [ -f "$(SCRIPTS_PATH)/integration_merge.yaml" ]; then \
-		cp "$(SCRIPTS_PATH)/integration_merge.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	if [ -f "$(BUILD_SCRIPTS_PATH)/integration_merge.yaml" ]; then \
+		cp "$(BUILD_SCRIPTS_PATH)/integration_merge.yaml" $$tmp_backup/ 2>/dev/null || true; \
 	fi; \
-	if [ -f "$(SCRIPTS_PATH)/pull_config_preview.yaml" ]; then \
-		cp "$(SCRIPTS_PATH)/pull_config_preview.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	if [ -f "$(BUILD_SCRIPTS_PATH)/pull_config_preview.yaml" ]; then \
+		cp "$(BUILD_SCRIPTS_PATH)/pull_config_preview.yaml" $$tmp_backup/ 2>/dev/null || true; \
 	fi; \
-	if [ -f "$(SCRIPTS_PATH)/pull_config.yaml" ]; then \
-		cp "$(SCRIPTS_PATH)/pull_config.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	if [ -f "$(BUILD_SCRIPTS_PATH)/pull_config.yaml" ]; then \
+		cp "$(BUILD_SCRIPTS_PATH)/pull_config.yaml" $$tmp_backup/ 2>/dev/null || true; \
 	fi; \
 	echo "$$tmp_backup" > .config_backup_path
 
@@ -223,28 +223,28 @@ backup-config:
 restore-config:
 	@if [ -f .config_backup_path ]; then \
 		backup_dir=$$(cat .config_backup_path); \
-		cp $$backup_dir/* $(SCRIPTS_PATH)/ 2>/dev/null || true; \
+		cp $$backup_dir/* $(BUILD_SCRIPTS_PATH)/ 2>/dev/null || true; \
 		rm .config_backup_path; \
 		rm -rf $$(dirname $$backup_dir); \
 	fi
 
-$(SCRIPTS_PATH):
-	@mkdir -p $(SCRIPTS_PATH)
+$(BUILD_SCRIPTS_PATH):
+	@mkdir -p $(BUILD_SCRIPTS_PATH)
 
 # Clean build scripts
 clean-build-scripts:
 	@echo "Cleaning build directory..."
-	@find $(SCRIPTS_PATH) -mindepth 1 -not -name 'integration_merge.yaml' -not -name 'pull_config_preview.yaml' -not -name 'pull_config.yaml' -delete
+	@find $(BUILD_SCRIPTS_PATH) -mindepth 1 -not -name 'integration_merge.yaml' -not -name 'pull_config_preview.yaml' -not -name 'pull_config.yaml' -delete
 
 # Source the build scripts and maintain file structure
-setup-build-scripts: clean-build-scripts $(SCRIPTS_PATH) backup-config
+setup-build-scripts: clean-build-scripts $(BUILD_SCRIPTS_PATH) backup-config
 	@echo "Fetching latest build scripts..."
 	@tmp_dir=$$(mktemp -d) && \
-	git clone --depth 1 -b $(BRANCH) $(REPO_URL) $$tmp_dir && \
-	if [ -d "$$tmp_dir/$(SOURCE_DIR)" ]; then \
+	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
+	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo "Moving files to build directory..." && \
-		cp -r $$tmp_dir/$(SOURCE_DIR)/* $(SCRIPTS_PATH)/ && \
-		cd $(SCRIPTS_PATH) && \
+		cp -r $$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)/* $(BUILD_SCRIPTS_PATH)/ && \
+		cd $(BUILD_SCRIPTS_PATH) && \
 		if [ -d "services" ]; then \
 			echo "Cleaning up directory structure..." && \
 			rm -rf services; \
