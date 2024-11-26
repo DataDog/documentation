@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance by continuously scanning container images, hosts, host images and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, making Datadog your single pane of glass.
+Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
 **Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5] and for application code, see [Code Security][10].
 
