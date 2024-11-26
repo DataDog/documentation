@@ -90,8 +90,8 @@ The UI displays up to 50 saved or published versions of your app, along with the
 You can perform the following operations:
 
 * To view an app version, click the version in the list.
-* To restore an app version, select the version, then click **Restore Version** in the upper-right.
-* To clone an app version, select the version, then click **Clone Version** in the upper-right.
+* To overwrite an app with a version, select the version, then click **Restore Version** in the upper-right.
+* To create a new app that is a copy of a version, select the version, then click **Clone Version** in the upper-right.
 
 
 ## Interact with an app in JSON
@@ -100,7 +100,7 @@ You can perform the following operations:
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
-### Copy or back up an app
+### Export an app
 
 To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
