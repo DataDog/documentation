@@ -58,9 +58,9 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 
    Select **OK** to finish.
 ### Additional required steps for metrics and traces
-Two Datadog Intake Services are subdomains of the (`agent.`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private DNS zone is slightly different from other intakes.
+There are two Datadog Intake Services that are subdomains of the `agent.`{{< region-param key="dd_site" code="true" >}} domain. Because of this, the Private DNS zone is slightly different from other intakes.
 
-Create a Private DNS Zone for (`agent.`{{< region-param key="dd_site" code="true" >}}), as outlined in the section above. Then add the three records below.
+Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true" >}}, as outlined in the section above. Then add the three records below.
 
 | DNS name | Resource record type | IPv4 address |
 | -------- |----------------------| ------------ |
@@ -68,7 +68,7 @@ Create a Private DNS Zone for (`agent.`{{< region-param key="dd_site" code="true
 | `*`      | A                    | IP address for your metrics endpoint |
 | `trace`  | A                    | IP address for your traces endpoint |
 
-**Note**: this zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
+**Note**: This zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 
 ## Published services
