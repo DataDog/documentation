@@ -365,6 +365,11 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 66+ of [the Datadog Extension][12] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+
+To leave feedback or report a bug, add an [issue on GitHub][13] and tag your issue with `version/next`.
+
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
@@ -393,3 +398,5 @@ module "lambda-datadog" {
 [9]: /serverless/guide/datadog_forwarder_java
 [10]: /serverless/guide/upgrade_java_instrumentation
 [11]: /security/application_security/serverless/
+[12]: https://github.com/DataDog/datadog-lambda-extension
+[13]: https://github.com/DataDog/datadog-lambda-extension/issues

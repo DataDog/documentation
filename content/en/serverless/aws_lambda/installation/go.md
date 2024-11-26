@@ -157,6 +157,11 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 }
 ```
 
+## Minimize cold start duration
+Version 66+ of [the Datadog Extension][5] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+
+To leave feedback or report a bug, add an [issue on GitHub][6] and tag your issue with `version/next`.
+
 ## What's next?
 
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
@@ -177,4 +182,6 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 [2]: /serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /serverless/configuration/
 [4]: /security/application_security/serverless/
+[5]: https://github.com/DataDog/datadog-lambda-extension
+[6]: https://github.com/DataDog/datadog-lambda-extension/issues
 

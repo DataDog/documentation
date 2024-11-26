@@ -328,6 +328,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 66+ of [the Datadog Extension][10] is optimized to reduce instrumentation overhead by up to 70%. To opt out of the optimized extension...
+
+To leave feedback or report a bug, add an [issue on GitHub][11] and tag your issue with `version/next`.
+
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][4].
@@ -402,3 +407,5 @@ For more information on custom metric submission, see [Serverless Custom Metrics
 [7]: /serverless/custom_metrics?tab=ruby
 [8]: /tracing/custom_instrumentation/ruby/
 [9]: /security/application_security/serverless/
+[10]: https://github.com/DataDog/datadog-lambda-extension
+[11]: https://github.com/DataDog/datadog-lambda-extension/issues
