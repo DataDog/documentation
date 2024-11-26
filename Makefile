@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -74,6 +74,12 @@ start: setup-build-scripts ## Build and run docs including external content.
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make server
+
+# Leave build scripts as is for local testing
+# This is useful for testing changes to the build scripts locally
+start-preserve-build: dependencies 
+	@make update_websites_sources_module
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
