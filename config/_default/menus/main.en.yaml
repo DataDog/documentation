@@ -2585,11 +2585,16 @@ menu:
       parent: app_builder
       identifier: app_builder_components
       weight: 8
+    - name: Custom Charts
+      url: service_management/app_builder/components/custom_charts/
+      parent: app_builder_components
+      identifier: app_builder_custom_charts
+      weight: 801
     - name: Tables
       url: service_management/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 801
+      weight: 802
     - name: Datastore
       url: service_management/app_builder/datastore/
       parent: app_builder
