@@ -53,7 +53,7 @@ Capture observability data from in-house code or complex functions that aren't c
 
 To learn more, see [custom instrumentation][6].
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/ " btn_hidden="false" header="Service discovery is in Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Service discovery is in Preview">}}
 Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
 {{< /callout >}}
 
