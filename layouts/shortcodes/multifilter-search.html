@@ -279,7 +279,7 @@ x-init="initFilterSearchValues()">
     </div>
     {{/*  SEARCH FORM */}}
     <form class="search__multifilter" @submit.prevent="">
-        <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredSet" @input.debounce="pushState()">
+        <input type="search" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredSet" @input.debounce="pushState()">
     </form>
   </nav>
 </div>
