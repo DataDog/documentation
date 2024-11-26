@@ -106,7 +106,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 If you need additional assistance, contact [Datadog support][5].
 
 
-### Third-Party library compatibility note
+### Third-Party Library Compatibility Note
 
 Code Security modifies Python code at runtime, which can cause conflicts with other third-party Python libraries that perform similar code transformations, especially but not limited to:
 
