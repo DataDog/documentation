@@ -117,4 +117,3 @@ The following configuration options behave consistently across the latest versio
 
 
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
-[2]: /tracing/troubleshooting/tracer_debug_logs#manual-debug-log-collection
