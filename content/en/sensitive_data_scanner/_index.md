@@ -336,7 +336,7 @@ This functionality is not available for Sensitive Data Scanner using the Agent.
 
 ## Cloud Storage scanning
 
-{{< callout header="Join the Limited Availability!" url="https://www.datadoghq.com/private-beta/data-security" >}}
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
   Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
