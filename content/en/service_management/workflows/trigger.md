@@ -154,7 +154,7 @@ For additional examples of security workflows you can automate, see [Automate Se
 
 ## GitHub triggers
 
-<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks for a GitHub repo to use this feature.</div>
+<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
 
 You can trigger a workflow from GitHub using the following steps.
 
