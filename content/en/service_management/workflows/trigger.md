@@ -162,7 +162,7 @@ You can trigger a workflow from GitHub using the following steps.
    - If your workflow doesn't have any triggers, click **Add Trigger > GitHub**.
    - If your workflow already has one or more triggers and you're adding GitHub as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **GitHub**.
 1. Navigate to the GitHub repo you want to use to trigger your workflow.
-1. In GitHub, click **Settings**, click **Webhooks**, and then click **New Webhook**.
+1. In GitHub, click **Settings**, click **Webhooks**, and then click **Add webhook**.
 1. In the **Configure** tab of your workflow, copy the **Payload URL**. Paste it into the **Payload URL** field on the GitHub webhook creation page.
 1. In GitHub, set the **Content type** of your webhook to `application/json`.
 1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the **Secret** field of your workflow trigger.
