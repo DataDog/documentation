@@ -90,7 +90,7 @@ The UI displays up to 50 saved or published versions of your app, along with the
 You can perform the following operations:
 
 * To view an app version, click the version in the list.
-* To overwrite an existing app with a previous version, select the version, then click **Restore Version** in the upper-right.
+* To overwrite an existing app with a previous version, select the version, then click **Restore Version** in the upper right.
 * To create a new app that is a copy of a version, select the version, then click **Clone Version** in the upper-right.
 
 
