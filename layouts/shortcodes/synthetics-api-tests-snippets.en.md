@@ -1,7 +1,7 @@
 
 When setting up a new Synthetic Monitoring API test, use snippets to automatically fill in basic auth, performance, and regions, rather than selecting these options manually. The following snippets are available:
 
-* **Basic Auth**: Automatically test your API's using pre-populated basic auth headers, JavaScript, Bearer Token, and API/APP key auth variables.
+* **Basic Auth**: Automatically test your APIs using pre-populated basic auth headers, JavaScript, bearer token, and API/app key auth variables.
 
 * **Performance**: Automatically configure a test with the shortest frequency (one minute), perform a gRPC health check, and test for overall response time latency with a breakdown of network timing.
 

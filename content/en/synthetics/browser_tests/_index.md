@@ -61,9 +61,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
 * **Tablet check**: Automatically perform your browser tests on a tablet sized screen across browsers.
 
-* **Large screen check**: Automatically perform your browser tests on a mobile sized screen across browsers.
+* **Mobile screen check**: Automatically perform your browser tests on a mobile sized screen across browsers.
 
-* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions.  
+* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA).  
 <br/>
   {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
 
