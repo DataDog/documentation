@@ -131,7 +131,7 @@ For more information, refer to the [Unified Service Tagging documentation][14].
 
 #### Tracer configuration
 
-Refer to [Library Configuration][16] documentation for all configuration instructions.
+Refer to [Library Configuration][16] for configuration instructions.
 
 #### Create custom trace spans
 
