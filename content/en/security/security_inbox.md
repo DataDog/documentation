@@ -75,8 +75,6 @@ Key features include:
 
 Vulnerability Pipeline enables you to configure rules that customize your Security Inbox, allowing you to highlight issues that are critical to your organization. By setting up these automated rules, you can streamline the management of newly discovered vulnerabilities, enhancing triage and remediation efforts at scale. Leveraging both the Vulnerability Pipeline and Add to Security Inbox rules, you can optimize your security operations in the following ways:
 
-Enhance the effectiveness of Security Inbox by customizing it to spotlight security issues most relevant to your organization's needs. This allows you to:
-
 - **Resurface issues not captured by default**: Highlight issues that might be missed by default or custom detection rules, ensuring no critical issue is overlooked.
 - **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
 - **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident or industry-wide vulnerabilities.
