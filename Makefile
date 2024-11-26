@@ -199,6 +199,58 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
 
+# Local build setup
+SCRIPTS_PATH := local/bin/py/build
+
+.PHONY: setup-build clean-build backup-config restore-config
+
+# Save specific config files
+backup-config:
+	@tmp_backup=$$(mktemp -d)/config_backup && \
+	if [ -f "$(SCRIPTS_PATH)/integration_merge.yaml" ]; then \
+		cp "$(SCRIPTS_PATH)/integration_merge.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	fi; \
+	if [ -f "$(SCRIPTS_PATH)/pull_config_preview.yaml" ]; then \
+		cp "$(SCRIPTS_PATH)/pull_config_preview.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	fi; \
+	if [ -f "$(SCRIPTS_PATH)/pull_config.yaml" ]; then \
+		cp "$(SCRIPTS_PATH)/pull_config.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	fi; \
+	echo "$$tmp_backup" > .config_backup_path
+
+# Restore specific config files
+restore-config:
+	@if [ -f .config_backup_path ]; then \
+		backup_dir=$$(cat .config_backup_path); \
+		cp $$backup_dir/* $(SCRIPTS_PATH)/ 2>/dev/null || true; \
+		rm .config_backup_path; \
+		rm -rf $$(dirname $$backup_dir); \
+	fi
+
+$(SCRIPTS_PATH):
+	@mkdir -p $(SCRIPTS_PATH)
+
+clean-build:
+	@echo "Cleaning build directory..."
+	@find $(SCRIPTS_PATH) -mindepth 1 -not -name 'integration_merge.yaml' -not -name 'pull_config_preview.yaml' -not -name 'pull_config.yaml' -delete
+
+setup-build: clean-build $(SCRIPTS_PATH) backup-config
+	@echo "Fetching latest build scripts..."
+	@tmp_dir=$$(mktemp -d) && \
+	git clone --depth 1 -b $(BRANCH) $(REPO_URL) $$tmp_dir && \
+	if [ -d "$$tmp_dir/$(SOURCE_DIR)" ]; then \
+		echo "Moving files to build directory..." && \
+		cp -r $$tmp_dir/$(SOURCE_DIR)/* $(SCRIPTS_PATH)/ && \
+		cd $(SCRIPTS_PATH) && \
+		if [ -d "services" ]; then \
+			echo "Cleaning up directory structure..." && \
+			rm -rf services; \
+		fi \
+	fi && \
+	rm -rf $$tmp_dir
+	@$(MAKE) restore-config
+	@echo "Build scripts updated successfully!"
+
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead
 #
