@@ -56,7 +56,7 @@ For each event, access troubleshooting information to help responders quickly un
 | Troubleshooting component     | Description    |
 | ---  | ----------- |
 | Dependency Map | When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies. |
-| Change Tracking | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the Change Tracking [documentation][6].|
+| Change Tracking | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the [Change Tracking][6] documentation. |
 
 
 ## Further reading

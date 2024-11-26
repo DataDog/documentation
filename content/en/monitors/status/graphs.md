@@ -71,7 +71,7 @@ The Change Tracking graph allows you to view and analyze changes related to your
 
 {{< img src="/monitors/status/change_tracking_monitor_status_page.png" alt="Example of a deployment shown in the monitor status page" style="width:100%;" >}}
 
-Change Tracking supports multiple changes like Deployments, Feature Flags or Database Modifications. To see the full list and setup requirements, see the Change Tracking [documentation][2].
+Change Tracking supports multiple changes like deployments, feature flags or database modifications. To see the full list and setup requirements, see the [Change Tracking][2] documentation.
 
 ## Source data graph
 
