@@ -58,7 +58,7 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 
    Select **OK** to finish.
 ### Additional required steps for metrics and traces
-There are two Datadog Intake Services that are subdomains of the (`agent.`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private DNS zone is slightly different from other intakes.
+Two Datadog Intake Services are subdomains of the (`agent.`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private DNS zone is slightly different from other intakes.
 
 Create a Private DNS Zone for (`agent.`{{< region-param key="dd_site" code="true" >}}), as outlined in the section above. Then add the three records below.
 
