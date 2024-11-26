@@ -293,11 +293,13 @@ You can [set a lifecycle configuration on your S3 bucket][1] to automatically tr
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
+* S3 Intelligent-Tiering, only if [the optional asynchronous archive access tiers][3] are both disabled.
 
 If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
+[3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 

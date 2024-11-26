@@ -2097,6 +2097,12 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Change Tracking
+      url: change_tracking/
+      pre: graph-3
+      parent: platform_heading
+      identifier: change_tracking
+      weight: 130000
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -3629,6 +3635,11 @@ menu:
       identifier: tracing_troubleshooting_quantization
       parent: tracing_troubleshooting
       weight: 1310
+    - name: Go Compile-Time Instrumentation
+      url: /tracing/troubleshooting/go_compile_time
+      identifier: tracing_troubleshooting_go_instrumentation
+      parent: tracing_troubleshooting
+      weight: 1311
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
@@ -3992,11 +4003,21 @@ menu:
       identifier: data_streams_schema_tracking
       parent: data_streams
       weight: 1
+    - name: Live Messages
+      url: data_streams/live_messages
+      identifier: data_streams_live_messages
+      parent: data_streams
+      weight: 2
     - name: Troubleshooting
       url: data_streams/troubleshooting
       identifier: data_streams_troubleshooting
       parent: data_streams
-      weight: 2
+      weight: 3
+    - name: Guide
+      url: data_streams/guide
+      identifier: data_streams_guide
+      parent: data_streams
+      weight: 4
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -5701,11 +5722,16 @@ menu:
       parent: csm_setup
       identifier: csm_setup_iac_remediation
       weight: 104
+    - name: Set Up without Infrastructure Monitoring
+      url: security/cloud_security_management/setup/without_infrastructure_monitoring
+      parent: csm_setup
+      identifier: csm_setup_without_infrastructure_monitoring
+      weight: 105
     - name: Deploy via Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
-      weight: 105
+      weight: 106
     - name: Threats
       url: security/threats/
       parent: csm
