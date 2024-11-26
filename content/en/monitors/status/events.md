@@ -20,10 +20,10 @@ For each event, you can access quick actions and view related assets, like dashb
 
 To explore each individual event for more information, including associated tags and actions:
 
-1. From the monitor status page, scroll down to the **Event timeline.**   
-2. Click on an event in the timeline to view event details.  
-   
-Use the event details to understand monitor alerts and identify root causes. This information supports responder workflows and helps you stay informed about ongoing situations. 
+1. From the monitor status page, scroll down to the **Event timeline.**
+2. Click on an event in the timeline to view event details.
+
+Use the event details to understand monitor alerts and identify root causes. This information supports responder workflows and helps you stay informed about ongoing situations.
 
 ### Take action to remediate
 
@@ -53,10 +53,10 @@ Manually resolving a monitor is useful when data is reported intermittently. For
 
 For each event, access troubleshooting information to help responders quickly understand the context of the alert.
 
-| Troubleshooting component     | Description    | 
-| ---  | ----------- | 
+| Troubleshooting component     | Description    |
+| ---  | ----------- |
 | Dependency Map | When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies. |
-| Change Tracking | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the Change Tracking [documentation][6] .|
+| Change Tracking | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the Change Tracking [documentation][6].|
 
 
 ## Further reading
