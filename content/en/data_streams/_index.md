@@ -52,6 +52,8 @@ To get started, follow the installation instructions to configure services with 
 | Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
 | Go | All (with [manual instrumentation][1]) |
 
+To set up Confluent Cloud Connectors, set up the [Confluent Cloud integration][8].
+
 ## Explore Data Streams Monitoring
 
 ### Measure end-to-end pipeline health with new metrics
@@ -106,3 +108,4 @@ Datadog automatically links the infrastructure powering your services and relate
 [5]: /integrations/amazon_sqs/
 [6]: /tracing/trace_collection/runtime_config/
 [7]: https://app.datadoghq.com/data-streams/measure
+[8]: https://app.datadoghq.com/integrations/confluent-cloud
