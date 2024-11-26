@@ -32,66 +32,62 @@ further_reading:
 
 Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5] and for application code, see [Code Security][10].
+With CSM Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 
-**Note 2**: CSM Vulnerabilities is available without any dependencies with other Datadog products.
+- Create a vulnerability management program, from CI/CD pipelines to production resources
+- Pass compliance audits (SOC2, PCI, HIPAA, CIS, FedRamp, etc.)
+- Remediate emerging vulnerabilities (0-day CVEs)
 
-## Use-cases
-
-- Vulnerability Management program, from CI/CD pipelines to production resources
-- Pass compliance audit (SOC2, PCI, HIPAA, CIS, FedRamp,..)
-- Emerging vulnerabilities (0-day CVEs)
+**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10].
 
 ## Key capabilities
 
-Deployment via Agentless or unified Datadog Agent
-: Quickly scan your entire infrastructure for vulnerabilities via Agentless or by using the unified Datadog Agent you already deployed.
+Deploy using Agentless or unified Datadog Agent
+: Quickly scan your entire infrastructure for vulnerabilities, either using Agentless, or by using the unified Datadog Agent you already have deployed.
 
-Inventory of cloud resources, in real-time
-: Real time inventory of container images, hosts, serverless functions and all packages deployed in your infrastructure. SBOM export.
+Inventory cloud resources, in real-time
+: Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM.
 
-Continuous vulnerability detection 
-: Scan updates pushed and new CVE published. Across running container images, host, host images and serverless. Identify container image layer that is vulnerable.
+Detect vulnerabilities continuously
+: Scan recent updates and newly published CVEs, across running container images, hosts, host images, and serverless, and identify vulnerable container image layers.
 
-Prioritization of exploitable vulnerabilities, using runtime observability
-: Based on CVSS, combining intel: CISA KEV, EPSS, Public exploit availability. Runtime observability: production, exposure to attack, processing sensitive data, priviledged access.
+Prioritize exploitable vulnerabilities, using runtime observability
+: Take advantage of Datadog's security scoring, which is based on CVSS, and combining intel with CISA KEV, EPSS, and public exploit availability. With runtime observability, you can monitor production, exposure to attacks, sensitive data processing, and who has privileged access.
 
-Guided remediation
-: Impacted layer, image suggestion, vulnerability lifecycle management
+Take advantage of guided remediation
+: See which layers are impacted, get suggestions specific to each image, and action on your vulnerability lifecycle management.
 
-Automation and Integration
-: Automate creation of JIRA tickets, implement SLAs. Export vulnerabilities, coverage and SBOMs via public API.
+Implement automation and integrations
+: Automate creation of JIRA tickets, implement SLAs. Export vulnerabilities, coverage, and SBOMs using Datadog's public API.
 
-Reporting
-: OOTB dashboard
+Explore reports
+: View and monitor vulnerability data in your dashboards.
 
-## Getting started
+## Deployment methods
 
-### Enable CSM Vulnerabilities
-Get started with CSM Vulnerabilities now and cover your infrastructure in minutes, using:
+Get started with CSM Vulnerabilities and cover your infrastructure in minutes, using:
 - [Agentless scanning][11]
 - [Unified Datadog agent][12]
 
-You can also use both deployment methods to leverage the unified Datadog Agent where already deployed and Agentless elsewhere.
+You can also use both deployment methods to use the unified Datadog Agent where you already have it deployed, and Agentless elsewhere.
 
-Once enabled, your resources are continuously scanned and prioritized vulnerabilities will start being reported in your [CSM Vulnerability Explorer][1] within an hour. 
+After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [CSM Vulnerability Explorer][1] within an hour. 
 
-Below is the table to help you define which solution to start with: 
-| Feature                         | Agentless              | Unified Datadog Agent     |
-|---------------------------------|------------------------|---------------------------|
-| Time to deploy accross your infrastrcture       | Minutes | Hours to weeks           |
-| Vulnerability prioritization                    | Yes | Yes, with runtime context    |
-| Vulnerability scanning frequency                | 12 hours | Real-time               |
-| Vulnerability detection scope |
-| Host and Host image           | OS packages and App packages, mapped to image | OS packages |
-| Container image               | OS packages and App packages, mapped to image | OS packages |
-| High-level Compatibility - [see detailed compatibility][13] |
-| Cloud Provider                | AWS, Azure (preview)        | AWS, Azure, GCP, on-prem,... |
-| Operating System              | Linux                       | Linux, Windows               |
-| Serverless                    | AWS Lambda                  | -                            |
-| Container Registries          | AWS ECR (preview)           | -                            |
+Use this table to decide which solution to start with: 
+| Feature                                   | Agentless                                     | Unified Datadog Agent          |
+|-------------------------------------------|-----------------------------------------------|--------------------------------|
+| Time to deploy across your infrastructure | Minutes                                       | Hours to weeks                 |
+| Vulnerability prioritization              | Yes                                           | Yes, with runtime context      |
+| Vulnerability scanning frequency          | 12 hours                                      | Real-time                      |
+| Vulnerability detection scope             | -                                             | -                              |
+| Host and Host image                       | OS packages and App packages, mapped to image | OS packages                    |
+| Container image                           | OS packages and App packages, mapped to image | OS packages                    |
+| Cloud Provider                            | AWS, Azure (preview)                          | AWS, Azure, GCP, on-prem, etc. |
+| Operating System                          | Linux                                         | Linux, Windows                 |
+| Serverless                                | AWS Lambda                                    | -                              |
+| Container Registries                      | Amazon ECR (preview)                          | -                              |
 
-If you need any assistance, check our [Troubleshooting guide][14] or reach out to support@datadog.com.
+For more information on compatibility, see [CSM Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
 
 
