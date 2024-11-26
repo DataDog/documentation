@@ -199,19 +199,19 @@ import "database/sql"
 // Caller-side instrumentation normally happens within this function...
 func normal() {
   // The following assignment will NOT be modified to add any caller-side
-  // instrumentation as it is opted out by the dd:ignore directive:
+  // instrumentation as it is opted out by the orchestrion:ignore directive:
   //orchestrion:ignore
   db, err := sql.Open("driver-name", "database=example")
   // ...
 }
 
 // Caller-side instrumentation will NOT happen in the following function
-// as it is annotated with dd:ignore.
+// as it is annotated with orchestrion:ignore.
 //orchestrion:ignore
 func excluded() {
   // The following assignment will NOT be modified to add any caller-side
-  // instrumentation as the surrounding context is excluded by a dd:ignore
-  // directive:
+  // instrumentation as the surrounding context is excluded by an
+  // orchestrion:ignore directive:
   db, err := sql.Open("driver-name", "database=example")
   // ...
 }
