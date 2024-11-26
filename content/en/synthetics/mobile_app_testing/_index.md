@@ -48,10 +48,6 @@ When the test runs successfully, the mobile app test recomputes (or "self heals"
 
 Define the configuration of your mobile app test.
 
-1. Select a pre-populated template to choose from, or build a test from scratch.
-
-   {{< img src="mobile_app_testing/mobile_app_templates.png" alt="Mobile app landing page with templates" style="width:100%;" >}}
-
 1. Select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
 1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
 1. Add a **name** for your test.
