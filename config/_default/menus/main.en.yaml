@@ -3737,11 +3737,6 @@ menu:
       parent: dbm
       identifier: dbm_setup_architecture
       weight: 2
-    - name: RDS Quick Install
-      url: database_monitoring/setup_rds_quick_install/
-      parent: dbm
-      identifier: dbm_setup_rds_quick_install
-      weight: 3
     - name: Setting Up Postgres
       url: database_monitoring/setup_postgres/
       parent: dbm
@@ -3757,6 +3752,11 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_rds
       weight: 302
+    - name: RDS Quick Install
+      url: database_monitoring/setup_postgres/rds/quick_install
+      parent: dbm_setup_postgres_rds
+      identifier: dbm_setup_rds_quick_install
+      weight: 2000
     - name: Aurora
       url: database_monitoring/setup_postgres/aurora
       parent: dbm_setup_postgres
