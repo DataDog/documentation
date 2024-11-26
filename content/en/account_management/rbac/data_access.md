@@ -8,12 +8,12 @@ further_reading:
       text: 'Reducing Data Related Risks'
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/" header="Join the Preview!">}}
-  Data Access Control is in preview
+  Data Access Control is in Preview
 {{< /callout >}}
 
 ## Overview
 
-Your data in Datadog may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, Data Access Control allows administrators and access managers in a Datadog organization to manage access to the sensitive data. Use Data Access Control to define that sensitive data with a query and ensure access is limited to only specific [Teams][1] or [Roles][2].
+Your data in Datadog may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, Data Access Control enables administrators and access managers within a Datadog organization to regulate access to this data. Use Data Access Control to identify sensitive data with a query and restrict access to only specific [Teams][1] or [Roles][2].
 
 When you define a _Restricted Dataset_, any data within the boundary of that dataset is restricted. Data outside of any Restricted Dataset remains unrestricted and accessible to users with appropriate permissions. Data Access Control provides an intuitive interface that allows access managers to grant only permitted users access to sensitive data enclosed within the datasets.
 
@@ -21,15 +21,15 @@ When you define a _Restricted Dataset_, any data within the boundary of that dat
 
 ### Configure access controls
 
-Data Access Control builds on your organization's existing Datadog access control configuration. Set up [Access Controls][3] first before moving on to configure Data Access Control.
+Data Access Control builds on your organization's existing Datadog access control configuration. Set up [Access Controls][3] first before configuring Data Access Control.
 
 ### Tag incoming data
 
-Data Access Control relies on tags and attributes in your data that can be used to define an access boundary. If you do not have tags defined, consider [Getting Started with Tags][4] before moving on to configure Data Access Control.
+Data Access Control relies on tags and attributes in your data that can be used to define an access boundary. If you do not have tags defined, consider [Getting Started with Tags][4] before configuring Data Access Control.
 
 ## Configure data access
 
-Data Access Control lets you create a restricted dataset, which defines a set of data which only users in specified teams or roles can access.
+Data Access Control allows you to create a restricted dataset, specifying data that only users in designated teams or roles can access.
 
 ### Datadog site
 
@@ -39,7 +39,7 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 1. On the left side of the page, select [Data Access Controls][7].
 1. Click **New Restricted Dataset**.
 
-In order to create a restricted dataset, you need to identify the data to be restricted with a query.
+In order to create a restricted dataset, identify the data to be restricted with a query.
 
 {{< img src="/account_management/rbac/restricted_dataset.png" alt="Create a restricted dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
@@ -47,14 +47,14 @@ Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset. 
 
 Select data to be included in this Dataset
-: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The supported telemetry types are custom metrics, RUM, APM traces, and logs
+: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The supported telemetry types are custom metrics, RUM, APM traces, and logs.
 
 Grant access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
 
 You may create a maximum of 10 key:value pairs per restricted dataset. Consider defining an additional restricted dataset if you need additional pairs.
 
-After you define the dataset by filling in all of the fields, click **Create Restricted Dataset** to apply the restricted dataset to your organization.
+After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
 
 You may create a maximum of 100 restricted datasets. If you need a higher limit, reach out to Support.
 
