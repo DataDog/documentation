@@ -129,7 +129,7 @@ Applications instrumented by `orchestrion` support Unified Service Tagging (UST)
 
 For more information, refer to the [Unified Service Tagging documentation][14].
 
-#### Tracer Configuration
+#### Tracer configuration
 
 Refer to [Library Configuration][16] documentation for all configuration instructions.
 
