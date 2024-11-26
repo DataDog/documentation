@@ -3,7 +3,7 @@ title: Configure the Datadog Tracing Library
 type: multi-code-lang
 ---
 
-This page describes configuration options that are supported across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
+This page describes configuration options that behave consistently across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
 
 For configuration options specific to your programming language, choose your language from the options below:
 
@@ -14,19 +14,20 @@ For configuration options specific to your programming language, choose your lan
 To instrument an application written in a language that does not yet have official library support, see the list of [community tracing libraries][1].
 
 ## Common configuration options
-The following configuration options behave consistently across all Datadog SDKs, unless otherwise noted:
+The following configuration options behave consistently across the latest versions of all Datadog SDKs, unless otherwise noted:
 
 ### Traces
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Not Supported In**: Go<br>
+**Caveats**: Not supported in Go & in Java integrations labeled as "beta" or marked as "Disabled" in this document are disabled by default.<br>
 **Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
 **Supported Input**: A positive integer<br>
+**Caveats**: `200` is the default value of `DD_TRACE_RATE_LIMIT` in C++<br>
 **Description**: Sets the maximum number of traces to sample per second; applies only when either `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set.
 
 `DD_TRACE_HEADER_TAGS`
@@ -50,9 +51,9 @@ The following configuration options behave consistently across all Datadog SDKs,
 ### Diagnostics
 
 `DD_TRACE_LOG_DIRECTORY`
-: **Default**: Varies by SDK, environment, and runtime. [Read more here][2] <br>
-**Supported Input**: A valid directory path that exists on the system<br>
-**Not Supported In**: Java, Node.js, Ruby, Python<br>
+: **Default**: Varies by SDK, environment, and runtime. Please read more in the specific configuration page above for your chosen language <br>
+**Supported Input**: A valid full or relative directory path that exists on the system<br>
+**Caveats**: Not supported in Java, Node.js, Ruby, Python<br>
 **Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK falls back to its default diagnostic logging method.
 
 ### Agent
@@ -70,9 +71,9 @@ The following configuration options behave consistently across all Datadog SDKs,
 **Description**: Adds a version tag to all spans except for spans coming from inferred services.
 
 `DD_SERVICE`
-: **Default**: `null` <br>
+: **Default**: `null`, the SDK will try to automatically determine a service name<br>
 **Supported Input**: A string representing an application service name <br>
-**Description**: Sets the default service name used for most spans. Tracers may set a different service name for inferred services. Integration spans may use their own default names, which can differ from the value specified in `DD_SERVICE`
+**Description**: Sets the default service name used for most spans. SDKs may set a different service name for inferred services. Integration spans may use their own default names, which can differ from the value specified in `DD_SERVICE`
 
 `DD_ENV`
 : **Default**: `null` <br>
@@ -84,25 +85,25 @@ The following configuration options behave consistently across all Datadog SDKs,
 `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`
 : **Default**: `400-499` <br>
 **Supported Input**: A comma-separated string of the form `from-to`, where `from` and `to` are integers. Singular values are also accepted (for example, `400-403,405,410-499`). <br>
-**Not Supported In**: Node.js<br>
+**Caveats**: Not supported in Node.js<br>
 **Description**: Defines the inclusive range of status codes to be considered as errors on automatically collected HTTP client spans. Only the values within the specified range are considered errors.
 
 `DD_TRACE_HTTP_SERVER_ERROR_STATUSES`
 : **Default**: `500-599` <br>
 **Supported Input**: A comma-separated string of the form `from-to`, where `from` and `to` are integers. Singular values are also accepted (for example, `400-403,405,410-499`). <br>
-**Not Supported In**: Node.js<br>
+**Caveats**: Not supported in Node.js<br>
 **Description**: Defines the inclusive range of status codes to be considered errors on `http.server` span kinds. Only the values within the specified range are considered errors.
 
 `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Not Supported In**: Node.js<br>
+**Caveats**: Not supported in Node.js<br>
 **Description**: Enables or disables the inclusion of the query string in the `http.url` span tag value for automatically collected HTTP spans.
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **Default**: `null` <br>
 **Supported Input**: Any non-empty string <br>
-**Description**: Configures a custom header name from which to source the `http.client_ip` tag value. If this variable is set, all other IP-related headers are ignored. If an empty string or null value is passed, IP headers are queried in this order:
+**Description**: Configures a custom header name from which to source the `http.client_ip` tag value. If this variable is set, all other IP-related headers are ignored (for example, setting `DD_TRACE_CLIENT_IP_HEADER=custom-ip-header` and including the header `custom-ip-header: 5.6.7.9` in a request results in a span tagged with `"http.client_ip": "5.6.7.9"`). If an empty string or null value is passed, IP headers are queried in this order:
   - `x-forwarded-for`
   - `x-real-ip`
   - `true-client-ip`
