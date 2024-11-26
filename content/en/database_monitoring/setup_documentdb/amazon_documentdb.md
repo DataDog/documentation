@@ -11,7 +11,7 @@ Supported Amazon DocumentDB major versions
 
 Supported Amazon DocumentDB cluster types
 : Instance-based clusters.<br /><br />
-**Note**: Amazon DocumentDB Elastic Cluster is not supported.
+**Note**: Amazon DocumentDB Elastic cluster is not supported.
 
 {{% dbm-documentdb-before-you-begin %}}
 

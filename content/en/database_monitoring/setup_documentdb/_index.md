@@ -6,11 +6,12 @@ disable_sidebar: true
 
 ### Amazon DocumentDB versions supported
 
-|       | Instance-based cluster | Elastic cluster |
-| ----- | ---------------------- | --------------- |
-| 3.6.0 |                        |                 |
-| 4.0.0 | {{< X >}}              |                 |
-| 5.0.0 | {{< X >}}              |                 |
+|       | Instance-based cluster |
+| ----- | ---------------------- |
+| 4.0.0 | {{< X >}}              |
+| 5.0.0 | {{< X >}}              |
+
+**Note**: Elastic clusters are not supported for these versions. Amazon DocumentDB version 3.6.0 is also not supported.
 
 For setup instructions, select your hosting type:
 
