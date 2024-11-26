@@ -1,15 +1,15 @@
 ---
 title: Streamlining the Development Lifecycle with CI Visibility
-
 aliases:
   - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
+  - /service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
 further_reading:
-- link: "/tracing/service_catalog/"
-  tag: "Documentation"
-  text: "Datadog Service Catalog"
-- link: "/continuous_integration/search/?tab=pipelines"
-  tag: "Documentation"
-  text: "Datadog CI Pipeline Visibility"
+  - link: "/tracing/service_catalog/"
+    tag: "Documentation"
+    text: "Datadog Service Catalog"
+  - link: "/continuous_integration/search/?tab=pipelines"
+    tag: "Documentation"
+    text: "Datadog CI Pipeline Visibility"
 ---
 
 In the Delivery view in Service Catalog, you can view CI pipeline and static analysis results associated to your services.
