@@ -167,7 +167,7 @@ You can trigger a workflow from GitHub using the following steps.
 1. In GitHub, set the **Content type** of your webhook to `application/json`.
 1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the **Secret** field of your workflow trigger.
 1. In GitHub, choose which events you would like to trigger your webhook, then click **Add webhook**.
-1. In your workflow, _optionally_ click the **plus** (+) to add a **Rate Limit**.
+1. _Optionally_, in your workflow, click the **plus** (+) to add a **Rate Limit**.
 1. Click **Save** on your workflow.
 
 ## API triggers
