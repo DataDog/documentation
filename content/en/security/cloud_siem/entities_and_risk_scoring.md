@@ -7,7 +7,7 @@ further_reading:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
-Risk Based Entity Insights is in private beta.
+Risk Based Entity Insights is in Preview.
 {{< /callout >}}
 
 ## Overview

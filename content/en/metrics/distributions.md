@@ -76,10 +76,6 @@ You can enable or disable percentile aggregations for multiple metrics at once, 
 
 ### Threshold Queries
 
-<div class="alert alert-warning">
-Threshold queries are in public beta.
-</div>
-
 Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors or violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries to define SLOs like "95% of requests were completed in under 10 seconds over the past 30 days". 
 
 With threshold queries for distributions with percentiles, you do not need to predefine a threshold value prior to metric submission, and have full flexibility to adjust the threshold value in Datadog.

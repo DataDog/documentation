@@ -87,6 +87,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     "cloudfront:ListDistributions",
     "elasticloadbalancing:DescribeLoadBalancers",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
+    "lambda:InvokeFunction",
     "lambda:List*",
     "lambda:GetPolicy",
     "redshift:DescribeClusters",
@@ -110,6 +111,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
+    | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Gets the Lambda policy when triggers are to be removed.                      |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
