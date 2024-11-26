@@ -91,7 +91,7 @@ You can perform the following operations:
 
 * To view an app version, click the version in the list.
 * To overwrite an existing app with a previous version, select the version, then click **Restore Version** in the upper right.
-* To create a new app that is a copy of a version, select the version, then click **Clone Version** in the upper-right.
+* To create a new app that is a copy of a version, select the version, then click **Clone Version** in the upper right.
 
 
 ## Interact with an app in JSON
