@@ -1,5 +1,5 @@
 ---
-title: RUM Browser Monitoring Server-Side (Auto) Instrumentation
+title: Browser Monitoring Server-Side (Auto) Instrumentation
 beta: true
 code_lang: server
 type: multi-code-lang
