@@ -128,7 +128,7 @@ Manually configure individual paths by specifying the exact endpoint you want to
 
 ### Network traffic paths (experimental)
 
-**Note**: Network traffic paths is currently experimental and is not yet considered stable. We do not recommend deploying network traffic paths widely in a production environment.
+**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
