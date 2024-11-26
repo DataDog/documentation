@@ -47,7 +47,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
 1. **HTTP Method** を選択し、クエリする **URL** を指定します。使用可能なメソッドは、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` です。`http` と `https` の両方の URL がサポートされています。
 
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+   <div class="alert alert-info">その他のオプションについては、<a href=#advanced-options>高度なオプション</a>をご覧ください。</div>
 
 2. HTTP テストに**名前**を付けます。
 
@@ -61,8 +61,8 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    {{< tabs >}}
 
-   {{% tab "Request Options" %}}
-   * **HTTP version**: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1`.
+   {{% tab "リクエストオプション" %}}
+   * **HTTP バージョン**: `HTTP/1.1 のみ`、`HTTP/2 のみ`、または `HTTP/2 から HTTP/1.1 へのフォールバック` を選択してください。
    * **Follow redirects**: 選択すると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
    * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
    * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
@@ -83,8 +83,8 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.  
-     For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。Amazon S3 などの特定の署名はそのままではサポートされていません。
+     Amazon S3 バケットへの "Single Chunk" 転送リクエストの場合、リクエストの本文を sha256 エンコードした値を含む `x-amz-content-sha256` ヘッダーを追加します (本文が空の場合は、`x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` を使用します)。
    * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。 
 
    {{% /tab %}}
@@ -121,9 +121,9 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    {{% tab "Javascript" %}}
 
-   Define variables for your HTTP API tests with JavaScript:
+JavaScript を使用して HTTP API テスト用の変数を定義します。
 
-  {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/http_javascript.png" alt="JavaScript を使用して HTTP API テストを定義する" style="width:90%;" >}}
 
    {{% /tab %}}
 
@@ -167,6 +167,18 @@ HTTP テストは次の頻度で実行できます。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
 {{% synthetics-alerting-monitoring %}}
+
+## ワンクリック
+
+API テストの作成は、[API カタログ][17]と既存の API テストからエンドポイントを提案し、テストフォームに関連するオプションを自動入力します。Datadog の既存データソースを使用してください (APM トレース、API カタログエンドポイントの発見、およびユーザーが作成した既存の同様の Synthetic テストなど)。
+
+Synthetic Monitoring の API テスト **URL** 入力に入力を開始すると、エンドポイントの提案や類似テストを取得できます。
+
+{{< img src="synthetics/api_tests/api-one-click.png" alt="既存の API テストの GET 検索を表示する HTTP API テスト" style="width:90%;" >}}
+
+次に、提案を選択してテスト構成 (リクエストオプションとヘッダー、認証、変数) を自動入力します。
+
+{{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="選択" style="width:90%;" >}}
 
 {{% synthetics-variables %}}
 
@@ -245,3 +257,4 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 [14]: /ja/account_management/rbac#custom-roles
 [15]: /ja/account_management/rbac/#create-a-custom-role
 [16]: /ja/synthetics/api_tests/errors/#http-errors
+[17]: /ja/api_catalog

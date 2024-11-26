@@ -152,9 +152,7 @@ Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. 
 
 ## Profiling your Lambda Functions
 
-<div class="alert alert-info">During the beta period, profiling is available at no additional cost.</div>
-
-Datadog's [Continuous Profiler][27] is available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 

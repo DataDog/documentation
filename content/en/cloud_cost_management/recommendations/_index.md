@@ -61,6 +61,10 @@ For each cloud account that you would like to receive recommendations for:
 | Recommendation Category | Cloud Provider | Resource Type | Recommendation Type | Recommendation Description | Recommendation Prerequisites |
 |-------------------------|----------------|---------------|---------------------|----------------------------|------------------------------|
 | Unused resource | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | [Datadog Agent][5] |
+| Unused resource | AWS | EC2 | Unused EC2 instance running Redis | EC2 instance running Redis with 0 keyspace hits and is not containerized, a leader, a follower, nor a shard. | [Redis Integration][12] |
+| Unused resource | AWS | EC2 | Unused EC2 instance running memcached | EC2 instance running memcached with 0 keyspace hits and is not containerized. | [Memcache Integration][12] |
+| Unused resource | AWS | EC2 | Unused EC2 instance running Postgres | EC2 instance running Postgres with less than 1 concurrent connection and is not containerized nor a replica. | [Postgres Integration][13] |
+| Unused resource | AWS | EC2 | Unused EC2 instance running MySQL | EC2 instance running MySQL with less than 1 concurrent connection and is not containerized nor a replica. | [MySQL Integration][14] |
 | Unused resource | AWS | EBS | Unattached EBS Volumes | Volumes that have been detached from an EC2 instance. | |
 | Unused resource | AWS | EBS | Unused EBS Volumes | Volumes attached to a non-running EC2 instance. | |
 | Unused resource | AWS | RDS | Unused RDS Instances | RDS instances with 0 database connections and 0 replica lag. | |
@@ -75,7 +79,7 @@ For each cloud account that you would like to receive recommendations for:
 | Unused resource | AWS | Application Load Balancer | Unused Application Load Balancer | An application load balancer with no traffic being processed. | |
 | Unused resource | AWS | NAT Gateway | Unused NAT Gateway | A NAT Gateway that has no bytes sent through it. | |
 | Unused resource | AWS | Elastic IP Address | Idle Elastic IP Address | Elastic IP addresses with idle charges in your AWS cost and usage report. |
-| Unused resource | AWS | DynamoDB | Unused DynamoDB | A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes. | 
+| Unused resource | AWS | DynamoDB | Unused DynamoDB | A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes. |
 | Unused resource | AWS | DynamoDB | Unused DynamoDB Global Secondary Index | A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads. |
 | Unused resource | AWS | Autoscaling groups (ASG) | ASGs with legacy instance types | An autoscaling group that includes legacy instance types. | [Datadog Agent][5] |
 | Unused resource | AWS | DynamoDB | DynamoDB Delete Extra On-Demand Backups | A DynamoDB table has charges for more than 2 on-demand backups. | |
@@ -84,15 +88,19 @@ For each cloud account that you would like to receive recommendations for:
 | Previous generation resource | AWS | I01 EBS | I01 EBS Volumes | EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement. |
 | Previous generation resource | AWS | RDS | Extended Support RDS Instance | An RDS running an engine version that is no longer supported and incurring [extended support charges][7] |
 | Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | Migrate legacy autoscaling group instances to new types. | [Datadog Agent][5] |
+| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances running Redis | EC2 instance running Redis with less than 25% user CPU and is not containerized, a leader, a follower, nor a shard. | [Redis Integration][12] |
+| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instance running memcached | EC2 instance running memcached with less than 25% user CPU and is not containerized. | [Memcache Integration][12] |
+| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instance running Postgres | EC2 instance running Postgres with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica. | [Postgres Integration][13] |
+| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 running MySQL | EC2 instance running MySQL with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica. | [MySQL Integration][14] |
 | Over-provisioned resource | AWS | Kubernetes containers | Over-provisioned Kubernetes Containers | Containers with less than 30% CPU and memory utilization. | [Datadog profiling agent][8] |
 | Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | RDS IOPS | Over-provisioned RDS IOPS | An RDS instance using less than 80% of the provisioned IOPS for reads and writes. | 
+| Over-provisioned resource | AWS | RDS IOPS | Over-provisioned RDS IOPS | An RDS instance using less than 80% of the provisioned IOPS for reads and writes. |
 | Over-provisioned resource | AWS | EBS IOPS | Over-provisioned EBS IOPS | An EBS volume using less than 80% of the provisioned IOPS for reads and writes. | *[Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | EBS Storage | Over-provisioned EBS Storage | An EBS volume with less than 20% of its storage capacity used. | *[Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | EBS Throughput | Over-provisioned EBS Throughput | An EBS volume using less than 80% of the provisioned throughput for reads and writes. | *[Amazon EC2 integration][9] |
 | Over-provisioned resource | AWS | DynamoDB | Over-provisioned DynamoDB Capacity | A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time. | |
 | Rate optimization | AWS | RDS Reserved Instances | Purchase RDS RI | An RDS instance older than 45 days is still charged with on-demand rates. | |
-| Rate optimization | AWS | ElastiCache Reserved Instances | Purchase ElastiCache RI | An ElastiCache node older than 45 days is still charged with on-demand rates. | | 
+| Rate optimization | AWS | ElastiCache Reserved Instances | Purchase ElastiCache RI | An ElastiCache node older than 45 days is still charged with on-demand rates. | |
 | Rate optimization | AWS | OpenSearch Reserved Instances | Purchase OpenSearch RI | An OpenSearch instance older than 45 days is still charged with on-demand rates. | |
 | Rate optimization | AWS | Redshift Reserved Instances | Purchase Redshift RI | A Redshift cluster older than 45 days is still charged with on-demand rates. | |
 | Rate optimization | AWS | S3 | S3 Tiering | A bucket's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects are accessed. | |
@@ -119,3 +127,7 @@ For each cloud account that you would like to receive recommendations for:
 [9]: /integrations/amazon_ec2/
 [10]: /network_monitoring/performance/setup/
 [11]: /integrations/guide/aws-integration-and-cloudwatch-faq/
+[12]: https://docs.datadoghq.com/integrations/redisdb/?tab=host
+[13]: https://docs.datadoghq.com/integrations/mcache/?tab=host
+[14]: https://docs.datadoghq.com/integrations/postgres/?tab=host
+[15]: https://docs.datadoghq.com/integrations/mysql/?tab=host

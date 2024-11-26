@@ -32,7 +32,7 @@ further_reading:
   text: "Datadog's full list of integrations"
 - link: '/tracing/guide/inferred-service-opt-in/'
   tag: 'Documentation'
-  text: 'Inferred Service dependencies (beta)'
+  text: 'Inferred Service dependencies (Preview)'
 ---
 
 If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
@@ -96,7 +96,7 @@ For example, you might have a single service such as `service:test` showing mult
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-You can use [Inferred Service dependencies (beta)][30]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
+You can use [Inferred Service dependencies (Preview)][30]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
 
 Or, you can merge the service names using an environment variable such as `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 

@@ -26,7 +26,7 @@ further_reading:
 
 You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-NOTE: Code-Level Vulnerability detection in Python is currently in beta.
+NOTE: Code-Level Vulnerability detection in Python is in Preview.
 
 Follow these steps to enable Code Security in your service:
 
@@ -108,7 +108,7 @@ If you need additional assistance, contact [Datadog support][5].
 
 ### Third-Party Library Compatibility Note
 
-Code Security modifies Python code at runtime, which can cause conflicts with other third-party Python libraries that perform similar code transformations, especially but not limited to:
+Code Security modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
 
 - Numba
 - JAX
@@ -119,7 +119,7 @@ Code Security modifies Python code at runtime, which can cause conflicts with ot
 - PyPy
 
 Additionally, Code Security does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++
-using the CPython API, or on intermediate language systems like Cython, the results may be less accurate than expected.
+using the CPython API, or on intermediate language systems like Cython, the results might be less accurate than expected.
 
 
 ## Further Reading
