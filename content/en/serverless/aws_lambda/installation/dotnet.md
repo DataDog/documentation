@@ -16,6 +16,8 @@ further_reading:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 ## Installation
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
@@ -298,6 +300,11 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+
+If you are noticing any issues, you can force your extension to use the fully compatible, older version of the extension by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog also encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tag your issue with `version/next`.
+
 ## What's next?
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
@@ -321,3 +328,5 @@ module "lambda-datadog" {
 [4]: /serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /serverless/configuration/
 [6]: /security/application_security/serverless/
+[7]: https://github.com/DataDog/datadog-lambda-extension
+[8]: https://github.com/DataDog/datadog-lambda-extension/issues
