@@ -82,7 +82,7 @@ For a Docker Linux container:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 You can enable APM by installing the Agent with either:
 
@@ -275,7 +275,7 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 ### Enabling or disabling instrumentation for namespaces
 

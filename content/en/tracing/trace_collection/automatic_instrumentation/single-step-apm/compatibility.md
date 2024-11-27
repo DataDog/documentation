@@ -18,7 +18,7 @@ The following operating systems and architectures are compatible:
 |--------------|-----------|---------------|
 | Amazon Linux | 2022+     | x86_64, arm64 |
 | CentOS       | 7+, 8+    | x86_64, arm64 |
-| Debian       | 9-12      | x86_64, arm64 |
+| Debian       | 10-12     | x86_64, arm64 |
 | Red Hat      | 7+        | x86_64, arm64 |
 | Ubuntu       | 20+ (LTS) | x86_64, arm64 |
 
