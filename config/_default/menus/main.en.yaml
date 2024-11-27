@@ -996,6 +996,12 @@ menu:
       identifier: coscreen_troubleshooting
       parent: coscreen
       weight: 1
+    - name: CoTerm
+      url: coterm/
+      pre: coscreen
+      identifier: coterm
+      parent: essentials_heading
+      weight: 120000
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
