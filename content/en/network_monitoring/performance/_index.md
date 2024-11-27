@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
   tag: "Blog"
   text: "Best practices for monitoring and remediating connection churn"
+- link: "https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/"
+  tag: "Architecture Center"
+  text: "Network Observability: SD-WAN Reference Architecture"
 algolia:
   tags: ['npm', 'network performance monitoring']
 ---
