@@ -144,12 +144,12 @@ To assign the name to inferred entities, Datadog uses a specific order of preced
 Entity type | Order of precedence
 -----------|----------------
 Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
-Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
 Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
-If the highest priority tag is not captured as part of the instrumentation (e.g. `peer.db.name`), Datadog uses the second highest priority tag (e.g. `peer.hostname`), and so on.
+If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
 
-**Note**: Datadog nevers sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over the rest.
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
 
 ## Migrate to global default service naming
 
