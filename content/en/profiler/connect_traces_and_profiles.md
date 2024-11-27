@@ -106,7 +106,9 @@ This capability requires `dd-trace-dotnet` version 2.30.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-The Trace to Profiling integration is enabled when you [turn on profiling for your PHP service][1] on `dd-trace-php` version 0.98+ and when you set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
+The Trace to Profiling integration is enabled when you [turn on profiling for your PHP service][1] when you meet the following criteria:
+- You are on `dd-trace-php` version 0.98+
+- You set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
