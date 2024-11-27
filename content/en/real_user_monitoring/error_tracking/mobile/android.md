@@ -277,7 +277,7 @@ To test your implementation:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
-[2]: https://app.datadoghq.com/rum/application/create
+[2]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
