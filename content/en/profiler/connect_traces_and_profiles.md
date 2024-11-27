@@ -129,51 +129,6 @@ To enable the [timeline feature](#span-execution-timeline-view):
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Span execution breakdown
-
-From the view of each trace, the **Profiles** tab highlights profiling data scoped on the selected spans.
-
-The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
-{{< programming-lang lang="java" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
-- **VM operations** shows the time taken waiting for VM operations (for example, garbage collections, compilation, safepoints, and heap dumps).
-- **File I/O** shows the time taken waiting for a disk read/write operation to execute.
-- **Socket I/O** shows the time taken waiting for a network read/write operation to execute.
-- **Monitor enter** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Off-CPU** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="php" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
-
 ### Span execution timeline view
 
 {{< img src="profiler/profiles_tab.png" alt="Profiles tab has a timeline view that breaks down threads and execution over time" >}}
@@ -242,7 +197,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 {{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
 
-For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
+From the timline, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
