@@ -77,7 +77,7 @@ before_script:
   - mkdir -p local/bin/py/build/configurations
 
   # Copy files from the image to our local build directory
-  - cp -r /path/to/image/services/webops-site-build/bin/docs-ci/* local/bin/py/build/
+  - cp -r /usr/local/bin/docs-ci/* local/bin/py/build/
 
   # Restore the configuration files
   - |
