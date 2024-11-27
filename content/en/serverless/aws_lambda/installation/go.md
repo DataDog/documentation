@@ -162,7 +162,7 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][5] is optimized to significantly reduce cold start duration.
 
-If you are noticing any issues, you can force your extension to use the fully compatible, older version of the extension by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog also encourages you to report any feedback or bugs by adding an [issue on GitHub][6] and tag your issue with `version/next`.
+If you notice any issues, you can force your extension to use the fully compatible, older version of the extension by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog also encourages you to report any feedback or bugs by adding an [issue on GitHub][6] and tagging your issue with `version/next`.
 
 ## What's next?
 
