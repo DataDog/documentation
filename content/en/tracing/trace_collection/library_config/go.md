@@ -47,14 +47,14 @@ func main() {
     // Make sure this line stays in your main function.
     defer tracer.Stop()
 
-  	// If you expect your application to be shutdown via SIGTERM (e.g. a container in k8s)
-  	// You likely want to listen for that signal and explicitly stop the tracer to ensure no data is lost
-  	sigChan := make(chan os.Signal, 1)
-  	signal.Notify(sigChan, syscall.SIGTERM)
-  	go func() {
-  		<-sigChan
-  		tracer.Stop()
-  	}()
+    // If you expect your application to be shutdown via SIGTERM (e.g. a container in k8s)
+    // You likely want to listen for that signal and explicitly stop the tracer to ensure no data is lost
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, syscall.SIGTERM)
+    go func() {
+        <-sigChan
+        tracer.Stop()
+    }()
 }
 ```
 
