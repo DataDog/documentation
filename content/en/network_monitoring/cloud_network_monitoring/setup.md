@@ -467,7 +467,7 @@ For additional information around these capabilities, see [Cloud service enhance
 
 ### Failed connections 
 
-To enable the Agent to start collecting data around failed connections, add the following setting to your `/etc/datadog-agent/system-probe.yaml` file (`C:\ProgramData\Datadog\system-probe.yaml` for Windows).
+To enable the Agent to start collecting data about failed connections, add the following setting to your `/etc/datadog-agent/system-probe.yaml` file (or `C:\ProgramData\Datadog\system-probe.yaml` for Windows).
 
 ```yaml
 network_config:   # use system_probe_config for Agent versions older than 7.24.1
