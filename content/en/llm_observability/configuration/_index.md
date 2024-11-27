@@ -37,10 +37,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 
 ## Select and enable evaluations
 
-Navigate to [**LLM Observability > Settings > Evaluations**][3]. 
-
-{{< img src="llm_observability/configuration/settings.png" alt="The Evaluations tab, featuring a list of existing evaluations." style="width:100%;" >}}
-
+1. Navigate to [**LLM Observability > Settings > Evaluations**][3]. 
 1. Click on the evaluation you want to enable.
 1. Select **OpenAI** as your LLM provider.
 1. Select the OpenAI account you want to run the evaluation on.
