@@ -206,8 +206,26 @@ When nesting queries, only the lookback mode version of the `moving_rollup` func
 - `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
 - `stddev`
 
-{{% collapse-content title="Moving rollup example query" level="h5" %}}
-When nesting these `moving_rollups`, the rollup intervals provided must get larger. 
+{{% collapse-content title="Max Moving rollup wiht Lookback Mode Enabled" level="h5" %}}
+When nesting these `moving_rollups`, the rollup intervals provided must get larger as shown in the UI or JSON tab:
+
+{{< img src="/metrics/nested_queries/moving_rollup1_ui.png" alt="example of moving rollup in the UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/moving_rollup1_json.png" alt="example of moving rollup in the JSON" style="width:100%;" >}}
+
+
+{{% /collapse-content %}} 
+
+
+{{% collapse-content title="Standard Devition Moving Rollup wiht Lookback Mode Enabled" level="h5" %}}
+You can also use percentiles and standard deviation with the new moving rollup function that supports lookback and nest moving rollups that have lookback enabled as well. 
+
+In the UI or JSON tab, it would look as follows:
+
+{{< img src="/metrics/nested_queries/moving_rollup2_ui.png" alt="example of moving rollup with standard deviation in the UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/moving_rollup2_json.png" alt="example of moving rollup with standard deviation in the JSON" style="width:100%;" >}}
+
 
 {{% /collapse-content %}} 
 
