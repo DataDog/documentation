@@ -103,7 +103,7 @@ Restricted Dataset 2:
 * Telemetry type: RUM
     * Filters: `@application.id:IJKL` `env:prod`
 
-While this example uses the right `@application.id` tag for RUM as was done for restricted dataset 1, the limit is 1 tag per telemetry type. Instead, consider either creating a restricted dataset with _either_ `application.id` or `env`, or identifying a different tag that better combines these attributes.
+This example correctly uses the `@application.id` tag for RUM, as was done for restricted dataset 1. However, the limit is one tag per telemetry type. Instead, consider creating a restricted dataset with _either_ `application.id` or `env`, or identify a different tag that better combines these attributes.
 
 ## Best practices
 
@@ -154,11 +154,11 @@ Data Access Control supports granting access to users through Datadog roles or t
 
 ## Access enforcement
 
-Users in a Datadog organization with Data Access Control enabled can only see query results for data to which they have access, such as in a Dashboard, in an Explorer, or through the API. A restricted dataset removes access from the data bound in the restricted dataset from users who are not permitted across all Datadog experiences and entry points.
+Users in a Datadog organization with Data Access Control enabled can only see query results for data to which they have access, such as in a Dashboard, in an Explorer, or through the API. A restricted dataset removes access to the data defined in the restricted dataset for users who are not permitted, across all Datadog experiences and entry points.
 
 ### Data explorers
 
-When exploring Datadog with restrictions enabled, users without permissions are still able to cycle through the list of asset names (for example: applications or metrics), but they do not see query results, top tags, or facet details that have been restricted by restricted datasets. When querying a metric, for example, that contains data which is restricted from the user, a blank graph returns. It appears to the user as if their query does not match any data.
+When exploring Datadog with restrictions enabled, users without permissions can still browse the list of asset names (applications or metrics), but they cannot see query results, top tags, or facet details restricted by datasets. For instance, querying a metric with restricted data returns a blank graph, making it appear as if the query does not match any data.
 
 ### Dashboards and Notebooks
 
@@ -166,7 +166,7 @@ Similar to exploring data in a data explorer like the RUM Explorer or Metrics Ex
 
 ### APIs
 
-When querying data through Datadog APIs with restrictions enabled, users without permissions do not see query results that have been restricted by Restricted Datasets.
+When querying data through Datadog APIs with restrictions enabled, users without permissions do **not** see query results that have been restricted by Restricted Datasets.
 
 ## Further reading
 
