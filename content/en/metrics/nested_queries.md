@@ -226,6 +226,47 @@ In the UI or JSON tab, it would look as follows:
 
 {{< img src="/metrics/nested_queries/moving_rollup2_json.png" alt="example of moving rollup with standard deviation in the JSON" style="width:100%;" >}}
 
+{{% /collapse-content %}} 
+
+
+## Boolean threshold remapping functions
+
+Remap functions give you the ability to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis (read more about remap functions [here][]). Nested queries unlocks the following 3 new functions:
+
+- `is_greater` (`<QUERY>, <THRESHOLD>`)
+- `is_less` (`<QUERY>, <THRESHOLD>`)
+- `is_between` (`<QUERY>, <LOWER THRESHOLD>, <UPPER THRESHOLD>`)
+
+
+{{% collapse-content title="is_greater() example query" level="h5" %}}
+`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_greater_ui.png" alt="example of is_greater mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_greater_json.png" alt="example of is_greater mapping function in JSON" style="width:100%;" >}}
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="is_less() example query" level="h5" %}}
+`is_less()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_less_ui.png" alt="example of is_less mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_less_json.png" alt="example of is_less mapping function in JSON" style="width:100%;" >}}
+
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="is_between() example query" level="h5" %}}
+`is_between()` returns 1.0 for each point where the query is between 10 and 30 (exclusive), and 0.0 elsewhere.
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_between_ui.png" alt="example of is_between mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_between_json.png" alt="example of is_between mapping function in JSON" style="width:100%;" >}}
+
 
 {{% /collapse-content %}} 
 
