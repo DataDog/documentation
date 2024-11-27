@@ -48,12 +48,7 @@ It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#require
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your Python service][1].
-
-Requires `dd-trace-py` version 0.44.0+.
-
-To enable the [timeline feature](#span-execution-timeline-view):
-
+The Trace to Profiling integration is enabled when you:
 - Upgrade `dd-trace-py` to version 2.12.0+, 2.11.4+, or 2.10.7+.
 - Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
 
@@ -61,9 +56,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your Ruby service][1].
-
-The new [timeline feature](#span-execution-timeline-view), including GC information, is enabled by default in `dd-trace-rb` 1.22.0+.
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Ruby service][1] and update `dd-trace-rb` to 1.22.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -71,17 +64,13 @@ The new [timeline feature](#span-execution-timeline-view), including GC informat
 
 The Trace to Profiling integration is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
 
-Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
-
-The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
+Requires `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your Go service][1].
-
-To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
+The Trace to Profiling integration is enabled when you [turn on profiling for your Go service][1] and set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -117,13 +106,7 @@ This capability requires `dd-trace-dotnet` version 2.30.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your PHP service][1].
-
-Requires `dd-trace-php` version 0.71+.
-
-To enable the [timeline feature](#span-execution-timeline-view):
-- Upgrade to `dd-trace-php` version 0.98+.
-- Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
+The Trace to Profiling integration is enabled when you [turn on profiling for your PHP service][1] on `dd-trace-php` version 0.98+ and when you set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
