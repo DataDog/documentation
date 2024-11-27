@@ -145,7 +145,7 @@ Next, Datadog examines the daily [workload resources][104] running on that node.
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
-[Cloud Network Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Network Performance Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
+[Cloud Network Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Cloud Network Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
 
 Datadog supports data transfer cost allocation using [standard 6 workload resources][104] only. For [custom workload resources][106], data transfer costs can be allocated down to the cluster level only, and not the node/namespace level.
 
@@ -246,8 +246,8 @@ Costs are allocated into the following spend types:
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Usage | Cost of data transfer that is monitored by Network Performance Monitoring and allocated. |
-| Not monitored | Cost of data transfer not monitored by Network Performance Monitoring. This cost is not allocated. |
+| Usage | Cost of data transfer that is monitored by Cloud Network Monitoring and allocated. |
+| Not monitored | Cost of data transfer not monitored by Cloud Network Monitoring. This cost is not allocated. |
 
 {{% /tab %}}
 {{% tab "Azure" %}}

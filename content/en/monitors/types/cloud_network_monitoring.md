@@ -26,7 +26,7 @@ Datadog [Cloud Network Monitoring][1] (CNM) provides visibility into your networ
 
 ## Monitor creation
 
-To create a CNM monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Network Performance**][2]. 
+To create a CNM monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Cloud Network**][2]. 
 
 ### Define the search query
 

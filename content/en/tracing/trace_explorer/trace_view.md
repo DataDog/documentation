@@ -214,7 +214,7 @@ Click on a service's span to see the processes running on its underlying infrast
 
 {{% tab "Network" %}}
 
-Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Network Performance Monitoring][2].
+Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Cloud Network Monitoring][2].
 
 **Note**: Related network telemetry is not currently supported for serverless traces.
 
