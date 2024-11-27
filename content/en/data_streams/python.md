@@ -9,18 +9,19 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
-
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Python libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Python Tracer][2]
-  * Kafka: v1.16.0 or later
-  * Amazon SQS and Amazon Kinesis: v1.20.0
-  * RabbitMQ: v2.6.0 or later
+
+### Supported libraries
+
+| Technology     | Library                                                      | Minimal tracer version | Recommended tracer version |
+|----------------|--------------------------------------------------------------|------------------------|----------------------------|
+| Kafka          | [confluent-kafka](https://pypi.org/project/confluent-kafka/) | 1.16.0                 | 2.11.0 or later            |
+| RabbitMQ       | [Kombu](https://pypi.org/project/kombu/)                     | 2.6.0                  | 2.6.0 or later             |
+| Amazon SQS     | [Botocore](https://pypi.org/project/botocore/)               | 1.20.0                 | 2.8.0 or later             |
+| Amazon Kinesis | [Botocore](https://pypi.org/project/botocore/)               | 1.20.0                 | 2.8.0 or later             |
+| Amazon SNS     | [Botocore](https://pypi.org/project/botocore/)               | 1.20.0                 | 2.8.0 or later             |
 
 ### Installation
 
@@ -31,9 +32,6 @@ For example:
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
-
-### Libraries Supported
-Data Streams Monitoring supports the [confluent-kafka library][3] and [kombu package][5].
 
 ### Monitoring SQS Pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or less message attributes set, allowing the remaining attribute for Data Streams Monitoring.

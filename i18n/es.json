@@ -1,0 +1,295 @@
+{
+  "integration_count": {
+    "other": "800"
+  },
+  "beta_sentence": {
+    "other": "Beta - Para obtener asistencia o informar de cualquier problema, ponte en contacto con"
+  },
+  "additional_sentence": {
+    "other": "Más enlaces, artículos y documentación útiles"
+  },
+  "apiaccount_sentence1": {
+    "other": "Asegurarse de sustituir la clave de API o APP a continuación"
+  },
+  "apiaccount_sentence2": {
+    "other": "por la de tu cuenta"
+  },
+  "install_agent_sentence": {
+    "other": "Instalar y configurar el Agent para recopilar datos"
+  },
+  "integrations_sentence": {
+    "other": "Reunir datos de todos tus sistemas, aplicaciones y servicios"
+  },
+  "graphing_sentence": {
+    "other": "Visualizar tus datos para <br> comprenderlos mejor"
+  },
+  "alerting_sentence": {
+    "other": "Crear y gestionar tus <br> monitores y notificaciones"
+  },
+  "apm_sentence": {
+    "other": "Instrumentar tu código <br> para mejorar el rendimiento"
+  },
+  "developer_tools_sentence": {
+    "other": "Recopilar métricas personalizadas <br> y crear una nueva integración"
+  },
+  "help_sentence": {
+    "other": "Nuestros amables y expertos ingenieros de soluciones están a tu disposición para ayudarte."
+  },
+  "email_support_sentence": {
+    "other": "Puedes ponerte en contacto con nuestro equipo de asistencia ingresando al <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Sitio web de asistencia de Datadog</a> (todos los sitios). <br><br>Para obtener más información sobre cómo acceder al sitio web de asistencia, consulta <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">Acceder a tu ticket de asistencia</a>."
+  },
+  "live_chat_support_sentence": {
+    "other": "Chatea con el equipo de asistencia de Datadog de lunes a viernes de 10:00 a 19:00 ET (hora del este) a través del chat de la aplicación. Para conocer las prácticas recomendadas, consulta <a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">Comunicarse por chat</a>."
+  },
+  "event_stream_support_sentence": {
+    "other": "El <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">programa Slack Community</a> es una red creada por usuarios de Datadog para usuarios de Datadog para ayudarse a encontrar respuestas a preguntas o compartir trucos y consejos sobre los productos."
+  },
+  "foundation_enablement_sentence": {
+    "other": "<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">Inscríbete</a> en una de nuestras sesiones en directo, dirigidas por expertos, sobre diversas funciones y productos de Datadog."
+  },
+  "learning_center_sentence": {
+    "other": "Sigue un <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">curso práctico</a> autoguiado para aprender y practicar conceptos clave de Datadog."
+  },
+  "learning_resources": {
+    "other": "Recursos de aprendizaje"
+  },
+  "learning_sentence": {
+    "other": "Enriquece tus conocimientos en la plataforma Datadog mediante recursos de aprendizaje gratuitos."
+  },
+  "webinars_sentence": {
+    "other": "Asiste o mira las grabaciones de los próximos <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">seminarios web de Datadog</a> sobre diversos temas relacionados con los productos."
+  },
+  "agent_started_sentence": {
+    "other": "Para empezar a utilizar el Agent, selecciona tu plataforma."
+  },
+  "choose_a_platform": {
+    "other": "Elegir una plataforma"
+  },
+  "get_started_datadog": {
+    "other": "Empezando con Datadog"
+  },
+  "all": {
+    "other": "Todas"
+  },
+  "free_trial": {
+    "other": "Prueba gratuita"
+  },
+  "agent_check": {
+    "other": "Check del Agent"
+  },
+  "statsd_check": {
+    "other": "Check de StatsD"
+  },
+  "crawler": {
+    "other": "Rastreador"
+  },
+  "library_check": {
+    "other": "Biblioteca"
+  },
+  "terms": {
+    "other": "Términos"
+  },
+  "privacy": {
+    "other": "Privacidad"
+  },
+  "cookies": {
+    "other": "Cookies"
+  },
+  "toc": {
+    "other": "Índice"
+  },
+  "get_started_free_short": {
+    "other": "PRUEBA GRATUITA"
+  },
+  "documentation_search": {
+    "other": "Búsqueda de documentación"
+  },
+  "guides": {
+    "one": "Guía",
+    "other": "Guías"
+  },
+  "tags": {
+    "one": "Etiqueta (tag)",
+    "other": "Etiquetas"
+  },
+  "language": {
+    "one": "Idioma",
+    "other": "Lenguajes"
+  },
+  "library": {
+    "one": "Biblioteca",
+    "other": "Bibliotecas"
+  },
+  "official": {
+    "other": "Oficial"
+  },
+  "api": {
+    "other": "API"
+  },
+  "docs": {
+    "other": "Documentos"
+  },
+  "home": {
+    "other": "Inicio"
+  },
+  "datadog_docs": {
+    "other": "Documentos de Datadog"
+  },
+  "datadog_api": {
+    "other": "API Datadog"
+  },
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+  "author": {
+    "other": "Autor"
+  },
+  "notes": {
+    "other": "Notas"
+  },
+  "agent": {
+    "other": "Agent"
+  },
+  "integrations": {
+    "one": "Integración",
+    "other": "integrations"
+  },
+  "graphing": {
+    "other": "Gráficos"
+  },
+  "alerting": {
+    "other": "Alertar"
+  },
+  "apm_tracing": {
+    "other": "APM (Rastreo)"
+  },
+  "developer_tools": {
+    "other": "Herramientas de desarrollador"
+  },
+  "contact_us": {
+    "other": "Ponerse en contacto con nosotros"
+  },
+  "status_page": {
+    "other": "Página de estado"
+  },
+  "ops_twitter": {
+    "other": "Ops Twitter"
+  },
+  "platform": {
+    "other": "Plataforma de asistencia<br>de Datadog "
+  },
+  "live_chat": {
+    "other": "Chat en directo con<br>nuestro equipo de asistencia"
+  },
+  "event_stream_messaging": {
+    "other": "Ponerse en contacto con nosotros<br>en Slack"
+  },
+  "learning_center": {
+    "other": "Centro de aprendizaje<br>de Datadog"
+  },
+  "foundation_enablement": {
+    "other": "Participar en una sesión<br>de capacitación en directo"
+  },
+  "webinars": {
+    "other": "Seminarios web<br>de Datadog"
+  },
+  "questions": {
+    "other": "¿Tienes alguna pregunta?"
+  },
+  "type": {
+    "other": "Tipo"
+  },
+  "feel_free_contribute": {
+    "other": "No dudes en contribuir."
+  },
+  "mistake_in_docs": {
+    "other": "Error en los documentos"
+  },
+  "groups_return_to_": {
+    "other": "Volver"
+  },
+  "table_of_contents_heading": {
+    "other": "En esta página"
+  },
+  "edit": {
+    "other": "Editar"
+  },
+  "overview": {
+    "other": "Información general"
+  },
+  "arguments": {
+    "other": "Argumentos"
+  },
+  "path_parameters": {
+    "other": "Parámetros de ruta"
+  },
+  "query_strings": {
+    "other": "Cadenas de consulta"
+  },
+  "header_parameters": {
+    "other": "Parámetros de cabecera"
+  },
+  "request": {
+    "other": "Solicitud"
+  },
+  "model": {
+    "other": "Modelo"
+  },
+  "example": {
+    "other": "Ejemplo"
+  },
+  "copy": {
+    "other": "Copia"
+  },
+  "response": {
+    "other": "Respuesta"
+  },
+  "code_example": {
+    "other": "Ejemplo de código"
+  },
+  "name": {
+    "other": "Nombre"
+  },
+  "description": {
+    "other": "Descripción"
+  },
+  "field": {
+    "other": "Campo"
+  },
+  "footer_blurb_heading": {
+    "other": "¿No encuentras algo?"
+  },
+  "footer_blurb_desc": {
+    "other": "Nuestros amables y expertos ingenieros de soluciones están a tu disposición para ayudarte."
+  },
+  "integration_version": {
+    "other": "Versión de la integración"
+  },
+  "beta_check": {
+    "other": "Beta"
+  },
+  "learn_more": {
+    "other": "Más información"
+  },
+  "personalized_demo": {
+    "other": "Solicitar una demostración personalizada"
+  },
+  "configuration_management": {
+    "other": "Gestión de configuración"
+  },
+  "cloud_and_container": {
+    "other": "Nube y contenedor"
+  },
+  "source": {
+    "other": "Origen"
+  },
+  "legacy": {
+    "other": "Legacy"
+  },
+  "try_this_rule": {
+    "other": "PROBAR ESTA REGLA"
+  },
+  "available_for": {
+    "other": "Disponible para"
+  }
+}

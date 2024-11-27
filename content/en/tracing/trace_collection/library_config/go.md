@@ -24,7 +24,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
+After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired.
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
@@ -123,7 +123,7 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 
-  <div class="alert alert-info">Support for sampling by resource and tags is in beta.</div>
+  <div class="alert alert-info">Support for sampling by resource and tags is in Preview.</div>
 
   For more information, see [Ingestion Mechanisms][4].<br>
   **Examples:**<br>
@@ -136,7 +136,7 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
 
-  <div class="alert alert-info">Support for sampling by resource and tags is in beta.</div>
+  <div class="alert alert-info">Support for sampling by resource and tags is in Preview.</div>
 
   For more information, see [Ingestion Mechanisms][5].<br>
   **Example:**<br>

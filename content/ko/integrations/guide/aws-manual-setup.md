@@ -49,6 +49,12 @@ title: AWS 매뉴얼 설정 가이드
 
 AWS 통합을 수동으로 설정하려면 AWS 계정에서 IAM 정책 및 IAM 역할을 생성하고 Datadog 계정에 생성된 AWS 외부 ID로 역할을 설정합니다. 이를 통해 Datadog의 AWS 계정이 사용자 대신 AWS API를 쿼리하고 데이터를 Datadog 계정으로 가져올 수 있습니다. 아래 섹션에서는 이러한 각 구성 요소를 생성한 후 Datadog 계정에서 설정을 완료하는 단계까지 자세히 설명합니다.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+  <em>Role Delegation을 사용한 S3 Log Archives 설정은 현재 제한적으로 제공됩니다. 정부용 Datadog 계정에서 이 기능을 요청하려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하세요</em>.
+</div>
+{{< /site-region >}}
+
 ## 설정
 
 ### 외부 ID 생성
@@ -85,7 +91,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 `Require MFA`를 사용하지 않도록 설정하세요. 자세한 내용은 [제3자에게 AWS 리소스 액세스 권한 부여 시 외부 ID를 사용하는 방법][2] AWS 설명서를 참조하세요.
 12. **Next**를 클릭합니다.
 13. 정책을 이미 만든 경우 이 페이지에서 정책을 검색하고 선택합니다. 그렇지 않으면 새 창에서 열리는 **Create Policy**를 클릭하고 이전 섹션의 지침을 따릅니다.
-14. (선택 사항)<a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS 보안감사 정책</a>을 역할에 연결하여 [Cloud Security Management Misconfiguration][5]을 사용할 수 있습니다.
+14. [리소스 수집][5]을 활성화하려면 <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit 정책</a>을 역할에 연결하세요.
 15. **Next**를 클릭합니다.
 16. 적절한 설명과 함께 `DatadogIntegrationRole`와 같은 이름을 지정합니다.
 17. **Create Role**을 클릭합니다.
@@ -104,7 +110,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /ko/security/cloud_security_management/misconfigurations/
+[5]: /ko/integrations/amazon_web_services/#resource-collection
 [6]: /ko/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [8]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
@@ -124,7 +130,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 4. **Access Keys (GovCloud or China\* Only)** 탭을 선택합니다.
 5. **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** 체크 상자를 클릭합니다.
 6. `Account ID`, `AWS Access Key`, `AWS Secret Key`를 입력합니다. GovCloud 및 China에 대한 액세스 및 보안 키만 허용됩니다.
-7. **저장**을 클릭합니다.
+7. **Save**을 클릭합니다.
 8. 데이터 수집이 시작될 때까지 최대 10분 정도 기다린 후 사용 가능한 <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 개요 대시보드</a>를 통해 AWS 서비스 및 인프라스트럭처에서 전송된 메트릭을 확인합니다.
 
 \* _중국 본토에서(또는 내부 환경과 관련된) Datadog 서비스의 모든 사용에는 당사 웹사이트의 [Restricted Service Locations][2] 섹션에 게시된 면책 조항이 적용됩니다._

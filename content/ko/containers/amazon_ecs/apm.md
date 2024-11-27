@@ -19,7 +19,7 @@ ECS 컨테이너에서 트레이스를 수집하려면 아래 설명된 대로 �
 
 활성화되면 Datadog 에이전트 컨테이너가 동일한 호스트에 있는 다른 애플리케이션 컨테이너에서 전송된 트레이스를 수집합니다.
 
-## 트레이스를 허용하도록 Datadog 에이전트 설정
+## 트레이스를 수신하도록 Datadog 에이전트 설정
 1. 실행되는 ECS 컨테이너에서 모든 트레이스를 수집하려면 아래 설정을 사용해 [원래 ECS 설정][6]에서 에이전트 작업 정의를 업데이트하세요.
 
    필수 기본 설정에 대한 참조 요소로  [datadog-agent-ecs-apm.json][3]을 사용합니다. Datadog 에이전트 컨테이너에 대한 작업 정의에서 `tcp` 프로토콜을 사용해 `8126`에 있는 호스트-컨테이너 포트를 설정합니다.
@@ -190,7 +190,7 @@ const axios = require('axios');
 대신 코드를 업데이트해 트레이서가 명시적으로 호스트 이름을 설정할 수 있도록 할 수 있습니다.
 
 ```ruby
-require 'ddtrace'
+require 'datadog' # v1.x를 사용하는 경우 'ddtrace'를 사용하세요
 require 'net/http'
 
 Datadog.configure do |c|

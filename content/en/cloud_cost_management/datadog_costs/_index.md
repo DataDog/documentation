@@ -27,9 +27,9 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/private-beta/daily-datadog-costs/" >}}
-Daily Datadog costs in Cloud Cost Management are in private beta. To request access, complete the form.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}
+Daily Datadog costs in Cloud Cost Management are in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
 
 ## Overview
 
@@ -63,7 +63,8 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 | dimension_name / dimension | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
 | product_name / datadog_product | `product_name` is the high-level grouping name for Datadog products (for example, `Logs`). </br></br> `datadog_product` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `logs`). |
 | `<Usage Attribution tags>` | You can add up to three tag keys, configured in [Usage Attribution][8], with their associated values (for example, `team` or `service`). |
-| cost_type | The type of charge covered by this item (for example, `committed` or `on-demand`). |
+| cost_type | The type of charge covered by this item (for example, `usage`). |
+| pricing_category | The specific type of charge covered by this item (for example, `committed` or `on-demand`). |
 
 ## Further reading
 

@@ -30,7 +30,7 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in public beta.</div>
+<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
@@ -87,20 +87,27 @@ The severity of the incident in the DORA Metrics product is based on the [incide
 
 ### Mapping PagerDuty services to Datadog services
 
-When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from the [Service Catalog][102].
+When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][107] and from the [Service Catalog][102].
 
-The matching algorithm works in the following scenarios:
+The matching algorithm works in the following steps:
 
-1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog:
-   
-   - If the incident service URL matches a single Datadog service, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
-   - If the incident service URL matches multiple Datadog services, the incident metrics and events are emitted with the Datadog team name.
-   
+1. If the PagerDuty incident event was [triggered from a Datadog monitor][107]:
+   - If the monitor is in [Multi Alert mode][109], the incident metrics and events are emitted with the `env`, `service`, and `team` from the alerted group.
+   - If the monitor has [tags][110] for `env`, `service`, or `team`:
+     - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
+     - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
+     - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
+     
+2. If the service URL of the incident matches the PagerDuty service URL for any services in the Service Catalog:
+   - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
+   - If multiple Datadog services match, the incident metrics and events are emitted with the team.
+
    For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][103].
 
-2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
-3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the corresponding Datadog team name.
-4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the Datadog team name.
+3. If the PagerDuty service name of the incident matches a service name in the Service Catalog, the incident metrics and events are emitted with the service and team.
+4. If the PagerDuty team name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
+5. If the PagerDuty service name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
+6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
 [101]: https://support.pagerduty.com/docs/services-and-integrations
 [102]: /service_catalog/
@@ -108,6 +115,9 @@ The matching algorithm works in the following scenarios:
 [104]: /integrations/pagerduty/
 [105]: https://app.datadoghq.com/organization-settings/api-keys
 [106]: https://support.pagerduty.com/main/docs/incident-priority
+[107]: /integrations/pagerduty/#troubleshooting
+[109]: /monitors/configuration/#multi-alert
+[110]: /monitors/manage/#monitor-tags
 
 {{% /tab %}}
 {{% tab "API" %}}

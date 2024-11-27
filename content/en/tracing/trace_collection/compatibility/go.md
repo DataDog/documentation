@@ -20,12 +20,14 @@ further_reading:
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
 
-The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in maintenance. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
+The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in maintenance. Older versions may function, but no support is provided by default. For special requests, [contact support][4].
 
 ### Requirements
 
 - Datadog Agent v5.21.1+.
-- [Add and initialize the Datadog Go tracer][77] before configuring integrations.
+- Instrument your application before configuring integrations using one of the following methods:
+  * [Automatically at compile time using `orchestrion`][78]
+  * [Manually add and initialize the Datadog Go tracer][77]
 
 ### Integrations
 
@@ -35,16 +37,19 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 
 **Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
-| Framework         | Support Type    | GoDoc Datadog Documentation                                              |
-|-------------------|-----------------|--------------------------------------------------------------------------|
-| [Gin][6]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin][7]               |
-| [Gorilla Mux][8] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][9]                |
-| [gRPC][10]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][11]     |
-| [gRPC v1.2][10]   | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][12] |
-| [chi][13]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][14] |
-| [echo v4][15]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][16]           |
-| [echo v3][15]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][17]              |
-| [Fiber][18]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2][19]              |
+| Framework         | Support Type                                         | GoDoc Datadog Documentation                                              |
+|-------------------|------------------------------------------------------|--------------------------------------------------------------------------|
+| [Gin][6]          | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin][7]               |
+| [Gorilla Mux][8]  | Manual or Compile-Time<sup>[🔹](#library-side)</sup> | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][9]                 |
+| [gRPC][10]        | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][11]     |
+| [gRPC v1.2][10]   | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][12] |
+| [chi][13]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][14]                 |
+| [echo v4][15]     | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][16]           |
+| [echo v3][15]     | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][17]              |
+| [Fiber][18]       | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2][19]           |
+
+<a id="library-side"></a>
+<sup>🔹</sup> Compile-time instrumentation is done directly within the library, and cannot be locally opted out of using the `//orchestrion:ignore` directive.
 
 #### Library compatibility
 
@@ -88,6 +93,7 @@ Packages must be imported with:
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 ```
+
 
 ## Further Reading
 
@@ -169,3 +175,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
 [77]: /tracing/trace_collection/library_config/go/
+[78]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=manualinstrumentation#activate-go-integrations-to-create-spans

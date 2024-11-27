@@ -44,11 +44,17 @@ The Flame Graph is the default visualization that displays all the color-coded s
 
 To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
 
-The legend details the color coding of the flame graph. Group spans by either **Service** (default), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
+The legend details the color coding of the flame graph. Group spans by either **Service** (default), **[Base service][1]** (service from which the span is emitted), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+Spans from [inferred services][2] are represented with a dashed outline.
+
+[2]: /tracing/services/inferred_services
+{{< /site-region >}}
 
 {{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
-
+[1]: /tracing/guide/service_overrides#base-service
 {{% /tab %}}
 {{% tab "Span List" %}}
 
@@ -79,6 +85,12 @@ Each row (span) indicates the following:
 - **Statuses**: When applicable, an HTTP status code is displayed.
 - **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+Spans from [inferred services][1] are represented with a dashed underline.
+
+[1]: /tracing/services/inferred_services
+{{< /site-region >}}
+
 To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
 {{% /tab %}}
@@ -88,15 +100,16 @@ To expand or collapse span descendants, click the chevron (>) icon on a row. To 
 
 Trace map displays a representation of all services involved in a single trace. It provides an overview of the transaction lifecycle at the service level and shows service dependencies.
 
-Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call another service that had already been invoked by the original service, are represented by duplicated nodes.
+Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call another service that had already been invoked by the original service, are represented by duplicated nodes. [Inferred services][2] are represented with a dashed outline and a purple background.
 
 Service nodes explicitly show the percentage of the **total execution time**, which shows the trace duration breakdown at the service level.
 
-If a [service entry span][6] is in an error state, the corresponding service node is marked with a red border to highlight a faulty services. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
+If a [service entry span][1] is in an error state, the corresponding service node is marked with a red border to highlight a faulty services. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
 
 To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name, along with any error messages. To further investigation, click **View Entry Span** to switch to the Waterfall view.
 
-
+[1]: /glossary/#service-entry-span
+[2]: /tracing/services/inferred_services
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -110,21 +123,19 @@ In the Waterfall and Flamegraph visualizations, the search option allows you to 
 
 The search query on the trace side panel supports the following options:
 
-**Free text search:**
+- **Free text search:**
 Free-form text search allows filtering by service, resource, or operation name. It highlights the spans containing the specified text within these categories.
 Example: `web`
-
-**Key-value search:**
+- **Key-value search:**
 Use key:value expression to filter spans with specific key-value pairs.
 Example: `service:web-ui`
 
 **Note**: Wildcards are not supported in the Trace search bar.
 
-**Supported experssions:**
-Group expression: `language:(go OR python)`
-Boolean expression: `service:event-query OR terminator`
-Range expression: `duration:>200ms`
-
+**Supported expressions:**
+- Group expression: `language:(go OR python)`
+- Boolean expression: `service:event-query OR terminator`
+- Range expression: `duration:>200ms`
 
 **Note**: Numerical values support `<`, `>`, `<=`, and `>=` expressions.
 
@@ -137,18 +148,39 @@ The span header contains service, operation, and resource names of the selected 
 
 {{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+When the span represents a client call from an instrumented service to a database, a queue, or a third-party service, the span header shows the service and the inferred entity.
+
+{{< img src="tracing/trace_view/span_header_inferred.png" alt="Span header inferred" style="width:90%;">}}
+{{< /site-region >}}
+
 {{< tabs >}}
 {{% tab "Span Info" %}} 
 
 See all span metadata, including custom tags. Click on a span tag to update the search query in the Trace Explorer or copy the tag's value to the clipboard.
 
 Other information may be displayed under various conditions:
+- Error message and stack trace (on error span)
+- SQL Query markup (on database spans)
+- RUM Context and Metadata (on RUM spans)
+- Spark Metrics (on Spark job spans)
 - A git warning message (when git information is missing on a CI Test)
-- SQL Query markup (on a SQL query)
-- RUM Context and Metadata (on a RUM span)
-- Spark Metrics (on a Spark job span)
 
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+When the service name is an override from the base service name, the top of the info section shows the:
+- **[Base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
+- **[Service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
+- **[Inferred service][4]** (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5].
+
+{{< img src="tracing/trace_view/base_override_inferred_service.png" alt="Base, Override, and inferred service" style="width:80%;">}}
+
+[2]: /tracing/guide/service_overrides#base-service
+[3]: /tracing/guide/service_overrides
+[4]: /tracing/services/inferred_services
+[5]: /tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 [1]: /tracing/glossary/#trace
 {{% /tab %}}
@@ -211,15 +243,13 @@ View [Profiles][1] to identify lines of code related to performance issues. The 
 [1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
-{{% tab "Span Links (Beta)" %}}
-
-<div class="alert alert-info">Span link support is in beta.</div>
+{{% tab "Span Links" %}}
 
 [Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
 Click a span in the flame graph to display spans connected with span links:
 
-{{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
+{{< img src="tracing/span_links/span_links_tab_2.png" alt="Span Links tab" style="width:90%;">}}
 
 **Note**: Span links only display when the corresponding spans are ingested and indexed, for example, with a [retention filter][1].
 

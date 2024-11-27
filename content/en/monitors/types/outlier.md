@@ -6,12 +6,12 @@ aliases:
     - /monitors/create/types/outlier/
 description: "Alert on members of a group behaving differently than the others"
 further_reading:
+- link: "https://www.datadoghq.com/blog/outlier-detection-algorithms-at-datadog"
+  tag: "Blog"
+  text: "Outlier detection in Datadog: A look at the algorithms"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
-  tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"

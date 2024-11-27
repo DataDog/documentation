@@ -115,7 +115,7 @@ Esta sección explica cómo crear dos roles, `ACME Admin` y `ACME User`, cómo o
 ### Crear un rol
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 En la [sección de grupos][1] de los parámetros de la organización Datadog, utiliza el botón Add Role (Añadir rol), en la pestaña Role (Rol), para crear los nuevos roles `ACME Admin` y `ACME User`.
 
@@ -198,7 +198,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 Ahora que tus roles están configurados con sus respectivos permisos, asigna estos roles a tus usuarios.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 En la [sección de equipos][1] de Datadog, ve a la pestaña User (Usuario). Elige un usuario y asígnale el rol `ACME Admin` o el rol `ACME User`, además de los roles que ya tenga asignados. Para obtener más detalles sobre la gestión de usuarios, consulta la sección [Gestión de cuentas][2].
 
@@ -263,7 +263,7 @@ En esta sección se explica cómo:
 **Nota: Los roles no pueden tener **más de una** consulta de restricción adjunta. Si adjuntas una consulta de restricción a un rol, se eliminan todas las consultas de restricción ya adjuntas a este rol.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Utiliza la [página de acceso a datos][1] de la aplicación Datadog para:
 

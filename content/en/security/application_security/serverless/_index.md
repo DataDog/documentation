@@ -342,7 +342,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 ## Google Cloud Run
 
-<div class="alert alert-info">ASM support for Google Cloud Run is in beta.</a></div>
+<div class="alert alert-info">ASM support for Google Cloud Run is in Preview.</a></div>
 
 ### How `serverless-init` works
 
@@ -353,7 +353,7 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 ### Get started
 
 {{< tabs >}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile

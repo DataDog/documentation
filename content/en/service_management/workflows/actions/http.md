@@ -141,8 +141,8 @@ Under **Error on Status**, enter a comma-delineated list of any status codes on 
 
 ## Private actions
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
-Private Actions are in beta. Use this form to request access today.
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
 You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Private actions make use of a private action runner which you install on a host in your network using Docker and pair with a Datadog Connection. For more information, see [Private Actions][5].
