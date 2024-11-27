@@ -22,6 +22,9 @@ further_reading:
   text: Tracing library open source code repository
 ---
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/guide/tutorial-enable-go-containers-v2">Tutorial - Enabling Tracing for a Go Application and Datadog Agent in Containers</a> documentation.</div>
+
+
 ## Overview
 
 This tutorial walks you through the steps for enabling tracing on a sample Go application installed on a container. In this scenario, the Datadog Agent is also installed in a container.

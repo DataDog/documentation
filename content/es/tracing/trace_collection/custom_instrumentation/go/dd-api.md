@@ -40,7 +40,7 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +70,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +89,7 @@ Añade [etiquetas][1] a todos los [tramos][2] configurando el rastreador con la 
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 func main() {
     tracer.Start(
@@ -121,11 +121,14 @@ A diferencia de otras bibliotecas de rastreo de Datadog, al rastrear aplicacione
 
 Para hacer uso de la instrumentación manual, utiliza el paquete `tracer` que está documentado en la [página godoc][4] de Datadog:
 
-Hay dos funciones disponibles para crear tramos. Los detalles de la API están disponibles para `StartSpan` [aquí][5] y para `StartSpanFromContext` [aquí][6].
+Hay tres funciones disponibles para crear tramos. Los detalles de la API están disponibles para `StartSpan` [aquí][5], para `StartSpanFromContext` [aquí][6] y para `Span.StartChild` [aquí][12].
 
 ```go
-//Crea un tramo con un nombre de recurso, que es el tramo secundario de parentSpan.
-span := tracer.StartSpan("mainOp", tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
+// Crea un tramo sin span primario.
+span := tracer.StartSpan("mainOp")
+
+// Crea un tramo con un nombre de recurso, que es el tramo secundario de parentSpan.
+span := parentSpan.StartChild("mainOp", tracer.ResourceName("/user"))
 
 // Crea un tramos que será el tramo secundario del tramo en el contexto Context, si hay un tramo en el contexto.
 // Devuelve el nuevo tramo y un nuevo contexto que contiene el nuevo tramo.
@@ -157,7 +160,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -183,7 +186,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -193,7 +196,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
         // Error de extracción de log o identificador
     }
 
-    span := tracer.StartSpan("post.filter", tracer.ChildOf(sctx))
+	span := tracer.StartSpan("post.filter", tracer.WithStartSpanConfig(&tracer.StartSpanConfig{
+		Parent: sctx,
+	}))
     defer span.Finish()
 }
 ```
@@ -218,9 +223,10 @@ Las trazas se pueden excluir en función de su nombre de recurso, para eliminar 
 [1]: /es/tracing/glossary/#span-tags
 [2]: /es/tracing/glossary/#spans
 [3]: /es/tracing/setup/go/#compatibility
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
+[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpanFromContext
 [7]: /es/tracing/glossary/#trace
 [9]: /es/tracing/security
 [11]: /es/tracing/trace_collection/trace_context_propagation/go/
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#Span.StartChild

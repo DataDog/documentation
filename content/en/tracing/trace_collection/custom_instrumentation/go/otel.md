@@ -28,9 +28,9 @@ import (
 	"log"
 	"os"
 
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
-	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" if you're using 2.x
+	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" if you're using 2.x
+	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using 2.x
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -49,10 +49,16 @@ To configure OpenTelemetry to use the Datadog trace provider:
    go get go.opentelemetry.io/otel
    ```
 
-3. Install the Datadog OpenTelemetry wrapper package `gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry` using the command:
+3. Install the Datadog OpenTelemetry wrapper package using the command:
 
    ```shell
    go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
+   ```
+
+   If you are using the preview version of v2.x, do:
+
+   ```shell
+   go get github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry
    ```
 
 4. Import packages in the code:
@@ -60,7 +66,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
    ```go
    import (
      "go.opentelemetry.io/otel"
-     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"  // use "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" if you're using 2.x
    )
    ```
 
