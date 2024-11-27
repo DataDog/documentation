@@ -17,11 +17,11 @@ further_reading:
 
 You can configure your LLM applications on the Configuration page with settings that can optimize your application's performance and security. 
 
-Topics
-: Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
-
 Evaluations
 : Enables Datadog to assess your LLM application against respective dimensions like Quality and Security and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. For more information about evaluations, see [Terms and Concepts][1].
+
+Topics
+: Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
 
 ## Connect your OpenAI account
 
@@ -47,8 +47,6 @@ Navigate to [**LLM Observability > Settings > Evaluations**][3].
 1. Assign the LLM application you want to run the evaluation on.
 
 After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using the OpenAI API key you provided.
-
-You can monitor the usage of this API key by querying for the metrics `ml_obs.span.llm.input.tokens`, `ml_obs.span.llm.output.tokens`, and `ml_obs.span.llm.total.tokens`. Filter by the `evaluation:default` tag.
 
 For more information about evaluations, see [Terms and Concepts][1].
 
