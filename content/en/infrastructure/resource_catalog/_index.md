@@ -26,8 +26,6 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in Preview.</div>
-
 ## Overview
 
 Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
