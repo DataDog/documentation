@@ -68,38 +68,38 @@ Terraform support will be announced after Data Access Control is generally avail
 Each restricted dataset can control access to multiple types of data, such as metrics. You are free to use the same or different tags across multiple types of telemetry. Within each telemetry type, you must use a _single_ tag or attribute to define your access strategy.
 
 If you have too many combinations of tags or attributes to fit within these constraints, consider [revisiting your tagging][4] to define a new tag that better reflects your access strategy.
+# Supported examples and restrictions for Restricted Datasets
+## Supported example
 
-**Supported example**
+### Restricted dataset 1
+- **Telemetry Type**: RUM  
+   - **Filters**: `@application.id:ABCD`
 
-Restricted dataset 1: 
-* Telemetry type: RUM 
-    * Filters: `@application.id:ABCD`
-
-Restricted dataset 2: 
+### Restricted dataset 2
 * Telemetry type: RUM
     * Filters: `@application.id:EFGH`
 * Telemetry type: Metrics
     * Filters: `env:prod`
 
-**Not supported**
+## Not supported examples
 
-Restricted dataset 1: 
+### Restricted dataset 1: 
 * Telemetry type: RUM 
     * Filters: `@application.id:ABCD`
 
-Restricted dataset 2:
+### Restricted dataset 2:
 * Telemetry type: RUM 
     * Filters: `env:prod`
 
 Restricted dataset 1 uses `@application.id` as the tag for RUM data, so a new restricted dataset can't change to a different tag. Instead, consider reconfiguring restricted dataset 2 to use `@application.id`, or changing all of your restricted datasets with RUM data to use another tag.
 
-**Not supported**
+## Not supported examples
 
-Restricted dataset 1: 
+### Restricted dataset 1: 
 * Telemetry type: RUM 
     * Filters: `@application.id:ABCD`
 
-Restricted Dataset 2: 
+### Restricted Dataset 2: 
 * Telemetry type: RUM
     * Filters: `@application.id:IJKL` `env:prod`
 
