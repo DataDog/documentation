@@ -50,6 +50,8 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`.
 * `*web` matches all log messages that end with `web`.
 
+**Note**: Wildcards only work as wildcards outside of double quotes. For example, `@ci.pipeline.name:"*test*"` matches a pipeline which contains the string `*test*` in its name. `@ci.pipeline.name:*test*` matches a pipeline which contains the string test in its name.
+
 Wildcard searches work within tags and attributes (faceted or not) with this syntax. 
 
 ### Search wildcard
