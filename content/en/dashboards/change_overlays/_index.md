@@ -24,34 +24,27 @@ further_reading:
 
 ## Overview
 
-As teams iterate, deploy code, and make changes to their applications and services, identifying the exact change that caused a spike in errors, increased latency, or slower page load times can be challenging. Use Change Overlays to visualize changes on your dashboard and quickly correlate performance issues with specific deployments.
-
-With the introduction of [Change Tracking][16], you can now identify a broader set of changes, including feature flags, database modifications, and infrastructure adjustments, alongside deployments.
+As teams iterate, deploy code, and make changes to their applications and services, identifying the exact change that caused a spike in errors, increased latency, or slower page load times can be challenging. Use Change Overlays to visualize changes on your dashboard like deployments or feature flags, and quickly correlate performance issues with them.
 
 ## Overlay changes on graphs
 
-To get started, click **Show Overlays** in the upper right corner of your dashboard. 
+To get started, click **Show Overlays** in the upper right corner of your dashboard to enable the [Change Tracking][16] timeline and change overlays on timeseries widgets.
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
-Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
+When actived, the **Service** search bar will display the **Most Relevant** service by default. Datadog automatically selects the service most frequently referenced in the queries supporting the widgets on the dashboard.
 
-<!-- Additional Review Needed: @Gonzalo is line 37 still true/relevant? -->
-
-Click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
-
-### Override automatic detection
 Override the automatic service detection by using the search bar to find the service of interest. 
 
-## Analyze the impact of your change
-Click on any overlay on your graph to open a change analysis page, allowing you to understand the status and impact of you change.
+All changes displayed on the change timeline and as overlays tie back to the selected service. 
+Use the **Show On** dropdown to limit change overlays to relevant widgets, or shown them on all widgets on your dashboard.
+
+To view additional details or take additional actions, click on a change overlay or change within the change timeline.
 
 ## FAQ
 
 ### What are deployments changes scoped to?
 For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`. 
-
-<!-- Additional Review Needed: @Gonzalo is line 52 still true/something that would be better captured on Change Tracking? -->
 
 
 ## Further Reading

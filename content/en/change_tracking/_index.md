@@ -69,8 +69,8 @@ To use change tracking on the Monitor Status Page, ensure the appropriate servic
 
 1. Go to the monitor status page for the monitor you are analyzing.
 1. Locate the change tracking timeline at the top of the page.
-   - For monitors with multiple graphs (dictated by the group by in the monitor query), increase the groups per page amount or page through the graphs to locate the change tracking timeline.
-1. Use the timeline together with the **Status & History** graphs to correlate change events with the alert.
+   - For monitors with multiple graphs (dictated by the group by in the monitor query), filter to an individual group.
+1. Use the timeline together with the event graphs to correlate change events with the alert.
 1. Click the change indicator in the timeline to view more details about the change in the side panel.
 1. From the side panel, you can investigate more details about the change and take the following actions:
    - View the deployment in your CI/CD system.
