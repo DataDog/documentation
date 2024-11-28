@@ -36,7 +36,7 @@ title: 메트릭
 {{< /whatsnext >}}
 
 {{< whatsnext desc="커스텀 메트릭 볼륨 및 비용에 대한 이해와 관리" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics Without LimitsTM을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics Without Limits™을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 개요
@@ -199,7 +199,7 @@ UI에서 또는 [API][27]을 통해 중첩된 쿼리를 사용하여 시간과 �
 {{< whatsnext desc="메트릭에 대해 다음 내용도 확인하세요.">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>고급 필터링</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>분포 메트릭</u> - 전체 데이터 세트에서 글로벌 백분위수를 계산하세요.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics Without LimitsTM을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics Without Limits™을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
     {{< nextlink href="https://dtdg.co/fe" >}}<u>기본 구축</u> - 인터랙티브 세션에 참여하여 메트릭에 대해 자세히 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
