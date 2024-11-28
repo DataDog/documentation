@@ -111,7 +111,7 @@ title: 대시보드
 
 {{< learning-center-callout header="Datadog 학습 센터의 그래프 위젯 생성 시도" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dahboard-graph-widgets">}} 시계열, 쿼리 값, 상단 목록, 표, 분포, 파이 차트 위젯을 살펴보세요. 위젯 설정 방법을 배우고 각 위젯 유형이 언제 활용되어야 하는지 이해합니다. {{< /learning-center-callout >}}
 
-{{< learning-center-callout header="Datadog 학습 센터에서 테이블, 목록 SLO, 아키텍처 위젯 생성 시도" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}}  표, 목록, SLO 및 아키텍처 위젯을 살펴보세요. 메트릭 및 웹 애플리케이션의 성능을 추적하는 방법과 중요한 데이터를 표시하는 방법을 알아보세요. {< /learning-center-callout >}}
+{{< learning-center-callout header="Datadog 학습 센터에서 테이블, 목록 SLO, 아키텍처 위젯 생성 시도" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}}  표, 목록, SLO 및 아키텍처 위젯을 살펴보세요. 메트릭 및 웹 애플리케이션의 성능을 추적하는 방법과 중요한 데이터를 표시하는 방법을 알아보세요. {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
