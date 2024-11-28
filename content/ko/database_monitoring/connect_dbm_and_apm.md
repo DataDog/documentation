@@ -73,7 +73,7 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 
 \* [CommandType.StoredProcedure][25] 지원 안 됨
 
-\*\* Full mode SQL Server for Java/.NET:
+\*\* 자바/.NET에 대한 전체 모드 SQL Server:
   - 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
   - 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
   - 요구 사항:
