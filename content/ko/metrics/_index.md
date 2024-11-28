@@ -16,7 +16,7 @@ title: 메트릭
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
   커스텀 메트릭에 대한 파운데이션 활성화 세션을 살펴보고 등록하세요. 커스텀 알고리즘에 대한 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 성능 분포 같은 애플리케이션 KPI를 추적하는 방법을 알아보세요.
-{< /learning-center-callout >}}
+{{< /learning-center-callout >}}
 
 이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다: 
 
