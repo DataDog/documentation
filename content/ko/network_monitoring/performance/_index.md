@@ -4,9 +4,9 @@ algolia:
   - npm
   - network performance monitoring
 aliases:
-- /monitors/network_flow_monitors/
-- /graphing/infrastructure/network_performance_monitor/
-- /network_performance_monitoring/
+- /ko/monitors/network_flow_monitors/
+- /ko/graphing/infrastructure/network_performance_monitor/
+- /ko/network_performance_monitoring/
 description: 인프라스트럭처의 지점 간 통신에 대한 메트릭을 살펴보세요.
 further_reading:
 - link: https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/
@@ -33,6 +33,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: 블로그
   text: 네트워크 및 보안 분석에 대한 DNS 모니터링
+- link: https://www.datadoghq.com/blog/monitor-connection-churn-datadog/
+  tag: 블로그
+  text: 모니터링 및 연결 이탈 해결을 위한 모범 사례
 title: 네트워크 성능 모니터링
 ---
 
@@ -49,7 +52,7 @@ Datadog 네트워크 성능 모니터링(NPM)을 사용하면 서비스, 컨테�
 
 NPM은 Linux와 [Windows OS][3]는 물론 [Istio 서비스 메시로 계측되고][4] 오케스트레이션되는 컨테이너화된 환경을 기본적으로 지원하여 복잡한 네트워크를 간편하게 모니터링할 수 있습니다.
 
-또 NPM 기능인 [네트워크 경로][5]가 프라이빗 베타 서비스 중입니다. 이 서비스를 이용하면 내 네트워크의 홉바이홉 트래픽을 볼 수 있습니다.
+또한 NPM의 기능인 [네트워크 경로][5]를 미리보기에서 사용할 수 있어 네트워크에서 홉별 트래픽을 확인할 수 있습니다.
 
 {{< whatsnext desc="이 섹션에는 다음 주제가 포함되어 있습니다.">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>설정</u>: 네트워크 데이터를 수집하도록 에이전트 구성{{< /nextlink >}}
