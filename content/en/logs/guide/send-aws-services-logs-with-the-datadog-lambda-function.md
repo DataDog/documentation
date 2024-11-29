@@ -135,7 +135,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `ssm:ListCommands`                                          | List all SSM commands.                                                       |
     | `states:ListStateMachines`                                  | List all Step Functions.                                                     |
     | `states:DescribeStateMachine`                               | Get logging details about a Step Function.                                   |
-    | `wafv2:ListLoggingConfigurations`                           | Lists all logging configurations of the Web Application Firewall.            |
+    | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events                          |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
