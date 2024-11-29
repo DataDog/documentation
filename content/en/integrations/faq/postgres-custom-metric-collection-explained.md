@@ -26,7 +26,7 @@ The SQL to execute. It can be a simple statement or a multi-line script. All of 
 
 `columns`
 : **Required**: Yes <br/> 
-A list representing each column ordered sequentially from left to right. There are 2 required pieces of data:<br>  - **`name`**: The suffix to append to the metric_prefix to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: The submission method (for example, `gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. 
+A list representing each column ordered sequentially from left to right. There are 2 required pieces of data:<br>  - **`name`**: The suffix to append to the `metric_prefix` to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: The submission method (for example, `gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. 
 
 `tags`
 : **Required**: No <br/>
