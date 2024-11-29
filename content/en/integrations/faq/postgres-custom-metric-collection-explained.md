@@ -17,7 +17,7 @@ To collect custom metrics with the Postgres integration, use the `custom_queries
 
 
 `metric_prefix`
-: **Required**: Yes </br/> 
+: **Required**: Yes <br/> 
 Each metric starts with the chosen prefix.
 
 `query`
