@@ -24,7 +24,7 @@ title: マルチステップ API テスト
 
 ## 概要
 
-Multistep API tests allow you to chain several [HTTP requests][1] or [gRPC requests][20] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, use [API tests][2].
+Multistep API テストは、一度に複数の [HTTP リクエスト][1]または [gRPC リクエスト][20]を連鎖させ、主要サービスにおける複雑な操作フローがいつでもどこでも利用可能であることを、プロアクティブに監視・確認できるようにするものです。サービスに対して単一のリクエストを実行したい場合は、[API テスト][2]を使用してください。
 
 以下を実現できます。
 
@@ -53,7 +53,7 @@ Multistep API テストの**ロケーション**を選択します。Multistep A
 
 ### ステップを定義する
 
-To create an API request step, click **Create Your First Step**.
+API リクエストのステップを作成するには、**Create Your First Step** をクリックします。
 
 {{< img src="synthetics/api_tests/ms_create_request.png" alt="Multistep API テストリクエストを作成する" style="width:90%;" >}}
 
@@ -67,41 +67,57 @@ To create an API request step, click **Create Your First Step**.
    {{< tabs >}}
    {{% tab "HTTP" %}}
 
-   See the [HTTP Tests documentation][101] to create an HTTP request and add assertions. Assertions are optional in multistep API tests.
+   HTTP リクエストを作成し、アサーションを追加するには、 [HTTP テストのドキュメント][101]を参照してください。アサーションはマルチステップ API テストでは任意です。
 
    [101]: /synthetics/api_tests/http_tests/
 
    {{% /tab %}}
    {{% tab "gRPC" %}}
 
-   See the [gRPC Tests documentation][101] to create a gRPC request and add assertions for a behavior check or a health check. Assertions are optional in multistep API tests.
+gRPC リクエストを作成し、動作チェックまたはヘルスチェックのためのアサーションを追加するには、 [gRPC テストのドキュメント][101]を参照してください。アサーションはマルチステップ API テストでは任意です。
 
    [101]: /synthetics/api_tests/grpc_tests#define-the-request
 
    {{% /tab %}}
    {{< /tabs >}}
 
-#### 実行パラメーターの追加
+### 実行設定を追加
 
-**Continue with test if this step fails** をクリックすると、ステップに失敗しても次のステップに進むことができます。こうすることで、テストが後始末をすることができます。例えば、あるテストでは、リソースを作成し、そのリソースに対していくつかのアクションを実行し、そのリソースを削除して終了することができます。
+**Execution Settings** の下で、以下のオプションが利用できます。
+
+#### ステップの成功:
+
+ステップが成功した後に後続のステップを続行するには、 **If step succeeds, continue to next step** をクリックします。
+
+{{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="ステップの成功オプション 'continue to next step' を示す実行設定のスクリーンショット" style="width:90%;" >}}
+
+ステップが成功した後にテストを終了するには、 **If step succeeds, exit test and mark it as passed** をクリックします。これにより、不要なステップの実行を防ぎ、テストが失敗としてマークされるのを回避します。
+
+{{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="ステップの成功で 'exit and mark as passed' を示す実行設定のスクリーンショット" style="width:90%;" >}}
+
+#### ステップの失敗
+
+ステップが失敗した場合に後続のステップを実行するには、**If step fails, continue to next step** をクリックします。これは、後続のステップを実行したい場合のクリーンアップタスクに役立ちます。例えば、テストがリソースを作成し、そのリソースに対していくつかの操作を行い、最後にそのリソースを削除する場合などです。
 
 中間ステップの 1 つが失敗した場合、テスト終了時にリソースが削除され、誤検出が発生しないようにするため、すべての中間ステップでこの設定を有効にしたいと思います。
 
 このテストでは、エンドポイントが期待通りに応答しない場合、アラートが生成されます。テストが失敗した場合、Y ミリ秒後に X 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
 
+{{< img src="synthetics/multistep_tests/step_failure.png" alt="ステップの失敗を示す実行設定のスクリーンショット" style="width:90%;" >}}
+
 #### 応答から変数を抽出する
 
-Optionally, extract variables from the response of your API request by parsing its response headers or body. The value of the variable updates each time the API request step runs.
+必要に応じて、API リクエストの応答ヘッダーまたは本文をパースして変数を抽出できます。変数の値は、API リクエストステップが実行されるたびに更新されます。
 
 変数のパースを開始するには、**Extract a variable from response content** をクリックします。
 
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
 2. 変数をレスポンスのヘッダーから抽出するか、本文から抽出するか決定します。
 
-   * Extract the value from **response header**: use the full response header of your API request as the variable value, or parse it with a [`regex`][9].
-   * Extract the value from **response body**: use the full response body of your API request as the variable value or parse it with a [`regex`][9], a [`JSONPath`][7], or a [`XPath`][8].
+   * **応答ヘッダー**から値を抽出: API リクエストの応答ヘッダー全体を変数値として使用するか、[`regex`][9] を用いてパースします。
+   * **応答本文**から値を抽出: API リクエストの応答本文全体を変数値として使用するか、[`regex`][9]、[`JSONPath`][7]、または [`XPath`][8] を用いてパースします。
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from API requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Multistep API テストで API リクエストから変数を抽出する" style="width:90%;" >}}
 
 1 つのテストステップにつき最大 10 個の変数を抽出することができます。一度作成すると、この変数はマルチステップ API テストの次のステップで使用することができます。詳しくは、[変数の使用](#use-variables)を参照してください。
 
@@ -121,9 +137,9 @@ Multistep API テストは次の頻度で実行できます。
 
 ローカル変数の作成に加えて、マルチステップ API テストの[任意のステップから変数を抽出](#extract-variables-from-the-response)し、[後続のステップで値を再挿入する](#use-variables)ことが可能です。
 
-### Use variables
+### 変数を使用する
 
-You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your API tests.
+API テストの URL、高度なオプション、およびアサーションで、[`Settings` で定義されたグローバル変数][14]と[ローカルで定義された変数](#create-local-variables)を使用できます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -152,9 +168,9 @@ You can use the [global variables defined in the `Settings`][14] and the [locall
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
   - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (30 minutes).
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、リクエストおよびアサーションの処理時間が最大許容時間 (30 分) に達したことを示しています。
 
-For HTTP steps, see [common HTTP step failures][15]. For gRPC steps, see [common gRPC step failures][16].
+HTTP ステップについては、 [一般的な HTTP ステップの失敗][15]を参照してください。gRPC ステップについては、 [一般的な gRPC ステップの失敗][16]を参照してください。
 
 ## 権限
 

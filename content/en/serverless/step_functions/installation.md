@@ -33,9 +33,9 @@ Then, to send your Step Functions logs to Datadog:
 1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
    {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
-2. Ensure you have deployed the [Datadog Lambda Forwarder][11], and that you are using v3.121.0+. You might need to [update your Forwarder][12]. As an alternative, you may also use [Amazon Data Firehose][16].
+2. Ensure you have deployed the [Datadog Lambda Forwarder][6], and that you are using v3.130.0+. You might need to [update your Forwarder][6]. As an alternative, you may also use [Amazon Data Firehose][16], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. However, it requires that the Step Functions log group name begins with "/aws/vendedlogs/states/".
 
-3. Subscribe CloudWatch logs to the Datadog Lambda Forwarder. 
+3. Subscribe CloudWatch logs to the Datadog Lambda Forwarder. If the log group name for your Step Functions begins with "/aws/vendedlogs/states/", you can also use the [Serverless Framework or the Datadog CLI to configure the subscription][11].
    {{< tabs >}}
    {{% tab "Automatic" %}}
    1. Ensure that you have set up the [Datadog-AWS integration][1].
@@ -50,13 +50,13 @@ Then, to send your Step Functions logs to Datadog:
    [2]: https://app.datadoghq.com/integrations/aws
    {{% /tab %}}
    {{% tab "Manual" %}}
-   1. Ensure that your log group name has the prefix `/aws/vendedlogs/states`. 
-   2. Open your AWS console and go to your Datadog Lambda Forwarder. In the *Function overview* section, click on *Add trigger*.
-   3. Under *Add trigger*, in the *Trigger configuration* section, use the *Select a source* dropdown to select `CloudWatch Logs`.
-   4. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
-   5. Enter a filter name. You can choose to name it "empty filter" and leave the *Filter pattern* box blank.
+   1. Open your AWS console and go to your Datadog Lambda Forwarder. In the *Function overview* section, click on *Add trigger*.
+   2. Under *Add trigger*, in the *Trigger configuration* section, use the *Select a source* dropdown to select `CloudWatch Logs`.
+   3. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
+   4. Enter a filter name. You can choose to name it "empty filter" and leave the *Filter pattern* box blank.
    {{% /tab %}}
    {{< /tabs >}}
+
 
 4. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>`, `service:<SERVICE_NAME>`, and `version:<VERSION>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name. The `version` tag defaults to `1.0`.
 
@@ -69,7 +69,7 @@ Then, to send your Step Functions logs to Datadog:
 ## Additional options for instrumentation
 
 
-### Merge Step Functions with your AWS Lambda traces
+### Merge Step Functions with AWS Lambda traces
 
 See [Merge Step Functions traces with Lambda traces][11]. Ensure that you have also [set up Serverless Monitoring for AWS Lambda][10].
 
@@ -104,7 +104,6 @@ If you cannot see your traces, see [Troubleshooting][5].
 [9]: /integrations/amazon_step_functions
 [10]: /serverless/aws_lambda/installation
 [11]: /serverless/step_functions/merge-step-functions-lambda
-[12]: /logs/guide/forwarder/
 [13]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [14]: /getting_started/integrations/aws/
 [15]: https://app.datadoghq.com/integrations/aws

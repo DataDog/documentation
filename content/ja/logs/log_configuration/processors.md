@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - grok
+  - grok パーサー
+  - ログのパース
+  - 属性の抽出
+  - 属性の再マッピング
+  - パース
 aliases:
 - /ja/logs/processing/processors/
 description: Grok プロセッサーを使用してログをパースする
@@ -104,7 +112,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 * ログイベントは過去 18 時間、未来の 2 時間まで送信が可能です。
 * ISO 8601-1:2019 では、基本フォーマットは `T[hh][mm][ss]`、拡張フォーマットは `T[hh]:[mm]:[ss]` です。それ以前のバージョンでは、どちらのフォーマットでも T (時刻を表す) が省略されています。
 * ログにデフォルトの属性が含まれず、独自の日付属性も定義していない場合、Datadog は、ログを受信した日付をタイムスタンプとします。
-* If multiple log date remapper processors are applied to a given log within the pipeline, the last one (according to the pipeline's order) is taken into account.
+* 複数のログ日付リマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最後のプロセッサーが考慮されます。
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -161,7 +169,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 * **o** または **s** で始まる文字列または **OK** か **Success**に一致する文字列 (大文字と小文字の区別なし) は、**OK** にマップされます
 * 他はすべて、**info (6)** にマップされます
 
-**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
+**注**: 複数のログステータスリマッパープロセッサーがパイプライン内のログに適用された場合、パイプラインの順序で最初にあるもののみが考慮されます。さらに、ログに一致するすべてのパイプラインに対して、適用可能なすべてのパイプラインから最初に検出されたステータスリマッパーのみが適用されます。
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -200,7 +208,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 
 サービスリマッパープロセッサーは、ログに 1 つまたは複数の属性を正式なサービスとして割り当てます。
 
-**Note**: If multiple service remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
+**注**: 複数のサービスリマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -243,7 +251,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 
 メッセージ属性を定義するには、まず[ストリングビルダープロセッサー](#string-builder-processor)を使用して、使用したい属性ごとに新しい文字列属性を作成します。次に、ログメッセージリマッパーを使用して、文字列属性をメッセージとして再マッピングします。
 
-**Note**: If multiple log message remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline order) is taken into account.
+**注**: 複数のログメッセージリマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -424,7 +432,7 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 
 **注**:
 
-* このクエリの構文は[ログエクスプローラー][6]検索バーで使用されているものです。このクエリはファセットか否かに関わらず、任意のログ属性またはタグで実行できます。クエリ内でワイルドカードを使用することも可能です。
+* このクエリの構文は [Log Explorer][6] の検索バーで使用されているものと同じです。このクエリはファセットかどうかに関係なく、任意のログ属性またはタグに対して実行できます。さらに、クエリ内でワイルドカードを使用することも可能です。
 * ログは、プロセッサークエリのいずれかと一致した時点で停止します。1 つのログが複数のクエリに一致する可能性がある場合は、クエリが正しい順序になっていることを確認してください。
 * カテゴリ名は一意でなければなりません。
 * カテゴリプロセッサーを定義したら、[ログステータスリマッパー](#log-status-remapper)を使用してカテゴリをログステータスにマップします。
@@ -648,7 +656,7 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 | `name`       | 文字列           | いいえ       | プロセッサーの名前。                                                                                                    |
 | `is_enabled` | Boolean          | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                     |
 | `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト: `network.client.ip`。                                                                  |
-| `target`     | 文字列           | Yes      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト:  `network.client.geoip`。  |
+| `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト:  `network.client.geoip`。  |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
