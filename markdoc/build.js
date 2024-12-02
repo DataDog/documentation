@@ -12,34 +12,7 @@ const yaml = require('js-yaml');
 const MarkdocHugoIntegration = require('./markdoc-hugo-integration/dist').MarkdocHugoIntegration;
 
 const env = process.env.CI_ENVIRONMENT_NAME || 'development';
-
-// Load the site params from the appropriate files
-const defaultSiteParamsFile = path.resolve(__dirname, '../config/_default/params.yaml');
-const defaultSiteParams = yaml.safeLoad(fs.readFileSync(defaultSiteParamsFile, 'utf8'));
-const envSiteParamsFile = path.resolve(__dirname, `../config/${env}/params.yaml`);
-const envSiteParams = yaml.safeLoad(fs.readFileSync(envSiteParamsFile, 'utf8'));
-const siteParams = Object.assign({}, defaultSiteParams, envSiteParams);
-
-// Load the site config from the appropriate files
-const defaultSiteConfigFile = path.resolve(__dirname, '../config/_default/config.yaml');
-const defaultSiteConfig = yaml.safeLoad(fs.readFileSync(defaultSiteConfigFile, 'utf8'));
-const envSiteConfigFile = path.resolve(__dirname, `../config/${env}/config.yaml`);
-const envSiteConfig = yaml.safeLoad(fs.readFileSync(envSiteConfigFile, 'utf8'));
-const siteConfig = Object.assign({}, defaultSiteConfig, envSiteConfig);
-
-// Load the languages from the appropriate file
-const languagesFile = path.resolve(__dirname, '../config/_default/languages.yaml');
-const languagesConfig = yaml.safeLoad(fs.readFileSync(languagesFile, 'utf8'));
-const languages = Object.keys(languagesConfig);
-
-// Load the i18n strings
-const i18n = {};
-const i18nDir = path.resolve(__dirname, '../i18n');
-const files = fs.readdirSync(i18nDir);
-files.forEach((file) => {
-    const lang = file.replace('.json', '');
-    i18n[lang] = yaml.safeLoad(fs.readFileSync(path.resolve(i18nDir, file), 'utf8'));
-});
+const baseSiteDir = path.resolve(__dirname, '..');
 
 const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc-assets.html');
 const SITE_DIR = path.resolve(__dirname, '..');
@@ -48,12 +21,8 @@ const CONTENT_DIR = path.resolve(__dirname, '../content');
 // Initialize the Markdoc integration
 const markdocIntegration = new MarkdocHugoIntegration({
     config: {
-        siteParams,
-        siteConfig,
-        languages,
-        env,
-        siteDir: SITE_DIR,
-        i18n
+        baseSiteDir,
+        env
     }
 });
 

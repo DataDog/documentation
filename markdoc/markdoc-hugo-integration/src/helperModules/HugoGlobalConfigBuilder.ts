@@ -4,6 +4,7 @@ import * as yaml from 'js-yaml';
 import {
   HugoEnv,
   HugoGlobalConfig,
+  HugoGlobalConfigSchema,
   HugoLanguagesConfig,
   HugoLanguagesConfigSchema,
   HugoSiteConfig,
@@ -14,39 +15,38 @@ import {
   i18nConfig,
   i18nConfigSchema
 } from '../schemas/config/hugo';
+import { IntegrationConfig } from '../schemas/config/integration';
 
-class HugoGlobalConfigBuilder {
-  static build(baseSiteDir: string, env: HugoEnv): HugoGlobalConfig {
-    const siteParams = this.loadSiteParams(baseSiteDir, env);
-    const siteConfig = this.loadSiteConfig(baseSiteDir, env);
-    const languages = this.loadLanguages(baseSiteDir);
-    const i18n = this.loadI18n(baseSiteDir);
-    const dirs = this.getSubdirsByType(baseSiteDir);
+export class HugoGlobalConfigBuilder {
+  static build(p: IntegrationConfig): HugoGlobalConfig {
+    const config: HugoGlobalConfig = {
+      siteParams: this.loadSiteParams(p),
+      siteConfig: this.loadSiteConfig(p),
+      languages: this.loadLanguages(p),
+      env: p.env,
+      siteDir: p.baseSiteDir,
+      i18n: this.loadI18n(p),
+      dirs: this.getSubdirsByType(p)
+    };
+
+    HugoGlobalConfigSchema.parse(config);
+    return config;
+  }
+
+  private static getSubdirsByType(p: IntegrationConfig): HugoSubdirsByType {
     return {
-      siteParams,
-      siteConfig,
-      languages,
-      env,
-      siteDir: baseSiteDir,
-      i18n,
-      dirs
+      content: p.baseSiteDir + '/content',
+      filtersConfig: p.baseSiteDir + '/config/_default/content_filters',
+      partials: p.baseSiteDir + '/layouts/partials',
+      images: p.baseSiteDir + '/static/images'
     };
   }
 
-  private static getSubdirsByType(siteDir: string): HugoSubdirsByType {
-    return {
-      content: siteDir + '/content',
-      filtersConfig: siteDir + '/config/_default/content_filters',
-      partials: siteDir + '/layouts/partials',
-      images: siteDir + '/static/images'
-    };
-  }
-
-  private static loadSiteParams(baseSiteDir: string, env: HugoEnv): HugoSiteParams {
-    const defaultSiteParamsFile = baseSiteDir + '/config/_default/params.yaml';
+  private static loadSiteParams(p: IntegrationConfig): HugoSiteParams {
+    const defaultSiteParamsFile = p.baseSiteDir + '/config/_default/params.yaml';
     const defaultSiteParams = yaml.load(fs.readFileSync(defaultSiteParamsFile, 'utf8'));
 
-    const envSiteParamsFile = baseSiteDir + `/config/${env}/params.yaml`;
+    const envSiteParamsFile = p.baseSiteDir + `/config/${p.env}/params.yaml`;
     const envSiteParams = yaml.load(fs.readFileSync(envSiteParamsFile, 'utf8'));
 
     const siteParams = Object.assign(
@@ -59,11 +59,11 @@ class HugoGlobalConfigBuilder {
     return siteParams;
   }
 
-  private static loadSiteConfig(baseSiteDir: string, env: HugoEnv): HugoSiteConfig {
-    const defaultSiteConfigFile = baseSiteDir + '/config/_default/config.yaml';
+  private static loadSiteConfig(p: IntegrationConfig): HugoSiteConfig {
+    const defaultSiteConfigFile = p.baseSiteDir + '/config/_default/config.yaml';
     const defaultSiteConfig = yaml.load(fs.readFileSync(defaultSiteConfigFile, 'utf8'));
 
-    const envSiteConfigFile = baseSiteDir + `/config/${env}/config.yaml`;
+    const envSiteConfigFile = p.baseSiteDir + `/config/${p.env}/config.yaml`;
     const envSiteConfig = yaml.load(fs.readFileSync(envSiteConfigFile, 'utf8'));
 
     const siteConfig = Object.assign(
@@ -76,8 +76,8 @@ class HugoGlobalConfigBuilder {
     return siteConfig;
   }
 
-  private static loadLanguages(baseSiteDir: string): HugoLanguagesConfig {
-    const languagesFile = baseSiteDir + '/config/_default/languages.yaml';
+  private static loadLanguages(p: IntegrationConfig): HugoLanguagesConfig {
+    const languagesFile = p.baseSiteDir + '/config/_default/languages.yaml';
     const languagesConfig = yaml.load(fs.readFileSync(languagesFile, 'utf8'));
     // @ts-ignore, data is validated by the schema on the next line
     const languages = Object.keys(languagesConfig);
@@ -85,9 +85,9 @@ class HugoGlobalConfigBuilder {
     return languages;
   }
 
-  static loadI18n(baseSiteDir: string): i18nConfig {
+  static loadI18n(p: IntegrationConfig): i18nConfig {
     const i18n = {};
-    const i18nDir = baseSiteDir + '/i18n';
+    const i18nDir = p.baseSiteDir + '/i18n';
     const files = fs.readdirSync(i18nDir);
     files.forEach((file) => {
       const lang = file.replace('.json', '');

@@ -21,7 +21,7 @@
 import { buildFilterSelectorUi } from './PageBuilder/components/ContentFilter';
 import { resolvePageFilters } from './filterResolution';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
-import { reresolveFunctionNode } from 'markdoc-static-compiler/src/reresolver';
+import { reresolveFunctionNode } from './renderer/reresolver';
 import {
   expandClientFunction,
   MinifiedClientFunction

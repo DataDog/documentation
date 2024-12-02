@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { FilterOptionsConfig } from './schemas/yaml/filterOptions';
 import { IntegrationConfig } from './schemas/config/integration';
-import { HugoGlobalConfig, HugoGlobalConfigSchema } from './schemas/config/hugo';
+import { HugoGlobalConfig } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
@@ -13,8 +13,8 @@ import {
 } from './schemas/compilationResults';
 import { PageFiltersManifestSchema } from './schemas/pageFilters';
 import { Glossary } from './schemas/yaml/glossary';
-import { HugoFunctions } from './helperModules/HugoFunctions';
 import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
+import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
 
 /**
  * The external interface of the integration.
@@ -40,11 +40,7 @@ export class MarkdocHugoIntegration {
    * Validate and store the provided configuration.
    */
   constructor(args: { config: IntegrationConfig }) {
-    const hugoGlobalConfig = {
-      ...args.config,
-      dirs: HugoFunctions.getSubdirsByType(args.config.siteDir)
-    };
-    this.hugoGlobalConfig = HugoGlobalConfigSchema.parse(hugoGlobalConfig);
+    this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
     // Load the English glossary configuration
     this.glossariesByLang = YamlConfigParser.loadGlossariesByLang({
