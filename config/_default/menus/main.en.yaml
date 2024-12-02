@@ -733,10 +733,6 @@ menu:
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 1004
-    - name: Combining OTel and Datadog Metrics
-      url: opentelemetry/guide/combining_otel_and_datadog_metrics/
-      parent: otel_guides
-      weight: 1005
     - name: Developers
       url: developers/
       pre: dev-code
@@ -1666,6 +1662,11 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 304
+    - name: Amazon Elastic Container Explorer
+      url: infrastructure/containers/amazon_elastic_container_explorer
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
+      weight: 305
     - name: Processes View
       url: infrastructure/process/
       parent: infrastructure

@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
   tag: "blog"
   text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/"
+  tag: "Architecture Center"
+  text: "Using Datadog with ECS Fargate"
 algolia:
   tags: ['ecs']
 ---
