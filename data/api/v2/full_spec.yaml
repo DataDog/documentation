@@ -45703,6 +45703,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview.

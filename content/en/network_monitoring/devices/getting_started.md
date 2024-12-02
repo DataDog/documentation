@@ -66,8 +66,8 @@ SD-WAN is a type of networking technology that uses software-defined networking 
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
-  - [Meraki SD-WAN][15] (in Preview)
-  - [Cisco SD-WAN][14] (in Preview)
+  - [Meraki SD-WAN][15] 
+  - [Cisco SD-WAN][14] 
 
 ### Enrich network devices with tags 
 
