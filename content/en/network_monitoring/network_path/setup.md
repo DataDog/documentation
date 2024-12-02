@@ -15,7 +15,7 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Preview. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
+<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 ## Overview
 
@@ -141,7 +141,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
      enabled: true
    ```
 
-2. Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
+2. Enable `network_path` to monitor CNM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
 
     ```yaml
     network_path:
