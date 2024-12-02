@@ -155,6 +155,7 @@ def security_rules(content, content_dir):
                 "integration_id": "",
                 "is_beta": is_beta
             }
+            page_data["aliases"].extend([f"{x}-alias" for x in range(6)])
 
             # lets build up this categorization for filtering purposes
 
