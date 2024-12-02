@@ -275,7 +275,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.5.0"
+  version = "2.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -285,7 +285,7 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 65
+  datadog_extension_layer_version = 67
   datadog_java_layer_version = 15
 
   # aws_lambda_function arguments
@@ -311,7 +311,7 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Java Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 65
+  datadog_extension_layer_version = 67
   datadog_java_layer_version = 15
 ```
 
