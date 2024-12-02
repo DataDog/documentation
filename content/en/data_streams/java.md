@@ -9,22 +9,23 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
-
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
 
 ### Supported libraries
 
-| Technology | Library                                                                                    | Minimal tracer version | Recommended tracer version |
-|------------|--------------------------------------------------------------------------------------------|------------------------|----------------------------|
-| Kafka      | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients)         | 1.9.0                  | 1.42.2 or later            |
-| RabbitMQ   | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                 | 1.9.0                  | 1.42.2 or later            |
-| Amazon SQS | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs) | 1.27.0                 | 1.42.2 or later            |
-| Amazon SQS | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                  | 1.27.0                 | 1.42.2 or later            |
+| Technology     | Library                                                                                         | Minimal tracer version | Recommended tracer version |
+|----------------|-------------------------------------------------------------------------------------------------|------------------------|-----------------------------
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients)              | 1.9.0                  | 1.43.0 or later            |
+| RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                      | 1.9.0                  | 1.42.2 or later            |
+| Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)      | 1.27.0                 | 1.42.2 or later            |
+| Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                       | 1.27.0                 | 1.42.2 or later            |
+| Amazon Kinesis | [Kinesis (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kinesis)           | 1.22.0                 | 1.42.2 or later            |
+| Amazon Kinesis | [Kinesis (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/kinesis)               | 1.22.0                 | 1.42.2 or later            |
+| Amazon SNS     | [SNS (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns)                   | 1.31.0                 | 1.42.2 or later            |
+| Amazon SNS     | [SNS (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sns)                       | 1.31.0                 | 1.42.2 or later            |
+| Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub) | 1.25.0                 | 1.42.2 or later            |
 
 ### Installation
 
