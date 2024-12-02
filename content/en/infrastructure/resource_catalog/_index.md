@@ -26,8 +26,6 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
-
 ## Overview
 
 Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
@@ -56,7 +54,7 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as NPM (Network Performance Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
@@ -130,15 +128,15 @@ Clicking on any resource opens a side panel with details including:
 
 ### Recent changes
 
-{{< callout url="https://www.datadoghq.com/private-beta/recent-changes-tab/" >}}
-  The <strong>Recent Changes</strong> tab is in private beta, but you can easily request access! Use this form to submit your request today.
+{{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
+  The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
 {{< /callout >}} 
 
 Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
 
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
-   - You have [access to the private beta][9].
+   - You have [access to the Preview][9].
 
 #### AWS
 
@@ -160,7 +158,7 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [6]: /integrations/amazon_config/#events
 [7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-change-collection
-[9]: https://www.datadoghq.com/private-beta/recent-changes-tab/
+[9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
 [10]: https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/
 [11]: https://docs.datadoghq.com/security/threats/
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/

@@ -30,7 +30,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics][27]
-- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
+- [Collect Profiling data](#collect-profiling-data)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -507,9 +507,9 @@ For instructions on setting up the source code integration on your serverless ap
 
 [101]: /integrations/guide/source-code-integration/?tab=go#serverless
 
-## Collect Profiling data (public beta)
+## Collect profiling data
 
-Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+Datadog's [Continuous Profiler][42] is available in Preview for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 

@@ -59,11 +59,21 @@ title: マルチオーガニゼーションアカウントの管理
 
 カスタムサブドメイン機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][1]にご連絡ください。
 
-複数のオーガニゼーションに属しているユーザーには、カスタムサブドメインを使用すると、アラートや通知のソースを特定するために便利です。そのようなユーザーをサブドメインに関連付けられているオーガニゼーションに即座に切り替えることもできます。
+複数の組織に属している場合、カスタムサブドメインはアラートや通知の発信元を特定するのに役立ちます。また、それによりサブドメインに関連付けられた組織に即座に切り替えることが可能です。
+{{% site-region region="us,us3,us5,ap1" %}}
+例えば、URL `https://app.datadoghq.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。しかし、カスタムサブドメインを使用すると、`https://org-a.datadoghq.com/event/event?id=1` に移動するだけで、ユーザーのコンテキストが自動的に組織 A に切り替わり、正しいページが表示されます。
 
-たとえば、URL `https://app.datadoghq.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。一方、カスタムサブドメインを使用し、`https://org-a.datadoghq.com/event/event?id=1` に移動すれば、自動的にユーザーのコンテキストが組織 A に切り替わり、正しいページを表示することができます。
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で (サブドメイン名を追加して) 編集してください。例えば、`https://**app**.datadoghq.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings` となります。{{% /site-region %}}
 
-**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で（サブドメイン名を追加して）編集してください。たとえば、`https://**app**.datadoghq.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings` となります。
+{{% site-region region="eu" %}}
+例えば、URL `https://app.datadoghq.eu/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。しかし、カスタムサブドメインを使用すると、`https://org-a.datadoghq.eu/event/event?id=1` に移動するだけで、ユーザーのコンテキストが自動的に組織 A に切り替わり、正しいページが表示されます。
+
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で (サブドメイン名を追加して) 編集してください。例えば、`https://**app**.datadoghq.eu/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.eu/account/settings` となります。{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+例えば、URL `https://app.ddog-gov.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。しかし、カスタムサブドメインを使用すると、`https://org-a.ddog-gov.com/event/event?id=1` に移動するだけで、ユーザーのコンテキストが自動的に組織 A に切り替わり、正しいページが表示されます。
+
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で (サブドメイン名を追加して) 編集してください。例えば、`https://**app**.ddog-gov.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.ddog-gov.com/account/settings` となります。{{% /site-region %}}
 
 ## SAML のセットアップ
 
@@ -82,7 +92,7 @@ SAML をマルチオーガニゼーションに構成するには
 SAML に厳しい親組織から作成された子組織に確実にログインするには、親組織で次の手順を実行します。
 1. 左ナビゲーションの下部にあるアカウントメニューで **Organization Settings** をクリックするか、Personal Settings ページの上部にあるドロップダウンで **Organization Settings** を選択します。
 2. 左ページのメニューで、**Users** を選択します。
-3. Select your user profile.
+3. ユーザープロファイルを選択します。
 4. **Override Default Login Methods** トグルをオンに設定します。
 5. **Select user's login methods** の下で、**Password** のチェックボックスにチェックを入れます。
 6. アカウントにパスワードが設定されていることを確認します。パスワードの設定にお困りの場合は、[Datadog サポート][1]にお問い合わせください。

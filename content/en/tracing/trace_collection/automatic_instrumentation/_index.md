@@ -6,6 +6,9 @@ further_reading:
     - link: "/tracing/glossary/"
       tag: "Documentation"
       text: "APM Terms and Concepts"
+    - link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+      tag: "Architecture Center"
+      text: "Instrument your app using the Datadog Operator and Admission Controller"
 ---
 
 ## Overview
@@ -25,7 +28,7 @@ Some situations when you might use automatic instrumentation include:
 Follow the relevant documentation for your automatic instrumentation approach to learn more:
 
 {{< tabs >}}
-{{% tab "Single Step Instrumentation (Beta)" %}}
+{{% tab "Single Step Instrumentation (Preview)" %}}
 
 If you install or update a Datadog Agent with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps.
 

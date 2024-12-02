@@ -27,7 +27,7 @@ title: 웹 및 모바일 애플리케이션에 대한 오류 추적
 
 ## 개요
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="오류 추적 탐색기의 문제 상세 정보" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

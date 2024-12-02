@@ -2,7 +2,7 @@
 categories:
 - ログの収集
 - security
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Google Workspace Alert Center からログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/google_workspace_alert_center/
@@ -40,12 +40,12 @@ Alert Center は、Google Workspace 全体にわたる重要なセキュリテ�
 
 Datadog Google Workspace Alert Center インテグレーションは、サービスアカウントを使用して Google と Datadog の間の API 接続を作成します。以下では、サービスアカウントを作成し、Datadog にサービスアカウント認証情報を提供して、自動的に API 呼び出しを開始するための手順を説明します。
 
-**Note**: Ensure that you have enabled the [Google Workspace Alert Center API][5].
+**注**: [Google Workspace Alert Center API][5] が有効になっていることを確認してください。
 
-1. Follow the [service account creation and authorization instructions][6]. You need
+1. [サービスアカウントの作成と承認の手順][6]に従ってください。
    これらの手順を完了するためには、スーパー管理者アクセスが必要です。そのプロセスの一環として、プライベートキー JSON ファイルを保存するロケーションに注意してください。説明したように、サービスアカウントにドメイン全体の権限を委譲し、その過程で `https://www.googleapis.com/auth/apps.alerts` スコープを付与します。
  1. GCP コンソールの `Service account details` ページから、`Advanced settings` セクションの一番下にある `Create Google Workspace Marketplace-Compatible OAuth Client` ボタンをクリックします。
-2. Navigate to the [Datadog Google Workspace Alert Center Integration tile][7].
+2. [Datadog Google Workspace Alert Center インテグレーションタイル][7]に移動します。
 3. **Configuration** タブで、_Upload Private Key File_ を選択してこのプロジェクトを Datadogと統合します。
    最初のステップで保存した秘密鍵 JSON ファイルを選択します。
 4. 件名のメールを入力します。これは、アラートセンターにアクセスできるユーザーまたはロボットアカウントのメールアドレスです。
@@ -70,7 +70,7 @@ Datadog Google Workspace Alert Center インテグレーションは、サービ
 
 ### イベント
 
-For the full list of log events, see the [Google Workspace Alert Center documentation][8].
+ログイベントの一覧については、[Google Workspace Alert Center のドキュメント][8]を参照してください。
 
 ### サービスチェック
 
