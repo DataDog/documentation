@@ -10,6 +10,9 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
+- link: "https://www.datadoghq.com/blog/historical-metrics/"
+  tag: "Blog"
+  text: "Monitor system performance across longer time frames with historical metrics"
 ---
 
 ## Overview
