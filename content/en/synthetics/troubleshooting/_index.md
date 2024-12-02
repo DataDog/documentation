@@ -145,7 +145,7 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 
 ### Unable to launch a device recording
 
-If there are security checks during application startup (in particular if USB debugging is checked), we suggest uploading a version of the application that does not contain these checks. 
+If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
 
 ## Private locations
 
