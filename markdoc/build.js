@@ -8,14 +8,13 @@ console.time('Markdoc compilation execution time');
 
 const fs = require('fs');
 const path = require('path');
-const yaml = require('js-yaml');
+
 const MarkdocHugoIntegration = require('./markdoc-hugo-integration/dist').MarkdocHugoIntegration;
 
 const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 const baseSiteDir = path.resolve(__dirname, '..');
 
 const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc-assets.html');
-const SITE_DIR = path.resolve(__dirname, '..');
 const CONTENT_DIR = path.resolve(__dirname, '../content');
 
 // Initialize the Markdoc integration
@@ -37,10 +36,12 @@ const { compiledFilePaths, hasErrors } = markdocIntegration.compileMdocFiles();
 // to be written to the content directory
 let gitignoreContents = `# GENERATED FILE: DO NOT EDIT
 # Ignore .md files compiled from Markdoc\n`;
+
 compiledFilePaths.forEach((file) => {
     const sanitizedFile = file.replace(CONTENT_DIR, '');
     gitignoreContents += sanitizedFile + '\n';
 });
+
 fs.writeFileSync(CONTENT_DIR + '/.gitignore', gitignoreContents);
 
 if (hasErrors) {
