@@ -1,7 +1,5 @@
 ---
 title: Amazon Elastic Container (ECS) Explorer
-aliases:
-  - /infrastructure/containers/amazon_elastic_container_explorer
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex.png" alt="ECS Explorer displaying ECS tasks." style="width:80%;">}}
