@@ -11,7 +11,6 @@ import transformer, { globalAttributes } from './src/transformer';
 import transforms from './src/transforms';
 import { parseTags } from './src/utils';
 import validator, { validateTree } from './src/validator';
-import { reresolveFunctionNode } from './src/reresolver';
 
 import type { Node, ParserArgs, Tag } from './src/types';
 import type Token from 'markdown-it/lib/token';
@@ -99,8 +98,7 @@ export {
   transformer,
   validator,
   truthy,
-  format,
-  reresolveFunctionNode
+  format
 };
 
 export default class MarkdocStaticCompiler {
