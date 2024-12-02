@@ -24,9 +24,9 @@ The following Linux distributions are supported for hosts and containers scans:
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         | [https://security-tracker.debian.org/tracker/][13] and [https://www.debian.org/security/oval/][14]        |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg         | [https://ubuntu.com/security/cve][15]                                                                     |
 
-## Software Composition Analysis
+## Application libraries
 
-The following languages are supported for Software Composition Analysis scans on containers and Lambda instances:
+The following application languages and libraries are supported for vulnerability scans on containers and Lambda instances:
 
 | Language | Supported Package Manager | Supported Files                                                      |
 |----------|---------------------------|----------------------------------------------------------------------|

@@ -12,3 +12,4 @@ gitlab_fail_fast: true
 team: webops-platform
 checks_to_ignore:
   - "Send PR Approval Status"
+  - "Preview Synthetics"

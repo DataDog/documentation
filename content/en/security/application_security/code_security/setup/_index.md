@@ -42,15 +42,11 @@ By following these steps, you'll successfully set up Code Security for your appl
 
 ## Enabling Code Security using single step instrumentation
 
-
-<div class="alert alert-info">Enabling Code Security using single step instrumentation is in beta.</div>
-
-
 ### Requirements
 
 - **Minimum Agent version 7.53.0**
 - **Minimum Datadog Helm chart version 3.62.0** (for Kubernetes deployments).
-- **Languages and architectures**: Single step instrumentation for Code Security only supports tracing Java, Node.js, .NET Core services on `x86_64` and `arm64` architectures, and Python (support available in private beta).
+- **Languages and architectures**: Single step instrumentation for Code Security only supports tracing Java, Node.js, .NET Core services on `x86_64` and `arm64` architectures, and Python (support available in Preview).
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ### Enabling in one step
@@ -173,7 +169,7 @@ By default, enabling APM on your server installs support for Java, Python, Node.
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_IAST_ENABLED=true DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
@@ -317,7 +313,7 @@ Run the following commands and restart the service to stop injecting the library
 {{% tab "Kubernetes" %}}
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
-  
+
    ```yaml
    spec:
      template:
@@ -365,7 +361,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Under `asm:`, remove `iast:` and all following configuration in`datadog-values.yaml`.
 3. Run the following command:
-  
+
     ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
 

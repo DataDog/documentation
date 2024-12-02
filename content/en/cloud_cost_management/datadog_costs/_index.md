@@ -27,9 +27,9 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/private-beta/daily-datadog-costs/" >}}
-Daily Datadog costs in Cloud Cost Management are in private beta. To request access, complete the form.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}
+Daily Datadog costs in Cloud Cost Management are in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
 
 ## Overview
 

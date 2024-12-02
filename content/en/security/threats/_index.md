@@ -13,7 +13,7 @@ Cloud Security Management Threats (CSM Threats) monitors file, network, and proc
 
 ## Detect threats to your production workloads in real-time
 
-Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
+Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Cloud Network Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
 
 CSM Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
 
@@ -52,7 +52,7 @@ Investigate and triage security signals in the [Signals Explorer][8]. View detai
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
 
-Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in private beta. Fill out the form to request access.
+Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in Preview. Fill out the form to request access.
 {{< /callout >}}
 
 ## Get started

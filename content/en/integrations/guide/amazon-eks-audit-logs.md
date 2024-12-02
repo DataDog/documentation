@@ -40,7 +40,7 @@ Once setup of Amazon EKS audit logs, the Datadog AWS integration, and Datadog Fo
 
 **Note**: Logs may take a few seconds to begin streaming into Log Explorer.
 
-To view only EKS audit logs in the Log Explorer, query `source:kubernetes.aduit` in Log Explorer search or, under **Source** in the facets panel, select the `kubernetes.audit` facet to filter by EKS audit logs.
+To view only EKS audit logs in the Log Explorer, query `source:kubernetes.audit` in Log Explorer search or, under **Source** in the facets panel, select the `kubernetes.audit` facet to filter by EKS audit logs.
 
 ## Cloud SIEM
 
