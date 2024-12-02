@@ -2,14 +2,15 @@
 title: Detecting a Network Outage
 aliases:
     - /network_performance_monitoring/guide/detecting_a_network_outage/
+    - /network_monitoring/performance/guide/detecting_a_network_outage/
 ---
 Network outages are often disguised as infrastructure, application, or container issues, which makes them hard to detect. Without visibility into your regional network performance or that of third-party endpoints you rely on, it may take hours to detect third-party or cloud regional outages, which could ultimately affect your customers. 
 
-With Network Performance Monitoring (NPM), you can detect network outages in minutes. By analyzing network flow data alongside process metrics, traces, logs, and infrastructure metrics, you can avoid making assumptions about the root of an issue, and instead use process of elimination (see the steps below) to determine whether you're experiencing a network outage.
+With Cloud Network Monitoring (CNM), you can detect network outages in minutes. By analyzing network flow data alongside process metrics, traces, logs, and infrastructure metrics, you can avoid making assumptions about the root of an issue, and instead use process of elimination (see the steps below) to determine whether you're experiencing a network outage.
 
 ## Traffic overloading the underlying infrastructure 
 
-Use NPM metrics to see whether your source endpoint may be sending an enormous amount of traffic or making a large number of open connections to the destination endpoint. When selecting a faulty dependency (for example, one with high latency), you can use the side panel graphs to spot such spikes in traffic. These spikes may overwhelm your receiving application to the point that it cannot (in the case of TCP) respond to all connections, leading to increased packet loss and thus, increased TCP latency. 
+Use CNM metrics to see whether your source endpoint may be sending an enormous amount of traffic or making a large number of open connections to the destination endpoint. When selecting a faulty dependency (for example, one with high latency), you can use the side panel graphs to spot such spikes in traffic. These spikes may overwhelm your receiving application to the point that it cannot (in the case of TCP) respond to all connections, leading to increased packet loss and thus, increased TCP latency. 
 
 {{< img src="network_performance_monitoring/guide/detecting_a_network_outage/npm-metrics.png" alt="Traffic overloading of the underlying infrastructure">}}
 
@@ -21,7 +22,7 @@ On the other hand, resource overconsumption of either the client or server endpo
 
 ## Application errors in code
 
-Network errors and latency can also be caused by client-side application errors. For instance, if your application is generating connections on loop unnecessarily, it could be overwhelming the endpoints that rely on it, leading to downstream application and network issues. To determine whether this is the case, look for application request errors in the **Traces** tab of a specific service in [NPM > DNS][1], or the **Network** tab of a specific trace in APM Traces.
+Network errors and latency can also be caused by client-side application errors. For instance, if your application is generating connections on loop unnecessarily, it could be overwhelming the endpoints that rely on it, leading to downstream application and network issues. To determine whether this is the case, look for application request errors in the **Traces** tab of a specific service in [CNM > DNS][1], or the **Network** tab of a specific trace in APM Traces.
 
 {{< img src="network_performance_monitoring/guide/detecting_a_network_outage/traces_2.png" alt="Application errors in code">}}
 
