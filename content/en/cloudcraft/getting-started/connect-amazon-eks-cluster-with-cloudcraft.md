@@ -20,7 +20,7 @@ To connect your AWS account and familiarize yourself with Cloudcraft, see the fo
 
 [Install and configure `kubectl`][7], a tool that allows you to control Kubernetes clusters through the command line. Cloudcraft recommends using the latest version to avoid issues.
 
-In addition, Cloudcraft cannot scan private clusters or clusters with IP filtering. Scanning won't work if the public access source allow list option in the EKS networking configuration is modified from the default of `0.0.0.0/0`.
+In addition, in order to scan your cluster successfully, Cloudcraft requires clusters to have public access enabled and no IP filtering applied. The **Public Access Source Allow List** option in the networking configuration must remain set to its default value of 0.0.0.0/0.
 
 ## Authorizing the Cloudcraft IAM role for view-only
 
