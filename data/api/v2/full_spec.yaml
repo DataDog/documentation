@@ -1361,19 +1361,8 @@ components:
     AWSNamespaceFilters:
       description: AWS Metrics namespace filters
       oneOf:
-      - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeAll'
       - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
-      - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeAll'
       - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
-    AWSNamespaceFiltersExcludeAll:
-      description: Exclude all namespaces
-      properties:
-        exclude_all:
-          description: Exclude all namespaces
-          example: false
-          type: boolean
-      required:
-      - exclude_all
     AWSNamespaceFiltersExcludeOnly:
       description: Exclude only these namespaces
       properties:
@@ -1387,15 +1376,6 @@ components:
           type: array
       required:
       - exclude_only
-    AWSNamespaceFiltersIncludeAll:
-      description: Include all namespaces
-      properties:
-        include_all:
-          description: Include all namespaces
-          example: false
-          type: boolean
-      required:
-      - include_all
     AWSNamespaceFiltersIncludeOnly:
       description: Include only these namespaces
       properties:
@@ -32353,8 +32333,12 @@ paths:
       x-undo:
         type: safe
     post:
-      description: This endpoint allows you to post events. Only events with `change`
-        category are under General Availability.
+      description: 'This endpoint allows you to post events.
+
+
+        Only events with **`change` category** are under General Availability. Refer
+        to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further
+        details.'
       operationId: CreateEvent
       requestBody:
         content:
@@ -32424,6 +32408,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
+        appKeyAuth: []
       summary: Post an event
       tags:
       - Events
@@ -45718,6 +45703,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview.
@@ -45820,9 +45809,9 @@ paths:
         schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost beginning this month. Either start_month or start_date should be
-          specified, but not both. (start_month cannot go beyond two months in the
-          past). Provide an `end_month` to view month-over-month cost.'
+          for cost beginning this month. **Either start_month or start_date should
+          be specified, but not both.** (start_month cannot go beyond two months in
+          the past). Provide an `end_month` to view month-over-month cost.'
         in: query
         name: start_month
         required: false
@@ -45838,8 +45827,8 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost beginning this day. Either start_month or start_date should be
-          specified, but not both. (start_date cannot go beyond two months in the
+          for cost beginning this day. **Either start_month or start_date should be
+          specified, but not both.** (start_date cannot go beyond two months in the
           past). Provide an `end_date` to view day-over-day cumulative cost.'
         in: query
         name: start_date

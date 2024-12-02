@@ -42,7 +42,7 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 8.0.0
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: couch
