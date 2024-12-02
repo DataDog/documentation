@@ -418,7 +418,7 @@ The default injection style is `tracecontext`, `Datadog`.
 
     `propagatorTypes` accepts a list of strings for desired propagators:
       - `datadog`: Datadog's propagator (`x-datadog-*`)
-      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`, `tracestate`)
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
@@ -553,6 +553,15 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 
 Example:
 : `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+
+`tracestate: dd=s:[sampling priority];o:[origin]`
+: `dd`: Datadog's vendor prefix.
+: `sampling priority`: Always set to `1` to make sure that the Agent keeps the trace.
+: `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
+
+Example:
+: `tracestate: dd=s1;o:rum`
+
 {{% /tab %}}
 {{% tab "b3 / b3 Multiple Headers" %}}
 `b3: [trace id]-[span id]-[sampled]`
