@@ -9,18 +9,20 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
-
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Node.js libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Node.js Tracer][2]
-  * Kafka: v2.39.0, v3.26.0, v4.5.0, or later
-  * Amazon SQS: v4.21.0 or later
-  * RabbitMQ: v3.48.0, v4.27.0, v5.3.0 or later
+
+### Supported libraries
+
+| Technology     | Library                                                                   | Minimal tracer version    | Recommended tracer version |
+|----------------|---------------------------------------------------------------------------|---------------------------|----------------------------|
+| Kafka          | [kafka-node](https://www.npmjs.com/package/kafka-node)                    | 2.39.0 or 3.26.0 or 4.5.0 | 5.25.0 or later            |
+| RabbitMQ       | [amqplib](https://www.npmjs.com/package/amqplib)                          | 3.48.0 or 4.27.0 or 5.3.0 | 5.3.0 or later             |
+| Amazon SQS     | [client-sqs](https://www.npmjs.com/package/@aws-sdk/client-sqs)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
+| Amazon Kinesis | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)   | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
+| Amazon SNS     | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
+| Google Pub/Sub | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub) | 5.25.0 or 4.49.0          | 5.25.0 or later            |
 
 ### Installation
 
@@ -31,9 +33,6 @@ For example:
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
-
-### Supported libraries
-Data Streams Monitoring supports the [confluent-kafka library][3], [amqplib package][5], and [rhea package][6].
 
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.

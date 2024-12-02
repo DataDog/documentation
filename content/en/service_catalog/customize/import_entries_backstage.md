@@ -35,7 +35,7 @@ Upon import, the following occurs:
 - `spec.owner` gets mapped to `team`
 - `metadata.links` gets mapped to `links`
   - The annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
-  - The annotations `pagertduty.com/service-id` and `pagertduty.com/account` are combined and map to `integration.pagerduty`
+  - The annotations `pagerduty.com/service-id` and `pagerduty.com/account` are combined and map to `integration.pagerduty`
 - `metadata.description` gets mapped to `description`
 - `spec.system` gets mapped to `application`
 - `spec.dependsOn` gets mapped to `dependsOn`

@@ -733,10 +733,6 @@ menu:
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 1004
-    - name: Combining OTel and Datadog Metrics
-      url: opentelemetry/guide/combining_otel_and_datadog_metrics/
-      parent: otel_guides
-      weight: 1005
     - name: Developers
       url: developers/
       pre: dev-code
@@ -1520,10 +1516,10 @@ menu:
       parent: monitor_types
       identifier: monitor_types_network
       weight: 317
-    - name: Network Performance
-      url: monitors/types/network_performance/
+    - name: Cloud Network Monitoring
+      url: monitors/types/cloud_network_monitoring/
       parent: monitor_types
-      identifier: monitor_types_network_performance
+      identifier: monitor_types_cnm
       weight: 318
     - name: NetFlow
       url: monitors/types/netflow/
@@ -1666,6 +1662,11 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 304
+    - name: Amazon Elastic Container Explorer
+      url: infrastructure/containers/amazon_elastic_container_explorer
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
+      weight: 305
     - name: Processes View
       url: infrastructure/process/
       parent: infrastructure
@@ -2974,35 +2975,35 @@ menu:
       identifier: nm_parent
       parent: infrastructure_heading
       weight: 40000
-    - name: Network Performance Monitoring
-      url: network_monitoring/performance/
+    - name: Cloud Network Monitoring
+      url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
-      identifier: npm
+      identifier: cnm
       weight: 1
     - name: Setup
-      url: network_monitoring/performance/setup/
-      parent: npm
-      identifier: npm_setup
+      url: network_monitoring/cloud_network_monitoring/setup/
+      parent: cnm
+      identifier: cnm_setup
       weight: 101
     - name: Overview Page
-      url: network_monitoring/performance/overview_page/
-      parent: npm
-      identifier: npm_overview_page
+      url: network_monitoring/cloud_network_monitoring/overview_page/
+      parent: cnm
+      identifier: cnm_overview_page
       weight: 102
     - name: Network Analytics
-      url: network_monitoring/performance/network_analytics/
-      parent: npm
-      identifier: npm_analytics
+      url: network_monitoring/cloud_network_monitoring/network_analytics/
+      parent: cnm
+      identifier: cnm_analytics
       weight: 103
     - name: Network Map
-      url: network_monitoring/performance/network_map/
-      parent: npm
-      identifier: npm_map
+      url: network_monitoring/cloud_network_monitoring/network_map/
+      parent: cnm
+      identifier: cnm_map
       weight: 104
     - name: Guides
-      url: network_monitoring/performance/guide/
-      identifier: npm_guides
-      parent: npm
+      url: network_monitoring/cloud_network_monitoring/guide/
+      identifier: cnm_guides
+      parent: cnm
       weight: 105
     - name: DNS Monitoring
       url: network_monitoring/dns/
@@ -5590,36 +5591,51 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
+    - name: Vulnerability Pipeline
+      url: security/vulnerability_pipeline/
+      parent: security_platform
+      identifier: vulnerability_pipeline
+      weight: 4
+    - name: Mute
+      url: security/vulnerability_pipeline/mute
+      parent: vulnerability_pipeline
+      identifier: vulnerability_pipeline_mute
+      weight: 10001
+    - name: Add to Security Inbox
+      url: security/vulnerability_pipeline/security_inbox
+      parent: vulnerability_pipeline
+      identifier: vulnerability_pipeline_inbox
+      weight: 10002
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
       identifier: security_inbox
-      weight: 4
+      weight: 5
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
       idenfier: security_threat_intelligence
-      weight: 5
+      weight: 6
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 6
+      weight: 7
     - name: Access Control
       url: security/access_control
       parent: security_platform
       identifier: security_access_control
-      weight: 7
+      weight: 8
     - name: Account Takeover Protection
       url: security/account_takeover_protection
       parent: security_platform
       identifier: security_ato_protection
-      weight: 8
+      weight: 9
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 9
+      weight: 10
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -5852,16 +5868,21 @@ menu:
       parent: csm_agentless
       identifier: csm_agentless_deployment_methods
       weight: 102
+    - name: IaC Scanning
+      url: security/cloud_security_management/iac_scanning
+      parent: csm
+      identifier: csm_iac_scanning
+      weight: 8
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
       identifier: csm_default_rules
-      weight: 8
+      weight: 9
     - name: Review and Remediate
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 9
+      weight: 10
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -5881,17 +5902,17 @@ menu:
       url: security/cloud_security_management/severity_scoring/
       parent: csm
       identifier: csm_severity_scoring
-      weight: 10
+      weight: 11
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
       identifier: csm_guides
-      weight: 11
+      weight: 12
     - name: Troubleshooting
       url: security/cloud_security_management/troubleshooting/
       parent: csm
       identifier: csm_troubleshooting
-      weight: 12
+      weight: 13
     - name: Threats
       url: security/cloud_security_management/troubleshooting/threats/
       parent: csm_troubleshooting
@@ -6893,6 +6914,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_permissions
       weight: 302
+    - name: Data Access
+      url: account_management/rbac/data_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_data_access
+      weight: 303
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml
