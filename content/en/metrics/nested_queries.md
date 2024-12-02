@@ -185,7 +185,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 ## Moving rollup
-Datadog provides a `moving_rollup` function that enables aggregation of data points over a specified time window (quick refresher [here][10])q. By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze data points beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
+Datadog provides a `moving_rollup` function that enables aggregation of data points over a specified time window (quick refresher [here][10]). By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze data points beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
 
 {{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
@@ -206,7 +206,7 @@ When nesting queries, only the lookback mode version of the `moving_rollup` func
 - `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
 - `stddev`
 
-{{% collapse-content title="Max Moving rollup wiht Lookback Mode Enabled" level="h5" %}}
+{{% collapse-content title="Max Moving rollup with Lookback Mode Enabled" level="h5" %}}
 When nesting these `moving_rollups`, the rollup intervals provided must get larger as shown in the UI or JSON tab:
 
 {{< img src="/metrics/nested_queries/moving_rollup1_ui.png" alt="example of moving rollup in the UI" style="width:100%;" >}}
@@ -217,7 +217,7 @@ When nesting these `moving_rollups`, the rollup intervals provided must get larg
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Standard Devition Moving Rollup wiht Lookback Mode Enabled" level="h5" %}}
+{{% collapse-content title="Standard Deviation Moving Rollup with Lookback Mode Enabled" level="h5" %}}
 You can also use percentiles and standard deviation with the new moving rollup function that supports lookback and nest moving rollups that have lookback enabled as well. 
 
 In the UI or JSON tab, it would look as follows:
