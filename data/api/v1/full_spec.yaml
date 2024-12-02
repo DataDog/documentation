@@ -23555,9 +23555,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code and library vulnerabilities.
-              This does not restrict access to the vulnerability data source through
-              the API or inventory SQL.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -23582,7 +23579,6 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
-            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -23627,6 +23623,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
