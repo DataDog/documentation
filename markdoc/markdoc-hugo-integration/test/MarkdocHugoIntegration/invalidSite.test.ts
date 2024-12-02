@@ -10,21 +10,8 @@ const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc$/);
 describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({
     config: {
-      siteParams: {
-        img_url: 'https://example.com'
-      },
-      env: 'development',
-      languages: ['en'],
-      siteConfig: { baseURL: 'https://example.com/' },
-      siteDir,
-      i18n: {
-        en: {
-          example_key: { other: 'test' }
-        },
-        ja: {
-          example_key: { other: 'テスト' }
-        }
-      }
+      baseSiteDir: siteDir,
+      env: 'development'
     }
   });
 

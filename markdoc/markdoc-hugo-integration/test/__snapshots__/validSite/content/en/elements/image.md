@@ -18,7 +18,7 @@ title: Image/Video
         <picture style="width: 80%"
           ><img
             srcset="
-              https://example.com/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
+              http://localhost:1313/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
             "
             class="img-fluid"
             style="width: 80%"
@@ -38,7 +38,7 @@ title: Image/Video
         <picture style="width: 80%"
           ><img
             srcset="
-              https://example.com/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
+              http://localhost:1313/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
             "
             class="img-fluid"
             style="width: 80%"
@@ -64,7 +64,7 @@ title: Image/Video
         controls=""
       >
         <source
-          src="https://example.comimages/share-with-team.mp4"
+          src="http://localhost:1313/images/share-with-team.mp4"
           type="video/mp4"
           media="(min-width: 0px)"
         />
