@@ -31,27 +31,44 @@ export type HugoSubdirsByType = z.infer<typeof HugoSubdirsByTypeSchema>;
  * other site-wide configuration data, such as the
  * i18n translation data.
  */
-export const HugoGlobalConfigSchema = IntegrationConfigSchema.extend({
-  dirs: HugoSubdirsByTypeSchema
-}).refine((config) => {
-  // If we're in preview mode, we need to know the branch name
-  // to build the correct URLs
-  if (config.env === 'preview' && !config.siteParams.branch) {
-    console.error(
-      'hugoVars.siteParams.branch is required when hugoVars.env is "preview"'
-    );
-    return false;
-  }
-  // English is the failover language for i18n data,
-  // so the English i18n data must be present
-  if (!config.i18n.en) {
-    console.error(
-      'No i18n data ingested for English, does <SITE_DIR>/i18n/en.json exist?'
-    );
-    return false;
-  }
-  return true;
-});
+export const HugoGlobalConfigSchema = z
+  .object({
+    siteParams: z.object({
+      img_url: z.string().url(),
+      branch: z.string().optional() // required if env is "preview"
+    }),
+    siteConfig: z.object({ baseURL: z.string().url() }),
+    env: z.union([z.literal('development'), z.literal('preview'), z.literal('live')]),
+    languages: z.array(z.string()),
+    siteDir: z.string().min(1),
+    i18n: z.record(
+      z.record(
+        z.object({
+          other: z.string()
+        })
+      )
+    ),
+    dirs: HugoSubdirsByTypeSchema
+  })
+  .refine((config) => {
+    // If we're in preview mode, we need to know the branch name
+    // to build the correct URLs
+    if (config.env === 'preview' && !config.siteParams.branch) {
+      console.error(
+        'hugoVars.siteParams.branch is required when hugoVars.env is "preview"'
+      );
+      return false;
+    }
+    // English is the failover language for i18n data,
+    // so the English i18n data must be present
+    if (!config.i18n.en) {
+      console.error(
+        'No i18n data ingested for English, does <SITE_DIR>/i18n/en.json exist?'
+      );
+      return false;
+    }
+    return true;
+  });
 
 /**
  * Any Hugo config that applies to the entire site,
