@@ -10,10 +10,7 @@ import {
   SNAPSHOTS_DIR
 } from '../../config/constants';
 import { PageFiltersManifestSchema } from '../../../src/schemas/pageFilters';
-import {
-  mockHugoGlobalConfig,
-  mockPageConfig
-} from '../../mocks/valid/integrationConfig';
+import { mockHugoGlobalConfig, mockPageConfig } from '../../mocks/valid/hugoConfig';
 
 describe('PageBuilder.build', () => {
   const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';

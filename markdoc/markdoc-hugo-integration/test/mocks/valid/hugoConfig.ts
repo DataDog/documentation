@@ -1,10 +1,9 @@
 import { HugoConfig, HugoGlobalConfig } from '../../../src/schemas/config/hugo';
-import { IntegrationConfig } from '../../../src/schemas/config/integration';
 import { VALID_SITE_DIR } from '../../config/constants';
 import { HugoFunctions } from '../../../src/helperModules/HugoFunctions';
 import { PageConfig } from '../../../src/schemas/config/hugo';
 
-const mockIntegrationConfig: IntegrationConfig = {
+const mockHugoGlobalConfig: HugoGlobalConfig = {
   siteParams: { img_url: 'https://example.com' },
   env: 'development',
   languages: ['en', 'ja'],
@@ -23,24 +22,8 @@ const mockIntegrationConfig: IntegrationConfig = {
         other: 'テスト'
       }
     }
-  }
-};
-
-const mockHugoGlobalConfig: HugoGlobalConfig = {
-  ...mockIntegrationConfig,
-  dirs: HugoFunctions.getSubdirsByType(VALID_SITE_DIR),
-  i18n: {
-    en: {
-      example_key: {
-        other: 'test'
-      }
-    },
-    ja: {
-      example_key: {
-        other: 'テスト'
-      }
-    }
-  }
+  },
+  dirs: HugoFunctions.getSubdirsByType(VALID_SITE_DIR)
 };
 
 const mockPageConfig: PageConfig = {
@@ -50,4 +33,4 @@ const mockPageConfig: PageConfig = {
 
 const mockHugoConfig: HugoConfig = { global: mockHugoGlobalConfig, page: mockPageConfig };
 
-export { mockHugoGlobalConfig, mockIntegrationConfig, mockPageConfig, mockHugoConfig };
+export { mockHugoGlobalConfig, mockPageConfig, mockHugoConfig };
