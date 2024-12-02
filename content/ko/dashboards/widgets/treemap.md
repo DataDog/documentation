@@ -10,7 +10,7 @@ further_reading:
   tag: 설명서
   text: 파이 차트 위젯
 title: 트리맵 위젯
-widget_type: 트리맵
+widget_type: treemap
 ---
 
 트리맵 위젯을 사용하면 하나 이상의 데이터세트의 비율을 표시할 수 있습니다. 이 위젯은 해당 비율의 단일 데이터세트 또는 중첩된 비율의 여러 데이터세트를 표시할 수 있습니다.
