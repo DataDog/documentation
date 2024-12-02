@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: levan-m/ec2-ib-doc
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
