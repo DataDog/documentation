@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-To use manual instrumentation to set up Data Streams Monitoring, see <a href="/data_streams/manual_instrumentation">Set up Data Streams Monitoring through Manual Instrumentation</a>. 
+Data Streams Monitoring (DSM) propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use <a href="/data_streams/manual_instrumentation/?tab=python">manual instrumentation to set up DSM</a>.
 </div>
 
 ### Prerequisites
