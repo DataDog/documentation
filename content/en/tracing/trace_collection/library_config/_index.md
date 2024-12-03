@@ -68,9 +68,12 @@ The following configuration options behave consistently across the latest versio
 ### Unified Service Tagging
 
 `DD_VERSION`
-: **Default**: `null`, with an exception for the Node.js SDK, which can automatically retrieve the version number from package.json, if available<br>
-**Supported Input**: A string representing an application version <br>
-**Description**: Adds a version tag to all spans except for spans coming from inferred services.
+: **Default**: `null`<br>
+**Supported Input**: A string representing an application version<br>
+**Caveats**:<br/>
+- Node.js automatically sets the version number from package.json
+- [Inferred services][3] will not set version tags
+**Description**: Adds a `version` tag to all spans
 
 `DD_SERVICE`
 : **Default**: `null`, the SDK will try to automatically determine a service name<br>
