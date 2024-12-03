@@ -21,7 +21,9 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Caveats**: Not supported in Go & in Java integrations labeled as "beta" or marked as "Disabled" in this document are disabled by default.<br>
+**Caveats**:<br>
+- Not supported in Go
+- [Some Java integrations are disabled by default][2].
 **Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_RATE_LIMIT`
