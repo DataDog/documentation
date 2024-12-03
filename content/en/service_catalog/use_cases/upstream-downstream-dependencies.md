@@ -1,8 +1,8 @@
 ---
 title: See Upstream and Downstream Dependencies During an Active Incident
-
 aliases:
   - /tracing/service_catalog/guides/upstream-downstream-dependencies
+  - /service_catalog/guides/upstream-downstream-dependencies
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"

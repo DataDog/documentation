@@ -1,21 +1,21 @@
 ---
 title: Validating Service Definition YAMLs
-
 aliases:
   - /tracing/service_catalog/guides/validating-service-definition
+  - /service_catalog/guides/validating-service-definition
 further_reading:
-- link: "/tracing/service_catalog/"
-  tag: "Documentation"
-  text: "Datadog Service Catalog"
-- link: "/api/latest/service-definition/"
-  tag: "Documentation"
-  text: "Service Definition API"
-- link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
-  tag: "Source Code"
-  text: "Service Definition Schema"
-- link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
-  tag: "Blog"
-  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+  - link: "/tracing/service_catalog/"
+    tag: "Documentation"
+    text: "Datadog Service Catalog"
+  - link: "/api/latest/service-definition/"
+    tag: "Documentation"
+    text: "Service Definition API"
+  - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
+    tag: "Source Code"
+    text: "Service Definition Schema"
+  - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
+    tag: "Blog"
+    text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
 ## Overview 

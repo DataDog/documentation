@@ -1,10 +1,11 @@
 ---
 title: Service Catalog Best Practices
-
+aliases:
+  - /service_catalog/guides/best-practices
 further_reading:
-- link: "/tracing/service_catalog/"
-  tag: "Documentation"
-  text: "Datadog Service Catalog"
+  - link: "/tracing/service_catalog/"
+    tag: "Documentation"
+    text: "Datadog Service Catalog"
 ---
 
 This page covers best practices for working with the Service Catalog.
