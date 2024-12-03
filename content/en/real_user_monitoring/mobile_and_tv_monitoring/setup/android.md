@@ -19,7 +19,7 @@ further_reading:
 ## Overview
 
 
-The Android SDK can be used to instrument your application for both [Real User Monitoring (RUM)][1] and [Error Tracking][2].
+You can use the Android SDK to instrument your application for both [Real User Monitoring (RUM)][1] and [Error Tracking][2].
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
@@ -33,7 +33,7 @@ The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ### Declare the Datadog SDK as a dependency
 
-Declare [dd-sdk-android-rum][3] and the [Gradle plugin][4] as a dependency in your **application module's** `build.gradle` file.
+Declare [dd-sdk-android-rum][3] and the [Gradle plugin][4] as dependencies in your **application module's** `build.gradle` file.
 
 ```groovy
 buildscript {
@@ -62,7 +62,7 @@ dependencies {
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggle button for those settings. For more information, see [RUM Android Data Collected][3].
+4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [RUM Android Data Collected][3].
 
    {{< img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
 
@@ -76,7 +76,7 @@ dependencies {
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggle button for those settings. For more information, see [Android Data Collected][3].
+4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][3].
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
 
@@ -87,7 +87,7 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code. 
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -95,7 +95,7 @@ For more information about setting up a client token, see the [Client Token docu
 
 In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][7].
 
-See [`trackingConsent`][8] to add GDPR compliance for your EU users, and [other configuration options][9] to initialize the library.
+See [`trackingConsent`][8] to add GDPR compliance for your EU users. See [other configuration options][9] to initialize the library.
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -316,13 +316,13 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
-The initialization credentials require your application's variant name and uses the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application with the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
+The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][10].
 
 ### Sample sessions
 
-To control the data your application sends to Datadog, you can specify a sample rate for sessions while [initializing the RUM or Error Tracking][11] as a percentage between 0 and 100.
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM or Error Tracking][11]. The sample rate is a percentage between 0 and 100.
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -348,7 +348,7 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
 
-### Enable feature to start sending data
+### Enable the feature to start sending data
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -381,7 +381,7 @@ See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views 
 
 ### Initialize the Interceptor to track network events
 
-1. If you want to have distributed tracing, add and enable Trace feature, see [Datadog Android Trace Collection documentation][13] to learn how.
+1. If you want to have distributed tracing, [add and enable the Trace feature][13].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy
@@ -420,7 +420,7 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
-This records each request processed by the `OkHttpClient` as a resource, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
+This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
 
 **Note**: If you also use multiple Interceptors, add `DatadogInterceptor` first.
 
@@ -451,7 +451,7 @@ Add the following snippet during RUM configuration:
 
 ### `Closeable` extension
 
-You can monitor `Closeable` instance usage by using `useMonitored` method, which reports any error happened to Datadog and close the resource afterwards.
+You can monitor `Closeable` instance usage with the `useMonitored` method, which reports errors to Datadog and closes the resource afterwards.
 
 ```kotlin
 val closeable: Closeable = ...
