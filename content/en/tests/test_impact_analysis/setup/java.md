@@ -44,22 +44,33 @@ After completing setup, run your tests as you normally do:
 {{% tab "Gradle" %}}
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
-dd.civisibility.enabled=true,\
-dd.env=ci,\
-dd.service=my-java-app
+DD_CIVISIBILITY_ENABLED=true \
+DD_ENV=ci \
+DD_SERVICE=my-java-app \
+GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar \
+./gradlew clean test
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Maven" %}}
 
 {{< code-block lang="shell" >}}
-MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
-dd.civisibility.enabled=true,\
-dd.env=ci,\
-dd.service=my-java-app \
+DD_CIVISIBILITY_ENABLED=true \
+DD_ENV=ci \
+DD_SERVICE=my-java-app \
+MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar \
 mvn clean verify
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Other" %}}
+
+{{< code-block lang="shell" >}}
+DD_CIVISIBILITY_ENABLED=true \
+DD_ENV=ci \
+DD_SERVICE=my-java-app \
+JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar \
+// run your tests
 {{< /code-block >}}
 
 {{% /tab %}}

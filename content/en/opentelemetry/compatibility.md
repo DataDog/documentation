@@ -40,7 +40,7 @@ The following table shows Datadog feature compatibility across different setups:
 | [Real User Monitoring][22] (RUM)                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Live Processes][16]                                |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Live Container Monitoring/Kubernetes Explorer][20] |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
-| [Network Performance Monitoring][21] (NPM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Cloud Network Monitoring][21] (CNM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Universal Service Monitoring][17] (USM)            |                                    |                                    | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Source code integration][24]                       | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
 | [Database Monitoring][14] (DBM)                     | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}}|   | {{< X >}}               | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
@@ -58,7 +58,6 @@ The following table shows OpenTelemetry feature compatibility across different s
 |-----------------------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------------|--------------|
 | [Span Links][25]                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            |              |
 
-
 ## More details
 
 ### Runtime metrics
@@ -69,11 +68,11 @@ Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1]
 
 To enable full RUM functionality, you need to [inject supported headers][2] to correlate RUM and traces.
 
-### Network Performance Monitoring (NPM)
+### Cloud Network Monitoring (CNM)
 
 Span-level or endpoint-level monitoring is **not** supported.
 
-For more information, see [Network Performance Monitoring Setup][3].
+For more information, see [Cloud Network Monitoring Setup][3].
 
 ### Live Processes
 
@@ -96,7 +95,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 
 [1]: /opentelemetry/integrations/runtime_metrics/
 [2]: /real_user_monitoring/platform/connect_rum_and_traces/
-[3]: /network_monitoring/performance/setup/
+[3]: /network_monitoring/cloud_network_monitoring/setup/
 [4]: /infrastructure/process/
 [5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging
 [6]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/

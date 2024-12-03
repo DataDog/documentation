@@ -2,11 +2,22 @@
 title: Go용 데이터 스트림 모니터링 설정
 ---
 
-### 필수 요건
+### 사전 필수 조건
 
 데이터 스트림 모니터링을 시작하려면, 다음과 같은 Datadog 에이전트 및 데이터 스트림 모니터링 라이브러리 최신 버전이 필요합니다:
 * [Datadog 에이전트 v7.34.0 이상][1]
 * [dd-trace-go v1.56.1 이상][2]
+
+### 사전 필수 조건
+
+* [Datadog 에이전트 v7.34.0 이상][1]
+
+### 지원되는 라이브러리
+
+| 기술 | 라이브러리                                                                  | 최소 트레이서 버전 | 권장 트레이서 버전 |
+|------------|--------------------------------------------------------------------------|------------------------|----------------------------|
+| Kafka      | [confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go) | 1.56.1                 | 1.66.0 이상            |
+| Kafka      | [Sarama](https://github.com/Shopify/sarama)                              | 1.56.1                 | 1.66.0 이상            |
 
 ### 설치
 
@@ -47,14 +58,14 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1"
 )
 
 ...
 config := sarama.NewConfig()
 producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
 
-// 하단 코드 추가
+// ADD THIS LINE
 producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
 ```
 

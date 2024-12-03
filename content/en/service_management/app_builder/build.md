@@ -76,13 +76,31 @@ UI components can trigger reactions on an [Event][11].
 
 You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
-### Interact with an app in JSON
 
-#### Edit an app
+## View app version history
+
+App Builder keeps a record of every saved version of your app.
+
+To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
+
+The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
+
+{{< img src="service_management/app_builder/version-history-example.png" alt="An example App Builder version history list with two items, the current version and a previous version" style="width:70%;" >}}
+
+You can perform the following operations:
+
+* To view an app version, click the version in the list.
+* To overwrite an existing app with a previous version, select the version, then click **Restore Version** in the upper right.
+* To create a new app that is a copy of a version, select the version, then click **Clone Version** in the upper right.
+
+
+## Interact with an app in JSON
+
+### Edit an app
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
-#### Copy or back up an app
+### Export an app
 
 To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
