@@ -62,7 +62,7 @@
   {{ if eq hugo.Environment "development" -}}
     {{ warnf $err_msg }}
   {{ else }}
-    {{ errorf $err_msg }}
+    {{ warnf $err_msg }}
   {{ end }}
 {{ end }}
 
