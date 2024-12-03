@@ -1,11 +1,9 @@
 ---
 title: Enabling ASM threat detection and protection using single step instrumentation
-aliases:
-- /security/application_security/enabling/single_step/threat_detection/
+external_redirect: /security/application_security/threats/threat_detection/
 ---
 
 <div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in Preview.</div>
-
 
 ## Requirements
 
@@ -198,7 +196,6 @@ To enable single step instrumentation with Helm:
 
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
-
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
@@ -210,77 +207,50 @@ To enable single step instrumentation with Helm:
 [15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#enabling-or-disabling-instrumentation-for-namespaces
 [16]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#specifying-tracing-library-versions
 [17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services
-
 {{% /tab %}}
 {{< /tabs >}}
-
 ## Removing Single Step APM and ASM instrumentation from your Agent
-
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
-
 ### Removing instrumentation for specific services
-
 Run the following commands and restart the service to stop injecting the library into the service and stop producing traces from that service.
-
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
-
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
-
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. Restart the service.
-
 3. To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
-
-
-
 {{% /tab %}}
-
 {{% tab "Docker" %}}
-
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. Restart the service.
-
 3. To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 {{% /tab %}}
-
 {{% tab "Kubernetes" %}}
-
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
-
    ```yaml
    spec:
      template:
        metadata:
          labels:
            admission.datadoghq.com/enabled: "false"
-
 {{% /tab %}}
-
 {{< /tabs >}}
-
 ### Removing APM for all services on the infrastructure
-
 To stop producing traces, remove library injectors and restart the infrastructure:
-
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
-
 1. Run:
    ```shell
    dd-host-install --uninstall
    ```
 2. Restart your host.
-
 {{% /tab %}}
-
 {{% tab "Docker" %}}
-
 1. Uninstall local library injection:
    ```shell
    dd-container-install --uninstall
@@ -290,21 +260,14 @@ To stop producing traces, remove library injectors and restart the infrastructur
    systemctl restart docker
    ```
    Or use the equivalent for your environment.
-
 {{% /tab %}}
-
 {{% tab "Kubernetes" %}}
-
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Under `asm:`, remove `threats:` and all following configuration in`datadog-values.yaml`.
 3. Run the following command:
-
    ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
 {{% /tab %}}
-
 {{< /tabs >}}
-
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
-
