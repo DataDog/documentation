@@ -7,9 +7,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: "Source Code"
   text: Source code for dd-sdk-flutter
-- link: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
-  tag: Documentation
-  text: Integrated Libraries
 ---
 
 This page lists integrated libraries you can use for Flutter applications.

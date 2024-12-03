@@ -10,7 +10,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/swiftui/
   - /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
 further_reading:
- - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+ - link: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"
@@ -25,7 +25,7 @@ further_reading:
  - link: "/real_user_monitoring/ios/swiftui/"
    tag: "Documentation"
    text: "Learn about instrumenting SwiftUI applications"
- - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+ - link: "/real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions"
    tag: "Documentation"
    text: "RUM iOS and tvOS monitoring supported versions"
 ---

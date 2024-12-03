@@ -10,7 +10,7 @@ further_reading:
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
-  - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+  - link: "/real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions/"
     tag: "Documentation"
     text: "RUM iOS and tvOS monitoring supported versions"
 ---
@@ -843,11 +843,11 @@ public init(
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios/?tab=error#error-attributes
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=error#error-attributes
 [6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios/?tab=session#default-attributes
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup

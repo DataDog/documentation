@@ -5,7 +5,7 @@ description: "List of supported operating systems and platforms for the RUM iOS 
 aliases:
  -  /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
 further_reading:
- - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+ - link: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"
@@ -90,6 +90,6 @@ The Datadog RUM SDK depends on the following third-party library:
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#alamofire
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/#apollo-graphql
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries/#alamofire
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries/#apollo-graphql
 [9]: https://github.com/microsoft/plcrashreporter

@@ -254,8 +254,8 @@ Before data is uploaded to Datadog, it is stored in cleartext in the cache direc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/#enrich-user-sessions
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/#track-user-sessions
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#enrich-user-sessions
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#track-user-sessions
 [3]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [4]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
 [5]: /data_security/real_user_monitoring/#ip-address

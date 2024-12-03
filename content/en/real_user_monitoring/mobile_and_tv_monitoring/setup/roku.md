@@ -185,7 +185,7 @@ See [**Track RUM Resources**][8] to enable automatic tracking of all your resour
 
 #### Track RUM Views
 
-To split [user sessions][4] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new RUM View.
+To split [user sessions][10] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new RUM View.
 
 ```brightscript
     viewName = "VideoDetails"
@@ -230,10 +230,10 @@ This means that even if users open your application while offline, no data is lo
 [1]: https://github.com/rokucommunity/ropm
 [2]: https://github.com/DataDog/dd-sdk-roku
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected/
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
-[10]: 
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected/
