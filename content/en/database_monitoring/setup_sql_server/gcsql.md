@@ -5,8 +5,9 @@ further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
   text: "SQL Server Integration"
-
-
+- link: "/database_monitoring/guide/sql_deadlock/"
+  tag: "Documentation"
+  text: "Configure Deadlock Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
