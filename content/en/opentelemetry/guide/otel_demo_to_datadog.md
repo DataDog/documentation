@@ -332,7 +332,7 @@ The OTel Demo sends `user.id` as span tags, so you can use this to filter all tr
 
 The OpenTelemetry Demo includes a feature flag engine for simulating error scenarios.
 
-1. Navigate to <http://localhost:8080/feature> to manage the available scenarios. See the [OpenTelemetry Demo documentation][5] for more details.
+1. Navigate to [http://localhost:8080/feature][12] to manage the available scenarios. See the [OpenTelemetry Demo documentation][5] for more details.
 2. After the demo starts producing errors, you can visualize and track down the affected services in Datadog.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/error_tracking.png" alt="Error tracking view showing error PaymentService Fail Feature Flag Enabled" style="width:90%;" >}}
@@ -347,3 +347,4 @@ The OpenTelemetry Demo includes a feature flag engine for simulating error scena
 [5]: https://opentelemetry.io/docs/demo/feature-flags/
 [10]: https://opentelemetry.io/docs/demo/#language-feature-reference
 [11]: https://app.datadoghq.com/services
+[12]: http://localhost:8080/feature
