@@ -25,7 +25,7 @@ aliases:
 <div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning"><h5 class="card-title text-black mt-0 mb-1">The API Catalog is not under current development</h5>
+<div class="alert alert-warning"><h5 class="card-title text-black mt-0 mb-1">The API Catalog features are migrating to Service Catalog</h5>
 We are making significant improvements to the way API endpoints are represented in Datadog. The functionality currently available on this page will be moved to the <a href="https://docs.datadoghq.com/service_catalog">Service Catalog</a>. Rest assured that all core capabilities will be available in the Service Catalog after the migration is done. Stay tuned for further updates!
 </div>
 
