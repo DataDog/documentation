@@ -39079,6 +39079,10 @@ paths:
           source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
   /api/v2/posture_management/findings:
