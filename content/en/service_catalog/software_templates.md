@@ -21,18 +21,21 @@ Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs fr
 {{< /callout >}} 
 
 ### Create software template workflows
-To use software templates in Datadog, create a git repository with the desired template. You can start from scratch or use our quickstart blueprints to learn from an example.
+To use software templates in Datadog, create a Git repository with the desired template. You can start from scratch or use our quickstart blueprints to learn from an example.
 
 #### Start from a blueprint
 Navigate to [App Builder Blueprints][9] and select one of the following blueprints:
 
-1. [Scaffold New Service][11]
-- This blueprint shows an example of scaffolding a new lambda function from a template. The form captures inputs from a developer that will be passed into the corresponding Git repo.
-- From the app, customize the form to include the parameters you want to capture from your developers.
-- Click **Save as New App** to save the app. This will also create a corresponding templating workflow.
+##### Scaffold New Service
 
-2. [Create S3 Bucket with Terraform][10]
-- This blueprint shows an example of creating the terraform for an S3 bucket from a form in Github.
+The [Scaffold New Service blueprint][11] shows an example of scaffolding a new lambda function from a template. The form captures inputs from a developer that will be passed into the corresponding Git repo.
+
+1. From the app, customize the form to include the parameters you want to capture from your developers.
+2. Click **Save as New App** to save the app. This will also create a corresponding templating workflow.
+
+##### Create S3 Bucket with Terraform
+
+The [Create S3 Bucket with Terraform blueprint][10] shows an example of creating the terraform for an S3 bucket from a form in Github.
 
 #### Start from scratch
 Navigate to the [Workflow Automation][3] page to configure the template in Datadog.
@@ -73,7 +76,7 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
 - **Github**
   - "Create or update file" to create new files
   - "Edit configuration file" to manipulate YAML or JSON files
-  - "Trigger github actions workflow fun" to initiate a github action
+  - "Trigger GitHub Actions workflow run" to initiate a GitHub Action
   - "Search repositories" to return a list of repositories
   - "Create pull request" to open a pull request
 - **Retrieve Service Information**
@@ -84,7 +87,7 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
   - "Get service PagerDuty on call"
   - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks).
 - **Private Actions**
-  - To interact with private resources, utilize the [Private Action Runner][12]
+  - To interact with private resources, use the [Private Action Runner][12].
     
 
 ## Further reading
