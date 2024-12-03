@@ -26,7 +26,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-The Datadog Profiler requires Ruby 2.5+ (Ruby 3.1+ or later are recommended). JRuby and TruffleRuby are not supported.
+The Datadog Profiler requires Ruby 2.5+ (Ruby 3.1+ or later is recommended). JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
