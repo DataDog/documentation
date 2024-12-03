@@ -28037,9 +28037,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code and library vulnerabilities.
-              This does not restrict access to the vulnerability data source through
-              the API or inventory SQL.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -28064,7 +28061,6 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
-            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -28085,7 +28081,6 @@ components:
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
-            security_monitoring_signals_write: Edit Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
             security_pipelines_read: View Security Pipelines.
@@ -28110,6 +28105,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -33012,7 +33008,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get a list of incident types
       tags:
@@ -33021,7 +33016,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -33152,7 +33146,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get incident type details
       tags:
@@ -33161,7 +33154,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -44348,11 +44340,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Convert a job result to a signal
       tags:
       - Security Monitoring
