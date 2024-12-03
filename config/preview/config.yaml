@@ -32,7 +32,7 @@ deployment:
       include: "**.{jpg,jpeg,png,gif,mp4,mov,svg,json}"
     - name: "preview:english_content"
       URL: "s3://datadog-docs-preview?region=us-east-1&prefix=$CI_COMMIT_REF_NAME/"
-      exclude: "{ja/**, fr/**, ko/**, es/**}"
+      exclude: "{ja/**,fr/**,ko/**,es/**}"
 
     matchers:
       # temporarily lets nocache this sh file
