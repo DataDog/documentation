@@ -19,7 +19,7 @@ further_reading:
   text: "Handling Private Action Credentials for App Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
 Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
@@ -46,7 +46,7 @@ To use App Builder with private actions, you must be able to point a hostname to
 
 In addition, the host must have the following:
 - 2GB of RAM
-- Docker (with Docker Compose if that is your preference)
+- Docker (with Docker Compose if that is your preference) or Kubernetes
 
 ## Set up a private action runner
 

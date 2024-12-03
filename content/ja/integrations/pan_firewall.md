@@ -35,7 +35,7 @@ draft: false
 git_integration_title: pan_firewall
 integration_id: pan-firewall
 integration_title: Palo Alto Networks Firewall
-integration_version: 1.2.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: pan_firewall
@@ -72,7 +72,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
 Datadog の Alto Networks Firewall ログインテグレーションにより、お客様は Palo Alto Networks ファイアウォールログを取り込み、解析し、分析することができます。このログインテグレーションは、Palo Alto ファイアウォールで実行されるオペレーティングシステムである PAN OS によって提供される HTTPS ログテンプレートおよび転送機能に依存しています。PAN-OS を使用すると、お客様は脅威、トラフィック、認証、およびその他の重要なログイベントを転送できます。
 
@@ -97,7 +97,7 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
     * Datadog Agent を備えたマシンの IP アドレス
     * トランスポート: TCP
     * ポート: 10518、形式: BSD
- 4. Copy and configure custom log format for the required log type. The formats below are mappings from the formats listed in [the Palo Alto Networks Syslog Field Descriptions docs][3].
+ 4. 必要なログタイプのカスタムログ形式をコピーして構成します。以下の形式は、[Palo Alto Networks Syslog Field Descriptions ドキュメント][3]に記載されている形式からのマッピングです。
 
     | 名前                         | 形式                                                |
     | -------------------------------| ---------------------------------------------------------- |
@@ -165,7 +165,7 @@ PANOS インテグレーションには、サービスのチェック機能は�
 [3]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[6]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
 [7]: https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions
 [8]: https://docs.datadoghq.com/ja/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
 [9]: https://docs.datadoghq.com/ja/help/

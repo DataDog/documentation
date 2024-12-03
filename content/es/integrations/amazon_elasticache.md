@@ -8,7 +8,7 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Seguimiento de métricas clave de Amazon ElasicCache.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
@@ -112,21 +112,26 @@ A continuación se muestra un ejemplo de configuración de un gráfico para comb
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, incluidos, entre otros, el nombre del host y los grupos de seguridad.
 
+**Nota**: Las métricas para despliegues de ElastiCache Serverless se informan en el mismo espacio de nombres `aws.elasticache`. Estas métricas pueden distinguirse por etiquetas (tags):
+
+   - Las métricas de ElastiCache existentes para cachés de diseño propio utilizan la etiqueta cacheclusterid para identificar una caché individual.
+   - Las métricas de caché serverless utilizan la etiqueta clusterid para identificar las cachés individuales
+
 ### Eventos
 
 La integración Amazon ElastiCache incluye eventos para clúster, grupos de seguridad de caché y grupos de parámetros de caché. Consulta los siguientes ejemplos de eventos:
 
 {{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Eventos Amazon ElastiCache" >}}
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Amazon ElastiCache no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
 
-## Leer más
+## Referencias adicionales
 
 - [Monitorización de métricas de rendimiento de ElastiCache con Redis o Memcached][1]
 - [Recopilación de métricas ElastiCache + sus métricas Redis/Memcached][11]

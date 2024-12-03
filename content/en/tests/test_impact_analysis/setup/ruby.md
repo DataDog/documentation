@@ -11,7 +11,7 @@ further_reading:
       text: "Explore Test Results and Performance"
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 ## Compatibility

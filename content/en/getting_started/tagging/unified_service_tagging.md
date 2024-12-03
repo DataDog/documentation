@@ -420,7 +420,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 
 [1]: /real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/setup
+[2]: /real_user_monitoring/browser/setup/
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}

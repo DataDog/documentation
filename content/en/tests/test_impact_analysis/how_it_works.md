@@ -33,7 +33,6 @@ While other test solutions calculate test impact analysis using code coverage to
 
 Test Impact Analysis leverages per-test code coverage information along with data from [Test Optimization][1] to search previous tests in all relevant past commits. Configuration of Test Impact Analysis is a one-click operation in most languages, and the results are accurate and more precise than other methods.
 
-
 ## How test selection works
 
 When you enable Test Impact Analysis, per-test (or per-suite, depending on the framework) code coverage is transparently collected and sent to Datadog.
@@ -48,7 +47,7 @@ The Datadog library then removes tests marked as unskippable in source from the 
 
 Let's take a look at a specific example:
 
-{{< img src="continuous_integration/itr_example_2.png" alt="A diagram explaining how a pull request with multiple commits to main and feature branches can have different results with tracked files" style="width:80%;">}}
+{{< img src="continuous_integration/itr_example_3.png" alt="A diagram explaining how a pull request with multiple commits to main and feature branches can have different results with tracked files" style="width:80%;">}}
 
 The diagram above shows a developer branch that branches out from `main` and has several commits. On each commit, the CI has been running two tests (A and B) with different results.
 

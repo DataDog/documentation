@@ -53,23 +53,20 @@ As it receives data, DogStatsD aggregates multiple data points for each unique m
 
 ## Setup
 
-DogStatsD is enabled by default over UDP port `8125` for Agent v6+. If you don't need to change this port, see directly how to [setup DogStatsD in your code](#code).
+DogStatsD consists of a server, which is bundled with the Datadog Agent, and a client library, which is available in multiple languages. The DogStatsD server is enabled by default over UDP port `8125` for Agent v6+. You can set a custom port for the server if necessary. Configure your client to match the address and port of the Datadog Agent DogStatsD server.
 
-### Agent
+### Datadog Agent DogStatsD server
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][1], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][2]. To enable a custom Agent DogStatsD server UDP port:
+If you need to change the port, configure the `dogstatsd_port` option in the main [Agent configuration file][1], and restart the Agent. You can also configure DogStatsD to use a [UNIX domain socket][2].
 
-1. Edit your `datadog.yaml` file to un-comment the `use_dogstatsd` and `dogstatsd_port` parameters:
+To enable a custom Agent DogStatsD server UDP port:
+
+1. Set the `dogstatsd_port` parameter:
 
     ```yaml
-    ## @param use_dogstatsd - boolean - optional - default: true
-    ## Set this option to false to disable the Agent DogStatsD server.
-    #
-    use_dogstatsd: true
-
     ## @param dogstatsd_port - integer - optional - default: 8125
     ## Override the Agent DogStatsD port.
     ## Note: Make sure your client is sending to the same UDP port.
@@ -78,7 +75,6 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
     ```
 
 2. [Restart your Agent][3].
-
 
 [1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /developers/dogstatsd/unix_socket/
@@ -95,12 +91,12 @@ docker run -d --cgroupns host \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
+              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
               gcr.io/datadoghq/agent:latest
 ```
 
-If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1].
+If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [UNIX domain socket][1].
 
 #### Origin detection over UDP
 
@@ -115,7 +111,7 @@ Origin detection in non-Kubernetes environments is based on an extension of the 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-StatsD metrics collection is enabled by default on [Unix domain socket][1]. To start collecting your StatsD metrics over UDP, you need to activate the DogStatsD feature in the Operator settings.
+StatsD metrics collection is enabled by default on [UNIX domain socket][1]. To start collecting your StatsD metrics over UDP, you need to activate the DogStatsD feature in the Operator settings.
 
 1. Add `features.dogstatsd.hostPortConfig.enabled` to your `datadog-agent.yaml` manifest:
 
@@ -183,7 +179,7 @@ Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect wh
     ```
 
 **Notes**: 
-* An alternative to UDP is [Unix Domain Sockets][5].
+* An alternative to UDP is [UNIX Domain Sockets][5].
 * Origin detection with UDP can use the pod ID as the entity ID.
 
 To use pod ID as the entity ID, add the following lines to your application manifest:
@@ -250,7 +246,9 @@ To gather custom metrics with [DogStatsD][1] with helm:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Code
+### DogStatsD client
+
+Install the DogStatsD client library for your preferred language and configure it to match the address and port of the Datadog Agent DogStatsD server.
 
 #### Install the DogStatsD client
 
@@ -293,8 +291,6 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 </dependency>
 ```
 
-
-
 [1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 {{< /programming-lang >}}
 
@@ -303,7 +299,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 Add the following to your `composer.json`:
 
 ```text
-"datadog/php-datadogstatsd": "1.4.*"
+"datadog/php-datadogstatsd": "1.6.*"
 ```
 
 **Note**: The first version shipped in Composer is _0.0.3_
@@ -364,7 +360,7 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
 <div class="alert alert-info">
-  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
+  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a UNIX Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
 </div>
 
 {{< /programming-lang >}}
@@ -476,7 +472,7 @@ In addition to the required DogStatsD configuration (`url` and `port`), the foll
 | ---------------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `statsd_host`          | String          | `localhost` | The host of your DogStatsD server.                                                                             |
 | `statsd_port`          | Integer         | `8125`      | The port of your DogStatsD server.                                                                             |
-| `statsd_socket_path`   | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
+| `statsd_socket_path`   | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
 | `statsd_constant_tags` | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
 | `statsd_namespace`     | String          | `null`      | Namespace to prefix all metrics, events, and service checks.                                                   |
 
@@ -491,7 +487,7 @@ For the full list of optional parameters available for `datadog.initialize()` as
 | --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `host`          | String          | `localhost` | The host of your DogStatsD server.                                                                             |
 | `port`          | Integer         | `8125`      | The port of your DogStatsD server.                                                                             |
-| `socket_path`   | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
+| `socket_path`   | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
 | `tags`          | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
 | `namespace`     | String          | `null`      | Namespace to prefix to all metrics, events, and service checks.                                                |
 | `single_thread` | Boolean         | `false`     | Makes the client send the metrics on the main thread when enabled rather than in a companion thread.           |
@@ -549,7 +545,7 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
 | `port`        | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |
-| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
+| `socket_path` | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
 | `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable.                                    |
 
 {{< /programming-lang >}}

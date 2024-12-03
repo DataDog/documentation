@@ -12,13 +12,13 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Service page dependency map" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 
 Explore inferred services in the [Service Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
 
-To see inferred services, you must enable some **Datadog Agent** configurations. 
+To see inferred services, you must enable some configurations. 
 
 {{< tabs >}}
 {{% tab "Agent v7.55.1+" %}}
@@ -135,6 +135,22 @@ Peer Tag | Source Attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
+**Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
+
+#### Precedence of peer tags
+
+To assign the name to inferred entities, Datadog uses a specific order of precedence between peer tags, when entities are defined by a combination of multiple tags. 
+
+Entity type | Order of precedence
+-----------|----------------
+Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
+Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
+
+If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
+
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
+
 ## Migrate to global default service naming
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
@@ -150,7 +166,7 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
 {{< /site-region >}}
-{{< site-region region="us,eu,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
 
 {{< /site-region >}}
