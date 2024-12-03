@@ -1,5 +1,5 @@
 ---
-title: RUM Roku Advanced Configuration
+title: Roku Advanced Configuration
 aliases:
     - /real_user_monitoring/roku/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku

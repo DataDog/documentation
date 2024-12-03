@@ -1,5 +1,6 @@
 ---
-title: RUM Android and Android TV Monitoring Setup
+title: Android and Android TV Monitoring Setup
+description: Collect RUM and Error Tracking data from your Android projects.
 aliases:
     - /real_user_monitoring/android/
     - /real_user_monitoring/setup/android

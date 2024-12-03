@@ -1,5 +1,5 @@
 ---
-title: RUM Android Data Collected
+title: Android Data Collected
 aliases:
 - /real_user_monitoring/android/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/

@@ -1,5 +1,5 @@
 ---
-title: RUM Flutter Advanced Configuration
+title: Flutter Advanced Configuration
 description: Learn how to configure Flutter Monitoring.
 aliases:
     - /real_user_monitoring/flutter/advanced_configuration

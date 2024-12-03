@@ -1,5 +1,5 @@
 ---
-title: RUM Kotlin Multiplatform Data Collected
+title: Kotlin Multiplatform Data Collected
 description: Learn about the data collected by Kotlin Multiplatform Monitoring.
 aliases:
 - /real_user_monitoring/kotlin-multiplatform/data_collected/

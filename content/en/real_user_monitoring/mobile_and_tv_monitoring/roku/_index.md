@@ -1,5 +1,6 @@
 ---
-title: RUM Roku Monitoring
+title: Roku Monitoring
+description: Collect RUM and Error Tracking data from your Roku projects.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
 further_reading:

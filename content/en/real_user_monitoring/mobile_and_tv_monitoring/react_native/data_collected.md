@@ -1,5 +1,5 @@
 ---
-title: RUM React Native Data Collected
+title: React Native Data Collected
 description: Learn about the data collected by React Native Monitoring.
 aliases:
 - /real_user_monitoring/reactnative/data_collected/

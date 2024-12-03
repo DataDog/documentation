@@ -1,5 +1,5 @@
 ---
-title: RUM Android and Android TV Monitoring
+title: Android and Android TV Monitoring
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
   tag: Documentation

@@ -1,5 +1,5 @@
 ---
-title: RUM Roku Data Collected
+title: Roku Data Collected
 aliases:
 - /real_user_monitoring/roku/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku

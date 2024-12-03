@@ -1,5 +1,6 @@
 ---
-title: RUM iOS and tvOS Monitoring
+title: iOS and tvOS Monitoring
+description: Collect RUM and Error Tracking data from your iOS projects.
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
   tag: Documentation

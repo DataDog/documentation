@@ -1,5 +1,5 @@
 ---
-title: RUM iOS Data Collected
+title: iOS Data Collected
 aliases:
 - /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios/

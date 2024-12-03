@@ -1,5 +1,5 @@
 ---
-title: RUM Kotlin Multiplatform Monitoring Setup
+title: Kotlin Multiplatform Monitoring Setup
 is_beta: true
 private: true
 description: Collect RUM data from your Kotlin Multiplatform projects.

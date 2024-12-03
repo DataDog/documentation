@@ -1,5 +1,5 @@
 ---
-title: RUM React Native Advanced Configuration
+title: React Native Advanced Configuration
 description: Learn about advanced configuration options for your React Native setup.
 aliases:
     - /real_user_monitoring/react-native/advanced_configuration/

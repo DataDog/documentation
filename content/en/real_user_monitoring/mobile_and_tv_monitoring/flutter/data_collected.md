@@ -1,5 +1,5 @@
 ---
-title: RUM Flutter Data Collected
+title: Flutter Data Collected
 description: Learn about the data collected by Flutter Monitoring.
 aliases:
 - /real_user_monitoring/flutter/data_collected/

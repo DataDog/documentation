@@ -1,5 +1,5 @@
 ---
-title: RUM iOS and tvOS Monitoring Supported Versions
+title: iOS and tvOS Monitoring Supported Versions
 beta: true
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 aliases:

@@ -1,5 +1,5 @@
 ---
-title: RUM Kotlin Multiplatform Advanced Configuration
+title: Kotlin Multiplatform Advanced Configuration
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
     - /real_user_monitoring/kotlin-multiplatform

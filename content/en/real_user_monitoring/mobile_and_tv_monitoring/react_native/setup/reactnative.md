@@ -1,5 +1,5 @@
 ---
-title: RUM React Native Monitoring Setup
+title: React Native Monitoring Setup
 description: Collect RUM data from your React Native projects.
 type: multi-code-lang
 code_lang: reactnative
