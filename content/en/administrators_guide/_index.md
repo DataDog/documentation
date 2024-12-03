@@ -1,5 +1,5 @@
 ---
-title: Administrator's Guide - Test1234
+title: Administrator's Guide - Test12345
 description: Setup and install Datadog as an administrator to avoid common issues.
 further_reading:
 - link: "/getting_started/application/"
