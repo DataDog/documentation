@@ -85,5 +85,5 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 [2]: /real_user_monitoring/ios/data_collected/
 [3]: /real_user_monitoring/android/data_collected/
 [4]: /real_user_monitoring/reactnative/data_collected/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[5]: /real_user_monitoring/flutter/mobile_and_tv_monitoring/data_collected/
 [6]: /data_security/real_user_monitoring/

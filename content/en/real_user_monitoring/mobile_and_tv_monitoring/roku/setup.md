@@ -4,7 +4,7 @@ aliases:
     - /real_user_monitoring/roku/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/roku
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
+- link: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration
   tag: Documentation
   text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku

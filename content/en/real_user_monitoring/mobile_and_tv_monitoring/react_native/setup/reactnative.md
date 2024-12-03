@@ -9,7 +9,7 @@ aliases:
     - /real_user_monitoring/reactnative/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/reactnative
+- link: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/advanced_configuration
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative

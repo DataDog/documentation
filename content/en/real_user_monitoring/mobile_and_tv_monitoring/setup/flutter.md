@@ -370,7 +370,7 @@ This means that even if users open your application while offline, no data is lo
 [4]: /real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
