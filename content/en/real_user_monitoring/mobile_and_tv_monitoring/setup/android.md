@@ -18,12 +18,13 @@ further_reading:
 ---
 ## Overview
 
-
-You can use the Android SDK to instrument your application for both [Real User Monitoring (RUM)][1] and [Error Tracking][2].
+You can use the Android SDK to instrument your application for [Real User Monitoring (RUM)][1] and/or [Error Tracking][2]. While the setup instructions are similar for RUM and Error Tracking, you need to instrument your applications for reach product separately.
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
+
+To setup the Android SDK for RUM or Error Tracking:
 
 1. Declare Datadog SDK as a dependency.
 2. Specify application details in the UI.
@@ -32,6 +33,8 @@ The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 5. Initialize the Interceptor to track network events.
 
 ### Declare the Datadog SDK as a dependency
+
+To declare the Android SDK as a dependency for RUM or Error Tracking:
 
 Declare [dd-sdk-android-rum][3] and the [Gradle plugin][4] as dependencies in your **application module's** `build.gradle` file.
 
@@ -92,6 +95,8 @@ To ensure the safety of your data, you must use a client token. If you use only 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
 ### Initialize Datadog SDK with application context
+
+To initialize the Android SDK for RUM or Error Tracking:
 
 In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][7].
 
@@ -334,7 +339,8 @@ Rum.enable(rumConfig)
 
 ### Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization for RUM and Error Tracking.
+
 Tracking consent can be one of the following values:
 
 - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
@@ -349,6 +355,8 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 
 
 ### Enable the feature to start sending data
+
+To enable the Android SDK to start sending data for RUM or Error Tracking:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -380,6 +388,8 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views (activities, fragments, and more).
 
 ### Initialize the Interceptor to track network events
+
+To initialize an interceptor for tracking network events for RUM or Error Tracking:
 
 1. If you want to have distributed tracing, [add and enable the Trace feature][13].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
@@ -428,7 +438,7 @@ You can also add an `EventListener` for the `OkHttpClient` to [automatically tra
 
 ## Track background events
 
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available) for RUM or Error Tracking. 
 
 Add the following snippet during RUM configuration:
 
@@ -479,7 +489,7 @@ val inputStream = context.getRawResAsRumResource(id)
 
 The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
-Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
