@@ -5,7 +5,6 @@ external_redirect: /security/application_security/threats/threat_detection/
 
 <div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in Preview.</div>
 
-
 ## Requirements
 
 - **Minimum Agent version 7.53.0**
