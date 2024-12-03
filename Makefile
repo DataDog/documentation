@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -39,7 +39,7 @@ CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.y
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files)
+clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
 	rm -rf ./node_modules ./hugpython ./public
 
 clean-dependent-repos:
@@ -67,12 +67,19 @@ server:
 	fi;
 
 # Download all dependencies and run the site
-start: dependencies ## Build and run docs including external content.
+start: setup-build-scripts ## Build and run docs including external content.
+	@make dependencies 
 	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make server
+
+# Leave build scripts as is for local testing
+# This is useful for testing changes to the build scripts locally
+start-preserve-build: dependencies 
+	@make update_websites_sources_module
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
@@ -198,6 +205,60 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
+
+# Local build setup
+BUILD_SCRIPTS_PATH := local/bin/py/build
+
+.PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
+
+# Save specific config files
+backup-config:
+	@tmp_backup=$$(mktemp -d)/config_backup && \
+	if [ -f "$(BUILD_SCRIPTS_PATH)/integration_merge.yaml" ]; then \
+		cp "$(BUILD_SCRIPTS_PATH)/integration_merge.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	fi; \
+	if [ -f "$(BUILD_SCRIPTS_PATH)/pull_config_preview.yaml" ]; then \
+		cp "$(BUILD_SCRIPTS_PATH)/pull_config_preview.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	fi; \
+	if [ -f "$(BUILD_SCRIPTS_PATH)/pull_config.yaml" ]; then \
+		cp "$(BUILD_SCRIPTS_PATH)/pull_config.yaml" $$tmp_backup/ 2>/dev/null || true; \
+	fi; \
+	echo "$$tmp_backup" > .config_backup_path
+
+# Restore specific config files
+restore-config:
+	@if [ -f .config_backup_path ]; then \
+		backup_dir=$$(cat .config_backup_path); \
+		cp $$backup_dir/* $(BUILD_SCRIPTS_PATH)/ 2>/dev/null || true; \
+		rm .config_backup_path; \
+		rm -rf $$(dirname $$backup_dir); \
+	fi
+
+$(BUILD_SCRIPTS_PATH):
+	@mkdir -p $(BUILD_SCRIPTS_PATH)
+
+# Clean build scripts
+clean-build-scripts:
+	@echo "Cleaning build directory..."
+	@find $(BUILD_SCRIPTS_PATH) -mindepth 1 -not -name 'integration_merge.yaml' -not -name 'pull_config_preview.yaml' -not -name 'pull_config.yaml' -delete
+
+# Source the build scripts and maintain file structure
+setup-build-scripts: clean-build-scripts $(BUILD_SCRIPTS_PATH) backup-config
+	@echo "Fetching latest build scripts..."
+	@tmp_dir=$$(mktemp -d) && \
+	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
+	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
+		echo "Moving files to build directory..." && \
+		cp -r $$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)/* $(BUILD_SCRIPTS_PATH)/ && \
+		cd $(BUILD_SCRIPTS_PATH) && \
+		if [ -d "services" ]; then \
+			echo "Cleaning up directory structure..." && \
+			rm -rf services; \
+		fi \
+	fi && \
+	rm -rf $$tmp_dir
+	@$(MAKE) restore-config
+	@echo "Build scripts updated successfully!"
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead
