@@ -1,5 +1,5 @@
 ---
-title: RUM Roku Channel Monitoring Setup
+title: Roku Channel Monitoring Setup
 aliases:
     - /real_user_monitoring/roku/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/roku

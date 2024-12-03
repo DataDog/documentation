@@ -1,5 +1,6 @@
 ---
-title: RUM React Native Monitoring
+title: React Native Monitoring
+description: Collect RUM and Error Tracking data from your React Native projects.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/setup/react_native/
 further_reading:

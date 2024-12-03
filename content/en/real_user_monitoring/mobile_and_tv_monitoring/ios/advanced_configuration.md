@@ -1,5 +1,5 @@
 ---
-title: RUM iOS Advanced Configuration
+title: iOS Advanced Configuration
 aliases:
     - /real_user_monitoring/ios/advanced_configuration
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios

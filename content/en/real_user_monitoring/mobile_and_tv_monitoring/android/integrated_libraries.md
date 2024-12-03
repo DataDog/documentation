@@ -1,5 +1,5 @@
 ---
-title: RUM Android and Android TV Libraries
+title: Android and Android TV Libraries for RUM
 aliases:
 - /real_user_monitoring/android/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries/

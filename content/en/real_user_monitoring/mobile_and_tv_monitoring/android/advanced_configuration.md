@@ -1,5 +1,5 @@
 ---
-title: RUM Android Advanced Configuration
+title: Android Advanced Configuration
 aliases:
     - /real_user_monitoring/android/advanced_configuration/
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
