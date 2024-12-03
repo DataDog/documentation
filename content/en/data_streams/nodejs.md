@@ -9,6 +9,10 @@ further_reading:
       text: 'Service Catalog'
 ---
 
+<div class="alert alert-info">
+To use manual instrumentation to set up Data Streams Monitoring, see <a href="/data_streams/manual_instrumentation">Set up Data Streams Monitoring through Manual Instrumentation</a>. 
+</div>
+
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
