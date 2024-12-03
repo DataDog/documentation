@@ -18,13 +18,11 @@ further_reading:
 ---
 ## Overview
 
-You can use the Android SDK to instrument your application for [Real User Monitoring (RUM)][1] and/or [Error Tracking][2]. While the setup instructions are similar for RUM and Error Tracking, you need to instrument your applications for reach product separately.
+You can use the Android SDK to instrument your application for [Real User Monitoring (RUM)][1] and/or [Error Tracking][2]. While the setup instructions are similar for RUM and Error Tracking, you need to instrument your applications for Error Tracking separately if you have purchased it as a standalone product.
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
-
-To setup the Android SDK for RUM or Error Tracking:
 
 1. Declare Datadog SDK as a dependency.
 2. Specify application details in the UI.
@@ -33,8 +31,6 @@ To setup the Android SDK for RUM or Error Tracking:
 5. Initialize the Interceptor to track network events.
 
 ### Declare the Datadog SDK as a dependency
-
-To declare the Android SDK as a dependency for RUM or Error Tracking:
 
 Declare [dd-sdk-android-rum][3] and the [Gradle plugin][4] as dependencies in your **application module's** `build.gradle` file.
 
@@ -95,8 +91,6 @@ To ensure the safety of your data, you must use a client token. If you use only 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
 ### Initialize Datadog SDK with application context
-
-To initialize the Android SDK for RUM or Error Tracking:
 
 In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][7].
 
@@ -327,7 +321,7 @@ The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` f
 
 ### Sample sessions
 
-To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM or Error Tracking][11]. The sample rate is a percentage between 0 and 100.
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100.
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -339,7 +333,7 @@ Rum.enable(rumConfig)
 
 ### Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization for RUM and Error Tracking.
+To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
 
 Tracking consent can be one of the following values:
 
@@ -356,7 +350,7 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 
 ### Enable the feature to start sending data
 
-To enable the Android SDK to start sending data for RUM or Error Tracking:
+To enable the Android SDK to start sending data:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -389,7 +383,7 @@ See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views 
 
 ### Initialize the Interceptor to track network events
 
-To initialize an interceptor for tracking network events for RUM or Error Tracking:
+To initialize an interceptor for tracking network events:
 
 1. If you want to have distributed tracing, [add and enable the Trace feature][13].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
@@ -438,7 +432,7 @@ You can also add an `EventListener` for the `OkHttpClient` to [automatically tra
 
 ## Track background events
 
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available) for RUM or Error Tracking. 
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
 
 Add the following snippet during RUM configuration:
 
