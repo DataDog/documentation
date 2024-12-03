@@ -2,7 +2,6 @@
 title: Troubleshooting Service Catalog
 aliases:
   - /tracing/service_catalog/troubleshooting
-  - /service_catalog/troubleshooting
   - /service_catalog/guides/troubleshooting
 further_reading:
   - link: "/tracing/service_catalog/setup/"
