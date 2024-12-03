@@ -22,9 +22,9 @@ cascade:
     rank: 70
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
-  Explore and register for Foundation Enablement sessions. Learn about how Datadog's SaaS-based infrastructure monitoring provides metrics, visualizations, and alerting to ensure your engineering teams can maintain and optimize your cloud or hybrid environments.
-{{< /learning-center-callout >}}
+<div class="alert alert-warning"><h5 class="card-title text-black mt-0 mb-1">The API Catalog is not under current development</h5>
+We are making significant improvements to the way API endpoints are represented in Datadog. The functionality currently available on this page will be moved to the Service Catalog. Rest assured that all core capabilities will be available in the Service Catalog after the migration is done. Stay tuned for further updates!
+</div>
 
 
 ## Overview
