@@ -256,7 +256,10 @@ assets/jsconfig.json
 !.yarn/versions
 
 # local build files
+.backup_path
 local/bin/py/build/*
+local/bin/py/sh
+local/bin/py/js
 local/bin/js/
 local/bin/py/translations
 local/bin/py/add_notranslate_tag.py

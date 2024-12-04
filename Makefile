@@ -39,7 +39,7 @@ CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.y
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files, build scripts)
+clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
 	rm -rf ./node_modules ./hugpython ./public
 
 clean-dependent-repos:
@@ -208,6 +208,8 @@ clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsub
 
 # Local build setup
 PY_PATH := local/bin/py
+JS_PATH := local/bin/js
+TRANSLATIONS_PATH := $(PY_PATH)/translations
 BUILD_SCRIPTS_PATH := $(PY_PATH)/build
 
 .PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
@@ -224,8 +226,15 @@ backup-config:
 		done; \
 	fi && \
 	if [ -d "$(PY_PATH)" ]; then \
-		mkdir -p $$tmp_backup/py_backup && \
-		find $(PY_PATH) -mindepth 1 -maxdepth 1 ! -name "build" -exec cp -r {} $$tmp_backup/py_backup/ \;; \
+	    mkdir -p $$tmp_backup/py_backup && \
+	    find $(PY_PATH) -mindepth 1 -maxdepth 1 \
+	        ! -name "build" \
+	        ! -name "translations" \
+	        ! -name "add_notranslate_tag.py" \
+	        ! -name "missing_metrics.py" \
+	        ! -name "placehold_translations.py" \
+	        ! -name "submit_github_status_check.py" \
+	        -exec cp -r {} $$tmp_backup/py_backup/ \; ; \
 	fi && \
 	echo "$$tmp_backup" > .backup_path
 
@@ -253,10 +262,13 @@ $(PY_PATH):
 
 # Clean build scripts
 clean-build-scripts:
-	@echo "Cleaning python directory..."
+	@echo "Cleaning build files..."
+	@$(MAKE) backup-config
 	@rm -rf $(PY_PATH)
+	@rm -rf $(JS_PATH)
 	@mkdir -p $(PY_PATH)
 	@mkdir -p $(BUILD_SCRIPTS_PATH)
+	@$(MAKE) restore-config
 
 # Source the build scripts and maintain file structure
 setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
@@ -277,6 +289,9 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 	fi && \
 	rm -rf $$tmp_dir
 	@$(MAKE) restore-config
+	mkdir local/bin/js
+	cp -r $(PY_PATH)/js/* $(JS_PATH)/
+	rm -rf local/bin/py/sh local/bin/py/js
 	@echo "Build scripts updated successfully!"
 
 # Function that will clone a repo or sparse clone a repo
