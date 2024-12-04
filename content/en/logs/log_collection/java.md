@@ -463,7 +463,11 @@ Use the [logstash-logback-encoder][11] logging library along with Logback to str
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
-    For the following configuration, replace `<YOUR REGION INTAKE>` with `{{< region-param key="web_integrations_endpoint" code="false" >}}:{{< region-param key="web_integrations_port" code="false" >}}`.
+   For the following configuration, replace `<YOUR REGION INTAKE>` with the intake based on your region:{{< region-param key="dd_site_name" code="true" >}}. **Note**: The US1-FED is not supported. 
+    - **US1**: `intake.logs.datadoghq.com:10516`    
+    - **US3**: `intake.logs.us3.datadoghq.com:10516`
+    - **US5**: `intake.logs.datadoghq.com:10516`    
+    - **AP1**: `intake.logs.ap1.datadoghq.com:443`  
 
     {{< site-region region="us,us3,us5,ap1" >}}
 
