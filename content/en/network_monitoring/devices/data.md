@@ -1,5 +1,5 @@
 ---
-title: NDM Data Collected
+title: SNMP Metrics Reference
 disable_toc: true
 aliases:
     - /network_performance_monitoring/devices/data/

@@ -22,9 +22,7 @@ The [generic profile][114] collects metrics for all devices not supported by a v
 
 ### Vendor profiles
 
-The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't, you can:
-  - Customize your own YAML profile (see the [NDM troubleshooting FAQ page][1] for guidance).
-  - Create new [profiles][2] to start monitoring new device models.
+The following vendor devices are supported with dedicated profiles. If you find that Datadog supports a vendor or device type but your specific model isn't supported, see the [FAQ](#faq) section.
 
 | Vendor | Config files |
 | ---  | ----------- |
@@ -102,6 +100,32 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 | Zyxel | [zyxel-switch.yaml][125] <br> |
 
 
+## FAQ
+
+### What do I do if Datadog supports a vendor or device type but my specific model isn't supported?
+
+If a vendor or device type is supported, but the specific model isn't, you can:
+  - Create new [profiles][2] to start monitoring new device models.
+
+- Contact [Datadog support][1] to put in a request to support your specific model.
+- Extend your profiles to support additional `sysobjectid` values. 
+    For example, if you want to monitor another type of Cisco CSR, you can modify the ISR profile directly to list another `sysobjectid` like this: 
+    
+    ```
+		snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
+    ```
+
+**Note**: If you do not know the `sysobjectid` of your device, try doing an Internet search or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
+
+### Can I still use Network Device Monitoring if my device-model pair isn't supported?
+
+Datadog collects generic base-line metrics from all devices. If there are unsupported metrics from a vendor MIB, you can write a custom profile, or send a feature request to [Datadog support][1].
+
+If you send a feature request, Datadog support needs a `snmpwalk` from the requested device. Run the following and send the output:
+
+```
+snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
+```
 
 [1]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
 [2]: /network_monitoring/devices/profiles/

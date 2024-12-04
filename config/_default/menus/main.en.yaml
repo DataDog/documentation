@@ -3015,51 +3015,56 @@ menu:
       parent: nm_parent
       identifier: ndm
       weight: 3
+    - name: NDM Terms and Concepts
+      url: network_monitoring/devices/glossary
+      parent: ndm
+      identifier: ndm_glossary
+      weight: 301
     - name: Getting Started
       url: network_monitoring/devices/getting_started
       parent: ndm
       identifier: ndm_getting_started
-      weight: 301
+      weight: 302
     - name: Supported Devices
       url: network_monitoring/devices/supported_devices
-      parent: ndm
+      parent: ndm_getting_started
       identifier: ndm_supported_devices
-      weight: 302
+      weight: 30001
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
-      parent: ndm
+      parent: ndm_getting_started
       identifier: ndm_snmp_metrics
-      weight: 303
+      weight: 30002
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
-      parent: ndm
+      parent: ndm_getting_started
       identifier: ndm_snmptraps
-      weight: 304
+      weight: 30003
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 305
+      weight: 303
     - name: Device Topology Map
       url: network_monitoring/devices/device_topology_map
       parent: ndm
       identifier: ndm_topology_map
-      weight: 306
-    - name: Data Collected
+      weight: 304
+    - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 307
+      weight: 305
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 308
+      weight: 306
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 309
+      weight: 307
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
