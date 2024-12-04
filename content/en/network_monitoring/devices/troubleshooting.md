@@ -12,7 +12,6 @@ further_reading:
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
 
-
 ### What SNMP versions does Datadog support?
 
 Datadog supports all three versions of SNMP: SNMPv1, SNMPv2, and SNMPv3.
