@@ -34,7 +34,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the iOS SDK. While Error Tracking is included with RUM, you can follow the steps below to instrument your applications for RUM, as well as Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the iOS SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
 
 ## Setup
 
