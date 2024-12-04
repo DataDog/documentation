@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
+<div class="alert alert-warning">RUM and Error Tracking for Roku are not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 ## Overview
