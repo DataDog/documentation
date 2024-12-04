@@ -28,7 +28,7 @@ As teams iterate, deploy code, and make changes to their applications and servic
 
 ## Overlay changes on graphs
 
-To get started, click **Show Overlays** in the upper right corner of your dashboard to enable the [Change Tracking][16] timeline and change overlays on timeseries widgets.
+To get started, click **Show Overlays** in the upper right corner of your dashboard. Now you can enable the [Change Tracking][16] timeline and change overlays on timeseries widgets.
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
