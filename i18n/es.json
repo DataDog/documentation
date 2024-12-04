@@ -1,4 +1,7 @@
 {
+  "brian_test": {
+    "other": "testing some deploy things"
+  },
   "integration_count": {
     "other": "800"
   },
