@@ -1,9 +1,20 @@
 ---
+algolia:
+  tags:
+  - grok
+  - grok パーサー
+  - ログのパース
+  - 属性の抽出
+  - 属性の再マッピング
+  - パース
 aliases:
 - /ja/logs/parsing/
 - /ja/logs/processing/parsing
 description: Grok プロセッサーを使用してログをパースする
 further_reading:
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: ラーニングセンター
+  text: ログパイプラインの構築と変更方法について
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ログの処理方法
@@ -18,6 +29,10 @@ further_reading:
   text: Datadog でインデックス化するログの量を制御する
 title: パース
 ---
+
+{{< learning-center-callout header="ラーニングセンターで Grok パースを試してみましょう" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+ログパイプラインの構築と変更を行い、Pipeline Scanner で管理し、処理されたログ全体で属性名を統一して一貫性を持たせる方法を学びましょう。
+{{< /learning-center-callout >}}
 
 ## 概要
 

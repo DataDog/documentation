@@ -106,6 +106,22 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 If you need additional assistance, contact [Datadog support][5].
 
 
+### Third-Party Library Compatibility Note
+
+Code Security modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
+
+- Numba
+- JAX
+- TorchScript
+- TensorFlow
+- Bytecode
+- Codetransformer
+- PyPy
+
+Additionally, Code Security does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++,
+using the CPython API, or on intermediate language systems like Cython, the results might be less accurate than expected.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

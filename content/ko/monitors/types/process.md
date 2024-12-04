@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임을 예약하여 모니터 음소거
-- link: /monitors/manage/status/
+- link: /모니터/상태/
   tag: 설명서
   text: 모니터 상태 점검
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
@@ -18,6 +18,10 @@ further_reading:
   text: Datadog으로 AWS Fargate에서 실행 중인 프로세스 모니터링
 title: 실시간 프로세스 모니터
 ---
+
+<div class="alert alert-warning">
+실시간 프로세스 및 Live 프로세스 모니터링은 Enterprise 요금제에 포함되어 있습니다. 다른 모든 요금제의 경우 계정 담당자 또는 <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>에 문의하여 이 기능을 요청하세요.
+</div>
 
 ## 개요
 

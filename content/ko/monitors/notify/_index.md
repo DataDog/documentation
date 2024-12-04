@@ -12,6 +12,9 @@ further_reading:
 - link: /monitors/manage/
   tag: 설명서
   text: 모니터링 관리
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: 학습 센터
+  text: 알림 모니터 알림 커스터마이즈를 위한 수강
 title: 알림
 ---
 
@@ -22,7 +25,7 @@ title: 알림
 ## 알림 및 자동화 설정
 
 **알림 및 자동화 설정** 섹션을 이용해 다음을 수행하세요.
-- 이메일, Slack, PagerDuty, 다른 통합에 알림을 전송합니다.
+- 이메일, Slack, PagerDuty 및 추가적인 통합을 통해 알림을 팀에 보냅니다.
 - 모니터에서 워크플로를 생성하거나 트리거합니다.
 - 모니터에 사례를 추가합니다.
 
@@ -46,7 +49,7 @@ title: 알림
 
 ### 알림
 
-`@notification`을 사용해 팀 구성원, 통합, 워크플로, 사례를 알림에 추가합니다. 입력을 시작하면 Datadog에서 드롭다운 메뉴로 기존 옵션을 추천합니다. 옵션을 클릭해 알림을 추가합니다. 또는 ****@ 멘션 추가**, **워크플로 추가** 또는 **사례 추가**를 클릭합니다.
+`@notification`을 사용해 팀 구성원, 통합, 워크플로, 사례를 알림에 추가합니다. 입력을 시작하면 Datadog에서 드롭다운 메뉴로 기존 옵션을 추천합니다. 옵션을 클릭해 알림을 추가합니다. 또는 ****@ 멘션 추가**, **워크플로 추가** 또는 **사례 추가**를 클릭합니다.
 
 **참고**: `@notification`의 경우 대상과 마지막 줄 문자 사이에 공백이 있어야 합니다. 예는 다음과 같습니다.
 
@@ -59,7 +62,7 @@ Disk space is low @ops-team@company.com
 
 {{% notifications-email %}}
 
-#### 팀
+#### Teams
 
 알림 채널이 설정되면 알림을 특정 팀에 라우팅할 수 있습니다. @team-handle을 대상으로 하는 모니터 알림은 선택한 커뮤니케이션 채널로 리디렉션됩니다. 팀에 알림 채널을 설정하는 자세한 벙법은 [Teams][6] 설명서를 참조하세요.
 
@@ -68,18 +71,12 @@ Disk space is low @ops-team@company.com
 {{% notifications-integrations %}}
 
 ### 워크플로
-[워크플로 자동화][7]를 트리거하거나 모니터에서 새로운 워크플로를 생성합니다.
+[워크플로 자동화][7]를 트리거하거나 모니터링에서 새 워크플로를 만들 수 있습니다. 
 
-**모니터에 기존 워크플로 추가**:
-1. 메시지 섹션에서 전체 워크플로 멘션 이름을 추가합니다.
-   - 멘션 이름은 `@workflow-`로 시작해야 합니다. 예는 `@workflow-my-workflow`와 같습니다.
-   - 워크플로에 트리거 변수를 전달하려면 `@workflow-name(key=value, key=value)` 구문과 함께 쉼표로 구분된 목록을 사용해야 합니다. 메시지 템플릿 변수를 트리거 변수로 사용할 수 있습니다. 예는 `@workflow-my-workflow(hostname=host.name)`와 같습니다.
+모니터에 워크플로를 추가하기 전에 [워크플로에 모니터 트리거를 추가][17]하세요.
 
-1. 대신 **워크플로 추가**를 클릭해 드롭다운 메뉴에서 검색할 수 있습니다.
+모니터 트리거를 추가한 후 [모니터에 기존 워크플로를 추가하거나[8] 새 워크플로를 만듭니다. 모니터 페이지에서 새 워크플로를 만들려면 다음과 같이 하세요.
 
-워크플로 트리거 방법에 대한 자세한 정보는 [워크플로 트리거][8]를 참조합니다.
-
-**워크플로를 생성하려면**:
 1. **워크플로 추가**를 클릭합니다.
 1. **+** 아이콘을 클릭해 Blueprint를 선택하거나 **처음부터 시작**을 선택합니다.
    {{< img src="/monitors/notifications/create-workflow.png" alt="+ 버튼을 클릭해 새로운 워크플로 추가" style="width:90%;">}}
@@ -134,8 +131,8 @@ Disk space is low @ops-team@company.com
 
 다시 알리기 간격, 모니터가 다시 알리는 대상의 모니터 상태(`alert`, `no data` 및 `warn`)를 설정합니다. 부수적으로 전송되는 다시 알림 메시지의 수를 제한하도록 설정할 수 있습니다. 
 
-예를 들어 `stop renotifying after 1 occurrence`에 모니터를 설정하여 기본 알림 이후 단일 에스컬레이션 메시지를 받습니다. 
-**참고:** 재알림의 [속성 및 태그 변수][12[는 재알림 시간 동안 모니터에서 사용할 수 있는 데이터로 채워집니다.
+예를 들어, 모니터를 `stop renotifying after 1 occurrence`로 보내면 기본 알림 이후 하나의 에스컬레이션 메시지를 받게 됩니다.
+**참고: 재알림의 [속성 및 태그 변수][2]는 재알림 기간 동안 모니터에서 사용할 수 있는 데이터로 채워집니다.
 
 재알림이 활성화되면 모니터가 특정 기간 동안 선택한 상태 중 하나로 남아 있을 경우 전송되는 에스컬레이션 메시지를 포함할 것인지를 선택할 수 있는 옵션이 있습니다.
 
@@ -151,42 +148,24 @@ Disk space is low @ops-team@company.com
 1. `{{#is_renotify}}` 블록에 추가되는 상세 설명만 포함해 원본 메시지 상세 정보가 반복되지 않도록 합니다.
 2. 그룹 하위 집합에 에스컬레이션 메시지를 전송합니다.
 
-[예시 섹션][13]에 있는 사용 사례에 대해 모니터를 설정하는 방법을 알아보세요.
+[예시 섹션][12]에서 이러한 사용 사례에 맞게 모니터를 설정하는 방법을 알아보세요.
 
 
-## 권한 및 감사 알림을 정의합니다.
+## 감사 알림
 
-### 수정 사항
-
-[이벤트][14]는 모니터가 생성, 수정, 무음, 삭제될 때 생성됩니다. `Notify` 옵션을 설정해 팀 구성원, 채팅 서비스 및 이러한 이벤트의 모니터 생성자에게 알립니다.
-
-### 권한
-
-모든 사용자는 관련 역할과 상관없이 모니터링을 모두 확인할 수 있습니다.
-
-기본적으로 [모니터 쓰기 권한][15]이 있는 역할에 할당된 사용자만 모니터를 편집할 수 있습니다. [Datadog 관리자 역할 및 Datadog 표준 역할][16]에는 기본적으로 모니터 쓰기 권한이 있습니다. 조직에서 [사용자 지정 역할][17]을 사용하는 경우, 기타 사용자 지정 역할에 모니터 쓰기 권한이 있을 수 있습니다.
-
-편집할 수 있는 [역할][18] 목록을 지정해 모니터를 더욱 제한할 수 있습니다. 모니터의 생성자는 항상 모니터를 편집할 수 있습니다.
-
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC 제한 모니터링" style="width:90%;" >}}
-
-편집 권한에는 모니터링 설정 업데이트, 모니터링 삭제, 원하는 기간 만큼 모니터링 뮤트가 포함됩니다.
-
-**참고**: 제한 사항은 UI와 API에 모두 적용됩니다.
-
-모니터의 RBAC를 설정하고 설정 잠김에서 역할 제한 사용으로 모니터를 마이그레이션하는 자세한 벙법은 [모니터용 RBAC 설정 방법][19]을 참조하세요.
+모니터가 생성, 수정, 무음 또는 삭제될 때마다 감사 [이벤트][13]가 생성됩니다. **권한 및 감사 정의 알림** 섹션에서 **알림**을 선택하여 팀원, 채팅 서비스, 그리고 모니터 생성자(이벤트)에게 알립니다.
 
 ## 알림 테스트
 
-호스트, 메트릭, 이상, 아웃라이어(outlier), 예측, 로그, RUM, 애플리케이션 성능 모니터링(APM), 통합(점검만), 프로세스(점검만), 네트워크(점검만), 커스텀 점검, 이벤트 및 컴포짓(composite) 등 [모니터 유형][20]에 대해 테스트 알림이 지원됩니다.
+테스트 알림은 호스트, 메트릭, 이상, 아웃라이어(outlier), 예측, 로그, 럼, 애플리케이션 성능 모니터링(APM), 통합 (점검만), 프로세스 (점검만), 네트워크 (점검만), 커스텀 점검, 이벤트 및 컴포짓과 같은 [모니터 유형][14]에 대해 지원됩니다. 
 
 ### 테스트 실행
 
 1. 모니터링을 정의한 후 모니터링 페이지 우하단의 **알림 테스트** 버튼으로 해당 알림을 테스트합니다.
 
-2. 테스트 알림 팝업에서 테스트하려는 모니터 사례를 고릅니다. 알림 조건에서 지정된 임계값에 대한 모니터 설정에서 사용할 수 있는 상태만 테스트할 수 있습니다. [임계값 복원][21]은 예외입니다. Datadog는 모니터가 더 이상 알림이나 경고 조건에 있지 않을 때 복원 알림을 전송합니다.
+2. 테스트 알림 팝업에서 테스트할 모니터 전환과 그룹을 선택합니다. 쿼리에 [그룹화][15]가 있는 경우에만 사용 가능). 경고 조건에 지정된 임계값에 대해 모니터의 설정에서 사용할 수 있는 상태만 테스트할 수 있습니다. [복구 임계값][16]은 모니터가 더 이상 경고 상태가 아니거나 경고 조건이 없는 경우 Datadog가 이 복구 알림을 전송하므로 예외입니다.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="본 모니터링용 알림 테스트" style="width:70%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="이 모니터에 대한 알림 테스트" style="width:70%;" >}}
 
 3. **테스트 실행**을 클릭하여 팀원과 모니터링에 명시한 서비스에 알림을 전송합니다.
 
@@ -210,23 +189,19 @@ Disk space is low @ops-team@company.com
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/monitors/configuration
-[2]: /ko/monitors/notify/variables/#tag-variables
+[2]: /ko/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /ko/monitors/notify/variables/
 [5]: /ko/monitors/notify/variables/#conditional-variables
 [6]: /ko/account_management/teams/#send-notifications-to-a-specific-communication-channel
 [7]: /ko/service_management/workflows/
-[8]: /ko/service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[8]: /ko/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [9]: /ko/service_management/workflows/build/
 [10]: /ko/monitors/settings/#tag-policies
 [11]: /ko/account_management/teams/
-[12]: /ko/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[13]: /ko/monitors/notify/variables/?tab=is_renotify#examples
-[14]: /ko/events/
-[15]: /ko/account_management/rbac/permissions/#monitors
-[16]: /ko/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[17]: /ko/account_management/rbac/?tab=datadogapplication#custom-roles
-[18]: /ko/account_management/rbac/?tab=datadogapplication
-[19]: /ko/monitors/guide/how-to-set-up-rbac-for-monitors/
-[20]: /ko/monitors/types
-[21]: /ko/monitors/guide/recovery-thresholds/
+[12]: /ko/monitors/notify/variables/?tab=is_renotify#examples
+[13]: /ko/events/
+[14]: /ko/monitors/types
+[15]: /ko/monitors/configuration/
+[16]: /ko/monitors/guide/recovery-thresholds/
+[17]: /ko/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
