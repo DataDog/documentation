@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e  # Exit on error
 
+echo -e "\nMerging build files into local/bin/py..."
+
 # First, backup existing configurations
 if [ -d "local/bin/py/build/configurations" ]; then
   mkdir -p /tmp/build_backup
@@ -49,3 +51,9 @@ fi
 
 # Clean up temporary backup directories
 rm -rf /tmp/build_backup /tmp/py_backup
+
+# Output directory structure and contents
+echo -e "\nFinal directory structure:"
+find local/bin/py -type d -print | sed -e "s;[^/]*/;|____;g;s;____|; |;g"
+echo -e "\nFull file listing:"
+find local/bin/py -type f | sort
