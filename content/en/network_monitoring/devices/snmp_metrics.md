@@ -17,7 +17,11 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary.
+Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package, and supports all three versions of SNMP: SNMPv1, SNMPv2, and SNMPv3. During discovery, the SNMP port (default 161) is polled. A device is considered discovered if there is a response and a matching profile.
+
+## Pre-requisites
+
+Agent v7.32+
 
 ## How it works
 
