@@ -133,7 +133,7 @@ Fill in the integration configuration settings:
 **Default**: (empty, no additional tags)<br/>
 **Note**: Available only in GitLab.com and GitLab >= 14.8 self-hosted.
 
-You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up. If the button fails, click **Save changes** and check that the first webhooks sent are successful by looking at the history in the "Recent events" section below.
+You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration setup. If the button fails, click **Save changes** and check that the first webhooks sent are successful by looking at the history in the "Recent events" section below.
 
 [101]: https://docs.gitlab.com/ee/administration/settings/project_integration_management.html#view-projects-that-use-custom-settings
 [102]: https://docs.gitlab.com/ee/user/project/integrations/index.html#manage-group-default-settings-for-a-project-integration
