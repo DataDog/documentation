@@ -241,7 +241,7 @@ build_preview:full:
   stage: build
   cache:
     - *hugo_cache
-    - *yarn_cache_pull_push
+    # - *yarn_cache_pull_push
     - *pip_cache
   environment: "preview"
   variables:
@@ -357,7 +357,7 @@ build_preview_mergequeue:
   stage: build
   cache:
     - *hugo_cache
-    - *yarn_cache_pull_push
+    # - *yarn_cache_pull_push
     - *pip_cache
   environment: "preview"
   variables:
