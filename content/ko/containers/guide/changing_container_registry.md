@@ -4,7 +4,7 @@ aliases:
 title: 컨테이너 레지스트리 변경하기
 ---
 
-Datadog은 Google의 gcr.io, AWS의 ECR 및 Docker Hub에 컨테이너 이미지를 게시합니다.
+Datadog은 Google의 gcr.io, Azure의 ACR, AWS의 ECR 및 Docker Hub에 컨테이너 이미지를 게시합니다.
 
 | dockerhub.io                               | gcr.io                                              | public.ecr.aws                                            | datadoghq.azurecr.io                                    |
 | ------------------------------------------ | --------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
