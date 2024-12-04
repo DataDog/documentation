@@ -1,14 +1,10 @@
 #!/bin/bash
 set -e  # Exit on error
 
-echo -e "\nMerging build files into local/bin/..."
-
-# Create only the js directory since py and sh already exist
-mkdir -p local/bin/js
+echo -e "\nMerging build files into local/bin/py..."
 
 # First, backup existing configurations
 if [ -d "local/bin/py/build/configurations" ]; then
-  echo "Backing up existing configurations..."
   mkdir -p /tmp/build_backup
   for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do
     if [ -f "local/bin/py/build/configurations/$config" ]; then
@@ -19,46 +15,39 @@ fi
 
 # Backup all existing content in py directory (except build dir which we handle separately)
 if [ -d "local/bin/py" ]; then
-  echo "Backing up existing py content..."
   mkdir -p /tmp/py_backup
   find local/bin/py -mindepth 1 -maxdepth 1 ! -name "build" -exec cp -r {} /tmp/py_backup/ \;
 fi
 
 # Backup the sh directory
 if [ -d "local/bin/sh" ]; then
-  echo "Backing up existing sh content..."
   mkdir -p /tmp/sh_backup
   cp -r local/bin/sh/* /tmp/sh_backup/ 2>/dev/null || true
 fi
 
-# Clear the directories while preserving our backups
+# Clear and recreate the directories
 rm -rf local/bin/py local/bin/sh
-echo "Creating new directories..."
 mkdir -p local/bin/py local/bin/sh local/bin/js
 
-# Copy files from docs-ci to respective directories, excluding sh and js from py
-cd /usr/local/bin/docs-ci && find . -mindepth 1 -maxdepth 1 ! -name 'sh' ! -name 'js' -exec cp -r {} /local/bin/py/ \;
+# Copy base content from docs-ci, excluding sh and js directories
+cp -r /usr/local/bin/docs-ci/* local/bin/py/
+rm -rf local/bin/py/sh local/bin/py/js
 
-# Copy sh and js directories if they exist
+# Copy sh and js if they exist
 if [ -d "/usr/local/bin/docs-ci/sh" ]; then
-  echo "Copying sh content..."
   cp -r /usr/local/bin/docs-ci/sh/* local/bin/sh/
 fi
 if [ -d "/usr/local/bin/docs-ci/js" ]; then
-  echo "Copying js content..."
   cp -r /usr/local/bin/docs-ci/js/* local/bin/js/
 fi
 
 # Restore all previously backed up py content (this will merge with new content)
 if [ -d "/tmp/py_backup" ]; then
-  echo "Restoring backed up py content..."
-  echo $(pwd)
   cp -r /tmp/py_backup/* local/bin/py/
 fi
 
 # Restore sh directory content
 if [ -d "/tmp/sh_backup" ]; then
-  echo "Restoring backed up sh content..."
   cp -r /tmp/sh_backup/* local/bin/sh/
 fi
 
@@ -67,13 +56,11 @@ mkdir -p local/bin/py/build
 
 # Copy the new build content from docs-ci
 if [ -d "/usr/local/bin/docs-ci/build" ]; then
-  echo "Copying build content..."
   cp -r /usr/local/bin/docs-ci/build/* local/bin/py/build/
 fi
 
 # Restore the configuration files
 if [ -d "/tmp/build_backup" ]; then
-  echo "Restoring backed up configurations..."
   mkdir -p local/bin/py/build/configurations
   for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do
     if [ -f "/tmp/build_backup/$config" ]; then
