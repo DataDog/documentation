@@ -278,12 +278,12 @@ To test your implementation:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#setup
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
 [6]: https://developer.android.com/topic/performance/vitals/anr
 [7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [8]: https://developer.android.com/tools/releases/platforms#11
 [9]: https://developer.android.com/tools/releases/platforms#10
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/#track-background-events
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#track-background-events
 [11]: https://app.datadoghq.com/source-code/setup/rum
