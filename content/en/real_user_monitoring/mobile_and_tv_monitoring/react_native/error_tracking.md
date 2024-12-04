@@ -4,6 +4,7 @@ description: Set up Error Tracking for your React Native projects.
 aliases:
 - /real_user_monitoring/error_tracking/reactnative
 - /real_user_monitoring/mobile_and_tv_monitoring/reactnative/error_tracking
+- /real_user_monitoring/error_tracking/mobile/reactnative/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
