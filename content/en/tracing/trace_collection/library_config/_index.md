@@ -71,8 +71,8 @@ The following configuration options behave consistently across the latest versio
 : **Default**: `null`<br>
 **Supported Input**: A string representing an application version<br>
 **Caveats**:<br/>
-- Node.js automatically sets the version number from package.json
-- [Inferred services][3] will not set version tags
+  - Node.js automatically sets the version number from package.json
+  - [Inferred services][3] will not set version tags
 **Description**: Adds a `version` tag to all spans
 
 `DD_SERVICE`
