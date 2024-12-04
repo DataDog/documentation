@@ -78,7 +78,7 @@ variables:
   - mkdir -p local/bin/py/build/configurations
 
   # Copy files from the image to our local build directory
-  - cp -r /usr/local/bin/docs-ci/* local/bin/py/build/
+  - cp -r /usr/local/bin/docs-ci/* local/bin/py/
 
   # Restore the configuration files
   - |
