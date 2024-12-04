@@ -51,9 +51,3 @@ fi
 
 # Clean up temporary backup directories
 rm -rf /tmp/build_backup /tmp/py_backup
-
-# Output directory structure and contents
-echo -e "\nFinal directory structure:"
-find local/bin/py -type d -print | sed -e "s;[^/]*/;|____;g;s;____|; |;g"
-echo -e "\nFull file listing:"
-find local/bin/py -type f | sort
