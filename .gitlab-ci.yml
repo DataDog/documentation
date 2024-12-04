@@ -224,8 +224,8 @@ build_preview:english:
       fi # Output the error to the console
   interruptible: true
 
-  # Builds full site including all languages
-  build_preview:full:
+# Builds full site including all languages
+build_preview:full:
   <<: *base_template
   rules:
     # In main we would also do this for the scheduled job.
@@ -241,7 +241,7 @@ build_preview:english:
   stage: build
   cache:
     - *hugo_cache
-    # - *yarn_cache_pull_push
+    - *yarn_cache_pull_push
     - *pip_cache
   environment: "preview"
   variables:
