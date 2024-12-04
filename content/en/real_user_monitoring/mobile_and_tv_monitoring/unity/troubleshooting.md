@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-If you experience unexpected behavior with Datadog RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
+If you experience unexpected behavior with Datadog RUM, use this guide to resolve those issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Set sdkVerbosity for easier debugging
 
