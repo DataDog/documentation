@@ -57,7 +57,7 @@ variables:
 
 
 # ================== copy scripts =============== #
-before_script:
+.common_script: &common_script
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
@@ -76,6 +76,21 @@ before_script:
   - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
   - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
 
+# move before script to common so we can reuse in sparse clones
+before_script:
+  - *common_script
+
+.sparse_clone: &sparse_clone |
+  rm -rf ./sparse-documentation
+  git clone --branch $CI_COMMIT_REF_NAME --depth 200 --filter=blob:none --no-checkout $REPO_URL sparse-documentation
+  cd sparse-documentation
+  git sparse-checkout init --cone && git sparse-checkout set assets config content data i18n layouts local snippets static .yarn .github
+  echo '!/static/img/' >> .git/info/sparse-checkout
+  git checkout $CI_COMMIT_REF_NAME
+  git fetch origin master:refs/remotes/origin/master --no-tags
+  git diff origin/master...$CI_COMMIT_REF_NAME --minimal --name-status | { grep "^M\|A\|R\|C" || true; } | rev | cut -f1 - | rev | { grep "static/" || true; } >> .git/info/sparse-checkout
+  cat .git/info/sparse-checkout
+  git checkout $CI_COMMIT_REF_NAME
 
 # set policy for the common case
 # hugo cache is used only in the build job so lets pull-push
@@ -149,7 +164,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: registry.ddbuild.io/ci/websites/webops-site-build:v42145832-00d7fc2f
+  image: registry.ddbuild.io/ci/websites/webops-site-build:v49904560-30b69972
   tags:
     - "arch:amd64"
   rules:
@@ -165,7 +180,6 @@ build_preview:
   <<: *base_template
   rules:
     - !reference [.preview_rules, rules ]
-    - !reference [.if_mergequeue, rules ]
   stage: build
   cache:
     - *hugo_cache
@@ -216,11 +230,55 @@ build_preview:
       fi # Output the error to the console
   interruptible: true
 
+# Only build the site for merge queue, we don't need to deploy or artifact since this is a follow up check to ensure the site builds correctly
+build_preview_mergequeue:
+  <<: *base_template
+  rules:
+    - !reference [.if_mergequeue, rules ]
+  stage: build
+  cache:
+    - *hugo_cache
+    - *yarn_cache_pull_push
+    - *pip_cache
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+    CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
+    LOCAL: "False"
+    GIT_STRATEGY: none
+  before_script: []
+  script:
+    - *sparse_clone
+    - *common_script
+    - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
+    - touch Makefile.config
+    - make dependencies
+    - make config
+    - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
+    - yarn run prebuild
+    - make update_websites_sources_module
+    - build_site
+    - remove_static_from_repo
+    - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
+  artifacts:
+    when: always
+    paths:
+      - ${ARTIFACT_RESOURCE}
+      - ./integrations_data
+      - .github/
+      - .vale.ini
+      - .htmltest.yml
+      - ./logs
+      - ./latest-cached.tar.gz
+      - typesense.config.json
+  interruptible: true
+
+
 link_checks_preview:
   <<: *base_template
   rules:
     - !reference [.preview_rules, rules ]
-    - !reference [.if_mergequeue, rules ]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -246,7 +304,6 @@ missing_tms_preview:
   <<: *base_template
   rules:
     - !reference [.preview_rules, rules ]
-    - !reference [.if_mergequeue, rules ]
   stage: post-deploy
   environment: "preview"
   allow_failure: true
@@ -281,7 +338,7 @@ typesense_sync_preview:manual:
     - >
       TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_preview_admin_api_key')
       TYPESENSE_HOST=$(get_secret 'typesense_preview_host')
-      TYPESENSE_CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json) 
+      TYPESENSE_CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json)
       yarn run typesense:sync:preview
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -304,7 +361,7 @@ typesense_sync_live:
    - >
      TYPESENSE_ADMIN_API_KEY=$(get_secret 'typesense_prod_admin_api_key')
      TYPESENSE_HOST=$(get_secret 'typesense_prod_host')
-     TYPESENSE_CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json) 
+     TYPESENSE_CONFIG_UPDATED=$(git diff $CI_DEFAULT_BRANCH... --name-only | grep typesense.config.json)
      yarn run typesense:sync:production
 
 sourcemaps_preview:
@@ -592,6 +649,7 @@ set_redirect_metadata_preview:
   variables:
     BUCKET: "datadog-docs-preview"
     SET_REDIRECTS_PREVIEW: "true"
+    GIT_STRATEGY: none
   stage: post-deploy
   cache: []
   environment: "preview"
@@ -607,6 +665,7 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
+    GIT_STRATEGY: none
   stage: post-deploy
   cache: []
   environment: "live"
@@ -624,7 +683,7 @@ run_notranslate_tag:schedule:
     - build_live
   timeout: 4h
   script:
-    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install six transifex-python
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
     - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
   rules:

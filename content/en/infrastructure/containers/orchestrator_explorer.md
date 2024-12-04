@@ -232,7 +232,7 @@ Additionally, resources contain a `kube_<api_kind>:<metadata.name>` tag. For exa
 >
 > - Pods use `pod_name` instead.
 > - *VPAs: `verticalpodautoscaler`*.
-> - *VPHs: `horizontalpodautoscaler`*.
+> - *HPAs: `horizontalpodautoscaler`*.
 > - *Persistent Volume Claims: `persistentvolumeclaim`*.
 
 Based on the labels attached to the resource, the following tags will also be extracted:

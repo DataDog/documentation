@@ -67,6 +67,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "data-deletion": {
+    "name": "Data Deletion",
+    "description": "The Data Deletion API allows the user to target and delete data from the allowed products. It's currently enabled for Logs and RUM and depends on `logs_delete_data` and `rum_delete_data` permissions respectively."
+  },
   "domain-allowlist": {
     "name": "Domain Allowlist",
     "description": "Configure your Datadog Email Domain Allowlist directly through the Datadog API.\nThe Email Domain Allowlist controls the domains that certain datadog emails can be sent to.\nFor more information, see the [Domain Allowlist docs page](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)"
@@ -113,7 +117,7 @@
   },
   "logs-archives": {
     "name": "Logs Archives",
-    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
+    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog.\n\nYou need an API and non-scoped application key with Admin rights to interact with these endpoints."
   },
   "logs-custom-destinations": {
     "name": "Logs Custom Destinations",
@@ -121,11 +125,11 @@
   },
   "logs-metrics": {
     "name": "Logs Metrics",
-    "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization."
+    "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization.\nYou need an API and non-scoped application key with Admin rights to interact with these endpoints."
   },
   "logs-restriction-queries": {
     "name": "Logs Restriction Queries",
-    "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nTo restrict read access on log data, add a team tag to log events to indicate which teams own them, and then scope Restriction Queries to the relevant values of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team) and different values. This means the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint.\n\nSee [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs) for details on how to add restriction queries."
+    "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nTo restrict read access on log data, add a team tag to log events to indicate which teams own them, and then scope Restriction Queries to the relevant values of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team) and different values. This means the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and non-scoped application key with Admin rights to interact with these endpoints.\n\nSee [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs) for details on how to add restriction queries."
   },
   "metrics": {
     "name": "Metrics",

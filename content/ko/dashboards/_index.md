@@ -31,7 +31,7 @@ further_reading:
   tag: 블로그
   text: 새로운 Datadog 대시보드 경험
 - link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
-  tag: 개발자 문서
+  tag: 모범 사례
   text: 탁월한 통합 대시보드 만들기
 - link: https://dtdg.co/fe
   tag: \u0008기초 구축
@@ -43,12 +43,12 @@ title: 대시보드
 
 대시보드는 조직 내 시스템 및 애플리케이션의 성능과 상태에 대한 실시간 인사이트를 제공합니다. 이를 통해 사용자는 데이터를 시각적으로 분석하고 핵심성과지표(KPI)를 추적하며 트렌드를 효율적으로 모니터링할 수 있습니다. 대시보드를 통해 팀은 이상 현상을 식별하고, 문제의 우선순위를 지정합니다. 또한 문제를 사전에 감지하고, 근본 원인을 진단하며, 안정성 목표가 충족되었는지 확인할 수 있습니다. 중요한 메트릭과 성과 지표를 모니터링하고 분석하기 위한 중앙 집중식 사용자 친화적인 인터페이스를 제공하여 팀이 정보에 입각한 결정을 내리고 시스템 운영을 최적화하며 비즈니스 성공을 촉진할 수 있도록 지원합니다.
 
-{{< whatsnext desc="대시보드 기능:">}}
+{{< whatsnext desc="Dashboard features:">}}
     {{< nextlink href="/dashboards/configure" >}}설정: 대시보드 설정 옵션 개요{{< /nextlink >}}
-    {{< nextlink href="/dashboards/configure" >}}대시보드 목록: 대시보드 및 목록을 검색, 확인, 생성하기{{< /nextlink >}}
-    {{< nextlink href="/dashboards/template_variables" >}}템플릿 변수: 대시보드의 위젯을 동적으로 필터링{{< /nextlink >}}
+    {{< nextlink href="/dashboards/list" >}}대시 보드 목록: 대시보드 및 목록 검색, 보기 또는 생성{{< /nextlink >}}
+    {{< nextlink href="/dashboards/template_variables" >}}템플릿 변수: 대시보드의 위젯 동적 필터링{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/datadog_clipboard/" >}}Datadog 클립보드{{< /nextlink >}}
-    {{< nextlink href="/api/latest/dashboards" >}}API: 프로그래밍 방식으로 대시보드 관리{{< /nextlink >}}
+    {{< nextlink href="/api/latest/dashboards" >}}API: 프로그래밍 방식 대시보드 관리{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="그래프 기능:">}}
@@ -109,9 +109,13 @@ title: 대시보드
 
 ## 참고 자료
 
+{{< learning-center-callout header="Datadog 학습 센터의 그래프 위젯 생성 시도" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dahboard-graph-widgets">}} 시계열, 쿼리 값, 상단 목록, 표, 분포, 파이 차트 위젯을 살펴보세요. 위젯 설정 방법을 배우고 각 위젯 유형이 언제 활용되어야 하는지 이해합니다. {{< /learning-center-callout >}}
+
+{{< learning-center-callout header="Datadog 학습 센터에서 테이블, 목록 SLO, 아키텍처 위젯 생성 시도" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}}  표, 목록, SLO 및 아키텍처 위젯을 살펴보세요. 메트릭 및 웹 애플리케이션의 성능을 추적하는 방법과 중요한 데이터를 표시하는 방법을 알아보세요. {{< /learning-center-callout >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/service_management/mobile/
+[1]: /ko/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists

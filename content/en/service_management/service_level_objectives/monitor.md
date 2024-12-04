@@ -26,7 +26,7 @@ To create a monitor-based SLO, you need an existing Datadog monitor. To set up a
 Datadog monitor-based SLOs support the following monitor types:
 - Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
 - Synthetic
-- Service Checks (open beta)
+- Service Checks
 
 ## Setup
 
