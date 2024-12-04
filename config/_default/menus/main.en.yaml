@@ -6794,7 +6794,7 @@ menu:
       weight: 101
     - name: Mobile Vitals
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals
-      parent: unity
+      parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 102
     - name: Web View Tracking

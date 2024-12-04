@@ -23,8 +23,8 @@ The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iO
 To get started with RUM for Kotlin Multiplatform, create an application and configure the Kotlin Multiplatform SDK.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup">}}<u>Setup</u>: Learn how to setup the Kotlin Multiplatform RUM SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/crash_reporting">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup">}}<u>Setup</u>: Learn how to setup the Kotlin Multiplatform SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/error_tracking">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals">}}<u>Data Collected</u>: Review data that the RUM Kotlin Multiplatform SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
