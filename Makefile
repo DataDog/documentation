@@ -68,7 +68,7 @@ server:
 
 # Download all dependencies and run the site
 start: setup-build-scripts ## Build and run docs including external content.
-	@make dependencies 
+	@make dependencies
 	@make update_websites_sources_module
 	@make server
 
@@ -78,7 +78,7 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
-start-preserve-build: dependencies 
+start-preserve-build: dependencies
 	@make update_websites_sources_module
 	@make server
 
@@ -244,7 +244,11 @@ clean-build-scripts:
 
 # Source the build scripts and maintain file structure
 setup-build-scripts: clean-build-scripts $(BUILD_SCRIPTS_PATH) backup-config
-	@echo "Fetching latest build scripts..."
+	@echo "Fetching latest build scripts..."; \
+	if [ -z "$(BUILD_SCRIPT_BRANCH)" ] || [ -z "$(BUILD_SCRIPT_REPO_URL)" ] || [ -z "$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
+		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
+		exit 1; \
+	fi; \
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
 	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
