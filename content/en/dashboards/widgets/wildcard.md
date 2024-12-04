@@ -32,7 +32,7 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 
 ## Setup
 
-After you create a Wildcard widget, you can configure the widget either as a [new configuration](#configure-a-new-wildcard-widget), or by [importing a configuration from an existing widget](#import-data-from-an-existing-widget). 
+After you create a Wildcard widget, you can configure the widget either as a [new configuration](#configure-a-new-wildcard-widget) or by [importing a configuration from an existing widget](#import-data-from-an-existing-widget). 
 
 ### Configure a new Wildcard widget
 
