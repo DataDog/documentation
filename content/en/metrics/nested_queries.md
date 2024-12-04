@@ -231,7 +231,7 @@ In the UI or JSON tab, it would look as follows:
 
 ## Boolean threshold remapping functions
 
-Remap functions give you the ability to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis. Nested queries unlocks the following 3 new functions:
+Remap functions allow you to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis. Nested queries unlocks the following 3 new functions:
 
 - `is_greater` (`<QUERY>, <THRESHOLD>`)
 - `is_less` (`<QUERY>, <THRESHOLD>`)
