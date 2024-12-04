@@ -365,7 +365,7 @@ This means that even if users open your application while offline, no data is lo
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /account_management/api-app-keys/#client-tokens
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
-[4]: /real_user_monitoring/flutter/error_tracking
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/error_tracking
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected
