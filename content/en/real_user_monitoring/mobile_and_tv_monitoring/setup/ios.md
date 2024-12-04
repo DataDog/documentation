@@ -12,7 +12,7 @@ code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
- - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+ - link: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"

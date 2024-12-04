@@ -392,10 +392,10 @@ This means that even if users open your application while offline, no data is lo
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#automatically-track-views
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#initialization-parameters
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#automatically-track-views
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#initialization-parameters
 [7]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#custom-views
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#custom-views
 [9]: /getting_started/tagging/using_tags/
 [10]: /real_user_monitoring/kotlin-multiplatform/data_collected/
 [11]: /real_user_monitoring/error_tracking/kotlin-multiplatform/

@@ -6,7 +6,7 @@ code_lang: roku
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
+- link: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration
   tag: Documentation
   text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku
@@ -234,6 +234,6 @@ This means that even if users open your application while offline, no data is lo
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#track-rum-resources
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [10]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected/

@@ -8,7 +8,7 @@ code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
+- link: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
@@ -375,6 +375,6 @@ This means that even if users open your application while offline, no data is lo
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
-[12]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/sadvanced_configuration/#automatic-view-tracking
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
