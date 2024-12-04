@@ -27,7 +27,7 @@ The Docker Agent produces the following events:
 - Restart Daemon
 - Update
 
-To collect additional Docker events, reach out to [Datadog support][2]
+To collect additional Docker events, reach out to [Datadog support][2].
 
 ### Service checks
 
