@@ -423,8 +423,8 @@ missing_tms_preview:
   environment: "preview"
   allow_failure: true
   cache: {}
-  dependencies:
-    - build_preview
+  # dependencies:
+  #   - build_preview
   script:
     - check_missing_tms
   interruptible: true
@@ -440,8 +440,8 @@ typesense_sync_preview:manual:
     - *hugo_cache
     - *yarn_cache
     - *pip_cache
-  dependencies:
-    - build_preview
+  # dependencies:
+  #   - build_preview
   script:
     # build the site to get search.json ondemand
     - touch Makefile.config preview_error.log
@@ -491,8 +491,8 @@ sourcemaps_preview:
     # Rename any js.map files to include SHA if correlating JS file is fingerprinted.  Hugo's asset build system seems to lose the fingerprint value when generating source maps.
     - find ./public -type f -name "*.*.js" -exec bash -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/.js/.$hash.js}' \;
     - DATADOG_API_KEY="$(get_secret 'dd-api-key')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
-  dependencies:
-    - build_preview
+  # dependencies:
+  #   - build_preview
   allow_failure: true
   interruptible: true
 
@@ -767,8 +767,8 @@ set_redirect_metadata_preview:
   stage: post-deploy
   cache: []
   environment: "preview"
-  dependencies:
-    - build_preview
+  # dependencies:
+  #   - build_preview
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
