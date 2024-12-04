@@ -177,7 +177,7 @@ build_preview:english:
   stage: build
   cache:
     - *hugo_cache
-    - *yarn_cache_pull_push
+    # - *yarn_cache_pull_push
     - *pip_cache
   environment: "preview"
   variables:
