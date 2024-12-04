@@ -29,11 +29,11 @@ Asegúrate de que dispones de una [clave de la API de Datadog][6] y de que utili
 
 ### Dockerfile
 
-Datadog publica nuevas versiones de la imagen de contenedor serverless-init en gcr.io de Google, AWS ECR y Docker Hub:
+Datadog publica nuevas versiones de la imagen de contenedor serverless-init en gcr.io de Google, Azure ACR, AWS ECR y Docker Hub:
 
-| dockerhub.io | gcr.io | public.ecr.aws |
-| ---- | ---- | ---- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+| datadoghq.azurecr.io                 | dockerhub.io            | gcr.io                           | public.ecr.aws                         |
+| ------------------------------------ | ----------------------- | -------------------------------- | -------------------------------------- |
+| datadoghq.azurecr.io/serverless-init | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
 Las imágenes se etiquetan en función del control de versiones semántico, y cada nueva versión recibe tres etiquetas (tags):
 
@@ -110,18 +110,18 @@ Las métricas se calculan en función del 100 % del tráfico de la aplicación,
 
 ### Variables de entorno
 
-| Variable | Descripción |
-| -------- | ----------- |
-|`DD_API_KEY`| La [clave de la API de Datadog][6]: **obligatoria**.|
-| `DD_SITE` | El [sitio de Datadog][4]: **obligatorio**. |
-| `DD_LOGS_ENABLED` | Cuando es true, envía logs (stdout y stderr) a Datadog. Por defecto, es false. |
-| `DD_LOGS_INJECTION`| Cuando es true, enriquece todos los logs con datos de trazas para los loggers admitidos en [Java][10], [Node.js][11], [.NET][12] y [PHP][13]. Consulta la documentación adicional de [Python][14], [Go][15] y [Ruby][16]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controla las frecuencias de muestreo de la ingesta de trazas `0.0` y `1.0`.|
-| `DD_SERVICE`      | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_VERSION`      | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_ENV`          | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_SOURCE`       | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_TAGS`         | Consulta [Etiquetado de servicios unificado][5].                                       |
+| Variable               | Descripción                                                                                                                                                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DD_API_KEY`           | La [clave de la API de Datadog][6]: **obligatoria**.                                                                                                                                                                      |
+| `DD_SITE`              | El [sitio de Datadog][4]: **obligatorio**.                                                                                                                                                                                |
+| `DD_LOGS_ENABLED`      | Cuando es true, envía logs (stdout y stderr) a Datadog. Por defecto, es false.                                                                                                                                            |
+| `DD_LOGS_INJECTION`    | Cuando es true, enriquece todos los logs con datos de trazas para los loggers admitidos en [Java][10], [Node.js][11], [.NET][12] y [PHP][13]. Consulta la documentación adicional de [Python][14], [Go][15] y [Ruby][16]. |
+| `DD_TRACE_SAMPLE_RATE` | Controla las frecuencias de muestreo de la ingesta de trazas `0.0` y `1.0`.                                                                                                                                               |
+| `DD_SERVICE`           | Consulta [Etiquetado de servicios unificado][5].                                                                                                                                                                          |
+| `DD_VERSION`           | Consulta [Etiquetado de servicios unificado][5].                                                                                                                                                                          |
+| `DD_ENV`               | Consulta [Etiquetado de servicios unificado][5].                                                                                                                                                                          |
+| `DD_SOURCE`            | Consulta [Etiquetado de servicios unificado][5].                                                                                                                                                                          |
+| `DD_TAGS`              | Consulta [Etiquetado de servicios unificado][5].                                                                                                                                                                          |
 
 ## Solucionar problemas
 
