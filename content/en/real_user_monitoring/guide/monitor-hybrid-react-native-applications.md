@@ -126,7 +126,7 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 
 Initialize the SDK on the native side. See the official [Android][1] documentation for instructions.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -316,6 +316,6 @@ RUM.Configuration(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/setup/
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#custom-views
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
