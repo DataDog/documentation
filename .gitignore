@@ -257,6 +257,9 @@ assets/jsconfig.json
 
 # local build files
 local/bin/py/build/*
+local/bin/py/add_notranslate_tag.py
+local/bin/py/placehold_translations.py
+local/bin/py/translations
 !local/bin/py/build/configuration/pull_config_preview.yaml
 !local/bin/py/build/configuration/pull_config.yaml
 !local/bin/py/build/configuration/integration_merge.yaml
