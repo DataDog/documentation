@@ -25,10 +25,9 @@ integration_id: sentry
 integration_title: Sentry
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: sentry
-oauth: {}
 public_title: Sentry
 short_description: Visualisez des exceptions Sentry dans votre flux d'événements Datadog.
 supported_os: []

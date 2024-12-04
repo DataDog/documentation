@@ -1,6 +1,6 @@
 ---
-title: Using Custom JavaScript Assertions In Browser Tests
-kind: guide
+title: Use Custom JavaScript Assertions In Browser Tests
+
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
 - link: '/synthetics/browser_tests/actions/'
@@ -20,7 +20,7 @@ This guide describes how you can test a user interface (UI) using custom JavaScr
 
 To create an assertion using custom JavaScript:
 
-1. Click **Assertion** and select **Test your UI with custom JavaScript**.
+1. Click **Assertion** and select **Test custom JavaScript assertion**.
 2. Write the body of your assertion.
 3. Optionally, select a target element in the UI. 
 4. Click **Apply**.
@@ -47,7 +47,7 @@ Your browser test results contain `console.error` logs.
 
 ## Assert that a radio button is checked
 
-To verify that a radio button is checked, use `return document.querySelector("<SELECTORS>").checked = true;` in the body assertion.
+To verify that a radio button is checked, use `return document.querySelector("<SELECTORS>").checked === true;` in the body assertion.
 
 ## Set the value of a specified local storage item
 
@@ -62,6 +62,13 @@ For example, to set the number of milliseconds elapsed since January 1, 1970, 00
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem("mytime", Date.now());
+return true
+{{< /code-block >}}
+
+`localStorage` can be accessed in other JavaScript assertions if you need to compare specific values:
+
+{{< code-block lang="javascript" >}}
+localStorage.getItem("mytime");
 return true
 {{< /code-block >}}
 

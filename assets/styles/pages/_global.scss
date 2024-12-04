@@ -5,6 +5,10 @@ $lightGreyGrey: #d6d6d6;
 $darkGreyGrey: #a1a1a1;
 $dimGreyGrey: #707070;
 
+:root {
+    --bs-link-hover-color: #{$ddpurple};
+}
+
 html {
     font-size: 18px;
     opacity: 1 !important;
@@ -58,7 +62,11 @@ body {
         position: relative;
     }
 }
-
+.chroma {
+    max-height: 350px;
+    overflow-wrap: break-word;
+    white-space: inherit;
+}
 .greyside {
     position: absolute;
     height: 100%;
@@ -233,7 +241,7 @@ details {
         position: relative;
         padding-right: 0 !important;
         pre {
-            padding: 30px 10px;
+            padding: 10px;
         }
         code {
             white-space: pre;
@@ -252,14 +260,14 @@ details {
             opacity: 0;
             right: 0;
             top: 0;
-            padding: 1rem 1rem 0 0;
+            padding: .5rem .5rem 0 0;
             transition: opacity 0.2s ease-in-out;
             z-index: 1;
             button {
                 background-color: $white;
                 box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
                 border-radius: 4px;
-                padding: 8px 25px;
+                padding: 2px 12px 3px 12px;
                 transition: box-shadow 0.2s ease-in-out;
                 &:hover {
                     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
@@ -277,7 +285,7 @@ details {
     position: relative;
     padding-right: 0 !important;
     pre {
-        padding: 30px 10px;
+        padding: 10px;
     }
     code {
         white-space: pre;
@@ -296,14 +304,14 @@ details {
         opacity: 0;
         right: 0;
         top: 0;
-        padding: 1rem 1rem 0 0;
+        padding: .5rem .5rem 0 0;
         transition: opacity 0.2s ease-in-out;
         z-index: 1;
         button {
             background-color: $white;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
             border-radius: 4px;
-            padding: 8px 25px;
+            padding: 2px 12px 3px 12px;
             transition: box-shadow 0.2s ease-in-out;
             &:hover {
                 box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
@@ -582,8 +590,25 @@ h5 {
         }
     }
 
+    ol ol {    
+        list-style-type: lower-alpha;
+        ol {
+            list-style-type: lower-roman;
+            ol {
+                list-style-type: decimal;
+                ol {
+                    list-style-type: upper-alpha;
+                    ol {
+                        list-style-type: upper-roman;
+                    }
+                }
+            }
+        }
+    }
+    
     ul,
     ol,
+    dl,
     p {
         &:lang(ja) {
             font-size: 14px;
@@ -883,6 +908,10 @@ table,
             width: 50%;
         }
     }
+
+    @include media-breakpoint-up(xl) {
+            table-layout: fixed;
+    }
 }
 
 .break-word {
@@ -895,6 +924,7 @@ table,
 
 dl {
     border: 1px solid $ddgray;
+    font-size: 18px;
 
     a {
         border-bottom: 1px solid;
@@ -905,7 +935,7 @@ dl {
     }
 
     dd {
-        padding: 0 0.75rem 1rem 1.75rem;
+        padding: 0 0.75rem 0rem 1.75rem;
 
         &:last-of-type {
             padding-bottom: 0.5rem;
@@ -1030,6 +1060,12 @@ dl {
     }
     .container__content {
         max-width: 1440px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1336px !important;
     }
 }
 

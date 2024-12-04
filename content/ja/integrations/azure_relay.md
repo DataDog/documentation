@@ -3,6 +3,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: Azure Relay のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_relay/
@@ -13,7 +14,6 @@ integration_id: azure-relay
 integration_title: Microsoft Azure Relay
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: azure_relay
 public_title: Datadog-Microsoft Azure Relay インテグレーション
@@ -21,6 +21,7 @@ short_description: Azure Relay のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Relay サービスを使用すると、ファイアウォールでポートを解放したり企業ネットワークインフラストラクチャーの内部に及んだりするような変更を加える必要なく、企業ネットワーク内で実行されているサービスをパブリッククラウドに安全に公開することができます。
@@ -43,7 +44,7 @@ Datadog Azure インテグレーションを使用して、Azure Relay からメ
 
 Azure Relay インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Relay インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Altostra: assets/dashboards/altostra.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: altostra.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10181
     source_type_name: Altostra
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -25,6 +27,7 @@ categories:
 - cloud
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: altostra
 integration_title: Altostra
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: altostra
-oauth: {}
 public_title: Altostra
 short_description: Altostra から Datadog へクラウドアプリケーションログを自動的に送信
 supported_os:
@@ -54,6 +55,7 @@ tile:
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Altostra から Datadog へクラウドアプリケーションログを自動的に送信
   media: []
@@ -62,6 +64,7 @@ tile:
   title: Altostra
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -76,7 +79,7 @@ Datadog Altostra インテグレーションにより、Altostra プロジェク
 
 Datadog Altostra インテグレーションは組み込まれているため、インストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 Datadog のインテグレーションは、アカウント設定ぺージの[インテグレーション][1]にある Altostra Web Console でご利用いただけます。
 

@@ -4,7 +4,6 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: Documentation
   text: Pipeline Visibility について
-kind: ガイド
 title: パイプラインのデータモデルと実行タイプ
 ---
 
@@ -16,14 +15,16 @@ title: パイプラインのデータモデルと実行タイプ
 
 このガイドでは、CI Visibility でパイプライン実行をプログラムで設定する方法を説明し、CI Visibility がサポートするパイプライン実行のタイプを定義します。
 
+このガイドは、[公開 CI Visibility Pipelines API][3] を使用して作成されたパイプラインに適用されます。他の CI プロバイダとのインテグレーションは異なる場合があります。
+
 ## データモデル
 
-パイプラインの実行は、スパンがパイプラインの異なる部分の実行を表す [APM 分散型トレーシング][1]と同様のトレースとしてモデル化されます。パイプラインの実行を表現する CI Visibility データモデルは、4 つのレベルで構成されます。
+Pipeline executions are modeled as traces, similar to an [APM distributed trace][1], where spans represent the execution of different parts of the pipeline. The CI Visibility data model for representing pipeline executions consists of four levels:
 
 | レベル名 | 説明 |
 | ---------- | ----------- |
 | パイプライン (必須)  | 他のすべてのレベルを子として含む、最上位のルートスパン。パイプラインの開始から終了までの全体的な実行を表します。CI プロバイダーによっては、このレベルを `build` や `workflow` と呼ぶこともあります。 |
-| ステージ      | ユーザー定義の名前でジョブをグループ化します。CI プロバイダーによっては、このレベルはありません。 |
+| ステージ      | Serves as a grouping of jobs under a user-defined name. Some CI providers do not have this level. |
 | ジョブ        | コマンドが実行される最小の作業単位。このレベルのタスクはすべて 1 つのノードで実行する必要があります。 |
 | 手順       | CI プロバイダーによっては、このレベルはシェルスクリプトやジョブ内で実行されるアクションを表します。 |
 
@@ -31,11 +32,13 @@ title: パイプラインのデータモデルと実行タイプ
 
 {{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行トレースの例" style="width:100%;">}}
 
+Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
+
 ### パイプライン固有 ID
 
-レベル内のすべてのパイプライン実行には一意の ID が必要です。例えば、パイプラインとジョブは同じ一意の ID を持つことができますが、2 つのパイプラインは持つことができません。
+All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines.
 
-タイムスタンプが異なる ID を繰り返し送信すると、ユーザーインターフェイスが望ましくない動作を示すことがあります。例えば、フレームグラフに異なるパイプライン実行のスパンタグが表示される場合があります。同じタイムスタンプの ID が重複して送信された場合、1 つのパイプライン実行のみが保存され、他は無視されます。
+When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only the values of the last pipeline execution received are stored.
 
 ## パイプライン実行タイプ
 
@@ -43,7 +46,7 @@ title: パイプラインのデータモデルと実行タイプ
 
 パイプラインの通常の実行は、以下のフローに従います。
 
-{{< img src="ci/ci-pipeline-normal-execution-flow.png" alt="通常のパイプライン実行の描写" style="width:100%;">}}
+{{< img src="ci/pipeline-normal-execution-flow.png" alt="通常のパイプライン実行の描写" style="width:100%;">}}
 
 プロバイダーによっては、いくつかのレベルが欠落している場合があります。例えば、ステージは存在しないかもしれませんし、ジョブは並行して実行されるかもしれませんし、順番に実行されるかもしれません。
 
@@ -51,15 +54,15 @@ title: パイプラインのデータモデルと実行タイプ
 
 ### 完全なリトライ
 
-パイプラインの完全なリトライは、異なるパイプライン固有 ID を持つ必要があります。
+Full retries of a pipeline must have different pipeline unique IDs. 
 
-公開 API エンドポイントでは、`previous_attempt` フィールドに以前のリトライへのリンクを入力することができます。リトライは Datadog では別のパイプライン実行として扱われ、開始時刻と終了時刻はそのリトライを含むものでなければなりません。
+In the public API endpoint, you can populate the `previous_attempt` field to link to previous retries. Retries are treated as separate pipeline executions in Datadog, and the start and end time should only encompass that retry.
 
 ### 部分的なリトライ
 
 パイプライン内のジョブのサブセットをリトライする場合は、新しいパイプライン固有 ID を持つ新しいパイプラインイベントを送信する必要があります。新しいジョブのペイロードは、新しいパイプライン固有 ID にリンクされていなければなりません。前回のリトライとリンクさせるには、`previous_attempt` フィールドを追加します。
 
-部分的なリトライも同様に別のパイプラインとして扱われます。開始時刻と終了時刻には、最初のリトライの時刻を含めてはなりません。部分的なリトライでは、前のリトライで実行されたジョブのペイロードを送信しないでください。また、部分的なリトライでは `partial_retry` フィールドを `true` に設定することで、実行時間を計算する際に集計から除外することができます。
+Partial retries are treated as separate pipelines as well. The start and end time must not include the time of the original retry. For a partial retry, do not send payloads for jobs that ran in the previous attempt. Also, set the `partial_retry` field to `true` on partial retries to exclude them from aggregation when calculating run times.
 
 例えば、`P` という名前のパイプラインには `J1`、`J2`、`J3` という 3 つのジョブがあり、順次実行されます。`P` の最初の実行では、`J1` と `J2` のみが実行され、`J2` は失敗します。
 
@@ -77,15 +80,15 @@ title: パイプラインのデータモデルと実行タイプ
 2. `J3` のジョブペイロード。ID は `J3_1`、パイプライン ID は `P_2`。
 3. `P` のパイプラインペイロード。ID は `P_2`。
 
-ID の実際の値は重要ではありません。重要なのは、上記で指定されたパイプラインの実行に基づいて、それらが正しく変更されることです。
+The actual values of the IDs are not important. What matters is that they are correctly modified based on the pipeline run as specified above.
 
 ### ブロッ クされたパイプライン
 
 パイプラインが手動介入を必要とするために無期限にブロックされる場合、パイプラインがブロッ クされた状態になるとすぐにパイプラインイベントペイロードを送信しなければなりません。パイプラインのステータスは `blocked` に設定されていなければなりません。
 
-残りのパイプラインデータは、別のパイプライン固有 ID を持つ別のペイロードで送信する必要があります。2 番目のパイプラインでは、`is_resumed` を `true` に設定することで、ブロックされたパイプラインから実行が再開されたことをシグナルとして送ることができます。
+{{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="ブロックされたパイプライン実行の流れ" style="width:100%;">}}
 
-{{< img src="ci/ci-pipeline-blocked-pipelines-execution.png" alt="ブロックされたパイプライン実行の流れ" style="width:90%;">}}
+The remaining pipeline data must be sent in separate payloads with a different pipeline unique ID. In the second pipeline, you can set `is_resumed` to `true` to signal that the execution was resumed from a blocked pipeline.
 
 ### ダウンストリームパイプライン
 
@@ -97,12 +100,13 @@ ID の実際の値は重要ではありません。重要なのは、上記で�
 
 ## Git 情報
 
-すべてのペイロードには、パイプライン実行のトリガーとなったコミットの Git 情報を含める必要があります。[公開 API エンドポイント仕様][3]で指定されているように、リポジトリの URL、コミットの SHA、作成者のメールアドレスが必要です。
+Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear on the [Recent Code Changes page][4]. At a minimum, the repository URL, commit SHA, and author email are required. For more information, see the [public API endpoint specification][3].
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/glossary/#trace
 [2]: /ja/continuous_integration/pipelines/#setup
 [3]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
+[4]: https://app.datadoghq.com/ci/commits

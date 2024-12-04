@@ -5,6 +5,7 @@ assets:
   dashboards:
     OPA base dashboard: assets/dashboards/open_policy_agent_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: open_policy_agent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10142
     source_type_name: open_policy_agent
   logs:
     source: opa
@@ -29,6 +31,7 @@ categories:
 - コンテナ
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_on_public_website: true
@@ -38,10 +41,8 @@ integration_id: open-policy-agent
 integration_title: Open Policy Agent
 integration_version: 0.0.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: open_policy_agent
-oauth: {}
 public_title: Open Policy Agent
 short_description: OPA インテグレーション
 supported_os:
@@ -55,6 +56,7 @@ tile:
   - Category::Log Collection
   - Category::Security
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: OPA インテグレーション
   media: []
@@ -63,6 +65,7 @@ tile:
   title: Open Policy Agent
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -163,7 +166,7 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 
 ![OPA 決定メトリクス][8]
 
-### コンフィギュレーション
+### 構成
 
 1. OPA パフォーマンスデータの収集を開始するには、Agent ポッドに追加した `/confd` フォルダーの `open_policy_agent/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル open_policy_agent/conf.yaml][9] を参照してください。
 
@@ -183,7 +186,7 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 
 open_policy_agent には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "open_policy_agent" >}}
 
 
@@ -194,7 +197,7 @@ open_policy_agent には、イベントは含まれません。
 
 [1]: https://www.openpolicyagent.org/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
+[3]: https://docs.datadoghq.com/ja/developers/integrations/python/
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/open_policy_agent/images/msg_facet.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/open_policy_agent/images/kind_facet.png

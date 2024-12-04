@@ -1,8 +1,5 @@
 ---
-title: Okta SAML IdP
-kind: documentation
-aliases:
-  - /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
+title: Okta SAML Identity Provider Configuration
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
@@ -12,60 +9,129 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    In the {{< region-param key="dd_site_name" >}} site, you must manually configure the Datadog application in Okta using the <a href="/account_management/faq/okta/">legacy instructions</a>. Ignore the instructions on this page about the preconfigured Datadog application in the Okta application catalog.
+</div>
+{{% /site-region %}}
+
+## Overview
+
+This page tells you how to set up the Datadog application in Okta. 
+
+Before proceeding, make sure that you are using the latest version of the Datadog application:
+1. In Okta, click **Applications**.
+1. Open the Datadog application.
+1. Select the **General** tab.
+1. Look for a field labeled **SSO Base URL**.
+
+{{< img src="account_management/saml/okta/sso_base_url.png" alt="Datadog application configuration in Okta, highlighting the SSO base URL" style="width:80%;" >}}
+
+If you don't see the SSO Base URL field, configure Okta using the [legacy instructions][1].
+
+## Supported features
+
+The Datadog Okta SAML integration supports the following:
+- IdP-initiated SSO
+- SP-initiated SSO
+- JIT provisioning
+
+For definitions of the terms above, see the Okta [glossary][2].
+
 ## Setup
 
-Follow Okta's [Create SAML app integrations][1] docs to configure Okta as a SAML IdP.
+Set up Okta as the SAML identity provider (IdP) for Datadog with the following instructions. The setup process requires you to alternate between your Okta and Datadog accounts.
 
-**Note**: It's recommended that you set up Datadog as an Okta application manually, as opposed to using a `pre-configured` configuration.
+### In Okta
 
-**Note**: US1 customers can use the preset configuration in Okta's [How to Configure SAML 2.0 for Datadog][2] docs to configure Okta as a SAML IdP.
+1. Log in to your Okta admin dashboard.
+1. In the left navigation, click **Applications**.
+1. Click **Browse App Catalog**.
+1. Use the search bar to search for "Datadog".
+1. Select the Datadog app for SAML and SCIM.
+1. Click **Add Integration**. The General Settings dialog appears.
+1. Populate the **SSO Base URL** field with your [Datadog website URL][3].
+1. Click **Done**.
 
-## General details
+**Note:** The SSO Base URL field accepts custom subdomains if you are not using a standard Datadog website URL.
 
-| Okta IDP Input Field        | Expected Value                                                                                                                 |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Single Sign On URL          | Assertion Consumer Service URL (Find this URL on the [Configure SAML][3] page, in the *Assertion Consumer Service URL* field.) |
-| Recipient URL               | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
-| Destination URL             | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
-| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this URL on the [Configure SAML][3] page, in the *Service Provider Entity ID* field.)         |
-| Name ID Format              | EmailAddress                                                                                                                   |
-| Response                    | Signed                                                                                                                         |
-| Assertion Signature         | Signed                                                                                                                         |
-| Signature Algorithm         | SHA256                                                                                                                         |
-| Assertion Encryption        | Assertions can be encrypted, but unencrypted assertions are also accepted.                                                     |
-| SAML Single Logout          | Disabled                                                                                                                       |
-| authnContextClassRef        | PasswordProtectedTransport                                                                                                     |
-| Honor Force Authentication  | Yes                                                                                                                            |
-| SAML Issuer ID              | `http://www.okta.com/${org.externalKey}`                                                                                       |
+Next, download the metadata details to upload to Datadog:
+1. While in the settings dialog for the Datadog application in Okta, click the **Sign on** tab.
+1. Scroll down until you see the **Metadata URL**.
+1. Click **Copy**.
+1. Open a new browser tab and paste the metadata URL into the address bar.
+1. Use your browser to save the content of the metadata URL as an XML file.
 
-## Attribute statements details
+{{< img src="account_management/saml/okta/metadata_url.png" alt="Sign on configuration in Okta" style="width:80%;" >}}
 
-| Name       | Name Format (optional) | Value                                             |
-|------------|------------------------|---------------------------------------------------|
-| NameFormat | URI Reference          | `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` |
-| sn         | URI Reference          | `user.lastName`                                   |
-| givenName  | URI Reference          | `user.firstName`                                  |
+### In Datadog
 
-## Group attribute statements (optional)
+#### Upload metadata details
 
-This is required only if you are using [AuthN Mapping][4].
+1. Navigate to [Login Methods][4] under Organization Settings.
+1. In the SAML component, click **Configure** or **Update**, depending on whether you have previously configured SAML. The SAML configuration page appears.
+1. Click **Choose File**, and select the metadata file you previously downloaded from Okta.
 
-| Name     | Name Format (optional) | Value                                                                                                                     |
-|----------|------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| memberOf | Unspecified            | Matches regex `.*` (This method retrieves all groups. Contact your IDP administrator if this does not fit your use case.) |
+{{< img src="account_management/saml/okta/choose_file.png" alt="SAML configuration in Datadog, highlighting metadata upload button" style="width:100%;" >}}
 
+#### Activate IdP initiated login
 
-Additional information on configuring SAML for your Datadog account is available on the [SAML documentation page][5].
+For the Datadog application to function correctly, you must activate IdP initiated login.
 
-In the event that you need to upload an `IDP.XML` file to Datadog before being able to fully configure the application in Okta, see [acquiring the idp.xml metadata file for a SAML template App article][6] for field placeholder instructions.
+<div class="alert alert-info">After you activate IdP initiated login, users can log in to Datadog from Okta</div>
+
+To activate IdP initiated login, execute the following steps:
+1. Navigate to the [SAML configuration page][5].
+1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**.
+1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Take note of this company ID, as you need to enter it in Okta to finalize your configuration.
+1. Click **Save Changes**.
+
+{{< img src="account_management/saml/okta/company_id.png" alt="SAML configuration in Datadog, highlighting the company ID portion of the assertion consumer service URL" style="width:100%;" >}}
+
+Return to Okta for the next set of configuration steps.
+
+### In Okta
+
+1. Return to the Okta admin dashboard.
+1. Select the **Sign on** tab.
+1. Click **Edit**.
+1. Scroll down to the **Advanced Sign-on Settings** section.
+1. Paste your company ID into the **Company ID** field. Your company ID should have the format `/id/xxxxx-xxxx-xxxx-xxxx-xxxxxxxxx`.
+1. Click **Save**.
+
+## Service Provider (SP) initiated login
+
+To log in to Datadog using service provider-initiated login (SP-initiated SSO), you need the single sign-on (SSO) URL. You can find your SSO URL in two ways: on the SAML configuration page, or through email.
+
+### SAML configuration page
+The Datadog [SAML configuration page][5] displays the SSO URL next to the **Single Sign-on URL** heading.
+
+### Email
+1. Navigate to the Datadog website URL for your organization.
+1. Select **Using Single Sign-On?**.
+1. Enter your email address, and click **Next**.
+1. Check your email for a message containing the SSO URL, listed as **Login URL**.
+
+After you find your SSO URL from either method, bookmark it for future reference.
+
+## SAML role mapping
+
+Follow the steps below to map Okta attributes to Datadog entities. This step is optional.
+
+1. Navigate to the Okta admin dashboard.
+1. Select the **Sign on** tab.
+1. Click **Edit**.
+1. Populate the **Attributes** with your [group attribute statements][6].
+1. Set up your desired [mappings][7] in Datadog.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm?cshid=ext_Apps_App_Integration_Wizard-saml
-[2]: https://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-DataDog.html
-[3]: https://app.datadoghq.com/saml/saml_setup
-[4]: /account_management/saml/mapping
-[5]: /account_management/saml/
-[6]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App
+[1]: /account_management/faq/okta/
+[2]: https://help.okta.com/en/prod/Content/Topics/Reference/glossary.htm
+[3]: /getting_started/site/#access-the-datadog-site
+[4]: https://app.datadoghq.com/organization-settings/login-methods
+[5]: https://app.datadoghq.com/organization-settings/login-methods/saml
+[6]: /account_management/faq/okta/#group-attribute-statements-optional
+[7]: /account_management/saml/mapping/

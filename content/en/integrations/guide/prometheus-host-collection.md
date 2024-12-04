@@ -1,6 +1,5 @@
 ---
 title: Prometheus and OpenMetrics metrics collection from a host
-kind: documentation
 further_reading:
     - link: 'logs/log_collection'
       tag: 'Documentation'
@@ -40,7 +39,7 @@ To collect your exposed metrics:
     init_config:
 
     instances:
-        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+        - openmetrics_endpoint: 'localhost:<PORT>/<ENDPOINT>'
           namespace: '<NAMESPACE>'
           metrics:
               - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
@@ -64,10 +63,10 @@ Find below the full list of parameters that can be used for your `instances`:
 
 | Name                                    | Type                                    | Necessity | Default value | Description                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prometheus_url`                        | string                                  | required  | none          | The URL where your application metrics are exposed by Prometheus/OpenMetrics.                                                                                                                                                                                        |
+| `openmetrics_endpoint`                        | string                                  | required  | none          | The URL exposing metrics in the OpenMetrics format.                                                                           |
 | `namespace`                             | string                                  | required  | none          | The namespace to be appended before all metrics namespaces. Your metrics are collected in the form `namespace.metric_name`.                                                                                                                                          |
 | `metrics`                               | list of strings or `key:value` elements | required  | none          | List of `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` pairs for metrics to be fetched from the Prometheus endpoint.<br> `<NEW_METRIC_NAME>` is optional. It transforms the name in Datadog if set. This list should contain at least one metric.                            |
-| `prometheus_metrics_prefix`             | string                                  | optional  | none          | Prefix for exposed Prometheus/OpenMetrics metrics.                                                                                                                                                                                                                   |
+| `raw_metric_prefix`             | string                                  | optional  | none          | A prefix that is removed from all exposed metric names, if present.                                                                                                                 |
 | `health_service_check`                  | boolean                                 | optional  | true          | Send a service check reporting on the health of the Prometheus endpoint. The check is named `<NAMESPACE>.prometheus.health`.                                                                                                                                         |
 | `label_to_hostname`                     | string                                  | optional  | none          | Override the hostname with the value of one label.                                                                                                                                                                                                                   |
 | `label_joins`                           | object                                  | optional  | none          | The label join allows you to target a metric and retrieve its label using a 1:1 mapping.                                                                                                                                                                               |
@@ -82,7 +81,7 @@ Find below the full list of parameters that can be used for your `instances`:
 | `ssl_cert`                              | string                                  | optional  | none          | If your Prometheus endpoint is secured, here are the settings to configure it:<br> Can either be: only the path to the certificate and thus you should specify the private key, or it can be the path to a file containing both the certificate and the private key. |
 | `ssl_private_key`                       | string                                  | optional  | none          | Needed if the certificate does not include the private key.<br> **WARNING**: The private key to your local certificate must be unencrypted.                                                                                                                          |
 | `ssl_ca_cert`                           | string                                  | optional  | none          | The path to the trusted CA used for generating custom certificates.                                                                                                                                                                                                  |
-| `prometheus_timeout`                    | integer                                 | optional  | 10            | Set a timeout in seconds for the Prometheus/OpenMetrics query.                                                                                                                                                                                                       |
+| `timeout`                               | integer                                 | optional  | 10            | Set a timeout in seconds for the Prometheus/OpenMetrics query.                                                                                                                                                                                                       |
 | `max_returned_metrics`                  | integer                                 | optional  | 2000          | The check limits itself to 2000 metrics by default. Increase this limit if needed.                                                                                                                                                                                   |
 | `bearer_token_auth`                     | boolean                                 | optional  | false         | Set `bearer_token_auth` to `true` to add a bearer token authentication header. **Note**: If `bearer_token_path` is not set, `/var/run/secrets/kubernetes.io/serviceaccount/token` is used as the default path.                                                       |
 | `bearer_token_path`                     | string                                  | optional  | none          | The path to a Kubernetes service account bearer token file (make sure the file exists and is mounted correctly). **Note**: Set `bearer_token_auth` to `true` to enable adding the token to HTTP headers for authentication.                                          |
@@ -106,7 +105,7 @@ To get started with collecting metrics exposed by Prometheus, follow these steps
     init_config:
 
     instances:
-        - prometheus_url: http://localhost:9090/metrics
+        - openmetrics_endpoint: http://localhost:9090/metrics
           namespace: 'documentation_example'
           metrics:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total

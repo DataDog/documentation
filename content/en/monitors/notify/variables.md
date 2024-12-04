@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
 - link: "/monitors/guide/template-variable-evaluation/"
@@ -15,6 +14,9 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Take a course to customize alert monitor notifications"
 ---
 
 Use variables in notification messages to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
@@ -29,16 +31,16 @@ The following conditional variables are available:
 |----------------------------|--------------------------------------------------------------------|
 | `{{#is_alert}}`            | The monitor alerts                                                 |
 | `{{^is_alert}}`            | The monitor does not alert                                         |
-| `{{#is_match}}`            | The context matches the provided substring                         |
+| `{{#is_match}}`            | The context matches the provided substring. If a numeric value is used, it is converted to a string.|
 | `{{^is_match}}`            | The context does not match the provided substring                  |
-| `{{#is_exact_match}}`      | The context exactly matches the provided string                    |
+| `{{#is_exact_match}}`      | The context exactly matches the provided string.<br> If a number is used, the numeric value is considered, regardless of its type. This means that as long as two numbers have the same value, they are considered equal by the function. |
 | `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
 | `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
 | `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
 | `{{#is_warning}}`          | The monitor warns                                                  |
 | `{{^is_warning}}`          | The monitor does not warn                                          |
-| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, or `NO DATA`         |
-| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, or `NO DATA` |
+| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA`         |
+| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
 | `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
@@ -179,7 +181,7 @@ The `is_exact_match` conditional variable also supports [`{{value}}` template va
 {{/is_exact_match}}
 ```
 
-To notify your dev team if the value that breached the threshold of your monitor is 5, use the following:
+To notify your dev team if the value that breached the threshold of your monitor is 5 (or 5.0), use the following:
 
 ```text
 {{#is_exact_match "value" "5"}}
@@ -230,9 +232,9 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle. 
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
 
-**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition. 
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
 ## Attribute and tag variables
 
@@ -258,17 +260,6 @@ This renders the `value` associated with the `key` in each alert notification. I
 **Example**: If your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
-
-#### Query group by host
-
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
-
-Some specific host metadata variables are available:
-
-- Agent Version: `{{host.metadata_agent_version}}`
-- Machine: `{{host.metadata_machine}}`
-- Platform: `{{host.metadata_platform}}`
-- Processor: `{{host.metadata_processor}}`
 
 #### Tag key with period
 
@@ -310,9 +301,58 @@ If your facet has periods, use brackets around the facet, for example:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Customize the notification based on the group
+
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group.
+
+##### Query group by host
+
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+
+Specific host metadata variables:
+
+- Agent Version: `{{host.metadata_agent_version}}`
+- Machine: `{{host.metadata_machine}}`
+- Platform: `{{host.metadata_platform}}`
+- Processor: `{{host.metadata_processor}}`
+
+##### Query group by kube_namespace and kube_cluster_name
+
+If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
+
+Namespace metadata variables:
+
+- Cluster name: `{{kube_namespace.cluster_name}}`
+- Namespace name: `{{kube_namespace.display_name}}`
+- Namespace status: `{{kube_namespace.status}}`
+- Namespace labels: `{{kube_namespace.labels}}`
+
+The following table contains all available attributes:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
+
+##### Query group by pod_name and kube_namespace and kube_cluster_name
+
+If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
+
+Pod metadata variables:
+- Cluster name: `{{pod_name.cluster_name}}`
+- Pod name: `{{pod_name.name}}`
+- Pod phase: `{{pod_name.phase}}`
+
+The following table contains all available attributes:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
+
+
+
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][8]_.
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -320,8 +360,9 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 |-----------------|--------------------------------------------------|
 | Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| Error Tracking  | Traces: `{{span.attributes.[error.message]}}`<br>RUM Events: `{{rum.attributes.[error.message]}}`<br>Logs: `{{log.attributes.[error.message]}}`             |
+| Error Tracking  | Traces: `{{span.attributes.error.message}}`<br>RUM Events: `{{rum.attributes.error.message}}`<br>Logs: `{{log.attributes.error.message}}`             |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
 | Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
@@ -350,18 +391,18 @@ Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic
 
 | Monitor type    | Variable syntax   | First level attributes |
 |-----------------|-------------------|------------------------|
-| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id`, `link` |
+| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id`, `link`, `host` |
 | Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link` |
 | RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp`, `link` |
 | Event             | `{{event.key}}`     | `attributes`, `host.name`, `id`, `link`, `title`, `text`, `tags` |
 | CI Pipeline             | `{{cipipeline.key}}`     | `service`, `env`, `resource_name`, `ci_level`, `trace_id`, `span_id`, `pipeline_fingerprint`, `operation_name`, `ci_partial_array`, `status`, `timestamp`, `link` |
-| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `error.message`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
+| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
 
 If the matching event does not contain the attribute in its definition, the variable is rendered empty.
 
 #### Explorer link
 
-Use `{{log.link}}`, `{{span.link}}`, and `{{rum.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, or RUM Explorer, scoped on the events matching the query.
+Use `{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, RUM Explorer, or Error Tracking, scoped on the events matching the query.
 
 ### Check monitor variables
 
@@ -385,7 +426,13 @@ To retrieve the status of the sub-monitor `a` use:
 
 Possible values for the status are: `OK`, `Alert`, `Warn`, and `No Data`.
 
-Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet.
+Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag or facet.
+
+For instance, assume your composite monitor has a sub-monitor `a`, which is a Logs monitor. You can include the value of any tag or facet of `a` with:
+
+```text
+{{ a.log.message }} or {{ a.log.my_facet }}
+```
 
 ### Character escape
 
@@ -395,22 +442,41 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
-| Variable                       | Description                                                                   |
-|--------------------------------|-------------------------------------------------------------------------------|
-| `{{value}}`                    | The value that breached the alert for metric based query monitors.            |
-| `{{threshold}}`                | The value of the alert threshold set in the monitor's alert conditions.       |
-| `{{warn_threshold}}`           | The value of the warning threshold set in the monitor's alert conditions.     |
-| `{{ok_threshold}}`             | The value that recovered the Service Check monitor.                            |
-| `{{comparator}}`               | The relational value set in the monitor's alert conditions.                   |
-| `{{first_triggered_at}}`       | The UTC date and time when the monitor first triggered.                       |
-| `{{first_triggered_at_epoch}}` | The UTC date and time when the monitor first triggered in epoch milliseconds. |
-| `{{last_triggered_at}}`        | The UTC date and time when the monitor last triggered.                        |
-| `{{last_triggered_at_epoch}}`  | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
-| `{{triggered_duration_sec}}`   | The number of seconds the monitor has been in a triggered state.              |
+| Variable                             | Description                                                                   |
+|-----------------------------------   |-------------------------------------------------------------------------------|
+| `{{value}}`                          | The value that breached the alert for metric based query monitors.            |
+| `{{threshold}}`                      | The value of the alert threshold set in the monitor's alert conditions.       |
+| `{{warn_threshold}}`                 | The value of the warning threshold set in the monitor's alert conditions.     |
+| `{{alert_recovery_threshold}}`       | The value that recovered the monitor from its `ALERT` state.                  |
+| `{{warn_recovery_threshold}}`        | The value that recovered the monitor from its `WARN` state.                   |
+| `{{ok_threshold}}`                   | The value that recovered the Service Check monitor.                           |
+| `{{comparator}}`                     | The relational value set in the monitor's alert conditions.                   |
+| `{{first_triggered_at}}`<br>*See section below*         | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`<br>*See section below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`<br>*See section below*          | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`<br>*See section below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{triggered_duration_sec}}`         | The number of seconds the monitor has been in a triggered state.              |
+
+### Triggered variables
+
+ The `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}`, and `{{last_triggered_at_epoch}}` monitor template variables reflect the values when a monitor changes state, **NOT** when a new monitor event occurs. Renotification events show the same template variable if the monitor state has not changed. Use `{{triggered_duration_sec}}` to display the duration at the time of the monitor event.
+
+ `{{first_triggered_at}}` is set when the monitor group goes from `OK` to a non-`OK` state or when a new group appears in a non-`OK` state. `{{last_triggered_at}}` gets set when the monitor group goes to a non-`OK` state independently from its previous state (including `WARN` → `ALERT`, `ALERT` → `WARN`). Additionally, `{{last_triggered_at}}` is set when a new group appears in a non-`OK` state. The difference is that `{{last_triggered_at}}` is independent from its previous state.
+
+ {{< img src="monitors/notifications/triggered_variables.png" alt="Showing four transitions with timestamps A: 1419 OK to WARN, B: 1427 WARN to ALERT, C: 1445 ALERT to NO DATA, D: 1449 NO DATA to OK" style="width:90%;">}}
+
+**Example**: When the monitor transitions from `OK` → `WARN`, the values of `{{first_triggered_at}}` and `{{last_triggered_at}}` both have timestamp A. The table below shows the values until the monitor recovers.
+
+| Transition         | first_triggered_at     | last_triggered_at      | triggered_duration_sec           |
+|------------------  |--------------------------------  |--------------------------------  |--------------------------------  |
+| `OK` → `WARN`      | A                                | A                                | 0                                |
+| `WARN` → `ALERT`   | A                                | B                                | B - A                            |
+| `ALERT` → `NO DATA`| A                                | C                                | C - A                            |
+| `NO DATA` → `OK`   | A                                | C                                | D - A                            |
 
 ### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][6].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][7].
 
 ### Local time
 
@@ -422,7 +488,7 @@ For example, to add the last triggered time of the monitor in the Tokyo time zon
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-See the [list of tz database time zones][7], particularly the TZ database name column, to see the list of available time zone values.
+See the [list of tz database time zones][8], particularly the TZ database name column, to see the list of available time zone values.
 
 ## Advanced
 
@@ -441,6 +507,17 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 ```text
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
+
+When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle. 
+
+To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
+
+```text
+{{#is_match "kube_namespace.owner" ""}}
+  @slack-example
+{{/is_match}}
+```
+
 
 ### Dynamic links
 
@@ -510,7 +587,7 @@ The monitors link is customizable with additional parameters. The most common ar
 Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) to provide a link to all logs happening in the moment of the alert.
 
 ```text
-https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
+https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
 The logs link is customizable with additional parameters. The most common are:
@@ -531,6 +608,7 @@ To include a comment in the monitor message that only displays in the monitor ed
 
 ```text
 {{!-- this is a comment --}}
+{{!-- this is a comment }}
 ```
 
 ### Raw format
@@ -567,10 +645,10 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your monitor message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
-https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
 ## Further reading
@@ -582,6 +660,6 @@ https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 [3]: /monitors/types/apm/?tab=analytics
 [4]: /monitors/types/real_user_monitoring/
 [5]: /monitors/types/ci/
-[6]: /monitors/guide/template-variable-evaluation/
-[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[8]: /monitors/types/database_monitoring/
+[6]: /monitors/types/database_monitoring/
+[7]: /monitors/guide/template-variable-evaluation/
+[8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

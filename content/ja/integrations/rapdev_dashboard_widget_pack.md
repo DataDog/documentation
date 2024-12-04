@@ -20,7 +20,6 @@ integration_id: rapdev-dashboard-widget-pack
 integration_title: ダッシュボードウィジェットパック
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

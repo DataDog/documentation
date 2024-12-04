@@ -1,28 +1,16 @@
 ---
 title: Writing Custom Rules with Rego
-kind: guide
 aliases:
   - /security_platform/cloud_security_management/guide/writing_rego_rules/
 further_reading:
 - link: "/security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "/security/misconfigurations/frameworks_and_benchmarks"
+- link: "/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks"
   tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
-{{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true">}}
-Writing custom rules is a beta feature available to all Cloud Security Management Misconfigurations (CSM Misconfigurations) customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}} 
-
 
 ## Overview
 

@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler
-kind: Documentation
 aliases:
     - /tracing/profiling/
     - /tracing/profiler/
@@ -17,6 +16,9 @@ further_reading:
     - link: '/developers/guide/data-collection-resolution-retention/'
       tag: 'Documentation'
       text: 'Data collection, resolution, and retention'
+    - link: 'https://www.datadoghq.com/blog/source-code-preview/'
+      tag: 'Blog'
+      text: 'Focus on code that matters with source code previews in Continuous Profiler'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
@@ -32,9 +34,14 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
+      tag: 'Blog'
+      text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
 cascade:
     algolia:
         rank: 70
+algolia:
+  tags: ["profiler"]
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
@@ -61,9 +68,13 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
+After you configure your application to send profiles to Datadog, start getting insights into your code performance.
 
 By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
+
+{{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.
+{{< /learning-center-callout >}}
 
 ### Profile types
 
@@ -85,13 +96,13 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 ### Connect traces to profiling data
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Profiles tab][4] to find specific lines of code related to performance issues.
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab shows profiling information for a APM trace span" >}}
 
 ### Find changes in performance by comparing profiles
 
-Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by. 
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by.
 
 ## Further Reading
 

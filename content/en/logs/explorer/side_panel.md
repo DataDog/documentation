@@ -1,6 +1,5 @@
 ---
 title: Log Side Panel
-kind: documentation
 description: 'Search through all of your logs and perform log analytics'
 aliases:
     - /logs/explorer/sidepanel
@@ -14,6 +13,9 @@ further_reading:
     - link: '/logs/guide/correlate-logs-with-metrics'
       tag: 'Documentation'
       text: 'Connect logs with infrastructure metrics'
+    - link: "/logs/explorer/calculated_fields/expression_language"
+      tag: "Documentation"
+      text: "Learn more about Calculated Fields Expression Language"
 ---
 
 ## Overview
@@ -65,12 +67,11 @@ Interact with the attributes names and values in the lower JSON section to:
 
 - Add or remove a column from the logs table
 - Append the search request with specific values (include or exclude)
-
-{{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context" style="width:50%;">}}
-
+  {{< img src="logs/explorer/side_panel/context.jpg" alt="Side Panel context" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="Side Panel context" style="width:50%;">}}
 - Build or edit a facet or measure from an attribute. See [Log Facets][12].
+  {{< img src="logs/explorer/side_panel/facets.mp4" alt="Side Panel Facets" video=true style="width:100%;">}}
+- Build or edit a calculated field from an attribute. See [Calculated Fields][14].
 
-{{< img src="logs/explorer/side_panel/facets.mp4" alt="Side Panel Facets" video=true style="width:100%;">}}
 
 ## Share a log
 
@@ -87,7 +88,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 [2]: /integrations/#cat-log-collection
 [3]: /agent/autodiscovery/integrations/?tab=kubernetes
 [4]: /logs/log_configuration/attributes_naming_convention
-[5]: /dashboards/#preset-lists
+[5]: /dashboards/list/#preset-lists
 [6]: /network_monitoring/performance/network_analytics/
 [7]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
 [8]: /infrastructure/serverless/#function-detail-view
@@ -96,3 +97,4 @@ Use the **Share** button to share the log opened in side panel to other contexts
 [11]: /tracing/app_analytics/search/#displaying-a-full-trace
 [12]: /logs/explorer/facets/#overview
 [13]: /integrations/#cat-notification
+[14]: /logs/explorer/calculated_fields/

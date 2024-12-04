@@ -5,7 +5,7 @@ further_reading:
 - link: /synthetics/
   tag: Documentation
   text: En savoir plus sur la surveillance Synthetic
-kind: guide
+
 title: Dupliquer vos tests Synthetic
 ---
 

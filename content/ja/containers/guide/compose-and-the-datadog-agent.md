@@ -4,7 +4,7 @@ aliases:
 - /ja/agent/guide/compose-and-the-datadog-agent
 further_reading:
 - link: https://github.com/DataDog/docker-compose-example
-  tag: Github
+  tag: ソースコード
   text: Datadog で Docker Compose を使用する例
 - link: /agent/docker/
   tag: Documentation
@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/docker/log/
   tag: Documentation
   text: Datadog Docker Log コレクションドキュメント
-kind: ガイド
 title: Compose と Datadog Agent
 ---
 
@@ -69,7 +68,7 @@ ADD conf.d/redisdb.yaml /etc/datadog-agent/conf.d/redisdb.yaml
 ```
 
 
-### ログの収集
+### ログ収集
 
 Datadog Agent がコンテナログを収集できるように、`docker-compose.yml` を拡張することが可能です。
 

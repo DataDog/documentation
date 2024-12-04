@@ -5,6 +5,7 @@ assets:
   dashboards:
     riak: assets/dashboards/riak_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,17 +16,17 @@ assets:
       prefix: riak.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 50
     source_type_name: Riak
-  logs:
-    source: riak
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riak/README.md
 display_on_public_website: true
@@ -33,12 +34,10 @@ draft: false
 git_integration_title: riak
 integration_id: riak
 integration_title: Riak
-integration_version: 3.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: riak
-oauth: {}
 public_title: Riak
 short_description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
 supported_os:
@@ -51,8 +50,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
   media: []
@@ -61,6 +61,7 @@ tile:
   title: Riak
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Riak Graph][1]
@@ -75,14 +76,14 @@ tile:
 
 Riak チェックは [Datadog Agent][2] パッケージに含まれています。Riak サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -100,7 +101,7 @@ Riak チェックは [Datadog Agent][2] パッケージに含まれています�
 
 2. [Agent を再起動][3]すると、Datadog への Riak メトリクスの送信が開始されます。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -144,7 +145,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -154,11 +155,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<インテグレーション名>` | `riak`                                 |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
-| `<インスタンスコンフィギュレーション>`  | `{"url":"http://%%host%%:8098/stats"}` |
+| `<INTEGRATION_NAME>` | `riak`                                 |
+| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8098/stats"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -187,7 +188,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Riak チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "riak" >}}
 
 
@@ -198,6 +199,6 @@ Riak チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

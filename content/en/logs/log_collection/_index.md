@@ -1,6 +1,5 @@
 ---
 title: Log Collection and Integrations
-kind: Documentation
 description: "Configure your environment to gather logs from your host, containers, and services."
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
@@ -28,6 +27,8 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -106,12 +107,23 @@ Datadog integrations and log collection are tied together. You can use an integr
 1. Select an integration from the [Integrations page][6] and follow the setup instructions.
 2. Follow the integration's log collection instructions. This section covers how to uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment.
 
+## Reduce data transfer fees
+
+Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
+
+For more information, see [How to send logs to Datadog while reducing data transfer fees][9].
+
 [1]: /logs/log_configuration/processors
 [2]: /logs/log_configuration/parsing
 [3]: /logs/explorer/facets/
 [4]: /agent/kubernetes/log/#autodiscovery
 [5]: /agent/docker/log/#log-integrations
 [6]: /integrations/#cat-log-collection
+[7]: /network_monitoring/cloud_network_monitoring/
+[8]: /cloud_cost_management/
+[9]: /logs/guide/reduce_data_transfer_fees/
+ 
+ 
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -254,6 +266,7 @@ Your payload, or `Log sent directly using TLS` as written in the example, can be
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /account_management/api-app-keys/#api-keys
 
@@ -312,10 +325,12 @@ The TCP endpoint is not supported for this site.
 
 * The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256kB (256000 bytes).
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
-* A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
+
+There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
 
 ### Attributes and tags
 

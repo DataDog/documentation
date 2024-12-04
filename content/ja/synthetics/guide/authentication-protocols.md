@@ -10,13 +10,12 @@ further_reading:
 - link: /synthetics/multistep
   tag: ドキュメント
   text: マルチステップ API テストを作成する
-kind: ガイド
-title: 認証が必要なアプリケーションで API テストとマルチステップ API テストを実行する
+title: API およびマルチステップ API テストでの認証使用
 ---
 
 ## 概要
 
-[HTTP テスト][1]では、アプリケーションの API エンドポイントに HTTP リクエストを送信し、レスポンスタイム、期待されるステータスコード、ヘッダー、本文の内容など、定義された条件とレスポンスを検証することができます。[マルチステップ API テスト][2]では、HTTP リクエストを連鎖させて、キーとなるサービスの洗練されたジャーニーをプロアクティブに監視し、いつでも、管理ロケーションまたはプライベートロケーションから利用できるようにすることが可能です。
+[API tests][1] allow you to send requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content. [Multistep API tests][2] allow you to chain requests to proactively monitor sophisticated journeys on your key services, and ensure they are available at any time and from any managed or private location.
 
 このガイドでは、Synthetic API およびマルチステップ API テストで利用可能なさまざまな認証プロトコルに ついて説明します。ブラウザテストにおける認証の詳細については、[認証が必要なアプリケーションでテストを実行する][3]を参照してください。
 
@@ -103,3 +102,4 @@ title: 認証が必要なアプリケーションで API テストとマルチ�
 [5]: https://app.datadoghq.com/synthetics/multi-step/create
 [6]: /ja/account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [7]: /ja/data_security/synthetics
+[8]: /ja/synthetics/api_tests/grpc_tests

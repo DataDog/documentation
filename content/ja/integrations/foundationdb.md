@@ -7,6 +7,7 @@ assets:
     FoundationDB Processes and Utilization: assets/dashboards/foundationdb_processes_and_utilization.json
     FoundationDB Transactions and Queues: assets/dashboards/foundationdb_transactions_and_queues.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,20 +20,19 @@ assets:
       prefix: foundationdb.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10258
     source_type_name: FoundationDB
-  logs:
-    source: foundationdb
   monitors:
-    FoundationDB Errors Logged: assets/monitors/errors_logged.json
-    FoundationDB High Durability Lag: assets/monitors/high_durability_lag.json
-    FoundationDB High Level Of Conflicted Transactions: assets/monitors/conflicts.json
-    FoundationDB High Level Of Rejected Transactions: assets/monitors/rejections.json
-    FoundationDB Log Queue Reaching Spill Threshold: assets/monitors/log_queue_spill.json
-    FoundationDB Low Disk Space: assets/monitors/low_disk_space.json
-    FoundationDB Read Latency Probe: assets/monitors/read_latency_probe.json
+    Disk space is low: assets/monitors/low_disk_space.json
     FoundationDB Status Check: assets/monitors/service_check.json
-    FoundationDB Transaction Commit Latency Probe: assets/monitors/transaction_commit_latency.json
-    FoundationDB Transaction Start Latency Probe: assets/monitors/transaction_start_latency.json
+    High durability lag is detected: assets/monitors/high_durability_lag.json
+    High severity errors logs are found: assets/monitors/errors_logged.json
+    Log queue is approaching the limit: assets/monitors/log_queue_spill.json
+    Read operation took a long time: assets/monitors/read_latency_probe.json
+    Transaction commit latency is high: assets/monitors/transaction_commit_latency.json
+    Transaction start latency is high: assets/monitors/transaction_start_latency.json
+    Transactions are conflicting: assets/monitors/conflicts.json
+    Transactions are rejected: assets/monitors/rejections.json
   saved_views:
     all: assets/saved_views/all.json
     errors: assets/saved_views/errors.json
@@ -43,8 +43,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/foundationdb/README.md
 display_on_public_website: true
@@ -52,12 +53,10 @@ draft: false
 git_integration_title: foundationdb
 integration_id: foundationdb
 integration_title: FoundationDB
-integration_version: 1.2.0
+integration_version: 3.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: foundationdb
-oauth: {}
 public_title: FoundationDB
 short_description: FoundationDB インテグレーション
 supported_os:
@@ -70,8 +69,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: FoundationDB インテグレーション
   media: []
@@ -80,6 +80,7 @@ tile:
   title: FoundationDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -97,11 +98,11 @@ FoundationDB チェックは [Datadog Agent][2] パッケージに含まれて�
 ### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -116,7 +117,7 @@ FoundationDB チェックは [Datadog Agent][2] パッケージに含まれて�
 
 4. [Agent を再起動します][4]。
 
-##### ログの収集
+##### ログ収集
 
 FoundationDB はデフォルトで XML ログを書き込みますが、Datadog インテグレーションは JSON ログを想定しています。そのため、FoundationDB に構成変更を行う必要があります。
 
@@ -173,11 +174,11 @@ FoundationDB はデフォルトで XML ログを書き込みますが、Datadog 
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<インテグレーション名>` | `foundationdb`                                             |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{}`                                                       |
+| `<INTEGRATION_NAME>` | `foundationdb`                                             |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{}`                                                       |
 
-##### ログの収集
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -208,11 +209,11 @@ FoundationDB チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 [1]: https://www.foundationdb.org/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://apple.github.io/foundationdb/downloads.html
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

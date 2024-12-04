@@ -1,6 +1,5 @@
 ---
-title: API Tests
-kind: documentation
+title: API Testing
 description: Simulate requests on your public and internal services
 aliases:
   - /synthetics/uptime_check
@@ -9,6 +8,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
   tag: 'Blog'
   text: 'Introducing Datadog Synthetic Monitoring'
+- link: 'https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/'
+  tag: 'Blog'
+  text: 'Improve your API test coverage with Datadog Synthetic Monitoring'
 - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog'
   tag: 'Blog'
   text: 'Monitor your workflows with Datadog SSL, TLS, and Multistep API tests'
@@ -22,7 +24,7 @@ further_reading:
   tag: 'Documentation'
   text: 'Run API tests on internal endpoints'
 - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
-  tag: 'Terraform'
+  tag: 'External Site'
   text: 'Create and manage Synthetic API Tests with Terraform'
 ---
 
@@ -44,7 +46,7 @@ API tests run from Datadog [managed locations][3] or [private locations][4], all
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[1]: /synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
 [2]: /continuous_testing/cicd_integrations
 [3]: /synthetics/api_tests/http_tests/#select-locations
 [4]: /synthetics/private_locations

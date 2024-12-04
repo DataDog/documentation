@@ -9,10 +9,9 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: イベントへの視覚化の適用
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
-kind: documentation
 title: リソースパフォーマンスの監視
 ---
 
@@ -71,7 +70,7 @@ RUM は、リソース URL ホスト部分からリソースプロバイダー�
 
 ## リソースタイミングと CORS
 
-[Resource Timing API][3] は、RUM リソースのタイミングを収集するために使用されます。これは、ブラウザがスクリプトに適用するクロスオリジンセキュリティ制限の対象となります。たとえば、Web アプリケーションが `www.example.com` でホストされており、`images.example.com` を介して画像をロードする場合、デフォルトでは、`www.example.com` でホストされてロードされたリソースのタイミングのみが取得されます。 
+[Resource Timing API][3] は、RUM リソースのタイミングを収集するために使用されます。これは、ブラウザがスクリプトに適用するクロスオリジンセキュリティ制限の対象となります。たとえば、Web アプリケーションが `www.example.com` でホストされており、`images.example.com` を介して画像をロードする場合、デフォルトでは、`www.example.com` でホストされてロードされたリソースのタイミングのみが取得されます。
 
 これを解決するには、クロスオリジンリソースに `Timing-Allow-Origin` HTTP 応答ヘッダーを追加して、CORS の対象となるリソースの拡張データ収集を有効にします。たとえば、任意のオリジンにリソースタイミングへのアクセスを許可するには、`Timing-Allow-Origin: *` を使用します。CORS の詳細については、[MDN Web ドキュメント][4]をご覧ください。
 
@@ -80,6 +79,6 @@ RUM は、リソース URL ホスト部分からリソースプロバイダー�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /ja/real_user_monitoring/connect_rum_and_traces
+[2]: /ja/real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

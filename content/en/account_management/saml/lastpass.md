@@ -1,6 +1,5 @@
 ---
 title: LastPass SAML IdP
-kind: documentation
 aliases:
   - /account_management/saml/nopassword
   - /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/

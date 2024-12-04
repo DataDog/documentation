@@ -1,26 +1,65 @@
 ---
+app_id: google-cloud-apis
+app_uuid: b2dc9b16-68b8-47c0-a9e0-351d9c356baa
+assets:
+  dashboards:
+    google-cloud-apis: assets/dashboards/google_cloud_apis_overview.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - gcp.serviceruntime.api.request_count
+      metadata_path: metadata.csv
+      prefix: gcp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 262
+    source_type_name: Google Cloud APIs
+  monitors:
+    Instances per VPC approaching limit: assets/monitors/compute_instance_vpc_quota.json
+    Service Quota utilization is high: assets/monitors/serviceruntime_rate_quota.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-- cloud
 - google cloud
-- ログの収集
+- モニター
+- クラウド
+custom_kind: インテグレーション
 dependencies: []
-description: Google Cloud APIs のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_apis/
+display_on_public_website: true
 draft: false
 git_integration_title: google_cloud_apis
-has_logo: true
 integration_id: google-cloud-apis
 integration_title: Google Cloud APIs
 integration_version: ''
 is_public: true
-kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_apis
-public_title: Datadog-Google Cloud APIs インテグレーション
-short_description: Google Cloud APIs のキーメトリクスを追跡
-version: '1.0'
+public_title: Google Cloud APIs
+short_description: Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Google Cloud
+  - Category::Metrics
+  - Category::Cloud
+  - Queried Data Type::Metrics
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud APIs
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。
@@ -33,17 +72,6 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### ログの収集
-
-Google Cloud API のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
-
-これが完了したら、Google Cloud API のログを Google Cloud Logging から Pub/Sub へエクスポートします。
-
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud API のログを絞り込みます。
-2. **Create Export** をクリックし、シンクに名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
-
 ## 収集データ
 
 ### メトリクス
@@ -54,16 +82,14 @@ Google Cloud API のログは Google Cloud Logging により収集され、HTTP 
 
 Google Cloud APIs インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Google Cloud APIs インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
-[3]: https://console.cloud.google.com/logs/viewer
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_apis/google_cloud_apis_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_apis/google_cloud_apis_metadata.csv
+[3]: https://docs.datadoghq.com/ja/help/

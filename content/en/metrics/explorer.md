@@ -1,6 +1,5 @@
 ---
 title: Metrics Explorer
-kind: documentation
 description: "Explore all of your metrics and perform analytics."
 aliases:
   - /graphing/metrics/explorer/
@@ -11,6 +10,10 @@ further_reading:
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
+  - link: "/dashboards/guide/quick-graphs/"
+    tag: "Documentation"
+    text: "Quick Graphs"
+    
 ---
 
 ## Overview
@@ -44,13 +47,19 @@ The possible options are:
 
 **Note**: The options may differ based on the metric type selected.
 
-### Functions
+### Functions and formulas
 
-You can optionally add functions to your query using the function button. Not all functions are available for all metric types.
+You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
 ### Export
 
 Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
+
+### Quick Graphs
+
+With Quick Graphs, you have more options to visualize your data, without needing to create a [Dashboard][4] or [Notebook][2]. These graphs are useful for understanding and troubleshooting issues without creating permanent dashboards or complex visualization setups.
+
+For more information, see the [Quick Graphs][7] documentation.
 
 ## Further reading
 
@@ -59,5 +68,7 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /notebooks/
 [3]: /dashboards/#screenboards
-[4]: /dashboards/#timeboards
+[4]: /dashboards/#get-started
 [5]: /metrics/introduction/#space-aggregation
+[6]: /dashboards/querying/#advanced-graphing
+[7]: /dashboards/guide/quick-graphs/

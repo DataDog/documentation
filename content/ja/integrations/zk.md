@@ -5,6 +5,7 @@ assets:
   dashboards:
     zookeeper: assets/dashboards/zookeeper_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,9 +19,8 @@ assets:
     - java zoo.cfg
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 48
     source_type_name: ZooKeeper
-  logs:
-    source: zookeeper
   saved_views:
     zookeeper_processes: assets/saved_views/zookeeper_processes.json
 author:
@@ -30,8 +30,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - orchestration
-- notification
+- notifications
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_on_public_website: true
@@ -39,12 +40,10 @@ draft: false
 git_integration_title: zk
 integration_id: zookeeper
 integration_title: ZooKeeper
-integration_version: 4.2.3
+integration_version: 4.5.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: zk
-oauth: {}
 public_title: ZooKeeper
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 supported_os:
@@ -56,8 +55,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Category::オーケストレーション
-  - Category::通知
+  - Category::Notifications
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
   media: []
@@ -66,6 +66,7 @@ tile:
   title: ZooKeeper
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![ZooKeeper ダッシュボード][1]
@@ -80,7 +81,7 @@ ZooKeeper チェックは、クライアント接続とレイテンシーの追�
 
 ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれています。ZooKeeper サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### 包含リスト
 
@@ -88,14 +89,14 @@ ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 #### SSL の有効化
 
-ZooKeeper 3.5 で SSL 認証を使用できるようになりました。ZooKeeper での SSL 設定については、[ZooKeeper SSL ユーザーガイド][5]を参照してください。 
+ZooKeeper 3.5 で SSL 認証を使用できるようになりました。ZooKeeper での SSL 設定については、[ZooKeeper SSL ユーザーガイド][5]を参照してください。
 
 ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agent を構成し、ZooKeeper に接続できるようになります。JKS ファイルによってすでに認証設定が済んでいる場合は、次のステップに従って JKS ファイルを TLS/SSL コンフィギュレーション用の PEM ファイルに変換します。
 
 次のコマンドの例は、JKS `truststore` ファイルと `keystore` ファイルが呼び出された場合を仮定しています。
 
 - `server_truststore.jks`
-- `server_keystore.jks` 
+- `server_keystore.jks`
 - `client_truststore.jks`
 - `client_keystore.jks`
 
@@ -112,26 +113,26 @@ JKS ファイルを PEM ファイルに変換するには
 2. クライアントの `keystore` にはエイリアス `client_cert` のクライアントの証明書が含まれているため、`cert.pem` ファイルを `client_keystore.jks` から取得します。
     ```
     keytool -importkeystore -srckeystore client_keystore.jks -destkeystore cert.p12 -srcstoretype jks -deststoretype pkcs12 -srcalias client_cert
-    ```   
+    ```
 
 3. `openssl pkcs12` コマンドを実行します。これにより、クライアント証明書と証明書の秘密キーをエクスポートします。`tls_cert` コンフィグオプションにより、証明書と秘密キーを含む PEM ファイルを読み取って、パースできます。パスワード保護されていないファイルを取得するには、このコマンドに `-nodes` を追加します。
    ```
    openssl pkcs12 -in cert.p12 -out cert.pem
-   ``` 
+   ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. ZooKeeper の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `zk.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zk.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -184,7 +185,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -194,11 +195,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<インテグレーション名>` | `zk`                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port": "2181"}` |
+| `<INTEGRATION_NAME>` | `zk`                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "2181"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -234,18 +235,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ZooKeeper チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "zk" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/zk/images/zk_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
 [4]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
 [5]: https://cwiki.apache.org/confluence/display/ZOOKEEPER/ZooKeeper+SSL+User+Guide

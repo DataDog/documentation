@@ -33,19 +33,24 @@
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
             {{ range $endpoint_data }}
-                {{ if in .tags $title }}
+                {{ $tags := slice }}
+                {{ if isset . "tags" }}
+                  {{ $tags = .tags }}
+                {{ end }}
 
-                    {{ 
+                {{ if in $tags $title }}
+
+                    {{
                         $params := (dict
-                            "context" $hugo_context 
-                            "page" $page 
-                            "title" $title 
-                            "lang" $lang 
-                            "api_version" "v1" 
-                            "endpoint_data" . 
+                            "context" $hugo_context
+                            "page" $page
+                            "title" $title
+                            "lang" $lang
+                            "api_version" "v1"
+                            "endpoint_data" .
                             "api_v1_translate_actions" $api_v1_translate_actions
                             "api_v2_translate_actions" $api_v2_translate_actions
-                        ) 
+                        )
                     }}
 
                     {{ partial "algolia/api-page-index.json" $params }}
@@ -56,19 +61,24 @@
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
             {{ range $endpoint_data }}
-                {{ if in .tags $title }}
+                {{ $tags := slice }}
+                {{ if isset . "tags" }}
+                  {{ $tags = .tags }}
+                {{ end }}
 
-                    {{ 
-                        $params := (dict 
-                            "context" $hugo_context 
-                            "page" $page 
-                            "title" $title 
-                            "lang" $lang 
-                            "api_version" "v2" 
-                            "endpoint_data" . 
+                {{ if in $tags $title }}
+
+                    {{
+                        $params := (dict
+                            "context" $hugo_context
+                            "page" $page
+                            "title" $title
+                            "lang" $lang
+                            "api_version" "v2"
+                            "endpoint_data" .
                             "api_v1_translate_actions" $api_v1_translate_actions
                             "api_v2_translate_actions" $api_v2_translate_actions
-                        ) 
+                        )
                     }}
 
                     {{ partial "algolia/api-page-index.json" $params }}

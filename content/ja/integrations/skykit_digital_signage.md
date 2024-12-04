@@ -12,6 +12,7 @@ author:
   vendor_id: skykit
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -20,12 +21,10 @@ integration_id: skykit-digital-signage-license
 integration_title: Skykit Digital Signage
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: skykit_digital_signage
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -34,7 +33,7 @@ pricing:
   short_description: 10 画面までのライセンス。ボリュームディスカウントあり。
   tag: 画面
   unit_label: 画面
-  unit_price: 40
+  unit_price: 33
 public_title: Skykit Digital Signage
 short_description: Skykit で Datadog のダッシュボードをテレビ画面に表示する
 supported_os:
@@ -69,11 +68,17 @@ tile:
     image_url: images/Datadog_Dashboard_Marketplace_Graphic_04.jpg
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/showcase-datadog-dashboards-securely-with-skykit/
+  - resource_type: documentation
+    url: https://support.skykit.com/docs/getting-started-with-skykit-beam-and-datadog-dashboards
   support: README.md#Support
   title: Skykit Digital Signage
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 ### Skykit とは
@@ -102,6 +107,7 @@ Skykit は、デジタルサイネージとワークプレイスエクスペリ�
 [1]: https://www.skykit.com/products/dashboards/connections/datadog-trial/
 [2]: mailto:sales@skykit.com
 [3]: https://www.datadoghq.com/blog/showcase-datadog-dashboards-securely-with-skykit/
-[4]: https://support.skykit.com/en/articles/324-getting-started-with-skykit-beam-and-datadog-dashboards
+[4]: https://support.skykit.com/docs/getting-started-with-skykit-beam-and-datadog-dashboards
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/skykit-digital-signage-license" target="_blank">こちらをクリック</a>してください。

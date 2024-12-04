@@ -1,6 +1,5 @@
 ---
 title: Infrastructure
-kind: documentation
 aliases:
   - /graphing/infrastructure/
 further_reading:
@@ -11,13 +10,26 @@ further_reading:
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to power up your Infrastructure monitoring'
 cascade:
-    algolia:
-        rank: 70
+- _target:
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: en
+  aliases:
+    - /security/cspm/custom_rules/aws_iam_user/
+- _target:
+    path: /infrastructure/**/*
+    lang: en
+  algolia:
+    rank: 70
 ---
 
-{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  Explore and register for Foundation Enablement sessions. Learn about how Datadog's SaaS-based infrastructure monitoring provides metrics, visualizations, and alerting to ensure your engineering teams can maintain and optimize your cloud or hybrid environments.
+{{< /learning-center-callout >}}
+
 
 ## Overview
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}
 
 Infrastructure monitoring includes core Datadog features that visualize, monitor, and measure the performance of your hosts, containers, and processes.
 

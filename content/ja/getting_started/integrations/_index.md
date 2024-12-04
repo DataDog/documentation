@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/
   tag: ドキュメント
   text: Datadog インテグレーションの一覧を見る
-kind: documentation
 title: インテグレーション入門
 ---
 
@@ -29,6 +28,10 @@ Datadog では、主に次の 3 種類のインテグレーションが提供さ
 ## インテグレーションの設定
 
 Datadog Agent パッケージには、Datadog が公式にサポートしている[インテグレーションコア][11]が含まれています。これらのインテグレーションを使用するには、Datadog Agent をダウンロードします。コミュニティベースのインテグレーションは、[インテグレーションエクストラ][12]にあります。これらのインテグレーションのインストールおよび管理についての詳細は、[インテグレーション管理ガイド][14]をご参照ください。
+
+### 権限
+
+Integration タイルを操作するには `manage_integrations` 権限が必要です。詳細については [RBAC ロール][45]を参照してください。
 
 ### API キーとアプリケーションキー
 
@@ -184,7 +187,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/integrations/new_check_howto/
+[1]: /ja/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /ja/integrations/slack/
 [4]: /ja/integrations/amazon_web_services/
@@ -197,12 +200,12 @@ tagging
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /ja/agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /ja/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /ja/integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /ja/agent/guide/agent-commands/#restart-the-agent
 [22]: /ja/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -227,3 +230,4 @@ tagging
 [42]: /ja/metrics/
 [43]: /ja/metrics/custom_metrics/
 [44]: /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /ja/account_management/rbac/permissions/#integrations

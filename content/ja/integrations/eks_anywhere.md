@@ -3,11 +3,13 @@ app_id: eks-anywhere
 app_uuid: 21bd91d8-7594-4c2f-bbd8-11595e4511d1
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10248
     source_type_name: Amazon EKS Anywhere
 author:
   homepage: https://www.datadoghq.com
@@ -22,6 +24,7 @@ categories:
 - ログの収集
 - orchestration
 - プロビジョニング
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: eks-anywhere
 integration_title: Amazon EKS Anywhere
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: eks_anywhere
-oauth: {}
 public_title: Amazon EKS Anywhere
 short_description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
 supported_os:
@@ -54,14 +55,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/announcing-eks
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/eks-cluster-metrics
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/eks_fargate/
   support: README.md#Support
   title: Amazon EKS Anywhere
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![EKS ダッシュボード][1]
@@ -106,7 +116,7 @@ EKS のモニタリングには、以下の Datadog インテグレーション�
 - [AWS][8]
 - [AWS EC2][9]
 
-### ログの収集
+### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Zebrium Root Cause as a Service Sample Dashboard: assets/dashboards/root_cause_as_a_service_sample_dashboard.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: zebrium.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10272
     source_type_name: zebrium
 author:
   homepage: https://www.zebrium.com
@@ -22,7 +24,8 @@ author:
   support_email: support@zebrium.com
 categories:
 - 自動化
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md
 display_on_public_website: true
@@ -32,10 +35,8 @@ integration_id: zebrium
 integration_title: Zebrium RCaaS
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: zebrium
-oauth: {}
 public_title: Zebrium RCaaS
 short_description: 問題の根本原因をダッシュボード上で直接発見します
 supported_os:
@@ -46,8 +47,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Automation
-  - Category::Notification
-  - Offering::Integration
+  - Category::Notifications
   - Offering::UI Extension
   - Supported OS::Linux
   - Supported OS::Windows
@@ -66,10 +66,14 @@ tile:
     image_url: images/Zebrium_Root_Cause_Finder_With_Side_Panel.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
   support: README.md#Support
   title: Zebrium RCaaS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -116,7 +120,7 @@ Zebrium のイベントメトリクスインテグレーションは、[Datadog 
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## その他の参考資料
+## 参考資料
 
 お役に立つドキュメント、リンクや記事:
 

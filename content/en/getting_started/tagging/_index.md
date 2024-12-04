@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Tags
-kind: documentation
 description: 'Learn how to assign and use tags in Datadog.'
 aliases:
     - /getting_started/getting_started_with_tags
@@ -22,13 +21,15 @@ further_reading:
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session on effective tagging with Datadog"
+algolia:
+  tags: ["tagging"]
 ---
 
 ## Overview
 
 Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
 
-Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. 
+Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys.
 
 | Tag Key   | Allows for                                                            |
 | --------- | --------------------------------------------------------------------- |
@@ -38,6 +39,7 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | `service` | Scoping of application specific data across metrics, traces, and logs. |
 | `env`     | Scoping of application specific data across metrics, traces, and logs. |
 | `version` | Scoping of application specific data across metrics, traces, and logs. |
+| `team`    | Assign ownership to any resources                                     |
 
 Datadog recommends looking at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
@@ -90,7 +92,7 @@ As a best practice, Datadog recommends using unified service tagging when assign
 
 ## Usage
 
-After you have [assigned tags][7] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. 
+After you have [assigned tags][7] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform.
 
 | Area                 | Use Tags to                                                                                      |
 | -------------------- | ------------------------------------------------------------------------------------------------ |
@@ -102,14 +104,16 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 | [Integrations][15]   | Optionally limit metrics for AWS, Google Cloud, and Azure.                                        |
 | [APM][16]            | Filter services, traces, and profiles, or navigate to other areas with the Service Map.           |
 | [RUM & Session Replay][17] | Filter event search, analytics, patterns, replays, and issues with the RUM Explorer.        |
-| [Synthetics][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the CI Results Explorer.   |
+| [Synthetic Monitoring & Continuous Testing][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the Synthetic Monitoring & Testing Results Explorer.   |
 | [Notebooks][19]      | Filter and group metrics on graphs.                                                               |
 | [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines.                                |
 | [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
 | [Developers][22]     | Pull information or setup different areas in the UI with the API.                                 |
 | [Billing][23]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id`. |
+| [CI Visibility][24]  | Filter and group test runs or pipeline executions with the CI Visibility Explorer. |
 
 For more information, see [Using Tags][1].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -137,3 +141,4 @@ For more information, see [Using Tags][1].
 [21]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
+[24]: /getting_started/tagging/using_tags/#ci-visibility

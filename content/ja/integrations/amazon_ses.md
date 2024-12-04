@@ -5,24 +5,29 @@ categories:
 - aws
 - cloud
 - log collection
+custom_kind: インテグレーション
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ses/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/email-performance-integrations/
+  tag: ブログ
+  text: 'インテグレーションまとめ: Datadog を使ってメールパフォーマンスを把握する'
 git_integration_title: amazon_ses
 has_logo: true
-integration_id: amazon-ses
+integration_id: ''
 integration_title: Amazon Simple Email Service (SES)
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ses
-public_title: Datadog-Amazon Simple Email Service (SES) インテグレーション
+public_title: Datadog と Amazon Simple Email Service (SES) のインテグレーション
 short_description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Simple Email Service (SES) は、費用効率の高いアウトバウンド専用のメール送信サービスです。
@@ -47,7 +52,7 @@ Amazon Simple Email Service (SES) は、費用効率の高いアウトバウン�
 
 3. [Datadog - Amazon Simple Email Service (SES) インテグレーション][5]をインストールします。
 
-### ログの収集
+### ログ収集
 
 #### ログの有効化
 
@@ -75,7 +80,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 Amazon Simple Email Service (SES) インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon Simple Email Service (SES) インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -83,13 +88,17 @@ Amazon Simple Email Service (SES) インテグレーションには、サービ�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/ses/latest/dg/control-user-access.html
 [5]: https://app.datadoghq.com/integrations/amazon-ses
 [6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ses/amazon_ses_metadata.csv
 [10]: https://docs.datadoghq.com/ja/help/

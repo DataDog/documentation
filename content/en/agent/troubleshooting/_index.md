@@ -1,6 +1,5 @@
 ---
 title: Agent Troubleshooting
-kind: documentation
 aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
     - /agent/faq/common-windows-agent-installation-error-1721
@@ -54,11 +53,11 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /agent/troubleshooting/hostname_containers/
-[4]: /agent/proxy/
+[4]: /agent/configuration/proxy/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /agent/troubleshooting/site/
-[7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: /agent/guide/agent-log-files/
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
+[8]: /agent/configuration/agent-log-files/
 [9]: /agent/troubleshooting/debug_mode/
 [10]: /help/
 [11]: /agent/troubleshooting/send_a_flare/

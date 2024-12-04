@@ -7,19 +7,18 @@ aliases:
 - /ja/agent/kubernetes/dogstatsd
 description: データタイプ、タグ付けなど、DogStatsD の機能の概要
 further_reading:
+- link: integrations/node
+  tag: ドキュメント
+  text: Node.js インテグレーションを利用して Node.js 用の DogStatsD を有効にします
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD 入門
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD ソースコード
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: ブログ
   text: Datadog で Azure App Service 上の Linux Web アプリを監視する
-kind: documentation
 title: DogStatsD
 ---
 
@@ -42,7 +41,7 @@ DogStatsD は、Docker Hub と GCR で利用できます。
 
 <div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
-## UDS の仕組み
+## 仕組み
 
 DogStatsD は、UDP 経由で[カスタムメトリクス][5]、[イベント][6]、および[サービスチェック][7]を受け入れ、それらを定期的に集計して Datadog に転送します。
 
@@ -56,7 +55,7 @@ DogStatsD は、データを受け取ると共に、_フラッシュ間隔_と�
 
 DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有効になっています。このポートを変更する必要がない場合は、[コードで DogStatsD をセットアップする](#code)方法を直接参照してください。
 
-### エージェント
+### Agent
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -81,9 +80,9 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 2. [Agent を再起動します][3]。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /ja/developers/dogstatsd/unix_socket/
-[3]: /ja/agent/guide/agent-commands/
+[3]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "コンテナ Agent" %}}
 
@@ -114,42 +113,46 @@ Kubernetes 以外の環境での発信点検出は、[Datagram Format and Shell 
 [1]: /ja/developers/dogstatsd/unix_socket/
 [2]: /ja/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Datadog Operator" %}}
 
-StatsD メトリクスの収集を開始するには、DogStatsD ポートをホストポートにバインドする必要があります。[Unix ドメインソケット][1]を使用するように DogStatsD を構成することもできます。
+StatsD メトリクス収集は、デフォルトで [Unix ドメインソケット][1]で有効になっています。UDP 経由で StatsD メトリクスの収集を開始するには、Operator 設定で DogStatsD 機能を有効にする必要があります。
 
-1. `hostPort` を `datadog-agent.yaml` マニフェストに追加します。
-
-    ```yaml
-    ports:
-        - containerPort: 8125
-          hostPort: 8125
-          name: dogstatsdport
-          protocol: UDP
-    ```
-
-   これによりアプリケーションは、実行中のノードのポート `8125` で DogStatsD でメトリクスを送信できるようになります。
-
-   **注**: `hostPort` 機能には、Calico、Canal、Flannel などの [CNI 仕様][2]に準拠したネットワークプロバイダーが必要です。非 CNI ネットワークプロバイダーの回避策を含む詳細については、Kubernetes のドキュメントを参照してください: [HostPort サービスが機能しない][3]。
-
-   **注**: Operator をデプロイする場合は、`agent.config.hostPort` でホストポートを構成してください。
-
-2. DogStatsD 非ローカルトラフィックを有効にして StatsD データ収集を許可し、`datadog-agent.yaml` マニフェストで `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定します。
+1. `features.dogstatsd.hostPortConfig.enabled` を `datadog-agent.yaml` マニフェストに追加します。
 
     ```yaml
-    - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-      value: 'true'
+    features:
+        dogstatsd:
+            hostPortConfig:
+                enabled: true
     ```
 
-   これにより、Agent を実行しているコンテナ以外のコンテナから StatsD データを収集できます。
+   これは `datadog-agent.yaml` マニフェストの例です。
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        dogstatsd:
+          hostPortConfig:
+            enabled: true
+    ```
 
-3. 変更を適用します。
+   これにより Agent は、ポート `8125` の UDP 経由で StatsD メトリクスを収集できるようになります。
+
+2. 変更を適用します。
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-**警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
+**警告**: `features.dogstatsd.hostPortConfig.hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
 
 ### StatsD メトリクスを Agent に送信する
 
@@ -171,12 +174,19 @@ env:
 
 発信点検出は Agent 6.10.0+ でサポートされており、これにより、DogStatsD はコンテナメトリクスとタグメトリクスがどこから発信されたかを自動的に検出します。このモードが有効な場合は、UDP で受信されたすべてのメトリクスがオートディスカバリーメトリクスと同じポッドタグに基づいてタグ付けされます。
 
+1. 送信元検出を有効にするには、`global.originDetectionUnified.enabled`設定を `datadog-agent.yaml` マニフェストに追加します。
+
+    ```yaml
+    global:
+        originDetectionUnified:
+            enabled: true
+    ```
+
 **注**: 
-
-* UDP による発信点検出では、ポッド ID をエンティティ ID として使用するため、コンテナレベルのタグは発行されません。
 * UDP 以外には [Unix ドメインソケット][5]があります。
+* UDP による送信元検出では、エンティティ ID としてポッド ID を使うことができます。
 
-UDP 経由の発信点検出を有効にするには、アプリケーションマニフェストに次の行を追加します。
+エンティティ ID としてポッド ID を使用するには、アプリケーションマニフェストに次の行を追加します。
 
 ```yaml
 env:
@@ -186,7 +196,7 @@ env:
               fieldPath: metadata.uid
 ```
 
-発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][6]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト) または `orchestrator` を使用します。
+送信元検出を使用して収集されたメトリクスに[タグのカーディナリティ][6]を設定するには、`features.dogstatsd.tagCardinality` の設定を `low` (デフォルト)、`orchestrator`、`high` のいずれかに設定します。
 
 **注:** UDP の場合、`pod_name` タグは、[カスタムメトリクス][7]が多くなりすぎないように、デフォルトで追加されていません。
 
@@ -307,8 +317,11 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 
 {{< programming-lang lang=".NET" >}}
 
-- [NuGet からパッケージ][1]を取得してインストールします。
+Nuget CLI を使用してパッケージを直接インストールするか、[NuGet から PackageReference][1] を取得します。
 
+```shell
+dotnet add package DogStatsD-CSharp-Client
+```
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
@@ -531,12 +544,12 @@ v2.10.0 以降では、NonBlockingStatsDClientBuilder を使ってクライア�
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| パラメーター     | タイプ            | デフォルト     | 説明                                                                                                                                                         |
-| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`        | 文字列          | `localhost` | DogStatsD サーバーのホスト。これが設定されていない場合、Agent は `DD_AGENT_HOST` 環境変数を調べます。                                                  |
-| `port`        | 整数         | `8125`      | DogStatsD サーバーのポート。これが設定されていない場合、Agent は `DD_DOGSTATSD_PORT` 環境変数を調べます。                                             |
-| `socket_path` | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス（`host` と `port` をオーバーライドします）。Agent v6 以上でのみサポートされます。                                                  |
-| `global_tags` | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。`@dd.internal.entity_id` タグは、`DD_ENTITY_ID` 環境変数から global_tags に追加されます。 |
+| パラメーター     | タイプ            | デフォルト     | 説明                                                                                                                                                                                            |
+| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `host`        | 文字列          | `localhost` | DogStatsD サーバーのホスト。これが設定されていない場合、Agent は `DD_AGENT_HOST` または `DD_DOGSTATSD_URL` 環境変数を調べます。                                                               |
+| `port`        | 整数         | `8125`      | DogStatsD サーバーのポート。これが設定されていない場合、Agent は `DD_DOGSTATSD_PORT` または `DD_DOGSTATSD_URL` 環境変数を調べます。                                                          |
+| `socket_path` | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス (`host` と `port` をオーバーライドします)。Agent v6 以上でのみサポートされます。これが設定されていない場合、Agent は `DD_DOGSTATSD_URL` 環境変数を調べます。 |
+| `global_tags` | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。`@dd.internal.entity_id` タグは、`DD_ENTITY_ID` 環境変数から global_tags に追加されます。                                    |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -557,13 +570,13 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
 
 {{< whatsnext desc="">}}
     {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
-    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][9]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -572,7 +585,7 @@ DogStatsD が使用するデータグラム形式についてさらに理解を�
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /ja/metrics/custom_metrics/
-[6]: /ja/events/guides/dogstatsd/
+[6]: /ja/service_management/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /ja/getting_started/tagging/unified_service_tagging
 [9]: /ja/developers/dogstatsd/datagram_shell/

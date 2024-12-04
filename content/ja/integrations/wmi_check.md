@@ -3,12 +3,14 @@ app_id: wmi
 app_uuid: ddd1578f-d511-4d57-b5dd-33c0ea7c391e
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 115
     source_type_name: WMI
 author:
   homepage: https://www.datadoghq.com
@@ -16,49 +18,50 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: wmi_check
 integration_id: wmi
-integration_title: WMI チェック
-integration_version: 1.15.1
+integration_title: WMI Check (レガシー)
+integration_version: 1.18.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: wmi_check
-oauth: {}
-public_title: WMI チェック
+public_title: WMI Check (レガシー)
 short_description: WMI メトリクスを収集してグラフを作成。
 supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::OS とシステム
+  - Category::Windows
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: WMI メトリクスを収集してグラフを作成。
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: WMI チェック
+  title: WMI Check (レガシー)
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![WMI メトリクス][1]
 
 ## 概要
 
+**注:** Datadog は、このインテグレーションのサポートおよび使用を推奨していません。すべてのケースにおいて、より低いオーバーヘッドと優れたスケーラビリティを提供する [Windows パフォーマンス カウンターのインテグレーション][2]を使用することを推奨します。
+
 WMI (Windows Management Instrumentation) で Windows アプリケーションからメトリクスをリアルタイムに取得して、以下のことができます。
 
 - アプリケーションのパフォーマンスを視覚化できます。
 - アプリケーションのアクティビティを他のアプリケーションと関連付けることができます。
-
-**注:** オーバーヘッドが大幅に少なく、したがってスケーラビリティに優れるため、どの場合も代わりに [Windows パフォーマンスカウンターチェック][2]を使用することをお勧めします。
 
 ## セットアップ
 
@@ -76,7 +79,7 @@ System.Diagnostics の使い方については、[PerformanceCounter クラス][
 
 メトリクスが WMI に表示されない場合は、`winmgmt /resyncperf` を実行して、WMI に強制的にパフォーマンスライブラリを登録してみてください。
 
-### コンフィギュレーション
+### 構成
 
 1. WMI インテグレーションタイルの **Install Integration** ボタンをクリックします。
 2. Windows サーバーで Datadog Agent Manager を開きます。
@@ -234,7 +237,7 @@ WMI チェックにより収集されたすべてのメトリクスは、[カス
 
 WMI チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 WMI チェックには、サービスのチェック機能は含まれません。
 

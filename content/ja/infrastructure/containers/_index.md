@@ -13,13 +13,15 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: システムのあらゆるレベルの事象の把握
+- link: https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/
+  tag: ブログ
+  text: Kubernetes における CPU リクエストと制限の深掘り
 - link: https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/
   tag: ブログ
   text: Kubernetes Anomalies でインフラストラクチャー調査の迅速化
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: ブログ
   text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
-kind: documentation
 title: コンテナビュー
 ---
 
@@ -29,7 +31,7 @@ htop、ctop、kubectl などの基盤ツールを手本として、Containers �
 
 Containers ページは、[Docker][2]、[Kubernetes][3]、[ECS][4] などのコンテナ技術と連動し、動的コンポーネントのタグ付けも組み込まれて、コンテナの健全性、リソース消費、ログ、デプロイなどの詳細な全体像をリアルタイムに提供します。
 
-{{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="ライブコンテナでサマリーを確認" >}}
+{{< img src="infrastructure/livecontainers/live-containers-overview_2.png" alt="ライブコンテナでサマリーを確認" >}}
 
 ## セットアップ
 
@@ -110,7 +112,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### コンフィギュレーション
+### 構成
 コンテナのフィルタリングや機密情報のスクラビングなどの構成オプションについては、[コンテナビューの構成][16]を参照してください。古いバージョンの Agent 用 (Datadog Agent v7.21.1 から v7.27.0 および Cluster Agent v1.9.0 から 1.11.0) にこのページをセットアップするには、[ライブコンテナのレガシー構成][17]を参照してください。
 
 ## Kubernetes オーケストレータエクスプローラー
@@ -230,7 +232,7 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 * RBAC 設定によって Kubernetes のメタデータ収集を制限できます。[Datadog Agent の RBAC エンティティ][14]を参照してください。
 * Kubernetes の `health` 値は、コンテナの readiness プローブです。liveness プローブではありません。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -251,6 +253,6 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [16]: /ja/infrastructure/containers/configuration
 [17]: /ja/infrastructure/faq/live-containers-legacy-configuration
-[18]: https://app.datadoghq.com/orchestration/overview/
+[18]: https://app.datadoghq.com/orchestration/overview
 [19]: /ja/infrastructure/containers/orchestrator_explorer/
 [20]: /ja/infrastructure/containers/kubernetes_resources

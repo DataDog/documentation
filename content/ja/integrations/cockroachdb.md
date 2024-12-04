@@ -5,6 +5,7 @@ assets:
   dashboards:
     CockroachDB Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,8 @@ assets:
     - cockroach
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10036
     source_type_name: CockroachDB
-  logs:
-    source: cockroachdb
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,8 +28,9 @@ author:
 categories:
 - キャッシュ
 - クラウド
-- data store
+- data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md
 display_on_public_website: true
@@ -37,12 +38,10 @@ draft: false
 git_integration_title: cockroachdb
 integration_id: cockroachdb
 integration_title: CockroachDB
-integration_version: 2.7.1
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cockroachdb
-oauth: {}
 public_title: CockroachDB
 short_description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
 supported_os:
@@ -54,19 +53,26 @@ tile:
   classifier_tags:
   - Category::Caching
   - Category::Cloud
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog
   support: README.md#Support
   title: CockroachDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -80,14 +86,18 @@ CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健
 CockroachDB チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+バージョン 1.9.0 から、この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。なお、最新モードには Python 3 が必要です。詳細は [OpenMetrics ベースのインテグレーションにおける最新バージョンとレガシーバージョン][3]を参照してください。
+
+Python 3 を使えないホストやレガシーモードを使うホストについては、以下の[構成][4]を参照してください。
+
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -105,9 +115,7 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 
 2. [Agent を再起動します][3]。
 
-**注**: 現在のバージョンのチェック (1.9.0+) は、メトリクスの収集に [OpenMetrics][4] の新しい実装を使用しており、これは Python 3 を必要とします。Python 3 を使用できないホスト、またはこのチェックのレガシーバージョンを使用する場合は、次の[構成][5]を参照してください。
-
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -138,10 +146,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [2]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/integrations/openmetrics/
-[5]: https://github.com/DataDog/integrations-core/blob/7.33.x/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -149,11 +155,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                    |
 | -------------------- | -------------------------------------------------------- |
-| `<インテグレーション名>` | `cockroachdb`                                            |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                            |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint":"http://%%host%%:8080/_status/vars"}` |
+| `<INTEGRATION_NAME>` | `cockroachdb`                                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                                            |
+| `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint":"http://%%host%%:8080/_status/vars"}` |
 
-##### ログの収集
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -170,7 +176,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_N
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cockroachdb` を探します。
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `cockroachdb` を探します。
 
 ## 収集データ
 
@@ -178,7 +184,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_N
 {{< get-metrics-from-git "cockroachdb" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 CockroachDB チェックには、サービスのチェック機能は含まれません。
 
@@ -188,17 +194,19 @@ CockroachDB チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した CockroachDB パフォーマンスメトリクスの監視][5]
+- [Datadog を使用した CockroachDB パフォーマンスメトリクスの監視][7]
 
 
 [1]: https://www.cockroachlabs.com/product/cockroachdb
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
+[4]: https://github.com/DataDog/integrations-core/blob/7.33.x/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog

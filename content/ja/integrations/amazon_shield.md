@@ -3,17 +3,17 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS Shield のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_shield/
 draft: false
 git_integration_title: amazon_shield
 has_logo: true
-integration_id: amazon-shield
+integration_id: ''
 integration_title: AWS Shield
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_shield
 public_title: Datadog-AWS Shield インテグレーション
@@ -21,6 +21,7 @@ short_description: AWS Shield のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 DDoS 攻撃に対する保護のため、AWS は Shield Standard と Shield Advanced を提供しています。
@@ -38,7 +39,7 @@ DDoS 攻撃に対する保護のため、AWS は Shield Standard と Shield Adva
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DDoSProtection` が有効になっていることを確認します。
 2. [Datadog - AWS Shield インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -64,7 +65,7 @@ AWS Shield から S3 バケットまたは CloudWatch のいずれかにログ�
 
 AWS Shield インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Shield インテグレーションには、サービスのチェック機能は含まれません。
 

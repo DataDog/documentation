@@ -23,7 +23,12 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: 로그 수집 문제 해결 가이드
-kind: 설명서
+- link: /glossary/#tail
+  tag: 용어
+  text: '"tail"에 대한 용어 항목'
+- link: https://github.com/DataDog/serilog-sinks-datadog-logs/
+  tag: Github 패키지
+  text: Serilog.Sinks.Datadog.Logs Package
 title: C# 로그 수집
 ---
 
@@ -33,13 +38,16 @@ C# 로그를 Datadog으로 보내려면 다음 방법 중 하나를 이용하세
 - [에이전트 없는 로깅을 활성화]합니다(#agentless-logging-with-apm).
 - [Serilog 싱크를 사용합니다](#agentless-logging-with-serilog-sink).
 
-이 페이지에서는 위의 각 방법에 따른 `Serilog`, `NLog`, `log4net`, `Microsoft.Extensions.Logging` 로깅 라이브러리용 설정 예시를 자세히 설명합니다.
-
 ## Datadog 에이전트를 이용한 파일-테일 로깅
 
-C# 로그 수집에 권장되는 접근 방식은 로그를 파일로 출력한 다음 Datadog 에이전트로 해당 파일을 추적하는 것입니다. 이렇게 하면 Datadog 에이전트가 추가 메타데이터로 로그를 보강할 수 있습니다.
+C# 로그 수집에 권장되는 접근 방식은 로그를 파일로 출력한 다음 Datadog 에이전트로 해당 파일을 [추적][20]하는 것입니다. 이렇게 하면 Datadog 에이전트가 추가 메타데이터로 로그를 보강할 수 있습니다.
 
 Datadog에서는 [커스텀 파싱 규칙][1]이 필요하지 않도록 로깅 라이브러리를 설정하여 로그를 JSON 형식으로 생성하는 것을 권장합니다.
+
+다음 프레임워크에서 파일 테일 로깅을 지원합니다.
+- Serilog
+- NLog
+- log4net
 
 ### 로거 설정
 
@@ -123,14 +131,14 @@ PM> Install-Package NLog
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!--
-  https://github.com/nlog/nlog/wiki/Configuration-file
-  에서 로깅 규칙 및 출력 사용자 지정에 대한 정보를 확인하세요.
+로깅 규칙 및 출력 사용자 정의에 대한 자세한 내용은 
+https://github.com/nlog/nlog/wiki/Configuration-file을 참조하세요.
    -->
   <targets async="true">
-    <!-- Write logs as Json into a file -->
+    <!-- 로그를 Json으로 파일에 쓰기 -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -139,7 +147,7 @@ PM> Install-Package NLog
 
   </targets>
   <rules>
-    <!-- Log all events to the json-file target -->
+    <!-- 모든 이벤트를 json-file 대상에 기록 -->
     <logger name="*" writeTo="json-file" minlevel="Trace" />
   </rules>
 </nlog>
@@ -179,7 +187,7 @@ PM> Install-Package log4net
 PM> Install-Package log4net.Ext.Json
 ```
 
-라이브러리가 설치되면 다음 레이아웃을 대상에 첨부합니다. 프로젝트의 `App.config`를 편집하고 다음 섹션을 추가하세요:
+라이브러리가 설치되면 다음 레이아웃을 대상에 첨부합니다. 프로젝트의 `App.config`를 편집하고 다음 섹션을 추가하세요:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -280,8 +288,8 @@ JSON 형식으로 로깅할 때의 장점에도 불구하고 원시 문자열 �
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -290,9 +298,9 @@ JSON 형식으로 로깅할 때의 장점에도 불구하고 원시 문자열 �
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-
-3. [에이전트를 재시작합니다][5].
-4. [에이전트 상태 하위 명령][6]을 실행해 `Checks` 섹션에서 `csharp`를 찾아 로그가 Datadog로 잘 전송되었는지 확인합니다.
+3. Agent 사용자에게 로그 파일에 대한 읽기 액세스 권한이 있는지 확인하세요.
+4. [에이전트를 재시작하세요][5].
+5. [에이전트 상태 하위 명령][6]을 실행해 `Checks` 섹션에서 `csharp`를 찾아 로그가 Datadog로 잘 전송되었는지 확인합니다.
 
 로그가 JSON 형식이면 Datadog에서 자동으로 [로그 메시지 구문 분석][7]을 실행해 로그 특성을 추출합니다. [로그 익스플로러][8]를 사용해 로그를 확인하고 문제를 해결할 수 있습니다.
 
@@ -454,10 +462,13 @@ Tracer 버전 2.7.0에서 에이전트리스 로깅을 사용할 때 기본적�
 
 ## Serilog 싱크를 이용해 에이전트리스 로깅
 
+<div class="alert alert-info"><code>0.2.0</code> 버전부터 <code>appsettings.json</code> 파일과  <a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a> 패키지를 사용해  Datadog 싱크를 구현할 수 있습니다.
+자세한 정보는 <a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a> 패키지를 참고하세요.</div>
+
 파일 테일 로깅이나 APM 에이전트리스 로깅을 사용할 수 없으나 `Serilog` 프레임워크를 사용한다면, Datadog [Serilog 싱크][19]를 이용해 로그를  Datadog으로  바로 전송할 수 있습니다.
 
-애플리케이션에 Datadog [Serilog 싱크][19]를 설치하면 이벤트와 로그가 Datadog으로 전송됩니다. 기본적으로 싱크는포트 443의 HTTPS를 통해 로그를 전달합니다.
-패키지 매니저 콘솔에서 다음 명령을 실행하세요:
+애플리케이션에 [Datadog Serilog 싱크][19]를 설치하면 이벤트와 로그가 Datadog으로 전송됩니다. 기본적으로 싱크는 포트 443의 HTTPS를 통해 로그를 전달합니다.
+패키지 매니저 콘솔에서 다음 명령을 실행하세요.
 
 ```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
@@ -465,83 +476,14 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 그런 다음 애플리케이션에서 바로 로거를 초기화합니다. [`<API_KEY>`를 추가][15]했는지 확인하세요.
 
-{{< site-region region="us" >}}
-
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint" code="true" >}}" })
     .CreateLogger())
 {
     // Some code
 }
 ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us5.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ddog-gov.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
 
 {{< site-region region="us" >}}
 
@@ -571,7 +513,7 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-다음 필수 속성을 수동으로 지정하여 기본 동작을 재정의하고 TCP에서 로그를 전달할 수도 있습니다: `url`, `port`, `useSSL`, `useTCP`. 선택적으로, [`source`, `service`, `host`, 커스텀 태그를 지정합니다.][1]
+다음 필수 속성을 수동으로 지정하여 기본 동작을 재정의하고 TCP에서 로그를 전달할 수도 있습니다: `port`, `useSSL`, `useTCP`. 선택적으로, [`source`, `service`, `host`, 커스텀 태그를 지정합니다.][1]
 
 예를 들어 TCP의 Datadog US 영역에 로그를 전달하려면 다음 싱크 설정을 사용합니다:
 
@@ -597,33 +539,6 @@ using (var log = new LoggerConfiguration()
 
 이제 새 로그가 Datadog으로 바로 전송됩니다.
 
-또는 `0.2.0`부터 `Serilog.Setting.Configuration` 패키지와 `appsettings.json` 파일을 사용해 Datadog 싱크를 설정할 수 있습니다.
-
-`Serilog.WriteTo` 배열에서 `DatadogLogs` 항목을 추가합니다. 다음 예시를 참고하세요.
-
-```json
-"Serilog": {
-  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
-  "MinimumLevel": "Debug",
-  "WriteTo": [
-    { "Name": "Console" },
-    {
-      "Name": "DatadogLogs",
-      "Args": {
-        "apiKey": "<API_KEY>",
-        "source": "<SOURCE_NAME>",
-        "host": "<HOST_NAME>",
-        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
-      }
-    }
-  ],
-  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
-  "Properties": {
-    "Application": "Sample"
-  }
-}
-```
-
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -631,9 +546,9 @@ using (var log = new LoggerConfiguration()
 [1]: /ko/logs/log_configuration/parsing
 [2]: /ko/agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /ko/agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /ko/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /ko/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /ko/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ko/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /ko/logs/log_configuration/parsing/?tab=matchers
 [8]: /ko/logs/explorer/#overview
 [9]: /ko/tracing/other_telemetry/connect_logs_and_traces/dotnet/
@@ -647,3 +562,4 @@ using (var log = new LoggerConfiguration()
 [17]: /ko/logs/log_configuration/pipelines/?tab=source
 [18]: /ko/api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[20]: /ko/glossary/#tail

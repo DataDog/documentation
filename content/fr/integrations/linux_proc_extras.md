@@ -28,12 +28,11 @@ draft: false
 git_integration_title: linux_proc_extras
 integration_id: system
 integration_title: Linux Proc Extras
-integration_version: 2.3.1
+integration_version: 2.5.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: linux_proc_extras
-oauth: {}
 public_title: Linux Proc Extras
 short_description: Visualiser et surveiller les états de linux_proc_extras.
 supported_os:
@@ -51,6 +50,7 @@ tile:
   title: Linux Proc Extras
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
@@ -60,13 +60,13 @@ Recueillez des métriques du service linux_proc_extras en temps réel pour :
 - Visualiser et surveiller les états de linux_proc_extras
 - Être informé des failovers et des événements de linux_proc_extras.
 
-## Configuration
+## Formule et utilisation
 
 ### Installation
 
 Le check Linux_proc_extras est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `linux_proc_extras.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple linux_proc_extras.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
@@ -76,17 +76,17 @@ Le check Linux_proc_extras est inclus avec le package de l'[Agent Datadog][1] :
 
 [Lancez la sous-commande status de l'Agent][5] et cherchez `linux_proc_extras` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "linux_proc_extras" >}}
 
 
-### Événements
+### Aide
 
 Le check Linux Proc Extras n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 Le check Linux Proc Extras n'inclut aucun check de service.
 

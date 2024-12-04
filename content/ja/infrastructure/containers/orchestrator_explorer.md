@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: オーケストレータエクスプローラー
 ---
 
@@ -9,7 +8,7 @@ title: オーケストレータエクスプローラー
 
 Datadog Agent と Cluster Agent は、[オーケストレータエクスプローラー][1]用に Kubernetes リソースを取得できます。この機能により、特定のネームスペースまたはアベイラビリティーゾーンのポッド、デプロイメント、その他の Kubernetes の概念の状態を監視したり、デプロイメント内で失敗したポッドのリソース仕様を確認したり、ノードアクティビティを関係するログに関連付けたりすることが可能になります。
 
-オーケストレータエクスプローラーでは、**Agent バージョン >= 7.27.0** および **Cluster Agent バージョン >= 1.11.0** が必要です。
+Orchestrator Explorer requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
 
 **注**: Kubernetes バージョン 1.25 以上の場合、必要な最小限の Cluster Agent のバージョンは 7.40.0 です。
 
@@ -20,7 +19,7 @@ Datadog Agent と Cluster Agent は、[オーケストレータエクスプロ�
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Datadog Operator では、オーケストレータエクスプローラーがデフォルトで有効になります。
+The Orchestrator Explorer is enabled in the Datadog Operator by default.
 
 検証のため、`datadog-agent.yaml` で`features.orchestratorExplorer.enabled` パラメーターが `true` に設定されていることを確認してください。
 
@@ -42,9 +41,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-[公式の Helm チャート][3]を利用している場合は、オーケストレータエクスプローラーがデフォルトで有効になります。
+If you are using the [official Helm chart][3], Orchestrator Explorer is enabled by default.
 
-検証のため、 [`values.yaml`][4] ファイルで `orchestratorExplorer.enabled` パラメーターが `true` に設定されていることを確認してください。
+For verification, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your [`values.yaml`][4] file:
 
 ```yaml
 datadog:
@@ -60,8 +59,8 @@ datadog:
 [3]: https://github.com/DataDog/helm-charts
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
-{{% tab "手動" %}}
-手動セットアップについては、[DaemonSet を使用してオーケストレータエクスプローラーをセットアップする][5]を参照してください。
+{{% tab "Manual" %}}
+For manual setup, see [Set up Orchestrator Explorer with DaemonSet][5].
 
 [5]: /ja/infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
@@ -75,11 +74,13 @@ datadog:
 
 それぞれのビューには、ステータス、名前、Kubernetes ラベルなどのフィールドごとにデータをよりよく整理するために役立つデータテーブルと、ポッドと Kubernetes クラスターの全体像を把握するための詳細なクラスターマップが含まれています。
 
+**See [Query filter details](#query-filter-details) for more details on how to filter these views.**
+
 {{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="オーケストレータエクスプローラーが開かれ、サマリーモードで Workloads > Replica Sets が表示されている様子" style="width:80%;">}}
 
-### 機能およびファセットごとにグループ化
+#### 機能およびファセットごとにグループ化
 
-タグや Kubernetes ラベルでポッドをグループ化することで集計ビューを表示し、情報をすばやく見つけることができます。グループ化を行うには、ページ右上の "Group by" バーを使用するか、下図のように特定のタグやラベルをクリックしてコンテキストメニューから "Group by" 機能を選択します。
+Group pods by tags, Kubernetes labels, or Kubernetes annotations to get an aggregated view which allows you to find information quicker. You can perform a group by using the "Group by" bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
 
 {{< img src="infrastructure/livecontainers/orch_ex_groupby.png" alt="チームごとにグループ化した例" style="width:80%;">}}
 
@@ -89,11 +90,9 @@ datadog:
 
 ### クラスターマップ
 
-クラスターマップは、ポッドと Kubernetes クラスターの全体像を示します。カスタマイズされたグループとフィルターを使用して、すべてのリソースを 1 つの画面にまとめて表示し、どのメトリクスを使ってポッドに色を付けるかを選択することができます。
+A cluster map gives you a bigger picture of your pods and Kubernetes clusters. You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the nodes.
 
 サークルまたはグループをクリックして詳細パネルを表示し、クラスターマップからリソースを調べます。
-
-カスタマイズされたグループやフィルターを使って、すべてのリソースを 1 つの画面にまとめて表示し、どのメトリクスを使ってポッドに色を付けるかを選択することができます。
 
 {{< img src="infrastructure/livecontainers/cluster-map.mp4" alt="カスタマイズしたグループとフィルターのクラスターマップ" video=true style="width:80%;">}}
 
@@ -103,11 +102,18 @@ datadog:
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="プロセスに対して開かれた、サイドパネルのリソースビュー。" style="width:80%;">}}
 
-サイドパネルの **YAML** タブには、リソースの完全な定義が表示されます。**Agent バージョン 7.44.0** 以降は、定義の履歴も 7 日分表示されるため、時間の経過とともに各バージョンでどのような変更が行われたのかを比較することができます。
+The side panel's **YAML** tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history. You can compare what changed over time and across different versions. The time indicated is approximately when the changes were applied to the resource.
 
-{{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="yaml の履歴機能が表示されたサイドパネルのリソースビュー" style="width:80%;">}}
+To prevent displaying a large number of irrelevant changes, updates affecting only the following fields are ignored:
 
-その他のタブには、選択したリソースのトラブルシューティングに利用できる詳しい情報が表示されます。
+* metadata.resourceVersion
+* metadata.managedFields
+* metadata.generation
+* status
+
+{{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="A view of resources in the side panel, showing the yaml history feature" style="width:80%;">}}
+
+The other tabs show more information for troubleshooting the selected resource:
 
 * [**Logs**][9]: コンテナまたはリソースからログを確認。関連ログを Logs Explorer で表示するには、ログをクリックします。
 * [**APM**][11]: コンテナまたはリソースのトレース (日付、サービス、期間、メソッド、トレースのステータスコードを含む) を確認。
@@ -123,28 +129,234 @@ datadog:
 
 ### リソース使用状況
 
-**Cluster Map** ボタンの右側にある **Resource Utilization** をクリックします。
+_Resource Utilization ページについては、[Resource Utilization][13] を参照してください_。
 
-{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="コンテナリソース使用状況" style="width:80%;">}}
+Within the Kubernetes Explorer tab, you can explore a selection of resource utilization metrics.
 
-このビューは、CPU とメモリの使用量を時系列で表示します。この情報は、リソースのプロビジョニングが過剰または不足している場所を検出するのに役立ちます。
+{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
-表中の任意の行をクリックすると、サイドパネルに特定のリソースの情報が表示されます。
+これらの列はすべてソートをサポートしており、リソース使用率に基づいて個々のワークロードを特定するのに役立ちます。
 
-{{< img src="infrastructure/livecontainers/resource_utilization_panel.png" alt="コンテナリソース使用状況サイドパネル詳細" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="コンテナリソース使用率のソートされた列" style="width:50%;">}}
 
-上のスクリーンショットでは、ポッドはクラスタ名でグループ化されています。サイドパネルは、特定のクラスター内のポッドに対して開かれます。これらのポッドの平均 CPU およびメモリ使用量が表示されます。
+## Query filter details
+
+You can narrow down the displayed resources by supplying a query within the "Filter by" search bar on the top left of the page.
+
+### 構文
+
+A query filter is composed of terms and operators. Example:
+
+{{< img src="infrastructure/livecontainers/orch_syntax.png" alt="Orchestrator Explorer query filter syntax." style="width:80%;">}}
+
+#### 利用規約
+
+There are multiple types of terms available:
+
+| タイプ | 例 |
+|---|---|
+| **Tags**: Attached to resources by [the agent collecting them][20]. There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
+| **Labels**: Extracted from [a resource's metadata][25]. They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
+| **Annotations**: Extracted from [a resource's metadata][26]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
+| **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
+| **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
+| **Fields**: Extracted from [a resource's metadata][27]. | `field#metadata.creationTimestamp:>=4wk`<br>`field#metadata.deletionTimestamp:<=1hr` |
+
+>  ***Note**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
+
+The following resource attributes are supported in arbitrary **String Matching**:
+- `metadata.name`
+- `metadata.uid`
+- IP Addresses found in:
+  - ポッド
+  - Nodes (internal and external)
+  - Services (cluster, external, and load balancer IPs)
+
+You do not need to specify a key to search for a resource by name, or IP. Quotes are not required unless your string search includes certain special characters.
+
+#### Comparators
+
+All terms support the `:` equality operator. [Metric value](#resource-utilization-filters) terms support numeric comparisons as well:
+
+- `:>` Greater than (for example, `metric#cpu_usage_avg15:>0.9`)
+- `:>=` Greater than or equal
+- `:<` Less than
+- `:<=` Less than or equal
+
+#### 演算子
+
+To combine multiple terms into a complex query, you can use any of the following case sensitive boolean operators:
+
+| 演算子 | 説明 | 例 |
+|---|---|---|
+| `AND` | **Intersection**: Both terms are in the selected events (if nothing is added, AND is taken by default) | `a AND b`   |
+| `OR` | **Union**: Either term is contained in the selected events                                             | `a OR b`   |
+| `NOT` / `-` | **Exclusion**: The following term is NOT in the event (apply to each individual raw text search) | `a AND NOT b` or<br>`a AND -b` |
+|  `( )` | **Grouping:** Specify how to group terms logically. | `a AND (b OR c)` or<br>`(a AND b) or c` |
+
+##### `OR` value shorthand
+
+Multiple terms sharing the same key can be combined into a single term if they all use the `OR` operator. For example, this query:
+
+```
+app_name:web-server OR app_name:database OR app_name:event-consumer
+```
+
+Can be reduced to:
+
+```
+app_name:(web-server OR database OR event-consumer)
+```
+
+### ワイルドカード
+
+You can use `*` wildcards as part of a term to filter by partial matches, both for values and keys. Some examples:
+
+- `kube_job:stats-*`: Find all resources with a `kube_deployment` tag value starting with `stats-`.
+- `pod_name:*canary`: Find all resources with a `pod_name` value ending in `canary`.
+- `label#release:*`: Find all resources with a `release` label, regardless of its value.
+- `-label#*.datadoghq.com/*`: Find resources that do not have any Datadog scoped labels.
+- `kube_*:*stats*canary`: Find resources that have related resource tags (`kube_*`), with  `stats` in the middle of the value, also ending with `canary`.
+
+### Extracted tags
+
+In addition to the tags you have [configured][20] within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
+
+#### All resources
+
+All resources have the `kube_cluster_name` tag and all namespaced resources have the `kube_namespace` tag added to them.
+
+Additionally, resources contain a `kube_<api_kind>:<metadata.name>` tag. For example, a deployment named `web-server-2` would have the `kube_deployment:web-server-2` tag automatically added to it.
+
+> **Note**: There are some exceptions to this pattern:
+>
+> - Pods use `pod_name` instead.
+> - *VPAs: `verticalpodautoscaler`*.
+> - *VPHs: `horizontalpodautoscaler`*.
+> - *Persistent Volume Claims: `persistentvolumeclaim`*.
+
+Based on the labels attached to the resource, the following tags will also be extracted:
+
+| タグ | Source Label |
+|---|---|
+| `kube_app_name` | `app.kubernetes.io/name` |
+| `kube_app_instance` | `app.kubernetes.io/instance` |
+| `kube_app_version` | `app.kubernetes.io/version` |
+| `kube_app_component` | `app.kubernetes.io/component` |
+| `kube_app_part_of` | `app.kubernetes.io/part-of` |
+| `kube_app_managed_by` | `app.kubernetes.io/managed-by` |
+| `env` | `tags.datadoghq.com/env` |
+| `version` | `tags.datadoghq.com/version` |
+| `service` | `tags.datadoghq.com/service` |
+
+#### Relationships
+
+Related Resources will be tagged with each other. Some examples:
+
+- A pod that is part of the "XYZ" deployment will have a `kube_deployment:xyz` tag.
+- An ingress that points at service "A" will have a `kube_service:a` tag.
+
+Resources that are spawned from "parent" resources will have the `kube_ownerref_kind` and `kube_ownerref_name` tags (such as pods and jobs).
+
+> **Tip:** Utilize the filter query autocomplete feature to discover what related resource tags are available. Type `kube_` and see what results are suggested.
+
+#### ポッド
+
+Pods are given the following tags:
+
+- `pod_name`
+- `pod_phase` (extracted from the manifest)
+- `pod_status` (calculated similarly to `kubectl`)
+
+#### Workloads
+
+Workload resources (pods, deployments, stateful sets, etc.) will have the following tags, indicating their support within the Resources Utilization page:
+
+- `resource_utilization` (`supported` or `unsupported`)
+- `missing_cpu_requests`
+- `missing_cpu_limits`
+- `missing_memory_requests`
+- `missing_memory_limits`
+
+#### 条件
+
+Some conditions, for some resources, are extracted as tags. For example, you can find the `kube_condition_available` tag on deployments. The tag format is always `kube_condition_<name>` with a `true` or `false` value.
+
+> **Tip**: Use the autocomplete feature to discover what conditions are available on a given resource type by entering `kube_condition` and reviewing the results.
+
+#### Resource specific tags
+
+Some resources have specific tags that are extracted based on your cluster's environment. The following tags are available in addition to the shared tags above.
+
+| Resource | Extracted Tags |
+|---|---|
+| **Cluster** | `api_server_version`<br>`kubelet_version` |
+| **Custom Resource Definitions** &<br>**Custom Resources** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope` |
+| **Namespace** | `phase` |
+| **Node** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
+| **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
+| **Persistent Volume Claim** | `pvc_phase`<br>`kube_storage_class_name` |
+| **Pod** | `pod_name` (instead of `kube_pod`)<br>`pod_phase` (extracted from the Manifest)<br>`pod_status` (calculated similarly to `kubectl`) |
+| **Service** | `kube_service_type`<br>`kube_service_port` |
+
+### Resource Utilization Filters
+
+The following workload resources are enriched with resource utilization metrics:
+
+- クラスター
+- Daemonsets
+- デプロイ
+- ノード
+- ポッド
+- Replica Sets
+- Stateful Sets
+
+These metrics are calculated at the time of collection, based on the average values over the last 15 minutes. You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
+
+- `metric_name` is an available metric (see below)
+- `comparator` is a supported [comparator](#comparator)
+- and `numeric_value` is a floating point value.
+
+For these workload resources, the following metric names are available:
+
+| CPU | メモリ |
+|---|---|
+| `cpu_limits_avg15` | `mem_limits_avg15` |
+| `cpu_requests_avg15` | `mem_requests_avg15` |
+| `cpu_usage_avg15` | `mem_usage_avg15` |
+| `cpu_usage_pct_limits_avg15` | `mem_usage_pct_limits_avg15` |
+| `cpu_usage_pct_requests_avg15` | `mem_usage_pct_requests_avg15` |
+| `cpu_waste_avg15` | `mem_waste_avg15` |
+
+In addition, clusters, and nodes have the following metrics available to them:
+
+- `cpu_usage_pct_alloc_avg15`
+- `cpu_requests_pct_alloc_avg15`
+- `mem_usage_pct_alloc_avg15`
+- `mem_requests_pct_alloc_avg15`
+
+#### メトリクス単位
+
+CPU metrics are stored as a number of cores.
+
+Memory metrics are stored as bytes.
+
+Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%. The value is the ratio of the two indicated metrics - for example `cpu_usage_pct_limits_avg15` is the value of `usage / limits`. Metric values can be above 100%, such as Percentage CPU Usage of Requests.
 
 ## 注意事項と既知の問題
 
 * データは一定の間隔で自動的に更新されます。ベータ版の更新間隔は変更される可能性があります。
 * 1000 以上のデプロイまたは ReplicaSets を持つクラスターでは、Cluster Agent からの CPU 使用率が上昇する場合があります。Helm チャートにはコンテナのスクラブを無効にするオプションがあります。詳細については、[Helm チャートリポジトリ][15]を参照してください。
 
-[1]: https://app.datadoghq.com/orchestration/overview/
+[1]: https://app.datadoghq.com/orchestration/overview
 [2]: /ja/infrastructure/containers/?tab=datadogoperator#setup
-
 [9]: /ja/logs
 [10]: /ja/metrics
 [11]: /ja/tracing
 [12]: /ja/events
+[13]: /ja/infrastructure/containers/kubernetes_resource_utilization
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[20]: /ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments
+[25]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+[26]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+[27]: https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/

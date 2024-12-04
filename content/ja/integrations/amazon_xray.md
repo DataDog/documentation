@@ -5,17 +5,17 @@ categories:
 - AWS
 - クラウド
 - トレーシング
+custom_kind: integration
 dependencies: []
 description: AWS サービス間で交わされるリクエストをトレース
 doc_link: https://docs.datadoghq.com/integrations/amazon_xray/
 draft: false
 git_integration_title: amazon_xray
 has_logo: true
-integration_id: amazon-xray
+integration_id: ''
 integration_title: AWS X-Ray
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_xray
 public_title: Datadog-AWS X-Ray インテグレーション
@@ -23,6 +23,7 @@ short_description: AWS サービス間で交わされるリクエストをトレ
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
 

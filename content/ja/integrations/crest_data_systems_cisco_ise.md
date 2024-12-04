@@ -13,23 +13,26 @@ assets:
     CDS Cisco ISE - Posture Details: assets/dashboards/cds_cisco_ise_posture_details.json
     CDS Cisco ISE - Profiler Details: assets/dashboards/cds_cisco_ise_profiler_details.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10364
     source_type_name: crest_data_systems_cisco_ise
 author:
-  homepage: https://www.crestdatasys.com
-  name: Crest Data Systems
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  homepage: https://crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - セキュリティ
 - ログの収集
 - プロビジョニング
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +41,6 @@ integration_id: crest-data-systems-cisco-ise
 integration_title: Cisco ISE
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -97,6 +99,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -108,24 +111,27 @@ Cisco Identity Services Engine (ISE) は、企業がコンプライアンスを�
 このインテグレーションは、以下のタイプのログを視覚化できます。
    * 認証
    * ポスチャ
-   * プロファイラー
+   * Profiler
    * クライアントプロビジョニング
 
-## サポート
+## Agent
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- サポートメール: [datadog.integrations@crestdatasys.com][2]
-- 営業メール: [datadog-sales@crestdatasys.com][3]
-- Web サイト: [crestdatasys.com][1]
+- Support Email: [datadog.integrations@crestdata.ai][2]
+- Sales Email: [datadog-sales@crestdata.ai][3]
+- Website: [crestdata.ai][1]
+- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][9]
 
 
-[1]: https://www.crestdatasys.com/
-[2]: mailto:datadog.integrations@crestdatasys.com
-[3]: mailto:datadog-sales@crestdatasys.com
+[1]: https://www.crestdata.ai/
+[2]: mailto:datadog.integrations@crestdata.ai
+[3]: mailto:datadog-sales@crestdata.ai
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
-
+[7]: https://docs.crestdata.ai/datadog-integrations-readme/Cisco_ISE.pdf
+[8]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[9]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cisco-ise" target="_blank">こちらをクリック</a>してください。

@@ -3,6 +3,7 @@ app_id: unbound
 app_uuid: 33cd72ba-822b-4a74-92eb-f1240ea71975
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: unbound.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10165
     source_type_name: Unbound
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
 categories:
 - キャッシュ
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: unbound
 integration_title: Unbound
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: unbound
-oauth: {}
 public_title: Unbound
 short_description: unbound メトリクスを収集する Datadog インテグレーション
 supported_os:
@@ -48,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: unbound メトリクスを収集する Datadog インテグレーション
   media: []
@@ -56,6 +58,7 @@ tile:
   title: Unbound
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -82,7 +85,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `unbound.d/conf.yaml` ファイルを編集して、
    unbound メトリクスの収集を開始します。
@@ -104,7 +107,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェ
 
 Unbound チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "unbound" >}}
 
 
@@ -114,7 +117,7 @@ Unbound チェックには、イベントは含まれません。
 
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example

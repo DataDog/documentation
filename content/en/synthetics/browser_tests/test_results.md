@@ -1,6 +1,5 @@
 ---
-title: Browser Test Results
-kind: documentation
+title: Browser Testing Results
 description: View Synthetic browser test results and compare successful or failed sample runs to test runs. 
 aliases:
  - "/synthetics/apm/browser_tests"
@@ -188,7 +187,7 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /real_user_monitoring/
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [7]: /tracing/trace_explorer/trace_view/
 [8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [9]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator

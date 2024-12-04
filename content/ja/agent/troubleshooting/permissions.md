@@ -5,21 +5,15 @@ aliases:
 - /ja/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: Agent のトラブルシューティング
+  tag: ドキュメント
   text: Agent デバッグモード
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Agent のトラブルシューティング
+  tag: ドキュメント
   text: Agent フレアの送信
-kind: documentation
 title: アクセス許可に関する問題
 ---
 
-Agent がホストでデータを収集するためには、特定のアクセス許可が必要です。このページでは最も一般的なアクセス許可に関する問題とその解決方法について説明します。
-
-* [Agent ロギングのアクセス許可の問題](#agent-logging-permission-issues)
-* [Agent ソケットのアクセス許可の問題](#agent-socket-permission-issues)
-* [プロセスメトリクスのアクセス許可の問題](#process-metrics-permission-issue)
-* [参考文献](#further-reading)
+Agent がホスト上でデータを収集するためには、特定の権限が必要です。以下に、最も一般的な権限の問題とその解決方法を示します。
 
 ## Agent ロギングのアクセス許可に関する問題
 
@@ -84,10 +78,7 @@ chown dd-agent -R /opt/datadog-agent/run
 Linux OS で実行している Agent の[プロセスチェック][7]を有効化している場合、デフォルトでは `system.processes.open_file_descriptors` メトリクスが収集または報告されません。
 これは、プロセスが Agent ユーザー `dd-agent` ではなく、他のユーザーの元で実行されるプロセスチェックにより監視されている場合に発生します。実際、`dd-agent` ユーザーには、Agent がメトリクスのデータを収集するために参照する `/proc` の全ファイルへの完全なアクセス権がありません。
 
-{{< tabs >}}
-{{% tab "Agent v6.3+" %}}
-
-プロセスチェックコンフィギュレーションの `try_sudo` オプションを有効化し、適切な `sudoers` ルールを追加します。
+プロセスチェック構成で `try_sudo` オプション (Agent 6.3 以降で利用可能) を有効化し、適切な `sudoers` ルールを追加します。
 
 ```text
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
@@ -97,43 +88,16 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 Datadog の `error.log` ファイルに `sudo: sorry, you must have a tty to run sudo` の行があった場合、`visudo` を使って sudoers ファイルの `Default requiretty` という行をコメントアウトする必要があります。
 
-{{% /tab %}}
-{{% tab "Agent v6 および v7" %}}
+### Agent を root 権限で実行する
 
-v6.3 以前の Agent v6 を実行している場合は、Agent をアップデートして `try_sudo` オプションを使用するようにしてください。アップデートできない場合は、この問題の回避策として Agent を `root` として実行します。
+`try_sudo` を使用できない場合、代替手段として Agent を `root` 権限で実行することができます。
 
-**注**: Agent を `root` として実行することは推奨されていません。Datadog Agent に限らず、また、何らかの信用性の低い現象が懸念されるわけでもありませんが、デーモンを `root` として実行することは推奨されていません。これは、Linux のプロセスにおける基本的なベストプラクティスです。個人的に懸念事項がある場合、オープンソースである Agent は [GitHub レポジトリ][1]を使用してご自身やチームで監査することが可能です。
+<div class="alert alert-info">Linux では、プロセスデーモンを <code>root</code> 権限で実行することはベストプラクティスではありません。Agent はオープンソースであり、<a href="https://github.com/DataDog/datadog-agent">GitHub リポジトリ</a>を通じて監査できます。</div>
 
-1. [Agent を停止します][2]
-
-2. `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` を開き、`[Service]` の `user​` 属性を変更します
-
-3. [Agent を起動します][3]
-
-[1]: https://github.com/DataDog/datadog-agent
-[2]: /ja/agent/guide/agent-commands/#stop-the-agent
-[3]: /ja/agent/guide/agent-commands/#start-the-agent
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-Agent v5 を実行している場合は、[最新バージョンの Agent 6][1] へアップデートし、`try_sudo` オプションを使用してください。アップデートできない場合は、この問題の回避策として、Agent を `root` として実行します。
-
-**注**: Agent を `root` として実行することは推奨されていません。Datadog Agent に限らず、また、何らかの信用性の低い現象が懸念されるわけでもありませんが、デーモンを `root` として実行することは推奨されていません。これは、Linux のプロセスにおける基本的なベストプラクティスです。個人的に懸念事項がある場合、オープンソースである Agent は [GitHub レポジトリ][2]を使用してご自身やチームで監査することが可能です。
-
-1. [Agent を停止します][3]
-
-2. `/etc/dd-agent/supervisor.conf` を開き、[20 行目][4]と [30 行目][5]の `dd-agent` を `root` で置換します。Agent をアップグレードまたは再インストールした場合は、再度この操作を実行してください。
-
-3. [Agent を起動します][6]
-
-[1]: /ja/agent/guide/upgrade-to-agent-v6/
-[2]: https://github.com/DataDog/dd-agent
-[3]: /ja/agent/guide/agent-commands/?tab=agentv5#stop-the-agent
-[4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
-[5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /ja/agent/guide/agent-commands/?tab=agentv5#start-the-agent
-{{% /tab %}}
-{{< /tabs >}}
+Agent を `root` 権限で実行するには
+1. [Agent を停止します][9]
+2. `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` を開き、`[Service]` の `user` 属性を変更します
+3. [Agent を起動します][10]
 
 詳細情報と、Linux マシンで利用可能なこのメトリクスのその他の取得メソッドについては、下記の GitHub に関する問題をご参照ください。
 
@@ -144,10 +108,12 @@ Agent v5 を実行している場合は、[最新バージョンの Agent 6][1] 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-commands/
-[2]: /ja/agent/guide/agent-log-files/
+[1]: /ja/agent/configuration/agent-commands/
+[2]: /ja/agent/configuration/agent-log-files/
 [3]: /ja/agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /ja/agent/faq/network/
-[5]: /ja/agent/guide/agent-commands/#start-the-agent
+[5]: /ja/agent/configuration/agent-commands/#start-the-agent
 [6]: /ja/help/
 [7]: /ja/integrations/process/
+[9]: /ja/agent/configuration/agent-commands/#stop-the-agent
+[10]: /ja/agent/configuration/agent-commands/#start-the-agent

@@ -3,6 +3,7 @@ app_id: pliant
 app_uuid: 28fb0874-e3be-4171-819d-142f1c9dd3cc
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: pliant.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10102
     source_type_name: Pliant
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,9 +23,10 @@ author:
 categories:
 - 自動化
 - コンプライアンス
-- notification
+- notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
 display_on_public_website: true
@@ -33,10 +36,8 @@ integration_id: pliant
 integration_title: Pliant
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: pliant
-oauth: {}
 public_title: Pliant
 short_description: Pliant.io で IT プロセスを自動化
 supported_os:
@@ -48,12 +49,13 @@ tile:
   classifier_tags:
   - Category::Automation
   - カテゴリ::コンプライアンス
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pliant.io で IT プロセスを自動化
   media: []
@@ -62,6 +64,7 @@ tile:
   title: Pliant
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -84,7 +87,7 @@ Pliant.io により、Datadog の通知をローコードの自動ワークフ�
 
 Datadog の通知からトリガーするワークフローを作成します。
 
-### コンフィギュレーション
+### 構成
 #### Pliant
 
 1. **Pliant API キーを作成します** - Pliant にログインし、画面右上のユーザー名をクリックしてメニューを開きます。"API Keys" をクリックします。
@@ -147,7 +150,7 @@ Datadog の通知からトリガーするワークフローを作成します。
 3. "webhooks" までスクロールします。**New** をクリックして、Pliant ワークフローにリンクする新しい Webhook を追加します。まず、"name" フィールドで Webhook に名前を付けます。この例では *RestartHost* という名前を使用します。
 ![webhook コンフィグ2][11]
 
-ステップ 4 でコピーした URL を貼り付けます。例: 
+ステップ 4 でコピーした URL を貼り付けます。例:
 
 ```
 https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>
@@ -167,7 +170,7 @@ https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_
 
 Pliant インテグレーションは、メトリクスを提供しません。
 
-### サービスのチェック
+### サービスチェック
 
 Pliant インテグレーションには、サービスのチェック機能は含まれません。
 

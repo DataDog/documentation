@@ -5,6 +5,7 @@ assets:
   dashboards:
     cisco_aci: assets/dashboards/cisco_aci_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,7 +16,11 @@ assets:
       prefix: cisco_aci.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 210
     source_type_name: Cisco ACI
+  monitors:
+    CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
+    Health score of device is critical: assets/monitors/critical_health_score.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -23,6 +28,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
 display_on_public_website: true
@@ -30,12 +36,10 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.2.2
+integration_version: 4.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cisco_aci
-oauth: {}
 public_title: CiscoACI
 short_description: Cisco ACI のパフォーマンスと使用状況を追跡。
 supported_os:
@@ -49,6 +53,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cisco ACI のパフォーマンスと使用状況を追跡。
   media: []
@@ -57,6 +62,7 @@ tile:
   title: CiscoACI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -66,21 +72,22 @@ Cisco ACI インテグレーションを使用すると、以下のことが可�
 - ネットワークの状態と健全性を追跡できます。
 - ACI の容量を追跡できます。
 - スイッチおよびコントローラー自体を監視できます。
+- [Network Devices Monitoring][1] を通じてデバイスを監視する機能
 
 ## セットアップ
 
 ### インストール
 
-Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][1]するだけです。
+Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][2]するだけです。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cisco_aci.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cisco_aci.d/conf.yaml][2] を参照してください。
 
@@ -111,6 +118,11 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
         # tenant:
         #   - <TENANT_1>
         #   - <TENANT_2>
+
+        ## @param send_ndm_metadata - boolean - optional - default: false
+        ## Set to `true` to enable Network Device Monitoring metadata (for devices and interfaces) to be sent.
+        #
+        # send_ndm_metadata: false
    ```
 
    *注*: 必ずインテグレーションにテナントを指定し、アプリケーションのメトリクスや EPG などを収集します。
@@ -121,7 +133,7 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 [2]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/datadog_checks/cisco_aci/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -129,9 +141,9 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 
 | パラメーター            | 値                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
-| `<インテグレーション名>` | `cisco_aci`                                                            |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"aci_url":"%%host%%", "username":"<ユーザー名>", "pwd": "<パスワード>"}` |
+| `<INTEGRATION_NAME>` | `cisco_aci`                                                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                          |
+| `<INSTANCE_CONFIG>`  | `{"aci_url":"%%host%%", "username":"<ユーザー名>", "pwd": "<パスワード>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -139,7 +151,11 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `cisco_aci` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cisco_aci` を探します。
+
+## ベンダープロファイル
+
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][4]のページで確認できます。
 
 ## 収集データ
 
@@ -151,7 +167,7 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 
 Cisco ACI チェックはテナントの障害をイベントとして送信します。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "cisco_aci" >}}
 
 
@@ -182,9 +198,11 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
     Last Successful Execution Date : 2023-01-04 15:58:04 CST / 2023-01-04 21:58:04 UTC (1672869484000)
   ```
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
+[1]: https://www.datadoghq.com/product/network-monitoring/network-device-monitoring/
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
+[5]: https://docs.datadoghq.com/ja/help/

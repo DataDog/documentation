@@ -1,0 +1,73 @@
+
+<!-- CTA MODAL -->
+{{ $ctx := . }}
+{{ $modal := .Page.Params.modal }}
+<div id="tryRuleModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header flex-column mx-auto">
+                <img src="{{.Site.Params.img_url}}images/dd-logo-white.svg" alt="datadog bits">
+                <h1 class="modal-title fs-4 mx-auto p-0">
+                    {{ $modal.title }}
+                </h1>
+                <div class="modal-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
+                    {{ partial "icon" (dict "name" "x-circle-solid" "size" "16px" ) }}
+                </div>
+            </div>
+            <div class="row modal-body mx-auto">
+                <div class="col-12 floating-body-top d-flex flex-column">
+                    <h2 class="fs-6 m-0 p-0 fw-bold text-uppercase">{{ $modal.top_box.title }}</h2>
+                    <div class="position-relative">
+                        {{$valid_lang := replaceRE `(\w+)` .Page.Params.meta.language .Page.Params.group_id 1}}
+                        {{$valid_ruleset := (delimit (split $valid_lang "-") " ")}}
+                        {{$code := printf "rulesets:\n  - %s     # Rules to enforce %s." .Page.Params.group_id $valid_ruleset}}
+                        {{ highlight $code "yaml" "lineNos=table, lineNumbersInTable=true"}}
+                        <div class="copy-icon d-flex" title="Copy" data-bs-toggle='tooltip' data-bs-placement='left'>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="icon-left">
+                                <path id="Vector" d="M14.6634 11.6633H13.3301V2.66332H4.33008V1.32999H14.6634V11.6633ZM11.6634 4.32999H1.33008V14.6633H11.6634V4.32999ZM2.66341 5.66332H10.3301V13.33H2.66341V5.66332Z" fill-opacity="0.66"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <ol class="m-0">
+                        {{ range $modal.top_box.steps }}
+                            <li>{{ . }}</li>
+                        {{ end }}
+                    </ol>
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">
+                            {{ $modal.top_box.footer | safeHTML }}
+                            {{ partial "icon" (dict "name" "external-link" "title" "link to Code Analysis documentation" "size" "12px" "color" "#006BC2") }}
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row floating-body-bottom">
+                        {{ range $modal.bottom_boxes }}
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center justify-content-between">
+                            <img src="{{$ctx.Site.Params.img_url}}images/icons/{{.icon}}.png" width="32" height="32" alt="{{.icon}}">
+                            <h2 class="fs-6 m-0 fw-bold">{{.title}}</h2>
+                            <p>{{.subtitle | safeHTML}}</p>
+                            <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary position-relative">
+                                <span>{{.cta_title}}</span>
+                                {{ partial "icon" (dict "name" "external-link" "size" "13px" "color" "white") }}
+                                <a class="stretched-link" href="{{.cta_url}}"></a>
+                            </button>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer flex justify-content-center">
+                <p class="m-0">{{ $modal.footer.text }}</p>
+                <div class="m-0 position-relative">
+                    <span>{{ $modal.footer.link.name}}</span>
+                    {{ partial "icon" (dict "name" "external-link" "size" "12px" "color" "#006BC2") }}
+                    <a class="stretched-link" href="{{$modal.footer.link.url}}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

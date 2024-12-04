@@ -7,8 +7,8 @@ assets: {}
 author:
   homepage: https://circleci.com/
   name: CircleCI
-  sales_email: partners@circleci.com
-  support_email: support@circleci.com
+  sales_email: mattk@circleci.com
+  support_email: mattk@circleci.com
   vendor_id: circleci
 categories:
 - 自動化
@@ -20,6 +20,7 @@ categories:
 - プロビジョニング
 - ソースコントロール
 - テスト
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -28,12 +29,10 @@ integration_id: circleci-circleci
 integration_title: CircleCI
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: circleci_circleci
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -79,11 +78,19 @@ tile:
     media_type: ビデオ
     vimeo_id: 731430543
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/run-synthetic-tests-in-circeci-pipelines-with-datadog/
+  - resource_type: documentation
+    url: https://circleci.com/docs
   support: README.md#Support
   title: CircleCI
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要

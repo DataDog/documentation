@@ -5,6 +5,7 @@ assets:
   dashboards:
     Sedai Overview: assets/dashboards/sedai_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: sedai.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10249
     source_type_name: Sedai
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,9 +26,10 @@ categories:
 - 自動化
 - cloud
 - コスト管理
-- notification
+- notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
 display_on_public_website: true
@@ -36,10 +39,8 @@ integration_id: sedai
 integration_title: Sedai
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: sedai
-oauth: {}
 public_title: Sedai
 short_description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
 supported_os:
@@ -52,12 +53,13 @@ tile:
   - Category::Automation
   - Category::Cloud
   - Category::Cost Management
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
   media: []
@@ -66,6 +68,7 @@ tile:
   title: Sedai
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Sedai は、本番環境をプロアクティブに管理し、問題を防止して可用性、パフォーマンス、およびクラウドコストを改善する自律型クラウドプラットフォームです。SRE のためのインテリジェントな オートパイロットとして、Sedai は監視データを独自に検出、優先順位付け、分析し、しきい値なしに本番環境で安全かつ自律的に行動します。

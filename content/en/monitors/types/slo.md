@@ -1,9 +1,19 @@
 ---
 title: SLO Alerts
-kind: documentation
 aliases :
   - /monitors/create/types/slo/
+further_reading:
+- link: "/service_management/service_level_objectives/burn_rate"
+  tag: "Documentation"
+  text: "Burn Rate Alerts"
+- link: "/service_management/service_level_objectives/error_budget"
+  tag: "Documentation"
+  text: "Error Budget Alerts"
 ---
+
+<div class="alert alert-info">
+This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monitor-based SLOs composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+</div>
 
 ## Overview
 
@@ -27,7 +37,7 @@ Two types of alerts are available:
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
 
@@ -37,6 +47,10 @@ In addition to the [standard template variables][6] available across all monitor
 | `{{value}}` | The percentage of error budget consumed (error budget alerts only). |
 | `{{short_window_burn_rate}}` | The burn rate value observed by the short window (burn rate alerts only). |
 | `{{long_window_burn_rate}}` | The burn rate value observed by the long window (burn rate alerts only). |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo

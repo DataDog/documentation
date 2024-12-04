@@ -3,11 +3,13 @@ app_id: amazon-eks
 app_uuid: abb8b86b-eeb7-4e38-b436-f4cbb09b4398
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10018
     source_type_name: Amazon EKS
 author:
   homepage: https://www.datadoghq.com
@@ -22,20 +24,19 @@ categories:
 - kubernetes
 - log collection
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: amazon_eks
 integration_id: amazon-eks
-integration_title: Amazon-EKS
+integration_title: Amazon EKS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_eks
-oauth: {}
-public_title: Amazon-EKS
+public_title: Amazon EKS
 short_description: Amazon EKS は、AWS で Kubernetes を簡単に実行できるマネージド型サービスです
 supported_os:
 - linux
@@ -54,14 +55,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon EKS は、AWS で Kubernetes を簡単に実行できるマネージド型サービスです
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/announcing-eks
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/eks-cluster-metrics
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/integrations/eks_fargate/
   support: README.md#Support
-  title: Amazon-EKS
+  title: Amazon EKS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![EKS ダッシュボード][1]
@@ -88,7 +98,7 @@ EKS のモニタリングには、以下の Datadog インテグレーション�
 - [AWS][7]
 - [AWS EC2][8]
 
-### ログの収集
+### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 

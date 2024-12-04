@@ -4,17 +4,17 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon Gamelift のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_gamelift/
 draft: false
 git_integration_title: amazon_gamelift
 has_logo: true
-integration_id: amazon-gamelift
+integration_id: ''
 integration_title: Amazon Gamelift
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_gamelift
 public_title: Datadog-Amazon Gamelift インテグレーション
@@ -22,6 +22,7 @@ short_description: Amazon Gamelift のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon GameLift は、セッションベースのマルチプレーヤーゲームサーバーをクラウドでデプロイ、運用、およびスケーリングするためのフルマネージド型サービスです。
@@ -37,9 +38,9 @@ Amazon GameLift は、セッションベースのマルチプレーヤーゲー�
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Game Lift` が有効になっていることを確認します。
-2. [Datadog - Amazon Gamelift インテグレーション][3]をインストールします。
+2. [Datadog - Amazon GameLift インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -63,11 +64,11 @@ Amazon GameLift から S3 バケットまたは CloudWatch のいずれかにロ
 
 ### イベント
 
-Amazon Gamelift インテグレーションには、イベントは含まれません。
+Amazon GameLift インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-Amazon Gamelift インテグレーションには、サービスのチェック機能は含まれません。
+Amazon GameLift インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -77,7 +78,7 @@ Amazon Gamelift インテグレーションには、サービスのチェック�
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-gamelift
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_gamelift/amazon_gamelift_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

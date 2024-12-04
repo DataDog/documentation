@@ -1,6 +1,5 @@
 ---
 title: Docker Log collection
-kind: documentation
 aliases:
     - /logs/docker
     - /logs/languages/docker
@@ -80,7 +79,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
+           -e DD_SITE=<DD_SITE> \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
@@ -101,7 +100,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
+           -e DD_SITE=<DD_SITE> \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -161,7 +160,7 @@ environment:
 
 [1]: /agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Host Agent with Custom Logging" %}}
 
@@ -184,8 +183,8 @@ environment:
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
-[3]: /agent/guide/agent-configuration-files/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-configuration-files/
+[4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 

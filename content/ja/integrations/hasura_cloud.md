@@ -5,6 +5,7 @@ assets:
   dashboards:
     Hasura Cloud Datadog Integration Dashboard: assets/dashboards/hasura_cloud.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -17,6 +18,7 @@ assets:
       prefix: hasura_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10175
     source_type_name: Hasura Cloud
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -27,6 +29,7 @@ categories:
 - クラウド
 - ログの収集
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
 display_on_public_website: true
@@ -36,10 +39,8 @@ integration_id: hasura-cloud
 integration_title: Hasura Cloud
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: hasura_cloud
-oauth: {}
 public_title: Hasura Cloud
 short_description: Hasura Cloud プロジェクトを監視します
 supported_os:
@@ -55,6 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Hasura Cloud プロジェクトを監視します
   media: []
@@ -63,6 +65,7 @@ tile:
   title: Hasura Cloud
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -95,7 +98,7 @@ Hasura Cloud プロジェクトのログ、メトリクス、トレースは、�
 {{< get-metrics-from-git "hasura_cloud" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 Hasura Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -105,7 +108,7 @@ Hasura Cloud インテグレーションには、イベントは含まれませ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://hasura.io/cloud/
 [2]: https://hasura.io/docs/latest/observability/integrations/datadog/

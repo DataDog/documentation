@@ -1,6 +1,5 @@
 ---
 title: Datadog-Heroku Buildpack troubleshooting
-kind: guide
 aliases:
   - /agent/faq/heroku-troubleshooting/
 ---
@@ -46,4 +45,4 @@ Generate a flare by running the [`agent-wrapper` command][1]:
 agent-wrapper flare
 ```
 
-[1]: /agent/guide/agent-commands/#agent-status-and-information
+[1]: /agent/configuration/agent-commands/#agent-status-and-information

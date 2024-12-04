@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "finished_at": 1693491984000000000,
+      "git": {
+        "commit_sha": "66adc9350f2cc9b250b69abddab733dd55e1a588",
+        "repository_url": "https://github.com/organization/example-repository"
+      },
+      "service": "shopist",
+      "started_at": 1693491974000000000,
+      "version": "v1.12.07"
+    }
+  }
+}

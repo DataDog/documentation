@@ -7,6 +7,7 @@ assets:
   dashboards:
     Oracle TimesTen: assets/dashboards/oracle_timesten.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -16,6 +17,7 @@ assets:
       prefix: rapdev.oracle_timesten.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10116
     source_type_name: Oracle TimesTen
 author:
   homepage: https://www.rapdev.io
@@ -25,9 +27,10 @@ author:
   vendor_id: rapdev
 categories:
 - キャッシュ
-- data store
+- data stores
 - マーケットプレイス
 - oracle
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,12 +39,10 @@ integration_id: rapdev-oracle-timesten
 integration_title: Oracle TimesTen
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: oracle_timesten
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -59,11 +60,12 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Marketplace
   - Category::Oracle
   - Offering::Integration
   - Supported OS::Linux
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Oracle TimesTen データベースのパフォーマンスを監視する
   media:
@@ -89,6 +91,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -97,7 +100,7 @@ Oracle TimesTen インテグレーションにより、TimesTen インメモリ�
 
 このインテグレーションには、TimesTen データベースのステータスとメトリクスを概観するダッシュボードが含まれています。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
@@ -111,4 +114,4 @@ Oracle TimesTen インテグレーションにより、TimesTen インメモリ�
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-oracle-timesten" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-oracle-timesten" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

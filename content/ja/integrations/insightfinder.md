@@ -5,6 +5,7 @@ assets:
   dashboards:
     InsightFinder Dashboard: assets/dashboards/ifdashboard.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: insightfinder.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10253
     source_type_name: InsightFinder
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,7 +26,9 @@ categories:
 - アラート設定
 - 自動化
 - インシデント
-- notification
+- notifications
+- ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/insightfinder/README.md
 display_on_public_website: true
@@ -34,10 +38,8 @@ integration_id: insightfinder
 integration_title: InsightFinder
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: insightfinder
-oauth: {}
 public_title: InsightFinder
 short_description: InsightFinder で DataDog からデータを統合して分析
 supported_os:
@@ -50,10 +52,12 @@ tile:
   - Category::Alerting
   - Category::Automation
   - Category::Incidents
-  - Category::Notification
+  - Category::Notifications
+  - Category::AI/ML
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: InsightFinder で DataDog からデータを統合して分析
   media: []
@@ -62,6 +66,7 @@ tile:
   title: InsightFinder
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

@@ -3,6 +3,7 @@ app_id: amixr
 app_uuid: 051b4bbe-d7cc-46bf-9a66-169ab7d5a4aa
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: amixr.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10103
     source_type_name: Amixr
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -23,8 +25,9 @@ categories:
 - 自動化
 - コラボレーション
 - インシデント
-- notification
+- notifications
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: amixr
 integration_title: Amixr
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amixr
-oauth: {}
 public_title: Amixr
 short_description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
 supported_os:
@@ -51,11 +52,12 @@ tile:
   - Category::Automation
   - Category::Collaboration
   - Category::Incidents
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
   media: []
@@ -64,6 +66,7 @@ tile:
   title: Amixr
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -84,7 +87,7 @@ Slack インテグレーションを活用して Amixr でアラートを管理�
 
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 Amixr で構成する場合:
 
@@ -117,7 +120,7 @@ Amixr で構成する場合:
 
 Amixr インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amixr インテグレーションには、サービスのチェック機能は含まれません。
 

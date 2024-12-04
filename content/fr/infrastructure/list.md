@@ -12,7 +12,6 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: Surveillance des live processes
-kind: documentation
 title: Liste des infrastructures
 ---
 

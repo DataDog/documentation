@@ -5,6 +5,9 @@
     td {
         border-left: none !important;
     }
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: pre;
 }
 
 .fm-math,

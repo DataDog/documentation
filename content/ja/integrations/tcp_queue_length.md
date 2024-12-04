@@ -3,6 +3,7 @@ app_id: tcp-queue-length
 app_uuid: 2c48a360-9fbb-4cd6-9316-0e9afd9926c8
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: tcp_queue.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10295
     source_type_name: TCP Queue Length
 author:
   homepage: https://www.datadoghq.com
@@ -21,6 +23,7 @@ author:
 categories:
 - developer tools
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: tcp-queue-length
 integration_title: TCP Queue Length
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_queue_length
-oauth: {}
 public_title: TCP Queue Length
 short_description: Datadog で、TCP バッファのサイズを追跡します。
 supported_os:
@@ -44,6 +45,7 @@ tile:
   - Category::Developer Tools
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で、TCP バッファのサイズを追跡します。
   media: []
@@ -52,6 +54,7 @@ tile:
   title: TCP Queue Length
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -79,7 +82,7 @@ yum install -y kernel-devel-$(uname -r)
 
 **注**: バージョン 8 以前の Windows および CentOS/RHEL はサポートされません。
 
-### コンフィギュレーション
+### 構成
 
 `tcp_queue_length` インテグレーションを有効にするには、`system-probe` とコアエージェントの両方でコンフィギュレーションオプションを有効化する必要があります。
 
@@ -127,7 +130,7 @@ spec:
       enabled: true
   override:
     nodeAgent:
-      volumes: 
+      volumes:
       - emptyDir: {}
         name: src
 ```
@@ -142,7 +145,7 @@ spec:
 {{< get-metrics-from-git "tcp_queue_length" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 TCP Queue Length チェックには、サービスのチェック機能は含まれません。
 
@@ -152,10 +155,10 @@ TCP Queue Length チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/tcp_queue_length.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/helm/charts/tree/master/stable/datadog
+[3]: https://github.com/DataDog/helm-charts
 [4]: https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

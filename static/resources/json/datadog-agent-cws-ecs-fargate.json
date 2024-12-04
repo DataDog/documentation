@@ -1,0 +1,107 @@
+{
+    "family": "<YOUR_TASK_NAME>",
+    "cpu": "256",
+    "memory": "512",
+    "networkMode": "awsvpc",
+    "pidMode": "task",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "name": "cws-instrumentation-init",
+            "image": "datadog/cws-instrumentation:latest",
+            "essential": false,
+            "user": "0",
+            "command": [
+                "/cws-instrumentation",
+                "setup",
+                "--cws-volume-mount",
+                "/cws-instrumentation-volume"
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "cws-instrumentation-volume",
+                    "containerPath": "/cws-instrumentation-volume",
+                    "readOnly": false
+                }
+            ]
+        },
+        {
+            "name": "datadog-agent",
+            "image": "datadog/agent:latest",
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_API_KEY",
+                    "value": "<DD_API_KEY>"
+                },
+                {
+                    "name": "DD_SITE",
+                    "value": "datadoghq.com"
+                },
+                {
+                    "name": "ECS_FARGATE",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_RUNTIME_SECURITY_CONFIG_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED",
+                    "value": "true"
+                }
+            ],
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "/probe.sh"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 2,
+                "startPeriod": 60
+            }
+        },
+        {
+            "name": "<YOUR_APP_NAME>",
+            "image": "<YOUR_APP_IMAGE>",
+            "entryPoint": [
+                "/cws-instrumentation-volume/cws-instrumentation",
+                "trace",
+                "--",
+                "<ENTRYPOINT>"
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "cws-instrumentation-volume",
+                    "containerPath": "/cws-instrumentation-volume",
+                    "readOnly": true
+                }
+            ],
+            "linuxParameters": {
+                "capabilities": {
+                    "add": [
+                        "SYS_PTRACE"
+                    ]
+                }
+            },
+            "dependsOn": [
+                {
+                    "containerName": "datadog-agent",
+                    "condition": "HEALTHY"
+                },
+                {
+                    "containerName": "cws-instrumentation-init",
+                    "condition": "SUCCESS"
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        {
+            "name": "cws-instrumentation-volume"
+        }
+    ]
+}

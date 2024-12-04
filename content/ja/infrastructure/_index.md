@@ -2,6 +2,14 @@
 aliases:
 - /ja/graphing/infrastructure/
 cascade:
+- _target:
+    lang: en
+    path: /infrastructure/resource_catalog/aws_iam_user
+  aliases:
+  - /security/cspm/custom_rules/aws_iam_user/
+- _target:
+    lang: en
+    path: /infrastructure/**/*
   algolia:
     rank: 70
 further_reading:
@@ -11,9 +19,21 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
-kind: documentation
 title: インフラストラクチャー
 ---
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  Foundation Enablement セッションを調べて登録しましょう。Datadog の SaaS ベースのインフラストラクチャー監視が、メトリクスの提供、可視化、アラート機能を通じて、エンジニアリングチームがクラウドやハイブリッド環境を維持・最適化する方法を学べます。
+{{< /learning-center-callout >}}
+
+
+## 概要
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="ホストマップを Nginx ホストにフィルターするビデオ" video="true">}}
+
+インフラストラクチャーモニタリングには、ホスト、コンテナ、プロセスのパフォーマンスを視覚化、監視、測定する Datadog のコア機能が含まれています。
+
+## コンポーネント
 
 {{< whatsnext desc="このセクションには、以下のトピックがあります。">}}
     {{< nextlink href="/infrastructure/list" >}}<u>インフラストラクチャーリスト</u> - Datadog が監視しているすべてのホストの一覧を表示します。{{< /nextlink >}}

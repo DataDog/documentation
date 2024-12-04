@@ -1,6 +1,5 @@
 ---
 title: Utilisation de base de l'Agent pour l'installation depuis les sources
-kind: documentation
 platform: Source
 aliases:
   - /fr/guides/basic_agent_usage/source/

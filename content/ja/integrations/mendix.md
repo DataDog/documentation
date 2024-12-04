@@ -5,12 +5,14 @@ assets:
   dashboards:
     Mendix Application Overview: assets/dashboards/MendixApplicationOverview.json
   integration:
+    auto_install: true
     metrics:
       check: mx.database.diskstorage_size
       metadata_path: metadata.csv
       prefix: mx.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10344
     source_type_name: Mendix
 author:
   homepage: https://mendix.com/
@@ -20,6 +22,7 @@ author:
 categories:
 - クラウド
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: mendix
 integration_title: Mendix
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: mendix
-oauth: {}
 public_title: Mendix
 short_description: Mendix 環境メトリクスの監視
 supported_os:
@@ -65,6 +66,7 @@ tile:
   title: Mendix
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -92,7 +94,7 @@ Mendix Cloud 上で動作する Mendix アプリケーションの Datadog イ�
 
 Mendix インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Mendix インテグレーションには、サービスのチェック機能は含まれません。
 

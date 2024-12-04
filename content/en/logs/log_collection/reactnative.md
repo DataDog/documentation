@@ -1,10 +1,9 @@
 ---
 title: React Native Log Collection
-kind: documentation
 description: Collect logs from your React Native Mobile applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-reactnative Source code
 - link: logs/explorer
   tag: Documentation
@@ -180,6 +179,21 @@ All the logs are first stored on the local device in batches. Each batch follows
 This means that even if users open your application while being offline, no data will be lost.
 
 The data on disk will automatically be discarded if it gets too old to ensure the SDK doesn't use too much disk space.
+
+## Custom error fingerprint
+
+Starting from v2.4.2, you can add a custom fingerprint to the error logs by using the `fingerprint` argument:
+
+```ts
+export type LogWithErrorArguments = [
+    message: string,
+    errorKind?: string,
+    errorMessage?: string,
+    stacktrace?: string,
+    context?: object,
+    fingerprint?: string
+];
+```
 
 ## Further Reading
 

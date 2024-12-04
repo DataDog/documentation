@@ -3,12 +3,14 @@ app_id: pdh
 app_uuid: 75f6813c-934c-4f1a-b8f4-71f9f1911165
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10065
     source_type_name: PDH
 author:
   homepage: https://www.datadoghq.com
@@ -17,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md
 display_on_public_website: true
@@ -24,12 +27,10 @@ draft: false
 git_integration_title: pdh_check
 integration_id: pdh
 integration_title: PDH Check
-integration_version: 1.16.1
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: pdh_check
-oauth: {}
 public_title: PDH Check
 short_description: Windows のパフォーマンスカウンターを収集およびグラフ化。
 supported_os:
@@ -38,7 +39,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows のパフォーマンスカウンターを収集およびグラフ化。
   media: []
@@ -47,6 +49,7 @@ tile:
   title: PDH Check
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -63,7 +66,7 @@ Windows のパフォーマンスカウンターからメトリクスをリアル
 
 PDH チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 1. Windows のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `pdh_check.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル pdh_check.d/conf.yaml][4] を参照してください。
 
@@ -83,7 +86,7 @@ PDH チェックにより収集されたすべてのメトリクスは、[カス
 
 PDH チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 PDH チェックには、サービスのチェック機能は含まれません。
 
@@ -92,7 +95,7 @@ PDH チェックには、サービスのチェック機能は含まれません�
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/windows_performance_counters/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent

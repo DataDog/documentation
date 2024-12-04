@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Event Grid のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
@@ -14,7 +15,6 @@ integration_id: azure-eventgrid
 integration_title: Microsoft Azure Event Grid
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_event_grid
 public_title: Datadog-Microsoft Azure Event Grid インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure Event Grid のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Event Grid は、公開/サブスクライブモデルを使用して均一なイベント消費を可能にするフルマネージド型のインテリジェントなイベントルーティングサービスです。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure Event Grid か�
 
 Azure Event Grid インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Event Grid インテグレーションには、サービスのチェック機能は含まれません。
 

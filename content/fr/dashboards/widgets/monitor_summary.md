@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Créer des dashboards avec JSON
-kind: documentation
 title: Widget Résumé des monitors
 widget_type: manage_status
 ---

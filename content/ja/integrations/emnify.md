@@ -5,6 +5,7 @@ assets:
   dashboards:
     EMnify Dashboard: assets/dashboards/emnify_dashboard.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,12 +15,13 @@ assets:
       prefix: emnify.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10304
     source_type_name: EMnify
   monitors:
-    Daily Traffic Forecast: assets/monitors/emnify_data_usage_forecast.json
-    High Incoming Traffic: assets/monitors/emnify_data_usage_high_rx.json
-    High Outgoing Traffic: assets/monitors/emnify_data_usage_high_tx.json
-    Traffic Transmition Stopped: assets/monitors/emnify_data_usage_host_stopped.json
+    Data exchange has stopped unexpectedly: assets/monitors/emnify_data_usage_host_stopped.json
+    Data transmission is abnormally high: assets/monitors/emnify_data_usage_high_tx.json
+    Forecasted data usage is more than expected: assets/monitors/emnify_data_usage_forecast.json
+    Receiving traffic is abnormally high: assets/monitors/emnify_data_usage_high_rx.json
 author:
   homepage: https://emnify.com
   name: EMnify
@@ -28,6 +30,7 @@ author:
 categories:
 - iot
 - メトリクス
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/emnify/README.md
 display_on_public_website: true
@@ -37,18 +40,17 @@ integration_id: emnify
 integration_title: EMnify
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: emnify
-oauth: {}
 public_title: EMnify
 short_description: EMnify データ使用量メトリクスのモニターとダッシュボード
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::IOT
+  - Category::IoT
   - Category::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: EMnify データ使用量メトリクスのモニターとダッシュボード
   media:
@@ -72,6 +74,7 @@ tile:
   title: EMnify
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 [EMnify][1] は、デバイスを接続したまま安全に保つ、セルラー IoT 接続プラットフォームです。
 
@@ -80,7 +83,7 @@ Datadog-EMnify インテグレーションを使用して、IoT EMnify デバイ
 ## セットアップ
 [EMnify インテグレーションガイド][2]に従って、**インテグレーションの手順**と**インテグレーションの検証**のセクションを使用して、使用量データのストリーミングを構成してください。
 
-### アラート設定
+### モニター
 
 使用パターンは人によって異なるため、モニターに特定のケースを反映させるには、作業量に応じた境界線と感度を定義する必要があります。
 詳細については、[予測値モニター][3]と[異常モニター][4]のドキュメントをお読みください。

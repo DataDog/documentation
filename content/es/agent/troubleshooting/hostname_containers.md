@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Detección de nombres de host en contenedores
 ---
 
@@ -70,7 +69,6 @@ datadog:
 Recurso `DatadogAgent` de Kubernetes:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -87,7 +85,6 @@ Manifiesto `DaemonSet`:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -138,7 +135,6 @@ datadog:
 Recurso `DatadogAgent` de Kubernetes:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -159,7 +155,6 @@ Manifiesto `DaemonSet`
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -177,7 +172,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Errores en nombres de host de AWS ECS y Docker VM
+## Errores de nombre de hosts de mv Amazon ECS y Docker
 
 Cuando el Agent se ejecuta en Docker en un proveedor de nube, un error en el nombre de host suele indicar que el Agent no puede acceder:
 * a la API de tiempo de ejecución del contenedor;
@@ -188,7 +183,7 @@ Cuando el Agent se ejecuta en Docker en un proveedor de nube, un error en el nom
 Permite que el Agent se conecte al socket de Docker:
 
 {{< tabs >}}
-{{% tab "AWS ECS en EC2" %}}
+{{% tab "Amazon ECS en EC2" %}}
 
 Asegúrate de que el socket de Docker está integrado en tu [definición de tarea][1].
 

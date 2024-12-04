@@ -4,17 +4,17 @@ categories:
 - クラウド
 - コンプライアンス
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Inspector のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_inspector/
 draft: false
 git_integration_title: amazon_inspector
 has_logo: true
-integration_id: amazon-inspector
+integration_id: ''
 integration_title: Amazon Inspector
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_inspector
 public_title: Datadog-Amazon Inspector インテグレーション
@@ -22,6 +22,7 @@ short_description: Amazon Inspector のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Inspector は、AWS リソースのセキュリティとコンプライアンスの強化を支援するセキュリティ脆弱性評価サービスです。
@@ -39,7 +40,7 @@ Amazon Inspector は、AWS リソースのセキュリティとコンプライ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Inspector` が有効になっていることを確認します。
 2. [Datadog - Amazon Inspector インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -65,7 +66,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 
 Amazon Inspector インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon Inspector インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -77,7 +78,7 @@ Amazon Inspector インテグレーションには、サービスのチェック
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-inspector
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_inspector/amazon_inspector_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

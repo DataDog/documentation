@@ -5,6 +5,7 @@ assets:
   dashboards:
     VoltDB - Overview: assets/dashboards/voltdb_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,11 +18,10 @@ assets:
     - voltdb
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10149
     source_type_name: VoltDB
-  logs:
-    source: voltdb
   monitors:
-    CPU load: assets/monitors/cpu_load.json
+    Voltdb Node CPU is high: assets/monitors/cpu_load.json
   saved_views:
     voltdb_processes: assets/saved_views/voltdb_processes.json
 author:
@@ -30,8 +30,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
 display_on_public_website: true
@@ -39,12 +40,10 @@ draft: false
 git_integration_title: voltdb
 integration_id: voltdb
 integration_title: VoltDB
-integration_version: 2.1.3
+integration_version: 3.2.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: voltdb
-oauth: {}
 public_title: VoltDB
 short_description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
 supported_os:
@@ -57,8 +56,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
   media: []
@@ -67,6 +67,7 @@ tile:
   title: VoltDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -84,7 +85,7 @@ tile:
 VoltDB チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. VoltDB `deployment.xml` ファイルを編集し、`datadog-agent` ユーザーを追加します。**注**: 特別なロールは必要ないため、組み込みの `user` ロールを割り当てます。
 
@@ -147,7 +148,7 @@ VoltDB チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 3. [Agent を再起動します][5]。
 
-#### ログの収集
+#### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -184,7 +185,7 @@ VoltDB チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 このチェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "voltdb" >}}
 
 
@@ -198,7 +199,7 @@ VoltDB チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 [1]: https://voltdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/voltdb/datadog_checks/voltdb/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.voltdb.com/UsingVoltDB/SecuritySSL.php

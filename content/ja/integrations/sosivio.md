@@ -5,6 +5,7 @@ assets:
   dashboards:
     sosivio_overview.json: ./assets/dashboards/sosivio_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: sosivio.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10285
     source_type_name: Sosivio
 author:
   homepage: https://www.sosiv.io
@@ -25,8 +27,9 @@ categories:
 - コンテナ
 - kubernetes
 - ネットワーク
-- notification
+- notifications
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sosivio/README.md
 display_on_public_website: true
@@ -36,10 +39,8 @@ integration_id: sosivio
 integration_title: Sosivio
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: sosivio
-oauth: {}
 public_title: Sosivio
 short_description: 手に入れるのは、データではなく答え。Kubernetes の予測型トラブルシューティング。
 supported_os:
@@ -51,9 +52,10 @@ tile:
   - Category::Containers
   - Category::Kubernetes
   - Category::Network
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: 手に入れるのは、データではなく答え。Kubernetes の予測型トラブルシューティング。
   media:
@@ -65,6 +67,7 @@ tile:
   title: Sosivio
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

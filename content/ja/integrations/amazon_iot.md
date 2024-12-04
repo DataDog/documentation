@@ -6,17 +6,17 @@ categories:
 - cloud
 - iot
 - log collection
+custom_kind: integration
 dependencies: []
 description: AWS IoT Core のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_iot/
 draft: false
 git_integration_title: amazon_iot
 has_logo: true
-integration_id: amazon-iot
+integration_id: ''
 integration_title: AWS IoT Core
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_iot
 public_title: Datadog-AWS IoT Core インテグレーション
@@ -24,6 +24,7 @@ short_description: AWS IoT Core のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS IoT Core は、接続されたデバイスが簡単かつセキュアにクラウドアプリケーションや他のデバイスと対話できるようにするマネージド型クラウドプラットフォームです。
@@ -41,7 +42,7 @@ AWS IoT Core は、接続されたデバイスが簡単かつセキュアにク�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `IoT` が有効になっていることを確認します。
 2. [Datadog - AWS IoT Core インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -69,7 +70,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 AWS IoT Core インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS IoT Core インテグレーションには、サービスのチェック機能は含まれません。
 

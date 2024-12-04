@@ -5,6 +5,7 @@ assets:
   dashboards:
     apache: assets/dashboards/apache_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,12 +20,11 @@ assets:
     - apache2
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 30
     source_type_name: Apache
-  logs:
-    source: apache
   monitors:
-    '[Apache] Low number of idle workers': assets/recommended_monitors/apache_low_idle_workers.json
-    '[Apache] resource utilization': assets/recommended_monitors/high_keep_alive_and_cpu.json
+    CPU load is running high: assets/monitors/high_keep_alive_and_cpu.json
+    Idle workers number is low: assets/monitors/apache_low_idle_workers.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -38,6 +38,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 display_on_public_website: true
@@ -45,12 +46,10 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 4.2.1
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: apache
-oauth: {}
 public_title: Apache
 short_description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 supported_os:
@@ -64,14 +63,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collect-apache-performance-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
   support: README.md#Support
   title: Apache
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Apache ダッシュボード][1]
@@ -90,14 +98,14 @@ Apache チェックは [Datadog Agent][2] にパッケージ化されていま�
 
 2. Apache サーバーに `mod_status` をインストールし、`ExtendedStatus` を有効にします。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -115,7 +123,7 @@ Apache チェックは [Datadog Agent][2] にパッケージ化されていま�
 
 2. [Agent を再起動します][3]。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -166,7 +174,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
 ```
 
-##### ログの収集
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -236,7 +244,7 @@ spec:
     - name: apache
 ```
 
-##### ログの収集
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
@@ -288,7 +296,7 @@ spec:
 }
 ```
 
-##### ログの収集
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -327,7 +335,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Apache チェックにはイベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "apache" >}}
 
 
@@ -350,7 +358,7 @@ Apache インテグレーションで問題が発生する場合の多くは、A
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example

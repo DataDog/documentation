@@ -1,17 +1,19 @@
 ---
-title: Logs Monitor
-kind: documentation
+title: Log Monitor
 aliases:
 - /monitors/monitor_types/log
 - /monitors/create/types/log/
 further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: "Logs Management Overview"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
@@ -21,11 +23,13 @@ further_reading:
 
 ## Overview
 
-Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified type of log exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
+Logs are essential for security investigations, aiding in threat detection, compliance tracking, and security monitoring. Log Management systems correlate logs with observability data for rapid root cause detection. Log management also enables efficient troubleshooting, issue resolution, and security audits.
+
+Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type  exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
 
 ## Monitor creation
 
-To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
+To create a log monitor in Datadog, use the main navigation: [**Monitors > New Monitor > Logs**][3].
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -33,14 +37,14 @@ To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors -->
 
 As you define the search query, the graph above the search fields updates.
 
-1. Construct a search query using the same logic as a [log explorer search][4].
-2. Choose to monitor over a log count, [facet][5], or [measure][6]:
-    * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet**: If a [facet][5] is selected, the monitor alerts over the `Unique value count` of the facet. For example, if you have a facet on `user.email`, the unique value count is the number of unique user emails.
+1. Construct a search query using the same logic as a [Log Explorer search][4].
+2. Choose to monitor over a log count, [facet][5], an attribute, or [measure][6]:
+    * **Monitor over a log count**: Use the search bar (optional) and do **not** select an attribute or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
+    * **Monitor over a facet or an attribute**: If a an attribute is selected, the monitor alerts over the `Unique value count` of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
     * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
 
-   All logs matching the query are aggregated into groups based on the value of up to four log facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
+   All logs matching the query are aggregated into groups based on the value of tags, attributes, and up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
    * **1 facet**: 1000 top values
    * **2 facets**: 30 top values per facet (at most 900 groups)
    * **3 facets**: 10 top values per facet (at most 1000 groups)
@@ -51,10 +55,13 @@ As you define the search query, the graph above the search fields updates.
 
 ### Set alert conditions
 
-* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between `5 minutes` and `2 days`.
-* Alert threshold `<NUMBER>`
-* Warning threshold `<NUMBER>`
+Trigger when the query meets one of the following conditions compared to a threshold value:
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
 
 #### No data and below alerts
 
@@ -77,7 +84,7 @@ For detailed instructions on the advanced alert options (evaluation delay, new g
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
 #### Log samples and breaching values toplist
 
@@ -94,7 +101,7 @@ When a logs monitor is triggered, samples or values can be added to the notifica
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
-To disable log samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+To disable log samples, uncheck the box at the bottom of the **Configure notification & automations** section. The text next to the box is based on your monitor's grouping (as stated above).
 
 #### Examples
 
@@ -110,7 +117,7 @@ Include a sample of 10 logs in the alert notification:
 
 [1]: /logs/
 [2]: /logs/log_configuration/indexes/
-[3]: https://app.datadoghq.com/monitors#create/log
+[3]: https://app.datadoghq.com/monitors/create/log
 [4]: /logs/explorer/search/
 [5]: /logs/explorer/facets/
 [6]: /logs/explorer/facets/#measures

@@ -21,7 +21,7 @@ integration_id: resin
 integration_title: Resin
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: brent@bmontague.com
 manifest_version: 1.0.0
 metric_prefix: resin.

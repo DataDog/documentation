@@ -1,6 +1,6 @@
 ---
 title: Add Custom Metadata with Reference Tables
-kind: guide
+
 beta: true
 aliases:
   - /logs/guide/enrichment-tables/
@@ -9,7 +9,7 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Use the lookup processor to enrich logs from a Reference Table"
-- link: "/logs/explorer/analytics/#filter-logs-based-on-reference-tables"
+- link: "/logs/explorer/advanced_search#filter-logs-based-on-reference-tables"
   tag: "Documentation"
   text: "Filter logs based on Reference Tables"
 - link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
@@ -19,11 +19,6 @@ further_reading:
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
 ---
-
-<div class="alert alert-warning">
-The Reference Tables feature is currently in public beta. There are no billing implications for defining and querying Reference Tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-During the beta, there is a limit of 100 Reference Tables per account.
-</div>
 
 ## Overview
 

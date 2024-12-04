@@ -3,6 +3,7 @@ app_id: squid
 app_uuid: de18c581-69ee-48cf-ba23-7794bfb7a4bd
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,18 +14,17 @@ assets:
       prefix: squid.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10022
     source_type_name: Squid
-  logs:
-    source: squid
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - caching
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/squid/README.md
 display_on_public_website: true
@@ -32,27 +32,25 @@ draft: false
 git_integration_title: squid
 integration_id: squid
 integration_title: Squid
-integration_version: 2.2.0
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: squid
-oauth: {}
 public_title: Squid
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::キャッシュ
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
   media: []
@@ -61,6 +59,7 @@ tile:
   title: Squid
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -73,14 +72,14 @@ tile:
 
 Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれています。Squid サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -88,7 +87,7 @@ Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれ�
 
 2. [Agent を再起動します][3]。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -120,7 +119,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/squid/datadog_checks/squid/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -130,11 +129,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
-| `<インテグレーション名>` | `squid`                                                                |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"name": "<SQUID_INSTANCE_NAME>", "host": "%%host%%", "port":"3128"}` |
+| `<INTEGRATION_NAME>` | `squid`                                                                |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                          |
+| `<INSTANCE_CONFIG>`  | `{"name": "<SQUID_INSTANCE_NAME>", "host": "%%host%%", "port":"3128"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -163,7 +162,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Squid チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "squid" >}}
 
 
@@ -174,6 +173,6 @@ Squid チェックには、イベントは含まれません。
 
 
 [1]: http://www.squid-cache.org/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

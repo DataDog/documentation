@@ -1,6 +1,5 @@
 ---
 title: Données NDM recueillies
-kind: documentation
 aliases:
   - /fr/network_performance_monitoring/devices/data/
 ---

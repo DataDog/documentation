@@ -6,6 +6,7 @@ categories:
 - クラウド
 - コンテナ
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 description: Azure Container Instances のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_instances/
@@ -16,7 +17,6 @@ integration_id: azure-containerinstances
 integration_title: Microsoft Azure Container Instances
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_container_instances
 public_title: Datadog-Microsoft Azure Container Instances インテグレーション
@@ -24,6 +24,7 @@ short_description: Azure Container Instances のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Container Instances は、開発者が基底のインフラストラクチャーをプロビジョニングおよび管理する必要なくコンテナをデプロイできるサービスです。
@@ -46,7 +47,7 @@ Datadog Azure インテグレーションを使用して Azure Container Instanc
 
 Azure Container Instances インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Container Instances インテグレーションには、サービスのチェック機能は含まれません。
 

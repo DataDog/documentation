@@ -3,17 +3,17 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS Elemental MediaPackage のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediapackage/
 draft: false
 git_integration_title: amazon_mediapackage
 has_logo: true
-integration_id: amazon-mediapackage
+integration_id: ''
 integration_title: AWS Elemental MediaPackage
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_mediapackage
 public_title: Datadog-AWS Elemental MediaPackage インテグレーション
@@ -21,6 +21,7 @@ short_description: AWS Elemental MediaPackage のキーメトリクスを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Elemental MediaPackage は、さまざまな再生デバイスに安全性、拡張性、信頼性の高いビデオストリームを配信するジャストインタイムのビデオパッケージングおよびオリジネーションサービスです。
@@ -38,7 +39,7 @@ AWS Elemental MediaPackage は、さまざまな再生デバイスに安全性�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MediaPackage` が有効になっていることを確認します。
 2. [Datadog - AWS Elemental MediaPackage インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -64,7 +65,7 @@ AWS Elemental MediaPackage から S3 バケットまたは CloudWatch のいず�
 
 AWS Elemental MediaPackage インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Elemental MediaPackage インテグレーションには、サービスのチェック機能は含まれません。
 

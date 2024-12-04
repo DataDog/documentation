@@ -1,6 +1,6 @@
 ---
 title: The AWS Integration with Terraform
-kind: guide
+
 aliases:
     - /integrations/faq/aws-integration-with-terraform/
 disable_toc: true
@@ -65,6 +65,11 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
    resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
       role = "${aws_iam_role.datadog_aws_integration.name}"
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
+   }
+
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
    }
 
    resource "datadog_integration_aws" "sandbox" {

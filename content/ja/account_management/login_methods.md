@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Login Methods の構成
 ---
 
@@ -34,9 +33,9 @@ title: Login Methods の構成
 
 [ユーザー管理][4]では、設定されているオーバーライド方法でユーザーを絞り込んだり、デフォルトのログイン方法を有効にしているユーザーを表示することができます。
 
-{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="ユーザー管理ビューは、設定されたログイン方法によってユーザーを表示するようにフィルターがかけられています。" style="width:80%;">}}
+{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to show users by login methods set." style="width:80%;">}}
 
-ユーザーのオーバーライドを編集するか、オーバーライドを完全に削除して、ユーザーがデフォルトのみを使用できるようにすることができます。詳しくは、[ユーザーのログイン方法を編集する][1]を参照してください。
+You can edit the user's overrides or remove the override altogether to allow the user to only use the defaults. For more information see [Edit a user's login methods][1].
 
 [1]: /ja/account_management/users/#edit-a-users-login-methods
 [2]: /ja/account_management/saml/

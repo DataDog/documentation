@@ -50,7 +50,7 @@ export function initializeGroupedListings() {
     }
 
     const handleEmptyResultSet = () => {
-        const searchQuery = inputSearch.value;
+        const searchQuery = inputSearch?.value;
         const activeEl = document.querySelector('.controls .active');
         const txt = (activeEl) ? activeEl.textContent : '';
         const activeCategoryFilter = stringToTitleCase(txt);
@@ -116,11 +116,12 @@ export function initializeGroupedListings() {
         const activeCategory = document.querySelector('.controls .active');
         const activeCategoryFilter = (activeCategory) ? activeCategory.dataset.filter : '';
 
-        if(searchValue){
+        if (searchValue) {
             url.searchParams.set('search', searchValue)
-        }else{
+        } else {
             url.searchParams.delete('search')
         }
+
         clearTimeout(keyupTimeout);
         
         keyupTimeout = setTimeout(() => {

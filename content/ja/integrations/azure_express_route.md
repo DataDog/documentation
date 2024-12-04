@@ -5,6 +5,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: Azure ExpressRoute のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
@@ -15,7 +16,6 @@ integration_id: azure-expressroute
 integration_title: Microsoft Azure ExpressRoute
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_express_route
 public_title: Datadog-Microsoft Azure ExpressRoute インテグレーション
@@ -23,6 +23,7 @@ short_description: Azure ExpressRoute のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure ExpressRoute サービスを使用すると、接続プロバイダーから提供されるプライベート接続を介して、オンプレミスネットワークを Microsoft クラウドまで拡張できます。
@@ -45,7 +46,7 @@ Datadog Azure インテグレーションを使用すると、Azure ExpressRoute
 
 Azure ExpressRoute インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure ExpressRoute インテグレーションには、サービスのチェック機能は含まれません。
 

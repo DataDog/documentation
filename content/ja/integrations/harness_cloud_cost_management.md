@@ -11,6 +11,7 @@ author:
   support_email: akash.bhardwaj@harness.io
 categories:
 - コスト管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/harness_cloud_cost_management/README.md
 display_on_public_website: true
@@ -20,10 +21,8 @@ integration_id: harness-cloud-cost-management
 integration_title: Harness クラウドコストマネジメント
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: harness_cloud_cost_management
-oauth: {}
 public_title: Harness クラウドコストマネジメント
 short_description: Harness のクラウドとクラスターのコストメトリクスを日付範囲で表示する
 supported_os:
@@ -56,6 +55,7 @@ tile:
   title: Harness クラウドコストマネジメント
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -81,11 +81,11 @@ Datadog と Harness を使えば、以下のことが可能です。
 
 Harness クラウドコストマネジメントチェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Harness クラウドコストマネジメントチェックには、サービスのチェック機能は含まれません。
 
-## サポート
+## Agent
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

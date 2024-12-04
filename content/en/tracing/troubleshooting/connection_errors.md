@@ -1,6 +1,5 @@
 ---
 title: APM Connection Errors
-kind: Documentation
 aliases:
   - /tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
 ---
@@ -264,7 +263,7 @@ If the configuration is correct, but you're still seeing connection errors, [con
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
 [2]: /tracing/troubleshooting/tracer_debug_logs/
-[3]: /agent/guide/agent-commands/#agent-information
+[3]: /agent/configuration/agent-commands/#agent-information
 [4]: /help/
 [5]: /agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup

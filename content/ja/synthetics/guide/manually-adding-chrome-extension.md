@@ -6,8 +6,7 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: ブラウザテストを作成する
-kind: ガイド
-title: ブラウザテスト Chrome 拡張機能を内部アプリケーションストアに手動で追加する
+title: ブラウザテストのための Chrome 拡張機能を手動で追加する
 ---
 
 ## 概要
@@ -17,7 +16,7 @@ title: ブラウザテスト Chrome 拡張機能を内部アプリケーショ�
 1. Datadog テストレコーダー拡張機能の[最新の CRX ファイル][1]をダウンロードします。
 2. この CRX ファイルを内部のアプリケーションストアにアップロードし、拡張機能を再パッケージ化します。Chrome ブラウザの拡張機能の横に、新しい拡張機能のアイコンが表示されます。
 
-   {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="ブラウザに表示されるアイコン" style="width:100%;" >}}
+   {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="the icon that appears in your browser" style="width:100%;" >}}
 
 3. [テストの構成を定義][3] (テスト名、タグ、場所、頻度など) し、**Save Details &amp; Record Test** をクリックして、[ブラウザ テスト][2]を作成します。記録を開始するには、まず、[Datadog テストレコーダー拡張機能][4]をダウンロードします。
 4. ブラウザの右上にあるレコーダー拡張機能のアイコンをクリックします。Datadog テストレコーダー拡張機能は、内部のアプリケーションストアにアップロードされた拡張機能を自動的に検出します。

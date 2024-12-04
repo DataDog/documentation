@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/data_collected/#metrics
   tag: 설명서
   text: ECS 메트릭 수집
-kind: 설명서
 title: Amazon ECS 로그 수집
 ---
 

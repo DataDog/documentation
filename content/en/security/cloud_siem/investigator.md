@@ -1,6 +1,5 @@
 ---
 title: Investigator
-kind: documentation
 aliases:
   - /security_platform/cloud_siem/cloud_security_investigator/
   - /security_platform/cloud_siem/cloud_siem_investigator/
@@ -20,8 +19,6 @@ further_reading:
 ---
 
 ## Overview
-
-<div class="alert alert-info">Cloud SIEM Investigator supports AWS CloudTrail logs and Google Cloud Audit logs.</div>
 
 When a security signal alerts on suspicious activity by a user or a resource, some commonly asked questions during the investigation include:
 

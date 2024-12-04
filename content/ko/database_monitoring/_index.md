@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/
   tag: 블로그
   text: Datadog DBM을 사용하여 SQL Server 및 Azure 관리 데이터베이스 모니터링
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: 블로그
+  text: MongoDB 성능 추적 및 문제 해결
 - link: /database_monitoring/data_collected/
   tag: 설명서
   text: 수집한 데이터
@@ -21,22 +24,24 @@ further_reading:
   tag: 설명서
   text: 트러블슈팅
 - link: https://dtdg.co/fe
-  tag: 기반 활성화
+  tag: 기초 구축
   text: 대화형 세선에 참여해 데이터베이스 모니터링을 한 단계 업그레이드하세요.
-kind: 설명서
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: 블로그
+  text: Datadog Database로 MongoDB 성능 추적 및 문제 해결 모니터링
 title: 데이터베이스 모니터링
 ---
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
 
-{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
+
+{{< learning-center-callout header="인에이블먼트 웨비나 세션에 참여하세요" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
+  데이터베이스 모니터링을 통해 비용이 많이 들고 느린 쿼리를 신속하게 찾아내는 방법을 알아보세요. 정확한 실행 세부 정보를 분석하여 병목 현상을 해결하세요.
+{{< /learning-center-callout >}}
 
 Datadog 데이터베이스 모니터링을 사용하면 호스트 전반에 있는 데이터베이스에 대한 가시성을 확보할 수 있습니다. 쿼리 성능 메트릭 내역, 설명 계획, 호스트 수준 메트릭 등을 모두 한 곳에서 살펴보고, 데이터베이스의 상태와 성능을 파악하여 문제 발생 시 문제를 해결할 수 있습니다.
 
 ## 시작하기
 
-Datadog 데이터베이스 모니터링은 자체 호스팅과 **Postgres**, **MySQL**, **SQL Server**의 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 설정하고 Datadog Agent를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택하세요:
+Datadog 데이터베이스 모니터링은 **Postgres**, **MySQL**, **Oracle**, **SQL Server** 및 **MongoDB**의 자체 호스팅 및 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 구성하고 Datadog Agent를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택합니다.
 
 ### Postgres
 
@@ -53,14 +58,19 @@ Datadog 데이터베이스 모니터링은 자체 호스팅과 **Postgres**, **M
 {{< partial name="dbm/dbm-setup-oracle" >}}
 <p></p>
 
-### SQL Server
+### SQL 서버
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
+### MongoDB
+
+{{< partial name="dbm/dbm-setup-mongodb" >}}
+<p></p>
+
 ## Datadog 데이터베이스 모니터링 탐색하기
 
-UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를 클릭하여 데이터베이스 모니터링으로 이동
+Datadog에서 [데이터베이스 모니터링][1]로 이동합니다.
 
 ### 쿼리 성능 메트릭 세부 정보
 
@@ -70,7 +80,7 @@ UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를
 - 업데이트/반환된 행과 같이 APM에서 캡처하지 않는 데이터베이스 수준 메트릭을 표시합니다.
 - 팀, 사용자, 클러스터, 호스트 등의 모든 차원에서 쿼리를 필터링하고 그룹화합니다.
 
-{{< img src="database_monitoring/dbm-query-metrics.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-query-metrics-2.png" alt="데이터베이스 모니터링" style="width:100%;">}}
 
 ### 쿼리 샘플 탐색
 
@@ -80,7 +90,7 @@ UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를
 - 쿼리 실행 시간이나 실행 비용에서 이상값을 찾아냅니다.
 - 특정 쿼리 실행을 사용자, 애플리케이션 또는 클라이언트 호스트와 연결합니다.
 
-{{< img src="database_monitoring/dbm-query-sample.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-query-sample-2.png" alt="데이터베이스 모니터링" style="width:100%;">}}
 
 ### 실행하기 전에 이해하기
 
@@ -90,7 +100,7 @@ UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를
 - 쿼리 효율성을 개선하고 큰 규모의 테이블에서 비용이 많이 드는 순차 스캔을 절약할 수 있습니다.
 - 시간이 지남에 따라 쿼리의 계획이 어떻게 변경되는지 확인하세요.
 
-{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan-3.png" alt="데이터베이스 모니터링" style="width:100%;">}}
 
 ### 향상된 대시보드로 모든 것을 시각화
 
@@ -98,7 +108,24 @@ UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 
+### 호스트 상태 및 성능 최적화
+
+[데이터베이스 페이지][1]에서 데이터베이스 호스트의 활동과 상태를 확인할 수 있습니다. 알림이 트리거되었거나 쿼리 볼륨이 높은 호스트 등 여러 기준에 따라 호스트 우선순위를 정렬하고 필터링할 수 있습니다. 각 호스트를 클릭하면 호스트 구성, 일반적으로 블록된 쿼리, 서비스 호출과 같은 상세 내역을 확인할 수 있습니다. 자세한 내용은 [데이터베이스 호스트 탐색][5]을 참고하세요.
+
+{{< img src="database_monitoring/databases-list.png" alt="Datadog 데이터베이스 페이지" style="width:90%;" >}}
+
+### 최적화 권장 사항 보기
+
+권장 사항 페이지][6]는 문제와 최적화 기회를 강조 표시하여 가장 중요한 것의 우선순위를 정함으로써 시간을 절약할 수 있도록 도와줍니다. 권장 사항을 선택하면 문제 요약과 문제 해결을 위한 잠재적인 다음 단계를 포함한 세부 정보를 볼 수 있습니다.
+
+{{< img src="database_monitoring/recommendations-page.png" alt="Datadog 권장 사항 페이지" style="width:90%;" >}}
+
+
 ## 참고 자료
+
+{{< learning-center-callout header="학습 센터에서 Datadog DBM으로 Postgres 데이터베이스를 모니터링해 보세요." btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/database-monitoring" >}}
+Datadog 학습 센터에는 이 주제에 대해 학습하는 데 유용한 실습 과정이 다양하게 준비되어 있습니다. 무료로 등록하여 비효율성을 식별하고 Postgres 데이터베이스를 최적화하세요.
+{{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -106,3 +133,5 @@ UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를
 [2]: /ko/database_monitoring/query_metrics/
 [3]: /ko/database_monitoring/query_samples/
 [4]: /ko/database_monitoring/query_metrics/#explain-plans
+[5]: /ko/database_monitoring/database_hosts/
+[6]: /ko/database_monitoring/recommendations/

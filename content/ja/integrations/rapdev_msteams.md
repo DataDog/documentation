@@ -11,6 +11,7 @@ assets:
     MS Teams CQ User Devices: assets/dashboards/ms_teams_cq_user_devices.json
     MS Teams CQ User Experience: assets/dashboards/ms_teams_cq_user_experience.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -21,7 +22,10 @@ assets:
       prefix: rapdev.msteams.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10297
     source_type_name: RapDev MSTeams
+  logs:
+    source: rapdev_msteams
   monitors:
     '[Microsoft Teams] Poor Call Session Audio Performance Qualifier A': assets/monitors/performance_audio_packet_utilization.json
     '[Microsoft Teams] Poor Call Session Audio Performance Qualifier B': assets/monitors/performance_audio_rtt.json
@@ -39,6 +43,7 @@ author:
 categories:
 - コラボレーション
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -47,12 +52,10 @@ integration_id: rapdev-msteams
 integration_title: Microsoft Teams
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_msteams
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -77,26 +80,24 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
   media:
   - caption: 通話品質概要
-    image_url: images/1.png
+    image_url: images/1.jpg
     media_type: image
   - caption: 通話品質ユーザーエクスペリエンス概要
-    image_url: images/2.png
-    media_type: image
-  - caption: 通話品質ユーザーエクスペリエンスネットワークとオーディオ
-    image_url: images/3.png
+    image_url: images/2.jpg
     media_type: image
   - caption: 通話品質ユーザーエクスペリエンスオーディオとビデオ
-    image_url: images/4.png
+    image_url: images/3.jpg
     media_type: image
   - caption: 通話品質ユーザーデバイス
-    image_url: images/5.png
+    image_url: images/4.jpg
     media_type: image
   - caption: パフォーマンス修飾子ルックアップテーブル
-    image_url: images/6.png
+    image_url: images/5.jpg
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -104,6 +105,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 RapDev Microsoft Teams インテグレーションは、通話品質レポートを監視し、通話アクティビティとエクスペリエンスに関する洞察を提供するメトリクス、モニター、ダッシュボードを提供します。
@@ -118,9 +120,9 @@ Microsoft Teams インテグレーションは、Active Directory テナント�
 ## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: support@rapdev.io 
+ - メール: support@rapdev.io
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222 
+ - 電話: 855-857-0222
 
 ---
 

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Torq: assets/dashboards/torq_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: torq.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10231
     source_type_name: Torq
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,9 +24,10 @@ author:
   support_email: support@torq.io
 categories:
 - 自動化
-- notification
+- notifications
 - orchestration
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: torq
 integration_title: Torq
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: torq
-oauth: {}
 public_title: Torq
 short_description: セキュリティチームとオペレーションチームのためのノーコード自動化
 supported_os:
@@ -48,12 +49,13 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Automation
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Security
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: セキュリティチームとオペレーションチームのためのノーコード自動化
   media: []
@@ -62,6 +64,7 @@ tile:
   title: Torq
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -177,7 +180,7 @@ Torq インテグレーションは、メトリクスを提供しません。
 
 Torq インテグレーションでは、Datadog ポストイベントステップを使用して Torq ワークフローから Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
 
-### サービスのチェック
+### サービスチェック
 
 Torq インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -187,11 +190,11 @@ Torq インテグレーションには、サービスのチェック機能は含
 
 [1]: https://torq.io
 [2]: https://torq.io/get-started/
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook.png
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_2.png
+[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_search.png
+[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_config.png
 [5]: https://docs.datadoghq.com/ja/monitors/manage_monitor/
 [6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
-[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_api_key.png
+[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_api_key_2.png
 [8]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-application-keys
-[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_app_key.png
+[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_app_key_2.png
 [10]: https://docs.datadoghq.com/ja/help/

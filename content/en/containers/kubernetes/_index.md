@@ -1,6 +1,5 @@
 ---
 title: Kubernetes
-kind: documentation
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes
@@ -25,7 +24,15 @@ further_reading:
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session for insights on Kubernetes monitoring'
+    - link: 'https://www.datadoghq.com/blog/watermark-pod-autoscaler/'
+      tag: 'Blog'
+      text: 'A guide on scaling out your Kubernetes pods with the Watermark Pod Autoscaler'
 ---
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+  This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -55,5 +62,5 @@ For information pertaining to the Datadog Cluster Agent, which provides a stream
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 [3]: /containers/cluster_agent/

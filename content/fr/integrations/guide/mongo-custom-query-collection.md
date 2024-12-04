@@ -1,12 +1,14 @@
 ---
-title: Recueillir des métriques custom Mongo
-kind: guide
 further_reading:
-  - link: /integrations/mongo/
-    tag: Documentation
-    text: Intégration Datadog/Mongo
+- link: /integrations/mongo/
+  tag: Documentation
+  text: En savoir plus sur l'intégration MongoDB
+title: Recueillir des métriques custom MongoDB
 ---
-Pour recueillir des métriques custom avec l'intégration Datadog/Mongo, utilisez l'option `custom_queries` dans le fichier `conf.d/mongo.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le fichier d'exemple [mongo.d/conf.yaml][2] pour en savoir plus.
+
+## Présentation
+
+Pour recueillir des métriques custom avec l'intégration [Datadog/MongoDB][8], utilisez l'option `custom_queries` dans le fichier `conf.d/mongo.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le fichier d'exemple [mongo.d/conf.yaml][2] pour en savoir plus.
 
 ## Configuration
 
@@ -14,6 +16,7 @@ Pour recueillir des métriques custom avec l'intégration Datadog/Mongo, utilise
 
 * **`metric_prefix`** : chaque métrique commence par le préfixe défini.
 * **`query`** : il s'agit de la requête [Mongo runCommand][3] à exécuter en tant qu'objet JSON. **Remarque** : l'Agent prend uniquement en charge les requêtes `count`, `find` et `aggregates`.
+* **`database`** : Il s'agit de la base de données MongoDB à partir de laquelle les métriques sont collectées.
 * **`fields`** : option ignorée pour les requêtes `count`. Il s'agit d'une liste représentant chaque champ sans aucun ordre spécifique. Ignore les champs non spécifiés et manquants. Chaque `fields` doit comporter trois informations :
   * `field_name` : le nom du champ à partir duquel récupérer les données.
   * `name` : le suffixe ajouté à la valeur metric_prefix pour former le nom complet de la métrique. Si le `type` est `tag`, cette colonne est traitée en tant que tag et appliquée à chaque métrique recueillie par cette requête spécifique.
@@ -23,7 +26,7 @@ Pour recueillir des métriques custom avec l'intégration Datadog/Mongo, utilise
 
 ## Exemples
 
-Pour les exemples ci-dessous, la méthode de collecte mongo `user_collection` est utilisée :
+Pour les exemples ci-dessous, la méthode de collecte Mongo `user_collection` est utilisée :
 
 ```text
 { name: "foo", id: 12345, active: true, age:45, is_admin: true}
@@ -135,7 +138,7 @@ Cela génère une métrique `gauge` `mongo.example3.user.age` avec deux tags : 
 
 ### Validation
 
-Pour vérifier le résultat, recherchez les métriques à l'aide du [Metrics Explorer][5] :
+Pour vérifier le résultat, recherchez les métriques à l'aide du [Metrics Explorer][5].
 
 ### Debugging
 
@@ -152,3 +155,4 @@ Pour vérifier le résultat, recherchez les métriques à l'aide du [Metrics Exp
 [5]: /fr/metrics/explorer/
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: /fr/agent/guide/agent-log-files/
+[8]: /fr/integrations/mongodb

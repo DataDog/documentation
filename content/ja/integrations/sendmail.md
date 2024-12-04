@@ -3,6 +3,7 @@ app_id: sendmail
 app_uuid: 8169d145-8d1f-4bb8-a4de-a0aa9aa84c0b
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: sendmail.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10204
     source_type_name: Sendmail
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
 categories:
 - メトリクス
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: sendmail
 integration_title: Sendmail
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: sendmail
-oauth: {}
 public_title: Sendmail
 short_description: メールキューを監視する Sendmail インテグレーション
 supported_os:
@@ -44,6 +45,7 @@ tile:
   - Category::Metrics
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: メールキューを監視する Sendmail インテグレーション
   media: []
@@ -52,6 +54,7 @@ tile:
   title: Sendmail
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,7 +77,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. sendmail のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sendmail.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sendmail.d/conf.yaml][5] を参照してください。
 
@@ -94,7 +97,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 Sendmail には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "sendmail" >}}
 
 
@@ -104,7 +107,7 @@ Sendmail には、イベントは含まれません。
 
 
 [1]: https://www.proofpoint.com/us/open-source-email-solution
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/sendmail/datadog_checks/sendmail/data/conf.yaml.example

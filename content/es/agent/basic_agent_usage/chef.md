@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/chef-datadog/blob/main/README.md
-kind: documentación
 title: Chef
 ---
 Las recetas del Datadog Chef se usan para desplegar los componentes y la configuración de Datadog automáticamente. El cookbook es compatible con:
@@ -11,7 +10,7 @@ Las recetas del Datadog Chef se usan para desplegar los componentes y la configu
 * Datadog Agent v5.x
 
 **Nota**: Es posible que esta página describa funciones que no están disponibles en la versión que has elegido. Consulta el archivo README de la
-etiqueta git o la versión gem de la documentación de tu versión.
+etiqueta git o la versión del GEM de la documentación de tu versión.
 
 ## Configuración
 
@@ -46,19 +45,6 @@ Los siguientes cookbooks de Opscode son dependencias:
 
 #### Chef
 
-**Usuarios de Chef 12**: Dependiendo de la versión de Chef 12 que uses, puede haber restricciones adicionales relacionadas con las dependencias:
-
-```ruby
-# Chef < 12.14
-depends 'yum', '< 5.0'
-```
-
-```ruby
-# Chef < 12.9
-depends 'apt', '< 6.0.0'
-depends 'yum', '< 5.0'
-```
-
 **Usuarios de Chef 13**: Con Chef 13 y `chef_handler` 1.x, puede que la receta `dd-handler` os dé algún problema. La única solución conocida es actualizar la dependencia a `chef_handler` >= 2.1.
 
 ### Instalación
@@ -66,7 +52,7 @@ depends 'yum', '< 5.0'
 1. Añade el cookbook a tu servidor de Chef con [Berkshelf][5] o [Knife][6]:
     ```text
     # Berksfile
-    cookbook 'datadog', '~> 4.0.0'
+    cookbook 'datadog', '~> 4.0'
     ```
 
     ```shell
@@ -81,7 +67,7 @@ depends 'yum', '< 5.0'
     node.default['datadog']['application_key'] = "<YOUR_DD_APP_KEY>"
     ```
 
-3. Carga el cookbook actualizado en tu servidor de Chef:
+3. Carga el cookbook actualizado en tu servidor Chef:
     ```shell
     berks upload
     # or
@@ -96,23 +82,6 @@ depends 'yum', '< 5.0'
     ```
 
 5. Espera a que se ejecute el próximo `chef-client` programado o actívalo manualmente.
-
-### Entorno dockerizado
-
-Para crear un entorno de Docker, usa los archivos que aparece debajo de `docker_test_env`:
-
-```
-cd docker_test_env
-docker build -t chef-datadog-container .
-```
-
-Para ejecutar el contenedor, usa:
-
-```
-docker run -d -v /dev/vboxdrv:/dev/vboxdrv --privileged=true chef-datadog-container
-```
-
-Luego, asocia una consola al contenedor o usa la función de contenedor remoto de VSCode para programar dentro del contenedor.
 
 #### Atributos de Datadog
 
@@ -214,7 +183,7 @@ Por defecto, la actual versión principal de este cookbook instala el Agent v7. 
 
 Consulta el ejemplo [attributes/default.rb][1] correspondiente a tu versión del cookbook para ver todos los atributos disponibles.
 
-### Pasar a una versión posterior
+### Actualizar
 
 Los nombres de algunos atributos han cambiado entre las versiones 3.x y 4.x del cookbook. Usa esta tabla de referencia para actualizar tu configuración:
 
@@ -226,7 +195,7 @@ Los nombres de algunos atributos han cambiado entre las versiones 3.x y 4.x del 
 | Anclar versión del Agent     | `'agent_version'` o `'agent6_version'`               | `'agent_version'` para todas las versiones        |
 | Cambiar package_action | `'agent_package_action'` o `'agent6_package_action'` | `'agent_package_action'` para todas las versiones |
 | Cambiar URL de repositorio APT   | `'aptrepo'` o `'agent6_aptrepo'`                     | `'aptrepo'` para todas las versiones              |
-| Cambiar distribución de repositorio APT  | `'aptrepo_dist'` o `'agent6_aptrepo_dist'`           | `'aptrepo_dist'` para todas las versiones         |
+| Cambiar distribución de repositorio APT  | `'aptrepo_dist'` o `'agent6_aptrepo_dist'`   | `'aptrepo_dist'` para todas las versiones         |
 | Cambiar repositorio YUM       | `'yumrepo'` o `'agent6_yumrepo'`                     | `'yumrepo'` para todas las versiones              |
 | Cambiar repositorio SUSE      | `'yumrepo_suse'` o `'agent6_yumrepo_suse'`           | `'yumrepo_suse'` para todas las versiones         |
 
@@ -267,11 +236,27 @@ El siguiente ejemplo muestra cómo se puede cambiar del Agent v7 al v6. Para pas
 
 Para desinstalar el Agent, elimina la receta `dd-agent` y añade la receta `remove-dd-agent` sin atributos.
 
+### Repositorio personalizado del Agent 
+
+Para utilizar un Agent de un repositorio personalizado, puedes configurar la opción `aptrepo`.
+
+Por defecto, esta opción es igual a `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] apt.datadoghq.com`. Si se establece un valor personalizado, también se puede establecer otro conjunto de claves `signed-by` `[signed-by=custom-repo-keyring-path] custom-repo`.
+
+El ejemplo siguiente utiliza el repositorio de preparación:
+
+```ruby
+  default_attributes(
+    'datadog' => {
+      'aptrepo' => '[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] apt.datad0g.com',
+    }
+  }
+```
+
 ## Recetas
 
 Accede a las [recetas de Datadog Chef en GitHub][7].
 
-### Predeterminada
+### Predeterminado
 
 La [receta predeterminada][8] es un parámetro.
 
@@ -283,7 +268,7 @@ La [receta dd-agent][9] instala el Datadog Agent en el sistema de destino, estab
 
 ### Handler
 
-La [receta dd-handler][11] instala el gem [chef-handler-datadog][12] e invoca el handler al final de una ejecución de Chef para enviar los detalles al muro de noticias.
+La [receta dd-handler][11] instala el GEM [chef-handler-datadog][12] e invoca el handler al final de una ejecución de Chef para enviar los detalles al muro de noticias.
 
 ### DogStatsD
 
@@ -334,23 +319,25 @@ Usa el recurso `datadog_monitor` para activar integraciones del Agent sin ningun
 
 ```ruby
 datadog_monitor 'name' do
-  init_config                       Hash # default value: {}
-  instances                         Array # default value: []
-  logs                              Array # default value: []
-  use_integration_template          true, false # default value: false
-  action                            Symbol # defaults to :add
+  init_config                       Hash # valor predeterminado: {}
+  instances                         Array # valor predeterminado: []
+  logs                              Array # valor predeterminado: []
+  use_integration_template          true, false # valor predeterminado: false
+  config_name                       String # valor predeterminado: 'conf'
+  action                            Symbol # con el valor predeterminado :add
 end
 ```
 
 #### Propiedades
 
-| Propiedad                   | Descripción                                                                                                                                                                                                                                                                                    |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `'name'`                   | Nombre de la integración del Agent que hay que configurar y activar.                                                                                                                                                                                                                                     |
-| `instances`                | Campos que se usan para rellenar los valores de la sección `instances` dentro del archivo de configuración de la integración.                                                                                                                                                                                            |
-| `init_config`              | Campos que se usan para rellenar los valores de la sección `init_config` dentro del archivo de configuración de la integración.                                                                                                                                                                                      |
-| `logs`                     | Campos que se usan para rellenar los valores de la sección `logs` dentro del archivo de configuración de la integración.                                                                                                                                                                                             |
+| Propiedad                   | Descripción                                                                                                                                                                                                                                                                                   |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `'name'`                   | Nombre de la integración del Agent que hay que configurar y activar.                                                                                                                                                                                                                                    |
+| `instances`                | Campos que se usan para rellenar los valores de la sección `instances` dentro del archivo de configuración de la integración.                                                                                                                                                                                           |
+| `init_config`              | Campos que se usan para rellenar los valores de la sección `init_config` dentro del archivo de configuración de la integración.                                                                                                                                                                                     |
+| `logs`                     | Campos que se usan para rellenar los valores de la sección `logs` dentro del archivo de configuración de la integración.                                                                                                                                                                                            |
 | `use_integration_template` | Establécela como `true` (recomendado) para usar la plantilla predeterminada, la cual redacta los valores de `instances`, `init_config` y `logs` en el YAML con sus claves correspondientes. Esto cambia por defecto a `false` para garantizar la compatibilidad con versiones anteriores, pero puede que se establezca de forma predeterminada como `true` en una versión principal futura del cookbook. |
+| `config_name`              | El nombre de archivo que se utiliza al crear un archivo de configuración de integraciones. Si se reemplaza esta propiedad, se permite la creación de varios archivos de configuración para una única integración. El valor predeterminado es `conf`, que crea un archivo de configuración llamado `conf.yaml`.                                    |
 
 #### Ejemplo
 
@@ -413,6 +400,32 @@ Para obtener las versiones disponibles de las integraciones, consulta el `CHANGE
 
 **Nota**: En el caso de los usuarios de Chef con Windows, `chef-client` debe tener permiso para leer el archivo `datadog.yaml` cuando este recurso use el binario `datadog-agent` disponible en el nodo.
 
+## Desarrollo
+
+### Entorno dockerizado
+
+Para crear un entorno Docker con el cual ejecutar pruebas Kitchen, utiliza los archivos siguientes `docker_test_env`:
+
+```
+cd docker_test_env
+docker build -t chef-datadog-test-env .
+```
+
+Para ejecutar el contenedor, usa:
+
+```
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock chef-datadog-test-env
+```
+
+Luego, asocia una consola al contenedor o usa la función de contenedor remoto de VS Code para desarrollar dentro del contenedor.
+
+Para ejecutar pruebas kitchen-docker desde el contenedor:
+
+```
+# Nota: También configura KITCHEN_DOCKER_HOSTNAME=host.docker.internal si estás en MacOS o Windows
+# Ejecuta esto bajo un shell de inicio de sesión (de lo contrario, no se encontrará `bundle`)
+KITCHEN_LOCAL_YAML=kitchen.docker.yml bundle exec rake circle
+```
 
 [1]: https://github.com/DataDog/chef-datadog/blob/master/attributes/default.rb
 [2]: https://github.com/DataDog/chef-datadog/releases/tag/v2.18.0

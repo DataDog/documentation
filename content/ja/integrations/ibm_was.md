@@ -5,6 +5,7 @@ assets:
   dashboards:
     IBM_WAS: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
       prefix: ibm_was.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10048
     source_type_name: IBM WAS
-  logs:
-    source: ibm_was
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -26,6 +26,7 @@ author:
 categories:
 - ログの収集
 - OS & システム
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
 display_on_public_website: true
@@ -33,12 +34,10 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 2.3.3
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ibm_was
-oauth: {}
 public_title: IBM WAS
 short_description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
 supported_os:
@@ -53,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
   media: []
@@ -61,6 +61,7 @@ tile:
   title: IBM WAS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -95,14 +96,14 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 この変更を行ったら、"適用" をクリックしてコンフィギュレーションを保存し、アプリケーションサーバーを再起動します。この変更を行ってからしばらくすると、追加した JDBC、JVM、およびサーブレットのメトリクスが Datadog に表示されます。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -110,7 +111,7 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 2. [Agent を再起動します][2]。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -135,7 +136,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -145,11 +146,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                         |
 | -------------------- | ----------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `ibm_was`                                                                     |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                 |
-| `<インスタンスコンフィギュレーション>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
+| `<INTEGRATION_NAME>` | `ibm_was`                                                                     |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                 |
+| `<INSTANCE_CONFIG>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -178,7 +179,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 IBM WAS には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "ibm_was" >}}
 
 
@@ -190,6 +191,6 @@ IBM WAS には、イベントは含まれません。
 [1]: https://www.ibm.com/cloud/websphere-application-platform
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

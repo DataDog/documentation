@@ -7,9 +7,8 @@ further_reading:
   tag: ドキュメント
   text: プロファイラーの概要
 - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
-  tags: ブログ
+  tag: ブログ
   text: Datadog に常時接続型の本番環境プロファイリングが登場
-kind: documentation
 title: プロファイルタイプ
 ---
 
@@ -26,10 +25,12 @@ CPU
 : 各メソッドが CPU での実行に費やした時間。これには JVM（Java、Kotlin など）で実行されるコードが含まれますが、JVM オペレーションや JVM 内から呼び出されるネイティブコードは含まれません。
 
 Allocations
-: 各メソッドによるヒープ割り当ての数。これには、後で解放された割り当ても含まれます。
+: The number of heap allocations made by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
 
 Allocated Memory
-: 各メソッドによって割り当てられたヒープメモリの量。これには、後で解放された割り当ても含まれます。
+: The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
 
 Heap Live Objects
 : 各メソッドがヒープメモリに割り当てたオブジェクトのうち、まだガベージコレクションとして処理されていないオブジェクトの数。これは、サービスの全体的なメモリ使用量を調査し、潜在的なメモリリークを特定する際に役立ちます。<br />
@@ -127,7 +128,7 @@ Heap Live Objects
 : 各関数がヒープメモリに割り当てたオブジェクトのうち、まだガベージコレクションとして処理されていないオブジェクトの数。Go ではこれを `inuse_objects` と呼びます。これは、サービスの全体的なメモリ使用量を調査し、潜在的なメモリリークを特定する際に役立ちます。
 
 Heap Live Size
-: 各関数によって割り当てられたヒープメモリのうち、まだガベージコレクションとして処理されていないメモリの量。Go ではこれを `inuse_space` と呼びます。これは、サービスの全体的なメモリ使用量を調査し、潜在的なメモリリークを特定する際に役立ちます。
+: The amount of heap memory allocated by each function that has not yet been garbage collected. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and [identifying potential memory leaks][4].
 
 Mutex
 : プロファイリング期間中 (デフォルト: 60 秒) に関数がミューテックスを待機している時間。このプロファイルのスタックトレースは、ミューテックスで続行をブロックされた別の goroutine を許可した `Unlock()` 演算子をポイントします。スピンロックを使用したショートミューテックスの競合はこのプロファイルでキャプチャされませんが、CPU プロファイルで確認できます。バージョン `1.33.0` でのこの指標の変更点については、[差分プロファイル](#delta-profiles)をご覧ください。
@@ -145,6 +146,7 @@ Goroutines
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
 [3]: /ja/profiler/enabling/go#requirements
+[4]: /ja/profiler/guide/solve-memory-leaks
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -156,11 +158,28 @@ CPU
 Wall Time
 : 各関数が使用した経過時間。経過時間には、コードが CPU で実行されている時間、I/O を待機している時間、および関数の実行中に発生するその他の時間が含まれます。
 
+Allocations (beta, v1.21.1+)
+: The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
+_Requires:_ [Manual enablement][3]
+
+Heap Live Objects (alpha, v1.21.1+)
+: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Ruby 2.7+_ and [manual enablement][2]
+
+Heap Live Size (alpha, v1.21.1+)
+: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Ruby 2.7+_ and [manual enablement][2]
+
 [1]: /ja/profiler/enabling/ruby/#requirements
+[2]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.19.0#:~:text=You%20can%20enable%20these%20features%3A
+[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.21.0
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 プロファイリングを有効にすると、[サポートされている Node.js バージョン][1]について、以下のプロファイルタイプが収集されます。
+
+CPU (beta, v5.11.0+, v4.35.0+, v3.56.0+)
+: The time each function spent running on the CPU, including JavaScript and native code.<br />
 
 Wall Time
 : 各関数が使用した経過時間。経過時間には、コードが CPU で実行されている時間、I/O を待機している時間、および関数の実行中に発生するその他の時間が含まれます。
@@ -187,9 +206,9 @@ Allocations (ベータ版、v2.18+)
 : 各メソッドで割り当てられたオブジェクトの数、サイズ、およびそのタイプ。<br />
 _必要なもの: .NET 6+_
 
-Lock (v2.31+)
-: スレッドがロックを待っている回数と時間。<br />
-_必要なもの: .NET 5+_
+Lock (v2.49+)
+: The number of times threads are waiting for a lock and for how long.<br />
+_Requires: beta .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
 Live Heap (ベータ版、v2.22+)
 : 割り当てられたオブジェクトのサブセット (クラス名付き) で、メモリ内に残っているもの。<br />
@@ -208,12 +227,15 @@ CPU
 : 各関数が CPU での実行に費やした時間を示します。
 
 Allocations (v0.88+)
-: プロファイリング期間中 (デフォルト: 67 秒) に各関数が行った割り当て数 (その後に解放された割り当てを含む)。スタックの割り当ては追跡されません。<br />
-_注: JIT が有効になっている場合は利用できません_
+: プロファイリング期間中 (デフォルト: 67 秒) に各関数が行ったアロケーションの数 (その後に解放されたアロケーションを含む)。スタックのアロケーションは追跡されません。<br />
+_注: PHP `8.0.0`-`8.1.20` および `8.2.0`-`8.2.7` で JIT が有効になっている場合は利用できません_
 
 Allocated memory (v0.88+)
-: プロファイリング期間中 (デフォルト: 67 秒) に各関数が割り当てたヒープメモリの量 (その後に解放された割り当てを含む)。スタックの割り当ては追跡されません。<br />
-_注: JIT が有効になっている場合は利用できません_
+: プロファイリング期間中 (デフォルト: 67 秒) に各関数が割り当てたヒープメモリの量 (その後に解放されたアロケーションを含む)。スタックのアロケーションは追跡されません。<br />
+_注: PHP `8.0.0`-`8.1.20` および `8.2.0`-`8.2.7` で JIT が有効になっている場合は利用できません_
+
+Thrown Exceptions (v0.92+)
+: 各メソッドによって発生したキャッチされたまたはされなかった例外の数、およびその種類。
 
 [1]: /ja/profiler/enabling/php/#requirements
 {{< /programming-lang >}}

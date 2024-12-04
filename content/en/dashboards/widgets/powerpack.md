@@ -1,6 +1,5 @@
 ---
 title: Powerpack Widget
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/guide/powerpacks-best-practices/"
@@ -92,7 +91,9 @@ To make changes to the edit permissions for a Powerpack:
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
+
+{{< dashboards-widgets-api >}}
 
 ## Further reading
 

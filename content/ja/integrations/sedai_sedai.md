@@ -15,9 +15,10 @@ categories:
 - クラウド
 - コスト管理
 - マーケットプレイス
-- notification
+- notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,12 +27,10 @@ integration_id: sedai-sedai-license
 integration_title: Sedai
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: sedai_sedai
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -51,7 +50,7 @@ tile:
   - Category::Cloud
   - Category::Cost Management
   - Category::Marketplace
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Provisioning
   - Offering::Software License
@@ -83,18 +82,22 @@ tile:
     image_url: images/sedai_7.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/autonomous-cloud-management-aws-lambda-sedai-datadog/
   support: README.md#Support
   title: Sedai
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 Sedai は、本番環境をプロアクティブに管理し、問題を防止して可用性、パフォーマンス、およびクラウドコストを改善する自律型クラウドプラットフォームです。SRE のためのインテリジェントな オートパイロットとして、Sedai は監視データを独自に検出、優先順位付け、分析し、しきい値なしに本番環境で安全かつ自律的に行動します。
 
 ソフトウェアライセンスと Datadog インテグレーションを組み合わせることで、Sedai が本番環境で自律的に実行するアクションについて、Datadog で通知を受け取ることができます。
 
-### UDS の仕組み
+### 仕組み
 
 * **エージェントレス:** クラウドアカウントにシームレスに接続し、本番環境を自動的に検知・把握します。
 

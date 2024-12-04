@@ -1,6 +1,5 @@
 ---
 title: Network Time Protocol (NTP) issues
-kind: documentation
 aliases:
     - /agent/faq/network-time-protocol-ntp-offset-issues
 ---
@@ -33,6 +32,6 @@ Alternatively, use Datadog's [Check Summary page][3] and inspect the check `ntp.
     {{< nextlink href="http://www.freebsd.org/doc/en/books/handbook/network-ntp.html" tag="FreeBSD">}}Clock Synchronization with NTP{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /agent/guide/agent-commands/#agent-status-and-information
+[1]: /agent/configuration/agent-commands/#agent-status-and-information
 [2]: /integrations/ntp/
 [3]: https://app.datadoghq.com/check/summary

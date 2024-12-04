@@ -5,6 +5,7 @@ assets:
   dashboards:
     HCPVault Overview: assets/dashboards/hcp_vault_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: hcp_vault.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10223
     source_type_name: HCPVault
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hcp_vault/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: hcp-vault
 integration_title: HCP Vault
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: hcp_vault
-oauth: {}
 public_title: HCP Vault
 short_description: HCP Vault のインテグレーションにより、Vault クラスターの概要がわかります。
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: HCP Vault のインテグレーションにより、Vault クラスターの概要がわかります。
   media: []
@@ -54,6 +56,7 @@ tile:
   title: HCP Vault
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -75,7 +78,7 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 - Datadog リージョンと [Datadog API キー][2]
 - HCP で割り当てられた Admin または Contributor [ロール][3]を持つアカウント
 
-### コンフィギュレーション
+### 構成
 
 メトリクスストリーミングを有効にするには
 
@@ -95,6 +98,7 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 **注**: HCP Vault は、一度に 1 つのメトリクスエンドポイントへのメトリクスストリーミングのみをサポートしています。
 
 6. Datadog に移動し、インテグレーションタイルの Install をクリックして、インテグレーションを有効にします。これにより、HCP Vault のテレメトリを最大限に活用するウィジェットを備えた HCP Vault ダッシュボードがインストールされます。ダッシュボード一覧で「HCP Vault Overview」を検索すると、ダッシュボードを見つけることができます。
+   **注**: ダッシュボードで `cluster` と `project_id` の値を指定して、適切なクラスターのメトリクスを選択します。`cluster` はクラスター作成時に設定したクラスター名です。`project_id` は HCP ポータルの URL `https://portal.cloud.hashicorp.com/orgs/xxxx/projects/xxxx` に存在するものです。
 
 ## 収集データ
 
@@ -102,7 +106,7 @@ HCP Vault のメトリクスストリーミングは、すべてのプロダク�
 
 メトリクスの範囲と解釈の詳細については、HCP Vault メトリクスガイダンス][1]を参照してください。
 
-### サービスのチェック
+### サービスチェック
 
 HCP Vault インテグレーションには、サービスのチェック機能は含まれません。
 

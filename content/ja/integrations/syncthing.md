@@ -5,6 +5,7 @@ assets:
   dashboards:
     Syncthing Overview: assets/dashboards/syncthing_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,14 +16,15 @@ assets:
       prefix: syncthing.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10276
     source_type_name: Syncthing
   monitors:
-    '[Syncthing] Device not connected': assets/monitors/syncthing_device_not_connected.json
-    '[Syncthing] Disconnected': assets/monitors/syncthing_disconnected.json
-    '[Syncthing] Folder error': assets/monitors/syncthing_folder_error.json
-    '[Syncthing] Out of sync': assets/monitors/syncthing_out_of_sync.json
-    '[Syncthing] Service error': assets/monitors/syncthing_service_error.json
-    '[Syncthing] System error': assets/monitors/syncthing_system_error.json
+    Device is not connected: assets/monitors/syncthing_device_not_connected.json
+    Files out of sync: assets/monitors/syncthing_out_of_sync.json
+    Folder errors: assets/monitors/syncthing_folder_error.json
+    No active connections: assets/monitors/syncthing_disconnected.json
+    Service is failed: assets/monitors/syncthing_service_error.json
+    System errors: assets/monitors/syncthing_system_error.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
@@ -31,6 +33,7 @@ author:
 categories:
 - コラボレーション
 - セキュリティ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/syncthing/README.md
 display_on_public_website: true
@@ -40,10 +43,8 @@ integration_id: syncthing
 integration_title: Syncthing
 integration_version: 1.1.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: syncthing
-oauth: {}
 public_title: Syncthing
 short_description: Syncthing インスタンスからの全体的な統計情報を追跡
 supported_os:
@@ -58,6 +59,7 @@ tile:
   - Category::Collaboration
   - Category::Security
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Syncthing インスタンスからの全体的な統計情報を追跡
   media: []
@@ -66,6 +68,7 @@ tile:
   title: Syncthing
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -88,7 +91,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Syncthing の[メトリクス](#metrics) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `syncthing.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル syncthing.d/conf.yaml][6] を参照してください。
 
@@ -108,7 +111,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 Syncthing には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "syncthing" >}}
 
 
@@ -118,7 +121,7 @@ Syncthing には、イベントは含まれません。
 
 
 [1]: https://syncthing.net/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

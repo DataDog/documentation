@@ -5,6 +5,7 @@ assets:
   dashboards:
     IBM ACE Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
       prefix: ibm_ace.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10262
     source_type_name: IBM ACE
-  logs:
-    source: ibm_ace
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md
 display_on_public_website: true
@@ -32,12 +33,10 @@ draft: false
 git_integration_title: ibm_ace
 integration_id: ibm-ace
 integration_title: IBM ACE
-integration_version: 1.1.0
+integration_version: 2.2.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: ibm_ace
-oauth: {}
 public_title: IBM ACE
 short_description: IBM ACE のリソース統計とメッセージフローを監視します。
 supported_os:
@@ -51,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: IBM ACE のリソース統計とメッセージフローを監視します。
   media: []
@@ -59,6 +59,7 @@ tile:
   title: IBM ACE
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -74,7 +75,7 @@ tile:
 IBM ACE からメトリクスメッセージを消費するためには、[IBM MQ][3] サーバーが必要です。
 
 <div class="alert alert-warning">
-Linux の場合は、先に進む前に、必ず<a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ のセットアップ</a>の説明に従って環境変数 LD_LIBRARY_PATH を設定してください。
+For Linux, make sure to set the LD_LIBRARY_PATH environment variable as described in the <a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ setup</a> before continuing.
 </div>
 
 ### IBM ACE
@@ -152,11 +153,11 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 
 IBM ACE インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "ibm_ace" >}}
 
 
-### ログの収集
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -164,7 +165,7 @@ IBM ACE インテグレーションには、イベントは含まれません。
     logs_enabled: true
     ```
 
-2. IBM ACE のログの収集を開始するには、次のコンフィギュレーションブロックを `ibm_ace.d/conf.yaml` ファイルに追加します。
+2. To start collecting your IBM ACE logs, add this configuration block to your `ibm_ace.d/conf.yaml` file:
 
     ```yaml
     logs:
@@ -173,7 +174,7 @@ IBM ACE インテグレーションには、イベントは含まれません。
         source: ibm_ace
     ```
 
-    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`ibm_ace.d/conf.yaml` ファイルのサンプル][7]を参照してください。
+    Change the `path` parameter value based on your environment. See the [sample `ibm_ace.d/conf.yaml` file][7] for all available configuration options.
 
 ## トラブルシューティング
 
@@ -185,7 +186,7 @@ IBM ACE インテグレーションには、イベントは含まれません。
 [3]: https://www.ibm.com/products/mq
 [4]: https://www.ibm.com/docs/en/app-connect/12.0?topic=properties-mqendpoint-policy
 [5]: https://www.ibm.com/docs/en/app-connect/12.0?topic=mq-connecting-secured-queue-manager
-[6]: https://app.datadoghq.com/account/settings#agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://github.com/DataDog/integrations-core/blob/master/ibm_ace/datadog_checks/ibm_ace/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

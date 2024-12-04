@@ -12,10 +12,18 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
+- link: /logs/troubleshooting/
+  tag: ドキュメント
+  text: ログのトラブルシューティング
 - link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: ラーニングセンター
   text: ログ処理を極める
-kind: documentation
+- link: https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/
+  tag: ブログ
+  text: Datadog Cloud SIEM で Cloudflare Zero Trust を監視
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
+  tag: ブログ
+  text: Datadog Cloud SIEM で 1Password を監視
 title: パイプライン
 ---
 
@@ -148,9 +156,22 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [2]: /ja/logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
+
+{{% tab "スパン ID" %}}
+
+#### スパン ID 属性
+
+デフォルトでは、Datadog トレーサーが[ログにスパン ID を自動的に挿入します][1]。ただし、JSON 形式のログに以下の属性が含まれる場合、Datadog はその値をログの `span_id` として解釈します。
+
+* `dd.span_id`
+* `contextMap.dd.span_id`
+
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+{{% /tab %}}
+
 {{< /tabs >}}
 
-## パイプラインを作成する
+## パイプラインを作成
 
 1. Datadog アプリで [Pipelines][7] に移動します。
 2. **New Pipeline** を選択します。
@@ -173,7 +194,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 サポートされているインテグレーションのリストは、<a href="/integrations/#cat-log-collection">こちら</a>でご確認ください。
 </div>
 
-ログを収集するようセットアップされている一部のソースには、インテグレーション処理パイプラインを使用できます。これらのパイプラインは**読み取り専用**であり、各ソースに適した方法でログをパースします。インテグレーションログにインテグレーションパイプラインが自動的にインストールされ、ログをパースして対応するファセットをログエクスプローラーに追加します。
+ログ収集をセットアップしている一部のソースでは、インテグレーション処理パイプラインを利用できます。これらのパイプラインは**読み取り専用**であり、それぞれのソースに適した方法でログをパースします。また、インテグレーションログに対しては、インテグレーションパイプラインが自動的にインストールされ、ログのパースと Log Explorer における対応するファセットの追加が行われます。
 
 インテグレーションパイプラインを表示するには、[パイプライン][5]ページに移動します。インテグレーションパイプラインを編集するには、それを複製した上で編集します。
 
@@ -203,7 +224,9 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 ### プロセッサー
 
-プロセッサーは、パイプラインの内部で実行し、データ構造化アクションを完了します。アプリ内または API を使用して、プロセッサー別にプロセッサーを追加し構成する方法については、[プロセッサーに関するドキュメント][3]を参照してください。
+プロセッサーはパイプライン内で実行され、データ構造化アクションを完了します。アプリ内または API を使用して、プロセッサーの種類ごとにプロセッサーを追加および構成する方法については、[プロセッサーに関するドキュメント][3]を参照してください。 
+
+カスタム日時形式のパースや、タイムスタンプが UTC でない場合に必要な `timezone` パラメーターについては、[日付のパース][10]を参照してください。
 
 ### ネストされたパイプライン
 
@@ -213,9 +236,11 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="ネストされたパイプライン" style="width:80%;">}}
 
-あるパイプラインを別のパイプラインに移動して、ネストされたパイプラインに変換することができます。
+パイプラインを別のパイプラインに移動して、ネストされたパイプラインにします。
 
-{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="ネストされたパイプラインをドラッグアンドドロップ" video="true" width="80%" >}}
+1. 移動したいパイプラインにカーソルを合わせ、**Move to** アイコンをクリックします。
+1. 元のパイプラインの移動先となるパイプラインを選択します。**注**: ネストされたパイプラインを含むパイプラインは、別の最上位の位置にのみ移動できます。別のパイプラインに移動することはできません。
+1. **Move** をクリックします。
 
 ## パイプラインの管理
 
@@ -229,7 +254,7 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 ## 推定使用量メトリクス
 
-パイプラインごとに推定された使用量メトリクス、具体的には、各パイプラインで取り込まれ、変更されたログの量と件数が表示されます。また、各パイプラインからすぐに使える [Logs Estimated Usage Dashboard][10] へのリンクがあり、そのパイプラインの使用量メトリクスをより詳細なグラフで表示することが可能です。
+パイプラインごとに推定された使用量メトリクス、具体的には、各パイプラインで取り込まれ、変更されたログの量と件数が表示されます。また、各パイプラインからすぐに使える [Logs Estimated Usage Dashboard][11] へのリンクがあり、そのパイプラインの使用量メトリクスをより詳細なグラフで表示することが可能です。
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="パイプラインの使用量メトリクスを素早く確認する方法" style="width:50%;">}}
 
@@ -249,4 +274,5 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 [7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [8]: https://app.datadoghq.com/logs/pipelines/remapping
 [9]: /ja/integrations/#cat-log-collection
-[10]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[10]: /ja/logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[11]: https://app.datadoghq.com/dash/integration/logs_estimated_usage

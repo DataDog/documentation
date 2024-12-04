@@ -1,14 +1,13 @@
 ---
 title: Azure Configuration Guide for Cloud SIEM
-kind: documentation
 further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security/explorer/"
+- link: "/security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/log_detection_rules/"
+- link: "/security/cloud_siem/detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 ---

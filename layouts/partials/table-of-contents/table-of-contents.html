@@ -8,15 +8,42 @@
             <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">{{ i18n "table_of_contents_heading"}}</p>
             {{ if ne .Params.disable_toc true }}
               {{ if eq .Page.Type "reference" }}
-                {{ $t := (index .Site.Data.reference "schema.tables") }}
-                {{ $iterable_data := (index $t (.Title | lower)) }}
-                <nav id="TableOfContents">
-                  <ul>
-                    {{ range $data := $iterable_data }}
-                      <li><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ index $data.metadata "docs::label" | default (index $data.metadata "docs::human_name") }}</a></li>
-                    {{ end }}
-                  </ul>
-                </nav>
+                {{ if eq .Page.File.TranslationBaseName "errors" }}
+                    {{ $errors := $.Site.Data.reference.errors | default (dict) }}
+                    <nav id="TableOfContents">
+                      <ul>
+                        {{ range $code, $obj := $errors}}
+                          <li><a href="#{{ $obj.title  | anchorize }}">{{ $obj.code }} {{ $obj.title }}</a></li>
+                        {{ end }}
+                      </ul>
+                    </nav>
+                {{ else if eq .Page.File.TranslationBaseName "functions" }}
+                    {{ $functions := $.Site.Data.reference.functions | default (dict) }}
+                    <nav id="TableOfContents">
+                      <ul>
+                        {{ range $category, $arrayOfFunctionObjs := $functions }}
+                          <li>
+                            <a href="#{{ $category | anchorize }}">{{ $category }} Functions</a>
+                            <ul>
+                            {{ range $obj := $arrayOfFunctionObjs }}
+                              <li><a href="#{{ $obj.name | anchorize }}">{{ $obj.name }}</a></li>
+                            {{ end }}
+                            </ul>
+                          </li>
+                        {{ end }}
+                      </ul>
+                    </nav>
+                {{ else }}
+                    {{ $t := (index .Site.Data.reference "schema.tables") }}
+                    {{ $iterable_data := (index $t (.Title | lower)) }}
+                    <nav id="TableOfContents">
+                      <ul>
+                        {{ range $data := $iterable_data }}
+                          <li><a href="#{{ $data.metadata.logical_name | anchorize }}">{{ index $data.metadata "docs::label" | default (index $data.metadata "docs::human_name") }}</a></li>
+                        {{ end }}
+                      </ul>
+                    </nav>
+                {{ end }}
               {{else if eq .Page.Type "schema"}}
               {{ $schema_data := .Page.Params.list_section }}
                 <nav id="TableOfContents">
@@ -27,7 +54,7 @@
                   </ul>
                 </nav>
               {{ else }}
-                {{ if in .RawContent "{{< site-region" }}
+                {{ if or (in .RawContent "{{< site-region") (in .RawContent "{{< include-markdown") }}
                   {{ partial "table-of-contents/scraped-toc.html" . }}
                 {{ else }}
                   {{ .TableOfContents }}

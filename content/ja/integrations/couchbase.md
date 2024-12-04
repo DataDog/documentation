@@ -5,6 +5,7 @@ assets:
   dashboards:
     couchbase: assets/dashboards/couchbase_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
     - beam.smp couchbase
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 59
     source_type_name: Couchbase
   logs:
     source: couchdb
@@ -28,8 +30,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- caching
+- data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
 display_on_public_website: true
@@ -37,34 +41,38 @@ draft: false
 git_integration_title: couchbase
 integration_id: couchbase
 integration_title: CouchBase
-integration_version: 2.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: couchbase
-oauth: {}
 public_title: CouchBase
 short_description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::データストア
+  - Category::キャッシュ
+  - Category::Data Stores
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog
   support: README.md#Support
   title: CouchBase
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Couchbase 読み取りバイト数][1]
@@ -87,14 +95,14 @@ tile:
 
 Couchbase チェックは [Datadog Agent][2] パッケージに含まれています。Couchbase ノードに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -112,7 +120,7 @@ Couchbase チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][3]。
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -139,7 +147,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -149,9 +157,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                |
 | -------------------- | ------------------------------------ |
-| `<インテグレーション名>` | `couchbase`                          |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                        |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "http://%%host%%:8091"}` |
+| `<INTEGRATION_NAME>` | `couchbase`                          |
+| `<INIT_CONFIG>`      | 空白または `{}`                        |
+| `<INSTANCE_CONFIG>`  | `{"server": "http://%%host%%:8091"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -171,7 +179,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Couchbase チェックは、クラスターのバランスが再調整されるたびに Datadog にイベントを送信します。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "couchbase" >}}
 
 
@@ -185,7 +193,7 @@ Couchbase チェックは、クラスターのバランスが再調整される�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couchbase/images/couchbase_graph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog

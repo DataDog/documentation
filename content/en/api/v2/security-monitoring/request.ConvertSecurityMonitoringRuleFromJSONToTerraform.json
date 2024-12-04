@@ -1,0 +1,30 @@
+{
+  "name": "Example-Security-Monitoring",
+  "queries": [
+    {
+      "query": "@test:true",
+      "aggregation": "count",
+      "groupByFields": [],
+      "distinctFields": [],
+      "metric": ""
+    }
+  ],
+  "filters": [],
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "condition": "a > 0",
+      "notifications": []
+    }
+  ],
+  "options": {
+    "evaluationWindow": 900,
+    "keepAlive": 3600,
+    "maxSignalDuration": 86400
+  },
+  "message": "Test rule",
+  "tags": [],
+  "isEnabled": true,
+  "type": "log_detection"
+}

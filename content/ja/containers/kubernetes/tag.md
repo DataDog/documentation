@@ -12,17 +12,14 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
-kind: documentation
 title: Kubernetes タグ抽出
 ---
 
-Agent は、タグを作成し、ラベルまたはアノテーションに基づいてポッドが発行するすべてのメトリクス、トレース、ログに割り当てることができます。
-
-ホスト上で Agent をバイナリとして実行している場合は、[Agent](?tab=agent) タブの手順を使用してタグ抽出を構成します。Kubernetes クラスターで Agent をコンテナとして実行している場合は、[コンテナ化された Agent](?tab=containerizedagent) タブの手順でタグ抽出を構成します。
+The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
 
 ## すぐに使えるタグ
 
-Agent は、タグを自動検出して、ポッド全体またはこのポッド内の個別のコンテナにより送信されたすべてのデータにアタッチします。自動的にアタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][1]に基づきます。
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
 
 <div style="overflow-x: auto;">
 
@@ -99,20 +96,85 @@ annotations:
   ad.datadoghq.com/<コンテナ識別子>.tags: '{"<タグキー>": "<タグ値>","<タグキー_1>": "<タグ値_1>"}'
 ```
 
-Agent v7.17 以降では、Agent は Docker ラベルからタグを自動検出できます。このプロセスにより、Agent は、[Agent の `datadog.yaml` ファイルを変更][3]することなく、コンテナによって発行されたすべてのデータにカスタムタグを関連付けることができます。
+Agent v7.17 以降では、Agent は Docker ラベルからタグを自動検出できます。このプロセスにより、Agent は、Agent 構成を変更することなく、コンテナによって発行されたすべてのデータにカスタムタグを関連付けることができます。
 
 ```yaml
 com.datadoghq.ad.tags: '["<タグキー>:タグ値", "<タグキー_1>:<タグ値_1>"]'
 ```
 
-## タグとしてのノードラベル
+## タグ抽出
+### タグとしてのノードラベル
 
-Agent v6.0 以降、Agent は特定のノードのラベルを収集し、それらをタグとして使用して、このノード上のすべてのポッドが発行するすべてのメトリクスにアタッチできます。
+Agent v6.0 以降、Agent は指定されたノードのラベルを収集し、Datadog のこの `host` に関連するすべてのメトリクス、トレース、ログに関連付けるタグとして使用することができます。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+指定されたノードラベル `<NODE_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
-特定のノードラベル `<ノードラベル>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    nodeLabelsAsTags:
+      <NODE_LABEL>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    nodeLabelsAsTags:
+      kubernetes.io/arch: arch
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    nodeLabelsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+指定したノードラベル `<NODE_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
+
+```yaml
+datadog:
+  nodeLabelsAsTags:
+    <NODE_LABEL>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+datadog:
+  nodeLabelsAsTags:
+    kubernetes.io/arch: arch
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+datadog:
+  nodeLabelsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
@@ -121,47 +183,91 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 たとえば、次のように設定できます。
 
 ```bash
-DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
-
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
-
-[1]: /ja/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-特定のノードラベル `<ノードラベル>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
-
-```yaml
-kubernetes_node_labels_as_tags:
-  <ノードラベル>: <タグキー>
-```
-
-たとえば、次のように設定できます。
-
-```yaml
-kubernetes_node_labels_as_tags:
-  app: kube_app
-```
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグとしてのポッドラベル
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-Agent v6.0 以降、Agent は特定のポッドのラベルを収集し、それらをタグとして使用して、このポッドが発行するすべてのメトリクスにアタッチできます。
+### タグとしてのポッドラベル
+
+Agent v6.0 以降、Agent は特定のポッドのラベルを収集し、それらをタグとして使用して、このポッドが発行するすべてのメトリクス、トレース、ログに関連付けることができます。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+指定されたポッドラベル `<POD_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
-特定のポッドラベル `<ポッドラベル>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podLabelsAsTags:
+      <POD_LABEL>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podLabelsAsTags:
+      app: kube_app
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podLabelsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+指定したポッドラベル `<POD_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
+
+```yaml
+datadog:
+  podLabelsAsTags:
+    <POD_LABEL>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+datadog:
+  podLabelsAsTags:
+    app: kube_app
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+datadog:
+  podLabelsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
@@ -178,54 +284,89 @@ Agent v6.8.0 以降の場合、次の環境変数構成を使用して、すべ�
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
-
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
-
-[1]: /ja/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-特定のポッドラベル `<ポッドラベル>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
-
-```yaml
-kubernetes_pod_labels_as_tags:
-  <ポッドラベル>: <タグキー>
-```
-
-たとえば、次のように設定できます。
-
-```yaml
-kubernetes_pod_labels_as_tags:
-  app: kube_app
-```
-
-Agent v6.8.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
-
-```yaml
-kubernetes_pod_labels_as_tags:
-  *: <プレフィックス>_%%label%%
-```
-
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグとしてのポッドアノテーション
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-Agent v6.0 以降、Agent は特定のポッドのアノテーションを収集し、それらをタグとして使用して、このポッドが発行するすべてのメトリクスにアタッチできます。
+### タグとしてのポッドアノテーション
+
+Agent v6.0 以降、Agent は特定のポッドのアノテーションを収集し、それらをタグとして使用して、このポッドが発行するすべてのメトリクス、トレース、ログに関連付けることができます。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+指定されたポッドアノテーション `<POD_ANNOTATION>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
-特定のポッドラベル `<ポッドアノテーション>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podAnnotationsAsTags:
+      <POD_ANNOTATION>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podAnnotationsAsTags:
+      app: kube_app
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podAnnotationsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+指定したポッドアノテーション `<POD_ANNOTATION>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
+
+```yaml
+datadog:
+  podAnnotationsAsTags:
+    <POD_ANNOTATION>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+datadog:
+  podAnnotationsAsTags:
+    app: kube_app
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+datadog:
+  podAnnotationsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
 ```
 
-たとえば、次のように設定できます。
+For example, you could set up:
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
@@ -236,39 +377,83 @@ Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべ
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 ```
-
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
-
-[1]: /ja/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-特定のポッドアノテーション `<ポッドアノテーション>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
-
-```yaml
-kubernetes_pod_annotations_as_tags:
-  <ポッドアノテーション>: <タグキー>
-```
-
-たとえば、次のように設定できます。
-
-```yaml
-kubernetes_pod_annotations_as_tags:
-  app: kube_app
-```
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグとしてのネームスペースラベル
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-Agent 7.27 以降、Agent は特定のネームスペースのラベルを収集し、それらをタグとして使用して、このネームスペースのすべてのポッドが発行するすべてのメトリクスにアタッチできます。
+### タグとしてのネームスペースラベル
+
+Agent 7.27 以降、Agent は特定のネームスペースのラベルを収集し、それらをタグとして使用して、このネームスペースのすべてのポッドが発行するすべてのメトリクス、トレース、ログに関連付けることができます。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+指定されたネームスペースラベル `<NAMESPACE_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
-特定のネームスペースラベル `<NAMESPACE_LABEL>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    namespaceLabelsAsTags:
+      <NAMESPACE_LABEL>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    namespaceLabelsAsTags:
+      app: kube_app
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのネームスペースラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    namespaceLabelsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+指定したネームスペースラベル `<NAMESPACE_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
+
+```yaml
+datadog:
+  namespaceLabelsAsTags:
+    <NAMESPACE_LABEL>: <TAG_KEY>
+```
+
+たとえば、次のように設定できます。
+```yaml
+datadog:
+  namespaceLabelsAsTags:
+    app: kube_app
+```
+
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのネームスペースラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
+
+```yaml
+datadog:
+  namespaceLabelsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
@@ -285,39 +470,71 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
-
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
-
-[1]: /ja/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-特定のネームスペースラベル `<NAMESPACE_LABEL>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
-
-```yaml
-kubernetes_namespace_labels_as_tags:
-  <NAMESPACE_LABEL>: <TAG_KEY>
-```
-
-たとえば、次のように設定できます。
-
-```yaml
-kubernetes_namespace_labels_as_tags:
-  app: kube_app
-```
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグとしてのコンテナ環境変数
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-Agent v7.32+ から、Agent はコンテナ環境変数を収集し、コンテナに対応するすべてのメトリクスにアタッチするタグとして使用することができます。`docker` と `containerd` の両方のコンテナがサポートされています。
+### タグとしてのコンテナ環境変数
+
+Agent v7.32+ から、Agent はコンテナ環境変数を収集し、コンテナに対応するすべてのメトリクス、トレース、ログに関連付けるタグとして使用することができます。`docker` と `containerd` の両方のコンテナがサポートされています。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+指定された環境変数 `<ENV_VAR>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
-特定の環境変数 `<ENV_VAR>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_ENV_AS_TAGS
+          value: '{"<ENV_VAR>": "<TAG_KEY>"}'
+```
+
+たとえば、次のように設定できます。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_ENV_AS_TAGS
+          value: '{"app":"kube_app"}'
+```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+指定した環境変数 `<ENV_VAR>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
+
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_ENV_AS_TAGS
+      value: '{"<ENV_VAR>": "<TAG_KEY>"}'
+```
+
+たとえば、次のように設定できます。
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_ENV_AS_TAGS
+      value: '{"app":"kube_app"}'
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
@@ -329,39 +546,73 @@ DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 ```
 
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求][1]を参照してください。
-
-[1]: /ja/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-特定の環境変数 `<ENV_VAR>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
-
-```yaml
-container_env_as_tags:
-  <ENV_VAR>: <TAG_KEY>
-```
-
-例:
-
-```yaml
-container_env_as_tags:
-  app: kube_app
-```
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグとしてのコンテナラベル
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求][3]を参照してください。
 
-Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics associated with the container.
-The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
+### タグとしてのコンテナラベル
+
+Agent v7.33 以降、Agent はコンテナラベルを収集し、タグとして使用できます。Agent は、コンテナに関連するすべてのメトリクス、トレース、ログにタグを関連付けます。
+
+Agent は `docker` と `containerd` コンテナの両方のコンテナラベルからタグを生成することができます。`containerd` の場合、最小サポートバージョンは v1.5.6 です。それ以前のリリースではラベルが正しく伝搬されないためです。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+指定されたコンテナラベル `<CONTAINER_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
-特定のコンテナラベル `<CONTAINER_LABEL>` を抽出し、タグキー `<TAG_KEY>` に変換するには、次の環境変数を Datadog Agent に追加します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_LABELS_AS_TAGS
+          value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
+```
+
+たとえば、次のように設定できます。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_LABELS_AS_TAGS
+          value: '{"app":"kube_app"}'
+```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+指定したコンテナラベル `<CONTAINER_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
+
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_LABELS_AS_TAGS
+      value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
+```
+
+たとえば、次のように設定できます。
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_LABELS_AS_TAGS
+      value: '{"app":"kube_app"}'
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
@@ -372,30 +623,10 @@ DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
-
-**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求][1]を参照してください。
-
-[1]: /ja/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-特定のコンテナラベル `<CONTAINER_LABEL>` を抽出し、タグキー `<TAG_KEY>` に変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
-
-```yaml
-container_labels_as_tags:
-  <CONTAINER_LABEL>: <TAG_KEY>
-```
-
-例:
-
-```yaml
-container_labels_as_tags:
-  app: kube_app
-```
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
+
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求][3]を参照してください。
 
 ## その他の参考資料
 
@@ -403,4 +634,4 @@ container_labels_as_tags:
 
 [1]: /ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
 [2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
+[3]: /ja/account_management/billing/custom_metrics

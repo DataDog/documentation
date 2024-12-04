@@ -1,6 +1,5 @@
 ---
 title: Usage Metrics
-kind: documentation
 aliases:
     - /tracing/trace_retention_and_ingestion/usage_metrics/
     - /tracing/trace_retention/usage_metrics/
@@ -44,11 +43,19 @@ The following metrics are associated with ingested spans usage:
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.ingested_traces`
 
-Control the usage with `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered as a volume, not as a number of spans or traces. This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the ingestion volume.
+To control usage, use `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered by volume, not by the number of spans or traces. This metric is tagged with `env`, `service`, and`sampling_service`. These tags help identify which environments and services contribute to the ingestion volume. For more information about the `sampling_service` dimension, read [What is the sampling service?](#what-is-the-sampling-service).
 
 This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the tracing libraries of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
 
 The `datadog.estimated_usage.apm.ingested_traces` metric measures the number of requests sampled per second, and only counts traces sampled by [head-based sampling][7]. This metric is also tagged by `env` and `service` so you can spot which services are starting the most traces.
+
+#### What is the sampling service?
+
+The `sampling_service` dimension on the `datadog.estimated_usage.apm.ingested_bytes` assigns ingested bytes to the **service that makes the sampling decision**, not the service emitting the span.
+
+Group the metric by `sampling_service` to identify services contributing the most to total ingested volumes. For instance, if service `A` starts a trace and makes a head-based sampling decision before calling services `B` and `C`, all bytes from services `A`, `B`, and `C` are attributed to `sampling_service:A`.
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/sampling_service.png" style="width:80%;" alt="Ingested Bytes sampling service explanation" >}}
 
 ### Indexed spans
 

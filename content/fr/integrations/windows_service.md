@@ -23,7 +23,7 @@ integration_id: windows-service
 integration_title: Windows Services
 integration_version: 4.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: windows_service.

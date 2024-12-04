@@ -1,12 +1,11 @@
 ---
 aliases:
 - /ko/synthetics/explorer/search_syntax
-description: CI 결과 탐색기에서 검색 쿼리 생성 방법을 알아보세요.
+description: 신서틱(Synthetic) 모니터링 및 테스트 결과 탐색기에서 검색 쿼리 생성 방법을 알아보세요.
 further_reading:
 - link: /continuous_testing/explorer
   tag: 설명서
-  text: 신서틱 모니터링 및 연속 테스트 탐색기에 대해 알아보기
-kind: 설명서
+  text: 신서틱 모니터링 및 테스트 결과 탐색기에 대해 자세히 알아보기
 title: 검색 신택스
 ---
 

@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/create-an-integration-dashboard.md
-kind: documentation
 title: Créer un dashboard d'intégration
 ---
 ## Présentation

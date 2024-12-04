@@ -1,8 +1,8 @@
 ---
 categories:
 - cloud
-- monitoring
 - google cloud
+custom_kind: integration
 dependencies: []
 description: Google Cloud Logging に収集されたログのサイズを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_stackdriver_logging/
@@ -17,7 +17,6 @@ integration_id: google-stackdriver-logging
 integration_title: Google Cloud Logging
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_stackdriver_logging
 public_title: Datadog-Google Cloud Logging インテグレーション
@@ -25,6 +24,7 @@ short_description: Google Stackdriver に収集されたログのサイズを追
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google の Cloud Logging 製品を使用すると、Google Cloud Platform からのログデータやイベントを保存、検索、分析、監視、およびアラートすることができます。
@@ -40,9 +40,9 @@ Datadog は Google Cloud Logging から**メトリクス**をプルして、以�
 
 Google Cloud ログのメトリクスは、[Google Cloud Platform インテグレーション][1]に含まれています。追加のインストール手順は必要ありません。
 
-### ログの収集
+### 収集データ
 
-[HTTP プッシュフォワーダーを使用した Cloud Pub/sub][2] のセットアップがまだの場合は、セットアップして GCP ログを Datadog へ転送します。
+Google Cloud のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
 ## 収集データ
 
@@ -56,13 +56,13 @@ Google Cloud ログのメトリクスは、[Google Cloud Platform インテグ�
 
 Google Cloud Logging インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Google Cloud Logging インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

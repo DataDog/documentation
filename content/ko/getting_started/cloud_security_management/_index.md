@@ -13,12 +13,11 @@ further_reading:
   tag: 블로그
   text: 클라우드 인프라스트럭처의 보안 상태 개선을 위한 Datadog CSM 사용 방법
 - link: https://dtdg.co/fe
-  tag: Foundation Enablement
+  tag: 기반 활성화
   text: 대화형 세션에 참여하여 보안 및 위협 탐지를 강화하세요.
 - link: https://securitylabs.datadoghq.com/
   tag: 보안 연구소
   text: Datadog의 보안 연구, 보고서, 팁 및 동영상
-kind: 설명서
 title: 클라우드 보안 관리 시작하기
 ---
 
@@ -30,12 +29,12 @@ title: 클라우드 보안 관리 시작하기
 
 ## 1단계: 배포
 
-1. [Datadog Agent (버전 7.44 이상)][4]를 설치합니다.
+1. [Datadog Agent(버전 7.46 이상)][4]를 설치합니다.
 2. 클라우드 리소스 및 인프라스트럭처에 대해 CSM을 활성화합니다.
     - **CSM Threats**: [Kubernetes][5], [Docker][6], [호스팅 기반][7] 설치.
     - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], [Docker][9] 지침.
     - **CSM Identity Risks**: [AWS 리소스 수집][26] 및 [Cloudtrail 로그 포워딩][27] 활성화.
-    - **CSM Infrastructure Vulnerabilities**: Kubernetes, ECS EC2 인스턴스, 호스트 기반 설치를 위한 [Container 이미지 스캐닝][23] 및 [호스트 스캐닝][24] 지침.
+    - **CSM Vulnerabilities**: Kubernetes, ECS EC2 인스턴스 및 호스트 기반 설치에 대한 [컨테이너 이미지 스캐닝][23] 및 [호스트 스캐닝][24] 지침.
 3. 조직의 위험과 위협에 대한 개요를 확인하려면 [CSM 홈페이지][13]를 참조하세요.
 4. [500개 이상의 즉시 사용 가능한 위협 및 잘못된 구성 탐지 규칙][14]을 검토하세요.
 5. [보안 신호][15]를 살펴보고 [CSM 잘못된 구성 발견 사항][16]을 검토하세요.
@@ -80,8 +79,8 @@ title: 클라우드 보안 관리 시작하기
 [20]: /ko/security/threats/agent_expressions
 [21]: /ko/security/misconfigurations/frameworks_and_benchmarks
 [22]: /ko/dashboards/#overview
-[23]: /ko/security/infrastructure_vulnerabilities/setup?tab=kubernetes#setup-for-container-image-scanning
-[24]: /ko/security/infrastructure_vulnerabilities/setup?tab=kubernetes#setup-for-host-vulnerability-scanning
+[23]: /ko/security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities
+[24]: /ko/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-csm-for-vulnerabilities
 [25]: https://app.datadoghq.com/containers/images
 [26]: /ko/integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [27]: /ko/integrations/amazon_cloudtrail/#send-logs-to-datadog

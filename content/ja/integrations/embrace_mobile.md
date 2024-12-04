@@ -4,6 +4,26 @@ app_uuid: 86988058-9b89-45a8-b92f-5473a96e4a36
 assets:
   dashboards:
     Embrace Overview: assets/dashboards/embrace_mobile_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - embrace.session_total.five_minute
+      - embrace.session_total.hourly
+      - embrace.session_total.daily
+      - embrace.crash_total.five_minute
+      - embrace.crash_total.hourly
+      - embrace.crash_total.daily
+      - embrace.users_total.daily
+      metadata_path: metadata.csv
+      prefix: embrace.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 25653134
+    source_type_name: Embrace
 author:
   homepage: https://embrace.io
   name: Embrace
@@ -13,6 +33,7 @@ categories:
 - メトリクス
 - モバイル
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -22,10 +43,8 @@ integration_id: embrace-mobile
 integration_title: Embrace Mobile
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
-oauth: {}
 public_title: Embrace Mobile
 short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
 supported_os:
@@ -67,6 +86,7 @@ tile:
   title: Embrace Mobile
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

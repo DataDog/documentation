@@ -1,6 +1,5 @@
 ---
 title: Serverless
-kind: documentation
 aliases:
   - /graphing/infrastructure/cloudfunctions
   - /graphing/infrastructure/serverless_functions
@@ -35,6 +34,10 @@ cascade:
  
 <div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+Learn how serverless monitoring enables your teams to stay agile and focus their time on building revenue-generating applications while reducing operational overhead.
+{{< /learning-center-callout >}}
+
 [Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
 Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), and [Google Cloud Run](#google-cloud-run).
@@ -51,7 +54,7 @@ With [Distributed Tracing][5], you can connect your serverless traces to metrics
 
 [Deployment Tracking][6] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
-### AWS Step Functions (Public Beta)
+### AWS Step Functions
 
 AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows in AWS. 
 
@@ -81,13 +84,13 @@ The Datadog extension for Azure App Service provides tracing capabilities for Az
 
 Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][9]. 
 
-Datadog also provides a solution, now in beta, for [instrumenting your Container Apps applications][10] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Datadog also provides a solution, now in Preview, for [instrumenting your Container Apps applications][10] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ### Google Cloud Run
 
 Google Cloud Run is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][11].
 
-Datadog also provides a solution, now in public beta, for [instrumenting your Cloud Run applications][12] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Datadog also provides a solution, now in Preview, for [instrumenting your Cloud Run applications][12] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ## Further Reading
 

@@ -41,6 +41,7 @@
     }
 
     .ais-SearchBox-input {
+        font-feature-settings: "lnum" 1;
         padding-left: 9px;
         margin-right: 8px;
 
@@ -150,6 +151,27 @@
         & strong {
             color: #02060c;
             font-weight: 700;
+        }
+
+        .ais-Hits-title {
+          display:flex;
+          flex-wrap: nowrap;
+          flex-direction: row;
+          justify-content: flex-start;
+          white-space: nowrap;
+          overflow: hidden;
+          gap: 2px;
+        }
+        .breadcrumb1 {
+          flex-grow:0;
+          flex-shrink:0;
+        }
+        .breadcrumb2 {
+          flex-grow:1;
+          flex-shrink:1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
     }
 

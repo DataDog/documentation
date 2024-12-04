@@ -4,7 +4,9 @@ app_uuid: 791bc8e8-1a70-465a-b423-709b6af4e6e5
 assets:
   dashboards:
     Cilium Overview: assets/dashboards/overview.json
+    Cilium Overview v2: assets/dashboards/overview_v2.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,6 +21,7 @@ assets:
     - cilium-health-responder
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10077
     source_type_name: Cilium
 author:
   homepage: https://www.datadoghq.com
@@ -30,6 +33,7 @@ categories:
 - ネットワーク
 - security
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
 display_on_public_website: true
@@ -37,12 +41,10 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 2.4.1
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cilium
-oauth: {}
 public_title: Cilium
 short_description: Agent のメトリクスと、クラスター全体のオペレーターメトリクスをポッドごとに収集
 supported_os:
@@ -59,6 +61,7 @@ tile:
   - Category::Network
   - Category::Security
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Agent のメトリクスと、クラスター全体のオペレーターメトリクスをポッドごとに収集
   media: []
@@ -67,6 +70,7 @@ tile:
   title: Cilium
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -80,6 +84,8 @@ tile:
 ### インストール
 
 Cilium チェックは [Datadog Agent][3] パッケージに含まれていますが、Prometheus のメトリクスを公開するための追加のセットアップが必要です。
+
+バージョン 1.10.0 以降、この OpenMetrics ベースのインテグレーションには、最新モード (`use_openmetrics`: true) とレガシーモード (`use_openmetrics`: false) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][4]を参照してください。
 
 1. `cilium-agent` と `cilium-operator` の両方で Prometheus のメトリクスを有効にするには、Cilium のバージョンに応じて以下の Helm の値を設定した状態で Cilium をデプロイします。
    * Cilium < v1.8.x:
@@ -115,11 +121,11 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
 ### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cilium.d/conf.yaml` ファイルを編集し、Cilium のパフォーマンスデータを収集します。使用可能なすべての構成オプションについては、[cilium.d/conf.yaml のサンプル][1]を参照してください。
 
    - `cilium-agent` メトリクスを収集するには、`agent_endpoint` オプションを有効にします。
@@ -129,12 +135,12 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
         instances:
 
             ## @param use_openmetrics - boolean - optional - default: false
-            ## Use the latest OpenMetrics V2 implementation for more features and better performance.
+            ## Use the latest OpenMetrics implementation for more features and better performance.
             ##
             ## Note: To see the configuration options for the legacy OpenMetrics implementation (Agent 7.33 or older),
-            ## https://github.com/DataDog/integrations-core/blob/7.33.x/cilium/datadog_checks/cilium/data/conf.yaml.example
+            ## see https://github.com/DataDog/integrations-core/blob/7.33.x/cilium/datadog_checks/cilium/data/conf.yaml.example
             #
-          - use_openmetrics: true # Enables OpenMetrics V2
+          - use_openmetrics: true # Enables OpenMetrics latest mode
 
             ## @param agent_endpoint - string - optional
             ## The URL where your application metrics are exposed by Prometheus.
@@ -150,12 +156,9 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
             operator_endpoint: http://localhost:6942/metrics
    ```
 
+2. [Agent を再起動します][2]。
 
-**注**: デフォルトでは、conf.yaml.example の `use_openmetrics` オプションが有効になっています。OpenMetrics V1 の実装を使用する場合は、`use_openmetrics` 構成オプションを `false` に設定します。OpenMetrics V1 の構成パラメーターを見るには、[`conf.yaml.example` ファイル][2]を参照してください。
-
-2. [Agent を再起動します][3]。
-
-##### ログの収集
+##### ログ収集
 
 Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあります。
 
@@ -172,14 +175,13 @@ Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあ�
      # (...)
    ```
 
-2. Datadog Agent への Docker ソケットをマニフェストでマウントするか、Docker を使用していない場合は、`/var/log/pods` ディレクトリをマウントします。マニフェストの例については、[DaemonSet の Kubernetes インストール手順][4]を参照してください。
+2. Datadog Agent への Docker ソケットをマニフェストでマウントするか、Docker を使用していない場合は、`/var/log/pods` ディレクトリをマウントします。マニフェストの例については、[DaemonSet の Kubernetes インストール手順][3]を参照してください。
 
-3. [Agent を再起動します][3]。
+3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/cilium/datadog_checks/cilium/data/conf.yaml.example
-[2]: https://github.com/DataDog/integrations-core/blob/7.33.x/cilium/datadog_checks/cilium/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -199,7 +201,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{"agent_endpoint": "http://%%host%%:9090/metrics", "use_openmetrics": "true"}` |
 
-- ログの収集
+- ログ収集
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -215,7 +217,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{"operator_endpoint": "http://%%host%%:6942/metrics", "use_openmetrics": "true"}` |
 
-- ログの収集
+- ログ収集
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -228,7 +230,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションで `cilium` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `cilium` を探します。
 
 ## 収集データ
 
@@ -240,17 +242,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Cilium インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "cilium" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
 [1]: https://cilium.io
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadohgq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

@@ -5,6 +5,7 @@ assets:
   dashboards:
     pgbouncer: assets/dashboards/pgbouncer_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,8 @@ assets:
     - pgbouncer
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 118
     source_type_name: PGBouncer
-  logs:
-    source: pgbouncer
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     instance_overview: assets/saved_views/instance_overview.json
@@ -31,8 +31,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_on_public_website: true
@@ -40,12 +41,10 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 4.4.2
+integration_version: 8.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: pgbouncer
-oauth: {}
 public_title: PGBouncer
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
 supported_os:
@@ -56,8 +55,9 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
   media: []
@@ -66,6 +66,7 @@ tile:
   title: PGBouncer
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -103,14 +104,14 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
    パスワードの入力を要求されたら、`userlist.txt` に追加したパスワードを入力します。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -130,7 +131,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 2. [Agent を再起動します][4]。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -160,7 +161,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -170,11 +171,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `<インテグレーション名>` | `pgbouncer`                                                                                            |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
+| `<INTEGRATION_NAME>` | `pgbouncer`                                                                                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                          |
+| `<INSTANCE_CONFIG>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -205,7 +206,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 PgBouncer チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "pgbouncer" >}}
 
 
@@ -215,6 +216,6 @@ PgBouncer チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

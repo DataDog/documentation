@@ -1,6 +1,5 @@
 ---
 title: Events Side Panel
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -19,7 +18,7 @@ Context about your users and their applications, including the OS, country, code
 
 ## Event side panel
 
-To open the event side panel in the [RUM Explorer][1], click on a table row in the **List** visualization type. Alternatively, click in the side panel list displayed after you click on **Show related events**. 
+To open the event side panel in the [RUM Explorer][1], click on a table row in the **List** visualization type.
 
 The event side panel displays all the information relative to a RUM event. The waterfall displays related resources, errors, views, and actions, and visualizes your events that cause errors or experience excessive loading times in a timeline format (the view minimap). 
 
@@ -38,4 +37,4 @@ RUM collects contextual information by default. You can also add additional cont
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context

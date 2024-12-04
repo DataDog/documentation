@@ -4,6 +4,7 @@ categories:
 - orchestration
 - google cloud
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Cloud Run for Anthos クラスターからメトリクスおよびログを収集し、Datadog で分析
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
@@ -18,7 +19,6 @@ integration_id: google-cloud-run-for-anthos
 integration_title: Google Cloud Run for Anthos
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: google_cloud_run_for_anthos
 public_title: Datadog-Google Cloud Run for Anthos インテグレーション
@@ -26,6 +26,7 @@ short_description: Cloud Run for Anthos クラスターからメトリクスお
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Cloud Run for Anthos は、ハイブリッドおよびマルチクラウド環境のための柔軟なサーバーレス開発プラットフォームです。Cloud Run for Anthos は、[Knative][1] サービスをフルサポートする、Google のマネージドサービスです。フルマネージドの Google Cloud をご利用の場合は、[Google Cloud Run ドキュメント][2]をご参照ください。
@@ -46,17 +47,17 @@ Workload Identity を有効にしていない場合、Knative メトリクスの
 
 セットアップの詳しい手順については、[Google Cloud Workload Identity][4] をご覧ください。
 
-### ログの収集
+### 収集データ
 
-Google Cloud Run for Anthos は、[サービスログ][5]も公開します。
-Google Cloud Run のログは、Google Cloud Logging を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][6]してください。
+Google Cloud Run for Anthos は[サービスログ][5]も公開します。
+Google Cloud Run のログは Google Cloud Logging で収集し、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信することができます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][6]。
 
-これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
 
 1. [Cloud Run for Anthos][7] へ移動し、希望するサービスをクリックして **Logs** タブを開きます。
 2. **View in Logs Explorer** をクリックして **Google Cloud Logging Page** へ移動します。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
@@ -80,7 +81,7 @@ Google Cloud Run のログは、Google Cloud Logging を使用して収集され
 
 Google Cloud Run for Anthos インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Google Cloud Run for Anthos インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -88,7 +89,7 @@ Google Cloud Run for Anthos インテグレーションには、サービスの�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

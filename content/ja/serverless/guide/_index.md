@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: サーバーレスモニタリングガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: サーバーレスモニタリングガイド
 ---
@@ -17,6 +16,11 @@ title: サーバーレスモニタリングガイド
     {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}サーバーレスと OpenTelemetry{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Azure App Service と Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Azure Sidecar を使用した Azure App Service 上の Linux コンテナのインスツルメンテーション{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder を使ったインストール
@@ -37,4 +41,5 @@ title: サーバーレスモニタリングガイド
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js の Lambda トレースと Webpack の互換性{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}サーバーレスパッケージが大きすぎるエラーのトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/handler_wrapper" >}}Lambda ハンドラーをコードでラップする{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}レイヤーが認可されていないエラーのトラブルシューティング{{< /nextlink >}}
 {{< /whatsnext >}}

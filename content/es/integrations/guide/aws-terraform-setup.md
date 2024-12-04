@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: Blog
   text: Gestión de Datadog con Terraform
-kind: guía
 title: La integración de AWS con Terraform
 ---
 
@@ -21,7 +20,7 @@ Mediante el uso de [Terraform][1], puedes crear el rol IAM de Datadog, el docume
    * `AWS_PERMISSIONS_LIST`: Políticas de IAM que necesitan las integraciones Datadog con AWS. La lista actual está disponible en la documentación [Integración de Datadog con AWS][1].
    * `AWS_ACCOUNT_ID`:  El ID de tu cuenta de AWS.
 
-   Consulta el [registro de Terraform][2] para obtener más ejemplos de uso y la lista completa de parámetros opcionales, así como recursos adicionales de Datadog.
+   Consulta la página de [Recursos de la integración de AWS con Datadog][2] en el registro de Terraform para obtener más ejemplos de uso y la lista completa de parámetros opcionales, así como recursos adicionales de Datadog.
 
    ```hcl
    data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
@@ -67,6 +66,11 @@ Mediante el uso de [Terraform][1], puedes crear el rol IAM de Datadog, el docume
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
    }
 
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
+   }
+
    resource "datadog_integration_aws" "sandbox" {
       account_id  = "<AWS_ACCOUNT_ID>"
       role_name   = "DatadogAWSIntegrationRole"
@@ -79,9 +83,9 @@ Mediante el uso de [Terraform][1], puedes crear el rol IAM de Datadog, el docume
 
 {{< site-region region="ap1" >}}
 
-2. Configura tu archivo de configuración de Terraform utilizando el siguiente ejemplo como plantilla base. Asegúrate de actualizar los siguientes parámetros antes de aplicar los cambios:
-   * `AWS_PERMISSIONS_LIST`: Políticas de IAM que necesitan las integraciones de AWS con Datadog. La lista actual está disponible en la documentación [Integración de AWS con Datadog][1].
-   * `AWS_ACCOUNT_ID`:  Tu ID de cuenta AWS.
+2. Configura tu archivo de ajustes de Terraform utilizando el siguiente ejemplo como plantilla base. Asegúrate de actualizar los siguientes parámetros antes de aplicar los cambios:
+   * `AWS_PERMISSIONS_LIST`: Políticas de IAM que necesitan las integraciones Datadog con AWS. La lista actual está disponible en la documentación [Integración de Datadog con AWS][1].
+   * `AWS_ACCOUNT_ID`:  El ID de tu cuenta de AWS.
 
    Consulta el [registro de Terraform][2] para obtener más ejemplos de uso y la lista completa de parámetros opcionales, así como recursos adicionales de Datadog.
 
@@ -160,5 +164,5 @@ Mediante el uso de [Terraform][1], puedes crear el rol IAM de Datadog, el docume
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.terraform.io
-[2]: https://docs.datadoghq.com/es/integrations/terraform/#overview
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [5]: https://app.datadoghq.com/screen/integration/7/aws-overview

@@ -10,7 +10,8 @@ author:
 categories:
 - コンテナ
 - kubernetes
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/komodor/README.md
 display_on_public_website: true
@@ -20,12 +21,8 @@ integration_id: komodor
 integration_title: Komodor Automation
 integration_version: ''
 is_public: true
-kind: integration
-legal_terms:
-  eula: Komodor Terms of use.pdf
 manifest_version: 2.0.0
 name: komodor
-oauth: {}
 public_title: Komodor Automation
 short_description: K8s のランドスケープとスタック全体の変更点を追跡する
 supported_os:
@@ -37,7 +34,7 @@ tile:
   classifier_tags:
   - Category::Containers
   - Category::Kubernetes
-  - Category::Notification
+  - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -71,6 +68,7 @@ tile:
   title: Komodor Automation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -91,7 +89,7 @@ Komodor は、K8s スタック全体の変更を追跡し、その波及効果�
 
 4. Kubernetes [アノテーション][7]を使用して、Datadog APM ダッシュボードへの関連リンクや、Datadog 内の特定のサービスメトリクスや時間範囲への動的リンクで Komodor サービスやデプロイ画面をリッチ化することができます。
 
-## サポート
+## Agent
 
 詳しくは、[Web サイトをご覧いただく][8]か、または[お問い合わせ][9]ください。
 

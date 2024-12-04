@@ -3,13 +3,12 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM データを Explorer で確認
-kind: ガイド
 title: beforeSend を使用してブラウザ RUM データを強化および制御する
 ---
 
 ## 概要
 
-RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM  SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM SDK によって収集されたすべてのイベントに、Datadog へ送信される前にアクセスできます。
 
 RUM イベントをインターセプトすると、次のことが可能になります。
 
@@ -37,15 +36,15 @@ function beforeSend(event, context)
 ```
 
 ### コンテキスト
-コンテキストは、イベントの作成をトリガーする Browser API で構成されます。コンテキスト値は `event.type` に依存します。
-| RUM イベントタイプ       | コンテキスト                                                         |
+The context is made of the Browser APIs that trigger the event creation. The context values depend on the `event.type`:
+| RUM event type       | Context                                                         |
 |----------------------|-----------------------------------------------------------------|
 | View                 | [Location][3]                                                   |
 | Action               | [Event][4]                                                      |
-| Resource (XHR)       | [XMLHttpRequest][5] および [PerformanceResourceTiming][6]          |
-| Resource (Fetch)     | [Request][7]、[Response][8]、および [PerformanceResourceTiming][6] |
+| Resource (XHR)       | [XMLHttpRequest][5] and [PerformanceResourceTiming][6]          |
+| Resource (Fetch)     | [Request][7], [Response][8], and [PerformanceResourceTiming][6] |
 | Resource (Other)     | [PerformanceResourceTiming][6]                                  |
-| Error                | [Error][9] またはエラーとして発生するその他の値                |
+| Error                | [Error][9] or any other value raised as an error                |
 | Long Task            | [PerformanceLongTaskTiming][10]                                 |
 
 コンテキストオブジェクトの構造の詳細については、[Browser SDK リポジトリ][11]を参照してください。
@@ -64,8 +63,9 @@ datadogRum.init({
     beforeSend: (event, context) => {
         // RUM リソースの応答ヘッダーを収集します
         if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context = {...event.context, responseHeaders: context.response.headers}
+            event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });
@@ -271,7 +271,7 @@ datadogRum.init({
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#modify-the-content-of-a-rum-event
+[1]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
 [2]: /ja/real_user_monitoring/browser/data_collected/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event

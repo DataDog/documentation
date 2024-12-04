@@ -3,6 +3,7 @@ app_id: bonsai
 app_uuid: ec3141f4-b722-4eaa-be49-47c6eec76da9
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: bonsai.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10053
     source_type_name: Bonsai
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,8 @@ author:
   sales_email: dev@onemorecloud.com
   support_email: dev@onemorecloud.com
 categories:
-- data store
+- メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: bonsai
 integration_title: Bonsai
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: bonsai
-oauth: {}
 public_title: Bonsai
 short_description: 'Bonsai: マネージド型 Elasticsearch'
 supported_os:
@@ -42,8 +43,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
+  - Category::Metrics
   - Supported OS::Windows
-  - Category::Data Store
+  - Offering::Integration
   configuration: README.md#Setup
   description: 'Bonsai: マネージド型 Elasticsearch'
   media: []
@@ -52,6 +54,7 @@ tile:
   title: Bonsai
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -106,7 +109,7 @@ cluster:my-cluster-slug
 
 Bonsai インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Bonsai インテグレーションには、サービスのチェック機能は含まれません。
 

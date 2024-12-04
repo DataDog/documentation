@@ -7,6 +7,7 @@ categories:
 - cloud
 - log collection
 - tracing
+custom_kind: integration
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -27,19 +28,14 @@ integration_id: amazon-lambda
 integration_title: AWS Lambda
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
-monitors:
-  lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json
-  lambda_high_iterator_rate: assets/monitors/lambda_high_iterator_rate.json
-  lambda_high_throttles: assets/monitors/lambda_high_throttles.json
-  lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
 public_title: Datadog-AWS Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 <div class="alert alert-warning">このページは、Amazon CloudWatch からの AWS Lambda メトリクスの取り込みに特化された文書となっています。Lambda 関数から直接リアルタイムにテレメトリーを収集することについては、<a href="/serverless">Datadog サーバーレスドキュメント</a>を参照してください。</div>
 
 ## 概要
@@ -85,7 +81,7 @@ AWS から取得される各メトリクスには、関数名やセキュリテ�
 
 AWS Lambda インテグレーションは、[Datadog サーバーレスデプロイの追跡][9]を有効にすると、AWS CloudTrail から Lambda のデプロイイベントを収集することができます。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Lambda インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -97,7 +93,7 @@ AWS Lambda インテグレーションには、サービスのチェック機能
 
 詳細は、[サーバーレスドキュメント][11]でご確認ください。
 
-### ログの収集
+### 収集データ
 
 詳細は、[サーバーレスドキュメント][12]でご確認ください。
 
@@ -111,7 +107,7 @@ Datadog は、Lambda のメトリクスに `at_edge`、`edge_master_name`、`edg
 
 Lambda@Edge 関数では、分散型トレーシングは_サポートされていません_。
 
-## すぐに使えるモニタリング
+## すぐに使える監視
 
 AWS Lambda インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
 

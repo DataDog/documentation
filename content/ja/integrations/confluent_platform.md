@@ -5,6 +5,7 @@ assets:
   dashboards:
     Confluent Platform Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,12 +16,11 @@ assets:
       prefix: confluent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10091
     source_type_name: Confluent Platform
-  logs:
-    source: confluent_platform
   monitors:
-    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
-    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
+    Topic partition is not used: assets/monitors/unused_partition.json
+    Unclean leader election detected: assets/monitors/unclean_leader_election.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +28,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
 display_on_public_website: true
@@ -35,12 +36,10 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.8.2
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: confluent_platform
-oauth: {}
 public_title: Confluent Platform
 short_description: Confluent Platform のコンポーネントを監視する。
 supported_os:
@@ -54,6 +53,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
+  - 製品::Data Streams Monitoring
   configuration: README.md#Setup
   description: Confluent Platform のコンポーネントを監視する。
   media: []
@@ -62,6 +63,7 @@ tile:
   title: Confluent Platform
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -88,7 +90,7 @@ Confluent Platform チェックは [Datadog Agent][1] パッケージに含ま�
 **注**: このチェックはメトリクスを JMX を使用して収集するため、Agent が [jmxfetch][2] を実行できるように、各ノード上に JVM が必要です。Oracle 提供の JVM を使用することをお勧めします。
 
 
-### コンフィギュレーション
+### 構成
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `confluent_platform.d/conf.yaml` ファイルを編集し、Confluent Platform のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[confluent_platform.d/conf.yaml のサンプル][3]を参照してください。
 
@@ -111,7 +113,7 @@ Confluent Platform チェックは [Datadog Agent][1] パッケージに含ま�
 
 2. [Agent を再起動します][5]。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -172,7 +174,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Confluent Platform チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "confluent_platform" >}}
 
 
@@ -181,7 +183,7 @@ Confluent Platform チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/jmxfetch
 [3]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml

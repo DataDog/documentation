@@ -1,8 +1,8 @@
 ---
 title: Query Syntax
-kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
+ - /tracing/search_syntax/
  - /tracing/trace_search_analytics/
  - /tracing/trace_search/
  - /tracing/search
@@ -25,9 +25,9 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -36,7 +36,7 @@ further_reading:
   text: "Dive into your resource performance and traces"
 ---
 
-## Search bar
+## Search query
 
 All search parameters are contained in the url of the page, which can be helpful for sharing your view.
 
@@ -46,10 +46,9 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A [**Facet**](#facet-search)
-
-* A [**Tag**](#tags-search)
-
+* **Span tag**: Enrichments of context related to the span. For instance, host or container tags describing the infrastructure the service is running on.
+* **Span attribute**: Content of the span, collected with automatic or manual instrumentation in the application.
+  
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
 | **Operator** | **Description**                                                                                        | **Example**                  |
@@ -58,17 +57,29 @@ To combine multiple *terms* into a complex query, use any of the following boole
 | `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
-### Facet search
+### Attribute search
 
-To search on a specific [facet](#facets) you must [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
+To search on a specific span attribute you must add `@` at the beginning of the attribute key.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
+For instance, if you want to access a span with the following attribute below, you can use:
 
-`@url:www.datadoghq.com`
+`@git.commit.sha:12345`
+
+```json
+  "git": {
+    "commit": {
+      "sha": "12345"
+    },
+    "repository": {
+      "id": "github.com/datadog/datadog"
+    }
+  }
+```
+**Note:** You do not need to use `@` on the [reserved attributes][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
 ### Tags search
 
-Your traces inherit tags from hosts and [integrations][1] that generate them. They can be used in the search and as facets as well:
+Your spans inherit tags from hosts and integrations that generate them. They can be used in the search query:
 
 | Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -76,9 +87,16 @@ Your traces inherit tags from hosts and [integrations][1] that generate them. Th
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
 | `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-If your tags don't follow [tags best practices][2] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][2], then do not use `key:value` syntax. Instead, use the following search query:
 
 * `tags:<MY_TAG>`
+
+Example tag that does not follow the best practices:
+
+<img width="867" alt="tagging-not-recommended" src="https://github.com/user-attachments/assets/4a3d5246-b6e7-4ab2-908a-bc2137062573">
+
+Search query for this specific tag:
+`tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### Wildcards
 
@@ -123,42 +141,64 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 To delete a saved search, click on the bin icon under the Trace search dropdown menu.
 
+### Search for services and entities 
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+To search for a service, use the `service` attribute. To search for another [entity type][20] (for example, a database, a queue, or a third-party provider), rely on other [peer attributes][21] which Datadog uses to describe dependencies that are not instrumented with APM. For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`
+
+**Note**: The span's `service` tag represents the service **emitting** the span if you migrated to the [global service naming][22] by setting `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
+
+[20]: /tracing/services/inferred_services
+[21]: /tracing/services/inferred_services#peer-tags
+[22]: /tracing/services/inferred_services#migrate-to-global-default-service-naming
+{{< /site-region >}}
+
 ## Time range
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown menu (or [entering a custom time frame][3]):
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
-## Trace stream
+## Span table
 
-The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+The Span table is the list of spans that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+### The service column
+
+By default, the service column shows the `service` reserved attribute from the span.
+
+{{< img src="tracing/app_analytics/search/span_table_service.png" style="width:60%;" alt="Span table service column" >}}
+
+When the span represents a client call from an instrumented service to an inferred service, the service column shows:
+- the **service**, identified by the `service` reserved attribute.
+- the **[inferred service][4]**: name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
+
+{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="Span table service column with inferred service" >}}
+
+When the service name is an override from the base service name, the service column shows:
+- the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
+- the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
+
+{{< img src="tracing/app_analytics/search/span_table_service_override.png" style="width:80%;" alt="Span table service column with service override" >}}
+
+[2]: /tracing/guide/service_overrides#base-service
+[3]: /tracing/guide/service_overrides
+[4]: /tracing/services/inferred_services
+[5]: /tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 ### Displaying a full trace
 
-Click on any trace to see more details about it:
+Click on any span to see details about the associated trace:
 
 {{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" style="width:80%;">}}
 
 ### Columns
 
-To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
+To add other [span tags or attributes][23] as columns to the list, click the **Options** button and select any dimension you want to add:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" style="width:80%;">}}
-
-### Multi-line display
-
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" style="width:30%;">}}
-
-Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
-
-* With one line displayed:
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" style="width:80%;">}}
-
-* With three lines displayed:
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" style="width:80%;">}}
-
-* With ten lines displayed:
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" style="width:80%;">}}
 
 ## Facets
 
@@ -168,9 +208,11 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo" style="width:80%;">}}
 
-### Quantitative (measures)
+### Measures
 
-**Use measures when you need to:**
+Measures are the specific type of facets for quantitative values.
+
+Use measures when you need to:
 * Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
 * Numerically compute the highest latency services for shopping cart values over $1000.
 * Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.
@@ -191,46 +233,13 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
+After you create a new facet, it is available in the facet panel for filtering and basic analytics.
 
 ### Facet panel
 
 Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" style="width:30%;">}}
-
-## Analytics overview
-
-Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
-
-Analytics is automatically enabled for all APM [services][6] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][7] and legacy App Analytics are available in Analytics for 15 days.
-
-Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
-
-## Analytics query
-
-Use the query to control what's displayed in your Analytics:
-
-1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
-
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" style="width:50%;">}}
-
-2. Select the aggregation function for the `Duration` metric:
-
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function" style="width:50%;">}}
-
-3. Use a tag or facet to split your Analytic.
-
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by" style="width:50%;">}}
-
-4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
-
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button" style="width:20%;">}}
-
-5. Choose the Analytic Timesteps.
- Changing the global timeframe changes the list of available Timesteps values.
-
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep" style="width:30%;">}}
 
 ## Visualizations
 
@@ -280,18 +289,15 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button" style="width:40%;">}}
 
-Export your Analytics:
+Export your queries:
 
-* To a new [APM monitor][11]
-* To an existing [Timeboard][12]. This feature is in beta. [Contact the Datadog support team][13] to activate it for your organization.
+* To [monitor][11]
+* To [dashboard][12]
+* To [notebook][18]
 
-**Note:** Analytics can be exported only when powered by [indexed spans][14].
+You can also generate a new metric for the query.
 
-## Traces in dashboard
-
-Export [Analytics][4] from the trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
-
-[Learn more about the timeseries widget][16].
+**Note**: APM queries in dashboards and notebooks are based on all [indexed spans][14]. APM queries in monitors are based on spans indexed by [custom retention filters][19] only.
 
 ## Further Reading
 
@@ -308,8 +314,12 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /tracing/glossary/#trace
 [11]: /monitors/types/apm/
-[12]: /dashboards/#timeboards
+[12]: /dashboards/#get-started
 [13]: /help/
 [14]: /tracing/glossary/#indexed-span
 [15]: /dashboards/
 [16]: /dashboards/widgets/timeseries/
+[17]: /monitors/notify/variables/?tab=is_alert#reserved-attributes
+[18]: /notebooks/
+[19]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[23]: /tracing/trace_explorer/span_tags_attributes

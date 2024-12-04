@@ -1,11 +1,10 @@
 site_name: "Datadog Infrastructure and Application Monitoring"
-meta_image: datadog_logo_share_tt.png
 meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "이 페이지는 아직 한국어로 제공되지 않으며 번역 작업 중입니다. 번역에 관한 질문이나 의견이 있으시면 언제든지 저희에게 연락해 주십시오."
 announcement_banner:
-  desktop_message: "Read the State of Application Security Research Report"
-  mobile_message: "Report: State of Application Security"
-  external_link: "https://www.datadoghq.com/state-of-application-security/?utm_source=organic&utm_medium=display&utm_campaign=dg-organic-websites-ww-docs-announcement-report-applicationsecurity2023"
+  desktop_message: "14일 동안 무료 트라이얼을 신청하시면 원하는 갯수의 서버를 모니터링하실수 있습니다"
+  mobile_message: "14일 동안 무료 트라이얼을 신청하시면 원하는 갯수의 서버를 모니터링하실수 있습니다"
+  external_link: https://www.datadoghq.com/ko/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-korea-docs-announcement-trial-freetrial-ko
 exclude: []
 translate_status_banner: "이 번역은 최신 버전이 아닙니다. 최신 한국어 버전을 보려면 여기를 클릭하세요"

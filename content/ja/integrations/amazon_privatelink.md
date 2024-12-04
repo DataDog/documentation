@@ -1,27 +1,65 @@
 ---
+app_id: amazon-privatelink
+app_uuid: a61f0481-5b69-4c7b-9777-12d626f2486d
+assets:
+  dashboards:
+    Amazon PrivateLink: assets/dashboards/amazon_privatelink_dashboard.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.privatelinkendpoints.active_connections
+      metadata_path: metadata.csv
+      prefix: aws.privatelink
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 360
+    source_type_name: Amazon PrivateLink
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-- AWS
+- モニター
+- aws
 - クラウド
 - ログの収集
 - ネットワーク
+custom_kind: integration
 dependencies: []
-description: AWS PrivateLink のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_privatelink/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_privatelink
-has_logo: true
 integration_id: amazon-privatelink
-integration_title: AWS PrivateLink
+integration_title: Amazon PrivateLink
 integration_version: ''
 is_public: true
-kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_privatelink
-public_title: Datadog-AWS PrivateLink インテグレーション
+public_title: Amazon PrivateLink
 short_description: AWS PrivateLink のキーメトリクスを追跡します。
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::AWS
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Network
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: AWS PrivateLink のキーメトリクスを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon PrivateLink
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレミスネットワーク間のプライベート接続を提供します。
@@ -52,7 +90,7 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 
 AWS PrivateLink インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS PrivateLink インテグレーションには、サービスのチェック機能は含まれません。
 

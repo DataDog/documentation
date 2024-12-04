@@ -2,19 +2,19 @@
 categories:
 - AWS
 - クラウド
-- data store
+- data stores
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Neptune のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/
 draft: false
 git_integration_title: amazon_neptune
 has_logo: true
-integration_id: amazon-neptune
+integration_id: ''
 integration_title: Amazon Neptune
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_neptune
 public_title: Datadog-Amazon Neptune インテグレーション
@@ -22,6 +22,7 @@ short_description: Amazon Neptune のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Neptune は、高速かつ信頼性の高いフルマネージド型グラフデータベースサービスです。高度に接続されたデータセットと連携するアプリケーションを簡単に構築および実行できます。
@@ -39,7 +40,7 @@ Amazon Neptune は、高速かつ信頼性の高いフルマネージド型グ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Neptune` が有効になっていることを確認します。
 2. [Datadog - Amazon Neptune インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -65,7 +66,7 @@ Amazon Neptune から S3 バケットまたは CloudWatch のいずれかにロ�
 
 Amazon Neptune インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon Neptune インテグレーションには、サービスのチェック機能は含まれません。
 

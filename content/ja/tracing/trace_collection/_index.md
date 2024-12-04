@@ -9,46 +9,82 @@ aliases:
 - /ja/tracing/getting_further/first_class_dimensions/
 - /ja/agent/apm/
 - /ja/tracing/setup_overview/
+- /ja/tracing/trace_collection/library_injection_remote
 description: Datadog APM の開始
-kind: documentation
-title: Datadog へのトレースの送信
+further_reading:
+- link: tracing/trace_collection/compatibility
+  tag: ドキュメント
+  text: 互換性要件
+title: アプリケーションインスツルメンテーション
 ---
 
-ほとんどの環境では、以下の 2 つのステップでアプリケーションを構成して[トレース][1]を Datadog に送信できます。
+## 概要
 
-1. インストール。
+Datadog APM を始めるには、次の重要なステップに従う必要があります。
 
-2. Datadog トレーシングライブラリをコードに追加する。
+1. Datadog Agent をインストールして構成します。
+2. アプリケーションをインスツルメントします。
 
-トレースは、Datadog トレーシングライブラリでインスツルメンテーションされたアプリケーションから Datadog Agent に、Datadog Agent から Datadog バックエンドに送信され、UI に表示されます。
+<div class="alert alert-info"><strong>セットアップを簡素化しましょう！</strong><a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> により、Agent のインストールとアプリケーションのインスツルメンテーションをワンステップで行うことができます。</div>
+
+アプリケーションをインスツルメントすることで、可観測性データが Agent に送信され、その後 Datadog のバックエンドに渡されて UI に表示されます。
 
 {{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="APM パイプライン">}}
 
-コンテナ化されたサーバーレスまたはその他特定の環境の場合は、トレースを適切に受信するためにトレーサーと Agent の双方で APM 特有のコンフィギュレーションが必要となります。双方のコンポーネントで必ず手順に従って操作してください。
+## インスツルメンテーションの種類
 
-## 言語を選択して設定の手順を確認します。
+アプリケーションをインスツルメントするには、主に自動またはカスタムの {{< tooltip glossary="instrumentation" >}} の 2 つのアプローチがあります。
 
-{{< partial name="apm/apm-languages.html" >}}
+### 自動インスツルメンテーション
 
-<br>
+最小限の手動ステップでアプリケーションの {{< tooltip glossary="span" >}} を作成します。自動的にアプリケーションをインスツルメントするには、次のいずれかのオプションを使用できます。
 
-公式ライブラリでまだサポートされていない言語で記述されたアプリケーションを計測する場合は、[コミュニティトレーシングライブラリ][2]のリストを参照してください。
+- [Single Step Instrumentation (ベータ版)][7]: 1 行のインストールコマンドを実行して Datadog Agent をインストールし、APM を有効化し、Linux ホスト、VM、またはコンテナ上のすべてのサービスをインスツルメントします。
+- [Datadog ライブラリ][8]: アプリケーションに Datadog トレーシング ライブラリを追加します。
 
-トレースを設定したら、[Continuous Profiler を有効にしてプロファイリングデータにアクセスするまであともう少しです][3]。プロファイラーは、Java、Python、Go、Ruby、Node.js、(ベータ) PHP、(ベータ) .NET、(ベータ) Linux で使用できます。
+詳細は[自動インスツルメンテーション][5]を参照してください。
+
+### カスタムインスツルメンテーション
+
+自動インスツルメンテーションでキャプチャされない自社コードや複雑な機能から可観測性データを取得します。カスタムでアプリケーションをインスツルメントするには、次のいずれかのオプションを使用できます。
+
+- [Datadog ライブラリ][9]: Datadog トレーシングライブラリを使用して、Datadog 内で可観測性を追加およびカスタマイズします。
+- [OpenTelemetry API][10]: Datadog ライブラリでの OpenTelemetry API サポートを使用して、ベンダーに依存しないコードのインスツルメンテーションを行います。
+
+詳細は[カスタムインスツルメンテーション][6]を参照してください。
 
 ## APM セットアップチュートリアル
 
-以下のチュートリアルでは、様々なインフラストラクチャーシナリオ上で、サンプル Python アプリケーションに分散型トレーシングを設定する手順を、自動およびカスタムインスツルメンテーションの両方を用いて解説します。
+以下のチュートリアルでは、Datadog トレーシングライブラリを使用して、自動およびカスタムインスツルメンテーションの両方を備えたさまざまなインフラストラクチャーシナリオで、サンプルアプリケーションの分散型トレーシングをセットアップする方法を案内します。
 
-{{< whatsnext desc="チュートリアル: トレースの有効化" >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Datadog Agent と同じホスト上の Python アプリケーションでトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}コンテナ内の Python アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}コンテナ内の Python アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}Datadog Agent と同じホスト上の Java アプリケーションでトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}コンテナ内の Java アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}コンテナ内の Java アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
+{{< whatsnext desc="言語と環境を選択してください。" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Python アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> コンテナ内の Python アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> コンテナ内の Python アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Java アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> コンテナ内の Java アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> コンテナ内の Java アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Amazon ECS with EC2 で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Amazon ECS with Fargate で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Admission Controller で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホストの Go アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Go アプリケーションとコンテナ内の Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> EC2 で Amazon ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Fargate で Amazon ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
+
 {{< /whatsnext >}}
+## 参考資料
 
-[1]: /ja/tracing/glossary/#trace
-[2]: /ja/developers/community/libraries/#apm-tracing-client-libraries
-[3]: /ja/profiler/enabling/
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/developers/community/libraries/#apm-tracing-client-libraries
+[2]: /ja/tracing/trace_collection/library_injection_local/
+[4]: /ja/tracing/trace_collection/dd_libraries/
+[5]: /ja/tracing/trace_collection/automatic_instrumentation/
+[6]: /ja/tracing/trace_collection/custom_instrumentation/
+[7]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[8]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[9]: /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/
+[10]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

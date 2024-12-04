@@ -3,6 +3,7 @@ app_id: filebeat
 app_uuid: 50405147-1148-405a-9d81-ea48be4f613b
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: filebeat.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10127
     source_type_name: Filebeat
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
   support_email: jean@tripping.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: filebeat
 integration_title: Filebeat
 integration_version: 1.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: filebeat
-oauth: {}
 public_title: Filebeat
 short_description: 軽量ログシッパー
 supported_os:
@@ -47,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 軽量ログシッパー
   media: []
@@ -55,6 +57,7 @@ tile:
   title: Filebeat
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チ�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Filebeat の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `filebeat.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル filebeat.d/conf.yaml][5] を参照してください。
 
@@ -100,7 +103,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チ�
 
 Filebeat チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "filebeat" >}}
 
 
@@ -109,7 +112,7 @@ Filebeat チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Speedtest: assets/dashboards/speedtest.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: speedtest.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10119
     source_type_name: speedtest
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -25,6 +27,7 @@ categories:
 - developer tools
 - ネットワーク
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: speedtest
 integration_title: speedtest
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: speedtest
-oauth: {}
 public_title: speedtest
 short_description: speedtest-cli を使用して Speedtest の結果を実行します
 supported_os:
@@ -53,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: speedtest-cli を使用して Speedtest の結果を実行します
   media: []
@@ -61,6 +63,7 @@ tile:
   title: speedtest
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -85,7 +88,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Speedtest チ�
 
 **注**: すべてのホストについて、[Speedtest CLI][1] をインストールし、使用前に Datadog Agent ユーザー (例: `sudo -u dd-agent speedtest`) として契約に同意する必要があります。
 
-### コンフィギュレーション
+### 構成
 
 1. Speedtest のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `speedtest.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[speedtest.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -105,7 +108,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Speedtest チ�
 
 Speedtest チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "speedtest" >}}
 
 
@@ -115,7 +118,7 @@ Speedtest チェックには、イベントは含まれません。
 
 
 [1]: https://www.speedtest.net/apps/cli
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/datadog_checks/speedtest/data/conf.yaml.example

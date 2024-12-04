@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: ログのパースに関する問題を調査する方法
-kind: ガイド
 title: ログのパース - ベストプラクティス
 ---
 
@@ -48,7 +47,7 @@ Datadog では、ログからすべての関連情報を抽出するためのパ
     ほとんどの規則は、この 4 つのマッチャーを使用して記述できます。すべてのマッチャーのリストは[パースのドキュメント][2]で確認できます。
 
 4. **KeyValue**。
-    keyvalue フィルターを使用すると、すべての属性を自動的に抽出できます。
+    key-value フィルターを使用すると、すべての属性を自動的に抽出できます。
     詳細については、[いくつかの例][3]を参照してください。
 
 5. **ログメッセージの中で、属性として抽出しない部分をスキップする**。
@@ -61,7 +60,6 @@ Datadog では、ログからすべての関連情報を抽出するためのパ
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" >}}
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

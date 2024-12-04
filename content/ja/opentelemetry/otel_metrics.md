@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: GitHub
   text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
-kind: documentation
 title: OpenTelemetry から Datadog にメトリクスを送信する
 ---
 
@@ -22,9 +21,9 @@ OpenTelemetry のメトリクスを Datadog に送信するには、Datadog Agen
 
 アプリケーションやサービスが [OpenTelemetry][4] ライブラリでインスツルメントされている場合、メトリクスデータを Datadog バックエンドに取得するために 2 つの経路から選択することができます。
 
-1. [トレースを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][5]、または
+1. [Send metrics to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5], or
 
-2. [Datadog Agent でトレースを取り込み、Datadog のために収集させます][6]。
+2. [Ingest metrics with the Datadog Agent, which collects them for Datadog][6].
 
 詳しくは [OpenTelemetry][7] をお読みください。
 
@@ -36,7 +35,7 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 
 **Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][8]から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][9]に応じて収集された他の種類のメトリクス用です。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

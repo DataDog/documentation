@@ -9,8 +9,11 @@ assets:
     'IO Connect Execs: Cost Optimization': assets/dashboards/execs_cost_optimization.json
     'IO Connect Operations: APIs': assets/dashboards/operations_apis.json
     'IO Connect Operations: Infrastructure': assets/dashboards/operations_infrastructure.json
+    'IO Connect Operations: RTF Infrastructure': assets/dashboards/rtf_infrastructure.json
+    'IO Connect Operations: RTF Resource Allocation and Usage': assets/dashboards/rtf_resource_allocation.json
     'IO Connect Operations: Resources allocation': assets/dashboards/operations_resources_allocation_and_usage.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -20,6 +23,7 @@ assets:
       prefix: ioconnect.mulesoft.anypoint.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10117
     source_type_name: IO Connect MuleSoft Anypoint
   monitors:
     Servers status: assets/monitors/server_disconnected_monitor.json
@@ -31,6 +35,10 @@ assets:
     '[On-Prem] Apps status': assets/monitors/onpremise_app_stopped_monitor.json
     '[On-Prem] CPU load': assets/monitors/onpremise_cpu_load_monitor.json
     '[On-Prem] Memory usage': assets/monitors/onpremise_memory_usage_monitor.json
+    '[RTF] App Status Pending': assets/monitors/rtf_application_status_pending.json
+    '[RTF] App Status Stopped': assets/monitors/rtf_applications_has_been_stopped.json
+    '[RTF] CPU Total Usage': assets/monitors/rtf_cpu_total_usage.json
+    '[RTF] Memory Total Usage': assets/monitors/rtf_memory_usage.json
 author:
   homepage: https://www.ioconnectservices.com/
   name: IO Connect Services
@@ -49,12 +57,10 @@ integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
-  eula: assets/EULA - IO Connect Services.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: mulesoft_anypoint
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -80,6 +86,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
   media:
@@ -110,6 +117,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -122,7 +130,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 ### ** Mule アプリケーションに必要な可観測性**
 
-#### オペレーション (_インフラストラクチャー、API、アラート、リソース割り当てダッシュボード_) 
+#### オペレーション (_インフラストラクチャー、API、アラート、リソース割り当てダッシュボード_)
 
 - Mule サーバー、アプリケーション、API、その他の IT インフラストラクチャーの状態を監視します
 - Mule インフラストラクチャーに関するアラートを受信して視覚化します
@@ -134,7 +142,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_allocation.png" alt="オペレーション: リソースの割り当てと使用状況のダッシュボード" >}}
 
-#### 開発 (_最適化ダッシュボード_) 
+#### 開発 (_最適化ダッシュボード_)
 
 - Mule アプリケーションのメモリ、CPU、ネットワークの問題をすばやく特定します
 - Mule アプリケーションのボトルネックを見つけて、パフォーマンスを最適化します
@@ -142,7 +150,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_dev_optimization.png" alt="開発: 最適化ダッシュボード" >}}
 
-#### エグゼクティブ (_コスト最適化とダウンタイムのダッシュボード_) 
+#### エグゼクティブ (_コスト最適化とダウンタイムのダッシュボード_)
 
 - 使用済みおよび未使用のリソースに基づいて ROI を分析、予測します
 - Mule 投資のシステムアップタイムを可視化します
@@ -151,11 +159,12 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 #### メトリクスは、次の MuleSoft 製品から収集されます。
 
-- CloudHub とオンプレミスのスタンドアロンサーバーの両方の Mule ランタイム
+- CloudHub、Runtime Fabric、およびオンプレミスのスタンドアロンサーバーの Mule ランタイム
+- Anypoint Runtime Fabric
 - Anypoint API Manager と API Analytics
-- Anypoint Exchange 
-- Anypoint Access Management 
-- Object Store v2 
+- Anypoint Exchange
+- Anypoint Access Management
+- Object Store v2
 
 ### **Datadog Mule 4 コネクタを使用して Mule アプリケーションをインスツルメントします**
 
@@ -179,7 +188,7 @@ Datadog APM トレースを備えた Mule 4 用の Datadog コネクタを使え
 {{< get-metrics-from-git "mulesoft_anypoint" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 mulesoft_anypoint には、次のサービスチェックが含まれていました。
 
@@ -190,7 +199,7 @@ mulesoft_anypoint には、次のサービスチェックが含まれていま�
 
 Datadog Mule® インテグレーションには、イベントは含まれません。
 
-## サポート
+## Agent
 
 サポートが必要な場合は、IO Connect Services ([support_ddp@ioconnectservices.com][9]) までお問い合わせください。
 

@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Load Balancer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
@@ -14,7 +15,6 @@ integration_id: azure-load-balancer
 integration_title: Microsoft Azure Load Balancer
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_load_balancer
 public_title: Datadog-Microsoft Azure Load Balancer インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure Load Balancer のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Load Balancer は、インバウンドとアウトバウンドのどちらのシナリオもサポートし、低レイテンシーと高スループットを実現して、あらゆる TCP および UDP アプリケーションの数百万のフローにスケールアップできます。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure Load Balancer �
 
 Azure Load Balancer インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Load Balancer インテグレーションには、サービスのチェック機能は含まれません。
 

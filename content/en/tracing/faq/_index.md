@@ -1,6 +1,6 @@
 ---
 title: Tracing FAQ
-kind: faq
+
 cascade: 
   - private: true
 ---

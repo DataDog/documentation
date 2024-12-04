@@ -1,6 +1,6 @@
 ---
 title: Managing the Azure Native Integration
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
@@ -131,7 +131,7 @@ There are three types of logs that can be emitted from Azure to Datadog using th
 
 1. [Activity logs](#activity-logs)
 2. [Resource logs](#resource-logs)
-3. [Azure Active Directory logs](#azure-active-directory-logs)
+3. [Microsoft Entra ID](#microsoft-entra-id-logs)
 
 ##### Activity logs
 
@@ -157,17 +157,17 @@ For example, the screenshot below shows a tag rule where only virtual machines, 
 
 {{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="A screenshot showing a metric tag rule of Datadog=true set for virtual machines, virtual machine scale sets, and app service plans. The logs section is also configured with tag rule of Datadog=true" responsive="true" style="width:100%;">}}
 
-##### Azure Active Directory logs
+##### Microsoft Entra ID logs
 
-Azure Active Directory (Azure AD) logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send Azure AD Logs:
+Microsoft Entra ID logs contain the history of sign-in activity and an audit trail of changes made in Microsoft Entra ID for a particular tenant. To send Microsoft Entra ID logs:
 
-1. Navigate to Azure Active Directory in Azure, and select **Diagnostic Settings** in the left navigation bar.
+1. Navigate to Microsoft Entra ID, and select **Diagnostic Settings** under **Monitoring** in the left navigation bar.
 2. Click **Add diagnostic setting**.
 3. Select the log categories you want to send to Datadog. Datadog recommends sending all categories.
 4. In **Destination details**, select **Send to a partner solution**.
 5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
-All Azure AD logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
+All Microsoft Entra ID logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
 
 ### Monitored resources
 
@@ -186,9 +186,14 @@ The **Logs to Datadog** column displays `Sending` if the resource is sending log
 | Region not supported                      | The Azure resource is in a region that doesn't support sending logs to Datadog.                                         |
 | Datadog Agent not configured              | Virtual machines without the Datadog Agent installed don't emit logs to Datadog.                                        |
 
-### Virtual machine agent
+### Datadog Agent extensions
+
+{{< tabs >}}
+{{% tab "VM Extension" %}}
 
 To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
+
+{{< img src="integrations/guide/azure_native_manual_setup/azure_native_vm_extension.png" alt="The Datadog resource in Azure with Virtual machine agent selected and the Install extension option highlighted" responsive="true" style="width:90%;">}}
 
 For each VM, the following information is displayed:
 
@@ -204,13 +209,46 @@ For each VM, the following information is displayed:
 
 #### Install
 
-To install the Datadog Agent, select the appropriate VM, then click **Install Agent**. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
+You can install the Datadog Agent directly in Azure with the VM Extension. To install the Datadog Agent: 
+
+1. Select the appropriate VM.
+2. Click **Install Extension**. 
+3. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
+
+##### Uninstall
+
+If the Datadog Agent was installed with the Azure VM extension:
+
+1. Select the appropriate VM.
+2. Click **Uninstall Agent**.
+
+If the Agent was installed using a different method, you cannot use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
+
+{{% /tab %}}
+{{% tab "AKS Cluster Extension" %}}
+
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. 
+
+#### Install
+
+To install the Datadog Agent with the AKS Cluster Extension: 
+
+1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Search for and select the `Datadog AKS Cluster Extension`.
+4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
 
 #### Uninstall
 
-If the Datadog Agent was installed with the Azure VM extension, you can uninstall the Agent by selecting the appropriate VM, then click **Uninstall Agent**.
+1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Select the Datadog AKS Cluster Extension (its **Type** is `Datadog.AKSExtension`).
+4. Click **Uninstall**.
 
-If the Agent was installed using a different method, you can not use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### App Service extension
 
@@ -246,9 +284,9 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 
 Select **Single sign-on** in the left sidebar to reconfigure single sign-on.
 
-To activate single sign-on through Azure Active Directory, select **Enable single sign-on**. The portal retrieves the appropriate Datadog application from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below.
+To activate single sign-on through Microsoft Entra ID, select **Enable single sign-on**. The portal retrieves the appropriate Datadog application from Microsoft Entra ID. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below.
 
-{{< img src="integrations/guide/azure_portal/sso.png" alt="The Azure portal with Enable Single sign-on through Azure active directory enabled" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/sso.png" alt="The Azure portal with Enable Single sign-on through Microsoft Entra ID enabled" responsive="true" style="width:100%;">}}
 
 ### API keys
 
@@ -282,4 +320,4 @@ To disable, uncheck the box and click **Save**.
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 [6]: /serverless/azure_app_services
 [7]: /serverless/azure_app_services/#requirements
-[8]: /security/misconfigurations/
+[8]: /security/cloud_security_management/misconfigurations/

@@ -1,26 +1,27 @@
 ---
 categories:
-  - cloud
-  - data store
-  - caching
-  - azure
-ddtype: crawler
+- azure
+- caching
+- cloud
+custom_kind: integration
 dependencies: []
 description: キャッシュのヒット数、ミス数、エビクション数、接続クライアント数などを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_redis_cache/'
+doc_link: https://docs.datadoghq.com/integrations/azure_redis_cache/
 draft: false
 git_integration_title: azure_redis_cache
 has_logo: true
 integration_id: azure-redis-cache
 integration_title: Microsoft Azure Redis Cache
+integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_redis_cache
 public_title: Datadog-Microsoft Azure Redis Cache インテグレーション
 short_description: キャッシュのヒット数、ミス数、エビクション数、接続クライアント数などを追跡。
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Redis Cache は、Azure アプリケーション用のマネージド型のデータキャッシュです。
@@ -46,7 +47,7 @@ Azure Redis Cache からメトリクスを取得すると、以下のことが�
 
 Azure Redis Cache インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Redis Cache インテグレーションには、サービスのチェック機能は含まれません。
 

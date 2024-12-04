@@ -5,6 +5,7 @@ assets:
   dashboards:
     MapR - Overview: assets/dashboards/mapr_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,17 +16,17 @@ assets:
       prefix: mapr.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10073
     source_type_name: MapR
-  logs:
-    source: mapr
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
 display_on_public_website: true
@@ -33,12 +34,10 @@ draft: false
 git_integration_title: mapr
 integration_id: mapr
 integration_title: MapR
-integration_version: 1.9.2
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: mapr
-oauth: {}
 public_title: MapR
 short_description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
 supported_os:
@@ -46,9 +45,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
   media: []
@@ -57,6 +57,7 @@ tile:
   title: MapR
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -81,15 +82,16 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 ノード別インストールステップ
 
 1. [Agent をインストールします][2]。
-2. 次のコマンドを使用して、ライブラリ _mapr-streams-library_ をインストールします。
+2. _mapr-streams-library_ が必要とする _librdkafka_ ライブラリを、[以下の手順][7]に従ってインストールします。
+3. 次のコマンドを使用して、ライブラリ _mapr-streams-library_ をインストールします。
 
     `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python`.
 
     Python 3 で Agent v7 を使用されている場合は、`pip` を `pip3` に置き換えます。
 
-3. `/etc/ld.so.conf` (または `/etc/ld.so.conf.d/` 内のファイル) に `/opt/mapr/lib/` を追加します。これは、Agent が使用する _mapr-streams-library_ で MapR 共有ライブラリを探すために必要です。
-4. `sudo ldconfig` を実行してライブラリを再読み込みします。
-5. チケットのロケーションを指定して、インテグレーションを構成します。
+4. `/etc/ld.so.conf` (または `/etc/ld.so.conf.d/` 内のファイル) に `/opt/mapr/lib/` を追加します。これは、Agent が使用する _mapr-streams-library_ で MapR 共有ライブラリを探すために必要です。
+5. `sudo ldconfig` を実行してライブラリを再読み込みします。
+6. チケットのロケーションを指定して、インテグレーションを構成します。
 
 #### 補足
 
@@ -97,17 +99,17 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 - 本番環境で gcc (mapr-streams-library の構築に必要) などのコンパイルツールを利用できない場合は、環境インスタンスでライブラリのコンパイル済み Wheel を生成して、本番ホストに配布できます。開発ホストと本番ホストは、双方でコンパイル済み Wheel を使用できるよう、同様である必要があります。`sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` を実行して、開発マシンで Wheel  ファイルを作成できます。次に、本番マシンで `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <WHEEL_ファイル>` を実行します。
 - Python 3 で Agent v7 を使用されている場合は、_mapr-streams-library_ をインストールする際に、必ず `pip` を `pip3` に置き換えてください。
 
-### コンフィギュレーション
+### 構成
 
 #### メトリクスの収集
 
-1. Agent コンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーで `mapr.d/conf.yaml` ファイルを編集し、MapR パフォーマンスデータを収集します。利用可能なコンフィギュレーションオプションについては、[mapr.d/conf.yaml のサンプル][7]を参照してください。
+1. Agent コンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーで `mapr.d/conf.yaml` ファイルを編集し、MapR パフォーマンスデータを収集します。利用可能なコンフィギュレーションオプションについては、[mapr.d/conf.yaml のサンプル][8]を参照してください。
 2. 作成済みの長期チケットのパスに対するコンフィグに `ticket_location` パラメーターを設定します。
-3. [Agent を再起動します][8]。
+3. [Agent を再起動します][9]。
 
-#### ログの収集
+#### ログ収集
 
-MapR はログに fluentD を使用します。[fluentD Datadog プラグイン][9]を使用して、MapR ログを収集します。下記のコマンドを使用して、プラグインをダウンロードし、適切なディレクトリにインストールします。
+MapR はログに fluentD を使用します。[fluentD Datadog プラグイン][10]を使用して、MapR ログを収集します。下記のコマンドを使用して、プラグインをダウンロードし、適切なディレクトリにインストールします。
 
 `curl https://raw.githubusercontent.com/DataDog/fluent-plugin-datadog/master/lib/fluent/plugin/out_datadog.rb -o /opt/mapr/fluentd/fluentd-<VERSION>/lib/fluentd-<VERSION>-linux-x86_64/lib/app/lib/fluent/plugin/out_datadog.rb`
 
@@ -132,11 +134,11 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
   </store>
 ```
 
-使用可能なオプションの詳細については、[fluent_datadog_plugin][9] を参照してください。
+使用可能なオプションの詳細については、[fluent_datadog_plugin][10] を参照してください。
 
 ### 検証
 
-[Agent の status サブコマンド][10]を実行し、Checks セクションで `mapr` を探します。
+[Agent の status サブコマンド][11]を実行し、Checks セクションで `mapr` を探します。
 
 ## 収集データ
 
@@ -148,7 +150,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 
 MapR チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "mapr" >}}
 
 
@@ -167,7 +169,7 @@ MapR チェックには、イベントは含まれません。
 
   このメッセージは、Agent 埋め込み環境で、コマンド `import confluent_kafka` を実行できなかったときに表示され、_mapr-streams-library_ が埋め込み環境内にインストールされていないか、mapr-core ライブラリが見つからないことを意味します。エラーメッセージに詳細が記述されています。
 
-ご不明な点は、[Datadog サポート][13]までお問い合わせください。
+ご不明な点は、[Datadog サポート][14]までお問い合わせください。
 
 
 [1]: https://mapr.com
@@ -176,10 +178,11 @@ MapR チェックには、イベントは含まれません。
 [4]: https://mapr.com/docs/61/AdministratorGuide/c-managing-users-and-groups.html
 [5]: https://docs.datafabric.hpe.com/52/SecurityGuide/t_config_impersonation_notsecure.html?hl=secure%2Ccluster
 [6]: https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html
-[7]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://www.rubydoc.info/gems/fluent-plugin-datadog
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
-[12]: https://github.com/DataDog/integrations-core/blob/master/mapr/assets/service_checks.json
-[13]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/confluentinc/librdkafka#installing-prebuilt-packages
+[8]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://www.rubydoc.info/gems/fluent-plugin-datadog
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
+[13]: https://github.com/DataDog/integrations-core/blob/master/mapr/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help/

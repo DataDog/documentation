@@ -4,6 +4,9 @@ algolia:
   - 高度なログフィルター
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
+- link: /logs/guide/how-to-set-up-only-logs/
+  tag: ドキュメント
+  text: ログ収集専用として Datadog Agent を使用する
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ログの処理方法について
@@ -18,15 +21,14 @@ further_reading:
   text: ログの調査方法
 - link: /logs/logging_without_limits/
   tag: ドキュメント
-  text: Logging without Limits (無制限のログ)*
+  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 用語集
-  text: 用語集 "テール" の項目
-kind: documentation
+  text: 用語集の "tail" の項目
 title: ログ収集の高度な構成
 ---
 
-ログ収集の構成をカスタマイズします。
+[ログ収集][1]をセットアップした後、収集構成をカスタマイズできます。
 * [ログをフィルター](#filter-logs)
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行のログを集計する](#multi-line-aggregation)
@@ -35,15 +37,16 @@ title: ログ収集の高度な構成
 * [ログファイルのエンコーディングを指定する](#log-file-encodings)
 * [グローバルな処理ルールを定義する](#global-processing-rules)
 
-**注**: 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
-
-**注**: 処理ルールのパターンは [Golang の正規構文][1]に従う必要があります。
-
 Datadog Agent によって収集されたすべてのログに同一の処理ルールを適用する場合は、[グローバルな処理ルール](#global-processing-rules)のセクションを参照してください。
+
+**注**:
+- 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
+- 処理ルールのパターンは [Golang の正規構文][2]に従う必要があります。
+- `log_processing_rules` パラメーターは、インテグレーションの構成で、ログ収集の構成をカスタマイズするために使用されます。Agent の[メインの構成][5]では、グローバルな処理ルールを定義するために `processing_rules` パラメーターが使用されます。
 
 ## ログの絞り込み
 
-ログの一部分のみを Datadog に送信するには、構成ファイル内の `log_processing_rules` パラメーターを使用して、`type` に **exclude_at_match** または **include_at_match** を指定します。
+ログの一部分のみを Datadog に送信するには、構成ファイル内の `log_processing_rules` パラメーターを使用して、type に `exclude_at_match` または `include_at_match` を指定します。
 
 ### 一致時に除外
 
@@ -51,7 +54,7 @@ Datadog Agent によって収集されたすべてのログに同一の処理ル
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | 指定されたパターンがメッセージに含まれる場合、そのログは除外され、Datadog に送信されません。 |
 
-たとえば、Datadog メールアドレスを含むログを**除外**するには、次の `log_processing_rules` を使用します。
+たとえば、Datadog メールアドレスを含むログを**除外する**には、次の `log_processing_rules` を使用します。
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -90,14 +93,15 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
 
 **注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
+**注**: ラベルの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。オートディスカバリーを使用して構成してポッド内の特定の `<CONTAINER_IDENTIFIER>` でコンテナログを収集するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
+オートディスカバリーを使用して、ポッド内の指定したコンテナ (名前は `CONTAINER_NAME`) のコンテナログを収集するように構成するには、ポッドの `log_processing_rules` に以下のアノテーションを追加します。
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -107,7 +111,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -122,11 +126,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
 **注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -138,7 +144,7 @@ spec:
 | `include_at_match` | 指定されたパターンを含むメッセージを持つログだけが Datadog に送信されます。複数の `include_at_match` ルールが定義されている場合、ログを含めるにはすべてのルールパターンが一致している必要があります。 |
 
 
-たとえば、Datadog メールアドレスを含むログに**絞り込む**には、次の `log_processing_rules` を使用します。
+たとえば、Datadog のメールアドレスを含むログに**絞り込む**には、次のような `log_processing_rules` の構成を使用します。
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -170,7 +176,7 @@ logs:
       pattern: abc|123
 ```
 
-パターンが長すぎて1行に表示されない場合は、複数行に分けることが可能です。
+パターンが一行に収まらないほど長い場合は、それを複数行に分割することができます。
 
 ```yaml
 logs:
@@ -189,7 +195,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、`log_processing_rules` を指定するために、**フィルターしたいログを送るコンテナ**のラベル `com.datadoghq.ad.logs` を使用します。例:
+Docker 環境では、フィルターを適用するログの送信元のコンテナでラベル `com.datadoghq.ad.logs` を使用して、`log_processing_rules` を指定します。例:
 
 ```yaml
  labels:
@@ -207,14 +213,15 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
 
 **注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
+**注**: ラベルの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -224,7 +231,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -239,18 +246,24 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
 **注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## ログの機密データのスクラビング
 
-編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、`type` に **mask_sequences** を指定します。
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+  Agent を使用した Sensitive Data Scanner は非公開ベータ版です。詳細は<a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">ブログ記事</a>と<a href="https://docs.datadoghq.com/sensitive_data_scanner/">ドキュメント</a>をご覧ください。アクセスをリクエストするには、このフォームに記入してください。
+{{< /callout >}}
+
+編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、type に `mask_sequences` を指定します。
 
 これにより、一致したすべてのグループが `replace_placeholder` パラメーターの値に置換されます。
 
@@ -276,7 +289,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
  labels:
@@ -295,14 +308,15 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 
 **注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
+**注**: ラベルの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -312,7 +326,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -328,11 +342,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
 **注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -348,9 +364,9 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 
 ## 複数行の集約
 
-送信されるログが JSON 形式でない場合に、複数の行を 1 つのエントリに集約するには、1 行に 1 つのログを入れる代わりに、正規表現パターンを使用して新しいログを検出するように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、`type` に **multi_line** を指定します。これで、指定されたパターンが再度検出されるまで、すべての行が 1 つのエントリに集約されます。
+送信されるログが JSON 形式でない場合に、複数の行を 1 つのエントリに集約するには、1 行に 1 つのログを入れる代わりに、正規表現パターンを使用して新しいログを検出するように Datadog Agent を構成します。`log_processing_rules` パラメーターを使用して、type に `multi_line`  を指定すれば、指定されたパターンが再度検出されるまで、すべての行が 1 つのエントリに集約されます。
 
-たとえば、Java のログ行は、どれも `yyyy-dd-mm` 形式のタイムスタンプで始まります。以下の行にはスタックトレースが含まれますが、これらは 2 つのログとして送信可能です。
+例えば、すべての Java ログ行は、`yyyy-dd-mm` 形式のタイムスタンプで始まります。これらの行はスタックトレースを含み、2 つのログとして送ることができます。
 
 ```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -363,7 +379,7 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-構成ファイルで上記のログ例を送信するには、次の `log_processing_rules` を使用します。
+上の例のログをコンフィギュレーションファイルと一緒に送信するには、次の `log_processing_rules` を使用します。
 
 ```yaml
 logs:
@@ -380,7 +396,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
  labels:
@@ -399,11 +415,10 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -413,7 +428,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -428,16 +443,18 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: postgres:latest
 ```
 
 **注**: ポッドアノテーションを使用して複数行の集約を実行する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
+
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
+<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em><br><br>ログ収集はミリ秒単位の精度で動作します。 パターンに一致するログでも、より高い精度のログは送信されません。</div>
 
 その他の例:
 
@@ -451,7 +468,7 @@ spec:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### 自動複数行集計
-Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][2]を自動的に検出することができます。
+Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][3]を自動的に検出することができます。
 
 `datadog.yaml` ファイルで `auto_multi_line_detection` をグローバルに有効化します。
 
@@ -476,54 +493,6 @@ logs:
     auto_multi_line_detection: true
 ```
 
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
-
-```yaml
- labels:
-    com.datadoghq.ad.logs: >-
-      [{
-        "source": "java",
-        "service": "testApp",
-        "auto_multi_line_detection": true
-      }]
-```
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-```yaml
-apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-  name: testApp
-spec:
-  selector:
-    matchLabels:
-      app: testApp
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
-          [{
-            "source": "java",
-            "service": "testApp",
-            "auto_multi_line_detection": true
-          }]
-      labels:
-        app: testApp
-      name: testApp
-    spec:
-      containers:
-        - name: '<CONTAINER_IDENTIFIER>'
-          image: testApp:latest
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`datadog.yaml` ファイルにカスタムパターンを追加することもできます。
 
 ```yaml
@@ -534,6 +503,76 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
+パターンが行一致のしきい値を満たさない場合は、`auto_multi_line_default_match_threshold` パラメーターをより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
+  auto_multi_line_default_match_threshold: 0.1
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "testApp",
+        "auto_multi_line_detection": true
+      }]
+```
+自動複数行検出は、一般的な正規表現リストを使用してログとのマッチングを試みます。組み込みリストで不足している場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数を使用して `datadog.yaml` ファイルにカスタムパターンを追加することが可能です。
+
+パターンが行一致のしきい値を満たさない場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数をより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
+
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+apiVersion: apps/v1
+metadata:
+  name: testApp
+spec:
+  selector:
+    matchLabels:
+      app: testApp
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
+          [{
+            "source": "java",
+            "service": "testApp",
+            "auto_multi_line_detection": true
+          }]
+      labels:
+        app: testApp
+      name: testApp
+    spec:
+      containers:
+        - name: '<CONTAINER_NAME>'
+          image: testApp:latest
+```
+
+複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数で `datadog.yaml` ファイルにカスタムパターンを追加することもできます。
+
+パターンがライン一致のしきい値に一致しない場合は、より低い値の `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数を追加します。これにより、自動複数行集計が機能するためにログが一致しなければならない頻度を決定するしきい値が構成されます。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
+
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
+
+{{% /tab %}}
+{{< /tabs >}}
+
 この機能を有効にすると、新しいログファイルが開かれたとき、Agent はパターンの検出を試みます。このプロセスの間、ログは 1 行で送信されます。検出しきい値に達すると、そのソースの将来のすべてのログは、検出されたパターンで集計され、パターンが見つからない場合は 1 行で集計されます。検出には、最大 30 秒または最初の 500 ログ (いずれか早い方) が必要です。
 
 **注**: ローテーションされたログの命名パターンを制御できる場合、ローテーションされたファイルが、同じ名前で以前アクティブだったファイルを置き換えることを確認してください。Agent は、新しくローテーションされたファイル上で以前に検出されたパターンを再利用し、検出の再実行を回避します。
@@ -542,9 +581,9 @@ logs_config:
 
 ## 良く使用されるログの処理ルール
 
-例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][3] をご覧ください。
+例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][4] をご覧ください。
 
-## ワイルドカードを使用したディレクトリの追跡
+## ワイルドカードを使用したディレクトリのテール
 
 ログファイルに日付のラベルが付いているか、すべてのログファイルが同じディレクトリに保存されている場合は、すべてのファイルを監視して、新しいファイルを自動的に検出するように Datadog Agent を構成できます。それには、`path` 属性にワイルドカードを使用します。選択した `path` と一致するファイルを除外する場合は、`exclude_paths` 属性にリストします。
 
@@ -557,7 +596,7 @@ logs_config:
   * `/var/log/myapp/errorLog/myerrorfile.log` に一致します。
   * `/var/log/myapp/mylogfile.log` には一致しません。
 
-構成例:
+Linux の構成例:
 
 ```yaml
 logs:
@@ -572,7 +611,22 @@ logs:
 
 上記の例では、`/var/log/myapp/log/myfile.log` にマッチし、`/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` は除外しています。
 
+Windows の構成例:
+
+```yaml
+logs:
+  - type: file
+    path: C:\\MyApp\\*.log
+    exclude_paths:
+      - C:\\MyApp\\MyLog.*.log
+    service: mywebapp
+    source: csharp
+```
+
+上記の例では、`C:\\MyApp\\MyLog.log` にマッチし、`C:\\MyApp\\MyLog.20230101.log` と `C:\\MyApp\\MyLog.20230102.log` を除外します。
+
 **注**: Agent がディレクトリ内にあるファイルをリストするには、そのディレクトリへの読み取りおよび実行アクセス許可が必要です。
+**注2**: path と exclude_paths の値は大文字と小文字を区別します。
 
 ## 最近更新されたファイルを最初に追跡する
 
@@ -609,7 +663,7 @@ logs:
 
 ## グローバルな処理ルール
 
-Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][4]で、または環境変数を使用してグローバルに定義できます。
+Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][5]で、または環境変数を使用してグローバルに定義できます。
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -638,21 +692,40 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 ```
 
 {{% /tab %}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Helm チャートで `env` パラメーターを使用して `DD_LOGS_CONFIG_PROCESSING_RULES` 環境変数を設定して、グローバルな処理ルールを構成します。以下に例を示します。
+Datadog Operator マニフェストで `spec.override.[key].env` パラメーターを使用して `DD_LOGS_CONFIG_PROCESSING_RULES` 環境変数を設定し、グローバルな処理ルールを構成します。`[key]` は `nodeAgent`、`clusterAgent`、または `clusterChecksRunner` です。例:
 
 ```yaml
-env:
-  - name: DD_LOGS_CONFIG_PROCESSING_RULES
-    value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_PROCESSING_RULES
+          value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Helm チャートで `datadog.env` パラメーターを使用して `DD_LOGS_CONFIG_PROCESSING_RULES` 環境変数を設定して、グローバルな処理ルールを構成します。例:
+
+```yaml
+datadog:
+  env:
+    - name: DD_LOGS_CONFIG_PROCESSING_RULES
+      value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 
-**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][5]を実行します。
+**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][6]を実行します。
 
 ## その他の参考資料
 
@@ -661,8 +734,9 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[3]: /ja/agent/faq/commonly-used-log-processing-rules
-[4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /ja/agent/guide/agent-commands/#agent-information
+[1]: /ja/agent/logs/
+[2]: https://golang.org/pkg/regexp/syntax/
+[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[4]: /ja/agent/faq/commonly-used-log-processing-rules
+[5]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[6]: /ja/agent/configuration/agent-commands/#agent-information

@@ -3,12 +3,15 @@ app_id: blink
 app_uuid: f2bd43a7-bbc5-4f69-89b7-437afbbff9fd
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
-      metadata_path: ./assets/service_checks.json
+      metadata_path: assets/service_checks.json
+    source_type_id: 10316
     source_type_name: Blink
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.blinkops.com/
   name: Blink
@@ -18,8 +21,9 @@ categories:
 - 自動化
 - クラウド
 - インシデント
-- 通知
+- notifications
 - オーケストレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/blink/README.md
 display_on_public_website: true
@@ -29,10 +33,8 @@ integration_id: blink
 integration_title: Blink
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: blink
-oauth: {}
 public_title: Blink
 short_description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです。
 supported_os:
@@ -45,7 +47,7 @@ tile:
   - Category::Automation
   - Category::Cloud
   - Category::Incidents
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Offering::Integration
   - Supported OS::Linux
@@ -55,22 +57,24 @@ tile:
   description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです。
   media:
   - caption: Blink のインタラクティブなワークフローを使用して、Datadog のインシデントを自動的に作成および更新します。
-    image_url: ./images/incident.png
+    image_url: images/incident.png
     media_type: image
   - caption: Blink オートメーション内から、すべてのアクティブな Datadog インシデントのリストを素早く参照することができます。
-    image_url: ./images/list-incidents.png
+    image_url: images/list-incidents.png
     media_type: image
   - caption: Blink インテグレーションを接続し、Datadog のインシデントに対応したアクションを実行するオートメーションの作成を開始します。
-    image_url: ./images/connection-creation.png
+    image_url: images/connection-creation.png
     media_type: image
   - caption: Datadog にインシデントを作成する Blink Automation の自動スケジュール。
-    image_url: ./images/new-incident.png
+    image_url: images/new-incident.png
     media_type: image
   overview: README.md#Overview
   support: support@blinkops.com
   title: Blink
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -96,7 +100,7 @@ Datadog のワークスペースと Blink の接続方法については、[弊�
 
 インテグレーションをアンインストールする場合は、Blink ワークスペースで対応する Datadog 接続を削除するだけです。
 
-削除が完了すると、それまでの認可やアクセストークンはすべて取り消されます。また、Datadog [API Keys][5] ページでインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
+Once deleted, any previous authorizations or access tokens are revoked.
 
 ## 収集データ
 
@@ -104,7 +108,7 @@ Datadog のワークスペースと Blink の接続方法については、[弊�
 
 このインテグレーションは、イベントとインシデントを Datadog に送信し、Blink 内で関連するインシデントを検索して更新することができます。
 
-### アラート設定
+### モニター
 
 Blink で Datadog のモニターを表示、変更、作成することができます。
 
@@ -114,11 +118,10 @@ Blink にはメトリクスは含まれていませんが、Blink のオート�
 
 ## トラブルシューティング
 
-ご不明な点は、[Blink サポート][6]までお問い合わせください。
+Need help? Contact [Blink support][5].
 
 [1]: https://www.blinkops.com/
 [2]: https://library.blinkops.com/automations?vendors=Datadog
-[3]: https://www.docs.blinkops.com/docs/Integrations/Datadog/Actions
-[4]: https://www.docs.blinkops.com/docs/Integrations/Datadog/
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: mailto:support@blinkops.com
+[3]: https://www.docs.blinkops.com/docs/integrations/datadog/actions
+[4]: https://www.docs.blinkops.com/docs/integrations/datadog
+[5]: mailto:support@blinkops.com

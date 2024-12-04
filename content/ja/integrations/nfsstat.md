@@ -1,8 +1,9 @@
 ---
-app_id: システム
+app_id: nfsstat
 app_uuid: 423f4b03-ce99-4ffc-a553-e522ebd451be
 assets:
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,9 +14,8 @@ assets:
       prefix: system.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 9164582
     source_type_name: Nfsstat
-  logs:
-    source: nfsstat
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -24,19 +24,18 @@ author:
 categories:
 - os & system
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: nfsstat
-integration_id: システム
+integration_id: nfsstat
 integration_title: Nfsstat
-integration_version: 1.11.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nfsstat
-oauth: {}
 public_title: Nfsstat
 short_description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
 supported_os:
@@ -45,8 +44,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::OS & System
-  - Category::Log Collection
+  - Category::OS とシステム
+  - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
   media: []
@@ -55,6 +55,7 @@ tile:
   title: Nfsstat
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -69,11 +70,11 @@ NFS インテグレーションは、マウントごとの NFS クライアン�
 
 NFSstat チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `nfsstat.d/conf.yaml` ファイルを編集します。nfsiostat バイナリスクリプトを指定するか、バイナリインストーラーに含まれているスクリプトを使用します。使用可能なすべてのコンフィギュレーションオプションについては、[nfsstat.d/conf.yaml のサンプル][4]を参照してください。
 
-### ログの収集
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` ファイルでこれを有効にするには、以下の設定を更新します。
 
@@ -108,7 +109,7 @@ NFSstat チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### イベント
 Nfsstat チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 Nfsstat チェックには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
@@ -119,7 +120,7 @@ Nfsstat チェックには、サービスのチェック機能は含まれませ
 - [HTTP チェックでネットワークモニターを構築][9]
 
 [1]: http://man7.org/linux/man-pages/man8/nfsiostat.8.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/datadog_checks/nfsstat/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

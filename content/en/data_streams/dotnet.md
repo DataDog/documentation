@@ -1,17 +1,20 @@
 ---
 title: Setup Data Streams Monitoring for .NET
-kind: documentation
 ---
-
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and .NET libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* .NET Tracer v2.28.0 or later ([.NET Core][2], [.NET Framework][3])
+
+### Supported libraries
+
+| Technology | Library                                                                        | Minimal tracer version | Recommended tracer version |
+|------------|--------------------------------------------------------------------------------|------------------------|----------------------------|
+| Kafka      | [Confluent.Kafka](https://www.nuget.org/packages/Confluent.Kafka)              | 2.28.0                 | 2.41.0 or later            |
+| RabbitMQ   | [RabbitMQ.Client](https://www.nuget.org/packages/RabbitMQ.Client)              | 2.28.0                 | 2.37.0 or later            |
+| Amazon SQS | [AWS SQS SDK](https://www.nuget.org/packages/AWSSDK.SQS)                       | 2.48.0                 | 2.48.0 or later            |
+| Amazon SNS | [AWS SNS SDK](https://www.nuget.org/packages/AWSSDK.SimpleNotificationService) | 3.6.0                  | 3.6.0 or later             |
+| IBM MQ     | [IBM.Data.DB2.Core](https://www.nuget.org/packages/IBM.Data.DB2.Core)          | 2.49.0                 | 2.49.0 or later            |
 
 ### Installation
 
@@ -23,6 +26,11 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
+### Monitoring SQS pipelines
+Data Streams Monitoring uses one [message attribute][5] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+
+
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
 [3]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html

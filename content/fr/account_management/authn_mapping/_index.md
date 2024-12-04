@@ -1,19 +1,19 @@
 ---
-title: API de mappage d'attributs d'authentification fédérée à un rôle
-kind: documentation
-beta: true
 aliases:
-  - /fr/account_management/authen_mapping/
+- /fr/account_management/authen_mapping/
+beta: true
 further_reading:
-  - link: /account_management/rbac/log_management/
-    tag: Documentation
-    text: RBAC pour Log Management
+- link: /account_management/rbac/log_management/
+  tag: Documentation
+  text: RBAC pour Log Management
+title: API de mappage d'attributs d'authentification fédérée à un rôle
 ---
+
 Si vous utilisez un système d'authentification fédérée, cette API vous permet de mapper automatiquement des groupes d'utilisateurs à des rôles dans Datadog à l'aide d'attributs envoyés par votre fournisseur d'identité. Pour créer et gérer des mappages d'authentification via l'API, les utilisateurs doivent utiliser une clé d'application appartenant à un utilisateur disposant de l'autorisation de gestion de l'accès.
 
 **Remarque** : si vous êtes un utilisateur SAML et que vous faites partie de la bêta du système de mappage fédéré existant (`roles_v2_saml`), Datadog vous conseille fortement de migrer vers cette API.
 
-Vous pouvez également créer et gérer des mappages dans l'interface Datadog, sous l'onglet **Mappings** de la rubrique User Management. Consultez la section [Mapper des attributs SAML à des rôles Datadog][1] pour en savoir plus.
+Vous pouvez également créer et gérer des mappages dans l'interface Datadog, sous l'onglet **Mappings** de la rubrique User Management. Consultez la section [Mappage de groupes SAML][1] pour en savoir plus.
 
 ## Requêtes
 
@@ -607,5 +607,5 @@ curl -X POST \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[1]: /fr/account_management/saml/mapping
 [2]: /fr/api/v2/roles/#list-roles

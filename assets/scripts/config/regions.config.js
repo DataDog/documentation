@@ -24,13 +24,21 @@ export default {
         ap1: 'ap1.datadoghq.com',
         gov: 'app.ddog-gov.com'
     },
+    dd_api: {
+      us: 'https://api.datadoghq.com',
+      us3: 'https://api.us3.datadoghq.com',
+      us5: 'https://api.us5.datadoghq.com',
+      eu: 'https://api.datadoghq.eu',
+      ap1: 'https://api.ap1.datadoghq.com',
+      gov: 'https://api.ddog-gov.com'
+    },
     dd_site_name: {
         us: 'US1',
         us3: 'US3',
         us5: 'US5',
         eu: 'EU',
         ap1: 'AP1',
-        gov: 'Government'
+        gov: 'US1-FED'
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
@@ -236,5 +244,57 @@ export default {
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc',
       gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_dbm_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_remote_config_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    ip_ranges_url: {
+      us: 'http://ip-ranges.datadoghq.com',
+      us3: 'http://ip-ranges.us3.datadoghq.com',
+      us5: 'http://ip-ranges.us5.datadoghq.com',
+      eu: 'http://ip-ranges.datadoghq.eu',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com',
+      gov: 'http://ip-ranges.ddog-gov.com'
+    },
+    otlp_trace_endpoint: {
+     us: 'https://trace.agent.datadoghq.com/api/v0.2/traces',
+     us3: 'https://trace.agent.us3.datadoghq.com/api/v0.2/traces',
+     us5: 'https://trace.agent.us5.datadoghq.com/api/v0.2/traces',
+     eu: 'https://trace.agent.datadoghq.eu/api/v0.2/traces'
+    },
+    otlp_metrics_endpoint: {
+     us: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
+     us3: 'https://api.us3.datadoghq.com/api/intake/otlp/v1/metrics',
+     us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
+     eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics'
+    },
+    custom_costs_endpoint: {
+      us: 'api.datadoghq.com/api/v2/cost/custom_costs',
+      us3: 'api.us3.datadoghq.com/api/v2/cost/custom_costs',
+      us5: 'api.us5.datadoghq.com/api/v2/cost/custom_costs',
+      eu: 'api.datadoghq.eu/api/v2/cost/custom_costs.',
+      ap1: 'api.ap1.datadoghq.com/api/v2/cost/custom_costs',
+      gov: 'The custom costs endpoint for GOV is not supported.'
+    },
+    ip_ranges_url_webhooks: {
+      us: 'http://ip-ranges.datadoghq.com/webhooks.json',
+      us3: 'http://ip-ranges.us3.datadoghq.com/webhooks.json',
+      us5: 'http://ip-ranges.us5.datadoghq.com/webhooks.json',
+      eu: 'http://ip-ranges.datadoghq.eu/webhooks.json',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com/webhooks.json',
+      gov: 'http://ip-ranges.ddog-gov.com/webhooks.json'
     }
 };

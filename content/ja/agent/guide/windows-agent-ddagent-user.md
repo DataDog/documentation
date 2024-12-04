@@ -1,49 +1,50 @@
 ---
+algolia:
+  tags:
+  - Windows Agent ユーザー
+  - Windows ユーザー
+  - ddagentuser
+  - グループポリシー
 aliases:
 - /ja/agent/faq/windows-agent-ddagent-user/
-kind: ガイド
 title: Datadog Windows Agent ユーザー
 ---
 
-リリース `6.11.0` からは、Windows Agent のコアと APM/トレースコンポーネントは、以前のバージョンのように `LOCAL_SYSTEM` アカウントで実行するのではなく、専用のユーザーアカウントで実行するようになりました。有効にした場合、ライブプロセスコンポーネントは引き続き `LOCAL_SYSTEM` アカウントで実行されます。
-
-Agent のインストーラーは、デフォルトで新しいアカウント (`ddagentuser`) を作成しますが、ユーザーから提供されたアカウントを使用することも可能です。
-このアカウントは、インストール時に以下のグループに割り当てられます。
+By default, the Windows Agent uses the `ddagentuser` account created at install time. The account is assigned to the following groups during installation:
 
 * "Performance Monitor Users" グループのメンバーになる
-  * WMI 情報にアクセスするために必要
+  * Necessary to access WMI information
   * Windows のパフォーマンスカウンターデータにアクセスするために必要
 * "Event Log Readers" グループのメンバーになる
+* It becomes a member of the "Performance Log Users" group (since 7.51)
 
 **注**: インストーラーは、作成したアカウントをデフォルトで `Users` グループに追加しません。まれに、権限の問題が発生することがあります。その場合、作成したユーザーを手動で `Users` グループに追加してください。
 
-さらに、インストール時に以下のセキュリティポリシーがアカウントに適用されます。
+Additionally, the following security policies are applied to the account during installation:
 * ネットワークからこのコンピューターへのアクセスを拒否する
 * ローカルでのログオンを拒否する
 * Remote Desktop Services によるログオンを拒否する
-* サービスとしてのログオン
+* Log on as a service
 
-**重要**: アカウントはインストール中に変更され、ログイン権限を含む特権が制限されるため、「実際の」ユーザーアカウントではなく、Datadog Agent を実行するためだけの専用アカウントであることを確認してください。
+The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
 
-**注**: このページのすべてのコマンド例では、置換されるべき変数を示すために `<>` が使用されています。例えば、ユーザーアカウントが `ddagentuser` で、コマンドに `DDAGENTUSER_NAME=<USERNAME>` が含まれている場合、コマンドラインには `DDAGENTUSER_NAME=ddagentuser` と入力する必要があります。
-
-**注**: `7.38.0/6.38.0` リリースから、インストーラーは **Grouped Managed Service Account (gMSA)** の使用をサポートします。Grouped Managed Service Account を指定するには、ユーザー名の最後に **$** を追加します: `<DOMAIN>\<USERNAME>**注**: 7.38.0/6.38.0 リリースから、インストーラーは **Grouped Managed Service Account (gMSA)** の使用をサポートします。Grouped Managed Service Account を指定するには、ユーザー名の最後に **$** を追加します。Grouped Managed Service Account は、インストーラーが作成できないため、インストール前に存在する必要があります。
+**Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Group Managed Service Account (gMSA)**. To specify a Group Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Group Managed Service Account must exist *prior* to installation, as the installer cannot create one. See [Getting Started with Group Managed Service Accounts][11] for more information.
 
 ## インストール
 
 コマンドラインでユーザーアカウントが指定されなかった場合、インストーラーはランダムに生成されたパスワードで `ddagentuser` という名前のローカルユーザーアカウントを作成しようとします。
 
-コマンドラインでユーザーアカウントが指定され、そのユーザーアカウントがシステム上にない場合、インストーラーはその作成を試行します。パスワードが指定されている場合、インストーラーはそのパスワードを使用し、そうでない場合はランダムなパスワードを生成します。
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
-オプションの USERNAME と PASSWORD をコマンドラインで指定するには、`msiexec` コマンドに以下のプロパティを渡します (ユーザー名とパスワードのプレースホルダーから`<>`の文字を削除してください)。
+To specify the optional USERNAME and PASSWORD on the command line, pass the following properties to the `msiexec` command (The bracket `<>` characters indicate a variable that should be replaced):
 
 ```shell
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-**注**: `<USERNAME>` は、Microsoft の [Active Directory Schema (AD Schema) SAM-Account-Name 属性][1]に準拠するため、20 文字以下でなければなりません。
-
-**注**: MSI インストーラーの制限により、`DDAGENTUSER_PASSWORD` プロパティにセミコロン文字 `;` を含めることができません。
+Requirements:
+* The username must be 20 characters or fewer to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+* Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
 **注**: インストール時に `system` と `winproc` のチェックで権限の問題が発生した場合、`ddagentuser` が Performance Monitor Users と Event Log Readers グループのメンバであることを確認してください。
 
@@ -62,9 +63,9 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 
 ドメインアカウントをコマンドラインで指定する場合、ドメインコントローラのみがドメインアカウントを作成できるため、インストール前に存在している必要があります。
 
-コマンドラインでユーザーアカウントが指定され、そのユーザーアカウントがシステム上にない場合、インストーラーはその作成を試行します。パスワードが指定されている場合、インストーラーはそのパスワードを使用し、そうでない場合はランダムなパスワードを生成します。
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
-ドメインアカウントからのユーザー名を指定するには、`DDAGENTUSER_NAME` プロパティに以下の形式を使用します。
+To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
 ```shell
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
@@ -81,7 +82,7 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD
 
 ##### プライマリおよびバックアップドメインコントローラ
 
-ドメインコントローラ上に Agent をインストールする場合、ローカルユーザーアカウントという概念はありません。そのため、インストーラがユーザーアカウントを作成する場合、それはローカルユーザーではなくドメインユーザーとなります。
+When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it is a domain user rather than a local one.
 
 コマンドラインでユーザーアカウントが指定され、そのユーザーアカウントがシステム上にない場合、インストーラーはその作成を試行します。インストールを成功させるには、パスワードの指定が必要です。
 
@@ -97,14 +98,14 @@ Windows ホストに Agent をデプロイするために Chef と公式の `dat
 
 ## アップグレード
 
-Agent バージョンが `7.25.0` 未満の場合、ユーザーが Agent 用のユーザー名を指定したドメインコントローラまたはホスト上の Datadog Agent をアップグレードするときに、`DDAGENTUSER_NAME` を指定する必要がありますが、`DDAGENTUSER_PASSWORD` は指定しないでください。
+For Agent version < `7.25.0` when you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
 
-Agent バージョン `7.25.0` 以降、インストーラーは Agent のインストールに使用したユーザー名を保持し、アップグレードの際に再利用します。
-保存された値を `DDAGENTUSER_NAME` でオーバーライドすることは可能です。
+Starting with Agent version `7.25.0` the installer retains the username used to install the Agent and re-uses it during upgrades.
+It is still possible to override the saved value with `DDAGENTUSER_NAME`.
 
 ## Agent インテグレーション
 
-### 一般許可
+### General permissions
 
 `LOCAL_SYSTEM` から `ddagentuser` への移行がシームレスに行われるよう、あらゆる努力が払われています。しかし、Agent のインストール時に特定の構成に特化した修正を必要とする問題があります。これらの問題は、Windows Agent が以前は管理者権限に依存していたが、新しい Agent にはデフォルトで欠けている場合に発生します。
 
@@ -134,7 +135,7 @@ Attach API を使用している場合、ユーザーコンテキストの変更
 
 ### プロセスチェック
 
-v6.11 + では、Agent は `Local System` ではなく、`ddagentuser` として実行されます。このため、他のユーザーで実行されているプロセスの完全なコマンドラインや他のユーザーのプロセスのユーザーにアクセスすることができません。このため、以下のチェックのオプションは機能しません。
+In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users' processes. This causes the following options of the check to not work:
 
 * `false` に設定した場合の `exact_match`
 * 特定のユーザーに属するプロセスを選択することができる `user`
@@ -168,3 +169,4 @@ Cassandra Nodetool インテグレーションが引き続き動作するよう�
 [8]: /ja/integrations/tomcat/
 [9]: /ja/integrations/kafka/
 [10]: /ja/integrations/win32_event_log/
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts

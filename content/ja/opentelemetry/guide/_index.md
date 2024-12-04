@@ -1,42 +1,40 @@
 ---
-disable_toc: true
-further_reading:
-- link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
-  tag: ブログ
-  text: Datadog と OpenTelemetry のパートナーシップ
-- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: ブログ
-  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
-  tag: ブログ
-  text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
-- link: https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/
-  tag: ブログ
-  text: Datadog Exporter で OpenTelemetry Collector からログを転送する
-- link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/
-  tag: ブログ
-  text: Agent における OTLP の取り込み
-- link: https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/
-  tag: ブログ
-  text: OpenTelemetry 用の AWS のマネージド Lambda レイヤーについて
-- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
-  tag: ブログ
-  text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
-kind: ガイド
 private: true
-title: OpenTelemetry ガイド
+title: OpenTelemetry ガイドとリソース
 ---
 
+## ガイド
 
-
-{{< whatsnext desc="OpenTelemetry ガイド" >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}OpenTelemetry によるデルタ一時性メトリクスの生成{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/semantic_mapping/" >}}OpenTelemetry のセマンティック規則と Datadog の規則をマッピングする{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}OTLP ヒストグラムのヒートマップとしての視覚化{{< /nextlink >}}
-{{< nextlink href="/opentelemetry/guide/switch_from_processor_to_connector/" >}}OpenTelemetry APM メトリクスを Datadog プロセッサから Datadog Connector に切り替える{{< /nextlink >}}
+{{< whatsnext desc=" " >}}
+{{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}OTLP ヒストグラムをヒートマップとして可視化する{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/guide/migration/" >}}OpenTelemetry Collector バージョン 0.95.0+ に移行する{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}デルタ時間性メトリクスを生成する{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}OpenTelemetry デモから Datadog へデータを送信する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## ブログで詳しく見る
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< whatsnext desc=" " >}}
+{{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-instrumentation/" >}}OpenTelemetry との Datadog のパートナーシップ{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/" >}}W3C Trace Context のサポートで OpenTelemetry をインスツルメントしたアプリを監視する{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/" >}}OpenTelemetry Collector から Datadog Exporter 経由で Datadog にメトリクスとトレースを送信する{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/" >}}OpenTelemetry Collector から Datadog Exporter でログを転送する{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/" >}}Agent での OTLP の取り込み{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/" >}}AWS の OpenTelemetry 用マネージド Lambda Layer について{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/" >}}OpenTelemetry をインスツルメントしたアプリケーションからのトレースと Datadog RUM イベントを相関付ける{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/" >}}Datadog APM で OpenTelemetry をインスツルメントしたアプリからのランタイムメトリクスを監視する{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## OpenTelemetry レジストリ
+
+{{< whatsnext desc=" " >}}
+{{< nextlink href="https://opentelemetry.io/ecosystem/registry/?s=datadog" >}}インスツルメンテーションライブラリ、コレクターコンポーネント、ユーティリティ、その他の OpenTelemetry プロジェクトを検索する{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## OpenTelemetry ドキュメント
+
+{{< whatsnext desc=" " >}}
+{{< nextlink href="https://opentelemetry.io/docs/" >}}OpenTelemetry ドキュメント{{< /nextlink >}}
+{{< nextlink href="https://opentelemetry.io/docs/concepts/" >}}OpenTelemetry の概念{{< /nextlink >}}
+{{< nextlink href="https://opentelemetry.io/docs/collector/" >}}OpenTelemetry Collector{{< /nextlink >}}
+{{< /whatsnext >}}

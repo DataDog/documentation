@@ -5,6 +5,7 @@ assets:
   dashboards:
     Netnology SD-WAN Overview: assets/dashboards/nn_sdwan_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,10 +18,11 @@ assets:
       prefix: nn_sdwan.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10277
     source_type_name: Netnology SD-WAN
   monitors:
-    High Latency Monitor: assets/monitors/high-latency-monitor.json
-    Packet Loss Monitor: assets/monitors/packet-loss-monitor.json
+    Link latency is high: assets/monitors/high-latency-monitor.json
+    Packet loss percentage is high: assets/monitors/packet-loss-monitor.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Netnology
@@ -28,7 +30,8 @@ author:
   support_email: info@netnology.io
 categories:
 - network
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true
@@ -38,10 +41,8 @@ integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
 integration_version: 1.0.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
-oauth: {}
 public_title: Netnology Cisco SD-WAN
 short_description: Exportateur de métriques pour les contrôleurs Cisco SD-WAN
 supported_os:
@@ -52,10 +53,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Network
-  - Category::Notification
+  - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Exportateur de métriques pour les contrôleurs Cisco SD-WAN
   media: []
@@ -64,6 +66,7 @@ tile:
   title: Netnology Cisco SD-WAN
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -118,7 +121,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 
 [1]: https://netnology.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/datadog_checks/nn_sdwan/data/conf.yaml.example

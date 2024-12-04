@@ -1,6 +1,5 @@
 ---
 title: Monitor FAQ
-kind: faq
 cascade: 
   - private: true
 ---

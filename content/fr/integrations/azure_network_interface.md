@@ -15,7 +15,7 @@ integration_id: azure-networkinterface
 integration_title: Microsoft Azure Network Interface
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_network_interface
 public_title: Intégration Datadog/Microsoft Azure Network Interface
@@ -23,33 +23,34 @@ short_description: Surveillez des métriques clés d'Azure Network Interface.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Network Interface permet à une machine virtuelle Azure de communiquer avec Internet, Azure et des ressources sur site.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Network Interface.
 
-## Implémentation
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_network_interface" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Network Interface n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Network Interface n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

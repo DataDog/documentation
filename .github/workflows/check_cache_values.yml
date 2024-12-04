@@ -7,6 +7,9 @@ on:
       - 'local/bin/py/build/configurations/pull_config_preview.yaml'
       - 'local/bin/py/build/configurations/pull_config.yaml'
 
+permissions:
+  contents: read
+
 # Stop the current running job if a new push is made to the PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
@@ -14,20 +17,22 @@ concurrency:
 
 jobs:
   check-cache-values:
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline' 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 2
+        persist-credentials: false
 
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v39
+      uses: tj-actions/changed-files@v42
       with:
         separator: ','
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: '3.10'
     - run: pip install pyyaml requests
@@ -37,6 +42,7 @@ jobs:
       env:
         GH_EVENT: ${{ github.event_name }}
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_CHECK_CACHE }}
+        ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
       run: |
         python local/bin/py/check_cache_values.py \
-        --files='${{ steps.changed_files.outputs.all_changed_files }}'
+        --files=$ALL_CHANGED_FILES

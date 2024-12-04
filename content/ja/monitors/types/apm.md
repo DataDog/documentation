@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: APM モニター
 ---
 
@@ -119,9 +118,9 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][3]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-**注**: サービスレベルモニターについては[サービスページ][4]および[サービスマップ][5]で、リソースレベルモニターについては個々のリソースページで確認できます（[サービスページ][4]に記載されているリソースをクリックすると、特定のアクセスできます）。
+**Note**: Find service level monitors on the [Service Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 
 ## その他の参考資料
 
@@ -130,5 +129,5 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [1]: /ja/monitors/types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
 [3]: /ja/monitors/notify/
-[4]: https://app.datadoghq.com/apm/services
+[4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map

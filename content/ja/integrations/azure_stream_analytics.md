@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Stream Analytics のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
@@ -14,7 +15,6 @@ integration_id: azure-streamanalytics
 integration_title: Microsoft Azure Stream Analytics
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_stream_analytics
 public_title: Datadog-Microsoft Azure Stream Analytics インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure Stream Analytics のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Stream Analytics は、デバイスからの大量のデータストリーミングを調べることができるイベント処理エンジンです。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure Stream Analytic
 
 Azure Stream Analytics インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Stream Analytics インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -4,7 +4,8 @@ aliases:
 categories:
 - azure
 - クラウド
-- data store
+- data stores
+custom_kind: integration
 dependencies: []
 description: Azure Cosmos DB for PostgreSQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb_for_postgresql/
@@ -15,7 +16,6 @@ integration_id: azure-cosmosdb-for-postgresql
 integration_title: Microsoft Azure Cosmos DB for PostgreSQL
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: azure_cosmosdb_for_postgresql
 public_title: Datadog-Microsoft Azure Cosmos DB for PostgreSQL インテグレーション
@@ -23,6 +23,7 @@ short_description: Azure Cosmos DB for PostgreSQL のキーメトリクスを追
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Cosmos DB for PostgreSQL は、PostgreSQL を「分散テーブル」のパワーで拡張したものです。これにより、拡張性の高いリレーショナルアプリケーションを構築することができます。PostgreSQL と同じように、シングルノードクラスターでアプリの構築を開始します。アプリのスケーラビリティと性能要件が高まるにつれて、テーブルを透過的に分散させることで、複数ノードにシームレスに拡張することができます。
@@ -45,7 +46,7 @@ Datadog Azure インテグレーションを使用して、Azure Cosmos DB for P
 
 Azure Cosmos DB for PostgreSQL インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Cosmos DB for PostgreSQL インテグレーションには、サービスのチェック機能は含まれません。
 

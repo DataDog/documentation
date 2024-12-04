@@ -35,10 +35,9 @@ integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
 integration_version: 2.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: jboss_wildfly
-oauth: {}
 public_title: JBoss/WildFly
 short_description: Recueille diverses métriques JMX fournies par des applications
   JBoss et WildFly

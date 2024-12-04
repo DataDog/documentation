@@ -1,16 +1,11 @@
 ---
 title: SNMP Traps
-kind: documentation
 description: "Enable listening for SNMP Traps."
 further_reading:
   - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
     tag: "Blog"
     text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -22,31 +17,47 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 
 ## Configuration
 
-To enable listening for SNMP Traps, add the following to `datadog.yaml`:
+1. To enable listening for SNMP traps, add the following to your `datadog.yaml` file:
 
-```yaml
-network_devices:
-  namespace: <NAMESPACE> # optional, defaults to "default".
-  snmp_traps:
-    enabled: true
-    port: 9162 # on which ports to listen for traps
-    community_strings: # which community strings to allow for v2 traps
-      - <STRING_1>
-      - <STRING_2>
-    bind_host: 0.0.0.0
-    users: # limited to only a single v3 user
-      - username: 'user'
-        authKey: 'fakeKey'
-        authProtocol: 'SHA' # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-        privKey: 'fakePrivKey'
-        privProtocol: 'AES' # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
-```
+   ```yaml
+   network_devices:
+     namespace: <NAMESPACE> # optional, defaults to "default".
+     snmp_traps:
+       enabled: true
+       port: 9162 # on which ports to listen for traps
+       community_strings: # which community strings to allow for v2 traps
+         - <STRING_1>
+         - <STRING_2>
+       bind_host: 0.0.0.0
+       users: # SNMP v3
+       - user: "user"
+         authKey: myAuthKey
+         authProtocol: "SHA"
+         privKey: myPrivKey
+         privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+       - user: "user"
+         authKey: myAuthKey
+         authProtocol: "MD5"
+         privKey: myPrivKey
+         privProtocol: "DES"
+       - user: "user2"
+         authKey: myAuthKey2
+         authProtocol: "SHA"
+         privKey: myPrivKey2
+         privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+   ```
 
-**Note**: Multiple v3 users and passwords are not supported. If this is a requirement in your environment, contact [Datadog support][2].
+   **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
+
+2. Once configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][5] with the following search query: `source:snmp-traps`.
+
+  {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
+
+**Note**: Even though SNMP traps are _forwarded as logs_, `logs_enabled` does **not** need to be set to `true`.
 
 ## Device namespaces
 
-As in [Network Device Monitoring][3], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
+As in [Network Device Monitoring][2], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
 
 The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap. 
 
@@ -109,14 +120,14 @@ vars:
 
 To extend the capabilities of the Agent, create your own mappings and place them in the `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` directory.
 
-You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][4].
+You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][3].
 
 #### Generate a TrapsDB file from a list of MIBs
 
 **Prerequisites**:
 - Python 3
-- [`ddev`][4] (`pip3 install "datadog-checks-dev[cli]"`)
-- [`pysmi`][5] (`pip3 install pysmi`)
+- [`ddev`][3] (`pip3 install "datadog-checks-dev[cli]"`)
+- [`pysmi`][4] (`pip3 install pysmi`)
 
 Put all your MIBs into a dedicated folder. Then, run:
 `ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
@@ -129,7 +140,7 @@ If there are errors due to missing dependencies and you have access to the missi
 
 
 [1]: /monitors/
-[2]: /help/
-[3]: /network_monitoring/devices
-[4]: /developers/integrations/python
-[5]: https://pypi.org/project/pysmi/
+[2]: /network_monitoring/devices
+[3]: /developers/integrations/python
+[4]: https://pypi.org/project/pysmi/
+[5]: https://app.datadoghq.com/logs

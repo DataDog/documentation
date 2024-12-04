@@ -1,6 +1,5 @@
 ---
 title: Context Links
-kind: guide
 further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'
@@ -11,11 +10,11 @@ further_reading:
 
 Dashboards collect data from multiple sources and display this data as visualizations. 
 
-You can attach dashboards to [monitor notifications][1], use them as screenboards to observe key technical or business indicators, or reference them in [runbooks][2] to provide additional context. Dashboards enable you to see not only snapshots of the current state of your platform, but also interactions—so you can preemptively see issues and analyze them more deeply in specialized pages.
+You can attach dashboards to [monitor notifications][1], use them as screenboards to observe key technical or business indicators, or reference them in [runbooks][2] to provide additional context. With Dashboards, you can see snapshots of the current state of your platform as well as interactions, so you can preemptively see issues and analyze them more deeply in specialized pages.
 
 The video below demonstrates a user looking at an overview dashboard for a web application. The user identifies a spike on a technical metric, zooms in for details, and accesses the underlying host dashboard to check for possible root causes.
 
-{{< img src="dashboards/guide/context_links/overview.mp4" alt="Context Link Demo" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/context_links/overview.mp4" alt="Troubleshooting workflow from a dashboard metric graph, using context links to find the root cause of issue" video="true" style="width:80%;" >}}
 
 This guide introduces **context links** in your dashboards and covers the following:
 
@@ -76,6 +75,7 @@ When you have to choose between `{{something}}` and `{{something.value}}`:
 
 * `{{something}}` returns the value prefixed by its key. For example, `env:prod`.
 * `{{something.value}}` returns the raw value. For example, `prod`.
+* See the [example use case to configure multiple variables](#configure-multiple-variables).
 
 
 In this example, when you click **View in Acme**, the link directs you to `https://prod.acme.io/search?what=basic&when=1643021787564`.
@@ -224,6 +224,29 @@ As the API Gateways team updates the saved view to account for the latest update
 
 Remapping the IP address creates a context link that connects your RUM events with corresponding logs.
 
+### Configure multiple variables
+
+The following example explains how to configure multiple variables and conditions in your context link query.
+
+#### Context
+
+Add context links to investigate specific logs or conditions. 
+- You have multiple tag values with the same context (for example, `env:production OR env:prod`). 
+- You want to filter down logs to multiple conditions (for example, `env:prod AND service:backend`)
+
+#### Approach
+
+After you select the template variables you want to troubleshoot, the context link configuration takes those template variables and inserts them into the query. **Note**: The syntax and the parenthesis enclosure impacts the query. 
+
+For example, if you want to configure a context link with `service:backend` AND (`env:production` OR `env:prod`), use the following configuration:
+
+```
+service:backend (env:{{$env.value}})
+```
+
+#### Result
+
+The parenthesis translates the `(env:{{$env.value}})` to `(env:*)` which allows you to enter multiple variables into your context links query.
 
 ## Further Reading
 
@@ -232,7 +255,7 @@ Remapping the IP address creates a context link that connects your RUM events wi
 
 [1]: /monitors/notify/
 [2]: /notebooks/
-[3]: /dashboards/#permissions
+[3]: /dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/

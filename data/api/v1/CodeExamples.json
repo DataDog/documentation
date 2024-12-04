@@ -1,9 +1,44 @@
 {
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Delete an AWS integration returns \"OK\" response"
+    }
+  ],
   "UpdateAWSAccount": [
     {
       "group": "aws_integration",
       "suffix": "",
       "description": "Update an AWS integration returns \"OK\" response"
+    }
+  ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
     }
   ],
   "CreateDashboardList": [
@@ -21,6 +56,11 @@
     }
   ],
   "CreateDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "_1433408735",
+      "description": "Clients deserialize a dashboard with a empty time object"
+    },
     {
       "group": "dashboards",
       "suffix": "_1442588603",
@@ -80,6 +120,16 @@
       "group": "dashboards",
       "suffix": "_1284514532",
       "description": "Create a new dashboard with a timeseries widget using formulas and functions cloud cost query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2563642929",
+      "description": "Create a new dashboard with a toplist widget sorted by group"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1413226400",
+      "description": "Create a new dashboard with a toplist widget with stacked type and no legend specified"
     },
     {
       "group": "dashboards",
@@ -203,6 +253,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3298564989",
+      "description": "Create a new dashboard with llm_observability_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2029850837",
       "description": "Create a new dashboard with log_stream widget"
     },
@@ -250,6 +305,11 @@
       "group": "dashboards",
       "suffix": "_2336428357",
       "description": "Create a new dashboard with query_table widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_794302680",
+      "description": "Create a new dashboard with query_table widget and text formatting"
     },
     {
       "group": "dashboards",
@@ -355,6 +415,26 @@
       "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_985012506",
+      "description": "Create a new timeseries widget with incident_analytics data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4262729673",
+      "description": "Create a new timeseries widget with legacy live span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3451918078",
+      "description": "Create a new timeseries widget with new fixed span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3066042014",
+      "description": "Create a new timeseries widget with new live span time format"
     }
   ],
   "CreatePublicDashboard": [
@@ -455,6 +535,32 @@
       "group": "events",
       "suffix": "_19927815",
       "description": "Post an event with a long title returns \"OK\" response"
+    }
+  ],
+  "CreateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a GCP integration returns \"OK\" response"
+    }
+  ],
+  "DeleteGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Delete a GCP integration returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "_3544259255",
+      "description": "Update a GCP integration cloud run revision filters returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update a GCP integration returns \"OK\" response"
     }
   ],
   "ListLogs": [
@@ -642,6 +748,11 @@
   "CreateSLO": [
     {
       "group": "service_level_objectives",
+      "suffix": "_3765703239",
+      "description": "Create a time-slice SLO object returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
       "suffix": "",
       "description": "Create an SLO object returns \"OK\" response"
     }
@@ -651,6 +762,23 @@
       "group": "service_level_objectives",
       "suffix": "",
       "description": "Update an SLO returns \"OK\" response"
+    }
+  ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_3298562511",
+      "description": "Create a FIDO global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_3397718516",
+      "description": "Create a TOTP global variable returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
   "CreateSyntheticsBrowserTest": [
@@ -670,25 +798,28 @@
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
-  "CreateGlobalVariable": [
-    {
-      "group": "synthetics",
-      "suffix": "_1068962881",
-      "description": "Create a global variable from test returns \"OK\" response"
-    }
-  ],
-  "CreatePrivateLocation": [
+  "CreateSyntheticsMobileTest": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Create a private location returns \"OK\" response"
+      "description": "Create a mobile test returns \"OK - Returns the created test details.\" response"
     }
   ],
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
+      "suffix": "_1717840259",
+      "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1402674167",
       "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1987645492",
+      "description": "Create an API HTTP test has bodyHash filled out"
     },
     {
       "group": "synthetics",
@@ -717,8 +848,27 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreatePrivateLocation": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a private location returns \"OK\" response"
+    }
+  ],
+  "UpdateMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Edit a Mobile test returns \"OK\" response"
     }
   ],
   "UpdateAPITest": [
@@ -726,6 +876,20 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Edit an API test returns \"OK\" response"
+    }
+  ],
+  "FetchUptimes": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Fetch uptime for multiple tests returns \"OK.\" response"
+    }
+  ],
+  "PatchTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Patch a Synthetic test returns \"OK\" response"
     }
   ],
   "TriggerTests": [

@@ -41,7 +41,7 @@ const initCodeTabs = () => {
     }
 
     /**
-     * Adds active class to the selected tab and shows the related tab pane. 
+     * Adds active class to the selected tab and shows the related tab pane.
      * @param {object} tabAnchorElement - Reference to the HTML DOM node representing the anchor tag within each tab.
     */
     const activateCodeTab = (tabAnchorElement) => {
@@ -63,7 +63,7 @@ const initCodeTabs = () => {
                     activeLangTab.closest('li').classList.add('active')
                     activePane.classList.add('active', 'show')
                 }
-                
+
                 const currentActiveTab = codeTabsElement.querySelector('.nav-tabs li.active')
 
                 // If we got this far and no tabs are highlighted, activate the first tab in the list of code tabs.
@@ -80,13 +80,29 @@ const initCodeTabs = () => {
         updateUrl(activeLang)
     }
 
+    const scrollToAnchor = (tab, anchorname) => {
+        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        console.log('tab: ', tab);
+        console.log('scrolling to anchor: ', anchor);
+        if (anchor) {
+            anchor.scrollIntoView();
+        } else {
+            document.querySelector(anchorname).scrollIntoView();
+        }
+    }
+
     const activateTabsOnLoad = () => {
         const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
 
             if (selectedLanguageTab) {
-                selectedLanguageTab.click()
+                activateCodeTab(selectedLanguageTab)
+                if (window.location.hash) {
+                    setTimeout(function () {
+                        scrollToAnchor(tabQueryParameter, window.location.hash);
+                    }, 300);
+                }
             }else{
                 activateCodeTab(firstTab)
             }
@@ -102,7 +118,7 @@ const initCodeTabs = () => {
             codeTabsList.forEach(codeTabsElement => {
                 let allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
                 allTabLinksNodeList.forEach(link => {
-                    link.addEventListener('click', e => {                        
+                    link.addEventListener('click', e => {
                         e.preventDefault();
                         const region = getCookieByName('site');
                         const regionalCodeTabs = codeTabParameters[region];
@@ -128,7 +144,7 @@ const initCodeTabs = () => {
     }
 
     /**
-     * Append the active lang to the URL as a query parameter. 
+     * Append the active lang to the URL as a query parameter.
     */
     const updateUrl = (activeLang) => {
         const url = window.location.href
@@ -214,4 +230,4 @@ const initCodeTabs = () => {
     init()
 }
 
-export default initCodeTabs;
+export default initCodeTabs

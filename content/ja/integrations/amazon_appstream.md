@@ -4,17 +4,17 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon AppStream のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_appstream/
 draft: false
 git_integration_title: amazon_appstream
 has_logo: true
-integration_id: amazon-appstream
+integration_id: ''
 integration_title: Amazon AppStream
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_appstream
 public_title: Datadog-Amazon AppStream インテグレーション
@@ -22,6 +22,7 @@ short_description: Amazon AppStream のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon AppStream は、AWS から Web ブラウザへデスクトップアプリケーションをストリーミングできるフルマネージド型の安全なアプリケーションストリーミングサービスです。
@@ -39,7 +40,7 @@ Amazon AppStream は、AWS から Web ブラウザへデスクトップアプリ
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AppStream` が有効になっていることを確認します。
 2. [Datadog - Amazon AppStream インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -65,7 +66,7 @@ Amazon AppStream から S3 バケットまたは CloudWatch のいずれかに�
 
 Amazon AppStream インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon AppStream インテグレーションには、サービスのチェック機能は含まれません。
 

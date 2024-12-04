@@ -6,7 +6,9 @@ import os
 import re
 import logging
 import sys
-
+from functools import partial
+from multiprocessing import cpu_count
+from multiprocessing.pool import Pool
 import yaml
 
 DEFAULT_LANGUAGE = "en"
@@ -75,7 +77,7 @@ def md_update_links(this_lang_code, content):
     """ Update footer links in markdown to be language relative """
     result = content
     try:
-        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/", "ko/", "resources/"]
+        common_lang_codes = ["en/", "es/", "de/", "fr/", "ja/", "ko/", "resources/"]
         exclude_common_langs = "|".join(list(map(lambda code: f"{code}",common_lang_codes)))
         relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ").*)$", re.MULTILINE | re.IGNORECASE)
         substitute = "\g<1>/" + this_lang_code.lower() + "\g<2>"
@@ -101,7 +103,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
 
     with open(template) as o_file:
         content = o_file.read()
-        boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+        boundary = re.compile(r'^-{3,}\s*$', re.MULTILINE)
         split = boundary.split(content, 2)
         new_yml = {}
         if len(split) == 3:
@@ -147,6 +149,8 @@ def main():
     parser.add_option("-d", "--lang_as_dir", help="use dir lang instead of suffix", default=True)
     parser.add_option("-i", "--ignore", help="paths to ignore", default=["content/en/meta"])
 
+    pool_size = cpu_count()
+
     (options, args) = parser.parse_args()
     options = vars(options)
 
@@ -163,8 +167,9 @@ def main():
         lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"], ignores=options["ignore"])
         diff = diff_globs(base=default_glob, compare=lang_glob, lang_as_dir=options["lang_as_dir"])
         print("\x1b[32mINFO\x1b[0m: building {0} placeholder pages for {1} ".format(len(diff), l))
-        for f in diff:
-            create_placeholder_file(template=f, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location)
+        with Pool(processes=pool_size) as pool:
+            # call the function for each item in parallel
+            pool.map(partial(create_placeholder_file, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location), diff)
 
 
 if __name__ == "__main__":
