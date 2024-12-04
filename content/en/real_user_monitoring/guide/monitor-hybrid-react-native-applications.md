@@ -316,6 +316,6 @@ RUM.Configuration(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/setup/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#custom-views
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#custom-views

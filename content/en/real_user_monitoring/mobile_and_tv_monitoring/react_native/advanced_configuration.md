@@ -528,7 +528,7 @@ See [Monitor hybrid React Native applications][16].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/react_native
 [3]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [4]: https://jestjs.io/
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548

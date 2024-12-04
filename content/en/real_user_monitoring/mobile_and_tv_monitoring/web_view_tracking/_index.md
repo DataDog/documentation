@@ -323,6 +323,6 @@ See [RUM & Session Replay Billing][7] for details on how web views in mobile app
 [2]: /real_user_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 [4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/setup/#add-native-dependencies-for-ios
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios
 [6]: https://app.datadoghq.com/rum/explorer
 [7]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

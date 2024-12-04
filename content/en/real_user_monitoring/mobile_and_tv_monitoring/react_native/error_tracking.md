@@ -473,7 +473,7 @@ Inside the loop, add the following snippet:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin

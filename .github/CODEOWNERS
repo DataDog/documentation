@@ -117,10 +117,10 @@ content/en/tracing/**/*dotnet*                                  @DataDog/tracing
 content/en/real_user_monitoring/mobile_and_tv_monitoring/android/setup/                        @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/                       @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/ios/setup/                           @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/reactnative/setup/                    @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/                    @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/                           @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/unity/setup/                          @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/setup/           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/           @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/session_replay/mobile                 @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/android.md                @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/expo.md                   @Datadog/rum-mobile @DataDog/documentation

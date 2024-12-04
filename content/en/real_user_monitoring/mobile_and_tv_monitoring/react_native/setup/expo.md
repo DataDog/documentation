@@ -9,7 +9,7 @@ type: multi-code-lang
 code_lang: expo
 code_lang_weight: 2
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/advanced_configuration
+- link: /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative

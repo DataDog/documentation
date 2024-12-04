@@ -9,7 +9,7 @@ aliases:
     - /real_user_monitoring/reactnative/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
 further_reading:
-- link: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/advanced_configuration
+- link: /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -477,9 +477,9 @@ end
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: https://github.com/wix/react-native-navigation
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/integrated_libraries/
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
 [7]: https://github.com/rmobile_and_tv_monitoring/eact-navigation/react-navigation
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/integrated_libraries/
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
 [9]: https://github.com/DataDog/dd-sdk-reactnative/blob/main/LICENSE
 [10]: https://source.android.com/security/app-sandbox
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
@@ -489,6 +489,6 @@ end
 [15]: /getting_started/tagging/#define-tags
 [16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [17]: https://reactnative.dev/docs/the-new-architecture/landing-page
-[18]: /real_user_monitoring/mobile_and_tv_monitoring/reactnative/setup/#initialize-the-library-with-application-context
+[18]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
 [19]: https://microsoft.github.io/code-push/
 [20]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/codepush
