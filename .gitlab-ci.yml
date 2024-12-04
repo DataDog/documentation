@@ -57,7 +57,7 @@ variables:
 
   # Feature Flag Vars
   FF_PREVIEW_PULL_CONFIG_CACHE: "true" # set to false to disable caching of pull_config.yaml in preview builds
-  FF_BUILD_IMAGE_URL: "registry.ddbuild.io/ci/websites/webops-site-build-preview:v50351977-4a4ead38"
+  FF_BUILD_IMAGE_URL: "registry.ddbuild.io/ci/websites/webops-site-build-preview:v50358761-779b7cc2"
 
 
 # ================== copy scripts =============== #

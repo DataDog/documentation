@@ -19,16 +19,35 @@ if [ -d "local/bin/py" ]; then
   find local/bin/py -mindepth 1 -maxdepth 1 ! -name "build" -exec cp -r {} /tmp/py_backup/ \;
 fi
 
-# Clear the py directory while preserving our backups
-rm -rf local/bin/py
-mkdir -p local/bin/py
+# Backup the sh directory
+if [ -d "local/bin/sh" ]; then
+  mkdir -p /tmp/sh_backup
+  cp -r local/bin/sh/* /tmp/sh_backup/ 2>/dev/null || true
+fi
 
-# Copy all files from the base docs-ci directory to py
-cp -r /usr/local/bin/docs-ci/* local/bin/py/
+# Clear the directories while preserving our backups
+rm -rf local/bin/py local/bin/sh
+mkdir -p local/bin/py local/bin/sh local/bin/js
+
+# Copy files from docs-ci to respective directories, excluding sh and js from py
+cd /usr/local/bin/docs-ci && find . -mindepth 1 -maxdepth 1 ! -name 'sh' ! -name 'js' -exec cp -r {} /local/bin/py/ \;
+
+# Copy sh and js directories if they exist
+if [ -d "/usr/local/bin/docs-ci/sh" ]; then
+  cp -r /usr/local/bin/docs-ci/sh/* local/bin/sh/
+fi
+if [ -d "/usr/local/bin/docs-ci/js" ]; then
+  cp -r /usr/local/bin/docs-ci/js/* local/bin/js/
+fi
 
 # Restore all previously backed up py content (this will merge with new content)
 if [ -d "/tmp/py_backup" ]; then
   cp -r /tmp/py_backup/* local/bin/py/
+fi
+
+# Restore sh directory content
+if [ -d "/tmp/sh_backup" ]; then
+  cp -r /tmp/sh_backup/* local/bin/sh/
 fi
 
 # Handle the build directory separately
@@ -50,4 +69,10 @@ if [ -d "/tmp/build_backup" ]; then
 fi
 
 # Clean up temporary backup directories
-rm -rf /tmp/build_backup /tmp/py_backup
+rm -rf /tmp/build_backup /tmp/py_backup /tmp/sh_backup
+
+# Output final directory structure for verification
+echo -e "\nFinal directory structure:"
+find local/bin -type d -print | sed -e "s;[^/]*/;|____;g;s;____|; |;g"
+echo -e "\nFull file listing:"
+find local/bin -type f | sort
