@@ -3025,8 +3025,8 @@ menu:
       parent: ndm
       identifier: ndm_glossary
       weight: 301
-    - name: Getting Started
-      url: network_monitoring/devices/getting_started
+    - name: Setup
+      url: network_monitoring/devices/setup
       parent: ndm
       identifier: ndm_getting_started
       weight: 302
@@ -3040,11 +3040,21 @@ menu:
       parent: ndm_getting_started
       identifier: ndm_snmp_metrics
       weight: 30002
+    - name: Ping
+      url: network_monitoring/devices/ping
+      parent: ndm_getting_started
+      identifier: ndm_snmp_ping
+      weight: 30003
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_getting_started
       identifier: ndm_snmptraps
-      weight: 30003
+      weight: 30004
+    - name: SD-WAN 
+      url: network_monitoring/devices/sd-wan
+      parent: ndm_getting_started
+      identifier: ndm_sd-wan
+      weight: 30005
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
