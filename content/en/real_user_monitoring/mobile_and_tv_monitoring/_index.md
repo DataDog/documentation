@@ -19,15 +19,3 @@ Datadog correlates each user journey with relevant synthetic tests, backend metr
 Select a platform to start collecting RUM data on your application:
 
 {{< partial name="rum/rum-getting-started-mobile-setup.html" >}}
-
-## WIP
-
-## Track, prioritize, and fix app crashes
-
-## Troubleshoot mobile performance issues
-
-## Deployment tracking
-
-## Understand product usage and user demographics
-
-## Visualize user journeys with Mobile Session Replay
