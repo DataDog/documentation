@@ -41,7 +41,7 @@ Muted issues automatically unmute after the specified mute duration expires. You
 1. On the misconfiguration, vulnerability, or identity risk side panel, find the triage status dropdown for the resource.
    - If the side panel is for a single resource, under **Next Steps**, the list is under **Triage**.
    - If the side panel is for a list of aggregated resources, select one or more resources in the table, then find the list in the **Status** column.
-2. Click **Muted** to open the dropdown, then select a new triage status. The triage status updates immediately for the selected resource(s).
+2. Click **Muted** to open the dropdown, then select a new triage status. The triage status updates immediately for the selected resources.
 
 ### Audit your muted issues
 
