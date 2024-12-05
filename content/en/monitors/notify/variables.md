@@ -352,7 +352,7 @@ The following table contains all available attributes:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [Error Tracking monitors](9), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [Error Tracking monitors][9], [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
