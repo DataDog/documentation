@@ -967,7 +967,7 @@ const httpsResolver = {
     return path.url.startsWith("https://");
   },
   read(file, callback, refs) {
-    callback(null, `{\"ref\": \"${file.url}\"}`);
+    callback(null, `{\"$ref\": \"${file.url}\"}`);
   }
 };
 
