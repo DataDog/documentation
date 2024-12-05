@@ -21,7 +21,7 @@ To use the Datadog Profiler, use at least the minimum versions summarized in the
 |                                   |  [Java][1]   |   [Python][2]    |    [Go][3]    |   [Ruby][4]    | [Node.js][5]  |  [.NET][6]  |   [PHP][7]    | [Rust/C/C++][8] |
 |-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|
 | <strong>Minimum&nbsp;runtime&nbsp;version</strong> | [JDK&nbsp;8+][17]  | Python&nbsp;2.7+ | Go&nbsp;1.19+ | Ruby&nbsp;2.5+ | Node&nbsp;14+ | .NET&nbsp;Core&nbsp;2.1+, .NET&nbsp;5+, .NET&nbsp;Framework&nbsp;4.6.1+ | PHP&nbsp;7.1+ |                 |
-| <strong>Feature-complete runtime version</strong>       | [JDK&nbsp;11+][17] | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;3.1+ | Node&nbsp;18+ |                              .NET&nbsp;7+                               | PHP&nbsp;8.0+ |                 |
+| <strong>Feature-complete runtime version</strong>       | [JDK&nbsp;11+][17] | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;3.2+ | Node&nbsp;18+ |                              .NET&nbsp;7+                               | PHP&nbsp;8.0+ |                 |
 | <strong>Feature-complete tracing library version</strong>        | [latest][9]  |   [latest][10]   | [latest][11]  |  [latest][12]  | [latest][13]  |                              [latest][14]                               | [latest][15]  |  [latest][16]   |
 
 ## Profile types
@@ -47,7 +47,7 @@ To access additional profiling features, use at least the minimum versions summa
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
 | {{< ci-details title="Trace to Profiling integration" >}}Find specific lines of code related to performance issues. <a href="/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;2.12.0,<br>2.11.4, 2.10.7 | tracer&nbsp;1.51.0 | tracer&nbsp;1.21.1 | tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.30.0 | tracer&nbsp;2.30.0 |      |
 | {{< ci-details title="Endpoint Profiling" >}}Identify endpoints that are bottlenecks or responsible for heavy resource consumption. <a href="/profiler/connect_traces_and_profiles/#endpoint-profiling">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.54.0 | tracer&nbsp;1.37.0 | tracer&nbsp;0.52.0 | tracer&nbsp;5.0.0,<br>4.24.0, 3.45.0 | tracer&nbsp;2.15.0 | tracer&nbsp;0.79.0 |      |
-| {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;2.12.0,<br>2.11.4, 2.10.7 | tracer&nbsp;1.51.0 | tracer&nbsp;1.21.1 | tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.30.0 | tracer&nbsp;0.89.0 |      |
+| {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;2.12.0,<br>2.11.4, 2.10.7 | tracer&nbsp;1.51.0 | tracer&nbsp;1.21.1<br>(2.4.0 for GVL profiling) | tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.30.0 | tracer&nbsp;0.89.0 |      |
 
 ## Further reading
 
