@@ -352,7 +352,7 @@ The following table contains all available attributes:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [Error Tracking monitors][9], [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -360,7 +360,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 |-----------------|--------------------------------------------------|
 | Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| Error Tracking  | Traces: `{{span.attributes.error.message}}`<br>RUM Events: `{{rum.attributes.error.message}}`<br>Logs: `{{log.attributes.error.message}}`             |
+| Error Tracking  | `{{issue.attributes.key}}`                         |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
 | Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
@@ -663,3 +663,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [6]: /monitors/types/database_monitoring/
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[9]: /monitors/types/error_tracking/
