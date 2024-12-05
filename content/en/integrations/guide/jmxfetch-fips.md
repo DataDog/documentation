@@ -107,7 +107,7 @@ docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
   keytool -import -alias java-app -keystore /ssl/jmxfetch-truststore -file /ssl/java-app-cert.pem -storepass changeit -noprompt
 ```
 
-{{% /tab }}
+{{% /tab %}}
 
 {{< /tabs >}}
 
