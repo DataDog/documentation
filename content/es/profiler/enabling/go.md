@@ -38,7 +38,7 @@ Para empezar a crear perfiles de aplicaciones:
 2. Obtén `dd-trace-go` utilizando el comando:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    go get github.com/DataDog/dd-trace-go/v2/profiler
     ```
 
      **Nota**: El generador de perfiles está disponible en la biblioteca `dd-trace-go` para las versiones 1.23.0+.
@@ -46,7 +46,7 @@ Para empezar a crear perfiles de aplicaciones:
 3. Importa el [generador de perfiles][6] al inicio de tu aplicación:
 
     ```Go
-    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    import "github.com/DataDog/dd-trace-go/v2/profiler"
     ```
 
 4. Añade el siguiente fragmento para iniciar el generador de perfiles:
@@ -141,13 +141,13 @@ La guía [Empezando con el generador de perfiles][17] toma un ejemplo de servici
 [3]: /es/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#pkg-constants
 [7]: /es/profiler/connect_traces_and_profiles/#span-execution-timeline-view
 [8]: /es/profiler/connect_traces_and_profiles/#prerequisites
 [9]: /es/integrations/guide/source-code-integration/?tab=go
 [10]: https://app.datadoghq.com/profiling
-[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
-[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
+[11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType
 [13]: /es/getting_started/tagging/unified_service_tagging
 [14]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [15]: https://tip.golang.org/doc/go1.21

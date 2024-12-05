@@ -733,6 +733,10 @@ menu:
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 1004
+    - name: Combining OTel and Datadog Metrics
+      url: opentelemetry/guide/combining_otel_and_datadog_metrics/
+      parent: otel_guides
+      weight: 1005
     - name: Developers
       url: developers/
       pre: dev-code
@@ -1516,10 +1520,10 @@ menu:
       parent: monitor_types
       identifier: monitor_types_network
       weight: 317
-    - name: Cloud Network Monitoring
-      url: monitors/types/cloud_network_monitoring/
+    - name: Network Performance
+      url: monitors/types/network_performance/
       parent: monitor_types
-      identifier: monitor_types_cnm
+      identifier: monitor_types_network_performance
       weight: 318
     - name: NetFlow
       url: monitors/types/netflow/
@@ -1662,11 +1666,6 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 304
-    - name: Amazon Elastic Container Explorer
-      url: infrastructure/containers/amazon_elastic_container_explorer
-      parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
-      weight: 305
     - name: Processes View
       url: infrastructure/process/
       parent: infrastructure
@@ -1881,21 +1880,16 @@ menu:
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 2
-    - name: Use Cases
-      url: service_catalog/use_cases
-      parent: service_catalog
-      identifier: service_catalog_use_cases
-      weight: 3
     - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
       identifier: service_catalog_investigate
-      weight: 4
+      weight: 3
     - name: Definitions
       url: service_catalog/service_definitions/
       parent: service_catalog
       identifier: service_catalog_definitions_versions
-      weight: 5
+      weight: 4
     - name: v3.0
       url: /service_catalog/service_definitions/v3-0/
       parent: service_catalog_definitions_versions
@@ -1920,7 +1914,7 @@ menu:
       url: service_catalog/scorecards
       parent: service_catalog
       identifier: service_catalog_scorecards
-      weight: 6
+      weight: 5
     - name: Scorecard Configuration
       url: service_catalog/scorecards/scorecard_configuration
       parent: service_catalog_scorecards
@@ -1940,22 +1934,22 @@ menu:
       url: service_catalog/software_templates
       parent: service_catalog
       identifier: software_templates
-      weight: 7
+      weight: 6
     - name: APIs
       url: service_catalog/apis
       parent: service_catalog
       identifier: service_catalog_apis
-      weight: 8
+      weight: 7
     - name: Integrations
       url: service_catalog/integrations
       parent: service_catalog
       identifier: service_catalog_integrations
-      weight: 9
-    - name: Troubleshooting
-      url: service_catalog/troubleshooting
+      weight: 8
+    - name: Troubleshooting and Best Practices
+      url: service_catalog/guides
       parent: service_catalog
-      identifier: service_catalog_troubleshooting
-      weight: 10
+      identifier: troubleshooting_best_practices
+      weight: 9
     - name: API Catalog
       url: /api_catalog/
       pre: api-catalog
@@ -2980,35 +2974,35 @@ menu:
       identifier: nm_parent
       parent: infrastructure_heading
       weight: 40000
-    - name: Cloud Network Monitoring
-      url: network_monitoring/cloud_network_monitoring/
+    - name: Network Performance Monitoring
+      url: network_monitoring/performance/
       parent: nm_parent
-      identifier: cnm
+      identifier: npm
       weight: 1
     - name: Setup
-      url: network_monitoring/cloud_network_monitoring/setup/
-      parent: cnm
-      identifier: cnm_setup
+      url: network_monitoring/performance/setup/
+      parent: npm
+      identifier: npm_setup
       weight: 101
     - name: Overview Page
-      url: network_monitoring/cloud_network_monitoring/overview_page/
-      parent: cnm
-      identifier: cnm_overview_page
+      url: network_monitoring/performance/overview_page/
+      parent: npm
+      identifier: npm_overview_page
       weight: 102
     - name: Network Analytics
-      url: network_monitoring/cloud_network_monitoring/network_analytics/
-      parent: cnm
-      identifier: cnm_analytics
+      url: network_monitoring/performance/network_analytics/
+      parent: npm
+      identifier: npm_analytics
       weight: 103
     - name: Network Map
-      url: network_monitoring/cloud_network_monitoring/network_map/
-      parent: cnm
-      identifier: cnm_map
+      url: network_monitoring/performance/network_map/
+      parent: npm
+      identifier: npm_map
       weight: 104
     - name: Guides
-      url: network_monitoring/cloud_network_monitoring/guide/
-      identifier: cnm_guides
-      parent: cnm
+      url: network_monitoring/performance/guide/
+      identifier: npm_guides
+      parent: npm
       weight: 105
     - name: DNS Monitoring
       url: network_monitoring/dns/
@@ -3787,7 +3781,7 @@ menu:
       url: database_monitoring/setup_postgres/
       parent: dbm
       identifier: dbm_setup_postgres
-      weight: 4
+      weight: 3
     - name: Self-hosted
       url: database_monitoring/setup_postgres/selfhosted
       parent: dbm_setup_postgres
@@ -3798,11 +3792,6 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_rds
       weight: 302
-    - name: RDS Quick Install
-      url: database_monitoring/setup_postgres/rds/quick_install
-      parent: dbm_setup_postgres_rds
-      identifier: dbm_setup_rds_quick_install
-      weight: 2000
     - name: Aurora
       url: database_monitoring/setup_postgres/aurora
       parent: dbm_setup_postgres
@@ -3837,7 +3826,7 @@ menu:
       url: database_monitoring/setup_mysql/
       parent: dbm
       identifier: dbm_setup_mysql
-      weight: 5
+      weight: 4
     - name: Self-hosted
       url: database_monitoring/setup_mysql/selfhosted
       parent: dbm_setup_mysql
@@ -3877,7 +3866,7 @@ menu:
       url: database_monitoring/setup_sql_server/
       parent: dbm
       identifier: dbm_setup_sql_server
-      weight: 6
+      weight: 5
     - name: Self-hosted
       url: database_monitoring/setup_sql_server/selfhosted/
       parent: dbm_setup_sql_server
@@ -3907,7 +3896,7 @@ menu:
       url: database_monitoring/setup_oracle/
       parent: dbm
       identifier: dbm_setup_oracle
-      weight: 7
+      weight: 6
     - name: Self-hosted
       url: database_monitoring/setup_oracle/selfhosted/
       parent: dbm_setup_oracle
@@ -3942,7 +3931,7 @@ menu:
       url: database_monitoring/setup_mongodb/
       parent: dbm
       identifier: dbm_setup_mongodb
-      weight: 8
+      weight: 7
     - name: Self-hosted
       url: database_monitoring/setup_mongodb/selfhosted
       parent: dbm_setup_mongodb
@@ -5657,16 +5646,16 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_content_packs
       weight: 1
-    - name: Detection Rules
-      url: security/cloud_siem/detection_rules
+    - name: Log Detection Rules
+      url: security/cloud_siem/log_detection_rules
       parent: cloud_siem
-      identifier: cloud_siem_detection_rules
+      identifier: cloud_siem_log_detection_rules
       weight: 2
     - name: Signal Correlation Rules
-      url: security/cloud_siem/detection_rules/signal_correlation_rules
-      parent: cloud_siem_detection_rules
+      url: security/cloud_siem/signal_correlation_rules
+      parent: cloud_siem
       identifier: cloud_siem_signal_correlation_rules
-      weight: 20500
+      weight: 3
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem
@@ -5687,7 +5676,7 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
       weight: 7
-    - name: Risk Insights for AWS Entities
+    - name: Entities and Risk Scoring
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
@@ -5994,6 +5983,11 @@ menu:
       parent: appsec_threats_management_setup
       identifier: appsec_compat_threats_mgmt
       weight: 701
+    - name: Using Single Step Instrumentation
+      url: security/application_security/threats/setup/single_step/
+      parent: appsec_threats_management_setup
+      identifier: appsec_threats_setup_using_single_step
+      weight: 702
     - name: Using Datadog Tracing Libraries
       url: security/application_security/threats/setup/threat_detection/
       parent: appsec_threats_management_setup

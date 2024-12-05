@@ -74,20 +74,6 @@ const doOnLoad = () => {
             }
         }
 
-        // Try to append RUM device ID and session ID
-        if(window.DD_RUM) {
-            const rumDeviceId = window.DD_RUM.getUser() ? window.DD_RUM.getUser().device_id : null;
-            if(rumDeviceId) {
-                completeUrl += `${operator}dd-device-id=${rumDeviceId}`;
-                operator = '&';
-            }
-            const rumSessionId = window.DD_RUM.getInternalContext() ? window.DD_RUM.getInternalContext().session_id : null;
-            if(rumSessionId) {
-                completeUrl += `${operator}dd-session-id=${rumSessionId}`;
-                operator = '&';
-            }
-        }
-
         return completeUrl;
     };
 

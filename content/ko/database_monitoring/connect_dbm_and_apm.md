@@ -61,8 +61,7 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
-|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
+|                                          | [ADO.NET][24] *        |           |           | {{< X >}} **       |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -73,13 +72,13 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 
 \* [CommandType.StoredProcedure][25] 지원 안 됨
 
-\*\* 자바/.NET에 대한 전체 모드 SQL Server:
-  - 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
-  - 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
-  - 요구 사항:
-    - 에이전트 버전 7.55.0 이상
-    - Java 트레이서 버전 1.39.0 이상
-    - .NET 트레이서 버전 3.3 이상
+\*\* 풀 모드 SQL Server/Java:
+- 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
+- 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
+- 요구 사항:
+  - 에이전트 버전 7.55.0 이상
+  - Java 트레이서 버전 1.39.0 이상
+  - .NET 트레이서 버전 3.3 이상
 
 ## 설정
 최상의 사용자 경험을 위해 다음 환경 변수가 애플리케이션에 설정되어 있는지 확인하세요.
@@ -93,17 +92,17 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
+앱 종속성을 업데이트하여 [dd-trace-go@v2.0.0][1] 이상을 포함합니다.
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+go get github.com/DataDog/dd-trace-go/v2@v1.44.0
 ```
 
 코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -113,12 +112,12 @@ import (
 
 2. 드라이버 등록 동안 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
 3. `sqltrace.Open` 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -130,8 +129,8 @@ import (
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
@@ -154,7 +153,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
 {{% /tab %}}
 
@@ -428,7 +427,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 [1]: /ko/database_monitoring/#getting-started
 [2]: /ko/tracing/
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb
@@ -449,7 +448,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
+[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[...]%20should%20set
 [26]: https://app.datadoghq.com/services
 [27]: https://pypi.org/project/asyncpg/
@@ -457,4 +456,3 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [29]: https://pypi.org/project/mysql-connector-python/
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
-[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

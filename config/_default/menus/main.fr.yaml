@@ -5473,6 +5473,11 @@ menu:
       parent: appsec_threats_management_setup
       identifier: appsec_compat_threats_mgmt
       weight: 701
+    - name: Using Single Step Instrumentation
+      url: security/application_security/threats/setup/single_step/
+      parent: appsec_threats_management_setup
+      identifier: appsec_threats_setup_using_single_step
+      weight: 702
     - name: Using Datadog Tracing Libraries
       url: security/application_security/threats/setup/threat_detection/
       parent: appsec_threats_management_setup

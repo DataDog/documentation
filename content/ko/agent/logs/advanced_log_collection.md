@@ -732,7 +732,7 @@ Datadog 에이전트에서 수집하는 모든 로그는 전역 처리 규칙의
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits는 Datadog, Inc.의 상표입니다.
+*제한없는 로그 수집(Logging without Limits™)은 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/agent/logs/
 [2]: https://golang.org/pkg/regexp/syntax/

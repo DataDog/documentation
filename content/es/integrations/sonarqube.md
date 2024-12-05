@@ -34,7 +34,7 @@ categories:
 - automatización
 - recopilación de logs
 - seguridad
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: sonarqube
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 5.1.0
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: sonarqube
@@ -407,7 +407,7 @@ SonarQube no incluye eventos.
 [1]: https://www.sonarqube.org
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
-[4]: https://docs.sonarqube.org/latest/server-upgrade-and-maintenance/monitoring/instance/#exposed-jmx-mbeans
+[4]: https://docs.sonarqube.org/latest/instance-administration/monitoring/
 [5]: https://docs.sonarsource.com/sonarqube/latest/instance-administration/monitoring/instance/#how-do-i-activate-jmx
 [6]: https://docs.datadoghq.com/es/integrations/java/
 [7]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information

@@ -122,7 +122,7 @@ profiler.WithCustomProfilerLabelKeys("customer_name"),
 その後、サービスの CPU またはゴルーチンのプロファイルを開き、`CPU time by` ドロップダウンで興味のある `customer_name` の値を選択します。
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithCustomProfilerLabelKeys
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

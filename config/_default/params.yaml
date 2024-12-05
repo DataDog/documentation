@@ -212,7 +212,7 @@ core_product:
     - name: log management
     - name: metrics
     - name: network device monitoring
-    - name: cloud network monitoring
+    - name: network performance monitoring
     - name: observability pipelines
     - name: security
     - name: serverless monitoring

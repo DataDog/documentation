@@ -5,7 +5,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: Código fuente
   text: Código fuente
-- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
   tag: Sitio externo
   text: Página del paquete
 - link: /tracing/glossary/
@@ -33,7 +33,7 @@ También puedes optar por proporcionar `env`, `service` y `version` a través de
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -171,7 +171,7 @@ El [nombre del entorno APM][7] puede configurarse [en el Agent][8] o utilizando 
 
 [1]: /es/tracing/trace_collection/dd_libraries/go
 [2]: /es/getting_started/tagging/unified_service_tagging
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
 [4]: /es/tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /es/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [6]: /es/tracing/configure_data_security#telemetry-collection
@@ -180,7 +180,7 @@ El [nombre del entorno APM][7] puede configurarse [en el Agent][8] o utilizando 
 [9]: https://github.com/openzipkin/b3-propagation
 [13]: /es/agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
-[15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[15]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
 [17]: https://docs.datadoghq.com/es/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/es/tracing/trace_collection/trace_context_propagation/go/

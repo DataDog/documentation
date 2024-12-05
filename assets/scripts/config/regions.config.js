@@ -24,14 +24,6 @@ export default {
         ap1: 'ap1.datadoghq.com',
         gov: 'app.ddog-gov.com'
     },
-    dd_api: {
-      us: 'https://api.datadoghq.com',
-      us3: 'https://api.us3.datadoghq.com',
-      us5: 'https://api.us5.datadoghq.com',
-      eu: 'https://api.datadoghq.eu',
-      ap1: 'https://api.ap1.datadoghq.com',
-      gov: 'https://api.ddog-gov.com'
-    },
     dd_site_name: {
         us: 'US1',
         us3: 'US3',
