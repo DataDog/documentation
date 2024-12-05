@@ -70,9 +70,9 @@ Haz clic en **Test de URL** para probar la configuración de la solicitud. Apare
    * **Cabeceras de solicitud**: Define las cabeceras a añadir a tu solicitud HTTP. También puedes anular las cabeceras predeterminadas (por ejemplo, la cabecera `user-agent`).
    * **Cookies**: Define cookies para añadir a tu solicitud HTTP. Define varias cookies utilizando el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`
 
-   {{% /tab %}}
+{{% /tab %}}
 
-   {{% tab "Autenticación" %}}
+{{% tab "Autenticación" %}}
 
    * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`. Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
@@ -88,31 +88,31 @@ Haz clic en **Test de URL** para probar la configuración de la solicitud. Apare
      Para las solicitudes de transferencia "Single Chunk" a buckets de Amazon S3, añade `x-amz-content-sha256` con el cuerpo de la solicitud codificado con sha256 como cabecera (para un cuerpo vacío: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: Elige entre conceder credenciales de cliente o una contraseña de propietario de recurso e introduce una URL de token de acceso. Dependiendo de tu selección, introduce un ID de cliente y un secreto o un nombre de usuario y una contraseña. En el menú desplegable, selecciona una opción para enviar el token de API como cabecera de autenticación básica o envía las credenciales de cliente en el cuerpo. También puedes proporcionar información adicional como el público, el recurso y el contexto (así como el ID de cliente y el secreto, si has seleccionado **Contraseña del propietario del recurso**).
 
-   {{% /tab %}}
+{{% /tab %}}
 
-   {{% tab "Parámetros de consulta" %}}
+{{% tab "Parámetros de consulta" %}}
 
    * **Codificar parámetros**: Añade el nombre y el valor de los parámetros de consulta que requieren codificación.
 
-   {{% /tab %}}
+{{% /tab %}}
 
-   {{% tab "Cuerpo de la consulta" %}}
+{{% tab "Cuerpo de la consulta" %}}
 
    * **Tipo de cuerpo**: Selecciona el tipo de cuerpo de la solicitud (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
    * **Cuerpo de la solicitud**: Añade el contenido del cuerpo de tu solicitud HTTP.
        * El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes para `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
        * El cuerpo de la solicitud está limitado a un archivo de 3 megabytes para `application/octet-stream`.
        * El cuerpo de la solicitud está limitado a tres archivos de 3 megabytes cada uno para `multipart/form-data`. 
-   {{% /tab %}}
+{{% /tab %}}
 
-   {{% tab "Proxy" %}}
+{{% tab "Proxy" %}}
 
    * **URL de proxy**: Especifica la URL del proxy por el que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Cabecera de proxy**: Añade cabeceras para incluir en la solicitud HTTP al proxy.
 
-   {{% /tab %}}
+{{% /tab %}}
 
-   {{% tab "Privacidad" %}}
+{{% tab "Privacidad" %}}
 
    * **No guardar el cuerpo de la respuesta**: Selecciona esta opción para evitar que se guarde el cuerpo de la respuesta en tiempo de ejecución. Esta opción es útil para garantizar que no se muestren datos confidenciales en los resultados del test, pero debes utilizarla con prudencia ya que puede dificultar la resolución de problemas. Para obtener recomendaciones de seguridad, consulta [Seguridad en la monitorización Synthetic][1].
 
@@ -128,7 +128,7 @@ Define variables para tus tests API HTTP con JavaScript:
 
 {{% /tab %}}
 
-{{< tabs >}}
+{{< /tabs >}}
 
 ### Definir aserciones
 

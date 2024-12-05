@@ -31,7 +31,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -124,4 +124,4 @@ Moogsoft サポート ([https://support.moogsoft.com][1]) までお問い合わ�
 [1]: https://support.moogsoft.com
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/moogsoft" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/moogsoft" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

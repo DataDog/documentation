@@ -36,7 +36,7 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 
 \* El modo de propagación completa en Aurora MySQL requiere la versión 3.
 
-\*\* SQL Server solo es compatible con el modo completo con el rastreador de Java.
+\*\* SQL Server solo es compatible con el modo completo con los rastreadores de Java y .NET.
 
 **Rastreadores y controladores de aplicaciones compatibles**
 
@@ -62,7 +62,8 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | solo el modo `service` |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -73,12 +74,13 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 
 \* [CommandType.StoredProcedure][25] no compatible
 
-\*\* Modo completo de SQL Server/Java:
-- La instrumentación ejecuta un comando `SET context_info` cuando el cliente emite una consulta, lo que realiza un recorrido completo adicional a la base de datos.
-- Si tus aplicaciones usan `context_info` para instrumentar la aplicación, el rastreador de APM lo sobrescribe.
-- Requisitos previos:
-  - Versión 7.55.0 o posterior del Agent
-  - Versión 1.39.0 o posterior del rastreador de Java
+\*\* Modo completo de SQL Server para Java/.NET:
+  - La instrumentación ejecuta un comando `SET context_info` cuando el cliente emite una consulta, lo que realiza un recorrido completo adicional a la base de datos.
+  - Si tus aplicaciones usan `context_info` para instrumentar la aplicación, el rastreador de APM lo sobrescribe.
+  - Requisitos previos:
+    - Versión 7.55.0 o posterior del Agent
+    - Versión 1.39.0 o posterior del rastreador de Java
+    - Versión del rastreador .NET 3.3 o posterior
 
 ## Configuración
 Para obtener la mejor experiencia de usuario, asegúrate de que las siguientes variables de entorno se hayan configurado en tu aplicación:
@@ -92,17 +94,17 @@ DD_VERSION=(versión de la aplicación)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Actualiza las dependencias de tu aplicación para incluir [dd-trace-go@v1.44.0][1] o posterior:
+Actualiza las dependencias de tu aplicación para incluir [dd-trace-go@v2.0.0][1] o posterior:
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+go get github.com/DataDog/dd-trace-go/v2@v1.44.0
 ```
 
 Actualiza tu código para importar el paquete `contrib/database/sql`:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -112,12 +114,12 @@ Habilita la función de propagación de la monitorización de base de datos medi
 
 2. Uso de código durante el registro del controlador:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
 3. Uso de código en `sqltrace.Open`:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -129,8 +131,8 @@ Ejemplo completo:
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
@@ -153,7 +155,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
 {{% /tab %}}
 
@@ -301,7 +303,7 @@ Asegúrate de usar una biblioteca de cliente compatible. Por ejemplo, `Npgsql`.
 
 Habilita la función de propagación de la monitorización de base de datos al establecer la siguiente variable de entorno:
    - Para Postgres y MySQL: `DD_DBM_PROPAGATION_MODE=full`
-   - Para SQL Server: `DD_DBM_PROPAGATION_MODE=service` o `DD_DBM_PROPAGATION_MODE=full` con el rastreador de Java
+   - Para SQL Server: `DD_DBM_PROPAGATION_MODE=service` o `DD_DBM_PROPAGATION_MODE=full` con Java y rastreadores .NET
    - Para Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /es/tracing/trace_collection/dd_libraries/dotnet-framework
@@ -427,7 +429,7 @@ Visualiza el rendimiento histórico de consultas similares a las que se ejecutan
 
 [1]: /es/database_monitoring/#getting-started
 [2]: /es/tracing/
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb
@@ -448,7 +450,7 @@ Visualiza el rendimiento histórico de consultas similares a las que se ejecutan
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[...]%20should%20set
 [26]: https://app.datadoghq.com/services
 [27]: https://pypi.org/project/asyncpg/
@@ -456,3 +458,4 @@ Visualiza el rendimiento histórico de consultas similares a las que se ejecutan
 [29]: https://pypi.org/project/mysql-connector-python/
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

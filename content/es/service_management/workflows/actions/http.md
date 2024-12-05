@@ -75,7 +75,7 @@ La conexión HTTP de 2 pasos te permite realizar una solicitud preliminar para r
 5. En el menú desplegable **Authentication Type** (Tipo de autenticación), selecciona **2 Step Auth** (Autenticación en 2 pasos).
 
 {{< tabs >}}
-{{% tab "Token auth" (Autenticación basada en tokens) %}}
+{{% tab "Autenticación basada en tokens" %}}
 Configura la consulta preliminar del token de acceso:
 1. En el menú desplegable **Secret Type** (Tipo de secreto), selecciona **Token Auth** (Autenticación basada en tokens).
 2. **Token Name** (Nombre de token) y un **Token Value** (Valor de token).
@@ -91,7 +91,7 @@ Utiliza el token recuperado para autenticar la conexión:
 2. Haz clic en **Create** (Crear).
 {{% /tab %}}
 
-{{% /tab "Basic auth" (Autenticación básica) %}}
+{{% tab "Autenticación básica" %}}
 Configura la consulta de autenticación preliminar:
 1. En el menú desplegable **Secret Type** (Tipo de secreto), selecciona **Basic Auth** (Autentificación básica).
 2. Introduce un **Username** (Nombre de usuario) y un **Password** (Contraseña). La sección **Request Headers** (Encabezados de solicitud) se rellena automáticamente con tu nombre de usuario y tu contraseña.
@@ -108,7 +108,7 @@ Utiliza el token recuperado para autenticar la conexión:
 1. En **Request Detail** (Detalle de la solicitud), introduce **Request Headers** (Encabezados de solicitud), **URL parameters** (Parámetros URL) y un **Body** (Cuerpo) para completar tu solicitud utilizando el token de acceso recuperado.
 1. Haz clic en **Create** (Crear).
 {{% /tab %}}
-{{&lt; /tabs &gt;}}
+{{< /tabs >}}
 
 ### Crear una conexión HTTP mTLS
 

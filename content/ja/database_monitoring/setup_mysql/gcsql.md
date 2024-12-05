@@ -40,16 +40,6 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 次の[データベースフラグ][3]を構成してから、設定を有効にするために**サーバーを再起動**します。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| パラメーター | 値 | 説明 |
-| --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
-| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
@@ -58,7 +48,16 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| パラメーター | 値 | 説明 |
+| --- | --- | --- |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
+| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
+
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -66,21 +65,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
-次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
+次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][11]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
@@ -89,6 +76,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -150,7 +149,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### 検証する
@@ -191,15 +190,15 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
+    password: 'ENC[datadog_user_database_password]' # CREATE USER ステップで設定し、シークレットとして保存されたもの
 
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、CPU やメモリなどの追加のクラウドデータを取得するために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][3]を参照してください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[`mysql.conf.yaml` ファイルの GCP セクション][4]を参照してください。
 
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
@@ -207,6 +206,8 @@ instances:
 [1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -252,10 +253,12 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][2]を参照してください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[`mysql.conf.yaml` ファイルの GCP セクション][2]を参照してください。
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
+[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -265,9 +268,9 @@ Kubernetes クラスターでまだチェックが有効になっていない場
 
 ### Helm
 
-以下の手順を踏んで、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
+以下の手順に従って、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールしてください。お使いのアカウントや環境に合わせて値を変更してください。
 
-1. Helm の [Datadog Agent インストール手順][3]を踏みます。
+1. Helm の [Datadog Agent インストール手順][3]に従います。
 2. YAML コンフィギュレーションファイル (Cluster Agent インストール手順の `datadog-values.yaml`) を更新して、以下を含めます。
     ```yaml
     clusterAgent:
@@ -307,7 +310,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/mysql.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -315,7 +318,7 @@ instances:
     port: 3306
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Google Cloud (GCP) インテグレーションを構成して、CPU、メモリなどの追加のクラウドデータを取得します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -358,20 +361,22 @@ spec:
     name: mysql
 ```
 
-`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[`mysql.conf.yaml` ファイルの GCP セクション][4]を参照してください。
 
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### UpdateAzureIntegration
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探します。または、[データベース][6]のページを参照してください。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探すか、[データベース][6]のページを参照してください。
 
 ## Agent の構成例
 {{% dbm-mysql-agent-config-examples %}}
@@ -399,3 +404,5 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 [7]: /ja/integrations/google_cloudsql
 [8]: /ja/database_monitoring/troubleshooting/?tab=mysql
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[10]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[11]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html

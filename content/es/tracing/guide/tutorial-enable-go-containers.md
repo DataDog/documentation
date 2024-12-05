@@ -98,10 +98,10 @@ A continuación, configura la aplicación Go para habilitar el rastreo. Dado que
 Para activar el rastreo, elimina los comentarios de las siguientes importaciones en `apm-tutorial-golang/cmd/notes/main.go`:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 En la función `main()`, elimina los comentarios de las siguientes líneas:
@@ -118,13 +118,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 {{< /code-block >}}
 
 En `setupDB()`, elimina los comentarios de las siguientes líneas:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -252,23 +252,23 @@ Datadog dispone de varias bibliotecas completamente compatibles para Go que perm
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
 
-En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción `WithServiceName`. Por ejemplo,  la biblioteca `chitrace` se inicializa de la siguiente manera:
+En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción `WithService`. Por ejemplo,  la biblioteca `chitrace` se inicializa de la siguiente manera:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-El uso de `chitrace.WithServiceName("notes")` garantiza que todos los elementos rastreados por la biblioteca estén bajo el nombre de servicio `notes`.
+El uso de `chitrace.WithService("notes")` garantiza que todos los elementos rastreados por la biblioteca estén bajo el nombre de servicio `notes`.
 
 El archivo `main.go` contiene más ejemplos de aplicación para cada una de estas bibliotecas. Para ver una extensa lista de bibliotecas, consulta [Requisitos de compatibilidad de Go][16].
 
@@ -299,7 +299,7 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 Elimina también el comentario de la siguiente importación:
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 Hay varios ejemplos de rastreo personalizado en la aplicación de ejemplo. Aquí hay un par de ejemplos más. Elimina los comentarios para habilitar estos tramos:
@@ -346,8 +346,8 @@ Para activar el seguimiento en la aplicación de calendario:
 
 1. Elimina los comentarios de las siguientes líneas en `cmd/calendar/main.go`:
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
@@ -356,7 +356,7 @@ Para activar el seguimiento en la aplicación de calendario:
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+   r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
    {{< /code-block >}}
 
 1. Abre `docker/all-docker-compose.yaml` y elimina los comentarios del servicio `calendar` para configurar el host de Agent y el etiquetado de servicios unificado para la aplicación y para Docker:

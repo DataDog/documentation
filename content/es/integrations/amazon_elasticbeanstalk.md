@@ -9,7 +9,7 @@ categories:
 - log collection
 - network
 - provisioning
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de métricas clave de AWS Elastic Beanstalk.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
@@ -206,7 +206,7 @@ end
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

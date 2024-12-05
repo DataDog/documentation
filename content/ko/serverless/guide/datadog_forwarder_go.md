@@ -39,8 +39,8 @@ go get github.com/DataDog/datadog-lambda-go
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
 3. Datadog Lamda 라이브러리에서 제공하는 래퍼를 사용해 Lamda 함수 처리기를 래핑합니다.

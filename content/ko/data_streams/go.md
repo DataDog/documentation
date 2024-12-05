@@ -21,7 +21,7 @@ title: Go용 데이터 스트림 모니터링 설정
 
 ```go
 import (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+  ddkafka "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2"
 )
 
 ...
@@ -47,7 +47,7 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2"
 )
 
 ...
