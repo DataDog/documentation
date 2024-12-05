@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: 세분화된 액세스 제어
 ---
 ## 개별 리소스에 대한 액세스 관리

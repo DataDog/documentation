@@ -1,6 +1,5 @@
 ---
 title: RUM iOS Advanced Configuration
-kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -76,6 +75,37 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{< /tabs >}}
 
 For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
+
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
+through the `RUMMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+@_spi(Experimental)
+import DatadogRUM
+
+func onHeroImageLoaded() {
+    let rum = RUMMonitor.shared()
+    rum.addViewLoadingTime(override: false)
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+- (void)onHeroImageLoad {
+    [[DDRUMMonitor shared] addViewLoadingTimeWithOverride:NO | YES];
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Use the `override` option to replace the previously calculated loading time for the current view..
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+Please note that this API is still experimental and might change in the future.
 
 ### Add your own performance timing
 
@@ -244,9 +274,9 @@ The following attributes are **optional**, you should provide **at least one** o
 
 | Attribute   | Type   | Description                                                                                              |
 |-------------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| `usr.id`    | String | Unique user identifier.                                                                                  |
+| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  
 
 To identify user sessions, use the `setUserInfo(id:name:email:)` API.
 
@@ -269,51 +299,99 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
-`site`
-: Sets the Datadog server endpoint that data is sent to.
+`backgroundTasksEnabled`
+: This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`.
 
 `batchSize`
 : Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the RUM iOS SDK (small batches mean more requests, but each request becomes smaller in size). Available values include: `.small`, `.medium`, and `.large`.
 
+`bundle`
+: The bundle object that contains the current executable.
+
+`clientToken`
+: Either the RUM client token (which supports RUM, Logging, and APM) or the regular client token (which supports Logging and APM).
+
+`encryption`
+: Data encryption to use for on-disk data persistency by providing an object that complies with the `DataEncryption` protocol.
+
+`env`
+: The environment name that is sent to Datadog. This can be used to filter events by different environments (such as `staging` or `production`).
+
+`proxyConfiguration`
+: A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
+
+`serverDateProvider`
+: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
+
+`service`
+: The service name associated with data sent to Datadog. The default value is the application bundle identifier.
+
+`site`
+: The Datadog server endpoint that data is sent to. The default value is `.us1`.
+
 `uploadFrequency`
-: Sets the preferred frequency of uploading data to Datadog. Available values include: `.frequent`, `.average`, and `.rare`.
+: The preferred frequency of uploading data to Datadog. Available values include: `.frequent`, `.average`, and `.rare`.
 
 ### RUM configuration
 
 You can use the following properties in `RUM.Configuration` when enabling RUM:
 
-`sessionSampleRate`
-: Sets the sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, `100.0` means all sessions are sent to Datadog. If not configured, the default value of `100.0` is used.
+`actionEventMapper`
+: Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`uiKitViewsPredicate`
-: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
+`appHangThreshold`
+: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][10].
+
+`applicationID`
+: The RUM application identifier.
+
+`customEndpoint`
+: A custom server URL for sending RUM data.
+
+`errorEventMapper`
+: The data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
+`longTaskEventMapper`
+: The data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
+`longTaskThreshold`
+: The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
+
+`onSessionStart`
+: (Optional) The method that gets called when RUM starts the session.
+
+`resourceEventMapper`
+: The data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+
+`sessionSampleRate`
+: The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`.
+
+`telemetrySampleRate`
+: The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
+
+`trackFrustrations`
+: Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
+
+`trackBackgroundEvents`
+: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+
+`trackWatchdogTerminations`
+: Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
 
 `uiKitActionsPredicate`
 : Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMActionsPredicate`](#automatically-track-user-actions) customized for your app.
+
+`uiKitViewsPredicate`
+: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
 
 `urlSessionTracking`
 : Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
 
 `viewEventMapper`
-: Sets the data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`resourceEventMapper`
-: Sets the data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`actionEventMapper`
-: Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`errorEventMapper`
-: Sets the data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
-
-`longTaskEventMapper`
-: Sets the data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
+: The data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `vitalsUpdateFrequency`
-: Sets the preferred frequency of collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (disable vitals monitoring).
-
-`appHangThreshold`
-: Sets the threshold for reporting app hangs. The minimum allowed value for this option is `0.1` seconds. To disable app hangs reporting, set this to `nil`. For more information, see [Add app hang reporting][10].
+: The preferred frequency for collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (which disables vitals monitoring).
 
 ### Automatically track views
 
@@ -436,28 +514,30 @@ To automatically track resources (network requests) and get their timing informa
 ```swift
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[SessionDelegate alloc] init]
+                                                      delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
@@ -482,13 +562,13 @@ RUM.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self
+        delegateClass: <YourSessionDelegate>.self
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```
@@ -537,12 +617,12 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
+URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[DDURLSessionInstrumentation disableWithDelegateClass:[SessionDelegate class]];
+[DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -684,8 +764,6 @@ Depending on the event's type, only some specific properties can be modified:
 
 | Event Type       | Attribute key                     | Description                             |
 |------------------|-----------------------------------|-----------------------------------------|
-| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
-|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
 | RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
 |                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
 | RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
@@ -694,6 +772,20 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.    |
 | RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
 |                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
+| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
+|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```swift
+RumMonitor.shared().currentSessionID(completion: { sessionId in
+  currentSessionId = sessionId
+})
+```
 
 ## Set tracking consent (GDPR compliance)
 
@@ -712,13 +804,71 @@ For example, if the current tracking consent is `.pending`:
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
-## Sending data when device is offline
+## Add user properties
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
 
-This means that even if users open your application while offline, no data is lost.
+```swift
+   public static func addUserExtraInfo(
+       _ extraInfo: [AttributeKey: AttributeValue?],
+       in core: DatadogCoreProtocol = CoreRegistry.default
+   ) {
+       let core = core as? DatadogCore
+       core?.addUserExtraInfo(extraInfo)
+   }
+```
 
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
+## Data management
+
+The iOS SDK first stores events locally and only uploads events when the [intake specifications][11] conditions are met.
+
+### Clear all data
+
+You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+
+```swift
+   public static func clearAllData(in core: DatadogCoreProtocol = CoreRegistry.default) {
+       let core = core as? DatadogCore
+       core?.clearAllData()
+   }
+```
+
+### Stop data collection
+
+You can use the `StopInstance` API to stop a named SDK instance (or the default instance if the name is null) from collecting and uploading data further.
+
+```swift
+   public static func stopInstance(named instanceName: String = CoreRegistry.defaultInstanceName) {
+       let core = CoreRegistry.unregisterInstance(named: instanceName) as? DatadogCore
+       core?.stop()
+   }
+```
+
+### Set remote log threshold
+
+You can define the minimum log level (priority) at which to send events to Datadog in a logger instance. If the log's priority is below the one you set in this threshold, the log does not get sent. The default value is `debug` (send all logs).
+
+```swift
+public init(
+    service: String? = nil,
+    name: String? = nil,
+    networkInfoEnabled: Bool = false,
+    bundleWithRumEnabled: Bool = true,
+    bundleWithTraceEnabled: Bool = true,
+    remoteSampleRate: Float = 100,
+    remoteLogThreshold: LogLevel = .debug,
+    consoleLogFormat: ConsoleLogFormat? = nil
+) {
+    self.service = service
+    self.name = name
+    self.networkInfoEnabled = networkInfoEnabled
+    self.bundleWithRumEnabled = bundleWithRumEnabled
+    self.bundleWithTraceEnabled = bundleWithTraceEnabled
+    self.remoteSampleRate = remoteSampleRate
+    self.remoteLogThreshold = remoteLogThreshold
+    self.consoleLogFormat = consoleLogFormat
+}
+```
 
 ## Further Reading
 
@@ -733,3 +883,6 @@ This means that even if users open your application while offline, no data is lo
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios#
+[12]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
+[13]: https://www.ntppool.org/en/

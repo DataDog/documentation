@@ -3,6 +3,7 @@ app_id: oom-kill
 app_uuid: 7546b270-2efe-4a59-8f94-3447df2db801
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: oom_kill.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10293
     source_type_name: OOM Killer
 author:
   homepage: https://www.datadoghq.com
@@ -20,6 +22,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+- イベント管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_on_public_website: true
@@ -29,7 +33,6 @@ integration_id: oom-kill
 integration_title: OOM Killer
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: oom_kill
 public_title: OOM Killer
@@ -41,6 +44,8 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::OS & System
+  - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: システムまたはcgroupによる OOM killer プロセスの追跡。
   media: []
@@ -49,6 +54,7 @@ tile:
   title: OOM Killer
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -74,10 +80,10 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: OOM Kill チェックが動作するためには カーネルバージョン 4.11 以降が必要です。
+**注**: OOM Kill チェックが動作するためには カーネルバージョン 4.9 以降が必要です。
 また、Windows およびバージョン 8 よりも前の CentOS/RHEL はサポートされません。
 
-### コンフィギュレーション
+### 構成
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `system-probe.yaml` フォルダーで、以下のコンフィギュレーションを追加します。
 
@@ -97,8 +103,8 @@ yum install -y kernel-devel-$(uname -r)
 1. 以下のボリュームを Agent コンテナにマウントします。
 
     ```
-    -v /sys/kernel/debug:/sys/kernel/debug 
-    -v /lib/modules:/lib/modules 
+    -v /sys/kernel/debug:/sys/kernel/debug
+    -v /lib/modules:/lib/modules
     -v /usr/src:/usr/src
     ```
 
@@ -108,7 +114,7 @@ yum install -y kernel-devel-$(uname -r)
     --privileged
     ```
 
-   カーネルバージョン 5.8 からは、`--privileged` パラメーターを `--cap-add CAP_BPF` に置き換えることができます。 
+   カーネルバージョン 5.8 からは、`--privileged` パラメーターを `--cap-add CAP_BPF` に置き換えることができます。
 
 *注**: Docker Swarm では `--privileged` モードはサポートされていません。
 
@@ -143,7 +149,7 @@ spec:
       enabled: true
   override:
     nodeAgent:
-      volumes: 
+      volumes:
       - emptyDir: {}
         name: src
 ```
@@ -158,7 +164,7 @@ spec:
 {{< get-metrics-from-git "oom_kill" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 OOM Killer チェックには、サービスのチェック機能は含まれません。
 
@@ -170,10 +176,10 @@ OOM Killer チェックでは、強制終了されたプロセス ID とプロ�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[4]: https://github.com/DataDog/helm-charts
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
 [7]: https://docs.datadoghq.com/ja/help/

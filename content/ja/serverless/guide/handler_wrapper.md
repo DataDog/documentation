@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Lambda ハンドラーをコードでラップする
 ---
 

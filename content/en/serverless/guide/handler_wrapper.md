@@ -1,6 +1,5 @@
 ---
 title: Wrap Your Lambda Handler in Code
-kind: documentation
 ---
 
 For Python and Node.js Lambda functions, in order to instrument individual invocations, the Datadog Lambda library needs to wrap around your Lambda handler function. This is achieved by setting your function's handler to the Datadog handler function, such as `datadog_lambda.handler.handler`, and setting the environment variable `DD_LAMBDA_HANDLER` with your original handler function to be called by the Datadog handler.

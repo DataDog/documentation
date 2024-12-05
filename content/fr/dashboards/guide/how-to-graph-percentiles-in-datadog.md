@@ -1,6 +1,5 @@
 ---
 title: Représentation des centiles dans Datadog
-kind: guide
 aliases:
   - /fr/graphing/faq/how-to-graph-percentiles-in-datadog
   - /fr/graphing/guide/how-to-graph-percentiles-in-datadog

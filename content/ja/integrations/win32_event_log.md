@@ -1,15 +1,19 @@
 ---
-app_id: win32-event-log
+app_id: event-viewer
 app_uuid: 8a0f4809-8470-4f7c-a7e8-350ba64123aa
 assets:
+  dashboards:
+    windows_event_log_overview: assets/dashboards/windows_event_log_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Win32
+    source_type_id: 47
+    source_type_name: Event Viewer
   logs:
     source: windows.events
 author:
@@ -20,16 +24,16 @@ author:
 categories:
 - os & system
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: win32_event_log
-integration_id: win32-event-log
+integration_id: event-viewer
 integration_title: Windows Event Log
 integration_version: 3.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: win32_event_log
 public_title: Windows Event Log
@@ -42,10 +46,22 @@ tile:
   - Supported OS::Windows
   - Category::OS とシステム
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows のイベントを Datadog イベントストリームへ送信。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/agent/logs/advanced_log_collection/?tab=configurationfile
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-windows-server-2012
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/windows-server-monitoring
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-windows-event-logs-with-datadog/
   support: README.md#Support
   title: Windows Event Log
 ---
@@ -64,21 +80,22 @@ tile:
 
 詳細については、[Windows のイベントログのドキュメント][1]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Windows Event Log チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Windows Event Log の収集方法は、以下のいずれか、または両方があります。
 
 - [Datadog イベント][3]として
 - [Datadog ログ][4]として
 
-どちらの方法も [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `win32_event_log.d/conf.yaml` で構成されます。使用可能なすべての構成オプションの詳細については、[サンプル win32_event_log.d/conf.yaml][6] を参照してください。
+どちらの方法も [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `win32_event_log.d/conf.yaml` で構成されます。使用可能なすべての構成オプションの詳細については、[サンプル win32_event_log.d/conf.yaml][6] を参照してください。Security イベントログを送信するクイックスタートオプションについては、[デフォルトの Security ログの送信](#send-default-security-logs)を参照してください。
 
+このインテグレーションには、アプリ内ですぐに使える [Windows Event Log Overview][7] ダッシュボードも付属しています。
 
 #### Windows Event チャンネルをリストアップ
 
@@ -109,7 +126,7 @@ Get-WinEvent -ListLog * | sort RecordCount -Descending
 応答例
 
 ```text
-LogMode  MaximumSizeInBytes RecordCount LogName 
+LogMode  MaximumSizeInBytes RecordCount LogName
 Circular          134217728      249896 Security
 Circular            5242880        2932 <CHANNEL_2>
 ```
@@ -120,13 +137,13 @@ Circular            5242880        2932 <CHANNEL_2>
 
 Windows Event Viewer で Event Log のチャンネル名を見つけるには、Event Log Properties ウィンドウを開き、`Full Name` フィールドを参照します。次の例では、チャンネル名は `Microsoft-Windows-Windows Defender/Operational` です。
 
-![Windows Event Log][7]
+![Windows Event Log][8]
 
 {{< tabs >}}
 
 {{% tab "ログ" %}}
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -167,12 +184,12 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
   ```yaml
   init_config:
   instances:
-    - # Event Log API 
+    - # Event Log API
       path: Security
       legacy_mode: false
       filters: {}
 
-    - path: "<CHANNEL_2>" 
+    - path: "<CHANNEL_2>"
       legacy_mode: false
       filters: {}
   ```
@@ -222,7 +239,7 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
 
 `<CHANNEL_2>` パラメーターに、イベントを収集したい Windows チャンネル名を入力します。
 
-最後に、[Agent を再起動][8]します。
+最後に、[Agent を再起動][9]します。
 
 **注**: Security ログチャンネルの場合は、Datadog Agent ユーザーを `Event Log Readers` ユーザーグループに追加してください。
 
@@ -249,13 +266,13 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows       
+    service: Windows
     query: '*[System[(Level=1 or Level=2 or Level=3)]]'
 
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows       
+    service: Windows
     query: |
       <QueryList>
         <Query Id="0" Path="Application">
@@ -274,7 +291,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Security
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: include_at_match
       name: relevant_security_events
@@ -283,7 +300,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Security
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: exclude_at_match
       name: relevant_security_events
@@ -292,7 +309,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: System
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: include_at_match
       name: system_errors_and_warnings
@@ -301,7 +318,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows       
+    service: Windows
     log_processing_rules:
     - type: include_at_match
       name: application_errors_and_warnings
@@ -483,7 +500,7 @@ Event Log API を使用する構成オプションには、以下のフィルタ
 {{% /tab %}}
 {{< /tabs >}}
 
-フィルターの設定が終わったら、Agent Manager を使用して [Agent の再起動][8]を行います (またはサービスを再起動します)。
+フィルターの設定が終わったら、Agent Manager を使用して [Agent の再起動][9]を行います (またはサービスを再起動します)。
 
 ### 検証
 
@@ -531,23 +548,51 @@ Checks
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## デフォルトの Security ログの送信
 
-### データセキュリティ
+Agent 7.54 からは、`dd_security_events` フラグを使用して、Security Event を自動的にログとして Datadog に送信できます。これらのログは、[Datadog の Cloud SIEM][10] と共に使用することで、脅威や不審なアクティビティをリアルタイムで自動検出できます。これらのデフォルトセキュリティイベントは、Datadog のすぐに使える Windows 検出ルールと互換性があり、ユーザーが Security ログをクリアしたり、Windows ファイアウォールを無効にしたり、Directory Services Restore Mode (DSRM) のパスワードを変更したりすると、セキュリティシグナルを生成します。
+
+1. `datadog.yaml` ファイルで[ログの収集を有効にします][11]。Datadog Agent ではデフォルトで無効になっています。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. インテグレーションコンフィギュレーションファイル (`win32_event_log.d/conf.yaml`) で、`dd_security_events` フラグを `low` または `high` に設定して、Datadog に Security Event の送信を開始します。
+
+   ```yaml
+   init_config:
+     legacy_mode: false
+   instances:
+     - dd_security_events: high
+   ```
+
+   - `low`: 監査ログのクリア (1102)、リプレイ攻撃の検出 (4649)、システム監査ポリシーの変更 (4719) など、最も重要でクリティカルな Security イベントのみを送信します。`low` 設定で収集されるイベントの完全なリストについては、[こちら][12]を参照してください。
+   - `high`: 暗号化データ回復ポリシーの変更 (4714)、ドメインポリシーの変更 (4739)、セキュリティ無効グループの削除 (4764) などの大量の Security イベントを送信します。`high` 設定で収集されるイベントの完全なリストについては、[こちら][13]を参照してください。
+
+チームはこれらのプロファイルを編集することで、どのイベント ID が `low` または `high` 設定に関連付けられるかを変更できます。
+
+
+3. [Agent を再起動します][9]。
+
+
+## 収集データ
+
+### メトリクス
 
 Windows Event Log チェックには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 すべての Windows イベントが Datadog に転送されます。
 
-### ヘルプ
+### サービスチェック
 
 Windows Event Log チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ヘルプが必要ですか？[Datadog サポート][9]に [Agent Flare][10] でお問い合わせください。
+ヘルプが必要ですか？[Datadog サポート][14]に [Agent Flare][15] でお問い合わせください。
 
 ### ログ処理ルールが機能しない
 
@@ -557,7 +602,7 @@ Windows Event Log チェックには、サービスのチェック機能は含�
     - type: windows_event
       channel_path: System
       source: windows.events
-      service: Windows       
+      service: Windows
       log_processing_rules:
       - type: include_at_match
         name: system_errors_and_warnings
@@ -573,11 +618,11 @@ Windows Event Log チェックには、サービスのチェック機能は含�
 
 お役に立つドキュメント、リンクや記事:
 
-- [高度なログの収集][11]
-- [Windows Server 2012 の監視][12]
-- [Windows Server 2012 メトリクスの収集方法][13]
-- [Datadog を使用した Windows Server 2012 の監視][14]
-- [Datadog を使用した Windows イベントログの監視][15]
+- [高度なログの収集][16]
+- [Windows Server 2012 の監視][17]
+- [Windows Server 2012 メトリクスの収集方法][18]
+- [Datadog を使用した Windows Server 2012 の監視][19]
+- [Datadog を使用した Windows イベントログの監視][20]
 
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging
@@ -586,12 +631,17 @@ Windows Event Log チェックには、サービスのチェック機能は含�
 [4]: https://docs.datadoghq.com/ja/logs/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example
-[7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/windows-defender-operational-event-log-properties.png
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[11]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile
-[12]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
-[13]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
-[14]: https://www.datadoghq.com/blog/windows-server-monitoring
-[15]: https://www.datadoghq.com/blog/monitor-windows-event-logs-with-datadog/
+[7]: https://app.datadoghq.com/integrations?integrationId=event-viewer
+[8]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/windows-defender-operational-event-log-properties.png
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/security/cloud_siem/
+[11]: https://docs.datadoghq.com/ja/agent/logs/#activate-log-collection
+[12]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/win32_event_log.d/profiles/dd_security_events_low.yaml.example
+[13]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/win32_event_log.d/profiles/dd_security_events_high.yaml.example
+[14]: https://docs.datadoghq.com/ja/help/
+[15]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[16]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile
+[17]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
+[18]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
+[19]: https://www.datadoghq.com/blog/windows-server-monitoring
+[20]: https://www.datadoghq.com/blog/monitor-windows-event-logs-with-datadog/

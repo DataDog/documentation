@@ -23,8 +23,19 @@ further_reading:
 - link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
   tag: 블로그
   text: 클라우드 환경에 대한 충분한 보안 커버리지 구축
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
+- link: https://www.datadoghq.com/blog/akamai-zero-trust-application-security/
+  tag: 블로그
+  text: Datadog Cloud SIEM으로 Akamal Zero Trust와 Application Security 모니터링
 title: Cloud SIEM
 ---
+
+{{< learning-center-callout header="활성화 웨비나 세션 참가" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
+  Datadog Cloud SIEM과 Cloud Security Management를 사용해 역동적인 클라우드 스케일 환경에서 조직에 위협이 되는 요소를 감지하고 조사 방법을 배우세요.
+{{< /learning-center-callout >}}
+
 ## 개요
 
 Datadog Cloud SIEM(보안 정보 및 이벤트 관리)은 개발자, 운영 및 보안 팀을 하나의 플랫폼을 통해 통합합니다. 단일 대시보드를 사용하여 DevOps 콘텐츠, 비즈니스 메트릭 및 보안 콘텐츠를 표시합니다. 표적 공격, 시스템과 통신하는 위협 정보 목록 IP 또는 안전하지 않은 설정과 같은 위협을 실시간으로 애플리케이션 및 인프라스트럭처에서 탐지하고 이메일, Slack, Jira, PagerDuty 또는 웹훅을 통해 팀에 알립니다.

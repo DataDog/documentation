@@ -1,6 +1,5 @@
 ---
 title: Notes and Links Widget
-kind: documentation
 widget_type: note
 description: "Display text in a dashboard widget."
 aliases:

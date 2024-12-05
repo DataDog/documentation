@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Agent
-kind: guía
 title: Comandos del Agent
 ---
 

@@ -10,15 +10,18 @@ further_reading:
 - link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임을 예약하여 모니터 음소거
-- link: /monitors/manage/status/
+- link: /모니터/상태/
   tag: 설명서
   text: 모니터 상태 점검
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
   tag: 블로그
   text: Datadog으로 AWS Fargate에서 실행 중인 프로세스 모니터링
-kind: 설명서
 title: 실시간 프로세스 모니터
 ---
+
+<div class="alert alert-warning">
+실시간 프로세스 및 Live 프로세스 모니터링은 Enterprise 요금제에 포함되어 있습니다. 다른 모든 요금제의 경우 계정 담당자 또는 <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>에 문의하여 이 기능을 요청하세요.
+</div>
 
 ## 개요
 
@@ -63,13 +66,13 @@ title: 실시간 프로세스 모니터
 | `foo OR bar` | 명령어 라인에 `foo` 또는 `bar`이 포함된 모든 프로세스와 일치함 |
 | `foo or NOT bar` | `foo`을 포함하거나 `bar`을 포함하지 않는 모든 프로세스와 일치함, |
 
-#### 경고 그룹화
+#### 알림 그룹화
 
 `Simple Alert` (기본값): 모든 보고 출처에 대한 알림을 집계합니다. 집계한 값이 설정한 값을 충족하면 하나의 알림을 받게 됩니다.
 
 `Multi Alert`: 그룹 파라미터에 따라 각 출처에 알림을 적용합니다. 설정한 조건을 충족하는 각 그룹에 대해 알림을 받습니다.
 
-### 알림 조건 설정
+### 경고 조건 설정
 
 - 프로세스 개수는 `above`, `above or equal to`, `below`, 또는 `below or equal to`였습니다.
 - `5 minutes`, `15 minutes`, `1 hour` 전 또는 그 이전의 임계값입니다. 또한 `custom`을 사용하여 5분 ~ 24시간 사이의 값을 설정할 수도 있습니다.
@@ -95,7 +98,7 @@ title: 실시간 프로세스 모니터
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/infrastructure/process/
-[2]: https://app.datadoghq.com/monitors#create/live_process
+[2]: https://app.datadoghq.com/monitors/create/live_process
 [3]: /ko/infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
 [5]: /ko/monitors/configuration/#advanced-alert-conditions

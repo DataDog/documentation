@@ -1,24 +1,28 @@
 ---
 title: Cloud Security Management Agentless Scanning
 aliases:
- - /security/agentless_scanning
+  - /security/agentless_scanning
 further_reading:
-- link: "/security/cloud_security_management/setup/agentless_scanning"
-  tag: "Documentation"
-  text: "Setting up Agentless Scanning"
-- link: "https://www.datadoghq.com/blog/agentless-scanning/"
-  tag: "Blog"
-  text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
-- link: "/security/vulnerabilities"
-  tag: "Documentation"
-  text: "Read more about CSM Vulnerabilities"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
+    tag: "Documentation"
+    text: "Agentless Scanning Quick Start for Cloud Security Management"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/terraform"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning using Terraform"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/cloudformation"
+    tag: "Documentation"
+    text: "Setting up Agentless Scanning with the AWS Integration"
+  - link: "https://www.datadoghq.com/blog/agentless-scanning/"
+    tag: "Blog"
+    text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
+  - link: "/security/vulnerabilities"
+    tag: "Documentation"
+    text: "Read more about CSM Vulnerabilities"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 ## Overview
 
@@ -53,7 +57,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 2. For Lambda functions, the scanners fetch the function's code.
 3. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
-4. After the scan is complete, only the list of packages is transmitted to Datadog, while all other data remains within your infrastructure. Snapshots created during the scan cycle are deleted.
+4. After the scan is complete, the list of packages and information related to collected hosts (hostnames/EC2 instances) are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
 5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
@@ -72,7 +76,7 @@ Datadog does **not** send:
 
 ## Security considerations
 
-Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
+Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users.
 
 To further mitigate this risk, Datadog implements the following security measures:
 
@@ -95,9 +99,21 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 {{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
 
+## Cloud Storage scanning
+
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< /callout >}}
+
+If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
+
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking. 
+When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking.
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
 
@@ -105,10 +121,14 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless_scanning/quick_start
 [2]: /agent/remote_config/?tab=configurationyamlfile
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_scanning/#permissions
+[4]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
-[6]: /security/cloud_security_management/setup/agentless_scanning#terraform
+[6]: /security/cloud_security_management/setup/agentless_scanning/terraform
 [7]: mailto:success@datadoghq.com
+[8]: /sensitive_data_scanner
+[9]: /security/cloud_security_management
+[10]: /agent/remote_config
+[11]: /sensitive_data_scanner/library_rules/

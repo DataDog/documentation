@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: 경고 그래프 위젯
 widget_type: alert_graph
 ---
@@ -15,7 +14,7 @@ widget_type: alert_graph
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="경고 그래프" >}}
 
-메트릭, 이상 징후, 아웃라이어, 예측, APM, 통합 모니터와 같은 쿼리 알림 모니터에서 지원됩니다.
+이 위젯은 메트릭, 이상치, 아웃라이어, 예측, APM, 통합과 같은 기본 예약된 쿼리 경고 모니터에서 지원됩니다.
 
 ## 설정
 
@@ -29,7 +28,7 @@ widget_type: alert_graph
 
 ## API
 
-이 위젯을 **[대시보드 API][1]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][2]와 관해서는 다음 테이블을 참고하세요.
+이 위젯을 **[대시보드 API][1]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][2]에 관해서는 다음 테이블을 참고하세요.
 
 {{< dashboards-widgets-api >}}
 

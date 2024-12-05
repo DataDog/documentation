@@ -2,7 +2,8 @@
 categories:
 - azure
 - クラウド
-- data store
+- data stores
+custom_kind: integration
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/
@@ -17,7 +18,6 @@ integration_id: azure-cosmosdb
 integration_title: Microsoft Azure Cosmos DB
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_cosmosdb
 public_title: Datadog-Microsoft Azure Cosmos DB インテグレーション
@@ -25,6 +25,7 @@ short_description: Azure Cosmos DB のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Cosmos DB は、ドキュメント、キー/値、ワイドカラム、グラフデータベースなどをサポートするグローバル分散型マルチモデルデータベースサービスです。
@@ -47,7 +48,7 @@ Datadog Azure インテグレーションを使用して、Cosmos DB からメ�
 
 Azure Cosmos DB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Cosmos DB インテグレーションには、サービスのチェック機能は含まれません。
 

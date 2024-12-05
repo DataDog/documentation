@@ -1,6 +1,5 @@
 ---
 title: Anomaly Monitor
-kind: documentation
 aliases:
     - /guides/anomalies
     - /monitors/monitor_types/anomaly
@@ -13,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "dashboards/functions/algorithms/#anomalies"
@@ -47,7 +46,7 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 
 ### Set alert conditions
 
-Trigger an alert if the values have been `above or below`, `above`, or `below` the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours. Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours.
+Trigger an alert if the values have been `above or below`, `above`, or `below` the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 2 weeks. Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 2 weeks.
 
 Anomaly detection
 : With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
@@ -249,7 +248,7 @@ A standard configuration of thresholds and threshold window looks like:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/anomaly
+[1]: https://app.datadoghq.com/monitors/create/anomaly
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -260,7 +259,7 @@ A standard configuration of thresholds and threshold window looks like:
 [9]: /monitors/types/metric/#data-window
 [10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
-[12]: /monitors/manage/status/#settings
+[12]: /monitors/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
 [15]: /monitors/guide/anomaly-monitor/

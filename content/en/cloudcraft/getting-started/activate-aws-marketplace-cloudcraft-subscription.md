@@ -1,6 +1,5 @@
 ---
 title: Activate your AWS Marketplace Cloudcraft subscription
-kind: documentation
 ---
 
 ## Overview

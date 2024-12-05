@@ -12,7 +12,6 @@ further_reading:
 - link: /developers/integrations/
   tag: 설명서
   text: 에이전트 기반 통합에 대한 소개
-kind: 설명서
 title: 커스텀 OpenMetrics 검사
 ---
 

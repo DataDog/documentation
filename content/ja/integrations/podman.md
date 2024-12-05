@@ -18,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/podman/README.md
 display_on_public_website: true
@@ -27,7 +28,6 @@ integration_id: podman
 integration_title: Podman
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: podman
 public_title: Podman
@@ -39,6 +39,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Podman コンテナのすべてのメトリクスを Datadog で追跡
   media: []
@@ -59,19 +60,19 @@ Podman コンテナランタイムは、[コンテナ Agent チェック][2]で�
 
 **注**: `container` チェックレポートは、コンテナランタイムに関係なく、システム上で見つかったすべてのコンテナのメトリクスを標準化します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Podman][1] で管理されているコンテナを監視するには、[コンテナ Agent チェック][2]の[インストール手順][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][4] を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 

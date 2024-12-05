@@ -6,6 +6,7 @@ categories:
 - ネットワーク
 - トレーシング
 creates_events: false
+custom_kind: インテグレーション
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
 display_name: AWS App Mesh
@@ -20,7 +21,6 @@ integration_id: amazon-app-mesh
 integration_title: AWS App Mesh
 integration_version: ''
 is_public: true
-kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: envoy.
@@ -38,10 +38,10 @@ supported_os:
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-[AWS App Mesh][1] は、Amazon ECS Fargate クラスターや AWS EKS クラスターで実行するマイクロサービスにアプリケーションレベルのネットワーキングを提供するサービスメッシュです。
+[AWS App Mesh][1] は、Amazon ECS Fargate または Amazon EKS クラスター上で稼働するマイクロサービスに対して、アプリケーションレベルのネットワーキングを提供するサービスメッシュです。
 
 
-## 計画と使用
+## セットアップ
 
 {{< tabs >}}
 {{% tab "EKS" %}}
@@ -112,15 +112,15 @@ supported_os:
 
 namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) をデプロイします。オプションでこれを使用し、以下のように appmesh-injector をデプロイします。
 
-    ```shell
-      helm upgrade -i appmesh-controller eks/appmesh-controller \
-      --namespace appmesh-system \
-      --set sidecar.logLevel=debug \
-      --set tracing.enabled=true \
-      --set tracing.provider=datadog \
-      --set tracing.address=ref:status.hostIP \
-      --set tracing.port=8126
-    ```
+```shell
+  helm upgrade -i appmesh-controller eks/appmesh-controller \
+  --namespace appmesh-system \
+  --set sidecar.logLevel=debug \
+  --set tracing.enabled=true \
+  --set tracing.provider=datadog \
+  --set tracing.address=ref:status.hostIP \
+  --set tracing.port=8126
+```
 
 
 または、[EKS を使用した App Mesh][2] ドキュメントの説明に従って、オプションの `enable-datadog-tracing=true` や環境変数の `ENABLE_DATADOG_TRACING=true` を使用して appmesh インジェクターをデプロイすることもできます。
@@ -223,21 +223,21 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 メトリクス一覧については、[Envoy インテグレーション][2]をご参照ください。
 
-### ヘルプ
+### イベント
 
 AWS  App Mesh インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

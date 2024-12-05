@@ -1,17 +1,17 @@
 ---
-title: コンテナマップ
-kind: documentation
 aliases:
-  - /ja/graphing/infrastructure/containermap/
-  - /ja/guides/hostmap
+- /ja/graphing/infrastructure/containermap/
+- /ja/guides/hostmap
 further_reading:
-  - link: /infrastructure/livecontainers/
-    tag: グラフ
-    text: 環境内のすべてのコンテナのリアルタイム表示
-  - link: /infrastructure/process/
-    tag: グラフ
-    text: システムのあらゆるレベルの事象の把握
+- link: /infrastructure/livecontainers/
+  tag: ドキュメント
+  text: 環境内のすべてのコンテナのリアルタイム表示
+- link: /infrastructure/process/
+  tag: ドキュメント
+  text: システムのあらゆるレベルの事象の把握
+title: コンテナマップ
 ---
+
 ## 概要
 
 [ホストマップ][1]と同様に、[コンテナマップ][2]は、コンテナの健全性に関する全体像を提供します。Datadog は、ECS、Docker、Kubernetes などと統合されています。グループ化とフィルターをカスタマイズして使用し、1 つの画面にすべてのコンテナをまとめて表示できます。さらに、メトリクスを一目で理解できるように色や図形を設定できます。

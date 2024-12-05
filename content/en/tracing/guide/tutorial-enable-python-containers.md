@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: "Documentation"

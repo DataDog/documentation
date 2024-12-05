@@ -1,6 +1,5 @@
 ---
 title: Notifications
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/monitors/notify/"

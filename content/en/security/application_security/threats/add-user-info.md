@@ -29,12 +29,12 @@ The custom user activity for which out-of-the-box detection rules are available 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
-| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]               |
+| `users.login.failure`  | User ID and `usr.exists` are mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]  |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP][10]                                                                                                        |
+| `payment.failure`      | None                                                 | [Excessive payment failures from IP][10]                                                                                                        |
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
@@ -312,9 +312,9 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // this is where you get User based on userId/password credentials
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
@@ -337,15 +337,19 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // this is where you get User based on userId/password credentials
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         // if function returns null - user doesn't exist
         boolean userExists = (user != null);
+        String userId = null;
         Map<String, String> metadata = new HashMap<>();
         if (userExists != null) {
+            userId = getUserId(userName)
             metadata.put("email", user.getEmail());
+        } else {
+            userId = user.getEmail();
         }
 
         // track user authentication error events
@@ -417,6 +421,7 @@ using Datadog.Trace.AppSec;
 
 void OnLogonFailure(string userId, bool userExists, ...)
 {
+    // If no userId can be provided, any unique user identifier (username, email...) may be used
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
@@ -466,7 +471,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
   userdata := /* optional extra user data */
 
-  // Track login success
+  // Track login success, replace `my-uid` by a unique identifier of the user (such as numeric, username, and email)
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
     // The given user id is blocked and the handler should be aborted asap.
     // The blocking response will be sent by the appsec middleware.
@@ -482,6 +487,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
   metadata := /* optional extra event metadata */ 
+  // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```
@@ -517,6 +523,7 @@ Traces containing login success/failure events can be queried using the followin
 require 'datadog/kit/appsec/events'
 
 trace = Datadog::Tracing.active_trace
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' })
 ```
 {{% /tab %}}
@@ -526,10 +533,12 @@ Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id'
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# if the user id exists
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+
+# if the user exists
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
 
-# if the user id doesn't exist
+# if the user doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
 ```
 {{% /tab %}}
@@ -564,6 +573,8 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Login failure" %}}
 ```php
 <?php
+// If no numeric userId is available, you may use any unique string as userId instead (username, email...)
+// Make sure that the value is unique per user (and not per attacker/IP)
 \datadog\appsec\track_user_login_failure_event($id, $exists, ['email' => $email])
 ?>
 ```
@@ -582,7 +593,7 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the NodeJS tracer's API to track user events.
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -593,7 +604,7 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory
+  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
   email: 'user@email.com' // other fields are optional
 }
 const metadata = { custom: 'value' } // optional metadata with arbitrary fields
@@ -608,7 +619,7 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 const tracer = require('dd-trace')
 
 // in a controller:
-const userId = 'user-id'
+const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
 const userExists = true // if the user login exists in database for example
 const metadata = { custom: 'value' } // optional metadata with arbitrary fields
 
@@ -661,6 +672,7 @@ from ddtrace import tracer
 metadata = {"custom": "customvalue"}
 # exists indicates if the failed login user exists in the system
 exists = False
+# if no numeric userId is available, any unique identifier will do (username, email...)
 track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
 {{% /tab %}}
@@ -670,7 +682,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
-metadata = {"usr.id": "12345"}
+metadata = {"usr.id": "userid"}
 event_name = "users.signup"
 track_custom_event(tracer, event_name, metadata)
 ```
@@ -684,7 +696,7 @@ track_custom_event(tracer, event_name, metadata)
 
 ### Tracking business logic information without modifying the code
 
-If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+If your service has ASM enabled and [Remote Configuration][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
 
 To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
 
@@ -702,7 +714,7 @@ Once saved, the rule is deployed to instances of the service that have Remote Co
 
 ## Automatic user activity event tracking
 
-When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+When ASM is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
 
 The events that can be automatically detected are:
 
@@ -710,21 +722,52 @@ The events that can be automatically detected are:
 - `users.login.failure`
 - `users.signup`
 
-### Automatic user activity event tracking mode
+### Automatic user activity event tracking modes
 
-Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+Automatic user activity tracking offers the following modes:
 
-In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `identification` mode (short name: `ident`): 
+  - This mode is the default and always collects the user ID or best effort.
+  - The user ID is collected on login success and login failure. With failure, the user ID is collected regardless of whether the user exists or not.
+  - When the instrumented framework doesn’t clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
+    - `id`
+    - `email`
+    - `username`
+    - `login`
+    - `user`
+  - If no user ID is available or found, the user event is not emitted.
+- `anonymization` mode (short name: `anon`):
+  - This mode is the same as `identification`, but anonymizes the user ID by hashing (SHA256) it and cropping the resulting hash.
+- `disabled` mode:
+  - ASM libraries do *not* collect any user ID from their automated instrumentations. 
+  - User login events are not emitted.
 
-In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
 
-To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+### Manual configuration
 
-**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident`|`anon`|`disabled`.
 
-## Disabling automatic user activity event tracking
+The default mode is `identification` mode (short name: `ident`).
 
-If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+For example, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
+
+### Deprecated modes
+
+<div class="alert alert-info">Previous modes are deprecated, but compatibility will be maintained until the next major release.</div>
+
+The following modes are deprecated:
+
+- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `extended` mode: The trace library tries to collect the user ID, and the user email. In this mode, Datadog does not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+## Disabling user activity event tracking 
+
+To disable automated user activity detection through your [ASM service catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
+
+For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
 ## Further Reading
 
@@ -739,3 +782,7 @@ If you wish to disable the detection of these events, you should set the environ
 [9]: /security/default_rules/bl-password-reset/
 [10]: /security/default_rules/bl-payment-failures/
 [11]: https://guid.one/guid
+[12]: /security/default_rules/appsec-ato-bf/
+[13]: /security/default_rules/distributed-ato-ua-asn/
+[14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
+[15]: /agent/remote_config/

@@ -11,7 +11,7 @@ has_logo: true
 integration_id: uwsgi
 integration_title: uWSGI
 is_public: true
-kind: 통합
+custom_kind: 통합
 name: uwsgi
 public_title: Datadog-uWSGI 통합
 short_description: 초, 제공된 바이트, 요청 상태 등에 따라 요청을 추적하려면 로그를 수집하세요.

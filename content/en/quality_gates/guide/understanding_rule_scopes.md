@@ -1,6 +1,6 @@
 ---
 title: Understanding How Rule Scopes Work in Quality Gates
-kind: guide
+
 description: Learn how to configure rule scopes for Quality Gate rules.
 further_reading:
   - link: "/quality_gates/setup"

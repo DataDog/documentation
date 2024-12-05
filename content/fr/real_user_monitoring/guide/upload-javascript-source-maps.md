@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualiser vos données de suivi des erreurs dans l'Explorateur
-kind: guide
+
 title: Importer des source maps JavaScript
 ---
 

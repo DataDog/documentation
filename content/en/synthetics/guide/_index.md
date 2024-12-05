@@ -1,6 +1,6 @@
 ---
 title: Synthetic Monitoring Guides
-kind: guide
+
 aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true

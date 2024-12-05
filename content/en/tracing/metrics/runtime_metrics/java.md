@@ -1,6 +1,5 @@
 ---
 title: Java Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your Java application's performance with the runtime metrics associated to your traces."
 code_lang: java
 type: multi-code-lang

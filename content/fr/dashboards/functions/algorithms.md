@@ -5,7 +5,6 @@ algolia:
   - graphique des anomalies
 aliases:
 - /fr/graphing/functions/algorithms/
-kind: documentation
 title: Algorithmes
 ---
 

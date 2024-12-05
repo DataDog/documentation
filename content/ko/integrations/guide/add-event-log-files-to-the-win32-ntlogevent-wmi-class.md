@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
-kind: 가이드
 title: Win32_NTLogEvent WMI 클래스에 이벤트 로그 파일 추가
 ---
 

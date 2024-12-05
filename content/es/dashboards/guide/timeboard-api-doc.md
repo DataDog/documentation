@@ -2,7 +2,6 @@
 aliases:
 - /es/graphing/faq/timeboard-api-doc
 - /es/graphing/guide/timeboard-api-doc
-kind: guía
 title: API de timeboard
 ---
 

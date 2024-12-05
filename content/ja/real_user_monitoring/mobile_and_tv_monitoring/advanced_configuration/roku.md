@@ -5,12 +5,11 @@ code_lang: roku
 code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku ソースコード
+  tag: ソースコード
+  text: dd-sdk-roku のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
-kind: ドキュメント
 title: RUM Roku の高度な構成
 type: multi-code-lang
 ---

@@ -9,7 +9,7 @@ further_reading:
   text: Fonctionnement d'Application Security Management
 - link: /security/application_security/threats/
   tag: Documentation
-  text: Métriques
+  text: Gestion des menaces
 - link: /security/application_security/software_composition_analysis/
   tag: Documentation
   text: Analyse de la composition dʼun logiciel
@@ -41,6 +41,9 @@ further_reading:
   tag: Blog
   text: Modélisation des menaces avec la solution Application Security Management
     de Datadog
+- link: https://www.datadoghq.com/blog/aws-waf-datadog/
+  tag: Blog
+  text: Surveiller les applications WAF AWS avec Datadog
 title: Application Security Management
 ---
 
@@ -72,7 +75,7 @@ Grâce à ses [règles prêtes à l'emploi][4], ASM détecte les menaces sans la
 
 Pour configurer votre environnement afin de détecter et de neutraliser les menaces avec ASM, consultez la [documentation relative à l'activation de la solution][5]. Une fois ASM configuré, vous pouvez commencer à étudier et à résoudre les problèmes liés aux signaux de sécurité depuis la vue [Security Signals Explorer][6].
 
-## Étudier des signaux de sécurité et résoudre les problèmes associés
+## Étudier les signaux de sécurité et résoudre les problèmes associés
 
 Dans la vue [Security Signals Explorer][6], cliquez sur un signal de sécurité afin de consulter l'événement associé ainsi que les étapes d'atténuation suggérées. Depuis ce volet, vous pouvez également visualiser des traces et le flux d'attaques associé, et obtenir des informations de contexte supplémentaires.
 

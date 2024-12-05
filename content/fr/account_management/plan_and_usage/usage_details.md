@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/account_management/billing/usage_details/
-kind: documentation
 title: Utilisation détaillée
 ---
 

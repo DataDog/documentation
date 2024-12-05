@@ -1,6 +1,5 @@
 ---
 title: How does Cloudcraft connect to my Azure account?
-kind: faq
 ---
 
 Cloudcraft connects to your Azure account using the IAM role created in your Azure subscription. This role allows Cloudcraft to communicate with Microsoft's public API and query the metadata that describes your infrastructure. The discovery process is read-only and does not require opening up your network or connecting directly to your infrastructure.

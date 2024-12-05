@@ -1,6 +1,5 @@
 ---
 title: Manage Your Team
-kind: documentation
 ---
 
 Make architecture reviews a team effort, share your real-time cloud infrastructure views, or collaboratively design your next project with the help of Cloudcraft teams.

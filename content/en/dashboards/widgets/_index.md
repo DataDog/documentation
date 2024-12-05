@@ -1,6 +1,5 @@
 ---
 title: Widgets
-kind: documentation
 aliases:
     - /graphing/dashboards/widgets
     - /graphing/faq/widgets
@@ -9,6 +8,9 @@ further_reading:
     - link: '/dashboards/guide/context-links/'
       tag: 'Documentation'
       text: 'Custom Links'
+    - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
+      tag: "blog"
+      text: "Transform and enrich your logs with Datadog Observability Pipelines"
 
 ---
 
@@ -32,6 +34,7 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Query Value{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
         img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Scatter Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
@@ -42,6 +45,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/timeseries_light_large.png">}} Timeseries{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} Wildcard{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups

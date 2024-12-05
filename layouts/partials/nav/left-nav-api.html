@@ -20,7 +20,7 @@
 <!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
 {{ $currentEnURL := $currentPage.RelPermalink }}
 {{ if ne $currentPage.Lang "en" }}
-    {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
+    {{ $currentEnURL = (strings.Replace $currentPage.RelPermalink (printf "/%s" .Lang) "") }}
 {{ end }}
 
 

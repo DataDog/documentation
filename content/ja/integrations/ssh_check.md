@@ -3,6 +3,7 @@ app_id: ssh
 app_uuid: 66833cbe-1bfc-4104-9d77-7b828219470b
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
     - 'sshd:'
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 90
     source_type_name: SSH
 author:
   homepage: https://www.datadoghq.com
@@ -27,6 +29,7 @@ author:
 categories:
 - developer tools
 - network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
 display_on_public_website: true
@@ -34,9 +37,8 @@ draft: false
 git_integration_title: ssh_check
 integration_id: ssh
 integration_title: SSH
-integration_version: 2.7.0
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ssh_check
 public_title: SSH
@@ -53,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: SSH 接続と SFTP レイテンシーを監視。
   media: []
@@ -61,6 +64,7 @@ tile:
   title: SSH
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -73,14 +77,14 @@ tile:
 
 SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `ssh_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ssh_check.d/conf.yaml][2] を参照してください。
 
@@ -104,7 +108,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 [2]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -112,9 +116,9 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 
 | パラメーター            | 値                                                        |
 | -------------------- | ------------------------------------------------------------ |
-| `<インテグレーション名>` | `ssh_check`                                                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
+| `<INTEGRATION_NAME>` | `ssh_check`                                                  |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -134,7 +138,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 
 SSH チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "ssh_check" >}}
 
 

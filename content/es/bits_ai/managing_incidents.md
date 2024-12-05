@@ -12,7 +12,6 @@ further_reading:
 - link: bits_ai/query_examples
   tag: Documentación
   text: Ejemplos de consultas en lenguaje natural
-kind: guía
 title: Gestión de incidencias
 ---
 
@@ -90,7 +89,7 @@ Si una incidencia ya tiene un análisis retrospectivo vinculado, puedes desvincu
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://app.datadoghq.com/incidents/settings#Postmortems

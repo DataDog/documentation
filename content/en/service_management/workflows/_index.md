@@ -1,6 +1,5 @@
 ---
 title: Workflow Automation
-kind: documentation
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
@@ -19,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-workflow-automation/"
   tag: "Blog"
   text: "Quickly remediate issues in your Azure applications with Datadog Workflow Automation"
+- link: "https://learn.datadoghq.com/courses/automated-workflows"
+  tag: "Learning Center"
+  text: "Remediate Issues with Workflow Automation"
 ---
 
 {{< site-region region="gov" >}}

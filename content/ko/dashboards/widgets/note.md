@@ -6,13 +6,15 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드를 구축하는 방법 알아보기
-kind: 설명서
 title: 메모 및 링크 위젯
+widget_type: 메모
 ---
 
-**메모 및 링크** 위젯은 [자유 텍스트 위젯][1]과 비슷하지만 더 많은 서식 및 표시 옵션이 포함되어 있습니다.
+**메모 및 링크** 위젯은 [자유 텍스트 위젯][1]과 비슷하지만 서식 및 디스플레이 옵션이 더 많이 포함되어 있습니다.
 
-## 구성
+**참고**: 메모 및 링크 위젯은 인라인 HTML을 지원하지 않습니다.
+
+## 설정
 
 1. 표시할 텍스트를 입력합니다. 마크다운이 지원됩니다.
 2. 프리셋 템플릿을 선택하거나 표시 옵션을 맞춤 설정합니다.
@@ -32,16 +34,15 @@ title: 메모 및 링크 위젯
 
 ## API
 
-이 위젯은 **Dashboards API**와 함께 사용할 수 있습니다. 자세한 내용은 [대시보드 API 가이드][2]를 참조하세요.
+이 위젯은 **[대시보드 API][2]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][3]에 대한 다음 표를 참조하세요.
 
-메모 위젯 전용 [위젯 JSON 스키마 정의][3]는 다음과 같습니다.
 
 {{< dashboards-widgets-api >}}
 
-
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/dashboards/widgets/free_text/
-[2]: /ko/api/v1/dashboards/
+[2]: /ko/api/latest/dashboards/
 [3]: /ko/dashboards/graphing_json/widget_json/

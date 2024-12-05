@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/sharing/
   tag: Documentation
   text: Graphiques partagés
-kind: guide
 title: Graphiques intégrés avec variables de modèle
 ---
 

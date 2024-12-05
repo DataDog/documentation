@@ -1,32 +1,77 @@
 ---
+app_id: azure-vm
+app_uuid: 2bcae6e7-13df-45c2-8085-ae9fc5ba0b09
+assets:
+  dashboards:
+    azure_vm: assets/dashboards/azure_vm.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - azure.vm.percentage_cpu
+      - azure.vm.processor_total_pct_user_time
+      metadata_path: metadata.csv
+      prefix: azure.vm
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 139
+    source_type_name: Azure VM
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - configuration & deployment
 - os & system
+custom_kind: インテグレーション
 dependencies: []
-description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_vm/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/
-  tag: ブログ
-  text: Datadog で Conviva を監視する
 git_integration_title: azure_vm
-has_logo: true
 integration_id: azure-vm
-integration_title: Microsoft Azure VM
+integration_title: Azure VM
 integration_version: ''
 is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_vm
-public_title: Datadog-Microsoft Azure VM インテグレーション
-short_description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
-version: '1.0'
+public_title: Azure VM
+short_description: Microsoft Azure VM は、Linux と Windows の仮想マシンを数分で作成できるサービスです
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::クラウド
+  - Category::構成 & デプロイ
+  - Category::OS とシステム
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Microsoft Azure VM は、Linux と Windows の仮想マシンを数分で作成できるサービスです
+  media:
+  - caption: Azure VM 概要ダッシュボード
+    image_url: images/1_azure_vm_overview_dashboard.png
+    media_type: image
+  - caption: Azure VM ヘルスモニターテンプレート
+    image_url: images/2_azure_vm_health_monitor_template.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/integrations/azure
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-azure-arm-vms-datadog
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/dash-2024-new-feature-roundup-infrastructure
+  support: README.md#Support
+  title: Azure VM
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure 仮想マシンでは、オンデマンドでスケーリングできる仮想化環境を柔軟に実行できます。
@@ -36,9 +81,9 @@ Azure VM からメトリクスを取得すると、以下のことができま�
 - VM のパフォーマンスを視覚化。
 - VM のパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -58,25 +103,25 @@ Azure VM がシャットダウンまたは停止したモニターをミュー�
 
 **注:** Datadog Agent を実行している場合、Azure VM の `host` タグは GUID です。目で見てわかりやすい名前も含めるには、通知の返信にメッセージのテンプレート変数 `{{host.name_tag}}` を使用します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 <div class="alert alert-warning"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化されました。
 
 ご不明な点は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までお問い合わせください。</div>
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_vm" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Virtual Machine インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Virtual Machine インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

@@ -6,7 +6,6 @@ aliases:
 code_lang: java
 code_lang_weight: 0
 description: Java のための OpenTracing インスツルメンテーション
-kind: ドキュメント
 title: Java OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---
@@ -15,7 +14,7 @@ type: multi-code-lang
 
 Datadog は [OpenTracing API][1] との連携が可能です。
 
-## トラブルシューティング
+## セットアップ
 
 Maven の場合、これを `pom.xml` に追加します。
 ```xml

@@ -34,13 +34,17 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기초 구축
   text: 대화형 세션에 참여하여 애플리케이션 성능 모니터링(APM)에 대한 이해도를 높이세요
-kind: 설명서
 title: APM
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
+  초급 또는 중급 활성화 세션에 참가해 AI로 더욱 강력해진  Datadog  APM(애플리케이션 성능 모니터링)를 사용해 브라우저와 모바일 애플리케이션에서 백엔드 서비스와 데이터 서비스까지 코드 수준 분배 추적을 하는 방법을 알아보세요.
+{{< /learning-center-callout >}}
 
 ## 개요
 
@@ -54,6 +58,8 @@ Datadog APM을 시작하는 가장 간단한 방법은 단일 단계 계측을 �
 
 더 많은 커스터마이제이션이 필요한 설정의 경우 Datadog은 Datadog 추적 라이브러리를 사용하여 커스텀 계측을 지원합니다. 자세한 내용은 [애플리케이션 계측][2]을 읽어보세요.
 
+<div class="alert alert-info">Datadog APM을 처음 사용하는 경우 <a href="https://docs.datadoghq.com/getting_started/tracing/">APM 시작하기</a>를 읽고 Datadog에 트레이스를 전송하는 방법을 알아보세요.</div>
+
 ## 사용 사례
 
 Datadog 애플리케이션 성능 모니터링(APM)이 사용 사례를 지원하는 방법을 확인하세요.
@@ -65,7 +71,7 @@ Datadog 애플리케이션 성능 모니터링(APM)이 사용 사례를 지원�
 | 트레이스를 DBM, RUM, 로그, 신서틱(Synthetic) 및 프로필과 연계합니다. | [애플리케이션 성능 모니터링(APM) 데이터와 다른 원격 측정 데이터 연계][20]를 통해 데이터에 컨텍스트를 부여하여 보다 포괄적인 분석을 할 수 있습니다. |
 | 데이터가 Datadog로 이동하는 흐름을 제어하세요. | [수집 제어][6]를 사용하여 수집 설정 및 샘플링 속도를 서비스 및 리소스별로 조정합니다. [보존 기간 필터][7]를 사용하여 15일 동안 보존할 스팬(span)을 선택합니다. |
 
-### Trace Explorer
+### 트레이스 탐색기
 
 [트레이스 탐색기][21]를 사용하면 트레이스를 실시간으로 검색 및 분석할 수 있습니다. 성능 병목 현상을 파악하고, 오류를 트러블슈팅하고, 관련 로그 및 메트릭에 활용하여 모든 문제에 대한 전체 컨텍스트를 파악할 수 있습니다.
 
@@ -91,9 +97,13 @@ Datadog 애플리케이션 성능 모니터링(APM)은 로그, 실제 사용자 
 
 트레이스는 계측된 애플리케이션에서 시작하여 Datadog로 이동합니다.
 
-Datadog 애플리케이션 성능 모니터링(APM)은 트레이스 데이터의 양과 보존 기간을 관리할 수 있는 도구를 제공합니다. [수집 제어][6]를 사용하여 샘플링 속도를 조정하고 [보존 기간 필터][7]를 사용하여 저장되는 스팬(span)을 제어할 수 있습니다.
+Datadog 애플리케이션 성능 모니터링(APM)은 트레이스 데이터의 양과 보존 기간을 관리할 수 있는 도구를 제공합니다. [수집 제어][6]를 사용하여 샘플링 속도를 조정하고 [보존 기간 필터][7]를 사용하여 저장되는 스팬을 제어할 수 있습니다.
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Datadog APM을 통한 데이터 흐름" style="width:100%;" >}}
+
+## 트러블슈팅
+
+트러블슈팅에 도움이 필요할 경우 [APM 트러블슈팅][29] 가이드를 참고하세요.
 
 ## 참고 자료
 
@@ -127,3 +137,4 @@ Datadog 애플리케이션 성능 모니터링(APM)은 트레이스 데이터의
 [26]: /ko/tracing/services/service_page/
 [27]: /ko/tracing/trace_collection/single-step-apm/
 [28]: /ko/tracing/services/resource_page/
+[29]: /ko/tracing/troubleshooting/

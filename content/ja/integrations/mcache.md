@@ -21,8 +21,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 32
     source_type_name: Memcached
-  logs:
-    source: memcached
   saved_views:
     memcached_processes: assets/saved_views/memcached_processes.json
 author:
@@ -34,6 +32,7 @@ categories:
 - caching
 - log collection
 - tracing
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_on_public_website: true
@@ -41,9 +40,8 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 4.1.0
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
 public_title: Memcache
@@ -59,10 +57,18 @@ tile:
   - Category::Tracing
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
   support: README.md#Support
   title: Memcache
 ---
@@ -74,13 +80,13 @@ tile:
 
 Agent の Memcache チェックを使用して、Memcache のメモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
 
@@ -91,7 +97,7 @@ Memcache サーバーを起動する際に、バインディングプロトコ�
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -150,7 +156,7 @@ Agent コンテナで必要な環境変数
 
 次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -180,23 +186,23 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の `status` サブコマンド][2]を実行し、Checks セクションで `mcache` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mcache" >}}
 
 
 `mcache.d/conf.yaml` で `options.slabs: true` と設定している場合、チェックは `memcache.slabs.*` メトリクスのみを収集します。同様に、`options.items: true` と設定している場合、チェックは `memcache.items.*` メトリクスのみを収集します。
 
-### ヘルプ
+### イベント
 
 Mcache チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "mcache" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

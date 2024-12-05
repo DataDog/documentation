@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/
   tag: Documentation
   text: Alertes
-kind: guide
+
 title: Alertes basées sur les données RUM
 ---
 

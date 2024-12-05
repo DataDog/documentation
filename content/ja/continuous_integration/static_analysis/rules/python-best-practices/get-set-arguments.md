@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: getter/setter must have 1 or 2 arguments respectively
 ---
 ## メタデータ

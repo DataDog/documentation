@@ -1,6 +1,5 @@
 ---
 title: Setting up SQL Server
-kind: documentation
 description: Setting up Database Monitoring on a SQL Server database
 disable_sidebar: true
 ---
@@ -21,3 +20,5 @@ For setup instructions, select your hosting type:
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 
 <br>
+
+[1]: /database_monitoring/setup_sql_server/troubleshooting/#known-limitations

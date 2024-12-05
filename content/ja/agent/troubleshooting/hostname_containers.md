@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: コンテナでのホスト名検出
 ---
 
@@ -54,23 +53,11 @@ Kubelet API への接続を妨げる最も一般的なエラーは、Kubelet の
 専用のパラメーターを使用するか、Agent マニフェストの**すべてのコンテナ**に対して `DD_KUBELET_TLS_VERIFY` 変数を設定することにより、TLS 検証を無効化することができます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  kubelet:
-    tlsVerify: false
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -81,13 +68,24 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "マニフェスト" %}}
+{{% tab "Helm" %}}
 
-`DaemonSet` マニフェスト:
+カスタム `datadog-values.yaml`:
+
+```yaml
+datadog:
+  kubelet:
+    tlsVerify: false
+```
+
+{{% /tab %}}
+
+{{% tab "手動 (DaemonSet)" %}}
+
+DaemonSet マニフェスト:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -119,26 +117,11 @@ AWS、Google Cloud、または Azure で実行する場合、Agent はホスト�
 この場合、Download API を使用して `DD_HOSTNAME` を設定することができます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  env:
-    - name: DD_HOSTNAME
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -153,13 +136,27 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "マニフェスト" %}}
+{{% tab "Helm" %}}
 
-`DaemonSet` マニフェスト
+カスタム `datadog-values.yaml`:
+
+```yaml
+datadog:
+  env:
+    - name: DD_HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+```
+
+{{% /tab %}}
+
+{{% tab "手動 (DaemonSet)" %}}
+
+DaemonSet マニフェスト:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:

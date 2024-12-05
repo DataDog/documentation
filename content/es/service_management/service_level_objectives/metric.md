@@ -10,7 +10,6 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentación
   text: Visión general de SLO, configuración y cálculo
-kind: documentation
 title: SLOs basados en la métrica
 ---
 

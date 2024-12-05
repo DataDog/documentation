@@ -1,6 +1,5 @@
 ---
 title: SSL Testing
-kind: documentation
 description: Monitor your SSL certificates from locations around the world
 aliases:
   - /synthetics/ssl_test
@@ -59,6 +58,10 @@ After choosing to create a `SSL` test, define your test's request.
    {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 

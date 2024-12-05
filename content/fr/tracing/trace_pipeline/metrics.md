@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
   text: Rétention des traces
-kind: documentation
 title: Métriques d'utilisation
 ---
 

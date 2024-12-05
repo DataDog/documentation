@@ -1,6 +1,5 @@
 ---
 title: RUM iOS Data Collected
-kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -70,6 +69,7 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                           |
 | `device.model`                       | string | The device model as reported by the device (System User-Agent).                                           |
 | `device.name`                        | string | The device name as reported by the device (System User-Agent).                                            |
+| `device.architecture` | string | The CPU architecture of the device that is reporting the error. |
 
 ### Connectivity
 
@@ -100,7 +100,7 @@ The below attributes are related to the geo-location of IP addresses.
 
 **Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][6].
 
-| Fullname                           | Type   | Description                                                                                                                               |
+| Attribute name                     | Type   | Description                                                                                                                               |
 |------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`                      | string | Name of the country                                                                                                                       |
 | `geo.country_iso_code`             | string | ISO Code of the country (for example, `US` for the United States or `FR` for France).                                                  |
@@ -133,6 +133,7 @@ You can enable [tracking user info][2] globally to collect and apply user attrib
 | `session.resource.count`  | number      | Count of all resources collected for this session.  |
 | `session.action.count`    | number      | Count of all actions collected for this session.    |
 | `session.long_task.count` | number      | Count of all long tasks collected for this session. |
+| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 
 
 ### Session attributes
@@ -209,7 +210,11 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.type`     | string | The error type (or error code in some cases).                                    |
 | `error.message`  | string | A concise, human-readable, one-line message explaining the event.                |
 | `error.stack`    | string | The stack trace or complementary information about the error.                    |
-| `error.issue_id` | string | The stack trace or complementary information about the error.                    |
+| `error.issue_id` | string | The stack trace or complementary information about the error.   
+| `error.category` | string | The high-level grouping for the type of error. Possible values are `Memory Warning`, `Watchdog Termination`, `App Hang`, or `Exception`. |
+| `error.file` | string | File where the issue found by Error Tracking occurred. |
+| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
+| `freeze.duration` | int64 | Duration of the main thread freeze (in nanoseconds). This is only supported for App Hangs. |
 
 ### Network errors 
 

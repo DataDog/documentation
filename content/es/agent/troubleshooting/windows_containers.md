@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Solucionar problemas del Agent
   text: Solucionar problemas del Agent
-kind: documentación
 title: Problemas de los contenedores de Windows
 ---
 

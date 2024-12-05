@@ -1,6 +1,5 @@
 ---
 title: Build diagrams with Mermaid JS
-kind: guide
 disable_toc: false
 ---
 

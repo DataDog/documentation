@@ -1,6 +1,5 @@
 ---
 title: Ruby Tests
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
@@ -15,13 +14,13 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -65,9 +64,9 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Ruby test visibility library
+## Installing the Ruby test optimization library
 
-To install the Ruby test visibility library:
+To install the Ruby test optimization library:
 
 1. Add the `datadog-ci` gem to your `Gemfile`:
 
@@ -94,7 +93,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -134,7 +133,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -194,7 +193,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -253,7 +252,7 @@ For more information on custom measures, see the [Add Custom Measures Guide][3].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the test visibility library, either in code by using a `Datadog.configure` block, or using environment variables:
+The following is a list of the most important configuration settings that can be used with the test optimization library, either in code by using a `Datadog.configure` block, or using environment variables:
 
 `service`
 : Name of the service or library under test.<br/>
@@ -302,7 +301,7 @@ Alternatively, you can enable automatic instrumentation in `test_helper/spec_hel
 require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-**Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
+**Note**: In CI mode, these traces are submitted to Test Optimization, and they do **not** show up in Datadog APM.
 
 For the full list of available instrumentation methods, see the [tracing documentation][6]
 
@@ -348,7 +347,7 @@ end
 
 ## Using manual testing API
 
-If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 Full public API documentation is available on [YARD site][8].

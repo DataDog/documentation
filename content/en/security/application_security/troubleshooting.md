@@ -6,12 +6,6 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog Application Security Management"
-- link: "/security/application_security/enabling/"
-  tag: "Documentation"
-  text: "Enable Application Security Management to Start Detecting Threats"
-- link: "/security/application_security/enabling/compatibility/"
-  tag: "Documentation"
-  text: "Programming Language and Framework Compatibility"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works in Datadog"
@@ -160,7 +154,7 @@ The required integrations vary by language.
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
-For [Java][1], if you are using any of the following technologies, the respective integration is required:
+For Java, if you are using any of the following technologies, the respective integration is required:
 
 - grizzly
 - grizzly-filterchain
@@ -176,26 +170,26 @@ For [Java][1], if you are using any of the following technologies, the respectiv
 - spring-web
 - tomcat
 
-[1]: /security/application_security/enabling/compatibility/java
+
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-For [.NET][1], the ASP.NET integration is required.
+For .NET, the ASP.NET integration is required.
 
 **Note:** If ASP.NET Core is disabled, ASM should still work with this framework.
 
-[1]: /security/application_security/enabling/compatibility/dotnet
+
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-There are no required integrations for [PHP][1].
+There are no required integrations for PHP.
 <p></p>
 
-[1]: /security/application_security/enabling/compatibility/php
+
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The following [Go][1] frameworks should be instrumented using the out-of-the-box APM integrations:
+The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
 
 - [gRPC][2]
 - [net/http][3]
@@ -205,7 +199,6 @@ The following [Go][1] frameworks should be instrumented using the out-of-the-box
 
 If your framework is not supported, [create a new issue][7] in the Go repository.
 
-[1]: /security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -215,18 +208,17 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-For [Node.js][1], the HTTP integration is required.
+For Node.js, the HTTP integration is required.
 <p></p>
 
-[1]: /security/application_security/enabling/compatibility/nodejs
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0` or higher is also required. See information on [migrating from 0.x to 1.x][3].
+For Ruby, the [Rack][2] integration is required. Ruby tracer version `1.0.0` or higher is also required. See information on [migrating from 0.x to 1.x][3].
 
 **Note:** Rack can be manually added or automatically added with the [Rails][4] or [Sinatra][5] integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
-[1]: /security/application_security/enabling/compatibility/ruby
 [2]: /tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /tracing/trace_collection/dd_libraries/ruby/#rails
@@ -235,11 +227,10 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 
 {{< programming-lang lang="python" >}}
 
-For [Python][1], the WSGI integration is required along with the integration for the
+For Python, the WSGI integration is required along with the integration for the
 framework you're using, such as the Django or Flask integration.
 <p></p>
 
-[1]: /security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -390,7 +381,7 @@ If you don't see ASM threat information in the [Trace and Signals Explorer][2] f
 
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
 
-    a. If `@datadog/native-appsec` is not found then the installation is incorrect. See [installation instructions][4].
+    a. If `@datadog/native-appsec` is not found then the installation is incorrect.
 
     b. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
 
@@ -406,7 +397,6 @@ If you don't see ASM threat information in the [Trace and Signals Explorer][2] f
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: /security/application_security/enabling/nodejs/?tab=dockercli
 [5]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -557,11 +547,11 @@ ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
 ### Confirm tracer versions are updated
 
-See the Application Security [set up documentation][11] to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 
-Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
+Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
 ## Disabling threat management and protection
 
@@ -590,18 +580,21 @@ To disable [Software Composition Analysis][14]:
 
 * Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
+* To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
 
 ## Disabling Code Security
 
-<div class="alert alert-info">Code Security vulnerability detection is in beta.</div>
+To disable [Code Security][13], remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
+  
+## All or some code-level vulnerabilities are not detected
 
-To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps. 
+### Confirm Code Security is enabled
 
-If no `DD_IAST_ENABLED=true` environment variable is set for your service, do the following:
-  1. Go to [Services][15].
-  2. Select **Code Security**.
-  3. Click on a service.
-  4. In the service details, in **Vulnerability Detection**, click **Deactivate**.
+Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corresponding system property for your language is enabled.
+
+### For Python+Flask, call the entrypoint patch function
+
+If you're running a Flask application ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. See the [Flask integration documentation][17] for more information.
   
 ## Need more help?
 
@@ -624,9 +617,9 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [8]: /tracing/troubleshooting/tracer_startup_logs/
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
-[11]: /security/application_security/enabling/
 [12]: https://app.datadoghq.com/security/appsec/vm
 [13]: /security/application_security/code_security/
 [14]: /security/application_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config
+[17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

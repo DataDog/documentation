@@ -18,7 +18,7 @@ assets:
     source_type_id: 10257
     source_type_name: Helm
   monitors:
-    '[helm] Monitor Helm failed releases': assets/monitors/monitor_failed_releases.json
+    Release is failed: assets/monitors/monitor_failed_releases.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +27,7 @@ author:
 categories:
 - 構成 & デプロイ
 - コンテナ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/helm/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: helm
 integration_title: Helm チェック
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: helm
 public_title: Helm チェック
@@ -53,10 +53,14 @@ tile:
   - Supported OS::Windows
   - Category::Configuration & Deployment
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で Helm のデプロイメントを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-helm-kubernetes-with-datadog/
   support: README.md#Support
   title: Helm チェック
 ---
@@ -70,14 +74,14 @@ tile:
 
 Helm は複数のストレージバックエンドをサポートしています。v3 では、Helm のデフォルトは Kubernetes シークレットで、v2 では、Helm のデフォルトは ConfigMaps です。このチェックでは、両方のオプションに対応しています。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Helm チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -90,7 +94,23 @@ Helm チェックは [Datadog Agent][1] パッケージに含まれています�
 
 [1]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
 {{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Operator (v1.5.0+)" %}}
+
+これはクラスターのチェックです。このチェックを有効にするには、`spec.features.helmCheck.enabled` を `DatadogAgent` のデプロイ構成に追加します。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    helmCheck:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Operator (< v1.5.0)" %}}
 
 これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイメント構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
 
@@ -153,13 +173,13 @@ rules:
 
 [Agent の status サブコマンドを実行][2]し、Checks セクションで `helm` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "helm" >}}
 
 
-### ヘルプ
+### イベント
 
 このチェックは、`collect_events` オプションが `true` に設定されているときにイベントを発行します。デフォルトは `false` です。
 
@@ -169,11 +189,11 @@ rules:
 - リリースがアップグレードされる (新しいリビジョン)。
 - 例えば、デプロイ済みから置き換え済みへのステータス変更があります。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "helm" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

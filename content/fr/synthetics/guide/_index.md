@@ -7,7 +7,7 @@ cascade:
     rank: 20
     subcategory: Guides d'utilisation de la surveillance Synthetic
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides d'utilisation de la surveillance Synthetic
 ---

@@ -22,6 +22,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: snmp-f5
 integration_title: F5 Networks
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_f5
 public_title: F5 Networks
@@ -49,10 +49,16 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: F5 ネットワークデバイスから SNMP メトリクスを収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/network-device-monitoring/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: F5 Networks
 ---
@@ -64,21 +70,25 @@ tile:
 
 F5 Networks は、アプリケーションデリバリーネットワーキングとセキュリティの企業です。Big IP と LTM プラットフォームを含む F5 デバイスの健全性とパフォーマンスメトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
 F5 アプライアンスのすべてのメトリクスは、SNMP から収集されます。メトリクスの収集を開始するには、SNMP インテグレーションをインストールし、構成します。詳細と構成オプションについては、[ネットワークデバイスモニタリング][1]のドキュメントを参照してください。
 
-## リアルユーザーモニタリング
+## ベンダープロファイル
 
-### データセキュリティ
+Specific supported vendor profiles for this integration can be found on the [network vendors][2] page.
 
-SNMP で収集可能なすべてのメトリクスは、ネットワークデバイスモニタリングのドキュメントの[収集データ][2]に記載されています。F5 アプライアンスから収集されたすべてのメトリクスは、[F5] ネームスペースの下で見つけることができます。
+## 収集データ
 
-### ヘルプ
+### メトリクス
+
+All possible metrics collected with SNMP can be found in the Network Device Monitoring documentation under [Data Collected][3]. All metrics collected from F5 appliances can be found under the [F5] namespace.
+
+### サービスチェック
 
 F5 インテグレーションに含まれるサービスチェックはありません。
 
-### ヘルプ
+### イベント
 
 F5 プラットフォームのどのコンポーネントからも、Datadog に追加のイベントが送信されることはありません。
 
@@ -86,15 +96,16 @@ F5 プラットフォームのどのコンポーネントからも、Datadog に
 
 お役に立つドキュメント、リンクや記事:
 
-* [Datadog でデータセンターおよびネットワークデバイスを監視][3]
-* [Datadog による SNMP モニタリング][4]
+* [Monitoring Datacenters and Network Devices with Datadog][4]
+* [SNMP Monitoring with Datadog][5]
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/network_monitoring/devices/setup
-[2]: https://docs.datadoghq.com/ja/network_monitoring/devices/data
-[3]: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
-[4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-[5]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/data
+[4]: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+[5]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[6]: https://docs.datadoghq.com/ja/help/

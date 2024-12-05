@@ -1,6 +1,5 @@
 ---
 title: Watchdog Impact Analysis
-kind: documentation
 description: Discover performance issues in your application impacting end users with Watchdog Impact Analysis.  
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"

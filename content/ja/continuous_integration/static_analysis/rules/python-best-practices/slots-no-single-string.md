@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: __slots__ は単一の文字列であってはならない
 ---
 ## メタデータ

@@ -4,7 +4,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: Documentation
   text: En savoir plus sur le journal d'audit
-kind: documentation
 title: Transmettre des événements d'audit à des destinations personnalisées
 ---
 

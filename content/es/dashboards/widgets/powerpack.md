@@ -13,7 +13,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: Documentación
 title: Widget Powerpack
 ---
 

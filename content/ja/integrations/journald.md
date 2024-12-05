@@ -19,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/journald/README.md
 display_on_public_website: true
@@ -26,9 +27,8 @@ draft: false
 git_integration_title: journald
 integration_id: journald
 integration_title: journald
-integration_version: 1.2.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: journald
 public_title: journald
@@ -44,6 +44,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog を使用して systemd-journald ログを監視します。
   media: []
@@ -60,14 +61,14 @@ tile:
 Systemd-journald は、ログデータを収集して保管するシステムサービスです。
 さまざまなソースからのログ情報に基づいて、構造化およびインデックス化されたジャーナルを作成し、維持します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 journald チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ジャーナルファイルは、デフォルトでは、systemd-journal システムグループによって所有され、読み取られます。ジャーナルログの収集を開始するには、以下のようにします。
 
@@ -84,7 +85,7 @@ journald チェックは [Datadog Agent][1] パッケージに含まれていま
 
 ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `journald.d/conf.yaml` ファイルを編集します。
 
-#### 収集データ
+#### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -114,7 +115,7 @@ logs:
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-#### 収集データ
+#### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
@@ -229,21 +230,21 @@ Agent がホストから実行されている場合、これは自動的に機�
 
 Agent の [status サブコマンド][3]を実行し、ログ Agent セクションで ``journald`` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 journald には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 journald には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 journald には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

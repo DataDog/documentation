@@ -1,6 +1,5 @@
 ---
 title: Datadog Resource Catalog
-kind: documentation
 is_beta: true
 aliases:
   - /security_platform/cspm/resource_catalog
@@ -16,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"
+- link: "https://www.datadoghq.com/blog/infrastructure-troubleshooting-recent-changes/"
+  tag: "Blog"
+  text: "Troubleshoot infrastructure issues faster with Recent Changes"
 ---
 
 {{< site-region region="gov" >}}
@@ -24,74 +26,125 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
-
 ## Overview
 
-Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security misconfigurations have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
+Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
 
-Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as databases, storage services, and hosts.
+Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_2.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-1.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
+
+### Use Cases
+
+#### Governance and reporting
+- Gain visibility into the compliance of your infrastructure with regards to ownership, versioning, migrations, and so on.
+- Facilitate good tagging practices to optimize cross-telemetry insights.
+- Reduce application risks by identifying and fixing security vulnerabilities in the dependencies of your services.
+- Provide engineering leadership with a high-level view of security practices across teams and cloud accounts.
+- Export resources for record-keeping or auditing.
+
+#### Troubleshoot incidents and performance issues
+- Access telemetry, dashboards and other Datadog views with rich insights to understand the health and performance of your resources.
+- Locate team and service owners of relevant resources to speed up incident recovery.
+- View resource configuration changes to identify probable root causes.
+
+#### Optimize observability
+- Spot resources that can be better monitored by Datadog and bridge observability gaps.
+- Ensure proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security misconfigurations.
 
 ## Setup
 
-By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as NPM (Network Performance Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
 
-**Note**: Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab.
-Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
-The Resource Catalog is useful for:
-
-- Training new site reliability and security engineers by providing a clear view of all resources, their relationships, and their security posture, along with information about teams responsible for them and services running on them.
-- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream resources.
-- Ensuring proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security misconfigurations.
-- Facilitating the practice of good tagging to optimize cross-telemetry insights.
-- Providing engineering leadership with a high-level view of security practices across teams and cloud accounts.
+**Note**: 
+- Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
+- Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
 
 ## Browse the Resource Catalog
 
-On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown in the ownership and security tabs, with two views: List and Map.
+On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization are shown in the Inventory and Security tabs, with two views: List and Map.
 
 **Inventory Tab**:
-The Inventory tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog shows configuration information customized for each resource type. You can search resources by specific configuration attributes such as `instance_type` for a host, or a `version` for a database.
+The Inventory tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog also shows resource attributes customized for each resource type. You can search resources by specific attributes such as the instance type for a host, or the version for a database.
 
 **Security Tab**:
-The security tab allows you to gain a clear understanding of resources with security risk. By viewing misconfigurations and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
+The Security tab provides a security-centric view of your infrastructure and allows you to understand how your resources are impacted by security risks. 
+
+- [**Misconfigurations**][10]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
+
+- [**Signals**][11]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
+
+- [**Identity Risks**][12]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
+
+- [**Vulnerabilities**][13]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
+
+By viewing misconfigurations, signals, identity risks, and vulnerabilities associated with resources, you can address security concerns without needing to spend time and effort to gather additional security context.
+
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-3.png" alt="The Resource Catalog page showing the Security tab, grouped by resource type" width="100%">}}
 
 ### List view
 
-You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, misconfigurations, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Misconfigurations** to identify cloud resources most prone to misconfigurations. In addition, you can export your Resource Catalog list as a CSV file from the top right corner of the list.
+You can filter, sort, and group resources in the Resource Catalog list by cloud platform, resource type, account, team, region, tags, and security risks to scope down to the resources that matter to your current context. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters. 
 
-To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters. To access the relevant cloud console, select the cloud console icon for the desired resource. 
+To filter the list to see a subset of resources you're most interested in, select resource categories or types from the resource selector on the left, or use the query cards and individual facets at the top of your list view. To group by any default or resource specific attributes as well as tags, use the **Group by** dropdown on the top right of your list view. You can additionally sort by different columns or attributes by clicking on the column names. If you are looking for a particular resource, you can search for the resource name directly in the search bar. 
 
-If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
+To access the relevant cloud console for any resource in your list, use the **Open Cloud Console** button to be redirected.
+
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-4.png" alt="Resources owned by the cloud-networks team grouped by resource type" width="100%">}}
+
+**Pro Tip**: If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to quickly view only resources assigned to those teams.
+
+In addition, easily export your Resource Catalog list as a CSV file from the top right corner of the list.
 
 ### Map view
 
-The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Misconfigurations or Threats.
+The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the **Fill by** selector to fill the map elements by Misconfigurations or Signals.
 
-If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-4.png" alt="Resource Catalog map view filled by misconfigurations, grouped by resource type" width="100%">}}
 
-#### Misconfigurations
+## Investigate a host or resource
 
-Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Management Misconfigurations.
+<div class="alert alert-info">No secrets are displayed in this panel. Any displayed "secrets" are randomly generated strings that do not pose a security risk.</div>
 
-#### Threats
+Clicking on a host opens a side panel with details including:
 
-Threats reflect data from the past four hours and are only available for compute instances such as Amazon EC2 and Azure VM. White indicates there are no active threats detected. If a resource has several threat levels on it, the color used is the highest-severity threat detected on the resource.
+- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource
+- **Telemetry** including metrics, logs, traces, processes, and so on
+- **Active monitor alerts** and enabled monitors status on the host
+- **Agent configuration** information
 
-## Investigate a resource
+{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-6.png" alt="Resource Catalog with the host side panel open" width="100%">}}
 
-Clicking on a resource opens a side panel with details including:
+Clicking on any resource opens a side panel with details including:
 
 - **Resource information** such as the resource type, name, account, and tags associated with the resource.
-- **Security misconfigurations** including the security rules and latest status.
-- **Real-time threat signals** detected on the asset by Cloud Security Management Threats.
 - **Resource definition** in JSON showing the full configuration of the asset.
-- An interactive asset relationship graph displaying the assets connected to the resource.
+- **Recent Changes** showing a 7-day history of changes to the resource
+- **Relationship** view showing interdependencies between resources
+- **Service and team ownership** of the resource
+- **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
 
-Click the **Share** button and select **Share event** to share a link to the current resource with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][3] available for this feature.
+### Recent changes
+
+{{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
+  The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
+{{< /callout >}} 
+
+Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
+
+**Prerequisites**: 
+   - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
+   - You have [access to the Preview][9].
+
+#### AWS
+
+See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
+
+#### Google Cloud Platform
+
+See the [Resource change collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
 
 ## Further reading
 
@@ -102,7 +155,11 @@ Click the **Share** button and select **Share event** to share a link to the cur
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
-
-
-
-
+[6]: /integrations/amazon_config/#events
+[7]: https://app.datadoghq.com/integrations
+[8]: /integrations/google_cloud_platform/#resource-change-collection
+[9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
+[10]: https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/
+[11]: https://docs.datadoghq.com/security/threats/
+[12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/
+[13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/

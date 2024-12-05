@@ -9,7 +9,6 @@ further_reading:
 - link: /dashboards/widgets/pie_chart/
   tag: Documentación
   text: Widget de gráfico circular
-kind: documentación
 title: Widget Treemap
 widget_type: treemap
 ---

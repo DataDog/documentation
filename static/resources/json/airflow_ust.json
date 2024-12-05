@@ -1,0 +1,283 @@
+[
+  {
+    "name": "airflow",
+    "prefix": "airflow.",
+    "mappings": [
+      {
+        "match": "airflow.*.*.*_start",
+        "name": "airflow.job.start",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "job_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.*_end",
+        "name": "airflow.job.end",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "job_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.*_heartbeat_failure",
+        "name": "airflow.job.heartbeat.failure",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "job_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.operator_failures_*",
+        "name": "airflow.operator_failures",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "operator_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.operator_successes_*",
+        "name": "airflow.operator_successes",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "operator_name": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dag_processing\\.last_runtime\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dag_processing.last_runtime",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_file": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dag_processing.last_run.seconds_ago",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_file": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dag\\.loading-duration\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dag.loading_duration",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_file": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.dagrun.*.first_task_scheduling_delay",
+        "name": "airflow.dagrun.first_task_scheduling_delay",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.pool.open_slots.*",
+        "name": "airflow.pool.open_slots",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "pool_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.pool.queued_slots.*",
+        "name": "airflow.pool.queued_slots",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "pool_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.pool.running_slots.*",
+        "name": "airflow.pool.running_slots",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "pool_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.pool.used_slots.*",
+        "name": "airflow.pool.used_slots",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "pool_name": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.pool.starving_tasks.*",
+        "name": "airflow.pool.starving_tasks",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "pool_name": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dagrun\\.dependency-check\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dagrun.dependency_check",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dag\\.(.*)\\.([^.]*)\\.duration",
+        "match_type": "regex",
+        "name": "airflow.dag.task.duration",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3",
+          "task_id": "$4"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dag_processing\\.last_duration\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dag_processing.last_duration",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_file": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dagrun\\.duration\\.success\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dagrun.duration.success",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dagrun\\.duration\\.failed\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dagrun.duration.failed",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.dagrun\\.schedule_delay\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dagrun.schedule_delay",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.scheduler.tasks.running",
+        "name": "airflow.scheduler.tasks.running",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow"
+        }
+      },
+      {
+        "match": "airflow.*.*.scheduler.tasks.starving",
+        "name": "airflow.scheduler.tasks.starving",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow"
+        }
+      },
+      {
+        "match": "airflow.*.*.sla_email_notification_failure",
+        "name": "airflow.sla_email_notification_failure",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.task_removed_from_dag\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dag.task_removed",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.task_restored_to_dag\\.(.*)",
+        "match_type": "regex",
+        "name": "airflow.dag.task_restored",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3"
+        }
+      },
+      {
+        "match": "airflow.*.*.task_instance_created-*",
+        "name": "airflow.task.instance_created",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "task_class": "$3"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.ti\\.start\\.(.+)\\.(\\w+)",
+        "match_type": "regex",
+        "name": "airflow.ti.start",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3",
+          "task_id": "$4"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.ti\\.finish\\.(\\w+)\\.(.+)\\.(\\w+)",
+        "name": "airflow.ti.finish",
+        "match_type": "regex",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow",
+          "dag_id": "$3",
+          "task_id": "$4",
+          "state": "$5"
+        }
+      },
+      {
+        "match": "airflow\\.([-a-zA-Z_)\\.([a-zA-Z_)\\.(.*)",
+        "name": "airflow.$3",
+        "match_type": "regex",
+        "tags": {
+          "env": "$2",
+          "service": "$1-airflow"
+        }
+      }
+    ]
+  }
+]

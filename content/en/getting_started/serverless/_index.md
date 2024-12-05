@@ -1,6 +1,5 @@
 ---
 title: Getting Started with AWS Lambda Serverless Monitoring
-kind: documentation
 
 further_reading:
     - link: '/agent/basic_agent_usage/'

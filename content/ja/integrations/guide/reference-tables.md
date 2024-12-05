@@ -7,7 +7,7 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ルックアッププロセッサを使用して、リファレンステーブルからログをリッチ化する
-- link: /logs/explorer/analytics/#filter-logs-based-on-reference-tables
+- link: /logs/explorer/advanced_search#filter-logs-based-on-reference-tables
   tag: ドキュメント
   text: リファレンステーブルに基づくログのフィルター
 - link: /cloud_cost_management/tag_pipelines/#map-multiple-tags
@@ -16,14 +16,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
   tag: ブログ
   text: リファレンステーブルを使用してログにさらにコンテキストを追加する
-kind: ガイド
 title: リファレンステーブルでカスタムメタデータを追加する
 ---
-
-<div class="alert alert-warning">
-リファレンステーブル機能は現在公開ベータ版です。リファレンステーブルを定義したりクエリを作成したりしても、請求内容には影響しません。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
-ベータ版期間中は、1 アカウントにつき 100 個のリファレンステーブルという制限があります。
-</div>
 
 ## 概要
 
@@ -35,13 +29,13 @@ title: リファレンステーブルでカスタムメタデータを追加す�
 
 リファレンステーブルの名前と列のヘッダーは、以下の命名規則で検証され、必要に応じて自動的に更新または正規化されます。
 
-| ルール     | 正規化 |
+| Rule     | 正規化 |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | 名前とヘッダーは重複できません。                                          | 重複した名前は列挙されます。例えば、`fileid` が名前として 2 回使用された場合、最初のインスタンスは `fileid1` に、2 番目のインスタンスは `fileid2` になります。名前またはヘッダーを列挙した際に、56 文字を超える場合は拒否され、名前を変更する必要があります。 |
 | 名前とヘッダーに大文字を含めることはできません。                               | 大文字で書かれた名前は、小文字に変換されます。この変換の結果、名前が重複することがありますが、その場合は列挙されます。例えば、`Fileid` と `FileID` は両方とも `fileid` となり、それぞれ `fileid1` と `fileid2` に列挙されます。 |
 | 名前とヘッダーにスペースを含めることはできません。                                          | 先頭と末尾のスペース以外のスペースは、アンダースコア `_` 文字に置き換えられます。先頭と末尾のスペースは削除されます。例えば、`customer names` は `customer_names` に置き換えられます。 |
 | 名前とヘッダーは小文字で始める必要があります。                             | 大文字は小文字に変換されます。文字以外の先頭の文字は削除されます。例えば、`23Two_three` は `two_three` となります。   |
-| 名前とヘッダーは、小文字のアルファベットと数字、および `_` 文字のみをサポートします。 | サポートされていない文字は、上記のルールのいずれかを破らない限り、アンダースコア `_` 文字に置き換えられます。その場合、サポートされていない文字は、それぞれのルールによって正規化されます。               |
+| 名前とヘッダーは、小文字のアルファベットと数字、および `_` 文字のみをサポートします。 | Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.               |
 | 名前とヘッダーは 56 文字以内にする必要があります。                                  | 正規化は行われません。56 文字以上の名前とヘッダーは拒否され、名前を変更する必要があります。 |
 
 ## リファレンステーブルを作成する
@@ -59,7 +53,7 @@ title: リファレンステーブルでカスタムメタデータを追加す�
 
 {{% tab "Amazon S3" %}}
 
-リファレンステーブルは、Amazon S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。これにより、初期リファレンステーブルが構成されると、S3 API を使用した API 更新も可能になります。
+Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
 S3 からリファレンステーブルを更新するために、Datadog は [AWS インテグレーション][1]用に構成した AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順][2]で作成してください。このロールがリファレンステーブルを更新できるようにするには、次のアクセス許可ステートメントを IAM ポリシーに追加します。バケット名は、環境に合わせて編集します。
 
@@ -86,9 +80,9 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 ```
 ### テーブルを定義する
 
-**New Reference Table +** をクリックしてから、名前を追加し、Amazon S3 を選択し、すべてのフィールドに入力し、インポートをクリックして、ルックアップのプライマリキーを定義します。
+Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="Amazon S3 タイルを選択し、AWS Account、Bucket、Path のデータを記入した upload your data セクション" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **注**: S3 バケットからのアップロードは、200MB までのファイルをサポートしています。
 
@@ -172,7 +166,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 [監査証跡][2]または[変更イベント][3]でリファレンステーブルのアクティビティを監視することができます。特定のリファレンステーブルの監査証跡と変更イベントを表示するには、そのテーブルを選択し、**Update Config** の隣にある設定アイコンをクリックします。監査証跡を表示するには、組織の管理権限が必要です。
 
-### 監査証跡
+### Audit trail（監査証跡）
 
 リファレンステーブルの監査証跡を使用して、ユーザーをトリガーとするアクションを追跡することができます。監査証跡イベントは、ユーザーが最初に CSV ファイルをアップロードまたはインポートしたとき、またはユーザーがリファレンステーブルを作成、変更、または削除したときに送信されます。
 

@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: 설명서
   text: 글로벌 처리 규칙
-kind: 설명서
 title: Agent 로그 전송
 ---
 

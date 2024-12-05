@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: ドキュメント
   text: 計画と使用設定
-kind: ガイド
 title: 2024 年 2 月 19 日の週より新 Plan & Usage CSV ヘッダーに移行
 ---
 Plan & Usage Cost Chargebacks CSV ファイルのヘッダーは、2024 年 2 月 19 日の週に更新されます。この更新により、CSV ファイル内のコストとアプリ内に表示されるコストデータが一致します。

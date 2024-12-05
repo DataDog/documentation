@@ -1,7 +1,6 @@
 ---
-title: Python Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Python application with OpenTelemetry API to send traces to Datadog.'
+title: Python Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Python application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
@@ -69,8 +68,47 @@ current_span = trace.get_current_span()
 current_span.set_attribute("attribute_key1", 1)
 ```
 
+## Adding span events
+
+<div class="alert alert-info">Adding span events requires SDK version 2.9.0 or higher.</div>
+
+You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects `microseconds`.
+
+The following examples demonstrate different ways to add events to a span:
+
+```python
+span.add_event("Event With No Attributes")
+span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [True, False]})
+```
+
+Read the [OpenTelemetry][2] specification for more information.
+
+### Recording exceptions
+
+To record exceptions, use the `record_exception` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```python
+span.record_exception(Exception("Error Message"))
+span.record_exception(Exception("Error Message"), {"status": "failed"})
+```
+
+Read the [OpenTelemetry][3] specification for more information.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/python/
+[2]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[3]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

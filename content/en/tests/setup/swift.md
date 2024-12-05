@@ -1,6 +1,5 @@
 ---
 title: Swift Tests
-kind: documentation
 code_lang: swift
 type: multi-code-lang
 code_lang_weight: 50
@@ -12,12 +11,12 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/swift"
+    - link: "/tests/test_impact_analysis/swift"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
-    - link: "/continuous_integration/troubleshooting/"
+      text: "Speed up your test jobs with Test Impact Analysis"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -732,7 +731,7 @@ Always call `module.end()` at the end so that all the test info is flushed to Da
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and Test Optimization.
 
 ### Generate symbols file when building
 
@@ -761,5 +760,5 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 [4]: /continuous_integration/guides/rum_swift_integration
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
-[7]: /continuous_integration/intelligent_test_runner/
+[7]: /tests/test_impact_analysis/
 [8]: /getting_started/tagging/unified_service_tagging

@@ -1,6 +1,5 @@
 ---
 title: Datagram Format and Shell Usage
-kind: documentation
 description: Overview of the datagram format used by DogStatsD as well as (advanced) shell usage.
 aliases:
     - /developers/dogstatsd/data_types/

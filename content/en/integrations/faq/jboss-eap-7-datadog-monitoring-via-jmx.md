@@ -1,6 +1,6 @@
 ---
 title: JBoss EAP 7 & Datadog monitoring via JMX
-kind: faq
+
 ---
 
 ## Overview

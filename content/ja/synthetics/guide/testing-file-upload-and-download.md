@@ -9,7 +9,6 @@ further_reading:
 - link: synthetics/browser_tests
   tag: Documentation
   text: ブラウザテストの設定
-kind: ガイド
 title: テストファイルのアップロードとダウンロード
 ---
 
@@ -31,7 +30,7 @@ Datadog のブラウザテストおよび `Test a downloaded file` アサーシ�
 
 このアサーションでブラウザテストをセットアップするには
 
-1. ブラウザテストで、**ファイルのダウンロードを生成するステップを記録**します。以下の例では `.docx` ファイルのダウンロードをトリガーするボタンクリックの記録方法を示しています。ファイルサイズは 50Mb 以下でなければなりません。
+1. ブラウザテストで、**ファイルのダウンロードを生成するステップを記録**します。以下の例では、`.docx` ファイルのダウンロードをトリガーするボタンのクリックを記録する方法を示しています。ファイルサイズは 100Mb 以下でなければなりません。
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="ステップの記録" video="true">}}
 

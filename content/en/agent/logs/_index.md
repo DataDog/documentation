@@ -1,6 +1,5 @@
 ---
 title: Host Agent Log collection
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "agent/logs/advanced_log_collection/#filter-logs"
@@ -26,7 +25,7 @@ See [Observability Pipelines][2] if you want to send logs using another vendor's
 
 ## Activate log collection
 
-Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][3] or [Docker Log Collection][4] documentation. 
+Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][3] or [Docker Log Collection][4] documentation.
 
 To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][5] (`datadog.yaml`).
 
@@ -69,6 +68,8 @@ logs:
 
 On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
+**Note**: A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
+
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
@@ -88,7 +89,9 @@ If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting wi
 
 In the Agent version 7.31.0+, the TCP connection stays open indefinitely even when idle.
 
-**Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
+**Notes**:
+- The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
+- A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
 
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}

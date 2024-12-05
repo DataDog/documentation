@@ -20,7 +20,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 설정
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: Rails 로그 수집에서의 루비(Ruby)
 ---
 

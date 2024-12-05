@@ -23,6 +23,7 @@ author:
 categories:
 - キャッシュ
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: unbound
 integration_title: Unbound
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: unbound
 public_title: Unbound
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: unbound メトリクスを収集する Datadog インテグレーション
   media: []
@@ -68,11 +69,11 @@ unbound サービスからメトリクスをリアルタイムに取得して、
 
 - unbound の状態を視覚化して監視します。
 
-## 計画と使用
+## セットアップ
 
 Unbound チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -84,7 +85,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `unbound.d/conf.yaml` ファイルを編集して、
    unbound メトリクスの収集を開始します。
@@ -96,21 +97,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェ
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `unbound` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "unbound" >}}
 
 
-### ヘルプ
+### イベント
 
 Unbound チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "unbound" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

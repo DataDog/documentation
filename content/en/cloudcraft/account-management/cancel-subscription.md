@@ -1,6 +1,5 @@
 ---
 title: Cancel your Cloudcraft Subscription
-kind: documentation
 ---
 
 Canceling your Cloudcraft subscription can be done from inside the Cloudcraft application.

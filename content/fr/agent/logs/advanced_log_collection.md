@@ -25,7 +25,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Envoi - API
   text: Entrée du glossaire pour le terme « tail » (suivi)
-kind: documentation
 title: Configurations avancées pour la collecte de logs
 ---
 
@@ -103,7 +102,6 @@ Pour appliquer une configuration spécifique à un conteneur donné, Autodiscove
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -224,7 +222,6 @@ Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -316,7 +313,6 @@ Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -419,7 +415,6 @@ Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -524,7 +519,6 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:

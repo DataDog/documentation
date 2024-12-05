@@ -7,9 +7,8 @@ code_lang: dotnet
 code_lang_weight: 70
 description: .NET のための OpenTracing インスツルメンテーション
 further_reading:
-- link: tracing/services/services_map/
+- link: tracing/trace_collection/trace_context_propagation/
   text: トレースコンテキストの伝搬
-kind: ドキュメント
 title: .NET OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---
@@ -18,7 +17,7 @@ type: multi-code-lang
 
 詳細や情報については、[OpenTracing API][1] をご覧ください。
 
-## 計画と使用
+## セットアップ
 OpenTracing のサポートには、[`Datadog.Trace.OpenTracing`][2] NuGet パッケージをアプリケーションに追加します。アプリケーションの起動時に、OpenTracing SDK を初期化します。
 
 ```csharp
@@ -65,7 +64,7 @@ using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").Start
 
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

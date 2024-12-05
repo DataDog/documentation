@@ -19,13 +19,13 @@ title: Application Threat Management
 <div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
 {{< /site-region >}}
 
-ASM Threat Management は、APM でインスツルメンテーションされたアプリケーションからのトレーステレメトリーを使用して、観測された挙動を既知の攻撃パターンと比較したり、ビジネスロジックの乱用を特定することにより、実行中のサービスに対する脅威や攻撃を特定します。
+ASM Threat Management uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns, or by identifying business logic abuse.
 
 Threat Monitoring によって提起されたセキュリティシグナルは要約され、サービスの健全性とパフォーマンスを監視するために通常アクセスしているビューに表示されます。[サービスカタログ][1]と APM の個々のサービスページは、アプリケーションの脅威シグナルに関する洞察を提供し、脆弱性の調査、攻撃者のブロック、攻撃の露出のレビューを可能にします。
 
-{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="脅威シグナルを表示するサービスを含むサービスカタログ" style="width:100%;" >}}
+{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Service Catalog with services showing threat signals" style="width:100%;" >}}
 
-Threat Management の仕組みについての詳細は、[ASM の仕組み][4]をご覧ください。
+For additional information about how Threat Management works, read [How ASM Works][4].
 
 
 ## 脅威シグナルを探る
@@ -39,13 +39,13 @@ Threat Management の仕組みについての詳細は、[ASM の仕組み][4]�
 
 ## 攻撃パターンを特定するための In-App WAF ルールの作成
 
-ASM に付属するデフォルトのルールを拡張して、アプリケーションの疑わしい動作を定義する [In-App WAF ルールを作成][5]することができます。そして、これらのルールからトリガーされた攻撃試行からセキュリティシグナルを生成するために[カスタムルールを指定][6]し、調査のために Threat Monitoring ビューでそれらを表示することができます。
+You can [create In-App WAF rules][5] that define what suspicious behavior looks like in your application, augmenting the default rules that come with ASM. Then [specify custom rules][6] to generate security signals from the attack attempts triggered from these rules, raising them in the Threat Monitoring views for your investigation.
 
 ## ASM Protect で攻撃と攻撃者の速度を落とす
 
 {{% asm-protect %}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -6,9 +6,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Aprenda a crear dashboards con JSON
-kind: documentación
 title: Widget de notas y enlaces
-widget_type: nota
+widget_type: note
 ---
 
 El widget de **Notas y enlaces** es similar al [widget de texto libre][1], pero contiene más opciones de formato y visualización. 

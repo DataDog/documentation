@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
-kind: documentation
 title: Ingestion Controls
 ---
 
@@ -39,26 +38,18 @@ Ingestion Control ページは、アプリケーションとサービスの取�
 
 ## Agent レベルで全サービスの取り込みを管理
 
-トレーシングライブラリでサービスの取り込み構成に入る前に、Datadog Agent から取り込みボリュームのシェアが制御可能です。
-
-**Manage Agent Ingestion** をクリックすると、Agent のサンプリングコントロールの構成方法が表示されます。
+サービスの取り込みサンプリングをグローバルに管理するには、**Remotely Configure Agent Ingestion** をクリックします。Agent のバージョン [7.42.0][13] 以降を使用している場合、Agent サンプリングのパラメーターをリモートで構成することができます。Agent でリモート構成を有効にする方法については、[リモート構成の仕組み][14]をお読みください。
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent レベル構成モーダル" >}}
 
-Datadog Agent でサンプリングを構成することで、3 つの取り込みメカニズムを制御することができます。
-- **[ヘッドベースサンプリング][4]**: サービスにサンプリングルールが設定されていない場合、Datadog Agent はライブラリで適用するサンプリングレートを自動的に計算し、Agent あたり 1 秒間に 10 件のトレースを目標とします。`DD_APM_MAX_TPS` の設定により、1 秒あたりの目標トレース数を変更することができます。
--  **[エラースパンサンプリング][5]**: ヘッドベースのサンプリングで捕捉されないトレースについて、Datadog Agent は、Agent ごとに最大で毎秒 10 トレースのローカルエラートレースを捕捉します。`DD_APM_ERROR_TPS` の設定により、1 秒あたりの目標トレース数を変更することができます。
--  **[レアスパンサンプリング][6]**: ヘッドベースのサンプリングで捕捉されないトレースについて、Datadog Agent は、Agent ごとに最大で毎秒 5 トレースのローカルレアレースを捕捉します。この設定は、デフォルトでは無効になっています。`DD_APM_ENABLE_RARE_SAMPLER` は、レアトレースの収集を有効にすることができます。
+Datadog Agent からは、3 つの取り込みサンプリングメカニズムを制御することができます。
+- **[ヘッドベースサンプリング][4]**: サービスに対してサンプリングルールが設定されていない場合、Datadog Agent は自動的にサービスに適用されるサンプリングレートを計算し、**Agent あたり 10 トレース/秒**を目標とします。Datadog でこの目標トレース数を変更するか、Agent レベルでローカルに `DD_APM_MAX_TPS` を設定します。
+-  **[エラースパンサンプリング][5]**: ヘッドベースサンプリングで捕捉されなかったトレースについて、Datadog Agent は、**Agent あたり最大 10 トレース/秒**でローカルエラートレースを捕捉します。Datadog でこの目標トレース数を変更するか、Agent レベルでローカルに `DD_APM_ERROR_TPS` を設定します。
+-  **[レアスパンサンプリング][6]**: ヘッドベースサンプリングで捕捉されなかったトレースについて、Datadog Agent は、**Agent あたり最大 5 トレース/秒**でローカルレアトレースを捕捉します。この設定はデフォルトでは無効になっています。Datadog でレアトレースの収集を有効にするか、Agent レベルでローカルに `DD_APM_ENABLE_RARE_SAMPLER` を設定します。
+
+リモート構成では、これらのパラメーターを更新するために Agent を再起動する必要はありません。`Apply` をクリックして構成の変更を保存すると、新しい構成はすぐに有効になります。
 
 **注**: 円グラフの `Other Ingestion Reasons` (グレー) セクションは、Datadog Agent レベルで_構成不可能_なその他の取り込み理由を表します。
-
-### Agent の取り込み設定をリモートで構成する
-
-<div class="alert alert-warning"> 取り込み構成のためのリモート構成はベータ版です。アクセスリクエストは <a href="/help/">Datadog サポート</a>にご連絡ください。</div>
-
-Agent のバージョン [7.42.0][13] 以降を使用している場合、これらのパラメーターをリモートで構成することができます。Agent でリモート構成を有効にする方法については、[リモート構成の仕組み][14]をお読みください。
-
-リモート構成では、Agent を再起動することなくパラメーターを変更することができます。`Apply` をクリックして構成の変更を保存すると、新しい構成が直ちに有効になります。
 
 **注**: リモートで構成されたパラメーターは、環境変数や `datadog.yaml` の構成など、ローカルでの構成よりも優先されます。
 
@@ -137,6 +128,8 @@ Traffic Breakdown の列は、サービスを起点とするすべてのトレ�
 
 ### サービス取り込み率を構成する
 
+<div class="alert alert-info"><strong>Remotely configured sampling rules are in Beta</strong>. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a> to be able to dynamically set this configuration from the Datadog UI without having to redeploy your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling">Resource-based sampling guide</a> to get started.</div>
+
 **Manage Ingestion Rate** をクリックすると、サービスの取り込み率の構成についての説明が表示されます。
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="サービス取り込み率の変更" >}}
@@ -167,4 +160,4 @@ Traffic Breakdown の列は、サービスを起点とするすべてのトレ�
 [11]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[14]: /ja/agent/remote_config/#enabling-remote-configuration

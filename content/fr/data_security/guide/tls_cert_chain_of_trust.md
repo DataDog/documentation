@@ -1,5 +1,4 @@
 ---
-kind: guide
 title: Modifications de la chaîne de confiance du certificat TLS de Datadog
 ---
 

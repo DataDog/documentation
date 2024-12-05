@@ -5,12 +5,11 @@ code_lang: android
 code_lang_weight: 10
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: ソースコード
   text: dd-sdk-android のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
-kind: ドキュメント
 title: RUM Android の高度なコンフィギュレーション
 type: multi-code-lang
 ---
@@ -214,10 +213,10 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ### 属性の追跡
 
 ```kotlin
-    // 今後のすべての RUM イベントに属性を追加
+    // Adds an attribute to all future RUM events
     GlobalRumMonitor.get().addAttribute(key, value)
 
-    // 今後のすべての RUM イベントから属性を削除
+    // Removes an attribute to all future RUM events
     GlobalRumMonitor.get().removeAttribute(key)
 ```
 
@@ -231,7 +230,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`Configuration.Builder` で以下のメソッドを使用できます。
 
 `setFirstPartyHosts()` 
-: トレーシングが有効で RUM リソースが `first-party` に分類されているホストを定義します。**注**: Datadog 構成でカスタムトレーシングヘッダータイプを定義し、`GlobalTracer` で登録されたトレーサーを使用している場合、使用するトレーサーに同じトレーシングヘッダータイプが設定されていることを確認してください。
+: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 `useSite(DatadogSite)` 
 : ターゲットデータを EU1、US1、US3、US5、US1_FED、および AP1 のサイトに切り替えます。
@@ -483,6 +482,18 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
    |               | `view.name`           | ビューの名前。                                |
 
    **注**: `EventMapper<T>` の実装から null が返された場合、イベントは削除されます。
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```kotlin
+GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
+  currentSessionId = sessionId
+}
+```
 
 ## その他の参考資料
 

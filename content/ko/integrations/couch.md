@@ -43,7 +43,7 @@ integration_id: couchdb
 integration_title: CouchDB
 integration_version: 6.2.1
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: couch
 public_title: CouchDB

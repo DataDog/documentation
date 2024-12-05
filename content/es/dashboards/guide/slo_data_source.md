@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: guía
 title: Graficar datos históricos de SLOs en dashboards
 ---
 

@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: 블로그
   text: DBM과 애플리케이션 성능 모니터링(APM) 텔레메트리를 원활하게 상호 연결하여 엔드 투 엔드 쿼리 성능을 알아봅니다.
-kind: 설명서
 title: 데이터베이스 모니터링과 트레이스 상호 연결
 ---
 
@@ -26,15 +25,17 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 애플리케이션 성능 모니터링(APM) 트레이서 통합은 *전파 모드*를 지원하며 전파 모드는 애플리케이션에서 데이터베이스로 전달되는 정보량을 제어합니다.
 
 - `full` 모드는 전체 트레이스 정보를 데이터베이스로 전송하여 DBM 내 개별 트레이스를 조사할 수 있도록 해줍니다. 대부분의 통합에서 이는 권장되는 솔루션입니다.
-- `service` 모드는 서비스 이름을 전송하여 어느 서비스가 데이터베이스 부하에 기여하는지 이해할 수 있도록 해줍니다. 이는 Oracle 및 SQL Server 애플리케이션에서만 지원되는 모드입니다.
+- `service` 모드는 서비스 이름을 전송하여 어느 서비스가 데이터베이스 부하에 기여하는지 이해할 수 있도록 해줍니다. 이는 Oracle 애플리케이션에서만 지원되는 모드입니다.
 - `disabled` 모드는 전파를 비활성화하므로 애플리케이션에서 아무 정보도 전송하지 않습니다.
 
-SQL Server 및 Oracle은 구문 캐싱 동작 때문에 `full` 전파 모드를 지원하지 않으며 이는 전체 트레이스 컨텍스트를 포함하는 경우 성능 문제를 야기할 수 있습니다.
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL 서버 |  Oracle   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL 서버 |  Oracle   |
-|:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} |            |           |
-| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
+\* Aurora MySQL의 전체 전파 모드에는 버전 3이 필요합니다.
+
+\*\* SQL Server에서는 Java와 .NET 트레이서만 지원합니다.
 
 **지원되는 애플리케이션 트레이서 및 드라이버**
 
@@ -44,17 +45,24 @@ SQL Server 및 Oracle은 구문 캐싱 동작 때문에 `full` 전파 모드를 
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` 모드만 |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | `service` 모드만 |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -64,6 +72,14 @@ SQL Server 및 Oracle은 구문 캐싱 동작 때문에 `full` 전파 모드를 
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] 지원 안 됨
+
+\*\* 자바/.NET에 대한 전체 모드 SQL Server:
+  - 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
+  - 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
+  - 요구 사항:
+    - 에이전트 버전 7.55.0 이상
+    - Java 트레이서 버전 1.39.0 이상
+    - .NET 트레이서 버전 3.3 이상
 
 ## 설정
 최상의 사용자 경험을 위해 다음 환경 변수가 애플리케이션에 설정되어 있는지 확인하세요.
@@ -286,7 +302,8 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 다음 환경 변수를 설정해 데이터베이스 모니터링 전파 기능을 활성화합니다.
    - Postgres 및 MySQL: `DD_DBM_PROPAGATION_MODE=full`
-   - SQL Server: `DD_DBM_PROPAGATION_MODE=service`
+   - SQL Server: `DD_DBM_PROPAGATION_MODE=service` 또는 Java와 .Net 트레이서가 있는  `DD_DBM_PROPAGATION_MODE=full`
+   - Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /ko/tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /ko/tracing/trace_collection/dd_libraries/dotnet-core
@@ -335,7 +352,7 @@ const tracer = require('dd-trace').init();
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
 
-* 통합 수준에서만 활성화하도록 설정합니다.
+* 통합 수준에서만 활성화:
    ```javascript
    const tracer = require('dd-trace').init();
    tracer.use('pg', {
@@ -432,6 +449,12 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[...]%20should%20set
 [26]: https://app.datadoghq.com/services
+[27]: https://pypi.org/project/asyncpg/
+[28]: https://pypi.org/project/aiomysql/
+[29]: https://pypi.org/project/mysql-connector-python/
+[30]: https://pypi.org/project/mysqlclient/
+[31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

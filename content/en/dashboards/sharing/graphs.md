@@ -1,6 +1,5 @@
 ---
 title: Share Graphs
-kind: documentation
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs

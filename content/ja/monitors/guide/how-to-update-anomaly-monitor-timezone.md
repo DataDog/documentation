@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の構成
-kind: ガイド
 title: ローカルタイムゾーンを考慮して異常検知モニターを更新する方法
 ---
 

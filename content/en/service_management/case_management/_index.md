@@ -1,6 +1,5 @@
 ---
 title: Case Management
-kind: documentation
 aliases:
 - /monitors/case_management/
 further_reading:
@@ -13,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
   tag: "blog"
   text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
+- link: "https://www.datadoghq.com/blog/datadog-service-management/"
+  tag: "Blog"
+  text: "Ensure high service availability with Datadog Service Management"
 algolia:
   tags: ['inbox', 'case management']
 ---

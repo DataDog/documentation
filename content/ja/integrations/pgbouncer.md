@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 118
     source_type_name: PGBouncer
-  logs:
-    source: pgbouncer
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     instance_overview: assets/saved_views/instance_overview.json
@@ -35,6 +33,7 @@ author:
 categories:
 - data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_on_public_website: true
@@ -42,9 +41,8 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 6.2.0
+integration_version: 8.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: pgbouncer
 public_title: PGBouncer
@@ -59,6 +57,7 @@ tile:
   - Supported OS::macOS
   - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
   media: []
@@ -74,9 +73,9 @@ tile:
 
 PgBouncer チェックは、接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックの監視を可能にします。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 
@@ -105,12 +104,12 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
    パスワードの入力を要求されたら、`userlist.txt` に追加したパスワードを入力します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -132,7 +131,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 2. [Agent を再起動します][4]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -176,7 +175,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                          |
 | `<INSTANCE_CONFIG>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -195,23 +194,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][2]し、Checks セクションで `pgbouncer` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "pgbouncer" >}}
 
 
 **注**: PgBouncer のバージョンによっては、すべてのメトリクスを使用できないことがあります。
 
-### ヘルプ
+### イベント
 
 PgBouncer チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "pgbouncer" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

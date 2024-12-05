@@ -1,6 +1,6 @@
 ---
 title: Tagging RabbitMQ queues by tag family
-kind: faq
+
 ---
 
 As of Datadog Agent version 5.8.0. it is now possible to apply a tag to specified groups of RabbitMQ queues for use in visualizations and alerting.

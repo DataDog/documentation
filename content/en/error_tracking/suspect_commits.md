@@ -1,6 +1,5 @@
 ---
 title: Suspect Commits
-kind: documentation
 disable_toc: false
 ---
 ## Overview

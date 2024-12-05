@@ -1,9 +1,8 @@
 ---
 title: Uploading JUnit test report files to Datadog
-kind: documentation
 code_lang: junit_xml
 type: multi-code-lang
-code_lang_weight: 60
+code_lang_weight: 70
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
@@ -12,9 +11,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -53,11 +52,9 @@ npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
 
-### Standalone binary (beta)
+### Standalone binary
 
-<div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
-
-If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -238,7 +235,7 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
-**Note**: Logs are billed separately from CI Visibility.
+**Note**: Logs are billed separately from Test Optimization.
 
 `--max-concurrency`
 : The number of concurrent uploads to the API.<br/>
@@ -372,7 +369,7 @@ The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 3. Follow the instructions to configure the integration for a personal or organization account.
 4. In **Edit Permissions**, grant `Contents: Read` access.
 5. Click **Create App in GitHub** to finish the app creation process on GitHub.
-6. Give the app a name, for example, `Datadog CI Visibility`.
+6. Give the app a name, for example, `Datadog Test Optimization`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
 ### Manually providing the `test.source.file` tag

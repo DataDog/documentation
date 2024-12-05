@@ -1,6 +1,5 @@
 ---
 title: RUM React Native Data Collected
-kind: documentation
 description: Learn about the data collected by React Native Monitoring.
 code_lang: reactnative
 type: multi-code-lang

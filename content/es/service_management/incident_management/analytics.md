@@ -3,7 +3,6 @@ aliases:
 - /es/monitors/incident_management/analytics
 description: Seguimiento y análisis de las estadísticas agregadas de gestión de incidencias
   en dashboards y notebooks
-kind: documentation
 title: Análisis de la gestión de incidencias
 ---
 

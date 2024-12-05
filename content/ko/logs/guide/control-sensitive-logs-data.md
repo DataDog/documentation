@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: 블로그
   text: Datadog Audit Trail로 팀 전반에 규정 준수, 거버넌스 및 투명성 빌드
-kind: 지침
 title: 민감한 로그 데이터 제어
 ---
 

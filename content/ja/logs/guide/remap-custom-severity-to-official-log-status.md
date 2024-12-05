@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: Documentation
   text: パースの詳細
-kind: ガイド
 title: カスタム重大度値を公式ログステータスに再マップする
 ---
 

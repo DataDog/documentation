@@ -2,7 +2,8 @@
 categories:
 - azure
 - クラウド
-- data store
+- data stores
+custom_kind: integration
 dependencies: []
 description: Azure DB for MariaDB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
@@ -13,7 +14,6 @@ integration_id: azure-dbformariadb
 integration_title: Microsoft Azure DB for MariaDB
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_db_for_mariadb
 public_title: Datadog-Microsoft Azure DB for MariaDB インテグレーション
@@ -21,6 +21,7 @@ short_description: Azure DB for MariaDB のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Database for MariaDB は、サービスとしてエンタープライズ対応のフルマネージド型コミュニティ MariaDB データベースを提供します。
@@ -46,7 +47,7 @@ Azure Database for MariaDB からメトリクスを取得すると、以下の�
 
 Azure Database for MariaDB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Database for MariaDB インテグレーションには、サービスのチェック機能は含まれません。
 

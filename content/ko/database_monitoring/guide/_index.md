@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 데이터베이스 모니터링 가이드
 disable_toc: true
-kind: 가이드
 private: true
 title: 데이터베이스 모니터링 가이드
 ---

@@ -8,16 +8,15 @@ further_reading:
 - link: /tracing/api_catalog/explore_apis/
   tag: ドキュメント
   text: API の探索
-- link: profiler/profiler_troubleshooting/dotnet/
+- link: /tracing/api_catalog/monitor_apis/
   tag: ドキュメント
-  text: .NET
+  text: Monitoring APIs
 is_beta: true
-kind: ドキュメント
 title: API カタログへのエントリの追加
 ---
 
 {{< site-region region="gov,ap1" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では API カタログはサポートされていません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では API Catalog はサポートされていません。</div>
 {{< /site-region >}}
 
 ## 概要
@@ -56,7 +55,7 @@ OpenAPI/Swagger ファイルをインポートするには
 3. **Import an API** を選択します。
 4. デバイスからインポートする OpenAPI ファイルを選択します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

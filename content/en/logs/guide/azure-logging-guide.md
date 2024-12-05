@@ -1,17 +1,19 @@
 ---
 title: Send Azure Logs to Datadog
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.
 
-Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
+Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option. To collect logs from Azure Log Analytics workspaces, you must use the Azure Event Hub process.
 
 **All sites**: All Datadog sites can use the steps on this page to send Azure logs to Datadog.
 
@@ -19,7 +21,7 @@ Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSe
 
 {{< tabs >}}
 
-{{% tab "Automated Installation" %}}
+{{% tab "Automated installation" %}}
 
 To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you.
 
@@ -57,6 +59,8 @@ You can also [view the contents of the script](https://github.com/DataDog/datado
 
 To send Azure platform logs (including resource logs), you can deploy an Event Hub and log forwarder function pair. 
 After deploying, create diagnostic settings for each of the log sources to stream logs to Datadog.
+
+**Note**: Resources can only stream to Event Hubs in the same Azure region.
 
 1. In the Azure portal, navigate to your **Cloud Shell**.
 
@@ -120,6 +124,8 @@ This section describes the manual setup process to forward your Azure logs to Da
 3. Create [diagnostic settings](#create-diagnostic-settings) to forward your Azure [Activity logs](#activity-logs), [resource logs](#resource-logs), or both to your Event Hub.
 
 The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
+
+**Note**: Resources can only stream to Event Hubs in the same Azure region.
 
 #### Create an Azure Event Hub
 

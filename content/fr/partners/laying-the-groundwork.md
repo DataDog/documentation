@@ -1,7 +1,6 @@
 ---
 description: Découvrez comment vous lancer ainsi que les décisions clés à prendre
   dès le début.
-kind: documentation
 private: true
 title: Préparation du terrain
 ---

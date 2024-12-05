@@ -25,6 +25,7 @@ author:
 categories:
 - インシデント
 - ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: superwise
 integration_title: Superwise
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: superwise
 public_title: Superwise
@@ -51,10 +51,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
   support: README.md#Support
   title: Superwise
 ---
@@ -72,7 +76,7 @@ Superwise のモデルメトリクスとインシデントのインテグレー�
 
 Superwise で Datadog インテグレーションを構成すると、標準的なモデルメトリクスが Datadog に送信され、ユーザーは Datadog でモデル観測性のダッシュボードを取得できます。特定のモデルメトリクスやインシデントポリシーを構成し、Datadog に送信することで、ユースケースに合わせたモデル観測性を実現することが可能です。
 
-## 計画と使用
+## セットアップ
 
 1. [Superwise ポータル][3]で、**Integrations** を選択します。
 
@@ -93,21 +97,21 @@ Datadog の **Metrics Explorer** で、メトリクス `superwise.integration.te
 
 ![Datadog の superwise.integration.test グラフ][7]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "superwise" >}}
 
 
-### ヘルプ
+### イベント
 
 Superwise インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Superwise インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 サポートが必要な場合は、[Superwise のドキュメント][9]をご覧ください。
 

@@ -7,7 +7,9 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: ドキュメント
   text: カスタムリンク
-kind: documentation
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
+  tag: blog
+  text: Datadog Observability Pipelines によるログの変換と強化
 title: ウィジェット
 ---
 
@@ -31,6 +33,7 @@ title: ウィジェット
         img="dashboards/widgets/icons/pie_light_large.png">}} 円グラフ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} クエリ値{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} サンキー{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
         img="dashboards/widgets/icons/scatter-plot_light_large.png">}} 散布図{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
@@ -38,7 +41,7 @@ title: ウィジェット
     {{< nextlink href="/dashboards/widgets/treemap"
         img="dashboards/widgets/icons/treemap_light_large.png">}} ツリーマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries"
-        img="dashboards/widgets/icons/timeseries_light_large.png">}} Timeseries{{< /nextlink >}}
+        img="dashboards/widgets/icons/timeseries_light_large.png">}} 時系列{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} トップリスト{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -128,7 +131,7 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## 単位のオーバーライド
 
-ウィジェットに表示される単位値をカスタマイズして、データにコンテキストを追加できます。その他のユースケースや情報については、[単位のオーバーライドで視覚化をカスタマイズする][3]を参照してください。
+ウィジェットに表示される単位値をカスタマイズして、データにコンテキストを追加できます。その他の使用例や情報については、[単位オーバーライドで可視化をカスタマイズする][3]を参照してください。
 - **Unit override**: 選択することで、「メモリ」ファミリーの単位が表示され、Datadog がデータに応じて適切なスケールを表示するようにします (メガバイトやギガバイトなど)。
 - **Unit and scale override**: 単位を単一のスケールに固定します (値に関係なくデータをメガバイトで表示)。
 - **Define custom units**: 完全にカスタマイズされた単位を定義します (一般的なカウントの代わりに「テスト」のような)。
@@ -149,9 +152,9 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## ウィジェットのコピーと貼り付け
 
-<div class="alert alert-warning">この機能を使用するには、<a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> 権限</a>を持ち、Organization Settings で <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> を有効にする必要があります。</div>
+<div class="alert alert-warning">この機能を使用するには、<a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> 権限</a>を持ち、組織設定で<a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>静的パブリックデータ共有</strong></a>を有効にする必要があります。</div>
 
-`Ctrl + C` (Mac の場合は `Cmd + C`) を使用するか、共有アイコンを選択して "Copy" を選択することで、ウィジェットは[ダッシュボード][4]、[ノートブック][5]、[APM サービス][6]、および [APM リソース][7]ページにコピーできます。
+ウィジェットを[ダッシュボード][4]、[ノートブック][5]、[APM サービス][6]、および [APM リソース][7]ページにコピーするには、`Ctrl + C` (Mac の場合は `Cmd + C`) を使用するか、共有アイコンを選択して "Copy" を選択します。
 
 コピーされたウィジェットは、次の場所で `Ctrl + V`（Mac の場合は `Cmd + V`）を使用して Datadog 内に貼り付けることができます。
 
@@ -172,7 +175,7 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## ウィジェットグラフ
 
-### OAuth アプリ
+### エクスポート
 
 | 形式 | 手順            |
 | -----  | ----------------------- |

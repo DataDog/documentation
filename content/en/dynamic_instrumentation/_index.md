@@ -1,6 +1,5 @@
 ---
 title: Dynamic Instrumentation
-kind: documentation
 aliases:
     - /tracing/dynamic_instrumentation/
     - /dynamic_instrumentation/how-it-works/
@@ -34,7 +33,7 @@ further_reading:
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
-If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [Symbol Database private beta][17].
+If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
 
 ## Getting started
 
@@ -42,13 +41,15 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.44.0 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.45.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][3] 1.24.0 or higher.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.42.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
+- For PHP applications, tracing library [`dd-trace-php`][18] 1.4.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Optionally, [Source Code Integration][7] is set up for your service.
+- Recommended, [autocomplete and search (in Preview)][17] is enabled.
+- Recommended, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
 - The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
 - The **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) permission is required to use the **Capture method parameters and local variables** option.
@@ -77,7 +78,7 @@ For more detailed instructions, select your runtime below:
 ### Limitations
 
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
-- Support is limited to applications built with Python, Java, and .NET.
+- Support is limited to applications built with Python, Java, .NET and PHP.
 
 ## Explore Dynamic Instrumentation
 
@@ -98,7 +99,7 @@ All probe types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
 1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file, and displays the file's code so you can choose the line.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
 
 See the individual probe types below for specific creation steps for each probe type.
 
@@ -142,7 +143,7 @@ You can also set a condition on a log probe using the [expression language][15].
 
 Probes with this setting enabled are rate-limited to one hit per second.
 
-<div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To ensure this information is properly redacted:<ul>
+<div class="alert alert-info"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To ensure this information is properly redacted:<ul>
 <li>Datadog Dynamic Instrumentation employs several techniques to redact sensitive information. To learn more about the default mechanisms or how to extend the it to meet your needs, read <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">Sensitive Data Scrubbing</a>.</li>
 <li>Turn off the <strong>Capture method parameters and local variables</strong> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify, thus reducing the risk of unintentional sensitive data leaks. </li>
 <li>If you are the Administrator of your Datadog account and would like to prevent other users from being able to use the <strong>Capture method parameters and local variables</strong> option, you can revoke their Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
@@ -223,3 +224,4 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /dynamic_instrumentation/symdb/
+[18]: https://github.com/DataDog/dd-trace-php

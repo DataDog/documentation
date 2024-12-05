@@ -17,7 +17,6 @@ further_reading:
 - link: tracing/
   tag: 고급 사용
   text: 고급 사용
-kind: 설명서
 title: 파이썬(Python) 추적 라이브러리 설정하기
 type: multi-code-lang
 ---

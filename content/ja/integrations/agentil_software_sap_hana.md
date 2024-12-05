@@ -33,6 +33,7 @@ categories:
 - data stores
 - イベント管理
 - モニター
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,7 +42,6 @@ integration_id: agentil-software-sap-hana
 integration_title: SAP HANA
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -108,13 +108,13 @@ Agent ベースのソリューションとは異なり、このプラットフ�
 ### 監視対象モジュール
 
 - HANA ノード
-- ガイド
+- Alerts
 - バックアップ
 - サービス CPU
 - サービスメモリ
 - サービスディスク
 - ブロックされたトランザクション
-- Ruby
+- Connections
 - スレッド
 - レプリケーションステータス
 - レプリケーション統計

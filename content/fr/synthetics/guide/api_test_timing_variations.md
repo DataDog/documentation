@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
   tag: Documentation
   text: Métriques des tests API Synthetic
-kind: documentation
 title: Fonctionnement des durées de test API et correction des écarts
 ---
 

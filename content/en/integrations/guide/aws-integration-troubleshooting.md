@@ -1,6 +1,6 @@
 ---
 title: AWS Integration Troubleshooting
-kind: guide
+
 description: "Troubleshooting steps for the Datadog AWS Integration"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"

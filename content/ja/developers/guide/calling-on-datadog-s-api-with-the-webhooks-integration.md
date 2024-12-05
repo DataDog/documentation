@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
-kind: ガイド
 title: Webhooks インテグレーションを使用した Datadog API の呼び出し
 ---
 

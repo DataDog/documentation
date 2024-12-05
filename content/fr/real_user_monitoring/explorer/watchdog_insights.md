@@ -14,7 +14,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: En savoir plus sur la fonctionnalité de recherche du RUM Explorer
-kind: documentation
 title: Watchdog Insights pour RUM
 ---
 

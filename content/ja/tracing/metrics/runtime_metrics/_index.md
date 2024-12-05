@@ -3,7 +3,6 @@ aliases:
 - /ja/tracing/advanced/runtime_metrics/
 - /ja/tracing/runtime_metrics/
 description: アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
-kind: documentation
 title: ランタイムメトリクス
 type: multi-code-lang
 ---

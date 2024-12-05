@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/types/event/
   tag: Documentación
   text: Monitores de eventos
-kind: documentation
 private: true
 title: Guías de eventos
 ---
@@ -45,4 +44,4 @@ Un evento representa cualquier registro de actividad destacable para los ingenie
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}

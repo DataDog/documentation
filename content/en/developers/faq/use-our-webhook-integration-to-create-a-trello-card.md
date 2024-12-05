@@ -1,6 +1,6 @@
 ---
 title: Use the webhooks integration to create a Trello card
-kind: faq
+
 ---
 
 You can use the [webhooks integration][1] to instantly create a Trello card using the [@-notification feature][2].

@@ -19,7 +19,6 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: 설명서
   text: Datadog 클러스터 에이전트 트러블슈팅
-kind: 설명서
 title: 클러스터 에이전트 커스텀 및 외부 메트릭을 사용하여 오토스케일링
 ---
 

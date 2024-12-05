@@ -1,6 +1,5 @@
 ---
 title: Correlate Database Monitoring and Traces
-kind: documentation
 aliases:
 - /database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
@@ -26,15 +25,17 @@ Data privacy
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
-- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle and SQL Server applications.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle applications.
 - `disabled` mode disables propagation and does not send any information from applications.
 
-SQL Server and Oracle do not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
-|:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} |            |           |
-| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
+\* Full propagation mode on Aurora MySQL requires version 3.
+
+\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
@@ -44,17 +45,24 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` mode only |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | `service` mode only |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -64,6 +72,14 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] not supported
+
+\*\* Full mode SQL Server for Java/.NET:
+  - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
+  - If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
+  - Prerequisites:
+    - Agent version 7.55.0 or greater
+    - Java tracer version 1.39.0 or greater
+    - .NET tracer version 3.3 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -286,7 +302,8 @@ Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
-   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service` or `DD_DBM_PROPAGATION_MODE=full` with Java and .NET tracers
+   - For Oracle: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
@@ -335,7 +352,7 @@ Enable the database monitoring propagation feature using one of the following me
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
 
-* Enable only at the integration level: 
+* Enable only at the integration level:
    ```javascript
    const tracer = require('dd-trace').init();
    tracer.use('pg', {
@@ -432,6 +449,12 @@ View historical performance of similar queries to those executed in your trace, 
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
 [26]: https://app.datadoghq.com/services
+[27]: https://pypi.org/project/asyncpg/
+[28]: https://pypi.org/project/aiomysql/
+[29]: https://pypi.org/project/mysql-connector-python/
+[30]: https://pypi.org/project/mysqlclient/
+[31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

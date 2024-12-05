@@ -18,11 +18,9 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10091
     source_type_name: Confluent Platform
-  logs:
-    source: confluent_platform
   monitors:
-    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
-    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
+    Topic partition is not used: assets/monitors/unused_partition.json
+    Unclean leader election detected: assets/monitors/unclean_leader_election.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,6 +28,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
 display_on_public_website: true
@@ -37,9 +36,8 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.10.1
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: confluent_platform
 public_title: Confluent Platform
@@ -55,6 +53,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
+  - 製品::Data Streams Monitoring
   configuration: README.md#Setup
   description: Confluent Platform のコンポーネントを監視する。
   media: []
@@ -80,17 +80,17 @@ tile:
 - Streams
 - REST Proxy
 
-## 計画と使用
+## セットアップ
 
 
-### インフラストラクチャーリスト
+### インストール
 
 Confluent Platform チェックは [Datadog Agent][1] パッケージに含まれています。Confluent Platform コンポーネントサーバーに追加でインストールする必要はありません。
 
 **注**: このチェックはメトリクスを JMX を使用して収集するため、Agent が [jmxfetch][2] を実行できるように、各ノード上に JVM が必要です。Oracle 提供の JVM を使用することをお勧めします。
 
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `confluent_platform.d/conf.yaml` ファイルを編集し、Confluent Platform のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[confluent_platform.d/conf.yaml のサンプル][3]を参照してください。
 
@@ -113,7 +113,7 @@ Confluent Platform チェックは [Datadog Agent][1] パッケージに含ま�
 
 2. [Agent を再起動します][5]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -164,21 +164,21 @@ _Agent バージョン 6.0 以降で利用可能_
           status : OK
 ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "confluent_platform" >}}
 
 
-### ヘルプ
+### イベント
 
 Confluent Platform チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "confluent_platform" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

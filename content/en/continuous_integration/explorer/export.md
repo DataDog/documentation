@@ -1,6 +1,5 @@
 ---
 title: Export Pipeline Executions 
-kind: documentation
 further_reading:
 - link: "/continuous_integration/search/"
   tag: "Documentation"

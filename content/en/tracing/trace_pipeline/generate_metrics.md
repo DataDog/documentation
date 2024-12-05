@@ -1,6 +1,5 @@
 ---
 title: Generate Metrics from Spans
-kind: documentation
 description: 'Generate custom metrics from ingested spans.'
 aliases:
 - /tracing/span_to_metrics/

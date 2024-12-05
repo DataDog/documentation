@@ -1,6 +1,5 @@
 ---
 title: Update to Distribution Metrics Workflow FAQ
-kind: faq
 is_beta: true
 further_reading:
 - link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers/"

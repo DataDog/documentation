@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentación
   text: Aprender a consultar gráficos
-kind: guía
 title: Configuración de un gráfico de estadísticas en APM
 ---
 

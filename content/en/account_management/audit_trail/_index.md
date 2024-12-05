@@ -1,6 +1,5 @@
 ---
 title: Datadog Audit Trail
-kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -153,7 +152,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 ## Filter audit events based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+<div class="alert alert-warning">Reference Tables containing over 40,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
@@ -163,7 +162,7 @@ To apply a query filter with Reference Tables, click on the `+ Add` button next 
 
 ### API key auditing
 
-<div class="alert alert-warning">API key auditing is in private beta.</div>
+<div class="alert alert-warning">API key auditing is in Preview.</div>
 
 Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
 - How API keys are used across your organization and telemetry sources.
@@ -188,6 +187,8 @@ Give more visual context to your audit trail events with dashboards. To create a
 Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
 
 To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+
+**Note**: The **List** view does not have the option to export to a scheduled report.
 
 {{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
 

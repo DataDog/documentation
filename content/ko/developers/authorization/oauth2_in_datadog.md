@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: 설명서
   text: OAuth 2.0 허가 엔드포인트 사용 방법 알아보기
-kind: 설명서
 title: Datadog OAuth2
 ---
 

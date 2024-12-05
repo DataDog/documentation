@@ -17,7 +17,6 @@ further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: 설명서
   text: OTLP 메트릭 유형
-kind: 설명서
 title: OpenTelemetry 컬렉터 및 Datadog 익스포터
 ---
 

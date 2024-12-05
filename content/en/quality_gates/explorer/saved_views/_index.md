@@ -1,19 +1,18 @@
 ---
 title: Saved Views
-kind: documentation
 further_reading:
 - link: "/quality_gates/explorer/search_syntax/"
   tag: "Documentation"
   text: "Learn how to create a search query"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Quality Gates is in Preview.
+{{< /callout >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
 
 ## Overview
 
@@ -36,7 +35,7 @@ To access your saved views, expand **> Views** to the left in the [Quality Gates
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the avatar of the view's creator. Click **Save** to create a saved view from the current content in your Explorer.
 
-{{< img src="quality_gates/explorer/expand_view.png" text="Create a saved view in the Quality Gates Explorer" style="width:100%" >}}
+{{< img src="quality_gates/explorer/expand_view_1.png" text="Create a saved view in the Quality Gates Explorer" style="width:100%" >}}
 
 You can:
 
@@ -52,7 +51,7 @@ You can:
 
 You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per-user and have no impact on your organization. 
 
-{{< img src="quality_gates/explorer/default_view.png" text="Set a default view in the Quality Gates Explorer" style="width:100%" >}}
+{{< img src="quality_gates/explorer/default_view_1.png" text="Set a default view in the Quality Gates Explorer" style="width:100%" >}}
 
 From your current default saved view, take actions to update the view to a different layout that you want as your default. In the **Views** panel, save the current view as your default saved view.
 

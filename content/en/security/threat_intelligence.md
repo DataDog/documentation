@@ -1,6 +1,5 @@
 ---
 title: Threat Intelligence
-kind: documentation
 aliases:
     - /security/threat_intel
 description: "Threat Intelligence at Datadog"
@@ -67,12 +66,14 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 | Source | Category | Source Use Cases | Primary Products | 
 |--------|------------|-----------|------------------|
-| Datadog Threat Research| scanners, exploits | Honeypots focused on software specific threats | ASM and CWS |
+| Datadog Threat Research| scanners, Redis exploitation, Docker exploitation, malware, bruteforcer | Honeypots focused on software specific threats | ASM, CWS and Cloud SIEM |
 | [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | ASM and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
-| Tor | tor | Policy violations for user activity | AWS, Cloud SIEM, and CWS |
+| Tor | tor | Policy violations for user activity | ASM, Cloud SIEM, and CWS |
+| [Threatfox](https://threatfox.abuse.ch/) | attack | Indicators of compromise (IOCs) associated with malware | Cloud SIEM, and CWS |
+
 
 ### Threat Intelligence Categories
 

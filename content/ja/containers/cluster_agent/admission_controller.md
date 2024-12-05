@@ -5,10 +5,12 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
+- link: /containers/troubleshooting/admission-controller
+  tag: ドキュメント
+  text: Admission Controller のトラブルシューティング
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: ブログ
   text: Datadog APM で Kubernetes アプリケーションのトレーシングを自動インスツルメンテーションするために、ライブラリインジェクションを使用します
-kind: documentation
 title: Datadog Admission Controller
 ---
 
@@ -26,11 +28,11 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 
 ## 構成
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Datadog Operator の Admission Controller を有効にするには、`DatadogAgent` の構成でパラメーター `features.admissionController.enabled` を `true` に設定します。
 
-{{< code-block lang="yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-agent.yaml" disable_copy="false" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -48,7 +50,7 @@ Helm chart v2.35.0 から、Datadog Admission Controller がデフォルトで�
 
 Admission Controller で v2.34.6 以前の Helm チャートを有効にするには、パラメーター `clusterAgent.admissionController.enabled` を `true` に設定してください。
 
-{{< code-block lang="yaml" filename="values.yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml" disable_copy="false" >}}
 #(...)
 clusterAgent:
   #(...)
@@ -155,10 +157,10 @@ Helm チャートに `mutateUnlabelled: true` という Agent 構成を追加す
 |------------------|-----------------------------------------|-----------|
 | `true`           | ラベルなし                                | はい       |
 | `true`           | `admission.datadoghq.com/enabled=true`  | はい       |
-| `true`           | `admission.datadoghq.com/enabled=false` | ✕        |
-| `false`          | ラベルなし                                | ✕        |
+| `true`           | `admission.datadoghq.com/enabled=false` | いいえ        |
+| `false`          | ラベルなし                                | いいえ        |
 | `false`          | `admission.datadoghq.com/enabled=true`  | はい       |
-| `false`          | `admission.datadoghq.com/enabled=false` | ✕        |
+| `false`          | `admission.datadoghq.com/enabled=false` | いいえ        |
 
 
 #### 優先順位
@@ -179,17 +181,13 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 |--------------------|-------------------------------------------------------------------------------------------------------------------|
 | `hostip` (デフォルト) | 環境変数 `DD_AGENT_HOST` にホスト IP を注入する                                                        |
 | `service`          | Datadog のローカルサービスの DNS 名を環境変数 `DD_AGENT_HOST` に注入する (Kubernetes v1.22+で使用可能)|
-| `socket`           | 環境変数 `DD_TRACE_AGENT_URL` に Unix ドメインソケットのパスを注入し、対応するパスにアクセスするようにボリュームを定義する |
+| `socket`           | 環境変数 `DD_TRACE_AGENT_URL` に Unix ドメインソケットのパスを注入し、対応するパスにアクセスするようにボリュームを定義する。`DD_DOGSTATSD_URL` に、DogStatsD メトリクスの Datadog Agent への接続に使用する URL を挿入する。 |
 
 **注**: ポッド固有のモードは、Admission Controller レベルで定義されたグローバルモードより優先されます。
 
-#### 注
+## トラブルシューティング
 
-- 新しいアプリケーションポッドを作成する前に、Admission Controller のデプロイと構成が必要です。既に存在するポッドは更新できません。
-- Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
-- Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
-- プライベートクラスターでは、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。
-
+[Admission Controller のトラブルシューティング][6]を参照してください。
 
 ## その他の参考資料
 
@@ -199,3 +197,5 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 [2]: /ja/tracing/trace_collection/library_injection_local/
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
+[5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
+[6]: /ja/containers/troubleshooting/admission-controller

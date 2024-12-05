@@ -26,6 +26,8 @@ categories:
 - metrics
 - issue tracking
 - network
+- event management
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,7 +36,6 @@ integration_id: catchpoint
 integration_title: Catchpoint
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: catchpoint
 public_title: Catchpoint
@@ -46,8 +47,10 @@ tile:
   - Category::Metrics
   - Category::問題の追跡
   - Category::ネットワーク
+  - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Catchpoint のアラートを Datadog イベントストリームへ送信。
+  description: Send your Catchpoint alerts to your Datadog event stream.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -65,13 +68,13 @@ Catchpoint インテグレーションにより、以下のことが可能にな
 -   Catchpoint ポータルの分析チャートへの直接リンクにアクセスできます。
 -   Alert Type タグを設定して、イベントをより効果的にフィルタリングできます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 イベントストリームに Catchpoint のアラートを取り込むには、Catchpoint ポータルにログインし、_Settings_ > _API_ に移動します。
 
@@ -821,21 +824,21 @@ Catchpoint メトリクスを Datadog で受信するには、Catchpoint ポー�
 }
 ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "catchpoint" >}}
 
 
-### ヘルプ
+### イベント
 
 Catchpoint からのイベントは、[Catchpoint Dashboard][4] の Event Stream ウィジェットに表示されます。
 
-### ヘルプ
+### サービスチェック
 
 Catchpoint インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

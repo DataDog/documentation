@@ -1,6 +1,5 @@
 ---
 title: Test Coverage
-kind: documentation
 description: Evaluate your testing suite's coverage of browser actions and API endpoints.
 aliases:
   - /synthetics/dashboards/testing_coverage

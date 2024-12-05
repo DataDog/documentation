@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/dashboards/faq/query-to-the-graph
-kind: documentación
 title: Consulta al gráfico
 ---
 

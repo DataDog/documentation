@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentación
   text: Aprenda a crear una consulta para crear gráficas
-kind: documentación
 title: Widget de tabla
 widget_type: query_table
 ---

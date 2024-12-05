@@ -10,15 +10,12 @@ further_reading:
 - link: /synthetics/metrics/
   tag: ドキュメント
   text: Synthetic モニタリングメトリクスについて
-kind: ガイド
 title: Synthetic テストモニターを利用する
 ---
 
 ## 概要
 
 Synthetic テストを作成すると、Datadog は自動的に関連するモニターを作成します。Synthetic テストのモニターがアラートを発する際の通知を設定することができます。
-
-{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Synthetic テストモニター" style="width:100%;">}}
 
 ## Synthetic テストモニターの作成
 
@@ -56,7 +53,7 @@ Synthetic テストモニターは、メール、Slack、Pagerduty、Microsoft T
 
 詳しくは、[Statuspage とモニターのインテグレーション][8]をご覧ください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

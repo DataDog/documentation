@@ -1,6 +1,5 @@
 ---
 title: Roles and Permissions
-kind: documentation
 ---
 
 Members of a Cloudcraft team may be assigned one of three different user roles:

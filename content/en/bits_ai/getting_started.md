@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-kind: guide
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"

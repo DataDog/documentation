@@ -1,6 +1,5 @@
 ---
 title: Empezando con la gestión de la seguridad de las aplicaciones
-kind: documentación
 aliases:
 - /security/security_monitoring/getting_started/
 further_reading:
@@ -8,7 +7,6 @@ further_reading:
   tag: Documentación
   text: Términos y conceptos de seguridad de las aplicaciones
 - link: /security/application_security/how-appsec-works
- 
   tag: Documentación
   text: Cómo funciona la gestión de la seguridad de las aplicaciones
 - link: /security/application_security/enabling/

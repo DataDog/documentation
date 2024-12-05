@@ -9,6 +9,7 @@ categories:
 - log collection
 - network
 - notifications
+custom_kind: インテグレーション
 dependencies: []
 description: インスタンスや多数の Azure サービスからメトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/azure/
@@ -65,32 +66,31 @@ integration_id: azure
 integration_title: Microsoft Azure
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 monitors:
-  '[Azure App Gateway] Backend Hosts': assets/monitors/app_gateway_backend_hosts.json
-  '[Azure App Gateway] CPU Utilization': assets/monitors/app_gateway_cpu_utilization.json
-  '[Azure App Gateway] Failed Requests': assets/monitors/app_gateway_failed_requests.json
-  '[Azure App Gateway] Response HTTP Status Anomaly': assets/monitors/app_gateway_http_status_anomalies.json
-  '[Azure App Service] App Service Errors': assets/monitors/app_service_app_service_errors.json
-  '[Azure App Service] App Service Plan CPU Utilization': assets/monitors/app_service_cpu.json
-  '[Azure App Service] App Service Plan Memory Utilization': assets/monitors/app_service_memory.json
-  '[Azure App Service] Connections': assets/monitors/app_service_connections.json
-  '[Azure App Service] Function App Errors': assets/monitors/app_service_function_app_errors.json
-  '[Azure App Service] Requests': assets/monitors/app_service_requests.json
-  '[Azure App Service] Response Time': assets/monitors/app_service_response_times.json
-  '[Azure SQL Database] CPU Utilization': assets/monitors/sql_db_cpu_percent.json
-  '[Azure SQL Database] DTU Consumption': assets/monitors/sql_db_dtu_consumption_percent.json
-  '[Azure SQL Database] Deadlock Anomalies': assets/monitors/sql_db_deadlock_anomalies.json
-  '[Azure SQL Database] Failed Connections': assets/monitors/sql_db_connections_failed.json
-  '[Azure SQL Database] Georeplication Link Status ': assets/monitors/sql_db_replication_links.json
-  '[Azure SQL Database] Storage Utilization': assets/monitors/sql_db_storage_percent.json
-  '[Azure VM] CPU Utilization Monitor': assets/monitors/vm_cpu_utilization.json
-  '[Azure VM] Resource Health Status Monitor': assets/monitors/vm_resource_health_status.json
-  '[Azure] API Rate Limit': assets/monitors/rate_limits.json
-  '[Azure] Integration Errors': assets/monitors/integration_errors.json
-  '[Azure] Resource Quotas': assets/monitors/resource_quotas.json
-  '[Azure] Service Health Events': assets/monitors/service_health_events.json
+  API Rate Limit: assets/monitors/rate_limits.json
+  App Service Errors is high: assets/monitors/app_service_app_service_errors.json
+  App Service Plan CPU Utilization is high: assets/monitors/app_service_cpu.json
+  App Service Plan Memory Utilization is high: assets/monitors/app_service_memory.json
+  App gateway CPU Utilization is high: assets/monitors/app_gateway_cpu_utilization.json
+  Backend Hosts Anomaly: assets/monitors/app_gateway_backend_hosts.json
+  Connections Anomaly: assets/monitors/app_service_connections.json
+  DTU Consumption: assets/monitors/sql_db_dtu_consumption_percent.json
+  Deadlock Anomalies: assets/monitors/sql_db_deadlock_anomalies.json
+  Failed Connections is high: assets/monitors/sql_db_connections_failed.json
+  Failed Requests is high: assets/monitors/app_gateway_failed_requests.json
+  Function App Errors is high: assets/monitors/app_service_function_app_errors.json
+  Georeplication Link Status: assets/monitors/sql_db_replication_links.json
+  Integration Errors: assets/monitors/integration_errors.json
+  Requests Anomaly: assets/monitors/app_service_requests.json
+  Resource Health Status: assets/monitors/vm_resource_health_status.json
+  Resource Quotas is high: assets/monitors/resource_quotas.json
+  Response HTTP Status Anomaly: assets/monitors/app_gateway_http_status_anomalies.json
+  Response Time Anomaly: assets/monitors/app_service_response_times.json
+  SQL DB CPU Utilization is high: assets/monitors/sql_db_cpu_percent.json
+  Service Health Events: assets/monitors/service_health_events.json
+  Storage Utilization is high: assets/monitors/sql_db_storage_percent.json
+  VM CPU Utilization is high: assets/monitors/vm_cpu_utilization.json
 name: azure
 public_title: Datadog-Microsoft Azure インテグレーション
 short_description: インスタンスや多数の Azure サービスからメトリクスを収集
@@ -117,7 +117,7 @@ Microsoft Azure に接続すると、以下のことができます。
 Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure のステータスとカウントメトリクス</a>をご覧ください。
 </div>
 
-| Datadog クリップボード                     | 説明                                                                                               |
+| インテグレーション                     | 説明                                                                                               |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|
 | [Analysis Services][2]          | クラウドでデータモデルを提供するサービス                                                         |
 | [API Management][3]             | API を公開、セキュリティ保護、変換、管理、監視するサービス                                      |
@@ -154,64 +154,63 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 | [Recovery Service Vault][34]    | 時間の経過とともに作成されたバックアップやリカバリーポイントを保存するエンティティ。                                  |
 | [Redis Cache][35]               | マネージド型のデータキャッシュ。                                                                                       |
 | [Relay][36]                     | 企業ネットワーク内で実行されているサービスをパブリッククラウドに安全に公開                          |
-| [Cognitive Search][37]          | 優れた検索エクスペリエンスを追加するためのツールを提供する、サービスとしての検索クラウドソリューション             |
-| Storage                         | [BLOB][38]、[ファイル][39]、[キュー][40]、[テーブル][41]のためのストレージ。                                     |
-| [Stream Analytics][42]          | デバイスからの大量のデータストリーミングを調べるイベント処理エンジン                        |
-| [SQL Database][43]              | クラウドの拡張性の高いリレーショナルデータベース。                                                         |
-| [SQL Database Elastic Pool][44] | 複数のデータベースのパフォーマンス管理。                                                              |
-| [Synapse Analytics][45]         | データインテグレーション、エンタープライズデータウェアハウス、ビッグデータアナリティクスを統合したアナリティクスサービス。 |
-| [Usage and Quotas][46]          | お使いの Azure の使用状況を示します。                                                                                  |
-| [Virtual Machine][47]           | 仮想マシン管理サービス。                                                                       |
-| [Virtual Machine Scale Set][48] | 同一の VM をセットでデプロイ、管理、オートスケーリング。                                                     |
-| [Virtual Network][49]           | Azure リソースがお互いと、インターネットと、オープンプレミスネットワークと、安全に通信できるようにします。    |
+| Storage                         | [BLOB][37]、[ファイル][38]、[キュー][39]、[テーブル][40]のためのストレージ。                                     |
+| [Stream Analytics][41]          | デバイスからの大量のデータストリーミングを調べるイベント処理エンジン                        |
+| [SQL Database][42]              | クラウドの拡張性の高いリレーショナルデータベース。                                                         |
+| [SQL Database Elastic Pool][43] | 複数のデータベースのパフォーマンス管理。                                                              |
+| [Synapse Analytics][44]         | データインテグレーション、エンタープライズデータウェアハウス、ビッグデータアナリティクスを統合したアナリティクスサービス。 |
+| [Usage and Quotas][45]          | お使いの Azure の使用状況を示します。                                                                                  |
+| [Virtual Machine][46]           | 仮想マシン管理サービス。                                                                       |
+| [Virtual Machine Scale Set][47] | 同一の VM をセットでデプロイ、管理、オートスケーリング。                                                     |
+| [Virtual Network][48]           | Azure リソースがお互いと、インターネットと、オープンプレミスネットワークと、安全に通信できるようにします。    |
 
-## 計画と使用
+## セットアップ
 
 ### 自動
 
 _全サイト:_  
-Datadog と Azure の標準インテグレーションを自動的にセットアップする手順については、[標準 Azure インテグレーションプログラム管理ガイド][50]を参照してください。Terraform や Azure CLI を通じてインテグレーションをセットアップし、 Datadog Azure VM 拡張機能を通じて Datadog Agent をネイティブに Azure にデプロイし、 自動化スクリプトを実行してログ収集を有効にすることができます。
+Datadog と Azure の標準インテグレーションを自動的にセットアップする手順については、[標準 Azure インテグレーションプログラム管理ガイド][49]を参照してください。Terraform や Azure CLI を通じてインテグレーションをセットアップし、 Datadog Azure VM 拡張機能を通じて Datadog Agent をネイティブに Azure にデプロイし、 自動化スクリプトを実行してログ収集を有効にすることができます。
 
 _US3:_  
-Terraform を使用して Datadog の Azure Native インテグレーションを Azure の Datadog リソースでセットアップする手順については、[Azure ネイティブインテグレーションプログラム管理ガイド][51]を参照してください。
+Terraform を使用して Datadog の Azure Native インテグレーションを Azure の Datadog リソースでセットアップする手順については、[Azure ネイティブインテグレーションプログラム管理ガイド][50]を参照してください。
 
 ### 手動
 
 _全サイト:_  
-Azure ポータルや CLI を通じた Datadog と Azure のインテグレーションを手動でセットアップする手順や、VM 拡張機能または AKS Cluster 拡張機能を用いて Azure に Datadog Agent を直接デプロイする手順については、[標準 Azure インテグレーション手動セットアップガイド][52]を参照してください。
+Azure ポータルや CLI を通じた Datadog と Azure のインテグレーションを手動でセットアップする手順や、VM 拡張機能または AKS Cluster 拡張機能を用いて Azure に Datadog Agent を直接デプロイする手順については、[標準 Azure インテグレーション手動セットアップガイド][51]を参照してください。
 
 _US3:_  
-Azure Native と Datadog のインテグレーションを手動でセットアップする手順については、[Azure ネイティブインテグレーション手動セットアップガイド][53]を参照してください。これには、Azure における Datadog リソースの作成、VM 拡張機能または AKS Cluster 拡張機能による Datadog Agent の Azure への直接デプロイ、シングルサインオン (SSO) のオプション構成が含まれます。
+Azure Native と Datadog のインテグレーションを手動でセットアップする手順については、[Azure ネイティブインテグレーション手動セットアップガイド][52]を参照してください。これには、Azure における Datadog リソースの作成、VM 拡張機能または AKS Cluster 拡張機能による Datadog Agent の Azure への直接デプロイ、シングルサインオン (SSO) のオプション構成が含まれます。
+
+## ログ収集
+
+_全サイト:_  
+Azure ログを Datadog に送信する手順については、[Azure ログを Datadog に送信する][53]ガイドを参照してください。Datadog-Azure 関数と Azure Event Hub を介したログ収集を有効にするには、自動プロセスまたは手動プロセスのいずれかを選択できます。また、Azure Blob Storage Function を使用して、すべての Azure App Services からログを収集することもできます。
+
+_US3:_  
+サブスクリプションレベル、Azure リソース、Azure Active Directory のログを Datadog に送信する手順については、[Datadog リソースで Azure ログを送信する][54]ガイドを参照してください。
 
 ## 収集データ
 
-_全サイト:_  
-Azure ログを Datadog に送信する手順については、[Azure ログを Datadog に送信する][54]ガイドを参照してください。Datadog-Azure 関数と Azure Event Hub を介したログ収集を有効にするには、自動プロセスまたは手動プロセスのいずれかを選択できます。また、Azure Blob Storage Function を使用して、すべての Azure App Services からログを収集することもできます。
+### メトリクス
 
-_US3:_  
-サブスクリプションレベル、Azure リソース、Azure Active Directory のログを Datadog に送信する手順については、[Datadog リソースで Azure ログを送信する][55]ガイドを参照してください。
+すべての標準 Azure Monitor メトリクスに加え、[Datadog 独自の生成メトリクス][55]。
 
-## リアルユーザーモニタリング
+詳しいメトリクス一覧については、[概要セクション](#overview)で該当する Azure サービスを選択してください。特定の VM をメトリクス収集対象から除外するには、[Azure VM の除外][56]を参照してください。
 
-### データセキュリティ
-
-すべての標準 Azure Monitor メトリクスと[一意の Datadog 生成メトリクス][56]。
-
-詳しいメトリクス一覧については、[概要セクション](#overview)で該当する Azure サービスを選択してください。
-
-### ヘルプ
+### イベント
 
 Azure インテグレーションは、自動的に Azure サービス健全性イベントを収集します。これを Datadog で表示するには、[イベントエクスプローラー][57]に移動し、`Azure Service Health` ネームスペースをフィルタリングします。 
 
-### ヘルプ
+### サービスチェック
 
 Azure インテグレーションには、サービスのチェック機能は含まれません。
 
-### Lambda のトレースされた起動の 1 時間単位使用量の取得
+### タグ
 
 Azure インテグレーションのメトリクス、イベント、およびサービスチェックは、Azure 環境で定義されているタグに加えて、次のタグを受け取ります。
 
-| Datadog クリップボード                             | ネームスペース                                   | Datadog タグキー                                                                                                                                                                                                 |
+| インテグレーション                             | ネームスペース                                   | Datadog タグキー                                                                                                                                                                                                 |
 |-----------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | すべての Azure インテグレーション                  | All                                         | `cloud_provider`、`region`、`kind`、`type`、`name`、`resource_group`、`tenant_name`、`subscription_name`、`subscription_id`、`status`（該当する場合）                                                            |
 | Azure VM インテグレーション                   | `azure.vm.*`                                | `host`、`size`、`operating_system`、`availability_zone`                                                                                                                                                          |
@@ -221,7 +220,7 @@ Azure インテグレーションのメトリクス、イベント、および�
 | Azure Load Balancer                     | `azure.network_loadbalancers.*`             | `sku_name`                                                                                                                                                                                                       |
 | Azure Usage and Quota                   | `azure.usage.*`                             | `usage_category`、`usage_name`                                                                                                                                                                                   |
 
-## ヘルプ
+## トラブルシューティング
 
 [Azure トラブルシューティング][58]ガイドをご参照ください。
 
@@ -267,26 +266,26 @@ Azure インテグレーションのメトリクス、イベント、および�
 [34]: https://docs.datadoghq.com/ja/integrations/azure_recovery_service_vault/
 [35]: https://docs.datadoghq.com/ja/integrations/azure_redis_cache/
 [36]: https://docs.datadoghq.com/ja/integrations/azure_relay/
-[37]: https://docs.datadoghq.com/ja/integrations/azure_search/
-[38]: https://docs.datadoghq.com/ja/integrations/azure_blob_storage/
-[39]: https://docs.datadoghq.com/ja/integrations/azure_file_storage/
-[40]: https://docs.datadoghq.com/ja/integrations/azure_queue_storage/
-[41]: https://docs.datadoghq.com/ja/integrations/azure_table_storage/
-[42]: https://docs.datadoghq.com/ja/integrations/azure_stream_analytics/
-[43]: https://docs.datadoghq.com/ja/integrations/azure_sql_database/
-[44]: https://docs.datadoghq.com/ja/integrations/azure_sql_elastic_pool/
-[45]: https://docs.datadoghq.com/ja/integrations/azure_synapse/
-[46]: https://docs.datadoghq.com/ja/integrations/azure_usage_and_quotas/
-[47]: https://docs.datadoghq.com/ja/integrations/azure_vm/
-[48]: https://docs.datadoghq.com/ja/integrations/azure_vm_scale_set/
-[49]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
-[50]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/
-[51]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-programmatic-management/
-[52]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/
-[53]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/
-[54]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
-[55]: https://docs.datadoghq.com/ja/logs/guide/azure-native-logging-guide/
-[56]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
+[37]: https://docs.datadoghq.com/ja/integrations/azure_blob_storage/
+[38]: https://docs.datadoghq.com/ja/integrations/azure_file_storage/
+[39]: https://docs.datadoghq.com/ja/integrations/azure_queue_storage/
+[40]: https://docs.datadoghq.com/ja/integrations/azure_table_storage/
+[41]: https://docs.datadoghq.com/ja/integrations/azure_stream_analytics/
+[42]: https://docs.datadoghq.com/ja/integrations/azure_sql_database/
+[43]: https://docs.datadoghq.com/ja/integrations/azure_sql_elastic_pool/
+[44]: https://docs.datadoghq.com/ja/integrations/azure_synapse/
+[45]: https://docs.datadoghq.com/ja/integrations/azure_usage_and_quotas/
+[46]: https://docs.datadoghq.com/ja/integrations/azure_vm/
+[47]: https://docs.datadoghq.com/ja/integrations/azure_vm_scale_set/
+[48]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
+[49]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/
+[50]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-programmatic-management/
+[51]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/
+[52]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/
+[53]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
+[54]: https://docs.datadoghq.com/ja/logs/guide/azure-native-logging-guide/
+[55]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
+[56]: https://docs.datadoghq.com/ja/account_management/billing/azure/#azure-vm-exclusion
 [57]: https://app.datadoghq.com/event/explorer
 [58]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/
 [59]: https://docs.datadoghq.com/ja/help/

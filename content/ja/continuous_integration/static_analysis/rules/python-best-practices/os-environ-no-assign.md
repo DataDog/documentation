@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: os.environ に代入しても環境はクリアされない
 ---
 ## メタデータ

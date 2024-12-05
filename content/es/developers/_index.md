@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: Blog
   text: Presentamos el hub Open Source de Datadog
-kind: documentación
 title: Desarrolladores
 ---
 
@@ -85,7 +84,7 @@ A la hora de decidir cómo enviar datos no compatibles a Datadog, las principale
 
 ### ¿Por qué crear una integración?
 
-Los [checks personalizados</txprotected>][1] son geniales para informes ocasionales o en los casos en los que el origen de los datos es único o muy limitado. Para casos de uso más general, como marcos de aplicaciones, proyectos de código abierto o software de uso común, tiene más sentido escribir una integración.
+Los [checks personalizados][1] son geniales para informes ocasionales o en los casos en los que el origen de los datos es único o muy limitado. Para casos de uso más general, como marcos de aplicaciones, proyectos de código abierto o software de uso común, tiene más sentido escribir una integración.
 
 Las métricas informadas por las integraciones aceptadas no se contabilizan como métricas personalizadas y, por tanto, no afectan a la asignación de métricas personalizadas. (Las integraciones que emiten métricas potencialmente ilimitadas pueden seguir considerándose personalizadas.) Garantizar la compatibilidad nativa con Datadog reduce la fricción relativa a la adopción e incentiva el uso de tu producto, servicio o proyecto. Además, formar parte del ecosistema Datadog es una buena forma de mejorar la visibilidad.
 

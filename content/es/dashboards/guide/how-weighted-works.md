@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/functions/smoothing
   tag: Documentación
   text: Suavizado
-kind: guía
 title: ¿Cómo funciona weighted()?
 ---
 

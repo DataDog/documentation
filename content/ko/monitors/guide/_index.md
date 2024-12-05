@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 모니터링 지침
 disable_toc: true
-kind: 지침
 private: true
 title: 모니터링 지침
 ---
@@ -32,17 +31,19 @@ title: 모니터링 지침
     {{< nextlink href="monitors/guide/monitor_api_options" >}}모니터 API 옵션{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="General Guides:" >}}
+{{< whatsnext desc="일반 가이드:" >}}
+    {{< nextlink href="/monitors/guide/monitor_best_practices" >}}모니터 모범 사례{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}모니터를 위한 RBAC 설정 방법{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}신서틱 테스트에서 모니터링 생성 방법{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/non_static_thresholds" >}}비고정 임계값 모니터링 방법{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}신서틱 테스트에서 모니터 생성 방법{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/non_static_thresholds" >}}비고정 임계값 모니터 방법{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}이상 모니터{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}재부팅을 위한 임시 서버 모니터링 {{< /nextlink >}}
-    {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}현지 표준 시간에에 맞는 이상 탐지 모니터 업데이트 방법{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}재부팅을 위한 짧은 수명의 서버 모니터링 {{< /nextlink >}}
+    {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}현지 표준 시간대 이상 감지 모니터 업데이트 방법{{< /nextlink >}}
     {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}모니터 기록 및 평가 그래프{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}효과 없는 모니터 설정 변경{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}상태 페이지를 사용한 모니터 통합{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/github_gating" >}}Datadog 모니터를 사용해 GitHub 작업 게이팅{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}효과 없는 모니터 설정 변경 사항{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}상태 페이지와의 모니터 통합{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/github_gating" >}}GitHub Actions Deployments with Datadog 모니터를 통해 GitHub 작업 배포 관리{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}사용 가능한 디스크 공간 모니터링{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="쿼리:" >}}

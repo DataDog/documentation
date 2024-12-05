@@ -1,6 +1,5 @@
 ---
 title: Alert Graph Widget
-kind: documentation
 widget_type: alert_graph
 description: "Graph the current status of any monitor defined on your system."
 aliases:

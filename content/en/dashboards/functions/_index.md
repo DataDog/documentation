@@ -1,6 +1,5 @@
 ---
 title: Functions
-kind: documentation
 aliases:
   - /examples/
   - /examples/aws-metrics/

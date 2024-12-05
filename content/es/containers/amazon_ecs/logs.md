@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentación
   text: Recopilar métricas de ECS
-kind: documentación
 title: Recopilación de logs de Amazon ECS
 ---
 

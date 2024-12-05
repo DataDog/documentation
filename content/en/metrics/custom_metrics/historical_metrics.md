@@ -1,6 +1,5 @@
 ---
 title: Historical Metrics Ingestion
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
@@ -45,13 +44,14 @@ To enable the ingestion of historical metrics for a specific metric:
 
 ### Bulk configuration for multiple metrics
 
-You can enable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
+You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1.  Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
+1. Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
 1. Select **Enable historical metrics**.
-1. Specify a metric namespace prefix to enable Historical Metrics Ingestion on all metrics that match that namespace.
+1. Specify a metric namespace prefix to select all metrics that match that namespace.
+1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the **Historical metrics** toggle.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Walkthrough of bulk enabling historic metric ingestion" video=true >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics ingestion toggle" >}}
 
 ## Historical metrics submission
 
@@ -453,7 +453,7 @@ Track your indexed historical metrics through the Usage Summary section of the [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/summary/
+[1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage

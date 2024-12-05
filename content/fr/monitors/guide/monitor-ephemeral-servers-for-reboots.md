@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-kind: guide
+
 title: Surveiller des serveurs éphémères pour les redémarrages
 ---
 

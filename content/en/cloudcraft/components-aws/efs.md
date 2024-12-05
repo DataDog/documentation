@@ -1,6 +1,5 @@
 ---
 title: "EFS Component"
-kind: documentation
 ---
 ## Overview
 

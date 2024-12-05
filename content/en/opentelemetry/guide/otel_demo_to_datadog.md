@@ -1,6 +1,5 @@
 ---
 title: Sending Data from the OpenTelemetry Demo to Datadog
-kind: guide
 further_reading:
 - link: "/service_catalog/"
   tag: "Documentation"
@@ -48,6 +47,7 @@ You can deploy the demo using Docker or Kubernetes (with Helm). Choose your pref
 
 - Kubernetes 1.24+
 - Helm 3.9+
+- An active Kubernetes cluster with kubectl configured to connect to it
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -75,19 +75,23 @@ Complete the following steps to configure these three components.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-1. Export your [Datadog site][7] to an environment variable:
+1. Open the demo repository. Create a file called `docker-compose.override.yml` in the root folder.
 
-    ```shell
-    export DD_SITE_PARAMETER=<Your API Site>
+2. Open the created file. Paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
+
+    ```yaml
+    services:
+      otelcol:
+        command:
+          - "--config=/etc/otelcol-config.yml"
+          - "--config=/etc/otelcol-config-extras.yml"
+          - "--feature-gates=exporter.datadogexporter.UseLogsAgentExporter"
+        environment:
+          - DD_SITE_PARAMETER=<Your API Site>
+          - DD_API_KEY=<Your API Key>
     ```
 
-2. Export your [Datadog API key][8] to an environment variable:
-
-    ```shell
-    export DD_API_KEY=<Your API Key>
-    ```
-
-3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` in an IDE or a text editor of your choice and add the following to the file:
+3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` and add the following to the file:
 
     ```yaml
     exporters:
@@ -97,8 +101,8 @@ Complete the following steps to configure these three components.
           trace_buffer: 500
         hostname: "otelcol-docker"
         api:
-          site: ${DD_SITE_PARAMETER}
-          key: ${DD_API_KEY}
+          site: ${env:DD_SITE_PARAMETER}
+          key: ${env:DD_API_KEY}
 
     processors:
       resource:
@@ -115,14 +119,14 @@ Complete the following steps to configure these three components.
     service:
       pipelines:
         traces:
-          processors: [batch, resource]
+          processors: [resource, batch]
           exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
         metrics:
-          receivers: [httpcheck/frontendproxy, otlp, spanmetrics, datadog/connector]
-          processors: [batch, resource]
+          receivers: [docker_stats, httpcheck/frontendproxy, otlp, prometheus, redis, spanmetrics, datadog/connector]
+          processors: [resource, batch]
           exporters: [otlphttp/prometheus, debug, datadog]
         logs:
-          processors: [batch, resource]
+          processors: [resource, batch]
           exporters: [opensearch, debug, datadog]
     ```
 
@@ -189,14 +193,14 @@ Complete the following steps to configure these three components.
         service:
           pipelines:
             traces:
-              processors: [batch, resource]
+              processors: [resource, batch]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
-              receivers: [otlp, spanmetrics, datadog/connector]
-              processors: [batch, resource]
+              receivers: [httpcheck/frontendproxy, otlp, redis, spanmetrics, datadog/connector]
+              processors: [resource, batch]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
-              processors: [batch, resource]
+              processors: [resource, batch]
               exporters: [opensearch, debug, datadog]
     ```
 
@@ -326,9 +330,9 @@ The OTel Demo sends `user.id` as span tags, so you can use this to filter all tr
 
 ### Error Tracking
 
-The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for simulating error scenarios.
+The OpenTelemetry Demo includes a feature flag engine for simulating error scenarios.
 
-1. Open the `src/flagd/demo.flagd.json` file and set the `defaultVariant` to `on` for one of the cases. See the [OpenTelemetry Demo documentation][6] for available cases.
+1. Navigate to [http://localhost:8080/feature][12] to manage the available scenarios. See the [OpenTelemetry Demo documentation][5] for more details.
 2. After the demo starts producing errors, you can visualize and track down the affected services in Datadog.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/error_tracking.png" alt="Error tracking view showing error PaymentService Fail Feature Flag Enabled" style="width:90%;" >}}
@@ -340,7 +344,7 @@ The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for
 [1]: https://github.com/open-telemetry/opentelemetry-demo
 [2]: https://www.datadoghq.com/free-datadog-trial/
 [3]: https://app.datadoghq.com/organization-settings/api-keys/
-[5]: https://flagd.dev/
-[6]: https://opentelemetry.io/docs/demo/feature-flags/
+[5]: https://opentelemetry.io/docs/demo/feature-flags/
 [10]: https://opentelemetry.io/docs/demo/#language-feature-reference
 [11]: https://app.datadoghq.com/services
+[12]: http://localhost:8080/feature

@@ -1,6 +1,5 @@
 ---
 title: Continuous Integration Visibility
-kind: documentation
 aliases:
   - /ci
 further_reading:
@@ -16,6 +15,9 @@ further_reading:
   - link: "/continuous_integration/pipelines/"
     tag: "Documentation"
     text: "Explore pipeline data to resolve build problems"
+  - link: "/account_management/billing/ci_visibility"
+    tag: "Documentation"
+    text: "Learn about billing considerations for CI Visibility"
   - link: "/continuous_integration/tests/"
     tag: "Documentation"
     text: "Explore test data to find and fix problem tests"
@@ -31,6 +33,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/"
     tag: "Blog"
     text: "Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility"
+  - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
+    tag: "Blog"
+    text: "How we use Datadog for detection as code"
 cascade:
     algolia:
         rank: 70
@@ -42,6 +47,11 @@ cascade:
 {{< /site-region >}}
 
 <div class="alert alert-info">This page is about bringing your continuous integration (CI) metrics and data into Datadog dashboards. If you want to run Continuous Testing tests in your CI pipelines, see the <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a> section.</div>
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Join the Introduction to CI Visibility session to understand how Datadog CI Visibility enhances the efficiency of CI pipelines and how to configure the Testing Visibility and Pipeline Visibility products. 
+{{< /learning-center-callout >}}
+
 
 ## Overview
 

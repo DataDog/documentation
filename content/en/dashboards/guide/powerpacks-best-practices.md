@@ -1,6 +1,5 @@
 ---
 title: Scale Graphing Expertise with Powerpacks
-kind: guide
 further_reading:
 - link: "/dashboards/widgets/powerpack"
   tag: "Documentation"

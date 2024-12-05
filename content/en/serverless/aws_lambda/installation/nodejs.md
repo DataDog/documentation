@@ -1,6 +1,5 @@
 ---
 title: Instrumenting Node.js Serverless Applications
-kind: documentation
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
@@ -25,6 +24,8 @@ aliases:
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
 <div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_bundlers/">mark the Datadog libraries as external</a>.</div>
+
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
 ## Installation
 
@@ -267,7 +268,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.1.0"
+  version = "2.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -277,8 +278,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 67
+  datadog_node_layer_version = 117
 
   # aws_lambda_function arguments
 }
@@ -303,8 +304,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
 ```
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 67
+  datadog_node_layer_version = 117
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -378,6 +379,19 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If using the Datadog Lambda Layer (recommended), do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
+
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
+
 ## What's next?
 
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
@@ -442,5 +456,6 @@ exports.handler = async (event) => {
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=nodejs
 [5]: /tracing/custom_instrumentation/nodejs/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
-
+[6]: /security/application_security/serverless/
+[7]: https://github.com/DataDog/datadog-lambda-extension
+[8]: https://github.com/DataDog/datadog-lambda-extension/issues

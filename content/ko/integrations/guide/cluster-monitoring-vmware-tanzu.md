@@ -10,7 +10,7 @@ further_reading:
 - link: /integrations/guide/application-monitoring-vmware-tanzu/
   tag: documentation
   text: VMware Tanzu용 Datadog 애플리케이션 모니터링
-kind: guide
+
 title: VMware Tanzu용 Datadog 클러스터 모니터링
 ---
 

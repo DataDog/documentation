@@ -1,6 +1,5 @@
 ---
 title: Browser Session Replay
-kind: documentation
 description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/

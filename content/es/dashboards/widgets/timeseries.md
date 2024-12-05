@@ -15,9 +15,8 @@ further_reading:
 - link: /dashboards/guide/slo_data_source
   tag: Guía
   text: Haz gráficos de datos históricos de SLO en dashboards
-kind: documentación
 title: Widget de series temporales
-widget_type: series temporales
+widget_type: timeseries
 ---
 
 La visualización de series temporales te permite mostrar la evolución de una o varias métricas, eventos de log o tramos indexados a lo largo del tiempo. El intervalo de tiempo depende de lo que se seleccione en [timeboard][1] o [screenboard][2]:

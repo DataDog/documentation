@@ -1,6 +1,5 @@
 ---
 description: Configuration avancée de Database Monitoring pour MySQL
-kind: documentation
 title: Configuration avancée de Database Monitoring pour MySQL
 ---
 

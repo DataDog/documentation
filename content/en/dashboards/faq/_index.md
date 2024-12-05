@@ -1,6 +1,5 @@
 ---
 title: Graphing FAQ
-kind: faq
 cascade: 
   - private: true
 aliases:

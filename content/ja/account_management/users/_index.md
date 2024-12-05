@@ -1,22 +1,21 @@
 ---
-title: ユーザー管理
-kind: documentation
-description: オーガニゼーションのユーザーを追加または削除します。ユーザーのロールを変更します。
 aliases:
-  - /ja/account_management/team/
+- /ja/account_management/team/
+description: オーガニゼーションのユーザーを追加または削除します。ユーザーのロールを変更します。
 further_reading:
-  - link: /account_management/saml/
-    tag: ドキュメント
-    text: Datadog アカウントのための SAML の構成
-  - link: /account_management/rbac/
-    tag: ドキュメント
-    text: ロールの作成、更新、削除
-  - link: /account_management/rbac/permissions/
-    tag: ドキュメント
-    text: 利用可能なアクセス許可の一覧
-  - link: /api/v1/users/
-    tag: ドキュメント
-    text: USER API を使用してユーザーを管理する
+- link: /account_management/saml/
+  tag: ドキュメント
+  text: Datadog アカウントのための SAML の構成
+- link: /account_management/rbac/
+  tag: ドキュメント
+  text: ロールの作成、更新、削除
+- link: /account_management/rbac/permissions/
+  tag: ドキュメント
+  text: 利用可能なアクセス許可の一覧
+- link: /api/v1/users/
+  tag: ドキュメント
+  text: USER API を使用してユーザーを管理する
+title: ユーザー管理
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
@@ -39,10 +38,9 @@ Datadog の **Organization Settings** の **User** タブでは、ユーザー�
 
 リストビューで招待を再送信するには、ユーザーをクリックしてユーザーサイドパネルを開き、**Resend Invite** をクリックします。または、グリッドビューで、ユーザーボックスにカーソルを合わせ、**Resend Invite** をクリックします。
 
-
 ## ユーザーのロールを編集する
 
-Datadog Admin Role などの Access Management アクセス許可を持つユーザーのみが他のユーザーのロールを変更できます。
+Datadog Admin Role などの User Access Management アクセス許可を持つユーザーのみが他のユーザーのロールを変更できます。
 
 ユーザーのロールを編集するには
 
@@ -54,6 +52,23 @@ Datadog Admin Role などの Access Management アクセス許可を持つユー
 {{< img src="account_management/users/user_role_update.png" alt="ユーザーロールの更新" style="width:80%;">}}
 
 使用可能なすべてのロールとカスタムロールの作成方法については、[ロールベースのアクセス制御のドキュメント][2]を参照してください。
+
+## ユーザーのログイン方法を編集する
+
+Datadog Admin Role などの User Access Management アクセス許可を持つユーザーのみが他のユーザーのログイン方法を変更できます。
+
+組織のデフォルトのログイン方法は、Login Methods ページで設定することができます。ここでは、組織内のすべてのユーザーが Datadog のユーザー名とパスワードを使用すること、Google でサインインすること、または SAML でサインインすることを許可または拒否することができます。User Management では、ユーザー単位でオーバーライドして、特定のユーザーに 1 つの方法または複数の方法の使用を許可することができます。これは、すべてのユーザーに SAML を使用させたいが、一部のユーザーには緊急時にユーザー名とパスワードでログインできるようにする必要がある場合に便利です。
+
+ユーザーのログイン方法を編集するには
+
+1. **Organization Settings** の **Users** タブに移動します。
+2. ユーザーの行の右にある **Edit** をクリックします。
+3. **Override Default Login Methods** の横のトグルを切り替えると、ユーザーに対してオーバーライドを有効または無効にすることができます。
+4. オーバーライドを有効にする場合、ユーザーが Datadog にアクセスするために使用できるログイン方法のセットを選択します。これは、1 つのオプションにすることも組織に対して構成されたすべてのオプションにすることもできます。
+5. **Save** をクリックします。
+
+
+**注**: オーバーライドは、有効なログイン方法のみに設定することができます。SAML を設定していない場合、そのログイン方法をユーザーのオーバーライドとして選択することはできません。
 
 ## 既存のメンバーを無効にする
 

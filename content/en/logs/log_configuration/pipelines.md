@@ -1,6 +1,5 @@
 ---
 title: Pipelines
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/pipelines/
@@ -157,6 +156,19 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
+
+{{% tab "Span ID" %}}
+
+#### Span ID attribute
+
+By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+
+* `dd.span_id`
+* `contextMap.dd.span_id`
+
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Create a pipeline
@@ -182,7 +194,7 @@ An example of a log transformed by a pipeline:
 See the <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
 </div>
 
-Integration processing pipelines are available for certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer.
+Integration processing pipelines are available for certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Log Explorer.
 
 To view an integration pipeline, navigate to the [Pipelines][5] page. To edit an integration pipeline, clone it and then edit the clone:
 

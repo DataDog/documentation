@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/guide/mobile-sdk-deprecation-policy
   tag: Documentation
   text: Politique d'obsolescence des SDK Mobile Datadog
-kind: guide
+
 title: Mettre à niveau les SDK RUM Mobile
 ---
 

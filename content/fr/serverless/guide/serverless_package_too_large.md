@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Instrumenter des applications Node.js
-kind: documentation
 title: Correction des erreurs de package sans serveur trop volumineux
 ---
 

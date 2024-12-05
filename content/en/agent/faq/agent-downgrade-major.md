@@ -1,6 +1,5 @@
 ---
 title: Downgrade the Agent to a prior major version
-kind: faq
 aliases:
 - /agent/faq/agent-downgrade
 ---
@@ -15,7 +14,7 @@ First, [uninstall Agent v7 from your system][1].
 Then, if you followed the instructions to [upgrade from v6 to v7][2], run the following Agent installation command to downgrade your Agent from version 7 to version 6:
 
 ```shell
-DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
+DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"
 ```
 
 The command works on all supported versions of Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE.
@@ -45,7 +44,7 @@ First, [uninstall Agent v7 from your system][1].
 Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` to downgrade your Agent from version 7 to version 6:
 
 ```shell
-DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 [1]: /agent/guide/how-do-i-uninstall-the-agent/
@@ -77,6 +76,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -129,7 +129,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
-    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
     **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.

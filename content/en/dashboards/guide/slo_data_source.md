@@ -1,11 +1,19 @@
 ---
 title: Graph historical SLO data on Dashboards
-kind: guide
-disable_toc: false
+further_reading:
+- link: "/service_management/service_level_objectives/"
+  tag: "Documentation"
+  text: "Learn more about Service Level Objectives"
+- link: "/dashboards/widgets/slo"
+  tag: "Documentation"
+  text: "SLO Widget"
+- link: "/dashboards/widgets/slo_list"
+  tag: "Documentation"
+  text: "SLO List Widget"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  The SLO data source is in public beta. This feature is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
+  The SLO data source is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
 {{< /callout >}}
 
 ## Overview
@@ -14,14 +22,14 @@ Graph Metric-based and Time Slice SLOs on dashboards and track trends over 15 mo
 
 ## Configuration
 
-{{< img src="dashboards/guide/slo_data_type/slo-data-source-good-events.png" alt="Graph editor configuration with the slo data type selected and the good events measure selected" style="width:100%;" >}}
+{{< img src="dashboards/guide/slo_data_type/slo-data-good-bad-events.png" alt="Graph editor configuration with the slo data type selected and the good events measure selected" style="width:100%;" >}}
 
 To get started, pick one of the standard visualization types from the dashboard widget tray and select *SLOs* as the data source in the query dropdown menu. 
 
 For the *Measure* parameter, see the table below for more information on what each measure visualizes. The *Display* parameter allows you to break out the query by the groups that are already configured for the SLO. 
 
 {{< callout url="#" btn_hidden="true" header="Key Information">}}
-  When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO. Additionally, SLO status corrections are applied to scalar widgets only, not the timeseries widget. 
+  When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO. 
 {{< /callout >}}
 
 | Measure | SLO type |  Timeseries widget  | Scalar widgets |
@@ -35,7 +43,15 @@ For the *Measure* parameter, see the table below for more information on what ea
 | Burn rate | Metric-based or Time Slice | For each time bucket, the burn rate shows the observed error rate divided by the ideal error rate. | The burn rate over the widget's time frame. |
 | Error budget burndown | Metric-based or Time Slice | The error budget burned over time. It starts at 100% (unless there were bad events/minutes within the first time bucket) and decreases with bad events/minutes. | Error budget burndown is not available in scalar widgets. |
 
+#### SLO status corrections
 
+For SLOs that have [status corrections][2], you can enable or disable corrections in charts using the SLO data source. By default, corrections are enabled and applied to the chart; you can disable with the advanced options menu options:
+
+{{< img src="dashboards/guide/slo_data_type/slo-data-source-correction.mp4" alt="Graph editor configuration with the slo data type selected and the good events measure selected" video="true" style="width:100%;" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/sharing/scheduled_reports/
 [2]: /service_management/service_level_objectives/#slo-status-corrections

@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Observability Pipelines Documentation
-kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:

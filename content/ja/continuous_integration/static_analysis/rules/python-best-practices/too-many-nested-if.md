@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: ネストされた if 条件を使いすぎない
 ---
 ## メタデータ

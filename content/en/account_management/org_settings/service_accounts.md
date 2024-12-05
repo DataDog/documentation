@@ -1,6 +1,5 @@
 ---
 title: Service Accounts
-kind: documentation
 further_reading:
     - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
       tag: "Documentation"

@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: 에이전트 트러블슈팅
   text: 에이전트 점검 상태 가져오기
-kind: 설명서
 title: 통합 활용하기
 ---
 

@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 로그 지침
 disable_toc: true
-kind: 지침
 private: true
 title: 로그 지침
 ---
@@ -21,27 +20,27 @@ title: 로그 지침
 <br>
 
 {{< whatsnext desc="로그 수집" >}}
-    {{< nextlink href="/agent/logs/advanced_log_collection" >}}고급 로그 수집 설정{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Kinesis Firehose 대상으로 AWS 서비스 로그 전송하기{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Amazon EventBridge API 대상으로 Datadog에 이벤트 및 로그 전송하기{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/forwarder/" >}}Datadog Lambda 포워더 설정{{< /nextlink >}}
+    {{< nextlink href="/agent/logs/advanced_log_collection" >}}고급 로그 수집 구성{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Amazon Data Firehose 목적지를 사용하여 AWS 서비스 로그 전송{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Amazon EventBridge API 목적지를 사용하여 Datadog에 이벤트 및 로그 전송{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/forwarder/" >}}Datadog 람다 포워드 설정{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Apigee 로그 수집{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Datadog에 Azure 로그 전송{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Datadog 리소스에 Azure 로그 전송{{< /nextlink >}}
-    {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Datadog 데이터플로우 템플릿으로  Google Cloud 로그 수집{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Azure 로그를 Datadog에 전송{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Datadog 리소스를 사용해 Azure 로그 전송{{< /nextlink >}}
+    {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Datadog Dataflow 템플릿을 사용하여 Google Cloud 로그 수집{{< /nextlink >}}
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Pub/Sub 푸시 구독으로 Google Cloud 로그 수집{{< /nextlink >}}    
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku 로그 수집{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 함수로 AWS 서비스 로그 전송하기{{< /nextlink >}}
-    {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}로그 수집 트러블슈팅 지침{{< /nextlink >}}
-    {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}도커 로그 수집 트러블슈팅 지침{{< /nextlink >}}
-    {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda 로그 수집 트러블슈팅 지침{{< /nextlink >}}
-    {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}로그 회전용 파일 권한 설정(Linux){{< /nextlink >}}
-    {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}로그 수집에만 Datadog 에이전트 사용하기{{< /nextlink >}}
-    {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}에이전트가 테일링(tailing)하는 로그 파일 개수 늘리기{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}컨테이너 에이전트를 사용하여 호스트의 로그 추적{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}로그 데이터가 손실되지 않도록 하는 메커니즘{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}읽기 권한 강화로 사용자 지정 로그 파일에서 로그 전송하기{{< /nextlink >}}   
-    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Kinesis Data Firehose로 AWS EKS Fargate 로그 전송하기{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 함수를 사용하여 AWS 서비스 로그 전송{{< /nextlink >}}
+    {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}로그 수집 트러블슈팅 가이드{{< /nextlink >}}
+    {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}도커 로그 수집 트러블슈팅 가이드{{< /nextlink >}}
+    {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}람다 로그 수집 트러블슈팅 가이드{{< /nextlink >}}
+    {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}로그 순환을 위한 파일 권한 설정(Linux){{< /nextlink >}}
+    {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}로그 수집에만 Datadog 에이전트 사용{{< /nextlink >}}
+    {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}에이전트가 추적하는 로그 파일 수 늘리기{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}컨테이너 에이전트를 사용하여 호스트에서 로그 추적{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}로그가 손실되지 않도록 하는 메커니즘{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}강화된 읽기 권한을 사용하여 커스텀 로그 파일에서 로그 보내기{{< /nextlink >}}   
+    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Amazon Data Firehose를 사용하여 Amazon EKS Fargate 로그 전송{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -65,9 +64,10 @@ title: 로그 지침
 <br>
 
 {{< whatsnext desc="민감한 데이터 관리" >}}
-    {{< nextlink href="logs/guide/logs-rbac" >}}로그용 RBAC 설정 방법{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-rbac-permissions" >}}로그 RBAC 권한에 대해 더 알아보기{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}쿼리 기반 액세스 컨트롤로 민감한 데이터 접근 제한하기{{< /nextlink >}}
+{{< nextlink href="logs/guide/logs-rbac" >}}로그용 RBAC 설정 방법{{< /nextlink >}}
+{{< nextlink href="logs/guide/logs-rbac-permissions" >}}로그에 대한 RBAC 권한에 대해 자세히 알아보기{{< /nextlink >}}
+{{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}쿼리 기반 액세스 제어로 민감한 데이터에 대한 액세스 제한{{< /nextlink >}}
+{{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}민감한 데이터가 포함된 로그 삭제{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog 통합" >}}

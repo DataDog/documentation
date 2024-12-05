@@ -29,6 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 display_on_public_website: true
@@ -36,9 +37,8 @@ draft: false
 git_integration_title: active_directory
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: active_directory
 public_title: Active Directory
@@ -50,6 +50,7 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Microsoft Active Directory のメトリクスを収集してグラフ化
   media: []
@@ -65,15 +66,15 @@ tile:
 
 Microsoft Active Directory からメトリクスを取得して、パフォーマンスを視覚化および監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent の Active Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][2]を参照してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
@@ -87,21 +88,21 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションの `active_directory` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "active_directory" >}}
 
 
-### ヘルプ
+### イベント
 
 Active Directory チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Active Directory チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

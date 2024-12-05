@@ -8,7 +8,6 @@ further_reading:
 - link: /developers/integrations/new_check_howto
   tag: 설명서
   text: 새로운 통합(Integration)을 생성하기
-kind: 가이드
 title: 커뮤니티 통합 사용하기
 ---
 

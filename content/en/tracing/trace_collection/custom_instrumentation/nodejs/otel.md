@@ -1,7 +1,6 @@
 ---
-title: Node.js Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Node.js application with OpenTelemetry API to send traces to Datadog.'
+title: Node.js Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Node.js application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
@@ -77,7 +76,6 @@ function processData(i, param1, param2) {
 
     // Add an attribute to the span
     span.setAttribute('app.processedData', result.toString());
-    
     span.end();
     return result;
     });
@@ -102,6 +100,42 @@ function performTask(iterations, param1, param2) {
   });
 }
 {{< /highlight >}}
+
+## Adding span events
+
+<div class="alert alert-info">Adding span events requires SDK version 5.17.0/4.41.0 or higher.</div>
+
+You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `TimeInput` object.
+
+The following examples demonstrate different ways to add events to a span:
+
+```js
+span.addEvent('Event With No Attributes')
+span.addEvent('Event With Some Attributes', {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [true, false]})
+```
+
+Read the [OpenTelemetry][6] specification for more information.
+
+### Recording exceptions
+
+To record exceptions, use the `recordException` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```js
+span.recordException(new TestError())
+```
+
+Read the [OpenTelemetry][7] specification for more information.
 
 ## Filtering requests
 
@@ -137,3 +171,5 @@ Additionally, you can exclude traces based on their resource name to prevent the
 [3]: https://opentelemetry.io/docs/instrumentation/js/automatic/
 [4]: /tracing/security
 [5]: /tracing/guide/ignoring_apm_resources/
+[6]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[7]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

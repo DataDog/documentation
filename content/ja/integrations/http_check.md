@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
 display_on_public_website: true
@@ -28,9 +29,8 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 9.5.0
+integration_version: 11.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: http_check
 public_title: HTTP チェック
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
   media: []
@@ -92,7 +93,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `name`                           | HTTP チェックインスタンスの名前。サービスチェックのタグとして提示されます。                                                                                                                                                              |
 | `url`                            | テストする URL。                                                                                                                                                                                                                                 |
-| `timeout`                        | レスポンスに許可する秒数。                                                                                                                                                                                                     |
+| `timeout`                        | レスポンスを許可する秒数。デフォルトは `10` です。                                                                                                                                                                               |
 | `method`                         | チェックに使用されるHTTP メソッド。                                                                                                                                                                                                            |
 | `data`                           | このパラメーターは、POST、PUT、DELETE、PATCH メソッドを使用したリクエストの本文を指定するために使用します。POST メソッドを使用し、データパラメーターとして XML 文字列を指定すれば、SOAP リクエストがサポートされます。                                             |
 | `headers`                        | このパラメーターを使用すると、リクエストで追加ヘッダーを送信できます。詳細な情報と注意については、[YAML ファイルのサンプル][3]を参照してください。                                                                                                    |
@@ -120,7 +121,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 
 [Agent の `status` サブコマンドを実行][8]し、Checks セクションの `http_check` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "http_check" >}}

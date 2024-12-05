@@ -17,7 +17,6 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: 설명서
   text: Datadog 트레이스 읽는 법 알아보기
-kind: 지침
 title: 서비스 주요 작업
 ---
 

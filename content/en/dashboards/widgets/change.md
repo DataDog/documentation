@@ -1,6 +1,5 @@
 ---
 title: Change Widget
-kind: documentation
 widget_type: change
 description: "Graph the change in a value over a chosen time period."
 aliases:

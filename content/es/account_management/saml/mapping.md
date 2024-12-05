@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/saml/
   tag: Documentación
   text: Inicio de sesión único con SAML
-kind: documentación
 title: Asignación de grupos SAML
 ---
 

@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: モニター API オプション
 ---
 
@@ -31,17 +30,9 @@ title: モニター API オプション
 
 ### 権限オプション
 
-- **`locked`** このモニターへの変更を、作成者または組織管理 (`org_management`) 権限を持つユーザーに制限するかどうかを示すブール値。デフォルト: **False**。**非推奨: 代わりに `restricted_roles` を使用してください**。
-- **`restricted_roles`** モニターの編集が許可されているロールの UUID をリストアップした配列。モニターの編集には、モニター構成の更新、モニターの削除、任意の時間でのモニターのミュートが含まれます。ロールの UUID は、[Roles API][1] から取得することができます。`restricted_roles` は `locked` の後継です。
+- **`restricted_roles`** モニターの編集が許可されているロールの UUID をリストアップした配列。モニターの編集には、モニター構成の更新、モニターの削除、任意の時間でのモニターのミュートが含まれます。ロールの UUID は、[Roles API][1] から取得することができます。
 
-**注:** 同じモニターに `locked` と `restricted_roles` の両方のパラメーターを設定しないでください。両方が設定された場合、より制限の強いパラメーターが適用されます。`restricted_roles` に設定されたロールは、`locked:true` よりも制限されているとみなされます。
-
-以下の例では、`locked` と `restricted_roles` パラメーターがどのように相互作用するかを示しています。
-- モニターが `locked:false` および `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]` に設定されている場合、`restricted_roles` パラメーターが適用されます。
-- モニターが `locked:true` および `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]` に設定されている場合、`restricted_roles` パラメーターが適用されます。
-- モニターに `locked:true` が設定され、かつ `"restricted_roles"` パラメーターが設定されていない場合、`locked:true` パラメーターが適用されます。
-
-モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について、詳しくは[専用ガイド][2]をご参照ください。
+**注:** [制限ポリシー][5]を使用して、ロールに加えて、[Teams][4] およびユーザーに基づいてモニターの権限を設定できるようになりました。モニターの権限制限の詳細については、[専用ガイド][2]を参照してください。
 
 ## 異常値のオプション
 
@@ -92,3 +83,5 @@ _これらのオプションはログアラートにのみ適用されます。_
 [1]: /ja/api/latest/roles/
 [2]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
 [3]: /ja/monitors/guide/recovery-thresholds/
+[4]: /ja/account_management/teams/
+[5]:/ja/api/latest/restriction-policies/

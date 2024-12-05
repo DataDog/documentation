@@ -1,6 +1,5 @@
 ---
 title: Cluster Agent Troubleshooting
-kind: documentation
 aliases:
 - /agent/cluster_agent/troubleshooting
 - /containers/cluster_agent/troubleshooting

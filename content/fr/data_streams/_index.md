@@ -23,7 +23,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
   tag: Blog
   text: Surveiller SQS avec Data Streams Monitoring
-kind: documentation
 title: Data Streams Monitoring
 ---
 

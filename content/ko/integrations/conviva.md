@@ -11,7 +11,7 @@ integration_id: ''
 integration_title: Conviva
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: conviva
 public_title: Datadog-Conviva 통합

@@ -3,7 +3,6 @@ further_reading:
 - link: developers/integrations/agent_integration
   tag: 설명서
   text: Datadog 통합 생성
-kind: 가이드
 title: Datadog 통합 요청
 ---
 

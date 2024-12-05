@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Deployment Design and Principles
-kind: Documentation
 aliases:
   - /observability_pipelines/production_deployment_overview/
 ---
@@ -61,7 +60,7 @@ Your pipeline begins with data collection. Your services and systems generate da
 
 You should choose the agent that optimizes your engineering team's ability to monitor their systems. Therefore, integrate Observability Pipelines Worker with the best agent for the job and deploy the Observability Pipelines Worker on separate nodes as an aggregator. 
 
-For example, Datadog [Network Performance Monitoring][4] integrates the Datadog Agent with vendor-specific systems and produces vendor-specific data. Therefore, the Datadog Agent should collect the data and send it directly to Datadog, since the data is not a supported data type in the Observability Pipelines Worker.
+For example, Datadog [Cloud Network Monitoring][4] integrates the Datadog Agent with vendor-specific systems and produces vendor-specific data. Therefore, the Datadog Agent should collect the data and send it directly to Datadog, since the data is not a supported data type in the Observability Pipelines Worker.
 
 As another example, the Datadog Agent collects service metrics and enriches them with vendor-specific Datadog tags. In this case, the Datadog Agent should send the metrics directly to Datadog or route them through the Observability Pipelines Worker. The Observability Pipelines Worker should not replace the Datadog Agent because the data being produced is enriched in a vendor-specific way.
 
@@ -144,7 +143,7 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
 [2]: /observability_pipelines/legacy/reference/sources/
-[4]: /network_monitoring/performance/
+[4]: /network_monitoring/cloud_network_monitoring/
 [5]: /observability_pipelines/legacy/architecture/
 
 ---

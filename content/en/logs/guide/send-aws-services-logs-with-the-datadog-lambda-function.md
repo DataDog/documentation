@@ -1,6 +1,5 @@
 ---
 title: Send AWS Services Logs With The Datadog Lambda Function
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -11,6 +10,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 AWS service logs can be collected with the Datadog Forwarder Lambda function. This Lambda—which triggers on S3 Buckets, CloudWatch log groups, and EventBridge events—forwards logs to Datadog.
@@ -85,6 +87,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     "cloudfront:ListDistributions",
     "elasticloadbalancing:DescribeLoadBalancers",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
+    "lambda:InvokeFunction",
     "lambda:List*",
     "lambda:GetPolicy",
     "redshift:DescribeClusters",
@@ -108,6 +111,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
+    | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Gets the Lambda policy when triggers are to be removed.                      |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
@@ -251,11 +255,14 @@ Resources:
 {{< /tabs >}}
 
 
-
 ## Scrubbing and filtering
 
 You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][46].
 You can also exclude or send only those logs that match a specific pattern by using the [filtering option][47].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support

@@ -1,6 +1,5 @@
 ---
 title: Span Tag Semantics
-kind: documentation
 further_reading:
     - link: 'logs/log_configuration/attributes_naming_convention'
       tag: 'Documentation'
@@ -40,12 +39,12 @@ For more information, see [Default Standard Attributes][6].
 
 Span tags and span attributes are similar but distinct concepts:
 
-- [Span tags](#span-tags) are the context around the span.
-- [Span attributes](#span-attributes) are the content of the span.
+- [Span tags](#span-tags) provides context related to the span. For instance, host or container tags on the infrastructure the service is running on.
+- [Span attributes](#span-attributes) are the content of the span, collected with automatic or manual instrumentation in the application.
 
 ### Span tags
 
-Span tags are the context around the span. Some examples include:
+Span tags provide context related to the span. For instance, host or container tags on the infrastructure the service is running on. More examples include:
 
 - **Host tags**: `hostname`, `availability-zone`, `cluster-name`
 - **Container tags**: `container_name`, `kube_deployment`, `pod_name`
@@ -58,7 +57,7 @@ To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side
 
 ### Span attributes
 
-Span attributes are the content of the span. Some example include:
+Span attributes are the content of the span, collected with automatic or manual instrumentation in the application. Some examples include:
 
 - `http.url`
 - `http.status_code`

@@ -36,7 +36,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: ダッシュボードで視覚化を改善するためのインタラクティブセッションにご参加ください
-kind: documentation
 title: ダッシュボード
 ---
 
@@ -46,7 +45,7 @@ title: ダッシュボード
 
 {{< whatsnext desc="ダッシュボード機能:">}}
     {{< nextlink href="/dashboards/configure" >}}Configure: ダッシュボードの構成オプションの概要{{< /nextlink >}}
-    {{< nextlink href="/dashboards/configure" >}}Dashboard List: ダッシュボードやリストを検索、表示、作成{{< /nextlink >}}
+    {{< nextlink href="/dashboards/list" >}}Dashboard List: ダッシュボードやリストを検索、表示、作成{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: ダッシュボードのウィジェットを動的にフィルタリング{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: ダッシュボードをプログラムで管理{{< /nextlink >}}
@@ -59,7 +58,7 @@ title: ダッシュボード
     {{< nextlink href="/dashboards/change_overlays" >}}オーバーレイ: 変更イベントを自動的にグラフにオーバーレイ{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## はじめに
+## 詳細はこちら
 
 {{< whatsnext desc="以下のリソースをご覧ください:" >}}
    {{< nextlink href="/getting_started/dashboards/" >}}ダッシュボードを始める{{< /nextlink >}}
@@ -110,9 +109,13 @@ title: ダッシュボード
 
 ## その他の参考資料
 
+{{< learning-center-callout header="Datadog ラーニングセンターでグラフウィジェットを作成してみる" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} 時系列、クエリ値、トップリスト、テーブル、分布、および円グラフのウィジェットを探索します。ウィジェットの構成方法を学び、各ウィジェットタイプをどのような場合に利用すべきかを理解します。 {{< /learning-center-callout >}}
+
+{{< learning-center-callout header="Datadog ラーニングセンターでテーブル、リスト、SLO、アーキテクチャのウィジェットを作成してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}} テーブル、リスト、SLO、アーキテクチャのウィジェットを探索します。Web アプリケーションのメトリクスとパフォーマンスを追跡する方法を学び、重要なデータをどのように表示するかを理解します。 {{< /learning-center-callout >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/service_management/mobile/
+[1]: /ja/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists

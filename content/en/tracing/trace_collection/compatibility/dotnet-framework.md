@@ -1,6 +1,5 @@
 ---
 title: .NET Framework Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
   - /tracing/compatibility_requirements/dotnet-framework
@@ -50,10 +49,12 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                 | Support level         | Package version                        |
-| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | latest                                 |
+| Processor architectures | Support level       | Package version       |
+| ----------------------- | ------------------- | --------------------- |
+| Windows x64 (`win-x64`) | [GA](#support-ga)   | latest                |
+| Windows x86 (`win-x86`) | [EOL](#support-eol) | < 3.0.0 (e.g. 2.56.0) |
+
+Note that running x86 applications on Windows x64 is supported.
 
 ## Integrations
 
@@ -94,23 +95,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
-
-## OpenTelemetry based integrations
-
-Some libraries provide built-in [Activity based tracing][11]. This is the same mechanism that OpenTelemetry is based on.
-
-For these libraries, set `DD_TRACE_OTEL_ENABLED` to `true`, and the .NET tracer automatically captures traces their traces. This is supported since [version 2.21.0][4].
-
-The following list of libraries have been tested with this setup:
-
-| Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
-| ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
-| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | See `Azure SDK` section below |
-
-### Azure SDK
-
-Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][12] for more details.
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
 ## Supported Datadog Agent versions
 
@@ -129,7 +114,7 @@ The .NET Tracer depends on the host operating system, .NET Framework runtime, ce
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][9]                                                             |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
+| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
@@ -139,7 +124,7 @@ The .NET Tracer depends on the host operating system, .NET Framework runtime, ce
 Datadog APM for .NET Framework practices [semantic versioning][10].
 Version updates imply the following changes to runtime support:
 
-  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Preview](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
   - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
   - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
@@ -157,5 +142,4 @@ Version updates imply the following changes to runtime support:
 [8]: /agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
-[11]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
-[12]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[11]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet

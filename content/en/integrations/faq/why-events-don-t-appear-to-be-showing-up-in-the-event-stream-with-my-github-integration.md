@@ -1,6 +1,6 @@
 ---
 title: Why events don't appear to be showing up in the event stream with my github integration ?
-kind: faq
+
 ---
 
 First you need to configure your GitHub integration, see [this dedicated documentation article][1].

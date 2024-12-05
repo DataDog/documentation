@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Étude et analyse des logs historiques avec Online Archives
 is_beta: true
-kind: documentation
 private: true
 title: Online Archives
 ---

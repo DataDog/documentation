@@ -2,8 +2,7 @@
 further_reading:
 - link: /tracing/trace_explorer/trace_queries/
   tag: ドキュメント
-  text: .NET
-kind: ガイド
+  text: Trace Queries
 title: Trace Queries ソースデータ
 ---
 
@@ -46,15 +45,9 @@ Traces Queries がアカウントで有効になった瞬間から (イベント
 
 {{< img src="tracing/trace_queries/intelligent_retention_filter_change.png" style="width:90%; background:none; border:none; box-shadow:none;" alt="イベントオーバーレイインテリジェント保持フィルター" >}}
 
-インテリジェント保持フィルターによってインデックス化されたスパンは、以下の APM クエリから除外されます。
+Spans indexed by the Intelligent retention filter are excluded from APM queries in [Trace Analytics monitor][5] evaluations. Therefore, monitors are **not impacted** by this change.
 
-- ライブラリ
-- チェック内容のサマリー
-- [トレース分析モニター][5]評価
-
-そのため、この変更による**影響はありません**。
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

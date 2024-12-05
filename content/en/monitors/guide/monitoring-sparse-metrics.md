@@ -1,6 +1,5 @@
 ---
 title: Monitoring Sparse Metrics
-kind: guide
 further_reading:
 - link: "/api/latest/monitors/#edit-a-monitor"
   tag: "Documentation"
@@ -68,7 +67,7 @@ Are you monitoring an event that needs to happen at certain times of the day, we
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/manage/status/#investigate-a-monitor-in-a-notebook
+[1]: /monitors/status/#investigate-a-monitor-in-a-notebook
 [2]: /dashboards/functions/interpolation/#default-zero
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /monitors/types/metric/?tab=change

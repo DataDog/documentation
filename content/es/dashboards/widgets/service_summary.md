@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/services/service_page/
   tag: Documentación
   text: Más información sobre la Página de servicios de APM
-kind: documentación
 title: Widget de resumen de servicio
 widget_type: trace_service
 ---

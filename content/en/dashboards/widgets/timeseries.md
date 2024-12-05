@@ -1,6 +1,5 @@
 ---
 title: Timeseries Widget
-kind: documentation
 widget_type: timeseries
 description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
@@ -148,7 +147,7 @@ This widget can be used with the **[Dashboards API][13]**. See the following tab
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#timeboards
+[1]: /dashboards/#get-started
 [2]: /dashboards/#screenboards
 [3]: /dashboards/querying/
 [4]: /tracing/trace_explorer/query_syntax/#search-bar

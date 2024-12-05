@@ -7,7 +7,7 @@ aliases:
 - /ja/security_monitoring/explorer/
 - /ja/cloud_siem/explorer/
 - /ja/security_platform/explorer
-- /ja/synthetics/api_tests/
+- /ja/security/explorer
 - /ja/security_platform/security_signal_management
 - /ja/security/security_signal_management
 cascade:
@@ -53,7 +53,21 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadogs-approach-devsecops/
   tag: ブログ
   text: Datadog の DevSecOps へのアプローチ
-kind: documentation
+- link: https://www.datadoghq.com/blog/investigate-denial-of-service-attacks/
+  tag: ブログ
+  text: 複雑なサービス拒否攻撃の調査
+- link: https://www.datadoghq.com/blog/optimize-and-secure-azure-functions/
+  tag: ブログ
+  text: Azure Functions を最適化し、セキュリティを確保するためのヒント
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: ブログ
+  text: Datadog を Detection as Code (コードとしての検出) に使用する方法
+- link: https://www.datadoghq.com/blog/lateral-movement-entra-id-azure/
+  tag: ブログ
+  text: ハイブリッド Azure 環境におけるラテラルムーブメントの検出
+- link: https://www.datadoghq.com/blog/secrets-management/
+  tag: ブログ
+  text: クラウド環境を攻撃に対してより脆弱にするシークレットを特定する
 title: Datadog Security
 ---
 
@@ -61,21 +75,21 @@ title: Datadog Security
 
 実稼働セキュリティ運用にスピードとスケールを。Datadog Security は、リアルタイムの脅威検出と、アプリケーション、ホスト、コンテナ、クラウドインフラストラクチャー全体にわたる継続的なコンフィギュレーション監査を提供します。Datadog の可観測性プラットフォームと組み合わせることで、Datadog Security は、組織の共有目標に沿ったセキュリティと運用の間にかつてないインテグレーションをもたらします。
 
-Datadog Security には、[Application Security Management](#application-security-management)、[Cloud SIEM](#cloud-siem)、[Cloud Security Management](#cloud-security-management) があります。詳しくは、[30 秒製品ガイドツアー][14]をご覧ください。
+Datadog Security には、[Application Security](#application-security-management)、[Cloud SIEM](#cloud-siem)、[Cloud Security Management](#cloud-security-management) が含まれています。詳しくは、[30 秒製品ガイドツアー][14]をご覧ください。
 
-## テストステップ
+## アプリケーションセキュリティ
 
-[Application Security Management][1] (ASM) は、SSRF (Server-Side-Request-Forgery) や SQL インジェクション、Log4Shell、XSS (Reflected Cross-Site-Scripting) など、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。ASM は、Datadog [APM][2]、[Datadog Agent][3]、およびアプリ内検出ルールを活用して、アプリケーション環境における脅威を検出します。詳しくは製品[ガイドツアー](https://www.datadoghq.com/guided-tour/security/application-security-management/)をご確認ください。
+Datadog [Application Security][1] は、SSRF (Server-Side-Request-Forgery) や SQL インジェクション、Log4Shell、XSS (Reflected Cross-Site-Scripting) など、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。ASM は、Datadog [APM][2]、[Datadog Agent][3]、およびアプリ内検出ルールを活用して、アプリケーション環境における脅威を検出します。詳しくは製品[ガイドツアー](https://www.datadoghq.com/guided-tour/security/application-security-management/)をご確認ください。
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="攻撃フローとフレームグラフが表示された Datadog のセキュリティシグナルパネル" width="75%">}}
 
-## ディメンショニング
+## Cloud SIEM
 
 [Cloud SIEM][4] (Security Information and Event Management) は、標的型攻撃、脅威情報リストに一致する IP 通信、安全でない構成など、アプリケーションやインフラストラクチャーに対する脅威をリアルタイムに検出します。Cloud SIEM は、[Datadog ログ管理][5]を利用しています。これらを組み合わせることで、[Datadog Cloud SIEM で検出した脅威の対処を自動化][6]し、脅威対応のワークフローを加速させることができます。詳しくは専用の[ガイドツアー](https://www.datadoghq.com/guided-tour/security/cloud-siem/)をご確認ください。
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="Cloud SIEM のホームページには、重要なシグナル、疑わしいアクター、影響を受けるリソース、脅威インテル、シグナルの傾向などのウィジェットを備えた Security Overview セクションが表示されています" width="100%">}}
 
-## 検索構文
+## Cloud Security Management
 
 [Cloud Security Management (CSM)][10] は、クラウドインフラクチャー全体でリアルタイムの脅威検出と継続的な構成監査を実現し、統一ビューでシームレスなコラボレーションと迅速な修復を可能にします。 観測可能性データにより、セキュリティチームは、攻撃フローを完全にトレースすることで脅威の影響を判断し、脆弱性がトリガーされたリソース所有者を特定することができます。
 

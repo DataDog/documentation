@@ -1,6 +1,5 @@
 ---
 title: How do I add new users to sub-organizations?
-kind: faq
 ---
 
 Datadog offers the following ways to provision users to their respective organizations:

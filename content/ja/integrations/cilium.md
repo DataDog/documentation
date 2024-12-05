@@ -33,6 +33,7 @@ categories:
 - ネットワーク
 - security
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
 display_on_public_website: true
@@ -40,9 +41,8 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 3.4.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cilium
 public_title: Cilium
@@ -61,6 +61,7 @@ tile:
   - Category::Network
   - Category::Security
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Agent のメトリクスと、クラスター全体のオペレーターメトリクスをポッドごとに収集
   media: []
@@ -76,11 +77,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Cilium][1] を監視します。このインテグレーションにより、`cilium-agent` または `cilium-operator` からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Cilium チェックは [Datadog Agent][3] パッケージに含まれていますが、Prometheus のメトリクスを公開するための追加のセットアップが必要です。
 
@@ -117,12 +118,12 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
               - --enable-metrics
       ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cilium.d/conf.yaml` ファイルを編集し、Cilium のパフォーマンスデータを収集します。使用可能なすべての構成オプションについては、[cilium.d/conf.yaml のサンプル][1]を参照してください。
@@ -157,7 +158,7 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 2. [Agent を再起動します][2]。
 
-##### 収集データ
+##### ログ収集
 
 Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあります。
 
@@ -200,7 +201,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{"agent_endpoint": "http://%%host%%:9090/metrics", "use_openmetrics": "true"}` |
 
-- 収集データ
+- ログ収集
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -216,7 +217,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{"operator_endpoint": "http://%%host%%:6942/metrics", "use_openmetrics": "true"}` |
 
-- 収集データ
+- ログ収集
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
@@ -231,21 +232,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `cilium` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cilium" >}}
 
 
-### ヘルプ
+### イベント
 
 Cilium インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cilium" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

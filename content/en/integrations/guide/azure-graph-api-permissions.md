@@ -1,6 +1,6 @@
 ---
 title: Microsoft Graph API Permissions for Monitoring Azure
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"

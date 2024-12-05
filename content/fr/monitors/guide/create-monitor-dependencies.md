@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
-kind: guide
+
 title: Créer des dépendances de monitor
 ---
 

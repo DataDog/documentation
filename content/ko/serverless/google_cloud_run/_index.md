@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: 블로그
   text: Cloud Run 서비스에서 트레이스, 로그, 커스텀 메트릭 수집
-kind: documentation
 title: Google Cloud Run
 ---
 

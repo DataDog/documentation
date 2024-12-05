@@ -2,7 +2,6 @@
 aliases:
 - /es/graphing/faq/screenboard-api-doc
 - /es/graphing/guide/screenboard-api-doc
-kind: guía
 title: API screenboard
 ---
 
@@ -21,12 +20,12 @@ El endpoint `screenboard` permite crear, actualizar, eliminar y consultar screen
 ### Argumentos
 
 * **`board_title`** [*required* (requerido)]:
-    El nombre del dashboard.
-* **`description`** (descripción) [*opcional*, *por defecto*=**Ninguno**]:
-    Una descripción del contenido de dashboard.
+    Nombre del dashboard.
+* **`description`** (descripción) [*opcional*, *default*=**None**]:
+    Descripción del contenido del dashboard.
 * **`widgets`** [*required* (requerido)]:
     Una lista de definiciones de widget. Para obtener una definición de widget, utiliza la *pestaña JSON* en la IU de la configuración de widget.
-* **`template_variables`** [*opcional*, *default*=**None**]:
+* **`template_variables`** [*optional*, *default*=**None**]:
     Una lista de variables de plantilla para utilizar la plantilla dashboard.
 * **`read_only`** [*opcional*, *default*=**False**]:
     El estado de solo lectura del screenboard.
@@ -140,18 +139,18 @@ curl -X POST -H "Tipo de contenido: aplicación/json" \
 ### Argumentos
 
 * **`board_title`** [*required* (requerido)]:
-    El nombre del dashboard.
+    Nombre del dashboard.
 * **`description`** (descripción) [*opcional*, *default*=**None**]:
-    Una descripción del contenido de dashboard.
+    Descripción del contenido del dashboard.
 * **`widgets`** [*required* (requerido)]:
-    Una lista de definiciones widget. Para obtener una definición de widget, utiliza la *pestaña JSON* en la IU de la configuración de widget.
-* **`template_variables`** [*optional* (opcional), *default*=**None**]:
+    Una lista de definiciones de widget. Para obtener una definición de widget, utiliza la *pestaña JSON* en la IU de la configuración de widget.
+* **`template_variables`** [*optional*, *default*=**None**]:
     Una lista de variables de plantilla para utilizar la plantilla dashboard.
 * **`width`** [*optional* (opcional), *default*=**None**]:
     Ancho de screenboard en píxeles
 * **`height`** (altura) [*optional* (opcional), *default*=**None**]:
     Altura de screenboard en píxeles.
-* **`read_only`** [*optional* (opcional), *default*=**False**]:
+* **`read_only`** [*opcional*, *default*=**False**]:
     El estado de solo lectura del screenboard.
 
 ### Ejemplos

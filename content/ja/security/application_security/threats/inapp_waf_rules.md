@@ -55,26 +55,24 @@ _アプリ内 WAF ルール_は、受信するリクエストの条件を指定�
 
 ## カスタムアプリ内 WAF ルール
 
-<div class="alert alert-info">カスタムアプリ内 WAF ルールはベータ版です。</div>
-
 カスタムアプリ内 WAF ルールにより、ユーザーはアプリケーションへの特定のタイプのリクエストを記録したり、ブロックしたりすることができます。例えば、カスタムルールを使用して、ログインの成功または失敗を監視することができます。開始するには、**Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4] へ移動します。
 
-**注:** アプリ内 WAF のデフォルトのルールは読み取り専用です。アプリ内 WAF の動作を精緻化するには、アプリ内 WAF ルールを修正します。デフォルトのルールを変更することはできませんが、デフォルトのルールの 1 つに基づいてカスタムルールを作成し、必要に応じて一致条件を変更することができます。同じリクエストを評価する 2 つの似たルールが存在することにならないように、デフォルトのルールは必ず無効にしてください。
+**注:** アプリ内 WAF のデフォルトのルールは読み取り専用です。アプリ内 WAF の動作を調整するには、アプリ内 WAF のルールを変更します。デフォルトのルールを変更することはできませんが、デフォルトのルールの 1 つに基づいてカスタムルールを作成し、必要に応じて一致条件を変更することができます。同じリクエストを評価する 2 つの非常によく似たルールが存在することにならないように、デフォルトのルールは必ず無効にしてください。
 
 ## ASM アプリ内 WAF ルールの構成
 
 サービスのブロックは、ポリシールールで定義します。アプリ内 WAF には、*Datadog Recommended*、攻撃のみを監視する *Datadog Monitoring-only*、攻撃ツールをブロックし、その他のすべての攻撃を監視する *Datadog Block Attack tools* の 3 つの Datadog デフォルトポリシーが含まれています。
 
-ポリシーを使用しているサービスは、ポリシー管理ページに直接表示されます。
+ポリシーが適用されているサービスは、ポリシー管理ページで直接確認できます。
 
 1. Datadog で、[Security > Application Security > Protection > In-App WAF][2] に移動します。
 
-   {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="2 つのデフォルトポリシーを示すアプリ内 WAF 構成ページ。" style="width:100%;" >}}
+   {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="アプリ内 WAF 構成ページ、2 つのデフォルトポリシーを表示しています。" style="width:100%;" >}} 
 
-2. ポリシーの右側にある 3 つの点をクリックし、**Download Configuration of this Policy** を選択すると、コンフィギュレーションファイルがローカルマシンにダウンロードされます。
-3. オプションで、**Apply this Policy to Services** を選択すると、保護が有効な 1 つまたは複数の ASM サービスにデフォルトポリシーが適用されます。
+2. ポリシーの右側にある 3 つのドットをクリックし、**Download Configuration of this Policy** を選択して、コンフィギュレーションファイルをローカルマシンにダウンロードします。
+3. オプションとして、**Apply this Policy to Services** を選択して、デフォルトのポリシーを保護が有効な 1 つ以上の ASM サービスに適用することもできます。
 
-   **注:** ポリシーは 1 つ以上のサービスに適用できますが、1 つのサービスには 1 つの_ポリシー_しか含めることができません。
+   注: ポリシーは複数のサービスに適用できますが、1 つのサービスには 1 つの_ポリシー_しか含めることができません。
 
 3. 上記の仕様に従って、新しいルールの JSON 定義を含むようにファイルを更新します。例:
 
@@ -127,5 +125,5 @@ _アプリ内 WAF ルール_は、受信するリクエストの条件を指定�
 
 [1]: /ja/security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
-[3]: /ja/security/application_security/enabling/
+[3]: /ja/security/application_security/threats/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules

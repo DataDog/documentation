@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/
   tag: Blog
   text: Visualiza el comportamiento de los usuarios con Datadog Heatmaps
-kind: documentación
 title: Widget heatmap
 widget_type: heatmap
 ---

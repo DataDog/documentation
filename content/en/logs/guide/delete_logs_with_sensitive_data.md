@@ -1,6 +1,6 @@
 ---
 title: Delete Logs with Sensitive Data
-kind: guide
+
 disable_toc: false
 further_reading:
 - link: "logs/guide/control-sensitive-logs-data/"

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Passer d'une organisation à une autre
 ---
 

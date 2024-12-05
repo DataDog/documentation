@@ -1,6 +1,5 @@
 ---
 title: Fonctions Bêta
-kind: documentation
 aliases:
   - /fr/graphing/functions/beta/
 ---

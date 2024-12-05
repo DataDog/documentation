@@ -1,6 +1,5 @@
 ---
 title: Pattern-based Correlation
-kind: Documentation
 further_reading:
 - link: "service_management/events/correlation/triage_and_notify"
   tag: "Documentation"

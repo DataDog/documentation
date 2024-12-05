@@ -1,6 +1,5 @@
 ---
 title: Log Configuration
-kind: Documentation
 description: "Process, enrich, control, and manage your logs from the Logs Configuration page"
 aliases:
   - /logs/processing
@@ -16,7 +15,10 @@ further_reading:
   text: "Investigate your log processing with the Datadog Log Pipeline Scanner"
 - link: "/logs/guide/"
   tag: "Guide"
-  text: Additional guides about logging with Datadog
+  text: "Additional guides about logging with Datadog"
+- link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+  tag: "Architecture Center"
+  text: "A guide to Log Management Indexing Strategies with Datadog"
 ---
 
 ## Overview

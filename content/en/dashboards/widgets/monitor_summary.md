@@ -1,6 +1,5 @@
 ---
 title: Monitor Summary Widget
-kind: documentation
 description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
 widget_type: "manage_status"
 aliases:

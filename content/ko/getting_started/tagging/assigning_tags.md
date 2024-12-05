@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/tagging
-- /ko/getting_started/tagging/assigning_tags
 - /ko/tagging/assigning_tags/
 description: Datadog에서 태그를 할당하는 방법 알아보기.
 further_reading:
@@ -11,7 +10,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: 설명서
   text: Datadog 태그 사용법 알아보기
-kind: 설명서
 title: 태그 할당
 ---
 
@@ -96,8 +94,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /ko/getting_started/integrations/
-[2]: /ko/agent/guide/agent-configuration-files/
-[3]: /ko/getting_started/tagging/#defining-tags
+[2]: /ko/agent/configuration/agent-configuration-files/
+[3]: /ko/getting_started/tagging/#define-tags
 [4]: /ko/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ko/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -138,8 +136,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /ko/getting_started/integrations/
-[2]: /ko/agent/guide/agent-configuration-files/
-[3]: /ko/getting_started/tagging/#defining-tags
+[2]: /ko/agent/configuration/agent-configuration-files/
+[3]: /ko/getting_started/tagging/#define-tags
 [4]: /ko/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ko/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -161,7 +159,7 @@ hostname: mymachine.mydomain
 
 #### 환경 변수
 
-컨테이너화된 Datadog Agent를 설치한 후에는 Agent 주요 설정 파일에 있는 환경 변수 `DD_TAGS`를 사용하여 호스트 태그를 설정할 수 있습니다.
+컨테이너화된 Datadog 에이전트를 설치한 후 에이전트 주 구성 파일에서 환경 변수 `DD_TAGS`를 사용해 호스트 태그를 설정할 수 있습니다. 여러 태그를 지정하면 쉼표와 띄어쓰기로 구분하세요.
 
 Datadog는 [도커(Docker), 쿠버네티스(Kubernetes), ECS, Swarm, Mesos, Nomad, Rancher][6]에서 일반적인 태그를 자동으로 수집합니다. 더 많은 태그를 추출하려면 다음 옵션을 사용하세요.
 
@@ -175,7 +173,7 @@ Datadog는 [도커(Docker), 쿠버네티스(Kubernetes), ECS, Swarm, Mesos, Noma
 
 **예시**:
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
@@ -190,8 +188,8 @@ DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 `DD_CONTAINER_LABELS_AS_TAGS` 변수를 도커 Swarm `docker-compose.yaml` 파일에서 사용 중일 때는 작은 따옴표("'" 기호)를 삭제하세요. 예를 들면 다음과 같습니다.
 
-```shell
-DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 도커 컨테이너에 라벨을 추가할 때는 `labels:` 키워드를 `docker-compose.yaml` 파일 내부에 배치하는 것이 중요합니다. 문제를 방지하려면 [도커 통합 서비스 태깅][2] 가이드를 따라주시기 바랍니다.
@@ -218,7 +216,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1 key2:value2 key3:value3"
+      - DD_TAGS="key1:value1, key2:value2, key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -265,35 +263,36 @@ Datadog 트레이서는 환경 변수, 시스템 속성 또는 코드 내의 설
 {{< tabs >}}
 {{% tab "호스트 맵" %}}
 
-[호스트 맵(Host Map) 페이지][1]를 사용하여 UI에서 호스트 태그를 할당합니다. 페이지 하단에 호스트 오버레이를 표시하려면 육각형(호스트)을 클릭하세요. 그런 다음 *User* 섹션에서 **Edit Tags** 버튼을 클릭합니다. 태그 목록을 쉼표(",")로 구분하여 입력하고 **Save Tags**를 클릭합니다. UI에서 호스트 태그를 변경한 경우, 변경 사항이 적용되기까지 최대 5분이 소요될 수 있습니다.
+[호스트 맵(Host Map) 페이지][1]를 사용하여 UI에서 호스트 태그를 할당합니다. 페이지 하단에 호스트 오버레이를 표시하려면 육각형(호스트)을 클릭하세요. 그런 다음 *User* 섹션에서 **Add Tags** 버튼을 클릭합니다. 태그 목록을 쉼표(",")로 구분하여 입력하고 **Save Tags**를 클릭합니다. UI에서 호스트 태그를 변경한 경우, 변경 사항이 적용되기까지 최대 5분이 소요될 수 있습니다.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="호스트 맵 태그" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="호스트 맵, 호스트 상세 내역에 Add Tags 버튼이 강조 표시됨" style="width:80%;">}}
+
 
 [1]: /ko/infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "인프라스트럭처 목록" %}}
 
-[인프라스트럭처 목록(Infrastructure List) 페이지][1]를 사용하여 UI에서 호스트 태그를 할당합니다. 페이지 오른쪽에 호스트 오버레이를 표시하려면 호스트를 클릭하세요. 그런 다음 *User* 섹션에서 **Edit Tags** 버튼을 클릭합니다. 태그 목록을 쉼표(",")로 구분하여 입력하고 **Save Tags**를 클릭합니다. 태그를 추가한 후에는 UI에서 확인할 수 있는지 먼저 살펴본 다음 다른 태그를 더하세요.
+[인프라스트럭처 목록(Infrastructure List) 페이지][1]를 사용하여 UI에서 호스트 태그를 할당합니다. 페이지 오른쪽에 호스트 오버레이를 표시하려면 호스트를 클릭하세요. 그리고 *User* 섹션에서 **Add Tags** 버튼을 클릭합니다. 태그 목록을 쉼표(",")로 구분하여 입력하고 **Save Tags**를 클릭합니다. 태그를 추가한 후에는 UI에서 확인할 수 있는지 먼저 살펴본 다음 다른 태그를 더하세요.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="인프라스트럭처 목록 태그" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="인프라스트럭처 목록, 인프라스트럭처 상세 패널이 열려 있고 Add Tags 버튼이 강조 표시됨" style="width:80%;">}}
+
 
 [1]: /ko/infrastructure/
 {{% /tab %}}
 {{% tab "모니터링" %}}
 
-[모니터링 관리(Manage Monitors)][1] 페이지에서 각 모니터 옆의 체크박스를 선택해 태그를 추가합니다(하나 이상의 모니터를 선택할 수 있습니다). **Edit Tags** 버튼을 클릭하세요. 태그를 입력하거나 이전에 사용했던 태그를 선택합니다. 다음으로 **Add Tag `tag:name`** 또는 **Apply Changes**를 클릭합니다. 태그를 이전에 추가했다면 태그 체크박스를 사용해 여러 태그를 동시에 할당할 수 있습니다.
+[모니터링 관리(Manage Monitors)][1] 페이지에서 각 모니터 옆의 체크박스를 선택해 태그를 추가합니다(하나 이상의 모니터를 선택할 수 있습니다). **Edit Tags** 버튼을 클릭하세요. 태그를 입력하거나 이전에 사용했던 태그를 선택합니다. 다음으로 **Add Tag `tag:name`** 또는 **Apply Changes**를 클릭합니다. 태그를 이전에 추가했다면 태그 체크박스를 사용해 여러 태그를 동시에 할당할 수 있습니다. 자세한 정보를 보려면 [모니터 관리 설명서][2]를 확인하세요.
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="모니터링 관리 태그" style="width:80%;">}}
+모니터링을 생성할 때, 4단계 *Say what's happening* 또는 *Notify your Team*에서 모니터링 태그를 할당하세요.
 
-모니터링을 생성할 때, 4단계 *Say what's happening*에서 모니터링 태그를 할당하세요.
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="정책 태그 구성 보기. '정책 태그' 아래 '값 선택' 드롭다운 옆에 'cost_center, product_id, env의 세 가지 예시 태그가 있음" style="width:80%;" >}}
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="모니터링 태그 만들기" style="width:80%;">}}
-
-[1]: /ko/monitors/manage/
+[1]: https://app.datadoghq.com/monitors/manage
+[2]: /ko/monitors/manage/
 {{% /tab %}}
-{{% tab "분포 메트릭" %}}
+{{% tab "디스트리뷰션 메트릭" %}}
 
-최대 10개의 태그 허가 목록을 메트릭에 적용하여 [분포 메트릭(Distribution Metrics)][1]에서 백분위 집계를 생성합니다. 그러면 태그 값의 쿼리 가능한 조합으로 시계열이 생성됩니다. 분포 메트릭에서 출력되는 커스텀 메트릭과 시계열을 자세히 알아보려면 [커스텀 메트릭][2] 가이드를 참조하세요.
+최대 10개의 태그 허가 목록을 메트릭에 적용하여 [디스트리뷰션 메트릭(Distribution Metrics)][1]에서 백분위 집계를 생성합니다. 그러면 태그 값의 쿼리 가능한 조합으로 시계열이 생성됩니다. 디스트리뷰션 메트릭에서 출력되는 커스텀 메트릭과 시계열을 자세히 알아보려면 [커스텀 메트릭][2] 가이드를 참조하세요.
 
 **태그는 최대 10개까지 적용할 수 있습니다. 제외 태그는 사용할 수 없습니다.**
 
@@ -380,7 +379,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-[DogStatsD][9]로 전송한 메트릭, 이벤트, 서비스 점검에 태그를 추가하세요. 예를 들어, 타이머 메트릭과 알고리즘 버전을 태깅하여 두 알고리즘의 성능을 비교할 수 있습니다.
+[DogStatsD][10]로 전송한 메트릭, 이벤트, 서비스 점검에 태그를 추가하세요. 예를 들어, 타이머 메트릭과 알고리즘 버전을 태깅하여 두 알고리즘의 성능을 비교할 수 있습니다.
 
 ```python
 
@@ -393,15 +392,15 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**참조**: 태깅은 StatsD의 [Datadog 전용 확장 프로그램][10]입니다.
+**참조**: 태깅은 StatsD의 [Datadog 전용 확장 프로그램][11]입니다.
 
-DogStatsD 메트릭에 `host` 태그를 할당할 때는 신중하게 결정하셔야 합니다. 호스트 태그 키를 자세히 알아보려면 [DogStatsD 섹션][11]을 참조하세요.
+DogStatsD 메트릭에 `host` 태그를 할당할 때는 신중하게 결정하셔야 합니다. 호스트 태그 키를 자세히 알아보려면 [메트릭 전송: DogStatsD][12] 설명서를 참고하세요.
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/getting_started/tagging/#defining-tags
+[1]: /ko/getting_started/tagging/#define-tags
 [2]: /ko/getting_started/tagging/unified_service_tagging
 [3]: /ko/integrations/#cat-cloud
 [4]: /ko/getting_started/agent/#setup
@@ -412,3 +411,4 @@ DogStatsD 메트릭에 `host` 태그를 할당할 때는 신중하게 결정하�
 [9]: /ko/tracing/setup/
 [10]: /ko/developers/dogstatsd/
 [11]: /ko/developers/community/libraries/
+[12]: /ko/metrics/dogstatsd_metrics_submission/#host-tag

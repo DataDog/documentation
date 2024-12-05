@@ -3,15 +3,14 @@ aliases:
 - /ja/integrations/faq/issues-getting-integrations-working
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: Agent のトラブルシューティング
+  tag: ドキュメント
   text: Agent デバッグモード
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Agent のトラブルシューティング
+  tag: ドキュメント
   text: Agent フレアの送信
 - link: /agent/troubleshooting/agent_check_status/
-  tag: Agent のトラブルシューティング
+  tag: ドキュメント
   text: Agent チェックのステータスを確認
-kind: documentation
 title: インテグレーションの稼働
 ---
 

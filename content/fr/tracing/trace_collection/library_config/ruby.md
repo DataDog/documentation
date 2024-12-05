@@ -8,7 +8,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/ruby/
   tag: Documentation
   text: Propager le contexte de traces
-kind: documentation
 title: Configurer la bibliothèque de tracing Ruby
 type: multi-code-lang
 ---

@@ -3,7 +3,7 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Cloud SIEM のデフォルト検出ルールの確認
-- link: /security/explorer/
+- link: /security/cloud_siem/investigate_security_signals
   tag: Documentation
   text: セキュリティシグナルエクスプローラーについて学ぶ
 - link: /security/cloud_siem/log_detection_rules/
@@ -121,13 +121,13 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 1. [Datadog-Azure 関数コード][4]をコピーして `index.js` ファイルに貼り付けてください。
 1. 関数コードの 22 行目の `<DATADOG_API_KEY>` をお使いの Datadog API に置き換えてください。
 1. Datadog US1 サイトを使用していない場合は、関数コードの 23 行目で `DD_SITE` を [Datadog サイト][5]パラメーターに置き換えてください。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 1. 左サイドメニューの **Integrations** をクリックします。
 1. **Azure Event Hubs** をクリックします。
 1. `Event parameter name` を `eventHubMessages` に設定します
 1. `Event Hub Cardinality` は、`Many` に設定する必要があります。
 1. `Event Hub Data Type` を empty に設定します。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 1. 関数を実行し、Datadog ログエクスプローラーでテストメッセージをチェックし、設定が正しいことを確認します。テストログイベントは、有効な JSON 形式である必要があります。例:
     ```
     {
@@ -147,7 +147,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 1. Datadog に送信するログのカテゴリーを選択します。
 1. **Stream to an event hub** を選択します。
 1. 先に作成したイベントハブネームスペースを選択します。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 
 #### リソースログを Event Hub に転送する
 
@@ -158,7 +158,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 1. **allLogs** を選択します。
 1. **Destination details** セクションで、**Stream to an event hub** を選択します。
 1. 先に作成したイベントハブネームスペースを選択します。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 
 [ログエクスプローラー][7]で検索クエリに `service:azure` と入力し、Azure のログを表示します。
 

@@ -1,5 +1,4 @@
 ---
-kind: Documentación
 title: Reasignador de estados
 ---
 

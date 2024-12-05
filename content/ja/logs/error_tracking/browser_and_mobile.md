@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: エラートラッキングエクスプローラーについて
 is_beta: true
-kind: documentation
 title: ブラウザとモバイルのエラーの追跡
 ---
 
@@ -78,7 +77,7 @@ Datadog Android SDK をまだセットアップしていない場合は、[ア�
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]:/ja/logs/log_collection/android/#setup
+[2]: /ja/logs/log_collection/android/#setup
 [3]: https://github.com/Datadog/dd-sdk-android
 [4]: /ja/logs/log_collection/android/?tab=kotlin#setup
 

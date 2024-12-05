@@ -1,6 +1,5 @@
 ---
 title: OAuth2 Authorization Endpoints Reference
-kind: documentation
 description: Learn how to use the OAuth2 authorization endpoints.
 further_reading:
 - link: "/developers/authorization/"

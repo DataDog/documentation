@@ -1,6 +1,5 @@
 ---
 title: Docker Log Collection Troubleshooting Guide
-kind: documentation
 ---
 
 There are a number of common issues that can get in the way when sending new container logs to Datadog with the Container Agent or with a locally installed Host Agent. If you experience issues sending new logs to Datadog, this guide helps you troubleshoot. If you continue to have trouble, [contact our support team][1] for further assistance.
@@ -157,7 +156,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
+If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_FORCE_USE_HTTP` environment variable to `true`:
 
 #### Your containers are not using the JSON logging driver
 

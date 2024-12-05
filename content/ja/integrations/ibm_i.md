@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md
 display_on_public_website: true
@@ -32,9 +33,8 @@ draft: false
 git_integration_title: ibm_i
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 2.2.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_i
 public_title: IBM i
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Category::OS & System
+  - Offering::Integration
   configuration: README.md#Setup
   description: ジョブ、ジョブキュー、ASP などを含む IBM i システムをリモートで監視します。
   media: []
@@ -63,13 +64,13 @@ tile:
 
 このチェックは、Datadog Agent を通して [IBM i][1] をリモートで監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
 **注**: Unix 系 OS に特有の `fcntl()` システムコールを使用するため、このチェックは Windows では利用できません。
 
-### インフラストラクチャーリスト
+### インストール
 
 IBM i チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -82,7 +83,7 @@ IBM i チェックでは、IBM i ODBC ドライバーを使用して、IBM i ホ
 
 Linux ホスト用の `ACS Linux App Pkg` など、お使いのプラットフォーム用の `ACS App Pkg` パッケージを選択します。パッケージをダウンロードし、インストール手順に従って、ドライバーをインストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 IBM i チェックは、Datadog Agent を実行しているホストから IBM i システムにリモートでクエリを実行します。IBM i システムと通信するには、Datadog Agent を実行しているホストで IBM i ODBC ドライバーをセットアップする必要があります。
 
@@ -116,17 +117,17 @@ IBM i ODBC ドライバーの名前は、IBM i のチェックを構成するた
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションの `ibm_i` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ibm_i" >}}
 
 
-### ヘルプ
+### イベント
 
 IBM i チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

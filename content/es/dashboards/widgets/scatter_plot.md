@@ -7,9 +7,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget de gráfico de dispersión
-widget_type: gráfico de dispersión
+widget_type: scatterplot
 ---
 
 Un gráfico de dispersión identifica una posible relación entre los cambios observados en dos conjuntos diferentes de variables. Proporciona un medio visual y estadístico para comprobar la fuerza de una relación entre dos variables. La visualización del gráfico de dispersión permite representar gráficamente una contexto elegido sobre dos métricas diferentes con sus respectivas agregaciones.

@@ -1,6 +1,5 @@
 ---
 title: Setup Data Streams Monitoring for Go
-kind: documentation
 ---
 
 ### Prerequisites
@@ -9,6 +8,17 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 * [Datadog Agent v7.34.0 or later][1]
 * [dd-trace-go v1.56.1 or later][2]
+
+### Prerequisites
+
+* [Datadog Agent v7.34.0 or later][1]
+
+### Supported libraries
+
+| Technology | Library                                                                  | Minimal tracer version | Recommended tracer version |
+|------------|--------------------------------------------------------------------------|------------------------|----------------------------|
+| Kafka      | [confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go) | 1.56.1                 | 1.66.0 or later            |
+| Kafka      | [Sarama](https://github.com/Shopify/sarama)                              | 1.56.1                 | 1.66.0 or later            |
 
 ### Installation
 
@@ -76,7 +86,8 @@ If a service consumes data from one point and produces to another point, propaga
     ```
 
 #### Other queuing technologies or protocols
-You can also use manual instrumentation. For example, you can propagate context through Kinesis.
+
+You can also manually instrumente your service. For example, you can propagate context through Kinesis.
 
 ##### Instrumenting the produce call
 

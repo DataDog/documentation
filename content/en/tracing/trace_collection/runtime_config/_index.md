@@ -1,13 +1,12 @@
 ---
 title: Configuration at Runtime
-kind: documentation
 further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
 
-<div class="alert alert-info">This feature is in public beta.</div>
+<div class="alert alert-info">This feature is in Preview.</div>
 
 ## Overview
 

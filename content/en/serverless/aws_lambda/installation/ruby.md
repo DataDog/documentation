@@ -1,6 +1,5 @@
 ---
 title: Instrumenting Ruby Serverless Applications
-kind: documentation
 further_reading:
 - link: 'serverless/datadog_lambda_library/ruby'
   tag: 'Documentation'
@@ -22,6 +21,8 @@ aliases:
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
+
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
 
 ## Installation
 
@@ -329,6 +330,17 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][10] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][11] and tagging your issue with `version/next`.
+
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][4].
@@ -402,4 +414,6 @@ For more information on custom metric submission, see [Serverless Custom Metrics
 [6]: /serverless/configuration
 [7]: /serverless/custom_metrics?tab=ruby
 [8]: /tracing/custom_instrumentation/ruby/
-[9]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[9]: /security/application_security/serverless/
+[10]: https://github.com/DataDog/datadog-lambda-extension
+[11]: https://github.com/DataDog/datadog-lambda-extension/issues

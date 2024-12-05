@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/
   tag: 설명서
   text: 대시보드에 대해 알아보기
-kind: 설명서
 title: 통합 대시보드 만들기
 ---
 ## 개요

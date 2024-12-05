@@ -1,19 +1,18 @@
 ---
-kind: documentation
 title: Google Cloud 통합 빌링
 ---
 
 ## 개요
 
-Datadog은 Agent를 실행하는 호스트와 Google Cloud 통합에서 선택한 모든 GCE 인스턴스에 대해 요금을 청구합니다. [Dataflow][6]와 같은 GCE 외부 서비스는 Datadog에서 청구 가능한 GCE 호스트를 생성할 수 있습니다. Google Cloud 통합으로 선택한 GCE 인스턴스에서 Agent를 실행하는 경우 요금이 두 번 청구되지 않습니다.
+Datadog에서는 Datadog 에이전트를 실행하는 호스트와 Google Cloud에서 가져온 모든 GCE 인스턴스 통합에 대해 청구합니다. [Dataflow][6]와 같은 GCE 외 서비스는 Datadog에서 청구 가능한 GCE 호스트를 생성할 수 있습니다. Google Cloud 통합에서 픽업한 GCE 인스턴스에서 에이전트를 실행하는 경우 이중 청구되지 않습니다.
 
-기타 Google Cloud 리소스(CloudSQL, Google App Engine, Pub/Sub 등)는 월별 결제에 포함되지 않습니다. 요금이 청구되는 호스트를 확인하려면 Google Cloud 콘솔의 GCE 페이지로 이동하여 실행 중인 호스트 목록을 확인하세요. [Google Cloud 메트릭 제외](#google-cloud-metric-exclusion) 태그를 포함하여 제외되지 않는 한 이 페이지에 나열된 호스트는 Datadog에 데이터를 전송하며 호스트로 요금이 청구됩니다.
+기타 Google Cloud 리소스(CloudSQL, Google App Engine, Pub/Sub 등)는 월간 빌 에 포함되지 않습니다. 어떤 호스트가 청구되는지 확인하려면 Google Cloud 콘솔의 GCE 페이지로 이동하여 실행 중인 호스트의 목록을 확인합니다. 태그에서 [Google Cloud 메트릭 제외](#google-cloud-metric-exclusion)를 통해 제외하지 않는 한, 이 페이지에 나열된 호스트는 Datadog로 데이터를 전송하며 호스트로 청구됩니다.
 
 ## Google Cloud 메트릭 제외
 
-[Google Cloud 통합 타일][1]을 사용해 메트릭 수집을 관리할 수 있습니다. Configuration 탭으로 이동하여 프로젝트를 선택하거나 새 프로젝트를 추가하세요. 각 프로젝트는 Optionally Limit Metrics Collection to hosts with tag 설정을 기반으로 관리됩니다. [호스트 태그][2]로 메트릭을 제한하는 예시는 다음과 같습니다.
+[Google 클라우드 통합 타일][1]를 사용하여 메트릭 컬렉션을 제어합니다. **설정** 탭 으로 이동하여 프로젝트를 선택하거나 새 프로젝트를 추가합니다. 각 프로젝트는 [호스팅 태그][2]를 설정하여 **선택적으로 메트릭 컬렉션을 호스트로 제한하여 제어합니다**.
 
-{{< img src="account_management/billing/google_cloud_metric_filter.png" alt="메트릭 수집을 제한하는 옵션이 강조 표시된 Datadog의 General 탭에 있는 Google Cloud 페이지" >}}
+{{< img src="account_management/billing/google_cloud_metric_filter.png" alt="일반 탭에서 Datadog에 있는 Google Cloud 페이지와 강조 표시된 메트릭 수집 제한 옵션" >}}
 
 통합 타일에서 기존 Google Cloud에 제한을 추가할 때 이전에 탐지된 인스턴스는 [인프라스트럭처 목록][3]에 최대 2시간 동안 표시됩니다. 이전(트랜지션) 동안에는 인스턴스의 상태가 `???`로 표시됩니다. 이는 요금 청구 대상으로 간주되지 않습니다.
 

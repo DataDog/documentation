@@ -1,6 +1,5 @@
 ---
 title: Check Status Widget
-kind: documentation
 widget_type: check_status
 description: "Graph the current status or number of results for any check performed."
 aliases:

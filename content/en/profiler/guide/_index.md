@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler Guides
-kind: guide
 disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/request-latency-profiling/"

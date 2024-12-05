@@ -1,6 +1,7 @@
 ---
 categories:
 - configuration & deployment
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
 description: Jenkins のメトリクス、イベント、サービスチェックを自動転送 to Datadog.
@@ -9,7 +10,6 @@ git_integration_title: jenkins
 has_logo: true
 integration_title: Jenkins
 is_public: true
-kind: インテグレーション
 name: jenkins
 public_title: Datadog-Jenkins インテグレーション
 short_description: Jenkins のメトリクス、イベント、サービスを自動転送 checks to Datadog.
@@ -171,9 +171,13 @@ d.save()
 
 #### ロギング
 
-ロギングには [Jenkins と相性の良い][6] `java.util.Logger` を利用します。ログの取得設定は [Jenkins のロギング文書][6]に記載の手順に従ってください。ロガーの追加画面では、 `org.datadog.jenkins.plugins.datadog.` で始まるすべての Datadog プラグイン関数と、それに紐付く関数名が自動入力されます。本記事の執筆時点で、利用可能な関数は `org.datadog.jenkins.plugins.datadog.listeners.DatadogBuildListener` のみとなります。
+ロギングは、[Jenkins のベストプラクティス][6]に従う `java.util.Logger` を利用して行われます。
 
-## 内容
+「Datadog Plugin Logs」というカスタムロガーが自動的に登録され、このロガーはプラグインのログをレベル `INFO` 以上で記録します。
+カスタムロガーの登録は、環境変数 `DD_JENKINS_PLUGIN_LOG_RECORDER_ENABLED` を `false` に設定することで無効化できます。
+プラグインのログを最大限詳細に確認したい場合は、カスタムロガーのレベルを手動で `ALL` に変更してください。
+
+## カスタマイズ
 
 ### パイプラインのカスタマイズ
 
@@ -220,11 +224,11 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 
 グローバルコンフィギュレーションをカスタマイズするには、Jenkins で `Manage Jenkins -> Configure System` に移動し、**Advanced** ボタンをクリックします。次のオプションを使用できます。
 
-| 内容              | 説明                                                                                                                                                                                                                                 | 環境変数                          |
+| カスタマイズ              | 説明                                                                                                                                                                                                                                 | 環境変数                          |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | ホスト名                   | Datadog に送信されるすべてのイベントで使用するホスト名。                                                                                                                                                                                           | `DATADOG_JENKINS_PLUGIN_HOSTNAME`             |
-| 除外されるジョブ              | 監視対象から除外したいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
-| 含まれるジョブ              | 監視対象に含めたいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
+| 除外されるジョブ              | 監視対象から除外したいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`。この設定は、イベント、メトリクス、ログ、CI Visibility といった、プラグインのすべての側面に影響します。               |  `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
+| 含まれるジョブ              | 監視対象に含めたいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`。この設定は、イベント、メトリクス、ログ、CI Visibility といった、プラグインのすべての側面に影響します。                | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
 | グローバルタグファイル            | タグのカンマ区切りリストを含むワークスペースファイルへのパスです (パイプラインのジョブとは互換不能) 。                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
 | グローバルタグ                | すべてのメトリクス、イベント、サービスチェックを適用するためのカンマ区切りのリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。　                                                                                                                                                          | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
 | グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。**注**: タグで `$` 記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
@@ -237,7 +241,7 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 
 各ジョブのコンフィギュレーションページでは、次のようなカスタマイズが可能です。
 
-| PHP                         | 説明                                                                                                                                                                                           |
+| カスタマイズ                         | 説明                                                                                                                                                                                           |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | カスタムタグ                           | ジョブワークスペースの `File` から設定 (パイプラインのジョブではサポートされていません) するか、コンフィギュレーションページのテキスト `Properties` から直接設定します。設定が完了すると、この内容で `Global Job Tags` が上書きされます。 |
 | ソース管理のイベントを送信 | イベントおよびメトリクスの `Source Control Management Events Type` を送信します (デフォルトで有効) 。                                                                                                         |
@@ -292,11 +296,11 @@ datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: [
 
 Test Visibility は、Datadog の別製品であり、別途請求されることにご留意ください。
 
-## Datadog Operator
+## データ収集
 
 このプラグインは以下の[イベント](#events)、[メトリクス](#metrics)、[サービスチェック](#service-checks)を収集します。
 
-### ヘルプ
+### イベント
 
 #### デフォルトのイベントタイプ
 
@@ -347,7 +351,7 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 
 注: [ジョブのカスタマイズ](#job-customization)セクションで言及されているように、`SCMCheckout` イベントを送信するためのジョブ固有のトグルがあります。`SCMCheckout` イベントがグローバルに除外されている場合、このトグルは無効です。
 
-### データセキュリティ
+### メトリクス
 
 | メトリクス名                            | 説明                                                                                            | デフォルトのタグ                                                               |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
@@ -391,6 +395,7 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 | `jenkins.plugin.failed`                | プラグインに失敗しました。                                                                                        | `jenkins_url`                                                              |
 | `jenkins.plugin.inactivate`            | プラグインは無効です。                                                                                      | `jenkins_url`                                                              |
 | `jenkins.plugin.withUpdate`            | プラグインに更新があります。                                                                                   | `jenkins_url`                                                              |
+| `jenkins.plugin.withWarning`           | 警告付きプラグイン。                                                                                  | `jenkins_url`                                                              |
 | `jenkins.project.count`                | プロジェクト総数                                                                                         | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | キューサイズ                                                                                            | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                                                                     | `jenkins_url`                                                              |
@@ -434,6 +439,23 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 ### サービスチェック
 
 ビルドステータス `jenkins.job.status` にデフォルトタグを適用:  `jenkins_url、`job`、`node`、`user_id`
+
+## トラブルシューティング
+
+### 診断用フレアの生成。
+
+プラグイン診断フレアには、プラグインの問題を診断するために使用できるデータが含まれています。
+本稿執筆時点では、フレアには以下の内容が含まれています。
+- XML 形式のプラグイン構成
+- プラグイン接続チェックの結果
+- 実行時データ (JVM、Jenkins Core、プラグインの現在のバージョン)
+- プラグインコード内で発生した最近の例外
+- レベル `INFO` 以上のプラグインログ、および最近の Jenkins コントローラログ
+- Jenkins コントローラプロセスの現在のスレッドスタック
+- 環境変数で、`DD_` または `DATADOG_` で始まるもの (API キーおよび/またはアプリキーを除く)
+
+フレアを生成するには、`Manage Jenkins` ページに移動し、`Troubleshooting` セクションを見つけ、`Datadog` を選択します。
+`Download Diagnostic Flare` をクリックして (「MANAGE」権限が必要です)、フレアを生成します。
 
 ## 問題の追跡
 

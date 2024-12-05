@@ -1,6 +1,5 @@
 ---
 title: Continuous Testing Settings
-kind: documentation
 further_reading:
 - link: "/continuous_testing/cicd_integrations"
   tag: "Documentation"

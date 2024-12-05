@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery Auto-Configuration
-kind: guide
 aliases:
  - /agent/autodiscovery/auto_conf
  - /agent/faq/auto_conf
@@ -8,13 +7,13 @@ aliases:
 further_reading:
 - link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
-  text: "Kubernetes and Integrations"
+  text: "Configure integrations with Autodiscovery on Kubernetes"
 - link: "/containers/docker/integrations/"
   tag: "Documentation"
-  text: "Docker and Integrations"
-- link: "/agent/guide/autodiscovery-management/"
+  text: "Configure integrations with Autodiscovery on Docker"
+- link: "/containers/guide/container-discovery-management/"
   tag: "Documentation"
-  text: "Autodiscovery Management"
+  text: "Container Discovery Management"
 algolia:
   tags: ['auto conf','ignore auto conf', 'autoconf','ignore autoconf']
 ---
@@ -61,7 +60,7 @@ The following examples disable auto-configuration for the Redis and Istio integr
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-In your `datadog-agent.yaml`, use `override.nodeAgent.env` to set the `DD_IGNORE_AUTOCONF` environment variable.
+In your `datadog-agent.yaml`, use `override.nodeAgent.containers.agent.env` to set the `DD_IGNORE_AUTOCONF` environment variable in the `agent` container.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -75,9 +74,11 @@ spec:
 
   override:
     nodeAgent:
-      env: 
-        name: DD_IGNORE_AUTOCONF
-        value: redisdb istio
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 
 Then, apply the new configuration.
@@ -89,26 +90,14 @@ Add `datadog.ignoreAutoconfig` to your `datadog-values.yaml`:
 
 ```yaml
 datadog:
- #List of integration(s) to ignore auto_conf.yaml.
+  #List of integration(s) to ignore auto_conf.yaml.
   ignoreAutoConfig:
     - redisdb
     - istio
 ```
 {{% /tab %}}
-{{% tab "Operator" %}}
-
-To disable auto configuration integration(s) with the Operator, add the `DD_IGNORE_AUTOCONF` variable to your `datadog-agent.yaml` file:
-
-```yaml
-  override:
-    nodeAgent:
-      env:
-        - name: DD_IGNORE_AUTOCONF
-          value: "redisdb istio"
-```
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-To disable auto configuration integration(s) with your DaemonSet, add the `DD_IGNORE_AUTOCONF` variable to your Agent manifest:
+{{% tab "Containerized Agent" %}}
+To disable auto configuration integration(s) with your containerized agent (manual DaemonSet, Docker, ECS), add the `DD_IGNORE_AUTOCONF` environment variable:
 
 ```yaml
 DD_IGNORE_AUTOCONF="redisdb istio"

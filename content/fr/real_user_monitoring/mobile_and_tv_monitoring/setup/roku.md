@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
   tag: Blog
   text: Surveiller vos canaux Roku avec la solution RUM de Datadog
-kind: documentation
 title: Configuration de la surveillance des canaux Roku avec RUM
 type: multi-code-lang
 ---

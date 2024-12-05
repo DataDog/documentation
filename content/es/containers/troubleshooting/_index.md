@@ -4,7 +4,6 @@ further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentación
   text: Duplicar hosts con Kubernetes en AWS (EC2 o EKS)
-kind: documentación
 title: Solucionar problemas de contenedor
 ---
 

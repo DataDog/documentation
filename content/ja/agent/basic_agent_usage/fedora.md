@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - uninstall
+  - uninstalling
 aliases:
 - /ja/guides/basic_agent_usage/fedora/
 further_reading:
@@ -17,7 +21,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: Fedora
 title: Fedora 用 Agent の基本的な使用方法
 ---
@@ -34,9 +37,6 @@ title: Fedora 用 Agent の基本的な使用方法
 
 Agent v6 & v7 では、オペレーティングシステムから提供されるサービスマネージャーが Agent のライフサイクルを担う一方で、他のコマンドは Agent バイナリから直接実行する必要があります。Agent v5 では、ほぼすべてがサービスマネージャーによって実行されます。
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
 | 説明                        | コマンド                                                |
 |------------------------------------|--------------------------------------------------------|
 | Agent をサービスとして起動           | `sudo systemctl start datadog-agent`                   |
@@ -48,63 +48,24 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 | コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
 | チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| 説明                        | コマンド                                           |
-|------------------------------------|---------------------------------------------------|
-| Agent をサービスとして起動           | `sudo service datadog-agent start`                |
-| サービスとして実行中の Agent の停止    | `sudo service datadog-agent stop`                 |
-| サービスとして実行中の Agent の再起動 | `sudo service datadog-agent restart`              |
-| Agent サービスのステータス            | `sudo service datadog-agent status`               |
-| 実行中の Agent のステータスページ       | `sudo service datadog-agent info`                 |
-| フレアの送信                         | `sudo service datadog-agent flare`                |
-| コマンドの使用方法の表示              | `sudo service datadog-agent`                      |
-| チェックの実行                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
-
 **注**: ご使用のシステムで `service` ラッパーを使用できない場合は、以下を使用してください。
 
 * `upstart` ベースのシステムの場合: `sudo start/stop/restart/status datadog-agent`
 * `systemd` ベースのシステムの場合: `sudo systemctl start/stop/restart/status datadog-agent`
 
-[サービスライフサイクルコマンドについては、こちらを参照してください][2]。
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## コンフィギュレーション
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-Agent の構成ファイルおよびフォルダーの場所:
-
-* `/etc/datadog-agent/datadog.yaml`
-
-[インテグレーション][1]用構成ファイルの場所
-
-* `/etc/datadog-agent/conf.d/`
-
-[1]: /ja/integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+## 構成
 
 Agent の構成ファイルおよびフォルダーの場所
 
-* `/etc/dd-agent/datadog.conf`
+* `/etc/datadog-agent/datadog.yaml`
 
-[インテグレーション][1]用構成ファイルの場所
+[インテグレーション][4]用コンフィギュレーションファイルの場所
 
-* `/etc/dd-agent/conf.d/`
-
-[1]: /ja/integrations/
-{{% /tab %}}
-{{< /tabs >}}
+* `/etc/datadog-agent/conf.d/`
 
 ## Agent のアンインストール
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
+Agent をアンインストールするには、次のコマンドを実行します。
 
 ```shell
 sudo yum remove datadog-agent
@@ -117,7 +78,7 @@ sudo yum remove datadog-agent
 * `dd-agent` ユーザー
 * Datadog ログファイル
 
-以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+これらの要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
 
 ```shell
 sudo userdel dd-agent \
@@ -125,33 +86,10 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/datadog-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{% /tab %}}
 
-{{% tab "Agent v5" %}}
-```shell
-sudo yum remove datadog-agent
-```
+{{% apm-ssi-uninstall-linux %}}
 
-このコマンドでは、Agent は削除されますが以下は削除されません。
-
-* `datadog.yaml` コンフィギュレーションファイル
-* `/etc/dd-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
-* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
-* `dd-agent` ユーザー
-* Datadog ログファイル
-
-以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
-
-```shell
-sudo userdel dd-agent \
-&& sudo rm -rf /opt/datadog-agent/ \
-&& sudo rm -rf /etc/dd-agent/ \
-&& sudo rm -rf /var/log/datadog/
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-## ヘルプ
+## トラブルシューティング
 
 [Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
@@ -168,3 +106,4 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=fedora
 [2]: /ja/agent/troubleshooting/
 [3]: /ja/developers/guide/custom-python-package/
+[4]: /ja/integrations/

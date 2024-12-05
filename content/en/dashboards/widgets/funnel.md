@@ -1,11 +1,10 @@
 ---
 title: Funnel Widget
-kind: documentation
 widget_type: funnel
 aliases:
 - /graphing/widgets/funnel/
 further_reading:
-- link: "https://docs.datadoghq.com/real_user_monitoring/product_analytics/funnel_analysis/"
+- link: "https://docs.datadoghq.com/product_analytics/journeys/funnel_analysis/"
   tag: "Documentation"
   text: "Learn more about Funnel Analysis"
 - link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
@@ -45,6 +44,6 @@ This widget can be used with the [Dashboards API][3]. See the following table fo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/search/
-[2]: /real_user_monitoring/product_analytics/funnel_analysis
+[2]: /product_analytics/journeys/funnel_analysis
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

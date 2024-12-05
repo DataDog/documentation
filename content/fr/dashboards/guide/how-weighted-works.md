@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/functions/smoothing
   tag: Documentation
   text: Lissage
-kind: guide
 title: Comment fonctionne weighted() ?
 ---
 

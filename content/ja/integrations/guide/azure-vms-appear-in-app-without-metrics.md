@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
-kind: ガイド
 title: Azure VM がメトリクスなしでアプリに表示される
 ---
 

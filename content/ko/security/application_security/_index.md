@@ -1,6 +1,14 @@
 ---
+algolia:
+  tags:
+  - asm
+  - 애플리케이션 보안
 aliases:
 - /ko/security_platform/application_security
+- /ko/security/application_security/enabling/single_step
+- /ko/security/application_security/enabling/compatibility
+- /ko/security/application_security/enabling
+- /ko/security/application_security/getting_started
 description: 모니터 위협 타겟팅 프로덕션 시스템으로 배포된 트레이스에서 제공된 실행 컨텍스트를 활용합니다.
 further_reading:
 - link: /security/application_security/how-appsec-works/
@@ -12,9 +20,6 @@ further_reading:
 - link: /security/application_security/software_composition_analysis/
   tag: 설명서
   text: 소프트웨어 구성 분석
-- link: /security/application_security/enabling/#compatibility
-  tag: 설명서
-  text: 언어와 프레임워크 호환성에 대해 자세히 알아보기
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: 제품 페이지
   text: Datadog 애플리케이션 보안 관리
@@ -39,6 +44,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: 블로그
   text: Datadog를 통한 AWS WAF 활동 모니터링
+- link: https://www.datadoghq.com/blog/security-inbox-prioritization/
+  tag: 블로그
+  text: Datadog Security Inbox의 보안 위험 우선순위 지정 방법
 title: 애플리케이션 보안 관리
 ---
 
@@ -68,7 +76,7 @@ ASM을 통해 지속적인 트레이스 데이터의 노이즈를 제거하고 �
 
 [즉시 사용 가능한 규칙][4] 제공 지원으로, ASM은 수동 설정 없이 위협을 탐지합니다. 이미 물리적 또는 가상 호스트에 Datadog [애플리케이션 성능 모니터링(APM)][1]이 설정되어 있다면 한 환경 병수를 설정하기만 하면 설치하고 시작할 수 있습니다.
 
-환경 설정을 시작하여 ASM을 활용해 위협을 탐지하고 위협을 보호하려면 [설명서 사용하기][5]를 따릅니다. ASM이 설정되면 [보안 신호 탐색기][6]에서 보안 신호 조사와 치료를 시작할 수 있습니다.
+ASM을 사용하여 위협을 탐지하고 보호하도록 환경을 구성하려면 각 제품에 대한 활성화 설명서를 따르세요. ASM이 구성되면 [Security Signals Explorer][6]에서 보안 신호 조사 및 문제 해결을 시작할 수 있습니다.
 
 ## 보안 신호 조사 및 해결
 
@@ -78,6 +86,10 @@ ASM을 통해 지속적인 트레이스 데이터의 노이즈를 제거하고 �
 
 [소프트웨어 구성 분석(SCA)][8]은 알려진 취약점이 있는 오픈 소스 라이브러리를 사용하거나 이에 종속되어 있어 서비스가 위험에 처해 있을 때를 알려줍니다. 취약점을 조사하고 해당 도움말을 따르거나 취약점의 원인을 조사하여 소프트웨어를 보호하세요.
 
+## 애플리케이션 코드의 취약점 감지
+
+[Code Security][9]는 서비스의 코드 수준 취약점을 식별하고 실행 가능한 인사이트와 수정 사항을 제공합니다. IAST(대화형 애플리케이션 보안 테스트) 접근 방식을 사용하여 애플리케이션 코드 내의 취약점을 찾습니다. IAST는 APM(애플리케이션 성능 모니터링)과 같이 코드에 내장된 계측을 사용하며 이를 통해 Datadog은 추가 구성이나 주기적인 스케줄링이 필요한 외부 테스트에 의존하는 대신 합법적인 애플리케이션 트래픽을 사용하여 취약점을 식별할 수 있습니다.
+
 ## 다음 단계
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -86,7 +98,7 @@ ASM을 통해 지속적인 트레이스 데이터의 노이즈를 제거하고 �
 [2]: /ko/agent/
 [3]: /ko/security/application_security/how-appsec-works/
 [4]: /ko/security/default_rules/?category=cat-application-security
-[5]: /ko/security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
 [8]: /ko/security/application_security/software_composition_analysis/
+[9]: /ko/security/application_security/code_security/

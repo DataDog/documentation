@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/configuration/agent-fips-proxy
   tag: 설명서
   text: Datadog FIPS 규정 준수
-kind: 설명서
 title: 에이전트 프록시 설정
 ---
 

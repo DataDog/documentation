@@ -1,6 +1,5 @@
 ---
 title: Connections
-kind: documentation
 description: App Builder connections
 disable_toc: false
 further_reading:
@@ -12,10 +11,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
-App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
-{{< /callout >}}
 
 Because app actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app can run successfully only if every app action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for an app to run.
 

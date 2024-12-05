@@ -1,6 +1,5 @@
 ---
-title: .NET Custom Instrumentation using Datadog API
-kind: documentation
+title: .NET Custom Instrumentation using the Datadog API
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -82,7 +81,7 @@ namespace Store.Managers
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: When using both the <code>Datadog.Trace</code> NuGet package and automatic instrumentation, it is important to keep the versions in sync.
+  <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 ### Configuring Datadog in code
@@ -198,7 +197,7 @@ catch(Exception e)
 ```
 
 This sets the following tags on the span:
-- `"error.msg":exception.Message`
+- `"error.message":exception.Message`
 - `"error.stack":exception.ToString()`
 - `"error.type":exception.GetType().ToString()`
 
@@ -233,4 +232,4 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 [9]: /tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
 [10]: /tracing/security
 [11]: /tracing/trace_collection/library_config/dotnet-core/
-[12]: /tracing/trace_collection/trace_context_propagation/dotnet/
+[12]: /tracing/trace_collection/trace_context_propagation/

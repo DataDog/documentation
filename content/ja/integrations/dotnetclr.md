@@ -23,6 +23,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - languages
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md
 display_on_public_website: true
@@ -30,9 +32,8 @@ draft: false
 git_integration_title: dotnetclr
 integration_id: dotnetclr
 integration_title: .NET CLR
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: dotnetclr
 public_title: .NET CLR
@@ -44,6 +45,8 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::言語
+  - Category::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Dotnetclr の状態を視覚化および監視
   media: []
@@ -62,13 +65,13 @@ tile:
 - .NET CLR の状態を視覚化および監視できます。
 - .NET CLR のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 .NET CLR チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. .NET CLR のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `dotnetclr.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル dotnetclr.d/conf.yaml][3] を参照してください。
 2. [Agent を再起動します][4]。
@@ -79,23 +82,23 @@ tile:
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `dotnetclr` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "dotnetclr" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 .NET CLR チェックには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 .NET CLR チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

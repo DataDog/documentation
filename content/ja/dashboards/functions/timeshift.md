@@ -5,7 +5,6 @@ further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
   tag: よくあるご質問
   text: 以前の値から現在の値への変化率をグラフ化する
-kind: documentation
 title: タイムシフト
 ---
 
@@ -53,7 +52,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 {{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="week before の例" style="width:80%;">}}
 
-### 1 か月前
+## 1 か月前
 
 | 関数         | 説明                                                                                | 例                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
@@ -62,6 +61,19 @@ timeshift(avg:system.load.1{*}, -1209600)
 例として、`aws.ec2.cpuutilization` の `month_before()` 値を細実線で示します。
 
 {{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="month before の例" style="width:80%;">}}
+
+
+## カレンダーシフト
+
+<div class="alert alert-info">カレンダーシフト機能は、<em>プライベート</em>ダッシュボードのクラウドコストデータソースでのみ利用可能です。</div>
+
+| 関数           | 説明                                                                                   | 例                            |
+|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
+| `calendar_shift()` | メトリクスの現在のタイムスタンプから前の日、週、または月の値をグラフ化します。 | `calendar_shift(<METRIC_NAME>{*})` |
+
+calendar_shift() 関数にアクセスするには、**Add function** ボタンをクリックし、**Timeshift &gt; Month before** を選択します。カレンダーシフトを使用すると、同じメトリクスを同等の期間で比較できます。以下は、2 週間前の calendar_shift() の値と現在の値を比較したクラウドコストメトリクス `aws.cost.net.amortized` の例です。
+
+{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="2 週間前と現在の `aws.cost.net.amortized ` メトリクス値を比較するために使用される calendar_shift() 関数の例" style="width:80%;" >}}
 
 ## その他の関数
 
@@ -78,6 +90,6 @@ timeshift(avg:system.load.1{*}, -1209600)
     {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

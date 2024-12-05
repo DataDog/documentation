@@ -24,7 +24,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: ドキュメント
   text: Synthetic テストモニターについて
-kind: documentation
 title: TCP テスト
 ---
 
@@ -40,11 +39,11 @@ TCP テストは、ネットワークの外部または内部からのテスト�
 
 ### リクエストを定義する
 
-1. テストを実行する **Host** と **Port** を指定します。デフォルトでは、ポートは `443` に設定されています。
+1. テストを実行する **Host** と **Port** を指定します。
 2. **Track number of network hops (TTL) (ネットワークホップ数 (TTL) を追跡する)**かどうかを決定します。このオプションを使用すると、ネットワークホップ数をアサートし、テスト結果で TCP Traceroute にアクセスできます。
 3. テストがタイムアウトするまでの時間を秒単位で指定します (オプション)。
 4. TCP テストに**名前**を付けます。
-5. TCP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
+5. TCP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
 
 {{< img src="synthetics/api_tests/tcp_test_config.png" alt="TCP 接続を定義する" style="width:90%;" >}}
 
@@ -72,7 +71,7 @@ TCP テストは、ネットワークの外部または内部からのテスト�
 
 TCP テストを実行する**ロケーション**を選択します。TCP テストは、ネットワークの外部または内部のどちらから接続を開始するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -82,47 +81,7 @@ TCP テストは次の頻度で実行できます。
 * [**Within your CI/CD pipelines**][2]。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
-### アラート条件を定義する
-
-アラート条件で、テストが失敗しアラートをトリガーする状況を設定します。
-
-#### アラート設定規則
-
-アラートの条件を `An alert is triggered if your test fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
-
-* 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)。
-* 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
-
-#### 高速再試行
-
-テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
-
-ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
-
-### テストモニターを構成する
-
-以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
-
-1. [モニターの構成方法と同様][4]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
-
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][5]のほか、以下の[条件付き変数][6]を使用できます。
-
-    | 条件付き変数       | 説明                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
-    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
-
-3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-
-4. **Create** をクリックすると、テストの構成とモニターが保存されます。
-
-詳しくは、[Synthetic テストモニターの使用][7]をご覧ください。
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}}
 
@@ -144,7 +103,7 @@ TCP テストの URL、高度なオプション、アサーションで、[**Set
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `TIMEOUT`
@@ -153,7 +112,7 @@ TCP テストの URL、高度なオプション、アサーションで、[**Set
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 
-## アクセス許可
+## 権限
 
 デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic TCP テストを作成、編集、削除できます。Synthetic TCP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
 
@@ -165,7 +124,7 @@ TCP テストの URL、高度なオプション、アサーションで、[**Set
 
 組織内の役割に基づいて、TCP テストへのアクセスを制限することができます。TCP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
 
 ## その他の参考資料
 
@@ -174,7 +133,7 @@ TCP テストの URL、高度なオプション、アサーションで、[**Set
 [1]: /ja/synthetics/private_locations
 [2]: /ja/synthetics/cicd_integrations
 [3]: /ja/synthetics/search/#search
-[4]: /ja/monitors/notify/#notify-your-team
+[4]: /ja/monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /ja/synthetics/guide/synthetic-test-monitors

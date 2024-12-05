@@ -1,6 +1,5 @@
 ---
 title: Advanced Filtering
-kind: documentation
 description: Filter your data to narrow the scope of metrics returned.
 further_reading:
   - link: "/metrics/explorer/"

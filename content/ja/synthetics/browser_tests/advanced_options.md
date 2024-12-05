@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/browser_tests/actions/
   tag: ドキュメント
   text: ブラウザテストステップについて
-kind: ドキュメント
 title: ブラウザテストステップの高度なオプション
 ---
 
@@ -44,15 +43,20 @@ Datadog では、不安定なテストを防ぐために、ロケータのセッ
 1. 記録するか、手動で[ステップ][1]を追加します。
 2. 記録されたステップをクリックし、**Advanced options** をクリックします。
 3. HTML 要素の **User Specified Locator** に XPath 1.0 セレクタまたは CSS クラス/ID (例: `div`、`h1`、または `.hero-body`) を入力します。
-4. 要素を定義した後、**Test** をクリックすると、記録中の要素が右の画面でハイライト表示されます。
+4. オプションとして、ハンドルバー (`{{`) 構文を使用して動的なコンテンツを挿入できます。事前に入力された変数のドロップダウンリストが表示されます。
+
+{{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="ハンドルバー構文と変数がハイライト表示された User Specified Locator フィールド" style="width:70%">}}
+
+5. 要素を定義した後、**Highlight** をクリックすると、記録中の要素が右の画面でハイライト表示されます。
 
 デフォルトで、**If user specified locator fails, fail test** のチェックボックスはオンになっています。つまり、定義したロケータが失敗した場合、テストは失敗と見なされます。
 
-{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="テストハイライト要素" video=true >}}
+{{< img src="synthetics/browser_tests/advanced_options/css_2.mp4" alt="テストハイライト要素" video=true >}}
 
 通常のアルゴリズムでブラウザテストを行う場合は、**If user specified locator fails, fail test** チェックボックスをオフにしてください。
 
 {{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="テスト失敗時のオプション" style="width:70%">}}
+
 
 ## タイムアウト
 
@@ -67,6 +71,19 @@ Datadog では、不安定なテストを防ぐために、ロケータのセッ
 たとえばポップアップイベントなどで、いくつかのステップをオプションで追加することが必要になるかもしれません。その場合は、**Allow this step to fail** を選択してください。ステップが失敗したまま、タイムアウトオプションに指定した時間 (デフォルトでは 60 秒) を経過した場合に、テストが次のステップへと移動して実行されます。
 
 {{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="タイムアウト" style="width:25%">}}
+
+## 成功時に終了
+
+成功時にテストを終了するよう、このオプションを構成します。これにより、不要なステップの実行を防ぎ、テストが失敗としてマークされるのを回避できます。
+
+{{< img src="synthetics/browser_tests/advanced_options/exit_on_success_browser.png" alt="成功時に終了" style="width:50%">}}
+
+## 常にこのステップを実行
+
+前のステップが失敗しても、このステップを実行するよう、このオプションを構成します。これは、後続のステップを進める必要があるクリーンアップタスクに役立ちます。
+
+{{< img src="synthetics/browser_tests/advanced_options/always_run_step.png" alt="前のステップが失敗した場合でも、常にステップを実行します" style="width:50%">}}
+
 
 ## スクリーンショットのキャプチャを防ぐ
 

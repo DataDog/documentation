@@ -1,6 +1,5 @@
 ---
 title: Correlate Logs and Traces
-kind: documentation
 type: multi-code-lang
 description: 'Connect your logs and traces to correlate them in Datadog.'
 aliases:

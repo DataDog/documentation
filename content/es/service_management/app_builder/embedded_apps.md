@@ -4,7 +4,6 @@ further_reading:
 - link: /service_management/workflows/actions_catalog/
   tag: Documentación
   text: Catálogo de acciones
-kind: documentación
 title: Aplicaciones integradas
 ---
 
@@ -46,4 +45,4 @@ Los elementos de la aplicación vinculados a variables de plantilla de dashboard
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}

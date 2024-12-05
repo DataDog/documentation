@@ -15,7 +15,7 @@ further_reading:
   tag: Blog
   text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
     vos équipes avec le journal d'audit Datadog
-kind: guide
+
 title: Contrôler les données de logs sensibles
 ---
 

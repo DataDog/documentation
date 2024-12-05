@@ -1,6 +1,5 @@
 ---
 title: Serverless Libraries and Integrations
-kind: documentation
 aliases:
   - /serverless/serverless_integrations
   - /serverless/datadog_lambda_library/

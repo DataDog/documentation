@@ -4,7 +4,6 @@ further_reading:
 - link: /service_management/workflows/
   tag: Documentación
   text: Automatización del flujo de trabajo
-kind: documentación
 title: Widget Run Workflow
 widget_type: run_workflow
 ---

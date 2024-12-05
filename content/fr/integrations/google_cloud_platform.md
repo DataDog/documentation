@@ -7,6 +7,7 @@ categories:
 - iot
 - log collection
 - network
+custom_kind: integration
 dependencies: []
 description: Recueillez une multitude de métriques GCP et visualisez vos instances
   sur une host map.
@@ -35,7 +36,6 @@ integration_id: google-cloud-platform
 integration_title: Google Cloud Platform
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_platform
 public_title: Intégration Datadog/Google Cloud Platform
@@ -350,7 +350,9 @@ Par défaut, les workers de pipelines Dataflow utilisent le [compte de service C
 
 {{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Paramètres requis dans le modèle Dataflow Datadog" style="width:80%;">}}  
 
-4. Si vous avez créé un secret dans Secret Manager avec la valeur de votre clé API Datadog comme indiqué dans [étape 1](#1-creer-une-rubrique-et-un-abonnement-pubsub-cloud)), entrez le **nom de la ressource** du secret dans le champ **Google Cloud Secret Manager ID**.  
+4. Sous **Optional Parameters**, cochez `Include full Pub/Sub message in the payload`.
+
+5. Si vous avez créé un secret dans Secret Manager avec la valeur de votre clé API Datadog comme indiqué dans [étape 1](#1-creer-une-rubrique-et-un-abonnement-pubsub-cloud)), entrez le **nom de la ressource** du secret dans le champ **Google Cloud Secret Manager ID**.  
 
 {{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Paramètres facultatifs dans le modèle Dataflow Datadog avec les champs de lʼID de Secret Manager dans Google Cloud et la source de la clé dʼAPI transmise mis en évidence" style="width:80%;">}}  
 
@@ -359,11 +361,11 @@ Consultez la section [Paramètres de modèle][55] dans le modèle Dataflow pour 
    - `apiKeySource=KMS` avec `apiKeyKMSEncryptionKey` défini sur votre clé dʼID de [Cloud KMS][71] et `apiKey` défini sur la clé dʼAPI chiffrée
    - **Non conseillé** : `apiKeySource=PLAINTEXT` avec `apiKey` défini sur la clé dʼAPI en texte brut
 
-5. Si vous avez créé un compte service de worker personnalisé, sélectionnez-le dans le menu déroulant **Service account email**.  
+6. Si vous avez créé un compte service de worker personnalisé, sélectionnez-le dans le menu déroulant **Service account email**.  
 
 {{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Paramètres facultatifs dans le modèle Dataflow Datadog avec le menu déroulant de lʼe-mail du compte de service mis en évidence" style="width:80%;">}}
 
-6. Cliquez sur **RUN JOB**.
+7. Cliquez sur **RUN JOB**.
 
 **Remarque** : si vous possédez un VPC partagé, consultez la page [Spécifier un réseau et un sous-réseau][72] de la documentation Dataflow pour obtenir des instructions sur la spécification des paramètres `Network` et `Subnetwork`.
 

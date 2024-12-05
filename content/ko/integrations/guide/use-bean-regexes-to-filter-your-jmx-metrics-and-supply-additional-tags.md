@@ -8,7 +8,6 @@ further_reading:
 - link: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
   tag: 설명서
   text: jConsole에서 JMX 데이터를 확인하고 수집하도록 jmx.yaml을 설정합니다.
-kind: 가이드
 title: Bean 정규식을 사용한 JMX 메트릭 필터링 및 추가 태그 제공
 ---
 

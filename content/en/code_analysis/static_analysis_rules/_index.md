@@ -1,13 +1,11 @@
 ---
 title: Static Analysis Rules
-kind: documentation
 description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
-is_beta: true
+is_beta: false
 type: static-analysis
-
 rulesets:
   csharp-best-practices:
     title: "Best Practices for C#"
@@ -29,6 +27,10 @@ rulesets:
     title: "Follow best practices with using Docker"
     description: |
       Best practices for using Docker.
+  github-actions:
+    title: "Secure your GitHub Actions"
+    description: |
+      Rules to check your GitHub Actions and detect unsafe patterns, such as permissions or version pinning.
   go-best-practices:
     title: "Best Practices for Go"
     description: |
@@ -89,6 +91,26 @@ rulesets:
     title: "React specific linting rules"
     description: |
       This plugin exports a `recommended` configuration that enforces React good practices.
+  kotlin-best-practices:
+    title: "Follow best practices for writing Kotlin code"
+    description: |
+      Rules to enforce Kotlin best practices.
+  kotlin-code-style:
+    title: "Enforce Kotlin code style"
+    description: |
+      Rules to enforce Kotlin code style.
+  php-best-practices:
+    title: "Follow best practices for writing PHP code"
+    description: |
+      Rules to enforce PHP best practices, enhancing code style, preventing bugs, and promoting performant, maintainable, and efficient PHP code.
+  php-code-style:
+    title: "Enforce PHP code style"
+    description: |
+      Rules to enforce PHP code style.
+  php-security:
+    title: "Security rules for PHP"
+    description: |
+      Rules focused on finding security issues in your PHP code.
   python-best-practices:
     title: "Follow best practices for writing Python code"
     description: |
@@ -117,7 +139,7 @@ rulesets:
     title: "Good practices for data science with pandas"
     description: |
       A set of rules to check that pandas code is used appropriately.
-      
+
        - Ensures `import` declarations follow coding guidelines.
        - Avoid deprecated code and methods.
        - Avoid inefficient code whenever possible.
@@ -125,7 +147,7 @@ rulesets:
     title: "Ensure your Python code is safe and secure"
     description: |
       Rules focused on finding security and vulnerability issues in your Python code, including those found in the OWASP10 and SANS25.
-       
+
        - Use of bad encryption and hashing protocols
        - Lack of access control
        - Security misconfiguration
@@ -153,6 +175,10 @@ rulesets:
     title: "Security rules for Ruby"
     description: |
       Rules focused on finding security issues in your Ruby code.
+  terraform-aws:
+    title: "Terraform AWS"
+    description: |
+      Rules to enforce Terraform best practices for AWS.
   tsx-react:
     title: "TypeScript React code quality"
     description: |
@@ -189,7 +215,7 @@ rulesets:
 cascade:
   modal:
     title: Try this rule and analyze your code with Datadog Code Analysis
-    top_box: 
+    top_box:
       title: How to use this rule
       steps:
         - Create a static-analysis.datadog.yml with the content above at the root of your repository
@@ -213,12 +239,11 @@ cascade:
         name: Datadog Code Analysis
         url: https://www.datadoghq.com/code-analysis/
 
-  banner: 
+  banner:
     title: "<span>Seamless integrations.</span> Try Datadog Code Analysis"
     link:
       name: Datadog Code Analysis
       url: https://www.datadoghq.com/code-analysis/
-
 
 further_reading:
   - link: "/code_analysis/"
@@ -226,15 +251,15 @@ further_reading:
     text: "Learn about Datadog Code Analysis"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
 
 ## Overview
 

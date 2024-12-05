@@ -1,6 +1,5 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
-kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
   tag: 'External Site'
@@ -25,10 +24,13 @@ further_reading:
   text: 'Forward logs from the OpenTelemetry Collector with the Datadog Exporter'
 ---
 
+{{< learning-center-callout header="Try 'Introduction to OpenTelemetry with Datadog' in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+  Learn how to configure OpenTelemetry to export metrics, traces, and logs to Datadog, and explore the collected data within the platform.
+{{< /learning-center-callout >}}
 
 ## Overview
 
-[OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
+[OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for {{< tooltip text="instrumenting" tooltip="Instrumentation is the process of adding code to your application to capture and report observability data to Datadog, such as traces, metrics, and logs.">}}, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
 
 This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and [Datadog Exporter][14]. This guide also shows you how to explore this data in the Datadog UI.
 
@@ -239,7 +241,7 @@ The Calendar application is already configured with unified service tagging:
    {{< code-block lang="yaml" filename="docker-compose-otel.yml" collapsible="true" disable_copy="true" >}}
 environment:
   - OTEL_SERVICE_NAME=calendar-otel
-  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
+  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker,service.version=<IMAGE_TAG>
 {{< /code-block >}}
 
 ## Running the application

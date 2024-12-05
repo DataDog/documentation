@@ -2,7 +2,6 @@
 aliases:
 - /es/integrations/faq/how-to-import-datadog-resources-into-terraform
 - /es/agent/guide/how-to-import-datadog-resources-into-terraform
-kind: documentation
 title: Importación de recursos de Datadog a Terraform
 ---
 

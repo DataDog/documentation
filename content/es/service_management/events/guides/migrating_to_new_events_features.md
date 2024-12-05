@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: Blog
   text: Solucionar problemas con mayor rapidez con los eventos de Datadog mejorados
-kind: guía
 title: Migración a las características de eventos nuevas
 ---
 

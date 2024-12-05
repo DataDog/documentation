@@ -1,6 +1,6 @@
 ---
 title: Request Datadog Integrations
-kind: guide
+
 further_reading:
   - link: "developers/integrations/agent_integration"
     tag: "Documentation"

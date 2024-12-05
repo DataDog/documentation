@@ -4,7 +4,6 @@ aliases:
 - /fr/serverless/serverless_integrations/cli/
 dependencies:
 - https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
-kind: documentation
 title: CLI Serverless Datadog
 ---
 Vous pouvez utiliser l'interface de ligne de commande pour instrumenter vos fonctions AWS Lambda avec Datadog. L'interface de ligne de commande permet d'instrumenter vos fonctions Lambda existantes en modifiant leur configuration. De ce fait, elle ne nécessite *pas* un redéploiement. Il s'agit du moyen le plus rapide de profiter des fonctionnalités de surveillance sans serveur de Datadog.

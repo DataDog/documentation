@@ -7,7 +7,6 @@ further_reading:
   tag: Documentación
   text: Escala automáticamente tus cargas de trabajo de Kubernetes con cualquier métrica
     de Datadog
-kind: Documentación
 title: Solucionar problemas del Custom Metrics Server y del HPA
 ---
 

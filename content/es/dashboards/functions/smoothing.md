@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/smoothing/
-kind: documentación
 title: Suavizado
 ---
 

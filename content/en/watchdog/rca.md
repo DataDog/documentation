@@ -1,6 +1,5 @@
 ---
 title: Watchdog RCA
-kind: documentation
 further_reading:
 - link: "/watchdog/faq/root-cause-not-showing/"
   tag: "Documentation"

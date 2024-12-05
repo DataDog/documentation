@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Detección de nombres de host en contenedores
 ---
 
@@ -70,7 +69,6 @@ datadog:
 Recurso `DatadogAgent` de Kubernetes:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -87,7 +85,6 @@ Manifiesto `DaemonSet`:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -138,7 +135,6 @@ datadog:
 Recurso `DatadogAgent` de Kubernetes:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -159,7 +155,6 @@ Manifiesto `DaemonSet`
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:

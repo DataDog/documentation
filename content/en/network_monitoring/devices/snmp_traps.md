@@ -1,6 +1,5 @@
 ---
 title: SNMP Traps
-kind: documentation
 description: "Enable listening for SNMP Traps."
 further_reading:
   - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
@@ -18,35 +17,43 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 
 ## Configuration
 
-To enable listening for SNMP Traps, add the following to `datadog.yaml`:
+1. To enable listening for SNMP traps, add the following to your `datadog.yaml` file:
 
-```yaml
-network_devices:
-  namespace: <NAMESPACE> # optional, defaults to "default".
-  snmp_traps:
-    enabled: true
-    port: 9162 # on which ports to listen for traps
-    community_strings: # which community strings to allow for v2 traps
-      - <STRING_1>
-      - <STRING_2>
-    bind_host: 0.0.0.0
-    users: # SNMP v3
-    - user: "user"
-      authKey: myAuthKey
-      authProtocol: "SHA"
-      privKey: myPrivKey
-      privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-    - user: "user"
-      authKey: myAuthKey
-      authProtocol: "MD5"
-      privKey: myPrivKey
-      privProtocol: "DES"
-    - user: "user2"
-      authKey: myAuthKey2
-      authProtocol: "SHA"
-      privKey: myPrivKey2
-      privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
-```
+   ```yaml
+   network_devices:
+     namespace: <NAMESPACE> # optional, defaults to "default".
+     snmp_traps:
+       enabled: true
+       port: 9162 # on which ports to listen for traps
+       community_strings: # which community strings to allow for v2 traps
+         - <STRING_1>
+         - <STRING_2>
+       bind_host: 0.0.0.0
+       users: # SNMP v3
+       - user: "user"
+         authKey: myAuthKey
+         authProtocol: "SHA"
+         privKey: myPrivKey
+         privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+       - user: "user"
+         authKey: myAuthKey
+         authProtocol: "MD5"
+         privKey: myPrivKey
+         privProtocol: "DES"
+       - user: "user2"
+         authKey: myAuthKey2
+         authProtocol: "SHA"
+         privKey: myPrivKey2
+         privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+   ```
+
+   **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
+
+2. Once configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][5] with the following search query: `source:snmp-traps`.
+
+  {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
+
+**Note**: Even though SNMP traps are _forwarded as logs_, `logs_enabled` does **not** need to be set to `true`.
 
 ## Device namespaces
 
@@ -136,3 +143,4 @@ If there are errors due to missing dependencies and you have access to the missi
 [2]: /network_monitoring/devices
 [3]: /developers/integrations/python
 [4]: https://pypi.org/project/pysmi/
+[5]: https://app.datadoghq.com/logs

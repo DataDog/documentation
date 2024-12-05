@@ -1,6 +1,5 @@
 ---
 title: Use Community and Marketplace Integrations
-kind: guide
 aliases:
   - /agent/guide/community-integrations-installation-with-docker-agent
 further_reading:
@@ -49,7 +48,7 @@ Use the following Dockerfile to build a custom version of the Agent that include
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
-RUN datadog-agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
+RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
 The `datadog-agent integration install` command (run inside Docker) issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. You can ignore this warning.

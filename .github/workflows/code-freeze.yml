@@ -34,6 +34,11 @@ on:
       # only target `master` branch
       - master
 
+permissions:
+  contents: read
+  pull-requests: read
+  checks: write
+
 env:
   ACTIVE_FREEZE: "false"
   # toggle to true like below to enable + change the job unique name and add a required branch protection!
@@ -48,7 +53,9 @@ jobs:
     steps:
     - name: checkout repository
       if: env.ACTIVE_FREEZE == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
     - name: Get Changed files
       if: env.ACTIVE_FREEZE == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
       id: changed-files

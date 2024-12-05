@@ -1,6 +1,5 @@
 ---
 title: Forwarding Logs to Custom Destinations
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/"
   tag: "Blog"
@@ -41,7 +40,7 @@ The following metrics report on logs that have been forwarded successfully, incl
 ## Set up log forwarding to custom destinations
 
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-2. Navigate to [Log Forwarding][4].
+1. Navigate to [Log Forwarding][4].
 3. Select **Custom Destinations**.
 4. Click **New Destination**.
 5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.
@@ -52,24 +51,24 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{< tabs >}}
 {{% tab "HTTP" %}}
 
-6. Enter a name for the destination. 
-7. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
+7. Enter a name for the destination.
+8. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
     - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
-8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
-    - Basic Authentication: Provide the username and password for the account to which you want to send logs.
-    - Request Header: Provide the header name and value. For example, if you use the Authorization header and the username for the account to which you want to send logs is `myaccount` and the password is `mypassword`: 
-        - Enter `Authorization` for the **Header Name**. 
-        - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
+9. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
+  | Authentication Type      | Description                                                                                                              | Example                                                             |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| **Basic Authentication** | Provide the username and password for the account to which you want to send logs.                                        | Username: `myaccount`<br>Password: `mypassword`                       |
+| **Request Header**       | Provide the header name and value. Example for Authorization:<br>- Enter `Authorization` for **Header Name**.<br>- Use a header value formatted as `Basic username:password`, encoded in base64. | Header Name: `Authorization`<br>Header Value: `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=` |
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
 
 {{% tab "Splunk" %}}
 
-6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`.  
+7. Enter a name for the destination.
+8. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`.  
     **Note**: `/services/collector/event` is automatically appended to the endpoint.
-8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.  
+9. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.  
     **Note**: The [indexer acknowledgment][2] needs to be disabled.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
@@ -78,27 +77,46 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 {{% tab "Elasticsearch" %}}
 
-6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the following details:  
-    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.  
-    b. The name of the destination index where you want to send the logs.  
-    c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`. 
-8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
+7. Enter a name for the destination.
+8. In the **Configure Destination** section, enter the following details:
+  | Setting                        | Description                                                                                                  | Example                                  |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------|
+| **Endpoint**                   | Enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.               | `https://<your_account>.us-central1.gcp.cloud.es.io` (Elasticsearch) |
+| **Destination Index Name**     | Specify the name of the destination index where you want to send the logs.                                   | `your_index_name`                        |
+| **Index Rotation**             | Optionally, select how often to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, `Every Month`. The default is `No Rotation`. | `Every Day`                              |
+9. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
 
 {{% /tab %}}
+
+{{% tab "Microsoft Sentinel" %}}
+
+<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
+
+7. Enter a name for the destination.
+8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
+9. In the **Configure Destination** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Logs Ingestion Endpoint** | Enter the endpoint on the Data Collection Endpoint (DCE) where logs are sent. This is labeled "Logs Ingestion" on the DCE Overview page. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`   |
+| **Immutable ID**           | Specify the immutable ID of the Data Collection Rule (DCR) where logging routes are defined, as found on the DCR Overview page as "Immutable Id".  **Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings. | `dcr-000a00a000a00000a000000aa000a0aa`                     |
+| **Stream Declaration Name**| Provide the name of the target Stream Declaration found in the Resource JSON of the DCR under `streamDeclarations`.  | `Custom-MyTable`                                          |
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-9. In the **Select Tags to Forward** section:   
-  a. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.   
+10. In the **Select Tags to Forward** section:
+  a. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
   b. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
-10. Click **Save**.
+11. Click **Save**.
+
 
 On the [Log Forwarding][4] page, hover over the status for a destination to see the percentage of logs that matched the filter criteria and have been forwarded in the past hour.
 
 ## Edit a destination
 1. Navigate to [Log Forwarding][4].
 2. Select **Custom Destinations** to view a list of all existing destinations.
-3. Click the **Edit** button for the destination you want to edit. 
+3. Click the **Edit** button for the destination you want to edit.
 4. Make the changes on the configuration page.
 5. Click **Save**.
 

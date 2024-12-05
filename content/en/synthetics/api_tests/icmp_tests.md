@@ -1,6 +1,5 @@
 ---
 title: ICMP Testing
-kind: documentation
 description: Monitor the availability of your hosts and diagnose network issues.
 aliases:
   - /synthetics/icmp_test
@@ -46,6 +45,10 @@ After choosing to create an `ICMP` test, define your test's request.
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 

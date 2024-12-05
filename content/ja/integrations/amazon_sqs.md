@@ -16,17 +16,19 @@ assets:
     source_type_id: 102
     source_type_name: Amazon SQS
   monitors:
-    sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
-    sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
+    SQS Message Processing Time Monitor: assets/monitors/sqs_message_processing_time.json
+    SQS Message Queue Anomaly Monitor: assets/monitors/sqs_message_queue_anomaly.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- aws
 - metrics
 - cloud
 - log collection
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,7 +37,6 @@ integration_id: amazon-sqs
 integration_title: Amazon SQS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_sqs
 public_title: Amazon SQS
@@ -44,9 +45,12 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::AWS
   - Category::Metrics
   - Category::クラウド
   - Category::ログの収集
+  - Offering::Integration
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブルなフルマネージド型のメッセージキューサービスです。
   media: []
@@ -64,9 +68,9 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 このインテグレーションを有効にすると、Datadog にすべての SQS メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -82,7 +86,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 3. [Datadog - Amazon SQS インテグレーション][5]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### SQS ログの有効化
 
@@ -100,9 +104,9 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 トリガーが追加されたら、[Datadog ログエクスプローラー][8]を使用してログを確認します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_sqs" >}}
 
 
@@ -112,7 +116,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 Amazon SQS インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Amazon SQS インテグレーションには、サービスのチェック機能は含まれません。
 

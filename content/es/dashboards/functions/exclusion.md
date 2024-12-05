@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/exclusion/
-kind: documentación
 title: Exclusión
 ---
 

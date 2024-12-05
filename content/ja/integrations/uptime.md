@@ -3,6 +3,7 @@ app_id: uptime
 app_uuid: 937f96ea-644f-4903-9f74-cdc5e8b46dd8
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: uptime
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10001
     source_type_name: Uptime
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,8 +21,12 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- notification
+- notifications
+- metrics
+- event management
 - os & system
+- testing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
 display_on_public_website: true
@@ -30,7 +36,6 @@ integration_id: uptime
 integration_title: Uptime.com
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: uptime
 public_title: Uptime.com
@@ -42,11 +47,15 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::通知
+  - Category::Notifications
+  - Category::Metrics
+  - Category::Event Management
   - Category::OS とシステム
+  - Category::Testing
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: アップタイムとパフォーマンスの監視を容易に実行
   media: []
@@ -55,6 +64,7 @@ tile:
   title: Uptime.com
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -68,7 +78,7 @@ tile:
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 Uptime アカウント内で Datadog インテグレーションを有効にするには、[Notifications > Integrations][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
 
@@ -92,7 +102,7 @@ Datadog プロファイルの構成が完了したら、_Alerting > Contacts_ �
 
 Uptime インテグレーションは、アラートが発生または解決したときに、Datadog のイベントストリームにイベントを送信します。
 
-### サービスのチェック
+### サービスチェック
 
 Uptime チェックには、サービスのチェック機能は含まれません。
 

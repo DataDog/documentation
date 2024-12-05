@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/notebooks/
   tag: 설명서
   text: 노트북
-kind: 가이드
 title: 사후 검토에 새션 재생을 핵심 도구로 사용하기
 ---
 

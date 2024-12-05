@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Apprendre à traiter vos logs
-kind: documentation
 title: Envoyer des logs de services AWS avec la fonction Lambda Datadog
 ---
 

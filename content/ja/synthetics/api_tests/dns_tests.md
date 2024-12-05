@@ -27,7 +27,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: ドキュメント
   text: Synthetic テストモニターについて
-kind: documentation
 title: DNS テスト
 ---
 
@@ -37,7 +36,7 @@ DNS テストを使用すると、任意のネームサーバーを使用して�
 
 DNS テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。DNS テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
 
-## コンフィギュレーション
+## 構成
 
 `DNS` テストの作成を選択した後、テストのリクエストを定義します。
 
@@ -63,6 +62,8 @@ DNS テストは、ネットワークの外部または内部からのテスト�
 | response time       |                                                                 | `is less than`                                     | 整数 (ms)             |
 | 以下の利用可能なすべてのレコード        | タイプ A、タイプ AAAA、タイプ CNAME、タイプ MX、タイプ NS、タイプ TXT | `is`、`contains`、<br> `matches`、`does not match` | _文字列_ <br> _[正規表現][4]_ |
 | at least one record | タイプ A、タイプ AAAA、タイプ CNAME、タイプ MX、タイプ NS、タイプ TXT | `is`、`contains`、<br> `matches`、`does not match` | _文字列_ <br> _[正規表現][4]_ |
+
+**注**: SOA レコードは Synthetic テストではテストできません。
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 

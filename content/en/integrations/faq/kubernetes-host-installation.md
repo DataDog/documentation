@@ -1,6 +1,6 @@
 ---
 title: Host Agent to monitor Kubernetes.
-kind: faq
+
 aliases:
     - /agent/kubernetes/host_setup
 ---

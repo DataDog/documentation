@@ -1,6 +1,6 @@
 ---
 title: Using USM Metrics in Monitors, SLOs, and Dashboards
-kind: guide
+
 description: Learn how to create monitors, SLOs, and dashboards using your USM metrics.
 further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"

@@ -1,6 +1,5 @@
 ---
 title: Prevent alerts from Monitors that were in downtime
-kind: guide
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

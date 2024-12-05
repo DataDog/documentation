@@ -1,6 +1,5 @@
 ---
 title: (Legacy) Propagating Ruby Trace Context
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'
@@ -10,7 +9,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-<div class="alert alert-warning">This documentation is for <code>ddtrace</code> gem v1.x. If you are using the <code>datadog</code> gem v2.0 or later, see the latest <a href="/tracing/trace_collection/trace_context_propagation/ruby">Propagating Ruby Trace Context</a> documentation.</div>
+<div class="alert alert-warning">This documentation is for <code>ddtrace</code> gem v1.x. If you are using the <code>datadog</code> gem v2.0 or later, see the latest <a href="/tracing/trace_collection/trace_context_propagation/">Propagating Ruby Trace Context</a> documentation.</div>
 
 ### Headers extraction and injection
 

@@ -32,6 +32,7 @@ author:
 categories:
 - log collection
 - metrics
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_on_public_website: true
@@ -39,9 +40,8 @@ draft: false
 git_integration_title: fluentd
 integration_id: fluentd
 integration_title: FluentD
-integration_version: 3.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: fluentd
 public_title: FluentD
@@ -58,10 +58,14 @@ tile:
   - Category::ログの収集
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-fluentd-datadog
   support: README.md#Support
   title: FluentD
 ---
@@ -78,9 +82,9 @@ Fluentd からメトリクスを取得して、以下のことができます。
 - Fluentd のパフォーマンスを視覚化できます。
 - Fluentd のパフォーマンスを他のアプリケーションと関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Fluentd チェックは [Datadog Agent][2] パッケージに含まれています。Fluentd サーバーに追加でインストールする必要はありません。
 
@@ -96,12 +100,12 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 </source>
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -121,7 +125,7 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 [Datadog の FluentD プラグイン][4]を使用して FluentD から Datadog アカウントへログを直接転送することができます。
 
@@ -245,21 +249,21 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `fluentd` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "fluentd" >}}
 
 
-### ヘルプ
+### イベント
 
 FluentD チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "fluentd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

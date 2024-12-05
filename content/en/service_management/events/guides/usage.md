@@ -1,6 +1,5 @@
 ---
 title: Using Events
-kind: Documentation
 aliases:
 - /service_management/events/usage
 further_reading:

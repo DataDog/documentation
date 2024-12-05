@@ -2,7 +2,6 @@
 aliases:
 - /ja/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
 - /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
-kind: ガイド
 title: Terraform でダッシュボードの編集を制限する方法
 ---
 

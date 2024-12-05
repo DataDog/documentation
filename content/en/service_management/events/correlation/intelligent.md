@@ -1,6 +1,5 @@
 ---
 title: Intelligent Correlation
-kind: Documentation
 further_reading:
 - link: "service_management/events/correlation/triage_and_notify"
   tag: "Documentation"
@@ -8,7 +7,7 @@ further_reading:
 ---
 
 {{< callout url="http://d-sh.io/eventmanagement" btn_hidden="false" header="Join the Beta!">}}
-Join the Intelligent Correlation beta to automatically correlate events without the need for any configuration. 
+Join the Intelligent Correlation Preview to automatically correlate events without the need for any configuration. 
 {{< /callout >}}
 ## Overview
 

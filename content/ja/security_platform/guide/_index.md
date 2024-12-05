@@ -2,7 +2,7 @@
 aliases:
 - /ja/security_monitoring/guide/
 disable_toc: true
-kind: guide
+
 private: true
 title: セキュリティプラットフォームガイド
 cascade:

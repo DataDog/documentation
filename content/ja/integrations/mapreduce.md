@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 133
     source_type_name: MapReduce
-  logs:
-    source: mapreduce
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
 display_on_public_website: true
@@ -34,9 +33,8 @@ draft: false
 git_integration_title: mapreduce
 integration_id: mapreduce
 integration_title: Map Reduce
-integration_version: 4.2.0
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: mapreduce
 public_title: Map Reduce
@@ -52,10 +50,20 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: マップのステータスと期間を監視し、タスクを削減。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/hadoop-architecture-overview
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
   support: README.md#Support
   title: Map Reduce
 ---
@@ -72,18 +80,18 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 - mapreduce の状態を視覚化および監視できます。
 - mapreduce のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -91,7 +99,7 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -132,7 +140,7 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                 |
 | `<INSTANCE_CONFIG>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -152,21 +160,21 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "mapreduce", "service": "<SERVICE_NAM
 
 [Agent の status サブコマンド][3]を実行し、Checks セクションで `mapreduce` を検索します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mapreduce" >}}
 
 
-### ヘルプ
+### イベント
 
 Mapreduce チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "mapreduce" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

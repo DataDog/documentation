@@ -1,5 +1,4 @@
 ---
-kind: guide
 title: Sélectionner des couleurs appropriées pour vos graphiques
 ---
 

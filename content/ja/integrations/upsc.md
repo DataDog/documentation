@@ -3,6 +3,7 @@ app_id: upsc
 app_uuid: 4681a41f-efdc-4d22-b573-06e101b9cf24
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: upsc.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10211
     source_type_name: UPSC
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
 display_on_public_website: true
@@ -29,7 +32,6 @@ integration_id: upsc
 integration_title: UPSC
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: upsc
 public_title: UPSC
@@ -41,6 +43,7 @@ tile:
   classifier_tags:
   - Category::OS とシステム
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: UPS バッテリーの UPSC 統計コレクター
   media: []
@@ -49,6 +52,7 @@ tile:
   title: UPSC
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,7 +78,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い UPSC チェッ
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. UPSC の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `upsc.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル upsc.d/conf.yaml][5] を参照してください。
 
@@ -94,7 +98,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い UPSC チェッ
 
 UPSC チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 UPSC チェックには、サービスのチェック機能は含まれません。
 
@@ -102,7 +106,7 @@ UPSC チェックには、サービスのチェック機能は含まれません
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

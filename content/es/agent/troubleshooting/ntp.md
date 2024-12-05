@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/faq/network-time-protocol-ntp-offset-issues
-kind: documentación
 title: Problemas con el protocolo de tiempo de la red (NTP)
 ---
 

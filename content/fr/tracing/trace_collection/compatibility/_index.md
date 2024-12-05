@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
   text: Ajouter la bibliothèque de tracing à votre application
-kind: documentation
 title: Exigences de compatibilité
 type: multi-code-lang
 ---

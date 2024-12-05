@@ -1,7 +1,12 @@
 ---
 title: Troubleshooting
-kind: Documentation
 ---
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
 ## Overview
 

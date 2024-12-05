@@ -10,7 +10,6 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: Agent 트러블슈팅
   text: Agent Flare 보내기
-kind: 설명서
 title: 권한 허용 문제
 ---
 

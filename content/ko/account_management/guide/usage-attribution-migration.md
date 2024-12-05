@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: 설명서
   text: 플랜 및 사용량 설정
-kind: 가이드
 title: 시간별 및 월별 사용량 속성 API로 마이그레이션하기
 ---
 

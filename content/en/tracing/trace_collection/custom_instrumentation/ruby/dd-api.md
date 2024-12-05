@@ -1,6 +1,5 @@
 ---
 title: Ruby Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/ruby
     - /tracing/manual_instrumentation/ruby
@@ -308,6 +307,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-[6]: /tracing/trace_collection/trace_context_propagation/ruby/
+[6]: /tracing/trace_collection/trace_context_propagation/
 [7]: /tracing/security
 [8]: https://github.com/DataDog/dd-trace-rb/releases

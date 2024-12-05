@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-tanzu-application-service/
   tag: Blog
   text: Surveiller les applications exécutées sur VMware Tanzu Application Service
-kind: guide
+
 title: Guide de configuration de Cloud Foundry
 ---
 

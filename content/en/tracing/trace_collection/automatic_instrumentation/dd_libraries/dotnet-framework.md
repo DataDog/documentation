@@ -1,6 +1,5 @@
 ---
 title: Tracing .NET Framework Applications
-kind: documentation
 aliases:
     - /tracing/dotnet
     - /tracing/languages/dotnet
@@ -88,7 +87,7 @@ Install the Datadog .NET Tracer machine-wide so that all services on the machine
 
 To install the .NET Tracer machine-wide:
 
-1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][1]. Use the x64 MSI installer if you are running 64-bit Windows; this can instrument both 64-bit and 32-bit applications. Only choose the x86 installer if you are running 32-bit Windows. Starting with v3.0.0, only the x64 installer is provided, as we do not support 32-bit operating systems.
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
@@ -183,21 +182,21 @@ If needed, configure the tracing library to send application performance telemet
 
 ## Custom instrumentation
 
-Your setup for custom instrumentation depends on your automatic instrumentation and includes additional steps depending on the method:
+Custom instrumentation depends on your automatic instrumentation and includes additional steps depending on the method:
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you must keep the package versions (for example: MSI and NuGet) in sync.
+<strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][1] to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
+1. Instrument your application using automatic instrumentation.
+2. Add the `Datadog.Trace` [NuGet package][1] to your application.
+3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}

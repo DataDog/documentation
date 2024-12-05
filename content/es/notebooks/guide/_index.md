@@ -1,7 +1,6 @@
 ---
 description: Índice de las guías de notebooks
 disable_toc: true
-kind: guía
 private: true
 title: Guías de notebooks
 ---

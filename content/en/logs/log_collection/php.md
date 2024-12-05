@@ -1,6 +1,5 @@
 ---
 title: PHP Log Collection
-kind: documentation
 aliases:
   - /logs/languages/php
 further_reading:

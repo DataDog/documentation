@@ -25,7 +25,7 @@
 "integration_id": "rapdev-syntheticemail"
 "integration_title": "Synthetic Email"
 "is_public": true
-"kind": "integration"
+"custom_kind": "integration"
 "maintainer": "integrations@rapdev.io"
 "manifest_version": "1.0.0"
 "metric_prefix": "rapdev.syntheticemail."

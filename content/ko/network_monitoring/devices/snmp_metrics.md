@@ -12,7 +12,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: 블로그
   text: Datadog와 SNMP 모니터링하기
-kind: 설명서
 title: 네트워크 장치에서 SNMP 메트릭 수집
 ---
 

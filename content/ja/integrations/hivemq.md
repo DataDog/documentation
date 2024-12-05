@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10101
     source_type_name: HiveMQ
-  logs:
-    source: hivemq
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,6 +27,7 @@ categories:
 - iot
 - ログの収集
 - メッセージキュー
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_on_public_website: true
@@ -36,9 +35,8 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.8.0
+integration_version: 2.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: hivemq
 public_title: HiveMQ
@@ -56,10 +54,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: HiveMQ クラスターを監視します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/
   support: README.md#Support
   title: HiveMQ
 ---
@@ -71,19 +73,19 @@ tile:
 
 [HiveMQ][1] は、接続された IoT デバイスと行き来するデータの高速で効率的かつ信頼性の高い移動のために設計された MQTT ベースのメッセージングプラットフォームです。MQTT 3.1、3.1.1、5.0 に準拠したブローカーです。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 HiveMQ チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -100,7 +102,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][5]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -138,7 +140,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
@@ -170,17 +172,17 @@ JMXFetch
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hivemq" >}}
 
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "hivemq" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

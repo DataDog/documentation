@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Mise à niveau vers PostgreSQL 15 et les versions ultérieures
 ---
 

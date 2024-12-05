@@ -10,19 +10,19 @@ aliases:
 - /ja/agent/faq/auto_conf
 - /ja/agent/guide/auto_conf
 further_reading:
-- link: /agent/kubernetes/integrations/
+- link: /containers/kubernetes/integrations/
   tag: Documentation
-  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-- link: /agent/guide/autodiscovery-management/
+  text: Configure integrations with Autodiscovery on Kubernetes
+- link: /containers/docker/integrations/
   tag: Documentation
-  text: Agent オートディスカバリーに含めるコンテナの管理
-kind: ガイド
+  text: Configure integrations with Autodiscovery on Docker
+- link: /containers/guide/container-discovery-management/
+  tag: ドキュメント
+  text: コンテナディスカバリー管理
 title: Autodiscovery Auto-Configuration
 ---
 
-コンテナとして実行されている Agent は、デフォルトで、`auto_conf.yaml` というデフォルトのオートディスカバリー構成ファイルに基づいて他のコンテナの自動検出を試みます。この構成ファイルは、以下に示すインテグレーションの該当する `conf.d/<INTEGRATION>.d/` フォルダーにあります。
-
-## 自動構成ファイル
+When the Agent runs as a container, [Autodiscovery][49] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
 | インテグレーション                    | オートディスカバリー構成ファイル |
 | ------                         | --------                |
@@ -52,21 +52,45 @@ title: Autodiscovery Auto-Configuration
 
 `auto_conf.yaml` 構成ファイルには、特定のインテグレーションのセットアップに必要なすべてのパラメーターと、コンテナ環境を考慮して用意されているそれらに相当する[オートディスカバリーテンプレートの変数][43]が含まれます。
 
-## 構成のカスタマイズ
-自動構成ロジックは、上記のどのインテグレーションに対しても、デフォルトの構成しかサポートしません。Datadog インテグレーションの構成をカスタマイズしたい場合は、インテグレーションテンプレートのドキュメントを参照して、Agent オートディスカバリーの構成方法を学んでください。Kubernetes アノテーションや Docker ラベルを通じて発見された、任意のコンテナに対する構成は、`auto_conf.yaml` ファイルより優先されます。
+## Override auto-configuration
+Each `auto_conf.yaml` file provides a default configuration. To override this, you can add a custom configuration in [Kubernetes annotations][50] or [Docker Labels][51].
 
-* [Key-Value ストアの使用][44]
-* [Kubernetes アノテーションの使用][45]
-* [Docker ラベルの使用][46]
+Kubernetes annotations and Docker Labels take precedence over `auto_conf.yaml` files, but `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
 
-## 自動構成を無効にする
+## Disable auto-configuration
 
-Agent が `auto_conf.yaml` 構成を使用しないようにするには、無効にしたいインテグレーションに対して `DD_IGNORE_AUTOCONF` 環境変数を追加することができます。次の例は、Agent が [`redisdb.d/auto_conf.yaml`][38] と [`istio.d/auto_conf.yaml`][22] ファイルを無視して、これらのインテグレーションを自動的にセットアップしないようにします。
+The following examples disable auto-configuration for the Redis and Istio integrations.
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml`, use `override.nodeAgent.env` to set the `DD_IGNORE_AUTOCONF` environment variable.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  override:
+    nodeAgent:
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
+```
+
+Then, apply the new configuration.
+
+{{% /tab %}}
 {{% tab "Helm" %}}
 
-Helm との自動構成インテグレーションを無効にするには、`values.yaml` に `datadog.ignoreAutoconfig` を追加します。
+Add `datadog.ignoreAutoconfig` to your `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -74,6 +98,20 @@ datadog:
   ignoreAutoConfig:
     - redisdb
     - istio
+```
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+To disable auto configuration integration(s) with the Operator, add the `DD_IGNORE_AUTOCONF` variable to your `datadog-agent.yaml` file:
+
+```yaml
+  override:
+    nodeAgent:
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -137,3 +175,6 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [46]: /ja/agent/docker/integrations/#configuration
 [47]: /ja/integrations/rabbitmq/
 [48]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
+[49]: /ja/getting_started/containers/autodiscovery
+[50]: /ja/containers/kubernetes/integrations/?tab=annotations#configuration
+[51]: /ja/containers/docker/integrations/

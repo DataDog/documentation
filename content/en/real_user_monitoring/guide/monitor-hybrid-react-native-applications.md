@@ -1,6 +1,6 @@
 ---
 title: Monitor Hybrid React Native Applications
-kind: guide
+
 description: Guide for monitoring hybrid React Native applications.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'

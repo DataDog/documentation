@@ -1,6 +1,6 @@
 ---
 title: Creating a JMX integration
-kind: guide
+
 ---
 
 This guide describes the creation of a JMX integration using the [Developer Toolkit][1].

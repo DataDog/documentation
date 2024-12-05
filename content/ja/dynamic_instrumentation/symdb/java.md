@@ -2,35 +2,31 @@
 code_lang: java
 code_lang_weight: 10
 is_beta: true
-kind: ドキュメント
-private: true
-title: Java で Symbol Database を有効にする
+private: false
+title: Enable Autocomplete and Search for Java
 type: multi-code-lang
 ---
-
-{{< beta-callout-private url="https://forms.gle/UG9EELAy8Li6z2jW8" >}}
-ダイナミックインスツルメンテーションプローブ作成時のユーザーエクスペリエンスの改善にご興味がおありですか？こちらから、Symbol Database 非公開データ版に参加しましょう。
-{{< /beta-callout-private >}}
-
-[Symbol Database][6] は、ダイナミックインスツルメンテーションの非公開ベータ版の機能です。
+{{< beta-callout url="#" btn_hidden="true" >}}
+オートコンプリートと検索は公開ベータ版です。
+{{< /beta-callout >}}
 
 ## 要件
 
 - サービスで[ダイナミックインスツルメンテーション][1]が有効になっていること。
-- トレーシングライブラリ [`dd-trace-java`][6] 1.25.0 以上がインストールされていること。
+- Tracing library [`dd-trace-java`][6] 1.34.0 or higher is installed.
 
-## インフラストラクチャーリスト
+## インストール
 
-ダイナミックインスツルメンテーションを有効にしてサービスを実行し、さらに Symbol Database のアップロードを有効にするには:
+Run your service with Dynamic Instrumentation enabled, and additionally enable autocomplete and search:
 
-1. `-Ddd.symbol.database.upload.enabled` フラグ、または `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` 環境変数を `true` に設定します。
-2. `-Ddd.symbol.database.includes` フラグ、または `DD_SYMBOL_DATABASE_INCLUDES` 環境変数を利用しているパッケージのプレフィックス (例: `com.datadoghq`) に設定します。設定にはカンマ区切りリストを使用し、複数のプレフィックスを追加できます。
-3. [統合サービスタグ][5]の `dd.service` と `dd.version` を指定します。
+1. Set the `-Ddd.symbol.database.upload.enabled=true` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true` environment variable.
+2. [統合サービスタグ][5]の `dd.service` と `dd.version` を指定します。
 
 {{< tabs >}}
 {{% tab "コマンド引数" %}}
 
 サービス起動コマンドの例:
+
 ```shell
 java \
     -javaagent:dd-java-agent.jar \
@@ -39,9 +35,9 @@ java \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.dynamic.instrumentation.enabled=true \
     -Ddd.symbol.database.upload.enabled=true \
-    -Ddd.symbol.database.includes=<YOUR_PACKAGE_PREFIX> \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
+
 {{% /tab %}}
 
 {{% tab "環境変数" %}}
@@ -52,11 +48,11 @@ export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true
-export DD_SYMBOL_DATABASE_INCLUDES=<YOUR_PACKAGE_PREFIX>
 java \
     -javaagent:dd-java-agent.jar \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -70,11 +66,37 @@ java \
    $ java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-2. Symbol Database を有効にした状態でサービスを起動すると、[APM > ダイナミックインスツルメンテーションページ][4]で Symbol Database の IDE 同様の機能を利用することができます。
+3. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
+
+## 追加構成
+
+### Third party detection
+
+If autocomplete suggestions do not appear for your package or module, it may be incorrectly recognized as third-party code. The autocomplete and search features use a heuristic to filter out third-party code, which can sometimes lead to accidental misclassification.
+
+To ensure that your code is properly recognized and to enable accurate autocomplete and search functionality, you can configure the third-party detection settings using the following options:
+
+```
+export DD_THIRD_PARTY_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
+export DD_THIRD_PARTY_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES>
+```
+
+または
+
+```
+  -Ddd.third.party.excludes=<LIST_OF_USER_CODE_PACKAGE_PREFIXES> \
+  -Ddd.third.party.includes=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES> \
+```
+
+Where a list means a comma separated list of package prefixes, for example
+
+```
+export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
+```
 
 [1]: /ja/dynamic_instrumentation
-[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/dynamic_instrumentation/symdb
+[6]: https://github.com/DataDog/dd-trace-java
+

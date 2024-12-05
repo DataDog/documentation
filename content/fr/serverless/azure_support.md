@@ -1,6 +1,6 @@
 ---
 description: Prise en charge par Datadog d'Azure App Services
-kind: faq
+
 title: Prise en charge d'Azure App Services
 ---
 

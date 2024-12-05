@@ -23,8 +23,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 20
     source_type_name: CouchDB
-  logs:
-    source: couchdb
   saved_views:
     couchdb_processes: assets/saved_views/couchdb_processes.json
 author:
@@ -36,6 +34,7 @@ categories:
 - caching
 - data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 display_on_public_website: true
@@ -43,9 +42,8 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 6.2.0
+integration_version: 8.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: couch
 public_title: CouchDB
@@ -63,10 +61,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
   support: README.md#Support
   title: CouchDB
 ---
@@ -85,18 +87,18 @@ Datadog で CouchDB データをキャプチャすると、以下のことが可
 
 パフォーマンス上の理由から、現在使用している CouchDB バージョンはキャッシュされます。そのため、同じ Agent インスタンスを使用して、異なるバージョンの CouchDB インスタンスを監視することはできません。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 CouchDB チェックは [Datadog Agent][2] パッケージに含まれています。CouchDB サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -118,7 +120,7 @@ CouchDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -160,7 +162,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                        |
 | `<INSTANCE_CONFIG>`  | `{"server": "http://%%host%%:5984"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -179,21 +181,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `couch` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "couch" >}}
 
 
-### ヘルプ
+### イベント
 
 Couch チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "couch" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

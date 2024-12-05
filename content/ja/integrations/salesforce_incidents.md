@@ -3,6 +3,7 @@ categories:
 - クラウド
 - インシデント
 - notifications
+custom_kind: integration
 dependencies: []
 description: このインテグレーションにより、Datadog でトリガーされたアラートから Salesforce Incidents を作成し、既存のインシデントに新しい情報を随時更新することができます。
 doc_link: https://docs.datadoghq.com/integrations/salesforce_incidents/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Salesforce Incidents
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: salesforce_incidents
 public_title: Datadog-Salesforce Incidents インテグレーション
@@ -26,7 +26,7 @@ version: '1.0'
 
 Salesforce Incidents インテグレーションを利用すると、モニターアラートイベントから Salesforce Service Cloud にインシデントを作成することができます。Salesforce Datadog Widget を使用すると、インシデントに関連するモニターイベントのタイムラインを Salesforce で直接表示できます。
 
-## 計画と使用
+## セットアップ
 
 ### Datadog と Salesforce Service Cloud の連携
 
@@ -60,7 +60,7 @@ Salesforce Service Cloud に Datadog Widget をインストールするには
 4. 左のナビゲーションのカスタムコンポーネントから Datadog ウィジェットをクリックし、ページにドラッグします。
 5. **Save** をクリックします。
 
-## API
+## 使用方法
 
 #### Datadog アラートから Salesforce Service Cloud にインシデントを作成する
 
@@ -69,21 +69,21 @@ Datadog モニターの **Notify your team** または **Say what's happening** 
 インシデントは、モニターがトリガーされると作成されます。モニターが解決されるまで、新しいインシデントは作成されません。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Salesforce Incidents インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### イベント
 
 Salesforce Incidents インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Salesforce Incidents インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

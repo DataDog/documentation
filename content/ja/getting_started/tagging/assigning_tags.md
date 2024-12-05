@@ -10,7 +10,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: Datadog でのタグの使用方法
-kind: ドキュメント
 title: タグの付け方
 ---
 
@@ -159,7 +158,7 @@ hostname: mymachine.mydomain
 
 #### 環境変数
 
-コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS を使用してホストタグを設定します。
+コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS` を使用してホストタグを設定します。複数のタグを指定する場合は、カンマとスペースで区切ってください。
 
 Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
@@ -216,7 +215,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1 key2:value2 key3:value3"
+      - DD_TAGS="key1:value1, key2:value2, key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -379,7 +378,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-[DogStatsD][9] に送信したタグをメトリクス、イベント、サービスチェックに追加します。たとえば、アルゴリズムのバージョンでタイマー メトリクスをタグ付けして、2 つのアルゴリズムのパフォーマンスを比較します。
+[DogStatsD][10] に送信するメトリクス、イベント、サービスチェックにタグを追加します。例えば、アルゴリズムのバージョンを示すタグをタイマーメトリクスに付けて、2 つのアルゴリズムのパフォーマンスを比較します。
 
 ```python
 
@@ -392,9 +391,9 @@ def algorithm_two():
     # 何らかの処理 (速度を比較) ...
 ```
 
-**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][10]です。
+**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][11]です。
 
-`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホスト タグ キーの詳細については、[DogStatsD セクション][11]を参照してください。
+`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホストタグキーの詳細については、[メトリクスの送信: DogStatsD][12] のドキュメントを参照してください。
 
 ## その他の参考資料
 
@@ -411,3 +410,4 @@ def algorithm_two():
 [9]: /ja/tracing/setup/
 [10]: /ja/developers/dogstatsd/
 [11]: /ja/developers/community/libraries/
+[12]: /ja/metrics/dogstatsd_metrics_submission/#host-tag

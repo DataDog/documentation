@@ -1,6 +1,5 @@
 ---
 title: Remote Configuration
-kind: documentation
 aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works
@@ -46,7 +45,17 @@ The following diagram illustrates how Remote Configuration works:
 2. The product feature configurations are securely stored within Datadog.
 3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
 
-**Note**: Configuration changes applied through Remote Configuration are not shown in your Agent configuration file.
+## Configuration order precedence
+Configurations set by higher-priority sources take precedence in the active configuration displayed in Fleet Automation. 
+
+Sources from highest to lowest priority:
+
+1. Remote Configuration
+   **Note**: Configuration changes applied through Remote Configuration are not shown in your local configuration file (`datadog.yaml`).
+2. Environment variables set by tools like Helm
+3. Configuration files (`datadog.yaml`) that are managed locally or by configuration management tools like Ansible, Chef, or Puppet
+
+Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
 
 ## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
@@ -78,6 +87,10 @@ The following products and features are supported with Remote Configuration:
 ### Observability Pipelines
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
+
+### Sensitive Data Scanner (SDS) through the Datadog Agent
+
+- **Redact sensitive information in your logs within your premises (Preview)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
 
 ## Security considerations
 
@@ -269,8 +282,8 @@ datadog:
 
 ## Supported environments
 
-Remote Configuration works in environments where the Datadog Agent is deployed. For a Serverless Container service like AWS Fargate, the underlying hosts do not appear in the Remote Configuration onboarding workflow. Remote Configuration does not support Serverless Container Managed Apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and Functions deployed with Container Packaging (AWS Lambda, Azure Functions, Google Cloud Functions)
-.
+Remote Configuration works in environments where the Datadog Agent is deployed. Remote Configuration supports serverless container cloud services such as AWS Fargate. Remote Configuration does not support serverless container managed apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and functions deployed with container packaging (AWS Lambda, Azure Functions, Google Cloud Functions).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -279,7 +292,7 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
-[6]: /security/application_security/enabling/compatibility/
+[6]: /security/application_security/
 [7]: /account_management/rbac/permissions#access-management
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security
@@ -301,3 +314,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
+[28]: https://docs.datadoghq.com/sensitive_data_scanner/?tab=usingtheagent

@@ -1,6 +1,5 @@
 ---
 is_beta: true
-kind: 설명서
 private: true
 title: 조직 간 가시성
 ---

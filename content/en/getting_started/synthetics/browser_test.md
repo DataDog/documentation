@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Browser Tests
-kind: documentation
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
@@ -92,7 +91,7 @@ For more information, see [Using Synthetic Test Monitors][8].
 
 ## Create recording
 
-Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. 
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. (This Chrome extension can also be installed on a Microsoft Edge browser)
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 

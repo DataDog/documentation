@@ -24,7 +24,6 @@ further_reading:
 - link: /integrations/guide/prometheus-metrics/
   tag: Documentación
   text: Asignación de métricas de Prometheus a métricas de Datadog
-kind: documentación
 title: Recopilación de métricas de Kubernetes Prometheus y OpenMetrics
 ---
 

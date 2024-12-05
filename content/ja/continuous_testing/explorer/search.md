@@ -5,14 +5,15 @@ description: 実行された CI ジョブのバッチを調査し、失敗した
 further_reading:
 - link: /continuous_testing/explorer
   tag: ドキュメント
-  text: Synthetic Monitoring &amp; Continuous Testing Explorer について
-kind: documentation
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 title: テストバッチを検索する
 ---
 
 ## 概要
 
-右上のドロップダウンメニューから時間帯を選択した後、[Synthetic Monitoring & Continuous Testing Explorer][1] の **CI Batches** イベントタイプをクリックすると、CI ジョブのバッチを検索することができます。
+After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the **CI Batches** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 ファセットを使用すると、以下のアクションを実行できます。
 

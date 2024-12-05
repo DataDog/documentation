@@ -12,7 +12,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: GitHub
   text: Envoyer des logs de flux Amazon VPS à Amazon Kinesis Data Firehose et Datadog
-kind: documentation
 title: Envoyer des logs de service AWS avec la destination Datadog pour Amazon Data Firehose
 ---
 

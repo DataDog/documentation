@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits* について
-kind: documentation
 title: ログアーカイブ
 ---
 
@@ -38,27 +37,26 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 
 環境から直接ストレージに最適化されたアーカイブにログをルーティングしたい場合は、[Observability Pipelines でログをアーカイブする][4]方法を参照してください。
 
-## アーカイブの構成
+## ログアーカイブを構成します
 
-### インテグレーションのセットアップ
+### インテグレーションを設定します
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+<div class="alert alert-warning"><em>ロール委任を使用した S3 アーカイブの設定は現在限定的に利用可能です。Datadog for Government アカウントでこの機能をリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください</em>。</div>
 {{< /site-region >}}
 
 まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
-
-* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
-* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
+   * 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
+   * 特に AWS China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
 
 [1]: /ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-まだ設定していない場合は、新しいストレージアカウントを保持するサブスクリプション内で [Azure インテグレーション][1]をセットアップします。これには、[Datadog がインテグレーションに使用できるアプリ登録の作成][2]も含まれます。
+新しいストレージアカウントのあるサブスクリプション内で [Azure インテグレーション][1]をセットアップしていない場合、セットアップします。これには、[Datadog が統合に使用できるアプリ登録の作成][2]も含まれます。
 
 **注:** Azure ChinaCloud、GermanyCloud、GovCloud へのアーカイブはサポートされていません。
 
@@ -84,11 +82,11 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-[AWS コンソール][1]に移動し、アーカイブを送信するための [S3 バケットを作成][2]します。
+[AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。
 
 **注:**
 
-- バケットを一般公開で読み取り可能にしないでください。
+- バケットを公開読み取り可能にしないでください。
 - [US1、US3、US5 サイト][3]については、地域間データ転送料とクラウドストレージコストへの影響について、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
@@ -99,7 +97,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 {{% tab "Azure Storage" %}}
 
-* [Azure ポータル][1]に移動し、アーカイブを送信するための[ストレージアカウントを作成][2]します。ストレージアカウントの名前を指定し、標準パフォーマンスまたは **Block blob** プレミアムアカウントタイプのいずれかを選択し、**hot** または **cool** アクセス層を選択します。
+* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。標準パフォーマンスまたは **Block blobs** プレミアムアカウントタイプを選択し、**hot** または **cool** アクセス層を選択します。
 * そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 **注:** まれに最後のデータを書き換える必要があるため、[不変性ポリシー][3]を設定しないでください (通常はタイムアウト)。
@@ -111,7 +109,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 {{% tab "Google Cloud Storage" %}}
 
-[Google Cloud アカウント][1]に移動し、アーカイブを送信するための [GCS バケットを作成][2]します。「**Choose how to control access to objects**」で、「**Set object-level and bucket-level permissions**」を選択します。
+[Google Cloud アカウント][1]にアクセスし、アーカイブを転送するための [GCS バケットを作成][2]します。**Choose how to control access to objects** セクションで、**Set object-level and bucket-level permissions** を選択してください。
 
 **注:** まれに最後のデータを書き換える必要があるため、[保持ポリシー][3]を追加しないでください (通常はタイムアウト)。
 
@@ -121,7 +119,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{< /tabs >}}
 
-### 権限を設定
+### 権限を設定する
 
 [`logs_write_archive` 権限][5]のある Datadog ユーザーだけがログアーカイブ構成を作成、変更、または削除できます。
 
@@ -155,8 +153,8 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
      ]
    }
    ```
-     * `GetObject` および `ListBucket` 権限により、[アーカイブからのリハイドレート][2]が可能になります。
-     * アーカイブのアップロードには、`PutObject` 権限で十分です。
+     * `GetObject` および `ListBucket` の権限を設定すると、[アーカイブからのリハイドレート][2]が可能になります。
+     * アーカイブをアップロードするには、`PutObject` 権限で十分です。
      * `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
 
 2. バケット名を編集します。
@@ -174,7 +172,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Datadog アプリに、ストレージアカウントへ書き込み、ここからリハイドレートするための権限を与えます。
+1. Datadog アプリに、ストレージアカウントへの書き込みおよびリハイドレートを行うための権限を付与します。
 2. [ストレージアカウントのページ][1]でストレージアカウントを選択し、**Access Control (IAM)** で **Add -> Add Role Assignment** を選択します。
 3. Role に **Storage Blob Data Contributor** を入力し、Azure と統合するために作成した Datadog アプリを選択して、保存します。
 
@@ -184,7 +182,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-1. Datadog Google Cloud サービスアカウントに、バケットへアーカイブを書き込むための権限を与えます。
+1. Datadog Google Cloud サービスアカウントに、アーカイブをバケットに書き込むための権限を付与します。 
 2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
 3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
 
@@ -198,10 +196,11 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 [Log Forwarding ページ][6]に移動し、**Archives** タブで **Add a new archive** を選択します。
 
-**注:** 
+**注:**
 * [`logs_write_archive` 権限][5]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
 * Azure Blob Storage へのログのアーカイブには、App Registration が必要です。[Azure インテグレーションページ][7]の手順を参照し、ドキュメントページの右側にある「サイト」を「US」に設定してください。アーカイブ目的で作成された App Registration は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
-* バケットでネットワークアクセスを特定の IP に制限している場合は、[IP 範囲リスト][8]から Webhook の IP を許可リストに追加してください。
+* バケットでネットワークアクセスを特定の IP に制限している場合は、{{< region-param key="ip_ranges_url" link="true" text="IP 範囲リスト">}}から Webhook の IP を許可リストに追加してください。
+* **US1-FED サイト**の場合、Datadog を構成して、ログを Datadog GovCloud 環境外の宛先に送信することができます。Datadog は、Datadog GovCloud 環境を離れたログに対して一切の責任を負いません。また、これらのログが GovCloud 環境を離れた後に適用される FedRAMP、DoD 影響レベル、ITAR、輸出コンプライアンス、データ居住地、またはそれに類する規制に関する義務や要件についても、Datadog は一切の責任を負いません。
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -270,12 +269,12 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 {{< img src="logs/archives/max_scan_size.png" alt="アーカイブの最大スキャンサイズを設定する" style="width:75%;">}}
 
 {{< site-region region="us3" >}}
-#### ファイアウォールのルール
+#### ファイアウォールルール 
 
 {{< tabs >}}
-{{% tab "Azure Storage" %}}
+{{% tab "Azure ストレージ" %}}
 
-ファイアウォールのルールはサポートされていません。
+ファイアウォールルールはサポートされていません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -399,7 +398,7 @@ S3 バケットが SSE-S3 で暗号化されていることを確認するには
 
 ### 検証
 
-Datadog アカウントでアーカイブ設定が正常に構成されたら、処理パイプラインは Datadog に取り込まれたすべてのログを豊かにする作業を開始します。その後アーカイブに転送されます。
+Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog に取り込まれたすべてのログを加工し始めます。その後アーカイブに転送されます。
 
 ただし、アーカイブの構成を作成または更新した後、次のアーカイブのアップロードが試行されるまでに数分かかることがあります。アーカイブがアップロードされる頻度は、さまざまです。アーカイブが Datadog アカウントから正常にアップロードされていることを確認するために、**15 分後にストレージバケットを再確認**してください。
 
@@ -428,7 +427,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 
 このディレクトリ構造により、過去のログアーカイブを日付に基づいてクエリする処理が簡略化されます。
 
-ZIP 圧縮された JSON ファイル内の各イベントの内容は、以下のようにフォーマットされています。
+圧縮 JSON ファイル内の各イベントは、以下の形式で内容が表されます。
 
 ```json
 {

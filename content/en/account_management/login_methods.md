@@ -1,6 +1,5 @@
 ---
 title: Configuring Login Methods
-kind: documentation
 ---
 
 Login Methods determine how users may authenticate themselves and log into your Datadog organization. Using Login Methods to enable or disable the default login methods requires one of the following privileged access permissions:

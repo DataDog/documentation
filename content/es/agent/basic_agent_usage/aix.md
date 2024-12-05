@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: Blog
   text: Monitorizar AIX con el Datadog Unix Agent
-kind: documentación
 title: Uso básico del Agent para AIX
 ---
 

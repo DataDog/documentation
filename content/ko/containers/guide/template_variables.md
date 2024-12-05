@@ -13,7 +13,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: 설명서
   text: Agent 자동탐지에 포함할 컨테이너 관리하기
-kind: guide
 title: 자동탐지 템플릿 변수
 ---
 

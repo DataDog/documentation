@@ -1,6 +1,5 @@
 ---
 title: Log Collection for AWS Lambda
-kind: documentation
 ---
 
 ### Collect logs from non-Lambda resources

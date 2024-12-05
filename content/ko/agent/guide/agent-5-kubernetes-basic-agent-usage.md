@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/faq/agent-5-kubernetes-basic-agent-usage
-kind: 가이드
 private: true
 title: Agent v5의 쿠버네티스(Kubernetes) Agent 기본 사용법
 ---
@@ -41,7 +40,6 @@ Datadog Agent v5는 최대 쿠버네티스 버전 1.8까지 지원합니다. 최
 ```yaml
 
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: dd-agent
 spec:
@@ -154,7 +152,6 @@ kube-state-metrics를 실행하려면 kube-state-metrics 서비스를 배포하�
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
@@ -179,7 +176,6 @@ spec:
             cpu: 200m
 ---
 apiVersion: v1
-kind: Service
 metadata:
   annotations:
     prometheus.io/scrape: 'true'
@@ -259,7 +255,6 @@ Checks
 ```yaml
 
 apiVersion: v1
-kind: Pod
 metadata:
   annotations:
     service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'

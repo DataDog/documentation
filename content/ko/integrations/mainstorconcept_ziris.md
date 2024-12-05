@@ -52,7 +52,7 @@ integration_id: mainstorconcept-ziris
 integration_title: z/IRIS
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 legal_terms:
   eula: EULA.pdf
 manifest_version: 2.0.0

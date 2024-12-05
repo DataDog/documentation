@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
-kind: guide
+
 title: Recueillir des métriques supplémentaires à partir de l'intégration SQL Server
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Ignoring Unwanted Resources in APM
-kind: documentation
 ---
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
@@ -59,18 +58,39 @@ apm_config:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{% tab "Kubernetes" %}}
+#### Datadog Operator
 
-In the `traceAgent` section of the `values.yaml` file, add `DD_APM_FILTER_TAGS_REJECT` in the `env` section, then [spin up helm as usual][1]. For multiple tags, separate each key:value with a space.
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
+{{< /code-block >}}
 
-{{< code-block lang="yaml" filename="values.yaml" >}}
-traceAgent:
-  # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
-    env:
-      - name: DD_APM_FILTER_TAGS_REJECT
-        value: tag_key1:tag_val2 tag_key2:tag_val2
+{{% k8s-operator-redeploy %}}
+
+#### Helm
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
+
+{{% k8s-helm-redeploy %}}
 
 [1]: /agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
@@ -78,7 +98,7 @@ traceAgent:
 
 Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
 
-On the backend, Datadog creates and adds the following span tags to spans after ingestion. These tags cannot be used to drop traces at the Datadog Agent level.
+On the backend, Datadog creates and adds the following span tags to spans after ingestion. Note, these tags cannot be used to drop traces at the Datadog Agent level, as the agent only filters based on tags available before ingestion.
 
 
 | Name                                    | Description                                      |
@@ -109,7 +129,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
-| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.useragent`               | `user_agent` - Java, C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
 #### Database
@@ -432,7 +452,7 @@ tracer.use('http', {
 ```
 <div class="alert alert-info"><strong>Note</strong>: The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}

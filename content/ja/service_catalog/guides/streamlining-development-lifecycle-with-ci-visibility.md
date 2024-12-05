@@ -8,29 +8,28 @@ further_reading:
 - link: /continuous_integration/search/?tab=pipelines
   tag: ドキュメント
   text: Datadog CI Pipeline Visibility
-kind: ガイド
 title: CI Visibility で開発ライフサイクルを効率化する
 ---
 
-サービスカタログの Delivery ビューでは、サービスに関連付けられた CI パイプラインと静的分析の結果を表示できます。
+In the Delivery view in Service Catalog, you can view CI pipeline and static analysis results associated to your services.
 
-デフォルトでは、サービスはリポジトリ URL を通じて [CI パイプライン][4]に関連付けられます。
-[サービスメタデータ][5]の `ci-pipeline-fingerprints` フィールドを変更することで、各サービスに関連付けられたパイプラインを編集できます。
+By default, your service is associated to [CI pipeline(s)][4] through repository URL. 
+You can edit the pipelines associated with each service by modifying the `ci-pipeline-fingerprints` field in your [service metadata][5].
 
-サービスに関連付けられたパイプラインを追加または削除するには、サービスページで `Edit Metadata` をクリックし、Software Delivery に進みます。これは [Service Catalog schema v2.2][7] でのみ利用可能です。
+To add or remove a pipeline associated to your service, click `Edit Metadata` in your service page, and go to Software Delivery. Please note that this is only available for [Service Catalog schema v2.2][7].
 
-{{< img src="tracing/service_catalog/service_catalog_delivery_lens.png" alt="サービスカタログのデリバリービュー" >}}
+{{< img src="tracing/service_catalog/service_catalog_delivery_lens.png" alt="The delivery view in the service catalog" >}}
 
-関連付けられたパイプラインを追加または削除するには、2 つの方法があります。
+There are two ways to add or remove an associated pipeline:
 
-1. 関連付けたいパイプラインを検索して選択します。
-{{< img src="tracing/service_catalog/add_pipelines_to_service.png" alt="UI でパイプラインを編集または追加" >}}
+1. Search for and select the pipelines you want to associate.
+{{< img src="tracing/service_catalog/add_pipelines_to_service.png" alt="Edit or add a pipeline in the UI" >}}
 
-2. パイプラインのフィンガープリントをサービスメタデータに直接追加します。[Pipelines][6] ページでパイプラインをクリックすることでパイプラインのフィンガープリントを見つけ、歯車のアイコンをクリックします。
-{{< img src="tracing/service_catalog/pipeline-fingerprint-location.png" alt="パイプラインのフィンガープリントの位置。" >}}
+2. Add the pipeline fingerprint directly to the service metadata. You can locate a pipeline's fingerprint by clicking on a pipeline in the [Pipelines][6] page, then click the gear icon:
+{{< img src="tracing/service_catalog/pipeline-fingerprint-location.png" alt="Pipeline fingerprint location." >}}
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

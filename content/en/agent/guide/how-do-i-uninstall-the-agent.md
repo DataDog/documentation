@@ -1,6 +1,5 @@
 ---
 title: Uninstalling the Agent
-kind: guide
 aliases:
   - /agent/faq/how-do-i-uninstall-the-agent/
 further_reading:

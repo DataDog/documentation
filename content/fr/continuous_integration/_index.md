@@ -36,7 +36,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: Blog
   text: Surveiller vos modernisations CI/CD avec Datadog CI Pipeline Visibility
-kind: documentation
 title: Continuous Integration Visibility
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Bits AI
-kind: documentation
 disable_toc: false
 private: false
 is_beta: true
@@ -17,6 +16,9 @@ further_reading:
     - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-bits-an-ai-assistant-to-help-engineers-quickly-resolve-application-issues/"
       tag: "Press release"
       text: "Bits AI announcement"
+    - link: "https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/"
+      tag: "Blog"
+      text: "Reimagining the way you run operations with autonomous investigations"
 ---
 
 Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
@@ -28,7 +30,7 @@ For detailed setup and usage instructions, see the [Getting Started][1] document
 ### Query data in natural language
 
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Natural language querying is in private beta. Fill out this form to join the wait list.
+Natural language querying is in Preview. Fill out this form to join the wait list.
 {{< /beta-callout >}} 
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.

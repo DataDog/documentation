@@ -19,9 +19,8 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentación
   text: Consulta
-kind: documentación
 title: Widget de distribución
-widget_type: distribución
+widget_type: distribution
 ---
 
 En la visualización de la distribución se muestran datos agregados a través de una o varios etiquetas, como *hosts*. A diferencia del [mapa de calor][1], el eje x de una gráfica de distribución es la cantidad y no el tiempo.
@@ -59,7 +58,7 @@ Te permiten:
 * Cambiar de manera automática los límites del eje x en función de un percentil o un umbral de valor absoluto. Este umbral se puede aplicar a uno o ambos extremos de la gráfica (inferior y superior) para eliminar los contenedores «outlier».
 * Cambiar la escala del eje y de lineal a log.
 
-{{< img src="dashboards/<txprotected>widgets</txprotected>/options/distribution_axis_controls.jpg" alt="Preferencias de control del eje de distribución" style="width:80%;">}}
+{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Preferencias de control del eje de distribución" style="width:80%;">}}
 
 ### Pantalla completa
 

@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 125
     source_type_name: OpenStack
-  logs:
-    source: openstack
   saved_views:
     openstack_processes: assets/saved_views/openstack_processes.json
 author:
@@ -33,6 +31,9 @@ categories:
 - cloud
 - log collection
 - network
+- provisioning
+- configuration & deployment
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
 display_on_public_website: true
@@ -40,9 +41,8 @@ draft: false
 git_integration_title: openstack
 integration_id: openstack
 integration_title: OpenStack (レガシー)
-integration_version: 2.0.0
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: openstack
 public_title: OpenStack (レガシー)
@@ -60,10 +60,22 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Category::プロビジョニング
+  - Category::構成 & デプロイ
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/openstack-monitoring-nova
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/install-openstack-in-two-commands
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
   support: README.md#Support
   title: OpenStack (レガシー)
 ---
@@ -82,13 +94,13 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 - OpenStack の状態を視覚化および監視できます。
 - OpenStack のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][3]します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### OpenStack の準備
 
@@ -184,7 +196,7 @@ openstack role add datadog_monitoring \
 
 2. [Agent を再起動します][6]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にできます。
 
@@ -208,21 +220,21 @@ openstack role add datadog_monitoring \
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `openstack` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "openstack" >}}
 
 
-### ヘルプ
+### イベント
 
 OpenStack チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "openstack" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

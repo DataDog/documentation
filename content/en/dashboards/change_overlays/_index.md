@@ -1,6 +1,5 @@
 ---
 title: Change Overlays
-kind: documentation
 description: Overlay your change events on graphs to correlate performance anomalies with changes in your application
 further_reading:
 - link: "/tracing/services/deployment_tracking/"
@@ -22,55 +21,31 @@ further_reading:
   tag: "Blog"
   text: "Quickly spot and revert faulty deployments with Change Overlays"
 ---
-<div class="alert alert-warning">
-    Change Overlays is in beta.
-</div>
-
 
 ## Overview
 
-As teams iterate, deploy code, and continually make changes to their applications and services, it can be difficult to find the exact change that caused a spike in errors, an increase in latency, or slower page load times. Use Change overlays to identify when a recent change is causing performance issues within your application or services and find the source of the problem.
-
-View the moment a change occurs in the context of your Datadog observability data to pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays supports [APM service deployments][1].
+As teams iterate, deploy code, and make changes to their applications and services, identifying the exact change that caused a spike in errors, increased latency, or slower page load times can be challenging. Use Change Overlays to visualize changes on your dashboard like deployments or feature flags, and quickly correlate performance issues with them.
 
 ## Overlay changes on graphs
 
-To get started, click **Show Overlays** in the upper right corner of your dashboard. 
+To get started, click **Show Overlays** in the upper right corner of your dashboard. Now you can enable the [Change Tracking][16] timeline and change overlays on timeseries widgets.
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
-Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
+When actived, the **Service** search bar will display the **Most Relevant** service by default. Datadog automatically selects the service most frequently referenced in the queries supporting the widgets on the dashboard.
 
-Click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
-
-### Show faulty deploys
-Use the toggle in the overlays panel to only show [faulty deployments][2] that could be impacting your metrics.
-
-### Override automatic detection
 Override the automatic service detection by using the search bar to find the service of interest. 
 
-## Analyze the impact of your change
-Click on any overlay on your graph to open a change analysis page, allowing you to understand the status and impact of you change.
+All changes displayed on the change timeline and as overlays tie back to the selected service. 
+Use the **Show On** dropdown to limit change overlays to relevant widgets, or shown them on all widgets on your dashboard.
 
-{{< img src="dashboards/change_overlays/change_overlays_side_panel.png" alt="Change overlays side panel" style="width:75%;">}}
-
-### APM deployments
-For APM deployments, you can:
-- Compare the version selected to overall service performance for requests, errors, or latency
-- View the rollout of your version by `region`, `env`, or `datacenter`
-- See new Error Tracking issues that have been introduced with the new deployment
-- Check related infrastructure that your service is running on
-
-{{< img src="dashboards/change_overlays/apm_overlays_side_panel.png" alt="APM overlays side panel" style="width:75%;">}}
+To view additional details or take additional actions, click on a change overlay or change within the change timeline.
 
 ## FAQ
-### When do overlays appear?
-For APM deployments, overlays appear on timeseries graphs that:
-1. Are filtered by the `service` tag in the query
-2. Have the `service` set up with the `version` tag
 
-### What are deployments scoped to?
+### What are deployments changes scoped to?
 For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`. 
+
 
 ## Further Reading
 
@@ -91,3 +66,4 @@ For APM deployments, an `env` must be specified. If you have an `env` or `datace
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /logs/explorer/search_syntax/
 [15]: /dashboards/widgets/timeseries/#event-overlay
+[16]: /change_tracking/

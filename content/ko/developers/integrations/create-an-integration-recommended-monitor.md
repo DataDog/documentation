@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: 설명서
   text: 모니터 설정
-kind: documentation
 title: 통합 권장 모니터 만들기
 ---
 ## 개요

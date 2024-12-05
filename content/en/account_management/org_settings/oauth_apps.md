@@ -1,6 +1,5 @@
 ---
 title: OAuth Apps
-kind: documentation
 further_reading:
 - link: "/account_management/org_settings/"
   tag: "Documentation"

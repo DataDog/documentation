@@ -29,6 +29,7 @@ categories:
 - notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: sedai
 integration_title: Sedai
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sedai
 public_title: Sedai
@@ -59,6 +59,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
   media: []
@@ -82,7 +83,7 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 
 * **プロアクティブアクション:** お客様に代わって本番稼動を安全に行い、リソースの可用性問題を回避し、常に最適な状態で稼動することを保証します。
 
-## 計画と使用
+## セットアップ
 
 Sedai で、
 
@@ -102,11 +103,11 @@ Sedai で、
 
    ![Datadog 通知の有効化][5]
 
-## リアルユーザーモニタリング
+## 収集データ
 
 このインテグレーションは、Datadog にイベントを送信します。
 
-## Agent
+## サポート
 
 このインテグレーションに関するサポートは、[Datadog サポート][6]にお問い合わせください。
 

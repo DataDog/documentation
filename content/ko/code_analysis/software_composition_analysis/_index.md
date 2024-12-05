@@ -15,7 +15,6 @@ further_reading:
   tag: 설명서
   text: 소스 코드 통합에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 소프트웨어 구성 분석
 ---
 

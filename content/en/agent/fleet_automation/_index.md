@@ -1,6 +1,5 @@
 ---
 title: Fleet Automation
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/agent/remote_config"
@@ -14,8 +13,6 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< callout btn_hidden="true">}}Fleet Automation is in beta. Access it from the <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> page in Datadog.{{< /callout >}}
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
@@ -24,7 +21,7 @@ further_reading:
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support your evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet-automation.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation1.png" alt="The fleet automation page" style="width:100%;" >}}
 
 With the Fleet Automation platform, you can:
 - View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
@@ -60,7 +57,7 @@ Before you send a flare, make sure that Remote Configuration is [enabled](#confi
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Control access to Fleet Automation
 

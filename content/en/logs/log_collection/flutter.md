@@ -1,6 +1,5 @@
 ---
 title: Flutter Log Collection
-kind: documentation
 description: Collect Logs data from your Flutter projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter

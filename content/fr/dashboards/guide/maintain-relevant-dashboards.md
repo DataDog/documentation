@@ -2,7 +2,6 @@
 aliases:
 - /fr/graphing/faq/maintain-relevant-dashboards
 - /fr/graphing/guide/maintain-relevant-dashboards
-kind: guide
 title: Pratiques recommandées pour conserver des dashboards pertinents
 ---
 

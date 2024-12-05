@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/agent/faq/agent-5-kubernetes-basic-agent-usage
-kind: guide
 private: true
 title: Utilisation de base de l'Agent Kubernetes dans l'Agent v5
 ---
@@ -40,7 +39,6 @@ Si le RBAC est activé dans votre environnement Kubernetes, découvrez comment c
 ```yaml
 
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: dd-agent
 spec:
@@ -153,7 +151,6 @@ Pour exécuter kube-state-metrics, créez un fichier `kube-state-metrics.yaml` a
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
@@ -178,7 +175,6 @@ spec:
             cpu: 200m
 ---
 apiVersion: v1
-kind: Service
 metadata:
   annotations:
     prometheus.io/scrape: 'true'
@@ -258,7 +254,6 @@ Si vous utilisez un pod `dd-agent` pour chaque nœud de travail Kubernetes, vous
 ```yaml
 
 apiVersion: v1
-kind: Pod
 metadata:
   annotations:
     service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'

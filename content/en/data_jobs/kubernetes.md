@@ -1,24 +1,21 @@
 ---
 title: Data Jobs Monitoring for Spark on Kubernetes
-kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}}
-
 [Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
 
 ## Setup
+<div class="alert alert-info">Data Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.55.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
 
 Follow these steps to enable Data Jobs Monitoring for Spark on Kubernetes.
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
 2. [Inject Spark instrumentation](#inject-spark-instrumentation).
+
 
 ### Install the Datadog Agent on your Kubernetes cluster
 
@@ -56,15 +53,13 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
      features:
        apm:
          enabled: true
-       hostPortConfig:
-         enabled: true
-         hostPort: 8126
+         hostPortConfig:
+           enabled: true
+           hostPort: 8126
        admissionController:
          enabled: true
          mutateUnlabelled: false
      global:
-       tags:
-         - 'data_workload_monitoring_trial:true'
        site: <DATADOG_SITE>
        credentials:
          apiSecret:
@@ -73,8 +68,14 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
          appSecret:
            secretName: datadog-secret
            keyName: app-key
+     override:
+       nodeAgent:
+         image:
+           tag: <DATADOG_AGENT_VERSION>
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+
+   Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 1. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -103,8 +104,10 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
      apm:
        portEnabled: true
        port: 8126
-     tags:
-       - 'data_workload_monitoring_trial:true'
+
+   agents:
+     image:
+       tag: <DATADOG_AGENT_VERSION>
 
    clusterAgent:
      admissionController:
@@ -112,6 +115,8 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        muteUnlabelled: false
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+
+   Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 1. Run the following command:
    ```shell
    helm install <RELEASE_NAME> \
@@ -135,18 +140,15 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 When you run your Spark job, use the following configurations:
 
-`spark.kubernetes.driver.label.admission.datadoghq.com/enabled` (Required)
+`spark.kubernetes.{driver,executor}.label.admission.datadoghq.com/enabled` (Required)
 : `true`
 
-`spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version` (Required)
+`spark.kubernetes.{driver,executor}.annotation.admission.datadoghq.com/java-lib.version` (Required)
 : `latest`
 
-`spark.driver.extraJavaOptions`
-:  `-Ddd.integration.spark.enabled` (Required)
+`spark.{driver,executor}.extraJavaOptions`
+:  `-Ddd.data.jobs.enabled=true` (Required)
    : `true`
-
-   `-Ddd.integrations.enabled` (Required)
-   : `false`
 
    `-Ddd.service` (Optional)
    : Your service name. Because this option sets the _job name_ in Datadog, it is recommended that you use a human-readable name.
@@ -160,9 +162,6 @@ When you run your Spark job, use the following configurations:
    `-Ddd.tags` (Optional)
    : Other tags you wish to add, in the format `<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>`.
 
-   `-Ddd.trace.experimental.long-running.enabled` (Optional)
-   : `true` To view jobs while they are still running
-
 
 #### Example: spark-submit
 
@@ -174,9 +173,13 @@ spark-submit \
   --deploy-mode cluster \
   --conf spark.kubernetes.namespace=<NAMESPACE> \
   --conf spark.kubernetes.authenticate.driver.serviceAccountName=<SERVICE_ACCOUNT> \
+  --conf spark.kubernetes.authenticate.executor.serviceAccountName=<SERVICE_ACCOUNT> \
   --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true \
+  --conf spark.kubernetes.executor.label.admission.datadoghq.com/enabled=true \
   --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest \
-  --conf spark.driver.extraJavaOptions="-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2> -Ddd.trace.experimental.long-running.enabled=true" \
+  --conf spark.kubernetes.executor.annotation.admission.datadoghq.com/java-lib.version=latest \
+  --conf spark.driver.extraJavaOptions="-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
+  --conf spark.executor.extraJavaOptions="-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
   local:///usr/lib/spark/examples/jars/spark-examples.jar 20
 ```
 
@@ -191,7 +194,7 @@ aws emr-containers start-job-run \
 --job-driver '{
   "sparkSubmitJobDriver": {
     "entryPoint": "s3://BUCKET/spark-examples.jar",
-    "sparkSubmitParameters": "--class <MAIN_CLASS> --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.driver.extraJavaOptions=\"-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2> -Ddd.trace.experimental.long-running.enabled=true\""
+    "sparkSubmitParameters": "--class <MAIN_CLASS> --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.executor.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.kubernetes.executor.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.driver.extraJavaOptions=\"-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>\"  --conf spark.executor.extraJavaOptions=\"-Ddd.data.jobs.enabled=true -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>\""
   }
 }
 
@@ -216,3 +219,4 @@ In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your da
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
+

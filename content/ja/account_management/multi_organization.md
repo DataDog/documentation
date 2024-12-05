@@ -17,7 +17,6 @@ further_reading:
 - link: /account_management/org_settings/cross_org_visibility
   tag: Documentation
   text: Cross-Organization Visibility
-kind: documentation
 title: マルチオーガニゼーションアカウントの管理
 ---
 
@@ -48,7 +47,7 @@ title: マルチオーガニゼーションアカウントの管理
     - 招待されたユーザーには、[Datadog Admin ロール][5]が割り当てられます。組織を作成後、
 組織の設定でさらにユーザーを招待することができます。
     - ユーザーがパスワードを持っていない場合、Datadog は、パスワードを設定し、新しい子組織に参加するためのリンクを持つ招待メールを送信します。
-4. **Create** をクリックします。
+4. **作成**をクリックします。
 
 新しい子組織は、親組織のプランを継承し、親組織の請求アカウントに追加されます。子組織の請求を更新する場合は、[営業担当者][6]にお問い合わせください。
 
@@ -60,11 +59,21 @@ title: マルチオーガニゼーションアカウントの管理
 
 カスタムサブドメイン機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][1]にご連絡ください。
 
-複数のオーガニゼーションに属しているユーザーには、カスタムサブドメインを使用すると、アラートや通知のソースを特定するために便利です。そのようなユーザーをサブドメインに関連付けられているオーガニゼーションに即座に切り替えることもできます。
+複数の組織に属している場合、カスタムサブドメインはアラートや通知の発信元を特定するのに役立ちます。また、それによりサブドメインに関連付けられた組織に即座に切り替えることが可能です。
+{{% site-region region="us,us3,us5,ap1" %}}
+例えば、URL `https://app.datadoghq.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。しかし、カスタムサブドメインを使用すると、`https://org-a.datadoghq.com/event/event?id=1` に移動するだけで、ユーザーのコンテキストが自動的に組織 A に切り替わり、正しいページが表示されます。
 
-たとえば、URL `https://app.datadoghq.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。一方、カスタムサブドメインを使用し、`https://org-a.datadoghq.com/event/event?id=1` に移動すれば、自動的にユーザーのコンテキストが組織 A に切り替わり、正しいページを表示することができます。
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で (サブドメイン名を追加して) 編集してください。例えば、`https://**app**.datadoghq.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings` となります。{{% /site-region %}}
 
-**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で（サブドメイン名を追加して）編集してください。たとえば、`https://**app**.datadoghq.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings` となります。
+{{% site-region region="eu" %}}
+例えば、URL `https://app.datadoghq.eu/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。しかし、カスタムサブドメインを使用すると、`https://org-a.datadoghq.eu/event/event?id=1` に移動するだけで、ユーザーのコンテキストが自動的に組織 A に切り替わり、正しいページが表示されます。
+
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で (サブドメイン名を追加して) 編集してください。例えば、`https://**app**.datadoghq.eu/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.eu/account/settings` となります。{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+例えば、URL `https://app.ddog-gov.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。しかし、カスタムサブドメインを使用すると、`https://org-a.ddog-gov.com/event/event?id=1` に移動するだけで、ユーザーのコンテキストが自動的に組織 A に切り替わり、正しいページが表示されます。
+
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で (サブドメイン名を追加して) 編集してください。例えば、`https://**app**.ddog-gov.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.ddog-gov.com/account/settings` となります。{{% /site-region %}}
 
 ## SAML のセットアップ
 
@@ -94,7 +103,7 @@ SAML に厳しい親組織から作成された子組織に確実にログイン
 
 ## マルチオーガニゼーションの使用量
 
-親組織は、左下のユーザー名にカーソルを合わせ、**Plan & Usage** > **Usage** に進むと、すべての組織 (子組織と親組織) の使用量の合計と請求対象分を見ることができます。
+親組織は、左下のユーザー名にカーソルを合わせて [**Plan & Usage** > **Usage & Cost**][11] に進むことで、すべての組織 (子組織と親組織) の使用量の合計と請求対象分を見ることができます。
 
 Usage ページには、親組織およびそのすべての子組織の使用量の集計が表示されます。Usage ページには、2 つのタブがあります。
 
@@ -131,15 +140,13 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 
 **Individual Organizations** の使用量タブでは、子組織の使用量を絶対単位または総使用量に対する割合で表示することができます。
 
-{{< img src="account_management/multi-org-percent-billable-v2.png" alt="個々の使用率" >}}
-
 デフォルトのビューは "Billable" ビューで、最終的な請求に寄与する使用量が表示されます。このビューでは、トライアルオーガニゼーションなどの請求対象ではない子オーガニゼーションや、請求対象のより正確な要約を提供するその他の調整が削除されます。"All" ビューに切り替えると、親オーガニゼーションとすべての子オーガニゼーションの使用量を未調整かつ生の状態で確認することができます。どちらのビューも CSV ファイルとしてダウンロードできます。
 
-子組織の[使用量の詳細][11]を表示するには、子組織の名前をクリックします。
+子組織の[使用量の詳細][12]を表示するには、子組織の名前をクリックします。
 
 ## 使用属性
 
-親組織は、[Usage Attribution][12] ページで子組織の使用量を既存のタグキーによって確認できます。管理者が、左下にあるユーザー名にカーソルを置き、`Plan & Usage`--> `Usage Attribution` と移動して表示します。
+親組織は、[Usage Attribution][13] ページで既存のタグキーによって子組織の使用量を確認できます。管理者は左下にあるユーザー名にカーソルを合わせて、[**Plan & Usage > Usage Attribution**][14] に移動することで表示できます。
 
 親オーガニゼーションレベルで有効化されている場合、使用属性にはすべてのオーガニゼーションの使用量集計が表示されます。これは、子オーガニゼーションの使用量を特定のプロジェクトまたはチームの属性とするなど、グループ化する場合に便利です。
 
@@ -169,5 +176,7 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 [8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [9]: /ja/monitors/manage/
 [10]: /ja/account_management/saml/
-[11]: /ja/account_management/plan_and_usage/usage_details/
-[12]: /ja/account_management/billing/usage_attribution/
+[11]: https://app.datadoghq.com/billing/usage?cost_summary
+[12]: /ja/account_management/plan_and_usage/usage_details/
+[13]: /ja/account_management/billing/usage_attribution/
+[14]: https://app.datadoghq.com/billing/usage-attribution

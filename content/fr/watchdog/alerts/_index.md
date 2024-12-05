@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Alertes Watchdog
 ---
 
@@ -92,6 +91,21 @@ Pour désactiver la détection des anomalies de log, accédez à la [page Log Ma
 [4]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "APM" %}}
+
+Watchdog analyse tous les services et toutes les ressources afin de détecter des anomalies basées sur les métriques suivantes :
+
+  * Taux d'erreur
+  * Latence
+  * Hits (taux de requête)
+
+Watchdog ne tient pas compte des endpoints et services peu utilisés, afin de réduire les alertes superflues et d'éviter de générer des anomalies pour de faibles volumes de trafic. En outre, si une anomalie concernant le taux de requête est détectée, mais qu'elle n'a aucune incidence sur la latence ni sur le taux d'erreur, elle est ignorée.
+
+#### Historique de données requis
+
+Pour déterminer le comportement attendu, Watchdog nécessite certaines données. Pour les anomalies de métrique, vous devez disposer au minimum d'un historique de deux semaines. Dès lors que cet historique est disponible, Watchdog commence à identifier les anomalies. L'historique s'améliore au fur et à mesure. Pour des performances optimales, un historique de six semaines est nécessaire.
+
+{{% /tab %}}
+{{% tab "USM" %}}
 
 Watchdog analyse tous les services et toutes les ressources afin de détecter des anomalies basées sur les métriques suivantes :
 

@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: 설명서
   text: 로그 탐색 방법 알아보기
-kind: 설명서
 title: Android 로그 수집
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Further Configure the Datadog Agent on Kubernetes
-kind: documentation
 aliases:
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection
@@ -14,7 +13,7 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 ### Enable Datadog to collect:
 - [Traces (APM)](#enable-apm-and-tracing)
 - [Kubernetes events](#enable-kubernetes-event-collection)
-- [NPM](#enable-npm-collection)
+- [CNM](#enable-cnm-collection)
 - [Logs](#enable-log-collection)
 - [Processes](#enable-process-collection)
 
@@ -135,7 +134,7 @@ agents:
 
 For DaemonSet configuration, see [DaemonSet Cluster Agent event collection][14].
 
-## Enable NPM collection
+## Enable CNM collection
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -184,7 +183,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information, see [Network Performance Monitoring][18].
+For more information, see [Cloud Network Monitoring][18].
 
 ## Enable log collection
 
@@ -853,7 +852,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [15]: /infrastructure/containers/
 [16]: /containers/kubernetes/apm
 [17]: /containers/kubernetes/log
-[18]: /network_monitoring/performance/
+[18]: /network_monitoring/cloud_network_monitoring/
 [19]: /developers/dogstatsd
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer

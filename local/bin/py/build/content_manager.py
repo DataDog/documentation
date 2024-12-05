@@ -200,7 +200,7 @@ def extract_sourced_and_cached_content_from_pull_config(self, configuration):
                     ]
                     content_temp["globs"] = content["globs"]
 
-                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows", "marketplace-integrations"):
+                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "marketplace-integrations"):
                         content_temp["options"] = content["options"]
 
                     self.list_of_sourced_contents.append(content_temp)
@@ -265,7 +265,7 @@ def download_cached_content_into_repo(self):
                 shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
             final_file_destination = content.get('options', {}).get('dest_dir', '')
-        elif action in ('workflows', 'security-rules'):
+        elif action == 'security-rules':
             final_file_destination = content.get('options', {}).get('dest_path', '')
         elif action not in ('integrations', 'marketplace-integrations', 'npm-integrations'):
             raise ValueError(f'Action {action} unsupported, cannot copy from cache.')

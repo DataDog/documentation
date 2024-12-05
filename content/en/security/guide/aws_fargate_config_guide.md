@@ -3,11 +3,16 @@ title: AWS Fargate Configuration Guide for Datadog Security
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate
+  - /security/cloud_security_management/setup/serverless
+further_reading:
+- link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
+  tag: "Blog"
+  text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-<div class="alert alert-warning">Cloud Security Management on AWS Fargate is in beta.</div>
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
 ## Full stack coverage for AWS Fargate
 
@@ -27,8 +32,8 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
-        <td>Application Security Management</td>
-        <td>Application Security Management</td>
+        <td>Software Composition Analysis (SCA) and Code Security</td>
+        <td>ASM - Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
@@ -79,8 +84,8 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 
 ### Images
 
-* `cws-instrumentation-init`: `datadog/cws-instrumentation:latest`
-* `datadog-agent`: `datadog/agent:latest`
+* `cws-instrumentation-init`: `public.ecr.aws/datadog/cws-instrumentation:latest`
+* `datadog-agent`: `public.ecr.aws/datadog/agent:latest`
 
 ### Installation
 
@@ -111,7 +116,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     "containerDefinitions": [
         {
             "name": "cws-instrumentation-init",
-            "image": "datadog/cws-instrumentation:latest",
+            "image": "public.ecr.aws/datadog/cws-instrumentation:latest",
             "essential": false,
             "user": "0",
             "command": [
@@ -130,7 +135,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
         },
         {
             "name": "datadog-agent",
-            "image": "datadog/agent:latest",
+            "image": "public.ecr.aws/datadog/agent:latest",
             "essential": true,
             "environment": [
                 {
@@ -276,7 +281,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation:latest
+       image: public.ecr.aws/datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
@@ -300,7 +305,7 @@ spec:
            mountPath: "/cws-instrumentation-volume"
            readOnly: true
      - name: datadog-agent
-       image: datadog/agent:latest 
+       image: public.ecr.aws/datadog/agent:latest
        env:
          - name: DD_API_KEY
            value: "<DD_API_KEY>"
@@ -350,7 +355,7 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Application Security Management
+## Application Security
 
 ### Prerequisites
 
@@ -360,6 +365,9 @@ In the task definition, replace the "workload" container with the following:
 <div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
 
 ### Installation
+
+#### Software Composition Analysis (SCA)
+[Software Composition Analysis (SCA)][22] works in Fargate. Follow the [installation steps for applications that run in traditional hosts][23].
 
 #### Threat Detection and Protection
 
@@ -398,6 +406,10 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 
 {{% cloud-siem-aws-cloudtrail-send-logs %}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/ecs_fargate/
 [2]: /integrations/eks_fargate/
 [3]: /security/cloud_security_management/
@@ -407,15 +419,17 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
-[10]: /security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
-[11]: /security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
-[12]: /security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
-[13]: /security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
-[14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
-[15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
-[16]: /security/application_security/enabling/compatibility/
+[10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
+[11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
+[12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate
+[13]: /security/application_security/threats/setup/threat_detection/ruby?tab=awsfargate
+[14]: /security/application_security/threats/setup/threat_detection/nodejs?tab=awsfargate
+[15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
+[16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/enabling/tracing_libraries/code_security/java/
-[19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
-[20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
+[18]: /security/application_security/code_security/setup/java/
+[19]: /security/application_security/code_security/setup/dotnet/
+[20]: /security/application_security/code_security/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
+[22]: /security/application_security/software_composition_analysis/
+[23]: /security/application_security/software_composition_analysis/setup/

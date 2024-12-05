@@ -10,9 +10,14 @@ cascade:
     tags:
     - 메트릭 제출
     - 메트릭 제출
-kind: 설명서
 title: 메트릭
 ---
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  커스텀 메트릭에 대한 파운데이션 활성화 세션을 살펴보고 등록하세요. 커스텀 알고리즘에 대한 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 성능 분포 같은 애플리케이션 KPI를 추적하는 방법을 알아보세요.
+{{< /learning-center-callout >}}
+
 이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다: 
 
 {{< whatsnext desc="Datadog에 메트릭 제출하기" >}}
@@ -23,14 +28,15 @@ title: 메트릭
     {{< nextlink href="/metrics/units" >}}<u>메트릭 단위</u> - 메트릭과 연결될 수 있는 단위에 대해 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="메트릭 시각화 및 쿼리" >}}
-    {{< nextlink href="/metrics/explorer" >}}<u>메트릭 탐색기</u> - 모든 메트릭을 탐색하고 분석하세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>메트릭 요약</u> - 적극적으로 보고하는 Datadog 메트릭에 대해 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>고급 필터링</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
+{{< whatsnext desc="Visualize and query your metrics" >}}
+    {{< nextlink href="/metrics/explorer" >}}<u>메트릭 탐색기</u> - 모든 메트릭을 탐색하고 분석을 수행합니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>메트릭 요약</u> - Datadog 메트릭 활성 보고를 이해합니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>고급 필터링</u> - 반환된 메트릭의 범위를 좁힐 수 있도록 데이터를 필터링합니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/nested_queries" >}}<u>중첩 쿼리</u> - 고급 쿼리 기능을 해제하기 위해 추가 집계 레이어를 적용하세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="커스텀 메트릭 볼륨 및 비용에 대한 이해와 관리" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics Without LimitsTM을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics Without Limits™을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 개요
@@ -63,11 +69,11 @@ Datadog에서 메트릭 데이터는 데이터 요소로 수집 및 저장되며
 
 또한 메트릭은 환경 규모를 조정하여 고객의 수요를 충족할 수 있도록 돕습니다. 리소스 소비량을 정확히 판단하면 성능을 개선하고 비용을 절감할 수 있습니다.
 
-### Datadog에 메트릭 제출
+### Datadog에 메트릭 제출하기
 
 메트릭은 여러 장소에서 Datadog로 전송될 수 있습니다.
 
-- [Datadog 지원 통합][8]: Datadog의 {{< translate key="통합_개수" >}}개 이상의 통합에는 기본으로 제공되는 메트릭이 포함되어 있습니다. 이러한 메트릭에 액세스하려면 해당 서비스의 특정 통합 페이지로 이동해 설치 지침을 따릅니다. 예를 들어, EC2 인스턴스를 모니터링해야 하는 경우 [Amazon EC2 통합 설명서][9]로 이동해야 합니다.
+- [Datadog 지원 통합][8]: Datadog의 {{< translate key="integration_count" >}}개 이상의 통합에는 기본으로 제공되는 메트릭이 포함되어 있습니다. 이러한 메트릭에 액세스하려면 해당 서비스의 특정 통합 페이지로 이동해 설치 지침을 따릅니다. 예를 들어, EC2 인스턴스를 모니터링해야 하는 경우 [Amazon EC2 통합 설명서][9]로 이동해야 합니다.
 
 - Datadog 플랫폼 내에서 직접 메트릭을 생성할 수 있습니다. 예를 들어 로그에 표시되는 오류 상태 코드를 계산하고 Datadog에 [새로운 메트릭으로 저장][10]할 수 있습니다.
 
@@ -100,6 +106,8 @@ Datadog 에이전트는 전송되는 단일 데이터 요소마다 Datadog 서�
 ## 메트릭 쿼리
 
 Datadog의 [메트릭 탐색기][3], [대시보드][4] 또는 [노트북][5]를 사용해 메트릭을 시각화하고 그래프를 만들 수 있습니다.
+
+**팁**: Datadog의 글로벌 검색에서 메트릭 요약 페이지를 열려면 <kbd>Cmd/Ctrl</kbd> + <kbd>K</kbd> 를, `metrics`의 경우 검색을 누르세요.
 
 시계열 시각화 예시는 다음과 같습니다.
 
@@ -172,6 +180,10 @@ Datadog는 데이터 요소를 대량으로 저장합니다. 대부분 그래프
 
 공간 집계를 사용하여 적용할 수 있는 4가지 집계에는 _합계(sum)_, _최소(min)_, _최대(max)_ 및 _평균(avg)_이 있습니다. 위 예시를 사용하고 4개 지역(us-east-1, us-east-2, us-west-1 및 us-west-2)에 호스트가 퍼져 있는 경우를 생각해 봅시다. 각 지역의 호스트는 애그리게이터 함수를 사용해 결합해야 합니다. _최대_ 애그리게이터_를 사용하면 호스트 전반에서 경험한 최대 지연이 표시됩니다. _평균_애그리게이터_를 사용하면 지역별 평균 지연이 표시됩니다.
 
+#### 중첩 쿼리
+UI에서 또는 [API][27]을 통해 중첩된 쿼리를 사용하여 시간과 공간의 기존 쿼리 결과에 추가 집계 레이어를 추가합니다. 자세한 내용은 [중첩된 쿼리][26] 설명서를 참조하세요.
+
+
 ### 메트릭에 대한 실시간 정보 보기
 
 [메트릭 요약 페이지][20]는 지정된 시간(지난 시간, 지난일, 지난주)에 Datadog에 보고된 메트릭 목록을 표시합니다. 메트릭은 메트릭 이름이나 태그로 필터링할 수 있습니다. 
@@ -185,10 +197,10 @@ Datadog는 데이터 요소를 대량으로 저장합니다. 대부분 그래프
 ## 참고 자료
 
 {{< whatsnext desc="메트릭에 대해 다음 내용도 확인하세요.">}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>Distribution metrics</u> - 전체 데이터 세트에서 글로벌 백분위수를 계산하세요.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics Without LimitsTM을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - 인터랙티브 세션에 참여하여 메트릭 활용에 대해 자세히 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>고급 필터링</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>분포 메트릭</u> - 전체 데이터 세트에서 글로벌 백분위수를 계산하세요.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics Without Limits™을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>기본 구축</u> - 인터랙티브 세션에 참여하여 메트릭에 대해 자세히 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /ko/logs
@@ -216,3 +228,5 @@ Datadog는 데이터 요소를 대량으로 저장합니다. 대부분 그래프
 [23]: /ko/dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /ko/dashboards/functions/
 [25]: /ko/metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /ko/metrics/nested_queries
+[27]: https://docs.datadoghq.com/ko/api/latest/metrics/#query-timeseries-data-across-multiple-products

@@ -1,6 +1,5 @@
 ---
 title: TCP Testing
-kind: documentation
 description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test
@@ -46,6 +45,10 @@ After choosing to create a `TCP` test, define your test's request.
 {{< img src="synthetics/api_tests/tcp_test_config.png" alt="Define TCP connection" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 

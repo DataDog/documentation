@@ -17,6 +17,7 @@ content/en/api/**/*.java
 content/en/api/**/*.pybeta
 content/en/api/**/*.rbbeta
 content/en/api/**/*.ts
+content/en/api/**/*.rs
 content/en/api/tsconfig.json
 
 # Ignoring all automated content
@@ -79,6 +80,12 @@ content/en/security/threats/agent_expressions.md
 content/en/security/threats/backend.md
 content/en/security_platform/
 
+# security threat detection
+content/en/security/threats/backend_linux.md
+content/en/security/threats/backend_windows.md
+content/en/security/threats/linux_expressions.md
+content/en/security/threats/windows_expressions.md
+
 # cspm cloud resource schemas
 content/en/security/cspm/custom_rules/*.md
 content/en/security/misconfigurations/custom_rules/*.md
@@ -104,6 +111,8 @@ content/en/continuous_testing/cicd_integrations/configuration.md
 content/en/continuous_testing/cicd_integrations/github_actions.md
 content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
+content/en/continuous_testing/cicd_integrations/bitrise_upload.md
+content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
 # Code Analysis
 content/en/code_analysis/static_analysis/github_actions.md
@@ -220,6 +229,7 @@ Makefile.config
 # data
 data/permissions.json
 data/agent_config.json
+data/workflow_bundles.json
 
 agent_config_types_list.txt
 
@@ -228,6 +238,7 @@ static/images/integrations_logos/2020w2.pdf
 # Generated resources from Hugo Pipes
 resources/_gen/
 static/jsconfig.json
+assets/jsconfig.json
 
 # Generated from GitHub actions
 .github/preview-links-template.md

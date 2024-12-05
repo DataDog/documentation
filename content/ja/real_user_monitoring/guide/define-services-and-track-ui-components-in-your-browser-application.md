@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
   text: RUM ブラウザモニタリング
-kind: ガイド
 title: ブラウザアプリケーションでサービスを定義し、UI コンポーネントを追跡する
 ---
 
@@ -27,7 +26,7 @@ RUM は、ブラウザアプリケーションのすべてのイベントをキ�
 - ビューには、`https://www.yourwebsite.com/about` のような `@view.url` で利用可能な **URL** があります。
 - ビューには、`/about` のような `@view.url_path` で利用可能な**パス**があります。
 
-例えば、ルート変更で自動的にページビューをキャプチャしても十分な視認性が得られない場合、ページに別の名前を指定することができます。これを行うには、[手動でビューを追跡][3]し、「会社概要」のような `@view.name` で利用できる名前をそれぞれ割り当てます。
+If, for example, automatically capturing pageviews by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them each a name available at `@view.name`, such as "About Us".
 
 ## ページのレンダリングライフサイクルにおけるタイミングの追跡
 
@@ -100,7 +99,7 @@ RUM の `service` 属性を使用して、指定されたチームのスコー�
 1. RUM アプリケーションの概要ページから、すべてのグラフを `service` で絞り込み、チームのスコープを全体的に把握することができます。
 2. RUM エクスプローラーで行うすべてのクエリは、`service` 属性を使用して以下をフィルタリングすることができます。
    - サービス別エラー数 
-   - サービス別ページビュー 
+   - Pageviews by service
 
 {{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Shopist の Cart ページでユーザー名でグループ分けされたアクションを検索するクエリ" style="width:90%;">}}
 
@@ -113,17 +112,17 @@ RUM の `service` 属性を使用して、指定されたチームのスコー�
 1. カスタムアクションの定義内にチーム属性を追加します。
 2. カスタムアクションの属性として、コンポーネントのライフサイクルにおけるロード時間やその他のタイミングを追跡します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/explorer/
-[2]: /ja/real_user_monitoring/browser/#setup
-[3]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[2]: /ja/real_user_monitoring/browser/setup
+[3]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [5]: /ja/real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
 [6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#overview
 [7]: /ja/real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[8]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[8]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [9]: /ja/real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages

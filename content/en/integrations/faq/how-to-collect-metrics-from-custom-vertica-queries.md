@@ -1,6 +1,6 @@
 ---
 title: How to collect metrics from custom Vertica queries
-kind: faq
+
 ---
 
 You can configure your Vertica integration to collect metrics from custom queries of your Vertica database by following the configuration syntax [in these lines][1] of the Datadog Vertica integration's `conf.yaml.example` file. While you do this, there are a few things you want to keep in mind.

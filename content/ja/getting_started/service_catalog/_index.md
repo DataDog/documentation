@@ -1,21 +1,20 @@
 ---
 further_reading:
-- link: profiler/profile_types/
+- link: /service_catalog/
   tag: ドキュメント
-  text: NodeJS
+  text: サービスカタログ
 - link: https://learn.datadoghq.com/courses/managing-service-catalog
-  tag: ガイド
+  tag: ラーニングセンター
   text: サービスカタログによるサービスの管理
 - link: https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/
   tag: ブログ
   text: Datadog サービスカタログでマイクロサービスガバナンスを簡素化する
 - link: /service_catalog/troubleshooting
   tag: ドキュメント
-  text: ヘルプ
+  text: トラブルシューティング
 - link: /service_catalog/scorecards
   tag: ドキュメント
-  text: チームを作成する
-kind: ドキュメント
+  text: サービススコアカード
 title: サービスカタログの概要
 ---
 

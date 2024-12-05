@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/guide/correlate-logs-with-metrics
   tag: 설명서
   text: 로그와 인프라스트럭처 메트릭 연결하기
-kind: 설명서
 title: 로그 사이드패널
 ---
 

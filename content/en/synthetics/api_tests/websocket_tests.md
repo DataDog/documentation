@@ -1,6 +1,5 @@
 ---
 title: WebSocket Testing
-kind: documentation
 description: Simulate WebSocket requests to monitor public and internal API endpoints
 aliases:
 further_reading:
@@ -63,6 +62,10 @@ After choosing to create an `WebSocket` test, define your test's request.
 {{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 

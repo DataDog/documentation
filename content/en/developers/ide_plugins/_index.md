@@ -1,6 +1,5 @@
 ---
 title: Datadog IDE Plugins
-kind: Documentation
 description: Learn how to set up Datadog IDE plugins.
 disable_toc: false
 aliases:

@@ -26,7 +26,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: 자바(Java) 로그 수집
 ---
 

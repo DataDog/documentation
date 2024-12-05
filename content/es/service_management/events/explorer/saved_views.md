@@ -3,7 +3,6 @@ further_reading:
 - link: /service_management/events/explorer/
   tag: Documentación
   text: Más información sobre Events Explorer
-kind: Documentación
 title: Vistas guardadas
 ---
 

@@ -20,7 +20,6 @@ further_reading:
 - link: /agent/kubernetes/tag
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
 title: Kubernetes Control Plane モニタリング
 ---
 
@@ -51,49 +50,9 @@ API サーバーインテグレーションは自動的に構成されます。D
 ホストにある Etcd 証明書への読み取りアクセスを提供することにより、Datadog Agent チェックは Etcd と通信し、Etcd メトリクスの収集を開始できます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-  ignoreAutoConfig:
-  - etcd
-  confd:
-    etcd.yaml: |-
-      ad_identifiers:
-        - etcd
-      instances:
-        - prometheus_url: https://%%host%%:2379/metrics
-          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
-          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
-          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-agents:
-  volumes:
-    - hostPath:
-        path: /etc/kubernetes/pki/etcd
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/kubernetes/pki/etcd
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/master
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -149,27 +108,12 @@ data:
         tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
         tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
         tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{< /tabs >}}
-
-### Controller Manager と Scheduler
-
-#### 安全でないポート
-
-Controller Manager インスタンスと Scheduler インスタンスの安全でないポートが有効になっている場合、Datadog Agent はインテグレーションを検出し、追加のコンフィギュレーションなしでメトリクスの収集を開始します。
-
-#### 安全なポート
-
-安全なポートにより、認証と承認が可能になり、Control Plane コンポーネントを保護できます。Datadog Agent は、安全なポートをターゲットにすることで、Controller Manager と Scheduler のメトリクスを収集できます。
-
-{{< tabs >}}
 {{% tab "Helm" %}}
 
-カスタム `values.yaml`:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -178,8 +122,6 @@ datadog:
     tlsVerify: false
   ignoreAutoConfig:
   - etcd
-  - kube_scheduler
-  - kube_controller_manager
   confd:
     etcd.yaml: |-
       ad_identifiers:
@@ -189,20 +131,6 @@ datadog:
           tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
           tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
           tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-    kube_scheduler.yaml: |-
-      ad_identifiers:
-        - kube-scheduler
-      instances:
-        - prometheus_url: https://%%host%%:10259/metrics
-          ssl_verify: false
-          bearer_token_auth: true
-    kube_controller_manager.yaml: |-
-      ad_identifiers:
-        - kube-controller-manager
-      instances:
-        - prometheus_url: https://%%host%%:10257/metrics
-          ssl_verify: false
-          bearer_token_auth: true
 agents:
   volumes:
     - hostPath:
@@ -216,14 +144,26 @@ agents:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
     operator: Exists
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+{{< /tabs >}}
 
-```yaml
+### Controller Manager と Scheduler
+
+#### 安全でないポート
+
+Controller Manager インスタンスと Scheduler インスタンスの安全でないポートが有効になっている場合、Datadog Agent はインテグレーションを検出し、追加のコンフィギュレーションなしでメトリクスの収集を開始します。
+
+#### 安全なポート
+
+安全なポートにより、認証と承認が可能になり、Control Plane コンポーネントを保護できます。Datadog Agent は、安全なポートをターゲットにすることで、Controller Manager と Scheduler のメトリクスを収集できます。
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -301,9 +241,62 @@ data:
       - prometheus_url: https://%%host%%:10257/metrics
         ssl_verify: false
         bearer_token_auth: true
-```
+{{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+  ignoreAutoConfig:
+    - etcd
+    - kube_scheduler
+    - kube_controller_manager
+  confd:
+    etcd.yaml: |-
+      ad_identifiers:
+        - etcd
+      instances:
+        - prometheus_url: https://%%host%%:2379/metrics
+          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
+          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
+    kube_scheduler.yaml: |-
+      ad_identifiers:
+        - kube-scheduler
+      instances:
+        - prometheus_url: https://%%host%%:10259/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_controller_manager.yaml: |-
+      ad_identifiers:
+        - kube-controller-manager
+      instances:
+        - prometheus_url: https://%%host%%:10257/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+agents:
+  volumes:
+    - hostPath:
+        path: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/kubernetes/pki/etcd
+      readOnly: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 **注:**
@@ -382,29 +375,9 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-...
-clusterChecksRunner:
-  volumes:
-    - name: etcd-certs
-      secret:
-        secretName: kube-etcd-client-certs
-    - name: disable-etcd-autoconf
-      emptyDir: {}
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/etcd
-      readOnly: true
-    - name: disable-etcd-autoconf
-      mountPath: /etc/datadog-agent/conf.d/etcd.d
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -426,9 +399,30 @@ spec:
             secretName: kube-etcd-client-certs
         - name: disable-etcd-autoconf
           emptyDir: {}
-```
+{{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - name: etcd-certs
+      secret:
+        secretName: kube-etcd-client-certs
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -516,29 +510,9 @@ Etcd サービスと通信するには証明書が必要で、これはホスト
 **注**: またマウントは、Agent にパッケージ化されている Etcd チェックの自動コンフィギュレーションファイルを無効化するために含まれています。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-...
-clusterChecksRunner:
-  volumes:
-    - hostPath:
-        path: /etc/etcd
-      name: etcd-certs
-    - name: disable-etcd-autoconf
-      emptyDir: {}
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/etcd
-      readOnly: true
-    - name: disable-etcd-autoconf
-      mountPath: /etc/datadog-agent/conf.d/etcd.d
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -560,7 +534,27 @@ spec:
             path: /etc/etcd
         - name: disable-etcd-autoconf
           emptyDir: {}
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - hostPath:
+        path: /etc/etcd
+      name: etcd-certs
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -631,7 +625,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Kubernetes サービスを追加し自動ディスカバリーチェックを構成します
+### Add Kubernetes services to configure Autodiscovery checks
 
 ヘッドレス Kubernetes サービスを追加してチェックのコンフィギュレーションを定義することで、Datadog Agent は `pushprox` ポッドをターゲットとしてメトリクスを収集できます。
 
@@ -711,41 +705,9 @@ spec:
 以下のコンフィギュレーションに基づき、マニフェストで Datadog Agent をデプロイします。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-agents:
-  volumes:
-    - hostPath:
-        path: /opt/rke/etc/kubernetes/ssl
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/opt/rke/etc/kubernetes/ssl
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -780,7 +742,35 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -831,41 +821,9 @@ Etcd は Kubernetes 外の Docker で実行され、Etcd サービスとの通�
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-agents:
-  volumes:
-    - hostPath:
-        path: /opt/rke/etc/kubernetes/ssl
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/opt/rke/etc/kubernetes/ssl
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -900,7 +858,35 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -26,6 +26,8 @@ author:
 categories:
 - クラウド
 - OS & システム
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md
 display_on_public_website: true
@@ -33,9 +35,8 @@ draft: false
 git_integration_title: hyperv
 integration_id: hyper-v
 integration_title: HyperV
-integration_version: 1.11.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: hyperv
 public_title: HyperV
@@ -47,11 +48,16 @@ tile:
   classifier_tags:
   - Category::Cloud
   - Category::OS & System
+  - カテゴリー::Windows
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Microsoft の Hyper-V 仮想化テクノロジーを監視
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
   support: README.md#Support
   title: HyperV
 ---
@@ -63,13 +69,13 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Hyper-V][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Hyper-V チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Hyper-V のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hyperv.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hyperv.d/conf.yaml][3] を参照してください。
 
@@ -81,23 +87,23 @@ Hyper-V チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `hyperv` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hyperv" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Hyper-V には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Hyper-V には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

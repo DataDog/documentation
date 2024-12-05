@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/configuration/proxy/#environment-variables
   tag: 설명서
   text: 프록시 환경 변수
-kind: 가이드
 title: Agent  환경 변수
 ---
 

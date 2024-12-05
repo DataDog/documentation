@@ -1,6 +1,5 @@
 ---
 title: Connect your AWS Account to Cloudcraft
-kind: documentation
 ---
 
 Connecting your AWS accounts to Cloudcraft allows you to visualize your infrastructure by reverse-engineering the live environment's service relationships into a system architecture diagram. In addition to automatically generating diagrams, a budget model will also be created, and your imported components will display live status data directly in your diagrams. There is no limit on the number of AWS accounts you can connect to Cloudcraft.
@@ -8,6 +7,8 @@ Connecting your AWS accounts to Cloudcraft allows you to visualize your infrastr
 **Note**: For AWS organizations, you must manually add the Cloudcraft role to each individual account in the organization.
 
 This article walks you through connecting your AWS account to Cloudcraft.
+
+<div class="alert alert-info">Datadog users can bypass this process by connecting their Datadog account to Cloudcraft. For more information, see <a href="https://docs.datadoghq.com/cloudcraft/getting-started/datadog-integration/" title="Datadog Integration">Datadog Integration</a>.</div>
 
 ## Requirements
 

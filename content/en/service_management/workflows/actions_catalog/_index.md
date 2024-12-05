@@ -1,6 +1,5 @@
 ---
 title: Actions Catalog
-kind: documentation
 type: actioncatalog
 disable_toc: true
 disable_sidebar: false

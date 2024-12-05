@@ -1,6 +1,5 @@
 ---
 title: Configuring the C++ Tracing Library
-kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
@@ -11,7 +10,7 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "/tracing/trace_collection/trace_context_propagation/cpp/"
+- link: "/tracing/trace_collection/trace_context_propagation/"
   tag: "Documentation"
   text: "Propagating trace context"
 ---
@@ -22,6 +21,8 @@ It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, 
 
 ## Environment variables
 To configure the tracer using environment variables, set the variables before launching the instrumented application.
+
+### Unified service tagging
 
 `DD_SERVICE`
 : **Since**: v0.1.0 <br>
@@ -37,15 +38,13 @@ Adds the `env` tag with the specified value to all generated spans.
 **Example**: `1.2.3`, `6c44da20`, `2020.02.13` <br>
 Sets the version of the service.
 
-`DD_TAGS`
-: **Since**: v0.1.0 <br>
-**Example**: `team:intake,layer:api,foo:bar` <br>
-A comma separated list of `key:value` pairs to be added to all generated spans.
+### Traces
 
-`DD_AGENT_HOST`
-: **Since**: v0.1.0 <br>
-**Default**: `localhost` <br>
-Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set.
+`DD_TRACE_ENABLED`
+: **Since**: 0.1.0 <br>
+**Default**: `true` <br>
+Submit or not traces to the Datadog Agent. <br>
+When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.
 
 `DD_TRACE_AGENT_PORT`
 : **Since**: v0.1.0 <br>
@@ -69,7 +68,8 @@ Maximum number of traces allowed to be submitted per second.
 `DD_TRACE_SAMPLE_RATE`
 : **Since**: 0.1.0 <br>
 **Default**: The Datadog Agent default rate or `1.0`. <br>
-Sets the sampling rate for all generated traces. The value must be between `0.0` and `1.0` (inclusive). By default, the sampling rate is delegated to the Datadog Agent. If no sampling rate is set by the Datadog Agent, then the default is `1.0`.
+Sets the sampling rate for all generated traces. The value must be between `0.0` and `1.0` (inclusive). By default, the sampling rate is delegated to the Datadog Agent. If no sampling rate is set by the Datadog Agent, then the default is `1.0`. <br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Since**: v0.1.0 <br>
@@ -89,31 +89,6 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 : **Since**: 0.1.0 <br>
 Points to a JSON file that contains the span sampling rules. See `DD_SPAN_SAMPLING_RULES` for the rule format.
 
-`DD_PROPAGATION_STYLE`
-: **Since**: 0.1.0 <br>
-Comma separated list of propagation styles to use when extracting and injecting tracing context. <br>
-When multiple values are given, the order of matching is based on the order of values.
-
-`DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Since**: v0.1.6 <br>
-**Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
-Comma separated list of propagation styles to use when injecting tracing context.
-When multiple values are given, the order of matching is based on the order of values.
-
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Since**: v0.1.6 <br>
-**Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
-Comma separated list of propagation styles to use when extracting tracing context.
-When multiple values are given, the order of matching is based on the order of values.
-
-`DD_TRACE_ENABLED`
-: **Since**: 0.1.0 <br>
-**Default**: `true` <br>
-Submit or not traces to the Datadog Agent. <br>
-When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.
-
 `DD_TRACE_REPORT_HOSTNAME`
 : **Since**: 0.1.0 <br>
 **Default**: `false` <br>
@@ -129,11 +104,6 @@ Log the tracer configuration once the tracer is fully initialized. <br>
 **Default**: `true` <br>
 If `true`, the tracer will generate 128-bit trace IDs. <br>
 If `false`, the tracer will generate legacy 64-bit trace IDs.
-
-`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **Since**: 0.1.12 <br>
-**Default**: `true` <br>
-Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, telemetry data are not collected.
 
 `DD_REMOTE_CONFIGURATION_ENABLED`
 : **Since**: 0.2.0 <br>
@@ -152,6 +122,43 @@ Sets how often, in seconds, the Datadog Agent is queried for Remote Configuratio
 **Default**: `false` <br>
 If `true`, delegate trace sampling decision to a child service and prefer the resulting decision over its own, if appropriate.
 
+### Agent
+
+`DD_TAGS`
+: **Since**: v0.1.0 <br>
+**Example**: `team:intake,layer:api,foo:bar` <br>
+A comma separated list of `key:value` pairs to be added to all generated spans.
+
+`DD_AGENT_HOST`
+: **Since**: v0.1.0 <br>
+**Default**: `localhost` <br>
+Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **Since**: 0.1.12 <br>
+**Default**: `true` <br>
+Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, telemetry data are not collected.
+
+### Trace context propagation
+
+`DD_PROPAGATION_STYLE`
+: **Since**: 0.1.0 <br>
+Comma separated list of propagation styles to use when extracting and injecting tracing context. <br>
+When multiple values are given, the order of matching is based on the order of values.
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Since**: v0.1.6 <br>
+**Default**: `datadog,tracecontext` <br>
+**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
+Comma separated list of propagation styles to use when injecting tracing context.
+When multiple values are given, the order of matching is based on the order of values.
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Since**: v0.1.6 <br>
+**Default**: `datadog,tracecontext` <br>
+**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
+Comma separated list of propagation styles to use when extracting tracing context.
+When multiple values are given, the order of matching is based on the order of values.
 
 ## Further Reading
 

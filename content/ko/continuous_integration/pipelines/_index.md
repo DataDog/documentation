@@ -15,7 +15,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: 설명서
   text: CI Visibility 문제 해결
-kind: 설명서
 title: Datadog의 Pipeline Visibility
 ---
 

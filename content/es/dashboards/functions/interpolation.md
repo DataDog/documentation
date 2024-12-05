@@ -8,7 +8,6 @@ further_reading:
 - link: /metrics/guide/interpolation-the-fill-modifier-explained/
   tag: Documentación
   text: La interpolación y el modificador de relleno
-kind: documentación
 title: Interpolación
 ---
 

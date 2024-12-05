@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/consul/
   tag: Documentation
   text: En savoir plus sur l'intégration Consul
-kind: guide
+
 title: Surveillance de HCP Consul avec Datadog
 ---
 

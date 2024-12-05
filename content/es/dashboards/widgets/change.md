@@ -15,9 +15,8 @@ further_reading:
 - link: /dashboards/graphing_json/request_json/
   tag: Documentación
   text: Solicitar un esquema JSON
-kind: documentación
 title: Widget de cambio
-widget_type: cambio
+widget_type: change
 ---
 
 La gráfica de cambio muestra el cambio en un métrica durante un período de tiempo. Compara el cambio de valor absoluto o relativo (%) entre el momento actual y N minutos antes con un umbral determinado. Los puntos de datos comparados no son puntos individuales, sino que se calculan mediante los parámetros de la sección de definición de la métrica. Para obtener más información, consulta la documentación de [Monitor de métricas][6] y la [guía de Monitores de alertas de cambio][7].

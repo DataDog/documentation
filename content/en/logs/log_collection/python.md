@@ -1,6 +1,5 @@
 ---
 title: Python Log Collection
-kind: documentation
 aliases:
   - /logs/languages/python
 further_reading:

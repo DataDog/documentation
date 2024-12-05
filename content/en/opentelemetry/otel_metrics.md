@@ -1,8 +1,5 @@
 ---
 title: Send Metrics from OpenTelemetry to Datadog
-kind: documentation
-aliases:
-- /metrics/open_telemetry/
 further_reading:
     - link: '/opentelemetry/'
       tag: 'Documentation'

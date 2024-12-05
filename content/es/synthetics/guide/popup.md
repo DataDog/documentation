@@ -5,13 +5,12 @@ further_reading:
   text: Monitorizar la experiencia de usuario con los tests de navegador de Datadog
 - link: synthetics/browser_tests
   tag: Documentación
-  text: Configurar un test de navegador
-kind: guía
-title: Gestionar las ventanas emergentes en los tests de navegador
+  text: Información sobre los tests de navegador Synthetic
+title: Controlar ventanas emergentes en tests de navegador
 ---
 ## Información general
 
-En este artículo te enseñamos a gestionar las ventanas emergentes, tanto modales como de aplicación, en un test de navegador de Synthetics.
+En esta guía se describe cómo administrar ventanas emergentes como modales o ventanas de aplicaciones en un [test de navegador][5] de Sintético.
 
 ## Modales
 
@@ -19,14 +18,15 @@ En este artículo te enseñamos a gestionar las ventanas emergentes, tanto modal
 
 Los tests de navegador de Synthetics gestionan los [modales JavaScript][1] automáticamente:
 
- - Los modales `alert` se cierran.
- - Los modales `prompt` y `confirm` se responden con `Lorem Ipsum`.
+ - `alert` los modales se descartan inmediatamente para OK. 
+ - `prompt` los modales se llenan con `Lorem Ipsum` para los tests en Google Chrome o Microsoft Edge.
+ - `confirm` se aceptan los modales que piden confirmación.
 
 ### Autenticación básica
 
-Para el caso de las ventanas emergentes de autenticación básica, especifica las credenciales correspondientes en los parámetros de configuración de los tests de navegador que encontrarás en el apartado [**Advanced Options > HTTP Auth**][2] (Opciones avanzadas > Autenticación HTTP):
+Para las ventanas emergentes de autenticación básica, especifica las credenciales asociadas en las [**Opciones avanzadas**][2] de tu configuración de test de navegador.
 
-{{< img src="synthetics/guide/popup/http_auth_option.png" alt="Ventana emergente de autenticación básica">}}
+{{< img src="synthetics/guide/popup/http_authentication.png" alt="Ventana emergente de autenticación básica" style="width:90%" >}}
 
 ## Ventanas emergentes de aplicación
 
@@ -34,11 +34,11 @@ Para el caso de las ventanas emergentes de autenticación básica, especifica la
 
 Si aparecen ventanas emergentes en algún punto de tu recorrido, puedes grabar un paso para cerrarla y contemplar la posibilidad de que este paso no funcione usando la [opción correspondiente][3]. De este modo, el test sabrá cómo comportarse si aparecen ventanas emergentes. Si no aparecen, el paso no funcionará, pero el resto del test se desarrollará correctamente.
 
-{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Incluye la posibilidad de que el paso falle para gestionar las ventanas emergentes" width="90%">}}
+{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Permitir que el paso no controle la ventana emergente" style="width:60%" >}}
 
 ### Ventanas emergentes móviles
 
-Si no se puede prever cuándo aparecerá una ventana así en una sesión, pregunta a quien la proporciona si puede crear una regla que impida que aparezca mientras se ejecuta tu test de navegador. Por ejemplo, una posibilidad es que te facilite una cookie para introducirla en el [apartado de opciones avanzadas pertinente][2] del test.
+Si el momento en que aparecen estas ventanas emergentes en una sesión no es predecible, check con el tercero que provee la ventana emergente para ver si puede crear una regla que impida que la ventana emergente aparezca durante la ejecución de tu test de navegador. Puede, por ejemplo, proveerte una cookie que puedes introducir en la [sección **Opciones avanzadas**][2] de tu test.
 
 Otra alternativa es aplicar uno de estos métodos para que la ventana emergente se cierre y el test siga su camino:
   * Crear una [aserción JavaScript][4] al principio del test de navegador para tratar de cerrar la ventana emergente con regularidad:
@@ -61,7 +61,7 @@ Otra alternativa es aplicar uno de estos métodos para que la ventana emergente 
 
   * Añadir pasos para cerrar la ventana emergente entre todos los demás pasos del test de navegador y seleccionar la [opción **Allow this step to fail**][3] (Este paso puede no funcionar) en cada uno de ellos.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -69,3 +69,4 @@ Otra alternativa es aplicar uno de estos métodos para que la ventana emergente 
 [2]: /es/synthetics/browser_tests/#test-configuration
 [3]: /es/synthetics/browser_tests/advanced_options/#optional-step
 [4]: /es/synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[5]: /es/synthetics/browser_tests

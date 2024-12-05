@@ -31,7 +31,7 @@ integration_id: botprise
 integration_title: Botprise
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: botprise
 public_title: Botprise

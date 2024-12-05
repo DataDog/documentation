@@ -14,7 +14,6 @@ further_reading:
 - link: dashboards/widgets/
   tag: Documentación
   text: Lista de widgets
-kind: Guía
 title: Personalizar visualizaciones con la anulación de unidades
 ---
 

@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
   tag: Blog
   text: DRUIDS, el sistema de diseño que impulsa a Datadog
-kind: documentación
 title: Empezando en Datadog
 ---
 

@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Évaluer des template variables
 ---
 

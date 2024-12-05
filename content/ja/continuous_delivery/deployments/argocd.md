@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: デプロイメント実行をクエリして視覚化する方法
 is_beta: true
-kind: ドキュメント
 title: Argo CD デプロイメントの監視
 ---
 
@@ -17,25 +16,25 @@ title: Argo CD デプロイメントの監視
 {{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
-Argo CD 向けの CD Visibility は現在非公開ベータ版です。アクセスをリクエストするには、フォームに記入してください。
+Argo CD 用の CD Visibility は非公開ベータ版です。アクセスをリクエストするには、フォームに記入してください。
 {{< /callout >}}
 
 ## 概要
 
-[Argo CD][1] は、Kubernetes 向けの宣言型 GitOps 継続的デリバリー (CD) ツールです。Git リポジトリを使って希望するアプリケーションの状態を定義することで GitOps パターンに従い、指定したターゲット環境へのアプリケーションのデプロイメントを自動化します。
+[Argo CD][1] は、Kubernetes のための宣言型 GitOps 継続的デリバリー (CD) ツールです。GitOps パターンに従い、Git リポジトリを使用して望ましいアプリケーションの状態を定義し、指定した対象環境へのアプリケーションのデプロイを自動化します。
 
-Datadog CD Visibility は、[Argo CD Notifications][2] を使用して Argo CD とインテグレーションします。
-Argo CD Notifications は、主に 2 つのコンポーネントで構成されています。
-1. _いつ_通知を送信するかを定義する[トリガー][3]。
-2. 通知で_何_を送るかを定義する[テンプレート][4]。
+Datadog CD Visibility は、[Argo CD Notifications][2] を使用して Argo CD と統合されます。
+Argo CD Notifications は、2 つの主要コンポーネントで構成されています。
+1. [トリガー][3]: 通知をいつ送信するかを定義します。
+2. [テンプレート][4]: 通知で_何を_送信するかを定義します。
 
 ## セットアップ
 
-Webhook を使用した Argo CD 通知のセットアップ方法の詳細については、[公式 Argo CD ガイド][5]を参照してください。
+Webhook を使って Argo CD Notifications をセットアップする方法については、 [Argo CD 公式ガイド][5]を参照してください。
 
-最初のステップは、Datadog インテーク URL と Datadog API キーを含むサービスを作成することです。
-1. [Datadog API キー][11]を `dd-api-key` キーと一緒に `argocd-notifications-secret` シークレットに追加します。`argocd-notifications-secret` の変更については [Argo CD ガイド][2]を参照してください。
-1. 以下のフォーマットで `argocd-notifications-cm` 構成マップにサービスを追加します。
+最初のステップは、Datadog のインテーク URL と Datadog API キーを含むサービスを作成することです。
+1. [Datadog API キー][11]を `dd-api-key` キーとして`argocd-notifications-secret` シークレットに追加します。`argocd-notifications-secret` の変更については、[Argo CD ガイド][2]を参照してください。
+1. `argocd-notifications-cm` 構成マップに通知サービスを以下の形式で追加します。
 
 ```yaml
 apiVersion: v1
@@ -54,9 +53,9 @@ data:
       value: "application/json"
 ```
 
-`cd-visibility-webhook` はサービス名で、`$dd-api-key` は `argocd-notifications-secret` シークレットに格納されている API キーへのリファレンスです。
+`cd-visibility-webhook` は通知サービスの名前で、`$dd-api-key` は`argocd-notifications-secret` シークレットに格納された API キーを参照します。
 
-2 つ目のステップは、同じ `argocd-notifications-cm` 構成マップにテンプレートを追加することです。
+2 番目のステップとして、同じ `argocd-notifications-cm` 構成マップにテンプレートを追加します。
 
 ```yaml
 apiVersion: v1
@@ -79,13 +78,13 @@ data:
 ```
 
 <div class="alert alert-warning">
-<code>commit_metadata</code> フィールドを入力するための呼び出しは必須ではありません。このフィールドは、ペイロードを Git の情報でリッチ化するために使われます。
-Argo CD アプリケーションのソースに Helm リポジトリを使用している場合、この行を削除し、前の行のカンマも削除して本文を調整してください。
+<code>commit_metadata</code> フィールドを入力するための呼び出しは必須ではありません。このフィールドは、ペイロードを Git の情報でリッチ化するために使用します。
+Helm リポジトリを Argo CD アプリケーションのソースとして使用している場合は、この行と前の行のカンマを削除して本文を調整してください。
 </div>
 
-`cd-visibility-template` はテンプレート名で、`cd-visibility-webhook`は上記で作成したサービスへのリファレンスです。
+`cd-visibility-template` はテンプレート名で、`cd-visibility-webhook` は上記で作成したサービスを参照します。
 
-3 番目のステップは、再び同じ `argocd-notifications-cm` 構成マップにトリガーを追加することです。
+3 番目のステップとして、同じ `argocd-notifications-cm` 構成マップにトリガーを追加します。
 
 ```yaml
 apiVersion: v1
@@ -98,9 +97,9 @@ data:
       send: [cd-visibility-template]
 ```
 
-`cd-visibility-template` はトリガー名で、`cd-visibility-trigger`は上記で作成したテンプレートへのリファレンスです。
+`cd-visibility-trigger` はトリガー名で、`cd-visibility-template` は上記で作成したテンプレートを参照します。
 
-サービス、トリガー、およびテンプレートが構成マップに追加されたら、インテグレーションに Argo CD アプリケーションをサブスクライブできます。
+通知サービス、トリガー、およびテンプレートが構成マップに追加されたら、インテグレーションに Argo CD アプリケーションをサブスクライブできます。
 Argo CD UI を使用するか、以下のアノテーションでアプリケーション定義を変更することで、Argo CD アプリケーションのアノテーションを変更します。
 
 ```yaml
@@ -116,17 +115,17 @@ metadata:
 アノテーションは 3 つあります。
 1. notifications アノテーションは、上記で作成した通知セットアップに Argo CD アプリケーションをサブスクライブします。
 2. `dd_env` アノテーションはアプリケーションの環境を構成します。上記の `YOUR_ENV` を、
-   このアプリケーションがデプロイする環境 (例: `staging` または `prod`) に置き換えてください。このアノテーションを設定しないと、
-   デフォルトの環境は `none` になります。
+   このアプリケーションがデプロイされている環境 (例: `staging` または`prod`) で置き換えます。このアノテーションを設定しない場合、
+   環境はデフォルトで `none` になります。
 3. `dd_service` アノテーションはアプリケーションのサービスを構成します。上記の `YOUR_SERVICE` を、
    Argo CD アプリケーションがデプロイしているサービス (例えば `transaction-service`) に置き換えます。このアノテーションを使用すると、
    アプリケーションから生成されるすべてのデプロイメント実行にサービス名が追加されます。さらに、サービスが
    [サービスカタログ][13]に登録されている場合、チーム名もすべてのデプロイメント実行に追加されます。Argo CD アプリケーションが
-   複数のサービスをデプロイするように構成されている場合は、このアノテーションを省略します。
+   複数のサービスをデプロイするように構成されている場合は、[複数のサービスをデプロイする Argo CD アプリケーションのタグ付け](#tag-an-argo-cd-application-deploying-multiple-services)を参照してください。
 
-アプリケーションサブスクリプションの詳細については、[公式 Argo CD ガイド][12]を参照してください。
+アプリケーションのサブスクリプションの詳細については、[Argo CD 公式ガイド][12]を参照してください。
 
-この最終ステップが完了したら、Datadog で Argo CD デプロイメントの監視を開始できます。
+この最終ステップが完了したら、Datadog で Argo CD デプロイのモニタリングを開始できます。
 
 ## デプロイメント実行にカスタムタグを追加する
 
@@ -143,15 +142,41 @@ metadata:
     dd_customtags: "region:us1-east, team:backend"
 ```
 
-## Datadog でデプロイメントを視覚化する
+## 複数のサービスをデプロイする Argo CD アプリケーションのタグ付け
 
-[**Deployments**][6] と [**Deployment Executions**][7] ページには、デプロイメントが実行された後にデータが入力されます。詳細については、[検索と管理][9]と [CD Visibility Explorer][10] を参照してください。
+Argo CD アプリケーションが複数のサービスをデプロイする場合、Datadog はアプリケーションの同期からデプロイされたサービスを自動的に推測することができます。Datadog は、変更された Kubernetes リソースに基づいてサービスを推測します。
 
-## ヘルプ
+サービスの自動タグ付けを有効にするには、[Datadog Agent を使ってKubernetes インフラストラクチャーを監視][14]する必要があります。また、Kubernetes リソースには次のラベルが必要です。
+- `tags.datadoghq.com/service` (必須): このリソースの Datadog サービスを指定します。詳しくは、[統合サービスタグ付け][16]を参照してください。
+- `team` (任意): このリソースの Datadog チームを指定します。このラベルが省略された場合、チームはサービスラベルに基づいて[サービスカタログ][13]から自動的に取得されます。
 
-通知が送信されない場合は、`argocd-notification-controller` ポッドのログを調べてください。コントローラーは通知を送信しているとき (例: `Sending notification ...`) と、受信者への通知に失敗したとき (例: `Failed to notify recipient ...`) にログを記録します。その他のトラブルシューティングシナリオについては、[公式 Argo CD ドキュメント][8] を参照してください。
+次の種類の Kubernetes リソースのみが対象となります: `Deployment`、`ReplicaSet`、`StatefulSet`、`Service`、`DaemonSet`、`Pod`、`Job`、`CronJob`。
 
-## その他の参考資料
+Argo CD アプリケーションに以下のアノテーションを追加します。
+- `dd_multiservice`: `true`。このアノテーションは、Datadog が、変更された Kubernetes リソースに基づいて、同期でデプロイされたサービスを自動的に推測するかどうかを指定します。
+- `dd_k8s_cluster`: Argo CD アプリケーションがデプロイする Kubernetes クラスターの名前を設定します。この名前は [Datadog Kubernetes 製品][15]で報告されている名前と一致する必要があります。
+
+例:
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+    dd_multiservice: true
+    dd_k8s_cluster: example-cluster
+```
+
+## Datadog でデプロイを視覚化する
+
+デプロイが実行されると、[**Deployments**][6] と [**Executions**][7] のページにデータが入力されます。詳細については、[検索と管理][9]および [CD Visibility Explorer][10] を参照してください。
+
+## トラブルシューティング
+
+通知が送信されない場合、`argocd-notification-controller` ポッドのログを調べます。コントローラーは、通知 (例: `Sending notification ...`) の送信時と、受信者への通知に失敗した際 (例: `Failed to notify recipient ...`) に、ログに書き込みます。その他のトラブルシューティングのシナリオについては、[Argo CD の公式ドキュメント][8]を参照してください。
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -168,3 +193,6 @@ metadata:
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /ja/tracing/service_catalog
+[14]: /ja/containers/kubernetes
+[15]: https://app.datadoghq.com/orchestration/explorer
+[16]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1

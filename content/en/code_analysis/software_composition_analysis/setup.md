@@ -1,8 +1,7 @@
 ---
 title: Setting Up Software Composition Analysis
-kind: documentation
 description: Learn how to set up Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
@@ -19,7 +18,13 @@ further_reading:
 - link: "/code_analysis/static_analysis/"
   tag: "Documentation"
   text: "Learn about Static Analysis"
+algolia:
+  tags: ['software composition analysis', 'software composition analysis rules', 'library vulnerabilities', 'SCA']
 ---
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
@@ -27,28 +32,35 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
-
 ## Overview
 
-To use Datadog Software Composition Analysis (SCA) in CI, you only need to set it up in its own dedicated job. 
+To set up Datadog Software Composition Analysis, navigate to [**Software Delivery** > **Code Analysis**][6].
 
-## Enable Software Composition Analysis
+## Select where to run Software Composition Analysis scans
+### Scan with Datadog-hosted scanning
+SCA scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][6].
 
-Navigate to **Software Delivery** > **Code Analysis** and click **+ Add a Repository**. When setting up [Code Analysis][2] on your project, select **Enable Software Composition Analysis**.
+### Scan in CI pipelines
+SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run SCA jobs in the respective CI provider.
 
-{{< img src="code_analysis/software_composition_analysis/enable_sca.png" alt="Click the Enable Software Composition Analysis checkbox on the Code Analysis setup page when setting up Code Analysis for your project" style="width:100%;" >}}
-
-## Configure your CI/CD provider
-
-Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][5] and checks that imported libraries are secure. Configure your [Datadog API and application keys][3] and run Software Composition Analysis jobs in the respective CI provider.
-
-{{< whatsnext desc="See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="See the documentation for your CI provider:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Select your source code management provider
+Datadog SCA supports all source code management providers, with native support for GitHub.
+### Set up the GitHub integration 
+If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see inline code snippets and enable [pull request comments][11].
+
+When installing a GitHub App, the following permissions are required to enable certain features:
+
+- `Content: Read`, which allows you to see code snippets displayed in Datadog.
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11].
+
+### Other source code management providers
+If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
 
 ## Further Reading
 
@@ -61,3 +73,7 @@ Datadog Software Composition Analysis runs in your CI pipelines using the [`data
 [5]: https://github.com/DataDog/datadog-ci
 [6]: https://app.datadoghq.com/ci/code-analysis
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[8]: /code_analysis/software_composition_analysis/generic_ci_providers/
+[9]: /integrations/github
+[10]: /integrations/guide/source-code-integration
+[11]: /code_analysis/github_pull_requests/

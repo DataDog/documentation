@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: ドキュメント
   text: モニターの管理
-kind: documentation
 title: チェック内容のサマリー
 ---
 
@@ -31,7 +30,7 @@ Datadog チェックの実行ごとにステータスを報告します。過去
 
 {{< img src="monitors/check_summary/check_search.png" alt="チェック詳細" style="width:100%;">}}
 
-## ダッシュボード  
+## ダッシュボード
 
 ダッシュボードにチェックステータスを表示するには、[チェックステータスウィジェット][2]を使用します。
 

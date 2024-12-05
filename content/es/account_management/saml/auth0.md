@@ -5,7 +5,6 @@ further_reading:
 - link: /account_management/saml/
   tag: Documentación
   text: Configurar SAML para tu cuenta de Datadog
-kind: documentación
 title: Auth0 SAML IdP
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Advanced Options for Mobile App Testing Steps
-kind: documentation
 description: Configure advanced options for Mobile Test Steps
 aliases:
 - /mobile_testing/mobile_app_tests/advanced_options
@@ -19,14 +18,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic Monitoring Data Security"
 ---
-
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
@@ -49,6 +40,10 @@ By default, mobile app tests use the Datadog locator system. When a test searche
 These points of reference become a set of locators, each of which uniquely define the element. You should only use custom selectors in edge cases because the Datadog locator system enables tests to be self-maintaining.
 
 Custom selectors are created by performing a [step in the recorder][1] (such as a **tap**, **double tap**, or **open deep link**) on any element of your page. This specifies the kind of step that needs to be performed.
+
+Optionally, under advanced options, use handlebars (`{{`) syntax to insert dynamic content. A pre-populated dropdown list of variables is shown:
+
+{{< img src="mobile_app_testing/mobile_app_advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
 ## Timeout
 
@@ -73,6 +68,12 @@ You can prevent a step screenshot from being captured at test execution by click
 {{< img src="mobile_app_testing/no_screenshots.png" alt="Do not capture a screenshot for this test step" style="width:50%" >}}
 
 This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
+
+## Exit on success
+
+Configure this option to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure.
+
+{{< img src="mobile_app_testing/exit_on_success.png" alt="Stop the test and mark it as passed" style="width:50%" >}}
 
 ## Subtests
 

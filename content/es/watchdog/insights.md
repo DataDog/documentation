@@ -15,7 +15,6 @@ further_reading:
   tag: Blog
   text: Detectar automáticamente patrones de error y latencia con Watchdog Insights
     para APM
-kind: documentación
 title: Watchdog Insights
 ---
 

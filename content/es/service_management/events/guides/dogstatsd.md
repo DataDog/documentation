@@ -11,7 +11,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentación
   text: API oficial y creada por la comunidad y bibliotecas de clientes de DogStatsD
-kind: guía
 title: Eventos con DogStatsD
 ---
 

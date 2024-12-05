@@ -1,6 +1,5 @@
 ---
 title: "Components: Common"
-kind: guide
 ---
 
 {{< whatsnext desc="Common:" >}}

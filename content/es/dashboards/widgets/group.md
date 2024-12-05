@@ -6,9 +6,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget de grupo
-widget_type: grupo
+widget_type: group
 ---
 
 ## Información general

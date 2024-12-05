@@ -1,6 +1,5 @@
 ---
 title: Tracing Java Applications
-kind: documentation
 aliases:
     - /tracing/java
     - /tracing/languages/java
@@ -73,10 +72,10 @@ To begin tracing your applications:
 | Environment Variable      | System Property                     | Description|
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continuous Profiler][5] |
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br> Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
 | `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, or `1.3-alpha`) |
 
@@ -117,27 +116,12 @@ To enable tracing when running Tomcat on Linux:
 
 To enable tracing when running Tomcat as a Windows service:
 
-1. Open a Command Prompt.
-1. Run the following command to update your Tomcat service configuration:
-    ```shell
-    tomcat8 //US//<SERVICE_NAME> --Environment="CATALINA_OPTS=%CATALINA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar\""
-    ```
-   Replace `<SERVICE_NAME>` with the name of your Tomcat service and replace the path to `dd-java-agent.jar`.
-1. Restart your Tomcat service for changes to take effect.
-
-#### Windows (Tomcat with environment setup script)
-
-To enable tracing when running Tomcat with an environment setup script:
-
-1. Create `setenv.bat` in the `./bin` directory of the Tomcat project folder, if it doesn't already exist.
-1. Add the following to `setenv.bat`:
-   ```text
-   set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
-   ```
-If the previous step doesn't work, try adding the following instead:
+1. Open the "tomcat@VERSION_MAJOR@w.exe" maintenance utility located in the `./bin` directory of the Tomcat project folder.
+2. Navigate to the **Java** tab, and add the following to `Java Options`:
 ```text
-set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+-javaagent:C:\path\to\dd-java-agent.jar
 ```
+3. Restart your Tomcat services for changes to take effect.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}

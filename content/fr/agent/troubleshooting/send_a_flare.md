@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: Dépannage de l'Agent
   text: Obtenir le statut d'un check de l'Agent
-kind: documentation
 title: Commande flare de l'Agent
 ---
 

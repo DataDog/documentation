@@ -1,6 +1,6 @@
 ---
 title: Mapping Prometheus Metrics to Datadog Metrics
-kind: guide
+
 aliases:
   - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:

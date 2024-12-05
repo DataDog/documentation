@@ -11,7 +11,6 @@ further_reading:
   tag: Blog
   text: Controla y gestiona de forma centralizada y remota Datadog Agents a escala
     con la automatización de flotas
-kind: documentación
 title: Automatización de flotas
 ---
 
@@ -61,7 +60,7 @@ Antes de enviar un flare, asegúrate de que la configuración remota está [habi
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
 
 ## Control de acceso a la automatización de flotas
 
@@ -76,7 +75,7 @@ Para obtener información sobre la configuración de funciones y permisos, consu
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /es/agent/configuration/agent-configuration-files/

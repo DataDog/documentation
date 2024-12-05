@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10100
     source_type_name: Ignite
-  logs:
-    source: ignite
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,6 +28,7 @@ categories:
 - data stores
 - ログの収集
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_on_public_website: true
@@ -37,9 +36,8 @@ draft: false
 git_integration_title: ignite
 integration_id: ignite
 integration_title: ignite
-integration_version: 2.4.0
+integration_version: 3.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ignite
 public_title: ignite
@@ -58,6 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Ignite サーバーからメトリクスを収集します。
   media: []
@@ -73,13 +72,13 @@ tile:
 
 このチェックは [Ignite][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Ignite チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### Ignite のセットアップ
 
@@ -90,7 +89,7 @@ JMX メトリクスエクスポーターはデフォルトで有効になって�
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -103,7 +102,7 @@ JMX メトリクスエクスポーターはデフォルトで有効になって�
 
 2. [Agent を再起動します][5]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -147,7 +146,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Datadog-Ignite インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][2]ガイドを参照してください。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -167,21 +166,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の `status` サブコマンドを実行][4]し、Checks セクションで `ignite` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ignite" >}}
 
 
-### ヘルプ
+### イベント
 
 Ignite インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ignite" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

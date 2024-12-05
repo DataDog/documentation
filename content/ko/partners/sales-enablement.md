@@ -1,6 +1,5 @@
 ---
 description: 새 MSP가 Datadog 영업 엔지니어링 절차를 주도하기 위해 필요한 교육 로드맵
-kind: 설명서
 private: true
 title: 파트너 영업 활성화 가이드
 ---

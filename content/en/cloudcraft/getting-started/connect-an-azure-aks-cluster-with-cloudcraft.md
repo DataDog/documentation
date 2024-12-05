@@ -1,6 +1,5 @@
 ---
 title: Connect an Azure AKS Cluster with Cloudcraft
-kind: documentation
 ---
 
 By scanning your Azure AKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.

@@ -1,11 +1,10 @@
 ---
 title: Delete Data
-kind: documentation
 private: true
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  Deleting data using the UI is in private beta.
+  Deleting data using the UI is in Preview.
 {{< /callout >}} 
 
 This page explains how to delete data from Datadog.
@@ -35,10 +34,11 @@ To grant an account access to delete data, perform the following steps:
 To delete data, perform the following steps:
 
 1. Under Organization Settings, go to [Data Deletion][4].
-2. Select a product to delete from.
+2. Select a product to delete from. 
 3. Select a time frame to search across.
-4. After the search shows the results you wish to delete, click the **Delete** button in the bottom right.
-5. You are prompted to confirm the deletion by selecting a checkbox and entering confirmation text. Click **Confirm**.
+4. Query for events within the time frame to delete.
+5. After the search shows the results you wish to delete, click the **Delete** button in the bottom right.
+6. You are prompted to confirm the deletion by selecting a checkbox and entering confirmation text. Click **Confirm**.
 
 The deletion begins 2 hours after you confirm the request.
 

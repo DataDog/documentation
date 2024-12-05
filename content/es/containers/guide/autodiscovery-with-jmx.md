@@ -14,7 +14,6 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentación
   text: Asigna y recopila las etiquetas (tags) de tu aplicación dinámicamente
-kind: guía
 title: Autodiscovery con JMX
 ---
 

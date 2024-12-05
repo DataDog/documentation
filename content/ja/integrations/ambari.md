@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10064
     source_type_name: Ambari
-  logs:
-    source: ambari
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,6 +26,7 @@ author:
 categories:
 - ログの収集
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_on_public_website: true
@@ -35,9 +34,8 @@ draft: false
 git_integration_title: ambari
 integration_id: ambari
 integration_title: Ambari
-integration_version: 4.2.0
+integration_version: 6.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ambari
 public_title: Ambari
@@ -52,6 +50,7 @@ tile:
   - Category::Network
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
   media: []
@@ -67,18 +66,18 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Ambari][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Ambari チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -98,7 +97,7 @@ Ambari チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][2]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -143,7 +142,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                |
 | `<INSTANCE_CONFIG>`  | `{"url": "http://%%host%%"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -162,7 +161,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `ambari` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 このインテグレーションは、以下のシステムメトリクスをすべてのクラスター内のホストごとに収集します。
 
@@ -176,19 +175,19 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 `collect_service_metrics` を使用してサービスメトリクスの収集が有効にされている場合、このインテグレーションは、含まれるサービスコンポーネントごとに、インクルードリスト内のヘッダーを持つメトリクスを収集します。
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ambari" >}}
 
 
-### ヘルプ
+### イベント
 
 Ambari には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ambari" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

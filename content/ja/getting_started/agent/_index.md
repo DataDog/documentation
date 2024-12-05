@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
-kind: documentation
 title: Agent の概要
 ---
 
@@ -34,7 +33,7 @@ Agent が占有するスペースとリソースの量は、構成と Agent が�
 
 これらのベンチマークについて詳しくは、[Agent Overhead][2] を参照してください。
 
-### 収集データ
+### データ収集
 
 #### Agent メトリクス
 
@@ -42,7 +41,7 @@ Agent が占有するスペースとリソースの量は、構成と Agent が�
 
 | メトリクス                           | 説明                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `datadog.agent.python.version` | Agent が Datadog に報告中の場合は、値 `1` が表示されます。メトリクスには `python_version` がタグ付けされています。 |
+| `datadog.agent.python.version` | メトリクスには `python_version` というタグが付いています。 |
 | `datadog.agent.running`        | Agent が Datadog に報告中の場合は、値 `1` が表示されます。                                                 |
 | `datadog.agent.started`        | Agent 起動時に値 `1` で送信されるカウント (v6.12 以上で使用可能)。                                        |
 
@@ -54,12 +53,12 @@ Agent メトリクスの全リストは、[Agent メトリクス][3]のインテ
 
 | チェック       | メトリクス       | プラットフォーム          |
 | ----------- | ------------- | ------------------ |
-| CPU         | [System][4]  | すべて                |
-| ディスク        | [Disk][5]    | すべて                |
-| IO          | [System][4]  | すべて                |
-| メモリ      | [System][4]  | すべて                |
-| ネットワーク     | [Network][6] | すべて                |
-| NTP         | [NTP][7]     | すべて                |
+| CPU         | [System][4]  | All                |
+| ディスク        | [Disk][5]    | All                |
+| IO          | [System][4]  | All                |
+| メモリ      | [System][4]  | All                |
+| ネットワーク     | [Network][6] | All                |
+| NTP         | [NTP][7]     | All                |
 | アップタイム      | [System][4]  | All                |
 | ファイル処理 | [System][4]  | Mac 以外のすべて     |
 | ロード        | [System][4]  | Windows 以外のすべて |
@@ -105,7 +104,7 @@ Datadog UI で [Agent Installation ページ][18]に移動し、**Ubuntu** を�
 Ubuntu の 1 行インストールコマンドの例:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [Agent Installation ページ][18]を使用して、お使いのオペレーティングシステムの最新のインストール手順を参照してください。
@@ -149,11 +148,10 @@ Datadog agent (v. 7.XX.X) started on <Hostname>
 
 Agent は、以下のサービスチェックを行うように設定されています。
 
-  - `datadog.agent.up`:
-    Agent が Datadog に接続した場合、`OK` を返します。
+  - `datadog.agent.up`: Agent が Datadog に接続すると `OK` を返します。
+    <div class="alert alert-warning">AIX Agent は <code>datadog.agent.up</code> サービスチェックを報告しませんが、<code>datadog.agent.running</code> メトリクスを使用して AIX Agent の稼働時間を監視することができます。このメトリクスは、Agent が Datadog に報告している場合、<code>1</code> を出力します。</div>
+  - `datadog.agent.check_status`: Agent チェックが Datadog にメトリクスを送信できない場合は `CRITICAL` を返し、それ以外は `OK` を返します。
 
-  - `datadog.agent.check_status`:
-    Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 これらのチェックは、Datadog プラットフォームで使用することで、モニターやダッシュボードを通じて Agent のステータスを一目で視覚化することができます。詳しくは、[サービスチェックの概要][21]を参照してください。
 

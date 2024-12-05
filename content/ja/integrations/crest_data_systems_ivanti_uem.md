@@ -10,28 +10,31 @@ assets:
     Ivanti UEM (On-Prem) - Device Details: assets/dashboards/crest_data_systems_ivanti_uem_onprem_device_details.json
     Ivanti UEM (On-Prem) - Overview: assets/dashboards/crest_data_systems_ivanti_uem_onprem_overview.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
-      creates_events: false
+      creates_events: true
     metrics:
       check: datadog.marketplace.crest_data_systems.ivanti.uem
       metadata_path: metadata.csv
       prefix: crest_data_systems
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10365
     source_type_name: crest_data_systems_ivanti_uem
 author:
-  homepage: https://www.crestdatasys.com
-  name: Crest Data Systems
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  homepage: https://crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - 自動化
-- event management
+- イベント管理
 - マーケットプレイス
-- モバイル
+- apm
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +43,6 @@ integration_id: crest-data-systems-ivanti-uem
 integration_title: Ivanti UEM
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -94,6 +96,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -104,20 +107,25 @@ Ivanti UEM は、組織内のエンドポイント管理を簡素化および合
 
 このインテグレーションは、Ivanti EPM としても知られる Ivanti UEM (On-Prem) の登録 `Devices` と、Ivanti MDM としても知られる Ivanti UEM (Cloud) の `Devices` と `Users` を監視します。
 
-## サポート
+## Agent
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
--   サポートメール: [datadog.integrations@crestdatasys.com][5]
--   営業メール: [datadog-sales@crestdatasys.com][6]
--   Web サイト: [crestdatasys.com][3]
+-   サポートメール: [datadog.integrations@crestdata.ai][5]
+-   営業メール: [datadog-sales@crestdata.ai][6]
+-   Web サイト: [crestdata.ai][3]
+-   よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][11]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://www.crestdatasys.com/
+[3]: https://www.crestdata.ai/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
-[5]: mailto:datadog.integrations@crestdatasys.com
-[6]: mailto:datadog-sales@crestdatasys.com
+[5]: mailto:datadog.integrations@crestdata.ai
+[6]: mailto:datadog-sales@crestdata.ai
 [7]: https://www.ivanti.com/solutions/unified-endpoint-management
+[8]: https://docs.crestdata.ai/datadog-integrations-readme/Ivanti_UEM.pdf
+[9]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[10]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[11]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-ivanti-uem" target="_blank">こちらをクリック</a>してください。

@@ -8,9 +8,8 @@ further_reading:
   tag: ドキュメント
   text: バックエンドサービスのエラー追跡について
 is_beta: true
-kind: ドキュメント
 private: true
-title: PHP
+title: Manage Data Collection
 ---
 
 ## 概要
@@ -24,7 +23,7 @@ Error Tracking に含まれるデータは以下の 2 つの方法で定義で�
 
 ルールとレート制限は、どちらも [**Logs** > **Error Tracking** > **Settings**][1] ページで構成できます。
 
-## ブラウザテスト
+## ルール
 
 ルールでは、Error Tracking に取り込むエラーを選択できます。
 

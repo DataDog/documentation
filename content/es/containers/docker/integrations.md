@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: Documentación
   text: Asignar etiquetas a todos los datos emitidos por un contenedor
-kind: documentación
 title: Integraciones de Autodiscovery para Docker
 ---
 
@@ -158,7 +157,7 @@ services:
 
 [1]: /es/getting_started/tagging/unified_service_tagging/?tab=docker
 {{% /tab %}}
-{{% tab "File" (Archivo) %}}
+{{% tab "Archivo" %}}
 
 Para almacenar plantillas como archivos locales y montarlos dentro del Agent contenedorizado no hace falta un servicio externo ni una plataforma específica de orquestación. La desventaja es que tienes que reiniciar tu Agent cada vez que cambias, añades o eliminas plantillas. El Agent busca plantillas Autodiscovery en el directorio `/conf.d`montado.
 
@@ -188,7 +187,7 @@ Consulta la documentación [Identificadores de contenedores Autodiscovery][1] pa
 
 [1]: /es/agent/guide/ad_identifiers/
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Autodiscovery puede usar [Consul][1], Etcd, y Zookeeper como fuentes de plantillas de integración. Para usar una base de datos clave-valor, configúrala en el archivo de configuración `datadog.yaml` del Agent y monta el archivo dentro del Agent contenedorizado. Opcionalmente, pasa tu base de datos clave-valor como variable de entorno al Agent contenedorizado.
 
@@ -265,7 +264,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "File" (Archivo) %}}
+{{% tab "Archivo" %}}
 
 Redis es una de las plantillas por defecto de Autodiscovery empaquetada con el Agent, así que no es necesario que montes este archivo. La plantilla de Redis a continuación se empaqueta con el Agent:
 
@@ -308,7 +307,7 @@ instances:
 [2]: /es/agent/guide/ad_identifiers/
 [3]: /es/agent/faq/template_variables/
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Los comandos etcd a continuación crean una plantilla de integración Redis con un parámetro de `password` personalizado:
 
@@ -346,7 +345,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "File" (Archivo) %}}
+{{% tab "Archivo" %}}
 
 * Crea las carpetas `conf.d/` y `conf.d/apache.d` en tu host.
 * Añade la autoconfiguración personalizada a continuación a `conf.d/apache.d/conf.yaml` en tu host.
@@ -387,7 +386,7 @@ instances:
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [2]: /es/agent/guide/ad_identifiers/
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 ```conf
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'

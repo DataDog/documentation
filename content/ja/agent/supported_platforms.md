@@ -4,16 +4,15 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: ドキュメント
   text: Agent の基本的な使い方
-kind: ドキュメント
 title: サポート対象のプラットフォーム
 ---
 
-Datadog Agent は、広く使用されているオペレーティングシステムとプラットフォームでサポートされています。お使いのオペレーティングシステムが以下に記載されていない場合は、[ソースインストール][1]が有効な場合があります。
+Datadog Agent は、広く使われているオペレーティングシステムとプラットフォームでサポートされています。ご利用のオペレーティングシステムが以下のリストに掲載されていない場合、[ソースからのインストール][1]でうまくいく可能性があります。
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-## 64-BIT X86
+## 64 ビット X86
 
 <table>
   <thead>
@@ -144,9 +143,9 @@ Datadog Agent は、広く使用されているオペレーティングシステ
   </tr>
 </table>
 
-チェックマーク ({{< X >}}) は、すべてのマイナーバージョンとパッチバージョンをサポートしていることを示します。
+チェックマーク ({{< X >}}) は、すべてのマイナーバージョンおよびパッチバージョンがサポートされていることを示します。
 
-## 64-BIT ARM V8
+## 64 ビット ARM V8
 
 <table>
   <thead>
@@ -223,7 +222,7 @@ Datadog Agent は、広く使用されているオペレーティングシステ
     <th>注</th>
   </thead>
   <tr>
-    <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
@@ -231,10 +230,17 @@ Datadog Agent は、広く使用されているオペレーティングシステ
     <td>Server 2008 R2 には、<a href="https://github.com/golang/go/issues/24489">クロックドリフトと Go に関する既知の問題</a>があります。</td>
   </tr>
   <tr>
-    <td>2012/R2</td>
+    <td>2012</td>
     <td></td>
     <td><= 6.46.0</td>
     <td><= 7.46.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2012 R2</td>
+    <td></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
     <td></td>
   </tr>
   <tr>
@@ -245,7 +251,7 @@ Datadog Agent は、広く使用されているオペレーティングシステ
     <td></td>
   </tr>
   <tr>
-    <td rowspan=3>Windows</td>
+    <td rowspan=4>Windows</td>
     <td>7</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -260,7 +266,14 @@ Datadog Agent は、広く使用されているオペレーティングシステ
     <td></td>
   </tr>
   <tr>
-    <td>>=10</td>
+    <td>10</td>
+    <td></td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -268,7 +281,7 @@ Datadog Agent は、広く使用されているオペレーティングシステ
   </tr>
 </table>
 
-チェックマーク ({{< X >}}) は、すべてのマイナーバージョンとパッチバージョンをサポートしていることを示します。
+チェックマーク ({{< X >}}) は、すべてのマイナーバージョンおよびパッチバージョンがサポートされていることを示します。
 
 Windows Agent の特定のバージョンをインストールするには、[インストーラーリスト][8]を参照してください。
 
@@ -277,7 +290,7 @@ Windows Agent の特定のバージョンをインストールするには、[�
 {{% /tab %}}
 {{% tab "macOS" %}}
 
-## 64-BIT X86
+## 64 ビット X86
 
 | macOS バージョン | Agent 5 | Agent 6 | Agent 7 |
 |---------------|---------|---------|---------|
@@ -296,7 +309,7 @@ Windows Agent の特定のバージョンをインストールするには、[�
 
 {{% tab "クラウドとコンテナ" %}}
 
-## 64-BIT X86 サポート
+## 64 ビット X86 のサポート
 
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
@@ -305,11 +318,11 @@ Windows Agent の特定のバージョンをインストールするには、[�
 | 7 | >= 1.14 | 1.3 以降 | すべてのバージョン |
 
 
-## 64-BIT ARM V8 サポート
+## 64 ビット ARM V8 のサポート
 
-Agent 6 および 7 は、以下の 64-BIT ARM V8 プラットフォームをサポートしています。
+Agent 6 および 7 は、以下の 64 ビット ARM V8 プラットフォームをサポートしています。
 
-| プラットフォーム    | サポートされるバージョン | 64-BIT ARM V8 サポート | 64-BIT X86 サポート |
+| プラットフォーム    | サポートされるバージョン | 64 ビット ARM V8 のサポート | 64 ビット X86 のサポート |
 |-------------|--------------------|-----------------------|--------------------|
 | [Docker][5] | >= 1.14     | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [Kubernetes][6] | 1.3 以降   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
@@ -334,7 +347,7 @@ Agent 6 および 7 は、以下の [AIX][1] バージョンをサポートし�
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

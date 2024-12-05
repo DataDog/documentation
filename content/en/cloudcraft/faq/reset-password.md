@@ -1,6 +1,5 @@
 ---
 title: How do I reset my password?
-kind: faq
 ---
 
 You can reset your password on the **[Reset your password][1]** page.

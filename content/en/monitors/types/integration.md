@@ -1,6 +1,5 @@
 ---
 title: Integration Monitor
-kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 aliases:
 - /monitors/monitor_types/integration
@@ -12,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -73,7 +72,7 @@ Set up the check alert:
     Choose how many consecutive runs with the `OK` status resolve the alert.
 
 
-[1]: /monitors/manage/status
+[1]: /monitors/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
@@ -106,7 +105,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
-[2]: https://app.datadoghq.com/monitors#create/integration
+[2]: https://app.datadoghq.com/monitors/create/integration
 [3]: /monitors/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /monitors/configuration/#advanced-alert-conditions

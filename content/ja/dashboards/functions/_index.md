@@ -21,7 +21,6 @@ further_reading:
 - link: /metrics/#querying-metrics
   tag: ドキュメント
   text: メトリクスのクエリ
-kind: documentation
 title: 関数
 ---
 
@@ -54,7 +53,7 @@ title: 関数
     {{< nextlink href="/dashboards/functions/beta" >}}ベータ版: メトリクスのローリングアベレージを計算します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

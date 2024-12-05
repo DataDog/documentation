@@ -1,6 +1,5 @@
 ---
 title: Roku Log Collection
-kind: documentation
 description: Collect logs from your Roku channel.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
@@ -16,7 +15,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">Roku Log collection is in beta.</div>
+<div class="alert alert-info">Roku Log collection is in Preview.</div>
 {{< /site-region >}}
 
 Send logs to Datadog from your Roku channel with [Datadog's `dd-sdk-roku` logging library][1] and leverage the following features:

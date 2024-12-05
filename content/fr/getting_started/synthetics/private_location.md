@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: En savoir plus sur les emplacements privés
-kind: documentation
 title: Débuter avec les emplacements privés
 ---
 

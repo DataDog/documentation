@@ -32,7 +32,6 @@ further_reading:
   tag: Blog
   text: Correction des anomalies liées aux performances des workloads avec Watchdog Insights
     pour les live processes
-kind: Documentation
 title: Datadog WatchdogTM
 ---
 ## Présentation

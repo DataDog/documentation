@@ -21,8 +21,8 @@ assets:
     source_type_id: 10277
     source_type_name: Netnology SD-WAN
   monitors:
-    High Latency Monitor: assets/monitors/high-latency-monitor.json
-    Packet Loss Monitor: assets/monitors/packet-loss-monitor.json
+    Link latency is high: assets/monitors/high-latency-monitor.json
+    Packet loss percentage is high: assets/monitors/packet-loss-monitor.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Netnology
@@ -31,6 +31,7 @@ author:
 categories:
 - ネットワーク
 - notifications
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
 integration_version: 1.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
 public_title: Netnology Cisco SD-WAN
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cisco SDWAN Controller Metric Exporter
   media: []
@@ -74,11 +75,11 @@ tile:
 
 現在、SD-WAN コントローラのターゲットとしてサポートされているのは、Cisco vManage デバイスのみです。
 
-## 計画と使用
+## セットアップ
 
 Netnology Cisco SD-WAN インテグレーションは [Datadog Agent][2] パッケージに含まれていないため、手動でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -90,7 +91,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Cisco SD-WAN のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nn_sdwan.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nn_sdwan.d/conf.yaml][5] を参照してください。
 
@@ -100,21 +101,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `nn_sdwan` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "nn_sdwan" >}}
 
 
-### ヘルプ
+### イベント
 
 Netnology Cisco SD-WAN インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "nn_sdwan" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

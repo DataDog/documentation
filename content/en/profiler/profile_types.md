@@ -1,6 +1,5 @@
 ---
 title: Profile Types
-kind: documentation
 further_reading:
     - link: 'profiler/enabling'
       tag: 'Documentation'
@@ -27,21 +26,19 @@ CPU
 
 Allocations
 : The number of heap allocations made by each method, including allocations which were subsequently freed.<br />
-_Requires: Java 11_ 
+_Requires: Java 11_
 
 Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
-_Requires: Java 11_ 
+_Requires: Java 11_
 
-Heap Live Objects
+Heap Live Objects (in Preview, 1.17.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Java 11_ <br />
-_Since: 1.17.0_
 
-Heap Live Size
+Heap Live Size (in Preview, 1.39.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11_ <br />
-_Since: 1.17.0_
+_Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
 
 Wall Time in Native Code
 : The elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
@@ -159,27 +156,26 @@ CPU
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
-Allocations (beta, v1.21.1+)
+Allocations (v2.3.0+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
-_Requires:_ [Manual enablement][3]
+_Requires:_ [Manual enablement][2]
 
-Heap Live Objects (alpha, v1.21.1+)
+Heap Live Objects (alpha, v2.3.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 2.7+_ and [manual enablement][2]
+_Requires: Ruby 3.1+_ and [manual enablement][2]
 
-Heap Live Size (alpha, v1.21.1+)
+Heap Live Size (alpha, v2.3.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 2.7+_ and [manual enablement][2]
+_Requires: Ruby 3.1+_ and [manual enablement][2]
 
 [1]: /profiler/enabling/ruby/#requirements
-[2]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.19.0#:~:text=You%20can%20enable%20these%20features%3A
-[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.21.0
+[2]: /profiler/enabling/ruby/#configuration
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
-CPU (beta, v5.11.0+, v4.35.0+, v3.56.0+)
+CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
 
 Wall Time
@@ -203,15 +199,15 @@ CPU (v2.15+)
 Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (beta, v2.18+)
+Allocations (in Preview, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
-_Requires: .NET 6+_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: beta .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
+_Requires: Preview .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
-Live Heap (beta, v2.22+)
+Live Heap (in Preview, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
 
