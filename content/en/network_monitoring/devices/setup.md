@@ -37,7 +37,7 @@ Follow the instructions below to configure Datadog to monitor your network devic
 
 ### Install the Agent
 
-Navigate to the [Agent installation page][12], and install the [Datadog Agent][1] on your host (usually a server that is **not** the monitored device).</br>
+Navigate to the [Agent installation page][1], and install the [Datadog Agent][2] on your host (usually a server that is **not** the monitored device).</br>
 
 {{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
 
@@ -47,13 +47,13 @@ Navigate to the [Agent installation page][12], and install the [Datadog Agent][1
 
 To begin monitoring your network devices, enable the SNMP integration using one of the following methods:
 
-[Individual devices][2]
+[Individual devices][3]
 : Configure SNMP monitoring on your individual devices.
 
-[Autodiscovery][3]
+[Autodiscovery][4]
 : Configure SNMP monitoring using Autodiscovery.
 
-[Ping][13]
+[Ping][5]
 : Additionally, SNMP supports enabling ping on your devices.
 
 
@@ -61,73 +61,74 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 Once NDM is configured on your devices, you can further enrich them by adding network device tags using the following methods:
 
-[Datadog Agent][1]
-: The Agent can collect device tags when configuring [individual devices][2] or with [Autodiscovery][3].
+[Datadog Agent][2]
+: The Agent can collect device tags when configuring [individual devices][3] or with [Autodiscovery][4].
 
-[Device profiles][16]
+[Device profiles][6]
 : Configure the Agent to collect and customize specific metrics and tags by creating device profiles directly in the app.
 
-[ServiceNow integration][4]
+[ServiceNow integration][7]
 : Dynamically enrich network devices monitored by Datadog Network Device Monitoring with data defined in ServiceNow's CMDB (Configuration Management Database).
 
-[Network Device Monitoring API][5]
+[Network Device Monitoring API][8]
 : Utilize the Network Device Monitoring API to programmatically add tags to your network devices.
 
 ### Customize metrics and tags
 
-Customize metrics and tags on your devices by viewing the [Supported Devices][22] page to view out-of-the-box device profiles. If you would like to edit or add more metrics, the following options are available:
+Customize metrics and tags on your devices by viewing the [Supported Devices][9] page to view out-of-the-box device profiles. If you would like to edit or add more metrics, the following options are available:
 
-[Device profiles][23]
+[Device profiles][10]
 : Directly edit metrics and tags in the Datadog Agent `yaml` file with with device profiles.
 
-[GUI based profile authoring][24]
+[GUI based profile authoring][6]
 : Take advantage of Datadog Network Monitoring's GUI based device onboarding experience where you can add custom metrics and tags to your devices.
 
 ### NetFlow Monitoring 
 
-Configure [NetFlow Monitoring][21] to visualize and monitor your flow records from your NetFlow-enabled devices.
+Configure [NetFlow Monitoring][11] to visualize and monitor your flow records from your NetFlow-enabled devices.
 
 {{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
 
 ## Validate your data
 
-- Start monitoring your entire network infrastructure on the [Network Devices][17] page.
+- Start monitoring your entire network infrastructure on the [Network Devices][12] page.
 - View metrics collected on Datadog's out-of-the-box dashboards:
-  - [Overview of all devices monitored][8]
-  - [Performance of interfaces on your network devices][18]
-- Use the Network [Device Topology Map][19] to identify and troubleshoot issues with your devices.
+  - [Overview of all devices monitored][13]
+  - [Performance of interfaces on your network devices][14]
+- Use the Network [Device Topology Map][15] to identify and troubleshoot issues with your devices.
+
+## Use the Network API
+
+- Use the [Network API][8] to extract the following information about your network devices:
+  * [Get the list of interfaces for your devices.][16]
+  - [Get the list of tags for your devices.][17]
+  - [Update the list of tags for your devices.][18]
 
 ## Troubleshooting
 
-- See the Network Device [Troubleshooting][20] page for more information on troubleshooting your NDM issues.
+- See the Network Device [Troubleshooting][19] page for more information on troubleshooting your NDM issues.
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#monitoring-individual-devices
-[3]: /network_monitoring/devices/snmp_metrics/#autodiscovery
-[4]: https://docs.datadoghq.com/integrations/servicenow/#network-device-tagging
-[5]: /api/latest/network-device-monitoring/
-[6]: https://docs.datadoghq.com/api/latest/network-device-monitoring/
-[7]: https://app.datadoghq.com/devices
-[8]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
-[9]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[10]: /monitors/types/metric/?tab=threshold
-[11]: /network_monitoring/devices/guide/device_profiles
-[12]: https://app.datadoghq.com/account/settings/agent/latest
-[13]: /network_monitoring/devices/ping
-[14]: https://docs.datadoghq.com/integrations/cisco_sdwan/
-[15]: https://docs.datadoghq.com/integrations/meraki/
-[16]: /network_monitoring/devices/guide/device_profiles/
-[17]: https://app.datadoghq.com/devices
-[18]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[19]: /network_monitoring/devices/device_topology_map
-[20]: /network_monitoring/devices/troubleshooting
-[21]: /network_monitoring/netflow/
-[22]: /network_monitoring/devices/supported_devices
-[23]: /network_monitoring/devices/profiles
-[24]: /network_monitoring/devices/guide/device_profiles/
-[25]: https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/
+[1]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: /agent
+[3]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#monitoring-individual-devices
+[4]: /network_monitoring/devices/snmp_metrics/#autodiscovery
+[5]: /network_monitoring/devices/ping
+[6]: /network_monitoring/devices/guide/device_profiles/
+[7]: https://docs.datadoghq.com/integrations/servicenow/#network-device-tagging
+[8]: /api/latest/network-device-monitoring/
+[9]: /network_monitoring/devices/supported_devices
+[10]: /network_monitoring/devices/profiles
+[11]: /network_monitoring/netflow/
+[12]: https://app.datadoghq.com/devices
+[13]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
+[14]: https://app.datadoghq.com/dash/integration/30417/interface-performance
+[15]: /network_monitoring/devices/device_topology_map
+[16]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
+[17]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
+[18]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
+[19]: /network_monitoring/devices/troubleshooting

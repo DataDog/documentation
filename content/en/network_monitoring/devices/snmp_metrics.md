@@ -17,7 +17,7 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package, and supports all three versions of SNMP: SNMPv1, SNMPv2, and SNMPv3. During discovery, the SNMP port (default 161) is polled. A device is considered discovered if there is a response and a matching profile.
+Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package, and supports all three versions of SNMP: `SNMPv1`, `SNMPv2`, and `SNMPv3`. During discovery, the SNMP port (default 161) is polled. A device is considered discovered if there is a response and a matching profile.
 
 ## Pre-requisites
 
@@ -184,11 +184,11 @@ network_devices:
 
 **Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
-**Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
+**Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][9]
 
 ## Validation
 
-[Run the Agent's status subcommand][9] and look for `snmp` under the Checks section.
+[Run the Agent's status subcommand][10] and look for `snmp` under the Checks section.
 
 ## Further Reading
 
@@ -203,6 +203,5 @@ network_devices:
 [6]: https://docs.datadoghq.com/network_monitoring/devices/supported_devices
 [7]: /agent
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /agent/configuration/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
-[11]: /network_monitoring/devices/snmp_metrics/?tab=userawsocketslinuxonly#ping
+[9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
+[10]: /agent/configuration/agent-commands/#agent-status-and-information

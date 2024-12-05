@@ -16,9 +16,9 @@ Use the information below for troubleshooting Datadog Network Device Monitoring.
 
 The following assumes you are running Datadog Agent version `7.59.0+`.
 
-Perform the following steps if your device is not visible on the [devices][6] page:
+Perform the following steps if your device is not visible on the [devices][2] page:
 
-1. Run the [datadog-agent status][7] command and look for the snmp section which contains your devices monitoring IP. After starting the Agent, it may take up to one minute for NDM to discover individually configured devices. If your Agent is set to scan a large number of devices, it may take longer. 
+1. Run the [datadog-agent status][3] command and look for the snmp section which contains your devices monitoring IP. After starting the Agent, it may take up to one minute for NDM to discover individually configured devices. If your Agent is set to scan a large number of devices, it may take longer. 
 The output should look similar to the following: 
 
    ```
@@ -40,25 +40,20 @@ The output should look similar to the following:
 
 2. If your device is not listed and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP.
 
-   Example:
-
-   ```
-   datadog-agent snmp walk
-   ## Run this with no snmp credentials specified on the CLI
-   ## When no credentials are specified, the DD agent will read relevant credentials from the appropriate yaml file
-   ```
+**Note**: If no credentials are specified, the Agent will attempt to locate them in your Agent configuration files.
 
    **Linux**: 
+   For SNMP v2:
    ```
-   sudo dd-agent /opt/datadog-agent/bin/agent/agent snmp walk <IP Address>[:Port] [OID] [OPTIONS] [flags]
-
-   Example:
-   sudo -u dd-agent /opt/datadog-agent/bin/agent/agent snmp walk 10.100.70.142 1.3.6 
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
    ```
-
+  For SNMP v3:
+   ```
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
+   ```
    **Windows**:   
    ```
-   agent snmp walk <IP Address>[:Port] [OID] [OPTIONS] [flags]
+   agent snmp walk <IP Address>[:Port]
 
    Example:           
    agent.exe snmp walk  10.143.50.30 1.3.6 
@@ -167,10 +162,10 @@ The output should look similar to the following:
 
 ### Extract information about devices and interfaces of network devices
 
-- Use the [Network API][2] to extract the following information about your network devices:
-  * [Get the list of interfaces for your devices.][3]
-  - [Get the list of tags for your devices.][4]
-  - [Update the list of tags for your devices.][5]
+- Use the [Network API][4] to extract the following information about your network devices:
+  * [Get the list of interfaces for your devices.][5]
+  - [Get the list of tags for your devices.][6]
+  - [Update the list of tags for your devices.][7]
 
 ## Further Reading
 
@@ -178,9 +173,9 @@ The output should look similar to the following:
 
 
 [1]: /help
-[2]: /api/latest/network-device-monitoring/
-[3]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
-[4]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
-[5]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
-[6]: https://app.datadoghq.com/infrastructure/devices 
-[7]: /agent/configuration/agent-commands/#agent-information
+[2]: https://app.datadoghq.com/infrastructure/devices
+[3]: /agent/configuration/agent-commands/#agent-information
+[4]: /api/latest/network-device-monitoring/
+[5]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
+[6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
+[7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device

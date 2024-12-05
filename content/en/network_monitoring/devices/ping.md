@@ -15,11 +15,11 @@ When configured, the SNMP check can also send ICMP pings to your devices. This c
 
 #### Setup
 
-1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][7] documentation.
+1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][1] documentation.
 
-2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3] for individual devices, or the [`datadog.yaml`][8] Agent configuration file for Autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
+2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][2] for individual devices, or the [`datadog.yaml`][3] Agent configuration file for Autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
 
-3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the Agent's system-probe. See the [linux.use_raw_socket][11] `system-probe` configuration below.
+3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the Agent's system-probe. See the [linux.use_raw_socket][5] `system-probe` configuration below.
 
 **Note**: For Autodiscovery, Datadog does not ping devices that do not respond to SNMP.
 
@@ -115,12 +115,8 @@ The following metrics are made available after enabling ping:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[1]: /agent
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
-[5]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/network_monitoring/devices/supported_devices
-[7]: /agent
-[8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /agent/configuration/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
-[11]: /network_monitoring/devices/snmp_metrics/?tab=userawsocketslinuxonly#ping
+[5]: /network_monitoring/devices/snmp_metrics/?tab=userawsocketslinuxonly#ping
