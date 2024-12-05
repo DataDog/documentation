@@ -167,7 +167,8 @@ build_preview:english:
   <<: *base_template
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
-      changes:
+      when: on_success
+    - changes:
         - content/!(en)/**/*
         - i18n/!(en).*
         - layouts/**/*.!(en).md
