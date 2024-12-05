@@ -2,12 +2,10 @@
 title: Setup Data Streams Monitoring for Go
 ---
 
-### Prerequisites
-
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
-
-* [Datadog Agent v7.34.0 or later][1]
-* [dd-trace-go v1.56.1 or later][2]
+Three types of instrumentation are available:
+* [Automatic instrumentation for Kafka-based workloads](#automatic-instrumentation)
+* [Manual Instrumentation for Kafka-based workloads](#kafka-based-workloads)
+* [Manual instrumentation for other queuing technology or protocol](#other-queuing-technologies-or-protocols)
 
 ### Prerequisites
 
@@ -20,29 +18,19 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 | Kafka      | [confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go) | 1.56.1                 | 1.66.0 or later            |
 | Kafka      | [Sarama](https://github.com/Shopify/sarama)                              | 1.56.1                 | 1.66.0 or later            |
 
+
 ### Installation
 
-* Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.
-* [Start the tracer][3].
+#### Automatic Instrumentation
 
-Three types of instrumentation are available:
-
-* Automatic instrumentation for Kafka-based workloads
-* Manual Instrumentation for Kafka-based workloads
-* Manual instrumentation for any other queuing technology or protocol
-
-### Automatic Instrumentation for Kafka-based Workloads
-
-Automatic instrumentation uses [Orchestrion][4] and supports both the Sarama and Confluent Kafka libraries.
+Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
 
 To automatically instrument your service:
 
 1. Follow the [Getting Started](5) guide to compile or run your service using [Orchestrion][4].
 2. Set the `DD_DATA_STREAMS_ENABLED=true` environment variable
 
-### Manual instrumentation
-
-#### Kafka based workloads
+#### Manual instrumentation
 
 ##### Manually Instrumenting Sarama Kafka client
 
@@ -85,7 +73,7 @@ If a service consumes data from one point and produces to another point, propaga
     datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
     ```
 
-#### Other queuing technologies or protocols
+###### Other queuing technologies or protocols
 
 You can also manually instrumente your service. For example, you can propagate context through Kinesis.
 
@@ -102,7 +90,7 @@ if ok {
 
 ```
 
-##### Instrumenting the consume call
+###### Instrumenting the consume call
 
 1. Ensure your message supports the [TextMapReader interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44).
 2. Extract the context from your message and instrument the consume call by calling:
