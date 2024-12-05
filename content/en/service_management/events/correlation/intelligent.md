@@ -23,7 +23,7 @@ To get started:
 
 {{< img src="service_management/events/correlation/intelligent/intelligent_project.png" alt="Event Management - Intelligent Correlation" style="width:100%;" >}}
 
-When you navigate to [Event Correlations][3], find a project called **Intelligent Correlation**. From this project, you can see thecases created by Intelligent Correlation. 
+When you navigate to [Event Correlations][3], find a project called **Intelligent Correlation**. From this project, you can see the cases created by Intelligent Correlation. 
 
 Intelligent Correlation generates cases automatically after it finds related alerts:
 {{< img src="service_management/events/correlation/intelligent/intelligent_correlation.png" alt="Case detail page of case created from intelligent correlation, showing related alerts in the Investigation tab" style="width:100%;" >}}
