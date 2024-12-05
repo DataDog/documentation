@@ -1,5 +1,5 @@
 {
-  "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/missing_closing_tag.mdoc": [
+  "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/missing_closing_tag.mdoc.md": [
     {
       "error": {
         "id": "missing-closing",
@@ -10,7 +10,7 @@
         6,
         7
       ],
-      "file": "/en/missing_closing_tag.mdoc"
+      "file": "/en/missing_closing_tag.mdoc.md"
     },
     {
       "error": {
@@ -22,7 +22,7 @@
         9,
         10
       ],
-      "file": "/en/missing_closing_tag.mdoc"
+      "file": "/en/missing_closing_tag.mdoc.md"
     }
   ]
 }

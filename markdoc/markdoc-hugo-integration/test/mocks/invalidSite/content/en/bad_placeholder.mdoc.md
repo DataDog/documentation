@@ -6,7 +6,7 @@ content_filters:
     options_source: primary_color_options
   - display_name: "Item"
     id: item
-    options_source: <COLOR>_item_options
+    options_source: <COLOUR>_item_options # mistake: <COLOUR> instead of <COLOR>
 ---
 
 This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things.
@@ -14,8 +14,7 @@ This test page explores everyday items that are blue, yellow, or red -- which al
 ## {% $item %}: Your {% $color %} item of choice
 
 <!-- blue -->
-<!-- mistake: $colour instead of $color -->
-{% if equals($colour, "blue") %} 
+{% if equals($color, "blue") %} 
 
 <!-- blue > ocean --> 
 {% if equals($item, "ocean") %}
@@ -41,10 +40,10 @@ Blueberries are a type of fruit. They're often eaten raw or used in baking.
 
 <!-- yellow -->
 {% if equals($color, "yellow") %}
-{% partial file="yellow.mdoc" /%}
+{% partial file="yellow.mdoc.md" /%}
 {% /if %}
 
 <!-- red -->
 {% if equals($color, "red") %}
-{% partial file="red.mdoc" /%}
+{% partial file="red.mdoc.md" /%}
 {% /if %}

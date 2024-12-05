@@ -39,7 +39,7 @@ class Alert extends CustomHtmlComponent {
 
 describe('custom components', () => {
   // retrieve test input file
-  const inputPath = __dirname + '/input.mdoc';
+  const inputPath = __dirname + '/input.mdoc.md';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
 
   // stage 1: build the AST

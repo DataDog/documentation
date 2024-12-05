@@ -3,7 +3,7 @@ title: The Primary Colors of the Color Wheel
 content_filters:
   - display_name: "Color"
     id: color
-    options_source: rainbow_color_options # mistake, not all of these colors will yield a valid options source for the item preference
+    options_source: primary_color_options
   - display_name: "Item"
     id: item
     options_source: <COLOR>_item_options
@@ -14,7 +14,8 @@ This test page explores everyday items that are blue, yellow, or red -- which al
 ## {% $item %}: Your {% $color %} item of choice
 
 <!-- blue -->
-{% if equals($color, "blue") %} 
+<!-- mistake: $colour instead of $color -->
+{% if equals($colour, "blue") %} 
 
 <!-- blue > ocean --> 
 {% if equals($item, "ocean") %}
@@ -40,10 +41,10 @@ Blueberries are a type of fruit. They're often eaten raw or used in baking.
 
 <!-- yellow -->
 {% if equals($color, "yellow") %}
-{% partial file="yellow.mdoc" /%}
+{% partial file="yellow.mdoc.md" /%}
 {% /if %}
 
 <!-- red -->
 {% if equals($color, "red") %}
-{% partial file="red.mdoc" /%}
+{% partial file="red.mdoc.md" /%}
 {% /if %}

@@ -1,5 +1,5 @@
 ---
-title: Primary Colors
+title: Primary Colors (ja)
 content_filters:
   - display_name: "Color"
     id: color
@@ -18,8 +18,7 @@ Warning: This is just a test page. It's not real.
 This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things.
 
 <!-- blue -->
-<!-- mistake: impossible value -->
-{% if equals($color, "bleu") %}
+{% if equals($color, "blue") %}
 
 ## Blue {% #blue-header-id-override %}
 
@@ -68,11 +67,11 @@ Blueberries are also popular in smoothies and jams. The vibrant blue color of bl
 <!-- yellow -->
 {% if equals($color, "yellow") %}
 ## Yellow
-{% partial file="yellow.mdoc" /%}
+{% partial file="yellow.mdoc.md" /%}
 {% /if %}
 
 <!-- red -->
 {% if equals($color, "red") %}
 ## Red
-{% partial file="red.mdoc" /%}
+{% partial file="red.mdoc.md" /%}
 {% /if %}

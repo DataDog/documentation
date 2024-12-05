@@ -152,7 +152,7 @@
   },
   "dirs": {
     "content": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/validSite/content",
-    "filtersConfig": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/validSite/config/_default/content_filters",
+    "filtersConfig": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/validSite/content_filters",
     "partials": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/validSite/layouts/partials",
     "images": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/validSite/static/images"
   }

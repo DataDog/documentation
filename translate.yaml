@@ -33,6 +33,8 @@ ignores:
 sources:
 - src: "content/en/**/*.md"
   dst: "content/{lang}/**/*.md"
+- src: "content_filters/en/**/*.yaml"
+  dst: "content_filters/{lang}/**/*.yaml"
 - src: "data/api/**/translate_actions.json"
   dst: "data/api/**/translate_actions.{lang}.json"
 - src: "data/api/**/translate_tags.json"

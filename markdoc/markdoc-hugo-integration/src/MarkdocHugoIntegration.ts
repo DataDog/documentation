@@ -136,7 +136,7 @@ export class MarkdocHugoIntegration {
 
     const markdocFilepaths = FileNavigator.findInDir(
       this.hugoGlobalConfig.dirs.content,
-      /\.mdoc$/
+      /\.mdoc.md$/
     );
 
     for (const markdocFilepath of markdocFilepaths) {
@@ -315,7 +315,7 @@ export class MarkdocHugoIntegration {
     markdocFilepath: string;
     pageContents: string;
   }): string {
-    const writePath = p.markdocFilepath.replace(/\.mdoc$/, '.md');
+    const writePath = p.markdocFilepath.replace(/\.mdoc\.md$/, '.md');
     fs.writeFileSync(writePath, p.pageContents);
     return writePath;
   }

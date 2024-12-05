@@ -1,6 +1,5 @@
 import { HugoConfig, HugoGlobalConfig } from '../../../src/schemas/config/hugo';
 import { VALID_SITE_DIR } from '../../config/constants';
-import { HugoFunctions } from '../../../src/helperModules/HugoFunctions';
 import { PageConfig } from '../../../src/schemas/config/hugo';
 
 const mockHugoGlobalConfig: HugoGlobalConfig = {
@@ -23,12 +22,17 @@ const mockHugoGlobalConfig: HugoGlobalConfig = {
       }
     }
   },
-  dirs: HugoFunctions.getSubdirsByType(VALID_SITE_DIR)
+  dirs: {
+    content: VALID_SITE_DIR + '/content',
+    filtersConfig: VALID_SITE_DIR + '/content_filters',
+    partials: VALID_SITE_DIR + '/layouts/partials',
+    images: VALID_SITE_DIR + '/static/images'
+  }
 };
 
 const mockPageConfig: PageConfig = {
   lang: 'en',
-  path: 'example/path/to/file.mdoc'
+  path: 'example/path/to/file.mdoc.md'
 };
 
 const mockHugoConfig: HugoConfig = { global: mockHugoGlobalConfig, page: mockPageConfig };

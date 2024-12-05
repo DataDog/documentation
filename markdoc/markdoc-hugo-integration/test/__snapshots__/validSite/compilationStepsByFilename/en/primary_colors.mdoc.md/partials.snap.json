@@ -1,5 +1,5 @@
 {
-  "yellow.mdoc": {
+  "yellow.mdoc.md": {
     "$$mdtype": "Node",
     "errors": [],
     "lines": [],
@@ -619,7 +619,7 @@
     "annotations": [],
     "slots": {}
   },
-  "red.mdoc": {
+  "red.mdoc.md": {
     "$$mdtype": "Node",
     "errors": [],
     "lines": [],

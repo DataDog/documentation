@@ -12,7 +12,7 @@ import { FiltersManifestBuilder } from '../../src/helperModules/FiltersManifestB
 
 describe('treeManagement', () => {
   const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
-  const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc';
+  const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
   const glossary = YamlConfigParser.loadGlossaryFromLangDir(LANG_DIR);
   const filterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
     dir: LANG_DIR,
