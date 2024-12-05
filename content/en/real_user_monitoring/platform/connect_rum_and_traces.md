@@ -540,8 +540,8 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 `x-datadog-origin: rum`
 : To make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
-`x-datadog-sampling-priority: 1`
-: To make sure that the Agent keeps the trace.
+`x-datadog-sampling-priority`
+: Set to `1` by the Real User Monitoring SDK if the trace was sampled, or `0` if it was not.
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
 
@@ -551,16 +551,14 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : `parent id`: 64 bits span ID, hexadecimal on 16 characters.
 : `trace flags`: Sampled (`01`) or not sampled (`00`)
 
-Example:
-: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
-
 `tracestate: dd=s:[sampling priority];o:[origin]`
 : `dd`: Datadog's vendor prefix.
-: `sampling priority`: Always set to `1` to make sure that the Agent keeps the trace.
+: `sampling priority`: Set to `1` if the trace was sampled, or `0` if it was not.
 : `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
 Example:
-: `tracestate: dd=s1;o:rum`
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+: `tracestate: dd=s:1;o:rum`
 
 {{% /tab %}}
 {{% tab "b3 / b3 Multiple Headers" %}}
