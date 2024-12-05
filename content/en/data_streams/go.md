@@ -139,7 +139,7 @@ if ok {
 
 ```
 
-###### Instrumenting the consume call
+##### Instrumenting the consume call
 
 1. Ensure your message supports the [TextMapReader interface][#7].
 2. Extract the context from your message and instrument the consume call by calling:
