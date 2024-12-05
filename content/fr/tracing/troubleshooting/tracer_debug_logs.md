@@ -98,7 +98,7 @@ Pour activer le mode debugging pour le traceur Go Datadog, activez le mode debug
 ```go
 package main
 
-import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
     tracer.Start(tracer.WithDebugMode(true))

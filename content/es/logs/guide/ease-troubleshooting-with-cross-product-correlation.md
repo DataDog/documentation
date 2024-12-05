@@ -12,6 +12,7 @@ further_reading:
 - link: /synthetics/apm/
   tag: Documentación
   text: Conectar tests Synthetic y trazas
+kind: guía
 title: Facilitar la resolución de problemas a través de la correlación entre productos
 ---
 

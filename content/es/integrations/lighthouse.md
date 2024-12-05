@@ -22,7 +22,7 @@ author:
   support_email: mustin.eric@gmail.com
 categories:
 - herramientas de desarrollo
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
 display_on_public_website: true

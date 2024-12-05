@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 4.0.0
+integration_version: 2.6.1
 is_public: true
 manifest_version: 2.0.0
 name: crio

@@ -70,7 +70,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-カスタム `datadog-values.yaml`:
+Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -80,9 +80,9 @@ datadog:
 
 {{% /tab %}}
 
-{{% tab "手動 (DaemonSet)" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
-DaemonSet マニフェスト:
+DaemonSet manifest:
 
 ```yaml
 apiVersion: apps/v1
@@ -138,7 +138,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-カスタム `datadog-values.yaml`:
+Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -151,9 +151,9 @@ datadog:
 
 {{% /tab %}}
 
-{{% tab "手動 (DaemonSet)" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
-DaemonSet マニフェスト:
+DaemonSet manifest:
 
 ```yaml
 apiVersion: apps/v1
@@ -174,7 +174,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Amazon ECS と Docker VM のホスト名エラー
+## Amazon ECS and Docker VM hostname errors
 
 クラウドプロバイダー上の Docker で Agent を実行する場合、ホスト名エラーは通常、Agent が少なくとも次のいずれかにアクセスできないことを意味します。
 * コンテナランタイム API
@@ -185,7 +185,7 @@ spec:
 Agent が Docker ソケットに接続できるようにします。
 
 {{< tabs >}}
-{{% tab "EC2 上の Amazon ECS" %}}
+{{% tab "Amazon ECS on EC2" %}}
 
 [タスク定義][1]で Docker ソケットがマウントされていることを確認します。
 

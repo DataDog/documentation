@@ -26,8 +26,7 @@ author:
 categories:
 - クラウド
 - OS & システム
-- windows
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md
 display_on_public_website: true
@@ -35,7 +34,7 @@ draft: false
 git_integration_title: hyperv
 integration_id: hyper-v
 integration_title: HyperV
-integration_version: 3.0.0
+integration_version: 1.11.1
 is_public: true
 manifest_version: 2.0.0
 name: hyperv
@@ -48,7 +47,6 @@ tile:
   classifier_tags:
   - Category::Cloud
   - Category::OS & System
-  - カテゴリー::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup
@@ -103,7 +101,7 @@ Hyper-V には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 

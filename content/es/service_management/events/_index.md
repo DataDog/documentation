@@ -45,7 +45,7 @@ La recopilación de eventos es compatible con más de 100 integraciones de Data
 
 ## Lectura adicional
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 
 [1]: /es/agent/kubernetes/#event-collection

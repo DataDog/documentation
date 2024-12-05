@@ -24,7 +24,7 @@ categories:
 - rum
 - recopilación de logs
 - seguridad
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_on_public_website: true

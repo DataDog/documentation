@@ -41,7 +41,7 @@ Selecciona el contexto de la monitorización eligiendo nombres de hosts, etiquet
 En esta sección, elige entre una **Alerta de check** o una **Alerta de clúster**:
 
 {{< tabs >}}
-{{% tab "Alerta de check" %}}
+{{% tab "Check Alert" (Alerta de check) %}}
 
 Una alerta de check rastrea los estados consecutivos enviados por cada agrupación de checks y los compara con tus umbrales.
 
@@ -62,7 +62,7 @@ Configura la alerta de check:
 
 [1]: /es/monitors/manage/status
 {{% /tab %}}
-{{% tab "Alerta de clúster" %}}
+{{% tab "Cluster Alert" (Alerta de clúster" %}}
 
 Una alerta de clúster calcula el porcentaje de checks con un estado determinado y lo compara con tus umbrales.
 

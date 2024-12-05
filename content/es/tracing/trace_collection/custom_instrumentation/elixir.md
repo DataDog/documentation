@@ -15,6 +15,6 @@ Datadog brinda soporte técnico para la instrumentación personalizada para apli
 
 ## Leer más
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/

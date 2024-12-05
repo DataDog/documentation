@@ -605,7 +605,7 @@ Para generar este JSON:
 
 ## Lectura adicional
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /es/logs/log_configuration/parsing

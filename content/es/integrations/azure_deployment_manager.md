@@ -2,7 +2,7 @@
 categories:
 - nube
 - azure
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Utiliza Datadog para monitorizar implementaciones de Canary en Azure
   Deployment Manager.

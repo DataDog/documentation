@@ -124,6 +124,18 @@ Pour en savoir plus, consultez la section relative à la [configuration de Ruby 
 
 [1]: /fr/tracing/setup_overview/open_standards/ruby/#opentracing
 {{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+
+```go
+opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
+```
+
+Pour en savoir plus, consultez la section relative à la [configuration de Go et d'OpenTracing][1].
+
+
+[1]: /fr/tracing/setup_overview/open_standards/go/#opentracing
+{{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 

@@ -108,7 +108,7 @@ Esto significa que incluso si los usuarios abren tu aplicación mientras están 
 
 ## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 
 [1]: /es/help

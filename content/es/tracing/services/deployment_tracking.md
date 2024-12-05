@@ -230,7 +230,7 @@ Tiempo máximo entre despliegues:
 
 ## Leer más
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 
 [1]: /es/getting_started/tagging/unified_service_tagging/

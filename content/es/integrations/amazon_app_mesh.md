@@ -6,7 +6,7 @@ categories:
 - la red
 - rastreo
 creates_events: false
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: AWS App Mesh es un proxy de servicio y periferia de código abierto.
 display_name: AWS App Mesh

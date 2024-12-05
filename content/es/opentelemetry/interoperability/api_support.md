@@ -25,4 +25,4 @@ Para más información, sigue el enlace correspondiente a tu lenguaje:
 
 ## Lectura adicional
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}

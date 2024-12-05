@@ -15,6 +15,7 @@ further_reading:
   tag: Blog
   text: Incrementa el cumplimiento, la gobernabilidad y la transparencia en todos
     tus equipos con Datadog Audit Trail
+kind: guía
 title: Control de datos de logs confidenciales
 ---
 

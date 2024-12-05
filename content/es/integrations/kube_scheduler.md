@@ -28,7 +28,7 @@ categories:
 - Kubernetes
 - recopilación de logs
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_on_public_website: true

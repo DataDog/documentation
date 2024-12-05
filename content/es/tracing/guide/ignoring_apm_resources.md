@@ -37,12 +37,12 @@ Puedes especificar etiquetas de tramos para requerir o rechazar utilizando un li
 : Rechaza trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 
-{{< tabs >}}
-{{% tab "datadog.yaml" %}}
+{{< pestañas >}}
+{{% pestaña "datadog.yaml" %}}
 
 También las puedes configurar en la configuración del Agent con una lista separada por comas:
 
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
+{{< lenguaje de código de bloque="yaml" nombre de archivo="datadog.yaml" >}}
 apm_config:
   filter_tags:
     requerir: ["db:sql", "db.instance:mysql"]
@@ -51,7 +51,7 @@ apm_config:
 
 Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide con este punto conexión:
 
-{{< code-block lang="yaml" filename="Datadog.yaml" >}}
+{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
 apm_config:
   filter_tags:
     rechazar: ["http.url:http://localhost:5050/healthcheck"]
@@ -61,7 +61,7 @@ apm_config:
 {{% tab "Kubernetes" %}}
 #### Datadog Operator
 
-{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+{{< lenguaje de bloque de código="yaml" nombre de archivo="datadog-agent.yaml" >}}
 apiVersion: datadoghq.com/v2alpha1
 clase: DatadogAgent
 metadatos:
@@ -74,13 +74,13 @@ spec:
           env:
             - nombre: DD_APM_FILTER_TAGS_REJECT
               valor: tag_key1:tag_val2 tag_key2:tag_val2
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 {{% k8s-operator-redeploy %}}
 
 #### Helm
 
-{{< code-block lang="yaml" filename="Datadog-values.yaml" >}}
+{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog-values.yaml" >}}
 agentes:
   contenedores:
     traceAgent:
@@ -88,13 +88,13 @@ agentes:
         - nombre: DD_APM_FILTER_TAGS_REJECT
           valor: tag_key1:tag_val2 tag_key2:tag_val2
 
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 {{% k8s-helm-redeploy %}}
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
-{{% /tab%}}
-{{< /tabs>}}
+{{% /pestaña%}}
+{{< /pestañas>}}
 
 Mediante el filtrado de trazas de esta manera, se eliminan estas solicitudes de [métricas de trazas][3]. Para obtener más información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta [Controles de consumo][4].
 
@@ -192,14 +192,14 @@ La opción **ignorar recursos** permite excluir recursos si el tramo de raíz gl
 
 Puedes especificar los recursos que deseas ignorar en el archivo de configuración del Agent, `datadog.yaml` o con la variable de entorno `DD_APM_IGNORE_RESOURCES`. Consulta los ejemplos siguientes.
 
-{{< code-block lang="yaml" filename="Datadog.yaml" >}}
+{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
 apm_config:
 ## @param ignore_resources - lista de cadenas - opcional
 ## Se puede proporcionar un lista de expresiones regulares para excluir determinados trazas en función del nombre del recurso.
 ## Todas las entradas deben ir entre comillas dobles y separadas por comas.
 
   ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 **Notas**:
 - La sintaxis expresiones regulares que acepta el Trace Agent se evalúa con [regexp][6] de Go.
@@ -222,47 +222,47 @@ Para utilizar correctamente la opción de ignorar recurso, la regla de la expres
 
 Según tu forma de despliegue, la sintaxis será un poco diferente:
 
-{{< tabs >}}
-{{% tab "Datadog.yaml" %}}
+{{< pestañas >}}
+{{% pestaña "Datadog.yaml" %}}
 
-{{< code-block lang="yaml" filename="Datadog.yaml" >}}
+{{< lenguaje de bloque de código="yaml" nombre de archivo="Datadog.yaml" >}}
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 Para valores múltiples:
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
 apm_config:
   ignore_resources: ["value1", "Api::HealthchecksController#index$"]
-{{< /code-block >}}
+{{< /bloque de código >}}
 
-{{% /tab %}}
-{{% tab "Docker componer" %}}
+{{% /pestaña %}}
+{{% pestaña "Docker componer" %}}
 
 En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD_APM_IGNORE_RESOURCES` con un patrón como el del ejemplo siguiente. Docker Compose tiene su propia [sustitución de variables][1] a tener en cuenta cuando utilices caracteres especiales como `$`.
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
    entorno:
       // otras variables de entorno del Datadog Agent 
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 Para valores múltiples:
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
    entorno:
       // otras variables de entorno del Datadog Agent
       - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
-{{% /tab %}}
-{{% tab "Docker run" %}}
+{{% /pestaña %}}
+{{% pestaña "Docker run" %}}
 
 En tu comando de Docker run para hacer girar el Datadog Agent, añade `DD_APM_IGNORE_RESOURCES`:
 
-{{< code-block lang="shell" >}}
+{{< lenguaje de bloque de código="shell" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
               --pid host \
@@ -274,20 +274,20 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 Para valores múltiples:
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
               -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
-{{< /code-block >}}
+{{< /bloque de código >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes daemonset" %}}
+{{% /pestaña %}}
+{{% pestaña "Kubernetes daemonset" %}}
 
 En el contenedor de Trace Agent dedicado, añade la variable de entorno `DD_APM_IGNORE_RESOURCES`:
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
     - nombre: trace-agent
         imagen: "gcr.io/datadoghq/agent:latest"
         imagePullPolicy: IfNotPresent
@@ -324,53 +324,53 @@ En el contenedor de Trace Agent dedicado, añade la variable de entorno `DD_APM_
           valor: "false"
         - nombre: DD_APM_IGNORE_RESOURCES
           valor: "Api::HealthchecksController#index$"
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 Para valores múltiples:
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
         - nombre: DD_APM_IGNORE_RESOURCES
           valor: '"value1","Api::HealthchecksController#index$"'
-{{< /code-block >}}
+{{< /bloque de código >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{% /pestaña %}}
+{{% pestaña "Kubernetes Helm" %}}
 
 En la sección `traceAgent` del archivo `values.yaml`, añade `DD_APM_IGNORE_RESOURCES` en la sección `env` y, a continuación, [haz girar helm como de costumbre][1].
 
-{{< code-block lang="yaml" filename="values.yaml" >}}
+{{< lenguaje de bloque de código="yaml" nombre del archivo="values.yaml" >}}
     traceAgent:
       # agents.containers.traceAgent.env -- Variables de entorno adicionales para el contenedor de trace-agent
       env:
         - nombre: DD_APM_IGNORE_RESOURCES
           valor: Api::HealthchecksController#index$
 
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 Para valores múltiples:
 
-{{< code-block lang="yaml" >}}
+{{< lenguaje de bloque de código="yaml" >}}
         - nombre: DD_APM_IGNORE_RESOURCES
           valor: value1, Api::HealthchecksController#index$
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 Como alternativa, puedes configurar `agents.containers.traceAgent.env` en el comando `helm install`:
 
-{{< code-block lang="shell" >}}
+{{< lenguaje de bloque de código="shell" >}}
 helm install dd-agent -f values.yaml \
   --configurar datadog.apiKeyExistingSecret="datadog-secret" \
   --configurar agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
     agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" \
   datadog/datadog
-{{< /code-block >}}
+{{< /bloque de código >}}
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
-{{% /tab %}}
-{{% tab "Definición de tareas de Amazon ECS" %}}
+{{% /pestaña %}}
+{{% pestaña "Definición de tareas de Amazon ECS" %}}
 
 Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datadog Agent, añade la variable de entorno `DD_APM_IGNORE_RESOURCES` con los valores necesarios para que el JSON evalúe de la siguiente manera:
 
-{{< code-block lang="json" >}}
+{{< lenguaje de bloque de código="json" >}}
     "entorno": [
     // otras variables de entorno para el Datadog Agent
         {
@@ -378,10 +378,10 @@ Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datad
           "valor": "Api::HealthchecksController#index$"
         }
      ]
-{{< /code-block >}}
+{{< /bloque de código >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /pestaña%}}
+{{< /pestañas >}}
 
 <div class="alert alert-warning"><strong>Nota</strong>: Mediante el filtrado de trazas de esta manera, se eliminan estas solicitudes de <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
 
@@ -392,9 +392,9 @@ Algunos de los rastreadores específicos del lenguaje tienen una opción para mo
 <div class="alert alert-danger"><strong>Importante</strong>: Si la solicitud está asociada a una traza distribuida, la traza resultante puede tener imprecisiones de muestreo si descartas partes de ella debido a estas reglas de filtrado.</div>
 
 
-{{< programming-lang-wrapper langs="ruby,python,nodejs,java" >}}
+{{< contenedor de lenguajes de programación lenguajes="Ruby,Python,NodeJS,Java" >}}
 
-{{< programming-lang lang="ruby" >}}
+{{< lenguaje de programación lenguaje="ruby" >}}
 
 El rastreador de Ruby tiene un pipeline de posprocesamiento que elimina trazas que cumplen ciertos criterios. Más información y ejemplos en [Trazas de posprocesamiento][1].
 
@@ -408,9 +408,9 @@ Datadog::Tracing.before_flush(
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [2]: /es/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-{{< /programming-lang >}}
+{{< /lenguaje de programación >}}
 
-{{< programming-lang lang="python" >}}
+{{< lenguaje de programación lenguaje="python" >}}
 
 El rastreador de Python tiene un filtro `FilterRequestsOnUrl` que puedes configurar para eliminar trazas de ciertos puntos de conexión. Como alternativa, puedes escribir un filtro personalizado. Consulta [Filtrar trazas][1] para obtener más información.
 
@@ -427,9 +427,9 @@ tracer.configure(settings={
 ```
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.filters.FilterRequestsOnUrl
-{{< /programming-lang >}}
+{{< /lenguaje de programación >}}
 
-{{< programming-lang lang="nodeJS" >}}
+{{< lenguaje de programación lenguaje="nodeJS" >}}
 
 Configura una lista de bloqueados en la extensión [Http][1]. Toma nota de las coincidencias de la lista de bloqueados en los documentos de la API. Por ejemplo, las solicitudes Http entrantes coinciden con las rutas URL, entonces, si la etiqueta de tramo `http.url` de la traza es `http://<domain>/healthcheck`, escribe una regla que coincida con la URL `healthcheck`:
 
@@ -453,9 +453,9 @@ tracer.use('http', {
 <div class="alert alert-info"><strong>Nota</strong>: La configuración del rastreador para la integración debe venir <em>antes de</em> que se importe ese módulo instrumentado.</div>
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
-{{< /programming-lang >}}
+{{< /lenguaje de programación >}}
 
-{{< programming-lang lang="java" >}}
+{{< lenguaje de programación lenguaje="java" >}}
 
 El rastreador de Java tiene una opción para que un `TraceInterceptor` personalizado filtre determinados tramos. Consulta [Ampliar los rastreadores][1].
 
@@ -485,8 +485,8 @@ clase pública GreetingController {
 ```
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
+{{< /lenguaje de programación >}}
+{{< /contenedor de lenguajes de programación >}}
 
 <div class="alert alert-warning"><strong>Nota</strong>: Mediante el filtrado de trazas de esta manera, se eliminan estas solicitudes de <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta los <a href="/tracing/trace_ingestion/ingestion_controls">controles de consumo</a>.</div>
 

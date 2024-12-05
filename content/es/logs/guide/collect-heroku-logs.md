@@ -1,4 +1,5 @@
 ---
+kind: guía
 title: Recopilar logs de Heroku
 ---
 

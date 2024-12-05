@@ -2,7 +2,7 @@
 categories:
 - recopilación de logs
 - seguridad
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Conéctate a Microsoft 365 para extraer los logs de auditoría de una organización
   a la plataforma de registro de Datadog.

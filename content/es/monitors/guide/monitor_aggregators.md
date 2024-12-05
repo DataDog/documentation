@@ -4,6 +4,7 @@ further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentación
   text: Configurar monitores
+kind: Guía
 title: Agregadores para monitores
 ---
 {{< jqmath-vanilla >}}

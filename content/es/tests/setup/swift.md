@@ -110,7 +110,7 @@ end
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
-{{% tab "Acciones de GitHub" %}}
+{{% tab "GitHub Actions" (Acciones de GitHub) %}}
 
 Si utilizas GitHub, puedes utilizar la [acción para tests de Swift][1] del Marketplace de GitHub para configurar y ejecutar tus tests automáticamente. Por defecto, es posible omitir el resto de la configuración descrita en esta página (excepto la configuración de la acción misma), aunque puedes utilizar las variables de entorno de configuración para deshabilitar o configurar funcionalidades adicionales.
 
@@ -379,7 +379,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `CIRCLE_TAG`            | `$(CIRCLE_TAG)`            |
 
 {{% /tab %}}
-{{% tab "CLI GitLab" %}}
+{{% tab "GitLab CI" (CLI GitLab) %}}
 
 | Variable de entorno | Valor                |
 | -------------------- | -------------------- |
@@ -432,7 +432,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `TRAVIS_COMMIT_MESSAGE`      | `$(TRAVIS_COMMIT_MESSAGE)`      |
 
 {{% /tab %}}
-{{% tab "Acciones GitHub" %}}
+{{% tab "GitHub Actions" (Acciones GitHub) %}}
 
 | Variable de entorno | Valor                   |
 | -------------------- | ----------------------- |
@@ -479,7 +479,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
 {{% /tab %}}
-{{% tab "Pipelines de Bitbucket" %}}
+{{% tab "Bitbucket Pipelines" (Pipelines de Bitbucket) %}}
 
 | Variable de entorno       | Valor                         |
 | -------------------------- | ----------------------------- |
@@ -521,7 +521,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`      | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`      |
 
 {{% /tab %}}
-{{% tab "Pipelines de Azure" %}}
+{{% tab "Azure Pipelines" (Pipelines de Azure) %}}
 
 | Variable de entorno             | Valor                               |
 | -------------------------------- | ----------------------------------- |
@@ -579,7 +579,7 @@ Configuración Git adicional para tests de dispositivos físicos:
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 {{% /tab %}}
-{{% tab "Nube Xcode" %}}
+{{% tab "Xcode Cloud" (Nube Xcode) %}}
 
 | Variable de entorno    | Valor                   |
 | ----------------------- | ----------------------- |

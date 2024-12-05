@@ -26,7 +26,7 @@ author:
 categories:
 - contenedores
 - Kubernetes
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_on_public_website: true

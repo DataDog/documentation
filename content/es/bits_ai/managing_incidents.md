@@ -89,7 +89,7 @@ Si una incidencia ya tiene un análisis retrospectivo vinculado, puedes desvincu
 
 ## Leer más
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 
 [1]: https://app.datadoghq.com/incidents/settings#Postmortems

@@ -17,6 +17,7 @@ further_reading:
 - link: logs/logging_without_limits
   tag: Documentación
   text: Logging without Limits*
+kind: preguntas frecuentes
 title: Reglas de limpieza de logs utilizadas con frecuencia
 ---
 

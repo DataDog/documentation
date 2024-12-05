@@ -8,6 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Configurar las notificaciones de tu monitor
+kind: Guía
 title: Monitorizar reinicios en servidores efímeros
 ---
 

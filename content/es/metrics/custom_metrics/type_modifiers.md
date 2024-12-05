@@ -42,7 +42,7 @@ Los dos principales modificadores en la aplicación son `as_count()` y `as_rate(
 Dependiendo del tipo de métrica al que se apliquen, el comportamiento difiere:
 
 {{< tabs >}}
-{{% tab "Recuento" %}}
+{{% tab "COUNT" (Recuento) %}}
 
 * Efecto de `as_count()`:
   * Desactiva cualquier [interpolación][1].
@@ -68,7 +68,7 @@ Dependiendo del tipo de métrica al que se apliquen, el comportamiento difiere:
 
 [1]: /es/metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
-{{% tab "Indicador" %}}
+{{% tab "GAUGE" (Indicador) %}}
 
 Los tipos de métricas `GAUGE` representan el valor absoluto y final de una métrica. Los modificadores `as_count()` y `as_rate()` no tienen ningún efecto sobre ellos.
 

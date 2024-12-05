@@ -45,4 +45,4 @@ Los elementos de la aplicación vinculados a variables de plantilla de dashboard
 
 ## Lectura adicional
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}

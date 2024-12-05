@@ -42,4 +42,4 @@ La monitorización de la infraestructura incluye funciones básicas de Datadog q
 
 ## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
