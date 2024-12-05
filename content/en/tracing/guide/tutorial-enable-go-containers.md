@@ -22,9 +22,6 @@ further_reading:
   text: Tracing library open source code repository
 ---
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/guide/tutorial-enable-go-containers-v2">Tutorial - Enabling Tracing for a Go Application and Datadog Agent in Containers</a> documentation.</div>
-
-
 ## Overview
 
 This tutorial walks you through the steps for enabling tracing on a sample Go application installed on a container. In this scenario, the Datadog Agent is also installed in a container.
@@ -102,10 +99,14 @@ Next, configure the Go application to enable tracing. Because the Agent runs in 
 To enable tracing support, uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+     // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
+     // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
+     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+     // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+     // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 {{< /code-block >}}
 
 In the `main()` function, uncomment the following lines:
@@ -122,13 +123,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 {{< /code-block >}}
 
 In `setupDB()`, uncomment the following lines:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -256,23 +257,26 @@ Datadog has several fully supported libraries for Go that allow for automatic tr
 import (
   ...
 
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+  // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
+  // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
   ...
 )
 {{< /code-block >}}
 
-In `cmd/notes/main.go`, the Datadog libraries are initialized with the `WithServiceName` option. For example, the `chitrace` library is initialized as follows:
+In `cmd/notes/main.go`, the Datadog libraries are initialized with the `WithService` option. For example, the `chitrace` library is initialized as follows:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
+r.Use(chitrace.Middleware(chitrace.WithService("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-Using `chitrace.WithServiceName("notes")` ensures that all elements traced by the library fall under the service name `notes`.
+Using `chitrace.WithService("notes")` ensures that all elements traced by the library fall under the service name `notes`.
 
 The `main.go` file contains more implementation examples for each of these libraries. For an extensive list of libraries, see [Go Compatibility Requirements][16].
 
@@ -303,7 +307,8 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 Also remove the comment around the following import:
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+// "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 {{< /code-block >}}
 
 There are several examples of custom tracing in the sample application. Here are a couple more examples. Remove the comments to enable these spans:
@@ -350,8 +355,10 @@ To enable tracing in the calendar application:
 
 1. Uncomment the following lines in `cmd/calendar/main.go`:
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"  // 1.x
+   // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
@@ -360,7 +367,7 @@ To enable tracing in the calendar application:
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
+   r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
    {{< /code-block >}}
 
 1. Open `docker/all-docker-compose.yaml` and uncomment the `calendar` service to set up the Agent host and Unified Service Tags for the app and for Docker:
