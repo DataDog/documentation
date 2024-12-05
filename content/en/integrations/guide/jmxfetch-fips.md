@@ -72,7 +72,7 @@ trust stores for that JVM.
 
 {{% /tab %}}
 
-{{% tab "Containers" }}
+{{% tab "Containers" %}}
 
 Datadog Agent FIPS JMX docker images come with BouncyCastle FIPS provider pre-installed. BouncyCastle uses a
 proprietary key and trust store format, which is not compatible with regular Java key store format, or formats
