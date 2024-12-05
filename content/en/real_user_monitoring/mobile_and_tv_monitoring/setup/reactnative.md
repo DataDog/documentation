@@ -490,7 +490,7 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://docs.expo.dev/
 [4]: /real_user_monitoring/reactnative/expo/

@@ -283,7 +283,7 @@ config.resourceEventMapper = event => {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
 [4]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
