@@ -167,10 +167,10 @@ build_preview:english:
   <<: *base_template
   rules:
     - changes:
-        - content/!(en)/**/*
-        - i18n/!(en).*
-        - layouts/**/*.!(en).md
-        - data/**/*.!(en).*
+        - content/{es,fr,ja,ko}/**/*
+        - i18n/{es,fr,ja,ko}.*
+        - layouts/**/*.{es,fr,ja,ko}.md
+        - data/**/*.{es,fr,ja,ko}.*
       when: never
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
       when: on_success
@@ -232,10 +232,10 @@ build_preview:full:
     # We could also opt to only build the full site on schedule and keep this as a manual job just in case we need it
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
       changes:
-        - content/!(en)/**/*
-        - i18n/!(en).*
-        - layouts/**/*.!(en).md
-        - data/**/*.!(en).*
+        - content/{es,fr,ja,ko}/**/*
+        - i18n/{es,fr,ja,ko}.*
+        - layouts/**/*.{es,fr,ja,ko}.md
+        - data/**/*.{es,fr,ja,ko}.*
       when: on_success
   stage: build
   cache:
