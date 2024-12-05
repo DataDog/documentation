@@ -1,15 +1,13 @@
 ---
-title: RUM Unity Advanced Configuration
+title: Unity Advanced Configuration
 description: Learn how to configure Unity Monitoring.
-code_lang: unity
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
     - /real_user_monitoring/unity/advanced_configuration
     - /real_user_monitoring/otel
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
     - /real_user_monitoring/unity/otel_support/
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/unity
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"
@@ -184,5 +182,5 @@ DatadogSdk.instance.ClearAllData();
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/unity
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup/
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/unity/data_collected/

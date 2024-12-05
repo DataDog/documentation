@@ -1,11 +1,9 @@
 ---
-title: RUM Unity Data Collected
+title: Unity Data Collected
 description: Learn about the data collected by Unity Monitoring.
-code_lang: unity
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
 - /real_user_monitoring/unity/data_collected/
+- /real_user_monitoring/mobile_and_tv_monitoring/unity/data_collected
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"
@@ -28,5 +26,5 @@ Most Unity Monitoring data is collected by native Datadog iOS and Android SDKs f
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
-[2]: /real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/#event-specific-metrics-and-attributes
