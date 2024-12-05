@@ -6507,8 +6507,8 @@ components:
           description: List of indexes for the search. If not provided, the search
             is performed in all indexes.
           example:
-          - index-1
-          - index-2
+          - test-index
+          - test-index-2
           items:
             description: Individual index.
             type: string
@@ -7876,14 +7876,16 @@ components:
           description: List of indexes for the search. If not provided, the search
             is performed in all indexes.
           example:
-          - index-1
-          - index-2
+          - test-index
+          - test-index-2
           items:
             description: Individual index.
             type: string
           type: array
         is_created:
-          description: Whether the deletion request is fully created or not.
+          description: Whether the deletion request is fully created or not. It can
+            take several minutes to fully create a deletion request depending on the
+            target query and timeframe.
           example: true
           type: boolean
         org_id:
@@ -32009,8 +32011,8 @@ paths:
         type: safe
   /api/v2/deletion/data/{product}:
     post:
-      description: Creates a data deletion request by providing a query and a time
-        frame targeting the proper data.
+      description: Creates a data deletion request by providing a query and a timeframe
+        targeting the proper data.
       operationId: CreateDataDeletionRequest
       parameters:
       - $ref: '#/components/parameters/ProductName'
@@ -32058,7 +32060,7 @@ paths:
             value: '"logs"'
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"from\": 1672527600000,\n
-              \     \"to\": 1704063600000,\n      \"indexes\": [\"index-1\", \"index-2\"],\n
+              \     \"to\": 1704063600000,\n      \"indexes\": [\"test-index\", \"test-index-2\"],\n
               \     \"query\": {\"host\": \"abc\", \"service\": \"xyz\"}\n    }\n
               \ }\n}"
           step: there is a valid "deletion_request" in the system
