@@ -173,7 +173,6 @@ build_preview:english:
         - layouts/**/*.!(en).md
         - data/**/*.!(en).*
       when: never
-    - when: on_success
   stage: build
   cache:
     - *hugo_cache
@@ -237,7 +236,6 @@ build_preview:full:
         - layouts/**/*.!(en).md
         - data/**/*.!(en).*
       when: on_success
-    - when: never
   stage: build
   cache:
     - *hugo_cache
