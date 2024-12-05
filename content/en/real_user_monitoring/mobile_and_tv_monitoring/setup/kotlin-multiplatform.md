@@ -24,7 +24,7 @@ further_reading:
 Kotlin Multiplatform Monitoring is in Preview.
 {{< /beta-callout >}}
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iOS v12+.
 
@@ -410,7 +410,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
 [4]: /account_management/api-app-keys/#api-keys

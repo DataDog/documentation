@@ -387,7 +387,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: /account_management/api-app-keys/#client-tokens
 [4]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html

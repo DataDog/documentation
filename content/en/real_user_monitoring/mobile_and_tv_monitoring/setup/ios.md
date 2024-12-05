@@ -518,7 +518,7 @@ See [Supported versions][10] for a list operating system versions and platforms 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens

@@ -248,7 +248,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://github.com/rokucommunity/ropm
 [4]: https://github.com/DataDog/dd-sdk-roku
