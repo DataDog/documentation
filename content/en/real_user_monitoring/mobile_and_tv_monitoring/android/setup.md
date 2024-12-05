@@ -73,7 +73,7 @@ dependencies {
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
 4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][3].
 
-   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for Android in Datadog" style="width:90%;">}}
+   {{< img src="real_user_monitoring/error_tracking/mobile-new-application-1.png" alt="Create an application for Android in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [2]: /real_user_monitoring/android/web_view_tracking/
@@ -84,7 +84,7 @@ dependencies {
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
-### Step 3 - Initialize Datadog SDK with application context
+### Step 3 - Initialize the Datadog SDK with application context
 
 #### Update the initialization snippet
 
@@ -315,7 +315,7 @@ The initialization credentials require your application's variant name and use t
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][9].
 
-#### Sample sessions
+#### Sample session rates
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 

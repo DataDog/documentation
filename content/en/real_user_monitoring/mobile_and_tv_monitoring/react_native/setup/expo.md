@@ -1,5 +1,5 @@
 ---
-title: RUM Expo Setup
+title: Expo Setup
 description: Monitor your React Native projects using Expo and Expo Go with Datadog.
 aliases:
     - /real_user_monitoring/reactnative/expo/
@@ -26,11 +26,13 @@ further_reading:
 
 ## Overview
 
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+
 The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-datadog` and `@datadog/mobile-react-native`.
 
 `expo-datadog` supports Expo starting from SDK 45 and the plugin's versions follow Expo versions. For example, if you use Expo SDK 45, use `expo-datadog` version `45.x.x`. Datadog recommends using **Expo SDK 45** as a minimum version; previous versions may require manual steps.
 
-If you experience any issues setting up the Datadog SDK with an Expo application, you can see our [example application][1] as a reference.
+If you experience any issues setting up the Datadog SDK with an Expo application, you can see our [example application][3] as a reference.
 
 ## Setup
 
@@ -48,7 +50,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 ### Track view navigation
 
-To see RUM sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+To see RUM/Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
 #### Manual tracking
 
@@ -74,8 +76,8 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 
 Automatic view tracking is supported for the following modules:
 
-- React Navigation: [@Datadog/mobile-react-navigation][2]
-- React Native Navigation: [@Datadog/mobile-react-native-navigation][3]
+- React Navigation: [@Datadog/mobile-react-navigation][4]
+- React Native Navigation: [@Datadog/mobile-react-native-navigation][5]
 
 In this Datadog example project, View Tracking is achieved through `@datadog/mobile-react-navigation` and is configured using the `NavigationContainer`:
 
@@ -124,9 +126,11 @@ await DdSdkReactNative.initialize(config);
 // Once the Datadog SDK is initialized, you need to setup view tracking in order to see data in the RUM dashboard.
 ```
 
-#### Sample RUM sessions
+#### Sample session rates
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Expo SDK][4] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
+<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][6] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
 
 ### Upload source maps on EAS builds
 
@@ -158,11 +162,11 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
-For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][5].
+For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][7].
 
 ## Tracking Expo Router screens
 
-If you are using [Expo Router][6], track your screens in your `app/_layout.js` file:
+If you are using [Expo Router][8], track your screens in your `app/_layout.js` file:
 
 ```javascript
 import { useEffect } from 'react';
@@ -188,14 +192,14 @@ If you are using Expo Go, switch to development builds (recommended), or keep us
 
 ### Switch from Expo Go to development builds
 
-Your application's [development builds][7] are debug builds that contain the `expo-dev-client` package.
+Your application's [development builds][9] are debug builds that contain the `expo-dev-client` package.
 
-1. Enable the [custom native code to run][8] with `expo run:android` and `expo run:ios`.
-2. To start using your development application, run `expo install expo-dev-client` and `expo start --dev-client`. This installs and starts the [`expo-dev-client` package][9] to execute the added native code in dev mode.
+1. Enable the [custom native code to run][10] with `expo run:android` and `expo run:ios`.
+2. To start using your development application, run `expo install expo-dev-client` and `expo start --dev-client`. This installs and starts the [`expo-dev-client` package][11] to execute the added native code in dev mode.
 
 ### Develop with Expo Go
 
-When your application runs inside of Expo Go, you are unable to add any custom native code that is not part of the Expo Go application. Because the RUM React Native SDK relies on some custom native code to run, you can develop your application inside Expo Go without Datadog, and use Datadog in your standalone builds.
+When your application runs inside of Expo Go, you are unable to add any custom native code that is not part of the Expo Go application. Because the React Native SDK relies on some custom native code to run, you can develop your application inside Expo Go without Datadog, and use Datadog in your standalone builds.
 
 Your application crashes in Expo Go when some native code (that is not included) is called. To use Datadog with your standalone application and continue using Expo Go in development, add the following TypeScript file to your project:
 
@@ -254,11 +258,11 @@ This means that even if users open your application while offline, no data is lo
 
 ## Troubleshooting
 
-### App produces a lot of /logs RUM Resources
+### App produces a lot of /logs Resources
 
-When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each RUM Resource triggers a `/logs` call to the Expo dev server to print the log, which itself creates a new RUM resource, creating an infinite loop.
+When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each Resource triggers a `/logs` call to the Expo dev server to print the log, which itself creates a new RUM resource, creating an infinite loop.
 The most common patterns of Expo dev server host URL are filtered by the SDK, therefore, you may not encounter this error in most situations.
-If this error occurs, add the following RUM Resource mapper to filter out the calls:
+If this error occurs, add the following Resource mapper to filter out the calls:
 
 ```js
 import { DdSdkReactNativeConfiguration } from 'expo-datadog';
@@ -280,12 +284,14 @@ config.resourceEventMapper = event => {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
-[2]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
-[3]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
-[5]: /real_user_monitoring/error_tracking/mobile/expo/
-[6]: https://expo.github.io/router/docs/
-[7]: https://docs.expo.dev/development/introduction/
-[8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
-[9]: https://docs.expo.dev/development/getting-started/
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
+[4]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
+[5]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
+[7]: /real_user_monitoring/error_tracking/mobile/expo/
+[8]: https://expo.github.io/router/docs/
+[9]: https://docs.expo.dev/development/introduction/
+[10]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
+[11]: https://docs.expo.dev/development/getting-started/
