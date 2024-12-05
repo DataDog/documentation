@@ -5616,8 +5616,8 @@ menu:
       parent: vulnerability_pipeline
       identifier: vulnerability_pipeline_inbox
       weight: 10002
-    - name: Assign a Due Date
-      url: security/vulnerability_pipeline/assign_due_date
+    - name: Set a Due Date
+      url: security/vulnerability_pipeline/set_due_date
       parent: vulnerability_pipeline
       identifier: vulnerability_pipeline_due_date
       weight: 10002
