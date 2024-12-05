@@ -93,8 +93,8 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/database_monitoring/connect_dbm_and_apm-gov2">Correlate Database Monitoring and Traces</a> documentation.</div>
-
+{{< tabs >}}
+{{% tab "v1" % }}
 
 Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
 ```
@@ -158,6 +158,76 @@ func main() {
 ```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+
+{{% /tab %}}
+
+{{% tab "v2" }}
+
+Update your app dependencies to include [dd-trace-go@v2.0.0][1] or greater:
+```
+go get github.com/DataDog/dd-trace-go/v2
+```
+
+Update your code to import the `contrib/database/sql` package:
+```go
+import (
+   "database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+)
+```
+
+Enable the database monitoring propagation feature using one of the following methods:
+1. Env variable:
+   `DD_DBM_PROPAGATION_MODE=full`
+
+2. Using code during the driver registration:
+   ```go
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
+   ```
+
+3. Using code on `sqltrace.Open`:
+   ```go
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
+
+   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
+   if err != nil {
+	   log.Fatal(err)
+   }
+   ```
+
+Full example:
+```go
+import (
+	"database/sql"
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+)
+
+func main() {
+	// The first step is to set the dbm propagation mode when registering the driver. Note that this can also
+	// be done on sqltrace.Open for more granular control over the feature.
+	sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
+
+	// Followed by a call to Open.
+	db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Then, we continue using the database/sql package as we normally would, with tracing.
+	rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+}
+```
+
+[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 

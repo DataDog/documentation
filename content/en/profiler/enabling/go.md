@@ -38,15 +38,9 @@ To begin profiling applications:
 2. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler // v1
+    // go get github.com/DataDog/dd-trace-go/v2/profiler // v2
     ```
-
-    If you are using the preview version of 2.x, use:
-
-    ```shell
-    go get github.com/DataDog/dd-trace-go/v2/profiler
-    ```
-
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
 
 3. Import the [profiler][6] ([v2 documentation][21]) at the start of your application:
