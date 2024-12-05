@@ -1,7 +1,7 @@
 ---
-title: Cloud Network Monitoring (CNM)
+title: Network Performance Monitoring (NPM)
 core_product:
-  - cloud network monitoring
+  - network performance monitoring
 ---
-Datadog's Cloud Network Monitoring (CNM) provides visibility into network traffic between services, containers, availability zones, etc.
+Datadog's Network Performance Monitoring (NPM) provides visibility into network traffic between services, containers, availability zones, etc.
 For more information, <a href="/network_monitoring/devices">see the documentation</a>.

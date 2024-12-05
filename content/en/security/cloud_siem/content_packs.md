@@ -2,7 +2,7 @@
 title: Content Packs
 disable_toc: false
 further_reading:
-- link: "/security/cloud_siem/detection_rules"
+- link: "/security/cloud_siem/log_detection_rules"
   tag: "Documentation"
   text: "Create log detection rules"
 - link: "security/cloud_siem/investigator"

@@ -1,6 +1,5 @@
 ---
 title: Combining OpenTelemetry and Datadog Metrics
-private: true
 further_reading:
     - link: '/metrics/'
       tag: 'Documentation'

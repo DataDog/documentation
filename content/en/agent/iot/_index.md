@@ -25,7 +25,7 @@ The IoT Agent also supports:
 - Custom metric collection using an embedded [DogStatsD][6] server
 - Log collection using [tailing files][7], [TCP/UDP][8], and [journald][9]
 
-The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the standard Agent. It also doesn't support tracing for APM, live process monitoring, or Cloud Network Monitoring.
+The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the standard Agent. It also doesn't support tracing for APM, live process monitoring, or network performance monitoring.
 
 ## Setup
 

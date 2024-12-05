@@ -27,7 +27,7 @@ The Datadog Agent with embedded OpenTelemetry Collector offers:
 
 ### Comprehensive observability
 
-- Access {{< translate key="integration_count" >}} Datadog integrations, [Live Container Monitoring][3], [Cloud Network Monitoring][7], and [Universal Service Monitoring][5] (with eBPF) and more
+- Access {{< translate key="integration_count" >}} Datadog integrations, [Live Container Monitoring][3], [Network Performance Monitoring][7], and [Universal Service Monitoring][5] (with eBPF) and more
 - Leverage OpenTelemetry community-contributed integrations to collect telemetry in OpenTelemetry Protocol (OTLP) native format
 - Control your OTLP data with the Collector's processing and routing capabilities
 
@@ -159,7 +159,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [3]: /containers/
 [4]: /sensitive_data_scanner/
 [5]: /universal_service_monitoring/
-[7]: /network_monitoring/cloud_network_monitoring/
+[7]: /network_monitoring/performance/
 [9]: /agent/fleet_automation/
 [11]: https://github.com/DataDog/datadog-agent/blob/386130a34dde43035c814f9a9b08bc72eb20e476/comp/otelcol/collector-contrib/impl/manifest.yaml
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md

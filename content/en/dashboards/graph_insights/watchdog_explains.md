@@ -19,7 +19,7 @@ Watchdog Explains is available in Preview. To request access, complete the form.
 
 {{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="A walkthrough of the Watchdog Explains product" video=true >}}
 
-Watchdog Explains is an investigation assistant that guides you to the root cause of anomalies on any timeseries graph. 
+Watchdog Explains is an investigation assitant that guides you to the root cause of anomalies on any timeseries graph. 
 
 In Datadog, an investigation typically starts with graphs, then branches out into investigating individual assets. Watchdog Explains makes investigations more efficient by automatically showing which individual tags account could be responsible for a given spike. This allows you to focus your investigation on problematic areas of your infrastructure or software stack.
 

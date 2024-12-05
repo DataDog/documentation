@@ -28,7 +28,7 @@ If you use API or Terraform, replace the YAMLs in your requests.
 If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][1] located at the root folder of a repo.
 
 Upon import, the following occurs:
-- Datadog recognizes `kind:component` and `kind:system` in Backstage YAML; `kind:component` in Backstage is recognized as a service in Datadog
+- Datadog recognizes `kind:component` and 'kind:system' in Backstage YAML; `kind:component` in Backstage is recognized as a service in Datadog
 - `metadata.name` gets mapped to `dd-service`
 - `metadata.namespace` gets mapped to a custom tag with the format `namespace:${metadata.namespace}`
 - `spec.lifecycle` gets mapped to `lifecycle`

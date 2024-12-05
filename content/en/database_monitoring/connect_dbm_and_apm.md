@@ -93,6 +93,9 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/database_monitoring/connect_dbm_and_apm-gov2">Correlate Database Monitoring and Traces</a> documentation.</div>
+
+
 Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0

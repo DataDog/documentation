@@ -37,7 +37,7 @@ These configuration options for private locations can be passed as **parameters 
 {{< tabs >}}
 {{% tab "Docker" %}}
 ```shell
-docker run -d --restart always -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
+docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
 ```
 {{% /tab %}}
 {{% tab "Windows" %}}

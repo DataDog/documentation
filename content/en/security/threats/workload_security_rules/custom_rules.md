@@ -195,7 +195,7 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/threats/workload_security_rules
 [8]: /security/threats/
-[9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
+[9]: /security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
 [12]: /security/cloud_security_management/guide/active-protection

@@ -275,7 +275,7 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-go
       official: true
       authors: Datadog
-      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
+      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1' or 'github.com/DataDog/dd-trace-go/v2'.
     - name: datadog-go
       link: https://github.com/savaki/datadog
       authors: Matt Ho

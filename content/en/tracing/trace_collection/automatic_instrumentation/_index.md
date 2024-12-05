@@ -6,9 +6,6 @@ further_reading:
     - link: "/tracing/glossary/"
       tag: "Documentation"
       text: "APM Terms and Concepts"
-    - link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
-      tag: "Architecture Center"
-      text: "Instrument your app using the Datadog Operator and Admission Controller"
 ---
 
 ## Overview

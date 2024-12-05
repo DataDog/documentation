@@ -18,7 +18,7 @@ further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "/mobile_app_testing/"
+- link: "/mobile_app_testing/mobile_app_tests"
   tag: "Documentation"
   text: "Configure a Mobile Test"
 - link: "/synthetics/private_locations/"
@@ -326,8 +326,8 @@ For more information, see [Explore RUM & Session Replay][14].
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
 [16]: /synthetics/browser_tests/actions/#use-variables
-[17]: /synthetics/mobile_app_testing/
-[18]: /synthetics/mobile_app_testing/settings/
-[19]: /synthetics/mobile_app_testing/#use-global-variables
+[17]: /mobile_app_testing/mobile_app_tests/
+[18]: /mobile_app_testing/settings/
+[19]: /mobile_app_testing/mobile_app_tests/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies

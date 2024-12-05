@@ -26,6 +26,9 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go-v2">Tracing Go Applications</a> documentation.</div>
+
+
 ## Compatibility requirements
 
 The Go Tracer requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.

@@ -53,11 +53,6 @@ Capture observability data from in-house code or complex functions that aren't c
 
 To learn more, see [custom instrumentation][6].
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Service discovery is in Preview">}}
-Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
-{{< /callout >}}
-
-
 ## APM setup tutorials
 
 The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the Datadog tracing libraries:

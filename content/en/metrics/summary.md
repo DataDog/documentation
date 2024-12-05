@@ -202,7 +202,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | LLM Observability       | Timeseries emitted by the LLM Observability product using the `lmobs_to_metrics` service.
 | Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
 | Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
-| CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
+| NPM                     | Timeseries sent by the Datadog [Network Performance Monitoring][19] product.
 | Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
 | Other                   | Timeseries that don't have a DD integration counterpart.
 | Processes               | Timeseries generated from the Datadog [Processes][22] product.
@@ -236,7 +236,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [16]: /data_streams/
 [17]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
 [18]: /opentelemetry/collector_exporter/
-[19]: /network_monitoring/cloud_network_monitoring/
+[19]: /network_monitoring/performance/
 [20]: /observability_pipelines/
 [21]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [22]: /integrations/process/

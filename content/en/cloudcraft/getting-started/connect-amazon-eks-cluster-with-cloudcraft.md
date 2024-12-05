@@ -18,9 +18,7 @@ To connect your AWS account and familiarize yourself with Cloudcraft, see the fo
 - [Connect your AWS account with Cloudcraft][4]
 - [Create your first live AWS diagram][5]
 
-[Install and configure `kubectl`][7], a tool that allows you to control Kubernetes clusters through the command line. Cloudcraft recommends using the latest version to avoid issues.
-
-In addition, in order to scan your cluster successfully, Cloudcraft requires clusters to have public access enabled and no IP filtering applied. The **Public Access Source Allow List** option in the networking configuration must remain set to its default value of 0.0.0.0/0.
+You should also [install and configure `kubectl`][7], a tool that allows you to control Kubernetes clusters through the command line. Cloudcraft recommends using the latest version to avoid issues.
 
 ## Authorizing the Cloudcraft IAM role for view-only
 

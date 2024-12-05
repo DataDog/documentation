@@ -10,6 +10,7 @@ private: true
 {{< nextlink href="/opentelemetry/guide/migration/" >}}Migrate to OpenTelemetry Collector version 0.95.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Sending Data from OpenTelemetry Demo to Datadog{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/guide/combining_otel_and_datadog_metrics/" >}}Combining OpenTelemetry Datadog Integration Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Read more on the blog

@@ -32,13 +32,13 @@ The time range appears on the top right of the Explorer as a timeline. This feat
 
 ### Facets
 
-{{< img src="/error_tracking/facets-panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/facets_panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
 Click the Edit icon to see the list of available facets that you can show or hide from view.
 
-{{< img src="/error_tracking/error-tracking-facets.png" alt="Click the pencil icon to hide or show available Error Tracking facets from view." style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error-tracking-facets.png" alt="Click the pencil icon to hide or show available Error Tracking facets from view." style="width:100%;" >}}
 
 ## Inspect an issue
 
@@ -60,7 +60,7 @@ Seeing a new issue as soon as it happens gives you the chance to proactively ide
 
 Each event generated is tagged with the version, the service, and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
 
-{{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
+{{< img src="real_user_monitoring/error_tracking/export_to_monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
 
 ## Further Reading
 

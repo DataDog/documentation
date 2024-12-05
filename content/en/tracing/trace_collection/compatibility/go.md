@@ -13,6 +13,9 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
+<div class="alert alert-info">This documentation is for the Go Tracer v1.x. If you are looking for v2.x preview documentation, see the <a href="/tracing/trace_collection/compatibility/go-v2/">Go Compatibility Requirements</a> documentation.</div>
+
+
 ## Compatibility
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
@@ -52,40 +55,37 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 
 The Go tracer includes support for the following data stores and libraries.
 
-| Library                  | Support Type                                         | Examples and Documentation                                                      |
-|--------------------------|------------------------------------------------------|---------------------------------------------------------------------------------|
-| [AWS SDK][20]            | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][21]                |
-| [AWS SDK v2][75]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws][76]             |
-| [Elasticsearch][22]      | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][23]                   |
-| [Cassandra][24]          | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][25]                       |
-| [GraphQL][26]            | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][27]          |
-| [HTTP][28]               | Manual or Compile-Time<sup>[🔹](#library-side)</sup> | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][29]                          |
-| [HTTP router][30]        | Manual or Compile-Time<sup>[🔹](#library-side)</sup> | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][31]          |
-| [Redis (go-redis)][32]   | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][33]                    |
-| [Redis (go-redis-v8)][34]| Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8][35]                 |
-| [Redis (redigo)][36]     | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][37]                   |
-| [Redis (new redigo)][38] | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gomodule/redigo][39]                   |
-| [SQL][40]                | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][41]                      |
-| [SQLx][42]               | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][43]                      |
-| [MongoDB][44]            | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][45] |
-| [MongoDB (mgo)][73]      | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
-| [BuntDB][47]             | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][48]                    |
-| [LevelDB][49]            | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
-| [miekg/dns][51]          | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
-| [Kafka (confluent)][53]  | Manual or Compile-Time<sup>[🔹](#library-side)</sup> | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][54]   |
-| [Kafka (sarama)][55]     | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1][56]                     |
-| [Google API][57]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][58]             |
-| [go-restful][59]         | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][60]               |
-| [Twirp][61]              | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][62]                    |
-| [Vault][63]              | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][64]                   |
-| [Consul][65]             | Manual                                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/consul][66]                  |
-| [Gorm][67]               | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm][68]                       |
-| [Gorm v2][69]            | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorm.io/gorm.v1][70]                   |
-| [Kubernetes][71]         | Manual or Compile-Time                               | [gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes][72]       |
-| [Memcache][73]           | Manual                                              | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][74]      |
-
-<a id="library-side"></a>
-<sup>🔹</sup> Compile-time instrumentation is done directly within the library, and cannot be locally opted out of using the `//orchestrion:ignore` directive.
+| Library                 | Support Type    | Examples and Documentation                                                      |
+|-------------------------|-----------------|---------------------------------------------------------------------------------|
+| [AWS SDK][20]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][21]                |
+| [AWS SDK v2][75]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws][76]                |
+| [Elasticsearch][22]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][23]                   |
+| [Cassandra][24]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][25]                       |
+| [GraphQL][26]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][27]          |
+| [HTTP][28]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][29]                          |
+| [HTTP router][30]       | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][31]          |
+| [Redis (go-redis)][32]  | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][33]                    |
+| [Redis (go-redis-v8)][34]| Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8][35]                |
+| [Redis (redigo)][36]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][37]                   |
+| [Redis (new redigo)][38]| Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gomodule/redigo][39]                   |
+| [SQL][40]               | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][41]                      |
+| [SQLx][42]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][43]                      |
+| [MongoDB][44]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][45] |
+| [MongoDB (mgo)[73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
+| [BuntDB][47]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][48]                    |
+| [LevelDB][49]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
+| [miekg/dns][51]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
+| [Kafka (confluent)][53] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][54]   |
+| [Kafka (sarama)][55]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][56]                    |
+| [Google API][57]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][58]             |
+| [go-restful][59]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][60]               |
+| [Twirp][61]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][62]                    |
+| [Vault][63]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][64]                   |
+| [Consul][65]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/consul][66]                  |
+| [Gorm][67]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm][68]                       |
+| [Gorm v2][69]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorm.io/gorm.v1][70]                   |
+| [Kubernetes][71]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes][72]       |
+| [Memcache][73]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][74]      |
 
 
 Packages must be imported with:
@@ -152,8 +152,8 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [52]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns
 [53]: https://github.com/confluentinc/confluent-kafka-go
 [54]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go
-[55]: https://github.com/IBM/sarama
-[56]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1
+[55]: https://github.com/Shopify/sarama
+[56]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama
 [57]: https://github.com/googleapis/google-api-go-client
 [58]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api
 [59]: https://github.com/emicklei/go-restful

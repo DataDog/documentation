@@ -116,7 +116,7 @@ For faster processing, generate the first exports manually by clicking **Run Now
 5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note:** If you do not see your App Registration listed, start typing in the name for the UI to update and show it, if it is available.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**.
     - Select *review + assign*.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.

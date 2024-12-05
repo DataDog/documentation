@@ -2,6 +2,7 @@
 title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
 
 ---
+
 ## Overview
 
 <div class="alert alert-warning">
@@ -40,8 +41,8 @@ Follow these steps to instrument the function:
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // use "github.com/DataDog/dd-trace-go/contrib/net/http/v2" if you're using v2.x
     )
     ```
 3. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.

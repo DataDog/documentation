@@ -10,6 +10,9 @@ further_reading:
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Package page"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+  tag: "External Site"
+  text: "v2 Package page"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -33,7 +36,7 @@ You may also elect to provide `env`, `service`, and `version` through the tracer
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
 )
 
 func main() {
@@ -46,20 +49,11 @@ func main() {
     // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
     // Make sure this line stays in your main function.
     defer tracer.Stop()
-
-    // If you expect your application to be shut down by SIGTERM (for example, a container in Kubernetes),
-    // you might want to listen for that signal and explicitly stop the tracer to ensure no data is lost
-    sigChan := make(chan os.Signal, 1)
-    signal.Notify(sigChan, syscall.SIGTERM)
-    go func() {
-        <-sigChan
-        tracer.Stop()
-    }()
 }
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3].
+See all available options in the [configuration documentation][3] ([v2.x documentation][20]).
 
 ### Unified service tagging
 
@@ -204,3 +198,4 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
+[20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption

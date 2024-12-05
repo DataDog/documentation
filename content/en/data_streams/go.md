@@ -32,7 +32,7 @@ Two types of instrumentation are available:
 
 ```go
 import (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2" // use "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2" if you're using v2.x
 )
 
 ...
@@ -58,7 +58,7 @@ If a service consumes data from one point and produces to another point, propaga
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama" // use "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama" if you're using 2.x
 )
 
 ...

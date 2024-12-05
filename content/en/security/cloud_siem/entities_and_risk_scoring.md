@@ -45,7 +45,7 @@ The **What contributes to the score** section displays the list of fired signals
 
 The **Next steps** section of the entity side panel includes the available mitigation steps for SIEM signals, misconfigurations, and identity risks.
 
-{{< img src="security/entities/entities-next-steps2.png" alt="The available next steps for an entity as shown in the entity side panel" style="width:80%;" >}}
+{{< img src="security/entities/entity-next-steps2.png" alt="The available next steps for an entity as shown in the entity side panel" style="width:80%;" >}}
 
 ## Risk scoring
 

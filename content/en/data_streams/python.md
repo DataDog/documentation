@@ -39,9 +39,6 @@ Data Streams Monitoring uses one [message attribute][4] to track a message's pat
 ### Monitoring Kinesis Pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
 
-### Manual instrumentation
-Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][6].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -51,4 +48,3 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [5]: https://pypi.org/project/kombu/
-[6]: /data_streams/manual_instrumentation/?tab=python

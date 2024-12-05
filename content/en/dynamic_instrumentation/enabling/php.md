@@ -3,7 +3,7 @@ title: Enable Dynamic Instrumentation for PHP
 aliases:
     - /tracing/dynamic_instrumentation/enabling/php/
 is_beta: true
-private: true
+private: false
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 30
@@ -52,3 +52,4 @@ See [Dynamic Instrumentation][5] for information about setting snapshot and metr
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[8]: /dynamic_instrumentation/symdb/

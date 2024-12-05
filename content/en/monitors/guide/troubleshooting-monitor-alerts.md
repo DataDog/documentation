@@ -41,12 +41,6 @@ If metrics are absent from a monitor's evaluation window, and the monitor is not
 
 The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4].
 
-#### "No Data" status using Rollup function
-
-If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated. 
-
-For most use cases, disable the "Require Full Window" setting unless your specific scenario demands complete data for accurate evaluation. For more information, see [Rollups in monitors][21].
-
 ## Verify the presence of data
 
 If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. 
@@ -113,4 +107,3 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 [18]: /events/stream
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
 [20]: /notebooks
-[21]: /dashboards/functions/rollup/#rollups-in-monitors

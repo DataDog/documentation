@@ -101,10 +101,6 @@ After choosing to create a `gRPC` test, define your test's request.
 
 Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
-### Snippets
-
-{{% synthetics-api-tests-snippets %}}
-
 ### Define assertions
 
 Assertions define what an expected test result is. After you click **Send**, an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.

@@ -68,10 +68,9 @@ To use change tracking on the Monitor Status Page, ensure the appropriate servic
 #### To analyze changes from the monitor status page:
 
 1. Go to the monitor status page for the monitor you are analyzing.
-1. Locate the change tracking timeline at the top of the page.
-   - For monitors with multiple graphs (dictated by the group by in the monitor query), filter to an individual group.
-1. Use the timeline together with the event graphs to correlate change events with the alert.
-1. Click the change indicator in the timeline to view more details about the change in the side panel.
+1. Locate the **Recent Changes** section.
+1. Use the **Recent Changes** timeline together with the **Status & History** graphs to correlate change events with the alert.
+1. Click the change indicator in the **Recent Changes** timeline to view more details about the change in the side panel.
 1. From the side panel, you can investigate more details about the change and take the following actions:
    - View the deployment in your CI/CD system.
    - View the latest commits in your repository.
@@ -116,13 +115,13 @@ Change Tracking follows these types of changes across your infrastructure:
 | Change Type | Tracking Requirements |
 | ----------- | ----------- |
 | Code Deployments (APM) | APM & [Deployment Tracking][4]. A version must be available on the service.
-| Kubernetes Deployment Manifest Updates | Datadog Agent Set Up for Kubernetes (Add service label to kubernetes yaml file if possible)
-| LaunchDarkly Feature Flag Events (service tag must be defined on event) | Third Party Datadog Integrations ([LaunchDarkly only][5])
+| Kubernetes Deployment Manifest Updates | Datadog Agent Set Up for Kubernetes
+| LaunchDarkly Feature Flag Events | Third Party Datadog Integrations ([LaunchDarkly only][5])
 | Custom Feature Flag Events | [Event Management API][6]
 | Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.). | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.
-| CrashLoopBackOff Kubernetes Pod Crashes | Kubernetes Integration (Add service label to kubernetes yaml file if possible)
-| PostgreSQL Database Table Change | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]
-| PostgreSQL Database Settings Change | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]
+| CrashLoopBackOff Kubernetes Pod Crashes | Kubernetes Integration
+| PostgreSQL Database Table Change | [Database Monitoring (DBM)][8]
+| PostgreSQL Database Settings Change | [Database Monitoring (DBM)][8]
 |  Kafka Schema Updates | [Data Streams Monitoring (DSM)][9]
 | Manual Kubernetes Deployment Scale Events | Kubernetes Audit Logging
 
@@ -139,4 +138,3 @@ Change Tracking follows these types of changes across your infrastructure:
 [7]: /watchdog/
 [8]: /database_monitoring/
 [9]: /data_streams/
-[10]: /database_monitoring/connect_dbm_and_apm/
