@@ -113,7 +113,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
+3. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
@@ -121,9 +121,12 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
+3. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
+
+   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for iOS in Datadog" style="width:90%;">}}
+
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
