@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Configurar las notificaciones de tu monitor
-kind: Guía
 title: Alerta por ausencia de variación del valor
 ---
 
@@ -22,7 +21,7 @@ Luego, necesitas aplicar la función abs() para obtener el valor absoluto de est
 
 Estas funciones se pueden aplicar a tu consulta en la interfaz de usuario.
 
-{{< img src="monitors/guide/alert_value_difference.png" alt="Apply diff function through Sigma icon > Rate > Value difference" (Aplicar la función diff a través de Icono sigma > Tasa > Diferencia de valores) >}}
+{{< img src="monitors/guide/alert_value_difference.png" alt="Aplicar la función diff a través de Icono sigma > Tasa > Diferencia de valores" >}}
 
 También puedes introducir tu consulta compleja manualmente en la interfaz de usuario 'edit monitor' (editar monitor'), a través de la pestaña Source (Fuente) (o aplicarla mediante programación a través de la [API][1]). Consulta la siguiente imagen.
 

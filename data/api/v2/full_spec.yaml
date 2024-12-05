@@ -578,6 +578,13 @@ components:
         example: 10
         format: int64
         type: integer
+    ProductName:
+      description: Name of the product to be deleted, either `logs` or `rum`.
+      in: path
+      name: product
+      required: true
+      schema:
+        type: string
     ProjectIDPathParameter:
       description: Project UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -590,6 +597,13 @@ components:
       description: The ID of the report job.
       in: path
       name: report_id
+      required: true
+      schema:
+        type: string
+    RequestId:
+      description: ID of the deletion request.
+      in: path
+      name: id
       required: true
       schema:
         type: string
@@ -4274,6 +4288,14 @@ components:
       - name
       - expression
       type: object
+    CancelDataDeletionResponseBody:
+      description: The response from the cancel data deletion request endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/DataDeletionResponseItem'
+        meta:
+          $ref: '#/components/schemas/DataDeletionResponseMeta'
+      type: object
     Case:
       description: A case
       properties:
@@ -6465,6 +6487,66 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateDataDeletionRequestBody:
+      description: Object needed to create a data deletion request.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDataDeletionRequestBodyData'
+      required:
+      - data
+      type: object
+    CreateDataDeletionRequestBodyAttributes:
+      description: Attributes for creating a data deletion request.
+      properties:
+        from:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search
+            is performed in all indexes.
+          example:
+          - index-1
+          - index-2
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        query:
+          additionalProperties:
+            type: string
+          description: Query for creating a data deletion request.
+          example:
+            host: abc
+            service: xyz
+          type: object
+        to:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+      required:
+      - query
+      - from
+      - to
+      type: object
+    CreateDataDeletionRequestBodyData:
+      description: Data needed to create a data deletion request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDataDeletionRequestBodyAttributes'
+      required:
+      - attributes
+      type: object
+    CreateDataDeletionResponseBody:
+      description: The response from the create data deletion request endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/DataDeletionResponseItem'
+        meta:
+          $ref: '#/components/schemas/DataDeletionResponseMeta'
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -7756,6 +7838,140 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataDeletionResponseItem:
+      description: The created data deletion request information.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DataDeletionResponseItemAttributes'
+        id:
+          description: The ID of the created data deletion request.
+          example: '1'
+          type: string
+        type:
+          description: The type of the request created.
+          example: deletion_request
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    DataDeletionResponseItemAttributes:
+      description: Deletion attribute for data deletion response.
+      properties:
+        created_at:
+          description: Creation time of the deletion request.
+          example: '2024-01-01T00:00:00.000000Z'
+          type: string
+        created_by:
+          description: User who created the deletion request.
+          example: test.user@datadoghq.com
+          type: string
+        from_time:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search
+            is performed in all indexes.
+          example:
+          - index-1
+          - index-2
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        is_created:
+          description: Whether the deletion request is fully created or not.
+          example: true
+          type: boolean
+        org_id:
+          description: Organization ID.
+          example: 321813
+          format: int64
+          type: integer
+        product:
+          description: Product name.
+          example: logs
+          type: string
+        query:
+          description: Query for creating a data deletion request.
+          example: service:xyz host:abc
+          type: string
+        starting_at:
+          description: Starting time of the process to delete the requested data.
+          example: '2024-01-01T02:00:00.000000Z'
+          type: string
+        status:
+          description: Status of the deletion request.
+          example: pending
+          type: string
+        to_time:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+        total_unrestricted:
+          description: Total number of elements to be deleted. Only the data accessible
+            to the current user that matches the query and timeframe provided will
+            be deleted.
+          example: 100
+          format: int64
+          type: integer
+        updated_at:
+          description: Update time of the deletion request.
+          example: '2024-01-01T00:00:00.000000Z'
+          type: string
+      required:
+      - created_at
+      - created_by
+      - from_time
+      - is_created
+      - org_id
+      - product
+      - query
+      - starting_at
+      - status
+      - to_time
+      - total_unrestricted
+      - updated_at
+      type: object
+    DataDeletionResponseMeta:
+      description: The metadata of the data deletion response.
+      properties:
+        count_product:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by product.
+          example:
+            logs: 8
+            rum: 7
+          type: object
+        count_status:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by status.
+          example:
+            completed: 10
+            pending: 5
+          type: object
+        next_page:
+          description: The next page when searching deletion requests created in the
+            current organization.
+          example: cGFnZTI=
+          type: string
+        product:
+          description: The product of the deletion request.
+          example: logs
+          type: string
+        request_status:
+          description: The status of the executed request.
+          example: canceled
+          type: string
+      type: object
     DataScalarColumn:
       description: A column containing the numerical results for a formula or query.
       properties:
@@ -10774,6 +10990,17 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetDataDeletionsResponseBody:
+      description: The response from the get data deletion requests endpoint.
+      properties:
+        data:
+          description: The list of data deletion requests that matches the query.
+          items:
+            $ref: '#/components/schemas/DataDeletionResponseItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DataDeletionResponseMeta'
+      type: object
     GetDeviceAttributes:
       description: The device attributes
       properties:
@@ -27810,9 +28037,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code and library vulnerabilities.
-              This does not restrict access to the vulnerability data source through
-              the API or inventory SQL.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -27837,7 +28061,6 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
-            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -27858,7 +28081,6 @@ components:
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
-            security_monitoring_signals_write: Edit Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
             security_pipelines_read: View Security Pipelines.
@@ -27883,6 +28105,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -31784,6 +32007,196 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/deletion/data/{product}:
+    post:
+      description: Creates a data deletion request by providing a query and a time
+        frame targeting the proper data.
+      operationId: CreateDataDeletionRequest
+      parameters:
+      - $ref: '#/components/parameters/ProductName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataDeletionRequestBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataDeletionResponseBody'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Precondition failed error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Creates a data deletion request
+      tags:
+      - Data Deletion
+      x-given:
+        deletion_request:
+          parameters:
+          - name: product
+            value: '"logs"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"from\": 1672527600000,\n
+              \     \"to\": 1704063600000,\n      \"indexes\": [\"index-1\", \"index-2\"],\n
+              \     \"query\": {\"host\": \"abc\", \"service\": \"xyz\"}\n    }\n
+              \ }\n}"
+          step: there is a valid "deletion_request" in the system
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_delete_data
+        - logs_delete_data
+      x-undo:
+        operationId: CancelDataDeletionRequest
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/deletion/requests:
+    get:
+      description: Gets a list of data deletion requests based on several filter parameters.
+      operationId: GetDataDeletionRequests
+      parameters:
+      - description: The next page of the previous search. If the next_page parameter
+          is included, the rest of the query elements are ignored.
+        example: cGFnZTI=
+        in: query
+        name: next_page
+        required: false
+        schema:
+          type: string
+      - description: Retrieve only the requests related to the given product.
+        example: logs
+        in: query
+        name: product
+        required: false
+        schema:
+          type: string
+      - description: Retrieve only the requests that matches the given query.
+        example: service:xyz host:abc
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - description: Retrieve only the requests with the given status.
+        example: pending
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: Sets the page size of the search.
+        example: '50'
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 50
+          format: int64
+          maximum: 50
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataDeletionsResponseBody'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Gets a list of data deletion requests
+      tags:
+      - Data Deletion
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_delete_data
+        - logs_delete_data
+      x-undo:
+        type: safe
+  /api/v2/deletion/requests/{id}/cancel:
+    put:
+      description: Cancels a data deletion request by providing its ID.
+      operationId: CancelDataDeletionRequest
+      parameters:
+      - $ref: '#/components/parameters/RequestId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelDataDeletionResponseBody'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Precondition failed error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Cancels a data deletion request
+      tags:
+      - Data Deletion
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_delete_data
+        - logs_delete_data
+      x-undo:
+        type: idempotent
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -32595,7 +33008,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get a list of incident types
       tags:
@@ -32604,7 +33016,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -32735,7 +33146,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get incident type details
       tags:
@@ -32744,7 +33154,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -38670,6 +39079,10 @@ paths:
           source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
   /api/v2/posture_management/findings:
@@ -40608,9 +41021,9 @@ paths:
         rum_metric:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"type\":
-              \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\": \"session\",\n
-              \     \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique_lower_alnum }}\",\n
+              \   \"type\": \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\":
+              \"session\",\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
               \       \"include_percentiles\": true,\n        \"path\": \"@duration\"\n
               \     },\n      \"filter\": {\n        \"query\": \"source:{{ unique
               }}\"\n      },\n      \"group_by\": [{\n        \"path\": \"@browser.name\",\n
@@ -43931,11 +44344,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Convert a job result to a signal
       tags:
       - Security Monitoring
@@ -45703,6 +46111,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview.
@@ -47115,6 +47527,10 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: The Data Deletion API allows the user to target and delete data from
+    the allowed products. It's currently enabled for Logs and RUM and depends on `logs_delete_data`
+    and `rum_delete_data` permissions respectively.
+  name: Data Deletion
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 

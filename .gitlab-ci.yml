@@ -683,7 +683,7 @@ run_notranslate_tag:schedule:
     - build_live
   timeout: 4h
   script:
-    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install six transifex-python
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
     - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
   rules:

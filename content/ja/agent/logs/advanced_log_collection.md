@@ -98,7 +98,7 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。オートディスカバリーを使用して構成してポッド内の特定の `<CONTAINER_IDENTIFIER>` でコンテナログを収集するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
+オートディスカバリーを使用して、ポッド内の指定したコンテナ (名前は `CONTAINER_NAME`) のコンテナログを収集するように構成するには、ポッドの `log_processing_rules` に以下のアノテーションを追加します。
 
 ```yaml
 apiVersion: apps/v1
@@ -111,7 +111,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -126,7 +126,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -231,7 +231,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -246,7 +246,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -326,7 +326,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -342,7 +342,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -428,7 +428,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -443,7 +443,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: postgres:latest
 ```
 
@@ -454,7 +454,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
+<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em><br><br>ログ収集はミリ秒単位の精度で動作します。 パターンに一致するログでも、より高い精度のログは送信されません。</div>
 
 その他の例:
 
@@ -503,7 +503,7 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
-If no pattern meets the line match threshold, add the `auto_multi_line_default_match_threshold` parameter with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+パターンが行一致のしきい値を満たさない場合は、`auto_multi_line_default_match_threshold` パラメーターをより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 ```yaml
 logs_config:
@@ -529,9 +529,9 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
         "auto_multi_line_detection": true
       }]
 ```
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
+自動複数行検出は、一般的な正規表現リストを使用してログとのマッチングを試みます。組み込みリストで不足している場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数を使用して `datadog.yaml` ファイルにカスタムパターンを追加することが可能です。
 
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+パターンが行一致のしきい値を満たさない場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数をより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 [1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
 
@@ -549,7 +549,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -560,13 +560,13 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: testApp:latest
 ```
 
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
+複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数で `datadog.yaml` ファイルにカスタムパターンを追加することもできます。
 
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+パターンがライン一致のしきい値に一致しない場合は、より低い値の `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数を追加します。これにより、自動複数行集計が機能するためにログが一致しなければならない頻度を決定するしきい値が構成されます。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 [1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
 

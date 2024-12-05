@@ -584,7 +584,7 @@ Les exemples suivants montrent comment surveiller les événements de connexion 
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Depuis la version 3.13.1 de dd-trace-js, l'API du traceur NodeJS permet de surveiller les événements utilisateur.
+Depuis la version 3.13.1 de dd-trace-js, l'API du traceur Node.js permet de surveiller les événements utilisateur.
 
 Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 

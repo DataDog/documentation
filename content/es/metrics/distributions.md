@@ -13,7 +13,7 @@ title: Distribuciones
 
 Las distribuciones son un tipo de métrica que agrega valores enviados desde varios hosts durante un intervalo de descarga para medir distribuciones estadísticas en toda tu infraestructura.
 
-Las distribuciones globales instrumentan objetos lógicos, como <txprotected>servicios</txprotected>independientemente de los hosts subyacentes. A diferencia de los [histogramas][1], que se agregan del lado del Agent, las distribuciones globales envían todos los datos sin procesar recopilados durante el intervalo de descarga y la agregación se produce del lado del servidor utilizando la [estructura de datos DDSketch][2] de Datadog. 
+Las distribuciones globales instrumentan objetos lógicos, como servicios independientemente de los hosts subyacentes. A diferencia de los [histogramas][1], que se agregan del lado del Agent, las distribuciones globales envían todos los datos sin procesar recopilados durante el intervalo de descarga y la agregación se produce del lado del servidor utilizando la [estructura de datos DDSketch][2] de Datadog. 
 
 Las distribuciones proporcionan una funcionalidad de consulta mejorada y opciones de configuración que no se ofrecen con otros tipos de métrica (count, tasa, gauge, histograma):
 * **Cálculo de agregaciones de percentiles**: Las distribuciones se almacenan como estructuras de datos DDSketch que representan datos sin procesar y no agregados, de modo que pueden calcularse agregaciones de percentiles globalmente precisas (p50, p75, p90, p95, p99 o cualquier percentil de tu elección con hasta dos decimales) a través de los datos sin procesar de todos tus hosts. La activación de agregaciones de percentiles puede desbloquear funcionalidades de consulta avanzadas como: 
@@ -43,7 +43,7 @@ Consulta la [sección Herramientas de desarrollo][1] para más detalles de la im
 
 ## Activación de funciones avanzadas de consulta
 
-Al igual que otros tipos de métrica, como `gauges` o `histograms`, las distribuciones disponen de las siguientes agregaciones: `count`, `min`, `max`, `sum`, y `avg`. Las distribuciones se etiquetan inicialmente del mismo modo que otras <txprotected>métricas</txprotected>, con las etiquetas (tags) personalizadas establecidas en el código. A continuación, se resuelven en el host etiquetas (tags) basándose en el host que informó la métrica. 
+Al igual que otros tipos de métrica, como `gauges` o `histograms`, las distribuciones disponen de las siguientes agregaciones: `count`, `min`, `max`, `sum`, y `avg`. Las distribuciones se etiquetan inicialmente del mismo modo que otras métricas, con las etiquetas (tags) personalizadas establecidas en el código. A continuación, se resuelven en el host etiquetas (tags) basándose en el host que informó la métrica. 
 
 Sin embargo, puedes activar la funcionalidad de consulta avanzada, como el cálculo de agregaciones de percentiles globalmente precisas para todas los etiquetas (tags) consultables de tu distribución en la página Resumen de métricas. Esto proporciona agregaciones para `p50`, `p75`, `p90`, `p95`, y `p99` o cualquier percentil definido por el usuario de tu elección (con hasta dos puntos decimales como 99,99). Al activar las consultas avanzadas también se desbloquean las consultas de umbral y la desviación estándar.
 
@@ -91,7 +91,7 @@ También puedes crear un SLO basado en métricas utilizando consultas de umbral:
 
 ## Personaliza el etiquetado
 
-Las distribuciones proporcionan una funcionalidad que te permite controlar el etiquetado para <txprotected><txprotected>métricas</txprotected> personalizadas</txprotected> donde la granularidad a nivel de host no tiene sentido. Las configuraciones de etiquetas (tags) son _listas de permisos_ de las etiquetas (tags) que te gustaría mantener. 
+Las distribuciones proporcionan una funcionalidad que te permite controlar el etiquetado para métricas personalizadas donde la granularidad a nivel de host no tiene sentido. Las configuraciones de etiquetas (tags) son _listas de permisos_ de las etiquetas (tags) que te gustaría mantener. 
 
 Para personalizar el etiquetado:
 

@@ -4,6 +4,6 @@ aliases:
 title: モニター設定の変更が反映されない
 ---
 
-Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that notify on on *No Data* are available for 48 hours. If you do not have *No Data* alert settings enabled and your group for a metric monitor stops reporting data, the group persists on the monitor status page until it ages out, though that group stops being evaluated after a short absence. The specific timing for how long the group persists depends on your settings.
+Datadog は、クエリが変更されない限り、UI 上でモニターグループを 24 時間保持します。*No Data* を通知するホストモニターとサービスチェックは 48 時間利用可能です。*No Data* のアラート設定を有効にしておらず、メトリクスモニターのグループがデータの報告を停止した場合、そのグループは古くなるまでモニターのステータスページに残りますが、短期間の不在後にそのグループの評価は停止します。グループがどのくらいの期間残るかの具体的なタイミングは、設定によって異なります。
 
-For event monitors, however, Datadog also keeps groups for evaluations for at least 24 hours. This means that if a monitor is updated and the groups are changed in the query, some old groups may persist. If you must change the group settings on your event monitor, you may want to clone or create a new monitor to reflect your new groups. Alternatively, you can mute them if you would like to maintain the monitor but silence any alerts that would result from the changes.
+しかしイベントモニターの場合、Datadog は評価のためにグループを少なくとも 24 時間保持します。これは、モニターが更新されてクエリ内のグループが変更された場合でも、古いグループが残る可能性があることを意味します。イベントモニターのグループ設定を変更する必要がある場合、新しいグループを反映するためにモニターを複製するか新しく作成することを検討してください。また、モニターを維持しつつ変更によるアラートをサイレントにしたい場合は、それらをミュートすることもできます。

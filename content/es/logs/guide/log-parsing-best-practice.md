@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: ¿Cómo investigar un problema de análisis de logs?
-kind: guía
 title: Análisis de logs - Prácticas recomendadas
 ---
 

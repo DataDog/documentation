@@ -9,6 +9,9 @@ further_reading:
 - link: /sensitive_data_scanner/regular_expression_syntax
   tag: 설명서
   text: 커스텀 스캔 규칙용 정규식 구문
+- link: /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  tag: 설명서
+  text: 커스텀 규칙 생성을 위한 모범 사례
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: 블로그
   text: 민감 데이터 스캐너를 사용하여 규모에 따라 민감 데이터 문제를 식별, 분류 및 해결하세요.
@@ -21,6 +24,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-security/
   tag: 블로그
   text: Data Security으로 내 클라우드 데이터에 있는 민감 데이터 찾기
+- link: https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/
+  tag: 블로그
+  text: Datadog를 사용해 HIPAA 요건의 적용을 받는 기업들이 민감한 데이터를 관리하는 방법
 title: 민감 데이터 스캐너
 ---
 
@@ -54,7 +60,7 @@ title: 민감 데이터 스캐너
 **환경:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  에이전트를 사용한 민감 데이터 스캐너는 프라이빗 베타 서비스 중입니다. 액세스를 요청하려면 다음 양식을 작성하세요.
+  Datadog 에이전트에 대한 Sensitive Data Scanner 지원은 베타 버전입니다. 등록하려면 <strong>액세스 요청</strong>을 클릭하세요.
 {{< /callout >}}
 
 - **에이전트를 사용한 민감 데이터 스캐너**를 사용하면 Datadog 백엔드에 전송되기 전에 Datadog가 로그를 수정하고, 수정된 로그가 프레미스를 벗어날 필요가 없습니다. 이 방법을 사용하면 조직당 스캐닝 그룹 하나만 할당할 수 있고,  사전 정의된 라이브러리 규칙을 하나만 사용할 수 있습니다.
@@ -74,7 +80,7 @@ title: 민감 데이터 스캐너
 [1]: /ko/account_management/rbac/permissions/#compliance
 [2]: /ko/account_management/rbac/
 {{% /tab %}}
-{{% tab "에이전트 사용" %}}
+{{% tab "에이전트 이용" %}}
 
 1. 필요한 권한을 부여하세요. 기본적으로 Datadog 관리자 역할이 있는 사용자는 스캔 규칙을 살펴보고 설정할 수 있는 접근 권한이 있습니다. 다른 사용자의 접근을 허용하려면 [규정 준수(Compliance)[1]에서 `data_scanner_read` 또는 `data_scanner_write` 권한을 허가하여 역할을 사용자 지정합니다. 역할 및 권한을 설정하는 방법에 대한 자세한 내용을 확인하려면 [접근 제어][2]를 참조하세요.
 
@@ -147,18 +153,27 @@ Terraform의 경우 [Datadog 민감 데이터 스캐너 규칙][1] 리소스를 
 
 스캔 규칙 라이브러리에는 이메일 주소, 신용카드 번호, API 키, 인증 토큰 등의 일반적인 패턴을 감지할 목적으로 사전 정의된 규칙이 포함되어 있습니다.
 
+1. 검사 그룹 내에서 이 규칙을 생성하지 않은 경우 검사 그룹을 선택하세요.
 1. **스캔 그룹에 라이브러리 규칙 추가** 섹션에서 사용하려는 라이브러리 규칙을 선택합니다.
-1. **규칙 적용 대상 및 작업 정의** 섹션에서 **전체 이벤트** 또는 **특정 속성**을 스캔할지 선택합니다.
-    - 전체 이벤트를 스캔하는 경우 특정 속성을 스캔 대상에서 선택적으로 제외할 수 있습니다.
-    - 특정 속성을 스캔하는 경우 스캔할 속성을 지정합니다.
 {{% sds-scanning-rule %}}
 1. **규칙 추가**를 클릭합니다.
 
-{{< /collapse-content >}} 
-{{< collapse-content title="커스텀 스캐닝 규칙 추가" level="p" >}}
-regex 패턴을 사용해 커스텀 스캐닝 규칙을 생성하여 민감 데이터를 스캔할 수 있습니다.
+#### 또 다른 키워드 추가
 
-1. **매칭 조건 정의** 섹션의 **정규식 정의** 필드에서 이벤트에 매칭시키는 데 사용할 정규식 패턴을 지정합니다. **정규식 테스터** 필드에 샘플 데이터를 입력하여 정규식 패턴이 유효한지 확인합니다.   
+OOTB 검색 규칙을 추가한 후 각 규칙을 개별적으로 편집하고 키워드 사전에 키워드를 추가할 수 있습니다.
+
+1. [민감 데이터 스캐너][2] 구성 페이지로 이동합니다.
+1. 편집하려는 규칙이 있는 검사 그룹을 클릭합니다.
+1. 규칙 위로 마우스를 가져간 다음 연필 아이콘을 클릭합니다.
+1. 기본적으로 추천 키워드가 사용됩니다. 키워드를 추가하려면 ** 권장 키워드 사용**을 토글한 다음 목록에 키워드를 추가합니다. 이러한 키워드가 지정된 글자 수 내에 있도록 할 수도 있습니다. 기본적으로 키워드는 일치하는 값 앞까지 30자 이내여야 합니다.
+1. **Update**를 클릭합니다.
+
+{{< /collapse-content >}}
+{{< collapse-content title="커스텀 검사 규칙 추가" level="p" >}}
+민감한 데이터에 대한 정규식 패턴을 사용해 커스텀 검사 규칙을 생성할 수 있습니다.
+
+1. 검사 그룹 내에서 이 규칙을 생성하지 않은 경우 검사 그룹을 선택합니다.
+1. **일치 조건 정의** 섹션의 **정규식 정의** 필드에 이벤트에 일치시키는 데 사용하려는 정규식 패턴을 정의합니다. **샘플 데이터 추가** 필드에서 샘플 데이터를 입력하여 정규식 패턴이 유효한지 확인합니다.
     민감 데이터 스캐너는 Perl 호환 정규식(PCRE)을 지원하나 다음 패턴은 지원하지 않습니다.
     - 역참조 및 하위 표현식 캡처(lookaround)
     - 임의의 너비 0 어서션
@@ -170,6 +185,7 @@ regex 패턴을 사용해 커스텀 스캐닝 규칙을 생성하여 민감 데�
     - `\K` 매칭 초기화 시작 지시문
     - 콜아웃 및 내장 코드
     - 원자 그룹화 및 소유 한정사
+1. **키워드 사전 생성**의 경우, 키워드를 추가하여 정규식 조건과 일치할 때 검색 정확도를 개선할 수 있습니다. 예를 들어 16자리 Visa 신용카드 번호를 검색하는 경우 `visa`, `credit`, `card`와 같은 키워드를 추가할 수 있습니다. 이러한 키워드가 지정된 글자 수 이내가 되도록 설정할 수도 있습니다. 기본적으로 키워드는 일치하는 값 앞에서 30자 이내여야 합니다.
 {{% sds-scanning-rule %}}
 1. **규칙 추가**를 클릭합니다.
 {{< /collapse-content >}} 
@@ -188,7 +204,7 @@ regex 패턴을 사용해 커스텀 스캐닝 규칙을 생성하여 민감 데�
 [3]: /ko/sensitive_data_scanner/investigate_sensitive_data_issues/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 {{% /tab %}}
-{{% tab "에이전트 사용" %}}
+{{% tab "에이전트 이용" %}}
 
 스캐닝 규칙은 스캐닝 그룹에서 정의한 데이터 내에서 민감한 정보가 무엇인지 결정하는 규칙입니다. Datadog 에이전트가 로그를 수집하고 Datadog 플랫폼으로 전송하기 전에 로컬 환경에서 데이터를 스캔합니다.
 
@@ -261,7 +277,7 @@ Datadog 플랫폼 기능에 필요한 예약 키워드가 있습니다. 스캔�
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
-{{% tab "에이전트 사용" %}}
+{{% tab "에이전트 이용" %}}
 
 1. [에이전트를 이용해 민감 데이터 스캐너 사용][1] 구성 페이지로 이동합니다.
 1. 편집하고자 하는 스캐닝 규칙 위에 마우스 커서를 올리고 **Edit**(연필) 아이콘을 클릭합니다.
@@ -301,7 +317,7 @@ Datadog 플랫폼 기능에 필요한 예약 키워드가 있습니다. 스캔�
 속성을 삭제하려면:
 
 1. [스캐닝 그룹][3]으로 이동합니다.
-2. **스캔 규칙 추가**를 클릭합니다.
+2. **Add Scanning Rule**을 클릭합니다.
 3. 사용하려는 라이브러리 규칙을 점검합니다.
 4. **전체 이벤트 또는 일부 스캔**에 대해 **특정 속성**을 선택합니다.
 5. 이전에 생성한 속성의 이름을 입력하여 스캔할 항목을 지정합니다.
@@ -318,15 +334,17 @@ Datadog 플랫폼 기능에 필요한 예약 키워드가 있습니다. 스캔�
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Security
+## Cloud Storage 검사
 
-<div class="alert alert-warning">Data Security는 프라이빗 베타 서비스 중입니다. 프라이빗 베타 서비스를 신청하려면 <a href="https://www.datadoghq.com/private-beta/data-security">여기에서 등록하세요</a>.</div>
+{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  미리 보기에서 Amazon S3 버킷 및 RDS 인스턴스에 대해 검사를 지원합니다. 등록하려면 <strong>액세스 요청</strong>을 클릭하세요.
+{{< /callout >}}
 
-[민감 데이터 스캐너][6]와 [클라우드 보안 관리][7]를 활성화한 경우 Data Security를 사용해 민감 데이터를 찾고 Amazon S3 버킷과 RDS 인스턴스에 영향을 주는 보안 문제를 고칠 수 있습니다.
+[Sensitive Data Scanner][6]를 활성화하면, Amazon S3 버킷 및 RDS 인스턴스에서 민감한 데이터를 분류하고 구분할 수 있습니다.
 
-Data Security는 클라우드 환경에 [에이전트 없는 스캐너][8]를 배포해 민감 정보를 스캔합니다. 이 스캐닝 인스턴스를 실행하면 [원격 구성][9]을 통해 S3 버킷과 RDS 인스턴스의 전체 목록을 가져옵니다. 또한 데이터스토어 전체에서 시간에 따른 CSV와 JSON과 같은 텍스트 파일 및 테이블을 스캔할 때 필요한 지침이 설정되어 있습니다. 매칭되는 결과가 있으면 인스턴스를 스캐닝하여 위치를 Datadog으로 전송합니다. 데이터스토어와 파일은 내 환경에서만 읽기가 가능하며 민감 데이터를 Datadog로 전송하지 않습니다.
+Sensitive Data Scanner는 클라우드 환경에 [에이전트리스 스캐너][8]를 배포하여 민감한 데이터를 검사합니다. 이러한 검사 인스턴스는 [원격 설정][9]을 통해 모든 S3 버킷 및 RDS 인스턴스 목록을 검색하고 명령을 설정해 CSV 및 JSON 등 텍스트 파일을 검사할 수 있습니다. 또한, 시간 변화에 따라 모든 데이터 자장소의 표를 검색하도록 할 수 있습니다. Sensitive Data Scanner는 [전체 규칙 라이브러리][11]를 사용해 일치 항목을 찾습니다. 일치 항목을 발견하면 해당 위치가 검사 인스턴스로 Datadog에 전송됩니다. 데이터가 저장되고 파일은 환경에서 읽기만 가능합니다. 민감한 데이터가 Datadog로 다시 전송되지 않습니다.
 
-Data Security에서는 민감 데이터 매칭 결과를 표시하는 것에 더해, Cloud Security Management를 통해 민감 데이터스토어에 영향을 미칠 수 있는 보안 이슈를 알려줍니다. 문제를 하나 클릭해 Cloud Security Management 내에서 선별하고 수정할 수 있습니다.
+클라우드 스토리지는 민감한 데이터 일치 항목 표시와 함께 [클라우드 보안 관리][7]에서 탐지한 민감한 데이터 저장소에 영향을 미치는 모든 보안 문제를 표시합니다. 문제를 클릭하면 클라우드 보안 관리 내에서 분류 및 해결을 계속할 수 있습니다.
 
 ## 기본 제공 대시보드
 
@@ -347,8 +365,9 @@ Data Security에서는 민감 데이터 매칭 결과를 표시하는 것에 더
 [3]: /ko/observability_pipelines/processors/#sensitive-data-scanner
 [4]: /ko/observability_pipelines/
 [5]: /ko/logs/guide/logs-rbac/
-[6]: /ko/sensitive_data_scanner/investigate_sensitive_data_issues/
+[6]: /ko/sensitive_data_scanner/
 [7]: /ko/security/cloud_security_management
 [8]: /ko/security/cloud_security_management/setup/agentless_scanning
 [9]: /ko/agent/remote_config
 [10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[11]: /ko/sensitive_data_scanner/library_rules/
