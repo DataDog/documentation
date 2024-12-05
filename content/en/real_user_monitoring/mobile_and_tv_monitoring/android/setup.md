@@ -23,13 +23,9 @@ The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
 
-1. Declare Datadog RUM SDK as a dependency.
-2. Specify application details in the UI.
-3. Initialize Datadog SDK with application context.
-4. Enable the feature to start sending data.
-5. Initialize the Interceptor to track network events.
+To start sending RUM or Error Tracking data from your Android or Android TV application to Datadog:
 
-### Step 1 - Declare the Datadog SDK as a dependency
+### Step 1 - Declare the Android SDK as a dependency
 
 Declare [dd-sdk-android-rum][1] and the [Gradle plugin][2] as a dependency in your **application module's** `build.gradle` file.
 
