@@ -3,8 +3,8 @@ import { Frontmatter } from './yaml/frontMatter';
 
 /**
  * The result of compiling a set of Markdoc files,
- * usually either all of the .mdoc files in the site,
- * or a single one .mdoc file that has changed
+ * usually either all of the .mdoc.md files in the site,
+ * or a single one .mdoc.md file that has changed
  * and is being compiled in watch mode.
  *
  * This is used to (for example) assess whether

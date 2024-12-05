@@ -5,7 +5,7 @@ import { FileNavigator } from '../../src/helperModules/FileNavigator';
 
 const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';
-const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc$/);
+const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc.md$/);
 
 describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({

@@ -125,7 +125,7 @@ export type PageConfig = z.infer<typeof PageConfigSchema>;
 
 /**
  * Any Hugo-specific config data needed for transforming and rendering
- * a Hugo .mdoc file with Markdoc.
+ * a Hugo .mdoc.md file with Markdoc.
  *
  * For example, there's no concept of "supported languages" or
  * "current language" in the Markdoc config, but the compilation process
@@ -141,7 +141,7 @@ export const HugoConfigSchema = z
 
 /**
  * Any Hugo-specific config data needed for transforming and rendering
- * a Hugo .mdoc file with Markdoc.
+ * a Hugo .mdoc.md file with Markdoc.
  *
  * For example, there's no concept of "supported languages" or
  * "current language" in the Markdoc config, but the compilation process

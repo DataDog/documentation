@@ -28,7 +28,7 @@ const mockHugoGlobalConfig: HugoGlobalConfig = {
 
 const mockPageConfig: PageConfig = {
   lang: 'en',
-  path: 'example/path/to/file.mdoc'
+  path: 'example/path/to/file.mdoc.md'
 };
 
 const mockHugoConfig: HugoConfig = { global: mockHugoGlobalConfig, page: mockPageConfig };

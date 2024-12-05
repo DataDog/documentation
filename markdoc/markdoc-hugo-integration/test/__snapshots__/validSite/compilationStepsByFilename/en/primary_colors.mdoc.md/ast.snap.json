@@ -1719,7 +1719,7 @@
           ],
           "inline": false,
           "attributes": {
-            "file": "yellow.mdoc"
+            "file": "yellow.mdoc.md"
           },
           "children": [],
           "type": "tag",
@@ -1728,7 +1728,7 @@
             {
               "type": "attribute",
               "name": "file",
-              "value": "yellow.mdoc"
+              "value": "yellow.mdoc.md"
             }
           ],
           "slots": {},
@@ -1904,7 +1904,7 @@
           ],
           "inline": false,
           "attributes": {
-            "file": "red.mdoc"
+            "file": "red.mdoc.md"
           },
           "children": [],
           "type": "tag",
@@ -1913,7 +1913,7 @@
             {
               "type": "attribute",
               "name": "file",
-              "value": "red.mdoc"
+              "value": "red.mdoc.md"
             }
           ],
           "slots": {},

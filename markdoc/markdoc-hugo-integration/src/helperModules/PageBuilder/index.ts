@@ -24,7 +24,7 @@ const clientFiltersManagerScriptStr = fs.readFileSync(
 
 /**
  * A class that functions as a module, providing methods
- * for building Hugo-compatible .md files from .mdoc files.
+ * for building Hugo-compatible .md files from .mdoc.md files.
  *
  * The PageBuilder uses the parsed Markdoc file to build:
  *
@@ -36,7 +36,7 @@ const clientFiltersManagerScriptStr = fs.readFileSync(
  */
 export class PageBuilder {
   /**
-   * Build the .md output for a given parsed .mdoc file.
+   * Build the .md output for a given parsed .mdoc.md file.
    */
   static build(p: {
     parsedFile: ParsedFile;

@@ -3,12 +3,11 @@ title: The Primary Colors of the Color Wheel
 content_filters:
   - display_name: "Color"
     id: color
-    options_source: primary_color_options
+    options_source: rainbow_color_options # mistake, not all of these colors will yield a valid options source for the item preference
   - display_name: "Item"
     id: item
-    options_source: <COLOR>_object_options
+    options_source: <COLOR>_item_options
 ---
-<!-- mistake above: <COLOR>_object_options instead of <COLOR>_item_options -->
 
 This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things.
 
@@ -41,10 +40,10 @@ Blueberries are a type of fruit. They're often eaten raw or used in baking.
 
 <!-- yellow -->
 {% if equals($color, "yellow") %}
-{% partial file="yellow.mdoc" /%}
+{% partial file="yellow.mdoc.md" /%}
 {% /if %}
 
 <!-- red -->
 {% if equals($color, "red") %}
-{% partial file="red.mdoc" /%}
+{% partial file="red.mdoc.md" /%}
 {% /if %}

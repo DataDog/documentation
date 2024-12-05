@@ -248,7 +248,7 @@ export class ClientFiltersManager {
 
   /**
    * Rerender the section of the page that was derived
-   * from the author's .mdoc file.
+   * from the author's .mdoc.md file.
    */
   rerenderPageContent() {
     const newDisplayStatusByRef: Record<string, boolean> = {};
@@ -348,7 +348,7 @@ export class ClientFiltersManager {
   }
 
   /**
-   * Override Hugo's default edit button to point to an .mdoc file,
+   * Override Hugo's default edit button to point to an .mdoc.md file,
    * since the .md file is generated code and not stored in the repo.
    */
   updateEditButton() {
@@ -360,7 +360,7 @@ export class ClientFiltersManager {
     if (!editButtonLink) {
       return;
     }
-    editButtonLink.href = editButtonLink.href.replace(/\.md\/$/, '.mdoc/');
+    editButtonLink.href = editButtonLink.href.replace(/\.md\/$/, '.mdoc.md/');
   }
 
   /**
