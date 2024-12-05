@@ -3,6 +3,7 @@ app_id: trino
 app_uuid: 5d6fa7f8-e827-408c-9cf1-8f2bd64b45d3
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: trino.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10282
     source_type_name: Trino
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/trino/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: trino
 integration_title: Trino
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: trino
-oauth: {}
 public_title: Trino
 short_description: Trino クラスターのパフォーマンスと使用量を収集する
 supported_os:
@@ -45,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Trino クラスターのパフォーマンスと使用量を収集する
   media: []
@@ -53,6 +55,7 @@ tile:
   title: Trino
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -76,7 +79,7 @@ Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェック�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `trino.d/conf.yaml` ファイルを編集して、
    Trino パフォーマンスデータの収集を開始します。
@@ -103,13 +106,13 @@ Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェック�
 
 Trino インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Trino インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 [1]: https://trino.io/

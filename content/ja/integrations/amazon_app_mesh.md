@@ -6,6 +6,7 @@ categories:
 - ネットワーク
 - トレーシング
 creates_events: false
+custom_kind: インテグレーション
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
 display_name: AWS App Mesh
@@ -20,7 +21,6 @@ integration_id: amazon-app-mesh
 integration_title: AWS App Mesh
 integration_version: ''
 is_public: true
-kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: envoy.
@@ -35,9 +35,10 @@ supported_os:
 - windows
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-[AWS App Mesh][1] は、AWS ECS Fargate クラスターや AWS EKS クラスターで実行するマイクロサービスにアプリケーションレベルのネットワーキングを提供するサービスメッシュです。
+[AWS App Mesh][1] は、Amazon ECS Fargate または Amazon EKS クラスター上で稼働するマイクロサービスに対して、アプリケーションレベルのネットワーキングを提供するサービスメッシュです。
 
 
 ## セットアップ
@@ -91,7 +92,7 @@ supported_os:
                 path: envoy.yaml
     ```
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -111,15 +112,15 @@ supported_os:
 
 namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) をデプロイします。オプションでこれを使用し、以下のように appmesh-injector をデプロイします。
 
-    ```shell
-      helm upgrade -i appmesh-controller eks/appmesh-controller \
-      --namespace appmesh-system \
-      --set sidecar.logLevel=debug \
-      --set tracing.enabled=true \
-      --set tracing.provider=datadog \
-      --set tracing.address=ref:status.hostIP \
-      --set tracing.port=8126
-    ```
+```shell
+  helm upgrade -i appmesh-controller eks/appmesh-controller \
+  --namespace appmesh-system \
+  --set sidecar.logLevel=debug \
+  --set tracing.enabled=true \
+  --set tracing.provider=datadog \
+  --set tracing.address=ref:status.hostIP \
+  --set tracing.port=8126
+```
 
 
 または、[EKS を使用した App Mesh][2] ドキュメントの説明に従って、オプションの `enable-datadog-tracing=true` や環境変数の `ENABLE_DATADOG_TRACING=true` を使用して appmesh インジェクターをデプロイすることもできます。
@@ -146,7 +147,7 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
             },
     ```
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -192,7 +193,7 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
             },
     ```
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -232,7 +233,7 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 
 AWS  App Mesh インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
 

@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure App Service Environment のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_app_service_environment/
@@ -14,7 +15,6 @@ integration_id: azure-appserviceenvironment
 integration_title: Microsoft Azure App Service Environment
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_app_service_environment
 public_title: Datadog-Microsoft Azure App Service Environment インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure App Service Environment のキーメトリクスを追�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure App Service Environment は、App Service アプリを大規模かつ安全に実行するために完全に分離された専用の環境を提供する Azure App Service の機能です。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure App Service Env
 
 Azure App Service Environment インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure App Service Environment インテグレーションには、サービスのチェック機能は含まれません。
 

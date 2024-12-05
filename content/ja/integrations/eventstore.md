@@ -3,6 +3,7 @@ app_id: eventstore
 app_uuid: b0c2527f-671e-4a98-aa74-807d7f1826e3
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: eventstore.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10221
     source_type_name: Eventstore
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,7 +23,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - キャッシュ
-- data store
+- data stores
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: eventstore
 integration_title: Eventstore
 integration_version: 2.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: eventstore
-oauth: {}
 public_title: Eventstore
 short_description: Eventstore のメトリクスを収集
 supported_os:
@@ -45,10 +46,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Eventstore のメトリクスを収集
   media: []
@@ -57,6 +59,7 @@ tile:
   title: Eventstore
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -82,7 +85,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チ
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. EventStore の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `eventstore.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル eventstore.d/conf.yaml][5] を参照してください。
@@ -107,7 +110,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チ
 
 eventstore チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 eventstore チェックには、サービスのチェック機能は含まれません。
 
@@ -115,7 +118,7 @@ eventstore チェックには、サービスのチェック機能は含まれま
 
 ご不明な点は、このインテグレーションの[メインテナー][9]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

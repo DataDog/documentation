@@ -5,6 +5,7 @@ assets:
   dashboards:
     Druid Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
       prefix: druid.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10074
     source_type_name: Druid
-  logs:
-    source: druid
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -25,8 +25,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - キャッシュ
-- data store
+- data stores
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/druid/README.md
 display_on_public_website: true
@@ -34,12 +35,10 @@ draft: false
 git_integration_title: druid
 integration_id: druid
 integration_title: Druid
-integration_version: 2.2.0
+integration_version: 2.5.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: druid
-oauth: {}
 public_title: Druid
 short_description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
 supported_os:
@@ -50,11 +49,12 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
   media: []
@@ -63,6 +63,7 @@ tile:
   title: Druid
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Druid ダッシュボード][1]
@@ -136,7 +137,7 @@ Druid インテグレーショが正常に動作するためには、下記の 2
 
 `druid.d/conf.yaml` ファイルのデフォルトコンフィギュレーションを使用して、Druid サービスチェックの収集を有効にします。利用可能なすべてのコンフィギュレーションオプションについては、[druid.d/conf.yaml][6]  のサンプルをご参照ください。
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -178,7 +179,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Druid チェックには イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "druid" >}}
 
 
@@ -191,7 +192,7 @@ Druid チェックには イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://druid.apache.org/docs/latest/operations/metrics.html
 [4]: https://docs.datadoghq.com/ja/agent/
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://github.com/DataDog/integrations-core/blob/master/druid/datadog_checks/druid/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://druid.apache.org/docs/latest/development/extensions-contrib/statsd.html

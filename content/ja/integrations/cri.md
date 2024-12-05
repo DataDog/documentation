@@ -5,6 +5,7 @@ assets:
   dashboards:
     cri: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: cri.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10043
     source_type_name: CRI
 author:
   homepage: https://www.datadoghq.com
@@ -23,6 +25,7 @@ author:
 categories:
 - コンテナ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
 display_on_public_website: true
@@ -32,10 +35,8 @@ integration_id: cri
 integration_title: CRI
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cri
-oauth: {}
 public_title: CRI
 short_description: CRI のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Category::Containers
   - Category::Kubernetes
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: CRI のすべてのメトリクスを Datadog で追跡
   media: []
@@ -54,6 +56,7 @@ tile:
   title: CRI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -107,7 +110,7 @@ spec:
 
 **注:** 問題なくインテグレーションを実行するには、ホストから `/var/run` ディレクトリをマウントする必要があります。
 
-### コンフィギュレーション
+### 構成
 
 1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][2] を参照してください。
 
@@ -123,7 +126,7 @@ spec:
 {{< get-metrics-from-git "cri" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 CRI には、サービスのチェック機能は含まれません。
 
@@ -133,9 +136,9 @@ CRI には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv

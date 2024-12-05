@@ -5,6 +5,7 @@ assets:
   dashboards:
     php-fpm: assets/dashboards/php-fpm_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -25,6 +26,7 @@ assets:
     - php7.0-fpm.service
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 117
     source_type_name: PHP-FPM
   saved_views:
     php-fpm_processes: assets/saved_views/php-fpm_processes.json
@@ -35,6 +37,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_on_public_website: true
@@ -42,12 +45,10 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 2.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: php_fpm
-oauth: {}
 public_title: PHP FPM
 short_description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
 supported_os:
@@ -61,6 +62,7 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
   media: []
@@ -69,6 +71,7 @@ tile:
   title: PHP FPM
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![PHP 概要][1]
@@ -83,16 +86,16 @@ PHP-FPM チェックは、FPM プールの状態を監視し、リクエスト�
 
 PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `php_fpm.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[php_fpm.d/conf.yaml のサンプル][2]を参照してください。
 
@@ -140,7 +143,7 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
 [2]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -148,9 +151,9 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 | パラメーター            | 値                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `<インテグレーション名>` | `php_fpm`                                                                                                                |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                            |
-| `<インスタンスコンフィギュレーション>`  | `{"status_url":"http://%%host%%/status", "ping_url":"http://%%host%%/ping", "use_fastcgi": false, "ping_reply": "pong"}` |
+| `<INTEGRATION_NAME>` | `php_fpm`                                                                                                                |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                            |
+| `<INSTANCE_CONFIG>`  | `{"status_url":"http://%%host%%/status", "ping_url":"http://%%host%%/ping", "use_fastcgi": false, "ping_reply": "pong"}` |
 
 #### 追加情報
 
@@ -211,7 +214,7 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 
 PHP-FPM チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "php_fpm" >}}
 
 
@@ -222,6 +225,6 @@ PHP-FPM チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

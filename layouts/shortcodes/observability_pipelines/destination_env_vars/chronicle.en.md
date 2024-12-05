@@ -1,0 +1,1 @@
+Enter the Google Chronicle endpoint URL. For example, `https://chronicle.googleapis.com`.

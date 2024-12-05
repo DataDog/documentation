@@ -5,6 +5,7 @@ assets:
   dashboards:
     solr: assets/dashboards/solr_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,8 @@ assets:
     - solr start
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 42
     source_type_name: Solr
-  logs:
-    source: solr
   saved_views:
     solr_processes: assets/saved_views/solr_processes.json
 author:
@@ -29,8 +29,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - caching
-- data store
+- data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/solr/README.md
 display_on_public_website: true
@@ -38,12 +39,10 @@ draft: false
 git_integration_title: solr
 integration_id: solr
 integration_title: Solr
-integration_version: 1.11.2
+integration_version: 2.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: solr
-oauth: {}
 public_title: Solr
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 supported_os:
@@ -54,11 +53,12 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::キャッシュ
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
   media: []
@@ -67,6 +67,7 @@ tile:
   title: Solr
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Solr グラフ][1]
@@ -83,14 +84,14 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
 
 このチェックは JMX ベースなので、Solr サーバーで JMX リモートを有効にする必要があります。詳細については、[JMX チェックに関するドキュメント][3]を参照してください。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `solr.d/conf.yaml` ファイルを編集します。使用可能な全コンフィギュレーションオプションの詳細については、[サンプル solr.d/conf.yaml][2] を参照してください。
 
@@ -201,13 +202,13 @@ mydomain:attr0=val0,attr1=val1
 [2]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### ログの収集
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -266,7 +267,7 @@ Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7
 
 Solr チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "solr" >}}
 
 
@@ -315,6 +316,6 @@ attribute:
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/integrations/java/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

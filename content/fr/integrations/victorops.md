@@ -1,8 +1,7 @@
 ---
 categories:
-- notification
-- monitoring
-ddtype: crawler
+- alerting
+- notifications
 dependencies: []
 description: Utilisez VictorOps comme canal de notification pour les alertes et les
   événements Datadog.
@@ -14,7 +13,7 @@ integration_id: victorops
 integration_title: VictorOps
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: victorops
 public_title: Intégration Datadog/VictorOps
@@ -23,6 +22,7 @@ short_description: Utilisez VictorOps comme canal de notification pour les alert
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Utilisez l'intégration Datadog/VictorOps pour envoyer des alertes Datadog à VictorOps et bénéficier d'un contrôle précis des processus d'acheminement et de réaffectation. Accédez plus rapidement aux détails des problèmes et réduisez leur délai de résolution en créant des alertes contenant **@victorops** :
@@ -31,30 +31,30 @@ Utilisez l'intégration Datadog/VictorOps pour envoyer des alertes Datadog à Vi
 - En prenant un snapshot
 - Lorsqu'une alerte de métrique est déclenchée
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 1. Sur votre page de paramètres VictorOps, cliquez sur Integrations.
 2. Cliquez sur Datadog, puis sur Enable Integration.
 3. Copiez votre clé.
 4. Sur Datadog, collez la clé d'API dans la section suivante :
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration VictorOps n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration VictorOps n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration VictorOps n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 

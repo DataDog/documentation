@@ -3,6 +3,7 @@ app_id: gremlin
 app_uuid: 451a4863-1767-4c11-8831-d196ae4643d0
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: gremlin.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10031
     source_type_name: Gremlin
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: support@gremlin.com
 categories:
 - 問題追跡
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: gremlin
 integration_title: Gremlin
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: gremlin
-oauth: {}
 public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
 supported_os:
@@ -46,14 +47,19 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Gremlin で発生したイベントを Datadog に送信
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/gremlin-datadog/
   support: README.md#Support
   title: Gremlin
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,7 +75,7 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 このインテグレーションを有効にするには、Gremlin に Datadog API キーを渡す必要があります。それには、[インテグレーションページ][4]で、**Datadog** の行にある **Add** ボタンをクリックします。**Datadog API キー**の入力を求められます。キーを入力すると、インテグレーションが初期化されます。
 
@@ -87,13 +93,13 @@ Gremlin インテグレーションは、メトリクスを提供しません。
 
 Gremlin で攻撃が開始または停止されると、Gremlin インテグレーションがイベントを [Datadog のイベントストリーム][4]に送信します。
 
-### サービスのチェック
+### サービスチェック
 
 Gremlin インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

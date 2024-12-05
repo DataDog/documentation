@@ -1,6 +1,5 @@
 ---
 title: OTLP Metrics Types
-kind: documentation
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
@@ -71,10 +70,10 @@ An OTLP Histogram represents the statistical distribution of a set of values on 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
 The default mapping is as follows:
-1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations.
-2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
+1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations. Histograms with a count of 0 are dropped.
+2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
 
-**Note**: Histogram metrics in OTLP are mapped to Distribution metrics. Because of how OTLP sends this data, the max, min, and percentile aggregations are approximations, not accurate calculations.
+**Note**: Histogram metrics in OTLP are mapped by default to Distribution metrics. Because of how OTLP sends this data, percentile aggregations and the max and min (if not available on the original OTLP data) are approximations, not accurate calculations.
 
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:
@@ -132,28 +131,6 @@ OTLP supports two kinds of attributes: datapoint-level attributes and resource a
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter map the datapoints-level attributes as tags. Resource attributes following OpenTelemetry semantic conventions are mapped to the equivalent Datadog conventions if they exist.
 
 You may add all resource attributes as tags by using the `resource_attributes_as_tags` flag.
-
-### Hostname resolution
-
-OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
-
-1. The `host` attribute, to avoid double tagging if present.
-1. `datadog.host.name`, a Datadog-specific hostname convention
-1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
-1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
-1. `host.id`, the unique host ID
-1. `host.name`, the system hostname
-
-The following host names are deemed invalid and discarded:
-1. `0.0.0.0`
-1. `127.0.0.1`
-1. `localhost`
-1. `localhost.localdomain`
-1. `localhost6.localdomain6`
-1. `ip6-localhost`
-
-If no valid host names are present, Datadog assigns a system-level host name to payloads.
-If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
 
 ### Example
 
@@ -237,6 +214,6 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: /opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /opentelemetry/guide/otlp_delta_temporality/

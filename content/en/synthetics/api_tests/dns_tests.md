@@ -1,6 +1,5 @@
 ---
-title: DNS Tests
-kind: documentation
+title: DNS Testing
 description: Monitor resolvability and lookup times of your DNS records
 aliases:
   - /synthetics/dns_test
@@ -51,6 +50,10 @@ After choosing to create a `DNS` test, define your test's request.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
+
 ### Define assertions
 
 Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time` and available records are added. You must define at least one assertion for your test to monitor.
@@ -60,6 +63,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | response time       |                                                                 | `is less than`                                     | _Integer (ms)_             |
 | every available record        | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
 | at least one record | of type A, of type AAAA, of type CNAME, of type MX, of type NS, of type TXT | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_ |
+
+**Note**: SOA records are not available for testing using Synthetic tests.
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
@@ -138,7 +143,7 @@ You can restrict access to a DNS test based on the roles in your organization. W
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Mergify merge queue overview: assets/dashboards/mergify_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: mergify.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10349
     source_type_name: Mergify
 author:
   homepage: https://mergify.com
@@ -23,6 +25,7 @@ author:
   support_email: support@mergify.com
 categories:
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mergify/README.md
 display_on_public_website: true
@@ -30,12 +33,10 @@ draft: false
 git_integration_title: mergify
 integration_id: mergify
 integration_title: Mergify
-integration_version: 1.0.1
+integration_version: 1.0.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: mergify
-oauth: {}
 public_title: Mergify
 short_description: Mergify マージキュー統計のインテグレーション
 supported_os:
@@ -50,6 +51,7 @@ tile:
   - Supported OS::macOS
   - Submitted Data Type::Metrics
   - Category::Developer Tools
+  - Offering::Integration
   configuration: README.md#Setup
   description: Mergify マージキュー統計のインテグレーション
   media: []
@@ -58,6 +60,7 @@ tile:
   title: Mergify
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -86,7 +89,7 @@ Mergify チェックをホストにインストールするには
  `datadog-agent integration install -w
  path/to/mergify/dist/<ARTIFACT_NAME>.whl`.
 
-### コンフィギュレーション
+### 構成
 
 1. Mergify の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `mergify.d/conf.yaml` ファイルを編集します。
 
@@ -114,7 +117,7 @@ Mergify には、イベントは含まれません。
 
 [1]: https://mergify.com
 [2]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#configure-the-developer-tool
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-extras/blob/master/mergify/datadog_checks/mergify/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -26,7 +26,7 @@
       <div class="col">
         <a class="card h-100" href="go">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/golang.png" "class" "img-fluid" "alt" "Go" "width" "400") }}
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/go-metro.png" "class" "img-fluid" "alt" "Go" "width" "400") }}
           </div>
         </a>
       </div>
@@ -65,6 +65,24 @@
           </div>
         </a>
       </div>
+      <!-- Conditional Android and iOS cards (no compatibility or library_config pages for these as of 12/22/23) -->
+      {{ $currentURL := .Page.Permalink }}
+      {{ if and (not (in $currentURL "/compatibility/")) (not (in $currentURL "/library_config/")) }}
+      <div class="col">
+        <a class="card h-100" href="android">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/android.png" "class" "img-fluid" "alt" "Android" "width" "400") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="ios">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/ios_large.svg" "class" "img-fluid" "alt" "iOS" "width" "400") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
     </div>
   </div>
 </div>

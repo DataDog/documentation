@@ -1,6 +1,5 @@
 ---
 title: "Configuration de Database Monitoring pour Postgres avec une gestion sur Google\_Cloud\_SQL"
-kind: documentation
 description: "Installez et configurez Database Monitoring pour Postgres avec une gestion sur Google\_Cloud\_SQL."
 further_reading:
   - link: /integrations/postgres/

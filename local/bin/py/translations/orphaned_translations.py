@@ -41,10 +41,17 @@ def is_git_ignored(file):
     return len(is_ignored) > 0
 
 
+def delete_local_files(orphaned_files_array):
+    for orphaned_file in orphaned_files_array:
+        if os.path.exists(orphaned_file):
+            os.remove(orphaned_file)
+
+
 def main():
     """
-    Note this script was created as a one-off to identify translated markdown files that became out of sync
-    due to a gap in the translation system.  This is currently unused in any jobs/automation.
+    Identify translated markdown files that are "orphaned" in the repo.
+    Files are considered orphaned when a translated version exists but does not have an English equivalent.
+    This only prints the list of files when ran in Gitlab, at this time there is not support for autogenerating a PR.
     """
     print('Searching for orphaned translated files...')
     languages = get_translation_languages()
@@ -55,6 +62,9 @@ def main():
         if len(orphaned) > 0:
             print(f'\nThe following {lang} pages are orphaned and should be reviewed for deletion:')
             print('\n'.join(orphaned))
+
+            # Uncomment if running locally
+            # delete_local_files(orphaned)
 
 
 if __name__ == "__main__":

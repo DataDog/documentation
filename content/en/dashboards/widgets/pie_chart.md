@@ -1,6 +1,5 @@
 ---
 title: Pie Chart Widget
-kind: documentation
 widget_type: "sunburst"
 description: "Graph proportions of one or more datasets."
 further_reading:

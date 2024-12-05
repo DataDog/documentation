@@ -1,6 +1,5 @@
 ---
 title: SAML Group Mapping
-kind: documentation
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
@@ -48,10 +47,6 @@ Make changes to a mapping by clicking the pencil (**Edit**) icon, or remove a ma
 Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][6].
 
 ## Map SAML attributes to Teams
-
-{{< callout url="/help/" >}}
-  Mapping SAML attributes to Teams is in beta. To request access, contact Support.
-{{< /callout >}}
 
 1. Ensure you selected either **SAML** or **All sources** when choosing your [provisioning source][7] for team memberships.
 2. [Cross-reference][4] and [validate][5] your SAML assertion to understand your IdP's attributes.

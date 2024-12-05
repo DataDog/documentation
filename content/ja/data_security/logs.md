@@ -5,10 +5,12 @@ further_reading:
 - link: /data_security/
   tag: ドキュメント
   text: Datadog に送信されるデータの主要カテゴリを確認する
+- link: /data_security/pci_compliance/
+  tag: ドキュメント
+  text: PCI 準拠の Datadog 組織をセットアップする
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
-  tag: GitHub
+  tag: ブログ
   text: Datadog から PCI に準拠したログ管理と APM を発表
-kind: documentation
 title: ログ管理のデータセキュリティ
 ---
 
@@ -32,50 +34,30 @@ Datadog は、インデックス化されたログに対して対称暗号化保
 
 バージョン 6 の場合は、Agent から Datadog アプリケーションに送信されるログに含まれる特定のパターンを難読化するように Agent を設定できます。ログに含まれる機密要素をマスクするには、`type` に **mask_sequences** を指定して `log_processing_rules` [設定][4]を使用します。これで、1 つ以上の正規表現からなるリストを作成することで、ログ内の機密データを編集するように Agent に指示できます。
 
+あるいは、クラウドまたは Agent で [Sensitive Data Scanner][7] を使用して、機密データの識別、タグ付け、およびマスキングを行うことができます。Sensitive Data Scanner では、スキャン対象のデータを定義するスキャングループを設定し、次にデータ内で照合する機密情報を特定するためのスキャンルールを設定します。一致した場合にデータをマスキングするかどうかを選択することも可能です。Datadog は、クレジットカード番号、メールアドレス、IP アドレス、API キーなどの機密情報を検出するための事前定義済みルールライブラリを提供しています。また、正規表現に基づくスキャンルールを独自に定義して、特定の機密情報を検出することもできます。
+
+Sensitive Data Scanner は、[プロセッサー][8]として [Observability Pipelines][9] でも利用可能です。Observability Pipelines を使用すると、独自のインフラストラクチャー内でログを収集および処理し、それらを下流のインテグレーションへ転送することができます。
+
 ## HIPAA 対応ユーザー
 
-Datadog は、Datadog のログ管理サービスを介して保護対象医療情報 (ePHI) を送信するお客様と業務提携契約 (BAA) を締結します。
-
-Datadog と BAA を締結されたお客様は、この機能をご利用いただけません。
-
-* チャットからサポートを求めることはできません。
-* ログモニターからの通知にログサンプルを含めることはできません。
-* Web インテグレーションを使用して、エクスプローラーからログ、セキュリティシグナル、またはトレースを[共有][5]することはできません。
-* セキュリティルールでは、通知タイトルにトリガーとなるグループ化の値を含めることができません。
-* セキュリティルールにメッセージテンプレート変数を含めることはできません。
-* セキュリティルールは Webhook で通知することができません。
-
-ログ管理サービスが HIPAA の適用要件をどのように満たすかについて質問がある場合は、アカウントマネージャーにお問い合わせください。HIPAA 対応のお客様は、特定の暗号化を実施するために、特定のエンドポイントを使用してログを送信する必要はありません。暗号化は、すべてのログ提出用エンドポイントで有効です。
+{{% hipaa-customers %}}
 
 ## ログ管理における PCI DSS 準拠
 
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-ログ管理の PCI DSS 準拠は、US1 サイトで作成された新しい Datadog 組織でのみ利用可能です。
+ログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 
 Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Datadog 組織にログを送信することができます。PCI 準拠の Datadog 組織を設定するには、以下の手順に従います。
 
-1. [US1 サイト][1]に新しい Datadog 組織をセットアップします。PCI DSS 準拠は、US1 で作成された新しい組織にのみサポートされています。
-2. [Datadog サポート][2]または[カスタマーサクセスマネージャー][3]に連絡し、新しい組織を PCI 準拠の組織として構成するようリクエストします。
-3. 新しい組織で[監査証跡][4]を有効にします。PCI DSS 準拠のため、監査証跡を有効にし、有効なままにする必要があります。
-4. Datadog サポートまたはカスタマーサクセスが新しい組織が PCI DSS に準拠していることを確認した後、PCI 準拠の専用エンドポイント (`agent-http-intake-pci.logs.datadoghq.com`) にログを送信するように Agent コンフィギュレーションファイルを構成します。
-    ```
-    logs_config:
-      logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
-    ```
-   **注**: ポートが構成に含まれている必要があります。
+{{% pci-logs %}}
 
-ログ管理サービスが PCI DSS の要件を適切に満たしているかどうかについてのご質問は、アカウントマネージャーまでお問い合わせください。
+詳しくは [PCI DSS 準拠][1]を参照してください。APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][1]を参照してください。
 
-APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][5]を参照してください。
-
-[1]: /ja/getting_started/site/
-[2]: /ja/help/
-[3]: mailto:success@datadoghq.com
-[4]: /ja/account_management/audit_trail/#setup
-[5]: /ja/tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
+[1]: /ja/data_security/pci_compliance/
+[2]: /ja/data_security/pci_compliance/?tab=apm
 
 {{< /site-region >}}
 
@@ -85,9 +67,9 @@ APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][5]を�
 
 {{< /site-region >}}
 
-## エンドポイント暗号化
+## エンドポイントの暗号化
 
-すべてのログ送信エンドポイントは暗号化されています。これらのレガシーエンドポイントはまだサポートされています。
+すべてのログ送信エンドポイントは暗号化されています。以下のレガシーエンドポイントはまだサポートされています。
 
 * `tcp-encrypted-intake.logs.datadoghq.com`
 * `lambda-tcp-encrypted-intake.logs.datadoghq.com`
@@ -103,3 +85,7 @@ APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][5]を�
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /ja/logs/explorer/#share-views
+[6]: https://www.datadoghq.com/legal/hipaa-eligible-services/
+[7]: /ja/sensitive_data_scanner/
+[8]: /ja/observability_pipelines/processors/sensitive_data_scanner
+[9]: /ja/observability_pipelines/

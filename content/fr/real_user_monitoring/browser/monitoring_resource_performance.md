@@ -9,10 +9,9 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: Appliquer des visualisations sur vos événements
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: Dashboards RUM
-kind: documentation
 title: Surveillance des performances de ressources
 ---
 
@@ -80,6 +79,6 @@ Pour y remédier, activez la collecte de données supplémentaires pour les ress
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /fr/real_user_monitoring/connect_rum_and_traces
+[2]: /fr/real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

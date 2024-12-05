@@ -12,6 +12,7 @@ assets:
     RapDev Zoom Rooms Dashboard: assets/dashboards/rapdev_zoom_rooms_dashboard.json
     RapDev Zoom User Details: assets/dashboards/rapdev_zoom_user_details.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -22,12 +23,13 @@ assets:
       prefix: rapdev.zoom.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10150
     source_type_name: RapDev Zoom
   logs: {}
   monitors:
-    Zoom API Limit Was Encountered: assets/monitors/zoom_api_rate_limit.json
-    Zoom Room's Component is Offline or Not Working Properly: assets/monitors/zoom_room_component_has_problem.json
-    Zoom Room's Health is in Warning or Critical State: assets/monitors/zoom_room_has_problem.json
+    API usage has hit the rate limit: assets/monitors/zoom_api_rate_limit.json
+    Zoom Room has a problem: assets/monitors/zoom_room_has_problem.json
+    Zoom Room's Component has a problem: assets/monitors/zoom_room_component_has_problem.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -38,6 +40,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - コラボレーション
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -46,12 +49,10 @@ integration_id: rapdev-zoom
 integration_title: Zoom
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_zoom
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -77,6 +78,7 @@ tile:
   - Category::Cloud
   - Category::Collaboration
   - Offering::Integration
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Zoom アカウントを監視し、ライセンスを最適化します
   media:
@@ -101,27 +103,28 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Zoom インテグレーションにより、ミーティング、Rooms、ユーザー、ネットワーク分析、そしてジオロケーションの概要を監視することで、世界中のあらゆる場所で勤務する従業員に最適な利用体験を提供することができます。インテグレーションには、完全カスタマイズが可能な 4 つのダッシュボードが事前構築されており、重要な情報を表面化できます。さらに、エンジニア、IT責任者、マネージャー、そして管理職レベルのすべてのユーザーに普遍的に利用価値のあるビジュアルを提供するよう設計されています。
 
-### アラート設定
+### モニター
 
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります
 
-### ダッシュボード  
+### ダッシュボード
 
 1. RapDev Zoom ミーティング概要
 2. RapDev Zoom Rooms ダッシュボード
 3. RapDev Zoom ミーティング品質
 4. RapDev Zoom ユーザー詳細
 5. RapDev Zoom ジオ概要
-6. RapDev Zoom 電話概要
+6. RapDev Zoom Phones 概要
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io

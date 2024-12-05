@@ -1,6 +1,5 @@
 ---
 title: NDM Troubleshooting
-kind: documentation
 aliases:
     - /network_performance_monitoring/devices/troubleshooting/
 further_reading:
@@ -8,10 +7,6 @@ further_reading:
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -88,6 +83,12 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 
 **Note**: If you do not know the `sysobjectid` of your device, try doing an Internet search or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
 
+#### How do I extract information about devices and interfaces of my network devices?
+
+- Use the [Network API][2] to extract the following information about your network devices:
+  * [Get the list of interfaces for your devices.][3]
+  - [Get the list of tags for your devices.][4]
+  - [Update the list of tags for your devices.][5]
 
 ## Further Reading
 
@@ -95,3 +96,7 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 
 
 [1]: /help
+[2]: /api/latest/network-device-monitoring/
+[3]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
+[4]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
+[5]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device

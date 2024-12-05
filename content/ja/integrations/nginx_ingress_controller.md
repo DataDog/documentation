@@ -5,6 +5,7 @@ assets:
   dashboards:
     nginx_ingress_controller: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
       prefix: nginx_ingress.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10050
     source_type_name: nginx-ingress-controller
-  logs:
-    source: nginx_ingress_controller
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -34,6 +34,7 @@ categories:
 - ログの収集
 - ネットワーク
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -41,12 +42,10 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.4.1
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx_ingress_controller
-oauth: {}
 public_title: nginx-ingress-controller
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
 supported_os:
@@ -64,6 +63,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
   media: []
@@ -72,6 +72,7 @@ tile:
   title: nginx-ingress-controller
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -85,10 +86,10 @@ tile:
 
 `nginx-ingress-controller` チェックは [Datadog Agent][4] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
@@ -97,7 +98,7 @@ Agent がホストで実行されている場合は、Agent のコンフィギ�
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -117,9 +118,9 @@ Agent がホストで実行されている場合は、Agent のコンフィギ�
 
 | パラメーター            | 値                                                                                                              |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `<インテグレーション名>` | `["nginx","nginx_ingress_controller"]`                                                                             |
-| `<初期コンフィギュレーション>`      | `[{},{}]`                                                                                                          |
-| `<インスタンスコンフィギュレーション>`  | `[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]` |
+| `<INTEGRATION_NAME>` | `["nginx","nginx_ingress_controller"]`                                                                             |
+| `<INIT_CONFIG>`      | `[{},{}]`                                                                                                          |
+| `<INSTANCE_CONFIG>`  | `[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]` |
 
 使用可能なすべての構成オプションの詳細については、[sample nginx_ingress_controller.d/conf.yaml][5] を参照してください。
 
@@ -141,7 +142,7 @@ Agent がホストで実行されている場合は、Agent のコンフィギ�
     }
 ```
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -165,7 +166,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 NGINX Ingress Controller には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 NGINX Ingress Controller には、サービスのチェック機能は含まれません。
 

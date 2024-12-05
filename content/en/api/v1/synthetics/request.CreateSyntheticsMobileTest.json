@@ -1,0 +1,21 @@
+{
+  "name": "Example-Synthetic",
+  "status": "paused",
+  "type": "mobile",
+  "config": {
+    "variables": []
+  },
+  "message": "",
+  "options": {
+    "device_ids": [
+      "synthetics:mobile:device:iphone_15_ios_17"
+    ],
+    "mobileApplication": {
+      "applicationId": "ab0e0aed-536d-411a-9a99-5428c27d8f8e",
+      "referenceId": "6115922a-5f5d-455e-bc7e-7955a57f3815",
+      "referenceType": "version"
+    },
+    "tick_every": 3600
+  },
+  "steps": []
+}

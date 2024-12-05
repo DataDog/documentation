@@ -10,6 +10,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
 display_on_public_website: true
@@ -19,10 +20,8 @@ integration_id: apptrail
 integration_title: Apptrail
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: apptrail
-oauth: {}
 public_title: Apptrail
 short_description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
 supported_os:
@@ -63,6 +62,7 @@ tile:
   title: Apptrail
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -102,11 +102,11 @@ Apptrail の監査ログを Datadog で表示するには
 
 ## 収集データ
 
-### ログの収集
+### 収集データ
 
 Datadog を宛先とする Apptrail の[トレイル][2]は、構成された[トレイルルール][8]にマッチしたすべてのログを Datadog に継続的に送信します。Apptrail の監査ログのフォーマットについては、[イベントフォーマット][9]を参照してください。
 
-## サポート
+## Agent
 
 ヘルプが必要ですか？[Datadog サポート][10]または [Apptrail サポート][11]にご連絡ください。
 

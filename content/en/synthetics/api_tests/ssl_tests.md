@@ -1,6 +1,5 @@
 ---
-title: SSL Tests
-kind: documentation
+title: SSL Testing
 description: Monitor your SSL certificates from locations around the world
 aliases:
   - /synthetics/ssl_test
@@ -37,7 +36,7 @@ After choosing to create a `SSL` test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
 2. Add **Advanced Options** (optional) to your test:
    * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
@@ -59,6 +58,10 @@ After choosing to create a `SSL` test, define your test's request.
    {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 
@@ -152,7 +155,7 @@ You can restrict access to an SSL test based on the roles in your organization. 
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

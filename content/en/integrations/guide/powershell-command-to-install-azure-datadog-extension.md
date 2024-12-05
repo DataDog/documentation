@@ -1,6 +1,6 @@
 ---
 title: Commands to install the Azure Datadog Extension
-kind: guide
+
 aliases:
   - "/integrations/faq/powershell-command-to-install-azure-datadog-extension"
 further_reading:
@@ -40,7 +40,7 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) Url to the Azure blob contaning the Agent configuration as a zip. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
 | `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
@@ -89,7 +89,7 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
 | `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
@@ -143,7 +143,7 @@ More information on the syntax to set Azure `connectedmachine` extensions can be
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
-[2]: /integrations/guide/azure-native-manual-setup/#virtual-machine-agent
+[2]: /integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /integrations/azure_arc/

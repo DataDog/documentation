@@ -1,13 +1,13 @@
 ---
-title: Auth0 SAML IdP
-kind: documentation
 aliases:
-  - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Datadog アカウントのための SAML の構成
+title: Auth0 SAML IdP
 ---
+
 ## 設定およびコンフィギュレーション
 
 [Auth0 を Datadog の ID プロバイダーとして構成する方法][1]に関するドキュメントに従って、Auth0 を SAML ID プロバイダーとして設定します。

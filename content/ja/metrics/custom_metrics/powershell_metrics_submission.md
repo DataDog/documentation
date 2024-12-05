@@ -4,7 +4,6 @@ aliases:
 - /ja/developers/faq/submitting-metrics-via-powershell
 - /ja/developers/metrics/powershell_metrics_submission/
 - /ja/metrics/powershell_metrics_submission
-kind: documentation
 title: 'メトリクス送信: PowerShell'
 ---
 
@@ -93,7 +92,7 @@ $http_request.status
 $http_request.responseText
 ```
 
-### ホストへのタグの追加
+### ホストにタグを追加
 
 1. API/アプリキーを自分のものに置き換えます。
 

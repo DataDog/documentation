@@ -1,6 +1,6 @@
 ---
 title: Send RUM Custom Actions
-kind: guide
+
 beta: true
 private: true
 description: Learn how to send custom actions to extend your collection of user interactions.
@@ -10,6 +10,8 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
+algolia:
+  tags: ["addaction"]
 ---
 ## Overview
 
@@ -100,6 +102,6 @@ The following example displays the average cart value per country in the last tw
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
-[2]: /real_user_monitoring/browser/modifying_data_and_context/#replace-global-context
+[1]: /real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /real_user_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /real_user_monitoring/explorer

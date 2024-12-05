@@ -27,7 +27,7 @@ integration_id: syncthing
 integration_title: Syncthing
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: Alexander@Bushnev.ru
 manifest_version: 1.0.0
 metric_prefix: syncthing.

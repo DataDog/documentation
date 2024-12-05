@@ -1,6 +1,5 @@
 ---
-title: ICMP Tests
-kind: documentation
+title: ICMP Testing
 description: Monitor the availability of your hosts and diagnose network issues.
 aliases:
   - /synthetics/icmp_test
@@ -46,6 +45,10 @@ After choosing to create an `ICMP` test, define your test's request.
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 
@@ -120,7 +123,7 @@ You can restrict access to an ICMP test based on the roles in your organization.
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: /monitors/notify/#notify-your-team
+[4]: /monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /synthetics/guide/synthetic-test-monitors

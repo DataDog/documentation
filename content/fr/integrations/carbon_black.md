@@ -10,7 +10,7 @@ dependencies:
 has_logo: true
 integration_title: "Carbon\_Black"
 is_public: true
-kind: integration
+custom_kind: integration
 name: carbon_black
 public_title: "Intégration Datadog/Carbon\_Black"
 short_description: "Recueillir vos logs Carbon\_Black\_Defense"

@@ -3,6 +3,7 @@ app_id: puma
 app_uuid: c517e801-0fa5-4f5e-8175-a7d5d48a8131
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: puma.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10126
     source_type_name: Puma
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,7 +22,8 @@ author:
   sales_email: justin.morris@ferocia.com.au
   support_email: justin.morris@ferocia.com.au
 categories:
-- web
+- メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
 display_on_public_website: true
@@ -28,25 +31,24 @@ draft: false
 git_integration_title: puma
 integration_id: puma
 integration_title: Puma
-integration_version: 1.2.0
+integration_version: 1.2.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: puma
-oauth: {}
 public_title: Puma
 short_description: Ruby および Rack のための高速コンカレントウェブサーバー
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
+  - Category::Metrics
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Ruby および Rack のための高速コンカレントウェブサーバー
   media: []
@@ -55,6 +57,7 @@ tile:
   title: Puma
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -77,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Puma チェッ
 
 2. コアの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Puma のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `puma.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル puma.d/conf.yaml][6] を参照してください。
 
@@ -97,7 +100,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Puma チェッ
 
 Puma には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "puma" >}}
 
 
@@ -108,7 +111,7 @@ Puma には、イベントは含まれません。
 
 [1]: https://puma.io/
 [2]: https://github.com/puma/puma#controlstatus-server
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [5]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [6]: https://github.com/DataDog/integrations-extras/blob/master/puma/datadog_checks/puma/data/conf.yaml.example

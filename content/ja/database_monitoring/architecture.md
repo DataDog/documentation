@@ -10,26 +10,22 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング
-kind: documentation
 title: DBM セットアップアーキテクチャ
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 ## 概要
 
-Datadog でデータベースモニタリングを設定するために必要な手順は、使用しているデータベースの種類 (Postgres、MySQL、SQL Server) およびホストプロバイダー (セルフホスト、AWS、Google Cloud SQL、またはAzure) によっても変化します。どのデータベースやホストプロバイダーを使用していても、データベースのデータベースモニタリングを使用できるようにするには、次のものが必要です。
+Datadog で Database Monitoring を設定するために必要な手順は、使用しているデータベースの種類 (Postgres、MySQL、SQL Server、Oracle)、ホストプロバイダー (セルフホスト、AWS、Google Cloud SQL、Azure、Oracle) によって異なります。どのホストプロバイダー上のどのデータベースでも Database Monitoring を使用するには、以下が必要です。
 
 * [Datadog Agent][1]
 * Datadog Agent のホスト
 * データベースの読み取り専用アクセス
 
-## エージェント
+## Agent
 
 Datadog Agent は、CPU、メモリ、ネットワークアクティビティなどのシステムメトリクスを監視する軽量なソフトウェアです。また、SQL ユーザーとしてデータベースに接続し、データベースパフォーマンスに関するデータを収集することもできます。
 
-セルフホスティングデータベースの場合、データベースをホストしているホストに直接 Agent をインストールします。AWS RDS や Azure SQL などのクラウド管理型データベースの場合は、データベースにリモートで接続するように Agent を構成します。
+For self-hosted databases, you install the agent directly onto the host that is hosting your database. For cloud-managed databases such as Amazon RDS and Azure SQL, you configure the Agent to connect to your databases remotely.
 
 
 ### セルフホストデータベース
@@ -41,7 +37,7 @@ Datadog Agent は、CPU、メモリ、ネットワークアクティビティな
 * [Postgresで収集したシステムメトリクス][2]
 * [MySQL で収集したシステムメトリクス][3]
 * [SQL Server で収集したシステムメトリクス][4]
-
+* [System metrics collected on Oracle][17]
 
 セルフホスト型セットアップの場合、Agent をデータベースホストに直接インストールし、データベースプロセスを実行しているシステムの健全性を完全に視覚化することができます。
 
@@ -52,19 +48,19 @@ Agent にデータベースへの読み取り専用アクセスを許可し、�
 * [Postgres][5]
 * [MySQL][6]
 * [SQL Server][7]
-
+* [Oracle][16]
 
 ### クラウド管理型データベース
 
-クラウド管理型 ([AWS RDS][8] や Aurora、Google Cloud SQL、Azure などのプロバイダー) の場合、別のホストに Agent をインストールし、管理対象インスタンスに接続するように構成します。
+If your setup is cloud-managed (with providers such as [Amazon RDS][8] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
 
 データベースモニタリングは、CPU、メモリ、ディスク使用量、ログ、関連するテレメトリーなどのシステムメトリクスを、クラウドプロバイダーとの Datadog インテグレーションを利用して直接収集します。
 
-{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="データベースインスタンスは Agent ホストとは別で、Datadog バックエンドとは別になっています。クラウド API は、インターネットを通じて Datadog の AWS インテグレーションに接続します。">}}
+{{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="The database instance is separate from the Agent host, which is separate from the Datadog backend. The cloud API connects to the Datadog AWS integration through the internet.">}}
 
 Agent がデータベースインスタンスに接続できるのであれば、どのクラウド VM (例えば、EC2) にも Agent をインストールすることができます。
 
-独自の Kubernetes クラスターを実行していない場合、Datadog はクラウドプロバイーダのオーケストレーションツールを使用することを推奨しています。例えば、[AWS ECS][9] を使用して Datadog Agent をホストすることができます。[Agent はすでに Docker コンテナとして存在する][10]からです。
+If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider's orchestration tools. For example, you can use [Amazon ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
 
 ### Kubernetes
 
@@ -76,15 +72,11 @@ Agent がデータベースインスタンスに接続できるのであれば�
 
 Agent がレポートを停止した場合、Cluster Agent はそれをアクティブプールから削除し、他の Agent に構成を分配します。これにより、クラスターにノードが追加・削除されても、常に 1 つの (そして 1 つだけの) インスタンスが実行されるようになります。これは、多数のデータベースインスタンスがある場合に重要になります。Cluster Agent は、クラスターチェックをさまざまなノードに分散させます。
 
-
-
 #### Aurora
 
-[Aurora][15] を使用している場合、Agent は監視対象のホストに直接接続する必要があるため、個々の Aurora インスタンス (クラスターのエンドポイントではありません) に接続する必要があります。
+If you are using [Aurora][15], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
 
 Aurora データベースのモニタリングでは、Agent はプロキシ、ロードバランサー、`pgbouncer` などの接続プーラー、または Aurora クラスターのエンドポイントを通じてデータベースに接続してはいけません。各 Datadog Agent は、基礎となるホスト名に関する知識を持ち、フェイルオーバーの場合でも、その生涯を通じて単一のホストで実行する必要があります。そうでないと、メトリクスの値が不正確になります。
-
-
 
 ## その他の参考資料
 
@@ -105,3 +97,5 @@ Aurora データベースのモニタリングでは、Agent はプロキシ、�
 [13]: /ja/agent/cluster_agent/clusterchecks/
 [14]: https://www.datadoghq.com/blog/datadog-cluster-agent/
 [15]: /ja/database_monitoring/setup_postgres/aurora/
+[16]: /ja/database_monitoring/setup_oracle/selfhosted/
+[17]: /ja/integrations/oracle/?tab=linux#data-collected

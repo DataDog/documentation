@@ -1,11 +1,10 @@
 ---
-title: New CSV headers for Usage Trends
-kind: guide
+title: New CSV headers for Cost Chargebacks
 ---
 
-CSV header changes take effect the week of September 18, 2023. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on: on:
+CSV header changes take effect the week of February 19, 2024. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on:
 
-| Organization Name | Public ID | Hour | Product Name | Aggregation | Usage |
-|----| ---| ---| ---| ---| ---|
-|Org 1 | public_id_1 | 10/31/2022 0:00:00 | Infra Hosts	| Max/hr	| 500|
-|Org 1 | public_id_1 | 10/30/2022 0:00:00 | Custom Metrics	| Avg/hr	| 1000|
+| Organization Name | Public ID | Month | Product Name | Cost | 
+|----| ---| ---| ---| ---| 
+|Org 1 | public_id_1 | 2024-01 | Infra Hosts	| $100.18	|
+|Org 1 | public_id_1 | 2024-01 | Custom Metrics	| $50.00	| 

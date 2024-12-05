@@ -5,6 +5,7 @@ assets:
   dashboards:
     crio: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: crio.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10044
     source_type_name: CRI-O
 author:
   homepage: https://www.datadoghq.com
@@ -23,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -30,12 +33,10 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 2.3.1
+integration_version: 4.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: crio
-oauth: {}
 public_title: CRI-O
 short_description: Surveillez toutes vos métriques CRI-O avec Datadog.
 supported_os:
@@ -49,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Surveillez toutes vos métriques CRI-O avec Datadog.
   media: []
@@ -57,6 +59,7 @@ tile:
   title: CRI-O
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation

@@ -24,7 +24,7 @@
 "integration_id": "bigpanda-bigpanda"
 "integration_title": "Plate-forme SaaS BigPanda"
 "is_public": true
-"kind": "integration"
+"custom_kind": "integration"
 "maintainer": "support@bigpanda.io"
 "manifest_version": "1.0.0"
 "metric_prefix": "datadog.marketplace.bigpanda."

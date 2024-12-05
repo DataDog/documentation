@@ -2,7 +2,8 @@
 categories:
 - azure
 - クラウド
-- data store
+- data stores
+custom_kind: integration
 dependencies: []
 description: Azure Blob Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
@@ -13,7 +14,6 @@ integration_id: azure-blob-storage
 integration_title: Microsoft Azure Blob Storage
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_blob_storage
 public_title: Datadog-Microsoft Azure Blob Storage インテグレーション
@@ -21,6 +21,7 @@ short_description: Azure Blob Storage のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレージソリューションです。Blob ストレージは、大量の非構造化データを格納できるように最適化されています。Azure Blob Storage からメトリクスを取得すると、以下のことができます。
@@ -44,7 +45,7 @@ Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレ
 
 Azure Blob Storage インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Blob Storage インテグレーションには、サービスのチェック機能は含まれません。
 

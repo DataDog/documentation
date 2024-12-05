@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/troubleshooting/
   tags: Documentation
   text: Dépannage
-kind: guide
+
 title: Tracer des scripts CLI PHP
 ---
 
@@ -18,8 +18,7 @@ Par défaut, le tracing est désactivé pour les scripts PHP qui s'exécutent de
 
 ```
 $ export DD_TRACE_CLI_ENABLED=1
-
-# (Facultatif) Définissez le host et le port de l'Agent s'ils sont différents de localhost et 8126, respectivement
+# (Facultatif) Définir le host et le port de l'Agent s'ils sont différents de localhost et 8126, respectivement
 $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
@@ -55,11 +54,9 @@ $ export DD_TRACE_CLI_ENABLED=1
 # Ces deux paramètres permettent d'envoyer des traces pour chaque unité de travail quand la méthode d'exécution se termine.
 $ export DD_TRACE_GENERATE_ROOT_SPAN=0
 $ export DD_TRACE_AUTO_FLUSH_ENABLED=1
-
-# (Facultatif) Définissez les paramètres service name, env, etc.
+# (Facultatif) Définir les paramètres de nom de service, d'environnement, etc
 $ export DD_SERVICE=my_service
-
-# (Facultatif) Définissez le host et le port de l'Agent s'ils sont différents de localhost et 8126, respectivement
+# (Facultatif) Définir le host et le port de l'Agent s'ils sont différents de localhost et 8126, respectivement
 $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
@@ -68,44 +65,36 @@ Par exemple, prenons le script `long_running.php` suivant :
 
 ```php
 <?php
-
-
 /* Code spécifique à Datadog. Peut être placé dans un fichier séparé. Obligatoire dans ce script */
 use function DDTrace\trace_method;
 use function DDTrace\trace_function;
 use DDTrace\SpanData;
-
 trace_function('processMessage', function(SpanData $span, $args) {
     // Accéder aux arguments de la méthode et modifier le nom de la ressource
     $span->resource =  'message:' . $args[0]->id;
     $span->meta['message.content'] = $args[0]->content;
     $span->service = 'my_service';
 });
-
 trace_method('ProcessingStage1', 'process', function (SpanData $span, $args) {
     $span->service = 'my_service';
     // Par défaut, le nom de la ressource correspond au nom complet de la méthode.
 });
-
 trace_method('ProcessingStage2', 'process', function (SpanData $span, $args) {
     $span->service = 'my_service';
     $span->resource = 'message:' . $args[0]->id;
 });
 /* Fin du code Datadog */
-
 /** Représente un message qui sera reçu et traité */
 class Message
 {
     public $id;
     public $content;
-
     public function __construct($id, $content)
     {
         $this->id   = $id;
         $this->content = $content;
     }
 }
-
 /** Une étape de traitement parmi d'autres, chacune devant avoir une span */
 class ProcessingStage1
 {
@@ -116,7 +105,6 @@ class ProcessingStage1
         curl_exec($ch);
     }
 }
-
 /** Une étape de traitement parmi d'autres, chacune devant avoir une span */
 class ProcessingStage2
 {
@@ -125,7 +113,6 @@ class ProcessingStage2
         sleep(1);
     }
 }
-
 /** Dans une application réelle, permet de lire les nouveaux messages à partir d'une source, telle qu'une file d'attente */
 function waitForNewMessages()
 {
@@ -135,7 +122,6 @@ function waitForNewMessages()
         new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
     ];
 }
-
 /** Cette fonction correspond à l'unité de travail. Une trace est générée à chaque fois qu'elle est exécutée */
 function processMessage(Message $m, array $processors)
 {

@@ -1,25 +1,57 @@
 ---
-"categories":
-- "monitoring"
-- "notification"
-"ddtype": "crawler"
-"dependencies": []
-"description": "Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。"
-"doc_link": "https://docs.datadoghq.com/integrations/splunk/"
-"draft": false
-"git_integration_title": "splunk"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Splunk"
-"is_public": true
-"kind": "インテグレーション"
-"manifest_version": "1.0"
-"name": "splunk"
-"public_title": "Datadog-Splunk インテグレーション"
-"short_description": "Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。"
-"version": "1.0"
+app_id: splunk
+app_uuid: a3e6047c-501a-4a70-a465-19c0f117d1ac
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 70
+    source_type_name: Splunk
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- notifications
+- event management
+custom_kind: integration
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: splunk
+integration_id: splunk
+integration_title: Splunk
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: splunk
+public_title: Splunk
+short_description: Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::Notifications
+  - Category::Event Management
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
+  support: README.md#Support
+  title: Splunk
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Splunk のログモニターを接続して、以下のことができます。
@@ -58,11 +90,11 @@ dog --api-key $API_KEY --application-key $APP_KEY event post \
 
 ## トラブルシューティング
 
-splunkd.log で runshellscript を実行するたびにエラーコードが表示される場合は、最後のコマンドの末尾に `> dog_splunk_trace.txt 2>&1` を追加します。これにより、`$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt` ファイルが作成されます。このファイルから問題の詳細を確認できます。
+`splunkd.log` で `runshellscript` を実行するたびにエラーコードが表示される場合は、最後のコマンドの末尾に `> dog_splunk_trace.txt 2>&1` を追加します。これにより、`$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt` ファイルが作成されます。このファイルから問題の詳細を確認できます。
 
-トレースファイルで、`dog: error: unrecognized arguments: OR failed OR severe` に続いて `dog`  コマンドの使用方法のヘルプのような文字列が含まれている場合は、最後の行の $SPLUNK_ARG_3 を単一引用符で囲む必要があります。
+トレースファイルで、`dog: error: unrecognized arguments: OR failed OR severe` に続いて `dog`  コマンドの使用方法のヘルプのような文字列が含まれている場合は、最後の行の `\$SPLUNK_ARG_3` を単一引用符で囲みます。
 
-トレースファイルに `pkg_resources.DistributionNotFound` などの文字列で終わるトレースバックが含まれている場合は、以下に示すように、dog-splunk.sh スクリプトの先頭に 3 つの unset を追加します。
+トレースファイルに `pkg_resources.DistributionNotFound` などの文字列で終わるトレースバックが含まれている場合は、`dog-splunk.sh` スクリプトの先頭に 3 つの `unset` を追加します。
 
 ```bash
 #!/bin/bash
@@ -101,8 +133,12 @@ dog --api-key $API_KEY --application-key $APP_KEY event post \
 
 ---
 
-_このドキュメントは、2015 年 10 月 28 日に [AWS 上の Splunk Enterprise AMI][2] を使用して検証されています。_
+## 参考資料
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
+- [Datadog と Splunk を使ってメトリクスとログを相関付ける][2]
 
+_このドキュメントは、2015 年 10 月 28 日に [AWS 上の Splunk Enterprise AMI][3] を使用して検証されています。_
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
+[3]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3

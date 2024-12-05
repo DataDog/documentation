@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: ブログ
   text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
-kind: documentation
 title: 取り込んだログからメトリクスを生成する
 ---
 
@@ -30,23 +29,27 @@ Datadog の [Logging without Limits][1]\* を使用すると、インデック�
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="ログをメトリクスに生成" style="width:80%;">}}
 
-ログベースのメトリクスを新しく生成するには、Datadog アカウントの [Configuration ページ][5]で _[Generate Metrics][6]_ タブを選択し、**New Metric+** ボタンをクリックします。
+新しいログベースのメトリクスを生成するには
+
+1. [Generate Metrics][5] ページに移動します。
+1. **Generate Metrics** タブを選択します。
+1. **+New Metric** をクリックします。
 
 Export メニューで "Generate new metric" を選択し、Analytics の検索からメトリクスを作成することも可能です。
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="ログからメトリクスを生成" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="ログからメトリクスを生成" style="width:80%;">}}
 
 ### 新しいログベースのメトリクスを追加
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="ログからメトリクスを作成" style="width:80%;">}}
 
-1. **クエリを入力してログストリームを絞り込み**: クエリの構文は[ログエクスプローラーでの検索][7]と同じです。過去 20 分以内のタイムスタンプで取り込まれたログのみが集計の対象となります。
-2. **追跡するフィールドを選択**: `*` を選択してクエリに一致するすべてのログカウントを生成するか、ログ属性 (例: `@network.bytes_written`) を入力して数値を集計し、該当する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。ログ属性のファセットが[メジャー][8]の場合、メトリクスの値はログ属性の値になります。
-3. **`group by` にディメンションを追加**: デフォルトでは、明示的に追加しない限り、ログから生成されたメトリクスにタグは付いていません。ログに存在する属性やタグディメンション (例: `@network.bytes_written`、`env`) は、いずれもメトリクス[タグ][9]を作成するために使用できます。メトリクスタグ名は元の属性またはタグ名から @ を抜いたものとなります。
-4. **パーセンタイル集計を追加**: ディストリビューションメトリクスの場合は、オプションでパーセンタイル（p50、p75、p90、p95、p99）で集計できます。パーセンタイルのメトリクスはカスタムメトリクスとしても扱われ、[適宜請求に追加][10]されます。
-5. **メトリクスに命名**: ログベースのメトリクス名は、[カスタムメトリクスの命名規則][11]に従う必要があります。
+1. **クエリを入力してログストリームを絞り込み**: クエリの構文は[ログエクスプローラーでの検索][6]と同じです。過去 20 分以内のタイムスタンプで取り込まれたログのみが集計の対象となります。
+2. **追跡するフィールドを選択**: `*` を選択してクエリに一致するすべてのログカウントを生成するか、ログ属性 (例: `@network.bytes_written`) を入力して数値を集計し、該当する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。ログ属性のファセットが[メジャー][7]の場合、メトリクスの値はログ属性の値になります。
+3. **`group by` にディメンションを追加**: デフォルトでは、明示的に追加しない限り、ログから生成されたメトリクスにはタグが付いていません。ログに存在する属性やタグディメンション (例: `@network.bytes_written`、`env`) は、メトリクス[タグ][8]を作成するために使用できます。メトリクスタグ名は元の属性またはタグ名から @ を除いたものになります。
+4. **パーセンタイル集計を追加**: ディストリビューションメトリクスの場合は、オプションでパーセンタイル（p50、p75、p90、p95、p99）で集計できます。パーセンタイルのメトリクスはカスタムメトリクスとしても扱われ、[適宜請求に追加][9]されます。
+5. **メトリクスに命名**: ログベースのメトリクス名は、[カスタムメトリクスの命名規則][10]に従う必要があります。
 
-**注**: ログベースのメトリクスのデータポイントは、10 秒間隔で生成されます。ログベースのメトリクスに対して[ダッシュボードグラフ][12]を作成する場合、`count unique` パラメーターは 10 秒間隔内の値に基づいています。
+**注**: ログベースのメトリクスのデータポイントは、10 秒間隔で生成されます。ログベースのメトリクスに対して[ダッシュボードグラフ][11]を作成する場合、`count unique` パラメーターは 10 秒間隔内の値に基づいています。
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="count unique クエリパラメーターがハイライトされた時系列グラフの構成ページ" style="width:80%;">}}
 
@@ -93,11 +96,10 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 [2]: /ja/logs/indexes/#exclusion-filters
 [3]: /ja/metrics/distributions/#overview
 [4]: /ja/metrics/custom_metrics/
-[5]: https://app.datadoghq.com/logs/pipelines
-[6]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[7]: /ja/logs/search_syntax/
-[8]: /ja/logs/explorer/facets/#quantitative-facets-measures
-[9]: /ja/getting_started/tagging/
-[10]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
-[11]: /ja/metrics/custom_metrics/#naming-custom-metrics
-[12]: /ja/dashboards/querying/
+[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[6]: /ja/logs/search_syntax/
+[7]: /ja/logs/explorer/facets/#quantitative-facets-measures
+[8]: /ja/getting_started/tagging/
+[9]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
+[10]: /ja/metrics/custom_metrics/#naming-custom-metrics
+[11]: /ja/dashboards/querying/

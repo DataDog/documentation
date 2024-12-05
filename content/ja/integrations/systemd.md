@@ -5,6 +5,7 @@ assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: systemd.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10066
     source_type_name: Systemd
 author:
   homepage: https://www.datadoghq.com
@@ -22,6 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: systemd
 integration_title: Systemd
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: systemd
-oauth: {}
 public_title: Systemd
 short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
 supported_os:
@@ -44,6 +45,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::OS & System
+  - Offering::Integration
   configuration: README.md#Setup
   description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
   media: []
@@ -52,6 +54,7 @@ tile:
   title: Systemd
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -67,14 +70,14 @@ tile:
 
 Systemd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
    Systemd パフォーマンスデータの収集を開始します。
@@ -85,7 +88,7 @@ Systemd チェックは [Datadog Agent][2] パッケージに含まれていま�
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -129,7 +132,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 Systemd チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "systemd" >}}
 
 
@@ -140,6 +143,6 @@ Systemd チェックには、イベントは含まれません。
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

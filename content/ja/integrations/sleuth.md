@@ -3,6 +3,7 @@ app_id: sleuth
 app_uuid: 7923b3ef-2436-4315-bf2e-7631a6975886
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: sleuth.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10118
     source_type_name: Sleuth
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,6 +26,7 @@ categories:
 - 問題追跡
 - orchestration
 - ソースコントロール
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
 display_on_public_website: true
@@ -33,10 +36,8 @@ integration_id: sleuth
 integration_title: Sleuth
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sleuth
-oauth: {}
 public_title: Sleuth
 short_description: Sleuth Deployment Tracker
 supported_os:
@@ -53,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Sleuth Deployment Tracker
   media: []
@@ -61,11 +63,12 @@ tile:
   title: Sleuth
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Sleuth は、DevOps スタック全体でソフトウェアのデプロイを追跡できるようにするデプロイ追跡ツールです。Datadog インテグレーションにより、Sleuth は洞察に満ちた有意義で実用的なリアルタイムデータを提供し、コードに加えた変更の影響を明確に確認できるようにします。
 
-## セットアップ
+## Setup
 
 Datadog インテグレーションを追加するには
 
@@ -88,7 +91,7 @@ Datadog インテグレーションを追加するには
 
 Datadog Sleuth インテグレーションは、Sleuth アカウントからのみインストールされます。Sleuth で Datadog API とアプリケーションキーを指定する以外に、Datadog アカウントから行う必要がある設定や追加の構成はありません。
 
-### コンフィギュレーション
+### 構成
 
 - **Add metric** ドロップダウンをクリックし、受信した Datadog メトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
 
@@ -105,7 +108,7 @@ Datadog Sleuth インテグレーションは、Sleuth アカウントからの�
 
 Sleuth インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Sleuth インテグレーションには、サービスのチェック機能は含まれません。
 

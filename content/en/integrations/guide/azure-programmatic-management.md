@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Programmatic Management Guide
-kind: guide
+
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
@@ -30,7 +30,7 @@ Follow these steps to deploy the integration through [Terraform][13].
 
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
     * `tenant_name`: Your Azure Active Directory ID.
-    * `client_id`: Your Azure web application secret key.
+    * `client_id`: Your Azure application (client) ID.
     * `client_secret`: Your Azure web application secret key.
 
    See the [Datadog Azure integration resource][17] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
@@ -79,7 +79,28 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 2. Apply any desired [Agent configurations][12].
 3. For Windows Server 2008, Vista, and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
 4. Upload the file to blob storage.
-5. Reference the blob storage URL in the Terraform block to create the VM extension:
+5. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+#### Extension settings
+
+The Azure Extension can accept both normal settings and protected settings.
+
+The normal settings include:
+
+| Variable | Type | Description  |
+|----------|------|--------------|
+| `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
+| `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
+| `agentConfiguration` | URI | (optional) URL to the Azure blob containing the Agent configuration as a zip. |
+| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
+
+The protected settings include:
+
+| Variable | Type | Description  |
+|----------|------|--------------|
+| `api_key`| String | Adds the Datadog API KEY to the configuration file. |
+
+**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence.
 
 {{< tabs >}}
 {{% tab "Windows" %}}
@@ -98,9 +119,10 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
   {
-    "DATADOG_API_KEY": "<DATADOG_API_KEY>"
+    "api_key": "<DATADOG_API_KEY>"
   }
   PROTECTED_SETTINGS
+}
 ```
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -147,4 +169,4 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
-[20]: /monitors/notify/#notify-your-team
+[20]: /monitors/notify/#configure-notifications-and-automations

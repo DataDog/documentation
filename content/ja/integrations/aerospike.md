@@ -5,27 +5,30 @@ assets:
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     metrics:
-      check: aerospike.uptime
+      check:
+      - aerospike.uptime
+      - aerospike.namespace.memory_free_pct
       metadata_path: metadata.csv
       prefix: aerospike.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10067
     source_type_name: Aerospike
-  logs:
-    source: aerospike
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
 display_on_public_website: true
@@ -33,12 +36,10 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.18.1
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: aerospike
-oauth: {}
 public_title: Aerospike
 short_description: Aerospike データベースからクラスターやネームスペースの統計を収集
 supported_os:
@@ -47,8 +48,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: Aerospike データベースからクラスターやネームスペースの統計を収集
   media: []
@@ -57,6 +59,7 @@ tile:
   title: Aerospike
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -76,15 +79,15 @@ Aerospike データベースからメトリクスをリアルタイムに取得�
 Aerospike チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
 ##### メトリクスの収集
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Aerospike Prometheus Exporter][1] のインストールと構成を行います。詳細は [Aerospike のドキュメント][2]を参照してください。
 
@@ -94,7 +97,7 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 **注**: このチェックのバージョン 1.16.0+ では、メトリクスの収集に [OpenMetrics][5] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、[コンフィグ例][6]を参照してください。
 
-##### ログの収集
+##### ログ収集
 
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
@@ -123,33 +126,65 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 [5]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/7.36.x/aerospike/datadog_checks/aerospike/data/conf.yaml.example
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ化環境の場合は、以下のパラメーターを適用する手順について、[Kubernetes でのオートディスカバリーとのインテグレーションの構成][1]または [Docker でのオートディスカバリーとのインテグレーションの構成][2]を参照してください。利用可能なすべての構成オプションについては、[サンプル aerospike.d/conf.yaml][3] を参照してください。
 
 ##### メトリクスの収集
 
 | パラメーター            | 値                                |
 | -------------------- | ------------------------------------ |
-| `<インテグレーション名>` | `aerospike`                          |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                        |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
+| `<INTEGRATION_NAME>` | `aerospike`                          |
+| `<INIT_CONFIG>`      | 空白または `{}`                        |
+| `<INSTANCES_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
 
-##### ログの収集
+**例**
+
+ポッドに以下のアノテーションを適用します。ここで、`<CONTAINER_NAME>` は Aerospike コンテナ名または[カスタム識別子][4]です。
+
+```
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+  {
+    "aerospike": {
+      "init_config": {},
+      "instances": [{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}]
+    }
+  } 
+```
+
+
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][5]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "aerospike", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+**例**
+
+ポッドに以下のアノテーションを適用します。ここで、`<CONTAINER_NAME>` は Aerospike コンテナ名または[カスタム識別子][4]です。
+
+```
+ad.datadoghq.com/<CONTAINER_NAME>.logs: |
+  [
+    {
+      "type": "file",
+      "path": "/var/log/aerospike/aerospike.log",
+      "source": "aerospike"
+    } 
+  ]
+```
+[1]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/containers/docker/integrations/
+[3]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/containers/guide/ad_identifiers/
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,7 +198,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "aerospike" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 **aerospike.can_connect**
 **aerospike.cluster_up**

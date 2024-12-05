@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 사전에서 중복 키 피하기
 ---
 ## 메타데이터

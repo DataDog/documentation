@@ -35,6 +35,19 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     height: auto;
   }
 
+  table {
+    tr {
+        th:empty {
+            display: none;
+        }
+
+        td {
+            word-break: break-word;
+            width: 50%;
+        }
+    }
+  }
+
   table.table-metrics {
     tr {
       td {
@@ -725,6 +738,9 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                             cursor: zoom-in;
                         }
                     }
+                    img:not(.play-overlay) {
+                        object-fit: contain;
+                    }
                     .play-overlay {
                         z-index: 2;
                         cursor: pointer;
@@ -861,7 +877,9 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                         max-width: 1026px;
                         grid-column: 1/-1;
                         grid-row: 1/-1;
-
+                        img:not(.play-overlay) {
+                            object-fit: contain;
+                        }
                         .play-overlay {
                             z-index: 2;
                             cursor: pointer;

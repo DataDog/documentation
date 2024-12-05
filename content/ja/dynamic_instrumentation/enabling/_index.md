@@ -5,9 +5,8 @@ further_reading:
 - link: /agent/
   tag: ドキュメント
   text: Datadog Agent の概要
-is_beta: true
-kind: ドキュメント
-private: true
+is_beta: false
+private: false
 title: ダイナミックインスツルメンテーションを有効にする
 type: multi-code-lang
 ---

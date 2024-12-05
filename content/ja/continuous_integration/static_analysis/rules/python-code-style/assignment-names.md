@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 変数名は snake_case を使用しなければならない
 ---
 ## メタデータ

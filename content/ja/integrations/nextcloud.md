@@ -3,6 +3,7 @@ app_id: nextcloud
 app_uuid: a48ccc77-3e72-4e3b-b439-3ebe7e2688b7
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: nextcloud.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10214
     source_type_name: Nextcloud
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: emeric.planet@gmail.com
 categories:
 - コラボレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: nextcloud
 integration_title: Nextcloud
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nextcloud
-oauth: {}
 public_title: Nextcloud
 short_description: Nextcloud インスタンスからの総合的な統計を追跡
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Collaboration
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nextcloud インスタンスからの総合的な統計を追跡
   media: []
@@ -54,6 +56,7 @@ tile:
   title: Nextcloud
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -76,7 +79,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Nextcloud の[メトリクス](#メトリクス) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `nextcloud.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nextcloud.d/conf.yaml][6] を参照してください。
 
@@ -96,7 +99,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チ�
 
 Nextcloud には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "nextcloud" >}}
 
 
@@ -106,7 +109,7 @@ Nextcloud には、イベントは含まれません。
 
 
 [1]: https://nextcloud.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

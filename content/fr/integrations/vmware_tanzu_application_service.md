@@ -6,6 +6,7 @@ categories:
 - provisioning
 - configuration & deployment
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: Surveillez l'intégrité de vos machines virtuelles VMware Tanzu Application
@@ -15,10 +16,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
   tag: Blog
   text: Surveillance de Pivotal Platform avec Datadog
+- link: /integrations/guide/application-monitoring-vmware-tanzu/
+  tag: documentation
+  text: Datadog Application Monitoring for VMware Tanzu
+- link: /integrations/guide/cluster-monitoring-vmware-tanzu/
+  tag: documentation
+  text: Datadog Cluster Monitoring for VMware Tanzu
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: integration
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Intégration Datadog/VMware Tanzu Application Service (Pivotal Cloud
@@ -57,7 +63,7 @@ cf restage <VOTRE_APP>
 
 L'Agent de trace Datadog (APM) est activé par défaut. Consultez la documentation relative à la [configuration d'APM][6] et à la [configuration du profiling][7] pour découvrir comment effectuer la configuration en fonction de votre langage.
 
-#### Collecte de logs
+#### Dépannage
 
 {{< site-region region="us3" >}}
 
@@ -89,7 +95,7 @@ Le tableau suivant décrit comment utiliser les paramètres ci-dessus pour confi
 
 | Paramètre                 | Description                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_LOGS_ENABLED`         | Définissez ce paramètre sur `true` pour activer la collecte de logs de l'Agent Datadog.                                                                                      |
+| `DD_LOGS_ENABLED`         | Définissez ce paramètre sur `true` pour activer la collecte de logs avec l'Agent Datadog.                                                                                      |
 | `DD_ENABLE_CHECKS`        | Définissez ce paramètre sur `false` pour désactiver la collecte de métriques système de l'Agent via les checks de base.                                                       |
 | `STD_LOG_COLLECTION_PORT` | Ce paramètre doit être utilisé lorsque les logs provenant de `stdout` ou `stderr` sont recueillis. Il redirige le flux `stdout` ou `stderr` vers la valeur du port local correspondant. |
 | `LOGS_CONFIG`             | Utilisez cette option pour configurer l'Agent afin d'effectuer une écoute sur un port TCP local et pour définir la valeur des paramètres `service` et `source`.          |
@@ -107,9 +113,9 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### Notification en cas de proxy mal configuré
 
-Avec la version 6.12+ de l'Agent, lorsque vous utilisez une [configuration de proxy][8] avec le buildpack, une vérification est effectuée pour déterminer si la connexion peut être établie. La collecte de logs démarre en fonction du résultat de ce test.
+Avec la version 6.12+ de l'Agent, lorsque vous utilisez une [configuration de proxy][101] avec le buildpack, une vérification est effectuée pour déterminer si la connexion peut être établie. La collecte de logs démarre en fonction du résultat de ce test.
 
-Si la connexion ne peut pas être établie et que la collecte de logs ne démarre pas, un événement semblable à celui illustré ci-dessous s'affiche dans l'[Events Explorer][9]. Configurez un monitor pour suivre ces événements et recevoir des notifications lorsqu'un buildpack mal configuré est déployé :
+Si la connexion ne peut pas être établie et que la collecte de logs ne démarre pas, un événement semblable à celui illustré ci-dessous s'affiche dans l'[Events Explorer][102]. Configurez un monitor pour suivre ces événements et recevoir des notifications lorsqu'un buildpack mal configuré est déployé :
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Un événement dans Datadog dont le titre est « Log endpoint cannot be reached - Log collection not started » et un message indiquant qu'une connexion TCP n'a pas pu être établie" >}}
 
@@ -124,9 +130,12 @@ cf set-env <VOTRE_APPLICATION> DD_TAGS key1=value1,key2=value2
 cf restage <VOTRE_APPLICATION>
 ```
 
+[101]: /fr/agent/logs/proxy/
+[102]: /fr/events/explorer/
+
 {{< /site-region >}}
 
-### DogStatsD
+### Paramètres d'organisation
 
 [DogStatsD][10] vous permet d'envoyer des métriques d'application personnalisées à Datadog. Consultez la section [Envoi de métriques : DogStatsD][11] pour en savoir plus. Vous pouvez également vous référer à la liste des [bibliothèques DogStatsD][12] compatibles avec un grand nombre d'applications.
 
@@ -153,7 +162,7 @@ Les métriques disponibles peuvent varier en fonction de la version de PCF et du
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: /fr/integrations/guide/pivotal-cloud-foundry-manual-setup
 [3]: /fr/integrations/faq/pivotal_architecture
-[4]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[4]: /fr/integrations/guide/application-monitoring-vmware-tanzu/
 [5]: /fr/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
 [6]: /fr/tracing/setup/
 [7]: /fr/profiler/enabling/
@@ -162,8 +171,8 @@ Les métriques disponibles peuvent varier en fonction de la version de PCF et du
 [10]: /fr/developers/dogstatsd/
 [11]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
 [12]: /fr/libraries/
-[13]: https://docs.pivotal.io/partners/datadog/installing.html
-[14]: /fr/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-pivotal-cloud-foundry-cluster
+[13]: /fr/integrations/guide/cluster-monitoring-vmware-tanzu/#installation
+[14]: /fr/integrations/guide/cloud-foundry-setup/#monitor-your-cloud-foundry-cluster
 [15]: /fr/integrations/system/#metrics
 [16]: /fr/integrations/network/#metrics
 [17]: /fr/integrations/disk/#metrics

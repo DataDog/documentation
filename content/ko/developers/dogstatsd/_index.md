@@ -7,19 +7,18 @@ aliases:
 - /ko/agent/kubernetes/dogstatsd
 description: 데이터 유형 및 태깅을 포함하는 DogStatsD 기능에 대한 개요입니다.
 further_reading:
+- link: integrations/node
+  tag: 도움말
+  text: Node.js 통합을 통해 Node.js용 DogStatsD 활성화
 - link: developers/dogstatsd
   tag: 도움말
   text: DogStatsD 소개
 - link: developers/libraries
-  tag: 도움말
+  tag: 설명서
   text: 공식적으로 커뮤니티에서 만든 API 및 DogStatsD 클라이언트 라이브러리
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD 소스 코드
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: 블로그
   text: Datadog을 통해 Azure App Service에서 Linux 웹 앱을 모니터링하세요
-kind: 설명서
 title: DogStatsD
 ---
 
@@ -28,7 +27,7 @@ title: DogStatsD
 - 히스토그램 메트릭 유형
 - 서비스 검사
 - 이벤트 
-- 태그 설정
+- 태깅
 
 호환되는 StatsD 클라이언트는 DogStatsD 및 에이전트와 함께 작동하지만 [Datadog-specific 익스텐션](#dive-into-dogstatsd)은 포함하지 않습니다.
 
@@ -40,9 +39,7 @@ DogStatsD는 Docker Hub 및 GCR에서 사용할 수 있습니다:
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">Docker Hub는 2023년 7월 10일부터 Datadog의 Docker Hub 레지스트리에 대한 다운로드 속도 제한을 시행합니다. 레지스트리에서 이미지를 다운로드하면 제한 할당량에 따라 제한이 적용됩니다.<br/><br/>
-
-Datadog은 Datadog 에이전트와 클러스터 에이전트 설정을 업데이트하여 다운로드 속도 제한이 적용되지 않는 다른 레지스트리에서 가져오도록 권장하고 있습니다. 자세한 내용은<a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참조하세요 .</div>
+<div class="alert alert-warning">Docker Hub는 이미지 풀 속도 제한에 영향을 받습니다. Datadog에서는 Docker Hub를 사용하지 않는 사용자의 경우 Datadog 에이전트와 클러스터 에이전트 구성을 GCR 또는 ECR에서 Datadog 에이전트에서 풀하여 업데이트할 것을 권장합니다. 자세한 설명은 <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.</div>
 
 ## 작동 방식
 
@@ -56,7 +53,7 @@ DogStatsD는 데이터를 수신할 때 _flush interval_이라는 기간 동안 
 
 ## 설정
 
-DogStatsD는 기본적으로 에이전트 v6+에 대해 UDP 포트 `8125`로 활성화됩니다. 이 포트를 변경할 필요가 없는 경우, [코드에 DogStatsD 설정](#code) 방법을 참조하세요.
+DogStatsD는 기본적으로 에이전트 v6+에 대해 UDP 포트 `8125`로 활성화됩니다. 이 포트를 변경할 필요가 없는 경우, [코드에 DogStatsD 설정](#code) 방법을 참조하세요.
 
 ### 에이전트
 
@@ -83,9 +80,9 @@ DogStatsD는 기본적으로 에이전트 v6+에 대해 UDP 포트 `8125`로 �
 2. [에이전트를 재시작합니다][3].
 
 
-[1]: /ko/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: /ko/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /ko/developers/dogstatsd/unix_socket/
-[3]: /ko/agent/guide/agent-commands/
+[3]: /ko/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 
@@ -116,42 +113,46 @@ StatsD 메트릭 수집 시 필요한 포트를 변경해야 하는 경우`DD_DO
 [1]: /ko/developers/dogstatsd/unix_socket/
 [2]: /ko/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Datadog 연산자" %}}
 
-StatsD 메트릭 수집을 시작하려면 DogStatsD 포트를 호스트 포트에 바인딩해야 합니다. DogStatsD가 [Unix 도메인 소켓][1]을 사용하도록 설정할 수도 있습니다.
+StatsD 메트릭 수집은 [Unix 도메인 소켓][1]에서 기본적으로 활성화됩니다. UDP를 통해 StatsD 메트릭 수집을 시작하려면 Operator 설정에서 DogStatsD 기능을 활성화해야 합니다.
 
-1. `datadog-agent.yaml` 매니페스트에 `hostPort`를 추가합니다:
-
-    ```yaml
-    ports:
-        - containerPort: 8125
-          hostPort: 8125
-          name: dogstatsdport
-          protocol: UDP
-    ```
-
-   이 설정을 통해 애플리케이션이 실행 중인 노드의 `8125`포트에서 DogStatsD로 메트릭을 전송할 수 있습니다.
-
-   **참고**: `hostPort` 기능을 사용하려면 Calico, Canal 또는 Flannel과 같이 [CNI 사양][2]을 준수하는 네트워크 제공자가 필요합니다. CNI를 준수하지 않는 네트워크 제공자에 대한 해결 방법과 자세한 내용은 쿠버네티스 설명서 [HostPort 서비스가 작동하지 않음][3]을 참조하세요.
-
-   **참고**: 오퍼레이터 디플로이먼트인 경우 `agent.config.hostPort`를 사용하여 호스트 포트를 설정합니다.
-
-2. DogStatsD 비로컬 트래픽을 활성화하여 StatsD 데이터 수집을 하려면  `datadog-agent.yaml` 매니페스트에서`DD_DOGSTATSD_NON_LOCAL_TRAFFIC`을 `true`로 설정합니다:
+1. `datadog-agent.yaml` 매니페스트에 `features.dogstatsd.hostPortConfig.enabled`를 추가합니다.
 
     ```yaml
-    - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-      value: 'true'
+    features:
+        dogstatsd:
+            hostPortConfig:
+                enabled: true
     ```
 
-   이 설정을 통해 에이전트를 실행하는 컨테이너가 아닌 다른 컨테이너에서 StatsD 데이터를 수집할 수 있습니다.
+   `datadog-agent.yaml` 매니페스트 예시입니다.
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        dogstatsd:
+          hostPortConfig:
+            enabled: true
+    ```
 
-3. 변경 사항을 적용합니다:
+   이를 통해 Agent는 포트 `8125`에서 UDP를 통해 StatsD 메트릭을 수집할 수 있습니다.
+
+2. 변경 사항을 적용합니다:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-**경고**: `hostPort`파라미터는 호스트의 포트를 엽니다. 방화벽이 애플리케이션 또는 신뢰할 수 있는 소스로부터의 액세스만 허용하는지 확인하세요. 네트워크 플러그인이 `hostPorts`를 지원하지 않는 경우 에이전트 포드 사양에 `hostNetwork: true`을 추가합니다. 그러면 호스트의 네트워크 네임스페이스가 Datadog 에이전트와 공유됩니다. 또한 컨테이너에서 열려 있는 모든 포트가 호스트에서 열려 있음을 의미합니다. 포트가 호스트와 컨테이너 모두에서 사용되는 경우 포트가 충돌하여(같은 네트워크 네임스페이스를 공유하므로) 포드가 시작되지 않습니다. 일부 쿠버네티스 설치에서는 이를 허용하지 않습니다.
+**경고**: `features.dogstatsd.hostPortConfig.hostPort` 파라미터는 호스트의 포트를 엽니다. 방화벽이 애플리케이션이나 신뢰할 수 있는 소스의 액세스만 허용하는지 확인하세요. 네트워크 플러그인이 `hostPorts`를 지원하지 않는 경우  Agent 포드 사양에 `hostNetwork: true`를 추가하세요. 이는 호스트의 네트워크 네임스페이스를 Datadog Agent와 공유합니다. 이는 또한 컨테이너에서 열려 있는 모든 포트가 호스트에서도 열려 있음을 의미합니다. 포트가 호스트와 컨테이너 모두에서 사용되는 경우 충돌이 발생하고(동일한 네트워크 네임스페이스를 공유하므로) 파드가 시작되지 않습니다. 일부 Kubernetes 설치에서는 이를 허용하지 않습니다.
 
 ### StatsD 메트릭을 에이전트로 전송
 
@@ -173,12 +174,19 @@ env:
 
 출처 감지는 에이전트 6.10.0+에서 지원되며 DogStatsD는 컨테이너 메트릭의 출처를 탐지하고 메트릭에 자동으로 태그를 지정할 수 있습니다. 이 모드를 사용하도록 설정하면 UDP를 통해 수신된 모든 메트릭이 자동탐지 메트릭과 동일한 포드 태그로 태그가 지정됩니다.
 
+1. 오리진 감지를 활성화하려면 `datadog-agent.yaml` 매니페스트에 `global.originDetectionUnified.enabled` 설정을 추가합니다.
+
+    ```yaml
+    global:
+        originDetectionUnified:
+            enabled: true
+    ```
+
 **참고**: 
-
-* UDP를 통한 출처 감지는 포드 ID를 엔티티 ID로 사용하므로 컨테이너 레벨 태그가 방출되지 않습니다.
 * UDP 대신 [유닉스 도메인 소켓][5]이 있습니다.
+* UDP를 사용한 오리진 감지는 파드 ID를 엔티티 ID로 사용할 수 있습니다.
 
-UDP를 통해 출처 감지를 활성화하려면, 애플리케이션 매니페스트에 다음 행을 추가합니다:
+파드 ID를 엔티티 ID로 사용하려면 애플리케이션 매니페스트에 다음 줄을 추가하세요.
 
 ```yaml
 env:
@@ -188,7 +196,7 @@ env:
               fieldPath: metadata.uid
 ```
 
-출처 감지를 사용하여 수집된 메트릭에 대해 [태그 카디널리티][6]를 설정하려면 환경 변수`DD_DOGSTATSD_TAG_CARDINALITY`를 `low`(기본값) 또는 `orchestrator`로 설정합니다.
+오리진 감지를 사용하여 수집된 메트릭에 대해 [태그 카디널리티][6]를 설정하려면 `features.dogstatsd.tagCardinality` 설정을 `low`(기본값), `orchestrator` 또는 `high`로 설정합니다.
 
 **참고:** UDP의 경우 [커스텀 메트릭][7]이 너무 많이 생성되는 것을 방지하기 위해 `pod_name` 태그가 기본값으로 추가되지 않습니다.
 
@@ -196,7 +204,7 @@ env:
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /ko/getting_started/tagging/unified_service_tagging
-[5]: /ko/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[5]: /ko/developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /ko/getting_started/tagging/assigning_tags/#environment-variables
 [7]: /ko/metrics/custom_metrics/
 {{% /tab %}}
@@ -309,8 +317,11 @@ Java DataDog StatsD 클라이언트는 Maven Central과 함께 배포되며 [Mav
 
 {{< programming-lang lang=".NET" >}}
 
-- [NuGet에서 패키지][1]를 가져와 설치합니다.
+Nuget CLI를 사용하여 패키지를 직접 설치하거나 [NuGet에서 PackageReference][1]를 가져옵니다.
 
+```shell
+dotnet add package DogStatsD-CSharp-Client
+```
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
@@ -476,14 +487,14 @@ using (var dogStatsdService = new DogStatsdService())
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-| 파라미터       | 유형            | 기본     | 설명                                                                                                    |
+| 파라미터       | 유형            | 기본값     | 설명                                                                                                    |
 | --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `host`          | 문자열          | `localhost` | DogStatsD 서버의 호스트입니다.                                                                             |
 | `port`          | 정수         | `8125`      | DogStatsD 서버의 포트입니다.                                                                             |
 | `socket_path`   | 문자열          | `null`      | DogStatsD 유닉스 도메인 소켓의 경로입니다(`host` 및 `port`를 재정의, 에이전트 v6+에서만 지원됨). |
 | `tags`          | 문자열 목록 | `null`      | 모든 메트릭, 이벤트 및 서비스 검사에 적용되는 태그입니다.                                                      |
 | `namespace`     | 문자열          | `null`      | 모든 메트릭, 이벤트 및 서비스 검사에서 접두사로 사용할 네임스페이스입니다.                                                |
-| `single_thread` | Boolean         | `false`     | 활성화된 상태에서 클라이언트가 메트릭을 컴패니언 스레드가 아닌 메인 스레드에서 전송하도록 합니다.           |
+| `single_thread` | 부울 연산자         | `false`     | 활성화된 상태에서 클라이언트가 메트릭을 컴패니언 스레드가 아닌 메인 스레드에서 전송하도록 합니다.           |
 
 부수적 파라미터의 전체 목록은 GitHub의 [dogstatsd-ruby repo][1]를 참조하세요.
 
@@ -494,7 +505,7 @@ using (var dogStatsdService = new DogStatsdService())
 
 Go 클라이언트에는 클라이언트의 동작을 설정할 수 있는 여러 옵션이 있습니다.
 
-| 매개 변수                     | 유형            | 설명                                                                  |
+| 파라미터                     | 유형            | 설명                                                                  |
 | ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
 | `WithNamespace()`             | 문자열          | 모든 메트릭, 이벤트 및 서비스 검사에서 접두사로 사용할 네임스페이스를 설정합니다.  |
 | `WithTags()`                  | 문자열 목록 | 모든 메트릭, 이벤트 및 서비스 검사에 적용되는 글로벌 태그입니다.               |
@@ -508,15 +519,15 @@ Go 클라이언트에는 클라이언트의 동작을 설정할 수 있는 여�
 
 v2.10.0 버전부터 클라이언트 인스턴스화 권장 방법은 NonBlockingStatsDClientBuilder를 사용하는 것입니다. 다음 빌더 방식을 사용하여 클라이언트 파라미터를 정의할 수 있습니다.
 
-| 빌더 방식                               | 유형           | 기본 설정   | 설명                                                                         |
+| 빌더 방식                               | 유형           | 기본값   | 설명                                                                         |
 | -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
 | `prefix(String val)`                         | 문자열         | null      | 모든 메트릭, 이벤트 및 서비스 검사에 적용할 접두사입니다.                     |
 | `hostname(String val)`                       | 문자열         | 로컬호스트 | 타겟팅된 StatsD 서버의 호스트 이름입니다.                                        |
 | `port(int val)`                              | 정수        | 8125      | 타겟팅된 StatsD 서버의 포트입니다.                                             |
 | `constantTags(String... val)`                | 문자열 변수 | null      | 모든 메트릭, 이벤트 및 서비스 검사에 적용할 글로벌 태그입니다.                |
-| `blocking(boolean val)`                      | Boolean        | false     | 인스턴스화할 클라이언트 유형: 차단 대 비차단.                        |
+| `blocking(boolean val)`                      | 부울 연산자        | false     | 인스턴스화할 클라이언트 유형: 차단 대 비차단.                        |
 | `socketBufferSize(int val)`                  | 정수        | -1        | 기본 소켓 버퍼의 크기입니다.                                           |
-| `enableTelemetry(boolean val)`               | Boolean        | false     | 텔레메트리를 보고하는 클라이언트입니다.                                                         |
+| `enableTelemetry(boolean val)`               | 부울 연산자        | false     | 텔레메트리를 보고하는 클라이언트입니다.                                                         |
 | `entityID(String val)`                       | 문자열         | null      | 출처 감지를 위한 엔티티 ID입니다.                                                   |
 | `errorHandler(StatsDClientErrorHandler val)` | 정수        | null      | 내부 클라이언트 오류 발생 시 오류 처리기.                                  |
 | `maxPacketSizeBytes(int val)`                | 정수        | 8192/1432 | 최대 패킷 크기; UDS에서는 8192, UDP에서는 1432.                               |
@@ -533,17 +544,18 @@ v2.10.0 버전부터 클라이언트 인스턴스화 권장 방법은 NonBlockin
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| 매개 변수     | 유형            | 기본 설정     | 설명                                                                                                                                                         |
-| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`        | 문자열          | `localhost` | DogStatsD 서버의 호스트입니다. 이 옵션이 설정되지 않은 경우 에이전트는 `DD_AGENT_HOST` 환경 변수를 확인합니다.                                                  |
-| `port`        | 정수         | `8125`      | DogStatsD 서버의 포트입니다. 이 옵션이 설정되지 않은 경우 에이전트는 `DD_DOGSTATSD_PORT` 환경 변수를 확인합니다.                                             |
-| `socket_path` | 문자열          | `null`      | DogStatsD 유닉스 도메인 소켓의 경로입니다(`host` 및 `port`를 재정의). 에이전트 v6+에서만 지원됩니다.                                                  |
-| `global_tags` | 문자열 목록 | `null`      | 모든 메트릭, 이벤트 및 서비스 검사에 적용할 태그입니다. `@dd.internal.entity_id`태그는 `DD_ENTITY_ID` 환경 변수에서 global_tags에 추가됩니다. |
+| 파라미터     | 유형            | 기본값    | 설명                                                                                                                                                                            
+          |
+| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `host`        | 문자열         | `localhost` | DogStatsD 서버의 호스트입니다. 설정되지 않은 경우  Agent는 `DD_AGENT_HOST` 또는 `DD_DOGSTATSD_URL` 환경 변수를 확인합니다.                                                          |
+| `port`        | 정수         | `8125`      | DogStatsD 서버의 포트입니다. 설정되지 않은 경우 Agent는 `DD_DOGSTATSD_PORT` 또는 `DD_DOGSTATSD_URL` 환경 변수를 확인합니다.                                             |
+| `socket_path` | 문자열        | `null`      | DogStatsD Unix 도메인 소켓에 대한 경로입니다(`host`및 `port` 재정의). Agent v6+에서만 지원됩니다. 설정되지 않은 경우 Agent는 `DD_DOGSTATSD_URL` 환경 변수를 확인합니다. |
+| `global_tags` | 문자열 목록 | `null`      | 모든 메트릭, 이벤트 및 서비스 검사에 적용할 태그입니다. `@dd.internal.entity_id` 태그는 `DD_ENTITY_ID` 환경 변수의 global_tags에 추가됩니다. |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-| 매개 변수          | 유형            | 기본 설정     | 설명                                                          |
+| 파라미터          | 유형            | 기본값     | 설명                                                          |
 | ------------------ | --------------- | ----------- | -------------------------------------------------------------------- |
 | `StatsdServerName` | 문자열          | `localhost` | 타겟팅된 StatsD 서버의 호스트 이름입니다.                         |
 | `StatsdPort`       | 정수         | `8125`      | 타겟팅된 StatsD 서버의 포트입니다.                              |
@@ -558,9 +570,9 @@ v2.10.0 버전부터 클라이언트 인스턴스화 권장 방법은 NonBlockin
 DogStatsD와 StatsD는 대체로 유사하지만, DogStatsD에는 사용 가능한 데이터 유형, 이벤트, 서비스 검사 및 태그를 포함한 DataDog 관련 고급 기능이 포함되어 있습니다:
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}DogStatsD로 Datadog에 메트릭 전송.{{< /nextlink >}}
-{{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD로 Datadog에 이벤트 전송.{{< /nextlink >}}
-{{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD로  Datadog에 서비스 검사 전송.{{< /nextlink >}}
+{{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}DogStatsD를 사용하여 Datadog에 메트릭 전송.{{< /nextlink >}}
+{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD를 사용하여 Datadog에 이벤트 전송.{{< /nextlink >}}
+{{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD를 사용하여 Datadog에 서비스 검사 전송.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 DogStatsD에서 사용하는 데이터그램 형식에 대해 자세히 알고 싶거나 자체 Datadog 라이브러리를 개발하려면 [데이터그램과 쉘 사용(율)][9] 섹션을 참조하세요. 명령줄에서 직접 메트릭과 이벤트를 보내는 방법도 확인할 수 있습니다.
@@ -574,7 +586,7 @@ DogStatsD에서 사용하는 데이터그램 형식에 대해 자세히 알고 �
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /ko/metrics/custom_metrics/
-[6]: /ko/events/guides/dogstatsd/
+[6]: /ko/service_management/events/guides/dogstatsd/
 [7]: /ko/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /ko/getting_started/tagging/unified_service_tagging
 [9]: /ko/developers/dogstatsd/datagram_shell/

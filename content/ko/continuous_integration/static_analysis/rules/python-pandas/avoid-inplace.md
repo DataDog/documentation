@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: inplace=True를 사용하지 마십시오.
 ---
 ## 메타데이터

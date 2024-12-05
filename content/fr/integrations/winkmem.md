@@ -19,7 +19,7 @@ integration_id: winkmem
 integration_title: Windows Kernel Memory
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: winkmem.

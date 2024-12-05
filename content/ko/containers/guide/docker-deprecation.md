@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/guide/docker-deprecation
-kind: 도움말
 title: 쿠버네티스(Kubernetes)의 도커(Docker) 지원 중단
 ---
 

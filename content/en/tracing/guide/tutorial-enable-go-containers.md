@@ -1,24 +1,24 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application and Datadog Agent in Containers
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
-  tags: Documentation
+  tag: "Documentation"
   text: Ingestion mechanisms
 - link: https://github.com/DataDog/dd-trace-Go
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -212,7 +212,7 @@ Use `curl` to again send requests to the application:
 
 Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 

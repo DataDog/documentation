@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Application Gateway のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
@@ -14,7 +15,6 @@ integration_id: azure-applicationgateway
 integration_title: Microsoft Azure Application Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_application_gateway
 public_title: Datadog-Microsoft Azure Application Gateway インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure Application Gateway のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Application Gateway は、Web アプリケーションへのトラフィックを管理できる Web トラフィックロードバランサーです。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure Application Gat
 
 Azure Application Gateway インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Application Gateway インテグレーションには、サービスのチェック機能は含まれません。
 

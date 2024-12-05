@@ -1,6 +1,5 @@
 ---
 title: Instrumenting a Ruby on Rails application on Heroku with Datadog
-kind: guide
 further_reading:
 - link: "/agent/basic_agent_usage/heroku/"
   tag: "Documentation"
@@ -616,10 +615,10 @@ Navigate to the [APM traces section][19] to see your traces:
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Ruby application traces in Datadog" >}}
 
-Navigate to the [Service list][20] to see all your application services and your application service view:
+Navigate to the [Service Catalog][20] to see all your application services and your application service view:
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service list view in Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service view in Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service Catalog in Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service details page in Datadog" >}}
 
 ## Logs
 
@@ -856,7 +855,7 @@ Agent (v7.27.0)
 [17]: https://elements.heroku.com/addons/memcachedcloud
 [18]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 [19]: https://app.datadoghq.com/apm/traces
-[20]: https://app.datadoghq.com/apm/services
+[20]: https://app.datadoghq.com/services
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages

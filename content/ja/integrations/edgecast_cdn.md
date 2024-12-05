@@ -1,36 +1,64 @@
 ---
+app_id: edgecast-cdn
+app_uuid: 2b575f7f-4575-4618-8ebd-f35f7d6a5d22
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: edgecast.request_count
+      metadata_path: metadata.csv
+      prefix: edgecast.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 619
+    source_type_name: Edgecast
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - キャッシュ
+- モニター
+custom_kind: integration
 dependencies: []
-description: Datadog メトリクスを使用して Edgecast の Web トラフィックを監視します。
-doc_link: https://docs.datadoghq.com/integrations/edgecast_cdn/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-edgecast-cdn-with-datadog/
-  tag: ブログ
-  text: Datadog で Edgecast CDN を監視する
 git_integration_title: edgecast_cdn
-has_logo: false
-integration_id: ''
+integration_id: edgecast-cdn
 integration_title: Edgecast
 integration_version: ''
 is_public: true
-kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: edgecast_cdn
-public_title: Datadog-Edgecast インテグレーション
-short_description: Edgecast のメトリクスを収集します。
-team: web-integrations
-version: '1.0'
+public_title: Edgecast
+short_description: Datadog メトリクスを使用した Edgecast CDN トラフィックの監視
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Metrics
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Datadog メトリクスを使用した Edgecast CDN トラフィックの監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Edgecast
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Edgecast のメトリクスを収集し、オリジンごとの Web トラフィックを監視することができます。
+Edgecast は、エッジコンピューティング、アプリケーションセキュリティ、オーバーザトップビデオストリーミングのためのコンテンツデリバリネットワーク (CDN) やその他のソリューションを提供するグローバルネットワークプラットフォームです。Edgecast のメトリクスを収集し、オリジン別に Web トラフィックを監視することができます。
 
 ## セットアップ
 
-### Edgecast クライアントの作成 
+
+### Edgecast クライアントの作成
 
 1. [Edgecast VDMS アカウント][1]にログインし、**Clients** タブに移動します。
 2. **Create New Client** をクリックすると、New Client モーダルが表示されます。
@@ -38,7 +66,7 @@ Edgecast のメトリクスを収集し、オリジンごとの Web トラフィ
 4. **Settings** に移動し、**JWT Expiration in Seconds** を 600 に変更します。
 5. **Save** をクリックすると、このクライアントと変更した設定値が保存されます。
 
-### コンフィギュレーション
+### 構成
 
 1. Datadog の [Edgecast インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
 2. Datadog でこのクライアントを識別するための一意の名前を入力します。
@@ -58,7 +86,7 @@ Edgecast のメトリクスを収集し、オリジンごとの Web トラフィ
 
 Edgecast インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Edgecast インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -71,6 +99,6 @@ Edgecast インテグレーションには、サービスのチェック機能�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://id.vdms.io
-[2]: https://app.datadoghq.com/account/settings#integrations/edgecast-cdn
+[2]: https://app.datadoghq.com/integrations/edgecast-cdn
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/edgecast_cdn/edgecast_cdn_metadata.csv
 [4]: https://docs.datadoghq.com/ja/help

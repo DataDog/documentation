@@ -1,0 +1,1 @@
+Select the data center region (**US** or **EU**) of your New Relic account.

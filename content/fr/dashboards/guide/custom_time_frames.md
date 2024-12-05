@@ -1,5 +1,4 @@
 ---
-kind: guide
 title: Intervalles personnalisés
 ---
 
@@ -61,7 +60,7 @@ Les intervalles de temps personnalisés fixes et relatifs sont pris en charge :
   * Jours : `d`, `day`, `days`
   * Semaines : `w`, `week`, `weeks`
   * Mois : `mo`, `mos`, `mon`, `mons`, `month`, `months`
-* Les intervalles `today`, `yesterday`, `this month`, `this year` et `last year` sont calculés lorsqu'ils sont entrés. Ils ne sont pas mis à jour à mesure que le temps passe.
+* Les intervalles `today`, `yesterday`, `this month`, `this year` et `last year` sont calculés lors de leur saisie. Ils ne sont pas mis à jour à mesure que le temps passe.
 
 ## URL
 

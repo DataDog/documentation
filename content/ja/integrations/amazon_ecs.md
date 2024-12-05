@@ -6,6 +6,7 @@ categories:
 - containers
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ecs/
@@ -19,11 +20,10 @@ further_reading:
   text: ECS Fargate インテグレーション
 git_integration_title: amazon_ecs
 has_logo: true
-integration_id: amazon-ecs
+integration_id: ''
 integration_title: Amazon ECS on EC2
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ecs
 public_title: Datadog-Amazon ECS on EC2 インテグレーション
@@ -31,6 +31,7 @@ short_description: コンテナ ステータスのモニタリングやリソー
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 <div class="alert alert-warning">
 コンテナ化された Datadog Agent を ECS クラスターにデプロイする方法については、<a href="https://docs.datadoghq.com/agent/amazon_ecs/"><b>Amazon ECS Agent ドキュメント</b></a>を参照してください。
 </div>
@@ -61,11 +62,11 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 
 3. [AWS インテグレーションページ][4]で、`Metric Collection` タブの下にある `ECS` が有効になっていることを確認します。
 
-    {{< img src="integrations/amazon_ecs/aws_tile.png" alt="AWS ECS コンフィギュレーション" >}}
+    {{< img src="integrations/amazon_ecs/aws_tile.png" alt="Amazon ECS コンフィギュレーション" >}}
 
 メトリクスの収集が有効な場合、ECS メトリクスの詳細を提供する[既定のダッシュボード][5]をこのインテグレーションで利用できます。詳細は、[Datadog で ECS をモニタリング][6]をご覧ください。
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_ecs" >}}
@@ -77,13 +78,13 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-ノイズを減らすため、Amazon ECS インテグレーションは次の単語を含むイベントのみを収集するように自動的に設定されます。`drain`、`error`、`fail`、`insufficient memory`、`pending`、`reboot`、`terminate`。以下にイベントの例を示します。
+ノイズを減らすため、Amazon ECS インテグレーションは `drain`、`error`、`fail`、`insufficient memory`、`pending`、`reboot`、`terminate` の単語を含むイベントのみを収集するように自動的に設定されます。以下にイベントの例を示します。
 
-{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
+{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Amazon ECS イベント" >}}
 
 包含リストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][8]までお問い合わせください。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "amazon_ecs" >}}
 
 

@@ -23,7 +23,7 @@ guid: 7bc177b0-b07d-4a83-921f-9cd8deef039b
 integration_id: exchange-server
 integration_title: "Microsoft\_Exchange\_Server"
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: exchange.

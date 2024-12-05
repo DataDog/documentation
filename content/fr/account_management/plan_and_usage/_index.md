@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Paramètres de formule et d'utilisation
 ---
 
@@ -7,7 +6,7 @@ Les [administrateurs][1] peuvent accéder aux [paramètres d'organisation][2] en
 
 ## Rapports d'utilisation
 
-Consultez l'utilisation horaire de votre compte pour tous les paramètres facturables, ainsi que les 500 principales métriques custom transmises. Si votre organisation est l'organisation parente d'un [compte multi-org][3], vous pouvez également consulter l'utilisation des comptes d'organisation enfant, en basculant entre les vues Overall et Individual Organizations en haut de la page. Les comptes individuels des organisations enfant sont isolés et ne peuvent afficher que leurs propres données d'utilisation et leurs propres métriques custom.
+Consultez l'utilisation horaire de votre compte pour tous les paramètres facturables, ainsi que les 5 000 principales métriques custom transmises. Si votre organisation est l'organisation parente d'un [compte multi-org][3], vous pouvez également consulter l'utilisation des comptes d'organisation enfant, en basculant entre les vues Overall et Individual Organizations en haut de la page. Les comptes individuels des organisations enfant sont isolés et ne peuvent afficher que leurs propres données d'utilisation et leurs propres métriques custom.
 
 **Remarque** : comptez jusqu'à 72 heures pour la mise à jour de cette section.
 

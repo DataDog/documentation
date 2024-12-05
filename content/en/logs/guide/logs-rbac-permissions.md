@@ -1,6 +1,6 @@
 ---
 title: Logs RBAC Permissions
-kind: guide
+
 further_reading:
 - link: "/logs/guide/logs-rbac"
   tag: "Documentation"
@@ -68,10 +68,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{% tab "UI" %}}
 
 1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
-
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters" style="width:75%;" >}}
-
+2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field.
 
 [1]: /logs/log_configuration/indexes/
 {{% /tab %}}
@@ -101,9 +98,7 @@ This permission can be assigned either globally or restricted to a subset of pip
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Assign the role(s) in the modal of a specific pipeline.
-
-{{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors" style="width:75%;" >}}
+Assign the role(s) in the `Edit` modal of a specific pipeline.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -292,7 +287,7 @@ These permissions are globally enabled by default for all users.
 [Logs Read Data](#logs_read_data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
 
 * If this user has scoped [Read Index Data](#logs_read_index_data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
-* If this user has [livetail](#logs_live_tail) permission, this users sees only sees `service:api` logs in the livetail.
+* If this user has [livetail](#logs_live_tail) permission, this user only sees `service:api` logs in the livetail.
 
 
 ### `logs_read_index_data`
@@ -309,7 +304,7 @@ Grant this role access to the index in [Configuration page][1].
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles" style="width:75%;" >}}
 
 
-[1]: https://app.datadoghq.com/logs/indexes
+[1]: https://app.datadoghq.com/logs/pipelines/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 

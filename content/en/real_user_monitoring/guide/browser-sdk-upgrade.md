@@ -1,6 +1,6 @@
 ---
 title: Upgrade the RUM Browser SDK
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -126,7 +126,7 @@ In v5, the default `sessionReplaySampleRate` is 0 instead of 100. If you don't i
 
 To promote the support and usage of OpenTelemetry, the default propagator types have been changed to include `tracecontext` in addition to `datadog`.
 
-**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure your server Access-Control-Allow-Headers to also accept `traceparent` header. For more information, see [connect RUM and Traces][25].
+**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure your server Access-Control-Allow-Headers to also accept the `traceparent` header. For more information, see [connect RUM and Traces][25].
 
 ### Session plan field
 
@@ -315,13 +315,13 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [2]: /real_user_monitoring/session_replay
 [3]: /real_user_monitoring/browser/collecting_browser_errors/
 [4]: /real_user_monitoring/browser/monitoring_resource_performance/
-[5]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
+[5]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#clear-user-session-property
-[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#add-global-context-property
-[9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#remove-global-context-property
-[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#read-global-context
-[11]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#replace-global-context
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
+[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
+[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
 [12]: /api/latest/rum/
 [13]: /api/latest/rum/
 [14]: /api/latest/rum/
@@ -330,10 +330,10 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [17]: /api/latest/rum/
 [18]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[20]: /real_user_monitoring/session_replay/privacy_options/#configuration
+[20]: /real_user_monitoring/session_replay/browser/privacy_options/#configuration
 [21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
-[22]: /real_user_monitoring/session_replay/#usage
-[23]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
+[22]: /real_user_monitoring/session_replay/browser/#usage
+[23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/browser/
-[25]: /real_user_monitoring/connect_rum_and_traces#opentelemetry-support
+[25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support

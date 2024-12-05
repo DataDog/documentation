@@ -1,6 +1,5 @@
 ---
 title: Python Log Collection
-kind: documentation
 aliases:
   - /logs/languages/python
 further_reading:
@@ -83,6 +82,47 @@ Once this is done, the log should have the following format:
 
 ```xml
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
+```
+
+If logs are in JSON format, trace values are automatically extracted if the values are at the top level or in the top level `extra` or `record.extra` blocks. The following are examples of valid JSON logs where trace values are automatically parsed.
+
+```json
+{
+  "message":"Hello from the private method",
+  "dd.trace_id":"18287620314539322434",
+  "dd.span_id":"8440638443344356350",
+  "dd.env":"dev",
+  "dd.service":"logs",
+  "dd.version":"1.0.0"
+}
+```
+
+```json
+{
+  "message":"Hello from the private method",
+  "extra":{
+    "dd.trace_id":"18287620314539322434",
+    "dd.span_id":"8440638443344356350",
+    "dd.env":"dev",
+    "dd.service":"logs",
+    "dd.version":"1.0.0"
+  }
+}
+```
+
+```json
+{
+"message":"Hello from the private method",
+  "record":{
+    "extra":{
+      "dd.trace_id":"1734396609740561719",
+      "dd.span_id":"17877262712156101004",
+      "dd.env":"dev",
+      "dd.service":"logs",
+      "dd.version":"1.0.0"
+    }
+  }
+}
 ```
 
 ## Further Reading

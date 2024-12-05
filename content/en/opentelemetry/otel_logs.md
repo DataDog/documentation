@@ -1,11 +1,10 @@
 ---
 title: Send Logs from OpenTelemetry to Datadog
-kind: documentation
 aliases:
 - /logs/log_collection/opentelemetry/
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
@@ -43,5 +42,5 @@ Read [OpenTelemetry][6] for more information.
 [2]: https://www.cncf.io/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/reference/specification/logs/overview/#third-party-application-logs
-[5]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#4-configure-the-logger-for-your-application
+[5]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#step-4---configure-the-logger-for-your-application
 [6]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python

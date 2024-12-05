@@ -18,7 +18,7 @@ integration_id: ping
 integration_title: Ping
 integration_version: 1.0.2
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: jim.stanton@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: network.

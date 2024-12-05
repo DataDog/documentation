@@ -11,19 +11,44 @@ further_reading:
 - link: /security/detection_rules/
   tag: ドキュメント
   text: セキュリティ検出ルールについて
-kind: documentation
+products:
+- icon: cloud-security-management
+  name: Cloud SIEM
+  url: /security/cloud_siem/
+- icon: cloud-security-management
+  name: Cloud Security Management
+  url: /security/cloud_security_management/
+- icon: app-sec
+  name: Application Security Management
+  url: /security/application_security/
 title: 通知
 ---
 
+{{< product-availability >}}
+
 ## 概要
 
-Datadog Security で脅威が検出されると、セキュリティシグナルが生成されます。これらのシグナルが生成されたときに、通知を送信してチームに情報を提供することができます。
+Notifications allow you to keep your team informed when a security signal is generated. A security signal is generated when at least one case defined in a [detection rule][2] is matched over a given period of time.
 
-通知は、特定の[検出ルール](#detection-rule-notifications)と、より広範な[通知ルール](#notification-rules)に設定することができます。シグナルの重大度や脅威に関する特定のコンテキストに基づいて通知をカスタマイズする方法については、[通知変数][1]を参照してください。
+## Notification types
+
+Notifications can be set up for individual [detection rules](#detection-rules) and also more broadly with [notification rules](#notification-rules).
+
+### 検出ルール
+
+When you [create or modify a detection rule][2], you can define the notifications that are sent. For example, you can add rule cases to determine when a detection rule triggers a security signal. You can also customize the notification message in the [**Say what's happening**](#say-whats-happening) section.
+
+#### Say what's happening
+
+Use the **Say what's happening** section to customize the notification message using Markdown and [notification variables][1]. This allows you to provide additional details about the signal by referencing its tags and event attributes. You can also add tags to the generated signal, for example, `attack:sql-injection-attempt`.
+
+### 通知ルール
+
+Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## 通知チャンネル
 
-メール、Slack、Jira、PagerDuty、または Webhook で通知を送信します。
+Notifications can be sent to individuals and teams through email, Slack, Jira, PagerDuty, webhooks, and more.
 
 ### Email
 
@@ -33,35 +58,7 @@ Datadog Security で脅威が検出されると、セキュリティシグナル
 
 {{% notifications-integrations %}}
 
-## 検出ルールの通知
-
-[新しい検出ルールを作成または変更する][2]際に、**Set rule case** と **Say what's happening** セクションを使用して、送信する通知を定義することができます。
-
-### ルールケースを設定する
-
-**Set rule case** セクションでは、検出ルールがいつセキュリティシグナルをトリガーするか、シグナルの重大度を決定するためのルールケースを追加します。**Notify** ドロップダウンを使用して、そのケースから生成されたシグナル通知を[選択された受信者](#notification-channels)に送信します。
-
-### Say what's happening
-
-シグナルが発生したときに送信する内容は、**Say what's happening** セクションを使用して決定します。
-
-#### ルール名
-
-検出ルールのルール名を追加します。ルール名は、シグナルのタイトルと同様に **Detection Rules** リストビューに表示されます。
-
-#### メッセージ
-
-標準的な Markdown と[通知変数][1]を使用して、そのタグとイベント属性を参照することによって、シグナルに関する特定の詳細を提供します。
-
-#### タグ
-
-シグナルに異なるタグを付けるには、**Tag resulting signals** ドロップダウンを使用します。例えば、`attack:sql-injection-attempt` のようになります。
-
-## 通知ルール
-
-通知ルールを使用すると、個々の検出ルールに通知設定を設定する必要がないように、一般的な警告の設定を行うことができます。例えば、`CRITICAL` または `HIGH` の重大度シグナルがトリガーされた場合に通知を送信するように通知ルールを設定することができます。セットアップと構成の詳細については、[通知ルール][3]を参照してください。
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

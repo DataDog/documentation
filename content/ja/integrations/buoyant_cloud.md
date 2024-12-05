@@ -5,6 +5,7 @@ assets:
   dashboards:
     Buoyant Cloud: assets/dashboards/buoyant_cloud_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +16,9 @@ assets:
       prefix: buoyant_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10320
     source_type_name: Buoyant Cloud
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://buoyant.io/cloud
   name: Buoyant
@@ -25,6 +28,7 @@ categories:
 - クラウド
 - ネットワーク
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/buoyant_cloud/README.md
 display_on_public_website: true
@@ -34,10 +38,8 @@ integration_id: buoyant-cloud
 integration_title: Buoyant Cloud
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: buoyant_cloud
-oauth: {}
 public_title: Buoyant Cloud
 short_description: Buoyant Cloud は、お客様のクラスター上でフルマネージド Linkerd を提供します。
 supported_os:
@@ -87,6 +89,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -99,7 +102,7 @@ tile:
 
 このインテグレーションを使用するには、[Buoyant Cloud][1] にアカウントが必要です。また、Datadog マーケットプレイスで Buoyant Cloud にサインアップすることができます。
 
-### コンフィギュレーション
+### 構成
 
 1. タイルの **Connect Accounts** ボタンをクリックし、OAuth フローを完了します。
 2. [Buoyant Cloud Notifications][2] ページを参照します。

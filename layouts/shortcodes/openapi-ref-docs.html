@@ -1,0 +1,65 @@
+{{ $tag := $.Params.tag | default nil }}
+{{ $dot := . }}
+ {{ with $.Params.url }}
+  {{ $openapi := $.Site.Data.cloudcraft }}
+  <style>
+    .openapi-spec-content img {
+      max-width:100%;
+    }
+    .openapi-spec-content h1 a:hover,
+    .openapi-spec-content h2 a:hover {
+      color: #000;
+      border-bottom: 1px solid #000;
+    }
+  </style>
+  <div class="openapi-spec-content">
+    {{ if not $tag }}
+    <div class="description">
+      <p>{{ $openapi.info.description | markdownify }}</p>
+    </div>
+    {{ end }}
+    <div style="display: flex; flex-direction: column; align-items: stretch; width: 80%;">
+      {{ $prevTag := "" }}
+      {{ $currentTag := "" }}
+      {{ range $path, $pathMethods := $openapi.paths }}
+        {{ range $pathMethod, $pathDetails := $pathMethods }}
+
+          {{ $currentTag = (index $pathDetails.tags 0) }}
+          {{ if eq $currentTag $tag }}
+
+            <h2 class="mb-2" style="margin-top: -150px; padding-top: 150px;" id="{{ $pathDetails.summary | anchorize }}">
+                <a href="#{{ $pathDetails.summary | anchorize }}">
+                  {{- $pathDetails.summary -}}
+                </a>
+            </h2>
+
+            <div class="row endpoint">
+              <div class="col-12">
+                <div class="endpoint-content">
+
+                  <p class="mb-0">
+                    <span style="padding: 3px" class="font-semibold text-api-{{ $pathMethod }} bg-bg-api-{{ $pathMethod }}">{{ $pathMethod | upper }}</span>&nbsp;
+                    <span>{{ $path }}</span>
+                  </p>
+
+                  <h3 class="mt-2">Overview</h3>
+                  {{ $pathDetails.description | markdownify }}
+
+                  <!-- response -->
+                  {{ partial "api/response.html" (dict "responses" $pathDetails.responses "operationid" $pathDetails.operationId "version" "v1") }}
+
+                  <!-- code example -->
+                  {{ partial "api/openapi-code-example.html" (dict "page" $.Page "pathDetails" $pathDetails "pathMethod" $pathMethod "path" $path "summary" ($pathDetails.summary | anchorize)) }}
+                </div>
+              </div>
+            </div>
+            <div class="row divider"><div class="col-12"><hr class="mt-0 mb-2" style="border-top:2px solid#DADADA"></div></div>
+
+            {{ $prevTag = $currentTag }}
+          {{ end }}
+
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

@@ -35,10 +35,9 @@ integration_id: ibm-db2
 integration_title: IBM Db2
 integration_version: 1.11.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_db2
-oauth: {}
 public_title: IBM Db2
 short_description: Surveillez les métriques de tablespace et de pool de mémoires tampon
   ainsi que d'autres métriques depuis votre base de données IBM Db2.

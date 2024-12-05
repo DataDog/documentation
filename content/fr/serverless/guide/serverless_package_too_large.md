@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Instrumenter des applications Node.js
-kind: documentation
 title: Correction des erreurs de package sans serveur trop volumineux
 ---
 
@@ -18,16 +17,16 @@ Datadog ajoute généralement deux couches Lambda pour l'instrumentation :
 - Une bibliothèque propre au langage qui instrumente le code de la fonction
 - L'extension qui agrège, met en mémoire tampon et transmet les données d'observabilité au backend Datadog
 
-Vérifiez le contenu et la taille des couches Lambda Datadog à l'aide de la commande AWS CLI [`aws lambda get-layer-version`][3]. Par exemple, les commandes ci-dessous fournissent des liens afin de télécharger les couches Lambda pour _la version 67 de Datadog-Node14-x_ et _la version 19 de Datadog-Extension et de vérifier leur taille non compressée (environ 30 Mo pour les couches). La taille non compressée varie selon les couches et les versions. Remplacez le nom de la couche et le numéro de version de l'exemple suivant par les valeurs pertinentes pour vos applications :
+Vérifiez le contenu et la taille des couches Lambda Datadog à l'aide de la commande AWS CLI [`aws lambda get-layer-version`][3]. Par exemple, les commandes ci-dessous fournissent des liens afin de télécharger les couches Lambda pour _la {{< latest-lambda-layer-version layer="node" >}} de Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} et _la version 19 de Datadog-Extension et de vérifier leur taille non compressée (environ 30 Mo pour les couches). La taille non compressée varie selon les couches et les versions. Remplacez le nom de la couche et le numéro de version de l'exemple suivant par les valeurs pertinentes pour vos applications :
 
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node14-x \
-  --version-number 67
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
+  --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
-  --version-number 19
+  --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
 Outre les couches Lambda Datadog, examinez également les autres couches Lambda qui ont été ajoutées (ou le seront) à vos fonctions. Si vous utilisez le [Serverless Framework][4], vous pouvez accéder au modèle CloudFormation depuis le dossier masqué `.serverless` après avoir exécuté la commande `deploy` ou `package`, ainsi qu'à la liste des couches Lambda depuis la section `Layers`.

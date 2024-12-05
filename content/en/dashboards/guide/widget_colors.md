@@ -1,6 +1,5 @@
 ---
 title: Selecting the right colors for your graphs
-kind: guide
 ---
 
 In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively.
@@ -17,7 +16,7 @@ Categorical palettes are best used for data that needs to be differentiated, but
 
 #### Classic
 
-The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. Adjacent series have distinct colors.
+The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. Adjacent series typically have distinct colors. However, in rare conditions, adjacent series could use the same color if intermediate series have no value for partial timeframes.
 
 The Classic color palette has visual accessibility support.
 
@@ -25,7 +24,7 @@ The Classic color palette has visual accessibility support.
 
 #### Consistent/Semantic
 
-The Consistent palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. Unlike the Classic palette, the Consistent palette does not guarantee that adjacent data series do not use the same color, and it does not have accessibility support.
+The Consistent palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. The Consistent palette does not guarantee that adjacent data series do not use the same color, and it does not have accessibility support.
 
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="A color palette for the Consistent/Semantic palette." style="width:70%;" >}}

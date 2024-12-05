@@ -3,6 +3,7 @@ app_id: php-opcache
 app_uuid: 392e54ac-60d4-4225-ab5a-d75245e0ea06
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,15 +14,17 @@ assets:
       prefix: php_opcache.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10141
     source_type_name: PHP OPcache
   monitors:
-    '[php_opcache] Cache Full has been detected': assets/monitors/php-opcache_expunges.json
+    OPcache is full: assets/monitors/php-opcache_expunges.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: php-opcache
 integration_title: PHP OPcache
 integration_version: 0.0.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: php_opcache
-oauth: {}
 public_title: PHP OPcache
 short_description: PHP OPcache バイトコードキャッシュシステムを監視します。
 supported_os:
@@ -47,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: PHP OPcache バイトコードキャッシュシステムを監視します。
   media: []
@@ -55,6 +57,7 @@ tile:
   title: PHP OPcache
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -100,7 +103,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 </Location>
 ```
 
-### コンフィギュレーション
+### 構成
 
 1. `php_opcache` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_opcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_opcache.d/conf.yaml` ファイル][6]を参照してください。
     ```
@@ -123,7 +126,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 
 PHP OPcache インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "php_opcache" >}}
 
 
@@ -134,8 +137,8 @@ PHP OPcache インテグレーションには、イベントは含まれませ�
 
 [1]: https://www.php.net/manual/en/book.opcache.php
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/developers/integrations/python/
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-extras/blob/master/php_opcache/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php
 [6]: https://github.com/DataDog/integrations-extras/blob/master/php_opcache/datadog_checks/php_opcache/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

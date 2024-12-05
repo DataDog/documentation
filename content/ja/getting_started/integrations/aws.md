@@ -23,11 +23,10 @@ further_reading:
   text: Datadog で Amazon ECS をどこでも監視する
 - link: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation
   tag: ドキュメント
-  text: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
+  text: Amazon Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: ブログ
   text: Datadog で Graviton3 搭載の EC2 インスタンスを監視する
-kind: documentation
 title: AWS の概要
 ---
 
@@ -40,6 +39,8 @@ title: AWS の概要
 最初の接続が確立された後、AWS 環境に関連する個々の AWS サービスインテグレーションを有効にすることができます。ワンクリックで、Datadog は AWS アカウントに必要なリソースをプロビジョニングし、使用するサービスのメトリクスとイベントのクエリを開始します。人気のある AWS サービスをご使用の場合、Datadog はすぐに使えるダッシュボードを用意しています。これは即座に視覚化を提供し、カスタマイズも可能です。このガイドでは、インテグレーションの設定と Amazon Linux EC2 インスタンスへの Datadog Agent のインストールをデモし、インテグレーションの機能の概要を説明します。利用可能なサブインテグレーションについては、[個々の AWS サービスに対するインテグレーションを有効にする](#enable-integrations-for-individual-aws-service)セクションを参照してください。
 
 このプロセスは必要な数の AWS アカウントに対して繰り返すことができますし、[API][3]、[AWS CLI][4]、[Terraform][5] を使って一度に複数のアカウントを設定することも可能です。詳しくは、[Datadog-Amazon CloudFormation ガイド][6]をご参照ください。
+
+**注**: Datadog の CloudFormation テンプレートは、定義済みのリソースの作成と削除のみをサポートしています。スタックへの更新の適用方法については、[スタックテンプレートの更新][59]を参照してください。
 
 ## 前提条件
 
@@ -69,6 +70,7 @@ title: AWS の概要
     * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
+    * iam:TagRole
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
@@ -86,6 +88,8 @@ title: AWS の概要
     * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
+    * oam:ListSinks
+    * oam:ListAttachedLinks
     * s3:CreateBucket
     * s3:DeleteBucket
     * s3:DeleteBucketPolicy
@@ -95,6 +99,7 @@ title: AWS の概要
     * s3:PutBucketPolicy
     * s3:PutBucketPublicAccessBlock
     * s3:PutEncryptionConfiguration
+    * s3:PutLifecycleConfiguration
     * secretsmanager:CreateSecret
     * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
@@ -109,7 +114,7 @@ title: AWS の概要
     a. インテグレーションする AWS リージョンを選択します。 
     b. Datadog [API キー][9]を追加します。 
     c. オプションで、[Datadog Forwarder Lambda][1] でログなどを Datadog に送ります。 
-    d. オプションで、[Cloud Security Posture Management][54] (CSPM) を有効にして、クラウド環境、ホスト、コンテナをスキャンして、構成ミスやセキュリティリスクを確認します。
+    d. 必要に応じて、[Cloud Security Management Misconfigurations][54] を有効にして、クラウド環境、ホスト、コンテナをスキャンして、誤構成やセキュリティリスクを検出します。
 
 5. **Launch CloudFormation Template** をクリックします。これで AWS コンソールが開き、CloudFormation スタックがロードされます。すべてのパラメーターは、事前の Datadog フォームでの選択に基づいて入力されているため、必要な場合以外は編集する必要はありません。
 **注:** `DatadogAppKey` パラメーターは、CloudFormation スタックが Datadog に API コールを行い、この AWS アカウントに対して Datadog の構成を追加・編集できるようにするものです。キーは自動的に生成され、Datadog アカウントに結びつけられます。
@@ -125,19 +130,19 @@ title: AWS の概要
 
 利用可能なサブインテグレーションの全リストは、[Integrations ページ][13]をご覧ください。これらのインテグレーションの多くは、Datadog が AWS アカウントから入ってくるデータを認識する際に、デフォルトでインストールされます。
 
-## ログを送信する
+## ログを送信
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][10]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Amazon Data Firehose destination][10]: Amazon Data Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
 - [Forwarder Lambda 関数][11]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
 
 最も利用されている AWS サービスのログを流すには、[AWS サービスのログを有効にする][14]のセクションを読んでください。
 
 ### 検証
 
-ログを有効にしたら、[ログエクスプローラー][15] でファセット・パネルから `source` または `service` ファセットを使用して、ログを見つけます (S3 からの以下の例のように)。
-{{< img src="getting_started/integrations/logs-explorer.png" alt="Datadog アカウントのログエクスプローラーページ。左側には、ソースとサービスのファセットが表示され、両方とも 's3' でチェックされています。右側には、いくつかのログエントリーがリスト形式で表示されています。">}}
+ログを有効にしたら、[Log Explorer][15] でファセットパネルの `source` または `service` ファセットを使用してログを見つけてください。以下は、S3 の例です。
+{{< img src="getting_started/integrations/logs-explorer.png" alt="Datadog アカウントの Log Explorer ページ。左側には、Source と Service ファセットが表示され、両方とも 's3' にチェックされています。右側には、いくつかのログエントリーがリスト形式で表示されています。">}}
 
 ## Datadog のプラットフォームをさらに活用する
 
@@ -164,6 +169,10 @@ Agent がインストールされると、[インフラストラクチャーリ�
 #### Fargate 起動タイプの ECS
 
 [Amazon ECS on AWS Fargate のドキュメント][28]を使用して、アプリケーションと同じタスク定義でコンテナとして Agent を実行します。**注**: Fargate インテグレーションをフルに活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
+
+#### Fargate オーケストレーションタイプによる AWS Batch
+
+[Amazon ECS on AWS Fargate for AWS Batch のドキュメント][58]を使用して、アプリケーションと同じ AWS Batch ジョブ定義でコンテナとして Agent を実行します。**注**: Fargate インテグレーションをフルに活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
 
 #### EKS
 
@@ -199,9 +208,9 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 [Cloud SIEM の概要][50]を参照して、すぐに使える[ログ検出ルール][51]に照らし合わせてログを評価します。これらのルールはカスタマイズ可能で、脅威が検出されると[セキュリティシグナルエクスプローラー][52]でアクセス可能なセキュリティシグナルが生成されます。適切なチームに通知するために、[通知ルール][53]を使用して複数のルールにまたがる通知設定を構成することができます。
 
-#### クラウドセキュリティポスチャ管理(CSPM)
+#### Cloud Security Management Misconfigurations
 
-[CSPM の概要][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能なポスチャ管理[クラウド][55]および[インフラストラクチャー][56]の検出ルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
+[CSM Misconfigurations の設定][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能な[クラウド][55]および[インフラストラクチャー][56]のコンプライアンスルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
 
 ### トラブルシューティング
 
@@ -255,16 +264,18 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [42]: /ja/serverless
 [43]: /ja/serverless/libraries_integrations
 [44]: /ja/serverless/distributed_tracing
-[45]: /ja/serverless/troubleshooting
+[45]: /ja/serverless/aws_lambda/troubleshooting/
 [46]: /ja/integrations/amazon_xray/
 [47]: /ja/tracing/trace_collection/
 [48]: /ja/tracing/
 [49]: /ja/watchdog/
 [50]: /ja/getting_started/cloud_siem/
 [51]: /ja/security/default_rules/#cat-log-detection
-[52]: /ja/security/explorer/
+[52]: /ja/security/cloud_siem/investigate_security_signals
 [53]: /ja/security/notifications/rules/
-[54]: /ja/security/cspm/setup/
+[54]: /ja/security/cloud_security_management/setup/
 [55]: /ja/security/default_rules/#cat-posture-management-cloud
 [56]: /ja/security/default_rules/#cat-posture-management-infra
 [57]: /ja/integrations/guide/aws-integration-troubleshooting/
+[58]: /ja/integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
+[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html

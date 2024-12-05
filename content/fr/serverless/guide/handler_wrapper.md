@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Incorporer la fonction Lambda du gestionnaire dans le code
 ---
 

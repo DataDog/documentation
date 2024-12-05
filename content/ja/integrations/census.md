@@ -5,6 +5,7 @@ assets:
   dashboards:
     Census Overview: assets/dashboards/census_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -16,7 +17,9 @@ assets:
       prefix: census
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10336
     source_type_name: Census
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.getcensus.com/
   name: Census
@@ -24,6 +27,7 @@ author:
   support_email: support@getcensus.com
 categories:
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/census/README.md
 display_on_public_website: true
@@ -33,10 +37,8 @@ integration_id: census
 integration_title: Census
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: census
-oauth: {}
 public_title: Census
 short_description: Census 同期のメトリクスとイベントを Datadog に送信します。
 supported_os:
@@ -64,6 +66,7 @@ tile:
   title: Census
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -94,7 +97,7 @@ Census ワークスペース上で同期を実行し、Datadog アカウント�
 {{< get-metrics-from-git "census" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 Census には、サービスのチェック機能は含まれません。
 

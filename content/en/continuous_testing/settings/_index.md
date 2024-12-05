@@ -1,6 +1,5 @@
 ---
 title: Continuous Testing Settings
-kind: documentation
 further_reading:
 - link: "/continuous_testing/cicd_integrations"
   tag: "Documentation"
@@ -18,16 +17,16 @@ further_reading:
   tag: "Documentation"
   text: "Explore RUM & Session Replay in Synthetics"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage tests with Terraform"
 ---
 {{< jqmath-vanilla >}}
 
 ## Overview
 
-You can access Continuous Testing settings on the [Synthetic Monitoring & Continuous Testing Settings page][1].
+You can access Continuous Testing settings on the [Synthetic Monitoring & Testing Settings page][1].
 
-{{< img src="continuous_testing/continuous_testing_settings_default.png" alt="Default settings for Continuous Testing" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Set parallelization for your Continuous Testing tests on the Settings page" style="width:100%;">}}
 
 By default, all your tests running in CI/CD pipelines run sequentially (one after the other). To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
 
@@ -60,7 +59,7 @@ $$\text"estimated parallelization" = {\text"average numbers of tests per CI batc
 3. Click **Save Selection**.
 4. Confirm your selection.
 
-{{< img src="continuous_testing/continuous_testing_settings_parallelization.png" alt="Setting parallelization for Continuous Testing" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Parallelization settings for 25 parallel Continuous Testing test runs" style="width:100%;">}}
 
 ## Permissions
 

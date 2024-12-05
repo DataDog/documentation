@@ -2,6 +2,7 @@
 categories:
 - provisioning
 - configuration & deployment
+custom_kind: integration
 dependencies: []
 description: Puppet の実行を追跡。失敗、成功、大きな変更を把握。
 doc_link: https://docs.datadoghq.com/integrations/puppet/
@@ -12,7 +13,6 @@ integration_id: puppet
 integration_title: Puppet
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: puppet
 public_title: Datadog-Puppet インテグレーション
@@ -20,6 +20,7 @@ short_description: Puppet の実行を追跡。失敗、成功、大きな変更
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Puppet を Datadog に接続して、以下のことができます。
@@ -44,7 +45,7 @@ Puppet で Datadog Agent をインストールするには、GitHub の [Datadog
 
 Puppet インテグレーションには、失敗、成功、変更された、および変更されていないリソースに関するステータスイベントが含まれます。
 
-### サービスのチェック
+### サービスチェック
 
 Puppet インテグレーションには、サービスのチェック機能は含まれません。
 

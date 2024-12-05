@@ -37,7 +37,6 @@
 		"body": [
 			"---",
 			"title: Doc Title",
-			"kind: <UPDATE>",
 			"disable_toc: false",
 			"aliases:",
 			"- /path-to-old-doc/",
@@ -67,15 +66,6 @@
 		"Additional helpful documentation, links, and articles:",
 		"- [First link][1]"
 	]
-	},
-
-	"Further reading footer - static analysis rules": {
-		"prefix": ";;further",
-		"body": [
-			"## Default rules",
-			"",
-			"{{< partial name=\"continuous_integration/rule-type.html\" >}}"
-		]
 	},
 
 	"Alert box":{
@@ -233,11 +223,59 @@
 		"description": "Video short-code"
 	},
 
-  "Vimeo": {
-		"prefix": ";;vimeo",
+	"Vimeo": {
+			"prefix": ";;vimeo",
+			"body": [
+				"{{< vimeo url=\"VIMEO_URL\" poster=\"THUMBNAIL_URL\" >}}"
+			],
+			"description": "Vimeo short-code"
+		},
+
+	"Highlight": {
+			"prefix": ";;highlight",
+			"body": [
+				"{{< highlight py \"hl_lines=1-2\" >}}",
+				"a='Hello World!'",
+				"print(a)",
+				"{{< /highlight >}}"
+			]
+	},
+	
+	"Whats next": {
+			"prefix": ";;whatsnext",
+			"body": [
+				"{{< whatsnext desc=\"Overall description goes here:\" >}}",
+				"   {{< nextlink href=\"link/here\" >}}Link desctiption goes here{{< /nextlink >}}",
+				"{{< /whatsnext >}}"
+			]
+	},
+	"Eng Blog Frontmatter":{
+		"prefix": ";;eng_blog_frontmatter",
 		"body": [
-			"{{< vimeo url=\"VIMEO_URL\" poster=\"THUMBNAIL_URL\" >}}"
+			"---",
+			"authors:",
+			"- email: author@datadoghq.com",
+			"  name: author-full-name",
+			"  image: author-headshot-image.jpg",
+			"blog: engineering",
+			"date: YYYY-MM-DD",
+			"publishDate: YYYY-MM-DD",
+			"description: \"A short summary of the post to be used on the front page of the blog\"",
+			"specific_interest:",
+			" - add-optional-interest",
+			" - add-optional-interest",
+			"core_product:",
+			" - product-name",
+			"disable_hiring_blurb: false",
+			"draft: false",
+			"private: false",
+			"slug: identical-to-your-markdown-filename",
+			"series: add-series-identifier-if-the-post-is-one-in-a-series",
+			"title: \"Title of the Blog\"",
+			"image: filename-of-hero-image.png",
+			"preview_image: filename-of-hero-image.png",
+            "---"
 		],
-		"description": "Vimeo short-code"
+		"description": "Eng Blog Frontmatter"
 	}
 }

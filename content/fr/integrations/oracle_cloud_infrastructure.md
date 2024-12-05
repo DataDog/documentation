@@ -17,7 +17,7 @@ integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: oracle_cloud_infrastructure
 public_title: Intégration Oracle Cloud Infrastructure/Datadog
@@ -49,22 +49,19 @@ Les instructions ci-dessous utilisent le portail OCI pour configurer l'intégrat
 
 #### Journalisation OCI
 
-1. Depuis le portail OCI, accédez à *Solutions and Platform -> Logging -> Log Groups*.
-2. Cliquez sur **Create Log Group** pour être redirigé vers la page **Create Custom log**.
-3. Sélectionnez votre **Compartment name**. Cette sélection restera inchangée tout au long de l'installation.
-4. Saisissez "data_log_group" dans le champ **Name**, puis entrez la **Description** de votre choix.
-5. Cliquez sur **Create** pour configurer votre nouveau groupe de logs.
-6. Accédez à *Solutions and Platform -> Logging -> Logs*.
-7. Cliquez sur **Enable Service Log**.
-8. Sous **Select Resource**, sélectionnez votre **Compartment**, le **Service** depuis lequel vous souhaitez collecter des logs, et une **Resource** appartenant à ce service.
-9. Sous **Configure Log**, sélectionnez "Write Access Events" comme **Log Category**, puis saisissez le nom de votre choix dans le champ **Name**.
-10. Cliquez sur **Enable Log** pour créer un nouveau log OCI.
+1. Depuis le portail OCI, accédez à *Logging -> Log Groups*.
+2. Sélectionnez votre compartiment et cliquez sur **Create Log Group**. Un volet latéral s'ouvre alors.
+3. Attribuez le nom `data_log_group` au groupe de logs et, si vous le souhaitez, ajoutez une description et des tags.
+4. Cliquez sur **Create** pour configurer votre nouveau groupe de logs.
+5. Sous **Resources**, cliquez sur **Logs**.  
+6. Cliquez sur **Create custom log** ou sur **Enable service log** selon vos besoins.
+7. Cliquez sur **Enable Log** pour créer un log OCI.
 
 Pour en savoir plus sur les logs OCI, consultez la section [Activation de la journalisation pour une ressource][1].
 
 #### Fonciton OCI
 
-1. Depuis le portail OCI, accédez à *Solutions and Platform -> Developer Services -> Functions.*
+1. Depuis le portail OCI, accédez à *Functions*.
 2. Sélectionnez une application existante ou cliquez sur **Create Application**.
 3. Créez une nouvelle fonction OCI au sein de votre application. Consultez la section [Présentation de Functions][2] de la documentation Oracle pour en savoir plus.
 4. Il est conseillé de commencer par créer une fonction Python réutilisable et de remplacer les fichiers générés automatiquement par le code source de Datadog :
@@ -74,14 +71,14 @@ Pour en savoir plus sur les logs OCI, consultez la section [Activation de la jou
 
 #### Service Connector Hub OCI
 
-1. Depuis le portail OCI, accédez à *Solutions and Platform -> Logging -> Service Connectors*.
-2. Cliquez sur **Create Connector** pour être redirigé vers la page **Edit Service Connector**.
+1. Depuis le portail OCI, accédez à *Logging -> Service Connectors*.
+2. Cliquez sur **Create Service Connector** pour être redirigé vers la page **Create Service Connector**.
 3. Sélectionnez Logging dans le champ **Source** et Functions dans le champ **Target**.
 4. Sous **Configure Source Connection**, sélectionnez un **Compartment name**, un **Log Group**, et un **Log**. Le **Log Group** et le **Log** sont ceux créés au cours de la première étape.
-5. Si vous souhaitez également envoyer des **Audit Logs**, cliquez sur **+Another Log** et sélectionnez le même **Compartment**, mais choisissez "_Audit" comme **Log Group**.
-6. Sous **Configure Target Condition**, sélectionnez un **Compartment name**, une **Function Application**, et une **Function**. La **Function Application** et la **Function** sont celles créées lors de l'étape précédente.
-7. Si vous êtes invité à créer une stratégie, cliquez sur **Create**.
-8. Cliquez sur **Save Changes** pour terminer la création de votre Service Connector.
+5. Si vous souhaitez également envoyer des **Audit Logs**, cliquez sur **+Another Log** et sélectionnez le même compartiment dans le champ **Compartment**, mais choisissez dans le champ **Log Group** le groupe de logs "_Audit".
+6. Sous **Configure target**, sélectionnez un **Compartment**, une **Function application** et une **Function**. La **Function Application** et la **Function** correspondent aux éléments créés lors de l'étape précédente.
+7. Si vous êtes invité à créer une stratégie, cliquez sur **Create** depuis l'invite.
+8. Cliquez sur **Create** en bas de la page pour terminer la création de votre Service Connector.
 
 Pour en savoir plus sur Object Storage OCI, consultez l'[article de blog sur Service Connector][6] (en anglais).
 

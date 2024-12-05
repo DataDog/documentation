@@ -3,6 +3,7 @@ app_id: winkmem
 app_uuid: 70d34855-e504-4716-be0a-cc9d7d82e5ab
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: winkmem.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10254
     source_type_name: Windows Kernel Memory
 author:
   homepage: https://www.datadoghq.com
@@ -20,6 +22,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/winkmem/README.md
 display_on_public_website: true
@@ -29,10 +33,8 @@ integration_id: winkmem
 integration_title: Windows Kernel Memory
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: winkmem
-oauth: {}
 public_title: Windows Kernel Memory
 short_description: Windows カーネルのメモリ割り当てを監視します。
 supported_os:
@@ -42,6 +44,8 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS & System
+  - カテゴリー::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows カーネルのメモリ割り当てを監視します。
   media: []
@@ -50,6 +54,7 @@ tile:
   title: Windows Kernel Memory
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -64,7 +69,7 @@ Datadog で視覚化とモニターを作成するために、Windows カーネ�
 
 Windows Kernel Memory インテグレーションは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `winkmem.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル winkmem.d/conf.yaml.example][3] を参照してください。
 
@@ -84,7 +89,7 @@ Windows Kernel Memory インテグレーションは [Datadog Agent][1] パッ�
 
 Windows Kernel Memory インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Windows Kernel Memory インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -92,7 +97,7 @@ Windows Kernel Memory インテグレーションには、サービスのチェ�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/winkmem.d/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

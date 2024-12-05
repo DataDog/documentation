@@ -1,6 +1,5 @@
 ---
 title: Monitoring Ranges
-kind: guide
 ---
 
 ## Overview

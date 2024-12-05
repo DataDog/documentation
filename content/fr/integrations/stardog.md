@@ -29,10 +29,9 @@ integration_id: stardog
 integration_title: Stardog
 integration_version: 2.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: stardog
-oauth: {}
 public_title: Stardog
 short_description: Un collecteur de données Stardog pour Datadog.
 supported_os:

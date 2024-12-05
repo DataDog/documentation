@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - synthetics
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Centro de aprendizaje
@@ -15,11 +18,14 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentación
   text: Más información sobre las localizaciones privadas
-- link: /synthetics/cicd_integrations
+- link: /continuous_testing/cicd_integrations
   tag: Documentación
   text: Más información sobre los tests Synthetic en el pipeline de integración continua
     (CI)
-kind: documentación
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para mejorar tus capacidades de synthetic
+    testing
 title: Empezando con la monitorización Synthetic
 ---
 
@@ -27,7 +33,7 @@ title: Empezando con la monitorización Synthetic
 
 Las pruebas Synthetic te permiten observar el rendimiento de tus sistemas y aplicaciones mediante **simulaciones de solicitudes y acciones procedentes de todo el mundo**. Datadog rastrea el rendimiento de tus páginas web y API desde el backend hasta el frontend, así como en varios niveles de red (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` y `gRPC`), de forma controlada y estable, y te alerta sobre cualquier problema, como regresiones, funciones defectuosas, tiempos de respuesta altos y códigos de estado inesperados.
 
-{{< img src="getting_started/synthetics/synthetic-monitoring-overview.png" alt="Tests de monitorización Synthetic" style="width:100%;" >}}
+{{< img src="getting_started/synthetics/synthetic-monitoring-overview.png" alt="Tests de monitorización de Synthetic" style="width:100%;" >}}
 
 ## Tipos de tests Synthetic
 

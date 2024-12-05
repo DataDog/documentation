@@ -14,7 +14,7 @@ integration_id: amazon-gamelift
 integration_title: Amazon Gamelift
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_gamelift
 public_title: "Intégration Datadog/Amazon\_Gamelift"

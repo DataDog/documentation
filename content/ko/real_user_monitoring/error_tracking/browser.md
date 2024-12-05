@@ -11,7 +11,6 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: 설명서
   text: 오류 추적 탐색기에 대해 알아보기
-kind: 설명서
 title: 브라우저 충돌 보고 및 오류 추적
 ---
 

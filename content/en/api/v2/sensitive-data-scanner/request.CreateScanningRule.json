@@ -17,7 +17,14 @@
       "tags": [
         "sensitive_data:true"
       ],
-      "is_enabled": true
+      "is_enabled": true,
+      "priority": 1,
+      "included_keyword_configuration": {
+        "keywords": [
+          "credit card"
+        ],
+        "character_count": 35
+      }
     },
     "relationships": {
       "group": {

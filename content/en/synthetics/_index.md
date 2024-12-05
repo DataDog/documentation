@@ -1,6 +1,5 @@
 ---
-title: Synthetic Monitoring
-kind: documentation
+title: Synthetic Testing and Monitoring
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
 disable_sidebar: true
 aliases:
@@ -21,9 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
   tag: "Blog"
   text: "Improve your API test coverage with Datadog Synthetic Monitoring"
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
@@ -40,6 +39,11 @@ cascade:
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
 
 <br/>
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+  Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
+{{< /learning-center-callout >}}
 
 Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
 
@@ -63,7 +67,7 @@ Use [Synthetic browser tests][14] to monitor how your customers experience your 
 
 Use [Synthetic mobile application tests][21] to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
 
-{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
+{{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
 ## Launch private locations
 
@@ -83,11 +87,17 @@ Analyze performance information about your API tests, multistep API tests, brows
 
 {{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing Summary Dashboard" style="width:100%;">}}
 
-## Use the Synthetic Monitoring & Continuous Testing Explorer
+## Use the Synthetic Monitoring & Testing Results Explorer
 
 Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+
+## Track testing coverage
+
+Optimize your test suite by [ensuring that your application's most critical workflows are being tested][22].
+
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
@@ -119,3 +129,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [19]: /getting_started/synthetics/private_location
 [20]: /continuous_testing/explorer/
 [21]: /mobile_testing
+[22]: /synthetics/test_coverage

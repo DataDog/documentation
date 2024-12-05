@@ -1,6 +1,5 @@
 ---
 title: Reducing Data Related Risks
-kind: documentation
 further_reading:
 - link: "/data_security/logs/"
   tag: "Documentation"
@@ -14,10 +13,10 @@ further_reading:
 - link: "/tracing/configure_data_security/"
   tag: "Documentation"
   text: "Tracing Data Security"
-- link: "/real_user_monitoring/browser/modifying_data_and_context/"
+- link: "/data_security/real_user_monitoring/"
   tag: "Documentation"
   text: "RUM Data Security"
-- link: "/real_user_monitoring/session_replay/privacy_options"
+- link: "/real_user_monitoring/session_replay/browser/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "/sensitive_data_scanner/"
@@ -162,8 +161,8 @@ Continuous Integration pipelines and tests
 [18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/modifying_data_and_context/
-[22]: /real_user_monitoring/session_replay/privacy_options
+[21]: /real_user_monitoring/browser/advanced_configuration/
+[22]: /real_user_monitoring/session_replay/browser/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/

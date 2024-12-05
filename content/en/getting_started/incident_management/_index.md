@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Incident Management
-kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
@@ -32,6 +31,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
+    - link: 'https://www.datadoghq.com/blog/how-datadog-manages-incidents/'
+      tag: 'Blog'
+      text: 'How we manage incidents at Datadog'
 ---
 
 {{% site-region region="gov" %}}
@@ -52,11 +54,11 @@ This guide walks you through using the Datadog site for declaring an incident, u
 
 This guide describes using the [Datadog Clipboard][2] to declare an incident. Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
-1. In the Datadog menu on the left-hand side, go to **Dashboard** > **Dashboard lists** and select **System - Metrics**.
+1. In Datadog, navigate to [**Dashboard List**][15] and select **System - Metrics**.
 2. Hover over one of the graphs and copy it to the Clipboard with one of the following commands:
     - **Ctrl**/**Cmd** + **C**
     - Click the **Export** icon on the graph and select **Copy**.
-3. In the Datadog menu on the left-hand side, go to **Monitors** > **Manage Monitors** and select **[Auto] Clock in sync with NTP**.
+3. In the Datadog menu on the left-hand side, go to [**Monitors** > **Monitors List**][16] and select **[Auto] Clock in sync with NTP**.
 4. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 5. In the Clipboard, click **Add current page** to add the monitor to the Clipboard.
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="Copy to Clipboard" responsive="true" style="width:100%;">}}
@@ -68,16 +70,12 @@ This guide describes using the [Datadog Clipboard][2] to declare an incident. Us
 | Title                    | Follow any naming conventions your team wants to use for incident titles. Because this is not a real incident, include the word `TEST` to make it clear that this is a test incident. An example title: `[TEST] My incident test`                                                                      |
 | Severity Level           | Set to **Unknown** since it's unclear whether customers are being impacted and how related services are being impacted. See the in-app description of what each severity level means and follow your team's guidelines.                                                                                |
 | Incident Commander       | Leave this assigned to you. In an actual incident this would be assigned to the leader of the incident investigation. You or others can update who the incident commander is as the incident investigation progresses.                                                                                 |
-| Notifications            | Leave blank because this is only a test, and you don't want to alert anyone else or another service. For an actual incident, add people and services that should be notified to help with the investigation and remediation. You can send these notifications to Slack and PagerDuty as well. |
-| Notes & Links            | Add information to support the reason you are declaring the incident. These can be graphs, logs, or other key visuals. The graph and the monitor you selected is already included but you can add additional signals. For example, copy and paste the URL for this guide.   
 9. Click **Declare Incident** to create the incident.
    You can also declare an incident from a [graph][4], [monitor][5], or the [incidents API][6]. For APM users, you can click the incidents icon on any APM graph to declare an incident.
 As part of the Slack integration, you can also use the `/datadog incident` shortcut to declare an incident and set the title, severity, and customer impact.
 10. Click **Slack Channel** on the incident's page to go to the incident's Slack channel.
    
 A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
-
-In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
 
 If you don't have the Slack integration enabled, click **Add Chat** to add the link to the chat service you are using to discuss the incident.
 
@@ -204,6 +202,8 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [9]: /service_management/incident_management/#status-levels
 [10]: /service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /service_management/mobile/
+[12]: /mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

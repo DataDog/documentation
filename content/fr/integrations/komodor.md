@@ -20,12 +20,11 @@ integration_id: komodor
 integration_title: Komodor Automation
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: Komodor Terms of use.pdf
 manifest_version: 2.0.0
 name: komodor
-oauth: {}
 public_title: Komodor Automation
 short_description: Effectuer le suivi des changements relatifs à l'ensemble de votre
   pile et environnement Kubernetes

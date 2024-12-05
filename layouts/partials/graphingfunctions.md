@@ -51,7 +51,7 @@ The method can be sum/min/max/count/avg and time is in seconds. You can use eith
 
 * a metric query string with some grouping, e.g. ```avg:system.cpu.idle{*} by {host}```
 * the number of series to be displayed, as an integer.
-* one of ```'max'```, ```'min'```, ```'last'```, ```'l2norm'```, or ```'area'```.  ```'area'``` is the signed area under the curve being graphed, which can be negative.  ```'l2norm'``` uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.
+* one of ```'max'```, ```'min'```, ```'last'```, ```'l2norm'```, or ```'area'```.  ```'area'``` is the signed area under the curve being graphed, which can be negative.  ```'l2norm'``` uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the timeseries, which is always positive, to rank the series.
 * either ```'desc'``` (rank the results in descending order) or ```'asc'``` (ascending order).
 
 The ```top()``` method also has convenience functions of the following form, all of which take a single series list as input:

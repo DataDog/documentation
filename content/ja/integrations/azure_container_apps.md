@@ -4,6 +4,7 @@ categories:
 - azure
 - クラウド
 - コンテナ
+custom_kind: integration
 dependencies: []
 description: Azure Container Apps からメトリクスを取得します。
 doc_link: https://docs.datadoghq.com/integrations/azure_container_apps/
@@ -14,7 +15,6 @@ integration_id: azure-container-apps
 integration_title: Microsoft Azure Container Apps
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: azure_container_apps
 public_title: Datadog-Microsoft Azure Container Apps インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure Container Apps からメトリクスを取得します�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Container Apps を使用すると、サーバーレスコンテナを使用してモダンなアプリやマイクロサービスを構築およびデプロイすることができます。詳細については、Azure Container Apps の [Microsoft のドキュメント][1]を参照してください。
@@ -42,7 +43,7 @@ Azure Container Apps を使用すると、サーバーレスコンテナを使�
 
 Azure Container Apps インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Container Apps インテグレーションには、サービスのチェック機能は含まれません。
 

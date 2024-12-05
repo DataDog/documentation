@@ -4,7 +4,6 @@ aliases:
 dependencies:
 - https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
 description: Synthetics 및 Datadog CI 확장 기능을 활용하여 CI 파이프라인에서 사용할 수 있는 작업을 생성하세요.
-kind: 설명서
 title: Continuous Testing 및 Datadog CI Azure DevOps 확장 기능
 ---
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]
@@ -105,9 +104,6 @@ Datadog 계정에 연결하려면 Azure 파이프라인 프로젝트에서 [Data
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
     testSearchQuery: 'tag:e2e-tests'
-    variables: |
-      START_URL=https://staging.website.com
-      PASSWORD=$(StagingPassword)
 ```
 
 ### `testSearchQuery`와 변수 재정의를 사용한 작업 예시
@@ -119,6 +115,9 @@ Datadog 계정에 연결하려면 Azure 파이프라인 프로젝트에서 [Data
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
     testSearchQuery: 'tag:e2e-tests'
+    variables: |
+      START_URL=https://staging.website.com
+      PASSWORD=$(StagingPassword)
 ```
 
 ### `configPath`로 글로벌 설정 재정의를 사용한 작업 예시
@@ -156,7 +155,6 @@ Datadog 계정에 연결하려면 Azure 파이프라인 프로젝트에서 [Data
 | `failOnCriticalErrors` | _선택_  | 테스트가 트리거되지 않거나 Datadog에서 결과를 가져올 수 없을 경우 CI 작업을 실패로 만듭니다. **기본값:** `false`.                                                                                                                                 |
 | `failOnMissingTests`   | _선택_  | 공용 ID(`publicIds`를 사용하거나 [테스트 파일][14]에 포함된)가 있는 지정 테스트 중 하나 이상이 누락될 경우 (예: 프로그램적으로 삭제 또는 Datadog 사이트에서 삭제된 경우) CI 작업을 실패로 처리합니다. **기본값:** `false`.     |
 | `failOnTimeout`        | _선택_  | 최소 하나 이상의 테스트가 테스트 제한 시간 기본값을 초과할 경우 CI 작업을 실패로 처리합니다. **기본값:** `true`.                                                                                                                                                     |
-
 
 ## 참고 자료
 

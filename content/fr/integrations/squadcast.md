@@ -22,7 +22,7 @@ integration_id: squadcast
 integration_title: Squadcast
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: it@squadcast.com
 manifest_version: 1.0.0
 metric_prefix: squadcast.

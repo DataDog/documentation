@@ -14,7 +14,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: 複合条件モニター
 ---
 
@@ -82,7 +81,7 @@ a || b && !c
 
 ### 通知
 
-複合条件モニターの構成モニターのテンプレート変数を通知に使用する方法については、[複合条件モニター変数][4]を参照してください。**Say what's happening** セクションと **Notify your team** セクションの詳細な説明は、[通知][3]のページを参照してください。
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ### API
 
@@ -125,19 +124,21 @@ API を使用している場合、複合条件モニターのクエリはモニ�
 | モニター A   | モニター B   | 条件   | 通知データなし   | 複合条件ステータス | アラートがトリガーされるか？ |
 |-------------|-------------|-------------|------------------|------------------|------------------|
 | Alert (T)   | Warn (T)    | `A && B`    |                  | Warn (T)         | {{< X >}}        |
-| Alert (T)   | Warn (T)    | `A \|\| B`    |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Warn (T)    | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
+| Alert (T)   | Ok (F)      | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
 | Warn (T)    | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
-| Warn (T)    | Ok (F)      | `A \|\| B`    |                  | Warn (T)         | {{< X >}}        |
+| Warn (T)    | Ok (F)      | `A \|\| B`  |                  | Warn (T)         | {{< X >}}        |
 | データなし (T) | Warn (T)    | `A && B`    | 真             | データなし (T)      | {{< X >}}        |
-| データなし (T) | Warn (T)    | `A \|\| B`    | 真             | Warn (T)         | {{< X >}}        |
+| データなし (T) | Warn (T)    | `A \|\| B`  | 真             | Warn (T)         | {{< X >}}        |
 | データなし (T) | Warn (T)    | `A && B`    | 偽            | 最後の既知データ       |                  |
-| データなし (T) | Warn (T)    | `A \|\| B`    | 偽            | Warn (T)         | {{< X >}}        |
+| データなし (T) | Warn (T)    | `A \|\| B`  | 偽            | Warn (T)         | {{< X >}}        |
 | データなし (T) | OK (F)      | `A && B`    | 偽            | OK (F)           |                  |
-| データなし (T) | OK (F)      | `A \|\| B`    | 偽            | 最後の既知データ       |                  |
+| データなし (T) | OK (F)      | `A \|\| B`  | 偽            | 最後の既知データ       |                  |
 | データなし (T) | OK (F)      | `A && B`    | 真             | OK (F)           |                  |
-| データなし (T) | OK (F)      | `A \|\| B`    | 真             | データなし (T)      | {{< X >}}        |
+| データなし (T) | OK (F)      | `A \|\| B`  | 真             | データなし (T)      | {{< X >}}        |
 | データなし (T) | データなし (T) | `A && B`    | 真             | データなし (T)      | {{< X >}}        |
-| データなし (T) | データなし (T) | `A \|\| B`    | 真             | データなし (T)      | {{< X >}}        |
+| データなし (T) | データなし (T) | `A \|\| B`  | 真             | データなし (T)      | {{< X >}}        |
 
 **注**: 複合条件の `notify_no_data` が false で、サブモニターの評価結果がその複合条件に対して `No Data` ステータスになった場合、複合条件は代わりに最後の既知の状態を使用します。
 

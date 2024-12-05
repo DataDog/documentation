@@ -24,7 +24,7 @@ integration_id: amazon-ecs
 integration_title: Amazon ECS sur EC2
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_ecs
 public_title: "Intégration Datadog/Amazon\_ECS sur EC2"

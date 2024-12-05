@@ -1,5 +1,4 @@
 ---
-kind: Documentation
 title: Ressources de l'Agent consommées par APM
 ---
 

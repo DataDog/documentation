@@ -1,6 +1,5 @@
 ---
 title: OAuth Apps
-kind: documentation
 further_reading:
 - link: "/account_management/org_settings/"
   tag: "Documentation"
@@ -21,7 +20,7 @@ Only users with the Datadog Admin role or the `org_authorized_apps_write` permis
 
 ### Enable
 
-Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App and your custom [Datadog Apps][4] that have [OAuth API Access][5]. 
+Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App<!-- and your custom [UI Extensions][4] that have [OAuth API Access][5]-->. 
 
 ### Disable
 
@@ -48,5 +47,5 @@ Revoking a user's OAuth access to an application removes all access to that appl
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /account_management/rbac/permissions/#general-permissions
 [3]: /account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /developers/datadog_apps/
-[5]: /developers/datadog_apps/#oauth-api-access
+[4]: /developers/ui_extensions/
+[5]: /developers/ui_extensions/#oauth-api-access

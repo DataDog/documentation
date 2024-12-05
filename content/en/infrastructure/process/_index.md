@@ -1,6 +1,5 @@
 ---
 title: Live Processes
-kind: documentation
 aliases:
     - /guides/process
     - /graphing/infrastructure/process/
@@ -12,7 +11,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Increase the retention of process data with metrics'
     - link: '/infrastructure/livecontainers'
-      tag: 'Graphing'
+      tag: "Documentation"
       text: 'Get real-time visibility of all of the containers across your environment'
     - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
       tag: 'Blog'
@@ -20,11 +19,19 @@ further_reading:
     - link: https://www.datadoghq.com/blog/process-level-data/
       tag: 'Blog'
       text: 'Troubleshoot faster with process-level app and network data'
+    - link: https://www.datadoghq.com/blog/watchdog-live-processes/
+      tag: 'Blog'
+      text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
 ---
+
+
+<div class="alert alert-warning">
+Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
 
 ## Introduction
 
-Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the processes running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
@@ -65,7 +72,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 ```text
 -v /etc/passwd:/etc/passwd:ro
--e DD_PROCESS_AGENT_ENABLED=true
+-e DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
 ```
 
 **Note**:
@@ -76,13 +83,59 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 [1]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
-In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
+Update your [datadog-values.yaml][1] file with the following process collection configuration:
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+```
+
+Then, upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+
+**Note**: Running the Agent as a container still allows you to collect host processes.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml`, set `features.liveProcessCollection.enabled` to `true`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    liveProcessCollection:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+**Note**: Running the Agent as a container still allows you to collect host processes.
+
+{{% /tab %}}
+{{% tab "Kubernetes (Manual)" %}}
+
+In the `datadog-agent.yaml` manifest used to create the DaemonSet, add the following environmental variables, volume mount, and volume:
 
 ```yaml
  env:
-    - name: DD_PROCESS_AGENT_ENABLED
+    - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
       value: "true"
   volumeMounts:
     - name: passwd
@@ -94,31 +147,62 @@ In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the followi
       name: passwd
 ```
 
-See the standard [Daemonset installation][2] and the [Docker Agent][3] information pages for further documentation.
+See the standard [DaemonSet installation][1] and the [Docker Agent][2] information pages for further documentation.
 
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: /agent/kubernetes/
-[3]: /agent/docker/#run-the-docker-agent
+[1]: /containers/guide/kubernetes_daemonset
+[2]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
-{{% tab "Helm" %}}
+{{% tab "AWS ECS Fargate" %}}
 
-Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
+<div class="alert alert-warning">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
 
-```yaml
-datadog:
-    # (...)
-    processAgent:
-        enabled: true
-        processCollection: true
+In order to collect processes, the Datadog Agent must be running as a container within the task.
+
+To enable process monitoring in ECS Fargate, set the `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable to `true` in the Datadog Agent container definition within the task definition.
+
+For example:
+
+```json
+{
+    "taskDefinitionArn": "...",
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            ...
+            "environment": [
+                {
+                    "name": "DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED",
+                    "value": "true"
+                }
+                ...
+             ]
+         ...
+         }
+    ]
+  ...
+}
 ```
 
+To start collecting process information in ECS Fargate, add the [`PidMode` parameter][3] to the Task Definition and set it to `task` as follows:
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+```text
+"pidMode": "task"
+```
+
+Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter processes by ECS, or enter `fargate:ecs` in the search query.
+
+{{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
+
+For more information about installing the Datadog Agent with AWS ECS Fargate, see the [ECS Fargate integration documentation][2].
+
+[1]: https://app.datadoghq.com/process
+[2]: /integrations/ecs_fargate/#installation
+[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
+
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ### I/O stats
@@ -146,6 +230,48 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
    ```
 
    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+
+### Optimize footprint for process collection
+By default, the Datadog Agent has a separate Process Agent for container and process collection. You can consolidate container and process collection to the core Agent if you're running a Linux environment.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+```
+datadog:
+  processAgent:
+    runInCoreAgent: true
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{% tab "Linux hosted" %}}
+If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
+
+```
+process_config:
+  run_in_core_agent:
+    enabled: true
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ### Process arguments scrubbing
@@ -219,12 +345,12 @@ datadog:
     processAgent:
         enabled: true
         processCollection: true
-    agents:
-        containers:
-            processAgent:
-                env:
-                - name: DD_STRIP_PROCESS_ARGS
-                  value: "true"
+agents:
+    containers:
+        processAgent:
+            env:
+            - name: DD_STRIP_PROCESS_ARGS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -356,8 +482,6 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-{{< img src="infrastructure/process/process_platform.mp4" alt="Processes across the Platform" video=true >}}
-
 ### Live containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
@@ -366,13 +490,13 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
-### Network Performance Monitoring
+### Cloud Network Monitoring
 
 When you inspect a dependency in the [Network Analytics][11] page, you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+Processes are normally collected at 10s resolution. While actively working with the Live Processes page, metrics are collected at 2s resolution and displayed in real time, which is important for volatile metrics such as CPU. However, for historical context, metrics are ingested at the default 10s resolution.
 
 ## Additional information
 
@@ -389,10 +513,10 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /monitors/types/process/
-[7]: https://app.datadoghq.com/monitors#create/live_process
+[7]: https://app.datadoghq.com/monitors/create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
-[11]: /network_monitoring/performance/network_analytics
+[11]: /network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /agent/configuration/agent-commands/#restart-the-agent
 

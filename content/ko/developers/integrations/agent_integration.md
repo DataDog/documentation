@@ -17,7 +17,6 @@ further_reading:
 - link: /developers/
   tag: 설명서
   text: Datadog 플랫폼에서 개발하는 방법에 대해 알아보세요.
-kind: 설명서
 title: 에이전트 통합 생성
 ---
 ## 개요

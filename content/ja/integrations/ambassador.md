@@ -3,6 +3,7 @@ app_id: ambassador
 app_uuid: eb591405-8cda-486a-8cf5-a06af769a3d7
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: envoy.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10010
     source_type_name: Ambassador
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -23,6 +25,7 @@ categories:
 - containers
 - kubernetes
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md
 display_on_public_website: true
@@ -32,10 +35,8 @@ integration_id: ambassador
 integration_title: Ambassador API Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ambassador
-oauth: {}
 public_title: Ambassador API Gateway
 short_description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
 supported_os:
@@ -52,6 +53,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
   media: []
@@ -60,6 +62,7 @@ tile:
   title: Ambassador API Gateway
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -99,7 +102,7 @@ Ambassador から Datadog APM へトレースデータを送信することも�
 
 Ambassador チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Ambassador チェックには、サービスのチェック機能は含まれません。
 

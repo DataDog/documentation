@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: if 条件が値を返す場合、else は不要である
 ---
 ## メタデータ

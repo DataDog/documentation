@@ -11,7 +11,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-kind: documentation
 title: Modificateurs de type de métriques
 ---
 

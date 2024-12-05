@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - languages
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md
 display_on_public_website: true
@@ -30,10 +31,8 @@ integration_id: go-metro
 integration_title: Go-Metro
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: go-metro
-oauth: {}
 public_title: Go-Metro
 short_description: ホスト間の TCP RTT を受動的に計算
 supported_os:
@@ -43,6 +42,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::言語
+  - Offering::Integration
   configuration: README.md#Setup
   description: ホスト間の TCP RTT を受動的に計算
   media: []
@@ -51,6 +51,7 @@ tile:
   title: Go-Metro
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -87,7 +88,7 @@ sudo yum install compat-libcap1
 sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### コンフィギュレーション
+### 構成
 
 Agent の `conf.d` ディレクトリで、`go-metro.yaml` ファイルを編集します。利用可能なすべてのコンフィギュレーションのオプションについては、[サンプル go-metro.yaml][3] を参照してください。
 app.datadoghq.com と 192.168.0.22 について、TCP RTT 時間を示すファイルの例を以下に挙げます。
@@ -125,7 +126,7 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ディストリビューションによってパッケージ名が異なるため、上記の手順がうまくいかない場合は、`apt-cache search libcap` または `yum search libcap` を実行して、バイナリを提供するパッケージのショートリストを入手してください。サポートが必要な場合は、[Datadog サポート][4]に連絡してください。
 
-**注**: go-metro は独自のファイルにログを記録することにご注意ください。ログは `/var/log/datadog/go-metro.log` にあります。さらに、go-metro はスタンドアロンで機能するため、Agent の情報ページには表示されません。
+**注**: go-metro は専用のファイルにログを記録します。このファイルは `/var/log/datadog/go-metro.log` で見つけることができます。また、go-metro はスタンドアロンで実行されるため、Agent のステータス出力には表示されません。
 
 最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているためパッケージ化されたバージョンでのみ使用できます。つまり、go-metro はソースインストールや 32-ビットパッケージでは利用できません。
 
@@ -162,7 +163,7 @@ TCP RTT チェックが開始している場合は、上のような go-metro �
 
 Go-metro チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Go-metro チェックには、サービスのチェック機能は含まれません。
 

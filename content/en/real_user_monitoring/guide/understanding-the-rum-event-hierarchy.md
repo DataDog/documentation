@@ -1,6 +1,6 @@
 ---
 title: Understanding the RUM Event Hierarchy
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -111,4 +111,4 @@ This example searches within the actions event type for all view names using the
 [5]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
 [6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm
 [7]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[8]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#custom-errors
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#custom-errors

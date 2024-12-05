@@ -7,7 +7,6 @@ further_reading:
 - link: /metrics/custom_metrics/dogstatsd_metrics_submission/
   tag: 설명서
   text: DogStatsD에서 분포 사용
-kind: 설명서
 title: 분포
 ---
 ## 개요

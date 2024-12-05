@@ -1,12 +1,14 @@
 ---
 title: Log Management Data Security
-kind: documentation
 aliases:
     - /logs/security/
 further_reading:
 - link: "/data_security/"
   tag: "Documentation"
   text: "Review the main categories of data submitted to Datadog"
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "Set up a PCI-compliant Datadog organization"
 - link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
   tag: "Blog"
   text: "Announcing PCI-Compliant Log Management and APM from Datadog"
@@ -32,19 +34,13 @@ In version 6 or above, the Agent can be configured to filter logs sent by the Ag
 
 As of version 6, the Agent can be configured to obfuscate specific patterns within logs sent by the Agent to the Datadog application. To mask sensitive sequences within your logs, use the `log_processing_rules` [setting][4], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your logs.
 
+Alteratively, use [Sensitive Data Scanner][7] in the cloud or with the Agent to identify, tag, and redact sensitive data. In Sensitive Data Scanner, you set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. You can choose whether to redact the data if there is a match. Datadog provides a library of predefined rules to detect sensitive information such as credit card numbers, email addresses, IP addresses, API keys, and more. You can also define your own regex-based scanning rules to identify sensitive information.
+
+Sensitive Data Scanner is also available as a [processor][8] in [Observability Pipelines][9]. With Observability Pipelines, you can collect and process logs within your own infrastructure and then route them to downstream integrations.
+
 ## HIPAA-enabled customers
 
-Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog's Log Management Service.
-
-These features are not available to customers who have signed Datadog's BAA:
-
-* Users cannot request support through chat.
-* You cannot [share][5] logs, security signals, or traces from the explorer through web integrations.
-* Security rules cannot include triggering group-by values in notification title.
-* Security rules cannot include message template variables.
-* Security rules cannot be notified by webhooks.
-
-If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, contact your account manager. HIPAA-enabled customers do not need to use specific endpoints to submit logs to enforce specific encryptions. The encryptions are enabled on all log submission endpoints.
+{{% hipaa-customers %}}
 
 ## PCI DSS compliance for Log Management
 
@@ -56,24 +52,12 @@ PCI DSS compliance for Log Management is only available for Datadog organization
 
 Datadog allows customers to send logs to PCI DSS compliant Datadog organizations upon request. To set up a PCI-compliant Datadog org, follow these steps:
 
-1. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the org be configured as a PCI-compliant org.
-2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send logs to the dedicated PCI-compliant endpoint (`agent-http-intake-pci.logs.datadoghq.com`):
-    ```
-    logs_config:
-      logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
-    ```
-    **Note**: The port must be included in the configuration. PCI compliance uses HTTP log forwarding only. If you are using the Agent, you should [enforce HTTP transport][5].
+{{% pci-logs %}}
 
-If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
+See [PCI DSS Compliance][1] for more information. To enable PCI compliance for APM, see [PCI DSS compliance for APM][1].
 
-To enable PCI compliance for APM, see [PCI DSS compliance for APM][6].
-
-[1]: /getting_started/site/
-[2]: /help/
-[3]: mailto:success@datadoghq.com
-[4]: /account_management/audit_trail/#setup
-[5]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
-[6]: /tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
+[1]: /data_security/pci_compliance/
+[2]: /data_security/pci_compliance/?tab=apm
 
 {{< /site-region >}}
 
@@ -101,3 +85,7 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /logs/explorer/#share-views
+[6]: https://www.datadoghq.com/legal/hipaa-eligible-services/
+[7]: /sensitive_data_scanner/
+[8]: /observability_pipelines/processors/sensitive_data_scanner
+[9]: /observability_pipelines/

@@ -7,7 +7,7 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: Pourquoi installer l'Agent Datadog sur mes instances cloud ?
-kind: guide
+
 title: Délai de réception des métriques cloud
 ---
 

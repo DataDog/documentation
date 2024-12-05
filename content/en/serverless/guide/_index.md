@@ -1,6 +1,6 @@
 ---
 title: Serverless Monitoring Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -17,6 +17,11 @@ cascade:
     {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}Serverless and OpenTelemetry{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Azure App Service and Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumenting Linux containers on Azure App Service using Azure Sidecar{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Install using the Datadog Forwarder

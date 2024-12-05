@@ -1,18 +1,17 @@
 ---
 app_id: rum-react
 app_uuid: e112aa24-4dc9-465f-9f23-c1284c4d0d63
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- ネットワーク
-- 例外
 - メトリクス
-- アラート設定
-- 問題追跡
+- ネットワーク
+- トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react/README.md
 display_on_public_website: true
@@ -22,32 +21,28 @@ integration_id: rum-react
 integration_title: React
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_react
-oauth: {}
 public_title: React
 short_description: Datadog RUM を使用した React アプリケーションの監視とメトリクス生成
 supported_os:
 - android
-- ios
 - linux
-- macos
 - windows
+- ios
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Android
-  - Supported OS::iOS
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
   - Category::Metrics
-  - Category::Alerting
-  - Category::Issue Tracking
+  - Category::Network
+  - Category::Tracing
+  - Supported OS::Android
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::iOS
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した React アプリケーションの監視とメトリクス生成
   media: []
@@ -56,6 +51,7 @@ tile:
   title: React
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -106,7 +102,7 @@ React インテグレーションには、サービスのチェック機能は�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

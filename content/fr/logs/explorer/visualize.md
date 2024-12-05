@@ -1,20 +1,18 @@
 ---
 aliases:
-- /fr/logs/explorer/visualize
 - /fr/logs/visualize
 description: Visualisez les résultats des filtres et des agrégations pour voir vos
   logs sous le bon angle et faire émerger des informations clés.
 further_reading:
 - link: logs/explorer/search
   tag: Documentation
-  text: Filtrer les logs
-- link: logs/explorer/group
+  text: Apprendre à filtrer les logs
+- link: logs/explorer/analytics
   tag: Documentation
-  text: Regrouper les logs interrogés
+  text: Apprendre à regrouper des logs
 - link: /logs/explorer/export
   tag: Documentation
-  text: Parcourir les vues du Log Explorer
-kind: documentation
+  text: Exporter des vues depuis le Log Explorer
 title: Visualisations de log
 ---
 
@@ -39,23 +37,11 @@ Le bouton **Options** vous permet de modifier le **nombre de lignes** affichées
 
 {{< img src="logs/explorer/table_controls.mp4" alt="Configuration du tableau d'affichage" video=true style="width:80%;">}}
 
-{{< site-region region="gov,us3,us5" >}}
-Par défaut, les logs affichés sous forme de liste sont **triés** par timestamp, les logs les plus récents étant affichés en premier. Cette méthode de tri est la plus rapide et donc la plus recommandée dans la plupart des cas. Vous pouvez afficher les logs présentant les valeurs les plus faibles ou les plus élevées pour une mesure en premier, ou trier vos logs par ordre lexicographique en fonction de la valeur unique d'une facette, en cliquant sur la colonne correspondant à cette facette.
+Par défaut, les logs affichés sous forme de liste sont **triés** par timestamp, les logs les plus récents étant affichés en premier. Cette méthode de tri est la plus rapide et est donc recommandée dans la plupart des cas. Vous pouvez afficher les logs présentant les valeurs les plus faibles ou les plus élevées pour une mesure en premier, ou trier vos logs par ordre lexicographique en fonction de la valeur unique d'une facette, en cliquant sur la colonne correspondant à cette facette.
 
-**Remarque** : pour trier votre tableau en fonction d'un champ spécifique, vous devez d'abord [déclarer une facette][1].
+**Remarque** : bien qu'il soit possible d'ajouter des attributs ou des tags sous la forme d'une colonne, il est recommandé de [déclarer une facette][3] avant de trier votre tableau, afin d'obtenir des résultats plus fiables. Les attributs sans facette peuvent être ajoutés en tant que colonnes, mais leur tri n'est pas cohérent.
 
-
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-Par défaut, les logs affichés sous forme de liste sont **triés** par timestamp, les logs les plus récents étant affichés en premier. Cette méthode de tri est la plus rapide et donc la plus recommandée dans la plupart des cas. Vous pouvez afficher les logs présentant les valeurs les plus faibles ou les plus élevées pour une mesure en premier, ou trier vos logs par ordre lexicographique en fonction de la valeur unique d'une facette, en cliquant sur la colonne correspondant à cette facette.
-
-**Remarque** : bien qu'il soit possible d'ajouter des attributs ou des tags sous la forme d'une colonne, il est recommandé de [déclarer une facette][1] avant de trier votre tableau, afin d'obtenir des résultats plus fiables. Les attributs sans facette peuvent être ajoutés en tant que colonnes, mais leur tri n'est pas cohérent.
-
-
-{{< /site-region >}}
-
-La configuration du tableau de logs est stockée avec d'autres éléments de votre contexte de dépannage dans les [vues enregistrées][2].
+La configuration du tableau de logs est stockée avec d'autres éléments de votre contexte de dépannage dans les [vues enregistrées][1].
 
 ### Liste de groupes de logs
 
@@ -68,7 +54,7 @@ Les résultats sont triés comme suit :
 
 ## Série temporelle
 
-Visualisez l'évolution d'une seule [mesure][3] (ou d'une [facette][3] correspondant à un nombre unique de valeurs) pour un intervalle donné. Vous pouvez également fractionner les données en utilisant l'une des trois [facettes][2] disponibles.
+Visualisez l'évolution d'une seule [mesure][2] (ou d'une [facette][2] correspondant à un nombre unique de valeurs) pour un intervalle donné. Vous pouvez également fractionner les données en utilisant l'une des trois [facettes][2] disponibles.
 
 L'analyse de logs sous forme de série temporelle suivante illustre l'évolution des **50 principaux chemins URL** en fonction du 95 centile de **duration** au cours des 15 dernières minutes.
 
@@ -78,7 +64,7 @@ Les séries temporelles vous permettent de choisir des options d'affichage suppl
 
 ## Top list
 
-Visualisez les valeurs les plus élevées d'une [facette][3] en fonction de la [mesure][3] choisie.
+Visualisez les valeurs les plus élevées d'une [facette][2] en fonction de la [mesure][2] choisie.
 
 Par exemple, la top list suivante affiche les **15 principaux clients** sur un site d'e-commerce en fonction du nombre de **sessions uniques** qu'ils ont enregistrées au cours des dernières 24 heures.
 
@@ -86,7 +72,7 @@ Par exemple, la top list suivante affiche les **15 principaux clients** sur un s
 
 ## Tableaux imbriqués
 
-Visualisez la liste des valeurs les plus élevées pour une à trois [facettes][3] en fonction de la [mesure][3] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur d'autres mesures dans ce tableau. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
+Visualisez la liste des valeurs les plus élevées pour une à trois [facettes][2] en fonction de la [mesure][2] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur d'autres mesures dans ce tableau. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
 
 - Lorsque plusieurs mesures sont définies, les valeurs les plus élevées ou faibles sont déterminées en fonction de la première mesure.
 - Le sous-total peut différer de la somme réelle des valeurs au sein d'un groupe, étant donné qu'un seul sous-ensemble (celui des valeurs les plus élevées ou des valeurs les plus faibles) s'affiche. Les événements associés à une valeur nulle ou vide pour cette dimension ne s'affichent pas en tant que sous-groupe.
@@ -115,6 +101,6 @@ La carte proportionnelle suivante représente une répartition par **service** s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/explorer/facets/
-[2]: /fr/logs/explorer/saved_views/
-[3]: /fr/logs/search-syntax
+[1]: /fr/logs/explorer/saved_views/
+[2]: /fr/logs/search-syntax
+[3]: /fr/logs/explorer/facets/

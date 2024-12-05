@@ -1,6 +1,5 @@
 ---
-title: WebSocket Tests
-kind: documentation
+title: WebSocket Testing
 description: Simulate WebSocket requests to monitor public and internal API endpoints
 aliases:
 further_reading:
@@ -63,6 +62,10 @@ After choosing to create an `WebSocket` test, define your test's request.
 {{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 
@@ -158,7 +161,7 @@ You can restrict access to a WebSocket test based on the roles in your organizat
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: /synthetics/settings/#global-variables
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

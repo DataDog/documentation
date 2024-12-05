@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'
@@ -8,13 +8,16 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
+- link: 'https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps'
+  tag: 'Source Code'
+  text: 'Sourcemaps command reference'
 ---
 
 ## Overview
 
 If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
-<div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
+<div class="alert alert-info">Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
 
 ## Instrument your code
 
@@ -100,7 +103,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
-3. Run the following command once per service in your RUM application:
+3. Run the following command once per service in your application:
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -117,7 +120,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
-4. Run the following command once per service in your RUM application:
+4. Run the following command once per service in your application:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -133,9 +136,9 @@ To minimize overhead on your CI's performance, the CLI is optimized to upload as
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
-The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events and browser logs. For more information on how to setup these tags, refer to the [Browser RUM SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
+The `--service` and `--release-version` parameters must match the `service` and `version` tags on your Error Tracking events, RUM events, and browser logs. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
 
-<div class="alert alert-info">If you have defined multiple services in your RUM application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire RUM application.</div>
+<div class="alert alert-info">If you have defined multiple services in your application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire application.</div>
 
 By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the JavaScript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
@@ -166,6 +169,6 @@ On the other hand, an unminified stack trace provides you with all the context y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters
+[2]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

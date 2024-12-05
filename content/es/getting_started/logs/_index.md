@@ -6,13 +6,24 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: Centro de aprendizaje
   text: Profundizando en el procesamiento de logs
+- link: https://learn.datadoghq.com/courses/log-indexes
+  tag: Centro de aprendizaje
+  text: Gestionar y monitorizar volúmenes de logs indexados
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: Centro de aprendizaje
+  text: Crear y gestionar pipelines de logs
+- link: https://learn.datadoghq.com/courses/integration-pipelines
+  tag: Centro de aprendizaje
+  text: Procesar logs predefinidos con pipelines de integración
 - link: /logs/log_collection/
   tag: Documentación
-  text: Recopilación de logs e integraciones
+  text: Colección de logs e integraciones
 - link: /getting_started/tagging/unified_service_tagging
   tag: Documentación
-  text: Descubre cómo configurar el etiquetado de servicios unificados
-kind: documentación
+  text: Descubre cómo configurar el etiquetado de servicios unificado
+- link: https://dtdg.co/fe
+  tag: Establecer las bases
+  text: Participa en una sesión interactiva para optimizar tu gestión de logs
 title: Empezando con los logs
 ---
 
@@ -30,7 +41,7 @@ Con Log Management, puedes analizar y explorar datos en el Log Explorer (Navegad
 
 ### Servidor
 
-Hay varias [integraciones][5] que pueden desviar logs desde tu servidor hacia Datadog. Para ello, dichas integraciones usan un bloque de configuración de logs en su archivo `conf.yaml`, disponible en la carpeta `conf.d/` que se encuentra en la raíz del directorio de configuración de tu Agent.
+Hay varias [integraciones][5] disponibles para reenviar logs desde tu servidor a Datadog. Las integraciones utilizan un bloque de configuración de logs en su archivo `conf.yaml`, que está disponible en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent, para reenviar logs a Datadog desde tu servidor.
 
 ```yaml
 logs:
@@ -69,7 +80,7 @@ Para empezar a recopilar logs a partir de un servicio de contenedor, sigue las [
 
 ### Nube
 
-Puedes desviar logs hacia Datadog desde varios proveedores de soluciones en la nube, como AWS, Azure y GCP. Cada proveedor tiene sus propias instrucciones de configuración.
+Puedes reenviar logs desde varios proveedores de la nube, como AWS, Azure y Google Cloud, a Datadog. Cada proveedor de la nube tiene su propio conjunto de instrucciones de configuración.
 
 Por ejemplo, los logs de los servicios de AWS suelen almacenarse en buckets de S3 o en grupos de logs de CloudWatch. Puedes suscribirte a estos logs y desviarlos hacia un flujo (stream) de Amazon Kinesis para luego transferirlos a uno o varios destinos. Uno de los destinos predeterminados de los flujos de entrega de Amazon Kinesis es Datadog.
 
@@ -79,7 +90,7 @@ Para empezar a recopilar logs a partir de un servicio en la nube, sigue las [ins
 
 Datadog autoriza la recopilación de logs desde clientes a través de SDK o bibliotecas. Por ejemplo, puedes usar el SDK `datadog-logs` para enviar logs a Datadog desde clientes de JavaScript.
 
-Para empezar a recopilar logs a partir de un servicio en la nube, sigue las [instrucciones de la aplicación][14].
+Para empezar a recopilar logs desde un cliente, sigue las [instrucciones de la aplicación][14].
 
 ### Otro
 
@@ -93,13 +104,13 @@ Para empezar a recopilar logs a partir de un servicio en la nube, sigue las [ins
 
 Cuando se configura una fuente de logs, tus logs pasan a estar disponibles en el [Log Explorer][16]. Puedes usar esta herramienta para filtrar, agregar y visualizar tus logs.
 
-Por ejemplo, si te llegan logs procedentes de un servicio que desees examinar de forma más detallada, filtra por `service`. Puedes acotar la búsqueda con un `status`, como `ERROR`, así como seleccionar [Aggregate by Patterns][17] (Agrupar por patrones) para ver qué parte de tu servicio registra más errores.
+Por ejemplo, si tienes logs que fluyen desde un servicio que deseas examinar más a fondo, filtra por `service`. También puedes filtrar por `status`, como `ERROR`, y seleccionar [Group into Patterns (Agrupar en patrones)][17] para ver qué parte de tu servicio está registrando más errores.
 
-{{< img src="/getting_started/logs/error-pattern.png" alt="Filtrar por patrón de error en el Log Explorer">}}
+{{< img src="/getting_started/logs/error-pattern-2024.png" alt="Filtrar en el Log Explorer por patrón de errores">}}
 
-Agrupa tus logs por `Field` de `Source` y cambia a la opción de visualización **Top List** (Lista principal) para ver tus principales servicios de logs. Elige una fuente ("source"), como puede ser `error`, y selecciona **View Logs** (Ver logs) en el menú desplegable. El panel lateral se rellenará con los logs que tengan errores para que puedas ver rápidamente qué host y servicios necesitan atención.
+Agrega tus logs en `Fields` y visualízalos como **Top List** (Lista principal) para ver tus principales servicios de registros. Selecciona una fuente, como `info` o `warn`, y selecciona **View Logs** (Ver logs) en el menú desplegable. El panel lateral rellena logs en función del error, para que puedas ver rápidamente qué hosts y servicios requieren atención.
 
-{{< img src="/getting_started/logs/top-list-view.png" alt="Lista principal del Log Explorer">}}
+{{< img src="/getting_started/logs/top-list-view-2024.png" alt="Una lista principal en el Log Explorer">}}
 
 ## ¿Qué toca hacer ahora?
 
@@ -109,7 +120,7 @@ Una vez que se haya configurado una fuente de logs y que tus logs estén disponi
 
 * Establece [atributos y alias][18] para unificar el entorno de tus logs.
 * Controla cómo se procesan tus logs con [pipelines][19] y [procesadores][20].
-* Dado que Logging without Limits* desconecta la ingesta e indexación de logs, puedes [configurar tus logs][21] eligiendo cuáles deben indexarse, conservarse o archivarse.
+* Como Logging without Limits* desacopla la ingesta y la indexación de logs, puedes [configurar tus logs][21] y elegir qué logs [indexar][22], [retener][23] o [archivar][24].
 
 ### Correlación de logs
 
@@ -118,11 +129,11 @@ Una vez que se haya configurado una fuente de logs y que tus logs estén disponi
 
 ### Guías
 
-* [Prácticas recomendadas para llevar a cabo la gestión de logs][22]
-* Obtén más información sobre [Logging without Limits*][23]
-* Gestiona los datos de logs confidenciales con la [configuración del control de acceso basado en roles (RBAC)][24]
+* [Prácticas recomendadas para Log Management][25]
+* Obtén más información en [Logging without Limits*][26]
+* Gestionar los datos confidenciales de logs con la [configuración RBAC][27]
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -145,11 +156,14 @@ Una vez que se haya configurado una fuente de logs y que tus logs estén disponi
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
 [16]: /es/logs/explorer/
-[17]: /es/logs/explorer/#patterns
+[17]: /es/logs/explorer/analytics/patterns/
 [18]: /es/logs/log_configuration/attributes_naming_convention/
 [19]: /es/logs/log_configuration/pipelines/
 [20]: /es/logs/log_configuration/processors/
 [21]: /es/logs/log_configuration/
-[22]: /es/logs/guide/best-practices-for-log-management/
-[23]: /es/logs/guide/getting-started-lwl/
-[24]: /es/logs/guide/logs-rbac/
+[22]: https://docs.datadoghq.com/es/logs/log_configuration/indexes
+[23]: https://docs.datadoghq.com/es/logs/log_configuration/flex_logs
+[24]: https://docs.datadoghq.com/es/logs/log_configuration/archives
+[25]: /es/logs/guide/best-practices-for-log-management/
+[26]: /es/logs/guide/getting-started-lwl/
+[27]: /es/logs/guide/logs-rbac/

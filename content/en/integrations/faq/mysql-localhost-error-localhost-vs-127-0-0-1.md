@@ -1,6 +1,6 @@
 ---
 title: MySQL Localhost Error - Localhost VS 127.0.0.1
-kind: faq
+
 ---
 
 Setting "localhost" in the mysql.yaml file may produce this error:

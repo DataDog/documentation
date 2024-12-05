@@ -1,6 +1,5 @@
 ---
 title: APM Metrics
-kind: documentation
 description: 'Learn about useful metrics you can generate from APM data.'
 further_reading:
     - link: 'tracing/trace_pipeline/'
@@ -19,12 +18,13 @@ further_reading:
 [Tracing application metrics][1] are collected after enabling trace collection and instrumenting your application. These metrics are available for dashboards and monitors.
 These metrics capture **request** counts, **error** counts, and **latency** measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration.
 
+By default, these metrics are calculated in the Datadog Agent based on the traces sent from an instrumented application to the Agent.
 
 Ingested span and traces are kept for 15 minutes. Indexed spans and traces that retention filters keep are stored in Datadog for 15 days. But if you generate custom metrics from ingested data, the metrics are retained for 15 months.
 
 ## Runtime metrics
 
-Enable [runtime metrics collection][3] in supported tracing libraries to gain insights into an application's performance.
+Enable [runtime metrics collection][3] in supported tracing libraries to gain insights into an application's performance. These metrics are sent to the Datadog Agent over the configured DogStatsD port.
 
 
 ## Next steps

@@ -1,6 +1,5 @@
 ---
 title: Topology Map Widget
-kind: documentation
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
 widget_type: "topology_map"
 aliases:

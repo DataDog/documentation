@@ -1,6 +1,5 @@
 ---
 title: Datadog Learning Center
-kind: documentation
 aliases:
   - /video-categories/
   - /video-categories/datadog-101/
@@ -35,6 +34,8 @@ aliases:
   - /videos/apm
   - /videos/aws
   - /videos/host-map
+algolia:
+  tags: ["tutorial"]
 ---
 
 Datadog is an extensive platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.

@@ -6,6 +6,7 @@
   "CreateAPIKey": {
     "description": "Créez une clé d'API.",
     "summary": "Créer une clé d'API",
+    "request_description": "",
     "request_schema_description": "Requête utilisée pour créer une clé d'API."
   },
   "DeleteAPIKey": {
@@ -19,7 +20,82 @@
   "UpdateAPIKey": {
     "description": "Mettez à jour une clé d'API.",
     "summary": "Modifier une clé d'API",
+    "request_description": "",
     "request_schema_description": "Requête utilisée pour mettre à jour une clé d'API."
+  },
+  "DeleteOpenAPI": {
+    "description": "Supprimer une API spécifique par ID.",
+    "summary": "Supprimer une API"
+  },
+  "GetOpenAPI": {
+    "description": "Récupérez des informations sur une API spécifique dans un fichier au format [OpenAPI](https://spec.openapis.org/oas/latest.html).",
+    "summary": "Obtenir une API"
+  },
+  "UpdateOpenAPI": {
+    "description": "Mettez à jour les informations relatives à une API spécifique. Le contenu donné remplacera tout le contenu de l'API de l'ID donné.\nL'ID est renvoyé par l'API créée ou peut être trouvé dans l'URL de l'interface utilisateur du catalogue d'API.\n",
+    "summary": "Mettre à jour une API",
+    "request_description": "",
+    "request_schema_description": "Objet pour les données de l'API dans un format `OpenAPI` sous forme de fichier."
+  },
+  "CreateOpenAPI": {
+    "description": "Créez une nouvelle API à partir de la spécification [OpenAPI](https://spec.openapis.org/oas/latest.html) indiquée.\nElle prend en charge les versions `2.0`, `3.0` et `3.1` de la spécification. Une section d'extension spécifique, `x-Datadog`,\nvous permet de spécifier le `teamHandle` de votre équipe responsable de l'API dans Datadog.\nElle renvoie l'ID de l'API créée.\n",
+    "summary": "Créer une nouvelle API",
+    "request_description": "",
+    "request_schema_description": "Objet pour les données de l'API dans un format `OpenAPI` sous forme de fichier."
+  },
+  "ListSpansMetrics": {
+    "description": "Obtenez la liste des métriques configurées basées sur des spans avec leurs définitions.",
+    "summary": "Récupérer toutes les métriques basées sur des spans"
+  },
+  "CreateSpansMetric": {
+    "description": "Créez une métrique basée sur des spans ingérés dans votre organisation.\nRenvoie l'objet de la métrique basée sur des spans depuis le corps de la requête lorsque celle-ci a abouti.",
+    "summary": "Créer une métrique basée sur des spans",
+    "request_description": "La définition de la nouvelle métrique basée sur des spans.",
+    "request_schema_description": "Le corps de la nouvelle métrique basée sur des spans."
+  },
+  "DeleteSpansMetric": {
+    "description": "Supprimez une métrique basée sur des spans spécifique de votre organisation.",
+    "summary": "Supprimer une métrique basée sur des spans"
+  },
+  "GetSpansMetric": {
+    "description": "Obtenez de votre organisation une métrique spécifique basée sur des spans.",
+    "summary": "Récupérer une métrique basée sur des spans"
+  },
+  "UpdateSpansMetric": {
+    "description": "Mettez à jour une métrique basée sur des spans de votre organisation.\nRenvoie lʼobjet de la métrique basée sur des spans du corps de la requête lorsque celle-ci aboutit.",
+    "summary": "Mettre à jour une métrique basée sur des spans",
+    "request_description": "Nouvelle définition de la métrique basée sur des spans.",
+    "request_schema_description": "Le corps de la nouvelle métrique basée sur des spans."
+  },
+  "ListApmRetentionFilters": {
+    "description": "Obtenez la liste des filtres de rétention APM.",
+    "summary": "Récupérer la liste des événements de log d'audit"
+  },
+  "CreateApmRetentionFilter": {
+    "description": "Créez un filtre de rétention pour indexer les spans dans votre organisation.\nRenvoyez la définition du filtre de rétention lorsque la requête aboutit.\n\nLes filtres par défaut de type spans-errors-sampling-processor et spans-appsec-sampling-processor ne peuvent pas être créés.",
+    "summary": "Rechercher des événements de log d'audit",
+    "request_description": "La définition du nouveau filtre de rétention.",
+    "request_schema_description": "Le corps du filtre de rétention à créer."
+  },
+  "ReorderApmRetentionFilters": {
+    "description": "Réorganisez l'ordre d'exécution des filtres de rétention.",
+    "summary": "Audit",
+    "request_description": "La liste des filtres de rétention dans le nouvel ordre.",
+    "request_schema_description": "Une liste des filtres de rétention à réorganiser."
+  },
+  "DeleteApmRetentionFilter": {
+    "description": "Supprimez un filtre de rétention spécifique de votre organisation.\n\nLes filtres par défaut de type spans-errors-sampling-processor et spans-appsec-sampling-processor ne peuvent pas être supprimés.",
+    "summary": "Audit"
+  },
+  "GetApmRetentionFilter": {
+    "description": "Obtenez un filtre de rétention APM.",
+    "summary": "Audit"
+  },
+  "UpdateApmRetentionFilter": {
+    "description": "Mettez à jour un filtre de rétention de votre organisation.\n\nLes filtres par défaut (filtres de type spans-errors-sampling-processor et spans-appsec-sampling-processor) ne peuvent pas être renommés ou supprimés.",
+    "summary": "Audit",
+    "request_description": "La définition actualisée du filtre de rétention.",
+    "request_schema_description": "Le corps du filtre de rétention à mettre à jour."
   },
   "ListApplicationKeys": {
     "description": "Énumérez toutes les clés d'application disponibles pour votre organisation.",
@@ -29,10 +105,219 @@
     "description": "Supprimez une clé d'application.",
     "summary": "Supprimer une clé d'application"
   },
+  "GetApplicationKey": {
+    "description": "Récupérez une clé d'application pour votre organisation.",
+    "summary": "Récupérer une clé d'application"
+  },
   "UpdateApplicationKey": {
     "description": "Modifiez une clé d'application.",
     "summary": "Modifier une clé d'application",
+    "request_description": "",
     "request_schema_description": "Requête utilisée pour mettre à jour une clé d'application."
+  },
+  "ListAuditLogs": {
+    "description": "L'endpoint de liste renvoie les événements qui correspondent à la requête de recherche de logs d'audit.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour afficher vos derniers événements de log d'audit.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Récupérer la liste des événements de log d'audit"
+  },
+  "SearchAuditLogs": {
+    "description": "L'endpoint de liste renvoie les événements de log d'audit qui correspondent à la requête de recherche d'audit.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour créer des filtres et des recherches d'événements de log d'audit complexes.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Rechercher des événements de log d'audit",
+    "request_description": "",
+    "request_schema_description": "La requête de récupération de la liste des événements de log d'audit."
+  },
+  "ListAuthNMappings": {
+    "description": "Énumérez tous les mappages d'authentification dans votre organisation.",
+    "summary": "Répertorier tous les mappages d'authentification"
+  },
+  "CreateAuthNMapping": {
+    "description": "Créez un mappage d'authentification.",
+    "summary": "Créer un mappage d'authentification",
+    "request_description": "",
+    "request_schema_description": "La requête de création d'un mappage d'authentification."
+  },
+  "DeleteAuthNMapping": {
+    "description": "Supprimez un mappage d'authentification en fonction de son UUID.",
+    "summary": "Supprimer un mappage d'authentification"
+  },
+  "GetAuthNMapping": {
+    "description": "Récupérez un mappage d'authentification en fonction de son UUID.",
+    "summary": "Récupérer un mappage d'authentification selon l'UUID"
+  },
+  "UpdateAuthNMapping": {
+    "description": "Modifiez un mappage d'authentification.",
+    "summary": "Modifier un mappage d'authentification",
+    "request_description": "",
+    "request_schema_description": "La requête de modification d'un mappage d'authentification."
+  },
+  "SearchCases": {
+    "description": "Cas de recherche.",
+    "summary": "Rechercher des cas"
+  },
+  "CreateCase": {
+    "description": "Créer un cas",
+    "summary": "Créer un dossier",
+    "request_description": "Charge utile du cas",
+    "request_schema_description": "Requête de création de cas"
+  },
+  "GetProjects": {
+    "description": "Obtenez tous les projets.",
+    "summary": "Obtenir tous les projets"
+  },
+  "CreateProject": {
+    "description": "Créez un projet.",
+    "summary": "Créer un projet",
+    "request_description": "Charge utile du projet",
+    "request_schema_description": "Requête de création de projet"
+  },
+  "DeleteProject": {
+    "description": "Supprimez un projet en utilisant son `id`.",
+    "summary": "Supprimer un projet"
+  },
+  "GetProject": {
+    "description": "Obtenez les détails d'un projet par `project_id`.",
+    "summary": "Obtenir les détails dʼun projet"
+  },
+  "GetCase": {
+    "description": "Obtenez les détails d'un cas par `case_id`",
+    "summary": "Obtenir les détails dʼun cas"
+  },
+  "ArchiveCase": {
+    "description": "Archiver un cas",
+    "summary": "Archiver un cas",
+    "request_description": "Archiver les données utiles du cas",
+    "request_schema_description": "Requête de cas vide"
+  },
+  "AssignCase": {
+    "description": "Attribuer un cas à un utilisateur",
+    "summary": "Attribuer un cas",
+    "request_description": "Attribuer les charges utiles d'un cas",
+    "request_schema_description": "Requête d'attribution de cas"
+  },
+  "UpdatePriority": {
+    "description": "Mettre à jour la priorité dʼun cas",
+    "summary": "Mettre à jour la priorité dʼun cas",
+    "request_description": "Charge utile de mise à jour de la priorité des cas",
+    "request_schema_description": "Requête de priorité pour la mise à jour d'un cas"
+  },
+  "UpdateStatus": {
+    "description": "Mettre à jour le statut dʼun cas",
+    "summary": "Mettre à jour le statut dʼun cas",
+    "request_description": "Charge utile de mise à jour du statut des cas",
+    "request_schema_description": "Requête de statut pour la mise à jour d'un cas"
+  },
+  "UnarchiveCase": {
+    "description": "Ne plus archiver un cas",
+    "summary": "Ne plus archiver un cas",
+    "request_description": "Ne plus archiver la charge utile du cas",
+    "request_schema_description": "Requête de cas vide"
+  },
+  "UnassignCase": {
+    "description": "Annuler lʼattribution dʼun cas",
+    "summary": "Annuler lʼattribution dʼun cas",
+    "request_description": "Ne plus attribuer la charge utile du cas",
+    "request_schema_description": "Requête de cas vide"
+  },
+  "CreateCIAppPipelineEvent": {
+    "description": "Envoyez votre événement de pipeline à votre plateforme Datadog via HTTP. Pour plus de détails sur la modélisation des exécutions de pipeline et les types d'exécution pris en charge, référez-vous à [Pipeline Data Model And Execution Types] (https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/) (en anglais).\n\nLes événements de pipeline peuvent être envoyés avec un horodatage pouvant dater de 18 heures maximum.",
+    "summary": "Envoyer un événement de pipeline",
+    "request_description": "",
+    "request_schema_description": "Objet de requête."
+  },
+  "AggregateCIAppPipelineEvents": {
+    "description": "Utilisez cet endpoint dʼ'API pour agréger les événements de pipeline CI Visibility dans des ensemble de métriques et séries temporelles calculées.",
+    "summary": "Agréger des événements de pipeline",
+    "request_description": "",
+    "request_schema_description": "L'objet envoyé avec la requête de récupération des buckets d'agrégation des événements de pipeline de votre organisation."
+  },
+  "ListCIAppPipelineEvents": {
+    "description": "Le endpoint List renvoie les événements de pipeline CI Visibility qui correspondent à une [requête de recherche](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Les résultats sont paginés de manière similaire à des logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUtilisez cet endpoint pour voir vos derniers événements de pipeline.",
+    "summary": "Récupérer la liste des événements de pipeline"
+  },
+  "SearchCIAppPipelineEvents": {
+    "description": "Le endpoint List renvoie les événements de pipeline CI Visibility qui correspondent à une [requête de recherche](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Les résultats sont paginés de manière similaire à des logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUtilisez cet endpoint pour créer des filtres et un système de recherche complexe des événements.",
+    "summary": "Rechercher des événements de pipeline",
+    "request_description": "",
+    "request_schema_description": "La requête de recherche de pipelines."
+  },
+  "AggregateCIAppTestEvents": {
+    "description": "Lʼendpoint d'API permettant dʼagréger les événements de test CI Visibility dans des ensembles de métriques et de séries temporelles calculées.",
+    "summary": "Agréger des événements de test",
+    "request_description": "",
+    "request_schema_description": "L'objet envoyé avec la requête pour récupérer les compartiments d'agrégation des événements de test de votre organisation."
+  },
+  "ListCIAppTestEvents": {
+    "description": "Le endpoint List renvoie les événements de test CI Visibility qui correspondent à une [requête de recherche](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Les résultats sont paginés de manière similaire à des logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUtilisez cet endpoint pour voir vos derniers événements de test.",
+    "summary": "Récupérer la liste des événements de test"
+  },
+  "SearchCIAppTestEvents": {
+    "description": "Le endpoint List renvoie les événements de test CI Visibility qui correspondent à une [requête de recherche](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Les résultats sont paginés de manière similaire à des logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUtilisez cet endpoint pour créer des filtres et un système de recherche complexe des événements.",
+    "summary": "Rechercher des événements de test",
+    "request_description": "",
+    "request_schema_description": "La requête de recherche de tests."
+  },
+  "ListContainerImages": {
+    "description": "Obtenez toutes les images de conteneur de votre organisation.",
+    "summary": "Mettre à jour un service Fastly"
+  },
+  "ListContainers": {
+    "description": "Obtenez tous les conteneurs de votre organisation.",
+    "summary": "Supprimer un service Fastly"
+  },
+  "ListCostAWSCURConfigs": {
+    "description": "Énumérez les configs CUR AWS.",
+    "summary": "Ajouter une ressource à un compte Confluent"
+  },
+  "CreateCostAWSCURConfig": {
+    "description": "Créer un compte Cloud Cost Management pour une config CUR AWS.",
+    "summary": "Supprimer une ressource d'un compte Confluent",
+    "request_description": "",
+    "request_schema_description": "Requête de publication de config CUR AWS."
+  },
+  "DeleteCostAWSCURConfig": {
+    "description": "Archivez un compte Cloud Cost Management.",
+    "summary": "Récupérer une ressource d'un compte Confluent"
+  },
+  "UpdateCostAWSCURConfig": {
+    "description": "Mettez à jour l'état d'une config CUR AWS (active/archivée).",
+    "summary": "Mettre à jour une ressource dans un compte Confluent",
+    "request_description": "",
+    "request_schema_description": "Requête de correctif dʼune config CUR AWS."
+  },
+  "ListAWSRelatedAccounts": {
+    "description": "Énumérez les comptes AWS d'une organisation en appelant \"organizations:ListAccounts\" à partir du compte de gestion spécifié.",
+    "summary": "Confluent Cloud"
+  },
+  "ListCostAzureUCConfigs": {
+    "description": "Énumérez les configs Azure.",
+    "summary": "Énumérer les comptes Cloudflare"
+  },
+  "CreateCostAzureUCConfigs": {
+    "description": "Créer un compte Cloud Cost Management pour une config Azure.",
+    "summary": "Ajouter un compte Cloudflare",
+    "request_description": "",
+    "request_schema_description": "Requête de publication de config Azure."
+  },
+  "DeleteCostAzureUCConfig": {
+    "description": "Archivez un compte Cloud Cost Management.",
+    "summary": "Supprimer un compte Cloudflare"
+  },
+  "UpdateCostAzureUCConfigs": {
+    "description": "Mettez à jour l'état d'une config Azure (active/archivée).",
+    "summary": "Récupérer un compte Cloudflare",
+    "request_description": "",
+    "request_schema_description": "Requête de correctif de config Azure."
+  },
+  "GetCloudCostActivity": {
+    "description": "Obtenez l'activité de Cloud Cost Management.",
+    "summary": "Mettre à jour un compte Cloudflare"
+  },
+  "GetActiveBillingDimensions": {
+    "description": "Obtenir les dimensions de facturation actives pour l'attribution des coûts. Les données relatives aux coûts pour un mois donné sont disponibles au plus tard le 19 du mois suivant.",
+    "summary": "Récupérer l'utilisation horaire pour les checks Synthetics"
+  },
+  "GetMonthlyCostAttribution": {
+    "description": "Obtenez l'attribution des coûts mensuels par tag pour les comptes multi-org et single root-org.\nLes données d'attribution des coûts pour un mois donné sont disponibles au plus tard le 19 du mois suivant.\nCe point d'accès à l'API est paginé. Pour être sûr de recevoir tous les enregistrements, vérifiez si la valeur de `next_record_id` est\ndans la réponse. Si c'est le cas, faites une autre requête et passez `next_record_id` comme paramètre.\nExemple de pseudo-code :\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\nsleep(5 seconds) # Éviter de se heurter à la limite de vitesse\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\ncursor := response.metadata.pagination.next_record_id\nEND",
+    "summary": "Récupérer l'utilisation horaire pour les checks Synthetics"
   },
   "ListCurrentUserApplicationKeys": {
     "description": "Énumérez toutes les clés d'application disponibles pour l'utilisateur actuel.",
@@ -41,6 +326,7 @@
   "CreateCurrentUserApplicationKey": {
     "description": "Créez une clé d'application pour l'utilisateur actuel.",
     "summary": "Créer une clé d'application pour l'utilisateur actuel",
+    "request_description": "",
     "request_schema_description": "Requête utilisée pour créer une clé d'application."
   },
   "DeleteCurrentUserApplicationKey": {
@@ -54,6 +340,7 @@
   "UpdateCurrentUserApplicationKey": {
     "description": "Modifiez une clé d'application appartenant à l'utilisateur actuel",
     "summary": "Modifier une clé d'application appartenant à l'utilisateur actuel",
+    "request_description": "",
     "request_schema_description": "Requête utilisée pour mettre à jour une clé d'application."
   },
   "DeleteDashboardListItems": {
@@ -78,6 +365,52 @@
     "request_description": "Nouveaux dashboards de la liste de dashboards.",
     "request_schema_description": "Requête contenant la liste des dashboards à mettre à jour."
   },
+  "CreateDORADeployment": {
+    "description": "Utilisez cet endpoint d'API pour fournir des données sur les déploiements de métriques DORA.\n\nCes données sont nécessaires pour :\n- La fréquence de déploiement\n- Le délai de mise en œuvre des changements\n- Le taux d'échec des changements",
+    "summary": "Mettre à jour une liste d'adresses IP autorisées",
+    "request_description": "",
+    "request_schema_description": "La requête de création d'un événement de déploiement DORA."
+  },
+  "CreateDORAIncident": {
+    "description": "Utilisez cet endpoint dʼAPI pour fournir des données sur les incidents pour les métriques DORA.\n\nCeci est nécessaire pour :\n- Le taux d'échec des changements\n- Le temps de restauration",
+    "summary": "Liste d'adresses IP autorisées",
+    "request_description": "",
+    "request_schema_description": "La requête de création d'un événement dʼincident DORA."
+  },
+  "ListDowntimes": {
+    "description": "Récupérez tous les downtimes planifiés.",
+    "summary": "Récupérer tous les downtimes"
+  },
+  "CreateDowntime": {
+    "description": "Planifiez un downtime.",
+    "summary": "Planifier un downtime",
+    "request_description": "Corps de requête pour la planification d'un downtime.",
+    "request_schema_description": "La requête de création d'un downtime."
+  },
+  "CancelDowntime": {
+    "description": "Annulez un downtime.",
+    "summary": "Annuler un downtime"
+  },
+  "GetDowntime": {
+    "description": "Récupérez les détails d'un downtime par `downtime_id`.",
+    "summary": "Récupérer un downtime"
+  },
+  "UpdateDowntime": {
+    "description": "Mettez à jour un downtime par `downtime_id`.",
+    "summary": "Mettre à jour un downtime",
+    "request_description": "Corps de requête pour la mise à jour d'un downtime.",
+    "request_schema_description": "La requête dʼédition d'un downtime."
+  },
+  "ListEvents": {
+    "description": "Le endpoint List renvoie les événements qui correspondent à une requête de recherche dʼévénements.\n[Les résultats sont paginés de manière similaire à des logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUtilisez cet endpoint pour voir vos derniers événements.",
+    "summary": "Récupérer la liste des événements"
+  },
+  "SearchEvents": {
+    "description": "Le endpoint List renvoie les événements qui correspondent à une requête de recherche dʼévénements.\n[Les résultats sont paginés de manière similaire à des logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUtilisez cet endpoint pour créer des filtres et un système de recherche complexe des événements.",
+    "summary": "Rechercher des événements",
+    "request_description": "",
+    "request_schema_description": "L'objet envoyé avec la requête pour récupérer une liste dʼévénements de votre organisation. "
+  },
   "ListIncidents": {
     "description": "Récupérez tous les incidents de l'organisation de l'utilisateur.",
     "summary": "Récupérer la liste des incidents"
@@ -87,6 +420,10 @@
     "summary": "Créer un incident",
     "request_description": "Charge utile de l'incident.",
     "request_schema_description": "Requête de création d'un incident."
+  },
+  "SearchIncidents": {
+    "description": "Recherchez des incidents correspondant à une certaine requête.",
+    "summary": "Rechercher des incidents"
   },
   "DeleteIncident": {
     "description": "Supprimez un incident existant de l'organisation de l'utilisateur.",
@@ -102,9 +439,282 @@
     "request_description": "Charge utile de l'incident.",
     "request_schema_description": "Requête de mise à jour d'un incident."
   },
+  "ListIncidentAttachments": {
+    "description": "Obtenez toutes les pièces jointes pour un incident spécifié.",
+    "summary": "Récupérer la liste des pièces jointes"
+  },
+  "UpdateIncidentAttachments": {
+    "description": "Le endpoint de mise à jour groupées pour la création, la mise à jour et la suppression des pièces jointes pour un incident donné.",
+    "summary": "Créer, mettre à jour et supprimer les pièces jointes d'un incident",
+    "request_description": "Charge utile de pièce jointe à un incident.",
+    "request_schema_description": "La requête de mise à jour des pièces jointes d'un incident."
+  },
+  "ListIncidentIntegrations": {
+    "description": "Obtenir toutes les métadonnées dʼintégration pour un incident.",
+    "summary": "Récupérer la liste des métadonnées d'intégration d'un incident"
+  },
+  "CreateIncidentIntegration": {
+    "description": "Créez des métadonnées de lʼintégration dʼun incident.",
+    "summary": "Créer des métadonnées d'intégration pour un incident",
+    "request_description": "Charge utile des métadonnées de lʼintégration dʼun incident.",
+    "request_schema_description": "Créez une requête pour les métadonnées de lʼintégration dʼun incident."
+  },
+  "DeleteIncidentIntegration": {
+    "description": "Supprimez les métadonnées de lʼintégration dʼun incident.",
+    "summary": "Supprimer les métadonnées d'intégration d'un incident"
+  },
+  "GetIncidentIntegration": {
+    "description": "Obtenez les détails des métadonnées de l'intégration dʼun incident.",
+    "summary": "Récupérer les détails des métadonnées d'intégration d'un incident"
+  },
+  "UpdateIncidentIntegration": {
+    "description": "Mettez à jour les métadonnées d'une intégration dʼincident existante.",
+    "summary": "Mettre à jour les métadonnées d'intégration d'un incident existant",
+    "request_description": "Charge utile des métadonnées dʼintégration dʼun incident.",
+    "request_schema_description": "Requête de correctif pour les métadonnées de lʼintégration dʼun incident."
+  },
+  "ListIncidentTodos": {
+    "description": "Obtenez toutes les tâches pour un incident.",
+    "summary": "Récupérer la liste des todo d'un incident"
+  },
+  "CreateIncidentTodo": {
+    "description": "Créez une tâche d'incident.",
+    "summary": "Créer un todo d'incident",
+    "request_description": "Charge utile de la tâche d'incident.",
+    "request_schema_description": "Requête de création d'une tâche dʼincident."
+  },
+  "DeleteIncidentTodo": {
+    "description": "Supprimez une tâche d'incident.",
+    "summary": "Supprimer un todo d'incident"
+  },
+  "GetIncidentTodo": {
+    "description": "Obtenez les détails de la tâche d'incident.",
+    "summary": "Récupérer les détails d'un todo d'incident"
+  },
+  "UpdateIncidentTodo": {
+    "description": "Mettez à jour une tâche dʼincident.",
+    "summary": "Mettre à jour un todo d'incident",
+    "request_description": "Charge utile de la tâche d'incident.",
+    "request_schema_description": "Requête de correctif pour une tâche dʼincident."
+  },
+  "ListGCPSTSAccounts": {
+    "description": "Énumérez tous les comptes de service GCP STS configurés sur votre compte Datadog.",
+    "summary": "Énumérer tous les comptes de services GCP avec STS"
+  },
+  "CreateGCPSTSAccount": {
+    "description": "Créez une nouvelle entrée dans Datadog pour votre compte de service STS.",
+    "summary": "Créer une entrée pour votre compte de service",
+    "request_description": "",
+    "request_schema_description": "Données sur votre compte de service nouvellement créé."
+  },
+  "DeleteGCPSTSAccount": {
+    "description": "Supprimer un compte GCP STS à partir de Datadog.",
+    "summary": "Supprimer un compte GCP avec STS"
+  },
+  "UpdateGCPSTSAccount": {
+    "description": "Mettez à jour un compte de service STS.",
+    "summary": "Mettre à jour un compte de service STS",
+    "request_description": "",
+    "request_schema_description": "Informations du compte de service."
+  },
+  "GetGCPSTSDelegate": {
+    "description": "Énumérez tous les comptes délégués Datadog/GCP STS configurés sur votre compte Datadog.",
+    "summary": "Énumérer les comptes délégués"
+  },
+  "MakeGCPSTSDelegate": {
+    "description": "Créez un principal GCP Datadog.",
+    "summary": "Créer un service principal GCP Datadog",
+    "request_description": "Créez un compte de service délégué dans Datadog.",
+    "request_schema_description": ""
+  },
+  "ListOpsgenieServices": {
+    "description": "Obtenez une liste de tous les services de lʼintégration Datadog/Opsgenie.",
+    "summary": "Récupérer tous les objets de service"
+  },
+  "CreateOpsgenieService": {
+    "description": "Créez un nouvel objet de service dans l'intégration Opsgenie.",
+    "summary": "Créer un objet de service",
+    "request_description": "Charge utile de service Opsgenie",
+    "request_schema_description": "Requête de création pour un service Opsgenie."
+  },
+  "DeleteOpsgenieService": {
+    "description": "Supprimez un objet de service unique dans l'intégration Datadog/Opsgenie.",
+    "summary": "Supprimer un objet de service unique"
+  },
+  "GetOpsgenieService": {
+    "description": "Obtenez un seul service de lʼintégration Datadog/Opsgenie.",
+    "summary": "Récupérer un objet de service unique"
+  },
+  "UpdateOpsgenieService": {
+    "description": "Mettez à jour un objet de service unique dans l'intégration Datadog/Opsgenie.",
+    "summary": "Mettre à jour un objet de service unique",
+    "request_description": "Charge utile de service Opsgenie.",
+    "request_schema_description": "Requête de mise à jour pour un service Opsgenie."
+  },
+  "ListCloudflareAccounts": {
+    "description": "Énumérez les comptes Cloudflare.",
+    "summary": "Énumérer les comptes Cloudflare"
+  },
+  "CreateCloudflareAccount": {
+    "description": "Créez un compte Cloudflare.",
+    "summary": "Ajouter un compte Cloudflare",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile lors de lʼajout dʼun compte Cloudflare."
+  },
+  "DeleteCloudflareAccount": {
+    "description": "Supprimez un compte Cloudflare.",
+    "summary": "Supprimer un compte Cloudflare"
+  },
+  "GetCloudflareAccount": {
+    "description": "Obtenez un compte Cloudflare.",
+    "summary": "Récupérer un compte Cloudflare"
+  },
+  "UpdateCloudflareAccount": {
+    "description": "Mettez à jour un compte Cloudflare.",
+    "summary": "Mettre à jour un compte Cloudflare",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile lors de la mise à jour dʼun compte Cloudflare."
+  },
+  "ListConfluentAccount": {
+    "description": "Énumérez les comptes Confluent.",
+    "summary": "Énumérer les comptes Confluent"
+  },
+  "CreateConfluentAccount": {
+    "description": "Créez un compte Confluent.",
+    "summary": "Ajouter un compte Confluent",
+    "request_description": "Charge utile Confluent",
+    "request_schema_description": "Schéma de charge utile lors de lʼajout dʼun compte Confluent."
+  },
+  "DeleteConfluentAccount": {
+    "description": "Supprimez un compte Confluent avec l'ID de compte fourni.",
+    "summary": "Supprimer un compte Confluent"
+  },
+  "GetConfluentAccount": {
+    "description": "Obtenez le compte Confluent avec l'ID de compte fourni.",
+    "summary": "Récupérer un compte Confluent"
+  },
+  "UpdateConfluentAccount": {
+    "description": "Mettez à jour le compte Confluent avec l'ID de compte fourni.",
+    "summary": "Mettre à jour un compte Confluent",
+    "request_description": "Charge utile Confluent",
+    "request_schema_description": "La requête JSON:API pour la mise à jour dʼun compte Confluent."
+  },
+  "ListConfluentResource": {
+    "description": "Obtenez une ressource Confluent pour le compte associé à l'ID fourni.",
+    "summary": "Énumérer les ressources d'un compte Confluent"
+  },
+  "CreateConfluentResource": {
+    "description": "Créez une ressource Confluent pour le compte associé à l'ID fourni.",
+    "summary": "Ajouter une ressource à un compte Confluent",
+    "request_description": "Charge utile Confluent",
+    "request_schema_description": "La requête JSON:API pour la mise à jour dʼune ressource Confluent."
+  },
+  "DeleteConfluentResource": {
+    "description": "Supprimez une ressource Confluent avec l'ID de ressource fourni pour le compte associé à l'ID de compte fourni.",
+    "summary": "Supprimer une ressource d'un compte Confluent"
+  },
+  "GetConfluentResource": {
+    "description": "Obtenez une ressource Confluent avec l'ID de ressource fourni pour le compte associé à l'ID de compte fourni.",
+    "summary": "Récupérer une ressource d'un compte Confluent"
+  },
+  "UpdateConfluentResource": {
+    "description": "Mettez à jour une ressource Confluent avec l'ID de ressource fourni pour le compte associé à l'ID de compte fourni.",
+    "summary": "Mettre à jour une ressource dans un compte Confluent",
+    "request_description": "Charge utile Confluent",
+    "request_schema_description": "La requête JSON:API pour la mise à jour dʼune ressource Confluent."
+  },
+  "ListFastlyAccounts": {
+    "description": "Énumérez les comptes Fastly.",
+    "summary": "Énumérer les comptes Fastly"
+  },
+  "CreateFastlyAccount": {
+    "description": "Créez un compte Fastly.",
+    "summary": "Ajouter un compte Fastly",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile lors de lʼajout dʼun compte Fastly."
+  },
+  "DeleteFastlyAccount": {
+    "description": "Supprimez un compte Fastly.",
+    "summary": "Supprimer un compte Fastly"
+  },
+  "GetFastlyAccount": {
+    "description": "Obtenez un compte Fastly.",
+    "summary": "Récupérer un compte Fastly"
+  },
+  "UpdateFastlyAccount": {
+    "description": "Mettez à jour un compte Fastly.",
+    "summary": "Mettre à jour un compte Fastly",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile lors de la mise à jour dʼun compte Fastly."
+  },
+  "ListFastlyServices": {
+    "description": "Énumérez les services Fastly pour un compte.",
+    "summary": "Énumérer les services Fastly"
+  },
+  "CreateFastlyService": {
+    "description": "Créez un service Fastly pour un compte.",
+    "summary": "Ajouter un service Fastly",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile pour les requête de service Fastly."
+  },
+  "DeleteFastlyService": {
+    "description": "Supprimez un service Fastly pour un compte.",
+    "summary": "Supprimer un service Fastly"
+  },
+  "GetFastlyService": {
+    "description": "Obtenez un service Fastly pour un compte.",
+    "summary": "Récupérer un service Fastly"
+  },
+  "UpdateFastlyService": {
+    "description": "Mettez à jour un service Fastly pour un compte.",
+    "summary": "Mettre à jour un service Fastly",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile pour les requête de service Fastly."
+  },
+  "ListOktaAccounts": {
+    "description": "Énumérez les comptes Okta.",
+    "summary": "Supprimer une application RUM"
+  },
+  "CreateOktaAccount": {
+    "description": "Créez un compte Okta.",
+    "summary": "Récupérer une application RUM",
+    "request_description": "",
+    "request_schema_description": "Objet de requête pour un compte Okta."
+  },
+  "DeleteOktaAccount": {
+    "description": "Supprimez un compte Okta.",
+    "summary": "Mettre à jour une application RUM"
+  },
+  "GetOktaAccount": {
+    "description": "Obtenez un compte Okta.",
+    "summary": "Récupérer la liste des événements RUM"
+  },
+  "UpdateOktaAccount": {
+    "description": "Mettez à jour un compte Okta.",
+    "summary": "Rechercher des événements RUM",
+    "request_description": "",
+    "request_schema_description": "Schéma de charge utile lors de la mise à jour dʼun compte Okta."
+  },
+  "GetIPAllowlist": {
+    "description": "Renvoie la liste d'autorisations IP et son état activé ou désactivé.",
+    "summary": "Récupérer une liste d'adresses IP autorisées"
+  },
+  "UpdateIPAllowlist": {
+    "description": "Modifiez les entrées de la liste d'autorisation IP et activez-la ou désactivez-la.",
+    "summary": "Mettre à jour une liste d'adresses IP autorisées",
+    "request_description": "",
+    "request_schema_description": "Mettez à jour la liste d'autorisation IP."
+  },
+  "SubmitLog": {
+    "description": "Envoyez vos logs à votre plateforme Datadog via HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile (sans compression) : 5 Mo\n- Taille maximale d'un log : 1 Mo\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 1 000 entrées\n\nTous les logs dépassant 1 Mo sont acceptés et tronqués par Datadog :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 1 Mo et renvoie un code 2xx.\n- Pour une requête avec plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 1 Mo et renvoie un code 2xx.\n\nDatadog vous conseille de compresser vos logs avant de les envoyer.\nAjoutez l'en-tête `Content-Encoding: gzip` à la requête pour envoyer vos logs compressés.\nLes événements de logs peuvent être envoyés avec un timestamp pouvant dater de 18 heures maximum.\n\nVoici les différents codes de statut renvoyés par l'API HTTP :\n- 202: Accepted : le traitement de la requête a été accepté.\n- 400: Bad request : ce statut est probablement dû à une erreur dans le format de la charge utile.\n- 401: Unauthorized : ce statut est probablement dû à une clé d'API manquante.\n- 403: Permission issue : ce statut est probablement dû à une clé d'API non valide.\n- 408: Request Timeout : patientez un peu avant de renvoyer la requête.\n- 413: Payload too large : la taille du lot est supérieure à 5 Mo une fois décompressé.\n- 429: Too Many Requests : patientez un peu avant de renvoyer la requête.\n- 500: Internal Server Error : le serveur a rencontré une condition inattendue l'empêchant de répondre à la demande ; patientez un peu avant de renvoyer la requête.\n- 503: Service Unavailable : le serveur n'est pas capable de gérer la requête, probablement parce qu'elle surchargée ; patientez un peu avant de renvoyer la requête.",
+    "summary": "Envoyer des logs",
+    "request_description": "Log à envoyer (format JSON).",
+    "request_schema_description": "Message de log structuré."
+  },
   "AggregateLogs": {
     "description": "Endpoint d'API pour agréger les événements sous la forme de compartiments et calculer les métriques ainsi que les séries temporelles.",
     "summary": "Événements agrégés",
+    "request_description": "",
     "request_schema_description": "L'objet envoyé avec la requête pour récupérer une liste de logs de votre organisation. "
   },
   "GetLogsArchiveOrder": {
@@ -144,6 +754,7 @@
   "RemoveRoleFromArchive": {
     "description": "Supprime un rôle d'une archive. ([API Roles](https://docs.datadoghq.com/api/v2/roles/))",
     "summary": "Révoquer le rôle d'une archive",
+    "request_description": "",
     "request_schema_description": "Relation avec le rôle."
   },
   "ListArchiveReadRoles": {
@@ -153,7 +764,32 @@
   "AddReadRoleToArchive": {
     "description": "Ajoute un rôle de lecture à une archive ([API Roles](https://docs.datadoghq.com/api/v2/roles/))",
     "summary": "Accorder un rôle à une archive",
+    "request_description": "",
     "request_schema_description": "Relation avec le rôle."
+  },
+  "ListLogsCustomDestinations": {
+    "description": "Obtenez la liste des destinations personnalisées configurées dans votre organisation avec leurs définitions.",
+    "summary": "Obtenir toutes les destinations personnalisées"
+  },
+  "CreateLogsCustomDestination": {
+    "description": "Créez une destination personnalisée dans votre organisation.",
+    "summary": "Créer une destination personnalisée",
+    "request_description": "La définition de la nouvelle destination personnalisée.",
+    "request_schema_description": "La destination personnalisée."
+  },
+  "DeleteLogsCustomDestination": {
+    "description": "Supprimez une destination personnalisée spécifique dans votre organisation.",
+    "summary": "Supprimer une destination personnalisée"
+  },
+  "GetLogsCustomDestination": {
+    "description": "Obtenez une destination personnalisée spécifique dans votre organisation.",
+    "summary": "Obtenir une destination personnalisée"
+  },
+  "UpdateLogsCustomDestination": {
+    "description": "Mettez à jour les champs d'une destination personnalisée spécifique dans votre organisation.",
+    "summary": "Mettre à jour une destination personnalisée",
+    "request_description": "Nouvelle définition des champs de la destination personnalisée.",
+    "request_schema_description": "La destination personnalisée."
   },
   "ListLogsMetrics": {
     "description": "Récupérez la liste des métriques basées sur des logs configurées avec leurs définitions.",
@@ -186,6 +822,7 @@
   "CreateRestrictionQuery": {
     "description": "Créez une nouvelle requête de restriction pour votre organisation.",
     "summary": "Créer une requête de restriction",
+    "request_description": "",
     "request_schema_description": "Créez une requête de restriction."
   },
   "GetRoleRestrictionQuery": {
@@ -207,11 +844,13 @@
   "UpdateRestrictionQuery": {
     "description": "Modifiez une requête de restriction.",
     "summary": "Mettre à jour une requête de restriction",
+    "request_description": "",
     "request_schema_description": "Mettez à jour une requête de restriction."
   },
   "RemoveRoleFromRestrictionQuery": {
     "description": "Supprime un rôle d'une requête de restriction.",
     "summary": "Révoquer un rôle d'une requête de restriction",
+    "request_description": "",
     "request_schema_description": "Relation avec le rôle."
   },
   "ListRestrictionQueryRoles": {
@@ -221,54 +860,211 @@
   "AddRoleToRestrictionQuery": {
     "description": "Ajoute un rôle à une requête de restriction.",
     "summary": "Accorder un rôle à une requête de restriction",
+    "request_description": "",
     "request_schema_description": "Relation avec le rôle."
   },
   "ListLogsGet": {
-    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour visualiser vos logs les plus récents.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que cette API.\nConsultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "description": "L'endpoint de liste renvoie les logs qui correspondent à une requête de recherche de logs.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour visualiser vos logs les plus récents.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que cette API.\nConsultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
     "summary": "Récupérer une liste de logs"
   },
   "ListLogs": {
-    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour effectuer des recherches de logs complexes et leur appliquer des filtres avancés.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que cette API.\nConsultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Search logs",
-    "request_schema_description": "La requête de récupération d'une liste de logs."
+    "description": "L'endpoint de liste renvoie les logs qui correspondent à une requête de recherche de logs.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour effectuer des recherches de logs complexes et leur appliquer des filtres avancés.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que cette API.\nConsultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Rechercher des logs",
+    "request_description": "",
+    "request_schema_description": "La requête de récupération de la liste de logs."
   },
   "ListTagConfigurations": {
-    "description": "Renvoie tous les noms des métriques count, gauge, rate et de distribution configurées\n(avec des filtres supplémentaires, lorsqu'ils sont spécifiés).",
-    "summary": "Lister les configurations de tag"
+    "description": "Renvoie toutes les métriques qui peuvent être configurées dans la page Metrics Summary ou avec Metrics without Limits™ (en fonction de filtres supplémentaires s'ils sont spécifiés).",
+    "summary": "Récupérer une liste de métriques"
+  },
+  "DeleteBulkTagsMetricsConfiguration": {
+    "description": "Supprimez toutes les listes personnalisées de clés de tag pouvant être interrogées pour un ensemble de métriques count, gauge, rate et de distribution existantes.\nLes métriques sont sélectionnées en passant un préfixe de nom de métrique.\nLes résultats peuvent être envoyés à un ensemble d'adresses de messagerie du compte, comme c'est le cas dans l'application Web Datadog pour la même opération.\nNe peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Supprimer les tags de plusieurs métriques",
+    "request_description": "",
+    "request_schema_description": "Objet wrapper pour une seule requête de suppression groupée de tags."
+  },
+  "CreateBulkTagsMetricsConfiguration": {
+    "description": "Créez et définissez une liste de clés de tag pouvant être interrogées pour un ensemble de métriques count, gauge, rate et de distribution existantes.\nLes métriques sont sélectionnées en passant un préfixe de nom de métrique. Utilisez la méthode Delete de ce chemin d'API pour supprimer les configurations de tag.\nLes résultats peuvent être envoyés à un ensemble d'adresses de messagerie du compte, comme c'est le cas dans l'application Web Datadog pour la même opération.\nSi plusieurs appels comprennent la même métrique, la dernière configuration appliquée est utilisée (sans tenir compte de l'ordre de l'envoi). L'ordre des appels simultanés n'est pas déterministe.\nNe peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Configurer des tags pour plusieurs métriques",
+    "request_description": "",
+    "request_schema_description": "Objet wrapper pour une seule requête de configuration groupée de tags."
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "Énumérez les tags et les agrégations qui sont activement interrogées sur les dashboards, les notebooks, les monitors et le Metrics Explorer pour un nom donné.",
+    "summary": "Énumérer les tags et agrégations actifs"
+  },
+  "ListTagsByMetricName": {
+    "description": "Affichez les paires key-value des tags indexés pour un nom de métrique donné.",
+    "summary": "Énumérer les tags par nom de métrique"
+  },
+  "ListMetricAssets": {
+    "description": "Renvoie les dashboards, les monitors, les notebooks et les SLO dans lesquels une métrique est stockée, le cas échéant.  Mise à jour toutes les 24 heures.",
+    "summary": "Ressources associées à une métrique"
+  },
+  "EstimateMetricsOutputSeries": {
+    "description": "Renvoie la cardinalité estimée pour une métrique avec une configuration des tags, des centiles et du nombre d'agrégations en utilisant Metrics without Limits&trade;.",
+    "summary": "Estimateur de la cardinalité des configurations de tags"
   },
   "DeleteTagConfiguration": {
     "description": "Supprime la configuration des tags d'une métrique. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
-    "summary": "Supprimer une configuration de Tag"
+    "summary": "Supprimer une configuration de tags"
   },
   "ListTagConfigurationByName": {
     "description": "Renvoie la configuration des tags pour le nom de métrique donné.",
-    "summary": "Lister les configurations de tag par nom"
+    "summary": "Énumérer les configurations de tags par nom"
   },
   "UpdateTagConfiguration": {
-    "description": "Mettez à jour la configuration des tags d'une métrique ou les agrégations en centile d'une métrique de distribution. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
-    "summary": "Mettre à jour une configuration de tag",
+    "description": "Mettez à jour la configuration des tags d'une métrique, les agrégations en centile d'une métrique de distribution ou les agrégations personnalisées\nd'une métrique count, rate ou gauge. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Mettre à jour une configuration de tags",
+    "request_description": "",
     "request_schema_description": "Objet de requête qui inclut la métrique pour laquelle vous souhaitez modifier la configuration des tags."
   },
   "CreateTagConfiguration": {
-    "description": "Créez et définissez une liste des clés de tag pouvant être interrogées pour une métrique count, gauge, rate ou de distribution. Si vous le souhaitez, vous pouvez inclure des agrégations en centile sur n'importe quelle métrique de distribution. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
-    "summary": "Créer une configuration de Tag",
+    "description": "Créez et définissez une liste de clés de tag pouvant être interrogées pour une métrique count, gauge, rate ou de distribution existante.\nSi vous le souhaitez, vous pouvez inclure des agrégations en centile sur n'importe quelle métrique de distribution ou configurer des agrégations personnalisées\npour une métrique count, gauge ou rate.\nNe peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Créer une configuration de tags",
+    "request_description": "",
     "request_schema_description": "Objet de requête qui inclut la métrique pour laquelle vous souhaitez configurer les tags."
+  },
+  "ListVolumesByMetricName": {
+    "description": "Consultez les volumes distincts de métriques pour le nom de la métrique indiqué.\n\nLes métriques personnalisées générées par l'application à partir d'autres produits renverront `null` pour les volumes ingérés.",
+    "summary": "Énumérer les volumes de métriques distincts par nom de métrique"
+  },
+  "ListMonitorConfigPolicies": {
+    "description": "Récupérez toutes les stratégies de configuration de monitor.",
+    "summary": "Récupérer toutes les politiques de configuration de monitor"
+  },
+  "CreateMonitorConfigPolicy": {
+    "description": "Créez une stratégie de configuration de monitor.",
+    "summary": "Créer une politique de configuration de monitor",
+    "request_description": "Créez un corps de requête de stratégie de configuration de monitor.",
+    "request_schema_description": "Requête de création d'une stratégie de configuration de monitor."
+  },
+  "DeleteMonitorConfigPolicy": {
+    "description": "Supprimez une stratégie de configuration de monitor.",
+    "summary": "Supprimer une politique de configuration de monitor"
+  },
+  "GetMonitorConfigPolicy": {
+    "description": "Récupérez une stratégie de configuration de monitor par `policy_id`.",
+    "summary": "Récupérer une politique de configuration de monitor"
+  },
+  "UpdateMonitorConfigPolicy": {
+    "description": "Modifiez une stratégie de configuration de monitor.",
+    "summary": "Modifier une politique de configuration de monitor",
+    "request_description": "Description de la mise à jour.",
+    "request_schema_description": "Requête de modification d'une stratégie de configuration de monitor."
+  },
+  "ListMonitorDowntimes": {
+    "description": "Récupérez tous les downtimes actifs du monitor spécifié.",
+    "summary": "Récupérer les downtimes actifs d'un monitor"
   },
   "ListPermissions": {
     "description": "Renvoie la liste de toutes les autorisations, y compris le nom, la description et l'ID.",
     "summary": "Énumérer les autorisations"
   },
+  "ListFindings": {
+    "description": "Récupérez la liste des découvertes CSPM.\n\n### Filtrage\n\nDes filtres peuvent être appliqués en ajoutant des paramètres de requête à lʼURL.\n\n  - Via un seul filtre : `?filter[attribute_key]=attribute_value`\n  - En enchaînant les filtres : `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - En filtrant les tags : `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nIci, `attribute_key` peut être nʼimporte laquelle des clés de filtre décrites plus bas.\n\nLes paramètres de requête de type `integer` prennent en charge les opérateurs de comparaison (`>`, `>=`, `<`, `<=`). Ceci est particulièrement utile lors du fitrage par `evaluation_changed_at` ou `resource_discovery_timestamp`. Par exemple : `?filter[evaluation_changed_at]=>20123123121`.\n\nVous pouvez aussi utiliser lʼopérateur de négation sur des chaînes. Par exemple, utilisez `filter[resource_type]=-aws*` pour filtrer toutes les ressources ne provenant pas dʼAWS.\n\nLʼopérateur doit venir après le signe égal. Par exemple, pour filtrer avec lʼopérateur `>=`, ajoutez lʼopérateur après le signe égal : `filter[evaluation_changed_at]=>=1678809373257`.\n\nLes paramètres de requête à utiliser sont ceux qui sont documentés et leurs types de valeurs doivent être corrects. Les paramètres de requête dupliqués (comme `filter[status]=low&filter[status]=info`) ne sont pas autorisés.\n\n### Réponse\n\nLa réponse contient une gamme dʼobjets de découverte, de métadonnées de pagination et un nombre dʼéléments correspondant à la requête.\n\nChaque objet de découverte contient ce qui suit :\n\n- LʼID de découverte pouvant être utilisé dans une requête `GetFinding` pour récupérer les détails complets de la découverte.\n- Les attributs principaux, comme le statut, lʼévaluation, les détails approfondis de la ressource, lʼétat de désactivation et les détails de la règle.\n- timestamps `evaluation_changed_at` et `resource_discovery_date`.\n- Un tableau des tags associés.\n",
+    "summary": "Énumérer les findings"
+  },
+  "MuteFindings": {
+    "description": "Activer ou désactiver les découvertes.",
+    "summary": "Récupérer les dépendances d'un service APM",
+    "request_description": "### Attributs\n\nToutes les découvertes sont mises à jour avec les mêmes attributs. Le corps de la requête doit inclure au moins deux attributs : `muted` et `reason`.\nLes raisons autorisées dépendent de lʼactivation ou non de la découverte :\n  - Pour désactiver une découverte : `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - Pour la réactiver : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Méta\n\nLe corps de la requête doit inclure une liste des ID de découverte à mettre à jour.\n",
+    "request_schema_description": "La nouvelle requête de découverte de désactivation en bloc."
+  },
+  "GetFinding": {
+    "description": "Renvoie une seule découverte avec la configuration des messages et des ressources.",
+    "summary": "Récupérer un finding"
+  },
+  "ListPowerpacks": {
+    "description": "Récupérez la liste de tous les powerpacks.",
+    "summary": "Récupérer tous les processus"
+  },
+  "CreatePowerpack": {
+    "description": "Créez un powerpack.",
+    "summary": "Processus",
+    "request_description": "Créez un corps de requête de powerpack.",
+    "request_schema_description": "Les powerpacks sont des groupes modèles de widgets de dashboard que vous pouvez enregistrer à partir d'un dashboard existant et transformer en paquets réutilisables dans la barre des widgets."
+  },
+  "DeletePowerpack": {
+    "description": "Supprimez un powerpack.",
+    "summary": "Récupérer tous les processus"
+  },
+  "GetPowerpack": {
+    "description": "Récupérez un powerpack.",
+    "summary": "Processus"
+  },
+  "UpdatePowerpack": {
+    "description": "Mettez à jour un powerpack.",
+    "summary": "RUM",
+    "request_description": "Mettez à jour un corps de requête de powerpack.",
+    "request_schema_description": "Les powerpacks sont des groupes modèles de widgets de dashboard que vous pouvez enregistrer à partir d'un dashboard existant et transformer en paquets réutilisables dans la barre des widget."
+  },
   "ListProcesses": {
     "description": "Récupérez tous les processus de votre organisation.",
     "summary": "Récupérer tous les processus"
   },
+  "QueryScalarData": {
+    "description": "Interroger des valeurs scalaires (comme on peut le voir sur les widgets Query Value, Table et Toplist).\nLes sources de données multiples sont prises en charge avec la possibilité de\ntraiter les données à l'aide de formules et de fonctions.",
+    "summary": "Interroger des données scalaires sur plusieurs produits",
+    "request_description": "",
+    "request_schema_description": "Une requête de wrapper autour d'une requête scalaire à exécuter."
+  },
+  "QueryTimeseriesData": {
+    "description": "Interroger des données de séries temporelles parmi plusieurs sources de données et\ntraiter les données en appliquant des formules et fonctions.",
+    "summary": "Interroger des données de séries temporelles sur plusieurs produits",
+    "request_description": "",
+    "request_schema_description": "Un wrapper de requête autour d'une seule requête de séries temporelles à exécuter."
+  },
+  "ListCSMThreatsAgentRules": {
+    "description": "Récupérez la liste des règles de lʼAgent Cloud Security Management Threats.",
+    "summary": "Obtenir toutes les règles de lʼAgent pour CSM Threats"
+  },
+  "CreateCSMThreatsAgentRule": {
+    "description": "Créez une nouvelle règle de lʼAgent Cloud Security Management Threats avec les paramètres indiqués.",
+    "summary": "Créer une règle de lʼAgent pour CSM Threats",
+    "request_description": "La définition de la nouvelle règle d'Agent.",
+    "request_schema_description": "Objet de la requête comprenant la règle d'Agent à créer."
+  },
+  "DeleteCSMThreatsAgentRule": {
+    "description": "Supprimer une règle spécifique de lʼAgent Cloud Security Management Threats.",
+    "summary": "Supprimer une règle de lʼAgent pour CSM Threats"
+  },
+  "GetCSMThreatsAgentRule": {
+    "description": "Récupérez les détails dʼune règle spécifique de lʼAgent Cloud Security Management Threats.",
+    "summary": "Obtenir une règle de lʼAgent pour CSM Threats"
+  },
+  "UpdateCSMThreatsAgentRule": {
+    "description": "Modifiez une règle spécifique de lʼAgent Cloud Security Management Threats.\nRenvoie l'objet de règle d'Agent lorsque la requête n'échoue pas.",
+    "summary": "Mettre à jour d'une règle de lʼAgent pour CSM Threats",
+    "request_description": "La nouvelle définition de la règle d'Agent.",
+    "request_schema_description": "Objet de la requête comprenant la règle d'Agent dont les attributs doivent être modifiés."
+  },
+  "DownloadCSMThreatsPolicy": {
+    "description": "L'endpoint de téléchargement génère un fichier de stratégie CSM Threats à partir de vos règles CSM Threats\nactives, puis les télécharge sous forme de fichier `.policy`. Il peut ensuite être déployé dans\nvos Agents afin de modifier la stratégie active de votre environnement.",
+    "summary": "Obtenir la dernière stratégie de CSM Threats"
+  },
+  "DeleteRestrictionPolicy": {
+    "description": "Supprime la stratégie de restriction associée à la ressource spécifiée.",
+    "summary": "Supprimer une politique de restriction"
+  },
+  "GetRestrictionPolicy": {
+    "description": "Récupère la stratégie de restriction associée à la ressource spécifiée.",
+    "summary": "Récupérer une politique de restriction"
+  },
+  "UpdateRestrictionPolicy": {
+    "description": "Met à jour la stratégie de restriction associée à une ressource.\n\n#### Ressources prises en charge\nLes stratégies de restriction peuvent être appliquées aux ressources suivantes :\n- Connexions : `connection`\n- Dashboards : `dashboard`\n- Notebooks : `notebook`\n- Règles de sécurité : `security-rule`\n- Service Level Objectives : `slo`\n\n#### Relations supportées pour les ressources\nType de ressource | Relations prises en charge\n-------------------------|--------------------------\nConnexions | `viewer`, `editor`, `resolver`\nDashboards | `viewer`, `editor`\nNotebooks | `viewer`, `editor`\nRègles de sécurité | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
+    "summary": "Mettre à jour une politique de restriction",
+    "request_description": "Charge utile de la stratégie de restriction",
+    "request_schema_description": "Requête de mise à jour dʼune stratégie de restriction"
+  },
   "ListRoles": {
-    "description": "Renvoie tous les rôles, y compris leurs noms et leurs ID.",
+    "description": "Renvoie tous les rôles, y compris leur nom et leur identifiant unique.",
     "summary": "Énumérer les rôles"
   },
   "CreateRole": {
     "description": "Créez un nouveau rôle pour votre organisation.",
     "summary": "Créer un rôle",
+    "request_description": "",
     "request_schema_description": "Créez un rôle."
   },
   "DeleteRole": {
@@ -282,11 +1078,19 @@
   "UpdateRole": {
     "description": "Modifiez un rôle. Nécessite une clé d'application appartenant à un administrateur.",
     "summary": "Mettre à jour un rôle",
+    "request_description": "",
     "request_schema_description": "Mettez un jour un rôle."
+  },
+  "CloneRole": {
+    "description": "Dupliquez un rôle existant.",
+    "summary": "Créer un rôle en dupliquant un rôle existant",
+    "request_description": "",
+    "request_schema_description": "Requête de création d'un rôle en dupliquant un rôle existant."
   },
   "RemovePermissionFromRole": {
     "description": "Supprime une autorisation pour un rôle.",
     "summary": "Révoquer une autorisation",
+    "request_description": "",
     "request_schema_description": "Relation avec un objet d'autorisations."
   },
   "ListRolePermissions": {
@@ -296,11 +1100,13 @@
   "AddPermissionToRole": {
     "description": "Ajoute une autorisation à un rôle.",
     "summary": "Accorder une autorisation à un rôle",
+    "request_description": "",
     "request_schema_description": "Relation avec un objet d'autorisations."
   },
   "RemoveUserFromRole": {
     "description": "Supprime un utilisateur d'un rôle.",
     "summary": "Supprimer un utilisateur d'un rôle",
+    "request_description": "",
     "request_schema_description": "Relation avec un utilisateur."
   },
   "ListRoleUsers": {
@@ -310,7 +1116,154 @@
   "AddUserToRole": {
     "description": "Ajoute un utilisateur à un rôle.",
     "summary": "Ajouter un utilisateur à un rôle",
+    "request_description": "",
     "request_schema_description": "Relation avec un utilisateur."
+  },
+  "AggregateRUMEvents": {
+    "description": "Endpoint d'API pour agréger les événements RUM sous forme de compartiments composés de métriques et de séries temporelles calculées.",
+    "summary": "Agréger des événements RUM",
+    "request_description": "",
+    "request_schema_description": "L'objet envoyé avec la requête pour récupérer les compartiments d'agrégation des événements RUM de votre organisation."
+  },
+  "GetRUMApplications": {
+    "description": "Énumérez toutes les applications RUM de votre organisation.",
+    "summary": "Énumérer toutes les applications RUM"
+  },
+  "CreateRUMApplication": {
+    "description": "Créez une nouvelle application RUM dans votre organisation.",
+    "summary": "Créer une application RUM",
+    "request_description": "",
+    "request_schema_description": "Attributs de la requête de création d'une application RUM."
+  },
+  "DeleteRUMApplication": {
+    "description": "Supprimez une application RUM existante dans votre organisation.",
+    "summary": "Supprimer une application RUM"
+  },
+  "GetRUMApplication": {
+    "description": "Récupérez l'application RUM avec l'ID donné dans votre organisation.",
+    "summary": "Récupérer une application RUM"
+  },
+  "UpdateRUMApplication": {
+    "description": "Mettez à jour l'application RUM avec l'identifiant donné dans votre organisation.",
+    "summary": "Mettre à jour une application RUM",
+    "request_description": "",
+    "request_schema_description": "Requête de mise à jour de l'application RUM."
+  },
+  "ListRUMEvents": {
+    "description": "L'endpoint de liste renvoie les événements qui correspondent à la requête de recherche RUM.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour afficher vos derniers événements RUM.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Récupérer la liste des événements RUM"
+  },
+  "SearchRUMEvents": {
+    "description": "L'endpoint de liste renvoie les événements RUM qui correspondent à la requête de recherche RUM.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour créer des filtres et des recherches d'événements RUM complexes.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
+    "summary": "Rechercher des événements RUM",
+    "request_description": "",
+    "request_schema_description": "La requête de récupération de la liste des événements RUM."
+  },
+  "UploadIdPMetadata": {
+    "description": "Endpoint d'importation de métadonnées IdP pour la configuration SAML.\n\nUtilisez cet endpoint pour importer ou remplacer des métadonnées IdP pour la configuration de la connexion SAML.",
+    "summary": "Importer les métadonnées IdP",
+    "request_description": "",
+    "request_schema_description": "Les données du formulaire soumises pour télécharger les métadonnées de l'IdP"
+  },
+  "ListScorecardOutcomes": {
+    "description": "Récupère tous les résultats des règles.",
+    "summary": "Obtenir les paramètres d'autorisation d'une équipe"
+  },
+  "CreateScorecardOutcomesBatch": {
+    "description": "Définit plusieurs résultats service-rule en une seule requête groupée.",
+    "summary": "Mettre à jour le paramètre d'autorisation d'une équipe",
+    "request_description": "Ensemble de résultats de scorecard.",
+    "request_schema_description": "Requête groupée de résultats de scorecard"
+  },
+  "ListScorecardRules": {
+    "description": "Récupérez toutes les règles.",
+    "summary": "Obtenir les équipes dont un utilisateur fait partie"
+  },
+  "CreateScorecardRule": {
+    "description": "Crée une nouvelle règle.",
+    "summary": "Équipes",
+    "request_description": "Attributs de la règle.",
+    "request_schema_description": "Requête de création d'une règle pour la scorecard."
+  },
+  "DeleteScorecardRule": {
+    "description": "Supprime une seule règle.",
+    "summary": "Obtenir toutes les métriques basées sur des spans"
+  },
+  "DownloadCloudWorkloadPolicyFile": {
+    "description": "L'endpoint de téléchargement génère un fichier de stratégie Cloud Workload Security à partir de vos règles Cloud Workload Security actives, puis télécharge ce fichier. Il peut ensuite être déployé dans vos Agents afin de modifier la stratégie active de votre environnement.",
+    "summary": "Récupérer la dernière stratégie Cloud Workload Security"
+  },
+  "ListCloudWorkloadSecurityAgentRules": {
+    "description": "Récupérez la liste des règles d'Agent.",
+    "summary": "Récupérer toutes les règles d'Agent Cloud Workload Security"
+  },
+  "CreateCloudWorkloadSecurityAgentRule": {
+    "description": "Créez une règle d'Agent à l'aide des paramètres fournis.",
+    "summary": "Créer une règle d'Agent Cloud Workload Security",
+    "request_description": "La définition de la nouvelle règle d'Agent.",
+    "request_schema_description": "Objet de la requête comprenant la règle d'Agent à créer."
+  },
+  "DeleteCloudWorkloadSecurityAgentRule": {
+    "description": "Supprimez une règle d'Agent spécifique.",
+    "summary": "Supprimer une règle d'Agent Cloud Workload Security"
+  },
+  "GetCloudWorkloadSecurityAgentRule": {
+    "description": "Récupérez les détails d'une règle d'Agent spécifique.",
+    "summary": "Récupérer une règle d'Agent Cloud Workload Security"
+  },
+  "UpdateCloudWorkloadSecurityAgentRule": {
+    "description": "Modifiez une règle d'Agent spécifique.\nRenvoie l'objet de règle d'Agent lorsque la requête n'échoue pas.",
+    "summary": "Modifier une règle d'Agent Cloud Workload Security",
+    "request_description": "La nouvelle définition de la règle d'Agent.",
+    "request_schema_description": "Objet de la requête comprenant la règle d'Agent dont les attributs doivent être modifiés."
+  },
+  "ListSecurityFilters": {
+    "description": "Récupérez la liste des filtres de sécurité configurés avec leurs définitions.",
+    "summary": "Récupérer tous les filtres de sécurité"
+  },
+  "CreateSecurityFilter": {
+    "description": "Créez un filtre de sécurité.\n\nConsultez le [guide sur les filtres de sécurité](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\npour obtenir plus d'exemples.",
+    "summary": "Créer un filtre de sécurité",
+    "request_description": "La définition du nouveau filtre de sécurité.",
+    "request_schema_description": "Objet de la requête comprenant le filtre de sécurité à créer."
+  },
+  "DeleteSecurityFilter": {
+    "description": "Supprimez un filtre de sécurité spécifique.",
+    "summary": "Supprimer un filtre de sécurité"
+  },
+  "GetSecurityFilter": {
+    "description": "Récupérez les détails d'un filtre de sécurité spécifique.\n\nConsultez le [guide sur les filtres de sécurité](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\npour obtenir plus d'exemples.",
+    "summary": "Récupérer un filtre de sécurité"
+  },
+  "UpdateSecurityFilter": {
+    "description": "Modifiez un filtre de sécurité spécifique.\nRenvoie l'objet de filtre de sécurité lorsque la requête n'échoue pas.",
+    "summary": "Mettre à jour un filtre de sécurité",
+    "request_description": "La nouvelle définition du filtre de sécurité.",
+    "request_schema_description": "Le corps du nouveau filtre de sécurité."
+  },
+  "ListSecurityMonitoringSuppressions": {
+    "description": "Récupérez la liste de toutes les règles de suppression.",
+    "summary": "Énumérer les findings"
+  },
+  "CreateSecurityMonitoringSuppression": {
+    "description": "Créez une nouvelle règle de suppression.",
+    "summary": "Obtenir un finding",
+    "request_description": "La définition de la nouvelle règle de suppression.",
+    "request_schema_description": "Objet de requête qui inclut la règle de suppression que vous souhaitez créer."
+  },
+  "DeleteSecurityMonitoringSuppression": {
+    "description": "Supprimez une règle de suppression spécifique.",
+    "summary": "Désactiver ou réactiver les notifications d'un finding"
+  },
+  "GetSecurityMonitoringSuppression": {
+    "description": "Obtenez les détails d'une règle de suppression spécifique.",
+    "summary": "Récupérer tous les filtres de sécurité"
+  },
+  "UpdateSecurityMonitoringSuppression": {
+    "description": "Mettez à jour une règle de suppression spécifique.",
+    "summary": "Créer un filtre de sécurité",
+    "request_description": "Nouvelle définition de la règle de suppression. Prend en charge les mises à jour partielles.",
+    "request_schema_description": "Objet de requête contenant les champs à mettre à jour dans la règle de suppression."
   },
   "ListSecurityMonitoringRules": {
     "description": "Énumérez les règles.",
@@ -319,6 +1272,13 @@
   "CreateSecurityMonitoringRule": {
     "description": "Créez une règle de détection.",
     "summary": "Créer une règle de détection",
+    "request_description": "",
+    "request_schema_description": "Créez une nouvelle règle."
+  },
+  "ValidateSecurityMonitoringRule": {
+    "description": "Validez une règle de détection.",
+    "summary": "Valider une règle de détection",
+    "request_description": "",
     "request_schema_description": "Créez une nouvelle règle."
   },
   "DeleteSecurityMonitoringRule": {
@@ -332,16 +1292,126 @@
   "UpdateSecurityMonitoringRule": {
     "description": "Mettez à jour une règle existante. Si vous mettez à jour `cases`, `queries` ou `options`, le champ complet doit être inclus. Par exemple, lorsque vous modifiez une requête, toutes les requêtes doivent être incluses. Les règles par défaut peuvent être mises à jour uniquement pour être activées ou pour modifier les notifications.",
     "summary": "Mettre à jour une règle existante",
+    "request_description": "",
     "request_schema_description": "Mettez à jour une règle existante."
   },
   "ListSecurityMonitoringSignals": {
-    "description": "L'endpoint List renvoie les signaux de sécurité qui correspondent à une requête de recherche. Cet endpoint et l'endpoint POST peuvent tous les deux être utilisés pour énumérer des signaux de sécurité.",
+    "description": "L'endpoint de liste renvoie les signaux de sécurité qui correspondent à une requête de recherche. Cet endpoint et l'endpoint POST peuvent tous les deux être utilisés pour énumérer des signaux de sécurité.",
     "summary": "Récupérer une liste rapide de signaux de sécurité"
   },
   "SearchSecurityMonitoringSignals": {
     "description": "Renvoie les signaux de sécurité qui correspondent à une requête de recherche. Cet endpoint et l'endpoint GET peuvent tous les deux être utilisés pour énumérer des signaux de sécurité.",
     "summary": "Récupérer une liste de signaux de sécurité",
-    "request_schema_description": "La requête de récupération d'une liste de signaux de sécurité."
+    "request_description": "",
+    "request_schema_description": "La requête de récupération de la liste de signaux de sécurité."
+  },
+  "GetSecurityMonitoringSignal": {
+    "description": "Récupérez les détails d'un signal.",
+    "summary": "Récupérer les détails d'un signal"
+  },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "Modifiez l'attributaire du triage d'un signal de sécurité.",
+    "summary": "Modifier la personne affectée au triage d'un signal de sécurité",
+    "request_description": "Attributs décrivant la mise à jour du signal.",
+    "request_schema_description": "Corps de la requête de changement d'attributaire d'un signal de surveillance de sécurité donné."
+  },
+  "EditSecurityMonitoringSignalIncidents": {
+    "description": "Modifiez les incidents liés à un signal de sécurité.",
+    "summary": "Modifier les incidents associés à un signal de sécurité",
+    "request_description": "Attributs décrivant la mise à jour du signal.",
+    "request_schema_description": "Corps de la requête de changement des incidents liés d'un signal de surveillance de sécurité donné."
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "Modifiez l'état de triage d'un signal de sécurité.",
+    "summary": "Modifier l'état de triage d'un signal de sécurité",
+    "request_description": "Attributs décrivant la mise à jour du signal.",
+    "request_schema_description": "Corps de la requête de changement d'état d'un signal de surveillance de sécurité donné."
+  },
+  "ListScanningGroups": {
+    "description": "Énumérez tous les groupes dʼanalyse de votre organisation.",
+    "summary": "Énumérer les groupes d'analyse"
+  },
+  "ReorderScanningGroups": {
+    "description": "Réorganisez la liste des groupes.",
+    "summary": "Réorganiser les groupes",
+    "request_description": "",
+    "request_schema_description": "Requête de réorganisation groupée."
+  },
+  "CreateScanningGroup": {
+    "description": "Créer un groupe dʼanalyse.\nLa demande PEUT inclure une relation de configuration.\nUne relation de règles peut être omise complètement, mais si elle est incluse, elle DOIT être\nnull ou un tableau vide (les règles ne peuvent pas être créées en même temps).\nLe nouveau groupe sera classé en dernier dans la configuration.",
+    "summary": "Créer un groupe d'analyse",
+    "request_description": "",
+    "request_schema_description": "Créez une requête de groupe."
+  },
+  "DeleteScanningGroup": {
+    "description": "Supprimez un groupe donné.",
+    "summary": "Supprimer un groupe d'analyse",
+    "request_description": "",
+    "request_schema_description": "Requête de suppression de groupe."
+  },
+  "UpdateScanningGroup": {
+    "description": "Mettez à jour un groupe, y compris l'ordre des règles.\nLes règles au sein du groupe sont réorganisées en incluant une relation entre les règles. Si la relation\nest présente, sa section de données DOIT contenir des liens pour toutes les règles\nactuellement dans le groupe et NE DOIT PAS en contenir d'autres.",
+    "summary": "Mettre à jour un groupe d'analyse",
+    "request_description": "",
+    "request_schema_description": "Requête de mise à jour de groupe."
+  },
+  "CreateScanningRule": {
+    "description": "Créez une règle d'analyse dans un groupe d'analyseurs de données sensibles, classée en dernier.\nLa règle affichée DOIT inclure une relation de groupe.\nElle DOIT inclure soit une relation standard_pattern, soit un attribut regex, mais pas les deux.\nSi included_attributes est vide ou manquant, nous analyserons tous les attributs à l'exception de\nexcluded_attributes. Si les deux sont absents, nous analyserons l'ensemble de lʼévénement.",
+    "summary": "Créer une règle d'analyse",
+    "request_description": "",
+    "request_schema_description": "Créer une requête de règle."
+  },
+  "DeleteScanningRule": {
+    "description": "Supprimez une règle donnée.",
+    "summary": "Supprimer une règle d'analyse",
+    "request_description": "",
+    "request_schema_description": "Supprimez une requête de règle."
+  },
+  "UpdateScanningRule": {
+    "description": "Mettez à jour une règle d'analyse.\nLe corps de la requête NE DOIT PAS inclure une relation standard_pattern, car cette relation n'est pas modifiable.\nEssayer de modifier l'attribut regex d'une règle avec une relation standard_pattern\nentraînera également une erreur.",
+    "summary": "Mettre à jour une règle d'analyse",
+    "request_description": "",
+    "request_schema_description": "Mettez à jour une requête de règle."
+  },
+  "ListStandardPatterns": {
+    "description": "Renvoie tous les modèles standard.",
+    "summary": "Énumérer les patterns standard"
+  },
+  "SubmitMetrics": {
+    "description": "L'endpoint de métriques vous permet d'envoyer des données de série temporelle afin de les représenter graphiquement dans les dashboards de Datadog.\nLa limite de taille des charges utiles compressées est de 500 Ko (512 000 octets), tandis que celle des charges utiles non compressées est de 5 Mo (5 242 880 octets).\n\nSi vous envoyez directement des métriques à l'API Datadog sans passer par DogStatsD, vous pouvez compter :\n\n- 64 bits pour le timestamp\n- 64 bits pour la valeur\n- 20 octets pour les noms de métriques\n- 50 octets pour la série temporelle\n- La charge utile totale fait environ 100 octets.\n\nLe nom du hast est celui des ressources dans le champ Ressources.",
+    "summary": "Envoyer des métriques",
+    "request_description": "",
+    "request_schema_description": "La charge utile des métriques."
+  },
+  "CreateServiceAccount": {
+    "description": "Créez un compte de service pour votre organisation.",
+    "summary": "Créer un compte de service",
+    "request_description": "",
+    "request_schema_description": "Créez un compte de service."
+  },
+  "ListServiceAccountApplicationKeys": {
+    "description": "Énumérez toutes les clés d'application disponibles pour ce compte de service.",
+    "summary": "Répertorier les clés d'application pour ce compte de service"
+  },
+  "CreateServiceAccountApplicationKey": {
+    "description": "Créez une clé d'application pour ce compte de service.",
+    "summary": "Créer une clé d'application pour ce compte de service",
+    "request_description": "",
+    "request_schema_description": "Requête utilisée pour créer une clé d'application."
+  },
+  "DeleteServiceAccountApplicationKey": {
+    "description": "Supprimez une clé d'application appartenant à ce compte de service.",
+    "summary": "Supprimer une clé d'application pour ce compte de service"
+  },
+  "GetServiceAccountApplicationKey": {
+    "description": "Récupérez une clé d'application appartenant à ce compte de service.",
+    "summary": "Récupérer une clé d'application pour ce compte de service"
+  },
+  "UpdateServiceAccountApplicationKey": {
+    "description": "Modifiez une clé d'application appartenant à ce compte de service.",
+    "summary": "Modifier une clé d'application pour ce compte de service",
+    "request_description": "",
+    "request_schema_description": "Requête utilisée pour mettre à jour une clé d'application."
   },
   "ListIncidentServices": {
     "description": "Récupérez tous les services liés à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces services.",
@@ -352,6 +1422,24 @@
     "summary": "Créer un service lié à un incident",
     "request_description": "Charge utile de service lié à un incident.",
     "request_schema_description": "Requête de création avec une charge utile de service lié à un incident."
+  },
+  "ListServiceDefinitions": {
+    "description": "Récupérez la liste des définitions du catalogue de services de Datadog.",
+    "summary": "Récupérer toutes les définitions de service"
+  },
+  "CreateOrUpdateServiceDefinitions": {
+    "description": "Créez ou mettez à jour la définition du service dans le catalogue de services de Datadog.",
+    "summary": "Créer ou mettre à jour une définition de service",
+    "request_description": "Définition du service YAML/JSON.",
+    "request_schema_description": "Créez une requête de définitions de services."
+  },
+  "DeleteServiceDefinition": {
+    "description": "Supprimez une seule définition de service dans le catalogue de services de Datadog.",
+    "summary": "Supprimer une définition de service unique"
+  },
+  "GetServiceDefinition": {
+    "description": "Récupérez une seule définition de service dans le catalogue de services de Datadog.",
+    "summary": "Récupérer une définition de service unique"
   },
   "DeleteIncidentService": {
     "description": "Supprime un service lié à un incident existant.",
@@ -366,6 +1454,124 @@
     "summary": "Mettre à jour un service lié à un incident existant",
     "request_description": "Charge utile du service lié à un incident.",
     "request_schema_description": "Requête de mise à jour avec une charge utile de service lié à un incident."
+  },
+  "CreateSLOReportJob": {
+    "description": "Créer une tâche pour générer un rapport SLO. La tâche de rapport est traitée de manière asynchrone et aboutit finalement à un rapport CSV disponible en téléchargement.\n\nVérifiez le statut de la tâche téléchargez le rapport CSV en utilisant l'identifiant `report_id` renvoyé.",
+    "summary": "Créer un nouveau rapport SLO",
+    "request_description": "Créez le corps de la requête de tâche de rapport SLO.",
+    "request_schema_description": "Le corps de la requête de rapport SLO."
+  },
+  "GetSLOReport": {
+    "description": "Téléchargez un rapport SLO. Cette opération ne peut être effectuée qu'une fois le travail de rapport terminé.\n\nL'existence des rapports n'est pas garantie indéfiniment. Datadog vous recommande de télécharger le rapport dès qu'il est disponible.",
+    "summary": "Obtenir un rapport SLO"
+  },
+  "GetSLOReportJobStatus": {
+    "description": "Récupérez le statut du rapport SLO.",
+    "summary": "Obtenir le statut du rapport SLO"
+  },
+  "AggregateSpans": {
+    "description": "Lʼendpoint dʼAPI pour agréger des spans en buckets et calculer des métriques et des séries temporelles.\nCet endpoint est limité à `300` requêtes par heure.",
+    "summary": "Agréger des spans",
+    "request_description": "",
+    "request_schema_description": "L'objet envoyé avec la requête pour récupérer une liste de spans agrégés de votre organisation. "
+  },
+  "ListSpansGet": {
+    "description": "L'endpoint de liste renvoie les spans qui correspondent à la requête de recherche.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour afficher vos derniers spans.\nLe débit de cet endpoint est limité à `300` requêtes par heure.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api\n",
+    "summary": "Obtenir la liste des spans"
+  },
+  "ListSpans": {
+    "description": "L'endpoint de liste renvoie les spans qui correspondent à la requête de recherche.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour afficher vos derniers spans.\nLe débit de cet endpoint est limité à `300` requêtes par heure.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api\n",
+    "summary": "Rechercher des spans",
+    "request_description": "",
+    "request_schema_description": "La requête pour une liste de spans."
+  },
+  "GetOnDemandConcurrencyCap": {
+    "description": "Récupérez la limite de simultanéité à la demande.",
+    "summary": "Récupérer la limite de simultanéité à la demande"
+  },
+  "SetOnDemandConcurrencyCap": {
+    "description": "Enregistrez la nouvelle valeur de la limite de simultanéité à la demande.",
+    "summary": "Enregistrer une nouvelle valeur comme limite de simultanéité à la demande",
+    "request_description": ".",
+    "request_schema_description": "Attributs de la limite de simultanéité à la demande."
+  },
+  "ListTeams": {
+    "description": "Récupérez toutes les équipes.\nPeut être utilisé pour rechercher des équipes en utilisant les paramètres de requête `filter[keyword]` et `filter[me]`.",
+    "summary": "Obtenir toutes les équipes"
+  },
+  "CreateTeam": {
+    "description": "Créez une nouvelle équipe.\nLes ID des utilisateurs transmis via le champ de relation `users` sont ajoutés à l'équipe.",
+    "summary": "Créer une équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de création d'une équipe"
+  },
+  "DeleteTeam": {
+    "description": "Supprimez une équipe en utilisant son `id`.",
+    "summary": "Supprimer une équipe"
+  },
+  "GetTeam": {
+    "description": "Récupérez une seule équipe en utilisant l'`id` de l'équipe.",
+    "summary": "Obtenir une équipe"
+  },
+  "UpdateTeam": {
+    "description": "Mettez à jour une équipe en utilisant son `id`.\nSi la relation `team_links` est présente, les liens associés sont mis à jour dans l'ordre où ils apparaissent dans le tableau, et tous les liens d'équipe existants qui ne sont pas présents sont supprimés.",
+    "summary": "Mettre à jour une équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de mise à jour de l'équipe"
+  },
+  "GetTeamLinks": {
+    "description": "Récupérez tous les liens pour une équipe donnée.",
+    "summary": "Récupérer les liens d'une équipe"
+  },
+  "CreateTeamLink": {
+    "description": "Ajoutez un nouveau lien à une équipe.",
+    "summary": "Créer un lien d'équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de création d'un lien d'équipe"
+  },
+  "DeleteTeamLink": {
+    "description": "Supprimez un lien d'une équipe.",
+    "summary": "Supprimer le lien d'une équipe"
+  },
+  "GetTeamLink": {
+    "description": "Récupérez un lien unique pour une équipe.",
+    "summary": "Obtenir le lien d'une équipe"
+  },
+  "UpdateTeamLink": {
+    "description": "Mettez à jour un lien d'équipe.",
+    "summary": "Mettre à jour le lien d'une équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de création d'un lien d'équipe"
+  },
+  "GetTeamMemberships": {
+    "description": "Récupérez une liste paginée des membres d'une équipe",
+    "summary": "Obtenir la composition d'une équipe"
+  },
+  "CreateTeamMembership": {
+    "description": "Ajoutez un utilisateur à une équipe.",
+    "summary": "Ajouter un utilisateur à une équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de composition dʼéquipe"
+  },
+  "DeleteTeamMembership": {
+    "description": "Supprimez un utilisateur d'une équipe.",
+    "summary": "Supprimer un utilisateur d'une équipe"
+  },
+  "UpdateTeamMembership": {
+    "description": "Mettez à jour les attributs d'appartenance d'un utilisateur à une équipe.",
+    "summary": "Modifier les attributs d'appartenance d'un utilisateur à une équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de composition dʼéquipe"
+  },
+  "GetTeamPermissionSettings": {
+    "description": "Récupérez tous les paramètres d'autorisation pour une équipe donnée.",
+    "summary": "Récupérer les paramètres d'autorisation d'une équipe"
+  },
+  "UpdateTeamPermissionSetting": {
+    "description": "Mettez à jour un paramètre dʼautorisation d'équipe pour une équipe donnée.",
+    "summary": "Mettre à jour le paramètre d'autorisation d'une équipe",
+    "request_description": "",
+    "request_schema_description": "Requête de mise à jour du paramètre dʼautorisation de l'équipe"
   },
   "ListIncidentTeams": {
     "description": "Récupérez toutes les équipes liées à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces équipes.",
@@ -391,9 +1597,42 @@
     "request_description": "Charge utile d'équipe liée à un incident.",
     "request_schema_description": "Requête de mise à jour avec une charge utile d'équipe liée à un incident."
   },
+  "GetUsageApplicationSecurityMonitoring": {
+    "description": "Récupérez l'utilisation horaire pour la sécurité des applications.\n**Remarque :** Cet endpoint est obsolète. Les données d'utilisation horaire pour tous les produits sont maintenant disponibles dans l'API [l'API Obtenir l'utilisation horaire par famille de produits] (https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).",
+    "summary": "Récupérer l'utilisation horaire pour Application Security"
+  },
+  "GetCostByOrg": {
+    "description": "Récupérez les coûts dans un compte multi-org.\nLes données sur les coûts par organisation pour un mois donné sont disponibles au plus tard le 16 du mois suivant.\n**Remarque :** Cet endpoint est obsolète. Veuillez utiliser le nouvel endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\nà la place.",
+    "summary": "Récupérer le coût global d'un compte multi-org"
+  },
+  "GetEstimatedCostByOrg": {
+    "description": "Obtenez une estimation des coûts pour les comptes multi-org et les comptes root-org uniques.\nLes données relatives aux coûts estimés ne sont disponibles que pour le mois en cours et le mois précédent.\nElles sont décalées de 72 heures par rapport à la date à laquelle elles ont été engagées.\nPour accéder aux coûts historiques antérieurs, utilisez lʼendpoint `/historical_cost`.",
+    "summary": "Récupérer le coût estimé de votre compte"
+  },
+  "GetHistoricalCostByOrg": {
+    "description": "Obtenez l'historique des coûts pour les comptes multi-org et les comptes simple root-org.\nLes données relatives aux coûts pour un mois donné sont disponibles au plus tard le 16 du mois suivant.",
+    "summary": "Récupérer le coût historique de votre compte"
+  },
+  "GetHourlyUsage": {
+    "description": "Récupérez l'utilisation horaire par famille de produits.",
+    "summary": "Récupérer l'utilisation horaire par famille de produits"
+  },
+  "GetUsageLambdaTracedInvocations": {
+    "description": "Récupérez l'utilisation horaire pour les invocations tracées Lambda.\n**Remarque :** Cet endpoint est obsolète. Les données d'utilisation horaire pour tous les produits sont maintenant disponibles dans l'API [l'API Obtenir l'utilisation horaire par famille de produits] (https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).",
+    "summary": "Obtenir l'utilisation horaire des invocations tracées de Lambda"
+  },
+  "GetUsageObservabilityPipelines": {
+    "description": "Récupérez l'utilisation horaire pour les pipelines dʼobservation.\n**Remarque :** Cet endpoint est obsolète. Les données d'utilisation horaire pour tous les produits sont maintenant disponibles dans l'API [l'API Obtenir l'utilisation horaire par famille de produits] (https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).",
+    "summary": "Récupérer l'utilisation horaire pour les pipelines d'observabilité"
+  },
+  "GetProjectedCost": {
+    "description": "Obtenez les coûts prévisionnels pour les comptes multi-org et les comptes simple root-org.\nLes données relatives aux coûts prévisionnels ne sont disponibles que pour le mois en cours et le sont vers le 12 du mois.\nCet endpoint nécessite le contexte usage_read.",
+    "summary": "Récupérer le coût historique de votre compte"
+  },
   "SendInvitations": {
     "description": "Invitez par e-mail un ou plusieurs utilisateurs à rejoindre votre organisation.",
     "summary": "Envoyer des invitations par e-mail",
+    "request_description": "",
     "request_schema_description": "Objet pour inviter des utilisateurs à rejoindre l'organisation."
   },
   "GetInvitation": {
@@ -407,6 +1646,7 @@
   "CreateUser": {
     "description": "Créez un utilisateur pour votre organisation.",
     "summary": "Créer un utilisateur",
+    "request_description": "",
     "request_schema_description": "Créez un utilisateur."
   },
   "DisableUser": {
@@ -420,6 +1660,7 @@
   "UpdateUser": {
     "description": "Modifiez un utilisateur. Nécessite une clé d'application appartenant à un administrateur.",
     "summary": "Mettre à jour un utilisateur",
+    "request_description": "",
     "request_schema_description": "Mettez à jour un utilisateur."
   },
   "ListUserOrganizations": {
@@ -429,5 +1670,9 @@
   "ListUserPermissions": {
     "description": "Récupérez l'ensemble des autorisations d'un utilisateur. Renvoie la liste des autorisations de l'utilisateur octroyées par ses rôles.",
     "summary": "Récupérer les autorisations d'un utilisateur"
+  },
+  "GetUserMemberships": {
+    "description": "Récupérer la liste des adhésions pour un utilisateur",
+    "summary": "Obtenir les équipes dont un utilisateur fait partie"
   }
 }

@@ -3,6 +3,7 @@ app_id: zabbix
 app_uuid: 9b7022c4-95c7-4872-83b6-7eaba2cc9d88
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,7 +14,8 @@ assets:
       prefix: zabbix.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Zabbix
+    source_type_id: 10166
+    source_type_name: Zabbix (コミュニティバージョン)
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
@@ -21,6 +23,8 @@ author:
   support_email: KosukeKamiya@users.noreply.github.com
 categories:
 - ネットワーク
+- イベント管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_on_public_website: true
@@ -30,10 +34,8 @@ integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: zabbix
-oauth: {}
 public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
 supported_os:
@@ -44,9 +46,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Network
+  - Category::Event Management
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
   media: []
@@ -55,6 +59,7 @@ tile:
   title: zabbix
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +85,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Zabbix サーバーのタイムゾーンが UTC に設定されていることを確認してください。Zabbix のタイムゾーンの詳細については、[Zabbix ドキュメント][5]を参照してください。
 
@@ -110,7 +115,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 
 3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
-``` 
+```
     try {
         Zabbix.Log(4, '[datadog webhook] received value=' + value);
 
@@ -162,7 +167,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 Zabbix アラートは Datadog イベントストリームのイベントとして収集されます。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "zabbix" >}}
 
 
@@ -172,7 +177,7 @@ Zabbix アラートは Datadog イベントストリームのイベントとし�
 
 
 [1]: https://www.zabbix.com/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone

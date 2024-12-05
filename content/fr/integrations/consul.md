@@ -45,10 +45,9 @@ integration_id: consul
 integration_title: Consul
 integration_version: 2.2.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: consul
-oauth: {}
 public_title: Consul
 short_description: Recevez des alertes en fonction des checks de santé Consul, visualisez
   les mappages entre services et nœuds, et plus encore.

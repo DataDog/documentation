@@ -7,16 +7,15 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/ruby
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
 - link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
   tag: ブログ
   text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
-kind: ドキュメント
 title: Ruby プロファイラーの有効化
 type: multi-code-lang
 ---
@@ -25,14 +24,16 @@ type: multi-code-lang
 
 ## 要件
 
-Datadog プロファイラーには Ruby 2.3+ が必要です (JRuby と TruffleRuby はサポートされていません)。
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
+
+The Datadog Profiler requires Ruby 2.5+. JRuby and TruffleRuby are not supported.
 
 以下の OS、アーキテクチャに対応しています。
 - Linux (GNU libc) x86-64、aarch64
 - Alpine Linux (musl libc) x86-64、aarch64
 
-また、[`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) または [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux システムユーティリティのいずれかがインストールされている必要があります。
-このユーティリティは、ほとんどの Linux ディストリビューションのソフトウェアリポジトリで入手できます。例:
+You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
+This utility is available on the software repositories of most Linux distributions. For example:
 
 - `pkg-config` パッケージは [Homebrew](https://formulae.brew.sh/formula/pkg-config)、[Debian](https://packages.debian.org/search?keywords=pkg-config) および [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config) ベースの Linux で利用可能です
 - `pkgconf` パッケージは [Arch](https://archlinux.org/packages/?q=pkgconf) および [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf) ベースの Linux で利用可能です
@@ -40,22 +41,23 @@ Datadog プロファイラーには Ruby 2.3+ が必要です (JRuby と Truffle
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
+[Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
+Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
+
 ## インストール
 
 アプリケーションのプロファイリングを開始するには
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][2] 以降または [6.20.2][3] 以降にアップグレードしてください。
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-2. `ddtrace` および `google-protobuf` gem を `Gemfile` または `gems.rb` ファイルに追加します。
+2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.0'
-    gem 'google-protobuf', '~> 3.0'
+    gem 'datadog', '~> 2.0'
     ```
+3. `bundle install` で gem をインストールします。
 
-2. `bundle install` で gem をインストールします。
-
-3. プロファイラーを有効にします。
+4. プロファイラーを有効にします。
 
    {{< tabs >}}
 {{% tab "環境変数" %}}
@@ -84,41 +86,46 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Ruby アプリケーションの起動コマンドに `ddtracerb exec` コマンドを追加します。
+5. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
-    bundle exec ddtracerb exec ruby myapp.rb
+    bundle exec ddprofrb exec ruby myapp.rb
     ```
 
     Rails の例:
 
     ```shell
-    bundle exec ddtracerb exec bin/rails s
+    bundle exec ddprofrb exec bin/rails s
     ```
+
+    If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
     **注**
 
-    アプリケーションを `ddtracerb exec` で起動する選択肢がない (Phusion Passenger ウェブサーバーを使用している) 場合、Web アプリケーションの `config.ru` などのアプリケーションエントリポイントに以下を追加してプロファイラーを起動することも可能です。
+    If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
     ```ruby
     require 'datadog/profiling/preload'
     ```
 
+6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-4. Ruby アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][4]にプロファイルが表示されます。
+7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
 
 ## 次のステップ
 
-[プロファイラーの概要][5]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://app.datadoghq.com/profiling
-[5]: /ja/getting_started/profiler/
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
+[4]: /ja/integrations/guide/source-code-integration/?tab=ruby
+[5]: https://app.datadoghq.com/profiling
+[6]: /ja/getting_started/profiler/
 [12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/

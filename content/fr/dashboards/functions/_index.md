@@ -21,7 +21,6 @@ further_reading:
 - link: /metrics/#interroger-des-metriques
   tag: Documentation
   text: Interroger des métriques
-kind: documentation
 title: Fonctions
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Integration Monitor
-kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 aliases:
 - /monitors/monitor_types/integration
@@ -12,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -27,18 +26,12 @@ To create an [integration monitor][2] in Datadog:
 
 1. Use the main navigation: *Monitors --> New Monitor --> Integration*.
 2. Search for an integration or select it from the list or images.
-3. Choose an **Integration Metric** or **Integration Status** monitor:
-    {{< img src="monitors/monitor_types/integration/metric_or_status.png" alt="Metric or Status" style="width:90%;">}}
 
 ### Integration metric
 
 Create an integration metric monitor by following the instructions in the [metric monitor][3] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][4] page.
 
-### Integration status
-
-If the integration has a service check, the **Integration Status** tab is active.
-
-**Note**: If the integration does not submit metrics or service checks, it will show up as "Misconfigured".
+**Note**: To configure an integration monitor, ensure that the integration submits metrics or service checks.
 
 #### Pick a check
 
@@ -79,7 +72,7 @@ Set up the check alert:
     Choose how many consecutive runs with the `OK` status resolve the alert.
 
 
-[1]: /monitors/manage/status
+[1]: /monitors/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
@@ -105,14 +98,14 @@ See the [Monitor configuration][5] documentation for information on [No data][6]
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][9] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][9] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
-[2]: https://app.datadoghq.com/monitors#create/integration
+[2]: https://app.datadoghq.com/monitors/create/integration
 [3]: /monitors/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /monitors/configuration/#advanced-alert-conditions

@@ -1,16 +1,19 @@
 ---
 app_id: rum-expo
 app_uuid: 6894cf91-e7a2-4600-966b-20a0c99ff08d
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メトリクス
-- モバイル
+- ログの収集
+- モニター
+- apm
 - ネットワーク
-- トレーシング
+- tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_expo/README.md
 display_on_public_website: true
@@ -20,38 +23,38 @@ integration_id: rum-expo
 integration_title: Expo
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rum_expo
-oauth: {}
 public_title: Expo
 short_description: Datadog RUM を使用した Expo アプリケーションの監視とメトリクス生成
 supported_os:
 - android
-- linux
-- windows
 - ios
-- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
   - Category::Network
   - Category::Tracing
   - Supported OS::Android
-  - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::iOS
-  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Expo アプリケーションの監視とメトリクス生成
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/reactnative/expo/
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/error_tracking/expo/
   support: README.md#Support
   title: Expo
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -98,7 +101,7 @@ Expo インテグレーションには、メトリクスは含まれていませ
 
 イベントや属性の詳細については、[RUM Expo モニタリング][5]を参照してください。
 
-### サービスのチェック
+### サービスチェック
 
 Expo インテグレーションには、サービスのチェック機能は含まれません。
 

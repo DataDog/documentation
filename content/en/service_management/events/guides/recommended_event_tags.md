@@ -1,6 +1,6 @@
 ---
 title: Best Practices For Tagging Events
-kind: guide
+
 description: Learn about recommended event tags and how to add them.
 aliases:
 - /events/guides/recommended_event_tags
@@ -45,7 +45,7 @@ You can add the following core attributes to your events:
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /service_management/events/explorer
 [3]: /api/latest/events/#post-an-event
-[4]: /getting_started/monitors/#notify-your-team
+[4]: /getting_started/monitors/#notify-your-services-and-your-team-members
 [5]: /getting_started/tagging/assigning_tags
 [6]: /integrations/
 [7]: https://app.datadoghq.com/event/explorer

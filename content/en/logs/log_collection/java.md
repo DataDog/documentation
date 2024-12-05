@@ -1,6 +1,5 @@
 ---
 title: Java Log Collection
-kind: documentation
 aliases:
   - /logs/languages/java
 further_reading:
@@ -78,7 +77,9 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
       <version>6.6</version>
     </dependency>
     ```
-2. Configure a file appender using the JSON layout in `logback.xml`:
+2. Configure an appender using the JSON layout in `logback.xml`:
+
+    For file:
 
     ```xml
     <configuration>
@@ -93,13 +94,31 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
     </configuration>
     ```
 
+    For console:
+
+    ```xml
+    <configuration>
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+      </appender>
+
+      <root>
+        <level value="DEBUG"/>
+          <appender-ref ref="CONSOLE"/>
+        </root>
+    </configuration>
+    ```
+
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
 Log4j 2 includes a JSON layout.
 
-1. Configure a file appender using the JSON layout in `log4j2.xml`:
+1. Configure an appender using the JSON layout in `log4j2.xml`:
+
+    For a file appender:
+
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <Configuration>
@@ -116,6 +135,28 @@ Log4j 2 includes a JSON layout.
       </Loggers>
     </Configuration>
     ```
+
+    For a console appender:
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration>
+
+        <Appenders>
+            <Console name="console" target="SYSTEM_OUT">
+                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
+            </Console>
+        </Appenders>
+
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="console"/>
+            </Root>
+
+        </Loggers>
+    </Configuration>
+    ```
+
 2. Add the JSON layout dependencies to your `pom.xml`:
     ```xml
     <dependency>
@@ -176,6 +217,30 @@ Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
     ```
 
 [1]: https://github.com/logstash/logstash-logback-encoder
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+Create a JSON writer configuration based on the [official Tinylog documentation][1].
+
+
+Use the following format in a `tinylog.properties` file:
+
+```properties
+writer                     = json
+writer.file                = log.json
+writer.format              = LDJSON
+writer.level               = info
+writer.field.level         = level
+writer.field.source        = {class}.{method}()
+writer.field.message       = {message}
+writer.field.dd.trace_id   = {context: dd.trace_id}
+writer.field.dd.span_id    = {context: dd.span_id}
+writer.field.dd.service    = {context: dd.service}
+writer.field.dd.version    = {context: dd.version}
+writer.field.dd.env        = {context: dd.env}
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -257,6 +322,22 @@ Configure a file appender in `logback.xml`:
 </configuration>
 ```
 
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+Create a writer configuration outputting to a file based on the [official Tinylog documentation][1].
+
+
+Use the following format in a `tinylog.properties` file:
+
+```properties
+writer          = file
+writer.level    = debug
+writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
+writer.file     = log.txt
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
 {{% /tab %}}
 {{< /tabs >}}
 

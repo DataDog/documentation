@@ -2,7 +2,6 @@
 aliases:
 - /ja/agent/faq/agent-apm-metrics/
 - /ja/tracing/send_traces/agent-apm-metrics/
-kind: ドキュメント
 title: Datadog Agent によって送信された APM メトリクス
 ---
 
@@ -44,9 +43,13 @@ GO のランタイムで報告されたヒープ割り当て。
 : **タイプ**: カウント<br>
 システムがフィールドを受け入れるため変更する必要がある不正フィールドを持つスパンの数
 
-`datadog.trace_agent.obfuscations`
+`datadog.trace_agent.obfuscation.sql_cache.hits`
 : **タイプ**: カウント<br>
-SQL の難読化が発生するたびに 1 増加。
+対応するキーに対して値が見つかった GET コールの回数。
+
+`datadog.trace_agent.obfuscation.sql_cache.misses`
+: **タイプ**: カウント<br>
+対応するキーに対して値が見つからなかった GET コールの回数。
 
 `datadog.trace_agent.panic`
 : **タイプ**: ゲージ<br>
@@ -84,10 +87,6 @@ Agent が受け入れたペイロード数。
 : **タイプ**: カウント<br>
 サンプリングが原因で受信者に拒否されたペイロードの数。
 
-`datadog.trace_agent.receiver.ratelimit`
-: **タイプ**: ゲージ<br>
-`1` 未満の場合、リソース使用量 (CPU またはメモリ) が多いためにペイロードが拒否されていることを意味します。
-
 `datadog.trace_agent.receiver.spans_dropped`
 : **タイプ**: カウント<br>
 Agent によってドロップされたスパンの数。
@@ -123,10 +122,6 @@ priority タグを持つ優先度サンプラーで処理されたトレース�
 `datadog.trace_agent.receiver.traces_received`
 : **タイプ**: カウント<br>
 受信済みおよび承認済みのトレース数。
-
-`datadog.trace_agent.service_writer.services`
-: **タイプ**: カウント<br>
-フラッシュしたサービス数。
 
 `datadog.trace_agent.started`
 : **タイプ**: カウント<br>
@@ -176,10 +171,6 @@ Datadog API でのエラーに対するリトライ回数
 : **タイプ**: カウント<br>
 送信されたバイト数 (GZIP 後に計算)。
 
-`datadog.trace_agent.trace_writer.bytes_estimated`
-: **タイプ**: カウント<br>
-Agent の内部アルゴリズムで推定されたバイト数。
-
 `datadog.trace_agent.trace_writer.bytes_uncompressed `
 : **タイプ**: カウント<br>
 送信されたバイト数 (GZIP 前に計算)。
@@ -215,10 +206,6 @@ Agent の内部アルゴリズムで推定されたバイト数。
 `datadog.trace_agent.trace_writer.flush_duration`
 : **タイプ**: ゲージ<br>
 ペイロードを Datadog API にフラッシュするのにかかった時間。
-
-`datadog.trace_agent.trace_writer.payloads`
-: **タイプ**: カウント<br>
-処理されたペイロード数。
 
 `datadog.trace_agent.trace_writer.payloads`
 : **タイプ**: カウント<br>

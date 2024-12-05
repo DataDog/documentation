@@ -1,6 +1,5 @@
 ---
 title: Forecasts Monitor
-kind: documentation
 aliases:
 - /guides/forecasts/
 - /monitors/monitor_types/forecasts
@@ -12,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -104,7 +103,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
 ## API
 
@@ -119,7 +118,7 @@ The `query` property in the request body should contain a query string in the fo
 ```
 
 * `aggregator`: Use `min` if the alert should trigger when the forecast goes below the threshold. Use `max` if the alert should trigger when the forecast goes above the threshold.
-* `query_window`: A timeframe, for example: `last_4h` or `last_7d`. The timeframe is recommended to be around five times the `alert_window`, but it must be at least as large as `alert_window`. This parameter controls the time range displayed in graphs included in notifications.
+* `query_window`: A timeframe, for example: `next_4h` or `next_7d`.
 * `metric_query`: A standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`.
 * `algorithm`: `linear` or `seasonal`
 * `deviations`: A number greater than or equal to one. This parameter controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive.
@@ -139,7 +138,7 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/forecast
+[1]: https://app.datadoghq.com/monitors/create/forecast
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /monitors/guide/recovery-thresholds/
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -148,5 +147,5 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 [7]: /monitors/types/metric/#data-window
 [8]: /monitors/notify/
 [9]: /api/v1/monitors/#create-a-monitor
-[10]: /monitors/manage/status/#settings
+[10]: /monitors/status/#settings
 [11]: /api/v1/monitors/

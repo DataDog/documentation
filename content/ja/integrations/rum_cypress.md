@@ -1,6 +1,7 @@
 ---
 app_id: rum-cypress
 app_uuid: a6c112b6-f3af-4f9e-bf25-e0f8d8d7bb5f
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -12,6 +13,7 @@ categories:
 - ネットワーク
 - テスト
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_cypress/README.md
 display_on_public_website: true
@@ -21,10 +23,8 @@ integration_id: rum-cypress
 integration_title: Cypress
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_cypress
-oauth: {}
 public_title: Cypress
 short_description: Datadog を使用したアプリケーションの Cypress テスト実行の監視
 supported_os:
@@ -38,6 +38,7 @@ tile:
   - Category::Testing
   - Category::Tracing
   - Supported OS::Any
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog を使用したアプリケーションの Cypress テスト実行の監視
   media: []
@@ -46,6 +47,7 @@ tile:
   title: Cypress
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -85,7 +87,7 @@ Cypress インテグレーションには、サービスのチェック機能は
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

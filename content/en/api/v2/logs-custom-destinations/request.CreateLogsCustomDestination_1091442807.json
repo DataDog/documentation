@@ -1,0 +1,25 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": false,
+      "forward_tags": false,
+      "forward_tags_restriction_list": [
+        "datacenter",
+        "host"
+      ],
+      "forward_tags_restriction_list_type": "ALLOW_LIST",
+      "forwarder_destination": {
+        "auth": {
+          "header_value": "my-secret",
+          "type": "custom_header",
+          "header_name": "MY-AUTHENTICATION-HEADER"
+        },
+        "endpoint": "https://example.com",
+        "type": "http"
+      },
+      "name": "Nginx logs",
+      "query": "source:nginx"
+    },
+    "type": "custom_destination"
+  }
+}

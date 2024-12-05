@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: 블로그
   text: Terraform으로 Datadog 관리
-kind: 가이드
 title: Terraform과 AWS 통합
 ---
 
@@ -65,6 +64,11 @@ title: Terraform과 AWS 통합
    resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
       role = "${aws_iam_role.datadog_aws_integration.name}"
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
+   }
+
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
    }
 
    resource "datadog_integration_aws" "sandbox" {

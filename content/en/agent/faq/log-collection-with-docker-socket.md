@@ -1,6 +1,5 @@
 ---
 title: Log collection with Docker socket
-kind: faq
 aliases:
  - /agent/faq/kubernetes-docker-socket-log-collection
 further_reading:
@@ -15,43 +14,86 @@ further_reading:
   text: "Custom Integrations"
 ---
 
-The Agent has then two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
+The Datadog Agent has a few ways to collect logs in containerized environments:
 
-* Docker is not the runtime, **or**
-* More than 10 containers are used on each node
+- Accessing Kubernetes log files stored in `/var/log/pods`
+- Accessing Docker log files stored in `/var/lib/docker/containers`
+- Requesting Docker logs from the Docker API and Docker socket
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers on the same node, collecting logs through the Docker socket might be consuming much more resources than going through the files:
+Datadog recommends that you use the log file approach for log collection because it is more resource-efficient. Additionally: in Kubernetes, most orchestrators use containerd as the container runtime instead of Docker, forcing the use of the log file method. Datadog's documentation uses the log file method by default. See [Docker log collection][1] and [Kubernetes log collection][2] for how to collect logs from log files.
 
-{{< tabs >}}
-{{% tab "DaemonSet" %}}
+This page discusses log collection with the Docker socket.
+
+## Configuration
 
 Mount the Docker socket into the Datadog Agent:
 
-```yaml
-  # (...)
-    env:
-      - {name: "DD_CRI_SOCKET_PATH", value: "/host/var/run/docker.sock"}
-      - {name: "DOCKER_HOST", value: "unix:///host/var/run/docker.sock"}
-  # (...)
-    volumeMounts:
-    #  (...)
-      - name: dockersocketdir
-        mountPath: /host/var/run
-  # (...)
-  volumes:
-    # (...)
-    - hostPath:
-        path: /var/run
-      name: dockersocketdir
-  # (...)
+{{< tabs >}}
+{{% tab "Docker" %}}
+Ensure that the Docker socket (`/var/run/docker.sock`) is mounted into the Agent container. You can see the [Docker log collection docs][1] for samples. However, leave out the mount point for `/var/lib/docker/containers`.
+
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+
+```shell
+docker run -d --name datadog-agent \
+    --cgroupns host \
+    --pid host \
+    -e DD_API_KEY=<DATADOG_API_KEY> \
+    -e DD_LOGS_ENABLED=true \
+    -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+    -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+    -e DD_SITE=<DD_SITE>
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    -v /proc/:/host/proc/:ro \
+    -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+    gcr.io/datadoghq/agent:latest
 ```
 
-**Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the Agent from recovering after a Docker daemon restart.
+[1]: /containers/docker/log
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+In Kubernetes, the Datadog Operator and Helm chart mount the `/var/run` directory into the Datadog Agent (by default) to give access to `/var/run/docker.sock`. You must disable `containerCollectUsingFiles` in the Operator and Helm Chart to opt-in to this method.
 
+**Note**: If your container runtime is not Docker (for example, CRI-O or containerd) this method does not work for log collection.
+
+#### Datadog Operator
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+      containerCollectUsingFiles: false
+```
+
+#### Helm
+```yaml
+datadog:
+  #(...)
+  logs:
+    enabled: true
+    containerCollectAll: true
+    containerCollectUsingFiles: false
+```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Autodiscovery
+After the socket is mounted, the same rules apply for the Agent for log discovery, tagging, and any custom Autodiscovery-based log integrations. The Agent accesses the underlying logs through the Docker socket instead.
+
+See the original docs for more information on setting up different Autodiscovery configurations for [Docker][1] and [Kubernetes][2].
 
 ### Short lived containers {#short-lived-container-socket}
 
 For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) once every second.
-Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
+Since Agent v6.14+, the Agent collects logs for all containers (running or stopped). This means that short-lived container logs that have started and stopped in the past second are still collected, as long as they are not removed.
+
+[1]: /containers/docker/log
+[2]: /containers/kubernetes/log

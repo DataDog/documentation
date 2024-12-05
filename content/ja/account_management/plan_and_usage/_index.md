@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: 計画と使用設定
 ---
 

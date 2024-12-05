@@ -18,7 +18,7 @@ integration_id: convox
 integration_title: Convox
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: convox

@@ -3,6 +3,7 @@ aliases:
 - /ja/logs/log_collection/syslog_ng
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
@@ -11,7 +12,6 @@ has_logo: true
 integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
-kind: インテグレーション
 name: syslog_ng
 public_title: Datadog-Syslog-ng インテグレーション
 short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
@@ -24,6 +24,10 @@ title: Syslog-ng
 ## 概要
 
 Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
+
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では <code>syslog-ng</code> のログ収集は利用できません。</div>
+{{< /site-region >}}
 
 ## セットアップ
 

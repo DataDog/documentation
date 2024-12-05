@@ -5,6 +5,7 @@ categories:
 - cloud
 - コンテナ
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Kubernetes Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_service/
@@ -15,7 +16,6 @@ integration_id: azure-containerservice
 integration_title: Microsoft Azure Kubernetes Service
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_container_service
 public_title: Datadog-Microsoft Azure Kubernetes Service インテグレーション
@@ -23,6 +23,7 @@ short_description: Azure Kubernetes Services のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Kubernetes Service を使用すると、実稼働準備が整った Kubernetes クラスターを迅速にデプロイできます。
@@ -45,7 +46,7 @@ Datadog Azure インテグレーションを使用して Azure Kubernetes Servic
 
 Azure Kubernetes Service インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Kubernetes Service インテグレーションには、サービスチェックは含まれません。
 

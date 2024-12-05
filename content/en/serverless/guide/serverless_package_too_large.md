@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Serverless Package Too Large Errors
-kind: documentation
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'
@@ -18,11 +17,11 @@ Typically Datadog adds two Lambda layers for instrumentation:
 - A language-specific library that instruments the function code, and
 - The extension, which aggregates, buffers, and forwards observability data to the Datadog backend.
 
-Inspect the content and size of the Datadog Lambda layers using AWS CLI command [`aws lambda get-layer-version`][3]. For example, running the following commands gives you links to download the Lambda layers for _Datadog-Node16-x version 67_ and _Datadog-Extension version 19_ and inspect the uncompressed size (about 30 MB combined). The uncompressed size varies by layers and versions. Replace the layer name and version number in the following example with those used by your applications:
+Inspect the content and size of the Datadog Lambda layers using AWS CLI command [`aws lambda get-layer-version`][3]. For example, running the following commands gives you links to download the Lambda layers for _Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} version {{< latest-lambda-layer-version layer="node" >}} and _Datadog-Extension version {{< latest-lambda-layer-version layer="extension" >}} and inspect the uncompressed size (about 30 MB combined). The uncompressed size varies by layers and versions. Replace the layer name and version number in the following example with those used by your applications:
 
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
   --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \

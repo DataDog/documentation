@@ -45,9 +45,10 @@
     }
 
     .ais-Hits-item {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
 
         & a {
+            display: block;
             flex-wrap: nowrap;
             flex-direction: column;
             border: none;
@@ -76,6 +77,7 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        word-break: break-word;
 
         & .ais-Hits-category,
         & .ais-Hits-subcategory,
@@ -88,6 +90,10 @@
             line-height: 24px;
             border: 0;
         }
+
+        & .ais-Hits-title {
+            display: inline;
+        }
     }
 
     .ais-Hits-category-spacer {
@@ -99,6 +105,7 @@
     }
 
     #pagination {
+        margin-top: 24px;
         align-self: flex-start;
     }
 

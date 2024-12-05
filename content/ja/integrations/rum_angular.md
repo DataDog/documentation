@@ -1,6 +1,7 @@
 ---
 app_id: rum-angular
 app_uuid: 0dd38c9b-921d-4252-8c46-c7a6d83c5778
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -9,6 +10,7 @@ author:
 categories:
 - メトリクス
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md
 display_on_public_website: true
@@ -18,10 +20,8 @@ integration_id: rum-angular
 integration_title: Angular
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_angular
-oauth: {}
 public_title: Angular
 short_description: Datadog RUM を使用した Angular アプリケーションの監視とメトリクス生成
 supported_os:
@@ -32,6 +32,7 @@ tile:
   - Category::Metrics
   - Category::Tracing
   - Supported OS::Any
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Angular アプリケーションの監視とメトリクス生成
   media: []
@@ -40,6 +41,7 @@ tile:
   title: Angular
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

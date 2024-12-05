@@ -1,0 +1,19 @@
+questions:
+- image: support.png
+  image_hover: support_p.png
+  link: https://help.datadoghq.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.datadoghq.com%2Fhc%2Fen-us&locale=1
+  name: support
+  text: 설치 및 설정, 사용 방법 알아보기
+  title: 지원
+- image: sales.png
+  image_hover: sales_p.png
+  link: https://www.datadoghq.com/about/contact/
+  name: sales
+  text: 설치 및 설정, 사용 방법 알아보기
+  title: 세일즈
+- image: faq.png
+  image_hover: faq_p.png
+  link: https://www.datadoghq.com/about/contact/
+  name: faq
+  text: 설치 및 설정, 사용 방법 알아보기
+  title: FAQ

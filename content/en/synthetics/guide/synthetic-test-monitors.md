@@ -1,6 +1,6 @@
 ---
-title: Using Synthetic Test Monitors
-kind: guide
+title: Use Synthetic Test Monitors
+
 description: Learn about Synthetic monitors created with your Synthetic tests. 
 further_reading:
 - link: "/monitors/manage/"
@@ -17,8 +17,6 @@ further_reading:
 ## Overview
 
 When you create a Synthetic test, Datadog automatically creates an associated monitor. You can set up notifications when the Synthetic test monitor alerts.
-
-{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Synthetic test monitor" style="width:100%;">}}
 
 ## Create a Synthetic test monitor
 

@@ -30,10 +30,9 @@ integration_id: neo4j
 integration_title: Neo4j
 integration_version: 2.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: neo4j
-oauth: {}
 public_title: Neo4j
 short_description: Permet de recueillir des métriques Neo4j
 supported_os:

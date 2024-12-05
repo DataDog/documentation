@@ -1,0 +1,317 @@
+{
+  "ListOktaAccounts": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": [
+            {
+              "attributes": {
+                "api_key": "string",
+                "auth_method": "oauth",
+                "client_id": "string",
+                "client_secret": "string",
+                "domain": "https://example.okta.com/",
+                "name": "Okta-Prod"
+              },
+              "id": "f749daaf-682e-4208-a38d-c9b43162c609",
+              "type": "okta-accounts"
+            }
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>List of Okta accounts.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes object for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The API key of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">auth_method&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The authorization method for an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Client ID of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_secret</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The client secret of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">domain&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The domain of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The ID of the Okta account, a UUID hash of the account name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Account type for an Okta account. \nAllowed enum values: <code>okta-accounts</code></p><p>default: <code>okta-accounts</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "CreateOktaAccount": {
+    "responses": {
+      "201": {
+        "json": {
+          "data": {
+            "attributes": {
+              "api_key": "string",
+              "auth_method": "oauth",
+              "client_id": "string",
+              "client_secret": "string",
+              "domain": "https://example.okta.com/",
+              "name": "Okta-Prod"
+            },
+            "id": "f749daaf-682e-4208-a38d-c9b43162c609",
+            "type": "okta-accounts"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Schema for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes object for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The API key of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">auth_method&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The authorization method for an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Client ID of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_secret</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The client secret of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">domain&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The domain of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The ID of the Okta account, a UUID hash of the account name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Account type for an Okta account. \nAllowed enum values: <code>okta-accounts</code></p><p>default: <code>okta-accounts</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "attributes": {
+            "auth_method": "oauth",
+            "domain": "https://example.okta.com/",
+            "name": "Okta-Prod"
+          },
+          "type": "okta-accounts"
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "api_key": "string",
+            "auth_method": "oauth",
+            "client_id": "string",
+            "client_secret": "string",
+            "domain": "https://example.okta.com/",
+            "name": "Okta-Prod"
+          },
+          "id": "f749daaf-682e-4208-a38d-c9b43162c609",
+          "type": "okta-accounts"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Schema for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes object for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The API key of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">auth_method&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The authorization method for an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Client ID of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_secret</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The client secret of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">domain&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The domain of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The ID of the Okta account, a UUID hash of the account name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Account type for an Okta account. \nAllowed enum values: <code>okta-accounts</code></p><p>default: <code>okta-accounts</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  },
+  "DeleteOktaAccount": {
+    "responses": {
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "GetOktaAccount": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "api_key": "string",
+              "auth_method": "oauth",
+              "client_id": "string",
+              "client_secret": "string",
+              "domain": "https://example.okta.com/",
+              "name": "Okta-Prod"
+            },
+            "id": "f749daaf-682e-4208-a38d-c9b43162c609",
+            "type": "okta-accounts"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Schema for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes object for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The API key of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">auth_method&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The authorization method for an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Client ID of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_secret</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The client secret of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">domain&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The domain of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The ID of the Okta account, a UUID hash of the account name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Account type for an Okta account. \nAllowed enum values: <code>okta-accounts</code></p><p>default: <code>okta-accounts</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "UpdateOktaAccount": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "api_key": "string",
+              "auth_method": "oauth",
+              "client_id": "string",
+              "client_secret": "string",
+              "domain": "https://example.okta.com/",
+              "name": "Okta-Prod"
+            },
+            "id": "f749daaf-682e-4208-a38d-c9b43162c609",
+            "type": "okta-accounts"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Schema for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes object for an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The API key of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">auth_method&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The authorization method for an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Client ID of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_secret</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The client secret of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">domain&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The domain of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The ID of the Okta account, a UUID hash of the account name.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Account type for an Okta account. \nAllowed enum values: <code>okta-accounts</code></p><p>default: <code>okta-accounts</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "attributes": {
+            "auth_method": "oauth",
+            "domain": "https://dev-test.okta.com/"
+          }
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "api_key": "string",
+            "auth_method": "oauth",
+            "client_id": "string",
+            "client_secret": "string",
+            "domain": "https://dev-test.okta.com/"
+          },
+          "type": "okta-accounts"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p></p></div>\n              <div class=\"col-6 column\"><p>Data object for updating an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes object for updating an Okta account.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">api_key</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The API key of the Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">auth_method&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The authorization method for an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Client ID of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">client_secret</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The client secret of an Okta app integration.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">domain&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The domain associated with an Okta account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Account type for an Okta account. \nAllowed enum values: <code>okta-accounts</code></p><p>default: <code>okta-accounts</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  }
+}

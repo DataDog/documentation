@@ -1,6 +1,5 @@
 ---
 title: Geomap Widget
-kind: documentation
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
@@ -13,7 +12,11 @@ further_reading:
   text: "Notebooks"
 ---
 
-The geomap widget plots geographic data and visualizes it through shaded regions or points.
+The geomap widget visualizes geographic data with shaded regions or points. It can be used to:
+- View user sessions by country.
+- Filter to see a list of all sessions in a new tab.
+- View user sessions filtered by employee.
+- Monitor performance metrics like load time, core web vitals, and percent of views with errors.
 
 {{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="Geomap visualization with the points overlay" >}}
 

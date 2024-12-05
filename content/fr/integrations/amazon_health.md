@@ -3,7 +3,7 @@ categories:
 - aws
 - cloud
 - log collection
-- notification
+- notifications
 dependencies: []
 description: Surveillez les événements de santé de vos services AWS en temps quasi
   réel.
@@ -15,7 +15,7 @@ integration_id: amazon-health
 integration_title: AWS Health
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_health
 public_title: Intégration Datadog/AWS Health
@@ -23,6 +23,7 @@ short_description: Surveillez la santé de vos services AWS.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 AWS Health fournit une visibilité continue sur l'état de vos ressources, services et comptes AWS. Activez cette intégration pour visualiser les événements du service AWS Health dans Datadog :
@@ -31,9 +32,9 @@ AWS Health fournit une visibilité continue sur l'état de vos ressources, serv
 
 **Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'une formule Business ou Entreprise.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
@@ -49,21 +50,21 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 2. Configurez l'[intégration Datadog/AWS Health][4].
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration AWS Health n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration AWS Health regroupe les événements du dashboard AWS Personal Health. On y trouve par exemple les problèmes en suspens, les maintenances planifiées et les notifications de compte.
 
-### Checks de service
+### Aide
 
 L'intégration AWS Health n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 

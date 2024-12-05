@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: ブログ
   text: Datadog セキュリティモニタリングが新登場
-kind: ガイド
 title: AWS 組織向け AWS インテグレーションマルチアカウント設定
 ---
 
@@ -86,7 +85,7 @@ StackSet が一度に 1 つの操作を実行するように、**Execution confi
 
 監視対象の各 AWS アカウントで有効化できる利用可能なサブインテグレーションの全リストは、[インテグレーションページ][4]を参照してください。Datadog にデータを送信するサブインテグレーションは、インテグレーションからデータが受信されると自動的にインストールされます。
 
-## ログを送信する
+## ログを送信
 
 StackSet では、AWS アカウントでのログ転送は設定されません。ログを設定するには、[ログ収集][2]のガイドの手順に従ってください。
 
@@ -102,7 +101,7 @@ StackSet では、AWS アカウントでのログ転送は設定されません�
 [2]: /ja/integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
 [4]: /ja/integrations/#cat-aws
-[5]: /ja/security/misconfigurations/setup/
+[5]: /ja/security/cloud_security_management/setup/
 [6]: https://docs.datadoghq.com/ja/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/

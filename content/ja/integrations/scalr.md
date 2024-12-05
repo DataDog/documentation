@@ -5,6 +5,7 @@ assets:
   dashboards:
     Scalr Overview Dashboard: assets/dashboards/scalr_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,7 +16,8 @@ assets:
       prefix: scalr.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Scalr
+    source_type_id: 10312
+    source_type_name: Scalr (Community Version)
 author:
   homepage: https://scalr.com
   name: Scalr
@@ -25,6 +27,7 @@ categories:
 - 自動化
 - 構成 & デプロイ
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: scalr
 integration_title: Scalr
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: scalr
-oauth: {}
 public_title: Scalr
 short_description: Scalr は、Terraform Automation and COllaboration (TACO) 製品です。
 supported_os:
@@ -61,10 +62,16 @@ tile:
     image_url: images/scalr_dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.scalr.com
+  - resource_type: documentation
+    url: https://docs.scalr.com/en/latest/integrations.html#datadog
   support: README.md#Support
   title: Scalr
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -88,7 +95,7 @@ Datadog Agent v7.21 または v6.21 以降の場合、以下の手順に従っ�
 
 2. Agent ベースの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. [Scalr のメトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `scalr.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル scalr.d/conf.yaml][7] を参照してください。
 
@@ -112,7 +119,7 @@ Scalr は、実行結果をイベントとして[イベントエクスプロー�
 
 ヘルプが必要ですか？[Datadog サポート][13]または [Scalr サポート][14]にお問い合わせください。
 
-
+## その他の参考資料
 
 - [Scalr の顧客向けドキュメント][15]
 - [Scalr Datadog インテグレーションドキュメント][16]
@@ -120,7 +127,7 @@ Scalr は、実行結果をイベントとして[イベントエクスプロー�
 
 [1]: https://docs.scalr.com/en/latest/integrations.html
 [2]: https://docs.datadoghq.com/ja/events/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [5]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

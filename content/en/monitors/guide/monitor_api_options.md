@@ -1,6 +1,5 @@
 ---
 title: Monitor API Options
-kind: guide
 ---
 
 ## Common options
@@ -20,7 +19,7 @@ kind: guide
 
 -  **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **False**.
 - **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **null**.
-- **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**. Without `renotify_statuses` set, it renotifies from `Alert` and `No Data` states.
+- **`renotify_statuses`** the states from which a monitor re-notifies. Default: *null* if `renotify_interval` is **null**. If `renotify_interval` is set, defaults to re-notify on `Alert` and `No Data`.
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `null`. Default: **null**.
 - **`notify_audit`** a boolean indicating whether tagged users are notified on changes to this monitor. Default: **False**
@@ -31,17 +30,9 @@ kind: guide
 
 ### Permissions options
 
-- **`locked`** a boolean indicating whether changes to this monitor should be restricted to the creator or users with the Org Management (`org_management`) permission. Default: **False**. **Deprecated: Use `restricted_roles` instead.**
-- **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1]. `restricted_roles` is the successor to `locked`.
+- **`restricted_roles`** an array listing the UUIDs of the roles allowed to edit the monitor. Monitor editing includes updates to the monitor configuration, deleting the monitor, and muting of the monitor for any amount of time. Role UUIDs can be pulled from the [Roles API][1].
 
-**Note:** Do not set both the `locked` and `restricted_roles` parameters on the same monitor. If both are set, the more restrictive parameter applies. Any role set in `restricted_roles` is considered more restrictive than `locked:true`.
-
-The following examples demonstrate how the `locked` and `restricted_roles` parameters interact:
-- If a monitor is set to `locked:false` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
-- If a monitor is set to `locked:true` and `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, the `restricted_roles` parameter applies.
-- If a monitor is set to `locked:true` and no `"restricted_roles"` parameter is set, the `locked:true` parameter applies.
-
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the [dedicated guide][2].
+**Note:** You can now set up permissions on monitors based on [Teams][4] and users, in addition to roles, with [Restriction Policies][5]. For more information on restricting permissions for monitors, see the [dedicated guide][2].
 
 ## Anomaly options
 
@@ -92,3 +83,5 @@ Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 [1]: /api/latest/roles/
 [2]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [3]: /monitors/guide/recovery-thresholds/
+[4]: /account_management/teams/
+[5]:/api/latest/restriction-policies/

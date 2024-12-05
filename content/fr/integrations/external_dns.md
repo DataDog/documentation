@@ -3,6 +3,7 @@ app_id: external-dns
 app_uuid: b41539a6-8222-4d6e-92f9-0a9f8496acdd
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: external_dns.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10075
     source_type_name: ExternalDNS
 author:
   homepage: https://www.datadoghq.com
@@ -20,8 +22,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -29,12 +31,10 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: ExternalDNS
-integration_version: 2.3.2
+integration_version: 5.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: external_dns
-oauth: {}
 public_title: ExternalDNS
 short_description: Surveillez toutes vos métriques ExternalDNS avec Datadog.
 supported_os:
@@ -47,8 +47,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: Surveillez toutes vos métriques ExternalDNS avec Datadog.
   media: []
@@ -57,6 +57,7 @@ tile:
   title: ExternalDNS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation

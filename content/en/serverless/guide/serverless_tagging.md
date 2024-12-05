@@ -1,6 +1,6 @@
 ---
 title: Serverless Tagging
-kind: guide
+
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/#aws-lambda-functions"
   tag: "Documentation"
@@ -27,7 +27,10 @@ With these tags, you can:
 
 To tag your serverless application with `env`, `service` and `version`, see the [unified service tagging documentation][1].
 
-**Note**: Lambda function names should adhere to [Datadog's tagging convention][2]. This ties all of your function's traces, logs, and metrics together seamlessly.
+**Notes**: 
+
+- Lambda function names should adhere to [Datadog's tagging convention][2]. This ties all of your function's traces, logs, and metrics together seamlessly.
+- [Enhanced Lambda metrics][5] do not pick up tags applied to your AWS Lambda function. Use the `DD_TAGS` environment variable instead.
 
 ### The env tag
 
@@ -62,3 +65,4 @@ The [Service Map][4] groups services into maps by the `env` tag, and uses the `s
 [2]: /developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
 [3]: /tracing/services/deployment_tracking/
 [4]: /tracing/services/services_map/
+[5]: /serverless/aws_lambda/metrics#enhanced-lambda-metrics

@@ -3,6 +3,7 @@ app_id: oom-kill
 app_uuid: 7546b270-2efe-4a59-8f94-3447df2db801
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: oom_kill.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10293
     source_type_name: OOM Kill
 author:
   homepage: https://www.datadoghq.com
@@ -29,10 +31,9 @@ integration_id: oom-kill
 integration_title: OOM Kill
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: oom_kill
-oauth: {}
 public_title: OOM Kill
 short_description: Surveillez les éliminations de processus OOM (Out of Memory) effectuées
   par le système ou un cgroup.
@@ -52,15 +53,16 @@ tile:
   title: OOM Kill
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
 
 Ce check permet de surveiller les processus tués par le mécanisme OOM Killer (Out of Memory Killer) du kernel par l'intermédiaire de l'Agent Datadog et du system probe.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Le check OOM Kill est inclus avec le package de l'[Agent Datadog][1]. Il repose sur un programme eBPF intégré au system probe.
 
@@ -79,7 +81,7 @@ yum install -y kernel-devel-$(uname -r)
 
 **Remarque** : pour que le check OOM Kill fonctionne, vous devez utiliser la version 4.11 ou une version ultérieure du kernel. De plus, seules les versions 8 et ultérieures de Windows et CentOS/RHEL sont prises en charge.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Dans le fichier `system-probe.yaml` situé à la racine du répertoire de configuration de votre Agent, ajoutez la configuration suivante :
 
@@ -154,21 +156,21 @@ spec:
 
 [Lancez la sous-commande status de l'Agent][5] et cherchez `oom_kill` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "oom_kill" >}}
 
 
-### Checks de service
+### Aide
 
 Le check OOM Kill n'inclut aucun check de service.
 
-### Événements
+### Aide
 
 Le check OOM Kill envoie un événement pour chaque OOM Kill. Celui-ci inclut l'ID et le nom du processus éliminé, ainsi que l'ID et le nom du processus à l'origine du déclenchement.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 

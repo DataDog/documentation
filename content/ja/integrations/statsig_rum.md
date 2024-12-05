@@ -13,6 +13,7 @@ categories:
 - 構成とデプロイ
 - 開発ツール
 - イベント管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/statsig_rum/README.md
 display_on_public_website: true
@@ -22,10 +23,8 @@ integration_id: statsig-rum
 integration_title: Statsig - RUM
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: statsig_rum
-oauth: {}
 public_title: Statsig - RUM
 short_description: Datadog の RUM データを Statsig の機能ゲート情報でリッチ化
 supported_os:
@@ -57,6 +56,7 @@ tile:
   title: Statsig - RUM
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Statsig の機能フラグ追跡インテグレーションは、Datadog RUM データに機能ゲート情報を追加し、製品機能とシステムおよびパフォーマンスメトリクスの因果関係を測定することができます。
@@ -74,12 +74,12 @@ Statsig の機能フラグ追跡インテグレーションは、Datadog RUM デ
 ```js
 await statsig.initialize('client-<STATSIG CLIENT KEY>',
   {userID: '<USER ID>'},
-  {     
+  {
     gateEvaluationCallback: (key, value) => {
       datadogRum.addFeatureFlagEvaluation(key, value);
     }
   }
-); 
+);
 ```
 
 ## サポート

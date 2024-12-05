@@ -6,9 +6,10 @@ aliases:
 categories:
 - aws
 - cloud
-- data store
+- data stores
 - log collection
 - network
+custom_kind: 통합
 dependencies: []
 description: Amazon RDS와 관련된 다양한 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -29,19 +30,19 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-kind: 통합
 manifest_version: '1.0'
 monitors:
-  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
-  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
-  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
+  Anomaly in database connections: assets/monitors/rds_database_connections_anomaly.json
+  CPU utilization is high: assets/monitors/rds_cpu_utilization.json
+  Storage utilization is high: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS 통합
 short_description: Amazon RDS와 관련된 다양한 메트릭을 추적합니다.
 version: '1.0'
 ---
 
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS 대시보드" popup="true">}}
 
 ## 개요
 
@@ -100,7 +101,7 @@ RDS 인스턴스를 모니터링하는 옵션에는 Standard, Enhanced, Native �
 
 **Instance Actions**에서 **Modify**를 선택하여 인스턴스 생성 중 또는 이후에 RDS 인스턴스에 대한 향상된 모니터링을 활성화합니다. Monitoring Granularity에 대해서는 `15`를 권장합니다. 
 
-다음 지침에서는 KMS 및 Lambda 관리 콘솔을 사용하여 RDS Enhanced Monitoring Lambda 함수에만 사용할 수 있는 Datadog API 키의 암호화된 버전을 생성합니다. [Log Forwarder][1]와 같은 다른 Lambda의 암호화된 API 키가 이미 있는 경우 [Lambda 함수의 README][2]에서 다른 옵션을 참조하세요. 
+다음 지침에서는 KMS와 Lambda Management Console을 사용하여 RDS Enhanced Monitoring Lambda 함수에서만 사용할 수 있는 Datadog API 키의 암호화된 버전을 생성합니다. [Log Forwarder][1]와 같은 다른 Lambda의 암호화된 API 키가 이미 있는 경우 [Lambda 함수의 README][2]를 참조해 다른 옵션을 살펴보세요.
 
 #### KMS 키 생성
 
@@ -175,9 +176,9 @@ Lambda 함수에 대한 테스트 버튼을 클릭하면 다음 오류가 발생
     | `rds:ListTagsForResource` | RDS 인스턴스에 커스텀 태그를 추가합니다.    |
     | `rds:DescribeEvents`     | RDS 데이터베이스와 관련된 이벤트를 추가합니다. |
 
-3. [Datadog - AWS RDS 통합][4]을 설치합니다.
+3. [Datadog - Amazon RDS 통합][4]을 설치합니다.
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon-rds
@@ -193,7 +194,7 @@ Lambda 함수에 대한 테스트 버튼을 클릭하면 다음 오류가 발생
     | `rds:ListTagsForResource` | RDS 인스턴스에 커스텀 태그를 추가합니다.     |
     | `rds:DescribeEvents`     | RDS 데이터베이스와 관련된 이벤트를 추가합니다. |
 
-3. [Datadog - AWS RDS 통합][4]을 설치합니다.
+3. [Datadog - Amazon RDS 통합][4]을 설치합니다.
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -301,9 +302,9 @@ AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일
 
 ### 이벤트 
 
-AWS RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 그룹과 관련된 이벤트가 포함됩니다. 아래 이벤트 예시를 참조하세요:
+Amazon RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 그룹과 관련된 이벤트가 포함됩니다. 아래 이벤트 예시를 참조하세요.
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="AWS RDS Events" >}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Amazon RDS 이벤트" >}}
 
 ### 서비스 점검
 
@@ -317,10 +318,10 @@ AWS RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 
 
 ## 즉시 사용 가능한 모니터링
 
-AWS RDS 통합은 즉시 사용 가능한 모니터링 기능을 제공하여 성능을 모니터링하고 최적화합니다.
+Amazon RDS 통합은 즉시 사용 가능한 모니터링 기능을 제공하여 성능을 모니터링하고 최적화합니다.
 
-- AWS RDS 대시보드: 즉시 사용 가능한 [AWS RDS 대시보드][9]를 사용하여 RDS 인스턴스에 대한 포괄적인 개요를 확인하세요.
-- 권장 모니터: [권장 AWS RDS 모니터][10]를 활성화하여 문제를 사전에 감지하고 적시에 알림을 받습니다.
+- Amazon RDS 대시보드: 즉시 사용 가능한 [Amazon RDS 대시보드][9]를 사용하여 RDS 인스턴스에 대한 포괄적인 개요를 확인해 보세요.
+- 권장 모니터링: [권장 Amazon RDS 모니터링][10]을 활성화하여 문제를 사전에 감지하고 적시에 알림을 받습니다.
 
 ## 문제 해결
 

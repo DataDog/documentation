@@ -25,7 +25,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기초 활성화
   text: 대화형 세션에 참여해 서버리스 모니터링에 대해 자세히 알아보세요.
-kind: 설명서
 title: 서버리스
 ---
 
@@ -34,6 +33,10 @@ title: 서버리스
 <br/>
 
 <div class="alert alert-info"><a href="https://chat.datadoghq.com/">Datadog Slack 커뮤니티</a>의 <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> 채널에서 토론에 참여해 보세요.</div>
+
+{{< learning-center-callout header="활성화 웨비나 세션에 참가힉;" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+서버리스 모니터링을 사용해 팀 작업을 유연하게 만들고, 최소한의 비용으로 수익을 창출하는 애플리케이션을 구축하는 데 집중하는 방법을 알아보세요.
+{{< /learning-center-callout >}}
 
 [Datadog 서버리스 모니터링][1]은 서버리스 컴퓨팅의 실시간 메트릭, 로그, 트레이스는 물론 완전 관리형 API, 대기열, 스트림, 데이터 저장소를 통합하여 서버리스 애플리케이션을 구동하는 모든 관리형 서비스에 대한 완벽한 가시성을 제공합니다.
 
@@ -50,6 +53,16 @@ Datadog Lambda Extension이나 Datadog Forwarder Lambda를 사용해 로그와 �
 [분산 추적][5]을 이용하면 서버리스 트레이스를 메트릭에 연결해 애플리케이션 성능에 대한 컨텍스트를 충분히 확인할 수 있습니다. Datadog Python, Node.js, Ruby, Go, Java, .NET 추적 라이브러리에서 AWS Lambda용 분산 추적을 지원합니다.
 
 [디플로이먼트 추적][6]을 사용하면 서버리스 코드, 설정, 디플로이먼트 변경 사항을 함수의 메트릭, 트레이스, 로그와 연결할 수 있어 변경 사항이 애플리케이션 상태와 성능에 미치는 영향을 실시간으로 확인할 수 있습니다.
+
+### AWS 단계 함수
+
+AWS Step Functions는 개발자가 AWS에서 다단계 애플리케이션 워크플로를 생성하고 관리할 수 있게 해주는 서버리스 오케스트레이션 서비스입니다.
+
+[AWS Step Functions 통합][13]의 메트릭과 로그를 모니터링하여 서버리스 앱 보기 내에서 클라우드 기반 텔레메트리를 확인하세요.
+
+[실행 추적][14]을 통해 버그와 병목 현상을 식별합니다. 계단 함수에 대한 트레이스는 Step Function 로그에서 생성될 수 있으며 상태 시스템 실행 경로, 각 단계의 입력 및 출력, 단계 실행 길이를 포함한 세부적인 실행 정보를 제공합니다.
+
+Datadog에 접두사 `aws.states.enhanced`가 붙은 강화된 Step Function 메트릭은 두 번째 세부 수준에서 사용 가능하며 Datadog 내에서 직접 생성됩니다.
 
 ### Azure 앱 서비스
 
@@ -95,3 +108,5 @@ Google Cloud Run은 소규모의 단일 목적 함수를 만들 수 있는 경�
 [10]: /ko/serverless/azure_container_apps
 [11]: /ko/integrations/google_cloud_platform/
 [12]: /ko/serverless/google_cloud_run
+[13]: /ko/integrations/amazon_step_functions
+[14]: /ko/serverless/step_functions/installation

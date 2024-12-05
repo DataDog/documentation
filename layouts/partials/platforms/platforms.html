@@ -12,6 +12,13 @@
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
+{{ $categories := slice}}
+
+<!-- get categories -->
+{{ range (index $datafile .Params.links) }}
+    {{ $categories = $categories | append .category }}
+{{ end }}
+{{ $categories = $categories | uniq }}
 
 <!-- mobile site -->
 <div class="dropdown d-block d-sm-none" style="margin-bottom:24px;">
@@ -46,23 +53,35 @@
   {{else}}
       <h3>{{ i18n "agent_started_sentence" }}</h3>
   {{ end }}
-  <div class="row cards-dd platform-nav mt-4 d-none d-sm-flex">
-      {{ range (index $datafile .Params.links) }}
-          <div class="col-6 col-sm-3 col-md-2-4 col-lg-2-4 col-xl-2-4">
-              <a class="card" href="{{ .link | absLangURL }}">
-                  <div class="card-body text-center">
-                      {{ $src := (print "icons/" .image)}}
-                      {{ $url := (print ($dot.Site.Params.img_url) "images/" $src "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
-                      <picture class="mx-auto">
-                          <source srcset="{{ $url }}&w=138 1x, {{ $url }}&w=138&dpr=2 2x" media="(min-width: 1200px)">
-                          <source srcset="{{ $url }}&w=108 1x, {{ $url }}&w=108&dpr=2 2x" media="(min-width: 992px)">
-                          <source srcset="{{ $url }}&w=110 1x, {{ $url }}&w=110&dpr=2 2x" media="(min-width: 768px)">
-                          <source srcset="{{ $url }}&w=101 1x, {{ $url }}&w=101&dpr=2 2x" media="(min-width: 0px)">
-                          <img class="img-fluid" srcset="{{ $url }}&w=138" alt="integration">
-                      </picture>
-                  </div>
-              </a>
-          </div>
-      {{ end }}
-  </div>
+    <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+            {{ range $categories }}
+            {{ $cat := . }}
+            <div data-lang="{{ . }}" class="tab-pane fade" role="tabpanel" title='{{ if or (eq . "cloud_and_container") (eq . "configuration_management") (eq . "source")}} {{ i18n . }} {{ else }} {{ . }}{{ end }}'>
+                <div class="row cards-dd platform-nav mt-4 d-none d-sm-flex">
+                    {{ range (index $datafile $.Params.links) }}
+                        {{ if eq $cat .category }}
+                            <div class="col-6 col-sm-3 col-md-2-4 col-lg-2-4 col-xl-2-4">
+                                <a class="card" href="{{ .link | absLangURL }}">
+                                    <div class="card-body text-center">
+                                        {{ $src := (print "icons/" .image)}}
+                                        {{ $url := (print ($dot.Site.Params.img_url) "images/" $src "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                                        <picture class="mx-auto">
+                                            <source srcset="{{ $url }}&w=138 1x, {{ $url }}&w=138&dpr=2 2x" media="(min-width: 1200px)">
+                                            <source srcset="{{ $url }}&w=108 1x, {{ $url }}&w=108&dpr=2 2x" media="(min-width: 992px)">
+                                            <source srcset="{{ $url }}&w=110 1x, {{ $url }}&w=110&dpr=2 2x" media="(min-width: 768px)">
+                                            <source srcset="{{ $url }}&w=101 1x, {{ $url }}&w=101&dpr=2 2x" media="(min-width: 0px)">
+                                            <img class="img-fluid" srcset="{{ $url }}&w=138" alt="integration">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                        {{ end }} 
+                    {{ end }}    
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>     
 </div>

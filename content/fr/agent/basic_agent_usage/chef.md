@@ -1,7 +1,6 @@
 ---
 dependencies:
 - "https://github.com/DataDog/chef-datadog/blob/master/README.md"
-kind: documentation
 title: Chef
 ---
 Les recettes Chef pour Datadog servent à déployer automatiquement les composants et la configuration de Datadog. Le cookbook prend en charge les versions suivantes de l'Agent :

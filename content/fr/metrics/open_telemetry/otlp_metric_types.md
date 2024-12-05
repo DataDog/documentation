@@ -11,7 +11,6 @@ further_reading:
 - link: /opentelemetry/guide/otlp_delta_temporality/
   tag: Guide
   text: Générer des métriques de temporalité delta avec OpenTelemetry
-kind: documentation
 title: Types de métriques OTLP
 ---
 

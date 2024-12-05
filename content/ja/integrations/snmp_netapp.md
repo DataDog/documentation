@@ -3,12 +3,14 @@ app_id: snmp-netapp
 app_uuid: d50aeab6-c26b-49df-aeb1-910d5d1a3e48
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10333
     source_type_name: NetApp
 author:
   homepage: https://www.datadoghq.com
@@ -16,10 +18,10 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- notification
 - ネットワーク
+- notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_netapp/README.md
 display_on_public_website: true
@@ -29,10 +31,8 @@ integration_id: snmp-netapp
 integration_title: NetApp
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: snmp_netapp
-oauth: {}
 public_title: NetApp
 short_description: NetApp ネットワークデバイスから SNMP メトリクスを収集
 supported_os:
@@ -42,21 +42,25 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Network
+  - Category::Notifications
+  - Category::SNMP
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Monitoring
-  - Category::Notification
-  - Category::Network
-  - Category::SNMP
+  - Offering::Integration
   configuration: README.md#Setup
   description: NetApp ネットワークデバイスから SNMP メトリクスを収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: NetApp
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要

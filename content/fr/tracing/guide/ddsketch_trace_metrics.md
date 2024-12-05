@@ -11,7 +11,7 @@ further_reading:
 - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
   tag: Documentation
   text: En savoir plus sur les métriques de trace
-kind: guide
+
 title: Métriques basées sur DDSketch dans APM
 ---
 
@@ -25,9 +25,6 @@ Datadog recueille automatiquement des métriques de trace pour vos services et r
 
 Les pages APM Service et Resource exploitent automatiquement ce type de métrique pour générer des dashboards et monitors.
 
-**À quoi sert cette métrique ?**
-- [Les métriques de distribution][1] proposent de nouvelles fonctions. Vous pouvez notamment calculer précisément des centiles sur des intervalles (au lieu d'utiliser la fonction de cumul). À terme, elles offrent la possibilité d'améliorer les visualisations et d'intégrer de nouvelles fonctionnalités.
-
 **Comment afficher l'historique complet de cette nouvelle métrique ?**
 - Datadog intègre la requête existante associée à la nouvelle métrique à une requête équivalente basée sur des métriques de latence durables. Ainsi, vous n'avez pas besoin de créer plusieurs requêtes.
 
@@ -35,11 +32,6 @@ Les pages APM Service et Resource exploitent automatiquement ce type de métriqu
 - Les métriques de distribution Datadog tirent profit de la technologie [DDSketch][4]. Au lieu de se baser sur des erreurs de rang, les garanties portent sur des erreurs relatives. Ainsi, toutes les valeurs estimées des centiles sont désormais plus proches de la valeur réelle.
 - Ainsi, il est possible que vous constatiez une réduction des valeurs du 99e centile, qui est le plus concerné par ce changement. Les nouvelles valeurs sont désormais plus proches de la valeur réelle du 99e centile.
 - Il convient de noter que les calculs de métriques d'APM ne sont pas identiques aux calculs effectués dans le code pour les métriques custom de distribution Datadog. En effet, le calcul s'effectue en backend, ce qui peut entraîner des écarts.
-
-**Ces nouvelles métriques sont-elles disponibles pour tous ?**
-- Ces nouvelles métriques peuvent être utilisées par les clients américains, et seront prochainement disponibles pour les clients européens.
-- Datadog déploie actuellement ces nouveautés à un nombre croissant de clients. Leurs pages APM Service et Resource tirent désormais profit des métriques de distribution.
-- Nous avons automatiquement remplacé toutes les requêtes manuelles des dashboards et monitors par les nouvelles métriques. Les anciennes métriques sont toutefois conservées pour les vues historiques.
 
 **J'utilise Terraform. Comment ce changement va-t-il m'affecter ?**
 - Les métriques existantes sont toujours valides, et vos définitions Terraform restent en place et fonctionnelles.

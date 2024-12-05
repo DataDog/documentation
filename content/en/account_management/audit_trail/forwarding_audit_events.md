@@ -1,6 +1,5 @@
 ---
 title: Forwarding Audit Events to Custom Destinations
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/account_management/audit_trail/"
@@ -8,7 +7,17 @@ further_reading:
   text: "Learn more about Audit Trail"
 ---
 
-<div class="alert alert-warning">Audit Event Forwarding is in beta. </div>
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Audit Event Forwarding is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+<div class="alert alert-warning">
+Audit Event Forwarding is in Preview.
+</div>
+{{% /site-region %}}
 
 ## Overview
 

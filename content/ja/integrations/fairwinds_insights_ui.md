@@ -7,7 +7,9 @@ author:
   name: Fairwinds
   sales_email: datadog-marketplace@fairwinds.com
   support_email: insights@fairwinds.com
-categories: []
+categories:
+- kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/fairwinds_insights_ui/README.md
 display_on_public_website: true
@@ -17,23 +19,22 @@ integration_id: fairwinds-insights-ui
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: fairwinds_insights_ui
-oauth: {}
 public_title: Fairwinds Insights
 short_description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Kubernetes
   - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
   media:
@@ -45,6 +46,7 @@ tile:
   title: Fairwinds Insights
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -59,5 +61,5 @@ Fairwinds Insights は、セキュリティ、効率性、信頼性に関連す�
 
 アカウントが設定されると、このアプリを任意の Datadog ダッシュボードに追加することができます。
 
-## サポート
+## Agent
 何か問題があれば、insights@fairwinds.com までご連絡ください。

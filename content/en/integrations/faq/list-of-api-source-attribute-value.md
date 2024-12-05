@@ -1,6 +1,6 @@
 ---
 title: API Source Attributes
-kind: faq
+
 disable_toc: true
 private: true
 ---

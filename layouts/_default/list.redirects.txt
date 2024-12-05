@@ -1,8 +1,23 @@
+{{- $pattern := `^security_monitoring/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$|^security/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$` -}}
 {{- range $p := .Site.Pages -}}
     {{- range .Aliases -}}
         {{- $temp := strings.TrimPrefix "/" . -}}
         {{- $alias := strings.TrimSuffix "/" $temp -}}
-        {{- $target := strings.TrimSuffix "/" $p.RelPermalink -}}
-        {{- printf "%s/ %s\n" $alias $p.RelPermalink -}}
+        {{- if not (findRE $pattern $alias) -}}
+            {{- $target := strings.TrimSuffix "/" $p.RelPermalink -}}
+            {{- printf "%s/ %s\n" $alias $p.RelPermalink -}}
+        {{- end -}}
+    {{- end -}}
+    {{- with $p.Params.external_redirect -}}
+        {{- $redirect_link := . -}}
+        {{- $temp := strings.TrimPrefix "/" $p.RelPermalink -}}
+        {{- $target := strings.TrimSuffix "/" $temp -}}
+        {{- if not (findRE $pattern $target) -}}
+            {{- if not (strings.HasPrefix $redirect_link "https://") -}}
+                {{- printf "%s/ %s\n" $target $redirect_link -}}
+            {{- else -}}
+                {{- printf "%s/ %s %s\n" $target $redirect_link "external" -}}
+            {{- end -}}
+        {{- end -}}
     {{- end -}}
 {{- end -}}

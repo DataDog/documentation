@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centre d'apprentissage
   text: Améliorer vos dashboards
-kind: documentation
 title: Requêtes
 ---
 
@@ -79,7 +78,7 @@ Pour cumuler manuellement les données, utilisez la [fonction rollup][11]. Cliqu
 
 Cette requête crée une ligne unique représentant l'espace disque total disponible en moyenne sur l'ensemble des machines déployées, avec un intervalle de cumul des données de 1 minute :
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="Exemple d'utilisation de la fonction rollup sur la métrique system.disk.free. L'icône Sigma permettant d'ajouter une fonction est mise en évidence " style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="Exemple d'utilisation de la fonction rollup sur la métrique system.disk.free sur toutes les machines" style="width:100%;">}}
 
 Lorsque vous passez à la vue JSON, voici à quoi ressemble la requête :
 
@@ -138,7 +137,7 @@ En outre, vous pouvez cliquer sur les tags dans la liste déroulante utilisée p
 
 En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Référez-vous à la [liste des fonctions disponibles][12].
 
-Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, et `*` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
+Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, `*`, `min`, and `max` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
 
 Pour représenter les métriques séparément, ajoutez une virgule (`,`). Par exemple, `a, b, c`.
 
@@ -173,6 +172,23 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Exemple de formule - rapport de logs" style="width:75%;" >}}
 
 **Remarque** : les formules ne sont pas représentées par des lettres. Vous ne pouvez donc pas effectuer d'opérations arithmétiques entre plusieurs formules.
+
+#### Minimum ou maximum entre deux requêtes
+Voici un exemple utilisant l'opérateur `max` pour trouver l'utilisation maximale du processeur entre deux zones de disponibilité.  
+
+```text
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+```
+
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Exemple de formule pour 'max' affichant la valeur maximale entre deux requêtes de métriques" style="width:75%;" >}}
+
+En outre, vous pouvez également calculer le maximum (ou le minimum) entre deux requêtes portant sur des produits différents. Voici un autre exemple utilisant l'opérateur `min` pour trouver le minimum entre des logs avec des statuts d'erreur et des statuts d'avertissement.
+
+```text
+min(status:error, status:warn)
+```
+
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Exemple de formule pour 'min' affichant la valeur minimale entre deux requêtes de logs" style="width:75%;" >}}
 
 ### Créer un alias
 

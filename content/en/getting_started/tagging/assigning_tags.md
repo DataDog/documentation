@@ -1,6 +1,5 @@
 ---
 title: Assigning Tags
-kind: documentation
 description: 'Learn how to assign tags in Datadog.'
 aliases:
     - /agent/tagging
@@ -160,7 +159,7 @@ For containerized environments, it is recommended to follow the [unified service
 
 #### Environment variables
 
-After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file.
+After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file. If you specify multiple tags, separate each one with a space.
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
@@ -264,17 +263,19 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
+
 
 [1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. Once you have added tags, ensure they are visible in the UI before attempting to add more tags.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
+
 
 [1]: /infrastructure/
 {{% /tab %}}
@@ -378,7 +379,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][10]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -391,9 +392,9 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][11] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [Metrics Submission: DogStatsD][12] documentation.
 
 ## Further Reading
 
@@ -410,3 +411,4 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [9]: /tracing/setup/
 [10]: /developers/dogstatsd/
 [11]: /developers/community/libraries/
+[12]: /metrics/dogstatsd_metrics_submission/#host-tag

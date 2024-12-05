@@ -5,6 +5,7 @@ assets:
   dashboards:
     Temporal Server Overview: assets/dashboards/server_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,8 @@ assets:
     - temporal-server
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10337
     source_type_name: Temporal
-  logs:
-    source: temporal
   monitors:
     frontend latency: assets/monitors/FrontendLatency.json
     history latency: assets/monitors/HistoryLatency.json
@@ -32,6 +32,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+- 開発ツール
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/temporal/README.md
 display_on_public_website: true
@@ -39,12 +41,10 @@ draft: false
 git_integration_title: temporal
 integration_id: temporal
 integration_title: Temporal
-integration_version: 1.1.1
+integration_version: 2.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: temporal
-oauth: {}
 public_title: Temporal
 short_description: Temporal Cluster の健全性とパフォーマンスを監視します。
 supported_os:
@@ -58,14 +58,22 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Log Collection
+  - Category::Developer Tools
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: Temporal Cluster の健全性とパフォーマンスを監視します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/temporal-server-integration/
   support: README.md#Support
   title: Temporal
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -81,7 +89,7 @@ tile:
 Temporal チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. [Temporal の公式ドキュメント][4]に従って、`prometheus` エンドポイント経由でメトリクスを公開するように Temporal サービスを構成してください。
 
@@ -93,7 +101,7 @@ Temporal チェックは [Datadog Agent][3] パッケージに含まれていま
 
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル temporal.d/conf.yaml][5] を参照してください。
 
-#### ログの収集
+#### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -128,17 +136,23 @@ Temporal チェックは [Datadog Agent][3] パッケージに含まれていま
 
 Temporal インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "temporal" >}}
 
 
-### ログ管理
+### Logs
 
 Temporal インテグレーションは、Temporal Cluster からログを収集し、Datadog に転送することができます。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Monitor the health of your Temporal Server with Datadog][12]
 
 
 [1]: https://temporal.io/
@@ -152,3 +166,4 @@ Temporal インテグレーションは、Temporal Cluster からログを収集
 [9]: https://github.com/DataDog/integrations-core/blob/master/temporal/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/temporal/assets/service_checks.json
 [11]: https://docs.datadoghq.com/ja/help/
+[12]: https://www.datadoghq.com/blog/temporal-server-integration/

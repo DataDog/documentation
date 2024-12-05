@@ -15,7 +15,7 @@ git_integration_title: amazon_sqs
 has_logo: true
 integration_title: Amazon SQS
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sqs
 public_title: "Intégration Datadog/Amazon\_SQS"

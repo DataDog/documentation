@@ -11,7 +11,6 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-kind: ドキュメント
 title: 遅いトレースやエンドポイントを調査する
 ---
 
@@ -21,13 +20,16 @@ Code Hotspots タブでスパン情報からプロファイリングデータに
 
 ## 遅いトレースのコードのホットスポットを特定する
 
-{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots タブで APM トレーススパンのプロファイリング情報を確認" video=true >}}
+{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab shows profiling information for a APM trace span" >}}
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-[Java サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。手動でインスツルメントされたコードの場合、Continuous Profiler はスパンのスコープアクティベーションを要求します。
+Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
+The feature is not available on Windows.
+
+For manually instrumented code, continuous profiler requires scope activation of spans:
 
 ```java
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
@@ -52,42 +54,69 @@ Java Flight Recorder (JFR) の代わりに <a href="/profiler/enabling/java/?tab
 
 `dd-trace-py` バージョン 0.44.0+ が必要です。
 
+To enable the [timeline feature](#span-execution-timeline-view):
+
+- Upgrade `dd-trace-py` to version 2.10.5 or later
+- Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
+
 [1]: /ja/profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
 [Ruby サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-`dd-trace-rb` バージョン 0.49.0+ が必要です。
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-rb` 1.21.1+.
+
+To additionally enable showing [GC in timeline](#span-execution-timeline-view):
+- set `DD_PROFILING_FORCE_ENABLE_GC=true`
 
 [1]: /ja/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Linux と macOS で [Node.js サービスのプロファイリングを有効にする][1]と、Code Hotspots の識別がデフォルトで有効になります。Windows ではこの機能は利用できません。
+
+`dd-trace-js` のバージョン 5.0.0 以降、4.24.0 以降または 3.45.0 以降が必要です。
+
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
+
+[1]: /ja/profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
 [Go サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-新しい[タイムライン機能](#span-execution-timeline-view) (ベータ版) を有効にするには、以下の環境変数を設定してください。
+To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 ```
 
-これらの変数を設定すると、最大 1 分 (または 5 MiB) の実行トレースデータが [15 分ごとに][2]記録されます。
+Setting these variables will record up to 1 minute (or 5 MiB) of execution tracing data [every 15 minutes][2].
 
-実行トレースを記録している間、アプリケーションがガベージコレクションのように CPU 使用率の増加を観測する可能性があります。ほとんどのアプリケーションでは大きな影響はないはずですが、Go 1.21 にはこのオーバーヘッドをなくすための[パッチ][3]が含まれています。
+このデータは、
 
-この機能を使用するには、`dd-trace-go` バージョン 1.37.0 以降 (タイムラインベータは 1.52.0 以降) が必要で、Go バージョン 1.18 以降 (タイムラインベータは 1.21 以降) で最適に動作します。
+- 検索クエリに `go_execution_traced:yes` を追加して [Profile List][3] で表示できます。プロファイルをクリックすると [Profile Timeline][4] が表示されます。さらに深く見るには、プロファイルをダウンロードし、`go tool trace` または [gotraceui][5] を使用して、含まれている `go.trace` ファイルを表示します。
+- 検索クエリに `@go_execution_traced:yes` (`@` に注意) を追加して[トレースエクスプローラー][6]で表示できます。スパンをクリックし、`Code Hotspots` タブを選択して[スパンタイムライン](#span-execution-timeline-view)を表示します。
+
+実行トレースを記録している間、アプリケーションがガベージコレクションのように CPU 使用率の増加を観測する可能性があります。ほとんどのアプリケーションでは大きな影響はないはずですが、Go 1.21 にはこのオーバーヘッドをなくすための[パッチ][7]が含まれています。
+
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
 [1]: /ja/profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
-[3]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
+[3]: /ja/profiler/profile_visualizations/#single-profile
+[4]: /ja/profiler/profile_visualizations/#timeline-view
+[5]: https://github.com/dominikh/gotraceui
+[6]: /ja/tracing/trace_explorer/
+[7]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 [.NET サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-この機能を使用するには `dd-trace-dotnet` バージョン 2.30.0+ が必要です。
+This capability requires `dd-trace-dotnet` version 2.30.0+.
 
 [1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -95,7 +124,11 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [PHP サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-`dd-trace-php` バージョン 0.71+ が必要です。
+Requires `dd-trace-php` version 0.71+.
+
+To enable the [timeline feature](#span-execution-timeline-view):
+- Upgrade to `dd-trace-php` version 0.98+.
+- Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
 [1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}
@@ -106,7 +139,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 各トレースのビューから、選択したスパンの範囲内のプロファイリングデータが Code Hotspots タブに表示されます。
 
 左側の値は、選択されたスパンの間にそのメソッド呼び出しに費やされた時間を表します。ランタイムと言語によって、カテゴリーは異なります。
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 - **CPU** は、CPU タスクを実行するのに費やした時間を示します。
 - **Synchronization** は、モニター待ちの時間、スレッドがスリープしている時間、パークしている時間などを表示します。
@@ -125,6 +158,10 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 - **CPU** は、CPU タスクを実行するのに費やした時間を示します。
 - **Uncategorized** は、CPU 実行以外のスパン実行に要した時間を表示します。
 {{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+- **CPU** は、CPU タスクの実行にかかった時間を示します。Node.js experimental CPU プロファイラーで収集されたプロファイルにのみ表示されます。
+- **Uncategorized** は、CPU 実行以外のスパン実行に要した時間を表示します。
+{{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 - **CPU** は、CPU タスクを実行するのに費やした時間を示します。
 - **Off-CPU** は、CPU 実行以外のスパン実行に要した時間を表示します。
@@ -140,11 +177,11 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-プラスアイコン `+` をクリックすると、スタックトレースをそのメソッドに**逆順**に展開します。値の上にカーソルを置くと、カテゴリー別に説明される時間の割合が表示されます。
+Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
 
-### スパン実行タイムラインビュー
+### Span execution timeline view
 
-{{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots タブには、時間とスレッドに渡る実行の内訳を示すタイムラインビューがあります" video=true >}}
+{{< img src="profiler/code_hotspots_tab-timeline.png" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" >}}
 
 **Timeline** ビューは、スパンの期間における時間ベースのパターンと作業分布を表示します。
 
@@ -152,38 +189,66 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 - 時間のかかるメソッドを分離する。
 - スレッド間の複雑な相互作用を整理する。
-- リクエストに影響を与えたランタイムアクティビティを表面化する。
+- Surface runtime activity that impacted the request.
 
 ランタイムや言語によって、レーンは異なります。
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
-上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビ ティです。これらはリクエスト自体に関係ないこともあります。
+上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
+
+For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
+
+[1]: https://www.datadoghq.com/blog/request-latency-profiling/
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Python.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-各レーンは **goroutine** を表します。これには、選択されたスパンを開始した goroutine と、その goroutine が作成した goroutine とその子孫が含まれます。同じ `go` ステートメントで作成された goroutine はグループ化されます。グループを展開して各 goroutine の詳細を見ることができます。
+Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
 
 上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
 
-タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [Datadog のプロファイリングタイムラインによる Go リクエストレイテンシーのデバッグ][2]を参照してください。
+タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [Datadog のプロファイリングタイムラインによる Go リクエストレイテンシーのデバッグ][1]を参照してください。
 
-[2]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+[1]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Ruby.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
-上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
+上部のレーンは、余分なレイテンシーを追加する可能性のあるランタイムアクティビティを表しています。これらはリクエスト自体に関係ないこともあります。
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+Node.js でこの機能を有効にする方法については、[前提条件](#prerequisites)を参照してください。
+
+JavaScript の**スレッド**には 1 つのレーンがあります。
+
+上のレーンはガベージコレクターの**ランタイムアクティビティ**で、リクエストに余分なレイテンシーを追加する可能性があります。
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+PHP でこの機能を有効にする方法については、[前提条件](#prerequisites)を参照してください。
+
+There is one lane for each PHP **thread** (in PHP NTS, this is only one lane). Fibers that run in this **thread** are represented in the same lane.
+
+Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ### プロファイルをトレースから閲覧する
 
-{{< img src="profiler/flamegraph_view-1.mp4" alt="フレームグラフでプロファイルビューを開く" video=true >}}
+{{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
 
-内訳のデータタイプごとに、**View In Full Page** をクリックすると、同じデータが新しいページで表示されます。そこから、フレームグラフに視覚化を変更することができます。
-**Focus On** セレクタをクリックすると、データの範囲を定義することができます。
+For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
+Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** は、選択したスパンと同じサービス内のすべての子孫スパンにプロファイリングデータをスコープします。
 - **Span only** は、プロファイリングデータをあらかじめ選択されたスパンにのみスコープします。
@@ -194,9 +259,9 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-[Java サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
+Endpoint profiling is enabled by default when you [turn on profiling for your Java service][1].
 
 [Datadog プロファイラーの使用][2]が必要です。JFR はサポートされていません。
 
@@ -207,7 +272,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [Python サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-py` バージョン 0.54.0+ が必要です。
+Requires `dd-trace-py` version 0.54.0+.
 
 [1]: /ja/profiler/enabling/python
 {{< /programming-lang >}}
@@ -222,15 +287,23 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [Ruby サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-rb` バージョン 0.54.0+ が必要です。
+Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /ja/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Linux と macOS で [Node.js サービスのプロファイリングを有効にする][1]と、エンドポイントプロファイリングがデフォルトで有効になります。Windows ではこの機能は利用できません。
+
+`dd-trace-js` のバージョン 5.0.0 以降、4.24.0 以降または 3.45.0 以降が必要です。
+
+[1]: /ja/profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 [.NET サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-dotnet` バージョン 2.15.0+ が必要です。
+Requires `dd-trace-dotnet` version 2.15.0+.
 
 [1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -238,7 +311,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [PHP サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-php` バージョン 0.79.0+ が必要です。
+Requires `dd-trace-php` version 0.79.0+.
 
 [1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}
@@ -254,23 +327,35 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 - CPU、メモリ、例外などの貴重なリソースを消費する上位のエンドポイントを切り分ける。これは、一般的にパフォーマンスを向上させるためにサービスを最適化しようとしている場合に特に役立ちます。
 - サードパーティのコードやランタイムライブラリが、エンドポイントの速度低下やリソース消費の重さの原因になっているかどうかを把握する。
 
-{{< img src="profiler/endpoint_agg.mp4" alt="エンドポイント集計による遅いエンドポイントのトラブルシューティング" video=true >}}
+{{< img src="profiler/endpoint_agg.png" alt="Troubleshooting a slow endpoint by using endpoint aggregation" >}}
 
-### 最もリソースを消費しているエンドポイントを追跡する
+### Surface code that impacted your production latency
+
+In the APM Service page, use the information in the **Profiling** tab to correlate a latency or throughput change to a code performance change.
+
+この例では、レイテンシーが、以下のコードによって引き起こされる`/GET train` でのロック競合の増加とどのようにリンクしているかがわかります。
+
+```java
+Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
+```
+
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+
+### Track endpoints that consume the most resources
 
 CPU やウォールタイムなどの貴重なリソースを消費している上位のエンドポイントを追跡することは価値があります。このリストは、エンドポイントが回帰していないか、あるいは新たに導入したエンドポイントが大幅にリソースを消費してサービス全体の速度を低下させていないかどうかを確認するのに役立ちます。
 
-次のイメージは、`GET /store_history` がこのサービスの CPU の 20% を消費して定期的に影響を与えていることを示しています。
+The following image shows that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU and 50% of its allocated memory:
 
-{{< img src="profiler/endpoint_metric.png" alt="上位のエンドポイントの消費リソースのグラフ化" >}}
+{{< img src="profiler/apm_endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
 
 ### リクエストごとの平均リソース消費量の追跡
 
 `Per endpoint call` を選択すると、トラフィックが時間の経過とともに変化しても、動作の変化を確認できます。これは、プログレッシブロールアウトのサニティチェックや日々のトラフィックパターンの分析に役立ちます。
 
-次のビデオは、`/GET train` のリクエストあたりの CPU が 2 倍になったことを示しています。
+The following example shows that CPU per request increased for `/GET train`:
 
-{{< img src="profiler/endpoint_per_request.mp4" alt="リクエストごとに多くのリソースを使用し始めたエンドポイントのトラブルシューティング" video=true >}}
+{{< img src="profiler/endpoint_per_request2.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video="true" >}}
 
 ## 参考資料
 

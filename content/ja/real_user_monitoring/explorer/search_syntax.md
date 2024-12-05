@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: イベント検索
-kind: documentation
 title: 検索構文
 ---
 
@@ -41,7 +40,7 @@ title: 検索構文
 
 ## ワイルドカード
 
-マルチバイト文字のワイルドカード検索を行う場合は、`*` 記号を使用します。たとえば、`@http.url:https:\/\/*` で検索すると、`https://` で始まる URL を含むすべてのビューが返されます。 
+マルチバイト文字のワイルドカード検索を行う場合は、`*` 記号を使用します。たとえば、`@http.url:https:\/\/*` で検索すると、`https://` で始まる URL を含むすべてのビューが返されます。
 
 ## 数値
 

@@ -1,11 +1,13 @@
 ---
 title: Parsing
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
     - /logs/parsing/
     - /logs/processing/parsing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Learn how to build and modify log pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
@@ -18,7 +20,13 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
+
+{{< learning-center-callout header="Try Grok parsing in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  Learn to build and modify log pipelines, manage them with the Pipeline Scanner, and standardize attribute names across processed logs for consistency.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -106,7 +114,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 : Matches an integer number (with scientific notation support) and parses it as an integer number.
 
 `word`
-: Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.
+: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
 
 `doubleQuotedString`
 : Matches a double-quoted string.

@@ -1,6 +1,5 @@
 ---
 title: Monitoring Resource Performance
-kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
@@ -11,7 +10,7 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
@@ -80,6 +79,6 @@ To resolve this, enable extended data collection for resources subject to CORS b
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/connect_rum_and_traces
+[2]: /real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

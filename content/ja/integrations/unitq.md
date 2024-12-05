@@ -5,6 +5,7 @@ assets:
   dashboards:
     unitQ: assets/dashboards/unitq_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: unitq.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10303
     source_type_name: unitQ
 author:
   homepage: https://www.unitq.com/
@@ -22,6 +24,7 @@ author:
   support_email: hello@unitq.com
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unitq/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: unitq
 integration_title: unitQ
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: unitq
-oauth: {}
 public_title: unitQ
 short_description: ユーザーの声を品質向上に役立てます。
 supported_os:
@@ -57,6 +58,7 @@ tile:
   title: unitQ
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -67,7 +69,7 @@ unitQ Datadog インテグレーションにより、unitQ から Datadog にメ
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. unitQ で、**Integrations** に移動します。
 2. Datadog タイルを選択します
@@ -83,7 +85,7 @@ unitQ Datadog インテグレーションにより、unitQ から Datadog にメ
 {{< get-metrics-from-git "unitq" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 unitQ には、サービスのチェック機能は含まれません。
 

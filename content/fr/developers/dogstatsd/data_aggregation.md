@@ -1,6 +1,5 @@
 ---
 title: Agrégation de données DogStatsD
-kind: documentation
 description: Découvrez comment le serveur DogStatsD agrège vos données avant de les envoyer à Datadog
 aliases:
   - /fr/developers/faq/data-aggregation-with-dogstatsd-threadstats
@@ -11,9 +10,6 @@ further_reading:
   - link: developers/libraries
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-    tag: GitHub
-    text: Code source de DogStatsD
 ---
 Le service DogStatsD de Datadog implémente le protocole StatsD, [avec quelques différences][1]. DogStatsD vous permet d'envoyer des métriques et de surveiller le code de votre application sans la bloquer. Les données sont transmises depuis votre application via UDP au [serveur DogStatsD][2] local (intégré à l'Agent Datadog), qui les agrège et les envoie ensuite à l'endpoint d'API Datadog. En savoir plus sur la [configuration de DogStatsD][2].
 

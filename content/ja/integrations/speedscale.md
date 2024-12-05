@@ -5,6 +5,7 @@ assets:
   dashboards:
     speedscale: assets/dashboards/SpeedscaleOverview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: speedscale.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10271
     source_type_name: Speedscale
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -25,6 +27,7 @@ categories:
 - kubernetes
 - orchestration
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedscale/README.md
 display_on_public_website: true
@@ -34,10 +37,8 @@ integration_id: speedscale
 integration_title: Speedscale
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: speedscale
-oauth: {}
 public_title: Speedscale
 short_description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
 supported_os:
@@ -54,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
   media: []
@@ -62,13 +64,14 @@ tile:
   title: Speedscale
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 このインテグレーションは、[Speedscale][1] のトラフィックリプレイ結果を Datadog に公開します。これにより、Datadog の観測可能性データと Speedscale の特定のリプレイ結果を組み合わせて、パフォーマンス低下の根本原因を調査することができます。Speedscale と Datadog のインテグレーションにより、潜在的なパフォーマンスの問題が本番環境に現れる前に発見し、トラブルシューティングすることができます。
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. このインテグレーションを使用するには、Datadog にイベントを送信できるように、Datadog の [API キー][2]が必要です。
 
@@ -100,7 +103,7 @@ Datadog の[イベントストリーム][2]を表示すると、エクスポー�
 
 Speedscale には、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Speedscale には、サービスのチェック機能は含まれません。
 

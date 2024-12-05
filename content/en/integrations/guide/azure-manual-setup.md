@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Manual Setup Guide
-kind: guide
+
 description: "Steps for manually setting up the Datadog Azure integration"
 further_reading:
 - link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
@@ -135,6 +135,53 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 ### Integrating through the Azure portal
 
+{{< tabs >}}
+{{% tab "ARM template" %}}
+
+1. In the Azure integration tile, select **Configuration** > **New App Registration** > **Using Azure Portal**.
+
+2. Select **Management Group (Auto-Discover)** or **Individual Subscriptions**.
+   - If you select Management Group, Datadog automatically discovers and monitors any subscriptions within that selected scope, including any subscriptions created in the future. You must have the owner role in the Management Group selected.
+   - If you select Individual Subscriptions, you must have the owner role in any subscriptions you want to monitor.
+
+3. Click **Open Template**.
+
+{{< img src="integrations/guide/azure_manual_setup/azure_tile_arm_template.png" alt="The Azure tile in the Datadog integrations page with Using Azure Portal and Management Group selected" popup="true" style="width:80%;" >}}
+
+4. Select the **Region**, **Subscription**, and **Resource Group** for the template to be deployed.
+
+   **Note**: The selection of region, subscription, and resource group only defines where this template is deployed. It has no impact on which subscriptions are monitored by Datadog.
+
+5. Click **Next**.
+
+6. Select the _Create new_ option in **Service principal type**. 
+7. Click the **Change selection** link in **Service principal**.
+A form to create a new app registration is displayed:
+
+{{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal.png" alt="The service principal page in the Azure ARM template with the option to Create New selected and the link to Change Selection highlighted" popup="true" style="width:80%;" >}}
+
+8. Enter a name for the app registration, select the supported account types, and click **Register**.
+
+9. A page opens to create a client secret. Click **+ New client secret** to add a client secret.
+
+10. Copy the value of the client secret, and click the close **(X)** button in the top-right corner of the screen.
+
+11. Paste the value of the client secret in the corresponding field on the template, and click **Next**.
+
+12. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
+
+    **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
+
+13. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security Management][17].
+
+14. Click **Review + create**, then click **Create**.
+
+15. Once the deployment has completed, click **Done** in the Azure integration page in Datadog to refresh the list and review your newly added App Registration.
+
+[17]: /security/cloud_security_management/
+{{% /tab %}}
+{{% tab "Manual" %}}
+
 1. [Create an app registration](#creating-the-app-registration) in your Active Directory and pass the correct credentials to Datadog.
 2. [Give the application read-access](#giving-read-permissions-to-the-application) to any subscriptions you would like to monitor.
 
@@ -187,6 +234,11 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 
 **Note**: Your updates to the Azure configuration can take up to 20 minutes to be reflected in Datadog.
 
+[10]: https://app.datadoghq.com/integrations/azure
+[11]: /integrations/guide/azure-troubleshooting/#enable-diagnostics
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Configuration
 
 To limit metric collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
@@ -217,16 +269,43 @@ Datadog provides a recommended monitor you can use as a template to get started.
 
 After the integration tile is set up, metrics are collected by a crawler. To collect additional metrics, deploy the Datadog Agent to your VMs:
 
-#### Agent installation
+### Agent installation
 
-You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs.
+You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs. You can also use the AKS Cluster Extension to deploy the Agent to your AKS Clusters.
 
-1. In the [Azure portal][14], navigate to your **VM** > **Settings** > **Extensions** > **Add** and select **Datadog Agent**.
-2. Click **Create**, enter your [Datadog API key][15], and click **OK**.
+{{< tabs >}}
+{{% tab "VM Extension" %}}
 
-To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][16].
+1. In the [Azure portal][4], select the appropriate VM.
+2. From the left sidebar, under **Settings**, select **Extensions + applications**.
+3. Click **+ Add**.
+4. Search for and select the `Datadog Agent` extension.
+5. Click **Next**.
+6. Enter your [Datadog API key][2] and [Datadog site][1], and click **OK**.
+
+To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][3].
 
 **Note**: Domain controllers are not supported when installing the Datadog Agent with the Azure extension.
+
+[1]: /getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://portal.azure.com
+{{% /tab %}}
+
+{{% tab "AKS Cluster Extension" %}}
+
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+
+1. Go to your AKS cluster in the Azure portal.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Search for and select the `Datadog AKS Cluster Extension`.
+4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
+
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Sending logs
 
@@ -238,15 +317,10 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [2]: https://us3.datadoghq.com/signup
 [3]: /integrations/guide/azure-portal/
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
-[5]: https://docs.datadoghq.com/logs/guide/azure-logging-guide
+[5]: /logs/guide/azure-logging-guide
 [6]: /integrations/guide/azure-native-manual-setup/
 [7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
 [8]: https://app.datadoghq.com/monitors/recommended
-[9]: /monitors/notify/#notify-your-team
-[10]: https://app.datadoghq.com/integrations/azure
-[11]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
+[9]: /monitors/notify/#configure-notifications-and-automations
 [12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
-[14]: https://portal.azure.com
-[15]: https://app.datadoghq.com/organization-settings/api-keys
-[16]: https://app.datadoghq.com/account/settings/agent/latest

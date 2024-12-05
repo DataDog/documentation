@@ -1,6 +1,5 @@
 ---
 title: Secrets Management
-kind: documentation
 aliases:
   - /agent/faq/kubernetes-secrets
   - /agent/guide/secrets-management
@@ -158,10 +157,12 @@ The expected payload is a JSON object, where each key is one of the handles requ
 * `value`: a string; the actual secret value to be used in the check configurations (can be null in the case of error).
 * `error`: a string; the error message, if needed. If error is anything other than null, the integration configuration that uses this handle is considered erroneous and is dropped.
 
-##### Example executable
+##### Example executables
 
-The following is a dummy Go program prefixing every secret with `decrypted_`:
+ Some sample dummy programs prefixing every secret with `decrypted_`:
 
+{{< tabs >}}
+{{% tab "Go" %}}
 ```go
 package main
 
@@ -202,6 +203,24 @@ func main() {
   fmt.Printf(string(output))
 }
 ```
+{{% /tab %}}
+{{% tab "PowerShell" %}}
+```powershell
+$secretsJson = $input | ConvertFrom-Json
+$secrets = @{}
+for ($index = 0; $index -lt $secretsJson.secrets.count; $index++) {
+    $secretKey = $secretsJson.secrets[$index]
+    # Add code to fetch secret here
+    # For example: $secretValue = Get-Secret -Name $secretKey -Vault SecretStore
+    $secrets[$secretKey] = @{
+        value = "decrypted_$($secretKey)"
+        error = $null
+    }
+}
+Write-Host ($secrets | ConvertTo-Json)
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 This updates this configuration (in the check file):
 
@@ -329,7 +348,7 @@ In addition to these permissions, you need to enable the script to read from mul
 Datadog Agent v7.32 introduces the `readsecret_multiple_providers.sh` script. Datadog recommends that you use this script instead of `/readsecret.py` and `/readsecret.sh` from Agent v6.12. Note that `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
 
 #### Usage
-These scripts require a folder passed as an argument. Secret handles are interpreted as file names,\ relative to this folder. To avoid leaking sensitive information, these scripts refuse to access any file out of the root folder specified (including symbolic link targets).
+These scripts require a folder passed as an argument. Secret handles are interpreted as file names, relative to this folder. To avoid leaking sensitive information, these scripts refuse to access any file out of the root folder specified (including symbolic link targets).
 
 These scripts are incompatible with [OpenShift restricted SCC operations][5] and require that the Agent runs as the `root` user.
 
@@ -487,6 +506,35 @@ If you encounter one of the following errors, then something is missing in your 
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
 
+Datadog has a [Powershell script][8] to help you set the correct permission on your executable. Example on how to use it:
+
+```powershell
+.\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
+ddagentuser SID: S-1-5-21-3139760116-144564943-2741514060-1076
+=== Checking executable permissions ===
+Executable path: C:\secrets\decrypt_secrets.exe
+Executable permissions: OK, the executable has the correct permissions
+
+Permissions Detail:
+
+stdout:
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\secrets\decrypt_secrets.exe
+Owner  : BUILTIN\Administrators
+Group  : BUILTIN\Administrators
+Access : NT AUTHORITY\SYSTEM Allow  FullControl
+         BUILTIN\Administrators Allow  FullControl
+         DESKTOP-V03BB2P\ddagentuser Allow  ReadAndExecute, Synchronize
+Audit  :
+Sddl   : O:BAG:BAD:PAI(A;;FA;;;SY)(A;;FA;;;BA)(A;;0x1200a9;;;S-1-5-21-3139760116-144564943-2741514
+         060-1076)
+stderr:
+
+
+=== Secrets stats ===
+Number of secrets resolved: 0
+Secrets handle resolved:
+```
+
 ##### Testing your executable
 
 Your executable is executed by the Agent when fetching your secrets. The Datadog Agent runs using the `ddagentuser`. This user has no specific rights, but it is part of the `Performance Monitor Users` group. The password for this user is randomly generated at install time and is never saved anywhere.
@@ -525,6 +573,8 @@ stderr: None
 exit code:
 0
 ```
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
+[8]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -566,4 +616,5 @@ This command returns whether the permissions are valid for the Agent to view thi
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [6]: /agent/configuration/agent-commands/#restart-the-agent
-[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
+
+

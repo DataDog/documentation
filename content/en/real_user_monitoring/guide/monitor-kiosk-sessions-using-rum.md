@@ -1,9 +1,9 @@
 ---
 title: Monitor Kiosk Sessions Using RUM
-kind: guide
+
 description: Guide for monitoring kiosk sessions with RUM.
 further_reading:
-- link: '/real_user_monitoring/dashboards/'
+- link: '/real_user_monitoring/platform/dashboards/'
   tag: 'Documentation'
   text: 'RUM Dashboards'
 
@@ -65,7 +65,7 @@ The `stopSession()` method differs depending on your mobile SDK framework.
 This feature requires RUM iOS SDK version >= 1.18.0. See installation instructions [here][1]. 
 
 ```swift
-Global.rum.stopSession()
+RUMMonitor.shared().stopSession()
 ```
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/ios/
@@ -76,7 +76,7 @@ Global.rum.stopSession()
 This feature requires RUM Android SDK version >= 1.19.0. See installation instructions [here][1]. 
 
 ```kotlin
-GlobalRum.get().stopSession()
+GlobalRumMonitor.get().stopSession()
 ```
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/android/
@@ -90,7 +90,7 @@ This feature requires RUM Flutter SDK version >= 1.4.0. See installation instruc
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/flutter/setup/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -110,9 +110,9 @@ DdRum.stopSession()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=cdnsync#clear-user-session-property
+[1]: /real_user_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
-[4]: /real_user_monitoring/flutter/advanced_configuration/#track-user-sessions
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-user-sessions
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#track-user-sessions
 [5]: /real_user_monitoring/reactnative/#user-information
 [6]: /real_user_monitoring/browser/

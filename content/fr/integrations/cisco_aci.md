@@ -32,10 +32,9 @@ integration_id: cisco-aci
 integration_title: CiscoACI
 integration_version: 2.2.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cisco_aci
-oauth: {}
 public_title: CiscoACI
 short_description: Surveillez l'utilisation et les performances de Cisco ACI.
 supported_os:

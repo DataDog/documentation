@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/disk/README.md
 display_name: Disk
@@ -30,17 +31,15 @@ git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: システム
 integration_title: Disk
-integration_version: 4.10.0
+integration_version: 5.4.0
 is_public: true
-kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 2.0.0
 metric_prefix: system.
 metric_to_check: system.disk.free
 monitors:
-  disk-space-forecast: assets/monitors/disk_monitor.json
+  Device is going to be full: assets/monitors/disk_monitor.json
 name: disk
-oauth: {}
 public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
 support: コア
@@ -54,7 +53,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
   media: []
@@ -63,6 +63,7 @@ tile:
   title: Disk
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -75,7 +76,7 @@ tile:
 
 ディスクチェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 ディスクチェックはデフォルトで有効になっています。Agent は、すべてのローカルパーティションに関するメトリクスを収集します。カスタムオプション付きでチェックを構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `disk.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル disk.d/conf.yaml][3] を参照してください。
 
@@ -111,7 +112,7 @@ tile:
 
 Disk チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "disk" >}}
 
 
@@ -120,7 +121,7 @@ Disk チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-findfirstvolumemountpointw

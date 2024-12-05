@@ -3,6 +3,7 @@ app_id: appkeeper
 app_uuid: fc54f5f2-0ce1-4d4e-b1e0-191eece029d3
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: AppKeeper.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10130
     source_type_name: AppKeeper
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,7 +23,8 @@ author:
 categories:
 - AWS
 - cloud
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: appkeeper
 integration_title: AppKeeper
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: appkeeper
-oauth: {}
 public_title: AppKeeper
 short_description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
 supported_os:
@@ -45,9 +46,10 @@ tile:
   classifier_tags:
   - Category::AWS
   - Category::Cloud
-  - Category::Notification
+  - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
   media: []
@@ -56,6 +58,7 @@ tile:
   title: AppKeeper
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

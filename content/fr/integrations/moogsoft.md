@@ -36,12 +36,11 @@ integration_id: moogsoft
 integration_title: Moogsoft
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: moogsoft
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

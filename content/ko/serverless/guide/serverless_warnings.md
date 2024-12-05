@@ -7,7 +7,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/serverless-insights/
   tag: 블로그
   text: 서버리스 인사이트에 관해 자세히 알아보기
-kind: 가이드
 title: 서버리스 경고
 ---
 

@@ -8,6 +8,7 @@ assets:
     Redis Enterprise Database Overview: assets/dashboards/redisenterprise_overview.json
     Redis Enterprise Redis on Flash: assets/dashboards/redisenterprise_rof.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
       prefix: redisenterprise.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10190
     source_type_name: Redis Enterprise
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -25,22 +27,21 @@ author:
   sales_email: github@mague.com
   support_email: github@mague.com
 categories:
-- data store
+- data stores
 - キャッシュ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: redisenterprise
 integration_id: redisenterprise
-integration_title: RedisEnterprise
+integration_title: RedisEnterprise (非推奨)
 integration_version: 1.2.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: redisenterprise
-oauth: {}
-public_title: RedisEnterprise
+public_title: RedisEnterprise (非推奨)
 short_description: Redis Enterprise 可視性
 supported_os:
 - linux
@@ -52,50 +53,54 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Caching
+  - Offering::Integration
   configuration: README.md#Setup
   description: Redis Enterprise 可視性
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: RedisEnterprise
+  title: RedisEnterprise (非推奨)
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ![img][1]
 
 ## 概要
 
-このインテグレーションにより、Datadog で [Redis Enterprise][2] を監視しメトリクスを取得できます。
+**This integration is will be deprecated starting on November 1, 2024. Please use the latest [Redis Enterprise Datadog Integration][2] going forward. This new integration exposes all of the latest Redis Enterprise metrics and includes updated dashboards.**
+
+このインテグレーションにより、Datadog で [Redis Enterprise][3] を監視しメトリクスを取得できます。
 
 ### Redis Enterprise とは？
 
-[Redis Enterprise][2] は、Redis のフルサポートエンタープライズ版です。Redis のオープンソースの主要機能セットに加え、Redis Enterprise ならアクティブなジオディストリビューション、マルチモデルデータベース機能、可視化の強化、そしてマルチテナンシー管理による稼働時間の増加が可能になります。
+[Redis Enterprise][3] は、Redis のフルサポートエンタープライズ版です。Redis のオープンソースの主要機能セットに加え、Redis Enterprise ならアクティブなジオディストリビューション、マルチモデルデータベース機能、可視化の強化、そしてマルチテナンシー管理による稼働時間の増加が可能になります。
 
 ### Redis Enterprise Datadog ダッシュボード
 
 Redis Enterprise Datadog インテグレーションで提供される、クラスターおよびデータベースのすべてに対するテンプレートビューを使用すると、他製品では不可能なオペレーションに関するインサイトを利用できます。使用パターンを把握し、データに裏付けされた成長プランを理解することで、情報に基づいた意思決定が可能になります。
 
 #### データベースの概要
-![overview][3]
-
-#### クラスターの概要
 ![overview][4]
 
-#### Redis on Flash
-![rofdash][5]
+#### クラスターの概要
+![overview][5]
 
-#### アクティブ/アクティブ Redis
+#### Redis on Flash
 ![rofdash][6]
 
-#### Redis Enterprise のイベント
-![イベント][7]
+#### アクティブ/アクティブ Redis
+![rofdash][7]
+
+#### Redis Enterprise events
+![events][8]
 
 ### プロバイダー
 
-![プロバイダー][8]
+![provider][9]
 
 このインテグレーションは、Redis Labs により提供されています。
 
@@ -103,23 +108,23 @@ Redis Enterprise Datadog インテグレーションで提供される、クラ�
 
 ### インストール
 
-Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に従って、ホストに RedisEnterprise チェックをインストールしてください。[v7.21 / v6.21 以前の Agent][10] または [Docker Agent][11] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][9]に関する Agent のガイドを参照してください。
+Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に従って、ホストに RedisEnterprise チェックをインストールしてください。[v7.21 / v6.21 以前の Agent][11] または [Docker Agent][12] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][10]に関する Agent のガイドを参照してください。
 
-1. [Datadog Agent をダウンロードして起動][12]します。
+1. [Datadog Agent をダウンロードして起動][13]します。
 2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-redisenterprise==<INTEGRATION_VERSION>
    ```
-  最新版は、[Datadog インテグレーションリリースページ][13]で確認することができます
+  最新版は、[Datadog インテグレーションリリースページ][14]で確認することができます
 
    **注**: I必要に応じて、インストールコマンドの先頭に `sudo -u dd-agent` を追加します。
 
-3. [他のパッケージ化されたインテグレーション][14]と同様にインテグレーションを構成します。
+3. [他のパッケージ化されたインテグレーション][15]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
-[サンプルコンフィギュレーション][15]をコピーして必要なセクションを更新し、Redis Enterprise クラスターからデータを収集します
+[サンプルコンフィギュレーション][16]をコピーして必要なセクションを更新し、Redis Enterprise クラスターからデータを収集します
 
 ```yml
     ## @param host - 文字列 - 必須
@@ -144,7 +149,7 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 
 クラスターコンフィギュレーションに一致するその他の設定オプションについては、例の完全ファイルをご参照ください。
 
-[ドキュメント][16]に従いユーザーを構成します。
+[ドキュメント][17]に従いユーザーを構成できます。
 
 ## 収集データ
 
@@ -152,7 +157,7 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 {{< get-metrics-from-git "redisenterprise" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 **`redisenterprise.running`**
 
@@ -173,29 +178,30 @@ Agent  v7.21 / v6.21 以降を使用している場合は、以下の手順に�
 
 ### イベント
 
-すべての [Redis Enterprise イベント][18]が収集されます。
+すべての [Redis Enterprise イベント][19]が収集されます。
 
 ## トラブルシューティング
 
-[Redis フィールドエンジニアリングチーム][19]にお問い合わせください。
+[Redis フィールドエンジニアリングチーム][20]にお問い合わせください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/redis-enterprise.jpg
-[2]: http://www.redislabs.com
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/dashboard.png
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/datadog_cluster_top_view.png
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/ROF_dashboard.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/active_active_dashboard.png
-[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/events.png
-[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/logo-redis.png
-[9]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentv721v621
-[10]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentearlierversions
-[11]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=docker
-[12]: https://app.datadoghq.com/account/settings#agent
-[13]: https://github.com/DataDog/integrations-extras/tags
-[14]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[15]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/datadog_checks/redisenterprise/data/conf.yaml.example
-[16]: https://docs.redislabs.com/latest/rc/security/database-security/passwords-users-roles/
-[17]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/metadata.csv
-[18]: https://docs.redislabs.com/latest/rs/administering/monitoring-metrics/#cluster-alerts
-[19]: mailto:redis.observability@redis.com?subject=Datadog%20Integration%20Support
+[2]: https://docs.datadoghq.com/ja/integrations/redis_enterprise/
+[3]: http://www.redislabs.com
+[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/dashboard.png
+[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/datadog_cluster_top_view.png
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/ROF_dashboard.png
+[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/active_active_dashboard.png
+[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/events.png
+[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/logo-redis.png
+[10]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentv721v621
+[11]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentearlierversions
+[12]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=docker
+[13]: https://app.datadoghq.com/account/settings/agent/latest
+[14]: https://github.com/DataDog/integrations-extras/tags
+[15]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[16]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/datadog_checks/redisenterprise/data/conf.yaml.example
+[17]: https://docs.redislabs.com/latest/rc/security/database-security/passwords-users-roles/
+[18]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/metadata.csv
+[19]: https://docs.redislabs.com/latest/rs/administering/monitoring-metrics/#cluster-alerts
+[20]: mailto:redis.observability@redis.com?subject=Datadog%20Integration%20Support

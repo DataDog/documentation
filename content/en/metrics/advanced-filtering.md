@@ -1,6 +1,5 @@
 ---
 title: Advanced Filtering
-kind: documentation
 description: Filter your data to narrow the scope of metrics returned.
 further_reading:
   - link: "/metrics/explorer/"
@@ -70,7 +69,7 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 ## Wildcard filtered queries 
 
-Tag value prefix, suffix, and infix wildcard matching is supported: 
+Prefix, suffix, and substring wildcard tag filtering are supported: 
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
 -  `node:*-prod-*`
@@ -93,7 +92,7 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 avg:system.disk.utilized{region:*east*} by {region}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_infix_example.png" alt="Wildcard used as infix" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="Wildcard used as infix" style="width:100%;" >}}
 
 ## Exclusion functions
 

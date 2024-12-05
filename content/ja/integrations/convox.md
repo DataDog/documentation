@@ -3,6 +3,7 @@ app_id: convox
 app_uuid: 4476973b-6e79-4861-a321-7e24e581873b
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: convox.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10006
     source_type_name: Convox
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,6 +24,7 @@ categories:
 - cloud
 - configuration & deployment
 - containers
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: convox
 integration_title: Convox
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: convox
-oauth: {}
 public_title: Convox
 short_description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
 supported_os:
@@ -50,14 +51,19 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
   support: README.md#Support
   title: Convox
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -104,7 +110,7 @@ Convox インテグレーションには、メトリクスは含まれません�
 
 Convox インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Convox インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -114,7 +120,7 @@ Convox インテグレーションには、サービスのチェック機能は�
 
 ![同じレベルで定義された Environment と Services のパラメーター][4]
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

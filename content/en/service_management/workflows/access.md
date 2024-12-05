@@ -1,12 +1,16 @@
 ---
 title: Access and Authentication
-kind: documentation
 description: Access and authentication for Workflow Automation
 aliases:
 - /workflows/access
 - /workflows/service_accounts
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 disable_toc: false
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
@@ -65,15 +69,17 @@ Workflow actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
-For more information on configuring credentials, see [Connections][7].
+For more information on configuring credentials, see [Connections][6].
 
 ## Workflow permissions
 
-Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][10].
+Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
+
+By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
 
 ### Restrict access on a specific connection
 
-Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**.
+Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : Can view the connection
@@ -88,7 +94,7 @@ Resolving a connection includes getting the connection object assigned to a step
 
 Follow the steps below to modify the permissions on a specific connection:
 
-1. Navigate to the [Workflow Automation page][9].
+1. Navigate to the [Workflow Automation page][8].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
@@ -100,7 +106,7 @@ Follow the steps below to modify the permissions on a specific connection:
 
 ### Restrict access on a specific workflow
 
-Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**.
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : Can view the workflow
@@ -111,10 +117,10 @@ Runner
 Editor
 : Can edit, run, and view the workflow
 
-You can restrict access on a specific workflow either form the workflow list page or from the workflow canvas while editing the workflow.
+You can restrict access on a specific workflow either from the workflow list page or from the workflow canvas while editing the workflow.
 
 **Restricting permissions from the workflow list page**
-1. Navigate to the [Workflow Automation page][9].
+1. Navigate to the [Workflow Automation page][8].
 1. Hover over the workflow on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
 1. Select **Restrict Access**.
@@ -136,13 +142,14 @@ You can restrict access on a specific workflow either form the workflow list pag
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
+
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
 [4]: /service_management/workflows/trigger/
 [5]: /service_management/workflows/actions_catalog/
-[6]: /integrations/
-[7]: /service_management/workflows/connections/
-[8]: /service_management/workflows/actions_catalog/generic_actions/
-[9]: https://app.datadoghq.com/workflow
-[10]: /account_management/rbac/permissions/#workflows
+[6]: /service_management/workflows/connections/
+[7]: /account_management/rbac/permissions/#workflow-automation
+[8]: https://app.datadoghq.com/workflow
+[9]: https://datadoghq.slack.com/

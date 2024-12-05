@@ -1,6 +1,6 @@
 ---
 aliases:
-- developers/marketplace/
+- /developers/marketplace/
 further_reading:
 - link: https://www.datadoghq.com/partner/
   tag: Partner Network
@@ -20,13 +20,13 @@ description: Learn about the Datadog marketplace.
 ---
 ## Overview
 
-The [Datadog Marketplace][2] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.  
+The [Datadog Marketplace][2] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.
 
 While the **Integrations** page includes integrations built by both Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including Agent-based or API-based integrations, software licenses, and professional services.
 
 {{< img src="developers/marketplace/marketplace_overview.png" alt="The Datadog Marketplace page" style="width:100%" >}}
 
-## List an offering 
+## List an offering
 
 The following types of offerings are supported on the Datadog Marketplace:
 
@@ -39,11 +39,11 @@ Software licenses
 Professional services
 : Professional services enable you to offer your team's services for implementation, support, or management for a set period of time.
 
-## Join the Datadog Marketplace 
+## Join the Datadog Marketplace
 
 Marketplace Partners have unique benefits that are not available to Technology Partners who list out-of-the-box integrations:
- 
-- **Go-to-market collaboration** including a blog post, a quote for a press release, and social media amplification, with access to dedicated sales and marketing resources focused on accelerating partner growth. 
+
+- **Go-to-market collaboration** including a blog post, a quote for a press release, and social media amplification, with access to dedicated sales and marketing resources focused on accelerating partner growth.
 - **Training and support** for internal sales enablement.
 - **Exclusive opportunities to sponsor** conferences and events (such as [Datadog DASH][20]) at a discounted rate.
 - **Generate new leads** from user discovery.

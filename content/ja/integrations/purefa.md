@@ -6,6 +6,7 @@ assets:
     purefa_overview: assets/dashboards/purefa_overview.json
     purefa_overview_legacy: assets/dashboards/purefa_overview_legacy.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,6 +17,7 @@ assets:
       prefix: purefa.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10256
     source_type_name: PureFA
 author:
   homepage: https://purestorage.com
@@ -23,8 +25,9 @@ author:
   sales_email: sales@purestorage.com
   support_email: pure-observability@purestorage.com
 categories:
-- data store
+- data stores
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
 display_on_public_website: true
@@ -32,12 +35,10 @@ draft: false
 git_integration_title: purefa
 integration_id: purefa
 integration_title: Pure Storage FlashArray
-integration_version: 1.1.1
+integration_version: 1.2.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: purefa
-oauth: {}
 public_title: Pure Storage FlashArray
 short_description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
 supported_os:
@@ -47,7 +48,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::OS & System
   - Offering::Integration
   - Supported OS::Linux
@@ -70,6 +71,7 @@ tile:
   title: Pure Storage FlashArray
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -98,12 +100,12 @@ tile:
 
 #### ホスト
 
-ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>` を実行します。
+ホスト上で動作している Agent に対してこのチェックを構成するには、`sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>` を実行します。
 
 注: `<INTEGRATION_VERSION>` は、Datadog Integration Extras の [CHANGELOG.md][5] 内に記載されています。
-  * 例: `datadog-agent integration install -t datadog-purefa==1.1.0`
+  * 例: `sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==1.2.0`
 
-### コンフィギュレーション
+### 構成
 
 1. FlashArray に Read-Only ロールのローカルユーザーを作成し、このユーザー用の API トークンを生成します。
    ![API キーの生成][6]
@@ -215,18 +217,18 @@ min_collection_interval: 120
 
 PureFA インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][13] を参照してください。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下の方法で Pure Storage にお問い合わせください。
 * メール: pure-observability@purestorage.com
 * Slack: [Pure Storage Code// Observability Channel][14]
 
 [1]: https://www.purestorage.com/products.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/PureStorage-OpenConnect/pure-fa-openmetrics-exporter
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/purefa/CHANGELOG.md

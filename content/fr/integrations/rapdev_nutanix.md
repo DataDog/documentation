@@ -42,12 +42,11 @@ integration_id: rapdev-nutanix
 integration_title: Nutanix
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_nutanix
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

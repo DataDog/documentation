@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/setup_pipelines/jenkins/
   tag: ドキュメント
   text: Jenkins パイプラインでトレースを設定する
-kind: documentation
 title: Jenkins
 ---
 
@@ -95,7 +94,7 @@ pipeline {
 
 {{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Jenkins でのテスト実行例" style="width:80%;">}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,6 +1,5 @@
 ---
 title: Process collection with Agent v5
-kind: faq
 private: true
 ---
 

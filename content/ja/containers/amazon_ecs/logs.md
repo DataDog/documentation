@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentation
   text: ECS メトリクスの収集
-kind: documentation
 title: Amazon ECS ログ収集
 ---
 
@@ -20,6 +19,10 @@ Datadog Agent 6+ は、コンテナからログを収集します。ECS コン�
 
 - コンテナが*その*コンテナ内に隔離されたログファイルを作成している場合、Agent コンテナがこれらのログファイルにアクセスできるように、いくつかの[追加手順](#log-file-within-a-container)を実行する必要があります。
 - コンテナが[ログを CloudWatch に送信するために `awslogs` ロギングドライバー][9]を使用している場合、これらのログは Agent から見えません。代わりに、これらのログを収集するために、[AWS ログ収集インテグレーション][10]のいずれかを使用します。
+
+#### AWS Fargate
+
+AWS Fargate のログ収集をセットアップするには、[AWS Fargate ログ収集][13]を参照してください。
 
 ## インストール
 
@@ -252,7 +255,7 @@ ECS によるボリューム管理の詳細については、[AWS Bind マウン
 
 各コンテナに使用するインテグレーションを特定するには、`source` 属性を使用します。この属性をコンテナのラベルで直接上書きすれば、[Datadog ログのインテグレーション][2]が有効になります。このプロセスの詳細については、Datadog の[ログのオートディスカバリー ガイド][1]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -268,3 +271,4 @@ ECS によるボリューム管理の詳細については、[AWS Bind マウン
 [10]: /ja/integrations/amazon_web_services/?tab=allpermissions#log-collection
 [11]: /ja/containers/amazon_ecs/?tab=awscli#setup
 [12]: /ja/containers/docker/log/?tab=dockerfile#log-integrations
+[13]: /ja/integrations/ecs_fargate/?tab=webui#log-collection

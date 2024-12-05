@@ -1,6 +1,5 @@
 ---
 title: Trace Qualification
-kind: documentation
 aliases:  
 further_reading:
 - link: "/security/application_security/"
@@ -21,7 +20,7 @@ Filter by the **Qualification** facet in the ASM [Traces Explorer][1] to view th
 
 ## Qualification outcomes
 
-There are four types of qualification outcomes listed in the facet menu:
+ASM runs qualification rules (closed-source) on every trace. There are four possible qualification outcomes, as listed in the facet menu:
 
 | Qualification result | Description |
 |------|-------------|

@@ -8,18 +8,21 @@ further_reading:
   text: Solucionar problemas
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog/
   tag: Blog
-  text: Monitorización del rendimiento de bases de datos con Datadog
-kind: documentación
+  text: Monitorización del rendimiento de las bases de datos con Datadog
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para mejorar la monitorización de bases
+    de datos
 title: Empezando con la monitorización de bases de datos
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">La monitorización de bases de datos no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Información general
 
-La monitorización de bases de datos de Datadog te ayuda a comprender mejor el estado y el rendimiento de tus bases de datos, y a determinar rápidamente el origen de cualquier problema.
+La monitorización de bases de datos de Datadog te ayuda a comprender mejor el estado y el rendimiento de tus bases de datos, y a determinar el origen de cualquier problema.
 
 En un único lugar, puedes visualizar lo siguiente:
 
@@ -44,24 +47,24 @@ La aplicación de ejemplo inicia el Datadog Agent y una base de datos PostgreSQL
 Sigue estas instrucciones para instalar la aplicación de ejemplo en MacOs o Linux.
 
 1. Clona el [repositorio][5] que contiene la aplicación de ejemplo:
-```
-git clone https://github.com/DataDog/dd-database-monitoring-example
-```
+    ```
+    git clone https://github.com/DataDog/dd-database-monitoring-example
+    ```
 
 2. Cambia al directorio de `dd-database-monitoring-example`:
-```
-cd dd-database-monitoring-example
-```
+    ```
+    cd dd-database-monitoring-example
+    ```
 
-3. Configura la variable de entorno `DD_API_KEY` con tu clave API de Datadog:
-```
-export DD_API_KEY=<API_KEY>
-```
+3. Configura la variable de entorno `DD_API_KEY` con tu clave de API de Datadog:
+    ```
+    export DD_API_KEY=<API_KEY>
+    ```
 
 4. Inicia la aplicación:
-```
-make postgres
-```
+    ```
+    make postgres
+    ```
 
 El comando continuará ejecutándose hasta que lo detengas pulsando Ctrl + C.
 
@@ -69,27 +72,31 @@ El comando continuará ejecutándose hasta que lo detengas pulsando Ctrl + C.
 
 ¿Cuál es la consulta que más tiempo consume en la base de datos? Para averiguarlo, utiliza la vista Query Metrics (Métricas de consultas).
 
-1. Haz clic en **APM > Databases** (APM > Bases de datos) en la interfaz de usuario para ir a la monitorización de bases de datos. Se abrirá la vista Query Metrics.
+1. En la página [Monitorización de base de datos][6], haz clic en la pestaña **Query metrics** (Métricas de consultas) en la interfaz de usuario.
 
 2. Ordena la tabla Normalized Query (Consulta normalizada) por **Percent time** (Porcentaje de tiempo) para ver a qué consulta dedica más tiempo de ejecución la base de datos.
 
-La consulta que más tiempo consume en la base de datos aparecerá en la primera línea.
+   La consulta que consume más tiempo de la base de datos aparece en la primera línea:
 
-{{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Consultas normalizadas ordenadas por porcentaje de tiempo" style="width:100%;">}}
+   {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Consultas normalizadas ordenadas por porcentaje de tiempo" style="width:100%;">}}
 
 ## Soluciona los problemas de una consulta lenta
 
-Además de identificar las consultas lentas, la monitorización de bases de datos de Datadog puede ayudarte a hacer un diagnóstico de ellas. Las acciones que lleva a cabo la base de datos para resolver esas consultas se describen en el Explain Plan (plan explicativo) de cada una. Si deseas ver un Explain Plan, haz clic en una muestra en la vista Query Samples (Muestras de consultas).
+Además de identificar las consultas lentas, la monitorización de bases de datos de Datadog puede ayudarte a hacer un diagnóstico de ellas. Las acciones que lleva a cabo la base de datos para resolver esas consultas se describen en el plan explicativo (Explain Plan) de cada una. Si deseas ver un plan explicativo, haz clic en una muestra en la vista Query Samples (Muestras de consultas).
 
-Para acceder a la vista Query Samples de la monitorización de bases de datos, haz clic en **[APM > Databases][6]** (APM > Bases de datos) y selecciona la pestaña **Query Samples** de la IU.
+1. Navega hasta la vista Muestras de consulta dentro de la [Monitorización de base de datos][6] seleccionando la pestaña **Samples** (Muestras).
 
-Ordena la tabla Normalized Query (Consulta normalizada) por **Duration** (Duración).
+2. En el menú desplegable **In** (En), selecciona **Explain Plans** (Planes de explicación).
 
-{{< img src="database_monitoring/dbm_qs_sort_duration.png" alt="Muestras de consultas normalizadas ordenadas por duración" style="width:100%;">}}
+3. Ordena la tabla Normalized Query (Consulta normalizada) por **Duration** (Duración).
 
-Encuentra una consulta en la tabla con los datos de la columna **Explain Plan** y haz clic en ella para abrir la página Sample Details (Detalles de la muestra). El Explain Plan que aparece en la parte inferior de Sample Details indica que la consulta requiere un _Index Scan_ (Análisis de índice).
+   {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="Muestras de consultas normalizadas ordenadas por duración">}}
 
-{{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Plan explicativo de una consulta que requiere un análisis de índice" style="width:100%;">}}
+4. Busca una consulta en la tabla con datos en la columna **Explain Plan** (Plan de explicación) y haz clic en ella para abrir la página Detalles de la muestra. 
+
+5. En **Explain Plan** (Plan de explicación), haz clic en **List View** (Vista de lista). Este Plan de explicación en la parte inferior de la página Muestra de plan de explicación indica que la consulta requiere un _Escaneo de índice_.
+
+   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Plan de explicación de consulta que muestra el Escaneo de índice">}}
 
 ## Visualiza el estado y el rendimiento de las bases de datos
 
@@ -109,23 +116,19 @@ Por ejemplo, si añades el widget **Change** (Cambios) para realizar el seguimie
 
 4. Selecciona `postgresql.queries.count` en el menú desplegable **Metric** (Métrica). Esta métrica hace un recuento del número de consultas que se han enviado a una base de datos PostgreSQL.
 
-5. Selecciona `host` en el menú desplegable **Break it down by** (Desglosar por) para que el widget agregue las consultas por host.
+5. Selecciona `host` en el menú desplegable **Break it down by* (Desglosar por) para que el widget agregue las consultas por host.
 
-{{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configuración del widget Change para obtener la métrica de consultas de PostgreSQL" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configuración del widget Change para obtener la métrica de consultas de PostgreSQL" style="width:100%;">}}
 
 7. Haz clic en el botón **Save** (Guardar). Tu nuevo widget aparecerá en el dashboard.
 
-{{< img src="database_monitoring/dashboard_change_widget.png" alt="Imagen del widget Change en la que se puede ver el count de consultas" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_widget.png" alt="Imagen del widget Change en la que se puede ver el count de consultas" style="width:100%;">}}
 
-### Visualiza los dashboards por defecto
+### Ver dashboards predefinidos
 
 Observa la actividad actual de la base de datos, la utilización de los recursos y mucho más en los dashboards predefinidos que ofrece la monitorización de bases de datos de Datadog.
 
-Para acceder a los dashboards:
-
-1. Haz clic en **APM > Databases** (APM > Bases de datos) en la IU para acceder a la monitorización de bases de datos.
-
-2. Selecciona la pestaña **Dashboards** y elige el que desees ver.
+Para acceder a los dashboards, desde la página [Monitorización de base de datos][6], selecciona la pestaña **Dashboards** y elige el dashboard que desees ver.
 
 Puedes clonar y modificar los dashboards predefinidos en función de tus necesidades.
 

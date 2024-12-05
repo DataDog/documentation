@@ -3,15 +3,15 @@ app_id: tenable
 app_uuid: 09a46b1b-a940-4aba-8e9f-bde9e5ae2c3f
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10089
     source_type_name: Tenable
-  logs:
-    source: tenable
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -19,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tenable/README.md
 display_on_public_website: true
@@ -26,12 +27,10 @@ draft: false
 git_integration_title: tenable
 integration_id: tenable
 integration_title: Tenable Nessus
-integration_version: 1.4.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tenable
-oauth: {}
 public_title: Tenable Nessus
 short_description: Nessus のバックエンドと Web サーバーのログを追跡
 supported_os:
@@ -45,6 +44,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nessus のバックエンドと Web サーバーのログを追跡
   media: []
@@ -53,6 +53,7 @@ tile:
   title: Tenable Nessus
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## 概要
 
 このインテグレーションは、Datadog Agent を通じて [Tenable Nessus][1] のログを監視します。
@@ -69,11 +70,11 @@ Tenable インテグレーションのコンフィギュレーションを Agent
 
 1. 1.0 のリリースを[インストール][2]します（`tenable==1.0.0`）。
 
-### コンフィギュレーション
+### 構成
 
 Agent は Tenable Nessus の `webserver` と `backend` のログを追跡し、Nessus スキャンのデータを収集します。
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -119,7 +120,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://www.tenable.com/products/nessus
 [2]: https://docs.datadoghq.com/ja/agent/guide/integration-management/#install

@@ -2,6 +2,7 @@
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Queue Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_queue_storage/
@@ -12,7 +13,6 @@ integration_id: azure-queue-storage
 integration_title: Microsoft Azure Queue Storage
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_queue_storage
 public_title: Datadog-Microsoft Azure Queue Storage インテグレーション
@@ -20,6 +20,7 @@ short_description: Azure Queue Storage のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Queue Storage は、多数のメッセージを格納するためのサービスです。メッセージには、HTTP または HTTPS を使用し、認証された呼び出しで世界中のどこからでもアクセスできます。
@@ -45,7 +46,7 @@ Azure Queue Storage からメトリクスを取得すると、以下のことが
 
 Azure Queue Storage インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Queue Storage インテグレーションには、サービスのチェック機能は含まれません。
 

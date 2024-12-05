@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
   text: Planificación y ajustes de uso
-kind: guía
 title: Migrar de la versión 1 de las APIs de uso por hora a la versión 2
 ---
 
@@ -45,6 +44,18 @@ Las gamas y los tipos de uso:
     * `ci_visibility_test_committers`
 - **cloud_cost_management** (gestión de costes en la nube)
     * `host_count`
+- **csm_container_enterprise**
+    * `cws_count`
+    * `compliance_count`
+    * `total_count`
+- **csm_host_enterprise**
+    * `total_host_count`
+    * `compliance_hosts`
+    * `cws_hosts`
+    * `aas_host_count`
+    * `azure_host_count`
+    * `aws_host_count`
+    * `gcp_host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
@@ -60,7 +71,7 @@ Las gamas y los tipos de uso:
 - **fargate**
     * `avg_profiled_fargate_tasks`
     * `tasks_count`
-- **infra_hosts** (hosts de infraestructuras)
+- **infra_hosts**
     * `agent_host_count`
     * `alibaba_host_count`
     * `apm_azure_app_service_host_count`
@@ -74,9 +85,9 @@ Las gamas y los tipos de uso:
     * `infra_azure_app_service`
     * `opentelemetry_host_count`
     * `vsphere_host_count`
-- **incident_management** (gestión de incidencias)
+- **incident_management**
     * `monthly_active_users`
-- **indexed_logs** (logs indexados)
+- **indexed_logs**
     * `logs_indexed_events_3_day_count`
     * `logs_live_indexed_events_3_day_count`
     * `logs_rehydrated_indexed_events_3_day_count`
@@ -107,13 +118,13 @@ Las gamas y los tipos de uso:
     * `logs_indexed_events_custom_day_count`
     * `logs_live_indexed_events_custom_day_count`
     * `logs_rehydrated_indexed_events_custom_day_count`
-- **indexed_spans** (tramos indexados)
+- **indexed_spans**
     * `indexed_events_count`
     * `ingested_spans`
     * `ingested_events_bytes`
 - **iot**
     * `iot_device_count`
-- **lambda_traced_invocations** (invocaciones rastreadas con funciones lambda)
+- **lambda_traced_invocations**
     * `lambda_traced_invocations_count`
 - **logs**
     * `billable_ingested_bytes`
@@ -124,25 +135,25 @@ Las gamas y los tipos de uso:
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`
     * `logs_rehydrated_ingested_bytes`
-- **network_flows** (flujos de red)
+- **network_flows**
     * `indexed_events_count`
-- **network_hosts** (hosts de red)
+- **network_hosts**
     * `host_count`
-- **observability_pipelines** (pipelines de observabilidad)
+- **observability_pipelines**
     * `observability_pipelines_bytes_processed`
-- **online_archive** (archivo en línea)
+- **online_archive**
     * `online_archive_events_count`
-- **profiling** (elaboración de perfiles)
+- **profiling**
     * `avg_container_agent_count`
     * `host_count`
 - **rum**
     * `browser_rum_units`
     * `mobile_rum_units`
     * `rum_units`
-- **rum_browser_sessions** (sesiones del navegador rum)
+- **rum_browser_sessions**
     * `replay_session_count`
     * `session_count`
-- **rum_mobile_sessions** (sesiones móviles rum)
+- **rum_mobile_sessions**
     * `session_count`
     * `session_count_android`
     * `session_count_ios`
@@ -153,11 +164,13 @@ Las gamas y los tipos de uso:
     * `total_scanned_bytes`
 - **snmp**
     * `snmp_devices`
-- **synthetics_api** (API Synthetics)
+- **synthetics_api**
     * `check_calls_count`
-- **synthetics_browser** (Navegador Synthetic)
+- **synthetics_browser**
     * `browser_check_calls_count`
-- **timeseries** (cronologías)
+- **synthetics_mobile**
+    * `test_runs`
+- **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`
     * `num_custom_timeseries`
@@ -236,7 +249,7 @@ ENDPOINT | GAMA DE PRODUCTOS
 : **Tipo de uso:** `logs_indexed_events_<retention>_count` **Punto de datos:** `indexed_events_count`
 : **Tipo de uso:** `logs_live_indexed_events_<retention>_count` **Punto de datos:** `live_indexed_events_count`
 : **Tipo de uso:** `logs_rehydrated_indexed_events_<retention>_count` **Punto de datos:** `rehydrated_indexed_events_count`
-: **Tipo de uso:** En `usage_type`, sustituye `<retention>` con uno de los siguientes: `3_day`, `7_day`, `15_day`, `30_day`, `45_day`, `60_day`, `90_day`, `180_day`, `365_day`, `custom` **Punto de datos:** `retention`
+: **Tipo de uso:** En `usage_type`, sustituye `<retention>` con uno de los siguientes parámetros: `3_day`, `7_day`, `15_day`, `30_day`, `45_day`, `60_day`, `90_day`, `180_day`, `365_day`, `custom` **Punto de datos:** `retention`
 
 `<base_url>/api/v1/usage/analyzed_logs` | analyzed_logs
 : `analyzed_logs`
@@ -316,7 +329,7 @@ a la API de uso por hora de la versión 2.
 ##### Notas
 
 * El producto es un elemento de la ruta `hosts`.
-* Los periodos de tiempo se controlan mendiante los parámetros `start_hr` y `end_hr`.
+* Los períodos de tiempo se controlan mediante los parámetros `start_hr` y `end_hr`.
 
 #### Respuesta
 
@@ -349,9 +362,9 @@ a la API de uso por hora de la versión 2.
 
 * El uso dado a cada hora se representa como un objeto en la matriz de uso.
 * Los tipos de uso son claves en el objeto, y el uso registrado de esos tipos de uso son los valores correspondientes.
-* La hora, el nombre de la organización y el ID público son también campos en el objeto.
+* La hora, el nombre de la organización y el ID público también son campos en el objeto.
 
-### API v2: Ver el uso por hora por gama de productos
+### API v2: ver el uso por hora por gama de productos
 
 #### Solicitud
 
@@ -359,8 +372,8 @@ a la API de uso por hora de la versión 2.
 
 ##### Notas
 
-* El producto se incluye como un parámetro de consulta`filter[product_families]=infra_hosts`.
-* Los periodos de tiempo se controlan mediante los parámetros `filter[timestamp][start]` y `filter[timestamp][end]`.
+* El producto se incluye como un parámetro de consulta `filter[product_families]=infra_hosts`.
+* Los períodos de tiempo se controlan mediante los parámetros `filter[timestamp][start]` y `filter[timestamp][end]`.
 
 #### Respuesta
 
@@ -442,7 +455,7 @@ a la API de uso por hora de la versión 2.
     * Las APIs v1 no eran compatibles con varios productos o varias organizaciones por solicitud.
 * Las mediciones de uso se representan en la matriz `measurements` anidada.
 * Los objetos de medición de uso tienen los campos  `usage_type` y `value`.
-* `hour`, `org_name` y `public_id` son también campos en el objeto `attributes`.
+* `hour`, `org_name` y `public_id` también son campos en el objeto `attributes`.
 
 ## Paginación
 

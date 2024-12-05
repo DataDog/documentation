@@ -1,6 +1,5 @@
 ---
 title: Monitor Authentication Logs for Security Threats
-kind: guide
 aliases:
   - /security_monitoring/guide/monitor-authentication-logs-for-security-threats/
   - /security_platform/guide/monitor-authentication-logs-for-security-threats/

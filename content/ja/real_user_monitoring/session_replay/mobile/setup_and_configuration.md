@@ -17,7 +17,9 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイ
-kind: ドキュメント
+- link: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+  tag: ドキュメント
+  text: Web ビュー追跡
 title: モバイルセッションリプレイの設定と構成
 ---
 
@@ -89,12 +91,50 @@ iOS 用にモバイルセッションリプレイを設定する方法
 {{% /tab %}}
 {{< /tabs >}}
 
+## Web view instrumentation
+
+You can record the entire user journey across both [web and native views][1] on iOS or Android and watch it in a single Session Replay.
+
+The Session Replay is recorded through the Browser SDK, then the Mobile SDK handles the batching and uploading of the webview recording.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+To instrument your consolidated web and native Session Replay views for Android:
+
+1. Ensure you are using version [`2.8.0`][2] or higher of the Android SDK.
+2. Enable [webview tracking][3] for your mobile application.
+3. Enable [Session Replay][4] for your web application.
+4. Enable Session Replay for your mobile application (see setup instructions above).
+
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/
+[2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
+[4]: /ja/real_user_monitoring/session_replay/browser/#setup
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+To instrument your consolidated web and native Session Replay views for iOS:
+
+1. Ensure you are using version [`2.13.0`][1] or higher of the iOS SDK.
+2. Enable [webview tracking][2] for your mobile application.
+3. Enable [Session Replay][3] for your web application.
+4. Enable Session Replay for your mobile application (see setup instructions above).
+
+[1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=ios#instrument-your-web-views
+[3]: /ja/real_user_monitoring/session_replay/browser/#setup
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## 追加構成
 ### 記録したセッションが表示されるサンプルレートの設定
 
-サンプルレートは、セッションリプレイの構成で必須のパラメーターです。 0.0～100.0 の間の数字でなければならず、0 はリプレイが記録されないこと、100 はすべての RUM セッションにリプレイが含まれることを意味します。
+Sample rate is a required parameter in Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 means no replays are recorded and 100 means all RUM sessions contain replay.
 
-このサンプルレートは、RUM サンプルレートに加えて適用されます。たとえば、RUM が 80% のサンプルレートを使用し、セッションリプレイが 20% のサンプルレートを使用した場合、すべてのユーザーセッションのうち 80% が RUM に含まれ、それらのセッションのうち 20% のみがリプレイを持つことを意味します。
+This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -149,10 +189,13 @@ Datadog.verbosityLevel = .debug
 
 ### プライバシーのオプション
 
-[プライバシーオプション][1]を参照してください。
+[プライバシーオプション][2]をご覧ください。
 
-[1]: /ja/real_user_monitoring/session_replay/mobile/privacy_options
+
 
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+[2]: /ja/real_user_monitoring/session_replay/mobile/privacy_options

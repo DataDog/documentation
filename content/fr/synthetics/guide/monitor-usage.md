@@ -1,6 +1,6 @@
 ---
 title: Surveillance de votre utilisation de Synthetics
-kind: guide
+
 further_reading:
   - link: /synthetics/api_tests
     tag: Documentation

@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Développement pour Datadog
-kind: documentation
 title: Écrire un check custom d'Agent
 ---
 

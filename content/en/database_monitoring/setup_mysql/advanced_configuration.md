@@ -1,13 +1,8 @@
 ---
 title: Advanced Configuration for MySQL Database Monitoring
-kind: documentation
 description: Advanced Configuration for MySQL Database Monitoring
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Truncating `events_statements_summary_by_digest`
 

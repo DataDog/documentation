@@ -10,10 +10,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentation
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD ソースコード
-kind: ガイド
 title: DogStatsD によるイベント
 ---
 
@@ -31,13 +27,13 @@ event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
 | `<title>`            | 文字列          | はい      | イベントのタイトル                                                                     |
 | `<message>`          | 文字列          | はい      | イベントのテキスト本文                                                                 |
-| `<alert_type>`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
-| `<aggregation_key>`  | 文字列          | ✕       | イベントを集計するために使用するキー                                                        |
-| `<source_type_name>` | 文字列          | ✕       | ソースタイプ名 (デフォルトは `my_apps`)                                               |
-| `<date_happened>`    | 整数         | ✕       | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
-| `<priority>`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)                                    |
-| `<tags>`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                                                  |
-| `<hostname>`         | 文字列          | ✕       | ホストの名前                                                                       |
+| `<alert_type>`       | 文字列          | いいえ       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
+| `<aggregation_key>`  | 文字列          | いいえ       | イベントを集計するために使用するキー                                                        |
+| `<source_type_name>` | 文字列          | いいえ       | ソースタイプ名 (デフォルトは `my_apps`)                                               |
+| `<date_happened>`    | 整数         | いいえ       | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
+| `<priority>`         | 文字列          | いいえ       | イベントの優先度を指定します (`normal` または `low`)                                    |
+| `<tags>`             | 文字列のリスト | いいえ       | このイベントに関連付けられるタグのリスト                                                  |
+| `<hostname>`         | 文字列          | いいえ       | ホストの名前                                                                       |
 
 ### 例
 
@@ -207,7 +203,7 @@ $statsd->event('An error occurred.',
 * Datadog API との通信の問題によって警告やエラーが出るのを避けるために、`try`/`catch` のコード ブロックを使用する必要があります。
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

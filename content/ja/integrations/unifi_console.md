@@ -3,6 +3,7 @@ app_id: unifi-console
 app_uuid: 224a050d-7ed3-4e7a-ada6-410f61393fc0
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: unifi.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10298
     source_type_name: Unifi Console
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   sales_email: antonin.bruneau@gmail.com
   support_email: antonin.bruneau@gmail.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unifi_console/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: unifi-console
 integration_title: Unifi Console
 integration_version: 1.2.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: unifi_console
-oauth: {}
 public_title: Unifi Console
 short_description: このチェックは、Unifi Controller からメトリクスを収集します
 supported_os:
@@ -45,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: このチェックは、Unifi Controller からメトリクスを収集します
   media: []
@@ -53,6 +55,7 @@ tile:
   title: Unifi Console
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -75,7 +78,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Unifi Console のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `unifi_console.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[unifi_console.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -95,7 +98,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 
 Unifi Console インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "unifi_console" >}}
 
 
@@ -106,7 +109,7 @@ Unifi Console インテグレーションには、イベントは含まれませ
 
 
 [1]: https://ui.com/consoles
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unifi_console/datadog_checks/unifi_console/data/conf.yaml.example

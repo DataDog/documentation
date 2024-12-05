@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
   tag: Documentation
   text: Collecter plusieurs logs avec la Pagination
-kind: guide
+
 title: Créer des rapports personnalisés à l'aide de l'API Log Analytics
 ---
 

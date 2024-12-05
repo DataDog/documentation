@@ -1,15 +1,15 @@
 ---
 title: Monitoring Kafka Queues
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_collection"
-  tags: "Documentation"
+  tag: "Documentation"
   text: "Set up trace collection"
 - link: "/integrations/kafka"
-  tags: "Documentation"
+  tag: "Documentation"
   text: "Kafka integration"
 - link: "/data_streams/"
-  tags: "Documentation"
+  tag: "Documentation"
   text: "Data Streams Monitoring"
 ---
 
@@ -27,7 +27,7 @@ Visualize the performance of your cluster in real time and correlate the perform
 
 [Datadog Data Streams Monitoring][3] provides a standardized method for your teams to measure pipeline health and end-to-end latencies for events traversing your system. The deep visibility offered by Data Streams Monitoring enables you to pinpoint faulty producers, consumers, or queues driving delays and lag in the pipeline. You can discover hard-to-debug pipeline issues such as blocked messages, hot partitions, or offline consumers. And you can collaborate seamlessly across relevant infrastructure or app teams.
 
-{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb.mp4" alt="Data Streams Monitoring Demo" video="true">}}
+{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="Data Streams Monitoring Demo" video="true">}}
 
 ### Distributed traces
 
@@ -79,36 +79,40 @@ A classic Kafka setup shows a trace with a producer span, and as a child, a cons
 
 {{% tab "Java" %}}
 
-The Datadog Kafka integration works with Kafka version 0.11+, which supports the Header API. This API is used to inject and extract trace context. If you run a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you run a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
+See [Java's tracer documentation][7] for configuration of Kafka.
+
+[7]: /tracing/trace_collection/compatibility/java/#networking-framework-compatibility
 
 {{% /tab %}}
 
 {{% tab ".NET" %}}
 
-The [Kafka .NET Client documentation][1] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
+The [Kafka .NET Client documentation][9] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
 
-When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][2] to extract the trace context.
+When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][10] to extract the trace context.
 
-The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][3]. The trace context propagation API is available since [v2.7.0][4]
+The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace context propagation API is available since [v2.7.0][12].
 
-[1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
-[2]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
+[9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[10]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
+
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][1] to enable it
+The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][8] to enable it.
 
-[1]: /tracing/trace_collection/dd_libraries/ruby/#kafka
+[8]: /tracing/trace_collection/dd_libraries/ruby/#kafka
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### Disable tracing for Kafka
 
-If you want to disable Kafka tracing on an application, set its `DD_TRACE_KAFKA_ENABLED` setting to `false`.
+If you want to disable Kafka tracing on an application, set the appropriate [language-specific configuration][6].
 
 ## Further reading
 
@@ -119,3 +123,4 @@ If you want to disable Kafka tracing on an application, set its `DD_TRACE_KAFKA_
 [3]: https://app.datadoghq.com/data-streams/onboarding
 [4]: /tracing/trace_collection/compatibility/
 [5]: /tracing/trace_collection/
+[6]: /tracing/trace_collection/library_config/

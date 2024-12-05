@@ -1,8 +1,6 @@
 ---
 categories:
-- monitoring
-- notification
-ddtype: crawler
+- notifications
 dependencies: []
 description: Consultez les alertes Opsmatic et validez-les dans votre flux d'événements
   Datadog.
@@ -14,7 +12,7 @@ integration_id: opsmatic
 integration_title: Opsmatic
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: opsmatic
 public_title: Intégration Datadog/Opsmatic
@@ -23,6 +21,7 @@ short_description: Consultez les alertes Opsmatic et validez-les dans votre flux
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Associez Opsmatic à Datadog pour :
@@ -30,9 +29,9 @@ Associez Opsmatic à Datadog pour :
 - Être immédiatement informé de toutes les modifications critiques
 - Obtenir une visibilité complète de l'historique et de l'état en direct de tous vos hosts
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Pour visualiser les événements Opsmatic dans votre flux Datadog :
 
@@ -41,25 +40,25 @@ Pour visualiser les événements Opsmatic dans votre flux Datadog :
 
 Consultez la [documentation sur le site Web Opsmatic pour obtenir plus d'informations][1].
 
-### Configuration
+### Dépannage de la solution Browser
 
 Cliquez sur le bouton **Install Integration** sur le carré d'intégration Opsmatic. Les étapes de configuration sont obligatoires pour cette intégration.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration Opsmatic n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration Opsmatic n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Opsmatic n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 

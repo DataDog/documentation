@@ -5,6 +5,7 @@ assets:
   dashboards:
     Sidekiq Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
       prefix: sidekiq.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10093
     source_type_name: Sidekiq
-  logs:
-    source: sidekiq
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md
 display_on_public_website: true
@@ -32,12 +33,10 @@ draft: false
 git_integration_title: sidekiq
 integration_id: sidekiq
 integration_title: Sidekiq
-integration_version: 1.3.0
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sidekiq
-oauth: {}
 public_title: Sidekiq
 short_description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
 supported_os:
@@ -51,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
   media: []
@@ -59,6 +59,7 @@ tile:
   title: Sidekiq
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -74,7 +75,7 @@ tile:
 Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化されています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. `dogstatsd-ruby` [gem][3] をインストールします。
 
@@ -143,7 +144,7 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
 
 Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq Enterprise Historical Metrics][10] を参照してください。
 
-### ログの収集
+### ログ収集
 
 1. Datadog Agent でのログ収集は、デフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -165,7 +166,7 @@ Sidekiq インテグレーションでは、カスタムメトリクスも使用
 
 3. [Agent を再起動します][8]。
 
-### サービスのチェック
+### サービスチェック
 
 Sidekiq には、サービスのチェック機能は含まれません。
 
@@ -180,7 +181,7 @@ Sidekiq には、イベントは含まれません。
 [1]: https://sidekiq.org/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://github.com/DataDog/dogstatsd-ruby
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/mperham/sidekiq/wiki/Pro-Metrics
 [6]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/

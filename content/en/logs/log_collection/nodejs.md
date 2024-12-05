@@ -1,6 +1,5 @@
 ---
 title: Node.js Log Collection
-kind: documentation
 aliases:
   - /logs/languages/nodejs
 further_reading:

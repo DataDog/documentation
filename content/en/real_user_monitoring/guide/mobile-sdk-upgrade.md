@@ -1,10 +1,13 @@
 ---
 title: Upgrade RUM Mobile SDKs
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: '/real_user_monitoring/guide/mobile-sdk-deprecation-policy'
+  tag: 'Documentation'
+  text: 'Deprecation Policy for Datadog Mobile SDKs'
 ---
 
 ## Overview
@@ -12,6 +15,8 @@ further_reading:
 Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
 ## From v1 to v2
+{{< tabs >}}
+{{% tab "Android" %}}
 
 The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
 
@@ -19,6 +24,31 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
+[1]: /real_user_monitoring/session_replay/mobile/
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
+
+SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
+
+SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+
+[1]: /real_user_monitoring/session_replay/mobile/
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+The migration from v1 to v2 comes with improved performance.
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+The migration from v1 to v2 comes with improved performance and additional features supplied by the v2 Native SDKs.
+
+{{% /tab %}}
+{{< /tabs >}}
 ### Modules
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -64,6 +94,9 @@ dependencies {
 
 See the [Android sample application][3] for an example of how to set up the SDK.
 
+[2]: https://stackoverflow.com/a/75298544
+[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -79,7 +112,7 @@ Libraries are modularized in v2. Adopt the following libraries:
 These come in addition to the existing `DatadogCrashReporting` and `DatadogObjc`.
 
 <details>
-  <summary>SPM</summary>
+  <summary>SPM (Recommended)</summary>
 
   ```swift
 let package = Package(
@@ -124,7 +157,7 @@ let package = Package(
 <details>
   <summary>Carthage</summary>
 
-  The `Cartfile` stays the same: 
+  The `Cartfile` stays the same:
   ```
   github "DataDog/dd-sdk-ios"
   ```
@@ -151,9 +184,175 @@ let package = Package(
 
 {{% /tab %}}
 
+{{% tab "React Native" %}}
+
+Update `@datadog/mobile-react-native` in your package.json:
+
+```json
+"@datadog/mobile-react-native": "2.0.0"
+```
+
+Update your iOS pods:
+
+```bash
+(cd ios && bundle exec pod update)
+```
+
+If you use a React Native version strictly over `0.67`, use Java version 17. If you use React Native version equal or below ot `0.67`, use Java version 11. To check your Java version, run the following in a terminal:
+
+```bash
+java --version
+```
+
+### For React Native < 0.73
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+### For React Native < 0.68
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+If you are using a version of `com.android.tools.build:gradle` below `5.0` in your `android/build.gradle`, add in your `android/gradle.properties` file:
+
+```properties
+android.jetifier.ignorelist=dd-sdk-android-core
+```
+
+### Troubleshooting
+
+#### Android build fails with `Unable to make field private final java.lang.String java.io.File.path accessible`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:processReleaseMainManifest'.
+> Unable to make field private final java.lang.String java.io.File.path accessible: module java.base does not "opens java.io" to unnamed module @1bbf7f0e
+```
+
+You are using Java 17, which is not compatible with your React Native version. Switch to Java 11 to solve the issue.
+
+#### Android build fails with `Unsupported class file major version 61`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not determine the dependencies of task ':app:lintVitalRelease'.
+> Could not resolve all artifacts for configuration ':app:debugRuntimeClasspath'.
+   > Failed to transform dd-sdk-android-core-2.0.0.aar (com.datadoghq:dd-sdk-android-core:2.0.0) to match attributes {artifactType=android-manifest, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
+      > Execution failed for JetifyTransform: /Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar.
+         > Failed to transform '/Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar' using Jetifier. Reason: IllegalArgumentException, message: Unsupported class file major version 61. (Run with --stacktrace for more details.)
+```
+
+You use a version of Android Gradle Plugin below `5.0`. To fix the issue, add in your `android/gradle.properties` file:
+
+```properties
+android.jetifier.ignorelist=dd-sdk-android-core
+```
+
+#### Android build fails with `Duplicate class kotlin.collections.jdk8.*`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:checkReleaseDuplicateClasses'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
+   > Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
+     Duplicate class kotlin.internal.jdk7.JDK7PlatformImplementations found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk7-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20)
+```
+
+You need to set a Kotlin version for your project to avoid clashes among Kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+Alternatively, you can add the following rules to your build script in your `android/app/build.gradle` file:
+
+```groovy
+dependencies {
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Update `datadog_flutter_plugin` in your pubspec.yaml:
+
+```yaml
+dependencies:
+  'datadog_flutter_plugin: ^2.0.0
+```
+
+## Troubleshooting
+
+### Duplicate interface (iOS)
+
+If you see this error while building iOS after upgrading to `datadog_flutter_plugin` v2.0:
+
+```
+Semantic Issue (Xcode): Duplicate interface definition for class 'DatadogSdkPlugin'
+/Users/exampleuser/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
+```
+
+Try performing `flutter clean && flutter pub get` and rebuilding. This usually resolves the issue.
+
+### Duplicate classes (Android)
+
+If you see this error while building Android after the upgrading to `datadog_flutter_plugin` v2.0:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:checkDebugDuplicateClasses'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
+```
+
+Make sure that you've updated your version of Kotlin to at least 1.8 in your `build.gradle` file.
+
+{{% /tab %}}
+
 {{< /tabs >}}
-
-
 
 ### SDK initialization
 {{< tabs >}}
@@ -208,7 +407,7 @@ API changes:
 |`com.datadog.android.log.Logger.Builder.setServiceName`|`com.datadog.android.log.Logger.Builder.setService`|
 |`com.datadog.android.log.Logger.Builder.setDatadogLogsMinPriority`|`com.datadog.android.log.Logger.Builder.setRemoteLogThreshold`|
 
-### Trace 
+### Trace
 
 All the classes related to the Trace product are strictly contained in the `com.datadog.android.trace` package (this means that all classes residing in `com.datadog.android.tracing` before have moved).
 
@@ -290,7 +489,7 @@ API changes:
 |`com.datadog.android.rum.GlobalRum.addAttribute`|`com.datadog.android.rum.RumMonitor.addAttribute`|
 |`com.datadog.android.rum.GlobalRum.removeAttribute`|`com.datadog.android.rum.RumMonitor.removeAttribute`|
 
-### NDK Crash Reporting 
+### NDK Crash Reporting
 
 The artifact name stays the same as before: `com.datadoghq:dd-sdk-android-ndk:x.x.x`.
 
@@ -334,7 +533,7 @@ implementation("com.datadoghq:dd-sdk-android-okhttp:x.x.x")
 
 OkHttp instrumentation supports the initialization of the Datadog SDK after the OkHttp client, allowing you to create `com.datadog.android.okhttp.DatadogEventListener`, `com.datadog.android.okhttp.DatadogInterceptor`, and `com.datadog.android.okhttp.trace.TracingInterceptor` before the Datadog SDK. OkHttp instrumentation starts reporting events to Datadog once the Datadog SDK is initialized.
 
-Both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` allow you to control sampling dynamically through integration with a remote configuration system. 
+Both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` allow you to control sampling dynamically through integration with a remote configuration system.
 
 To dynamically adjust sampling, provide your own implementation of the `com.datadog.android.core.sampling.Sampler` interface in the `com.datadog.android.okhttp.DatadogInterceptor`/`com.datadog.android.okhttp.trace.TracingInterceptor` constructor. It is queried for each request to make the sampling decision.
 
@@ -399,7 +598,7 @@ Datadog.initialize(
         clientToken: "<client token>",
         env: "<environment>",
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: .granted
 )
 ```
@@ -539,7 +738,7 @@ CrashReporting.enable()
 |---|---|
 |`Datadog.Configuration.Builder.enableCrashReporting()`|`CrashReporting.enable()`|
 
-### WebView Tracking 
+### WebView Tracking
 
 To enable WebViewTracking, make sure to also enable RUM and Logs to report to those products respectively.
 
@@ -562,13 +761,111 @@ For instructions on setting up Mobile Session Replay, see [Mobile Session Replay
 [5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
+{{% tab "React Native" %}}
+
+No change in the SDK initialization is needed.
+
+{{% /tab %}}
+
+{{% tab "Flutter" %}}
+
+## SDK Configuration Changes
+
+Certain configuration properties have been moved or renamed to support modularity in Datadog's native SDKs.
+
+The following structures have been renamed:
+
+| `1.x` | `2.x` |
+|-------|-------|
+| `DdSdkConfiguration` | `DatadogConfiguration` |
+| `LoggingConfiguration` | `DatadogLoggingConfiguration` |
+| `RumConfiguration` | `DatadogRumConfiguration` |
+| `DdSdkExistingConfiguration` | `DatadogAttachConfiguration` |
+
+The following properties have changed:
+
+| 1.x | 2.x | Notes |
+|-------|-------|-------|
+| `DdSdkConfiguration.trackingConsent`| Removed | Part of `Datadog.initialize` | |
+| `DdSdkConfiguration.customEndpoint` | Removed | Now configured per-feature | |
+| `DdSdkConfiguration.serviceName` | `DatadogConfiguration.service` | |
+| `DdSdkConfiguration.logEventMapper` | `DatadogLoggingConfiguration.eventMapper` | |
+| `DdSdkConfiguration.customLogsEndpoint` | `DatadogLoggingConfiguration.customEndpoint` | |
+| `DdSdkConfiguration.telemetrySampleRate` | `DatadogRumConfiguration.telemetrySampleRate` | |
+
+In addition, the following APIs have changed:
+
+| 1.x | 2.x | Notes |
+|-------|-------|-------|
+| `Verbosity` | Removed | See `CoreLoggerLevel` or `LogLevel` |
+| `DdLogs DatadogSdk.logs` | `DatadogLogging DatadogSdk.logs` | Type changed |
+| `DdRum DatadogSdk.rum` | `DatadogRum DatadogSdk.rum` | Type changed
+| `Verbosity DatadogSdk.sdkVerbosity` | `CoreLoggerLevel DatadogSdk.sdkVerbosity` |
+| `DatadogSdk.runApp` | `DatadogSdk.runApp` | Added `trackingConsent` parameter |
+| `DatadogSdk.initialize` | `DatadogSdk.initialize` | Added `trackingConsent` parameter |
+| `DatadogSdk.createLogger` | `DatadogLogging.createLogger` | Moved |
+
+## Flutter Web Changes
+
+Clients using Flutter Web should update to using the Datadog Browser SDK v5. Change the following import in your `index.html`:
+
+```diff
+-  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
+-  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
+```
+
+**Note**: Datadog provides one CDN bundle per site. See the [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) for a list of all site URLs.
+
+## Logs product changes
+
+As with v1, Datadog Logging can be enabled by setting the `DatadogConfiguration.loggingConfiguration` member. However, unlike v1, Datadog does not create a default logger for you. `DatadogSdk.logs` is now an instance of `DatadogLogging`, which can be used to create logs. Many options were moved to `DatadogLoggerConfiguration` to give developers more granular support over individual loggers.
+
+The following APIs have changed:
+
+| 1.x | 2.x | Notes |
+|-------|-------|-------|
+| `LoggingConfiguration` | `DatadogLoggingConfiguration` | Renamed most members are now on `DatadogLoggerConfiguration` |
+| `LoggingConfiguration.sendNetworkInfo` | `DatadogLoggerConfiguration.networkInfoEnabled` | |
+| `LoggingConfiguration.printLogsToConsole` | `DatadogLoggerConfiguration.customConsoleLogFunction` | |
+| `LoggingConfiguration.sendLogsToDatadog` | Removed. Use `remoteLogThreshold` instead | |
+| `LoggingConfiguration.datadogReportingThreshold` | `DatadogLoggerConfiguration.remoteLogThreshold` | |
+| `LoggingConfiguration.bundleWithRum` | `DatadogLoggerConfiguration.bundleWithRumEnabled` | |
+| `LoggingConfiguration.bundleWithTrace` | `DatadogLoggerConfiguration.bundleWithTraceEnabled` | |
+| `LoggingConfiguration.loggerName` | `DatadogLoggerConfiguration.name` | |
+| `LoggingConfiguration.sampleRate` | `DatadogLoggerConfiguration.remoteSampleRate` | |
+
+## RUM Product Changes
+
+The following APIs have changed:
+
+| 1.x | 2.x | Notes |
+|-------|-------|-------|
+| `RumConfiguration` | `DatadogRumConfiguration` | Type renamed |
+| `RumConfiguration.vitalsUpdateFrequency` | `DatadogRumConfiguration.vitalsUpdateFrequency` | Set to `null` to disable vitals updates |
+| `RumConfiguration.tracingSampleRate` | `DatadogRumConfiguration.traceSampleRate` |
+| `RumConfiguration.rumViewEventMapper` | `DatadogRumConfiguration.viewEventMapper` |
+| `RumConfiguration.rumActionEventMapper` | `DatadogRumConfiguration.actionEventMapper` |
+| `RumConfiguration.rumResourceEventMapper` | `DatadogRumConfiguration.resourceEventMapper` |
+| `RumConfiguration.rumErrorEventMapper` | `DatadogRumConfiguration.rumErrorEventMapper` |
+| `RumConfiguration.rumLongTaskEventMapper` | `DatadogRumConfiguration.longTaskEventMapper` |
+| `RumUserActionType` | `RumActionType` | Type renamed |
+| `DdRum.addUserAction` | `DdRum.addAction` | |
+| `DdRum.startUserAction` | `DdRum.startAction` | |
+| `DdRum.stopUserAction` | `DdRum.stopAction` | |
+| `DdRum.startResourceLoading` | `DdRum.startResource` | |
+| `DdRum.stopResourceLoading` | `DdRum.stopResource` | |
+| `DdRum.stopResourceLoadingWithError` | `DdRum.stopResourceWithError` | |
+
+Additionally, event mappers no longer allow you to modify their view names. To rename a view, use a custom [`ViewInfoExtractor`](https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html) instead.
+
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/session_replay/mobile/
-[2]: https://stackoverflow.com/a/75298544
-[3]: https://github.com/DataDog/dd-sdk-android/sample

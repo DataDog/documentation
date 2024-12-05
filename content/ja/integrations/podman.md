@@ -3,11 +3,13 @@ app_id: podman
 app_uuid: ecc06845-18ac-448e-b352-1bbf31fdfcc3
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10267
     source_type_name: Podman
 author:
   homepage: https://www.datadoghq.com
@@ -16,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/podman/README.md
 display_on_public_website: true
@@ -25,10 +28,8 @@ integration_id: podman
 integration_title: Podman
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: podman
-oauth: {}
 public_title: Podman
 short_description: Podman コンテナのすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -38,6 +39,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Podman コンテナのすべてのメトリクスを Datadog で追跡
   media: []
@@ -46,6 +48,7 @@ tile:
   title: Podman
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 [Podman][1] は、Linux システムで OCI コンテナを開発、管理、実行するためのデーモンレスコンテナエンジンです。コンテナは、ルートで実行することも、ルートレスで実行することも可能です。

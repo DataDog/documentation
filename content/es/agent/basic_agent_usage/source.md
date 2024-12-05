@@ -13,17 +13,16 @@ further_reading:
   text: Recopilar tus trazas
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentación
-  text: Obtén más información sobre la arquitectura del Agent
-- link: /agent/guide/network#configure-ports
+  text: Más información sobre la arquitectura del Agent
+- link: /agent/configuration/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Origen
 title: Uso básico del Agent para la instalación de origen
 ---
 ## Información general
 
-En esta página, se describen las funciones básicas del Datadog Agent. Si aún no has instalado el Agent, consulta las instrucciones [en la página sobe la integración del Datadog Agent][1].
+En esta página, se describen las funciones básicas del Datadog Agent. Si aún no has instalado el Agent, consulta las instrucciones [en la página sobre la integración del Datadog Agent][1].
 
 Por defecto, tu Agent se instala en su propio entorno de pruebas, ubicado en `~/.datadog-agent`. Puedes mover esta carpeta a cualquier otro lugar con total libertad. Sin embargo, en este artículo se asume que el Agent está instalado en su localización predeterminada, así que asegúrate de adaptar las instrucciones según corresponda si decides moverlo.
 
@@ -59,7 +58,7 @@ El Datadog Agent cuenta con algunos comandos, y solo deben ejecutarse con `sudo`
 ## Configuración
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent v6 y v7" %}}
 Los archivos y carpetas de configuración del Agent se encuentran en:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -72,7 +71,7 @@ Archivos de configuración para las [integraciones][1]:
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-Los archivos y carpetas de configuración para el Agent se encuentran en:
+Los archivos y carpetas de configuración del Agent se encuentran en:
 
 * `/etc/dd-agent/datadog.conf`
 
@@ -88,9 +87,9 @@ Archivos de configuración para las [integraciones][1]:
 
 Consulta la [documentación sobre cómo solucionar problemas relacionados con el Agent][2].
 
-
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source
 [2]: /es/agent/troubleshooting/

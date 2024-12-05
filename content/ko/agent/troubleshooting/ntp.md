@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/faq/network-time-protocol-ntp-offset-issues
-kind: 설명서
 title: 네트워크 타임 프로토콜(NTP) 문제
 ---
 

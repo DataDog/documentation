@@ -1,6 +1,5 @@
 ---
 title: Data Security
-kind: documentation
 description: "Configure the Client library or Agent to control the collection of sensitive data in traces."
 aliases:
     - /tracing/security
@@ -10,6 +9,10 @@ aliases:
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/
+further_reading:
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "Set up a PCI-compliant Datadog organization"
 ---
 ## Overview
 
@@ -32,6 +35,7 @@ The table below describes the personal data categories collected by the automati
 | Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                            |
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
+| Login ID            | Can include an account/user ID, name, or email address.                                                                |
 
 The table below describes the default behavior of each language tracing library with regard to whether a data category is collected and whether it is obfuscated by default.
 
@@ -48,6 +52,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> |                                 |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -64,6 +69,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -80,6 +86,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -96,6 +103,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -112,6 +120,7 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location | <i class="icon-check-bold"></i> |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 [1]: /tracing/trace_collection/compatibility/python/#datastore-compatibility
 {{% /tab %}}
@@ -129,13 +138,13 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+| Login ID            | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
-**Note:** Client IPs are not collected by default and must be enabled. Database statements and
-Client URIs are obfuscated by the Datadog Agent.
+**Note:** Client IPs are not collected by default and must be enabled. Database statements are obfuscated by the Datadog Agent.
 
 | Category                | Collected                       | Obfuscated                      |
 |:------------------------|:-------------------------------:|:-------------------------------:|
@@ -145,12 +154,13 @@ Client URIs are obfuscated by the Datadog Agent.
 | Database statements     | <i class="icon-check-bold"></i> |                                 |
 | Geographic location     |                                 |                                 |
 | Client URI path         | <i class="icon-check-bold"></i> |                                 |
-| Client URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Client URI query string | <i class="icon-check-bold"></i> |                                 |
 | Server URI path         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Server URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP body               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP cookies            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP headers            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Login ID                | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -170,6 +180,7 @@ Client URIs are obfuscated by the Datadog Agent.
 | HTTP body               |                                 |            |
 | HTTP cookies            |                                 |            |
 | HTTP headers            |                                 |            |
+| Login ID                | <i class="icon-check-bold"></i> |            |
 
 {{% /tab %}}
 
@@ -189,6 +200,7 @@ Client URIs are obfuscated by the Datadog Agent.
 | HTTP body               |                                 |            |
 | HTTP cookies            |                                 |            |
 | HTTP headers            |                                 |            |
+| Login ID                | <i class="icon-check-bold"></i> |            |
 
 {{% /tab %}}
 
@@ -208,12 +220,13 @@ Client URIs are obfuscated by the Datadog Agent.
 | HTTP body               |                                 |            |
 | HTTP cookies            |                                 |            |
 | HTTP headers            |                                 |            |
+| Login ID                | <i class="icon-check-bold"></i> |            |
 
 {{% /tab %}}
 
 {{% /tabs %}}
 
-If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
+If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a security trace. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
 
 ## Agent
 
@@ -383,7 +396,7 @@ apm_config:
     remove_stack_traces: true # default false
 ```
 
-This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=false`.
+This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=true`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -420,7 +433,7 @@ apm_config:
     - name: "error.stack"
       pattern: "(?s).*"
     # Replace series of numbers in error messages
-    - name: "error.msg"
+    - name: "error.message"
       pattern: "[0-9]{10}"
       repl: "[REDACTED]"
 ```
@@ -450,7 +463,7 @@ DD_APM_REPLACE_TAGS=[
         "pattern": "(?s).*"
       },
       {
-        "name": "error.msg",
+        "name": "error.message",
         "pattern": "[0-9]{10}",
         "repl": "[REDACTED]"
       }
@@ -460,9 +473,12 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1], or use `agents.containers.traceAgent.env` in the `values.yaml` file if you are using [helm chart][2].
+Set the `DD_APM_REPLACE_TAGS` environment variable:
+- For Datadog Operator, in `override.nodeAgent.env` in your `datadog-agent.yaml`
+- For Helm, in `agents.containers.traceAgent.env` in your `datadog-values.yaml`
+- For manual configuration, in the `trace-agent` container section of your manifest
 
-```datadog-agent.yaml
+```yaml
 - name: DD_APM_REPLACE_TAGS
   value: '[
             {
@@ -485,11 +501,47 @@ Put this environment variable in the trace-agent container if you are using the 
               "pattern": "(?s).*"
             },
             {
-              "name": "error.msg",
+              "name": "error.message",
               "pattern": "[0-9]{10}",
               "repl": "[REDACTED]"
             }
           ]'
+```
+
+#### Examples
+
+Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
+```
+
+Helm:
+
+```yaml
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
 ```
 
 [1]: /containers/kubernetes/installation/?tab=daemonset
@@ -498,7 +550,7 @@ Put this environment variable in the trace-agent container if you are using the 
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl":"$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"},{"name":"error.message","pattern":"[0-9]{10}","repl":"[REDACTED]"}]
 ```
 
 {{% /tab %}}
@@ -555,6 +607,14 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 ## Telemetry collection
 
+{{< site-region region="gov" >}}
+
+<div class="alert alert-warning">
+Instrumentation telemetry is not available for the {{< region-param key="dd_site_name" >}} site, but is enabled by default. To avoid errors, {{< region-param key="dd_site_name" >}} users should disable this capability by setting <code>DD_INSTRUMENTATION_TELEMETRY_ENABLED=false</code> on their application and <code>DD_APM_TELEMETRY_ENABLED=false</code> on their Agent.
+</div>
+
+{{< /site-region >}}
+
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
 You can disable this telemetry collection using either of these settings:
@@ -572,7 +632,7 @@ apm_config:
 {{% tab "Environment variables" %}}
 
 ```bash
-export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
+export DD_APM_TELEMETRY_ENABLED=false
 ```
 
 {{% /tab %}}
@@ -588,27 +648,22 @@ PCI compliance for APM is only available for Datadog organizations in the <a hre
 
 To set up a PCI-compliant Datadog org, follow these steps:
 
-1. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the org be configured as a PCI-compliant org.
-2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
-    ```
-    apm_config:
-      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
-    ```
+{{% pci-apm %}}
 
-To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5].
+See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
 
-[1]: /getting_started/site/
-[2]: /help/
-[3]: mailto:success@datadoghq.com
-[4]: /account_management/audit_trail/
-[5]: /data_security/logs/#pci-dss-compliance-for-log-management
-
+[1]: /data_security/pci_compliance/
+[2]: /data_security/pci_compliance/?tab=logmanagement
 
 {{< /site-region >}}
 
 {{< site-region region="us2,us3,us5,eu,gov" >}}
 PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
 {{< /site-region >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
 [2]: /tracing/glossary/#trace

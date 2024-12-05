@@ -5,7 +5,6 @@ further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: ドキュメント
   text: Datadog クラウドワークロードセキュリティの概要
-kind: documentation
 title: カスタム Agent ルールの作成
 ---
 <!-- このファイルは自動生成されています。scripts/templates フォルダーにあるファイルを編集してください -->

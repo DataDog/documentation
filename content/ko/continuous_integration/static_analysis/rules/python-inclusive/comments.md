@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 코멘트에 표현 문제가 있는지 확인하기
 ---
 ## 메타데이터

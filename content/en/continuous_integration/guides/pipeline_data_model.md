@@ -1,6 +1,5 @@
 ---
 title: Pipeline Data Model And Execution Types 
-kind: guide
 description: Learn how Pipelines are modeled and what execution types are supported by CI Visibility.
 further_reading:
   - link: "/continuous_integration/pipelines"
@@ -39,7 +38,7 @@ Stages, jobs, and steps are expected to have the exact same pipeline name as the
 
 All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines.
 
-When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only one pipeline execution is stored while the others are ignored.
+When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only the values of the last pipeline execution received are stored.
 
 ## Pipeline execution types
 
@@ -101,7 +100,7 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 ## Git information
 
-Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear in the [My Recent Commits](https://app.datadoghq.com/ci/commits) page. At minimum, the repository URL, commit SHA, and author email are required. For more information see the [public API endpoint specification][3].
+Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear on the [Recent Code Changes page][4]. At a minimum, the repository URL, commit SHA, and author email are required. For more information, see the [public API endpoint specification][3].
 
 ## Further reading
 
@@ -110,3 +109,4 @@ Providing Git information of the commit that triggered the pipeline execution is
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[4]: https://app.datadoghq.com/ci/commits

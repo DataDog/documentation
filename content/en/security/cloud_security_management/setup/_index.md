@@ -1,6 +1,5 @@
 ---
-title: Setting Up Cloud Security Management
-kind: documentation
+title: Setting up Cloud Security Management
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
@@ -10,103 +9,118 @@ aliases:
   - /security/cspm/getting_started
   - /security/cspm/setup
   - /security/misconfigurations/setup
+  - /security/vulnerabilities/setup
+  - /security/infrastructure_vulnerabilities/setup/
+  - /security/cloud_security_management/setup/csm_enterprise
+  - /security/cloud_security_management/setup/csm_cloud_workload_security
+  - /security/cloud_security_management/setup/csm_pro
 further_reading:
-- link: "/getting_started/cloud_security_management"
-  tag: "Documentation"
-  text: "Getting Started with Cloud Security Management"
-- link: "security/default_rules"
-  tag: "Documentation"
-  text: "Explore default cloud configuration compliance rules"
-- link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
-  tag: "Blog"
-  text: "Learn more about Datadog Cloud Runtime Security"
-- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
-  tag: "Blog"
-  text: "How to detect security threats in your systems' Linux processes"
-- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
-  tag: "Blog"
-  text: "The PwnKit vulnerability: Overview, detection, and remediation"
-- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
-  tag: "Blog"
-  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
-- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
-  tag: "Blog"
-  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
-- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
-  tag: "Blog"
-  text: "Catch attacks at the network layer with DNS-based threat detection"
+    - link: "/security/cloud_security_management/setup/supported_deployment_types"
+      tag: "Documentation"
+      text: "Supported Deployment Types"
+    - link: "/security/guide/aws_fargate_config_guide"
+      tag: "Documentation"
+      text: "AWS Fargate Configuration Guide for Datadog Security"
+    - link: "/security/cloud_security_management/guide/agent_variables/"
+      tag: "Guide"
+      text: "Cloud Security Management Agent Variables"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+## Overview
 
-<div class="alert alert-info">Cloud Security Management offerings are now available in three separate packages: CSM Enterprise, CSM Pro, and CSM Workload Security. For more information, see <a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Changes to Datadog Cloud Security Management</a>.</div>
+To get started with Cloud Security Management (CSM), follow these steps:
 
-Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
+1. [Enable Agentless Scanning](#enable-agentless-scanning)
+1. [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
+1. [Enable additional features](#enable-additional-features)
 
-CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. Each package includes access to a specific set of features, as shown in the following table:
+## Enable Agentless Scanning
+
+The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
+
+To learn more about Agentless Scanning, see [Cloud Security Management Agentless Scanning][2].
+
+## Deploy the Agent for additional coverage
+
+For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security Management on the Agent][3].
 
 <table>
+  <thead>
     <tr>
-        <th>Package</th>
-        <th>Features</th>
+      <th>Feature</th>
+      <th>Agentless</th>
+      <th>Agentless &#43; Agent-based deployment</th>
     </tr>
-    <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
-    </tr>
-    <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
-    </tr>
-    <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
-    </tr>
+  </thead>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Host benchmarks</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Vulnerability prioritization</td>
+    <td>Yes</td>
+    <td>Yes, with runtime context</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Vulnerability update frequency</td>
+    <td>12 hours</td>
+    <td>Real time</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Threat detection</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
+    <td>Yes</td>
+    <td>Yes, with more accurate insights</td>
+  </tr>
 </table>
 
-**Notes**: 
+## Enable additional features
 
-- You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
-- CSM Identity Risks and CSM Vulnerabilities are in beta. For setup instructions, see [Cloud Security Management Identity Risks][5] and [Setting up Cloud Security Management Vulnerabilities][6].
+### AWS CloudTrail Logs
 
-## Prerequisites
+AWS CloudTrail Logs allows you to get the most out of [CSM Identity Risks][6]. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions. For more information, see [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
 
-{{< tabs >}}
-{{% tab "CSM Enterprise" %}}
+### IaC remediation
 
-{{% csm-prereqs-enterprise-ws %}}
+With Infrastructure as Code (IaC) remediation, you can use Terraform to open a pull request in GitHub, applying code changes that fix a misconfiguration or identity risk. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
 
-{{% /tab %}}
+### Deploy via cloud integrations
 
-{{% tab "CSM Pro" %}}
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security Management via Cloud Integrations][7].
 
-To [enable CSM Pro][1], you must first set up the Datadog cloud account integrations for AWS, Azure, and Google Cloud Platform.
-
-[1]: /security/cloud_security_management/setup/csm_pro
-
-{{% /tab %}}
-
-{{% tab "CSM Workload Security" %}}
-
-{{% csm-prereqs-enterprise-ws %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## Next steps
-
-To get started setting up CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For detailed instructions, see the [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3] setup docs.
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/csm_enterprise
-[2]: /security/cloud_security_management/setup/csm_pro
-[3]: /security/cloud_security_management/setup/csm_workload_security
-[4]: https://app.datadoghq.com/security/configuration/csm/setup
-[5]: /security/identity_risks/#setup
-[6]: /security/infrastructure_vulnerabilities/setup
+[1]: /security/cloud_security_management/setup/agentless_scanning
+[2]: /security/cloud_security_management/agentless_scanning
+[3]: /security/cloud_security_management/setup/agent
+[4]: /security/cloud_security_management/setup/cloudtrail_logs
+[5]: /security/cloud_security_management/setup/iac_remediation
+[6]: /security/cloud_security_management/identity_risks
+[7]: /security/cloud_security_management/setup/cloud_accounts

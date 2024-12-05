@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
 display_on_public_website: true
@@ -28,12 +29,10 @@ draft: false
 git_integration_title: directory
 integration_id: システム
 integration_title: Directory
-integration_version: 1.14.3
+integration_version: 2.1.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: directory
-oauth: {}
 public_title: Directory
 short_description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
 supported_os:
@@ -46,7 +45,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
   media: []
@@ -55,6 +55,7 @@ tile:
   title: Directory
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -72,7 +73,7 @@ tile:
 
 Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. Directory のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `directory.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル directory.d/conf.yaml][3] を参照してください。
 
@@ -107,16 +108,20 @@ Directory チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 Directory チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "directory" >}}
 
 
 ## トラブルシューティング
 
+非常に大きなディレクトリに対してチェックを実行し、再帰が true に設定されている場合、I/O と CPU に負荷がかかることに注意してください。デフォルトのチェック頻度である 15 秒ごとを調整する必要があるかもしれません。
+
+例えば、15,000 個のファイルとサブディレクトリがあるディレクトリで、CPU 使用率の高いチェックが 30〜40 秒実行される場合、チェック頻度を低くセットアップしなければ、CPU 使用率の高いチェックが効率よく継続的に実行されます。
+
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/directory/datadog_checks/directory/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

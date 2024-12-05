@@ -4,6 +4,8 @@ aliases:
 categories:
 - languages
 - log collection
+- tracing
+custom_kind: integration
 dependencies: []
 description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/nodejs/
@@ -18,17 +20,17 @@ further_reading:
 git_integration_title: node
 has_logo: true
 integration_id: node
-integration_title: NodeJS
+integration_title: Node.js
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: node
-public_title: Datadog-NodeJS インテグレーション
+public_title: Datadog-Node.js インテグレーション
 short_description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Node.js インテグレーションを利用して、Node.js アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
@@ -39,46 +41,60 @@ Node.js インテグレーションを利用して、Node.js アプリケーシ�
 
 Node.js インテグレーションを使用すると、数行のコードのインスツルメンテーションでカスタムメトリクスを監視できます。たとえば、ページビューや関数呼び出しの回数を返すメトリクスを監視できます。
 
-インスツルメンテーションは、Node.js 用のオープンソース DogStatsD クライアントである [hot-shots][1] を使用して実装できます。
+Node.js インテグレーションの詳細については、[メトリクスの送信に関するガイド][1]を参照してください。
 
-Node.js インテグレーションの詳細については、[メトリクスの送信に関するガイド][2]を参照してください。
+```js
+// dd-trace が必要です
+const tracer = require('dd-trace').init();
 
-1. npm を使用して hot-shots をインストールします。
+// カウンターをインクリメントします
+tracer.dogstatsd.increment('page.views');
+```
 
-    ```shell
-    npm install hot-shots
-    ```
+カスタムメトリクスを動作させるには、Agent で DogStatsD を有効にする必要があることに注意してください。収集はデフォルトで有効になっていますが、Agent は localhost からのメトリクスのみをリッスンします。外部メトリクスを許可するには、環境変数を設定するか、コンフィギュレーションファイルを更新する必要があります。
 
-2. コードのインスツルメンテーションを開始します。
+```sh
+DD_USE_DOGSTATSD=true # デフォルト
+DD_DOGSTATSD_PORT=8125 # デフォルト
+DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true # 外部メトリクスを期待する場合
+```
 
-    ```js
-    var StatsD = require('hot-shots');
-    var dogstatsd = new StatsD();
+```yaml
+use_dogstatsd: true # デフォルト
+dogstatsd_port: 8125 # デフォルト
+dogstatsd_non_local_traffic: true # 外部メトリクスを期待する場合
+```
 
-    // Increment a counter.
-    dogstatsd.increment('page.views')
-    ```
+Agent の DogStatsD コレクターを使用するようにアプリケーションを構成する必要もあります。
+
+```sh
+DD_DOGSTATSD_HOSTNAME=localhost DD_DOGSTATSD_PORT=8125 node app.js
+```
 
 ### トレースの収集
 
-トレースを Datadog に送信するには、[Node.js アプリケーションのインスツルメンテーション][3]に関するドキュメントを参照してください。
+トレースを Datadog に送信するには、[Node.js アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
 
-### ログの収集
+### 収集データ
 
 _Agent v6.0 以上で使用可能_
 
-ログを Datadog に転送するには、[Node.js ログ収集][4]のセットアップに関するドキュメントを参照してください。
+ログを Datadog に転送するには、[Node.js ログ収集][3]のセットアップに関するドキュメントを参照してください。
+
+### プロファイルの収集
+
+[Node.js プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/brightcove/hot-shots
-[2]: https://docs.datadoghq.com/ja/developers/metrics/
-[3]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
-[4]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
+[1]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
+[2]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/nodejs/
 [5]: https://docs.datadoghq.com/ja/help/

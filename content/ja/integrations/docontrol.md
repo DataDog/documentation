@@ -11,6 +11,7 @@ categories:
 - 自動化
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/docontrol/README.md
 display_on_public_website: true
@@ -20,10 +21,8 @@ integration_id: docontrol
 integration_title: DoControl
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: docontrol
-oauth: {}
 public_title: DoControl
 short_description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
 supported_os:
@@ -39,6 +38,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
   media:
@@ -69,6 +69,7 @@ tile:
   title: DoControl
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要

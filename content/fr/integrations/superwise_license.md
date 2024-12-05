@@ -30,12 +30,11 @@ integration_id: superwise-license
 integration_title: Superwise Model Observability
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: superwise_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

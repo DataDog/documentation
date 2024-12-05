@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Intégration Postgres basique
-kind: documentation
 title: Configuration de Database Monitoring pour les bases de données Azure et PostgreSQL
 ---
 

@@ -1,11 +1,14 @@
 ---
 title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
-kind: documentation
 further_reading:
 - link: "/containers/kubernetes/installation"
   tag: "Documentation"
   text: "Install the Datadog Agent on Kubernetes"
 ---
+
+<div class="alert alert-warning">
+  Datadog discourages using DaemonSets to deploy the Datadog Agent because the manual process is prone to errors. Datadog recommends that you <a href="/containers/kubernetes/installation">use Datadog Operator or Helm</a> to install the Agent on Kubernetes.
+</div>
 
 ## Installation
 You can use DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
@@ -36,7 +39,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     |                                 |                                 |                                 |                                 | <i class="icon-check-bold"></i> |                                 | [Manifest template][10] | no template                          |
     | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 |                                 | [Manifest template][11] | [Manifest template][12]              |
 
-     To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Network Performance Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Cloud Network Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
@@ -77,6 +80,76 @@ To install the Datadog Agent on your Kubernetes cluster:
     ```
 
 ## Configuration
+
+### Trace collection
+
+{{< tabs >}}
+{{% tab "TCP" %}}
+
+To enable APM trace collection over TCP, open the DaemonSet configuration file and edit the following:
+
+- Allow incoming data from port `8126` (forwarding traffic from the host to the agent) within the `trace-agent` container:
+    ```yaml
+      # (...)
+      containers:
+        - name: trace-agent
+          # (...)
+          ports:
+            - containerPort: 8126
+              hostPort: 8126
+              name: traceport
+              protocol: TCP
+      # (...)
+    ```
+
+- **If using Agent version 7.17 or previous**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variables to `true` in your `env` section of the `datadog.yaml` trace Agent manifest:
+
+  ```yaml
+    # (...)
+    containers:
+      - name: trace-agent
+        # (...)
+        env:
+          - name: DD_APM_ENABLED
+            value: 'true'
+          - name: DD_APM_NON_LOCAL_TRAFFIC
+            value: "true"
+          # (...)
+  ```
+
+**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn't support `hostPorts`, add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. This also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
+
+
+{{% /tab %}}
+{{% tab "Unix Domain Socket (UDS)" %}}
+
+To enable APM trace collection over UDS, open the DaemonSet configuration file and edit the following:
+
+  ```yaml
+    # (...)
+    containers:
+    - name: trace-agent
+      # (...)
+      env:
+      - name: DD_APM_ENABLED
+        value: "true"
+      - name: DD_APM_RECEIVER_SOCKET
+        value: "/var/run/datadog/apm.socket"
+    # (...)
+      volumeMounts:
+      - name: apmsocket
+        mountPath: /var/run/datadog/
+    volumes:
+    - hostPath:
+        path: /var/run/datadog/
+        type: DirectoryOrCreate
+    # (...)
+  ```
+
+This configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file in that directory with the `DD_APM_RECEIVER_SOCKET` value of `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Log collection
 
@@ -294,7 +367,7 @@ Additional examples are available on the [Container Discover Management][27] pag
 [14]: /agent/kubernetes/log/
 [15]: /agent/kubernetes/apm/
 [16]: /infrastructure/process/?tab=kubernetes#installation
-[17]: /network_monitoring/performance/setup/
+[17]: /network_monitoring/cloud_network_monitoring/setup/
 [18]: /data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /getting_started/site/

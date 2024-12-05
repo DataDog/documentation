@@ -38,10 +38,9 @@ integration_id: jfrog-platform
 integration_title: JFrog Platform
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: jfrog_platform
-oauth: {}
 public_title: JFrog Platform
 short_description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
 supported_os:

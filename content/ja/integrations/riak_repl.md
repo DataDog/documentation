@@ -3,6 +3,7 @@ app_id: riak-repl
 app_uuid: bbba11cf-2ea1-4a8b-904c-eb3b55ed169a
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: riak_repl.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10168
     source_type_name: Riak MDC Replication
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,8 @@ author:
   sales_email: britt.treece@gmail.com
   support_email: britt.treece@gmail.com
 categories:
-- data store
+- data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: riak-repl
 integration_title: Riak MDC Replication
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: riak_repl
-oauth: {}
 public_title: Riak MDC Replication
 short_description: レプリケーションのパフォーマンス、容量、健全性を追跡
 supported_os:
@@ -45,7 +46,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: レプリケーションのパフォーマンス、容量、健全性を追跡
   media: []
@@ -54,6 +56,7 @@ tile:
   title: Riak MDC Replication
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -76,7 +79,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Riak-Repl チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. riak_repl のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `riak_repl.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riak_repl.d/conf.yaml][5] を参照してください。
 
@@ -92,7 +95,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Riak-Repl チ�
 {{< get-metrics-from-git "riak_repl" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 Riak-Repl インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -105,7 +108,7 @@ Riak-Repl インテグレーションには、イベントは含まれません�
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/riak_repl/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/riak_repl/datadog_checks/riak_repl/data/conf.yaml.example

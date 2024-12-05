@@ -12,9 +12,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: 블로그
   text: Datadog와 SNMP 모니터링하기
-kind: 설명서
 title: 네트워크 장치에서 SNMP 메트릭 수집
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+{{< /site-region >}}
 
 ## 설치
 
@@ -79,7 +82,7 @@ Datadog 네트워크 장치 모니터링은 전체 서브넷에 있는 개별 �
 {{% /tab %}}
 {{< /tabs >}}
 
-- [에이전트를 재시작][5]합니다.
+- [에이전트를 재시작합니다][5].
 
 설정 후 에이전트가 장치를  [Datadog 장치 프로필][6] 중 하나에 일치시켜 관련 메트릭을 수집합니다.
 
@@ -92,7 +95,7 @@ Datadog 네트워크 장치 모니터링은 전체 서브넷에 있는 개별 �
 
 개별 장치를 지정하는 대신 자동탐지를 사용해 네트워크에서 모든 장치를 자동으로 검색할 수 있습니다.
 
-자동탐ㅁ지는 설정된 서브넷에 있는 각 IP를 수집하고 장치의 응답을 확인합니다. 그러면 Datadog 에이전트는 검색된 장치의 `sysObjectID`를 찾고 [Datadog 장치 프로필][6] 중 하나에 매핑합니다. 프로필은 다양한 유형의 장치를 수집하기 위한 사전 정의된 메트릭 목록을 포함합니다.
+자동탐지는 설정된 서브넷에 있는 각 IP를 수집하고 장치의 응답을 확인합니다. 그러면 Datadog 에이전트는 검색된 장치의 `sysObjectID`를 찾고 [Datadog 장치 프로필][6] 중 하나에 매핑합니다. 프로필은 다양한 유형의 장치를 수집하기 위한 사전 정의된 메트릭 목록을 포함합니다.
 
 네트워크 장치 모니터링과 자동탐지를 사용하는 방법:
 
@@ -130,7 +133,7 @@ snmp_listener:
       - "key2:val2"
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "SNMPv3" %}}
 
@@ -179,12 +182,12 @@ snmp_listener:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ko/network_monitoring/devices/profiles#sysoid-mapped-devices
-[3]: /ko/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /ko/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
-[5]: /ko/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[5]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
 [7]: /ko/agent
-[8]: /ko/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[8]: /ko/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[9]: /ko/agent/configuration/agent-commands/#agent-status-and-information

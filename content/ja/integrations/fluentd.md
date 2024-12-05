@@ -5,6 +5,7 @@ assets:
   dashboards:
     fluentd: assets/dashboards/fluentd_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,6 +20,7 @@ assets:
     - ruby td-agent
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 108
     source_type_name: fluentd
   saved_views:
     fluentd_processes: assets/saved_views/fluentd_processes.json
@@ -30,6 +32,7 @@ author:
 categories:
 - log collection
 - metrics
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_on_public_website: true
@@ -37,12 +40,10 @@ draft: false
 git_integration_title: fluentd
 integration_id: fluentd
 integration_title: FluentD
-integration_version: 2.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: fluentd
-oauth: {}
 public_title: FluentD
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 supported_os:
@@ -57,14 +58,19 @@ tile:
   - Category::ログの収集
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-fluentd-datadog
   support: README.md#Support
   title: FluentD
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Fluentd ダッシュボード][1]
@@ -94,14 +100,14 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 </source>
 ```
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -119,7 +125,7 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 
 2. [Agent を再起動します][3]。
 
-##### ログの収集
+##### ログ収集
 
 [Datadog の FluentD プラグイン][4]を使用して FluentD から Datadog アカウントへログを直接転送することができます。
 
@@ -221,7 +227,7 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -231,9 +237,9 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 
 | パラメーター            | 値                                                             |
 | -------------------- | ----------------------------------------------------------------- |
-| `<インテグレーション名>` | `fluentd`                                                         |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                     |
-| `<インスタンスコンフィギュレーション>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
+| `<INTEGRATION_NAME>` | `fluentd`                                                         |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                     |
+| `<INSTANCE_CONFIG>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -253,7 +259,7 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 
 FluentD チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "fluentd" >}}
 
 
@@ -267,7 +273,7 @@ FluentD チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/fluentd/images/snapshot-fluentd.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-fluentd-datadog

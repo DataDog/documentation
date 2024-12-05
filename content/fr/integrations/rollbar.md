@@ -15,7 +15,7 @@ integration_id: rollbar
 integration_title: Rollbar
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: rollbar
 public_title: Intégration Datadog/Rollbar

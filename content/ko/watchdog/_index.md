@@ -1,17 +1,23 @@
 ---
+algolia:
+  tags:
+  - watchdog
 aliases:
 - /ko/tracing/watchdog
+cascade:
+  algolia:
+    rank: 70
 description: 잠재적인 애플리케이션 및 인프라스트럭처 문제를 자동으로 감지
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Watchdog
   tag: 릴리스 노트
   text: 최신 Datadog Watchdog 릴리스를 확인하세요! (앱 로그인 필요).
+- link: https://www.datadoghq.com/blog/datadog-bits-generative-ai/
+  tag: 블로그
+  text: 새로운 DevOps Copilot인 Bits AI 소개
 - link: /logs/
   tag: 설명서
-  text: 로그 수집
-- link: /infrastructure/process/
-  tag: 설명서
-  text: 프로세스 수집
+  text: \u0008로그 수집
 - link: /tracing/
   tag: 설명서
   text: 트레이스 수집
@@ -21,67 +27,59 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-impact-analysis/
   tag: 블로그
   text: Watchdog Impact Analysis로 사용자 영향 범위 이해
-kind: 설명서
-title: Watchdog
+- link: https://www.datadoghq.com/blog/watchdog-live-processes/
+  tag: 블로그
+  text: Watchdog Insights for Live Processes를 사용하여 워크로드 성능 이상 문제 해결
+title: Datadog WatchdogTM
 ---
-
-{{< img src="watchdog/watchdog.png" alt="오류율에 대한 2개의 중요 경고가 제공되는 Watchdog 경고 페이지" >}}
-
 ## 개요
 
-Watchdog은 잠재적인 애플리케이션 및 인프라스트럭처 문제를 자동으로 감지하는 APM 성능 및 인프라스트럭처 메트릭을 위한 알고리즘 기능입니다. 이상 징후와 대시보드를 구동할 때와 동일한 시즌 알고리즘을 활용합니다. Watchdog은 다음에서 추세와 패턴을 관찰합니다.
+Watchdog는 Datadog의 AI 엔진으로, Datadog 플랫폼 전체의 관찰 데이터를 기반으로 알림을 보내고 인사이트, 근본 원인 분석 정보를 자동으로 제공해 줍니다. Watchdog이 지속적으로 인프라스트럭처를 모니터링하고 중요한 신호에 관심을 유도하기 때문에 문제를 감지하고, 트러블슈팅을 실시하고, 문제를 해결하는 데 도움이 됩니다.
 
-* APM 메트릭:
-  * 히트(요청률)
-  * 오류율
-  * 레이턴스
+Watchdog 기능은 기본 제공되기 때문에 설치가 필요 없습니다.
 
-* 통합 항목의 인프라스트럭처 메트릭:
-  * 호스트 수준 메모리 사용량(메모리 누수) 및 TCP 재전송 속도의 경우에는 [System][1]
-  * [Redis][2]
-  * [PostgreSQL][3]
-  * [NGINX][4]
-  * [S3][6], [ELB/ALB/NLB][7], [CloudFront][8] 및 [DynamoDB][9] Amazon 서비스의 경우에는 [Amazon Web Services][5]
-  * [Alerting][10]
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/781921620/rendition/1080p/file.mp4?loc=external&signature=8889419b739e3398d03a72edca4f96909144567e045d30deeb8f9345c43a682d" poster="/images/poster/watchdog.png" >}}
 
-Watchdog은 적중률의 갑작스러운 급증과 같은 메트릭의 불규칙성을 찾습니다. 각 불규칙성에 대해 [Watchdog 페이지][11]에 Watchdog 경고가 표시됩니다. 각 경고에는 감지된 메트릭 불규칙성에 대한 그래프가 포함되며, 관련 타임프레임 및 엔드포인트에 대한 상세 정보를 제공합니다. Watchdog은 Datadog 에이전트 또는 통합 항목에서 보낸 데이터를 자동으로 모니터링합니다.
+<br/>
 
-메트릭, 로그 또는 기타 데이터의 새로운 소스와 관련하여 Watchdog은 예상 동작의 베이스라인을 설정하기 위해 2주간의 데이터를 필요로 합니다. 2주 미만의 데이터를 기반으로 Watchdog에서 감지한 이상 징후에는 부정확성이 포함될 수 있습니다.
+### 자동 관리 알림
 
-## 서비스 목록의 Watchdog
+Watchdog에서 사용자의 시스템, 애플리케이션, 배포 행동의 기준선을 계산하고 예측합니다. 이 기준선을 바탕으로 이상 행동을 탐지합니다.
 
-Watchdog이 APM 메트릭에서 불규칙성을 감지하면 [APM 서비스 목록][12]에서 영향을 받는 서비스 옆에 분홍색 Watchdog 쌍안경 아이콘이 나타납니다. 쌍안경 옆의 숫자는 Watchdog이 해당 서비스 내에서 감지한 문제의 수를 나타냅니다.
+{{< whatsnext desc="">}}
+  {{< nextlink href="/watchdog/alerts">}}<u>Watchdog 알림</u>: Watchdog 알림을 보고 해석하는 방법: 각 알림으로 제공하는 정보, 알림 범위, Datadog에서 Watchdog 알림을 찾는 방법.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/faulty_deployment_detection">}}<u>잘못된 배포 탐지</u>: Watchdog에서 잘못된 코드 배포를 찾는 방법.{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< img src="watchdog/service_list.png" alt="5개의 서비스를 보여주는 APM 서비스 목록 페이지의 스크린샷. 웹 스토어 서비스 이름 뒤에는 분홍색 쌍안경 아이콘이 있습니다." style="width:75%;" >}}
+Watchdog 알고리즘 사용자 지정하는 방법:
+  * [이상 알고리즘][7]
+  * [예측 알고리즘][8]
+  * [아웃라이어 알고리즘][9]
 
-[서비스 페이지][13]로 이동하여 메트릭 이상 징후에 대한 자세한 내용을 볼 수 있습니다. 페이지 상단에는 Watchdog Insights 상자가 있습니다. Watchdog Insights는 더 높은 오류율 또는 레이턴시와 같은 비정상적인 동작과 관련된 태그 값을 검색하는 데 도움이 됩니다.
+### 조사 도우미
 
-메트릭 그래프에서도 Watchdog 아이콘을 찾을 수 있습니다.
+Watchdog는 조사를 돕기 위해 모든 탐색기에서 컨텍스트 기반 인사이트를 보여주고, 근본 원인을 탐색하고, 사용자 영향을 결정합니다.
 
-{{< img src="watchdog/latency_graph.png" alt="y축에 서비스 레이턴시(초)를 표시하고 x축에 하루 중 시간을 표시하는 그래프. 전체 그래프가 분홍색으로 강조 표시되고 상단에 May 2: 13:31 Ongoing이라는 단어가 표시됩니다." style="width:75%;" >}}
-
-쌍안경 아이콘을 클릭하면 자세한 내용이 포함된 [Watchdog 경고][14] 카드를 볼 수 있습니다.
+{{< whatsnext desc="">}}
+  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insight</u>: Watchdog Insights는 추천 엔진으로, 문제를 파악하고 해결하는 것을 도와줍니다.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/rca">}}<u>근본 원인 분석</u>: Watchdog Root Cause Analysis(RCA)에서 이상 징후의 근본 원인을 찾는 방법, 제공된 정보를 사용하는 방법.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/impact_analysis">}}<u>영향 분석</u>: Watchdog에서 이상 징후가 사용자에게 미치는 악영향을 파악하는 방법.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## 트러블슈팅
 
-도움이 필요하시면 [Datadog 지원팀][15]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][1]에 문의하세요.
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/integrations/system/
-[2]: /ko/integrations/redisdb/
-[3]: /ko/integrations/postgres/
-[4]: /ko/integrations/nginx/
-[5]: /ko/integrations/amazon_web_services/
-[6]: /ko/integrations/amazon_s3/
-[7]: /ko/integrations/amazon_elb/
-[8]: /ko/integrations/amazon_cloudfront/
-[9]: /ko/integrations/amazon_dynamodb/
-[10]: /ko/monitors/
-[11]: https://app.datadoghq.com/watchdog
-[12]: /ko/tracing/services/services_list/
-[13]: /ko/tracing/services/service_page/#overview
-[14]: /ko/watchdog/alerts#alert-details
-[15]: /ko/help/
+[1]: /ko/help/
+[2]: /ko/watchdog/alerts
+[3]: /ko/watchdog/faulty_deployment_detection/
+[4]: /ko/watchdog/insights?tab=logmanagement
+[5]: /ko/watchdog/rca/
+[6]: /ko/watchdog/impact_analysis/
+[7]: /ko/monitors/types/anomaly/#anomaly-detection-algorithms
+[8]: /ko/monitors/types/forecasts/?tab=linear#algorithms
+[9]: /ko/monitors/types/outlier/?tab=dbscan#algorithms

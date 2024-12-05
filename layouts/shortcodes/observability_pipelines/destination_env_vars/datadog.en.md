@@ -1,0 +1,1 @@
+There are no environment variables to configure for Datadog Log Management.

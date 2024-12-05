@@ -1,23 +1,24 @@
 ---
 title: Getting Integrations Working
-kind: documentation
 aliases:
     - /integrations/faq/issues-getting-integrations-working
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent debug mode"
 - link: "/agent/troubleshooting/send_a_flare/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Send an Agent flare"
 - link: "/agent/troubleshooting/agent_check_status/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Get the status of an Agent check"
 ---
 
 Datadog integrations are configured through the Datadog Agent using YAML configuration files. For the path to the configuration directory for your operating system, consult the [Agent Configuration Files][1] documentation.
 
 If an integration that you've configured is not showing up in Datadog, run the [`status` CLI command][2] and look for the integration under the *Running Checks* heading.
+
+**Note**: Community, Partner, and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
 
 If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
 1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.

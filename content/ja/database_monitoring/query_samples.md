@@ -10,23 +10,16 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング
-kind: documentation
 title: クエリサンプルの確認
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+[Samples ページ][1]は、特定の時間に実行されていたクエリを理解するのに役立ちます。各実行を、クエリおよび関連するクエリの平均パフォーマンスと比較します。
 
-Query Samples ビューは、特定の時間に実行されているクエリを理解するのに役立ちます。各実行を、クエリおよび関連するクエリの平均パフォーマンスと比較します。
-
-UI の **[APM > Databases][1]** をクリックし、**Query Samples** タブを選択して、データベースモニタリング内の Query Samples ビューに移動します。
-
-Query Samples ページには、実行中および最近終了したクエリのスナップショットが表示されます。スナップショットは必ずしも_すべて_のクエリを表すものではありませんが、大体の割合を把握することはできます。
+Samples ページには、実行中および最近終了したクエリのスナップショットが表示されます。スナップショットは必ずしも_すべて_のクエリを表すものではありませんが、大体の割合を把握することはできます。
 
 ## 検索とフィルター
 
-Query Samples ページには、サポートされているすべてのデータベース製品のクエリがまとめて表示されます (Query Metrics ページではどのデータベースを対象とするかを選択できますが、それとは異なります)。特定のデータベース (Postgres または MySQL) のデータを表示するには、`source` ファセットでフィルタリングします。
+Samples ページには、サポートされているすべてのデータベース製品のクエリがまとめて表示されます (Query Metrics ページではどのデータベースを対象とするかを選択できますが、それとは異なります)。特定のデータベース (Postgres または MySQL) のデータを表示するには、`source` ファセットでフィルタリングします。
 
 検索フィールドにタグを入力してクエリサンプルのリストをフィルタリングするか、左側に表示されるファセットを使用します。ファセットには次のようなものがあります。
 
@@ -95,5 +88,5 @@ Query Samples ページでは、複数のクエリの実行計画コストをフ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/samples
 [2]: /ja/database_monitoring/data_collected/#which-queries-are-tracked

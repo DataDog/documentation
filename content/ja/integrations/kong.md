@@ -7,6 +7,7 @@ assets:
     Kong Overview: assets/dashboards/kong_overview.json
     Kong Overview OpenMetrics: assets/dashboards/kong_overview_openmetrics.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,9 +20,8 @@ assets:
     - kong start
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 141
     source_type_name: Kong
-  logs:
-    source: kong
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -35,6 +35,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
 display_on_public_website: true
@@ -42,12 +43,10 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 2.4.1
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: kong
-oauth: {}
 public_title: Kong
 short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
 supported_os:
@@ -61,14 +60,19 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-kong-datadog
   support: README.md#Support
   title: Kong
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -83,14 +87,14 @@ Agent の Kong チェックは、合計リクエスト数、応答コード数�
 
 Kong チェックは [Datadog Agent][4] パッケージに含まれています。Kong サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -112,7 +116,7 @@ Kong チェックは [Datadog Agent][4] パッケージに含まれています�
 
 **注**: 現在のバージョンのチェック (1.17.0+) は、メトリクスの収集に [OpenMetrics][5] を使用しており、これは Python 3 を必要とします。Python 3 を使用できないホスト、またはこのチェックのレガシーバージョンを使用する場合は、次の[構成][6]を参照してください。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -150,7 +154,7 @@ Kong アクセスログは NGINX によって生成されます。したがっ�
 [5]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/7.27.x/kong/datadog_checks/kong/data/conf.yaml.example
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -161,11 +165,11 @@ Kong アクセスログは NGINX によって生成されます。したがっ�
 
 | パラメーター            | 値                                                 |
 | -------------------- | ----------------------------------------------------- |
-| `<インテグレーション名>` | `kong`                                                |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                         |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:8001/metrics"}` |
+| `<INTEGRATION_NAME>` | `kong`                                                |
+| `<INIT_CONFIG>`      | 空白または `{}`                                         |
+| `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:8001/metrics"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -195,7 +199,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Kong チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "kong" >}}
 
 
@@ -211,6 +215,6 @@ Kong チェックには、イベントは含まれません。
 [1]: https://docs.konghq.com/hub/kong-inc/datadog/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://www.datadoghq.com/blog/monitor-kong-datadog
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

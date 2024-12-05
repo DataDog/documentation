@@ -2,7 +2,6 @@
 title: Docker Data Collected
 aliases:
 - /agent/docker/data_collected
-kind: documentation
 ---
 
 ## Docker integration
@@ -27,6 +26,8 @@ The Docker Agent produces the following events:
 - Restart container
 - Restart Daemon
 - Update
+
+To collect additional Docker events, reach out to [Datadog support][2].
 
 ### Service checks
 
@@ -54,3 +55,4 @@ The containerd check can collect events. Use `filters` to select the relevant ev
 {{< get-service-checks-from-git "containerd" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
+[2]: https://www.datadoghq.com/support/

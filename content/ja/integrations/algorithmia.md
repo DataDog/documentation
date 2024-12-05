@@ -5,6 +5,7 @@ assets:
   dashboards:
     Algorithmia: assets/dashboards/algorithmia.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,16 +15,19 @@ assets:
       prefix: algorithmia.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10128
     source_type_name: Algorithmia
   monitors:
-    Algorithmia: assets/monitors/algorithm_duration.json
+    Algorithm is taking too long to execute: assets/monitors/algorithm_duration.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Algorithmia
   sales_email: support@algorithmia.io
   support_email: support@algorithmia.io
 categories:
-- モニタリング
+- メトリクス
+- ai/ml
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
 display_on_public_website: true
@@ -33,10 +37,8 @@ integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: algorithmia
-oauth: {}
 public_title: Algorithmia
 short_description: 本番環境の機械学習モデルのメトリクスを監視
 supported_os:
@@ -44,8 +46,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Metrics
+  - Category::AI/ML
   - Supported OS::Linux
-  - Category::Monitoring
+  - Offering::Integration
   configuration: README.md#Setup
   description: 本番環境の機械学習モデルのメトリクスを監視
   media: []
@@ -54,6 +58,7 @@ tile:
   title: Algorithmia
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -118,7 +123,7 @@ scikit-learn の回帰モデルからの予測可能性、TensorFlow の画像�
 {{< get-metrics-from-git "algorithmia" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 Algorithmia チェックには、サービスのチェック機能は含まれません。
 

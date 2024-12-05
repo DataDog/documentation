@@ -6,13 +6,12 @@ further_reading:
 - link: /account_management/users/
   tag: Documentación
   text: Gestión de usuarios
-kind: documentación
 title: Parámetros de organización
 ---
 ## Información general
 Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings**, en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
 
-Desde los parámetros de organización (Organization Settings), puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Organization Settings** en la documentación.
+Desde Organization Settings, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Organization Settings** en la documentación.
 
 ## Identidad y cuentas
 
@@ -107,11 +106,15 @@ Obtén información acerca de cómo acceder y controlar los [parámetros de la m
 
 ## Seguridad
 
+### Centro de seguridad
+
+La página **Safety Center** (Centro de seguridad) contiene alertas de seguridad, advertencias y recomendaciones para revisar en tu organización. También puedes configurar **Security Contacts** (Contactos de seguridad) a fin de recibir notificaciones de seguridad para tu organización. Para ello, haz clic en **Configuration* (Configuración), introduce hasta dos direcciones de correo electrónico y haz clic en el botón **Save** (Guardar).
+
 ### Uso compartido público
 
 La pestaña **Public Sharing** (Uso compartido público) incluye una lista de dashboards y gráficas compartidas. Recuerda que puedes editar los parámetros para compartir haciendo clic en los conmutadores de activación **Enabled**.
 
-### Aplicaciones de OAuth
+### Python
 
 La página [**OAuth Apps**][14] te permite ver o gestionar aplicaciones de OAuth de tu organización.
 
@@ -149,11 +152,11 @@ Puedes elegir si quieres que la página de inicio de tu organización sea una li
 [4]: /es/account_management/org_settings/service_accounts
 [5]: /es/account_management/login_methods/
 [6]: /es/account_management/saml/
-[7]: /es/account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[7]: /es/account_management/saml/mapping
 [8]: /es/account_management/api-app-keys/
 [9]: /es/account_management/rbac/
 [10]: /es/agent/remote_config/?tab=configurationyamlfile#how-it-works
 [11]: /es/account_management/api-app-keys/#client-tokens
-[12]: /es/events/guides/email/
+[12]: /es/service_management/events/guides/email/
 [13]: /es/synthetics/settings/?tab=specifyvalue#overview
 [14]: /es/account_management/org_settings/oauth_apps

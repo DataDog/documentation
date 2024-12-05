@@ -4,7 +4,6 @@ aliases:
 dependencies:
 - https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
 description: Synthetics と Datadog CI 拡張機能を使用して、CI パイプラインで使用できるタスクを作成します。
-kind: documentation
 title: Continuous Testing と Datadog CI Azure DevOps 拡張機能
 ---
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]
@@ -15,7 +14,7 @@ title: Continuous Testing と Datadog CI Azure DevOps 拡張機能
 
 Datadog Continuous Testing Azure DevOps 拡張機能を使用すると、Azure パイプラインの構成内で Synthetic テストを実行し、Azure DevOps を使用しているすべてのチームが、ソフトウェアライフサイクルの各段階で Synthetic テストの恩恵を受けられるようにすることができます。タスクとして [`SyntheticsRunTests`][3] を実行することができます。
 
-## Authentication
+## 認証
 
 ### サービス接続
 
@@ -86,8 +85,8 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     authenticationType: 'apiAppKeys'
     apiKey: '$(DatadogApiKey)'
     appKey: '$(DatadogAppKey)'
-    subdomain: 'myorg'
     datadogSite: '$(DatadogSite)'
+    subdomain: 'myorg'
 ```
 
 ## 複雑の使用
@@ -105,9 +104,6 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
     testSearchQuery: 'tag:e2e-tests'
-    variables: |
-      START_URL=https://staging.website.com
-      PASSWORD=$(StagingPassword)
 ```
 
 ### `testSearchQuery` と変数のオーバーライドを使用したタスク例
@@ -119,46 +115,48 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
     testSearchQuery: 'tag:e2e-tests'
+    variables: |
+      START_URL=https://staging.website.com
+      PASSWORD=$(StagingPassword)
 ```
 
-### `configPath` によるグローバル構成オーバーライドを使用したタスク例
+### Example task using a global configuration file with `configPath`
 
-このタスクは、グローバルな `datadog-ci.config.json` ファイルへのパスをオーバーライドします。
+By default, the path to the global configuration file is `datadog-ci.json`. You can override this path with the `config_path` input.
 
 ```yaml
 - task: SyntheticsRunTests@1
   displayName: Run Datadog Synthetic tests
   inputs:
     authenticationType: 'connectedService'
+    configPath: './global.config.json'
     connectedService: 'my-datadog-ci-connected-service'
-    configPath: './synthetics-config.json'
 ```
 
-コンフィギュレーションファイルの例としては、この [`global.config.json` ファイル][13] をご覧ください。
+For an example of a global configuration file, see this [`global.config.json` file][13].
 
 ## 入力
 
 | 名前                   | 要件 | 説明                                                                                                                                                                                                                                     |
 | ---------------------- | :---------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`               | _required_  | `apiAppKeys` 認証タイプを使用する際の Datadog API キー。このキーは [Datadog 組織][6]によって作成され、[シークレット][7]として保存される必要があります。                                                                              |
+| `appKey`               | _必須_  | `apiAppKeys` 認証タイプを使用する際の Datadog アプリケーションキー。このキーは [Datadog 組織][6]によって作成され、[シークレット][7]として保存される必要があります。                                                                      |
 | `authenticationType`   | _必須_  | Datadog に使用させたい認証のタイプで、`connectedService` または `apiAppKeys` のどちらか。                                                                                                                                                  |
-| `connectedService`     | _オプション_  | [Datadog CI サービス接続](#setup)で、`connectedService` 認証タイプを使用する際に使用する名前。                                                                                                                           |
-| `apiKey`               | _オプション_  | `apiAppKeys` 認証タイプを使用する際の Datadog API キー。このキーは [Datadog 組織][6]によって作成され、[シークレット][7]として保存される必要があります。                                                                              |
-| `appKey`               | _オプション_  | `apiAppKeys` 認証タイプを使用する際の Datadog アプリケーションキー。このキーは [Datadog 組織][6]によって作成され、[シークレット][7]として保存される必要があります。                                                                      |
-| `subdomain`            | _オプション_  | `apiAppKeys` 認証タイプを使用する際に、Datadog アプリケーションにアクセスするために設定するカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、この値は `myorg` に設定する必要があります。**デフォルト:** `app`。 |
+| `connectedService`     | _必須_  | [Datadog CI サービス接続](#setup)で、`connectedService` 認証タイプを使用する際に使用する名前。                                                                                                                           |
+| `configPath`           | _オプション_  | The [global JSON configuration][9] used when launching tests. For more information, see the [example configuration][9]. **Default:** `datadog-ci.json`.                                                                                         |
 | `datadogSite`          | _オプション_  | `apiAppKeys` 認証タイプを使用する場合の [Datadog サイト][11]。**デフォルト:** `datadoghq.com`。                                                                                                                                           |
-| `publicIds`            | _オプション_  | トリガーしたい Synthetic テストの ID を、改行またはカンマで区切ったリスト。値を指定しない場合、タスクは `synthetics.json` という名前のファイルを探します。                                                                       |
-| `testSearchQuery`      | _オプション_  | [検索][8]クエリに対応するテストをトリガーします。これは、テストの構成にタグを付けている場合に便利です。詳しくは、[タグの命名規則とベストプラクティス][10]を参照してください。                                                   |
-| `files`                | _オプション_  | Synthetic テストの構成ファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                                                                   |
-| `configPath`           | _オプション_  | テストを起動するときに使用されるグローバル JSON 構成。詳細は[構成例][9]を参照してください。**デフォルト:** `datadog-ci.json`。                                                                                              |
-| `variables`            | _オプション_  | Synthetic テストに使用するグローバル変数のリストで、改行またはカンマで区切って指定します。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                                                  |
-| `jUnitReport`          | _オプション_  | JUnit レポートを生成したい場合のファイル名。                                                                                                                                                                                    |
-| `pollingTimeout`       | _オプション_  | タスクがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。**デフォルト:** 30 分。                                                 |
 | `failOnCriticalErrors` | _オプション_  | テストがトリガーされなかったり、Datadog から結果を取得できなかったりした場合に、CI ジョブを失敗させます。**デフォルト:** `false`                                                                                                                                 |
 | `failOnMissingTests`   | _オプション_  | パブリック ID (`publicIds` を使用するか、[テストファイル][14]にリストされている) を持つ指定されたテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム上または Datadog サイトで削除された場合)、CI ジョブを失敗させます。**デフォルト:** `false`     |
 | `failOnTimeout`        | _オプション_  | 少なくとも 1 つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させます。**デフォルト:** `true`                                                                                                                                                     |
+| `files`                | _オプション_  | Synthetic テストの構成ファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                                                                   |
+| `jUnitReport`          | _オプション_  | JUnit レポートを生成したい場合のファイル名。                                                                                                                                                                                    |
+| `pollingTimeout`       | _オプション_  | **DEPRECATED**: The duration (in milliseconds) after which the task stops polling for test results. At the CI level, test results completed after this duration are considered failed. **Default:** 30 minutes.                                                 |
+| `publicIds`            | _オプション_  | トリガーしたい Synthetic テストの ID を、改行またはカンマで区切ったリスト。値を指定しない場合、タスクは `synthetics.json` という名前のファイルを探します。                                                                       |
+| `subdomain`            | _オプション_  | `apiAppKeys` 認証タイプを使用する際に、Datadog アプリケーションにアクセスするために設定するカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、この値は `myorg` に設定する必要があります。**デフォルト:** `app`。 |
+| `testSearchQuery`      | _オプション_  | [検索][8]クエリに対応するテストをトリガーします。これは、テストの構成にタグを付けている場合に便利です。詳しくは、[タグの命名規則とベストプラクティス][10]を参照してください。                                                   |
+| `variables`            | _オプション_  | Synthetic テストに使用するグローバル変数のリストで、改行またはカンマで区切って指定します。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                                                  |
 
-
-## その他の参考資料
+## 参考資料
 
 お役に立つドキュメント、リンクや記事:
 

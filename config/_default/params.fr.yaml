@@ -1,11 +1,10 @@
 site_name: Surveillance d'applications et d'infrastructures avec Datadog
-meta_image: datadog_logo_share_tt.png
 meta_title: Débuter avec Datadog
 meta_description: Datadog, le principal prestataire de services de surveillance à l'échelle du cloud.
 disclaimer: Cette page n'est pas encore disponible en français, sa traduction est en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction actuel, <a href="https://docs.datadoghq.com/fr/help/">n'hésitez pas à nous contacter</a>.
 announcement_banner:
-  desktop_message: "Lancement du scanner de données sensibles une solution évolutive de protection des données\_!"
-  mobile_message: "Lancement du scanner de données sensibles Datadog\_!"
-  external_link: https://www.datadoghq.com/product/sensitive-data-scanner/
+  desktop_message: "Commencez à explorer la plateforme dès à présent en activant votre essai gratuit de 14 jours\_!"
+  mobile_message: "Profitez de 14 jours de surveillance illimitée\_!"
+  external_link: https://www.datadoghq.com/fr/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-emea-docs-announcement-trial-freetrial-fr
 exclude: []
 translate_status_banner: Cette traduction n'est pas à jour. Pour consulter la dernière version en anglais, cliquez ici

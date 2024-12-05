@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/library_config/
   tag: ドキュメント
   text: トレーシングライブラリの構成
-kind: ドキュメント
 title: APM データの量子化
 ---
 
@@ -73,7 +72,7 @@ apm_config:
 export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get_id_[0-9]+", "repl": "get_id_x"}, {...}, ...]'
 ```
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

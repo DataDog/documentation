@@ -17,6 +17,7 @@ categories:
 - インシデント
 - マーケットプレイス
 - メトリクス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,12 +26,10 @@ integration_id: zigiwave-micro-focus-opsbridge-integration
 integration_title: OpsBridge
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: zigiwave_micro_focus_opsbridge_integration
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -51,6 +50,10 @@ tile:
   - Category::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  - Submitted Data Type::Incidents
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog と OpsBridge のノーコードインテグレーション
   media:
@@ -75,6 +78,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 
@@ -92,7 +96,10 @@ Datadog オートディスカバリーは、OpsBridge データベースにな�
 ZigiOps は、Datadog のイベントを収集し、イベントとして OpsBridge に報告します。
 このプラットフォームは、メトリクスやトポロジーなど、関連するホストの詳細をすべて同期します。
 
-ZigiOps は Datadog のメトリクスを収集し、関連するホスト情報とともに MF Operations Connector にレポートします。これらのメトリクスは、OpsBridge Performance Perspective からアクセスでき、ダッシュボードの構築に使用することができます。
+ZigiOps collects Datadog metrics and reports them, along with related host information, to the MF Operations
+Connector. These metrics can then be
+accessed by the OpsBridge Performance Perspective and used for
+building dashboards.
 
 このインテグレーションにより、IT 運用チームは OpsBridge インフラストラクチャーを俯瞰的に把握し、問題が現実の問題となる前に検出できるようになります。
 

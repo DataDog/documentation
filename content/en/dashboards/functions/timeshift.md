@@ -1,6 +1,5 @@
 ---
 title: Timeshift
-kind: documentation
 aliases:
     - /graphing/functions/timeshift/
 further_reading:
@@ -9,7 +8,7 @@ further_reading:
   text: "Graph the percentage change between an earlier value and a current value."
 ---
 
-Here is a set of functions of the pattern `<TIMEPERIOD>_before()`. These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
+Here is a set of functions performing a time shift of your data. These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 
 ## Timeshift
 
@@ -23,6 +22,23 @@ For example, if you wanted to use this to compare current system load with load 
 timeshift(avg:system.load.1{*}, -1209600)
 ```
 
+## Calendar shift
+
+
+| Function           | Description                                                                                   | Example                            |
+|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
+| `calendar_shift()` | Graph values from the previous day, week, or month from the current timestamp for the metric. | `calendar_shift(<METRIC_NAME>{*}, "<TIME_SHIFT_STRING>", "<TIME_ZONE_CODE>")` |
+
+To access the `calendar_shift()` function click the **Add function** button, select **Timeshift > Month before**. The calendar shift allows you to compare the same metric across equivalent time frames. Below is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from two weeks ago compared to the current value.
+
+{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from two weeks ago and the present" style="width:80%;" >}}
+
+Valid `TIME_SHIFT_STRING` values are negative integers followed by "d" for days, "w" for weeks, or "mo" for months.
+Some examples are `-1d`, `-7d`, `-1mo`, `-30d`, and `-4w`.
+
+Valid `TIME_ZONE_CODE` values are the IANA time zone codes for a specific city, or `UTC`.
+For example, `UTC`, `America/New_York`, `Europe/Paris`, or `Asia/Tokyo`.
+
 ## Hour before
 
 | Function        | Description                                                            | Example                         |
@@ -35,6 +51,8 @@ Here is an example of `system.load.1` with the `hour_before()` value shown as a 
 
 ## Day before
 
+<div class="alert alert-danger">The day before feature is being deprecated. Use calendar shift with a value of "-1d" instead.</div>
+
 | Function       | Description                                                          | Example                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
 | `day_before()` | Graph values from a day before the current timestamp for the metric. | `day_before(<METRIC_NAME>{*})` |
@@ -45,6 +63,8 @@ Here is an example of `nginx.net.connections` with the `day_before()` value show
 
 ## Week before
 
+<div class="alert alert-danger">The week before feature is being deprecated. Use calendar shift with a value of "-7d" instead.</div>
+
 | Function        | Description                                                                    | Example                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
 | `week_before()` | Graph values from a week (7 days) before the current timestamp for the metric. | `week_before(<METRIC_NAME>{*})` |
@@ -53,7 +73,9 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 {{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example" style="width:80%;">}}
 
-### Month before
+## Month before
+
+<div class="alert alert-danger">The month before feature is being deprecated. Use calendar shift with a value of "-1mo", "-30d" or "-4w" instead, depending on your use case.</div>
 
 | Function         | Description                                                                                | Example                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
@@ -62,6 +84,7 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value shown as a thin, solid line.
 
 {{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="simple month before example" style="width:80%;">}}
+
 
 ## Other functions
 

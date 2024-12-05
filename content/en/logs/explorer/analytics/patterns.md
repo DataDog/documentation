@@ -1,6 +1,5 @@
 ---
 title: Grouping Logs Into Patterns
-kind: documentation
 description: 'Group queried logs into patterns.'
 further_reading:
 - link: 'logs/explorer/'
@@ -9,6 +8,12 @@ further_reading:
 - link: 'logs/explorer/analytics'
   tag: 'Documentation'
   text: 'Learn how to analyze your logs'
+- link: 'https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/'
+  tag: 'Blog'
+  text: 'Filter and correlate logs dynamically using Subqueries'
+- link: 'https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/'
+  tag: 'Blog'
+  text: 'Monitor DNS logs for network and security analysis'
 ---
 
 ## Overview
@@ -17,7 +22,7 @@ When aggregating indexed logs by **Patterns**, logs that have a `message` with s
 
 The **Patterns** view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues. The pattern detection is based on 10,000 log samples. Refine your search to see patterns limited to a specific subset of logs.
 
-{{< img src="logs/explorer/aggregations_patterns.png" alt="The logs explorer showing logs grouped by patterns" style="width:90%;" >}}
+{{< img src="logs/explorer/aggregations_patterns.png" alt="The Log Explorer showing logs grouped by patterns" style="width:90%;" >}}
 
 Patterns support the [List][1] visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
 

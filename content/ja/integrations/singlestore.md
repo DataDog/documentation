@@ -5,6 +5,7 @@ assets:
   dashboards:
     Singlestore Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,22 +18,22 @@ assets:
     - memsqld
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10215
     source_type_name: SingleStore
-  logs:
-    source: singlestore
   monitors:
-    '[SingleStore] License expiration': assets/monitors/license_expiration.json
-    '[SingleStore] Read failures rate': assets/monitors/read_failures.json
-    '[SingleStore] Write failures rate': assets/monitors/write_failures.json
+    License will expire soon: assets/monitors/license_expiration.json
+    Read queries failure rate is high: assets/monitors/read_failures.json
+    Write queries failure rate is high: assets/monitors/write_failures.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
 display_on_public_website: true
@@ -40,12 +41,10 @@ draft: false
 git_integration_title: singlestore
 integration_id: singlestore
 integration_title: SingleStore
-integration_version: 1.3.2
+integration_version: 4.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: singlestore
-oauth: {}
 public_title: SingleStore
 short_description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
 supported_os:
@@ -55,12 +54,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   - Category::Network
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
   media: []
@@ -69,6 +69,7 @@ tile:
   title: SingleStore
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -89,7 +90,7 @@ tile:
 SingleStore チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### ホスト
 
@@ -100,7 +101,7 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 **注**: デフォルトでは、SingleStore インテグレーションは `MV_GLOBAL_STATUS`、`AGGREGATORS`、`LEAVES` テーブルからしかメトリクスを収集しません。システムレベルのメトリクス (CPU、ディスク、ネットワーク IO、メモリ) を追加で収集するには、`singlestore.d/conf.yaml` ファイルで `collect_system_metrics: true` を設定します。
 
-##### ログの収集
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -136,11 +137,11 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<インテグレーション名>` | `singlestore`                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
+| `<INTEGRATION_NAME>` | `singlestore`                                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### ログの収集
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -170,7 +171,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 SingleStore インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "singlestore" >}}
 
 

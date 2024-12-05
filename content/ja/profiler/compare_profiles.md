@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/tracing/profiler/compare_profiles/
 further_reading:
 - link: profiler/enabling
   tag: ドキュメント
@@ -15,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: ブログ
   text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
-kind: documentation
 title: プロファイルを比較する
 ---
 
@@ -71,6 +72,6 @@ UI のさまざまな場所からさまざまなタイプの比較を開くこ�
 
 {{< img src="profiler/compare_recent_versions.mp4" alt="2 つのバージョンの比較ビューを開きます。" video="true">}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

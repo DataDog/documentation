@@ -1,6 +1,5 @@
 ---
 title: DBM Setup Architectures
-kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
@@ -14,9 +13,6 @@ further_reading:
   text: "Troubleshooting"
 
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -42,6 +38,7 @@ In a self-hosted setup, the Datadog Agent collects system metrics from the opera
 * [System metrics collected on Postgres][2]
 * [System metrics collected on MySQL][3]
 * [System metrics collected on SQL Server][4]
+* [System metrics collected on Oracle][17]
 
 For self-hosted setups, you install the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
 
@@ -49,10 +46,10 @@ You grant the Agent read-only access to your database, and configure the integra
 
 Instructions for setting up Database Monitoring with a self-hosted provider:
 
-* [MySQL][6]
-* [Oracle][16]
 * [Postgres][5]
+* [MySQL][6]
 * [SQL Server][7]
+* [Oracle][16]
 
 ### Cloud-managed databases
 
@@ -102,3 +99,4 @@ For monitoring Aurora databases, the Agent should not connect to the database th
 [14]: https://www.datadoghq.com/blog/datadog-cluster-agent/
 [15]: /database_monitoring/setup_postgres/aurora/
 [16]: /database_monitoring/setup_oracle/selfhosted/
+[17]: /integrations/oracle/?tab=linux#data-collected

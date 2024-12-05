@@ -1,6 +1,5 @@
 ---
 title: Cluster Checks
-kind: documentation
 aliases:
     - /agent/autodiscovery/clusterchecks
     - /agent/faq/kubernetes-state-cluster-check
@@ -9,7 +8,7 @@ further_reading:
     - link: '/containers/cluster_agent/'
       tag: 'Documentation'
       text: 'Datadog Cluster Agent'
-    - link: '/containers/cluster_agent/troubleshooting#cluster-checks'
+    - link: '/containers/troubleshooting/cluster-and-endpoint-checks'
       tag: 'Documentation'
       text: 'Troubleshooting Cluster Checks'
     - link: '/containers/guide/clustercheckrunners'
@@ -36,21 +35,7 @@ Using cluster checks is recommended if your infrastructure is configured for hig
 The setup process involves enabling the dispatching ability in the Cluster Agent, as well as ensuring the Agents are prepared to receive configurations from the `clusterchecks` provider. Once this is done, configurations are passed to the Cluster Agent through mounted configuration files or through Kubernetes service annotations.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-Cluster check dispatching is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
-```yaml
-datadog:
-  clusterChecks:
-    enabled: true
-  # (...)
-clusterAgent:
-  enabled: true
-  # (...)
-```
-
-This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `spec.features.clusterChecks.enabled` configuration key:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -66,7 +51,22 @@ spec:
 This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
 
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Helm" %}}
+Cluster check dispatching is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
+```yaml
+datadog:
+  clusterChecks:
+    enabled: true
+  # (...)
+clusterAgent:
+  enabled: true
+  # (...)
+```
+
+This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 ### Cluster Agent
 
 Once your [Cluster Agent][1] is running, make the following changes to the Cluster Agent deployment:
@@ -109,7 +109,7 @@ The [Datadog Helm Chart][3] and the [Datadog Operator][4] additionally offer the
 
 The Cluster Agent can use an advanced dispatching logic for cluster checks, which takes into account the execution time and metric samples from check instances. This logic enables the Cluster Agent to optimize dispatching and distribution between cluster check runners.
 
-To configure advanced dispatching logic, set the `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` environment variable to `true` for the Cluster Agent.
+To configure advanced dispatching logic, set the `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` environment variable to `true` for the Cluster Agent. See [Cluster Agent environment variables][15] for how to set environment variables in your Datadog Operator manifest or Helm chart.
 
 The following environment variables are required to configure the node Agents (or cluster check runners) to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
 
@@ -138,25 +138,7 @@ When the URL or IP of a given resource is constant (for example, an external ser
 In Cluster Agent v1.18.0+, you can use `advanced_ad_identifiers` and [Autodiscovery template variables][7] in your check configuration to target Kubernetes services ([see example][8]).
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-With Helm, these configuration files can be created within the `clusterAgent.confd` section.
-
-```yaml
-#(...)
-clusterAgent:
-  confd:
-    <INTEGRATION_NAME>.yaml: |-
-      cluster_check: true
-      init_config:
-        - <INIT_CONFIG>
-      instances:
-        - <INSTANCES_CONFIG>
-```
-
-**Note**: This is separate from the `datadog.confd` section, where the files are created in the node-based Agents. The `<INTEGRATION_NAME>` must exactly match the desired integration check you want to run.
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 With the Datadog Operator, these configuration files can be created within the `spec.override.clusterAgent.extraConfd.configDataMap` section:
 
 ```yaml
@@ -204,7 +186,25 @@ data:
 ```
 
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Helm" %}}
+With Helm, these configuration files can be created within the `clusterAgent.confd` section.
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      init_config:
+        - <INIT_CONFIG>
+      instances:
+        - <INSTANCES_CONFIG>
+```
+
+**Note**: This is separate from the `datadog.confd` section, where the files are created in the node-based Agents. The `<INTEGRATION_NAME>` must exactly match the desired integration check you want to run.
+
+{{% /tab %}}
+{{% tab "Manual (DaemonSet)" %}}
 With the manual approach you must create a ConfigMap to store the desired static configuration files, and then mount this ConfigMap into the corresponding `/conf.d` file of the Cluster Agent container. This follows the same approach for [mounting ConfigMaps into the Agent container][1]. For example:
 
 ```yaml
@@ -274,27 +274,7 @@ instances:
 If there is a Kubernetes service you would like the to perform an [HTTP check][10] against once per cluster:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-Use the `clusterAgent.confd` field to define your check configuration:
-
-```yaml
-#(...)
-clusterAgent:
-  confd:
-    http_check.yaml: |-
-      advanced_ad_identifiers:
-        - kube_service:
-            name: "<SERVICE_NAME>"
-            namespace: "<SERVICE_NAMESPACE>"
-      cluster_check: true
-      init_config:
-      instances:
-        - url: "http://%%host%%"
-          name: "<EXAMPLE_NAME>"
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 Use the `spec.override.clusterAgent.extraConfd.configDataMap` field to define your check configuration:
 
 ```yaml
@@ -316,7 +296,27 @@ spec:
                 name: "<EXAMPLE_NAME>"
 ```
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Helm" %}}
+Use the `clusterAgent.confd` field to define your check configuration:
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    http_check.yaml: |-
+      advanced_ad_identifiers:
+        - kube_service:
+            name: "<SERVICE_NAME>"
+            namespace: "<SERVICE_NAMESPACE>"
+      cluster_check: true
+      init_config:
+      instances:
+        - url: "http://%%host%%"
+          name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
+{{% tab "Manual (DaemonSet)" %}}
 Mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
@@ -513,5 +513,6 @@ Now, run the [node Agent's `status` subcommand][14] and look for the check name 
 [10]: /integrations/http_check/
 [11]: /agent/faq/template_variables/
 [12]: /integrations/nginx/
-[13]: /containers/cluster_agent/troubleshooting/#dispatching-logic-in-the-cluster-agent
+[13]: /containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
 [14]: /containers/cluster_agent/commands/#cluster-agent-commands
+[15]: /containers/cluster_agent/commands/?tab=datadogoperator#cluster-agent-environment-variables

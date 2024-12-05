@@ -4,7 +4,8 @@ aliases:
 categories:
 - azure
 - クラウド
-- 通知
+- notifications
+custom_kind: integration
 dependencies: []
 description: Azure Notification Hubs のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_notification_hubs/
@@ -15,7 +16,6 @@ integration_id: azure-notificationhubs
 integration_title: Microsoft Azure Notification Hubs
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_notification_hubs
 public_title: Datadog-Microsoft Azure Notification Hubs インテグレーション
@@ -23,6 +23,7 @@ short_description: Azure Notification Hubs のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Notification Hubs は、任意のバックエンド (クラウドまたはオンプレミス) から任意のプラットフォーム (iOS、Android、Windows、Kindle、Baidu など) に通知を送信できる、使いやすくスケールアウトされたプッシュエンジンを提供します。
@@ -45,7 +46,7 @@ Datadog Azure インテグレーションを使用して、Azure Notification Hu
 
 Azure Notification Hubs インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Notification Hubs インテグレーションには、サービスのチェック機能は含まれません。
 

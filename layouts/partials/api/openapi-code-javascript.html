@@ -1,0 +1,63 @@
+{{- define "partials/api/openapi-code-javascript-get.html" -}}
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("https://api.cloudcraft.co{{ .path }}", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+{{- end -}}
+
+{{- define "partials/api/openapi-code-javascript-delete.html" -}}
+var requestOptions = {
+  method: 'DELETE',
+  redirect: 'follow'
+};
+
+fetch("https://api.cloudcraft.co{{ .path }}", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+{{- end -}}
+
+{{- define "partials/api/openapi-code-javascript-put.html" -}}
+var raw = "{\n    \"name\": \"My updated AWS Account\",\n    \"roleArn\": \"arn:aws:iam::1234567890:role/cloudcraft\"\n}\n";
+
+var requestOptions = {
+  method: 'PUT',
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://api.cloudcraft.co{{ .path }}", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+{{- end -}}
+
+{{- define "partials/api/openapi-code-javascript-post.html" -}}
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  HERE{{ .payload }}
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://api.cloudcraft.co{{ .path }}", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+{{- end -}}
+
+{{- $p := printf "partials/api/openapi-code-javascript-%s.html" .method -}}
+{{- $pr := partial $p (dict "payload" .payload "path" .path) }}
+{{- highlight (trim $pr "\n\r") "javascript" -}}

@@ -7,13 +7,12 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
-kind: ドキュメント
 title: Node.js プロファイラーの有効化
 type: multi-code-lang
 ---
@@ -22,7 +21,9 @@ type: multi-code-lang
 
 ## 要件
 
-Datadog Profiler は、少なくとも Node.js 14 が必要ですが、Node.js 16 以上を推奨しています。**Node.js の 16 より前のバージョンを使用する場合、一部のアプリケーションでは、次のプロファイルを開始する際にテールレイテンシーが 1 分ごとにスパイクすることがあります**。
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][7]をお読みください。
+
+The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
@@ -30,7 +31,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 
 アプリケーションのプロファイリングを開始するには
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][2] 以降または [6.20.2][3] 以降にアップグレードしてください。
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. `npm install --save dd-trace@latest` を実行して、プロファイラーを含む `dd-trace` モジュールへの依存関係を追加します。
 
@@ -73,11 +74,13 @@ const tracer = require('dd-trace/init')
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Node.js アプリケーションの起動 1〜2 分後、[APM > Profiler ページ][4]にプロファイルが表示されます。
+4. Optional: Set up [Source Code Integration][4].
+
+5. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][5].
 
 ## 次のステップ
 
-[プロファイラーの概要][5]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
 ## オーバーヘッドが高いと感じている方
 
@@ -88,7 +91,9 @@ Node.js 16 以上を推奨します。それ以前のバージョンでは、ア
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://app.datadoghq.com/profiling
-[5]: /ja/getting_started/profiler/
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
+[4]: /ja/integrations/guide/source-code-integration/?tab=nodejs
+[5]: https://app.datadoghq.com/profiling
+[6]: /ja/getting_started/profiler/
+[7]: /ja/profiler/enabling/supported_versions/

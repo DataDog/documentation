@@ -5,9 +5,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: 블로그
   text: Datadog으로 SNMP 모니터링하기
-kind: 설명서
 title: NDM 트러블슈팅
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+{{< /site-region >}}
 
 ## 개요
 

@@ -3,6 +3,7 @@ app_id: pulumi
 app_uuid: 7604c52b-dc07-4854-a5e4-799ab62798d8
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: pulumi.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10220
     source_type_name: Pulumi
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -26,6 +28,7 @@ categories:
 - developer tools
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
 display_on_public_website: true
@@ -35,10 +38,8 @@ integration_id: pulumi
 integration_title: Pulumi
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: pulumi
-oauth: {}
 public_title: Pulumi
 short_description: 好きなプログラミング言語を使って、あらゆるクラウドに対応する Infrastructure as Code を実現
 supported_os:
@@ -58,6 +59,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 好きなプログラミング言語を使って、あらゆるクラウドに対応する Infrastructure as Code を実現
   media: []
@@ -66,6 +68,7 @@ tile:
   title: Pulumi
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,17 +77,19 @@ tile:
 
 Pulumi インテグレーションは、Datadog で利用可能な任意のクラウドリソースをプロビジョニングするために使用されます。このインテグレーションは、Datadog でリソースをデプロイおよび更新するための認証情報を使って構成される必要があります。
 
+**注**: インテグレーションを変更するには、AWS IAM 権限を設定する必要があります。AWS IAM 権限の設定方法は、[AWS インテグレーションドキュメント][2]を参照してください。
+
 ## セットアップ
 
 ### インストール
 
-[Pulumi と Datadog のインテグレーション][2]では、Datadog SDK を使用してリソースの管理およびプロビジョニングを行います。
+[Pulumi と Datadog のインテグレーション][3]では、Datadog SDK を使用してリソースの管理およびプロビジョニングを行います。
 
-### コンフィギュレーション
+### 構成
 
-1. [無料または商用 Pulumi アカウントに登録します][3]
+1. [無料または商用 Pulumi アカウントに登録します][4]
 
-2. [Pulumi をインストールします][4]
+2. [Pulumi をインストールします][5]
 
 3. 取得後、Datadog の認証トークンを Pulumi に設定するには、2 つの方法があります。
 
@@ -103,7 +108,7 @@ pulumi config set datadog:apiKey XXXXXXXXXXXXXX --secret && pulumi config set da
 
 **注**: `datadog:apiKey` と `datadog:appKey` を設定する際に `--secret` を渡して、適切に暗号化されるようにします。
 
-4. `pulumi new` を実行してインフラストラクチャースタックのプロジェクトディレクトリを初期化し、[API ドキュメント][5]に従って新しいメトリクス、モニター、ダッシュボード、その他のリソースを定義します。
+4. `pulumi new` を実行してインフラストラクチャースタックのプロジェクトディレクトリを初期化し、[API ドキュメント][6]に従って新しいメトリクス、モニター、ダッシュボード、その他のリソースを定義します。
 
 5. クラウドのリソースをコードで定義したら、`pulumi up` を実行して、Pulumi プログラムで定義した新しいリソースを作成します。
 
@@ -113,7 +118,7 @@ pulumi config set datadog:apiKey XXXXXXXXXXXXXX --secret && pulumi config set da
 
 Pulumi には、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Pulumi には、サービスのチェック機能は含まれません。
 
@@ -123,11 +128,12 @@ Pulumi には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://pulumi.com
-[2]: https://www.pulumi.com/docs/intro/cloud-providers/datadog/
-[3]: https://www.pulumi.com/pricing/
-[4]: https://www.pulumi.com/docs/get-started/
-[5]: https://www.pulumi.com/docs/reference/pkg/datadog/
-[6]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#aws-iam-permissions
+[3]: https://www.pulumi.com/docs/intro/cloud-providers/datadog/
+[4]: https://www.pulumi.com/pricing/
+[5]: https://www.pulumi.com/docs/get-started/
+[6]: https://www.pulumi.com/docs/reference/pkg/datadog/
+[7]: https://docs.datadoghq.com/ja/help/

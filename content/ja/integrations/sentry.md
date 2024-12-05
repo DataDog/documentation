@@ -8,6 +8,7 @@ assets:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 56
     source_type_name: Sentry
 author:
   homepage: https://www.datadoghq.com
@@ -17,6 +18,8 @@ author:
 categories:
 - collaboration
 - issue tracking
+- event management
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,10 +28,8 @@ integration_id: sentry
 integration_title: Sentry
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sentry
-oauth: {}
 public_title: Sentry
 short_description: Datadog イベントストリームで Sentry の例外を参照。
 supported_os: []
@@ -37,21 +38,27 @@ tile:
   classifier_tags:
   - Category::コラボレーション
   - Category::問題の追跡
+  - Category::Event Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog イベントストリームで Sentry の例外を参照。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/
   support: README.md#Troubleshooting
   title: Sentry
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/sentry/sentry.png" alt="sentry イベント" popup="true">}}
+
 ## 概要
 
-Sentry を Datadog に接続して、以下のことができます。
+Sentry は、セルフホスト型およびクラウド型のアプリケーションパフォーマンスモニタリングとエラー追跡を提供し、ソフトウェアチームがより明確な情報を把握し、迅速に解決し、継続的に学習できるようにします。
 
-- ストリームで例外をリアルタイムに確認できます
-- グラフで例外を検索できます。
-- 例外についてチームで議論できます。
+Datadog Sentry インテグレーションは、Sentry イベントを自動的に Datadog イベントストリームに転送し、エラーやバグ修正の検索やコメント、Sentry エラーと他のシステムのメトリクスやデータとの相関付けを可能にします。
 
 ## セットアップ
 
@@ -87,4 +94,9 @@ Datadog から Sentry のエラーが消えている場合、Sentry Webhook が�
 **通知インテグレーションが無効化されている**。<br>
 通知インテグレーションが、規則アクションで特定のサービスとして有効化されている、または「すべての有効化されたサービス」に含まれていることを確認してください。
 
+## 参考資料
+
+- [Datadog の Sentry インテグレーションによる共同バグ修正][2]
+
 [1]: https://docs.sentry.io/platforms/java/enriching-events/tags/
+[2]: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/

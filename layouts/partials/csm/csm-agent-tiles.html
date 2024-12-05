@@ -1,0 +1,43 @@
+{{ $dot := . }}
+<div class="csm-agent-install">
+    <div class="container cards-dd col-num-3">
+        <div class="row row-cols-2 row-cols-sm-3 g-2 g-xl-3 justify-content-sm-center">
+            <div class="col">
+                <a class="card h-100" href="/security/cloud_security_management/setup/agent/kubernetes/">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/kubernetes.png" "class" "img-fluid" "alt" "Kubernetes" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/security/cloud_security_management/setup/agent/docker/">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/docker.png" "class" "img-fluid" "alt" "Docker" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/security/cloud_security_management/setup/agent/ecs_ec2/">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_ecs.png" "class" "img-fluid" "alt" "ECS EC2" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/security/cloud_security_management/setup/agent/windows/">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/windows.png" "class" "img-fluid" "alt" "Windows" "width" "400") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/security/cloud_security_management/setup/agent/linux/">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/linux.png" "class" "img-fluid" "alt" "Linux" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

@@ -38,12 +38,11 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: fairwinds_insights
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

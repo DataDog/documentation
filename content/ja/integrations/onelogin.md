@@ -5,10 +5,12 @@ assets:
   dashboards:
     OneLogin-Overview: assets/dashboards/OneLogin-Overview_dashboard.json
   integration:
+    auto_install: false
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 617
     source_type_name: OneLogin
 author:
   homepage: https://www.datadoghq.com
@@ -18,7 +20,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-- web
+custom_kind: integration
 dependencies: []
 description: OneLogin
 display_on_public_website: true
@@ -30,10 +32,8 @@ integration_id: onelogin
 integration_title: OneLogin
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: onelogin
-oauth: {}
 public_title: OneLogin
 short_description: OneLogin のイベントログとインテグレーションします。
 supported_os:
@@ -49,7 +49,7 @@ tile:
   - Supported OS::macOS
   - Category::Log Collection
   - Category::Security
-  - Category::Web
+  - Offering::Integration
   configuration: README.md#Setup
   description: OneLogin のイベントログとインテグレーションします。
   media: []
@@ -59,13 +59,14 @@ tile:
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Datadog と OneLogin を接続すると、OneLogin が公開するログを見ることができます。
+Connect Datadog with OneLogin to see logs published by OneLogin. The OneLogin integration collects logs to track any [event][1] in OneLogin, including logins, file access, and updates to admin privileges. You can use this integration for compliance and security in conjunction with the [OOTB SIEM rules][2] for OneLogin.
 
 ## セットアップ
 
-### ログの収集
+### ログ収集
 #### クライアント ID とクライアントシークレットを生成する
 
 1. OneLogin アカウントにログインします。
@@ -76,7 +77,7 @@ Datadog と OneLogin を接続すると、OneLogin が公開するログを見�
 
 #### インストールと構成
 
-1. Datadog [OneLogin インテグレーションタイル][1]を開きます。
+1. Open the Datadog [OneLogin integration tile][3].
 2. クライアント ID、クライアントシークレットを対応するフィールドに入力します。
 3. オプションで、ログに関連付けるタグをカンマ区切りで追加することができます。
 
@@ -94,8 +95,9 @@ OneLogin インテグレーションには、サービスのチェック機能�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-
-[1]: https://app.datadoghq.com/account/settings#integrations/onelogin
-[2]: https://docs.datadoghq.com/ja/help/
+[1]: https://developers.onelogin.com/api-docs/1/events/event-resource
+[2]: https://docs.datadoghq.com/ja/security/default_rules/?search=onelogin
+[3]: https://app.datadoghq.com/account/settings#integrations/onelogin
+[4]: https://docs.datadoghq.com/ja/help/

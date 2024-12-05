@@ -1,6 +1,6 @@
 ---
 title: Issues with Apache Integration
-kind: faq
+
 ---
 
 If you are having issues with your Apache integration, it is mostly like due to the Agent not being able to access your Apache status URL.

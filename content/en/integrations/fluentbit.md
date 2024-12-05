@@ -1,7 +1,7 @@
 ---
 title: Fluent Bit
 name: fluentbit
-kind: integration
+custom_kind: integration
 description: 'Configure Fluent Bit to collect, parse, and forward log data from several sources.'
 short_description: 'Collect, parse, and forward log data from several sources.'
 categories:
@@ -38,17 +38,18 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 
 #### Configuration parameters
 
-| Key            | Description                                                                                                              | Default                                                                     |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | {{< region-param key="http_endpoint" code="true" >}} |
-| TLS            | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
-| apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
-| compress       | _Recommended_ - compresses the payload in GZIP format, Datadog supports and recommends setting this to `gzip`.           |                                                                             |
-| dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |
-| dd_source      | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |                                                                             |
-| dd_message_key | _Recommended_ - Set the attribute to use to store your log message.                                                      |                                                                             |
-| dd_tags        | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                  |                                                                             |
-| provider       | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.         |                                                                             |
+| Key            | Description                                                                                                                                                                                                                                                                                                                 | Default                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                    | --------------------------------------------------------------------------- |
+| Host           | _Required_ - The Datadog server where you are sending your logs.                                                                                                                                                                                                                                                            | {{< region-param key="http_endpoint" code="true" >}}                        |
+| TLS            | _Required_ - End-to-end security communications security protocol. This setting must be set to `on`.                                                                                                                                                                                                                        | `off`                                                                       |
+| apikey         | _Required_ - Your [Datadog API key][4].                                                                                                                                                                                                                                                                                     |                                                                             |
+| compress       | _Recommended_ - compresses the payload in GZIP format, Datadog supports and recommends setting this to `gzip`.                                                                                                                                                                                                              |                                                                             |
+| dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database.                                                                                                                                                                                                    |                                                                             |
+| dd_source      | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`.                                                                                                                                                                                                    |                                                                             |
+| dd_message_key | _Recommended_ - Set the attribute to use to store your log message.                                                                                                                                                                                                                                                         |                                                                             |
+| dd_tags        | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                                                                                                                                                                                                                     |                                                                             |
+| dd_hostname    | _Optional_ - The host that emitted logs should be associated with. If unset, Datadog expects the host to be set as one of [the standard host attributes][12].
+| provider       | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.                                                                                                                                                                                                            |                                                                             |
 
 #### Configuration file example
 
@@ -85,3 +86,4 @@ Need help? Contact [Datadog support][11].
 [9]: https://app.datadoghq.com/logs
 [10]: /getting_started/tagging/
 [11]: /help/
+[12]: /logs/log_configuration/pipelines/?tab=host#preprocessing

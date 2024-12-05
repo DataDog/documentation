@@ -12,7 +12,6 @@ further_reading:
 - link: /real_user_monitoring/dashboards/
   tag: Documentation
   text: En savoir plus sur les dashboards RUM
-kind: documentation
 title: Suivi des actions utilisateur
 ---
 

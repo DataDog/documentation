@@ -1,6 +1,5 @@
 ---
 title: Delivering value
-kind: documentation
 description: "Recommended steps after you have data flowing into Datadog."
 private: true
 ---

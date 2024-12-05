@@ -21,7 +21,7 @@ integration_title: PerimeterX
 integration_version: ''
 is_beta: false
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@perimeterx.com
 manifest_version: 1.0.0
 metric_prefix: perimeterx.

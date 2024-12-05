@@ -9,6 +9,7 @@ assets:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 616
     source_type_name: Salesforce Commerce Cloud
 author:
   homepage: https://www.datadoghq.com
@@ -17,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,25 +27,35 @@ integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
-oauth: {}
 public_title: Salesforce Commerce Cloud
 short_description: Salesforce Commerce Cloud のログを Datadog にインポートする
-supported_os: []
+supported_os:
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
+  - Offering::Integration
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Salesforce Commerce Cloud のログを Datadog にインポートする
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/salesforce_commerce_cloud/
   support: README.md#Support
   title: Salesforce Commerce Cloud
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Salesforce Commerce Cloud は、マルチテナント型のクラウドベースのコマースプラットフォームです。Salesforce Commerce Cloud と Datadog をインテグレーションし、[Datadog Logs][1] を使ってログを表示・パースします。
@@ -54,13 +66,13 @@ Salesforce Commerce Cloud は、マルチテナント型のクラウドベース
 
 インストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 Datadog がログデータをインポートするためのアクセスを Salesforce Commerce Cloud に許可するよう構成するには、API クライアントを作成する必要があります。そして、その API クライアントを Datadog に登録します。
 
 #### API クライアントの作成
-1. [Commerce Cloud のクライアント作成手順][2]の手順に従います。`Token Endpoint Auth Method` フィールドで、`private_key_jwt` を選択します。`Access Token Format` フィールドでは、`UUID` を選択します。**注**: このインテグレーションは、`https://account.demandware.com/` にあるメインのアカウントマネージャーインスタンスを使用してプロビジョニングされた API クライアントのみをサポートします。
-2. API クライアント ID とシークレットを控えておいてください。これらは以降の手順で必要になります。
+1. [Commerce Cloud のクライアント作成手順][2]の手順に従います。`Token Endpoint Auth Method` フィールドで、`private_key_jwt` を選択します。`Access Token Format` フィールドでは、`JWT` を選択します。**注**: このインテグレーションは、`https://account.demandware.com/` にあるメインのアカウントマネージャーインスタンスを使用してプロビジョニングされた API クライアントのみをサポートします。
+2. API クライアント ID とシークレット (ユーザー名とパスワードとも呼ばれます) を控えておいてください。これらは以降の手順で必要になります。
 3. Business Manager インターフェイスの **Administration > Organization > WebDAV Client Permissions** の下に、以下の JSON を追加します。適切な場所にクライアント ID を挿入していることを確認してください。
 
 ```json
@@ -99,11 +111,11 @@ SFCC Log Center は、Datadog とは異なるログデータを表現します�
 
 Salesforce Commerce Cloud インテグレーションには、メトリクスは含まれません。
 
-### ログ管理
+### ログ
 
 Salesforce Commerce Cloud インテグレーションは、Commerce Cloud インスタンスへの webdav 接続を介してログを収集します。
 
-### サービスのチェック
+### サービスチェック
 
 Salesforce Commerce Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -112,6 +124,6 @@ Salesforce Commerce Cloud インテグレーションには、サービスのチ
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: /ja/logs/
-[2]: https://documentation.b2c.commercecloud.salesforce.com/DOC3/index.jsp?topic=%2Fcom.demandware.dochelp%2Fcontent%2Fb2c_commerce%2Ftopics%2Faccount_manager%2Fb2c_account_manager_overview.html
+[2]: https://help.salesforce.com/s/articleView?id=cc.b2c_account_manager_add_api_client_id.htm&type=5
 [3]: https://app.datadoghq.com/account/settings#integrations/salesforce-commerce-cloud
 [4]: https://docs.datadoghq.com/ja/help/

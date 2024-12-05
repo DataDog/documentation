@@ -6,7 +6,6 @@ further_reading:
   tag: FAQ
   text: Créez un graphique illustrant le changement de pourcentage entre une valeur
     passée et une valeur actuelle.
-kind: documentation
 title: Décalage temporel
 ---
 

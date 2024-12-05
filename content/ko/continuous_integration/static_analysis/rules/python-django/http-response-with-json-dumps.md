@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: JSON 데이터를 전송할 때 HttpResponse 대신 JsonResponse 사용하기
 ---
 ## 메타데이터

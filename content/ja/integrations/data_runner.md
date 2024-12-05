@@ -1,13 +1,15 @@
 ---
 app_id: data-runner
 app_uuid: ad7b5a3c-497d-45e0-9bcf-50f2d1365247
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://datadoghq.com
   name: Datadog
   sales_email: sales@datadog.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/data_runner/README.md
 display_on_public_website: true
@@ -17,21 +19,19 @@ integration_id: data-runner
 integration_title: The Data Runner
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: data_runner
-oauth: {}
 public_title: The Data Runner
 short_description: メトリクスを探す Datadog ダッシュボードの放置ゲーム。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::UI Extension
   configuration: README.md#Setup
@@ -45,6 +45,7 @@ tile:
   title: The Data Runner
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -73,11 +74,11 @@ Data Runner は、メトリクスを提供しません。
 
 Data Runner には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Data Runner には、サービスのチェック機能は含まれません。
 
-## サポート
+## Agent
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

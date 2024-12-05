@@ -3,6 +3,7 @@ app_id: statsig
 app_uuid: 57fb9235-151d-4ed9-b15e-a3e6f918dcca
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,13 +13,16 @@ assets:
       prefix: statsig.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10180
     source_type_name: Statsig
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Statsig
   sales_email: support@statsig.com
   support_email: support@statsig.com
-categories: []
+categories:
+- 構成 & デプロイ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md
 display_on_public_website: true
@@ -28,30 +32,34 @@ integration_id: statsig
 integration_title: Statsig
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: statsig
-oauth: {}
 public_title: Statsig
 short_description: Datadog で Statsig の変更を監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Configuration & Deployment
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog で Statsig の変更を監視する
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
   support: README.md#Support
   title: Statsig
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -64,7 +72,7 @@ Datadog-Statsig インテグレーションにより、Statsig でイベント�
 
 Statsig のインテグレーションセットアップにインストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 1. Datadog API キーをコピーします。
 2. [Statsig コンソールで Integrations タブに移動します][1]。
@@ -79,7 +87,7 @@ Statsig インテグレーションでは、Datadog からのデータは収集�
 {{< get-metrics-from-git "statsig" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 Statsig インテグレーションには、サービスのチェック機能は含まれません。
 

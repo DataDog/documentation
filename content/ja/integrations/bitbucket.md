@@ -3,6 +3,7 @@ categories:
 - Source Control
 - Collaboration
 - issue tracking
+custom_kind: integration
 dependencies: []
 description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
 doc_link: https://docs.datadoghq.com/integrations/bitbucket/
@@ -17,7 +18,6 @@ integration_id: bitbucket
 integration_title: Bitbucket
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: bitbucket
 public_title: Datadog-Bitbucket インテグレーション
@@ -26,7 +26,8 @@ team: web-integrations
 version: '1.0'
 ---
 
-{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="integrations bitbucket" video="true" >}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="インテグレーションビットバケット" video="true" >}}
 
 ## 概要
 
@@ -54,9 +55,11 @@ Bitbucket のドキュメントを参照して、Datadog で追跡する Bitbuck
 https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>
 ```
 
-### コンフィギュレーション
+Bitbucket のドキュメント [IP アドレスの管理][2]を参照し、イベントが期待通りに受信されるように、発信接続用に正しい IP 範囲が許可リストに登録されていることを確認してください。
 
-インテグレーションタイルから [Bitbucket インテグレーション][2]を構成します。
+### 構成
+
+インテグレーションタイルから [Bitbucket インテグレーション][3]を構成します。
 
 1. 監視する各リポジトリの完全名を入力します。たとえば、リポジトリの URL が `https://bitbucket.org/groupname/reponame` の場合は、**Repository** テキストボックスに `groupname/reponame` と入力します。
 2. Datadog に送信するイベントの種類を選択します。
@@ -84,18 +87,19 @@ Bitbucket インテグレーションには、メトリクスは含まれませ�
 
 Bitbucket Cloud と Bitbucket Server の両方からのコミットとプルリクエストを含む Bitbucket イベントは、Datadog に転送されます。
 
-### サービスのチェック
+### サービスチェック
 
 Bitbucket インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
-[2]: https://app.datadoghq.com/account/settings#integrations/bitbucket
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://support.atlassian.com/organization-administration/docs/ip-addresses-and-domains-for-atlassian-cloud-products/
+[3]: https://app.datadoghq.com/integrations/bitbucket
+[4]: https://docs.datadoghq.com/ja/help/

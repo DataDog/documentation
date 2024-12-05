@@ -32,7 +32,7 @@ API インテグレーションは、以下の種類のデータを Datadog に�
 - [トレース][6]
 - [インシデント][7]
 
-Agent ベースのインテグレーションには、[モニター][25]、[ダッシュボード][26]、[ログパイプライン][27]などのすぐに使えるアセットを含めることができます。ユーザーがインテグレーションタイルの **Install** をクリックすると、セットアップ手順に従うよう促され、すぐに使えるすべてのダッシュボードがアカウントに表示されます。ログパイプラインなどの他のアセットは、インテグレーションを適切にインストールおよび構成した後に、ユーザーに表示されます。
+You can include out-of-the-box assets such as [monitors][25], [dashboards][26], and [log pipelines][27] with your API integration. When a user clicks **Install** on your integration tile, they are prompted to follow the setup instructions, and all out-of-the-box dashboards will appear in their account. Other assets, such as log pipelines, will appear for users after proper installation and configuration of the integration.
 
 **Integrations** または **Marketplace ページ**に製品を表示するには、タイルを作成する必要があります (下の写真)。このタイルには、製品のセットアップ方法に関する説明や、インテグレーションが何をするのか、どのように使用するのかについての一般的な情報が記載されます。
 
@@ -62,7 +62,33 @@ API ベースのインテグレーションを構築するプロセスは、次�
 
 [タイルを作成する][24]ことで、API インテグレーションの構築を開始します。
 
-## その他の参考資料
+## インテグレーションを更新する
+関連するファイルを編集し、[`integrations-extras`][21] リポジトリ内のインテグレーションのディレクトリに新しいプルリクエストを開くことで、いつでもインテグレーションを更新することができます。
+
+API ベースのインテグレーションでは、新しいデータが送信されるなど新しい機能が追加されたときや、大きなバグが修正されたときに、インテグレーションのバージョンをバンプすることをお勧めします。
+
+インテグレーションのバージョンがバンプされた場合は、`CHANGELOG.md` ファイルに以下の形式でエントリを追加してください。
+
+   ```
+   ## バージョン番号 / 日付
+
+   ***Added***: 
+
+   * New feature
+   * New feature
+
+   ***Fixed***:
+
+   * Bug fix
+   * Bug fix
+   ```
+
+新しい README コンテンツ、マニフェスト情報、またはダッシュボードや推奨モニターなどのアセットを編集または追加する場合、バージョンバンプは必要ありません。
+
+ダッシュボードや推奨モニターなどのアセットに対する更新は、対応するプルリクエストがマージされ、アセットが公開された後に顧客が入手できるようになります。`README.md`、`manifest.json` などのコード以外のファイルの更新も、公開後すぐに顧客が入手できるようになります。
+
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

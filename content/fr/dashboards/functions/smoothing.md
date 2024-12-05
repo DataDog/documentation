@@ -1,9 +1,9 @@
 ---
-title: Lissage
-kind: documentation
 aliases:
-  - /fr/graphing/functions/smoothing/
+- /fr/graphing/functions/smoothing/
+title: Lissage
 ---
+
 ## Autosmooth
 
 | Fonction       | Description                                                           | Exemple                        |
@@ -49,6 +49,14 @@ Exemple :
 Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient à 10 après 10 points de données, alors `ewma5(10 + x%10 {*})` donne le graphique suivant :
 
 {{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5" style="width:80%;">}}
+
+### Ewma 7
+
+| Fonction   | Description                                                         | Exemple                    |
+| :----      | :-------                                                            | :---------                 |
+| `ewma_7()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 7. | `ewma_7(<METRIC_NAME>{*})` |
+
+Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `ewma_7()` utilise les 7 derniers points de données pour calculer la moyenne.
 
 ### Ewma 10
 
@@ -112,6 +120,25 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
 
 Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `median_9()` utilise les 9 derniers points de données pour calculer la valeur médiane.
 
+## Pondéré 
+<div class="alert alert-info">La fonction Weighted() n'est disponible que lors de l'interrogation de `SUM BY` sur des métriques de type gauge.</div> 
+
+| Fonction       | Description                                                           | Exemple                        |
+| :----          | :-------                                                              | :---------                     |
+| `weighted()`   | Supprime automatiquement les valeurs parasites tout en préservant le poids des tags transitoires. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
+
+La fonction `weighted()` tient compte de la courte durée de vie  des valeurs de tag transitoires et fluctuantes lors de l'addition de métriques de type gauge dans l'espace afin d'éviter les pics artificiels. 
+
+Cette fonction est automatiquement ajoutée aux requêtes sur des métriques de type gauge lorsque les deux conditions suivantes sont respectées :
+1. La métrique possède un intervalle dʼenvoi régulier et cohérent, qui est également spécifié dans Metrics Summary
+2. La métrique est agrégée avec `SUM by` (par exemple, `sum: mygaugemetric{*}`)
+
+Voici un exemple de graphique de la requête originale avec des pics inexacts (en violet) et de la requête avec le calcul correctement pondéré (en vert) : 
+
+{{< img src="dashboards/functions/smoothing/weighted.png" alt="Exemple de graphique comparant des requêtes avec et sans le modificateur pondéré" style="width:80%;">}}
+
+Pour en savoir plus sur le modificateur weighted(), consultez la section [Comment fonctionne weighted() ?][3].
+
 ## Autres fonctions
 
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
@@ -127,5 +154,6 @@ Remarque : la valeur de l'intervalle correspond au nombre de points de données
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://futuredata.stanford.edu/asap
+[1]: https://github.com/stanford-futuredata/ASAP
 [2]: https://www.datadoghq.com/blog/auto-smoother-asap
+[3]: /fr/dashboards/guide/how-weighted-works

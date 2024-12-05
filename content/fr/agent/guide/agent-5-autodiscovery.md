@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery avec l'Agent v5
-kind: guide
 private: true
 aliases:
   - /fr/agent/faq/agent-5-autodiscovery
@@ -236,7 +235,6 @@ L'annotation de pod suivante définit deux modèles, équivalant à ceux présen
 
 ```text
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -259,7 +257,6 @@ Si vous définissez vos pods avec des Deployments, n'ajoutez pas d'annotations d
 
 ```text
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # N'ajoutez pas les modèles ici
   name: apache-deployment
 spec:

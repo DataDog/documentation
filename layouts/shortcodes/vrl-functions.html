@@ -1,0 +1,93 @@
+{{ $functions := $.Site.Data.reference.functions | default (dict) }}
+{{/* we want to convert links like [foo][https://foo.bar] into [foo](https://foo.bar) */}}
+{{ $regexToConvertMdLinks := `\[([^\[]+)\]\[([^\]]+)\]` }}
+{{/* we want to remove relative links that no longer work e.g [enrichment table](/docs/reference/glossary/#enrichment-tables) */}}
+{{ $regexToFixMdLinks := `\[([^\[]+)\](\(/[^\)]+\))` }}
+{{ range $category, $arrayOfFunctionObjs := $functions}}
+  <h2 id="{{ $category | anchorize }}" class="pt-2">{{ $category }} Functions</h2>
+  {{ range $obj := $arrayOfFunctionObjs }}
+  <div class="py-3" style="border-bottom:2px solid #DADADA">
+    <h3 id="{{ $obj.name | anchorize }}">{{ $obj.name }}</h3>
+    {{ $desc := (replaceRE $regexToConvertMdLinks "[$1]($2)" $obj.description) }}
+    <p>{{ replace (replaceRE $regexToFixMdLinks "$1" $desc) "VRL" "DPL" | markdownify }}</p>
+    {{ with $obj.arguments }}
+      <div class="schema-table row">
+        <div class="col-12">
+          <div class="row table-header">
+            <div class="col-3 column">
+              <p class="font-semibold"> {{ i18n "argument" | default "argument" }}</p>
+            </div>
+            <div class="col-2 column">
+              <p class="font-semibold"> {{ i18n "type" }}</p>
+            </div>
+            <div class="col-3 column">
+              <p class="font-semibold"> {{ i18n "description" }}</p>
+            </div>
+            <div class="col-2 column">
+              <p class="font-semibold"> {{ i18n "default" | default "default" }}</p>
+            </div>
+            <div class="col-2 column">
+              <p class="font-semibold"> {{ i18n "required" | default "required" }}</p>
+            </div>
+          </div>
+          <div class="row">
+          {{ range . }}
+
+            <div class="col-12 first-column">
+              <div class="row first-row ">
+                  <div class="col-3 column">
+                      <p> {{ .name | default "" }}</p>
+                  </div>
+                  <div class="col-2 column">
+                      <p> {{ delimit .type ", " | default "" }}</p>
+                  </div>
+                  <div class="col-3 column">
+                      <p> {{ (replaceRE $regexToFixMdLinks "$1" (.description | default "")) | markdownify }}</p>
+                  </div>
+                  <div class="col-2 column text-center">
+                      <p>
+                        {{ with (strings.TrimLeft " " .default) }}
+                          {{ print "`" . "`" | markdownify }}
+                        {{ else }}
+                          N/A
+                        {{ end }}
+                      </p>
+                  </div>
+                  <div class="col-2 column text-center">
+                      <p> {{ (replace (replace .required "true" "yes") "false" "no") | default "" }}</p>
+                  </div>
+              </div>
+            </div>
+
+          {{ end }}
+            </div>
+        </div>
+      </div>
+    {{ end }}
+    {{ with $obj.internal_failure_reasons }}
+      <h4 id="{{ $obj.name | anchorize }}-errors">Errors</h4>
+      <ul>
+      {{ range $reason := . }}
+        <li>{{ . | markdownify }}</li>
+      {{ end }}
+      </ul>
+    {{ end }}
+    {{ with $obj.examples }}
+      <h4 id="{{ $obj.name | anchorize }}-examples">Examples</h4>
+      <div>
+        <div class="card-body">
+          {{ range $i, $ex := . }}
+            <h5 id="{{ $ex.title | anchorize }}">{{ $ex.title | markdownify }}</h5>
+            <p>Source:</p>
+            {{ print "```bash\n" $ex.source "\n```" | markdownify }}
+            {{ with $ex.return }}
+              <p>Return:</p>
+              {{ highlight . "bash" }}
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+  {{ end }}
+{{ end }}

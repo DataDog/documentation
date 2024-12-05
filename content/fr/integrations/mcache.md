@@ -31,7 +31,7 @@ integration_id: memcached
 integration_title: Memcache
 integration_version: 3.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: memcache.

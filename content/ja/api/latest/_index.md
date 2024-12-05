@@ -29,17 +29,21 @@ Datadog では HTTP REST API を採用しており、リソース指向 URL を�
 
 API への認証は、ヘッダー `DD-API-KEY` を用いて [API キー][1]で行います。エンドポイントによっては、ヘッダー `DD-APPLICATION-KEY` を使用した[アプリケーションキー][2]も必要です。
 
-API を実行するには、[![Postman で実行][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+API を試すには [![Postman で実行][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa)
+
+**注**: Postman を通して Datadog API を認証するには、Datadog API コレクションに含まれる**コレクション変数**に、Datadog API とアプリケーションキーの値を追加します。
 
 [API の使用][4]でエンドポイントについて説明しています。
 
-**注**: cURL コードの例は、BASH および GNU Core Utilities を使用することを想定したものです。macOS をお使いの場合は [Homebrew package manager][5] から Coreutils をダウンロードして、コマンド `brew install coreutils` でインストールできます。
+**注**: 
+   - Datadog API コレクションの **Variables** タブに API とアプリケーションキーの値を追加します。
+   - cURL コード例は、BASH と GNU coreutils の使用を前提としています。macOS をお使いの場合は [Homebrew package manager][5] を使って Coreutils をダウンロードして、コマンド `brew install coreutils` でインストールできます。
 
 ### クライアントライブラリ
 
 デフォルトでは、Datadog API Docs には cURL で例が示されています。各エンドポイントの公式[クライアントライブラリ][6]言語から 1 つを選択すると、選択したライブラリのコード例を閲覧できます。各ライブラリをインストールするには、
 
-{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript,rust" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
 #### インストール
@@ -195,6 +199,37 @@ import { <VERSION> } from 'datadog-api-client';
 **注**: 使用するエンドポイントに応じて、`<VERSION>` を v1 または v2 に置き換えてください。
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
+{{< /programming-lang >}}
+
+{{< programming-lang lang="rust" >}}
+#### インストール
+`cargo add datadog-api-client` を実行するか、または `[dependencies]` の下の `Cargo.toml` に次を追加します。
+
+```
+datadog-api-client = "0"
+```
+
+#### 使用方法
+Datadog API キーを検証するには、次のスニペットを試してください。
+```rust
+use datadog_api_client::datadog::Configuration;
+use datadog_api_client::datadogV1::api_authentication::AuthenticationAPI;
+
+#[tokio::main]
+async fn main() {
+    let configuration = Configuration::new();
+    let api = AuthenticationAPI::with_config(configuration);
+    let resp = api.validate().await;
+    if let Ok(value) = resp {
+        println!("{:#?}", value);
+    } else {
+        println!("{:#?}", resp.unwrap_err());
+    }
+}
+```
+
+[1]: https://crates.io/crates/datadog-api-client
+[2]: https://docs.rs/datadog-api-client/latest/datadog_api_client/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

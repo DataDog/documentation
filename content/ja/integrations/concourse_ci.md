@@ -3,6 +3,7 @@ app_id: concourse-ci
 app_uuid: eb83d03f-e1d6-4718-8e54-922f4d2528b1
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: concourse.ci.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10041
     source_type_name: Concourse CI
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
 display_on_public_website: true
@@ -29,10 +32,8 @@ integration_id: concourse-ci
 integration_title: Concourse-CI
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: concourse_ci
-oauth: {}
 public_title: Concourse-CI
 short_description: Concourse CI から送信されるメトリクスを収集
 supported_os:
@@ -46,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Concourse CI から送信されるメトリクスを収集
   media: []
@@ -54,6 +56,7 @@ tile:
   title: Concourse-CI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,7 +72,7 @@ Concourse CI で Datadog メトリクスエミッターを構成すると、以�
 
 Concourse CI には Datadog メトリクスエミッターが付属しています。起動時にメトリクスを送信するように [ATC][1] を構成するには、[Datadog Agent][2] がインストールされていることが前提条件です。
 
-### コンフィギュレーション
+### 構成
 
 以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、`concourse.ci` というプレフィックスを使用することが重要です。
 
@@ -103,7 +106,7 @@ Metric Emitter (Datadog):
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://concourse-ci.org/concepts.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [4]: https://concourse-ci.org/metrics.html#configuring-metrics
 [5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv

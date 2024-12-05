@@ -1,0 +1,21 @@
+- name: Azure CLI script
+       uses: azure/CLI@v1
+       with:
+         inlineScript: |
+           resourceGroupName="{your-resource-group}"
+           appName="{your-app-name}"
+           slotName="{your-slot-name}"
+
+
+           echo "Login"
+           az login --service-principal -u ${{ secrets.AZURE_APP_ID }} -p ${{ secrets.AZURE_PASSWORD }} --tenant ${{ secrets.AZURE_TENANT }}
+
+
+           echo "Update Site Extensions"
+           # for production slots
+           az resource create --resource-group $resourceGroupName --resource-type "Microsoft.Web/sites/siteextensions" \
+           --name "$appName/siteextensions/DevelopmentVerification.DdDotNet.Apm" -p "{}"
+          
+           # for staging slots
+           az resource create -g "StormsSandbox" --resource-type "Microsoft.Web/sites/siteextensions" \
+           --name "$appName/slots/$slotName/siteextensions/DevelopmentVerification.DdDotNet.Apm" -p "{}"

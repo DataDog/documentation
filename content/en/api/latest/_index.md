@@ -28,17 +28,21 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 Authenticate to the API with an [API key][1] using the header `DD-API-KEY`. For some endpoints, you also need an [Application key][2], which uses the header `DD-APPLICATION-KEY`.
 
-To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa)
+
+**Note**: To authenticate to the Datadog API through Postman, add your Datadog API and Application key values to the **Collection variables** of the Datadog API collection.
 
 [Using the API][4] is a guide to the endpoints.
 
-**Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][5]: `brew install coreutils`
+**Notes**: 
+   - Add your API and application key values to the **Variables** tab of the Datadog API Collection.
+   - cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils with the [Homebrew package manager][5]: `brew install coreutils`
 
 ### Client libraries
 
 By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][6] languages in each endpoint to see code examples from that library. To install each library:
 
-{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript,rust" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
 #### Installation
@@ -194,6 +198,37 @@ import { <VERSION> } from 'datadog-api-client';
  **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
+{{< /programming-lang >}}
+
+{{< programming-lang lang="rust" >}}
+#### Installation
+Run `cargo add datadog-api-client`, or add the following to `Cargo.toml` under `[dependencies]`:
+
+```
+datadog-api-client = "0"
+```
+
+#### Usage
+Try the following snippet to validate your Datadog API key:
+```rust
+use datadog_api_client::datadog::Configuration;
+use datadog_api_client::datadogV1::api_authentication::AuthenticationAPI;
+
+#[tokio::main]
+async fn main() {
+    let configuration = Configuration::new();
+    let api = AuthenticationAPI::with_config(configuration);
+    let resp = api.validate().await;
+    if let Ok(value) = resp {
+        println!("{:#?}", value);
+    } else {
+        println!("{:#?}", resp.unwrap_err());
+    }
+}
+```
+
+[1]: https://crates.io/crates/datadog-api-client
+[2]: https://docs.rs/datadog-api-client/latest/datadog_api_client/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

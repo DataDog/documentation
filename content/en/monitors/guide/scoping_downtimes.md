@@ -1,6 +1,5 @@
 ---
 title: Scoping Downtime
-kind: Guide
 disable_toc: false
 further_reading:
 - link: "/monitors/downtimes"
@@ -40,7 +39,7 @@ In the downtime configuration, select **By Monitor Name** and search for the mon
 
 Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select `By Monitor Tags` and enter the monitor tags that you want to target.
 
-**Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` and `team:automations`.
+**Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` AND `team:automations`.
 
 ### Target all monitors
 
@@ -60,8 +59,6 @@ The examples in this guide show how the `Group scope` may be applied to monitors
 {{< img src="monitors/downtimes/downtime_example_byname.png" alt="Downtime example of 'By Monitor Name' with preview of affected monitors" style="width:90%;">}}
 
 After the scheduled downtime begins, only alerts for the group `service:web-store` are muted for this monitor.
-
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:90%;">}}
 
 This mutes any alerts that includes the tag `service:web-store`, for example:
 
@@ -123,11 +120,7 @@ If you are running your application and infrastructure on multiple environments,
 
 6. *Monitor A* shows downtime has started, but only for the group in scope: `service:web-store`
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:80%;">}}
-
 7. *Monitor B* shows downtime has started for `service:web-store`. Because all the monitor's groups (by `host`) belong to `service:web-store`, the result is that all hosts are muted during downtime for this monitor.
-
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.png" alt="Evaluation graph showing downtime for group service:web-store and both affected hosts" style="width:80%;">}}
 
 ## Further reading
 

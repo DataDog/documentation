@@ -3,6 +3,7 @@ app_id: docker
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -18,6 +19,7 @@ assets:
     - docker-containerd-shim
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 73
     source_type_name: Docker
 author:
   homepage: https://www.datadoghq.com
@@ -28,6 +30,7 @@ categories:
 - containers
 - ログの収集
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_on_public_website: true
@@ -37,10 +40,8 @@ integration_id: docker
 integration_title: Docker Daemon
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: docker_daemon
-oauth: {}
 public_title: Docker Daemon
 short_description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
 supported_os:
@@ -54,14 +55,29 @@ tile:
   - Category::Containers
   - Category::Log Collection
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/agent/guide/compose-and-the-datadog-agent
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/faq/dogstatsd-and-docker
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/the-docker-monitoring-problem
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
+  - resource_type: documentation
+    url: https://www.datadoghq.com/docker-adoption
   support: README.md#Support
   title: Docker Daemon
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 **注**: Docker Daemon チェックのメンテナンスは継続されていますが、**Agent v5** でのみ動作します。
@@ -208,7 +224,7 @@ Docker インテグレーションは以下のイベントを生成します。
 * Restart Daemon
 * Update
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "docker_daemon" >}}
 
 
@@ -234,11 +250,11 @@ Docker インテグレーションは以下のイベントを生成します。
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/docker.png
 [2]: https://github.com/DataDog/docker-dd-agent
 [3]: https://github.com/DataDog/docker-dd-agent#cgroups
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://app.datadoghq.com/account/settings#integrations/docker
 [6]: https://github.com/DataDog/integrations-core/blob/master/docker_daemon/datadog_checks/docker_daemon/data/conf.yaml.example
 [7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/docker_daemon/images/integrations-docker-dockerps.png
-[8]: https://app.datadoghq.com/account/settings#agent/docker
+[8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [9]: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy
 [10]: https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration
 [11]: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-a-web-proxy-as-proxy

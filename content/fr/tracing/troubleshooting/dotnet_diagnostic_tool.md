@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Utiliser l'outil de diagnostic .NET pour le dépannage
 ---
 

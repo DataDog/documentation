@@ -20,7 +20,7 @@
 "integration_id": "rapdev-reporter"
 "integration_title": "Reporter"
 "is_public": true
-"kind": "integration"
+"custom_kind": "integration"
 "maintainer": "integrations@rapdev.io"
 "manifest_version": "1.0.0"
 "metric_prefix": ""

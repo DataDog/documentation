@@ -5,17 +5,17 @@ categories:
 - 構成 & デプロイ
 - ログの収集
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 description: 主要な AWS Certificate Manager メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_certificate_manager/
 draft: false
 git_integration_title: amazon_certificate_manager
 has_logo: true
-integration_id: amazon-certificate-manager
+integration_id: ''
 integration_title: AWS Certificate Manager
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: amazon_certificate_manager
 public_title: Datadog-AWS Certificate Manager インテグレーション
@@ -23,6 +23,7 @@ short_description: 主要な AWS Certificate Manager メトリクスを追跡し
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Certificate Manager を使用すると、SSL/TLS 証明書をプロビジョニング、管理、デプロイして AWS サービスや内部の接続済みリソースに利用できます。
@@ -50,13 +51,13 @@ AWS Certificate Manager を使用すると、SSL/TLS 証明書をプロビジョ
 
 AWS Certificate Manager インテグレーションは、EventBridge からの証明書期限とステータス変更イベントをサポートします。
 
-### サービスのチェック
+### サービスチェック
 
 AWS Certificate Manager インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

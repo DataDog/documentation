@@ -10,7 +10,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: Datadog でのタグの使用方法
-kind: ドキュメント
 title: タグの付け方
 ---
 
@@ -94,8 +93,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /ja/getting_started/integrations/
-[2]: /ja/agent/guide/agent-configuration-files/
-[3]: /ja/getting_started/tagging/#defining-tags
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/getting_started/tagging/#define-tags
 [4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -136,8 +135,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /ja/getting_started/integrations/
-[2]: /ja/agent/guide/agent-configuration-files/
-[3]: /ja/getting_started/tagging/#defining-tags
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/getting_started/tagging/#define-tags
 [4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -159,7 +158,7 @@ hostname: mymachine.mydomain
 
 #### 環境変数
 
-コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS を使用してホストタグを設定します。
+コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS` を使用してホストタグを設定します。複数のタグを指定する場合は、カンマとスペースで区切ってください。
 
 Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
@@ -216,7 +215,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1 key2:value2 key3:value3"
+      - DD_TAGS="key1:value1, key2:value2, key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -263,17 +262,19 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。
+[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Add Tags** ボタンをクリックします。タグをカンマで区切って入力し、**Save Tags** をクリックします。UI で行ったホストタグの変更が適用されるまで最大 5 分かかることがあります。
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="ホストマップタグ" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="ホストの詳細情報が開かれ、Add Tags ボタンがハイライト表示されているホストマップ" style="width:80%;">}}
+
 
 [1]: /ja/infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
+[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Add Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="インフラストラクチャーリストタグ" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="インフラストラクチャーの詳細パネルが開かれ、Add Tags ボタンがハイライト表示されているインフラストラクチャーリスト" style="width:80%;">}}
+
 
 [1]: /ja/infrastructure/
 {{% /tab %}}
@@ -377,7 +378,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-[DogStatsD][9] に送信したタグをメトリクス、イベント、サービスチェックに追加します。たとえば、アルゴリズムのバージョンでタイマー メトリクスをタグ付けして、2 つのアルゴリズムのパフォーマンスを比較します。
+[DogStatsD][10] に送信するメトリクス、イベント、サービスチェックにタグを追加します。例えば、アルゴリズムのバージョンを示すタグをタイマーメトリクスに付けて、2 つのアルゴリズムのパフォーマンスを比較します。
 
 ```python
 
@@ -390,15 +391,15 @@ def algorithm_two():
     # 何らかの処理 (速度を比較) ...
 ```
 
-**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][10]です。
+**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][11]です。
 
-`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホスト タグ キーの詳細については、[DogStatsD セクション][11]を参照してください。
+`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホストタグキーの詳細については、[メトリクスの送信: DogStatsD][12] のドキュメントを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/#defining-tags
+[1]: /ja/getting_started/tagging/#define-tags
 [2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: /ja/integrations/#cat-cloud
 [4]: /ja/getting_started/agent/#setup
@@ -409,3 +410,4 @@ def algorithm_two():
 [9]: /ja/tracing/setup/
 [10]: /ja/developers/dogstatsd/
 [11]: /ja/developers/community/libraries/
+[12]: /ja/metrics/dogstatsd_metrics_submission/#host-tag

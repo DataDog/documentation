@@ -12,10 +12,9 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: 설명서
   text: 이벤트에 시각화 적용
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드에 대해 알아보기
-kind: 설명서
 title: 사용자 액션 추적
 ---
 
@@ -112,7 +111,7 @@ Datadog Browser SDK for RUM은 다양한 전략을 사용하여 클릭 액션의
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/real_user_monitoring/browser/modifying_data_and_context/
+[1]: /ko/real_user_monitoring/browser/advanced_configuration/
 [2]: /ko/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [3]: /ko/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

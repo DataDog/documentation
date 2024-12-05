@@ -1,6 +1,5 @@
 ---
 title: Agent v6 Changes
-kind: faq
 aliases:
  - /agent/faq/agent-v6-changes
 further_reading:
@@ -179,7 +178,7 @@ Previous versions logged to multiple files (`collector.log`, `forwarder.log`, `d
 
 ## Interface
 
-The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
+The Agent v6 command-line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell
 <AGENT_BINARY> --help
 ```
@@ -378,7 +377,7 @@ The following options and tags are deprecated:
 
 * `label_to_tag_prefix` is superseded by `kubernetes_pod_labels_as_tags`.
 * `container_alias` tags are not collected.
-* `kube_replicate_controller` is only added if the pod is created by a replication controller. Instead, use the relevant creator tag (`kube_deployment`, `kube_daemon_set`, etc.).
+* `kube_replicate_controller` is only added if the pod is created by a replication controller. Instead, use a relevant creator tag such as `kube_deployment`, or `kube_daemon_set`.
 
 [1]: /integrations/kubelet/
 [2]: /integrations/kube_apiserver_metrics/

@@ -13,7 +13,7 @@ integration_id: new-relic
 integration_title: New Relic
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: new_relic
 public_title: Intégration Datadog/New Relic

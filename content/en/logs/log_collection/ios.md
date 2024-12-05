@@ -1,10 +1,9 @@
 ---
 title: iOS Log Collection
-kind: documentation
 description: Collect logs from your iOS applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-ios Source code
 - link: logs/explorer
   tag: Documentation
@@ -24,20 +23,9 @@ The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 
 ## Setup
 
-1. Declare the library as a dependency depending on your package manager:
+1. Declare the library as a dependency depending on your package manager. Swift Package Manager is recommended.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][6] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogLogs'
-```
-
-[6]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -50,6 +38,17 @@ In your project, link the following libraries:
 DatadogCore
 DatadogLogs
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][6] to install `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogLogs'
+```
+
+[6]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -379,6 +378,8 @@ logger.critical("Something critical happened!")
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note:** To add a custom iOS log to a newly created RUM view, apply it with the `viewDidAppear` method. If the log is applied before `viewDidAppear` occurs, such as at `viewDidLoad`, the log is applied to the preceding RUM view, which is still technically the active view.
 
 5. (Optional) Provide a map of `attributes` alongside your log message to add attributes to the emitted log. Each entry of the map is added as an attribute.
 

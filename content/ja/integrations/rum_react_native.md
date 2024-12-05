@@ -1,16 +1,19 @@
 ---
 app_id: rum-react-native
 app_uuid: 61207de8-cc1e-4915-a18a-7fb25093d85c
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メトリクス
-- モバイル
+- ログの収集
+- モニター
+- apm
 - ネットワーク
-- トレーシング
+- tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md
 display_on_public_website: true
@@ -20,30 +23,24 @@ integration_id: rum-react-native
 integration_title: React Native
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_react_native
-oauth: {}
 public_title: React Native
 short_description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
 supported_os:
 - android
-- linux
-- windows
 - ios
-- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
   - Category::Network
   - Category::Tracing
   - Supported OS::Android
-  - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::iOS
-  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
   media: []
@@ -52,6 +49,7 @@ tile:
   title: React Native
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -106,7 +104,7 @@ React Native インテグレーションには、サービスのチェック機�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

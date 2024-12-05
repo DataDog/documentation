@@ -5,6 +5,7 @@ assets:
   dashboards:
     Ambari base dashboard: assets/dashboards/base_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,17 +16,17 @@ assets:
       prefix: ambari.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10064
     source_type_name: Ambari
-  logs:
-    source: ambari
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
 - ログの収集
+- ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_on_public_website: true
@@ -33,12 +34,10 @@ draft: false
 git_integration_title: ambari
 integration_id: ambari
 integration_title: Ambari
-integration_version: 3.2.0
+integration_version: 6.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: ambari
-oauth: {}
 public_title: Ambari
 short_description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
 supported_os:
@@ -47,10 +46,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
+  - Category::Network
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::Processing
-  - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
   media: []
@@ -59,6 +59,7 @@ tile:
   title: Ambari
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -71,14 +72,14 @@ tile:
 
 Ambari チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -96,7 +97,7 @@ Ambari チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][2]。
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -127,7 +128,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -137,11 +138,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                        |
 | -------------------- | ---------------------------- |
-| `<インテグレーション名>` | `ambari`                     |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "http://%%host%%"}` |
+| `<INTEGRATION_NAME>` | `ambari`                     |
+| `<INIT_CONFIG>`      | 空白または `{}`                |
+| `<INSTANCE_CONFIG>`  | `{"url": "http://%%host%%"}` |
 
-##### ログの収集
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -182,7 +183,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Ambari には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "ambari" >}}
 
 
@@ -193,6 +194,6 @@ Ambari には、イベントは含まれません。
 
 
 [1]: https://ambari.apache.org
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

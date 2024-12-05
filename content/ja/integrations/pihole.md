@@ -3,6 +3,7 @@ app_id: pihole
 app_uuid: 008d006b-6390-4b93-9302-dc37d9625b18
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: pihole.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10169
     source_type_name: pihole
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,6 +24,7 @@ author:
 categories:
 - ネットワーク
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
 display_on_public_website: true
@@ -31,10 +34,8 @@ integration_id: pihole
 integration_title: Pi-hole
 integration_version: 3.14.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: pihole
-oauth: {}
 public_title: Pi-hole
 short_description: Pi-hole のデフォルトメトリクスを収集するインテグレーション
 supported_os:
@@ -49,6 +50,7 @@ tile:
   - Supported OS::Windows
   - Category::Network
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pi-hole のデフォルトメトリクスを収集するインテグレーション
   media: []
@@ -57,6 +59,7 @@ tile:
   title: Pi-hole
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -79,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Pi-hole チェ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Pi-hole のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `pihole.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pihole.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -89,7 +92,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Pi-hole チェ
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `pihole` を探します。
 
-### ログの収集
+### ログ収集
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][8]を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -115,7 +118,7 @@ logs_enabled: true
 
 Pi-hole には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "pihole" >}}
 
 
@@ -125,7 +128,7 @@ Pi-hole には、イベントは含まれません。
 
 
 [1]: https://pi-hole.net/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/pihole/datadog_checks/pihole/data/conf.yaml.example

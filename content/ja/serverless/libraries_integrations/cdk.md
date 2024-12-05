@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md
-kind: documentation
 title: Datadog CDK コンストラクト
 ---
 [![NPM](https://img.shields.io/npm/v/datadog-cdk-constructs?color=blue&label=npm+cdk+v1)](https://www.npmjs.com/package/datadog-cdk-constructs)
@@ -14,11 +13,14 @@ title: Datadog CDK コンストラクト
 
 以下を行うことで、サーバーレスアプリケーションからのメトリクス、トレース、ログの収集を CDK ライブラリで自動的に構成できます。
 
-- [Python][1]、[Node.js][2]、[Java][15] Lambda 関数の Datadog Lambda レイヤーをインストールし構成。
+- [.NET][19]、[Java][15]、[Node.js][2]、[Python][1] Lambda 関数の Datadog Lambda レイヤーをインストールし構成。
 - Lambda 関数からのトレースおよびカスタムメトリクスの収集を有効化。
 - Datadog Forwarder から Lambda および非 Lambda ロググループへのサブスクリプションを管理。
 
 ## AWS CDK v1 と AWS CDK v2
+
+**警告**: `AWS CDK v1` はサポートが終了し、`datadog-cdk-constructs` はアップデートを受けられなくなりました。`AWS CDK v2` ([公式マイグレーションガイド](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html))にアップグレードし、`datadog-cdk-constructs-v2` の使用に切り替えることを強く推奨します。
+
 Datadog CDK コンストラクトには、`datadog-cdk-constructs` と `datadog-cdk-constructs-v2` という 2 つのバージョンが存在します。これらは、それぞれ `AWS CDK v1` と `AWS CDK v2` で動作するように設計されています。
 
 - `datadog-cdk-constructs-v2` には Node >= 14 が必要で、`datadog-cdk-constructs` は Node >= 12 をサポートしています。
@@ -64,7 +66,7 @@ pip install datadog-cdk-constructs
 - _AWS CDK を初めて使うのであれば、こちらの[ワークショップ][14]をご覧ください。_
 - _以下の例では、AWS CDK v2 を使用することを想定しています。CDK v1 を使用している場合は、`datadog-cdk-constructs-v2` ではなく、`datadog-cdk-constructs` をインポートします。_
 
-これを CDK スタックに追加します。
+Add this to your CDK stack:
 
 ```typescript
 import { Datadog } from "datadog-cdk-constructs-v2";
@@ -73,6 +75,7 @@ const datadog = new Datadog(this, "Datadog", {
   nodeLayerVersion: <LAYER_VERSION>,
   pythonLayerVersion: <LAYER_VERSION>,
   javaLayerVersion: <LAYER_VERSION>,
+  dotnetLayerVersion: <LAYER_VERSION>
   addLayers: <BOOLEAN>,
   extensionLayerVersion: "<EXTENSION_VERSION>",
   forwarderArn: "<FORWARDER_ARN>",
@@ -160,7 +163,7 @@ CDK Stack が初期化されている場所で行うことをお勧めします�
   ```
 </details>
 
-## コンフィギュレーション
+## 構成
 
 Datadog のコンストラクトをさらに構成するには、以下のカスタムパラメーターを使用します。
 
@@ -168,10 +171,11 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 
 | npm パッケージパラメーター | PyPI パッケージパラメーター | 説明 |
 | --- | --- | --- |
-| `addLayers` | `add_layers` | Lambda レイヤーを追加またはユーザーが独自のレイヤーを使用。デフォルトは true。「true」の場合、Lambda ライブラリのバージョン変数も必要になります。「false」の場合は、関数のデプロイメントパッケージに Datadog Lambda ライブラリを含める必要があります。 |
-| `pythonLayerVersion` | `python_layer_version` | インストールする Python Lambda レイヤーのバージョン（例: 21）。Python で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[こちら][5]で確認できます。 |
-| `nodeLayerVersion` | `node_layer_version` | インストールする Node.js Lambda レイヤーのバージョン（例: 29）。Node.js で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[こちら][6]で確認できます。 |
-| `javaLayerVersion` | `java_layer_version` | インストールする Java レイヤーのバージョン (8 など)。Java で書かれた Lambda 関数を少なくとも 1 つデプロイする場合で、`addLayers` が true の場合は必須です。最新のバージョン番号は、[サーバーレス Java インストールドキュメント][15]で検索してください。**注**: Datadog のコンストラクトで Java 関数を適切にインスツルメンテーションするには、`extensionLayerVersion >= 25` と `javaLayerVersion >= 5` が必要です。 |
+| `addLayers` | `add_layers` | Lambda レイヤーを追加またはユーザーが独自のレイヤーを使用。デフォルトは `true`。`true` の場合、Lambda ライブラリのバージョン変数も必要になります。`false` の場合は、関数のデプロイメントパッケージに Datadog Lambda ライブラリを含める必要があります。 |
+| `pythonLayerVersion` | `python_layer_version` | インストールする Python Lambda レイヤーのバージョン (例: `83`)。Python で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が `true` のときは必須。最新バージョンの数字は、[こちら][5]で確認できます。 |
+| `nodeLayerVersion` | `node_layer_version` | インストールする Node.js Lambda レイヤーのバージョン (例: `100`)。Node.js で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が `true` のときは必須。最新バージョンの数字は、[こちら][6]で確認できます。 |
+| `javaLayerVersion` | `java_layer_version` | インストールする Java レイヤーのバージョン (`8` など)。Java で書かれた Lambda 関数を少なくとも 1 つデプロイする場合で、`addLayers` が `true` の場合は必須です。最新のバージョン番号は、[サーバーレス Java インストールドキュメント][15]で検索してください。**注**: Datadog のコンストラクトで Java 関数を適切にインスツルメンテーションするには、`extensionLayerVersion >= 25` と `javaLayerVersion >= 5` が必要です。 |
+| `dotnetLayerVersion` | `dotnet_layer_version` | インストールする .NET レイヤーのバージョン (例: `13`)。.NET で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が `true` のときは必須。最新バージョンの数字は、[こちら][18]で確認できます。 |
 | `extensionLayerVersion` | `extension_layer_version` | 5 など、インストールする Datadog Lambda Extension レイヤーのバージョン。`extensionLayerVersion` が設定されている場合は、`apiKey` (暗号化の場合は `apiKMSKey` または `apiKeySecretArn`) の設定も必要となります。有効にすると、Lambda 関数のロググループは Forwarder にサブスクライブされなくなります。Lambda Extension の詳細は[こちら][12]。 |
 | `forwarderArn` | `forwarder_arn` | 設定すると、プラグインは自動的に Datadog Forwarder を関数のロググループにサブスクライブするようになります。`extensionLayerVersion` が設定されている場合は、`forwarderArn` を設定しないでください。 |
 | `createForwarderPermissions` | `createForwarderPermissions` | `true` に設定すると、ロググループごとに Datadog Forwarder に Lambda 権限が作成されます。Datadog Forwarder にはデフォルトで権限が構成されているため、ほとんどのユースケースで不要です。 |
@@ -191,13 +195,13 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 | `service` | `service` | `extensionLayerVersion` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_SERVICE` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `service` タグが追加され、指定した値が設定されます。 |
 | `version` | `version` | `extensionLayerVersion` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_VERSION` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `version` タグが追加され、指定した値が設定されます。 |
 | `tags` | `tags` | 1 つの文字列としての key:value のペアのカンマ区切りのリスト。`extensionLayerVersion` と共に設定すると、すべての Lambda 関数に `DD_TAGS` 環境変数が追加され、指定した値が設定されます。`forwarderArn` と共に指定すると、cdk は文字列をパースして、各 key:value ペアをタグとしてすべての Lambda 関数に設定します。 |
-| `enableColdStartTracing`      | `enable_cold_start_tracing` | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。 |
+| `enableColdStartTracing`      | `enable_cold_start_tracing` | コールドスタートトレーシングを無効にするには、`false` に設定します。Node.js と Python で使用されます。デフォルトは `true` です。 |
 | `coldStartTraceMinDuration`   | `min_cold_start_trace_duration` | コールドスタートトレースでトレースするモジュールロードイベントの最小継続時間 (ミリ秒) を設定します。数値。デフォルトは `3` です。 |
 | `coldStartTraceSkipLibs`      | `cold_start_trace_skip_libs`| オプションで、カンマで区切られたライブラリのリストに対してコールドスタートスパンの作成をスキップすることができます。深さを制限したり、既知のライブラリをスキップするのに便利です。デフォルトはランタイムに依存します。 |
-| `enableProfiling`             | `enable_profiling` | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。 |
-| `encodeAuthorizerContext`     |`encode_authorizer_context` | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
-| `decodeAuthorizerContext`     |`decode_authorizer_context` | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                         |
-| `apmFlushDeadline` | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。 |
+| `enableProfiling`             | `enable_profiling` | `true` で Datadog Continuous Profiler を有効にします。Node.js と Python のベータ版でサポートされています。デフォルトは `false` です。 |
+| `encodeAuthorizerContext`     |`encode_authorizer_context` | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。Node.js と Python でサポートされています。デフォルトは `true` です。 |
+| `decodeAuthorizerContext`     |`decode_authorizer_context` | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。Node.js と Python でサポートされています。デフォルトは `true` です。                         |
+| `apmFlushDeadline` | `apm_flush_deadline` | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。Node.js と Python でサポートされています。デフォルトは `100` ミリ秒です。 |
 | `redirectHandler` | `redirect_handler` | `false` に設定すると、ハンドラーを Datadog Lambda Library のハンドラーにリダイレクトするのをスキップします。Datadog Lambda 拡張機能のみでインスツルメンテーションを行う場合に便利です。デフォルトは `true` です。 |
 
 **注**: 上記のパラメーターを使用すると、対応する関数レベルの `DD_XXX` 環境変数がオーバーライドされる場合があります。
@@ -234,6 +238,7 @@ class RootStack extends cdk.Stack {
       nodeLayerVersion: <LAYER_VERSION>,
       pythonLayerVersion: <LAYER_VERSION>,
       javaLayerVersion: <LAYER_VERSION>,
+      dotnetLayerVersion: <LAYER-VERSION>,
       addLayers: <BOOLEAN>,
       forwarderArn: "<FORWARDER_ARN>",
       flushMetricsToLogs: <BOOLEAN>,
@@ -259,6 +264,7 @@ class NestedStack extends cdk.NestedStack {
       nodeLayerVersion: <LAYER_VERSION>,
       pythonLayerVersion: <LAYER_VERSION>,
       javaLayerVersion: <LAYER_VERSION>,
+      dotnetLayerVersion: <LAYER-VERSION>,
       addLayers: <BOOLEAN>,
       forwarderArn: "<FORWARDER_ARN>",
       flushMetricsToLogs: <BOOLEAN>,
@@ -286,10 +292,10 @@ class NestedStack extends cdk.NestedStack {
 
 Lambda 実行ロールに指定したシークレットへの読み取りアクセスを自動的に付与するには、Datadog のコンストラクトを初期化する際に、`apiKeySecretArn` の代わりに `apiKeySecret` を渡します。
 
-```
+```typescript
 const { Secret } = require('aws-cdk-lib/aws-secretsmanager');
 
-const secret = Secret.fromSecretPartialArn(this, 'DatadogApiKeySecret' 'arn:aws:secretsmanager:us-west-1:123:secret:DATADOG_API_KEY');
+const secret = Secret.fromSecretPartialArn(this, 'DatadogApiKeySecret', 'arn:aws:secretsmanager:us-west-1:123:secret:DATADOG_API_KEY');
 
 const datadog = new Datadog(this, 'Datadog', {
   ...
@@ -300,9 +306,9 @@ const datadog = new Datadog(this, 'Datadog', {
 
 `addLambdaFunctions` が呼び出されると、Datadog CDK コンストラストは、Lambda 実行ロールに与えられた AWS シークレットへの読み取りアクセスを付与します。これは [AWS ISecret の grantRead 関数][17]を通して行われます。
 
-## UDS の仕組み
+## 仕組み
 
-Datadog CDK コンストラクトは、Lambda 関数のリストを取り込み、関数に [Java][15]、[Node.js][2]、および [Python][1] の Lambda Layers をアタッチして、Datadog Lambda Library をインストールするものです。これは、必要なコードの変更なしに Lambda Library を初期化する代替ハンドラーにリダイレクトします。Datadog CDK コンストラクトに追加された構成も、各 Lambda 関数の下でそれぞれの環境変数に変換されます (該当する場合/必要な場合)。
+Datadog CDK コンストラクトは、Lambda 関数のリストを取り込み、関数に [.NET][19]、[Java][15]、[Node.js][2]、および [Python][1] の Lambda Layers をアタッチして、Datadog Lambda Library をインストールするものです。これは、必要なコードの変更なしに Lambda Library を初期化する代替ハンドラーにリダイレクトします。Datadog CDK コンストラクトに追加された構成も、各 Lambda 関数の下でそれぞれの環境変数に変換されます (該当する場合/必要な場合)。
 
 Lambda 関数ベースのロググループは `addLambdaFunctions` メソッドで自動的に処理されますが、このコンストラクトには追加の関数 `addForwarderToNonLambdaLogGroups` があり、Forwarder に追加のロググループをサブスクライブさせます。
 
@@ -313,15 +319,9 @@ Lambda 関数ベースのロググループは `addLambdaFunctions` メソッド
 - [CDK by AWS の紹介ビデオ (デモ付き)](https://youtu.be/ZWCvNFUN-sU)
 - [CDK コンセプト](https://youtu.be/9As_ZIjUGmY)
 
-## リポジトリの構造
-
-このリポジトリでは、`v1` と `v2` というフォルダが、パッケージ `datadog-cdk-constructs` と `datadog-cdk-contructs-v2` に対応しています。それぞれは独立したプロジェクトとして扱うことができます (依存関係、コンフィギュレーションファイル、テスト、スクリプトを持つ別々の projen プロジェクトです)。
-
-さらに、`v1` と `v2` の両パッケージに共通する共有ロジックを格納した `common` フォルダも用意されています。これは、`v1/src` と `v2/src` 内の `common` フォルダを、リポジトリのルートにある `common` フォルダにソフトリンクすることによって行われます。
-
 ## Projen の使用
 
-Datadog CDK コンストラクトライブラリの `v1` と `v2` は共に、`package.json`、`.gitignore`、`.npmignore` などのプロジェクトコンフィギュレーションファイルを管理するために Projen を使用しています。ほとんどのコンフィギュレーションファイルは、Projen によって読み取り専用権限で保護されています。これらのファイルを変更するには、 `v1` または `v2` フォルダ内の `.projenrc.js` ファイルを編集して、`npx projen` (`v1` または `v2` 内) を実行して新しい変更を反映させます。詳しくは、[Projen][13] をチェックしてください。
+Datadog CDK コンストラクトライブラリは、`package.json`、`.gitignore`、`.npmignore` などのプロジェクトコンフィギュレーションファイルを管理するために Projen を使用しています。ほとんどのコンフィギュレーションファイルは、Projen によって読み取り専用権限で保護されています。これらのファイルを変更するには、`.projenrc.js` ファイルを編集して、`npx projen` を実行して新しい変更を反映させます。詳しくは、[Projen][13] をチェックしてください。
 
 ## 問題を開く
 
@@ -337,12 +337,12 @@ Datadog CDK コンストラクトライブラリの `v1` と `v2` は共に、`p
 
 ## テスト
 
-このパッケージに貢献した場合、`v1` または `v2` フォルダ内の `yarn test` を使ってテストを実行することができます。このパッケージには、手動テスト用のサンプルアプリケーションも含まれています。
+このパッケージに貢献した場合、`yarn test` を使ってテストを実行することができます。このパッケージには、手動テスト用のサンプルアプリケーションも含まれています。
 
-1. 別のターミナルを開き、`v1` または `v2` に `cd` します。
+1. 別のターミナルを開きます。
 2. `yarn watch` を実行すると、`src` ディレクトリにある Typescript ファイルが、`lib` ディレクトリにある Javascript にコンパイルされることを確認できます。
 3. `src/sample` に移動し、ここで `index.ts` を編集して、手動で貢献をテストすることができます。
-4. `v1` または `v2` ディレクトリのルートで、`npx cdk --app lib/sample/index.js <CDK Command>` を実行します。`<CDK Command>` は `synth`、`diff`、`deploy` などの一般的な CDK コマンドに置き換えてください。
+4. root ディレクトリで、`npx cdk --app lib/sample/index.js <CDK Command>` を実行します。`<CDK Command>` は `synth`、`diff`、`deploy` などの一般的な CDK コマンドに置き換えてください。
 
 - なお、"... is not authorized to perform: …” (...は実行する権限がありません: …) と表示された場合は、AWS の認証情報でコマンドを認証する必要がある場合もあります。
 
@@ -351,7 +351,7 @@ Datadog CDK コンストラクトライブラリの `v1` と `v2` は共に、`p
 このライブラリのデバッグログを表示するには、`cdk synth` を実行するときに `DD_CONSTRUCT_DEBUG_LOGS` 環境変数を `true` に設定します (生成されたテンプレートの出力を抑制するには `--quiet` を使用します)。
 
 例:
-_`v1` または `v2` ディレクトリのルートにいることを確認します_
+_root ディレクトリにいることを確認します_
 
 ```
 DD_CONSTRUCT_DEBUG_LOGS=true npx cdk --app lib/sample/index.js synth --quiet
@@ -384,3 +384,5 @@ DD_CONSTRUCT_DEBUG_LOGS=true npx cdk --app lib/sample/index.js synth --quiet
 [15]: https://docs.datadoghq.com/ja/serverless/installation/java/?tab=awscdk
 [16]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_secretsmanager.ISecret.html
 [17]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_secretsmanager.ISecret.html#grantwbrreadgrantee-versionstages
+[18]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases
+[19]: https://docs.datadoghq.com/ja/serverless/aws_lambda/installation/dotnet

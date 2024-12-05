@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/org_settings/
   tag: Documentación
   text: Más información sobre los parámetros de organización
-kind: documentación
 title: Aplicaciones de OAuth
 ---
 ## Información general
@@ -21,7 +20,7 @@ Solo los usuarios que sean administradores o tengan permisos de `org_authorized_
 
 ### Activar
 
-Las aplicaciones OAuth activadas permiten a los usuarios con los permisos necesarios autorizar el acceso en su nombre. Las aplicaciones de OAuth incluyen la aplicación móvil de Datadog y tus [aplicaciones de Datadog][4] personalizadas que tengan [acceso a la API de OAuth][5].
+Las aplicaciones OAuth habilitadas sirven para que los usuarios con los permisos necesarios autoricen el acceso en su nombre. Las aplicaciones OAuth incluyen la aplicación móvil Datadog y tus [Extensiones de interfaz de usuario][4] personalizadas que tengan [Acceso a la API de OAuth][5]. 
 
 ### Desactivar
 
@@ -38,7 +37,7 @@ Hay dos formas de desactivar una aplicación desde la página de gestión de apl
 
 ### Revocar el acceso
 
-Al revocar el acceso a una aplicación de OAuth para un usuario se restringe todo acceso a esa aplicación. Si el usuario tiene los permisos necesarios para autorizar la aplicación, podrá recuperar el acceso volviendo a autorizarla.
+Al revocar el acceso a una aplicación de OAuth para un usuario, se restringe todo acceso a esa aplicación. Si el usuario tiene los permisos necesarios para autorizar la aplicación, podrá recuperar el acceso volviendo a autorizarla.
 {{< img src="account_management/oauth_apps/revoke-user.png" alt="Botón de desactivación en la vista detallada de aplicaciones" style="width:100%;">}}
 
 ## Leer más
@@ -48,5 +47,5 @@ Al revocar el acceso a una aplicación de OAuth para un usuario se restringe tod
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /es/account_management/rbac/permissions/#general-permissions
 [3]: /es/account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /es/developers/datadog_apps/
-[5]: /es/developers/datadog_apps/#oauth-api-access
+[4]: /es/developers/ui_extensions/
+[5]: /es/developers/ui_extensions/#oauth-api-access

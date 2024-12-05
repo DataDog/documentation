@@ -17,8 +17,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-kind: documentation
-title: Go ログとトレースの接続
+title: Go ログとトレースの相関付け
 type: multi-code-lang
 ---
 
@@ -49,10 +48,41 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 **注**: [Datadog ログインテグレーション][1]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id`、`dd.span_id`、`dd.service`、`dd.env`、`dd.version` が文字列としてパースされていることを確実にする必要があります。詳しくは、[関連するログがトレース ID パネルに表示されない][2]を参照してください。
 
+## logrus ログへの注入
 
+logrus パッケージには、ログとスパンを自動的にリンクするためのフックが用意されています。
+このパッケージは Go トレーサーで利用可能です。
+
+```go
+package main
+
+import (
+    "github.com/sirupsen/logrus"
+
+    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    // オプション: ログ形式を変更して JSON を使用 (Go ログコレクションを参照)
+    logrus.SetFormatter(&logrus.JSONFormatter{})
+
+    // Datadog コンテキストログフックを追加
+    logrus.AddHook(&dd_logrus.DDContextLogHook{})
+
+    // ...
+}
+```
+
+これにより、コンテキスト付きでログを取る際に、トレース ID が自動的にログに注入されます。
+```go
+    // コンテキスト付きのログ
+    logrus.WithContext(ctx).Info("Go logs and traces connected!")
+```
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /ja/logs/log_collection/go/#configure-your-logger
 [2]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

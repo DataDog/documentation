@@ -3,6 +3,7 @@ app_id: lacework
 app_uuid: e23af0ca-003e-4b3d-b6c5-24894b710750
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: lacework.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10079
     source_type_name: Lacework
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
 categories:
 - セキュリティ
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: lacework
 integration_title: Lacework
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: lacework
-oauth: {}
 public_title: Lacework
 short_description: Lacework は、すべてのクラウド環境に対応するセキュリティプラットフォームです
 supported_os:
@@ -48,6 +49,7 @@ tile:
   - Supported OS::Windows
   - Category::Security
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Lacework は、すべてのクラウド環境に対応するセキュリティプラットフォームです
   media: []
@@ -56,6 +58,7 @@ tile:
   title: Lacework
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -93,11 +96,11 @@ Datadog-Lacework インテグレーションを使用して、Lacework のログ
 
 Lacework インテグレーションはメトリクスを収集しません。
 
-### サービスのチェック
+### サービスチェック
 
 Lacework インテグレーションには、サービスのチェック機能は含まれません。
 
-### ログの収集
+### ログ収集
 
 Lacework インテグレーションは、ログを送信するように構成できます。
 
@@ -109,6 +112,6 @@ Lacework インテグレーションは、イベントを送信するように�
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://www.lacework.com/datadog/
+[1]: https://docs.lacework.net/onboarding/datadog
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/help/

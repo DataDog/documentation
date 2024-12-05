@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: Gérer vos monitors
-kind: documentation
 title: Sommaire des checks
 ---
 

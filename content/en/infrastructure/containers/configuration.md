@@ -1,6 +1,5 @@
 ---
 title: Configure Containers View
-kind: documentation
 aliases:
   - /infrastructure/livecontainers/configuration
 further_reading:
@@ -84,26 +83,28 @@ The following table presents the list of collected resources and the minimal Age
 
 | Resource | Minimal Agent version | Minimal Cluster Agent version* | Minimal Helm chart version | Minimal Kubernetes version |
 |---|---|---|---|---|
-| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| Clusters | 7.27.0 | 1.12.0 | 2.10.0 | 1.17.0 |
-| CronJobs | 7.27.0 | 7.40.0 | 2.15.5 | 1.16.0 |
-| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 | 1.16.0 |
-| Deployments | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
-| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 | 1.21.0 |
-| Jobs | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
-| Namespaces | 7.27.0 | 7.41.0 | 2.30.9 | 1.17.0 |
-| Nodes | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
-| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
-| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
-| Pods | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
-| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
-| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| Roles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
-| Services | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
-| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
-| VerticalPodAutoscalers | 7.27.0 | 7.46.0 | 3.6.8 | 1.16.0 |
+| ClusterRoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ClusterRoles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Clusters | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| CronJobs | 7.33.0 | 7.40.0 | 2.15.5 | 1.16.0 |
+| DaemonSets | 7.33.0 | 1.18.0 | 2.16.3 | 1.16.0 |
+| Deployments | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| HorizontalPodAutoscalers | 7.33.0 | 7.51.0 | 2.10.0 | 1.1.1 |
+| Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
+| Jobs | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
+| Namespaces | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Network Policies | 7.33.0 | 7.56.0 | 3.57.2 | 1.14.0 |
+| Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| Pods | 7.33.0 | 1.18.0 | 3.9.0 | 1.17.0 |
+| ReplicaSets | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| RoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Roles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ServiceAccounts | 7.33.0 | 1.19.0 | 2.30.9 | 1.17.0 |
+| Services | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| Statefulsets | 7.33.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+| VerticalPodAutoscalers | 7.33.0 | 7.46.0 | 3.6.8 | 1.16.0 |
 
 **Note**: After version 1.22, Cluster Agent version numbering follows Agent release numbering, starting with version 7.39.0.
 
@@ -189,9 +190,63 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect custom resources and CustomResourceDefinitions
+
+The [Orchestrator Explorer][3] collects CustomResourceDefinitions by default. These definitions appear in Datadog without any user configuration required.
+
+To collect custom resources, you need to configure both the Datadog Agent and set up indexing.
+
+1. Configure the Datadog Agent:
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   Add the following configuration to `datadog-values.yaml`:
+
+   ```
+   orchestratorExplorer:
+       customResources:
+           - <CUSTOM_RESOURCE_NAME>
+   ```
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+   The Datadog Operator needs permission to allow the Agent to collect custom resources. Install the Operator with an option that grants this permission:
+
+   ```
+   helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+   ```
+
+   Then, add the following configuration to your `DatadogAgent` manifest, `datadogagent.yaml`:
+
+   ```
+   features:
+     orchestratorExplorer:
+       customResources:
+         - <CUSTOM_RESOURCE_NAME>
+   ```
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+1. In Datadog, open [Orchestrator Explorer][3].
+1. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
+1. Locate the custom resource definition that corresponds to the resource you want to visualize in the explorer. Click on the version under the **Versions** column.
+1. Click to select the fields you would like to index from the Custom Resource (maximum of 50 fields per resource), then click **Enable Indexing** to save
+
+Once fields are indexed, they will be available to add as columns in the explorer or as part of Saved Views. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
+[3]: https://app.datadoghq.com/orchestration/explorer/pod
+[4]: https://app.datadoghq.com/orchestration/explorer/crd
+

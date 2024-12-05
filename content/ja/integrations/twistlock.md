@@ -5,6 +5,7 @@ assets:
   dashboards:
     Twistlock: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
       prefix: twistlock.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10052
     source_type_name: Twistlock
-  logs:
-    source: twistlock
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,6 +29,7 @@ categories:
 - ログの収集
 - ネットワーク
 - セキュリティ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_on_public_website: true
@@ -36,12 +37,10 @@ draft: false
 git_integration_title: twistlock
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
-integration_version: 3.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: twistlock
-oauth: {}
 public_title: Prisma Cloud Compute Edition
 short_description: Twistlock はコンテナセキュリティスキャナ
 supported_os:
@@ -59,6 +58,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Twistlock はコンテナセキュリティスキャナ
   media: []
@@ -67,6 +67,7 @@ tile:
   title: Prisma Cloud Compute Edition
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -79,14 +80,14 @@ tile:
 
 Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -97,7 +98,7 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 [1]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -107,9 +108,9 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 
 | パラメーター            | 値                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `twistlock`                                                                         |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                       |
-| `<インスタンスコンフィギュレーション>`  | `{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}` |
+| `<INTEGRATION_NAME>` | `twistlock`                                                                         |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                       |
+| `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}` |
 
 ###### Kubernetes
 
@@ -138,7 +139,7 @@ spec:
         name: twistlock-console
 ```
 
-##### ログの収集
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -220,7 +221,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベントを送信します。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "twistlock" >}}
 
 
@@ -231,6 +232,6 @@ Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベン�
 
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

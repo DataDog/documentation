@@ -1,13 +1,12 @@
 ---
-title: Browser Test Steps
-kind: documentation
+title: Browser Testing Steps
 description: Learn how to automatically record and manually set steps in a browser test recording.
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
   text: "Learn about advanced options for browser tests"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
@@ -19,7 +18,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3] automatically detects and records steps on your website.
+Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### Click
 
@@ -37,7 +36,7 @@ Click on the step and select a click type you want the browser test to perform a
 
 Datadog records steps you perform on your application, such as selecting an option from a `select` dropdown menu, and a recap appears as a step.
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
+{{< img src="synthetics/browser_tests/type_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
 
 ### Select option
 
@@ -66,7 +65,7 @@ Assertions allow you to validate that your browser test is in the state you expe
 
 To confirm your test ends in an expected state, you must end your browser tests with an **assertion**.
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
 Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
 
@@ -89,9 +88,12 @@ Create this assertion step to have your browser test select a page element such 
 
 Set the user locator to ensure the browser test targets the correct element by selecting `CSS` or `XPath 1.0` from the dropdown menu and adding a selector. Click **Test**. 
 
-Datadog recommends using the two assertions listed above for better accuracy. For more information, see [Advanced Options][1].
+#### Test the state of a checkbox or radio button
 
-[1]: /synthetics/browser_tests/advanced_options#user-specified-locator
+Create this assertion step to have your browser test select a page element and validate the state of the assertion (unchecked or checked).
+
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
+
 {{% /tab %}}
 {{% tab "Test Active Page Content" %}}
 
@@ -125,13 +127,13 @@ Create this assertion step to test a custom assertion on the active page using y
 
 The JavaScript assertion function contains the following parameters and requires a return statement.
 
-* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean.
+* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean. If a falsy value is returned, the test step fails.
 
 * `vars` (optional): A string containing your browser test's [variables][2]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
 * `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/assertion_java.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%" >}}
 
 Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (such as libraries, built-ins, and global variables). To load external libraries, use a promise. 
 
@@ -160,8 +162,17 @@ For more information about how to test downloads, see [Test File Upload and Down
 [1]: /synthetics/guide/email-validation
 [2]: /synthetics/browser_tests/actions#use-variables
 [3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+
+#### Test HTTP Request Count
+
+Create this assertion step to test the number of HTTP requests made to a specific URL pattern. Enter the expected request count and the target URL regex to test against.
+
+{{< img src="synthetics/browser_tests/number_and_target_2.png" alt="Test number and target of requests option with the requests made dropdown shown" style="width:60%;" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
+
+</br>
 
 ### Navigation
 
@@ -265,6 +276,13 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 Create a variable from content such as a `span` or `div` by extracting the element's text.
 
+#### Email body
+
+Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12].
+
+* [`Regex`][13] searches and returns the first matching pattern (for example, `/*./`) from the email's plain text body. If the pattern is not found, it then searches the HTML body.
+
+* [`Xpath`][12] is only applicable when the email contains an HTML body. It returns the content of the corresponding location (for example, `$`).
 
 #### JavaScript
 
@@ -278,7 +296,7 @@ The JavaScript function comes with the following parameters and requires a retur
 
 * `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/custom_java_script.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%" >}}
 
 Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (such as libraries, built-ins, and global variables). To load external libraries, use a promise. 
 
@@ -334,7 +352,7 @@ If it does not make sense for you to run your subtest independently, you can pau
 
 You can run HTTP requests as part of your browser tests.
 
-{{< img src="synthetics/browser_tests/recorder_http_requests2.png" alt="HTTP Request step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/http_request_2.png" alt="HTTP Request step" style="width:70%;" >}}
 
 #### Set up
 
@@ -454,6 +472,30 @@ If a variable is assigned different values along your browser test steps (for ex
 
 Some variables only compute at runtime, such as a variable from an HTTP request or a JavaScript step. For example, assume you have a `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value. To record a step using one of these variables, record a step with the actual variable value, and replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` in the step's definition before saving your test. 
 
+### Use multiple variables
+
+You can add multiple variables to your browser test recording steps.
+
+In your browser test recording, click the **+ Add Variable** button to add one or more variables to your test:
+
+  {{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="Defining a local variable from global variables" width="90%" >}}
+
+In your browser test's recorder, add a step recording, and click **Extract variables from the response(optional)** to extract and use the variables in your browser test:
+
+  {{< img src="synthetics/browser_tests/edit_test_extract_multiple_variables.png" alt="Injecting a local variable into a field during a browser recording" width="90%" >}}
+
+## Edit a recording 
+
+To edit a browser recording after it's saved:
+
+- Navigate to [Synthetics > Tests.][14]
+- Click on a previously saved browser test.
+- Click the gear icon on the top right hand corner and then click "edit recording".
+- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+
+{{< img src="synthetics/browser_tests/edit_a_recording.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -471,3 +513,4 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: https://app.datadoghq.com/synthetics/tests

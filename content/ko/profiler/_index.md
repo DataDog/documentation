@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
   tag: 블로그
   text: Datadog 지속적 프로파일러를 통해 루비(Ruby) 코드 성능 분석
-kind: 설명서
 title: 지속적 프로파일러
 ---
 

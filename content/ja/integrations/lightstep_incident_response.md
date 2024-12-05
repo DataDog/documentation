@@ -33,10 +33,9 @@ integration_id: lightstep-incident-response
 integration_title: Lightstep  Incident Response
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: lightstep_incident_response
-oauth: {}
 public_title: Lightstep  Incident Response
 short_description: Datadog のアラートと Lightstep Incident Response のアラートを同期させる
 supported_os:

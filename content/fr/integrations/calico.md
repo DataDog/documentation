@@ -40,10 +40,9 @@ integration_id: calico
 integration_title: calico
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: calico
-oauth: {}
 public_title: calico
 short_description: Calico est une solution de mise en réseau et de sécurité réseau
   pour les conteneurs.

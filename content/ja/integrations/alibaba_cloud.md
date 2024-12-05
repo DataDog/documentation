@@ -1,6 +1,7 @@
 ---
 categories:
 - cloud
+custom_kind: integration
 dependencies: []
 description: Alibaba Cloud サービスを Datadog と統合
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
@@ -15,7 +16,6 @@ integration_id: alibaba-cloud
 integration_title: Alibaba Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: alibaba_cloud
 public_title: Datadog-Alibaba Cloud インテグレーション
@@ -23,6 +23,7 @@ short_description: Alibaba Cloud サービスを Datadog と統合
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog Alibaba Cloud インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
 {{< /site-region >}}
@@ -113,7 +114,7 @@ Alibaba Cloud のイベントは、Alibaba Cloud サービスごとに収集さ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#integrations/alibaba_cloud
+[1]: https://app.datadoghq.com/integrations/alibaba_cloud
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: https://www.alibabacloud.com/help/doc-detail/60933.htm
 [4]: https://www.alibabacloud.com/help/doc-detail/25506.htm

@@ -34,7 +34,7 @@ integration_id: mysql
 integration_title: MySQL
 integration_version: 8.2.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: mysql.

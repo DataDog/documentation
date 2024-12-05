@@ -14,7 +14,7 @@ integration_id: fastly
 integration_title: Fastly
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json

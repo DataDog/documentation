@@ -1,10 +1,10 @@
 ---
-title: Pratiques recommandées pour conserver des dashboards pertinents
-kind: guide
 aliases:
-  - /fr/graphing/faq/maintain-relevant-dashboards
-  - /fr/graphing/guide/maintain-relevant-dashboards
+- /fr/graphing/faq/maintain-relevant-dashboards
+- /fr/graphing/guide/maintain-relevant-dashboards
+title: Pratiques recommandées pour conserver des dashboards pertinents
 ---
+
 Une liste de dashboards trop encombrée risque de vous empêcher de trouver le contenu qui vous intéresse et de polluer vos recherches avec des résultats obsolètes ou non pertinents. En tirant parti de la fonction de suppression groupée et des [dashboards **récemment supprimés**][1], vous pourrez supprimer tous les dashboards dont vous n'avez plus besoin en quelques étapes et annuler toute suppression accidentelle. Ce guide aborde les sujets suivants :
 
 - Règles générales pour identifier les dashboards non utilisés et les supprimer régulièrement
@@ -33,17 +33,17 @@ Cliquez sur la colonne **Popularity** pour trier vos dashboards par ordre de pop
 #### 2. Recherchez les dashboards qui possèdent un titre par défaut
 
 Vous pouvez par exemple rechercher les termes suivants :
-- “’s timeboard”
-- “'s screenboard”
-- “’s dashboard”
+- "'s timeboard"
+- "'s screenboard"
+- "'s dashboard"
 
-La plupart des dashboards correspondant à ces termes (par exemple, “Stephanie's Dashboard Thu, Jun 3, 1:41:44 pm”) ont reçu un titre par défaut, ce qui peut être indicatif d'un dashboard de test qui a été créé rapidement et qui n'a jamais été renommé. Ces dashboards peuvent probablement être supprimés sans risque, surtout s'ils sont anciens ou que leur popularité est faible. Par exemple, l'image qui suit affiche les résultats correspondant à la liste **All Custom** dont le titre contient “’s screenboard”, triés par ordre de popularité inverse.
+La plupart des dashboards correspondant à ces termes (par exemple, “Stephanie's Dashboard Thu, Jun 3, 1:41:44 pm”) ont reçu un titre par défaut, ce qui peut être indicatif d'un dashboard de test qui a été créé rapidement et qui n'a jamais été renommé. Ces dashboards peuvent probablement être supprimés sans risque, surtout s'ils sont anciens ou peu utilisés. Par exemple, l'image qui suit affiche les résultats correspondant à la liste **All Custom** dont le titre contient “’s screenboard”, triés par ordre de popularité inverse.
 
 **Datadog :** le référentiel public Datadog Miscellany (non officiel) propose un [script pour supprimer des dashboards en fonction de leur titre][4].
 
 {{< img src="dashboards/guide/screenboard_search.jpeg" alt="Rechercher des dashboards dont le titre contient ''s screenboard'" style="width:80%;">}}
 
-#### 3. Recherchez des mots-clés comme "test"
+#### 3. Recherchez des mots-clés comme « test »
 
 Recherchez des termes qui pourraient indiquer qu'un dashboard n'a été utilisé que temporairement, comme `test` ou `cloned`. Ces mots peuvent également être utilisés pour décrire des dashboards couramment utilisés, alors supprimez-les avec prudence en prenant soin de vérifier leur ancienneté ou leur popularité.
 
@@ -53,7 +53,7 @@ Si un nettoyage régulier permet de réduire l'encombrement de vos dashboards, l
 
 - Utilisez des listes personnalisées pour retrouver les dashboards dont vous avez besoin. Recherchez un mot-clé tel qu'un nom de service, puis sélectionnez plusieurs dashboards pour les ajouter à une liste.
 - Privilégiez les notebooks ou les graphiques rapides pour les analyses ponctuelles. Lorsque vous explorez une métrique ou un graphique spécifique, utilisez les [notebooks][5] (qui ne sont pas enregistrés par défaut) ou les [graphiques rapides][6] au lieu de créer un dashboard qui devra ensuite être supprimé.
-- Utilisez les [détails d'un dashboard][7] pour décrire l'objectif d'un dashboard et son fonctionnement. Votre équipe pourra ainsi mieux comprendre pourquoi un dashboard a été créé, et le dashboard pourra être utilisé par plus de personnes.
+- Utilisez les [détails d'un dashboard][7] pour décrire son objectif et son fonctionnement. Votre équipe pourra ainsi mieux comprendre pourquoi un dashboard a été créé, et le dashboard pourra être utilisé par un plus grand nombre de personnes.
 
 Vous pouvez également gérer vos dashboards en passant par l'API Dashboards, qui propose des endpoints pour effectuer des [suppressions groupées][8] et des [restaurations groupées][2].
 
@@ -66,7 +66,7 @@ Vous pouvez également gérer vos dashboards en passant par l'API Dashboards, qu
 - [Datadog Miscellany : Supprimer les anciens dashboards et monitors][3]
 - [Datadog Miscellany : Supprimer des dashboards en fonction de leur titre][4]
 
-[1]: https://docs.datadoghq.com/fr/dashboards/#restore-deleted-dashboards
+[1]: https://docs.datadoghq.com/fr/dashboards/list/#restore-deleted-dashboards
 [2]: https://docs.datadoghq.com/fr/api/latest/dashboards/#restore-deleted-dashboards
 [3]: https://github.com/DataDog/Miscellany/tree/master/remove_old_dash_monitors
 [4]: https://github.com/DataDog/Miscellany/tree/master/delete_dashboards_by_text_search

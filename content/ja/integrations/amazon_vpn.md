@@ -4,17 +4,17 @@ categories:
 - クラウド
 - ログの収集
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: AWS VPN のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
 draft: false
 git_integration_title: amazon_vpn
 has_logo: true
-integration_id: amazon-vpn
+integration_id: ''
 integration_title: AWS VPN
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_vpn
 public_title: Datadog-AWS VPN インテグレーション
@@ -22,6 +22,7 @@ short_description: AWS VPN のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS VPN を使用すると、ユーザーネットワークまたはデバイスから AWS グローバルネットワークへの安全なプライベートトンネルを確立できます。
@@ -39,7 +40,7 @@ AWS VPN を使用すると、ユーザーネットワークまたはデバイス
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `VPN` が有効になっていることを確認します。
 2. [Datadog - AWS VPN インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -65,7 +66,7 @@ AWS VPN から S3 バケットまたは CloudWatch のいずれかにログを�
 
 AWS VPN インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS VPN インテグレーションには、サービスのチェック機能は含まれません。
 

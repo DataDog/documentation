@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: Blog
   text: Surveiller vos applications Web Linux sur Azure App Service avec Datadog
-kind: documentation
 title: Azure App Service - Code Linux
 ---
 ## Présentation
@@ -58,7 +57,7 @@ Définissez ces valeurs dans la variable d'environnement `DD_START_APP`. Les exe
 Accédez à **General settings** et ajoutez ce qui suit dans le champ **Startup Command** :
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.3.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.7.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Configuration d'Azure App Service : les paramètres du stack, sous la section Configuration des paramètres au sein de l'interface Azure. Sous les champs du stack, de la version majeure et de la version mineure se trouve un champ Startup Command qui affiche la commande curl ci-dessus." style="width:100%;" >}}

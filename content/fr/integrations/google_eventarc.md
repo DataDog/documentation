@@ -12,7 +12,7 @@ integration_id: google-eventarc
 integration_title: Google Eventarc
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_eventarc
 public_title: Intégration Google Eventarc
@@ -20,11 +20,12 @@ short_description: Envoyez des alertes Datadog à vos canaux Google Eventarc.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Envoyez vos événements Datadog à [Eventarc][1] en vue de les transmettre aux services Google. Cela vous permet de lancer des workflows basés sur Eventarc à l'aide des notifications de vos monitors Datadog.
 
-### Configuration
+### Formule et utilisation
 
 1. Assurez-vous que la principale [intégration GCP][2] est installée pour chaque projet GCP qui reçoit des notifications.
 
@@ -48,21 +49,21 @@ Configurez de nouveaux canaux de notification sortante pour les monitors afin de
 
 La liste complète des ressources pouvant être ciblées est disponible dans la [documentation sur GCP][5].
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration Google Eventarc n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration Google Eventarc n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Google Eventarc n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 

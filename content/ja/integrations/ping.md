@@ -3,6 +3,7 @@ app_id: ping
 app_uuid: 841c9313-628f-4861-ad0b-2d12c37ee571
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: ネットワーク。
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10200
     source_type_name: Ping
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
 categories:
 - developer tools
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
 display_on_public_website: true
@@ -30,10 +33,8 @@ integration_id: ping
 integration_title: Ping
 integration_version: 1.0.2
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ping
-oauth: {}
 public_title: Ping
 short_description: リモートホストへの接続を監視
 supported_os:
@@ -48,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リモートホストへの接続を監視
   media: []
@@ -56,6 +58,7 @@ tile:
   title: Ping
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -81,7 +84,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
    ```shell
    # Linux
-   datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
+   sudo -u dd-agent -- datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
 
    # Windows
    agent.exe integration install -t datadog-ping==<INTEGRATION_VERSION>
@@ -93,7 +96,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
 3. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. ping のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ping.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ping.d/conf.yaml][5] を参照してください。
 
@@ -113,7 +116,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
 Ping チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "ping" >}}
 
 
@@ -142,7 +145,7 @@ Ping インテグレーションは Agent にデフォルトで含まれてい�
 
 
 [1]: https://en.wikipedia.org/wiki/Ping_%28networking_utility%29
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example

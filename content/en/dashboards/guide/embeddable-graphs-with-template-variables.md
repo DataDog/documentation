@@ -1,6 +1,5 @@
 ---
 title: Embeddable Graphs with Template Variables
-kind: guide
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
     - /dashboards/faq/embeddable-graphs-with-template-variables/

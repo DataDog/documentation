@@ -8,7 +8,6 @@ cascade:
     rank: 20
     subcategory: Guides graphiques
 disable_toc: true
-kind: guide
 private: true
 title: Guides graphiques
 ---
@@ -22,6 +21,7 @@ title: Guides graphiques
     {{< nextlink href="dashboards/guide/custom_time_frames" >}}Intervalles personnalisés{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Graphiques rapides{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/context-links" >}}Liens de contexte{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/unit-override" >}}Remplacement des unités{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Utiliser Terraform pour restreindre la modification d'un dashboard{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Graphiques intégrables avec des template variables{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Pourquoi je n'arrive pas à afficher certaines URL HTTPS dans un iFrame ?{{< /nextlink >}}

@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure パブリック IP アドレスのキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/
@@ -14,7 +15,6 @@ integration_id: azure-publicipaddress
 integration_title: Microsoft Azure パブリック IP アドレス
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_public_ip_address
 public_title: Datadog-Microsoft Azure Public IP Address インテグレーション
@@ -22,6 +22,7 @@ short_description: Azure パブリック IP アドレスのキーメトリクス
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure パブリック IP アドレスがリソースに割り当てられると、インターネットとのインバウンド通信およびアウトバウンド接続が可能になります。
@@ -44,7 +45,7 @@ Datadog Azure インテグレーションを使用して、Azure パブリック
 
 Azure Public IP Address インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Azure Public IP Address インテグレーションには、サービスのチェック機能は含まれません。
 

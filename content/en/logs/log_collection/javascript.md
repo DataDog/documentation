@@ -1,6 +1,5 @@
 ---
 title: Browser Log Collection
-kind: documentation
 aliases:
   - /logs/log_collection/web_browser
 algolia:
@@ -339,6 +338,10 @@ window.DD_LOGS.init({
 
 ## Configuration
 
+### Content Security Policy integration
+
+If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the RUM section of the CSP documentation][14] for configuration steps.
+
 ### Initialization parameters
 
 The following parameters are available to configure the Datadog browser logs SDK to send logs to Datadog:
@@ -355,20 +358,24 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `forwardReports`           | `"all"` or an Array of `"intervention"` `"deprecation"` `"csp_violation"` | No       | `[]`            | Forward reports from the [Reporting API][8] to Datadog. Use `"all"` to forward everything or an array of report types to forward only a subset.                                       |
 | `sampleRate`               | Number                                                                    | No       | `100`           | **Deprecated** - see `sessionSampleRate`.                                                                                                                                             |
 | `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs.                                                                                    |
+| `trackingConsent`          | `"granted"` or `"not-granted"`                                            | No       | `"granted"`     | Set the initial user tracking consent state. See [User Tracking Consent][15].                                                                                                         |
 | `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
-| `proxyUrl`                 | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
+| `proxy`                    | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
 | `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
 | `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.          |
 | `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
+| `sendLogsAfterSessionExpiration` | Boolean                                                             | No       |                 | Keep sending logs after the session expires.
 
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
-| Parameter                      | Type    | Required | Default | Description                                                                                                                                                  |
-| ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `trackSessionAcrossSubdomains` | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                    |
-| `useSecureSessionCookie`       | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                    |
-| `useCrossSiteSessionCookie`    | Boolean | No       | `false` | Use a secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| Parameter                              | Type    | Required | Default | Description                                                                                                                                                              |
+|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `trackSessionAcrossSubdomains`         | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                                |
+| `useSecureSessionCookie`               | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
+| `usePciIntake`                         | Boolean | No       | `false` | To forward logs to the [PCI-compliant intake][16], set to `true`. The PCI-compliant intake is only available for Datadog organizations in the US1 site. If `usePciIntake` is set to `true` and the site is not US1 (datadoghq.com), logs are sent to the default intake. |
 
 ## Usage
 
@@ -729,7 +736,7 @@ datadogLogs.createLogger('signupLogger', {
 })
 ```
 
-It can now be used in a different part of the code with:
+It can then be used in a different part of the code with:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -738,7 +745,7 @@ const signupLogger = datadogLogs.getLogger('signupLogger')
 signupLogger.info('Test sign up completed')
 ```
 
-#### CDN async
+##### CDN async
 
 For example, assume there is a `signupLogger`, defined with all the other loggers:
 
@@ -748,11 +755,11 @@ window.DD_LOGS.onReady(function () {
     level: 'info',
     handler: 'http',
     context: { env: 'staging' }
-  )
+  })
 })
 ```
 
-It can now be used in a different part of the code with:
+It can then be used in a different part of the code with:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -777,11 +784,11 @@ if (window.DD_LOGS) {
 }
 ```
 
-It can now be used in a different part of the code with:
+It can then be used in a different part of the code with:
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```
@@ -829,7 +836,7 @@ datadogLogs.clearGlobalContext()
 datadogLogs.getGlobalContext() // => {}
 ```
 
-#### CDN async
+##### CDN async
 
 For CDN async, use:
 
@@ -917,7 +924,7 @@ datadogLogs.clearUser()
 datadogLogs.getUser() // => {}
 ```
 
-#### CDN async
+##### CDN async
 
 For CDN async, use:
 
@@ -1014,7 +1021,7 @@ datadogLogs.setContext("{'env': 'staging'}")
 datadogLogs.setContextProperty('referrer', document.referrer)
 ```
 
-#### CDN async
+##### CDN async
 
 For CDN async, use:
 
@@ -1052,7 +1059,7 @@ setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
 
 Only logs with a status equal to or higher than the specified level are sent.
 
-##### NPM
+#### NPM
 
 For NPM, use:
 
@@ -1074,7 +1081,7 @@ window.DD_LOGS.onReady(function () {
 
 **Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
-##### CDN sync
+#### CDN sync
 
 For CDN sync, use:
 
@@ -1096,7 +1103,7 @@ By default, loggers created by the Datadog browser logs SDK are sending logs to 
 setHandler (handler?: 'http' | 'console' | 'silent' | Array<handler>)
 ```
 
-##### NPM
+#### NPM
 
 For NPM, use:
 
@@ -1120,7 +1127,7 @@ window.DD_LOGS.onReady(function () {
 
 **Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
-##### CDN sync
+#### CDN sync
 
 For CDN sync, use:
 
@@ -1130,6 +1137,75 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
+
+### User tracking consent
+
+To be compliant with GDPR, CCPA and similar regulations, the Logs Browser SDK lets you provide the tracking consent value at initialization.
+
+The `trackingConsent` initialization parameter can be one of the following values:
+
+1. `"granted"`: The Logs Browser SDK starts collecting data and sends it to Datadog.
+2. `"not-granted"`: The Logs Browser SDK does not collect any data.
+
+To change the tracking consent value after the Logs Browser SDK is initialized, use the `setTrackingConsent()` API call. The Logs Browser SDK changes its behavior according to the new value:
+
+* when changed from `"granted"` to `"not-granted"`, the Logs session is stopped, and data is no longer sent to Datadog.
+* when changed from `"not-granted"` to `"granted"`, a new Logs session is created if no previous session is active, and data collection resumes.
+
+This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during Logs Browser SDK initialization or by using `setTrackingConsent()`.
+
+When `setTrackingConsent()` is used before `init()`, the provided value takes precedence over the initialization parameter.
+
+#### NPM
+
+For NPM, use:
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+
+datadogLogs.init({
+    ...,
+    trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', function() {
+    datadogLogs.setTrackingConsent('granted');
+});
+```
+
+#### CDN async
+
+For CDN async, use:
+
+```javascript
+window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
+        ...,
+        trackingConsent: 'not-granted'
+    });
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_LOGS.onReady(function() {
+        window.DD_LOGS.setTrackingConsent('granted');
+    });
+});
+```
+
+#### CDN sync
+
+For CDN sync, use:
+
+```javascript
+window.DD_LOGS && window.DD_LOGS.init({
+  ...,
+  trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_LOGS && window.DD_LOGS.setTrackingConsent('granted');
+});
+```
 
 ### Access internal context
 
@@ -1141,7 +1217,7 @@ getInternalContext (startTime?: 'number' | undefined)
 
 You can optionally use `startTime` parameter to get the context of a specific time. If the parameter is omitted, the current context is returned.
 
-##### NPM
+#### NPM
 
 For NPM, use:
 
@@ -1161,7 +1237,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-##### CDN sync
+#### CDN sync
 
 For CDN sync, use:
 
@@ -1184,3 +1260,6 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [11]: https://docs.datadoghq.com/logs/log_collection/javascript/#contexts-life-cycle
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[15]: #user-tracking-consent
+[16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management

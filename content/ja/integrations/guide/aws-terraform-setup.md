@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: ブログ
   text: Datadog を Terraform で管理する
-kind: ガイド
 title: AWS と Terraform のインテグレーション
 ---
 
@@ -17,7 +16,7 @@ title: AWS と Terraform のインテグレーション
 
 {{< site-region region="us,us3,us5,eu" >}}
 
-2. 以下の例を基本テンプレートとして、Terraform の構成ファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
+2. 以下の例を基本テンプレートとして、Terraform のコンフィギュレーションファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
    * `AWS_PERMISSIONS_LIST`: Datadog AWS インテグレーションが必要とする IAM ポリシー。現在のリストは、[Datadog AWS インテグレーション][1]のドキュメントで確認できます。
    * `AWS_ACCOUNT_ID`: AWS アカウント ID。
 
@@ -67,6 +66,11 @@ title: AWS と Terraform のインテグレーション
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
    }
 
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
+   }
+
    resource "datadog_integration_aws" "sandbox" {
       account_id  = "<AWS_ACCOUNT_ID>"
       role_name   = "DatadogAWSIntegrationRole"
@@ -79,7 +83,7 @@ title: AWS と Terraform のインテグレーション
 
 {{< site-region region="ap1" >}}
 
-2. 以下の例を基本テンプレートとして、Terraform の構成ファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
+2. 以下の例を基本テンプレートとして、Terraform のコンフィギュレーションファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
    * `AWS_PERMISSIONS_LIST`: Datadog AWS インテグレーションが必要とする IAM ポリシー。現在のリストは、[Datadog AWS インテグレーション][1]のドキュメントで確認できます。
    * `AWS_ACCOUNT_ID`: AWS アカウント ID。
 

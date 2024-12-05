@@ -1,6 +1,6 @@
 ---
-title: Add event log files to the `Win32_NTLogEvent` WMI class
-kind: guide
+title: Add event log files to the Win32_NTLogEvent WMI class
+
 aliases:
   - /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
 ---

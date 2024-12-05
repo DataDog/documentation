@@ -5,6 +5,7 @@ assets:
   dashboards:
     Superwise: assets/dashboards/superwise.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: superwise.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10246
     source_type_name: Superwise
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,7 +23,9 @@ author:
   sales_email: support@superwise.ai
   support_email: support@superwise.ai
 categories:
-- モニタリング
+- インシデント
+- ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md
 display_on_public_website: true
@@ -31,31 +35,35 @@ integration_id: superwise
 integration_title: Superwise
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: superwise
-oauth: {}
 public_title: Superwise
 short_description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Incidents
+  - Category::AI/ML
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
   support: README.md#Support
   title: Superwise
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -99,7 +107,7 @@ Datadog の **Metrics Explorer** で、メトリクス `superwise.integration.te
 
 Superwise インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Superwise インテグレーションには、サービスのチェック機能は含まれません。
 

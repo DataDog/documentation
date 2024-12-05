@@ -5,6 +5,7 @@ assets:
   dashboards:
     Steadybit Chaos Engineering Activity: assets/dashboards/steadybit.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: steadybit.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10321
     source_type_name: Steadybit
 author:
   homepage: https://steadybit.com/
@@ -23,6 +25,7 @@ author:
 categories:
 - インシデント
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/steadybit/README.md
 display_on_public_website: true
@@ -32,10 +35,8 @@ integration_id: steadybit
 integration_title: Steadybit
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: steadybit
-oauth: {}
 public_title: Steadybit
 short_description: カオスエンジニアリングでシステムの信頼性を即座に向上させる
 supported_os:
@@ -72,6 +73,7 @@ tile:
   title: Steadybit
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -119,7 +121,7 @@ Steadybit Datadog 拡張機能を実行すると、Steadybit の *Landscape* タ
 
 Steadybit には、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Steadybit には、サービスのチェック機能は含まれません。
 

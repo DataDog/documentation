@@ -16,7 +16,7 @@ integration_id: google-cloud-vpn
 integration_title: Google VPN
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_vpn
 public_title: Intégration Datadog/Google VPN

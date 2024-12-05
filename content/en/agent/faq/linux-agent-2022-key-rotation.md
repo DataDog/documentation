@@ -1,6 +1,5 @@
 ---
 title: 2022 Linux Agent Key Rotation
-kind: guide
 private: true
 aliases:
   - /agent/guide/linux-agent-2022-key-rotation
@@ -169,7 +168,7 @@ With the third method, you need to explicitly install the `datadog-signing-keys`
 `datadog-signing-keys` versions before 1.1.0 do not handle the following corner cases:
 
 * On Ubuntu >= 16 and Debian >= 9, only `/usr/share/keyrings/datadog-archive-keyring.gpg` was created, but `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` was not.
-* If the APT source list file (e.g. `/etc/apt/sources.list.d/datadog.list`) does not contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT never knows about the new key. Any operations with the Datadog repository will fail after the key rotation.
+* If the APT source list file (For example, `/etc/apt/sources.list.d/datadog.list`) does not contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT never knows about the new key. Any operations with the Datadog repository will fail after the key rotation.
 
 `datadog-signing-keys` version 1.1.0 addresses this issue by creating `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when `/etc/apt/sources.list.d/datadog.list` doesn't contain the proper `signed-by` option. This ensures that the above corner case is covered as well.
 
@@ -185,7 +184,7 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
-[5]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+[5]: https://install.datadoghq.com/scripts/install_script.sh
 [6]: https://github.com/DataDog/chef-datadog
 [7]: https://github.com/DataDog/ansible-datadog
 [8]: https://github.com/DataDog/puppet-datadog-agent

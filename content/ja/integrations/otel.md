@@ -6,6 +6,7 @@ assets:
     OpenTelemetry Collector Metrics Dashboard: assets/dashboards/otel_collector_metrics_dashboard.json
     OpenTelemetry Dashboard: assets/dashboards/otel_host_metrics_dashboard.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -17,7 +18,10 @@ assets:
       prefix: otel.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 312
     source_type_name: OTel
+  monitors:
+    OpenTelemetry Refused Spans: assets/monitors/otel_refused_spans.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +31,7 @@ categories:
 - developer tools
 - ネットワーク
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/otel/README.md
 display_on_public_website: true
@@ -36,10 +41,8 @@ integration_id: otel
 integration_title: OpenTelemetry
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: otel
-oauth: {}
 public_title: OpenTelemetry
 short_description: OpenTelemetry コレクターからテレメトリーデータを取得
 supported_os:
@@ -55,6 +58,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: OpenTelemetry コレクターからテレメトリーデータを取得
   media: []
@@ -63,9 +67,13 @@ tile:
   title: OpenTelemetry
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## OpenTelemetry コレクター
-
 ## 概要
+
+<div class="alert alert-danger">
+  <strong>Important:</strong> OpenTelemetry Collector Contrib v0.95.0 introduces a breaking change that disables Trace Metrics computation in the Datadog Exporter. Follow Datadog's <a href="https://docs.datadoghq.com/opentelemetry/guide/migration/">migration guide</a> when upgrading.
+</div>
 
 OpenTelemetry は、テレメトリーデータのベンダーに依存しない標準です。Datadog は、OpenTelemetry コレクターと Datadog Agent を通じて、OpenTelemetry データの取り込みをサポートしています。このタイルでは、Datadog Exporter [OpenTelemetry コレクター Datadog エクスポーター][1]を使用して OpenTelemetry コレクターから Datadog にデータをエクスポートする方法を説明します。また、Datadog Agent で OTLP トレースを取り込む方法については、[Datadog Agent における OTLP の取り込み][2]を参照してください。
 
@@ -80,7 +88,7 @@ OpenTelemetry コレクターは、ベンダーに依存しない Agent プロ�
 [OpenTelemetry コレクターのドキュメント][3]に従って `opentelemetry-collector-contrib` ディストリビューションをインストールするか、Datadog Exporter を含むその他のディストリビューションを使用してください。
 
 このセットアップでテレメトリーデータを Datadog にエクスポートするには、Datadog Agent は**必要ありません**。Datadog Agent を使用する場合は、[Datadog Agent における OTLP の取り込み][2]を参照してください。
-### コンフィギュレーション
+### 構成
 
 OpenTelemetry コレクターからテレメトリーデータを Datadog にエクスポートするには、Datadog エクスポーターをお使いのメトリクスおよびトレースパイプラインに追加します。
 この時必要な設定は [API キー][4]のみです。
@@ -129,7 +137,7 @@ CPU とディスクのメトリクスは、macOS では利用できません。
 OpenTelemetry コレクターのログで Datadog エクスポーターが有効化されており、正常に起動したことを確認してください。
 たとえば、上記のコンフィギュレーションの場合は以下のようなログメッセージを確認することができます。
 
-``` 
+```
 Exporter is enabled.    {"component_kind": "exporter", "exporter": "datadog"}
 Exporter is starting... {"component_kind": "exporter", "component_type": "datadog", "component_name": "datadog"}
 Exporter started.   {"component_kind": "exporter", "component_type": "datadog", "component_name": "datadog"}
@@ -142,7 +150,7 @@ Everything is ready. Begin running and processing data.
 {{< get-metrics-from-git "otel" >}}
 
 
-### サービスのチェック
+### サービスチェック
 
 OpenTelemetry コレクターには、サービスのチェック機能は含まれません。
 

@@ -24,7 +24,7 @@ integration_id: cloudsmith
 integration_title: Cloudsmith
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: ccarey@cloudsmith.io
 manifest_version: 1.0.0
 metric_prefix: cloudsmith.

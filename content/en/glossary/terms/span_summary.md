@@ -1,10 +1,8 @@
 ---
-title: span tag
+title: span summary
 core_product:
   - apm
 ---
-
-A span tag is a tag that is applied to a [span][1], in the form of a key-value pair, to correlate a request with other telemetry (or to filter it in searches). Tags can be added to a single span or globally to all spans. 
 
 The span summary table in APM shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
 

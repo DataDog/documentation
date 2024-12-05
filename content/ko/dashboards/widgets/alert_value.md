@@ -1,50 +1,34 @@
 ---
 aliases:
 - /ko/graphing/widgets/alert_value/
-description: 시스템에 정의된 메트릭 모니터에서 메트릭의 현재 값을 그래프로 표시하세요.
+description: 시스템에 정의된 간단 알림 메트릭을 어떤 것이든 사용해 현재 값을 그래프로 표시할 수 있습니다.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: 경고 값 위젯
+widget_type: alert_value
 ---
 
-경고 값은 쿼리 값들이며 해당 값들은 시스템에 정의된 메트릭 모니터에 있는 메트릭의 현재 값을 표시하는 쿼리 값입니다.
+알림 값 위젯에는 간단 알림 메트릭 모니터의 현재 쿼리 값을 표시합니다. 간단 알림 모니터에는 그룹화되지 않고 값을 하나만 반환하는 메트릭 쿼리가 있습니다. 대시보드에 알림 값 위젯을 사용해 모니터 동작과 알림 상태의 개요를 확인할 수 있습니다.
 
-{{< img src="dashboards/widgets/alert_value/alert_value.png" alt="경고 값" >}}
+{{< img src="dashboards/widgets/alert_value/alert_value_2023.png" alt="디스크 공간, 높은 CPU, 구매 오류율의 상태 모니터를 나타내는 알림 값 위젯 3개" >}}
 
-## 구성
-{{< img src="dashboards/widgets/alert_value/alert_value_setup.png" alt="경고 값 구성" style="width:80%;">}}
+## 설정
+{{< img src="dashboards/widgets/alert_value/alert_value_setup_2023.png" alt="높은 CPU 모니터의 알림 값 설정 페이지" style="width:100%;">}}
 
 ### 설정
 
-1. 이전에 만든 메트릭 모니터를 선택하여 그래프로 표시하세요.
+1. 그래프로 만들 기존 메트릭 모니터를 선택하세요.
 2. 표시할 형식을 선택하세요.
-    * 원시 값
-    * 0/1/2/3 소수점
-3. 표시하려면 선택하세요.
-    * `Automatic`
-    * `/s` 초당
-    * `b` 비트
-    * `B` 바이트
-    * `Custom`
-
-### 옵션
-
-#### 타이틀
-
-`Show a Title` 확인란을 활성화하여 위젯의 커스텀 타이틀을 표시하세요.
-
-{{< img src="dashboards/widgets/options/title.png" alt="위젯 타이틀" style="width:80%;">}}
-
-선택적으로 크기와 정렬을 정의할 수 있습니다.
+    * 10진수
+    * 유닛
+    * 맞춤
+3. 그래프 이름을 입력하세요.
 
 ## API
 
-이 위젯은 **Dashboards API**와 함께 사용할 수 있습니다. 더 많은 정보를 얻으시려면 [대시보드 API 가이드][1]를 참조하세요.
-
-경고 값 위젯의 전용 [위젯 JSON 스키마 정의][2]는 다음과 같습니다:
+이 위젯을 **[대시보드 API][1]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][2]와 관해서는 다음 테이블을 참고하세요.
 
 {{< dashboards-widgets-api >}}
 

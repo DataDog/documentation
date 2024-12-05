@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self hosted Postgres
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: "/integrations/postgres/"
@@ -8,10 +7,6 @@ further_reading:
   text: "Basic Postgres Integration"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
@@ -24,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
 Prerequisites
 : Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
@@ -37,7 +32,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -49,7 +44,7 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
@@ -163,6 +158,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -223,7 +221,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        host: localhost
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
@@ -238,7 +236,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        host: localhost
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        pg_stat_statements_view: datadog.pg_stat_statements()
        pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
@@ -247,6 +245,8 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Wrap your password in single quotes if a special character is present.
 
 2. [Restart the Agent][10].
 
@@ -315,7 +315,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
-[2]: /agent/basic_agent_usage#agent-overhead
+[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html

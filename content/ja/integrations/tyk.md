@@ -5,6 +5,7 @@ assets:
   dashboards:
     Tyk Analytics Canvas: assets/dashboards/tyk_analytics_canvas.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -19,6 +20,7 @@ assets:
       prefix: tyk.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10233
     source_type_name: Tyk
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -27,6 +29,7 @@ author:
   support_email: yaara@tyk.io
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md
 display_on_public_website: true
@@ -36,10 +39,8 @@ integration_id: tyk
 integration_title: Tyk
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: tyk
-oauth: {}
 public_title: Tyk
 short_description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
 supported_os:
@@ -53,6 +54,7 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
   media: []
@@ -61,6 +63,7 @@ tile:
   title: Tyk
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -71,7 +74,7 @@ Tyk には、[Tyk API ゲートウェイ][2]からメトリクスを収集する
 
 Tyk API ゲートウェイでは、処理されるすべてのトラフィックが記録され、その情報を Datadog に送信してその関連ダッシュボードを構築します。
 
-### UDS の仕組み
+### 仕組み
 
 [Tyk pump][3] は、アプリケーションのカスタムメトリクスを書き込み、Datadog Agent にバンドルされたメトリクス集計サービスである [DogStatsD][4] へ送信することで Datadog に送信します。DogStatsD は、`Tyk-gateway` で使用されるヒストグラムメトリクスタイプを含む Datadog 固有の拡張機能を追加する StatsD プロトコルを実装します。
 
@@ -100,7 +103,7 @@ Datadog [Agent][9] は、K8s クラスター、Docker コンテナ、Mac など�
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][10]のガイドをご参照ください。変更の適用を検証するには、[Agent の status サブコマンドを実行][11]します。
 
 
-### コンフィギュレーション
+### 構成
 
 #### Tyk-pump
 Datadog pump を設定するには、pump README の [DogstatsD セクション][12]に記載された手順に従います。
@@ -173,7 +176,7 @@ Tyk インテグレーションでは、Datadog Agent にバンドルされた�
 {{< get-metrics-from-git "tyk" >}}
 
 
-### ダッシュボード  
+### ダッシュボード
 
 Datadog では、API サービスおよびその消費に関する統計データを表示するダッシュボードを作成できます。
 
@@ -187,7 +190,7 @@ Datadog では、API サービスおよびその消費に関する統計デー�
 
 Tyk インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Tyk インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -202,7 +205,7 @@ Tyk インテグレーションには、サービスのチェック機能は含�
 [5]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#dogstatsd-custom-metrics
 [6]: https://tyk.io/docs/tyk-self-managed/install/
 [7]: https://tyk.io/docs/apim/open-source/installation/
-[8]: https://app.datadoghq.com/account/settings#agent
+[8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://docs.datadoghq.com/ja/agent/
 [10]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information

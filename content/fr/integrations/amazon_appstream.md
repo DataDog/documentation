@@ -14,7 +14,7 @@ integration_id: amazon-appstream
 integration_title: "Amazon\_AppStream"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_appstream
 public_title: "Intégration Datadog/Amazon\_AppStream"

@@ -3,8 +3,9 @@ aliases:
 - /ja/security_monitoring/detection_rules/
 - /ja/cloud_siem/detection_rules/
 - /ja/security_platform/detection_rules/
+- /ja/security/security_monitoring/log_detection_rules/
 further_reading:
-- link: /cloud_siem/default_rules
+- link: /security/default_rules/#all
   tag: Documentation
   text: デフォルトの検出ルールについて
 - link: /security/notifications/
@@ -12,91 +13,112 @@ further_reading:
   text: セキュリティ通知について
 - link: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
   tag: ブログ
-  text: Datadog でアプリケーションの悪用を検出
+  text: Datadog で機能の悪用を検出
 - link: https://www.datadoghq.com/blog/impossible-travel-detection-rules/
   tag: ブログ
   text: 不可能な旅行検出ルールで不審なログイン行為を検出する
-kind: documentation
+products:
+- icon: cloud-security-management
+  name: Cloud SIEM
+  url: /security/cloud_siem/
+- icon: cloud-security-management
+  name: Cloud Security Management
+  url: /security/cloud_security_management/
+- icon: app-sec
+  name: Application Security Management
+  url: /security/application_security/
 title: 検出ルール
 ---
 
-## 概要
+{{< product-availability >}}
 
-検出ルールは、取り込んだすべてのログおよびクラウドコンフィギュレーションに適用される条件付きロジックを定義します。対象期間内に、ルールで定義された少なくとも 1 つのケースが一致した場合に Datadog でセキュリティシグナルが生成されます。
+検出ルールは、取り込んだすべてのログおよびクラウド構成に適用される条件付きロジックを定義します。対象期間内に、ルールで定義された少なくとも 1 つのケースが一致した場合にセキュリティシグナルが生成されます。これらのシグナルは、[シグナルエクスプローラー][1]で確認できます。
 
-それぞれのモニタリングオプションに、インテグレーションコンフィギュレーションによりすぐに機能する[デフォルトの検出ルール][1]があります。
+## すぐに使える検出ルール
 
-- [Cloud SIEM][2] では、ログ検出を使用して、収集したログをリアルタイムで分析します。環境に合わせて[カスタム検出ルール][3]を作成することも可能です。
+Datadog は、攻撃者の手法や構成ミスにフラグを立てるために、[すぐに使える検出ルール][2]を提供します。新しい検出ルールがリリースされると、構成に応じて、新規ルールが自動でお使いのアカウント、Application Security Management ライブラリ、および Agent にインポートされます。
 
-- [Cloud Security Management Misconfigurations][4] では、クラウド構成およびインフラストラクチャー構成検出ルールを使用して、クラウド環境の状態をスキャンします。
+すぐに使えるルールは、以下のセキュリティ製品で利用可能です。
 
-- [Cloud Security Management Threats][5] を使用して、Datadog Agent はアクティブにシステムのアクティビティを監視し、検出ルールに対して評価を行います。
+- [Cloud SIEM][3] は、ログ検出を使用して、取り込まれたログをリアルタイムで分析します。
+- Cloud Security Management (CSM):
+    - [CSM Misconfigurations][4] では、クラウド構成およびインフラストラクチャー構成検出ルールを使用して、クラウド環境の状態をスキャンします。
+    - [CSM Threats][5] は、Datadog Agent と検出ルールを使用して、システムのアクティビティを積極的に監視、評価します。
+    - [CSM Identity Risks][6] は、検出ルールを使用して、クラウドインフラストラクチャーにおける IAM ベースのリスクを検出します。
+- [Application Security Management][7] (ASM) は、Datadog [APM][8]、[Datadog Agent][9]、検出ルールを活用し、アプリケーション環境における脅威を検出します。
 
-- [Application Security Management][6] (ASM) は、Datadog [APM][7]、[Datadog Agent][8]、検出ルールを活用し、アプリケーション環境における脅威を検出します。
+## ベータ検出ルール
 
-## 検出ルールの作成と管理
+Datadog のセキュリティリサーチチームは、継続的に新しいすぐに使えるセキュリティ検出ルールを追加しています。その目的は、インテグレーションやその他の新機能のリリースとともに高品質の検出を提供することですが、そのルールを一般的に利用可能にする前に、多くの場合、大規模での検出のパフォーマンスを観察する必要があります。これにより、Datadog のセキュリティリサーチは、当社の基準を満たさない検出の機会を改善したり、非推奨にしたりする時間を得ることができます。
 
-[Detection Rules][9] ページでは、ルールの種類別にすべての検出ルールを検索することができます。ルールの有効化、無効化、編集、削除、クローン化が素早く行えます。カスタムの[検出ルール][3]を作成するには、ページの右上にある **New Rule** ボタンをクリックします。
+## カスタム検出ルール
 
-### 検出ルールの発見
+環境またはワークロードに基づいてルールをカスタマイズしたい場合もあるかもしれません。例えば、ASM を使用している場合、ビジネスが行われていない地域から機密アクションを実行するユーザーを検出する検出ルールをカスタマイズしたいと思うかもしれません。
 
-フリーテキスト検索を使うと、ルール名やクエリに含まれるテキストで検出ルールを絞り込むことができます。クエリが編集された場合、"Search" ボタンを再度クリックしなくてもクエリ結果がリアルタイムで更新されます。
+[カスタムルールを作成](#create-detection-rules)するには、デフォルトのルールを複製してコピーを編集するか、独自のルールをゼロから作成します。
 
-#### ファセットで絞り込み
+## 検出ルールの検索とフィルター
 
-左側のパネルにあるファセットを使用して、検索クエリを値によってスコープします。例えば、`log detection` や `cloud configuration` など、いくつかのルールタイプがある場合、`only` でフィルタリングすると、ルールタイプ別にルールが表示されます。
+Datadog ですぐに使える検出ルールとカスタム検出ルールを表示するには、[**Security Settings**][10] ページに移動します。ルールは、各製品 (Application Security、Cloud Security Management、Cloud SIEM) の個別のページにリストされています。
 
-{{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Datadog のログ検出やクラウド構成など、ルールタイプ別のフィルタリング" style="width:80%;" >}}
+ルールを検索およびフィルタリングするには、検索ボックスとファセットを使用して、値でクエリします。例えば、指定したルールタイプのルールのみを表示するには、ルールタイプにカーソルを合わせ、`only` を選択します。また、受信した問題を調査およびトリアージする際に、`source` や `severity` などのファセットでフィルタリングすることもできます。
 
-また、`source` や `severity` などのファセットでフィルタリングすることもでき、受信した問題の調査やトリアージに役立てることができます。カテゴリー内のすべてのファセットを検索に含めるには、パネル内の値の上にマウスカーソルを置き、**all** をクリックします。
+{{< img src="security/default_detection_rules.png" alt="デフォルトとカスタムの Cloud SIEM 検出ルールが表示された Configuration ページ" width="100%">}}
 
-**注**: デフォルトでは、すべてのファセットが選択されています。
+## 検出ルールの作成
 
-### ルール表
+カスタム検出ルールを作成するには、Detection Rules ページの右上隅にある **New Rule** ボタンをクリックします。また、[既存のデフォルトルールまたはカスタムルールを複製](#clone-a-rule)してテンプレートとして使用することもできます。
 
-ルールは、検出ルール表に表示されます。テーブルの右上にある **Sort by** オプションをクリックすると、テーブルを並べ替えることができます。たとえば、**Highest Severity** でソートすると、影響の大きい構成ミスや脅威をトリアージできます。
+詳しい手順については、以下の記事を参照してください。
 
-#### ルールの有効化・無効化
+- [Cloud SIEM][11]
+- [ASM][12]
+- [CSM Misconfigurations][13]
+- [CSM Threats][14]
 
-1 つのルールを有効または無効にするには、ルールの右側にあるスイッチを切り替えます。
+## 検出ルールの管理
+
+### ルールの有効化・無効化
+
+ルールを有効または無効にするには、ルール名の右側にあるスイッチを切り替えます。
 
 また、ルールの一括有効化、無効化も可能です。
 
 1. **Select Rules** をクリックします。
 1. 有効化または無効化したいルールを選択します。
-1. **Edit Rules** ドロップダウンをクリックします。
+1. **Edit Rules** ドロップダウンメニューをクリックします。
 1. **Enable Rules** または **Disable Rules** を選択します。
 
-#### ルールと生成されたシグナルのオプション
+### ルールの編集
 
-ルールトグルの隣にある 3 点ドットメニューをクリックし、提供されているオプション (編集、複製、削除、生成された信号の表示) のいずれかを選択します。
+すぐに使える検出ルールの場合、抑制クエリの追加または編集のみが可能です。クエリの更新、トリガーの調整、通知の管理を行うには、[デフォルトのルールを複製](#clone-a-rule)して、カスタムルールのテンプレートとして使用します。その後、[デフォルトのルールを無効にする](#enable-or-disable-rules)ことができます。
 
-- クエリの更新、トリガーの調整、通知の管理、ルール設定の調整を行う場合は、**Edit** をクリックします。
-  -  **注**: Out-of-the-box (OOTB) ルールを編集するには、まずルールを複製し、その後ルールを変更する必要があります。デフォルトのルールを編集するには、**Edit** をクリックし、ルール構成ページの一番下までスクロールします。**Clone** をクリックし、ルールを変更します。
-- ルールの複製は、既存のルールを複製して軽く設定を変更し、他の検出領域をカバーしたい場合に便利です。例えば、ログ検出ルールを複製し、**Threshold** から **Anomaly** に変更することで、同じクエリとトリガーを使用して脅威検出に新しい次元を追加することができます。
-- 削除オプションは、カスタムルールに対してのみ利用可能です。Out-of-the-box (OOTB) ルールはプラットフォームにネイティブなものなので、削除することはできません。カスタムルールを永久に削除するには、**Delete** をクリックします。OOTB ルールを無効にするには、無効化トグルをクリックします。
-- **View generated signals** をクリックすると、[シグナルエクスプローラー][6]に移動し、ルールの ID でクエリを実行できます。これは、ルールごとに複数のソースのシグナルを相関させる場合や、ルールの監査を完了させる場合に便利です。
+- デフォルトルールを編集するには、ルールの縦 3 点メニューをクリックし、**Edit default rule** を選択します。
+- カスタムルールを編集するには、ルールの縦 3 点メニューをクリックし、**Edit rule** を選択します。
 
-#### 編集アクセス権の制限
+### ルールの複製
 
-デフォルトでは、すべてのユーザーがセキュリティルールにフルアクセスできます。
+ルールを複製するには、ルールの縦 3 点メニューをクリックし、**Clone rule** を選択します。
 
-きめ細かいアクセス制御を使用して、1 つのルールを編集できる[ロール][10]を制限することができます。
-1. ルールの 3 つのドットメニューをクリックします。
-1. **Permissions** を選択します。
-1. **Restrict Access** をクリックします。
-1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. ドロップダウンを使用して、セキュリティルールを編集できる 1 つまたは複数のロール、チーム (ベータ版)、またはユーザー (ベータ版) を選択します。
-1. **Add** をクリックします。
-1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
-1. **Save** をクリックします。
-**注:** 規則の編集アクセス権を維持するために、保存する前に、少なくとも 1 つのロールのメンバーであることを含めることがシステムから要求されます。
+ルールの複製は、既存のルールを複製して軽く設定を変更し、他の検出領域をカバーしたい場合に便利です。例えば、ログ検出ルールを複製し、**Threshold** から **Anomaly** に変更することで、同じクエリとトリガーを使用して脅威検出に新しい次元を追加することができます。
 
-アクセスが制限されたルールに一般的なアクセスを戻すには、次の手順に従います。
-1. ルールの右側にある 3 つのドットメニューをクリックします。
-1. **Permissions** を選択します。
-1. **Restore Full Access** をクリックします。
-1. **保存**をクリックします。
+### ルールを削除
+
+カスタムルールを削除するには、ルールの縦 3 点メニューをクリックし、**Delete rule** を選択します。
+
+**注**: 削除できるのはカスタムルールだけです。デフォルトのルールを削除するには、[ルールを無効にする](#enable-or-disable-rules)必要があります。
+
+### 編集権限の制限
+
+{{% security-products/detection-rules-granular-access %}}
+
+### 生成されたシグナルの確認
+
+[シグナルエクスプローラー][1]でルールのセキュリティシグナルを確認するには、縦 3 点メニューをクリックし、**View generated signals** を選択します。これは、複数のソースからのシグナルをルールごとに相関させる場合や、ルールの監査を完了させる場合に便利です。
+
+### ルールを JSON としてエクスポート
+
+ルールのコピーを JSON としてエクスポートするには、ルールの縦 3 点メニューをクリックし、**Export as JSON** を選択します。
 
 ## ルール非推奨
 
@@ -106,21 +128,26 @@ title: 検出ルール
 
 1. ルールに非推奨の日付が書かれた警告が表示されています。UI では、警告が以下に表示されます。
     - シグナルサイドパネルの **Rule Details > Playbook** セクション
-    - Findings サイドパネル (CSM Misconfigurations のみ)
-    - その特定のルールの[ルールエディター](#rule-and-generated-signal-options)
-2. ルールが非推奨になると、ルールが削除されるまでに 15 か月の期間があります。これは、シグナルの保持期間が 15 か月であるためです。この間、UI で[ルールの複製](#rule-and-generated-signal-options)を行うと、ルールを再び有効にすることができます。
+    - Misconfigurations サイドパネル (CSM Misconfigurations のみ)
+    - その特定のルールの[ルールエディター][10]
+2. ルールが非推奨になると、ルールが削除されるまでに 15 か月の期間があります。これは、シグナルの保持期間が 15 か月であるためです。この間、UI で[ルールの複製](#clone-a-rule)を行うと、ルールを再び有効にすることができます。
 3. 一度削除されたルールは、複製して再度有効にすることはできません。
 
-## その他の参考資料
+## 参考資料
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/default_rules/
-[2]: /ja/security/cloud_siem/
-[3]: /ja/security/cloud_siem/log_detection_rules/
-[4]: /ja/security/cspm/
-[5]: /ja/security/cloud_workload_security/
-[6]: /ja/security/application_security/
-[7]: /ja/tracing/
-[8]: /ja/agent/
-[9]: https://app.datadoghq.com/security/configuration/rules
-[10]: /ja/account_management/rbac/
+[1]: https://app.datadoghq.com/security
+[2]: /ja/security/default_rules/
+[3]: /ja/security/cloud_siem/
+[4]: /ja/security/cloud_security_management/misconfigurations/
+[5]: /ja/security/threats/
+[6]: /ja/security/cloud_security_management/identity_risks/
+[7]: /ja/security/application_security/
+[8]: /ja/tracing/
+[9]: /ja/agent/
+[10]: https://app.datadoghq.com/security/configuration/
+[11]: /ja/security/cloud_siem/log_detection_rules/
+[12]: /ja/security/application_security/threats/custom_rules/
+[13]: /ja/security/cloud_security_management/misconfigurations/custom_rules
+[14]: /ja/security/threats/workload_security_rules?tab=host#create-custom-rules

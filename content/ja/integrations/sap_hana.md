@@ -5,6 +5,7 @@ assets:
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: sap_hana.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10076
     source_type_name: SAP HANA
 author:
   homepage: https://www.datadoghq.com
@@ -22,8 +24,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - sap
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_on_public_website: true
@@ -31,12 +34,10 @@ draft: false
 git_integration_title: sap_hana
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 2.2.1
+integration_version: 3.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sap_hana
-oauth: {}
 public_title: SAP HANA
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
 supported_os:
@@ -46,11 +47,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::SAP
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
   media: []
@@ -59,6 +61,7 @@ tile:
   title: SAP HANA
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -75,13 +78,13 @@ SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれて�
 Unix: の場合:
 
 ```text
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.21.28
 ```
 
 Windows の場合:
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install hdbcli==2.10.15
+"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install hdbcli==2.21.28
 ```
 
 #### HANA の準備
@@ -146,11 +149,32 @@ HANA テナント、シングルテナント、システムデータベースの
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### コンフィギュレーション
+### 構成
 
 1. sap_hana のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sap_hana.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
 
 2. [Agent を再起動します][6]。
+
+#### ログ収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Add this configuration block to your `sap_hana.d/conf.yaml` file to start collecting your SAP HANA logs, adjusting the `service` value to configure them for your environment:
+
+   ```yaml
+   logs:
+     - type: integration
+       source: sap_hana
+       service: sap_hana
+   ```
+
+    See the [sample sap_hana.d/conf.yaml][5] for all available configuration options.
+
+3. [Agent を再起動します][6]。
 
 ### 検証
 
@@ -166,7 +190,7 @@ HANA テナント、シングルテナント、システムデータベースの
 
 SAP HANA には、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "sap_hana" >}}
 
 
@@ -176,7 +200,7 @@ SAP HANA には、イベントは含まれません。
 
 
 [1]: https://www.sap.com/products/hana.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://pypi.org/project/hdbcli/
 [4]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example

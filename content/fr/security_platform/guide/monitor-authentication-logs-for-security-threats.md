@@ -1,6 +1,6 @@
 ---
 title: Surveillance des logs d'authentification pour identifier les menaces de sécurité
-kind: guide
+
 aliases:
   - /fr/security_monitoring/guide/monitor-authentication-logs-for-security-threats/
 further_reading:

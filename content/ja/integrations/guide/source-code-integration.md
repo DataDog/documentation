@@ -2,26 +2,39 @@
 description: APM と統合するソースコードインテグレーションを設定して、テレメトリーをリポジトリとリンクし、CI パイプラインのアーティファクトに git
   情報を埋め込み、GitHub インテグレーションを使用してインラインコードスニペットを生成します。
 further_reading:
-- link: https://docs.datadoghq.com/integrations/github/
+- link: /integrations/github/
   tag: ドキュメント
   text: GitHub インテグレーションについて
-- link: https://docs.datadoghq.com/tracing/error_tracking/
+- link: /tracing/error_tracking/
   tag: ドキュメント
   text: バックエンドサービスのエラー追跡について
-- link: https://docs.datadoghq.com/profiler/
+- link: /profiler/
   tag: ドキュメント
   text: Continuous Profiler について
-kind: ガイド
+- link: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+  tag: ドキュメント
+  text: サーバーレスモニタリングについて
+- link: /tests/developer_workflows/
+  tag: ドキュメント
+  text: Test Optimization について
+- link: /code_analysis/
+  tag: ドキュメント
+  text: Code Analysis について
+- link: /security/application_security/
+  tag: ドキュメント
+  text: Application Security Monitoring について
+- link: /logs/error_tracking/
+  tag: ドキュメント
+  text: ログの Error Tracking について
+- link: https://www.datadoghq.com/blog/live-debugging/
+  tag: ブログ
+  text: Datadog Live Debugging で本番環境のバグを効率的に修正
 title: Datadog ソースコードインテグレーション
 ---
 
 ## 概要
 
-<div class="alert alert-info">
-ソースコードインテグレーションは以下をサポートします:</br></br>言語:<ul><li>Go</li><li>Java</li><li>JavaScript (トランスパイルされた JavaScript はサポートしていません)</li><li>Python</li><li>Ruby</li></ul></br>Git プロバイダー:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> セルフホストインスタンスやプライベート URL はサポートされていません。
-</div>
-
-Datadog のソースコードインテグレーションは、GitHub、GitLab、Bitbucket、Azure DevOps でホストされている Git リポジトリとテレメトリーを接続することが可能です。[ソースコードインテグレーション][7]を有効にすると、ソースコードの関連行に素早くアクセスして、スタックトレース、スロープロファイル、その他の問題をデバッグすることができます。
+Datadog のソースコードインテグレーションを使って、テレメトリーを Git リポジトリと連携させ、関連するソースコード行にアクセスしてスタックトレースやスロープロファイルなどの問題をデバッグできます。
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Java RuntimeException のインラインコードスニペットと GitHub でコードを見るためのボタン" style="width:100%;">}}
 
@@ -32,113 +45,354 @@ Datadog Agent v7.35.0 以降が必要です。
 
 [APM][6] をすでに設定している場合は、[**Integrations** > **Link Source Code**][7] に移動し、バックエンドサービスのソースコードインテグレーションを構成してください。
 
-## アクティブコミットをリンクさせる
+## テレメトリーに Git 情報をタグ付け
 
-デプロイされたアーティファクトに[テレメトリーのタグ付け](#tag-your-telemetry)または [git 情報の埋め込み](#embed-git-information-in-your-artifacts-on-ci)を行うことでアクティブコミットをリンクさせることができます。
+テレメトリーには、実行中のアプリケーションのバージョンを特定のリポジトリやコミットと結びつける Git 情報をタグ付けする必要があります。
 
-### テレメトリーのタグ付け
+サポートされている言語については、Datadog はデプロイされたアーティファクトに [Git 情報を埋め込む](#embed-git-information-in-your-build-artifacts)ことを推奨しています。この情報は [Datadog トレーシングライブラリ][9]によって自動的に抽出されます。
 
-データを特定のコミットにリンクさせるには、テレメトリーに `git.commit.sha` と `git.repository_url` タグを付けます。`git.repository_url` タグにプロトコルが含まれていないことを確認してください。例えば、リポジトリの URL が `https://github.com/example_repo` である場合、`git.repository_url` タグの値は `github.com/example_repo` となります。
+その他の言語や構成については、自身で[テレメトリータギングを構成する](#configure-telemetry-tagging)ことができます。
 
-{{< tabs >}}
-{{% tab "Docker Runtime" %}}
+### ビルドアーティファクトに Git 情報を埋め込む
 
-<div class="alert alert-warning">
-この方法は、Docker、または containerd >= 1.5.6 を必要とします。AWS Fargate 上で動作するコンテナには対応していません。
-その他のコンテナ設定については、<a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> タブを参照してください。
-</div>
-
-コンテナでアプリを実行している場合、Datadog はイメージの Docker ラベルから直接ソースコード情報を抽出することができます。ビルド時に、[オープンコンテナスタンダード][1]に従って、git commit SHA とリポジトリ URL を Docker ラベルとして追加します。
-
-```
-docker build . \
-  -t my-application \
-  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
-  --label org.opencontainers.image.source=git-provider.example/me/my-repo
-```
-
-[1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-Kubernetes を使用している場合は、[Datadog のタグオートディスカバリー][1]を使用してデプロイされたポッドにポッドアノテーションを付けます。
-
-```
-ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.repository_url": "git-provider.example/me/my-repo"}'
-```
-
-`git.commit.sha` と `git.repository_url` はテレメトリーでタグ付けされています。
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
-{{% /tab %}}
-{{% tab "サーバーレス" %}}
-
-Datadog は、[Serverless Monitoring for AWS Lambda 設定][4]に従って、サーバーレスアプリケーションからソースコード情報を直接抽出することができます。
-
-| APM サーバーレスの設定                | 方法の説明                                                                                                                                                                                                          |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Datadog サーバーレスフレームワークプラグイン | Datadog Serverless Plugin][1] を使用してサーバーレスアプリケーションのインスツルメンテーションを行う場合は、serverless-plugin-datadog `version >= 5.18.0` を使用します。                                                                         |
-| datadog-cdk-constructs              | サーバーレスアプリケーションのインスツルメンテーションに [Datadog CDK Construct][2] を使用する場合、AWS CDK v1 では datadog-cdk-constructs `version >= 0.8.5`、AWS CDK v2 では datadog-cdk-constructs-v2 `version >= 1.4.0` を使用します。 |
-| datadog-ci                          | [Datadog CLI クライアント][3]を使用してサーバーレスアプリケーションのインスツルメンテーションを行う場合は、datadog-ci `version >= 2.4.1` を使用します。CLI ツールは、コードリポジトリと同じディレクトリで実行する必要があります。                        |
-
-[1]: /ja/serverless/libraries_integrations/plugin/
-[2]: /ja/serverless/libraries_integrations/cdk/
-[3]: https://www.npmjs.com/package/@datadog/datadog-ci
-[4]: /ja/serverless/aws_lambda/configuration/
-
-{{% /tab %}}
-{{% tab "Host" %}}
-
-トレース、スパン、プロファイルに `git.commit.sha` と `git.repository_url` というタグを付けるには、環境変数 `DD_TAGS` でトレーサーを構成します。
-
-```
-export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-provider.example/me/my-repo"
-./my-application start
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Datadog はリポジトリの URL、現在のブランチのコミット SHA、追跡されたファイルパスのリストをキャプチャするだけで、ユーザーコードを取り込んだり保存したりすることはありません。
-
-### git 情報を CI のアーティファクトに埋め込む
-
-リポジトリ URL やコミットハッシュなどの git 情報をアーティファクトに埋め込むことができます。[Datadog トレーシングライブラリ][9]はこの情報を使って、アクティブコミットを APM サービスに自動的にリンクさせます。
+リポジトリの URL とコミットハッシュをビルドアーティファクトに埋め込むことができます。[Datadog トレーシングライブラリ][9]はこの情報を使用して、APM サービスのテレメトリーに適切なタグを自動的に追加します。
 
 git 情報の埋め込みに対応している言語を、次の中から 1 つ選択します。
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Go はバージョン 1.18 からバイナリに[バージョン管理情報を埋め込む][1]ようになりました。
+Go クライアントライブラリのバージョン 1.48.0 以降が必要です。
 
-サービスが以下の要件をすべて満たしていることを確認します。
+#### コンテナ
 
-* Go >= 1.18 のバージョンを使用している。
-* Datadog Go Tracer >= 1.48.0 のバージョンを使用している。
-* アプリケーションは `go.mod` を使ってモジュールとしてビルドされました。モジュールパスはコードリポジトリの URL です。
+Docker コンテナを使用している場合、Docker を使用する、Datadog トレーシングライブラリを使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 3 つのオプションがあります。
 
-[1]: https://tip.golang.org/doc/go1.18
+##### オプション 1: Docker
+
+{{% sci-docker %}}
+
+##### オプション 2: Datadog トレーシングライブラリ
+
+{{% sci-dd-tracing-library %}}
+
+##### オプション 3: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### サーバーレス
+
+サーバーレスを使用している場合、サーバーレスアプリケーションのセットアップに応じて 3 つのオプションがあります。
+
+##### オプション 1: Datadog ツール
+
+{{% sci-dd-serverless %}}
+
+##### オプション 2: Datadog トレーシングライブラリ
+
+{{% sci-dd-tracing-library %}}
+
+##### オプション 3: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### ホスト
+
+ホストを使用している場合、2 つのオプションがあります。
+
+##### オプション 1: Datadog トレーシングライブラリ
+
+{{% sci-dd-tracing-library %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+[101]: https://tip.golang.org/doc/go1.18
+[102]: https://www.npmjs.com/package/@datadog/datadog-ci
+[103]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/plugin/
+[104]: https://github.com/DataDog/datadog-cdk-constructs
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+<div class="alert alert-info">Python クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
+
+#### コンテナ
+
+Docker コンテナを使用している場合、Docker を使用する、Datadog トレーシングライブラリを使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 3 つのオプションがあります。
+
+##### オプション 1: Docker
+
+{{% sci-docker %}}
+
+##### オプション 2: Setuptools または Unified Python プロジェクト設定ファイル
+
+{{% sci-dd-setuptools-unified-python %}}
+
+##### オプション 3: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+[101]: https://github.com/DataDog/dd-trace-go
+[102]: https://github.com/DataDog/hatch-datadog-build-metadata#readme
+
+#### サーバーレス
+
+サーバーレスを使用している場合、サーバーレスアプリケーションのセットアップに応じて 3 つのオプションがあります。
+
+##### オプション 1: Datadog ツール
+
+{{% sci-dd-serverless %}}
+
+##### オプション 2: Setuptools または Unified Python プロジェクト設定ファイル
+
+{{% sci-dd-setuptools-unified-python %}}
+
+##### オプション 3: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### ホスト
+
+ホストを使用している場合、2 つのオプションがあります。
+
+##### オプション 1: Setuptools または Unified Python プロジェクト設定ファイル
+
+{{% sci-dd-setuptools-unified-python %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+<div class="alert alert-info">.NET クライアントライブラリのバージョン 2.24.1 以降が必要です。</div>
+
+まず、`.pdb` ファイルが .NET アセンブリ (`.dll` または `.exe`) と同じフォルダにデプロイされていることを確認してください。
+その後、特定のデプロイメントモデルに応じて、残りの手順に従ってください。
+
+#### コンテナ
+
+Docker コンテナを使用しえいる場合、Docker を使用する、Microsoft SourceLink を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 3 つのオプションがあります。
+
+##### オプション 1: Docker
+
+{{% sci-docker %}}
+
+##### オプション 2: Microsoft SourceLink
+
+{{% sci-microsoft-sourcelink %}}
+
+##### オプション 3: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### サーバーレス
+
+サーバーレスを使用している場合、サーバーレスアプリケーションのセットアップに応じて 3 つのオプションがあります。
+
+##### オプション 1: Datadog ツール
+
+{{% sci-dd-serverless %}}
+
+##### オプション 2: Microsoft SourceLink
+
+{{% sci-microsoft-sourcelink %}}
+
+##### オプション 3: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### ホスト
+
+ホストを使用している場合、Microsoft SourceLink を使用するか、`DD_GIT_*` 環境変数でアプリケーションを構成するかの 2 つのオプションがあります。
+
+##### オプション 1: Microsoft SourceLink
+
+{{% sci-microsoft-sourcelink %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+<div class="alert alert-info">Node.js クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
+
+#### コンテナ
+
+Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
+
+##### オプション 1: Docker
+
+{{% sci-docker %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### サーバーレス
+
+サーバーレスを使用している場合、サーバーレスアプリケーションのセットアップに応じて 2 つのオプションがあります。
+
+##### オプション 1: Datadog ツール
+
+{{% sci-dd-serverless %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### ホスト
+
+ホストを使用している場合、`DD_GIT_*` 環境変数でアプリケーションを構成します。
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+<div class="alert alert-info">Ruby クライアントライブラリのバージョン 1.6.0 以降が必要です。</div>
+
+#### コンテナ
+
+Docker コンテナを使用している場合、Docker を使用する、または `DD_TAGS` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
+
+##### オプション 1: Docker
+
+{{% sci-docker-ddtags %}}
+
+##### オプション 2: `DD_TAGS` 環境変数
+
+{{% sci-dd-tags-env-variable %}}
+
+#### サーバーレス
+
+サーバーレスを使用している場合、サーバーレスアプリケーションのセットアップに応じて 2 つのオプションがあります。
+
+##### オプション 1: Datadog ツール
+
+{{% sci-dd-serverless %}}
+
+##### オプション 2: `DD_TAGS` 環境変数
+
+{{% sci-dd-tags-env-variable %}}
+
+#### ホスト
+
+ホストを使用している場合、`DD_TAGS` 環境変数でアプリケーションを構成します。
+
+{{% sci-dd-tags-env-variable %}}
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+<div class="alert alert-info">Java クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
+
+Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
+
+##### オプション 1: Docker
+
+{{% sci-docker %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### サーバーレス
+
+サーバーレスを使用している場合、サーバーレスアプリケーションのセットアップに応じて 2 つのオプションがあります。
+
+##### オプション 1: Datadog ツール
+
+{{% sci-dd-serverless %}}
+
+##### オプション 2: `DD_GIT_*` 環境変数
+
+{{% sci-dd-git-env-variables %}}
+
+#### ホスト
+
+ホストを使用している場合、`DD_GIT_*` 環境変数でアプリケーションを構成します。
+
+{{% sci-dd-git-env-variables %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
-## リポジトリの構成
+### Docker コンテナ内でのビルド
+
+ビルドプロセスが Docker コンテナ内の CI で実行される場合は、ビルドが Git 情報にアクセスできるように以下の手順を実行します。
+
+1. 次のテキストを `.dockerignore` ファイルに追加します。これにより、ビルドプロセスが `.git` フォルダのサブセットにアクセスできるようになり、git のコミットハッシュとリポジトリの URL を特定できるようになります。
+
+   ```
+   !.git/HEAD
+   !.git/config
+   !.git/refs
+   ```
+
+2. 以下のコードを `Dockerfile` に追加してください。実際のビルドが実行される前に配置されていることを確認してください。
+
+   ```
+   COPY .git ./.git
+   ```
+
+### テレメトリータギングの構成
+
+サポートされていない言語の場合、`git.commit.sha` タグと `git.repository_url` タグを使用してデータを特定のコミットにリンクします。`git.repository_url` タグにプロトコルが含まれないことを確認してください。例えば、リポジトリの URL が `https://github.com/example/repo` の場合、`git.repository_url` タグの値は `github.com/example/repo` となります。
+
+## リポジトリのメタデータを同期
+
+テレメトリーとソースコードをリンクさせるには、リポジトリのメタデータを Datadog と同期させる必要があります。Datadog はリポジトリ内のファイルの実際の内容は保存せず、Git のコミットオブジェクトとツリーオブジェクトのみを保存します。
+
+### Git プロバイダー
+
+ソースコードインテグレーションは、以下の Git プロバイダーをサポートしています。
+
+| プロバイダー | Context Links Support | Code Snippets Support |
+|---|---|---|
+| GitHub SaaS (github.com) | はい | はい |
+| GitHub Enterprise Server | はい | はい |
+| GitLab SaaS (gitlab.com) | はい | はい |
+| GitLab self-managed | はい | いいえ |
+| Bitbucket | はい | いいえ |
+| Azure DevOps サービス | はい | いいえ |
+| Azure DevOps Server | はい | いいえ |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-GitHub SaaS ユーザーの場合、テレメトリーをソースコードにリンクさせるために、Datadog の [GitHub インテグレーション][1]を [GitHub インテグレーションタイル][2]にインストールします。インテグレーションタイルで権限を指定する際、**Contents** に対して Datadog の読み取り権限を有効にしてください。
+Datadog の [GitHub インテグレーション][101]を [GitHub インテグレーションタイル][102]にインストールして、リポジトリのメタデータを Datadog が自動的に同期できるようにします。インテグレーションタイルで権限を指定する場合、少なくとも **Contents** の **Read** 権限を選択してください。
 
-GitHub とのインテグレーションを設定することで、**エラー追跡**にインラインコードスニペットを表示することができます。詳しくは、[インラインソースコード](#inline-source-code)をご覧ください。
+GitHub インテグレーションを設定することで、[**Error Tracking**][103]、[**Continuous Profiler**][104]、[**Serverless Monitoring**][105]、[**CI Visibility**][106]、[**Application Security Monitoring**][107] でインラインコードスニペットを確認することもできます。
 
-[1]: https://docs.datadoghq.com/ja/integrations/github/
-[2]: https://app.datadoghq.com/integrations/github/
+[101]: https://docs.datadoghq.com/ja/integrations/github/
+[102]: https://app.datadoghq.com/integrations/github/
+[103]: /ja/logs/error_tracking/backend/?tab=serilog#setup
+[104]: /ja/integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[105]: /ja/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[106]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[107]: /ja/security/application_security/
+
 {{% /tab %}}
-{{% tab "その他の Git プロバイダー" %}}
+{{% tab "GitLab" %}}
 
-テレメトリーをソースコードにリンクさせるために、Datadog は [`datadog-ci git-metadata upload`][1] コマンドで Git リポジトリから全てのコミット SHA についてメタデータを収集します。
+<div class="alert alert-warning">
+セルフマネージド GitLab インスタンスからのリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
+</div>
+
+テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][2] コマンドでアップロードします。`datadog-ci v2.10.0` 以降が必要です。
 
 Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
+
+このコマンドは、Datadog と同期する必要があるコミットごとに実行します。
+
+[gitlab.com][1] を使用している場合、これにより [**Error Tracking**][3]、[**Continuous Profiler**][4]、[**Serverless Monitoring**][5]、[**CI Visibility**][6]、および [**Application Security Monitoring**][7] でインラインコードスニペットを確認することができます。
 
 ### 検証
 
@@ -147,9 +401,48 @@ Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、
 以下のような出力が期待できます。
 
 ```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:my-org/my-repository.git.
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
+```
+
+[1]: https://gitlab.com
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[3]: /ja/logs/error_tracking/backend/?tab=serilog#setup
+[4]: /ja/integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[5]: /ja/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[6]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[7]: /ja/security/application_security/
+
+{{% /tab %}}
+{{% tab "その他の Git プロバイダー" %}}
+
+<div class="alert alert-warning">
+セルフホストインスタンスまたはプライベート URL 上のリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
+</div>
+
+テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][1] コマンドでアップロードします。`datadog-ci v2.10.0` 以降が必要です。
+
+Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
+
+このコマンドは、Datadog と同期する必要があるコミットごとに実行します。
+
+### 検証
+
+データが収集されていることを確認するために、CI パイプラインで `datadog-ci git-metadata upload` を実行します。
+
+以下のような出力が期待できます。
+
+```
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
+180 tracked file paths will be reported.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
@@ -162,13 +455,15 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 {{< tabs >}}
 {{% tab "エラー追跡" %}}
-トレースは GitHub のソースリポジトリの[エラー追跡][1]で直接アクセスできます。
+[エラー追跡][1]でスタックフレームからソースリポジトリへのリンクを見ることができます。
 
 1. [**APM** > **Error Tracking**][2] の順に移動します。
 2. 課題をクリックします。右側に **Issue Details** パネルが表示されます。
 3. **Latest Event** の下で、フレームの右側にある **View** ボタンをクリックするか、**View file**、**View Git blame**、**View commit** を選択すると、ソースコード管理ツールにリダイレクトされます。
 
-{{< img src="integrations/guide/source_code_integration/links-to-git-error-full.png" alt="エラー追跡のエラースタックトレースの右側に、3 つのオプション (view file、view blame、view commit) を持つビューリポジトリボタンがあります" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="Error Tracking のエラースタックトレースの右側に表示される、3 つのオプション (ファイルの表示、注釈の表示、コミットの表示) を備えたリポジトリの表示ボタンと、スタックトレース内のインラインコードスニペット" style="width:100%;">}}
+
+GitHub インテグレーションを使用している場合、または GitLab SaaS インスタンス (gitlab.com) でリポジトリをホストしている場合は、スタックフレームの **Connect to preview** をクリックします。スタックトレースでインラインコードスニペットを直接見ることができます。
 
 [1]: /ja/tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
@@ -176,31 +471,86 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-トレースは、[Continuous Profiler][1] で GitHub 上のソースリポジトリに直接アクセスすることができます。
+[Continuous Profiler][1] では、プロファイルフレームのソースコードプレビューを見ることができます。
 
 1. [**APM** > **Profile Search**][2] の順に移動します。
-2. プロファイルをクリックし、フレームグラフのメソッドにカーソルを合わせます。右側に **More actions** というラベルの付いたケバブアイコンが表示されます。
+2. フレームグラフのメソッドにカーソルを合わせます。
+3. 必要であれば、`Opt` または `Alt` を押してプレビューを有効にします。
+
+{{< img src="integration/guide/source_code_integration/profiler-source-code-preview.png" alt="Continuous Profiler のソースコードプレビュー" style="width:100%;">}}
+
+プロファイルフレームからソースリポジトリへのリンクも表示できます。これは、行、メソッド、ファイルごとに分割されたプロファイルでサポートされています。
+
+1. [**APM** > **Profile Search**][2] の順に移動します。
+2. フレームグラフのメソッドにカーソルを合わせます。右側に **More actions** というラベルのついたケバブアイコンが表示されます。
 3. *More actions** > **View in repo** をクリックし、トレースをソースコードリポジトリで開きます。
 
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Continuous Profiler から GitHub へのリンク" style="width:100%;">}}
 
-[1]: /ja/profiler/search_profiles/
+[1]: /ja/profiler/
 [2]: https://app.datadoghq.com/profiling/search
 {{% /tab %}}
+{{% tab "Serverless Monitoring" %}}
+
+Lambda 関数の関連するスタックトレースのエラーからソースリポジトリへのリンクを **Serverless Monitoring** で確認できます。
+
+1. [**Infrastructure** > **Serverless**][101] に移動し、**AWS** タブをクリックします。
+2. Lambda 関数をクリックし、関連するスタックトレースを持つ呼び出しの **Open Trace** ボタンをクリックします。
+3. **View Code** をクリックして、ソースコードリポジトリでエラーを開きます。
+
+GitHub インテグレーションを使用している場合、エラーフレームで **Connect to preview** をクリックします。Lambda 関数のスタックトレースでインラインコードスニペットを直接見ることができます。
+
+{{< img src="integration/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Serverless Monitoring から GitHub へのリンク" video="true" >}}
+
+[101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
+
+{{% /tab %}}
+{{% tab "Test Optimization" %}}
+
+失敗したテスト実行からソースリポジトリへのリンクは、**Test Optimization** で確認できます。
+
+1. [**Software Delivery** > **Test Optimization** > **Test Runs**][101] に移動し、失敗したテスト実行を選択します。
+2. **View on GitHub** ボタンをクリックして、テストをソースコードリポジトリで開きます。
+
+{{< img src="integration/guide/source_code_integration/test_run_blurred.png" alt="CI Visibility Explorer から GitHub へのリンク" style="width:100%;">}}
+
+詳細は [Datadog で開発者のワークフローを強化する][102]を参照してください。
+
+[101]: https://app.datadoghq.com/ci/test-runs
+[102]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
+
+{{% /tab %}}
+{{% tab "Code Analysis" %}}
+
+失敗した Static Analysis と Software Composition Analysis のスキャンからソースリポジトリへのリンクは、**Code Analysis** で確認できます。
+
+1. [**Software Delivery** > **Code Analysis**][101] に移動し、リポジトリを選択します。
+2. **Code Vulnerabilities** または **Code Quality** ビューで、コードの脆弱性または違反をクリックします。**Details** セクションで、**View Code** ボタンをクリックして、フラグが付けられたコードをソースコードリポジトリで開きます。
+
+{{< img src="integration/guide/source_code_integration/code-analysis-scan.png" alt="Code Analysis Code Vulnerabilities ビューから GitHub へのリンク" style="width:100%;">}}
+
+詳細については、[Code Analysis のドキュメント][102]を参照してください。
+
+[101]: https://app.datadoghq.com/ci/code-analysis
+[102]: /ja/code_analysis/
+
+{{% /tab %}}
+{{% tab "Application Security Monitoring" %}}
+
+セキュリティシグナルの関連するスタックトレースのエラーからソースリポジトリへのリンクは、**Application Security Monitoring** で確認できます。
+
+1. [**Security** > **Application Security**][101] に移動し、セキュリティシグナルを選択します。
+2. **Related Signals** タブの **Traces** セクションまでスクロールダウンし、関連するスタックトレースをクリックします。
+3. **View Code** をクリックして、ソースコードリポジトリでエラーを開きます。
+
+GitHub インテグレーションを使用している場合、エラーフレームで **Connect to preview** をクリックします。インラインコードスニペットをセキュリティシグナルのスタックトレースで直接見ることができます。
+
+{{< img src="integration/guide/source_code_integration/asm-signal-trace-blur.png" alt="Application Security Monitoring から GitHub へのリンク" style="width:100%;">}}
+
+[101]: https://app.datadoghq.com/security/appsec
+
+{{% /tab %}}
 {{< /tabs >}}
-
-### インラインソースコード
-
-GitHub SaaS ユーザーの場合、Datadog の [GitHub インテグレーション][2]をインストールすると、[エラー追跡][8]のスタックトレースに GitHub リポジトリからコードスニペットを直接インラインで表示することができます。インテグレーションタイルで権限を指定する際、**Contents** に対して Datadog の読み取り権限を有効にしてください。
-
-1. [**APM** > **Error Tracking**][1] の順に移動します。
-2. 課題をクリックします。右側に **Issue Details** パネルが表示されます。
-3. **Connect to Preview** と **Authorize** をクリックして、エラーを含むソースコードスニペットにアクセスします。
-4. **Latest Event** の下で、フレームの右側にある **View Code** ボタンをクリックするか、**View file**、**View Git blame**、**View commit** を選択すると、ソースコード管理ツールにリダイレクトされます。
-
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="スタックトレース内のインラインコードスニペット" style="width:100%;">}}
-
-組織用の GitHub アプリをインストールするには、組織のオーナーであるか、リポジトリの管理者権限が必要です。また、個人の GitHub アカウントに GitHub アプリをインストールすることも可能です。詳しくは、[GitHub Apps & OAuth Apps][3] をご覧ください。
 
 ## その他の参考資料
 

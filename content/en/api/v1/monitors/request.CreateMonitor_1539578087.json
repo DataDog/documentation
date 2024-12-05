@@ -8,7 +8,6 @@
       "critical": 0.5
     },
     "notify_audit": false,
-    "on_missing_data": "default",
     "include_tags": false,
     "scheduling_options": {
       "evaluation_window": {

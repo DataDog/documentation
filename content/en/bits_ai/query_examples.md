@@ -1,65 +1,72 @@
 ---
 title: Example Natural Language Queries
-kind: guide
 disable_toc: false
-private: true
-is_beta: true
+further_reading:
+- link: "bits_ai/"
+  tag: "Documentation"
+  text: "Bits AI Overview"
+- link: "bits_ai/getting_started"
+  tag: "Documentation"
+  text: "Get Started Using Bits AI"
+- link: bits_ai/managing_incidents/"
+  tag: "Documentation"
+  text: "Managing Incidents"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Bits AI is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
+## Overview
 
-{{< whatsnext desc="For instructions on running natural language queries in Datadog, see:">}}
-    {{< nextlink href="bits_ai/getting_started/#in-the-chat-panel" >}}Querying in the chat panel{{< /nextlink >}}
-    {{< nextlink href="bits_ai/getting_started/#in-a-search-bar" >}}Querying in a search bar{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
+Natural language querying is in Preview. Fill out this form to join the wait list.
+{{< /beta-callout >}} 
+
+Bits AI enables natural language querying for service health and ownership of your services, and allows for retrieval of related Datadog resources. You can inquire about on-call personnel, dashboards, service status, and dependencies using natural language questions. In this guide, see example queries for:
+- [Logs](#logs)
+- [APM traces](#apm-traces)
+- [Infrastructure data (DDSQL Editor)](#infrastructure-data-ddsql-editor)
+- [Cloud cost](#cloud-cost)
+- [RUM](#rum)
 
 ## Logs
-You can query your logs in natural language from the Logs Explorer search bar.
 
 `Find errors in AWS CloudTrail where a user is assuming a different user's role`:
-{{< img src="bits_ai/cloudtrail-user-role-errors.png" alt="Query result for user role changes" style="width:100%;">}}
+{{< img src="bits_ai/query_examples/cloudtrail-user-role-errors.png" alt="Query result for user role changes" style="width:90%;">}}
 
 `Create a pie chart of error logs by service`:
-{{< img src="bits_ai/logs-pie-chart.png" alt="Query result for a pie chart of error logs by service" style="width:100%;">}}
+{{< img src="bits_ai/query_examples/logs-pie-chart.png" alt="Query result for a pie chart of error logs by service" style="width:90%;">}}
 
 `Show me patterns of errors for users checking out`:
-{{< img src="bits_ai/checkout-error-patterns.png" alt="Query result for user checkout errors" style="width:100%;">}}
+{{< img src="bits_ai/query_examples/checkout-error-patterns.png" alt="Query result for user checkout errors" style="width:90%;">}}
 
 ## APM traces
 
-To query APM traces, use the chat panel.
-
 `Show me traces for web-store that are slower than 1s`:
-{{< img src="bits_ai/slow-web-store-traces.png" alt="Query result for slow traces" style="width:100%;">}}
+{{< img src="bits_ai/query_examples/slow-web-store-traces.png" alt="Query result for slow traces" style="width:90%;">}}
 
-## Infrastructure data (Inventories SQL)
+## Infrastructure data (DDSQL Editor)
 
-<div class="alert alert-info">Bits AI includes access to Inventories SQL, which is in private beta.</div>
+<div class="alert alert-info">Bits AI includes access to [DDSQL Editor][1], which is in Preview.</div>
 
-Infrastructure resource data can be queried in natural language from the search bar of [Inventories SQL][3], a centralized interface for infrastructure resource data. You can also use the chat panel to query infrastructure data from anywhere in Datadog.
+Most Common Instance Types:
+{{< img src="ddsql_editor/query-ui-overview.png" alt="Query result for most common instance types" style="width:90%;">}}
 
-`How many hosts am I running by availability zone?`:
-{{< img src="bits_ai/hosts-by-az.png" alt="Query result for host count by availability zone" style="width:100%;">}}
-
-`Show me the security groups open to the Internet`:
-{{< img src="bits_ai/open-security-groups.png" alt="Query result for exposed security groups" style="width:100%;">}}
+To learn more about querying infrastructure resource data in DDSQL Editor, see this [page][2]. 
 
 ## Cloud cost
 
-Natural language querying of cloud cost is available through the in-product search bar or the chat panel.
-
 `Show me how much each team spends on the web-store service`:
-{{< img src="bits_ai/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:100%;">}}
+{{< img src="bits_ai/query_examples/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:90%;">}}
 
 `AWS products with >5% increase in costs`:
-{{< img src="bits_ai/aws-product-cost-increase.png" alt="Query result for AWS products with an increase in costs" style="width:100%;">}}
+{{< img src="bits_ai/query_examples/aws-product-cost-increase.png" alt="Query result for AWS products with an increase in costs" style="width:90%;">}}
 
-{{< whatsnext desc="Additional Bits AI documentation:">}}
-    {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
-    {{< nextlink href="bits_ai/getting_started" >}}Getting Started{{< /nextlink >}}
-    {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
-{{< /whatsnext >}}
+## RUM
 
-[3]: https://app.datadoghq.com/inventories/sql
+`Crashes in the iOS app over the past 1 week`:
+{{< img src="bits_ai/query_examples/rum_ios_crashes_query.png" alt="Query result for iOS app crashes" style="width:90%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/ddsql/editor
+[2]: https://docs.datadoghq.com/ddsql_editor/

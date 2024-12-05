@@ -1,6 +1,6 @@
 ---
-title: Manually Adding The Browser Test Chrome Extension To Internal Applications Stores
-kind: guide
+title: Manually Add The Chrome Extension For Your Browser Tests
+
 further_reading:
     - link: 'https://www.datadoghq.com/blog/browser-tests/'
       tag: 'Blog'

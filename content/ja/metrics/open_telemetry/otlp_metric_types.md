@@ -11,7 +11,6 @@ further_reading:
 - link: /opentelemetry/guide/otlp_delta_temporality/
   tag: ガイド
   text: OpenTelemetry によるデルタ一時性メトリクスの生成
-kind: documentation
 title: OTLP メトリクスタイプ
 ---
 
@@ -71,10 +70,10 @@ OTLP Histogram は、母集団の合計やカウントなどの特定の集計�
 - *Aggregation temporality*、これは累積とデルタがあります。デルタメトリクスはタイムウィンドウが重ならないが、累積メトリクスは時間的に固定された開始点からのタイムウィンドウを表します。
 
 デフォルトのマッピングは以下の通りです。
-1. デルタヒストグラムは、Datadog の分布として報告されます。利用可能な集計について理解するために、[分布についての詳細をお読みください][1]。
-2. 累積ヒストグラムの場合、連続するポイント間のデルタが計算され、分布として Datadog に報告されます。OTLP ペイロードの値を復元するために、個々の集計で [`cumsum` 算術関数][2]を使用することができます。
+1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations. Histograms with a count of 0 are dropped.
+2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
 
-**注**: OTLP のヒストグラムメトリクスは、ディストリビューションメトリクスにマッピングされています。OTLP がこのデータを送信する方法のため、最大、最小、およびパーセンタイルの集計は、正確な計算ではなく、近似値です。
+**Note**: Histogram metrics in OTLP are mapped by default to Distribution metrics. Because of how OTLP sends this data, percentile aggregations and the max and min (if not available on the original OTLP data) are approximations, not accurate calculations.
 
 Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、`histogram` サブセクションで Histogram エクスポートを変更することができます。
 - `mode` に `counters` を指定すると、以下のようなメトリクスが生成されます。
@@ -132,28 +131,6 @@ OTLP はデータポイントレベルの属性とリソース属性の 2 種類
 Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、データポイントレベルの属性をタグとしてマッピングします。OpenTelemetry のセマンティック規則に従ったリソース属性は、同等の Datadog 規則が存在すればそれにマッピングされます。
 
 `resource_attributes_as_tags` フラグを使用すると、すべてのリソースの属性をタグとして追加することができます。
-
-### ホスト名解決
-
-OpenTelemetry は、ホスト名に関する特定のセマンティック規則を定義しています。OTLP ペイロードが既知のホスト名属性を持つ場合、Datadog はこれらの規則に従い、その値をホスト名として使用しようとします。セマンティック規則は、以下の順序で考慮されます。
-
-1. 存在する場合に二重タグを避ける `host` 属性。
-1. `datadog.host.name`、Datadog 固有のホスト名規則
-1. クラウドプロバイダー固有の規則、`cloud.provider` セマンティック規則がベース
-1. Kubernetes 固有のセマンティック規約である `k8s.node.name` と `k8s.cluster.name`
-1. `host.id`、一意のホスト ID
-1. `host.name`、システムホスト名
-
-以下のホスト名は無効とみなされ、破棄されます。
-1. `0.0.0.0`
-1. `127.0.0.1`
-1. `localhost`
-1. `localhost.localdomain`
-1. `localhost6.localdomain6`
-1. `ip6-localhost`
-
-有効なホスト名が存在しない場合、Datadog はペイロードにシステムレベルのホスト名を割り当てます。
-リモートホストからデータを送信する場合、パイプラインに ['resource detection' プロセッサー][1]を追加することで、正確なホスト名解決を行うことができます。
 
 ### 例
 
@@ -232,11 +209,11 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: /ja/opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /ja/opentelemetry/guide/otlp_delta_temporality/

@@ -14,6 +14,14 @@
         "title_size": "16",
         "title_align": "left",
         "time": {},
+        "style": {
+          "display": {
+            "type": "stacked",
+            "legend": "inline"
+          },
+          "scaling": "relative",
+          "palette": "dog_classic"
+        },
         "type": "toplist",
         "requests": [
           {
@@ -27,13 +35,19 @@
             ],
             "formulas": [
               {
-                "formula": "query1",
-                "limit": {
-                  "count": 10,
-                  "order": "desc"
-                }
+                "formula": "query1"
               }
             ],
+            "sort": {
+              "count": 10,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            },
             "response_format": "scalar"
           }
         ]
@@ -42,6 +56,5 @@
   ],
   "template_variables": [],
   "layout_type": "free",
-  "is_read_only": false,
   "notify_list": []
 }

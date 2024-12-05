@@ -27,7 +27,6 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: Documentación
   text: Consumo elevado de la memoria o CPU
-kind: documentación
 title: Solucionar problemas del Agent
 ---
 

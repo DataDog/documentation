@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Ubuntu
-kind: documentation
 platform: Ubuntu
 aliases:
     - /guides/basic_agent_usage/ubuntu/
@@ -20,22 +19,21 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Ubuntu. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Ubuntu. 
 
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+To install the Agent, see the [installation instructions][1]. Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 **Note**: Ubuntu 14.04 and above are supported on the 64-bit x86 architecture. Ubuntu 16.04 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 
 In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -48,57 +46,44 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo datadog-agent --help`                            |
 | Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Description                        | Command                                           |
-|------------------------------------|---------------------------------------------------|
-| Start Agent as a service           | `sudo service datadog-agent start`                |
-| Stop Agent running as a service    | `sudo service datadog-agent stop`                 |
-| Restart Agent running as a service | `sudo service datadog-agent restart`              |
-| Status of Agent service            | `sudo service datadog-agent status`               |
-| Status page of running Agent       | `sudo service datadog-agent info`                 |
-| Send flare                         | `sudo service datadog-agent flare`                |
-| Display command usage              | `sudo service datadog-agent`                      |
-| Run a check                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
-
-{{% /tab %}}
-{{< /tabs >}}
-
 **Note**: If the `service` wrapper is not available on your system, use:
 
 * On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
-[Learn more about Service lifecycle commands][2]
-
 ## Configuration
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml`
 
-Configuration files for [Integrations][1]:
+Configuration files for [Integrations][5]:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+## Uninstall the Agent
 
-The configuration files and folders for the Agent are located in:
+To uninstall the Agent, run the following command:
 
-* `/etc/dd-agent/datadog.conf`
+```shell
+sudo apt-get remove datadog-agent -y
+```
 
-Configuration files for [Integrations][1]:
+This command removes the Agent, but does not remove:
 
-* `/etc/dd-agent/conf.d/`
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
 
-[1]: /integrations/
-{{% /tab %}}
-{{< /tabs >}}
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo apt-get remove --purge datadog-agent -y
+```
+
+{{% apm-ssi-uninstall-linux %}}
 
 ## Troubleshooting
 
@@ -118,3 +103,4 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /agent/troubleshooting/
 [4]: /developers/guide/custom-python-package/
+[5]: /integrations/

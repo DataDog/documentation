@@ -1,1 +1,7 @@
-{{ readFile (.Get 0) | markdownify }}
+{{- $page := .Get 0 -}}
+
+{{- with .Site.GetPage $page -}}
+    {{ .Content }}
+{{- else -}}
+    {{ errorf "[include-markdown shortcode] Page %s not found" $page }}
+{{- end -}}

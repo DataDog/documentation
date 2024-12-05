@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: Documentación
   text: Referencia de API de cuentas de servicio
-kind: documentación
 title: Cuentas de servicio
 ---
 

@@ -15,7 +15,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Learn how to develop on the Datadog platform
-kind: documentation
 title: Create an Agent Integration
 description: Learn how to develop and publish a Datadog Agent integration.
 ---
@@ -47,7 +46,7 @@ The process to build an Agent-based integration looks like this:
 
 The required Datadog Agent integration development tools include the following:
 
-- Python v3.9, [pipx][2], and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
+- Python v3.11, [pipx][2], and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
 - [Docker][4] to run the full test suite.
 - The git [command line][5] or [GitHub Desktop client][19].
 
@@ -436,6 +435,12 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
   ```
 </details>
 
+For installing your wheel to test in Kubernetes environments: 
+1. Mount the `.whl` file into an initContainer.
+2. Run the wheel install in the initContainer.
+3. Mount the initContainer in the Agent container while it's running.
+
+For customer install commands for both host and container environments, see the [Community and Marketplace Integrations documentation][35].
 ## Populate your tile and publish your integration
 
 Once you have created your Agent-based integration, see the [Create a tile][20] documentation for information on populating the remaining [required assets][31] that appear on your integration tile, and opening a pull request.
@@ -506,3 +511,4 @@ In addition to any code changes, the following is required when bumping an integ
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/developers/integrations/check_references/
 [34]: https://docs.datadoghq.com/metrics/
+[35]: https://docs.datadoghq.com/agent/guide/use-community-integrations/

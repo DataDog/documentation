@@ -1,6 +1,5 @@
 ---
 title: Monitor-based SLOs
-kind: documentation
 description: "Use Monitors to define the Service Level Objective"
 aliases:
 - /monitors/service_level_objectives/monitor/
@@ -14,11 +13,11 @@ further_reading:
 ---
 
 ## Overview
-To build an SLO from new or existing Datadog monitors, create a monitor-based SLO.
+To build an SLO from new or existing Datadog monitors, create a monitor-based SLO. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
 
-Time-based data sets usually map well to monitor-based SLOs. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
+<div class="alert alert-info">Time Slice SLOs are another way to create SLOs with a time-based SLI calculation. With Time Slice SLOs, you can create an uptime SLO without going through a monitor, so you don’t have to create and maintain both a monitor and an SLO.</div>
 
-{{< img src="service_management/service_level_objectives/grouped_monitor_based_slo.png" alt="monitor-based SLO example" >}}
+{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="monitor-based SLO example" >}}
 
 ## Prerequisites
 
@@ -27,28 +26,27 @@ To create a monitor-based SLO, you need an existing Datadog monitor. To set up a
 Datadog monitor-based SLOs support the following monitor types:
 - Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
 - Synthetic
-- Service Checks (open beta)
+- Service Checks
 
 ## Setup
 
-On the [SLO status page][2], select **New SLO**.
-
-Under **Define the source**, select **Monitor Based**.
+On the [SLO status page][2], click **+ New SLO**. Then, select **By Monitor Uptime**.
 
 ### Define queries
 
+
 In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
 
-If you're only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors.
+**Notes**:
 
+- If you're using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. 
+- If you're adding multiple monitors to your SLO, group selection is not supported. You can add up to 20 monitors.
 
 ### Set your SLO targets
 
 Select a **target** percentage, **time window**, and optional **warning** level.
 
-The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state.
-
-The time window specifies the rolling period the SLO runs its calculation.
+The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state. The time window specifies the rolling period the SLO runs its calculation.
 
 Depending on the value of the SLI, the Datadog UI displays the SLO status in a different color:
 - While the SLI remains above the target, the UI displays the SLO status in green.
@@ -67,15 +65,17 @@ If you need finer granularity than the once a minute monitor evaluation, conside
 
 ### Add name and tags
 
-Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO.
-
-Select **Save & Exit** to save your new SLO.
+Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO. Select **Create** or **Create & Set Alert** to save your new SLO.
 
 ## Status calculation
 
-{{< img src="service_management/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated" >}}
+{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="Monitor-based SLO with groups" >}}
 
-Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected. If specific groups have been selected, the SLO status is calculated with only those groups. If no specific groups are selected, the UI displays the five groups with the worst statuses.
+Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected:
+- If specific groups have been selected (up to 20), the SLO status is calculated with only those groups. The UI displays all selected groups. 
+- If no specific groups are selected, the SLO status is calculated across *all* groups. The UI displays all underlying groups of the SLO. 
+
+**Note:** For monitor-based SLOs with groups, all groups can be displayed for any SLOs containing up to 5,000 groups. For SLOs containing more than 5,000 groups, the SLO is calculated based on all groups but no groups are displayed in the UI.
 
 Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior since `WARN` is not severe enough to indicate bad behavior.
 
@@ -112,12 +112,26 @@ Muting a monitor does not affect the SLO calculation.
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
 
 ### Missing data
-When you create a metric monitor or service check, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
+#### Metric monitors
+When you create a metric monitor, you choose [how the monitor will handle missing data][6]. This configuration affects how a monitor-based SLO calculation interprets missing data:
+
+| Monitor configuration     | SLO calculation of missing data |
+|---------------------------|---------------------------------|
+| `Evaluate as zero`        | Depends on the monitor alert threshold <br> For instance, a threshold of `> 10` would result in Uptime (since the Monitor status would be `OK`), while a threshold of `< 10` would result in Downtime.                             |
+| `Show last known status`  | Keep last state of SLO          |
+| `Show NO DATA`            | Uptime                          |
+| `Show NO DATA and notify` | Downtime                        |
+| `Show OK`                 | Uptime                          |
+
+#### Other monitor types
+When you create a service check monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
 
 If you pause a Synthetic test, the SLO removes the time period with missing data from its calculation. In the UI, these time periods are marked light gray on the SLO status bar.
 
 
 ## Underlying monitor and SLO histories
+
+<div class="alert alert-warning">Support for SLO Replay will be deprecated in the near future. Impacted customers will be notified about the change ahead of time with details about how they will be impacted.</div>
 
 SLOs based on the metric monitor types have a feature called SLO Replay that backfills SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. When you create a new Metric Monitor and set an SLO on that new monitor, you do not have to wait a full 7, 30, or 90 days to view the SLO status. Instead, SLO Replay triggers when you create the new SLO and looks at the history of the monitor's underlying metric and query to fill in the status.
 
@@ -125,16 +139,13 @@ SLO Replay also triggers when you change the underlying metric monitor's query t
 
 **Note:** SLOs based on Synthetic tests or Service Checks do not support SLO Replay.
 
-## Other considerations
-
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and [metric-based][3] SLIs.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create
+[1]: https://app.datadoghq.com/monitors/create
 [2]: https://app.datadoghq.com/slo
 [3]: /service_management/service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions
 [5]: /service_management/service_level_objectives/#slo-status-corrections
+[6]: /monitors/configuration/#no-data
