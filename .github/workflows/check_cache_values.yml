@@ -17,6 +17,7 @@ concurrency:
 
 jobs:
   check-cache-values:
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline' 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4

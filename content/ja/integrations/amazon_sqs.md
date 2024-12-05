@@ -16,8 +16,8 @@ assets:
     source_type_id: 102
     source_type_name: Amazon SQS
   monitors:
-    sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
-    sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
+    SQS Message Processing Time Monitor: assets/monitors/sqs_message_processing_time.json
+    SQS Message Queue Anomaly Monitor: assets/monitors/sqs_message_queue_anomaly.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,7 +28,7 @@ categories:
 - metrics
 - cloud
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -50,6 +50,7 @@ tile:
   - Category::クラウド
   - Category::ログの収集
   - Offering::Integration
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブルなフルマネージド型のメッセージキューサービスです。
   media: []

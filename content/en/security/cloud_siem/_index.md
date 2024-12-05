@@ -38,7 +38,7 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud SIEM (Security Information and Event Management) unifies developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, Slack, Jira, PagerDuty, or a webhook.
+Datadog Cloud SIEM (Security Information and Event Management) unifies developer, operation, and security teams on one platform. Use a single dashboard to display DevOps content, business metrics, and security insights. Cloud SIEM detects threats to your applications and infrastructure, such as targeted attacks, communications from threat intel-listed IP addresses, and insecure configurations, in real time. Notify your team of these security issues by email, Slack, Jira, PagerDuty, or webhooks.
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" >}}
 

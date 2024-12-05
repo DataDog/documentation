@@ -25,7 +25,7 @@ author:
 categories:
 - ログの収集
 - テスト
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
 display_on_public_website: true

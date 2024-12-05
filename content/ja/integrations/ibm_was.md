@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 3.3.2
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_was

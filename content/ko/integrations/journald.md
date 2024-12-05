@@ -27,7 +27,7 @@ draft: false
 git_integration_title: journald
 integration_id: journald
 integration_title: journald
-integration_version: 1.2.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: journald

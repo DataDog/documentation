@@ -21,11 +21,11 @@ Estimated usage metrics are generally available for the following usage types:
 
 | Usage Type                    | Metric                                   | Description |
 |-------------------------------|------------------------------------------| ----------- |
-| Infrastructure Hosts          | `datadog.estimated_usage.hosts`          | Unique hosts seen in the last hour. |
-| Containers                    | `datadog.estimated_usage.containers`     | Unique containers seen in the last hour. |
-| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`  | Unique Fargate Tasks seen in the last 5 minutes. |
-| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` | Unique indexed Custom Metrics seen in the last hour. |
-| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` | Unique ingested Custom Metrics seen in the last hour. |
+| Infrastructure Hosts          | `datadog.estimated_usage.hosts`, `datadog.estimated_usage.hosts.by_tag`          | Unique hosts seen in the last hour. |
+| Containers                    | `datadog.estimated_usage.containers`, `datadog.estimated_usage.containers.by_tag`     | Unique containers seen in the last hour. |
+| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`, `datadog.estimated_usage.fargate_tasks.by_tag`  | Unique Fargate Tasks seen in the last 5 minutes.<br/><br/>**Note**: This metric tracks both ECS Fargate and EKS Fargate usage. |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
@@ -33,33 +33,33 @@ Estimated usage metrics are generally available for the following usage types:
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
 | Error Tracking Logs Events    | `datadog.estimated_usage.error_tracking.logs.events` | Volume of error logs ingested into Error Tracking. |
 | Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | Total ingestion of Cloud SIEM logs in bytes. |
-| APM Hosts                     | `datadog.estimated_usage.apm_hosts` | Unique APM hosts seen in last hour. Does not include Azure App Services hosts. |
+| APM Hosts                     | `datadog.estimated_usage.apm_hosts`, `datadog.estimated_usage.apm_hosts.by_tag` | Unique APM hosts seen in last hour. Does not include Azure App Services hosts. |
 | APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters. |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` | Volume of ingested spans in bytes. |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` | Total number of ingested spans. |
-| APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks` | Unique APM Fargate Tasks seen in last 5 minutes. |
+| APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks`, `datadog.estimated_usage.apm.fargate_tasks.by_tag` | Unique APM Fargate Tasks seen in last 5 minutes. |
 | RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | Total number of RUM sessions. |
-| Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` | Unique serverless functions seen in the last hour. |
+| Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions`, `datadog.estimated_usage.serverless.aws_lambda_functions.by_tag` | Unique serverless functions seen in the last hour. |
 | Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`| Sum of serverless invocations in the last hour. |
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` | Estimated usage for API tests. |
 | Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`| Estimated usage for browser tests. |
 | Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` | Estimated usage for parallel testing slots. |
-| Network Hosts                 | `datadog.estimated_usage.network.hosts` | Unique NPM hosts seen in the last hour. |
-| Network Devices               | `datadog.estimated_usage.network.devices` | Unique NDM devices seen in the last hour. |
-| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | Unique profiling hosts seen in the last hour. |
-| Profiled Containers           | `datadog.estimated_usage.profiling.containers` | Unique profiling containers seen in last 5 minutes. |
-| Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks` | Unique profiling Fargate Tasks seen in the last 5 minutes. |
-| CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` | Unique CSPM hosts seen in the last hour. |
-| CSPM Containers               | `datadog.estimated_usage.cspm.containers` | Unique CSPM containers seen in the last 5 minutes. |
-| CWS Hosts                     | `datadog.estimated_usage.cws.hosts` | Unique CWS hosts seen in the last hour. |
-| CWS Containers                | `datadog.estimated_usage.cws.containers` | Unique CWS containers seen in the last 5 minutes. |
-| Database Hosts                | `datadog.estimated_usage.dbm.hosts` | Unique DBM hosts seen in the last hour. |
-| ASM Hosts                     | `datadog.estimated_usage.asm.hosts` | Unique ASM hosts seen in the last hour. |
-| ASM Tasks                     | `datadog.estimated_usage.asm.tasks` | Unique ASM Fargate Tasks seen in the last 5 minutes. |
+| Network Hosts                 | `datadog.estimated_usage.network.hosts`, `datadog.estimated_usage.network.hosts.by_tag` | Unique CNM hosts seen in the last hour. |
+| Network Devices               | `datadog.estimated_usage.network.devices`, `datadog.estimated_usage.network.devices.by_tag` | Unique NDM devices seen in the last hour. |
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts`, `datadog.estimated_usage.profiling.hosts.by_tag` | Unique profiling hosts seen in the last hour. |
+| Profiled Containers           | `datadog.estimated_usage.profiling.containers`, `datadog.estimated_usage.profiling.containers.by_tag` | Unique profiling containers seen in last 5 minutes. |
+| Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks`, `datadog.estimated_usage.profiling.fargate_tasks.by_tag` | Unique profiling Fargate Tasks seen in the last 5 minutes. |
+| CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts`, `datadog.estimated_usage.cspm.hosts.by_tag` | Unique CSPM hosts seen in the last hour. |
+| CSPM Containers               | `datadog.estimated_usage.cspm.containers`, `datadog.estimated_usage.cspm.containers.by_tag` | Unique CSPM containers seen in the last 5 minutes. |
+| CWS Hosts                     | `datadog.estimated_usage.cws.hosts`, `datadog.estimated_usage.cws.hosts.by_tag` | Unique CWS hosts seen in the last hour. |
+| CWS Containers                | `datadog.estimated_usage.cws.containers`, `datadog.estimated_usage.cws.containers.by_tag` | Unique CWS containers seen in the last 5 minutes. |
+| Database Hosts                | `datadog.estimated_usage.dbm.hosts`, `datadog.estimated_usage.dbm.hosts.by_tag` | Unique DBM hosts seen in the last hour. |
+| ASM Hosts                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Unique ASM hosts seen in the last hour. |
+| ASM Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique ASM Fargate Tasks seen in the last 5 minutes. |
 | Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` | Active IM users seen from (calendar) month-to-date. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
-| IOT devices                   | `datadog.estimated_usage.iot.devices` | Unique IoT devices seen in the last hour. |
+| IOT devices                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
 | Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |

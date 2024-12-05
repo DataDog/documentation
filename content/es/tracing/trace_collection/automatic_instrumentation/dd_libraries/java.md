@@ -48,7 +48,7 @@ Para empezar a rastrear tus aplicaciones:
    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 {{% /tab %}}
-{{% tab "Dockerfile" (Archivo Docker) %}}
+{{% tab "Archivo Docker" %}}
    ```dockerfile
    ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
    ```

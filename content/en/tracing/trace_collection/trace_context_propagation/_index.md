@@ -29,6 +29,7 @@ By default, the Datadog SDK extracts and injects distributed tracing headers usi
 
 - [Datadog][1] (takes higher precedence when extracting headers)
 - [W3C Trace Context][2]
+- [Baggage][10]
 
 This default configuration maximizes compatibility with older Datadog SDK versions and products while allowing interoperability with other distributed tracing systems like OpenTelemetry.
 
@@ -70,6 +71,7 @@ The Datadog SDK supports the following trace context formats:
 | [W3C Trace Context][2] | `tracecontext`                |
 | [B3 Single][3]         | _Language Dependent Value_    |
 | [B3 Multi][4]          | `b3multi`                     |
+| [Baggage][10]          | `baggage`                     |
 | [None][5]              | `none`                        |
 
 ## Language support
@@ -116,13 +118,14 @@ In addition to the environment variable configuration, you can also update the p
 
 The Datadog Python SDK supports the following trace context formats, including deprecated configuration values:
 
-| Format                 | Configuration Value |
-|------------------------|---------------------|
-| [Datadog][1]           | `datadog`           |
-| [W3C Trace Context][2] | `tracecontext`      |
-| [B3 Single][3]         | `b3`                |
-| [B3 Multi][4]          | `b3multi`           |
-| [None][5]              | `none`              |
+| Format                 | Configuration Value             |
+|------------------------|---------------------------------|
+| [Datadog][1]           | `datadog`                       |
+| [W3C Trace Context][2] | `tracecontext`                  |
+| [B3 Single][3]         | `b3`                            |
+|                        | `b3 single header` (deprecated) |
+| [B3 Multi][4]          | `b3multi`                       |
+| [None][5]              | `none`                          |
 
 [1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
@@ -191,11 +194,11 @@ The Datadog Go SDK supports the following trace context formats, including depre
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
 ### Supported formats
 
-The Datadog NodeJS SDK supports the following trace context formats, including deprecated configuration values:
+The Datadog Node.js SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -623,6 +626,12 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 
 When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK does _not_ interact with request headers, meaning that the corresponding context propagation operation does nothing.
 
+### Baggage
+
+_Currently available in Python and Node.js. For other languages, please reach out to [Support][11]_ 
+
+By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -636,3 +645,6 @@ When the Datadog SDK is configured with the None format for extraction or inject
 [7]: /real_user_monitoring/platform/connect_rum_and_traces
 [8]: /synthetics/platform/apm
 [9]: /opentelemetry/interoperability/environment_variable_support
+[10]: https://www.w3.org/TR/baggage/
+[11]: /help
+[12]: #customize-trace-context-propagation

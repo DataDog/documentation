@@ -18,7 +18,7 @@ further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "/mobile_app_testing/mobile_app_tests"
+- link: "/mobile_app_testing/"
   tag: "Documentation"
   text: "Configure a Mobile Test"
 - link: "/synthetics/private_locations/"
@@ -47,7 +47,27 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 ### Enforced tags settings
 
-On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
+#### Enforce tags for **usage attribution** on all tests
+
+On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+
+#### Enforce required **monitor tag policies** on all tests
+
+On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+
+  <br>
+
+  1. Configure monitor tags on the [**Monitors** > **Settings** > **Policies** page][21]:
+  
+  <br>
+
+   {{< img src="synthetics/settings/monitor_tag_policy.png" alt="Monitor Settings page, showing monitor policy tags that are configured" style="width:80%;">}}
+
+  2. Create a Synthetic browser test, and add the required policy tags:
+  
+  <br>
+
+  {{< img src="synthetics/settings/monitor_tags.png" alt="New Synthetics test page, highlighting Policy tags feature" style="width:80%;">}}
 
 ### Default locations
 
@@ -306,6 +326,8 @@ For more information, see [Explore RUM & Session Replay][14].
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
 [16]: /synthetics/browser_tests/actions/#use-variables
-[17]: /mobile_app_testing/mobile_app_tests/
-[18]: /mobile_app_testing/settings/
-[19]: /mobile_app_testing/mobile_app_tests/#use-global-variables
+[17]: /synthetics/mobile_app_testing/
+[18]: /synthetics/mobile_app_testing/settings/
+[19]: /synthetics/mobile_app_testing/#use-global-variables
+[20]: https://app.datadoghq.com/synthetics/settings/default
+[21]: https://app.datadoghq.com/monitors/settings/policies

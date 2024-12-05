@@ -26,7 +26,7 @@ Algunas situaciones en las que se puede utilizar la instrumentación automática
 Para obtener más información, consulta la documentación correspondiente a su estrategia de instrumentación automática:
 
 {{< tabs >}}
-{{% tab "Single Step Instrumentation (Beta)" (Instrumentación en un solo paso (Beta)) %}}
+{{% tab "Instrumentación en un solo paso (Beta)" %}}
 
 Si instalas o actualizas un Datadog Agent con la opción **Habilitar la instrumentación APM (Beta)** seleccionada, el Agent se instala y configura para habilitar APM. Esto te permite instrumentar automáticamente tu aplicación, sin la necesidad de ningún paso adicional de instalación o configuración.
 
@@ -36,7 +36,7 @@ Para empezar, consulta la documentación de [instrumentación en un solo paso][1
 
 {{% /tab %}}
 
-{{% tab "Datadog libraries" (Bibliotecas de Datadog) %}}
+{{% tab "Bibliotecas de Datadog" %}}
 
 Para instrumentar automáticamente tu aplicación con bibliotecas de Datadog:
 

@@ -4,6 +4,26 @@ app_uuid: 86988058-9b89-45a8-b92f-5473a96e4a36
 assets:
   dashboards:
     Embrace Overview: assets/dashboards/embrace_mobile_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - embrace.session_total.five_minute
+      - embrace.session_total.hourly
+      - embrace.session_total.daily
+      - embrace.crash_total.five_minute
+      - embrace.crash_total.hourly
+      - embrace.crash_total.daily
+      - embrace.users_total.daily
+      metadata_path: metadata.csv
+      prefix: embrace.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 25653134
+    source_type_name: Embrace
 author:
   homepage: https://embrace.io
   name: Embrace
@@ -13,7 +33,7 @@ categories:
 - メトリクス
 - モバイル
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -83,7 +103,7 @@ tile:
 1. Datadog でダッシュボードを新規作成します。クラッシュまたはネットワーキングメトリクスを含む Embrace のデータを表示するには、Embrace ウィジェットを選択します。
 1. "Details" をクリックすると、Datadog から Embrace の詳細を確認できます。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

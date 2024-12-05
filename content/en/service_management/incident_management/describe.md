@@ -20,8 +20,6 @@ No matter where you [declare an incident][1], it’s important to describe it as
 
 When you declare an incident, an incident modal comes up. This modal has several core elements:
 
-{{< img src="/service_management/incidents/describe/declare_incident_make_private.png" alt="Incident Declaration Modal" style="width:80%;">}}
-
 | Incident elements  | Description |
 | ------------------ | ----------- |
 | Title              | (Required) Give your incident a descriptive title. |

@@ -9,6 +9,12 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    In the {{< region-param key="dd_site_name" >}} site, you must manually configure the Datadog application in Okta using the <a href="/account_management/faq/okta/">legacy instructions</a>. Ignore the instructions on this page about the preconfigured Datadog application in the Okta application catalog.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 This page tells you how to set up the Datadog application in Okta. 
@@ -114,6 +120,7 @@ Follow the steps below to map Okta attributes to Datadog entities. This step is 
 
 1. Navigate to the Okta admin dashboard.
 1. Select the **Sign on** tab.
+1. Click **Edit**.
 1. Populate the **Attributes** with your [group attribute statements][6].
 1. Set up your desired [mappings][7] in Datadog.
 

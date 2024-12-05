@@ -18,7 +18,7 @@ Datadog recomienda enviar logs desde Azure a Datadog a través del Agent o de Da
 
 {{< tabs >}}
 
-{{% tab "Automated Installation" (Instalación automatizada) %}}
+{{% tab "Instalación automatizada" %}}
 
 Para empezar, haz clic en el botón de abajo y rellena el formulario en el portal Azure. Se desplegarán los recursos de Azure necesarios para transferir logs de actividades a tu cuenta Datadog.
 
@@ -110,7 +110,7 @@ Para transferir logs de actividades y de recursos, ejecuta el primer script incl
 [101]: /es/integrations/guide/azure-troubleshooting/#automated-log-collection
 {{% /tab %}}
 
-{{% tab "Manual installation" (Instalación manual) %}}
+{{% tab "Instalación manual" %}}
 
 Esta sección describe el proceso de configuración manual para el reenvío de logs de Azure a Datadog:
 
@@ -264,7 +264,7 @@ Para obtener más información, consulta [Parámetros de diagnóstico en Azure M
 [215]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
 {{% /tab %}}
 
-{{% tab "Blob Storage" (Almacenamiento de blobs)%}}
+{{% tab "Almacenamiento de blobs"%}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
 <div class="alert alert-warning">

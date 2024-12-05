@@ -55,8 +55,6 @@ An input represents which part of the request the operator is applied to. The fo
 
 ## Custom in-app WAF rules
 
-   <div class="alert alert-info">Custom in-app WAF rules is in beta.</div>
-
 Custom in-app WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4].
 
 **Note:** Default rules in in-app WAF are read-only. To refine your in-app WAF behavior, modify the in-app WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 

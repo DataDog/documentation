@@ -96,7 +96,7 @@ Consulta la lista completa lista de [atributos estándar por defecto de Log Mana
   - Los atributos de detalles de URL llevan el prefijo `http.url_details`. Estos atributos proporcionan información sobre las partes analizadas de la URL HTTP. Son generados por el [Analizador URL][14].
 - [Código fuente][15]
   - Estos atributos están relacionados con los datos que se utilizan cuando se genera un log o un error utilizando un creador de logs en una aplicación personalizada. Todos los atributos llevan el prefijo `logger` o `error`.
-  - Las integraciones típicas que se basan en estos atributos son Java, NodeJS, .NET, Golang, Python, etc.
+  - Las integraciones típicas que se basan en estos atributos son Java, Node.js, .NET, Golang, Python, etc.
 - [Base de datos] [16]
   - Las integraciones típicas que se basan en estos atributos son  [Cassandra][17], [MySQL][18], [RDS][19], [Elasticsearch][20], etc.
 - [Rendimiento][21]

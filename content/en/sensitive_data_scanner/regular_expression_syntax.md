@@ -5,6 +5,9 @@ further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner"
+    - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
+      tag: "Documentation"
+      text: "Best practices for creating custom rules"
 ---
 
 ## Overview

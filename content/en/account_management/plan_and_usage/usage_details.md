@@ -29,9 +29,9 @@ In product specific tabs, view your month-to-date usage of the products in that 
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
-The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view breaks out on-demand usage above your commitments and allocations.
+The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view breaks out your usage by commitments, allotments and on-demand usage.
 
-{{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
+{{< img src="account_management/billing/UsageTilesWithAllPills.png" alt="Usage Summary - Billable" >}}
 For API users, endpoints are available to access ["All"][2] usage and ["Billable"][3] usage.
 
 Month-to-date usage of each product is calculated as follows:
@@ -90,9 +90,9 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 <div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-Billable on-demand pills highlight the portion of billable usage that is on-demand usage. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
+Purple on-demand pills highlight the portion of billable usage that is on-demand usage. Blue committed and allotted pills highlight the portion of your usage that is covered by commitments and <a href="https://www.datadoghq.com/pricing/allotments/">allotments</a> from parent products. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
 
-{{< img src="account_management/plan_and_usage/MTD-billable-and-committed-lines.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
 
 
 ## Top custom metrics

@@ -405,7 +405,7 @@ No built-in support for load-balancing is provided, given the single-machine nat
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
+An NLB is provisioned by the Terraform module, and configured to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 

@@ -75,6 +75,11 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -141,11 +146,21 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
+
+{{% /tab %}}
+{{% tab "Add env vars" %}}
+
+{{% observability_pipelines/processors/add_env_vars %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Datadog Agent address. This is the address and port where your Datadog Agent is sending its logging data. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Datadog" %}}
@@ -188,6 +203,11 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
@@ -196,19 +216,9 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}

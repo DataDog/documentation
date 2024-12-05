@@ -8,10 +8,10 @@ further_reading:
   text: "Service Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
-  text: "Service Scorecards API" 
+  text: "Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Prioritize and promote service observability best practices with Service Scorecards"
+  text: "Prioritize and promote service observability best practices with Scorecards"
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
@@ -21,10 +21,10 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Service Scorecards are in beta.
+Scorecards are in Preview.
 {{< /callout >}}
 
-Datadog provides [default rules][1] so you can get started quickly with Service Scorecards, but you can also create custom rules.
+Datadog provides [default rules][1] so you can get started quickly with Scorecards, but you can also create custom rules.
 
 ## Create custom rules
 

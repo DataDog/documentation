@@ -147,7 +147,8 @@ def security_rules(content, content_dir):
                 "default_rule_id": data.get('defaultRuleId', '').strip(),
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
-                    # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                    f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                    f"/security/default_rules/{data.get('defaultRuleId', '').strip()}",
                     f"/security_monitoring/default_rules/{p.stem.lower()}"
                 ],
                 "rule_category": [],

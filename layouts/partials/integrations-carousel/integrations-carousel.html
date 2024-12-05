@@ -112,13 +112,13 @@ x-data="{
                 x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
                 x-transition.opacity.duration.500ms>
                     {{ if eq $elm.media_type "image"}}
-                    <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
+                    <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
                     {{ else }}
                     <iframe x-ref="iframe" class="d-none" src="https://player.vimeo.com/video/{{ $elm.vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3"></iframe>
                     <img 
                     x-ref="playOverlay"
                     class="play-overlay position-relative h-100 w-100 rounded-1" 
-                    src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
+                    src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
                     alt="{{ $elm.caption }}">
                     <button 
                     @click="$store.integrationsModal.playVideo($refs)"
@@ -161,7 +161,7 @@ x-data="{
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
                 >
                 </button>
                 {{ end }}
@@ -174,7 +174,7 @@ x-data="{
             class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
-            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
             >
             </button>
             {{ end }}
@@ -187,7 +187,7 @@ x-data="{
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
                 >
                 </button>
                 {{ end }}
