@@ -185,7 +185,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 ## Moving rollup
-Datadog provides a `moving_rollup` function that enables aggregation of data points over a specified time window (quick refresher [here][10]). By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze data points beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
+Datadog provides a `moving_rollup` function that enables aggregation of datapoints over a specified time window. See [moving-rollup][10] for more information. By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze datapoints beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
 
 {{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
@@ -218,7 +218,7 @@ When nesting these `moving_rollups`, the rollup intervals provided must get larg
 
 
 {{% collapse-content title="Standard Deviation Moving Rollup with Lookback Mode Enabled" level="h5" %}}
-You can also use percentiles and standard deviation with the new moving rollup function that supports lookback and nest moving rollups that have lookback enabled as well. 
+You can also use percentiles and standard deviation with the new moving rollup function, which supports lookback, and allows nesting of moving rollups with lookback enabled.
 
 In the UI or JSON tab, it would look as follows:
 
@@ -231,7 +231,7 @@ In the UI or JSON tab, it would look as follows:
 
 ## Boolean threshold remapping functions
 
-Remap functions allow you to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis. Nested queries unlocks the following 3 new functions:
+Remap functions allow you to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis. Nested queries unlocks the following three new functions:
 
 - `is_greater` (`<QUERY>, <THRESHOLD>`)
 - `is_less` (`<QUERY>, <THRESHOLD>`)
