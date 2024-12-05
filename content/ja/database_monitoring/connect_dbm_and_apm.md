@@ -35,7 +35,7 @@ APM トレーサーインテグレーションは、アプリケーションか�
 
 \* Aurora MySQL の完全伝播モードにはバージョン 3 が必要です。
 
-\*\* SQL Server は Java および .NET トレーサーでのみフルモードをサポートしています。
+\*\* SQL Server は Java トレーサーでのみフルモードをサポートしています。
 
 **サポート対象のアプリケーショントレーサーとドライバー**
 
@@ -61,8 +61,7 @@ APM トレーサーインテグレーションは、アプリケーションか�
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
-|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
+|                                          | [ADO.NET][24] *        |           |           | `service` モードのみ |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -73,13 +72,12 @@ APM トレーサーインテグレーションは、アプリケーションか�
 
 \* [CommandType.StoredProcedure][25] はサポートされていません
 
-\*\* Java/.NET トレーサーにおける SQL Server のフルモード:
-  - インスツルメンテーションは、クライアントがクエリを発行する際に `SET context_info` コマンドを実行し、これによりデータベースとの追加のラウンドトリップが発生します。
-  - アプリケーションが `context_info` を使用してインスツルメンテーションを行っている場合、APM トレーサーによって上書きされます。
-  - 前提条件:
-    - Agent バージョン 7.55.0 以降
-    - Java トレーサーバージョン 1.39.0 以降
-    - .NET トレーサーバージョン 3.3 以降
+\*\* フルモードの SQL Server/Java:
+- インスツルメンテーションは、クライアントがクエリを発行する際に `SET context_info` コマンドを実行し、これによりデータベースとの追加のラウンドトリップが発生します。
+- アプリケーションが `context_info` を使用してインスツルメンテーションを行っている場合、APM トレーサーによって上書きされます。
+- 前提条件:
+  - Agent バージョン 7.55.0 以降
+  - Java トレーサーバージョン 1.39.0 以降
 
 ## セットアップ
 最高のユーザーエクスペリエンスを得るために、アプリケーションで以下の環境変数が設定されていることを確認してください。
@@ -93,17 +91,17 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-アプリの依存関係を更新して、[dd-trace-go@v2.0.0][1] 以上を含むようにします。
+アプリの依存関係を更新して、[dd-trace-go@v1.44.0][1] 以上を含むようにします。
 ```
-go get github.com/DataDog/dd-trace-go/v2@v1.44.0
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
 コードを更新して `contrib/database/sql` パッケージをインポートします。
 ```go
 import (
    "database/sql"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 ```
 
@@ -113,12 +111,12 @@ import (
 
 2. ドライバー登録時にコードを使用する:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
 3. `sqltrace.Open` のコードを使用する:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -130,8 +128,8 @@ import (
 ```go
 import (
     "database/sql"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 
 func main() {
@@ -154,7 +152,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 
 {{% /tab %}}
 
@@ -302,7 +300,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 以下の環境変数を設定して、データベースモニタリングの伝播機能を有効にします。
    - Postgres および MySQL の場合: `DD_DBM_PROPAGATION_MODE=full`
-   - SQL Server の場合: Java および .NET トレーサーで `DD_DBM_PROPAGATION_MODE=service` または `DD_DBM_PROPAGATION_MODE=full`
+   - SQL Server の場合: Java トレーサーで `DD_DBM_PROPAGATION_MODE=service` または `DD_DBM_PROPAGATION_MODE=full`
    - Oracle の場合: `DD_DBM_PROPAGATION_MODE=service`
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
@@ -428,7 +426,7 @@ Database Monitoring で Query Sample を表示するとき、関連付けられ�
 
 [1]: /ja/database_monitoring/#getting-started
 [2]: /ja/tracing/
-[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb
@@ -449,7 +447,7 @@ Database Monitoring で Query Sample を表示するとき、関連付けられ�
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
+[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[...]%20should%20set
 [26]: https://app.datadoghq.com/services
 [27]: https://pypi.org/project/asyncpg/
@@ -457,4 +455,3 @@ Database Monitoring で Query Sample を表示するとき、関連付けられ�
 [29]: https://pypi.org/project/mysql-connector-python/
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
-[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

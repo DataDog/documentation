@@ -62,7 +62,7 @@ datadog-ci lambda uninstrument --functions-regex <valid-regex-pattern> -r us-eas
 datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r us-east-1 --dry-run
 ```
 
-コンフィギュレーションセクションでその設定を確認します。
+See the configuration section for additional settings.
 
 ## 構成
 

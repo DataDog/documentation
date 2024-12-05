@@ -23,7 +23,7 @@ author:
   support_email: ervansetiawan@gmail.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md
 display_on_public_website: true

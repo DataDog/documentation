@@ -6,7 +6,7 @@ categories:
 - cloud
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Seguimiento de métricas Amazon Redshift clave.
 doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/

@@ -1,4 +1,5 @@
 ---
+kind: Guía
 title: Prácticas recomendadas para la monitorización de Live Processes
 ---
 

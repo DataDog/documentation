@@ -55,7 +55,7 @@ NPM simplifica la monitorización de redes complejas con soporte integrado para 
 Además, [la ruta de red][5], una función de NPM, está disponible en fase beta privada, lo que te permite ver el tráfico paso a paso en tu red.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="network_monitoring/performance/setup" >}}<u>Configuración</u>: configurar el Agent para recopilar datos de red.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/setup" ><u>}}Configuración</u>: configurar el Agent para recopilar datos de red.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Network Analytics</u>: grafica tus datos de red entre cada cliente y servidor disponible.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Mapa de red</u>: asigna tus datos de red entre tus etiquetas (tags).{{< /nextlink >}}
     {{< nextlink href="monitors/types/network_performance/" >}}<u>Monitores recomendados</u>: configurar monitores de NPM recomendados.{{< /nextlink >}}

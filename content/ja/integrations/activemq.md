@@ -24,8 +24,8 @@ assets:
     source_type_id: 40
     source_type_name: ActiveMQ
   monitors:
-    Host is running out of disk space: assets/monitors/activemq_artemis_high_disk_store.json
-    Number of unrouted messages is high: assets/monitors/activemq_artemis_unrouted_messages.json
+    '[ActiveMQ Artemis] High disk store usage': assets/monitors/activemq_artemis_high_disk_store.json
+    '[ActiveMQ Artemis] High unrouted messages': assets/monitors/activemq_artemis_unrouted_messages.json
   saved_views:
     activemq_processes: assets/saved_views/activemq_processes.json
 author:
@@ -36,7 +36,7 @@ author:
 categories:
 - log collection
 - message queues
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_on_public_website: true
@@ -44,7 +44,7 @@ draft: false
 git_integration_title: activemq
 integration_id: activemq
 integration_title: ActiveMQ
-integration_version: 5.0.0
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: activemq

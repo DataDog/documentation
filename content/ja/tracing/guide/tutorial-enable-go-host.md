@@ -95,17 +95,17 @@ make exitNotes
 次に、Go トレーサーをインストールします。`apm-tutorial-golang` ディレクトリから、以下を実行します。
 
 {{< code-block lang="shell" >}}
-go get github.com/DataDog/dd-trace-go/v2/ddtrace
+go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 {{< /code-block >}}
 
 トレーシングライブラリが `go.mod` に追加されたので、トレーシングのサポートを有効にします。
 
 `apm-tutorial-golang/cmd/notes/main.go` の以下のインポートのコメントを解除します。
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
   "fmt"
 {{< /code-block >}}
 
@@ -134,13 +134,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-r.Use(chitrace.Middleware(chitrace.WithService("notes")))
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 {{< /code-block >}}
 
 `setupDB()` で、以下の行のコメントを解除します。
 
 {{< code-block lang="go" filename="cmd/notes/main.go">}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -215,23 +215,23 @@ Datadog には Go 用に完全にサポートされたライブラリがいく�
 import (
   ...
 
-  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
   ...
 )
 {{< /code-block >}}
 
-`cmd/notes/main.go` では、Datadog ライブラリは `WithService` オプションで初期化されます。例えば、`chitrace` ライブラリは以下のように初期化されます。
+`cmd/notes/main.go` では、Datadog ライブラリは `WithServiceName` オプションで初期化されます。例えば、`chitrace` ライブラリは以下のように初期化されます。
 
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithService("notes")))
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-`chitrace.WithService("notes")` を使用すると、ライブラリによってトレースされるすべての要素がサービス名 `notes` に該当することを保証します。
+`chitrace.WithServiceName("notes")` を使用すると、ライブラリによってトレースされるすべての要素がサービス名 `notes` に該当することを保証します。
 
 `main.go` ファイルには、これら各ライブラリの実装例がより多く含まれています。ライブラリの拡張機能については、[Go 互換性要件][16]を参照してください。
 
@@ -262,7 +262,7 @@ r.Mount("/", nr.Register())
 また、以下のインポート周りのコメントも削除してください。
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 サンプルアプリケーションには、カスタムトレースの例がいくつかあります。ここでは、さらにいくつかの例を紹介します。これらのスパンを有効にするには、コメントを削除してください。
@@ -300,8 +300,8 @@ func privateMethod1(ctx context.Context) {
 以下のインポートのコメントを解除します。
 
 {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 `make runNotes` でアプリケーションを起動し、再度 `curl` コマンドを実行して、先ほど構成したカスタムスパンやトレースを観測します。
@@ -331,8 +331,8 @@ func privateMethod1(ctx context.Context) {
 カレンダーアプリケーションでトレースを有効にするには、`cmd/calendar/main.go` の以下の行のコメントを解除します。
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
@@ -341,7 +341,7 @@ func privateMethod1(ctx context.Context) {
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
+  r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
 {{< /code-block >}}
 
 1. ノートアプリケーションがまだ実行されている場合は、`make exitNotes` を使用して停止させます。

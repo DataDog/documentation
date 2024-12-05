@@ -25,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
-custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -33,8 +32,9 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 4.0.0
+integration_version: 2.6.0
 is_public: true
+custom_kind: integration
 manifest_version: 2.0.0
 name: crio
 public_title: CRI-O
@@ -50,7 +50,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Containers
-  - Offering::Integration
   configuration: README.md#Setup
   description: Surveillez toutes vos métriques CRI-O avec Datadog.
   media: []
@@ -66,13 +65,13 @@ tile:
 
 Ce check surveille [CRI-O][1].
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 L'intégration repose sur l'option `--enable-metrics` de CRI-O, qui est désactivée par défaut, lors de l'exposition des métriques activées sur `127.0.0.1:9090/metrics`.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `crio.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI-O. Consultez le [fichier d'exemple crio.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
@@ -82,20 +81,20 @@ L'intégration repose sur l'option `--enable-metrics` de CRI-O, qui est désacti
 
 [Lancez la sous-commande status de l'Agent][4] et cherchez `crio` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
 CRI-O recueille des métriques sur le nombre d'opérations effectuées par le runtime, ainsi que leur latence.
 L'intégration Datadog/CRI-O recueille des métriques sur l'utilisation du processeur et de la mémoire du binaire Golang CRI-O.
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "crio" >}}
 
 
-### Checks de service
+### Aide
 {{< get-service-checks-from-git "crio" >}}
 
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 

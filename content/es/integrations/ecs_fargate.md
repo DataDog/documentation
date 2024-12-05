@@ -31,7 +31,7 @@ categories:
 - orchestration
 - provisioning
 - tracing
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md
 display_on_public_website: true

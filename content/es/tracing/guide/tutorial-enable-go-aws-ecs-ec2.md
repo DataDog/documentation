@@ -160,10 +160,10 @@ Para activar el soporte de rastreo:
 1. Para activar el rastreo automático, elimina los comentarios de las siguientes importaciones en `apm-tutorial-golang/cmd/notes/main.go`:
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-     sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-     chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-     httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
-     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+     sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
    {{< /code-block >}}
 
 1. En la función `main()`, elimina los comentarios de las siguientes líneas:
@@ -179,11 +179,11 @@ Para activar el soporte de rastreo:
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-   r.Use(chitrace.Middleware(chitrace.WithService("notes"))){{< /code-block >}}
+   r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
 
 1. En `setupDB()`, elimina los comentarios de las siguientes líneas:
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
+   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
@@ -213,7 +213,7 @@ Para activar el soporte de rastreo:
    Elimina también el comentario de la siguiente importación:
 
    {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"{{< /code-block >}}
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
 
 1. La función `doLongRunningProcess` crea tramos (spans) secundarios a partir de un contexto primario. Elimina los comentarios para habilitarla:
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}

@@ -178,7 +178,7 @@ end
 ```go
 package ledger
 
-import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 // [...]
 

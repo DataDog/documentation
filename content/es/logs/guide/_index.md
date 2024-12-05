@@ -5,6 +5,7 @@ cascade:
     rank: 20
     subcategory: Guías de logs
 disable_toc: true
+kind: guía
 private: true
 title: Guías de logs
 ---

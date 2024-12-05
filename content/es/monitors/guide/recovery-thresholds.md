@@ -5,6 +5,7 @@ further_reading:
 - link: /monitors/types/metric/
   tag: Documentación
   text: Monitor de métricas
+kind: Guía
 title: Umbrales de recuperación
 ---
 

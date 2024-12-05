@@ -44,4 +44,4 @@ Un evento representa cualquier registro de actividad destacable para los ingenie
 
 ## Lectura adicional
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}

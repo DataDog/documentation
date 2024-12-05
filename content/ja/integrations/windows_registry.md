@@ -18,8 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
-- windows
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_registry/README.md
 display_on_public_website: true
@@ -40,7 +39,6 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS & System
-  - カテゴリー::Windows
   - Offering::Integration
   configuration: README.md#Setup
   description: Windows ホストでレジストリキーの変更を監視します。

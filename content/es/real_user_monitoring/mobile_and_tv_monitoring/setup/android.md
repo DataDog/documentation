@@ -74,8 +74,8 @@ En el fragmento de código de inicialización, configura un nombre de entorno, u
 Consulta [`trackingConsent`][6] para añadir el cumplimiento del Reglamento general de protección de datos (RGPD) para tus usuarios de la UE y [otras opciones de configuración ][7] para inicializar la biblioteca.
 
 {{< site-region region="us" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Application() {
     sustituir fun onCreate() {
@@ -89,8 +89,8 @@ clase SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 clase pública SampleApplication extiende Application {
     @Override
@@ -103,13 +103,13 @@ clase pública SampleApplication extiende Application {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
+{{< /sitio-región >}}
 
-{{< site-region region="eu" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< sitio-región región="eu" >}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Application() {
     sustituir fun onCreate() {
@@ -125,8 +125,8 @@ clase SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 clase públcia SampleApplication extends Application {
     @Override
@@ -140,13 +140,13 @@ clase públcia SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
+{{< /sitio-región >}}
 
-{{< site-region region="us3" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< sitio-región región="us3" >}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Applicación() {
     sustituir fun onCreate() {
@@ -162,8 +162,8 @@ clase SampleApplication : Applicación() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 clase pública SampleApplication extends Application {
     @Override
@@ -177,13 +177,13 @@ clase pública SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
+{{< /sitio-región >}}
 
-{{< site-region region="us5" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< sitio-región región="us5" >}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Application() {
     sustituir fun onCreate() {
@@ -199,8 +199,8 @@ clase SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 clase pública SampleApplication extends Application {
     @Override
@@ -214,13 +214,13 @@ clase pública SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+{{% /´pestaña %}}
+{{< /pestañas >}}
+{{< /sitio-región >}}
 
-{{< site-region region="gov" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< sitio-región región="gov" >}}
+{{< pestaña >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Application() {
     sustituir fun onCreate() {
@@ -236,8 +236,8 @@ clase SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 clase pública SampleApplication extiende Aplicación {
     @Override
@@ -251,13 +251,13 @@ clase pública SampleApplication extiende Aplicación {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
+{{< /sitio-región >}}
 
-{{< site-region region="ap1" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< sitio-región región="ap1" >}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 clase SampleApplication : Aplicación() {
     sustituir fun onCreate() {
@@ -273,8 +273,8 @@ clase SampleApplication : Aplicación() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 clase pública SampleApplication extiende Aplicación {
     @Override
@@ -288,9 +288,9 @@ clase pública SampleApplication extiende Aplicación {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
+{{< /sitio-región >}}
 
 Las credenciales de inicialización requieren el nombre de variante de tu aplicación y utilizan el valor de `BuildConfig.FLAVOR`. Con la variante, RUM puede hacer coincidir los errores notificados desde tu aplicación con los archivos de asignación que ha cargado el complemento Gradle. Si no tienes variantes, las credenciales utilizarán una cadena vacía.
 
@@ -310,8 +310,8 @@ Rum.enable(rumConfig)
 
 ### Activar la característica de RUM para iniciar el envío de datos
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
     val rumConfig = RumConfiguration.Builder(applicationId)
       .trackInteractions()
@@ -320,9 +320,9 @@ Rum.enable(rumConfig)
       .build()
     Rum.enable(rumConfig)
 ```
-{{% /tab %}}
+{{% /pestaña %}}
 
-{{% tab "Java" %}}
+{{% pestaña "Java" %}}
 ```Java
     RumConfiguration rumConfig = nuevo RumConfiguration.Builder(applicationId)
       .trackInteractions()
@@ -331,8 +331,8 @@ Rum.enable(rumConfig)
       .build();
     Rum.enable(rumConfig);
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
 
 Consulta [`ViewTrackingStrategy`][5] para activar el rastreo automático de todas tus vistas (actividades, fragmentos, etc.).
 
@@ -349,8 +349,8 @@ Consulta [`ViewTrackingStrategy`][5] para activar el rastreo automático de toda
 
 3. Para rastrear tus solicitudes de OkHttp como recursos, añade el [Interceptor][9] suministrado:
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 val tracedHostsWithHeaderType = mapOf(
     "example.com" to setOf(
@@ -363,8 +363,8 @@ val okHttpClient = OkHttpClient.Builder()
     .addInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 final Map<String, Configurar<TracingHeaderType>> tracedHostsWithHeaderType = nuevo HashMap<>();
 final Configurar<TracingHeaderType> datadogAndW3HeadersTypes = nuevo HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
@@ -374,8 +374,8 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
     .addInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
     .build();
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
 
 
 
@@ -391,18 +391,18 @@ Puedes rastrear eventos como bloqueos y solicitudes de red cuando tu aplicación
 
 Añade el siguiente fragmento durante configuración de RUM:
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< pestañas >}}
+{{% pestaña "Kotlin" %}}
 ```kotlin
 .trackBackgroundEvents(true)
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{% /pestaña %}}
+{{% pestaña "Java" %}}
 ```Java
 .trackBackgroundEvents(true)
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /pestaña %}}
+{{< /pestañas >}}
 <div class="alert alert-info"><p>El rastreo de eventos en segundo plano puede dar lugar a sesiones adicionales, lo que puede afectar a la facturación. Si tienes dudas, <a href="https://docs.datadoghq.com/help/">contacta con el equipo de asistencia de Datadog.</a></p>
 </div>
 

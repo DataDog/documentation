@@ -272,7 +272,6 @@ openssl s_client -connect intake.logs.datadoghq.com:10516
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
 
 [1]: /ko/account_management/api-app-keys/#api-keys
 

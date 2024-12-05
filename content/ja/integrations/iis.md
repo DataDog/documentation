@@ -20,9 +20,9 @@ assets:
     source_type_id: 46
     source_type_name: IIS
   monitors:
-    404 errors is high: assets/monitors/err.json
-    Locked errors is high: assets/monitors/lock.json
-    Request number is high: assets/monitors/req.json
+    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
+    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
+    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -36,8 +36,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-- windows
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iis/README.md
 display_on_public_website: true
@@ -45,7 +44,7 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 5.0.0
+integration_version: 3.1.1
 is_public: true
 manifest_version: 2.0.0
 name: iis
@@ -57,7 +56,6 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
-  - カテゴリー::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup

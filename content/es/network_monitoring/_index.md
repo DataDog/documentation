@@ -41,4 +41,4 @@ title: Monitorización de redes
 
 ## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}

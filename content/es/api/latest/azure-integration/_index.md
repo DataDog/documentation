@@ -1,3 +1,0 @@
----
-title: Integración de Azure
----

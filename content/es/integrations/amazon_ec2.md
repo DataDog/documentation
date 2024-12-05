@@ -7,7 +7,7 @@ categories:
 - os & system
 - aws
 - log collection
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Seguimiento del uso de recursos de instancias, de checks del estado de
   monitores y mucho más.

@@ -228,4 +228,4 @@ Si la solicitud de token de acceso o actualización es válida y está autorizad
 
 ## Leer más
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}

@@ -7,7 +7,7 @@ categories:
 - kubernetes
 - recopilación de logs
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Recopila métricas y logs de clústeres de Knative para Anthos y analízalos
   en Datadog.

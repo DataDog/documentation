@@ -4,7 +4,7 @@ categories:
 - network
 - oracle
 - tracing
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Recopila métricas personalizadas de tus aplicaciones usando la biblioteca
   de métricas de Yammer.

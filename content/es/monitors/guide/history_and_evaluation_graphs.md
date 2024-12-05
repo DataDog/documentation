@@ -7,6 +7,7 @@ further_reading:
 - link: monitors/guide/monitor_aggregators/
   tag: Documentación
   text: Más información sobre agregadores de monitor
+kind: Guía
 title: Gráficos de historia y evaluación del monitor
 ---
 

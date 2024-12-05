@@ -22,7 +22,7 @@ categories:
 - nube
 - gestión de costos
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
 display_on_public_website: true
@@ -133,8 +133,8 @@ Después de estos pasos, cualquier nuevo clúster utiliza el script en forma aut
 
 <div class="alert alert-info">Puedes definir varios scripts de inicio y especificar su orden en la interfaz de usuario.</div>
 
-{{< tabs >}}
-{{% tab "Solo controlador" %}}
+{{< <txprotected>pestañas</txprotected> >}}
+{{% pestaña "Solo controlador" %}}
 ##### Instala el Datadog Agent en el controlador
 
 Instala el Datadog Agent en el nodo del controlador del clúster. 
@@ -215,8 +215,8 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-{{% /tab %}}
-{{% tab "Todos los nodos" %}}
+{{% /pestaña %}}
+{{% pestaña "Todos los nodos" %}}
 ##### Instale el Datadog Agent en los nodos controlador y trabajador del clúster
 
 Instale el Datadog Agent en los nodos controlador y trabajador del clúster
@@ -340,8 +340,8 @@ Si guardaste to `datadog_init_script.sh` directamente en un `Unity Catalog Volum
 
 Puedes encontrar más información sobre los scripts de inicio del clúster en la [documentación oficial de Databricks][7].
 
-{{< tabs >}}
-{{% tab "Solo controlador" %}}
+{{< pestañas >}}
+{{% pestaña "Solo controlador" %}}
 ##### Instala el Datadog Agent en el controlador
 
 Instala el Datadog Agent en el nodo controlador del clúster. 
@@ -420,8 +420,8 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-{{% /tab %}}
-{{% tab "Todos los nodos" %}}
+{{% /pestaña %}}
+{{% pestaña "Todos los nodos" %}}
 ##### Instalar el Datadog Agent en los nodos controlador y trabajador
 
 Instalar el Datadog Agent en los nodos controlador y trabajador del clúster
@@ -511,8 +511,8 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-{{% /tab %}}
-{{< /tab >}}
+{{% /pestaña %}}
+{{< /pestaña >}}
 
 ## Datos recopilados
 

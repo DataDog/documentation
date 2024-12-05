@@ -61,8 +61,8 @@ Kubernetes Las anotaciones y las etiquetas Docker tienen prioridad sobre los arc
 
 Los siguientes ejemplos desactivan el auto-Configuración para Redis e Istio integraciones.
 
-{{< tabs >}}
-{{% tab "Datadog Operador" %}}
+{{< <txprotected>pestañas</txprotected> >}}
+{{% pestaña "Datadog Operador" %}}
 
 En su `datadog-agent.yaml`, utilice `override.nodeAgent.env` para establecer la variable `DD_IGNORE_AUTOCONF` entorno .
 

@@ -191,11 +191,11 @@ The Datadog Go SDK supports the following trace context formats, including depre
 
 {{% /tab %}}
 
-{{% tab "Node.js" %}}
+{{% tab "NodeJS" %}}
 
 ### Supported formats
 
-The Datadog Node.js SDK supports the following trace context formats, including deprecated configuration values:
+The Datadog NodeJS SDK supports the following trace context formats, including deprecated configuration values:
 
 | 形式                 | Configuration Value |
 |------------------------|---------------------|
