@@ -96,7 +96,7 @@ Datadog también ofrece una solución, ahora en versión beta pública, para [in
 
 ## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
 [2]: /es/serverless/aws_lambda

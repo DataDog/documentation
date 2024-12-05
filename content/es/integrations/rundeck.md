@@ -25,7 +25,7 @@ categories:
 - rum
 - notificaciones
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
 display_on_public_website: true

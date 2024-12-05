@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/process/README.md
 display_on_public_website: true

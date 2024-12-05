@@ -1,7 +1,7 @@
 ---
 categories:
 - mobile
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Monitoriza fallos de aplicaciones y recopila métricas detalladas del
   rendimiento en tiempo de ejecución

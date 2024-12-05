@@ -95,7 +95,7 @@ categories:
 - marketplace
 - la red
 - snmp
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false

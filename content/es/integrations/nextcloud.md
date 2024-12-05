@@ -22,7 +22,7 @@ author:
   support_email: emeric.planet@gmail.com
 categories:
 - colaboración
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_on_public_website: true

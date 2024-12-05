@@ -19,7 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - métricas
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_on_public_website: true

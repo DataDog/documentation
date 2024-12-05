@@ -24,7 +24,7 @@ author:
 categories:
 - red
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
 display_on_public_website: true
