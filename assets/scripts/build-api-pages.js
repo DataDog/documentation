@@ -959,6 +959,19 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
 
 
 /**
+ * HTTPS resolver to handle properties named `$refs` in the OpenAPI spec.
+ */
+const httpsResolver = {
+  order: 1,
+  canRead(path) {
+    return path.url.startsWith("https://");
+  },
+  read(file, callback, refs) {
+    callback(null, `{\"ref\": \"${file.url}\"}`);
+  }
+};
+
+/**
  * Takes an array of spec file paths and processes them
  * @param {array} specs - array of strings with path to spec e.g ['./data/api/v2/full_spec.yaml']
  */
@@ -966,7 +979,7 @@ const processSpecs = (specs) => {
   specs
     .forEach((spec) => {
       const fileData = yaml.safeLoad(fs.readFileSync(spec, 'utf8'));
-      $RefParser.dereference(fileData)
+      $RefParser.dereference(fileData, { resolve: { https: httpsResolver } })
         .then((deref) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);
