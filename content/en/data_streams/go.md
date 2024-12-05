@@ -86,7 +86,7 @@ If a service consumes data from one point and produces to another point, propaga
     datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
     ```
 
-###### Other queuing technologies or protocols
+#### Other queuing technologies or protocols
 
 You can also use manual instrumentation. For example, you can propagate context through Kinesis.
 
@@ -103,7 +103,7 @@ if ok {
 
 ```
 
-###### Instrumenting the consume call
+##### Instrumenting the consume call
 
 1. Ensure your message supports the [TextMapReader interface][#7].
 2. Extract the context from your message and instrument the consume call by calling:
