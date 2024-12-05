@@ -18,8 +18,8 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 | Technology | Library                                                                  | Minimal tracer version | Recommended tracer version |
 |------------|--------------------------------------------------------------------------|------------------------|----------------------------|
-| Kafka      | [confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go) | 1.56.1                 | 1.66.0 or later            |
-| Kafka      | [Sarama](https://github.com/Shopify/sarama)                              | 1.56.1                 | 1.66.0 or later            |
+| Kafka      | [confluent-kafka-go][#8] | 1.56.1                 | 1.66.0 or later            |
+| Kafka      | [Sarama][#9]                              | 1.56.1                 | 1.66.0 or later            |
 
 ### Installation
 
@@ -157,3 +157,5 @@ if ok {
 [5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
 [7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
+[8]: https://github.com/confluentinc/confluent-kafka-go
+[9]: https://github.com/Shopify/sarama
