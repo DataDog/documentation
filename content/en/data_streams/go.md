@@ -119,8 +119,6 @@ if ok {
 [3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
 [4]: https://datadoghq.dev/orchestrion/
 [5]: https://datadoghq.dev/orchestrion/docs/getting-started/
-[4]: https://datadoghq.dev/orchestrion/
-[5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
 [7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
 [8]: https://github.com/confluentinc/confluent-kafka-go
