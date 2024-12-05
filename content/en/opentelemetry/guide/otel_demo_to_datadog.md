@@ -75,14 +75,14 @@ Complete the following steps to configure these three components.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-1. Open the demo repository. Create a file called `docker-compose.override.yml` in the root folder. 
+1. Open the demo repository. Create a file called `docker-compose.override.yml` in the root folder.
 
 2. Open the created file. Paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
 
     ```yaml
-    services: 
+    services:
       otelcol:
-        command: 
+        command:
           - "--config=/etc/otelcol-config.yml"
           - "--config=/etc/otelcol-config-extras.yml"
           - "--feature-gates=exporter.datadogexporter.UseLogsAgentExporter"
@@ -330,9 +330,9 @@ The OTel Demo sends `user.id` as span tags, so you can use this to filter all tr
 
 ### Error Tracking
 
-The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for simulating error scenarios.
+The OpenTelemetry Demo includes a feature flag engine for simulating error scenarios.
 
-1. Open the `src/flagd/demo.flagd.json` file and set the `defaultVariant` to `on` for one of the cases. See the [OpenTelemetry Demo documentation][6] for available cases.
+1. Navigate to [http://localhost:8080/feature][12] to manage the available scenarios. See the [OpenTelemetry Demo documentation][5] for more details.
 2. After the demo starts producing errors, you can visualize and track down the affected services in Datadog.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/error_tracking.png" alt="Error tracking view showing error PaymentService Fail Feature Flag Enabled" style="width:90%;" >}}
@@ -344,7 +344,7 @@ The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for
 [1]: https://github.com/open-telemetry/opentelemetry-demo
 [2]: https://www.datadoghq.com/free-datadog-trial/
 [3]: https://app.datadoghq.com/organization-settings/api-keys/
-[5]: https://flagd.dev/
-[6]: https://opentelemetry.io/docs/demo/feature-flags/
+[5]: https://opentelemetry.io/docs/demo/feature-flags/
 [10]: https://opentelemetry.io/docs/demo/#language-feature-reference
 [11]: https://app.datadoghq.com/services
+[12]: http://localhost:8080/feature

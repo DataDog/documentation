@@ -1,6 +1,5 @@
 ---
-title: Single Step APM Instrumentation (Beta)
-is_beta: true
+title: Single Step APM Instrumentation
 aliases:
 - /tracing/trace_collection/single-step-apm
 further_reading:
@@ -10,21 +9,15 @@ further_reading:
 ---
 ## Overview
 
-Single Step Instrumentation for APM installs the Datadog Agent and [instruments][4] your applications in one step, with no additional configuration steps required.
+Single Step Instrumentation (SSI) for APM installs the Datadog Agent and [instruments][4] your applications in one step, with no additional configuration steps required.
 
-## Requirements
+## Compatibility
 
-- **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
-
-- **Operating systems**:
-   - Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora)
-   - Docker
-   - Kubernetes clusters with Linux containers ([Datadog Admission Controller][5] must be enabled) 
-     - NOTE: Windows pods are not supported. Use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
+To see requirements for compatible languages, operating systems, and architectures, see [Single Step Instrumentation compatibility][6].
 
 ## Enabling APM on your applications
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
+If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
 
 The following examples show how it works for each deployment type.
 
@@ -38,7 +31,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
@@ -63,7 +56,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -89,7 +82,7 @@ For a Docker Linux container:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 You can enable APM by installing the Agent with either:
 
@@ -143,7 +136,6 @@ To enable Single Step Instrumentation with the Datadog Operator:
              dotnet: "3"
              python: "2"
              js: "5"
-             ruby: "2"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -153,7 +145,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
@@ -184,7 +176,6 @@ To enable Single Step Instrumentation with Helm:
             dotnet: "3"
             python: "2"
             js: "5"
-            ruby: "2"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -196,7 +187,7 @@ To enable Single Step Instrumentation with Helm:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -282,7 +273,7 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 ### Enabling or disabling instrumentation for namespaces
 
@@ -298,7 +289,7 @@ To enable instrumentation for specific namespaces, add `enabledNamespaces` confi
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          enabledNamespaces: # Add namespaces to instrument
            - default
            - applications
@@ -310,7 +301,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
            - default
            - applications
@@ -603,6 +594,15 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### Single Step Instrumentation is not taking effect
+
+Single Step Instrumentation automatically disables when it detects [custom instrumentation][7] in your application. If you want to use SSI, you'll need to:
+
+1. Remove any existing custom instrumentation code.
+1. Restart your application.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -612,3 +612,5 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [3]: /tracing/service_catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
+[6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
+[7]: /tracing/trace_collection/custom_instrumentation/
