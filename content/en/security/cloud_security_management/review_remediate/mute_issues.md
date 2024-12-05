@@ -32,7 +32,7 @@ For example, the CSM Misconfigurations rule ['Block Public Access' feature is en
 3. Select a reason for the mute; for example, a fix is pending, it's a false positive, or it's an accepted risk.
 4. Enter an optional **Description**.
 5. Select the duration of the mute.
-6. Click **Mute**. The Mute issue window closes.
+6. Click **Mute**. The **Mute issue** window closes.
 
 ### Unmute an issue
 
