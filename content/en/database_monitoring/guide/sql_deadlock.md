@@ -14,6 +14,7 @@ further_reading:
 
 The Deadlock view enables you to explore deadlock events in your SQL Server database.
 A deadlock occurs when two or more processes are unable to proceed because each is waiting for the other to release resources.
+
 This guide assumes that Database Monitoring has been configured for your [SQL Server][1].
 
 ## Before you begin
@@ -49,7 +50,7 @@ Supported Agent versions
   GO
 ```
 
-2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
+2. In addition to the [DBM for SQL Server setup][1]. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
   deadlocks_collection:
       enabled: true
