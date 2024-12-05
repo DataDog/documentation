@@ -23,18 +23,16 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 ### Installation
 
-### Automatic Instrumentation for Kafka-based Workloads
+#### Automatic Instrumentation
 
-Automatic instrumentation uses [Orchestrion][4] and supports both the Sarama and Confluent Kafka libraries.
+Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
 
 To automatically instrument your service:
 
 1. Follow the [Getting Started](5) guide to compile or run your service using [Orchestrion][4].
 2. Set the `DD_DATA_STREAMS_ENABLED=true` environment variable
 
-### Manual instrumentation
-
-#### Kafka based workloads
+#### Manual instrumentation
 
 ##### Manually Instrumenting Sarama Kafka client
 
@@ -134,7 +132,7 @@ if ok {
 
 ```
 
-##### Instrumenting the consume call
+###### Instrumenting the consume call
 
 1. Ensure your message supports the [TextMapReader interface][#7].
 2. Extract the context from your message and instrument the consume call by calling:
