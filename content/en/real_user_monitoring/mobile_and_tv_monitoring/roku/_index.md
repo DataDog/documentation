@@ -24,7 +24,7 @@ To get started with RUM for Roku, create an application and configure the RokuSD
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/setup">}}<u>Setup</u>: Learn how to setup the Roku SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/error_reporting">}}<u>Crash Reporting</u>: Add crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/error_tracking">}}<u>Crash Reporting</u>: Add crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/mobile_vitals">}}<u>Data Collected</u>: Review data that the RUM Roku SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
