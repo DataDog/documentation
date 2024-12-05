@@ -72,10 +72,7 @@ For more information about setting up a client token, see the [Client Token docu
 
 In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][8].
 
-At this step, it is important to:
-- Set the [sample rate (RUM sessions)](#sample-rum-sessions)
-- Set [Set tracking consent](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users
-- See [other configuration options][9] to initialize the library
+During initialization, you can also set the sample rate (RUM sessions) and set the tracking consent for GDPR compliance, as described below. See [other configuration options][9] to initialize the library.
 
 {{< site-region region="us" >}}
 {{< tabs >}}
