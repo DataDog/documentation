@@ -18,45 +18,11 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 | Technology | Library                                                                  | Minimal tracer version | Recommended tracer version |
 |------------|--------------------------------------------------------------------------|------------------------|----------------------------|
-| Kafka      | [confluent-kafka-go][#8] | 1.56.1                 | 1.66.0 or later            |
-| Kafka      | [Sarama][#9]                              | 1.56.1                 | 1.66.0 or later            |
+| Kafka      | [confluent-kafka-go][#8]                                                  | 1.56.1                | 1.66.0 or later            |
+| Kafka      | [Sarama][#9]                                                             | 1.56.1                 | 1.66.0 or later            |
 
 ### Installation
 
-#### Automatic Instrumentation
-
-Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
-
-To automatically instrument your service:
-
-1. Follow the [Orchestrion Getting Started](5) guide to compile or run your service using [Orchestrion][4].
-2. Set the `DD_DATA_STREAMS_ENABLED=true` environment variable
-
-#### Manual instrumentation
-
-##### Sarama Kafka client
-
-To manually instrument the Sarama Kafka client with Data Streams Monitoring:
-
-1. Import the `ddsarama` go library
-
-```go
-import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
-)
-
-2. Wrap the producer with `ddsarama.WrapAsyncProducer`
-
-...
-config := sarama.NewConfig()
-producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
-
-// ADD THIS LINE
-producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
-```
-
-<<<<<<< HEAD
-##### Manually Instrumenting Confluent Kafka client
 #### Automatic Instrumentation
 
 Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
