@@ -28,7 +28,7 @@ For example, the CSM Misconfigurations rule ['Block Public Access' feature is en
 1. On the misconfiguration, vulnerability, or identity risk side panel, find the triage status dropdown for the resource.
    - If the side panel is for a single resource, under **Next Steps**, the list is under **Triage**.
    - If the side panel is for a list of aggregated resources, select one or more resources in the table, then find the list in the **Status** column.
-2. Open the list with the current triage status and click **Muted**. The Mute issue window opens.
+2. Open the list with the current triage status and click **Muted**. The **Mute issue** window opens.
 3. Select a reason for the mute; for example, a fix is pending, it's a false positive, or it's an accepted risk.
 4. Enter an optional **Description**.
 5. Select the duration of the mute.
