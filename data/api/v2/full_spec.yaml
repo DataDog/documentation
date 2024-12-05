@@ -41021,9 +41021,9 @@ paths:
         rum_metric:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"type\":
-              \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\": \"session\",\n
-              \     \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique_lower_alnum }}\",\n
+              \   \"type\": \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\":
+              \"session\",\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
               \       \"include_percentiles\": true,\n        \"path\": \"@duration\"\n
               \     },\n      \"filter\": {\n        \"query\": \"source:{{ unique
               }}\"\n      },\n      \"group_by\": [{\n        \"path\": \"@browser.name\",\n
