@@ -28,9 +28,12 @@ import (
 	"log"
 	"os"
 
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" if you're using 2.x
-	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" if you're using 2.x
-	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using 2.x
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" //2.x
+	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" //2.x
+	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" //2.x
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -65,8 +68,9 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
    ```go
    import (
-     "go.opentelemetry.io/otel"
-     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"  // use "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" if you're using 2.x
+      "go.opentelemetry.io/otel"
+      ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"  // 1.x
+      // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" //2.x
    )
    ```
 

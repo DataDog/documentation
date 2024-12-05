@@ -52,7 +52,8 @@ To begin profiling applications:
 3. Import the [profiler][6] ([v2 documentation][21]) at the start of your application:
 
     ```Go
-    import "gopkg.in/DataDog/dd-trace-go.v1/profiler" // use "github.com/DataDog/dd-trace-go/v2/profiler" if you're using 2.x
+    import "gopkg.in/DataDog/dd-trace-go.v1/profiler" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/profiler" //2.x
     ```
 
 4. Add the following snippet to start the profiler:

@@ -121,7 +121,10 @@ The Go tracer package provides the `SetUser()` function, which allows you to mon
 This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/appsec" if you're using v2.x
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec //2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
@@ -467,7 +470,10 @@ The following examples show how to track login events or custom events (using si
 {{< tabs >}}
 {{% tab "Login success" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" //2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
@@ -484,7 +490,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Login failure" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/appsec" if you're using v2.x
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" //2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
@@ -497,7 +506,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% tab "Custom business logic" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec" // use "github.com/DataDog/dd-trace-go/v2/appsec" if you're using v2.x
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" //2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "my-uid"}

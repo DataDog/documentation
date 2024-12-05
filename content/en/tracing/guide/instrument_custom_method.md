@@ -182,7 +182,10 @@ end
 ```go
 package ledger
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // use "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" if you're using v2.x
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" //2.x
+)
 
 // [...]
 
