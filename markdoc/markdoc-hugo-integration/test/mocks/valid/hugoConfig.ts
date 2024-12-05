@@ -23,7 +23,12 @@ const mockHugoGlobalConfig: HugoGlobalConfig = {
       }
     }
   },
-  dirs: HugoFunctions.getSubdirsByType(VALID_SITE_DIR)
+  dirs: {
+    content: VALID_SITE_DIR + '/content',
+    filtersConfig: VALID_SITE_DIR + '/content_filters',
+    partials: VALID_SITE_DIR + '/layouts/partials',
+    images: VALID_SITE_DIR + '/static/images'
+  }
 };
 
 const mockPageConfig: PageConfig = {

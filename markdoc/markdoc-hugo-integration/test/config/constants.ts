@@ -8,8 +8,7 @@ export const MOCKS_DIR = path.join(__dirname, '..', 'mocks');
 
 // Valid example site
 export const VALID_SITE_DIR = path.join(__dirname, '..', 'mocks', 'validSite');
-export const VALID_FILTERS_CONFIG_DIR =
-  VALID_SITE_DIR + '/config/_default/content_filters/';
+export const VALID_FILTERS_CONFIG_DIR = VALID_SITE_DIR + '/content_filters/';
 export const VALID_CONTENT_DIR = VALID_SITE_DIR + '/content';
 export const VALID_PARTIALS_DIR = VALID_SITE_DIR + '/layouts/partials';
 

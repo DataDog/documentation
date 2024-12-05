@@ -71,20 +71,6 @@ export class HugoFunctions {
   }
 
   /**
-   * When given the top-level directory for a Hugo site,
-   * returns an object with the paths to any subdirectories
-   * the integration needs to access.
-   */
-  static getSubdirsByType(siteDir: string): HugoSubdirsByType {
-    return {
-      content: siteDir + '/content',
-      filtersConfig: siteDir + '/config/_default/content_filters',
-      partials: siteDir + '/layouts/partials',
-      images: siteDir + '/static/images'
-    };
-  }
-
-  /**
    * Returns the string value of a key in the i18n object.
    * The i18n object is ingested from the JSON files in
    * the `<SITE_DIR>/i18n` folder. It contains translations

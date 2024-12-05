@@ -36,7 +36,7 @@ export class HugoGlobalConfigBuilder {
   private static getSubdirsByType(p: IntegrationConfig): HugoSubdirsByType {
     return {
       content: p.baseSiteDir + '/content',
-      filtersConfig: p.baseSiteDir + '/config/_default/content_filters',
+      filtersConfig: p.baseSiteDir + '/content_filters',
       partials: p.baseSiteDir + '/layouts/partials',
       images: p.baseSiteDir + '/static/images'
     };
