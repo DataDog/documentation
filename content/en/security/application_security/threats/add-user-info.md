@@ -116,7 +116,7 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1]. If you are using the preview version of v2.x, see this [documentation][2].
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1] (or [v2 documentation][2]).
 
 This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
 

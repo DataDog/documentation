@@ -36,7 +36,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1 
    ```
 
-   If you are on the preview version of v2.x, do:
+   If you are using v2, do:
 
    ```console
    $ go get -v -u github.com/DataDog/dd-trace-go/v2/ddtrace/tracer

@@ -110,7 +110,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] (if you are on v2.x of the Go Tracer, refer to the v2 docs [here][3]) option when starting the profiler:
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] (or [WithCustomProfilerLabelKeys v2][3]) option when starting the profiler:
 
 ```go
 profiler.Start(

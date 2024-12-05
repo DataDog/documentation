@@ -58,7 +58,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
    go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
    ```
 
-   If you are using the preview version of v2.x, do:
+   If you are using v2, do:
 
    ```shell
    go get github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry

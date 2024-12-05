@@ -54,7 +54,7 @@ func main() {
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3] ([v2.x documentation][20]).
+See all available options in the [configuration documentation][3] (or [configuration documentation v2][20]).
 
 ### Unified service tagging
 
