@@ -2,6 +2,8 @@
 title: Estimated Usage Metrics
 ---
 
+<style>tbody code {word-break: break-word !important;}</style>
+
 ## Overview
 
 Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
