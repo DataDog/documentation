@@ -6,19 +6,50 @@ kind: documentation
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
+
 * [Datadog Agent v7.34.0 or later][1]
 * [dd-trace-go v1.56.1 or later][2]
 
 ### Installation
 
-- Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.
-- [Start the tracer][3].
+* Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.
+* [Start the tracer][3].
 
-Two types of instrumentation are available:
-- Instrumentation for Kafka-based workloads
-- Custom instrumentation for any other queuing technology or protocol
+Three types of instrumentation are available:
 
-### Confluent Kafka client
+* Automatic instrumentation for Kafka-based workloads
+* Manual Instrumentation for Kafka-based workloads
+* Manual instrumentation for any other queuing technology or protocol
+
+### Automatic Instrumentation for Kafka-based Workloads
+
+Automatic instrumentation uses [Orchestrion][4] and supports both the Sarama and Confluent Kafka libraries.
+
+To automatically instrument your service:
+
+1. Follow the [Getting Started](5) guide to compile or run your service using [Orchestrion][4].
+2. Set the `DD_DATA_STREAMS_ENABLED=true` environment variable
+
+### Manual instrumentation
+
+#### Kafka based workloads
+
+##### Manually Instrumenting Sarama Kafka client
+
+```go
+import (
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+)
+
+...
+config := sarama.NewConfig()
+producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
+
+// ADD THIS LINE
+producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
+```
+
+##### Manually Instrumenting Confluent Kafka client
 
 ```go
 import (
@@ -44,26 +75,10 @@ If a service consumes data from one point and produces to another point, propaga
     datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
     ```
 
-### Sarama Kafka client
-
-```go
-import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
-)
-
-...
-config := sarama.NewConfig()
-producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
-
-// ADD THIS LINE
-producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
-```
-
-### Manual instrumentation
-
+#### Other queuing technologies or protocols
 You can also use manual instrumentation. For example, you can propagate context through Kinesis.
 
-#### Instrumenting the produce call
+##### Instrumenting the produce call
 
 1. Ensure your message supports the [TextMapWriter interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37).
 2. Inject the context into your message and instrument the produce call by calling:
@@ -76,7 +91,7 @@ if ok {
 
 ```
 
-#### Instrumenting the consume call
+##### Instrumenting the consume call
 
 1. Ensure your message supports the [TextMapReader interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44).
 2. Extract the context from your message and instrument the consume call by calling:
@@ -88,3 +103,5 @@ if ok {
 [1]: /agent
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[4]: https://datadoghq.dev/orchestrion/
+[5]: https://datadoghq.dev/orchestrion/docs/getting-started/
