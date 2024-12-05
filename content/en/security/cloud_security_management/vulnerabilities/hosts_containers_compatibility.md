@@ -25,6 +25,12 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for ho
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg                  | {{< X >}}         | {{< X >}}         |
 | Windows                  | Windows Server 2016/2019/2022, Windows 10 and later | Windows OS                |                   | {{< X >}}         |
 
+{{% collapse-content title="Windows limitations" level="h4" %}}
+- Datadog detects vulnerabilities in Windows by identifying the Windows version, and the security KB updates that have been installed. With this information, it can determine which vulnerabilities a Windows host is subject to, and which updates have been released to address them. However, some KB updates can be cumulative and contain other KB updates, which may cause Datadog to misidentify which updates have been installed.
+- Datadog can't track vulnerability fixes that Windows applies outside of KB updates.
+- Datadog can't track vulnerabilities associated with third-party software.
+{{% /collapse-content %}} 
+
 ## Application libraries
 
 Cloud Security Management Vulnerabilities supports vulnerability scanning for the following application languages and libraries on containers and Lambda instances:
