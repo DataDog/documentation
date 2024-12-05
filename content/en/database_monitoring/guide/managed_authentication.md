@@ -448,7 +448,7 @@ instances:
 ## Configure Microsoft Entra ID managed identity authentication
 
 
-Azure allows users to configure managed identity authentication for any resource that can access [Microsoft Entra ID][15], formerly Azure Active Directory. The Datadog Agent supports both [user and system assigned][10] managed identity authentication to your cloud databases.
+Azure allows users to configure managed identity authentication for any resource that can access [Microsoft Entra ID][15], formerly Azure Active Directory. The Datadog Agent supports [user-assigned][10] managed identity authentication to your cloud databases.
 
 
 ### Connect to PostgreSQL
