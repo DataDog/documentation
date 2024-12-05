@@ -207,43 +207,71 @@ clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsub
 	@rm -rf examples
 
 # Local build setup
-BUILD_SCRIPTS_PATH := local/bin/py/build
+PY_PATH := local/bin/py
+JS_PATH := local/bin/js
+TRANSLATIONS_PATH := $(PY_PATH)/translations
+BUILD_SCRIPTS_PATH := $(PY_PATH)/build
 
 .PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
 
 # Save specific config files
 backup-config:
-	@tmp_backup=$$(mktemp -d)/config_backup && \
-	if [ -f "$(BUILD_SCRIPTS_PATH)/integration_merge.yaml" ]; then \
-		cp "$(BUILD_SCRIPTS_PATH)/integration_merge.yaml" $$tmp_backup/ 2>/dev/null || true; \
-	fi; \
-	if [ -f "$(BUILD_SCRIPTS_PATH)/pull_config_preview.yaml" ]; then \
-		cp "$(BUILD_SCRIPTS_PATH)/pull_config_preview.yaml" $$tmp_backup/ 2>/dev/null || true; \
-	fi; \
-	if [ -f "$(BUILD_SCRIPTS_PATH)/pull_config.yaml" ]; then \
-		cp "$(BUILD_SCRIPTS_PATH)/pull_config.yaml" $$tmp_backup/ 2>/dev/null || true; \
-	fi; \
-	echo "$$tmp_backup" > .config_backup_path
+	@tmp_backup=$$(mktemp -d) && \
+	mkdir -p $$tmp_backup/build_backup && \
+	if [ -d "$(BUILD_SCRIPTS_PATH)/configurations" ]; then \
+		for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do \
+			if [ -f "$(BUILD_SCRIPTS_PATH)/configurations/$$config" ]; then \
+				cp "$(BUILD_SCRIPTS_PATH)/configurations/$$config" "$$tmp_backup/build_backup/$$config"; \
+			fi \
+		done; \
+	fi && \
+	if [ -d "$(PY_PATH)" ]; then \
+	    mkdir -p $$tmp_backup/py_backup && \
+	    find $(PY_PATH) -mindepth 1 -maxdepth 1 \
+	        ! -name "build" \
+	        ! -name "translations" \
+	        ! -name "add_notranslate_tag.py" \
+	        ! -name "missing_metrics.py" \
+	        ! -name "placehold_translations.py" \
+	        ! -name "submit_github_status_check.py" \
+	        -exec cp -r {} $$tmp_backup/py_backup/ \; ; \
+	fi && \
+	echo "$$tmp_backup" > .backup_path
 
 # Restore specific config files
 restore-config:
-	@if [ -f .config_backup_path ]; then \
-		backup_dir=$$(cat .config_backup_path); \
-		cp $$backup_dir/* $(BUILD_SCRIPTS_PATH)/ 2>/dev/null || true; \
-		rm .config_backup_path; \
-		rm -rf $$(dirname $$backup_dir); \
+	@if [ -f .backup_path ]; then \
+		backup_dir=$$(cat .backup_path) && \
+		if [ -d "$$backup_dir/py_backup" ]; then \
+			cp -r $$backup_dir/py_backup/* $(PY_PATH)/; \
+		fi && \
+		if [ -d "$$backup_dir/build_backup" ]; then \
+			mkdir -p $(BUILD_SCRIPTS_PATH)/configurations && \
+			for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do \
+				if [ -f "$$backup_dir/build_backup/$$config" ]; then \
+					cp "$$backup_dir/build_backup/$$config" "$(BUILD_SCRIPTS_PATH)/configurations/$$config"; \
+				fi \
+			done; \
+		fi && \
+		rm -rf $$backup_dir && \
+		rm .backup_path; \
 	fi
 
-$(BUILD_SCRIPTS_PATH):
-	@mkdir -p $(BUILD_SCRIPTS_PATH)
+$(PY_PATH):
+	@mkdir -p $(PY_PATH)
 
 # Clean build scripts
 clean-build-scripts:
-	@echo "Cleaning build directory..."
-	@find $(BUILD_SCRIPTS_PATH) -mindepth 1 -not -name 'integration_merge.yaml' -not -name 'pull_config_preview.yaml' -not -name 'pull_config.yaml' -delete
+	@echo "Cleaning build files..."
+	@$(MAKE) backup-config
+	@rm -rf $(PY_PATH)
+	@rm -rf $(JS_PATH)
+	@mkdir -p $(PY_PATH)
+	@mkdir -p $(BUILD_SCRIPTS_PATH)
+	@$(MAKE) restore-config
 
 # Source the build scripts and maintain file structure
-setup-build-scripts: clean-build-scripts $(BUILD_SCRIPTS_PATH) backup-config
+setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 	@echo "Fetching latest build scripts..."; \
 	if [ -z "$(BUILD_SCRIPT_BRANCH)" ] || [ -z "$(BUILD_SCRIPT_REPO_URL)" ] || [ -z "$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
@@ -252,16 +280,18 @@ setup-build-scripts: clean-build-scripts $(BUILD_SCRIPTS_PATH) backup-config
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
 	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
-		echo "Moving files to build directory..." && \
-		cp -r $$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)/* $(BUILD_SCRIPTS_PATH)/ && \
-		cd $(BUILD_SCRIPTS_PATH) && \
-		if [ -d "services" ]; then \
+		echo "Moving files to python directory..." && \
+		cp -r $$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)/* $(PY_PATH)/ && \
+		if [ -d "$(PY_PATH)/services" ]; then \
 			echo "Cleaning up directory structure..." && \
-			rm -rf services; \
+			rm -rf $(PY_PATH)/services; \
 		fi \
 	fi && \
 	rm -rf $$tmp_dir
 	@$(MAKE) restore-config
+	mkdir local/bin/js
+	cp -r $(PY_PATH)/js/* $(JS_PATH)/
+	rm -rf local/bin/py/sh local/bin/py/js
 	@echo "Build scripts updated successfully!"
 
 # Function that will clone a repo or sparse clone a repo

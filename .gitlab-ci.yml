@@ -57,41 +57,16 @@ variables:
 
   # Feature Flag Vars
   FF_PREVIEW_PULL_CONFIG_CACHE: "true" # set to false to disable caching of pull_config.yaml in preview builds
-  FF_BUILD_IMAGE_URL: "registry.ddbuild.io/ci/websites/webops-site-build:v50282548-b9d45335"
+  FF_BUILD_IMAGE_URL: "registry.ddbuild.io/ci/websites/webops-site-build:v50389622-96d5f437"
 
 
 # ================== copy scripts =============== #
 .common_script: &common_script
-  # First, backup existing configuration files we want to preserve
-  - |
-    if [ -d "local/bin/py/build/configurations" ]; then
-      mkdir -p /tmp/config_backup
-      for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do
-        if [ -f "local/bin/py/build/configurations/$config" ]; then
-          cp "local/bin/py/build/configurations/$config" "/tmp/config_backup/$config"
-        fi
-      done
-    fi
-
-  # Clear the build directory while preserving configs
-  - rm -rf local/bin/py/build
-  - mkdir -p local/bin/py/build/configurations
-
-  # Copy files from the image to our local build directory
-  - cp -r /usr/local/bin/docs-ci/* local/bin/py/build/
-
-  # Restore the configuration files
-  - |
-    for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do
-      if [ -f "/tmp/config_backup/$config" ]; then
-        cp "/tmp/config_backup/$config" "local/bin/py/build/configurations/$config"
-      fi
-    done
-
-  - rm -rf /tmp/config_backup
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
+  - chmod +x /usr/local/bin/docs-ci/sh/merge-build-files.sh
+  - /usr/local/bin/docs-ci/sh/merge-build-files.sh
   - chmod +x /usr/local/bin/*.py # make python scripts executable by the runner
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
