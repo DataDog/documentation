@@ -9,7 +9,10 @@ The following instrumentation types are available:
 
 ### Prerequisites
 
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
+
 * [Datadog Agent v7.34.0 or later][1]
+* [dd-trace-go v1.56.1 or later][2]
 
 ### Supported libraries
 
@@ -18,9 +21,37 @@ The following instrumentation types are available:
 | Kafka      | [confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go) | 1.56.1                 | 1.66.0 or later            |
 | Kafka      | [Sarama](https://github.com/Shopify/sarama)                              | 1.56.1                 | 1.66.0 or later            |
 
-
 ### Installation
 
+### Automatic Instrumentation for Kafka-based Workloads
+
+Automatic instrumentation uses [Orchestrion][4] and supports both the Sarama and Confluent Kafka libraries.
+
+To automatically instrument your service:
+
+1. Follow the [Getting Started](5) guide to compile or run your service using [Orchestrion][4].
+2. Set the `DD_DATA_STREAMS_ENABLED=true` environment variable
+
+### Manual instrumentation
+
+#### Kafka based workloads
+
+##### Manually Instrumenting Sarama Kafka client
+
+```go
+import (
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+)
+
+...
+config := sarama.NewConfig()
+producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
+
+// ADD THIS LINE
+producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
+```
+
+##### Manually Instrumenting Confluent Kafka client
 #### Automatic Instrumentation
 
 Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
@@ -115,6 +146,8 @@ if ok {
 [1]: /agent
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[4]: https://datadoghq.dev/orchestrion/
+[5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [4]: https://datadoghq.dev/orchestrion/
 [5]: https://datadoghq.dev/orchestrion/docs/getting-started/
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
