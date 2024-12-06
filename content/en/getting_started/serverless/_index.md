@@ -20,9 +20,9 @@ This guide makes use of a serverless [sample app][2] that you can launch using a
 
 1. Clone the [sample app][3] repository to your local machine.
 2. Choose a runtime and IaC tool of your choice and follow the link to the specific deployment instructions
-3. Find your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}), you will need them for the next step.
-4. Follow the runtime and IaC specific instructions to deploy the sample application 
-5. After the deployment completes, you can either use the Postman collection in the root of the repository or by running the [load test][6]
+3. Find your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}). You will need them for the next step.
+4. Follow the runtime and IaC specific instructions to deploy the sample application.
+5. After the deployment completes, you can either use the Postman collection in the root of the repository or run the [load test][6].
 
 You can [see your sample app functions in Serverless View][7].
 
@@ -43,7 +43,7 @@ For your serverless sample application, Datadog has likely detected a [cold star
 
 ## Investigate Errors
 
-The sample application will periodically generate errors and have slow response, causing Lambda timeouts, in the product pricing service.
+The sample application periodically generates errors and has a slow response. This causes Lambda timeouts in the product pricing service.
 
 {{< img src="getting_started/serverless/dd_serverless_view_error_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
@@ -76,7 +76,7 @@ If you zoom out, you will also see the entire end to end trace through all of th
 
 The **Trace Map** tab visualizes the flow of your services and how they connect to each other.
 
-If you are viewing a trace with an error the lower half of the detailed trace view will show the details:
+If you are viewing a trace with an error, the lower half of the detailed trace view shows the details:
 
 ```
 Error: Failure generating prices

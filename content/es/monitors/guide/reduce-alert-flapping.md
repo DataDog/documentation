@@ -5,7 +5,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar un tiempo de inactividad para silenciar un monitor
-kind: Guía
 title: Reducir el flapping de alertas
 ---
 

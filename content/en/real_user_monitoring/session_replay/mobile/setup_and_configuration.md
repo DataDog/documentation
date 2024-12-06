@@ -186,7 +186,7 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-Sample rate is a required parameter in Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 means no replays are recorded and 100 means all RUM sessions contain replay.
+The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied. 
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 

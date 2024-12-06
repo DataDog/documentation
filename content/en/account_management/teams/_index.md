@@ -59,8 +59,8 @@ If you have teams with existing members, picking the SAML strict option override
 A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-handle>` or `teams:<team-handle>`. 
 
 To find a team handle:
-1. Click the team's name in the team directory page. A side panel appears with team details.
-1. Look for the **handle** field at the top of the panel. 
+1. Click the team's name in the team directory page. The team detail page appears.
+1. The team handle appears to the right of the name, at the top of the page.
 
 To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below. 
 
@@ -87,15 +87,41 @@ Add a notification channel to your Team to route alerts to communication channel
 1. Select **Notifications**.
 1. Add a channel, then click **Save**.
 
-## Filter
+## Team filter
 
-The team filter tailors a user's experiences across Datadog to content associated with their teams.
+The team filter tailors your experience across Datadog by showing you content associated with your teams. The **My Teams** list includes teams you are a member of and teams you selected as a favorite.
 
-The team filter appears in two places in each list view: 
-- A list of search facets at the top left
-- A search term in the search bar
+{{< img src="/account_management/teams/team-filter.png" alt="Monitor list page with red box around the team filter. Two out of three My Teams selected.">}}
 
-When a user enables a team filter, they see only the resources associated with their teams or with the services owned by their teams. The team filter state is global and persistent. Therefore, Datadog maintains team context across a user's navigation journey over all applicable products.
+When you enable the team filter, you see only the resources associated with your teams or with the services owned by your teams. The team filter state is global and persistent, so Datadog applies your team context as you navigate across different products.
+
+The team filter works by adding team-based search terms to the search query. When you enable the team filter, you can see the team-based search terms it adds in the search bar.
+
+### Favorite teams
+
+You may be interested in a particular team's resources without being a member of that team. Adding a team to your favorite teams allows you to get filtered views on that team's resources without joining the team.
+
+Your favorite teams appear alongside teams you belong to at the top of the team directory page and in the team filter.
+
+#### Add or remove favorite teams
+
+You can add or remove a team from your favorites from the team directory page or from the team filter.
+
+From the [team directory page][1]:
+1. Click the team you wish to add as a favorite. The [team detail page][3] appears.
+1. Click **Add Favorite** or **Remove Favorite** in the upper right.
+
+Alternatively, also from the team directory page:
+1. Hover over the team you wish to add or remove. Inline icons appear to the right of the team name.
+1. Click the star (**Add to Favorites** or **Remove from Favorites**) icon.
+
+From the team filter:
+1. If the filter is collapsed, click **My Teams** to expand it.
+1. Click **Add Favorites**. A search box and list of teams appear.
+1. To narrow the list of teams, start typing a team name in the search box.
+1. Click the star next to the desired team to add or remove it from your favorites.
+
+### Supported products
 
 The following table describes the products in which you can use the team filter:
 
@@ -112,7 +138,6 @@ The following table describes the products in which you can use the team filter:
 | [Data Streams Monitoring][18]  | Team handle                                                                 |
 | [Synthetic Tests][19]          | Team handle                                                                 |
 | [Notebooks][20]          | Team handle                                                                      |
-
 
 
 ## Permissions

@@ -52,12 +52,12 @@ Ejecutores de tests compatibles:
 Para informar de resultados de tests a Datadog, necesitas configurar el gem `datadog-ci`:
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" (Proveedor CI en la nube (Agentless)) %}}
+{{% tab "Proveedor CI en la nube (Agentless)" %}}
 
 {{% ci-agentless %}}
 
 {{% /tab %}}
-{{% tab "On-Premises CI Provider (Datadog Agent)" (Proveedor CI on-premises (Datadog Agent) %}}
+{{% tab "Proveedor CI on-premises (Datadog Agent)" %}}
 
 {{% ci-agent %}}
 

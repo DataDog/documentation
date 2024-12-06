@@ -8,6 +8,17 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 * [Datadog Agent v7.34.0 or later][1]
 * [dd-trace-go v1.56.1 or later][2]
 
+### Prerequisites
+
+* [Datadog Agent v7.34.0 or later][1]
+
+### Supported libraries
+
+| Technology | Library                                                                  | Minimal tracer version | Recommended tracer version |
+|------------|--------------------------------------------------------------------------|------------------------|----------------------------|
+| Kafka      | [confluent-kafka-go](https://github.com/confluentinc/confluent-kafka-go) | 1.56.1                 | 1.66.0 or later            |
+| Kafka      | [Sarama](https://github.com/Shopify/sarama)                              | 1.56.1                 | 1.66.0 or later            |
+
 ### Installation
 
 - Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.

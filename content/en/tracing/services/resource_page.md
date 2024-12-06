@@ -50,27 +50,29 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="A close-up of the latency distribution graph sidebar which allows filtering on percentiles" style="width:50%;">}}
 
-## Dependency Map with Navigator
+## Dependency Map 
 
-You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource (endpoint, database query, etc.) end-to-end, along with their request counts.
+Use the Dependency Map to view a flow graph of all of a resource's upstream and downstream service dependencies. The map is scoped to the requests flowing through the selected service and resource (endpoint, database query, etc.) you're focused on.
 
-This map is based on a sample of ingested spans; the sample is drawn by a fixed sampling algorithm that considers the structure of traces. The sampling algorithm is not configurable and is not impacted by ingestion control.
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+[Inferred service dependencies][10] like databases, queues or third-party services are represented with a purple background node.
 
-The dependency map is only available for resources containing service entry spans.
+[10]: /tracing/services/inferred_services/
+{{< /site-region >}}
 
-{{< img src="tracing/visualization/resource/dependency-map-navigator-cropped.png" alt="A dependency map for a resource, with a list of service dependencies and flow diagram of requests from service to service" style="width:100%;" >}}
+Click on a downstream or upstream service node to see which resources are invoked in the request flow. To focus on a particular request path, select a node an click `set as start/end`. This filters the map to focus on the requests that also flow through this upstream or downstream dependency.
 
-Hover over a node to view metrics of each service including requests/second, error rate, and average latency. Click on a node to open a context menu with options to view the Service Page, related traces, and more.
+**Note**: This map is based on a sample of ingested spans. Request rates are then upscaled based on applied sampling rates to represent actual application/service traffic.
 
-The highlight color of the node indicates the service's [monitor status][5]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
+The dependency map is only available for service-entry span resources.
 
-{{< img src="tracing/visualization/resource/dependency-navigator-cropped.mp4" video="true" alt="A video that shows selecting a service in the dependency map list to view the flow of requests into and out of that service" style="width:100%;" >}}
+{{< img src="tracing/visualization/resource/dependency_map.png" alt="Resource page dependency map" style="width:100%;" >}}
 
-### Load amplification
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+**Note**: [Service overrides][9] are represented as part of the edge of the dependency map to keep visibility over the actual remote service, database or queue the service is interacting with.
 
-A service has load amplification if it's receiving more than 100% of the requests received by the selected resource upstream. Services with call paths highlighted in orange have load amplification, and the amplification multiplier is shown in the list on the panel. The amplification is calculated based on the requests received by the resource (shown highlighted on the map in the image below), and the requests received by the downstream service (shown inside the downstream service node on the map). By clicking on a service in the list, you can see the spans contributing to the amplification.
-
-{{< img src="tracing/visualization/resource/dependency-map-requests-cropped.png" alt="A dependency map that shows the flow of requests into and out of a particular resource and highlights the request count of that resource" style="width:100%;" >}}
+[9]: /tracing/guide/service_overrides/
+{{< /site-region >}}
 
 ### Frontend Impact
 
@@ -143,3 +145,4 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 [6]: /tracing/glossary/#spans
 [7]: /tracing/trace_explorer/trace_view/
 [8]: /tracing/search/
+

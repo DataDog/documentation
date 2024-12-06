@@ -1,5 +1,4 @@
 ---
-kind: Guía
 title: Creación de una integración JMX
 ---
 

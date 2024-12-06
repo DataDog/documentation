@@ -82,7 +82,7 @@ logs:
 Luego, aplica una etiqueta (label) de Docker o una anotación de Kubernetes para identificar tu contenedor como `foo`:
 
 {{< tabs >}}
-{{% tab "Docker label" (Etiqueta (label) de Docker) %}}
+{{% tab "Etiqueta (label) de Docker" %}}
 
 ```yaml
 LABEL com.datadoghq.ad.check.id="foo"
@@ -91,7 +91,7 @@ LABEL com.datadoghq.ad.check.id="foo"
 **Nota**: La etiqueta (label) `com.datadoghq.ad.check.id` tiene prioridad sobre el nombre de la imagen.
 
 {{% /tab %}}
-{{% tab "Kubernetes annotation" (Anotación de Kubernetes) %}}
+{{% tab "Anotación de Kubernetes" %}}
 
 ```text
 ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>

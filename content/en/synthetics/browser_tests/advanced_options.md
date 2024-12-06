@@ -78,6 +78,13 @@ Configure this option to exit the test after a successful step completion. This 
 
 {{< img src="synthetics/browser_tests/advanced_options/exit_on_success_browser.png" alt="Exit on success" style="width:50%">}}
 
+## Always run this step
+
+Configure this option to run this step even if the previous steps have failed. This can be useful for clean-up tasks when you want subsequent steps to proceed.
+
+{{< img src="synthetics/browser_tests/advanced_options/always_run_step.png" alt="Always run step even if previous steps have failed" style="width:50%">}}
+
+
 ## Prevent screenshot capture
 
 You can prevent a step screenshot from being captured at test execution. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].

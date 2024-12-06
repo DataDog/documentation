@@ -18,6 +18,11 @@ aliases:
     - /service_catalog/enrich_default_catalog/
 ---
 
+You can customize your engineering team's landing experience in Service Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
+
+{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for Developer Homepage experience!" >}}
+{{< /callout >}}
+
 ## Automatic discovery
 
 Datadog Service Catalog is pre-populated with entries detected through [APM][2], eBPF-based autodiscovery with [Universal Service Monitoring][1], and RUM applications.
@@ -29,7 +34,7 @@ If you are using APM and would like to remove the automatically named *services*
 ## Enrich auto-detected services with metadata 
 To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. 2.2 is the recommended version. To try experimental features like enhanced relationship mapping and precise code location, opt in to the beta program for [schema 3.0][3] by [submitting a request][4].
 
-{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
+{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for metadata schema v3.0!" >}}
 {{< /callout >}}
 
 ### Service Definition Schema (v2.2) (Recommended)

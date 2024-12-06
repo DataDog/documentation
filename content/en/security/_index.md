@@ -60,6 +60,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
     tag: "Blog"
     text: "How we use Datadog for detection as code"
+  - link: "https://www.datadoghq.com/blog/lateral-movement-entra-id-azure/"
+    tag: "Blog"
+    text: "Detect lateral movement in hybrid Azure environments"
+  - link: "https://www.datadoghq.com/blog/secrets-management/"
+    tag: "Blog"
+    text: "Identify the secrets that make your cloud environment more vulnerable to an attack"
 cascade:
     algolia:
         rank: 70

@@ -115,7 +115,7 @@ Para más información, consulta [Configurar la biblioteca de rastreo de Datadog
 **Ejemplo**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 Renombra dinámicamente los servicios en la configuración. Es útil para hacer que las bases de datos tengan nombres distintos en diferentes servicios.
 
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Python" %}}
 
@@ -163,8 +163,8 @@ Ruby no admite `DD_SERVICE_MAPPING` ni `DD_TRACE_SERVICE_MAPPING`. Consulta [Con
 
 [2000]: https://docs.datadoghq.com/es/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#advanced-configuration
 
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 
@@ -345,7 +345,7 @@ Cuando abres un [tique de soporte][1], el equipo de soporte de Datadog puede ped
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help/
 [2]: /es/tracing/metrics/metrics_namespace/

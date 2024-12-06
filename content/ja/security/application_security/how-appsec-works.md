@@ -34,7 +34,7 @@ Datadog Application Security [Threat Management][1] は、APM がすでに収集
 
 アプリケーション攻撃にさらされているサービスは、APM に組み込まれたセキュリティビュー ([サービスカタログ][2]、[サービス詳細画面][3]、[トレース][4]) で直接ハイライトされます。
 
-Datadog Threat Monitoring and Detection は、すべてのリクエストにおけるクライアント IP アドレスや手動で追加されたユーザータグを収集し、悪意のあるユーザーを特定します。
+Datadog Threat Monitoring and Detection は、すべてのリクエストにおけるクライアント IP アドレス、ログインアカウント情報 (ユーザーアカウント/ID など)、および手動で追加されたユーザータグを収集し、悪意のあるユーザーを特定します。
 
 <div class="alert alert-info"><strong>1-Click 有効化</strong><br>
 サービスが <a href="/agent/remote_config/#enabling-remote-configuration"> Remote Configuration が有効な Agent と、それをサポートするバージョンのトレーシングライブラリ</a>で実行されている場合、Agent または トレーシングライブラリの追加構成なしで Datadog UI から <a href="https://app.datadoghq.com/security/configuration/asm/setup">Application Security を有効にする</a>ことができます。</div>

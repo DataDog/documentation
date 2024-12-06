@@ -141,6 +141,12 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle such as your email address or Slack handle after a transition is generated (for example: a test going into alert or recovering from a previous alert), a notification is not sent for that transition. A notification is sent for the next transition.
 
+## Mobile tests
+
+### Unable to launch a device recording
+
+If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
+
 ## Private locations
 
 {{< tabs >}}

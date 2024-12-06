@@ -17,7 +17,7 @@ further_reading:
   text: "Learn about Serverless Monitoring"
 - link: "/tests/developer_workflows/"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/code_analysis/"
   tag: "Documentation"
   text: "Learn about Code Analysis"
@@ -221,7 +221,14 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-<div class="alert alert-info">The Node.js client library version 3.21.0 or later is required.</div>
+<div class="alert alert-info">
+  The Node.js client library version 3.21.0 or later is required.
+  </br>
+  </br>
+  Displaying code links and snippets for TypeScript applications requires your Node application to be run with: 
+  </br>
+  <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### Containers
 
@@ -505,11 +512,11 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in **Test Visibility**.
+You can see links from failed test runs to their source repository in **Test Optimization**.
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select a failed test run.
+1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
 2. Click the **View on GitHub** button to open the test in its source code repository.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}

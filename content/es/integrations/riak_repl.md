@@ -22,7 +22,7 @@ author:
   support_email: britt.treece@gmail.com
 categories:
 - almacenes de datos
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_on_public_website: true

@@ -31,9 +31,9 @@ The following conditional variables are available:
 |----------------------------|--------------------------------------------------------------------|
 | `{{#is_alert}}`            | The monitor alerts                                                 |
 | `{{^is_alert}}`            | The monitor does not alert                                         |
-| `{{#is_match}}`            | The context matches the provided substring                         |
+| `{{#is_match}}`            | The context matches the provided substring. If a numeric value is used, it is converted to a string.|
 | `{{^is_match}}`            | The context does not match the provided substring                  |
-| `{{#is_exact_match}}`      | The context exactly matches the provided string                    |
+| `{{#is_exact_match}}`      | The context exactly matches the provided string.<br> If a number is used, the numeric value is considered, regardless of its type. This means that as long as two numbers have the same value, they are considered equal by the function. |
 | `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
 | `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
 | `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
@@ -181,7 +181,7 @@ The `is_exact_match` conditional variable also supports [`{{value}}` template va
 {{/is_exact_match}}
 ```
 
-To notify your dev team if the value that breached the threshold of your monitor is 5, use the following:
+To notify your dev team if the value that breached the threshold of your monitor is 5 (or 5.0), use the following:
 
 ```text
 {{#is_exact_match "value" "5"}}
@@ -352,7 +352,7 @@ The following table contains all available attributes:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [Error Tracking monitors][9], [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -360,7 +360,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 |-----------------|--------------------------------------------------|
 | Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| Error Tracking  | Traces: `{{span.attributes.[error.message]}}`<br>RUM Events: `{{rum.attributes.[error.message]}}`<br>Logs: `{{log.attributes.[error.message]}}`             |
+| Error Tracking  | `{{issue.attributes.key}}`                         |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
 | Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
@@ -663,3 +663,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [6]: /monitors/types/database_monitoring/
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[9]: /monitors/types/error_tracking/

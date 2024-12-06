@@ -67,6 +67,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User invite (Support)][12] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
 | [User's role (Support)][100] | A user was added or deleted from a role in the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
 | [Role modified (Support)][101] | A role was modified by Datadog Support, and what the previous and new permissions are. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
+| [IP Allowlist Modified (Support)][115] | A new IP was added to the org's IP allowlist by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:ip_allowlist @action:modified` |
 
 ### Agent
 
@@ -405,3 +406,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [112]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Asaved_view%20
 [113]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Acustom_metrics%20
 [114]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Sensitive%20Data%20Scanner%22%20%40action%3Amodified%20%40asset.type%3Asensitive_data_scanner_scanning_group_list%20
+[115]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Aip_allowlist%20%40action%3Amodified

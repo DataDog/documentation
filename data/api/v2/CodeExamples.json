@@ -20,6 +20,25 @@
       "description": "Update a retention filter returns \"OK\" response"
     }
   ],
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "_1716720881",
+      "description": "Create an AWS account returns \"AWS Account object\" response"
+    },
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -279,6 +298,20 @@
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Update items of a dashboard list returns \"OK\" response"
+    }
+  ],
+  "CreateDataDeletionRequest": [
+    {
+      "group": "data_deletion",
+      "suffix": "",
+      "description": "Creates a data deletion request returns \"OK\" response"
+    }
+  ],
+  "PatchDomainAllowlist": [
+    {
+      "group": "domain_allowlist",
+      "suffix": "",
+      "description": "Sets Domain Allowlist returns \"OK\" response"
     }
   ],
   "CreateDowntime": [
@@ -832,6 +865,20 @@
       "description": "Revoke permission returns \"OK\" response"
     }
   ],
+  "CreateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Create a rum-based metric returns \"Created\" response"
+    }
+  ],
+  "UpdateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Update a rum-based metric returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -923,6 +970,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "RunHistoricalJob": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Run a historical job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [

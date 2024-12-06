@@ -64,3 +64,7 @@ Datadog supports the [W3C Trace Context standard][6], ensuring complete traces a
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/
+
+{{< learning-center-callout header="Try Understanding OpenTelemetry in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry">}}
+  Discover the fundamentals of OpenTelemetry, an open source standard for telemetry data collection. This course provides an overview of OpenTelemetry's capabilities and benefits, preparing you for integrating observability into your applications.
+{{< /learning-center-callout >}}

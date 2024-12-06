@@ -56,7 +56,7 @@ Mobile RUM tracking is only run upon user consent. If the end user accepts the R
 You have several options and tools when it comes to collecting and redacting data captured by RUM.
 
 ### Client token
-The browser RUM [client token][2] is used to match data from the end user's browser to a specific RUM application in Datadog. It is unencrypted and visible from the client side of an application.
+The browser RUM [client token][2] is used to match data from the end user's browser to a specific RUM application in Datadog. It is unencrypted and visible from the client-side of an application.
 
 Because the client token is only used to send data to Datadog, there is no risk of data loss due to this token; however, Datadog recommends good client token management to avoid other kinds of misuse, including:
 

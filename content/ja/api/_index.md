@@ -15,6 +15,11 @@ cascade:
   - /api/latest/ci-visibility
 - _target:
     lang: en
+    path: /api/latest/csm-threats
+  aliases:
+  - /api/latest/cloud-workload-security
+- _target:
+    lang: en
     path: /api/latest/dashboards
   aliases:
   - /api/screenboards/
