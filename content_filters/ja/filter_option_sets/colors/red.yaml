@@ -1,0 +1,10 @@
+red_item_options:
+  - display_name: Ruby (ja)
+    id: ruby
+    default: true
+  - display_name: Apple (ja)
+    id: apple
+  - display_name: Firetruck (ja)
+    id: firetruck
+  - display_name: Stop sign (ja)
+    id: stop_sign
