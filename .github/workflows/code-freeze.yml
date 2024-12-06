@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 jobs:
-  check-status:
+  check-code-freeze-status:
     runs-on: ubuntu-latest
     env:
       FREEZE_ENABLED: ${{ env.FREEZE_ENABLED }}
