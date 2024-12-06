@@ -221,7 +221,7 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-9. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example::
+9. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example:
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
