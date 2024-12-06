@@ -29,7 +29,7 @@ Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and suppo
 
 To automatically instrument your service:
 
-1. Follow the [Orchestrion Getting Started](5) guide to compile or run your service using [Orchestrion][4].
+1. Follow the [Orchestrion Getting Started][5] guide to compile or run your service using [Orchestrion][4].
 2. Set the `DD_DATA_STREAMS_ENABLED=true` environment variable
 
 #### Manual instrumentation
