@@ -18,7 +18,7 @@ further_reading:
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
-    - link: '/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking'
+    - link: '/real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking'
       tag: Documentation
       text: Web View Tracking
 ---
@@ -149,9 +149,9 @@ To instrument your consolidated web and native Session Replay views for Android:
 3. Enable [Session Replay][4] for your web application.
 4. Enable Session Replay for your mobile application (see setup instructions above).
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/
 [2]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
 [4]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -165,7 +165,7 @@ To instrument your consolidated web and native Session Replay views for iOS:
 4. Enable Session Replay for your mobile application (see setup instructions above).
 
 [1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=ios#instrument-your-web-views
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
 [3]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -177,7 +177,7 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
 [2]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -300,5 +300,5 @@ See [Privacy Options][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
