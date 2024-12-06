@@ -78,7 +78,7 @@ Once NDM is configured on your devices, you can further enrich them by adding ne
 Customize metrics and tags on your devices by viewing the [Supported Devices][9] page to view out-of-the-box device profiles. If you would like to edit or add more metrics, the following options are available:
 
 [Device profiles][10]
-: Directly edit metrics and tags in the Datadog Agent `yaml` file with with device profiles.
+: Directly edit metrics and tags in the Datadog Agent `yaml` file with device profiles.
 
 [GUI based profile authoring][6]
 : Take advantage of Datadog Network Monitoring's GUI based device onboarding experience where you can add custom metrics and tags to your devices.

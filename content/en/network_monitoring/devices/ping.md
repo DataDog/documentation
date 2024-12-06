@@ -9,11 +9,11 @@ further_reading:
   text: "SNMP Monitoring Overview"
 ---
 
-### Ping
+## Ping
 
 When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as Autodiscovered devices.
 
-#### Setup
+### Setup
 
 1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][1] documentation.
 
@@ -101,7 +101,7 @@ The following are the status names in the **Ping State** column and their descri
 | Ok           | Device is reachable through ping.                     |
 | N/A          | The devices do not support ping. |
 
-#### Metrics collected
+### Metrics collected
 
 The following metrics are made available after enabling ping:
 
@@ -111,6 +111,7 @@ The following metrics are made available after enabling ping:
 | networkdevice.ping.reachable |   Device reachability status        |
 | networkdevice.ping.packet_loss  |   Packet loss percentage |
 | networkdevice.ping.unreachable         | Device unreachable status |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

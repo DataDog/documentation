@@ -38,26 +38,28 @@ The output should look similar to the following:
      No traceback
    ```
 
-2. If your device is not listed and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP.
+2. If your device is not listed and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP. 
 
-**Note**: If no credentials are specified, the Agent attempts to locate them in your Agent configuration files.
+   **Note**: If no credentials are specified in the below commands, the Agent attempts to locate them in your Agent configuration files. Additionally, it is advisable to restart the Agent before running an `snmp walk`, as it uses the running config of the Agent, not what's on disk.
 
    **Linux**: 
    For SNMP v2:
    ```
    sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
    ```
-  For SNMP v3:
-   ```
-   sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
-   ```
-   **Windows**:   
-   ```
-   agent snmp walk <IP Address>[:Port]
+   For SNMP v3:
+    ```
+    sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
+    ```
+    **Windows**:   
+    ```
+    agent snmp walk <IP Address>[:Port]
 
-   Example:           
-   agent.exe snmp walk  10.143.50.30 1.3.6 
-   ```
+    Example:           
+    agent.exe snmp walk  10.143.50.30 1.3.6 
+    ```
+
+    Refer to your vendor specific documentation for additional information on running these commands.
 
 3. If either the SNMP status or Agent walk show an error, it could indicate one of the following issues:
 
@@ -104,7 +106,7 @@ The output should look similar to the following:
 
 ### Traps not being received for devices
 
-1. Check the Datadog `agent.log` file to ensure  that you aren't unable to bind to the traps port. If this is the case, the following error is present:
+1. Check the Datadog `agent.log` file to ensure that you aren't unable to bind to the traps port. If this is the case, the following error is present:
 
    ```
    Failed to start snmp-traps server: error happened when listening for SNMP Traps: listen udp 0.0.0.0:162: bind: permission denied
@@ -121,7 +123,7 @@ The output should look similar to the following:
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="The Network Device Monitoring page showing the Dashboard dropdown with the NDM Troubleshooting dashboard highlighed." style="width:80%;" >}}
 
-   Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match. 
+3. Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match. 
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="The NDM troubleshooting dashboard showing the Traps widget section." style="width:100%;" >}}
    
