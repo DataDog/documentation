@@ -50,7 +50,7 @@ Click **Configure** to open a menu of configuration options available for your d
 | Keyboard&nbsp;shortcuts | View a list of available keyboard shortcuts. |
 | Display UTC time | Toggle between UTC time and your default time zone. |
 | Increase density | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
-| TV Mode | Toggle to display key performance metrics on large screens or TVs. |
+| TV Mode | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][]. |
 
 ### Notifications
 
@@ -121,3 +121,4 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [6]: /dashboards/list
 [7]: /account_management/rbac/
 [8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[9]: /dashboards/guide/tv_mode
