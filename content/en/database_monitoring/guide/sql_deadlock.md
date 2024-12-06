@@ -51,7 +51,7 @@ Supported Agent versions
   GO
 ```
 
-2. In addition to the [DBM for SQL Server setup][1]. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
+2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
   deadlocks_collection:
       enabled: true
