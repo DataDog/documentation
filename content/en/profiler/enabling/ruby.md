@@ -122,7 +122,7 @@ You can configure the profiler using the following environment variables:
 | `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
 | `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to `false`. |
 | `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
-| `DD_PROFILING_PREVIEW_GVL_ENABLED`            | Boolean | Set to `true` to enable Global VM Lock (GVL) profiling. It requires the profiler to be enabled already and Ruby 3.2+. Defaults to `false`. |
+| `DD_PROFILING_PREVIEW_GVL_ENABLED`            | Boolean | Set to `true` to enable Global VM Lock (GVL) profiling. This feature requires Ruby 3.2+, and you must also enable the profiler. Defaults to `false`. |
 | `DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `DD_ENV`                                      | String  | The [environment][10] name, for example: `production`.                                                                                  |
 | `DD_SERVICE`                                  | String  | The [service][10] name, for example, `web-backend`.                                                                                     |
@@ -138,7 +138,7 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 | `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
 | `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to `false`. |
 | `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
-| `c.profiling.advanced.preview_gvl_enabled`            | Boolean | Set to `true` to enable Global VM Lock (GVL) profiling. It requires the profiler to be enabled already and Ruby 3.2+. Defaults to `false`. |
+| `c.profiling.advanced.preview_gvl_enabled`            | Boolean | Set to `true` to enable Global VM Lock (GVL) profiling. This feature requires Ruby 3.2+, and you must also enable the profiler. Defaults to `false`. |
 | `c.profiling.advanced.preview_otel_context_enabled`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `c.env`                                               | String  | The [environment][10] name, for example: `production`.                                                                                  |
 | `c.service`                                           | String  | The [service][10] name, for example, `web-backend`.                                                                                     |
