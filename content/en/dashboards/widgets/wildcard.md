@@ -30,9 +30,12 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. **Test the Wildcard widget**. The flexibility of the Wildcard widget comes with the risk of creating slow, unappealing, or inconsistent visualizations. Test the Wildcard widget on a scratchpad or empty dashboard before adding Wildcard widgets to production.
 1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query, which ensures the configuration builds the expected graph. With the Wildcard widget, you're adding a custom Vega-Lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
 
- ## Setup
+## Setup
 
- ### Configure a new Wildcard widget
+After you create a Wildcard widget, you can configure the widget either as a [new configuration](#configure-a-new-wildcard-widget) or by [importing a configuration from an existing widget](#import-data-from-an-existing-widget). 
+
+### Configure a new Wildcard widget
+
 1. [Check native widgets][4]. See if a Datadog widget can fulfill your requirements.
 1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click **Add Widgets**.
 1. Click and drag the Wildcard Widget icon from the widget tray. 
