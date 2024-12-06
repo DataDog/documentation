@@ -123,13 +123,13 @@ Click on the **Define Visual** tab to view how this query maps to Vega-Lite. Ope
 
 | Select data configuration  | Define Visual Specification |
 | ---  | ----------- |
-|{{< img src="/dashboards/widgets/wildcard/example_configuration_no_alias.png" alt="Example widget configuration, showing open data preview" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/example_vega_spec_map_to_config.png" alt="Vega specification mapping the widget configuration field query1 to the vega field" style="width:100%;" >}}|
+|{{< img src="/dashboards/widgets/wildcard/example_configuration_no_alias.png" alt="Example widget configuration, showing open data preview" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/define_visual_run_button.png" alt="Vega specification mapping the widget configuration field query1 to the vega field" style="width:100%;" >}}|
 
 To demonstrate a mismatch between the Datadog data and the Vega-Lite specification, add an alias to the query. The visualization does not work because the Vega-lite specification still points to "query1", but the Data Preview column shows that the new query is now the new alias "example". To fix this visualization, you need to replace `field:"query1"` with `field:"example"`.
 
 | Select data configuration  | Define Visual Specification |
 | ---  | ----------- |
-|{{< img src="/dashboards/widgets/wildcard/example_config_with_alias.png" alt="Example widget configuration where query has an alias" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/example_vega_spec_mismatch.png" alt="Mismatched mapping between widget configuration and Vega specification" style="width:100%;" >}}|
+|{{< img src="/dashboards/widgets/wildcard/example_config_with_alias.png" alt="Example widget configuration where query has an alias" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/define_visual_example_run_button.png" alt="Mismatched mapping between widget configuration and Vega specification" style="width:100%;" >}}|
 
 ## Compatible data formats
 
