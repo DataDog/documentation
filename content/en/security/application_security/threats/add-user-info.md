@@ -298,9 +298,9 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 ## Adding business logic information (login success, login failure, any business logic) to traces
 
 <div class="alert alert-info">
-<strong>A note on `usr.id` and `usr.login`:</strong> Investigation login abuse rely on two similar, but different concepts. `usr.id` contains the unique identifier of the user account in database. It's unique and immutable. It's unavailable when someone tries to log into a non-existant account. User blocking targets `usr.id`.</br>
-The user generally isn't aware of their user ID. Instead, they rely on mutable identifiers (phone number, username, email address...). The string used the user to log into an account should be reported as `usr.login` in login events.</br>
-If no `usr.login` is provided, `usr.id` will be used instead.</a>
+<strong>A note on usr.id and usr.login:</strong> Investigation login abuse rely on two similar, but different concepts. usr.id contains the unique identifier of the user account in database. It's unique and immutable. It's unavailable when someone tries to log into a non-existant account. User blocking targets usr.id.</br>
+The user generally isn't aware of their user ID. Instead, they rely on mutable identifiers (phone number, username, email address...). The string used by the user to log into an account should be reported as usr.login in login events.</br>
+If no usr.login is provided, usr.id will be used instead.</a>
 </div>
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
@@ -325,6 +325,9 @@ public class LoginController {
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
         metadata.put("usr.login", userName);
+
+        // If your system has multiple "tenants", please provide it. A tenant is an environment/group of user
+        metadata.put("usr.org", usr.getTenant());
 
         // track user authentication success events
         GlobalTracer
