@@ -72,7 +72,7 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: A string representing an application version<br>
 **Caveats**:<br/>
   - Node.js automatically sets the version number from package.json
-  - [Inferred services][3] will not set version tags
+  - [Inferred services][3] do not set version tags<br/>
 **Description**: Adds a `version` tag to all spans
 
 `DD_SERVICE`
