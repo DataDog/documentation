@@ -54,7 +54,7 @@ Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and
 {{< tabs >}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. To enable Static Analysis or use a different CI provider, run scans in your CI pipelines instead.</div>
+<div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. Datadog-hosted Static Analysis scans are in private beta. To use a different CI provider, run scans in your CI pipelines instead.</div>
 
 With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline. Datadog reads your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results.
 
