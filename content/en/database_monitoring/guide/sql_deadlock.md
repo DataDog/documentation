@@ -15,9 +15,10 @@ further_reading:
 The Deadlock view enables you to explore deadlock events in your SQL Server database.
 A deadlock occurs when two or more processes are unable to proceed because each is waiting for the other to release resources.
 
-This guide assumes that Database Monitoring has been configured for your [SQL Server][1].
-
 ## Before you begin
+
+You must configure Database Monitoring for your [SQL Server][1] before following the steps in this guide.
+
 
 Supported databases
 : SQL Server
