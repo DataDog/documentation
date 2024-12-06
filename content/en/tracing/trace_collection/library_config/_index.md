@@ -76,7 +76,7 @@ The following configuration options behave consistently across the latest versio
 **Description**: Adds a `version` tag to all spans
 
 `DD_SERVICE`
-: **Default**: `null`, the SDK will try to automatically determine a service name<br>
+: **Default**: `null`, the SDK tries to automatically determine a service name<br>
 **Supported Input**: A string representing an application service name <br>
 **Description**: Sets the default service name used for most spans. SDKs may set a different service name for inferred services. Integration spans may use their own default names, which can differ from the value specified in `DD_SERVICE`
 
