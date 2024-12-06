@@ -5,23 +5,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
-
-### Code freeze documentation: https://datadoghq.atlassian.net/wiki/spaces/ENG/pages/2754481240/CodeFreeze+Runbook
-
-### To enable a freeze:
-# 1. Set ACTIVE_FREEZE to "true".
-# 2. Change codefreeze-check-unfrozen to codefreeze-check-YYYYmmdd format `echo "check-$(date -u +'%Y%m%d')"`.
-# 3. Push the changes to the Github repo and open a PR.
-# 4. Merge the PR.
-# 5. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
-
-
-### To disable a freeze:
-# 1. Set ACTIVE_FREEZE to "false".
-# 2. Change codefreeze-check-YYYYmmdd to `codefreeze-check-unfrozen`.
-# 3. In the Github repo settings, remove the codefreeze-check-YYYYmmdd required status check from the master branch.
-# 4. Open a PR and merge the changes.
-
 on:
   pull_request:
     types:
@@ -36,47 +19,18 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
-  checks: write
-
-env:
-  ACTIVE_FREEZE: "false"
-  # toggle to true like below to enable + change the job unique name and add a required branch protection!
-  # ACTIVE_FREEZE: "true"
 
 jobs:
-  # during an unfrozen state leave as the unfrozen name so it is more obvious
-  codefreeze-check-unfrozen:
-  # NOTE: update this date for every new freeze, update the protected branches to require the new name
-  # codefreeze-check-incident-19254:
+  check-code-freeze-status:
     runs-on: ubuntu-latest
+    env:
+      FREEZE_ENABLED: ${{ vars.FREEZE_ENABLED }}
     steps:
-    - name: checkout repository
-      if: env.ACTIVE_FREEZE == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      uses: actions/checkout@v4
-      with:
-        persist-credentials: false
-    - name: Get Changed files
-      if: env.ACTIVE_FREEZE == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      id: changed-files
-      uses: tj-actions/changed-files@v42
-      with:
-        separator: ","
-        fetch_depth: 5
-        files_ignore: |
-          DOESNOTEXIST
-    - uses: actions/setup-python@v4
-      if: env.ACTIVE_FREEZE == 'true' && ( steps.changed-files.outputs.any_modified == 'true' ) && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      with:
-        python-version: '3.10'    # get all commits, not just the latest
-    - name: Check for frozen files
-      env:
-        ALL_CHANGED_AND_MODIFIED_FILES: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
-      if: env.ACTIVE_FREEZE == 'true' && steps.changed-files.outputs.any_modified == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      run: python local/bin/py/code-freeze-check.py -c $ALL_CHANGED_AND_MODIFIED_FILES
-    - name: Frozen file exception pass
-      if: env.ACTIVE_FREEZE == 'true' && (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      run: echo 'This PR was marked for exception, passing.'
-    - name: All Ignored Files pass
-      if: env.ACTIVE_FREEZE == 'true' && steps.changed-files.outputs.any_modified != 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      run: echo 'This PR is not affected by the code freeze, passing.'
+      - name: Check Status
+        run: |
+          if [ "$FREEZE_ENABLED" = "true" ]; then
+            echo "Code Freeze is enabled"
+            exit 1
+          else
+            exit 0
+          fi

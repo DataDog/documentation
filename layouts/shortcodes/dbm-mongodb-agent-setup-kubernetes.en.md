@@ -67,7 +67,7 @@ kind: Service
 metadata:
   name: mongodb-datadog-check-instances
   annotations:
-    ad.datadoghq.com/mongo.checks: |
+    ad.datadoghq.com/service.checks: |
     {
       "mongo": {
         "init_config": {},

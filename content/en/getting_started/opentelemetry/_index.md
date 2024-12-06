@@ -71,17 +71,15 @@ The Calendar application uses OpenTelemetry tools to generate and collect metric
 
 The Calendar sample application is already partially [instrumented][15]:
 
-1. Go to the main `CalendarController.java` file located at: `./src/main/java/com/otel/controller/CalendarController.java`.
-2. The following code instruments `getDate()` using the OpenTelemetry API:
+1. Go to the main `CalendarService.java` file located at: `./src/main/java/com/otel/service/CalendarService.java`.
+2. The following code instruments `getDate()` using the OpenTelemetry annotations and API:
 
-   {{< code-block lang="java" disable_copy="true" filename="CalendarController.java" >}}
-private String getDate() {
-  Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
-  try (Scope scope = span.makeCurrent()) {
-   ...
-  } finally {
-    span.end();
-  }
+   {{< code-block lang="java" disable_copy="true" filename="CalendarService.java" >}}
+@WithSpan(kind = SpanKind.CLIENT)
+public String getDate() {
+    Span span = Span.current();
+    span.setAttribute("peer.service", "random-date-service");
+    ...
 }
 {{< /code-block >}}  
 

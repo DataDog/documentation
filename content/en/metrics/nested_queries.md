@@ -184,6 +184,93 @@ In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/nested-queries-higher-res-json.png" alt="example of higher resolution queries using nested queries in the JSON" style="width:100%;" >}}
 {{% /collapse-content %}} 
 
+## Moving rollup
+Datadog provides a `moving_rollup` function that enables aggregation of datapoints over a specified time window. See [moving-rollup][10] for more information. By using nested queries, you can extend its functionality to incorporate lookback mode, allowing you to analyze datapoints beyond the original query window. This provides a more comprehensive view of your query's trends and patterns over the specified time window.
+
+{{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
+
+The existing version of the `moving-rollup` function only supports the following aggregators:
+- `avg`
+- `sum`
+- `min`
+- `max`
+- `median`
+
+When nesting queries, only the lookback mode version of the `moving_rollup` function can be used. This version of the function supports the following aggregators:
+- `avg`
+- `sum`
+- `min`
+- `max`
+- `count`
+- `count by`
+- `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
+- `stddev`
+
+{{% collapse-content title="Max Moving rollup with Lookback Mode Enabled" level="h5" %}}
+When nesting these `moving_rollups`, the rollup intervals provided must get larger as shown in the UI or JSON tab:
+
+{{< img src="/metrics/nested_queries/moving_rollup1_ui.png" alt="example of moving rollup in the UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/moving_rollup1_json.png" alt="example of moving rollup in the JSON" style="width:100%;" >}}
+
+
+{{% /collapse-content %}} 
+
+
+{{% collapse-content title="Standard Deviation Moving Rollup with Lookback Mode Enabled" level="h5" %}}
+You can also use percentiles and standard deviation with the new moving rollup function, which supports lookback, and allows nesting of moving rollups with lookback enabled.
+
+In the UI or JSON tab, it would look as follows:
+
+{{< img src="/metrics/nested_queries/moving_rollup2_ui.png" alt="example of moving rollup with standard deviation in the UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/moving_rollup2_json.png" alt="example of moving rollup with standard deviation in the JSON" style="width:100%;" >}}
+
+{{% /collapse-content %}} 
+
+
+## Boolean threshold remapping functions
+
+Remap functions allow you to refine and transform query results based on specific conditions, extending functionality for monitoring and analysis. Nested queries unlocks the following three new functions:
+
+- `is_greater` (`<QUERY>, <THRESHOLD>`)
+- `is_less` (`<QUERY>, <THRESHOLD>`)
+- `is_between` (`<QUERY>, <LOWER THRESHOLD>, <UPPER THRESHOLD>`)
+
+
+{{% collapse-content title="is_greater() example query" level="h5" %}}
+`is_greater()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_greater_ui.png" alt="example of is_greater mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_greater_json.png" alt="example of is_greater mapping function in JSON" style="width:100%;" >}}
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="is_less() example query" level="h5" %}}
+`is_less()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_less_ui.png" alt="example of is_less mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_less_json.png" alt="example of is_less mapping function in JSON" style="width:100%;" >}}
+
+
+{{% /collapse-content %}} 
+
+{{% collapse-content title="is_between() example query" level="h5" %}}
+`is_between()` returns 1.0 for each point where the query is between 10 and 30 (exclusive), and 0.0 elsewhere.
+
+In the UI or JSON tab, it would look as follows:
+{{< img src="/metrics/nested_queries/is_between_ui.png" alt="example of is_between mapping function in UI" style="width:100%;" >}}
+
+{{< img src="/metrics/nested_queries/is_between_json.png" alt="example of is_between mapping function in JSON" style="width:100%;" >}}
+
+
+{{% /collapse-content %}} 
+
+
 ## Use nested queries with Datadog's API
 You can use nested queries functionality in our [public API for querying timeseries data][3]. Change the contents of the **formula** object
 
