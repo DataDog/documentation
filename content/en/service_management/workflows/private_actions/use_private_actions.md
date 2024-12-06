@@ -19,8 +19,8 @@ further_reading:
   text: "Handling Private Action Credentials for App Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
-Private Actions are in beta. Use this form to request access today.
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
 ## Overview
@@ -46,7 +46,7 @@ To use App Builder with private actions, you must be able to point a hostname to
 
 In addition, the host must have the following:
 - 2GB of RAM
-- Docker (with Docker Compose if that is your preference)
+- Docker (with Docker Compose if that is your preference) or Kubernetes
 
 ## Set up a private action runner
 
@@ -57,7 +57,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Both**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -77,6 +77,21 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 [101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a `values.yaml` file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+
+
+{{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
 
@@ -85,7 +100,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **App Builder**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
@@ -106,6 +121,21 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 [101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a `values.yaml` file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+
+
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
@@ -114,7 +144,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **Workflows**.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
@@ -132,6 +162,20 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 
 [101]: https://docs.docker.com/compose/compose-application-model/
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a `values.yaml` file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+
 {{% /tab %}}
 {{< /tabs >}}
 

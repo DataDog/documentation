@@ -1,5 +1,5 @@
 ---
-title: Service Scorecards
+title: Scorecards
 aliases:
   - /tracing/service_catalog/scorecards
 further_reading:
@@ -8,36 +8,39 @@ further_reading:
   text: "Service Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
-  text: "Service Scorecards API" 
+  text: "Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Prioritize and promote service observability best practices with Service Scorecards"
+  text: "Prioritize and promote service observability best practices with Scorecards"
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
 - link: "/continuous_integration/dora_metrics/"
   tag: "Documentation"
-  text: "Track DORA Metrics with Datadog" 
+  text: "Track DORA Metrics with Datadog"
+- link: "https://www.datadoghq.com/blog/scorecards-dogfooding/"
+  tag: "Blog"
+  text: "How we use Scorecards to define and communicate best practices at scale"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Service Scorecards are in beta.
+Scorecards are in Preview.
 {{< /callout >}}
 
-{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Service Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
 
 ## Overview
 
-Service Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
+Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
 
 You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
 
 ## Get started
 
-{{< whatsnext desc="Set up Service Scorecards and explore how they can help your team:" >}}
-    {{< nextlink href="/service_catalog/scorecards/scorecard_configuration/" >}}Configure Service Scorecards{{< /nextlink >}}
+{{< whatsnext desc="Set up Scorecards and explore how they can help your team:" >}}
+    {{< nextlink href="/service_catalog/scorecards/scorecard_configuration/" >}}Configure Scorecards{{< /nextlink >}}
     {{< nextlink href="/service_catalog/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Service Scorecards{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Scorecards{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

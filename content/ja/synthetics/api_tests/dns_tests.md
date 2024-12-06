@@ -44,7 +44,7 @@ DNS テストは、ネットワークの外部または内部からのテスト�
 
 1. テストでクエリする**ドメイン**を指定します (例: `www.example.com`)。
 2. 使用する **DNS サーバー** を指定します（任意）。ドメイン名または IP アドレスを使用できます。指定されていない場合、DNS テストは `8.8.8.8` を使用して解決を実行し、 `1.1.1.1` と内部 AWS DNS サーバーにフォールバックします。
-3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
+3. DNS サーバーの **ポート** を指定します（任意）。指定されていない場合、DNS サーバーのポートはデフォルトで 53 になります。
 4. テストがタイムアウトするまでの時間を秒単位で指定します (オプション)。
 5. DNS テストに**名前**を付けます。
 6. DNS テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
@@ -63,7 +63,7 @@ DNS テストは、ネットワークの外部または内部からのテスト�
 | 以下の利用可能なすべてのレコード        | タイプ A、タイプ AAAA、タイプ CNAME、タイプ MX、タイプ NS、タイプ TXT | `is`、`contains`、<br> `matches`、`does not match` | _文字列_ <br> _[正規表現][4]_ |
 | at least one record | タイプ A、タイプ AAAA、タイプ CNAME、タイプ MX、タイプ NS、タイプ TXT | `is`、`contains`、<br> `matches`、`does not match` | _文字列_ <br> _[正規表現][4]_ |
 
-**Note**: SOA records are not available for testing using Synthetic tests.
+**注**: SOA レコードは Synthetic テストではテストできません。
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 

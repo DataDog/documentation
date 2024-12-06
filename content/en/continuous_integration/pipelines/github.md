@@ -35,7 +35,7 @@ Set up tracing in GitHub Actions to track the execution of your workflows, ident
 | [Partial retries][13] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for GitHub jobs. |
-| [Custom tags][12] [and measures at runtime][13] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
+| [Custom tags][20] [and measures at runtime][21] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Approval wait time][16] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
 | [Custom spans][17] | Custom spans | Configure custom spans for your pipelines. |
@@ -131,3 +131,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [17]: /glossary/#custom-span
 [18]: /logs/guide/best-practices-for-log-management/
 [19]: /continuous_integration/search/#search-for-pipelines
+[20]: /glossary/#custom-tag
+[21]: /glossary/#measure

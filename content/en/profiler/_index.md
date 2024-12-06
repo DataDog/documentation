@@ -18,7 +18,7 @@ further_reading:
       text: 'Data collection, resolution, and retention'
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
       tag: 'Blog'
-      text: 'Focus on code that matters with source code previews in Continuous Profiler'      
+      text: 'Focus on code that matters with source code previews in Continuous Profiler'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
@@ -40,6 +40,8 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+algolia:
+  tags: ["profiler"]
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
@@ -66,7 +68,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
+After you configure your application to send profiles to Datadog, start getting insights into your code performance.
 
 By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
 
@@ -100,7 +102,7 @@ Application processes that have both [APM distributed tracing][3] and continuous
 
 ### Find changes in performance by comparing profiles
 
-Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by. 
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by.
 
 ## Further Reading
 

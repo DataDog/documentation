@@ -5,6 +5,9 @@ further_reading:
 - link: "https://vega.github.io/vega-lite/tutorials/getting_started.html"
   tag: "Vega Tutorial"
   text: "Introduction to Vega-Lite"
+- link: "https://vega.github.io/vega-lite/tutorials/explore.html"
+  tag: "Vega Tutorial"
+  text: "Exploring Data"
 ---
 
 {{< callout url="https://forms.gle/tLdC1AqhVizD3wCp7" btn_hidden="false" header="Access the Preview!">}}
@@ -27,12 +30,16 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. **Test the Wildcard widget**. The flexibility of the Wildcard widget comes with the risk of creating slow, unappealing, or inconsistent visualizations. Test the Wildcard widget on a scratchpad or empty dashboard before adding Wildcard widgets to production.
 1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query, which ensures the configuration builds the expected graph. With the Wildcard widget, you're adding a custom Vega-Lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
 
- ## Setup
+## Setup
 
- ### Configure a new Wildcard widget
+After you create a Wildcard widget, you can configure the widget either as a [new configuration](#configure-a-new-wildcard-widget) or by [importing a configuration from an existing widget](#import-data-from-an-existing-widget). 
+
+### Configure a new Wildcard widget
+
 1. [Check native widgets][4]. See if a Datadog widget can fulfill your requirements.
 1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click **Add Widgets**.
 1. Click and drag the Wildcard Widget icon from the widget tray. 
+1. Select from the **Request Type** dropdown. For more information on Scalar and Timeseries types, see the [Formulas Scalar vs. Formulas Timeseries](#formulas-scalar-vs-formulas-timeseries) section of this page.
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification. 
 1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**.
 1. Paste the copied Vega-Lite definition.
@@ -40,6 +47,22 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
    **Note**: You must click **Apply** to add your changes, however this does not save your configuration.
 1. (Optional) Debug Vega-Lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-Lite specification maps to the Datadog query. 
 1. Click **Save**.
+
+#### Formulas Scalar vs. Formulas Timeseries
+
+In Datadog dashboards, visualizations are powered by a multiple _request types_, including scalar and timeseries. Each _request type_ changes the number and type of fields available for the data in a Wildcard widget.
+
+**Timeseries**
+: This data format is designed to display how your data changes over time.
+   - **Use-cases**: It's ideal for monitoring metrics that fluctuate, such as CPU usage, memory consumption, or request rates. It helps identify trends, patterns, and anomalies over a specified time range. 
+
+**Scalar**
+: This data format aggregates your data producing 1 value per "group". The scalar format is used for the toplist, treemap, pie chart, and table widget, where each group refers to 1 shape (bar, rectangle, slice, or row respectively) in your graph.
+   - **Use-cases**: It's best for displaying key performance indicators (KPIs) or summary statistics such as averages, sums, or percentiles. It provides a summary view of the current state or a specific metric. If you are not describing changes over time, use Scalar.
+
+The Timeseries data format emphasizes data trends over time, while the Scalar format focuses on presenting single, computed values for quick assessments. Choose the Timeseries type if you need to visualize time on an axis or require individual time buckets. If not visualizing against time, select the Scalar type for performance. 
+
+**Note**: The "Formulas" prefix is used specifically for Scalar and Timeseries formats because they are compatible with the [Functions API][18]. The other formats, such as Histogram and List, do not support this API.
 
 ### Import data from an existing widget
 
@@ -145,4 +168,5 @@ Avoid using Wildcard widgets for the following scenarios:
 [6]: /dashboards/widgets/#full-screen
 [16]: /api/latest/dashboards/
 [17]: /dashboards/graphing_json/widget_json/
+[18]: /dashboards/functions/
 

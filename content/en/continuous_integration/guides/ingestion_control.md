@@ -4,7 +4,7 @@ description: Learn how to define condition(s) by which to exclude specific event
 further_reading:
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
-    text: "Streamline your CI testing with Datadog Intelligent Test Runner"
+    text: "Streamline your CI testing with Datadog Test Impact Analysis"
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
     text: "Learn about Pipeline Visibility"

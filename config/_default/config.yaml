@@ -113,6 +113,9 @@ module:
     - source: content/ko
       target: content
       lang: ko
+    - source: content/es
+      target: content
+      lang: es
     - source: static
       target: static
     - source: layouts
@@ -144,11 +147,6 @@ security:
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
 outputFormats:
-  Algolia:
-    baseName: "algolia"
-    isPlainText: true
-    mediaType: "application/json"
-    notAlternative: true
   Search:
     baseName: "search"
     isPlainText: true

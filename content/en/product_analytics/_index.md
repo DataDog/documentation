@@ -28,6 +28,16 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 - Track key user behavior patterns
 - Visualize the most and least interacted with buttons on a given page
 
+## Getting started
+
+To start using Product Analytics, enable it for each application where you want to monitor user behavior:
+
+1. Select the application you want to monitor from the [Application Management][9] list.
+2. Under PRODUCT SETTINGS, click **Product Analytics**.
+3. Click the **Enable** button.
+
+{{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
+
 By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
 
 ## Measure user retention
@@ -69,3 +79,4 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [6]: /product_analytics/journeys#conversion
 [7]: /product_analytics/segmentation/
 [8]: /product_analytics/heatmaps
+[9]: https://app.datadoghq.com/rum/

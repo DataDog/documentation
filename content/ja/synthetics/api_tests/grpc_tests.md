@@ -34,9 +34,9 @@ title: GRPC テスト
 gRPC テストは、gRPC サービスやサーバーをプロアクティブに監視することができます。2 つのタイプから選択することができます。
 
 Behavior Checks
-: アプリケーションの API エンドポイントに gRPC リクエストを送信し、全体的な応答時間、ヘッダー、本文のコンテンツなど、定義された条件と応答を検証します。
+: アプリケーションの API エンドポイントに gRPC リクエストを送信して、応答時間、ヘッダー、本文の内容など、応答や定義された条件を検証します。
 
-Health Checks
+Health Checks 
 : gRPC ヘルスチェックは、gRPC サービスの健全性を報告するための標準的なものです。gRPC サーバーとサービスが応答し、実行され、リモートプロシージャコール (RPC) を処理できるかを判断します。<br><br>gRPC ヘルスチェックを実装することで、Datadog に `.proto` ファイルを提供しなくても、gRPC ヘルスチェックテストを実行することができるようになります。詳細については、gRPC コミュニティで共有されている[ヘルスチェックの例 `.proto` ファイル][1]を参照してください。
 
 gRPC テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][2]の両方から実行することができます。gRPC テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][3]内で直接実行することができます。
@@ -48,23 +48,23 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 ### リクエストを定義する
 
 1. テストを実行する **Host** と **Port** を指定します。デフォルトの gRPC ポートは `50051` です。
-2. unary コールを行う場合は **Behavior Check** を、ヘルスチェックを行う場合は **Health Check** を選択します。
+2. **Behavior Check** を選択して単一呼び出しを実行するか、**Health Check** を選択してヘルスチェックを実行します。
 
    {{< tabs >}}
    {{% tab "動作チェック" %}}
 
-   動作チェックでは、**Server Reflection** を指定するか、gRPC サーバーを定義するための [**Proto File** をアップロード][101]します。メソッドを選択し、リクエストメッセージを含めます。Datadog は、ストリーミングメソッドをサポートしていません。
+   動作チェックを実行するには、gRPC サーバーを定義する **Server Reflection** を指定するか、[**Proto File** をアップロード][101]してください。メソッドを選択し、リクエストメッセージを入力してください。Datadog はストリーミングメソッドには対応していません。
 
-   {{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="gRPC リクエストを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="gRPC リクエストを定義する" style="width:90%;" >}}
 
    [101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
 
-   {{% /tab %}}
-   {{% tab "ヘルスチェック" %}}
+{{% /tab %}}
+{{% tab "ヘルスチェック" %}}
 
-   ヘルスチェックの場合は、サービス名を入力します。gRPC サーバーでヘルスチェックを送信する場合は、このフィールドを空白のままにします。
+ヘルスチェックの場合は、サービスの名前を入力してください。 gRPC サーバーでヘルスチェックを送信する場合は、このフィールドを空白のままにしてください。
 
-   {{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="gRPC リクエストを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="gRPC リクエストを定義する" style="width:90%;" >}}
 
    {{% /tab %}}
    {{< /tabs >}}
@@ -85,7 +85,7 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 
    * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
 
-     <br/>
+     <br/> 
 
      `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
 
@@ -106,7 +106,7 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 
 ### アサーションを定義する
 
-アサーションは、期待されるテストの結果を定義します。**Send** をクリックすると、取得したレスポンスに基づいて `response time` に関するアサーションが追加されます。モニターするテストには、少なくとも 1 つのアサーションを定義する必要があります。
+アサーションは、期待されるテスト結果が何であるかを定義します。**Send** をクリックすると、取得したレスポンスに基づいて `response time` に関するアサーションが追加されます。モニターするテストには、少なくとも 1 つのアサーションを定義する必要があります。
 
 {{< tabs >}}
 {{% tab "動作チェック" %}}
@@ -114,8 +114,8 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 | タイプ | 演算子 | 値の型 |
 |---|---|---|
 | response time | `is less than` | 整数 (ms) |
-| gRPC レスポンス | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][4]、[`xpath`][2] | _文字列_ <br> _[正規表現][3]_ |
-| gRPC メタデータ | `is`、`is not`、`contains`、`does not contain`、`matches regex`、`does not match regex`、`does not exist` | _整数 (ms)_ <br> _[正規表現][3]_ |
+| gRPC レスポンス | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][1]、[`xpath`][2] | _文字列_ <br> _[正規表現][3]_ |
+| gRPC メタデータ | `is`、`is not`、`contains`、`does not contain`、`matches regex`、`does not match regex`、`does not exist` | _整数 (ミリ秒)_ <br> _[正規表現][3]_ |
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
@@ -132,7 +132,7 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 |---|---|---|
 | response time | `is less than` | 整数 (ms) |
 | ヘルスチェックのステータス | `is`、`is not` | 整数 (ms) |
-| gRPC メタデータ | `is`、`is not`、`contains`、`does not contain`、`matches regex`、`does not match regex`、`does not exist` | 整数 (ms) |
+| gRPC メタデータ | `is`、`is not`、`contains`、`does not contain`、`matches regex`、`does not match regex`、`does not exist`  | 整数 (ms) |
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
@@ -149,7 +149,7 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 
 gRPC テストを実行する**ロケーション**を選択します。gRPC テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][2]の両方から実行できます。
 
-{{% managed-locations %}}
+{{% managed-locations %}} 
 
 ### テストの頻度を指定する
 

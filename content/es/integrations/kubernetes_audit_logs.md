@@ -5,7 +5,7 @@ categories:
 - recopilación de logs
 - contenedores
 - orquestación
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
 description: Para realizar un seguimiento de todo lo que ocurre dentro de tus clústeres

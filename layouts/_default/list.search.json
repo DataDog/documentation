@@ -69,6 +69,12 @@
     {{- /* api pages are controlled by layout and not markdown, so we need to index them separately */ -}}
     {{ partial "algolia/api-pages-full-index.json" (dict "context" $hugo_context) }}
 
+    {{- /* standard attributes pages */ -}}
+    {{ partial "algolia/standard-attributes.json" (dict "context" $hugo_context) }}
+
+    {{- /* glossary pages */ -}}
+    {{ partial "algolia/glossary.json" (dict "context" $hugo_context) }}
+
     {{- /* Outputs final JSON object, copied to public/ folder. */ -}}
     {{- $.Scratch.Get "algoliaindex" | jsonify -}}
 {{- end -}}

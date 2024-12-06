@@ -153,8 +153,8 @@ aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' o
 
 ### 古いバージョンを 3.106.0 以降にアップグレードする
 
-Starting version 3.106.0 Lambda function has been updated to add a prefix to cache filenames stored in the S3 bucket configured in `DD_S3_BUCKET_NAME`. This allows to use the same bucket to store cache files from several functions.
-Additionally, starting this version, the forwarder will attach custom S3 bucket tags by default to all logs exported to S3. For example, if a service is configured to send logs to a destiantion S3 bucket, the forwarder will add the bucket's tags to the logs while pulling and forwarding the logs.
+バージョン 3.106.0 から、Lambda 関数は `DD_S3_BUCKET_NAME` で構成された S3 バケットに保存されるキャッシュファイル名にプレフィックスを追加するよう更新されました。これにより、複数の関数が同じバケットにキャッシュファイルを保存できるようになります。
+さらに、このバージョンから、フォワーダーは S3 にエクスポートされるすべてのログにデフォルトでカスタム S3 バケットタグを付与します。たとえば、サービスが宛先の S3 バケットにログを送信するよう構成されている場合、フォワーダーはログを取得・転送する際にそのバケットのタグをログに追加します。
 
 ### 古いバージョンを 3.99.0 以降にアップグレードする
 
@@ -437,7 +437,7 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 : Forwarder が GetResources API 呼び出しを使用して Step Functions タグをフェッチし、それらをログとトレースに適用できるようにします (Step Functions のトレースが有効な場合)。true に設定すると、アクセス許可 `tag:GetResources` が Lambda 実行 IAM ロールに自動的に追加されます。
 
 `DdStepFunctionTraceEnabled`
-: Set to true to enable tracing for all Step Functions.
+: すべての Step Functions のトレースを有効にするには、true に設定します。
 
 `SourceZipUrl`
 : 実行内容を理解できない場合は、変更しないでください。関数のソースコードのデフォルトの場所を上書きします。
@@ -558,12 +558,11 @@ CloudFormation Stack は、次の IAM ロールを作成します。
     "Resource": "*"
   },
   {
-    "Action": ["s3:PutObject", "s3:DeleteObject"],
-    "Resource": "<S3Bucket to Store the Forwarder Zip>",
-    "Effect": "Allow"
-  },
-  {
-    "Action": ["s3:ListBucket"],
+    "Action": [
+      "s3:ListBucket",
+      "s3:PutObject",
+      "s3:DeleteObject"
+    ],
     "Resource": "<S3Bucket to Store the Forwarder Zip>",
     "Effect": "Allow"
   }

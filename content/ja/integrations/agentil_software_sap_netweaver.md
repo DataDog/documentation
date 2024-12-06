@@ -34,7 +34,7 @@ author:
 categories:
 - marketplace
 - sap
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -174,4 +174,4 @@ SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4
 [4]: https://wiki.agentil-software.com/doku.php?id=products:promonitor:6.8:userguide:configuration
 [5]: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

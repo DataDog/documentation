@@ -120,6 +120,7 @@ Follow the steps below to map Okta attributes to Datadog entities. This step is 
 
 1. Navigate to the Okta admin dashboard.
 1. Select the **Sign on** tab.
+1. Click **Edit**.
 1. Populate the **Attributes** with your [group attribute statements][6].
 1. Set up your desired [mappings][7] in Datadog.
 

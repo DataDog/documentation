@@ -22,7 +22,7 @@ title: iOS ログ収集
 
 ## セットアップ
 
-1. Declare the library as a dependency depending on your package manager. Swift Package Manager is recommended.
+1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。Swift Package Manager が推奨されます。
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}

@@ -156,6 +156,19 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
+
+{{% tab "Span ID" %}}
+
+#### Span ID attribute
+
+By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+
+* `dd.span_id`
+* `contextMap.dd.span_id`
+
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Create a pipeline

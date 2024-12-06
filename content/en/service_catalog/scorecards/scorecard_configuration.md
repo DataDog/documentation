@@ -8,10 +8,10 @@ further_reading:
   text: "Service Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
-  text: "Service Scorecards API" 
+  text: "Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Prioritize and promote service observability best practices with Service Scorecards"
+  text: "Prioritize and promote service observability best practices with Scorecards"
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Service Scorecards are in beta.
+Scorecards are in Preview.
 {{< /callout >}}
 
 Datadog provides the following out-of-the-box scorecards based on a default set of rules: Production Readiness, Observability Best Practices, and Ownership & Documentation. 
@@ -34,7 +34,7 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
-{{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Service Scorecards setup page" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Scorecards setup page" style="width:90%;" >}}
 
 ## How services are evaluated
 

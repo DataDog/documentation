@@ -47,7 +47,7 @@ Las acciones representan la actividad del usuario en una página. En los navegad
 
 Este ejemplo muestra una consulta que busca todas las acciones de los usuarios que hacen clic en el botón "Añadir al carro" que han dado lugar a un error.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart-1.png" alt="Ejemplo de búsqueda de todas las acciones "Añadir al carro" que han dado lugar a un error." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart-1.png" alt="Ejemplo de búsqueda de todas las acciones 'Añadir al carro' que han dado lugar a un error." style="width:80%;">}}
 
 ### Errores
 

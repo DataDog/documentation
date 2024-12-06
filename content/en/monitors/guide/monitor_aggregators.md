@@ -65,7 +65,7 @@ You want a monitor to alert if the minimum metric value is above 10 at any point
 
 ##### Answer
 
-**ALERT** state, the value at 3:01 (15) is above 10.
+**OK** state, the value at 3:00 (10) and 3:03 (8) is NOT above 10.
 
 ## Sum
 

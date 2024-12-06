@@ -36,7 +36,7 @@ title: ブラウザテストのステップ
 
 Datadog は、`select` ドロップダウンメニューからオプションを選択するなど、アプリケーション上で実行したステップを記録し、その要約がステップとして表示されます。
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="ブラウザテストテキスト入力ステップ" video="true" width="95%" >}}
+{{< img src="synthetics/browser_tests/type_text.mp4" alt="ブラウザテストのテキスト入力ステップ" video="true" width="95%" >}}
 
 ### オプションを選択する
 
@@ -133,7 +133,7 @@ JavaScript アサーション関数には以下のパラメーターが含まれ
 
 * `element` (オプション): ページ上の要素のロケーター。これを設定するには、**Select** および **Update** ターゲット要素ボタンを使用します。選択された要素は、Datadog のブラウザテストの複数配置アルゴリズムを自動的に利用します。
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="ブラウザテスト JavaScript アサーション" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/assertion_java.mp4" alt="ブラウザテストの JavaScript アサーション" video="true" width="100%" >}}
 
 JavaScript アサーションはアクティブページのコンテキストで実行されるため、これらのステップはアクティブページで定義されたすべてのオブジェクト (ライブラリ、組み込み、グローバル変数など) にアクセスできます。外部ライブラリをロードするには、promise を使用します。
 
@@ -162,6 +162,13 @@ return jQuery().jquery.startsWith('3.5.1')
 [1]: /ja/synthetics/guide/email-validation
 [2]: /ja/synthetics/browser_tests/actions#use-variables
 [3]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+
+#### HTTP リクエスト数のテスト
+
+このアサーションステップを作成して、特定の URL パターンへの HTTP リクエスト数をテストします。期待されるリクエスト数と、テスト対象のターゲット URL の正規表現を入力してください。
+
+{{< img src="synthetics/browser_tests/number_and_target_2.png" alt="リクエスト数とターゲットをテストするオプションと、リクエストのドロップダウンが表示されている" style="width:60%;" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -289,7 +296,7 @@ JavaScript 関数には以下のパラメーターが付属しており、return
 
 * `element` (オプション): ページ上の要素のロケーター。これを設定するには、**Select** および **Update** ターゲット要素ボタンを使用します。選択された要素は、Datadog のブラウザテストの複数配置アルゴリズムを自動的に利用します。
 
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="ブラウザテスト JavaScript 変数" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/custom_java_script.mp4" alt="ブラウザテストの JavaScript 変数" video="true" width="100%" >}}
 
 JavaScript アサーションはアクティブページのコンテキストで実行されるため、これらのステップはアクティブページで定義されたすべてのオブジェクト (ライブラリ、組み込み、グローバル変数など) にアクセスできます。外部ライブラリをロードするには、promise を使用します。
 
@@ -345,7 +352,7 @@ Datadog Synthetics のメールアドレスを作成し、テストステップ�
 
 ブラウザテストの一環として HTTP リクエストを実行できます。
 
-{{< img src="synthetics/browser_tests/recorder_http_requests2.png" alt="HTTP リクエストの手順" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/http_request_2.png" alt="HTTP リクエストステップ" style="width:70%;" >}}
 
 #### セットアップ
 
@@ -465,6 +472,18 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 HTTP リクエストや JavaScript ステップの変数など、実行時にのみ計算される変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` を使用する `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に一貫して置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
 
+### 複数の変数を使用
+
+ブラウザテストの記録ステップに複数の変数を追加できます。
+
+ブラウザテストの記録で、**+ Add Variable** ボタンをクリックして、テストに 1 つ以上の変数を追加します。
+
+{{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="グローバル変数からローカル変数を定義する" width="90%" >}}
+
+ブラウザテストのレコーダーで、ステップ記録を追加し、**Extract variables from the response(optional)** をクリックして、ブラウザテストで変数を抽出して使用します。
+
+{{< img src="synthetics/browser_tests/edit_test_extract_multiple_variables.png" alt="ブラウザ記録中にフィールドにローカル変数を挿入する" width="90%" >}}
+
 ## 記録を編集する
 
 ブラウザの記録を保存後に編集するには
@@ -474,7 +493,7 @@ HTTP リクエストや JavaScript ステップの変数など、実行時にの
 - 右上隅にある歯車アイコンをクリックし、"edit recording" をクリックします。
 - 削除または再生する複数のステップまたは単一のステップを選択し、**Save &amp; Quit** をクリックします。
 
-{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="ブラウザ記録の編集と、複数選択機能の使用"="70%" >}}
+{{< img src="synthetics/browser_tests/edit_a_recording.png" alt="ブラウザ記録を編集し、マルチセレクト機能を使用する"="70%" >}}
 
 
 ## その他の参考資料

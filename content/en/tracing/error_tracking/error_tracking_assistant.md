@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Error Tracking Assistant for APM Error Tracking is in private beta. To request access, contact Support at support@datadoghq.com.
+Error Tracking Assistant for APM Error Tracking is in Preview. To request access, contact Support at support@datadoghq.com.
 {{< /beta-callout >}}
 
 ## Overview

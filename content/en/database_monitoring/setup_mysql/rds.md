@@ -254,7 +254,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: |-
+        mysql.yaml: |-
           cluster_check: true
           init_config:
           instances:

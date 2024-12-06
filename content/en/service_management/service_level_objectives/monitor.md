@@ -26,7 +26,7 @@ To create a monitor-based SLO, you need an existing Datadog monitor. To set up a
 Datadog monitor-based SLOs support the following monitor types:
 - Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
 - Synthetic
-- Service Checks (open beta)
+- Service Checks
 
 ## Setup
 
@@ -112,7 +112,19 @@ Muting a monitor does not affect the SLO calculation.
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
 
 ### Missing data
-When you create a metric monitor or service check, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
+#### Metric monitors
+When you create a metric monitor, you choose [how the monitor will handle missing data][6]. This configuration affects how a monitor-based SLO calculation interprets missing data:
+
+| Monitor configuration     | SLO calculation of missing data |
+|---------------------------|---------------------------------|
+| `Evaluate as zero`        | Depends on the monitor alert threshold <br> For instance, a threshold of `> 10` would result in Uptime (since the Monitor status would be `OK`), while a threshold of `< 10` would result in Downtime.                             |
+| `Show last known status`  | Keep last state of SLO          |
+| `Show NO DATA`            | Uptime                          |
+| `Show NO DATA and notify` | Downtime                        |
+| `Show OK`                 | Uptime                          |
+
+#### Other monitor types
+When you create a service check monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
 
 If you pause a Synthetic test, the SLO removes the time period with missing data from its calculation. In the UI, these time periods are marked light gray on the SLO status bar.
 
@@ -136,3 +148,4 @@ SLO Replay also triggers when you change the underlying metric monitor's query t
 [3]: /service_management/service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions
 [5]: /service_management/service_level_objectives/#slo-status-corrections
+[6]: /monitors/configuration/#no-data

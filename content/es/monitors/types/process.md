@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar un tiempo de inactividad para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/

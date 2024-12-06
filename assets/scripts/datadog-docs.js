@@ -1,5 +1,5 @@
 import configDocs from './config/config-docs';
-import { updateMainContentAnchors, gtag, chromeHashFix } from './helpers/helpers';
+import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { bodyClassContains } from './helpers/helpers';
 import { DOMReady } from './helpers/documentReady';
 import { initializeIntegrations } from './components/integrations';
@@ -7,7 +7,7 @@ import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
 import { loadPage } from './components/async-loading';
-import { loadInstantSearch } from './components/algolia';
+import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
 
 const { env } = document.documentElement.dataset;
@@ -81,7 +81,7 @@ const doOnLoad = () => {
         });
     }
 
-    // Load algolia instant search for the first time
+    // Load instant search for the first time
     loadInstantSearch((asyncLoad = false));
 
     if (!bodyClassContains('api')) {
@@ -122,8 +122,6 @@ const doOnLoad = () => {
 
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
-    } else {
-        chromeHashFix();
     }
 };
 

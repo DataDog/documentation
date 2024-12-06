@@ -126,7 +126,7 @@ Watchdog requiere datos para establecer una línea de referencia del comportamie
 Watchdog empieza a encontrar anomalías una vez que se dispone del historial mínimo requerido, y Watchdog mejora a medida que este aumenta. Los mejores resultados se obtienen con seis semanas de historial.
 
 {{% /tab %}}
-{{% tab "Infrastructure" (Infraestructura) %}}
+{{% tab "Infraestructura" %}}
 
 Watchdog consulta las métricas de infraestructura de las siguiente integraciones:
 
