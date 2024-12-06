@@ -10,155 +10,503 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. 
 
-### Prerequisites
+<div class="alert alert-info">To instrument your Google Cloud Run applications with <code>serverless-init</code>, see <a href="/serverless/guide/gcr_serverless_init">Instrument Google Cloud Run with serverless-init</a>.</div>
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+## Setup
 
-## Instrument your application
+### Application
 
-You can instrument your application in one of two ways: [Dockerfile](#dockerfile) or [buildpack](#buildpack).
+{{< tabs >}}
+{{% tab "Node.js" %}}
+#### Tracing
 
-### Dockerfile
+In your main application, add the `dd-trace-js` library. See [Tracing Node.js applications][1] for instructions.
 
-Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+#### Metrics
+The tracing library also collects custom metrics. See the [code examples][2].
 
-| dockerhub.io | gcr.io | public.ecr.aws |
-| ------------ | ------ | -------------- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+#### Logs
+The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
-Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
+To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
-* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
-* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[3]: /logs/log_collection/nodejs/?tab=winston30
+[4]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
 
-## How `serverless-init` works
+{{% /tab %}}
+{{% tab "Python" %}}
+#### Tracing
 
-The `serverless-init` application wraps your process and executes it as a subprocess. It starts a DogStatsD listener for metrics and a Trace Agent listener for traces. It collects logs by wrapping the stdout/stderr streams of your application. After bootstrapping, serverless-init then launches your command as a subprocess.
+In your main application, add the `dd-trace-py` library. See [Tracing Python applications][1] for instructions. You can also use [Tutorial - Enabling tracing for a Python application and Datadog Agent in containers][5].
 
-To get full instrumentation, ensure you are calling `datadog-init` as the first command that runs inside your Docker container. You can do this through by setting it as the entrypoint, or by setting it as the first argument in CMD.
+#### Metrics
+The tracing library also collects custom metrics. See the [code examples][2].
 
-{{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
-{{< programming-lang lang="nodejs" >}}
+#### Logs
+The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
-{{% svl-init-nodejs %}}
+To set up logging in your application, see [Python Log Collection][3]. [Python logging best practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[3]: /logs/log_collection/python
+[4]: /tracing/other_telemetry/connect_logs_and_traces/python
+[5]: /tracing/guide/tutorial-enable-python-containers/
+[6]: https://www.datadoghq.com/blog/python-logging-best-practices/
 
-{{% svl-init-python %}}
+{{% /tab %}}
+{{% tab "Java" %}}
+#### Tracing
 
-{{< /programming-lang >}}
-{{< programming-lang lang="java" >}}
+In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
 
-{{% svl-init-java %}}
+```dockerfile
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /app
+COPY target/cloudrun-java-1.jar cloudrun-java-1.jar
 
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
 
-{{% svl-init-go %}}
+#Add the datadog tracer
+ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
 
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
 
-{{% svl-init-dotnet %}}
+EXPOSE 8080
 
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
 
-{{% svl-init-ruby %}}
-
-{{< /programming-lang >}}
-{{< programming-lang lang="php" >}}
-
-{{% svl-init-php %}}
-
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-### Buildpack
-
-[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile.
-
-First, manually install your tracer:
-- [Node.JS][14]
-- [Python][13]
-- [Java][15]
-- [Go][12]
-- [.NET][18]
-- [Ruby][16]
-- [PHP][17]
-
-Then, build your application by running the following command:
-
-```shell
-pack build --builder=gcr.io/buildpacks/builder \
---buildpack from=builder \
---buildpack datadog/serverless-buildpack:latest \
-gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+#Start the datadog tracer via the javaagent argument
+ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.jar" ]
 ```
 
-**Note**: Buildpack instrumentation is not compatible with Alpine images
+#### Metrics
+To collect custom metrics, [install the Java DogStatsD client][2].
 
-## Configure your application
+#### Logs
+The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
-- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: set to `true` to enable tracing
-- `DD_TRACE_PROPAGATION_STYLE`: Set this to `datadog` to use context propagation and log trace correlation.
+To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
-For more environment variables and their function, see [Additional Configurations](#additional-configurations).
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#getting-started
+[2]: /developers/dogstatsd/?tab=hostagent&code-lang=java#install-the-dogstatsd-client
+[3]: /logs/log_collection/java/?tab=winston30
+[4]: /tracing/other_telemetry/connect_logs_and_traces/java
 
-The following command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
+{{% /tab %}}
+{{% tab "Go" %}}
+#### Tracing
 
+In your main application, add the `dd-trace-go` library. See [Tracing Go applications][1] for instructions.
+
+#### Metrics
+The tracing library also collects custom metrics. See the [code examples][2].
+
+#### Logs
+The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+
+To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[3]: /logs/log_collection/go
+[4]: /tracing/other_telemetry/connect_logs_and_traces/go
+{{% /tab %}}
+{{% tab ".NET" %}}
+#### Tracing
+
+In your main application, add the .NET tracing library. See [Tracing .NET applications][1] for instructions.
+
+Example Dockerfile:
+
+```dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy
+WORKDIR /app
+COPY ./bin/Release/net8.0/publish /app
+
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.56.0/datadog-dotnet-apm_2.56.0_amd64.deb /opt/datadog/datadog-dotnet-apm_2.56.0_amd64.deb
+RUN dpkg -i /opt/datadog/datadog-dotnet-apm_2.56.0_amd64.deb
+RUN mkdir -p /shared-volume/logs/
+
+ENV CORECLR_ENABLE_PROFILING=1
+ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+ENV DD_DOTNET_TRACER_HOME=/opt/datadog/
+
+ENV DD_TRACE_DEBUG=true
+
+ENTRYPOINT ["dotnet", "dotnet.dll"]
 ```
-shell
-gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
-  --port=8080 \
-  --update-env-vars=DD_API_KEY=$DD_API_KEY \
-  --update-env-vars=DD_TRACE_ENABLED=true \
-  --update-env-vars=DD_SITE='datadoghq.com' \
-  --update-env-vars=DD_TRACE_PROPAGATION_STYLE='datadog' \
+
+#### Metrics
+The tracing library also collects custom metrics. See the [code examples][2].
+
+#### Logs
+The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+
+To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux#enable-the-tracer-for-your-service
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[3]: /log_collection/csharp/?tab=serilog
+[4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/?tab=serilog
+{{% /tab %}}
+{{% tab "PHP" %}}
+In your main application, add the `dd-trace-php` library. See [Tracing PHP applications][1] for instructions.
+
+#### Metrics
+The tracing library also collects custom metrics. See the [code examples][2].
+
+#### Logs
+The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+
+To set up logging in your application, see [PHP Log Collection][3]. To set up trace log correlation, see [Correlating PHP Logs and Traces][4].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[3]: /logs/log_collection/php
+[4]: /tracing/other_telemetry/connect_logs_and_traces/php
+{{% /tab %}}
+{{< /tabs >}}
+
+### Sidecar container
+
+1. In Cloud Run, select **Edit & Deploy New Revision**.
+1. At the bottom of the page, select **Add Container**.
+1. For **Container image URL**, select `gcr.io/datadoghq/serverless-init:1.2.5`
+1. Go to **Volume Mounts** and set up a volume mount for logs. Ensure that the mount path matches your application's write location. For example:
+   {{< img src="serverless/gcr/volume_mount.png" width="80%" alt="Volume Mounts tab. Under Mounted volumes, Volume Mount 1. For Name 1, 'shared-logs (In-Memory)' is selected. For Mount path 1, '/shared-volume' is selected.">}}
+1. Go to **Settings** and add a startup check.
+   - **Select health check type**: Startup check
+   - **Select probe type**: TCP
+   - **Port**: Enter a port number. Make note of this, as it is used in the next step.
+1. Go to **Variables & Secrets** and add the following environment variables as name-value pairs:
+   - `DD_SERVICE`: A name your service. For example, `gcr-sidecar-test`.
+   - `DD_ENV`: A name for your environment. For example, `dev`.
+   - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
+   - `DD_API_KEY`: Your [Datadog API key][2].
+   - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
+
+### Main container
+1. Go to **Volume Mounts** and add the same shared volume as you did for the sidecar container.
+   **Note**: Save your changes by selecting **Done**. Do not deploy changes until the final step.
+1. Go to **Variables & Secrets** and add the following environment variables as name-value pairs:
+   - `DD_SERVICE`: The same `DD_SERVICE` that you set for the sidecar.
+   - `DD_ENV`: The same `DD_ENV` that you set for the sidecar.
+1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
+1. Deploy your main application.
+
+## Example application
+
+The following example contains a single app with tracing, metrics, and logs set up.
+
+{{< tabs >}}
+{{% tab "Node.js" %}}
+
+```js
+const tracer = require('dd-trace').init({
+ logInjection: true,
+});
+const express = require("express");
+const app = express();
+const { createLogger, format, transports } = require('winston');
+
+const logger = createLogger({
+ level: 'info',
+ exitOnError: false,
+ format: format.json(),
+ transports: [new transports.File({ filename: `/shared-volume/logs/app.log`}),
+  ],
+});
+
+app.get("/", (_, res) => {
+ logger.info("Welcome!");
+ res.sendStatus(200);
+});
+
+app.get("/hello", (_, res) => {
+ logger.info("Hello!");
+ metricPrefix = "nodejs-cloudrun";
+ // Send three unique metrics, just so we're testing more than one single metric
+ metricsToSend = ["sample_metric_1", "sample_metric_2", "sample_metric_3"];
+ metricsToSend.forEach((metric) => {
+   for (let i = 0; i < 20; i++) {
+     tracer.dogstatsd.distribution(`${metricPrefix}.${metric}`, 1);
+   }
+ });
+ res.status(200).json({ msg: "Sending metrics to Datadog" });
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port);
 ```
 
-## Results
+{{% /tab %}}
+{{% tab "Python" %}}
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+### app.py
 
-## Additional configurations
+```python
+import ddtrace
+from flask import Flask, render_template, request
+import logging
+from datadog import initialize, statsd
 
-- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
+ddtrace.patch(logging=True)
+app = Flask(__name__)
+options = {
+   'statsd_host':'127.0.0.1',
+   'statsd_port':8125
+}
+FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
+         '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+         '- %(message)s')
+logging.basicConfig(level=logging.DEBUG, filename='app.log', format=FORMAT)
+logger = logging.getLogger(__name__)
+logger.level = logging.INFO
 
-- **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+ddlogs = []
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+@ddtrace.tracer.wrap(service="dd_gcp_log_forwader")
+@app.route('/', methods=["GET"])
+def index():
+   log = request.args.get("log")
+   if log != None:
+       with tracer.trace('sending_logs') as span:
+           statsd.increment('dd.gcp.logs.sent')
+           span.set_tag('logs', 'nina')
+           logger.info(log)
+           ddlogs.append(log)
+   return render_template("home.html", logs=ddlogs)
 
-### Environment Variables
-
-| Variable | Description |
-| -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][7] - **Required**|
-| `DD_SITE` | [Datadog site][5] - **Required** |
-| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`. |
-| `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
-| `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
-| `DD_ENV`          | See [Unified Service Tagging][6].                                  |
-| `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
-| `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
-
-## Troubleshooting
-
-This integration depends on your runtime having a full SSL implementation. If you are using a slim image, you may need to add the following command to your Dockerfile to include certificates.
-
+if __name__ == '__main__':
+   tracer.configure(port=8126)
+   initialize(**options)
+   app.run(debug=True)
 ```
-RUN apt-get update && apt-get install -y ca-certificates
+
+### Home.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Datadog Test</title>
+</head>
+<body>
+   <h1>Welcome to Datadog!💜</h1>
+   <form action="">
+       <input type="text" name="log" placeholder="Enter Log">
+       <button>Add Log</button>
+   </form>
+   <h3>Logs Sent to Datadog:</h3>
+   <ul>
+   {% for log in logs%}
+       {% if log %}
+       <li>{{ log }}</li>
+       {% endif %}
+   {% endfor %}
+   </ul>
+</body>
+</html>
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+
+```java
+package com.example.springboot;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+@RestController
+public class HelloController {
+   Private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
+   private static final Log logger = LogFactory.getLog(HelloController.class);
+   @GetMapping("/")
+   public String index() {
+       Statsd.incrementCounter("page.views");
+       logger.info("Hello Cloud Run!");
+       return "💜 Hello Cloud Run! 💜";
+   }
+}
 ```
 
+{{% /tab %}}
+{{% tab "Go" %}}
+```go
+package main
+
+
+import (
+   "fmt"
+   "log"
+   "net/http"
+   "os"
+   "path/filepath"
+
+
+   "github.com/DataDog/datadog-go/v5/statsd"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+
+const logDir = "/shared-volume/logs"
+
+var logFile *os.File
+var logCounter int
+var dogstatsdClient *statsd.Client
+
+func handler(w http.ResponseWriter, r *http.Request) {
+   log.Println("Yay!! Main container works")
+   span := tracer.StartSpan("maincontainer", tracer.ResourceName("/handler"))
+   defer span.Finish()
+   logCounter++
+   writeLogsToFile(fmt.Sprintf("received request %d", logCounter), span.Context())
+   dogstatsdClient.Incr("request.count", []string{"test-tag"}, 1)
+}
+
+func writeLogsToFile(log_msg string, context ddtrace.SpanContext) {
+   span := tracer.StartSpan(
+       "writeLogToFile",
+       tracer.ResourceName("/writeLogsToFile"),
+       tracer.ChildOf(context))
+   defer span.Finish()
+   _, err := logFile.WriteString(log_msg + "\n")
+   if err != nil {
+       log.Println("Error writing to log file:", err)
+   }
+}
+
+func main() {
+   log.Print("Main container started...")
+
+   err := os.MkdirAll(logDir, 0755)
+   if err != nil {
+       panic(err)
+   }
+   logFilePath := filepath.Join(logDir, "maincontainer.log")
+   log.Println("Saving logs in ", logFilePath)
+   logFileLocal, err := os.OpenFile(logFilePath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+   if err != nil {
+       panic(err)
+   }
+   defer logFileLocal.Close()
+
+   logFile = logFileLocal
+
+   dogstatsdClient, err = statsd.New("localhost:8125")
+   if err != nil {
+       panic(err)
+   }
+   defer dogstatsdClient.Close()
+
+   tracer.Start()
+   defer tracer.Stop()
+
+   http.HandleFunc("/", handler)
+   log.Fatal(http.ListenAndServe(":8080", nil))
+}
+```
+{{% /tab %}}
+{{% tab ".NET" %}}
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Serilog;
+using Serilog.Formatting.Json;
+using Serilog.Formatting.Compact;
+using Serilog.Sinks.File;
+using StatsdClient;
+
+
+namespace dotnet.Pages;
+
+
+public class IndexModel : PageModel
+{
+   private readonly static DogStatsdService _dsd;
+   static IndexModel()
+   {
+       var dogstatsdConfig = new StatsdConfig
+       {
+           StatsdServerName = "127.0.0.1",
+           StatsdPort = 8125,
+       };
+
+
+       _dsd = new DogStatsdService();
+       _dsd.Configure(dogstatsdConfig);
+
+
+       Log.Logger = new LoggerConfiguration()
+           .WriteTo.File(new RenderedCompactJsonFormatter(), "/shared-volume/logs/app.log")
+           .CreateLogger();
+   }
+   public void OnGet()
+   {
+       _dsd.Increment("page.views");
+       Log.Information("Hello Cloud Run!");
+   }
+}
+```
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+```php
+<?php
+
+
+require __DIR__ . '/vendor/autoload.php';
+
+
+use DataDog\DogStatsd;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\JsonFormatter;
+
+
+$statsd = new DogStatsd(
+   array('host' => '127.0.0.1',
+         'port' => 8125,
+    )
+ );
+
+
+$log = new logger('datadog');
+$formatter = new JsonFormatter();
+
+
+$stream = new StreamHandler('/shared-volume/logs/app.log', Logger::DEBUG);
+$stream->setFormatter($formatter);
+
+
+$log->pushHandler($stream);
+
+
+$log->info("Hello Datadog!");
+echo '💜 Hello Datadog! 💜';
+
+
+$log->info("sending a metric");
+$statsd->increment('page.views', 1, array('environment'=>'dev'));
+
+
+?>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
@@ -166,27 +514,4 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 
 [1]: /integrations/google_cloud_platform/#log-collection
-[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
-[3]: https://buildpacks.io/docs/tools/pack/
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging/
-[7]: /account_management/api-app-keys/#api-keys
-[8]: https://github.com/DataDog/crpb/tree/main
-[9]: /metrics/distributions/
-[10]: /metrics/#time-and-space-aggregation
-[11]: https://cloud.google.com/run/docs/configuring/secrets
-[12]: /tracing/trace_collection/library_config/go/
-[13]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
-[14]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
-[15]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
-[16]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
-[17]: /tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
-[18]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
-[19]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
-[20]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
-[21]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
-[22]: /tracing/other_telemetry/connect_logs_and_traces/php
-[23]: /tracing/other_telemetry/connect_logs_and_traces/python
-[24]: /tracing/other_telemetry/connect_logs_and_traces/go
-[25]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[2]: https://app.datadoghq.com/organization-settings/api-keys
