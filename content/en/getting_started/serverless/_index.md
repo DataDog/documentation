@@ -76,7 +76,7 @@ If you zoom out, you will also see the entire end to end trace through all of th
 
 The **Trace Map** tab visualizes the flow of your services and how they connect to each other.
 
-If you are viewing a trace with an error the lower half of the detailed trace view will show the details:
+If you are viewing a trace with an error, the lower half of the detailed trace view shows the details:
 
 ```
 Error: Failure generating prices
