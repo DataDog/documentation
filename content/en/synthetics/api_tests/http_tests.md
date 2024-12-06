@@ -40,7 +40,9 @@ HTTP tests can run from both [managed](#select-locations) and [private locations
 
 After choosing to create an `HTTP` test, define your test's request.
 
-### Define request
+{{% synthetics-api-tests-templates %}}
+
+### Define request (build from scratch)
 
 1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 

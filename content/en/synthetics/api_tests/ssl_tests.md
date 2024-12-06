@@ -34,7 +34,9 @@ SSL tests can run from both [managed](#select-locations) and [private locations]
 
 After choosing to create a `SSL` test, define your test's request.
 
-### Define request
+{{% synthetics-api-tests-templates %}}
+
+### Define request (build from scratch)
 
 1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
 2. Add **Advanced Options** (optional) to your test:
