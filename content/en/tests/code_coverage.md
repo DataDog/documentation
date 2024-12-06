@@ -279,7 +279,7 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 
 ### Compatibility
 
-* `datadogg-ci-rb>=1.7.0`
+* `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
 <div class="alert alert-warning">
