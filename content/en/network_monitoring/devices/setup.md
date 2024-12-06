@@ -70,7 +70,7 @@ Once NDM is configured on your devices, you can further enrich them by adding ne
 [ServiceNow integration][7]
 : Dynamically enrich network devices monitored by Datadog Network Device Monitoring with data defined in ServiceNow's CMDB (Configuration Management Database).
 
-[Network Device Monitoring API][8]
+[Network Device Monitoring API](#use-the-network-api)
 : Utilize the Network Device Monitoring API to programmatically add tags to your network devices.
 
 ### Customize metrics and tags
