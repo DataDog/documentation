@@ -43,8 +43,8 @@ After you create a Wildcard widget, you can configure the widget either as a [ne
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification. 
 1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**.
 1. Paste the copied Vega-Lite definition.
-1. Click **Apply** to apply your configuration changes, see a preview of the visualization, and iterate on your design. 
-   **Note**: You must click **Apply** to add your changes, however this does not save your configuration.
+1. Click **Run** to apply your configuration changes, see a preview of the visualization, and iterate on your design. 
+   **Note**: You must click **Run** to add your changes, however this does not save your configuration.
 1. (Optional) Debug Vega-Lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-Lite specification maps to the Datadog query. 
 1. Click **Save**.
 
