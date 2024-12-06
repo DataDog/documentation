@@ -18,8 +18,8 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 | Technology | Library                                                                  | Minimal tracer version | Recommended tracer version |
 |------------|--------------------------------------------------------------------------|------------------------|----------------------------|
-| Kafka      | [confluent-kafka-go][#8]                                                  | 1.56.1                | 1.66.0 or later            |
-| Kafka      | [Sarama][#9]                                                             | 1.56.1                 | 1.66.0 or later            |
+| Kafka      | [confluent-kafka-go][8]                                                  | 1.56.1                | 1.66.0 or later            |
+| Kafka      | [Sarama][9]                                                             | 1.56.1                 | 1.66.0 or later            |
 
 ### Installation
 
@@ -94,7 +94,7 @@ You can also use manual instrumentation. For example, you can propagate context 
 
 ##### Instrumenting the produce call
 
-1. Ensure your message supports the [TextMapWriter interface][#6].
+1. Ensure your message supports the [TextMapWriter interface][6].
 2. Inject the context into your message and instrument the produce call by calling:
 
 ```go
@@ -107,7 +107,7 @@ if ok {
 
 ##### Instrumenting the consume call
 
-1. Ensure your message supports the [TextMapReader interface][#7].
+1. Ensure your message supports the [TextMapReader interface][7].
 2. Extract the context from your message and instrument the consume call by calling:
 
 ```go
