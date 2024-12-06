@@ -43,7 +43,7 @@ For your serverless sample application, Datadog has likely detected a [cold star
 
 ## Investigate Errors
 
-The sample application will periodically generate errors and have slow response, causing Lambda timeouts, in the product pricing service.
+The sample application periodically generates errors and has a slow response. This causes Lambda timeouts in the product pricing service.
 
 {{< img src="getting_started/serverless/dd_serverless_view_error.png" alt="Close-up of two functions" style="width:80%;">}}
 
