@@ -26,7 +26,7 @@ This guide makes use of a serverless [sample app][2] that you can launch using a
 
 You can [see your sample app functions in Serverless View][7].
 
-{{< img src="getting_started/serverless/serverless_view_2024.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
+{{< img src="getting_started/serverless/serverless_view_2024_2.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
 
 ## Serverless View
 
@@ -34,7 +34,7 @@ The Serverless View displays telemetry from all serverless resources in your AWS
 
 The Serverless View groups your resources by the `SERVICE_NAME`. If you have invoked your functions at least once, you will see a seperate service group for each of the individual backend services.
 
-{{< img src="getting_started/serverless/functions_view.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/functions_view_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 ### Serverless Insights
 In Serverless View, the rightmost column is titled **Insights**. Datadog automatically highlights potential issues in your serverless applications, such as [high errors][8] and [high duration][9]; these issues appear in the Insights column.
@@ -45,7 +45,7 @@ For your serverless sample application, Datadog has likely detected a [cold star
 
 The sample application will periodically generate errors and have slow response, causing Lambda timeouts, in the product pricing service.
 
-{{< img src="getting_started/serverless/dd_serverless_view_error.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_serverless_view_error_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 Notice that both of the services under the `product-pricing-service` have errors. The Issues & Insights section at the top also identifies that one of your services has issues with timeouts.
 
@@ -54,7 +54,7 @@ Notice that both of the services under the `product-pricing-service` have errors
 ## Function details
 Click on your function to see more details regarding invocations and recent deployments.
 
-{{< img src="getting_started/serverless/details_error.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/details_error_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 The detailed view, as shown above, contains three graphs. You can set these to display any available metric; by default, they show three [enhanced Lambda metrics][11]: invocations, errors, and duration. 
 
@@ -66,13 +66,13 @@ The **Invocations** tab displays your function's latest invocations.
 
 Each invocation is associated with a trace. Click on **Open Trace** to see the trace for each invocation:
 
-{{< img src="getting_started/serverless/dd_flame_graph.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_flame_graph_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 The **Flame Graph** tab shows exactly what happened during the duration of this invocation, including which services had the highest percentage of the total execution time. The flame graph displays the request as it travels from APIGateway, through your `create-product-function`. 
 
 If you zoom out, you will also see the entire end to end trace through all of the downstream services.
 
-{{< img src="getting_started/serverless/trace_map.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/trace_map_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 The **Trace Map** tab visualizes the flow of your services and how they connect to each other.
 
@@ -91,7 +91,7 @@ Underneath, you can also examine your Lambda request and response payloads. Data
 
 The serverless sample app has logs enabled by default. You can see each function's logs under its **Logs** tab. 
 
-{{< img src="getting_started/serverless/dd_logs_view.png" alt="Close-up of two functions" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_logs_view_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 You can filter these logs to only see errors, or view them in the [Log Explorer][13].
 
