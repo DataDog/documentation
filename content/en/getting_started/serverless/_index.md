@@ -22,7 +22,7 @@ This guide makes use of a serverless [sample app][2] that you can launch using a
 2. Choose a runtime and IaC tool of your choice and follow the link to the specific deployment instructions
 3. Find your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}). You will need them for the next step.
 4. Follow the runtime and IaC specific instructions to deploy the sample application.
-5. After the deployment completes, you can either use the Postman collection in the root of the repository or by running the [load test][6]
+5. After the deployment completes, you can either use the Postman collection in the root of the repository or run the [load test][6].
 
 You can [see your sample app functions in Serverless View][7].
 
