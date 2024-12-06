@@ -160,13 +160,6 @@ The output should look similar to the following:
     #   privProtocol: <PRIVACY_PROTOCOL>
     ```
 
-### Extract information about devices and interfaces of network devices
-
-- Use the [Network API][4] to extract the following information about your network devices:
-  * [Get the list of interfaces for your devices.][5]
-  - [Get the list of tags for your devices.][6]
-  - [Update the list of tags for your devices.][7]
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
