@@ -24,7 +24,7 @@ jobs:
   check-code-freeze-status:
     runs-on: ubuntu-latest
     env:
-      FREEZE_ENABLED: ${{ var.FREEZE_ENABLED }}
+      FREEZE_ENABLED: ${{ vars.FREEZE_ENABLED }}
     steps:
       - name: Check Status
         run: |
