@@ -28,6 +28,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Amazon Bedrock](#amazon-bedrock)          | >= 1.31.57         | >= 2.9.0          |
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
+| [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -80,9 +81,9 @@ The LangChain integration provides automatic tracing for the [LangChain Python S
 
 The LangChain integration instruments the following methods:
 
-- [LLMs][13]: 
+- [LLMs][13]:
   - `llm.invoke()`, `llm.ainvoke()`
-- [Chat models][14] 
+- [Chat models][14]
   - `chat_model.invoke()`, `chat_model.ainvoke()`
 - [Chains/LCEL][15]
   - `chain.invoke()`, `chain.ainvoke()`
@@ -109,7 +110,7 @@ The Amazon Bedrock integration instruments the following methods:
 
 ## Anthropic
 
-The Anthropic integration provides automatic tracing for the [Anthropic Python SDK's][9] chat message calls. 
+The Anthropic integration provides automatic tracing for the [Anthropic Python SDK's][9] chat message calls.
 
 ### Traced methods
 
@@ -132,6 +133,22 @@ The Google Gemini integration instruments the following methods:
   - `model.generate_content()` (Also captures `chat.send_message()`)
   - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
 
+## Vertex AI
+
+The Vertex AI integration provides automatic tracing for [Google's Vertex AI SDK for Python][21] content generation and chat message calls.
+
+### Traced methods
+
+The Vertex AI integration instruments the following methods:
+
+- [Generating content][22] (including streamed calls):
+  - `model.generate_content()`
+  - `model.generate_content_async()`
+
+- [Chat Messages][23] (including streamed calls):
+  - `chat.send_message()`
+  - `chat.send_message_async()`
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -152,6 +169,9 @@ The Google Gemini integration instruments the following methods:
 [18]: /llm_observability/setup/sdk/#tracing-spans
 [19]: https://ai.google.dev/gemini-api/docs
 [20]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
+[21]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest
+[22]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_preview_generative_models_GenerativeModel_generate_content_summary
+[23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
