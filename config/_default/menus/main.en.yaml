@@ -3028,31 +3028,31 @@ menu:
     - name: Setup
       url: network_monitoring/devices/setup
       parent: ndm
-      identifier: ndm_getting_started
+      identifier: ndm_setup
       weight: 302
     - name: Supported Devices
       url: network_monitoring/devices/supported_devices
-      parent: ndm_getting_started
+      parent: ndm_setup
       identifier: ndm_supported_devices
       weight: 30001
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
-      parent: ndm_getting_started
+      parent: ndm_setup
       identifier: ndm_snmp_metrics
       weight: 30002
     - name: Ping
       url: network_monitoring/devices/ping
-      parent: ndm_getting_started
+      parent: ndm_setup
       identifier: ndm_snmp_ping
       weight: 30003
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
-      parent: ndm_getting_started
+      parent: ndm_setup
       identifier: ndm_snmptraps
       weight: 30004
     - name: SD-WAN 
       url: network_monitoring/devices/sd-wan
-      parent: ndm_getting_started
+      parent: ndm_setup
       identifier: ndm_sd-wan
       weight: 30005
     - name: Profiles
