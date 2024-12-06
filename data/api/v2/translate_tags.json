@@ -183,6 +183,10 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "scim": {
+    "name": "SCIM",
+    "description": "Provision Datadog teams using SCIM group APIs.\nThis feature is only available for select organizations at this point."
+  },
   "security-monitoring": {
     "name": "Security Monitoring",
     "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
