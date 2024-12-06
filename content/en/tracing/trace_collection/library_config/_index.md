@@ -23,7 +23,7 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: Boolean <br>
 **Caveats**:<br>
   - Not supported in Go
-  - [Some Java integrations are disabled by default][2].
+  - [Some Java integrations are disabled by default][2].<br/>
 **Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_RATE_LIMIT`
