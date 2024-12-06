@@ -3,7 +3,7 @@
 JMXFetch supports running in JVMs configured to be FIPS-140 compliant.
 
 JMXFetch uses cryptography for communication with Datadog Agent over TLS and when configured to connect to JMX
-endpoints via SSL. For all encrypted connections JMXFetch uses the default SSL provider (JSSE provider) of the
+endpoints with SSL. For all encrypted connections JMXFetch uses the default SSL provider (JSSE provider) of the
 Java runtime environment.
 
 ## Requirements
@@ -78,10 +78,6 @@ Finally, make the certificates trusted by importing them into corresponding trus
 keytool -import -alias jmxfetch -keystore java-app-truststore -file jmxfetch-cert.pem -storepass changeit -noprompt
 keytool -import -alias java-app -keystore jmxfetch-truststore -file java-app-cert.pem -storepass changeit -noprompt
 ```
-
-In a case when different JVM versions or FIPS modules are used to run JMXFetch and the Java application,
-please make sure that the `keytool` and environment match the target JVM version when manipulating key and
-trust stores for that JVM.
 
 {{% /tab %}}
 
