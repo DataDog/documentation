@@ -79,7 +79,7 @@ To enable the Agent DogStatsD UDS:
 
 2. Make the socket file accessible to the application containers by mounting a shared volume on both sides. This makes it possible for the application containers to access the socket from the Datadog Agent container.
 
-    - Mount the empty folder the `volumes` section of the task definition:
+    1. Mount the empty folder in the `volumes` section of the task definition:
 
         ```json
         "volumes": [
@@ -90,7 +90,7 @@ To enable the Agent DogStatsD UDS:
         ],
         ```
 
-    - In the `mountPoints` section of your Agent container, mount the socket folder:
+    1. In the `mountPoints` section of your Agent container, mount the socket folder:
 
         ```json
         "mountPoints": [
@@ -101,7 +101,9 @@ To enable the Agent DogStatsD UDS:
         ],
         ```
 
-    - In the `mountPoints` section of your application containers, expose the same folder in your application containers:
+    1. In the `mountPoints` section of your application containers, expose the same folder in your application containers:
+
+        <div class="alert alert-info">Remove <code>"readOnly": true</code> if your application containers need write access to the socket.</div> 
 
         ```json
         "mountPoints": [
@@ -113,8 +115,6 @@ To enable the Agent DogStatsD UDS:
         ],
         ```
 
-        **Note**: Remove `"readOnly": true` if your application containers need write access to the socket.
-
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -122,7 +122,7 @@ To enable the Agent DogStatsD UDS:
 
 2. Make the socket file accessible to the application containers by mounting a host directory on both sides (read-only in your application containers and read-write in the Agent container). Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts.
 
-    - Mount the socket folder in your `datadog-agent` container:
+    1. Mount the socket folder in your `datadog-agent` container:
 
         ```yaml
         volumeMounts:
@@ -135,7 +135,9 @@ To enable the Agent DogStatsD UDS:
               name: dsdsocket
         ```
 
-    - Expose the same folder in your application containers:
+    1. Expose the same folder in your application containers:
+
+       <div class="alert alert-info">Remove <code>"readOnly": true</code> if your application containers need write access to the socket.</div>
 
         ```yaml
         volumeMounts:
@@ -149,8 +151,6 @@ To enable the Agent DogStatsD UDS:
               name: dsdsocket
         ```
 
-        **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
-
 {{% /tab %}}
 {{% tab "EKS Fargate" %}}
 
@@ -158,7 +158,7 @@ To enable the Agent DogStatsD UDS:
 
 2. Make the socket file accessible to the application containers by mounting an empty directory on both sides (read-only in your application containers and read-write in the Agent container). Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts.
 
-    - Mount the empty folder in your pod spec:
+    1. Mount the empty folder in your pod spec:
 
         ```yaml
         volumes:
@@ -166,7 +166,7 @@ To enable the Agent DogStatsD UDS:
               name: dsdsocket
         ```
 
-    - Mount the socket folder in your `datadog-agent` container:
+    1. Mount the socket folder in your `datadog-agent` container:
 
         ```yaml
         volumeMounts:
@@ -174,7 +174,9 @@ To enable the Agent DogStatsD UDS:
               mountPath: /var/run/datadog
         ```
 
-    - Expose the same folder in your application containers:
+    1. Expose the same folder in your application containers:
+
+       <div class="alert alert-info">Remove <code>"readOnly": true</code> if your application containers need write access to the socket.</div>
 
         ```yaml
         volumeMounts:
@@ -182,8 +184,6 @@ To enable the Agent DogStatsD UDS:
               mountPath: /var/run/datadog
               readOnly: true
         ```
-
-        **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
 
 {{% /tab %}}
 {{< /tabs >}}
