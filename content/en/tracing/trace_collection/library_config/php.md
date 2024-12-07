@@ -162,12 +162,12 @@ The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. 
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
-**Default**: `0`<br>
+**Default**: `0` (`1` in CLI environment)<br>
 Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
-**Default**: `0`<br>
+**Default**: `1`<br>
 Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 
 `DD_TRACE_DEBUG`

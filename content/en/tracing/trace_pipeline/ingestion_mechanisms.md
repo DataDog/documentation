@@ -196,13 +196,23 @@ Read more about sampling controls in the [Node.js tracing library documentation]
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
+**Remote configuration**
+
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, for PHP applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+
+**Note**: Remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
+
 For PHP applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service`, 20% of other endpoints' traces, and 10% for the rest of the traces, set:
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 Read more about sampling controls in the [PHP tracing library documentation][1].
