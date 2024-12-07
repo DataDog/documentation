@@ -1,7 +1,4 @@
 ---
-- config:
-    cache_enabled: false
-
 - data:
     - org_name: jenkinsci
 
