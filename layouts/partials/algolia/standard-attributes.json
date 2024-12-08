@@ -2,12 +2,11 @@
 {{- $page := $hugo_context.Site.GetPage "/standard-attributes/" -}}
 
 {{- range $attr := $page.Params.attributes -}}
-  {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" ($attr.name | anchorize)) -}}
+  {{- $id := (print $page.File.UniqueID "_" $page.File.Lang "_" ($attr.name | anchorize)) -}}
   {{- $relpermalink := print $page.RelPermalink "?search=" $attr.name -}}
   {{
     $hugo_context.Scratch.Add "algoliaindex" (
-        dict "objectID" $object_id
-        "id" $object_id
+        dict "id" $id
         "title" "Default Standard Attributes"
         "section_header" $attr.name
         "content" (print $attr.name " " $attr.description)
