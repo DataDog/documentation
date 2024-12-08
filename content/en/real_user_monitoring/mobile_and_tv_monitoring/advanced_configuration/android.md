@@ -638,11 +638,23 @@ Retrieving the RUM session ID can be helpful for troubleshooting. For example, y
 
 You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
   currentSessionId = sessionId
 }
 ```
+{{% /tab %}}
+{{% tab "Java" %}}
+  ```java
+GlobalRumMonitor.get().getCurrentSessionId( sessionId -> {
+ currentSessionId = sessionId;
+ return null;
+ });
+  ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
