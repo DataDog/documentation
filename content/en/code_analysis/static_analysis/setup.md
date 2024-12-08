@@ -31,7 +31,7 @@ To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code A
 
 ## Select where to run Static Analysis scans
 ### Scan in CI pipelines
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Analysis in the respective CI provider.
+Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][4] and run Static Analysis in the respective CI provider.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
@@ -252,7 +252,7 @@ To upload a SARIF report:
 
 Diff-aware scanning enables Datadog's static analyzer to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
 
-1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
+1. Make sure your `DD_APP_KEY`, `DD_SITE`, and `DD_API_KEY` variables are set in your CI pipeline.
 2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that Git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
 3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`.
 
@@ -265,13 +265,21 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 **Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
+## Integrate Static Analysis in an IDE
+
+You can identify code vulnerabilities in real time as you edit a file in your Integrated Development Environment (IDE). By integrating Static Analysis with your IDE, you can access immediate feedback on code quality and security issues as you write code.
+
+1. Install the relevant plugin or extension for your IDE from the [IDE Plugins documentation][3].
+1. Configure Static Analysis within the IDE.
+1. Open a project and check for real-time feedback.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[3]: /developers/ide_plugins/idea/#static-analysis
+[3]: /code_analysis/ide_plugins
 [4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis_rules
 [7]: /getting_started/site/
