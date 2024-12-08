@@ -35,7 +35,7 @@ further_reading:
   text: Lista completa de integraciones de Datadog
 - link: /tracing/guide/inferred-service-opt-in/
   tag: Documentación
-  text: Dependencias inferidas de servicio (fase beta)
+  text: Dependencias inferidas de servicios (Vista previa)
 title: Solucionar problemas de APM
 ---
 
@@ -83,7 +83,7 @@ Las métricas de traza y las métricas basadas en tramos personalizados pueden t
 
 Para garantizar que tus métricas de traza y tus métricas basadas en tramos personalizados tengan el mismo valor, configura una tasa de ingesta del 100% para tu aplicación o servicio.
 
-<div class="alert alert-info">Los nombres de métrica deben seguir la <a href="/metrics/custom_metrics/#naming-custom-metrics">convención de nomenclatura de métricas</a>. Los nombres de métrica que empiecen por </code>trace.*</code> no están permitidos y no se guardan.</div>
+<div class="alert alert-info">Los nombres de métrica deben seguir la <a href="/metrics/custom_metrics/#naming-custom-metrics">convención de nomenclatura de métricas</a>. Los nombres de métrica que empiecen por <code>trace.*</code> no están permitidos y no se guardan.</div>
 
 {{% /collapse-content %}}
 
@@ -100,7 +100,7 @@ Por ejemplo, puedes tener un único servicio como `service:test` mostrando múlt
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-Puedes utilizar [Dependencias inferidas de servicio (fase beta)][30]. Las API externas inferidas utilizan el esquema de nomenclatura por defecto `net.peer.name`. Por ejemplo: `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan la nomenclatura por defecto `scheme db.instance`.
+Puedes utilizar [dependencias inferidas de servicios (Vista previa)][30]. Las API externas inferidas utilizan la nomenclatura por defecto `net.peer.name`. Por ejemplo: `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan la nomenclatura por defecto `scheme db.instance`.
 
 O bien, puedes fusionar los nombres de servicio utilizando una variable de entorno como `DD_SERVICE_MAPPING` o `DD_TRACE_SERVICE_MAPPING`, según el lenguaje. 
 
@@ -207,7 +207,7 @@ Tu aplicación instrumentada puede enviar tramos con marcas temporales de hasta 
 
 Datadog acepta las siguientes combinaciones para un intervalo determinado de 40 minutos:
 
-- 1000 combinaciones únicas de `environments` y `service`
+- 5000 combinaciones únicas de `environments` y `service` 
 - 30 `second primary tag values` únicos por entorno
 - 100 `operation names` únicos por entorno y servicio
 - 1000 `resources` únicos por entorno, servicio y nombre de operación
