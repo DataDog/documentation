@@ -25,13 +25,13 @@ To open the Clipboard, copy any graph and click **Open Clipboard** in the popup.
 
 {{< img src="service_management/incidents/open-clipboard.png" alt="Open a graph in the Clipboard" style="width:80%;">}}
 
-Or, click "`Cmd/Ctrl + Shift + K` to open" on the minimized Clipboard.
+Or, click "<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> to open" on the minimized Clipboard.
 
-The Clipboard can also be opened and closed using `Cmd/Ctrl + Shift + K`. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
+The Clipboard can also be opened and closed using <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
 
 ## Adding clips
 
-To add a graph, copy it with `Cmd/Ctrl + C` or click **Copy** in the export menu. Once the Clipboard is open, copied graphs get added automatically.
+To add a graph, copy it with <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd> or click **Copy** in the export menu. Once the Clipboard is open, copied graphs get added automatically.
 
 To add a URL, open the Clipboard and click **Add current page**.
 
@@ -47,7 +47,7 @@ The Clipboard holds a maximum of 20 signals. Remove signals by deleting them ind
 
 ## Exporting
 
-Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents using keyboard shortcuts or the export menu. To copy an individual signal, hover over it and use `Cmd/Ctrl + C` to copy, and paste it into a dashboard or notebook with `Cmd/Ctrl + V`. To copy multiple signals, use  `Shift + Click` to select graphs and links, and use `Cmd/Ctrl + C` to copy them.
+Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents using keyboard shortcuts or the export menu. To copy an individual signal, hover over it and use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd> to copy, and paste it into a dashboard or notebook with <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>. To copy multiple signals, use  <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd> to select graphs and links, and use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd> to copy them.
 
 Alternatively, export your selection to a new or existing dashboard, notebook, or incident using the export menu. Only [supported graphs][1] can be exported to Notebooks.
 
