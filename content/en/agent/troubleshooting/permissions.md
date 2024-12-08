@@ -68,7 +68,7 @@ ls -al /opt/datadog-agent/run
 If the owner of the file is **NOT** `dd-agent`, run the following command to fix it:
 
 ```text
-chown dd-agent -R /opt/datadog-agent/run
+sudo chown -R dd-agent:dd-agent /opt/datadog-agent/run
 ```
 
 After making this change, the [Agent Start command][5] should successfully be able to start the Agent. If you continue to see this issue despite having taken these steps, contact [Datadog support][6] for additional direction.
