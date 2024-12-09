@@ -423,7 +423,7 @@ Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliz
 [4]: /es/agent/configuration/secrets-management
 {{% /tab %}}
 
-{{< /pestañas >}}
+{{< /tabs >}}
 
 ### Validar
 
