@@ -40,7 +40,7 @@ The output should look similar to the following:
 
 2. If your device is not listed and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP. 
 
-   **Note**: If no credentials are specified in the below commands, the Agent attempts to locate them in your Agent configuration files. Additionally, it is advisable to restart the Agent before running an `snmp walk`, as it uses the running config of the Agent, not what's on disk.
+   **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
 
    **Linux**: 
    For SNMP v2:
