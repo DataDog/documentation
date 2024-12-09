@@ -20,7 +20,8 @@ import { SNAKE_CASE_REGEX } from '../regexes';
 export const GlossaryEntryConfigSchema = z
   .object({
     id: z.string().regex(SNAKE_CASE_REGEX),
-    display_name: z.string()
+    display_name: z.string(),
+    description: z.string().optional()
   })
   .strict();
 
