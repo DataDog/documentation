@@ -1,5 +1,9 @@
 ---
 title: Manage Cloud Traffic Costs with CNM
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/'
+      tag: 'Blog'
+      text: 'Monitor your cloud architecture and app dependencies with Datadog CNM'
 aliases:
     - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
     - /network_monitoring/performance/guide/manage_traffic_costs_with_npm/
@@ -62,3 +66,6 @@ Datadog recommends tracking traffic volume metrics over time in dashboards and n
 Then share these results and any issues with your teammates using Dashboards and Notebooks. 
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="View your network traffic">}}
+
+## Further Reading
+{{< partial name="whats-next/whats-next.html" >}}
