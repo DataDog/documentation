@@ -1983,7 +1983,9 @@ window.DD_RUM.init({
 {{% tab "Error Tracking" %}}
 
 
-Types are compatible with TypeScript >= 3.8.2. For earlier versions, import JavaScript sources and use global variables to avoid any compilation issues:
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
