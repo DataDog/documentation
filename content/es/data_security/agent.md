@@ -94,8 +94,8 @@ Para obtener más información, consulta la documentación sobre la [gestión de
 
 El Agent en sitios no gubernamentales recopila información del entorno, del rendimiento y del uso de funciones del Datadog Agent. Cuando el Agent detecta un sitio gubernamental o se utiliza el [proxy FIPS del Datadog Agent][1], el Agent desactiva automáticamente la recopilación de telemetría. Cuando la detección es imposible (por ejemplo, si se está utilizando un proxy), se emite la telemetría del Agent, pero se abandona inmediatamente en el consumo de Datadog. Para evitar que se emitan estos datos en primer lugar, Datadog recomienda desactivar explícitamente la telemetría del Agent, actualizando el parámetro `agent_telemetry` en el archivo de configuración del Agent, como se muestra en el ejemplo siguiente.
 
-{{< pestañas >}}
-{{% pestaña "Datadog.yaml" %}}
+{{< tabs >}}
+{{% tab "Datadog.yaml" %}}
 
 ```yaml
 agent_telemetry:
