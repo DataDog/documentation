@@ -31,7 +31,10 @@ To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code A
 
 ## Select where to run Static Analysis scans
 ### Scan with Datadog-hosted scanning
-<div class="alert alert-warning">Datadog-hosted Static Analysis scans are in private beta.</div>
+
+{{< callout url="#" header="false" btn_hidden="true" >}}
+  Datadog-hosted Static Analysis scans are in Preview. Contact your Customer Success Manager to request access.
+{{< /callout >}}
 
 Datadog Static Analysis scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][1].
 
