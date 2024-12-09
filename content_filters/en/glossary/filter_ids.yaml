@@ -1,10 +1,10 @@
-# The list of allowed IDs for content preferences.
+# The list of allowed IDs for content filters.
 # This is used to prevent unnecessary bloat in naming,
-# and to tightly focus the preferences on 
+# and to tightly focus the filters on 
 # their most useful task, which is to build 
 # a page-agnostic profile of the user's needs.
 #
-# A new preference ID should only be added here if it
+# A new filter ID should only be added here if it
 # represents a general user characteristic, 
 # such as their operating system or programming language.
 
