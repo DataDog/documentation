@@ -1,5 +1,5 @@
 ---
-title: WAF Integration
+title: WAF Integrations
 disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
