@@ -94,7 +94,7 @@ gem "datadog-ci", "~> 1.0", group: :test
 
 ## Instrumenting your tests
 
-Follow these steps if your CI Provider is not supported for auto-instrumentation (see above).
+Follow these steps if your CI Provider is not supported for auto-instrumentation (see [Configuring reporting method](#configuring-reporting-method)).
 
 1. Set the following environment variables to configure the tracer:
 
@@ -107,7 +107,7 @@ Follow these steps if your CI Provider is not supported for auto-instrumentation
 `DD_SERVICE` (Required)
 : Name of the service or library being tested.
 
-2. Prepend your test command with datadog-ci CLI wrapper:
+2. Prepend your test command with this datadog-ci CLI wrapper:
 
 ```bash
 bundle exec ddcirb exec bundle exec rake test
@@ -211,9 +211,9 @@ For the full list of available instrumentation methods, see the [tracing documen
 don't change `RUBYOPT` env variable and don't prepend `bundle exec ddcirb exec` to your test command
 </div>
 
-Auto instrumentation adds additional performance overhead on code loading stage. It can be especially noticeable for 
-very big repositories with a lot of dependencies. If your project takes 20+ seconds to start, you will likely
-benefit from manually instrumenting your tests.
+Auto-instrumentation adds additional performance overhead at the code loading stage. It can be especially noticeable for 
+large repositories with a lot of dependencies. If your project takes 20+ seconds to start, you are likely
+to benefit from manually instrumenting your tests.
 
 {{< tabs >}}
 {{% tab "RSpec" %}}
