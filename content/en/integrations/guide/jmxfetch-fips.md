@@ -42,9 +42,6 @@ This section provides an example mutual TLS (mTLS) configuration.
 Mutual TLS (mTLS) requires valid certificates to be presented by both the server (the Java application's JMX
 connector) and the client (JMXFetch).
 
-This section describes how to generate certificates and cross-add them to corresponding trust stores. Private
-keys can not be imported or exported, and must be generated directly into the key store used by the JVM.
-
 Commands provided in this section are for reference only and can be adjusted according to circumstances.
 
 JVM must be already configured to run in FIPS mode before applying these commands. Some Java FIPS modules can
