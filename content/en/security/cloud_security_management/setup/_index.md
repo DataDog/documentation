@@ -36,7 +36,7 @@ To get started with Cloud Security Management (CSM), follow these steps:
 
 ## Enable Agentless Scanning
 
-The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
+The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
 
 To learn more about Agentless Scanning, see [Cloud Security Management Agentless Scanning][2].
 

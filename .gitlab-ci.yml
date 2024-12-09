@@ -55,12 +55,18 @@ variables:
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
   URGENT_FIX: "false" # set to true if the branch is an urgent fix to skip the build_live queue
 
+  # Feature Flag Vars
+  FF_PREVIEW_PULL_CONFIG_CACHE: "true" # set to false to disable caching of pull_config.yaml in preview builds
+  FF_BUILD_IMAGE_URL: "registry.ddbuild.io/ci/websites/webops-site-build:v50389622-96d5f437"
+
 
 # ================== copy scripts =============== #
 .common_script: &common_script
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
+  - chmod +x /usr/local/bin/docs-ci/sh/merge-build-files.sh
+  - /usr/local/bin/docs-ci/sh/merge-build-files.sh
   - chmod +x /usr/local/bin/*.py # make python scripts executable by the runner
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
@@ -164,7 +170,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: registry.ddbuild.io/ci/websites/webops-site-build:v49904560-30b69972
+  image: ${FF_BUILD_IMAGE_URL}
   tags:
     - "arch:amd64"
   rules:
@@ -427,6 +433,7 @@ post_build_failure_status_to_spec_repo:
     LOCAL: "False"
     RESOURCE_GROUP_ORDER: oldest_first
     RESOURCE_GROUP_LIMIT: 1
+    FF_PREVIEW_PULL_CONFIG_CACHE: "false"
   script:
     - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - notify_slack.py "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" --status="#FFD700"
@@ -558,18 +565,6 @@ link_checks:on-schedule:
   interruptible: true
   allow_failure: true
 
-# We are relying on the preview version of this job due to the length of time it takes
-# test_missing_tms_live:
-#   <<: *base_template
-#   <<: *live_rules
-#   stage: post-deploy
-#   cache: {}
-#   environment: "live"
-#   dependencies:
-#     - build_live
-#   script:
-#     - check_missing_tms
-
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
   image: registry.ddbuild.io/ci/websites/pa11y:v48852638-b2768bdb
@@ -683,7 +678,7 @@ run_notranslate_tag:schedule:
     - build_live
   timeout: 4h
   script:
-    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install six transifex-python
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
     - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
   rules:
