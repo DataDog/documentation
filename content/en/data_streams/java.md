@@ -54,6 +54,9 @@ To set up Data Streams Monitoring from the Datadog UI without needing to restart
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
+### Manual instrumentation
+Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -62,3 +65,4 @@ Data Streams Monitoring uses one [message attribute][3] to track a message's pat
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[5]: /data_streams/manual_instrumentation/?tab=java
