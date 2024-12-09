@@ -1,0 +1,7 @@
+allowed:
+- id: red
+  display_name: Red
+  # Mistake: 'default' is not a valid key here.
+  default: true
+- id: green
+  display_name: Green

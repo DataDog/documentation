@@ -1,0 +1,31 @@
+# The list of allowed IDs for content preferences.
+# This is used to prevent unnecessary bloat in naming,
+# and to tightly focus the preferences on 
+# their most useful task, which is to build 
+# a page-agnostic profile of the user's needs.
+#
+# A new preference ID should only be added here if it
+# represents a general user characteristic, 
+# such as their operating system or programming language.
+
+allowed:
+  # for the Markdoc test pages
+  - id: color
+    display_name: "Color"
+  - id: item
+    display_name: "Item"
+  - id: postgres_version
+    display_name: "Postgres version"
+  - id: agent_version
+    display_name: "Agent version"
+  - id: agent_host
+    display_name: "Agent host"
+  # general examples
+  - id: host
+    display_name: "Host"
+  - id: programming_lang
+    display_name: "Language"
+  - id: os
+    display_name: "OS"
+  - id: database
+    display_name: "Database"
