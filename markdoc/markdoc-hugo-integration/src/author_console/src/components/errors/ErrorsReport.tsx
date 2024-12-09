@@ -17,19 +17,20 @@ const ParsingErrorsReport = (props: {
           const filename = filePath.split('/').pop();
           const vscodeLink = `vscode://file/${filePath}`;
           return (
-            <div
+            <Paper
               key={filePath}
+              elevation={3}
               style={{
-                padding: '0px 10px 5px 10px',
-                border: '1px solid gray',
-                marginBottom: '10px',
-                borderRadius: '4px'
+                padding: '3px 15px 15px 15px',
+                marginBottom: '15px',
+                position: 'relative',
+                borderRadius: '5px'
               }}
             >
               <h3>{filename}</h3>
-              <p>
+              <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
                 <a href={vscodeLink}>view file</a>
-              </p>
+              </div>
               <TableContainer component={Paper} elevation={0}>
                 <Table>
                   <TableHead>
@@ -55,7 +56,7 @@ const ParsingErrorsReport = (props: {
                   </TableBody>
                 </Table>
               </TableContainer>
-            </div>
+            </Paper>
           );
         }
       )}
@@ -73,18 +74,18 @@ const ValidationErrorsReport = (props: {
           const filename = filePath.split('/').pop();
           const vscodeLink = `vscode://file/${filePath}`;
           return (
-            <div
+            <Paper
               key={filePath}
+              elevation={3}
               style={{
-                padding: '0px 10px 5px 10px',
-                border: '1px solid gray',
-                marginBottom: '10px',
+                padding: '3px 35px 15px 15px',
+                marginBottom: '15px',
                 position: 'relative',
-                borderRadius: '4px'
+                borderRadius: '5px'
               }}
             >
               <h3>{filename}</h3>
-              <div style={{ position: 'absolute', top: '15px', right: '15px' }}>
+              <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
                 <a href={vscodeLink}>view file</a>
               </div>
               <ul>
@@ -96,7 +97,7 @@ const ValidationErrorsReport = (props: {
                   );
                 })}
               </ul>
-            </div>
+            </Paper>
           );
         }
       )}
@@ -116,7 +117,7 @@ const ErrorsReport = (props: {
         parsingErrorReportsByFilePath={props.parsingErrorReportsByFilePath}
       />
       <h2>Validation errors</h2>
-      <p>Some files were incorrectly configured or otherwise invalid.</p>
+      <p>Some files contained incorrect configuration values or other invalid data.</p>
       <ValidationErrorsReport
         validationErrorsByFilePath={props.validationErrorsByFilePath}
       />
