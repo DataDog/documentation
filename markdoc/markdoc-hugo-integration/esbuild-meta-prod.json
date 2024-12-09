@@ -21,8 +21,8 @@
       ],
       "format": "cjs"
     },
-    "../markdoc-static-compiler/dist/index.js": {
-      "bytes": 428902,
+    "node_modules/markdoc-static-compiler/dist/index.js": {
+      "bytes": 428141,
       "imports": [],
       "format": "cjs"
     },
@@ -30,7 +30,7 @@
       "bytes": 1829,
       "imports": [
         {
-          "path": "../markdoc-static-compiler/dist/index.js",
+          "path": "node_modules/markdoc-static-compiler/dist/index.js",
           "kind": "require-call",
           "original": "markdoc-static-compiler"
         }
@@ -95,8 +95,8 @@
         "dist/helperModules/filterResolution.js": {
           "bytesInOutput": 985
         },
-        "../markdoc-static-compiler/dist/index.js": {
-          "bytesInOutput": 207601
+        "node_modules/markdoc-static-compiler/dist/index.js": {
+          "bytesInOutput": 206970
         },
         "dist/helperModules/renderer/reresolver.js": {
           "bytesInOutput": 790
@@ -111,7 +111,7 @@
           "bytesInOutput": 140
         }
       },
-      "bytes": 217991
+      "bytes": 217360
     }
   }
 }
