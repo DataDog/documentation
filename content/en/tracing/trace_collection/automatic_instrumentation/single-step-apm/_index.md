@@ -365,7 +365,7 @@ Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available vers
 - [Java][31]
 - [Node.js][32]
 - [Python][33]
-- [.NET][34] (For .NET applications using a musl-based Linux distribution like Alpine, specify a tag with the `-musl` suffix, such as `v2.29.0-musl`.)
+- [.NET][34]
 - [Ruby][35]
 
 <div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
