@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-When applications depend on each other, poor connectivity or slow service calls can lead to errors and latency that appear at the application layer. Identifying whether the issue is a network problem or a code-level bug can be challenging with visibility into only one layer.
+When applications depend on each other, poor connectivity or slow service calls can lead to errors and latency that appear at the application layer. Determining if the issue is a network problem or a code-level issue can be difficult with visibility into only one layer.
 
 Datadog CNM addresses this by correlating monitoring data from both the network and application layers. For example, if high TCP retransmits are detected in a specific availability zone, you can access logs, traces, and processes to identify the root cause, such as a CPU-saturating process, without leaving the network view.
 
@@ -23,19 +23,19 @@ Datadog CNM addresses this by correlating monitoring data from both the network 
 
 CNM is designed to track traffic between entities and determine which resources are communicating and their health status.
 
-To examine the a simple traffic flow between entities, use the following steps:
+To examine the a basic traffic flow between entities, use the following steps:
 
-1. On the [Network Analytics page](https://app.datadoghq.com/network), set your **View clients as** and **View servers as** dropdown filters to group by `service` tags to examine a service-to-service flow, where you'll notice the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
+1. On the [Network Analytics page][1], set your **View clients as** and **View servers as** dropdown filters to group by `service` tags to examine a service-to-service flow, and observe the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_service_service.png" alt="CNM analytics page, grouping by service to service with Client and Server IP highlighted">}}
 
-Each row aggregates 5 minutes' worth of connections. While you might recognize some IPs as specific addresses or hosts depending on your network familiarity, this becomes challenging with larger, more complex networks. Therefore, the most meaningful aggregation level is rolling up the host or container associated with these IPs to tags in Datadog, such as service, availability zone, pod, and so forth.
+   Each row aggregates 5 minutes worth of connections. While you might recognize some IPs as specific addresses or hosts depending on your network familiarity, this becomes challenging with larger, more complex networks. Therefore, the most meaningful aggregation level is rolling up the host or container associated with these IPs to tags in Datadog, such as service, availability zone, pod, and so on.
 
-2. To view the network traffic for all of your orders-sqlserver* pods by host and AZ, use the following filters to narrow down your search results:
+2. For example, to view the network traffic for all of your `orders-sqlserver*` pods by host and AZ, use the following filters to narrow down your search results:
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_host_az.png" alt="CNM analytics page, grouping by host and availability zone for specific client pod name">}}
 
-This initial step allows you to begin monitoring your most complex networks and start gaining insights between endpoints in your environment, including VMs, containers, services, cloud regions or datacenters, and much more.
+   This initial step allows you to begin monitoring your most complex networks and start gaining insights between endpoints in your environment, including VMs, containers, services, cloud region, datacenters, and more.
 
 ### Service-to-Service dependency tracking
 
@@ -45,57 +45,55 @@ For example, a possible cause of service latency could be too much traffic being
 
 To analyze the cause of service latency, use the following steps:
 
-1. On the [Network Analytics](https://app.datadoghq.com/network?query=&clientService=orders-app&destG=core_network.server.auto_grouping_tags&env=%2A&filter_from=20190&filter_to=139698332917&netviz=sent_vol%3A%3A%2Ctcp_r_pct%3A%3A%2Crtt%3A%3A&refresh_mode=paused&serverService=&showGraphs=true&showRQ=false&srcG=core_network.client.auto_grouping_tags&stream_sort=timestamp%2Cdesc&team=%2A&from_ts=1732661879737&to_ts=1732662779737&live=true) page, aggregate traffic by `service`, and filter for the cloud region where you may be noticing alerts or service latency. This view displays all service-to-service dependency paths within that region. 
+1. On the [Network Analytics][1] page, aggregate traffic by `service`, and filter for the cloud region where you may be noticing alerts or service latency. This view displays all service-to-service dependency paths within that region. 
 
 2. Sort the dependency table based on retransmits or latency, to identify connections with the most significant performance degradation. For instance, if you notice an unusually high number of TCP established connections alongside spikes in retransmits and latency, it may indicate that the source is overwhelming the destination's infrastructure with requests.
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_service_region_retransmits.png" alt="CNM analytics page, grouping by service and region for specific cloud region">}}
 
-3. Click into one of the traffic paths on this page to open the sidepanel. This provides more detailed telemetry to help you further debug your network dependencies. 
+3. Click into one of the traffic paths on this page to open the side panel. This provides more detailed telemetry to help you further debug your network dependencies. 
 
-Here we can see on the Flows tab if the communication protocol is TCP or UDP, and view other metrics such as RTT, Jitter, and packets sent and received to further isolate the cause of high retransmit count.
+4. Check the Flows tab to determine if the communication protocol is TCP or UDP, and review metrics like RTT, Jitter, and packets sent and received to help identify the cause of a high retransmit count.
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_sidepanel_flows.png" alt="Side panel of a traffic flow, highlighting the Flows tab">}}
 
 ## Visibility into network traffic 
 
 Datadog CNM consolidates relevant distributed traces, logs, and infrastructure data into a single view, allowing you to identify and trace issues back to the originating request from an application.
 
-In the following example, we'll take a closer look at the Traces tab under Network Analytics, which displays distributed traces for requests moving between source and destination endpoints, enabling you to pinpoint where application-level errors occur. 
+In the example below, examine the Traces tab under Network Analytics to view distributed traces of requests between source and destination endpoints, helping you identify where application-level errors occur.
 
 To identify if an issue is an Application or Network issue, you can use the following steps:
 
-<screen shot>    
-
-1. Navigate to [Infrastructure \> Cloud Network \> Analytics](https://app.datadoghq.com/network?showGraphs=true&showRQ=false)  
+1. Navigate to [Infrastructure > Cloud Network > Analytics][1].  
 2. In the Summary graphs, click a line of communication that has a lot of volume and high RTT time:
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_isolate_series.png" alt="CNM analytics page, clicking on a path with high RTT Time">}}
 
 3. Click **Isolate this series**  
 4. Click into this path and click on the Flows tab to observe RTT time:
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_sidepanel_rtt.png" alt="CNM sidepanel, highlighting the RTT time column">}}
 
-5. On this page, NPM correlates network metric round-trip time (RTT) with application request latency, to help us identify if the issue is a network or application issue. In this particular example, we see that the RTT time is slightly high but has come down over time and needs to be investigated further.  
+5. On this page, CNM correlates network metric round-trip time (RTT) with application request latency, to help us identify if the issue is a network or application issue. In this particular example, observe that the RTT time is slightly high but has come down over time and needs to be investigated further.  
      
 6. On this same page, click the Traces tab and investigate the Duration column: 
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_traces_duration.png" alt="CNM sidepanel, highlighting the Traces tab and duration column">}}
 
- We can see here that although network latency (RTT) is high, the application request latency (Duration) is normal, so in this case, the issue is likely network-related, and there's no need to investigate the app code. 
+   Observe that although network latency (RTT) is high, the application request latency (Duration) is normal, so in this case, the issue is likely network-related, and there's no need to investigate the app code. 
 
-Conversely, *if network latency is stable but application latency (Duration) is high*, the problem likely stems from the app, and you can explore code-level traces to find the root cause:
+   Conversely, *if network latency is stable but application latency (Duration) is high*, the problem likely stems from the app, and you can explore code-level traces by clicking on one of the service paths in the Traces tab to find the root cause, which takes you to the APM flame graph relative to this service:
 
-<screen shot>
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_apm_traces.png" alt="APM flame graph screenshot after clicking on a service from the CNM sidepanel traces tab">}}
 
 ### Network map
 
-The [Network map](https://app.datadoghq.com/network/map?query=&clientService=orders-app&cluster=loadbalancer&destG=core_network.server.auto_grouping_tags&env=%2A&filter_from=20190&filter_to=139698332917&highlight=true&netviz=sent_vol%3A%3A%2Ctcp_r_pct%3A%3A%2Crtt%3A%3A&refresh_mode=paused&serverService=&srcG=core_network.client.auto_grouping_tags&stream_sort=timestamp%2Cdesc&team=%2A&from_ts=1732661879737&to_ts=1732662779737&live=false) in Datadog provides a visual representation of your network topology, helping identify partitions, dependencies, and bottlenecks. It consolidates network data into a directional map, making it easier to isolate problematic areas.
+The [Network map][2] in Datadog provides a visual representation of your network topology, helping identify partitions, dependencies, and bottlenecks. It consolidates network data into a directional map, making it easier to isolate problematic areas.
 
-Containers, for example, are efficient, portable, and scalable, but their complex, distributed, and ephemeral nature comes with challenges, particularly for tracking network traffic. Datadog’s [Network Map](https://docs.datadoghq.com/network_monitoring/performance/network_map/#map-clusters) simplifies this by visualizing real-time traffic flows between containers, pods, and deployments, even as containers change. This allows users to spot inefficiencies and misconfigurations. For example, the map can reveal if Kubernetes pods within the same cluster are communicating through an ingress controller, indicating misconfiguration that can cause increased latency.  
+Containers, for example, are efficient, portable, and scalable, but their complex, distributed, and ephemeral nature comes with challenges, particularly for tracking network traffic. Datadog's [Network Map][3] simplifies this by visualizing real-time traffic flows between containers, pods, and deployments, even as containers change. This allows users to spot inefficiencies and misconfigurations. For example, the map can reveal if Kubernetes pods within the same cluster are communicating through an ingress controller, indicating misconfiguration that can cause increased latency.  
 
-<add some steps and screen shot>
+add some steps and screen shot
 
 ### Service mesh
 
@@ -110,3 +108,7 @@ By setting up CNM, organizations can monitor and improve network performance, en
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/network
+[2]: https://app.datadoghq.com/network/map
+[3]: https://docs.datadoghq.com/network_monitoring/performance/network_map/#map-clusters

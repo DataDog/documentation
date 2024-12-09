@@ -46,7 +46,7 @@ or monitor your own team's output specifically.
 
 ## Visualizing traffic costs 
 
-You can visualize cross-AZ or inter-AZ traffic using the Network Map to quickly pinpoint bottlenecks. At Datadog,  this view is used to validate that the EU and US availability zones are not communicating, to ensure compliance with GDPR and protection of customers' data. 
+You can visualize cross-AZ or inter-AZ traffic using the Network Map to quickly pinpoint bottlenecks. At Datadog, this view is used to validate that the EU and US availability zones are not communicating, to ensure compliance with GDPR and protection of customers' data. 
 Cross-AZ traffic:
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/cross-az-traffic.png" alt="Cross-AZ traffic">}}
 Inter-AZ service-to-service traffic:
