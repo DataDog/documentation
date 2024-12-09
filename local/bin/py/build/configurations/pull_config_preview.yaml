@@ -79,7 +79,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: docs9683/recent-changes-updates
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs9683/aws-config-updates
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
