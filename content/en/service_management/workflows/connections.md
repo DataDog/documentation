@@ -114,7 +114,7 @@ You define the members of a connection group using a connection's _Identifier Ta
 
 Each connection in the group must have a different set of tag values for the given Identifier Tags. For example:
 - `connectionA {env:staging}` and `connectionB {env:prod}` can be grouped together.
-- `connectionA {env:staging}` and `connectionC {env:staging}` can't be grouped, because it would contain duplicate tag values.
+- `connectionA {env:staging}` and `connectionC {env:staging}` can't be grouped, because the group would contain duplicate tag values.
 
 You can only add connections you have **Resolve Access** for, and you can only use connections within a group if you have Resolve Access for those connections. If you use a group with a connection to which you don't have Resolve Access _and_ when your workflow runs it points to that connection, the workflow fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure your workflow so that it can't point to a connection you don't have Resolve Access for.
