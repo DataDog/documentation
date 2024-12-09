@@ -85,8 +85,8 @@ The LangChain integration instruments the following methods:
 - [Tools][21]
   - `BaseTool.invoke()`, `BaseTool.ainvoke()`
 - [Retrieval][22]
-  - langchain_community.<vectorstores>, langchain_pinecone, langchain_qdrant, langchain_milvus
-  - `similarity_search()`, `similarity_search_with_score()`, `similarity_search_by_vector_with_score()`, `similarity_search_with_score_by_vector()`, `similarity_search_by_vector()`
+  - langchain_community.<vectorstores>, langchain_pinecone
+  - `similarity_search()`
 
 ## Amazon Bedrock
 
