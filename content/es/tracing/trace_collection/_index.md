@@ -37,7 +37,7 @@ Existen dos enfoques principales para instrumentar tu aplicación: automático o
 
 ### Instrumentación automática
 
-Crea {{< tooltip glossary="tramos" (spans)>}} para tu aplicación con pocos pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
+Crea {{< tooltip glossary="tramos" (span)>}}s para tu aplicación con pocos pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
 
 - [Instrumentación en un solo paso (Vista previa)][7]: Ejecuta un comando de instalación de una sola línea para instalar el Datadog Agent, habilitar APM e instrumentar todos tus servicios en tu host Linux, máquina virtual o contenedor.
 - [Bibliotecas de Datadog][8]: añade bibliotecas de rastreo de Datadog a tu aplicación.
