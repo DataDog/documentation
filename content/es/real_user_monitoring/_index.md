@@ -111,7 +111,7 @@ La siguiente tabla muestra las funcionalidades de RUM compatibles con cada plata
 | Monitorizar indicadores vitales específicos de plataformas | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Seguimiento global de contexto/atributo en logs  | {{< X >}} |  |  |  |  |  |  |
 | Rastreo del lado del cliente |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay está en fase beta pública para aplicaciones móviles nativas. |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay está en Vista previa para aplicaciones móviles nativas. |
 | Señales de frustración | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Compatible sólo parcialmente con todos los dispositivos **móviles** y **Roku** |
 
 ## Endpoints compatibles para dominios de SDK
@@ -130,6 +130,8 @@ El tráfico de todos los SDK de Datadog se transmite a través de SSL (443 por d
 ## Explorar Datadog RUM
 
 Accede a RUM yendo a [**Experiencia digital > Resumen del rendimiento**][1].
+
+**Consejo**: Para abrir RUM a partir de la búsqueda global de Datadog, pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> y busca `real user monitoring`.
 
 ### Dashboards predefinidos
 
@@ -178,6 +180,7 @@ Accede a información sobre logs activados, errores y rendimiento cuando solucio
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /es/real_user_monitoring/platform/dashboards/
