@@ -14,13 +14,13 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -301,7 +301,7 @@ Alternatively, you can enable automatic instrumentation in `test_helper/spec_hel
 require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-**Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
+**Note**: In CI mode, these traces are submitted to Test Optimization, and they do **not** show up in Datadog APM.
 
 For the full list of available instrumentation methods, see the [tracing documentation][6]
 
@@ -347,7 +347,7 @@ end
 
 ## Using manual testing API
 
-If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 Full public API documentation is available on [YARD site][8].

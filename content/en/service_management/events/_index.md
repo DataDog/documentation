@@ -37,6 +37,8 @@ Ingest, enrich and normalize, and correlate your events from any source into act
 
 More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
 
+**Tip**: To open the Event Management page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `event explorer`.
+
 ## Components
 
 {{< whatsnext desc="Event Management features:">}}

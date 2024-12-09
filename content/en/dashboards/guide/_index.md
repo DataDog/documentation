@@ -33,6 +33,8 @@ cascade:
     {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
     {{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/tv_mode" >}}Using TV mode for Dashboards
+    {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Functions:" >}}
