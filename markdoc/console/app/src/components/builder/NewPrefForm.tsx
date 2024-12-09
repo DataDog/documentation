@@ -156,7 +156,7 @@ export default function NewPrefForm(props: {
                       allowlist={allowlist}
                     />
                   )}
-                  {activeStep === 1 && <OptionsSelector />}
+                  {activeStep === 1 && <OptionsSelector pref={pref} />}
                 </div>
                 <Box sx={{ mb: 2 }}>
                   <Button
