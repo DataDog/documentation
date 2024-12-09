@@ -28427,6 +28427,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28475,6 +28479,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28529,6 +28537,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28592,6 +28604,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28653,6 +28669,10 @@ paths:
             value: '"openapi-spec.yaml"'
           step: there is a valid "managed_api" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         operationId: DeleteOpenAPI
         parameters:
