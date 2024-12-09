@@ -14,10 +14,7 @@ further_reading:
 
 A short-running script typically runs for a few seconds or minutes. The expected behavior is to receive one trace each time the script is executed.
 
-By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
-
 ```
-$ export DD_TRACE_CLI_ENABLED=1
 # Optionally, set the agent host and port if different from localhost and 8126, respectively
 $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
@@ -47,13 +44,9 @@ Once the script is run, the trace is generated and sent to the Datadog backend w
 
 A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
 
-By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
-
 ```
-$ export DD_TRACE_CLI_ENABLED=1
-# With this pair of settings, traces for each "unit of work" is sent as soon as the method execution terminates.
+# With this setting, traces for each "unit of work" are sent as soon as the method execution terminates.
 $ export DD_TRACE_GENERATE_ROOT_SPAN=0
-$ export DD_TRACE_AUTO_FLUSH_ENABLED=1
 # Optionally, set service name, env, etc...
 $ export DD_SERVICE=my_service
 # Optionally, set the agent host and port if different from localhost and 8126, respectively
