@@ -732,7 +732,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-test
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
+[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. Set `NODE_OPTIONS` to `-r dd-trace/ci/init --import dd-trace/register.js` to get full visibility into your tests. See [dd-trace-js ESM support][10] for more information.
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
@@ -805,7 +805,7 @@ When you use this approach, both the testing framework and Test Optimization can
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[10]: https://github.com/datadog/dd-trace-js?tab=readme-ov-file#ecmascript-modules-esm-support
 [11]: /real_user_monitoring/browser/
 [12]: /continuous_integration/guides/rum_integration/
 [13]: https://docs.cypress.io/api/plugins/before-run-api
