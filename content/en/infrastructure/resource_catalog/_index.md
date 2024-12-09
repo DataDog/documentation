@@ -142,6 +142,10 @@ Use the **Recent Changes** tab on a resource's side panel to see a 7-day history
 
 See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
 
+#### Azure
+
+After confirming that you have enabled resource collection under the **Resource Collection** tab in the [Azure integration tile][14], submit your request using the [form above](#recent-changes). There are no other setup steps.
+
 #### Google Cloud Platform
 
 See the [Resource change collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
@@ -163,3 +167,4 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [11]: https://docs.datadoghq.com/security/threats/
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/
 [13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/
+[14]: https://app.datadoghq.com/integrations/azure
