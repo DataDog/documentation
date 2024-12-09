@@ -80,6 +80,7 @@ Para habilitar un puerto UDP personalizado del servidor DogStatsD en el Agent:
 [1]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /es/developers/dogstatsd/unix_socket/
 [3]: /es/agent/configuration/agent-commands/
+
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 
@@ -109,6 +110,7 @@ La detección del origen en entornos distintos a Kubernetes se basa en una exten
 
 [1]: /es/developers/dogstatsd/unix_socket/
 [2]: /es/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
+
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -247,7 +249,7 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 Accede a dashboards preconfigurados
 
 {{% /tab %}}
-{{< tabs >}}
+{{< /tabs >}}
 
 ### Cliente DogStatsD
 
