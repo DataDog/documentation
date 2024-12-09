@@ -36,7 +36,7 @@ To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code A
   Datadog-hosted Static Analysis scans are in Preview. Contact your Customer Success Manager to request access.
 {{< /callout >}}
 
-Datadog Static Analysis scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][1].
+You can run Datadog Static Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][1].
 
 ### Scan in CI pipelines
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Analysis in the respective CI provider.
