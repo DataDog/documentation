@@ -395,6 +395,7 @@ Para cualquier cambio en las claves de KSM existentes, ponte en contacto con el 
 [3]: /es/help/
 {{< partial name="whats-next/whats-next.html" >}}
 
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validación
