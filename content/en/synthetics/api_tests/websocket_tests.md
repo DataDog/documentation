@@ -31,7 +31,9 @@ WebSocket tests can run from both [managed](#select-locations) and [private loca
 
 After choosing to create an `WebSocket` test, define your test's request.
 
-### Define request
+{{% synthetics-api-tests-templates %}}
+
+### Define request (build from scratch)
 
 1. Specify the **URL** to run your test on.
 2. Enter the string you want to send in your test. 
