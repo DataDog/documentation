@@ -10,6 +10,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import PrefsBuilder from './components/builder/PrefsBuilder';
+import ErrorsReport from './components/errors/ErrorsReport';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -89,74 +90,12 @@ function App() {
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
-          <p>There are no recent builds to debug.</p>
-          <p>
-            Run <code>make compile-markdoc</code> from the command line to build all{' '}
-            <code>.mdoc</code> files inside of <code>content/en</code>.
-          </p>
+          <ErrorsReport {...dbData.errors} />
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={1}>
           <PrefsBuilder allowlist={dbData.allowlist} />
         </CustomTabPanel>
       </Box>
-      <div style={{ height: '1200px' }}></div>
-      <hr />
-      <p>
-        This app runs from a single HTML file. It's written with React, TypeScript, and
-        Vite.
-      </p>
-      <p>Material UI and Emotion are also installed and available to use.</p>
-      <h2>Usage examples</h2>
-      <ExampleWrapper>
-        <h3>Include an image asset</h3>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>React counter</h3>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        </div>
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Style a component with Emotion</h3>
-        <p>
-          The button below is styled with Emotion at the top of <code>src/App.tsx</code>.
-        </p>
-        <Button>Hover on me</Button>
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Use a Material UI component</h3>
-        <p>
-          MUI is installed, so you can use MUI components, such as the rating below (see{' '}
-          <a href="https://mui.com/material-ui/react-rating/">the Rating docs</a>
-          ).
-        </p>
-        <Rating
-          name="my-rating"
-          value={rating}
-          onChange={(_event, newRating) => {
-            setRating(newRating);
-          }}
-        />
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Import data</h3>
-        <p>
-          A common use case for a single-file tooling app is to layer a UI over a dataset.
-        </p>
-        <p>
-          Add your data to <code>src/db.ts</code>, and it will be available to your app as{' '}
-          <code>dbData</code>.
-        </p>
-        <p>
-          The data below comes from <code>src/db.ts</code> and is imported at the top of{' '}
-          <code>src/App.tsx</code>. Any other component can accept it (or a subset of it)
-          as a prop, and use the data in some way.
-        </p>
-        <pre>{JSON.stringify(dbData, null, 2)}</pre>
-      </ExampleWrapper>
     </>
   );
 }
