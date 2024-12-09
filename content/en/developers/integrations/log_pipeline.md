@@ -23,7 +23,7 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration sends logs to Datadog.
 
 
-When developing your integration to send logs to Datadog follow these guidlines to ensure the best experience for your users.
+When developing your integration to send logs to Datadog follow these guidelines to ensure the best experience for your users.
 
 ## Best practices
 
@@ -68,7 +68,7 @@ Logs sent to Datadog are processed in [log pipelines][13] using pipeline process
 
 #### Create a pipeline
 
-Create a log pipeline to process specified logs with pipeline processors. Once you've set-up a pipeline add processors to enrich and structure the logs further.
+Create a log pipeline to process specified logs with pipeline processors.
 
 
 1. From the [**Pipelines**][3] page, click **+ New Pipeline**.
@@ -77,11 +77,12 @@ Create a log pipeline to process specified logs with pipeline processors. Once y
 3. Optionally, add tags and a description.
 4. Click **Create**.
 
+After you set-up a pipeline, add processors to enrich and structure the logs further.
 #### Add pipeline processors
 
 Before defining your pipeline processors, review [Datadog's Standard Attributes][6].
 
-Use processors within your pipelines to enrich, restructure your data, and generate log attributes. For a list of all log processors, see the [Processors][10] documentation.
+Use processors within your pipelines to enrich and restructure your data, and generate log attributes. For a list of all log processors, see the [Processors][10] documentation.
 
 ##### Requirements
 
@@ -92,7 +93,7 @@ Map the log `service` tag to the name of the service producing telemetry
 : Use the [Service Remapper][7] to remap the `service` attribute. When source and [service][26] share the same value, remap the `service` tag to the `source` tag. `service` tags must be lowercase. 
 
 Map the log's internal timestamp to its official Datadog timestamp
-: Use the [Date Remapper][4] to define the official timestamp for logs. If the log timestamp does not already map to a [standard date attribute][28] it defaults to the time of ingestion at Datadog's endpoint.
+: Use the [Date Remapper][4] to define the official timestamp for logs. If a log's timestamp does not map to a [standard date attribute][28], Datadog sets its timestamp to the time of ingestion.
 
 Map the custom status attributes of the logs to the official Datadog `status` attribute
 : Use a [Status Remapper][25] to remap the `status` of a log, or a [Category Processor][19] for statuses mapped to a range (as with HTTP status codes).
