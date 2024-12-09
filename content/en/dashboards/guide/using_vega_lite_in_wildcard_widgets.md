@@ -147,6 +147,8 @@ Special considerations apply to field names that contain non-alphanumeric charac
 
 To ensure these characters are interpreted correctly by the Wildcard widget, you must escape these characters with `\\`. For example, when using the RUM query field `@view.name`, write it as `@view\\.name` in the Vega-Lite specification.
 
+For more information on supported data formats, see the [Wildcard widget][11] documentation.
+
 ## Context menu and context links
 
 With Datadog widgets, you have the ability to click on a graph datapoint to open a [graph context menu][8] with context links. You can enable this feature on Wildcard widgets by adding specific parameters to your widget's configuration.
@@ -170,13 +172,14 @@ You can also add dynamic custom links through the [`href` encoding][10]. This is
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/metrics/units/#unit-list
+[1]: /metrics/units/#unit-list
 [2]: https://d3js.org/d3-format#locale_format
 [3]: https://vega.github.io/vega/docs/expressions/
 [4]: https://vega.github.io/vega-lite/docs/data.html#named
-[5]: https://docs.datadoghq.com/dashboards/widgets/wildcard/#map-datadog-data-to-vega-lite-specifications
-[6]: https://docs.datadoghq.com/dashboards/widgets/wildcard/#data-preview
-[7]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
-[8]: https://docs.datadoghq.com/dashboards/widgets/#graph-menu
-[9]: https://docs.datadoghq.com/dashboards/guide/context-links/#context-links-variables
+[5]: /dashboards/widgets/wildcard/#map-datadog-data-to-vega-lite-specifications
+[6]: /dashboards/widgets/wildcard/#data-preview
+[7]: /getting_started/tagging/#define-tags
+[8]: /dashboards/widgets/#graph-menu
+[9]: /dashboards/guide/context-links/#context-links-variables
 [10]: https://vega.github.io/vega-lite/docs/encoding.html
+[11]: /dashboards/widgets/wildcard/#compatible-data-formats
