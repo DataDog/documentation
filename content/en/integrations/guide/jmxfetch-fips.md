@@ -80,11 +80,10 @@ keytool -keystore jmxfetch-truststore -import -alias java-app -file java-app-cer
 
 {{% tab "Containers" %}}
 
-Datadog Agent FIPS JMX docker images come with BouncyCastle FIPS provider pre-installed. BouncyCastle uses a
-proprietary key and trust store format, which is not compatible with regular Java key store format or formats
-used by other Java FIPS implementations. For this reason, `keytool` command provided by the docker image
-should be used to configure key and trust stores for JMXFetch. Stores for the Java application should be
-configured using `keytool` from the same Java runtime that is running the application.
+Datadog Agent FIPS JMX docker images use BCFKS key store format. PKCS#12 and JKS key store formats used by
+other Java implementations are not supported. `keytool` utility provided in the docker image must be used to
+configure key and trust stores for JMXFetch. `keytool` utility from the Java implementation used to run the
+monitored Java application must be used to configure key and trust stores used by the application.
 
 Pick a location to place the key and trust stores, make it the current directory.
 
