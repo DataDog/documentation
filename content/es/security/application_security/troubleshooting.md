@@ -551,7 +551,7 @@ Consulte la documentación de configuración del producto Application Security p
 
 ### Garantizar la comunicación de los datos de telemetría
 
-Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (`DD_TRACE_TELEMETRY_ENABLED` para NodeJS) está configurada como `true` o que la propiedad del sistema correspondiente a tu lenguaje está habilitada. Por ejemplo, en Java: `-Ddd.instrumentation.telemetry.enabled=true`
+Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (`DD_TRACE_TELEMETRY_ENABLED` para Node.js) está configurada como `true` o que la propiedad del sistema correspondiente a tu lenguaje está habilitada. Por ejemplo, en Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
 ## Deshabilitar la gestión de amenazas y la protección
 

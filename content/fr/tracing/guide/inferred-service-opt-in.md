@@ -27,7 +27,7 @@ Datadog peut automatiquement identifier les dépendances d'un service instrument
 
 Datadog utilise les attributs des spans pour déterminer les noms et types des services déduits. Les API externes déduites utilisent par défaut le schéma d'attribution de nom `net.peer.name` (`api.stripe.com`, `api.twilio.com` ou `us6.api.mailchimp.com`, par exemple). Les bases de données déduites utilisent le schéma d'attribution de nom par défaut, c'est-à-dire `db.instance`.
 
-Si vous utilisez le traceur Go, Java, NodeJS, PHP, .NET ou Ruby, vous pouvez personnaliser le nom par défaut des services déduits. Pour en savoir plus, consultez la section « Mappage de services homologues » ci-dessous dans votre langage.
+Si vous utilisez le traceur Go, Java, Node.js, PHP, .NET ou Ruby, vous pouvez personnaliser le nom par défaut des services déduits. Pour en savoir plus, consultez la section « Mappage de services homologues » ci-dessous dans votre langage.
 
 **Remarque :** si vous configurez des monitors, des dashboards ou des notebooks pour un service déduit spécifique pendant la bêta, vous devrez peut-être les mettre à jour en cas de modification du schéma d'attribution de nom.
 
@@ -133,9 +133,9 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-La version minimale requise du traceur NodeJS est la [2.44.0][1], la [3.31.0][2] ou la [4.10.0][3]. Nous vous recommandons d'effectuer régulièrement une mise à niveau vers la dernière version pour bénéficier des nouveautés et des corrections de bugs.
+La version minimale requise du traceur Node.js est la [2.44.0][1], la [3.31.0][2] ou la [4.10.0][3]. Nous vous recommandons d'effectuer régulièrement une mise à niveau vers la dernière version pour bénéficier des nouveautés et des corrections de bugs.
 
 Pour activer la carte des dépendances, ajoutez les variables d'environnement ou propriétés système suivantes aux paramètres de votre traceur :
 

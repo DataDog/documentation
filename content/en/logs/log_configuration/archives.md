@@ -200,6 +200,7 @@ Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.  
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
+* For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datatdog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -292,11 +293,13 @@ You can [set a lifecycle configuration on your S3 bucket][1] to automatically tr
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
+* S3 Intelligent-Tiering, only if [the optional asynchronous archive access tiers][3] are both disabled.
 
 If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
+[3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 

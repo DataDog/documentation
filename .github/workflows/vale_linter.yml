@@ -8,6 +8,11 @@ on:
 permissions:
   contents: read
 
+# Stop the current running job if a new push is made to the PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   vale:
     runs-on: ubuntu-latest

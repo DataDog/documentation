@@ -7,6 +7,15 @@ further_reading:
     - link: '/integrations/amazon_web_services/#log-collection'
       tag: 'Documentation'
       text: 'Collect logs from your AWS services'
+    - link: "https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink/"
+      tag: "Architecture Center"
+      text: "Connect to Datadog over AWS PrivateLink"
+    - link: "https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-transit-gateway/"
+      tag: "Architecture Center"
+      text: "Connect to Datadog over AWS PrivateLink using AWS Transit Gateway"
+    - link: "https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-vpc-peering/"
+      tag: "Architecture Center"
+      text: "Connect to Datadog over AWS PrivateLink using AWS VPC peering"
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}

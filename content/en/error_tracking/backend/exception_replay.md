@@ -18,7 +18,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is in beta.
+Exception Replay for APM Error Tracking is in Preview
 </div>
 
 ## Overview
@@ -53,7 +53,7 @@ For `dd-trace-php` version `1.4.0` or higher, set the `DD_EXCEPTION_REPLAY_ENABL
 
 ### Redacting sensitive data
 
-By default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are automatically redacted. See the full [list of redacted identifiers][1].
+After you enable Sensitive Data Scrubbing, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, is automatically redacted. Enable Sensitive Data Scrubbing rules [in Datadog][7]. See the full [list of redacted identifiers][1].
 
 You can also scrub variable data for PII by:
 - [Creating custom identifier redaction][2].
@@ -82,6 +82,7 @@ To keep the performance overhead of the feature at a minimum, error capturing is
 [4]: /sensitive_data_scanner/
 [5]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [6]: https://app.datadoghq.com/apm/error-tracking
+[7]: https://app.datadoghq.com/dynamic-instrumentation/setup
 
 ## Further Reading
 

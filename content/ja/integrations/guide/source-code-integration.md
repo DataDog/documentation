@@ -16,7 +16,7 @@ further_reading:
   text: サーバーレスモニタリングについて
 - link: /tests/developer_workflows/
   tag: ドキュメント
-  text: Test Visibility について
+  text: Test Optimization について
 - link: /code_analysis/
   tag: ドキュメント
   text: Code Analysis について
@@ -171,6 +171,9 @@ Docker コンテナを使用している場合、Docker を使用する、Datado
 
 <div class="alert alert-info">.NET クライアントライブラリのバージョン 2.24.1 以降が必要です。</div>
 
+まず、`.pdb` ファイルが .NET アセンブリ (`.dll` または `.exe`) と同じフォルダにデプロイされていることを確認してください。
+その後、特定のデプロイメントモデルに応じて、残りの手順に従ってください。
+
 #### コンテナ
 
 Docker コンテナを使用しえいる場合、Docker を使用する、Microsoft SourceLink を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 3 つのオプションがあります。
@@ -216,9 +219,9 @@ Docker コンテナを使用しえいる場合、Docker を使用する、Micros
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">NodeJS クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
+<div class="alert alert-info">Node.js クライアントライブラリのバージョン 3.21.0 以降が必要です。</div>
 
 #### コンテナ
 
@@ -319,27 +322,6 @@ Docker コンテナを使用している場合、Docker を使用する、また
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "PHP" %}}
-
-<div class="alert alert-info">PHP クライアントライブラリのバージョン 1.12.0 以降が必要です。</div>
-
-Docker コンテナを使用している場合、Docker を使用する、または `DD_GIT_*` 環境変数でアプリケーションを構成するの 2 つのオプションがあります。
-
-##### オプション 1: Docker
-
-{{% sci-docker %}}
-
-##### オプション 2: `DD_GIT_*` 環境変数
-
-{{% sci-dd-git-env-variables %}}
-
-#### ホスト
-
-ホストを使用している場合、`DD_GIT_*` 環境変数でアプリケーションを構成します。
-
-{{% sci-dd-git-env-variables %}}
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Docker コンテナ内でのビルド
@@ -404,7 +386,7 @@ GitHub インテグレーションを設定することで、[**Error Tracking**
 セルフマネージド GitLab インスタンスからのリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
-テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][2] コマンドでアップロードします。
+テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][2] コマンドでアップロードします。`datadog-ci v2.10.0` 以降が必要です。
 
 Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
 
@@ -421,7 +403,10 @@ Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://gitlab.com
@@ -439,7 +424,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 セルフホストインスタンスまたはプライベート URL 上のリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
-テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][1] コマンドでアップロードします。
+テレメトリーをソースコードとリンクさせるには、リポジトリのメタデータを [`datadog-ci git-metadata upload`][1] コマンドでアップロードします。`datadog-ci v2.10.0` 以降が必要です。
 
 Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
 
@@ -454,7 +439,10 @@ Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
@@ -517,11 +505,11 @@ GitHub インテグレーションを使用している場合、エラーフレ�
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Test Optimization" %}}
 
-失敗したテスト実行からソースリポジトリへのリンクは、**Test Visibility** で確認できます。
+失敗したテスト実行からソースリポジトリへのリンクは、**Test Optimization** で確認できます。
 
-1. [**Software Delivery** > **Test Visibility** > **Test Runs**][101] に移動し、失敗したテスト実行を選択します。
+1. [**Software Delivery** > **Test Optimization** > **Test Runs**][101] に移動し、失敗したテスト実行を選択します。
 2. **View on GitHub** ボタンをクリックして、テストをソースコードリポジトリで開きます。
 
 {{< img src="integration/guide/source_code_integration/test_run_blurred.png" alt="CI Visibility Explorer から GitHub へのリンク" style="width:100%;">}}

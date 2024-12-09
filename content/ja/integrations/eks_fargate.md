@@ -23,7 +23,7 @@ categories:
 - cloud
 - AWS
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
 integration_title: Amazon EKS on AWS Fargate
-integration_version: 4.2.1
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
@@ -116,7 +116,7 @@ Fargate ノード上の AWS EKS Fargate で実行しているアプリケーシ�
 
 - [AWS EKS Fargate RBAC ルールをセットアップ](#aws-eks-fargate-rbac)。
 - [Agent をサイドカーとしてデプロイ](#running-the-agent-as-a-sidecar)。
-- Set up Datadog [metrics](#metrics-collection), [logs](#log-collection), [events](#events-collection), and [traces](#traces-collection) collection.
+- Datadog の[メトリクス](#metrics-collection)、[ログ](#log-collection)、[イベント](#events-collection)、[トレース](#traces-collection) の収集をセットアップします。
 
 Datadog Live Container View に EKS Fargate コンテナを表示するには、ポッド仕様で `shareProcessNamespace` を有効にします。[プロセス収集](#process-collection)を参照してください。
 
@@ -181,7 +181,7 @@ metadata:
 {{% tab "Datadog Operator" %}}
 ##### Datadog Operator を使用した Admission Controller
 
-<div class="alert alert-warning">この機能には、Cluster Agent v7.52.0 以降と Datadog Operator v1.7.0 以降が必要です。
+<div class="alert alert-warning">この機能を使用するには、Cluster Agent v7.52.0 以降、Datadog Operator v1.7.0 以降、および <a href="https://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate インテグレーション</a>が必要です。
 </div>
 
 以下のセットアップでは、Cluster Agent が Agent サイドカーと通信するように構成し、[イベント収集][1]、[Kubernetes リソースビュー][2]、[クラスターチェック][3]などの機能にアクセスできるようにします。
@@ -189,6 +189,7 @@ metadata:
 **前提条件**
 
 * アプリケーションのネームスペースに RBAC をセットアップします。このページの [AWS EKS Fargate RBAC](#aws-eks-fargate-rbac) セクションを参照してください。
+* 上記の RBAC をアプリケーションポッドにバインドするには、Service Account 名を設定します。 
 * Datadog のインストールとアプリケーションのネームスペースに、Datadog API キーと Cluster Agent トークンを含む Kubernetes シークレットを作成します。
 
    ```shell
@@ -229,7 +230,7 @@ metadata:
    kubectl apply -n datadog-agent -f datadog-agent.yaml
    ```
 
-2. After the Cluster Agent reaches a running state and registers Admission Controller mutating webhooks, an Agent sidecar is automatically injected into any pod created with the label `agent.datadoghq.com/sidecar:fargate`.
+2. Cluster Agent が実行状態に達し、Admission Controller の変更を加える Webhook を登録した後、`agent.datadoghq.com/sidecar:fargate` というラベルを持つどのポッドにも Agent のサイドカーが自動的に注入されます。
    **Admission Controller はすでに作成されたポッドを変更しません**。
 
 **結果例**
@@ -276,7 +277,7 @@ Agent やそのコンテナリソースをさらに構成するには、`Datadog
 
      **例**
 
-     In the following example, a selector targets all pods with the label `"app": redis`. The sidecar profile configures a `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable and resource settings.
+     次の例では、セレクターが `"app": redis` というラベルを持つすべてのポッドをターゲットにしています。サイドカープロファイルは `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` 環境変数とリソース設定を構成します。
 
      ```yaml
         spec:
@@ -364,6 +365,7 @@ Agent やそのコンテナリソースをさらに構成するには、`Datadog
 **前提条件**
 
 * アプリケーションのネームスペースに RBAC をセットアップします。このページの [AWS EKS Fargate RBAC](#aws-eks-fargate-rbac) セクションを参照してください。
+* 上記の RBAC をアプリケーションポッドにバインドするには、Service Account 名を設定します。 
 * Datadog のインストールとアプリケーションのネームスペースに、Datadog API キーと Cluster Agent トークンを含む Kubernetes シークレットを作成します。
 
    ```shell
@@ -671,8 +673,8 @@ spec:
      name: "<POD_NAME>"
      annotations:
       ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<CHECK_NAME>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.init_configs: '[<INIT_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.instances: '[<INSTANCE_CONFIG>]'
    spec:
      serviceAccountName: datadog-agent
      containers:

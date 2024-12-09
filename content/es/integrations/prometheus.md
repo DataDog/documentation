@@ -3,7 +3,7 @@ app_id: prometheus
 app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
 assets:
   integration:
-    auto_install: true
+    auto_install: verdadero
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -20,16 +20,16 @@ author:
 categories:
 - metrics
 - event management
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
-display_on_public_website: true
+display_on_public_website: verdadero
 draft: false
 git_integration_title: prometheus
 integration_id: prometheus
 integration_title: Prometheus (heredado)
 integration_version: 5.0.0
-is_public: true
+is_public: verdadero
 manifest_version: 2.0.0
 name: prometheus
 public_title: Prometheus (heredado)
@@ -83,7 +83,7 @@ Todas las métricas recuperadas por esta integración se consideran <a href="htt
 
 ## Configuración
 
-Sigue las siguientes instrucciones para instalar y configurar este check en un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de la integración Autodiscovery][3] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][3] para obtener orientación sobre la aplicación de estas instrucciones.
 
 ### Instalación
 
@@ -137,15 +137,15 @@ Envía alertas del AlertManager de Prometheus dentro del flujo de eventos. De fo
 ```
 receivers:
 - name: datadog
-  webhook_configs: 
-  - send_resolved: true
+  configuraciones_webhooks: 
+  - enviar_resuelto: verdadero
     url: https://app.datadoghq.com/intake/webhook/prometheus?api_key=<DATADOG_API_KEY>
 route:
-  group_by: ['alertname']
-  group_wait: 10s
+  agrupar_por: ['nombredealerta']
+  espera_grupo: 10s
   intervalo_grupo: 5m
   receiver: datadog
-  repeat_interval: 3h
+  repetir_intervalo: 3h
 ```
 
 **Nota**: Este endpoint sólo acepta un evento en la carga útil a la vez.
@@ -157,7 +157,7 @@ sudo systemctl restart prometheus.service alertmanager.service
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 ## Referencias adicionales
 

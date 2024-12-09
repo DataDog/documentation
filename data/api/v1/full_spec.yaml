@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -3147,6 +3149,8 @@ components:
       enum:
       - good_events
       - bad_events
+      - good_minutes
+      - bad_minutes
       - slo_status
       - error_budget_remaining
       - burn_rate
@@ -3156,6 +3160,8 @@ components:
       x-enum-varnames:
       - GOOD_EVENTS
       - BAD_EVENTS
+      - GOOD_MINUTES
+      - BAD_MINUTES
       - SLO_STATUS
       - ERROR_BUDGET_REMAINING
       - BURN_RATE
@@ -4294,6 +4300,7 @@ components:
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
+      - cws_fargate_task_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_stream_monitoring_usage
@@ -4301,11 +4308,8 @@ components:
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
-      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
-      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4369,6 +4373,7 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_STREAM_MONITORING_USAGE
@@ -4376,11 +4381,8 @@ components:
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -4759,6 +4761,11 @@ components:
           description: Widget column field.
           example: content
           type: string
+        is_clustering_pattern_field_path:
+          description: Identifies the clustering pattern field column, usable only
+            with logs_pattern_stream.
+          example: true
+          type: boolean
         width:
           $ref: '#/components/schemas/ListStreamColumnWidth'
       required:
@@ -4838,6 +4845,11 @@ components:
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        clustering_pattern_field_path:
+          description: Specifies the field for logs pattern clustering. Usable only
+            with logs_pattern_stream.
+          example: message
+          type: string
         compute:
           description: Compute configuration for the List Stream Widget. Compute can
             be used only with the logs_transaction_stream (from 1 to 5 items) list
@@ -8052,6 +8064,8 @@ components:
       - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
+      - cws_fargate_task_percentage
+      - cws_fargate_task_usage
       - cws_hosts_percentage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
@@ -8064,10 +8078,6 @@ components:
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -8106,8 +8116,6 @@ components:
       - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
-      - estimated_rum_sessions_usage
-      - estimated_rum_sessions_percentage
       - universal_service_monitoring_usage
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
@@ -8197,6 +8205,8 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_PERCENTAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
@@ -8209,10 +8219,6 @@ components:
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -8251,8 +8257,6 @@ components:
       - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
-      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
@@ -8482,6 +8486,15 @@ components:
           description: The Cloud Workload Security container usage by tag(s).
           format: double
           type: number
+        cws_fargate_task_percentage:
+          description: The percentage of Cloud Workload Security Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_usage:
+          description: The Cloud Workload Security Fargate task usage by tag(s).
+          format: double
+          type: number
         cws_hosts_percentage:
           description: The percentage of Cloud Workload Security host usage by tag(s).
           format: double
@@ -8522,14 +8535,6 @@ components:
           description: The error tracking events usage by tag(s).
           format: double
           type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
           format: double
@@ -8538,28 +8543,12 @@ components:
           description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_usage:
           description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -13273,6 +13262,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -13280,6 +13271,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security
@@ -14696,7 +14689,7 @@ components:
             $ref: '#/components/schemas/SyntheticsBatchResult'
           type: array
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
       type: object
     SyntheticsBatchResult:
       description: Object with the results of a Synthetic batch.
@@ -14720,7 +14713,7 @@ components:
           format: double
           type: number
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
         test_name:
           description: Name of the test.
           type: string
@@ -14730,6 +14723,17 @@ components:
         test_type:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
+    SyntheticsBatchStatus:
+      description: Determines whether the batch has passed, failed, or is in progress.
+      enum:
+      - passed
+      - skipped
+      - failed
+      type: string
+      x-enum-varnames:
+      - PASSED
+      - SKIPPED
+      - FAILED
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -15421,34 +15425,8 @@ components:
       type: object
     SyntheticsDeviceID:
       description: The device ID.
-      enum:
-      - laptop_large
-      - tablet
-      - mobile_small
-      - chrome.laptop_large
-      - chrome.tablet
-      - chrome.mobile_small
-      - firefox.laptop_large
-      - firefox.tablet
-      - firefox.mobile_small
-      - edge.laptop_large
-      - edge.tablet
-      - edge.mobile_small
       example: chrome.laptop_large
       type: string
-      x-enum-varnames:
-      - LAPTOP_LARGE
-      - TABLET
-      - MOBILE_SMALL
-      - CHROME_LAPTOP_LARGE
-      - CHROME_TABLET
-      - CHROME_MOBILE_SMALL
-      - FIREFOX_LAPTOP_LARGE
-      - FIREFOX_TABLET
-      - FIREFOX_MOBILE_SMALL
-      - EDGE_LAPTOP_LARGE
-      - EDGE_TABLET
-      - EDGE_MOBILE_SMALL
     SyntheticsFetchUptimesPayload:
       description: Object containing IDs of Synthetic tests and a timeframe.
       properties:
@@ -15751,10 +15729,6 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
-    SyntheticsMobileDeviceID:
-      description: The device ID.
-      example: synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
-      type: string
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -15770,14 +15744,14 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: ''
           maxLength: 1500
           type: string
         noScreenshot:
           description: A boolean set to not take a screenshot for the step.
           type: boolean
         params:
-          description: The parameters of the mobile step.
-          type: object
+          $ref: '#/components/schemas/SyntheticsMobileStepParams'
         publicId:
           description: The public ID of the step.
           example: pub-lic-id0
@@ -15788,6 +15762,199 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/SyntheticsMobileStepType'
+      required:
+      - name
+      - params
+      - type
+      type: object
+    SyntheticsMobileStepParams:
+      description: The parameters of a mobile step.
+      properties:
+        check:
+          $ref: '#/components/schemas/SyntheticsCheckType'
+        delay:
+          description: Number of milliseconds to wait between inputs in a `typeText`
+            step type.
+          format: int64
+          maximum: 5000
+          minimum: 0
+          type: integer
+        direction:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsDirection'
+        element:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElement'
+        enabled:
+          description: Boolean to change the state of the wifi for a `toggleWiFi`
+            step type.
+          type: boolean
+        maxScrolls:
+          description: Maximum number of scrolls to do for a `scrollToElement` step
+            type.
+          format: int64
+          type: integer
+        positions:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsPositions'
+        subtestPublicId:
+          description: Public ID of the test to be played as part of a `playSubTest`
+            step type.
+          type: string
+        value:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsValue'
+        variable:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsVariable'
+        withEnter:
+          description: Boolean to indicate if `Enter` should be pressed at the end
+            of the `typeText` step type.
+          type: boolean
+        x:
+          description: Amount to scroll by on the `x` axis for a `scroll` step type.
+          format: double
+          type: number
+        y:
+          description: Amount to scroll by on the `y` axis for a `scroll` step type.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsDirection:
+      description: The direction of the scroll for a `scrollToElement` step type.
+      enum:
+      - up
+      - down
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - UP
+      - DOWN
+      - LEFT
+      - RIGHT
+    SyntheticsMobileStepParamsElement:
+      description: Information about the element used for a step.
+      properties:
+        context:
+          description: Context of the element.
+          type: string
+        contextType:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementContextType'
+        elementDescription:
+          description: Description of the element.
+          type: string
+        multiLocator:
+          description: Multi-locator to find the element.
+          type: object
+        relativePosition:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementRelativePosition'
+        textContent:
+          description: Text content of the element.
+          type: string
+        userLocator:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocator'
+        viewName:
+          description: Name of the view of the element.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementContextType:
+      description: Type of the context that the element is in.
+      enum:
+      - native
+      - web
+      type: string
+      x-enum-varnames:
+      - NATIVE
+      - WEB
+    SyntheticsMobileStepParamsElementRelativePosition:
+      description: Position of the action relative to the element.
+      properties:
+        x:
+          description: The `relativePosition` on the `x` axis for the element.
+          format: double
+          type: number
+        y:
+          description: The `relativePosition` on the `y` axis for the element.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsElementUserLocator:
+      description: User locator to find the element.
+      properties:
+        failTestOnCannotLocate:
+          description: Whether if the the test should fail if the element cannot be
+            found.
+          type: boolean
+        values:
+          description: Values of the user locator.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItems'
+          type: array
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItems:
+      description: A single user locator object.
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItemsType'
+        value:
+          description: Value of a user locator.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItemsType:
+      description: Type of a user locator.
+      enum:
+      - accessibility-id
+      - id
+      - ios-predicate-string
+      - ios-class-chain
+      - xpath
+      type: string
+      x-enum-varnames:
+      - ACCESSIBILITY_ID
+      - ID
+      - IOS_PREDICATE_STRING
+      - IOS_CLASS_CHAIN
+      - XPATH
+    SyntheticsMobileStepParamsPositions:
+      description: List of positions for the `flick` step type. The maximum is 10
+        flicks per step
+      items:
+        $ref: '#/components/schemas/SyntheticsMobileStepParamsPositionsItems'
+      type: array
+    SyntheticsMobileStepParamsPositionsItems:
+      description: A description of a single position for a `flick` step type.
+      properties:
+        x:
+          description: The `x` position for the flick.
+          format: double
+          type: number
+        y:
+          description: The `y` position for the flick.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsValue:
+      description: Values used in the step for in multiple step types.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueString'
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueNumber'
+    SyntheticsMobileStepParamsValueNumber:
+      description: Value used in the step for in multiple step types.
+      format: int64
+      type: integer
+    SyntheticsMobileStepParamsValueString:
+      description: Value used in the step for in multiple step types.
+      type: string
+    SyntheticsMobileStepParamsVariable:
+      description: Variable object for `extractVariable` step type.
+      properties:
+        example:
+          description: An example for the variable.
+          example: ''
+          type: string
+        name:
+          description: The variable name.
+          example: VAR_NAME
+          type: string
+      required:
+      - name
+      - example
       type: object
     SyntheticsMobileStepType:
       description: Step type used in your mobile Synthetic test.
@@ -15835,9 +16002,9 @@ components:
         config:
           $ref: '#/components/schemas/SyntheticsMobileTestConfig'
         device_ids:
-          description: The `SyntheticsMobileTest` `device_ids`.
+          description: Array with the different device IDs used to run the test.
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         message:
           description: Notification message associated with the test.
@@ -15883,44 +16050,6 @@ components:
       - options
       - type
       type: object
-    SyntheticsMobileTestBinding:
-      description: Objects describing the binding used for a mobile test.
-      properties:
-        items:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItems'
-      type: object
-    SyntheticsMobileTestBindingItems:
-      description: Object describing the binding used for a mobile test.
-      properties:
-        principals:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingPrincipals'
-        role:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItemsRole'
-      type: object
-    SyntheticsMobileTestBindingItemsRole:
-      description: The definition of `SyntheticsMobileTestBindingItemsRole` object.
-      enum:
-      - editor
-      - viewer
-      type: string
-      x-enum-varnames:
-      - EDITOR
-      - VIEWER
-    SyntheticsMobileTestBindingPrincipals:
-      description: List of principals for a mobile test binding.
-      items:
-        description: A principal for a mobile test binding.
-        maxLength: 1500
-        type: string
-      type: array
-    SyntheticsMobileTestCiOptions:
-      description: CI/CD options for a Synthetic test.
-      properties:
-        executionRule:
-          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
-      required:
-      - executionRule
-      type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
       properties:
@@ -15933,34 +16062,27 @@ components:
           type: array
       type: object
     SyntheticsMobileTestInitialApplicationArguments:
+      additionalProperties:
+        description: A single application argument.
+        type: string
       description: Initial application arguments for a mobile test.
-      properties:
-        propertyNames:
-          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArgumentsPropertyNames'
-      type: object
-    SyntheticsMobileTestInitialApplicationArgumentsPropertyNames:
-      description: Name of the property.
-      properties:
-        pattern:
-          description: The `propertyNames` `pattern`.
-          example: ^(?!_dd).*$
-          type: string
       type: object
     SyntheticsMobileTestOptions:
       description: Object describing the extra options for a Synthetic test.
       properties:
         allowApplicationCrash:
-          description: The `SyntheticsMobileTestOptions` `allowApplicationCrash`.
+          description: A boolean to set if an application crash would mark the test
+            as failed.
           type: boolean
         bindings:
           description: Array of bindings used for the mobile test.
           items:
-            $ref: '#/components/schemas/SyntheticsMobileTestBinding'
+            $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBinding'
           type: array
         ci:
-          $ref: '#/components/schemas/SyntheticsMobileTestCiOptions'
+          $ref: '#/components/schemas/SyntheticsTestCiOptions'
         defaultStepTimeout:
-          description: The `SyntheticsMobileTestOptions` `defaultStepTimeout`.
+          description: The default timeout for steps in the test (in seconds).
           format: int32
           maximum: 300
           minimum: 1
@@ -15968,11 +16090,13 @@ components:
         device_ids:
           description: For mobile test, array with the different device IDs used to
             run the test.
+          example:
+          - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         disableAutoAcceptAlert:
-          description: The `SyntheticsMobileTestOptions` `disableAutoAcceptAlert`.
+          description: A boolean to disable auto accepting alerts.
           type: boolean
         min_failure_duration:
           description: Minimum amount of time in failure required to trigger an alert.
@@ -15987,7 +16111,7 @@ components:
             all monitor dashboard widgets and SLOs.
           type: string
         monitor_options:
-          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptions'
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptions'
         monitor_priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int32
@@ -15995,7 +16119,7 @@ components:
           minimum: 1
           type: integer
         noScreenshot:
-          description: The `SyntheticsMobileTestOptions` `noScreenshot`.
+          description: A boolean set to not take a screenshot for the step.
           type: boolean
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
@@ -16005,54 +16129,23 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
+          example: 300
           format: int64
           maximum: 604800
           minimum: 300
           type: integer
         verbosity:
-          description: The `SyntheticsMobileTestOptions` `verbosity`.
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
           format: int32
           maximum: 5
           minimum: 0
           type: integer
+      required:
+      - device_ids
+      - tick_every
+      - mobileApplication
       type: object
-    SyntheticsMobileTestOptionsMonitorOptions:
-      description: 'Object containing the options for a mobile Synthetic test as a
-        monitor
-
-        (for example, renotification).'
-      properties:
-        escalation_message:
-          description: Message to include in the escalation notification.
-          type: string
-        notification_preset_name:
-          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName'
-        renotify_interval:
-          description: 'Time interval before renotifying if the test is still failing
-
-            (in minutes).'
-          format: int64
-          minimum: 0
-          type: integer
-        renotify_occurrences:
-          description: The `SyntheticsMobileTestOptionsMonitorOptions` `renotify_occurrences`.
-          format: int64
-          type: integer
-      type: object
-    SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName:
-      description: The definition of `SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName`
-        object.
-      enum:
-      - show_all
-      - hide_all
-      - hide_query
-      - hide_handles
-      type: string
-      x-enum-varnames:
-      - SHOW_ALL
-      - HIDE_ALL
-      - HIDE_QUERY
-      - HIDE_HANDLES
     SyntheticsMobileTestType:
       default: mobile
       description: Type of the Synthetic test, `mobile`.
@@ -16067,14 +16160,20 @@ components:
       properties:
         applicationId:
           description: Application ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaaa
           maxLength: 1500
           type: string
         referenceId:
           description: Reference ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaab
           maxLength: 1500
           type: string
         referenceType:
           $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplicationReferenceType'
+      required:
+      - applicationId
+      - referenceId
+      - referenceType
       type: object
     SyntheticsMobileTestsMobileApplicationReferenceType:
       description: Reference type for the mobile application for a mobile synthetics
@@ -16082,6 +16181,7 @@ components:
       enum:
       - latest
       - version
+      example: latest
       type: string
       x-enum-varnames:
       - LATEST
@@ -16364,23 +16464,18 @@ components:
           description: Subject Alternative Name associated with the certificate.
           type: string
       type: object
-    SyntheticsStatus:
-      description: Determines whether or not the batch has passed, failed, or is in
-        progress.
-      enum:
-      - passed
-      - skipped
-      - failed
-      type: string
-      x-enum-varnames:
-      - PASSED
-      - skipped
-      - failed
     SyntheticsStep:
       description: The steps used in a Synthetic browser test.
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: A boolean set to exit the test if the step succeeds.
           type: boolean
         isCritical:
           description: A boolean to use in addition to `allowFailure` to determine
@@ -16390,7 +16485,7 @@ components:
           description: The name of the step.
           type: string
         noScreenshot:
-          description: A boolean set to not take a screenshot for the step.
+          description: A boolean set to skip taking a screenshot for the step.
           type: boolean
         params:
           description: The parameters of the step.
@@ -16555,6 +16650,8 @@ components:
       properties:
         executionRule:
           $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      required:
+      - executionRule
       type: object
     SyntheticsTestConfig:
       description: Configuration object for a Synthetic test.
@@ -16816,6 +16913,11 @@ components:
 
         (for example, renotification).'
       properties:
+        escalation_message:
+          description: Message to include in the escalation notification.
+          type: string
+        notification_preset_name:
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptionsNotificationPresetName'
         renotify_interval:
           description: 'Time interval before renotifying if the test is still failing
 
@@ -16823,7 +16925,24 @@ components:
           format: int64
           minimum: 0
           type: integer
+        renotify_occurrences:
+          description: The number of times to renotify if the test is still failing.
+          format: int64
+          type: integer
       type: object
+    SyntheticsTestOptionsMonitorOptionsNotificationPresetName:
+      description: The name of the preset for the notification for the monitor.
+      enum:
+      - show_all
+      - hide_all
+      - hide_query
+      - hide_handles
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -16862,6 +16981,9 @@ components:
           description: Timezone in which the timeframe is based.
           example: America/New_York
           type: string
+      required:
+      - timeframes
+      - timezone
       type: object
     SyntheticsTestOptionsSchedulingTimeframe:
       description: Object describing a timeframe.
@@ -16881,6 +17003,10 @@ components:
           description: The hour of the day on which scheduling ends.
           example: '16:00'
           type: string
+      required:
+      - day
+      - from
+      - to
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)
@@ -17117,6 +17243,30 @@ components:
       description: String Port number to use when performing the test. Supports templated
         variables.
       type: string
+    SyntheticsTestRestrictionPolicyBinding:
+      description: Objects describing the binding used for a mobile test.
+      properties:
+        principals:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
+        relation:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
+      type: object
+    SyntheticsTestRestrictionPolicyBindingPrincipals:
+      description: List of principals for a mobile test binding.
+      items:
+        description: A principal for a mobile test binding.
+        maxLength: 1500
+        type: string
+      type: array
+    SyntheticsTestRestrictionPolicyBindingRelation:
+      description: The type of relation for the binding.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
     SyntheticsTestUptime:
       description: Object containing the uptime for a Synthetic test ID.
       properties:
@@ -19997,6 +20147,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for all organizations.
@@ -20021,9 +20176,19 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20190,8 +20355,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
@@ -20757,6 +20923,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
@@ -20777,9 +20948,19 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20949,8 +21130,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for the given org.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for the given org.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
@@ -21511,9 +21693,14 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
-        cws_containers_avg_sum:
+        cws_container_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cws_fargate_task_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
@@ -21540,9 +21727,19 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        error_tracking_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_events_agg_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -21731,8 +21928,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p_sum:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            month for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_agg_sum:
@@ -23396,7 +23594,8 @@ components:
               Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_read: View a list of findings that include
+              both misconfigurations and identity risks.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -23424,6 +23623,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -29952,20 +30152,26 @@ paths:
         ##### Error Tracking Alert Query
 
 
-        Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
+        "New issue" example: `error-tracking(query).source(issue_source).new().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`
 
-        Example(APM Traces): `error-tracking-traces(query).rollup(rollup_method[,
-        measure]).last(time_window) operator #`
+        "High impact issue" example: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`
 
 
         - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
 
+        - `issue_source` The issue source - supports `all`, `browser`, `mobile` and
+        `backend` and defaults to `all` if omitted.
+
         - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
+        `cardinality` and defaults to `count` if omitted.
 
         - `measure` For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
+
+        - `group by` Comma-separated list of attributes to group by - should contain
+        at least `issue.id`.
 
         - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
 
@@ -34191,6 +34397,10 @@ paths:
             name: body
           step: there is a valid "synthetics_mobile_test" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -34242,6 +34452,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -34304,6 +34518,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -34441,6 +34659,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -38298,7 +38520,8 @@ tags:
   name: Logs
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
-    You need an API and application key with Admin rights to interact with this endpoint.'
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
@@ -38310,11 +38533,12 @@ tags:
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
     For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
     endpoints are only available for admin users.\nMake sure to use an application
-    key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
-    data to be configured before using in a request.**\nFor example, if you are using
-    the data returned from a\nrequest for another request body, and have a parsing
-    rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure
-    all escaped spaces as `%{space}` to use\nin the body data."
+    key created by an admin with no applied scopes.\n\n**Grok parsing rules may effect
+    JSON output and require\nreturned data to be configured before using in a request.**\nFor
+    example, if you are using the data returned from a\nrequest for another request
+    body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,
+    you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body
+    data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration

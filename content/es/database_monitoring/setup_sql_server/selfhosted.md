@@ -46,10 +46,11 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- Si no utilizas Log Shipping Monitoring (disponible en el Agent v7.50+) o
+-- SQL Server Agent Monitoring (disponible en el Agent v7.57+), comenta las siguiente tres líneas:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -59,10 +60,11 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- Si no utilizas Log Shipping Monitoring (disponible en el Agent v7.50+) o
+-- SQL Server Agent Monitoring (disponible en el Agent v7.57+), comenta las siguientes tres líneas:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 Crea el usuario `datadog` en cada base de datos de aplicaciones adicional:
@@ -73,7 +75,10 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
-## Instalar el Agent
+### Guarda tu contraseña de forma segura
+{{% dbm-secret %}}
+
+## Instalación del Agent
 
 Se recomienda instalar el Agent directamente en el host de SQL Server, ya que esto permite al Agent recopilar una variedad de telemetrías del sistema (CPU, memoria, disco, red), además de la telemetría específica del SQL Server.
 

@@ -24,7 +24,7 @@ author:
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true

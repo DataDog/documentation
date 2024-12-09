@@ -262,7 +262,49 @@ Si ya dispones de una definición de tarea, actualiza tu archivo para incluir la
    "family": "datadog-agent-task"
  }
  ```
+#### Ruta de red
 
+<div class="alert alert-info">La ruta de red para Datadog Network Performance Monitoring está en fase previa. Ponte en contacto con tu representante de Datadog para inscribirte.</div>
+
+1. Para habilitar la [ruta de red][31] en tus clústeres de ECS, habilita el módulo `system-probe` traceroute añadiendo la siguiente variable de entorno en tu archivo `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. Para monitorizar rutas individuales, sigue las instrucciones aquí para [configurar características adicionales del Agent](#set-up-additional-agent-features):
+
+   Estos archivos despliegan un contenedor del Agent con una configuración base para recopilar métricas clave sobre los contenedores en tu clúster de ECS. El Agent también puede ejecutar integraciones del Agent según las etiquetas (labels) de Docker detectadas en tus contenedores.
+
+3. Para monitorizar las rutas de tráfico de red y permitir que el Agent detecte automáticamente y monitorice rutas de red según el tráfico de red real, sin necesidad de especificar los endpoints manualmente, añade las siguientes variables adicionales de entorno a tu `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. Opcionalmente, para configurar el número de trabajadores (por defecto es 4) ajusta la siguiente variable de entorno en tu archivo `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## Modo AWSVPC
 
 A partir de la versión 6.10 del Agent, el modo `awsvpc` es compatible para contenedores aplicativos, siempre y cuando los grupos de seguridad estén configurados para permitir que el grupo de seguridad de la instancia de host llegue los contenedores aplicativos en los puertos correspondientes.
@@ -277,6 +319,8 @@ Esta función sólo está disponible para Linux.
 </div>
 
 Para enviar datos a sitio de Datadog para el Gobierno, añade el contenedor auxiliar `fips-proxy` y abre los puertos de contenedor para garantizar una comunicación adecuada para [funciones compatibles][1].
+
+**Nota**: También debes asegurarte de que el contenedor auxiliar esté configurado con la configuración aplicable de red y permisos de IAM.
 
 ```json
  {
@@ -402,9 +446,9 @@ También debes actualizar las variables entorno del contenedor del Datadog Agent
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -433,3 +477,4 @@ También debes actualizar las variables entorno del contenedor del Datadog Agent
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /es/network_monitoring/network_path

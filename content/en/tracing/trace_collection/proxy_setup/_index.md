@@ -349,7 +349,7 @@ TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
 curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
 
-Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically locaated at `/usr/lib/nginx/modules`.
+Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically located at `/usr/lib/nginx/modules`.
 
 ### NGINX configuration with Datadog module
 In the topmost section of the NGINX configuration, load the Datadog module.
@@ -469,7 +469,7 @@ Datadog monitors every aspect of your Istio environment, so you can:
 - View individual distributed traces for applications transacting over the mesh with APM (see below).
 - Assess the health of Envoy and the Istio control plane with [logs][1].
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1].
-- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
+- Map network communication between containers, pods, and services over the mesh with [Cloud Network Monitoring][2].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
@@ -526,12 +526,6 @@ environment variable. If `DD_TRACE_SAMPLING_RULES` is not specified, then 100%
 of Istio traces are sent to Datadog.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
-
-To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
-
-```bash
-DD_TRACE_SAMPLING_RULES='[]'
-```
 
 Explicitly specifying an empty array of rules is different from not specifying rules.
 

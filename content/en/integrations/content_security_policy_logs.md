@@ -164,7 +164,7 @@ Each browser interprets the report format differently:
 
 ## Use CSP with Real User Monitoring and Session Replay
 
-If you're using CSP on your websites, add the following URLs to your existing directives depending on your use case.
+If you're using CSP on your websites, add the following URLs to your existing [directives][15] depending on your use case.
 
 ### Intake URLs
 
@@ -207,9 +207,9 @@ script-src https://www.datadoghq-browser-agent.com
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
+[4]: /real_user_monitoring/browser/setup/#initialization-parameters
 [5]: /logs/log_collection/javascript/#initialization-parameters
-[6]: /real_user_monitoring/browser/setup
+[6]: /real_user_monitoring/browser/setup/
 [7]: /logs/log_collection/javascript/#cdn-async
 [8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
 [9]: https://www.npmjs.com/package/@datadog/browser-worker
@@ -218,3 +218,4 @@ script-src https://www.datadoghq-browser-agent.com
 [12]: https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
 [13]: https://github.com/rollup/plugins/tree/master/packages/url/#readme
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker
+[15]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy#directives

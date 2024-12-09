@@ -222,9 +222,9 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
-{{% tab "Set env vars" %}}
+{{% tab "Add env vars" %}}
 
-{{% observability_pipelines/processors/set_env_vars %}}
+{{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -51,6 +51,6 @@ Una vez finalizada la configuración, puedes enviar consultas a `@Datadog` en le
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/integrations/slack/?tab=applicationforslack

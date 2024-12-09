@@ -19,6 +19,10 @@ further_reading:
   text: "Monitor processes running on AWS Fargate with Datadog"
 ---
 
+<div class="alert alert-warning">
+Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
+
 ## Overview
 
 Live Process Monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert based on the count of any group of processes across hosts or tags.

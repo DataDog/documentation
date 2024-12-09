@@ -30,7 +30,7 @@ Kubernetes Admission Controller の詳細については、[Kubernetes Admission
 ## 要件
 
 * Kubernetes v1.14+
-* Java、Python、NodeJS については Datadog [Cluster Agent v7.40+][3]、.NET、Ruby については Datadog [Cluster Agent v7.44+][3]。
+* Java、Python、Node.js については Datadog [Cluster Agent v7.40+][3]、.NET、Ruby については Datadog [Cluster Agent v7.44+][3]。
 * Datadog Admission Controller が有効になっている。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
 * Python の場合、現時点では uWSGI アプリケーションはサポートされていません。
 * Ruby については、ライブラリ挿入のサポートはベータ版です。インスツルメンテーションは、Bundler のバージョンが 2.3 以上で、vendored gems (デプロイモードまたは `BUNDLE_PATH`) がない Ruby on Rails アプリケーションでのみサポートされています。
@@ -303,8 +303,8 @@ Configure host injection in one of the following ways:
 
 ### 構成ファイル
 
-| プロパティ名 | 目的 | デフォルト値 | 有効な値 | 
-| --------- | ----------- | ------------- | ----------- | 
+| プロパティ名 | 目的 | デフォルト値 | 有効な値 |
+| --------- | ----------- | ------------- | ----------- |
 |`log_level`  | ロギングレベル|`off`|`off`、`debug`、`info`、`warn`、`error`|
 |`output_paths`|The location where log output is written|`stderr`|`stderr` または `file://` URL|
 |`env`|The default environment assigned to a process|なし|非該当|
@@ -327,7 +327,7 @@ The following environment variables configure library injection. You can pass th
 構成ファイルの各フィールドは環境変数に対応しています。この環境変数は起動中のプロセスの環境変数から読み込まれ、現在起動中のプロセスのみに影響を与えます。
 
 |構成ファイルのプロパティ|環境変数|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
@@ -381,7 +381,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -424,16 +424,16 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## プリロードライブラリのインストール
 
-Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
+Use the `install_script_agent7.sh` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:2,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LIBRARIES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1,js:5" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 

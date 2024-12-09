@@ -14,16 +14,16 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/dotnet"
+    - link: "/tests/test_impact_analysis/dotnet"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
-    - link: "/continuous_integration/troubleshooting/"
+      text: "Speed up your test jobs with Test Impact Analysis"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -207,7 +207,7 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][10] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
-**Note**: When using Intelligent Test Runner, the tracer's built-in code coverage is enabled by default.
+**Note**: When using Test Impact Analysis, the tracer's built-in code coverage is enabled by default.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
@@ -280,7 +280,7 @@ For more information about how to add spans and tags for custom instrumentation,
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 
-If you use XUnit, NUnit, or MSTest with your .NET projects, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use XUnit, NUnit, or MSTest with your .NET projects, Test Optimization automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
 
 The API is based around three concepts: test module, test suites, and tests.
 
