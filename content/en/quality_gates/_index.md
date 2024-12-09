@@ -35,7 +35,7 @@ Quality Gates is in Preview.
 
 Quality Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
-{{< img src="quality_gates/setup/pipeline_rule_1.png" alt="A pipeline rule that fails when code coverage for PCT is below or equal to zero in Quality Gates" style="width:100%" >}}
+{{< img src="quality_gates/setup/sca_2.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
 Use Quality Gates to:
 
@@ -47,11 +47,7 @@ You can configure Quality Gates rules for the following categories:
 
 [Test Optimization][9]
 
-: <br> - New flaky tests <br> - Performance regressions <br> - Code coverage
-
-[Pipeline Visibility][10]
-
-: <br> - Custom measures
+: <br> - New flaky tests <br> - Code coverage
 
 [Static Analysis][11]
 
@@ -61,7 +57,7 @@ You can configure Quality Gates rules for the following categories:
 
 : <br> - Vulnerabilities <br> - Detected licenses
 
-By integrating Quality Gates [into your CI/CD pipelines][7], you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
+By integrating Quality Gates [into your CI/CD pipelines][7] or allowing the [Datadog GitHub integration][13] to create status checks on your Pull Requests automatically (currently available for SCA rules only), you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
 
 ## Setup
 
@@ -70,32 +66,26 @@ Quality Gates offers the following rule types:
 {{< tabs >}}
 {{% tab "Tests" %}}
 
-You can create rules to block code from being merged that introduces new [flaky tests][101].
+You can create rules to block code from being merged that introduces new [flaky tests][101] or that decreases [code coverage][102].
 
-{{< img src="quality_gates/setup/flaky_test_1.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
+{{< img src="quality_gates/setup/flaky_test_2.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
 
 [101]: /tests/flaky_test_management/
-
-{{% /tab %}}
-{{% tab "Pipelines" %}}
-
-You can create rules to block code from being merged that introduces issues that wouldn't normally fail your CI/CD pipelines, but end up being deployed to production.
-
-{{< img src="quality_gates/setup/pipeline_rule_1.png" alt="A Quality Gate rule that fails when code coverage for PCT is below or equal to zero for a CI pipeline" style="width:80%" >}}
+[102]: /tests/code_coverage/
 
 {{% /tab %}}
 {{% tab "Static Analysis" %}}
 
-You can create rules to block code from being merged that introduces code quality and code vulnerability violations.
+You can create rules to block code from being merged when your repository has a certain number of code quality or code vulnerability violations.
 
-{{< img src="quality_gates/setup/static_analysis_1.png" alt="A Quality Gate rule that fails when one or more new code quality violations with errors occur" style="width:80%" >}}
+{{< img src="quality_gates/setup/static_analysis_2.png" alt="A Quality Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
-You can create rules to block code from being merged that introduces software vulnerabilities and forbidden licenses.
+You can create rules to block code from being merged when your repository has a certain number of library vulnerabilities or forbidden licenses.
 
-{{< img src="quality_gates/setup/sca_1.png" alt="A Quality Gate rule that fails when one or more new critical vulnerabilities are introduced" style="width:80%" >}}
+{{< img src="quality_gates/setup/sca_2.png" alt="A Quality Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -106,18 +96,18 @@ To create a Quality Gate rule, see the [Setup documentation][2].
 
 You can evaluate and update quality control processes by accessing Quality Gates rules on the [**Quality Gates Rules** page][6]. Improve your deployment practices based on your project requirements and desired performance outcomes. 
 
-{{< img src="quality_gates/rules_list_1.png" alt="List of Quality Gate rules in Datadog" style="width:100%" >}}
+{{< img src="quality_gates/rules_list_2.png" alt="List of Quality Gate rules in Datadog" style="width:100%" >}}
 
 To search for Quality Gate rules, see the [Search and Manage documentation][5].
 
 ## Analyze executions in the Quality Gates Explorer
 
-You can search and filter for quality gates or rule executions, create visualizations, and export saved views of your search query on the [**Quality Gates Executions** page][8].
+You can search and filter for quality gates or rule executions, create visualizations, and export saved views of your search query on the [**Quality Gates Executions** page][14].
 
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-{{< img src="quality_gates/explorer/gates_1.png" alt="Quality Gate results in the Quality Gates Explorer" style="width:100%" >}}
+{{< img src="quality_gates/explorer/gates_3.png" alt="Quality Gate results in the Quality Gates Explorer" style="width:100%" >}}
 
 {{% /tab %}}
 {{% tab "Rule Executions" %}}
@@ -147,9 +137,11 @@ For more information, see the [Audit Trail documentation][4].
 [4]: /account_management/audit_trail/events/#ci-visibility-events
 [5]: /quality_gates/search/
 [6]: https://app.datadoghq.com/ci/quality-gates
-[7]: /monitors/guide/github_gating/
+[7]: https://github.com/DataDog/datadog-ci
 [8]: /quality_gates/explorer/
 [9]: /tests/
 [10]: /continuous_integration/
 [11]: /code_analysis/static_analysis
 [12]: /code_analysis/software_composition_analysis
+[13]: /integrations/github/
+[14]: https://app.datadoghq.com/ci/quality-gates/executions

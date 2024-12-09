@@ -164,7 +164,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: registry.ddbuild.io/ci/websites/webops-site-build:v48290164-5b75a7bd
+  image: registry.ddbuild.io/ci/websites/webops-site-build:v49904560-30b69972
   tags:
     - "arch:amd64"
   rules:
@@ -649,6 +649,7 @@ set_redirect_metadata_preview:
   variables:
     BUCKET: "datadog-docs-preview"
     SET_REDIRECTS_PREVIEW: "true"
+    GIT_STRATEGY: none
   stage: post-deploy
   cache: []
   environment: "preview"
@@ -664,6 +665,7 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
+    GIT_STRATEGY: none
   stage: post-deploy
   cache: []
   environment: "live"
@@ -681,7 +683,7 @@ run_notranslate_tag:schedule:
     - build_live
   timeout: 4h
   script:
-    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install six transifex-python
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
     - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
   rules:
