@@ -127,7 +127,7 @@ Just like tags, you can add custom measures to your tests by using the current a
 For more information about custom measures, see the [Add Custom Measures Guide][2].
 
 ### Mocha ES modules
-[Mocha >=9.0.0][3] uses an ESM-first approach to load test files. Set `NODE_OPTIONS` to `-r dd-trace/ci/init --import dd-trace/register.js` to get full visibility into your tests. See [dd-trace-js ESM support][4] for more informationes.
+[Mocha >=9.0.0][3] uses an ESM-first approach to load test files. Set `NODE_OPTIONS` to `-r dd-trace/ci/init --import dd-trace/register.js` to get full visibility into your tests. See [`dd-trace-js` ESM support][4] for more information.
 
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
