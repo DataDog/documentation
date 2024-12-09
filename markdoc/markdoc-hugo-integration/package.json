@@ -26,6 +26,7 @@
         "react-dom": "^18.3.1",
         "rimraf": "^5.0.5",
         "rollup": "^4.19.1",
+        "sfha-builder": "file:../sfha-builder",
         "stringcase": "^4.3.1",
         "uuid": "^10.0.0",
         "zod": "^3.22.4"
