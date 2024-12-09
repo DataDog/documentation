@@ -313,6 +313,9 @@ Si deseas recuperar a partir de archivos de otro nivel de acceso, primero debes 
 [1]: /es/logs/archives/rehydrating/
 Accede a dashboards preconfigurados
 
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Cifrado del lado del servidor (SSE)
 
 {{< tabs >}}
