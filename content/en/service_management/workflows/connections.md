@@ -106,12 +106,34 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
+## Connection tags
+
+You can add tags to connections. The tagging rules for connections are based on [Datadog tags](https://docs.datadoghq.com/getting_started/tagging/), but have some additional limitations:
+- tag format should strictly follow `tag:value`, additional colons are not allowed (for ex. the tag `env:staging:east` and `env` are invalid formats for connections)
+- tags must start with a letter and after that may contain the characters listed below:
+  - Alphanumerics
+  - Underscores
+  - Minuses
+  - Colon (only one, to separate key from value)
+  - Slashes
+- `default` is a reserved value for conenction tags, it can't be used as a stand-alone tag key or tag value (for ex. `aws:default` is invalid for connections)
+
 ## Connection groups
 
-You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs.
+You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (you cannot group GCP and AWS connections within the same group). 
 
-You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `env` tag.
+To configure a group you need to set _Identifier Tags_ . You define the members of a connection group using connection tags in way that connection tag keys match the Identifier Tags of the group.
+For example, you can create an AWS connection group consisting of AWS account connections that all have the `env` tag keys.
 
+Each connection in the group must have a different set of tag values for the given Identifier Tags.
+For ex.:
+- `connectionA {env:staging}` and `connectionB {env:prod}` can be grouped together.
+- `connectionA {env:staging}` and `connectionC {env:staging}` can't be grouped because of duplicated tag values (should have at least 1 different tag value).
+
+You can only add connections, to which you have **Resolve Access**. If you use a group with one or more connections to which you don't have Resolve Access and in runtime Identifiers evaluate to point to these connections, the workflow will fail with `403 Forbidden`. To fix this, several options are possible:
+- you can configure your workflow the way that the **Identifiers** never point to the forbidden connections
+- **if you are sure that this change won't break other workflows**, you can drop the forbidden connection from the group
+  
 ### Create a connection group
 
 To create a connection group:
@@ -124,13 +146,21 @@ To create a connection group:
 1. Click **Next, Confirm Access**, then choose your desired access level for the group.
 1. Click **Create**.
 
+### Update a connection group
+
+If you have edit access to a conneciton group, you can update the following attributes:
+- group name
+- the Identifier Tags (can never be empty, but can be completely replaced)
+- connections (a group can be empty)
+
+The same way as for connections, once created, you can't update the group integration.
+
 ### Use a connection group
 
 1. In your workflow, select an action that requires a connection.
 1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
 1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
 1. Fill in any other required step values, then click **Save** to save your workflow.
-
 
 ## Further reading
 
