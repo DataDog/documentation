@@ -41,14 +41,14 @@ There are two main use cases supported with this [integration][1]:
 1. Gain visibility of AWS WAF actions in Datadog ASM. For example:
    1. Metrics such as total requests allowed vs. blocked by the AWS WAF.
    2. Drill down and view individual AWS WAF logs (requires you to [ingest AWS WAF logs into Datadog][2]).
-   3. How AWS WAF inspected the request: rules that were applied and the decision made (allow, block or count). 
+   3. How AWS WAF inspected the request: rules that were applied and the decision made (allow, block, or count). 
    
    <div class="alert alert-info">Note that ASM converts AWS WAF logs into ASM Traces, enabling you to view application activity (traces) and AWS WAF activity (logs converted to ASM traces) in the ASM Trace Explorer.</div>
 
    {{< img src="security/application_security/threats/aws-waf-int-asm.png" alt="AWS WAF integration details in Datadog UI" style="width:100%;" >}}
    
 2. Leverage AWS WAF to block attackers:
-   1. Connect your AWS WAF IP set(s) with Datadog ASM. You can either use an existing set or create a new one. Datadog will add blocked IP addresses to this IP set. You can block attackers from ASM [Signals][3] or [Traces][4] explorers.
+   1. Connect your AWS WAF IP set(s) with Datadog ASM. You can use an existing set or create a new one. Datadog will add blocked IP addresses to this IP set. You can block attackers from ASM [Signals][3] or [Traces][4] explorers.
            
    {{< img src="/security/application_security/threats/aws-waf-blocked-ips.png" alt="ASM denylist blocked IPs" style="width:100%;" >}}
 
