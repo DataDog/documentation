@@ -57,7 +57,7 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% ci-autoinstrumentation %}}
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. If you use JRuby, please follow the manual instrumentation steps outlined below.
+  <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. Follow the <a href="/tests/setup/ruby/?tab=ciproviderwithautoinstrumentationsupport#manually-instrumenting-your-tests">manual instrumentation steps</a> instead.  
 </div>
 
 {{% /tab %}}
