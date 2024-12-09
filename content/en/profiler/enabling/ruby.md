@@ -41,9 +41,6 @@ This utility is available on the software repositories of most Linux distributio
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
-[Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
-Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
-
 ## Installation
 
 To begin profiling applications:

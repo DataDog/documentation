@@ -6507,8 +6507,8 @@ components:
           description: List of indexes for the search. If not provided, the search
             is performed in all indexes.
           example:
-          - index-1
-          - index-2
+          - test-index
+          - test-index-2
           items:
             description: Individual index.
             type: string
@@ -7876,14 +7876,16 @@ components:
           description: List of indexes for the search. If not provided, the search
             is performed in all indexes.
           example:
-          - index-1
-          - index-2
+          - test-index
+          - test-index-2
           items:
             description: Individual index.
             type: string
           type: array
         is_created:
-          description: Whether the deletion request is fully created or not.
+          description: Whether the deletion request is fully created or not. It can
+            take several minutes to fully create a deletion request depending on the
+            target query and timeframe.
           example: true
           type: boolean
         org_id:
@@ -28425,6 +28427,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28473,6 +28479,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28527,6 +28537,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28590,6 +28604,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28651,6 +28669,10 @@ paths:
             value: '"openapi-spec.yaml"'
           step: there is a valid "managed_api" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         operationId: DeleteOpenAPI
         parameters:
@@ -32009,8 +32031,8 @@ paths:
         type: safe
   /api/v2/deletion/data/{product}:
     post:
-      description: Creates a data deletion request by providing a query and a time
-        frame targeting the proper data.
+      description: Creates a data deletion request by providing a query and a timeframe
+        targeting the proper data.
       operationId: CreateDataDeletionRequest
       parameters:
       - $ref: '#/components/parameters/ProductName'
@@ -32058,7 +32080,7 @@ paths:
             value: '"logs"'
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"from\": 1672527600000,\n
-              \     \"to\": 1704063600000,\n      \"indexes\": [\"index-1\", \"index-2\"],\n
+              \     \"to\": 1704063600000,\n      \"indexes\": [\"test-index\", \"test-index-2\"],\n
               \     \"query\": {\"host\": \"abc\", \"service\": \"xyz\"}\n    }\n
               \ }\n}"
           step: there is a valid "deletion_request" in the system
@@ -39079,6 +39101,10 @@ paths:
           source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
   /api/v2/posture_management/findings:
@@ -41017,9 +41043,9 @@ paths:
         rum_metric:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"type\":
-              \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\": \"session\",\n
-              \     \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique_lower_alnum }}\",\n
+              \   \"type\": \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\":
+              \"session\",\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
               \       \"include_percentiles\": true,\n        \"path\": \"@duration\"\n
               \     },\n      \"filter\": {\n        \"query\": \"source:{{ unique
               }}\"\n      },\n      \"group_by\": [{\n        \"path\": \"@browser.name\",\n
