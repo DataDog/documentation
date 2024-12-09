@@ -24,7 +24,7 @@ further_reading:
 
 Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2].
 
-{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
+{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
 Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
@@ -202,54 +202,15 @@ Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 * For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datatdog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
 
-{{< tabs >}}
-{{% tab "AWS S3" %}}
-
-Select the appropriate AWS account and role combination for your S3 bucket.
-
-Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
-
-{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog" style="width:75%;">}}
-
-{{% /tab %}}
-{{% tab "Azure Storage" %}}
-
-Select the **Azure Storage** archive type, and the Azure tenant and client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.
-
-Input your storage account name and the container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
-
-{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
-
-
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-Select the **GCS** archive type, and the GCS Service Account that has permissions to write on your storage bucket.
-
-Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
-
-{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
-
-{{% /tab %}}
-{{< /tabs >}}
+| Service                  | Steps                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AWS S3**               | - Select the appropriate AWS account and role combination for your S3 bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
+| **Azure Storage**        | - Select the **Azure Storage** archive type, and the Azure tenant and client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.<br>- Input your storage account name and the container name for your archive.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
+| **Google Cloud Storage** | - Select the **Google Cloud Storage** archive type, and the GCS Service Account that has permissions to write on your storage bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
 
 ### Advanced settings
 
-#### Datadog permissions
-
-By default:
-
-* All Datadog Admin users can create, edit and reorder. See [Configure Multiple Archives](#multiple-archives) for more information.
-* All Datadog Admin and Standard users can rehydrate from archives.
-* All users, including Datadog Read Only users, can access rehydrated logs.
-
-Use this optional configuration step to assign roles on that archive and restrict who can:
-
-* Edit that archive configuration. See the [`logs_write_archive`][9] permission.
-* Rehydrate from that archive. See the [`logs_read_archives`][10] and [`logs_write_historical_view`][11] permissions.
-* Access rehydrated logs in case you use the legacy [`read_index_data` permission][12].
-
-{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs" style="width:75%;">}}
+{{< img src="/logs/archives/log_archives_advanced_settings.png" alt="Advanced settings to add optional tags and define max scan size" style="width:100%;" >}}
 
 #### Datadog tags
 
@@ -258,15 +219,11 @@ Use this optional configuration step to:
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
 * Add tags on rehydrated logs according to your Restriction Queries policy. See the [`logs_read_data`][13] permission.
 
-{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags" style="width:75%;">}}
-
 #### Define maximum scan size
 
 Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Rehydration on your Log Archives.
 
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
-
-{{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
 {{< site-region region="us3" >}}
 #### Firewall rules
