@@ -204,7 +204,7 @@ For the full list of available instrumentation methods, see the [tracing documen
 
 {{% ci-git-metadata %}}
 
-## Manual instrumentation (optional)
+## Manually instrumentating your tests
 
 <div class="alert alert-info">
 <strong>Attention</strong>: when using manual instrumentation, run your tests like you normally do: 
