@@ -104,7 +104,7 @@ Follow these steps if your CI Provider is not supported for auto-instrumentation
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE` (Optional)
 : Name of the service or library being tested.
 
 2. Prepend your test command with this datadog-ci CLI wrapper:
