@@ -204,7 +204,7 @@ Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the
 
 | Service                  | Steps                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AWS S3**               | - Select the appropriate AWS account and role combination for your S3 bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
+| **Amazon S3**               | - Select the appropriate AWS account and role combination for your S3 bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
 | **Azure Storage**        | - Select the **Azure Storage** archive type, and the Azure tenant and client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.<br>- Input your storage account name and the container name for your archive.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
 | **Google Cloud Storage** | - Select the **Google Cloud Storage** archive type, and the GCS Service Account that has permissions to write on your storage bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your log archives. |
 
