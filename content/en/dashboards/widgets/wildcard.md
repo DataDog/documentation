@@ -30,9 +30,12 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. **Test the Wildcard widget**. The flexibility of the Wildcard widget comes with the risk of creating slow, unappealing, or inconsistent visualizations. Test the Wildcard widget on a scratchpad or empty dashboard before adding Wildcard widgets to production.
 1. **Validate your query**. Datadog widgets guarantee that the data visualizations are semantically aligned with the query, which ensures the configuration builds the expected graph. With the Wildcard widget, you're adding a custom Vega-Lite specification that defines how the request maps to visual elements. This creates the potential that you'll fetch a data field that isn't used in your visualization. Use the [Data Preview](#data-preview) to help debug mismatches.
 
- ## Setup
+## Setup
 
- ### Configure a new Wildcard widget
+After you create a Wildcard widget, you can configure the widget either as a [new configuration](#configure-a-new-wildcard-widget) or by [importing a configuration from an existing widget](#import-data-from-an-existing-widget). 
+
+### Configure a new Wildcard widget
+
 1. [Check native widgets][4]. See if a Datadog widget can fulfill your requirements.
 1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click **Add Widgets**.
 1. Click and drag the Wildcard Widget icon from the widget tray. 
@@ -40,8 +43,8 @@ However, if none of the Datadog widgets meets your visualization needs, a Wildca
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification. 
 1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**.
 1. Paste the copied Vega-Lite definition.
-1. Click **Apply** to apply your configuration changes, see a preview of the visualization, and iterate on your design. 
-   **Note**: You must click **Apply** to add your changes, however this does not save your configuration.
+1. Click **Run** to apply your configuration changes, see a preview of the visualization, and iterate on your design. 
+   **Note**: You must click **Run** to add your changes, however this does not save your configuration.
 1. (Optional) Debug Vega-Lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-Lite specification maps to the Datadog query. 
 1. Click **Save**.
 
@@ -120,13 +123,13 @@ Click on the **Define Visual** tab to view how this query maps to Vega-Lite. Ope
 
 | Select data configuration  | Define Visual Specification |
 | ---  | ----------- |
-|{{< img src="/dashboards/widgets/wildcard/example_configuration_no_alias.png" alt="Example widget configuration, showing open data preview" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/example_vega_spec_map_to_config.png" alt="Vega specification mapping the widget configuration field query1 to the vega field" style="width:100%;" >}}|
+|{{< img src="/dashboards/widgets/wildcard/example_configuration_no_alias.png" alt="Example widget configuration, showing open data preview" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/define_visual_run_button.png" alt="Vega specification mapping the widget configuration field query1 to the vega field" style="width:100%;" >}}|
 
 To demonstrate a mismatch between the Datadog data and the Vega-Lite specification, add an alias to the query. The visualization does not work because the Vega-lite specification still points to "query1", but the Data Preview column shows that the new query is now the new alias "example". To fix this visualization, you need to replace `field:"query1"` with `field:"example"`.
 
 | Select data configuration  | Define Visual Specification |
 | ---  | ----------- |
-|{{< img src="/dashboards/widgets/wildcard/example_config_with_alias.png" alt="Example widget configuration where query has an alias" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/example_vega_spec_mismatch.png" alt="Mismatched mapping between widget configuration and Vega specification" style="width:100%;" >}}|
+|{{< img src="/dashboards/widgets/wildcard/example_config_with_alias.png" alt="Example widget configuration where query has an alias" style="width:100%;" >}} | {{< img src="/dashboards/widgets/wildcard/define_visual_example_run_button.png" alt="Mismatched mapping between widget configuration and Vega specification" style="width:100%;" >}}|
 
 ## Compatible data formats
 
