@@ -61,8 +61,6 @@ Ensure [Test Optimization][1] is configured for your test runs.
 
 {{% tab "Python" %}}
 
-<div class="alert alert-info">Auto Test Retries is available using the beta of the new pytest plugin. Set the <b>DD_PYTEST_USE_NEW_PLUGIN_BETA</b> environment variable to <b>true</b> to enable it.</div>
-
 `dd-trace-py >= 2.18.0` (`pytest >= 7.2.0`)
 
 {{% /tab %}}
@@ -160,6 +158,8 @@ Customize the Auto Test Retries with the following environment variables:
 {{% /tab %}}
 
 {{% tab "Python" %}}
+
+<div class="alert alert-info">Auto Test Retries is available using the beta of the new pytest plugin. Set the <b>DD_PYTEST_USE_NEW_PLUGIN_BETA</b> environment variable to <b>true</b> to enable it.</div>
 
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
