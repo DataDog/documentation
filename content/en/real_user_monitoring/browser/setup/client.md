@@ -1982,7 +1982,21 @@ window.DD_RUM.init({
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
-TypeScript is not supported for Error Tracking.
+
+Types are compatible with TypeScript >= 3.8.2. For earlier versions, import JavaScript sources and use global variables to avoid any compilation issues:
+
+```javascript
+import '@datadog/browser-rum/bundle/datadog-rum'
+
+window.DD_RUM.init({
+  applicationId: 'XXX',
+  clientToken: 'XXX',
+  site: 'datadoghq.com',
+  trackUserInteractions: true,
+   trackResources: true,
+  ...
+})
+```
 
 {{% /tab %}}
 {{< /tabs >}}
