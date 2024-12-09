@@ -246,6 +246,9 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 Accede a dashboards preconfigurados
 
+{{% /tab %}}
+{{< tabs >}}
+
 ### Cliente DogStatsD
 
 Instala la biblioteca cliente DogStatsD con tu lenguaje preferido y configúrala para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
