@@ -2,9 +2,9 @@
 
 JMXFetch supports running in JVMs configured to be FIPS-140 compliant.
 
-JMXFetch uses cryptography for communication with Datadog Agent over TLS and when configured to connect to JMX
-endpoints with SSL. For all encrypted connections JMXFetch uses the default SSL provider (JSSE provider) of the
-Java runtime environment.
+JMXFetch uses cryptography for communication with Datadog Agent over TLS and, when configured, to connect to
+JMX endpoints with SSL. For all encrypted connections JMXFetch uses the default JSSE provider of the Java
+runtime environment.
 
 ## Requirements
 
@@ -16,14 +16,14 @@ Java runtime environment.
 2. Datadog Agent installed on the host.
 3. Appropriate TLS/SSL certificates if encrypted JMX connection is required.
 
-Datadog Agent host installs do not include a Java runtime, which must be installed and configured to run in
+Datadog Agent host installs do not include a Java runtime, it must be installed and configured to run in
 FIPS-approved mode separately.
 
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
-1. Datadog Agent FIPS JMX docker image v7.61 or later.
+1. Datadog Agent FIPS JMX docker image v7.62 or later.
 2. Appropriate TLS/SSL certificates if encrypted JMX connection is required. (Private keys must be generated
    with the `keytool` utility provided in the container, see below).
 
@@ -84,7 +84,7 @@ keytool -keystore jmxfetch-truststore -import -alias java-app -file java-app-cer
 {{% tab "Containers" %}}
 
 Datadog Agent FIPS JMX docker images come with BouncyCastle FIPS provider pre-installed. BouncyCastle uses a
-proprietary key and trust store format, which is not compatible with regular Java key store format, or formats
+proprietary key and trust store format, which is not compatible with regular Java key store format or formats
 used by other Java FIPS implementations. For this reason, `keytool` command provided by the docker image
 should be used to configure key and trust stores for JMXFetch. Stores for the Java application should be
 configured using `keytool` from the same Java runtime that is running the application.
