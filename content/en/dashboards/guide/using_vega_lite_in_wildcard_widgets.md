@@ -20,7 +20,7 @@ When using Vega-Lite with Wildcard widgets in Datadog, you'll find extensions to
 
 ## Customizing the theming and Color Palettes
 
-Datadog provides a range of theming and color palette options to enhance the visual appeal of widgets. Using Datadog color palettes ensures your visualizations blend in with the styling choices used by native Datadog widgets. If you choose to customize outside of Datadog's themes, the graph will not adjust colors when the overall app theme changes. It's best to avoid setting custom colors for graph axes.
+Datadog provides a range of theming and color palette options to enhance the visual appeal of widgets. You can specify custom colors so that they blend in with the styling choices used by native Datadog widgets. If you set custom colors, the graph will not adjust colors when the app theme changes. By default, Datadog graphs adjust colors for text and axis marks to ensure readable contrast when viewed in dark mode. It's best to avoid setting custom colors for graph axes.
 
 Customized color, font, spacing, and other design settings are available. These settings apply automatically when using the theme switcher (`CTRL + OPT + D`).
 
@@ -78,7 +78,7 @@ Then, in any place where you set a `format` key, set `formatType: hoverFormatter
 
 The second element of the "units" array represents a "per" unit, such as in "bits per second." Units should be provided in singular form (such as, "second" instead of "seconds"). Regular number formatting, such as specifying precision, scientific notation, or integers, is possible using [d3-format][2] tokens. Two popular formats include:
 
-* `~s`: scientific prefix (e.g., 2000 \-\> 2k), with trailing zeros removed  
+* `~s`: scientific prefix (for example, 2000 -> 2k), with trailing zeros removed  
 * `.2f`: floating point to 2 decimals
 
 The `hoverFormatter` may also be called in [Vega expressions][3]. This function has the signature of:
@@ -131,27 +131,25 @@ For example, you can use the following configuration to specify a height increme
 
 In Datadog, each "request" or query corresponds to a Vega [named data source][4]. The numbering for these sources starts at one. This means if your widget makes multiple requests, it generates corresponding datasets named `table1`, `table2`, and so forth.
 
-![][image1]
+{{< img src="/dashboards/guide/using_vega_lite_in_wildcard_widgets/wildcard_multiple_requests.png" alt="Example wildcard widget with multiple requests" style="width:100%;" >}}
 
-Whenever possible, Datadog widgets preserve tag names from your request's "group by" field. For formula and function requests, such as Scalar or Timeseries, "Formula Aliases" are used as field names.
-
-\[INSERT IMAGE OF EXAMPLE\]
+Whenever possible, Datadog widgets preserve tag names from your request's "group by" field. For formula and function requests, such as Scalar or Timeseries, "Formula Aliases" are used as field names. For an example, see the [Wildcard widget][5] documentation.
 
 ### Additional Field Information
 
 - Timeseries requests include a `_time` field for timestamps in milliseconds.  
 - Histogram request rows consist of three fields: `start`, `end`, and `count`.  
-- List request responses vary by data source. Use the [DataPreview][5] to determine available fields.
+- List request responses vary by data source. Use the [DataPreview][6] to determine available fields.
 
 ### Field names with special characters
 
-Special considerations apply to field names that contain non-alphanumeric characters. Datadog Metrics tags [prohibit most non-alphanumeric characters][6]. However, not all products have this constraint and they allow characters in attribute names that may have dual meanings in Vega-Lite. These characters include square brackets \`\[\]\` and periods \`.\` used to access nested properties in object-shaped data, but need to be escaped because the backend flattens the data before returning it to you for /scalar and /timeseries data. 
+Special considerations apply to field names that contain non-alphanumeric characters. Datadog Metrics tags [prohibit most non-alphanumeric characters][7]. However, not all products have this constraint and they allow characters in attribute names that may have dual meanings in Vega-Lite. These characters include square brackets `[]` and periods `.` used to access nested properties in object-shaped data, but need to be escaped because the backend flattens the data before returning it to you for /scalar and /timeseries data. 
 
 To ensure these characters are interpreted correctly by the Wildcard widget, you must escape these characters with `\\`. For example, when using the RUM query field `@view.name`, write it as `@view\\.name` in the Vega-Lite specification.
 
 ## Context menu and context links
 
-With Datadog widgets, you have the ability to click on a graph datapoint to open a [graph context menu][7] with context links. You can enable this feature on Wildcard widgets by adding specific parameters to your widget's configuration.
+With Datadog widgets, you have the ability to click on a graph datapoint to open a [graph context menu][8] with context links. You can enable this feature on Wildcard widgets by adding specific parameters to your widget's configuration.
 
 To enable the context menu feature, include the following parameters in your Vega-Lite configuration:
 
@@ -164,9 +162,9 @@ To enable the context menu feature, include the following parameters in your Veg
 ]
 ```
 
-After you enable this feature you can click on datapoints in the widget to open a context menu. Use the graph context menu with the context links of the graph editor. Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows. For more information, see [Context Links][8].
+After you enable this feature you can click on datapoints in the widget to open a context menu. Use the graph context menu with the context links of the graph editor. Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows. For more information, see [Context Links][9].
 
-You can also add dynamic custom links through the [`href` encoding][9]. This is useful if you do not need a full context menu of choices.
+You can also add dynamic custom links through the [`href` encoding][10]. This is useful if you do not need a full context menu of choices.
 
 ## Further reading
 
@@ -176,8 +174,9 @@ You can also add dynamic custom links through the [`href` encoding][9]. This is 
 [2]: https://d3js.org/d3-format#locale_format
 [3]: https://vega.github.io/vega/docs/expressions/
 [4]: https://vega.github.io/vega-lite/docs/data.html#named
-[5]: https://docs.datadoghq.com/dashboards/widgets/wildcard/#data-preview
-[6]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
-[7]: https://docs.datadoghq.com/dashboards/widgets/#graph-menu
-[8]: https://docs.datadoghq.com/dashboards/guide/context-links/#context-links-variables
-[9]: https://vega.github.io/vega-lite/docs/encoding.html
+[5]: https://docs.datadoghq.com/dashboards/widgets/wildcard/#map-datadog-data-to-vega-lite-specifications
+[6]: https://docs.datadoghq.com/dashboards/widgets/wildcard/#data-preview
+[7]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
+[8]: https://docs.datadoghq.com/dashboards/widgets/#graph-menu
+[9]: https://docs.datadoghq.com/dashboards/guide/context-links/#context-links-variables
+[10]: https://vega.github.io/vega-lite/docs/encoding.html
