@@ -2837,13 +2837,13 @@ __metadata:
 
 "sfha-builder@file:../sfha-builder::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 1.0.0
-  resolution: "sfha-builder@file:../sfha-builder#../sfha-builder::hash=250ea7&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "sfha-builder@file:../sfha-builder#../sfha-builder::hash=5e0379&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     "@vitejs/plugin-react": ^4.3.3
     typescript: ^5.6.3
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
-  checksum: 67271ca014729454866cb35d46d4090e479192cdc4865de0117e17023da7a09d691d1eeaa58f9148679a569a65fc30e87fc592da65ff43b85c5de4e9a337c8b3
+  checksum: 9cd4675e740605615c7eeaf63f8b8452cb8ae8aa2dbbb6f110df409553f11bc9c71f8a7347d75c2515c75c38238df61123cb0a1b042cb5c06dca5197c11b08aa
   languageName: node
   linkType: hard
 

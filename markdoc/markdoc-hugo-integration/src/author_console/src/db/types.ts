@@ -1,3 +1,5 @@
+import { ParsingErrorReport } from '../../../schemas/compilationResults';
+
 export type DbData = {
   allowlist: {
     prefsById: Record<
@@ -15,5 +17,9 @@ export type DbData = {
         display_name: string;
       }
     >;
+  };
+  errors: {
+    parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
+    validationErrorsByFilePath: Record<string, string[]>;
   };
 };

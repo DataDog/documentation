@@ -1,14 +1,16 @@
+import { buildApp } from 'sfha-builder';
+import path from 'path';
+import fs from 'fs';
+
+const APP_PATH = path.resolve(__dirname, '../author_console');
+
+class AuthorConsoleBuilder {
+  static async compileHtml() {
+    // create the dbData object
+  }
+}
+
 /*
-import { buildApp } from "sfha-builder";
-import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const PATH_TO_APP = path.resolve(__dirname, "../../app");
-
 buildApp({
   viteProjectPath: PATH_TO_APP,
   dbData: { msg: "Hello from the demo builder!" },
