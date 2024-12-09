@@ -132,6 +132,13 @@ To create a connection group:
 1. Click **Next, Confirm Access**, then choose your desired access level for the group.
 1. Click **Create**.
 
+### Use a connection group
+
+1. In your workflow, select an action that requires a connection.
+1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
+1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
+1. Fill in any other required step values, then click **Save** to save your workflow.
+
 ### Update a connection group
 
 If you have edit access to a connection group, you can update the following attributes:
@@ -147,13 +154,6 @@ To delete a connection group:
 
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
-
-### Use a connection group
-
-1. In your workflow, select an action that requires a connection.
-1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
-1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
-1. Fill in any other required step values, then click **Save** to save your workflow.
 
 ## Further reading
 
