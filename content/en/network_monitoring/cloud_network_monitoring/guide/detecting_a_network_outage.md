@@ -16,13 +16,13 @@ With Cloud Network Monitoring (CNM), you can detect network outages in minutes. 
 
 Use CNM metrics to see whether your source endpoint may be sending an enormous amount of traffic or making a large number of open connections to the destination endpoint. When selecting a faulty dependency (for example, one with high latency), you can use the side panel graphs to spot such spikes in traffic. These spikes may overwhelm your receiving application to the point that it cannot (in the case of TCP) respond to all connections, leading to increased packet loss and thus, increased TCP latency. 
 
-{{< img src="network_performance_monitoring/guide/detecting_a_network_outage/npm-metrics.png" alt="Traffic overloading of the underlying infrastructure">}}
+{{< img src="network_performance_monitoring/guide/detecting_a_network_outage/cnm_metrics.png" alt="Traffic overloading of the underlying infrastructure">}}
 
 ## CPU overconsumption of the underlying infrastructure
 
 On the other hand, resource overconsumption of either the client or server endpoint could be the culprit of poor communication between the two. In the side panel **Processes** tab, scope your view to processes running on either the source or destination endpoints to spot any heavy software that may be degrading the performance of their underlying hosts or containers, thus reducing their ability to respond to network calls. In this case, in addition to knowing _whether_ an underlying host is running hot and causing application latency, you will want to know _why_ it is running hot. Grouping your process metrics by command gives you this granularity, since you can identify the particular workload that is consuming your CPU and memory resources. 
 
-{{< img src="network_performance_monitoring/guide/detecting_a_network_outage/processes.png" alt="CPU overconsumption of the underlying infrastructure">}}
+{{< img src="network_performance_monitoring/guide/detecting_a_network_outage/cnm_processes_tab.png" alt="CPU overconsumption of the underlying infrastructure">}}
 
 ## Application errors in code
 
