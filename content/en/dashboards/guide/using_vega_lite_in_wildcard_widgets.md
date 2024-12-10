@@ -18,7 +18,7 @@ When using Vega-Lite with Wildcard widgets in Datadog, you'll find extensions to
 
 **Note**: Some extensions in Vega-Lite are exclusive to Datadog and might not function in the same way if exported to other tools that have Vega-lite.
 
-## Customizing the theming and Color Palettes
+## Customizing the theming and color palettes
 
 Datadog provides a range of theming and color palette options to enhance the visual appeal of widgets. You can specify custom colors so that they blend in with the styling choices used by native Datadog widgets. If you set custom colors, the graph will not adjust colors when the app theme changes. By default, Datadog graphs adjust colors for text and axis marks to ensure readable contrast when viewed in dark mode. It's best to avoid setting custom colors for graph axes.
 
@@ -35,15 +35,15 @@ Datadog offers additional color palettes beyond the public Vega color schemes, i
 
 {{< whatsnext desc="Additional resources:" >}}
     {{< nextlink href="/dashboards/guide/widget_colors/" >}}Learn more about Datadog color schemes and themes{{< /nextlink >}}
-    {{< nextlink href="https://docs.datadoghq.com/dashboards/guide/widget_colors/" >}}See Vega color schemes{{< /nextlink >}}
+    {{< nextlink href="https://vega.github.io/vega/docs/schemes/" >}}See Vega color schemes{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
 ## Customize visualization units
 
-Datadog offers unit-aware number formatting for [over 150 units][1], enabling you to easily format values such as 3600 (seconds) as 1 (hour). To use this feature in your Vega-Lite definition, add the `"config": {"customFormatTypes": true}` parameter to the root of your JSON
+Datadog offers unit-aware number formatting for [over 150 units][1], enabling you to easily format values such as 3600 (seconds) as 1 (hour). To use this feature in your Vega-Lite definition, add the `"config": {"customFormatTypes": true}` parameter to the root of your JSON block.
 
-Then, in any place where you set a `format` key, set `formatType: hoverFormatter` and define your units as an array.  For example:
+Next, wherever you set a `format` key, use `formatType: hoverFormatter` and define your units as an array.  For example:
 
 {{% collapse-content title="Example Vega-Lite Spec with custom units" level="h4" %}}
 {{< highlight json "hl_lines=11 19-20" >}}
@@ -143,7 +143,7 @@ Whenever possible, Datadog widgets preserve tag names from your request's "group
 
 ### Field names with special characters
 
-Special considerations apply to field names that contain non-alphanumeric characters. Datadog Metrics tags [prohibit most non-alphanumeric characters][7]. However, not all products have this constraint and they allow characters in attribute names that may have dual meanings in Vega-Lite. These characters include square brackets `[]` and periods `.` used to access nested properties in object-shaped data, but need to be escaped because the backend flattens the data before returning it to you for /scalar and /timeseries data. 
+Special considerations apply to field names that contain non-alphanumeric characters. Datadog Metrics tags [prohibit most non-alphanumeric characters][7]. However, not all products have this constraint and they allow characters in attribute names that may have dual meanings in Vega-Lite. These characters include square brackets `[]` and periods `.` which are used to access nested properties in object-shaped data. They need to be escaped because the backend flattens the data before returning it to you for /scalar and /timeseries data. 
 
 To ensure these characters are interpreted correctly by the Wildcard widget, you must escape these characters with `\\`. For example, when using the RUM query field `@view.name`, write it as `@view\\.name` in the Vega-Lite specification.
 
@@ -164,7 +164,7 @@ To enable the context menu feature, include the following parameters in your Veg
 ]
 ```
 
-After you enable this feature you can click on datapoints in the widget to open a context menu. Use the graph context menu with the context links of the graph editor. Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows. For more information, see [Context Links][9].
+After you enable this feature, you can click on datapoints in the widget to open a context menu. Use the graph context menu with the context links of the graph editor. Context links bridge dashboard widgets with other pages in Datadog, as well as the third-party applications you have integrated into your workflows. For more information, see [Context Links][9].
 
 You can also add dynamic custom links through the [`href` encoding][10]. This is useful if you do not need a full context menu of choices.
 
