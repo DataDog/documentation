@@ -7,10 +7,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import { useState } from 'react';
 
 const ErrorsPrintout = (props: {
   errorReportsByFilePath: Record<string, CompilationError[]>;
 }) => {
+  const [searchTermWasCopied, setSearchTermWasCopied] = useState(false);
+
+  const handleSearchTermCopy = () => {
+    setSearchTermWasCopied(true);
+  };
+
+  const handleSearchTermSnackbarClose = (
+    _event: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSearchTermWasCopied(false);
+  };
+
   return (
     <div>
       {Object.entries(props.errorReportsByFilePath).map(([filePath, errors]) => {
@@ -83,12 +102,20 @@ const ErrorsPrintout = (props: {
                           <TableCell sx={{ fontSize: '1em' }}>
                             <code
                               style={{ cursor: 'pointer' }}
-                              onClick={() =>
-                                navigator.clipboard.writeText(error.searchTerm || '')
-                              }
+                              onClick={() => {
+                                navigator.clipboard.writeText(error.searchTerm || '');
+                                handleSearchTermCopy();
+                              }}
                             >
                               {error.searchTerm}
                             </code>
+                            <Snackbar
+                              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                              open={searchTermWasCopied}
+                              autoHideDuration={1000}
+                              onClose={handleSearchTermSnackbarClose}
+                              message="Search term copied"
+                            />
                           </TableCell>
                         )}
                       </TableRow>
