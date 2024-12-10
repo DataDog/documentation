@@ -113,7 +113,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Magento        | 2                                       | All supported PHP versions  | Framework-level instrumentation |
 | Neos Flow      | 1.1                                     | All supported PHP versions  | Generic web tracing             |
 | Phalcon        | 1.3, 3.4                                | All supported PHP versions  | Generic web tracing             |
-| RoadRunner     | 2.x, 3.x                                | All supported PHP versions  | Framework-level instrumentation |
+| RoadRunner     | {{< tooltip text="SDK" tooltip="RoadRunner uses two versioning schemes: semantic versioning (3.x) for the SDK component, and calendar versioning (2024.x) for the server. For compatibility purposes, refer to the SDK version." >}} 2.x, 3.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions  | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
@@ -122,6 +122,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
