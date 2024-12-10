@@ -131,7 +131,7 @@ spec:
               value: "true"
 ```
 
-Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
 
 [1]: /getting_started/site
 {{% /tab %}}
