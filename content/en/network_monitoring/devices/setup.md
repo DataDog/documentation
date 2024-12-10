@@ -19,7 +19,7 @@ further_reading:
 
 Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. Once the Datadog Agent is installed on a host that has access to the network, the Agent can autodiscover network devices and collect metrics right out of the box.
 
-This guide explains how to configure Network Device Monitoring on your hosts, enrich device tags, view, and set up device profiles, view your data in NetFlow Monitoring, and validate your data in the provided dashboards and in the Device Topology Map.
+This guide covers configuring Network Device Monitoring on your hosts, enriching device tags, setting up and viewing device profiles, viewing data in NetFlow Monitoring, and validating data in the provided dashboards and Device Topology Map.
 
 {{< img src="network_device_monitoring/getting_started/ndm_landing_page.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
 
