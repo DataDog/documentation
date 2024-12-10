@@ -114,8 +114,6 @@ export class MarkdocHugoIntegration {
     // if the file has errors, log the errors for later output
     // and continue to the next file
     if (parsedFile.errors.length > 0) {
-      console.log(`\nAdding errors from line 117`);
-      console.log(JSON.stringify(parsedFile.errors, null, 2));
       this.#addFileErrors({
         filePath: markdocFilepath,
         errors: parsedFile.errors
@@ -224,15 +222,11 @@ export class MarkdocHugoIntegration {
     parsedFile: ParsedFile;
     filterOptionsConfig: FilterOptionsConfig;
   }): string | null {
-    console.log('Processing file at');
-    console.log(p.markdocFilepath);
     const lang = p.markdocFilepath
       .replace(this.hugoGlobalConfig.dirs.content, '')
       .split('/')[1];
 
     if (!this.hugoGlobalConfig.languages.includes(lang)) {
-      console.log('\nAdding error from line 232:');
-      console.log(`Language "${lang}" is not supported.`);
       this.#addFileError({
         filePath: p.markdocFilepath,
         error: {
@@ -250,8 +244,6 @@ export class MarkdocHugoIntegration {
     });
 
     if (draftFiltersManifest.errors.length > 0) {
-      console.log(`\nAdding errors from line 251`);
-      console.log(JSON.stringify(draftFiltersManifest.errors, null, 2));
       this.#addFileErrors({
         filePath: p.markdocFilepath,
         errors: draftFiltersManifest.errors
@@ -275,8 +267,6 @@ export class MarkdocHugoIntegration {
         }
       });
 
-      console.log(`\nAdding errors from line 276`);
-      console.log(JSON.stringify(errors, null, 2));
       errors.forEach((error) => {
         this.#addFileError({
           filePath: p.markdocFilepath,
@@ -289,9 +279,6 @@ export class MarkdocHugoIntegration {
         markdocFilepath: p.markdocFilepath,
         pageContents: html
       });
-
-      console.log('Final errors:');
-      console.log(JSON.stringify(this.errorsByFilePath[p.markdocFilepath], null, 2));
 
       return compiledFilepath;
     } catch (e) {
@@ -310,8 +297,6 @@ export class MarkdocHugoIntegration {
         };
       }
 
-      console.log(`\nAdding error from line 308`);
-      console.log(JSON.stringify(error, null, 2));
       this.#addFileError({
         filePath: p.markdocFilepath,
         error

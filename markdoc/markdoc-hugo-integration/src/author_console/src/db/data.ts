@@ -730,38 +730,10 @@ export const dbData: AuthorConsoleData = {
           {
             message:
               "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
-          },
-          {
-            message:
-              "Invalid options source: The options source 'orange_item_options', which is required for the filter ID 'item', does not exist."
-          },
-          {
-            message:
-              "Invalid options source: The options source 'green_item_options', which is required for the filter ID 'item', does not exist."
-          },
-          {
-            message:
-              "Invalid options source: The options source 'indigo_item_options', which is required for the filter ID 'item', does not exist."
-          },
-          {
-            message:
-              "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
           }
         ],
       '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_literal_options_source.mdoc.md':
         [
-          {
-            message:
-              "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist."
-          },
-          {
-            message:
-              "Invalid options source: The options source 'yellow_object_options', which is required for the filter ID 'item', does not exist."
-          },
-          {
-            message:
-              "Invalid options source: The options source 'blue_object_options', which is required for the filter ID 'item', does not exist."
-          },
           {
             message:
               "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist."
@@ -781,20 +753,10 @@ export const dbData: AuthorConsoleData = {
             message:
               'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
             searchTerm: 'bleu'
-          },
-          {
-            message:
-              'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
-            searchTerm: 'bleu'
           }
         ],
       '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_placeholder.mdoc.md':
         [
-          {
-            message:
-              "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item.",
-            searchTerm: '<COLOUR>_item_options'
-          },
           {
             message:
               "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item.",
@@ -807,11 +769,6 @@ export const dbData: AuthorConsoleData = {
             message:
               'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
             searchTerm: 'bleu'
-          },
-          {
-            message:
-              'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
-            searchTerm: 'bleu'
           }
         ],
       '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_variable_id.mdoc.md':
@@ -819,22 +776,10 @@ export const dbData: AuthorConsoleData = {
           {
             message: 'Invalid filter ID found in markup: colour',
             searchTerm: 'colour'
-          },
-          {
-            message: 'Invalid filter ID found in markup: colour',
-            searchTerm: 'colour'
           }
         ],
       '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/missing_closing_tag.mdoc.md':
         [
-          {
-            message: "Node 'if' is missing closing",
-            lines: [6, 7]
-          },
-          {
-            message: "Node 'if' is missing closing",
-            lines: [9, 10]
-          },
           {
             message: "Node 'if' is missing closing",
             lines: [6, 7]

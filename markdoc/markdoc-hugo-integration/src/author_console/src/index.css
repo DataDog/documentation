@@ -1,11 +1,16 @@
 body {
     padding: 10px 30px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     max-width: 960px;
 }
 
 pre,
 code {
-    color: DeepPink;
-    font-size: 1.15em;
+    color: #ff0099;
+    font-size: 1em;
+    font-family: 'Roboto Mono';
+}
+
+a {
+    color: #0953bf;
 }

@@ -41,7 +41,7 @@ const ErrorsPrintout = (props: {
             elevation={3}
             style={{
               padding: '3px 15px 15px 15px',
-              marginBottom: '15px',
+              marginBottom: '30px',
               position: 'relative',
               borderRadius: '5px'
             }}
@@ -79,7 +79,7 @@ const ErrorsPrintout = (props: {
                       <TableCell sx={{ fontSize: '1em' }}>
                         Suggested search term
                         <br />
-                        (click to copy)
+                        (click term to copy)
                       </TableCell>
                     )}
                   </TableRow>
@@ -98,7 +98,11 @@ const ErrorsPrintout = (props: {
                               paddingTop: '0',
                               marginRight: '0px',
                               marginLeft: '-10px',
-                              marginTop: '8px'
+                              marginTop: '8px',
+                              color: 'purple',
+                              '&.Mui-checked': {
+                                color: '#9364cd'
+                              }
                             }}
                           />
                         </TableCell>
@@ -146,11 +150,11 @@ const ErrorsReport = (props: {
 }) => {
   return (
     <div>
-      <p>
-        Checking the box next to an error has no effect — it's optional and just for your
-        reference.
-      </p>
       <h2>Compilation errors</h2>
+      <p>
+        Checking the box next to an error has no effect — it's optional for tracking your
+        fixes between builds.
+      </p>
       <ErrorsPrintout errorReportsByFilePath={props.errorsByFilePath} />
     </div>
   );
