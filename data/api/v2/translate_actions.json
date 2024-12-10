@@ -339,10 +339,6 @@
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
   },
-  "GetCloudCostActivity": {
-    "description": "Get the Cloud Cost Management activity.",
-    "summary": "Cloud Cost Enabled"
-  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
