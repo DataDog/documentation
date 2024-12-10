@@ -710,6 +710,7 @@ export const dbData: DbData = {
       }
     }
   },
+  hasErrors: true,
   errors: {
     parsingErrorReportsByFilePath: {
       '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/missing_closing_tag.mdoc.md':

@@ -11,6 +11,9 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import PrefsBuilder from './components/builder/PrefsBuilder';
 import ErrorsReport from './components/errors/ErrorsReport';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import ErrorIcon from '@mui/icons-material/Error';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -74,8 +77,7 @@ function App() {
 
   return (
     <>
-      <h1>Markdoc console</h1>
-      <p>A local tool for creating and debugging Markdoc documentation pages.</p>
+      <h1>Markdoc author console</h1>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
@@ -88,6 +90,15 @@ function App() {
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
+          {dbData.hasErrors && (
+            <Alert
+              severity="error"
+              icon={<ErrorIcon />}
+              sx={{ padding: '10px', paddingBottom: '5px' }}
+            >
+              <AlertTitle sx={{ marginTop: '0px' }}>This build has errors.</AlertTitle>
+            </Alert>
+          )}
           <ErrorsReport {...dbData.errors} />
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={1}>

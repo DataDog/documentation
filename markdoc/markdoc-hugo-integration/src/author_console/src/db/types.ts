@@ -18,6 +18,7 @@ export type DbData = {
       }
     >;
   };
+  hasErrors: boolean;
   errors: {
     parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
     validationErrorsByFilePath: Record<string, string[]>;
