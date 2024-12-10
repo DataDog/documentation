@@ -466,7 +466,7 @@ Dentro del bucle, añade el siguiente fragmento:
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create

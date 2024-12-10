@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Obtener más información sobre los tiempos de inactividad
-kind: Guía
 title: Evitar alertas de monitores que estaban en tiempo de inactividad
 ---
 

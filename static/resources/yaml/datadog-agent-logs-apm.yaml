@@ -81,8 +81,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "8760a5ac-33c3-42a1-a742-94dce5854b0f"
-  install_time: "1728322710"
+  install_id: "bf4c83c6-9d5f-4b22-a221-b81956c3913a"
+  install_time: "1731489754"
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -214,7 +214,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -232,12 +232,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: /etc/datadog-agent/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -378,7 +378,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -397,12 +397,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: /etc/datadog-agent/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -473,7 +473,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "--cfgpath=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -487,12 +487,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: /etc/datadog-agent/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -555,7 +555,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -566,7 +566,7 @@ spec:
               readOnly: false # Need RW for config path
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.57.2"
+          image: "gcr.io/datadoghq/agent:7.59.0"
           imagePullPolicy: IfNotPresent
           command:
             - bash
@@ -574,12 +574,12 @@ spec:
           args:
             - for script in $(find /etc/cont-init.d/ -type f -name '*.sh' | sort) ; do bash $script ; done
           volumeMounts:
-            - name: logdatadog
-              mountPath: /var/log/datadog
-              readOnly: false # Need RW to write logs
             - name: config
               mountPath: /etc/datadog-agent
               readOnly: false # Need RW for config path
+            - name: logdatadog
+              mountPath: /var/log/datadog
+              readOnly: false # Need RW to write logs
             - name: procdir
               mountPath: /host/proc
               mountPropagation: None
@@ -598,12 +598,12 @@ spec:
               value: "true"
             - name: DD_AUTH_TOKEN_FILE_PATH
               value: /etc/datadog-agent/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_LANGUAGE_DETECTION_ENABLED
               value: "false"
             - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
               value: "false"
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
@@ -627,6 +627,8 @@ spec:
           emptyDir: {}
         - name: tmpdir
           emptyDir: {}
+        - name: s6-run
+          emptyDir: {}
         - hostPath:
             path: /proc
           name: procdir
@@ -644,11 +646,12 @@ spec:
             path: /var/run/datadog/
             type: DirectoryOrCreate
           name: apmsocket
-        - name: s6-run
-          emptyDir: {}
         - hostPath:
             path: /etc/passwd
           name: passwd
+        - hostPath:
+            path: /var/run
+          name: runtimesocketdir
         - hostPath:
             path: /var/lib/datadog-agent/logs
           name: pointerdir
@@ -661,9 +664,6 @@ spec:
         - hostPath:
             path: /var/lib/docker/containers
           name: logdockercontainerpath
-        - hostPath:
-            path: /var/run
-          name: runtimesocketdir
       tolerations:
       affinity: {}
       serviceAccountName: "datadog-agent"

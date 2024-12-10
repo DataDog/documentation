@@ -82,7 +82,7 @@ Metrics exporter to be used<br>
 : ****Datadog convention****: `DD_TAGS` <br>
 Key-value pairs to be used as resource attributes. See [Resource semantic conventions][11] for details<br>
 **Notes**: Only the first 10 key-value pairs are used; the subsequent values are dropped<br>
-`deployment.environment` maps to the `DD_ENV` environment variable<br>
+`deployment.environment` and `deployment.environment.name` map to the `DD_ENV` environment variable<br>
 `service.name` maps to the `DD_SERVICE` environment variable<br>
 `service.version` maps to the `DD_VERSION` environment variable<br>
 

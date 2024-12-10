@@ -33,7 +33,7 @@ Supported operating systems:
 
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
-- Oracle JDK 8u352+, 11.0.17+, 17.0.5+
+- Oracle JDK 8u351+, 11.0.17+, 17.0.5+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
@@ -56,9 +56,13 @@ Minimum JDK versions:
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
-Additional requirements for profiling [Code Hotspots][12]:
- - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
- - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
+Additional requirements for profiling [Trace to Profiling integration][12]:
+ - OpenJDK 17.0.5+ and `dd-trace-java` version 1.17.0+
+ - OpenJDK 11.0.17+ and `dd-trace-java` version 1.17.0+
+ - OpenJDK 8 8u352+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 17.0.6+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 11.0.18+ and `dd-trace-java` version 1.17.0+
+ - OpenJ9 8.0.362+ and `dd-trace-java` version 1.17.0+
 
 [3]: /profiler/profiler_troubleshooting/java/#java-8-support
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
@@ -152,7 +156,7 @@ When the service binary is built, you can use environment variables to enable an
 
 Since dd-trace-java version 1.5.0, you have two options for the CPU profiler used, Datadog or Java Flight Recorder (JFR). Since version 1.7.0, Datadog is the default, but you can also optionally enable JFR for CPU profiling. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
-The Datadog profiler records the active span on every sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
+The Datadog profiler records the active span on every sample, which improves the fidelity of the Trace to Profiling integration and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
 
 The Datadog profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
 

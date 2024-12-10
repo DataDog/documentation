@@ -4,8 +4,8 @@ title: Handling Private Action Credentials
 disable_toc: false
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
-Private Actions are in beta. Use this form to request access today.
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
 ## Overview
@@ -111,9 +111,16 @@ In the runner's connection, specify the location of the credential file on the p
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "username": "USERNAME",
-                        "token": "TOKEN",
-                        "domain": "DOMAIN"
+                        "tokenName": "username",
+                        "tokenValue": "USERNAME"
+                },
+                {
+                        "tokenName": "token",
+                        "tokenValue": "TOKEN"
+                },
+                {
+                        "tokenName": "domain",
+                        "tokenValue": "DOMAIN"
                 }
         ]
 }
@@ -134,7 +141,8 @@ For the username credential, replace `USERNAME` with your username.
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "username": "USERNAME"
+                        "tokenName": "username",
+                        "tokenValue": "USERNAME"
                 }
         ]
 }
@@ -147,7 +155,8 @@ For the token credential, replace `TOKEN` with your token.
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "token": "TOKEN"
+                        "tokenName": "token",
+                        "tokenValue": "TOKEN"
                 }
         ]
 }
@@ -160,7 +169,8 @@ For the domain credential, replace `DOMAIN` with your domain.
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "domain": "DOMAIN"
+                        "tokenName": "domain",
+                        "tokenValue": "DOMAIN"
                 }
         ]
 }

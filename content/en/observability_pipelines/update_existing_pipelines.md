@@ -138,19 +138,9 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}

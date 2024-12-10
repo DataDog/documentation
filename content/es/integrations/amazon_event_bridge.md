@@ -3,7 +3,7 @@ categories:
 - AWS
 - nube
 - notificaciones
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Un bus de eventos serverless que procesa eventos de servicios AWS, SaaS
   y tus aplicaciones casi en tiempo real.

@@ -24,7 +24,7 @@ author:
 categories:
 - os & system
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
 display_on_public_website: true
@@ -32,7 +32,7 @@ draft: false
 git_integration_title: nfsstat
 integration_id: nfsstat
 integration_title: Nfsstat
-integration_version: 1.13.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: nfsstat

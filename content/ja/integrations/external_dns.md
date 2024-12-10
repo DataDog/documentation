@@ -23,7 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 外部 DNS
-integration_version: 3.2.1
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: external_dns

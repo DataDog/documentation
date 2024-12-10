@@ -35,7 +35,7 @@ $ python2 -m pip install pylint
 
 파이썬 2 명령해석기(인터프리터) 경로가 다른 경우 위의 명령어에서 `python2`를 수정하세요.
 
-#### 사용법
+#### 사용량
 
 `pylint` 명령어를 실행해 파이썬 3에서 실행하는 커스텀 점검이나 통합을 검증하세요. 이때 `CHECK`를 파이썬 모듈이나 패키지 폴더의 유효한 경로로 수정합니다.
 
@@ -43,7 +43,7 @@ $ python2 -m pip install pylint
 $ python2 -m pylint -sn --py3k CHECK
 ```
 
-예를 들면 다음과 같습니다.
+예시:
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
@@ -106,7 +106,7 @@ from datadog_checks.base.checks import AgentCheck
 | `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...` |
 | `for value in mydict.itervalues():`<br/> &nbsp;&nbsp;`  ...`     | `from six import itervalues` <br/><br/> `for value in itervalues(mydict):`<br/> &nbsp;&nbsp;`  ...`    |
 
-또한 파이썬 3에서 `dict.keys()`, `dict.items()`, `dict.values()` 메소드는 이터레이터(iterator)를 반환합니다. 따라서 딕셔너리를 이터레이션(iteration) 중에 수정해야 하는 경우 먼저 내용을 복사하시기 바랍니다. 딕셔너리 키/아이템/값을 목록으로 가져오는 방법은 다음과 같습니다.
+또한 파이썬 3(Python 3)에서 `dict.keys()`, `dict.items()`, `dict.values()` 메서드는 이터레이터를 반환합니다. 따라서 반복 동안 사전을 수정해야 하는 경우 먼저 복사본을 만들어야 합니다. 사전의 키/항목/값을 목록으로 검색하려면 다음을 수행하세요.
 
 | 파이썬 2                        | 파이썬 2와 3                       |
 |---------------------------------|--------------------------------------|
@@ -124,7 +124,7 @@ from datadog_checks.base.checks import AgentCheck
 
 파이썬 3에는 재편성된 표준 라이브러리 기능이 있으며, 이를 통해 일부 모듈이나 함수의 명칭이 바뀌거나 이동되었습니다. 파이썬 두 버전 모두에서 `six.moves`로 이동된 모듈을 불러올 수 있습니다.
 
-| 파이썬 2            | 파이썬 3             | 파이썬 2와 3                      |
+| 파이썬 2            | Python 3             | 파이썬 2와 3                      |
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
@@ -134,7 +134,7 @@ from datadog_checks.base.checks import AgentCheck
 
 파이썬 2는 유니코드 텍스트와 바이너리 인코딩 데이터를 동일하게 취급하며 바이트와 스트링 간의 자동 변환을 시도합니다. 모든 문자가 ASCII 문자인 경우에는 문제 없이 작동하지만, ASCII 문자가 아닌 문자가 있는 경우에는 예상하지 못한 방향으로 작동합니다.
 
-| 타입    | 리터럴 | 파이썬 2 | 파이썬 3 |
+| 유형    | 리터럴 | 파이썬 2 | Python 3 |
 |---------|---------|----------|----------|
 | 바이트   | b'...'  | 바이너리   | 바이너리   |
 | 스트링     | '...'   | 바이너리   | 텍스트     |
@@ -146,7 +146,7 @@ from datadog_checks.base.checks import AgentCheck
 from io import open
 
 f = open('textfile.txt', encoding='utf-8')
-contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
+contents = f.read()  # contents will be decoded to unicode using 'utf-8'; these are not bytes!
 ```
 
 자세한 정보는 Ned Batchelder의 [Pragmatic Unicode][8]를 참조하세요.
@@ -172,7 +172,7 @@ contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; th
 
 파이썬 3에서는 `/` 연산자가 올림나눗셈(float division)을 실행합니다. `//` 연산자는 버림나눗셈을 실행합니다.
 
-#### 파이썬 3
+#### Python 3
 
 ```python
 >> 5/2
@@ -196,7 +196,7 @@ contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; th
 4
 ```
 
-#### 파이썬 3
+#### Python 3
 
 ```python
 >> round(2.5)
@@ -229,9 +229,9 @@ mypackage/
     foo.py
 ```
 
-또한 `math.py`에 `gcd`라 불리는 함수가(표준 라이브러리 `math` 모듈의 `gcd` 함수와는 다소 다른 기능 포함) 포함되며, 표준 라이브러리가 아닌 로컬 패키지의 `gcd` 함수를 사용한다고 가정해보겠습니다.
+또한 `math.py`에 표준 라이브러리 `math` 모듈의 `gcd` 함수와 미세하게 다른 `gcd` 함수가 포함되어 있고, 표준 라이브러리가 아닌 로컬 패키지의 `gcd` 함수를 사용하려 한다고 가정해 보겠습니다.
 
-파이썬 2의 경우, 패키지 내에서는 이 패키지 모듈이 글로벌 패키지보다 우선합니다. `from math import gcd`를 사용하여 `gcd`를 `mypackage/math.py`에서 불러옵니다.
+파이썬 2(Python 2)에서 패키지 내부에 있는 경우 이 패키지의 자체 모듈이 전역 모듈보다 우선합니다. `from math import gcd`를 사용하면 `mypackage/math.py`에서 `gcd`를 가져옵니다.
 
 Python 3이 경우 `.`로 시작하지 않는 불러오기 형식은 절대 임포트(absolute import)로 간주합니다. `from math import gcd`를 사용하여 표준 라이브러리에서 `gcd`를 불러옵니다.
 

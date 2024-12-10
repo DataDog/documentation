@@ -36,9 +36,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
     tag: "Blog"
     text: "Build sufficient security coverage for your cloud environment"
-  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings-2024/"
     tag: "Blog"
-    text: "Key learnings from the State of Cloud Security study"
+    text: "Key learnings from the 2024 State of Cloud Security study"
   - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
     tag: "Blog"
     text: "Detect malware in your containers with Datadog Cloud Security Management"
@@ -52,7 +52,7 @@ further_reading:
     tag: "Blog"
     text: "How we use Datadog for detection as code"
 algolia:
-  tags: ['inbox']
+  tags: ['csm', 'cloud security management', 'inbox']
 cascade:
     algolia:
         subcategory: Cloud Security Management
@@ -95,7 +95,7 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
+<div class="alert alert-info">Resource Catalog is in Preview.</div>
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
 

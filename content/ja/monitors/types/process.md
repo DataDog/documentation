@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
@@ -94,7 +94,7 @@ title: ライブプロセスモニター
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/infrastructure/process/
-[2]: https://app.datadoghq.com/monitors#create/live_process
+[2]: https://app.datadoghq.com/monitors/create/live_process
 [3]: /ja/infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
 [5]: /ja/monitors/configuration/#advanced-alert-conditions

@@ -186,7 +186,7 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-Sample rate is a required parameter in Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 means no replays are recorded and 100 means all RUM sessions contain replay.
+The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied. 
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
@@ -220,9 +220,9 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 {{% /tab %}}
 {{< /tabs >}}
 
-### Start the recording manually
+### Start or stop the recording manually
 
-By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`.
+By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -233,6 +233,7 @@ By default, Session Replay starts recording automatically. However, if you prefe
         .build()
     // Do something 
     SessionReplay.startRecording()
+    SessionReplay.stopRecording()
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -246,6 +247,7 @@ By default, Session Replay starts recording automatically. However, if you prefe
     )
     // Do something 
     SessionReplay.startRecording()
+    SessionReplay.stopRecording()
 {{< /code-block >}}
 
 {{% /tab %}}

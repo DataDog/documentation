@@ -27,7 +27,7 @@ categories:
 - security
 - 構成 & デプロイ
 - containers
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 4.1.2
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: cert_manager

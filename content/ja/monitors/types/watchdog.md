@@ -21,32 +21,32 @@ title: Watchdog モニター
 
 Datadog で [Watchdog モニター][2]を作成するには、メインナビゲーションを使用して次のように移動します: *Monitors --> New Monitor --> Watchdog*。
 
-{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-1.png" alt="Configuring a Watchdog Monitor" style="width:80%;">}}
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-1.png" alt="Watchdog モニターの構成" style="width:80%;">}}
 
-## Define your query
-Select the scope to be alerted on with the following optional configurations (wildcards are supported):
+## クエリを定義する
+次のオプション構成を使用して、アラート設定する範囲を選択します (ワイルドカードがサポートされています)。
 
 **1. 定義済みセレクタ**
-* Environment. These values are derived from the `env` tag.
-* Alert Category. Scope the monitor to a subset of Watchdog alerts.
-* Team. These values are derived from the Service Catalog.
+* Environment。これらの値は `env` タグから取得されます。
+* Alert Category。モニターを Watchdog アラートのサブセットに範囲設定します。
+* Team。これらの値はサービスカタログから取得されます。
 
-**2. Additional scoping**
-* Filter on any additional tag available on the Watchdog event.
-* Group By the dimensions you want to [group notifications by][3].
-{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-2.png" alt="Configuring a Watchdog Monitor with advanced settings" style="width:90%;">}}
+**2. 追加の範囲選択**
+* Watchdog イベントで利用可能な任意の追加タグでフィルタリングします。
+* [通知をグループ化][3]したいディメンションで Group By (グループ化) します。
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-2.png" alt="高度な設定を使用した Watchdog モニターの構成" style="width:90%;">}}
 
 選択が完了すると、モニター作成ページの上部にあるグラフに、選択した時間枠の中で一致した Watchdog イベントが表示されます。
 
 ### 通知
 
-For more instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
+**Configure notifications and automations** セクションの詳細な手順については、[通知][4]ページを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/watchdog/
-[2]: https://app.datadoghq.com/monitors#create/watchdog
+[2]: https://app.datadoghq.com/monitors/create/watchdog
 [3]: /ja/monitors/configuration/?tab=thresholdalert#alert-grouping
 [4]: /ja/monitors/notify/

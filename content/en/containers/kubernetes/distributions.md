@@ -243,6 +243,8 @@ GKE Autopilot requires some configuration, shown below.
 
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
+**Note**: Cloud Network Monitoring is not supported for GKE Autopilot.
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
@@ -292,30 +294,11 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Spot pods and instances
+### Spot pods and compute classes
 
-Using Spot Pods in GKE Autopilot clusters introduces taints to these GKE nodes. To use Spot Pods, additional configuration is required to provide the Datadog Agent with tolerations.
+Using [Spot Pods][10] in GKE Autopilot clusters introduces [taints][9] to the corresponding Spot GKE nodes. When using Spot Pods, additional configuration is required to provide the Agent DaemonSet with a matching toleration.
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    nodeAgent:
-      tolerations:
-        - effect: NoSchedule
-          key: cloud.google.com/gke-spot
-          operator: Equal
-          value: "true"
-```
-{{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
 agents:
@@ -330,7 +313,23 @@ agents:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
+Similarly when using [GKE Autopilot Compute classes][11] to run workloads that have specific hardware requirements, take note of the [taints][9] that GKE Autopilot is applying to these specific nodes and add matching tolerations to the Agent DaemonSet. You can match the tolerations on your corresponding pods. For example for the `Scale-Out` compute class use a toleration like:
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+```yaml
+agents:
+  #(...)
+  # agents.tolerations -- Allow the DaemonSet to schedule on tainted nodes (requires Kubernetes >= 1.6)
+  tolerations:
+  - effect: NoSchedule
+    key: cloud.google.com/compute-class
+    operator: Equal
+    value: Scale-Out
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Red Hat OpenShift {#Openshift}
 
@@ -611,3 +610,6 @@ agents:
 [6]: /agent/guide/operator-eks-addon
 [7]: /containers/kubernetes/apm/?tab=tcp
 [8]: /tracing/guide/setting_up_apm_with_kubernetes_service
+[9]: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+[10]: https://cloud.google.com/kubernetes-engine/docs/how-to/autopilot-spot-pods
+[11]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes

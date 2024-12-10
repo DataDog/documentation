@@ -939,18 +939,44 @@ menu:
       parent: dev_tools
       identifier: dev_tools_guides
       weight: 9
+    - name: Administrator's Guide
+      url: administrators_guide/
+      pre: organization
+      parent: essentials_heading
+      identifier: administrators_guide
+      weight: 80000
+    - name: Getting Started
+      url: administrators_guide/getting_started/
+      parent: administrators_guide
+      identifier: administrators_guide_getting_started
+      weight: 1
+    - name: Plan
+      url: administrators_guide/plan/
+      parent: administrators_guide
+      identifier: administrators_guide_plan
+      weight: 2
+    - name: Build
+      url: administrators_guide/build/
+      parent: administrators_guide
+      identifier: administrators_guide_build
+      weight: 3
+    - name: Run
+      url: administrators_guide/run/
+      parent: administrators_guide
+      identifier: administrators_guide_run
+      weight: 4
     - name: API
       url: api/
       pre: api
       identifier: api
       parent: essentials_heading
-      weight: 80000
+      weight: 90000
     - name: モバイルアプリケーション
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 90000
+      weight: 100000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -961,7 +987,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 100000
+      weight: 110000
     - name: トラブルシューティング
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -4797,7 +4823,7 @@ menu:
       parent: log_collection
       identifier: log_collection_java
       weight: 109
-    - name: NodeJS
+    - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
@@ -5442,11 +5468,6 @@ menu:
       parent: appsec_threats_management_setup
       identifier: appsec_compat_threats_mgmt
       weight: 701
-    - name: Using Single Step Instrumentation
-      url: security/application_security/threats/setup/single_step/
-      parent: appsec_threats_management_setup
-      identifier: appsec_threats_setup_using_single_step
-      weight: 702
     - name: Using Datadog Tracing Libraries
       url: security/application_security/threats/setup/threat_detection/
       parent: appsec_threats_management_setup

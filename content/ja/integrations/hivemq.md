@@ -27,7 +27,7 @@ categories:
 - iot
 - ログの収集
 - メッセージキュー
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.8.0
+integration_version: 2.1.0
 is_public: true
 manifest_version: 2.0.0
 name: hivemq

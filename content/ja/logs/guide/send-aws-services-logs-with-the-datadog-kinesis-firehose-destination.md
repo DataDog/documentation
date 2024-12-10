@@ -12,6 +12,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: GitHub
   text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: ガイド
+  text: データ転送料金を削減しながら Datadog にログを送信する方法
 title: Datadog Amazon Data Firehose Destination を使用して AWS サービスログを送信する
 ---
 
@@ -138,7 +141,7 @@ AWS CLI で設定する例としては、[Kinesis データストリームを使
 
 ### 検証
 
-[CloudWatch][1] のロググループの詳細ページの **Subscription filters** 田部井をチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
+[CloudWatch][1] のロググループの詳細ページの **Subscription filters** タブをチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
 
 ### Datadog でログを確認する
 

@@ -270,7 +270,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
         # enable the odbc connector
         connector: odbc
         # enable the ODBC driver
-        driver: ODBC Driver 13 for SQL Server
+        driver: '{ODBC Driver 13 for SQL Server}'
         username: <USERNAME>
         password: <PASSWORD>
     ```

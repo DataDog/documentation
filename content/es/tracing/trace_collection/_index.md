@@ -33,11 +33,11 @@ Instrumentar la aplicación permite enviar datos de observabilidad al Agent, que
 
 ## Tipos de instrumentación
 
-Hay dos enfoques principales para instrumentar tu aplicación: instrumentación automática o personalizada.
+Existen dos enfoques principales para instrumentar tu aplicación: automático o personalizado {{< tooltip glossary="Instrumentación" >}}.
 
 ### Instrumentación automática
 
-Crea tramos para tu aplicación con un mínimo de pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
+Crea {{< tooltip glossary="tramos" >}} para tu aplicación con pocos pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
 
 - [Instrumentación de paso único (fase beta)][7]: ejecuta un comando de instalación de una sola línea para instalar el Datadog Agent , habilitar APM e instrumentar todos tus servicios en tu host de Linux, máquina virtual, o contenedor.
 - [Bibliotecas de Datadog][8]: añade bibliotecas de rastreo de Datadog a tu aplicación.
@@ -57,25 +57,25 @@ Para más información, consulta [Instrumentación personalizada][6].
 
 Los siguientes tutoriales te guiarán a través de la configuración de trazas distribuidas para una aplicación de ejemplo en varios escenarios de infraestructura, tanto con una instrumentación automática como personalizada, mediante bibliotecas de rastreo de Datadog:
 
-{{< whatsnext desc="Choose your language and environment:" >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Activar el rastreo en una aplicación Python en el mismo host que el Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Activar el rastreo de una aplicación Python y Datadog Agent en contenedores{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Activar el rastreo de una aplicación Python en un acontenedor y un Agent en un host{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Activar el rastreo en una aplicación Java en el mismo host y Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Activar el rastreo en una aplicación Java y Datadog Agent en contenedores{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Activar el rastreo en una aplicación Java en un contenedor y un Agent en un host{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> Activar el rastreo de una aplicación Java en GKE{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Activar el rastreo de una aplicación Java en AWS EKS{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Activar el rastreo de una aplicación Java en Amazon ECS con EC2{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Activar el rastreo de una aplicación Java en Amazon ECS con Fargate{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Activar el rastreo de una aplicación Java con el Controlador de admisiones (Admission Controller){{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Activar el rastreo de una aplicación Go en el mismo host y Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Activar el rastreo de una aplicación Go y Datadog Agent en contenedores{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Activar el rastreo de una aplicación Go en Amazon ECS con EC2{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Activar el rastreo de una aplicación Go en Amazon ECS con Fargate{{< /nextlink >}}
+{{< whatsnext desc="Elige tu lenguaje y entorno:" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Habilitación del rastreo en una aplicación Python en el mismo host que el Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Habilitación del rastreo en una aplicación Python y un Datadog Agent en contenedores{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Habilitación del rastreo para una aplicación Python en un contenedor y un Agent en un host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Habilitación del rastreo en una aplicación Java en el mismo host que el Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Habilitación del rastreo en una aplicación Java y un Datadog Agent en contenedores{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Habilitación del rastreo para una aplicación Java en un contenedor y un Agent en un host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> Habilitación del rastreo para una aplicación Java en GKE{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Habilitación del rastreo para una aplicación Java en AWS EKS{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Habilitación del rastreo para una aplicación Java en Amazon ECS con EC2{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Habilitación del rastreo para una aplicación Java en Amazon ECS con Fargate{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Habilitación del rastreo para una aplicación Java con el Controlador de admisión{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Habilitación del rastreo en una aplicación Go en el mismo host que el Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Habilitación del rastreo en una aplicación Go y un Datadog Agent en contenedores{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Habilitación del rastreo para una aplicación Go en Amazon ECS con EC2{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Habilitación del rastreo para una aplicación Go en Amazon ECS con Fargate{{< /nextlink >}}
 
 {{< /whatsnext >}}
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

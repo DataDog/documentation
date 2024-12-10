@@ -82,7 +82,7 @@ Esto inyecta automáticamente el ID de traza a tus logs cuando logueas con el co
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/logs/log_collection/go/#configure-your-logger
 [2]: /es/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

@@ -18,10 +18,10 @@ assets:
     source_type_id: 57
     source_type_name: Fastly
   monitors:
-    '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
-    '[Fastly] Abnormal bandwidth being sent for service: {{service.name}}': assets/monitors/rec_monitor_bandwidth.json
-    '[Fastly] High volume of requests triggering a Web Application Firewall rule on service: {{service.name}}': assets/monitors/waf_rules.json
-    '[Fastly] Low Hit Ratio for service: {{service.name}}': assets/monitors/rec_monitor_hit_ratio.json
+    5XX errors are higher than usual: assets/monitors/rec_monitor_5xx_errors.json
+    'Hit Ratio is low ': assets/monitors/rec_monitor_hit_ratio.json
+    Sent bandwidth is abnormally high: assets/monitors/rec_monitor_bandwidth.json
+    Web application firewall rule is triggered: assets/monitors/waf_rules.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -31,7 +31,7 @@ categories:
 - caching
 - log collection
 - metrics
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -130,7 +130,7 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 ##### Syslog エンドポイントの構成
 
 1. エンドポイントに名前を付けます (例: `Datadog`)。
-2. Configure the log format to include the recommended Datadog-Fastly log format with [your Datadog API key][3] at the beginning. See [Using the JSON logging format][2] in the Fastly documentation for an example.
+2. ログ形式を構成して、推奨される[Datadog-Fastly ログ形式][2]の先頭に[Datadog API キー][3]を含めます。例については、Fastly のドキュメントの [JSON ログ形式の使用][2]を参照してください。
 
     ```text
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>

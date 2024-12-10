@@ -253,6 +253,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3298564989",
+      "description": "Create a new dashboard with llm_observability_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2029850837",
       "description": "Create a new dashboard with log_stream widget"
     },

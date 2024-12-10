@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: Empezando con el Agent
   title: Instalar el Agent
-- desc: Reúne métricas, trazas (traces) y logs con más de 750 integraciones incorporadas
+- desc: Reúne métricas, trazas (traces) y logs con más de 800 integraciones incorporadas
     para enviar a Datadog.
   link: getting_started/integrations/
   link_text: Empezando con las integraciones

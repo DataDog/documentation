@@ -94,7 +94,7 @@ Inicia sesión como `sysdba` y concede los siguientes permisos:
 
 Inicia sesión como `sysdba`, crea una nueva `view` en el esquema `sysdba` y concede acceso al usuario del Agent:
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Multiinquilino" %}}
 {{% dbm-multitenant-view-create-sql %}}
@@ -108,7 +108,7 @@ Inicia sesión como `sysdba`, crea una nueva `view` en el esquema `sysdba` y con
 {{% dbm-oracle-11-view-create-sql %}}
 {{% /tab %}}
 
-{{< /pestañas >}}
+{{< /tabs >}}
 
 ### Instalación del Agent
 

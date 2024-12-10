@@ -14,7 +14,7 @@ Inferred service dependencies are in Preview. To request access, complete the fo
 
 ## Overview
 
-Inferred services improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
+[Inferred services][1] improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
 
 ### Before inferred services
 
@@ -136,7 +136,7 @@ Similarly, for a span representing a call to a mySQL database:
 ## Glossary
 
 ##### Service override
-A service name set for a span which differs from the default `DD_SERVICE` name. It can be set [automatically]((#integration-service-overrides)) by some Datadog integrations, or [manually]((#custom-service-overrides)) by users.
+A service name set for a span which differs from the default `DD_SERVICE` name. It can be set [automatically](#integration-service-overrides) by some Datadog integrations, or [manually](#custom-service-overrides) by users.
 
 ##### Base service
 The default `DD_SERVICE` name.

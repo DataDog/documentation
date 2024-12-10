@@ -59,6 +59,8 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
   - SNS and SQS direct integration
   - Kinesis
   - EventBridge
+  - DynamoDB
+  - S3
 - Tracing dozens of additional out-of-the-box [Python][3] and [Node.js][4] libraries.
 
 For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5].
@@ -108,7 +110,39 @@ For .NET serverless applications, Datadog recommends [installing Datadog's traci
 
 Learn more about [tracing through .NET Azure serverless applications][15].
 
-### Hybrid environments
+## Span Auto-linking
+Datadog automatically detects linked spans when segements of your asynchronous requests cannot propogate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. Span Auto-links appear in the [Span Links tab][30] in the Datadog Trace UI. 
+
+This feature is available in Python version 101 and higher. 
+
+**Note:** Span Auto-linking may not link traces if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
+
+If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Backward` link. 
+
+If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Forward` link. 
+
+This functionality is available for Python instrumented AWS Lambda functions on layer version 101 and above and python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
+
+### DyanmoDB Change Stream Auto-linking
+
+For [DyanmoDB Change Streams][29], Span Auto-linking supports the following operations:
+
+- `PutItem`
+- `UpdateItem`
+- `DeleteItem`
+- `BatchWriteItem`
+- `TransactWriteItems`
+
+### S3 Change Notification Auto-linking
+
+For [S3 Change Notifications][28], Span Auto-linking supports the following operations:
+
+- `PutObject`
+- `CompleteMultipartUpload`
+- `CopyObject`
+
+
+## Hybrid environments
 
 If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
@@ -116,11 +150,9 @@ If `dd-trace` is installed on your hosts with the Datadog Agent, and your server
 
 Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. See the [Datadog APM documentation][16] to learn more about tracing in container or host-based environments.
 
-## Profiling your Lambda Functions (Public Beta)
+## Profiling your Lambda Functions
 
-<div class="alert alert-info">During the beta period, profiling is available at no additional cost.</div>
-
-Datadog's [Continuous Profiler][27] is available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -360,3 +392,7 @@ If you are already tracing your serverless application with X-Ray and want to co
 [25]: /tracing/trace_collection/custom_instrumentation/
 [26]: /serverless/guide/handler_wrapper/
 [27]: /profiler/
+[28]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html
+[29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[30]: https://docs.datadoghq.com/tracing/trace_explorer/trace_view/?tab=spanlinksbeta
+[31]: https://github.com/DataDog/dd-trace-py/

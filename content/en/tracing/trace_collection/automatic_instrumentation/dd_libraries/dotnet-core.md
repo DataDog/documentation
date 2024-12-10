@@ -49,7 +49,7 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
+The .NET Tracer supports instrumentation on .NET Core 3.1, .NET 5, .NET 6, .NET 7, .NET 8, and .NET 9.
 
 For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
@@ -64,7 +64,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-info">
-  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
+  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project.
 </div>
 
 ### Installation
