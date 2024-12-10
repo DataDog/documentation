@@ -133,6 +133,28 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 [3]: /real_user_monitoring/kotlin-multiplatform/#add-native-dependencies-for-ios
 
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+All Session Replay SDK versions can be found in the [npmjs repository][1].
+
+To set up Mobile Session Replay for React Native:
+
+1. Make sure you've [setup and initialized the Datadog React Native SDK][2] with views instrumentation enabled.
+
+2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version.
+
+2. Enable Session Replay in your app, after initializing the Datadog SDK:
+   {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+   import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+
+   SessionReplay.enable();
+   {{< /code-block >}}
+
+[1]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions\
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Web view instrumentation
@@ -175,11 +197,25 @@ To instrument your consolidated web and native Session Replay views for iOS:
 
 To instrument your consolidated web and native Session Replay views for Kotlin Multiplatform:
 
-1. Enable [web view tracking][1] for your mobile application.
+1. Enable [webview tracking][1] for your mobile application.
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
+[2]: /real_user_monitoring/session_replay/browser/#setup
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+To instrument your consolidated web and native Session Replay views for React Native:
+
+1. Enable [webview tracking][1] for your React Native application.
+2. Enable [Session Replay][2] for your web application.
+3. Enable Session Replay for your mobile application (see setup instructions above).
+
+This feature is **not compatible with new architecture** on Android.
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
 [2]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -220,6 +256,15 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+
+SessionReplay.enable({
+  replaySampleRate: [sampleRate]
+});
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Start or stop the recording manually
@@ -252,6 +297,19 @@ By default, Session Replay starts recording automatically. However, if you prefe
     SessionReplay.stopRecording()
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+
+SessionReplay.enable({
+  replaySampleRate: sampleRate,
+  startRecordingImmediately: false
+});
+// Do something
+SessionReplay.startRecording();
+SessionReplay.stopRecording();
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -287,6 +345,21 @@ If everything is fine, following logs should appear in the Xcode debug console i
 
 {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
 Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Set the verbosity to `DEBUG` when you initialize the SDK:
+
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
+import { SdkVerbosity } from "@datadog/mobile-react-native";
+
+...
+
+config.verbosity = SdkVerbosity.DEBUG;
+
 {{< /code-block >}}
 
 {{% /tab %}}
