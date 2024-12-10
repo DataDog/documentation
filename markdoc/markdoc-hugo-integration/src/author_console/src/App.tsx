@@ -60,8 +60,10 @@ function App() {
             value={currentTabIndex}
             onChange={handleTabChange}
             aria-label="basic tabs example"
+            TabIndicatorProps={{ style: { backgroundColor: '#632ca6' } }}
+            textColor="inherit"
           >
-            <Tab label="Build status" {...a11yProps(0)} />
+            <Tab label="Build status" {...a11yProps(0)} sx={{ color: '#632ca6' }} />
             {/* <Tab label="Create" {...a11yProps(1)} /> */}
           </Tabs>
         </Box>
