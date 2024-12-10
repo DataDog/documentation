@@ -173,7 +173,7 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 
 {{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
 
-[101]: https://app.datadoghq.com/integrations/elastic-cloud-ccm
+[101]: https://app.datadoghq.com/integrations/elastic-cloud
 [102]: https://cloud.elastic.co/account/keys
 
 {{% /tab %}}
