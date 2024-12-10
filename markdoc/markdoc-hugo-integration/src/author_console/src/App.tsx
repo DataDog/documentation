@@ -71,10 +71,12 @@ function App() {
           {dbData.hasErrors && (
             <Alert
               severity="error"
-              icon={<ErrorIcon />}
-              sx={{ padding: '10px', paddingBottom: '5px' }}
+              icon={<ErrorIcon sx={{ color: '#eb364b' }} />}
+              sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#fdebed' }}
             >
-              <AlertTitle sx={{ marginTop: '0px' }}>This build has errors.</AlertTitle>
+              <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>
+                This build has errors.
+              </AlertTitle>
             </Alert>
           )}
           <ErrorsReport {...dbData.errors} />

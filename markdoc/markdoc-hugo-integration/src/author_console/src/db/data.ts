@@ -738,7 +738,7 @@ export const dbData: DbData = {
               id: 'really-long-error',
               level: 'critical',
               message:
-                "This isn't a real error, but it's long enough to test the UI's handling of long error messages. And I mean really long messages, like they just go on and on and on. It's ridiculous!"
+                "This isn't a real error, but it's long enough to test the UI's handling of long error messages. And I mean really long messages, like they just go on and on and on. It's ridiculous! Like how much information can one error contain? More pointedly, how much information SHOULD the error contain? Surely not this much. Surely."
             },
             lines: [9, 10],
             file: '/en/missing_closing_tag.mdoc.md'
