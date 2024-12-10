@@ -29,7 +29,7 @@ const ParsingErrorsReport = (props: {
             >
               <h3>{filename}</h3>
               <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
-                <a href={vscodeLink}>view in VS Code</a>
+                <a href={vscodeLink}>open file in VS Code</a>
               </div>
               <TableContainer component={Paper} elevation={0}>
                 <Table>
@@ -86,7 +86,7 @@ const ValidationErrorsReport = (props: {
             >
               <h3>{filename}</h3>
               <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
-                <a href={vscodeLink}>view in VS Code</a>
+                <a href={vscodeLink}>open file in VS Code</a>
               </div>
               <ul>
                 {validationErrors.map((validationError, i) => {
