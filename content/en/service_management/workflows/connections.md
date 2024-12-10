@@ -106,6 +106,13 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
+## Connection tags
+
+You can add tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
+- Tags must follow the format `tag:value`, and additional colons are not allowed. For example, the tags `env:staging:east` and `env` are invalid formats for connection tags.
+- Tags must start with a letter, after which they can contain alphanumerics, underscores, minuses, slashes, and exactly one colon.
+- `default` is a reserved value for connection tags. It can't be used as a stand-alone tag key or a tag value. For example, `default:yes` and `aws:default` are invalid for connection tags.
+
 ## Connection groups
 
 You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
@@ -175,3 +182,4 @@ To delete a connection group:
 [10]: /service_management/workflows/actions/http/
 [11]: https://datadoghq.slack.com/
 [12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
+[13]: /getting_started/tagging/
