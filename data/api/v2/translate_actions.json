@@ -339,10 +339,6 @@
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
   },
-  "GetCloudCostActivity": {
-    "description": "Get the Cloud Cost Management activity.",
-    "summary": "Cloud Cost Enabled"
-  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -398,7 +394,7 @@
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
   "CreateDataDeletionRequest": {
-    "description": "Creates a data deletion request by providing a query and a time frame targeting the proper data.",
+    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
     "summary": "Creates a data deletion request",
     "request_description": "",
     "request_schema_description": "Object needed to create a data deletion request."

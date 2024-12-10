@@ -2,7 +2,7 @@
 title: Cloud Network Monitoring Guides
 aliases:
     - /network_performance_monitoring/guide/
-private: true
+    - /network_monitoring/performance/guide/
 disable_toc: true
 ---
 
