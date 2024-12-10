@@ -300,6 +300,8 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 
 <div class="alert alert-info">The Java client library version 1.12.0 or later is required.</div>
 
+#### Containers
+
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
@@ -332,6 +334,8 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% tab "PHP" %}}
 
 <div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+
+#### Containers
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
