@@ -40792,9 +40792,9 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
-              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
-              \   }\n  }\n}"
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test-rum-{{ unique_hash }}\",\n        \"type\":
+              \"ios\"\n    }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
       x-permission:
