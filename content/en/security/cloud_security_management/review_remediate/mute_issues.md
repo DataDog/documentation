@@ -47,7 +47,7 @@ Muted issues automatically unmute after the specified mute duration expires. You
 
 To view your organization's muted issues:
 
-1. By default, the Misconfigurations and Identity Risks issue explorers hide muted issues. To view muted issues, remove the `@workflow.triage.status:(open OR in-progress)` filter from the search bar.
+1. By default, all issue explorers hide muted issues. To view muted issues on the Misconfigurations and Identity Risks issue explorers, remove the `@workflow.triage.status:(open OR in-progress)` filter from the search bar.
 1. Depending on the issue explorer you're using, sort or filter the issues:
    - On the Misconfigurations issue explorer, sort by the **Muted** column.
    - On the Misconfigurations or Identity Risks issue explorers, filter issues using the **Muted** facet.
