@@ -25,7 +25,7 @@ further_reading:
 
 Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
 
-Shared dashboards refresh every 60 seconds aproximately and this [refresh rate][1] cannot be customized.
+Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
 ## Share states
 
