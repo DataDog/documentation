@@ -42,28 +42,6 @@ function a11yProps(index: number) {
   };
 }
 
-const Button = styled.button`
-  padding: 15px;
-  background-color: Indigo;
-  font-size: 18px;
-  border-radius: 4px;
-  border-color: Indigo;
-  color: white;
-  font-weight: bold;
-  &:hover {
-    background-color: DeepPink;
-    border-color: DeepPink;
-  }
-`;
-
-const ExampleWrapper = styled.div`
-  padding: 20px;
-  padding-top: 0;
-  margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-`;
-
 function App() {
   const [dbData, _setDbData] = useState<DbData>(dbDataOnDisk);
 

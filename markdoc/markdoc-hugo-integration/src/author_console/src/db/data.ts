@@ -732,6 +732,16 @@ export const dbData: DbData = {
             },
             lines: [9, 10],
             file: '/en/missing_closing_tag.mdoc.md'
+          },
+          {
+            error: {
+              id: 'really-long-error',
+              level: 'critical',
+              message:
+                "This isn't a real error, but it's long enough to test the UI's handling of long error messages. And I mean really long messages, like they just go on and on and on. It's ridiculous!"
+            },
+            lines: [9, 10],
+            file: '/en/missing_closing_tag.mdoc.md'
           }
         ]
     },

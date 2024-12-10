@@ -36,7 +36,7 @@ const ParsingErrorsReport = (props: {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell sx={{ fontSize: '1em', width: '20px' }}></TableCell>
+                      <TableCell sx={{ fontSize: '1em', width: '25px' }}></TableCell>
                       <TableCell sx={{ fontSize: '1em', width: '75px' }}>
                         At line
                       </TableCell>
@@ -53,7 +53,8 @@ const ParsingErrorsReport = (props: {
                               sx={{
                                 paddingTop: '0',
                                 marginRight: '0px',
-                                marginLeft: '-10px'
+                                marginLeft: '-10px',
+                                marginTop: '8px'
                               }}
                             />
                           </TableCell>
@@ -134,13 +135,19 @@ const ErrorsReport = (props: {
 }) => {
   return (
     <div>
+      <p>
+        Checking the box next to an error has no effect — it's optional and just for your
+        reference.
+      </p>
       <h2>Parsing errors</h2>
-      <p>Some files could not be parsed by the compiler.</p>
+      <p>Some files could not be parsed by Markdoc.</p>
       <ParsingErrorsReport
         parsingErrorReportsByFilePath={props.parsingErrorReportsByFilePath}
       />
       <h2>Validation errors</h2>
-      <p>Some files contained incorrect configuration values or other invalid data.</p>
+      <p>
+        Some files contained incorrect filter configuration values or other invalid data.
+      </p>
       <ValidationErrorsReport
         validationErrorsByFilePath={props.validationErrorsByFilePath}
       />
