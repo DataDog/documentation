@@ -47,7 +47,11 @@ const ErrorsPrintout = (props: {
                       </TableCell>
                     )}
                     {errors.some((error) => error.searchTerm) && (
-                      <TableCell sx={{ fontSize: '1em' }}>Click to copy</TableCell>
+                      <TableCell sx={{ fontSize: '1em' }}>
+                        Suggested search term
+                        <br />
+                        (click to copy)
+                      </TableCell>
                     )}
                   </TableRow>
                 </TableHead>
