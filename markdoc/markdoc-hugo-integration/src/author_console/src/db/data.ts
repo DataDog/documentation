@@ -1,8 +1,8 @@
-import { DbData } from './types';
+import { AuthorConsoleData } from '../../../schemas/authorConsole';
 
-export const dbData: DbData = {
-  allowlist: {
-    prefsById: {
+export const dbData: AuthorConsoleData = {
+  glossary: {
+    filtersById: {
       color: {
         id: 'color',
         display_name: 'Color',
@@ -710,69 +710,134 @@ export const dbData: DbData = {
       }
     }
   },
-  hasErrors: true,
-  errors: {
-    parsingErrorReportsByFilePath: {
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/missing_closing_tag.mdoc.md':
-        [
-          {
-            error: {
-              id: 'missing-closing',
-              level: 'critical',
-              message: "Node 'if' is missing closing"
-            },
-            lines: [6, 7],
-            file: '/en/missing_closing_tag.mdoc.md'
-          },
-          {
-            error: {
-              id: 'missing-closing',
-              level: 'critical',
-              message: "Node 'if' is missing closing"
-            },
-            lines: [9, 10],
-            file: '/en/missing_closing_tag.mdoc.md'
-          },
-          {
-            error: {
-              id: 'really-long-error',
-              level: 'critical',
-              message:
-                "This isn't a real error, but it's long enough to test the UI's handling of long error messages. And I mean really long messages, like they just go on and on and on. It's ridiculous! Like how much information can one error contain? More pointedly, how much information SHOULD the error contain? Surely not this much. Surely."
-            },
-            lines: [9, 10],
-            file: '/en/missing_closing_tag.mdoc.md'
-          }
-        ]
+  buildStatus: {
+    hasErrors: true,
+    errorsByFilePath: {
+      '/en/bad_interpolated_options_source.mdoc.md': [
+        {
+          message:
+            "Invalid options source: The options source 'orange_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'green_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'indigo_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'orange_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'green_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'indigo_item_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
+        }
+      ],
+      '/en/bad_literal_options_source.mdoc.md': [
+        {
+          message:
+            "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'yellow_object_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'blue_object_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'yellow_object_options', which is required for the filter ID 'item', does not exist."
+        },
+        {
+          message:
+            "Invalid options source: The options source 'blue_object_options', which is required for the filter ID 'item', does not exist."
+        }
+      ],
+      '/en/bad_nested_pref_value_reference.mdoc.md': [
+        {
+          message:
+            'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
+          searchTerm: 'bleu'
+        },
+        {
+          message:
+            'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
+          searchTerm: 'bleu'
+        }
+      ],
+      '/en/bad_placeholder.mdoc.md': [
+        {
+          message:
+            "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item.",
+          searchTerm: '<COLOUR>_item_options'
+        },
+        {
+          message:
+            "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item.",
+          searchTerm: '<COLOUR>_item_options'
+        }
+      ],
+      '/en/bad_pref_value_reference.mdoc.md': [
+        {
+          message:
+            'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
+          searchTerm: 'bleu'
+        },
+        {
+          message:
+            'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".',
+          searchTerm: 'bleu'
+        }
+      ],
+      '/en/bad_variable_id.mdoc.md': [
+        {
+          message: 'Invalid filter ID found in markup: colour',
+          searchTerm: 'colour'
+        },
+        {
+          message: 'Invalid filter ID found in markup: colour',
+          searchTerm: 'colour'
+        }
+      ],
+      '/en/missing_closing_tag.mdoc.md': [
+        {
+          message: "Node 'if' is missing closing",
+          lines: [6, 7]
+        },
+        {
+          message: "Node 'if' is missing closing",
+          lines: [9, 10]
+        },
+        {
+          message: "Node 'if' is missing closing",
+          lines: [6, 7]
+        },
+        {
+          message: "Node 'if' is missing closing",
+          lines: [9, 10]
+        }
+      ]
     },
-    validationErrorsByFilePath: {
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_interpolated_options_source.mdoc.md':
-        [
-          "Invalid options source: The options source 'orange_item_options', which is required for the filter ID 'item', does not exist.",
-          "Invalid options source: The options source 'green_item_options', which is required for the filter ID 'item', does not exist.",
-          "Invalid options source: The options source 'indigo_item_options', which is required for the filter ID 'item', does not exist.",
-          "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
-        ],
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_literal_options_source.mdoc.md':
-        [
-          "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist.",
-          "Invalid options source: The options source 'yellow_object_options', which is required for the filter ID 'item', does not exist.",
-          "Invalid options source: The options source 'blue_object_options', which is required for the filter ID 'item', does not exist."
-        ],
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_nested_pref_value_reference.mdoc.md':
-        [
-          'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".'
-        ],
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_placeholder.mdoc.md':
-        [
-          "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item."
-        ],
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_pref_value_reference.mdoc.md':
-        [
-          'Invalid value found in markup: "bleu" is not a valid value for the filter ID "color".'
-        ],
-      '/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/bad_variable_id.mdoc.md':
-        ['Invalid filter IDs found in markup: colour']
-    }
+    timestamp: 1733868046
   }
 };

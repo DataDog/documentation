@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { dbData as dbDataOnDisk } from './db/data';
-import { DbData } from './db/types';
+import { AuthorConsoleData } from '../../schemas/authorConsole';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -41,7 +41,7 @@ function a11yProps(index: number) {
 }
 
 function App() {
-  const [dbData, _setDbData] = useState<DbData>(dbDataOnDisk);
+  const [consoleData, _setConsoleData] = useState<AuthorConsoleData>(dbDataOnDisk);
 
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
@@ -66,7 +66,7 @@ function App() {
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
-          {dbData.hasErrors && (
+          {consoleData.buildStatus.hasErrors && (
             <Alert
               severity="error"
               icon={<ErrorIcon sx={{ color: '#eb364b' }} />}
@@ -77,11 +77,13 @@ function App() {
               </AlertTitle>
             </Alert>
           )}
-          <ErrorsReport {...dbData.errors} />
+          <ErrorsReport errorsByFilePath={consoleData.buildStatus.errorsByFilePath} />
         </CustomTabPanel>
+        {/*
         <CustomTabPanel value={currentTabIndex} index={1}>
-          <PrefsBuilder allowlist={dbData.allowlist} />
+          <PrefsBuilder glossary={consoleData.glossary} />
         </CustomTabPanel>
+        */}
       </Box>
     </>
   );
