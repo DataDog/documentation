@@ -9,7 +9,7 @@ further_reading:
 ## Overview
 
 Intelligent Correlation uses a Machine Learning modeling approach. It automatically correlates Datadog Monitor events on your behalf, using underlying telemetry gathered within Datadog, and other heuristics.
-## Preview Intelligent Correlation
+## Enable Intelligent Correlation
 
 To get started:
 1. Navigate to the [Correlation Settings][1] page, and click [Preview Cases][2]. 
