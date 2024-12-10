@@ -110,7 +110,12 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 
 You can add identifier tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
 - Identifier tags must follow the format `tag:value`, and additional colons are not allowed. For example, the identifier tags `env:staging:east` and `env` are invalid formats for connection tags.
-- Identifier tags must start with a letter, after which they can contain alphanumerics, underscores, minuses, slashes, and exactly one colon.
+- Identifier tags must start with a letter, after which they can contain:
+    - Alphanumerics
+    - Underscores
+    - Minuses
+    - Slashes
+    - Exactly one colon
 - `default` is a reserved value for connection identifier tags. It can't be used as a stand-alone tag key or as a tag value. For example, `default:yes` and `aws:default` are invalid for connection tags.
 
 ## Connection groups
