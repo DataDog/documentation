@@ -110,17 +110,15 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 
 You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
 
-You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `env` tag.
+You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.
 
-Each connection in the group must have a different set of tag values for the given Identifier Tags. For example:
-- `connectionA {env:staging}` and `connectionB {env:prod}` can be grouped together.
-- `connectionA {env:staging}` and `connectionC {env:staging}` can't be grouped, because the group would contain duplicate tag values.
-
-You can only add connections you have **Resolve Access** for, and you can only use connections within a group if you have Resolve Access for those connections. If you use a group with a connection to which you don't have Resolve Access _and_ when your workflow runs it points to that connection, the workflow fails with a `403 Forbidden` error. To fix this issue, you can:
-- Configure your workflow so that it can't point to a connection you don't have Resolve Access for.
-- Remove the connection you don't have Resolve Access for from the connection group.<div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
+Each connection in the group must have a set of unique identifier tags so that a workflow can dynamically select the correct correction at runtime. For example:
+- `connectionA {account_id:123456789}` and `connectionB {account_id:987654321}` can be grouped together.
+- `connectionA {account_id:123456789}` and `connectionC {account_id:123456789}` can't be grouped, because the group would contain duplicate tag values.
 
 ### Create a connection group
+
+<div class="alert alert-info"><strong>Note</strong>:You can only add connections to a group if you have <a href="/service_management/workflows/access/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
 
 To create a connection group:
 
@@ -134,10 +132,16 @@ To create a connection group:
 
 ### Use a connection group
 
+To use a connection group:
+
 1. In your workflow, select an action that requires a connection.
 1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
 1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
 1. Fill in any other required step values, then click **Save** to save your workflow.
+
+**Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow tries to use a connection you don't have Resolver permission for, the workflow fails with a `403 Forbidden` error. To fix this issue, you can:
+- Configure your workflow so that it can't point to a connection you don't have Resolver permission for.
+- Remove the connection you don't have Resolver permission for from the connection group.<div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
 
@@ -146,14 +150,14 @@ If you have edit access to a connection group, you can update the following attr
 - Identifier Tags (these can never be empty, but they can be completely replaced)
 - Connections (a group can be empty)
 
-<div class="alert alert-warning"><strong>Note</strong>: After you create a connection group, you can't update the integration associated with the group.</div>
-
 ### Delete a connection group
 
 To delete a connection group:
 
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
+
+<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group will impact any workflows that are using the group.</div>
 
 ## Further reading
 
@@ -170,3 +174,4 @@ To delete a connection group:
 [9]: https://app.datadoghq.com/workflow
 [10]: /service_management/workflows/actions/http/
 [11]: https://datadoghq.slack.com/
+[12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
