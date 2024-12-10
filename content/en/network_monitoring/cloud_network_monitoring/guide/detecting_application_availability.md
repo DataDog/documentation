@@ -95,7 +95,7 @@ For complex networks in large containerized environments, Datadog's [Network Map
 
 To identify if there might be a communication problem with your Kubernetes pods and their underlying services, perform the following steps:
 
-1. On the [Network Map][2], set the **View** drop down to `pod_name`, the **By** drop down to "Client Availability Zone", and set the **Metric** to "Volume Sent":
+1. On the [Network Map][2], set the **View** drop down to `pod_name`, the **By** drop down to "Client Availability Zone", and set the **Metric** to "Volume Sent" (this is the [metric][6] you want your edges to represent):
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map.png" alt="CNM Network Map page showing a clustering example">}}
 
@@ -103,7 +103,7 @@ To identify if there might be a communication problem with your Kubernetes pods 
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map_node.png" alt="CNM Network Map page showing a clustering example, highlighting a specific node">}}
 
-3. To observe if a particular pod is contributing to latency, hover over an arrow with a thicker line. Since thicker lines can mean increased latency, this particular line may want to be investigated further. You can navigate directly back to the [Network Analytics][1] page by clicking on the dotted edge directly to investigate this further.
+3. To observe if a particular pod is contributing to latency, hover over an arrow with a wider edge. Since wider edges can mean increased latency, this particular edge may want to be investigated further. You can navigate directly back to the [Network Analytics][1] page by clicking on the dotted edge directly to investigate this further.
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map_thicker_edge.png" alt="CNM Network Map page showing a clustering example, highlighting a thicker edge">}}
 
@@ -122,3 +122,4 @@ Additionally, Datadog supports [Envoy][5] monitoring, correlating Istio data wit
 [3]: https://docs.datadoghq.com/network_monitoring/performance/network_map/#map-clusters
 [4]: https://istio.io/
 [5]: https://istio.io/latest/docs/ops/deployment/architecture/#envoy
+[6]: /network_monitoring/cloud_network_monitoring/network_map/#usage
