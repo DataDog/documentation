@@ -14,6 +14,7 @@ import { PageFiltersManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
 import { FiltersManifestBuilder } from '../FiltersManifestBuilder';
+import { CompilationError } from '../../schemas/compilationResults';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -42,7 +43,7 @@ export class PageBuilder {
     parsedFile: ParsedFile;
     hugoConfig: HugoConfig;
     filtersManifest: PageFiltersManifest;
-  }): { html: string; errors: string[] } {
+  }): { html: string; errors: CompilationError[] } {
     const variables = p.filtersManifest.defaultValsByFilterId;
 
     const { renderableTree, errors } = buildRenderableTree({

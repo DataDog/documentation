@@ -8,7 +8,7 @@
  * Read more about Markdoc's phases: https://markdoc.dev/docs/render
  */
 
-import { ParsedFile } from '../schemas/compilationResults';
+import { CompilationError, ParsedFile } from '../schemas/compilationResults';
 import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode,
@@ -69,8 +69,8 @@ export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   variables: Record<string, any>;
   filtersManifest: PageFiltersManifest;
-}): { renderableTree: RenderableTreeNode; errors: string[] } {
-  const errors: string[] = [];
+}): { renderableTree: RenderableTreeNode; errors: CompilationError[] } {
+  const errors: CompilationError[] = [];
 
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: {
@@ -95,7 +95,12 @@ export function buildRenderableTree(p: {
   );
 
   if (invalidFilterIds.length > 0) {
-    errors.push(`Invalid filter IDs found in markup: ${invalidFilterIds}`);
+    invalidFilterIds.forEach((id) => {
+      errors.push({
+        message: `Invalid filter ID found in markup: ${id}`,
+        searchTerm: id
+      });
+    });
   }
 
   // ensure that all referenced values are valid
@@ -111,9 +116,12 @@ export function buildRenderableTree(p: {
 
     const invalidVals = referencedVals.filter((value) => !possibleVals.includes(value));
     if (invalidVals.length > 0) {
-      errors.push(
-        `Invalid value found in markup: "${invalidVals}" is not a valid value for the filter ID "${filterId}".`
-      );
+      invalidVals.forEach((val) => {
+        errors.push({
+          message: `Invalid value found in markup: "${val}" is not a valid value for the filter ID "${filterId}".`,
+          searchTerm: val
+        });
+      });
     }
   });
 

@@ -14,38 +14,17 @@ import { z } from 'zod';
  */
 export type CompilationResult = {
   hasErrors: boolean;
-  parsingErrorsByFilePath: Record<string, ParsingError[]>;
-  validationErrorsByFilePath: Record<string, string[]>;
+  errorsByFilePath: Record<string, CompilationError[]>;
   compiledFilePaths: string[];
 };
 
-export const ValidationErrorSchema = z.object({
+export const CompilationErrorSchema = z.object({
   message: z.string(),
+  lines: z.array(z.number()).optional(),
   searchTerm: z.string().optional()
 });
 
-/**
- * An string representing a validation error encountered
- * while parsing a Markdoc file to an AST.
- */
-export type ValidationError = z.infer<typeof ValidationErrorSchema>;
-
-export const ParsingErrorSchema = z.object({
-  message: z.string(),
-  lines: z.array(z.number())
-});
-
-/**
- * An object representing an error encountered
- * while parsing a Markdoc file to an AST,
- * along with context such as the line number.
- */
-export type ParsingError = z.infer<typeof ParsingErrorSchema>;
-
-export const CompilationErrorReportSchema = z.object({
-  parsingErrorsByFilePath: z.record(z.array(ParsingErrorSchema)),
-  validationErrorsByFilePath: z.record(z.array(ValidationErrorSchema))
-});
+export type CompilationError = z.infer<typeof CompilationErrorSchema>;
 
 /**
  * An object representing a Markdoc file that has been
@@ -56,5 +35,5 @@ export interface ParsedFile {
   ast: Node;
   frontmatter: Frontmatter;
   partials: Record<string, Node>;
-  errors: ParsingError[];
+  errors: CompilationError[];
 }

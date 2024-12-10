@@ -8,6 +8,7 @@ import {
   PageFiltersClientSideManifest
 } from '../schemas/pageFilters';
 import { PageFilterConfig } from '../schemas/yaml/frontMatter';
+import { CompilationError } from '../schemas/compilationResults';
 
 /**
  * A module responsible for combining ingested configuration data
@@ -83,9 +84,10 @@ export class FiltersManifestBuilder {
     p.frontmatter.content_filters.forEach((pageFilterConfig) => {
       // Validate the filter ID
       if (!p.glossary.filtersById[pageFilterConfig.id]) {
-        manifest.errors.push(
-          `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the glossary.`
-        );
+        manifest.errors.push({
+          message: `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the glossary.`,
+          searchTerm: pageFilterConfig.id
+        });
       }
 
       // Get all possible options set IDs for this filter,
@@ -162,27 +164,27 @@ export class FiltersManifestBuilder {
   }): {
     defaultValsByOptionsSetId: Record<string, string>;
     possibleVals: string[];
-    errors: string[];
+    errors: CompilationError[];
   } {
     // Populate the default value for each options set ID
     const defaultValsByOptionsSetId: Record<string, string> = {};
     const possibleVals: string[] = [];
-    const errors: string[] = [];
+    const errors: CompilationError[] = [];
 
     p.optionsSetIds.forEach((optionsSetId) => {
       const optionsSet = p.filterOptionsConfig[optionsSetId];
       if (!optionsSet) {
-        errors.push(
-          `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`
-        );
+        errors.push({
+          message: `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`
+        });
         return;
       }
 
       optionsSet.forEach((option) => {
         if (!p.glossary.optionsById[option.id]) {
-          errors.push(
-            `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`
-          );
+          errors.push({
+            message: `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`
+          });
         }
 
         if (option.default) {
@@ -206,11 +208,11 @@ export class FiltersManifestBuilder {
     filterOptionsConfig: FilterOptionsConfig;
     filterConfigsByFilterId: Record<string, PageFilterConfig>;
     precedingFilterIds: string[];
-  }): { optionsSetIds: string[]; errors: string[] } {
+  }): { optionsSetIds: string[]; errors: CompilationError[] } {
     const filter = p.filterConfigsByFilterId[p.filterId];
 
     let optionsSetIds: string[] = [];
-    const errors: string[] = [];
+    const errors: CompilationError[] = [];
 
     const segments = filter.options_source.split('_').map((segment) => {
       // build non-placeholder segment (array of solitary possible value)
@@ -222,9 +224,10 @@ export class FiltersManifestBuilder {
       const referencedFilterId = segment.slice(1, -1).toLowerCase();
       const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
       if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
-        errors.push(
-          `Invalid placeholder: The placeholder ${segment} in the options source '${filter.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`
-        );
+        errors.push({
+          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filter.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`,
+          searchTerm: filter.options_source
+        });
         return [segment];
       }
 

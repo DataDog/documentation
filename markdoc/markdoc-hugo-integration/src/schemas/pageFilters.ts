@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
 import { FilterOptionsConfigSchema } from './yaml/filterOptions';
 import { PageFilterConfigSchema } from './yaml/frontMatter';
+import { CompilationErrorSchema } from './compilationResults';
 
 /**
  * An option available in a resolved page filter
@@ -166,7 +167,7 @@ export const PageFiltersManifestSchema = z
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX)
     ),
-    errors: z.array(z.string())
+    errors: z.array(CompilationErrorSchema)
   })
   .strict();
 

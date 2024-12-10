@@ -7,7 +7,7 @@ import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
 import {
-  ParsingError,
+  CompilationError,
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
@@ -29,12 +29,7 @@ export class MarkdocHugoIntegration {
   glossariesByLang: Record<string, Glossary> = {};
   private compiledFilePaths: string[] = [];
 
-  // Errors from the markup-string-to-AST parsing process,
-  // which include additional helpful data, like line numbers
-  parsingErrorsByFilePath: Record<string, ParsingError[]> = {};
-
-  // All other errors caught during compilation
-  validationErrorsByFilePath: Record<string, string[]> = {};
+  errorsByFilePath: Record<string, CompilationError[]> = {};
 
   /**
    * Validate and store the provided configuration.
@@ -119,11 +114,29 @@ export class MarkdocHugoIntegration {
     // if the file has errors, log the errors for later output
     // and continue to the next file
     if (parsedFile.errors.length > 0) {
-      this.parsingErrorsByFilePath[markdocFilepath] = parsedFile.errors;
+      this.#addFileErrors({
+        filePath: markdocFilepath,
+        errors: parsedFile.errors
+      });
       return null;
     }
 
     return parsedFile;
+  }
+
+  #addFileError(p: { filePath: string; error: CompilationError }) {
+    if (!this.errorsByFilePath[p.filePath]) {
+      this.errorsByFilePath[p.filePath] = [];
+    }
+    this.errorsByFilePath[p.filePath].push(p.error);
+  }
+
+  #addFileErrors(p: { filePath: string; errors: CompilationError[] }) {
+    if (!this.errorsByFilePath[p.filePath]) {
+      this.errorsByFilePath[p.filePath] = p.errors;
+    } else {
+      this.errorsByFilePath[p.filePath].push(...p.errors);
+    }
   }
 
   /**
@@ -171,8 +184,7 @@ export class MarkdocHugoIntegration {
 
     return {
       hasErrors: this.#hasErrors(),
-      parsingErrorsByFilePath: this.parsingErrorsByFilePath,
-      validationErrorsByFilePath: this.validationErrorsByFilePath,
+      errorsByFilePath: this.errorsByFilePath,
       compiledFilePaths: this.compiledFilePaths
     };
   }
@@ -181,32 +193,22 @@ export class MarkdocHugoIntegration {
    * Pretty-print any errors to the console.
    */
   logErrorsToConsole() {
-    const errorsByFilePath = this.parsingErrorsByFilePath;
+    const errorsByFilePath = this.errorsByFilePath;
+
     if (Object.keys(errorsByFilePath).length > 0) {
       console.error(`Syntax errors found in Markdoc files:`);
 
       for (const filePath in errorsByFilePath) {
-        const reports = errorsByFilePath[filePath];
-        if (reports.length === 0) {
+        const fileErrors = errorsByFilePath[filePath];
+        if (fileErrors.length === 0) {
           continue;
         }
 
         console.error(`\nIn file ${filePath}:`);
-        errorsByFilePath[filePath].forEach((report) => {
-          console.error(`  - ${report.message} at line(s) ${report.lines.join(', ')}`);
+        errorsByFilePath[filePath].forEach((error) => {
+          console.error(`  - ${JSON.stringify(error, null, 2)}`);
         });
       }
-    }
-
-    for (const filePath in this.validationErrorsByFilePath) {
-      if (this.validationErrorsByFilePath[filePath].length === 0) {
-        continue;
-      }
-
-      console.error(`\nIn file ${filePath}:`);
-      this.validationErrorsByFilePath[filePath].forEach((error) => {
-        console.error(`  - ${error}`);
-      });
     }
   }
 
@@ -220,16 +222,17 @@ export class MarkdocHugoIntegration {
     parsedFile: ParsedFile;
     filterOptionsConfig: FilterOptionsConfig;
   }): string | null {
-    let filterOptionsConfigForPage: FilterOptionsConfig;
     const lang = p.markdocFilepath
       .replace(this.hugoGlobalConfig.dirs.content, '')
       .split('/')[1];
-    this.validationErrorsByFilePath[p.markdocFilepath] = [];
 
     if (!this.hugoGlobalConfig.languages.includes(lang)) {
-      this.validationErrorsByFilePath[p.markdocFilepath] = [
-        `Language "${lang}" is not supported.`
-      ];
+      this.#addFileError({
+        filePath: p.markdocFilepath,
+        error: {
+          message: `Language "${lang}" is not supported.`
+        }
+      });
       return null;
     }
 
@@ -241,8 +244,9 @@ export class MarkdocHugoIntegration {
     });
 
     if (draftFiltersManifest.errors.length > 0) {
-      draftFiltersManifest.errors.forEach((error) => {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(error);
+      this.#addFileErrors({
+        filePath: p.markdocFilepath,
+        errors: draftFiltersManifest.errors
       });
       return null;
     }
@@ -270,18 +274,34 @@ export class MarkdocHugoIntegration {
       });
 
       errors.forEach((error) => {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(error);
+        this.#addFileError({
+          filePath: p.markdocFilepath,
+          error
+        });
       });
 
       return compiledFilepath;
     } catch (e) {
+      let error: CompilationError;
       if (e instanceof Error) {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(e.message);
+        error = {
+          message: e.message
+        };
       } else if (typeof e === 'string') {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(e);
+        error = {
+          message: e
+        };
       } else {
-        this.validationErrorsByFilePath[p.markdocFilepath].push(JSON.stringify(e));
+        error = {
+          message: JSON.stringify(e)
+        };
       }
+
+      this.#addFileError({
+        filePath: p.markdocFilepath,
+        error
+      });
+
       return null;
     }
   }
@@ -290,19 +310,17 @@ export class MarkdocHugoIntegration {
    * Clear any stored errors.
    */
   #resetErrors() {
-    this.parsingErrorsByFilePath = {};
-    this.validationErrorsByFilePath = {};
+    this.errorsByFilePath = {};
   }
 
   /**
    * Whether any errors have been detected during compilation.
    */
   #hasErrors() {
-    const hasParsingErrors = Object.keys(this.parsingErrorsByFilePath).length > 0;
-    const hasValidationErrors = Object.values(this.validationErrorsByFilePath).some(
+    const hasErrors = Object.values(this.errorsByFilePath).some(
       (errors) => errors.length > 0
     );
-    return hasParsingErrors || hasValidationErrors;
+    return hasErrors;
   }
 
   /**

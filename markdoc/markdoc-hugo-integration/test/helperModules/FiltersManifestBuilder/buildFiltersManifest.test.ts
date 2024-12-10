@@ -203,7 +203,7 @@ describe('FiltersManifestBuilder.build', () => {
     });
 
     expect(manifest.errors.length).toEqual(1);
-    expect(manifest.errors[0]).toContain('Invalid placeholder:');
+    expect(manifest.errors[0].message).toContain('Invalid placeholder:');
   });
 
   test('detects a nonexistent options source', () => {
@@ -251,6 +251,6 @@ describe('FiltersManifestBuilder.build', () => {
     });
 
     expect(manifest.errors.length).toEqual(1);
-    expect(manifest.errors[0]).toContain('Invalid options source:');
+    expect(manifest.errors[0].message).toContain('Invalid options source:');
   });
 });

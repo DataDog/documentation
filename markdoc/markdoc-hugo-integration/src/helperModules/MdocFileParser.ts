@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
-import { ParsingError, ParsedFile } from '../schemas/compilationResults';
+import { CompilationError, ParsedFile } from '../schemas/compilationResults';
 
 /**
  * A module responsible for parsing Markdoc files into data structures
@@ -45,9 +45,9 @@ export class MdocFileParser {
   static #buildPartialASTs(
     ast: Node,
     partialsDir: string
-  ): { partials: Record<string, Node>; errors: ParsingError[] } {
+  ): { partials: Record<string, Node>; errors: CompilationError[] } {
     let partialAstsByFilename: Record<string, Node> = {};
-    let errors: ParsingError[] = [];
+    let errors: CompilationError[] = [];
     const partialPaths = this.#extractPartialPaths(ast);
     partialPaths.forEach((partialPath) => {
       const partialFile = path.join(partialsDir, partialPath);
@@ -99,8 +99,8 @@ export class MdocFileParser {
    * @param p An object containing the AST node and the file path.
    * @returns A list of parsing error reports.
    */
-  static #extractErrors(p: { node: Node }): ParsingError[] {
-    let errors: ParsingError[] = [];
+  static #extractErrors(p: { node: Node }): CompilationError[] {
+    let errors: CompilationError[] = [];
     if (p.node.errors.length) {
       errors = errors.concat(
         p.node.errors.map((error) => ({
