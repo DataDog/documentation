@@ -13,13 +13,13 @@ import { useState } from 'react';
 const ErrorsPrintout = (props: {
   errorReportsByFilePath: Record<string, CompilationError[]>;
 }) => {
-  const [searchTermWasCopied, setSearchTermWasCopied] = useState(false);
+  const [textWasCopied, setTextWasCopied] = useState(false);
 
-  const handleSearchTermCopy = () => {
-    setSearchTermWasCopied(true);
+  const handleTextCopy = () => {
+    setTextWasCopied(true);
   };
 
-  const handleSearchTermSnackbarClose = (
+  const handleCopySnackbarClose = (
     _event: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason
   ) => {
@@ -27,7 +27,7 @@ const ErrorsPrintout = (props: {
       return;
     }
 
-    setSearchTermWasCopied(false);
+    setTextWasCopied(false);
   };
 
   return (
@@ -104,18 +104,11 @@ const ErrorsPrintout = (props: {
                               style={{ cursor: 'pointer' }}
                               onClick={() => {
                                 navigator.clipboard.writeText(error.searchTerm || '');
-                                handleSearchTermCopy();
+                                handleTextCopy();
                               }}
                             >
                               {error.searchTerm}
                             </code>
-                            <Snackbar
-                              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                              open={searchTermWasCopied}
-                              autoHideDuration={1000}
-                              onClose={handleSearchTermSnackbarClose}
-                              message="Search term copied"
-                            />
                           </TableCell>
                         )}
                       </TableRow>
@@ -124,6 +117,13 @@ const ErrorsPrintout = (props: {
                 </TableBody>
               </Table>
             </TableContainer>
+            <Snackbar
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              open={textWasCopied}
+              autoHideDuration={1000}
+              onClose={handleCopySnackbarClose}
+              message="Copied"
+            />
           </Paper>
         );
       })}
