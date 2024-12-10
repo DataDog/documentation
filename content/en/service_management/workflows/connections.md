@@ -68,7 +68,7 @@ To create a connection:
 1. Navigate to the [connections list][3].
 1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
 1. Click on an icon to choose an integration schema.
-1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more Identifier Tags.</div>
+1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more [Identifier Tags](#connection-identifier-tags).</div>
 1. Click **Create**.
 
 Alternatively, add a connection from the workflow page:
@@ -106,12 +106,12 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
-## Connection tags
+## Connection identifier tags
 
-You can add tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
-- Tags must follow the format `tag:value`, and additional colons are not allowed. For example, the tags `env:staging:east` and `env` are invalid formats for connection tags.
-- Tags must start with a letter, after which they can contain alphanumerics, underscores, minuses, slashes, and exactly one colon.
-- `default` is a reserved value for connection tags. It can't be used as a stand-alone tag key or a tag value. For example, `default:yes` and `aws:default` are invalid for connection tags.
+You can add identifier tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
+- Identifier tags must follow the format `tag:value`, and additional colons are not allowed. For example, the identifier tags `env:staging:east` and `env` are invalid formats for connection tags.
+- Identifier tags must start with a letter, after which they can contain alphanumerics, underscores, minuses, slashes, and exactly one colon.
+- `default` is a reserved value for connection identifier tags. It can't be used as a stand-alone tag key or as a tag value. For example, `default:yes` and `aws:default` are invalid for connection tags.
 
 ## Connection groups
 
