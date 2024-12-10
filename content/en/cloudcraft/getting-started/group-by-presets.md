@@ -2,9 +2,9 @@
 title: Group By and Presets
 ---
 
-Cloudcraft's **Group By** and **Presets** features offer powerful tools for creating focused, customized diagrams of your cloud infrastructure. These tools provide a structured approach to visualize cloud architecture, catering to specific use cases like infrastructure, network, and security requirements.
+Cloudcraft's **Group By** and **Presets** features offer powerful tools for creating focused, custom diagrams of your cloud infrastructure. These tools provide a structured approach to visualize cloud architecture, catering to specific use cases like infrastructure, network, and security requirements.
 
-By utilizing grouping and preset configurations, users can quickly generate focused diagrams, improving workflow efficiency and resource management. Whether you're troubleshooting, conducting security audits, or analyzing network performance, these features help you create focused, insightful diagrams quickly and easily.
+By utilizing grouping and preset configurations, users can quickly generate focused diagrams, improving workflow efficiency and resource management. Whether you are troubleshooting, conducting security audits, or analyzing network performance, these features help you create focused, insightful diagrams quickly and easily.
 
 ## Group By
 
@@ -39,7 +39,7 @@ To apply a preset to your diagram:
 
 1. Switch to the **Live** tab within Cloudcraft.
 2. Select the desired preset from the menu at the top of the diagram view.
-3. The diagram will automatically update to reflect the chosen preset.
+3. The diagram automatically updates to reflect the chosen preset.
 
 ### Infrastructure diagram
 
