@@ -9,6 +9,12 @@ further_reading:
   text: "Analytics on cases"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Event Correlation is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 There are two types of correlations: 
