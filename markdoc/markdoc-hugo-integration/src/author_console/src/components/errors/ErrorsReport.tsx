@@ -28,7 +28,11 @@ const ParsingErrorsReport = (props: {
                 borderRadius: '5px'
               }}
             >
-              <h3>{filename}</h3>
+              <h3>
+                <a href={vscodeLink} style={{ textDecoration: 'none' }}>
+                  {filename}
+                </a>
+              </h3>
               <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
                 <a href={vscodeLink}>open file in VS Code</a>
               </div>
@@ -98,7 +102,12 @@ const ValidationErrorsReport = (props: {
                 borderRadius: '5px'
               }}
             >
-              <h3>{filename}</h3>
+              <h3>
+                {' '}
+                <a href={vscodeLink} style={{ textDecoration: 'none' }}>
+                  {filename}
+                </a>
+              </h3>
               <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
                 <a href={vscodeLink}>open file in VS Code</a>
               </div>
