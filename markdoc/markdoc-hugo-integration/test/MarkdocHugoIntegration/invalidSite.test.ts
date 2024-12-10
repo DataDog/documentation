@@ -25,7 +25,6 @@ describe('MarkdocHugoIntegration', () => {
     errorsByFilePathDup[sanitizedFilePath] = errorsByFilePathDup[filePath];
     errorsByFilePathDup[filePath].forEach((error) => {
       error.message = error.message.replace(contentDir, '');
-      errorsByFilePathDup[sanitizedFilePath].push(error);
     });
     delete errorsByFilePathDup[filePath];
   });
