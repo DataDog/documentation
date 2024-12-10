@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import reactLogo from './assets/react.svg';
 import './App.css';
 import styled from '@emotion/styled';
-import Rating from '@mui/material/Rating';
 // import the data from db.json
 import { dbData as dbDataOnDisk } from './db/data';
 import { DbData } from './db/types';
