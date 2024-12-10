@@ -7,7 +7,7 @@
 
 <!-- 
 If you're waiting for a release or there are other considerations that you want us to be aware of, list them here. 
-If the PR is ready to be merged once it recieves the required reviews, check the box below after you've created the PR.
+If the PR is ready to be merged once it receives the required reviews, check the box below after you've created the PR.
 -->
 
 Merge readiness:

@@ -3336,6 +3336,183 @@ components:
         tags:
           $ref: '#/components/schemas/TagsEventAttribute'
       type: object
+    CIAppPipelineEventFinishedPipeline:
+      description: Details of a finished pipeline.
+      properties:
+        end:
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: 'UUID of the pipeline run. The ID has to be unique across retries
+            and pipelines,
+
+            including partial retries.'
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - end
+      - status
+      - partial_retry
+      type: object
+    CIAppPipelineEventInProgressPipeline:
+      description: Details of a running pipeline.
+      properties:
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineInProgressStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: UUID of the pipeline run. The ID has to be the same as the
+            finished pipeline.
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - status
+      - partial_retry
+      type: object
     CIAppPipelineEventJob:
       description: Details of a CI job.
       properties:
@@ -3484,97 +3661,17 @@ components:
       type: object
     CIAppPipelineEventPipeline:
       description: Details of the top level pipeline, build, or workflow of your CI.
-      properties:
-        end:
-          description: Time when the pipeline run finished. It cannot be older than
-            18 hours in the past from the current time. The time format must be RFC3339.
-          example: '2023-05-31T15:30:00Z'
-          format: date-time
-          type: string
-        error:
-          $ref: '#/components/schemas/CIAppCIError'
-        git:
-          $ref: '#/components/schemas/CIAppGitInfo'
-        is_manual:
-          description: Whether or not the pipeline was triggered manually by the user.
-          example: false
-          nullable: true
-          type: boolean
-        is_resumed:
-          description: Whether or not the pipeline was resumed after being blocked.
-          example: false
-          nullable: true
-          type: boolean
-        level:
-          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
-        metrics:
-          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
-        name:
-          description: Name of the pipeline. All pipeline runs for the builds should
-            have the same name.
-          example: Deploy to AWS
-          type: string
-        node:
-          $ref: '#/components/schemas/CIAppHostInfo'
-        parameters:
-          $ref: '#/components/schemas/CIAppPipelineEventParameters'
-        parent_pipeline:
-          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
-        partial_retry:
-          description: 'Whether or not the pipeline was a partial retry of a previous
-            attempt. A partial retry is one
-
-            which only runs a subset of the original jobs.'
-          example: false
-          type: boolean
-        pipeline_id:
-          description: 'Any ID used in the provider to identify the pipeline run even
-            if it is not unique across retries.
-
-            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
-            can be set to the same value.'
-          example: '#023'
-          type: string
-        previous_attempt:
-          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
-        queue_time:
-          description: The queue time in milliseconds, if applicable.
-          example: 1004
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        start:
-          description: Time when the pipeline run started (it should not include any
-            queue time). The time format must be RFC3339.
-          example: '2023-05-31T15:30:00Z'
-          format: date-time
-          type: string
-        status:
-          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
-        tags:
-          $ref: '#/components/schemas/CIAppPipelineEventTags'
-        unique_id:
-          description: 'UUID of the pipeline run. The ID has to be unique across retries
-            and pipelines,
-
-            including partial retries.'
-          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
-          type: string
-        url:
-          description: The URL to look at the pipeline in the CI provider UI.
-          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
-          type: string
-      required:
-      - level
-      - unique_id
-      - name
-      - url
-      - start
-      - end
-      - status
-      - partial_retry
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/CIAppPipelineEventFinishedPipeline'
+      - $ref: '#/components/schemas/CIAppPipelineEventInProgressPipeline'
+    CIAppPipelineEventPipelineInProgressStatus:
+      description: The in progress status of the pipeline.
+      enum:
+      - running
+      example: running
+      type: string
+      x-enum-varnames:
+      - RUNNING
     CIAppPipelineEventPipelineLevel:
       default: pipeline
       description: Used to distinguish between pipelines, stages, jobs, and steps.
@@ -5006,42 +5103,6 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_CONFIGURATION
-    CloudCostActivity:
-      description: Cloud Cost Activity.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/CloudCostActivityAttributes'
-        type:
-          $ref: '#/components/schemas/CloudCostActivityType'
-      required:
-      - attributes
-      - type
-      type: object
-    CloudCostActivityAttributes:
-      description: Attributes for Cloud Cost activity.
-      properties:
-        is_enabled:
-          description: Whether or not the cloud account is enabled.
-          example: true
-          type: boolean
-      required:
-      - is_enabled
-      type: object
-    CloudCostActivityResponse:
-      description: Response for Cloud Cost activity.
-      properties:
-        data:
-          $ref: '#/components/schemas/CloudCostActivity'
-      type: object
-    CloudCostActivityType:
-      default: cloud_cost_activity
-      description: Type of Cloud Cost Activity.
-      enum:
-      - cloud_cost_activity
-      example: cloud_cost_activity
-      type: string
-      x-enum-varnames:
-      - CLOUD_COST_ACTIVITY
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered.
       properties:
@@ -23314,6 +23375,10 @@ components:
           description: User ID of the user who updated the rule.
           format: int64
           type: integer
+        updatedAt:
+          description: The date the rule was last updated, in milliseconds.
+          format: int64
+          type: integer
         version:
           description: The version of the rule.
           format: int64
@@ -28427,6 +28492,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28475,6 +28544,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28529,6 +28602,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28592,6 +28669,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28653,6 +28734,10 @@ paths:
             value: '"openapi-spec.yaml"'
           step: there is a valid "managed_api" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         operationId: DeleteOpenAPI
         parameters:
@@ -31351,41 +31436,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 12
-      x-undo:
-        type: safe
-  /api/v2/cost/enabled:
-    get:
-      deprecated: true
-      description: Get the Cloud Cost Management activity.
-      operationId: GetCloudCostActivity
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CloudCostActivityResponse'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: Cloud Cost Enabled
-      tags:
-      - Cloud Cost Management
-      x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
@@ -40839,9 +40889,9 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
-              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
-              \   }\n  }\n}"
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test-rum-{{ unique_hash }}\",\n        \"type\":
+              \"ios\"\n    }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
       x-permission:
@@ -47326,6 +47376,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_run
       summary: Execute a workflow
       tags:
       - Workflow Automation
