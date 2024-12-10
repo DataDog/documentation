@@ -11,7 +11,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-Event Correlation is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+Event Correlation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
