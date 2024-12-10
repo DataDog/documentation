@@ -52,6 +52,16 @@ const ErrorsPrintout = (props: {
               </a>
             </h3>
             <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  navigator.clipboard.writeText(filePath || '');
+                  handleTextCopy();
+                }}
+              >
+                copy full path
+              </a>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
               <a href={vscodeLink}>open file in VS Code</a>
             </div>
             <TableContainer component={Paper} elevation={0}>

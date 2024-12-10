@@ -5,7 +5,7 @@ import { AuthorConsoleData } from '../../schemas/authorConsole';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import PrefsBuilder from './components/builder/PrefsBuilder';
+// import PrefsBuilder from './components/builder/PrefsBuilder';
 import ErrorsReport from './components/errors/ErrorsReport';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
