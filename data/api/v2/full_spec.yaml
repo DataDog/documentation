@@ -5006,42 +5006,6 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_CONFIGURATION
-    CloudCostActivity:
-      description: Cloud Cost Activity.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/CloudCostActivityAttributes'
-        type:
-          $ref: '#/components/schemas/CloudCostActivityType'
-      required:
-      - attributes
-      - type
-      type: object
-    CloudCostActivityAttributes:
-      description: Attributes for Cloud Cost activity.
-      properties:
-        is_enabled:
-          description: Whether or not the cloud account is enabled.
-          example: true
-          type: boolean
-      required:
-      - is_enabled
-      type: object
-    CloudCostActivityResponse:
-      description: Response for Cloud Cost activity.
-      properties:
-        data:
-          $ref: '#/components/schemas/CloudCostActivity'
-      type: object
-    CloudCostActivityType:
-      default: cloud_cost_activity
-      description: Type of Cloud Cost Activity.
-      enum:
-      - cloud_cost_activity
-      example: cloud_cost_activity
-      type: string
-      x-enum-varnames:
-      - CLOUD_COST_ACTIVITY
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered.
       properties:
@@ -23314,6 +23278,10 @@ components:
           description: User ID of the user who updated the rule.
           format: int64
           type: integer
+        updatedAt:
+          description: The date the rule was last updated, in milliseconds.
+          format: int64
+          type: integer
         version:
           description: The version of the rule.
           format: int64
@@ -31371,41 +31339,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 12
-      x-undo:
-        type: safe
-  /api/v2/cost/enabled:
-    get:
-      deprecated: true
-      description: Get the Cloud Cost Management activity.
-      operationId: GetCloudCostActivity
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CloudCostActivityResponse'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: Cloud Cost Enabled
-      tags:
-      - Cloud Cost Management
-      x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-        - cloud_cost_management_read
       x-undo:
         type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
@@ -40859,9 +40792,9 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
-              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
-              \   }\n  }\n}"
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test-rum-{{ unique_hash }}\",\n        \"type\":
+              \"ios\"\n    }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
       x-permission:
@@ -47346,6 +47279,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_run
       summary: Execute a workflow
       tags:
       - Workflow Automation
