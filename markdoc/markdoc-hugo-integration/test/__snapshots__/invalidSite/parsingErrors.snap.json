@@ -1,28 +1,18 @@
 {
-  "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalidSite/content/en/missing_closing_tag.mdoc.md": [
+  "/en/missing_closing_tag.mdoc.md": [
     {
-      "error": {
-        "id": "missing-closing",
-        "level": "critical",
-        "message": "Node 'if' is missing closing"
-      },
+      "message": "Node 'if' is missing closing",
       "lines": [
         6,
         7
-      ],
-      "file": "/en/missing_closing_tag.mdoc.md"
+      ]
     },
     {
-      "error": {
-        "id": "missing-closing",
-        "level": "critical",
-        "message": "Node 'if' is missing closing"
-      },
+      "message": "Node 'if' is missing closing",
       "lines": [
         9,
         10
-      ],
-      "file": "/en/missing_closing_tag.mdoc.md"
+      ]
     }
   ]
 }

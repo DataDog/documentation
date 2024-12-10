@@ -7,7 +7,7 @@ import { FileNavigator } from './helperModules/FileNavigator';
 import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
 import {
-  ParsingErrorReport,
+  ParsingError,
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
@@ -31,7 +31,7 @@ export class MarkdocHugoIntegration {
 
   // Errors from the markup-string-to-AST parsing process,
   // which include additional helpful data, like line numbers
-  parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
+  parsingErrorsByFilePath: Record<string, ParsingError[]> = {};
 
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string[]> = {};
@@ -118,8 +118,8 @@ export class MarkdocHugoIntegration {
 
     // if the file has errors, log the errors for later output
     // and continue to the next file
-    if (parsedFile.errorReports.length > 0) {
-      this.parsingErrorReportsByFilePath[markdocFilepath] = parsedFile.errorReports;
+    if (parsedFile.errors.length > 0) {
+      this.parsingErrorsByFilePath[markdocFilepath] = parsedFile.errors;
       return null;
     }
 
@@ -171,7 +171,7 @@ export class MarkdocHugoIntegration {
 
     return {
       hasErrors: this.#hasErrors(),
-      parsingErrorReportsByFilePath: this.parsingErrorReportsByFilePath,
+      parsingErrorsByFilePath: this.parsingErrorsByFilePath,
       validationErrorsByFilePath: this.validationErrorsByFilePath,
       compiledFilePaths: this.compiledFilePaths
     };
@@ -181,21 +181,19 @@ export class MarkdocHugoIntegration {
    * Pretty-print any errors to the console.
    */
   logErrorsToConsole() {
-    const errorReportsByFilePath = this.parsingErrorReportsByFilePath;
-    if (Object.keys(errorReportsByFilePath).length > 0) {
+    const errorsByFilePath = this.parsingErrorsByFilePath;
+    if (Object.keys(errorsByFilePath).length > 0) {
       console.error(`Syntax errors found in Markdoc files:`);
 
-      for (const filePath in errorReportsByFilePath) {
-        const reports = errorReportsByFilePath[filePath];
+      for (const filePath in errorsByFilePath) {
+        const reports = errorsByFilePath[filePath];
         if (reports.length === 0) {
           continue;
         }
 
         console.error(`\nIn file ${filePath}:`);
-        errorReportsByFilePath[filePath].forEach((report) => {
-          console.error(
-            `  - ${report.error.message} at line(s) ${report.lines.join(', ')}`
-          );
+        errorsByFilePath[filePath].forEach((report) => {
+          console.error(`  - ${report.message} at line(s) ${report.lines.join(', ')}`);
         });
       }
     }
@@ -292,7 +290,7 @@ export class MarkdocHugoIntegration {
    * Clear any stored errors.
    */
   #resetErrors() {
-    this.parsingErrorReportsByFilePath = {};
+    this.parsingErrorsByFilePath = {};
     this.validationErrorsByFilePath = {};
   }
 
@@ -300,7 +298,7 @@ export class MarkdocHugoIntegration {
    * Whether any errors have been detected during compilation.
    */
   #hasErrors() {
-    const hasParsingErrors = Object.keys(this.parsingErrorReportsByFilePath).length > 0;
+    const hasParsingErrors = Object.keys(this.parsingErrorsByFilePath).length > 0;
     const hasValidationErrors = Object.values(this.validationErrorsByFilePath).some(
       (errors) => errors.length > 0
     );

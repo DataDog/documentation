@@ -16,29 +16,26 @@ describe('MarkdocHugoIntegration', () => {
   });
 
   // compile the bad files
-  const { hasErrors, parsingErrorReportsByFilePath, validationErrorsByFilePath } =
+  const { hasErrors, parsingErrorsByFilePath, validationErrorsByFilePath } =
     integration.compileMdocFiles();
 
   // sanitize the file paths so snapshots are consistent across machines
-  const errorReports = { ...parsingErrorReportsByFilePath };
-  Object.keys(errorReports).forEach((filePath) => {
+  const parsingErrorsByFilePathDup = { ...parsingErrorsByFilePath };
+  Object.keys(parsingErrorsByFilePathDup).forEach((filePath) => {
     const sanitizedFilePath = filePath.replace(contentDir, '');
-    errorReports[sanitizedFilePath] = errorReports[filePath];
-    errorReports[sanitizedFilePath].forEach((errorReport) => {
-      errorReport.file = errorReport.file.replace(contentDir, '');
-    });
-    delete errorReports[filePath];
+    parsingErrorsByFilePathDup[sanitizedFilePath] = parsingErrorsByFilePathDup[filePath];
+    delete parsingErrorsByFilePathDup[filePath];
   });
 
-  const errors = { ...validationErrorsByFilePath };
-  Object.keys(errors).forEach((filePath) => {
+  const validationErrorsByFilePathDup = { ...validationErrorsByFilePath };
+  Object.keys(validationErrorsByFilePathDup).forEach((filePath) => {
     const sanitizedFilePath = filePath.replace(contentDir, '');
-    errors[sanitizedFilePath] = [];
-    errors[filePath].forEach((error) => {
+    validationErrorsByFilePathDup[sanitizedFilePath] = [];
+    validationErrorsByFilePathDup[filePath].forEach((error) => {
       error = error.replace(contentDir, '');
-      errors[sanitizedFilePath].push(error);
+      validationErrorsByFilePathDup[sanitizedFilePath].push(error);
     });
-    delete errors[filePath];
+    delete validationErrorsByFilePathDup[filePath];
   });
 
   test('the compilation should return false', () => {
@@ -47,10 +44,10 @@ describe('MarkdocHugoIntegration', () => {
 
   markupFiles.forEach((markupFile) => {
     const sanitizedFilename = markupFile.replace(contentDir, '');
-    const parsingErrorReports = parsingErrorReportsByFilePath[markupFile];
+    const parsingErrors = parsingErrorsByFilePath[markupFile];
     const validationError = validationErrorsByFilePath[markupFile];
 
-    const fileHasError = !!parsingErrorReports || !!validationError;
+    const fileHasError = !!parsingErrors || !!validationError;
 
     test(`the file ${sanitizedFilename} should have errors`, () => {
       expect(fileHasError).toBe(true);
@@ -58,13 +55,13 @@ describe('MarkdocHugoIntegration', () => {
   });
 
   test(`the validation errors match the snapshot`, () => {
-    expect(JSON.stringify(validationErrorsByFilePath, null, 2)).toMatchFileSnapshot(
+    expect(JSON.stringify(validationErrorsByFilePathDup, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/invalidSite/validationErrors.snap.json`
     );
   });
 
   test(`the parsing errors match the snapshot`, () => {
-    expect(JSON.stringify(parsingErrorReportsByFilePath, null, 2)).toMatchFileSnapshot(
+    expect(JSON.stringify(parsingErrorsByFilePathDup, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/invalidSite/parsingErrors.snap.json`
     );
   });

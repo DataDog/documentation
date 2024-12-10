@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
-import { ParsingErrorReport, ParsedFile } from '../schemas/compilationResults';
+import { ParsingError, ParsedFile } from '../schemas/compilationResults';
 
 /**
  * A module responsible for parsing Markdoc files into data structures
@@ -24,7 +24,7 @@ export class MdocFileParser {
     FrontmatterSchema.parse(frontmatter);
 
     // Collect all partials and build their ASTs
-    const { partials, errorReports: partialErrors } = this.#buildPartialASTs(
+    const { partials, errors: partialErrors } = this.#buildPartialASTs(
       ast,
       p.partialsDir
     );
@@ -33,10 +33,7 @@ export class MdocFileParser {
       ast,
       frontmatter,
       partials,
-      errorReports: [
-        ...this.#extractErrors({ node: ast, file: p.file }),
-        ...partialErrors
-      ]
+      errors: [...this.#extractErrors({ node: ast }), ...partialErrors]
     };
   }
 
@@ -48,9 +45,9 @@ export class MdocFileParser {
   static #buildPartialASTs(
     ast: Node,
     partialsDir: string
-  ): { partials: Record<string, Node>; errorReports: ParsingErrorReport[] } {
+  ): { partials: Record<string, Node>; errors: ParsingError[] } {
     let partialAstsByFilename: Record<string, Node> = {};
-    let errorReports: ParsingErrorReport[] = [];
+    let errors: ParsingError[] = [];
     const partialPaths = this.#extractPartialPaths(ast);
     partialPaths.forEach((partialPath) => {
       const partialFile = path.join(partialsDir, partialPath);
@@ -61,11 +58,9 @@ export class MdocFileParser {
         ...partialAstsByFilename,
         ...this.#buildPartialASTs(partialAst, partialsDir).partials
       };
-      errorReports = errorReports.concat(
-        this.#extractErrors({ node: partialAst, file: partialFile })
-      );
+      errors = errors.concat(this.#extractErrors({ node: partialAst }));
     });
-    return { partials: partialAstsByFilename, errorReports };
+    return { partials: partialAstsByFilename, errors };
   }
 
   /**
@@ -104,16 +99,19 @@ export class MdocFileParser {
    * @param p An object containing the AST node and the file path.
    * @returns A list of parsing error reports.
    */
-  static #extractErrors(p: { node: Node; file: string }): ParsingErrorReport[] {
-    let errors: ParsingErrorReport[] = [];
+  static #extractErrors(p: { node: Node }): ParsingError[] {
+    let errors: ParsingError[] = [];
     if (p.node.errors.length) {
       errors = errors.concat(
-        p.node.errors.map((error) => ({ error, lines: p.node.lines, file: p.file }))
+        p.node.errors.map((error) => ({
+          message: error.message,
+          lines: p.node.lines
+        }))
       );
     }
     if (p.node.children.length) {
       for (const child of p.node.children) {
-        errors = errors.concat(this.#extractErrors({ node: child, file: p.file }));
+        errors = errors.concat(this.#extractErrors({ node: child }));
       }
     }
     return errors;

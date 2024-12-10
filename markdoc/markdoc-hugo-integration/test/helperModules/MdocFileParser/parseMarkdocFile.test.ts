@@ -10,7 +10,7 @@ describe('FileParse.parseMdocFile', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
-  const { ast, frontmatter, partials, errorReports } = MdocFileParser.parseMdocFile({
+  const { ast, frontmatter, partials, errors } = MdocFileParser.parseMdocFile({
     file: testFilePath,
     partialsDir: VALID_PARTIALS_DIR
   });
@@ -37,7 +37,7 @@ describe('FileParse.parseMdocFile', () => {
   });
 
   test(`does not encounter any errors for ${sanitizedMarkdocFilename}`, () => {
-    expect(errorReports).toBeDefined();
-    expect(errorReports.length).toEqual(0);
+    expect(errors).toBeDefined();
+    expect(errors.length).toEqual(0);
   });
 });

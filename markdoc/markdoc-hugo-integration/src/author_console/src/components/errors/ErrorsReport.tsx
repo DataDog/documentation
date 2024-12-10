@@ -1,4 +1,4 @@
-import { ParsingErrorReport } from '../../../../schemas/compilationResults';
+import { ParsingError } from '../../../../schemas/compilationResults';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 
 const ParsingErrorsReport = (props: {
-  parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
+  parsingErrorReportsByFilePath: Record<string, ParsingError[]>;
 }) => {
   return (
     <div>
@@ -48,8 +48,8 @@ const ParsingErrorsReport = (props: {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {parsingErrorReports.map((parsingErrorReport, i) => {
-                      const startingLine = parsingErrorReport.lines[0];
+                    {parsingErrorReports.map((parsingError, i) => {
+                      const startingLine = parsingError.lines[0];
                       return (
                         <TableRow key={i}>
                           <TableCell sx={{ fontSize: '1em' }}>
@@ -66,7 +66,7 @@ const ParsingErrorsReport = (props: {
                             <a href={vscodeLink + ':' + startingLine}>{startingLine}</a>
                           </TableCell>
                           <TableCell sx={{ fontSize: '1em' }}>
-                            {parsingErrorReport.error.message}
+                            {parsingError.message}
                           </TableCell>
                         </TableRow>
                       );
@@ -139,7 +139,7 @@ const ValidationErrorsReport = (props: {
 };
 
 const ErrorsReport = (props: {
-  parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
+  parsingErrorReportsByFilePath: Record<string, ParsingError[]>;
   validationErrorsByFilePath: Record<string, string[]>;
 }) => {
   return (

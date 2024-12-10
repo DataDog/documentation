@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import styled from '@emotion/styled';
-// import the data from db.json
 import { dbData as dbDataOnDisk } from './db/data';
 import { DbData } from './db/types';
 import Tabs from '@mui/material/Tabs';
