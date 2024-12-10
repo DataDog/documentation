@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Checkbox from '@mui/material/Checkbox';
 
 const ParsingErrorsReport = (props: {
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]>;
@@ -35,7 +36,10 @@ const ParsingErrorsReport = (props: {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell sx={{ fontSize: '1em' }}>At line</TableCell>
+                      <TableCell sx={{ fontSize: '1em', width: '20px' }}></TableCell>
+                      <TableCell sx={{ fontSize: '1em', width: '75px' }}>
+                        At line
+                      </TableCell>
                       <TableCell sx={{ fontSize: '1em' }}>Message</TableCell>
                     </TableRow>
                   </TableHead>
@@ -44,6 +48,15 @@ const ParsingErrorsReport = (props: {
                       const startingLine = parsingErrorReport.lines[0];
                       return (
                         <TableRow key={i}>
+                          <TableCell sx={{ fontSize: '1em' }}>
+                            <Checkbox
+                              sx={{
+                                paddingTop: '0',
+                                marginRight: '0px',
+                                marginLeft: '-10px'
+                              }}
+                            />
+                          </TableCell>
                           <TableCell sx={{ fontSize: '1em' }}>
                             <a href={vscodeLink + ':' + startingLine}>{startingLine}</a>
                           </TableCell>
@@ -88,15 +101,25 @@ const ValidationErrorsReport = (props: {
               <div style={{ position: 'absolute', top: '25px', right: '25px' }}>
                 <a href={vscodeLink}>open file in VS Code</a>
               </div>
-              <ul>
+              <div>
                 {validationErrors.map((validationError, i) => {
                   return (
-                    <li key={i} style={{ marginBottom: '10px', lineHeight: '1.5em' }}>
-                      {validationError}
-                    </li>
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        marginBottom: '10px'
+                      }}
+                    >
+                      <div>
+                        <Checkbox sx={{ paddingTop: '0', marginRight: '0px' }} />
+                      </div>
+                      <div style={{ lineHeight: '1.5em' }}>{validationError}</div>
+                    </div>
                   );
                 })}
-              </ul>
+              </div>
             </Paper>
           );
         }
