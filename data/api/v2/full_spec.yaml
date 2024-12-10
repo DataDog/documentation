@@ -23314,6 +23314,10 @@ components:
           description: User ID of the user who updated the rule.
           format: int64
           type: integer
+        updatedAt:
+          description: The date the rule was last updated, in milliseconds.
+          format: int64
+          type: integer
         version:
           description: The version of the rule.
           format: int64
