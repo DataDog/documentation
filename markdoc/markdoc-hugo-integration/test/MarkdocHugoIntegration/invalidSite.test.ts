@@ -43,7 +43,7 @@ describe('MarkdocHugoIntegration', () => {
     });
   });
 
-  test(`the  errors match the snapshot`, () => {
+  test(`the errors match the snapshot`, () => {
     expect(JSON.stringify(errorsByFilePathDup, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/invalidSite/errors.snap.json`
     );

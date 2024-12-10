@@ -47,7 +47,7 @@ const ErrorsPrintout = (props: {
                       </TableCell>
                     )}
                     {errors.some((error) => error.searchTerm) && (
-                      <TableCell sx={{ fontSize: '1em' }}>Click to search file</TableCell>
+                      <TableCell sx={{ fontSize: '1em' }}>Click to copy</TableCell>
                     )}
                   </TableRow>
                 </TableHead>
@@ -77,12 +77,14 @@ const ErrorsPrintout = (props: {
                         )}
                         {errors.some((error) => error.searchTerm) && (
                           <TableCell sx={{ fontSize: '1em' }}>
-                            <a
-                              style={{ textDecoration: 'none' }}
-                              href={`${vscodeLink}#search={${error.searchTerm}}`}
+                            <code
+                              style={{ cursor: 'pointer' }}
+                              onClick={() =>
+                                navigator.clipboard.writeText(error.searchTerm || '')
+                              }
                             >
-                              <code>{error.searchTerm}</code>
-                            </a>
+                              {error.searchTerm}
+                            </code>
                           </TableCell>
                         )}
                       </TableRow>
