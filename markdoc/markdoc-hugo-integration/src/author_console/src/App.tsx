@@ -64,8 +64,6 @@ const ExampleWrapper = styled.div`
 `;
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [rating, setRating] = useState<number | null>(null);
   const [dbData, _setDbData] = useState<DbData>(dbDataOnDisk);
 
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
@@ -85,8 +83,8 @@ function App() {
             onChange={handleTabChange}
             aria-label="basic tabs example"
           >
-            <Tab label="Debug" {...a11yProps(0)} />
-            <Tab label="Create" {...a11yProps(1)} />
+            <Tab label="Build status" {...a11yProps(0)} />
+            {/* <Tab label="Create" {...a11yProps(1)} /> */}
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
