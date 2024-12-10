@@ -64,6 +64,12 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 
 Follow the instructions for [Terraform][3] uninstallation.
 
+## Update the Terraform modules version
+
+Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases).
+
+For usage examples, refer to our [Github repository](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

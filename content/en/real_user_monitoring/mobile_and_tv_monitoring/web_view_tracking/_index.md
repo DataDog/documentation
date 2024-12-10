@@ -55,17 +55,33 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 To enable Web View tracking, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialization snippet.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
+{{% tab "Android" %}}
 
+Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+
+[1]: /real_user_monitoring/browser/setup/#npm
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+
+To enable Crash Reporting:
+
+1. Make sure to also enable [RUM][2] and, or [Logs][3].
+2. Add the package according to your dependency manager.
+3. Update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
+
+{{% collapse-content title="CocoaPods" level="h4" %}}
 You can use [CocoaPods][1] to install `dd-sdk-ios`:
 ```
 pod 'DatadogWebViewTracking'
 ```
 
 [1]: https://cocoapods.org/
+{{% /collapse-content %}}
 
-{{% /tab %}}
-{{% tab "Swift Package Manager (SPM)" %}}
+{{% collapse-content title="Swift Package Manager (SPM)" level="h4" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -77,9 +93,9 @@ In your project, link the following libraries:
 DatadogCore
 DatadogWebViewTracking
 ```
+{{% /collapse-content %}} 
 
-{{% /tab %}}
-{{% tab "Carthage" %}}
+{{% collapse-content title="Carthage" level="h4" %}}
 
 You can use [Carthage][1] to install `dd-sdk-ios`:
 ```
@@ -92,13 +108,32 @@ DatadogWebViewTracking.xcframework
 ```
 
 [1]: https://github.com/Carthage/Carthage
+{{% /collapse-content %}} 
+
+[1]: /real_user_monitoring/browser/setup/#npm
+[2]: /real_user_monitoring/ios/
+[3]: https://docs.datadoghq.com/logs/log_collection/ios
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+
+[1]: /real_user_monitoring/browser/setup/#npm
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
+
+[1]: /real_user_monitoring/browser/setup/#npm
 
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Kotlin Multiplatform
 
-Add `DatadogWebViewTracking` library to your application by following the guide [here][7].
+Add `DatadogWebViewTracking` library to your application by following the guide [here][5].
 
 ### Instrument your web views
 
@@ -122,6 +157,13 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
    ```
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+
+**Note**:
+In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
+
+```kotlin
+    webView.settings.javaScriptEnabled = true
+```
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [2]: /real_user_monitoring/android/?tab=kotlin#setup
@@ -252,26 +294,35 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 
 ### Access your web views
 
-Your web views appear in the [RUM Explorer][5] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
+Your web views appear in the [RUM Explorer][6] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
-Filter on your Android and Android TV applications, and click a session. A side panel with a list of events in the session appears.
+To access your web views:
 
-{{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
+1. Navigate to **Digital Experiences > Real User Monitoring > (Sessions) Explorer**.
+2. Create a query to filter on the following:
+   - Your Android and Android TV applications using either `application.id` or `application.name`
+   - The web component using `service`
+   - The platform using `source`
+3. Click a session. A side panel with a list of events in the session appears.
 
-Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
+   {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
+
+   Any service with the web icon indicates a webview.
+
+From here, you can hover over a session event and click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
 
 ## Billing implications
 
-See [RUM & Session Replay Billing][6] for details on how web views in mobile applications impact session recordings and billing.
+See [RUM & Session Replay Billing][7] for details on how web views in mobile applications impact session recordings and billing.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/browser/setup/#npm
-[3]: /real_user_monitoring/ios/
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup
 [4]: /logs/log_collection/ios
-[5]: https://app.datadoghq.com/rum/explorer
-[6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
+[6]: https://app.datadoghq.com/rum/explorer
+[7]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

@@ -32,9 +32,18 @@ Configure **Notification Preferences** to control when and how you receive On-Ca
 
 Under **Other Notifications**, you can opt to receive a **Shift reminder** before your On-Call shift begins.
 
+### Supported notification methods
+
+Datadog supports:
+- Push notifications through the [Datadog mobile app][3]
+- Emails (HTML or text format)
+- SMS
+- Phone calls
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/on-call/profile
 [2]: /service_management/mobile/?tab=ios
+[3]: /mobile

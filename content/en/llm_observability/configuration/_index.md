@@ -15,35 +15,56 @@ further_reading:
 
 ## Overview
 
-You can configure your LLM applications on the [Configuration page][1] with settings that can optimize your application's performance and security. 
-
-Topics
-: Helps identify and filter out irrelevant or malicious input, ensuring your LLM application stays focused on its intended purpose. 
+You can configure your LLM applications on the Configuration page with settings that can optimize your application's performance and security. 
 
 Evaluations
-: Enables Datadog to assess your LLM application against respective dimensions like Quality and Security and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. 
+: Enables Datadog to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. For more information about evaluations, see [Terms and Concepts][1].
 
-Select an LLM application set up with LLM Observability to start customizing its topics and evaluations. 
+Topics
+: Helps identify irrelevant input for the `topic relevancy` out-of-the-box evaluation, ensuring your LLM application stays focused on its intended purpose. 
 
-{{< img src="llm_observability/configuration.png" alt="An example of an LLM application's configuration settings in LLM Observability" style="width:100%;" >}}
+## Connect your OpenAI account
 
-Enabling any of the [out-of-the-box evaluations](#select-evaluations) outside of `Language Mismatch` shares your input and output to OpenAI. 
+Connect your OpenAI account to LLM Observability with your OpenAI API key.
 
-## Enter a topic
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][2]. 
+1. Select **Connect** on the OpenAI tile.
+1. Follow the instructions on the tile. 
+   - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
+1. Enable **Invoke Model from this API key**.
 
-To enter a topic, click the Edit icon and add keywords. For example, for an LLM application that was designed for incident management, add `observability`, `software engineering`, or `incident resolution`. 
+{{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
-Topics can contain multiple words and should be as specific and descriptive as possible. For example, if your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
+## Select and enable evaluations
 
-## Select evaluations
+1. Navigate to [**LLM Observability > Settings > Evaluations**][3]. 
+1. Click on the evaluation you want to enable.
+1. Select **OpenAI** as your LLM provider.
+1. Select the OpenAI account you want to run the evaluation on.
+1. Assign the LLM application you want to run the evaluation on.
 
-To enable evaluations, click the toggle for the respective evaluations that you'd like to assess your LLM application against in the Quality and Security and Safety sections. For more information about evaluations, see [Terms and Concepts][2].
+After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using the OpenAI API key you provided.
 
-<div class="alert alert-warning">By enabling the out-of-the-box evaluations, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
+For more information about evaluations, see [Terms and Concepts][1].
+
+## Provide topics for topic relevancy
+
+Providing topics allows you to use the [topic relevancy][4] evaluation. 
+
+1. Go to [**LLM Observability > Applications**][5].
+1. Select the application you want to add topics for.
+1. At the bottom of the left sidebar, select **Configuration**.
+1. Add topics in the pop-up modal.
+
+Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/llm/config
-[2]: /llm_observability/terms/
+[1]: /llm_observability/terms/
+[2]: https://app.datadoghq.com/llm/settings/integrations
+[3]: https://app.datadoghq.com/llm/settings/evaluations
+[4]: /llm_observability/terms/#topic-relevancy
+[5]: https://app.datadoghq.com/llm/applications

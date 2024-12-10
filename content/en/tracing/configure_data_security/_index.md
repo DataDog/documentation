@@ -607,6 +607,14 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 ## Telemetry collection
 
+{{< site-region region="gov" >}}
+
+<div class="alert alert-warning">
+Instrumentation telemetry is not available for the {{< region-param key="dd_site_name" >}} site, but is enabled by default. To avoid errors, {{< region-param key="dd_site_name" >}} users should disable this capability by setting <code>DD_INSTRUMENTATION_TELEMETRY_ENABLED=false</code> on their application and <code>DD_APM_TELEMETRY_ENABLED=false</code> on their Agent.
+</div>
+
+{{< /site-region >}}
+
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
 You can disable this telemetry collection using either of these settings:
@@ -624,7 +632,7 @@ apm_config:
 {{% tab "Environment variables" %}}
 
 ```bash
-export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
+export DD_APM_TELEMETRY_ENABLED=false
 ```
 
 {{% /tab %}}

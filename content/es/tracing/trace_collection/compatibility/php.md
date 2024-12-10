@@ -19,7 +19,7 @@ type: multi-code-lang
 La biblioteca de PHP Datadog Trace es de código abierto - consulta el [repositorio GitHub][1] para obtener más información.
 
 Datadog APM para PHP se basa en dependencias definidas en versiones específicas del sistema operativo host, tiempo de ejecución de PHP,
-determinadas <txprotected>bibliotecas</txprotected> de PHP y el Datadog Agent o API.
+determinadas bibliotecas de PHP y el Datadog Agent o API.
 Cuando estas versiones dejan de tener soporte técnico de los responsables de mantenimiento, Datadog APM para PHP también limita su soporte técnico a estas.
 
 #### Niveles de soporte técnico
@@ -91,7 +91,7 @@ Por defecto, Datadog **es compatible con todos los marcos web de PHP** desde el 
 
 La instrumentación al nivel del marco incluye el rastreo de métodos internos y el etiquetado específico del marco.
 
-El rastreo web genérico incluye un tramo (span) de`web.request` para rastrear la latencia y los errores que se originan en la llamada, además de tramos para las <txprotected>bibliotecas</txprotected> compatibles - por ejemplo: base de datos y clientes HTTP.
+El rastreo web genérico incluye un tramo (span) de`web.request` para rastrear la latencia y los errores que se originan en la llamada, además de tramos para las bibliotecas compatibles - por ejemplo: base de datos y clientes HTTP.
 
 En la siguiente tabla se enumeran algunos de los marcos y versiones que Datadog rastrea con éxito.
 
@@ -134,7 +134,7 @@ El rastreo desde CLI SAPI está desactivado por defecto. Para habilitar el rastr
 | Laravel Artisan | 5.x, 8.x, 9.x, 10.x | Todas las versiones compatibles de PHP  |
 | Symfony CLI     | 4.x, 5.x, 6.x       | Todas las versiones compatibles de PHP  |
 
-Para solicitar soporte para <txprotected>bibliotecas</txprotected> CLI adicionales, ponte en contacto con nuestro magnífico [equipo de soporte técnico][3].
+Para solicitar soporte para bibliotecas CLI adicionales, ponte en contacto con nuestro magnífico [equipo de soporte técnico][3].
 
 #### Compatibilidad de almacenes de datos
 
@@ -165,7 +165,7 @@ Para solicitar asistencia para otros almacenes de datos, ponte en contacto con n
 | Cola de Laravel     | Versiones de Laravel compatibles | Todas las versiones compatibles de PHP  |
 
 
-Para solicitar asistencia para <txprotected>bibliotecas</txprotected> adicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][3].
+Para solicitar asistencia para bibliotecas adicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][3].
 
 #### Stacks tecnológicos de llamadas en profundidad en PHP 5
 
@@ -177,13 +177,13 @@ La instrumentación [generadores][6] no es compatible con PHP 5 y PHP 7.
 
 ### PCNTL
 
-Datadog es compatible con el rastreo de <txprotected>procesos</txprotected> de bifurcaciones utilizando [pcntl][7]. Cuando se detecta una llamada a `pcntl_fork`, se crea un tramo dedicado y se instrumenta el proceso de bifurcación. Esto puede desactivarse con `DD_TRACE_FORKED_PROCESS`. Consulta la [página de configuración de bibliotecas][9] para obtener más información.
+Datadog es compatible con el rastreo de procesos de bifurcaciones utilizando [pcntl][7]. Cuando se detecta una llamada a `pcntl_fork`, se crea un tramo dedicado y se instrumenta el proceso de bifurcación. Esto puede desactivarse con `DD_TRACE_FORKED_PROCESS`. Consulta la [página de configuración de bibliotecas][9] para obtener más información.
 
 Si la aplicación invoca `pcntl_unshare(CLONE_NEWUSER);` y el rastreador está instalado, la aplicación se bloquea fatalmente. Esto ocurre porque `unshare` con `CLONE_NEWUSER` requiere que el proceso [no sea encadenado][8], mientras que el rastreador de PHP utiliza un subproceso separado para enviar trazas (traces) al Datadog Agent sin bloquear el proceso principal.
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: https://www.datadoghq.com/support/

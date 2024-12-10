@@ -102,9 +102,9 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, prometheus, otlp]
+      receivers: [hostmetrics, prometheus, otlp, datadog/connector]
       processors: [batch]
-      exporters: [datadog]
+      exporters: [datadog/exporter]
     traces:
       receivers: [otlp]
       processors: [batch]
@@ -112,7 +112,7 @@ service:
     logs:
       receivers: [otlp, filelog]
       processors: [batch]
-      exporters: [datadog]
+      exporters: [datadog/exporter]
 ```
 
 The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
@@ -629,8 +629,6 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 
 ### Containers overview dashboard
-
-<div class="alert alert-info">The Container Overview dashboard is in private beta. <a href="https://forms.gle/g3ndvTnepWY4Bvuh7">Fill out this form</a> to try it out.</div>
 
 <div class="alert alert-warning">This feature is affected by <a href="/containers/guide/docker-deprecation/">Docker deprecation in Kubernetes</a> and you might not be able to use <code>dockerstatsreceiver</code> for OpenTelemetry with Kubernetes version 1.24+.</div>
 

@@ -11,9 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
-  tag: "Learning Center"
-  text: "Introduction to Synthetic Tests"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with browser tests"
@@ -52,6 +52,20 @@ Define the configuration of your browser test.
    You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
 
 6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+
+### Snippets
+
+When setting up a new Synthetic Monitoring browser test, use snippets to automatically fill in your devices and regions, rather than selecting these options manually. The following snippets are available:
+
+* **Screen sizes**: Automatically perform your browser tests on a specifically sized screen across browsers:
+   * **Large**
+   * **Tablet**
+   * **Mobile**
+
+* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA). 
+</br><br>
+
+  {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
 
 ### Advanced options
 

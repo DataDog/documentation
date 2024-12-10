@@ -228,8 +228,8 @@
   "UpsertCatalogEntity": {
     "description": "Create or update entities in Software Catalog.",
     "summary": "Create or update entities",
-    "request_description": "Entity YAML/JSON.",
-    "request_schema_description": "Create / Update entity request."
+    "request_description": "Entity YAML or JSON.",
+    "request_schema_description": "Create or update entity request."
   },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
@@ -301,10 +301,6 @@
     "request_description": "",
     "request_schema_description": "AWS CUR config Patch Request."
   },
-  "ListAWSRelatedAccounts": {
-    "description": "List the AWS accounts in an organization by calling 'organizations:ListAccounts' from the specified management account.",
-    "summary": "List related AWS accounts"
-  },
   "ListCostAzureUCConfigs": {
     "description": "List the Azure configs.",
     "summary": "List Cloud Cost Management Azure configs"
@@ -342,10 +338,6 @@
   "GetCustomCostsFile": {
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
-  },
-  "GetCloudCostActivity": {
-    "description": "Get the Cloud Cost Management activity.",
-    "summary": "Cloud Cost Enabled"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -401,6 +393,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "CreateDataDeletionRequest": {
+    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
+    "summary": "Creates a data deletion request",
+    "request_description": "",
+    "request_schema_description": "Object needed to create a data deletion request."
+  },
+  "GetDataDeletionRequests": {
+    "description": "Gets a list of data deletion requests based on several filter parameters.",
+    "summary": "Gets a list of data deletion requests"
+  },
+  "CancelDataDeletionRequest": {
+    "description": "Cancels a data deletion request by providing its ID.",
+    "summary": "Cancels a data deletion request"
+  },
+  "GetDomainAllowlist": {
+    "description": "Get the domain allowlist for an organization.",
+    "summary": "Get Domain Allowlist"
+  },
+  "PatchDomainAllowlist": {
+    "description": "Update the domain allowlist for an organization.",
+    "summary": "Sets Domain Allowlist",
+    "request_description": "",
+    "request_schema_description": "Request containing the desired email domain allowlist configuration."
+  },
   "CreateDORADeployment": {
     "description": "Use this API endpoint to provide data about deployments for DORA metrics.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
     "summary": "Send a deployment event for DORA Metrics",
@@ -441,6 +457,12 @@
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
     "summary": "Get a list of events"
   },
+  "CreateEvent": {
+    "description": "This endpoint allows you to post events.\n\nOnly events with **`change` category** are under General Availability. Refer to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further details.",
+    "summary": "Post an event",
+    "request_description": "Event request object",
+    "request_schema_description": "Payload for creating an event."
+  },
   "SearchEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search events",
@@ -456,6 +478,30 @@
     "summary": "Create an incident",
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
+  },
+  "ListIncidentTypes": {
+    "description": "Get all incident types.",
+    "summary": "Get a list of incident types"
+  },
+  "CreateIncidentType": {
+    "description": "Create an incident type.",
+    "summary": "Create an incident type",
+    "request_description": "Incident type payload.",
+    "request_schema_description": "Create request for an incident type."
+  },
+  "DeleteIncidentType": {
+    "description": "Delete an incident type.",
+    "summary": "Delete an incident type"
+  },
+  "GetIncidentType": {
+    "description": "Get incident type details.",
+    "summary": "Get incident type details"
+  },
+  "UpdateIncidentType": {
+    "description": "Update an incident type.",
+    "summary": "Update an incident type",
+    "request_description": "Incident type payload.",
+    "request_schema_description": "Patch request for an incident type."
   },
   "SearchIncidents": {
     "description": "Search for incidents matching a certain query.",
@@ -533,6 +579,42 @@
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
   },
+  "ListAWSAccounts": {
+    "description": "Get a list of AWS Account Integration Configs.",
+    "summary": "List all AWS integrations"
+  },
+  "CreateAWSAccount": {
+    "description": "Create a new AWS Account Integration Config.",
+    "summary": "Create an AWS integration",
+    "request_description": "",
+    "request_schema_description": "AWS Account Create Request body"
+  },
+  "DeleteAWSAccount": {
+    "description": "Delete an AWS Account Integration Config",
+    "summary": "Delete an AWS integration"
+  },
+  "GetAWSAccount": {
+    "description": "Get an AWS Account Integration Config",
+    "summary": "Get an AWS integration by config ID"
+  },
+  "UpdateAWSAccount": {
+    "description": "Update an AWS Account Integration Config",
+    "summary": "Update an AWS integration",
+    "request_description": "",
+    "request_schema_description": "AWS Account Update Request body"
+  },
+  "ListAWSNamespaces": {
+    "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
+    "summary": "List available namespaces"
+  },
+  "CreateNewAWSExternalID": {
+    "description": "Generate a new external ID for AWS role-based authentication.",
+    "summary": "Generate a new external ID"
+  },
+  "ListAWSLogsServices": {
+    "description": "Get a list of AWS services that can send logs to Datadog.",
+    "summary": "Get list of AWS log ready services"
+  },
   "ListGCPSTSAccounts": {
     "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
     "summary": "List all GCP STS-enabled service accounts"
@@ -567,33 +649,29 @@
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
     "summary": "Get channel information by name"
   },
-  "ListApiHandles": {
-    "description": "Get a list of all handles from the Datadog Microsoft Teams integration.",
-    "summary": "Get all handles"
+  "ListTenantBasedHandles": {
+    "description": "Get a list of all tenant-based handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all tenant-based handles"
   },
-  "CreateApiHandle": {
-    "description": "Create a handle in the Datadog Microsoft Teams integration.",
-    "summary": "Create handle",
-    "request_description": "Handle payload.",
-    "request_schema_description": "Create handle request."
+  "CreateTenantBasedHandle": {
+    "description": "Create a tenant-based handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Create tenant-based handle request."
   },
-  "GetApiHandleByName": {
-    "description": "Get the tenant, team, and channel information of a handle by name from the Datadog Microsoft Teams integration.",
-    "summary": "Get handle information by name"
+  "DeleteTenantBasedHandle": {
+    "description": "Delete a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete tenant-based handle"
   },
-  "DeleteApiHandle": {
-    "description": "Delete a handle from the Datadog Microsoft Teams integration.",
-    "summary": "Delete handle"
+  "GetTenantBasedHandle": {
+    "description": "Get the tenant, team, and channel information of a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get tenant-based handle information"
   },
-  "GetApiHandle": {
-    "description": "Get the tenant, team, and channel information of a handle from the Datadog Microsoft Teams integration.",
-    "summary": "Get handle information"
-  },
-  "UpdateApiHandle": {
-    "description": "Update a handle from the Datadog Microsoft Teams integration.",
-    "summary": "Update handle",
-    "request_description": "Opsgenie service payload.",
-    "request_schema_description": "Update handle request."
+  "UpdateTenantBasedHandle": {
+    "description": "Update a tenant-based handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update tenant-based handle",
+    "request_description": "Tenant-based handle payload.",
+    "request_schema_description": "Update tenant-based handle request."
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -962,7 +1040,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name.",
+    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
@@ -1066,7 +1144,7 @@
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
   "MuteFindings": {
@@ -1156,7 +1234,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1252,6 +1330,30 @@
     "summary": "Update a RUM application",
     "request_description": "",
     "request_schema_description": "RUM application update request."
+  },
+  "ListRumMetrics": {
+    "description": "Get the list of configured rum-based metrics with their definitions.",
+    "summary": "Get all rum-based metrics"
+  },
+  "CreateRumMetric": {
+    "description": "Create a metric based on your organization's RUM data.\nReturns the rum-based metric object from the request body when the request is successful.",
+    "summary": "Create a rum-based metric",
+    "request_description": "The definition of the new rum-based metric.",
+    "request_schema_description": "The new rum-based metric body."
+  },
+  "DeleteRumMetric": {
+    "description": "Delete a specific rum-based metric from your organization.",
+    "summary": "Delete a rum-based metric"
+  },
+  "GetRumMetric": {
+    "description": "Get a specific rum-based metric from your organization.",
+    "summary": "Get a rum-based metric"
+  },
+  "UpdateRumMetric": {
+    "description": "Update a specific rum-based metric from your organization.\nReturns the rum-based metric object from the request body when the request is successful.",
+    "summary": "Update a rum-based metric",
+    "request_description": "New definition of the rum-based metric.",
+    "request_schema_description": "The new rum-based metric body."
   },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
@@ -1587,6 +1689,34 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "ListHistoricalJobs": {
+    "description": "List historical jobs.",
+    "summary": "List historical jobs"
+  },
+  "RunHistoricalJob": {
+    "description": "Run a historical job.",
+    "summary": "Run a historical job",
+    "request_description": "",
+    "request_schema_description": "Run a historical job request."
+  },
+  "ConvertJobResultToSignal": {
+    "description": "Convert a job result to a signal.",
+    "summary": "Convert a job result to a signal",
+    "request_description": "",
+    "request_schema_description": "Request for converting historical job results to signals."
+  },
+  "DeleteHistoricalJob": {
+    "description": "Delete an existing job.",
+    "summary": "Delete an existing job"
+  },
+  "GetHistoricalJob": {
+    "description": "Get a job's details.",
+    "summary": "Get a job's details"
+  },
+  "CancelHistoricalJob": {
+    "description": "Cancel a historical job.",
+    "summary": "Cancel a historical job"
+  },
   "CreateSLOReportJob": {
     "description": "Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.\n\nCheck the status of the job and download the CSV report using the returned `report_id`.",
     "summary": "Create a new SLO report",
@@ -1732,6 +1862,10 @@
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
+  },
+  "GetBillingDimensionMapping": {
+    "description": "Get a mapping of billing dimensions to the corresponding keys for the supported usage metering public API endpoints.\nMapping data is updated on a monthly cadence.\n\nThis endpoint is only accessible to [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "summary": "Get billing dimension mapping for usage endpoints"
   },
   "GetCostByOrg": {
     "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",

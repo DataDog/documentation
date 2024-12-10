@@ -43,7 +43,7 @@ draft: false
 git_integration_title: argo_rollouts
 integration_id: argo-rollouts
 integration_title: Argo Rollouts
-integration_version: 1.0.2
+integration_version: 2.1.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_rollouts

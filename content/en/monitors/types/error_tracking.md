@@ -16,7 +16,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -48,7 +48,7 @@ There are two types of alerting conditions you can configure your Error Tracking
 {{% tab "High Impact" %}}
 High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
 
-1. Select **RUM**, **APM**, or **Logs** and build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+1. Build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
     - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
@@ -137,7 +137,7 @@ Error Tracking monitors use [Issue States][2] to ensure that your alerts stay fo
 
 As a result, Datadog does not recommend using `issue.age` and `issue.regression.age`. However, If state-based monitor behavior is not suitable for you, these filters can still be used if manually specified.
 
-**Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be`@issue.age` or `issue.age`.
+**Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be `@issue.age` or `issue.age`.
 
 ### New Issue monitors are generating too much noise
 New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.

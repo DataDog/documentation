@@ -60,14 +60,14 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 Alongside SNMP devices, you can monitor wireless and SD-WAN (Software-Defined Wide Area Network) environments for select vendors. Collect metrics from wireless access points, and monitor the health of SD-WAN tunnels and edge devices.
 
-{{< img src="network_device_monitoring/getting_started/sd-wan-datadog-integration.png" alt="SD-WAN reference architecture" style="width:90%;" >}}
+{{< img src="network_device_monitoring/getting_started/sd-wan-datadog-integration_no_numbers.png" alt="SD-WAN reference architecture" style="width:90%;" >}}
 
 SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. For more information on Datadog SD-WAN, see the [SD-WAN reference architecture][25].
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
-  - [Meraki SD-WAN][15] (public beta)
-  - [Cisco SD-WAN][14] (public beta)
+  - [Meraki SD-WAN][15] 
+  - [Cisco SD-WAN][14] 
 
 ### Enrich network devices with tags 
 

@@ -11,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
@@ -21,6 +21,10 @@ further_reading:
   tag: "Blog"
   text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 ---
+
+{{< callout url="https://www.datadoghq.com/private-beta/cost-anomaly-detection/" btn_hidden="false" header="In Preview">}}
+Cost anomaly detection is in Preview. To request access, complete the form.
+{{< /callout >}}
 
 ## Overview
 Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.

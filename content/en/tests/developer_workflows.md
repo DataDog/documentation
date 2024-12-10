@@ -1,6 +1,6 @@
 ---
 title: Enhancing Developer Workflows with Datadog 
-description: Learn how to use Datadog Test Visibility with additional Datadog features to accelerate your development process.
+description: Learn how to use Datadog Test Optimization with additional Datadog features to accelerate your development process.
 aliases:
 - /continuous_integration/guides/developer_workflows
 - /continuous_integration/guides/pull_request_comments
@@ -24,17 +24,17 @@ further_reading:
 ## Overview
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-[Test Visibility][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
+[Test Optimization][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
 - [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)
 - [Create and open GitHub issues](#create-and-open-github-issues) 
 - [Create Jira issues through Case Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 
-These features are available for all Test Visibility customers, and they do not require usage of the [Datadog GitHub integration][4].
+These features are available for all Test Optimization customers, and they do not require usage of the [Datadog GitHub integration][4].
 
 ## Test summaries in GitHub pull requests
 
@@ -74,11 +74,11 @@ Comments only appear on pull requests that were opened before the test run and t
 
 ## Create and open GitHub issues
 
-With Test Visibility, you can create and open pre-filled GitHub issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
+With Test Optimization, you can create and open pre-filled GitHub issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Optimization can help you track and maintain accountability for test failures and flaky tests.
 
 ### In-app entry points
 
-You can create pre-filled GitHub issues from three areas within Test Visibility:
+You can create pre-filled GitHub issues from three areas within Test Optimization:
 
 - [Commit Overview page (from the **Commits** table)](#commit-overview) 
 - [Branch Overview page](#branch-overview)
@@ -112,13 +112,13 @@ Below is what a pre-filled GitHub issue might look like:
 
 ## Create Jira issues
 
-With [Case Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests. 
+With [Case Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Optimization can help you track and maintain accountability for test failures and flaky tests. 
 
 When you update the status of a Jira issue, the status in Case Management updates and reflects the latest case status.
 
 ### In-app entry points
 
-After you have [set up the Jira integration][7], you can create cases from three areas within Test Visibility:
+After you have [set up the Jira integration][7], you can create cases from three areas within Test Optimization:
 
 - [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
 - [Flaky Tests section](#branch-overview-1)

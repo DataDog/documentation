@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
 ## Availability
 
@@ -76,7 +76,7 @@ Datadog does **not** send:
 
 ## Security considerations
 
-Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
+Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users.
 
 To further mitigate this risk, Datadog implements the following security measures:
 
@@ -99,19 +99,21 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 {{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
 
-## Data Security
+## Cloud Storage scanning
 
-<div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< /callout >}}
 
-If you have [Sensitive Data Scanner][8] and [Cloud Security Management][9] enabled, you can use Data Security to locate sensitive data and fix security issues impacting AWS S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
 
-Data Security scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Data Security leverages rules provided by Sensitive Data Scanner to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Datastores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
-Along with displaying sensitive data matches, Data Security surfaces any security issues detected by Cloud Security Management affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking. 
+When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking.
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
 
@@ -129,3 +131,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [8]: /sensitive_data_scanner
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
+[11]: /sensitive_data_scanner/library_rules/

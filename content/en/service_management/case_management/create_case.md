@@ -59,7 +59,7 @@ Create a case through the [API endpoint][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /monitors/manage/status/
+[2]: /monitors/status/
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /api/latest/case-management/#create-a-case

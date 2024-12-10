@@ -44,7 +44,8 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7<br/>
-.NET 8
+.NET 8<br/>
+.NET 9
 
 <div class="alert alert-warning">
   <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
@@ -63,7 +64,7 @@ The following profiling features are available in the following minimum versions
 | Allocations profiling     | Preview, 2.18.0+                   | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 6+                           |
 | Lock Contention profiling | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
 | Live heap profiling       | Preview, 2.22.0+                   | .NET 7+                                                                                  |
-| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
+| [Trace to Profiling integration][12]       | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 

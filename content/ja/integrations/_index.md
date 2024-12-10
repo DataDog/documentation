@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - インテグレーション
+  - インテグレーションセットアップ
 aliases:
 - /ja/integrations/verisign_openhybrid/
 - /ja/integrations/snyk/

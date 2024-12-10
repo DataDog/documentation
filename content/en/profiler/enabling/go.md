@@ -25,7 +25,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 
 The Datadog Profiler requires Go 1.19+.
 
-For [Code Hotspots][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.37.0+.
+For the [Trace to Profiling integration][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.51.0+.
 
 Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 

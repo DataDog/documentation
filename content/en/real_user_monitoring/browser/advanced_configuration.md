@@ -349,6 +349,45 @@ To override default RUM view names so that they are aligned with how you've defi
    {{% /tab %}}
    {{< /tabs >}}
 
+### Set view name
+
+Use `setViewName(name: string)` to update the name of the current view. This allows you to change the view name during the view without starting a new one.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewName('<VIEW_NAME>');
+
+// Code example
+datadogRum.setViewName('Checkout');
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('<VIEW_NAME>');
+})
+
+// Code example
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('Checkout');
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
+
+// Code example
+window.DD_RUM && window.DD_RUM.setViewName('Checkout');
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Changing the view name affects the view and its child events from the time the method is called.
+
 ## Enrich and control RUM data
 
 The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog.
@@ -370,9 +409,9 @@ The potential `context` values are:
 | RUM event type   | Context                   |
 |------------------|---------------------------|
 | View             | [Location][6]                  |
-| Action           | [Event][7]                     |
-| Resource (XHR)   | [XMLHttpRequest][8] and [PerformanceResourceTiming][9]            |
-| Resource (Fetch) | [Request][10], [Response][11], and [PerformanceResourceTiming][9]      |
+| Action           | [Event][7] and handling stack                     |
+| Resource (XHR)   | [XMLHttpRequest][8], [PerformanceResourceTiming][9], and handling stack            |
+| Resource (Fetch) | [Request][10], [Response][11], [PerformanceResourceTiming][9], and handling stack      |
 | Resource (Other) | [PerformanceResourceTiming][9] |
 | Error            | [Error][12]                     |
 | Long Task        | [PerformanceLongTaskTiming][13] |
@@ -502,6 +541,8 @@ You can update the following event properties:
 |   `view.url`            |   String  |   The URL of the active web page.                            |
 |   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
 |   `view.name`           |   String  |   The name of the current view.                            |
+|   `service`             |   String  |   The service name for your application.                                                            |
+|   `version`             |   String  |   The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                          |
 |   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
 |   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
@@ -1162,6 +1203,91 @@ However, this feature comes with some **limitations**:
 - The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
 - `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
 
+## Micro frontend
+
+Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace. To use it, you must be able to extract service and version properties from your application's file paths and filenames.
+
+### How to use it
+
+In the `beforeSend` property, you can override the service and version properties. To help you identify where the event originated, use the `context.handlingStack` property.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+datadogRum.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+            if (service && version) {
+                event.service = service;
+                event.version = version;
+            }
+
+            return true;
+        },
+    });
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM && window.DD_RUM.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Any query done in the RUM Explorer can use the service attribute to filter events.
+
+### Limitations
+
+Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
+- Action events collected automatically
+- Resource events other than XHR and Fetch.
+- View events (but you can [override default RUM view names][21] instead)
+- CORS and CSP violations
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1169,7 +1295,7 @@ However, this feature comes with some **limitations**:
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/browser/setup
+[4]: /real_user_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -1186,4 +1312,4 @@ However, this feature comes with some **limitations**:
 [18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-
+[21]: /real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names

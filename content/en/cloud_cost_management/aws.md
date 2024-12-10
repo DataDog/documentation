@@ -255,11 +255,13 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
 | `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
 | `aws_operation`              | The operation associated with the item (for example, RunInstances).|
-| `aws_region`                 | The region associated with the item (such as `us-east-1`).|
+| `aws_region`                 | The region associated with the item (for example, us-east-1).|
 | `aws_availability_zone`      | The availability zone associated with the item.|
 | `aws_resource_id`            | The resource ID associated with the item.|
 | `aws_instance_type`          | The instance type of the item.|
 | `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
+| `aws_datatransfer_type`      | The type of data transfer associated with the item (for example, cross-zone or cross-region).|
+| `aws_datatransfer_direction` | The direction of data transfer associated with the item (for example, in or out).|
 | `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
 | `is_aws_ec2_compute_on_demand`| Whether the usage is on-demand.|
 | `is_aws_ec2_compute_reservation`| Whether the usage is associated with a Reserved Instance.|

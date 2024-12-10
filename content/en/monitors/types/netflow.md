@@ -10,13 +10,13 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
 
-{{< callout btn_hidden="true" header="Join the Beta!">}}
-The NetFlow monitor is in private beta. Reach out to your Datadog representative to sign up for access.
+{{< callout btn_hidden="true" header="Access the Preview!">}}
+The NetFlow monitor is in Preview. Reach out to your Datadog representative to sign up for access.
 {{< /callout >}}
 
 ## Overview
