@@ -35,7 +35,7 @@ Install the integration through the [Statuspage Integration tile][1]. For more i
 
 ## Add a Statuspage incident
 
-You must have a role with Incidents Write and Integrations Read permissions in order to add a Statuspage incident.
+You must have a role with Incidents Write and Integrations Read permissions to add a Statuspage incident.
 
 1. In the [Incidents page][4], open an existing incident.
 1. At the top of the incident page, click **Add a Statuspage incident**.
