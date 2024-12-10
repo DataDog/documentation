@@ -112,7 +112,7 @@ You can create groups of connections so that your workflows can authenticate int
 
 You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.
 
-Each connection in the group must have a set of unique identifier tags so that a workflow can dynamically select the correct correction at runtime. For example:
+Each connection in the group must have a set of unique identifier tags so that a workflow can dynamically select the correct connection at runtime. For example:
 - `connectionA {account_id:123456789}` and `connectionB {account_id:987654321}` can be grouped together.
 - `connectionA {account_id:123456789}` and `connectionC {account_id:123456789}` can't be grouped, because the group would contain duplicate tag values.
 
