@@ -102,7 +102,7 @@ Map the custom message attribute of the logs to the official Datadog `message` a
 : Use the [message remapper][9] to define the official message of the log if application logs do not map to the standard message attribute. This allows users to search for logs using free text.
 
 Set a namespace for custom attributes within your logs
-: Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14].
+: Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14]. For example, `file` would be remapped to `integration_name.file`.
 Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. 
 
 1. Expand the newly created pipeline and click **Add Processor** to begin building your pipeline using processors.
@@ -145,7 +145,7 @@ Attributes mapped to custom facets must be namespaced first
 For example, remapping `attribute_name` to `integration_name.attribute_name`.
 
 Custom facets must not duplicate an existing Datadog Facet
-: To avoid confusion with existing out-of-the-box Datadog facets, avoid creating custom facets that duplicate an existing facets mapped to [Datadog Standard Attributes][6].
+: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that duplicate any existing facets already mapped to [Datadog Standard Attributes][6].
 
 Custom facets must be grouped under the `source` name
 : When creating a custom facet a group should be assigned. Set the `Group` value to the `source`, same as the integration's name.
