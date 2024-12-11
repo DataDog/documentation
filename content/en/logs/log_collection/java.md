@@ -459,73 +459,45 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
+{{< site-region region="us3,us5,ap1,gov" >}}
+  <div class="alert alert-warning">The TCP endpoint is not supported for the selected Datadog site {{< region-param key="dd_site_name" code="true" >}}. For a list of logging endpoinst, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a></div>
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+
 Use the [logstash-logback-encoder][11] logging library along with Logback to stream logs directly to Datadog.
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
-    {{< site-region region="us,us3,us5,ap1" >}}
+   For the following configuration, replace `<YOUR REGION INTAKE>` with the intake based on your region:{{< region-param key="dd_site_name" code="true" >}}. 
+    - **US1**: `intake.logs.datadoghq.com:10516`    
+    - **EU**: `tcp-intake.logs.datadoghq.eu:443`
 
-  ```xml
-  <configuration>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file>logs/app.log</file>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-    </appender>
-    <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <destination>intake.logs.datadoghq.com:10516</destination>
-      <keepAliveDuration>20 seconds</keepAliveDuration>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-          <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-              <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
-              </layout>
-            </prefix>
-      </encoder>
-      <ssl />
-    </appender>
+    ```xml
+    <configuration>
+      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+      </appender>
+      <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination><YOUR REGION INTAKE></destination>
+        <keepAliveDuration>20 seconds</keepAliveDuration>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
+                </layout>
+              </prefix>
+        </encoder>
+        <ssl />
+      </appender>
 
-    <root level="DEBUG">
-      <appender-ref ref="FILE"/>
-      <appender-ref ref="JSON_TCP" />
-    </root>
-  </configuration>
-  ```
-
-    {{< /site-region >}}
-
-    {{< site-region region="eu" >}}
-
-  ```xml
-  <configuration>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file>logs/app.log</file>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-    </appender>
-    <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-      <destination>tcp-intake.logs.datadoghq.eu:443</destination>
-      <keepAliveDuration>20 seconds</keepAliveDuration>
-      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-          <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-              <layout class="ch.qos.logback.classic.PatternLayout">
-                  <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
-              </layout>
-            </prefix>
-      </encoder>
-      <ssl />
-    </appender>
-
-    <root level="DEBUG">
-      <appender-ref ref="FILE"/>
-      <appender-ref ref="JSON_TCP" />
-    </root>
-  </configuration>
-  ```
-
-    {{< /site-region >}}
-
-    {{< site-region region="gov" >}}
-  Not supported.
-    {{< /site-region >}}
+      <root level="DEBUG">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="JSON_TCP" />
+      </root>
+    </configuration>
+    ```
 
     **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][12].
 
@@ -543,7 +515,9 @@ Use the [logstash-logback-encoder][11] logging library along with Logback to str
       <version>6.6</version>
     </dependency>
     ```
-
+    [11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+{{< /site-region >}}
 ## Getting further
 
 Enrich your log events with contextual attributes.
