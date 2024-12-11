@@ -153,7 +153,7 @@ To use a connection group:
 
 **Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow tries to use a connection you don't have Resolver permission for, the workflow fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure your workflow so that it can't point to a connection you don't have Resolver permission for.
-- Remove the connection you don't have Resolver permission for from the connection group.<div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
+- Remove the connection for which you don't have Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
 
