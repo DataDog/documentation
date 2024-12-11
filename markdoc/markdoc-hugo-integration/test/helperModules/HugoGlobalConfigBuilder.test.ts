@@ -18,8 +18,8 @@ describe('HugoFunctions', () => {
     }).not.toThrow();
   });
 
-  test('matches the snapshot', () => {
-    expect(JSON.stringify(hugoConfig, null, 2)).toMatchFileSnapshot(
+  test('matches the snapshot', async () => {
+    await expect(JSON.stringify(hugoConfig, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/HugoGlobalConfigBuilder.snap.json`
     );
   });

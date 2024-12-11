@@ -31,14 +31,14 @@ describe('treeManagement', () => {
     glossary
   });
 
-  test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
+  test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {
     const { renderableTree } = buildRenderableTree({
       parsedFile,
       variables: {},
       filtersManifest
     });
 
-    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
+    await expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/renderableTree.snap.json`
     );
   });

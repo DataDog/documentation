@@ -113,20 +113,20 @@ describe('custom components', () => {
     parser: 'html'
   });
 
-  test('ast', () => {
-    expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
+  test('ast', async () => {
+    await expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/renderer/customComponents/ast.snap.json`
     );
   });
 
-  test('renderableTree', () => {
-    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
+  test('renderableTree', async () => {
+    await expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/renderer/customComponents/renderableTree.snap.json`
     );
   });
 
-  test('renderedHtml', () => {
-    expect(formattedHtml).toMatchFileSnapshot(
+  test('renderedHtml', async () => {
+    await expect(formattedHtml).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/renderer/customComponents/renderedHtml.snap.html`
     );
   });

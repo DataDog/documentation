@@ -44,20 +44,20 @@ describe('description lists', () => {
     parser: 'html'
   });
 
-  test('ast', () => {
-    expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
+  test('ast', async () => {
+    await expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/renderer/descriptionLists/ast.snap.json`
     );
   });
 
-  test('renderableTree', () => {
-    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
+  test('renderableTree', async () => {
+    await expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/renderer/descriptionLists/renderableTree.snap.json`
     );
   });
 
-  test('renderedHtml', () => {
-    expect(formattedHtml).toMatchFileSnapshot(
+  test('renderedHtml', async () => {
+    await expect(formattedHtml).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/renderer/descriptionLists/renderedHtml.snap.html`
     );
   });

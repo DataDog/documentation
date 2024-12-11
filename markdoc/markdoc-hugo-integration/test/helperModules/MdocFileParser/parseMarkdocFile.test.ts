@@ -15,23 +15,23 @@ describe('FileParse.parseMdocFile', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  test(`creates an AST for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
+  test(`creates an AST for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {
     expect(ast).toBeDefined();
-    expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
+    await expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/ast.snap.json`
     );
   });
 
-  test(`creates frontmatter for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
+  test(`creates frontmatter for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {
     expect(frontmatter).toBeDefined();
-    expect(JSON.stringify(frontmatter, null, 2)).toMatchFileSnapshot(
+    await expect(JSON.stringify(frontmatter, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/frontmatter.snap.json`
     );
   });
 
-  test(`creates partials for ${sanitizedMarkdocFilename} that match the snapshot`, () => {
+  test(`creates partials for ${sanitizedMarkdocFilename} that match the snapshot`, async () => {
     expect(partials).toBeDefined();
-    expect(JSON.stringify(partials, null, 2)).toMatchFileSnapshot(
+    await expect(JSON.stringify(partials, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/partials.snap.json`
     );
   });

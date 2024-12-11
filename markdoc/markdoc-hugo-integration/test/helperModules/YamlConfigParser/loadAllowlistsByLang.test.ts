@@ -6,13 +6,13 @@ import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
 describe('YamlConfigParser.loadGlossariesByLang', () => {
   const langs = ['en', 'ja'];
 
-  test('matches the snapshot', () => {
+  test('matches the snapshot', async () => {
     const glossariesByLang = YamlConfigParser.loadGlossariesByLang({
       langs,
       filtersConfigDir: VALID_FILTERS_CONFIG_DIR
     });
 
-    expect(glossariesByLang).toMatchFileSnapshot(
+    await expect(glossariesByLang).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossariesByLang.test.snap`
     );
   });

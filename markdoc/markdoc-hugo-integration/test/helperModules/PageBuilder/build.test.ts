@@ -42,8 +42,8 @@ describe('PageBuilder.build', () => {
     filtersManifest: filtersManifest
   });
 
-  test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
-    expect(html).toMatchFileSnapshot(
+  test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {
+    await expect(html).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/PageBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
     );
   });

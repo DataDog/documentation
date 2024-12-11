@@ -10,7 +10,7 @@ import { SNAPSHOTS_DIR } from '../../config/constants';
 import { PageFiltersManifest } from '../../../src/schemas/pageFilters';
 
 describe('FiltersManifestBuilder.build', () => {
-  test('creates the expected object when given valid data', () => {
+  test('creates the expected object when given valid data', async () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
@@ -168,7 +168,7 @@ describe('FiltersManifestBuilder.build', () => {
       }
     };
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
-    expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
+    await expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/FiltersManifestBuilder/valid/filtersManifest.snap.json`
     );
   });

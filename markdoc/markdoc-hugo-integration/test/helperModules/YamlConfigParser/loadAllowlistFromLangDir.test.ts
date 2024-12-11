@@ -7,7 +7,7 @@ import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
 describe('YamlConfigParser.loadGlossaryFromLangDir', () => {
   const langDir = `${VALID_FILTERS_CONFIG_DIR}/en`;
 
-  test('builds the expected glossary', () => {
+  test('builds the expected glossary', async () => {
     const glossary = YamlConfigParser.loadGlossaryFromLangDir(langDir);
 
     const expectedGlossary = {
@@ -106,7 +106,7 @@ describe('YamlConfigParser.loadGlossaryFromLangDir', () => {
     };
 
     expect(_.isEqual(glossary, expectedGlossary)).toBe(true);
-    expect(glossary).toMatchFileSnapshot(
+    await expect(glossary).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossary.snap.json`
     );
   });
