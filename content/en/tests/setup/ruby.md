@@ -86,7 +86,6 @@ Alternatively, add it to your Gemfile manually:
 1. Add the `datadog-ci` gem to your `Gemfile`:
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
-source "<https://rubygems.org>"
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
@@ -204,7 +203,7 @@ For the full list of available instrumentation methods, see the [tracing documen
 
 {{% ci-git-metadata %}}
 
-## Manually instrumentating your tests
+## Manually instrumenting your tests
 
 <div class="alert alert-info">
 <strong>Attention</strong>: when using manual instrumentation, run your tests like you normally do: 
