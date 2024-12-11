@@ -9,7 +9,7 @@ further_reading:
   text: "Azure App Service Environment"
 ---
 
-<div class="alert alert-info">To instrument your Azure App Service containers with <code>serverless-init</code>, see <a href="/serverless/guide/azure_app_services_linux_containers_serverless_init">Instrument Azure App Service - Linux Container with serverless-init</a>.</div>
+<div class="alert alert-info">To instrument your Azure App Service containers with <code>serverless-init</code>, see <a href="/serverless/guide/azure_app_service_linux_containers_serverless_init">Instrument Azure App Service - Linux Container with serverless-init</a>.</div>
 
 ### Prerequisites
 

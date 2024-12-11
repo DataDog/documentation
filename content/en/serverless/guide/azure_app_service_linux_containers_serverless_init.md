@@ -29,7 +29,7 @@ Make sure you have a [Datadog API Key][6] and are using a programming language [
 
 ### Dockerfile
 
-Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
+Datadog publishes new releases of the serverless-init container image to Docker Hub, Google's gcr.io, and AWS's ECR:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
@@ -37,7 +37,7 @@ Datadog publishes new releases of the serverless-init container image to Google'
 
 Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
 * `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
@@ -82,7 +82,7 @@ Images are tagged based on semantic versioning, with each new version receiving 
 ### 2. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as an [Azure Secret][7] for privacy and safety.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 
@@ -102,7 +102,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsD client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
 - **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
 
@@ -116,7 +116,7 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 | `DD_SITE` | [Datadog site][4] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate between `0.0` and `1.0`.|
 | `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
 | `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
 | `DD_ENV`          | See [Unified Service Tagging][5].                                       |
