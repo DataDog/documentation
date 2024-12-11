@@ -7,7 +7,7 @@ const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';
 const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc.md$/);
 
-describe('MarkdocHugoIntegration', () => {
+describe('MarkdocHugoIntegration', async () => {
   const integration = new MarkdocHugoIntegration({
     config: {
       baseSiteDir: siteDir,
@@ -17,6 +17,8 @@ describe('MarkdocHugoIntegration', () => {
 
   // compile the bad files
   const { hasErrors, errorsByFilePath } = integration.compileMdocFiles();
+
+  const authorConsoleHtml = await integration.injectAuthorConsole();
 
   // sanitize the file paths so snapshots are consistent across machines
   const errorsByFilePathDup = { ...errorsByFilePath };
@@ -42,9 +44,15 @@ describe('MarkdocHugoIntegration', () => {
     });
   });
 
-  test(`the errors match the snapshot`, () => {
-    expect(JSON.stringify(errorsByFilePathDup, null, 2)).toMatchFileSnapshot(
+  test(`the errors match the snapshot`, async () => {
+    await expect(JSON.stringify(errorsByFilePathDup, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/invalidSite/errors.snap.json`
+    );
+  });
+
+  test('the author console HTML matches the snapshot', async () => {
+    await expect(authorConsoleHtml).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/invalidSite/authorConsole.html`
     );
   });
 });

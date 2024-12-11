@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@types/markdown-it": "^14.1.2",
+        "@vitejs/plugin-react": "^4.3.3",
         "chroma-highlight": "^2.4.2",
         "interweave": "^13.1.0",
         "js-yaml": "^4.1.0",
@@ -26,9 +27,10 @@
         "react-dom": "^18.3.1",
         "rimraf": "^5.0.5",
         "rollup": "^4.19.1",
-        "sfha-builder": "file:../sfha-builder",
         "stringcase": "^4.3.1",
         "uuid": "^10.0.0",
+        "vite": "^5.4.10",
+        "vite-plugin-singlefile": "^2.0.2",
         "zod": "^3.22.4"
     },
     "devDependencies": {

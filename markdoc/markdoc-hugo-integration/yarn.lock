@@ -2310,6 +2310,7 @@ __metadata:
     "@types/react": ^18.3.3
     "@types/react-dom": ^18.3.0
     "@types/uuid": ^10.0.0
+    "@vitejs/plugin-react": ^4.3.3
     "@vitest/coverage-v8": ^2.0.2
     chroma-highlight: ^2.4.2
     esbuild: 0.20.2
@@ -2324,10 +2325,11 @@ __metadata:
     react-dom: ^18.3.1
     rimraf: ^5.0.5
     rollup: ^4.19.1
-    sfha-builder: "file:../sfha-builder"
     stringcase: ^4.3.1
     typescript: ^5.4.3
     uuid: ^10.0.0
+    vite: ^5.4.10
+    vite-plugin-singlefile: ^2.0.2
     vitest: ^2.0.2
     zod: ^3.22.4
   languageName: unknown
@@ -2835,18 +2837,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sfha-builder@file:../sfha-builder::locator=markdoc-hugo-integration%40workspace%3A.":
-  version: 1.0.0
-  resolution: "sfha-builder@file:../sfha-builder#../sfha-builder::hash=5e0379&locator=markdoc-hugo-integration%40workspace%3A."
-  dependencies:
-    "@vitejs/plugin-react": ^4.3.3
-    typescript: ^5.6.3
-    vite: ^5.4.10
-    vite-plugin-singlefile: ^2.0.2
-  checksum: 9cd4675e740605615c7eeaf63f8b8452cb8ae8aa2dbbb6f110df409553f11bc9c71f8a7347d75c2515c75c38238df61123cb0a1b042cb5c06dca5197c11b08aa
-  languageName: node
-  linkType: hard
-
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
   resolution: "shebang-command@npm:2.0.0"
@@ -3122,7 +3112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.4.3, typescript@npm:^5.6.3":
+"typescript@npm:^5.4.3":
   version: 5.7.2
   resolution: "typescript@npm:5.7.2"
   bin:
@@ -3142,7 +3132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.4.3#~builtin<compat/typescript>, typescript@patch:typescript@^5.6.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.4.3#~builtin<compat/typescript>":
   version: 5.7.2
   resolution: "typescript@patch:typescript@npm%3A5.7.2#~builtin<compat/typescript>::version=5.7.2&hash=14eedb"
   bin:

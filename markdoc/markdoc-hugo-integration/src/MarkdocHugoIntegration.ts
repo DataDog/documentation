@@ -15,6 +15,8 @@ import { PageFiltersManifestSchema } from './schemas/pageFilters';
 import { Glossary } from './schemas/yaml/glossary';
 import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
+import { AuthorConsoleData } from './schemas/authorConsole';
+import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
 
 /**
  * The external interface of the integration.
@@ -78,6 +80,23 @@ export class MarkdocHugoIntegration {
         ...translatedFilterOptionsConfig
       };
     });
+  }
+
+  async injectAuthorConsole() {
+    const consoleData: AuthorConsoleData = {
+      glossary: this.glossariesByLang.en,
+      buildStatus: {
+        hasErrors: this.#hasErrors(),
+        errorsByFilePath: this.errorsByFilePath,
+        timestamp: Date.now()
+      }
+    };
+
+    const consoleHtml = await AuthorConsoleBuilder.buildHtml({
+      data: consoleData
+    });
+
+    return consoleHtml;
   }
 
   /**
