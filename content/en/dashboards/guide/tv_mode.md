@@ -22,7 +22,7 @@ To ensure that your dashboard displays correctly on a TV, follow these steps:
 
 While TV mode offers a convenient way to display dashboards, there are certain limitations and considerations:  
 - **12-Column Grid Restriction**: Dashboards in TV mode adhere to a fixed 12-column grid. This can limit the flexibility in stretching content to fill the entire screen width. In high-density mode, the dashboard is split into two grids of 12 columns, and more widgets will expand the dashboard vertically.  
-- **Aspect Ratio Constraints**: TV mode resizes the dashboard to fit everything on the screen without scrolling, which means an enforced aspect ratio. If the dashboard's height and width are disproportionate, it may result in white spaces on the edges. To minimize this, design your dashboard with an aspect ratio that closely matches your TV's display.  
+- **Aspect Ratio Constraints**: TV mode resizes the dashboard to fit everything on the screen without scrolling, which means an enforced aspect ratio. If the dashboard's height and width are disproportionate, it may result in white spaces on the edges and widgets can appear minimized (zoomed out). To minimize this, design your dashboard with an aspect ratio that closely matches your TV's display.  
 - **Content Centering**: Content may be centered on the screen rather than expanding to the edges. This behavior is often due to the fixed grid system and aspect ratio. For a dashboard that fully utilizes screen width, consider switching to a screenboard, which allows finer control over widget positioning.
 
 ## Alternative solutions and recommendations
