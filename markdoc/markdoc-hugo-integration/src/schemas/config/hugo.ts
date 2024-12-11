@@ -10,7 +10,8 @@ export const HugoSubdirsByTypeSchema = z
     content: z.string().min(1),
     partials: z.string().min(1),
     filtersConfig: z.string().min(1),
-    images: z.string().min(1)
+    images: z.string().min(1),
+    static: z.string().min(1)
   })
   .strict();
 

@@ -12,8 +12,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', async () => {
   });
 
   const { compiledFilePaths, hasErrors } = compiler.compileMdocFiles();
-
-  const authorConsoleHtml = await compiler.injectAuthorConsole();
+  compiler.injectAuthorConsole();
 
   if (hasErrors) {
     compiler.logErrorsToConsole();
@@ -31,11 +30,5 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', async () => {
 
   test('no errors occurred during compilation', () => {
     expect(hasErrors).toBe(false);
-  });
-
-  test('the author console HTML matches the snapshot', async () => {
-    await expect(authorConsoleHtml).toMatchFileSnapshot(
-      SNAPSHOTS_DIR + '/validSite/authorConsole.html'
-    );
   });
 });

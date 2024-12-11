@@ -38,7 +38,8 @@ export class HugoGlobalConfigBuilder {
       content: p.baseSiteDir + '/content',
       filtersConfig: p.baseSiteDir + '/content_filters',
       partials: p.baseSiteDir + '/layouts/partials',
-      images: p.baseSiteDir + '/static/images'
+      images: p.baseSiteDir + '/static/images',
+      static: p.baseSiteDir + '/static'
     };
   }
 

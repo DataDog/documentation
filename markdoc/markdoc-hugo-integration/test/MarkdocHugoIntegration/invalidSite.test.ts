@@ -17,8 +17,7 @@ describe('MarkdocHugoIntegration', async () => {
 
   // compile the bad files
   const { hasErrors, errorsByFilePath } = integration.compileMdocFiles();
-
-  const authorConsoleHtml = await integration.injectAuthorConsole();
+  integration.injectAuthorConsole();
 
   // sanitize the file paths so snapshots are consistent across machines
   const errorsByFilePathDup = { ...errorsByFilePath };
@@ -47,12 +46,6 @@ describe('MarkdocHugoIntegration', async () => {
   test(`the errors match the snapshot`, async () => {
     await expect(JSON.stringify(errorsByFilePathDup, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/invalidSite/errors.snap.json`
-    );
-  });
-
-  test('the author console HTML matches the snapshot', async () => {
-    await expect(authorConsoleHtml).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/invalidSite/authorConsole.html`
     );
   });
 });

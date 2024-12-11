@@ -96,6 +96,13 @@ export class MarkdocHugoIntegration {
       data: consoleData
     });
 
+    if (this.hugoGlobalConfig.env === 'development') {
+      // write it to the static folder
+      const consolePath = this.hugoGlobalConfig.dirs.static + '/markdoc/console.html';
+      fs.mkdirSync(this.hugoGlobalConfig.dirs.static + '/markdoc', { recursive: true });
+      fs.writeFileSync(consolePath, consoleHtml);
+    }
+
     return consoleHtml;
   }
 
