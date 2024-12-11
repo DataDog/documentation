@@ -12,7 +12,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', async () => {
   });
 
   const { compiledFilePaths, hasErrors } = compiler.compileMdocFiles();
-  compiler.injectAuthorConsole();
+  await compiler.injectAuthorConsole();
 
   if (hasErrors) {
     compiler.logErrorsToConsole();

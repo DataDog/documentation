@@ -3,11 +3,14 @@ import react from '@vitejs/plugin-react';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { AuthorConsoleData } from '../schemas/authorConsole';
 
 const __dirname = path.dirname(__filename);
-const TEMP_PARENT_DIR = path.resolve(__dirname, 'tmp');
 const VITE_PROJECT_PATH = path.resolve(__dirname, '../author-console');
+// const TEMP_PARENT_DIR = path.resolve(os.tmpdir(), 'markdoc-author-console');
+const TEMP_PARENT_DIR = path.resolve(__dirname, 'tmp');
+console.log('TEMP_PARENT_DIR: ' + TEMP_PARENT_DIR);
 
 export class AuthorConsoleBuilder {
   static async buildHtml(p: { data: AuthorConsoleData }): Promise<string> {
@@ -35,7 +38,8 @@ export class AuthorConsoleBuilder {
     }
 
     // Delete the temporary app
-    fs.rmSync(tempAppDir, { recursive: true, force: true });
+    console.log('Trying to remove temp app dir: ' + tempAppDir);
+    fs.rmdirSync(tempAppDir, { recursive: true });
 
     return appHtml;
   }
@@ -61,6 +65,7 @@ export class AuthorConsoleBuilder {
     // Copy the vite project to tmp
     fs.cpSync(VITE_PROJECT_PATH, tempAppDir, { recursive: true });
 
+    console.log('RETURNING temp app dir: ' + tempAppDir);
     return tempAppDir;
   }
 }

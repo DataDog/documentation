@@ -17,7 +17,7 @@ describe('MarkdocHugoIntegration', async () => {
 
   // compile the bad files
   const { hasErrors, errorsByFilePath } = integration.compileMdocFiles();
-  integration.injectAuthorConsole();
+  await integration.injectAuthorConsole();
 
   // sanitize the file paths so snapshots are consistent across machines
   const errorsByFilePathDup = { ...errorsByFilePath };
