@@ -168,7 +168,7 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 
 ## Interact with workflows using the API
 
-To perform actions using the API, see the [Workflow Automation API documentation][13].
+To perform tasks using the API, see the [Workflow Automation API documentation][13].
 
 ## Further reading
 
