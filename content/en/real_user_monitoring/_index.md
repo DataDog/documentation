@@ -45,6 +45,9 @@ further_reading:
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
+- link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
+  tag: "Blog"
+  text: "Best practices for monitoring progressive web applications"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:
