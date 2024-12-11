@@ -31,6 +31,10 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
   },
+  "csm-agents": {
+    "name": "CSM Agents",
+    "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more"
+  },
   "csm-threats": {
     "name": "CSM Threats",
     "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
