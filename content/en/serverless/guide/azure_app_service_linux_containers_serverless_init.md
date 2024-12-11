@@ -19,7 +19,7 @@ This instrumentation method uses `serverless-init` and provides the following ad
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][1].
+- Support for submitting custom metrics using DogStatsD.
 
 ### Prerequisites
 
@@ -129,7 +129,7 @@ If you are not receiving traces or custom metric data as expected, enable **App 
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][14].
+Share the content of the **Log stream** with [Datadog Support][17].
 
 ## Further reading
 
@@ -152,3 +152,4 @@ Share the content of the **Log stream** with [Datadog Support][14].
 [14]: /tracing/other_telemetry/connect_logs_and_traces/python
 [15]: /tracing/other_telemetry/connect_logs_and_traces/go
 [16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[17]: /help

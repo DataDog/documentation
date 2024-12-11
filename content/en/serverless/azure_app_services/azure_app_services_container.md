@@ -35,7 +35,7 @@ You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
-[2]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs#code-examples
 [3]: /logs/log_collection/nodejs/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
 {{% /tab %}}
@@ -54,7 +54,7 @@ You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
-[2]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python#code-examples
 [3]: /logs/log_collection/python/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
 {{% /tab %}}
@@ -73,7 +73,7 @@ You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#getting-started
-[2]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java#code-examples
 [3]: /logs/log_collection/java/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java
 {{% /tab %}}
@@ -92,7 +92,7 @@ You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
-[2]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go#code-examples
 [3]: /logs/log_collection/go/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/go
 {{% /tab %}}
@@ -111,7 +111,7 @@ You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/#getting-started
-[2]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=php#code-examples
 [3]: /logs/log_collection/php/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/php
 {{% /tab %}}
