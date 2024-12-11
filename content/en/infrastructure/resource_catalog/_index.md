@@ -144,7 +144,7 @@ See the [AWS Config integration page][6] to launch a CloudFormation template tha
 
 #### Azure
 
-After confirming that you have enabled resource collection under the **Resource Collection** tab in the [Azure integration tile][14], submit your request using the [form above](#recent-changes). There are no other setup steps.
+After you've submitted your request to the form above, ensure **Resource Collection** is enabled for the Azure subscriptions in the [Azure integration tile][14] to also collect resource configuration changes.
 
 #### Google Cloud Platform
 
