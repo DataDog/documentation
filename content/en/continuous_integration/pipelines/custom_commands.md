@@ -140,8 +140,8 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 ## Troubleshooting
 
 ### Payload too large
-The size limit is approximately `4MB`. The most common cause for this error are extremely large tags.
-The `--dry-run` option can be used to see the traced command contents before sending it to Datadog.
+The size limit is approximately `4MB`. The most common cause for this error is extremely large tags.
+Use the `--dry-run` option to see the traced command's contents before sending it to Datadog.
 
 ## Further reading
 
