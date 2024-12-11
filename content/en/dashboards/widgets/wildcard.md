@@ -2,6 +2,9 @@
 title: Wildcard Widget
 widget_type: wildcard
 further_reading:
+- link: "/dashboards/guide/using_vega_lite_in_wildcard_widgets/"
+  tag: "Documentation"
+  text: "Learn more about using Vega-Lite with Wildcard widgets"
 - link: "https://vega.github.io/vega-lite/tutorials/getting_started.html"
   tag: "Vega Tutorial"
   text: "Introduction to Vega-Lite"
