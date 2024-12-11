@@ -130,7 +130,7 @@ Each connection in the group must have a set of unique identifier tags so that a
 
 ### Create a connection group
 
-<div class="alert alert-info"><strong>Note</strong>:You can only add connections to a group if you have <a href="/service_management/workflows/access/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
+<div class="alert alert-info"><strong>Note</strong>: You can only add connections to a group if you have <a href="/service_management/workflows/access/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
 
 To create a connection group:
 
