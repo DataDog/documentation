@@ -39,11 +39,11 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 1. In the Datadog site, hover over **Digital Experience** in the left hand menu and select **[Tests][2]** (under **Synthetic Monitoring & Testing**).
 2. In the top right corner, click **New Test** > **[Browser Test][3]**.
-3. Select a pre-populated template to choose from, or build a test from scratch.
+3. You can select a pre-populated template to choose from:
 
    {{< img src="getting_started/synthetics/synthetics_browser_templates.png" alt="Synthetics browser test landing page with templates" style="width:100%;" >}}
 
-4. Define your browser test (build a test from scratch):
+4. OR, click the **+** option to build a test from scratch by performing the following:
 
     - Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 

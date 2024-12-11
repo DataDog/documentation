@@ -44,11 +44,11 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 
 1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
 2. Click **New Test** > **[New API test][5]**.
-3. Select a pre-populated template to choose from, or build a test from scratch.
+3. Select a pre-populated template to choose from, or to build a test from scratch see steps 4-6 below.
 
    {{< img src="getting_started/synthetics/synthetics_api_templates.png" alt="Synthetics API test landing page with templates" style="width:100%;" >}}
 
-4. Select the `HTTP` request type.
+4. If you want to build a test from scratch, click the **+** template, then select the `HTTP` request type.
 5. Define your request:
 
     - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
