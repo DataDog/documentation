@@ -56,6 +56,10 @@ After choosing to create an `HTTP` test, define your test's request.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
+
 ### Advanced options
 
    {{< tabs >}}

@@ -92,8 +92,8 @@
     },
     {
       "group": "ci_visibility_pipelines",
-      "suffix": "_129899466",
-      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+      "suffix": "_2341150096",
+      "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [
@@ -298,6 +298,13 @@
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Update items of a dashboard list returns \"OK\" response"
+    }
+  ],
+  "CreateDataDeletionRequest": [
+    {
+      "group": "data_deletion",
+      "suffix": "",
+      "description": "Creates a data deletion request returns \"OK\" response"
     }
   ],
   "PatchDomainAllowlist": [
