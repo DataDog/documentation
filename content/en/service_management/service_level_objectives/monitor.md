@@ -128,17 +128,6 @@ When you create a service check monitor, you choose whether it sends an alert wh
 
 If you pause a Synthetic test, the SLO removes the time period with missing data from its calculation. In the UI, these time periods are marked light gray on the SLO status bar.
 
-
-## Underlying monitor and SLO histories
-
-<div class="alert alert-warning">Support for SLO Replay will be deprecated in the near future. Impacted customers will be notified about the change ahead of time with details about how they will be impacted.</div>
-
-SLOs based on the metric monitor types have a feature called SLO Replay that backfills SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. When you create a new Metric Monitor and set an SLO on that new monitor, you do not have to wait a full 7, 30, or 90 days to view the SLO status. Instead, SLO Replay triggers when you create the new SLO and looks at the history of the monitor's underlying metric and query to fill in the status.
-
-SLO Replay also triggers when you change the underlying metric monitor's query to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
-
-**Note:** SLOs based on Synthetic tests or Service Checks do not support SLO Replay.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
