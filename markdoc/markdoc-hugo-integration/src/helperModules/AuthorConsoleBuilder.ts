@@ -3,13 +3,12 @@ import react from '@vitejs/plugin-react';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import path from 'path';
 import fs from 'fs';
-import os from 'os';
 import { AuthorConsoleData } from '../schemas/authorConsole';
 
 const __dirname = path.dirname(__filename);
-const VITE_PROJECT_PATH = path.resolve(__dirname, '../author-console');
+const VITE_PROJECT_PATH = path.resolve(__dirname, '../../dist/author-console');
 // const TEMP_PARENT_DIR = path.resolve(os.tmpdir(), 'markdoc-author-console');
-const TEMP_PARENT_DIR = path.resolve(__dirname, 'tmp');
+const TEMP_PARENT_DIR = path.resolve(__dirname, '../../dist/tmp');
 console.log('TEMP_PARENT_DIR: ' + TEMP_PARENT_DIR);
 
 export class AuthorConsoleBuilder {

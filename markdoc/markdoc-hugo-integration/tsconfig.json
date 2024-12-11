@@ -106,5 +106,5 @@
         // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
         "skipLibCheck": true /* Skip type checking all .d.ts files. */
     },
-    "exclude": ["./test", "./node_modules", "./dist", "vitest.config.ts", "./src/author_console"]
+    "exclude": ["./test", "./node_modules", "./dist", "vitest.config.ts", "./src/author-console"]
 }
