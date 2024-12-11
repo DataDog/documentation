@@ -609,7 +609,7 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -40068,6 +40068,8 @@ paths:
 
         - Powerpacks: `powerpack`
 
+        - Reference Tables: `reference-table`
+
         - Security Rules: `security-rule`
 
         - Service Level Objectives: `slo`
@@ -40103,7 +40105,9 @@ paths:
 
         Synthetic Private Locations | `viewer`, `editor`
 
-        Monitors                    | `viewer`, `editor`'
+        Monitors                    | `viewer`, `editor`
+
+        Reference Tables            | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
