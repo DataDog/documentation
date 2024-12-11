@@ -113,6 +113,8 @@ Services meshes like [Istio][4] help manage microservice communication but add c
 
 Additionally, Datadog supports [Envoy][5] monitoring, correlating Istio data with the Envoy proxy mesh. Since traffic is routed through Envoy sidecars, Datadog tags them as containers, allowing users to identify and diagnose latency issues between pods and determine if they're related to the service mesh.
 
+   {{< img src="network_performance_monitoring/guide/detecting_network_insights/service_mesh_edit_2.png" alt="CNM Network Map page showing a service mesh example">}}
+
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
