@@ -108,7 +108,7 @@ The `all.cost` metric has [Container costs allocated][13] for AWS, Azure, and Go
 <div class="alert alert-warning">If your organization tags with any of these FOCUS tags, Datadog recommends updating your tag key on the underlying infrastructure so that tag values do not overlap with FOCUS tag values in Cloud Cost Management.</div>
 
 ## Currency conversion
-Cloud Cost Management retrieves the billing currency from each cloud provider's bill. When processing costs with different currencies, each provider’s cost charges are converted to USD. This conversion is performed using the average monthly exchange rate, which is updated daily. This ensures that Cloud Cost Management can consistently and accurately represent all cost data, regardless of its original currency.
+Cloud Cost Management retrieves the billing currency from each cloud provider's bill. When processing costs from multiple providers in different currencies, cost charges are converted to USD. This conversion is performed using the average monthly exchange rate, which is updated daily. This ensures that Cloud Cost Management can consistently and accurately represent all cost data, regardless of its original currency. To view your cost in the original billing currency, filter to a single provider.
 
 ## Further reading
 
