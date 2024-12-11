@@ -24,6 +24,8 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 In your main application, add the `dd-trace-js` library. See [Tracing Node.js applications][1] for instructions.
 
+Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-trace/init` module is required when the Node.js process starts.
+
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
 
@@ -148,7 +150,7 @@ The Datadog sidecar collects logs through a shared volume. to forward logs from 
 To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux#enable-the-tracer-for-your-service
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
+[2]: https://www.datadoghq.com/blog/statsd-for-net-dogstatsd/
 [3]: /log_collection/csharp/?tab=serilog
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/?tab=serilog
 {{% /tab %}}
@@ -170,11 +172,15 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 {{% /tab %}}
 {{< /tabs >}}
 
-### Sidecar container
+### Containers
+{{< tabs >}}
+{{% tab "GCR UI" %}}
+
+#### Sidecar container
 
 1. In Cloud Run, select **Edit & Deploy New Revision**.
 1. At the bottom of the page, select **Add Container**.
-1. For **Container image URL**, select `gcr.io/datadoghq/serverless-init:1.2.5`
+1. For **Container image URL**, select `gcr.io/datadoghq/serverless-init:latest`.
 1. Go to **Volume Mounts** and set up a volume mount for logs. Ensure that the mount path matches your application's write location. For example:
    {{< img src="serverless/gcr/volume_mount.png" width="80%" alt="Volume Mounts tab. Under Mounted volumes, Volume Mount 1. For Name 1, 'shared-logs (In-Memory)' is selected. For Mount path 1, '/shared-volume' is selected.">}}
 1. Go to **Settings** and add a startup check.
@@ -182,20 +188,159 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
    - **Select probe type**: TCP
    - **Port**: Enter a port number. Make note of this, as it is used in the next step.
 1. Go to **Variables & Secrets** and add the following environment variables as name-value pairs:
-   - `DD_SERVICE`: A name your service. For example, `gcr-sidecar-test`.
+   - `DD_SERVICE`: A name for your service. For example, `gcr-sidecar-test`.
    - `DD_ENV`: A name for your environment. For example, `dev`.
    - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
-   - `DD_API_KEY`: Your [Datadog API key][2].
+   - `DD_API_KEY`: Your [Datadog API key][1].
    - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
 
-### Main container
+   For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
+
+#### Main container
+
 1. Go to **Volume Mounts** and add the same shared volume as you did for the sidecar container.
    **Note**: Save your changes by selecting **Done**. Do not deploy changes until the final step.
-1. Go to **Variables & Secrets** and add the following environment variables as name-value pairs:
-   - `DD_SERVICE`: The same `DD_SERVICE` that you set for the sidecar.
-   - `DD_ENV`: The same `DD_ENV` that you set for the sidecar.
+1. Go to **Variables & Secrets** and add the same [environment variables](#environment-variables) that you set for the sidecar container. Omit `DD_HEALTH_PORT`.
 1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
 1. Deploy your main application.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
+{{% /tab %}}
+{{% tab "YAML deploy" %}}
+To deploy your Cloud Run service with a YAML service specification:
+
+1. Create a YAML file that contains the following:
+
+   ```yaml
+   apiVersion: serving.knative.dev/v1
+   kind: Service
+   metadata:
+     name: '<RESOURCE_NAME>'
+     labels:
+       cloud.googleapis.com/location: '<LOCATION>'
+   spec:
+     template:
+       metadata:
+         annotations:
+           autoscaling.knative.dev/maxScale: '100' # The maximum number of instances that can be created for this service. https://cloud.google.com/run/docs/reference/rest/v1/RevisionTemplate
+           run.googleapis.com/container-dependencies: '{"run-sidecar-1":["serverless-init-1"]}' # Configure container start order for sidecar deployments https://cloud.google.com/run/docs/configuring/services/containers#container-ordering
+           run.googleapis.com/startup-cpu-boost: 'true' # The startup CPU boost feature for revisions provides additional CPU during instance startup time and for 10 seconds after the instance has started. https://cloud.google.com/run/docs/configuring/services/cpu#startup-boost
+       spec:
+         containers:
+           - env:
+               - name: DD_SERVERLESS_LOG_PATH
+                 value: shared-volume/logs/*.log
+               - name: DD_SITE
+                 value: datadoghq.com
+               - name: DD_ENV
+                 value: serverless
+               - name: DD_API_KEY
+                 value: '<API_KEY>'
+               - name: DD_SERVICE
+                 value: '<SERVICE_NAME>'
+               - name: DD_VERSION
+                 value: '<VERSION>'
+               - name: DD_LOG_LEVEL
+                 value: debug
+               - name: DD_LOGS_INJECTION
+                 value: 'true'
+             image: '<CONTAINER_IMAGE>'
+             name: run-sidecar-1
+             ports:
+               - containerPort: 8080
+                 name: http1
+             resources:
+               limits:
+                 cpu: 1000m
+                 memory: 512Mi
+             startupProbe:
+               failureThreshold: 1
+               periodSeconds: 240
+               tcpSocket:
+                 port: 8080
+               timeoutSeconds: 240
+             volumeMounts:
+               - mountPath: /shared-volume
+                 name: shared-volume
+           - env:
+               - name: DD_SERVERLESS_LOG_PATH
+                 value: shared-volume/logs/*.log
+               - name: DD_SITE
+                 value: datadoghq.com
+               - name: DD_ENV
+                 value: serverless
+               - name: DD_API_KEY
+                 value: '<API_KEY>'
+               - name: DD_SERVICE
+                 value: '<SERVICE_NAME>'
+               - name: DD_VERSION
+                 value: '<VERSION>'
+               - name: DD_LOG_LEVEL
+                 value: debug
+               - name: DD_LOGS_INJECTION
+                 value: 'true'
+               - name: DD_HEALTH_PORT
+                 value: '12345'
+             image: gcr.io/datadoghq/serverless-init:latest
+             name: serverless-init-1
+             resources:
+               limits:
+                 cpu: 1000m
+                 memory: 512Mi # Can be updated to a higher memory if needed
+             startupProbe:
+               failureThreshold: 3
+               periodSeconds: 10
+               tcpSocket:
+                 port: 12345
+               timeoutSeconds: 1
+             volumeMounts:
+               - mountPath: /shared-volume
+                 name: shared-volume
+         serviceAccountName: '<SERVICE_ACCOUNT>' # you do not have to add the serviceAccountName field to the Cloud Run service YAML. If you don't specify it, Cloud Run will use the default service account for your project, which is typically named PROJECT_NUMBER-compute@developer.gserviceaccount.com. This default service account will have limited permissions by default.
+         volumes:
+           - emptyDir:
+               medium: Memory
+               sizeLimit: 512Mi
+             name: shared-volume
+     traffic: # make this revision and all future ones serve 100% of the traffic as soon as possible, overriding any established traffic split
+       - latestRevision: true
+         percent: 100
+   ```
+1. Supply placeholder values:
+   - `<RESOURCE_NAME>`:
+   - `<LOCATION>`:
+   - `<API_KEY>`: Your [Datadog API key][1]. **Note**: This placeholder appears twice in the file. Use the same value for both.
+   - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
+   - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
+   - `<CONTAINER_IMAGE>`:
+   - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
+   
+1. Run:
+   ```bash
+   gcloud run services replace <FILENAME>.yaml
+   ```
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/tagging/unified_service_tagging/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Environment variables
+
+| Variable | Description |
+| -------- | ----------- |
+|`DD_API_KEY`| [Datadog API Key][4] - **Required**|
+| `DD_SITE` | [Datadog site][5] - **Required** |
+| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`. |
+| `DD_SERVICE`      | See [Unified Service Tagging][13].                                  |
+| `DD_VERSION`      | See [Unified Service Tagging][13].                                  |
+| `DD_ENV`          | See [Unified Service Tagging][13].                                  |
+| `DD_SOURCE`       | See [Unified Service Tagging][13].                                  |
+| `DD_TAGS`         | See [Unified Service Tagging][6]. 
 
 ## Example application
 
@@ -515,3 +660,14 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 
 [1]: /integrations/google_cloud_platform/#log-collection
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://hub.docker.com/r/datadog/serverless-init
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /getting_started/site/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[7]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[8]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[9]: /tracing/other_telemetry/connect_logs_and_traces/php
+[10]: /tracing/other_telemetry/connect_logs_and_traces/python
+[11]: /tracing/other_telemetry/connect_logs_and_traces/go
+[12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[13]: /getting_started/tagging/unified_service_tagging/
