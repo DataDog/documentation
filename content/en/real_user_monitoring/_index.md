@@ -134,15 +134,15 @@ Select an application from the top navigation, or follow the setup instructions 
 
 ## Performance monitoring summary
 
-{{< img src="real_user_monitoring/rum-performance-browser.png" alt="RUM Performance monitoring summary page for a browser application." >}}
+{{< img src="real_user_monitoring/rum-performance-browser.png" alt="RUM Performance Monitoring summary page for a browser application" >}}
 
-The [RUM Performance Monitoring summary][1] page, which provides relevant and actionable insights for both web and mobile applications. You have a tailored experience for each platform that helps you:
+The [RUM Performance Monitoring summary][1] page provides relevant and actionable insights for both web and mobile applications. You have a tailored experience for each platform that helps you:
 
 - **Focus on key metrics** by platform, such as the UI latency for web or mobile crashes
-- **Monitor application health** through familiar KPIs, such as Core Web Vitals for web apps or hang rate for iOS to assess app reliability
+- **Monitor application health** through familiar KPIs, such as Core Web Vitals for web apps or hang rate for iOS, to assess app reliability
 - **Dive into investigations directly** from interactive widgets without leaving the page
 
-For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [/rum/optimization/inspect][17] page.
+For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization Inspect][17] page.
 
 For **mobile apps**, review recent crashes at the bottom of the page and use the [Error Tracking][6] side panel for troubleshooting.
 
