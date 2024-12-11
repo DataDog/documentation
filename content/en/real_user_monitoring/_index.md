@@ -126,7 +126,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
 
-Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first one.
+Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first application.
 
 {{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="Select a RUM application" >}}
 
