@@ -36,28 +36,7 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for Ruby][1]
 
 ## Run tests with Test Impact Analysis enabled
 
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-After completing setup, run your tests as you normally do:
-
-{{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-app bundle exec rake test
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "Cloud CI provider (Agentless)" %}}
-
-After completing setup, run your tests as you normally do:
-
-{{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY bundle exec rake test
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+After completing setup, run your tests as you normally do.
 
 ## Disabling skipping for specific tests
 

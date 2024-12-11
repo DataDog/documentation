@@ -82,15 +82,21 @@ The LangChain integration instruments the following methods:
 
 - [LLMs][13]: 
   - `llm.invoke()`, `llm.ainvoke()`
+  - `llm.stream()`, `llm.astream()`
 - [Chat models][14] 
   - `chat_model.invoke()`, `chat_model.ainvoke()`
+  - `chat_model.stream()`, `chat_model.astream()`
 - [Chains/LCEL][15]
   - `chain.invoke()`, `chain.ainvoke()`
   - `chain.batch()`, `chain.abatch()`
+  - `chain.stream()`, `chain.astream()`
 - [Embeddings][17]
   - OpenAI : `OpenAIEmbeddings.embed_documents()`, `OpenAIEmbeddings.embed_query()`
-
-**Note:** The LangChain integration does not yet support tracing streamed calls.
+- [Tools][21]
+  - `BaseTool.invoke()`, `BaseTool.ainvoke()`
+- [Retrieval][22]
+  - `langchain_community.<vectorstore>.similarity_search()`
+  - `langchain_pinecone.similarity_search()`
 
 ## Amazon Bedrock
 
@@ -152,6 +158,9 @@ The Google Gemini integration instruments the following methods:
 [18]: /llm_observability/setup/sdk/#tracing-spans
 [19]: https://ai.google.dev/gemini-api/docs
 [20]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
+[21]: https://python.langchain.com/v0.2/docs/concepts/#tools
+[22]: https://python.langchain.com/v0.2/docs/concepts/#retrieval
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
