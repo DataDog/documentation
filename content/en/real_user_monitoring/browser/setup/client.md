@@ -87,7 +87,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 {{% tab "RUM" %}}
 
 Server-side (Auto-instrumentation)
-: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][27].
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][1].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
@@ -97,6 +97,8 @@ CDN async
 
 CDN sync
 : This method is recommended for collecting all RUM events. The RUM Browser SDK loads from our CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
+
+[1]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}

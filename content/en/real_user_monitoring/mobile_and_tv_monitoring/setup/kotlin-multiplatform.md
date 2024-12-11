@@ -71,6 +71,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 | 0.0.1                                    | 2.14.1                  |
 | 0.0.2                                    | 2.17.0                  |
 | 0.0.3                                    | 2.17.0                  |
+| 0.4.0                                    | 2.20.0                  |
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
