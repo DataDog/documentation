@@ -1118,7 +1118,7 @@ pipeline {
         datadog(testVisibility: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
