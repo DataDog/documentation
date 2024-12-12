@@ -2337,7 +2337,7 @@ __metadata:
 
 "markdoc-static-compiler@file:../markdoc-static-compiler::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 0.1.0
-  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=7df649&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=d0fb0d&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     "@types/markdown-it": 12.2.3
     markdown-it-deflist: ^3.0.0
@@ -2345,7 +2345,7 @@ __metadata:
   dependenciesMeta:
     "@types/markdown-it":
       optional: true
-  checksum: 3440b34be5a9b697f0cfe035472f0395ee3f8ce339e70e9f4f5e149e51b887b6c6e54406a152a0b9286207acc69850ccae9a2831c0945de20dbd235fe701dca4
+  checksum: 3c4253e2e5b8e5ff31ccdf77ff6fdb85e9edd355b3a5c32eeed64b137ee0a4fe677e526ff1066c8b0b2e2ce4d22d5a6f5645dcbd3bb6bfcfe4553d794490f0a3
   languageName: node
   linkType: hard
 
