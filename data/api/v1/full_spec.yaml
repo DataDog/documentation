@@ -4761,11 +4761,6 @@ components:
           description: Widget column field.
           example: content
           type: string
-        is_clustering_pattern_field_path:
-          description: Identifies the clustering pattern field column, usable only
-            with logs_pattern_stream.
-          example: true
-          type: boolean
         width:
           $ref: '#/components/schemas/ListStreamColumnWidth'
       required:
@@ -13977,6 +13972,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
         extractedValues:
           description: Array of values to parse and save as variables from the response.
           items:
@@ -23661,6 +23659,12 @@ components:
       type: apiKey
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      in: header
+      name: Authorization
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
