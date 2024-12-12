@@ -76,13 +76,13 @@ window.DD_RUM &&
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
@@ -94,7 +94,19 @@ Feature flag tracking is available for your Flutter applications. To start, set 
 
 Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+{{% /tab %}}
+{{% tab "Unity" %}}
+
+Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/unity/
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/
 {{% /tab %}}
 {{< /tabs >}}
 

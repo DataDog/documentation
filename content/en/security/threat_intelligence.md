@@ -84,7 +84,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| CWS |
 | scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
-| Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
+| tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |

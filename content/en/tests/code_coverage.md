@@ -279,7 +279,7 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 
 ### Compatibility
 
-* `datadogg-ci-rb>=1.7.0`
+* `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
 <div class="alert alert-warning">
@@ -295,9 +295,7 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 {{% tab "Go" %}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Test optimization for Go is in Preview.
-{{< /callout >}}
+<div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 ### Compatibility
 
